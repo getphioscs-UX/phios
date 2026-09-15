@@ -293,6 +293,11 @@ function dispatchReady(detail) {
 }
 
 export async function initializeClientVisualConsumption({ fetchImpl = fetch, pathname = window.location.pathname } = {}) {
+  // The current article renderer owns its hero, including asynchronous locale rerenders.
+  // Checking for an existing image here races with article loading and creates a second masthead.
+  if (document.body?.dataset.cxSurface === 'ARTICLE_DETAIL') {
+    return { state: 'DELEGATED_TO_ARTICLE_RENDERER', record: null };
+  }
   ensureStylesheet();
   const [consumerMap, context] = await Promise.all([
     fetchConsumerMap(fetchImpl),

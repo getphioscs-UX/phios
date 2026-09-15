@@ -1,515 +1,888 @@
 {
-  "baseline": "d60e1de",
-  "numberingPolicy": "Numbered detailed sections W0–W84; summary order is retained as input, not used to overwrite detailed IDs.",
+  "baseline": "5c149d93730c3e5306b2d0266d4d2df3dc43d66a",
+  "scope": "LOCAL_SUCCESSOR_NOT_DEPLOYED",
+  "stripeWork": "DEFERRED_BY_USER",
+  "humanReview": "AT_FINAL_ONLY",
+  "productionReadiness": false,
   "steps": [
     {
       "work": "CA-R1-W0",
       "title": "BASELINE & EVIDENCE FREEZE",
-      "state": "IN_PROGRESS",
+      "state": "PREPARED_LOCAL",
+      "evidence": [
+        "work-step-status-v1.json"
+      ],
+      "note": "当前基线 5c149d93；问题与缺口均未自动关闭。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W1",
       "title": "ISSUE REGISTRY CUTOVER",
-      "state": "PREPARED",
+      "state": "PREPARED_LOCAL",
+      "evidence": [
+        "work-step-status-v1.json"
+      ],
+      "note": "当前基线 5c149d93；问题与缺口均未自动关闭。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W2",
       "title": "CONTEXTUAL ASK CONTRACT INVENTORY",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "contextual-ask-entry-contract-audit-v1.json"
+      ],
+      "note": "12 类入口静态清单已补；全部入口的来源注入仍需逐类运行证据。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W3",
       "title": "CANONICAL ASK CONTEXT NORMALIZATION",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "已验证 Article 中英文来源绑定；其他入口的完整来源矩阵尚未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W4",
       "title": "ASK SOURCE INJECTION GATE",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "已验证 Article 中英文来源绑定；其他入口的完整来源矩阵尚未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W5",
       "title": "ASK ANSWER RELEVANCE GATE",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "已验证 Article 中英文来源绑定；其他入口的完整来源矩阵尚未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W6",
       "title": "ASK SOURCE / BACKLINK / RELATED REGRESSION",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "已验证 Article 中英文来源绑定；其他入口的完整来源矩阵尚未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W7",
       "title": "HEADER SEARCH EVENT AUDIT",
-      "state": "IN_PROGRESS",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "Header 搜索 Enter／按钮／完整搜索与移动端 Escape 回焦通过。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W8",
       "title": "HEADER SEARCH CANONICAL NAVIGATION",
-      "state": "IN_PROGRESS",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "Header 搜索 Enter／按钮／完整搜索与移动端 Escape 回焦通过。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W9",
       "title": "HEADER SEARCH BROWSER REGRESSION",
-      "state": "IN_PROGRESS",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "Header 搜索 Enter／按钮／完整搜索与移动端 Escape 回焦通过。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W10",
       "title": "SEARCH RANKING AUTHORITY",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "类型筛选、精确书名及已登记图示通过；所有意图与密度仍需最终体验审阅。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W11",
       "title": "SEARCH RELEVANCE THRESHOLD",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "类型筛选、精确书名及已登记图示通过；所有意图与密度仍需最终体验审阅。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W12",
       "title": "SEARCH TYPE GROUPING",
-      "state": "IN_PROGRESS",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "类型筛选、精确书名及已登记图示通过；所有意图与密度仍需最终体验审阅。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W13",
       "title": "SEARCH P0 RETEST",
-      "state": "IN_PROGRESS",
+      "state": "FAIL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "FIG 11F 未登记，不能虚构映射或将 FIG 0A 测试当作该要求通过。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W14",
       "title": "BOOK III SOURCE AUTHORITY",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W15",
       "title": "BOOK III MEANING EXTRACTION",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W16",
       "title": "BOOK III CUSTOMER PROJECTION",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W17",
       "title": "BOOK III REAL BROWSER ACCEPTANCE",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W18",
       "title": "BOOK IV SOURCE AUTHORITY",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W19",
       "title": "BOOK IV MEANING CLOSURE",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W20",
       "title": "BOOK IV CUSTOMER CHAIN",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W21",
       "title": "BOOK IV → BOOK V BRIDGE",
-      "state": "CANDIDATE_PENDING_M8",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "正文与候选已整理；40 条 meaning、Book IV 定义、额外字段及跨册关系尚未正式审核导入。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W22",
       "title": "ARTICLE DETAIL CUSTOMER SHELL CUTOVER",
-      "state": "NOT_RUN",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "article-browser-v1.json"
+      ],
+      "note": "157 篇文章接入当前 shell；文章样本的双语、单 Hero、390/1440 布局与实时语言切换通过。所有文章逐篇视觉审核未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W23",
       "title": "ARTICLE VOLUME LABEL AUTHORITY",
-      "state": "NOT_RUN",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "article-browser-v1.json"
+      ],
+      "note": "157 篇文章接入当前 shell；文章样本的双语、单 Hero、390/1440 布局与实时语言切换通过。所有文章逐篇视觉审核未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W24",
       "title": "LOCALE AUTHORITY CONVERGENCE",
-      "state": "NOT_RUN",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "article-browser-v1.json"
+      ],
+      "note": "157 篇文章接入当前 shell；文章样本的双语、单 Hero、390/1440 布局与实时语言切换通过。所有文章逐篇视觉审核未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W25",
       "title": "BROKEN VISUAL CLOSURE",
-      "state": "NOT_RUN",
+      "state": "FAIL",
+      "evidence": [
+        "seven-volume-http-audit-v1.json"
+      ],
+      "note": "七册总览 Hero 的已登记 URL 返回 404；七张单册封面 HTTP 通过，不代表全部图片视觉验收。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W26",
       "title": "VISUAL FAILURE POLICY",
-      "state": "NOT_RUN",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "七册图片不再提前标记 ready；失败隐藏破图并提供明确 fallback／重试。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W27",
       "title": "SEARCH NAVIGATION INTENT",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "类型筛选、精确书名及已登记图示通过；所有意图与密度仍需最终体验审阅。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W28",
       "title": "SEARCH OVERLAY ACCESSIBILITY",
-      "state": "NOT_RUN",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "local-browser-retest-v1.json"
+      ],
+      "note": "Header 搜索 Enter／按钮／完整搜索与移动端 Escape 回焦通过。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W29",
       "title": "DYNAMIC LOADING / ERROR / RETRY",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "503 全失败与部分来源失败已验证；慢网、429、离线、中断的完整矩阵待补。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W30",
       "title": "SITEMAP PUBLICATION AUTHORITY",
-      "state": "NOT_RUN",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "sitemap-diff.json"
+      ],
+      "note": "185 个 canonical public URLs；发布清单差集为零，不包含私有或旧跳转入口。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W31",
       "title": "SITEMAP DIFFERENCE CHECK",
-      "state": "NOT_RUN",
+      "state": "LOCAL_CHECKED_PENDING_DEPLOYMENT",
+      "evidence": [
+        "sitemap-diff.json"
+      ],
+      "note": "185 个 canonical public URLs；发布清单差集为零，不包含私有或旧跳转入口。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W32",
       "title": "SEARCH RESULT DENSITY REFINEMENT",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "类型筛选、精确书名及已登记图示通过；所有意图与密度仍需最终体验审阅。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W33",
       "title": "EXTERNAL INDEX / CACHE专项",
-      "state": "NOT_RUN",
+      "state": "BLOCKED_EXTERNAL_EVIDENCE",
+      "evidence": [],
+      "note": "外部搜索引擎索引和缓存状态不能由本地 sitemap 检查证明。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W34",
       "title": "QA CLOUDFLARE PROJECT",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W35",
       "title": "QA DATA ISOLATION",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W36",
       "title": "QA ENVIRONMENT MARKER",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W37",
       "title": "STRIPE SANDBOX",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W38",
       "title": "BOOK I SANDBOX PRODUCT",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W39",
       "title": "BOOK I QA SECRETS",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W40",
       "title": "SANDBOX WEBHOOK",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W41",
       "title": "WATERMARK SANDBOX SERVICE",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W42",
       "title": "RECEIPT SANDBOX",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W43",
       "title": "AUTHENTICATED TEST ACCOUNT",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W44",
       "title": "RELEASED REPORT FIXTURE",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W45",
       "title": "EXACT VIEWPORT QA HARNESS",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json",
+        "article-browser-v1.json"
+      ],
+      "note": "已补当前 Search 与 Article 的中英文 390/1440 验证；完整产品与辅助功能矩阵未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W46",
       "title": "390PX MOBILE MATRIX",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json",
+        "article-browser-v1.json"
+      ],
+      "note": "已补当前 Search 与 Article 的中英文 390/1440 验证；完整产品与辅助功能矩阵未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W47",
       "title": "1440PX DESKTOP MATRIX",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json",
+        "article-browser-v1.json"
+      ],
+      "note": "已补当前 Search 与 Article 的中英文 390/1440 验证；完整产品与辅助功能矩阵未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W48",
       "title": "AUDIO ACCEPTANCE BOUNDARY",
-      "state": "NOT_RUN",
+      "state": "PENDING_FINAL_HUMAN_REVIEW",
+      "evidence": [
+        "M8-CUSTOMER-APPROVAL.html"
+      ],
+      "note": "两分钟动作与音效生命周期机器通过，真实设备听感、自然度与同步性待最后人工验收。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W49",
       "title": "SLOW NETWORK / FAILURE HARNESS",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json"
+      ],
+      "note": "503 全失败与部分来源失败已验证；慢网、429、离线、中断的完整矩阵待补。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W50",
       "title": "P0 REAL BROWSER RETEST GATE",
-      "state": "NOT_RUN",
+      "state": "NOT_CLOSED",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "Book III／IV 语义未导入，FIG 11F 要求仍失败；不能宣布 P0 全部关闭。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W51",
       "title": "P1 REAL BROWSER RETEST",
-      "state": "NOT_RUN",
+      "state": "NOT_CLOSED",
+      "evidence": [
+        "seven-volume-http-audit-v1.json"
+      ],
+      "note": "图片缺口、完整浏览器复测与人工验收未关闭。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W52",
       "title": "P2 RETEST",
-      "state": "NOT_RUN",
+      "state": "BLOCKED_EXTERNAL_EVIDENCE",
+      "evidence": [],
+      "note": "外部搜索引擎索引和缓存状态不能由本地 sitemap 检查证明。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W53",
       "title": "BOOK I SANDBOX PAYMENT SUCCESS",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W54",
       "title": "PAYMENT FAILURE",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W55",
       "title": "EXPIRED CHECKOUT",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W56",
       "title": "REFUND",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W57",
       "title": "WEBHOOK IDEMPOTENCY",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W58",
       "title": "W80 CONTINUITY SUBSCRIPTION GUARD",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W59",
       "title": "FULL CUSTOMER JOURNEY A",
       "state": "NOT_RUN",
+      "evidence": [],
+      "note": "完整客户旅程仍缺一条贯通的实际操作证据；局部交互测试不能代替。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W60",
       "title": "FULL CUSTOMER JOURNEY B",
       "state": "NOT_RUN",
+      "evidence": [],
+      "note": "完整客户旅程仍缺一条贯通的实际操作证据；局部交互测试不能代替。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W61",
       "title": "FULL CUSTOMER JOURNEY C",
       "state": "NOT_RUN",
+      "evidence": [],
+      "note": "完整客户旅程仍缺一条贯通的实际操作证据；局部交互测试不能代替。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W62",
       "title": "FULL CUSTOMER JOURNEY D",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W63",
       "title": "FULL CUSTOMER JOURNEY E",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W64",
       "title": "FULL CUSTOMER JOURNEY F",
       "state": "NOT_RUN",
+      "evidence": [],
+      "note": "完整客户旅程仍缺一条贯通的实际操作证据；局部交互测试不能代替。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W65",
       "title": "FULL CUSTOMER JOURNEY G",
       "state": "NOT_RUN",
+      "evidence": [],
+      "note": "完整客户旅程仍缺一条贯通的实际操作证据；局部交互测试不能代替。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W66",
       "title": "FULL CUSTOMER JOURNEY H",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W67",
       "title": "BILINGUAL FULL REGRESSION",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json",
+        "article-browser-v1.json"
+      ],
+      "note": "已补当前 Search 与 Article 的中英文 390/1440 验证；完整产品与辅助功能矩阵未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W68",
       "title": "ACCESSIBILITY REGRESSION",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "search-failure-browser-v1.json",
+        "article-browser-v1.json"
+      ],
+      "note": "已补当前 Search 与 Article 的中英文 390/1440 验证；完整产品与辅助功能矩阵未完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W69",
       "title": "IMAGE REGRESSION",
-      "state": "NOT_RUN",
+      "state": "FAIL",
+      "evidence": [
+        "seven-volume-http-audit-v1.json"
+      ],
+      "note": "七册总览 Hero 的已登记 URL 返回 404；七张单册封面 HTTP 通过，不代表全部图片视觉验收。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W70",
       "title": "RUNTIME / MACHINE REGRESSION",
-      "state": "NOT_RUN",
+      "state": "FAIL",
+      "evidence": [
+        "iching-freeze-drift-v1.json"
+      ],
+      "note": "本轮专项通过；易经既有 release freeze 哈希仍不一致，不声称 npm 全量通过。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W71",
       "title": "CUSTOMER CAPABILITY FINAL REGISTRY",
-      "state": "NOT_RUN",
+      "state": "PREPARED_LOCAL",
+      "evidence": [
+        "work-step-status-v1.json"
+      ],
+      "note": "统一证据索引、明确 NOT_RUN／FAIL 和最终审核入口已整理；无生产接受声明。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W72",
       "title": "NO FALSE PUBLIC CLAIM CHECK",
-      "state": "NOT_RUN",
+      "state": "PREPARED_LOCAL",
+      "evidence": [
+        "work-step-status-v1.json"
+      ],
+      "note": "统一证据索引、明确 NOT_RUN／FAIL 和最终审核入口已整理；无生产接受声明。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W73",
       "title": "PRODUCTION DATA ISOLATION CHECK",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W74",
       "title": "PRODUCTION CANONICAL CLOSURE",
-      "state": "NOT_RUN",
+      "state": "PARTIAL",
+      "evidence": [
+        "sitemap-diff.json"
+      ],
+      "note": "157 篇文章 canonical 已统一 getphios.com；全站其他 canonical 的逐路由验收待补。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W75",
       "title": "FINAL WORK CLOUD BROWSER RUN",
-      "state": "NOT_RUN",
+      "state": "BLOCKED_FINAL_GATES",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "等待未解决缺口、最终人工决定、部署后完整复测及独立 Sandbox E2E；不冻结为完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W76",
       "title": "FINAL COVERAGE REQUIREMENTS",
-      "state": "NOT_RUN",
+      "state": "BLOCKED_FINAL_GATES",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "等待未解决缺口、最终人工决定、部署后完整复测及独立 Sandbox E2E；不冻结为完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W77",
       "title": "FINAL P0 RULE",
-      "state": "NOT_RUN",
+      "state": "NOT_CLOSED",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "Book III／IV 语义未导入，FIG 11F 要求仍失败；不能宣布 P0 全部关闭。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W78",
       "title": "FINAL P1 RULE",
-      "state": "NOT_RUN",
+      "state": "NOT_CLOSED",
+      "evidence": [
+        "seven-volume-http-audit-v1.json"
+      ],
+      "note": "图片缺口、完整浏览器复测与人工验收未关闭。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W79",
       "title": "FINAL NOT_RUN RULE",
-      "state": "NOT_RUN",
+      "state": "PREPARED_LOCAL",
+      "evidence": [
+        "work-step-status-v1.json"
+      ],
+      "note": "统一证据索引、明确 NOT_RUN／FAIL 和最终审核入口已整理；无生产接受声明。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W80",
       "title": "FINAL EVIDENCE PACKAGE",
-      "state": "NOT_RUN",
+      "state": "PREPARED_LOCAL",
+      "evidence": [
+        "work-step-status-v1.json"
+      ],
+      "note": "统一证据索引、明确 NOT_RUN／FAIL 和最终审核入口已整理；无生产接受声明。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W81",
       "title": "FINAL PRODUCTION READINESS DECISION",
-      "state": "NOT_RUN",
+      "state": "BLOCKED_FINAL_GATES",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "等待未解决缺口、最终人工决定、部署后完整复测及独立 Sandbox E2E；不冻结为完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W82",
       "title": "BOOK I LIVE COMMERCE CUTOVER GATE",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W83",
       "title": "CONTINUITY SUBSCRIPTION SUCCESSOR GATE",
-      "state": "NOT_RUN",
+      "state": "DEFERRED_STRIPE_USER_INSTRUCTION",
+      "evidence": [],
+      "note": "按用户指令暂停 Book I QA／Stripe／webhook／账户／报告 fixture／entitlement／watermark／receipt／download；绝不使用 production 替代。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
     {
       "work": "CA-R1-W84",
       "title": "FINAL FREEZE CONDITIONS",
-      "state": "NOT_RUN",
+      "state": "BLOCKED_FINAL_GATES",
+      "evidence": [
+        "M8-REVIEW-HUB.html"
+      ],
+      "note": "等待未解决缺口、最终人工决定、部署后完整复测及独立 Sandbox E2E；不冻结为完成。",
+      "humanAcceptanceDeferred": true,
       "productionAccepted": false
     }
   ]

@@ -92,7 +92,11 @@ function conceptCard(concept,enMap){const title=locale()==='zh-Hans'?clean(conce
 async function renderConcepts(){const grid=$('[data-cx-concept-grid]'),form=$('[data-cx-concept-search-form]'),summary=$('[data-cx-concept-summary]');if(!grid||!form)return;loading(grid);try{const [registry,enMap]=await Promise.all([concepts(),loadEnglishConceptDefinitions()]);const list=registry.concepts||[];const draw=()=>{const q=clean(form.elements.q?.value).toLowerCase();const visible=list.filter(c=>!q||[c.id,c.en,c['zh-Hans'],c.definition,enMap.get(c.id)].map(clean).join(' ').toLowerCase().includes(q));grid.innerHTML=visible.map(c=>conceptCard(c,enMap)).join('');if(summary)summary.textContent=tr(`${visible.length} concepts`,`${visible.length} 个概念`)};form.addEventListener('submit',event=>{event.preventDefault();draw()});form.elements.q?.addEventListener('input',draw);draw()}catch{unavailable(grid)}}
 
 async function searchCorpus(){
- const [discoveryRows,bookRegistry,conceptRegistry,figureRegistry,partsRegistry]=await Promise.all([discoveryIndex().catch(()=>[]),books().catch(()=>({books:[]})),concepts().catch(()=>({concepts:[]})),figures().catch(()=>({figures:[]})),parts().catch(()=>({parts:[]}))]);
+ const summary=$('[data-cx-knowledge-search-summary]');if(summary)delete summary.dataset.partial;
+ let failures=0;
+ const recover=fallback=>()=>{failures++;if(summary)summary.dataset.partial='true';return fallback;};
+ const [discoveryRows,bookRegistry,conceptRegistry,figureRegistry,partsRegistry]=await Promise.all([discoveryIndex().catch(recover([])),books().catch(recover({books:[]})),concepts().catch(recover({concepts:[]})),figures().catch(recover({figures:[]})),parts().catch(recover({parts:[]}))]);
+ if(failures===5)throw new Error('SEARCH_SOURCES_UNAVAILABLE');
  const articleRows=discoveryRows.map(record=>({type:'ARTICLE',ids:[record.slug,record.nodeCode,record.articleCode],title:record.title,summary:record.summary,source:[label(record.bookTitle),label(record.partTitle)].filter(Boolean).join(' · '),related:[record.themeCode,...(record.tags||[])].filter(Boolean).slice(0,3).join(' · '),href:record.href,ask:askHref('ARTICLE',record.slug,record.title,record.href),terms:record.searchText||[record.title,record.summary,record.displayQuestion,...(record.keyConcepts||[]),...(record.tags||[])].join(' '),crossBook:record.crossBookNeighbors||[]}));
  const bookRows=(bookRegistry.books||[]).map(b=>{const title=label(b.title),href=BOOK_ROUTE[b.bookCode]||'/books/';return {type:'BOOK',ids:[b.bookCode],aliases:[b.title?.en,b.title?.['zh-Hans']],title,summary:label(b.subtitle),source:tr(`PHI OS Volume ${b.volume}`,`PHI OS 第 ${b.volume} 册`),related:BOOK_ROLE[b.bookCode]?.[locale()==='zh-Hans'?'zh':'en']||'',href,ask:askHref('BOOK',b.bookCode,title,href),terms:[title,label(b.subtitle),BOOK_ROLE[b.bookCode]?.en,BOOK_ROLE[b.bookCode]?.zh].join(' ')}});
  const conceptRows=(conceptRegistry.concepts||[]).map(c=>({type:'CONCEPT',ids:[c.id],aliases:[c.en,c['zh-Hans']],title:locale()==='zh-Hans'?c['zh-Hans']:c.en,summary:c.definition,source:tr('PHI OS concept registry','PHI OS 概念表'),related:tr(`Part ${c.part}`,`第 ${c.part} 部分`),href:`/knowledge/concepts/#term-${encodeURIComponent(c.id)}`,ask:null,terms:[c.id,c.en,c['zh-Hans'],c.definition].join(' ')}));
@@ -107,16 +111,19 @@ async function renderSearch(){
  try{
   const corpus=await searchCorpus(),params=new URLSearchParams(location.search);form.elements.q.value=clean(params.get('q'));
   let limit=24;
+  let type=form.querySelector('[data-search-type]');
+  if(!type){const label=document.createElement('label');label.textContent=tr('Result type ','结果类型 ');type=document.createElement('select');type.dataset.searchType='';type.name='type';for(const value of ['ALL','ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS']){const option=document.createElement('option');option.value=value;option.textContent=value==='ALL'?tr('All types','全部类型'):resultType(value);type.append(option);}label.append(type);form.append(label);}
+  type.value=['ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS'].includes((params.get('type')||'').toUpperCase())?params.get('type').toUpperCase():'ALL';
   const draw=()=>{
    const q=clean(form.elements.q.value),navigation=knowledgeNavigationIntent(q,locale());
-   const rows=navigation?[{type:'NAVIGATION',title:navigation.title,href:navigation.href,summary:navigation.text,source:'',related:''}]:rankPublicSearch(corpus,q);
+   const rows=navigation?[{type:'NAVIGATION',title:navigation.title,href:navigation.href,summary:navigation.text,source:'',related:''}]:rankPublicSearch(corpus,q).filter(item=>type.value==='ALL'||item.type===type.value);
    const visible=rows.slice(0,limit);
-   node.innerHTML=visible.length?visible.map(resultCard).join(''):'<p>'+esc(tr('No published knowledge matched this search.','没有已发布知识符合这次搜索。'))+'</p>';
+   node.innerHTML=visible.length?visible.map((item,i)=>(q&&i===0&&item.exactMatch?'<h2>'+esc(tr('Exact match','精确匹配'))+'</h2>':q&&!item.exactMatch&&visible[i-1]?.exactMatch?'<h2>'+esc(tr('Related results','相关结果'))+'</h2>':'')+resultCard(item)).join(''):'<p>'+esc(tr('No published knowledge matched this search.','没有已发布知识符合这次搜索。'))+'</p>';
    if(rows.length>limit){const more=document.createElement('button');more.type='button';more.className='cx-button';more.textContent=tr('Show more results','显示更多结果');more.onclick=()=>{limit+=24;draw();};node.append(more);}
    summary.textContent=q?tr(rows.length+' matches; showing '+visible.length,rows.length+' 项匹配，显示 '+visible.length+' 项'):tr('Browse articles, books, figures and concepts.','浏览文章、书籍、图示与概念。');
-   if(summary.dataset.partial)summary.textContent+=tr(' Some sources are unavailable; reload to retry.',' 部分来源暂不可用，请刷新重试。');
+   if(summary.dataset.partial){summary.textContent+=tr(' Some sources are unavailable.',' 部分来源暂不可用。');const retry=document.createElement('button');retry.type='button';retry.textContent=tr('Retry unavailable sources','重试未加载的来源');retry.onclick=()=>location.reload();summary.append(retry);}
   };
-  form.addEventListener('submit',event=>{event.preventDefault();limit=24;draw();const url=new URL(location.href),q=clean(form.elements.q.value);q?url.searchParams.set('q',q):url.searchParams.delete('q');history.replaceState({},'',url);});draw();
+  const submit=event=>{event?.preventDefault();limit=24;draw();const url=new URL(location.href),q=clean(form.elements.q.value);q?url.searchParams.set('q',q):url.searchParams.delete('q');type.value==='ALL'?url.searchParams.delete('type'):url.searchParams.set('type',type.value.toLowerCase());history.replaceState({},'',url);};form.onsubmit=submit;type.onchange=submit;draw();
  }catch{unavailable(node);}
 }
 

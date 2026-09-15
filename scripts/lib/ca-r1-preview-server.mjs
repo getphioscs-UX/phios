@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
 import {onRequestGet,onRequestPost} from '../../functions/api/customer-contextual-ask.js';
+import {onRequestGet as publicAssetConfig} from '../../functions/api/public-asset-config.js';
 const root=process.cwd();
 export function localAsset(url){
  const pathname=decodeURIComponent(new URL(url).pathname);
@@ -16,7 +17,11 @@ export async function previewServer({candidatePreview=false}={}){
  const packet=candidatePreview?JSON.parse(fs.readFileSync('functions/_source-material/m1-m4-review/m1-m4-review-packet-v1.json')):null;
  const server=http.createServer(async(req,res)=>{try{
   const url=new URL(req.url,'http://preview.local');let response;
-  if(url.pathname==='/api/customer-contextual-ask'){
+  if(url.pathname==='/api/public-asset-config'){
+   // Explicit local read-only fixture from the existing public asset registry.
+   const registry=JSON.parse(fs.readFileSync('content/web-production/registries/wpr-seven-volume-r2-public-assets-v1.json'));
+   response=publicAssetConfig({env:{PHIOS_PUBLIC_ASSET_BASE_URL:registry.publicBaseUrl}});
+  }else if(url.pathname==='/api/customer-contextual-ask'){
    let body='';for await(const c of req)body+=c;
    const request=new Request(url,{method:req.method,...(req.method==='POST'?{body}:{} )});
    response=await(req.method==='POST'?onRequestPost:onRequestGet)({request,env:{ASSETS:{fetch:request=>localAsset(request.url)}}});

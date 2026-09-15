@@ -2483,7 +2483,10 @@
     "build:b14-sks:freeze": "node scripts/build-b14-sks-freeze.mjs",
     "check:b14-sks:freeze": "node scripts/check-b14-sks-freeze.mjs",
     "check:b14-sks:production-freeze": "node scripts/check-b14-sks-freeze.mjs --require-production",
-    "check:pages-preview-commerce": "node scripts/check-pages-preview-commerce.mjs && node --no-warnings scripts/check-m3b-book-access-payment.mjs --preview-source"
+    "check:pages-preview-commerce": "node scripts/check-pages-preview-commerce.mjs && node --no-warnings scripts/check-m3b-book-access-payment.mjs --preview-source",
+    "check:ca-r1:customer-successor": "node scripts/check-ca-r1-article-shell.mjs && node scripts/check-ca-r1-image-failure.mjs && node scripts/check-customer-publication-sitemap.mjs",
+    "build:ca-r1:article-shell": "node scripts/build-ca-r1-article-shell.mjs",
+    "build:ca-r1:final-review": "node scripts/build-ca-r1-closure-status.mjs && node scripts/build-m8-click-review.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
