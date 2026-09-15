@@ -6,6 +6,7 @@ export const tasks=[
  {id:'CONTINUE_ASK',label:'继续 Ask',evidence:'记录提问、所携带主题与实际返回结果；仅存在 Ask 链接不算完成。'}
 ];
 export function validateAcceptanceDraft(packet,draft){
+ const tasks=packet.tasks;
  const errors=[];
  if(draft.sourceDigest!==packet.sourceDigest)errors.push('STALE_PACKET');
  if(!draft.reader?.trim()||draft.firstTimeReader!==true)errors.push('READER_REQUIRED');
@@ -14,5 +15,5 @@ export function validateAcceptanceDraft(packet,draft){
  if(!Number.isFinite(draft.elapsedSeconds)||draft.elapsedSeconds<=0)errors.push('TIMING_REQUIRED');
  if(!Array.isArray(draft.results)||draft.results.length!==tasks.length||new Set(draft.results?.map(r=>r.id)).size!==tasks.length)errors.push('TASK_SET_INVALID');
  for(const task of tasks){const r=draft.results?.find(r=>r.id===task.id);if(!r||!['PASS','FAIL','NOT_RUN'].includes(r.status))errors.push('TASK_INVALID:'+task.id);else if(r.status!=='NOT_RUN'&&!r.observation?.trim())errors.push('OBSERVATION_REQUIRED:'+task.id);}
- return {errors,eligibleForAcceptanceReview:errors.length===0&&draft.elapsedSeconds<=300&&draft.results.every(r=>r.status==='PASS'),humanAcceptanceApplied:false};
+ return {errors,eligibleForAcceptanceReview:errors.length===0&&(packet.timeBudgetSeconds==null||draft.elapsedSeconds<=packet.timeBudgetSeconds)&&draft.results.every(r=>r.status==='PASS'),humanAcceptanceApplied:false};
 }

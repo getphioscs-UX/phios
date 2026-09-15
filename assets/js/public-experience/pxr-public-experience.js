@@ -110,7 +110,8 @@ function customerSafeText(value) {
     .replace(/\beligibility\b/gi, 'readiness')
     .replace(/\bMethod\b/g, 'analysis')
     .replace(/\bprojections\b/gi, 'views')
-    .replace(/\bprojection\b/gi, 'view');
+    // Projection System is the canonical Part II title, not interface terminology.
+    .replace(/\bprojection\b(?!\s+system\b)/gi, 'view');
   const replacements = [
     [/Canonical Registry/gi, 'published structure'],
     [/Canonical Part Registry/gi, 'book structure'],

@@ -1,0 +1,9 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import vm from 'node:vm';
+import {base,packet,html} from './build-b14-sks-book2-acceptance.mjs';
+import {validateAcceptanceDraft} from './lib/book1-customer-acceptance.mjs';
+const p=packet();assert.deepEqual(JSON.parse(fs.readFileSync(base+'w72-book2-acceptance-v1.json')),p);const output=fs.readFileSync(base+'W72-BOOK2-READER-REVIEW.html','utf8');assert.equal(output,html(p));assert.equal((output.match(/<fieldset /g)||[]).length,3);new vm.Script(output.match(/<script>([\s\S]*)<\/script>/)[1]);
+const d={sourceDigest:p.sourceDigest,reader:'Fixture only',firstTimeReader:true,locale:'zh-Hans',testUrl:'https://example.test/',elapsedSeconds:450,results:p.tasks.map(t=>({id:t.id,status:'PASS',observation:'Fixture'}))};assert.equal(validateAcceptanceDraft(p,d).eligibleForAcceptanceReview,true);
+for(const mutate of [x=>x.sourceDigest='stale',x=>x.results[1].status='FAIL',x=>x.results[2].observation='',x=>x.results.pop(),x=>x.firstTimeReader=false]){const x=structuredClone(d);mutate(x);assert.equal(validateAcceptanceDraft(p,x).eligibleForAcceptanceReview,false);}
+assert.equal(validateAcceptanceDraft(p,d).humanAcceptanceApplied,false);
+const text=fs.readFileSync('assets/js/public-experience/pxr-public-experience.js','utf8');const fn=text.slice(text.indexOf('function customerSafeText('),text.indexOf('function sanitizeLeaf('));const context=vm.createContext({});vm.runInContext(fn,context);assert.equal(context.customerSafeText('Projection System'),'Projection System');assert.equal(context.customerSafeText('projection system'),'projection system');assert.equal(context.customerSafeText('projection'),'view');
+console.log('✓ W72 three-task draft preparation and invalid-decision guards passed; Projection System survives customer wording normalization. No human acceptance applied.');

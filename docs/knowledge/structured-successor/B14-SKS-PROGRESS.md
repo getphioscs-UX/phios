@@ -198,3 +198,7 @@ All six mandated questions have bilingual coverage: two missing-object cases, si
 ## W71 Book I acceptance preparation
 
 Five-minute first-time reader test packet, offline timed observation form and draft-only exporter are ready. Eight invalid draft cases and mobile browser timer/export/layout checks passed. No reader acceptance was performed; source entry and actual Ask continuation must be observed. See customer-acceptance/W71-BOOK1-ACCEPTANCE.md. Next W72 preparation; W71 human gate remains open.
+
+## W72 Book II acceptance preparation
+
+Three reader tasks cover interaction selection, feedback and relationship/collective-pattern understanding. The reusable timed draft form is source-bound; W72 records elapsed time without inventing the W71 five-minute cutoff. Feedback or definitions absent from the live page must be recorded as failure. W71 and W72 draft checks pass. Fixed the global customer-language sanitizer that changed the canonical Part II title Projection System to view System; source registries already had the correct name. Next W73 preparation; both reader gates remain open.
