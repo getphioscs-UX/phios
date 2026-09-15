@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {validateCrossBookScope} from './lib/structured-cross-book-checker.mjs';
+assert.equal(process.argv.includes('--record'),false,'W69_DOES_NOT_REWRITE_HISTORICAL_ACCEPTANCE');
+for(const script of ['check-b14-sks-cross-book.mjs','check-b14-sks-dedup.mjs','check-b14-sks-conflicts.mjs','check-b14-sks-relationships.mjs'])await import(`./${script}`);
+const read=p=>JSON.parse(fs.readFileSync(p)),base='content/knowledge/structured/';
+const data={objects:read(base+'structured-knowledge-registry-v1.json').objects,backlinks:read(base+'structured-knowledge-backlinks-v1.json').backlinks,graph:read(base+'structured-knowledge-relationships-v1.json')};
+const result=validateCrossBookScope({...data,read});
+const reject=(edit,pattern)=>{const c=structuredClone(data);edit(c);assert.throws(()=>validateCrossBookScope({...c,read}),pattern);};
+reject(c=>c.objects[0].explorerHref='/books/reality-expansion/?mechanism='+c.objects[0].objectId,/CROSS_BOOK_ROUTE_MISMATCH/);
+reject(c=>c.objects[0].explorerHref='/books/reality-formation/?mechanism=MISSING',/CROSS_BOOK_DEEPLINK_MISMATCH/);
+reject(c=>c.backlinks[0].bookCode='BOOK-4',/CROSS_BOOK_OWNER_MISMATCH/);
+reject(c=>c.graph.navigationBridges[0].targetRoute='/books/reality-formation/',/BRIDGE_ROUTE_MISMATCH/);
+for(const key of ['copiesBook5Registry','createsHistoricalClaims','mayWriteAtlas','humanAcceptanceComplete'])assert.throws(()=>validateCrossBookScope({...data,read:p=>({...read(p),[key]:true})}),/BRIDGE_AUTHORITY_PROMOTION/);
+console.log(`✓ W69: ${result.objects} objects across ${result.books} books and ${result.bridges} navigation bridge reconciled; 8 scope/authority mutations rejected. Pending semantic findings remain pending.`);

@@ -186,3 +186,7 @@ Endpoint existence, semantic schema/type, distinct pending-reading role, duplica
 ## W68 book-specific checkers
 
 The four required check:b14-sks:book1–book4 aliases now point to the existing book-specific contracts. The check:b14-sks:books aggregate verifies aliases and runs all four without nested npm or historical recording. All passed (11/12/28/20 objects). The 40 source-verified meaning proposals remain pending semantic review/import. See B14-SKS-W68-BOOK-CHECKERS.md. Next W69.
+
+## W69 cross-book checker on d09f7d4
+
+The required check:b14-sks:cross-book command now composes existing source, dedup, conflict and relationship checks, plus cross-book route/owner and Book IV–V bridge invariants. All 71 objects and one bridge pass; eight scope/authority mutation tests reject invalid changes. Pending findings and 40 proposal imports remain deferred. See B14-SKS-W69-CROSS-BOOK.md. Next W70.
