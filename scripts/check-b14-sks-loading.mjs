@@ -18,11 +18,16 @@ if(process.argv.includes('--browser')){
  const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://local');if(url.pathname==='/'){res.setHeader('Content-Type','text/html');res.end('<html><body><main id="host"></main></body></html>');return;}try{const path='.'+url.pathname;if(url.pathname.includes('..'))throw Error();res.setHeader('Content-Type',path.endsWith('.js')?'text/javascript':'application/json');res.end(fs.readFileSync(path));}catch{res.writeHead(404).end();}});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
  try{browser=await chromium.launch({channel:process.env.PHIOS_BROWSER_CHANNEL||'msedge',headless:true});
- for(let n=1;n<=4;n++){
+ const all=process.argv.includes('--all');
+ const backlinks=JSON.parse(fs.readFileSync('content/knowledge/structured/structured-knowledge-backlinks-v1.json')).backlinks;
+ const cases=all?backlinks.flatMap(b=>['en','zh-Hans'].map(locale=>({n:Number(b.bookCode.slice(-1)),target:b,locale}))):[1,2,3,4].map(n=>({n,locale:'zh-Hans'}));
+ for(const {n,target,locale} of cases){
   const page=await browser.newPage({viewport:{width:390,height:844}}),urls=[];page.on('request',r=>{if(r.url().includes('/loading/'))urls.push(r.url());});await page.goto(`http://127.0.0.1:${server.address().port}/`);
-  await page.evaluate(async code=>{const {mountProgressiveExplorer}=await import('/assets/js/knowledge/progressive-explorer.js');window.dispose=await mountProgressiveExplorer(document.querySelector('main'),code,'zh-Hans');},`BOOK-${n}`);
+  if(target)await page.evaluate(href=>history.replaceState(null,'',href),target.explorerHref);
+  await page.evaluate(async({code,locale})=>{const {mountProgressiveExplorer}=await import('/assets/js/knowledge/progressive-explorer.js');window.dispose=await mountProgressiveExplorer(document.querySelector('main'),code,locale);},{code:`BOOK-${n}`,locale});
   assert.equal(urls.length,4);assert.equal(await page.locator('aside h3').count(),1);
-  const second=page.locator('nav button').nth(1);if(await second.count()){await second.click();await page.waitForFunction(()=>document.querySelector('aside h3')&&document.querySelector('nav [aria-pressed=true]')?.textContent===document.querySelector('aside h3')?.textContent);assert.equal(urls.length,5);await page.goBack();await page.waitForSelector('aside h3');assert.equal(urls.length,5);}
+  if(target){assert.equal(await page.locator('nav [aria-pressed=true]').getAttribute('data-id'),target.objectId);const href=await page.locator('aside a[href^="/knowledge/ask/"]').getAttribute('href');const q=new URL(href,'http://local').searchParams;assert.equal(q.get('contextType'),'KNOWLEDGE');assert.equal(q.get('contextRef'),'CONCEPT:'+target.objectId.toLowerCase());assert.equal(q.get('readingPath'),target.explorerHref);}
+  const second=page.locator('nav button').nth(1);if(!all&&await second.count()){await second.click();await page.waitForFunction(()=>document.querySelector('aside h3')&&document.querySelector('nav [aria-pressed=true]')?.textContent===document.querySelector('aside h3')?.textContent);assert.equal(urls.length,5);await page.goBack();await page.waitForSelector('aside h3');assert.equal(urls.length,5);}
   if(process.argv.includes('--search')){
    const index=JSON.parse(fs.readFileSync('content/knowledge/structured/structured-knowledge-search-index-v1.json'));
    const target=index.filter(r=>r.bookCode===`BOOK-${n}`).at(-1);
@@ -36,6 +41,6 @@ if(process.argv.includes('--browser')){
   }
   await page.evaluate(()=>window.dispose());await page.close();
  }
- console.log('✓ W62 browser: four live progressive mounts, four initial JSON requests each, selected-object lazy load and history cache passed.');
+ console.log(all?'✓ W67: 142 bilingual deep-link inspectors and selected-object Ask contexts passed.':'✓ W62 browser: four live progressive mounts, four initial JSON requests each, selected-object lazy load and history cache passed.');
  }finally{await browser?.close();await new Promise(r=>server.close(r));}
 }

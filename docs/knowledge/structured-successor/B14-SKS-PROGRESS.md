@@ -176,3 +176,7 @@ The registered 71-object corpus retains canonical-source and projection-only bou
 ## W66 relationship checker on cc24b53
 
 Endpoint existence, semantic schema/type, distinct pending-reading role, duplicate IDs/pairs and self-loop authorization are checked. Zero semantic edges and two pending reading proposals remain unchanged. Eight rejection cases and an explicit fixture-only self-loop exception pass. No production exception or human decision was created. A separate 40-task source-extraction packet and Chat prompt are in meaning-extraction/. Next W67.
+
+## W67 projection checker on 893d7c1
+
+71 static discovery/deep-link checks and 142 English/Chinese rendered inspector/Ask-context cases passed. See B14-SKS-W67-PROJECTION.md for test scope. Incoming meaning batches await restored/current file paths before full coverage and quote verification; the 40 registered missing meanings remain unchanged. Next W68.
