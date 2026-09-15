@@ -202,3 +202,5 @@ Five-minute first-time reader test packet, offline timed observation form and dr
 ## W72 Book II acceptance preparation
 
 Three reader tasks cover interaction selection, feedback and relationship/collective-pattern understanding. The reusable timed draft form is source-bound; W72 records elapsed time without inventing the W71 five-minute cutoff. Feedback or definitions absent from the live page must be recorded as failure. W71 and W72 draft checks pass. Fixed the global customer-language sanitizer that changed the canonical Part II title Projection System to view System; source registries already had the correct name. Next W73 preparation; both reader gates remain open.
+
+W73–W77: Book III/IV reader packets prepared; four-book Read/Explore/Ask, structured-object/Atlas discovery and typed Ask return actions implemented. Human and deployed acceptance remain open. See B14-SKS-W73-W77.md and customer-acceptance/CUSTOMER-REVIEW-GUIDE.md.

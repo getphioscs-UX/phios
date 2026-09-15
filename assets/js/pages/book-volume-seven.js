@@ -70,6 +70,8 @@ async function render() {
       : bookId === 'book-5'
         ? `<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何分化》':'Read World Differentiation')}</a>`
         : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
+    const readAction=['book-1','book-2','book-3','book-4'].includes(bookId)
+      ? `<a class="knowledge-action knowledge-action--primary" data-book-read href="#structured-sources">${locale==='zh-Hans'?'阅读 · 来源与文章':'Read · sources and articles'}</a>` : '';
     const askHref = buildCkaEntryHref({
       entrySurface: 'BOOK',
       contextType: 'CANONICAL_VOLUME',
@@ -96,7 +98,7 @@ async function render() {
             <h1>${escapeHtml(title)}</h1>
             <p class="knowledge-hero__lead">${escapeHtml(subtitle)}</p>
             <p>${escapeHtml(t('knowledge.production.registryLed'))}</p>
-            <div class="knowledge-actions">${bookOneActions}${atlasAction}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部七册':'All seven volumes')}</a></div>
+            <div class="knowledge-actions">${readAction}${bookOneActions}${atlasAction}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部七册':'All seven volumes')}</a></div>
           </div>
           <figure class="wpr-book-cover"><div>${heroVisual}</div><figcaption>${escapeHtml(t('knowledge.production.coverBoundary'))}</figcaption></figure>
         </div>
@@ -136,6 +138,7 @@ async function render() {
     if (bookId === 'book-4') {
       const action=document.createElement('a');action.className='knowledge-action';action.href='#expansion';action.textContent=locale==='zh-Hans'?'探索扩展与尺度':'Explore expansion and scale';root.querySelector('.knowledge-actions')?.append(action);
       const explorer=document.createElement('section');explorer.id='expansion';explorer.className='expansion-explorer';root.querySelector('.knowledge-hero')?.after(explorer);
+      const nextVolume=document.createElement('p');const nextLink=document.createElement('a');nextLink.href='/books/reality-differentiation/#atlas';nextLink.textContent=locale==='zh-Hans'?'继续阅读 Book V · 文明图谱':'Continue to Book V · Civilization Atlas';nextVolume.append(nextLink);explorer.after(nextVolume);
       const {mountExpansionExplorer}=await import('../knowledge/expansion-explorer.js');
       const dispose=await mountExpansionExplorer(explorer,locale);
       if(generation !== renderGeneration)dispose();else disposeFormation=dispose;

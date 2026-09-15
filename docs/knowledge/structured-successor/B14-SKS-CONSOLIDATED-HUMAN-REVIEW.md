@@ -53,3 +53,5 @@ W70: review the six-question campaign after meaning import. Three question famil
 W71: run customer-acceptance/W71-BOOK1-READER-REVIEW.html with a first-time reader on the actual deployment, recording all five tasks within five minutes. Do not substitute machine checks for understanding, source access or actual Ask results. Test exports remain drafts.
 
 W72: use customer-acceptance/W72-BOOK2-READER-REVIEW.html for the three actual-reader tasks. Record missing feedback honestly; do not substitute the 12 undelivered definition proposals or observer explanation for page content. Human acceptance remains deferred.
+
+W73–W77: Book III/IV reader packets prepared; four-book Read/Explore/Ask, structured-object/Atlas discovery and typed Ask return actions implemented. Human and deployed acceptance remain open. See B14-SKS-W73-W77.md and customer-acceptance/CUSTOMER-REVIEW-GUIDE.md.
