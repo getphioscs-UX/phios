@@ -1,0 +1,7 @@
+# W63 metadata search on 7614ca6
+
+The public structured-knowledge-search-index-v1.json contains 71 records with exactly objectId, title, aliases, objectType, bookCode, partCode and keywords. Aliases are copied from existing aliases or English titles; keywords use existing identity/classification metadata. No definition, manuscript prose, review information, or invented synonym is indexed. Source validation and deterministic regeneration are required before rebuilding.
+
+Progressive Explorer search now finds titles, aliases and metadata across families within the current book. Empty input restores the active-family list. The index is fetched on first nonempty query after a 180 ms debounce, with shared caching, failed-request retry and a 12-second timeout. Selection cancels stale search rendering; object details continue through the W62 scoped loader. No Ask authority or source availability changes.
+
+Validation: check:b14-sks-search verifies the exact field allowlist, all 71 identities/titles, bilingual matching, book filtering, deterministic ranking, no-match/empty behavior and lazy retry/cache. check-b14-sks-loading.mjs --browser --search verifies all four book views, search-result selection, empty-result recovery and the unchanged four-request initial loading sequence. This is metadata search, not semantic or full-text retrieval. W64 is next; consolidated human review remains pending.

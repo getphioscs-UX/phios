@@ -160,3 +160,7 @@ Four-state conflict validation and a source-bound registry are implemented. Five
 ## W62 loading on 22d8cca
 
 Progressive loader and four public mounts implemented; source backlinks are lazy. Initial selected-topic load uses four scoped JSON requests, approximately 6.3–9.1 KB. Complete reading maps and comparisons remain available on explicit request. Projection/loader tests, four new browser mounts, and 32 retained reading-component cases pass. See B14-SKS-W62-LOADING.md. Human and production performance review remain open. Next W63.
+
+## W63 metadata search on 7614ca6
+
+The seven-field 71-record index and lazy current-book, cross-family Explorer search are implemented. Deterministic source/field/search checks and four-book browser navigation tests passed. No source definitions or manuscript prose are indexed. See B14-SKS-W63-SEARCH.md. Next W64; human review remains deferred.

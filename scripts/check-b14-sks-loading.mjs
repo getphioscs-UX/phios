@@ -23,6 +23,17 @@ if(process.argv.includes('--browser')){
   await page.evaluate(async code=>{const {mountProgressiveExplorer}=await import('/assets/js/knowledge/progressive-explorer.js');window.dispose=await mountProgressiveExplorer(document.querySelector('main'),code,'zh-Hans');},`BOOK-${n}`);
   assert.equal(urls.length,4);assert.equal(await page.locator('aside h3').count(),1);
   const second=page.locator('nav button').nth(1);if(await second.count()){await second.click();await page.waitForFunction(()=>document.querySelector('aside h3')&&document.querySelector('nav [aria-pressed=true]')?.textContent===document.querySelector('aside h3')?.textContent);assert.equal(urls.length,5);await page.goBack();await page.waitForSelector('aside h3');assert.equal(urls.length,5);}
+  if(process.argv.includes('--search')){
+   const index=JSON.parse(fs.readFileSync('content/knowledge/structured/structured-knowledge-search-index-v1.json'));
+   const target=index.filter(r=>r.bookCode===`BOOK-${n}`).at(-1);
+   await page.locator('input[type=search]').fill(target.title);
+   await page.waitForSelector(`nav button[data-id="${target.objectId}"]`);
+   await page.locator(`nav button[data-id="${target.objectId}"]`).click();
+   await page.waitForFunction(id=>document.querySelector('nav [aria-pressed=true]')?.dataset.id===id&&document.querySelector('aside h3'),target.objectId);
+   assert.equal(await page.locator('aside h3').innerText(),target.title);
+   await page.locator('input[type=search]').fill('zz-no-match-998');await page.waitForSelector('nav [role=status]');
+   await page.locator('input[type=search]').fill('');await page.waitForSelector('nav button');
+  }
   await page.evaluate(()=>window.dispose());await page.close();
  }
  console.log('✓ W62 browser: four live progressive mounts, four initial JSON requests each, selected-object lazy load and history cache passed.');
