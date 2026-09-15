@@ -1,4 +1,4 @@
-import { BOOK_ONE_PRODUCT } from './book-product-registry.js';
+import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey } from './book-product-registry.js';
 import {
   encryptSensitive,
   randomId,
@@ -61,7 +61,7 @@ export async function ensureBookProduct(env, clock = Date.now) {
     BOOK_ONE_PRODUCT.format,
     BOOK_ONE_PRODUCT.currency,
     BOOK_ONE_PRODUCT.amountMinor,
-    BOOK_ONE_PRODUCT.sourceObjectKey,
+    resolveBookOneSourceKey(env),
     /^[0-9a-f]{64}$/i.test(String(env.BOOK_ONE_SOURCE_SHA256 || ''))
       ? String(env.BOOK_ONE_SOURCE_SHA256).toLowerCase()
       : null,
@@ -319,7 +319,7 @@ export async function fulfillPaidBookSession({
     `).bind(
       `wm_${metadata.purchase_id.replace(/^pur_/, '')}`,
       entitlementId,
-      BOOK_ONE_PRODUCT.sourceObjectKey,
+      resolveBookOneSourceKey(env),
       destinationKey,
       watermarkPayload,
       now

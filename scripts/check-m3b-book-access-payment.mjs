@@ -12,6 +12,7 @@ import {
 } from './runtime-migration-loader.mjs';
 import {
   BOOK_ONE_PRODUCT,
+  resolveBookOneSourceKey,
   BOOK_PRODUCT_REGISTRY_VERSION
 } from '../functions/commerce/book-product-registry.js';
 import {
@@ -52,18 +53,26 @@ await applyRuntimeMigrations({
   now: () => '2026-07-28T00:00:00.000Z'
 });
 
-const sourceKey = BOOK_ONE_PRODUCT.sourceObjectKey;
+const sourceEnv = process.argv.includes('--preview-source') ? { BOOK_ONE_SOURCE_KEY: 'books/book-one/PHI-OS-Book-I-v2' } : {};
+const sourceKey = resolveBookOneSourceKey(sourceEnv);
+assert.equal(resolveBookOneSourceKey(), 'private/books/book-one/zh-Hans/book-one-v1.pdf');
+assert.equal(BOOK_ONE_PRODUCT.amountMinor, 8900);
+const checkedSourceKeys = [];
+
 const r2Objects = new Map([
   [sourceKey, new Uint8Array([37, 80, 68, 70, 45, 49, 46, 55])]
 ]);
 const BOOKS = {
   async head(key) {
+    checkedSourceKeys.push(key);
     const bytes = r2Objects.get(key);
     return bytes
       ? { key, size: bytes.byteLength, httpEtag: '"test-etag"' }
       : null;
   },
   async get(key) {
+    assert.notEqual(key, sourceKey, 'raw source must never be downloaded');
+    assert.match(key, /^private\/books\/book-one\/watermarked\//);
     const bytes = r2Objects.get(key);
     return bytes
       ? {
@@ -77,6 +86,7 @@ const BOOKS = {
 };
 
 const env = {
+  ...sourceEnv,
   RUNTIME_DB: db,
   BOOKS,
   PHIOS_BOOK_ONE_SALES_ENABLED: 'true',
@@ -498,9 +508,13 @@ assert.doesNotMatch(
   /purchaseState\s*=\s*['"]purchased|setItem/
 );
 
-database.close();
+
 console.log(
   '✓ M3B-W4/W8 Book Access and Payment passed: frozen RM89 product, ' +
   'Stripe Checkout, verified idempotent webhook, D1 purchase and entitlement, ' +
   'watermarked R2 delivery, limited download tokens, receipt email and refund revocation.'
 );
+
+assert.ok(checkedSourceKeys.includes(sourceKey), "readiness must check the resolved source key");
+assert.equal(database.prepare("SELECT source_object_key FROM commerce_products LIMIT 1").get().source_object_key, sourceKey);
+database.close();

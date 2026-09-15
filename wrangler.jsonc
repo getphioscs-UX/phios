@@ -22,5 +22,31 @@
   ],
   "compatibility_flags": [
     "nodejs_compat"
-  ]
+  ],
+  "env": {
+    "preview": {
+      "ai": {
+        "binding": "AI"
+      },
+      "d1_databases": [
+        {
+          "binding": "RUNTIME_DB",
+          "database_name": "phios-runtime-sandbox",
+          "database_id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+          "migrations_dir": "db/migrations"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "BOOKS",
+          "bucket_name": "phios-private-books-sandbox"
+        }
+      ],
+      "vars": {
+        "PHIOS_ENVIRONMENT": "qa",
+        "BOOK_ONE_SOURCE_KEY": "books/book-one/PHI-OS-Book-I-v2",
+        "PHIOS_BOOK_ONE_SALES_ENABLED": "false"
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { BOOK_ONE_PRODUCT } from './book-product-registry.js';
+import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey } from './book-product-registry.js';
 
 function configured(value, prefix = '') {
   const text = String(value || '').trim();
@@ -30,7 +30,7 @@ export async function commerceReadiness(env = {}) {
   if (checks.privateBookBucketBound) {
     try {
       checks.sourceBookPresent = Boolean(
-        await env.BOOKS.head(BOOK_ONE_PRODUCT.sourceObjectKey)
+        await env.BOOKS.head(resolveBookOneSourceKey(env))
       );
     } catch {
       checks.sourceBookPresent = false;

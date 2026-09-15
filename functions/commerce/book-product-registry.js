@@ -63,3 +63,8 @@ export function publicProduct(product = BOOK_ONE_PRODUCT) {
     requiresPurchaserWatermark: true
   });
 }
+
+// Shared source authority for readiness, catalog persistence and watermark jobs.
+export function resolveBookOneSourceKey(env = {}) {
+  return String(env.BOOK_ONE_SOURCE_KEY || "").trim() || BOOK_ONE_PRODUCT.sourceObjectKey;
+}
