@@ -40,7 +40,7 @@ export const BOOK_ASSET_CODE_BY_ID = Object.freeze({
 
 async function fetchJson(path) {
   const response = await fetch(path, {
-    credentials: 'same-origin',
+    credentials: 'same-origin', signal: AbortSignal.timeout(12000),
     headers: JSON_HEADERS
   });
   if (!response.ok) throw new Error(`WPR_PUBLIC_SOURCE_UNAVAILABLE:${path}`);

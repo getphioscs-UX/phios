@@ -1,8 +1,9 @@
+import {normalizeAskContext} from '../ask-context-contract.js';
 import {renderStructuredAnswer} from './structured-answer.js';
 import {arr,esc,locale,postJson,reRenderOnLocale,setStatus,tr} from './runtime-ui.js';
 import {handoffToMyReality} from '../handoff.js';
 
-let view=null;
+let view=null, seedLoading=false, seedFailed=false;
 const empty=message=>`<div class="cx-p1-empty">${esc(message)}</div>`;
 const CX_R31_HANDOFF_ROUTES=Object.freeze({RELATIONSHIP:'/perspectives/relationship/',PROFILE:'/perspectives/profile/',FINANCIAL:'/professional/financial/',SPECIALIST:'/perspectives/',PROFESSIONAL:'/professional/'});
 const emitCxR31=(name,detail={})=>document.dispatchEvent(new CustomEvent('phi:cx-r31',{detail:{name,...detail}}));
@@ -215,12 +216,14 @@ function availabilityHelp(item,specificKnowledge){
 }
 
 async function loadSeededContexts(){
-  const params=new URLSearchParams(location.search),contextType=params.get('contextType'),contextRef=params.get('contextRef'),contextLabel=params.get('contextLabel'),contextRoute=params.get('contextRoute'),contextSummary=params.get('contextSummary'),readingPath=params.get('readingPath'),relatedKnowledgeRef=params.get('relatedKnowledgeRef'),retrievalScope=params.get('retrievalScope');
+  const {contextType,contextRef,contextLabel,contextRoute,contextSummary,readingPath,relatedKnowledgeRef,retrievalScope}=normalizeAskContext(new URLSearchParams(location.search));
   const node=document.querySelector('[data-cx-seeded-contexts]');
   if(!node)return;
   if(!contextType){node.innerHTML='';return;}
+  seedLoading=true;seedFailed=false;
   try{
     const response=await fetch(`/api/customer-contextual-ask?locale=${encodeURIComponent(locale())}&contextType=${encodeURIComponent(contextType)}&contextRef=${encodeURIComponent(contextRef||'')}`,{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(12000)});
+    if(!response.ok)throw Error('SELECTED_SOURCE_UNAVAILABLE');
     const payload=await response.json();
     const seeded=arr(payload?.availability).filter(x=>x.requestedContextRef||x.contextType===contextType).filter(x=>x.contextType!=='CURRENT_REALITY');
     node.innerHTML=seeded.map(x=>{
@@ -232,12 +235,14 @@ async function loadSeededContexts(){
     }).join('');
     if(node.querySelector('[data-context-type="KNOWLEDGE"]:checked')&&document.querySelector('[name="contextKnowledge"]'))document.querySelector('[name="contextKnowledge"]').checked=false;
   }catch{
-    node.innerHTML=`<div class="cx-p1-callout">${esc(tr('The selected source could not be confirmed. You can still ask with Knowledge or add your current situation.','无法确认刚才选择的来源。你仍然可以使用知识提问，或加入当前处境。'))}</div>`;
-  }
+    seedFailed=true;
+    node.innerHTML=`<div class="cx-p1-callout">${esc(tr('The selected source could not be loaded. Retry, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试，或明确选择只使用知识提问。'))}</div>`;
+  }finally{seedLoading=false;}
 }
 
 function errorMessage(code){
   const value=String(code||'');
+  if(value==='SELECTED_SOURCE_UNAVAILABLE')return tr('The selected source could not be loaded. Retry, open the original source, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试、打开原始来源，或明确选择只使用知识提问。');
   if(value.includes('CONSENT_REQUIRED'))return tr('Please confirm the consent box for the context you selected.','请先确认你所选择情境的同意选项。');
   if(value.includes('ENTITLEMENT_REQUIRED'))return tr('That saved source is not currently available for this Ask session. Open it again from its original page if access is available.','这份已保存来源目前无法用于本次 Ask。若仍有访问权限，请从原始页面重新打开。');
   if(value.includes('NOT_AUTHORIZED')||value.includes('SERVER_AUTHORIZATION_REQUIRED'))return tr('This source must be opened from its original reading, relationship or profile page before Ask can use it.','这项资料必须从原本的读取、关系或 Profile 页面打开后，Ask 才能使用。');
@@ -260,14 +265,15 @@ function boot(){
     if(target?.matches?.('[data-cx-seeded-context]')&&target.checked)form.elements.questionOnly.checked=false;
     syncSelection(form);
   });
-  form.elements.questionOnly.addEventListener('change',()=>{if(form.elements.questionOnly.checked){form.elements.contextKnowledge.checked=false;form.elements.contextReality.checked=false;}syncSelection(form);});
-  form.elements.contextKnowledge.addEventListener('change',()=>{if(form.elements.contextKnowledge.checked){form.elements.questionOnly.checked=false;form.querySelectorAll('[data-cx-seeded-context][data-context-type="KNOWLEDGE"]').forEach(x=>x.checked=false);}syncSelection(form);});
+  form.elements.questionOnly.addEventListener('change',()=>{seedFailed=false;if(form.elements.questionOnly.checked){form.elements.contextKnowledge.checked=false;form.elements.contextReality.checked=false;}syncSelection(form);});
+  form.elements.contextKnowledge.addEventListener('change',()=>{seedFailed=false;if(form.elements.contextKnowledge.checked){form.elements.questionOnly.checked=false;form.querySelectorAll('[data-cx-seeded-context][data-context-type="KNOWLEDGE"]').forEach(x=>x.checked=false);}syncSelection(form);});
   form.elements.contextReality.addEventListener('change',()=>{if(form.elements.contextReality.checked)form.elements.questionOnly.checked=false;syncSelection(form);});
   form.addEventListener('submit',async event=>{
     event.preventDefault();
     const question=String(form.elements.question.value||'').trim();
     if(!question||form.getAttribute('aria-busy')==='true')return;
     if(navigator.onLine===false){form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');return;}
+    if(seedLoading||seedFailed){setStatus(status,tr('The selected source is still unavailable. Reload to retry, or explicitly choose Knowledge only.','所选来源尚未载入。请刷新重试，或明确选择只使用知识提问。'),'error');return;}
     const selection=selectedRequest(form),guided=guidedContext(form);
     if(form.elements.contextReality.checked&&!form.elements.currentRealityConsent.checked){setStatus(status,tr('Confirm that the situation you entered may be used for this question.','请确认你填写的当前处境可以用于这个问题。'),'error');return;}
     setStatus(status,tr('Connecting your question to the selected sources…','正在把你的问题与所选来源连接起来…'));
@@ -281,7 +287,7 @@ function boot(){
       setStatus(status,'','success');
       document.querySelector('[data-cx-contextual-ask-result]').scrollIntoView({behavior:'smooth',block:'start'});
     }catch(error){
-      form.dataset.askState=navigator.onLine===false?'OFFLINE':'ERROR';
+      form.dataset.askState=navigator.onLine===false?'OFFLINE':error?.code==='SELECTED_SOURCE_UNAVAILABLE'?'SOURCE_UNAVAILABLE':'ERROR';
       setStatus(status,error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code),'error');
       if(isPaidBoundary(error?.code))showPaidUpgrade({reason:String(error?.code||'ENTITLEMENT_BOUNDARY'),adds:['new structure','new combination','new timing','new context','new continuity']});
     }finally{form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;}

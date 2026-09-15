@@ -60,3 +60,22 @@ export function contextualAskDisclosure(contexts=[],currentFacts=null,locale='en
  return freeze({schemaVersion:'PHI-OS-CX-R9-R2-CONTEXT-DISCLOSURE-v1.0.0',contexts:used,groups:Object.entries(groups).map(([sourceClass,items])=>freeze({sourceClass,items})),currentVsStable:{current,stable},noSilentAccountSweep:true,sourceClassesEqualScientificStatus:false});
 }
 export function contextRegistryForAudit(){return ASK_CONTEXT_SOURCE_REGISTRY}
+
+// Resolve the existing published-article projection; never use URL-supplied prose as evidence.
+export async function resolveSelectedArticle(env,slug,locale='en') {
+ if(!/^[a-zA-Z0-9_-]+$/.test(slug||'')||!env?.ASSETS?.fetch)return null;
+ const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));return r.ok?r.json():null;};
+ try{
+  const paths=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json'];
+  const manifests=await Promise.all(paths.map(read));
+  const row=manifests.flatMap(m=>m?.records||[]).find(r=>(r.slug===slug||r.nodeCode?.toLowerCase()===slug.toLowerCase())&&r.locale===locale&&r.status==='published');
+  if(!row?.path?.startsWith('/content/knowledge/public/'))return null;
+  const article=await read(row.path);
+  if(article?.publicationStatus!=='published'||article?.reviewStatus!=='approved'||article?.locale!==locale||article?.slug!==row.slug)return null;
+  const paragraphs=(article.sections||[]).flatMap(s=>(s.blocks||[]).map(b=>b.text||b.statement||'')).filter(Boolean);
+  if(!paragraphs.length)return null;
+  const href=article.publicHref||row.href;
+  if(!href?.startsWith('/articles/')||href.startsWith('//'))return null;
+  return {slug:article.slug,title:article.title,href,locale,nodeCode:article.nodeCode,sources:paragraphs.map((text,i)=>({sourceId:'ARTICLE:'+slug+':'+i,fragmentCode:slug+'-'+i,sourceType:'PUBLISHED_CANONICAL_ARTICLE',authorityClass:'PUBLISHED_ARTICLE_AUTHORITY',nodeCode:article.nodeCode,bookCode:article.nodeCode?.match(/^KN-B([1-7])/i)?.[1]?'BOOK-'+article.nodeCode.match(/^KN-B([1-7])/i)[1]:null,title:article.title,href,locale,text,scopeMatch:true,selected:true,articleSlug:slug}))};
+ }catch{return null;}
+}

@@ -2,7 +2,7 @@ const BOOKS='/content/registry/successors/seven-volume-v1/books.json';
 const PARTS='/content/registry/successors/seven-volume-v1/parts.json';
 const ASSETS='/content/web-production/registries/wpr-seven-volume-r2-public-assets-v1.json';
 export const BOOK_ROUTE_BY_ID=Object.freeze({'book-1':'/books/reality-formation/','book-2':'/books/reality-runtime/','book-3':'/books/reality-continuity/','book-4':'/books/reality-expansion/','book-5':'/books/reality-differentiation/','book-6':'/books/reality-observation/','book-7':'/books/reality-navigation/'});
-const json=async p=>{const r=await fetch(p,{credentials:'same-origin',headers:{Accept:'application/json'}});if(!r.ok)throw new Error(`SEVEN_VOLUME_SOURCE_UNAVAILABLE:${p}`);return r.json()};
+const json=async p=>{const r=await fetch(p,{credentials:'same-origin',signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});if(!r.ok)throw new Error(`SEVEN_VOLUME_SOURCE_UNAVAILABLE:${p}`);return r.json()};
 export async function loadSevenVolumeBooks(){const r=await json(BOOKS);if(r.architecture!=='seven-volume-15-part'||!Array.isArray(r.books)||r.books.length!==7)throw new Error('SEVEN_VOLUME_BOOK_REGISTRY_INVALID');return r}
 export async function loadSevenVolumeParts(){const r=await json(PARTS);if(r.architecture!=='seven-volume-15-part'||!Array.isArray(r.parts)||r.parts.length!==15)throw new Error('SEVEN_VOLUME_PART_REGISTRY_INVALID');return r}
 export async function loadSevenVolumeAssets(){const r=await json(ASSETS);if(!Array.isArray(r.assets)||r.assets.length<15)throw new Error('SEVEN_VOLUME_ASSET_REGISTRY_INVALID');return r}

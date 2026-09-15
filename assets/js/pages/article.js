@@ -110,8 +110,9 @@ function appendAskEntry(article) {
     createCkaEntryAction(document, {
       entrySurface: 'ARTICLE',
       contextType: 'PUBLISHED_ARTICLE',
-      contextId: article.nodeCode || slug,
-      articleCode: article.nodeCode || slug,
+      contextId: `ARTICLE:${slug}`,
+      contextRoute: `/articles/${slug}`,
+      articleCode: slug,
       bookCode: context.bookCode,
       partCode: context.partCode,
       contextLabel: article.title,

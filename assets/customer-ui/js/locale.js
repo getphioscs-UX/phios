@@ -108,7 +108,9 @@ function installDynamicLocaleProjection(scope=document){
 }
 
 export function preferredCustomerLocale(){
-  const stored=readStorage(KEY)||readStorage('phiOSLocale');
+  const explicit=new URLSearchParams(location.search).get('locale');
+  if(explicit==='en'||explicit==='zh-Hans')return explicit;
+  const stored=readStorage('phiOSLocale')||readStorage(KEY);
   if(stored==='en'||stored==='zh-Hans')return stored;
   return navigator.language?.toLowerCase().startsWith('zh')?'zh-Hans':'en';
 }

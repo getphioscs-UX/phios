@@ -7,11 +7,11 @@ const PATHS=Object.freeze({
 const cache=new Map();
 async function load(name){
  if(cache.has(name))return cache.get(name);
- const promise=fetch(PATHS[name],{credentials:'same-origin',headers:{Accept:'application/json'}}).then(response=>{
+ const promise=fetch(PATHS[name],{credentials:'same-origin',signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}}).then(response=>{
   if(!response.ok)throw new Error(`PUBLIC_DISCOVERY_SOURCE_UNAVAILABLE:${PATHS[name]}`);
   return response.json();
  });
- cache.set(name,promise);return promise;
+ cache.set(name,promise);promise.catch(()=>cache.delete(name));return promise;
 }
 export async function loadPublicSearchIndex(locale){
  const data=await load('search');

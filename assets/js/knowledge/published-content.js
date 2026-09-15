@@ -37,7 +37,7 @@ const BOOK4_PUBLICATION_SUCCESSOR_MANIFEST =
 
 async function fetchJson(path) {
   const response = await fetch(path, {
-    credentials: 'same-origin',
+    credentials: 'same-origin', signal: AbortSignal.timeout(12000),
     headers: {
       Accept: 'application/json'
     }
@@ -258,6 +258,7 @@ async function loadLocale(locale) {
   });
 
   cache.set(normalizedLocale, promise);
+  promise.catch(()=>cache.delete(normalizedLocale));
 
   return promise;
 }

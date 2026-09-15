@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-KAP-MAINTENANCE-SUCCESSOR-v2.0.0",
+  "work": "CA-R1-CONTEXTUAL-ARTICLE-CONSUMPTION",
+  "status": "LOCAL_IMPLEMENTATION_VALIDATED_PRODUCTION_RETEST_PENDING",
+  "baselineCommit": "d60e1de0a4271c7c801eecc61c3f4d8784b03653",
+  "changes": [
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "6587f2a492874d6cc4f3d2400451b2a6b8896779d56a12bba659ab1c69a2af99",
+      "successorSha256": "660d677e577628f68d954a7a6deb621a412b0f7ca68b7c3f56b268221e813fbc",
+      "changeClass": "RESOLVE_SELECTED_PUBLISHED_ARTICLE_AND_EXCLUDE_BROADER_SOURCES"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "7f3432fa1a8e306c8ca0f07060226ae12ded61f36956e51a6183a6d0df824696",
+      "successorSha256": "053bea3d2ea80e28616c674a0daee552f75b19d4fadc83cb9a4c945f051c23a6",
+      "changeClass": "PRESERVE_SELECTED_SOURCE_RELEVANCE_ORDER"
+    }
+  ],
+  "evidence": [
+    "scripts/check-ca-r1-context-search.mjs",
+    "docs/qa/customer-activation-r1/local-browser-retest-v1.json"
+  ],
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false,
+    "humanSemanticApprovalApplied": false
+  }
+}

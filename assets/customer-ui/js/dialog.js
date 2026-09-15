@@ -1,5 +1,6 @@
 const installedScopes = new WeakSet();
 const openerByDialog = new WeakMap();
+const parentByDialog = new WeakMap();
 
 function resolveDialog(scope, id) {
   if (!id) return null;
@@ -13,7 +14,7 @@ function syncExpanded(opener, open) {
 
 function openDialog(dialog, opener) {
   const parent = opener?.closest?.('dialog[open]');
-  if (parent && parent !== dialog) parent.close('switch');
+  if (parent && parent !== dialog) {parentByDialog.set(dialog,parent);parent.close('switch');}
   openerByDialog.set(dialog, opener || null);
   syncExpanded(opener, true);
   queueMicrotask(() => {
@@ -32,7 +33,7 @@ export function installCustomerDialogs(scope = document) {
   installedScopes.add(scope);
 
   scope.addEventListener('click', event => {
-    const opener = event.target.closest('[data-cx-dialog-open]');
+    const opener = event.target.closest('button[data-cx-dialog-open],a[data-cx-dialog-open]');
     if (opener) {
       const dialog = resolveDialog(scope, opener.dataset.cxDialogOpen);
       if (dialog) {
@@ -59,6 +60,8 @@ export function installCustomerDialogs(scope = document) {
       syncExpanded(opener, false);
       openerByDialog.delete(dialog);
       if (!scope.querySelector('dialog[open]')) delete document.documentElement.dataset.cxDialogOpen;
+      const parent=parentByDialog.get(dialog);parentByDialog.delete(dialog);
+      if(parent?.isConnected&&!parent.open&&dialog.returnValue!=='navigate'&&dialog.returnValue!=='switch'){parent.showModal();document.documentElement.dataset.cxDialogOpen=parent.id;}
       if (opener?.isConnected) opener.focus({ preventScroll: true });
       dialog.dispatchEvent(new CustomEvent('phios:dialogclose', { bubbles: true, detail: { id: dialog.id, returnValue: dialog.returnValue } }));
     });

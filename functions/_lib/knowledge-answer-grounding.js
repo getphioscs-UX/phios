@@ -1,3 +1,4 @@
+import {resolveSelectedArticle} from '../contextual-ask/contextual-ask-runtime.js';
 import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
 import {normalizeAtlasRetrievalScope} from './atlas-retrieval-scope.js';
@@ -194,6 +195,17 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
   url.search = new URLSearchParams(retrievalRequest.params).toString();
   const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env, {retrievalScope:options.retrievalScope});
   const payload = await response.json();
+  if(options.selectedArticle){
+    const selected=await resolveSelectedArticle(env,options.selectedArticle,normalized.locale);
+    if(!selected)throw Object.assign(new Error('SELECTED_SOURCE_UNAVAILABLE'),{status:422});
+    const terms=relevanceTerms(normalized.tokens);
+    const fragments=selected.sources.flatMap(source=>(source.text.match(/[^。！？.!?]+[。！？.!?]?/gu)||[]).filter(text=>text.trim().length>15).map((text,i)=>({...source,text:text.trim(),sourceId:source.sourceId+':S'+i,fragmentCode:source.fragmentCode+'-S'+i})));
+    const rank=s=>terms.filter(term=>searchText(s.text).includes(term)).length;
+    fragments.sort((a,b)=>rank(b)-rank(a));
+    payload.answerGrounding={sources:fragments.map((s,i)=>({...s,selectedRelevanceRank:i}))};
+    payload.published={...(payload.published||{}),results:(payload.published?.results||[]).filter(r=>r.slug===selected.slug)};
+    payload.manuscript={status:'not_requested',records:[],errors:[]};
+  }
   const formation = await retrieveFormationScope({env,scope:options.retrievalScope,locale:normalized.locale});
   if(options.retrievalScope?.scopeType==='STRUCTURED_KNOWLEDGE'){
     const intent=classifyStructuredIntent(normalized.searchText||normalized.originalQuestion||normalized.question);
@@ -504,7 +516,7 @@ export function evaluateKapCoverage({ bundle, retrieval, scopeDisposition = 'KNO
 export async function runKapGroundingPipeline({ input, request, env = {}, retrievalOptions = {}, scopeDisposition = 'KNOWLEDGE_QUERY' }) {
   const intake = createKapQuestionIntake(input);
   const normalized = normalizeKapQuestion(intake);
-  const retrieval = await retrieveKapKnowledge({ request, env, normalized, options: {...retrievalOptions,retrievalScope:intake.retrievalScope} });
+  const retrieval = await retrieveKapKnowledge({ request, env, normalized, options: {...retrievalOptions,retrievalScope:intake.retrievalScope,selectedArticle:intake.surfaceContext?.articleSlug} });
   const nodeMatches = deriveKapNodeMatches(retrieval);
   const relationshipAuthority = await loadKapRelationshipAuthority(env);
   const expansion = expandKapRelationships({ nodeMatches, locale: normalized.locale, ...relationshipAuthority });

@@ -666,7 +666,7 @@ function renderHeader(documentRef, article, translate) {
   actions.append(save);
 
   for (const action of [
-    [article.publicationContext?.bookRoute || '/books', translated(translate, 'knowledge.articles.viewBook')],
+    [article.publicationContext?.bookRoute || '/books', (article.locale==='zh-Hans'?'阅读本册：':'Read volume: ')+(article.publicationContext?.bookTitle?.[article.locale]||article.publicationContext?.bookTitle?.en||article.publicationContext?.bookCode||'PHI OS')],
     ['/explore', translated(translate, 'knowledge.articles.viewAtlas')]
   ]) {
     const link = createInternalLink(documentRef, {

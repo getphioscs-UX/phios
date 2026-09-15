@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {freezeArtifacts,base} from './build-b14-sks-freeze.mjs';
+import {assertFreezeSuccessor} from './lib/ca-r1-freeze-successor.mjs';
 import './check-b14-sks-source-material.mjs';
 import './check-b14-sks-authority.mjs';
 import './check-b14-sks-books.mjs';
@@ -8,7 +9,7 @@ import './check-b14-sks-cross-book-current.mjs';
 import './check-b14-sks-relationships.mjs';
 import './check-b14-sks-ask-current.mjs';
 import './check-b14-sks-w73-w77.mjs';
-const artifacts=freezeArtifacts();for(const [p,data] of Object.entries(artifacts))assert.deepEqual(JSON.parse(fs.readFileSync(p)),data,'FREEZE_DRIFT:'+p);
+const artifacts=freezeArtifacts();assertFreezeSuccessor(artifacts);
 const runtime=artifacts[base+'b14-sks-r1-runtime-freeze-v1.json'];
 for(const file of ['functions/_lib/structured-ask-policy.js','functions/contextual-ask/contextual-ask-runtime.js','assets/js/knowledge/progressive-explorer.js'])assert.ok(runtime.digests[file],'RUNTIME_BINDING_MISSING:'+file);
 assert.ok(Object.keys(runtime.digests).every(p=>!p.includes('/_source-material/')),'SOURCE_ARCHIVE_IMPORTED_INTO_RUNTIME');

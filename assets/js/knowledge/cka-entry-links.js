@@ -1,8 +1,10 @@
+import {normalizeAskContext} from '../../customer-ui/js/ask-context-contract.js';
 const clean = value => String(value ?? '').trim();
 
 export function buildCkaEntryHref({
   entrySurface,
   contextType,
+  contextRoute,
   contextId,
   bookCode,
   partCode,
@@ -19,6 +21,7 @@ export function buildCkaEntryHref({
   });
   for (const [key, value] of Object.entries({
     contextType,
+    contextRoute,
     contextId,
     bookCode,
     partCode,
@@ -31,7 +34,10 @@ export function buildCkaEntryHref({
   })) {
     if (clean(value)) params.set(key, clean(value));
   }
-  return `/knowledge-search?${params}`;
+  const normalized=normalizeAskContext(params);
+  if(normalized.contextRef){params.set('contextRef',normalized.contextRef);params.set('contextType',normalized.contextType);}
+  params.set('locale',typeof document!=='undefined'&&document.documentElement.lang==='zh-Hans'?'zh-Hans':'en');
+  return `/knowledge/ask/?${params}`;
 }
 
 export function ckaEntryLabel(kind, locale = 'en') {
