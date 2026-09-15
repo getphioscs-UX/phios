@@ -155,7 +155,7 @@
       "evidence": [
         "search-failure-browser-v1.json"
       ],
-      "note": "FIG 11F 未登记，不能虚构映射或将 FIG 0A 测试当作该要求通过。",
+      "note": "FIG 11F 的 R2 图像已找到，但正式图示登记仍缺；不能仅凭图片创建定义或将 FIG 0A 测试当作该要求通过。",
       "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
@@ -283,11 +283,12 @@
     {
       "work": "CA-R1-W25",
       "title": "BROKEN VISUAL CLOSURE",
-      "state": "FAIL",
+      "state": "LOCAL_FIXED_PENDING_DEPLOYMENT",
       "evidence": [
-        "seven-volume-http-audit-v1.json"
+        "r2-public-image-usage-v1.json",
+        "R2-PUBLIC-IMAGE-REVIEW.html"
       ],
-      "note": "七册总览 Hero 的已登记 URL 返回 404；七张单册封面 HTTP 通过，不代表全部图片视觉验收。",
+      "note": "R2 实际对象位于 images/hero/；七册 Hero 错误路径已修正，GET 与原 SHA256 一致，部署后实际显示仍待验收。",
       "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
@@ -718,11 +719,12 @@
     {
       "work": "CA-R1-W69",
       "title": "IMAGE REGRESSION",
-      "state": "FAIL",
+      "state": "LOCAL_FIXED_PENDING_DEPLOYMENT",
       "evidence": [
-        "seven-volume-http-audit-v1.json"
+        "r2-public-image-usage-v1.json",
+        "R2-PUBLIC-IMAGE-REVIEW.html"
       ],
-      "note": "七册总览 Hero 的已登记 URL 返回 404；七张单册封面 HTTP 通过，不代表全部图片视觉验收。",
+      "note": "R2 实际对象位于 images/hero/；七册 Hero 错误路径已修正，GET 与原 SHA256 一致，部署后实际显示仍待验收。",
       "humanAcceptanceDeferred": true,
       "productionAccepted": false
     },
