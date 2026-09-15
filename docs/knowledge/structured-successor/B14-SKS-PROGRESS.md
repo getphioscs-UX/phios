@@ -190,3 +190,7 @@ The four required check:b14-sks:book1–book4 aliases now point to the existing 
 ## W69 cross-book checker on d09f7d4
 
 The required check:b14-sks:cross-book command now composes existing source, dedup, conflict and relationship checks, plus cross-book route/owner and Book IV–V bridge invariants. All 71 objects and one bridge pass; eight scope/authority mutation tests reject invalid changes. Pending findings and 40 proposal imports remain deferred. See B14-SKS-W69-CROSS-BOOK.md. Next W70.
+
+## W70 Ask checker
+
+All six mandated questions have bilingual coverage: two missing-object cases, six missing-live-meaning cases, four bounded-source cases. Fixed a Book IV expansion relevance gap for structural costs and scale shifts, with negative scope tests. Existing 14 bilingual KAP cases still pass. This does not claim full answers for all six questions; see B14-SKS-W70-ASK.md. Next W71; human review remains deferred.

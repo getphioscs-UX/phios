@@ -20,6 +20,7 @@ export function structuredIntentRelevant(intent,source){
  const tags=String(source.structuredTags||'');
  const rules={RECOVERY:/RECOVERY|ADAPTATION|恢复|修复/,DEGRADATION:/DEGRADATION|FAILURE|退化|失效/,CONTINUITY:/CONTINUITY|连续|持续/,EXPANSION:/EXPANSION|REPLICATION|DISTRIBUTION|扩展/,SCALE_TRANSITION:/SCALE_SHIFT|尺度转换/,CONSTRAINT_ANALYSIS:/CONSTRAINT|约束|限制/,RUNTIME_INTERACTION:/RELATIONSHIP|COORDINATION|FEEDBACK|关系|互动/,STATE_TRANSITION:/TRANSITION|STATE|状态/};
  if(intent==='PATTERN_COMPARISON')return false; // One selected object cannot establish a comparison.
+ if(intent==='EXPANSION'&&source.bookCode==='BOOK-4'&&/\b(?:MAINTENANCE_COST|SCALE_SHIFT)\b/.test(tags))return true;
  return !rules[intent]||rules[intent].test(tags);
 }
 export async function retrieveStructuredObject({env,scope,locale='zh-Hans'}){
