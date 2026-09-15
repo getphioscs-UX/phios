@@ -41,3 +41,7 @@ W65: authority checks preserve all prior review gaps. Twenty article-summary can
 W66: two reading suggestions remain excluded from retrieval; no self-loop approvals were applied. The 40-task Chat extraction packet produces AI-assisted proposals only. Confirm original evidence and source version before any successor import or consolidated review; never treat Chat output as canonical authority.
 
 W67: projection checks passed without granting human acceptance. Incoming Chat batches are not yet fully audited because the supplied files became unavailable before import. No missing meaning was silently marked complete.
+
+40-meaning follow-up: all 40 restored proposals and 88 quotations now pass source/identity checks. Book III is verified through exact section SHA256 from the supplied original review HTML; its PDF authority is unchanged. All 40 await consolidated semantic review and successor import. See meaning-extraction/MEANING-PROPOSALS-AUDIT.md.
+
+W68: all four per-book checks passed against the current registries. This does not import the 40 source-verified proposals or approve their semantics. Consolidated human decisions remain open.

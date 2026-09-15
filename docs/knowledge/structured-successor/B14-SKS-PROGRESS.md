@@ -180,3 +180,9 @@ Endpoint existence, semantic schema/type, distinct pending-reading role, duplica
 ## W67 projection checker on 893d7c1
 
 71 static discovery/deep-link checks and 142 English/Chinese rendered inspector/Ask-context cases passed. See B14-SKS-W67-PROJECTION.md for test scope. Incoming meaning batches await restored/current file paths before full coverage and quote verification; the 40 registered missing meanings remain unchanged. Next W68.
+
+40-meaning follow-up: all 40 restored proposals and 88 quotations now pass source/identity checks. Book III is verified through exact section SHA256 from the supplied original review HTML; its PDF authority is unchanged. All 40 await consolidated semantic review and successor import. See meaning-extraction/MEANING-PROPOSALS-AUDIT.md.
+
+## W68 book-specific checkers
+
+The four required check:b14-sks:book1–book4 aliases now point to the existing book-specific contracts. The check:b14-sks:books aggregate verifies aliases and runs all four without nested npm or historical recording. All passed (11/12/28/20 objects). The 40 source-verified meaning proposals remain pending semantic review/import. See B14-SKS-W68-BOOK-CHECKERS.md. Next W69.
