@@ -15,3 +15,7 @@
 @media(max-width:800px){.structured-explorer .structured-explorer-layout{grid-template-columns:minmax(0,1fr)}.structured-explorer nav{max-height:20rem;overflow:auto}}
 @media(prefers-reduced-motion:reduce){.structured-explorer *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(forced-colors:active){.structured-explorer :is(button,article,aside,details){border:1px solid CanvasText}.structured-explorer :focus-visible{outline-color:Highlight}.structured-explorer [aria-pressed=true]{border-color:Highlight}}
+
+.structured-explorer.structured-progressive .structured-explorer-layout{grid-template-columns:minmax(10rem,1fr) minmax(0,2fr)}
+.structured-progressive nav{display:flex;flex-direction:column;gap:.5rem}.structured-progressive button{min-height:44px;white-space:normal;text-align:start}.structured-progressive>label{display:block;margin-block:1rem}.structured-progressive input,.structured-progressive select{max-width:100%}
+@media(max-width:700px){.structured-explorer.structured-progressive .structured-explorer-layout{grid-template-columns:minmax(0,1fr)}}

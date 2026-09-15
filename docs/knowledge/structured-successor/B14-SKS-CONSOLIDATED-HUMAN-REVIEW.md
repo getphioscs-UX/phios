@@ -29,3 +29,5 @@ W39 customer presentation is now implemented and tested through the customer pro
 W60: review five Book IV article-summary reuse pairs in dedup/B14-SKS-W60-DEDUP.md against the exact source evidence in b14-sks-w60-dedup-report-v1.json. Decide whether node-specific extraction is needed; identical summary text does not authorize merging distinct nodes. Forty missing meanings and paraphrase equivalence remain open. All findings are pending; no registry writeback.
 
 W61: review the five unconfirmed candidates in content/knowledge/structured/structured-knowledge-conflicts-v1.json. Identical article summaries do not establish conflicting definitions. SUPERSEDED/REFINED require explicit predecessor/successor; CONTEXT_SPECIFIC requires both scopes. Keep both source variants and evidence. No actual reviewer decisions or canonical writeback have been applied.
+
+W62: review progressive topic/family navigation, source-link expansion, and the explicit full reading-map/comparison entry. Missing definitions remain explicit. Machine request counts do not replace deployed performance or paid-flow acceptance.

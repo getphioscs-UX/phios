@@ -1,3 +1,4 @@
+import {structuredLoader} from './structured-loader.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function renderStructuredBacklinks(host,{objects,backlinks,bookCode,locale='en'}){
  const tr=(en,zh)=>locale==='zh-Hans'?zh:en,available=objects.filter(o=>o.bookCode===bookCode),byId=new Map(backlinks.map(b=>[b.objectId,b]));
@@ -10,6 +11,11 @@ export function renderStructuredBacklinks(host,{objects,backlinks,bookCode,local
  select.addEventListener('change',refresh);refresh();return ()=>select.removeEventListener('change',refresh);
 }
 export async function mountStructuredBacklinks(host,bookCode,locale){
- try{const load=async name=>{const r=await fetch('/content/knowledge/structured/'+name);if(!r.ok)throw new Error('unavailable');return r.json();};const [registry,source]=await Promise.all(['structured-knowledge-registry-v1.json','structured-knowledge-backlinks-v1.json'].map(load));if(!host.isConnected)return ()=>{};return renderStructuredBacklinks(host,{objects:registry.objects,backlinks:source.backlinks,bookCode,locale});}
- catch{host.textContent=locale==='zh-Hans'?'来源回链暂不可用。':'Source links are temporarily unavailable.';return ()=>{};}
+ const tr=(en,zh)=>locale==='zh-Hans'?zh:en;let disposed=false,revision=0;
+ try{const book=await structuredLoader.book(bookCode);if(!host.isConnected)return ()=>{};
+ host.innerHTML='<details><summary>'+tr('Trace topics to their sources','查看主题的来源回链')+'</summary><label>'+tr('Topic','主题')+' <select>'+Object.entries(book.objects).map(([id,o])=>'<option value="'+esc(id)+'">'+esc(locale==='en'?(o.titleEn||o.title):o.title)+'</option>').join('')+'</select></label><div data-lazy-source></div></details>';
+ const details=host.querySelector('details'),select=host.querySelector('select'),target=host.querySelector('[data-lazy-source]');
+ async function refresh(){if(!details.open)return;const ticket=++revision;target.textContent=tr('Loading…','正在加载…');try{const r=await structuredLoader.object(bookCode,select.value);if(disposed||ticket!==revision)return;target.innerHTML='<ul>'+r.backlink.publishedArticles.filter(a=>a.locale===locale).map(a=>'<li><a href="'+esc(a.href)+'">'+esc(a.title)+'</a></li>').join('')+'</ul><p><a href="'+esc(r.backlink.explorerHref)+'">'+tr('Open topic','打开主题')+'</a></p><ul>'+r.backlink.manuscriptSections.map(s=>'<li>'+esc(s.sectionCode)+' · '+s.startPage+'–'+s.endPage+'</li>').join('')+'</ul><p>'+tr('Page references do not grant access to private manuscript text.','页码引用不授予私有稿件正文访问权限。')+'</p>';}catch{if(!disposed&&ticket===revision)target.textContent=tr('Source unavailable','来源暂不可用');}}
+ details.addEventListener('toggle',refresh);select.addEventListener('change',refresh);return ()=>{disposed=true;revision++;details.removeEventListener('toggle',refresh);select.removeEventListener('change',refresh);};
+ }catch{host.textContent=tr('Source links unavailable','来源回链暂不可用');return ()=>{};}
 }

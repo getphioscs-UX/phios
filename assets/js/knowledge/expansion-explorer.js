@@ -1,3 +1,4 @@
+import {mountProgressiveExplorer} from './progressive-explorer.js';
 import {enhanceExplorerShell} from './explorer-shell.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function renderExpansionExplorer(host,{objects,chains,bridge,locale='en',locationRef=window.location,historyRef=window.history,eventTarget=window}){
@@ -14,7 +15,11 @@ export function renderExpansionExplorer(host,{objects,chains,bridge,locale='en',
  const disposeShell=enhanceExplorerShell(host,{layout:'.expansion-layout',nav:'[data-expansion-list]',inspector:'[data-expansion-inspector]',locale});
  return ()=>{disposeShell();host.removeEventListener('click',click);input.removeEventListener('input',renderList);eventTarget.removeEventListener('popstate',sync);};
 }
-export async function mountExpansionExplorer(host,locale){
+async function mountFullReadingView(host,locale){
  try{const load=async path=>{const r=await fetch(path);if(!r.ok)throw new Error('unavailable');return r.json();};const [registry,chains,bridge]=await Promise.all(['book-4/book-4-expansion-mode-registry-v1.json','book-4/book-4-expansion-chain-registry-v1.json','bridges/book-4-to-book-5-civilization-threshold-v1.json'].map(p=>load('/content/knowledge/structured/'+p)));if(!host.isConnected)return ()=>{};return renderExpansionExplorer(host,{objects:registry.objects,chains,bridge,locale});}
  catch{host.textContent=locale==='zh-Hans'?'扩展探索暂不可用，请使用章节入口。':'Expansion explorer unavailable. Use the chapter links.';return ()=>{};}
+}
+
+export async function mountExpansionExplorer(host,locale){
+ try{return await mountProgressiveExplorer(host,'BOOK-4',locale,()=>mountFullReadingView(host,locale));}catch{host.textContent=locale==='zh-Hans'?'主题暂不可用，请阅读书籍章节。':'Topics unavailable. Use the book chapter links.';return ()=>{};}
 }

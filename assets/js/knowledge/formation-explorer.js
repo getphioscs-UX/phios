@@ -1,3 +1,4 @@
+import {mountProgressiveExplorer} from './progressive-explorer.js';
 import {enhanceExplorerShell} from './explorer-shell.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const BASE='/content/knowledge/structured/book-1/';
@@ -29,8 +30,12 @@ export function renderFormationExplorer(host,{registry,chains,comparisons,locale
  const disposeShell=enhanceExplorerShell(host,{layout:'.formation-layout',nav:'nav',inspector:'[data-formation-inspector]',locale});
  return ()=>{disposeShell();host.removeEventListener('click',click);input.removeEventListener('input',renderList);filter.removeEventListener('change',renderList);eventTarget.removeEventListener('popstate',sync);};
 }
-export async function mountFormationExplorer(host,locale){
+async function mountFullReadingView(host,locale){
  host.textContent=locale==='zh-Hans'?'正在加载形成探索器…':'Loading Formation Explorer…';
  try {const load=async name=>{const response=await fetch(BASE+name);if(!response.ok)throw new Error('FORMATION_SOURCE_UNAVAILABLE');return response.json();};const [registry,chains,comparisons]=await Promise.all(['book-1-mechanism-registry-v1.json','book-1-formation-chain-registry-v1.json','book-1-mechanism-comparison-families-v1.json'].map(load));if(!host.isConnected)return ()=>{};return renderFormationExplorer(host,{registry,chains,comparisons,locale});}
  catch {host.textContent=locale==='zh-Hans'?'探索器暂时无法加载，请使用上方阅读入口。':'The explorer is temporarily unavailable. Use the reading links above.';return ()=>{};}
+}
+
+export async function mountFormationExplorer(host,locale){
+ try{return await mountProgressiveExplorer(host,'BOOK-1',locale,()=>mountFullReadingView(host,locale));}catch{host.textContent=locale==='zh-Hans'?'主题暂不可用，请阅读书籍章节。':'Topics unavailable. Use the book chapter links.';return ()=>{};}
 }

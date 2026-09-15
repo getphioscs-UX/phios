@@ -1,3 +1,4 @@
+import {mountProgressiveExplorer} from './progressive-explorer.js';
 import {enhanceExplorerShell} from './explorer-shell.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function renderMaintenanceExplorer(host,{entries,locale='en',locationRef=globalThis.location||{href:'https://local/'},historyRef=globalThis.history,eventTarget=globalThis.window}){
@@ -13,7 +14,11 @@ export function renderMaintenanceExplorer(host,{entries,locale='en',locationRef=
  const disposeShell=enhanceExplorerShell(host,{layout:'.maintenance-layout',nav:'.maintenance-topics',inspector:'[data-maintenance-inspector]',locale});
  return ()=>{disposeShell();input.removeEventListener('input',render);input.removeEventListener('input',restore);host.removeEventListener('click',click);eventTarget?.removeEventListener('popstate',sync);};
 }
-export async function mountMaintenanceExplorer(host,locale){
+async function mountFullReadingView(host,locale){
  try{const response=await fetch('/content/knowledge/structured/book-3/book-3-maintenance-signal-registry-v1.json');if(!response.ok)throw new Error('unavailable');const {entries}=await response.json();if(!host.isConnected)return ()=>{};return renderMaintenanceExplorer(host,{entries,locale});}
  catch{host.textContent=locale==='zh-Hans'?'维持与恢复目录暂不可用。':'Maintenance topics are unavailable.';return ()=>{};}
+}
+
+export async function mountMaintenanceExplorer(host,locale){
+ try{return await mountProgressiveExplorer(host,'BOOK-3',locale,()=>mountFullReadingView(host,locale));}catch{host.textContent=locale==='zh-Hans'?'主题暂不可用，请阅读书籍章节。':'Topics unavailable. Use the book chapter links.';return ()=>{};}
 }

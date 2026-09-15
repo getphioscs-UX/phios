@@ -156,3 +156,7 @@ Machine implementation and targeted checks complete: 71 objects, 2,485 pairs, 46
 ## W61 conflict registry on 2151998
 
 Four-state conflict validation and a source-bound registry are implemented. Five W60 clues remain UNRESOLVED and unconfirmed; there are zero confirmed conflicts. Forty missing meanings still prevent full semantic coverage. Explicit reviewer, rationale, evidence and direction/context are required for resolution records; validation does not apply authority changes. Builder refuses to overwrite modified records. VAP-W20/W21 now checks one body figure separately from the current fallback hero. Targeted checks passed. Human review deferred; next W62.
+
+## W62 loading on 22d8cca
+
+Progressive loader and four public mounts implemented; source backlinks are lazy. Initial selected-topic load uses four scoped JSON requests, approximately 6.3–9.1 KB. Complete reading maps and comparisons remain available on explicit request. Projection/loader tests, four new browser mounts, and 32 retained reading-component cases pass. See B14-SKS-W62-LOADING.md. Human and production performance review remain open. Next W63.

@@ -1,3 +1,4 @@
+import {mountProgressiveExplorer} from './progressive-explorer.js';
 import {enhanceExplorerShell} from './explorer-shell.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function renderRuntimeAtlas(host,{patterns,locale='en',locationRef=window.location,historyRef=window.history,eventTarget=window}){
@@ -17,7 +18,11 @@ export function renderRuntimeAtlas(host,{patterns,locale='en',locationRef=window
  const disposeShell=enhanceExplorerShell(host,{layout:'.runtime-atlas-layout',nav:'[data-runtime-list]',inspector:'[data-runtime-inspector]',locale});
  return ()=>{disposeShell();host.removeEventListener('click',click);search.removeEventListener('input',renderList);level.removeEventListener('change',renderList);compare.removeEventListener('change',renderComparison);eventTarget.removeEventListener('popstate',sync);};
 }
-export async function mountRuntimeAtlas(host,locale){
+async function mountFullReadingView(host,locale){
  try{const response=await fetch('/content/knowledge/structured/book-2/book-2-runtime-pattern-registry-v1.json');if(!response.ok)throw new Error('unavailable');const {patterns}=await response.json();if(!host.isConnected)return ()=>{};return renderRuntimeAtlas(host,{patterns,locale});}
  catch{host.textContent=locale==='zh-Hans'?'图谱暂不可用，请使用书籍章节入口。':'Atlas unavailable. Use the book chapter links.';return ()=>{};}
+}
+
+export async function mountRuntimeAtlas(host,locale){
+ try{return await mountProgressiveExplorer(host,'BOOK-2',locale,()=>mountFullReadingView(host,locale));}catch{host.textContent=locale==='zh-Hans'?'主题暂不可用，请阅读书籍章节。':'Topics unavailable. Use the book chapter links.';return ()=>{};}
 }
