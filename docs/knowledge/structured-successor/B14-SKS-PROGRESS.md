@@ -168,3 +168,7 @@ The seven-field 71-record index and lazy current-book, cross-family Explorer sea
 ## W64 schema checker on da0b0a6
 
 Common schema and cross-registry checks cover 71 objects, valid IDs/book/Part/sourceRefs and orphan detection. Twelve negative fixtures are rejected. Book-specific extension contracts remain intact; absent definitions stay unresolved. See B14-SKS-W64-SCHEMA.md. Next W65; human review remains deferred.
+
+## W65 authority checker on 403b681
+
+The registered 71-object corpus retains canonical-source and projection-only boundaries. Twenty article summaries remain summaries; forty missing meanings remain unresolved. W64 plus source reconstruction and 12 authority-negative cases pass. See B14-SKS-W65-AUTHORITY.md. Next W66; human review remains deferred.

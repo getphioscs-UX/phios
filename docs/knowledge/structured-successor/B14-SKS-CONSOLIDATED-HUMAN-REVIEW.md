@@ -35,3 +35,5 @@ W62: review progressive topic/family navigation, source-link expansion, and the 
 W63: review current-book search labels and ranking using the existing source titles/English aliases. Search does not confirm missing meanings or create synonyms. No human acceptance is recorded.
 
 W64: structural validation does not imply semantic or source-fidelity approval. Forty unresolved meanings and existing review findings remain open; no human decisions were applied.
+
+W65: authority checks preserve all prior review gaps. Twenty article-summary candidates are not definitions; forty missing meanings still need extraction. No LLM or machine check has granted canonical authority or human acceptance.
