@@ -172,3 +172,7 @@ Common schema and cross-registry checks cover 71 objects, valid IDs/book/Part/so
 ## W65 authority checker on 403b681
 
 The registered 71-object corpus retains canonical-source and projection-only boundaries. Twenty article summaries remain summaries; forty missing meanings remain unresolved. W64 plus source reconstruction and 12 authority-negative cases pass. See B14-SKS-W65-AUTHORITY.md. Next W66; human review remains deferred.
+
+## W66 relationship checker on cc24b53
+
+Endpoint existence, semantic schema/type, distinct pending-reading role, duplicate IDs/pairs and self-loop authorization are checked. Zero semantic edges and two pending reading proposals remain unchanged. Eight rejection cases and an explicit fixture-only self-loop exception pass. No production exception or human decision was created. A separate 40-task source-extraction packet and Chat prompt are in meaning-extraction/. Next W67.
