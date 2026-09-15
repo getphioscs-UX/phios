@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "W64 shared structured identity and references",
+  "description": "Validates shared fields; book-specific extension fields retain their existing contracts. Missing definitions are not promoted.",
+  "type": "object",
+  "required": [
+    "objectId",
+    "bookCode",
+    "partCode",
+    "nodeCode",
+    "title",
+    "objectType",
+    "sourceRefs"
+  ],
+  "properties": {
+    "objectId": {
+      "type": "string",
+      "pattern": "^SK-B[1-4]-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "bookCode": {
+      "enum": [
+        "BOOK-1",
+        "BOOK-2",
+        "BOOK-3",
+        "BOOK-4"
+      ]
+    },
+    "partCode": {
+      "type": "string",
+      "pattern": "^P(?:[1-9]|1[01])$"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objectType": {
+      "enum": [
+        "MECHANISM",
+        "STATE",
+        "SIGNAL",
+        "CONDITION",
+        "BOUNDARY",
+        "CONSTRAINT",
+        "PRESSURE",
+        "CAPACITY",
+        "LOAD",
+        "PATTERN",
+        "RELATIONSHIP",
+        "DEPENDENCY",
+        "FEEDBACK",
+        "TRANSITION",
+        "THRESHOLD",
+        "FAILURE_MODE",
+        "RECOVERY_MODE",
+        "EXPANSION_MODE",
+        "SCALE_SHIFT",
+        "CARRIER",
+        "RESOURCE",
+        "COORDINATION_MODE",
+        "CONTINUITY_MODE",
+        "OBSERVATION_CUE"
+      ]
+    },
+    "sourceRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalNodeCodes",
+        "manuscriptSectionRefs",
+        "publishedArticleRefs",
+        "figureRefs",
+        "relatedStructuredObjectIds"
+      ],
+      "properties": {
+        "canonicalNodeCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "manuscriptSectionRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "publishedArticleRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "figureRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "relatedStructuredObjectIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

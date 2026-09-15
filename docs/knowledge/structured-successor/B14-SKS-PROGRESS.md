@@ -164,3 +164,7 @@ Progressive loader and four public mounts implemented; source backlinks are lazy
 ## W63 metadata search on 7614ca6
 
 The seven-field 71-record index and lazy current-book, cross-family Explorer search are implemented. Deterministic source/field/search checks and four-book browser navigation tests passed. No source definitions or manuscript prose are indexed. See B14-SKS-W63-SEARCH.md. Next W64; human review remains deferred.
+
+## W64 schema checker on da0b0a6
+
+Common schema and cross-registry checks cover 71 objects, valid IDs/book/Part/sourceRefs and orphan detection. Twelve negative fixtures are rejected. Book-specific extension contracts remain intact; absent definitions stay unresolved. See B14-SKS-W64-SCHEMA.md. Next W65; human review remains deferred.

@@ -33,3 +33,5 @@ W61: review the five unconfirmed candidates in content/knowledge/structured/stru
 W62: review progressive topic/family navigation, source-link expansion, and the explicit full reading-map/comparison entry. Missing definitions remain explicit. Machine request counts do not replace deployed performance or paid-flow acceptance.
 
 W63: review current-book search labels and ranking using the existing source titles/English aliases. Search does not confirm missing meanings or create synonyms. No human acceptance is recorded.
+
+W64: structural validation does not imply semantic or source-fidelity approval. Forty unresolved meanings and existing review findings remain open; no human decisions were applied.
