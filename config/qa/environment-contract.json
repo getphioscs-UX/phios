@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "project": "getphios-qa",
+  "origin": "https://getphios-qa.pages.dev",
+  "deploymentStatus": "BLOCKED_PENDING_QA_DEPLOYMENT",
+  "productionFallbackAllowed": false,
+  "bindings": {
+    "RUNTIME_DB": {"kind":"D1", "name":"phios-runtime-sandbox", "id":null},
+    "BOOKS": {"kind":"R2", "name":"phios-private-books-sandbox", "private":true},
+    "MANUSCRIPTS": {"kind":"R2", "name":"phios-private-manuscripts-sandbox", "private":true}
+  },
+  "stripe": {"mode":"sandbox", "accountId":null, "webhookPath":"/api/stripe-webhook"},
+  "secretNames": ["STRIPE_SECRET_KEY","STRIPE_WEBHOOK_SECRET","BOOK_ACCESS_TOKEN_SECRET","BOOK_WATERMARK_SERVICE_TOKEN","RESEND_API_KEY"],
+  "secretPolicy": "Provision independently in QA. Never commit values or send them in chat. Deployment operator verifies separation from production.",
+  "testAccount": null,
+  "testReceiptRecipient": null,
+  "watermarkServiceOrigin": null,
+  "initialVars": {"PHIOS_ENVIRONMENT":"qa", "PHIOS_PUBLIC_ORIGIN":"https://getphios-qa.pages.dev", "PHIOS_BOOK_ONE_SALES_ENABLED":"false"},
+  "e2e": ["checkout","stripe","webhook","account","entitlement","watermark","receipt","download"]
+}

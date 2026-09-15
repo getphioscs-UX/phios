@@ -1,4 +1,4 @@
-import {shuffleSound} from './tarot-shuffle.js';
+import {startRitual} from './ritual-sequence.js';
 const q = (selector, scope = document) => scope.querySelector(selector);
 const qa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 const arr = value => Array.isArray(value) ? value : [];
@@ -340,19 +340,6 @@ function installation(scope = document) {
   }
 
   let shuffling=false;
-  let stopActiveSound=()=>{};
-  function installSoundControl(){
-    let control=q('[data-shuffle-sound]',scope);
-    const anchor=q('[data-start-draw]',scope)||q('[data-reshuffle]',scope);
-    if(!control&&anchor){
-      const label=document.createElement('label');
-      label.className='cx-tarot-sound-control';
-      label.innerHTML=`<input type="checkbox" data-shuffle-sound checked> ${t('Shuffle sound','洗牌声音')}`;
-      anchor.after(label);control=q('input',label);
-      control.addEventListener('change',()=>{if(!control.checked)stopActiveSound();});
-    }
-    return control;
-  }
   async function startDraw() {
     if(shuffling)return;
     const questionNode = q('[data-symbolic-question]', scope);
@@ -361,24 +348,23 @@ function installation(scope = document) {
       return;
     }
     shuffling=true;
-    const soundControl=installSoundControl();
-    const stopSound=soundControl?.checked===false?()=>{}:shuffleSound();
-    stopActiveSound=stopSound;
+
     const host=q('[data-card-picker]',scope);
     const controls=qa('[data-start-draw], [data-reshuffle], [data-spread], [data-symbolic-execute]',scope);
     const disabled=controls.map(b=>b.disabled);controls.forEach(b=>b.disabled=true);
-    if(host){host.hidden=false;host.inert=true;host.setAttribute('aria-busy','true');host.classList.add('is-shuffling');}
+    if(host){host.hidden=false;host.inert=true;host.setAttribute('aria-busy','true');host.style.display='none';}
+    const ritual=startRitual(host,{kind:'tarot',zh:document.documentElement.lang.startsWith('zh')});
     setExecutionStatus(t('Shuffling the deck…','正在洗牌…'),'info');
     try {
     const cards = await loadJson(CARD_REGISTRY_URL);
     state.shuffledCardIds = cryptoShuffle(cards.entries.map(entry => entry.cardId));
     state.selectedCardIds = [];
     renderDeck();
-    await new Promise(resolve=>setTimeout(resolve,globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches?150:1500));
+    if(!await ritual.done){state.shuffledCardIds=[];state.selectedCardIds=[];renderDeck();setExecutionStatus(t('Shuffle cancelled. Start again when ready.','洗牌已取消，准备好后可重新开始。'),'info');return;}
     } finally {
-      shuffling=false;stopSound();
+      shuffling=false;ritual.stop();
       controls.forEach((b,i)=>b.disabled=disabled[i]);
-      if(host){host.inert=false;host.removeAttribute('aria-busy');host.classList.remove('is-shuffling');}
+      if(host){host.inert=false;host.removeAttribute('aria-busy');host.style.display='';}
       updateButton();
     }
     setExecutionStatus(t('Cards shuffled. Choose the cards that draw your attention.', '牌已洗好。请选择最吸引你注意的牌。'), 'info');
@@ -492,7 +478,7 @@ function installation(scope = document) {
       if (state.questionGuide) renderQuestionGuide();
       else chooseSpread(state.spreadId);
       await loadContext();
-      installSoundControl();
+
       q('[data-start-draw]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', 'Tarot 暂时无法运行。'), 'error')));
       q('[data-reshuffle]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', 'Tarot 暂时无法运行。'), 'error')));
       q('[data-symbolic-execute]', scope)?.addEventListener('click', () => execute());

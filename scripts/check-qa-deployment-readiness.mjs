@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {validateQaEnvironment,requireQaTarget} from './lib/qa-environment-validation.mjs';
+const contract=JSON.parse(fs.readFileSync('config/qa/environment-contract.json'));
+const result=validateQaEnvironment(contract);
+assert.equal(result.contractValid,true);assert.equal(result.status,'BLOCKED_PENDING_QA_DEPLOYMENT');assert.equal(result.e2ePassed,false);
+for(const url of ['https://getphios.com','https://www.getphios.com','http://getphios-qa.pages.dev','https://getphios-qa.pages.dev.evil.test'])assert.throws(()=>requireQaTarget(url));
+assert.equal(requireQaTarget(contract.origin).origin,contract.origin);
+for(const mutation of [{project:'getphios'},{origin:'https://getphios.com'},{productionFallbackAllowed:true},{stripe:{mode:'live'}},{initialVars:{PHIOS_BOOK_ONE_SALES_ENABLED:'true'}}])assert.equal(validateQaEnvironment({...contract,...mutation}).contractValid,false);
+fs.writeFileSync('docs/qa/customer-activation-r1/deployment-readiness-v1.json',JSON.stringify({...result,scope:'OFFLINE_CONTRACT_CHECK_ONLY',networkRequests:0,stages:contract.e2e.map(stage=>({stage,status:'BLOCKED_PENDING_QA_DEPLOYMENT'}))},null,2)+'\n');
+console.log('PASS: offline QA contract and production-target rejection. Sandbox E2E: BLOCKED_PENDING_QA_DEPLOYMENT.');

@@ -1,3 +1,4 @@
+import {startRitual} from './ritual-sequence.js';
 import {renderIChingView} from './iching-full.js';
 
 const q=selector=>document.querySelector(selector);
@@ -12,6 +13,7 @@ let currentCast=null;
 let boundQuestion='';
 let productionReady=false;
 let installed=false;
+let casting=false;
 
 function installStyles(){
   if(document.querySelector('link[data-iching-casting-style]'))return;
@@ -298,21 +300,30 @@ async function refreshAuthority(){
 }
 
 async function createCast(isRepeat){
+  if(casting)return;
   if(!productionReady){status(t('Full Production authority is not active on this deployment.','当前部署尚未取得 Full Production 权限。'));return;}
   const currentQuestion=question();
   if(!currentQuestion){status(t('Add the situation you want to understand before casting.','请先填写你想理解的处境，再开始起卦。'));q('[data-iching-question]')?.focus();return;}
+  casting=true;
+  currentCast=null;boundQuestion='';renderCast();setExecuteCopy();
   const button=q('[data-iching-cast]');
+  const controls=qa('[data-iching-cast-mode], [data-iching-recast], [data-iching-question]');
+  const previous=controls.map(x=>x.disabled);controls.forEach(x=>x.disabled=true);
   if(button)button.disabled=true;
+  const ritual=startRitual(q('[data-iching-cast-result]'),{kind:'iching',zh:isZh()});
   status(isRepeat?t('Creating a new independent cast…','正在形成一次新的独立起卦……'):t('Creating one governed cast…','正在形成一次受治理的起卦……'));
   try{
     const response=await fetch('/api/iching-full-cast',{
       method:'POST',
       headers:{'content-type':'application/json',accept:'application/json'},
       cache:'no-store',
+      signal:AbortSignal.timeout(20000),
       body:JSON.stringify({method:'I_CHING',intent:'CREATE_NEW_CAST',question:currentQuestion})
     });
     const payload=await response.json().catch(()=>null);
     if(!response.ok||!payload?.ok||!payload.cast)throw new Error(payload?.error?.code||'CAST_UNAVAILABLE');
+    if(!await ritual.done){status(t('Casting cancelled. Start again when ready.','起卦已取消，准备好后可重新开始。'));renderCast();return;}
+    if(question()!==currentQuestion||mode!=='SYSTEM_RANDOM')throw new Error('CAST_CONTEXT_CHANGED');
     currentCast=payload.cast;
     boundQuestion=currentQuestion;
     renderCast();
@@ -323,6 +334,7 @@ async function createCast(isRepeat){
     renderCast();
     status(t(`Cast unavailable: ${error.message}`,`起卦暂时不可用：${error.message}`));
   }finally{
+    ritual.stop();casting=false;controls.forEach((x,i)=>x.disabled=previous[i]);
     if(button)button.disabled=false;
     setExecuteCopy();
   }
