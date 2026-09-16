@@ -19,17 +19,17 @@ const account = Object.freeze({
   },
   membershipPublic: {
     metaTitle: '会员方案 — PHI OS', skip: '跳到会员方案', eyebrow: '会员方案',
-    title: '四种清楚的 PHI OS 使用方式。', lead: '会员方案负责组织权限，不会改变任何 Reality Journey 的证据或结论。',
-    explorer: 'Explorer', reader: 'Reader', navigator: 'Navigator', professional: 'Professional',
-    explorerCopy: '探索公开知识系统，并开始有限次数的 Journey。',
-    readerCopy: '持续进行常规 Reading，并使用标准报告。',
-    navigatorCopy: '以更完整的连续性进行 Reading 与 Navigation。',
-    professionalCopy: '在获准范围内使用受治理的 Professional Workspace。',
-    monthly: '月付', annual: '年付', lifecycle: '订阅生命周期',
+    title: '四种清楚的 PHI OS 使用方式。', lead: '了解不同使用方式，具体可用内容以账户中的说明为准。',
+    explorer: '探索者', reader: '阅读者', navigator: '导航者', professional: '专业用户',
+    explorerCopy: '从公开知识与入门内容开始。',
+    readerCopy: '了解日常阅读与相关报告。',
+    navigatorCopy: '了解如何持续跟进处境与下一步。',
+    professionalCopy: '了解专业服务与协作范围。',
+    monthly: '月付', annual: '年付', lifecycle: '方案变更说明',
     upgrade: '升级', downgrade: '降级', cancel: '取消',
     grace: '宽限期', failed: '付款失败',
-    entitlements: '权限', book: '书籍权限', quota: 'Journey 配额', reports: '报告权限',
-    review: '专业审阅', academy: 'Academy 权限',
+    entitlements: '权限', book: '书籍权限', quota: '使用次数', reports: '报告权限',
+    review: '专业审阅', academy: '学院内容',
     boundary: '页面所示权限须经账户服务验证后才生效。本页尚未启用结账或付款资料收集。'
   }
 });

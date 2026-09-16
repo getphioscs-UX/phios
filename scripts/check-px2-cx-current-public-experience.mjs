@@ -1,3 +1,4 @@
+import {assertCurrentVisualSuccessor} from './lib/check-pis-visual-successor.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -67,7 +68,7 @@ assert.equal(ia.status, 'FROZEN');
 assert.deepEqual(ia.primaryJourney, ['SEARCH', 'ASK', 'READ', 'FINANCIAL', 'MY_REALITY']);
 
 const pointer = json('content/web-production/registries/current-client-visual-registry.json');
-assert.match(pointer.currentRegistryPath, /client-visual-asset-registry-v1\.7\.json$/);
+assertCurrentVisualSuccessor(pointer);
 const visualRegistry = json(pointer.currentRegistryPath.replace(/^\//, ''));
 for (const code of ['ILL-004', 'ILL-005', 'ILL-008', 'ILL-010']) {
   const asset = visualRegistry.assets.find(candidate => candidate.sequence === code);

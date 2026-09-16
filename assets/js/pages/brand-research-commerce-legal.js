@@ -25,7 +25,7 @@ async function decorate(){
  const body=document.body; const surface=body.dataset.brclSurface; if(!surface||!MAP[surface]) return; const cfg=MAP[surface];
  const main=document.querySelector('main'); if(!main) return;
  const hero=main.querySelector(':scope > section, :scope > .legal-hero, :scope > .checkout-hero') || main.firstElementChild;
- if(hero && !hero.querySelector('.brcl-hero-media')){
+ if(hero && !body.dataset.pisHero && !hero.querySelector('.brcl-hero-media')){
    hero.classList.add('brcl-hero-ready');
    const media=document.createElement('div'); media.className='brcl-hero-media'; media.setAttribute('aria-hidden','true');
    const img=document.createElement('img'); img.alt=''; img.loading='eager'; img.fetchPriority='high'; media.append(img);
@@ -37,6 +37,12 @@ async function decorate(){
    bridge.innerHTML=`<div class="brcl-shell brcl-bridge__grid"><div><p class="brcl-kicker">${local(cfg.kicker)}</p><h2>${local(cfg.title)}</h2><p>${local(cfg.copy)}</p></div><figure class="brcl-visual"><img alt="" loading="lazy"></figure></div>`;
    const ref=hero?.nextElementSibling; if(ref) main.insertBefore(bridge,ref); else main.append(bridge);
    const ill=await resolveIllustration(cfg.ill); const fig=bridge.querySelector('.brcl-visual'); if(ill?.renderable){fig.querySelector('img').src=ill.src}else fig.hidden=true;
+ }
+ const existingBridge=main.querySelector('[data-brcl-bridge]');
+ if(existingBridge){
+  existingBridge.querySelector('.brcl-kicker').textContent=local(cfg.kicker);
+  existingBridge.querySelector('h2').textContent=local(cfg.title);
+  existingBridge.querySelector('.brcl-bridge__grid > div > p:last-child').textContent=local(cfg.copy);
  }
 }
 

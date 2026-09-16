@@ -1,4 +1,4 @@
-import { fetchPublicAssetRegistry, resolvePublicAsset, resolvePublicAssetForWeb, normalizePublicAssetBaseUrl } from './asset-resolver.js';
+import { fetchPublicAssetRegistry, fetchPublicAssetConfig, resolvePublicAsset, resolvePublicAssetForWeb, normalizePublicAssetBaseUrl } from '../runtime/web-production/asset-resolver.js';
 
 const POINTER_URL = '/content/web-production/registries/current-client-visual-registry.json';
 let pointerPromise;
@@ -29,7 +29,8 @@ export async function resolveUnifiedPublicVisual(code, options = {}) {
     const [clientRegistry, publicRegistry] = await Promise.all([clientVisualRegistry(), fetchPublicAssetRegistry()]);
     const entry = clientEntry(clientRegistry, code);
     if (!entry?.r2?.objectKey || entry.r2.remoteVerified !== true) throw primaryError;
-    const base = normalizePublicAssetBaseUrl(publicRegistry.public_base_url);
+    const config=publicRegistry.public_base_url?null:await fetchPublicAssetConfig();
+    const base = normalizePublicAssetBaseUrl(publicRegistry.public_base_url||config?.publicAssetBaseUrl);
     if (!base) throw primaryError;
     return resolvePublicAsset({
       registry: {

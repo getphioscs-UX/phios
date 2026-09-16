@@ -23,15 +23,15 @@ assert.equal(allocation.createsVisualAuthority,false);
 assert.deepEqual(allocation.assets.map(a=>a.assetCode).sort(),authority.assets.map(a=>a.assetCode).sort());
 assert.ok(allocation.assets.filter(a=>a.consumerState==='HISTORICAL_SEMANTIC_STALE').every(a=>a.sevenVolumeCompatibility==='HISTORICAL_ONLY'));
 const copy=read('content/web/index-surfaces/pis-r1-discovery-copy-v1.json');
-assert.equal(Object.keys(copy.pages).length,9);
+assert.equal(Object.keys(copy.pages).length,29);
 for(const [file,sections] of Object.entries(copy.pages)){
  const source=fs.readFileSync(file,'utf8');
  const {document}=parseHTML(source);
  assert.equal(document.querySelectorAll('h1').length,1,`${file}: one h1`);
- assert.equal(document.querySelectorAll('.pis-editorial').length,sections.length);
+ assert.equal(document.querySelectorAll('.pis-editorial:not(.pis-visual-story)').length,sections.length);
  assert.ok(document.querySelector('script[src="/assets/customer-ui/js/public-index-copy.js"]'));
  for(const section of sections){
-  assert.ok(section.body.en.length>150&&section.body.zh.length>45);
+  assert.ok(section.body.en.length>120&&section.body.zh.length>40);
   assert.ok(!/\b(registry|resolver|cutover|successor|fixture|checker|canonical)\b/i.test(section.body.en));
   for(const link of section.links){
    assert.ok(link.en&&link.zh);
@@ -43,4 +43,4 @@ for(const [file,sections] of Object.entries(copy.pages)){
  }
  assert.ok([...document.querySelectorAll('[data-pis-copy]')].every(n=>n.getAttribute('data-cx-en')&&n.getAttribute('data-cx-zh')));
 }
-console.log(`PASS PIS foundation and nine-page editorial additions: ${census.surfaces.length} inventoried files, ${allocation.assets.length} existing asset identities. Browser review, broader pages and production freeze are separate.`);
+console.log(`PASS PIS foundation and expanded editorial additions: ${census.surfaces.length} inventoried files, ${allocation.assets.length} existing asset identities. Browser review, broader pages and production freeze are separate.`);

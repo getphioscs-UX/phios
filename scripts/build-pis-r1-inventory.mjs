@@ -37,7 +37,7 @@ const sourceFiles=files.filter(p=>/\.(html|js|mjs)$/.test(p)&&!/^scripts\//.test
 const sourceText=sourceFiles.map(p=>[p,fs.readFileSync(p,'utf8')]);
 const allocation=visuals.assets.map(a=>{
  const stale=/five[-_ ]?(volume|books?)/i.test([a.title,a.semanticName,a.officialFilename].join(' '));
- const consumers=sourceText.filter(([,s])=>s.includes(a.assetCode)||s.includes(a.r2?.objectKey||'__NO_OBJECT__')).map(([p])=>p);
+ const consumers=sourceText.filter(([,s])=>new RegExp('(?<![A-Za-z0-9_-])'+a.assetCode+'(?![A-Za-z0-9_-])').test(s)||s.includes(a.r2?.objectKey||'__NO_OBJECT__')).map(([p])=>p);
  return {assetCode:a.assetCode,canonicalAssetRef:pointerPath+'#'+a.assetCode,semanticRole:a.semanticPurpose||a.title,primarySurface:consumers[0]||null,secondarySurfaces:consumers.slice(1),placement:'EXISTING_REFERENCE_REQUIRES_VISUAL_REVIEW',localeRule:a.localePolicy,consumerState:stale?'HISTORICAL_SEMANTIC_STALE':!a.r2?.remoteVerified?'UNVERIFIED':consumers.length?'REFERENCED_BROWSER_CONFIRMATION_PENDING':'ALLOCATION_REQUIRED',sevenVolumeCompatibility:stale?'HISTORICAL_ONLY':'REVIEW_WITH_CURRENT_SEVEN_VOLUME_CONTEXT',reason:stale?'Do not reactivate old five-volume semantic artwork.':'References are evidence of consumption candidates, not proof of visible rendering.'};
 });
 write('content/web/index-surfaces/public-index-visual-allocation-v1.json',{authorityPointer:pointerPath,createsVisualAuthority:false,assets:allocation});

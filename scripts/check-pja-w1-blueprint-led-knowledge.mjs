@@ -251,10 +251,10 @@ assert.equal(
 );
 assert(px2Successor.preservesRuntimeAuthority.includes('published knowledge authority'));
 
-const expectedMainNavigation = expW1.primaryNavigation.map(item => [
-  item.id,
-  item.id === 'reality' ? iaSuccessor.current.realityHref : item.href
-]);
+const pisNavigation=await readJson('content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
+assert.deepEqual(pisNavigation.primaryNavigation.map(item=>item.href),['/explore/','/reality/','/perspectives/','/knowledge/','/professional/']);
+assert.equal(pisNavigation.runtimeChanged,false);
+const expectedMainNavigation = pisNavigation.primaryNavigation.map(item => [item.id,item.href]);
 for (const [id, href] of expectedMainNavigation) {
   assert(
     publicShell.includes(`{ id: '${id}', href: '${href}'`),

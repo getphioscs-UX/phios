@@ -567,7 +567,7 @@ PASS: Pages Preview isolation, unchanged production resources, one Book I source
 ✓ Package checker alias registry passed: 171 historical W-stage aliases route through one runner; compatibility npm keys remain present.
 ✓ Public/canonical commands remain direct and in current-main order; parallel PPR/AST package-only deltas remain quarantined until their target gates pass.
 ✓ JSON Schema references, internal schema IDs, and Book 1 Manifest Schema checks passed.
-PHI OS i18n OK (4354 aligned keys; HTML and JavaScript references verified).
+PHI OS i18n OK (4358 aligned keys; HTML and JavaScript references verified).
 Reading Evidence Boundary checks passed.
 Reading de-duplication checks passed.
 Reading → Navigation contract checks passed.
@@ -2520,7 +2520,7 @@ AST MFP-R machine/review artifacts generated: 240/240 machine PASS; human 24/24 
 > check:cx-no-legacy-route-reference
 > node scripts/check-cx-no-legacy-route-reference.mjs
 
-✓ CX legacy-route guard passed across 134 clean-room customer source files.
+✓ CX legacy-route guard passed across 136 clean-room customer source files.
 ✓ CX-R2 Customer IA / Route Authority passed at f6d31da: 8-step internal spine, 3 primary intents, 5 primary navigation domains, 40 canonical route targets, 15 customer surface authorities.
 ✓ CX-R2 ACCEPTED: CUSTOMER_MAIN_CHAIN_FROZEN · GLOBAL_IA_FROZEN · REALITY_JOURNEY_DEMOTED
 ✓ No route cutover, legacy physical deletion, design-system creation, backend authority creation or hard-coded method availability was performed by CX-R2.
@@ -2982,9 +2982,10 @@ AST MFP-R machine/review artifacts generated: 240/240 machine PASS; human 24/24 
   Golden, boundary, property-style, and cross-calculator reconciliation fixtures passed; assumptions/formula/as-of/non-advice/provenance are present on every calculated result.
 
 > check:pis-r1
-> node scripts/check-pis-r1-foundation.mjs
+> node scripts/check-pis-r1-foundation.mjs && node scripts/check-pis-r1-presentation.mjs
 
-PASS PIS foundation and nine-page editorial additions: 84 inventoried files, 152 existing asset identities. Browser review, broader pages and production freeze are separate.
+PASS PIS foundation and expanded editorial additions: 84 inventoried files, 193 existing asset identities. Browser review, broader pages and production freeze are separate.
+PASS PIS presentation: 29 entry pages + seven book orientations; bilingual editorial copy, metadata, 41 verified image dispositions, six home entries, commerce and retired-page boundaries.
 
 > check:ptrc:w9-testamentary-report
 > node scripts/check-ptrc-w9-testamentary-report.mjs
@@ -4082,7 +4083,7 @@ ICR-W0-W4 input foundation check passed.
 > check:cx-no-legacy-route-reference
 > node scripts/check-cx-no-legacy-route-reference.mjs
 
-✓ CX legacy-route guard passed across 134 clean-room customer source files.
+✓ CX legacy-route guard passed across 136 clean-room customer source files.
 ✓ CX-R2 Customer IA / Route Authority passed at f6d31da: 8-step internal spine, 3 primary intents, 5 primary navigation domains, 40 canonical route targets, 15 customer surface authorities.
 ✓ CX-R2 ACCEPTED: CUSTOMER_MAIN_CHAIN_FROZEN · GLOBAL_IA_FROZEN · REALITY_JOURNEY_DEMOTED
 ✓ No route cutover, legacy physical deletion, design-system creation, backend authority creation or hard-coded method availability was performed by CX-R2.
@@ -4153,7 +4154,7 @@ ICR-W0-W4 input foundation check passed.
 > check:cx-no-legacy-route-reference
 > node scripts/check-cx-no-legacy-route-reference.mjs
 
-✓ CX legacy-route guard passed across 134 clean-room customer source files.
+✓ CX legacy-route guard passed across 136 clean-room customer source files.
 
 > check:cx-no-legacy-css
 > node scripts/check-cx-no-legacy-css.mjs

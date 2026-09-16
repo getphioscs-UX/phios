@@ -3,6 +3,10 @@ const publicExperience = Object.freeze({
   publicShell: {
     nav: {
       label: 'Primary navigation',
+      explore: 'Explore',
+      myReality: 'My Reality',
+      perspectives: 'Perspectives',
+      search: 'Search',
       discover: 'Discover',
       knowledge: 'Knowledge',
       realityJourney: 'Reality Journey',
@@ -407,8 +411,8 @@ const publicExperience = Object.freeze({
   },
   hpc2Destinations: {
     "common": {
-      "source": "Migrated from the preserved V8 positioning source. The original remains canonical archival evidence.",
-      "boundary": "Evidence, interpretation, projection and professional authority remain distinct."
+      "source": "Continue through the linked books and research pages to examine these ideas in context.",
+      "boundary": "Keep observations, interpretations and professional advice distinct."
     },
     "why": {
       "metaTitle": "Why PHI OS — From answers to Reality Navigation",
@@ -458,7 +462,7 @@ const publicExperience = Object.freeze({
       "skip": "Skip to research foundation",
       "eyebrow": "Research foundation",
       "title": "Why people seek coherence when Reality becomes uncertain.",
-      "lead": "The V8 research layer does not validate any spiritual claim. It explains why uncertainty, self-relevance, structured attention and coherent narratives can make interpretive systems compelling—and why professional boundaries matter.",
+      "lead": "This research does not validate a particular spiritual claim. It explains why uncertainty, self-relevance, structured attention and coherent narratives can make interpretive systems compelling—and why professional boundaries matter.",
       "uncertainty": "Uncertainty — anxiety can increase repetitive or ritualized behavior as people seek control.",
       "coherence": "Coherence — people do not only want facts; they want events to make sense together.",
       "self": "Self-Relevance — information changes value when it becomes “about me,” which increases the need to resist manufactured certainty.",
@@ -730,7 +734,7 @@ const publicExperience = Object.freeze({
     eyebrow: 'External Reader Framework', title: 'Interpretive perspectives remain secondary to Reality Reading.',
     lead: 'Each Reader uses the same source, correspondence, limitation and professional-review boundaries.',
     available: 'Available', planned: 'Planned', humanDesign: 'Personal Runtime Projection',
-    humanDesignCopy: 'Bilingual Registry and professional interpretation infrastructure are available.',
+    humanDesignCopy: 'Learn about the available interpretation and its scope before continuing.',
     bazi: 'BaZi', ziwei: 'Zi Wei', geneKeys: 'Gene Keys', astrology: 'Astrology'
   },
   privacyPublic: {

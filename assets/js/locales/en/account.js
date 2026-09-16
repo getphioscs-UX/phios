@@ -19,16 +19,16 @@ const account = Object.freeze({
   },
   membershipPublic: {
     metaTitle: 'Membership — PHI OS', skip: 'Skip to membership', eyebrow: 'Membership',
-    title: 'Four clear ways to use PHI OS.', lead: 'Membership organises access without changing the evidence or conclusions of any Reality Journey.',
+    title: 'Four clear ways to use PHI OS.', lead: 'Explore different ways to use PHI OS; available access is described in your account.',
     explorer: 'Explorer', reader: 'Reader', navigator: 'Navigator', professional: 'Professional',
-    explorerCopy: 'Explore the public knowledge system and begin a limited Journey.',
-    readerCopy: 'Continue regular Reading work with standard reports.',
-    navigatorCopy: 'Work through Reading and Navigation with broader continuity.',
-    professionalCopy: 'Use the governed Professional Workspace within an approved scope.',
-    monthly: 'Monthly', annual: 'Annual', lifecycle: 'Subscription lifecycle',
+    explorerCopy: 'Start with public knowledge and introductory reading.',
+    readerCopy: 'Explore regular reading and related reports.',
+    navigatorCopy: 'Explore ways to follow your situation and next steps over time.',
+    professionalCopy: 'Explore the scope of professional services and collaboration.',
+    monthly: 'Monthly', annual: 'Annual', lifecycle: 'Understanding plan changes',
     upgrade: 'Upgrade', downgrade: 'Downgrade', cancel: 'Cancel',
     grace: 'Grace period', failed: 'Failed payment',
-    entitlements: 'Entitlements', book: 'Book access', quota: 'Journey quota', reports: 'Report access',
+    entitlements: 'Entitlements', book: 'Book access', quota: 'Usage allowance', reports: 'Report access',
     review: 'Professional review', academy: 'Academy access',
     boundary: 'Displayed access is informational until validated by the account service. Checkout and payment collection are not enabled on this page.'
   }

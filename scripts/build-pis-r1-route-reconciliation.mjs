@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p));
+const census=read('docs/public-index-successor/pis-r1-w1-surface-census-v1.json').surfaces;
+const registryPath='content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json';
+const registry=read(registryPath);
+const redirects=fs.readFileSync('_redirects','utf8').split(/\r?\n/).filter(l=>l.trim()&&!l.startsWith('#')).map(l=>l.trim().split(/\s+/));
+const normalize=p=>p.replace(/\.html$/,'').replace(/\/$/,'')||'/';
+const deleted=read('content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json').candidates;
+const entries=census.map(s=>{
+ const route=s.path==='index.html'?'/':'/'+s.path.replace(/index\.html$/,'');
+ const current=registry.routes.find(r=>normalize(r.canonicalPath)===normalize(route));
+ const redirect=redirects.find(r=>normalize(r[0])===normalize(route)&&/^30[1278]$/.test(r[2])&&normalize(r[1])!==normalize(route));
+ const incoming=census.flatMap(p=>p.links.filter(a=>normalize(a.href.split(/[?#]/)[0])===normalize(route)).map(a=>({file:p.path,href:a.href})));
+ const internal=/^(docs|tools|functions|review)\//.test(s.path);
+ const functional=/^(account|checkout|payment|read\/|academy\/lesson|professional-consent|professional-data|external-reader-intake|free-observation|guided-reading)/.test(s.path);
+ return {path:s.path,route,status:internal?'REVIEW_INTERNAL':redirect?'COMPATIBILITY':current?'CANONICAL':functional?'FUNCTIONAL_CHILD':'ACTIVE_SECONDARY',evidence:current?{registry:registryPath,routeId:current.routeId}:redirect?{registry:'_redirects',redirect:redirect.slice(0,3)}:{existingFile:s.path,sha256:s.sha256,incomingLinks:incoming},newRouteCreated:false,promotedToCanonical:false,navigationActivation:current?'EXISTING_CURRENT_AUTHORITY':redirect?'REDIRECT_ONLY':internal?'NOT_CUSTOMER_NAVIGATION':'EXISTING_FILE_ONLY_NOT_NEW_ROUTE_AUTHORITY',needsOwnerRouteDecision:!current&&!redirect&&!internal&&!functional&&!incoming.length};
+});
+const report={work:'PIS-R1-W2',changesRouteAuthority:false,canonicalAuthority:registryPath,redirectAuthority:'_redirects',interpretation:'All existing files are accounted for; ACTIVE_SECONDARY records physical existence only, never a canonical promotion. Unlinked files remain outside new navigation.',entries,retiredPages:deleted.map(x=>({path:x.path,state:x.state,exists:fs.existsSync(x.path)})),unlinkedSecondary:entries.filter(x=>x.needsOwnerRouteDecision).map(x=>x.path)};
+fs.writeFileSync('docs/public-index-successor/pis-r1-route-reconciliation-v1.json',JSON.stringify(report,null,2)+'\n');
+console.log(`PIS: ${entries.length} existing routes reconciled without changing authority; ${report.unlinkedSecondary.length} unlinked secondary files explicitly retained outside new navigation.`);

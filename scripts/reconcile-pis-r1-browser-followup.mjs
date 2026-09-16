@@ -1,0 +1,10 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+const dir='docs/public-index-successor/',base=dir+'pis-r1-discovery-browser-v1.json',follow=dir+'pis-r1-filtered-browser-v1.json';const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const a=JSON.parse(fs.readFileSync(base)),b=JSON.parse(fs.readFileSync(follow));assert.ok(a.complete&&b.complete);assert.equal(b.results.length,16);
+const changed=new Set(b.results.map(r=>r.file));assert.deepEqual([...changed].sort(),['knowledge/index.html','membership.html']);
+for(const f of a.testedFiles)if(!changed.has(f.path))assert.equal(sha(f.path),f.sha256,'Unretested dependency changed: '+f.path);
+for(const f of b.testedFiles)assert.equal(sha(f.path),f.sha256,'Follow-up dependency changed: '+f.path);
+const results=[...a.results.filter(r=>!changed.has(r.file)),...b.results];assert.equal(results.length,232);assert.equal(new Set(results.map(r=>r.file+':'+r.width+':'+r.locale)).size,232);
+const initial=dir+'pis-r1-discovery-browser-before-followup-v1.json';fs.copyFileSync(base,initial);
+const tested=new Map(a.testedFiles.map(f=>[f.path,f]));for(const f of b.testedFiles)tested.set(f.path,f);
+fs.writeFileSync(base,JSON.stringify({...a,testedFiles:[...tested.values()],results,reconciliation:{initial,initialSha256:sha(initial),followup:follow,followupSha256:sha(follow),retestedFiles:[...changed],rule:'Only these page results replaced; all other source hashes remain identical.'}},null,2)+'\n');console.log('PASS: 232 current cases, with the final 16 cases safely reconciled.');

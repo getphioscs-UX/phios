@@ -1,0 +1,21 @@
+import fs from 'node:fs';import crypto from 'node:crypto';
+const read=p=>JSON.parse(fs.readFileSync(p));const source='content/web-production/registries/client-visual-asset-registry-v1.8.json';const registry=read(source);
+const allocation=read('content/web/index-surfaces/public-index-visual-allocation-v1.json').assets;
+const inherited=read('docs/public-index-successor/pis-r1-inherited-remote-evidence-v1.json').results;
+const added=read('docs/public-index-successor/pis-r1-41-consumption-audit-v1.json').assets;
+const consumerMap='content/web-production/registries/client-visual-consumer-map-v1.json',records=read(consumerMap).records;
+const assets=registry.assets.map(a=>{
+ const p=added.find(x=>x.assetCode===a.assetCode),local=allocation.find(x=>x.assetCode===a.assetCode),remote=inherited.find(x=>x.code===a.assetCode);
+ const historical=/five[-_ ]?(volume|books?)/i.test([a.title,a.semanticName,a.officialFilename].join(' '))||['HERO-022','HERO-023','PHIOS-BRANDING-VOLUME-IV-REALITY-CIVILIZATION-V1','PHIOS-BRANDING-VOLUME-V-REALITY-NAVIGATION-V1'].includes(a.assetCode);
+ const bindings=records.filter(r=>JSON.stringify(r).includes('"'+a.assetCode+'"')).map(r=>({surface:r.surfaceCode,routes:r.routes,source:consumerMap}));
+ const refs=[local.primarySurface,...local.secondarySurfaces].filter(Boolean);
+ const state=p?p.state:historical?'HISTORICAL_QUARANTINED':remote?.state!=='REMOTE_GET_VERIFIED'?'UNAVAILABLE_NOT_ACTIVATED':!a.r2.remoteVerified?'VERIFIED_AVAILABLE_NOT_ACTIVATED':refs.length?'CURRENT_SOURCE_BOUND':bindings.length?'SPECIALIZED_OR_FUNCTIONAL_BINDING_DECLARED':'UNRESOLVED';
+ return {assetCode:a.assetCode,title:a.title,key:a.r2?.objectKey,state,sourceReferences:refs,declaredRuntimeBindings:bindings,remoteStatus:remote?.state||'SEE_41_REMOTE_EVIDENCE',remoteSha256:remote?.sha256||null,productionRenderingVerified:false,reason:p?.reason|| (historical?'Old five-volume semantics or former Book IV/V identity; not a current seven-volume illustration.':state==='UNAVAILABLE_NOT_ACTIVATED'?'Exact old key returned an error. Do not fabricate a replacement path.':state==='VERIFIED_AVAILABLE_NOT_ACTIVATED'?'Object exists, but this pass does not silently override its existing admission state.':'Source bindings are recorded; conditional runtime visibility still requires the final deployed audit.')};
+});
+const summary=assets.reduce((r,a)=>(r[a.state]=(r[a.state]||0)+1,r),{});
+const output={scope:'COMPLETE_193_IDENTITY_SOURCE_AND_REMOTE_AUDIT_NOT_PRODUCTION_RENDERING_ACCEPTANCE',source,sha256:crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),total:assets.length,summary,unresolved:assets.filter(a=>a.state==='UNRESOLVED').map(a=>a.assetCode),zeroOrphanProductionClaim:false,assets};
+fs.writeFileSync('docs/public-index-successor/pis-r1-full-visual-audit-v1.json',JSON.stringify(output,null,2)+'\n');
+console.log(summary);console.log('Unresolved source allocation:',output.unresolved);
+
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+fs.writeFileSync('docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html','<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PIS-R1 图片用途核对</title><style>body{max-width:1200px;margin:auto;padding:24px;font:16px/1.65 system-ui;background:#f7f5ef;color:#18313a}td,th{padding:12px;text-align:left;border-bottom:1px solid #ccd;overflow-wrap:anywhere}table{width:100%;table-layout:fixed}summary{font-size:1.2rem;padding:16px;cursor:pointer}a{color:#17545a}</style><h1>193 项图片身份与用途</h1><p>图片本身已按你的指示接受，无需再次审核。这里说明用途、旧路径与目前不能显示的资源；没有把源码引用当作生产渲染验收。</p><p>旧登记 152 项：123 个实际返回图片，29 个精确路径返回 404。新增核对 41 个路径均已验证。39 张既有总结图已经在六个相关页面展开加载验证。</p><p><a href="PIS-R1-HUMAN-REVIEW.html">返回页面集中审核</a> · <a href="pis-r1-full-visual-audit-v1.json">完整机器记录</a></p>'+Object.entries(summary).map(([state,count])=>'<details><summary>'+esc(state)+' — '+count+'</summary><table><tr><th>资源</th><th>精确路径</th><th>消费者或说明</th></tr>'+assets.filter(a=>a.state===state).map(a=>'<tr><td>'+esc(a.assetCode)+'<br>'+esc(a.title)+'</td><td>'+esc(a.key)+'</td><td>'+esc(a.sourceReferences.join(', ')||a.declaredRuntimeBindings.flatMap(b=>b.routes).join(', ')||a.reason)+'</td></tr>').join('')+'</table></details>').join('')+'</html>');

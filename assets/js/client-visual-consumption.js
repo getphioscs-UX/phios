@@ -298,6 +298,9 @@ export async function initializeClientVisualConsumption({ fetchImpl = fetch, pat
   if (document.body?.dataset.cxSurface === 'ARTICLE_DETAIL') {
     return { state: 'DELEGATED_TO_ARTICLE_RENDERER', record: null };
   }
+  if (document.body?.dataset.pisHero) {
+    return { state: 'DELEGATED_TO_PUBLIC_INDEX_HERO', record: null };
+  }
   ensureStylesheet();
   const [consumerMap, context] = await Promise.all([
     fetchConsumerMap(fetchImpl),

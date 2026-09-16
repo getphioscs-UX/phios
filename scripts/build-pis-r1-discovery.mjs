@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {expandedPages} from './lib/pis-r1-expanded-copy.mjs';
 const pair=(en,zh)=>({en,zh});
 const link=(href,en,zh)=>({href,...pair(en,zh)});
 const section=(heading,body,links)=>({heading,body,links});
@@ -6,7 +7,7 @@ const section=(heading,body,links)=>({heading,body,links});
 const pages={
  'index.html':[
   section(pair('Begin with what matters to you.','从你真正关心的事开始。'),pair('PHI OS connects reading, questions and reflection around the situation you are actually facing. Start with a question, explore a different perspective, or read enough to decide what deserves your attention. You remain the person who chooses what to do.','PHI OS 把阅读、提问与反思连接到你正在面对的处境。先问一个问题，换一个角度观察，或通过阅读判断什么值得关注。下一步怎样走，仍由你决定。'),[link('/knowledge/ask/','Ask a real question for free','免费问一个真实问题'),link('/explore/start/','Find a useful starting point','看看适合我的入口')]),
-  section(pair('Choose the depth you need.','按需要，选择理解的深度。'),pair('Explore and selected book previews help you begin without a purchase. Books offer a longer reading path; reports focus on a particular question; professional services bring human involvement where it matters. Check each detail page for availability and what is included before making a commitment.','探索与精选书籍预览可以免费开始。书籍提供完整阅读路径，报告聚焦具体问题，专业服务则在需要时加入真人协助。决定之前，先在详情页确认是否开放以及包含什么。'),[link('/reality/','Continue My Reality','继续我的现实'),link('/books/','Preview the seven books','预览七册书'),link('/professional/','Find professional support','了解专业协助'),link('/academy/','Explore learning options','了解学习路径')])
+  section(pair('Choose the depth you need.','按需要，选择理解的深度。'),pair('Explore and selected book previews help you begin without a purchase. Books offer a longer reading path; reports focus on a particular question; professional services bring human involvement where it matters. Check each detail page for availability and what is included before making a commitment.','探索与精选书籍预览可以免费开始。书籍提供完整阅读路径，报告聚焦具体问题，专业服务则在需要时加入真人协助。决定之前，先在详情页确认是否开放以及包含什么。'),[link('/reality/','Continue My Reality','继续我的现实'),link('/books/','Preview the seven books','预览七册书'),link('/professional/','Find professional support','了解专业协助'),link('/academy/','Explore learning options','了解学习路径'),link('/professional/reports/','Understand reports','了解报告'),link('/membership.html','Understand membership','了解会员')])
  ],
  'about/index.html':[
   section(pair('Why connect the answers?','为什么要把答案重新连接起来？'),pair('Advice about work, relationships and money often arrives separately, although the consequences meet in the same life. PHI OS exists to help you keep that context in view: what you know, what you are interpreting and what still needs to be checked. More information is useful only when you can relate it to the decision in front of you.','事业、关系与金钱的建议往往各说各话，后果却发生在同一个生活里。PHI OS 希望帮助你保留整体处境：哪些已知，哪些是解释，哪些仍需核对。更多信息，只有连接到眼前的选择时才真正有用。'),[link('/about/reality-navigation/','Understand reality navigation','理解现实导航')]),
@@ -39,6 +40,7 @@ const pages={
   section(pair('Choose by what you need today.','按今天的需要，选择入口。'),pair('A question does not require a report. Reading does not require a purchase. A method perspective does not replace professional advice. Start with the smallest useful step, and only choose a deeper option after you understand what it includes and whether it fits your situation.','一个问题不一定需要一份报告，阅读也不一定需要购买，方法提供的视角不能代替专业意见。先选择最有用的一小步，了解更深入的选项包含什么、是否适合自己，再作决定。'),[link('/knowledge/ask/','I have a question','我有一个问题'),link('/knowledge/','I want to learn','我想学习'),link('/perspectives/personal/','I want to understand myself','我想理解自己'),link('/perspectives/relationship/','I want to understand a relationship','我想理解关系'),link('/professional/','I need human support','我需要真人协助')])
  ]
 };
+Object.assign(pages,expandedPages);
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const text=(tag,p)=>`<${tag} data-pis-copy data-cx-en="${esc(p.en)}" data-cx-zh="${esc(p.zh)}">${esc(p.en)}</${tag}>`;
 const begin='<!-- PIS-R1 EDITORIAL START -->',end='<!-- PIS-R1 EDITORIAL END -->';
@@ -53,4 +55,4 @@ for(const [file,sections] of Object.entries(pages)){
  fs.writeFileSync(file,html);
 }
 fs.writeFileSync('content/web/index-surfaces/pis-r1-discovery-copy-v1.json',JSON.stringify({status:'LOCAL_EDITORIAL_ADDITIONS_BROWSER_REVIEW_PENDING',pages},null,2)+'\n');
-console.log('PIS discovery: nine existing pages enriched; existing shells and functional forms preserved.');
+console.log(`PIS discovery: ${Object.keys(pages).length} existing pages enriched; existing shells and functional forms preserved.`);

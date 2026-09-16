@@ -70,6 +70,18 @@ assert.deepEqual(visualSuccessor.dependencies.map(item=>item.path),[
 ]);
 for(const dependency of visualSuccessor.dependencies) assert.equal(digest(dependency.path),dependency.sha256,`static visual dependency drift: ${dependency.path}`);
 authorizedMaintenance.set(priorVisual.path,{...priorVisual,successorSha256:visualSuccessor.change.successorSha256});
+const editorial=json('content/civilization-atlas/maintenance/book-v-civ-atlas-pis-editorial-successor-v1.json');
+assert.equal(editorial.predecessor,maintenancePath);
+assert.equal(editorial.predecessorSha256,digest(maintenancePath));
+assert.equal(editorial.change.path,'books/reality-differentiation/index.html');
+const priorEditorial=authorizedMaintenance.get(editorial.change.path);
+assert.equal(editorial.change.previousSha256,priorEditorial.successorSha256);
+assert.equal(editorial.change.changeClass,priorEditorial.changeClass);
+assert.equal(editorial.productionVerified,false);
+const editorialHtml=read(editorial.change.path);
+assert.match(editorialHtml,/data-civilization-atlas-root/);
+assert.match(editorialHtml,/PIS BOOK CONTEXT START/);
+authorizedMaintenance.set(priorEditorial.path,{...priorEditorial,successorSha256:editorial.change.successorSha256});
 for(const f of freeze.frozenFiles){
   assert.ok(fs.existsSync(path.join(root,f.path)),`frozen file missing: ${f.path}`);
   const current=digest(f.path);

@@ -9,11 +9,11 @@ import {
 } from './i18n.js';
 
 const NAVIGATION = Object.freeze([
-  { id: 'discover', href: '/', key: 'publicShell.nav.discover' },
-  { id: 'knowledge', href: '/library', key: 'publicShell.nav.knowledge' },
-  { id: 'reality', href: '/reality/', key: 'publicShell.nav.realityJourney' },
-  { id: 'professional', href: '/services', key: 'publicShell.nav.professional' },
-  { id: 'about', href: '/about', key: 'publicShell.nav.about' }
+  { id: 'discover', href: '/explore/', key: 'publicShell.nav.explore' },
+  { id: 'reality', href: '/reality/', key: 'publicShell.nav.myReality' },
+  { id: 'perspectives', href: '/perspectives/', key: 'publicShell.nav.perspectives' },
+  { id: 'knowledge', href: '/knowledge/', key: 'publicShell.nav.knowledge' },
+  { id: 'professional', href: '/professional/', key: 'publicShell.nav.professional' }
 ]);
 
 const FOOTER_LINKS = Object.freeze([
@@ -73,6 +73,8 @@ function languageMarkup() {
 function auxiliaryMarkup() {
   return `
     <div class="public-nav__actions">
+      <a class="public-nav__auxiliary" href="/search/" data-i18n="publicShell.nav.search"></a>
+      <a class="public-nav__auxiliary" href="/knowledge/ask/">Ask PHI OS</a>
       <a class="public-nav__auxiliary" href="/account" data-i18n="publicShell.nav.signIn"></a>
     </div>
   `;

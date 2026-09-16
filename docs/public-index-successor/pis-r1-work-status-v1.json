@@ -1,331 +1,695 @@
 {
   "work": "PHI-OS-PIS-R1",
-  "status": "IN_PROGRESS_NOT_PRODUCTION_FROZEN",
-  "baseline": "8772ca0821b7d5c2b84db47f17fee1ffde4039b3",
+  "status": "LOCAL_IMPLEMENTATION_REVIEW_AND_DEPLOYMENT_PENDING",
+  "originalBaseline": "8772ca0821b7d5c2b84db47f17fee1ffde4039b3",
+  "continuationBaseline": "8d98d06f87a6ac11ce254670680f7cd3f938e0d2",
   "census": 84,
-  "existingVisualIdentities": 152,
-  "unresolvedRouteAuthorities": 54,
-  "secondaryImages": {
-    "verified": 20,
-    "currentBindings": 162,
-    "requiredSecondaryBound": 64,
-    "plannedNotYetVerified": 218
+  "publicEditorialPages": 29,
+  "bookOrientations": 7,
+  "existingVisualIdentities": 193,
+  "verifiedNewObjects": 41,
+  "newObjectDisposition": {
+    "CURRENT_LOCAL_CONSUMER": 28,
+    "FUNCTIONAL_RESERVED": 6,
+    "IDENTICAL_BYTES_ALTERNATE_PATH": 7
   },
-  "fig11F": "ACCEPTED_FREE_BOOK_SUMMARY_NO_SPECIAL_APPROVAL",
-  "localDiscoveryPages": 9,
-  "localBrowserCases": 72,
-  "localBrowserComplete": true,
+  "unlinkedSecondaryPages": [
+    "book-one-preview.html",
+    "figure.html",
+    "health-reality.html",
+    "library.html",
+    "perspectives/iching/consult/index.html",
+    "perspectives/iching/run/index.html",
+    "professional/external-readers/index.html",
+    "readings/i-ching/index.html",
+    "readings/index.html",
+    "reality-review.html"
+  ],
+  "localBrowser": {
+    "discovery": {
+      "complete": true,
+      "cases": 232,
+      "current": true,
+      "path": "docs/public-index-successor/pis-r1-discovery-browser-v1.json"
+    },
+    "books": {
+      "complete": true,
+      "cases": 56,
+      "current": true,
+      "path": "docs/public-index-successor/pis-r1-books-browser-v1.json"
+    },
+    "functional": {
+      "complete": true,
+      "cases": 40,
+      "current": true,
+      "path": "docs/public-index-successor/pis-r1-functional-browser-v1.json"
+    }
+  },
   "fullCheck": "PASS",
   "productionDeployed": false,
-  "stripe": "PAUSED_BY_USER",
+  "stripe": "PAUSED_BY_USER_BLOCKED_PENDING_QA_DEPLOYMENT",
+  "humanReview": "PIS-R1-HUMAN-REVIEW.html",
   "steps": [
     {
       "work": "PIS-W0",
-      "state": "FOUNDATION_RECORDED"
+      "state": "LOCAL_AUDIT_AND_CONTRACT_RECORDED",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-w0-baseline-audit-v1.json",
+        "docs/public-index-successor/pis-r1-route-reconciliation-v1.json"
+      ],
+      "title": "Baseline and authority audit"
     },
     {
       "work": "PIS-W1",
-      "state": "FOUNDATION_RECORDED"
+      "state": "LOCAL_AUDIT_AND_CONTRACT_RECORDED",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-w0-baseline-audit-v1.json",
+        "docs/public-index-successor/pis-r1-route-reconciliation-v1.json"
+      ],
+      "title": "全部 Index Surface Census"
     },
     {
       "work": "PIS-W2",
-      "state": "PARTIAL"
+      "state": "LOCAL_AUDIT_AND_CONTRACT_RECORDED",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-w0-baseline-audit-v1.json",
+        "docs/public-index-successor/pis-r1-route-reconciliation-v1.json"
+      ],
+      "title": "Canonical Route Reconciliation"
     },
     {
       "work": "PIS-W3",
-      "state": "PARTIAL"
+      "state": "FINAL_HUMAN_REVIEW_PENDING",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "Machine checks cover specified text and geometry; complete editorial meaning, contrast and usability require the final review.",
+      "title": "Internal Language Ban"
     },
     {
       "work": "PIS-W4",
-      "state": "FOUNDATION_RECORDED"
+      "state": "LOCAL_AUDIT_AND_CONTRACT_RECORDED",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-w0-baseline-audit-v1.json",
+        "docs/public-index-successor/pis-r1-route-reconciliation-v1.json"
+      ],
+      "title": "Public Vocabulary Canon"
     },
     {
       "work": "PIS-W5",
-      "state": "FOUNDATION_RECORDED"
+      "state": "LOCAL_AUDIT_AND_CONTRACT_RECORDED",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-w0-baseline-audit-v1.json",
+        "docs/public-index-successor/pis-r1-route-reconciliation-v1.json"
+      ],
+      "title": "Editorial Quality Standard"
     },
     {
       "work": "PIS-W6",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "全站首页职责重建"
     },
     {
       "work": "PIS-W7",
-      "state": "FOUNDATION_RECORDED"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "全站一级导航"
     },
     {
       "work": "PIS-W8",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "首页 Hero"
     },
     {
       "work": "PIS-W9",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Need-Based Entry"
     },
     {
       "work": "PIS-W10",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Seven-Volume Public Story"
     },
     {
       "work": "PIS-W11",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Commercial Gateway"
     },
     {
       "work": "PIS-W12",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/about/` 重建"
     },
     {
       "work": "PIS-W13",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/about/founder/` 重建"
     },
     {
       "work": "PIS-W14",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/about/reality-navigation/` 重建"
     },
     {
       "work": "PIS-W15",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`thesis.html` 全面升级"
     },
     {
       "work": "PIS-W16",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Thesis Visual Story"
     },
     {
       "work": "PIS-W17",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/explore/`"
     },
     {
       "work": "PIS-W18",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/explore/why-phios/`"
     },
     {
       "work": "PIS-W19",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/explore/how-it-works/`"
     },
     {
       "work": "PIS-W20",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/explore/start/`"
     },
     {
       "work": "PIS-W21",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/knowledge/`"
     },
     {
       "work": "PIS-W22",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/knowledge/ask/`"
     },
     {
       "work": "PIS-W23",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Articles / Concepts / Figures"
     },
     {
       "work": "PIS-W24",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "`/books/`"
     },
     {
       "work": "PIS-W25",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Book 1 index"
     },
     {
       "work": "PIS-W26",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Book 2 index"
     },
     {
       "work": "PIS-W27",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Book 3 index"
     },
     {
       "work": "PIS-W28",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Book 4 index"
     },
     {
       "work": "PIS-W29",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Book 5 index"
     },
     {
       "work": "PIS-W30",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Book 6 index"
     },
     {
       "work": "PIS-W31",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Book 7 index"
     },
     {
       "work": "PIS-W32",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Perspectives Index"
     },
     {
       "work": "PIS-W33",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Method Icons Placement"
     },
     {
       "work": "PIS-W34",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Governance / Interpretation / Unknown Icons"
     },
     {
       "work": "PIS-W35",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Reality Entry Index"
     },
     {
       "work": "PIS-W36",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Reports Commerce Entry"
     },
     {
       "work": "PIS-W37",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Membership"
     },
     {
       "work": "PIS-W38",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Academy"
     },
     {
       "work": "PIS-W39",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Professional Index"
     },
     {
       "work": "PIS-W40",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Professional Child Pages"
     },
     {
       "work": "PIS-W41",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Research Index"
     },
     {
       "work": "PIS-W42",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Traditional Reading Systems Research"
     },
     {
       "work": "PIS-W43",
-      "state": "PARTIAL"
+      "state": "LOCAL_VERIFIED_BINDINGS",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-41-remote-evidence-v1.json",
+        "docs/public-index-successor/pis-r1-41-consumption-audit-v1.json"
+      ],
+      "title": "Visual Registry Reconciliation"
     },
     {
       "work": "PIS-W44",
-      "state": "PARTIAL"
+      "state": "SOURCE_AUDITED_PRODUCTION_CONSUMPTION_PENDING",
+      "evidence": [
+        "content/web/index-surfaces/public-index-visual-allocation-v1.json",
+        "docs/public-index-successor/pis-r1-full-visual-audit-v1.json"
+      ],
+      "limitation": "Existing source references do not prove live rendering. All 152 inherited object keys were fetched; local source allocation is complete, but conditional production rendering still requires a deployed audit.",
+      "title": "全资产 Coverage Rule"
     },
     {
       "work": "PIS-W45",
-      "state": "PARTIAL"
+      "state": "SOURCE_AUDITED_PRODUCTION_CONSUMPTION_PENDING",
+      "evidence": [
+        "content/web/index-surfaces/public-index-visual-allocation-v1.json",
+        "docs/public-index-successor/pis-r1-full-visual-audit-v1.json"
+      ],
+      "limitation": "Existing source references do not prove live rendering. All 152 inherited object keys were fetched; local source allocation is complete, but conditional production rendering still requires a deployed audit.",
+      "title": "旧五册 Visual Quarantine"
     },
     {
       "work": "PIS-W46",
-      "state": "PARTIAL"
+      "state": "LOCAL_VERIFIED_BINDINGS",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-41-remote-evidence-v1.json",
+        "docs/public-index-successor/pis-r1-41-consumption-audit-v1.json"
+      ],
+      "title": "41 Remaining Assets 正式定位"
     },
     {
       "work": "PIS-W47",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_VERIFIED_BINDINGS",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-41-remote-evidence-v1.json",
+        "docs/public-index-successor/pis-r1-41-consumption-audit-v1.json"
+      ],
+      "title": "R2 Path Integrity"
     },
     {
       "work": "PIS-W48",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "No Poster-as-Page Rule"
     },
     {
       "work": "PIS-W49",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Full-Bleed Hero Standard"
     },
     {
       "work": "PIS-W50",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Logo Context Rule"
     },
     {
       "work": "PIS-W51",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Commercial Ladder"
     },
     {
       "work": "PIS-W52",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "CTA Contract"
     },
     {
       "work": "PIS-W53",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Cross-Surface Conversion"
     },
     {
       "work": "PIS-W54",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Information Density"
     },
     {
       "work": "PIS-W55",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Metadata"
     },
     {
       "work": "PIS-W56",
-      "state": "PARTIAL"
+      "state": "FINAL_HUMAN_REVIEW_PENDING",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "Machine checks cover specified text and geometry; complete editorial meaning, contrast and usability require the final review.",
+      "title": "Semantic Parity"
     },
     {
       "work": "PIS-W57",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "FINAL_HUMAN_REVIEW_PENDING",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "Machine checks cover specified text and geometry; complete editorial meaning, contrast and usability require the final review.",
+      "title": "Customer Chinese Review"
     },
     {
       "work": "PIS-W58",
-      "state": "PARTIAL"
+      "state": "LOCAL_BROWSER_PASS",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-discovery-browser-v1.json",
+        "docs/public-index-successor/pis-r1-books-browser-v1.json"
+      ],
+      "title": "Viewport"
     },
     {
       "work": "PIS-W59",
-      "state": "PARTIAL"
+      "state": "FINAL_HUMAN_REVIEW_PENDING",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "Machine checks cover specified text and geometry; complete editorial meaning, contrast and usability require the final review.",
+      "title": "Accessibility"
     },
     {
       "work": "PIS-W60",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Internal Language Checker"
     },
     {
       "work": "PIS-W61",
-      "state": "PARTIAL"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Visual Coverage Checker"
     },
     {
       "work": "PIS-W62",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_IMPLEMENTATION_AWAITING_FINAL_REVIEW",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Commercial Integrity Checker"
     },
     {
       "work": "PIS-W63",
-      "state": "HUMAN_REVIEW_AT_FINAL_BATCH"
+      "state": "FINAL_HUMAN_REVIEW_PENDING",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "Machine checks cover specified text and geometry; complete editorial meaning, contrast and usability require the final review.",
+      "title": "Desktop Human Review"
     },
     {
       "work": "PIS-W64",
-      "state": "HUMAN_REVIEW_AT_FINAL_BATCH"
+      "state": "FINAL_HUMAN_REVIEW_PENDING",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "Machine checks cover specified text and geometry; complete editorial meaning, contrast and usability require the final review.",
+      "title": "Customer Questions"
     },
     {
       "work": "PIS-W65",
-      "state": "HUMAN_REVIEW_AT_FINAL_BATCH"
+      "state": "FINAL_HUMAN_REVIEW_PENDING",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "Machine checks cover specified text and geometry; complete editorial meaning, contrast and usability require the final review.",
+      "title": "Visual Human Review"
     },
     {
       "work": "PIS-W66",
-      "state": "PARTIAL"
+      "state": "LOCAL_WAVE_IMPLEMENTED_PRODUCTION_CUTOVER_PENDING",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Wave 1 — Brand & Discovery"
     },
     {
       "work": "PIS-W67",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_WAVE_IMPLEMENTED_PRODUCTION_CUTOVER_PENDING",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Wave 2 — Knowledge & Books"
     },
     {
       "work": "PIS-W68",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_WAVE_IMPLEMENTED_PRODUCTION_CUTOVER_PENDING",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Wave 3 — Commercial & Continuity"
     },
     {
       "work": "PIS-W69",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_WAVE_IMPLEMENTED_PRODUCTION_CUTOVER_PENDING",
+      "evidence": [
+        "content/web/index-surfaces/pis-r1-presentation-manifest-v1.json"
+      ],
+      "title": "Wave 4 — Perspectives & Research"
     },
     {
       "work": "PIS-W70",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "LOCAL_READ_ONLY_SHELL_PASS",
+      "evidence": [
+        "docs/public-index-successor/pis-r1-functional-browser-v1.json"
+      ],
+      "limitation": "No purchase, account write, entitlement, receipt or download E2E.",
+      "title": "Functional Index Pass"
     },
     {
       "work": "PIS-W71",
-      "state": "PARTIAL"
+      "state": "MACHINE_REGRESSION_PASS_LIVE_E2E_PENDING",
+      "evidence": [
+        "docs/public-index-successor/npm-check-result-v1.json"
+      ],
+      "limitation": "Production functional interaction is not inferred from local checks.",
+      "title": "No Functional Regression"
     },
     {
       "work": "PIS-W72",
-      "state": "NOT_IMPLEMENTED_IN_THIS_BATCH"
+      "state": "RETIRED_PAGE_CHECK_IMPLEMENTED",
+      "evidence": [
+        "scripts/check-pis-r1-presentation.mjs"
+      ],
+      "title": "No Retired Page Resurrection"
     },
     {
       "work": "PIS-W73",
-      "state": "PARTIAL"
+      "state": "PASS",
+      "evidence": [
+        "docs/public-index-successor/npm-check-result-v1.json",
+        "docs/public-index-successor/npm-check-current.log"
+      ],
+      "title": "npm run check"
     },
     {
       "work": "PIS-W74",
-      "state": "PENDING_DEPLOYMENT_AND_ACCEPTANCE"
+      "state": "BLOCKED_PENDING_CANDIDATE_DEPLOYMENT",
+      "evidence": [],
+      "limitation": "Edited pages have not been deployed and production journeys have not been verified.",
+      "title": "真实 Production E2E"
     },
     {
       "work": "PIS-W75",
-      "state": "PARTIAL"
+      "state": "SOURCE_AUDITED_PRODUCTION_CONSUMPTION_PENDING",
+      "evidence": [
+        "content/web/index-surfaces/public-index-visual-allocation-v1.json",
+        "docs/public-index-successor/pis-r1-full-visual-audit-v1.json"
+      ],
+      "limitation": "Existing source references do not prove live rendering. All 152 inherited object keys were fetched; local source allocation is complete, but conditional production rendering still requires a deployed audit.",
+      "title": "Final Visual Consumption Audit"
     },
     {
       "work": "PIS-W76",
-      "state": "PENDING_DEPLOYMENT_AND_ACCEPTANCE"
+      "state": "BLOCKED_PENDING_HUMAN_REVIEW_AND_PRODUCTION_RETEST",
+      "evidence": [
+        "docs/public-index-successor/PIS-R1-HUMAN-REVIEW.html"
+      ],
+      "limitation": "No production freeze or acceptance is manufactured.",
+      "title": "Production Freeze"
     }
   ]
 }

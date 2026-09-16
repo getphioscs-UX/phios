@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const root = process.cwd();
 
@@ -35,7 +36,14 @@ assert.equal(contract.boundaries.runtimeSdkChanged, false);
 assert.equal(contract.boundaries.apiChanged, false);
 assert.equal(contract.boundaries.storageKeysChanged, false);
 
-const activeNavigationIds = fixture.primaryNavigationIds;
+// PIS-W7 aligns the still-used legacy shell with the current five-entry CX IA.
+// The PDS contract and fixture remain immutable predecessor evidence.
+const navigationSuccessor=await readJson('content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
+assert.equal(navigationSuccessor.predecessorContractSha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,navigationSuccessor.predecessorContract))).digest('hex'));
+assert.deepEqual(navigationSuccessor.primaryNavigation.map(x=>x.href),['/explore/','/reality/','/perspectives/','/knowledge/','/professional/']);
+assert.equal(navigationSuccessor.runtimeChanged,false);
+for(const item of navigationSuccessor.primaryNavigation)assert.ok(shell.includes(`id: '${item.id}', href: '${item.href}'`));
+const activeNavigationIds = navigationSuccessor.primaryNavigation.map(x=>x.id);
 let cursor = shell.indexOf('const NAVIGATION');
 for (const id of activeNavigationIds) {
   const index = shell.indexOf(`id: '${id}'`, cursor + 1);

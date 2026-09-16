@@ -8,6 +8,24 @@
 .pis-editorial__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:2rem}
 .pis-editorial__grid article{border-top:1px solid #aaa18a;padding-top:1.25rem;min-width:0}
 .pis-editorial__grid h3{font:600 1.2rem/1.4 system-ui,sans-serif}
+.pis-visual-story figure{margin:0;min-width:0}
+.pis-visual-story img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:contain}
+.pis-visual-story img[data-px2-asset^="PIS-02"],.pis-visual-story img[data-px2-asset^="PIS-01"]{max-height:32rem}
+.pis-visual-story figcaption{font:400 1rem/1.6 system-ui;margin-top:1rem}
+.pis-visual-story [hidden]{display:none!important}
+.pis-landing-hero{position:relative;isolation:isolate;box-sizing:border-box;width:100vw;max-width:none!important;margin-inline:calc(50% - 50vw);padding:clamp(4rem,9vw,8rem) max(1.25rem,calc((100vw - 1120px)/2));min-height:32rem;background:#12262d;color:#fff;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.pis-landing-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,22,29,.94),rgba(7,22,29,.82) 55%,rgba(7,22,29,.5))}
+.pis-landing-hero__image{position:absolute!important;inset:0;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover;z-index:-2;border-radius:0!important}
+.pis-landing-hero h1,.pis-landing-hero p{color:#fff!important;max-width:46rem}
+.pis-landing-hero h1{font-size:clamp(2.2rem,5vw,4.6rem);line-height:1.12;overflow-wrap:anywhere}
+.pis-landing-hero a{color:#fff;text-decoration:underline;text-underline-offset:.2em}
+.pis-landing-hero a.cx-button{background:#f7f5ef;color:#152931;border-color:#f7f5ef}
+section:has(> .pis-landing-hero){padding-block:0}
+.cx-knowledge-hero__grid:has(.pis-landing-hero),.cx-explore-hero__grid:has(.pis-landing-hero),.cx-explore-subhero__grid:has(.pis-landing-hero){display:block}
+body[data-pis-hero] .sc-hero__media,body[data-pis-hero] .sc-hero__wash{display:none}
+[data-seven-thesis-books-grid]{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1.5rem}
+[data-seven-thesis-books-grid] h3{overflow-wrap:anywhere}
+@media(max-width:52rem){.pis-landing-hero::after{background:rgba(7,22,29,.84)}.pis-landing-hero{min-height:28rem}}
 /* Full-width image with readable HTML foreground; the existing asset hydrator owns delivery. */
 .cx-home-hero,.cx-explore-subhero:has(.cx-explore-subhero__visual){position:relative;isolation:isolate;background:#12262d;color:#fff;overflow:hidden}
 .cx-home-hero__grid,.cx-explore-subhero:has(.cx-explore-subhero__visual) .cx-explore-subhero__grid{display:block;min-height:36rem;align-content:center}

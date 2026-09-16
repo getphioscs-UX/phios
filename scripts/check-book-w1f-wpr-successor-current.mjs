@@ -162,7 +162,14 @@ const px2Successor = json(currentSuccessor.presentationSuccessor.historicalPx2Go
 assert.equal(px2Successor.status, 'ACTIVE');
 assert.equal(currentSuccessor.presentationSuccessor.historicalPx2GovernanceSha256, sha256(currentSuccessor.presentationSuccessor.historicalPx2GovernancePath));
 assert.equal(currentSuccessor.presentationSuccessor.governanceSha256, sha256(currentSuccessor.presentationSuccessor.governancePath));
-assert.equal(currentSuccessor.presentationSuccessor.checkerSha256, sha256(currentSuccessor.presentationSuccessor.checkerPath));
+const pisCheckerSuccessor = json('content/web/index-surfaces/pis-r1-checker-successor-v1.json');
+assert.equal(pisCheckerSuccessor.status, 'CURRENT_PRESENTATION_CHECKER_MAINTENANCE');
+assert.equal(pisCheckerSuccessor.predecessor, 'content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v7.json');
+assert.equal(pisCheckerSuccessor.predecessorSha256, sha256(pisCheckerSuccessor.predecessor));
+assert.equal(pisCheckerSuccessor.checker.path, currentSuccessor.presentationSuccessor.checkerPath);
+assert.equal(pisCheckerSuccessor.checker.previousSha256, currentSuccessor.presentationSuccessor.checkerSha256);
+assert.equal(pisCheckerSuccessor.checker.successorSha256, sha256(pisCheckerSuccessor.checker.path));
+assert.equal(pisCheckerSuccessor.productionVerified, false);
 assert.equal(currentSuccessor.presentationSuccessor.financialCheckerSha256, sha256(currentSuccessor.presentationSuccessor.financialCheckerPath));
 assert.equal(currentSuccessor.presentationSuccessor.pdsCheckerSha256, sha256(currentSuccessor.presentationSuccessor.pdsCheckerPath));
 assert.equal(currentSuccessor.presentationSuccessor.historicalCheckersRewritten, false);

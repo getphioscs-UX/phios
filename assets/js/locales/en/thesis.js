@@ -22,71 +22,96 @@ const thesis = Object.freeze({
     },
     "route": {
       "position": "Research Position",
-      "runtime": "Runtime Layer",
+      "runtime": "Keeping context",
       "journey": "Reality Journey",
-      "implementation": "PHI OS Implementation"
+      "implementation": "Explore the ideas"
     },
     "position": {
       "eyebrow": "01 · Research Position",
-      "title": "From category to implementation.",
-      "copy": "The thesis establishes the research category. PHI OS turns that category into a readable and operational environment.",
-      "statement": "Reality Navigation is the computational category. The Unified Runtime Framework is its theoretical architecture. PHI OS is its integrated reference implementation.",
+      "title": "Why more answers create another question.",
+      "copy": "The thesis asks how we can keep answers connected to a situation that continues to change.",
+      "statement": "More intelligence can help generate answers. Choosing a direction also requires attention to context, constraints and the consequences of action. PHI OS develops this as a research proposition, open to examination.",
       "l1": {
-        "label": "Computational Category",
+        "label": "The question",
         "copy": "Maintaining coherent orientation while reality continues to change."
       },
       "l2": {
         "label": "Research Foundation",
-        "copy": "Explains why the category is required and how evolving reality can become observable and computable."
+        "copy": "Ask what helps people notice and understand changes in a situation."
       },
       "l3": {
-        "label": "Theoretical Architecture",
-        "copy": "Provides a shared language for reality, runtime, evidence, state, transition and continuity."
+        "label": "A connected explanation",
+        "copy": "Relate observations, interpretations, changes and continuity without treating them as the same thing."
       },
       "l4": {
-        "label": "Reference Implementation",
-        "copy": "Connects the books, Reality Atlas, Reality Journey, runtime services and future platform infrastructure."
+        "label": "Ways to explore",
+        "copy": "Follow the books, ask a question or explore a situation through the available reading tools."
       }
     },
     "runtime": {
       "eyebrow": "02 · The Missing Layer",
-      "title": "The Runtime Layer.",
+      "title": "Keep the situation in view.",
       "copy": "Intelligence can produce answers. Navigation requires a persistent representation of the reality those answers are meant to serve.",
       "statement": "A person, organization or society does not operate as a single prompt. Reality accumulates history, constraints, resources, relationships, residues and unfinished transitions.",
-      "body": "Without a Runtime Layer, each interaction begins from a partial snapshot. A system may reason well while still losing the continuity of the reality it is meant to support.",
+      "body": "If each conversation starts from an isolated snapshot, important history and constraints can be lost. Keeping context makes it easier to ask whether an answer still fits today.",
       "quote": "Reality becomes navigable when change leaves evidence that can be reconstructed, read, acted upon and reviewed over time."
     },
     "journey": {
-      "eyebrow": "03 · Operational Route",
+      "eyebrow": "03 · From question to reflection",
       "title": "The Reality Journey",
       "copy": "The platform translates the thesis into a continuous route rather than a one-time answer.",
       "s1": "Capture what started to change and what remains unclear.",
       "s2": "Organize sequence, conditions, evidence and gaps.",
-      "s3": "Interpret the current Runtime without treating interpretation as fact.",
+      "s3": "Interpret the present situation without treating interpretation as fact.",
       "s4": "Identify position, priority, constraints and viable movement.",
       "s5": "Compare expectation, action and observed change.",
-      "s6": "Preserve learning and update the Runtime over time."
+      "s6": "Keep what you learned and return when circumstances change."
     },
     "books": {
       "eyebrow": "Human Reading Route",
       "title": "Seven books. One architecture.",
       "copy": "The seven books form the human-readable route through the fifteen-part PHI OS architecture.",
-      "b1": {"no":"BOOK I · PARTS 1–4","title":"Reality Formation","copy":"Foundations of Reality Formation and Runtime","status":"Seven-volume architecture"},
-      "b2": {"no":"BOOK II · PARTS 5–7","title":"Reality Runtime","copy":"How Humans and the World Run Together","status":"Seven-volume architecture"},
-      "b3": {"no":"BOOK III · PARTS 8–9","title":"Reality Continuity","copy":"How Runtime Is Maintained, Recovered and Coordinated","status":"Seven-volume architecture"},
-      "b4": {"no":"BOOK IV · PARTS 10–11","title":"Reality Expansion","copy":"Runtime Expansion and Civilization Runtime","status":"Seven-volume architecture"},
-      "b5": {"no":"BOOK V · PART 12","title":"Reality Differentiation","copy":"Civilization Atlas","status":"Seven-volume architecture"}
+      "b1": {
+        "no": "BOOK I · PARTS 1–4",
+        "title": "Reality Formation",
+        "copy": "Foundations of Reality Formation and Runtime",
+        "status": "Seven-volume architecture"
+      },
+      "b2": {
+        "no": "BOOK II · PARTS 5–7",
+        "title": "Reality Runtime",
+        "copy": "How Humans and the World Run Together",
+        "status": "Seven-volume architecture"
+      },
+      "b3": {
+        "no": "BOOK III · PARTS 8–9",
+        "title": "Reality Continuity",
+        "copy": "How Runtime Is Maintained, Recovered and Coordinated",
+        "status": "Seven-volume architecture"
+      },
+      "b4": {
+        "no": "BOOK IV · PARTS 10–11",
+        "title": "Reality Expansion",
+        "copy": "Runtime Expansion and Civilization Runtime",
+        "status": "Seven-volume architecture"
+      },
+      "b5": {
+        "no": "BOOK V · PART 12",
+        "title": "Reality Differentiation",
+        "copy": "Civilization Atlas",
+        "status": "Seven-volume architecture"
+      }
     },
     "implementation": {
-      "eyebrow": "04 · Reference Implementation",
+      "eyebrow": "04 · Continue exploring",
       "title": "From thesis to PHI OS.",
       "copy": "PHI OS does not reduce the research to a chatbot. It builds a connected Reality Navigation environment.",
-      "a1": "A scrollable and explorable map of the fourteen-part knowledge architecture.",
-      "a2": "The operational route from Entry through Reconstruction, Reading, Navigation, Review and Continuity.",
-      "a3": "Persistent evidence, state versions, reviews and evolving reality records.",
+      "a1": "Explore the fifteen parts through the seven connected books.",
+      "a2": "Describe a situation, understand it, consider a next step and return to its outcome.",
+      "a3": "Keep observations and earlier questions available for later reflection.",
       "a4": {
-        "title": "Services and Infrastructure",
-        "copy": "Rule, AI and professional layers operating under a shared evidence contract."
+        "title": "Tools and human support",
+        "copy": "Choose a reading tool or professional service with a clear purpose and scope."
       }
     },
     "reader": {
