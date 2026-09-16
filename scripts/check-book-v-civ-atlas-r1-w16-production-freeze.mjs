@@ -57,6 +57,19 @@ assert.equal(freeze.freezePolicy.silentInPlaceRewrite,false); assert.equal(freez
 const maintenancePath='content/civilization-atlas/maintenance/book-v-civ-atlas-r1-m1-customer-projection-recovery-v1.json';
 const maintenance=fs.existsSync(path.join(root,maintenancePath))?json(maintenancePath):null;
 const authorizedMaintenance=new Map((maintenance?.authorizedFrozenPathChanges||[]).map(item=>[item.path,item]));
+const visualSuccessor=json('content/civilization-atlas/maintenance/book-v-civ-atlas-static-visual-successor-v1.json');
+assert.equal(visualSuccessor.predecessor,maintenancePath);
+assert.equal(visualSuccessor.predecessorSha256,digest(maintenancePath));
+assert.equal(visualSuccessor.change.path,'assets/js/pages/civilization-atlas.js');
+const priorVisual=authorizedMaintenance.get(visualSuccessor.change.path);
+assert.equal(visualSuccessor.change.previousSha256,priorVisual.successorSha256);
+assert.equal(visualSuccessor.change.changeClass,priorVisual.changeClass);
+assert.deepEqual(visualSuccessor.dependencies.map(item=>item.path),[
+  'assets/js/pages/civilization-atlas/atlas-static-visual.js',
+  'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json'
+]);
+for(const dependency of visualSuccessor.dependencies) assert.equal(digest(dependency.path),dependency.sha256,`static visual dependency drift: ${dependency.path}`);
+authorizedMaintenance.set(priorVisual.path,{...priorVisual,successorSha256:visualSuccessor.change.successorSha256});
 for(const f of freeze.frozenFiles){
   assert.ok(fs.existsSync(path.join(root,f.path)),`frozen file missing: ${f.path}`);
   const current=digest(f.path);
