@@ -1,0 +1,47 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {parseHTML} from 'linkedom';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
+const write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const base='docs/public-index-successor/';
+const routePath='content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json';
+const route=read(routePath);
+const pointerPath='content/web-production/registries/current-client-visual-registry.json';
+const pointer=read(pointerPath),visualPath=pointer.currentRegistryPath.replace(/^\//,'');
+const visuals=read(visualPath);
+const ignored=new Set(['.git','node_modules','.tmp','.wrangler','.runtime-evidence','.cf-pages-functions-test','.cf-pages-functions-wrangler3']);
+function walk(dir='.') {return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>ignored.has(e.name)?[]:e.isDirectory()?walk(path.posix.join(dir,e.name)):[path.posix.join(dir,e.name)]);}
+const files=walk();
+const redirects=fs.readFileSync('_redirects','utf8').split(/\r?\n/).filter(l=>l.trim()&&!l.startsWith('#')).map(l=>l.trim().split(/\s+/));
+const banned=/\b(canonical|registry|resolver|cutover|successor|fixture|checker|admission|runtime owner|execution class|binding state)\b/ig;
+const pages=files.filter(p=>p.endsWith('/index.html')||p==='index.html'||(p.endsWith('.html')&&!p.includes('/')));
+const census=pages.map(p=>{
+ const {document}=parseHTML(fs.readFileSync(p,'utf8'));
+ const html=document.documentElement;
+ const routeUrl=p==='index.html'?'/':p.endsWith('/index.html')?'/'+p.slice(0,-10):'/'+p;
+ const authority=route.routes.find(r=>r.canonicalPath===routeUrl);
+ const redirect=redirects.find(r=>r[0]===routeUrl&&/^30[1278]$/.test(r[2]));
+ const internal=/^(docs|tools|functions|tests|test|archives|archive)\//.test(p);
+ const audience=internal?'REVIEW_INTERNAL':redirect?'COMPATIBILITY_ONLY':/^(account|checkout|payment|download|receipt)\//.test(p)?'FUNCTIONAL_TRANSACTION':p.startsWith('professional/')?'PROFESSIONAL':p.startsWith('research/')?'RESEARCH':p.startsWith('reality/')?'CUSTOMER_WORKSPACE':/^(knowledge|articles|figures)\//.test(p)?'PUBLIC_KNOWLEDGE':/^(books|membership|academy|perspectives)\//.test(p)?'PUBLIC_PRODUCT':'PUBLIC_DISCOVERY';
+ const main=document.querySelector('main')||document.body;
+ const clone=main.cloneNode(true);clone.querySelectorAll('script,style,template').forEach(n=>n.remove());
+ const text=clone.textContent.replace(/\s+/g,' ').trim();
+ const leaks=[...new Set(text.match(banned)||[])];
+ const links=[...main.querySelectorAll('a[href]')].map(a=>({label:a.textContent.trim(),href:a.getAttribute('href')}));
+ return {surfaceId:authority?.routeId||p.replace(/[^a-z0-9]/gi,'_').toUpperCase(),path:p,routeId:authority?.routeId||null,canonicalPath:authority?.canonicalPath||redirect?.[1]||routeUrl,audience,purpose:document.querySelector('h1')?.textContent.trim()||document.title||'DYNAMIC_CONTENT_REVIEW_REQUIRED',currentStatus:internal?'HISTORICAL':redirect?'COMPATIBILITY':authority?'CANONICAL':'ACTIVE_SECONDARY',currentContentDepth:{staticTextCharacters:text.length,sections:main.querySelectorAll('section').length,headings:main.querySelectorAll('h2').length,dynamicCopyNotMeasured:true},commercialRole:audience==='PUBLIC_PRODUCT'?'DISCOVERY_ONLY_NOT_PURCHASE_AUTHORITY':'NO_NEW_COMMERCE',visualCoverage:{images:main.querySelectorAll('img').length,assetCodes:[...main.querySelectorAll('[data-cx-asset]')].map(n=>n.getAttribute('data-cx-asset'))},languageQuality:'BROWSER_REVIEW_PENDING',internalLanguageLeak:leaks,sevenVolumeAlignment:/five[- ](volume|book)|五册/i.test(text)?'REVIEW_REQUIRED':'NO_STATIC_FIVE_VOLUME_TEXT',ctaState:links.length?'LINKS_PRESENT_DESTINATIONS_TO_VERIFY':'DYNAMIC_OR_MISSING',routeAuthority:authority?routePath:redirect?'_redirects':internal?'INTERNAL_NOT_PUBLIC':'EXISTING_FILE_UNRESOLVED_AUTHORITY',links,sha256:sha(p),lang:html.lang};
+});
+write(base+'pis-r1-w1-surface-census-v1.json',{scope:'ALL_REPOSITORY_INDEX_AND_ROOT_STANDALONE_HTML',limitations:'Static census; dynamic copy and browser acceptance are separately required. Unresolved paths are not newly authorized.',surfaces:census});
+const sourceFiles=files.filter(p=>/\.(html|js|mjs)$/.test(p)&&!/^scripts\//.test(p)&&!/^docs\//.test(p)&&!/^functions\//.test(p)&&!/^tools\//.test(p));
+const sourceText=sourceFiles.map(p=>[p,fs.readFileSync(p,'utf8')]);
+const allocation=visuals.assets.map(a=>{
+ const stale=/five[-_ ]?(volume|books?)/i.test([a.title,a.semanticName,a.officialFilename].join(' '));
+ const consumers=sourceText.filter(([,s])=>s.includes(a.assetCode)||s.includes(a.r2?.objectKey||'__NO_OBJECT__')).map(([p])=>p);
+ return {assetCode:a.assetCode,canonicalAssetRef:pointerPath+'#'+a.assetCode,semanticRole:a.semanticPurpose||a.title,primarySurface:consumers[0]||null,secondarySurfaces:consumers.slice(1),placement:'EXISTING_REFERENCE_REQUIRES_VISUAL_REVIEW',localeRule:a.localePolicy,consumerState:stale?'HISTORICAL_SEMANTIC_STALE':!a.r2?.remoteVerified?'UNVERIFIED':consumers.length?'REFERENCED_BROWSER_CONFIRMATION_PENDING':'ALLOCATION_REQUIRED',sevenVolumeCompatibility:stale?'HISTORICAL_ONLY':'REVIEW_WITH_CURRENT_SEVEN_VOLUME_CONTEXT',reason:stale?'Do not reactivate old five-volume semantic artwork.':'References are evidence of consumption candidates, not proof of visible rendering.'};
+});
+write('content/web/index-surfaces/public-index-visual-allocation-v1.json',{authorityPointer:pointerPath,createsVisualAuthority:false,assets:allocation});
+const baselinePath=base+'pis-r1-w0-baseline-audit-v1.json';
+if(!fs.existsSync(baselinePath))write(baselinePath,{work:'PHI-OS-PIS-R1',baselineCommit:'8772ca0821b7d5c2b84db47f17fee1ffde4039b3',sourceZip:{status:'NOT_PROVIDED',sha256:null,resolution:'User explicitly selected current main; no ZIP or historical checkout substituted.'},plan:{path:base+'MASTER-WORK-STEP-v1.md',sha256:sha(base+'MASTER-WORK-STEP-v1.md')},routeAuthorities:[routePath,'_redirects','content/web-production/registries/wpr-route-registry-v1.json'].map(path=>({path,sha256:sha(path)})),historicalWprNotUsedToRestoreRoutes:true,visualRegistryPointer:{path:pointerPath,sha256:sha(pointerPath),target:visualPath},publicR2Base:'https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev',sevenVolumeAuthority:'content/registry/successors/seven-volume-v1/books.json',commerceScope:'PRESENTATION_ONLY_EXISTING_PRODUCTS',stripeStatus:'PAUSED_BY_USER',productionCutover:false});
+write(base+'pis-r1-route-findings-v1.json',{unresolved:census.filter(x=>!['REVIEW_INTERNAL','COMPATIBILITY_ONLY'].includes(x.audience)&&x.routeAuthority==='EXISTING_FILE_UNRESOLVED_AUTHORITY').map(x=>({path:x.path,canonicalPath:x.canonicalPath})),policy:'No inferred route is permission to create, resurrect or cut over a page.',primaryNavigation:route.primaryNavigation,utilities:route.utilities});
+console.log(`PIS inventory: ${census.length} surfaces; ${allocation.length} existing visual identities; no new authority or routes.`);

@@ -13,7 +13,7 @@ assert.deepEqual(r.assets.filter(a=>a.family==='CASE_SECONDARY').map(a=>a.assetI
 assert.ok(p.cancelledSecondaryAssetIds.every(id=>!ids.includes(id)));
 assert.equal(b.batches.length,43);assert.ok(b.batches.every(b=>b.assetIds.length<=10));
 assert.deepEqual(b.batches.flatMap(b=>b.assetIds).sort(),[...ids].sort());
-assert.equal(bindings.assets.length,142);
+assert.equal(bindings.assets.length,162);
 for(const a of r.assets){
  for(const k of ['historicalAuthority','canonicalAuthority','registryWriteAuthority','ocrWriteBackAllowed','containsText'])assert.equal(a[k],false);
  assert.equal(a.fallback,'STRUCTURED_HTML_SVG');
@@ -23,5 +23,5 @@ for(const a of r.assets){
  }else assert.equal(a.bucketKey,null);
 }
 assert.equal(r.assets.filter(a=>a.reviewState==='ACCEPTED').length,162);
-assert.equal(r.assets.filter(a=>a.status==='OWNER_CONFIRMED_REMOTE_UNRESOLVED').length,20);
-console.log('PASS W4C current successor: 380 / 14 families / 43 batches, 64 REQUIRED; 142 accepted verified bindings, 20 unresolved remain unbound.');
+assert.equal(r.assets.filter(a=>a.status==='OWNER_CONFIRMED_REMOTE_UNRESOLVED').length,0);
+console.log('PASS W4C current successor: 380 / 14 families / 43 batches, 64 REQUIRED; 162 accepted verified bindings, all 64 REQUIRED secondary images bound.');

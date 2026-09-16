@@ -1,0 +1,35 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const read=p=>JSON.parse(fs.readFileSync(p));
+const dir='docs/public-index-successor/';
+const census=read(dir+'pis-r1-w1-surface-census-v1.json');
+const findings=read(dir+'pis-r1-route-findings-v1.json');
+const original=read('docs/assets/r2-public/non-atlas-usage-resolution-v1.json');
+function destination(key){
+ if(/logo/i.test(key))return ['/','BRAND_UTILITY'];
+ if(/thesis/.test(key))return [/ecosystem/.test(key)?'/about/':'/thesis.html','EDITORIAL_FIGURE'];
+ if(/icons\/methods/.test(key))return ['/perspectives/','METHOD_SELECTOR'];
+ if(/icons\/status/.test(key))return ['/perspectives/','REAL_AVAILABILITY_ONLY'];
+ if(/icons\/global/.test(key))return [/GOVERNANCE/.test(key)?'/about/':'/about/reality-navigation/','PUBLIC_EXPLANATION'];
+ if(/PROFESSIONAL|FINANCIAL/.test(key))return [/FINANCIAL/.test(key)?'/professional/financial/':'/professional/','SUPPORTING_SCENE'];
+ if(/ACADEMY/.test(key))return ['/academy/','LEARNING_SCENE'];
+ if(/MEMBERSHIP|CONTINUITY/.test(key))return ['/reality/','CONTINUITY_CONTEXT_NO_NEW_ENTITLEMENTS'];
+ if(/READING-PATH/.test(key))return ['/books/','READING_PATH'];
+ if(/KNOWLEDGE/.test(key))return ['/knowledge/','DISCOVERY'];
+ return ['/reality/','PERSONAL_CONTEXT'];
+}
+const asset41=original.items.filter(x=>x.status==='REQUIRES_PAGE_FIT_REVIEW').map(x=>{const [primarySurface,placement]=destination(x.key);return {key:x.key,primarySurface,placement,canonicalAssetRef:null,state:'PLANNED_ALLOCATION_NOT_ACTIVATED',blocker:'NOT_REGISTERED_IN_CURRENT_CLIENT_VISUAL_POINTER',ownerImageAcceptance:'ACCEPTED',note:'Extend the existing visual authority before adding consumers; not a new image review request.'};});
+fs.writeFileSync(dir+'pis-r1-remaining-41-allocation-plan-v1.json',JSON.stringify({createsVisualAuthority:false,assets:asset41},null,2)+'\n');
+const steps=Array.from({length:77},(_,i)=>({work:`PIS-W${i}`,state:'NOT_IMPLEMENTED_IN_THIS_BATCH'}));
+for(const i of [0,1,4,5,7])steps[i].state='FOUNDATION_RECORDED';
+for(const i of [2,3,6,8,9,10,11,12,13,14,15,17,18,19,20,43,44,45,46,49,52,56,58,59,60,61,66,71,73,75])steps[i].state='PARTIAL';
+for(const i of [63,64,65])steps[i].state='HUMAN_REVIEW_AT_FINAL_BATCH';
+for(const i of [74,76])steps[i].state='PENDING_DEPLOYMENT_AND_ACCEPTANCE';
+const browser=fs.existsSync(dir+'pis-r1-discovery-browser-v1.json')?read(dir+'pis-r1-discovery-browser-v1.json'):null;
+const record={work:'PHI-OS-PIS-R1',status:'IN_PROGRESS_NOT_PRODUCTION_FROZEN',baseline:'8772ca0821b7d5c2b84db47f17fee1ffde4039b3',census:census.surfaces.length,existingVisualIdentities:152,unresolvedRouteAuthorities:findings.unresolved.length,secondaryImages:{verified:20,currentBindings:162,requiredSecondaryBound:64,plannedNotYetVerified:218},fig11F:'ACCEPTED_FREE_BOOK_SUMMARY_NO_SPECIAL_APPROVAL',localDiscoveryPages:9,localBrowserCases:browser?.results.length||0,localBrowserComplete:!!(browser?.complete&&browser.testedFiles?.length===11&&browser.testedFiles.every(x=>crypto.createHash('sha256').update(fs.readFileSync(x.path)).digest('hex')===x.sha256)),fullCheck:fs.existsSync(dir+'npm-check-result-v1.json')?read(dir+'npm-check-result-v1.json').status:'PENDING',productionDeployed:false,stripe:'PAUSED_BY_USER',steps};
+fs.writeFileSync(dir+'pis-r1-work-status-v1.json',JSON.stringify(record,null,2)+'\n');
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const copy=read('content/web/index-surfaces/pis-r1-discovery-copy-v1.json');
+const html=`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PIS-R1 进度与首批内容</title><style>body{max-width:1100px;margin:40px auto;padding:20px;font:18px/1.8 system-ui;background:#f8f6ef;color:#223}article{border-top:1px solid #bbb;padding:24px 0}a{color:#165569}img{max-width:100%;height:auto}summary{cursor:pointer;min-height:44px}td,th{padding:10px;text-align:left;border-bottom:1px solid #ccc}</style><h1>PIS-R1：本地首批改造，尚未整体完成</h1><p>基线：8772ca0。附件 about.zip 未提供，按你明确指定的 main 工作。本页用于查看真实进度，不把机器测试、图片接受或本地截图当作全站人工验收。</p><h2>已落地</h2><ul><li>20 张 SECONDARY 实际文件验证、登记与绑定完成：现有 162 张，64 张 REQUIRED 齐全。</li><li>FIG 11F 按普通免费书籍总结图使用，取消额外定义审批卡点。</li><li>${record.census} 个入口文件盘点、现有 152 项视觉登记引用审计、双语公共词汇与编辑规则。</li><li>9 个现有入口增加双语说明和下一步链接；首页新标题，首页与带图的 About 子页采用满宽 Hero。</li><li>完整 npm run check（包含 postcheck）：${record.fullCheck}。本地浏览器记录：${record.localBrowserCases}/72；完成标志：${record.localBrowserComplete}。范围仅为本批布局、语言与键盘检查，不是生产 E2E。</li></ul><h2>真正尚未完成</h2><ol><li>${record.unresolvedRouteAuthorities} 个入口未在本轮优先路由表中匹配，尚需对照其他现行路径记录；这不代表页面坏链或 404。历史 WPR 路径不能直接复活。</li><li>首批页面还需完成整页编辑、旧文案清理和视觉整合；知识、七册、方法、会员、专业、研究等后续批次未在本批改造。</li><li>41 项资源已有逐项用途建议，但都需在既有视觉权威中核对或补齐精确对象映射后再接入；建议不等于已使用。其余 152 项也未宣称零孤立资源。</li><li>全部 SEO、商业入口真实性、完整可访问性、逐页视觉与真实客户旅程仍需完成。</li><li>最终集中人工验收、部署后复测与 PIS-W76 冻结尚未完成。Stripe 仍按你指示暂停。</li></ol><p><a href="pis-r1-work-status-v1.json">全部 W0–W76 状态</a> · <a href="pis-r1-remaining-41-allocation-plan-v1.json">41 项逐项用途</a> · <a href="pis-r1-discovery-browser-v1.json">浏览器记录</a> · <a href="npm-check-current.log">完整检查日志</a></p><h2>实际本地截图</h2><details><summary>首页：手机</summary><img src="home-mobile-hero.png" alt="本地首页手机截图"></details><details><summary>About：桌面</summary><img src="about-desktop-hero.png" alt="本地 About 桌面截图"></details><h2>首批新增文字（中英对照）</h2>${Object.entries(copy.pages).map(([file,sections])=>`<article><h3>${esc(file)}</h3>${sections.map(s=>`<h4>${esc(s.heading.zh)}</h4><p>${esc(s.body.zh)}</p><p lang="en">${esc(s.body.en)}</p><p>下一步：${s.links.map(a=>esc(a.zh)+' → '+esc(a.href)).join('；')}</p>`).join('')}</article>`).join('')}</html>`;
+fs.writeFileSync(dir+'PIS-R1-PROGRESS.html',html+'\n');
+console.log('PIS progress recorded; no human acceptance or production freeze inferred.');

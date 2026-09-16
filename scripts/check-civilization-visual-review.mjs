@@ -8,7 +8,7 @@ assert.equal(report.planned,436);assert.equal(report.suppliedCsvRows,316);assert
 assert.equal(report.uploadedVerified,142);assert.equal(report.remaining,294);assert.equal(report.productionBound,0);
 assert.equal(report.assets.filter(a=>a.sha256).length,142);assert.ok(report.assets.every(a=>a.reviewState==='PENDING'&&a.bindingState==='UNBOUND'));
 const bindings=JSON.parse(fs.readFileSync('content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json'));
-assert.equal(bindings.assets.length,142);
+assert.equal(bindings.assets.length,162);
 assert.ok(bindings.assets.every(a=>a.reviewState==='ACCEPTED'&&a.sha256&&a.bucketKey));
 const state={activeLayer:'timeline',timeWindowId:'T00'};
 const candidate={...report.assets.find(a=>a.assetId==='VIS-CIV-T00-HERO'),containsText:false};
@@ -22,4 +22,4 @@ renderAtlasStaticVisuals(root,{bindings:{assets:[accepted]},state});assert.equal
 root.querySelector('img').dispatchEvent(new window.Event('error'));assert.equal(root.querySelectorAll('img').length,0);assert.ok(root.querySelector('svg'));assert.match(root.textContent,/Source text/);
 renderAtlasStaticVisuals(root,{bindings:{assets:[candidate]},state});assert.equal(root.querySelectorAll('img').length,0);
 root.querySelector('svg').remove();renderAtlasStaticVisuals(root,{bindings:{assets:[accepted]},state});assert.equal(root.querySelectorAll('img').length,0);
-console.log('PASS: historical 436 snapshot preserved; current 142 accepted bindings verified; unsafe/unreviewed fixtures rejected and structured fallback preserved.');
+console.log('PASS: historical 436 snapshot preserved; current 162 accepted bindings verified; unsafe/unreviewed fixtures rejected and structured fallback preserved.');
