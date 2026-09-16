@@ -1,3 +1,4 @@
+import {renderBookPublicSamples} from '../knowledge/book-public-samples.js';
 import { getLocale, onLocaleChange, t } from '../i18n.js';
 import {bookRoute,canonicalPartsForBook,loadSevenVolumeBooks,loadSevenVolumeParts,resolveSevenVolumeBookCover} from '../web-production/public-surface-data-seven.js';
 import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
@@ -113,6 +114,13 @@ async function render() {
         </div>
       </section>
     `;
+
+    // Public static samples are independent of checkout and paid delivery.
+    fetch('/content/web-production/registries/book-public-samples-v1.json').then(r=>{if(!r.ok)throw new Error('SAMPLES_UNAVAILABLE');return r.json();}).then(registry=>{
+      if(generation!==renderGeneration)return;const sample=registry.books.find(b=>b.bookId===bookId);if(!sample)return;
+      const section=document.createElement('section');section.id='free-samples';section.className='knowledge-section';const shell=document.createElement('div');shell.className='knowledge-shell';section.append(shell);root.append(section);renderBookPublicSamples(shell,sample,locale);
+      const link=document.createElement('a');link.className='knowledge-action';link.href='#free-samples';link.textContent=locale==='zh-Hans'?'免费预览与总结图':'Free previews and summary figures';root.querySelector('.knowledge-actions')?.append(link);
+    }).catch(()=>{});
 
     if (bookId === 'book-1') {
       const action=document.createElement('a');action.className='knowledge-action';action.href='#explorer';action.textContent=locale==='zh-Hans'?'探索形成机制':'Explore formation';root.querySelector('.knowledge-actions')?.append(action);
