@@ -8,7 +8,7 @@
       "preview": "review.html?case=cases/BZR-01-zh-Hans.json&depth=paid",
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -17,7 +17,7 @@
       "preview": "review.html?case=cases/ZWR-01-zh-Hans.json&depth=paid",
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -26,7 +26,7 @@
       "preview": "review.html?case=cases/AST-01-zh-Hans.json&depth=paid",
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -35,7 +35,7 @@
       "preview": "review.html?case=cases/NUM-01-zh-Hans.json&depth=paid",
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -45,7 +45,7 @@
       "blockers": [
         "SOURCE_DEPTH_LIMITED_FOR_SINGLE_ENTRY_MODES",
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -54,7 +54,7 @@
       "preview": "review.html?case=cases/ECR-01-zh-Hans.json&depth=paid",
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -63,7 +63,7 @@
       "preview": "review.html?case=cases/HD-01-zh-Hans.json&depth=paid",
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -72,7 +72,7 @@
       "preview": "review.html?case=cases/CROSS-01-zh-Hans.json&depth=paid",
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     }
   ],
@@ -81,21 +81,28 @@
       "productId": "BUNDLE_2",
       "state": "PENDING",
       "preview": "catalog.html",
-      "entitlementContract": "NOT_LOCATED"
+      "entitlementContract": "phi-os.pws.report-commerce-successor.v1"
     },
     {
       "productId": "BUNDLE_3",
       "state": "PENDING",
       "preview": "catalog.html",
-      "entitlementContract": "NOT_LOCATED"
+      "entitlementContract": "phi-os.pws.report-commerce-successor.v1"
     },
     {
       "productId": "BUNDLE_5PLUS",
       "state": "PENDING",
       "preview": "catalog.html",
-      "entitlementContract": "NOT_LOCATED"
+      "entitlementContract": "phi-os.pws.report-commerce-successor.v1"
     }
   ],
+  "crossSuccessor": {
+    "work": "CROSS_HD_PROFILE_SUCCESSOR",
+    "state": "PENDING",
+    "preview": "cross-successor/review.html",
+    "authorityAudit": "cross-successor/AUDIT.md",
+    "productionAdmission": false
+  },
   "pis": {
     "work": "PIS-R1",
     "preview": "../public-index-successor/PIS-R1-HUMAN-REVIEW.html",

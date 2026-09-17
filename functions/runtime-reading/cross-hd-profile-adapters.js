@@ -19,6 +19,7 @@ function finish(methodId,units,semanticDigest,locale,extra={}){
 }
 export async function adaptHdCrossEnvelope({product,locale=product?.locale||'en'}={}){
  if(!HD_R3_PRODUCTION_AUTHORITY.customerPublicationAllowed||product?.activeCustomerReadingVersion!=='HD_PRO_R3'||product.publicationDecision?.customerPublishable!==true||product.publicationDecision?.productionAdmitted!==true||product.boundaries?.customerSuppliedExternalContext!==true||product.boundaries?.phiosCalculated!==false)fail('CROSS_HD_CUSTOMER_PUBLISHABLE_AUTHORITY_REQUIRED');
+ if(product.publicationDecision.humanAccepted!==true||product.publicationDecision.machineVerified!==true)fail('CROSS_HD_ACCEPTANCE_REQUIRED');
  if(locale!==product.locale)fail('CROSS_HD_LOCALE_MISMATCH');
  const {professionalProductDigest,...seed}=product;
  if((await sha256Stable(seed)).slice(0,24)!==professionalProductDigest)fail('CROSS_HD_PRODUCT_DIGEST_MISMATCH');

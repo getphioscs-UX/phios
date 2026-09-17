@@ -1,6 +1,6 @@
 # VRPT-R1 · 交付状态与最后审核
 
-基于 013d3aa6e9d09ab079d0696a5d0b15905fac0783。上一轮 ECR R1/R1A 已记录 **REJECTED**：报告与 free version 没有分别。本轮是可追溯的视觉候选交付，**不是八个收费产品已验收、上线或 W0–W28 全部完成**。
+原工程基于 013d3aa；本次恢复与 Delta 基线为 **e192653ff4fbafad1feaffb9dc1c0fa4073ad215**。用户已将前段工作提交进该 main，本次继续时工作区干净。上一轮 ECR R1/R1A 已记录 **REJECTED**：报告与 free version 没有分别。本轮是可追溯的视觉候选交付，**不是八个收费产品已验收、上线或 W0–W28 全部完成**。
 
 入口：[八报告预览](review.html) · [商品与 Bundle 陈列](catalog.html) · [最后统一审核（含 PIS-R1）](final-review.html)。所有样本为明确标注的合成／既有测试样本，不是客户档案。
 
@@ -18,7 +18,7 @@ ECR R1/R1A 历史审核包保留；当前 admission 已改为 REJECTED。NUM 使
 
 ## D · PRODUCT REGISTRY
 
-8 个目标报告、3 个 Bundle、16 模板、21 图形组件已注册于现有 presentation 范围。[注册快照](presentation-registry.json)。目标价：BZR/ZWR/AST/NUM/PROFILE/ECR 各 MYR 39，HD 129，Cross 299；这些不是已启用 checkout 价格。
+8 个目标报告、3 个 Bundle、16 模板、21 图形组件已注册于现有 presentation 范围。[注册快照](presentation-registry.json)。用户批准的 Commerce authority 价格：BZR/ZWR/AST/NUM/PROFILE/ECR 各 MYR 39，HD 129，Cross 299；这些不是已启用 checkout 价格。
 
 ## E · FREE / PAID CONTRACT
 
@@ -43,7 +43,7 @@ RPT-T00–T15：封面、身份卡、快照、结构图、分布、矩阵、时�
 | BZR | 2 | 1–1 | 13–13 | 来源绑定候选；人工价值验收待定 |
 | ZWR | 2 | 1–1 | 13–13 | 来源绑定候选；人工价值验收待定 |
 | AST | 2 | 1–1 | 14–14 | 来源绑定候选；人工价值验收待定 |
-| NUM | 2 | 1–1 | 13–13 | 来源绑定候选；人工价值验收待定 |
+| NUM | 2 | 1–1 | 12–12 | 来源绑定候选；人工价值验收待定 |
 | PROFILE | 16 | 1–1 | 3–8 | 来源自适应候选；部分入口不足以形成完整付费深度 |
 | ECR | 18 | 2–2 | 11–14 | 来源绑定候选；人工价值验收待定 |
 | HD | 2 | 1–1 | 11–13 | 来源绑定候选；人工价值验收待定 |
@@ -53,11 +53,11 @@ RPT-T00–T15：封面、身份卡、快照、结构图、分布、矩阵、时�
 
 ## J · BUNDLE STATUS
 
-MYR 69 / 99 / 159 的陈列与 SVG 已完成。Bundle 是独立报告组合，不生成 Cross；可选报告名单、HD 是否可选、权益组合规则未自行制定。
+MYR 69 / 99 / 159 已读取用户批准的 PWS successor contract。Bundle 2 / 3 分别选 2 / 3 份；5+ 当前可选 5–6 份，最大值来自六个标准报告 eligibility registry。HD / Cross 不在低价 Bundle 内，Cross 权益独立。
 
 ## K · COMMERCE / ENTITLEMENT STATUS
 
-附件所指 Commerce & Pricing Successor R1 的八报告／Bundle 契约未定位。现有 PWS 商品／ECR draft 和 MYR 28 narrative 不能替代此契约。所有 checkout、订单与权益发放保持关闭。真实购买、支付 webhook、下载权限尚未测试。先前 PIS-R1 的独立 Sandbox 门槛原样保留。
+用户已确认旧完整矩阵尚未入仓并正式批准增补。现已在现有 PWS Product / Commercial Runtime materialize 八报告、三 Bundle、schema、registry、42 个有效组合及 150 个错误数量反例、独立权益计划和客户投影。没有第二个 Commerce Runtime，最小 schema gap 为 NONE。详情见 content/pws/commercial/report-successor-r1/。真实收费、权益发放及下载授权仍遵守现有 gate；本轮未激活或声称测试真实支付。
 
 ## L · AI COMPOSITION STATUS
 
@@ -65,7 +65,7 @@ T1 默认确定性组装；T2 只选择／排序完整已准入短句；T3 仅�
 
 ## M · BILINGUAL STATUS
 
-全部八方法均有 en / zh-Hans 页面。方法解释复用相应 locale owner；Cross 的五类关系边界仅作 presentation 翻译，原始方法贡献按 locale 从已有 owner 生成。源提供方名称、部分 Profile 分面代码和 HD 技术名保留。双语可读性及语义等价仍需人工审核，不能仅以两份文件存在判定通过。
+全部八方法均有 en / zh-Hans 页面。方法解释复用相应 locale owner；Cross 的五类关系边界仅作 presentation 翻译，原始方法贡献按 locale 从已有 owner 生成。HD / PROFILE Cross successor 另有 90 个双语审核案例，不改变既有五方法生产准入。源提供方名称、部分 Profile 分面代码和 HD 技术名保留。双语可读性及语义等价仍需人工审核，不能仅以两份文件存在判定通过。
 
 ## N · DESKTOP / MOBILE STATUS
 
@@ -77,7 +77,7 @@ T1 默认确定性组装；T2 只选择／排序完整已准入短句；T3 仅�
 
 ## P · VISUAL DENSITY RESULTS
 
-浏览器主视觉 DOM 区域最小 47.1%，正文最大 29.8%；不得低于 45% / 高于 30%。55–70% 是目标区间，59 个页面视图落在目标区间外但未越硬阈值，留给人工检查。DOM 容器占比只是代理指标，**不能代替图形实际占用、可读性和有用性的目视判断**。
+浏览器主视觉 DOM 区域最小 47.1%，正文最大 27.0%；不得低于 45% / 高于 30%。55–70% 是目标区间，63 个页面视图落在目标区间外但未越硬阈值，留给人工检查。DOM 容器占比只是代理指标，**不能代替图形实际占用、可读性和有用性的目视判断**。
 
 ## Q · METHOD MACHINE RESULTS
 
@@ -93,11 +93,11 @@ T1 默认确定性组装；T2 只选择／排序完整已准入短句；T3 仅�
 
 ## T · PRODUCTION ADMISSION BY PRODUCT
 
-八报告及三 Bundle 均 CLOSED。详见 [逐产品准入](production-admission.json)。Profile 的来源深度不足单独阻断，其他产品也必须通过真实 Free vs Paid 人工价值评审、双语／视觉审核和相应权益契约后才可切换。
+八报告及三 Bundle 均 CLOSED。详见 [逐产品准入](production-admission.json)。Profile 的来源深度不足单独阻断；若干两节点图／单柱图的留白和重复边界说明也列入人工增量审核，机器 DOM 比例不能据此认定视觉质量合格。其他产品也必须通过真实 Free vs Paid 人工价值评审、双语／视觉审核和相应权益契约后才可切换。
 
 ## U · KNOWN BLOCKERS / CHAT DECISIONS
 
-1. 需要既有 Commerce & Pricing Successor R1 的仓库路径／提交，尤其 Bundle 选择范围和报告权益。
+1. Commerce 矩阵已由用户补充批准并落地；生产支付 gate 按要求保留关闭。
 2. Profile 单入口的现有 owner 主要给出来源数值与证据，部分样本不足以形成完整付费深度；需已准入的进一步解释／情境证据，不能由 renderer 发明。
 3. 真实 AI provider campaign 尚缺运行凭据；当前确定性报告与 fallback 可运行。
 4. 最后的人工视觉、双语和商业增量审核仍待真实决定；因此发布、收费、正式 successor freeze 未执行。
@@ -108,17 +108,17 @@ T1 默认确定性组装；T2 只选择／排序完整已准入短句；T3 仅�
 
 ## W · FULL npm run check RESULT
 
-`npm run check`：**PASS，exit 0**。使用 `scripts/run-check-windows.ps1` 原样执行 precheck / check / postcheck。完整日志：[npm-run-check-final.log](validation/npm-run-check-final.log)。本轮新视觉检查另外以 `npm run check:vrpt-r1` 执行，通过日志：[focused-final.log](validation/focused-final.log)。未用分段 PASS 冒充全仓 PASS。
+`npm run check`：**PASS，exit 0**。使用 `scripts/run-check-windows.ps1` 原样执行 precheck / check / postcheck。完整日志：[npm-run-check-successors-final.log](validation/npm-run-check-successors-final.log)。本轮新视觉检查另外以 `npm run check:vrpt-r1` 执行，通过日志：[focused-final.log](validation/focused-final.log)。未用分段 PASS 冒充全仓 PASS。
 
 ## X · DOWNLOADABLE DELTA ZIP
 
-产物路径：`output/delta/VRPT-R1-013d3aa.zip`。SHA-256 与文件数量写入同目录 `VRPT-R1-013d3aa.delivery.json`。包内 REPLAY.md 指定基线、清洁 checkout、哈希核验、生成与测试命令；不含整仓、node_modules、.git 或临时浏览器 profile。
+产物路径：`output/delta/VRPT-R1-COMMERCE-CROSS-HP-e192653.zip`。SHA-256 与文件数量写入同目录 `VRPT-R1-COMMERCE-CROSS-HP-e192653.delivery.json`。包内 REPLAY.md 指定基线、清洁 checkout、哈希核验、生成与测试命令；不含整仓、node_modules、.git 或临时浏览器 profile。
 
 ## W0–W28 工作包边界
 
 | 工作包 | 状态 |
 | --- | --- |
-| W0 authority census | 完成记录；Commerce successor 未定位 |
+| W0 authority census | 完成记录；Commerce successor 按用户批准增补 |
 | W1–W2 product / depth contract | 候选注册与校验完成；商业与人工冻结未通过 |
 | W3–W6 templates / components / Page IR / AI contract | 已实现、机器验证；真实 AI campaign 未运行 |
 | W7–W10 BZR / ZWR / AST / NUM | 来源绑定视觉候选完成，待人工审核 |
@@ -126,11 +126,21 @@ T1 默认确定性组装；T2 只选择／排序完整已准入短句；T3 仅�
 | W12 ECR | 11 页及条件扩展候选完成，旧拒绝决定保留 |
 | W13 HD | 既有 R3 adaptive 读取的视觉候选完成，待本轮审核 |
 | W14 Cross | 当前生产 owner、矩阵与原始贡献证据候选完成，待本轮审核 |
-| W15 Bundle surfaces | 陈列与资产完成；资格／权益契约未绑定 |
-| W16 Commerce binding | BLOCKED：所指契约未定位 |
+| W15 Bundle surfaces | 陈列、资产与资格／权益计划已绑定 |
+| W16 Commerce binding | PWS additive contract 与机器检查完成；真实支付 gate CLOSED |
 | W17 bilingual parity | 双语工程样本完成；人工等价审核 PENDING |
 | W18–W22 browser / PDF / density / method / visual checks | 机器结果见上；不转移历史人工结论 |
 | W23 AI campaign | mock / fallback / timeout 已验证；真实 provider 未执行 |
 | W24 human review | 最后统一审核包已备，PENDING |
 | W25–W27 cutover / production / freeze | CLOSED，未执行 |
-| W28 delta | 工程候选 Delta；不是已准入产品 freeze |
+| W28 delta | 对 e192653 的 changes-only Delta；不是已准入产品 freeze |
+
+## Cross HD + PROFILE addendum
+
+[Authority 审计与适配器路径](cross-successor/AUDIT.md) · [90 场景与结果](cross-successor/cases.json) · [双语审核](cross-successor/review.html)。变更前／后正式 Cross 方法均为 AST / BZR / ZWR / NUM / ECR；HD / PROFILE 保持候选，机器通过不会自动入 production。
+
+HD 消费 R3 pre-editorial Reading IR 与完整 claim/source/rule lineage。PHI OS Profile 消费原始 signal envelope，保留来源类别、工具、日期、置信与 precision boundary；Quick / 低完整度信号为 OPEN，伪造提升会被拒绝。HD Profile 与 PHI OS Profile method IDs 分开。所有映射限定在既有 16 维，没有 CROSS-RUNTIME-2。
+
+14 类 UNMAPPED 保留为独立语义决策项，包括高级 HD modifier、Big Five 分面与无解释的导入字段；不计入支持票。Current Reality 存在／缺失均已覆盖，存在时仍独立展示，不越过既有 Cross integration gate。冲突分类用显式 synthetic unit inputs 测试，不伪装为真实客户反证。
+
+报告／Commerce／Cross 共用最后审核入口，PIS-R1 放在最后阶段。新增 Cross 专项核对九项；所有人工决定仍 PENDING。

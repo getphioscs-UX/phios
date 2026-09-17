@@ -40,6 +40,10 @@ function normalizeClaim(claim,envelope){
  const units=unitRefs.map(ref=>envelope.acceptedUnits.find(unit=>unit.interpretationUnitId===ref)).filter(Boolean);
  if(units.length!==unitRefs.length)fail('CROSS_CLAIM_ACCEPTED_UNIT_REQUIRED',{claimId:claim.claimId});
  if(!units.some(unit=>unit.title===claim.headline&&admittedUnitText(unit)===claim.structuralMeaning))fail('CROSS_CLAIM_TEXT_MUST_MATCH_ACCEPTED_UNIT',{claimId:claim.claimId});
+ if(['HD','PROFILE'].includes(claim.methodId)){
+  const unit=units[0],expectedType=unit.relationType==='OPEN'?'OPEN':'CONDITION';
+  if(units.length!==1||claim.claimType!==expectedType||claim.confidenceClass!==unit.evidenceClass?.confidence||stable(claim.conditions)!==stable([{kind:'METHOD_EVIDENCE_SCOPE',...unit.evidenceClass}]))fail('CROSS_SUCCESSOR_EVIDENCE_WEIGHT_MISMATCH');
+ }
  const evidenceRefs=uniq(claim.evidenceRefs);if(!evidenceRefs.length)fail('CROSS_CLAIM_EVIDENCE_REQUIRED',{claimId:claim.claimId});
  return freeze({
   claimId:claim.claimId,methodId:claim.methodId,publicationState:'CUSTOMER_PUBLISHABLE',semanticDimension:claim.semanticDimension,claimType:claim.claimType,

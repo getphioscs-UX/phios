@@ -27,14 +27,14 @@
       "authority": "BZR_FULL_PRODUCTION",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
       "visualCandidateCases": 2,
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -62,14 +62,14 @@
       "authority": "ZIWEI_PRO_R2",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
       "visualCandidateCases": 2,
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -96,14 +96,14 @@
       "authority": "AST_FULL_PRODUCTION",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
       "visualCandidateCases": 2,
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -128,14 +128,14 @@
       "authority": "NUM_FULL_PRODUCTION",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
       "visualCandidateCases": 2,
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -166,7 +166,7 @@
       "authority": "PROFILE_PPR_VISUAL_OUTPUT_AUTHORITY_V2",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
@@ -174,7 +174,7 @@
       "blockers": [
         "SOURCE_DEPTH_LIMITED_FOR_SINGLE_ENTRY_MODES",
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -203,14 +203,14 @@
       "authority": "ECR_FULL_R1_R1A",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
       "visualCandidateCases": 18,
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -226,14 +226,14 @@
       "authority": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/report/hd-pro-r3-report-blueprint-authority-v1.json",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
       "visualCandidateCases": 2,
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     },
     {
@@ -266,50 +266,119 @@
       "authority": "CROSS_METHOD_RUNTIME_READING_IR_V2",
       "review": "PENDING",
       "customerPublishable": false,
-      "commerceBinding": "REQUIRES_EXISTING_COMMERCE_CONTRACT",
+      "commerceBinding": "phi-os.pws.report-commerce-successor.v1",
       "humanReview": "PENDING",
       "checkoutEnabled": false,
       "paidValueAccepted": false,
       "visualCandidateCases": 2,
       "blockers": [
         "HUMAN_FREE_VS_PAID_VALUE_REVIEW",
-        "COMMERCE_REPORT_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+        "EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED"
       ]
     }
   ],
   "bundles": [
     {
       "productId": "BUNDLE_2",
+      "productCode": "bundle-2",
+      "methodId": null,
+      "kind": "BUNDLE",
+      "offerCode": "bundle-2-myr",
+      "price": {
+        "currency": "MYR",
+        "amountMinor": 6900,
+        "version": "1.0.0"
+      },
+      "eligibleProductIds": [
+        "BAZI_FULL_REPORT",
+        "ZIWEI_FULL_REPORT",
+        "ASTROLOGY_FULL_REPORT",
+        "PROFILE_FULL_REPORT",
+        "NUMEROLOGY_FULL_REPORT",
+        "ECR_FULL_REPORT"
+      ],
+      "selection": {
+        "min": 2,
+        "max": 2,
+        "eligibilityRegistry": "standard-myr39-v1",
+        "distinct": true
+      },
+      "checkoutEnabled": false,
+      "independentReportsOnly": true,
+      "bundleCreatesCross": false,
       "targetMyr": 69,
       "currency": "MYR",
       "assetId": "COM-REPORT-BUNDLE-2",
-      "independentReportsOnly": true,
       "createsCrossReading": false,
-      "eligibleProductIds": null,
-      "checkoutEnabled": false,
-      "blocker": "BUNDLE_ELIGIBILITY_AND_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+      "blocker": "HUMAN_REVIEW_AND_EXISTING_PRODUCTION_GATE"
     },
     {
       "productId": "BUNDLE_3",
+      "productCode": "bundle-3",
+      "methodId": null,
+      "kind": "BUNDLE",
+      "offerCode": "bundle-3-myr",
+      "price": {
+        "currency": "MYR",
+        "amountMinor": 9900,
+        "version": "1.0.0"
+      },
+      "eligibleProductIds": [
+        "BAZI_FULL_REPORT",
+        "ZIWEI_FULL_REPORT",
+        "ASTROLOGY_FULL_REPORT",
+        "PROFILE_FULL_REPORT",
+        "NUMEROLOGY_FULL_REPORT",
+        "ECR_FULL_REPORT"
+      ],
+      "selection": {
+        "min": 3,
+        "max": 3,
+        "eligibilityRegistry": "standard-myr39-v1",
+        "distinct": true
+      },
+      "checkoutEnabled": false,
+      "independentReportsOnly": true,
+      "bundleCreatesCross": false,
       "targetMyr": 99,
       "currency": "MYR",
       "assetId": "COM-REPORT-BUNDLE-3",
-      "independentReportsOnly": true,
       "createsCrossReading": false,
-      "eligibleProductIds": null,
-      "checkoutEnabled": false,
-      "blocker": "BUNDLE_ELIGIBILITY_AND_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+      "blocker": "HUMAN_REVIEW_AND_EXISTING_PRODUCTION_GATE"
     },
     {
       "productId": "BUNDLE_5PLUS",
+      "productCode": "bundle-5plus",
+      "methodId": null,
+      "kind": "BUNDLE",
+      "offerCode": "bundle-5plus-myr",
+      "price": {
+        "currency": "MYR",
+        "amountMinor": 15900,
+        "version": "1.0.0"
+      },
+      "eligibleProductIds": [
+        "BAZI_FULL_REPORT",
+        "ZIWEI_FULL_REPORT",
+        "ASTROLOGY_FULL_REPORT",
+        "PROFILE_FULL_REPORT",
+        "NUMEROLOGY_FULL_REPORT",
+        "ECR_FULL_REPORT"
+      ],
+      "selection": {
+        "min": 5,
+        "max": null,
+        "eligibilityRegistry": "standard-myr39-v1",
+        "distinct": true
+      },
+      "checkoutEnabled": false,
+      "independentReportsOnly": true,
+      "bundleCreatesCross": false,
       "targetMyr": 159,
       "currency": "MYR",
       "assetId": "COM-REPORT-BUNDLE-5PLUS",
-      "independentReportsOnly": true,
       "createsCrossReading": false,
-      "eligibleProductIds": null,
-      "checkoutEnabled": false,
-      "blocker": "BUNDLE_ELIGIBILITY_AND_ENTITLEMENT_CONTRACT_NOT_LOCATED"
+      "blocker": "HUMAN_REVIEW_AND_EXISTING_PRODUCTION_GATE"
     }
   ],
   "automaticHumanAcceptance": false

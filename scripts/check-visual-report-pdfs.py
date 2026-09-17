@@ -65,6 +65,6 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
 result = dict(work='VRPT-R1', sampleCount=len(records), passCount=sum(r['status'] == 'PASS' for r in records),
               measurement='Exact Page IR count, A4, extractable text, original card raster allowance; rendered contact sheets require visual review',
               results=records)
-(output / 'pdf-results.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+(output / 'pdf-results.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
 print(json.dumps(dict(samples=len(records), failed=[r['file'] for r in records if r['status'] != 'PASS'])))
 raise SystemExit(0 if len(records) == 32 and all(r['status'] == 'PASS' for r in records) else 1)

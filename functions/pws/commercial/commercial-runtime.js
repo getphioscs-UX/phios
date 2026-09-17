@@ -294,8 +294,8 @@ export function createCommercialRuntime(options = {}) {
       const price = runtime.resolvePrice(offer.price_code);
       const product = productRuntime.resolveProduct(offer.product_code);
       const reportProduct=REPORT_COMMERCE_CONTRACT.products.find(p=>p.productCode===product.product_code);
-      if(reportProduct&&!REPORT_COMMERCE_CONTRACT.policy.productionPaymentEnabled)throw new CommercialRuntimeError('PWS_REPORT_PRODUCTION_GATE_CLOSED','Report contract approval does not activate payment.');
       if(offer.status!=='active'||price.status!=='active'||product.state!=='active')throw new CommercialRuntimeError('PWS_OFFER_NOT_ACTIVE','Only active products, offers and prices may create orders.');
+      if(reportProduct&&!REPORT_COMMERCE_CONTRACT.policy.productionPaymentEnabled)throw new CommercialRuntimeError('PWS_REPORT_PRODUCTION_GATE_CLOSED','Report contract approval does not activate payment.');
       const productVersion = productRuntime.resolveProductVersion(
         product.product_code, offer.product_version
       );

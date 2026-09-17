@@ -17,13 +17,13 @@ const census=Object.entries(evidencePaths).map(([methodId,path])=>({methodId,pat
 write('inherited-campaigns.json',census);
 const admission=VISUAL_REPORT_PRODUCTS.map(p=>({...p,humanReview:'PENDING',customerPublishable:false,checkoutEnabled:false,paidValueAccepted:false,visualCandidateCases:caseRows.filter(c=>c.methodId===p.methodId).length,blockers:[...(p.methodId==='PROFILE'?['SOURCE_DEPTH_LIMITED_FOR_SINGLE_ENTRY_MODES']:[]),'HUMAN_FREE_VS_PAID_VALUE_REVIEW','EXISTING_PRODUCTION_PAYMENT_GATE_CLOSED']}));
 write('production-admission.json',{work:'VRPT-R1',status:'INTERNAL_REVIEW_ONLY',predecessorEcr:'REJECTED',products:admission,bundles:VISUAL_REPORT_BUNDLES,automaticHumanAcceptance:false});
-write('human-review-queue.json',{stage:'LAST_WITH_PIS_R1',predecessorDecisionRef:'predecessor-human-rejection.json',reports:admission.map(p=>({productId:p.productId,state:'PENDING',preview:`review.html?case=cases/${p.methodId}-01-zh-Hans.json&depth=paid`,blockers:p.blockers})),bundles:VISUAL_REPORT_BUNDLES.map(p=>({productId:p.productId,state:'PENDING',preview:'catalog.html',entitlementContract:'phi-os.pws.report-commerce-successor.v1'})),pis:{work:'PIS-R1',preview:'../public-index-successor/PIS-R1-HUMAN-REVIEW.html',historicalDecisionUnchanged:true},acceptanceOwner:'HUMAN_ONLY',productionAdmission:false});
+write('human-review-queue.json',{stage:'LAST_WITH_PIS_R1',predecessorDecisionRef:'predecessor-human-rejection.json',reports:admission.map(p=>({productId:p.productId,state:'PENDING',preview:`review.html?case=cases/${p.methodId}-01-zh-Hans.json&depth=paid`,blockers:p.blockers})),bundles:VISUAL_REPORT_BUNDLES.map(p=>({productId:p.productId,state:'PENDING',preview:'catalog.html',entitlementContract:'phi-os.pws.report-commerce-successor.v1'})),crossSuccessor:{work:'CROSS_HD_PROFILE_SUCCESSOR',state:'PENDING',preview:'cross-successor/review.html',authorityAudit:'cross-successor/AUDIT.md',productionAdmission:false},pis:{work:'PIS-R1',preview:'../public-index-successor/PIS-R1-HUMAN-REVIEW.html',historicalDecisionUnchanged:true},acceptanceOwner:'HUMAN_ONLY',productionAdmission:false});
 const minMax=a=>`${Math.min(...a)}–${Math.max(...a)}`;
 const table=VISUAL_REPORT_PRODUCTS.map(p=>{const cases=caseRows.filter(c=>c.methodId===p.methodId);return `| ${p.methodId} | ${cases.length} | ${minMax(cases.map(c=>c.data.free.pages.length))} | ${minMax(cases.map(c=>c.data.paid.pages.length))} | ${p.methodId==='PROFILE'?'来源自适应候选；部分入口不足以形成完整付费深度':'来源绑定候选；人工价值验收待定'} |`;}).join('\n');
 const screen=browser.results.flatMap(r=>r.pages),visualMin=Math.min(...screen.map(p=>p.visualRatio)),bodyMax=Math.max(...screen.map(p=>p.bodyRatio)),outsideTarget=screen.filter(p=>p.visualRatio<.55||p.visualRatio>.70).length;
 const status=`# VRPT-R1 · 交付状态与最后审核
 
-基于 013d3aa6e9d09ab079d0696a5d0b15905fac0783。上一轮 ECR R1/R1A 已记录 **REJECTED**：报告与 free version 没有分别。本轮是可追溯的视觉候选交付，**不是八个收费产品已验收、上线或 W0–W28 全部完成**。
+原工程基于 013d3aa；本次恢复与 Delta 基线为 **e192653ff4fbafad1feaffb9dc1c0fa4073ad215**。用户已将前段工作提交进该 main，本次继续时工作区干净。上一轮 ECR R1/R1A 已记录 **REJECTED**：报告与 free version 没有分别。本轮是可追溯的视觉候选交付，**不是八个收费产品已验收、上线或 W0–W28 全部完成**。
 
 入口：[八报告预览](review.html) · [商品与 Bundle 陈列](catalog.html) · [最后统一审核（含 PIS-R1）](final-review.html)。所有样本为明确标注的合成／既有测试样本，不是客户档案。
 
@@ -41,7 +41,7 @@ ECR R1/R1A 历史审核包保留；当前 admission 已改为 REJECTED。NUM 使
 
 ## D · PRODUCT REGISTRY
 
-8 个目标报告、3 个 Bundle、16 模板、21 图形组件已注册于现有 presentation 范围。[注册快照](presentation-registry.json)。目标价：BZR/ZWR/AST/NUM/PROFILE/ECR 各 MYR 39，HD 129，Cross 299；这些不是已启用 checkout 价格。
+8 个目标报告、3 个 Bundle、16 模板、21 图形组件已注册于现有 presentation 范围。[注册快照](presentation-registry.json)。用户批准的 Commerce authority 价格：BZR/ZWR/AST/NUM/PROFILE/ECR 各 MYR 39，HD 129，Cross 299；这些不是已启用 checkout 价格。
 
 ## E · FREE / PAID CONTRACT
 
@@ -81,7 +81,7 @@ T1 默认确定性组装；T2 只选择／排序完整已准入短句；T3 仅�
 
 ## M · BILINGUAL STATUS
 
-全部八方法均有 en / zh-Hans 页面。方法解释复用相应 locale owner；Cross 的五类关系边界仅作 presentation 翻译，原始方法贡献按 locale 从已有 owner 生成。源提供方名称、部分 Profile 分面代码和 HD 技术名保留。双语可读性及语义等价仍需人工审核，不能仅以两份文件存在判定通过。
+全部八方法均有 en / zh-Hans 页面。方法解释复用相应 locale owner；Cross 的五类关系边界仅作 presentation 翻译，原始方法贡献按 locale 从已有 owner 生成。HD / PROFILE Cross successor 另有 90 个双语审核案例，不改变既有五方法生产准入。源提供方名称、部分 Profile 分面代码和 HD 技术名保留。双语可读性及语义等价仍需人工审核，不能仅以两份文件存在判定通过。
 
 ## N · DESKTOP / MOBILE STATUS
 
@@ -109,7 +109,7 @@ ${pdf.sampleCount} 份 A4 PDF，${pdf.passCount} PASS；页数与 Page IR 相同
 
 ## T · PRODUCTION ADMISSION BY PRODUCT
 
-八报告及三 Bundle 均 CLOSED。详见 [逐产品准入](production-admission.json)。Profile 的来源深度不足单独阻断，其他产品也必须通过真实 Free vs Paid 人工价值评审、双语／视觉审核和相应权益契约后才可切换。
+八报告及三 Bundle 均 CLOSED。详见 [逐产品准入](production-admission.json)。Profile 的来源深度不足单独阻断；若干两节点图／单柱图的留白和重复边界说明也列入人工增量审核，机器 DOM 比例不能据此认定视觉质量合格。其他产品也必须通过真实 Free vs Paid 人工价值评审、双语／视觉审核和相应权益契约后才可切换。
 
 ## U · KNOWN BLOCKERS / CHAT DECISIONS
 
@@ -124,11 +124,11 @@ ${pdf.sampleCount} 份 A4 PDF，${pdf.passCount} PASS；页数与 Page IR 相同
 
 ## W · FULL npm run check RESULT
 
-\`npm run check\`：**${global.status}，exit ${global.exitCode}**。使用 \`scripts/run-check-windows.ps1\` 原样执行 precheck / check / postcheck。完整日志：[npm-run-check-final.log](validation/npm-run-check-final.log)。本轮新视觉检查另外以 \`npm run check:vrpt-r1\` 执行，通过日志：[focused-final.log](validation/focused-final.log)。未用分段 PASS 冒充全仓 PASS。
+\`npm run check\`：**${global.status}，exit ${global.exitCode}**。使用 \`scripts/run-check-windows.ps1\` 原样执行 precheck / check / postcheck。完整日志：[${global.log}](validation/${global.log})。本轮新视觉检查另外以 \`npm run check:vrpt-r1\` 执行，通过日志：[focused-final.log](validation/focused-final.log)。未用分段 PASS 冒充全仓 PASS。
 
 ## X · DOWNLOADABLE DELTA ZIP
 
-产物路径：\`output/delta/VRPT-R1-013d3aa.zip\`。SHA-256 与文件数量写入同目录 \`VRPT-R1-013d3aa.delivery.json\`。包内 REPLAY.md 指定基线、清洁 checkout、哈希核验、生成与测试命令；不含整仓、node_modules、.git 或临时浏览器 profile。
+产物路径：\`output/delta/VRPT-R1-COMMERCE-CROSS-HP-e192653.zip\`。SHA-256 与文件数量写入同目录 \`VRPT-R1-COMMERCE-CROSS-HP-e192653.delivery.json\`。包内 REPLAY.md 指定基线、清洁 checkout、哈希核验、生成与测试命令；不含整仓、node_modules、.git 或临时浏览器 profile。
 
 ## W0–W28 工作包边界
 
@@ -149,7 +149,17 @@ ${pdf.sampleCount} 份 A4 PDF，${pdf.passCount} PASS；页数与 Page IR 相同
 | W23 AI campaign | mock / fallback / timeout 已验证；真实 provider 未执行 |
 | W24 human review | 最后统一审核包已备，PENDING |
 | W25–W27 cutover / production / freeze | CLOSED，未执行 |
-| W28 delta | 工程候选 Delta；不是已准入产品 freeze |
+| W28 delta | 对 e192653 的 changes-only Delta；不是已准入产品 freeze |
+
+## Cross HD + PROFILE addendum
+
+[Authority 审计与适配器路径](cross-successor/AUDIT.md) · [90 场景与结果](cross-successor/cases.json) · [双语审核](cross-successor/review.html)。变更前／后正式 Cross 方法均为 AST / BZR / ZWR / NUM / ECR；HD / PROFILE 保持候选，机器通过不会自动入 production。
+
+HD 消费 R3 pre-editorial Reading IR 与完整 claim/source/rule lineage。PHI OS Profile 消费原始 signal envelope，保留来源类别、工具、日期、置信与 precision boundary；Quick / 低完整度信号为 OPEN，伪造提升会被拒绝。HD Profile 与 PHI OS Profile method IDs 分开。所有映射限定在既有 16 维，没有 CROSS-RUNTIME-2。
+
+14 类 UNMAPPED 保留为独立语义决策项，包括高级 HD modifier、Big Five 分面与无解释的导入字段；不计入支持票。Current Reality 存在／缺失均已覆盖，存在时仍独立展示，不越过既有 Cross integration gate。冲突分类用显式 synthetic unit inputs 测试，不伪装为真实客户反证。
+
+报告／Commerce／Cross 共用最后审核入口，PIS-R1 放在最后阶段。新增 Cross 专项核对九项；所有人工决定仍 PENDING。
 `;
 fs.writeFileSync(`${root}/STATUS.md`,status);
 console.log('Built A–X status, inherited campaign index and final human review queue.');
