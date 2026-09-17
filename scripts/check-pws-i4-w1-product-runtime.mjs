@@ -1,3 +1,4 @@
+import {REPORT_PRODUCT_DEFINITIONS} from '../functions/pws/commercial/report-successor-contract.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {
@@ -14,8 +15,8 @@ import {
 
 assert.equal(productRuntime.contract, PRODUCT_RUNTIME_CONTRACT);
 assert.equal(productRuntime.listProducts().filter(p=>p.state==='active').length, 2);
-assert.deepEqual(productRuntime.listProducts().filter(p=>p.state==='draft').map(p=>p.product_code), ['ecr-full-report']);
-assert.equal(productRuntime.listProducts().length, 3);
+assert.deepEqual(productRuntime.listProducts().filter(p=>p.state==='draft').map(p=>p.product_code), REPORT_PRODUCT_DEFINITIONS.map(p=>p.product_code));
+assert.equal(productRuntime.listProducts().length, 13);
 
 const book = productRuntime.resolveProduct('phios-book-one-zh-pdf');
 const legacyBook = productRuntime.resolveProduct('phios-book-one');

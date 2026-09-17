@@ -1,3 +1,4 @@
+import {CROSS_INPUT_SUCCESSOR_ADMISSION} from './cross-input-successor-admission.js';
 export const CROSS_PERSPECTIVE_INPUT_IR_SCHEMA='PHI-OS-CROSS-PERSPECTIVE-INPUT-IR-v1.0.0';
 const ENVELOPE_SCHEMA='PHI-OS-ACCEPTED-METHOD-READING-ENVELOPE-v1.0.0';
 const CLAIM_COLLECTION_SCHEMA='PHI-OS-CUSTOMER-READING-CLAIM-IR-COLLECTION-v1.0.0';
@@ -44,12 +45,17 @@ function normalizeClaim(claim,envelope){
   claimId:claim.claimId,methodId:claim.methodId,publicationState:'CUSTOMER_PUBLISHABLE',semanticDimension:claim.semanticDimension,claimType:claim.claimType,
   headline:claim.headline,structuralMeaning:claim.structuralMeaning,evidenceRefs,counterEvidenceRefs:uniq(claim.counterEvidenceRefs),
   conditionKinds:uniq((Array.isArray(claim.conditions)?claim.conditions:[]).map(item=>typeof item==='string'?item:item?.kind)),
-  boundaryRefs:uniq(claim.boundaries),interpretationUnitRefs:unitRefs
+  boundaryRefs:uniq(claim.boundaries),interpretationUnitRefs:unitRefs,
+  ...(['HD','PROFILE'].includes(claim.methodId)?{confidenceClass:claim.confidenceClass,evidenceConditions:claim.conditions,lineage:claim.lineage}: {})
  });
 }
-function normalizeMethodInput(envelope,claimCollection){
+function normalizeMethodInput(envelope,claimCollection,successorReview){
  if(envelope?.schemaVersion!==ENVELOPE_SCHEMA)fail('CROSS_ACCEPTED_METHOD_READING_ENVELOPE_REQUIRED');
- if(!METHODS.has(envelope.methodId))fail('CROSS_PUBLIC_METHOD_NOT_ALLOWED',{methodId:envelope?.methodId});
+ if(!METHODS.has(envelope.methodId)){
+  if(!successorReview||!CROSS_INPUT_SUCCESSOR_ADMISSION.candidateMethodIds.includes(envelope.methodId))fail('CROSS_PUBLIC_METHOD_NOT_ALLOWED',{methodId:envelope?.methodId});
+  if(envelope.productionAdmission?.customerPublishable!==true||envelope.successorAdapterId!==`CROSS-${envelope.methodId}-ACCEPTED-ENVELOPE-v1`||envelope.boundary?.renderedProseConsumed!==false||envelope.boundary?.rawSymbolInference!==false)fail('CROSS_SUCCESSOR_ADAPTER_OR_ADMISSION_REQUIRED');
+  for(const claim of claimCollection?.claims||[])if(!claim.lineage?.projectionRefs?.length||!claim.lineage?.meaningRefs?.length||!claim.lineage?.ruleRefs?.length||claim.lineage.semanticDigest!==envelope.semanticDigest)fail('CROSS_SUCCESSOR_COMPLETE_CLAIM_LINEAGE_REQUIRED');
+ }
  if(envelope.boundary?.acceptedAuthorityOnly!==true||envelope.boundary?.newMeaningCreated!==false)fail('CROSS_ACCEPTED_METHOD_BOUNDARY_REQUIRED',{methodId:envelope.methodId});
  if(!envelope.productionAdmissionRef||!envelope.readingAuthorityRef||!envelope.semanticDigest)fail('CROSS_METHOD_PRODUCTION_LINEAGE_REQUIRED',{methodId:envelope.methodId});
  if(claimCollection?.schemaVersion!==CLAIM_COLLECTION_SCHEMA||claimCollection.methodId!==envelope.methodId)fail('CROSS_CLAIM_COLLECTION_REQUIRED',{methodId:envelope.methodId});
@@ -74,20 +80,21 @@ function normalizeHdr(reading){
  return freeze({schemaVersion:HDR_SCHEMA,visibility:'INTERNAL_ONLY',readingDigest:reading.readingDigest,contextRef:`HDR:${reading.readingDigest}`,countsTowardMethodAgreement:false,publicLeakAllowed:false});
 }
 
-export async function buildCrossPerspectiveInputIR(input={}){
+export async function buildCrossPerspectiveInputIR(input={}, {successorReview=false}={}){
  if(!input||typeof input!=='object'||Array.isArray(input))fail('CROSS_INPUT_OBJECT_REQUIRED');
  for(const key of Object.keys(input))if(!ALLOWED_INPUT_KEYS.has(key))fail('CROSS_INPUT_FIELD_NOT_ALLOWED',{key});
  assertNoSmrProseBackfeed(input);
  const envelopes=Array.isArray(input.acceptedMethodReadingEnvelopes)?input.acceptedMethodReadingEnvelopes:[];
  const claimCollections=Array.isArray(input.claimCollections)?input.claimCollections:[];
- if(envelopes.length<2||envelopes.length>5||claimCollections.length!==envelopes.length)fail('CROSS_REQUIRES_TWO_TO_FIVE_ACCEPTED_METHODS');
+ if(envelopes.length<2||envelopes.length>(successorReview?7:5)||claimCollections.length!==envelopes.length)fail(successorReview?'CROSS_REQUIRES_TWO_TO_SEVEN_REVIEW_METHODS':'CROSS_REQUIRES_TWO_TO_FIVE_ACCEPTED_METHODS');
  const claimByMethod=new Map(claimCollections.map(collection=>[collection?.methodId,collection]));
- const methodInputs=envelopes.map(envelope=>normalizeMethodInput(envelope,claimByMethod.get(envelope?.methodId)));
+ const methodInputs=envelopes.map(envelope=>normalizeMethodInput(envelope,claimByMethod.get(envelope?.methodId),successorReview));
  const methodIds=methodInputs.map(item=>item.methodId);if(new Set(methodIds).size!==methodIds.length)fail('CROSS_DUPLICATE_PUBLIC_METHOD');
  methodInputs.sort((a,b)=>a.methodId.localeCompare(b.methodId));
  const xpfContext=normalizeXpf(input.confirmedXpf??null),hdrInternalContext=normalizeHdr(input.hdrInternalReading??null);
  const sourceDigests=uniq([...methodInputs.map(item=>item.semanticDigest),xpfContext?.profileDigest,hdrInternalContext?.readingDigest]);
  const seed={schemaVersion:CROSS_PERSPECTIVE_INPUT_IR_SCHEMA,methodInputs,xpfContext,hdrInternalContext,sourceDigests,boundaries:{smrProseConsumed:false,rawProjectionConsumedAsCrossConclusion:false,rawSymbolMappedDirectly:false,allPublicMethodClaimsCustomerPublishable:true,xpfCountsTowardAgreement:false,hdrCountsTowardAgreement:false,hdrPublicLeakAllowed:false,currentRealityInputActivated:false,methodVotingAllowed:false}};
+ if(successorReview)seed.successorReview={state:'REVIEW_ONLY',customerPublishable:false,admissionRef:CROSS_INPUT_SUCCESSOR_ADMISSION.authorityRef};
  const inputDigest=await sha256(seed);
  return freeze({...seed,inputDigest});
 }

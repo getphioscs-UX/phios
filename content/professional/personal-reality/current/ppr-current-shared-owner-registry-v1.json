@@ -393,10 +393,11 @@
       }
     },
     "assets/customer-ui/js/specialists/ecr/product-renderer.js": {
-      "currentSha256": "bc623d8182bf8fbbffdd48bd5bd5c67429d4a15ad4cb82c440dd12abac1b9c28",
+      "currentSha256": "a48c6caa2d35cec10e86327113a2beea87b0cf4fa01ac42bd23766e1ce42b5ca",
       "recognizedPredecessors": [
         "138b0ceca23da1b7ccd94dcc49c08e274d91e12669e4f6fde58df26025199753",
-        "07289adfbf45cf1b69f4bb3358bdc17d4a0b77bd972fe763cb991c7a921886a6"
+        "07289adfbf45cf1b69f4bb3358bdc17d4a0b77bd972fe763cb991c7a921886a6",
+        "bc623d8182bf8fbbffdd48bd5bd5c67429d4a15ad4cb82c440dd12abac1b9c28"
       ],
       "requiredTokens": [
         "export function renderEcrProduct",
@@ -411,7 +412,30 @@
       "fullReportSuccessor": {
         "work": "ECR-FULL-R1",
         "scope": "Use existing specialist for explicit full-report edition; legacy branch retained; no meaning or calculation creation",
-        "humanReview": "PENDING"
+        "humanReview": "REJECTED"
+      },
+      "visualReportSuccessor": {
+        "work": "VRPT-R1",
+        "humanReview": "PENDING",
+        "customerPublishable": false,
+        "scope": "Explicit internal visual report presentation only; preserve legacy defaults"
+      }
+    },
+    "assets/customer-ui/js/specialists/ecr/mandala-renderer.js": {
+      "currentSha256": "2d24c9654e72ab4ecd6b61ce33d752ecdb7c038c35cd547b8cacff3b71f7b590",
+      "recognizedPredecessors": [],
+      "requiredTokens": [
+        "renderPhiMandalaVisual",
+        "svgOnly"
+      ],
+      "forbiddenTokens": [
+        "resolveEcrCoordinateFromSolarLongitude",
+        "calculateEcrSolarAnchor"
+      ],
+      "visualReportSuccessor": {
+        "work": "VRPT-R1",
+        "humanReview": "PENDING",
+        "customerPublishable": false
       }
     }
   },

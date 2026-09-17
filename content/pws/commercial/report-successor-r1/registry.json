@@ -1,0 +1,172 @@
+{
+  "contractId": "phi-os.pws.report-commerce-successor.v1",
+  "version": "1.0.0",
+  "effectiveAt": "2026-09-17T00:00:00.000Z",
+  "owner": "PWS_COMMERCIAL_RUNTIME",
+  "approval": {
+    "source": "EXPLICIT_USER_APPROVED_SUCCESSOR_INPUT",
+    "baseline": "1046e1ee66db5403142c76f6754729de36d37ce7",
+    "successor": "013d3aa6e9d09ab079d0696a5d0b15905fac0783",
+    "date": "2026-09-17"
+  },
+  "products": [
+    {
+      "productId": "BAZI_FULL_REPORT",
+      "productCode": "bazi-full-report",
+      "methodId": "BZR",
+      "kind": "SINGLE_METHOD",
+      "amountMinor": 3900,
+      "currency": "MYR",
+      "bundleEligible": true,
+      "entitlementKey": "report:bazi:full",
+      "selection": null
+    },
+    {
+      "productId": "ZIWEI_FULL_REPORT",
+      "productCode": "ziwei-full-report",
+      "methodId": "ZWR",
+      "kind": "SINGLE_METHOD",
+      "amountMinor": 3900,
+      "currency": "MYR",
+      "bundleEligible": true,
+      "entitlementKey": "report:ziwei:full",
+      "selection": null
+    },
+    {
+      "productId": "ASTROLOGY_FULL_REPORT",
+      "productCode": "astrology-full-report",
+      "methodId": "AST",
+      "kind": "SINGLE_METHOD",
+      "amountMinor": 3900,
+      "currency": "MYR",
+      "bundleEligible": true,
+      "entitlementKey": "report:astrology:full",
+      "selection": null
+    },
+    {
+      "productId": "PROFILE_FULL_REPORT",
+      "productCode": "profile-full-report",
+      "methodId": "PROFILE",
+      "kind": "SINGLE_METHOD",
+      "amountMinor": 3900,
+      "currency": "MYR",
+      "bundleEligible": true,
+      "entitlementKey": "report:profile:full",
+      "selection": null
+    },
+    {
+      "productId": "NUMEROLOGY_FULL_REPORT",
+      "productCode": "numerology-full-report",
+      "methodId": "NUM",
+      "kind": "SINGLE_METHOD",
+      "amountMinor": 3900,
+      "currency": "MYR",
+      "bundleEligible": true,
+      "entitlementKey": "report:numerology:full",
+      "selection": null
+    },
+    {
+      "productId": "ECR_FULL_REPORT",
+      "productCode": "ecr-full-report",
+      "methodId": "ECR",
+      "kind": "SINGLE_METHOD",
+      "amountMinor": 3900,
+      "currency": "MYR",
+      "bundleEligible": true,
+      "entitlementKey": "report:ecr:full",
+      "selection": null
+    },
+    {
+      "productId": "HD_FULL_REPORT",
+      "productCode": "hd-full-report",
+      "methodId": "HD",
+      "kind": "SINGLE_METHOD",
+      "amountMinor": 12900,
+      "currency": "MYR",
+      "bundleEligible": false,
+      "entitlementKey": "report:hd:full",
+      "selection": null
+    },
+    {
+      "productId": "CROSS_FULL_REPORT",
+      "productCode": "cross-full-report",
+      "methodId": "CROSS",
+      "kind": "SYNTHESIS",
+      "amountMinor": 29900,
+      "currency": "MYR",
+      "bundleEligible": false,
+      "entitlementKey": "report:cross:full",
+      "selection": null
+    },
+    {
+      "productId": "BUNDLE_2",
+      "productCode": "bundle-2",
+      "methodId": null,
+      "kind": "BUNDLE",
+      "amountMinor": 6900,
+      "currency": "MYR",
+      "bundleEligible": false,
+      "entitlementKey": null,
+      "selection": {
+        "min": 2,
+        "max": 2,
+        "eligibilityRegistry": "standard-myr39-v1",
+        "distinct": true
+      }
+    },
+    {
+      "productId": "BUNDLE_3",
+      "productCode": "bundle-3",
+      "methodId": null,
+      "kind": "BUNDLE",
+      "amountMinor": 9900,
+      "currency": "MYR",
+      "bundleEligible": false,
+      "entitlementKey": null,
+      "selection": {
+        "min": 3,
+        "max": 3,
+        "eligibilityRegistry": "standard-myr39-v1",
+        "distinct": true
+      }
+    },
+    {
+      "productId": "BUNDLE_5PLUS",
+      "productCode": "bundle-5plus",
+      "methodId": null,
+      "kind": "BUNDLE",
+      "amountMinor": 15900,
+      "currency": "MYR",
+      "bundleEligible": false,
+      "entitlementKey": null,
+      "selection": {
+        "min": 5,
+        "max": null,
+        "eligibilityRegistry": "standard-myr39-v1",
+        "distinct": true
+      }
+    }
+  ],
+  "eligibilityRegistries": [
+    {
+      "registryId": "standard-myr39-v1",
+      "productIds": [
+        "BAZI_FULL_REPORT",
+        "ZIWEI_FULL_REPORT",
+        "ASTROLOGY_FULL_REPORT",
+        "PROFILE_FULL_REPORT",
+        "NUMEROLOGY_FULL_REPORT",
+        "ECR_FULL_REPORT"
+      ]
+    }
+  ],
+  "policy": {
+    "bundleCreatesCross": false,
+    "crossGrantsSingleMethods": false,
+    "selectionIsEntitlement": false,
+    "clientPaymentSuccessIsAuthority": false,
+    "productionPaymentEnabled": false,
+    "activationOwner": "EXISTING_PWS_COMMERCE_GATE",
+    "entitlementActivationRequires": "SERVER_VERIFIED_PAYMENT_AND_PRODUCT_ADMISSION"
+  }
+}

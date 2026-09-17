@@ -1,0 +1,26 @@
+// Additive configuration and selection policy for the existing PWS owners.
+// No orders, payment sessions or entitlement state live in this module.
+const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
+export const REPORT_COMMERCE_CONTRACT_ID='phi-os.pws.report-commerce-successor.v1';
+const version='1.0.0',effectiveAt='2026-09-17T00:00:00.000Z';
+const singles=[['BAZI','BZR',3900],['ZIWEI','ZWR',3900],['ASTROLOGY','AST',3900],['PROFILE','PROFILE',3900],['NUMEROLOGY','NUM',3900],['ECR','ECR',3900],['HD','HD',12900],['CROSS','CROSS',29900]].map(([name,methodId,amountMinor])=>({productId:`${name}_FULL_REPORT`,productCode:`${name.toLowerCase()}-full-report`,methodId,kind:methodId==='CROSS'?'SYNTHESIS':'SINGLE_METHOD',amountMinor,currency:'MYR',bundleEligible:amountMinor===3900,entitlementKey:`report:${name.toLowerCase()}:full`,selection:null}));
+const bundles=[['BUNDLE_2',6900,2,2],['BUNDLE_3',9900,3,3],['BUNDLE_5PLUS',15900,5,null]].map(([productId,amountMinor,min,max])=>({productId,productCode:productId.toLowerCase().replaceAll('_','-'),methodId:null,kind:'BUNDLE',amountMinor,currency:'MYR',bundleEligible:false,entitlementKey:null,selection:{min,max,eligibilityRegistry:'standard-myr39-v1',distinct:true}}));
+export const REPORT_COMMERCE_CONTRACT=freeze({contractId:REPORT_COMMERCE_CONTRACT_ID,version,effectiveAt,owner:'PWS_COMMERCIAL_RUNTIME',approval:{source:'EXPLICIT_USER_APPROVED_SUCCESSOR_INPUT',baseline:'1046e1ee66db5403142c76f6754729de36d37ce7',successor:'013d3aa6e9d09ab079d0696a5d0b15905fac0783',date:'2026-09-17'},products:[...singles,...bundles],eligibilityRegistries:[{registryId:'standard-myr39-v1',productIds:singles.filter(p=>p.bundleEligible).map(p=>p.productId)}],policy:{bundleCreatesCross:false,crossGrantsSingleMethods:false,selectionIsEntitlement:false,clientPaymentSuccessIsAuthority:false,productionPaymentEnabled:false,activationOwner:'EXISTING_PWS_COMMERCE_GATE',entitlementActivationRequires:'SERVER_VERIFIED_PAYMENT_AND_PRODUCT_ADMISSION'}});
+export const REPORT_PRODUCT_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products.map(p=>({product_code:p.productCode,display_name:p.productId.replaceAll('_',' '),product_type_code:'knowledge_product',state:'draft',current_version:version,legacy_product_ids:[],versions:[{version,status:'active',effective_at:effectiveAt,components:[{component_code:`${p.productCode}-reading`,component_type:'knowledge_access',configuration:{knowledge_asset_id:p.productId,access_scope:p.kind==='BUNDLE'?'selected_independent_full_reports':'single_subject_full_report',...(p.methodId?{method_code:p.methodId}:{selection_policy_ref:REPORT_COMMERCE_CONTRACT_ID,eligibility_registry_ref:p.selection.eligibilityRegistry})}}]}]})));
+export const REPORT_PRICE_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products.map(p=>({price_code:`${p.productCode}-myr`,price_version:version,currency_code:p.currency,amount_minor:p.amountMinor,status:'draft',effective_at:effectiveAt})));
+export const REPORT_OFFER_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products.map(p=>({offer_code:`${p.productCode}-myr`,offer_version:version,display_name:p.productId.replaceAll('_',' '),product_code:p.productCode,product_version:version,price_code:`${p.productCode}-myr`,region_code:'my',customer_segment_code:'public-customer',status:'draft'})));
+export function resolveReportProduct(reference){const p=REPORT_COMMERCE_CONTRACT.products.find(p=>p.productId===reference||p.productCode===reference);if(!p)throw new Error('PWS_REPORT_PRODUCT_NOT_FOUND');return p;}
+export function eligibleReportIds(bundleId){const p=resolveReportProduct(bundleId);if(p.kind!=='BUNDLE')throw new Error('PWS_REPORT_BUNDLE_REQUIRED');return REPORT_COMMERCE_CONTRACT.eligibilityRegistries.find(r=>r.registryId===p.selection.eligibilityRegistry).productIds;}
+// This returns an entitlement mapping plan, never a grant or payment assertion.
+export function mapReportEntitlements(productId,selectedProductIds=[]){
+ const p=resolveReportProduct(productId);if(!Array.isArray(selectedProductIds))throw new Error('PWS_REPORT_SELECTION_ARRAY_REQUIRED');
+ let ids;
+ if(p.kind==='BUNDLE'){
+  const eligible=eligibleReportIds(p.productId),{min,max}=p.selection;
+  if(selectedProductIds.length<min||selectedProductIds.length>(max??eligible.length))throw new Error('PWS_REPORT_SELECTION_COUNT');
+  if(new Set(selectedProductIds).size!==selectedProductIds.length)throw new Error('PWS_REPORT_SELECTION_DUPLICATE');
+  if(selectedProductIds.some(id=>!eligible.includes(id)))throw new Error('PWS_REPORT_SELECTION_INELIGIBLE');
+  ids=eligible.filter(id=>selectedProductIds.includes(id));
+ }else{if(selectedProductIds.length)throw new Error('PWS_REPORT_SINGLE_SELECTION_FORBIDDEN');ids=[p.productId];}
+ return freeze({contractId:REPORT_COMMERCE_CONTRACT_ID,version,productId:p.productId,selectedProductIds:ids,entitlements:ids.map(id=>{const r=resolveReportProduct(id);return {productId:id,entitlementKey:r.entitlementKey,scope:r.kind==='SYNTHESIS'?'CROSS_SYNTHESIS':'INDEPENDENT_SINGLE_METHOD_REPORT',methodId:r.methodId};}),createsCrossReading:false,grantsEntitlement:false,requiresVerifiedPayment:true,requiresProductAdmission:true});
+}

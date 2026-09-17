@@ -168,6 +168,20 @@ for (const protectedPath of fixture.protectedPaths) {
   ]).split('\n').filter(Boolean);
   if (!changedFiles.length) continue;
 
+  if (protectedPath === 'functions/runtime') {
+    const ecrLocales = read('content/web-production/reconciliation/pds-w0-ecr-full-r1-locale-successor-v1.json');
+    assert.equal(ecrLocales.baselineFilesMayChange, false);
+    assert.equal(ecrLocales.newUnregisteredFilesAllowed, false);
+    assert.deepEqual([...changedFiles].sort(), ecrLocales.files.map(x => x.path).sort(), 'PDS_W0_ECR_LOCALE_TOPOLOGY_DRIFT');
+    for (const entry of ecrLocales.files) {
+      assert.equal(baselineFiles.includes(entry.path), false, 'PDS_W0_ECR_BASELINE_FILE_CHANGED');
+      assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_ECR_LOCALE_DRIFT:${entry.path}`);
+      const committed = git(['show', `${ecrLocales.sourceCommit}:${entry.path}`]).replace(/\r\n?/g, '\n');
+      assert.equal(committed, text(entry.path).trim(), `PDS_W0_ECR_LOCALE_BASELINE_MISMATCH:${entry.path}`);
+    }
+    continue;
+  }
+
   if (protectedPath === 'db/migrations') {
     assert.ok(changedFiles.every(file => !baselineFiles.includes(file) && registeredMigrations.has(file)), 'PDS_W0_UNAUTHORIZED_MIGRATION_CHANGE');
     continue;

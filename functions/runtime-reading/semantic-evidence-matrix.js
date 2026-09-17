@@ -1,4 +1,5 @@
 import {SHARED_SEMANTIC_DIMENSIONS,METHOD_SEMANTIC_DIMENSION_MAPPING,METHOD_SEMANTIC_DIMENSION_FAMILY_MAPPING,XPF_CONTEXT_DIMENSION_MAPPING} from './cross-semantic-registry-v2.js';
+import {CROSS_SUCCESSOR_MAPPING} from './cross-successor-semantic-mapping.js';
 export const SEMANTIC_EVIDENCE_MATRIX_SCHEMA='PHI-OS-SEMANTIC-EVIDENCE-MATRIX-v1.0.0';
 const INPUT_SCHEMA='PHI-OS-CROSS-PERSPECTIVE-INPUT-IR-v1.0.0';
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const child of Object.values(value))freeze(child)}return value};
@@ -14,7 +15,7 @@ function claimSubject(claim){
 export function mapCustomerPublishableClaim(claim){
  if(claim?.publicationState!=='CUSTOMER_PUBLISHABLE')fail('CROSS_MATRIX_CUSTOMER_PUBLISHABLE_CLAIM_REQUIRED',{claimId:claim?.claimId});
  const subject=claimSubject(claim);if(!subject)return freeze({claimRef:claim.claimId,methodId:claim.methodId,subject:null,dimensions:[]});
- const exact=METHOD_SEMANTIC_DIMENSION_MAPPING[claim.methodId]?.[subject]||[];
+ const exact=METHOD_SEMANTIC_DIMENSION_MAPPING[claim.methodId]?.[subject]||CROSS_SUCCESSOR_MAPPING[claim.methodId]?.[subject]||[];
  const family=exact.length?null:(METHOD_SEMANTIC_DIMENSION_FAMILY_MAPPING[claim.methodId]||[]).find(rule=>new RegExp(rule.subjectPattern).test(subject));
  const dimensions=exact.length?exact:(family?.dimensions||[]);
  return freeze({claimRef:claim.claimId,methodId:claim.methodId,subject,dimensions:uniq(dimensions),mappingBasis:exact.length?'EXACT_CLAIM_SUBJECT':family?'CLAIM_FAMILY_PATTERN':'UNMAPPED'});
@@ -25,6 +26,7 @@ export async function buildSemanticEvidenceMatrix(crossInput){
  const rows=new Map(SHARED_SEMANTIC_DIMENSIONS.map(d=>[d.code,{dimension:d.code,methodClaimRefs:[],supports:[],tensions:[],open:[],xpfContextRefs:[],currentRealityRefs:[]}]))
  const unmappedClaimRefs=[];
  for(const method of crossInput.methodInputs||[]){
+  if(['HD','PROFILE'].includes(method.methodId)&&crossInput.successorReview?.state!=='REVIEW_ONLY')fail('CROSS_SUCCESSOR_REVIEW_GATE_REQUIRED');
   if(method.publicationState!=='CUSTOMER_PUBLISHABLE')fail('CROSS_MATRIX_METHOD_PUBLICATION_STATE_REQUIRED',{methodId:method.methodId});
   for(const claim of method.claims||[]){
    const mapped=mapCustomerPublishableClaim(claim);

@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PWS additive report commerce successor",
+  "type": "object",
+  "required": [
+    "contractId",
+    "version",
+    "effectiveAt",
+    "owner",
+    "approval",
+    "products",
+    "eligibilityRegistries",
+    "policy"
+  ],
+  "properties": {
+    "contractId": {
+      "const": "phi-os.pws.report-commerce-successor.v1"
+    },
+    "version": {
+      "const": "1.0.0"
+    },
+    "effectiveAt": {
+      "type": "string"
+    },
+    "owner": {
+      "const": "PWS_COMMERCIAL_RUNTIME"
+    },
+    "approval": {
+      "type": "object",
+      "required": [
+        "source",
+        "baseline",
+        "successor",
+        "date"
+      ]
+    },
+    "products": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "required": [
+          "productId",
+          "productCode",
+          "methodId",
+          "kind",
+          "amountMinor",
+          "currency",
+          "bundleEligible",
+          "entitlementKey",
+          "selection"
+        ],
+        "properties": {
+          "productId": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          },
+          "productCode": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "methodId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "SINGLE_METHOD",
+              "SYNTHESIS",
+              "BUNDLE"
+            ]
+          },
+          "amountMinor": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "currency": {
+            "const": "MYR"
+          },
+          "bundleEligible": {
+            "type": "boolean"
+          },
+          "entitlementKey": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "selection": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "min",
+              "max",
+              "eligibilityRegistry",
+              "distinct"
+            ],
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "max": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "eligibilityRegistry": {
+                "const": "standard-myr39-v1"
+              },
+              "distinct": {
+                "const": true
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "eligibilityRegistries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "registryId",
+          "productIds"
+        ],
+        "properties": {
+          "registryId": {
+            "type": "string"
+          },
+          "productIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "policy": {
+      "type": "object",
+      "required": [
+        "bundleCreatesCross",
+        "crossGrantsSingleMethods",
+        "selectionIsEntitlement",
+        "clientPaymentSuccessIsAuthority",
+        "productionPaymentEnabled",
+        "activationOwner",
+        "entitlementActivationRequires"
+      ],
+      "properties": {
+        "bundleCreatesCross": {
+          "const": false
+        },
+        "crossGrantsSingleMethods": {
+          "const": false
+        },
+        "selectionIsEntitlement": {
+          "const": false
+        },
+        "clientPaymentSuccessIsAuthority": {
+          "const": false
+        },
+        "productionPaymentEnabled": {
+          "const": false
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

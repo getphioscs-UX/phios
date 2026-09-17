@@ -1,5 +1,6 @@
-// Product and commercial configuration owned by the existing PWS runtimes.
+// Compatibility exports: the additive PWS successor is the definition owner.
+import {REPORT_PRODUCT_DEFINITIONS,REPORT_PRICE_DEFINITIONS,REPORT_OFFER_DEFINITIONS} from './commercial/report-successor-contract.js';
 export const ECR_FULL_REPORT_BINDING=Object.freeze({productId:'ECR_FULL_REPORT',methodId:'ECR',productCode:'ecr-full-report',offerCode:'ecr-full-report-myr',version:'1.0.0'});
-export const ECR_FULL_REPORT_PRODUCT={product_code:'ecr-full-report',display_name:'ECR FULL REPORT',product_type_code:'knowledge_product',state:'draft',current_version:'1.0.0',legacy_product_ids:[],versions:[{version:'1.0.0',status:'active',effective_at:'2026-09-17T00:00:00.000Z',components:[{component_code:'ecr-full-report-reading',component_type:'knowledge_access',configuration:{knowledge_asset_id:'ECR_FULL_REPORT',access_scope:'single_subject_full_report',method_code:'ECR'}}]}]};
-export const ECR_FULL_REPORT_PRICE={price_code:'ecr-full-report-myr',price_version:'1.0.0',currency_code:'MYR',amount_minor:3900,status:'draft',effective_at:'2026-09-17T00:00:00.000Z'};
-export const ECR_FULL_REPORT_OFFER={offer_code:'ecr-full-report-myr',offer_version:'1.0.0',display_name:'ECR FULL REPORT',product_code:'ecr-full-report',product_version:'1.0.0',price_code:'ecr-full-report-myr',region_code:'my',customer_segment_code:'public-customer',status:'draft'};
+export const ECR_FULL_REPORT_PRODUCT=REPORT_PRODUCT_DEFINITIONS.find(p=>p.product_code==='ecr-full-report');
+export const ECR_FULL_REPORT_PRICE=REPORT_PRICE_DEFINITIONS.find(p=>p.price_code==='ecr-full-report-myr');
+export const ECR_FULL_REPORT_OFFER=REPORT_OFFER_DEFINITIONS.find(p=>p.offer_code==='ecr-full-report-myr');
