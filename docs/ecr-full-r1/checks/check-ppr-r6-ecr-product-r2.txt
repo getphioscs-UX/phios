@@ -1,0 +1,18 @@
+
+> check:ppr-r6-ecr-product-r2
+> npm run check:ppr-r6-canonical-input-determinism && npm run check:ecr-product-r2
+
+
+> check:ppr-r6-canonical-input-determinism
+> node scripts/check-ppr-r6-canonical-input-determinism.mjs
+
+✓ PPR-R6 canonical-input determinism passed.
+  Confirmed birth location is frozen once and reused; provider resolvedAt is excluded; birth date/time/provider mismatches fail closed.
+  Method evidence: AST 12/12 replay; BZR 96/96 incl. DETERMINISM; NUM same-input projection acceptance; ZWR 8/8 replay; ECR deterministic PHI Card mapping.
+  Zi Wei timing now consumes the explicit shared target owner; customer date/time/place remain explicit and browser/device current time or timezone are never auto-seeded.
+
+> check:ecr-product-r2
+> node scripts/check-ecr-product-r2-solar-anchor-explanation.mjs
+
+✓ ECR Product R2 Solar Anchor explanation + PHI Card presentation passed.
+  Solar Anchor v1 stays single-anchor; default Reality Comparison card wall is removed; empty flow/tension sections suppress; PHI Cards render complete and readable; generic Human Design boundary is visibly rendered.

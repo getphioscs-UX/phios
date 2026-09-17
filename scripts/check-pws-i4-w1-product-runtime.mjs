@@ -13,7 +13,9 @@ import {
 } from '../functions/pws/registry/product-offer-registry.js';
 
 assert.equal(productRuntime.contract, PRODUCT_RUNTIME_CONTRACT);
-assert.equal(productRuntime.listProducts().length, 2);
+assert.equal(productRuntime.listProducts().filter(p=>p.state==='active').length, 2);
+assert.deepEqual(productRuntime.listProducts().filter(p=>p.state==='draft').map(p=>p.product_code), ['ecr-full-report']);
+assert.equal(productRuntime.listProducts().length, 3);
 
 const book = productRuntime.resolveProduct('phios-book-one-zh-pdf');
 const legacyBook = productRuntime.resolveProduct('phios-book-one');

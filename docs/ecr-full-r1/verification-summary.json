@@ -1,0 +1,62 @@
+{
+  "work": "ECR-FULL-R1 + ECR-FULL-R1A",
+  "status": "PASS_SEGMENTED_FULL_PIPELINE",
+  "singleNpmInvocationPassed": false,
+  "executionNote": "npm precheck and check were run in order. Historical digest/icon failures were repaired through explicit successors and resumed at the failing stage. Deep npm nesting on Windows lost node resolution; the remaining npm commands and lifecycle hooks were expanded in the same order into independent processes. No tests skipped.",
+  "coverage": [
+    {
+      "from": "npm precheck",
+      "through": "check:ppr-current-shared-owner",
+      "status": "PASS",
+      "log": "checks/npm-check-r1-r1a-final.log"
+    },
+    {
+      "from": "check:ecr-mandala",
+      "through": "check:ppr-r2:post-machine-human-gate",
+      "status": "PASS",
+      "log": "checks/npm-check-remainder.log"
+    },
+    {
+      "from": "check:integrated-phase0",
+      "through": "check:integrated-phase0",
+      "status": "PASS",
+      "log": "checks/npm-check-phase0-remainder.log"
+    },
+    {
+      "from": "check:integrated-phase1",
+      "through": "check:integrated-phase7",
+      "status": "PASS",
+      "log": "checks/npm-check-expanded-remainder.log"
+    },
+    {
+      "from": "check:pvp-r1:ecr-phase8",
+      "through": "all remaining check plus postcheck",
+      "status": "PASS",
+      "leafCommands": 145,
+      "log": "checks/npm-check-expanded-phase8.log"
+    }
+  ],
+  "focused": {
+    "coreStructuralCases": 64,
+    "coreBilingualExecutions": 128,
+    "contextCases": 96,
+    "contextScenarioLocaleCells": 24,
+    "casesPerContextScenarioLocale": 4,
+    "reportBrowserCases": 8,
+    "iconBrowserCases": 8,
+    "printSamples": 4,
+    "exactDisplayedDigestChecks": 2,
+    "sharedOwnerPaths": 16,
+    "pis": "PASS",
+    "visualRegistry": "PASS",
+    "productRuntime": "PASS"
+  },
+  "human": {
+    "core": "PENDING",
+    "context": "PENDING",
+    "icons": "PENDING",
+    "pis": "UNCHANGED_PENDING"
+  },
+  "productionAdmission": false,
+  "checkoutActive": false
+}

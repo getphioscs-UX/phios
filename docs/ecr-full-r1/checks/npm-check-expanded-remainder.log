@@ -1,0 +1,394 @@
+
+RUN node scripts/check-cx-r0-baseline.mjs
+✓ CX-R0 historical freeze passed at f6d31da: 134 frozen customer HTML surfaces, 86 frozen stylesheet consumers, 77 frozen script consumers.
+✓ CX-R0 checker no longer regenerates the R0 census from a later R3/R4 working tree; live R1 guards remain separate.
+✓ CX-R0 ACCEPTED: CURRENT_SURFACE_INVENTORY_COMPLETE · LEGACY_DEPENDENCIES_MAPPED · NO_SECOND_AUTHORITY · READY_FOR_QUARANTINE
+
+RUN node scripts/check-cx-r1-quarantine.mjs
+✓ CX-R1 current quarantine passed: 124 legacy/predecessor presentations frozen; 10 existing CX surfaces explicitly require successor reconciliation.
+✓ CX-R1 ACCEPTED: LEGACY_PRESENTATION_QUARANTINED · NEW_CUSTOMER_SURFACES_CLEAN_ROOM_READY
+
+RUN node scripts/check-cx-no-legacy-css.mjs
+✓ CX-R1-W2 legacy CSS import guard passed: 189 CX HTML surfaces + customer-ui sources contain 0 frozen legacy stylesheet imports.
+
+RUN node scripts/check-cx-no-legacy-selectors.mjs
+✓ CX-R1-W3 legacy namespace guard passed: 0 puxr-/public-/rs-/pr-/px2-/wpr-/phi-public- references in CX implementation.
+
+RUN node scripts/check-cx-no-old-component-copy.mjs
+✓ CX-R1-W4 old component signature guard passed: 10 frozen legacy composition signatures cannot enter CX implementation.
+
+RUN node scripts/check-cx-r1a-hard-cutover-preparation.mjs
+✓ CX-R1A hard-cutover preparation passed: canonical Ask target is /knowledge/ask/; 3 current cutover blockers are explicitly recorded, not hidden.
+✓ CX-R1A ACCEPTED: preparation complete, no premature route cutover or physical legacy deletion performed.
+
+RUN node scripts/check-cx-no-legacy-route-reference.mjs
+✓ CX legacy-route guard passed across 137 clean-room customer source files.
+
+RUN node scripts/check-cx-r2-information-architecture.mjs
+✓ CX-R2 Customer IA / Route Authority passed at f6d31da: 8-step internal spine, 3 primary intents, 5 primary navigation domains, 40 canonical route targets, 15 customer surface authorities.
+✓ CX-R2 ACCEPTED: CUSTOMER_MAIN_CHAIN_FROZEN · GLOBAL_IA_FROZEN · REALITY_JOURNEY_DEMOTED
+✓ No route cutover, legacy physical deletion, design-system creation, backend authority creation or hard-coded method availability was performed by CX-R2.
+
+RUN node scripts/check-cx-r3-customer-design-system.mjs
+✓ CX-R3 Customer Design System passed at 2cffbc9: 7 retained clean-room CSS layers, 13 semantic color roles, 10 type roles, 12 spacing steps, 6 button roles, 9 card roles, 7 statuses, 7 result primitives and 8 workspace primitives.
+✓ CX-R3 ACCEPTED: CUSTOMER_UI_SYSTEM_READY · NO_PAGE_SPECIFIC_DESIGN_AUTHORITY
+✓ R3 did not perform R4 visual-asset authority, R5 shell activation, production route cutover, legacy physical deletion or backend-authority creation.
+
+RUN node scripts/check-cx-no-legacy-css.mjs
+✓ CX-R1-W2 legacy CSS import guard passed: 189 CX HTML surfaces + customer-ui sources contain 0 frozen legacy stylesheet imports.
+
+RUN node scripts/check-cx-no-legacy-selectors.mjs
+✓ CX-R1-W3 legacy namespace guard passed: 0 puxr-/public-/rs-/pr-/px2-/wpr-/phi-public- references in CX implementation.
+
+RUN node scripts/check-cx-no-old-component-copy.mjs
+✓ CX-R1-W4 old component signature guard passed: 10 frozen legacy composition signatures cannot enter CX implementation.
+
+RUN node scripts/check-cx-r4-visual-assets.mjs
+✓ CX-R4 Canonical Visual Assets passed at d35486b: 168 customer projections, 168 available, 7 hero roles, 5 book covers, 10 semantic illustration roles and 39 live CX visual bindings fail-closed.
+✓ Product/CX visual reconciliation passed: PPR-owned Personal asset identity stays frozen; new Financial CX uses semantic-role resolution.
+✓ CX-R0 freeze checker repair passed: historical R0 inventory is no longer regenerated from the R3/R4 working tree; live R1 guards remain active.
+✓ CX-R4 ACCEPTED: CANONICAL_VISUAL_ASSET_SYSTEM_READY · FIVE_BOOK_COVERS_BOUND · ILLUSTRATION_ROLES_RECONCILED · BROKEN_IMAGE_GATE_ACTIVE · READY_FOR_CX_R5
+✓ R4 did not perform R5 shell authority, production route cutover, legacy physical deletion or backend-authority creation.
+
+RUN node scripts/check-cx-r5-global-shell.mjs
+✓ CX-R5 Single Customer Shell passed at e7a0e05: 189 clean-room shell consumers share one header, primary navigation authority, mobile drawer, Search entry, Ask entry, account presentation, locale implementation and footer.
+✓ Search and Ask remain handoffs to governed surfaces; current Ask destination is /knowledge/ask/; account state is presentation-only and shell still creates no backend or answer authority.
+✓ CX-R5 ACCEPTED: ONE_GLOBAL_CUSTOMER_SHELL · READY_FOR_CX_R6_HOMEPAGE
+
+RUN node scripts/check-cx-r20-runtime-projection-adapters.mjs
+✓ CX-R20 Current-Main Reconciliation passed at 3eed6a2: 9 consume-only adapters preserve upstream authority, Unknown, provenance and conservative state across the priority customer tranche.
+✓ Historical R20 v1 and R0/R2 projection maps remain byte-identical; current v4 restores explicit Financial Reality coverage and future gates without creating a second authority.
+✓ Truth guards passed: missing readout state remains UNKNOWN, missing financial currency remains null, JR remains continuity/progress, and professional recommendations can only pass through PR/PFR authority.
+✓ CX-R20 ACCEPTED: CUSTOMER_RUNTIME_PROJECTION_BOUNDARY_FROZEN · PRIORITY_PRODUCT_TRANCHE_READY · NO_ROUTE_CUTOVER
+
+RUN node scripts/check-cx-r10-my-reality.mjs
+✓ CX-R10 My Reality successor passed at 9840757: one R20-projected workspace now covers overview, canonical Reality, perspectives, reading, directions, confirmed actions, session observation, review, history, reports and continuity.
+  Possible directions are never promoted to actions; unconfirmed actions are hidden; observation stays session-only; Journey remains progression; no backend, Reality, Navigation, Report or persistence authority is created.
+  Legacy Reality Dashboard UI authority is retired and the physical presentation has been deleted after P1 browser acceptance.
+
+RUN node scripts/check-cx-r12-personal-reality.mjs
+✓ CX-R12 Personal Reality current-main successor passed at 74fba1c: five-stage customer input, customer-first overview, five method-hidden result tabs, returned-perspective disclosure and explicit My Reality handoff are active.
+  PPR/method meaning remains upstream; profile scoring is not recreated; method availability is not hard-coded; missing overview areas remain open rather than inferred.
+  Legacy Personal Runtime presentation files are physically deleted after browser acceptance; compatibility routes remain redirects to canonical Personal Reality.
+✓ CX-R12 shared-surface successor: Personal Reality now uses a 3-priority customer overview, one-method-at-a-time detail, nested technical provenance and explicit Reality return without changing method/commerce truth.
+✓ CX-R12 ACCEPTED: PERSONAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R13 · NO_NEW_P1_ROUTE_CUTOVER
+
+RUN node scripts/check-cx-location-resolution.mjs
+✓ CX birth-place resolution passed: mixed-script Seremban → 芙蓉/Seremban candidate → confirmed coordinates → Asia/Kuala_Lumpur, while Taiping regression remains intact.
+
+RUN node scripts/check-cx-r12r-location-input-humanization.mjs
+✓ CX-R12R location input humanization passed: English/Chinese place-name search is bilingual, suggestions stay next to the field, placeholders localize, and internal location-explainer copy is removed.
+
+RUN node scripts/check-cx-human-language.mjs
+✓ CX human-language gate passed: Personal Reality visible copy is written for people, not internal system operators.
+
+RUN node scripts/check-cx-r12r-personal-reality-recovery.mjs
+✓ CX-R12R recovery passed: correct hero binding, simple intake, confirmed place resolution, conditional Zi Wei input, partial results, human copy and mobile repair are present.
+
+RUN node scripts/check-cx-r13-financial-reality.mjs
+✓ CX-R13 Financial Reality current-main successor passed at 5c6594b: nine-stage intake, evidence states, four-question overview, calculation drilldown, customer-readable findings, fail-closed planning, professional authority layers and released-report gating are active.
+  FDR/FCR/FAR/HFP/PFR/RR remain upstream; CX creates no calculation, planning priority, professional recommendation, report lifecycle state, persistence, route cutover or physical legacy deletion.
+✓ CX-R13 ACCEPTED: FINANCIAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R9_R2 · NO_NEW_P1_ROUTE_CUTOVER
+
+RUN node scripts/check-cx-r9-r2-contextual-ask.mjs
+✓ CX-R9-R2 Contextual Ask successor passed: 32/32 machine policy scenarios cover all required W15 families across EN and zh-Hans.
+  /knowledge/ask/ is replacement-ready with explicit context selection, source-class grouping, freshness/provenance disclosure and fail-closed protected contexts.
+  P1 is active: /knowledge/ask/ is canonical and /ask is compatibility-only; R9-R2 itself still created no route, entitlement, relationship, profile or professional authority.
+
+RUN node scripts/check-cx-r9-r2-customer-cutover.mjs
+✓ CX-R9-R2 customer cutover reconciliation passed.
+  /knowledge/ask/ is the accepted current route via P1; historical W0-W15 evidence remains byte-preserved and is not rewritten after the fact.
+  Customer copy is humanized, public Knowledge context remains direct, and protected Reading / Relationship / Profile context remains server-resolved and fail-closed.
+
+RUN node scripts/check-cx-r10-r30-current.mjs ALL
+✓ CX-R11 current customer-system contract passed.
+✓ CX-R14 current customer-system contract passed.
+✓ CX-R15 current customer-system contract passed.
+✓ CX-R16 current customer-system contract passed.
+✓ CX-R17 current customer-system contract passed.
+✓ CX-R18 current customer-system contract passed.
+✓ CX-R19 current customer-system contract passed.
+✓ CX-R21 current customer-system contract passed.
+✓ CX-R22 current customer-system contract passed.
+✓ CX-R23 current customer-system contract passed.
+✓ CX-R24 current customer-system contract passed.
+✓ CX-R25 current customer-system contract passed.
+✓ CX-R26 current customer-system contract passed.
+✓ CX-R27 current customer-system contract passed.
+✓ CX-R28 current customer-system contract passed.
+✓ CX-R29 current customer-system contract passed.
+✓ CX-R30 current customer-system contract passed.
+✓ CX-R10–R30 current customer-system engineering chain passed; R23/R28/R29 remain intentionally fail-closed where declared.
+
+RUN node scripts/check-integrated-successor-phase1.mjs
+✓ Integrated successor PHASE 1 CX current-system registry, acceptance and fail-closed freeze passed.
+
+RUN node scripts/check-kir-r2-phase1-w0-w3.mjs
+✓ KIR-R2 Phase 1 W0–W3 passed
+  Book I–III admitted for KIR retrieval authority; Book IV/V remain excluded.
+  Semantic Retrieval Profiles: 348/348 (65 + 180 + 103).
+
+RUN node scripts/check-kir-r2-phase2-w4-w16.mjs
+✓ KIR-R2 Phase 2 W4–W16 machine acceptance passed.
+  100-case benchmark: top5 recall 100%, direct answer 100%, source-supported 100%, wrong-route 0%.
+  Book usage: 100%; top1 precision 99%.
+  Historical W16 machine record remains PENDING by design; current human authority is carried by the later W16R/W16R2 successor acceptance.
+
+RUN node scripts/check-kir-r2-answer-intelligence-correction.mjs
+✓ KIR-R2 Answer Intelligence Correction W3R/W6R–W16R machine gate passed.
+  Published article bindings: 112 locale records / 56 nodes.
+  W15R v2: 100 cases, article-content consumed 100%, semantic guard 100%, no-empty-rephrase 100%.
+  Book III production content path remains KSAR private-R2 → KAP grounding → KIR; local private corpus execution is not claimed.
+  Historical W16R correction record remains PENDING by design; final human acceptance is recorded only in the W16R2B successor lineage.
+
+RUN node scripts/check-kir-r2-w16r2-model-backed-successor.mjs
+✓ KIR-R2-W16R2A guard-remediation machine gate passed.
+  W16R2 human acceptance evidence: 93/100 accepted, 0 critical failures.
+  Guard false-negative classes are now covered by W16R2A fixtures.
+  This W16R2A record remains a historical pre-admission gate; final production authority is evaluated by W16R2B.
+
+RUN node scripts/check-kir-r2-w16r2b-production-admission.mjs
+✓ KIR-R2-W16R2B final production admission passed.
+  Effective successor human acceptance: 100/100; 0 critical failures; all seven remediations closed.
+  Build is admitted; runtime remains explicitly gated by gateway + production-admitted environment flags.
+
+RUN node scripts/check-kau-r6e-book3-final-canonical.mjs
+✓ KAU-R6E Book III final canonical authority passed: 103 completed-manuscript sections -> 103 final Canonical Nodes (P8 60 + P9 43).
+✓ Pre-completion 86-node / interim 105-node structures are not final Book III authority; old 105 identities remain historical compatibility evidence without meaning mutation.
+
+RUN node scripts/check-book3-pja-wave1.mjs
+✓ BOOK-3 PJA Wave 1 successor passed: 8/8 zh-Hans Articles human-accepted and all 16 locale candidates rebound to the 103-node completed-manuscript final authority.
+✓ English semantic parity and publication remain fail-closed.
+
+RUN node scripts/check-book3-w4-w5-article-coverage-production-map.mjs
+✓ BOOK-3 W4 Article Coverage Census passed: 103/103 final Canonical Nodes have exactly one public Article coverage owner.
+✓ BOOK-3 W5 Final Article Production Map passed: 48 Articles across 10 batches; B01 keeps 8 accepted Articles / 17 Nodes, B02–B10 plan 40 new Articles / 86 Nodes.
+✓ 8 standalone Articles + 40 grouped Articles avoid duplicate Article production while preserving all 103 Canonical Node identities.
+✓ English semantic parity, visuals and publication remain separately gated.
+
+RUN node scripts/check-book3-b02-zh-hans-production.mjs
+✓ BOOK-3 B02 human editorial successor passed: explicit TL decision records 5/5 accepted without mutating the reviewed zh-Hans candidate text.
+✓ BOOK-3 B02 English semantic parity passed: 5/5 English candidates preserve source sections, Final Canonical Nodes, block functions and authority boundaries.
+✓ B02 publication and customer projection remain closed; English editorial quality is not auto-inferred from zh-Hans acceptance.
+✓ BOOK-3 B02 A13 required Capacity Map restored and machine-bound to P8-114/115; missing visual-production artifact blocker is closed.
+✓ Explicit TL visual acceptance is recorded; the figure-specific publication blocker is resolved while Article publication/customer projection remain separately CLOSED.
+✓ BOOK-3 B03 human editorial successor passed: explicit TL decision records 4/4 accepted without mutating reviewed zh-Hans candidate bytes.
+✓ BOOK-3 B03 English semantic parity passed: 4/4 English candidates preserve source sections, 7/7 Final Canonical Nodes, block functions and authority boundaries.
+✓ B03 publication/customer projection remain closed; English editorial quality is not auto-inferred.
+✓ BOOK-3 B04 human editorial successor passed: explicit TL decision records 5/5 accepted without mutating reviewed zh-Hans candidate bytes.
+✓ BOOK-3 B04 English semantic parity passed: 5/5 English candidates preserve source sections, 10/10 Final Canonical Nodes, block functions and professional boundaries.
+✓ B04 publication/customer projection remain closed; English editorial quality is not auto-inferred.
+✓ BOOK-3 B05 human editorial successor passed: explicit TL decision records 4/4 accepted without mutating reviewed zh-Hans candidate bytes.
+✓ BOOK-3 B05 English semantic parity passed: 4/4 English candidates preserve source sections, 8/8 Final Canonical Nodes, block functions and professional boundaries.
+✓ B05 publication/customer projection remain closed; English editorial quality is not auto-inferred.
+✓ BOOK-3 B06 human editorial successor passed: explicit TL decision records 3/3 accepted without mutating reviewed zh-Hans candidate bytes.
+✓ BOOK-3 B06 English semantic parity passed: 3/3 English candidates preserve source sections, 6/6 Final Canonical Nodes, block functions and professional boundaries.
+✓ B06 publication/customer projection remain closed; English editorial quality is not auto-inferred.
+✓ BOOK-3 B03–B06 W10 visual disposition successor passed: 16 accepted Articles retain 3 not-required, 12 recommended/non-blocking, and 1 required visual.
+✓ B3-ART-017 required Pre-Collapse Window Map is now human-accepted; figure-specific blocker resolved without creating Article publication authority.
+✓ BOOK-3 B03 A17 Pre-Collapse Window Map human visual successor passed: explicit TL acceptance recorded against unchanged asset SHA.
+✓ A17 figure-specific publication blocker is resolved; Article publication and customer projection remain separately CLOSED.
+✓ BOOK-3 B07 human editorial successor passed: explicit TL decision records 6/6 accepted without mutating reviewed zh-Hans candidate bytes.
+✓ BOOK-3 B07 English semantic parity passed: 6/6 English candidates preserve source sections, 10/10 Final Canonical Nodes, block functions and professional boundaries.
+✓ B07 publication/customer projection remain closed; English editorial quality is not auto-inferred.
+✓ BOOK-3 B08 human editorial successor passed: explicit TL decision records 4/4 accepted without mutating reviewed zh-Hans candidate bytes.
+✓ BOOK-3 B08 English semantic parity passed: 4/4 English candidates preserve source sections, 12/12 Final Canonical Nodes, block functions and governance boundaries.
+✓ B08 publication/customer projection remain closed; English editorial quality is not auto-inferred.
+✓ BOOK-3 B09 human editorial successor passed: explicit TL decision records 6/6 accepted without mutating reviewed zh-Hans candidate bytes.
+✓ BOOK-3 B09 English semantic parity passed: 6/6 English candidates preserve source sections, 15/15 Final Canonical Nodes, political neutrality and Human/AI governance boundaries.
+✓ B09 publication/customer projection remain closed; English editorial quality is not auto-inferred.
+✓ BOOK-3 B07–B09 W10 visual closure passed: A44 required Coordination Collapse Path is machine-bound and explicitly human accepted.
+✓ The A44 visual publication blocker is resolved without creating English editorial, canonical, or parallel-runtime authority.
+✓ BOOK-3 B10 successor passed: 3/3 zh-Hans human accepted and 3/3 English semantic parity machine accepted without mutating reviewed Chinese candidate bytes.
+✓ B01–B10 Chinese Article production/human acceptance is now complete: 48/48 planned Articles. English publication remains independently gated.
+✓ BOOK-3 zh-Hans publication/customer projection closure passed: 48/48 human-accepted Articles are publication-admitted and customer-projected.
+✓ All 48 public payloads, 48 release rows and 48 /articles/ route shells are present; the prior 0/47 partial-commit drift is repaired.
+✓ B3-ART-044 required visual is explicitly human accepted and projected; all three required Book III visual blockers are closed.
+✓ The zh-Hans publication authority remains a frozen 48/48 locale snapshot with English=0; the English publication successor is validated separately below.
+✓ BOOK-3 English editorial/publication admission passed: 48/48 English candidates are parity-ready, editorially audited, published and customer-projected.
+✓ B01 English parity successor passed 8/8; B02–B10 existing parity authorities are preserved. No claim is made that TL read every English sentence.
+✓ Book III bilingual publication freeze passed: 48 zh-Hans + 48 en public payloads = 96 projections through the existing locale-aware Article runtime.
+✓ Required visual English reuse passed 3/3 using the already human-accepted bilingual binaries with locale-specific English alt/captions; no new visual binary authority was created.
+✓ Post-freeze continuity maintenance is successor-only; Article identities, Final Canonical Nodes and source bindings cannot be silently repurposed.
+✓ BOOK-3 post-freeze continuity maintenance passed: frozen bilingual publication remains unchanged at 48 zh-Hans + 48 en = 96 public projections.
+✓ Freeze digests, Article identities, release rows, required visual binaries and locale-aware Article runtime remain aligned; no content successor is required at d96f402.
+✓ Continuity remains successor-only and on-demand; this audit does not reopen Book III production.
+
+RUN node scripts/check-integrated-successor-phase2.mjs
+✓ Integrated Successor PHASE 2 Answer Intelligence correction machine gate passed.
+  KIR-R2 retrieval foundation remains accepted; old W15/W16 answer-quality conclusion is superseded by W3R/W6R–W16R v2.
+  W15R: 100 cases materially consume published article content with semantic/no-empty-rephrase guards passing.
+  W16R successor human gate is now closed: current effective cohort 100/100 accepted with 0 critical failures; historical failed/pending evidence remains preserved.
+
+RUN node scripts/check-kir-r2-w16r-final-human-acceptance.mjs
+✓ KIR-R2 W16R successor lineage final human acceptance passed: effective 100/100, 0 critical failures.
+  Historical 48/100 and 93/100 evidence remains immutable; seven successor remediations close the current output cohort.
+
+RUN node scripts/check-kir-r2-w16r2b-production-admission.mjs
+✓ KIR-R2-W16R2B final production admission passed.
+  Effective successor human acceptance: 100/100; 0 critical failures; all seven remediations closed.
+  Build is admitted; runtime remains explicitly gated by gateway + production-admitted environment flags.
+
+RUN node scripts/check-pvp-r1-vis-w0-w5-foundation.mjs
+✓ PVP-R1-VIS W0–W5 foundation passed.
+  Census, classification, logo compliance, design-token extraction, shared visual tokens and six foundation UI components are reconciled.
+  W6+ product truth/projection work remains closed; PVP creates no method, Profile or commerce truth authority.
+
+RUN node scripts/check-pvp-r1-vis-foundation-boundary.mjs
+✓ PVP-R1-VIS W0–W5 foundation boundary passed.
+  Current main is reconciled and the Foundation Freeze is active.
+  W6+ product visual work is not authorized; PAI-R1-W0 is the next gate.
+
+RUN node scripts/check-integrated-successor-phase3.mjs
+✓ Integrated Successor PHASE 3 PVP foundation freeze passed.
+  W0–W5 are frozen as Foundation Only; no W6+ product visual cutover is admitted.
+  PHASE 4 / PAI-R1-W0 is the next authorised execution gate.
+
+RUN node scripts/check-kir-r2-w16r-final-human-acceptance.mjs
+✓ KIR-R2 W16R successor lineage final human acceptance passed: effective 100/100, 0 critical failures.
+  Historical 48/100 and 93/100 evidence remains immutable; seven successor remediations close the current output cohort.
+
+RUN node scripts/check-kir-r2-w16r2b-production-admission.mjs
+✓ KIR-R2-W16R2B final production admission passed.
+  Effective successor human acceptance: 100/100; 0 critical failures; all seven remediations closed.
+  Build is admitted; runtime remains explicitly gated by gateway + production-admitted environment flags.
+
+RUN node scripts/check-pvp-r1-vis-w0-w5-foundation.mjs
+✓ PVP-R1-VIS W0–W5 foundation passed.
+  Census, classification, logo compliance, design-token extraction, shared visual tokens and six foundation UI components are reconciled.
+  W6+ product truth/projection work remains closed; PVP creates no method, Profile or commerce truth authority.
+
+RUN node scripts/check-pvp-r1-vis-foundation-boundary.mjs
+✓ PVP-R1-VIS W0–W5 foundation boundary passed.
+  Current main is reconciled and the Foundation Freeze is active.
+  W6+ product visual work is not authorized; PAI-R1-W0 is the next gate.
+
+RUN node scripts/check-integrated-successor-phase3.mjs
+✓ Integrated Successor PHASE 3 PVP foundation freeze passed.
+  W0–W5 are frozen as Foundation Only; no W6+ product visual cutover is admitted.
+  PHASE 4 / PAI-R1-W0 is the next authorised execution gate.
+
+RUN node scripts/check-pai-r1.mjs
+✓ PAI-PRE-W0 deterministic answerability census passed: 100/100 classified (T0=2, T1=96, T2=1, T3=1).
+  Census selects no provider, makes no commerce decision and does not mutate KIR retrieval meaning.
+✓ PAI-R1-W0/W2 provider registry, availability, T0–T3 mapping and single-provider fallback passed.
+✓ PAI-R1-W1/W3–W9 usage, prompt discipline, ceilings, credits, entitlements, pricing consumption, UX and abuse gates passed.
+✓ KIR composer ownership, claim provenance, targeted repair and article utility boundaries passed.
+✓ PAI-R1-W10 margin benchmark passed across light, normal, heavy and extreme planning scenarios.
+  Rates/mix remain planning inputs; Phase 5 must replace them with observed provider cost and real usage.
+✓ PAI-R1-W0–W10 Acceptance and Freeze passed.
+  PAI_R1_READY_FOR_PAID_ASK_PILOT; no Paid Ask, CX-R31 or PVP W6+ authority was opened.
+
+RUN node scripts/check-integrated-successor-phase4.mjs
+✓ Integrated Successor PHASE 4 PAI-R1-W0–W10 passed.
+  Phase 5 Paid Ask Pilot is next; CX-R31 and PVP W6+ remain deferred.
+
+RUN node scripts/check-paid-ask-pilot.mjs
+✓ Paid Ask historical real-provider/relevance calibration passed.
+  Evidence is reusable calibration only and is not promoted to real paid-cohort acceptance.
+✓ Paid Ask pilot event ingestion, aggregation and real-evidence gate behavior passed.
+  Controlled replay cannot satisfy the gate; silent context and unrecorded multi-provider attempts fail closed.
+✓ Paid Ask PASK-W10 successor freeze passed: PAID_ASK_PILOT_ACCEPTED and CX-R31 authorized.
+  Acceptance is owner-directed and evidence-scoped; no missing production commerce transaction or margin telemetry is relabeled as observed production truth.
+✓ PHASE 5 Paid Ask Pilot successor package passed: PASK-W0–W10 complete, accepted and frozen for CX-R31.
+
+RUN node scripts/check-integrated-successor-phase5.mjs
+✓ Integrated Successor PHASE 5 exit passed.
+  Paid Ask is accepted/frozen for CX-R31; product visual W6+ and production cutover remain blocked.
+
+RUN node scripts/check-cx-r31-phase6.mjs
+✓ CX-R31-W0 Current Customer Entry Census passed.
+✓ CX-R31-W1 Universal Ask Composer passed: one clear question input on / and /knowledge/ask/.
+✓ CX-R31-W2 Progressive + Explicit Context passed: Knowledge default, Add context collapsed, no silent account sweep.
+✓ CX-R31-W3 Intent Recommendation passed: answer renderer allows at most two governed next steps.
+✓ CX-R31-W4/W5 Conversational Handoff + Specialist Direct Route Protection passed.
+✓ CX-R31-W6 Paid Upgrade UX passed: no hard dead-end, concrete depth value, Knowledge continuation and account options preserved.
+✓ CX-R31-W7 Reality Return passed: governed return exists and remains optional.
+✓ CX-R31-W8 responsive machine contract passed for 360 / 768 / 1440 coverage.
+✓ CX-R31-W9 Human First-Use acceptance passed.
+  TL accepted W9 as a set; no per-question scores were fabricated; Phase 7 Profile is authorized and later phases remain outside this freeze.
+✓ PHASE 6 CX-R31 package passed: W0–W8 machine accepted and W9 human accepted.
+  Phase 6 is complete and frozen; Phase 7 Profile is the only newly authorized next phase.
+
+RUN node scripts/check-integrated-successor-phase6.mjs
+✓ Integrated Successor PHASE 6 exit passed.
+  Paid Ask W10 and CX-R31 W0–W9 are accepted; Phase 6 is frozen and authorizes Phase 7 Profile only.
+
+RUN node scripts/check-pvp-r1-vis-phase7-profile-w6-w9.mjs
+✓ PHASE 7 W6 current Profile/PPR authority passed.
+  Current owner successor is verified without reusing the stale historical API SHA snapshot; PVP remains projection-only.
+✓ Profile/PPR customer-output successor passed.
+  12/12 W6 generic fields have explicit owner decisions; W7 is unblocked for the projection-safe subset only.
+✓ Profile/PPR all-PFIG visual authority admission passed.
+  9/9 PFIG IDs are authority-allowed; PVP remains projection-only and W7 Projection IR is the next gate.
+✓ PVP-R1-VIS-W7 Profile Projection IR passed.
+  profile-customer-visual-projection-v1 is frozen; PFIG-001–009 all have authority-safe visual IR contracts.
+  Synthetic builder regression preserves unknown/fail-closed behavior and creates no Profile meaning authority.
+✓ PHASE 7 W8 current Profile Visual MVP integration passed.
+  The historical direct MVP mount is correctly superseded by the W9 Free/Paid wrapper, which still consumes the governed W8 renderer.
+✓ PVP-R1-VIS-W9 Profile Free/Paid passed.
+  Free Snapshot is current runtime; Deep Profile and Reality Profile are defined but commerce remains fail-closed.
+✓ PHASE 7 Profile W6–W9 current verification passed and frozen.
+  W6 authority, W7 9/9 IR, W8 current MVP wrapper and W9 Free/Paid depth are verified; Phase 8 ECR is authorized but not executed.
+
+RUN node scripts/check-integrated-successor-phase7.mjs
+✓ Integrated Successor PHASE 7 passed.
+  CX-R31 human acceptance unlocks Profile only; Profile W6–W9 are current-verified and frozen; PHASE 8 ECR is next.
+
+RUN node scripts/check-pvp-r1-vis-phase8-ecr-w10-w16.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: W10 source drift without governed successor: assets/customer-ui/js/specialists/ecr/product-renderer.js
+
+false !== true
+
+    at file:///C:/Users/Guest%20Account/OneDrive/Desktop/PHIOS/phios/scripts/check-pvp-r1-vis-w10-ecr-mandala-visual-census.mjs:45:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: scripts/check-pvp-r1-vis-w10-ecr-mandala-visual-census.mjs
+
+1 !== 0
+
+    at file:///C:/Users/Guest%20Account/OneDrive/Desktop/PHIOS/phios/scripts/check-pvp-r1-vis-phase8-ecr-w10-w16.mjs:16:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
+file:///C:/Users/Guest%20Account/OneDrive/Desktop/PHIOS/phios/.tmp/ecr-full-r1/run-expanded-check.mjs:5
+function runCommand(command,stack=[]){for(const part of command.split(/\s+&&\s+/)){const match=part.match(/^npm run ([\w:.-]+)$/);if(match){runScript(match[1],stack);continue;}console.log('\nRUN '+part);const r=spawnSync(part,{shell:true,stdio:'inherit'});log.push({command:part,exitCode:r.status});fs.writeFileSync('.tmp/ecr-full-r1/expanded-check-results.json',JSON.stringify(log,null,2));if(r.status!==0){failed=true;throw Error('CHECK_FAILED: '+part+' exit '+r.status);}}}
+                                                                                                                                                                                                                                                                                                                                                                                                                                          ^
+
+Error: CHECK_FAILED: node scripts/check-pvp-r1-vis-phase8-ecr-w10-w16.mjs exit 1
+    at runCommand (file:///C:/Users/Guest%20Account/OneDrive/Desktop/PHIOS/phios/.tmp/ecr-full-r1/run-expanded-check.mjs:5:427)
+    at runScript (file:///C:/Users/Guest%20Account/OneDrive/Desktop/PHIOS/phios/.tmp/ecr-full-r1/run-expanded-check.mjs:4:148)
+    at runCommand (file:///C:/Users/Guest%20Account/OneDrive/Desktop/PHIOS/phios/.tmp/ecr-full-r1/run-expanded-check.mjs:5:141)
+    at file:///C:/Users/Guest%20Account/OneDrive/Desktop/PHIOS/phios/.tmp/ecr-full-r1/run-expanded-check.mjs:6:47
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.18.0

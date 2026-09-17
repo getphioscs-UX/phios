@@ -90,3 +90,13 @@ export function buildCustomerClaimIR({acceptedMethodReadingEnvelope,customerInte
     }
   });
 }
+
+// Shared contextual claim adapter. The interpretation owner supplies a derived
+// unit; report assemblers never supply templates or infer evidence here.
+export function buildContextualCustomerClaimIR({baselineClaim,derivedUnit}={}){
+ if(baselineClaim?.schemaVersion!=='PHI-OS-CUSTOMER-READING-CLAIM-IR-v1.0.0'||derivedUnit?.owner!=='CANONICAL_INTERPRETATION_KERNEL')fail('CONTEXT_CLAIM_OWNER_REQUIRED');
+ for(const field of ['ruleId','text','semanticDimension','sourceProjectionId'])if(!derivedUnit[field])fail('CONTEXT_CLAIM_FIELD_REQUIRED',{field});
+ if(!list(derivedUnit.evidenceRefs).length||!list(derivedUnit.meaningRefs).length||!list(derivedUnit.conditions).length||!derivedUnit.boundary)fail('CONTEXT_CLAIM_LINEAGE_REQUIRED');
+ if(!list(baselineClaim.lineage?.projectionRefs).some(ref=>ref.startsWith(derivedUnit.sourceProjectionId+'#')))fail('CONTEXT_BASELINE_SOURCE_MISMATCH');
+ return freeze({...baselineClaim,claimId:`${baselineClaim.claimId}:${derivedUnit.ruleId}`,semanticDimension:derivedUnit.semanticDimension,claimType:'CONDITION',headline:derivedUnit.headline,structuralMeaning:derivedUnit.text,evidenceRefs:uniq([...baselineClaim.evidenceRefs,...derivedUnit.evidenceRefs]),counterEvidenceRefs:uniq(derivedUnit.counterEvidenceRefs),conditions:derivedUnit.conditions,boundaries:uniq([...baselineClaim.boundaries,derivedUnit.boundary]),confidenceClass:derivedUnit.admitted===true?'CONDITIONAL_SELF_REPORTED':'CONDITIONAL_REVIEW_CANDIDATE',lineage:{...baselineClaim.lineage,contextOwner:derivedUnit.owner,contextEvidenceRefs:uniq(derivedUnit.evidenceRefs),meaningRefs:uniq([...baselineClaim.lineage.meaningRefs,...derivedUnit.meaningRefs]),ruleRefs:uniq([...baselineClaim.lineage.ruleRefs,derivedUnit.ruleId]),sourceRefs:uniq(derivedUnit.sourceRefs),mappingHumanAcceptance:derivedUnit.admitted===true?'ACCEPTED':'PENDING'}});
+}

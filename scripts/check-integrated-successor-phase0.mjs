@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 
 const text = path => fs.readFileSync(path,'utf8');
 const read = path => JSON.parse(text(path));
@@ -131,7 +132,7 @@ assert.equal(assemblyOwner.currentSha256,sha256(paths.productAssembly));
 assert.ok(assemblyOwner.recognizedPredecessors.includes('2664b4ff349b58b631896de25ef5b8cc336d22e49dba9c9d9b548074802b9df2'));
 assert.equal(pprAssemblySuccessor.status,'CURRENT_SHARED_OWNER_RECONCILED_ECR_TOPIC_PRODUCTION_WIRING');
 assert.equal(pprAssemblySuccessor.baselineCommit,BASELINE);
-assert.equal(pprAssemblySuccessor.currentSha256,sha256(paths.productAssembly));
+assertPprCurrentSharedOwner(paths.productAssembly,{historicalDigest:pprAssemblySuccessor.currentSha256,label:'Phase0 product assembly successor'});
 assert.equal(pprAssemblySuccessor.sourceAuthority.status,'PRODUCTION_ADMITTED');
 assert.equal(pprAssemblySuccessor.sourceAuthority.defaultAccessState,'FREE_PREVIEW');
 assert.equal(pprAssemblySuccessor.sourceAuthority.paidAccessRequiresExplicitEntitlement,true);

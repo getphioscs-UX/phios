@@ -13,7 +13,7 @@ const METHOD_IDS=new Set(['AST','BZR','NUM','ZWR','ECR']);
 const GENERAL=new Set(CURRENT_REALITY_DOMAINS);
 const SENSITIVE=new Set(CURRENT_REALITY_SENSITIVE_DOMAINS);
 const STATES=new Set(REALITY_COMPARISON_STATES);
-const PROMPTS=new Set(['ACTIVE_NOW','HEAVY_NOW','UNCERTAIN_NOW','DECISION_STUCK','ENERGY_COST','SUPPORTIVE_NOW','REPEATING_NOW','UNDERSTAND_NOW','DOMAIN_DETAIL','SENSITIVE_DETAIL']);
+const PROMPTS=new Set(['ACTIVE_NOW','HEAVY_NOW','UNCERTAIN_NOW','DECISION_STUCK','ENERGY_COST','SUPPORTIVE_NOW','REPEATING_NOW','UNDERSTAND_NOW','DOMAIN_DETAIL','SENSITIVE_DETAIL','CARRIER_CONDITIONS','CARRIER_ENVIRONMENT','EXPERIENCE_SELECTION','EXPERIENCE_STABILIZATION','EXPERIENCE_PERSPECTIVE','EXPERIENCE_MOTIVATION','CONTEXT_COUNTER_EVIDENCE']);
 const clean=v=>String(v??'').trim();
 const list=v=>Array.isArray(v)?v:[];
 const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);for(const x of Object.values(v))freeze(x)}return v};
@@ -140,3 +140,18 @@ export function buildProgressiveCurrentRealityIntake(locale='en'){
   ]),level2Domains:CURRENT_REALITY_DOMAINS,level3SensitiveDomains:CURRENT_REALITY_SENSITIVE_DOMAINS,governance:freeze({longQuestionnaire:false,progressive:true,sensitiveConsentSeparate:true})});
 }
 export const PERSONAL_CURRENT_REALITY_SCHEMAS=Object.freeze({input:INPUT_SCHEMA,observation:OBSERVATION_SCHEMA,comparison:COMPARISON_SCHEMA,correlation:CORRELATION_SCHEMA});
+
+// Optional R1A intake consumes the same consent, purpose, length, count and
+// self-report schema as every other Personal Reality observation. No score.
+export function buildEcrContextEvidenceIntake(locale='en'){
+ const zh=locale==='zh-Hans';
+ return freeze([
+  ['CARRIER_CONDITIONS','BODY_CARRIER','What carrying conditions, available capacity or recovery space do you currently notice?','你目前观察到怎样的承载条件、可用空间或恢复余地？'],
+  ['CARRIER_ENVIRONMENT','ENVIRONMENT','What in your environment supports or constrains how you operate?','当前环境中，什么支持或限制了你的运行？'],
+  ['EXPERIENCE_SELECTION','CURRENT_STATE','What are you repeatedly paying attention to or selecting now?','你目前反复注意或选择的是什么？'],
+  ['EXPERIENCE_STABILIZATION','CURRENT_STATE','Which experiences persist across situations, and which do not?','哪些经验会跨情境持续，哪些不会？'],
+  ['EXPERIENCE_PERSPECTIVE','CURRENT_STATE','From what standpoint are you observing this situation?','你正从怎样的立场观察这件事？'],
+  ['EXPERIENCE_MOTIVATION','CURRENT_STATE','What makes this situation matter to you now?','这个处境目前为何对你重要？'],
+  ['CONTEXT_COUNTER_EVIDENCE','CURRENT_STATE','What observations do not fit this account? (optional)','哪些观察不符合上述描述？（可选）']
+ ].map(([promptId,domain,en,cn])=>({promptId,domain,label:zh?cn:en,required:false,source:'CUSTOMER',confidence:'SELF_REPORTED',maxLength:600})));
+}

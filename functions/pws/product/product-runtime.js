@@ -1,3 +1,4 @@
+import {ECR_FULL_REPORT_PRODUCT} from '../ecr-full-report-definitions.js';
 export const PRODUCT_RUNTIME_CONTRACT = 'phi-os.pws.product-runtime.v1';
 
 export const PRODUCT_COMPONENT_TYPES = Object.freeze([
@@ -236,6 +237,7 @@ function normalizeProduct(input) {
 }
 
 export const DEFAULT_PRODUCT_RUNTIME_DEFINITIONS = deepFreeze([
+  ECR_FULL_REPORT_PRODUCT,
   {
     product_code: 'reality-journey-pass-v1',
     display_name: 'Reality Journey Pass',

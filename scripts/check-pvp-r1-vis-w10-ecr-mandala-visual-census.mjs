@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const text=p=>fs.readFileSync(p,'utf8');
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -42,7 +43,7 @@ for(const [p,digest] of Object.entries(census.sourceDigests)){
     && p8?.boundaries?.ecrCalculationChanged===false
     && p8?.boundaries?.ecrMeaningChanged===false
     && p8?.boundaries?.duplicateMandalaCreated===false;
-  assert.equal(governedRendererSuccessor||governedPhase8CurrentSuccessor,true,`W10 source drift without governed successor: ${p}`);
+  if(!governedRendererSuccessor&&!governedPhase8CurrentSuccessor)assertPprCurrentSharedOwner(p,{historicalDigest:digest,label:'W10 current visual successor'});
 }
 const renderer=text(census.existingProductionPath.renderer),hierarchy=fs.existsSync('assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js')?text('assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js'):'',css=text(census.existingProductionPath.stylesheet),geometry=text(census.existingProductionPath.geometry),projection=text(census.existingProductionPath.projection);
 for(const token of ['PRIMARY_ACTIVE','SUPPORTING_ACTIVE','BACKGROUND','LOCKED_DEPTH','FREE_SNAPSHOT','PAID_DEPTH'])assert.ok((renderer+hierarchy).includes(token),`Mandala visual-state witness missing: ${token}`);

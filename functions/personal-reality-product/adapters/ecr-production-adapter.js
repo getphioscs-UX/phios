@@ -1,6 +1,12 @@
 import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from './product-envelope-core.js';
 function reportSectionPayload(item){return {card:item.card,acceptedInterpretation:item.acceptedInterpretation};}
 export function adaptEcrPersonalRealityProduct({readingIR,mandalaProjection=null,phiCardSpread=null,fullReport=null,customerAdmission=null,mandalaExperienceState='FREE_SNAPSHOT',mandalaTopicProjection=null,locale=readingIR?.locale||mandalaProjection?.locale||phiCardSpread?.locale||'en'}={}){
+ if(fullReport?.edition==='ECR_FULL_R1'){
+  if(fullReport.sourceProjectionId!==readingIR?.sourceProjectionId||mandalaProjection?.sourceProjectionId!==readingIR?.sourceProjectionId)fail('ECR_FULL_REPORT_PRODUCT_SOURCE_MISMATCH');
+  const publishable=fullReport.publicationState==='CUSTOMER_PUBLISHABLE',paid=fullReport.depth==='PAID';
+  const cards=fullReport.sections.find(x=>x.sectionId==='PHI_CARD')?.cards||[];
+  return buildMethodProductEnvelope({methodId:'ECR',productType:'PHI_CONFIGURATION_READING',locale:fullReport.locale,state:publishable?'CUSTOMER_PUBLISHABLE':'PRODUCT_AUTHORITY_INCOMPLETE',publication:{customerPublishable:publishable,status:fullReport.publicationState,edition:fullReport.edition,mandalaExperienceState:paid?'PAID_DEPTH':'FREE_SNAPSHOT',serverEntitlementStillRequiredForPaidData:true},hero:{title:fullReport.title,summary:fullReport.subtitle},navigation:fullReport.sections.map(x=>x.sectionId),sections:fullReport.sections.map(x=>section({sectionId:x.sectionId,title:x.title,payload:x,sourceRefs:[fullReport.sourceProjectionId]})),visuals:[visual({visualId:'ECR_PHI_MANDALA',type:'ECR_PHI_MANDALA_V1',payload:mandalaProjection}),visual({visualId:'ECR_PHI_CARD_SPREAD',type:'ECR_SIX_CARD_SPREAD',payload:{cards}})],lineage:fullReport.lineage,boundaries:fullReport.boundaries,sourceProduct:{fullReport},specialistRenderer:{rendererId:'PPR_R3_ECR_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['PHI_CARD_VISUAL','PHI_MANDALA','FULL_REPORT']}});
+ }
  if(readingIR?.schemaVersion!=='PHI-OS-ECR-RUNTIME-READING-IR-v1.0.0')fail('PPR_R2_ECR_READING_IR_REQUIRED');
  if(mandalaProjection&&mandalaProjection.schemaVersion!=='PHI-OS-ECR-CUSTOMER-MANDALA-PROJECTION-v1.0.0')fail('PPR_R3_ECR_MANDALA_PROJECTION_INVALID');
  if(phiCardSpread&&phiCardSpread.schemaVersion!=='PHI-OS-ECR-PHI-CARD-SPREAD-v1.0.0')fail('PPR_R2_ECR_PHI_CARD_SPREAD_INVALID');

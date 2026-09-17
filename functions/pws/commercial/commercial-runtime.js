@@ -1,4 +1,5 @@
 import { productRuntime as defaultProductRuntime } from '../product/product-runtime.js';
+import {ECR_FULL_REPORT_PRICE,ECR_FULL_REPORT_OFFER} from '../ecr-full-report-definitions.js';
 import {
   paymentProviderRegistry as defaultProviderRegistry
 } from './payment-provider-registry.js';
@@ -178,10 +179,12 @@ export const DEFAULT_COMMERCIAL_DEFINITIONS = freeze({
     { customer_segment_code: 'professional-customer', display_name: 'Professional Customer', active: true }
   ],
   prices: [
+    ECR_FULL_REPORT_PRICE,
     { price_code:'reality-journey-pass-v1-myr',price_version:'1.0.0',currency_code:'MYR',amount_minor:500,status:'active',effective_at:'2026-07-30T00:00:00.000Z' },
     { price_code:'phios-book-one-zh-pdf-myr',price_version:'1.0.0',currency_code:'MYR',amount_minor:8900,status:'active',effective_at:'2026-07-19T00:00:00.000Z' }
   ],
   offers: [
+    ECR_FULL_REPORT_OFFER,
     { offer_code:'reality-journey-pass-v1-myr',offer_version:'1.0.0',display_name:'Reality Journey Pass — MYR',product_code:'reality-journey-pass-v1',product_version:'1.0.0',price_code:'reality-journey-pass-v1-myr',region_code:'my',customer_segment_code:'public-customer',status:'active' },
     { offer_code:'phios-book-one-zh-pdf-myr',offer_version:'1.0.0',display_name:'《世界如何形成》第一册 — MYR',product_code:'phios-book-one-zh-pdf',product_version:'1.0.0',price_code:'phios-book-one-zh-pdf-myr',region_code:'my',customer_segment_code:'public-customer',status:'active' }
   ]
@@ -280,6 +283,7 @@ export function createCommercialRuntime(options = {}) {
       const offer = runtime.resolveOffer(input.offer_code);
       const price = runtime.resolvePrice(offer.price_code);
       const product = productRuntime.resolveProduct(offer.product_code);
+      if(offer.status!=='active'||price.status!=='active'||product.state!=='active')throw new CommercialRuntimeError('PWS_OFFER_NOT_ACTIVE','Only active products, offers and prices may create orders.');
       const productVersion = productRuntime.resolveProductVersion(
         product.product_code, offer.product_version
       );

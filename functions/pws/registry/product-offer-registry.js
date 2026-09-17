@@ -61,7 +61,9 @@ const DEFAULT_OFFER_DEFINITIONS = Object.freeze({
 // identity, version and components are owned by Product Runtime; price remains
 // an Offer concern and is joined only at this adapter boundary.
 export const DEFAULT_PRODUCT_DEFINITIONS = Object.freeze(
-  DEFAULT_PRODUCT_RUNTIME_DEFINITIONS.map(product => {
+  // The legacy seed marks every definition active. Draft runtime products must
+  // stay outside this compatibility projection until separately admitted.
+  DEFAULT_PRODUCT_RUNTIME_DEFINITIONS.filter(product => product.state === 'active').map(product => {
     const version = product.versions.find(
       item => item.version === product.current_version
     );

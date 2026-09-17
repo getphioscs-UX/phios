@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "PHI-OS-CX-R12R4-ICON-RECONCILIATION-v1.0.0",
+  "schemaVersion": "PHI-OS-CX-R12R4-ICON-RECONCILIATION-v1.1.0",
   "work": "CX-R12R4-ICON-CANONICAL-RECONCILIATION",
   "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
   "status": [
@@ -32,7 +32,7 @@
   "authorityBoundary": {
     "createsSecondGlobalIconAuthority": false,
     "createsSecondAssetResolver": false,
-    "existingCanonicalIconsRemainOwnedByCustomerVisualAssetRegistryV2": true,
+    "existingCanonicalIconsRemainOwnedByCustomerVisualAssetRegistryV3": true,
     "pagePrivateIconAuthorityForbidden": true
   },
   "reuse": [
@@ -119,6 +119,16 @@
       "semantic": "TAROT",
       "customerAssetId": "CXICON-METHOD-TAROT",
       "repoPath": "assets/icons/methods/PHIOS-ICON-METHOD-TAROT-v1.svg"
+    },
+    {
+      "semantic": "ECR",
+      "customerAssetId": "CXICON-METHOD-ECR",
+      "repoPath": "assets/icons/methods/PHIOS-ICON-METHOD-ECR-v1.svg"
+    },
+    {
+      "semantic": "PROFILE",
+      "customerAssetId": "CXICON-METHOD-PROFILE",
+      "repoPath": "assets/icons/methods/PHIOS-ICON-METHOD-PROFILE-v1.svg"
     }
   ],
   "aliases": {
@@ -135,5 +145,12 @@
     "EVIDENCE_V2_DUPLICATE",
     "READING_LAYER_DUPLICATE",
     "STATUS_UNKNOWN_DUPLICATE"
-  ]
+  ],
+  "successor": {
+    "work": "ECR-PROFILE-METHOD-ICONS-R1",
+    "baselineCommit": "1046e1ee66db5403142c76f6754729de36d37ce7",
+    "changeClass": "Explicit Contract Version Upgrade",
+    "scope": "Register user-supplied ECR and Profile icons; presentation only",
+    "customerRegistry": "content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json"
+  }
 }

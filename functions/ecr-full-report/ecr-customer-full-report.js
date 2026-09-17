@@ -1,3 +1,4 @@
+import {assembleEcrCoreReport} from './ecr-core-report-projection.js';
 const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);for(const x of Object.values(v))freeze(x)}return v};
 const list=v=>Array.isArray(v)?v:[];
 const uniq=v=>[...new Set(list(v).filter(Boolean))];
@@ -7,11 +8,12 @@ function text(locale,en,zh){return localeOf(locale)==='zh-Hans'?zh:en}
 function acceptedUnitIndex(reading){return new Map(list(reading?.insights).map(x=>[x.insightId,x]));}
 function cardGroupTitle(locale,groupId){const labels={CORE:['Core structure','核心结构'],DRIVER:['What keeps this moving','驱动力'],GIFT:['Usable capacities','可用能力'],TENSION:['Tensions to watch','需要留意的张力'],FIELD:['Supporting conditions','支持场域'],PHASE:['Where the baseline sits','运行阶段']};const pair=labels[groupId]||[groupId,groupId];return text(locale,pair[0],pair[1]);}
 function cardSection(locale,card,index){const unitId=card?.lineage?.interpretationUnitId||null,unit=unitId?index.get(unitId):null;return freeze({sectionId:`${card.groupId}_READING`,groupId:card.groupId,title:cardGroupTitle(locale,card.groupId),card:{cardId:card.cardId,title:card.title,subtitle:card.subtitle,oneLineInsight:card.oneLineInsight,canonicalCustomerMeaning:card.canonicalCustomerMeaning,flowingExpression:card.flowingExpression,strainedExpression:card.strainedExpression,observationPrompt:card.observationPrompt,asset:card.asset||null},acceptedInterpretation:unit?{interpretationUnitId:unit.insightId,title:unit.title||null,summary:unit.summary||null,body:unit.body||null,plainLanguageExplanation:unit.plainLanguageExplanation||unit.body||null,observableSignals:list(unit.observableSignals),alternativeInterpretations:list(unit.alternativeInterpretations),openQuestions:list(unit.openQuestions),confidenceBoundary:unit.confidenceBoundary||null}:null,sourceRefs:[unitId].filter(Boolean)});}
-export function buildEcrCustomerFullReport({readingIR,acceptedReading,phiCardSpread,customerAdmission,locale=readingIR?.locale||acceptedReading?.locale||'en'}={}){
+export function buildEcrCustomerFullReport({readingIR,acceptedReading,phiCardSpread,customerAdmission,locale=readingIR?.locale||acceptedReading?.locale||'en',edition=null,sharedEntitlement=null,reviewMode=false,contextProjection=null}={}){
  if(readingIR?.schemaVersion!=='PHI-OS-ECR-RUNTIME-READING-IR-v1.0.0')fail('ECR_FULL_REPORT_READING_IR_REQUIRED');
  if(acceptedReading?.methodId!=='ECR'||acceptedReading?.state!=='READY_TO_READ'||acceptedReading?.technical?.acceptanceBasis!=='ADMITTED_COMPOSITION_RULESET')fail('ECR_FULL_REPORT_ACCEPTED_READING_REQUIRED');
  if(phiCardSpread?.schemaVersion!=='PHI-OS-ECR-PHI-CARD-SPREAD-v1.0.0'||list(phiCardSpread.cards).length!==6)fail('ECR_FULL_REPORT_SIX_CARD_SPREAD_REQUIRED');
  if(customerAdmission?.customerAdmission!==true)fail('ECR_FULL_REPORT_CARD_ADMISSION_REQUIRED');
+ if(edition==='ECR_FULL_R1')return assembleEcrCoreReport({readingIR,acceptedReading,phiCardSpread,locale,sharedEntitlement,reviewMode,contextProjection});
  const localeId=localeOf(locale),index=acceptedUnitIndex(acceptedReading),sections=list(phiCardSpread.cards).map(card=>cardSection(localeId,card,index));
  const technicalUnits=list(acceptedReading?.technical?.interpretationUnits);
  const technicalLineage=freeze({

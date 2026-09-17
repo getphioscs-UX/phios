@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
 const html=read('perspectives/personal/index.html');
@@ -14,7 +15,7 @@ const input=json('content/customer-experience-rebuild/contracts/cx-r12r4-persona
 const visuals=json('content/customer-experience-rebuild/registries/cx-r12r4-visual-delivery-manifest-v1.json');
 const acceptance=json('content/customer-experience-rebuild/acceptance/cx-r12r4-w0-w9-acceptance-v1.json');
 const iconRecon=json('content/customer-experience-rebuild/registries/cx-r12r4-icon-reconciliation-v1.json');
-const customerVisuals=json('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v2.json');
+const customerVisuals=json('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json');
 assert.equal(authority.customerAuthority.canonicalPath,'/perspectives/personal/');
 assert.equal(authority.customerAuthority.surfaceId,'PERSONAL_REALITY');
 assert.equal(authority.customerAuthority.internalRuntimeName,'Personal Runtime');
@@ -59,7 +60,21 @@ assert.match(js,/METHOD_REQUIREMENTS/);assert.match(js,/requirementsFor/);assert
 assert.equal(iconRecon.authorityBoundary.createsSecondGlobalIconAuthority,false);assert.equal(iconRecon.authorityBoundary.createsSecondAssetResolver,false);assert.equal(iconRecon.forbiddenNewIdentities.includes('PERSPECTIVE_NOT_FACT'),true);
 assert.equal(fs.existsSync('assets/customer-ui/media/personal/icons'),false,'page-private Personal Reality icon directory must not exist');
 assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-PROJECTION-v1.svg'),true);assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-INTERPRETATION-v1.svg'),true);assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-GOVERNANCE-v1.svg'),true);assert.equal(fs.existsSync('assets/icons/global/PHIOS-ICON-NAVIGATION-THRESHOLD-v1.svg'),true);
-assert.equal(fs.readdirSync('assets/icons/methods').filter(x=>x.endsWith('.svg')).length,7);assert.equal(fs.readdirSync('assets/icons/status').filter(x=>x.endsWith('.svg')).length,5);
+assert.deepEqual(fs.readdirSync('assets/icons/methods').filter(x=>x.endsWith('.svg')).sort(),iconRecon.methods.map(x=>path.basename(x.repoPath)).sort(),'method SVG files must match the canonical icon inventory');
+assert.equal(new Set(iconRecon.methods.map(x=>x.customerAssetId)).size,iconRecon.methods.length,'method icon IDs must be unique');
+for(const icon of iconRecon.methods){
+ const asset=customerVisuals.entries.find(x=>x.assetId===icon.customerAssetId);
+ assert(asset,`unregistered method icon: ${icon.customerAssetId}`);
+ assert.equal(asset.publicUrl,`/${icon.repoPath}`);
+ assert.equal(asset.available,true);
+ assert.equal(asset.sha256,createHash('sha256').update(fs.readFileSync(icon.repoPath)).digest('hex'));
+}
+for(const id of ['CXICON-METHOD-ECR','CXICON-METHOD-PROFILE'])assert(iconRecon.methods.some(x=>x.customerAssetId===id));
+assert.match(html,/data-ppr-r5-method="ecr"[^\n]*data-cx-asset="CXICON-METHOD-ECR"/);
+assert.match(html,/data-method="ecr"[^\n]*data-cx-asset="CXICON-METHOD-ECR"/);
+assert.match(html,/data-cx-asset="CXICON-METHOD-PROFILE"/);
+assert.match(read('perspectives/profile/index.html'),/data-cx-asset="CXICON-METHOD-PROFILE"/);
+assert.equal(fs.readdirSync('assets/icons/status').filter(x=>x.endsWith('.svg')).length,5);
 const cxIconIds=new Set(customerVisuals.entries.map(x=>x.assetId));for(const id of ['ICON-007','ICON-010','ICON-011','ICON-020','ICON-027','CXICON-GLOBAL-PROJECTION','CXICON-GLOBAL-INTERPRETATION','CXICON-GLOBAL-GOVERNANCE','CXICON-GLOBAL-NAVIGATION-THRESHOLD','CXICON-METHOD-ASTROLOGY','CXICON-METHOD-BAZI','CXICON-METHOD-ZIWEI','CXICON-METHOD-NUMEROLOGY','CXICON-METHOD-HUMAN-DESIGN','CXICON-METHOD-I-CHING','CXICON-METHOD-TAROT','CXICON-STATUS-AVAILABLE','CXICON-STATUS-PARTIAL','CXICON-STATUS-SEPARATE','CXICON-STATUS-UNAVAILABLE','CXICON-STATUS-TEMPORARY'])assert(cxIconIds.has(id),`canonical CX icon binding missing ${id}`);
 assert(!html.includes('PHIOS-ICON-PERSPECTIVE-NOT-FACT'));assert(!html.includes('/assets/customer-ui/media/personal/icons/'));assert(!js.includes('/assets/customer-ui/media/personal/icons/'));
 assert.match(html,/data-cx-asset="ICON-027"/);assert.match(html,/data-cx-asset="ICON-007"/);assert.match(html,/data-cx-asset="CXICON-STATUS-TEMPORARY"/);assert.match(html,/data-cx-asset="CXICON-METHOD-ASTROLOGY"/);assert.match(html,/data-cx-asset="CXICON-GLOBAL-PROJECTION"/);if(!pprR3ReadingSurface)assert.match(html,/data-cx-asset="ICON-020"/);assert.match(js,/hydrateCustomerAssets/);
