@@ -1,0 +1,227 @@
+
+> check:cx-priority
+> npm run check:cx-p1
+
+
+> check:cx-p1
+> npm run check:cx-r9-r2 && npm run check:cx-no-legacy-route-reference && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy && npm run check:cx-p1-browser-current && npm run check:cx-p1-physical-delete
+
+
+> check:cx-r9-r2
+> npm run check:cx-r13 && node scripts/check-cx-r9-r2-contextual-ask.mjs && node scripts/check-cx-r9-r2-customer-cutover.mjs
+
+
+> check:cx-r13
+> npm run check:cx-r12r && node scripts/check-cx-r13-financial-reality.mjs
+
+
+> check:cx-r12r
+> npm run check:cx-r12 && npm run check:cx-location-resolution && npm run check:cx-location-input-humanization && npm run check:cx-human-language && node scripts/check-cx-r12r-personal-reality-recovery.mjs
+
+
+> check:cx-r12
+> npm run check:cx-r10 && node scripts/check-cx-r12-personal-reality.mjs
+
+
+> check:cx-r10
+> npm run check:cx-r20 && node scripts/check-cx-r10-my-reality.mjs
+
+
+> check:cx-r20
+> npm run check:cx-foundation && node scripts/check-cx-r20-runtime-projection-adapters.mjs
+
+
+> check:cx-foundation
+> npm run check:cx-r5
+
+
+> check:cx-r5
+> npm run check:cx-r4 && node scripts/check-cx-r5-global-shell.mjs
+
+
+> check:cx-r4
+> npm run check:cx-r3 && node scripts/check-cx-r4-visual-assets.mjs
+
+
+> check:cx-r3
+> npm run check:cx-r2 && node scripts/check-cx-r3-customer-design-system.mjs && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy
+
+
+> check:cx-r2
+> npm run check:cx-r1a && node scripts/check-cx-r2-information-architecture.mjs
+
+
+> check:cx-r1a
+> npm run check:cx-r1 && node scripts/check-cx-r1a-hard-cutover-preparation.mjs && npm run check:cx-no-legacy-route-reference
+
+
+> check:cx-r1
+> npm run check:cx-r0 && npm run check:cx-r1-quarantine && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy
+
+
+> check:cx-r0
+> node scripts/check-cx-r0-baseline.mjs
+
+✓ CX-R0 historical freeze passed at f6d31da: 134 frozen customer HTML surfaces, 86 frozen stylesheet consumers, 77 frozen script consumers.
+✓ CX-R0 checker no longer regenerates the R0 census from a later R3/R4 working tree; live R1 guards remain separate.
+✓ CX-R0 ACCEPTED: CURRENT_SURFACE_INVENTORY_COMPLETE · LEGACY_DEPENDENCIES_MAPPED · NO_SECOND_AUTHORITY · READY_FOR_QUARANTINE
+
+> check:cx-r1-quarantine
+> node scripts/check-cx-r1-quarantine.mjs
+
+✓ CX-R1 current quarantine passed: 124 legacy/predecessor presentations frozen; 10 existing CX surfaces explicitly require successor reconciliation.
+✓ CX-R1 ACCEPTED: LEGACY_PRESENTATION_QUARANTINED · NEW_CUSTOMER_SURFACES_CLEAN_ROOM_READY
+
+> check:cx-no-legacy-css
+> node scripts/check-cx-no-legacy-css.mjs
+
+✓ CX-R1-W2 legacy CSS import guard passed: 189 CX HTML surfaces + customer-ui sources contain 0 frozen legacy stylesheet imports.
+
+> check:cx-no-legacy-selectors
+> node scripts/check-cx-no-legacy-selectors.mjs
+
+✓ CX-R1-W3 legacy namespace guard passed: 0 puxr-/public-/rs-/pr-/px2-/wpr-/phi-public- references in CX implementation.
+
+> check:cx-no-old-component-copy
+> node scripts/check-cx-no-old-component-copy.mjs
+
+✓ CX-R1-W4 old component signature guard passed: 10 frozen legacy composition signatures cannot enter CX implementation.
+✓ CX-R1A hard-cutover preparation passed: canonical Ask target is /knowledge/ask/; 3 current cutover blockers are explicitly recorded, not hidden.
+✓ CX-R1A ACCEPTED: preparation complete, no premature route cutover or physical legacy deletion performed.
+
+> check:cx-no-legacy-route-reference
+> node scripts/check-cx-no-legacy-route-reference.mjs
+
+✓ CX legacy-route guard passed across 141 clean-room customer source files.
+✓ CX-R2 Customer IA / Route Authority passed at f6d31da: 8-step internal spine, 3 primary intents, 5 primary navigation domains, 40 canonical route targets, 15 customer surface authorities.
+✓ CX-R2 ACCEPTED: CUSTOMER_MAIN_CHAIN_FROZEN · GLOBAL_IA_FROZEN · REALITY_JOURNEY_DEMOTED
+✓ No route cutover, legacy physical deletion, design-system creation, backend authority creation or hard-coded method availability was performed by CX-R2.
+✓ CX-R3 Customer Design System passed at 2cffbc9: 7 retained clean-room CSS layers, 13 semantic color roles, 10 type roles, 12 spacing steps, 6 button roles, 9 card roles, 7 statuses, 7 result primitives and 8 workspace primitives.
+✓ CX-R3 ACCEPTED: CUSTOMER_UI_SYSTEM_READY · NO_PAGE_SPECIFIC_DESIGN_AUTHORITY
+✓ R3 did not perform R4 visual-asset authority, R5 shell activation, production route cutover, legacy physical deletion or backend-authority creation.
+
+> check:cx-no-legacy-css
+> node scripts/check-cx-no-legacy-css.mjs
+
+✓ CX-R1-W2 legacy CSS import guard passed: 189 CX HTML surfaces + customer-ui sources contain 0 frozen legacy stylesheet imports.
+
+> check:cx-no-legacy-selectors
+> node scripts/check-cx-no-legacy-selectors.mjs
+
+✓ CX-R1-W3 legacy namespace guard passed: 0 puxr-/public-/rs-/pr-/px2-/wpr-/phi-public- references in CX implementation.
+
+> check:cx-no-old-component-copy
+> node scripts/check-cx-no-old-component-copy.mjs
+
+✓ CX-R1-W4 old component signature guard passed: 10 frozen legacy composition signatures cannot enter CX implementation.
+✓ CX-R4 Canonical Visual Assets passed at d35486b: 182 customer projections, 182 available, 7 hero roles, 5 book covers, 10 semantic illustration roles and 39 live CX visual bindings fail-closed.
+✓ Product/CX visual reconciliation passed: PPR-owned Personal asset identity stays frozen; new Financial CX uses semantic-role resolution.
+✓ CX-R0 freeze checker repair passed: historical R0 inventory is no longer regenerated from the R3/R4 working tree; live R1 guards remain active.
+✓ CX-R4 ACCEPTED: CANONICAL_VISUAL_ASSET_SYSTEM_READY · FIVE_BOOK_COVERS_BOUND · ILLUSTRATION_ROLES_RECONCILED · BROKEN_IMAGE_GATE_ACTIVE · READY_FOR_CX_R5
+✓ R4 did not perform R5 shell authority, production route cutover, legacy physical deletion or backend-authority creation.
+✓ CX-R5 Single Customer Shell passed at e7a0e05: 189 clean-room shell consumers share one header, primary navigation authority, mobile drawer, Search entry, Ask entry, account presentation, locale implementation and footer.
+✓ Search and Ask remain handoffs to governed surfaces; current Ask destination is /knowledge/ask/; account state is presentation-only and shell still creates no backend or answer authority.
+✓ CX-R5 ACCEPTED: ONE_GLOBAL_CUSTOMER_SHELL · READY_FOR_CX_R6_HOMEPAGE
+✓ CX-R20 Current-Main Reconciliation passed at 3eed6a2: 9 consume-only adapters preserve upstream authority, Unknown, provenance and conservative state across the priority customer tranche.
+✓ Historical R20 v1 and R0/R2 projection maps remain byte-identical; current v4 restores explicit Financial Reality coverage and future gates without creating a second authority.
+✓ Truth guards passed: missing readout state remains UNKNOWN, missing financial currency remains null, JR remains continuity/progress, and professional recommendations can only pass through PR/PFR authority.
+✓ CX-R20 ACCEPTED: CUSTOMER_RUNTIME_PROJECTION_BOUNDARY_FROZEN · PRIORITY_PRODUCT_TRANCHE_READY · NO_ROUTE_CUTOVER
+✓ CX-R10 My Reality successor passed at 9840757: one R20-projected workspace now covers overview, canonical Reality, perspectives, reading, directions, confirmed actions, session observation, review, history, reports and continuity.
+  Possible directions are never promoted to actions; unconfirmed actions are hidden; observation stays session-only; Journey remains progression; no backend, Reality, Navigation, Report or persistence authority is created.
+  Legacy Reality Dashboard UI authority is retired and the physical presentation has been deleted after P1 browser acceptance.
+✓ CX-R12 Personal Reality current-main successor passed at 74fba1c: five-stage customer input, customer-first overview, five method-hidden result tabs, returned-perspective disclosure and explicit My Reality handoff are active.
+  PPR/method meaning remains upstream; profile scoring is not recreated; method availability is not hard-coded; missing overview areas remain open rather than inferred.
+  Legacy Personal Runtime presentation files are physically deleted after browser acceptance; compatibility routes remain redirects to canonical Personal Reality.
+✓ CX-R12 shared-surface successor: Personal Reality now uses a 3-priority customer overview, one-method-at-a-time detail, nested technical provenance and explicit Reality return without changing method/commerce truth.
+✓ CX-R12 ACCEPTED: PERSONAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R13 · NO_NEW_P1_ROUTE_CUTOVER
+
+> check:cx-location-resolution
+> node scripts/check-cx-location-resolution.mjs
+
+✓ CX birth-place resolution passed: mixed-script Seremban → 芙蓉/Seremban candidate → confirmed coordinates → Asia/Kuala_Lumpur, while Taiping regression remains intact.
+
+> check:cx-location-input-humanization
+> node scripts/check-cx-r12r-location-input-humanization.mjs
+
+✓ CX-R12R location input humanization passed: English/Chinese place-name search is bilingual, suggestions stay next to the field, placeholders localize, and internal location-explainer copy is removed.
+
+> check:cx-human-language
+> node scripts/check-cx-human-language.mjs
+
+✓ CX human-language gate passed: Personal Reality visible copy is written for people, not internal system operators.
+✓ CX-R12R recovery passed: correct hero binding, simple intake, confirmed place resolution, conditional Zi Wei input, partial results, human copy and mobile repair are present.
+✓ CX-R13 Financial Reality current-main successor passed at 5c6594b: nine-stage intake, evidence states, four-question overview, calculation drilldown, customer-readable findings, fail-closed planning, professional authority layers and released-report gating are active.
+  FDR/FCR/FAR/HFP/PFR/RR remain upstream; CX creates no calculation, planning priority, professional recommendation, report lifecycle state, persistence, route cutover or physical legacy deletion.
+✓ CX-R13 ACCEPTED: FINANCIAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R9_R2 · NO_NEW_P1_ROUTE_CUTOVER
+✓ CX-R9-R2 Contextual Ask successor passed: 32/32 machine policy scenarios cover all required W15 families across EN and zh-Hans.
+  /knowledge/ask/ is replacement-ready with explicit context selection, source-class grouping, freshness/provenance disclosure and fail-closed protected contexts.
+  P1 is active: /knowledge/ask/ is canonical and /ask is compatibility-only; R9-R2 itself still created no route, entitlement, relationship, profile or professional authority.
+✓ CX-R9-R2 customer cutover reconciliation passed.
+  /knowledge/ask/ is the accepted current route via P1; historical W0-W15 evidence remains byte-preserved and is not rewritten after the fact.
+  Customer copy is humanized, public Knowledge context remains direct, and protected Reading / Relationship / Profile context remains server-resolved and fail-closed.
+
+> check:cx-no-legacy-route-reference
+> node scripts/check-cx-no-legacy-route-reference.mjs
+
+✓ CX legacy-route guard passed across 141 clean-room customer source files.
+
+> check:cx-no-legacy-css
+> node scripts/check-cx-no-legacy-css.mjs
+
+✓ CX-R1-W2 legacy CSS import guard passed: 189 CX HTML surfaces + customer-ui sources contain 0 frozen legacy stylesheet imports.
+
+> check:cx-no-legacy-selectors
+> node scripts/check-cx-no-legacy-selectors.mjs
+
+✓ CX-R1-W3 legacy namespace guard passed: 0 puxr-/public-/rs-/pr-/px2-/wpr-/phi-public- references in CX implementation.
+
+> check:cx-no-old-component-copy
+> node scripts/check-cx-no-old-component-copy.mjs
+
+✓ CX-R1-W4 old component signature guard passed: 10 frozen legacy composition signatures cannot enter CX implementation.
+
+> check:cx-p1-browser-current
+> node scripts/check-p1-browser-acceptance-current.mjs
+
+✓ P1 production browser acceptance current gate passed: the user-confirmed browser phase transition is recorded without inventing per-matrix observations.
+  Browser R1 repairs remain intact; current P1 route authority records HUMAN_ACCEPTED and permits the completed physical legacy deletion.
+
+> check:cx-p1-physical-delete
+> node scripts/check-cx-p1-physical-legacy-delete.mjs
+
+✓ P1 PHYSICAL LEGACY DELETE passed: 7 retired public presentation files are physically absent while all compatibility routes remain direct 308 redirects to the four canonical P1 surfaces.
+  Production browser acceptance is recorded from the user-confirmed phase transition; backend/runtime/Knowledge/Financial/Reality/Report authorities remain intact.
+✓ P1 EXIT: PHYSICAL_LEGACY_DELETE_COMPLETE · READY_FOR_POST_CUTOVER_HUMAN_PRODUCTION_TEST
+
+> check:cx-r12r3b-pass2c
+> npm run check:cx-r12r3b-pass2b && node scripts/check-cx-r12r3b-pass2c.mjs
+
+
+> check:cx-r12r3b-pass2b
+> npm run check:cx-r12r3b-pass2a && node scripts/check-cx-r12r3b-pass2b.mjs
+
+
+> check:cx-r12r3b-pass2a
+> npm run check:cx-r12r3b-pass2 && node scripts/check-cx-r12r3b-pass2a.mjs
+
+
+> check:cx-r12r3b-pass2
+> npm run check:cx-r12r3b && node scripts/check-cx-r12r3b-pass2.mjs
+
+
+> check:cx-r12r3b
+> node scripts/check-cx-r12r3b-method-interpretation-layer.mjs
+
+✓ CX-R12R3B W0–W60 shared Method Interpretation Layer passed.
+  AST, NUM, BZR and ZWR remain independent calculation/projection perspectives and consume one shared composition, graph, validation and handoff successor.
+  96 fixed human-review cases are prepared; HUMAN_REVIEWED, CUSTOMER_PUBLISHABLE, LIVE_BROWSER_ACCEPTED and FULL_PRODUCTION remain false without external evidence.
+✓ CX-R12R3B Pass 2 audit/preflight passed.
+  W0–W60 DEVELOPMENT_ACCEPTED is preserved.
+  96 case identities are preserved, but 0/96 are review-eligible because case-specific candidate/graph snapshots are not materialized and composition/customer-language blockers remain.
+  HUMAN_ACCEPTED, LIVE_BROWSER_ACCEPTED, CONTROLLED_PRODUCTION and FULL_PRODUCTION remain fail-closed.
+✓ CX-R12R3B PASS2A passed: selector remediation + customer-language projection + 96/96 materialized review cases.
+  External dual human review remains required; 0/96 are human accepted and no production authority is promoted.
+✓ CX-R12R3B PASS2B human acceptance passed: 96/96 dual accepted, all four interpretation methods are customer-publishable at the interpretation layer.
+  Production remains fail-closed until post-human machine reacceptance, exact deployment, live browser and ordinary-reader evidence complete.
+✓ CX-R12R3B PASS2C post-human machine reacceptance passed.
+  Exact deployment + live browser + 5-minute ordinary-reader evidence remain required before production promotion/freeze.

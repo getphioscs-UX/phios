@@ -135,3 +135,9 @@ export function installLocaleControls(scope=document){
   installDynamicLocaleProjection(scope);
   return applyCustomerLocale(preferredCustomerLocale(),document);
 }
+
+// HD intake successor copy stays in the existing customer localization owner.
+export const HD_INTAKE_COPY=Object.freeze({
+  en:{review:'Review your Human Design details',intro:'PHI OS uses your uploaded Human Design chart and birth details to prefill the structure below. Only items marked “Needs confirmation” require your attention.',CONFIRMED:'Confirmed',CONFLICT:'Needs confirmation',UNKNOWN:'Unable to confirm',CALCULATED:'Calculated · needs confirmation',EXTRACTED:'Chart reading · needs confirmation',DERIVED:'Automatic',edit:'Edit',view:'View',variable:'Variable · four arrows',help:'How to read it',guide:'Find the four arrows around the BodyGraph head. Match each arrow’s actual direction. PHI OS converts your choices automatically; no technical codes are needed.',positions:['Top left','Bottom left','Top right','Bottom right'],left:'Left',right:'Right',check:'Do these four arrows match your chart?',yes:'Correct',change:'Change arrows',gates:'Activated gates'},
+  'zh-Hans':{review:'请核对以下资料',intro:'系统会结合你上传的 Human Design 图表与出生资料预填。只有标记为「需要确认」的项目需要你检查或补充。',CONFIRMED:'已确认',CONFLICT:'需要确认',UNKNOWN:'未能确认',CALCULATED:'内部计算 · 需要确认',EXTRACTED:'图表读取 · 需要确认',DERIVED:'自动',edit:'修改',view:'查看',variable:'Variable｜四箭头',help:'怎么看？',guide:'找到 BodyGraph 头部周围的四个箭头，按照每个箭头实际朝向选择。PHI OS 会自动转换，你不需要理解专业代码。',positions:['左上箭头','左下箭头','右上箭头','右下箭头'],left:'向左',right:'向右',check:'这四个箭头方向与你的图表一致吗？',yes:'正确',change:'修改箭头',gates:'激活闸门'}
+});

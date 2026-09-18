@@ -1,3 +1,4 @@
+import {reconcileIntakeField,deriveIntakeFields,variableFromArrows,arrowsFromVariable} from './hd-intake-reconciliation.js';
 import crypto from 'node:crypto';
 import {cleanExternalProfileText,EXTERNAL_PROFILE_MANUAL_FIELDS} from './external-profile-contract.js';
 import {parseHumanDesignProfileText} from './hd-profile-parser.js';
@@ -20,15 +21,18 @@ function candidateRank(item){
 }
 function bestCandidate(items){return [...items].sort((a,b)=>candidateRank(b)-candidateRank(a))[0]||null}
 function groupCandidates(items=[]){const map=new Map();for(const item of items){if(!item?.field)continue;if(!map.has(item.field))map.set(item.field,[]);map.get(item.field).push(item)}return map}
-function fieldDraft(field,items){const selected=bestCandidate(items)||null;return freeze({field,value:selected?.normalizedValue??null,sourceType:selected?.sourceType??null,sourceRegion:selected?.sourceRegion??null,extractionConfidence:selected?.extractionConfidence??null,customerConfirmed:selected?.customerConfirmed===true,alternatives:Object.freeze(items.filter(item=>item!==selected).map(item=>item.normalizedValue))})}
+function fieldDraft(field,items,intakeId){const selected=bestCandidate(items)||null;return freeze({...reconcileIntakeField(field,items,intakeId,selected),field,value:selected?.normalizedValue??null,sourceType:selected?.sourceType??null,sourceRegion:selected?.sourceRegion??null,extractionConfidence:selected?.extractionConfidence??null,customerConfirmed:selected?.customerConfirmed===true,alternatives:Object.freeze(items.filter(item=>item!==selected).map(item=>item.normalizedValue))})}
 
 export function buildExternalProfileConfirmationDraft(extractionIr){
   if(!extractionIr||typeof extractionIr!=='object')throw new TypeError('EXTERNAL_PROFILE_EXTRACTION_IR_REQUIRED');
+  for(const item of [...(extractionIr.candidates||[]),...(extractionIr.manualFields||[])])if(item.currentReadingId&&item.currentReadingId!==extractionIr.intakeId)throw new TypeError('HD_INTAKE_SCOPE_MISMATCH');
   const grouped=groupCandidates([...(extractionIr.candidates||[]),...(extractionIr.manualFields||[])]);
   const fields={};
-  for(const field of [...EXTERNAL_PROFILE_CORE_FIELDS,...EXTERNAL_PROFILE_MANUAL_FIELDS])fields[field]=fieldDraft(field,grouped.get(field)||[]);
+  for(const field of [...EXTERNAL_PROFILE_CORE_FIELDS,...EXTERNAL_PROFILE_MANUAL_FIELDS])fields[field]=fieldDraft(field,grouped.get(field)||[],extractionIr.intakeId);
+  deriveIntakeFields(fields,extractionIr.intakeId);
+  fields.variable={...fields.variable,arrowDirections:arrowsFromVariable(fields.variable?.status==='CONFLICT'||fields.variable?.extractionConfidence==='LOW'?null:fields.variable?.value)};
   const structure={};
-  for(const field of EXTERNAL_PROFILE_STRUCTURAL_FIELDS)structure[field]=fieldDraft(field,grouped.get(field)||[]);
+  for(const field of EXTERNAL_PROFILE_STRUCTURAL_FIELDS)structure[field]=fieldDraft(field,grouped.get(field)||[],extractionIr.intakeId);
   const body={
     schemaVersion:EXTERNAL_PROFILE_CONFIRMATION_DRAFT_VERSION,
     intakeId:extractionIr.intakeId,
@@ -98,7 +102,16 @@ function recordsFromDraft(draft,edits={},structureEdits={}){
 export function confirmExternalProfile({confirmationDraft,edits={},structureEdits={},confirmedAt=new Date().toISOString()}={}){
   if(!confirmationDraft||confirmationDraft.schemaVersion!==EXTERNAL_PROFILE_CONFIRMATION_DRAFT_VERSION)throw new TypeError('EXTERNAL_PROFILE_CONFIRMATION_DRAFT_INVALID');
   if(typeof confirmationDraft.intakeId!=='string'||!confirmationDraft.intakeId)throw new TypeError('EXTERNAL_PROFILE_CONFIRMATION_INTAKE_ID_REQUIRED');
-  const records=recordsFromDraft(confirmationDraft,edits,structureEdits);
+  for(const item of [...Object.values(confirmationDraft.fields||{}),...Object.values(confirmationDraft.structure||{})]){
+    if(item.currentReadingId&&item.currentReadingId!==confirmationDraft.intakeId)throw new TypeError('HD_INTAKE_SCOPE_MISMATCH');
+  }
+  if(Object.hasOwn(edits,'type')&&edits.type!==confirmationDraft.fields?.type?.value){
+    const derived={type:{value:edits.type,status:'CONFIRMED'},strategy:{},notSelfTheme:{}};
+    deriveIntakeFields(derived,confirmationDraft.intakeId);edits={...edits};
+    for(const field of ['strategy','notSelfTheme'])if(derived[field]?.value&&(!Object.hasOwn(edits,field)||edits[field]===confirmationDraft.fields?.[field]?.value))edits[field]=derived[field].value;
+  }
+  if(Object.hasOwn(edits,'variableArrows')){edits={...edits,variable:variableFromArrows(edits.variableArrows)||''};delete edits.variableArrows;}
+  const records=recordsFromDraft(confirmationDraft,edits,structureEdits).map(record=>freeze({...record,intakeEvidence:(confirmationDraft.fields?.[record.field]||confirmationDraft.structure?.[record.field])?.evidence||[],priorSource:(confirmationDraft.fields?.[record.field]||confirmationDraft.structure?.[record.field])?.source||'UNKNOWN',currentReadingId:confirmationDraft.intakeId,source:'CURRENT_SESSION_MANUAL_CONFIRMATION',status:'CONFIRMED',manuallyOverridden:record.sourceType==='CUSTOMER_CORRECTED',lastValidatedAt:confirmedAt}));
   if(!records.length)throw new TypeError('EXTERNAL_PROFILE_CONFIRMATION_VALUE_REQUIRED');
   const profile={
     schemaVersion:EXTERNAL_PROFILE_CONFIRMED_VERSION,

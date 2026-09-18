@@ -23,14 +23,14 @@ const clean=value=>String(value??'').trim();
 function hasValue(value){return Array.isArray(value)?value.length>0:Boolean(value)}
 function isCalculatedDraftItem(item){return item?.sourceType===HDR_INTAKE_CALCULATION_SOURCE}
 function buildRecognitionSummary(confirmationDraft){
-  const recognizedFields=BASIC_CONFIRMATION_FIELDS.filter(field=>hasValue(confirmationDraft?.fields?.[field]?.value)&&!isCalculatedDraftItem(confirmationDraft?.fields?.[field]));
+  const recognizedFields=BASIC_CONFIRMATION_FIELDS.filter(field=>hasValue(confirmationDraft?.fields?.[field]?.value)&&(confirmationDraft?.fields?.[field]?.evidence||[]).some(item=>['CUSTOMER_UPLOADED_DOCUMENT','CUSTOMER_UPLOADED_IMAGE','CUSTOMER_PASTED_TEXT'].includes(item.sourceType)));
   const calculatedReferenceFields=BASIC_CONFIRMATION_FIELDS.filter(field=>hasValue(confirmationDraft?.fields?.[field]?.value)&&isCalculatedDraftItem(confirmationDraft?.fields?.[field]));
   const pendingFields=BASIC_CONFIRMATION_FIELDS.filter(field=>!hasValue(confirmationDraft?.fields?.[field]?.value));
   const advancedFields=EXTERNAL_PROFILE_MANUAL_FIELDS.filter(field=>field!=='variable');
   const advancedRecognizedFields=advancedFields.filter(field=>hasValue(confirmationDraft?.fields?.[field]?.value));
   const structuralRecognizedFields=STRUCTURAL_CONFIRMATION_FIELDS.filter(field=>hasValue(confirmationDraft?.structure?.[field]?.value)&&!isCalculatedDraftItem(confirmationDraft?.structure?.[field]));
   const structuralCalculatedReferenceFields=STRUCTURAL_CONFIRMATION_FIELDS.filter(field=>hasValue(confirmationDraft?.structure?.[field]?.value)&&isCalculatedDraftItem(confirmationDraft?.structure?.[field]));
-  return freeze({basicExpectedCount:BASIC_CONFIRMATION_FIELDS.length,recognizedCount:recognizedFields.length,calculatedReferenceCount:calculatedReferenceFields.length,prefilledCount:recognizedFields.length+calculatedReferenceFields.length,pendingCount:pendingFields.length,recognizedFields,calculatedReferenceFields,pendingFields,advancedRecognizedCount:advancedRecognizedFields.length,advancedRecognizedFields,structuralRecognizedFields,structuralCalculatedReferenceFields});
+  return freeze({needsConfirmationFields:BASIC_CONFIRMATION_FIELDS.filter(field=>['CONFLICT','CALCULATED','EXTRACTED','UNKNOWN'].includes(confirmationDraft?.fields?.[field]?.status)),basicExpectedCount:BASIC_CONFIRMATION_FIELDS.length,recognizedCount:recognizedFields.length,calculatedReferenceCount:calculatedReferenceFields.length,prefilledCount:recognizedFields.length+calculatedReferenceFields.length,pendingCount:pendingFields.length,recognizedFields,calculatedReferenceFields,pendingFields,advancedRecognizedCount:advancedRecognizedFields.length,advancedRecognizedFields,structuralRecognizedFields,structuralCalculatedReferenceFields});
 }
 
 async function sha256File(file){const bytes=await file.arrayBuffer();return crypto.createHash('sha256').update(Buffer.from(bytes)).digest('hex')}

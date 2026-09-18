@@ -288,3 +288,6 @@ assert(pkg.scripts.check.includes('npm run check:hd-pro-r2'));
 console.log(`✓ HD-PRO-R2 W0-W10 machine campaign passed ${passCount}/${w9m.caseCount}.`);
 console.log('  Customer-supplied chart intake now has explicit Read -> editable confirmation -> canonical chart flow; HDR public calculation and automatic Variable/PHS calculation remain blocked.');
 console.log('  W9 human review is 24/24 accepted; the admitted external-chart reading and Reality Comparison are CUSTOMER_PUBLISHED on the canonical personal route.');
+
+// Additive HD-INTAKE-R1 regressions are part of the existing HD campaign.
+await import('./check-hd-intake-r1.mjs');

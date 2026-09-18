@@ -134,7 +134,9 @@ assert(html.includes('计算结构参考'));
 const historicalConversionCopy=html.includes('Cloudflare document-conversion service');
 const w11ConfirmationCopy=hdW11.status==='OFFICIAL_CHART_PDF_INTAKE_ADAPTER_SUCCESSOR_ACTIVE'&&html.includes('Automatic extraction creates candidates only.')&&html.includes('Only the values you verify here are used in this session.');
 const currentConfirmationCopy=html.includes('CHART DETAILS — REVIEW BEFORE USE')&&html.includes('Review the chart details below.')&&html.includes('only use the values you confirm');
-assert(historicalConversionCopy||w11ConfirmationCopy||currentConfirmationCopy,'R2/W11/current customer confirmation surface must disclose review-before-use and customer verification');
+const intakeR1Copy=fs.readFileSync('assets/customer-ui/js/locale.js','utf8');
+const intakeR1ConfirmationCopy=client.includes('HD_INTAKE_COPY[locale()]')&&intakeR1Copy.includes('Review your Human Design details')&&intakeR1Copy.includes('请核对以下资料')&&html.includes('name="externalProfileChartVerified"')&&html.includes('only use the values you confirm');
+assert(historicalConversionCopy||w11ConfirmationCopy||currentConfirmationCopy||intakeR1ConfirmationCopy,'R2/W11/current customer confirmation surface must disclose review-before-use and customer verification');
 for(const token of ['/api/customer-external-profile-confirm','/api/customer-external-profile-shadow-check','renderExternalProfileConfirmation','confirmPreparedExternalProfile','runExternalProfileShadowCheck'])assert(client.includes(token),`R2 client binding missing ${token}`);
 for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"','name="externalDefinedCenters"','name="externalOpenCenters"'])assert.equal(html.includes(forbidden),false,`Structural detail must not become normal manual input: ${forbidden}`);
 

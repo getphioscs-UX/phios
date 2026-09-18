@@ -59,7 +59,7 @@ assert(html.includes('共同观察领域'));
 assert(html.includes('互补视角'));
 assert(html.includes('没有直接对应'));
 assert(html.includes('Generator'));
-assert(html.includes('Wait to Respond'));
+assert(html.includes('To Respond')); // HD-INTAKE-R1 canonical Generator strategy
 assert(html.includes('Sacral'));
 assert(html.includes('5/1'));
 assert(html.includes('Markets'));
@@ -77,7 +77,7 @@ const partialIr=buildEcrHumanDesignComparisonIR({acceptedEcrReading:ecr.methodRe
 const partialHtml=renderEcrHumanDesignComparison(partialIr);
 assert(partialHtml.includes('PHI OS does not fill in or calculate a missing field here.'));
 assert(partialHtml.includes('Generator'));
-assert(partialHtml.includes('Wait to Respond'));
+assert(partialHtml.includes('To Respond'));
 assert.equal(partialHtml.includes('Sacral'),false,'W6 must not invent missing Authority');
 assert.equal(partialHtml.includes('5/1'),false,'W6 must not invent missing Profile');
 

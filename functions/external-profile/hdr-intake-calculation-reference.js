@@ -48,9 +48,9 @@ export async function buildHdrIntakeCalculationReference({canonicalBirthInput,re
   if(authorityCode)candidates.push(candidate('authority',readableAuthority(authorityCode),'authority'));
   if(profile)candidates.push(candidate('profile',String(profile),'profile'));
   if(definition)candidates.push(candidate('definition',definition,'definition'));
-  if(channels.length)candidates.push(candidate('channels',freeze(channels),'channels'));
-  if(definedCenters.length)candidates.push(candidate('definedCenters',freeze(definedCenters),'definedCenters'));
-  if(openCenters.length)candidates.push(candidate('openCenters',freeze(openCenters),'openCenters'));
+  if(Array.isArray(sections.get('channels')?.channels))candidates.push(candidate('channels',freeze(channels),'channels'));
+  if(Array.isArray(sections.get('centers')?.definedCenters))candidates.push(candidate('definedCenters',freeze(definedCenters),'definedCenters'));
+  if(Array.isArray(sections.get('centers')?.undefinedCenters))candidates.push(candidate('openCenters',freeze(openCenters),'openCenters'));
   if(activations.length)candidates.push(candidate('activations',freeze(activations),'activations'));
   const chartOverview=sections.get('chart_overview')||{};
   return freeze({

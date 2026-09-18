@@ -1,3 +1,4 @@
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -31,7 +32,7 @@ for(const item of kapRelevance.runtimeSuccessors){
   assert.equal(sha(item.path),currentSha,`KAP_RELEVANCE_RUNTIME_DRIFT:${item.path}`);
 }
 const askRequest=new Request('https://phios.test/api/customer-contextual-ask',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:'为什么我丈夫脾气那么坏',locale:'zh-Hans',contexts:[{contextType:'KNOWLEDGE'}],questionOnly:false})});const askResponse=await runContextualAsk({request:askRequest,env:{},data:{}});assert.equal(askResponse.status,200);const askPayload=await askResponse.json();assert.equal(askPayload.ok,true);assert.equal(askPayload.view.state,'NEEDS_CONTEXT');assert.match(askPayload.view.answer.text,/脾气坏/);assert.doesNotMatch(askPayload.view.answer.text,/为什么需要 PHI OS/);assert.deepEqual(askPayload.view.relatedKnowledge,[]);assert.ok(askPayload.view.answer.supporting.every(item=>!/I am using the Relational Runtime/.test(item)));assert.ok(askPayload.view.answer.supporting.some(item=>/关系情境/.test(item))); 
-const z=json('content/customer-experience-rebuild/ziwei-cx-r1/authority/ziwei-cx-r1-w16-current-shared-owner-reconciliation-v3.json');const owner=json(z.currentOwnerRegistryRef);assert.equal(z.currentOwnerSha256,owner.files[z.sharedFile].currentSha256);assert.equal(sha(z.sharedFile),z.currentOwnerSha256);assert.equal(z.ziweiSharedSurfaceMutationByThisWork,false);
+const z=json('content/customer-experience-rebuild/ziwei-cx-r1/authority/ziwei-cx-r1-w16-current-shared-owner-reconciliation-v3.json');assertPprCurrentSharedOwner(z.sharedFile,{historicalDigest:z.currentOwnerSha256,label:'P1 browser / registered HD intake shared-host successor'});assert.equal(z.ziweiSharedSurfaceMutationByThisWork,false);
 assert.equal(acceptance.productionBrowserAcceptance,false);assert.equal(acceptance.physicalLegacyDeleteAllowed,false);assert.equal(cutover.productionBrowserAcceptance.status,'PENDING_PRODUCTION_BROWSER_ACCEPTANCE');assert.equal(cutover.physicalDelete.performed,false);
 console.log('✓ P1 Browser R1 blocker repair passed: light-header brand variant, Ask drawer navigation, relationship/relevance routing and Zi Wei current-owner reconciliation are code-correct.');
 console.log('  Production browser acceptance remains pending; physical legacy deletion remains blocked until human browser recheck.');
