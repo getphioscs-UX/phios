@@ -36,6 +36,16 @@ export const BOOK_ONE_PRODUCT = Object.freeze({
 
 export const BOOK_PRODUCTS = Object.freeze([BOOK_ONE_PRODUCT]);
 
+// Additional private source keys are deployment configuration, never browser input.
+// No Book V–VII preview or unverified R2 path is invented here.
+export function resolveCommerceBookSourceKey(env,productId){
+  if(productId==='COM-BOOK-01') return resolveBookOneSourceKey(env);
+  let mappings={};try{mappings=JSON.parse(env.COMMERCE_BOOK_SOURCE_KEYS_JSON||'{}');}catch{}
+  const key=String(mappings[productId]||'');
+  if(!/^COM-BOOK-0[2-7]$/.test(productId)||!key||key.includes('..')||key.startsWith('/')||/^https?:/.test(key)) throw Object.assign(new Error('Private book source mapping is not configured.'),{status:503,code:'commerce_book_source_unconfigured'});
+  return key;
+}
+
 export function getBookProduct(productId) {
   return BOOK_PRODUCTS.find(product =>
     product.productId === productId ||

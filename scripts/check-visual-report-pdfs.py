@@ -15,14 +15,15 @@ from pypdf import PdfReader
 from PIL import Image, ImageDraw
 
 args = argparse.ArgumentParser()
-args.add_argument('--poppler-bin', required=True)
+args.add_argument('--poppler-bin')
+args.add_argument('--render', action='store_true', help='Explicitly retain review raster exports')
 options = args.parse_args()
 root = Path(__file__).resolve().parent.parent
 output = root / 'docs/visual-report-r1/pdf-review'
 temporary = root / '.tmp/vrpt-final-pdf'
 output.mkdir(exist_ok=True)
 temporary.mkdir(parents=True, exist_ok=True)
-poppler = Path(options.poppler_bin) / ('pdftoppm.exe' if __import__('os').name == 'nt' else 'pdftoppm')
+poppler = Path(options.poppler_bin or '.') / ('pdftoppm.exe' if __import__('os').name == 'nt' else 'pdftoppm')
 
 
 def inspect(path):
@@ -38,26 +39,29 @@ def inspect(path):
                                           and abs(p['heightPt'] - 841.89) < 1 for p in pages)
     # Only the original six PHI card illustrations may be raster content.
     valid &= sum(p['rasterImages'] for p in pages) == (6 if case.startswith('ECR-') else 0)
-    subprocess.run([str(poppler), '-r', '60', '-png', str(path), str(temporary / name)],
-                   check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    # Select by the actual page count; an older, longer export must not leave
-    # obsolete pages in the contact sheet.
-    digits = len(str(len(pages)))
-    files = [temporary / f'{name}-{i:0{digits}d}.png' for i in range(1, len(pages) + 1)]
-    width, height, columns = 240, 350, min(4, len(files))
-    canvas = Image.new('RGB', (columns * width, math.ceil(len(files) / columns) * height), '#e9ece7')
-    draw = ImageDraw.Draw(canvas)
-    for i, file in enumerate(files):
-        image = Image.open(file).convert('RGB')
-        image.thumbnail((width - 12, height - 26))
-        x, y = i % columns * width + 6, i // columns * height + 20
-        canvas.paste(image, (x, y))
-        draw.text((x, y - 16), str(i + 1), fill='#293638')
-    contact = output / (name + '.png')
-    canvas.save(contact)
+    contact = None
+    if options.render:
+        if not options.poppler_bin: raise ValueError('--render requires --poppler-bin')
+        subprocess.run([str(poppler), '-r', '60', '-png', str(path), str(temporary / name)],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # Select by the actual page count; an older, longer export must not leave
+        # obsolete pages in the contact sheet.
+        digits = len(str(len(pages)))
+        files = [temporary / f'{name}-{i:0{digits}d}.png' for i in range(1, len(pages) + 1)]
+        width, height, columns = 240, 350, min(4, len(files))
+        canvas = Image.new('RGB', (columns * width, math.ceil(len(files) / columns) * height), '#e9ece7')
+        draw = ImageDraw.Draw(canvas)
+        for i, file in enumerate(files):
+            image = Image.open(file).convert('RGB')
+            image.thumbnail((width - 12, height - 26))
+            x, y = i % columns * width + 6, i // columns * height + 20
+            canvas.paste(image, (x, y))
+            draw.text((x, y - 16), str(i + 1), fill='#293638')
+        contact = output / (name + '.png')
+        canvas.save(contact)
     return dict(file=path.relative_to(root).as_posix(), sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
                 expectedPages=expected, actualPages=len(pages), status='PASS' if valid else 'FAIL', pages=pages,
-                contactSheet=contact.relative_to(root).as_posix())
+                contactSheet=contact.relative_to(root).as_posix() if contact else None)
 
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:

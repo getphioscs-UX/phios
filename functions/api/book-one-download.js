@@ -33,9 +33,7 @@ export async function onRequestGet({ request, env = {} }) {
       });
     }
     if (
-      !authorization.watermarked_object_key.startsWith(
-        'private/books/book-one/watermarked/'
-      )
+      !/^private\/books\/(?:book-one|com-book-0[1-7])\/watermarked\/[A-Za-z0-9_-]+\.pdf$/.test(authorization.watermarked_object_key)
     ) {
       throw Object.assign(new Error('Unwatermarked delivery is forbidden.'), {
         status: 403,
@@ -71,7 +69,7 @@ export async function onRequestGet({ request, env = {} }) {
     const headers = new Headers({
       'content-type': 'application/pdf',
       'content-disposition':
-        'attachment; filename="PHI-OS-Book-I-Watermarked.pdf"',
+        'attachment; filename="PHI-OS-Licensed-Book-Watermarked.pdf"',
       'cache-control': 'private, no-store, max-age=0',
       'content-security-policy': "default-src 'none'",
       'x-content-type-options': 'nosniff',

@@ -19,7 +19,7 @@ try{await Promise.all(Array.from({length:3},async()=>{while(cursor<jobs.length){
  const metrics=await page.locator('.vrpt-page').evaluateAll(pages=>pages.map(p=>{const r=p.getBoundingClientRect(),v=p.querySelector('.vrpt-primary').getBoundingClientRect(),b=p.querySelector('.vrpt-insights').getBoundingClientRect();return {pageId:p.dataset.pageId,width:r.width,height:r.height,visualRatio:v.height/r.height,bodyRatio:b.height/r.height,overflow:p.scrollWidth>p.clientWidth+2,insights:p.querySelectorAll('.vrpt-insights p').length};}));
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
  const key=`${sample.caseId}-${depth}-${width}`;
- await page.screenshot({path:`${root}/browser/${key}.png`,fullPage:true});
+ if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.screenshot({path:`${root}/browser/${key}.png`,fullPage:true});
  let print=[];
  if(width===1440){await page.emulateMedia({media:'print'});print=await page.locator('.vrpt-page').evaluateAll(pages=>pages.map(p=>({pageId:p.dataset.pageId,overflow:p.scrollHeight>p.clientHeight+2||p.scrollWidth>p.clientWidth+2,height:p.getBoundingClientRect().height})));}
  if(process.argv.includes('--pdf')&&width===1440&&/^[A-Z]+-01-/.test(sample.caseId)){fs.mkdirSync('output/pdf',{recursive:true});await page.pdf({path:`output/pdf/VRPT-${sample.caseId}-${depth}.pdf`,format:'A4',printBackground:true,preferCSSPageSize:true});}

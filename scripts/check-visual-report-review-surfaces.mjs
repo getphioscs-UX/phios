@@ -24,6 +24,6 @@ try{for(const width of [1440,390])for(const surface of ['catalog','final-review'
   const manifest=JSON.parse(fs.readFileSync(`${root}/cross-successor/cases.json`));const last=manifest.rows.find(r=>r.methodIds.length===7&&r.locale==='zh-Hans');await page.locator('#cases').selectOption(last.path);await page.waitForFunction(id=>document.getElementById('context').textContent.includes(id),last.caseId);
  }
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);assert.equal(overflow,false,`${surface}:${width}`);assert.deepEqual(errors,[]);
- await page.screenshot({path:`${root}/browser/surface-${surface.replace('/','-')}-${width}.png`,fullPage:true});results.push({surface,width,status:'PASS',errors,overflow});await page.close();
+ if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.screenshot({path:`${root}/browser/surface-${surface.replace('/','-')}-${width}.png`,fullPage:true});results.push({surface,width,status:'PASS',errors,overflow});await page.close();
 }}finally{await browser.close();}
 fs.writeFileSync(`${root}/review-surface-results.json`,JSON.stringify({status:'PASS',surfaces:results,crossCaseViewportChecks:180,acceptanceRecordsCreated:0,realOrdersCreated:0},null,2)+'\n');console.log('PASS six review surfaces; 180 Cross scenario viewports; no acceptance, orders or payments created.');

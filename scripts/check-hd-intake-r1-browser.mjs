@@ -42,7 +42,7 @@ try{for(const language of ['en','zh-Hans'])for(const width of [390,1440]){
  assert.equal(await page.locator('[data-cx-external-profile-edit=authority]').inputValue(),'Current manual correction');
  await page.locator('[data-hd-arrows-confirmed]').check();await page.locator('[name=externalAdvancedAvailability][value=NO_ADVANCED]').check();await page.locator('[name=externalProfileChartVerified]').check();
  const confirmedResponse=page.waitForResponse(response=>response.url().endsWith('/api/customer-external-profile-confirm'));await page.locator('[data-cx-external-profile-confirm]').click();const confirmed=await(await confirmedResponse).json();assert.equal(confirmed.ok,true);assert.equal(confirmed.confirmedExternalProfile.records.find(x=>x.field==='authority').value,'Current manual correction');assert.equal(confirmed.confirmedExternalProfile.records.find(x=>x.field==='channels').manuallyOverridden,false);
- await page.locator('[data-cx-external-profile-confirmation]').screenshot({path:`docs/hd-intake-r1/browser/${language}-${width}.png`,style:'.cx-shell-header,.cx-r5-jumpbar,.cx-skip{visibility:hidden!important}'});
+ if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.locator('[data-cx-external-profile-confirmation]').screenshot({path:`docs/hd-intake-r1/browser/${language}-${width}.png`,style:'.cx-shell-header,.cx-r5-jumpbar,.cx-skip{visibility:hidden!important}'});
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  await upload('B.pdf');
  assert.equal(await page.locator('[data-cx-external-profile-edit=authority]').inputValue(),'Splenic');

@@ -11,6 +11,6 @@ try{for(const file of [...new Set(bindings.map(x=>x.file))]){
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
   results.push({code:item.code,file,loaded:true,originalImageLink:true,viewport:390});
  }
- await root.scrollIntoViewIfNeeded();await page.screenshot({path:'docs/public-index-successor/screenshots/'+file.replace(/[^a-z0-9]/gi,'-')+'-diagrams.png'});await page.close();console.log('Diagrams loaded: '+file);
+ await root.scrollIntoViewIfNeeded();if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.screenshot({path:'docs/public-index-successor/screenshots/'+file.replace(/[^a-z0-9]/gi,'-')+'-diagrams.png'});await page.close();console.log('Diagrams loaded: '+file);
 }}finally{await browser.close();await server.close();fs.writeFileSync('docs/public-index-successor/pis-r1-context-figures-browser-v1.json',JSON.stringify({scope:'LOCAL_EXPANDED_DIAGRAMS_REMOTE_IMAGE_LOAD_NOT_PRODUCTION_DEPLOYMENT',complete:results.length===39,results,testedFiles:[...new Set(bindings.map(x=>x.file)),'assets/customer-ui/js/public-index-figures.js'].map(path=>({path,sha256:crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex')}))},null,2)+'\n')}
 console.log(`PASS: ${results.length} registered diagrams loaded, original image links and mobile layout checked.`);

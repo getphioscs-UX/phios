@@ -5,6 +5,8 @@ import {
 } from './payment-provider-registry.js';
 
 export const COMMERCIAL_RUNTIME_CONTRACT = 'phi-os.pws.commercial-runtime.v1';
+// QA product policy is an additive projection of this authority, not a second runtime.
+export {STRIPE_PRODUCT_REGISTRY,commerceProduct,commerceSelection,commerceEntitlements} from './stripe-product-registry.js';
 
 const CODE_PATTERN = /^[a-z][a-z0-9-]*$/;
 const CURRENCY_PATTERN = /^[A-Z]{3}$/;

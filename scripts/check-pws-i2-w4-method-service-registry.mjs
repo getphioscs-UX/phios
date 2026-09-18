@@ -151,7 +151,7 @@ await assert.rejects(
   RegistryValidationError
 );
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 5);
+assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 6);
 database.close();
 console.log('✓ PWS-I2-W4 Method and Service Registry passed.');
 console.log('  Six Method Definitions registered; professional methods require W3 Capability.');

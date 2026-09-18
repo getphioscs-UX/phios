@@ -1,0 +1,84 @@
+{
+  "work": "COM-STRIPE-R1",
+  "status": "PASS",
+  "cases": [
+    {
+      "name": "migration preserves existing book purchases, rights and download tokens",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "24 approved QA prices and all existing report prices agree",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle eligibility/count/uniqueness server policy",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "checkout authenticated, tamper rejected, live keys fail closed, origin protected",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle checkout idempotency, collision protection, customer reuse",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "success poll creates no rights, another account cannot read order",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "unpaid completed does not grant; paid replay and concurrent deliveries grant only selected rights",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "invalid signature and live event do not mutate; RECEIVED replay recovers",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "all single products create QA checkouts and fulfill according to type",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "subscription created is not entitlement; invoice activates; cancellation retains only paid interval; terminal status denies",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "partial/full refunds recorded with review; permanent rights not silently revoked",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "provider price mismatch is review-required without grants; portal cannot select another customer",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "temporary DB failure returns 503; failed event retry succeeds without duplicate rights",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "expiration/payment failure do not grant; protected book access is account-bound",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "unknown order or absent metadata records terminal review without granting",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    }
+  ],
+  "providerEndToEnd": "NOT_RUN",
+  "humanReview": "PENDING",
+  "liveOperations": "NOT_EXECUTED"
+}

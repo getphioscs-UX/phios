@@ -22,7 +22,7 @@ try{for(const width of [390,1440])for(const locale of ['en','zh-Hans']){
  await page.waitForFunction(()=>{const img=document.querySelector('.knowledge-article__hero-visual img');return img?.complete&&img.naturalWidth>0;});
  assert.equal(await page.locator('.client-visual-masthead').count(),0,'legacy masthead must not duplicate the article hero');
  tests.push({width,locale,status:'PASS',checks:['single current shell','single wide hero','no overflow','live locale rerender'],metrics});
- if(width===1440&&locale==='en')await page.screenshot({path:'docs/customer-activation-r1/article-current-shell-1440.png',fullPage:false});
+ if(width===1440&&locale==='en')if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.screenshot({path:'docs/customer-activation-r1/article-current-shell-1440.png',fullPage:false});
  await page.close();
 }}catch(error){tests.push({status:'FAIL',error:error.message});process.exitCode=1;}finally{await browser.close();await server.close();fs.writeFileSync('docs/customer-activation-r1/article-browser-v1.json',JSON.stringify({environment:'LOCAL_PREVIEW',tests},null,2)+'\n');}
 console.log(tests);

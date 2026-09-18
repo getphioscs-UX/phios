@@ -18,7 +18,7 @@ try{
   assert.equal(overflow,false,`${file} ${width}: page overflow`);
   assert.ok(await page.locator('main').innerText(),`${file}: empty main`);
   let screenshot=null;
-  if(width===390||width===1440){screenshot=`screenshots/${file.replace(/[^a-z0-9]/gi,'-')}-${width}-shell.png`;await page.screenshot({path:'docs/public-index-successor/'+screenshot});}
+  if(process.env.PHIOS_REVIEW_CAPTURE==='1'&&(width===390||width===1440)){screenshot=`screenshots/${file.replace(/[^a-z0-9]/gi,'-')}-${width}-shell.png`;await page.screenshot({path:'docs/public-index-successor/'+screenshot});}
   results.push({file,route,width,status:'PASS',scope:'UNAUTHENTICATED_LOCAL_SHELL_ONLY',submittedForms:0,purchaseOrAccountWrites:0,screenshot});await page.close();
  }
 }finally{

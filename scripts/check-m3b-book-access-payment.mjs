@@ -205,10 +205,7 @@ const checkoutPayload = await checkoutResponse.json();
 assert.equal(checkoutPayload.checkoutSessionId, 'cs_test_book1');
 assert.equal(checkoutPayload.purchaseState, 'payment_pending');
 assert.equal(stripeParameters.get('mode'), 'payment');
-assert.deepEqual(stripeParameters.getAll('payment_method_types[]'), [
-  'card',
-  'fpx'
-]);
+assert.deepEqual(stripeParameters.getAll('payment_method_types[]'), [], 'Stripe dynamic payment methods remain enabled');
 assert.equal(stripeParameters.get('line_items[0][price_data][currency]'), 'myr');
 assert.equal(stripeParameters.get('line_items[0][price_data][unit_amount]'), '8900');
 assert.equal(

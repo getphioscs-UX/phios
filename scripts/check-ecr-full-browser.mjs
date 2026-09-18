@@ -23,8 +23,8 @@ try{
   assert.equal(await page.locator('[data-ecr-full-section]').count(),work==='core-review'?11:14);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
   const failedImages=await page.locator('#reading img').evaluateAll(imgs=>imgs.filter(i=>!i.naturalWidth).map(i=>i.src));
-  await page.locator('#reading').scrollIntoViewIfNeeded();await page.screenshot({path:`${dir}/${work}-${locale}-${width}.png`,fullPage:true});
-  if(width===1440){await page.emulateMedia({media:'print'});await page.pdf({path:`output/pdf/ecr-${work}-${locale}.pdf`,format:'A4',printBackground:true,displayHeaderFooter:true,headerTemplate:'<span></span>',footerTemplate:'<div style="font-size:8px;width:100%;text-align:center;color:#506864">ECR · INTERNAL REVIEW · <span class="pageNumber"></span> / <span class="totalPages"></span></div>',margin:{top:'16mm',bottom:'16mm',left:'16mm',right:'16mm'}});await page.emulateMedia({media:'screen'});}
+  await page.locator('#reading').scrollIntoViewIfNeeded();if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.screenshot({path:`${dir}/${work}-${locale}-${width}.png`,fullPage:true});
+  if(process.argv.includes('--pdf')&&width===1440){await page.emulateMedia({media:'print'});await page.pdf({path:`output/pdf/ecr-${work}-${locale}.pdf`,format:'A4',printBackground:true,displayHeaderFooter:true,headerTemplate:'<span></span>',footerTemplate:'<div style="font-size:8px;width:100%;text-align:center;color:#506864">ECR · INTERNAL REVIEW · <span class="pageNumber"></span> / <span class="totalPages"></span></div>',margin:{top:'16mm',bottom:'16mm',left:'16mm',right:'16mm'}});await page.emulateMedia({media:'screen'});}
   await page.selectOption('#depth','free');await page.waitForSelector('[data-ecr-report-depth="FREE"]');
   assert.equal(await page.locator('[data-ecr-full-section]').first().getAttribute('data-ecr-full-section'),'PHI_CARD');
   assert.equal(await page.locator('[data-ecr-full-section="EXPERIENCE_EXPRESSION"]').count(),0);

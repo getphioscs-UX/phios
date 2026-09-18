@@ -8,7 +8,7 @@ const STRIPE_API = 'https://api.stripe.com/v1';
 
 function stripeSecret(env) {
   const secret = String(env?.STRIPE_SECRET_KEY || '').trim();
-  if (!secret.startsWith('sk_')) {
+  if (!/^(sk|rk)_/.test(secret)) {
     throw Object.assign(new Error('Stripe is not configured.'), {
       status: 503,
       code: 'stripe_not_configured'
@@ -24,6 +24,7 @@ async function stripeRequest(env, path, options = {}) {
       method: options.method || 'GET',
       headers: {
         authorization: `Bearer ${stripeSecret(env)}`,
+        ...(options.apiVersion ? {'Stripe-Version':options.apiVersion} : {}),
         ...(options.idempotencyKey
           ? { 'idempotency-key': options.idempotencyKey }
           : {}),
@@ -66,8 +67,6 @@ export async function createCheckoutSession({
 }) {
   const parameters = new URLSearchParams();
   parameters.set('mode', 'payment');
-  parameters.append('payment_method_types[]', 'card');
-  parameters.append('payment_method_types[]', 'fpx');
   parameters.set('customer_creation', 'always');
   parameters.set('billing_address_collection', 'auto');
   parameters.set('line_items[0][quantity]', '1');
@@ -106,6 +105,50 @@ export async function createCheckoutSession({
     idempotencyKey,
     fetcher
   });
+}
+
+// QA successor uses this existing adapter. Live mapping is intentionally absent.
+export function requireStripeQa(env) {
+  if (env?.STRIPE_ENVIRONMENT !== 'QA' || !/^(sk|rk)_test_/.test(String(env.STRIPE_SECRET_KEY || ''))) {
+    throw Object.assign(new Error('QA Stripe configuration required.'), {status:503,code:'stripe_qa_required'});
+  }
+}
+export async function stripeQaRequest(env, path, options = {}) {
+  requireStripeQa(env);
+  const payload=await stripeRequest(env,path,{...options,apiVersion:'2026-07-29.dahlia'});
+  if (payload.livemode === true || payload.data?.some(item=>item.livemode===true)) throw Object.assign(new Error('Live object rejected.'),{status:502,code:'stripe_live_object_rejected'});
+  return payload;
+}
+export async function verifyStripeQaAccount(env, fetcher) {
+  const account=await stripeQaRequest(env,'/account',{fetcher});
+  if(account.id!=='acct_1UFr0TBEKXJyHMkK') throw Object.assign(new Error('Wrong Stripe account.'),{status:503,code:'stripe_qa_account_mismatch'});
+}
+export function createCanonicalStripeCustomer(env, customerId, idempotencyKey, fetcher) {
+  return stripeQaRequest(env,'/customers',{method:'POST',body:new URLSearchParams({'metadata[customer_id]':customerId,'metadata[environment]':'QA'}),idempotencyKey,fetcher});
+}
+export function createCommerceCheckoutSession({env,product,order,customerId,origin,locale,idempotencyKey,fetcher}) {
+  const mode=product.billingType==='RECURRING'?'subscription':'payment';
+  const metadata={order_id:order.checkout_attempt_id,commerce_product_id:product.productId,customer_id:order.customer_id,environment:'QA',schema_version:'COM-STRIPE-R1',selected_reports:order.selected_products_json};
+  const body=new URLSearchParams({mode,customer:customerId,'line_items[0][price]':product.qaPriceId,'line_items[0][quantity]':'1',success_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}`,cancel_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}&checkout=cancelled`,locale:locale==='zh-Hans'?'zh':'en'});
+  const suffix=order.checkout_attempt_id.replace('ord_','').slice(0,8).split('').map(c=>String.fromCharCode(97+parseInt(c,16))).join('');
+  body.set('integration_identifier',`phios_commerce_qa_${suffix}`);
+  for(const [key,value] of Object.entries(metadata)){
+    body.set(`metadata[${key}]`,value);
+    body.set(`${mode==='subscription'?'subscription_data':'payment_intent_data'}[metadata][${key}]`,value);
+  }
+  // Dynamic payment methods; never force FPX for subscriptions.
+  return stripeQaRequest(env,'/checkout/sessions',{method:'POST',body,idempotencyKey,fetcher});
+}
+export function retrieveCommerceSession(env,id,fetcher){
+  if(!/^cs_test_[A-Za-z0-9]+$/.test(id)) throw Object.assign(new Error('Invalid QA session.'),{status:400,code:'qa_session_invalid'});
+  return stripeQaRequest(env,`/checkout/sessions/${encodeURIComponent(id)}?expand[]=line_items&expand[]=subscription`,{fetcher});
+}
+export function retrieveCommerceSubscription(env,id,fetcher){
+  if(!/^sub_[A-Za-z0-9]+$/.test(id)) throw Object.assign(new Error('Invalid subscription.'),{status:400,code:'subscription_invalid'});
+  return stripeQaRequest(env,`/subscriptions/${encodeURIComponent(id)}`,{fetcher});
+}
+export function createCommercePortal(env,customerId,origin,fetcher){
+  return stripeQaRequest(env,'/billing_portal/sessions',{method:'POST',body:new URLSearchParams({customer:customerId,return_url:`${origin}/account`}),fetcher});
 }
 
 export function retrieveCheckoutSession(env, sessionId, fetcher) {

@@ -13,6 +13,8 @@ import {
 import {
   verifyStripeWebhook
 } from '../commerce/stripe-client.js';
+import {processCommerceStripeEvent} from '../commerce/commerce-stripe-events.js';
+import {commerceLog} from '../commerce/commerce-observability.js';
 
 export async function onRequestPost({
   request,
@@ -51,15 +53,21 @@ export async function onRequestPost({
         code: 'stripe_event_invalid'
       });
     }
+    if (env.STRIPE_ENVIRONMENT === 'QA' && (event.livemode !== false || event.data?.object?.livemode === true)) {
+      return json({success:false,code:'stripe_live_event_rejected'},400);
+    }
     const firstDelivery = await registerWebhookEvent({
       env,
       event,
       payloadSha256: verified.payloadSha256
     });
+    commerceLog('STRIPE_EVENT_RECEIVED',{stripe_event_id:event.id});
     if (!firstDelivery) {
+      commerceLog('ENTITLEMENT_SKIPPED_DUPLICATE',{stripe_event_id:event.id});
       return json({ success: true, replay: true });
     }
-    const result = await processStripeEvent({
+    const successor = event.data?.object?.metadata?.schema_version === 'COM-STRIPE-R1' || env.STRIPE_ENVIRONMENT === 'QA' && event.data?.object?.metadata?.product_id !== 'phios-book-one-zh-pdf';
+    const result = await (successor ? processCommerceStripeEvent : processStripeEvent)({
       env,
       event,
       origin: requestOrigin(request),

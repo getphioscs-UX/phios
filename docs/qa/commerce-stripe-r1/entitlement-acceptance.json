@@ -1,0 +1,56 @@
+{
+  "work": "COM-STRIPE-R1",
+  "implementation": "IMPLEMENTED",
+  "machine": "MACHINE_TESTED",
+  "mockAcceptance": "MOCK_ACCEPTED",
+  "tests": [
+    {
+      "name": "migration preserves existing book purchases, rights and download tokens",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle eligibility/count/uniqueness server policy",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "bundle checkout idempotency, collision protection, customer reuse",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "success poll creates no rights, another account cannot read order",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "unpaid completed does not grant; paid replay and concurrent deliveries grant only selected rights",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "all single products create QA checkouts and fulfill according to type",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "partial/full refunds recorded with review; permanent rights not silently revoked",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "temporary DB failure returns 503; failed event retry succeeds without duplicate rights",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    },
+    {
+      "name": "expiration/payment failure do not grant; protected book access is account-bound",
+      "status": "PASS",
+      "evidence": "local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end"
+    }
+  ],
+  "realStripeE2E": "NOT_RUN — QA credential / deployment dependency",
+  "humanReview": "PENDING",
+  "live": "NOT_ACTIVATED"
+}

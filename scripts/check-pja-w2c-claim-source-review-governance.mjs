@@ -854,7 +854,7 @@ assert.equal(existingSourcesRegistry.sources.length, 12);
 assert.equal(
   (await fs.readdir(path.join(root, 'db/migrations')))
     .filter(file => file.endsWith('.sql')).length,
-  5
+  6
 );
 
 const articleBlockTypes = articleSchema.$defs.articleBlock.oneOf.map(item => {

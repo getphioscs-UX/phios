@@ -2,9 +2,7 @@ import {
   accessCookie,
   signAccessSession
 } from '../commerce/commerce-crypto.js';
-import {
-  fulfillCheckout
-} from '../commerce/book-fulfillment.js';
+import {purchaseAccessBySession} from '../commerce/book-commerce-store.js';
 import {
   commerceError,
   json,
@@ -54,13 +52,10 @@ export async function onRequestGet({
         downloadReady: false
       });
     }
-    const fulfilled = await fulfillCheckout({
-      env,
-      session,
-      origin: requestOrigin(request),
-      fetcher
-    });
-    const record = fulfilled.purchase;
+    const record = await purchaseAccessBySession(env,session.id);
+    if (!record || record.purchase_state !== 'purchased' || record.entitlement_status !== 'active') {
+      return json({success:true,...publicAccess(record)});
+    }
     const nowSeconds = Math.floor(Date.now() / 1000);
     const token = await signAccessSession({
       purchaseId: record.purchase_id,

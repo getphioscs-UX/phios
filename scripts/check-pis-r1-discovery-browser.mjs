@@ -47,10 +47,10 @@ try{
     await page.evaluate(()=>window.scrollTo(0,0));
     await page.waitForFunction(()=>[...document.querySelectorAll('.pis-landing-hero__image')].every(i=>i.complete&&i.naturalWidth>0),null,{timeout:30000});
     fs.mkdirSync('docs/public-index-successor/screenshots',{recursive:true});
-    await page.screenshot({path:`docs/public-index-successor/screenshots/${file.replace(/[^a-z0-9]/gi,'-')}-${width}-${locale}.png`});
+    if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.screenshot({path:`docs/public-index-successor/screenshots/${file.replace(/[^a-z0-9]/gi,'-')}-${width}-${locale}.png`});
    }
   }
-  if((file==='index.html'&&width===390)||(file==='about/index.html'&&width===1440)){await page.evaluate(()=>window.scrollTo(0,0));await page.waitForFunction(()=>{const img=document.querySelector('img[data-cx-asset="HERO-001"]');return !img||(img.complete&&img.naturalWidth>0)});await page.screenshot({path:`docs/public-index-successor/${file==='index.html'?'home-mobile':'about-desktop'}.png`,fullPage:true});}
+  if((file==='index.html'&&width===390)||(file==='about/index.html'&&width===1440)){await page.evaluate(()=>window.scrollTo(0,0));await page.waitForFunction(()=>{const img=document.querySelector('img[data-cx-asset="HERO-001"]');return !img||(img.complete&&img.naturalWidth>0)});if(process.env.PHIOS_REVIEW_CAPTURE==='1')await page.screenshot({path:`docs/public-index-successor/${file==='index.html'?'home-mobile':'about-desktop'}.png`,fullPage:true});}
   await page.close();
  }
 }finally{

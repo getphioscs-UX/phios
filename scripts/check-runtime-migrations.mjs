@@ -28,7 +28,7 @@ assert.equal(registry.status, 'active');
 assert.equal(registry.history_table, 'runtime_migration_history');
 assert.equal(registry.rules.immutable_after_deployment, true);
 assert.equal(registry.rules.schema_mismatch_forbidden, true);
-assert.equal(migrations.length, 5);
+assert.equal(migrations.length, 6);
 assert.equal(migrations[0].file, 'db/migrations/0001_platform_foundation.sql');
 assert.equal(migrations[1].file, 'db/migrations/0002_initial_runtime.sql');
 assert.equal(
@@ -91,7 +91,8 @@ assert.deepEqual(migrationFiles, [
   '0002_initial_runtime.sql',
   '0003_financial_professional_infrastructure.sql',
   '0004_book_commerce.sql',
-  '0005_pws_universal_registry.sql'
+  '0005_pws_universal_registry.sql',
+  '0006_commerce_stripe_r1.sql'
 ]);
 
 const migratedDatabase = new DatabaseSync(':memory:');
@@ -104,11 +105,11 @@ const firstRun = await applyRuntimeMigrations({
   now: () => '2026-07-23T00:00:00.000Z'
 });
 assert.equal(firstRun.status, 'migrated');
-assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3, 4, 5]);
+assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3, 4, 5, 6]);
 
 const history = await loadMigrationHistory(migratedAdapter);
-assert.equal(history.length, 5);
-assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3, 4, 5]);
+assert.equal(history.length, 6);
+assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3, 4, 5, 6]);
 assert.deepEqual(history.map(row => row.checksum), migrations.map(item => item.checksum));
 assert.equal(planPendingMigrations(migrations, history).length, 0);
 

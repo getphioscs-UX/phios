@@ -87,7 +87,7 @@ export async function onRequestPost({
       watermarkJobId: job.watermark_job_id,
       destinationObjectKey: job.destination_object_key
     });
-    await sendReceiptAndDelivery({
+    if (!job.purchase_id.startsWith('pur_ord_')) await sendReceiptAndDelivery({
       env,
       purchaseId: job.purchase_id,
       origin: requestOrigin(request),
