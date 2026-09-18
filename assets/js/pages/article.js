@@ -1,4 +1,5 @@
 import {mountArticleStructuredLinks} from '../knowledge/article-structured-links.js';
+import {saveBookArticleProgress} from '../knowledge/reading-progress.js';
 import { hydrateKnowledgeSpineVisuals } from './knowledge-spine-visuals.js';
 import {
   getLocale,
@@ -23,6 +24,7 @@ import { createCkaEntryAction } from '../knowledge/cka-entry-links.js';
 const root = document.querySelector('[data-article-slug]');
 if (root) root.setAttribute('data-knowledge-spine-surface', 'ARTICLE');
 const slug = root?.dataset.articleSlug || '';
+let renderGeneration = 0;
 
 function renderLoadingState() {
   const status = document.createElement('div');
@@ -80,13 +82,16 @@ function bindSave(article) {
     );
   };
 
-  updateLabel(isArticleSaved(article.nodeCode));
+    updateLabel(isArticleSaved(article.articleId || article.nodeCode));
   button.addEventListener('click', () => {
-    updateLabel(toggleArticleSaved(article.nodeCode));
+      updateLabel(toggleArticleSaved(article.articleId || article.nodeCode));
   });
 }
 
-function updateDocumentMetadata(article) {
+  function updateDocumentMetadata(article) {
+    document.documentElement.lang=article.locale;
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content',article.title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content',article.summary);
   if (article.seo?.title) {
     document.title = article.seo.title;
   }
@@ -101,9 +106,10 @@ function appendAskEntry(article) {
   const boundary = document.createElement('aside');
   boundary.className = 'knowledge-boundary cka-contextual-entry';
   const copy = document.createElement('p');
-  copy.textContent = getLocale() === 'zh-Hans'
-    ? 'Ask 用来理解这篇已发布文章；它不会改变文章权威，也不会建立 Reality 案例。'
-    : 'Ask helps you understand this published article. It does not change article authority or create a Reality case.';
+  const zh=getLocale()==='zh-Hans';
+  copy.textContent = article.publicationContext?.bookCode==='BOOK-5'
+    ? (zh?'带着这篇文章继续提问，了解其中的历史背景与联系。':'Ask about this article to explore its historical context and connections.')
+    : (zh?'Ask 用来理解这篇已发布文章；它不会改变文章权威，也不会建立 Reality 案例。':'Ask helps you understand this published article. It does not change article authority or create a Reality case.');
   const context = article.publicationContext || {};
   boundary.append(
     copy,
@@ -128,6 +134,7 @@ async function render() {
   if (!root) {
     return;
   }
+  const generation = ++renderGeneration;
 
   root.setAttribute('aria-busy', 'true');
   renderLoadingState();
@@ -138,6 +145,7 @@ async function render() {
       loadPublishedArticleBySlug(slug, locale),
       loadPublishedArticles(locale)
     ]);
+    if(generation!==renderGeneration)return;
 
     if (!article) {
       renderUnavailableState();
@@ -149,19 +157,25 @@ async function render() {
       translate: t
     });
     root.replaceChildren(articleElement);
+    if(/^#manuscript(?:-page-\d+)?$/.test(window.location.hash)){
+      const reading=articleElement.querySelector('.knowledge-article__source-reading');
+      if(reading){reading.open=true;reading.scrollIntoView();}
+    }
+    saveBookArticleProgress(article.publicationContext?.bookCode,article.slug);
     void mountArticleStructuredLinks(articleElement,article);
     updateDocumentMetadata(article);
     bindSave(article);
     appendAskEntry(article);
     hydrateKnowledgeSpineVisuals(root);
   } catch (error) {
+    if(generation!==renderGeneration)return;
     if (error instanceof ArticleRenderError) {
       renderInvalidState();
     } else {
       renderLoadErrorState();
     }
   } finally {
-    root.removeAttribute('aria-busy');
+    if(generation===renderGeneration)root.removeAttribute('aria-busy');
   }
 }
 

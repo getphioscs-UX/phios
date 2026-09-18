@@ -1,4 +1,5 @@
 import {loadSevenVolumeBooks,bookRoute} from '../web-production/public-surface-data-seven.js';
+import {loadBook5PublicationMetadata} from './published-content.js';
 const BASE='/content/knowledge/public/successors/book4-discovery-v1';
 const PATHS=Object.freeze({
   search:`${BASE}/public-search-index.json`,
@@ -15,17 +16,17 @@ async function load(name){
  cache.set(name,promise);promise.catch(()=>cache.delete(name));return promise;
 }
 export async function loadPublicSearchIndex(locale){
- const data=await load('search');
- const records=Array.isArray(data.records)?data.records:[];
+ const [data,book5]=await Promise.all([load('search'),loadBook5PublicationMetadata()]);
+ const records=[...(data.records||[]),...book5.records.map(r=>({...r,bookTitle:r.publicationContext.bookTitle,partTitle:r.publicationContext.partTitle})),...book5.atlasDiscovery];
  return records.filter(record=>!locale||record.locale===locale);
 }
 export async function loadPublicKnowledgeCatalog(){
- const [catalog,registry]=await Promise.all([load('catalog'),loadSevenVolumeBooks()]);
+ const [catalog,registry,book5]=await Promise.all([load('catalog'),loadSevenVolumeBooks(),loadBook5PublicationMetadata()]);
  // Semantic route joins preserve article counts when publication numbers move.
  const previous=new Map(catalog.books.map(b=>[b.canonicalRoute,b]));
  return {...catalog,bookCount:registry.books.length,books:registry.books.map(b=>{
   const route=bookRoute(b.book_id),prior=previous.get(route);
-  return {...prior,bookCode:b.bookCode,volume:b.volume,title:b.title,subtitle:b.subtitle,canonicalRoute:route,partCodes:b.parts.map(n=>'P'+n),hasPublishedKnowledge:prior?.hasPublishedKnowledge||false,publishedArticleCount:prior?.publishedArticleCount||0};
+  return {...prior,bookCode:b.bookCode,volume:b.volume,title:b.title,subtitle:b.subtitle,canonicalRoute:route,partCodes:b.parts.map(n=>'P'+n),hasPublishedKnowledge:b.bookCode==='BOOK-5'||prior?.hasPublishedKnowledge||false,publishedArticleCount:b.bookCode==='BOOK-5'?book5.articlePlanCount:prior?.publishedArticleCount||0};
  })};
 }
 export async function loadCrossBookDiscovery(locale){

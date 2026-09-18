@@ -15,7 +15,7 @@ function terms(text){
   }
   return uniq(out).slice(0,64);
 }
-function splitSentences(text){return clean(text).match(/[^。！？!?]+[。！？!?]?/g)?.map(clean).filter(x=>x.length>=10)||[]}
+function splitSentences(text){return clean(text).split(/(?<=[。！？!?])\s*|(?<=\.)\s+(?=[A-Z])/u).map(clean).filter(x=>x.length>=10)}
 function similarity(a,b){const A=new Set(terms(a)),B=new Set(terms(b));if(!A.size||!B.size)return 0;let n=0;for(const x of A)if(B.has(x))n++;return n/Math.max(1,Math.min(A.size,B.size))}
 function questionTypeBoost(type,s){
   const t=low(s); if(type==='CAUSAL')return /因为|因此|所以|依赖|建立在|形成|导致|使得|反馈|条件|基础|并不意味着|不是.*而是|because|therefore|depends|forms|leads/.test(t)?4:0;
@@ -55,6 +55,7 @@ export function normalizeKirGroundingSources({groundingBundle=null,articleSource
     ordinal:Number(s.ordinal||i+1),
     contentBearing:Boolean(plain(s.text||s.excerpt)),
     scopeMatch:s.scopeMatch===true,
+    ...(Number.isInteger(s.retrievalTier)&&s.retrievalTier>=0&&s.retrievalTier<=3?{retrievalTier:s.retrievalTier}:{}),
     upstreamAuthority:s.sourceType==='PUBLISHED_CANONICAL_ARTICLE'?'PUBLISHED_ARTICLE_AUTHORITY':s.sourceType?.startsWith('CIVILIZATION_ATLAS_')?'STRUCTURED_ATLAS_AUTHORITY':'REVIEWED_MANUSCRIPT_AUTHORITY'
   })).filter(x=>x.contentBearing);
   return [...fromBundle,...(articleSources||[])];
@@ -69,7 +70,7 @@ export function rerankKirContentFragments({understanding,expansion,contentSource
     const typeBoost=questionTypeBoost(understanding.questionType,source.text); const kindBoost=source.kind==='summary'?2:source.kind==='paragraph'?1:0;
     const score=authorityBoost(source)+canonical+exactTitle+lexical+typeBoost+kindBoost;
     return {...source,features:{lexical:Number(lexical.toFixed(2)),canonical,exactTitle,typeBoost,authority:authorityBoost(source),kindBoost,matchedTerms:uniq(matched)},rerankScore:Number(score.toFixed(3))};
-  }).filter(x=>x.features.lexical>0||x.features.canonical>0||x.features.exactTitle>0).sort((a,b)=>b.rerankScore-a.rerankScore||(a.ordinal||0)-(b.ordinal||0)||String(a.sourceId).localeCompare(String(b.sourceId)));
+  }).filter(x=>x.features.lexical>0||x.features.canonical>0||x.features.exactTitle>0).sort((a,b)=>(a.retrievalTier??3)-(b.retrievalTier??3)||b.rerankScore-a.rerankScore||(a.ordinal||0)-(b.ordinal||0)||String(a.sourceId).localeCompare(String(b.sourceId)));
   return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-FRAGMENT-SEMANTIC-RERANK-v2.0.0',results:ranked,contentBearingOnly:true});
 }
 
@@ -97,7 +98,7 @@ function sentenceCandidates(evidencePack,understanding){
       list.push({sentence,source,score,lexicalHits});
     }
   }
-  list.sort((a,b)=>b.lexicalHits-a.lexicalHits||b.score-a.score||a.sentence.length-b.sentence.length);
+  list.sort((a,b)=>(a.source.retrievalTier??3)-(b.source.retrievalTier??3)||b.lexicalHits-a.lexicalHits||b.score-a.score||a.sentence.length-b.sentence.length);
   return list;
 }
 function selectDiverseSentences(candidates,max=5){const out=[];for(const c of candidates){if(c.sentence.length>420)continue;if(out.some(x=>similarity(x.sentence,c.sentence)>.82))continue;out.push(c);if(out.length>=max)break}return out}

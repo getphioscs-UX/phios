@@ -2,6 +2,9 @@ import {renderBookPublicSamples} from '../knowledge/book-public-samples.js';
 import { getLocale, onLocaleChange, t } from '../i18n.js';
 import {bookRoute,canonicalPartsForBook,loadSevenVolumeBooks,loadSevenVolumeParts,resolveSevenVolumeBookCover} from '../web-production/public-surface-data-seven.js';
 import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
+import {loadBook5PublicationMetadata} from '../knowledge/published-content.js';
+import {readBookArticleProgress} from '../knowledge/reading-progress.js';
+import {atlasStateFromUrl} from './civilization-atlas/atlas-url-state.js';
 
 const root = document.querySelector('[data-wpr-book-volume]');
 const bookId = document.body.dataset.bookId || root?.dataset.bookId || 'book-7';
@@ -76,8 +79,8 @@ async function render() {
     const askHref = buildCkaEntryHref({
       entrySurface: 'BOOK',
       contextType: 'CANONICAL_VOLUME',
-      contextId: book.book_id,
-      bookCode: book.book_id,
+        contextId: book.bookCode,
+        bookCode: book.bookCode,
       contextLabel: title,
       contextSummary: subtitle,
       readingPath: `${canonicalRoute}#book-parts`,
@@ -114,6 +117,44 @@ async function render() {
         </div>
       </section>
     `;
+
+    if (bookId === 'book-5') {
+      const manifest = await loadBook5PublicationMetadata();
+      if (generation !== renderGeneration) return;
+      const records=manifest.records.filter(r=>r.locale===locale);
+      const currentSlug=readBookArticleProgress('BOOK-5');
+      const contents=root.querySelector('#book-parts .knowledge-shell');
+      contents.replaceChildren();
+      const heading=document.createElement('h2');heading.textContent=locale==='zh-Hans'?'阅读《世界如何分化》':'Read Reality Differentiation';contents.append(heading);
+      const intro=document.createElement('p');intro.textContent=locale==='zh-Hans'?'按十一部分阅读相关文章，也可在每篇文章下展开对应中文原文。':'Read the articles in eleven parts. Each article also opens its corresponding Chinese manuscript pages.';contents.append(intro);
+      for (const part of manifest.parts) {
+        const section=document.createElement('section');section.id='book-part-'+part.code.replace('.','-');
+        const h=document.createElement('h3');h.textContent=part.title[locale];section.append(h);
+        const list=document.createElement('ol');
+        for (const article of records.filter(r=>r.part===part.code)) {
+          const item=document.createElement('li'),link=document.createElement('a');link.href=article.href+'?locale='+locale;link.textContent=article.title;
+          if(article.slug===currentSlug){link.setAttribute('aria-current','location');link.textContent+=(locale==='zh-Hans'?' · 上次阅读':' · Last read');}
+          item.append(link);list.append(item);
+        }
+        section.append(list);contents.append(section);
+      }
+      const original=document.createElement('section');original.id='book-manuscript';original.className='knowledge-section';
+      const originalShell=document.createElement('div');originalShell.className='knowledge-shell';original.append(originalShell);
+      const originalHeading=document.createElement('h2');originalHeading.textContent=locale==='zh-Hans'?'原文目录':'Manuscript contents · Chinese original';originalShell.append(originalHeading);
+      for(const part of manifest.parts){
+        const group=document.createElement('details'),summary=document.createElement('summary');summary.textContent=part.title[locale];group.append(summary);
+        const list=document.createElement('ul');
+        for(const section of manifest.manuscriptContents||[]){if(section.part!==part.code)continue;
+          const item=document.createElement('li'),link=document.createElement('a');link.href=section.href+'?locale='+locale+'#'+section.anchor;link.textContent=section.heading;item.append(link);list.append(item);
+        }
+        group.append(list);originalShell.append(group);
+      }
+      root.querySelector('#book-parts').after(original);
+      const actions=root.querySelector('.knowledge-actions');
+      for(const [href,label] of [['#book-manuscript',locale==='zh-Hans'?'阅读原文':'Read manuscript (Chinese)'],['#book-parts',locale==='zh-Hans'?'阅读相关文章':'Browse articles'],['/search/?q='+encodeURIComponent(locale==='zh-Hans'?'文明':'civilization'),locale==='zh-Hans'?'搜索文明与历史':'Search civilizations and history']]){
+        const link=document.createElement('a');link.className='knowledge-action';link.href=href;link.textContent=label;actions.append(link);
+      }
+    }
 
     // Public static samples are independent of checkout and paid delivery.
     fetch('/api/commerce-catalog').then(r=>{if(!r.ok)throw new Error('CATALOG_UNAVAILABLE');return r.json();}).then(catalog=>{
@@ -171,6 +212,26 @@ async function render() {
     if (persistentAtlas) {
       const hero = root.querySelector('.wpr-book-hero');
       if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);
+      const manifest=await loadBook5PublicationMetadata();
+      if(generation!==renderGeneration)return;
+      const reading=document.createElement('nav');reading.className='knowledge-shell knowledge-section';reading.dataset.atlasArticleReading='';
+      reading.setAttribute('aria-label',locale==='zh-Hans'?'图谱相关阅读':'Related Atlas reading');persistentAtlas.after(reading);
+      const refresh=()=>{
+        const selected=atlasStateFromUrl(window.location.href,locale);
+        const keys={cases:'primaryCaseId',world:'snapshotId',transitions:'transitionWindowId',comparison:'comparisonFamilyId',loss:'lossTypeId'};
+        const key=keys[selected.activeLayer];
+        const rows=manifest.records.filter(r=>r.locale===locale&&r.connections.relatedAtlasEntries.some(link=>{
+          const target=atlasStateFromUrl(link.href,locale);
+          return target.activeLayer===selected.activeLayer&&(key?selected[key]&&selected[key]===target[key]:selected.activeLayer==='trajectories'&&selected.trajectoryIds.some(id=>target.trajectoryIds.includes(id)));
+        })).slice(0,5);
+        reading.replaceChildren();
+        const heading=document.createElement('h3');heading.textContent=locale==='zh-Hans'?'继续阅读第五册':'Continue reading Book V';reading.append(heading);
+        for(const row of rows){const link=document.createElement('a');link.className='knowledge-action';link.href=row.href+'?locale='+locale;link.textContent=row.title;reading.append(link);}
+        const contents=document.createElement('a');contents.href='#book-parts';contents.className='knowledge-action';contents.textContent=locale==='zh-Hans'?'查看全部章节与文章':'All chapters and articles';reading.append(contents);
+      };
+      refresh();
+      const observer=new MutationObserver(refresh);observer.observe(persistentAtlas,{childList:true});
+      const previous=disposeFormation;disposeFormation=()=>{previous?.();observer.disconnect();};
     }
   } catch {
     root.innerHTML = `<section class="knowledge-section"><div class="knowledge-shell"><p>${escapeHtml(t('knowledge.production.sourceUnavailable'))}</p></div></section>`;

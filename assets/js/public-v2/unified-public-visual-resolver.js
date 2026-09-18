@@ -1,8 +1,10 @@
 import { fetchPublicAssetRegistry, fetchPublicAssetConfig, resolvePublicAsset, resolvePublicAssetForWeb, normalizePublicAssetBaseUrl } from '../runtime/web-production/asset-resolver.js';
+import {resolveAtlasStaticVisuals} from '../pages/civilization-atlas/atlas-static-visual.js';
 
 const POINTER_URL = '/content/web-production/registries/current-client-visual-registry.json';
 let pointerPromise;
 let clientRegistryPromise;
+let atlasBindingsPromise;
 
 async function fetchJson(url) {
   const response = await fetch(url, { headers: { Accept: 'application/json' } });
@@ -23,6 +25,16 @@ function clientEntry(registry, code) {
   return registry.assets?.find(asset => asset.sequence === code || asset.assetCode === code || asset.legacyAssetCode === code) || null;
 }
 export async function resolveUnifiedPublicVisual(code, options = {}) {
+  if (/^VIS-CIV-[A-Z0-9_-]+$/.test(code)) {
+    // Reuse the admitted Atlas binding authority; never infer a key from a name.
+    atlasBindingsPromise ||= fetchJson('/content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json').catch(error => {atlasBindingsPromise=null;throw error;});
+    const registry = await atlasBindingsPromise;
+    const entry = registry.assets.find(asset => asset.assetId === code);
+    if (!entry || entry.bindingState !== 'BOUND' || entry.reviewState !== 'ACCEPTED' || entry.status !== 'UPLOADED_VERIFIED' || entry.historicalAuthority !== false || !entry.bucketKey || !entry.publicUrl) throw Error('UNRESOLVED_ASSET_BINDING');
+    const state = entry.family === 'TIMELINE_ANCHOR' ? {activeLayer:'timeline',timeWindowId:entry.subjectId} : {activeLayer:'cases',primaryCaseId:entry.subjectId};
+    if (!resolveAtlasStaticVisuals(registry,state).some(asset=>asset.assetId===code)) throw Error('ASSET_BINDING_CONFLICT');
+    return {assetCode:code,src:entry.publicUrl,renderable:true,deliveryState:'VERIFIED_RENDERABLE',sourceReference:'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json'};
+  }
   try {
     return await resolvePublicAssetForWeb(code, options);
   } catch (primaryError) {

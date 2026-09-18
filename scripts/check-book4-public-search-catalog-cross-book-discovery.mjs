@@ -33,7 +33,7 @@ for(const [p,d] of Object.entries(authority.predecessorDigests))assert.equal(sha
 for(const [p,d] of Object.entries(authority.protectedDigests))assert.equal(shaFile(p),d,`protected authority drift ${p}`);
 const loader=fs.readFileSync('assets/js/knowledge/public-discovery.js','utf8');assert.match(loader,/book4-discovery-v1/);assert.match(loader,/loadPublicSearchIndex/);assert.match(loader,/loadPublicKnowledgeCatalog/);
 const ui=fs.readFileSync('assets/customer-ui/js/surfaces/knowledge.js','utf8');assert.match(ui,/loadPublicSearchIndex/);assert.match(ui,/record\.searchText/);assert.match(ui,/crossBookNeighbors/);assert.match(ui,/Across other volumes/);assert.match(ui,/跨册发现/);
-const html=fs.readFileSync('search/index.html','utf8');assert.match(html,/seven-volume system/);assert.doesNotMatch(html,/five books/);
+const html=fs.readFileSync('search/index.html','utf8');assert.ok(html.includes(read('content/registry/current-book-architecture.json').architecture+' system'));assert.doesNotMatch(html,/five books/);
 const pkg=read('package.json');assert.equal(pkg.scripts['book4:public-discovery:build'],'node scripts/build-book4-public-discovery-successor.mjs');assert.equal(pkg.scripts['check:book4:public-discovery'],'node scripts/check-book4-public-search-catalog-cross-book-discovery.mjs');
 console.log('✓ Book IV Public Search / Knowledge Catalog / Cross-Book Discovery successor passed.');
 console.log(`  ${index.recordCount} published locale articles across ${catalog.publishedBookCount} books; Book IV ${book4.length} locale projections / 53 routes / 125 covered nodes.`);

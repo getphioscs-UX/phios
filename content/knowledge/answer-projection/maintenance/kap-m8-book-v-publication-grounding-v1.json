@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-KAP-MAINTENANCE-SUCCESSOR-v2.0.0",
+  "work": "BOOK-V-PKA-R1-W8-W12",
+  "status": "LOCAL_IMPLEMENTATION_VALIDATED_HUMAN_AND_PRODUCTION_REVIEW_PENDING",
+  "baselineCommit": "1157ac7803253191875701eb2b4746e9d7bb8a84",
+  "changes": [
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "660d677e577628f68d954a7a6deb621a412b0f7ca68b7c3f56b268221e813fbc",
+      "successorSha256": "01af76f0408d96088bbca8a4a13bdd714c863f6cc8a745097d5342a79f6b3336",
+      "changeClass": "REGISTERED_BOOK_V_ARTICLE_MANUSCRIPT_ATLAS_CONTEXTUAL_GROUNDING"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "053bea3d2ea80e28616c674a0daee552f75b19d4fadc83cb9a4c945f051c23a6",
+      "successorSha256": "6f282bcf42e1ee2af3971cfcab78845e08ce08a6ecc7212609e96be9202bd320",
+      "changeClass": "PRESERVE_SERVER_RESOLVED_SOURCE_PRIORITY_AND_PUBLIC_TITLES"
+    }
+  ],
+  "evidence": [
+    "scripts/check-book-v-pka-r1-publication.mjs",
+    "scripts/check-book-v-pka-r1-ask-api.mjs",
+    "content/books/book-5/maintenance/ask-api-results-v1.json"
+  ],
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false,
+    "humanSemanticApprovalApplied": false
+  },
+  "humanDecision": "PENDING_HUMAN_REVIEW"
+}

@@ -72,7 +72,7 @@ function sourcePriority(source) {
 function groundedSentences(bundle) {
   return (bundle?.sources || [])
     .slice()
-    .sort((a, b) => (a.selected===true&&b.selected===true ? a.selectedRelevanceRank-b.selectedRelevanceRank : 0) || sourcePriority(a) - sourcePriority(b) || String(a.sourceId).localeCompare(String(b.sourceId)))
+    .sort((a, b) => (a.retrievalTier??3)-(b.retrievalTier??3) || (a.selected===true&&b.selected===true ? a.selectedRelevanceRank-b.selectedRelevanceRank : 0) || sourcePriority(a) - sourcePriority(b) || String(a.sourceId).localeCompare(String(b.sourceId)))
     .filter(source => !/^#{1,6}\s+/.test(canonicalText(source.text)))
     .flatMap(source => splitSentences(source.text).map(text => ({ text, source })));
 }
@@ -170,6 +170,7 @@ export function projectKapSources(bundle, depth = DEFAULT_DEPTH) {
   return (bundle?.sources || []).slice(0, profile.sourceItems).map(source => Object.freeze({
     sourceId: source.sourceId,
     sourceType: source.sourceType,
+    title: source.title || null,
     authorityLabel: source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE'
       ? 'PUBLISHED_CANONICAL_KNOWLEDGE'
       : source.sourceType?.startsWith('CIVILIZATION_ATLAS_')

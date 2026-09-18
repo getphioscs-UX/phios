@@ -1,7 +1,8 @@
 import {resolveSelectedArticle} from '../contextual-ask/contextual-ask-runtime.js';
 import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
-import {normalizeAtlasRetrievalScope} from './atlas-retrieval-scope.js';
+import {normalizeAtlasRetrievalScope,retrieveAtlasScope} from './atlas-retrieval-scope.js';
+import {atlasUrlFromState} from '../../assets/js/pages/civilization-atlas/atlas-url-state.js';
 import {normalizeFormationScope,retrieveFormationScope} from './formation-retrieval-scope.js';
 import {classifyStructuredIntent,structuredIntentRelevant} from './structured-ask-policy.js';
 import { applyPtrcQualityToCoverage, evaluatePtrcKnowledgeQuality, filterPtrcSourcesByPolicy } from './ptrc-knowledge-quality.js';
@@ -188,6 +189,50 @@ export function buildKapRetrievalRequest(normalized, options = {}) {
   };
 }
 
+// Published source projections join the existing grounding pipeline. No account data
+// or URL-supplied prose enters this lookup; only registered metadata and bodies do.
+export async function retrievePublishedBookSources({env,bookCode,locale='zh-Hans',question=''}) {
+  const empty={sources:[],articles:[],chain:[]};
+  if(bookCode!=='BOOK-5'||!env?.ASSETS?.fetch)return empty;
+  const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));if(!r.ok)throw Error('BOOK_SOURCE_UNAVAILABLE');return r.json();};
+  const manifest=await read('/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json');
+  const rows=manifest.records.filter(r=>r.locale===locale&&r.status==='published');
+  const text=searchText(question);
+  const years=new Set(text.match(/\b\d{3,4}\b/g)||text.match(/\d{3,4}/g)||[]);
+  const explicitSnapshots=manifest.atlasDiscovery.filter(r=>r.locale===locale&&/^WS-\d+$/.test(r.slug)&&years.has(r.slug.slice(3)));
+  const terms=unique([...(text.match(/[a-z0-9]{3,}/g)||[]),...(text.match(/[\u3400-\u9fff]+/g)||[]).flatMap(run=>Array.from({length:Math.max(0,run.length-1)},(_,i)=>run.slice(i,i+2)))]).filter(t=>!['为什么','为什','什么','文明','不能','不是','没有','以后','之后','简单','理解','同一','不同','所有','一种','形成','怎么','如何','为何','可以','世界','一个','后来','the','why','how','and','does','did','was','were'].includes(t));
+  const weights=new Map(terms.map(t=>[t,Math.log(1+rows.length/(1+rows.filter(r=>searchText(r.searchText).includes(t)).length))]));
+  const rank=(value)=>terms.reduce((sum,t)=>sum+(searchText(value).includes(t)?weights.get(t):0),0);
+  const ranked=rows.map(r=>({...r,score:rank(r.title)*3+rank(r.searchText)+(r.searchAliases||[]).filter(alias=>text.includes(searchText(alias))).reduce((n,alias)=>n+alias.length*2,0)})).filter(r=>r.score>0&&(!explicitSnapshots.length||r.connections.relatedAtlasEntries.some(link=>explicitSnapshots.some(s=>link.href.includes('snapshot='+s.slug))))).sort((a,b)=>b.score-a.score).slice(0,3);
+  if(!ranked.length)return empty;
+  while(ranked.length>1&&ranked.at(-1).score<ranked[0].score*.55)ranked.pop();
+  const anchors=terms.filter(t=>searchText(ranked[0].title).includes(t)&&rows.filter(r=>searchText(r.searchText).includes(t)).length<=2);
+  const onTopic=value=>!anchors.length||anchors.some(t=>searchText(value).includes(t));
+  const articles=await Promise.all(ranked.map(r=>resolveSelectedArticle(env,r.slug,locale)));
+  const valid=articles.filter(Boolean),sources=valid.flatMap((a,i)=>{const relevant=a.sources.filter(s=>onTopic(s.text));return i===0&&!relevant.length?a.sources:relevant;});
+  sources.sort((a,b)=>rank(b.text)-rank(a.text));
+  for(const article of valid.slice(0,2)){
+    if(!article.sourceReading?.path?.startsWith('/content/knowledge/public/successors/book5-publication-v1/source-readings/'))continue;
+    const source=await read(article.sourceReading.path);
+    const paragraphs=source.pages.flatMap(p=>p.paragraphs.flatMap(text=>(text.match(/[^。！？.!?]+[。！？.!?]?/gu)||[]).filter(text=>text.trim().length>20&&onTopic(text)).map(text=>({text,page:p.page}))));
+    paragraphs.sort((a,b)=>rank(b.text)-rank(a.text));
+    for(const [i,p] of paragraphs.slice(0,2).entries())sources.push({sourceId:`MANUSCRIPT:${article.slug}:${p.page}:${i}`,sourceType:'COMPLETED_MANUSCRIPT',authorityClass:'COMPLETED_MANUSCRIPT',bookCode:'BOOK-5',partCode:'PART-12',nodeCode:article.nodeCode,title:article.title,locale:'zh-Hans',text:p.text.slice(0,2500),href:article.href+'#article-body',scopeMatch:true,selected:true,sourcePdfSha256:source.sourcePdfSha256});
+  }
+  const links=[...new Map([...explicitSnapshots.map(r=>({href:r.href,label:r.title})),...valid.flatMap(a=>a.atlasLinks)].map(link=>[link.href,link])).values()].slice(0,6);
+  for(const link of links){
+    const u=new URL(link.href,'https://assets.local');
+    const scope={bookCode:'BOOK-5',partCode:'PART-12',activeLayer:u.searchParams.get('atlas'),primaryCaseId:u.searchParams.get('case'),snapshotId:u.searchParams.get('snapshot'),transitionWindowId:u.searchParams.get('tw'),lossTypeId:u.searchParams.get('lossType'),comparisonFamilyId:u.searchParams.get('family'),trajectoryIds:(u.searchParams.get('trajectories')||'').split(',').filter(Boolean)};
+    const related=await retrieveAtlasScope({env,scope,locale,question});
+    const deep=atlasUrlFromState('/books/reality-differentiation/',scope);
+    sources.push(...related.sources.map(s=>{
+      const explicit=explicitSnapshots.find(r=>r.slug===s.atlasEntityId);
+      return {...s,...(explicit?{text:explicit.title+'：'+explicit.summary,explicitQuestionEntity:true}:{}),href:deep.pathname+deep.search+deep.hash,title:link.label};
+    }));
+  }
+  const ordered=sources.map((s,i)=>({...s,selected:true,selectedRelevanceRank:i,retrievalTier:s.explicitQuestionEntity?0:s.sourceType==='PUBLISHED_CANONICAL_ARTICLE'?(explicitSnapshots.length||s.articleSlug!==ranked[0].slug?1:0):s.sourceType==='COMPLETED_MANUSCRIPT'?1:2})).sort((a,b)=>a.retrievalTier-b.retrievalTier);
+  return {sources:ordered,articles:ranked.map(r=>({nodeCode:r.nodeCode,slug:r.slug,title:r.title,href:r.href,score:r.score,bookCode:'BOOK-5'})),chain:[...(explicitSnapshots.length?[{stage:'EXPLICIT_SNAPSHOT',status:'QUESTION_IDENTIFIED',count:explicitSnapshots.length}]:[]),{stage:'BOOK_ARTICLE',status:'MATCHED',count:valid.length},{stage:'FINAL_MANUSCRIPT',status:'SOURCE_GROUNDED'},{stage:'RELATED_ATLAS',status:links.length?'RELATED_ENTITIES':'NO_EXPLICIT_RELATION'},{stage:'BROADER_KNOWLEDGE',status:'FALLBACK'}]};
+}
+
 export async function retrieveKapKnowledge({ request, env = {}, normalized, options = {} }) {
   const retrievalRequest = buildKapRetrievalRequest(normalized, options);
   const baseUrl = request?.url || 'https://kap.local/';
@@ -205,6 +250,14 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
     payload.answerGrounding={sources:fragments.map((s,i)=>({...s,selectedRelevanceRank:i}))};
     payload.published={...(payload.published||{}),results:(payload.published?.results||[]).filter(r=>r.slug===selected.slug)};
     payload.manuscript={status:'not_requested',records:[],errors:[]};
+  }
+  if (options.selectedBook === 'BOOK-5' && !options.selectedArticle && options.retrievalScope?.scopeType !== 'CIVILIZATION_ATLAS') {
+    const selected = await retrievePublishedBookSources({env,bookCode:'BOOK-5',locale:normalized.locale,question:normalized.originalQuestion||normalized.searchText});
+    if (selected.sources.length) {
+      payload.answerGrounding={...(payload.answerGrounding||{}),sources:[...selected.sources,...(payload.answerGrounding?.sources||[])]};
+      payload.published={...(payload.published||{}),results:[...selected.articles,...(payload.published?.results||[])]};
+      payload.retrievalChain=[...selected.chain,...(payload.retrievalChain||[])];
+    }
   }
   const formation = await retrieveFormationScope({env,scope:options.retrievalScope,locale:normalized.locale});
   if(options.retrievalScope?.scopeType==='STRUCTURED_KNOWLEDGE'){
@@ -516,7 +569,7 @@ export function evaluateKapCoverage({ bundle, retrieval, scopeDisposition = 'KNO
 export async function runKapGroundingPipeline({ input, request, env = {}, retrievalOptions = {}, scopeDisposition = 'KNOWLEDGE_QUERY' }) {
   const intake = createKapQuestionIntake(input);
   const normalized = normalizeKapQuestion(intake);
-  const retrieval = await retrieveKapKnowledge({ request, env, normalized, options: {...retrievalOptions,retrievalScope:intake.retrievalScope,selectedArticle:intake.surfaceContext?.articleSlug} });
+  const retrieval = await retrieveKapKnowledge({ request, env, normalized, options: {...retrievalOptions,retrievalScope:intake.retrievalScope,selectedArticle:intake.surfaceContext?.articleSlug,selectedBook:intake.surfaceContext?.bookCode} });
   const nodeMatches = deriveKapNodeMatches(retrieval);
   const relationshipAuthority = await loadKapRelationshipAuthority(env);
   const expansion = expandKapRelationships({ nodeMatches, locale: normalized.locale, ...relationshipAuthority });

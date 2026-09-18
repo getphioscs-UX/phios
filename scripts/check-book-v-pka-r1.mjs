@@ -66,4 +66,6 @@ for(const r of map.records){
 assert.equal(covered.size,sections.size);
 assert.equal(base.humanDecision,'PENDING_HUMAN_REVIEW');
 console.log(`PASS W0–W1: ${source.pageCount} source pages; ${sections.size} sections; ${articleIds.size} bilingual article candidates; valid source/Atlas/visual references.`);
-console.log('NOT_RUN W2–W16: published bodies, route rendering, retrieval, remote visuals, browser review and production admission. This checker does not grant publication or human acceptance.');
+await import('./check-book-v-pka-r1-publication.mjs');
+await import('./check-book-v-pka-r1-ask-api.mjs');
+console.log('W15 human decision remains pending; W16 production admission is not granted by machine checks.');

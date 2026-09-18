@@ -475,8 +475,8 @@ function renderRelated(documentRef, article, publishedArticles, translate) {
     ...(article.connections.relatedNodes || [])
   ]);
   const related = publishedArticles.filter(candidate => (
-    candidate.nodeCode !== article.nodeCode &&
-    relatedCodes.has(candidate.nodeCode) &&
+    candidate.slug !== article.slug &&
+    (relatedCodes.has(candidate.slug) || (candidate.nodeCode !== article.nodeCode && relatedCodes.has(candidate.nodeCode))) &&
     safeInternalHref(candidate.publicHref)
   ));
 
@@ -571,6 +571,7 @@ function renderExitNavigation(documentRef, article, translate) {
 
 function renderHeroVisual(documentRef, article) {
   if (!article.hero?.assetCode) {
+    if (article.sourceReading) return null;
     const figure=documentRef.createElement('figure');figure.className='knowledge-article__hero-visual';
     const image=documentRef.createElement('img');image.setAttribute('data-ks-asset','HERO-004');image.alt='';image.loading='eager';figure.append(image);return figure;
   }
@@ -645,7 +646,7 @@ function renderHeader(documentRef, article, translate) {
   if (article.publicationContext) {
     const locale = article.locale === 'zh-Hans' ? 'zh-Hans' : 'en';
     const bookTitle = article.publicationContext.bookTitle?.[locale] || article.publicationContext.bookTitle?.en || '';
-    metadataParts.push(`Volume ${article.publicationContext.publicationVolume}${bookTitle ? ` · ${bookTitle}` : ''} · ${article.publicationContext.partCode}`);
+    metadataParts.push(article.sourceReading ? bookTitle : `Volume ${article.publicationContext.publicationVolume}${bookTitle ? ` · ${bookTitle}` : ''} · ${article.publicationContext.partCode}`);
   }
   metadata.textContent = metadataParts.join(' · ');
   if (metadata.textContent) {
@@ -667,7 +668,7 @@ function renderHeader(documentRef, article, translate) {
 
   for (const action of [
     [article.publicationContext?.bookRoute || '/books', (article.locale==='zh-Hans'?'阅读本册：':'Read volume: ')+(article.publicationContext?.bookTitle?.[article.locale]||article.publicationContext?.bookTitle?.en||article.publicationContext?.bookCode||'PHI OS')],
-    ['/explore', translated(translate, 'knowledge.articles.viewAtlas')]
+    [article.sourceReading ? '/books/reality-differentiation/#atlas' : '/explore', translated(translate, 'knowledge.articles.viewAtlas')]
   ]) {
     const link = createInternalLink(documentRef, {
       href: action[0],
@@ -724,6 +725,41 @@ export function renderArticleDocument(
   ));
   layout.append(renderArticleAside(documentRef, article, translate));
   container.append(layout);
+  if (article.sourceReading) {
+    const details = documentRef.createElement('details');
+    details.className = 'knowledge-article__source-reading';
+    details.id = 'manuscript';
+    appendText(documentRef, details, 'summary', article.sourceReading.label);
+    let loaded = false, pending = false;
+    details.addEventListener('toggle', async () => {
+      if (!details.open || loaded || pending) return;
+      pending = true;
+      const body = documentRef.createElement('div');
+      body.setAttribute('aria-live', 'polite');
+      body.textContent = article.locale === 'en' ? 'Loading manuscript…' : '正在加载原文…';
+      details.append(body);
+      try {
+        const sourcePath = article.sourceReading.path;
+        if (!/^\/content\/knowledge\/public\/successors\/[a-z0-9-]+\/source-readings\/[a-z0-9-]+\.json$/.test(sourcePath)) throw Error('SOURCE_PATH');
+        const response = await fetch(sourcePath, {signal: AbortSignal.timeout(12000)});
+        if (!response.ok) throw Error('SOURCE_UNAVAILABLE');
+        const source = await response.json();
+        body.replaceChildren();
+        for (const page of source.pages) {
+          const heading=appendText(documentRef, body, 'h3', article.locale === 'en' ? `Manuscript page ${page.page} · Chinese original` : `原稿第 ${page.page} 页`);
+          heading.id='manuscript-page-'+page.page;
+          for (const text of page.paragraphs) appendText(documentRef, body, 'p', text);
+        }
+        loaded = true;
+        const hash=documentRef.defaultView?.location?.hash||'';
+        if(/^#manuscript(?:-page-\d+)?$/.test(hash))documentRef.getElementById(hash.slice(1))?.scrollIntoView?.();
+      } catch {
+        body.textContent = article.locale === 'en' ? 'The manuscript could not be loaded. Close and reopen to retry.' : '原文暂未加载成功，请收起后重新展开。';
+        details.addEventListener('toggle', () => {if (!details.open) body.remove();}, {once:true});
+      } finally {pending = false;}
+    });
+    container.append(details);
+  }
 
   if (article.knowledgeBoundary.length) {
     container.append(renderBoundary(documentRef, article, translate));

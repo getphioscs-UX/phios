@@ -34,6 +34,16 @@ const ABL_BILINGUAL_RELEASE_MANIFEST =
   '/content/knowledge/public/abl-bilingual-release.json';
 const BOOK4_PUBLICATION_SUCCESSOR_MANIFEST =
   '/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json';
+const BOOK5_PUBLICATION_SUCCESSOR_MANIFEST =
+  '/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json';
+let book5Manifest;
+export function loadBook5PublicationMetadata() {
+  book5Manifest ||= fetchJson(BOOK5_PUBLICATION_SUCCESSOR_MANIFEST).catch(error => {
+    book5Manifest = null;
+    throw error;
+  });
+  return book5Manifest;
+}
 
 async function fetchJson(path) {
   const response = await fetch(path, {
@@ -164,7 +174,8 @@ async function loadLocale(locale) {
     loadCanonicalBooks(),
     loadCanonicalParts(),
     fetchJson(BOOK4_PUBLICATION_SUCCESSOR_MANIFEST).catch(() => ({ records: [] })),
-    loadFiveVolumePublicationContextRegistry()
+    loadFiveVolumePublicationContextRegistry(),
+    loadBook5PublicationMetadata().catch(() => ({records:[]}))
   ]).then(async ([
     nodeRegistry,
     localizedRegistry,
@@ -175,7 +186,8 @@ async function loadLocale(locale) {
     booksRegistry,
     partsRegistry,
     book4PublicationSuccessorManifest,
-    publicationContextRegistry
+    publicationContextRegistry,
+    book5PublicationManifest
   ]) => {
     const localizedByNode = new Map(
       localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
@@ -250,7 +262,7 @@ async function loadLocale(locale) {
     );
 
     return Object.freeze(
-      [...publishedByNode.values()]
+      [...publishedByNode.values(), ...book5PublicationManifest.records.filter(record => record.locale === normalizedLocale && record.status === 'published')]
         .sort((left, right) => (
           left.publicationOrder - right.publicationOrder
         ))
@@ -268,6 +280,13 @@ export function loadPublishedArticles(locale) {
 }
 
 export async function loadPublishedArticleBySlug(slug, locale) {
+  // Successor manifests carry route metadata. Fetch only the selected body.
+  const manifest = await loadBook5PublicationMetadata().catch(() => ({records:[]}));
+  const row = manifest.records.find(record => record.slug === slug && record.locale === normalizeLocale(locale) && record.status === 'published');
+  if (row) {
+    const article = await fetchJson(row.path);
+    return isApprovedPublication(article) && article.slug === row.slug && article.locale === row.locale ? article : null;
+  }
   const articles = await loadLocale(locale);
   return articles.find(article => article.slug === slug) || null;
 }

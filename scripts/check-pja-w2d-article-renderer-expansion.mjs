@@ -388,13 +388,17 @@ const ablBilingualRelease = await readJson(
 const book4BilingualRelease = await readJson(
   'content/knowledge/public/successors/book4-publication-v1/visual-article-release.json'
 );
+const book5BilingualRelease = await readJson(
+  'content/knowledge/public/successors/book5-publication-v1/visual-article-release.json'
+);
 const publishedArticleIndex = await readJson(
   'content/knowledge/public/published-articles.json'
 );
 const successorReleaseRecords = [
   ...(visualArticleRelease.records || []),
   ...(ablBilingualRelease.records || []),
-  ...(book4BilingualRelease.records || [])
+  ...(book4BilingualRelease.records || []),
+  ...(book5BilingualRelease.records || [])
 ].filter(record => record.status === 'published');
 const expectedPublishedKeys = locale => new Set([
   ...(publishedArticleIndex.records || [])
@@ -474,10 +478,12 @@ for (const release of successorReleaseRecords) {
   const articles = release.locale === 'zh-Hans'
     ? publishedChinese
     : publishedEnglish;
-  const publicArticle = articles.find(article => (
-    article.nodeCode === release.nodeCode &&
+  const metadata = articles.find(article => (
+    article.slug === release.slug &&
     article.locale === release.locale
   ));
+  assert.ok(metadata, `Published successor metadata missing: ${release.slug}:${release.locale}`);
+  const publicArticle = metadata.metadataOnly ? await readJson(release.path.replace(/^\//,'')) : metadata;
   assert.ok(publicArticle, `Published successor is not loadable: ${release.nodeCode}:${release.locale}`);
   assert.equal(publicArticle.slug, release.slug);
   assert.equal(publicArticle.publicHref, release.href);

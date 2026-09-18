@@ -4,16 +4,19 @@ import {kirR2W16R2BProductionCutoverEnabled,getKirR2W16R2BProductionAdmission} f
 import {runKirR2W16R2Successor} from './kir-r2-w16r2-successor.js';
 const PROFILE_PATH='content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a6/kir-r2-book-i-iv-semantic-retrieval-profiles-v2.json';
 const ARTICLE_BINDING_PATH='content/knowledge/knowledge-intelligence-r2/registries/successors/book4-publication-v1/kir-r2-book-i-iv-published-article-binding-registry-v3.json';
+const BOOK5_ARTICLE_BINDING_PATH='content/knowledge/knowledge-intelligence-r2/registries/successors/book5-publication-v1/published-article-bindings-v1.json';
+const BOOK5_PROFILE_PATH='content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book5-publication-v1/semantic-retrieval-profiles-v1.json';
 async function readAsset(env,path){if(!env?.ASSETS?.fetch)return null;const r=await env.ASSETS.fetch(new Request(`https://assets.local/${path}`));return r.ok?r.json():null}
 function enrichProfiles(profiles,bindings=[]){
  const byNode=new Map();for(const b of bindings){if(!byNode.has(b.nodeCode))byNode.set(b.nodeCode,[]);byNode.get(b.nodeCode).push(b)}
  return profiles.map(p=>{const rows=byNode.get(p.nodeCode)||[];if(!rows.length)return p;return {...p,articleSources:rows.map(r=>({articleCode:r.articleCode,slug:r.slug,href:r.href,title:r.title,locale:r.locale,authorityDigest:r.authorityDigest})),aliases:[...(p.aliases||[]),...rows.flatMap(r=>[r.title,r.slug])],userLanguage:[...(p.userLanguage||[]),...rows.map(r=>r.title)]}})
 }
 async function loadProfiles(env){
-  const [doc,binding]=await Promise.all([readAsset(env,PROFILE_PATH),readAsset(env,ARTICLE_BINDING_PATH)]);
+  const [doc,binding,book5,book5Profiles]=await Promise.all([readAsset(env,PROFILE_PATH),readAsset(env,ARTICLE_BINDING_PATH),readAsset(env,BOOK5_ARTICLE_BINDING_PATH),readAsset(env,BOOK5_PROFILE_PATH)]);
   if(!Array.isArray(doc?.profiles)||doc.profiles.length<348)return null;
   if(Number.isInteger(doc.profileCount)&&doc.profileCount!==doc.profiles.length)return null;
-  return enrichProfiles(doc.profiles,binding?.records||[]);
+  const profiles=[...new Map([...doc.profiles,...(book5Profiles?.profiles||[])].map(p=>[p.nodeCode,p])).values()];
+  return enrichProfiles(profiles,[...(binding?.records||[]),...(book5?.records||[])]);
 }
 export async function runKirR2ProductionProjection({question,locale='zh-Hans',env={},allowedContext=null,upstreamGroundedAnswer=null,upstreamGroundingBundle=null,provider=null}={}){
   try{

@@ -66,7 +66,7 @@ export async function resolveSelectedArticle(env,slug,locale='en') {
  if(!/^[a-zA-Z0-9_-]+$/.test(slug||'')||!env?.ASSETS?.fetch)return null;
  const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));return r.ok?r.json():null;};
  try{
-  const paths=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json'];
+  const paths=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json'];
   const manifests=await Promise.all(paths.map(read));
   const row=manifests.flatMap(m=>m?.records||[]).find(r=>(r.slug===slug||r.nodeCode?.toLowerCase()===slug.toLowerCase())&&r.locale===locale&&r.status==='published');
   if(!row?.path?.startsWith('/content/knowledge/public/'))return null;
@@ -76,6 +76,7 @@ export async function resolveSelectedArticle(env,slug,locale='en') {
   if(!paragraphs.length)return null;
   const href=article.publicHref||row.href;
   if(!href?.startsWith('/articles/')||href.startsWith('//'))return null;
-  return {slug:article.slug,title:article.title,href,locale,nodeCode:article.nodeCode,sources:paragraphs.map((text,i)=>({sourceId:'ARTICLE:'+slug+':'+i,fragmentCode:slug+'-'+i,sourceType:'PUBLISHED_CANONICAL_ARTICLE',authorityClass:'PUBLISHED_ARTICLE_AUTHORITY',nodeCode:article.nodeCode,bookCode:article.nodeCode?.match(/^KN-B([1-7])/i)?.[1]?'BOOK-'+article.nodeCode.match(/^KN-B([1-7])/i)[1]:null,title:article.title,href,locale,text,scopeMatch:true,selected:true,articleSlug:slug}))};
+  const bookCode=article.publicationContext?.bookCode || (article.nodeCode?.match(/^KN-B([1-8])/i)?.[1]?'BOOK-'+article.nodeCode.match(/^KN-B([1-8])/i)[1]:null);
+  return {slug:article.slug,title:article.title,href,locale,nodeCode:article.nodeCode,bookCode,articleContext:article.askContext||null,sourceReading:article.sourceReading||null,atlasLinks:article.connections?.relatedAtlasEntries||[],sources:paragraphs.map((text,i)=>({sourceId:'ARTICLE:'+slug+':'+i,fragmentCode:slug+'-'+i,sourceType:'PUBLISHED_CANONICAL_ARTICLE',authorityClass:'PUBLISHED_ARTICLE_AUTHORITY',nodeCode:article.nodeCode,bookCode,title:article.title,href,locale,text,scopeMatch:true,selected:true,articleSlug:slug}))};
  }catch{return null;}
 }
