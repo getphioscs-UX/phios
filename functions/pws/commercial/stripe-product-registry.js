@@ -369,6 +369,27 @@ const rows = [
     "fulfillmentType": "DIGITAL_ACCESS"
   }
 ];
+// Product and entitlement IDs identify a work, never its mutable volume number.
+// Keep the seven-volume purchase IDs and private-source bindings intact.
+const bookPublication = {
+  'COM-BOOK-01': [1, 'Reality Formation', '世界如何形成', 'BOOK_01_FULL_ACCESS'],
+  'COM-BOOK-02': [2, 'Reality Runtime', '世界如何运行', 'BOOK_02_FULL_ACCESS'],
+  'COM-BOOK-03': [3, 'Reality Continuity', '世界如何维持', 'BOOK_03_FULL_ACCESS'],
+  'COM-BOOK-04': [4, 'Reality Expansion', '世界如何扩展', 'BOOK_04_FULL_ACCESS'],
+  'COM-BOOK-05': [5, 'Reality Differentiation', '世界如何分化', 'BOOK_05_FULL_ACCESS'],
+  'COM-BOOK-CONFIGURATION': [6, 'Reality Configuration', '世界如何重组', 'BOOK_CONFIGURATION_FULL_ACCESS'],
+  'COM-BOOK-06': [7, 'Reality Observation', '世界如何被观察', 'BOOK_06_FULL_ACCESS'],
+  'COM-BOOK-07': [8, 'Reality Navigation', '世界将如何继续', 'BOOK_07_FULL_ACCESS']
+};
+rows.push({productId:'COM-BOOK-CONFIGURATION',category:'BOOK',billingType:'ONE_TIME',currency:'MYR',amountMinor:10900,
+  qaProductId:'prod_VHXHiFJUW2FBEX',qaPriceId:'price_1UGyClBEKXJyHMkKLUjUaBMH',liveProductId:null,livePriceId:null,
+  active:true,title:'PHI OS Book VI · Reality Configuration',entitlementPolicy:'BOOK_CONFIGURATION_FULL_ACCESS',fulfillmentType:'DIGITAL_ACCESS'});
+const roman=['I','II','III','IV','V','VI','VII','VIII'];
+for(const row of rows){const b=bookPublication[row.productId];if(!b)continue;
+  Object.assign(row,{publicationBookCode:`BOOK-${b[0]}`,publicationVolume:b[0],workId:b[1].toLowerCase().replaceAll(' ','-'),
+    title:`PHI OS Book ${roman[b[0]-1]} · ${b[1]}`,titleZh:`PHI OS 第${b[0]}册 · ${b[2]}`});
+  if(row.entitlementPolicy!==b[3])throw new Error('BOOK_ENTITLEMENT_IDENTITY_DRIFT');
+}
 export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));
 export function commerceProduct(id) {
   const product = STRIPE_PRODUCT_REGISTRY.find(row => row.productId === id);

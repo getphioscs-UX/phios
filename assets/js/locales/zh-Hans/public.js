@@ -235,9 +235,9 @@ const publicExperience = Object.freeze({
       boundary: '这些入口只披露现有界面；不会建立账户或案例，不会执行 Method、产生专业判断，也不会自动启动 Reality Journey。'
     },
     fiveVolumeKnowledge: {
-      eyebrow: '七册知识体系',
-      title: '七册书，一套理解现实的完整架构。',
-      lead: '七册内容从现实形成、运行、维持、文明扩展走向读取与导航。每一册保持自己的范围，同时共同构成一个彼此连接的模型。',
+      eyebrow: '八册知识体系',
+      title: '八册书，一套理解现实的完整架构。',
+      lead: '八册内容从现实形成、运行、维持、文明扩展走向读取与导航。每一册保持自己的范围，同时共同构成一个彼此连接的模型。',
       progression: {
         formation: '现实如何形成',
         runtime: '现实如何运行',
@@ -245,7 +245,7 @@ const publicExperience = Object.freeze({
         civilization: '现实如何扩展',
         navigation: '现实如何被读取与导航'
       },
-      figureCaption: 'Canonical Seven-Volume Architecture 图把七册的顺序连接起来，同时不把不同册的范围压缩成一个没有区别的答案。',
+      figureCaption: 'Canonical Eight-Volume Architecture 图把八册的顺序连接起来，同时不把不同册的范围压缩成一个没有区别的答案。',
       coverUnavailable: '受治理封面暂时不可用',
       actions: {
         read: '已发布知识',
@@ -325,7 +325,7 @@ const publicExperience = Object.freeze({
       eyebrow: '三种进入方式',
       title: '从知识、体验或系统本身开始。',
       knowledgeTitle: '探索知识',
-      knowledgeCopy: '进入研究论文、七册书、十五部架构与现实地图集。',
+      knowledgeCopy: '进入研究论文、八册书、十五部架构与现实地图集。',
       knowledgeAction: '打开现实地图集',
       realityTitle: '体验现实旅程',
       realityCopy: '了解六阶段路径、信息边界，以及你选择开始前会发生什么。',
@@ -365,8 +365,8 @@ const publicExperience = Object.freeze({
       action: '探索生态'
     },
     production: {
-      booksEyebrow: 'Canonical Knowledge · 七册',
-      booksTitle: '七册知识现在由同一套受治理的公开架构承载。',
+      booksEyebrow: 'Canonical Knowledge · 八册',
+      booksTitle: '八册知识现在由同一套受治理的公开架构承载。',
       booksLead: '书册身份、Part 归属与公开状态直接投射自 Canonical Registry，不再依赖另一份前端目录。',
       knowledgePulse: '{articles} 条已发布 Article 记录 · {figures} 张归属一致的第一册 Figure · {parts} 个 Canonical Part',
       volumeLabel: '第 {volume} 册',
@@ -509,7 +509,7 @@ const publicExperience = Object.freeze({
       "skip": "跳至 Professional Authority",
       "eyebrow": "External Reality Grounding",
       "title": "PHI OS 不需要拥有每一个领域的 Truth；它必须知道自己正在使用什么 Authority。",
-      "lead": "七册框架通过 Source、Authority、Date、Jurisdiction、Evidence Type、Confidence 与 Case Fit 连接不断变化的世界。",
+      "lead": "八册框架通过 Source、Authority、Date、Jurisdiction、Evidence Type、Confidence 与 Case Fit 连接不断变化的世界。",
       "groundTitle": "External Reality Grounding",
       "groundCopy": "不断变化的事实通过受治理 Source 进入，而不是被静默吸收到永久 Interpretation。",
       "chainTitle": "Authority Chain",
@@ -535,7 +535,7 @@ const publicExperience = Object.freeze({
       "originCopy": "她的实践跨越理财规划、资源配置、组织重组与系统分析，同时研究不同历史框架如何理解人的模式与时序。不同领域反复显露同一个限制：每种方法能看见一部分，却难以持续保留整体处境、证据、未知与时间中的变化。",
       "quote": "「更深的问题是：这个框架究竟观察到了什么？可以合理推导到哪里？它的解释与现实相遇之后，是否仍然成立？」",
       "factsTitle": "实践背景与研究方向",
-      "factsCopy": "PHI OS 创办者与首席架构设计者，《现实导航核心论述》与七册书系作者。实践背景包括理财规划、组织重组、资源配置与系统分析；研究关注现实形成、人的持续运行、解释、连续性、AI 与文明。",
+      "factsCopy": "PHI OS 创办者与首席架构设计者，《现实导航核心论述》与八册书系作者。实践背景包括理财规划、组织重组、资源配置与系统分析；研究关注现实形成、人的持续运行、解释、连续性、AI 与文明。",
       "researchTitle": "为什么研究仍在继续",
       "researchCopy": "AI 扩展了语言与综合信息的能力。PHI OS 继续追问：如何让这些能力连接证据、持续变化与行动责任，而不只产生更多答案。"
     },
@@ -563,7 +563,7 @@ const publicExperience = Object.freeze({
       limits: 'PHI OS 不做什么',
       trust: '建立者与信任',
       research: '研究基础',
-      books: '七册书',
+      books: '八册书',
       architecture: '十五部架构',
       platform: '平台',
       ecosystem: '未来生态'
@@ -615,9 +615,9 @@ const publicExperience = Object.freeze({
       ecosystem: '生态'
     },
     books: {
-      eyebrow: '03 · 七册书',
-      title: '同一个架构的七册阅读路径。',
-      lead: '这七册书不是相互分离的架构，而是贯穿十五个相连部分的人类可读路径。',
+      eyebrow: '03 · 八册书',
+      title: '同一个架构的八册阅读路径。',
+      lead: '这八册书不是相互分离的架构，而是贯穿十五个相连部分的人类可读路径。',
       b1Title: "第一册 · 世界如何形成",
       b1Copy: "现实形成与运行基础",
       b2Title: "第二册 · 世界如何运行",

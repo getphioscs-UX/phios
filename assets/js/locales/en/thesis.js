@@ -69,37 +69,37 @@ const thesis = Object.freeze({
     },
     "books": {
       "eyebrow": "Human Reading Route",
-      "title": "Seven books. One architecture.",
-      "copy": "The seven books form the human-readable route through the fifteen-part PHI OS architecture.",
+      "title": "Eight books. One architecture.",
+      "copy": "The eight books form the human-readable route through the fifteen-part PHI OS architecture.",
       "b1": {
         "no": "BOOK I · PARTS 1–4",
         "title": "Reality Formation",
         "copy": "Foundations of Reality Formation and Runtime",
-        "status": "Seven-volume architecture"
+        "status": "Eight-volume architecture"
       },
       "b2": {
         "no": "BOOK II · PARTS 5–7",
         "title": "Reality Runtime",
         "copy": "How Humans and the World Run Together",
-        "status": "Seven-volume architecture"
+        "status": "Eight-volume architecture"
       },
       "b3": {
         "no": "BOOK III · PARTS 8–9",
         "title": "Reality Continuity",
         "copy": "How Runtime Is Maintained, Recovered and Coordinated",
-        "status": "Seven-volume architecture"
+        "status": "Eight-volume architecture"
       },
       "b4": {
         "no": "BOOK IV · PARTS 10–11",
         "title": "Reality Expansion",
         "copy": "Runtime Expansion and Civilization Runtime",
-        "status": "Seven-volume architecture"
+        "status": "Eight-volume architecture"
       },
       "b5": {
         "no": "BOOK V · PART 12",
         "title": "Reality Differentiation",
         "copy": "Civilization Atlas",
-        "status": "Seven-volume architecture"
+        "status": "Eight-volume architecture"
       }
     },
     "implementation": {

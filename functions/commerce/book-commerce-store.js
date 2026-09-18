@@ -27,7 +27,7 @@ export async function ensureCommerceProducts(env, clock=Date.now) {
   await db.batch(STRIPE_PRODUCT_REGISTRY.map(p=>db.prepare(`INSERT INTO commerce_products
     (product_id,product_version,title,language,format,currency,amount_minor,source_object_key,active,created_at,updated_at,category,billing_type,qa_price_id,qa_product_id)
     VALUES (?1,'COM-STRIPE-R1',?2,'bilingual',?3,'MYR',?4,'',1,?5,?5,?6,?7,?8,?9)
-    ON CONFLICT(product_id) DO UPDATE SET amount_minor=excluded.amount_minor,qa_price_id=excluded.qa_price_id,qa_product_id=excluded.qa_product_id,updated_at=excluded.updated_at`)
+    ON CONFLICT(product_id) DO UPDATE SET title=excluded.title,amount_minor=excluded.amount_minor,qa_price_id=excluded.qa_price_id,qa_product_id=excluded.qa_product_id,updated_at=excluded.updated_at`)
     .bind(p.productId,p.title,p.fulfillmentType,p.amountMinor,now,p.category,p.billingType,p.qaPriceId,p.qaProductId)));
 }
 export async function createCommerceOrder({env,customerId,productId,selectedProducts,idempotencyKeyHash,requestHash,locale,context={},clock=Date.now}){

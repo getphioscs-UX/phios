@@ -1,7 +1,8 @@
 export function renderBookPublicSamples(host,book,locale='en'){
  const doc=host.ownerDocument,zh=locale==='zh-Hans';host.replaceChildren();
  const heading=doc.createElement('h2');heading.textContent=book.previewPages?.length||book.figures?.length?(zh?'免费阅读预览':'Free reading preview'):(zh?'本册封面':'Book cover');host.append(heading);
- const cover=doc.createElement('img');cover.src=book.cover;cover.alt=zh?'本册封面':'Book cover';cover.loading='lazy';cover.style.cssText='width:200px;max-width:100%;height:auto';host.append(cover);
+ if(book.cover){const cover=doc.createElement('img');cover.src=book.cover;cover.alt=zh?'本册封面':'Book cover';cover.loading='lazy';cover.style.cssText='width:200px;max-width:100%;height:auto';host.append(cover);}
+ else {const note=doc.createElement('p');note.textContent=zh?'本册封面与预览尚待公布。':'Cover and preview will be announced.';host.append(note);}
  const pages=book.previewPages||[];
  if(pages.length){const note=doc.createElement('p');note.textContent=zh?'购买前可免费阅读以下静态预览页。原文语言保持不变。':'Read these sample pages free before purchasing. The original page language is preserved.';host.append(note);
  const controls=doc.createElement('div'),prev=doc.createElement('button'),next=doc.createElement('button'),select=doc.createElement('select'),image=doc.createElement('img'),status=doc.createElement('p');

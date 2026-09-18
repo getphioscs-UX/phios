@@ -68,7 +68,7 @@ const currentBookArchitecture = await readJson(
   'content/registry/current-book-architecture.json'
 );
 assert.equal(currentBookArchitecture.status, 'ACTIVE');
-assert.equal(currentBookArchitecture.architecture, 'seven-volume-15-part');
+assert.equal(currentBookArchitecture.architecture, 'eight-volume');
 assert.equal(currentBookArchitecture.historicalPredecessor.mutable, false);
 
 const knowledgeData = await listFiles('content/knowledge/registry', '.json');

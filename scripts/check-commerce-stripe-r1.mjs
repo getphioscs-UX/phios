@@ -14,7 +14,7 @@ const cases=[];async function test(name,fn){await fn();cases.push({name,status:'
 const sqlite=new DatabaseSync(':memory:');sqlite.exec('PRAGMA foreign_keys=ON');
 const db=createSqliteD1Adapter(sqlite), migrations=loadRuntimeMigrations(process.cwd()).migrations;
 const env={RUNTIME_DB:db,STRIPE_ENVIRONMENT:'QA',STRIPE_SECRET_KEY:'sk_test_fixture_only',STRIPE_WEBHOOK_SECRET:'whsec_fixture_only',PHIOS_COMMERCE_QA_ENABLED:'true'};
-Object.assign(env,{BOOKS:{head:async()=>({size:1})},BOOK_ACCESS_TOKEN_SECRET:'fixture-only-book-secret-at-least-32-characters',BOOK_WATERMARK_SERVICE_URL:'https://watermark.test',BOOK_WATERMARK_SERVICE_TOKEN:'fixture-only',COMMERCE_BOOK_SOURCE_KEYS_JSON:JSON.stringify(Object.fromEntries([2,3,4,5,6,7].map(n=>[`COM-BOOK-0${n}`,`private/fixture-book-${n}.pdf`])))});
+Object.assign(env,{BOOKS:{head:async()=>({size:1})},BOOK_ACCESS_TOKEN_SECRET:'fixture-only-book-secret-at-least-32-characters',BOOK_WATERMARK_SERVICE_URL:'https://watermark.test',BOOK_WATERMARK_SERVICE_TOKEN:'fixture-only',COMMERCE_BOOK_SOURCE_KEYS_JSON:JSON.stringify({...Object.fromEntries([2,3,4,5,6,7].map(n=>[`COM-BOOK-0${n}`,`private/fixture-book-${n}.pdf`])), 'COM-BOOK-CONFIGURATION':'private/fixture-configuration.pdf'})});
 await test('migration preserves existing book purchases, rights and download tokens',async()=>{
   await applyRuntimeMigrations({db,migrations:migrations.slice(0,5)});await ensureBookProduct(env);
   const product=sqlite.prepare('SELECT product_id FROM commerce_products').get().product_id;
@@ -27,9 +27,9 @@ await test('migration preserves existing book purchases, rights and download tok
   assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM digital_entitlements').get().n,1);
   assert.deepEqual(sqlite.prepare('PRAGMA foreign_key_check').all(),[]);
 });
-await test('24 approved QA prices and all existing report prices agree',()=>{
-  assert.equal(STRIPE_PRODUCT_REGISTRY.length,24);assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId)).size,24);assertReportPriceParity();
-  const approved={'COM-REPORT-FINANCIAL-FULL':15900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':2900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
+await test('25 approved QA prices and all existing report prices agree',()=>{
+  assert.equal(STRIPE_PRODUCT_REGISTRY.length,25);assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId)).size,25);assertReportPriceParity();
+  const approved={'COM-REPORT-FINANCIAL-FULL':15900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-CONFIGURATION':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':2900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
   for(const [id,amount] of Object.entries(approved))assert.equal(STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===id).amountMinor,amount);
   const provider=JSON.parse(fs.readFileSync('docs/qa/commerce-stripe-r1/stripe-provider-readback.json','utf8'));
   for(const p of STRIPE_PRODUCT_REGISTRY){const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);assert.equal(q.unit_amount,p.amountMinor);assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(p.livePriceId,null);assert.equal(p.liveProductId,null);assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}

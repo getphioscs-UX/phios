@@ -17,7 +17,7 @@ const atlas = Object.freeze({
     hero: {
       eyebrow: 'Knowledge Journey · Reality Atlas',
       title: 'Explore how Reality organizes itself.',
-      subtitle: 'A scrollable knowledge map connecting the PHI OS thesis, seven books, fifteen architectural layers and their figures.',
+      subtitle: 'A scrollable knowledge map connecting the PHI OS thesis, eight books, fifteen architectural layers and their figures.',
       beginAction: 'Enter the Atlas',
       thesisAction: 'Read the Thesis',
       orientationLabel: 'You are here',
@@ -37,14 +37,14 @@ const atlas = Object.freeze({
       thesisDescription: 'Establishes why Reality Navigation is needed.',
       layersTitle: '15 Layers',
       layersDescription: 'Defines how the PHI OS architecture works.',
-      booksTitle: 'Seven Books',
+      booksTitle: 'Eight Books',
       booksDescription: 'Provides a continuous route for human reading.',
       figuresTitle: 'Figures',
       figuresDescription: 'Compresses relationships into visual reference maps.',
       boundary: 'The fifteen Parts are interoperable architectural layers. They are not fifteen separate books, and this Knowledge Journey does not change the Reality Journey.'
     },
     books: {
-      eyebrow: 'Seven-book architecture',
+      eyebrow: 'Eight-book architecture',
       title: 'Reality forms, runs, maintains continuity, expands and continues.',
       description: 'Each book opens a different scale of the same PHI OS architecture.',
       bookOneTitle: "Reality Formation",

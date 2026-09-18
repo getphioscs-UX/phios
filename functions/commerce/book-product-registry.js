@@ -42,7 +42,7 @@ export function resolveCommerceBookSourceKey(env,productId){
   if(productId==='COM-BOOK-01') return resolveBookOneSourceKey(env);
   let mappings={};try{mappings=JSON.parse(env.COMMERCE_BOOK_SOURCE_KEYS_JSON||'{}');}catch{}
   const key=String(mappings[productId]||'');
-  if(!/^COM-BOOK-0[2-7]$/.test(productId)||!key||key.includes('..')||key.startsWith('/')||/^https?:/.test(key)) throw Object.assign(new Error('Private book source mapping is not configured.'),{status:503,code:'commerce_book_source_unconfigured'});
+  if(!/^(?:COM-BOOK-0[2-7]|COM-BOOK-CONFIGURATION)$/.test(productId)||!key||key.includes('..')||key.startsWith('/')||/^https?:/.test(key)) throw Object.assign(new Error('Private book source mapping is not configured.'),{status:503,code:'commerce_book_source_unconfigured'});
   return key;
 }
 

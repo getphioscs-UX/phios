@@ -1,4 +1,4 @@
-const URL='/content/web-production/registries/wpr-seven-volume-r2-public-assets-v1.json';let cache=null;
+const URL='/content/web-production/registries/wpr-eight-volume-r2-public-assets-v1.json';let cache=null;
 const registry=async()=>{if(cache)return cache;const r=await fetch(URL,{cache:'force-cache',signal:AbortSignal.timeout(12000)});if(!r.ok)throw new Error(`SEVEN_VOLUME_ASSET_REGISTRY_${r.status}`);cache=await r.json();return cache};
 export async function resolveSevenVolumeCustomerAsset(id){const r=await registry();const a=r.assets?.find(x=>x.assetId===id);if(!a?.available||!a?.publicUrl)throw new Error(`SEVEN_VOLUME_ASSET_UNAVAILABLE:${id}`);return a}
 const bindings=new WeakMap();

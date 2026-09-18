@@ -161,7 +161,7 @@ export async function loadFiveVolumePublicationContextRegistry() {
   const [books, parts] = await Promise.all([loadSevenVolumeBooks(), loadSevenVolumeParts()]);
   return {
     ...registry,
-    architecture: 'seven-volume-15-part',
+    architecture: books.architecture,
     partOwnership: parts.parts.map(part => {
       const book = books.books.find(item => item.book_id === part.book);
       if (!book) throw new Error('WPR_PUBLICATION_OWNER_MISSING');

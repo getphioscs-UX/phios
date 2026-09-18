@@ -18,16 +18,17 @@ const fetchJson=async path=>{const response=await fetch(path,{credentials:'same-
 const state={articles:new Map(),books:null,concepts:null,figures:null,parts:null,catalog:null,searchIndex:new Map()};
 
 const BOOK_ROLE={
+ 'BOOK-6':{en:'Reality Configuration',zh:'世界如何重组'},
  'BOOK-1':{en:'How reality forms',zh:'现实如何形成'},
  'BOOK-2':{en:'How reality runs',zh:'现实如何运行'},
  'BOOK-3':{en:'How reality maintains continuity',zh:'现实如何维持与延续'},
  'BOOK-4':{en:'How reality expands across scale',zh:'现实如何跨越尺度扩展'},
  'BOOK-5':{en:'How civilizations occupy different reality positions',zh:'文明如何占据不同现实位置'},
- 'BOOK-6':{en:'How reality becomes observable and readable',zh:'现实如何被观察与读取'},
- 'BOOK-7':{en:'How reading becomes navigation and continuation',zh:'读取如何进入导航与延续'}
+ 'BOOK-7':{en:'How reality becomes observable and readable',zh:'现实如何被观察与读取'},
+ 'BOOK-8':{en:'How reading becomes navigation and continuation',zh:'读取如何进入导航与延续'}
 };
-const BOOK_ASSET=Object.fromEntries(Array.from({length:7},(_,i)=>[`BOOK-${i+1}`,`BOOK-${i+1}-HARDCOVER`]));
-const BOOK_ROUTE={'BOOK-1':'/books/reality-formation/','BOOK-2':'/books/reality-runtime/','BOOK-3':'/books/reality-continuity/','BOOK-4':'/books/reality-expansion/','BOOK-5':'/books/reality-differentiation/','BOOK-6':'/books/reality-observation/','BOOK-7':'/books/reality-navigation/'};
+const BOOK_ASSET=Object.fromEntries(Array.from({length:8},(_,i)=>[`BOOK-${i+1}`,`BOOK-${i+1}-HARDCOVER`]));
+const BOOK_ROUTE={'BOOK-1':'/books/reality-formation/','BOOK-2':'/books/reality-runtime/','BOOK-3':'/books/reality-continuity/','BOOK-4':'/books/reality-expansion/','BOOK-5':'/books/reality-differentiation/','BOOK-6':'/books/reality-configuration/','BOOK-7':'/books/reality-observation/','BOOK-8':'/books/reality-navigation/'};
 
 function askHref(kind,ref,labelText,route){
  const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:`${kind}:${ref}`,contextLabel:clean(labelText).slice(0,160),contextRoute:clean(route).slice(0,240)});

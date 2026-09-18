@@ -1,3 +1,4 @@
+import {loadSevenVolumeBooks,bookRoute} from '../web-production/public-surface-data-seven.js';
 const BASE='/content/knowledge/public/successors/book4-discovery-v1';
 const PATHS=Object.freeze({
   search:`${BASE}/public-search-index.json`,
@@ -18,7 +19,15 @@ export async function loadPublicSearchIndex(locale){
  const records=Array.isArray(data.records)?data.records:[];
  return records.filter(record=>!locale||record.locale===locale);
 }
-export async function loadPublicKnowledgeCatalog(){return load('catalog')}
+export async function loadPublicKnowledgeCatalog(){
+ const [catalog,registry]=await Promise.all([load('catalog'),loadSevenVolumeBooks()]);
+ // Semantic route joins preserve article counts when publication numbers move.
+ const previous=new Map(catalog.books.map(b=>[b.canonicalRoute,b]));
+ return {...catalog,bookCount:registry.books.length,books:registry.books.map(b=>{
+  const route=bookRoute(b.book_id),prior=previous.get(route);
+  return {...prior,bookCode:b.bookCode,volume:b.volume,title:b.title,subtitle:b.subtitle,canonicalRoute:route,partCodes:b.parts.map(n=>'P'+n),hasPublishedKnowledge:prior?.hasPublishedKnowledge||false,publishedArticleCount:prior?.publishedArticleCount||0};
+ })};
+}
 export async function loadCrossBookDiscovery(locale){
  const data=await load('crossBook');
  const records=Array.isArray(data.records)?data.records:[];

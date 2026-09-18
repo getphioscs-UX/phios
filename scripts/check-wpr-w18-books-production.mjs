@@ -20,12 +20,12 @@ assert.deepEqual(historicalBooks.books.map(book => book.parts), [
 
 const architecture = readJson('content/registry/current-book-architecture.json');
 assert.equal(architecture.status, 'ACTIVE');
-assert.equal(architecture.architecture, 'seven-volume-15-part');
+assert.equal(architecture.architecture, 'eight-volume');
 assert.equal(architecture.historicalPredecessor.mutable, false);
 
 const currentBooks = readJson(architecture.books.replace(/^\//, ''));
-const projection = readJson('content/web-production/registries/wpr-seven-volume-book-production-projection-v1.json');
-assert.equal(currentBooks.books.length, 7);
+const projection = readJson('content/web-production/registries/wpr-eight-volume-book-production-projection-v1.json');
+assert.equal(currentBooks.books.length, 8);
 assert.equal(projection.status, 'ACTIVE_SUCCESSOR');
 assert.equal(projection.architecture, architecture.architecture);
 assert.deepEqual(

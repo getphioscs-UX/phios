@@ -99,7 +99,7 @@ async function render() {
             <h1>${escapeHtml(title)}</h1>
             <p class="knowledge-hero__lead">${escapeHtml(subtitle)}</p>
             <p>${escapeHtml(t('knowledge.production.registryLed'))}</p>
-            <div class="knowledge-actions">${readAction}${bookOneActions}${atlasAction}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部七册':'All seven volumes')}</a></div>
+            <div class="knowledge-actions">${readAction}${bookOneActions}${atlasAction}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部八册':'All eight volumes')}</a></div>
           </div>
           <figure class="wpr-book-cover"><div>${heroVisual}</div><figcaption>${escapeHtml(t('knowledge.production.coverBoundary'))}</figcaption></figure>
         </div>
@@ -109,13 +109,23 @@ async function render() {
           <p class="knowledge-eyebrow">${escapeHtml(t('knowledge.production.architectureEyebrow'))}</p>
           <h2>${escapeHtml(t('knowledge.production.architectureTitle', { count: parts.length }))}</h2>
           ${crossVolume}
-          <div class="wpr-parts-grid">${parts.map(part => partMarkup(part, locale)).join('')}</div>
+          <div class="wpr-parts-grid">${parts.map(part => partMarkup(part, locale)).join('')}${book.partAdmission==='PENDING_USER_AUTHORITY'?`<p>${locale==='zh-Hans'?'本册内容与章节安排尚待公布。':'Contents and chapter organization will be announced.'}</p>`:''}</div>
           <p class="knowledge-boundary">${escapeHtml(t('knowledge.production.ownershipBoundary'))}</p>
         </div>
       </section>
     `;
 
     // Public static samples are independent of checkout and paid delivery.
+    fetch('/api/commerce-catalog').then(r=>{if(!r.ok)throw new Error('CATALOG_UNAVAILABLE');return r.json();}).then(catalog=>{
+      if(generation!==renderGeneration)return;
+      const product=catalog.products?.find(p=>p.category==='BOOK'&&p.publicationBookCode===book.bookCode);
+      if(!product)return;
+      const price=document.createElement('p');price.dataset.bookCommercePrice=product.productId;
+      price.textContent=new Intl.NumberFormat(locale==='zh-Hans'?'zh-MY':'en-MY',{style:'currency',currency:product.currency}).format(product.amountMinor/100);
+      const link=document.createElement('a');link.className='knowledge-action';link.href='/account/';
+      link.textContent=locale==='zh-Hans'?'查看购买与交付状态':'View purchase and delivery availability';
+      price.append(' · ',link);root.querySelector('.knowledge-hero__lead')?.after(price);
+    }).catch(()=>{});
     fetch('/content/web-production/registries/book-public-samples-v1.json').then(r=>{if(!r.ok)throw new Error('SAMPLES_UNAVAILABLE');return r.json();}).then(registry=>{
       if(generation!==renderGeneration)return;const sample=registry.books.find(b=>b.bookId===bookId);if(!sample)return;
       const section=document.createElement('section');section.id='free-samples';section.className='knowledge-section';const shell=document.createElement('div');shell.className='knowledge-shell';section.append(shell);root.append(section);renderBookPublicSamples(shell,sample,locale);

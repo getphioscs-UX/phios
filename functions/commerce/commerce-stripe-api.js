@@ -5,6 +5,7 @@ import { verifyStripeQaAccount, createCanonicalStripeCustomer, createCommerceChe
 import { sha256Hex } from './commerce-crypto.js';
 import { json,commerceError,readJsonBody,localeFrom } from './commerce-http.js';
 import {commerceLog} from './commerce-observability.js';
+import {resolveCommerceBookSourceKey} from './book-product-registry.js';
 
 function requireIdentity(context){
   const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
@@ -52,6 +53,8 @@ export async function commerceApi(context,action){
     const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy']);
     if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
     const product=commerceProduct(body.productId), selected=commerceSelection(product.productId,body.selectedProducts||[]);
+    // A registered price does not establish that the private book can be delivered.
+    if(product.category==='BOOK') resolveCommerceBookSourceKey(env,product.productId);
     if(body.acceptDigitalPolicy!==true) throw Object.assign(new Error('Accept purchase terms.'),{status:422,code:'digital_policy_acceptance_required'});
     const supplied=request.headers.get('idempotency-key')||'';
     if(!/^[A-Za-z0-9._:-]{16,120}$/.test(supplied)) throw Object.assign(new Error('Idempotency key required.'),{status:422,code:'idempotency_key_required'});

@@ -89,13 +89,18 @@ export const LIBRARY_RESOURCES = Object.freeze([
     description: { en: 'Civilization Atlas.', 'zh-Hans': '文明图谱。' }
   },
   {
-    id: 'book-six', category: 'books', status: 'later', href: '/books/reality-observation/',
-    title: { en: 'Book VI · Reality Observation', 'zh-Hans': '第六册 · 世界如何被观察' },
+    id: 'book-six', category: 'books', status: 'later', href: '/books/reality-configuration/',
+    title: {en:'Book VI · Reality Configuration','zh-Hans':'第六册 · 世界如何重组'},
+    description: {en:'Contents will be announced.','zh-Hans':'本册内容尚待公布。'}
+  },
+  {
+    id: 'book-seven', category: 'books', status: 'later', href: '/books/reality-observation/',
+    title: { en: 'Book VII · Reality Observation', 'zh-Hans': '第七册 · 世界如何被观察' },
     description: { en: 'Reading Science.', 'zh-Hans': '读取科学。' }
   },
   {
-    id: 'book-seven', category: 'books', status: 'later', href: '/books/reality-navigation/',
-    title: { en: 'Book VII · Reality Navigation', 'zh-Hans': '第七册 · 世界将如何继续' },
+    id: 'book-eight', category: 'books', status: 'later', href: '/books/reality-navigation/',
+    title: { en: 'Book VIII · Reality Navigation', 'zh-Hans': '第八册 · 世界将如何继续' },
     description: { en: 'Navigation Science and Reality Continuation.', 'zh-Hans': '导航科学与现实延续。' }
   },
   {
@@ -108,8 +113,8 @@ export const LIBRARY_RESOURCES = Object.freeze([
       'zh-Hans': '现实 Atlas'
     },
     description: {
-      en: 'A free structural route across fifteen Parts and seven Books.',
-      'zh-Hans': '贯穿十五部与七册书的免费结构路径。'
+      en: 'A free structural route across fifteen Parts and eight Books.',
+      'zh-Hans': '贯穿十五部与八册书的免费结构路径。'
     }
   },
   {

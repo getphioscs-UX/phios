@@ -42,15 +42,15 @@ try{
  page.on('pageerror',e=>{errors.push(e.message);console.error(e.message);});page.on('requestfailed',r=>failures.push(r.url()));
  await page.goto(pathToFileURL(path.join(root,'docs/qa/commerce-stripe-r1/UNIFIED-HUMAN-REVIEW.html')).href,{timeout:60000});
  await page.waitForSelector('body[data-ready=true]',{timeout:60000});
- assert.equal(await page.locator('#item option').count(),230);
+ const itemCount=await page.locator('#item option').count();assert.equal(itemCount,239);
  assert.equal(await page.locator('img,iframe').count(),0);
  await page.locator('#base').fill(origin);await page.locator('#base').dispatchEvent('change');
- for(let i=0;i<230;i++){await page.locator('#item').selectOption(String(i));const url=await page.locator('#open').getAttribute('href');assert(url.startsWith(origin));const response=await context.request.get(url);assert.equal(response.status(),200,url);}
+ for(let i=0;i<itemCount;i++){await page.locator('#item').selectOption(String(i));const url=await page.locator('#open').getAttribute('href');assert(url.startsWith(origin));const response=await context.request.get(url);assert.equal(response.status(),200,url);}
  await page.locator('#item').selectOption('0');await page.locator('#reviewer').fill('AUTOMATED_INTERFACE_TEST_NOT_HUMAN_REVIEW');await page.locator('#notes').fill('Fixture only; no acceptance.');await page.locator('#decision').selectOption('PENDING');await page.locator('#save').click();
  const download=page.waitForEvent('download');await page.locator('#export').click();assert.equal((await download).suggestedFilename(),'PHIOS-UNIFIED-HUMAN-REVIEW.json');
  await page.reload();await page.waitForSelector('body[data-ready=true]');assert.match(await page.locator('#saved').textContent(),/PENDING/);
  await page.setViewportSize({width:390,height:900});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
- results.push({surface:'unified-review',status:'MACHINE_TESTED',offlineIndex:true,runtimeRequiresLocalOrPreview:true,reportCases:46,crossCases:90,pisPages:46,checks:['lightweight offline index','230 live target routes return 200','no embedded media','draft persistence','single JSON export','mobile overflow'],humanAcceptance:false});await context.close();
+ results.push({surface:'unified-review',status:'MACHINE_TESTED',offlineIndex:true,runtimeRequiresLocalOrPreview:true,reportCases:46,crossCases:90,pisPages:46,checks:['lightweight offline index','239 live target routes return 200','no embedded media','draft persistence','single JSON export','mobile overflow'],humanAcceptance:false});await context.close();
  fs.writeFileSync('docs/qa/commerce-stripe-r1/browser-results.json',JSON.stringify({status:'MOCK_ACCEPTED',realStripeE2E:'NOT_RUN',results},null,2)+'\n');console.log('Commerce browser + offline unified review checks passed.');
 }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}

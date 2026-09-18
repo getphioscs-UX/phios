@@ -3,9 +3,9 @@ import {parseHTML} from 'linkedom';
 const read=p=>JSON.parse(fs.readFileSync(p));
 const pages=read('content/web/index-surfaces/pis-r1-presentation-manifest-v1.json').pages;
 const books=read('content/web/index-surfaces/pis-r1-book-context-v1.json').books;
-const publication=read('content/registry/successors/seven-volume-v1/books.json').books;
+const publication=read('content/registry/successors/eight-volume-v1/books.json').books;
 const visuals=read('content/web-production/registries/client-visual-asset-registry-v1.8.json').assets;
-const bookVisuals=read('content/web-production/registries/wpr-seven-volume-r2-public-assets-v1.json').assets;
+const bookVisuals=read('content/web-production/registries/wpr-eight-volume-r2-public-assets-v1.json').assets;
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
 const data=(marker,value)=>`<script type="application/ld+json" ${marker}>${JSON.stringify(value).replaceAll('<','\\u003c')}</script>`;
 for(const entry of [...pages,...books]){

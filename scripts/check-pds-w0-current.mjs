@@ -168,6 +168,16 @@ for (const protectedPath of fixture.protectedPaths) {
   ]).split('\n').filter(Boolean);
   if (!changedFiles.length) continue;
 
+  // COM-STRIPE-R1 schema was already committed in the user-approved 16a0ca9
+  // baseline. Admit that single additive file, not arbitrary schema changes.
+  if (protectedPath === 'db/schema' && changedFiles.length === 1 &&
+      changedFiles[0] === 'db/schema/commerce-stripe-r1.sql' &&
+      !baselineFiles.includes(changedFiles[0])) {
+    const accepted = git(['show', `16a0ca903137fdd83cd31e639a119c8c5b3d3c48:${changedFiles[0]}`]).replace(/\r\n?/g, '\n');
+    assert.equal(text(changedFiles[0]).trim(), accepted, 'PDS_W0_COMMERCE_SCHEMA_BASELINE_DRIFT');
+    continue;
+  }
+
   if (protectedPath === 'functions/runtime') {
     const ecrLocales = read('content/web-production/reconciliation/pds-w0-ecr-full-r1-locale-successor-v1.json');
     assert.equal(ecrLocales.baselineFilesMayChange, false);

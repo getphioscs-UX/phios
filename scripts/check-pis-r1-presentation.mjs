@@ -6,7 +6,7 @@ const read=p=>JSON.parse(fs.readFileSync(p));
 const registry=assertCurrentVisualSuccessor(read('content/web-production/registries/current-client-visual-registry.json'));
 const pages=read('content/web/index-surfaces/pis-r1-presentation-manifest-v1.json').pages;
 const books=read('content/web/index-surfaces/pis-r1-book-context-v1.json').books;
-assert.equal(pages.length,29);assert.equal(books.length,7);
+assert.equal(pages.length,29);assert.equal(books.length,8);
 const activeCodes=new Set();
 for(const p of pages){
  const {document}=parseHTML(fs.readFileSync(p.file,'utf8'));
@@ -49,7 +49,7 @@ for(const b of books){
 }
 const home=parseHTML(fs.readFileSync('index.html','utf8')).document;
 assert.equal(home.querySelectorAll('[data-cx-home-section="H03"] .cx-home-beginning').length,6);
-assert.equal(home.querySelectorAll('[data-cx-seven-volume-asset$="HARDCOVER"]').length,7);
+assert.equal(home.querySelectorAll('[data-cx-seven-volume-asset$="HARDCOVER"]').length,8);
 const offer=fs.readFileSync('functions/pws/registry/product-offer-registry.js','utf8');
 assert.match(offer,/amount_minor:\s*8900,\s*currency:\s*'MYR'/);
 const deleted=read('content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json');
@@ -57,4 +57,4 @@ for(const item of deleted.candidates.filter(x=>x.state==='PHYSICALLY_DELETED'))a
 const bridge=fs.readFileSync('assets/customer-ui/js/public-index-copy.js','utf8');
 assert.doesNotMatch(bridge,/checkout|stripe|localStorage|\/api\//i);
 fs.writeFileSync('docs/public-index-successor/pis-r1-41-consumption-audit-v1.json',JSON.stringify({scope:'LOCAL_SOURCE_BINDING_NOT_DEPLOYED_BROWSER_PROOF',assets:allocation},null,2)+'\n');
-console.log('PASS PIS presentation: 29 entry pages + seven book orientations; bilingual editorial copy, metadata, 41 verified image dispositions, six home entries, commerce and retired-page boundaries.');
+console.log('PASS PIS presentation: 29 entry pages + eight book orientations; bilingual editorial copy, metadata, 41 verified image dispositions, six home entries, commerce and retired-page boundaries.');
