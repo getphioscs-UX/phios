@@ -1,0 +1,96 @@
+{
+  "project": "phios-github",
+  "subdomain": "phios-github.pages.dev",
+  "productionBranch": "main",
+  "source": {
+    "type": "github",
+    "owner": "getphioscs-UX",
+    "repo": "phios",
+    "previewDeploymentSetting": "all",
+    "previewBranchIncludes": [
+      "*"
+    ],
+    "previewBranchExcludes": []
+  },
+  "preview": {
+    "variables": [
+      {
+        "name": "BOOK_ONE_SOURCE_KEY",
+        "type": "plain_text",
+        "configured": true
+      },
+      {
+        "name": "PHIOS_BOOK_ONE_SALES_ENABLED",
+        "type": "plain_text",
+        "configured": true
+      },
+      {
+        "name": "PHIOS_ENVIRONMENT",
+        "type": "plain_text",
+        "configured": true,
+        "value": "qa"
+      },
+      {
+        "name": "STRIPE_SECRET_KEY",
+        "type": "secret_text",
+        "configured": true
+      }
+    ],
+    "d1": {
+      "RUNTIME_DB": {
+        "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8"
+      }
+    },
+    "r2": {
+      "BOOKS": {
+        "name": "phios-private-books-sandbox"
+      }
+    }
+  },
+  "deployments": [
+    {
+      "id": "b13f8e67-f258-4b23-bc37-88892328c2f5",
+      "environment": "preview",
+      "url": "https://b13f8e67.phios-github.pages.dev",
+      "aliases": [
+        "https://qa.phios-github.pages.dev"
+      ],
+      "stage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-09-18T08:09:51.019623Z",
+        "status": "success"
+      },
+      "trigger": {
+        "type": "ad_hoc",
+        "metadata": {
+          "branch": "qa",
+          "commit_hash": "eea35d26626ebdb29548fe62b8fce5c3eab26eb7",
+          "commit_message": "COM-STRIPE-R1 remote QA preview",
+          "commit_dirty": false
+        }
+      }
+    },
+    {
+      "id": "b2b7b217-fd55-40d3-85af-2747e9e8479f",
+      "environment": "preview",
+      "url": "https://b2b7b217.phios-github.pages.dev",
+      "aliases": null,
+      "stage": {
+        "name": "deploy",
+        "started_on": "2026-09-15T23:26:21.20056Z",
+        "ended_on": "2026-09-15T23:26:39.734155Z",
+        "status": "success"
+      },
+      "trigger": {
+        "type": "github:push",
+        "metadata": {
+          "branch": "qa",
+          "commit_hash": "aee83a2434b863e5f3d7557c9ab04dc2466b1f5b",
+          "commit_message": "qa",
+          "commit_dirty": false
+        }
+      }
+    }
+  ]
+}

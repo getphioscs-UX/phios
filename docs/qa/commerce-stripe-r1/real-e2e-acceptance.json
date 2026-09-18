@@ -1,0 +1,111 @@
+{
+  "environment": "QA",
+  "stripeAccount": "acct_1UFr0TBEKXJyHMkK",
+  "livemode": false,
+  "previewUrl": "https://b13f8e67.phios-github.pages.dev",
+  "previewAlias": "https://qa.phios-github.pages.dev",
+  "deploymentId": "b13f8e67-f258-4b23-bc37-88892328c2f5",
+  "commit": "eea35d26626ebdb29548fe62b8fce5c3eab26eb7",
+  "checkoutEndpoint": "/api/commerce-checkout",
+  "webhookEndpoint": "/api/stripe-webhook",
+  "remoteHealth": {
+    "status": "PASS_WITH_EXPECTED_CONFIG_GATES",
+    "tlsVerified": true,
+    "health": [
+      {
+        "method": "GET",
+        "path": "/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "redirect": null
+      },
+      {
+        "method": "GET",
+        "path": "/api/commerce-catalog",
+        "status": 200,
+        "contentType": "application/json; charset=utf-8",
+        "redirect": null,
+        "products": 24,
+        "checkoutAvailable": false
+      },
+      {
+        "method": "POST",
+        "path": "/api/commerce-checkout",
+        "status": 401,
+        "contentType": "application/json; charset=utf-8",
+        "redirect": null,
+        "code": "commerce_authentication_required"
+      },
+      {
+        "method": "GET",
+        "path": "/api/stripe-webhook",
+        "status": 405,
+        "contentType": "application/json; charset=utf-8",
+        "redirect": null,
+        "code": "method_not_allowed"
+      },
+      {
+        "method": "POST",
+        "path": "/api/stripe-webhook",
+        "status": 503,
+        "contentType": "application/json; charset=utf-8",
+        "redirect": null,
+        "code": "stripe_webhook_not_configured"
+      }
+    ]
+  },
+  "realStripeE2E": "NOT_RUN",
+  "live": "NOT_ACTIVATED",
+  "checkpoint": "ACTION_REQUIRED_BY_USER_CHECKPOINT_A",
+  "requiredEnvironmentVariables": [
+    "STRIPE_SECRET_KEY",
+    "STRIPE_WEBHOOK_SECRET",
+    "STRIPE_ENVIRONMENT",
+    "PHIOS_COMMERCE_QA_ENABLED"
+  ],
+  "missing": [
+    "Preview STRIPE_WEBHOOK_SECRET",
+    "Approved Commerce identity integration",
+    "QA gate activation after prerequisite validation",
+    "QA D1 migration verification"
+  ],
+  "results": {
+    "report": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "bundle": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "book": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "subscription": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "portal": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "service": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "idempotency": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "refund": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "failure": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "validSignature": "NOT_RUN \u2014 QA credential / authenticated identity dependency",
+    "invalidSignature": "NOT_RUN \u2014 QA credential / authenticated identity dependency"
+  },
+  "operationEvidence": "remote-qa-operations.json",
+  "webhookDestination": "https://b13f8e67.phios-github.pages.dev/api/stripe-webhook",
+  "webhookDestinationCreated": false,
+  "requiredWebhookEvents": [
+    "checkout.session.completed",
+    "checkout.session.async_payment_succeeded",
+    "checkout.session.async_payment_failed",
+    "checkout.session.expired",
+    "invoice.paid",
+    "invoice.payment_failed",
+    "customer.subscription.created",
+    "customer.subscription.updated",
+    "customer.subscription.deleted",
+    "charge.refunded",
+    "payment_intent.succeeded"
+  ],
+  "checkpointARecheck": {
+    "result": "PREVIEW_CONFIGURATION_CONFIRMED",
+    "previewSecretConfigured": true,
+    "previewSecretType": "secret_text",
+    "stripeEnvironmentConfigured": true,
+    "stripeEnvironment": "QA",
+    "secretValuesRead": false,
+    "runtimeActivationVerified": false,
+    "nextStep": "Redeploy Preview and verify runtime prerequisites"
+  }
+}
