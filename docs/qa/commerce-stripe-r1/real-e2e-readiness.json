@@ -6,15 +6,12 @@
   "knownPagesSite": "https://phios-github.pages.dev",
   "knownSiteIsConfirmedQaDeployment": false,
   "missing": [
-    "Approved Commerce identity provider populating existing trusted server account context",
-    "QA-only .dev.vars or Pages Preview STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET",
-    "STRIPE_ENVIRONMENT=QA and explicit PHIOS_COMMERCE_QA_ENABLED=true after environment review",
-    "Verified Preview deployment SHA and QA database binding",
-    "Apply immutable migrations 0001–0006 to QA D1 only",
-    "QA webhook endpoint and matching API version 2026-07-29.dahlia",
-    "Existing BOOKS binding, approved private source mappings, watermark service and BOOK_ACCESS_TOKEN_SECRET",
-    "Test-mode Customer Portal configuration",
-    "Execute provider tests and record actual event/session/order evidence"
+    "Approved Commerce identity integration",
+    "Preview STRIPE_WEBHOOK_SECRET for the QA webhook destination",
+    "QA enable gate after remaining prerequisites",
+    "Private manuscript mappings including COM-BOOK-CONFIGURATION, watermark service and access-token secret",
+    "Test Mode Customer Portal configuration",
+    "Actual payment, webhook, order, entitlement and customer-surface E2E evidence"
   ],
   "flows": [
     {
@@ -106,8 +103,42 @@
       "order": "NOT_RUN — QA credential / deployment dependency",
       "entitlement": "NOT_RUN — QA credential / deployment dependency",
       "customerSurface": "NOT_RUN — QA credential / deployment dependency"
+    },
+    {
+      "flow": "MYR109 Configuration / Book VI",
+      "checkout": "NOT_RUN",
+      "testPayment": "NOT_RUN",
+      "webhook": "NOT_RUN",
+      "order": "NOT_RUN",
+      "entitlement": "NOT_RUN",
+      "customerSurface": "NOT_RUN"
+    },
+    {
+      "flow": "Observation / Book VII / preserved COM-BOOK-06",
+      "checkout": "NOT_RUN",
+      "testPayment": "NOT_RUN",
+      "webhook": "NOT_RUN",
+      "order": "NOT_RUN",
+      "entitlement": "NOT_RUN",
+      "customerSurface": "NOT_RUN"
+    },
+    {
+      "flow": "Navigation / Book VIII / preserved COM-BOOK-07",
+      "checkout": "NOT_RUN",
+      "testPayment": "NOT_RUN",
+      "webhook": "NOT_RUN",
+      "order": "NOT_RUN",
+      "entitlement": "NOT_RUN",
+      "customerSurface": "NOT_RUN"
     }
   ],
   "secretValuesStored": false,
-  "live": "NOT_ACTIVATED"
+  "live": "NOT_ACTIVATED",
+  "successor": "COM-8V-STRIPE-R1A",
+  "verified": [
+    "Preview encrypted STRIPE_SECRET_KEY present (value not inspected)",
+    "Preview STRIPE_ENVIRONMENT=QA",
+    "QA D1 0001–0006 applied, foreign keys clean",
+    "25 QA registry products; Book VI MYR109 provider readback"
+  ]
 }

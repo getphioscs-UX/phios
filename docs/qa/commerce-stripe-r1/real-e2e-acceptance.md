@@ -1,3 +1,5 @@
+> Current successor: [COM-8V-STRIPE-R1A](COM-8V-STRIPE-R1A.md) and [current Preview verification](eight-volume-remote-qa.json). The evidence below is the preceding campaign.
+
 # COM-STRIPE-R1 Remote QA
 
 State: ACTION_REQUIRED_BY_USER — Checkpoint A. REAL_STRIPE_E2E = NOT_RUN. LIVE = NOT_ACTIVATED.

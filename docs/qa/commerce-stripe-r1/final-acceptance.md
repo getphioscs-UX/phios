@@ -1,3 +1,5 @@
+> Current successor: [COM-8V-STRIPE-R1A](COM-8V-STRIPE-R1A.md) and [current Preview verification](eight-volume-remote-qa.json). The evidence below is the preceding campaign.
+
 # COM-STRIPE-R1 final delivery
 
 Baseline: **aacfba0425cdc37f9b69a1bdc958b0e9bfef6420**, branch main, initially clean.

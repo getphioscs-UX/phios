@@ -82,6 +82,15 @@ const editorialHtml=read(editorial.change.path);
 assert.match(editorialHtml,/data-civilization-atlas-root/);
 assert.match(editorialHtml,/PIS BOOK CONTEXT START/);
 authorizedMaintenance.set(priorEditorial.path,{...priorEditorial,successorSha256:editorial.change.successorSha256});
+const eightVolume=json('content/civilization-atlas/maintenance/book-v-eight-volume-publication-successor-v1.json');
+assert.equal(eightVolume.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-pis-editorial-successor-v1.json');
+assert.equal(eightVolume.change.path,editorial.change.path);
+assert.equal(eightVolume.change.previousSha256,editorial.change.successorSha256);
+assert.equal(eightVolume.change.changeClass,editorial.change.changeClass);
+assert.equal(eightVolume.productionAdmissionChanged,false);
+assert.equal(eightVolume.humanReview,'PENDING');
+assert.match(editorialHtml,/eight books/i);
+authorizedMaintenance.set(priorEditorial.path,{...priorEditorial,successorSha256:eightVolume.change.successorSha256});
 for(const f of freeze.frozenFiles){
   assert.ok(fs.existsSync(path.join(root,f.path)),`frozen file missing: ${f.path}`);
   const current=digest(f.path);

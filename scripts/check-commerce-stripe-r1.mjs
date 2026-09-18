@@ -79,6 +79,13 @@ await test('checkout authenticated, tamper rejected, live keys fail closed, orig
   for(const key of ['amount','priceId','currency','customerId'])assert.equal((await commerceApi(context({productId,[key]:'tamper'}),'checkout')).status,422);
   assert.equal((await commerceApi(context({productId},{env:{...env,STRIPE_SECRET_KEY:'sk_live_fixture'}}),'checkout')).status,503);
   const ctx=context({productId});ctx.request.headers.set('origin','https://attacker.test');assert.equal((await commerceApi(ctx,'checkout')).status,403);
+  const beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
+  const beforeCalls=stripeCalls.length;
+  const noConfigurationSource={...env,COMMERCE_BOOK_SOURCE_KEYS_JSON:JSON.stringify({'COM-BOOK-06':'private/observation.pdf'})};
+  const unavailable=await commerceApi(context({productId:'COM-BOOK-CONFIGURATION'},{env:noConfigurationSource}),'checkout');
+  assert.equal(unavailable.status,503);assert.equal((await unavailable.json()).error,'commerce_book_source_unconfigured');
+  assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
+  assert.equal(stripeCalls.length,beforeCalls,'missing Configuration manuscript must not create any provider operation');
 });
 await test('bundle checkout idempotency, collision protection, customer reuse',async()=>{
   const ctx=context({productId:'COM-REPORT-BUNDLE-2',selectedProducts:standardBundleProducts().slice(0,2)});

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import Ajv2020 from 'ajv/dist/2020.js';
 import {STRIPE_PRODUCT_REGISTRY,commerceEntitlements} from '../functions/pws/commercial/stripe-product-registry.js';
 import {resolveCommerceBookSourceKey} from '../functions/commerce/book-product-registry.js';
 import {isPublicKnowledgeContextRef} from '../functions/contextual-ask/contextual-ask-runtime.js';
@@ -11,6 +12,8 @@ assert.equal(books.length,8);assert.equal(parts.length,15);
 assert.deepEqual(books.map(b=>b.parts),[[1,2,3,4],[5,6,7],[8,9],[10,11],[12],[],[13],[14,15]]);
 assert.equal(books[5].title.en,'Reality Configuration');assert.equal(books[5].title['zh-Hans'],'世界如何重组');
 assert.equal(books[5].partAdmission,'PENDING_USER_AUTHORITY');
+const validate=new Ajv2020({strict:false}).compile(json('data/schemas/book-publication-successor.schema.json'));
+for(const n of [6,7,8]){const manifest=json(`content/registry/successors/eight-volume-v1/book-${n}-manifest.json`);assert(validate(manifest),JSON.stringify(validate.errors));assert.equal(manifest.volume,n);assert.equal(manifest.bookCode,`BOOK-${n}`);}
 for(const p of parts)assert(books.find(b=>b.book_id===p.book)?.parts.includes(p.number));
 const previous=json('content/registry/successors/seven-volume-v1/books.json');
 assert.equal(previous.books[5].title.en,'Reality Observation');assert.deepEqual(previous.books[6].parts,[14,15]);

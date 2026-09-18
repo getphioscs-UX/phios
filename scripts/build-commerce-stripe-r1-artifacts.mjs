@@ -12,4 +12,14 @@ for(const [name,terms] of Object.entries(groups))write(`${name}-acceptance.json`
 write('live-cutover-readiness.json',{work:'COM-STRIPE-R1',state:'PREPARE_ONLY',liveActivated:false,liveOperations:'NOT_EXECUTED',liveProductMappings:null,livePriceMappings:null,qaAccount:'acct_1UFr0TBEKXJyHMkK',qaEndToEnd:real,requiresSeparateApproval:true});
 const flows=['RM39 standard report','RM69 Bundle 2','RM129 HD','RM299 Cross','RM89 Book','RM19 monthly membership','RM100 financial consultation','RM100 / 2-hour cash flow game','RM100 / hour natural healer','RM29 will writing'];
 write('real-e2e-readiness.json',{work:'COM-STRIPE-R1-REAL-E2E-READINESS',status:'NOT_READY',realStripeE2E:real,productionDomainExcluded:'https://getphios.com',knownPagesSite:'https://phios-github.pages.dev',knownSiteIsConfirmedQaDeployment:false,missing:['Approved Commerce identity provider populating existing trusted server account context','QA-only .dev.vars or Pages Preview STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET','STRIPE_ENVIRONMENT=QA and explicit PHIOS_COMMERCE_QA_ENABLED=true after environment review','Verified Preview deployment SHA and QA database binding','Apply immutable migrations 0001–0006 to QA D1 only','QA webhook endpoint and matching API version 2026-07-29.dahlia','Existing BOOKS binding, approved private source mappings, watermark service and BOOK_ACCESS_TOKEN_SECRET','Test-mode Customer Portal configuration','Execute provider tests and record actual event/session/order evidence'],flows:flows.map(flow=>({flow,checkout:real,testPayment:real,webhook:real,order:real,entitlement:real,customerSurface:real})),secretValuesStored:false,live:'NOT_ACTIVATED'});
+// Preserve verified successor environment readiness without upgrading it to E2E.
+if(fs.existsSync(`${dir}/eight-volume-remote-qa.json`)){
+  const remote=JSON.parse(fs.readFileSync(`${dir}/eight-volume-remote-qa.json`));
+  const readiness=JSON.parse(fs.readFileSync(`${dir}/real-e2e-readiness.json`));
+  Object.assign(readiness,{successor:'COM-8V-STRIPE-R1A',knownPagesSite:remote.previewUrl,
+    knownSiteIsConfirmedQaDeployment:remote.remoteHealth.status==='PASS_WITH_EXPECTED_CONFIG_GATES',missing:remote.missing,
+    databaseEvidence:remote.databaseEvidence,realStripeE2E:real});
+  readiness.flows.push(...['MYR109 Configuration / Book VI','Observation / Book VII / COM-BOOK-06','Navigation / Book VIII / COM-BOOK-07'].map(flow=>({flow,checkout:real,testPayment:real,webhook:real,order:real,entitlement:real,customerSurface:real})));
+  write('real-e2e-readiness.json',readiness);
+}
 console.log('Commerce QA artifacts generated with actual E2E explicitly NOT_RUN.');
