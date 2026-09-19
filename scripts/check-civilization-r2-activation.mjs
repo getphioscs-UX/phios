@@ -7,6 +7,10 @@ const bindings=read('.'+ATLAS_VISUAL_BINDINGS_PATH),audit=read(bindings.sourceAu
 assert.equal(bindings.actualBucketTotal,null);
 assert.equal(bindings.assets.length,audit.rows.filter(r=>r.result==='VERIFIED_WEBP').length);
 assert.equal(new Set(bindings.assets.map(a=>a.assetId)).size,bindings.assets.length);
+const ownerAcceptance=read(bindings.ownerAcceptance);
+assert.equal(ownerAcceptance.decision,'OWNER_ACCEPTED');
+assert.equal(ownerAcceptance.assets.length,230,'229 previously pending plus newly uploaded 2026');
+for(const accepted of ownerAcceptance.assets){const binding=bindings.assets.find(a=>a.assetId===accepted.assetId);assert.equal(binding?.sha256,accepted.sha256);assert.equal(binding?.reviewState,'ACCEPTED');}
 const options={allowPendingReview:true};
 for(const a of bindings.assets){
  assert.equal(resolveAtlasVisualById(bindings,a.assetId,options)?.assetId,a.assetId);
@@ -18,7 +22,11 @@ for(const a of bindings.assets){
 for(const family of ['MODERN_FLAG','HISTORICAL_FIGURE'])assert.equal(bindings.assets.filter(a=>a.family===family).length,family==='MODERN_FLAG'?24:16);
 const states=[{activeLayer:'timeline',timeWindowId:'T00'},{activeLayer:'cases',primaryCaseId:'CA-T09-01'},{activeLayer:'comparison',comparisonFamilyId:'CONTINENTAL_EMPIRE'},{activeLayer:'world',snapshotId:'WS-1250'},{activeLayer:'trajectories',trajectoryIds:['POPULATION']},{activeLayer:'transitions',transitionWindowId:'TW-01'},{activeLayer:'loss',lossTypeId:'LOSS-REGIME-END'}];
 for(const state of states){const rows=resolveAtlasStaticVisuals(bindings,state,options);assert.ok(rows.length>0,state.activeLayer);assert.ok(rows.length<=2);}
-const candidate=bindings.assets.find(a=>a.reviewState==='PENDING_HUMAN_REVIEW');
+const candidate=bindings.assets.find(a=>a.family==='CASE_HERO');
+assert.ok(candidate);
+const pendingFixture={...candidate,reviewState:'PENDING_HUMAN_REVIEW'};
+assert.equal(resolveAtlasVisualById({...bindings,assets:[pendingFixture]},candidate.assetId),null);
+assert.ok(resolveAtlasVisualById({...bindings,assets:[pendingFixture]},candidate.assetId,options));
 for(const patch of [{publicUrl:'https://invalid.test/image.webp'},{subjectId:'WRONG_SUBJECT'},{sha256:''},{historicalAuthority:true},{deliveryVerified:false},{ownerUploadConfirmed:false}])assert.equal(resolveAtlasVisualById({...bindings,assets:[{...candidate,...patch}]},candidate.assetId,options),null);
 const {document}=parseHTML('<html><head></head><body><main data-atlas-ready="true"><div data-atlas-structured-visual><svg></svg></div></main></body></html>');
 renderAtlasStaticVisuals(document.querySelector('main'),{bindings,state:states[0],locale:'zh-Hans'});

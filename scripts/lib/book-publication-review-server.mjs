@@ -6,7 +6,7 @@ import {onRequestGet as assetConfig} from '../../functions/api/public-asset-conf
 const root=process.cwd();
 function resolveFile(pathname){
  let file=path.resolve(root,'.'+decodeURIComponent(pathname));
- if(!file.startsWith(root+path.sep))return null;
+ if(file!==root&&!file.startsWith(root+path.sep))return null;
  if(fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');
  else if(!fs.existsSync(file)&&fs.existsSync(file+'.html'))file+='.html';
  return fs.existsSync(file)&&fs.statSync(file).isFile()?file:null;

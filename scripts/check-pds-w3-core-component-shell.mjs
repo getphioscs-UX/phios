@@ -39,7 +39,11 @@ assert.equal(contract.boundaries.storageKeysChanged, false);
 // PIS-W7 aligns the still-used legacy shell with the current five-entry CX IA.
 // The PDS contract and fixture remain immutable predecessor evidence.
 const navigationSuccessor=await readJson('content/web/index-surfaces/pis-r1-navigation-successor-v1.json');
-assert.equal(navigationSuccessor.predecessorContractSha256,crypto.createHash('sha256').update(await fs.readFile(path.join(root,navigationSuccessor.predecessorContract))).digest('hex'));
+// Historical evidence was captured from a Windows CRLF checkout. Git may check
+// out identical text as LF. Preserve the evidence hash and reject content drift.
+const predecessorText=(await fs.readFile(path.join(root,navigationSuccessor.predecessorContract),'utf8')).replace(/\r\n/g,'\n');
+const predecessorDigests=[predecessorText,predecessorText.replace(/\n/g,'\r\n')].map(text=>crypto.createHash('sha256').update(text).digest('hex'));
+assert.ok(predecessorDigests.includes(navigationSuccessor.predecessorContractSha256),'PDS-W3 predecessor content changed (LF/CRLF normalization allowed only)');
 assert.deepEqual(navigationSuccessor.primaryNavigation.map(x=>x.href),['/explore/','/reality/','/perspectives/','/knowledge/','/professional/']);
 assert.equal(navigationSuccessor.runtimeChanged,false);
 for(const item of navigationSuccessor.primaryNavigation)assert.ok(shell.includes(`id: '${item.id}', href: '${item.href}'`));

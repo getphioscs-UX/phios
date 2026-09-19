@@ -22,4 +22,4 @@ for(const b of r.books)for(const locale of ['en','zh-Hans']){
  if(b.figures.length){const details=host.querySelector('details');details.open=true;details.dispatchEvent(new window.Event('toggle'));if(b.figures[0].deliveryState==='MISSING_BUCKET_OBJECT'){assert.equal(details.querySelector('img'),null);assert.ok(details.textContent.includes(locale==='en'?'unavailable':'暂时无法'));}else assert.equal(details.querySelector('img').src,b.figures[0].url);}
  assert.equal(host.querySelectorAll('a[href*="checkout"]').length,0);
 }
-console.log('PASS: 223 free sample pages, 51 figure records (39 available, 12 explicitly missing), eight verified covers; bilingual navigation/failure recovery; no checkout or invented figure definition.');
+console.log(`PASS: 223 free sample pages, 51 figure records (${r.books.flatMap(b=>b.figures).filter(f=>f.deliveryState==='VERIFIED_PUBLIC_IMAGE').length} available), eight verified covers; bilingual navigation/failure recovery; no checkout or invented figure definition.`);

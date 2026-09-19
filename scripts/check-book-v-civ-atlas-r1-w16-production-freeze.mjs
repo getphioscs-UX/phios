@@ -70,18 +70,31 @@ assert.deepEqual(visualSuccessor.dependencies.map(item=>item.path),[
 ]);
 const activationPath='content/civilization-atlas/maintenance/book-v-civ-atlas-r1-m1-r2-binding-successor-v1.json';
 const activation=fs.existsSync(path.join(root,activationPath))?json(activationPath):null;
+const ownerSuccessor=json('content/civilization-atlas/maintenance/book-v-civ-atlas-owner-acceptance-successor-2026-09-19.json');
+assert.equal(ownerSuccessor.predecessor,activationPath);
+assert.equal(ownerSuccessor.predecessorSha256,digest(activationPath));
+assert.equal(ownerSuccessor.acceptanceSha256,digest(ownerSuccessor.acceptance));
+assert.equal(json(ownerSuccessor.acceptance).decision,'OWNER_ACCEPTED');
+assert.equal(ownerSuccessor.historicalRegistriesChanged,false);
+assert.deepEqual(ownerSuccessor.changes.map(c=>c.path),[activation.bindingSuccessor,'assets/js/pages/civilization-atlas/atlas-static-visual.js']);
+for(const change of ownerSuccessor.changes){
+ const previous=change.path===activation.bindingSuccessor?activation.bindingSuccessorSha256:activation.changes.find(c=>c.path===change.path)?.successorSha256;
+ assert.equal(change.previousSha256,previous);
+ assert.equal(digest(change.path),change.successorSha256,`owner successor content drift: ${change.path}`);
+}
 if(activation){
   assert.equal(activation.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-static-visual-successor-v1.json');
   assert.equal(activation.predecessorSha256,digest(activation.predecessor));
   assert.equal(activation.historicalRegistriesChanged,false);
   assert.equal(activation.humanDecision,'PENDING_HUMAN_REVIEW');
   assert.deepEqual(activation.changes.map(c=>c.path),['assets/js/pages/civilization-atlas.js','assets/js/pages/civilization-atlas/atlas-static-visual.js']);
-  assert.equal(digest(activation.bindingSuccessor),activation.bindingSuccessorSha256);
+  assert.equal(digest(activation.bindingSuccessor),ownerSuccessor.changes[0].successorSha256);
 }
 for(const dependency of visualSuccessor.dependencies){
   const change=activation?.changes.find(c=>c.path===dependency.path);
   if(change)assert.equal(change.previousSha256,dependency.sha256);
-  assert.equal(digest(dependency.path),change?.successorSha256||dependency.sha256,`static visual dependency drift: ${dependency.path}`);
+  const accepted=ownerSuccessor.changes.find(c=>c.path===dependency.path);
+  assert.equal(digest(dependency.path),accepted?.successorSha256||change?.successorSha256||dependency.sha256,`static visual dependency drift: ${dependency.path}`);
 }
 authorizedMaintenance.set(priorVisual.path,{...priorVisual,successorSha256:visualSuccessor.change.successorSha256});
 if(activation){

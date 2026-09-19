@@ -1,41 +1,61 @@
 # R2 visual usage audit · 2026-09-19
 
-The authenticated Cloudflare Objects API was read to the end of pagination (2 pages): **1,085 objects, including 1,000 images**. All 1,000 public image URLs returned a successful image response. No R2 objects were modified.
+The latest authenticated, fully paginated inventory contains **1,097 objects, including 1,012 images**. Public image checks cover all 1,012; per-object timestamps distinguish the initial audit from incremental GET checks.
 
-Open `R2-ALL-VISUAL-ASSETS-REVIEW.html` through the local review server (`node scripts/serve-book-v-pka-r1-review.mjs`, port 8788). The original unified review and Book V review now link to it. Each image has an intended use, current evidence, and a truthful consumption status. An HTTP response or source reference is not proof of production rendering.
+Open [all R2 visual assets](R2-ALL-VISUAL-ASSETS-REVIEW.html) or the [original 260-image display checklist](R2-260-DISPLAY-CHECKLIST.html) through the local review server on port 8788. The checklist includes previews, exact keys, public URLs, intended uses, observed pages and a [CSV export](R2-260-DISPLAY-CHECKLIST.csv).
 
-## Applied changes
+## Atlas acceptance and 2026
 
-- Added the verified Maya and Early Byzantine case HERO objects to the existing Atlas bindings. All 391 present Atlas images are registered and decoded by the browser; 162 retain prior acceptance, 229 remain local-review candidates under the existing gate.
-- Bound the uploaded Book VI–VIII Hero/branding assets in the current eight-volume registry and their correctly numbered physical covers in the book sample registry. Old numbered artwork was not substituted.
-- Connected Book V's 50 uploaded free sample pages and summary figures 12E/12F to the existing sample reader. No canonical figure definitions or manuscript claims were invented.
-- Connected 17 verified Commerce visuals to the existing account product selector. Missing imagery does not affect product selection; changing to a book hides the preceding product image. Checkout logic and authorization are unchanged.
-- Added a direct Atlas `visual` selection for review links; choosing the supplemental image does not alter the historical state or Ask context.
-- Preserved 12 missing Book I summary figure records and added an explicit unavailable message rather than attempting broken image requests.
+All **392 Atlas images** have verified delivery and accepted bindings: 162 previously accepted images plus the owner's explicitly accepted original 229 pending images and newly uploaded 2026 reconfiguration image. The owner declaration is separate from browser evidence and scoped by asset ID and SHA-256; unknown future images do not inherit it.
 
-## Coverage and limits
+Maya and Early Byzantine HERO images and `images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_2026.webp` are present. The 2026 image is selectable in the existing Atlas reference library, labelled as Book VI. This does not create Book VI chapters or historical facts from illustration text.
 
-- 506 images have a traced binding or presentation consumer.
-- 260 have current registry entries and intended uses but have not all been observed on their actual product surfaces during this audit.
-- 229 Atlas images remain restricted to local review by the existing acceptance policy.
-- 5 obsolete series/numbered assets are retained for historical use.
-- All 1,000 images have a usage record; this is **not** a claim that all are already displayed in production.
-- `images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_2026.webp` was absent from the complete bucket listing. The present `VIS-CIV-WS-2026-ATMOSPHERE.webp` is a different Book V image and was not substituted.
-- The eight-volume series Hero is still not supplied by the current registry. The old seven-volume Hero is not a replacement.
-- No commit, push, deployment, human approval, model activation, or payment was performed.
+The original freeze record is preserved. A dated maintenance successor records the accepted bindings, URL selection and verified-delivery enforcement. The earlier review page now shows current image acceptance instead of requiring another image approval.
 
-## Validation
+## Original 260-image cohort
 
-- 1,000/1,000 public image HTTP checks passed.
-- Atlas browser checks: 42 bilingual viewport/layer views and 391 actual image decodes passed; keyboard focus, expansion, context isolation and image outage fallback passed.
-- New usage browser checks: 390/1440 layouts, Book V page 50, Book VI–VIII covers, both restored HERO images, direct image selection, and all 17 Commerce images passed. Commerce used the existing product registry with a signed-out fixture and disabled checkout.
-- Book sample, eight-volume, Atlas activation and 15 Commerce machine test groups passed.
-- Existing consolidated Book V review browser check passed with the current unresolved count.
+The original cohort is preserved in `r2-260-display-verification-queue-v1.json`. Browser evidence is in `r2-260-display-results-v1.json`.
+
+| Result | Images |
+| --- | ---: |
+| Actually displayed and decoded on tested local pages | 26 |
+| Browser icon link observed (not page-image proof) | 2 |
+| Interactive/report flow still needs display verification | 127 |
+| Not observed on the pages tested | 105 |
+| Total | 260 |
+
+The cohort consists of 13 logos, 61 figures, 12 hero images, 46 icons, 1 illustration, 48 PHI cards and 79 Tarot images. The interactive group is exactly 48 PHI cards plus 78 Tarot cards and one card back.
+
+Checks used desktop signed-out local routes, scrolling and image decoding; report/account backend APIs are unavailable in this static review server. Authenticated product rendering is not inferred from registry references, HTTP success or audit-gallery previews. Old `.html` consumers and current routes are recorded separately. `/knowledge/figures/` returned 404; the registered `/figures/` route was checked successfully.
+
+Current full-bucket source coverage is **747 bound, 260 registered, 5 historical archive**. These describe bindings, not production rendering of every image. The five historical series/numbering assets remain archive material without replacing current eight-volume artwork.
+
+## First-book recovery
+
+Eleven unchanged original WebP files were recovered from Git at `61e4f513077e24a859e4c93c34ea03e46d5cd178^`, before deletion. They were uploaded to the missing public R2 keys under `images/figures/books/book-1/`:
+
+`0A`, `1A`, `1B`, `2A`, `3A`, `3B`, `3C`, `4A`, `4B`, `4C`, `4D`.
+
+Each public GET was SHA-256 matched to the source. No different existing object was overwritten. All eleven display and decode on the actual Book I page at 390 and 1440 pixels. Provenance is in `book-one-recovery-v1.json`.
+
+**4E remains missing.** No matching Git-history original, bucket object or canonical figure definition was found. Its unavailable message remains; no unrelated image or invented diagram was substituted. There are now 50 available summary figures out of 51 records across the books.
+
+## Validation and deployment
+
+- Atlas: 42 bilingual viewport/layer views and 392 browser WebP decodes passed, including keyboard interaction, context isolation and outage fallback.
+- Actual-page checks passed for Maya, Early Byzantine, 2026 selection, Book I's 11 restored figures, Book V previews, Book VI–VIII covers and 17 Commerce visuals. Commerce uses a signed-out catalog fixture with checkout disabled.
+- PDS-W3 was failing on LF versus CRLF serialization of identical frozen text. The checker accepts either newline encoding while rejecting content changes; it retains the historical evidence hash.
+- The Atlas freeze checker recognizes the explicit owner-acceptance maintenance successor instead of treating the authorized asset update as unexplained drift.
+- Full `npm run check` passed with exit code 0, including precheck, check and postcheck. The result and full-log SHA-256 are recorded in `npm-check-followup-v1.json`.
+- Eleven recovered public image objects were uploaded. No website deployment, push or payment was performed. Website-code changes remain in the local working tree.
+- A read-only production check confirms `https://www.getphios.com/api/public-asset-config` already points to the correct R2 public base. Production still serves 391 Atlas bindings / 162 accepted; local changes contain 392 / 392. Evidence is in `production-asset-config-observation-v1.json`. R2 restoration is live, but the updated website binding/acceptance files still need deployment.
 
 ## Reproduction
 
-`node scripts/list-r2-public-assets.mjs` reads the existing Wrangler login (or `CLOUDFLARE_API_TOKEN`) and writes only object metadata. Credentials are never written to the repo.
+`node scripts/list-r2-public-assets.mjs` reads the existing Wrangler login and writes metadata only, never credentials.
 
-`node scripts/audit-r2-bucket-coverage.mjs` verifies all current inventory images and repairs verified Atlas gaps. Then run `node scripts/build-civilization-r2-bindings-v2.mjs` and `node scripts/build-r2-usage-review.mjs`.
+`node scripts/build-civilization-r2-bindings-v2.mjs` applies the recorded per-image acceptance. The maintenance successor records the reviewed resulting hashes; do not regenerate it to bless unrelated changes.
 
-Browser check scripts use `PHIOS_PLAYWRIGHT_MODULE` to select the installed Playwright package. Evidence is stored beside this document and in the existing Atlas maintenance directory.
+`node scripts/audit-r2-260-display.mjs` captures local evidence; `node scripts/build-r2-260-review.mjs` exports HTML and CSV. `node scripts/build-r2-usage-review.mjs` rebuilds the all-image review.
+
+Browser scripts use `PHIOS_PLAYWRIGHT_MODULE` for the installed Playwright. The recovery upload script requires `--upload`, rejects different existing bytes and verifies public results.

@@ -26,7 +26,7 @@ try{
  await page.waitForSelector('[data-atlas-ready="true"] .civ-visual-library');
  await page.locator('.civ-visual-library summary').click();
  const before=await page.locator('.civ-atlas-ask a').getAttribute('href');
- for(const [family,id] of [['MODERN_FLAG','VIS-CIV-FLAG-08'],['HISTORICAL_FIGURE','VIS-CIV-HF-03'],['GEOGRAPHIC_BASE','VIS-CIV-MAP-01'],['CIVILIZATION_INFRASTRUCTURE','VIS-CIV-INF-01'],['SCALE_SHIFT','VIS-CIV-SS-01'],['WORLD_RECONFIGURATION_SNAPSHOT','WORLD_RECONFIGURATION_SNAPSHOT_1945']]){
+ for(const [family,id] of [['MODERN_FLAG','VIS-CIV-FLAG-08'],['HISTORICAL_FIGURE','VIS-CIV-HF-03'],['GEOGRAPHIC_BASE','VIS-CIV-MAP-01'],['CIVILIZATION_INFRASTRUCTURE','VIS-CIV-INF-01'],['SCALE_SHIFT','VIS-CIV-SS-01'],['WORLD_RECONFIGURATION_SNAPSHOT','WORLD_RECONFIGURATION_SNAPSHOT_2026']]){
   await page.locator('[data-atlas-visual-family]').selectOption(family);await page.locator('[data-atlas-visual-choice]').selectOption(id);
   const image=page.locator('[data-atlas-visual-selection] img');await image.scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelector('[data-atlas-visual-selection] figure')?.dataset.imageState==='ready');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Supplemental mobile overflow');
@@ -46,7 +46,7 @@ try{
  await page.route('**/*.r2.dev/**',r=>r.abort());await page.goto(origin+'/books/reality-differentiation/?atlas=world&snapshot=WS-1250&locale=en#atlas');await page.waitForSelector('[data-atlas-ready="true"] [data-atlas-structured-visual] svg');
  assert.ok(await page.locator('[data-atlas-layer-content]').innerText());assert.ok(await page.locator('.civ-atlas-ask a').getAttribute('href'));
  assert.deepEqual(errors,[]);
- fs.writeFileSync('content/civilization-atlas/maintenance/visual-activation-60247ff/browser-results-v1.json',JSON.stringify({status:'PASS',engine:'Microsoft Edge / Playwright',scope:'Local candidate implementation; real R2 and existing Ask links; not production or human acceptance',viewports:results,decodedObjects:decode,supplementalContextIsolation:'PASS',keyboardExpandEscapeFocus:'PASS',forcedImageFailureFallback:'PASS',humanDecision:'PENDING_HUMAN_REVIEW'},null,2)+'\n');
+ fs.writeFileSync('content/civilization-atlas/maintenance/visual-activation-60247ff/browser-results-v1.json',JSON.stringify({status:'PASS',engine:'Microsoft Edge / Playwright',scope:'Local implementation; real R2 and existing Ask links; not production deployment. Owner acceptance is separately recorded, not inferred from this browser test.',viewports:results,decodedObjects:decode,supplementalContextIsolation:'PASS',keyboardExpandEscapeFocus:'PASS',forcedImageFailureFallback:'PASS',humanDecision:'OWNER_ACCEPTED',ownerAcceptance:'content/civilization-atlas/visuals/civilization-visual-owner-acceptance-2026-09-19.json'},null,2)+'\n');
  console.log(`PASS ${results.length} bilingual viewport/layer views; ${decode.length} real WebP decodes through shared resolver; context isolation, keyboard and outage fallback.`);
 }
 }finally{await browser?.close();await new Promise(r=>server.close(r));}

@@ -18,7 +18,7 @@ try{
   await page.goto(origin+'/docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html');
   assert.equal(await page.locator('#grid article').count(),12);
   await page.locator('#query').fill('玛雅');assert.equal(await page.locator('#grid article').count(),2);
-  await page.locator('#query').fill('WORLD_RECONFIGURATION_SNAPSHOT_2026');assert.equal(await page.locator('#grid article').count(),0);
+  await page.locator('#query').fill('WORLD_RECONFIGURATION_SNAPSHOT_2026');assert.equal(await page.locator('#grid article').count(),1);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   for(const [slug,number] of [['reality-differentiation',5],['reality-configuration',6],['reality-observation',7],['reality-navigation',8]]){
    await page.goto(origin+'/books/'+slug+'/?locale=zh-Hans');await page.locator('#free-samples').waitFor();
@@ -34,6 +34,16 @@ try{
  await page.goto(origin+'/books/reality-differentiation/?atlas=cases&case=CA-T07-02&locale=zh-Hans#atlas');
  const hero=page.locator('[data-atlas-static-visuals] > figure img').first();await hero.waitFor();await hero.scrollIntoViewIfNeeded();await hero.evaluate(image=>image.decode());assert.equal(await hero.getAttribute('data-asset-id'),'VIS-CIV-CA-T07-02-HERO');
  results.push({maya:'DECODED',earlyByzantine:'DECODED',visualDeepLink:'PASS'});
+ await page.goto(origin+'/books/reality-differentiation/?visual=WORLD_RECONFIGURATION_SNAPSHOT_2026&locale=zh-Hans#atlas');
+ const reconfiguration=page.locator('[data-atlas-visual-selection] img');await reconfiguration.waitFor();await reconfiguration.evaluate(image=>image.decode());assert.equal(await reconfiguration.getAttribute('data-asset-id'),'WORLD_RECONFIGURATION_SNAPSHOT_2026');
+ results.push({reconfiguration2026:'DECODED_IN_ACTUAL_ATLAS_LIBRARY'});
+ for(const width of [390,1440]){
+  await page.setViewportSize({width,height:1000});await page.goto(origin+'/books/reality-formation/?locale=zh-Hans');await page.locator('#free-samples details').first().waitFor();
+  const summaries=page.locator('#free-samples details');assert.equal(await summaries.count(),12);
+  for(let i=0;i<11;i++){const detail=summaries.nth(i);await detail.locator('summary').click();const image=detail.locator('img');await image.waitFor();await image.scrollIntoViewIfNeeded();await image.evaluate(image=>image.decode());assert.ok(await image.evaluate(image=>image.naturalWidth>0));await detail.locator('summary').click();}
+  assert.equal(await summaries.nth(11).locator('img').count(),0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  results.push({book:1,width,originalFigures:11,decoded:'PASS',missing:'4E'});
+ }
  await page.goto(origin+'/account/');await page.locator('[data-commerce-form]').waitFor({state:'attached'});await page.locator('[data-commerce-account] details summary').click();
  const visuals=JSON.parse(fs.readFileSync('content/web-production/registries/commerce-product-visuals-v1.json')).assets;
  for(const visual of visuals){const product=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===visual.productId);assert.ok(product,visual.productId);await page.locator('[name=category]').selectOption(product.category);await page.locator('[name=product]').selectOption(product.productId);const image=page.locator('[data-commerce-product-visual]');assert.equal(await image.getAttribute('src'),visual.publicUrl);await image.scrollIntoViewIfNeeded();await image.evaluate(image=>image.decode());}

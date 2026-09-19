@@ -13,6 +13,7 @@ export function resolveAtlasVisualById(bindings,assetId,{allowPendingReview=fals
  if(!a||!folder||!(/^(VIS-CIV-[A-Z0-9_-]+|WORLD_RECONFIGURATION_SNAPSHOT_\d{4})$/).test(a.assetId))return null;
  const pending=allowPendingReview&&bindings.pendingReviewPolicy==='LOCAL_REVIEW_ONLY_UNTIL_EXPLICIT_HUMAN_ACCEPTANCE'&&a.reviewState==='PENDING_HUMAN_REVIEW'&&a.deliveryVerified===true&&a.ownerUploadConfirmed===true;
  if(a.reviewState!=='ACCEPTED'&&!pending)return null;
+ if(bindings.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&(a.deliveryVerified!==true||a.ownerUploadConfirmed!==true))return null;
  const boundedText=a.containsText===false||(bindings.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&[null,true].includes(a.containsText)&&a.embeddedTextAuthority==='NONE'&&a.displayTextAuthority==='HTML_REGISTRY_ONLY');
  if(a.bindingState!=='BOUND'||a.fallback!=='STRUCTURED_HTML_SVG'||!boundedText||a.historicalAuthority!==false||a.canonicalAuthority!==false||a.registryWriteAuthority!==false||a.ocrWriteBackAllowed!==false)return null;
  if(!/^[a-f0-9]{64}$/.test(a.sha256||'')||typeof a.reviewEvidence!=='string'||!a.reviewEvidence.trim())return null;
