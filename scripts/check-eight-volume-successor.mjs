@@ -26,7 +26,13 @@ assert.equal(projection.books.length,8);
 for(const b of projection.books){const html=text(b.route.slice(1)+'index.html');assert(html.includes(`data-book-id="${b.bookId}"`));assert(html.includes('/assets/js/pages/book-volume-seven.js'));assert(text('sitemap.xml').includes(b.route));}
 for(const n of [13,14,15])assert.equal(context.partOwnership.find(p=>p.partNumber===n).publicationBookCode,n===13?'BOOK-7':'BOOK-8');
 for(const n of [1,2,3,4,5])assert.equal(assets.assets.find(a=>a.assetId===`BOOK-${n}-HARDCOVER`).available,true);
-for(const id of ['HERO-8V-SYSTEM',...[6,7,8].flatMap(n=>[`BOOK-${n}-HARDCOVER`,`BOOK-${n}-BRANDING`])]){const a=assets.assets.find(a=>a.assetId===id);assert.equal(a.available,false);assert.equal(a.publicUrl,null);}
+for(const id of ['HERO-8V-SYSTEM',...[6,7,8].flatMap(n=>[`BOOK-${n}-HARDCOVER`,`BOOK-${n}-BRANDING`])]){
+ const a=assets.assets.find(a=>a.assetId===id);
+ if(!a.available){assert.equal(a.publicUrl,null);continue;}
+ const proof=json(a.evidence).results.find(r=>r.key===a.objectKey);
+ assert(proof?.httpImagePass);assert.equal(proof.url,a.publicUrl);assert.match(a.sha256,/^[a-f0-9]{64}$/);
+ assert(!/BOOK-6-REALITY-OBSERVATION|BOOK-7-REALITY-NAVIGATION/.test(a.objectKey),'Historical numbered covers cannot represent successor books');
+}
 const home=text('index.html');assert(home.includes('EIGHT BOOKS'));
 for(let n=1;n<=8;n++)assert.equal(home.split(`data-cx-seven-volume-asset="BOOK-${n}-HARDCOVER"`).length-1,1);
 assert.equal((home.match(/data-cx-home-section="H\d{2}"/g)||[]).length,9);

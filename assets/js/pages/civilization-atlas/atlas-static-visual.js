@@ -72,6 +72,9 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en'}={}){
   const show=()=>{display.replaceChildren();if(!details.open)return;const a=resolveAtlasVisualById(bindings,choice.value,options);if(a)display.append(visualFigure(doc,a,locale));};
   const choices=()=>{choice.replaceChildren();for(const a of library.filter(a=>a.family===family.value)){const option=doc.createElement('option');option.value=a.assetId;option.textContent=a.subjectTitle?.[locale]||a.subjectTitle?.en;choice.append(option);}show();};
   family.addEventListener('change',choices);choice.addEventListener('change',show);details.addEventListener('toggle',show);details.append(controls,display);choices();host.append(details);
+  const requested=new URLSearchParams(doc.defaultView?.location?.search||'').get('visual');
+  const selected=library.find(a=>a.assetId===requested);
+  if(selected){family.value=selected.family;choices();choice.value=selected.assetId;details.open=true;show();}
  }
  structured.before(host);
 }
