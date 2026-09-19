@@ -6,10 +6,10 @@ const key=u=>{try{return decodeURIComponent(new URL(u).pathname).slice(1);}catch
 const keys=new Set(original.map(r=>r.key));
 const redirects=new Map(fs.readFileSync('_redirects','utf8').split(/\r?\n/).map(x=>x.trim().split(/\s+/)).filter(x=>x.length===3&&/^30[1278]$/.test(x[2])).map(x=>[x[0],x[1]]));
 function current(route){const seen=new Set();while(redirects.has(route)&&!seen.has(route)){seen.add(route);route=redirects.get(route);}return route;}
-const routes=[...new Set([...original.map(r=>r.route).filter(Boolean).map(current),'/account/','/academy/','/knowledge/','/professional/reports/','/professional/appointments/','/professional/services/'])];
+const routes=process.env.R2_EXTRA_ROUTES?process.env.R2_EXTRA_ROUTES.split(','):[...new Set([...original.map(r=>r.route).filter(Boolean).map(current),'/account/','/academy/','/knowledge/','/professional/reports/','/professional/appointments/','/professional/services/'])];
 const {chromium}=await import(pathToFileURL(process.env.PHIOS_PLAYWRIGHT_MODULE).href);
 const server=createPublicationReviewServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;let browser;
-const views=[];const jobs=routes.flatMap(route=>[390,1440].flatMap(viewport=>['zh-Hans','en'].map(locale=>({route,viewport,locale}))));
+const views=process.env.R2_EXTRA_ROUTES?json(evidenceDir+'/r2-260-static-browser-v2.json').views.filter(v=>!routes.includes(v.route)):[];const jobs=routes.flatMap(route=>[390,1440].flatMap(viewport=>['zh-Hans','en'].map(locale=>({route,viewport,locale}))));
 try{browser=await chromium.launch({channel:'msedge',headless:true});let cursor=0;
  await Promise.all(Array.from({length:3},async()=>{while(cursor<jobs.length){const job=jobs[cursor++],{route,viewport,locale}=job;const page=await browser.newPage({viewport:{width:viewport,height:950}});const evidence=[],errors=[];page.on('pageerror',e=>errors.push(e.message));
  try{
@@ -27,9 +27,6 @@ try{browser=await chromium.launch({channel:'msedge',headless:true});let cursor=0
   const icons=await page.locator('link[rel*=icon]').evaluateAll(es=>es.map(e=>({href:e.href,rel:e.rel})));
   for(const icon of icons){if(keys.has(key(icon.href))){const r=await page.request.get(icon.href);evidence.push({objectKey:key(icon.href),resolvedUrl:icon.href,trigger:'BROWSER_ICON_LINK',evidenceClass:'BROWSER_ICON',httpStatus:r.status(),mime:r.headers()['content-type'],resourceBytes:(await r.body()).length,selector:`link[rel="${icon.rel}"]`,rendered:false});}}
   views.push({...job,httpStatus:response.status(),finalRoute:page.url().replace(origin,''),lang:await page.getAttribute('html','lang'),evidence,errors,overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)});
- }catch(e){views.push({...job,error:String(e),evidence,errors});}finally{await page.close();console.log('STATIC',route,viewport,locale,evidence.length);writeJson(evidenceDir+'/r2-260-static-browser-v2.json',{scope:'LOCAL_BROWSER_VERIFIED; actual customer routes and disclosures; no audit galleries',routes,routeResolution:original.filter(r=>r.route).map(r=>({from:r.route,to:current(r.route)})),views});}
+ }catch(e){views.push({...job,error:String(e),evidence,errors});}finally{await page.close();console.log('STATIC',route,viewport,locale,evidence.length);writeJson(evidenceDir+'/r2-260-static-browser-v2.json',{scope:'LOCAL_BROWSER_VERIFIED; actual customer routes and disclosures; no audit galleries',routes:[...new Set(views.map(v=>v.route))],routeResolution:original.filter(r=>r.route).map(r=>({from:r.route,to:current(r.route)})),views});}
  }}));
 }finally{await browser?.close();await new Promise(r=>server.close(r));}
-
-
-

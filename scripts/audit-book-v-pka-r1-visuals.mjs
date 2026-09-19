@@ -1,19 +1,20 @@
 import fs from 'node:fs';
-import {resolveAtlasStaticVisuals} from '../assets/js/pages/civilization-atlas/atlas-static-visual.js';
+import {resolveAtlasVisualById,ATLAS_VISUAL_BINDINGS_PATH} from '../assets/js/pages/civilization-atlas/atlas-static-visual.js';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const registryPath='content/civilization-atlas/visuals/civilization-visual-asset-registry-v2.json';
-const bindingPath='content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json';
+const bindingPath=ATLAS_VISUAL_BINDINGS_PATH.slice(1);
 const registry=read(registryPath),bindings=read(bindingPath);
 const manifest=read('content/knowledge/public/successors/book5-publication-v1/visual-article-release.json');
 const articles=manifest.records.map(r=>read('.'+r.path));
 const byId=new Map(),byKey=new Map();
 for(const b of bindings.assets){byId.set(b.assetId,[...(byId.get(b.assetId)||[]),b]);byKey.set(b.bucketKey,[...(byKey.get(b.bucketKey)||[]),b.assetId]);}
-const records=registry.assets.map(a=>{
+// Preserve the historical registry while including its already accepted delivery successors.
+const registered=[...registry.assets,...bindings.assets.filter(b=>!registry.assets.some(a=>a.assetId===b.assetId))];
+const records=registered.map(a=>{
  const rows=byId.get(a.assetId)||[],bound=rows[0];
- const state={activeLayer:a.family==='TIMELINE_ANCHOR'?'timeline':'cases',timeWindowId:a.subjectId,primaryCaseId:a.subjectId};
- const resolved=resolveAtlasStaticVisuals(bindings,state).some(b=>b.assetId===a.assetId);
+ const resolved=Boolean(resolveAtlasVisualById(bindings,a.assetId));
  const usage=articles.filter(r=>r.visualAssets.some(v=>v.assetCode===a.assetId)).map(r=>r.publicHref+'?locale='+r.locale);
- return {assetId:a.assetId,filename:a.bucketKey?.split('/').at(-1)||null,family:a.family,subjectId:a.subjectId,relatedBook:'BOOK-5',r2Ref:bound?.bucketKey||null,publicResolver:'resolveUnifiedPublicVisual → resolveAtlasStaticVisuals',usage,classification:rows.length>1||bound&&byKey.get(bound.bucketKey).length>1?'DUPLICATE_MAPPING':resolved?'BOUND':bound?'UNRESOLVED':'MISSING_MAPPING',bindingIssue:resolved?null:'UNRESOLVED_ASSET_BINDING',publicationUse:usage.length?'ARTICLE_BOUND':resolved?'AVAILABLE_FOR_CONTEXTUAL_SELECTION':'STRUCTURED_FALLBACK',historicalAuthority:false};
+ return {assetId:a.assetId,filename:(bound?.bucketKey||a.bucketKey)?.split('/').at(-1)||null,family:a.family,subjectId:a.subjectId,relatedBook:bound?.relatedBook||a.relatedBook||'BOOK-5',r2Ref:bound?.bucketKey||null,publicResolver:'resolveUnifiedPublicVisual → resolveAtlasVisualById',usage,classification:rows.length>1||bound&&byKey.get(bound.bucketKey).length>1?'DUPLICATE_MAPPING':resolved?'BOUND':bound?'UNRESOLVED':'MISSING_MAPPING',bindingIssue:resolved?null:'UNRESOLVED_ASSET_BINDING',publicationUse:usage.length?'ARTICLE_BOUND':resolved?'AVAILABLE_FOR_CONTEXTUAL_SELECTION':'STRUCTURED_FALLBACK',historicalAuthority:false};
 });
 const orphanReferences=bindings.assets.filter(b=>!registry.assets.some(a=>a.assetId===b.assetId)).map(b=>({assetId:b.assetId,classification:'ORPHAN_REFERENCE'}));
 const representatives=[...new Set(records.map(r=>r.family))].map(family=>{

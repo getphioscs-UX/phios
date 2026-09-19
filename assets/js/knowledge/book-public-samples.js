@@ -1,6 +1,7 @@
 export function renderBookPublicSamples(host,book,locale='en'){
  const doc=host.ownerDocument,zh=locale==='zh-Hans';host.replaceChildren();
  const heading=doc.createElement('h2');heading.textContent=book.previewPages?.length||book.figures?.length?(zh?'免费阅读预览':'Free reading preview'):(zh?'本册封面':'Book cover');host.append(heading);
+ if(Number.isInteger(book.publicationPageCount)&&book.publicationPageCount>0){const count=doc.createElement('p');count.dataset.bookPublicationPages=String(book.publicationPageCount);count.textContent=zh?`本册共 ${book.publicationPageCount} 页。以下为免费预览与总结图。`:`This volume has ${book.publicationPageCount} pages. Free samples and summary figures follow.`;host.append(count);}
  if(book.cover){const cover=doc.createElement('img');cover.src=book.cover;cover.alt=zh?'本册封面':'Book cover';cover.loading='lazy';cover.style.cssText='width:200px;max-width:100%;height:auto';host.append(cover);}
  else {const note=doc.createElement('p');note.textContent=zh?'本册封面与预览尚待公布。':'Cover and preview will be announced.';host.append(note);}
  const pages=book.previewPages||[];
