@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+import {baseline,csvPath,evidenceDir,parseCsv,rowIdentity,sha,writeJson} from './lib/r2-260-evidence.mjs';
+const bytes=fs.readFileSync(csvPath),[header,...rows]=parseCsv(bytes.toString('utf8'));
+assert.equal(rows.length,260);assert.equal(new Set(rows.map(r=>r[0])).size,260);assert.equal(new Set(rows.map(r=>r[2])).size,260);
+rows.forEach((r,i)=>assert.equal(Number(r[0]),i+1));
+const counts=rows.reduce((o,r)=>(o[r[6]]=(o[r[6]]||0)+1,o),{});
+assert.deepEqual(counts,{'浏览器图标链接已引用':2,'所查页面未观察到':105,'已在本地页面显示并解码':26,'交互／报告流程待确认':127});
+const path=evidenceDir+'/r2-260-predecessor-freeze-v1.json';assert.ok(!fs.existsSync(path),'Do not overwrite predecessor evidence');
+writeJson(path,{scope:'Verification predecessor integrity; not an asset registry',baseline,startingWorkingTree:'CLEAN',headEqualsOriginMain:true,csvPath,csvSha256:sha(bytes),htmlSha256:sha(fs.readFileSync(csvPath.replace('.csv','.html'))),header,counts,immutableColumns:[0,1,2,3,4,5,8],rowHashes:rows.map(r=>({index:Number(r[0]),identitySha256:rowIdentity(r),previousStatus:r[6]}))});
+console.log('Frozen original 260 rows, IDs, keys, URLs, uses and reference columns; baseline clean and matched.');

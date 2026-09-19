@@ -40,9 +40,9 @@ try{
  for(const width of [390,1440]){
   await page.setViewportSize({width,height:1000});await page.goto(origin+'/books/reality-formation/?locale=zh-Hans');await page.locator('#free-samples details').first().waitFor();
   const summaries=page.locator('#free-samples details');assert.equal(await summaries.count(),12);
-  for(let i=0;i<11;i++){const detail=summaries.nth(i);await detail.locator('summary').click();const image=detail.locator('img');await image.waitFor();await image.scrollIntoViewIfNeeded();await image.evaluate(image=>image.decode());assert.ok(await image.evaluate(image=>image.naturalWidth>0));await detail.locator('summary').click();}
-  assert.equal(await summaries.nth(11).locator('img').count(),0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  results.push({book:1,width,originalFigures:11,decoded:'PASS',missing:'4E'});
+  for(let i=0;i<12;i++){const detail=summaries.nth(i);await detail.locator('summary').click();const image=detail.locator('img');await image.waitFor();await image.scrollIntoViewIfNeeded();await image.evaluate(image=>image.decode());assert.ok(await image.evaluate(image=>image.naturalWidth>0));await detail.locator('summary').click();}
+  assert.equal(await summaries.nth(11).locator('img').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  results.push({book:1,width,originalFigures:12,decoded:'PASS',missing:null});
  }
  await page.goto(origin+'/account/');await page.locator('[data-commerce-form]').waitFor({state:'attached'});await page.locator('[data-commerce-account] details summary').click();
  const visuals=JSON.parse(fs.readFileSync('content/web-production/registries/commerce-product-visuals-v1.json')).assets;
