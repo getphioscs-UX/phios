@@ -1,5 +1,5 @@
 import { fetchPublicAssetRegistry, fetchPublicAssetConfig, resolvePublicAsset, resolvePublicAssetForWeb, normalizePublicAssetBaseUrl } from '../runtime/web-production/asset-resolver.js';
-import {resolveAtlasStaticVisuals} from '../pages/civilization-atlas/atlas-static-visual.js';
+import {resolveAtlasVisualById,ATLAS_VISUAL_BINDINGS_PATH,isLocalAtlasReview} from '../pages/civilization-atlas/atlas-static-visual.js';
 
 const POINTER_URL = '/content/web-production/registries/current-client-visual-registry.json';
 let pointerPromise;
@@ -25,15 +25,13 @@ function clientEntry(registry, code) {
   return registry.assets?.find(asset => asset.sequence === code || asset.assetCode === code || asset.legacyAssetCode === code) || null;
 }
 export async function resolveUnifiedPublicVisual(code, options = {}) {
-  if (/^VIS-CIV-[A-Z0-9_-]+$/.test(code)) {
+  if (/^(VIS-CIV-[A-Z0-9_-]+|WORLD_RECONFIGURATION_SNAPSHOT_\d{4})$/.test(code)) {
     // Reuse the admitted Atlas binding authority; never infer a key from a name.
-    atlasBindingsPromise ||= fetchJson('/content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json').catch(error => {atlasBindingsPromise=null;throw error;});
+    atlasBindingsPromise ||= fetchJson(ATLAS_VISUAL_BINDINGS_PATH).catch(error => {atlasBindingsPromise=null;throw error;});
     const registry = await atlasBindingsPromise;
-    const entry = registry.assets.find(asset => asset.assetId === code);
-    if (!entry || entry.bindingState !== 'BOUND' || entry.reviewState !== 'ACCEPTED' || entry.status !== 'UPLOADED_VERIFIED' || entry.historicalAuthority !== false || !entry.bucketKey || !entry.publicUrl) throw Error('UNRESOLVED_ASSET_BINDING');
-    const state = entry.family === 'TIMELINE_ANCHOR' ? {activeLayer:'timeline',timeWindowId:entry.subjectId} : {activeLayer:'cases',primaryCaseId:entry.subjectId};
-    if (!resolveAtlasStaticVisuals(registry,state).some(asset=>asset.assetId===code)) throw Error('ASSET_BINDING_CONFLICT');
-    return {assetCode:code,src:entry.publicUrl,renderable:true,deliveryState:'VERIFIED_RENDERABLE',sourceReference:'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json'};
+    const entry = resolveAtlasVisualById(registry,code,{allowPendingReview:isLocalAtlasReview()});
+    if (!entry) throw Error('UNRESOLVED_ASSET_BINDING');
+    return {assetCode:code,src:entry.publicUrl,renderable:true,deliveryState:'VERIFIED_RENDERABLE',reviewState:entry.reviewState,sourceReference:ATLAS_VISUAL_BINDINGS_PATH.slice(1)};
   }
   try {
     return await resolvePublicAssetForWeb(code, options);

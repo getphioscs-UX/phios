@@ -1,4 +1,4 @@
-import {renderAtlasStaticVisuals} from './civilization-atlas/atlas-static-visual.js';
+import {renderAtlasStaticVisuals,ATLAS_VISUAL_BINDINGS_PATH} from './civilization-atlas/atlas-static-visual.js';
 import {getLocale,onLocaleChange} from '../i18n.js';
 import {createCivilizationAtlasState} from './civilization-atlas/atlas-state.js';
 import {bindAtlasUrlState} from './civilization-atlas/atlas-url-state.js';
@@ -33,6 +33,6 @@ if(root){
     const target=root.querySelector('[data-atlas-layer-content]');
     if(target) target.innerHTML=`<p role="alert">${getLocale()==='zh-Hans'?'文明图谱资料暂时无法载入。':'Civilization Atlas data could not be loaded.'}</p>`;
   });
-  fetch('/content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json').then(r=>{if(!r.ok)throw new Error('STATIC_VISUAL_BINDINGS_UNAVAILABLE');return r.json();}).then(bindings=>{data.staticVisuals=bindings;render();}).catch(()=>{/* Optional imagery: structured Atlas remains available. */});
+  fetch(ATLAS_VISUAL_BINDINGS_PATH).then(r=>{if(!r.ok)throw new Error('STATIC_VISUAL_BINDINGS_UNAVAILABLE');return r.json();}).then(bindings=>{data.staticVisuals=bindings;render();}).catch(()=>{/* Optional imagery: structured Atlas remains available. */});
   window.addEventListener('pagehide',()=>{unsubscribe();unbindUrl();unbindLocale();},{once:true});
 }

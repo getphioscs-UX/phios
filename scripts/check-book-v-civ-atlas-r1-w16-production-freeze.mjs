@@ -68,8 +68,27 @@ assert.deepEqual(visualSuccessor.dependencies.map(item=>item.path),[
   'assets/js/pages/civilization-atlas/atlas-static-visual.js',
   'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json'
 ]);
-for(const dependency of visualSuccessor.dependencies) assert.equal(digest(dependency.path),dependency.sha256,`static visual dependency drift: ${dependency.path}`);
+const activationPath='content/civilization-atlas/maintenance/book-v-civ-atlas-r1-m1-r2-binding-successor-v1.json';
+const activation=fs.existsSync(path.join(root,activationPath))?json(activationPath):null;
+if(activation){
+  assert.equal(activation.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-static-visual-successor-v1.json');
+  assert.equal(activation.predecessorSha256,digest(activation.predecessor));
+  assert.equal(activation.historicalRegistriesChanged,false);
+  assert.equal(activation.humanDecision,'PENDING_HUMAN_REVIEW');
+  assert.deepEqual(activation.changes.map(c=>c.path),['assets/js/pages/civilization-atlas.js','assets/js/pages/civilization-atlas/atlas-static-visual.js']);
+  assert.equal(digest(activation.bindingSuccessor),activation.bindingSuccessorSha256);
+}
+for(const dependency of visualSuccessor.dependencies){
+  const change=activation?.changes.find(c=>c.path===dependency.path);
+  if(change)assert.equal(change.previousSha256,dependency.sha256);
+  assert.equal(digest(dependency.path),change?.successorSha256||dependency.sha256,`static visual dependency drift: ${dependency.path}`);
+}
 authorizedMaintenance.set(priorVisual.path,{...priorVisual,successorSha256:visualSuccessor.change.successorSha256});
+if(activation){
+ const change=activation.changes.find(c=>c.path===priorVisual.path);
+ assert.equal(change.previousSha256,visualSuccessor.change.successorSha256);
+ authorizedMaintenance.set(priorVisual.path,{...priorVisual,successorSha256:change.successorSha256});
+}
 const editorial=json('content/civilization-atlas/maintenance/book-v-civ-atlas-pis-editorial-successor-v1.json');
 assert.equal(editorial.predecessor,maintenancePath);
 assert.equal(editorial.predecessorSha256,digest(maintenancePath));
