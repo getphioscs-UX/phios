@@ -158,3 +158,42 @@
  .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-bars"] svg { height:14px; }
 }
 /* END BAZI-DYNAMIC-R1-BATCH-02 */
+/* BAZI-DYNAMIC-R1-BATCH-03: shared M06 composition; frozen tokens and chrome. */
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-main"] { display:grid; grid-template-columns:1.5fr 1fr; gap:var(--phi-report-gap); flex:2; }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-conditions"] { display:grid; grid-template-columns:1fr 1fr; gap:var(--phi-report-gap); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-lead"] { display:grid; gap:var(--phi-report-gap-small); padding-bottom:var(--phi-report-gap); border-bottom:var(--phi-report-border); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-lead"] strong { font-family:var(--phi-report-font-title); font-size:var(--phi-report-section-size); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-themes"] { display:grid; gap:var(--phi-report-gap); padding-top:var(--phi-report-gap); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-themes"] span { display:flex; justify-content:space-between; gap:var(--phi-report-gap-small); align-items:center; }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-themes"] b { font-family:var(--phi-report-font-title); font-size:var(--phi-report-section-size); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-conditions"] [data-part="metrics"] { grid-template-columns:1fr 1fr; }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] .vrpt-insights { grid-template-columns:1fr 1fr; }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] .vrpt-node[data-selected="true"] circle { stroke:var(--phi-report-gold); stroke-width:3; }
+@media(max-width:600px) {
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-main"],.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-conditions"],.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] .vrpt-insights { grid-template-columns:1fr; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-themes"] span { padding:var(--phi-report-gap-small) 0; }
+}
+@media print {
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-orbit"] { max-height:215px; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-themes"] { gap:var(--phi-report-gap-small); }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-main"] { flex:1; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="metrics"] { padding:var(--phi-report-gap-small) 0; }
+}
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-main"]>.vrpt-tile { min-height:0; }
+@media print {
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="metrics"] b { margin-top:var(--phi-report-gap-small); }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-lead"] { padding-bottom:var(--phi-report-gap-small); }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-themes"] { padding-top:var(--phi-report-gap-small); }
+}
+@media print {
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="metrics"] span { display:flex; align-items:center; justify-content:space-between; gap:var(--phi-report-gap-small); text-align:left; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="metrics"] b { margin-top:0; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="metrics"] { padding:0; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="observe"] { flex:0; }
+}
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-orbit"] text { font-size:var(--phi-report-section-size); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] [data-part="domain-orbit"] [data-total] { font-size:var(--phi-report-title-size); }
+@media print {
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-03"] .vrpt-primary>[data-part="observe"] { flex:0; }
+}
+/* END BAZI-DYNAMIC-R1-BATCH-03 */
