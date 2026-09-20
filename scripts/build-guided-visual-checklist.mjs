@@ -11,8 +11,8 @@ const index={source:'reference-visual-attachment.md',sourceLineCount:lines.lengt
 fs.writeFileSync(`${root}/visual-requirement-index.json`,JSON.stringify(index,null,2)+'\n');
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const gaps={
- M01:'固定 P01 使用三种语言的独立 R2 纵向封面；现有必需路径未能取到图片。不得把商品横图拉伸，也不得将示例出生资料作为默认值。',
- M02:'P02–05 静态图、原文和无障碍文本必须一致。120 个必需图片路径均未验证可用；七种方法的 P05 还缺完整双语原文。',
+ M01:'固定 P01 使用三种语言的独立 R2 纵向封面；120 张指定路径均已可读取，并记录用户审核通过。英文 P01 当前仍含双语内容，另列路径内容差异。不得把商品横图拉伸，也不得将示例出生资料作为默认值。',
+ M02:'P02–05 静态图、原文和无障碍文本必须一致。120 个必需图片路径已验证可读取；七种方法的 P05 canonical text 仍缺完整双语原文。图片批准与无障碍文本补齐分开记录。',
  M03:'现有四柱图尚未组成完整快照：四柱纵卡、日主／季节、五行与 Primary／Tension／Observe 的组合仍待绑定。',
  M04:'现有结构图可显示来源数据；核心、支撑、张力、表达与条件的专属母版，以及最多三张卡片仍待逐页绑定。',
  M05:'现有数值图组件保留真实数据要求。Donut＋排序条、五行网络、平衡矩阵的完整页面绑定与手机堆叠仍待验证。',
@@ -22,7 +22,7 @@ const gaps={
 };
 const rows=Object.entries(REPORT_VISUAL_MASTERS).map(([id,m])=>`<tr><th>${id} · ${m.role}</th><td>${Array.from({length:26},(_,i)=>i+1).filter(n=>baziVisualMaster(n)===id).join(', ')}</td><td>${m.slots.map(esc).join(' · ')}</td><td>${m.visualShare.map(n=>Math.round(n*100)).join('–')}%</td><td>${esc(gaps[id])}</td></tr>`).join('');
 const html=`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>视觉设计逐项核对</title><style>body{margin:0;background:#fcfaf5;color:#23364a;font:16px/1.7 system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:24px}h1,h2{font-family:Georgia,serif}a{color:#285a76}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid #cabc9a;padding:12px;text-align:left;vertical-align:top}.table{overflow:auto}details{border-bottom:1px solid #cabc9a;padding:12px 0}summary{cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.65 system-ui}a:focus-visible,summary:focus-visible{outline:3px solid #986536;outline-offset:4px}.notice{border-left:4px solid #986536;padding:12px 18px;background:#f1eadc}button{padding:10px;font:inherit}input{padding:12px;font:inherit;width:min(90%,600px)}@media(max-width:600px){main{padding:16px}th,td{min-width:150px}}</style><main>
-<h1>视觉设计逐项核对</h1><p class="notice">状态：实现进行中；人工视觉验收待完成。记录了全部 ${sections.length} 个章节标题，不等于全部实现。测试稿目前沿用既有动态页面，尚不是八字完整 26 页成品。</p>
+<h1>视觉设计逐项核对</h1><p><a href="BAZI-BATCH-0-REFERENCE-FREEZE.html">最新 Batch 0：120 张静态图已齐备；查看 M03–M08 原图、视觉 token 与组件归属</a></p><p class="notice">状态：实现进行中；人工视觉验收待完成。记录了全部 ${sections.length} 个章节标题，不等于全部实现。测试稿目前沿用既有动态页面，尚不是八字完整 26 页成品。</p>
 <p><a href="review.html">查看 24 个语言／方法候选稿</a> · <a href="visual-requirement-index.json">完整需求索引</a> · <a href="reference-visual-attachment.md">完整附件原文</a> · <a href="STATUS.md">实现与阻塞状态</a></p>
 <h2>八字 26 页与 M01–M08</h2><p>本表是实现约束。P08 以 M04 为主，允许经审核的 M04／M05 混合。静态 P01–05 遵循当前 L10N-COM-R2 合约；附件示例姓名、数值、四柱、年份不具有计算依据。</p><div class="table"><table><thead><tr><th>母版</th><th>页码</th><th>必需信息槽</th><th>视觉占比目标</th><th>尚需落实与验证</th></tr></thead><tbody>${rows}</tbody></table></div>
 <h2>跨页面要求</h2><ul><li>只使用六类卡片：${REPORT_CARD_FAMILIES.join('、')}；标题／2–4 行正文／状态标记。</li><li>锁定页保留图表家族轮廓。当前四类骨架只是候选，需要继续验证与实际付费母版的一致性。</li><li>390／768／1440px；图表不可靠横向溢出维持布局；减少动态效果偏好必须生效。</li><li>A4 15–18mm 边距；同一 Page IR；图表和卡片组不拆页。已调整为 15mm，完整 PDF 尚缺静态页与完整页面绑定。</li><li>商品图、免费版、付费版、PDF 的品质连续性需要人工验收，机器通过不代替该验收。</li></ul>

@@ -1,5 +1,7 @@
 # Guided Reality / Method Guidance / Visual Reports — candidate status
 
+2026-09-20 update on main 16028ad: static images are USER_APPROVED and 120/120 exact paths are readable. The current staged task is [Batch 0 visual reference registration](BATCH-0-STATUS.md); prior dynamic QA artifacts below are historical, not current full-report acceptance.
+
 Baseline: `main`, `a7fc16025e67f653b9cd2e41418dcc2c355d3df3`.
 
 Status: **IMPLEMENTATION IN PROGRESS. HUMAN VISUAL ACCEPTANCE PENDING. NOT PRODUCTION ACCEPTED.**
@@ -35,7 +37,7 @@ Status: **IMPLEMENTATION IN PROGRESS. HUMAN VISUAL ACCEPTANCE PENDING. NOT PRODU
 
 | Area | Remaining work |
 |---|---|
-| Static artwork | All 120 exact required locale paths returned HTTP 404 at the recorded check. This does not mean the bucket is empty. Authenticated inventory attempt returned 401. No cross-language substitution is permitted. |
+| Static artwork | Resolved: 120/120 exact locale paths returned readable images after the user completed uploads. Three BaZi P01 objects contain PNG bytes under WebP names; en/P01 contains a bilingual cover. See Batch 0 for exact observations. |
 | Canonical editorial copy | 25 of 32 interior editorial bodies imported from full bilingual source. Seven P05 entries lack complete bilingual body text in the retrieved source and remain candidates. |
 | M03–M08 and complete page bind | Existing review fixtures have fewer dynamic pages than the new full blueprints. The 26/24/32/34-page plans are registered, but full evidence-driven page assembly and all master slots are not implemented. |
 | Six card families | Registered contract; complete renderer binding, 2–4-line checks and page-level insight density checks remain. |
@@ -43,13 +45,13 @@ Status: **IMPLEMENTATION IN PROGRESS. HUMAN VISUAL ACCEPTANCE PENDING. NOT PRODU
 | Actual report delivery | Server ownership lookup exists, but presentation selection is not yet wired through the complete customer report-generation endpoint. No new production entitlement authority is claimed. |
 | Reality and Ask | Precise source-specific probes, six capability discovery cards, complete comparison/counter-evidence integration and all required Ask journeys remain to verify/finish. |
 | Visual consistency | All eight method-specific skins, commerce promise vs interior, mobile chart stacking, density measurements and every-page PDF inspection remain. |
-| Full PDF | Blocked by missing static artwork and incomplete full page binding. DYNAMIC-ONLY files are explicitly QA drafts. |
+| Full PDF | Static artwork availability is resolved. Complete page binding and whole-report visual acceptance remain pending. Existing DYNAMIC-ONLY files are historical QA drafts. |
 | Human review | Reality UX flows and premium visual acceptance remain PENDING. Earlier Atlas approval is separate and does not approve these new report templates. |
 
 ## Review entry points
 
 - `VISUAL-DESIGN-CHECKLIST.html`: full attachment checklist with original sections and master-specific gaps.
-- `review.html`: 24 synthetic method/language candidate reports. Static missing-artwork notices are deliberate.
+- `review.html`: 24 synthetic method/language candidate reports. These historical snapshots predate the uploads; use the Batch 0 review for current static assets.
 - `browser-results.json`, `print-results.json`, `pdf-inspection.json`: exact verification scope.
 
 All changes remain in the working tree. No files intentionally deleted; no commit, push, deploy, or ZIP created. Review with `git status` and `git diff --stat`; review untracked files as well. These are review steps, not a request to approve an unfinished release.

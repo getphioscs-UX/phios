@@ -36,7 +36,14 @@ assert.equal(routeGuidedAsk({confirmedReality:confirmed}).mode,'REALITY_BASED_RE
 assert.equal(routeGuidedAsk({selectedMethod:registry.methods[0].methodId,registry}).mode,'USER_SELECTED_METHOD');
 assert(routeGuidedAsk({methodGuidanceRequested:true,registry}).alternatives.length<=2);
 assert.equal(REPORT_EDITORIAL_ASSETS.length,120);assert.equal(new Set(REPORT_EDITORIAL_ASSETS.map(a=>a.object_key)).size,120);
-for(const a of REPORT_EDITORIAL_ASSETS)assert.throws(()=>resolveReportEditorialAsset({registry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},methodId:a.methodId,page:a.page,locale:a.locale,publicBaseUrl:'https://assets.example.test'}),{code:'STATIC_EDITORIAL_ASSET_MISSING'});
+for(const a of REPORT_EDITORIAL_ASSETS){
+ const args={registry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},methodId:a.methodId,page:a.page,locale:a.locale,publicBaseUrl:'https://assets.example.test'};
+ if(a.active){const result=resolveReportEditorialAsset(args);assert(result.renderable);assert(result.src.endsWith(a.object_key));assert(a.width>0&&a.height>0);}
+ else assert.throws(()=>resolveReportEditorialAsset(args),{code:'STATIC_EDITORIAL_ASSET_MISSING'});
+ // Explicitly deactivated and wrong-language objects must still fail closed.
+ assert.throws(()=>resolveReportEditorialAsset({...args,registry:{...args.registry,assets:[{...a,active:false}]}}),{code:'STATIC_EDITORIAL_ASSET_MISSING'});
+ assert.throws(()=>resolveReportEditorialAsset({...args,locale:'fr'}),{code:'STATIC_EDITORIAL_ASSET_MISSING'});
+}
 assert.equal(REPORT_CARD_FAMILIES.length,6);
 const visualSource=fs.readFileSync('docs/guided-report-successor-r1/reference-visual-attachment.md','utf8').split(/\r?\n/);
 const visualIndex=JSON.parse(fs.readFileSync('docs/guided-report-successor-r1/visual-requirement-index.json'));
@@ -55,11 +62,11 @@ for(const plan of REPORT_REFERENCE_BLUEPRINTS){
  for(const page of plan.pages)assert(REPORT_VISUAL_MASTERS[page.master]);
 }
 const source=JSON.parse(fs.readFileSync('docs/visual-report-r1/cases/BZR-01-en.json')).paid;
-const project=report=>presentVisualReport({report,presentation:{reportLanguageMode:'SINGLE',reportLocale:'en'},access:'FREE',editorialRegistry:{assets:REPORT_EDITORIAL_ASSETS},reviewMode:true});
+const project=report=>presentVisualReport({report,presentation:{reportLanguageMode:'SINGLE',reportLocale:'en'},access:'FREE',editorialRegistry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},publicBaseUrl:'https://assets.example.test',reviewMode:true});
 const free=project(source),locked=free.pages.find(p=>p.accessState==='PAID_LOCKED');assert(locked);
 assert(!('sourcePage' in locked));assert(!('translations' in locked));
 assert.deepEqual(Object.keys(locked.preview).sort(),['insightCount','visualType']);
-const markup=renderVisualReportPages(free);assert.match(markup,/data-preview-family=/);assert.match(markup,/Visual layout preview/);
+const markup=renderVisualReportPages(free);assert(!markup.includes('src="undefined"'));assert.equal(free.pages.slice(0,5).filter(p=>p.accessState==='OPEN').length,5);assert(markup.includes('<img src="https://assets.example.test/images/reports/bazi/'));assert.match(markup,/data-preview-family=/);assert.match(markup,/Visual layout preview/);
 const missing=structuredClone(source);for(const p of missing.pages)p.accessState='DATA_REQUIRED';
 assert(!renderVisualReportPages(project(missing)).includes('vrpt-unlock'));
 assert(!project(missing).pages.some(p=>p.accessState==='PAID_LOCKED'));
