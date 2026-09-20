@@ -1,5 +1,6 @@
 import {renderQuantitativeVisual} from './visual-report-quantitative.js';
 import {esc} from '../surfaces/runtime-ui.js';
+import {renderBaziStructuralBatch} from './bazi-structural-visual-pages.js';
 const list=v=>Array.isArray(v)?v:[];
 const words=(text,max=22)=>{
  const chars=/[\u3400-\u9fff]/u.test(text),parts=chars?[...text]:String(text).split(/\s+/),lines=[];let line='';
@@ -36,6 +37,7 @@ function responsiveDiagram(v){
  return desktop;
 }
 export function renderVisualReportPages(report,{primaryVisuals={}}={}) {
+ if(report?.visualBatch==='BAZI-DYNAMIC-R1-BATCH-01'&&!report.presentationSchema)return renderBaziStructuralBatch(report);
  if(report?.presentationSchema==='PHI-OS-REPORT-PRESENTATION-R2')return renderPresentedReport(report,{primaryVisuals});
  if(report?.schemaVersion!=='PHI-OS-PERSONAL-READING-VISUAL-PAGES-v1.0.0')throw Error('VRPT_PAGE_REPORT_REQUIRED');
  const zh=report.locale==='zh-Hans';

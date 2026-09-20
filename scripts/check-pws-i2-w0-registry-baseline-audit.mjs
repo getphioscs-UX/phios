@@ -39,7 +39,9 @@ assert.equal(runtimeRegistryFiles.length, 6);
 const registryIndex = await readJson('content/registry/index.json');
 const contentRegistryFiles = await listFiles('content/registry', '.json');
 const authorisedSevenVolumeSuccessorRegistryFiles = new Set([
-  'current-book-architecture.json'
+  'current-book-architecture.json',
+  // Batch 0 presentation-only successor, outside the historical PWS registry.
+  'report-visual-reference-freeze-r1.json'
 ]);
 const authorisedKnowledgeSuccessorRegistryFiles = new Set([
   'm3c-w3-wrangler-successor-reconciliation-v1.json'
@@ -55,6 +57,10 @@ const preSevenVolumeRegistryFiles = contentRegistryFiles.filter(
   file => !authorisedSevenVolumeSuccessorRegistryFiles.has(file)
 );
 assert.equal(preSevenVolumeRegistryFiles.length, 114);
+const visualFreeze = await readJson('content/registry/report-visual-reference-freeze-r1.json');
+assert.equal(visualFreeze.schemaVersion, 'PHI-OS-REPORT-VISUAL-REFERENCE-FREEZE-R1');
+assert.equal(visualFreeze.tokenOwner, 'assets/css/tokens.css');
+assert.equal(visualFreeze.productionAccepted, false);
 assert.equal(indexedFiles.length, 51);
 assert.equal(registryIndex.registries.public_assets, './public-assets.json');
 assert.equal(registryIndex.registries.book_5_manifest, './book-5-manifest.json');
@@ -190,5 +196,5 @@ assert(
 console.log('✓ PWS-I2-W0 Registry Baseline Audit passed.');
 console.log('  Registry 6 modules; Runtime Contracts/Schemas/Versions 20 each.');
 console.log('  Persistence 9 methods; D1 1 binding; W0 executable Migrations 4.');
-console.log('  Historical Static JSON baseline 114 + 1 authorised 7V architecture pointer; Knowledge Registry 12 frozen + 1 authorised M3C successor reconciliation; registry index 51; historical unindexed excluding index 62.');
+console.log('  Historical Static JSON baseline 114 + 1 authorised 7V architecture pointer + 1 Batch 0 visual freeze; Knowledge Registry 12 frozen + 1 authorised M3C successor reconciliation; registry index 51; historical unindexed excluding index 62.');
 console.log('  Multiple-source risks recorded; no Registry or Migration changed.');
