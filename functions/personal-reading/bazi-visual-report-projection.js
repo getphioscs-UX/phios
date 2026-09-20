@@ -1,8 +1,9 @@
 import {visualProjectionBuilder} from './visual-report-projection-utils.js';
 import {projectBaziStructuralBatch} from './bazi-structural-visual-pages.js';
+import {projectBaziBalanceBatch} from './bazi-balance-visual-pages.js';
 export function projectBaziVisualReport({reading:r,locale='en',depth='FREE',reviewMode=false,batch=null}){
  if(r?.methodId!=='BZR'||r.publicationDecision?.customerPublishable!==true)throw Error('VRPT_BZR_ADMITTED_READING_REQUIRED');
- if(batch!==null){if(batch!=='BAZI-DYNAMIC-R1-BATCH-01')throw Error('VRPT_BAZI_BATCH_UNKNOWN');return projectBaziStructuralBatch({reading:r,locale,depth,reviewMode});}
+ if(batch!==null){if(batch==='BAZI-DYNAMIC-R1-BATCH-02')return projectBaziBalanceBatch({reading:r,locale,depth,reviewMode});if(batch!=='BAZI-DYNAMIC-R1-BATCH-01')throw Error('VRPT_BAZI_BATCH_UNKNOWN');return projectBaziStructuralBatch({reading:r,locale,depth,reviewMode});}
  const sourceReportRef=`BAZI_FULL_REPORT:${r.summary.reportDigest}`,m=r.professionalModules,pillars=r.structuralModel.pillars;
  const b=visualProjectionBuilder({methodId:'BZR',productId:'BAZI_FULL_REPORT',sourceReportRef,sourceProjectionId:pillars[0]?.stem.sourceRef.split('#')[0],locale,depth,reviewMode,identity:pillars.map(x=>({position:x.position,stem:x.stem.code,branch:x.branch.code}))});
  const {add,local,ref}=b,zh=locale==='zh-Hans',choose=x=>x?.[zh?'zhHans':'en'];

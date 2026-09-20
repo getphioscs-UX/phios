@@ -138,3 +138,23 @@
  .vrpt-report[data-visual-batch] * { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
 }
 /* END BAZI-DYNAMIC-R1-BATCH-01 */
+/* BAZI-DYNAMIC-R1-BATCH-02: composition slots only; Batch 1 tokens unchanged. */
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-page-number="11"] .vrpt-insights { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-bars"] { display:grid; gap:var(--phi-report-gap-section); padding:var(--phi-report-gap-section) 0; }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-bars"]>div { display:grid; grid-template-columns:1.2fr 2fr 2ch; align-items:center; gap:var(--phi-report-gap); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-key"] { display:grid; gap:var(--phi-report-gap-small); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-candidates"],.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-conditions"] { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--phi-report-gap); }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="condition-row"] { border-top:var(--phi-report-border); padding:var(--phi-report-gap) 0; }
+.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="condition-row"] strong { display:block; margin-top:var(--phi-report-gap-small); font-size:var(--phi-report-secondary-size); }
+@media(max-width:600px) {
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-candidates"],.vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-conditions"] { grid-template-columns:1fr; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-page-number="11"] .vrpt-insights { grid-template-columns:1fr; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-bars"]>div { grid-template-columns:1.3fr 1fr 2ch; gap:var(--phi-report-gap-small); }
+}
+@media print {
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-orbit"] { max-height:320px; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] svg [data-caption] { font-size:var(--phi-report-body-size); }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="condition-row"] { padding:var(--phi-report-gap-small) 0; }
+ .vrpt-report[data-visual-batch="BAZI-DYNAMIC-R1-BATCH-02"] [data-part="balance-bars"] svg { height:14px; }
+}
+/* END BAZI-DYNAMIC-R1-BATCH-02 */

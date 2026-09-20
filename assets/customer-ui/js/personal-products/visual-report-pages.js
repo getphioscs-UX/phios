@@ -37,7 +37,7 @@ function responsiveDiagram(v){
  return desktop;
 }
 export function renderVisualReportPages(report,{primaryVisuals={}}={}) {
- if(report?.visualBatch==='BAZI-DYNAMIC-R1-BATCH-01'&&!report.presentationSchema)return renderBaziStructuralBatch(report);
+ if(['BAZI-DYNAMIC-R1-BATCH-01','BAZI-DYNAMIC-R1-BATCH-02'].includes(report?.visualBatch)&&!report.presentationSchema)return renderBaziStructuralBatch(report);
  if(report?.presentationSchema==='PHI-OS-REPORT-PRESENTATION-R2')return renderPresentedReport(report,{primaryVisuals});
  if(report?.schemaVersion!=='PHI-OS-PERSONAL-READING-VISUAL-PAGES-v1.0.0')throw Error('VRPT_PAGE_REPORT_REQUIRED');
  const zh=report.locale==='zh-Hans';
