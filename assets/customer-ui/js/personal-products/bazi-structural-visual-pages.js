@@ -1,11 +1,14 @@
 import {esc} from '../surfaces/runtime-ui.js';
 import {renderBaziBalanceBody} from './bazi-balance-visual-pages.js';
 import {renderBaziDomainBody} from './bazi-domain-visual-pages.js';
-// Shared report renderer's bounded M03–M06 composition implementation.
+import {renderBaziTimingNavigationBody} from './bazi-timing-navigation-visual-pages.js';
+// Shared report renderer's bounded M03–M08 composition implementation.
 // Geometry encodes values already bound in Page IR; it creates no reading.
 export function renderBaziStructuralBatch(report){
- const count=report.visualBatch==='BAZI-DYNAMIC-R1-BATCH-03'?4:5;
- const firstPage=report.visualBatch==='BAZI-DYNAMIC-R1-BATCH-03'?16:report.visualBatch==='BAZI-DYNAMIC-R1-BATCH-02'?11:6;
+ const spec={'BAZI-DYNAMIC-R1-BATCH-01':[6,5],'BAZI-DYNAMIC-R1-BATCH-02':[11,5],'BAZI-DYNAMIC-R1-BATCH-03':[16,4],'BAZI-DYNAMIC-R1-BATCH-04':[20,3],'BAZI-DYNAMIC-R1-BATCH-05':[23,4]}[report.visualBatch];
+ if(!spec)throw Error('BAZI_BATCH_REVIEW_SCOPE_REQUIRED');
+ const [firstPage,count]=spec;
+
  if(report.reviewMode!==true||report.customerPublishable!==false||report.depth!=='PAID'||report.pages.length!==count||report.pages.some((p,i)=>p.pageNumber!==i+firstPage))throw Error('BAZI_BATCH_REVIEW_SCOPE_REQUIRED');
  const locale=report.locale,t=(en,zh)=>locale==='bilingual'?`${zh} / ${en}`:locale==='zh-Hans'?zh:en;
  const text=(value)=>esc(value),panel=(title,body,role='')=>`<section class="vrpt-tile" ${role?`data-part="${role}"`:''}><h3>${text(title)}</h3>${body}</section>`;
@@ -17,6 +20,7 @@ export function renderBaziStructuralBatch(report){
  const seasonal=v=>{const c=v.context;return `<div data-part="season-structure"><svg viewBox="0 0 440 400" role="img" aria-label="${text(`${t('Day Master','日主')}: ${c.dayMaster.code}; ${t('Season','季节')}: ${c.season.name}; ${t('Root records','根气记录')}: ${c.roots.value}`)}"><circle class="vrpt-orbit" cx="220" cy="200" r="155"/><path class="vrpt-link" d="M220 85V315M75 200H365"/>${[[220,58,c.season.glyph,c.season.name],[75,200,String(c.roots.value),t('Roots','根气')],[365,200,'—',t('Open','开放')],[220,342,c.season.label,t('Month element','月令五行')]].map(([x,y,a,b])=>`<g class="vrpt-node"><circle cx="${x}" cy="${y}" r="55"/><text x="${x}" y="${y-4}" text-anchor="middle">${text(a)}</text><text data-caption x="${x}" y="${y+20}" text-anchor="middle">${text(b)}</text></g>`).join('')}<g class="vrpt-node" data-center><circle cx="220" cy="200" r="73"/><text data-total x="220" y="196" text-anchor="middle">${text(c.dayMaster.glyph)}</text><text x="220" y="226" text-anchor="middle">${text(c.dayMaster.label)}</text></g></svg>${context(v)}</div>`;};
  const relationships=v=>{const pts=v.nodes.map((n,i)=>({id:n.id,x:220+145*Math.cos(-Math.PI/2+i*2*Math.PI/5),y:205+145*Math.sin(-Math.PI/2+i*2*Math.PI/5)}));return `<svg data-part="relationships" viewBox="0 0 440 410" role="img" aria-label="${text(t('Solid arrows generate; dashed arrows control. Counts label the inventory only.','实线箭头相生，虚线箭头相克。数字仅表示清单计数。'))}"><defs><marker id="arrow-${locale}" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="currentColor"/></marker></defs><circle class="vrpt-orbit" cx="220" cy="205" r="145"/>${v.edges.map(e=>{const a=pts.find(p=>p.id===e.from),b=pts.find(p=>p.id===e.to),dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy),x1=a.x+dx/d*43,y1=a.y+dy/d*43,x2=b.x-dx/d*48,y2=b.y-dy/d*48;return `<path class="vrpt-link" ${e.relation==='SUBJECT_CONTROLS_TARGET'?'stroke-dasharray="5 5"':''} marker-end="url(#arrow-${locale})" d="M${x1} ${y1}L${x2} ${y2}"/>`;}).join('')}${v.nodes.map((n,i)=>`<g class="vrpt-node" data-element="${n.id}"><circle cx="${pts[i].x}" cy="${pts[i].y}" r="43"/><text x="${pts[i].x}" y="${pts[i].y-2}" text-anchor="middle">${text(n.label)}</text><text x="${pts[i].x}" y="${pts[i].y+22}" text-anchor="middle">${n.value}</text></g>`).join('')}</svg>`;};
  const body=p=>{const v=p.visual;
+  if(p.pageNumber>=20)return renderBaziTimingNavigationBody(p,{t,text,panel});
   if(p.pageNumber>=16)return renderBaziDomainBody(p,{t,text,panel});
   if(p.pageNumber>=11)return renderBaziBalanceBody(p,{t,text,panel});
   if(p.pageNumber===6)return panel(t('Four pillars','四柱命盘'),`<div data-part="snapshot">${pillars(v)}${context(v)}</div>`)+panel(t('Five elements · unweighted inventory','五行 · 未加权清单'),distribution(v));
