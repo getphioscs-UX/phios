@@ -4,6 +4,21 @@ const clean=v=>String(v??'').trim();
 const list=v=>Array.isArray(v)?v:[];
 const fail=(code,status=422)=>{const e=new Error(code);e.code=code;e.status=status;throw e};
 const hasGuidedContext=value=>Boolean(value&&typeof value==='object'&&Object.values(value).some(x=>clean(x)));
+export function routeGuidedAsk({question='',selectedMethod=null,confirmedReality=null,methodGuidanceRequested=false,registry}={}){
+ const methods=list(registry?.guidedReportMethods).length?list(registry.guidedReportMethods):list(registry?.methods), selected=[...methods,...list(registry?.methods)].find(m=>m.methodId===selectedMethod);
+ if(selectedMethod){if(!selected)fail('ASK_SELECTED_METHOD_INVALID');return {mode:'USER_SELECTED_METHOD',method:selected.methodId,executionGranted:false};}
+ if(methodGuidanceRequested){
+  const interests=[];
+  for(const [tag,pattern] of [['TIMING',/period|cycle|when|周期|阶段|何时/i],['CURRENT_OPERATION',/tired|exhaust|operat|消耗|疲惫|运行/i],['ENVIRONMENT',/environment|环境/i],['DECISION_OBSERVATION',/decision|decid|选择|决定/i],['REPEATED_THEMES',/repeat|反复|重复/i],['ASSESSMENT_COMPARISON',/assessment|profile|测评|侧写/i],['MULTIPLE_READINGS',/different reports|compare readings|多个报告|不同报告/i],['LIFE_DOMAINS',/career|relationship|work|事业|关系|工作/i]])if(pattern.test(question))interests.push(tag);
+  if(!interests.length)interests.push('CURRENT_REALITY');
+  const eligible=methods.filter(m=>(m.routingOnly===true||m.experienceState==='AVAILABLE_IN_THIS_READING')&&m.publicSelectionAllowed!==false&&m.routingProfile?.supportsDecisionObservation)
+   .map(m=>({m,score:interests.filter(x=>m.routingProfile.strongFor.includes(x)).length})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).map(x=>x.m);
+  return {mode:'METHOD_GUIDANCE',primary:eligible[0]?.methodId||null,alternatives:eligible.slice(1,3).map(m=>m.methodId),interests,requires:eligible[0]?.routingProfile.requires||[],wording:'A possible starting point; you can choose another method.',executionGranted:false};
+ }
+ const personal=/(?:我(?:最近|现在|该|应该|正在|的处境)|\b(?:I am|I feel|my situation|should I)\b)/i.test(question);
+ if(personal&&!confirmedReality)return {mode:'CLARIFY',question:'What is happening, and what would be useful to understand?',evidencePromoted:false};
+ return {mode:confirmedReality?'REALITY_BASED_RESPONSE':'DIRECT_ANSWER',recommendMethod:false};
+}
 const PUBLIC_KNOWLEDGE_REF=/^(?:ARTICLE:[a-z0-9][a-z0-9-]{0,119}|BOOK:BOOK-[1-8]|FIGURE:figure-[a-z0-9-]{1,79}|CONCEPT:[a-z0-9][a-z0-9-]{0,79})$/;
 export function isPublicKnowledgeContextRef(value){return PUBLIC_KNOWLEDGE_REF.test(clean(value))}
 function publicDefinition(row,locale='en'){return freeze({contextType:row.contextType,label:row.customerDisclosureLabel[locale==='zh-Hans'?'zh':'en'],sourceClass:row.sourceClass,participantScope:row.participantScope,caseScope:row.caseScope,consentRequired:row.consentRequired,entitlementRequired:row.entitlementRequired,freshnessPolicy:row.freshnessPolicy})}

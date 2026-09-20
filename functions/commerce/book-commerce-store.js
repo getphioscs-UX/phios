@@ -1,3 +1,4 @@
+import {orderReportPresentation,validateOrderReportPresentation} from './report-presentation.js';
 import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey, resolveCommerceBookSourceKey } from './book-product-registry.js';
 import { STRIPE_PRODUCT_REGISTRY, commerceProduct, commerceEntitlements } from '../pws/commercial/stripe-product-registry.js';
 import {commerceLog} from './commerce-observability.js';
@@ -36,13 +37,24 @@ export async function createCommerceOrder({env,customerId,productId,selectedProd
   await db.prepare(`INSERT OR IGNORE INTO commerce_checkout_attempts
     (checkout_attempt_id,product_id,idempotency_key_hash,status,locale,created_at,updated_at,customer_id,selected_products_json,order_state,amount_minor,currency,qa_price_id,request_hash,environment,context_json)
     VALUES (?1,?2,?3,'creating',?4,?5,?5,?6,?7,'PENDING',?8,'MYR',?9,?10,'QA',?11)`)
-    .bind(randomId('ord_'),productId,idempotencyKeyHash,locale,now,customerId,JSON.stringify(selectedProducts),p.amountMinor,p.qaPriceId,requestHash,JSON.stringify(context)).run();
+    .bind(randomId('ord_'),productId,idempotencyKeyHash,locale,now,customerId,JSON.stringify(selectedProducts),context.reportPresentation?.amountMinor??p.amountMinor,p.qaPriceId,requestHash,JSON.stringify(context)).run();
   const order=await db.prepare('SELECT * FROM commerce_checkout_attempts WHERE idempotency_key_hash=?1').bind(idempotencyKeyHash).first();
   if(order.customer_id!==customerId||order.request_hash!==requestHash) throw Object.assign(new Error('Idempotency key conflicts with another request.'),{status:409,code:'idempotency_conflict'});
   return order;
 }
 export async function commerceOrder(env,id,customerId){
   return dbFrom(env).prepare(`SELECT * FROM commerce_checkout_attempts WHERE checkout_attempt_id=?1 AND environment='QA' ${customerId?'AND customer_id=?2':''}`).bind(...(customerId?[id,customerId]:[id])).first();
+}
+// Language is bound through the immutable purchase -> checkout order relation.
+// Bundle children each resolve the same purchased presentation, without a new store.
+export async function ownedReportPresentation(env,customerId,productId,clock=Date.now){
+ const row=await dbFrom(env).prepare(`SELECT e.entitlement_id,e.entitlement_status,e.purchase_id,o.context_json
+ FROM digital_entitlements e JOIN commerce_purchases p ON p.purchase_id=e.purchase_id
+ JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id
+ WHERE e.customer_id=?1 AND e.product_id=?2 AND e.entitlement_status='active'
+ AND (e.expires_at IS NULL OR e.expires_at>?3) AND o.review_required=0
+ AND o.order_state='FULFILLED' ORDER BY e.granted_at DESC LIMIT 1`).bind(customerId,productId,nowIso(clock)).first();
+ return row?{entitlement_id:row.entitlement_id,entitlement_status:row.entitlement_status,purchase_id:row.purchase_id,reportPresentation:orderReportPresentation(row)}:null;
 }
 export async function commerceCustomerBinding(env,customerId){
   return dbFrom(env).prepare('SELECT * FROM commerce_customer_bindings WHERE customer_id=?1').bind(customerId).first();
@@ -82,16 +94,17 @@ export async function ownedCommerceBook(env,customerId,productId){
 }
 export async function fulfillCommerceOrder({env,order,session,eventId,clock=Date.now}){
   const db=dbFrom(env), now=nowIso(clock), p=commerceProduct(order.product_id), purchaseId=`pur_${order.checkout_attempt_id}`;
+  validateOrderReportPresentation(p,order);
   const human=p.fulfillmentType==='HUMAN_SERVICE'||p.professionalReviewRequired;
   const subscription=p.billingType==='RECURRING';
   const paidState=human||p.category==='BOOK'||subscription?'FULFILLMENT_PENDING':'FULFILLED';
   const statements=[db.prepare(`INSERT OR IGNORE INTO commerce_purchases
     (purchase_id,product_id,checkout_attempt_id,stripe_checkout_session_id,stripe_payment_intent_id,stripe_customer_id,currency,amount_minor,purchase_state,paid_at,created_at,updated_at,customer_id)
     VALUES (?1,?2,?3,?4,?5,?6,'MYR',?7,'purchased',?8,?8,?8,?9)`)
-    .bind(purchaseId,p.productId,order.checkout_attempt_id,session.id,typeof session.payment_intent==='string'?session.payment_intent:session.payment_intent?.id||null,typeof session.customer==='string'?session.customer:session.customer.id,p.amountMinor,now,order.customer_id),
+    .bind(purchaseId,p.productId,order.checkout_attempt_id,session.id,typeof session.payment_intent==='string'?session.payment_intent:session.payment_intent?.id||null,typeof session.customer==='string'?session.customer:session.customer.id,order.amount_minor,now,order.customer_id),
     db.prepare(`UPDATE commerce_checkout_attempts SET status='paid',order_state=?2,updated_at=?3 WHERE checkout_attempt_id=?1 AND order_state NOT IN ('REFUNDED','PARTIALLY_REFUNDED','FULFILLED')`).bind(order.checkout_attempt_id,paidState,now),
     db.prepare(`INSERT OR IGNORE INTO commerce_receipts (receipt_id,receipt_number,purchase_id,receipt_json,issued_at) VALUES (?1,?2,?3,?4,?5)`)
-      .bind(`rcp_${order.checkout_attempt_id}`,`PHI-QA-${order.checkout_attempt_id}`,purchaseId,JSON.stringify({purchaseId,productId:p.productId,productTitle:p.title,currency:'MYR',amountMinor:p.amountMinor,displayAmount:p.amountMinor/100,issuedAt:now,paymentStatus:'paid',environment:'QA'}),now)];
+      .bind(`rcp_${order.checkout_attempt_id}`,`PHI-QA-${order.checkout_attempt_id}`,purchaseId,JSON.stringify({purchaseId,productId:p.productId,productTitle:p.title,currency:'MYR',amountMinor:order.amount_minor,displayAmount:order.amount_minor/100,reportPresentation:orderReportPresentation(order),issuedAt:now,paymentStatus:'paid',environment:'QA'}),now)];
   if(!human&&!subscription){
     const selected=p.productId.includes('BUNDLE')?JSON.parse(order.selected_products_json):[];
     for(const e of commerceEntitlements(p.productId,selected)) statements.push(db.prepare(`INSERT OR IGNORE INTO digital_entitlements
@@ -140,12 +153,12 @@ export async function refundCommerceOrder(env,object){
 export async function commerceAccountProjection(env,customerId,clock=Date.now){
   const db=dbFrom(env), time=Math.floor(clock()/1000);
   const [orders,entitlements,subscriptions,services]=await Promise.all([
-    db.prepare(`SELECT checkout_attempt_id AS orderId,product_id AS productId,order_state AS state,amount_minor AS amountMinor,currency,review_required AS reviewRequired FROM commerce_checkout_attempts WHERE customer_id=?1 ORDER BY created_at DESC LIMIT 100`).bind(customerId).all(),
+    db.prepare(`SELECT checkout_attempt_id AS orderId,product_id AS productId,order_state AS state,amount_minor AS amountMinor,currency,review_required AS reviewRequired,context_json FROM commerce_checkout_attempts WHERE customer_id=?1 ORDER BY created_at DESC LIMIT 100`).bind(customerId).all(),
     db.prepare(`SELECT product_id AS productId,entitlement_code AS entitlementCode,entitlement_status AS status,watermark_status AS deliveryState FROM digital_entitlements WHERE customer_id=?1 AND entitlement_status='active' AND (expires_at IS NULL OR expires_at>?2)`).bind(customerId,nowIso(clock)).all(),
     db.prepare('SELECT subscription_status AS status,current_period_end AS currentPeriodEnd,paid_until AS paidUntil,cancel_at_period_end AS cancelAtPeriodEnd FROM commerce_subscriptions WHERE customer_id=?1').bind(customerId).all(),
     db.prepare('SELECT product_id AS productId,fulfillment_state AS state,duration_minutes AS durationMinutes,modality FROM commerce_service_fulfillments WHERE customer_id=?1').bind(customerId).all()
   ]);
-  return {orders:orders.results,entitlements:entitlements.results,subscriptions:subscriptions.results.map(s=>({...s,entitlementCode:'PHIOS_MEMBERSHIP',accessGranted:['ACTIVE','CANCEL_AT_PERIOD_END'].includes(s.status)&&s.paidUntil>time&&s.currentPeriodEnd>time})),services:services.results};
+  return {orders:orders.results.map(({context_json,...row})=>({...row,reportPresentation:orderReportPresentation({context_json})})),entitlements:entitlements.results,subscriptions:subscriptions.results.map(s=>({...s,entitlementCode:'PHIOS_MEMBERSHIP',accessGranted:['ACTIVE','CANCEL_AT_PERIOD_END'].includes(s.status)&&s.paidUntil>time&&s.currentPeriodEnd>time})),services:services.results};
 }
 
 function changes(result) {

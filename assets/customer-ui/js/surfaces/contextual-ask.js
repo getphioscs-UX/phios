@@ -255,6 +255,7 @@ function isPaidBoundary(code){return /(ENTITLEMENT|CREDIT|ALLOWANCE|QUOTA|PAID|U
 function boot(){
   const form=document.querySelector('[data-cx-contextual-ask-form]'),status=document.querySelector('[data-cx-contextual-ask-status]');
   if(!form)return;
+  const routing=document.createElement('label');routing.innerHTML=tr('How would you like to continue? ','你想如何继续？ ')+'<select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
   form.dataset.askState=navigator.onLine===false?'OFFLINE':'IDLE';
   form.elements.question.addEventListener('input',()=>{if(form.getAttribute('aria-busy')!=='true')form.dataset.askState=navigator.onLine===false?'OFFLINE':form.elements.question.value.trim()?'COMPOSING':'IDLE';});
   window.addEventListener('offline',()=>{form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');});
@@ -280,7 +281,7 @@ function boot(){
     form.setAttribute('aria-busy','true');const submit=form.querySelector('[type=submit]');if(submit)submit.disabled=true;
     form.dataset.askState='RETRIEVING';
     try{
-      const payload=await postJson('/api/customer-contextual-ask',{question,locale:locale(),...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
+      const payload=await postJson('/api/customer-contextual-ask',{question,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
       view=payload.view;
       form.dataset.askState=['SUFFICIENT','PARTIAL','INSUFFICIENT','AMBIGUOUS','CONTRADICTORY'].includes(view?.qualityOutcome)?view.qualityOutcome:(view?.state||'IDLE');
       render();

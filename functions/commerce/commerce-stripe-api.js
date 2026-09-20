@@ -1,3 +1,4 @@
+import {isLanguageReport,commerceReportQuote,orderReportPresentation} from './report-presentation.js';
 import { normalizeVerifiedSymbolicAccountIdentity } from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
 import { commerceProduct, commerceSelection, STRIPE_PRODUCT_REGISTRY, standardBundleProducts } from '../pws/commercial/stripe-product-registry.js';
 import { createCommerceOrder, commerceOrder, commerceCustomerBinding, bindCommerceCustomer, attachCommerceCheckout, commerceAccountProjection,ownedCommerceBook,issueDownloadToken } from './book-commerce-store.js';
@@ -20,14 +21,14 @@ function sameOrigin(request){
 export async function commerceApi(context,action){
   const {request,env={},fetch:fetcher}=context;
   try{
-    if(action==='catalog') return json({success:true,environment:'QA',liveEnabled:false,checkoutAvailable:env.STRIPE_ENVIRONMENT==='QA'&&env.PHIOS_COMMERCE_QA_ENABLED==='true'&&/^(sk|rk)_test_/.test(env.STRIPE_SECRET_KEY||''),products:STRIPE_PRODUCT_REGISTRY.map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>p),eligibleBundleProducts:standardBundleProducts()});
+    if(action==='catalog') return json({success:true,environment:'QA',liveEnabled:false,checkoutAvailable:env.STRIPE_ENVIRONMENT==='QA'&&env.PHIOS_COMMERCE_QA_ENABLED==='true'&&/^(sk|rk)_test_/.test(env.STRIPE_SECRET_KEY||''),products:STRIPE_PRODUCT_REGISTRY.map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>({...p,reportPresentationOptions:isLanguageReport(p)?['zh-Hans','en','bilingual'].map(reportLocale=>commerceReportQuote(p,{reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'},p.productId.includes('BUNDLE')?standardBundleProducts().slice(0,p.productId.endsWith('-2')?2:p.productId.endsWith('-3')?3:5):[])):null})),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
     if(action==='status'){
       const order=await commerceOrder(env,new URL(request.url).searchParams.get('order_id'),customerId);
       if(!order) return json({success:false,code:'order_not_found'},404);
       // Read-only: redirects and polling can never create entitlements.
-      return json({success:true,order:{orderId:order.checkout_attempt_id,productId:order.product_id,state:order.order_state,amountMinor:order.amount_minor,currency:order.currency,reviewRequired:Boolean(order.review_required)}});
+      return json({success:true,order:{orderId:order.checkout_attempt_id,productId:order.product_id,state:order.order_state,amountMinor:order.amount_minor,currency:order.currency,reviewRequired:Boolean(order.review_required),reportPresentation:orderReportPresentation(order)}});
     }
     const origin=sameOrigin(request);
     if(action==='book-download'){
@@ -50,7 +51,7 @@ export async function commerceApi(context,action){
       const portal=await createCommercePortal(env,binding.stripe_customer_id,origin,fetcher);
       return json({success:true,url:portal.url});
     }
-    const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy']);
+    const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale']);
     if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
     const product=commerceProduct(body.productId), selected=commerceSelection(product.productId,body.selectedProducts||[]);
     // A registered price does not establish that the private book can be delivered.
@@ -62,6 +63,8 @@ export async function commerceApi(context,action){
     const reference=body.context?.readingId;
     if(body.context&&(Object.keys(body.context).some(k=>k!=='readingId')||typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
     const contextSnapshot=reference?{readingId:reference}:{};
+    if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
+    else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
     const requestHash=await sha256Hex(JSON.stringify({productId:product.productId,selected,context:contextSnapshot}));
     const key=await sha256Hex(`COM-STRIPE-R1/QA/${customerId}/${supplied}`);
     const order=await createCommerceOrder({env,customerId,productId:product.productId,selectedProducts:selected,idempotencyKeyHash:key,requestHash,locale:localeFrom(body.locale),context:contextSnapshot});
@@ -76,7 +79,7 @@ export async function commerceApi(context,action){
     const session=await createCommerceCheckoutSession({env,product,order,customerId:binding.stripe_customer_id,origin,locale:order.locale,idempotencyKey:`checkout-${key}`,fetcher});
     if(!/^cs_test_/.test(session.id)||!/^https:\/\/checkout\.stripe\.com\//.test(session.url||'')||!Number.isFinite(session.expires_at)) throw Object.assign(new Error('Invalid QA checkout response.'),{status:502,code:'checkout_response_invalid'});
     await attachCommerceCheckout(env,order,session);
-    commerceLog('CHECKOUT_CREATED',{order_id:order.checkout_attempt_id,checkout_session_id:session.id,product_id:product.productId,amount_minor:product.amountMinor,currency:'MYR'});
+    commerceLog('CHECKOUT_CREATED',{order_id:order.checkout_attempt_id,checkout_session_id:session.id,product_id:product.productId,amount_minor:order.amount_minor,currency:'MYR'});
     return json({success:true,orderId:order.checkout_attempt_id,checkoutUrl:session.url},201);
   }catch(error){return commerceError(error,'commerce_request_failed');}
 }

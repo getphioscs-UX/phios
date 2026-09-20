@@ -10,6 +10,29 @@ export const REPORT_PRODUCT_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products
 export const REPORT_PRICE_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products.map(p=>({price_code:`${p.productCode}-myr`,price_version:version,currency_code:p.currency,amount_minor:p.amountMinor,status:'draft',effective_at:effectiveAt})));
 export const REPORT_OFFER_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products.map(p=>({offer_code:`${p.productCode}-myr`,offer_version:version,display_name:p.productId.replaceAll('_',' '),product_code:p.productCode,product_version:version,price_code:`${p.productCode}-myr`,region_code:'my',customer_segment_code:'public-customer',status:'draft'})));
 export function resolveReportProduct(reference){const p=REPORT_COMMERCE_CONTRACT.products.find(p=>p.productId===reference||p.productCode===reference);if(!p)throw new Error('PWS_REPORT_PRODUCT_NOT_FOUND');return p;}
+export const REPORT_LANGUAGE_PRICING_VERSION='REPORT-LANGUAGE-R2-2026-09-20-CORRECTED';
+export function normalizeReportPresentation(input={}) {
+ const {reportLanguageMode,reportLocale}=input;
+ if(!((reportLanguageMode==='SINGLE'&&['en','zh-Hans'].includes(reportLocale))||(reportLanguageMode==='BILINGUAL'&&reportLocale==='bilingual')))
+  throw Object.assign(new Error('Choose the report language explicitly.'),{code:'REPORT_PRESENTATION_REQUIRED',status:422});
+ return freeze({reportLanguageMode,reportLocale});
+}
+export function quoteReportPresentation(productId,input,selectedProductIds=[]) {
+ const product=resolveReportProduct(productId), presentation=normalizeReportPresentation(input);
+ const plan=mapReportEntitlements(product.productId,selectedProductIds);
+ const surcharge=presentation.reportLanguageMode==='SINGLE'?0:({BUNDLE_2:0,BUNDLE_3:1000,BUNDLE_5PLUS:2000}[product.productId]??1000);
+ return freeze({...presentation,productId:product.productId,currency:product.currency,baseAmountMinor:product.amountMinor,
+  surchargeAmountMinor:surcharge,amountMinor:product.amountMinor+surcharge,pricingVersion:REPORT_LANGUAGE_PRICING_VERSION,
+  modifierRule:presentation.reportLanguageMode==='SINGLE'?'SINGLE_NO_SURCHARGE':product.kind==='BUNDLE'?`${product.productId}_BILINGUAL`:'INDIVIDUAL_BILINGUAL',
+  selectedProductIds:plan.selectedProductIds});
+}
+// The caller must load an active, customer-owned entitlement from Commerce.
+export function requirePurchasedReportPresentation(entitlement,requested) {
+ if(entitlement?.entitlement_status!=='active'||!entitlement.purchase_id)throw Object.assign(new Error('Active purchase required.'),{code:'REPORT_ENTITLEMENT_REQUIRED',status:403});
+ const stored=normalizeReportPresentation(entitlement.reportPresentation);
+ if(requested){const selection=normalizeReportPresentation(requested);if(selection.reportLocale!==stored.reportLocale||selection.reportLanguageMode!==stored.reportLanguageMode)throw Object.assign(new Error('Purchased report language is locked.'),{code:'REPORT_LANGUAGE_ENTITLEMENT_MISMATCH',status:403});}
+ return stored;
+}
 export function eligibleReportIds(bundleId){const p=resolveReportProduct(bundleId);if(p.kind!=='BUNDLE')throw new Error('PWS_REPORT_BUNDLE_REQUIRED');return REPORT_COMMERCE_CONTRACT.eligibilityRegistries.find(r=>r.registryId===p.selection.eligibilityRegistry).productIds;}
 // This returns an entitlement mapping plan, never a grant or payment assertion.
 export function mapReportEntitlements(productId,selectedProductIds=[]){

@@ -1,0 +1,3986 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>视觉设计逐项核对</title><style>body{margin:0;background:#fcfaf5;color:#23364a;font:16px/1.7 system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:24px}h1,h2{font-family:Georgia,serif}a{color:#285a76}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid #cabc9a;padding:12px;text-align:left;vertical-align:top}.table{overflow:auto}details{border-bottom:1px solid #cabc9a;padding:12px 0}summary{cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.65 system-ui}a:focus-visible,summary:focus-visible{outline:3px solid #986536;outline-offset:4px}.notice{border-left:4px solid #986536;padding:12px 18px;background:#f1eadc}button{padding:10px;font:inherit}input{padding:12px;font:inherit;width:min(90%,600px)}@media(max-width:600px){main{padding:16px}th,td{min-width:150px}}</style><main>
+<h1>视觉设计逐项核对</h1><p class="notice">状态：实现进行中；人工视觉验收待完成。记录了全部 241 个章节标题，不等于全部实现。测试稿目前沿用既有动态页面，尚不是八字完整 26 页成品。</p>
+<p><a href="review.html">查看 24 个语言／方法候选稿</a> · <a href="visual-requirement-index.json">完整需求索引</a> · <a href="reference-visual-attachment.md">完整附件原文</a> · <a href="STATUS.md">实现与阻塞状态</a></p>
+<h2>八字 26 页与 M01–M08</h2><p>本表是实现约束。P08 以 M04 为主，允许经审核的 M04／M05 混合。静态 P01–05 遵循当前 L10N-COM-R2 合约；附件示例姓名、数值、四柱、年份不具有计算依据。</p><div class="table"><table><thead><tr><th>母版</th><th>页码</th><th>必需信息槽</th><th>视觉占比目标</th><th>尚需落实与验证</th></tr></thead><tbody><tr><th>M01 · COVER</th><td>1</td><td>identity · birthDetails · pillars · elements · timingMotif</td><td>70–80%</td><td>固定 P01 使用三种语言的独立 R2 纵向封面；现有必需路径未能取到图片。不得把商品横图拉伸，也不得将示例出生资料作为默认值。</td></tr><tr><th>M02 · EDITORIAL</th><td>2, 3, 4, 5</td><td>title · question · diagram · threeKnowledgeBlocks · boundary</td><td>55–65%</td><td>P02–05 静态图、原文和无障碍文本必须一致。120 个必需图片路径均未验证可用；七种方法的 P05 还缺完整双语原文。</td></tr><tr><th>M03 · SNAPSHOT</th><td>6</td><td>fourPillars · dayMaster · season · elements · primaryPattern · keyTension · observe</td><td>75–85%</td><td>现有四柱图尚未组成完整快照：四柱纵卡、日主／季节、五行与 Primary／Tension／Observe 的组合仍待绑定。</td></tr><tr><th>M04 · STRUCTURE</th><td>7, 8, 12, 13, 14, 15</td><td>core · support · tension · expression · condition</td><td>60–75%</td><td>现有结构图可显示来源数据；核心、支撑、张力、表达与条件的专属母版，以及最多三张卡片仍待逐页绑定。</td></tr><tr><th>M05 · DISTRIBUTION</th><td>9, 10, 11</td><td>distribution · rankedBars · relationships · balance · tension</td><td>60–75%</td><td>现有数值图组件保留真实数据要求。Donut＋排序条、五行网络、平衡矩阵的完整页面绑定与手机堆叠仍待验证。</td></tr><tr><th>M06 · DOMAIN</th><td>16, 17, 18, 19</td><td>domain · structure · environment · condition · helps · costs · observe</td><td>60–75%</td><td>关系／事业／资源图仍需分别绑定领域结构、条件、helps／costs／observe，不应只换标题或颜色。</td></tr><tr><th>M07 · TIMING</th><td>20, 21, 22</td><td>baseline · timingLayer · selectedPeriod · currentEvidence</td><td>60–75%</td><td>需完整绑定 baseline／timing／period／current evidence，并验证缺数据时 DATA_REQUIRED；不得用示例年份或虚构能量曲线。</td></tr><tr><th>M08 · NAVIGATION</th><td>23, 24, 25, 26</td><td>notice · compare · test · review · sourceLineage · boundary</td><td>45–55%</td><td>需绑定 WHEN／OBSERVE／COUNTER-SIGNAL、Opportunity／Condition／Risk、Notice→Compare→Test→Review 和完整 lineage。</td></tr></tbody></table></div>
+<h2>跨页面要求</h2><ul><li>只使用六类卡片：PRIMARY_INSIGHT、CONDITION、OBSERVATION、CURRENT_EVIDENCE、OPEN_QUESTION、SOURCE_LINEAGE；标题／2–4 行正文／状态标记。</li><li>锁定页保留图表家族轮廓。当前四类骨架只是候选，需要继续验证与实际付费母版的一致性。</li><li>390／768／1440px；图表不可靠横向溢出维持布局；减少动态效果偏好必须生效。</li><li>A4 15–18mm 边距；同一 Page IR；图表和卡片组不拆页。已调整为 15mm，完整 PDF 尚缺静态页与完整页面绑定。</li><li>商品图、免费版、付费版、PDF 的品质连续性需要人工验收，机器通过不代替该验收。</li></ul>
+<h2>全部附件章节</h2><label>搜索标题 <input id="filter" type="search" placeholder="例如 M05、Mobile、W30"></label><p>每节可展开原文；未获具体实现及验收证据的条目保留待核对。</p>
+<details data-heading="五｜建立 8 个八字 interior master templates"><summary>五｜建立 8 个八字 Interior Master Templates · 待核对 · 原文第 1 行</summary><pre># 五｜建立 8 个八字 Interior Master Templates
+
+---
+</pre></details><details data-heading="master bz-m01"><summary>MASTER BZ-M01 · 待核对 · 原文第 5 行</summary><pre># MASTER BZ-M01
+</pre></details><details data-heading="cover / opening"><summary>Cover / Opening · 待核对 · 原文第 7 行</summary><pre># Cover / Opening
+
+适用：
+
+```
+Page 01
+```
+
+目标：
+
+&gt; 商品图进入报告后的第一张真正报告页。
+
+不要直接把商品 WebP 贴满 A4。
+
+应该把商品视觉语言重构为纵向 report cover。
+</pre></details><details data-heading="layout"><summary>Layout · 待核对 · 原文第 23 行</summary><pre>### Layout
+
+```
+┌──────────────────────────────┐
+│            PHI OS            │
+│                              │
+│       八字完整报告             │
+│       BAZI FULL REPORT       │
+│                              │
+│   Structure · Timing ·       │
+│   Life Pattern               │
+│                              │
+│          [四柱视觉]           │
+│             │                │
+│       [五行环结构]            │
+│             │                │
+│        [时间轨迹]             │
+│                              │
+│      Customer Name           │
+│      Birth Details           │
+│                              │
+│ Your life, in context.       │
+└──────────────────────────────┘
+```
+
+主视觉占约 55%。
+
+---
+</pre></details><details data-heading="master bz-m02"><summary>MASTER BZ-M02 · 待核对 · 原文第 52 行</summary><pre># MASTER BZ-M02
+</pre></details><details data-heading="editorial method page"><summary>Editorial Method Page · 待核对 · 原文第 54 行</summary><pre># Editorial Method Page
+
+适用：
+
+```
+02 What Is BaZi?
+03 Why Has BaZi Endured?
+04 PHI OS Lens
+05 How to Read
+```
+
+虽然四页内容不同，但视觉骨架相同。
+</pre></details><details data-heading="layout"><summary>Layout · 待核对 · 原文第 67 行</summary><pre>### Layout
+
+```
+┌─────────────────────────────┐
+│ 02                          │
+│ 什么是八字？                  │
+│ WHAT IS BAZI?               │
+│                             │
+│ ┌─────────────────────────┐ │
+│ │                         │ │
+│ │     PRIMARY DIAGRAM     │ │
+│ │                         │ │
+│ └─────────────────────────┘ │
+│                             │
+│ [BLOCK A] [BLOCK B] [BLOCK C]
+│                             │
+│ Boundary / key sentence     │
+└─────────────────────────────┘
+```
+
+视觉占：
+
+```
+60–65%
+```
+
+文字：
+
+```
+25–30%
+```
+
+剩余：
+
+```
+labels / whitespace
+```
+
+---
+</pre></details><details data-heading="m02-a｜what is bazi"><summary>M02-A｜What is BaZi · 待核对 · 原文第 107 行</summary><pre>## M02-A｜What is BaZi
+
+主视觉：
+
+```
+Birth Data
+→ Four Pillars
+→ Stems / Branches
+→ Five Elements
+→ Timing
+```
+
+---
+</pre></details><details data-heading="m02-b｜history"><summary>M02-B｜History · 待核对 · 原文第 121 行</summary><pre>## M02-B｜History
+
+主视觉改成：
+
+```
+Continuity Timeline
+```
+
+用 6 个节点。
+
+可以加入非常轻的传统文献纹理，但不能变成古籍页。
+
+---
+</pre></details><details data-heading="m02-c｜phi os lens"><summary>M02-C｜PHI OS Lens · 待核对 · 原文第 135 行</summary><pre>## M02-C｜PHI OS Lens
+
+主视觉：
+
+```
+Method
+→ Projection
+→ Interpretation
+→ Current Evidence
+→ Navigation
+```
+
+这是现代系统图。
+
+---
+</pre></details><details data-heading="m02-d｜how to read"><summary>M02-D｜How to Read · 待核对 · 原文第 151 行</summary><pre>## M02-D｜How to Read
+
+主视觉：
+
+```
+CALCULATED
+INTERPRETED
+CURRENT EVIDENCE
+OPEN
+```
+
+最好做四层透明卡片，不用流程箭头堆太多。
+
+---
+</pre></details><details data-heading="master bz-m03"><summary>MASTER BZ-M03 · 待核对 · 原文第 166 行</summary><pre># MASTER BZ-M03
+</pre></details><details data-heading="premium snapshot dashboard"><summary>Premium Snapshot Dashboard · 待核对 · 原文第 168 行</summary><pre># Premium Snapshot Dashboard
+
+适用：
+
+```
+06 Your BaZi Snapshot
+```
+
+这是整份报告最重要的一页之一。
+
+客户如果截一张图分享，很可能就是这一页。
+</pre></details><details data-heading="layout"><summary>Layout · 待核对 · 原文第 180 行</summary><pre>### Layout
+
+```
+┌─────────────────────────────────┐
+│ 你的八字总览                     │
+│ YOUR BAZI SNAPSHOT              │
+│                                 │
+│      ┌──────┬──────┬──────┬──────┐
+│      │ YEAR │MONTH │ DAY  │ HOUR │
+│      └──────┴──────┴──────┴──────┘
+│                                 │
+│   [DAY MASTER]   [SEASON]       │
+│                                 │
+│      ┌────────────────┐         │
+│      │ FIVE ELEMENTS  │         │
+│      │   RADIAL MAP   │         │
+│      └────────────────┘         │
+│                                 │
+│ ┌────────┐ ┌────────┐ ┌───────┐ │
+│ │Primary │ │Tension │ │Observe│ │
+│ └────────┘ └────────┘ └───────┘ │
+└─────────────────────────────────┘
+```
+</pre></details><details data-heading="视觉语言"><summary>视觉语言 · 待核对 · 原文第 204 行</summary><pre>### 视觉语言
+
+- Four Pillars = vertical premium data cards
+- Five Elements = 环形或平衡图
+- Main insight = 3 个 compact cards
+
+不能出现：
+
+```
+一大段 300 字总评
+```
+
+---
+</pre></details><details data-heading="master bz-m04"><summary>MASTER BZ-M04 · 待核对 · 原文第 218 行</summary><pre># MASTER BZ-M04
+</pre></details><details data-heading="structural deep analysis"><summary>Structural Deep Analysis · 待核对 · 原文第 220 行</summary><pre># Structural Deep Analysis
+
+适用：
+
+```
+07 日主与季节
+11 主模式
+12 次级模式
+13 可用优势
+14 摩擦
+15 自我与方向
+```
+
+这是最常用的一种母版。
+</pre></details><details data-heading="layout"><summary>Layout · 待核对 · 原文第 235 行</summary><pre>### Layout
+
+```
+┌─────────────────────────────┐
+│ TITLE                        │
+│ ONE CUSTOMER QUESTION        │
+│                              │
+│         [CORE]               │
+│       /   |    \             │
+│     A     B     C            │
+│    /             \           │
+│ Condition      Support       │
+│                              │
+│ ┌──────────┐ ┌──────────┐    │
+│ │ Insight  │ │ Condition│    │
+│ └──────────┘ └──────────┘    │
+│                              │
+│ WHAT TO OBSERVE              │
+└─────────────────────────────┘
+```
+
+视觉约 60%。
+
+可根据页面切换：
+
+```
+central node
+layer stack
+structural balance
+condition tree
+```
+
+但骨架一致。
+
+---
+</pre></details><details data-heading="master bz-m05"><summary>MASTER BZ-M05 · 待核对 · 原文第 271 行</summary><pre># MASTER BZ-M05
+</pre></details><details data-heading="distribution / relationship analysis"><summary>Distribution / Relationship Analysis · 待核对 · 原文第 273 行</summary><pre># Distribution / Relationship Analysis
+
+适用：
+
+```
+08 五行分布
+09 五行关系
+10 平衡与张力
+```
+
+这三页是八字最能显示“分析感”的位置。
+
+---
+</pre></details><details data-heading="m05-a｜五行分布"><summary>M05-A｜五行分布 · 待核对 · 原文第 287 行</summary><pre>## M05-A｜五行分布
+</pre></details><details data-heading="layout"><summary>Layout · 待核对 · 原文第 289 行</summary><pre>### Layout
+
+左：
+
+```
+large donut / radial
+```
+
+右：
+
+```
+ranked bars
+```
+
+底：
+
+```
+3 insight chips
+```
+
+例如：
+
+```
+DOMINANT
+BALANCE
+UNDER-REPRESENTED
+```
+
+必须真实数值。
+
+---
+</pre></details><details data-heading="m05-b｜五行关系"><summary>M05-B｜五行关系 · 待核对 · 原文第 321 行</summary><pre>## M05-B｜五行关系
+
+主视觉：
+
+```
+WOOD → FIRE → EARTH → METAL → WATER
+↑                           ↓
+relation overlays
+```
+
+但不要画成课堂教材。
+
+建议使用：
+
+- fine gold curves
+- copper highlights
+- navy labels
+- subtle glowing nodes
+
+---
+</pre></details><details data-heading="m05-c｜balance &amp; tension"><summary>M05-C｜Balance &amp; Tension · 待核对 · 原文第 342 行</summary><pre>## M05-C｜Balance &amp; Tension
+
+做成：
+
+```
+SUPPORT  |  BALANCE  |  TENSION
+```
+
+中央 matrix。
+
+不要把“张力”画成红色危险警告。
+
+---
+</pre></details><details data-heading="master bz-m06"><summary>MASTER BZ-M06 · 待核对 · 原文第 356 行</summary><pre># MASTER BZ-M06
+</pre></details><details data-heading="domain analysis"><summary>Domain Analysis · 待核对 · 原文第 358 行</summary><pre># Domain Analysis
+
+适用：
+
+```
+16 关系
+17 事业
+18 资源
+```
+
+未来如果有更多 domain page 也用这一套。
+</pre></details><details data-heading="layout"><summary>Layout · 待核对 · 原文第 370 行</summary><pre>### Layout
+
+```
+┌───────────────────────────────┐
+│ DOMAIN TITLE                  │
+│                               │
+│        PRIMARY DOMAIN         │
+│             ○                 │
+│        ╱    │    ╲            │
+│   STRUCT  RESOURCE CONDITION  │
+│                               │
+│ ┌────────────┐ ┌────────────┐ │
+│ │ What helps │ │ What costs │ │
+│ └────────────┘ └────────────┘ │
+│                               │
+│ WHAT TO OBSERVE               │
+└───────────────────────────────┘
+```
+
+---
+</pre></details><details data-heading="relationship page"><summary>Relationship Page · 待核对 · 原文第 391 行</summary><pre>## Relationship Page
+
+主视觉：
+
+```
+SELF
+↔ PARTNER
+↔ FAMILY
+↔ SOCIAL
+```
+
+---
+</pre></details><details data-heading="career page"><summary>Career Page · 待核对 · 原文第 404 行</summary><pre>## Career Page
+
+```
+INPUT
+↓
+WORK STYLE
+↓
+OUTPUT
+↓
+RESPONSIBILITY
+↓
+DIRECTION
+```
+
+---
+</pre></details><details data-heading="resources page"><summary>Resources Page · 待核对 · 原文第 420 行</summary><pre>## Resources Page
+
+```
+SOURCE
+→ FLOW
+→ HOLDING
+→ OUTPUT
+→ PRESSURE
+```
+
+统一 visual language。
+
+---
+</pre></details><details data-heading="master bz-m07"><summary>MASTER BZ-M07 · 待核对 · 原文第 434 行</summary><pre># MASTER BZ-M07
+</pre></details><details data-heading="timing / current reality"><summary>Timing / Current Reality · 待核对 · 原文第 436 行</summary><pre># Timing / Current Reality
+
+适用：
+
+```
+19 时间结构
+20 当前周期
+21 当前现实
+```
+
+这一套视觉必须明显区别于 structure pages。
+</pre></details><details data-heading="layout"><summary>Layout · 待核对 · 原文第 448 行</summary><pre>### Layout
+
+```
+┌─────────────────────────────┐
+│ TIMING                      │
+│                             │
+│ ●─────●─────●─────●─────●   │
+│       timeline              │
+│                             │
+│       CURRENT WINDOW        │
+│      ┌───────────────┐      │
+│      │               │      │
+│      └───────────────┘      │
+│                             │
+│ Baseline      Current       │
+│ ┌───────┐ VS ┌────────┐     │
+│ └───────┘    └────────┘     │
+│                             │
+│ OBSERVE                     │
+└─────────────────────────────┘
+```
+
+---
+</pre></details><details data-heading="timing architecture"><summary>Timing Architecture · 待核对 · 原文第 472 行</summary><pre>## Timing Architecture
+
+长时间线。
+
+---
+</pre></details><details data-heading="current period"><summary>Current Period · 待核对 · 原文第 478 行</summary><pre>## Current Period
+
+放大当前 window。
+
+---
+</pre></details><details data-heading="current reality"><summary>Current Reality · 待核对 · 原文第 484 行</summary><pre>## Current Reality
+
+改成 Split Compare：
+
+```
+BAZI BASELINE
+       VS
+CURRENT REALITY
+```
+
+左右对称。
+
+状态 badge：
+
+```
+CURRENTLY RESONANT
+PARTIALLY RESONANT
+CURRENTLY NOT RESONANT
+OPEN
+```
+
+---
+</pre></details><details data-heading="master bz-m08"><summary>MASTER BZ-M08 · 待核对 · 原文第 507 行</summary><pre># MASTER BZ-M08
+</pre></details><details data-heading="signals / navigation / closing"><summary>Signals / Navigation / Closing · 待核对 · 原文第 509 行</summary><pre># Signals / Navigation / Closing
+
+适用：
+
+```
+22 Observable Signals
+23 Opportunities &amp; Risks
+24 Reality Navigation
+25/26 Evidence + Boundary
+```
+
+因为我们加入历史页后，最终顺序可能是 26 页；Codex 应按 canonical blueprint 实际编号。
+
+---
+</pre></details><details data-heading="m08-a｜signals"><summary>M08-A｜Signals · 待核对 · 原文第 524 行</summary><pre>## M08-A｜Signals
+
+三个 large cards：
+
+```
+WHEN
+OBSERVE
+COUNTER-SIGNAL
+```
+
+---
+</pre></details><details data-heading="m08-b｜opportunity / risk"><summary>M08-B｜Opportunity / Risk · 待核对 · 原文第 536 行</summary><pre>## M08-B｜Opportunity / Risk
+
+左：
+
+```
+OPPORTUNITY
+```
+
+右：
+
+```
+RISK
+```
+
+中间：
+
+```
+CONDITION
+```
+
+不是绿色 vs 红色。
+
+建议：
+
+- opportunity = muted gold / jade
+- risk = copper / muted graphite
+
+保持高级。
+
+---
+</pre></details><details data-heading="m08-c｜navigation"><summary>M08-C｜Navigation · 待核对 · 原文第 567 行</summary><pre>## M08-C｜Navigation
+
+主视觉：
+
+```
+NOTICE
+   ↓
+COMPARE
+   ↓
+TEST
+   ↓
+REVIEW
+```
+
+用道路 / navigation geometry，但不要画成地图图标。
+
+---
+</pre></details><details data-heading="m08-d｜evidence &amp; closing"><summary>M08-D｜Evidence &amp; Closing · 待核对 · 原文第 585 行</summary><pre>## M08-D｜Evidence &amp; Closing
+
+最重要的是 lineage：
+
+```
+Birth Data
+↓
+Calculation
+↓
+Projection
+↓
+Claim
+↓
+Interpretation
+↓
+Current Evidence
+↓
+Report
+```
+
+最后 Closing 放在很大的留白内：
+
+&gt; 这份八字报告提供的是一种结构与时间视角，而不是对你人生的最终定义。
+
+只留这一小段，不要再堆很多免责声明。
+
+---
+</pre></details><details data-heading="六｜建立统一的 bazi card system"><summary>六｜建立统一的 BAZI Card System · 待核对 · 原文第 613 行</summary><pre># 六｜建立统一的 BAZI Card System
+
+所有卡片统一只有 6 类。
+
+Codex 不允许自己发明第 7、第 8 种卡。
+</pre></details><details data-heading="`bz-card-01`"><summary>`BZ-CARD-01` · 待核对 · 原文第 619 行</summary><pre>### `BZ-CARD-01`
+
+Primary Insight
+</pre></details><details data-heading="`bz-card-02`"><summary>`BZ-CARD-02` · 待核对 · 原文第 623 行</summary><pre>### `BZ-CARD-02`
+
+Condition
+</pre></details><details data-heading="`bz-card-03`"><summary>`BZ-CARD-03` · 待核对 · 原文第 627 行</summary><pre>### `BZ-CARD-03`
+
+Observation
+</pre></details><details data-heading="`bz-card-04`"><summary>`BZ-CARD-04` · 待核对 · 原文第 631 行</summary><pre>### `BZ-CARD-04`
+
+Current Evidence
+</pre></details><details data-heading="`bz-card-05`"><summary>`BZ-CARD-05` · 待核对 · 原文第 635 行</summary><pre>### `BZ-CARD-05`
+
+Open Question
+</pre></details><details data-heading="`bz-card-06`"><summary>`BZ-CARD-06` · 待核对 · 原文第 639 行</summary><pre>### `BZ-CARD-06`
+
+Source / Lineage
+
+---
+</pre></details><details data-heading="七｜统一 insight card 视觉"><summary>七｜统一 Insight Card 视觉 · 待核对 · 原文第 645 行</summary><pre># 七｜统一 Insight Card 视觉
+
+例如：
+
+```
+┌───────────────────────┐
+│ PRIMARY PATTERN       │
+│                       │
+│ 结构在……条件下更容易   │
+│ 强调……                 │
+│                       │
+│ STRUCTURAL            │
+└───────────────────────┘
+```
+
+顶部 label。
+
+正文 2–4 行。
+
+底部小 badge。
+
+不要一张 card 写 100 字。
+
+---
+</pre></details><details data-heading="八｜锁页 preview 也必须使用同样的视觉母版"><summary>八｜锁页 Preview 也必须使用同样的视觉母版 · 待核对 · 原文第 670 行</summary><pre># 八｜锁页 Preview 也必须使用同样的视觉母版
+
+Free Web 不要重新设计一套 locked card。
+
+例如 Paid Page 09 是五行关系：
+
+Paid：
+
+```
+完整 network
++
+3 insights
+```
+
+Free locked preview：
+
+```
+同一个 M05 模板
++
+network skeleton
++
+部分节点可见
++
+detail nodes locked
+```
+
+这叫：
+
+&gt; **progressive disclosure**
+
+而不是另做一张营销卡。
+
+---
+</pre></details><details data-heading="九｜网页与报告的连续关系"><summary>九｜网页与报告的连续关系 · 待核对 · 原文第 704 行</summary><pre># 九｜网页与报告的连续关系
+
+八字网页最终应该直接使用同一个：
+
+```
+BAZI Report Page Renderer
+```
+</pre></details><details data-heading="free"><summary>Free · 待核对 · 原文第 712 行</summary><pre>### Free
+
+```
+P01 OPEN
+P02 OPEN
+P03 OPEN
+P04 OPEN
+P05 OPEN
+P06 OPEN
+P07+ entitlement rules
+```
+</pre></details><details data-heading="paid web"><summary>Paid Web · 待核对 · 原文第 724 行</summary><pre>### Paid Web
+
+```
+all eligible pages OPEN
+```
+</pre></details><details data-heading="pdf"><summary>PDF · 待核对 · 原文第 730 行</summary><pre>### PDF
+
+```
+all eligible paid pages
+without lock UI
+```
+
+没有：
+
+```
+web marketing renderer
+paid report renderer
+PDF report renderer
+```
+
+三套内容系统。
+
+---
+</pre></details><details data-heading="十｜bazi web hero 也需要整改"><summary>十｜BAZI Web Hero 也需要整改 · 待核对 · 原文第 749 行</summary><pre># 十｜BAZI Web Hero 也需要整改
+
+现在既然网页就是 Free Report 前页，Hero 也应该变。
+
+建议结构：
+
+```
+[COM-REPORT-BAZI-FULL visual]
+
+八字完整报告
+BAZI FULL REPORT
+
+Structure, timing, and life pattern.
+
+[Start / Continue My Reading]
+```
+
+Hero 后面不要：
+
+```
+800 字介绍八字是什么
+```
+
+直接进入：
+
+```
+02 What Is BaZi?
+```
+
+也就是网页是：
+
+```
+Hero
+↓
+Page 02
+↓
+Page 03
+↓
+Page 04
+↓
+Page 05
+↓
+Page 06
+↓
+Report Map
+↓
+Locked continuation
+```
+
+非常自然。
+
+---
+</pre></details><details data-heading="十一｜visual density 进一步冻结"><summary>十一｜Visual Density 进一步冻结 · 待核对 · 原文第 802 行</summary><pre># 十一｜Visual Density 进一步冻结
+
+八字报告中：
+</pre></details><details data-heading="cover"><summary>Cover · 待核对 · 原文第 806 行</summary><pre>### Cover
+
+visual 70–80%
+</pre></details><details data-heading="editorial pages"><summary>Editorial pages · 待核对 · 原文第 810 行</summary><pre>### Editorial pages
+
+visual 55–65%
+</pre></details><details data-heading="analysis pages"><summary>Analysis pages · 待核对 · 原文第 814 行</summary><pre>### Analysis pages
+
+visual 60–75%
+</pre></details><details data-heading="dashboard"><summary>Dashboard · 待核对 · 原文第 818 行</summary><pre>### Dashboard
+
+visual/data 75–85%
+</pre></details><details data-heading="closing"><summary>Closing · 待核对 · 原文第 822 行</summary><pre>### Closing
+
+visual 45–55%  
+留白更多。
+
+---
+</pre></details><details data-heading="十二｜图表不能成为“装饰”"><summary>十二｜图表不能成为“装饰” · 待核对 · 原文第 829 行</summary><pre># 十二｜图表不能成为“装饰”
+
+每个 chart 必须回答一个问题。
+
+例如：
+</pre></details><details data-heading="五行 donut"><summary>五行 Donut · 待核对 · 原文第 835 行</summary><pre>### 五行 Donut
+
+问题：
+
+&gt; 元素分布如何？
+</pre></details><details data-heading="五行 network"><summary>五行 Network · 待核对 · 原文第 841 行</summary><pre>### 五行 Network
+
+问题：
+
+&gt; 元素之间怎样作用？
+</pre></details><details data-heading="timing"><summary>Timing · 待核对 · 原文第 847 行</summary><pre>### Timing
+
+问题：
+
+&gt; 结构重点如何随时间变化？
+
+如果一个图不能回答问题，就不应该出现。
+
+---
+</pre></details><details data-heading="十三｜bazi premium motion language"><summary>十三｜BAZI Premium Motion Language · 待核对 · 原文第 857 行</summary><pre># 十三｜BAZI Premium Motion Language
+
+网页上可以增加轻量 animation，但 PDF 保持静态。
+
+允许：
+
+- lines slowly draw
+- node highlight on scroll
+- timeline reveal
+- chart label fade-in
+
+禁止：
+
+- floating fortune particles
+- sparkles everywhere
+- rotating mystical wheel
+- distracting parallax
+
+---
+</pre></details><details data-heading="十四｜mobile master"><summary>十四｜Mobile Master · 待核对 · 原文第 877 行</summary><pre># 十四｜Mobile Master
+
+390px 不能只是把 desktop 缩小。
+
+例如 Five Element distribution：
+
+Desktop：
+
+```
+Donut + bars side by side
+```
+
+Mobile：
+
+```
+Donut
+↓
+bars
+↓
+insights
+```
+
+Network：
+
+Desktop：
+
+```
+full horizontal
+```
+
+Mobile：
+
+```
+contained square / vertical mapping
+```
+
+不能横向挤爆。
+
+---
+</pre></details><details data-heading="十五｜a4 print master"><summary>十五｜A4 Print Master · 待核对 · 原文第 917 行</summary><pre># 十五｜A4 Print Master
+
+建议：
+
+```
+15mm–18mm margin
+```
+
+图表尽量 SVG。
+
+每页：
+
+```
+title
+question
+visual
+insights
+```
+
+必须 `break-inside: avoid`。
+
+不要：
+
+```
+一张 chart 被分页切两半
+```
+
+---
+</pre></details><details data-heading="十六｜visual master → 26 页映射表"><summary>十六｜Visual Master → 26 页映射表 · 待核对 · 原文第 946 行</summary><pre># 十六｜Visual Master → 26 页映射表
+
+正式可以冻结成：
+
+|页面|Master|
+|---|---|
+|01 Cover|M01|
+|02 What is BaZi|M02|
+|03 History|M02|
+|04 PHI OS Lens|M02|
+|05 How to Read|M02|
+|06 Snapshot|M03|
+|07 Day Master / Season|M04|
+|08 Four Pillars|M04 / M05 hybrid|
+|09 Five Elements|M05|
+|10 Element Relationships|M05|
+|11 Balance / Tension|M05|
+|12 Primary Pattern|M04|
+|13 Secondary Patterns|M04|
+|14 Strength / Resources|M04|
+|15 Friction|M04|
+|16 Self / Direction|M06|
+|17 Relationships|M06|
+|18 Career|M06|
+|19 Resources / Money|M06|
+|20 Timing|M07|
+|21 Current Period|M07|
+|22 Current Reality|M07|
+|23 Observable Signals|M08|
+|24 Opportunities / Risks|M08|
+|25 Reality Navigation|M08|
+|26 Evidence / Boundary|M08|
+
+这就是 Codex 真正需要的“视觉设计约束”。
+
+```
+More tired
+更累了
+
+More stressed
+压力更大
+
+Less motivated
+更没动力
+
+More irritable
+更容易烦躁
+
+Stronger desire to change
+更想改变
+
+Harder to make decisions
+更难做决定
+
+More friction with other people
+跟别人更容易有摩擦
+
+Losing interest in things I used to enjoy
+对原本喜欢的东西失去兴趣
+
+Nothing outside changed, but I feel different
+事情其实没有变，但我感觉自己变了
+
+I still can't explain it
+我还是说不上来
+```
+
+Then:
+
+```
+Where is this change most obvious?
+这种变化最明显出现在哪里？
+```
+
+Options:
+
+```
+Work
+Relationships
+Family
+Money
+Body / Energy
+Environment
+Direction
+Everywhere
+```
+
+Do not diagnose.
+
+---
+</pre></details><details data-heading="9｜capability discovery for users who do not know phi os"><summary>9｜CAPABILITY DISCOVERY FOR USERS WHO DO NOT KNOW PHI OS · 待核对 · 原文第 1037 行</summary><pre># 9｜CAPABILITY DISCOVERY FOR USERS WHO DO NOT KNOW PHI OS
+
+Do not explain all methods first.
+
+Show six visual question cards:
+
+```
+WHY IS THIS HAPPENING?
+为什么现在会这样？
+
+IS THIS A REPEATING PATTERN?
+这是长期重复模式吗？
+
+WHAT IS CHANGING?
+现在正在发生什么变化？
+
+HOW DO I TEND TO OPERATE?
+我通常怎样运行？
+
+WHAT SHOULD I COMPARE?
+几个选择应该怎样比较？
+
+WHAT SHOULD I OBSERVE NEXT?
+接下来最值得观察什么？
+```
+
+Selecting a card helps form routing intent.
+
+Do not claim that one method is objectively “best”.
+
+---
+</pre></details><details data-heading="10｜reality summary"><summary>10｜REALITY SUMMARY · 待核对 · 原文第 1069 行</summary><pre># 10｜REALITY SUMMARY
+
+After QUICK/GUIDED/DEEP intake, generate a structured customer-readable summary before method execution.
+
+Example form:
+
+```
+We currently understand:
+
+You have experienced a significant work-environment change over the last three months.
+
+Your main concern is not income but sustained energy and loss of direction.
+
+You want to understand whether this is:
+• temporary adaptation,
+• structural mismatch,
+• or a current phase of change.
+
+Current supporting evidence:
+• energy has decreased,
+• motivation has decreased.
+
+Counter-evidence:
+• work performance remains stable.
+```
+
+Buttons:
+
+```
+Yes, this is accurate
+是的，这很准确
+
+Edit
+修改
+
+Something is missing
+还少了什么
+```
+
+Only confirmed summary may be promoted into governed Current Reality evidence.
+
+Do not treat an LLM-generated summary as evidence before customer confirmation.
+
+---
+</pre></details><details data-heading="11｜method guidance"><summary>11｜METHOD GUIDANCE · 待核对 · 原文第 1114 行</summary><pre># 11｜METHOD GUIDANCE
+
+Method guidance occurs after Reality Summary unless:
+
+```
+user already selected a method
+```
+
+Guidance output:
+
+```
+PRIMARY RECOMMENDATION
+maximum 1
+
+ALTERNATIVE PERSPECTIVES
+maximum 2
+```
+
+Language:
+
+```
+Based on what you want to explore,
+BaZi may be a useful first perspective.
+```
+
+Never:
+
+```
+BaZi is the best method for you.
+```
+
+The recommendation is:
+
+```
+QUESTION ↔ METHOD FIT
+```
+
+not:
+
+```
+PERSON ↔ DESTINY METHOD
+```
+
+---
+</pre></details><details data-heading="12｜method routing metadata"><summary>12｜METHOD ROUTING METADATA · 待核对 · 原文第 1159 行</summary><pre># 12｜METHOD ROUTING METADATA
+
+Extend existing Method Registry.
+
+Do not create a second method registry.
+
+Add a governed field such as:
+
+```
+methodRoutingProfile
+```
+
+Final field names must follow current repository conventions after inspection.
+
+Support concepts:
+
+```
+strongFor[]
+usefulFor[]
+lessDirectFor[]
+requires[]
+supportsTiming
+supportsCurrentRealityComparison
+supportsImmediateQuestion
+supportsBaselineStructure
+supportsDecisionObservation
+```
+
+This metadata is routing metadata only.
+
+It must not become semantic authority.
+
+Example conceptual mappings:
+
+```
+BAZI
+strongFor:
+baseline_structure
+timing
+resource_patterns
+relationship_structure
+career_structure
+```
+
+```
+ASTROLOGY
+strongFor:
+natal_structure
+life_domains
+relationships
+timing
+current_phase
+```
+
+```
+ZI_WEI
+strongFor:
+life_domains
+relationships
+career
+resources
+timing
+```
+
+```
+NUMEROLOGY
+strongFor:
+numerical_patterns
+cycles
+repetition
+rhythm
+```
+
+```
+PROFILE
+strongFor:
+multi_evidence_profile
+work_style
+career_interest
+behavioral_patterns
+evidence_conflicts
+```
+
+```
+ECR
+strongFor:
+runtime_pattern
+current_operation
+environment_load
+structure_context_comparison
+current_reality
+```
+
+```
+HUMAN_DESIGN
+strongFor:
+decision_mechanics
+interaction_strategy
+centers
+environment
+advanced_configuration
+```
+
+```
+CROSS
+strongFor:
+multiple_existing_readings
+conflicting_interpretations
+cross_method_synthesis
+```
+
+CROSS must fail closed if required admitted upstream reading evidence is missing.
+
+---
+</pre></details><details data-heading="13｜method-specific reality probes"><summary>13｜METHOD-SPECIFIC REALITY PROBES · 待核对 · 原文第 1274 行</summary><pre># 13｜METHOD-SPECIFIC REALITY PROBES
+
+Do not build a second questionnaire system.
+
+After method output exists, ask only 2–4 high-information-gain probes where useful.
+
+Probe answers feed Current Reality only after explicit customer confirmation.
+
+---
+</pre></details><details data-heading="bazi"><summary>BAZI · 待核对 · 原文第 1284 行</summary><pre>## BAZI
+
+Possible probes:
+
+```
+Where has the biggest change occurred in the last year?
+
+Work
+Relationships
+Resources
+Living environment
+Responsibility
+Direction
+No major change
+```
+
+and:
+
+```
+How did the change happen?
+
+Suddenly
+Gradually
+External event
+My own decision
+Not sure
+```
+
+---
+</pre></details><details data-heading="astrology"><summary>ASTROLOGY · 待核对 · 原文第 1314 行</summary><pre>## ASTROLOGY
+
+Possible probe:
+
+```
+Which feels most true right now?
+
+Starting a new phase
+Ending an old phase
+Taking on more responsibility
+Redefining a relationship
+Changing work direction
+Changing living environment
+Internal change is stronger than external change
+No obvious change
+```
+
+---
+</pre></details><details data-heading="zi wei"><summary>ZI WEI · 待核对 · 原文第 1333 行</summary><pre>## ZI WEI
+
+Ask customer-facing life-domain language.
+
+Do not expose technical palace terminology unless requested.
+
+Example:
+
+```
+Which area currently occupies most of your attention?
+
+Self / direction
+Work
+Relationship
+Family
+Resources
+Environment / movement
+Current phase
+```
+
+---
+</pre></details><details data-heading="numerology"><summary>NUMEROLOGY · 待核对 · 原文第 1355 行</summary><pre>## NUMEROLOGY
+
+Possible probe:
+
+```
+Have you noticed a repeating theme recently?
+
+Repeating similar decisions
+Repeating relationship pattern
+Repeated direction changes
+Repeated starts and stops
+No obvious repetition
+```
+
+---
+</pre></details><details data-heading="profile"><summary>PROFILE · 待核对 · 原文第 1371 行</summary><pre>## PROFILE
+
+Possible probe:
+
+```
+Are you similar under normal conditions and under pressure?
+
+Very similar
+Somewhat different
+Very different
+Not sure
+```
+
+---
+</pre></details><details data-heading="ecr"><summary>ECR · 待核对 · 原文第 1386 行</summary><pre>## ECR
+
+Possible probe:
+
+```
+Which feels closest?
+
+I know what to do but cannot move.
+I keep moving but feel increasingly depleted.
+My environment makes it difficult to perform well.
+I have too many options and cannot prioritize.
+My state keeps changing.
+Things are going well; I want to understand why.
+```
+
+---
+</pre></details><details data-heading="human design"><summary>HUMAN DESIGN · 待核对 · 原文第 1403 行</summary><pre>## HUMAN DESIGN
+
+Do not ask technical-code questions.
+
+Ask observable behavior:
+
+```
+When you make an important decision, what usually happens?
+
+I decide immediately.
+I need some time.
+I ask other people first.
+I wait until things become clearer.
+I act first and adjust later.
+It varies.
+```
+
+Never require:
+
+```
+DLLPLL
+PLRDLR
+etc.
+```
+
+as the primary customer-facing answer format.
+
+---
+</pre></details><details data-heading="cross"><summary>CROSS · 待核对 · 原文第 1432 行</summary><pre>## CROSS
+
+Possible probe:
+
+```
+What do you want Cross to resolve?
+
+Why different reports seem contradictory
+Which themes truly repeat
+Which finding is most worth observing
+What different methods contribute
+I want one organized synthesis
+```
+
+---
+</pre></details><details data-heading="14｜reality checking contract"><summary>14｜REALITY CHECKING CONTRACT · 待核对 · 原文第 1448 行</summary><pre># 14｜REALITY CHECKING CONTRACT
+
+Do not use:
+
+```
+Does this resonate?
+YES / NO
+```
+
+as the only evidence model.
+
+Do not generate:
+
+```
+83% match
+92% accurate
+5/7 methods agree therefore true
+```
+
+Instead support:
+
+```
+CURRENTLY_RESONANT
+PARTIALLY_RESONANT
+CURRENTLY_NOT_RESONANT
+OPEN
+```
+
+Reuse the current shared Current Reality authority if these exact statuses remain canonical after baseline inspection.
+
+Reality check should ask observable questions.
+
+Example:
+
+```
+The method suggests this pattern may appear under high pressure.
+
+Think of the most recent high-pressure period.
+
+What was closest?
+
+Clearly appeared
+Appeared somewhat
+Did not appear
+The opposite appeared
+I cannot recall a comparable situation
+```
+
+Then optionally:
+
+```
+Where does this usually happen?
+
+Work
+Family
+Relationship
+Alone
+Group environment
+Major transitions
+No consistent environment
+```
+
+---
+</pre></details><details data-heading="15｜report current reality presentation"><summary>15｜REPORT CURRENT REALITY PRESENTATION · 待核对 · 原文第 1512 行</summary><pre># 15｜REPORT CURRENT REALITY PRESENTATION
+
+Current Reality comparison page must distinguish:
+
+```
+METHOD PROJECTION
+CURRENT EVIDENCE
+COUNTER-EVIDENCE
+STATUS
+WHY
+```
+
+Example:
+
+```
+METHOD PROJECTION
+Pressure may increase depletion under a mismatched environment.
+
+CURRENT EVIDENCE
+Energy decreased after changing work environment.
+
+COUNTER-EVIDENCE
+Performance remains strong.
+
+STATUS
+PARTIALLY_RESONANT
+```
+
+No percentage truth score.
+
+---
+</pre></details><details data-heading="16｜premium report global story"><summary>16｜PREMIUM REPORT GLOBAL STORY · 待核对 · 原文第 1544 行</summary><pre># 16｜PREMIUM REPORT GLOBAL STORY
+
+All Full Reports must support the common customer story:
+
+```
+WHAT IS THIS METHOD?
+↓
+WHERE DID IT COME FROM / WHY WAS IT BUILT?
+↓
+HOW DOES PHI OS USE IT?
+↓
+HOW SHOULD I READ THIS REPORT?
+↓
+WHAT DOES MY PERSONAL RESULT SHOW?
+↓
+HOW DOES IT RELATE TO CURRENT REALITY?
+↓
+WHAT SHOULD I OBSERVE?
+↓
+WHAT ARE THE EVIDENCE AND BOUNDARIES?
+```
+
+Add canonical Page Roles if not already present:
+
+```
+METHOD_INTRODUCTION
+METHOD_ORIGIN_CONTINUITY
+PHIOS_METHOD_LENS
+HOW_TO_READ_REPORT
+PERSONAL_SNAPSHOT
+STRUCTURAL_ANALYSIS
+RELATIONSHIP_ANALYSIS
+DOMAIN_ANALYSIS
+TIMING_ANALYSIS
+CURRENT_REALITY_COMPARISON
+OBSERVABLE_SIGNALS
+REALITY_NAVIGATION
+EVIDENCE_LINEAGE
+METHOD_BOUNDARY
+LOCKED_PAGE_PREVIEW
+REPORT_MAP
+```
+
+Reuse existing Page IR extension strategy.
+
+Do not create a parallel Page IR.
+
+---
+</pre></details><details data-heading="17｜global page law"><summary>17｜GLOBAL PAGE LAW · 待核对 · 原文第 1593 行</summary><pre># 17｜GLOBAL PAGE LAW
+
+Normal interior page:
+
+```
+ONE PAGE
+=
+ONE PRIMARY CUSTOMER QUESTION
++
+ONE PRIMARY VISUAL
++
+maximum 3 core insights
+```
+
+Recommended visual proportions:
+
+```
+visual / structured data
+55–75%
+
+labels / navigation / states
+10–20%
+
+prose
+10–25%
+```
+
+Hard rule:
+
+```
+normal analysis pages:
+body prose must not visually dominate the page.
+```
+
+No 300–600 word essay as the primary page body.
+
+Long educational material belongs in canonical source / expandable detail, not the main premium report composition.
+
+---
+</pre></details><details data-heading="18｜fixed editorial pages"><summary>18｜FIXED EDITORIAL PAGES · 待核对 · 原文第 1633 行</summary><pre># 18｜FIXED EDITORIAL PAGES
+
+For every report:
+
+```
+01 Cover
+02 What Is This Method?
+03 Origin / Continuity / Why Built
+04 How PHI OS Uses This Method
+05 How to Read This Report
+06 Personal Snapshot
+```
+
+Exceptions:
+
+```
+modern or PHI OS-native methods
+must not fabricate ancient history.
+```
+
+Three Origin types:
+
+```
+TRADITIONAL_LONG_DURATION
+Why Has This Method Endured?
+
+MODERN_SYNTHESIS
+How Did This Method Emerge and Develop?
+
+PHIOS_NATIVE
+Why Was This Method Built?
+```
+
+---
+</pre></details><details data-heading="19｜historical / origin boundary"><summary>19｜HISTORICAL / ORIGIN BOUNDARY · 待核对 · 原文第 1668 行</summary><pre># 19｜HISTORICAL / ORIGIN BOUNDARY
+
+Long transmission must never be presented as proof.
+
+Required principle:
+
+```
+Long transmission demonstrates cultural and interpretive continuity;
+it does not by itself validate every traditional claim as a modern empirical fact.
+```
+
+Human Design:
+
+```
+must be described as a modern synthesis,
+not an ancient unified tradition.
+```
+
+Profile / ECR / Cross:
+
+```
+must use development / purpose history,
+not invented ancient lineage.
+```
+
+---
+</pre></details><details data-heading="20｜report blueprint — bazi"><summary>20｜REPORT BLUEPRINT — BAZI · 待核对 · 原文第 1695 行</summary><pre># 20｜REPORT BLUEPRINT — BAZI
+
+Target:
+
+```
+26 pages
+```
+
+Canonical page map:
+
+```
+01 BAZI FULL REPORT
+02 What Is BaZi?
+03 Why Has BaZi Endured?
+04 How Does PHI OS Use BaZi?
+05 How to Read This Report
+06 Your BaZi Snapshot
+07 Day Master &amp; Seasonal Context
+08 Four Pillars Structure
+09 Five Elements Distribution
+10 Five Element Relationships
+11 Structural Balance &amp; Tension
+12 Primary Structural Pattern
+13 Secondary Patterns &amp; Conditions
+14 Available Strengths &amp; Resources
+15 Structural Pressure &amp; Friction
+16 Self &amp; Direction
+17 Relationships
+18 Career &amp; Work
+19 Resources &amp; Money
+20 Timing Architecture
+21 Current / Selected Period
+22 Current Reality Comparison
+23 Observable Signals
+24 Opportunities &amp; Risks
+25 Reality Navigation
+26 Evidence, Boundary &amp; Closing
+```
+
+Pages 20–22 must fail closed if required timing/current Reality data are absent.
+
+---
+</pre></details><details data-heading="21｜report blueprint — astrology"><summary>21｜REPORT BLUEPRINT — ASTROLOGY · 待核对 · 原文第 1738 行</summary><pre># 21｜REPORT BLUEPRINT — ASTROLOGY
+
+Target:
+
+```
+~26 pages
+```
+
+```
+01 Astrology Full Report
+02 What Is Astrology?
+03 Why Has Astrology Endured?
+04 How Does PHI OS Use Astrology?
+05 How to Read This Report
+06 Your Astrology Snapshot
+07 Your Natal Chart
+08 Planetary Emphasis
+09 House Structure
+10 Aspect Network
+11 Elements &amp; Modalities
+12 Primary Chart Pattern
+13 Secondary Themes &amp; Conditions
+14 Available Strengths &amp; Resources
+15 Tensions &amp; Friction
+16 Self &amp; Expression
+17 Relationships
+18 Career &amp; Work
+19 Resources &amp; Values
+20 Timing &amp; Change
+21 Current / Selected Period
+22 Current Reality Comparison
+23 Observable Signals
+24 Opportunities &amp; Risks
+25 Reality Navigation
+26 Evidence, Boundary &amp; Closing
+```
+
+Do not fabricate timing if no admitted timing authority exists.
+
+---
+</pre></details><details data-heading="22｜report blueprint — zi wei"><summary>22｜REPORT BLUEPRINT — ZI WEI · 待核对 · 原文第 1779 行</summary><pre># 22｜REPORT BLUEPRINT — ZI WEI
+
+Target:
+
+```
+26 pages
+```
+
+```
+01 Zi Wei Full Report
+02 What Is Zi Wei Dou Shu?
+03 Why Has Zi Wei Dou Shu Endured?
+04 How Does PHI OS Use Zi Wei?
+05 How to Read This Report
+06 Your Zi Wei Snapshot
+07 The Twelve Palaces
+08 Life Palace &amp; Core Structure
+09 Primary Stars
+10 Star Relationships
+11 Palace Relationship Map
+12 Primary Chart Pattern
+13 Secondary Patterns &amp; Conditions
+14 Available Strengths &amp; Resources
+15 Structural Pressure &amp; Friction
+16 Self &amp; Development
+17 Relationships &amp; Partnership
+18 Family &amp; Close Relationships
+19 Career &amp; Social Direction
+20 Resources &amp; Wealth
+21 Movement, Environment &amp; Outer World
+22 Timing Architecture
+23 Current / Selected Period
+24 Current Reality Comparison
+25 Observable Signals &amp; Reality Navigation
+26 Evidence, Method Boundary &amp; Closing
+```
+
+Do not expose school-specific technical reading on the customer surface unless user requests technical detail.
+
+---
+</pre></details><details data-heading="23｜report blueprint — numerology"><summary>23｜REPORT BLUEPRINT — NUMEROLOGY · 待核对 · 原文第 1820 行</summary><pre># 23｜REPORT BLUEPRINT — NUMEROLOGY
+
+Target:
+
+```
+~24 pages
+```
+
+Do not inflate to 26 by generic prose.
+
+```
+01 Numerology Full Report
+02 What Is Numerology?
+03 How Did Numerology Develop and Endure?
+04 How Does PHI OS Use Numerology?
+05 How to Read This Report
+06 Your Numerology Snapshot
+07 Core Number Structure
+08 Number Relationships
+09 Pattern Distribution
+10 Repetition &amp; Absence
+11 Primary Numerical Pattern
+12 Secondary Patterns &amp; Conditions
+13 Available Strengths &amp; Resources
+14 Tensions &amp; Friction
+15 Self &amp; Direction
+16 Relationships &amp; Interaction
+17 Work &amp; Development
+18 Resources &amp; Value
+19 Life Cycles &amp; Rhythm
+20 Current Cycle
+21 Current Reality Comparison
+22 Observable Signals
+23 Reality Navigation
+24 Evidence, Boundary &amp; Closing
+```
+
+Suppress unsupported domain pages.
+
+---
+</pre></details><details data-heading="24｜report blueprint — profile"><summary>24｜REPORT BLUEPRINT — PROFILE · 待核对 · 原文第 1861 行</summary><pre># 24｜REPORT BLUEPRINT — PROFILE
+
+Target:
+
+```
+adaptive ~12–26 pages
+```
+
+Do not force missing evidence into fake content.
+
+Potential pages:
+
+```
+01 Profile Full Report
+02 What Is the PHI OS Profile?
+03 Why Was the PHI OS Profile Built?
+04 How Does PHI OS Use Profile Evidence?
+05 How to Read This Report
+06 Your Profile Snapshot
+07 Your Evidence Sources
+08 Evidence Coverage
+09 Six-Domain Profile Map
+10 Core Configuration
+11 Most Consistent Patterns
+12 Contradictions &amp; Differences
+13 Available Strengths
+14 Friction &amp; Blind Spots
+15 Self-Organization &amp; Decision
+16 Relationships &amp; Interaction
+17 Career Interest
+18 Work Style
+19 Big Five Evidence
+20 Financial Capability
+21 External Results
+22 Evidence Integration
+23 Current Reality Comparison
+24 Observable Signals
+25 Reality Navigation
+26 Evidence, Boundary &amp; Closing
+```
+
+Supported states must include:
+
+```
+DIRECT_EVIDENCE
+INFERRED
+MULTI_SOURCE
+CONTRADICTED
+OPEN
+```
+
+Report Map states:
+
+```
+OPEN
+PAID_LOCKED
+DATA_REQUIRED
+CONDITIONAL
+NOT_APPLICABLE
+```
+
+PHI OS Profile ≠ Human Design Profile.
+
+---
+</pre></details><details data-heading="25｜report blueprint — ecr / phi configuration"><summary>25｜REPORT BLUEPRINT — ECR / PHI CONFIGURATION · 待核对 · 原文第 1926 行</summary><pre># 25｜REPORT BLUEPRINT — ECR / PHI CONFIGURATION
+
+Target:
+
+```
+~26 adaptive pages
+```
+
+```
+01 ECR Full Report
+02 What Is PHI Configuration?
+03 Why Was PHI Configuration Built?
+04 How Does PHI OS Use PHI Configuration?
+05 How to Read This Report
+06 Your PHI Card
+07 Configuration Overview
+08 Core Question
+09 Capability Region
+10 Driver Priority
+11 Motion
+12 PHI Configuration
+13 Activation
+14 Primary Runtime Pattern
+15 Secondary Patterns &amp; Conditions
+16 Available Capabilities &amp; Resources
+17 Structural Pressure &amp; Friction
+18 Embodied Configuration
+19 Experience Expression
+20 Current Reality Comparison
+21 Self &amp; Direction
+22 Relationships, Work &amp; Resources
+23 Observable Signals
+24 Opportunities, Risks &amp; Limits
+25 Reality Navigation
+26 Evidence, Method Boundary &amp; Closing
+```
+
+Pages:
+
+```
+18
+19
+20
+```
+
+must require independent contextual/current evidence.
+
+Birth ECR must not generate:
+
+```
+body state
+health state
+current experience
+current Reality
+```
+
+without independent evidence.
+
+---
+</pre></details><details data-heading="26｜report blueprint — human design"><summary>26｜REPORT BLUEPRINT — HUMAN DESIGN · 待核对 · 原文第 1986 行</summary><pre># 26｜REPORT BLUEPRINT — HUMAN DESIGN
+
+Target:
+
+```
+28–32 adaptive pages
+RM129 premium depth
+```
+
+Potential canonical pages:
+
+```
+01 Human Design Full Report
+02 What Is Human Design?
+03 How Did Human Design Emerge and Develop?
+04 How Does PHI OS Use Human Design?
+05 How to Read This Report
+06 Your Design Snapshot
+07 Your Type
+08 Your Strategy
+09 Your Inner Authority
+10 Type × Strategy × Authority
+11 Your Human Design Profile
+12 Your Definition
+13 Centers Overview
+14 Defined Centers
+15 Open &amp; Undefined Centers
+16 Center Relationships
+17 Priority Channels
+18 Channel Interaction
+19 Priority Gates
+20 Planetary Activations
+21 Personality &amp; Design
+22 Decision Flow
+23 Variables Overview
+24 Cognition
+25 Determination
+26 Environment
+27 Perspective &amp; Motivation
+28 Observable Signals
+29 Current Reality Comparison
+30 Reality Navigation
+31 Evidence &amp; Technical Trace
+32 Method Boundary &amp; Closing
+```
+
+Rules:
+
+```
+do not default-expand all 64 Gates
+use selected / priority findings
+advanced pages conditional on real data
+technical Variable code secondary
+customer-facing natural language primary
+no medical claims
+```
+
+---
+</pre></details><details data-heading="27｜report blueprint — cross"><summary>27｜REPORT BLUEPRINT — CROSS · 待核对 · 原文第 2045 行</summary><pre># 27｜REPORT BLUEPRINT — CROSS
+
+Target:
+
+```
+28–34 adaptive pages
+RM299 synthesis
+```
+
+Cross ≠ bundle.
+
+Cross consumes admitted method claims, not rendered report prose.
+
+```
+01 Cross Full Report
+02 What Is a Cross Reading?
+03 Why Was Cross Built?
+04 How Does PHI OS Use Cross?
+05 How to Read This Report
+06 Methods in This Reading
+07 What Does Each Method Contribute?
+08 Cross Snapshot
+09 Shared Semantic Map
+10 Method Contribution Matrix
+11 Common
+12 Why Are These Themes Common?
+13 Complementary
+14 Tension
+15 Understanding Tension
+16 Context-Dependent
+17 Open
+18 Self &amp; Identity
+19 Decision &amp; Action
+20 Relationships
+21 Family &amp; Close Relationships
+22 Career &amp; Work
+23 Resources &amp; Money
+24 Environment &amp; Capacity
+25 Timing &amp; Change
+26 Timing Relationships
+27 Current Reality Comparison
+28 Reality-Supported Themes
+29 Priority Themes
+30 Primary Tension
+31 Observable Signals
+32 Reality Navigation
+33 Evidence &amp; Lineage
+34 Participation, Boundary &amp; Closing
+```
+
+Cross relationship classes remain:
+
+```
+COMMON
+COMPLEMENTARY
+TENSION
+CONTEXT_DEPENDENT
+OPEN
+```
+
+Never add:
+
+```
+WINNER
+MOST_ACCURATE
+TRUE_METHOD
+MAJORITY_PROVES
+```
+
+Current admitted methods must be discovered from the active registry.
+
+Do not silently activate HD/Profile just because candidate adapters exist.
+
+---
+</pre></details><details data-heading="28｜free → locked → paid report continuity"><summary>28｜FREE → LOCKED → PAID REPORT CONTINUITY · 待核对 · 原文第 2120 行</summary><pre># 28｜FREE → LOCKED → PAID REPORT CONTINUITY
+
+One report.
+
+Not:
+
+```
+marketing website
++
+different paid report
++
+different PDF report
+```
+
+Use:
+
+```
+Canonical Report
+↓
+Page IR
+↓
+Web Renderer
+↓
+Entitlement State
+```
+
+and:
+
+```
+same Page IR
+↓
+Print / PDF Renderer
+```
+
+States:
+
+```
+OPEN
+PREVIEW
+PAID_LOCKED
+DATA_REQUIRED
+CONDITIONAL
+NOT_APPLICABLE
+```
+
+Paid PDF must not include lock UI.
+
+---
+</pre></details><details data-heading="29｜locked page preview"><summary>29｜LOCKED PAGE PREVIEW · 待核对 · 原文第 2169 行</summary><pre># 29｜LOCKED PAGE PREVIEW
+
+Do not blur the entire page.
+
+Locked page must show:
+
+```
+page number
+page title
+one-line customer value
+same visual-template silhouette
+partial real structure when safe
+one or more locked insight indicators
+unlock CTA
+```
+
+Example:
+
+```
+09
+Five Element Relationships
+五行关系网络
+
+See how the Five Elements support, constrain and redirect one another.
+
+[network skeleton]
+
+3 findings locked
+
+UNLOCK FULL REPORT
+```
+
+Use progressive disclosure.
+
+---
+</pre></details><details data-heading="30｜report map"><summary>30｜REPORT MAP · 待核对 · 原文第 2205 行</summary><pre># 30｜REPORT MAP
+
+Every Free report should show a real report map.
+
+Example states:
+
+```
+01 OPEN
+02 OPEN
+03 OPEN
+...
+08 PREVIEW
+09 PAID_LOCKED
+20 CONDITIONAL
+21 DATA_REQUIRED
+```
+
+Do not represent unavailable-data pages as “pay to unlock”.
+
+---
+</pre></details><details data-heading="31｜bazi visual report master r1"><summary>31｜BAZI VISUAL REPORT MASTER R1 · 待核对 · 原文第 2226 行</summary><pre># 31｜BAZI VISUAL REPORT MASTER R1
+
+The supplied / attached visual references are design references only.
+
+Reference hierarchy:
+
+```
+M01
+Commerce anchor / vertical cover adaptation
+
+M02
+Editorial
+
+M03
+Snapshot
+
+M04
+Structure
+
+M05
+Distribution
+
+M06
+Domain
+
+M07
+Timing
+
+M08
+Navigation
+```
+
+Freeze status:
+
+```
+M01
+PASS_WITH_VERTICAL_ADAPTATION_REQUIRED
+
+M02
+PASS
+
+M03
+PASS
+
+M04
+PASS
+
+M05
+PASS
+
+M06
+PASS
+
+M07
+PASS
+
+M08
+PASS
+```
+
+Add an explicit design-source note:
+
+```
+DESIGN_REFERENCE_ONLY
+
+All names,
+birth data,
+percentages,
+pillars,
+timing dates,
+scores,
+interpretations,
+and example findings
+inside reference images are illustrative only.
+
+Production values MUST come from governed runtime data.
+```
+
+---
+</pre></details><details data-heading="32｜bazi visual dna"><summary>32｜BAZI VISUAL DNA · 待核对 · 原文第 2306 行</summary><pre># 32｜BAZI VISUAL DNA
+
+Use the reference images to extract and implement a coded design system.
+
+Required characteristics:
+
+```
+BASE
+warm ivory
+soft champagne
+
+PRIMARY
+deep navy / midnight blue
+
+ACCENT
+muted antique gold
+deep copper
+soft earth neutrals
+
+MATERIAL
+soft paper field
+subtle champagne halo
+fine gold structural lines
+restrained translucent analysis cards
+subtle grain
+
+TYPOGRAPHY
+editorial serif title
+clean sans labels
+clear bilingual hierarchy
+
+VISUAL LANGUAGE
+modern premium analytical report
+with restrained East-Asian landscape atmosphere
+```
+
+Avoid:
+
+```
+bright red
+Chinese New Year aesthetic
+cheap fortune-telling gold
+black mystical background
+dragons
+phoenixes
+heavy scroll / parchment gimmicks
+excessive sparkles
+```
+
+---
+</pre></details><details data-heading="33｜bazi master m01–m08 implementation"><summary>33｜BAZI MASTER M01–M08 IMPLEMENTATION · 待核对 · 原文第 2357 行</summary><pre># 33｜BAZI MASTER M01–M08 IMPLEMENTATION
+</pre></details><details data-heading="m01 cover"><summary>M01 COVER · 待核对 · 原文第 2359 行</summary><pre>## M01 COVER
+
+Use vertical adaptation.
+
+Must include:
+
+```
+PHI OS
+BaZi Full Report
+customer identity
+birth details
+Four Pillar visual
+Five Element visual
+timing motif
+Your life, in context.
+```
+
+Do not paste commerce image as a flat full-page raster.
+
+---
+</pre></details><details data-heading="m02 editorial"><summary>M02 EDITORIAL · 待核对 · 原文第 2380 行</summary><pre>## M02 EDITORIAL
+
+Used by:
+
+```
+What Is BaZi
+History
+PHI OS Lens
+How to Read
+```
+
+Structure:
+
+```
+title
+question/subtitle
+large primary diagram
+three compact knowledge blocks
+boundary line
+```
+
+---
+</pre></details><details data-heading="m03 snapshot"><summary>M03 SNAPSHOT · 待核对 · 原文第 2403 行</summary><pre>## M03 SNAPSHOT
+
+Used by:
+
+```
+BaZi Snapshot
+```
+
+Primary visual/data:
+
+```
+Four Pillars
+Day Master
+Season
+Five Elements
+Primary Pattern
+Key Tension
+What to Observe
+```
+
+No large summary essay.
+
+---
+</pre></details><details data-heading="m04 structure"><summary>M04 STRUCTURE · 待核对 · 原文第 2427 行</summary><pre>## M04 STRUCTURE
+
+Used by:
+
+```
+Day Master / Season
+Primary Pattern
+Secondary Pattern
+Strengths
+Friction
+Self / Direction
+```
+
+Structure:
+
+```
+central core
+support
+tension
+expression
+condition
+maximum 3 insight blocks
+```
+
+---
+</pre></details><details data-heading="m05 distribution"><summary>M05 DISTRIBUTION · 待核对 · 原文第 2453 行</summary><pre>## M05 DISTRIBUTION
+
+Used by:
+
+```
+Five Element Distribution
+Five Element Relationships
+Balance / Tension
+```
+
+Charts must use actual runtime data.
+
+Do not encode reference-image sample percentages.
+
+---
+</pre></details><details data-heading="m06 domain"><summary>M06 DOMAIN · 待核对 · 原文第 2469 行</summary><pre>## M06 DOMAIN
+
+Used by:
+
+```
+Relationships
+Career
+Resources
+```
+
+Domain model:
+
+```
+primary domain
+supporting structure
+environment
+condition
+what helps
+what costs
+what to observe
+```
+
+---
+</pre></details><details data-heading="m07 timing"><summary>M07 TIMING · 待核对 · 原文第 2493 行</summary><pre>## M07 TIMING
+
+Used by:
+
+```
+Timing Architecture
+Current Period
+Current Reality Comparison
+```
+
+Must distinguish:
+
+```
+baseline
+timing layer
+selected/current period
+current evidence
+```
+
+No fake smooth “energy curve” unless a governed underlying quantity exists.
+
+If reference art contains illustrative curves, production must replace them with:
+
+```
+real admitted timing structure
+or
+non-quantitative phase/timeline visualization
+```
+
+---
+</pre></details><details data-heading="m08 navigation"><summary>M08 NAVIGATION · 待核对 · 原文第 2524 行</summary><pre>## M08 NAVIGATION
+
+Used by:
+
+```
+Observable Signals
+Opportunity / Risk
+Reality Navigation
+Evidence / Lineage
+Closing
+```
+
+Must visually support:
+
+```
+NOTICE
+COMPARE
+TEST
+REVIEW
+```
+
+No fortune telling.
+
+---
+</pre></details><details data-heading="34｜bazi master → page mapping"><summary>34｜BAZI MASTER → PAGE MAPPING · 待核对 · 原文第 2549 行</summary><pre># 34｜BAZI MASTER → PAGE MAPPING
+
+Implement:
+
+```
+01 M01
+
+02–05 M02
+
+06 M03
+
+07–08 M04 / approved hybrid
+
+09–11 M05
+
+12–15 M04
+
+16–19 M06
+
+20–22 M07
+
+23–26 M08
+```
+
+Final page numbers must follow active canonical report registry, not hard-coded DOM text where avoidable.
+
+---
+</pre></details><details data-heading="35｜global visual master system"><summary>35｜GLOBAL VISUAL MASTER SYSTEM · 待核对 · 原文第 2577 行</summary><pre># 35｜GLOBAL VISUAL MASTER SYSTEM
+
+Do not duplicate one visual system per report from scratch.
+
+After BAZI implementation proves stable, extract shared contracts:
+
+```
+REPORT-SHELL
+EDITORIAL-PAGE
+SNAPSHOT-PAGE
+STRUCTURE-PAGE
+DISTRIBUTION-PAGE
+DOMAIN-PAGE
+TIMING-PAGE
+NAVIGATION-PAGE
+LOCKED-PREVIEW
+REPORT-MAP
+```
+
+Then allow method-specific skins:
+
+```
+BAZI skin
+ASTROLOGY skin
+ZI WEI skin
+NUMEROLOGY skin
+PROFILE skin
+ECR skin
+HD skin
+CROSS skin
+```
+
+Method skin may change:
+
+```
+accent
+geometry
+method iconography
+chart family
+texture
+```
+
+but must preserve the same report-quality law.
+
+---
+</pre></details><details data-heading="36｜no cover bait-and-switch"><summary>36｜NO COVER BAIT-AND-SWITCH · 待核对 · 原文第 2623 行</summary><pre># 36｜NO COVER BAIT-AND-SWITCH
+
+Add an explicit acceptance invariant:
+
+```
+A commerce report visual may not promise a level of
+visual structure, hierarchy, data richness, or premium finish
+that the delivered report materially fails to provide.
+```
+
+Check:
+
+```
+commerce cover
+vs
+Free report
+vs
+Paid report
+vs
+PDF
+```
+
+Human acceptance required.
+
+---
+</pre></details><details data-heading="37｜static vs dynamic visual law"><summary>37｜STATIC VS DYNAMIC VISUAL LAW · 待核对 · 原文第 2649 行</summary><pre># 37｜STATIC VS DYNAMIC VISUAL LAW
+
+Static R2:
+
+```
+commerce cover
+brand texture
+decorative motif
+non-customer-specific background
+```
+
+Dynamic:
+
+```
+customer chart
+distribution
+timeline
+network
+matrix
+snapshot
+radar
+Mandala
+PHI Card
+Cross contribution matrix
+Reality comparison
+```
+
+Do not convert customer-specific data visuals into static WebP assets.
+
+Prefer:
+
+```
+HTML
+CSS
+SVG
+canvas only where justified
+```
+
+---
+</pre></details><details data-heading="38｜bilingual law"><summary>38｜BILINGUAL LAW · 待核对 · 原文第 2689 行</summary><pre># 38｜BILINGUAL LAW
+
+All fixed canonical editorial pages must support:
+
+```
+zh-Hans
+English
+```
+
+Do not mix untranslated customer-facing labels.
+
+Technical codes may appear secondary.
+
+Customer-readable natural language is primary.
+
+---
+</pre></details><details data-heading="39｜report ai execution law"><summary>39｜REPORT AI EXECUTION LAW · 待核对 · 原文第 2706 行</summary><pre># 39｜REPORT AI EXECUTION LAW
+
+Preserve current execution classes.
+
+Conceptually:
+
+```
+T0
+deterministic calculation / mapping
+
+T1
+canonical assembly
+
+T2
+light admitted composition
+
+T3
+deep composition only where explicitly admitted
+```
+
+Fixed pages:
+
+```
+What Is Method
+Origin
+PHI OS Lens
+How to Read
+Closing boundary
+```
+
+must be canonical T1 content, not regenerated on each customer run.
+
+Personal report:
+
+```
+T1
++
+optional T2
+```
+
+Cross may use deeper composition only under existing admitted Cross policy.
+
+LLM fills slots.
+
+LLM does not invent:
+
+```
+method result
+calculation
+missing evidence
+current Reality
+Cross participation
+timing values
+```
+
+---
+</pre></details><details data-heading="40｜canonical fixed copy storage"><summary>40｜CANONICAL FIXED COPY STORAGE · 待核对 · 原文第 2763 行</summary><pre># 40｜CANONICAL FIXED COPY STORAGE
+
+Create or extend canonical report editorial content registry.
+
+Do not embed large fixed copy independently inside every frontend page.
+
+Required fields may conceptually include:
+
+```
+methodId
+pageRole
+locale
+title
+subtitle
+canonicalBody
+keyBlocks[]
+boundaryText
+visualIntent
+version
+status
+authorityRef
+```
+
+Use repository naming conventions after inspection.
+
+Fixed copy already approved in design work should be stored canonically.
+
+Do not ask runtime OpenAI to rewrite it.
+
+---
+</pre></details><details data-heading="41｜page ir successor fields"><summary>41｜PAGE IR SUCCESSOR FIELDS · 待核对 · 原文第 2794 行</summary><pre># 41｜PAGE IR SUCCESSOR FIELDS
+
+Extend existing Page IR only as needed.
+
+Do not create a second Page IR.
+
+Candidate fields:
+
+```
+pageRole
+pageNumber
+totalPages
+accessState
+visualTemplateId
+visualPromiseRef
+methodAuthorityRefs[]
+currentRealityRefs[]
+isPersonalized
+isConditional
+dataRequirements[]
+informationGainFrom[]
+evidenceState
+lockedPreview
+commerceVisualRef
+```
+
+Use current schema style.
+
+Do not blindly implement field names if equivalent fields already exist.
+
+Reconcile first.
+
+---
+</pre></details><details data-heading="42｜report page eligibility"><summary>42｜REPORT PAGE ELIGIBILITY · 待核对 · 原文第 2828 行</summary><pre># 42｜REPORT PAGE ELIGIBILITY
+
+Every adaptive page must have deterministic eligibility.
+
+Examples:
+
+```
+HD VARIABLES
+requires admitted variable data
+
+PROFILE BIG FIVE
+requires admitted Big Five source
+
+ECR EMBODIED CONFIGURATION
+requires independent contextual evidence
+
+CURRENT REALITY COMPARISON
+requires confirmed Current Reality evidence
+
+CROSS DOMAIN PAGE
+requires sufficient admitted contributing claims
+```
+
+No LLM may decide whether missing-data pages “should probably exist”.
+
+---
+</pre></details><details data-heading="43｜mobile requirements"><summary>43｜MOBILE REQUIREMENTS · 待核对 · 原文第 2855 行</summary><pre># 43｜MOBILE REQUIREMENTS
+
+Test at approximately:
+
+```
+390px
+768px
+1440px
+```
+
+Do not simply scale down desktop.
+
+Examples:
+
+```
+desktop donut + ranked bars side by side
+
+mobile
+donut
+↓
+bars
+↓
+insights
+```
+
+Network visuals must remain readable without accidental horizontal overflow.
+
+Locked preview must remain understandable on mobile.
+
+---
+</pre></details><details data-heading="44｜print / pdf requirements"><summary>44｜PRINT / PDF REQUIREMENTS · 待核对 · 原文第 2886 行</summary><pre># 44｜PRINT / PDF REQUIREMENTS
+
+A4-oriented output.
+
+Target margins approximately:
+
+```
+15–18mm
+```
+
+Use:
+
+```
+SVG where possible
+break-inside: avoid
+page-break controls
+print-specific typography
+```
+
+Never split:
+
+```
+chart
+primary diagram
+key card group
+```
+
+across pages.
+
+PDF must be generated from the same Page IR.
+
+---
+</pre></details><details data-heading="45｜accessibility"><summary>45｜ACCESSIBILITY · 待核对 · 原文第 2919 行</summary><pre># 45｜ACCESSIBILITY
+
+Required:
+
+```
+semantic heading hierarchy
+keyboard navigation
+visible focus
+sufficient contrast
+touch targets
+ARIA only where needed
+non-color-only state communication
+chart textual equivalents
+screen-reader-accessible locked states
+```
+
+Decorative visual assets:
+
+```
+aria-hidden
+```
+
+Meaningful data visuals must expose equivalent labels.
+
+---
+</pre></details><details data-heading="46｜reality intake privacy / correctability"><summary>46｜REALITY INTAKE PRIVACY / CORRECTABILITY · 待核对 · 原文第 2945 行</summary><pre># 46｜REALITY INTAKE PRIVACY / CORRECTABILITY
+
+Customer Reality information is customer-supplied evidence.
+
+Must support:
+
+```
+edit
+correct
+remove from current intake before confirmation
+skip
+```
+
+Do not silently derive sensitive facts.
+
+Do not use method projections to fill customer Reality fields.
+
+---
+</pre></details><details data-heading="47｜customer experience law"><summary>47｜CUSTOMER EXPERIENCE LAW · 待核对 · 原文第 2964 行</summary><pre># 47｜CUSTOMER EXPERIENCE LAW
+
+The customer should experience:
+
+```
+Tell us what you want to understand.
+↓
+PHI OS helps organize the question.
+↓
+Customer confirms the Reality Summary.
+↓
+PHI OS suggests a useful perspective,
+or respects the customer's chosen method.
+↓
+Method reading begins.
+↓
+Only high-information Reality questions are asked.
+↓
+Free report already feels like the beginning of the real product.
+↓
+Paid unlock continues the same report.
+```
+
+Do not make onboarding feel like a long mandatory questionnaire.
+
+---
+</pre></details><details data-heading="48｜ask flexibility acceptance cases"><summary>48｜ASK FLEXIBILITY ACCEPTANCE CASES · 待核对 · 原文第 2991 行</summary><pre># 48｜ASK FLEXIBILITY ACCEPTANCE CASES
+
+Create deterministic test cases covering at least:
+
+```
+1
+clear general question
+→ DIRECT ANSWER
+
+2
+vague Reality problem
+→ CLARIFY
+
+3
+customer cannot describe problem
+→ DISCOVERY MODE
+
+4
+customer knows method
+→ no recommendation override
+
+5
+personal issue with strong routing signal
+→ 1 primary + max 2 alternatives
+
+6
+no method needed
+→ no method recommendation
+
+7
+customer wants speed
+→ QUICK mode
+
+8
+customer wants depth
+→ GUIDED / DEEP
+
+9
+counter-evidence exists
+→ preserved
+
+10
+Reality Summary rejected
+→ not promoted as confirmed evidence
+
+11
+Current Reality absent
+→ comparison page suppressed / DATA_REQUIRED
+
+12
+method-specific probe not relevant
+→ not shown
+```
+
+---
+</pre></details><details data-heading="49｜method guidance acceptance cases"><summary>49｜METHOD GUIDANCE ACCEPTANCE CASES · 待核对 · 原文第 3047 行</summary><pre># 49｜METHOD GUIDANCE ACCEPTANCE CASES
+
+Test examples similar to:
+
+```
+&quot;最近换工作以后很累，不知道是环境不适合还是方向不适合。&quot;
+
+Expected:
+clarify / guided reality
+then method guidance
+ECR-like runtime/current-operation perspective may surface strongly,
+with other appropriate perspectives,
+but exact ranking must follow registry metadata and current availability.
+```
+
+```
+&quot;我要看八字事业。&quot;
+
+Expected:
+BAZI direct.
+No recommendation detour.
+```
+
+```
+&quot;我有很多报告互相矛盾。&quot;
+
+Expected:
+Cross guidance only if upstream conditions can be met.
+Otherwise explain what is missing.
+```
+
+---
+</pre></details><details data-heading="50｜reality comparison acceptance cases"><summary>50｜REALITY COMPARISON ACCEPTANCE CASES · 待核对 · 原文第 3080 行</summary><pre># 50｜REALITY COMPARISON ACCEPTANCE CASES
+
+Must test:
+
+```
+supported
+partially supported
+not currently supported
+open
+counter-evidence
+insufficient evidence
+contradictory evidence
+customer correction
+stale evidence
+```
+
+Do not produce false certainty.
+
+---
+</pre></details><details data-heading="51｜report machine checks"><summary>51｜REPORT MACHINE CHECKS · 待核对 · 原文第 3100 行</summary><pre># 51｜REPORT MACHINE CHECKS
+
+Add / extend deterministic checkers.
+
+Use repository naming conventions.
+
+Check at least:
+
+```
+all 8 report products registered
+canonical page roles valid
+page count / adaptive range valid
+no duplicate page IDs
+all fixed pages bilingual
+all report templates resolve
+locked previews resolve
+all access states valid
+conditional pages have requirements
+all visual template IDs valid
+all method authority refs resolvable
+all current-Reality refs resolvable
+no static example percentages in production logic
+no hardcoded example birth data
+no sample pillars in runtime defaults
+no sample timing years leaking into production
+no fake numeric truth scores
+no majority-truth Cross logic
+no unsupported HD/Profile Cross admission
+no DATA_REQUIRED page represented as PAID_LOCKED
+PDF renderer consumes same Page IR
+web renderer consumes same Page IR
+```
+
+---
+</pre></details><details data-heading="52｜visual machine checks"><summary>52｜VISUAL MACHINE CHECKS · 待核对 · 原文第 3135 行</summary><pre># 52｜VISUAL MACHINE CHECKS
+
+Where practical, add DOM-level acceptance checks:
+
+```
+primary visual exists
+main analysis page visual area &gt;= expected threshold
+body prose does not dominate
+maximum insight cards respected
+page status visible
+page number present
+report identity present
+locked state correct
+no overflow
+mobile stack valid
+```
+
+Do not use meaningless pixel-perfect screenshots as sole acceptance.
+
+---
+</pre></details><details data-heading="53｜human visual acceptance"><summary>53｜HUMAN VISUAL ACCEPTANCE · 待核对 · 原文第 3156 行</summary><pre># 53｜HUMAN VISUAL ACCEPTANCE
+
+Machine PASS is not human visual acceptance.
+
+Generate review pages / fixture customers for:
+
+```
+BAZI
+AST
+ZIWEI
+NUM
+PROFILE
+ECR
+HD
+CROSS
+```
+
+At minimum inspect:
+
+```
+390px
+1440px
+A4 PDF
+zh-Hans
+English
+```
+
+Human review must explicitly judge:
+
+```
+commerce promise vs interior quality
+hierarchy
+visual density
+text density
+data readability
+bilingual quality
+locked-preview quality
+mobile quality
+PDF quality
+premium consistency
+```
+
+Until reviewed:
+
+```
+HUMAN_VISUAL_ACCEPTANCE = PENDING
+```
+
+Do not silently mark ACCEPTED.
+
+---
+</pre></details><details data-heading="54｜reality ux human acceptance"><summary>54｜REALITY UX HUMAN ACCEPTANCE · 待核对 · 原文第 3208 行</summary><pre># 54｜REALITY UX HUMAN ACCEPTANCE
+
+Human-review flows:
+
+```
+A
+I know what is happening.
+
+B
+Something feels wrong but I cannot explain it.
+
+C
+I don't know what PHI OS can do.
+
+D
+I just want something quick.
+
+E
+I already know my method.
+
+F
+I disagree with the Reality Summary.
+
+G
+I have strong counter-evidence.
+
+H
+I skip Reality intake.
+
+I
+I complete Reality intake after paying.
+
+J
+I return later and Reality has changed.
+```
+
+Human acceptance required before calling the flow production-accepted.
+
+---
+</pre></details><details data-heading="55｜web e2e acceptance"><summary>55｜WEB E2E ACCEPTANCE · 待核对 · 原文第 3248 行</summary><pre># 55｜WEB E2E ACCEPTANCE
+
+When browser tooling is available, execute actual browser interaction.
+
+Required flow:
+
+```
+Entry
+→ Start with my Reality
+→ Guided questions
+→ optional free text
+→ Reality Summary
+→ Edit
+→ confirm
+→ Method Guidance
+→ choose recommended method
+→ Free Report
+→ Report Map
+→ Locked Page
+→ Unlock CTA
+```
+
+and:
+
+```
+Entry
+→ I Know My Method
+→ select BaZi
+→ intake
+→ Free Report
+```
+
+and:
+
+```
+Ask PHI OS
+→ vague question
+→ clarify
+→ guided reality
+→ method guidance
+```
+
+and:
+
+```
+Ask PHI OS
+→ general factual question
+→ direct answer
+→ no method push
+```
+
+Unavailable browser actions must be marked:
+
+```
+NOT_RUN
+```
+
+not PASS.
+
+---
+</pre></details><details data-heading="56｜pdf e2e acceptance"><summary>56｜PDF E2E ACCEPTANCE · 待核对 · 原文第 3309 行</summary><pre># 56｜PDF E2E ACCEPTANCE
+
+Generate representative PDFs.
+
+Check:
+
+```
+page count
+correct adaptive omission
+no blank conditional pages
+no lock UI
+no clipped visual
+no split chart
+bilingual typography
+page number
+footer
+evidence states
+```
+
+Test at least:
+
+```
+BaZi
+ECR
+HD
+Cross
+```
+
+because these cover:
+
+```
+fixed report
+contextual report
+advanced adaptive report
+multi-method synthesis
+```
+
+---
+</pre></details><details data-heading="57｜no regression"><summary>57｜NO REGRESSION · 待核对 · 原文第 3348 行</summary><pre># 57｜NO REGRESSION
+
+Run all relevant existing checks.
+
+Do not modify old checker expectations merely to force PASS unless current canonical contract truly changed.
+
+If a checker reflects retired behavior:
+
+```
+document why
+update it through the successor contract
+preserve historical evidence
+```
+
+Do not disable checks.
+
+---
+</pre></details><details data-heading="58｜do not physically delete legacy until replacement acceptance"><summary>58｜DO NOT PHYSICALLY DELETE LEGACY UNTIL REPLACEMENT ACCEPTANCE · 待核对 · 原文第 3366 行</summary><pre># 58｜DO NOT PHYSICALLY DELETE LEGACY UNTIL REPLACEMENT ACCEPTANCE
+
+If this work replaces existing customer pages:
+
+```
+quarantine
+→ successor accepted
+→ zero consumer
+→ physical delete
+```
+
+Preserve redirects where needed.
+
+Do not retain old HTML fallback only to hide missing migration.
+
+---
+</pre></details><details data-heading="59｜work packages"><summary>59｜WORK PACKAGES · 待核对 · 原文第 3383 行</summary><pre># 59｜WORK PACKAGES
+
+Execute in this order.
+
+---
+</pre></details><details data-heading="gr-mg-vrpt-w0"><summary>GR-MG-VRPT-W0 · 待核对 · 原文第 3389 行</summary><pre>## GR-MG-VRPT-W0
+</pre></details><details data-heading="current main baseline audit"><summary>Current Main Baseline Audit · 待核对 · 原文第 3391 行</summary><pre>### Current Main Baseline Audit
+
+Inspect:
+
+```
+Ask
+Current Reality
+method selector
+method registry
+report registry
+Page IR
+report renderer
+PDF renderer
+commerce registry
+entitlement
+Cross
+visual template system
+```
+
+Output audit document.
+
+No behavior change.
+
+---
+</pre></details><details data-heading="w1"><summary>W1 · 待核对 · 原文第 3416 行</summary><pre>## W1
+</pre></details><details data-heading="authority reconciliation"><summary>Authority Reconciliation · 待核对 · 原文第 3418 行</summary><pre>### Authority Reconciliation
+
+Create / update an authority map proving:
+
+```
+what Guided Reality owns
+what it does not own
+what Method Guidance owns
+what Ask owns
+what Report owns
+```
+
+Checker required.
+
+---
+</pre></details><details data-heading="w2"><summary>W2 · 待核对 · 原文第 3434 行</summary><pre>## W2
+</pre></details><details data-heading="guided reality contract"><summary>Guided Reality Contract · 待核对 · 原文第 3436 行</summary><pre>### Guided Reality Contract
+
+Define:
+
+```
+QUICK
+GUIDED
+DEEP
+DISCOVERY_MODE
+question schema
+answer schema
+counter-evidence
+confirmation
+```
+
+No customer UI yet.
+
+---
+</pre></details><details data-heading="w3"><summary>W3 · 待核对 · 原文第 3455 行</summary><pre>## W3
+</pre></details><details data-heading="reality summary contract"><summary>Reality Summary Contract · 待核对 · 原文第 3457 行</summary><pre>### Reality Summary Contract
+
+Implement:
+
+```
+draft summary
+customer correction
+customer confirmation
+promotion into Current Reality
+```
+
+Fail closed before confirmation.
+
+---
+</pre></details><details data-heading="w4"><summary>W4 · 待核对 · 原文第 3472 行</summary><pre>## W4
+</pre></details><details data-heading="ask routing successor"><summary>Ask Routing Successor · 待核对 · 原文第 3474 行</summary><pre>### Ask Routing Successor
+
+Implement:
+
+```
+DIRECT_ANSWER
+CLARIFY
+METHOD_GUIDANCE
+USER_SELECTED_METHOD
+REALITY_BASED_RESPONSE
+```
+
+No second Ask runtime.
+
+---
+</pre></details><details data-heading="w5"><summary>W5 · 待核对 · 原文第 3490 行</summary><pre>## W5
+</pre></details><details data-heading="method routing metadata"><summary>Method Routing Metadata · 待核对 · 原文第 3492 行</summary><pre>### Method Routing Metadata
+
+Extend current Method Registry.
+
+No semantic truth.
+
+No hardcoded winner ranking.
+
+---
+</pre></details><details data-heading="w6"><summary>W6 · 待核对 · 原文第 3502 行</summary><pre>## W6
+</pre></details><details data-heading="method guidance engine / adapter"><summary>Method Guidance Engine / Adapter · 待核对 · 原文第 3504 行</summary><pre>### Method Guidance Engine / Adapter
+
+Use current context/routing owner.
+
+Output:
+
+```
+primary recommendation &lt;= 1
+alternatives &lt;= 2
+why this perspective may help
+direct choose-another-method path
+```
+
+Do not create parallel runtime.
+
+---
+</pre></details><details data-heading="w7"><summary>W7 · 待核对 · 原文第 3521 行</summary><pre>## W7
+</pre></details><details data-heading="reality intake customer ui"><summary>Reality Intake Customer UI · 待核对 · 原文第 3523 行</summary><pre>### Reality Intake Customer UI
+
+Implement:
+
+```
+Quick
+Guided
+Deep
+Discovery
+Skip
+```
+
+Bilingual.
+
+Responsive.
+
+Accessible.
+
+---
+</pre></details><details data-heading="w8"><summary>W8 · 待核对 · 原文第 3543 行</summary><pre>## W8
+</pre></details><details data-heading="reality summary ui"><summary>Reality Summary UI · 待核对 · 原文第 3545 行</summary><pre>### Reality Summary UI
+
+Implement:
+
+```
+Yes
+Edit
+Something is missing
+```
+
+No automatic confirmation.
+
+---
+</pre></details><details data-heading="w9"><summary>W9 · 待核对 · 原文第 3559 行</summary><pre>## W9
+</pre></details><details data-heading="entry surface cutover"><summary>Entry Surface Cutover · 待核对 · 原文第 3561 行</summary><pre>### Entry Surface Cutover
+
+Implement dual entry:
+
+```
+Start with my Reality
+Choose a Method
+```
+
+Preserve method-grid access.
+
+---
+</pre></details><details data-heading="w10"><summary>W10 · 待核对 · 原文第 3574 行</summary><pre>## W10
+</pre></details><details data-heading="ask phi os guided flow integration"><summary>Ask PHI OS Guided Flow Integration · 待核对 · 原文第 3576 行</summary><pre>### Ask PHI OS Guided Flow Integration
+
+Ask can now:
+
+```
+answer
+clarify
+route
+respect explicit method
+```
+
+Run regression.
+
+---
+</pre></details><details data-heading="w11"><summary>W11 · 待核对 · 原文第 3591 行</summary><pre>## W11
+</pre></details><details data-heading="method-specific reality probe registry"><summary>Method-Specific Reality Probe Registry · 待核对 · 原文第 3593 行</summary><pre>### Method-Specific Reality Probe Registry
+
+Add governed probes for:
+
+```
+BAZI
+AST
+ZIWEI
+NUM
+PROFILE
+ECR
+HD
+CROSS
+```
+
+No duplicate questionnaire runtime.
+
+---
+</pre></details><details data-heading="w12"><summary>W12 · 待核对 · 原文第 3612 行</summary><pre>## W12
+</pre></details><details data-heading="current reality comparison successor"><summary>Current Reality Comparison Successor · 待核对 · 原文第 3614 行</summary><pre>### Current Reality Comparison Successor
+
+Implement structured comparison:
+
+```
+projection
+support
+counter-evidence
+status
+why
+```
+
+No percentages.
+
+---
+</pre></details><details data-heading="w13"><summary>W13 · 待核对 · 原文第 3630 行</summary><pre>## W13
+</pre></details><details data-heading="report page roles successor"><summary>Report Page Roles Successor · 待核对 · 原文第 3632 行</summary><pre>### Report Page Roles Successor
+
+Add / reconcile:
+
+```
+Origin
+PHI OS Lens
+How to Read
+Snapshot
+Reality Comparison
+Navigation
+Evidence
+Locked Preview
+Report Map
+```
+
+---
+</pre></details><details data-heading="w14"><summary>W14 · 待核对 · 原文第 3650 行</summary><pre>## W14
+</pre></details><details data-heading="canonical fixed editorial content"><summary>Canonical Fixed Editorial Content · 待核对 · 原文第 3652 行</summary><pre>### Canonical Fixed Editorial Content
+
+Register approved fixed pages for all 8 products.
+
+Do not regenerate at runtime.
+
+---
+</pre></details><details data-heading="w15"><summary>W15 · 待核对 · 原文第 3660 行</summary><pre>## W15
+</pre></details><details data-heading="8-report blueprint registry"><summary>8-Report Blueprint Registry · 待核对 · 原文第 3662 行</summary><pre>### 8-Report Blueprint Registry
+
+Register exact / adaptive page plans.
+
+Checker required.
+
+---
+</pre></details><details data-heading="w16"><summary>W16 · 待核对 · 原文第 3670 行</summary><pre>## W16
+</pre></details><details data-heading="report eligibility / suppression rules"><summary>Report Eligibility / Suppression Rules · 待核对 · 原文第 3672 行</summary><pre>### Report Eligibility / Suppression Rules
+
+Implement:
+
+```
+conditional page requirements
+DATA_REQUIRED
+NOT_APPLICABLE
+```
+
+No hallucinated content.
+
+---
+</pre></details><details data-heading="w17"><summary>W17 · 待核对 · 原文第 3686 行</summary><pre>## W17
+</pre></details><details data-heading="web / pdf single page ir contract"><summary>Web / PDF Single Page IR Contract · 待核对 · 原文第 3688 行</summary><pre>### Web / PDF Single Page IR Contract
+
+Verify:
+
+```
+Free Web
+Paid Web
+PDF
+```
+
+use same child Page IR.
+
+No parallel content source.
+
+---
+</pre></details><details data-heading="w18"><summary>W18 · 待核对 · 原文第 3704 行</summary><pre>## W18
+</pre></details><details data-heading="locked preview"><summary>Locked Preview · 待核对 · 原文第 3706 行</summary><pre>### Locked Preview
+
+Implement progressive disclosure.
+
+No whole-page blur.
+
+---
+</pre></details><details data-heading="w19"><summary>W19 · 待核对 · 原文第 3714 行</summary><pre>## W19
+</pre></details><details data-heading="report map"><summary>Report Map · 待核对 · 原文第 3716 行</summary><pre>### Report Map
+
+Show:
+
+```
+OPEN
+PREVIEW
+PAID_LOCKED
+DATA_REQUIRED
+CONDITIONAL
+NOT_APPLICABLE
+```
+
+---
+</pre></details><details data-heading="w20"><summary>W20 · 待核对 · 原文第 3731 行</summary><pre>## W20
+</pre></details><details data-heading="bazi visual token extraction"><summary>BAZI Visual Token Extraction · 待核对 · 原文第 3733 行</summary><pre>### BAZI Visual Token Extraction
+
+Use approved M01–M08 references.
+
+Implement coded BAZI visual DNA.
+
+No customer data from sample art.
+
+---
+</pre></details><details data-heading="w21"><summary>W21 · 待核对 · 原文第 3743 行</summary><pre>## W21
+</pre></details><details data-heading="shared report shell"><summary>Shared Report Shell · 待核对 · 原文第 3745 行</summary><pre>### Shared Report Shell
+
+Implement:
+
+```
+header
+report identity
+page state
+page number
+footer
+mobile
+print
+```
+
+---
+</pre></details><details data-heading="w22"><summary>W22 · 待核对 · 原文第 3761 行</summary><pre>## W22
+</pre></details><details data-heading="bazi m01 cover"><summary>BAZI M01 Cover · 待核对 · 原文第 3763 行</summary><pre>### BAZI M01 Cover
+
+Vertical adaptation.
+
+---
+</pre></details><details data-heading="w23"><summary>W23 · 待核对 · 原文第 3769 行</summary><pre>## W23
+</pre></details><details data-heading="bazi m02 editorial"><summary>BAZI M02 Editorial · 待核对 · 原文第 3771 行</summary><pre>### BAZI M02 Editorial
+
+Implement reusable editorial master.
+
+---
+</pre></details><details data-heading="w24"><summary>W24 · 待核对 · 原文第 3777 行</summary><pre>## W24
+</pre></details><details data-heading="bazi m03 snapshot"><summary>BAZI M03 Snapshot · 待核对 · 原文第 3779 行</summary><pre>### BAZI M03 Snapshot
+
+Implement runtime-data dashboard.
+
+---
+</pre></details><details data-heading="w25"><summary>W25 · 待核对 · 原文第 3785 行</summary><pre>## W25
+</pre></details><details data-heading="bazi m04 structure"><summary>BAZI M04 Structure · 待核对 · 原文第 3787 行</summary><pre>### BAZI M04 Structure
+
+Implement dynamic structural page.
+
+---
+</pre></details><details data-heading="w26"><summary>W26 · 待核对 · 原文第 3793 行</summary><pre>## W26
+</pre></details><details data-heading="bazi m05 distribution"><summary>BAZI M05 Distribution · 待核对 · 原文第 3795 行</summary><pre>### BAZI M05 Distribution
+
+Implement:
+
+```
+distribution
+relationship network
+balance / tension
+```
+
+Actual data only.
+
+---
+</pre></details><details data-heading="w27"><summary>W27 · 待核对 · 原文第 3809 行</summary><pre>## W27
+</pre></details><details data-heading="bazi m06 domain"><summary>BAZI M06 Domain · 待核对 · 原文第 3811 行</summary><pre>### BAZI M06 Domain
+
+Implement:
+
+```
+relationship
+career
+resources
+```
+
+---
+</pre></details><details data-heading="w28"><summary>W28 · 待核对 · 原文第 3823 行</summary><pre>## W28
+</pre></details><details data-heading="bazi m07 timing"><summary>BAZI M07 Timing · 待核对 · 原文第 3825 行</summary><pre>### BAZI M07 Timing
+
+Implement timing and current-Reality views.
+
+No fake quantitative curve.
+
+---
+</pre></details><details data-heading="w29"><summary>W29 · 待核对 · 原文第 3833 行</summary><pre>## W29
+</pre></details><details data-heading="bazi m08 navigation"><summary>BAZI M08 Navigation · 待核对 · 原文第 3835 行</summary><pre>### BAZI M08 Navigation
+
+Implement:
+
+```
+signals
+opportunity/risk
+navigation
+lineage
+closing
+```
+
+---
+</pre></details><details data-heading="w30"><summary>W30 · 待核对 · 原文第 3849 行</summary><pre>## W30
+</pre></details><details data-heading="bazi full 26-page bind"><summary>BAZI Full 26-Page Bind · 待核对 · 原文第 3851 行</summary><pre>### BAZI Full 26-Page Bind
+
+Bind all pages to visual masters.
+
+Web + PDF.
+
+---
+</pre></details><details data-heading="w31"><summary>W31 · 待核对 · 原文第 3859 行</summary><pre>## W31
+</pre></details><details data-heading="shared premium report design system"><summary>Shared Premium Report Design System · 待核对 · 原文第 3861 行</summary><pre>### Shared Premium Report Design System
+
+Extract reusable structure from successful BAZI implementation.
+
+Do not genericize so aggressively that method identity disappears.
+
+---
+</pre></details><details data-heading="w32"><summary>W32 · 待核对 · 原文第 3869 行</summary><pre>## W32
+</pre></details><details data-heading="astrology skin + blueprint bind"><summary>Astrology Skin + Blueprint Bind · 待核对 · 原文第 3871 行</summary><pre>### Astrology Skin + Blueprint Bind
+
+Apply shared system with Astrology-specific visual language.
+
+Do not simply recolor BaZi.
+
+---
+</pre></details><details data-heading="w33"><summary>W33 · 待核对 · 原文第 3879 行</summary><pre>## W33
+</pre></details><details data-heading="zi wei skin + blueprint bind"><summary>Zi Wei Skin + Blueprint Bind · 待核对 · 原文第 3881 行</summary><pre>### Zi Wei Skin + Blueprint Bind
+
+Preserve palace/star visual identity.
+
+---
+</pre></details><details data-heading="w34"><summary>W34 · 待核对 · 原文第 3887 行</summary><pre>## W34
+</pre></details><details data-heading="numerology skin + blueprint bind"><summary>Numerology Skin + Blueprint Bind · 待核对 · 原文第 3889 行</summary><pre>### Numerology Skin + Blueprint Bind
+
+Preserve numeric/rhythm identity.
+
+Do not inflate unsupported pages.
+
+---
+</pre></details><details data-heading="w35"><summary>W35 · 待核对 · 原文第 3897 行</summary><pre>## W35
+</pre></details><details data-heading="profile adaptive report bind"><summary>Profile Adaptive Report Bind · 待核对 · 原文第 3899 行</summary><pre>### Profile Adaptive Report Bind
+
+Evidence-driven page eligibility.
+
+---
+</pre></details><details data-heading="w36"><summary>W36 · 待核对 · 原文第 3905 行</summary><pre>## W36
+</pre></details><details data-heading="ecr adaptive report bind"><summary>ECR Adaptive Report Bind · 待核对 · 原文第 3907 行</summary><pre>### ECR Adaptive Report Bind
+
+Preserve PHI Card and governed contextual boundaries.
+
+---
+</pre></details><details data-heading="w37"><summary>W37 · 待核对 · 原文第 3913 行</summary><pre>## W37
+</pre></details><details data-heading="hd premium report bind"><summary>HD Premium Report Bind · 待核对 · 原文第 3915 行</summary><pre>### HD Premium Report Bind
+
+Support 28–32 adaptive depth.
+
+Advanced data conditional.
+
+---
+</pre></details><details data-heading="w38"><summary>W38 · 待核对 · 原文第 3923 行</summary><pre>## W38
+</pre></details><details data-heading="cross premium synthesis bind"><summary>Cross Premium Synthesis Bind · 待核对 · 原文第 3925 行</summary><pre>### Cross Premium Synthesis Bind
+
+Support admitted methods only.
+
+Preserve relationship classes.
+
+---
+</pre></details><details data-heading="w39"><summary>W39 · 待核对 · 原文第 3933 行</summary><pre>## W39
+</pre></details><details data-heading="commerce → report visual promise checker"><summary>Commerce → Report Visual Promise Checker · 待核对 · 原文第 3935 行</summary><pre>### Commerce → Report Visual Promise Checker
+
+Add checker / audit for:
+
+```
+commerceVisualRef
+report visual identity
+interior visual availability
+```
+
+No cover bait-and-switch.
+
+---
+</pre></details><details data-heading="w40"><summary>W40 · 待核对 · 原文第 3949 行</summary><pre>## W40
+</pre></details><details data-heading="responsive + accessibility checks"><summary>Responsive + Accessibility Checks · 待核对 · 原文第 3951 行</summary><pre>### Responsive + Accessibility Checks
+
+```
+390
+768
+1440
+keyboard
+focus
+touch
+screen-reader
+```
+
+---
+</pre></details><details data-heading="w41"><summary>W41 · 待核对 · 原文第 3965 行</summary><pre>## W41
+</pre></details><details data-heading="print / pdf checks"><summary>Print / PDF Checks · 待核对 · 原文第 3967 行</summary><pre>### Print / PDF Checks
+
+Run representative report exports.
+
+---
+</pre></details><details data-heading="w42"><summary>W42 · 待核对 · 原文第 3973 行</summary><pre>## W42
+</pre></details><details data-heading="ask / guided reality machine regression"><summary>Ask / Guided Reality Machine Regression · 待核对 · 原文第 3975 行</summary><pre>### Ask / Guided Reality Machine Regression
+
+Run the full routing case set.
+
+---
+</pre></details><details data-heading="w43"><summary>W43 · 待核对 · 原文第 3981 行</summary><pre>## W43
+</pre></details><details data-heading="reality comparison machine regression"><summary>Reality Comparison Machine Regression · 待核对 · 原文第 3983 行</summary><pre>### Reality Comparison Machine Regression
+
+Run support / counter-evidence / open / missing cases.
+
+---
+</pre></details><details data-heading="w44"><summary>W44 · 待核对 · 原文第 3989 行</summary><pre>## W44
+</pre></details><details data-heading="report machine regression"><summary>Report Machine Regression · 待核对 · 原文第 3991 行</summary><pre>### Report Machine Regression
+
+All 8 products.
+
+---
+</pre></details><details data-heading="w45"><summary>W45 · 待核对 · 原文第 3997 行</summary><pre>## W45
+</pre></details><details data-heading="browser e2e"><summary>Browser E2E · 待核对 · 原文第 3999 行</summary><pre>### Browser E2E
+
+Real browser if available.
+
+Unavailable actions = NOT_RUN.
+
+---
+</pre></details><details data-heading="w46"><summary>W46 · 待核对 · 原文第 4007 行</summary><pre>## W46
+</pre></details><details data-heading="human reality-intake review"><summary>Human Reality-Intake Review · 待核对 · 原文第 4009 行</summary><pre>### Human Reality-Intake Review
+
+Leave PENDING unless actually performed.
+
+---
+</pre></details><details data-heading="w47"><summary>W47 · 待核对 · 原文第 4015 行</summary><pre>## W47
+</pre></details><details data-heading="human visual review"><summary>Human Visual Review · 待核对 · 原文第 4017 行</summary><pre>### Human Visual Review
+
+Leave PENDING unless actually performed.
+
+---
+</pre></details><details data-heading="w48"><summary>W48 · 待核对 · 原文第 4023 行</summary><pre>## W48
+</pre></details><details data-heading="commerce / purchase continuity review"><summary>Commerce / Purchase Continuity Review · 待核对 · 原文第 4025 行</summary><pre>### Commerce / Purchase Continuity Review
+
+Verify:
+
+```
+Free report
+→ lock
+→ unlock
+→ same report continues
+```
+
+Do not claim real payment acceptance unless performed.
+
+---
+</pre></details><details data-heading="w49"><summary>W49 · 待核对 · 原文第 4040 行</summary><pre>## W49
+</pre></details><details data-heading="final production candidate audit"><summary>Final Production Candidate Audit · 待核对 · 原文第 4042 行</summary><pre>### Final Production Candidate Audit
+
+Return:
+
+```
+implemented
+machine-tested
+browser-tested
+human-pending
+blocked
+not-run
+```
+
+separately.
+
+---
+</pre></details><details data-heading="60｜required checker invariants"><summary>60｜REQUIRED CHECKER INVARIANTS · 待核对 · 原文第 4059 行</summary><pre># 60｜REQUIRED CHECKER INVARIANTS
+
+At final machine acceptance all of the following must be true:
+
+```
+✓ no new parallel Ask runtime
+✓ no new parallel Current Reality runtime
+✓ no new parallel Report runtime
+✓ no new Knowledge Master
+✓ no new method calculation authority
+✓ no recommendation-as-truth logic
+✓ explicit method choice bypasses recommendation
+✓ general questions can bypass method selection
+✓ vague Reality questions can clarify
+✓ Discovery Mode exists
+✓ Quick mode exists
+✓ Reality Summary requires confirmation
+✓ counter-evidence preserved
+✓ no percentage truth score
+✓ no agreement-as-proof logic
+✓ fixed editorial pages are canonical
+✓ Origin page exists for every report
+✓ modern methods do not claim ancient lineage
+✓ PHI OS-native methods explain why they were built
+✓ all 8 report products resolve
+✓ conditional pages fail closed
+✓ DATA_REQUIRED ≠ PAID_LOCKED
+✓ same Page IR powers web and PDF
+✓ locked preview uses progressive disclosure
+✓ report map exposes state
+✓ BAZI M01–M08 resolve
+✓ BAZI sample art values never enter production defaults
+✓ charts use runtime data
+✓ mobile renders without overflow
+✓ print/PDF does not split primary visuals
+✓ Cross only consumes admitted methods
+✓ HD/Profile are not silently admitted to Cross
+```
+
+---
+</pre></details><details data-heading="61｜final status language"><summary>61｜FINAL STATUS LANGUAGE · 待核对 · 原文第 4100 行</summary><pre># 61｜FINAL STATUS LANGUAGE
+
+Do not return:
+
+```
+DONE
+COMPLETE
+PRODUCTION READY
+```
+
+unless every relevant gate actually passed.
+
+Use explicit status.
+
+Example:
+
+```
+IMPLEMENTED
+MACHINE PASS
+BROWSER PASS
+HUMAN VISUAL PENDING
+REAL PAYMENT NOT_RUN
+PRODUCTION ACCEPTANCE PENDING
+```
+
+---
+</pre></details><details data-heading="62｜files / output expectation"><summary>62｜FILES / OUTPUT EXPECTATION · 待核对 · 原文第 4127 行</summary><pre># 62｜FILES / OUTPUT EXPECTATION
+
+Because this is Direct Main workflow:
+
+Do NOT:
+
+```
+create aligned ZIP
+create delta ZIP
+create SHA manifest
+auto commit
+auto push
+reset user work
+```
+
+Do:
+
+```
+modify current worktree
+run checks
+leave all changed files in working tree
+return changed-file list
+return checker results
+return blockers
+return NOT_RUN items
+return human-review items
+```
+
+At end provide:
+
+```
+1. Current HEAD used as baseline
+2. Files added
+3. Files modified
+4. Files deleted, if any
+5. Checks run
+6. PASS / FAIL / NOT_RUN
+7. Human-review items
+8. Current production-admission state
+9. Exact next action for the user
+```
+
+The exact user next action should normally remain:
+
+```
+git status
+git diff --stat
+```
+
+then, after user review:
+
+```
+git add .
+git commit -m &quot;&lt;appropriate message&gt;&quot;
+git push origin main
+```
+
+Do not perform these commit/push actions yourself.
+
+---
+</pre></details><details data-heading="63｜final product principle"><summary>63｜FINAL PRODUCT PRINCIPLE · 待核对 · 原文第 4188 行</summary><pre># 63｜FINAL PRODUCT PRINCIPLE
+
+The successor is accepted only if the final customer experience feels like:
+
+```
+I do not need to know PHI OS terminology.
+
+I can begin from a real problem.
+
+PHI OS helps me express it.
+
+I can still choose my own method.
+
+The recommended method has a clear reason.
+
+The system does not pretend every method is equally useful for every question.
+
+My Reality answers appear meaningfully in the final report.
+
+The report distinguishes projection from evidence.
+
+The Free experience is already part of the same report.
+
+Unlocking continues the report instead of replacing it.
+
+The delivered report looks as premium as the product image promised.
+
+I can see what the system knows,
+what it interprets,
+what Reality currently supports,
+and what remains open.
+```</pre></details>
+</main><script>document.getElementById('filter').addEventListener('input',event=>{const q=event.target.value.toLowerCase();for(const el of document.querySelectorAll('details[data-heading]'))el.hidden=!el.dataset.heading.includes(q);});</script></html>

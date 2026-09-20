@@ -1,3 +1,4 @@
+import {validateOrderReportPresentation} from './report-presentation.js';
 // Successor dispatch of the existing /api/stripe-webhook, not a second endpoint.
 import {commerceProduct} from '../pws/commercial/stripe-product-registry.js';
 import {commerceOrder,commerceCustomerBinding,fulfillCommerceOrder,setCommercePaymentState,markCommerceReview,finishWebhookEvent,recordCommerceSubscription,refundCommerceOrder,prepareCommerceBookDelivery} from './book-commerce-store.js';
@@ -15,13 +16,18 @@ async function boundOrder(env,object){
   const binding=await commerceCustomerBinding(env,order.customer_id);
   assert(binding&&id(object.customer)===binding.stripe_customer_id);
   let product;try{product=commerceProduct(order.product_id);}catch{throw mismatch();}
-  assert(order.amount_minor===product.amountMinor&&order.currency==='MYR'&&order.qa_price_id===product.qaPriceId);
+  const presentation=validateOrderReportPresentation(product,order);
+  if(presentation)for(const key of ['reportLanguageMode','reportLocale','pricingVersion','modifierRule','surchargeAmountMinor'])assert(metadata[key]===String(presentation[key]));
+  assert(order.amount_minor===(presentation?.amountMinor??product.amountMinor)&&order.currency==='MYR'&&order.qa_price_id===product.qaPriceId);
   return {order,product};
 }
-function validateLineItems(lines,product){
-  assert(lines?.has_more!==true&&lines?.data?.length===1);
+function validateLineItems(lines,product,order){
+  const presentation=order?validateOrderReportPresentation(product,order):null;
+  const surcharge=presentation?.surchargeAmountMinor||0;
+  assert(lines?.has_more!==true&&lines?.data?.length===(surcharge?2:1));
   const line=lines.data[0],price=line.price||line.pricing?.price_details?.price;
   assert(id(price)===product.qaPriceId&&line.quantity===1);
+  if(surcharge){const modifier=lines.data[1];assert(modifier.quantity===1&&modifier.price?.unit_amount===surcharge&&modifier.price.currency==='myr'&&id(modifier.price.product)===product.qaProductId&&!modifier.price.recurring);}
 }
 export async function processCommerceStripeEvent({env,event,fetcher,origin,clock=Date.now}){
   requireStripeQa(env);
@@ -35,8 +41,8 @@ export async function processCommerceStripeEvent({env,event,fetcher,origin,clock
       const session=await retrieveCommerceSession(env,object.id,fetcher);
       const {order,product}=await boundOrder(env,session);orderId=order.checkout_attempt_id;
       assert(order.stripe_checkout_session_id===session.id&&session.livemode===false);
-      validateLineItems(session.line_items,product);
-      assert(session.currency==='myr'&&session.amount_total===product.amountMinor&&session.mode===(product.billingType==='RECURRING'?'subscription':'payment'));
+      validateLineItems(session.line_items,product,order);
+      assert(session.currency==='myr'&&session.amount_total===order.amount_minor&&session.mode===(product.billingType==='RECURRING'?'subscription':'payment'));
       if(['checkout.session.completed','checkout.session.async_payment_succeeded'].includes(event.type)){
         if(session.payment_status!=='paid') await setCommercePaymentState(env,orderId,'PAYMENT_PROCESSING');
         else{

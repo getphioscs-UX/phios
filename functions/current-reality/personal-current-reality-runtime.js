@@ -141,6 +141,31 @@ export function buildProgressiveCurrentRealityIntake(locale='en'){
 }
 export const PERSONAL_CURRENT_REALITY_SCHEMAS=Object.freeze({input:INPUT_SCHEMA,observation:OBSERVATION_SCHEMA,comparison:COMPARISON_SCHEMA,correlation:CORRELATION_SCHEMA});
 
+// Guided collection is an entry adapter to this owner, not another evidence store.
+export function guidedRealityQuestions(mode='GUIDED',locale='en'){
+ const rows=[['intent','UNDERSTAND_NOW','What would you like to understand?','你想弄清什么？'],['happening','ACTIVE_NOW','What is actually happening?','实际正在发生什么？'],['outcome','DECISION_STUCK','What would be useful to leave with?','你希望带走什么帮助？'],['duration','REPEATING_NOW','How long has this been happening?','这种情况持续多久了？'],['observations','DOMAIN_DETAIL','What have you directly observed?','你直接观察到了什么？'],['counterEvidence','CONTEXT_COUNTER_EVIDENCE','What does not fit this account?','哪些情况不符合这个描述？'],['support','SUPPORTIVE_NOW','What supports you?','什么正在支持你？'],['uncertainty','UNCERTAIN_NOW','What is still uncertain?','还有什么不确定？']];
+ if(!['QUICK','GUIDED','DEEP','DISCOVERY'].includes(mode))fail('GUIDED_REALITY_MODE_INVALID');
+ const selected=mode==='DISCOVERY'?[['recentChange','ACTIVE_NOW','What changed recently?','最近有什么变化？'],['whereObvious','DOMAIN_DETAIL','Where is it most noticeable?','在哪方面最明显？']]:rows.slice(0,mode==='QUICK'?3:mode==='GUIDED'?6:8);
+ return freeze(selected.map(([id,promptId,en,zh])=>({id,promptId,label:locale==='zh-Hans'?zh:en,maxLength:600,required:false})));
+}
+export function summarizeGuidedReality({mode='GUIDED',answers={},locale='en'}={}){
+ const questions=guidedRealityQuestions(mode,locale), allowed=new Set(questions.map(q=>q.id));
+ if(!answers||typeof answers!=='object'||Array.isArray(answers)||Object.keys(answers).some(k=>!allowed.has(k)))fail('GUIDED_REALITY_ANSWER_INVALID');
+ const items=questions.filter(q=>clean(answers[q.id])).map(q=>({id:q.id,promptId:q.promptId,label:q.label,text:clipped(answers[q.id],600)}));
+ return freeze({mode,locale,items,confirmationRequired:true,evidencePromoted:false,source:'CUSTOMER_VERBATIM',automaticPersistence:false});
+}
+export function confirmGuidedReality({mode,answers,locale='en',confirmation,confirmedSummary}={}){
+ const summary=summarizeGuidedReality({mode,answers,locale});
+ if(confirmation!=='ACCURATE'||confirmedSummary!==JSON.stringify(summary.items)||!summary.items.length)fail('GUIDED_REALITY_SUMMARY_CONFIRMATION_REQUIRED',403);
+ return normalizePersonalCurrentRealityInput({optIn:true,purposeCode:CURRENT_REALITY_PURPOSE,observations:summary.items.map(x=>({promptId:x.promptId,domain:'CURRENT_STATE',text:x.text}))},locale);
+}
+export function methodRealityProbes(methodId,locale='en'){
+ const ids={BZR:['REPEATING_NOW','DECISION_STUCK','SUPPORTIVE_NOW'],AST:['ACTIVE_NOW','REPEATING_NOW','UNCERTAIN_NOW'],ZWR:['ACTIVE_NOW','DECISION_STUCK','SUPPORTIVE_NOW'],NUM:['REPEATING_NOW','UNDERSTAND_NOW'],PROFILE:['REPEATING_NOW','SUPPORTIVE_NOW'],HD:['ENERGY_COST','DECISION_STUCK','SUPPORTIVE_NOW'],CROSS:['REPEATING_NOW','UNCERTAIN_NOW']}[methodId];
+ if(methodId==='ECR')return buildEcrContextEvidenceIntake(locale).filter(x=>['CARRIER_CONDITIONS','CARRIER_ENVIRONMENT','CONTEXT_COUNTER_EVIDENCE'].includes(x.promptId));
+ if(!ids)fail('GUIDED_REALITY_METHOD_INVALID');
+ return buildProgressiveCurrentRealityIntake(locale).level1.filter(x=>ids.includes(x.promptId));
+}
+
 // Optional R1A intake consumes the same consent, purpose, length, count and
 // self-report schema as every other Personal Reality observation. No score.
 export function buildEcrContextEvidenceIntake(locale='en'){

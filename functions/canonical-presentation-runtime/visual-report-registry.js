@@ -1,3 +1,4 @@
+import {REPORT_REFERENCE_BLUEPRINTS} from './report-blueprint-reference.js';
 import {commercialRuntime} from '../pws/commercial/commercial-runtime.js';
 const commerceCatalog=commercialRuntime.projectReportCatalog();
 // Presentation reads all prices and eligibility from the existing PWS owner.
@@ -29,3 +30,14 @@ export const VISUAL_REPORT_PRODUCTS = freeze([
  report('CROSS','CROSS_FULL_REPORT','#9c8247',['COVER','METHOD_COVERAGE','SNAPSHOT','SEMANTIC_MATRIX','COMMON','COMPLEMENTARY','TENSION','CONTEXT_DEPENDENT','OPEN','IDENTITY','RELATIONSHIPS','WORK','RESOURCES','TIMING','CURRENT_REALITY?','PRIORITY','NAVIGATION','EVIDENCE'],'CROSS_METHOD_RUNTIME_READING_IR_V2')
 ]);
 export const VISUAL_REPORT_BUNDLES = freeze(commerceCatalog.products.filter(p=>p.kind==='BUNDLE').map(p=>({...p,targetMyr:p.price.amountMinor/100,currency:p.price.currency,assetId:`COM-REPORT-${p.productId.replaceAll('_','-')}`,createsCrossReading:false,blocker:'HUMAN_REVIEW_AND_EXISTING_PRODUCTION_GATE'})));
+
+export const REPORT_BLUEPRINT_SUCCESSOR=freeze(VISUAL_REPORT_PRODUCTS.map(p=>({
+ methodId:p.methodId,productId:p.productId,authority:p.authority,
+ pagePlan:REPORT_REFERENCE_BLUEPRINTS.find(b=>b.methodId===p.methodId).pages.map(({sourceText,...page})=>page),
+ staticRoles:['COVER','METHOD_INTRO','ORIGIN','PHIOS_LENS','HOW_TO_READ'],
+ dynamicRoles:REPORT_REFERENCE_BLUEPRINTS.find(b=>b.methodId===p.methodId).pages.filter(p=>p.pageNumber>5).map(p=>p.role),
+ targetPages:{BZR:[26,26],AST:[26,26],ZWR:[26,26],NUM:[24,24],PROFILE:[12,26],ECR:[26,26],HD:[28,32],CROSS:[28,34]}[p.methodId],
+ eligibility:{missingEvidence:'DATA_REQUIRED',optionalAbsent:'NOT_APPLICABLE',pendingAdmission:'CONDITIONAL',paidDoesNotGrantMissingInputs:true},
+ requiredContext:p.methodId==='ECR'?{pages:[18,19,20],requirement:'INDEPENDENT_CURRENT_REALITY_OBSERVATIONS'}:p.methodId==='HD'?{advanced:['VARIABLES','PHS'],requirement:'ACTUAL_ADMITTED_INPUT'}:p.methodId==='CROSS'?{requirement:'ADMITTED_METHODS_ONLY',relationshipClasses:['COMMON','COMPLEMENTARY','TENSION','CONTEXT_DEPENDENT','OPEN']}:null,
+ editorialRegistry:'functions/canonical-presentation-runtime/report-editorial-registry.js',customerPublishable:false,humanReview:'PENDING'
+})));

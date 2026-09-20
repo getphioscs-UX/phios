@@ -1,3 +1,4 @@
+import {validateOrderReportPresentation} from './report-presentation.js';
 import {
   rawHmacHex,
   sha256Hex,
@@ -130,6 +131,16 @@ export function createCommerceCheckoutSession({env,product,order,customerId,orig
   const mode=product.billingType==='RECURRING'?'subscription':'payment';
   const metadata={order_id:order.checkout_attempt_id,commerce_product_id:product.productId,customer_id:order.customer_id,environment:'QA',schema_version:'COM-STRIPE-R1',selected_reports:order.selected_products_json};
   const body=new URLSearchParams({mode,customer:customerId,'line_items[0][price]':product.qaPriceId,'line_items[0][quantity]':'1',success_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}`,cancel_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}&checkout=cancelled`,locale:locale==='zh-Hans'?'zh':'en'});
+  const presentation=validateOrderReportPresentation(product,order);
+  if(presentation){
+    for(const key of ['reportLanguageMode','reportLocale','pricingVersion','modifierRule','surchargeAmountMinor'])metadata[key]=String(presentation[key]);
+    if(presentation.surchargeAmountMinor){
+      body.set('line_items[1][price_data][currency]','myr');
+      body.set('line_items[1][price_data][product]',product.qaProductId);
+      body.set('line_items[1][price_data][unit_amount]',String(presentation.surchargeAmountMinor));
+      body.set('line_items[1][quantity]','1');
+    }
+  }
   const suffix=order.checkout_attempt_id.replace('ord_','').slice(0,8).split('').map(c=>String.fromCharCode(97+parseInt(c,16))).join('');
   body.set('integration_identifier',`phios_commerce_qa_${suffix}`);
   for(const [key,value] of Object.entries(metadata)){

@@ -4,10 +4,11 @@ import {DatabaseSync} from 'node:sqlite';
 import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
 import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
 import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity} from '../functions/pws/commercial/stripe-product-registry.js';
+import {isLanguageReport} from '../functions/commerce/report-presentation.js';
 import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
 import {createStripeTestSignature} from '../functions/commerce/stripe-client.js';
 import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
-import {commerceAccountProjection,registerWebhookEvent,ensureBookProduct} from '../functions/commerce/book-commerce-store.js';
+import {ownedReportPresentation,commerceAccountProjection,registerWebhookEvent,ensureBookProduct} from '../functions/commerce/book-commerce-store.js';
 import {sha256Hex} from '../functions/commerce/commerce-crypto.js';
 
 const cases=[];async function test(name,fn){await fn();cases.push({name,status:'PASS',evidence:'local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end'});}
@@ -51,10 +52,11 @@ const fetcher=async(url,options={})=>{
   if(pathname==='/v1/customers')return respond({id:'cus_fixture',livemode:false});
   if(pathname==='/v1/billing_portal/sessions')return respond({url:'https://billing.stripe.com/p/session/test_fixture'});
   if(pathname==='/v1/checkout/sessions'){
-    assert(![...body.keys()].some(k=>k.includes('payment_method_types')||k.includes('price_data')));
+    assert(![...body.keys()].some(k=>k.includes('payment_method_types')));
     const metadata=Object.fromEntries([...body].filter(([k])=>/^metadata\[/.test(k)).map(([k,v])=>[k.slice(9,-1),v]));
     const product=STRIPE_PRODUCT_REGISTRY.find(p=>p.qaPriceId===body.get('line_items[0][price]'));assert(product);
     const session={id:`cs_test_fixture${++sequence}`,url:`https://checkout.stripe.com/c/pay/cs_test_fixture${sequence}`,expires_at:Math.floor(Date.now()/1000)+1800,livemode:false,mode:body.get('mode'),metadata,customer:body.get('customer'),payment_status:'unpaid',currency:'myr',amount_total:product.amountMinor,payment_intent:`pi_fixture${sequence}`,line_items:{data:[{price:{id:product.qaPriceId},quantity:1}]}};
+    const surcharge=Number(body.get('line_items[1][price_data][unit_amount]')||0);if(surcharge){assert.equal(body.get('line_items[1][price_data][product]'),product.qaProductId);session.amount_total+=surcharge;session.line_items.data.push({quantity:1,price:{id:'price_fixture_modifier',unit_amount:surcharge,currency:'myr',product:product.qaProductId}});}
     if(session.mode==='subscription'){
       session.subscription=`sub_fixture${sequence}`;subscriptions.set(session.subscription,{id:session.subscription,metadata,customer:session.customer,livemode:false,status:'active',cancel_at_period_end:false,items:{data:[{price:{id:product.qaPriceId},quantity:1,current_period_end:Math.floor(Date.now()/1000)+2592000}]}});
     }
@@ -65,7 +67,7 @@ const fetcher=async(url,options={})=>{
   throw new Error('Unexpected fixture request '+pathname);
 };
 const identity={userId:'user_owner',providerId:'QA_TEST_FIXTURE',authenticated:true,verified:true};
-const context=(body={},overrides={})=>({env,data:{symbolicAccountIdentity:identity},fetch:fetcher,request:new Request('https://phios.test/api/commerce-checkout',{method:'POST',headers:{origin:'https://phios.test','content-type':'application/json','idempotency-key':'test-key-'+String(++sequence).padStart(16,'0')},body:JSON.stringify({acceptDigitalPolicy:true,...body})}),...overrides});
+const context=(body={},overrides={})=>({env,data:{symbolicAccountIdentity:identity},fetch:fetcher,request:new Request('https://phios.test/api/commerce-checkout',{method:'POST',headers:{origin:'https://phios.test','content-type':'application/json','idempotency-key':'test-key-'+String(++sequence).padStart(16,'0')},body:JSON.stringify({acceptDigitalPolicy:true,...(STRIPE_PRODUCT_REGISTRY.some(p=>p.productId===body.productId&&isLanguageReport(p))?{reportLanguageMode:'SINGLE',reportLocale:'en'}:{}),...body})}),...overrides});
 let eventSeq=0;
 async function send(type,object,eventId=`evt_fixture${++eventSeq}`,override={}){
   const event={id:eventId,type,livemode:false,data:{object},...override},raw=JSON.stringify(event);
@@ -174,6 +176,19 @@ await test('unknown order or absent metadata records terminal review without gra
   const response=await send('checkout.session.completed',{id:'cs_test_unknown',livemode:false,metadata:{}});
   assert.equal(response.status,200);assert.equal((await response.json()).eventStatus,'review_required');
   assert.equal((await commerceAccountProjection(env,identity.userId)).entitlements.length,before);
+});
+await test('bilingual bundle settlement persists one language across every child and blocks tampered provider price',async()=>{
+ for(const [productId,count,total] of [['COM-REPORT-BUNDLE-2',2,6900],['COM-REPORT-BUNDLE-3',3,10900],['COM-REPORT-BUNDLE-5PLUS',5,17900]]){
+  const selectedProducts=standardBundleProducts().slice(0,count);
+  const r=await commerceApi(context({productId,selectedProducts,reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');assert.equal(r.status,201);const result=await r.json();
+  const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);assert.equal(session.amount_total,total);session.payment_status='paid';
+  assert.equal((await send('checkout.session.completed',session)).status,200);
+  for(const child of selectedProducts){const owned=await ownedReportPresentation(env,identity.userId,child);assert.equal(owned.reportPresentation.reportLocale,'bilingual');}
+  assert.equal(sqlite.prepare('SELECT amount_minor FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).amount_minor,total);
+ }
+ const r=await commerceApi(context({productId:'COM-REPORT-HD-FULL',reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');const result=await r.json();const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);session.line_items.data[1].price.unit_amount=1;session.payment_status='paid';
+ const invalid=await send('checkout.session.completed',session);assert.equal((await invalid.json()).eventStatus,'review_required');
+ assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).n,0);
 });
 fs.mkdirSync('docs/qa/commerce-stripe-r1',{recursive:true});
 fs.writeFileSync('docs/qa/commerce-stripe-r1/machine-results.json',JSON.stringify({work:'COM-STRIPE-R1',status:'PASS',cases,providerEndToEnd:'NOT_RUN',humanReview:'PENDING',liveOperations:'NOT_EXECUTED'},null,2)+'\n');
