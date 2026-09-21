@@ -81,6 +81,7 @@ The owner confirmed `FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY` (encrypted Secret) and
 - `functions/account/private-report-delivery.js` consumes only `PRIVATE_REPORTS`; it reuses existing RR release checks and DAR short-lived download grants. Each request rechecks owner, active release and consent, then verifies the retrieved bytes against the bound PDF digest. Responses are private/no-store and do not expose a permanent object URL.
 - This private-delivery adapter is **not yet wired to a public API or a trusted persisted RR material loader**. Customer private PDF delivery is therefore not accepted or advertised as available.
 - `private-bindings-evidence.json` records synthetic local tests using an in-memory SQLite database and a fake private R2 binding. Production/Preview resources and their actual secret values are never accessed by these tests. Draft customer UI and full live save/reload/download journeys remain pending.
+- Follow-up implementation is included in `f9d299fc` (`financial & R2`). The complete `npm run check` lifecycle, including precheck and postcheck, exited 0. Final Pages compilation exited 0 (Worker 6,415,087 bytes; gzip 1,301,857 bytes). `private-bindings-checks.json` and the adjacent logs record these results separately from the earlier authentication checkpoint.
 
 ## Evidence and remaining acceptance
 
