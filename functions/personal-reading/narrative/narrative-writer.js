@@ -62,7 +62,7 @@ export function humanizePublicationStatement(text){
 
 // The publication lane stays in this writer, behind the existing PAI router.
 // No live text is admitted solely because its provider returned valid JSON.
-export async function composePublicationNarrative({interpretation,locale,executionClass,registry={},providerAdapters=null,env={},fetcher,verifyComposition,timeoutMs=8000}={}){
+export async function composePublicationNarrative({interpretation,locale,executionClass,registry={},providerAdapters=null,env={},fetcher,verifyComposition,timeoutMs=8000,sectionComposition=null}={}){
  if(!['T2_LIGHT_COMPOSITION','T3_DEEP_COMPOSITION'].includes(executionClass))throw Error('PUBLICATION_COMPOSITION_CLASS_INVALID');
  if(interpretation?.schemaVersion!=='PHI-OS-PUBLICATION-INTERPRETATION-v2'||!['en','zh-Hans'].includes(locale))throw Error('PUBLICATION_WRITER_INPUT_INVALID');
  const route=selectPaiRoute({aiExecutionClass:executionClass,deterministicFallbackAvailable:true},registry);
@@ -73,7 +73,7 @@ export async function composePublicationNarrative({interpretation,locale,executi
  if(!invoke||typeof verifyComposition!=='function')return fallback();
  const controller=new AbortController();let timer;
  try{
-  const result=await Promise.race([invoke({model:route.selectedModel,executionClass,taskType:'PUBLICATION_NARRATIVE',language:locale,evidencePack:interpretation,compositionPolicy:{version:'2.0.0',calculate:false,required:['WHAT_WE_SEE','WHY_IT_MATTERS','WHEN_IT_MAY_DIFFER','WHAT_TO_OBSERVE'],preserve:['facts','conditions','counterSignals','boundaries'],maxParagraphs:3},signal:controller.signal}),new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('PUBLICATION_COMPOSITION_TIMEOUT'));},timeoutMs);})]);
+  const result=await Promise.race([invoke({model:route.selectedModel,executionClass,taskType:sectionComposition?'PUBLICATION_SECTION':'PUBLICATION_NARRATIVE',language:locale,evidencePack:interpretation,sectionComposition,compositionPolicy:{version:'2.1.0',calculate:false,scope:sectionComposition?'SECTION':'PAGE',required:['WHAT_WE_SEE','WHY_IT_MATTERS','WHEN_IT_MAY_DIFFER','WHAT_TO_OBSERVE'],preserve:['facts','conditions','counterSignals','boundaries'],maxParagraphs:3},signal:controller.signal}),new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('PUBLICATION_COMPOSITION_TIMEOUT'));},timeoutMs);})]);
   if(!Array.isArray(result?.paragraphs)||!result.paragraphs.length||result.paragraphs.length>3||result.paragraphs.some(p=>typeof p!=='string'||!p.trim()||p.length>1000))return fallback();
   const verified=await verifyComposition({interpretation,locale,result});
   if(verified?.accepted!==true||verified.sourceDigest!==interpretation.semanticDigest||verified.factsPreserved!==true||verified.boundariesPreserved!==true||verified.counterSignalsPreserved!==true)return fallback();

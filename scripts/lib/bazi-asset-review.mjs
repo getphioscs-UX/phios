@@ -1,0 +1,7 @@
+import fs from 'node:fs';
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+export function buildBaziAssetReview(root){
+ const a=JSON.parse(fs.readFileSync('config/reports/bazi-visual-assets.json'));
+ const cards=a.assets.map(x=>`<article><h2>${esc(x.assetId)}</h2><p>Priority ${x.priority} · ${x.assetType}</p><p>${x.status}</p>${a.bindings[x.assetId]?`<img src="${esc(a.bindings[x.assetId])}" alt="装饰资产预览">`:'<div class="fallback">CSS fallback 已启用</div>'}<p>R2 key: <code>${esc(x.objectKey)}</code></p><p>无文字声明：已登记 · 人工验收：待完成</p></article>`).join('');
+ fs.writeFileSync(`${root}/assets.html`,`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BaZi · 13 项视觉资产</title><style>body{margin:30px auto;max-width:1150px;padding:20px;background:#faf7ef;color:#293a41;font:16px/1.7 system-ui}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}article{padding:22px;border:1px solid #ccb88b;background:#fffdf8;overflow-wrap:anywhere}h2{font-size:17px}img,.fallback{width:100%;height:290px;object-fit:contain;background:#f6f2e7}.fallback{display:grid;place-items:center;color:#93784c}code{font-size:13px}a{color:#72572f}</style><h1>BaZi · 13 项视觉资产</h1><p>这是绑定与缺口清单。未提供的专属图片使用 fallback；不代表图片已生成、已上载 R2 或已人工通过。</p><p><a href="review.html">返回整书检查</a> · <a href="../ADDENDA-STATUS.md">实施与验收状态</a></p><main>${cards}</main></html>`);
+}

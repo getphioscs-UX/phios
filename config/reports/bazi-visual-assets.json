@@ -1,0 +1,339 @@
+{
+  "method": "BAZI",
+  "version": "2.1.0",
+  "global": {
+    "bodyBackground": "VIS-REPORT-BAZI-BODY",
+    "motifLayer": "VIS-REPORT-BAZI-MOTIF",
+    "sectionStyle": "VIS-REPORT-BAZI-SECTION-STYLE"
+  },
+  "sections": {
+    "S01_OVERVIEW": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
+    "S02_PERSONALITY": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
+    "S03_LIFE_STRUCTURE": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
+    "S04_CAREER": "VIS-REPORT-BAZI-SEC-04-CAREER",
+    "S05_WEALTH": "VIS-REPORT-BAZI-SEC-05-WEALTH",
+    "S06_RELATIONSHIP": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
+    "S07_HEALTH": "VIS-REPORT-BAZI-SEC-07-HEALTH",
+    "S08_TIMING": "VIS-REPORT-BAZI-SEC-08-TIMING",
+    "S09_GUIDANCE": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
+    "S10_APPENDIX": "VIS-REPORT-BAZI-SEC-10-APPENDIX"
+  },
+  "bindings": {
+    "VIS-REPORT-BAZI-MOTIF": "/assets/images/report/VIS-REPORT-BAZI-MOTIF.svg"
+  },
+  "fallback": "CSS_SECTION_STYLE_BODY_MOTIF",
+  "allowEmptySlots": false,
+  "fallbackOrder": [
+    "SECTION_HERO",
+    "SECTION_STYLE",
+    "BODY_WITH_MOTIF",
+    "BODY",
+    "CSS_PREMIUM"
+  ],
+  "heroPlacements": [
+    "hero-bottom",
+    "hero-right",
+    "hero-left",
+    "hero-full-fade",
+    "hero-corner"
+  ],
+  "openerRotation": [
+    "hero-bottom",
+    "hero-right",
+    "hero-left",
+    "hero-full-fade",
+    "hero-bottom",
+    "hero-right",
+    "hero-left",
+    "hero-full-fade",
+    "hero-bottom",
+    "hero-right"
+  ],
+  "bodyVariants": [
+    "BODY_A",
+    "BODY_B",
+    "BODY_C"
+  ],
+  "intensity": {
+    "body": 0.15,
+    "narrative": 0.12,
+    "insight": 0.09,
+    "opener": 0.45
+  },
+  "assets": [
+    {
+      "assetId": "VIS-REPORT-BAZI-BODY",
+      "method": "BAZI",
+      "assetType": "BODY",
+      "section": null,
+      "priority": "A",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/body/VIS-REPORT-BAZI-BODY.webp",
+      "fallback": "CSS_PREMIUM",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "EXISTING_AWAITING_FILE_BINDING",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-MOTIF",
+      "method": "BAZI",
+      "assetType": "MOTIF",
+      "section": null,
+      "priority": "A",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "svg",
+      "objectKey": "reports/bazi/r2/visual/motif/VIS-REPORT-BAZI-MOTIF.svg",
+      "fallback": "CSS_PREMIUM",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "PROVIDED_LOCAL_REVIEW_PENDING",
+      "humanVisualAcceptance": "PENDING",
+      "technicalNote": "SVG contains embedded PNG raster layers; accepted as decodable SVG, not claimed to be a pure vector master."
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "method": "BAZI",
+      "assetType": "SECTION_STYLE",
+      "section": null,
+      "priority": "A",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SECTION-STYLE.webp",
+      "fallback": "VIS-REPORT-BAZI-BODY",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S01_OVERVIEW",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S02_PERSONALITY",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S03_LIFE_STRUCTURE",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-04-CAREER",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S04_CAREER",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-05-WEALTH",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S05_WEALTH",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S06_RELATIONSHIP",
+      "priority": "B",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-07-HEALTH",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S07_HEALTH",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-08-TIMING",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S08_TIMING",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S09_GUIDANCE",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    },
+    {
+      "assetId": "VIS-REPORT-BAZI-SEC-10-APPENDIX",
+      "method": "BAZI",
+      "assetType": "SECTION_HERO",
+      "section": "S10_APPENDIX",
+      "priority": "C",
+      "localeIndependent": true,
+      "containsText": false,
+      "preferredFormat": "webp",
+      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
+      "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
+      "safeArea": {
+        "top": 0.2,
+        "center": 0.55,
+        "left": 0.12,
+        "right": 0.12,
+        "bottom": 0.12
+      },
+      "status": "OPTIONAL_NOT_PROVIDED",
+      "humanVisualAcceptance": "PENDING"
+    }
+  ]
+}
