@@ -714,7 +714,7 @@ export const familyRegistry = {
 
 export const visualAssets = {
   "method": "BAZI",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "global": {
     "bodyBackground": "VIS-REPORT-BAZI-BODY",
     "motifLayer": "VIS-REPORT-BAZI-MOTIF",
@@ -733,7 +733,19 @@ export const visualAssets = {
     "S10_APPENDIX": "VIS-REPORT-BAZI-SEC-10-APPENDIX"
   },
   "bindings": {
-    "VIS-REPORT-BAZI-MOTIF": "/assets/images/report/VIS-REPORT-BAZI-MOTIF.svg"
+    "VIS-REPORT-BAZI-MOTIF": "/assets/images/report/VIS-REPORT-BAZI-MOTIF.svg",
+    "VIS-REPORT-BAZI-BODY": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-BODY.webp",
+    "VIS-REPORT-BAZI-SECTION-STYLE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SECTION-STYLE.webp",
+    "VIS-REPORT-BAZI-SEC-01-OVERVIEW": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
+    "VIS-REPORT-BAZI-SEC-02-PERSONALITY": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
+    "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
+    "VIS-REPORT-BAZI-SEC-04-CAREER": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
+    "VIS-REPORT-BAZI-SEC-05-WEALTH": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
+    "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
+    "VIS-REPORT-BAZI-SEC-07-HEALTH": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
+    "VIS-REPORT-BAZI-SEC-08-TIMING": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
+    "VIS-REPORT-BAZI-SEC-09-GUIDANCE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
+    "VIS-REPORT-BAZI-SEC-10-APPENDIX": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp"
   },
   "fallback": "CSS_SECTION_STYLE_BODY_MOTIF",
   "allowEmptySlots": false,
@@ -784,7 +796,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/body/VIS-REPORT-BAZI-BODY.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-BODY.webp",
       "fallback": "CSS_PREMIUM",
       "safeArea": {
         "top": 0.2,
@@ -793,7 +805,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "EXISTING_AWAITING_FILE_BINDING",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -827,7 +839,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SECTION-STYLE.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SECTION-STYLE.webp",
       "fallback": "VIS-REPORT-BAZI-BODY",
       "safeArea": {
         "top": 0.2,
@@ -836,7 +848,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -848,7 +860,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -857,7 +869,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -869,7 +881,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -878,7 +890,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -890,7 +902,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -899,7 +911,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -911,7 +923,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -920,7 +932,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -932,7 +944,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -941,7 +953,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -953,7 +965,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -962,7 +974,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -974,7 +986,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -983,7 +995,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -995,7 +1007,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -1004,7 +1016,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -1016,7 +1028,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -1025,7 +1037,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     },
     {
@@ -1037,7 +1049,7 @@ export const visualAssets = {
       "localeIndependent": true,
       "containsText": false,
       "preferredFormat": "webp",
-      "objectKey": "reports/bazi/r2/visual/section/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
+      "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
       "fallback": "VIS-REPORT-BAZI-SECTION-STYLE",
       "safeArea": {
         "top": 0.2,
@@ -1046,7 +1058,7 @@ export const visualAssets = {
         "right": 0.12,
         "bottom": 0.12
       },
-      "status": "OPTIONAL_NOT_PROVIDED",
+      "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
     }
   ]

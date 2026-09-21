@@ -1,3 +1,4 @@
+import {projectFinancialNavigation} from './financial-navigation-projection.js';
 import {CX_PROJECTION_VERSION,boundary,clean,deepFreeze,finite,list,localeOf,object,safeUrl,sourceLineage,text} from './projection-common.js';
 const metric=(metrics,code)=>finite(metrics?.[code]);
 const evidenceLabel=state=>{const s=clean(state).toUpperCase();if(s.includes('VERIFIED'))return 'VERIFIED';if(s.includes('ASSUM'))return 'ASSUMED';if(s.includes('OUTDATED'))return 'OUTDATED';if(s.includes('MISSING'))return 'MISSING';if(s)return 'REPORTED';return 'MISSING'};
@@ -40,6 +41,7 @@ export function projectFinancialForCustomer(result={}, {intake={},locale='en'}={
  return deepFreeze({schemaVersion:`${CX_PROJECTION_VERSION}:FINANCIAL_REALITY`,surface:'FINANCIAL_REALITY',locale:lang,state:r.schemaVersion?'READY':'EMPTY',snapshot:{snapshotId:clean(snap.snapshotId)||null,asOfDate:clean(snap.asOfDate)||null,baseCurrency:currency,persisted:snap.persisted===true,evidenceState:evidenceLabel(snap.evidenceState)},
  overview:{whereYouAre:{asOfDate:clean(snap.asOfDate)||null,baseCurrency:currency,netWorth:metric(metrics,'netWorth')},strengths:strengthFindings,attention:attentionFindings,unknownCount:missingItemCount+explicitUnknownFindings.length+(clean(input('unknowns'))?1:0)},
  household,currentPosition,cashflow,calculations,assets,liabilities,protection,goals,constraints,documents,unknowns,findings,
+ navigation:projectFinancialNavigation(r.navigationCandidate,{locale:lang,date:snap.asOfDate,currency}),
  priorities,options,planning:deepFreeze({state:planningPresent?(clean(planningSource.state)||'AVAILABLE'):'NOT_ESTABLISHED',sourceAuthority:planningPresent?(clean(planningSource.sourceAuthority)||null):null,priorities,options,actionSequence,assumptions}),
  professionalReview:{available:r.professionalHandoff?.available===true,performed:false,route:clean(r.professionalHandoff?.route)||'/professional/financial/',productNeutral:r.professionalHandoff?.productNeutral===true},
  authorityLayers:{systemAnalysis:{present:findings.length>0,label:text(lang,'System analysis','系统分析')},professionalReview:{present:false,label:text(lang,'Professional review','专业复核')},professionalRecommendation:{present:false,label:text(lang,'Professional recommendation','专业建议')}},

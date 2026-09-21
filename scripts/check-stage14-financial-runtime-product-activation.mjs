@@ -23,5 +23,5 @@ if(fs.existsSync(cxRoutePath)){
 }else{
   assert.ok(currentFinancialHtml.includes('href="/financial-reality"'),'existing Financial surface must hand off to Financial Reality');
 }
-assert.ok(fs.readFileSync('sitemap.xml','utf8').includes('/financial-reality'),'sitemap must expose Financial Reality compatibility route');
+assert.ok(fs.readFileSync('sitemap.xml','utf8').includes('/professional/financial/'),'sitemap must expose the current canonical Financial Reality route');
 console.log('✓ STAGE 14 Financial Runtime Product Activation passed.');console.log('  FDR-compatible ephemeral intake → real FCR → real FAR → bounded snapshot/findings → PFR handoff.');console.log('  Scenario stays explicit-assumption-only; no hidden defaults, model calculation, automatic persistence or recommendation authority.');

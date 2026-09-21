@@ -1,0 +1,62 @@
+{
+  "workId": "PHIOS-FIN-WILL-FULL-PRODUCTION-R1",
+  "executionBaselineCommit": "d9e727d4223dc6f3e411a704ceb46beb66e08840",
+  "executionBranch": "main",
+  "initialWorkingTree": "CLEAN",
+  "status": "IN_PROGRESS_NOT_FULL_PRODUCTION_ACCEPTED",
+  "owners": {
+    "financialData": "FDR",
+    "calculation": "FCR",
+    "analysis": "FAR",
+    "planning": "HFP",
+    "professional": "PFR",
+    "reportRelease": "RR",
+    "testamentary": [
+      "PTRC_TESTAMENTARY_INTAKE",
+      "PTRC_TESTAMENTARY_REPORT",
+      "PTRC_TESTAMENTARY_SECURITY"
+    ]
+  },
+  "boundaries": {
+    "NO_PARALLEL_FINANCIAL_RUNTIME_CREATED": true,
+    "NO_PARALLEL_WILL_RUNTIME_CREATED": true,
+    "NO_AUTOMATIC_LEGAL_VALIDITY_CLAIM": true,
+    "NO_MODEL_GENERATED_FINANCIAL_CALCULATION": true,
+    "PROFESSIONAL_RECOMMENDATIONS_REMAIN_PFR_GATED": true
+  },
+  "notRun": [
+    "Live production deployment",
+    "Rockwills external live portal verification",
+    "Account-bound encrypted draft save/restore",
+    "Paid report entitlement and RR release end-to-end",
+    "Real PFR/legal approval",
+    "Full required 22 financial + 19 Will fixture matrix",
+    "Canonical Will schema full-field round trip"
+  ],
+  "fullRepositoryCheck": {
+    "command": "npm.cmd run check",
+    "exitCode": 0,
+    "log": "npm-check.log"
+  },
+  "blockers": [
+    {
+      "code": "PFR_PRODUCTION_AUTHORITY_NOT_INSTALLED",
+      "owner": "functions/financial/holistic-planning-product/holistic-financial-planning-runtime.js",
+      "reason": "Formal professional mode remains unavailable outside fixtures; recommendations and release cannot be synthesized."
+    },
+    {
+      "code": "DAR_PERSON_PRIVACY_RECONCILIATION_REQUIRED",
+      "owners": [
+        "content/document-assembly/contracts/person-role-contract-v1.json",
+        "functions/professional/financial/testamentary-security-v1.js"
+      ],
+      "reason": "Full DAR person schema requires identity number/address; testamentary review intake forbids full identity storage. Current projection stays an informational subset."
+    }
+  ],
+  "pagesBuild": {
+    "command": "npm.cmd run check:pages-build",
+    "exitCode": 0,
+    "workerGzipBytes": 1273714,
+    "deployPerformed": false
+  }
+}

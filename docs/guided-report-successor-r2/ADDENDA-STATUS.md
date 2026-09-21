@@ -28,13 +28,11 @@ The new path extends the current projection, writer, presentation owner and rend
 
 ## Addendum C asset state
 
-All 13 IDs, exact filenames, proposed R2 object keys, priorities, safe areas, text-free declarations and locale-independent bindings are registered in `config/reports/bazi-visual-assets.json`.
+All 13 visual identities are registered. On baseline d9e727d, the user's twelve supplied WebP objects (BODY, SECTION-STYLE and ten chapter heroes) returned HTTP 200 from the public R2 bucket and were bound to their exact images/reports/bazi/editorial/shared/ keys. Browser decoding passed for all thirteen bound assets. Dedicated chapter images now replace the drawn fallback when present; the drawn landscape remains available if the image chain fails.
 
-The current `VIS-REPORT-BAZI-MOTIF.svg` in the workspace is bound and decoded. It appeared with new image content during implementation and was preserved. It contains embedded PNG layers, so it is not represented as a pure-vector master. Text-free declaration still requires human visual acceptance; the checker validates SVG safety, extension, binding and successful decode, not semantic image contents.
+The supplied /assets/images/method/VIS-REPORT-BAZI-MOTIF.svg path was absent locally and returned HTTP 404 from the public R2 host. The existing working /assets/images/report/VIS-REPORT-BAZI-MOTIF.svg binding is retained. It contains embedded raster PNG layers, so it is not described as a pure-vector master. This was public URL verification, not an authenticated inventory of the entire bucket.
 
-BODY is marked existing in C and in the conversation, but its actual file/object URL was not exposed by the retrieved chat attachments or located in the repository. Its identity is retained as **EXISTING_AWAITING_FILE_BINDING**, not replaced or declared absent from the user's account. No R2 upload or live bucket inventory is claimed in this work.
-
-SECTION-STYLE and ten dedicated heroes are optional and currently unbound. The resolver follows hero → section style → body with motif → body → CSS premium fallback. Decode failures advance through available alternatives. No symbolic asset ID is used as an image URL.
+Fallback remains hero → section style → body with motif → body → CSS. Human visual acceptance and production cutover remain separate from HTTP/browser checks.
 
 Five placement variants are supported; the supplied ten-section rotation uses bottom, right, left and full-fade. Consecutive openers differ. Body A/B/C vary placement from the same asset. Narrative decorations are limited to 12%, insight decoration to 9%, and opener hero to 45% (35% for full-fade). Titles, numbers, diagrams, prose and folios stay in HTML.
 
@@ -52,7 +50,7 @@ BaZi human acceptance, other-method migration, live T3 admission and production 
 - `node scripts/check-bazi-section-publication.mjs`: registry/order, families, 36/35-page expansion, section-level requests, source scope, bilingual structure, frozen intro, exact dynamic folios, content budgets and 13-asset fallback contract.
 - `node scripts/check-guided-report-r2.mjs`: previous R2 temporal, cache, provider failure, privacy and 26-page fixture regression preserved.
 - Browser QA: 2 locales × 2 viewport widths × 36 pages = **144 screenshots**, no horizontal overflow or print footer overlap.
-- Asset browser QA: actual bound SVG decode and simulated hero 404 fallback pass.
+- Asset browser QA: twelve remote WebP images plus the bound SVG decode; simulated hero 404 fallback passes.
 - PDF QA: two A4 files, expected pages derived from their semantic snapshots; per-page rendering, dynamic folios and identifier checks.
 - Full repository regression: **`npm.cmd run check` passed with exit code 0**, including precheck and postcheck; see `addendum-b/npm-check.log`.
 - Computed browser asset policy: narrative decoration ≤15%, insight decoration ≤10%, four opener placements with no identical consecutive placement; all pass.
@@ -73,4 +71,4 @@ The first full check found prohibited JSON import attributes in Pages Functions.
 | Asset quality | No lettering, people or unintended symbols; safe typography area; embedded-raster SVG print appearance |
 | Privacy | Customer pages contain no hashes, provider names or method runtime IDs |
 
-No acceptance has been recorded on behalf of the user. Production successor active: **false**. Changes remain uncommitted.
+No acceptance has been recorded on behalf of the user. Production successor active: **false**. Latest binding work is recorded against execution baseline d9e727d; see the delivery commit for its revision.

@@ -12,7 +12,7 @@ try{
  const records=[];
  for(const a of assets.assets){const src=assets.bindings[a.assetId];if(!src){records.push({assetId:a.assetId,status:a.status,selectedFallback:'CSS_PREMIUM',humanVisualAcceptance:'PENDING'});continue;}
   const size=await page.evaluate(async src=>{const i=new Image();i.src=src;await i.decode();return {width:i.naturalWidth,height:i.naturalHeight};},src);
-  assert(size.width&&size.height);records.push({assetId:a.assetId,src,...size,sha256:createHash('sha256').update(fs.readFileSync('.'+src)).digest('hex'),decoded:true,containsTextDeclared:false,humanVisualAcceptance:'PENDING'});
+  assert(size.width&&size.height);records.push({assetId:a.assetId,src,...size,sha256:src.startsWith('https://')?null:createHash('sha256').update(fs.readFileSync('.'+src)).digest('hex'),decoded:true,containsTextDeclared:false,humanVisualAcceptance:'PENDING'});
  }
  await page.route('**/simulated-missing-section-hero.webp',r=>r.fulfill({status:404,body:''}));
  const fallback=await page.evaluate(async()=>{
