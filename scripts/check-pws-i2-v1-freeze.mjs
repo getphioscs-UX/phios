@@ -124,7 +124,7 @@ assert.equal(objectCounts.Product, 2);
 assert.equal(objectCounts.Offer, 2);
 assert.equal(objectCounts.PublishedAssetType, 7);
 assert.equal(objectCounts.DeliverableType, 5);
-assert.equal(migrations.length, 6);
+assert.equal(migrations.length, 7);
 
 assert.equal(freeze.frozenBoundaries.coreRuntimeAuthorityPreserved, true);
 assert.equal(freeze.frozenBoundaries.pkrKnowledgeAuthorityPreserved, true);

@@ -47,4 +47,4 @@ Rockwills live portal verification: **NOT_RUN**, as specified in the attachment.
 
 `PROFESSIONAL_RECOMMENDATIONS_REMAIN_PFR_GATED`
 
-Full DAR person schema privacy reconciliation remains required: `person-role-contract-v1.json` requires `idNumber` and `address`, while the testamentary security contract forbids full identity-number storage. No dummy identity, inferred address or relaxed security rule was introduced to claim full-schema acceptance.
+The [FW production successor report](fw-production/IMPLEMENTATION-REPORT.md) records subsequent work. A versioned DAR person-role v2 now reconciles persisted draft identity fields without altering v1 or weakening testamentary security; consumer cutover and the full Will round trip remain pending. No dummy identity, inferred address or relaxed security rule was introduced to claim full-schema acceptance.

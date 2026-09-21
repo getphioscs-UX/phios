@@ -135,7 +135,7 @@ await assert.rejects(
   RegistryValidationError
 );
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 6);
+assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 7);
 database.close();
 console.log('✓ PWS-I2-W3 Capability and Credential Registry passed.');
 console.log('  Seven Capability Definitions and seven Credential Requirements registered.');

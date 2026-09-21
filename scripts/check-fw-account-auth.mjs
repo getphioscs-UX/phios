@@ -1,0 +1,63 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {DatabaseSync} from 'node:sqlite';
+import {generateKeyPair,exportJWK,SignJWT} from 'jose';
+import {authApi,authenticate,verifyIdToken,SESSION_COOKIE} from '../functions/account/oidc-auth.js';
+import {onRequest as middleware} from '../functions/api/_middleware.js';
+
+const sqlite=new DatabaseSync(':memory:');
+for(const file of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync(`db/migrations/${file}`,'utf8'));
+sqlite.exec(fs.readFileSync('db/migrations/0007_account_oidc_sessions.sql','utf8'));
+const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const results=[];for(const statement of statements)results.push(await statement.run());sqlite.exec('COMMIT');return results;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
+const {publicKey,privateKey}=await generateKeyPair('RS256'),jwk={...await exportJWK(publicKey),kid:'test-key',alg:'RS256',use:'sig'};
+const counts={callbacks:0};
+for(const issuer of ['https://custom-auth.example/','https://tenant.example/']){
+ const env={AUTH_PROVIDER:'auth0',AUTH_ISSUER:issuer,AUTH_CLIENT_ID:'fixture-client',AUTH_CLIENT_SECRET:'fixture-only-client-secret',AUTH_SESSION_SECRET:'fixture-only-session-secret-of-at-least-32-characters',RUNTIME_DB:db};
+ let nonce,claimedSub='subject-1',emailVerified=true;
+ const token=async overrides=>new SignJWT({nonce,email_verified:emailVerified,...overrides}).setProtectedHeader({alg:'RS256',kid:'test-key'}).setIssuer(issuer).setAudience(env.AUTH_CLIENT_ID).setSubject(claimedSub).setIssuedAt().setExpirationTime('5m').sign(privateKey);
+ const fetcher=async (url,options={})=>{
+  assert.equal(new URL(url).origin,new URL(issuer).origin);
+  if(url.endsWith('openid-configuration'))return Response.json({issuer,authorization_endpoint:`${issuer}authorize`,token_endpoint:`${issuer}oauth/token`,jwks_uri:`${issuer}jwks`,end_session_endpoint:`${issuer}oidc/logout`,id_token_signing_alg_values_supported:['RS256']});
+  if(url.endsWith('/jwks'))return Response.json({keys:[jwk]});
+  if(url.endsWith('/oauth/token')){assert.equal(options.body.get('client_secret'),env.AUTH_CLIENT_SECRET);assert.equal(options.body.get('code_verifier').length,64);return Response.json({id_token:await token()});}
+  throw new Error('Unexpected request');
+ };
+ const context=(path,options={})=>({request:new Request(`https://app.example${path}`,options),env,fetch:fetcher,data:{}});
+ assert.equal(await authenticate(context('/api/test',{headers:{'X-User-Id':'forged'}})),null);
+ const login=await authApi(context('/api/auth/login'),'login');assert.equal(login.status,302);
+ const location=new URL(login.headers.get('location'));nonce=location.searchParams.get('nonce');assert.equal(location.origin,new URL(issuer).origin);assert.equal(location.searchParams.get('code_challenge_method'),'S256');
+ const tx=login.headers.get('set-cookie').split(';')[0];assert.match(tx,/^__Host-phios-login=/);assert(!tx.includes(env.AUTH_CLIENT_SECRET));
+ const state=location.searchParams.get('state');
+ assert.equal((await authApi(context('/api/auth/callback?code=test&state=wrong',{headers:{cookie:tx}}),'callback')).status,401);
+ const badNonce=await token({nonce:'wrong'});await assert.rejects(()=>verifyIdToken(context('/'),badNonce,nonce));
+ const wrongAudience=await new SignJWT({nonce,email_verified:true}).setProtectedHeader({alg:'RS256',kid:'test-key'}).setIssuer(issuer).setAudience('other').setSubject('attacker').setIssuedAt().setExpirationTime('5m').sign(privateKey);
+ await assert.rejects(()=>verifyIdToken(context('/'),wrongAudience,nonce));
+ const expired=await new SignJWT({nonce,email_verified:true}).setProtectedHeader({alg:'RS256',kid:'test-key'}).setIssuer(issuer).setAudience(env.AUTH_CLIENT_ID).setSubject('subject-1').setIssuedAt(Math.floor(Date.now()/1000)-900).setExpirationTime(Math.floor(Date.now()/1000)-60).sign(privateKey);
+ await assert.rejects(()=>verifyIdToken(context('/'),expired,nonce));
+ const wrongIssuer=await new SignJWT({nonce,email_verified:true}).setProtectedHeader({alg:'RS256',kid:'test-key'}).setIssuer('https://untrusted.example/').setAudience(env.AUTH_CLIENT_ID).setSubject('subject-1').setIssuedAt().setExpirationTime('5m').sign(privateKey);
+ await assert.rejects(()=>verifyIdToken(context('/'),wrongIssuer,nonce));
+ emailVerified=false;assert.equal((await authApi(context(`/api/auth/callback?code=test&state=${state}`,{headers:{cookie:tx}}),'callback')).status,403);emailVerified=true;
+ emailVerified=false;const pending=await authApi(context(`/api/auth/callback?code=test&state=${state}`,{headers:{cookie:tx,accept:'text/html'}}),'callback');assert.match(await pending.text(),/Verify your email/);emailVerified=true;
+ const callback=await authApi(context(`/api/auth/callback?code=test&state=${state}`,{headers:{cookie:tx}}),'callback');assert.equal(callback.status,302);counts.callbacks++;
+ const session=callback.headers.getSetCookie().find(c=>c.startsWith(SESSION_COOKIE+'=')).split(';')[0];
+ const who=await authenticate(context('/api/private',{headers:{cookie:session}}));assert(who?.verified);assert.equal(who.providerId,issuer);
+ const trusted=context('/api/private',{headers:{cookie:session,'x-user-id':'forged'}});trusted.next=()=>Response.json({userId:trusted.data.symbolicAccountIdentity?.userId,access:trusted.data.ckaAccess});
+ const projected=await (await middleware(trusted)).json();assert.equal(projected.userId,who.userId);assert.equal(projected.access.entitlement,false);assert.equal(projected.access.permission,false);assert.equal(projected.access.retentionPolicyAccepted,false);
+ const csrf=context('/api/private',{method:'POST',headers:{cookie:session,origin:'https://evil.example'}});csrf.next=()=>{throw new Error('Must not reach downstream');};assert.equal((await middleware(csrf)).status,403);
+ const account=await (await authApi(context('/api/auth/session',{headers:{cookie:session}}),'session')).json();assert.equal(account.authenticated,true);assert(!JSON.stringify(account).includes(who.userId));
+ sqlite.prepare("UPDATE users SET status='deleted' WHERE user_id=?").run(who.userId);
+ assert.equal(await authenticate(context('/api/private',{headers:{cookie:session}})),null);
+ sqlite.prepare("UPDATE users SET status='active' WHERE user_id=?").run(who.userId);
+ const originalExpiry=sqlite.prepare('SELECT expires_at FROM account_verified_sessions WHERE session_hash=?').get(who.sessionId).expires_at;
+ sqlite.prepare('UPDATE account_verified_sessions SET expires_at=0 WHERE session_hash=?').run(who.sessionId);
+ assert.equal(await authenticate(context('/api/private',{headers:{cookie:session}})),null);
+ sqlite.prepare('UPDATE account_verified_sessions SET expires_at=? WHERE session_hash=?').run(originalExpiry,who.sessionId);
+ assert.equal((await authApi(context('/api/auth/logout',{method:'POST',headers:{cookie:session,origin:'https://evil.example'}}),'logout')).status,403);
+ const logout=await authApi(context('/api/auth/logout',{method:'POST',headers:{cookie:session,origin:'https://app.example'}}),'logout');assert.equal(logout.status,303);assert.equal(new URL(logout.headers.get('location')).origin,new URL(issuer).origin);
+ assert.equal(await authenticate(context('/api/private',{headers:{cookie:session}})),null);
+ assert.equal(await authenticate(context('/api/private',{headers:{cookie:session+'tampered'}})),null);
+}
+assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM users').get().n,2,'same subject under different issuers cannot merge');
+fs.mkdirSync('docs/financial-will-successor-r1/fw-production',{recursive:true});
+fs.writeFileSync('docs/financial-will-successor-r1/fw-production/auth-evidence.json',JSON.stringify({passed:true,providerMode:'SYNTHETIC_OIDC_WITH_REAL_RSA_SIGNATURES',realProviderLogin:'NOT_RUN',migration:'0007_account_oidc_sessions.sql',sqliteMigrations:'PASS',...counts},null,2)+'\n');
+console.log('PASS OIDC custom/default issuer, signed token, PKCE, nonce/state, verified email, subject mapping, session revocation, CSRF and migration idempotence. Live Auth0 login not claimed.');

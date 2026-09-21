@@ -1,0 +1,32 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import Ajv from 'ajv/dist/2020.js';
+import {admitPersonUse,assertNoPersistedIdentity} from '../functions/account/person-use-policy.js';
+import {PTRC_TESTAMENTARY_SECURITY_POLICY} from '../functions/professional/financial/testamentary-security-v1.js';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const v1='content/document-assembly/contracts/person-role-contract-v1.json',v2=read('content/document-assembly/contracts/person-role-contract-v2.json');
+assert.equal(createHash('sha256').update(fs.readFileSync(v1)).digest('hex'),'b54abd08c74f50f644d3a98b38da80a400ff72df5c94286ca22c6a0c4b40ef0d','Frozen v1 must remain byte-identical to df24926b');
+assert(read(v1).required.includes('idNumber'));assert.equal(PTRC_TESTAMENTARY_SECURITY_POLICY.fullIdentityNumberStorageAllowed,false);
+assert.equal(v2['x-phi-os'].predecessor,v1);
+const validate=new Ajv({strict:false}).compile(v2);
+const role={personId:'P1',fullName:'Synthetic person',idType:'UNKNOWN',identityCaptureState:'FINALIZATION_REQUIRED',addressCaptureState:'NOT_PROVIDED',roles:['EXECUTOR']};
+assert(validate(role));assert(!('idNumber' in role));assert(!('address' in role));
+assert(!validate({...role,idNumber:'dummy'}));assert(!validate({...role,addressCaptureState:'CUSTOMER_DECLARED'}));assert(!validate({...role,identityReferenceLast4:'12345678'}));
+assert.throws(()=>assertNoPersistedIdentity({people:[{identity_number:'123'}]}));
+assertNoPersistedIdentity({people:[role]});
+const person={personId:'P1',accountOwnerUserId:'U1',subjectClass:'SELF',displayName:'Synthetic',birthDate:'2000-01-01',relationshipToAccountOwner:'SELF'};
+const consent={consentId:'C1',personId:'P1',grantingSubjectReference:'U1',purposeScope:'PERSONAL_METHOD',dataScopes:['personId','displayName','birthDate'],grantedAt:'2026-01-01T00:00:00Z',expiresAt:'2027-01-01T00:00:00Z',revocationState:'ACTIVE',consentVersion:1,authorityBasis:'EXPLICIT_SELF_CONSENT'};
+const input={userId:'U1',person,consent,purpose:'PERSONAL_METHOD',now:Date.parse('2026-09-21T00:00:00Z')};
+assert.deepEqual(admitPersonUse(input),{personId:'P1',displayName:'Synthetic'});
+for(const patch of [{userId:'OTHER'},{purpose:'*'},{consent:{...consent,dataScopes:['*']}},{consent:{...consent,revocationState:'REVOKED'}},{consent:{...consent,expiresAt:'2025-01-01'}},{requiredFields:['bankAccount']},{person:{...person,subjectClass:'DEPENDENT'}}])assert.throws(()=>admitPersonUse({...input,...patch}));
+assert(admitPersonUse({...input,person:{...person,subjectClass:'DEPENDENT'},authority:{guardianAuthorityRecorded:true}}));
+const adult={...input,person:{...person,subjectClass:'DECLARED_THIRD_PARTY'},purpose:'FINANCIAL_PLANNING',consent:{...consent,purposeScope:'FINANCIAL_PLANNING'}};
+assert.throws(()=>admitPersonUse(adult));assert(admitPersonUse({...adult,authority:{adultSubjectConsentVerified:true}}));
+const rel={...adult,purpose:'RELATIONSHIP_READING',consent:{...consent,purposeScope:'RELATIONSHIP_READING'}};assert.throws(()=>admitPersonUse(rel));assert(admitPersonUse({...rel,authority:{bilateralActiveConsentVerified:true}}));
+for(const purpose of ['TAROT_CONTEXT','ICHING_CONTEXT']){
+ const context={...input,purpose,consent:{...consent,purposeScope:purpose,dataScopes:['personId','displayName']}};assert.equal(admitPersonUse(context).birthDate,undefined);assert.throws(()=>admitPersonUse({...context,requiredFields:['birthDate']}));
+}
+fs.mkdirSync('docs/financial-will-successor-r1/fw-production',{recursive:true});
+fs.writeFileSync('docs/financial-will-successor-r1/fw-production/s1-evidence.json',JSON.stringify({passed:true,scope:'CONTRACT_AND_POLICY_ONLY',v1Sha256:createHash('sha256').update(fs.readFileSync(v1)).digest('hex'),v1Unchanged:true,productionConsumersInstalled:false,checks:['no persisted full identity','no dummy identity','no inferred address','explicit v2 predecessor','adult subject consent','minor authority','bilateral relationship consent','purpose and field minimization','expiry and revocation','cross-account denial']},null,2)+'\n');
+console.log('PASS FW-S1 contract/privacy policy; frozen v1 and security preserved. Production consumer cutover remains separate.');

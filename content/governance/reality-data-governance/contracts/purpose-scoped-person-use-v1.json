@@ -1,0 +1,9 @@
+{
+  "contractCode":"PHIOS-RDG-PURPOSE-SCOPED-PERSON-USE-v1",
+  "authorityOwner":"RDG",
+  "upstreamPermission":"content/governance/reality-data-governance/contracts/data-permission-contract-v1.json",
+  "requiredFields":["consentId","personId","grantingSubjectReference","purposeScope","dataScopes","grantedAt","expiresAt","revocationState","consentVersion","authorityBasis"],
+  "purposeScopes":["PERSONAL_METHOD","RELATIONSHIP_READING","FINANCIAL_PLANNING","WILL_ASSEMBLY","PROFESSIONAL_REVIEW","REPORT","TAROT_CONTEXT","ICHING_CONTEXT","ASK_PERSONALIZATION"],
+  "rules":{"noWildcard":true,"defaultGrantAll":false,"adultHouseholdMembersRequireSeparateConsent":true,"minorRequiresRecordedAuthorityBasis":true,"bilateralRelationshipConsentRequired":true,"consentImpliesRetention":false,"willRoleImpliesAppointment":false,"expiredOrRevokedFailsClosed":true,"missingGovernanceFailsClosed":true},
+  "rdgPurposeMapping":{"PERSONAL_METHOD":"SERVICE_DELIVERY","RELATIONSHIP_READING":"SERVICE_DELIVERY","FINANCIAL_PLANNING":"SERVICE_DELIVERY","WILL_ASSEMBLY":"SERVICE_DELIVERY","PROFESSIONAL_REVIEW":"PROFESSIONAL_SERVICE","REPORT":"SERVICE_DELIVERY","TAROT_CONTEXT":"SERVICE_DELIVERY","ICHING_CONTEXT":"SERVICE_DELIVERY","ASK_PERSONALIZATION":"USER_REQUESTED_MEMORY"}
+}
