@@ -187,7 +187,7 @@ for (const file of htmlFiles) {
   );
 }
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 7);
+assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 8);
 database.close();
 console.log('✓ PWS-I2-W5 Product and Offer Registry passed.');
 console.log('  Six Product Types, Reality Journey Pass v1 and Book I registered.');

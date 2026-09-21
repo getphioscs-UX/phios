@@ -198,7 +198,7 @@ const [nodesAfter, questionsAfter] = await Promise.all([
 ]);
 assert.deepEqual(nodesAfter, nodesBefore);
 assert.deepEqual(questionsAfter, questionsBefore);
-assert.equal(migrations.length, 7);
+assert.equal(migrations.length, 8);
 
 database.close();
 console.log('✓ PWS-I2-W7 Migration and Reconciliation passed.');

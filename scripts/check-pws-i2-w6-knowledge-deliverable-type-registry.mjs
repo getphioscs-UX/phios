@@ -139,7 +139,7 @@ assert.equal(book1Blueprint.nodes.length, book1Blueprint.plannedCanonicalNodes);
 assert.equal(book1Blueprint.activeProductionLimit, 8);
 assert.equal(knowledgeAfter.totals.books, 5);
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 7);
+assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 8);
 database.close();
 console.log('✓ PWS-I2-W6 Knowledge and Deliverable Type Registry passed.');
 console.log('  Seven Published Asset Types and five Deliverable Types registered.');

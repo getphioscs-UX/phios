@@ -407,7 +407,7 @@ assert.equal(evidence.preservation.commercialRuntimeBlocked, false);
 
 const migrationFiles = (await fs.readdir(path.join(root, 'db/migrations')))
   .filter(file => file.endsWith('.sql'));
-assert.equal(migrationFiles.length, 7); // COM-STRIPE-R1 additive migration; historical PJA evidence unchanged.
+assert.equal(migrationFiles.length, 8); // COM-STRIPE-R1 additive migration; historical PJA evidence unchanged.
 assert.equal(evidence.preservation.d1MigrationAdded, false);
 
 assert.equal(

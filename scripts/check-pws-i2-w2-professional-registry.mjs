@@ -121,7 +121,7 @@ const outbox = database.prepare(`
 `).get();
 assert.equal(Number(audits.value), 13);
 assert.equal(Number(outbox.value), 13);
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 7);
+assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 8);
 
 database.close();
 console.log('✓ PWS-I2-W2 Professional Registry passed.');

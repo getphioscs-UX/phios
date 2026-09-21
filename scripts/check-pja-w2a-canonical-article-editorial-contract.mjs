@@ -229,7 +229,7 @@ assert.deepEqual(
   [...frozenKnowledgeRegistryFiles].sort()
 );
 assert.equal(registrySchemas.length, 12);
-assert.equal(migrationFiles.length, 7); // COM-STRIPE-R1 adds migration 0006; article authority is unchanged.
+assert.equal(migrationFiles.length, 8); // COM-STRIPE-R1 adds migration 0006; article authority is unchanged.
 assert.equal(contract.preservation.canonicalNodeCount, blueprint.prefaceCanonicalNodes);
 assert.equal(
   contract.preservation.canonicalThemeCount,

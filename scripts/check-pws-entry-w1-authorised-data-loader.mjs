@@ -271,10 +271,10 @@ assert.equal(Object.keys(registryIndex.registries).length, 51);
 assert.equal(registryIndex.registries.public_assets, './public-assets.json');
 assert.equal(registryIndex.registries.book_5_manifest, './book-5-manifest.json');
 assert.equal(runtimeContracts.contracts.length, 20);
-assert.equal(migrations.migrations.length, 7);
+assert.equal(migrations.migrations.length, 8);
 assert.deepEqual(
   migrations.migrations.map(item => item.version),
-  [1, 2, 3, 4, 5, 6, 7]
+  [1, 2, 3, 4, 5, 6, 7, 8]
 );
 
 for (const file of [

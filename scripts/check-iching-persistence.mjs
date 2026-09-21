@@ -42,7 +42,7 @@ enableSqliteNumberedParameterCompatibility(database);
 database.exec('PRAGMA foreign_keys=ON;');
 const db = createSqliteD1Adapter(database);
 const { migrations } = loadRuntimeMigrations(process.cwd());
-assert.equal(migrations.length, 7);
+assert.equal(migrations.length, 8);
 let tick = 0;
 const clock = () => new Date(Date.UTC(2026, 7, 24, 16, 0, tick++)).toISOString();
 await applyRuntimeMigrations({ db, migrations, now: clock });

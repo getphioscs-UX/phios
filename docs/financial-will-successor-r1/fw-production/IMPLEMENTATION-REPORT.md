@@ -17,7 +17,7 @@ Status: **IMPLEMENTATION_IN_PROGRESS — not full FW-S1–FW-S10 acceptance**.
 | FW-S1 | Persisted DAR Person Role v2, ephemeral finalization contract and three RDG person-reference contracts added. Policy tests pass. v1 and testamentary security unchanged. Production consumer cutover is not yet installed. |
 | FW-S2 | Not complete. Existing testamentary subset remains; full specialized schema/UI/assembly/private-render round trip is pending. |
 | FW-S3 | Not complete. Existing inventory/FCR/FAR/HFP integration remains. Full revisions, scenarios and remaining field coverage are pending. |
-| FW-S4 | OIDC discovery, Authorization Code + PKCE, nonce/state/signature/issuer/audience/verified-email validation, server subject mapping and revocable encrypted session cookies implemented. Account login/register/logout controls added. People storage and encrypted Financial/Will drafts are not yet implemented. |
+| FW-S4 | OIDC account bridge and login controls implemented. Added account-isolated AES-GCM Financial/Will working-draft API with explicit save/retention consent, version checks, restore and withdrawal. People storage, draft customer UI, canonical consent/retention-owner integration and scheduled expiry deletion remain pending. |
 | FW-S5 | Not complete. Canonical persistent FDR→DAR lineage and versioned reverse sync remain pending. |
 | FW-S6 | Not complete. Existing PFR human authority gate remains closed. No eligibility or signatures invented. |
 | FW-S7 | Not complete. Existing Commerce/entitlement and RR release gates remain. |
@@ -70,7 +70,17 @@ npx wrangler d1 migrations apply RUNTIME_DB --remote
 
 No command above has been executed against remote D1 by this implementation. Login remains unavailable until the new tables exist. Keep old tables on code rollback; do not delete user mappings to resolve a deployment problem. Restore the prior application version, revoke new sessions if required, and use the database recovery procedure for data rollback. Expired session rows may be removed by an owner-approved retention job; automated cleanup is not yet installed.
 
-The owner confirmed `FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY` and private R2 binding `PRIVATE_REPORTS` in both environments, with independent Preview resources. Neither has been read, copied, renamed or claimed integrated. Do not send secret values. Private Will/report assets must never use the public visual-asset bucket.
+The owner confirmed `FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY` (encrypted Secret) and `PRIVATE_REPORTS` (private R2 binding) in Production and Preview/QA, with an independent Preview secret and sandbox bucket. Implementation and local acceptance checks use exactly these names. No deployment secret values were requested, printed, logged, persisted or committed. Configuration confirmation is owner-provided; live environment acceptance has not been performed.
+
+## Private binding implementation follow-up
+
+- `functions/account/financial-will-draft-store.js` consumes `FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY` only at runtime for AES-256-GCM. Supported encodings are a 32-byte base64/base64url value, 64 hexadecimal characters, or exactly 32 UTF-8 bytes; no key material is returned. Key rotation is not implemented in this checkpoint.
+- `/api/account-financial-will-drafts` requires verified server account context, same-origin writes, explicit save and retention consent, an explicit purpose and a future expiry no longer than 366 days. The working-intake schema preserves unknown/range/declined values and rejects structured full identity-number fields. This is not canonical FDR/DAR authority.
+- Migration `0008_financial_will_encrypted_drafts.sql` adds encrypted immutable versions and metadata-only withdrawal/deletion records. The migration registry and current inventory checks include 0008. Remote application has not been performed; apply through the same owner migration procedure above.
+- AES-GCM authenticated data binds account, draft type, draft ID, schema, version and expiry. Stale writes and cross-account access are denied. Expired drafts cannot be read. Withdrawal deletes all versions unless a legal hold requires review. Automated physical expiry cleanup and governed consent/retention records remain pending.
+- `functions/account/private-report-delivery.js` consumes only `PRIVATE_REPORTS`; it reuses existing RR release checks and DAR short-lived download grants. Each request rechecks owner, active release and consent, then verifies the retrieved bytes against the bound PDF digest. Responses are private/no-store and do not expose a permanent object URL.
+- This private-delivery adapter is **not yet wired to a public API or a trusted persisted RR material loader**. Customer private PDF delivery is therefore not accepted or advertised as available.
+- `private-bindings-evidence.json` records synthetic local tests using an in-memory SQLite database and a fake private R2 binding. Production/Preview resources and their actual secret values are never accessed by these tests. Draft customer UI and full live save/reload/download journeys remain pending.
 
 ## Evidence and remaining acceptance
 

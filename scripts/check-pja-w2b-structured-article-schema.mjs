@@ -517,7 +517,7 @@ assert.equal(
 assert.equal(
   (await fs.readdir(path.join(root, 'db/migrations')))
     .filter(file => file.endsWith('.sql')).length,
-  7
+  8
 );
 
 const prefaceLocalized = localizedByNode.get('KN-PREFACE-001');

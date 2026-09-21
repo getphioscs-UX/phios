@@ -383,7 +383,8 @@ assert.deepEqual(migrationFiles, [
   '0004_book_commerce.sql',
   '0005_pws_universal_registry.sql',
   '0006_commerce_stripe_r1.sql',
-  '0007_account_oidc_sessions.sql'
+  '0007_account_oidc_sessions.sql',
+  '0008_financial_will_encrypted_drafts.sql'
 ]);
 await assertRuntimePlaceholderBoundary();
 
