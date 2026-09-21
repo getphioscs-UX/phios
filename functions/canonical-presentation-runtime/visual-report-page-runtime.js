@@ -2,6 +2,16 @@ import {VISUAL_TEMPLATES} from './visual-report-registry.js';
 import {normalizeReportPresentation,requirePurchasedReportPresentation} from '../pws/commercial/report-successor-contract.js';
 import {resolveReportEditorialAsset} from './report-editorial-resolver.js';
 import {REPORT_EDITORIAL_COPY} from './report-editorial-copy.js';
+import {GUIDED_REPORT_SUCCESSOR,PUBLICATION_VERSIONS,REPORT_PAGE_REGISTRY} from './report-publication-contract.js';
+
+export function assemblePublicationSnapshot({methodId,locale,pages,intro,temporalSnapshot,internalPages,generatedAt}={}){
+ const plan=REPORT_PAGE_REGISTRY.find(p=>p.method===methodId);
+ if(!plan||!['en','zh-Hans'].includes(locale)||!temporalSnapshot||!generatedAt)throw Error('PUBLICATION_ASSEMBLY_INPUT_INVALID');
+ const sequence=[...intro,...pages].map(p=>p.pageNumber);
+ if(sequence.length!==plan.totalPages||sequence.some((n,i)=>n!==i+1))throw Error('PUBLICATION_PAGE_SEQUENCE_INVALID');
+ const customer={schemaVersion:GUIDED_REPORT_SUCCESSOR,...PUBLICATION_VERSIONS,methodId,locale,totalPages:plan.totalPages,customerPublishable:false,successorBaselineActivated:false,intro,pages};
+ return {customer,internalOnly:{generatedAt,temporalSnapshot,internalPages,versions:PUBLICATION_VERSIONS,humanAcceptance:'PENDING',productionCutover:'NOT_ACTIVATED'}};
+}
 export const VISUAL_PAGE_SCHEMA = 'PHI-OS-PERSONAL-READING-VISUAL-PAGE-v1.0.0';
 export const PERSONAL_READING_PARENT_SCHEMA = 'PHI-OS-PERSONAL-READING-REPORT-IR-v2.0.0';
 const unique = xs => [...new Set(xs)];

@@ -3,6 +3,16 @@ import {buildBzrTemporalProjection,BZR_TEMPORAL_PROJECTION_SCHEMA} from '../bzr-
 import {buildBaziFullReading} from '../api/bazi-full-reading.js';
 import {buildMethodNativeCustomerReading} from './method-native-reading-product.js';
 import {buildBaziProfessionalSurfaceModules} from './bazi-professional-surface-projection.js';
+import {resolveReportObservationTime,toMethodTargetContext} from '../method-production-activation/report-observation-time.js';
+
+// Explicit successor entry; historical reads preserve their original time policy.
+export async function buildBaziPublicationReading({observationTime,...input}={}){
+ if(input.temporalProjectionOverride)throw Error('PUBLICATION_TEMPORAL_OVERRIDE_FORBIDDEN');
+ const temporalSnapshot=resolveReportObservationTime(observationTime);
+ const reading=await buildBaziMethodNativeReading({...input,targetContext:toMethodTargetContext(temporalSnapshot)});
+ const timeline=reading.professionalModules.professionalTimeline;
+ return {reading,temporalSnapshot:freeze({...temporalSnapshot,resolvedMethodLayers:['NATAL',...(timeline.daYunTimeline.some(c=>c.isSelected)?['DA_YUN']:[]),...(timeline.currentWindow?.annual?['LIU_NIAN']:[])]})};
+}
 
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const x of Object.values(value))freeze(x)}return value};
 const clean=value=>String(value??'').trim();

@@ -163,3 +163,12 @@ export async function compileNarrativeBrief(input={}){
   return freeze({...seed,briefSemanticDigest});
 }
 export default Object.freeze({compileNarrativeBrief});
+
+// Publication pages use the same brief owner as long-form narratives. Only
+// admitted statements and their bound facts enter this object, never birth input.
+export async function compilePublicationInterpretation({methodId,page,temporalContext,allowedStatements,conditions=[],counterSignals=[],realityQuestions=[]}={}){
+ if(!page?.sourceReportRef||!page.evidenceRefs?.length||!allowedStatements?.length)throw Error('PUBLICATION_INTERPRETATION_EVIDENCE_REQUIRED');
+ const facts=(page.visual?.nodes||[]).filter(n=>n.sourceRefs?.length).map(n=>({id:n.id,label:n.label,...(typeof n.value==='number'?{value:n.value}:n.value!==undefined?{displayValue:n.value}:{}),sourceRefs:n.sourceRefs}));
+ const interpretation={schemaVersion:'PHI-OS-PUBLICATION-INTERPRETATION-v2',method:methodId,topic:page.pageId,canonicalFacts:facts,evidence:page.evidenceRefs,supportingSignals:allowedStatements,tensionSignals:conditions,temporalContext,allowedInterpretations:allowedStatements,prohibitedClaims:['RECALCULATE_METHOD','INVENT_REALITY','GUARANTEED_FUTURE_EVENT','DIAGNOSIS','FINANCIAL_RECOMMENDATION'],counterSignals,unresolvedItems:[],realityQuestions,provenance:{sourceReportRef:page.sourceReportRef,internalOnly:true},customerVisible:false};
+ return deepFreeze({...interpretation,semanticDigest:await sha256Stable(interpretation)});
+}

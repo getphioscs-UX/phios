@@ -22,6 +22,17 @@ function setLocalized(node,en,cn){if(!node)return;node.dataset.cxEn=en;node.data
 function emptyResult(){return Object.freeze({targetDate:null,targetPlaceRef:null,astTargetContext:null,baziTemporalContext:null,ziweiTargetContext:null,ecrTargetContext:null,hdrTargetContext:null})}
 
 export const SHARED_TARGET_CONTEXT_VERSION='PPR-SHARED-TARGET-CONTEXT-v2.0.0';
+
+// Opt-in publication successor control; legacy method entry keeps its policy
+// until the governed production cutover. NOW is resolved by the server once.
+export function mountPublicationObservationControl(root,{locale='en',customerTimezone}={}){
+ const text=(en,cn)=>locale==='en'?en:cn;
+ root.innerHTML=`<fieldset><legend>${text('Observation time','观察时间')}</legend><label><input type="checkbox" name="publicationUseNow" checked> ${text('Use now as the observation time','以现在作为观察时间')}</label><div data-custom-time hidden><label>${text('Date','日期')} <input type="date" name="publicationTargetDate"></label><label>${text('Time','时间')} <input type="time" step="1" name="publicationTargetTime"></label><label>${text('Timezone','时区')} <input name="publicationTargetZone"></label><label>${text('Question or context (optional)','问题或情境（可选）')} <textarea name="publicationTargetQuestion"></textarea></label></div></fieldset>`;
+ root.querySelector('[name="publicationTargetZone"]').value=customerTimezone||'';
+ const checkbox=root.querySelector('[name="publicationUseNow"]'),custom=root.querySelector('[data-custom-time]');
+ checkbox.addEventListener('change',()=>{custom.hidden=checkbox.checked;for(const input of custom.querySelectorAll('input'))input.required=!checkbox.checked;});
+ return {read(){if(!customerTimezone)fail('CUSTOMER_TIMEZONE_REQUIRED');if(checkbox.checked)return {mode:'NOW',customerTimezone};const val=name=>clean(root.querySelector(`[name="${name}"]`).value),localDate=val('publicationTargetDate'),localTime=val('publicationTargetTime'),timezone=val('publicationTargetZone');if(!validDate(localDate)||!validTime(localTime)||!validIana(timezone))fail('CUSTOM_OBSERVATION_INPUT_REQUIRED');return {mode:'CUSTOM',customerTimezone,requestedTarget:{localDate,localTime,timezone,question:val('publicationTargetQuestion')}};}};
+}
 export const SHARED_TARGET_FIELD_NAMES=Object.freeze(['sharedTargetDate','sharedTargetTime','sharedTargetTimezoneIana','sharedTargetUtcOffset']);
 
 export function syncSharedTargetContext(form,methods=[]){

@@ -1,5 +1,6 @@
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
-import {invokeOpenAIStructured} from './narrative-provider.js';
+import {invokeOpenAIStructured,createPublicationProviderAdapters} from './narrative-provider.js';
+import {selectPaiRoute} from '../../_lib/pai-r1-economics.js';
 export const NARRATIVE_DRAFT_SCHEMA='PHI-OS-NARRATIVE-DRAFT-v1.0.0';
 export const NARRATIVE_WRITER_VERSION='PHI-OS-NARRATIVE-WRITER-v1.0.0';
 export const NARRATIVE_PROMPT_VERSION='PHI-OS-NARRATIVE-PROMPT-v1.0.0';
@@ -53,3 +54,29 @@ export async function writeNarrative({brief,env={},fetcher,provider,providerMeta
   return deepFreeze({...seed,draftDigest});
 }
 export default Object.freeze({writeNarrative});
+
+export function humanizePublicationStatement(text){
+ // A bounded editorial glossary, not inference or an LLM paraphrase license.
+ return String(text).replaceAll('interfaces','relationships between pillar positions').replaceAll('interface','relationship between pillar positions').replaceAll('接口','柱位关系').replaceAll('whole-chart priority themes','themes considered across the chart').replaceAll('not an isolated mini-reading','best read together with the rest of the chart');
+}
+
+// The publication lane stays in this writer, behind the existing PAI router.
+// No live text is admitted solely because its provider returned valid JSON.
+export async function composePublicationNarrative({interpretation,locale,executionClass,registry={},providerAdapters=null,env={},fetcher,verifyComposition,timeoutMs=8000}={}){
+ if(!['T2_LIGHT_COMPOSITION','T3_DEEP_COMPOSITION'].includes(executionClass))throw Error('PUBLICATION_COMPOSITION_CLASS_INVALID');
+ if(interpretation?.schemaVersion!=='PHI-OS-PUBLICATION-INTERPRETATION-v2'||!['en','zh-Hans'].includes(locale))throw Error('PUBLICATION_WRITER_INPUT_INVALID');
+ const route=selectPaiRoute({aiExecutionClass:executionClass,deterministicFallbackAvailable:true},registry);
+ const fallback=()=>({paragraphs:interpretation.allowedInterpretations.map(s=>humanizePublicationStatement(s.text)),internalOnly:{executionClass:'T2_LIGHT_COMPOSITION',requestedExecutionClass:executionClass,evidenceAdmission:'SOURCE_BOUND_CANONICAL_STATEMENTS',route,compositionVersion:'2.0.0',fallbackReason:!route.selectedModel?'NO_ADMITTED_PROVIDER_ROUTE':typeof verifyComposition!=='function'?'SEMANTIC_VERIFIER_NOT_ADMITTED':'PROVIDER_OR_VERIFICATION_FAILED',fallbackState:executionClass==='T3_DEEP_COMPOSITION'?'DEEP_COMPOSITION_FALLBACK':'CANONICAL_HUMANIZATION',sourceDigest:interpretation.semanticDigest}});
+ const invoke=(providerAdapters||createPublicationProviderAdapters({env,fetcher}))[route.selectedProvider];
+ // A semantic verifier must preserve facts, uncertainty, counter-signals and
+ // bilingual scope. Existing extractive verification does not license paraphrase.
+ if(!invoke||typeof verifyComposition!=='function')return fallback();
+ const controller=new AbortController();let timer;
+ try{
+  const result=await Promise.race([invoke({model:route.selectedModel,executionClass,taskType:'PUBLICATION_NARRATIVE',language:locale,evidencePack:interpretation,compositionPolicy:{version:'2.0.0',calculate:false,required:['WHAT_WE_SEE','WHY_IT_MATTERS','WHEN_IT_MAY_DIFFER','WHAT_TO_OBSERVE'],preserve:['facts','conditions','counterSignals','boundaries'],maxParagraphs:3},signal:controller.signal}),new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('PUBLICATION_COMPOSITION_TIMEOUT'));},timeoutMs);})]);
+  if(!Array.isArray(result?.paragraphs)||!result.paragraphs.length||result.paragraphs.length>3||result.paragraphs.some(p=>typeof p!=='string'||!p.trim()||p.length>1000))return fallback();
+  const verified=await verifyComposition({interpretation,locale,result});
+  if(verified?.accepted!==true||verified.sourceDigest!==interpretation.semanticDigest||verified.factsPreserved!==true||verified.boundariesPreserved!==true||verified.counterSignalsPreserved!==true)return fallback();
+  return {paragraphs:result.paragraphs,internalOnly:{executionClass,evidenceAdmission:'SEMANTIC_VERIFIER_ACCEPTED',route,compositionVersion:'2.0.0',fallbackState:null,sourceDigest:interpretation.semanticDigest,verification:verified}};
+ }catch{return fallback();}finally{clearTimeout(timer);}
+}
