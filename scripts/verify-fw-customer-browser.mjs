@@ -85,6 +85,8 @@ try{
   await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:`${out}/screenshots/private-account-${locale}-${width}.png`,fullPage:true});
   await page.locator('form[action="/api/auth/logout"] button').click();await page.locator('a[href^="/api/auth/login"]').first().waitFor();
   assert.equal(await page.evaluate(async()=> (await fetch('/api/account-financial-will-drafts')).status),401);
+  await language(page,'zh-Hans');await page.waitForFunction(()=>document.querySelector('[data-account-reports] [role="status"]')?.textContent==='请登录以查看你的报告。');
+  await language(page,'en');await page.waitForFunction(()=>document.querySelector('[data-account-reports] [role="status"]')?.textContent==='Sign in to view your reports.');
   await page.locator('a[href^="/api/auth/login"]').first().click();await page.locator('[data-account-drafts] article').first().waitFor();
   for(const action of ['withdraw','delete']){await page.locator(`[data-account-drafts] [data-right="${action}"]`).first().click();await page.locator('[data-account-drafts] [data-confirm]').click();await page.waitForFunction(n=>document.querySelectorAll('[data-account-drafts] article').length===n,action==='withdraw'?1:0);}
   assert.deepEqual(errors,[]);results.push({locale,width,saveConsent:true,financialRefreshRestore:true,willRefreshRestore:true,versionConflict:true,back:true,signOutSignIn:true,deleteWithdraw:true,privateDownload:true,overflow:false});await ctx.close();
