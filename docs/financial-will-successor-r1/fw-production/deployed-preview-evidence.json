@@ -1,0 +1,120 @@
+{
+  "checkedAt": "2026-09-22T07:48:29.270Z",
+  "origin": "https://qa.phios-github.pages.dev",
+  "scope": "DEPLOYED_PREVIEW_ANONYMOUS_HTTP_ONLY",
+  "previewAccepted": false,
+  "results": [
+    {
+      "path": "/api/auth/session",
+      "method": "GET",
+      "status": 200,
+      "cacheControl": "private, no-store",
+      "robots": "noindex, nofollow, noarchive",
+      "authenticated": false,
+      "providerConfigured": false,
+      "code": null
+    },
+    {
+      "path": "/api/auth/login",
+      "method": "GET",
+      "status": 503,
+      "cacheControl": "private, no-store",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/api/account-financial-will-drafts",
+      "method": "GET",
+      "status": 401,
+      "cacheControl": "private, no-store",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/api/account-reports",
+      "method": "GET",
+      "status": 401,
+      "cacheControl": "private, no-store",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/api/account-report-download-grant",
+      "method": "POST",
+      "status": 401,
+      "cacheControl": "private, no-store",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/api/account-report-download",
+      "method": "POST",
+      "status": 401,
+      "cacheControl": "private, no-store",
+      "robots": "noindex, nofollow, noarchive"
+    },
+    {
+      "path": "/api/qa-fw-acceptance",
+      "method": "POST",
+      "status": 401,
+      "cacheControl": "private, no-store",
+      "robots": "noindex, nofollow, noarchive"
+    }
+  ],
+  "deployedCommit": "fde331a3b1f455523a1689edd3c985aa260db716",
+  "deployment": "https://69c53303.phios-github.pages.dev",
+  "project": "phios-github",
+  "bindings": {
+    "RUNTIME_DB": {
+      "id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8"
+    },
+    "BOOKS": {
+      "name": "phios-private-books-sandbox"
+    },
+    "PRIVATE_REPORTS": {
+      "name": "phios-private-reports-sandbox"
+    },
+    "MANUSCRIPTS": "INTENTIONALLY_ABSENT_DISABLED"
+  },
+  "requiredConfigurationNames": [
+    {
+      "name": "AUTH_PROVIDER",
+      "present": false
+    },
+    {
+      "name": "AUTH_ISSUER",
+      "present": false
+    },
+    {
+      "name": "AUTH_CLIENT_ID",
+      "present": false
+    },
+    {
+      "name": "AUTH_CLIENT_SECRET",
+      "present": false
+    },
+    {
+      "name": "AUTH_SESSION_SECRET",
+      "present": false
+    },
+    {
+      "name": "FINANCIAL_WILL_DRAFT_ENCRYPTION_KEY",
+      "present": false
+    }
+  ],
+  "ownerReportedPreviewConfigurationComplete": true,
+  "metadataAndRuntimeDisagreeWithOwnerReport": true,
+  "previewMigrations": {
+    "0007": "APPLIED_OWNER_EVIDENCE",
+    "0008": "APPLIED_OWNER_EVIDENCE",
+    "newMigration": false
+  },
+  "productionMigration": "NOT_APPLIED_BLOCKED",
+  "remainingDeployedAcceptance": [
+    "real Auth0 Preview login",
+    "authenticated refresh and sign-out denial",
+    "remote Financial save, restore, edit/version, delete/withdraw",
+    "remote Will save and restore",
+    "second-account isolation and expired-draft denial",
+    "real Preview private PDF materialization, R2 digest and account report card",
+    "grant expiry/invalidity, wrong-account and revoked release/consent denial",
+    "authenticated en/zh-Hans 1440/390 browser matrix"
+  ],
+  "productionSuccessorAccepted": false
+}

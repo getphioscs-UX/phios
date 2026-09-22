@@ -54,6 +54,16 @@ Local checks completed on 2026-09-22: targeted FW privacy/auth/private-binding/r
 
 `npm.cmd run check` completed with exit code 0, including precheck, main check and postcheck. The KAP maintenance successor records the narrowly scoped Preview manuscript isolation change; historical hashes and runtime freezes are preserved.
 
+### Actual deployed Preview checkpoint
+
+- Implementation commit: `31a413468ab0f3f91e91bb67286cb72f108d615e`; final language-switch correction: `fde331a3b1f455523a1689edd3c985aa260db716` (four local browser combinations rechecked after the correction).
+- Final successful deployment: https://69c53303.phios-github.pages.dev ; stable alias: https://qa.phios-github.pages.dev . Only branch `qa` was deployed. No push to main or Production deployment was performed.
+- Actual Preview metadata confirms RUNTIME_DB sandbox, BOOKS sandbox and PRIVATE_REPORTS `phios-private-reports-sandbox`. Production PRIVATE_REPORTS is declared in the future deployment configuration but is still absent from the current Production deployment; its activation remains behind Preview acceptance.
+- At `2026-09-22T07:48:29.270Z`, real `/api/auth/session` returned `providerConfigured:false`; real login returned HTTP 503. Actual Preview secret-name metadata still contained only STRIPE_SECRET_KEY. The owner reported configuration complete, but actual project metadata and runtime do not yet corroborate it. No secret value was requested, printed, logged or committed.
+- Anonymous draft/report/grant/download/QA-fixture requests all return 401 with private/no-store and noindex headers. Real deployed Account guest UI was checked in en/zh-Hans at 1440/390; status messages switch languages, and document width does not overflow. This is guest UI verification, not authenticated acceptance.
+- Real Auth0 login, authenticated refresh/sign-out, remote encrypted Financial/Will lifecycle, second-account isolation, expiry, actual R2 materialization/digest/private download and grant/release/consent negative cases remain BLOCKED_ON_PREVIEW_AUTH_CONFIGURATION. Full evidence: [deployed-preview-evidence.json](./deployed-preview-evidence.json).
+- Preview migrations 0007/0008 remain accepted as applied; there is no 0009. Do not rerun their application. Production migration remains blocked; no Production command is requested.
+
 Repository work and local regression are tracked separately from DEPLOYED_PREVIEW_ACCEPTED. The latter remains false until actual Auth0 login, remote encrypted draft lifecycle, isolation, private report materialization/download/revocation and the bilingual 1440/390 browser matrix run against the stable deployed Preview.
 
 FW-S2, FW-S3, FW-S5, FW-S6 and FW-S7 remain unresolved production work: specialized Will completeness/assembly, full Financial revisions/scenarios, canonical FDR–DAR persistent synchronization, professional eligibility/signatures and entitlement-to-governed-release integration. This checkpoint does not grant or fabricate those authorities. FINANCIAL_WILL_PRODUCTION_SUCCESSOR_ACCEPTED remains false.
