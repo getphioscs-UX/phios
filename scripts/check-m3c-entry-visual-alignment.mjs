@@ -206,7 +206,11 @@ assert.equal(wrangler.ai.binding, wranglerReconciliation.preserved.aiBinding);
 assert.equal(wrangler.d1_databases.length, 1);
 assert.equal(wrangler.d1_databases[0].binding, wranglerReconciliation.preserved.d1Binding);
 assert.equal(wrangler.d1_databases[0].database_name, wranglerReconciliation.preserved.d1DatabaseName);
-assert.deepEqual(wrangler.r2_buckets, [{ binding: wranglerReconciliation.allowedDelta.r2Binding, bucket_name: wranglerReconciliation.allowedDelta.bucketName }]);
+assert.deepEqual(wrangler.r2_buckets, [
+  { binding: wranglerReconciliation.allowedDelta.r2Binding, bucket_name: wranglerReconciliation.allowedDelta.bucketName },
+  { binding: 'PRIVATE_REPORTS', bucket_name: 'phios-private-reports' }
+]);
+assert.equal(wranglerReconciliation.allowedDelta.privateReports.previewBucket, 'phios-private-reports-sandbox');
 assert.equal(wranglerReconciliation.preserved.runtimeContractsChanged, false);
 assert.equal(wranglerReconciliation.preserved.entryPresentationChanged, false);
 

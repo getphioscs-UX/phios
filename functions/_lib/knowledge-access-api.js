@@ -38,6 +38,11 @@ async function publishedProjection({ request, env, query, locale, mode }) {
 }
 
 async function manuscriptProjection({ env, query, locale }) {
+  // The Pages Preview checkpoint exercises public knowledge and private reports,
+  // not production manuscript retrieval. R2 bindings are not inherited.
+  if (env?.PHIOS_ENVIRONMENT === 'qa' && env.PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED !== 'true') {
+    return { status: 'disabled_in_preview', records: [], errors: [] };
+  }
   const [registry, reviewedRegistry, bindings, corrections] = await Promise.all([
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'),

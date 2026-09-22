@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "getphios",
+  "name": "phios-github",
   "pages_build_output_dir": ".",
   "compatibility_date": "2026-07-14",
   "ai": {
@@ -18,6 +18,10 @@
     {
       "binding": "MANUSCRIPTS",
       "bucket_name": "phios-private-manuscripts"
+    },
+    {
+      "binding": "PRIVATE_REPORTS",
+      "bucket_name": "phios-private-reports"
     }
   ],
   "compatibility_flags": [
@@ -40,10 +44,16 @@
         {
           "binding": "BOOKS",
           "bucket_name": "phios-private-books-sandbox"
+        },
+        {
+          "binding": "PRIVATE_REPORTS",
+          "bucket_name": "phios-private-reports-sandbox"
         }
       ],
       "vars": {
         "PHIOS_ENVIRONMENT": "qa",
+        "PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED": "false",
+        "FW_PREVIEW_ACCEPTANCE_FIXTURES": "enabled",
         "STRIPE_ENVIRONMENT": "QA",
         "BOOK_ONE_SOURCE_KEY": "books/book-one/PHI-OS-Book-I-v2",
         "PHIOS_BOOK_ONE_SALES_ENABLED": "false"

@@ -2,6 +2,8 @@
 
 Status: **IMPLEMENTATION_IN_PROGRESS — not full FW-S1–FW-S10 acceptance**.
 
+The 2026-09-22 continuation is recorded in [PREVIEW-CHECKPOINT.md](./PREVIEW-CHECKPOINT.md): owner evidence confirms Preview migrations 0007/0008 applied; customer draft/report UI and trusted private report APIs are now implemented. This document retains the earlier checkpoint history. Production migration and deployed Preview acceptance are separate, still-open gates.
+
 ## Baseline and deployment repair
 
 - Actual starting HEAD: `df24926beafd0a7777df1254c3fdfccc0844ec0a`, branch `main`, clean. The attachment's `d9e727d` is historical authority, not the current checkout.

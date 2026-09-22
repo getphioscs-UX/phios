@@ -28,10 +28,25 @@
         "commit": "16a0ca903137fdd83cd31e639a119c8c5b3d3c48",
         "change": "USER_AUTHORIZED_PREVIEW_STRIPE_ENVIRONMENT_QA",
         "wranglerSha256": "0890e0e1a8eb144b4acc354b41dc19a3e60d370dfb6b05a7ed4b95257c307ab9"
+      },
+      {
+        "authorization": "USER_EXPLICIT_FW_PREVIEW_CHECKPOINT_2026_09_22",
+        "change": "BIND_OWNER_CONFIRMED_PRIVATE_REPORTS_IN_BOTH_ENVIRONMENTS_AND_RECONCILE_ACTUAL_PAGES_PROJECT",
+        "wranglerSha256": "727acbf82fa426b0b0765232bc47301320c292dfcb9ff962da905cd87e3700ae"
+      },
+      {
+        "authorization": "USER_EXPLICIT_FW_PREVIEW_CHECKPOINT_2026_09_22",
+        "change": "BIND_OWNER_CONFIRMED_PRIVATE_REPORTS_IN_BOTH_ENVIRONMENTS_AND_RECONCILE_ACTUAL_PAGES_PROJECT",
+        "wranglerSha256": "9bbac8328774c55dbc2a9149aa36ca32a9cff6e1e05007e332d7b26c52c8920e"
       }
     ],
-    "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts.",
-    "wranglerSha256": "0890e0e1a8eb144b4acc354b41dc19a3e60d370dfb6b05a7ed4b95257c307ab9"
+    "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts. The 2026-09-22 owner request authorizes exact private report bucket bindings, actual Pages project name reconciliation, and explicit manuscript retrieval disablement in isolated Preview.",
+    "wranglerSha256": "9bbac8328774c55dbc2a9149aa36ca32a9cff6e1e05007e332d7b26c52c8920e",
+    "currentAuthorization": {
+      "basis": "USER_EXPLICIT_FW_PREVIEW_CHECKPOINT_2026_09_22",
+      "baselineCommit": "c50d336b",
+      "evidence": "docs/financial-will-successor-r1/fw-production/PREVIEW-CHECKPOINT.md"
+    }
   },
   "allowedDelta": {
     "r2Binding": "MANUSCRIPTS",
@@ -42,7 +57,16 @@
     "previewEnvironment": "qa",
     "previewBookOneSourceKey": "books/book-one/PHI-OS-Book-I-v2",
     "previewBookOneSalesEnabled": false,
-    "previewStripeEnvironment": "QA"
+    "previewStripeEnvironment": "QA",
+    "privateReports": {
+      "binding": "PRIVATE_REPORTS",
+      "productionBucket": "phios-private-reports",
+      "previewBucket": "phios-private-reports-sandbox",
+      "source": "OWNER_CONFIRMED",
+      "secretValuesCommitted": false
+    },
+    "pagesProjectName": "phios-github",
+    "previewManuscriptsEnabled": false
   },
   "preserved": {
     "m3cEntryArtifacts": true,

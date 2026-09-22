@@ -57,6 +57,6 @@ export async function draftApi(context){
   const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:aad(userId,kind,id,version,expires)},key,encoder.encode(text));
   const result=await db.prepare('INSERT INTO account_financial_will_drafts(draft_id,user_id,draft_type,schema_version,object_version,ciphertext,iv,key_version,digest,prior_digest,retention_id,consent_id,expires_at,created_at) SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,? WHERE COALESCE((SELECT MAX(object_version) FROM account_financial_will_drafts WHERE user_id=? AND draft_id=?),0)=? AND NOT EXISTS(SELECT 1 FROM account_financial_will_drafts WHERE user_id=? AND draft_id=? AND legal_hold_reference IS NOT NULL)').bind(id,userId,kind,schema,version,b64(new Uint8Array(ciphertext)),b64(iv),'v1',hash,prior?.digest||null,crypto.randomUUID(),crypto.randomUUID(),expires,now,userId,id,expected,userId,id).run();
   if((result.meta?.changes??result.changes)!==1)throw fail('DRAFT_VERSION_CONFLICT',409);
-  return reply({ok:true,draftId:id,draftType:kind,version,digest:hash,expiresAt:new Date(expires).toISOString(),saved:true});
+  return reply({ok:true,draftId:id,draftType:kind,version,digest:hash,expiresAt:new Date(expires).toISOString(),createdAt:new Date(now).toISOString(),saved:true});
  }catch(error){return reply({ok:false,code:error.code||'DRAFT_REQUEST_INVALID'},error.status||400);}
 }
