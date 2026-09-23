@@ -30,7 +30,7 @@ Historical R2 orders retain their server-persisted pricing version, including th
 
 ## Acceptance still required
 
-- New revision: full check, Pages build and 390/768/1440 browser results must be recorded after completion.
+- Runtime commit `c6ab7321` is deployed to stable QA (`e44c6482`). Pages build passed (gzip 2,541,415 bytes). Local EN/zh-Hans Free/Locked browser checks passed at 390/768/1440. Real deployed EN/zh-Hans generated 11 free pages, ten generic locked titles and zero full workspaces; report images loaded. See `preview-delivery-evidence.json` for the actual remote viewport limitation. Full `npm.cmd run check` completed with exit 0, including precheck, main checks and postcheck.
 - Real QA purchase → webhook → entitlement → purchased-language full report remains unverified. The current owner's checkout form had Bilingual selected and an enabled submit button, but the required terms checkbox was unchecked. Its browser validation message was “Please check this box if you want to proceed.” The owner subsequently confirmed that Continue to checkout is now clickable. A completed payment has not yet been reported. No terms have been accepted on the owner's behalf.
 - Real paid HTML/PDF/private delivery acceptance is not established by synthetic review PDFs.
 - Owner review of BaZi Free, Locked, Full, PDF and Details is pending. Do not freeze the transport as human-accepted or roll out other methods yet.
