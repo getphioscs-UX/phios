@@ -7,6 +7,8 @@ const bundle='.tmp/bazi-t3-test/qa-handler.mjs';
 await build({entryPoints:['functions/api/qa-bazi-t3.js'],bundle:true,platform:'node',format:'esm',outfile:bundle,logLevel:'silent'});
 const {onRequest}=await import(pathToFileURL(fs.realpathSync(bundle)).href);
 const reviewBundle=await build({entryPoints:['assets/customer-ui/js/personal-products/bazi-t3-review.js'],bundle:true,platform:'browser',format:'esm',minify:true,write:false,logLevel:'silent'});
+const publicationBundle=await build({entryPoints:['assets/customer-ui/js/personal-products/publication-report-pages.js'],bundle:true,platform:'browser',format:'esm',minify:true,write:false,logLevel:'silent'});
+assert.equal(publicationBundle.outputFiles[0].text,fs.readFileSync('assets/customer-ui/js/personal-products/publication-report-pages.bundle.js','utf8'),'Customer publication bundle must match the canonical renderer');
 assert.equal(reviewBundle.outputFiles[0].text,fs.readFileSync('assets/customer-ui/js/personal-products/bazi-t3-review.bundle.js','utf8'),'Pages review bundle must match the canonical renderer');
 for(const locale of ['en','zh-Hans'])assert(fs.readFileSync(`docs/guided-report-successor-r2/bazi-t3/${locale}/review.html`,'utf8').includes('bazi-t3-review.bundle.js'));
 const objects=new Map(),reservations=new Set();

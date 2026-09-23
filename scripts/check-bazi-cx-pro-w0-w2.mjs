@@ -77,14 +77,15 @@ assert.match(css,/@media\(max-width:1050px\)/);
 assert.match(css,/@media\(max-width:767px\)/);
 assert.match(css,/writing-mode:horizontal-tb/);
 
-// The actual canonical specialist renderer is exercised with a tiny DOM facade only for CSS-link installation.
+// Exercise the retained specialist detail owner; the default report/access path
+// is checked independently by check-bazi-visual-commerce.mjs.
 globalThis.document={
  documentElement:{lang:'zh-Hans'},
  querySelector:()=>null,
  createElement:()=>({dataset:{}}),
  head:{appendChild:()=>{}}
 };
-const {renderBaziProduct}=await import('../assets/customer-ui/js/specialists/bazi/product-renderer.js');
+const {renderBaziSpecialistWorkspace:renderBaziProduct}=await import('../assets/customer-ui/js/specialists/bazi/product-renderer.js');
 const product=adaptBaziPersonalRealityProduct({report:native,locale:'zh-Hans'});
 const rendered=renderBaziProduct({product});
 assert.equal(rendered.status,'RENDERED');

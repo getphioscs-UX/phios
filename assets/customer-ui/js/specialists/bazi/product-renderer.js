@@ -17,7 +17,7 @@ import {
  renderBaziRealityComparisonSurface
 } from '../../surfaces/bazi-professional-reading.js';
 import {renderPvpPhase10MethodSnapshot,ensurePvpPhase10SnapshotCss} from '../phase10/method-snapshot.js';
-import {renderPublicationReport,settlePublicationAssets,fitPublicationForPrint} from '../../personal-products/publication-report-pages.js';
+import {renderPublicationReport,settlePublicationAssets,fitPublicationForPrint} from '../../personal-products/publication-report-pages.bundle.js';
 
 const NAV=Object.freeze([
  ['overview','Overview','总览'],

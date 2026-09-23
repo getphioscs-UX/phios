@@ -7,7 +7,9 @@ const evidence={evidenceClass:'SYNTHETIC_PRESENTATION_ONLY',variants:[],errors:[
 const browser=await chromium.launch({channel:'msedge',headless:true});
 try{for(const locale of ['en','zh-Hans'])for(const width of [1440,390])for(const mode of ['free','locked']){
  const page=await browser.newPage({viewport:{width,height:1000}});page.on('pageerror',e=>evidence.errors.push(String(e)));
+ await page.route('**/functions/**',route=>route.fulfill({status:404,body:'Functions sources are not static assets'}));
  await page.goto(`http://127.0.0.1:8788/${root}/${mode}/${locale}/review.html`);await page.waitForFunction(()=>window.batchReady,{},{timeout:120000});
+ assert.equal(await page.evaluate(async()=>typeof(await import('/assets/customer-ui/js/specialists/bazi/product-renderer.js')).renderBaziProduct),'function','actual customer module must load without public functions/ sources');
  assert.equal(await page.locator('.cx-bazi-w12-workspace').count(),0);
  assert.equal(await page.locator('[data-page-number]').count(),11);
  assert.equal(await page.locator('[data-publication-visual]').count(),4);
