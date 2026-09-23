@@ -55,6 +55,9 @@ export async function writeNarrative({brief,env={},fetcher,provider,providerMeta
 }
 export default Object.freeze({writeNarrative});
 
+// Versioned Addendum D lane; legacy T2 contracts remain frozen.
+export {composeBaziT3Section} from './bazi-t3-composition.js';
+
 export function humanizePublicationStatement(text){
  // A bounded editorial glossary, not inference or an LLM paraphrase license.
  return String(text).replaceAll('interfaces','relationships between pillar positions').replaceAll('interface','relationship between pillar positions').replaceAll('接口','柱位关系').replaceAll('whole-chart priority themes','themes considered across the chart').replaceAll('not an isolated mini-reading','best read together with the rest of the chart');
