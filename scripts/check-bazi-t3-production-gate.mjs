@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {composeBaziT3Section,canShowT3} from '../functions/personal-reading/narrative/bazi-t3-composition.js';
+import {composeBaziT3Section,canShowT3,verifyBaziT3BilingualParity} from '../functions/personal-reading/narrative/bazi-t3-composition.js';
+import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
 import {evaluateBaziT3Release} from '../functions/personal-reading/narrative/bazi-t3-release-gate.js';
 import {editorialFixture} from './lib/bazi-t3-test-fixture.mjs';
 const {pack,candidate,verdict}=editorialFixture();
@@ -10,6 +11,13 @@ const adapter=async r=>{calls.push(r.taskType);return r.taskType==='REPORT_SECTI
 const args={pack,registry,providerAdapters:{test:adapter}};
 const accepted=await composeBaziT3Section(args);assert.equal(accepted.status,'PASS');assert.equal(calls.length,2);
 const frozen=await composeBaziT3Section({...args,snapshot:accepted.snapshot});assert.equal(frozen.internalOnly.cacheHit,true);assert.equal(calls.length,2);
+const {snapshotDigest:ignoredDigest,...chineseSeed}=structuredClone(accepted.snapshot);chineseSeed.locale='zh-Hans';
+const chineseSnapshot={...chineseSeed,snapshotDigest:await sha256Stable(chineseSeed)};
+const parityArgs={english:accepted.snapshot,chinese:chineseSnapshot,registry,providerAdapters:{test:async r=>({status:'PASS',conditionsPreserved:true,uncertaintyPreserved:true,temporalPreserved:true,differences:[],assessments:r.payload.claims.map(c=>({path:c.path,equivalent:true,counterpartPaths:[c.path.startsWith('en:')?c.path.replace('en:','zh-Hans:'):c.path.replace('zh-Hans:','en:')],reason:'Synthetic mapping only; this is not live bilingual acceptance.'}))})}};
+assert.equal((await verifyBaziT3BilingualParity(parityArgs)).status,'PASS');
+assert.equal((await verifyBaziT3BilingualParity({...parityArgs,chinese:{...chineseSnapshot,sectionKey:'S04_CAREER'}})).reason,'PARITY_PAIR_INVALID');
+assert.equal((await verifyBaziT3BilingualParity({...parityArgs,providerAdapters:{test:async()=>({status:'PASS',conditionsPreserved:true,uncertaintyPreserved:true,temporalPreserved:true,differences:[],assessments:[]})}})).status,'REJECT');
+assert.equal((await verifyBaziT3BilingualParity({...parityArgs,timeoutMs:5,providerAdapters:{test:()=>new Promise(()=>{})}})).reason,'PARITY_PROVIDER_FAILED');
 const altered=structuredClone(accepted.snapshot);altered.finalNarrative.lead.text='Invented';assert.equal((await composeBaziT3Section({...args,snapshot:altered})).status,'FALLBACK');
 const wrongLocale=await composeBaziT3Section({...args,pack:{...pack,locale:'zh-Hans'},snapshot:accepted.snapshot});assert.equal(wrongLocale.status,'FALLBACK');
 let repairs=0;const repair=await composeBaziT3Section({...args,providerAdapters:{test:async r=>{if(r.taskType==='REPORT_SECTION_COMPOSITION'){repairs++;return candidate;}return {...verdict,status:'REPAIR'};}}});assert.equal(repairs,2);assert.equal(repair.status,'FALLBACK');
