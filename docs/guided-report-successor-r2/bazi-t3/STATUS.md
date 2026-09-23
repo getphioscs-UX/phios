@@ -55,6 +55,8 @@ All results were retrieved from `phios-private-reports-sandbox`; no rejected nar
 
 The current bilingual 36-page PDFs were rendered and visually inspected across all 72 pages; browser checks passed at 1440 and 390, with no page overflow, duplicate dynamic folios or footer overlap. These are layout/fallback checks, not accepted-T3 evidence. Targeted composition/parity/Preview regressions and the Pages build pass. See deployed-evidence.json for deployment and full-check evidence.
 
+All `npm run check` phases passed: precheck and the main chain completed in the original run; the postcheck lifecycle fixture was manually interrupted because its old copy filter included `.tmp` deployment archives. After pruning scratch/dependency directories, the **entire postcheck phase** was rerun and exited 0. The initial interrupted command itself exited 1, so this is recorded as phased completion, not a fabricated uninterrupted exit 0. The fixture now cleans up its own temporary directory. Final QA runtime deployment: `49ed9d13` at `https://12dcee8f.phios-github.pages.dev`; its real authenticated bilingual-pair request returned 409 `BILINGUAL_ACCEPTED_PAIR_REQUIRED`, without a model call.
+
 `node scripts/check-bazi-t3-production-gate.mjs` tests fail-closed behavior and reports all remaining gates. Add `--require-accepted` for a release-blocking exit code. `BAZI_R2_T3_ACCEPTED` and `BAZI_PRODUCTION_SUCCESSOR_ACTIVE` remain false.
 
 Auth0 login and authenticated refresh passed again on 2026-09-23. The real QA logout still returned `post_logout_redirect_uri` not registered for the exact `/account/` URL in application `eSmR58lhvWkRCTyo7RdMxTuQzLM85Axr`; owner confirmation alone is not substituted for that failed live result.

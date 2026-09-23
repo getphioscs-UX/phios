@@ -71,6 +71,30 @@
       "pagesPerLocale": 36,
       "all72PagesVisuallyInspected": true,
       "content": "T2_FALLBACK"
+    },
+    "repositoryCheck": {
+      "status": "ALL_PHASES_PASS",
+      "precheck": "PASS",
+      "mainCheck": "PASS",
+      "postcheck": "PASS_AFTER_FIX_AND_RERUN",
+      "initialProcessExit": 1,
+      "initialProcessInterruption": "Stopped only the lifecycle fixture copier after it began copying ignored deployment scratch archives. No assertion failure. Added exact directory pruning and reran the complete postcheck phase successfully.",
+      "postcheckExit": 0,
+      "logs": {
+        "original": "9b25a85b21d8345ae52a69006665228fda13a3c0fec5dc399e2c202d29fec8ee",
+        "postcheck": "82c217538c6a91ddfa2751ce12a9d6b13a034ab922d6eda899d085648e8bfb77"
+      }
     }
+  },
+  "finalQaDeployment": {
+    "commit": "49ed9d13",
+    "url": "https://12dcee8f.phios-github.pages.dev",
+    "origin": "https://qa.phios-github.pages.dev",
+    "authenticatedBilingualPairCheck": {
+      "httpStatus": 409,
+      "code": "BILINGUAL_ACCEPTED_PAIR_REQUIRED",
+      "providerCallMade": false
+    },
+    "productionTouched": false
   }
 }

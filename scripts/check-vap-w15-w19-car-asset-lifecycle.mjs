@@ -111,7 +111,10 @@ assert.deepEqual(storedActivation, expectedActivation, 'CAR_PRODUCTION_ACTIVATIO
 
 // Isolated full lifecycle fixture: reset successor production state before exercising W15-W19.
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'phios-car-life-'));
-fs.cpSync(root, tmp, { recursive: true, filter: src => !src.includes(`${path.sep}.git${path.sep}`) && !src.includes(`${path.sep}node_modules${path.sep}`) });
+try {
+// A lifecycle fixture needs repository inputs, not local deployment archives,
+// dependency trees or private scratch files. Prune these at the directory itself.
+fs.cpSync(root, tmp, { recursive: true, filter: src => !path.relative(root, src).split(path.sep).some(segment => ['.git', 'node_modules', '.tmp', '.wrangler'].includes(segment)) });
 for (const [relative, collection, code] of [
   [CANDIDATE_REGISTRY, 'candidates', 'PHI-OS-CAR-PRODUCTION-CANDIDATE-REGISTRY-v1'],
   [REVIEW_REGISTRY, 'reviews', 'PHI-OS-CAR-PRODUCTION-REVIEW-REGISTRY-v1'],
@@ -175,6 +178,11 @@ assert.equal(published.carPublicationRecord.publicationState, 'published');
 assert.equal(published.carPublicationRecord.rightsStatus, 'owned');
 assert.equal(published.carPublicationRecord.accessibilityStatus, 'passed');
 assert.equal(readJson(tmp, 'content/production/car/activation/vap-w12-w19-car-production-activation-v1.json').status, 'PILOT_PUBLISHED_ASSET_RECORDED');
+} finally {
+  assert.equal(path.dirname(path.resolve(tmp)), path.resolve(os.tmpdir()));
+  assert(path.basename(tmp).startsWith('phios-car-life-'));
+  fs.rmSync(tmp, {recursive: true, force: true});
+}
 
 console.log('✓ VAP-W15 external-manual Figure Candidate Intake preserves CAB/Knowledge/Meaning lineage and records OPENAI_CHATGPT provider lineage.');
 console.log('✓ VAP-W16 independent Human Asset Review is successor-aware; accept requires all five review dimensions to pass and does not create Approval.');
