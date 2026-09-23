@@ -39,7 +39,7 @@
       "locale": "en",
       "sectionKey": "S07_HEALTH",
       "status": "FALLBACK",
-      "reason": "INSUFFICIENT_ADMITTED_INTERPRETATION",
+      "reason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
       "snapshotDigest": null
     },
     {
@@ -95,7 +95,7 @@
       "locale": "zh-Hans",
       "sectionKey": "S07_HEALTH",
       "status": "FALLBACK",
-      "reason": "INSUFFICIENT_ADMITTED_INTERPRETATION",
+      "reason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
       "snapshotDigest": null
     },
     {
@@ -113,6 +113,20 @@
       "snapshotDigest": null
     }
   ],
-  "liveRecords": {},
+  "liveRecords": {
+    "first-en-personality.json": {
+      "status": "FALLBACK",
+      "snapshot": null,
+      "internalOnly": {
+        "fallbackState": "T3_FALLBACK_USED",
+        "fallbackReason": "SEMANTIC_REJECTED",
+        "canonicalEvidenceHash": "0d1c7f4d207e6ef9e1dce14156af0049281e9de8a0ff4b235c64877236a99132"
+      },
+      "generatedAt": "2026-09-23T01:44:15.559Z",
+      "fixtureClass": "SYNTHETIC_EXISTING_CANONICAL_BAZI_BENCHMARK",
+      "liveProviderAttempt": true,
+      "productionActivated": false
+    }
+  },
   "productionActivated": false
 }

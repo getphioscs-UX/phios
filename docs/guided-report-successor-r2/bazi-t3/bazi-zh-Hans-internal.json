@@ -466,7 +466,7 @@
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
           "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
-          "canonicalEvidenceHash": "89a68a6d7c0671274eb94e61eb8030727f51bd511bfda4504f560923a2a49ccf"
+          "canonicalEvidenceHash": "f982d7e1621e8aa2cdf69288b4d6a24525313b74534357a7810d8f0486f19b92"
         },
         "evidencePack": {
           "sectionKey": "S02_PERSONALITY",
@@ -495,6 +495,14 @@
               "sourceRefs": [
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
           "admittedInterpretations": [
@@ -524,7 +532,12 @@
             }
           ],
           "openConditions": [],
-          "counterSignals": [],
+          "counterSignals": [
+            {
+              "id": "S02_PERSONALITY:counterSignals:0",
+              "text": "明明能力已经存在时，哪些情境仍会稳定地阻碍表达或发挥？"
+            }
+          ],
           "temporalContext": {
             "mode": "NOW",
             "localDate": "2026-09-21",
@@ -576,16 +589,24 @@
               "boundary": "Contextual symbolism, never a measured ability."
             }
           ],
-          "reflectionTargets": [],
+          "reflectionTargets": [
+            {
+              "id": "S02_PERSONALITY:realityQuestions:0",
+              "text": "哪些能力要经过反复练习与支持才会稳定，哪些能力很容易出现，却比较难持续？"
+            }
+          ],
           "sourceFactIds": [
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT",
+            "policy:BOUNDED_SYMBOLIC_READING",
             "professionalModules/customerNarrative/topicNarratives/4/lead",
             "professionalModules/customerNarrative/topicNarratives/4/development",
-            "S02_PERSONALITY:tensionSignals:0"
+            "S02_PERSONALITY:tensionSignals:0",
+            "S02_PERSONALITY:counterSignals:0",
+            "S02_PERSONALITY:realityQuestions:0"
           ],
-          "canonicalEvidenceHash": "89a68a6d7c0671274eb94e61eb8030727f51bd511bfda4504f560923a2a49ccf"
+          "canonicalEvidenceHash": "f982d7e1621e8aa2cdf69288b4d6a24525313b74534357a7810d8f0486f19b92"
         }
       }
     },
@@ -841,7 +862,7 @@
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
           "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
-          "canonicalEvidenceHash": "06c7a3a798c4c8f502686555337f2aa222659e3eb638fd5729d1736a2b8f5023"
+          "canonicalEvidenceHash": "2d5d09405ca916e86d811a1519c06dd50d05b33508a60f2b622dc6ee49d4f5c1"
         },
         "evidencePack": {
           "sectionKey": "S03_LIFE_STRUCTURE",
@@ -982,6 +1003,14 @@
               "sourceRefs": [
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/3"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
           "admittedInterpretations": [
@@ -1011,7 +1040,12 @@
             }
           ],
           "openConditions": [],
-          "counterSignals": [],
+          "counterSignals": [
+            {
+              "id": "S03_LIFE_STRUCTURE:counterSignals:0",
+              "text": "哪一个很小的环境调整，最容易带来日常运行节奏上最大的改善？"
+            }
+          ],
           "temporalContext": {
             "mode": "NOW",
             "localDate": "2026-09-21",
@@ -1063,7 +1097,12 @@
               "boundary": "Contextual symbolism, never a measured ability."
             }
           ],
-          "reflectionTargets": [],
+          "reflectionTargets": [
+            {
+              "id": "S03_LIFE_STRUCTURE:realityQuestions:0",
+              "text": "以一个普通月份来看，支持 → 输出 → 资源交换 → 责任这条循环在哪里最顺，在哪里最容易反复断掉？"
+            }
+          ],
           "sourceFactIds": [
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/supportVisible",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/outwardVisible",
@@ -1082,11 +1121,14 @@
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/1",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/2",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/3",
+            "policy:BOUNDED_SYMBOLIC_READING",
             "professionalModules/customerNarrative/topicNarratives/6/lead",
             "professionalModules/customerNarrative/topicNarratives/6/development",
-            "S03_LIFE_STRUCTURE:tensionSignals:0"
+            "S03_LIFE_STRUCTURE:tensionSignals:0",
+            "S03_LIFE_STRUCTURE:counterSignals:0",
+            "S03_LIFE_STRUCTURE:realityQuestions:0"
           ],
-          "canonicalEvidenceHash": "06c7a3a798c4c8f502686555337f2aa222659e3eb638fd5729d1736a2b8f5023"
+          "canonicalEvidenceHash": "2d5d09405ca916e86d811a1519c06dd50d05b33508a60f2b622dc6ee49d4f5c1"
         }
       }
     },
@@ -1316,7 +1358,7 @@
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
           "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
-          "canonicalEvidenceHash": "02685e7ad49fd799d8c0c61042c3afb29b441580bbd47eae8f3ee98424a61b7a"
+          "canonicalEvidenceHash": "d51556ccc3ebe02e42bf92fdc60f581bc305723e06faa59e3a32e8ba65666a48"
         },
         "evidencePack": {
           "sectionKey": "S04_CAREER",
@@ -1348,6 +1390,14 @@
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/2",
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/leadGroup"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
           "admittedInterpretations": [
@@ -1377,7 +1427,12 @@
             }
           ],
           "openConditions": [],
-          "counterSignals": [],
+          "counterSignals": [
+            {
+              "id": "S04_CAREER:counterSignals:0",
+              "text": "有哪些角色表面上看起来适合，但真正进入持续执行后，会因为承载成本而变得难以长期维持？"
+            }
+          ],
           "temporalContext": {
             "mode": "NOW",
             "localDate": "2026-09-21",
@@ -1429,16 +1484,24 @@
               "boundary": "Contextual symbolism, never a measured ability."
             }
           ],
-          "reflectionTargets": [],
+          "reflectionTargets": [
+            {
+              "id": "S04_CAREER:realityQuestions:0",
+              "text": "回看最近两三个工作环境，责任、输出、资源交换与学习支持中，哪一种组合最常重复？"
+            }
+          ],
           "sourceFactIds": [
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/0",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/1",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/2",
+            "policy:BOUNDED_SYMBOLIC_READING",
             "professionalModules/customerNarrative/topicNarratives/0/lead",
             "professionalModules/customerNarrative/topicNarratives/0/development",
-            "S04_CAREER:tensionSignals:0"
+            "S04_CAREER:tensionSignals:0",
+            "S04_CAREER:counterSignals:0",
+            "S04_CAREER:realityQuestions:0"
           ],
-          "canonicalEvidenceHash": "02685e7ad49fd799d8c0c61042c3afb29b441580bbd47eae8f3ee98424a61b7a"
+          "canonicalEvidenceHash": "d51556ccc3ebe02e42bf92fdc60f581bc305723e06faa59e3a32e8ba65666a48"
         }
       }
     },
@@ -1668,7 +1731,7 @@
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
           "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
-          "canonicalEvidenceHash": "be5f242bc4a7b26232aeb55b8c0f5b59950b4f7dc9f524be829a204bfd7970da"
+          "canonicalEvidenceHash": "932f61a76239fe0a8063228c522d02e93e14bc0896ec6da4e8026a1f0f7798d6"
         },
         "evidencePack": {
           "sectionKey": "S05_WEALTH",
@@ -1700,6 +1763,14 @@
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/2",
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/leadGroup"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
           "admittedInterpretations": [
@@ -1729,7 +1800,12 @@
             }
           ],
           "openConditions": [],
-          "counterSignals": [],
+          "counterSignals": [
+            {
+              "id": "S05_WEALTH:counterSignals:0",
+              "text": "有哪些财富经验并不符合这段结构，因为市场、家庭责任或个人选择反而占了主导？"
+            }
+          ],
           "temporalContext": {
             "mode": "NOW",
             "localDate": "2026-09-21",
@@ -1781,16 +1857,24 @@
               "boundary": "Contextual symbolism, never a measured ability."
             }
           ],
-          "reflectionTargets": [],
+          "reflectionTargets": [
+            {
+              "id": "S05_WEALTH:realityQuestions:0",
+              "text": "当资源累积比较顺时，真正的差别更常来自产出、管理、交换、节制，还是行动时机？"
+            }
+          ],
           "sourceFactIds": [
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/0",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/1",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/2",
+            "policy:BOUNDED_SYMBOLIC_READING",
             "professionalModules/customerNarrative/topicNarratives/1/lead",
             "professionalModules/customerNarrative/topicNarratives/1/development",
-            "S05_WEALTH:tensionSignals:0"
+            "S05_WEALTH:tensionSignals:0",
+            "S05_WEALTH:counterSignals:0",
+            "S05_WEALTH:realityQuestions:0"
           ],
-          "canonicalEvidenceHash": "be5f242bc4a7b26232aeb55b8c0f5b59950b4f7dc9f524be829a204bfd7970da"
+          "canonicalEvidenceHash": "932f61a76239fe0a8063228c522d02e93e14bc0896ec6da4e8026a1f0f7798d6"
         }
       }
     },
@@ -2030,7 +2114,7 @@
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
           "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
-          "canonicalEvidenceHash": "58d0fc156efa72a39f3f8378b42cd1b6ca9f8046e19ddc753aefa160ed170be8"
+          "canonicalEvidenceHash": "ab38540785bedf9addf3518f4aa6192af39cd193a1c9f17aaef7a629b82f7295"
         },
         "evidencePack": {
           "sectionKey": "S06_RELATIONSHIP",
@@ -2071,6 +2155,14 @@
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/3",
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
           "admittedInterpretations": [
@@ -2100,7 +2192,12 @@
             }
           ],
           "openConditions": [],
-          "counterSignals": [],
+          "counterSignals": [
+            {
+              "id": "S06_RELATIONSHIP:counterSignals:0",
+              "text": "哪一种边界、期待或资源条件一改变，关系互动就会明显变成另一种样子？"
+            }
+          ],
           "temporalContext": {
             "mode": "NOW",
             "localDate": "2026-09-21",
@@ -2152,17 +2249,25 @@
               "boundary": "Contextual symbolism, never a measured ability."
             }
           ],
-          "reflectionTargets": [],
+          "reflectionTargets": [
+            {
+              "id": "S06_RELATIONSHIP:realityQuestions:0",
+              "text": "即使对象性格完全不同，哪些互动模式仍会在不同关系里重复？"
+            }
+          ],
           "sourceFactIds": [
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/0",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/1",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/2",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/3",
+            "policy:BOUNDED_SYMBOLIC_READING",
             "professionalModules/customerNarrative/topicNarratives/2/lead",
             "professionalModules/customerNarrative/topicNarratives/2/development",
-            "S06_RELATIONSHIP:tensionSignals:0"
+            "S06_RELATIONSHIP:tensionSignals:0",
+            "S06_RELATIONSHIP:counterSignals:0",
+            "S06_RELATIONSHIP:realityQuestions:0"
           ],
-          "canonicalEvidenceHash": "58d0fc156efa72a39f3f8378b42cd1b6ca9f8046e19ddc753aefa160ed170be8"
+          "canonicalEvidenceHash": "ab38540785bedf9addf3518f4aa6192af39cd193a1c9f17aaef7a629b82f7295"
         }
       }
     },
@@ -2361,8 +2466,8 @@
         "snapshot": null,
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
-          "fallbackReason": "INSUFFICIENT_ADMITTED_INTERPRETATION",
-          "canonicalEvidenceHash": "8b39392300b15baa44c78cf2eec4c073fc3cb520162e3aca21fc53f5c6a1a423"
+          "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
+          "canonicalEvidenceHash": "8db3b026ed787a9d4173033176ab04398fa09f097b1363c821ae6ac374900e81"
         },
         "evidencePack": {
           "sectionKey": "S07_HEALTH",
@@ -2391,13 +2496,49 @@
               "sourceRefs": [
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/realityBridge/topicPrompts/0/prompts/1/prompt"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
-          "admittedInterpretations": [],
-          "supportingSignals": [],
-          "tensionSignals": [],
+          "admittedInterpretations": [
+            {
+              "id": "professionalModules/customerNarrative/topicNarratives/5/lead",
+              "text": "压力主题把规则与受克放在可用支持和承载条件里一起读。"
+            },
+            {
+              "id": "professionalModules/customerNarrative/topicNarratives/5/development",
+              "text": "就「压力与责任」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、正官、正印。同时可连接到七杀格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。"
+            }
+          ],
+          "supportingSignals": [
+            {
+              "id": "professionalModules/customerNarrative/topicNarratives/5/lead",
+              "text": "压力主题把规则与受克放在可用支持和承载条件里一起读。"
+            },
+            {
+              "id": "professionalModules/customerNarrative/topicNarratives/5/development",
+              "text": "就「压力与责任」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、正官、正印。同时可连接到七杀格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。"
+            }
+          ],
+          "tensionSignals": [
+            {
+              "id": "S07_HEALTH:tensionSignals:0",
+              "text": "承载侧目前呈「支持、外泄与压力并见」，所以压力要同时看可用支持 0 与受克 3，不能只看官杀数量。"
+            }
+          ],
           "openConditions": [],
-          "counterSignals": [],
+          "counterSignals": [
+            {
+              "id": "S07_HEALTH:counterSignals:0",
+              "text": "同一种责任变得更容易承接时，最先改变的通常是支持、清晰度、权限、时间还是资源？"
+            }
+          ],
           "temporalContext": {
             "mode": "NOW",
             "localDate": "2026-09-21",
@@ -2412,7 +2553,10 @@
             ],
             "generatedAt": "2026-09-21T03:22:57.333Z"
           },
-          "allowedClaims": [],
+          "allowedClaims": [
+            "professionalModules/customerNarrative/topicNarratives/5/lead",
+            "professionalModules/customerNarrative/topicNarratives/5/development"
+          ],
           "prohibitedClaims": [
             "RECALCULATE_METHOD",
             "INVENT_REALITY",
@@ -2446,13 +2590,24 @@
               "boundary": "Contextual symbolism, never a measured ability."
             }
           ],
-          "reflectionTargets": [],
+          "reflectionTargets": [
+            {
+              "id": "S07_HEALTH:realityQuestions:0",
+              "text": "哪一种压力会提升专注，哪一种压力反而会持续削弱判断、节奏或恢复？"
+            }
+          ],
           "sourceFactIds": [
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/realityBridge/topicPrompts/5/prompts/1/prompt",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/customerNarrative/topicNarratives/4/condition",
-            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/realityBridge/topicPrompts/0/prompts/1/prompt"
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/realityBridge/topicPrompts/0/prompts/1/prompt",
+            "policy:BOUNDED_SYMBOLIC_READING",
+            "professionalModules/customerNarrative/topicNarratives/5/lead",
+            "professionalModules/customerNarrative/topicNarratives/5/development",
+            "S07_HEALTH:tensionSignals:0",
+            "S07_HEALTH:counterSignals:0",
+            "S07_HEALTH:realityQuestions:0"
           ],
-          "canonicalEvidenceHash": "8b39392300b15baa44c78cf2eec4c073fc3cb520162e3aca21fc53f5c6a1a423"
+          "canonicalEvidenceHash": "8db3b026ed787a9d4173033176ab04398fa09f097b1363c821ae6ac374900e81"
         }
       }
     },
@@ -2731,7 +2886,7 @@
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
           "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
-          "canonicalEvidenceHash": "554d831d2cf3bf243cc38b345d4d7944ee2de79db8ba6bd1302b94d07913e293"
+          "canonicalEvidenceHash": "8a625f6fd3c06a0e667aab1d09673f74a110a686a62eeecf230f834c423be1d3"
         },
         "evidencePack": {
           "sectionKey": "S08_TIMING",
@@ -2824,6 +2979,14 @@
               "sourceRefs": [
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/annual"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
           "admittedInterpretations": [
@@ -2909,24 +3072,7 @@
               "boundary": "Contextual symbolism, never a measured ability."
             }
           ],
-          "reflectionTargets": [
-            {
-              "id": "S08_TIMING:realityQuestions:0",
-              "text": "在这段观察范围内，哪项责任变得更明显？请找一个具体例子支持自己的描述。"
-            },
-            {
-              "id": "S08_TIMING:realityQuestions:1",
-              "text": "这段时间可用的支持有哪些变化？支持改变时，你的回应是否也随之不同？"
-            },
-            {
-              "id": "S08_TIMING:realityQuestions:2",
-              "text": "哪段经历与最初注意到的主题相反？有哪些情境可以帮助理解这个差异？"
-            },
-            {
-              "id": "S08_TIMING:realityQuestions:3",
-              "text": "时间层名称改变前后，哪些经验仍然保持一致？"
-            }
-          ],
+          "reflectionTargets": [],
           "sourceFactIds": [
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/0",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/1",
@@ -2939,16 +3085,13 @@
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/currentDaYun",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/annual",
+            "policy:BOUNDED_SYMBOLIC_READING",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/targetContext",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow",
             "S08_TIMING:tensionSignals:0",
-            "S08_TIMING:tensionSignals:1",
-            "S08_TIMING:realityQuestions:0",
-            "S08_TIMING:realityQuestions:1",
-            "S08_TIMING:realityQuestions:2",
-            "S08_TIMING:realityQuestions:3"
+            "S08_TIMING:tensionSignals:1"
           ],
-          "canonicalEvidenceHash": "554d831d2cf3bf243cc38b345d4d7944ee2de79db8ba6bd1302b94d07913e293"
+          "canonicalEvidenceHash": "8a625f6fd3c06a0e667aab1d09673f74a110a686a62eeecf230f834c423be1d3"
         }
       }
     },
@@ -3217,28 +3360,12 @@
         "internalOnly": {
           "fallbackState": "T3_FALLBACK_USED",
           "fallbackReason": "PROVIDER_CREDENTIAL_NOT_CONFIGURED",
-          "canonicalEvidenceHash": "dbea8eef7ef0ffaca85b70fbe783313a02822bd76d514d9bc25e6eaa8b4f2ecf"
+          "canonicalEvidenceHash": "7828fd3aea0da073933c38cae6a640cc2b6090e24484a6b26b819e9bc22fcb2c"
         },
         "evidencePack": {
           "sectionKey": "S09_GUIDANCE",
           "locale": "zh-Hans",
           "facts": [
-            {
-              "id": "CMP-CA22B15B88F266304E9EDC45#FOUR_PILLARS:DAY_STEM",
-              "label": "日主",
-              "displayValue": "癸",
-              "sourceRefs": [
-                "CMP-CA22B15B88F266304E9EDC45#FOUR_PILLARS:DAY_STEM"
-              ]
-            },
-            {
-              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/fiveElements/monthCommand",
-              "label": "月令",
-              "displayValue": "午",
-              "sourceRefs": [
-                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/fiveElements/monthCommand"
-              ]
-            },
             {
               "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total",
               "label": "根气记录",
@@ -3285,6 +3412,94 @@
               "value": 3,
               "sourceRefs": [
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/pressureVisible"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/verdict/primaryPattern",
+              "label": "主格局",
+              "displayValue": "未定",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/verdict/primaryPattern"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1",
+              "label": "七杀",
+              "displayValue": "己",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0",
+              "label": "偏财",
+              "displayValue": "丁",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/0",
+              "label": "偏财",
+              "displayValue": "支持路径可见",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/0"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/1",
+              "label": "偏财",
+              "displayValue": "所需因素未见",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/1"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/2",
+              "label": "偏财",
+              "displayValue": "位置条件待审",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/2"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1/professionalReading/formation/paths/0",
+              "label": "七杀",
+              "displayValue": "所需因素未见",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1/professionalReading/formation/paths/0"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/0",
+              "label": "年柱",
+              "displayValue": "己巳",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/0"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/1",
+              "label": "月柱",
+              "displayValue": "庚午",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/1"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/2",
+              "label": "日柱",
+              "displayValue": "癸丑",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/2"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/3",
+              "label": "时柱",
+              "displayValue": "戊午",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/3"
               ]
             },
             {
@@ -3466,6 +3681,30 @@
               ]
             },
             {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars",
+              "label": "本命基线",
+              "displayValue": "己巳 · 庚午 · 癸丑 · 戊午",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/currentDaYun",
+              "label": "所选大运",
+              "displayValue": "甲戌",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/currentDaYun"
+              ]
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/annual",
+              "label": "所选流年",
+              "displayValue": "2026 · 丙午",
+              "sourceRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/annual"
+              ]
+            },
+            {
               "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/0",
               "label": "官杀",
               "value": 6,
@@ -3500,6 +3739,14 @@
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/3",
                 "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/leadGroup"
               ]
+            },
+            {
+              "id": "policy:BOUNDED_SYMBOLIC_READING",
+              "text": "This is a conditional symbolic reading. It does not establish observed customer events, measured personality, medical diagnoses, guaranteed income, relationships or professions. Experience can differ from the interpretation.",
+              "sourceRefs": [
+                "docs/guided-report-successor-r2/addendum-d.md"
+              ],
+              "claimScope": "BOUNDARY_ONLY_NOT_PERSONAL_EVIDENCE"
             }
           ],
           "admittedInterpretations": [
@@ -3544,8 +3791,20 @@
               "text": "就「关系」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 3 个优先主线直接相连，因此不是独立的小结。"
             },
             {
-              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/0",
+              "id": "professionalModules/customerNarrative/topicNarratives/5/lead",
+              "text": "压力主题把规则与受克放在可用支持和承载条件里一起读。"
+            },
+            {
+              "id": "professionalModules/customerNarrative/topicNarratives/5/development",
+              "text": "就「压力与责任」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、正官、正印。同时可连接到七杀格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。"
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/targetContext",
               "text": "本次读取以 Asia/Kuala_Lumpur 的 2026-09-21 为观察时点。本命结构保持不变，下面的时间层用于定位这一阶段。"
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow",
+              "text": "在所选观察时点，流年为丙午，大运为甲戌。把这一时间范围放回本命结构中比较，再联系实际经验；不同时间层并不是可以互相替代的自我描述。"
             }
           ],
           "supportingSignals": [
@@ -3590,8 +3849,20 @@
               "text": "就「关系」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 3 个优先主线直接相连，因此不是独立的小结。"
             },
             {
-              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/0",
+              "id": "professionalModules/customerNarrative/topicNarratives/5/lead",
+              "text": "压力主题把规则与受克放在可用支持和承载条件里一起读。"
+            },
+            {
+              "id": "professionalModules/customerNarrative/topicNarratives/5/development",
+              "text": "就「压力与责任」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、正官、正印。同时可连接到七杀格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。"
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/targetContext",
               "text": "本次读取以 Asia/Kuala_Lumpur 的 2026-09-21 为观察时点。本命结构保持不变，下面的时间层用于定位这一阶段。"
+            },
+            {
+              "id": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow",
+              "text": "在所选观察时点，流年为丙午，大运为甲戌。把这一时间范围放回本命结构中比较，再联系实际经验；不同时间层并不是可以互相替代的自我描述。"
             }
           ],
           "tensionSignals": [
@@ -3616,6 +3887,10 @@
               "text": "关系结构更适合观察互动方式、边界与反复柱位关系，不把它直接翻译成结婚、分手或某一种伴侣结果。"
             },
             {
+              "id": "S07_HEALTH:tensionSignals:0",
+              "text": "承载侧目前呈「支持、外泄与压力并见」，所以压力要同时看可用支持 0 与受克 3，不能只看官杀数量。"
+            },
+            {
               "id": "S08_TIMING:tensionSignals:0",
               "text": "时间层用于界定对照范围，不能据此认定某件事已经发生或必然发生。"
             },
@@ -3625,7 +3900,36 @@
             }
           ],
           "openConditions": [],
-          "counterSignals": [],
+          "counterSignals": [
+            {
+              "id": "S02_PERSONALITY:counterSignals:0",
+              "text": "明明能力已经存在时，哪些情境仍会稳定地阻碍表达或发挥？"
+            },
+            {
+              "id": "S03_LIFE_STRUCTURE:counterSignals:0",
+              "text": "哪一个很小的环境调整，最容易带来日常运行节奏上最大的改善？"
+            },
+            {
+              "id": "S04_CAREER:counterSignals:0",
+              "text": "有哪些角色表面上看起来适合，但真正进入持续执行后，会因为承载成本而变得难以长期维持？"
+            },
+            {
+              "id": "S05_WEALTH:counterSignals:0",
+              "text": "有哪些财富经验并不符合这段结构，因为市场、家庭责任或个人选择反而占了主导？"
+            },
+            {
+              "id": "S06_RELATIONSHIP:counterSignals:0",
+              "text": "哪一种边界、期待或资源条件一改变，关系互动就会明显变成另一种样子？"
+            },
+            {
+              "id": "S07_HEALTH:counterSignals:0",
+              "text": "同一种责任变得更容易承接时，最先改变的通常是支持、清晰度、权限、时间还是资源？"
+            },
+            {
+              "id": "S09_GUIDANCE:counterSignals:0",
+              "text": "哪一个很小的环境调整，最容易带来日常运行节奏上最大的改善？"
+            }
+          ],
           "temporalContext": {
             "mode": "NOW",
             "localDate": "2026-09-21",
@@ -3651,7 +3955,10 @@
             "professionalModules/customerNarrative/topicNarratives/1/development",
             "professionalModules/customerNarrative/topicNarratives/2/lead",
             "professionalModules/customerNarrative/topicNarratives/2/development",
-            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/0"
+            "professionalModules/customerNarrative/topicNarratives/5/lead",
+            "professionalModules/customerNarrative/topicNarratives/5/development",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/targetContext",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow"
           ],
           "prohibitedClaims": [
             "RECALCULATE_METHOD",
@@ -3688,31 +3995,52 @@
           ],
           "reflectionTargets": [
             {
-              "id": "S08_TIMING:realityQuestions:0",
-              "text": "在这段观察范围内，哪项责任变得更明显？请找一个具体例子支持自己的描述。"
+              "id": "S02_PERSONALITY:realityQuestions:0",
+              "text": "哪些能力要经过反复练习与支持才会稳定，哪些能力很容易出现，却比较难持续？"
             },
             {
-              "id": "S08_TIMING:realityQuestions:1",
-              "text": "这段时间可用的支持有哪些变化？支持改变时，你的回应是否也随之不同？"
+              "id": "S03_LIFE_STRUCTURE:realityQuestions:0",
+              "text": "以一个普通月份来看，支持 → 输出 → 资源交换 → 责任这条循环在哪里最顺，在哪里最容易反复断掉？"
             },
             {
-              "id": "S08_TIMING:realityQuestions:2",
-              "text": "哪段经历与最初注意到的主题相反？有哪些情境可以帮助理解这个差异？"
+              "id": "S04_CAREER:realityQuestions:0",
+              "text": "回看最近两三个工作环境，责任、输出、资源交换与学习支持中，哪一种组合最常重复？"
             },
             {
-              "id": "S08_TIMING:realityQuestions:3",
-              "text": "时间层名称改变前后，哪些经验仍然保持一致？"
+              "id": "S05_WEALTH:realityQuestions:0",
+              "text": "当资源累积比较顺时，真正的差别更常来自产出、管理、交换、节制，还是行动时机？"
+            },
+            {
+              "id": "S06_RELATIONSHIP:realityQuestions:0",
+              "text": "即使对象性格完全不同，哪些互动模式仍会在不同关系里重复？"
+            },
+            {
+              "id": "S07_HEALTH:realityQuestions:0",
+              "text": "哪一种压力会提升专注，哪一种压力反而会持续削弱判断、节奏或恢复？"
+            },
+            {
+              "id": "S09_GUIDANCE:realityQuestions:0",
+              "text": "以一个普通月份来看，支持 → 输出 → 资源交换 → 责任这条循环在哪里最顺，在哪里最容易反复断掉？"
             }
           ],
           "sourceFactIds": [
-            "CMP-CA22B15B88F266304E9EDC45#FOUR_PILLARS:DAY_STEM",
-            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/fiveElements/monthCommand",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/supportVisible",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/outwardVisible",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/pressureVisible",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/verdict/primaryPattern",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1/professionalReading/formation/paths/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/3",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/0",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/1",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/2",
@@ -3734,10 +4062,14 @@
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/5",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/6",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/7",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/currentDaYun",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/annual",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/0",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/1",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/2",
             "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/3",
+            "policy:BOUNDED_SYMBOLIC_READING",
             "professionalModules/customerNarrative/topicNarratives/4/lead",
             "professionalModules/customerNarrative/topicNarratives/4/development",
             "professionalModules/customerNarrative/topicNarratives/6/lead",
@@ -3748,19 +4080,34 @@
             "professionalModules/customerNarrative/topicNarratives/1/development",
             "professionalModules/customerNarrative/topicNarratives/2/lead",
             "professionalModules/customerNarrative/topicNarratives/2/development",
+            "professionalModules/customerNarrative/topicNarratives/5/lead",
+            "professionalModules/customerNarrative/topicNarratives/5/development",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/targetContext",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow",
             "S02_PERSONALITY:tensionSignals:0",
             "S03_LIFE_STRUCTURE:tensionSignals:0",
             "S04_CAREER:tensionSignals:0",
             "S05_WEALTH:tensionSignals:0",
             "S06_RELATIONSHIP:tensionSignals:0",
+            "S07_HEALTH:tensionSignals:0",
             "S08_TIMING:tensionSignals:0",
             "S08_TIMING:tensionSignals:1",
-            "S08_TIMING:realityQuestions:0",
-            "S08_TIMING:realityQuestions:1",
-            "S08_TIMING:realityQuestions:2",
-            "S08_TIMING:realityQuestions:3"
+            "S02_PERSONALITY:counterSignals:0",
+            "S03_LIFE_STRUCTURE:counterSignals:0",
+            "S04_CAREER:counterSignals:0",
+            "S05_WEALTH:counterSignals:0",
+            "S06_RELATIONSHIP:counterSignals:0",
+            "S07_HEALTH:counterSignals:0",
+            "S09_GUIDANCE:counterSignals:0",
+            "S02_PERSONALITY:realityQuestions:0",
+            "S03_LIFE_STRUCTURE:realityQuestions:0",
+            "S04_CAREER:realityQuestions:0",
+            "S05_WEALTH:realityQuestions:0",
+            "S06_RELATIONSHIP:realityQuestions:0",
+            "S07_HEALTH:realityQuestions:0",
+            "S09_GUIDANCE:realityQuestions:0"
           ],
-          "canonicalEvidenceHash": "dbea8eef7ef0ffaca85b70fbe783313a02822bd76d514d9bc25e6eaa8b4f2ecf"
+          "canonicalEvidenceHash": "7828fd3aea0da073933c38cae6a640cc2b6090e24484a6b26b819e9bc22fcb2c"
         }
       }
     },

@@ -48,7 +48,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  paragraphs('boundaries',[e('S10_APPENDIX').bridge[locale]],`${edRef}#S10_APPENDIX`);
  paragraphs('methodology',[pick('BaZi organizes a birth reading around four pillars and uses the Day Master as a reference position. The diagrams in this report preserve the distinctions between visible stems, branches, hidden stems and element counts. Structural candidates are shown with their conditions, so an open pattern remains open rather than becoming a final verdict. The timing chapter adds only the layers resolved by the existing method engine for the saved observation window. These layers accompany the birth structure; they do not replace it. Read the prose as a bounded explanation of that structure, then compare it with independent experience.','八字围绕四柱组织出生读取，并以日主作为参照位置。本报告的图表区分天干、地支、藏干与五行计数；结构候选与成立条件一同呈现，因此仍开放的格局不会被写成最终判断。时间章节只加入既有方法引擎针对保存的观察窗口所解析的层次，它们与本命结构一起阅读，不取代本命。请把文字看作有范围的结构说明，再用独立经验来比较。')],`${edRef}#S10_APPENDIX`);
  for(const name of unavailableModules)delete modules[name];
- const sections=[],internalSections=[],pages=[];
+ const sections=[],internalSections=[],pages=[],t3Interpretations=[];
  for(const section of BAZI_SECTION_REGISTRY.sections){
   const editorial=e(section.key),sourceNumbers=({S01_OVERVIEW:[7,8,9],S02_PERSONALITY:[14],S03_LIFE_STRUCTURE:[11,12,13,14,15],S04_CAREER:[18],S05_WEALTH:[19],S06_RELATIONSHIP:[17],S07_HEALTH:[24],S08_TIMING:[20,21],S09_GUIDANCE:[16,18,19,17],S10_APPENDIX:[26]})[section.key];
   const sourcePage=legacy.reports.flatMap(r=>r.pages).find(p=>p.pageNumber===sourceNumbers[0]);
@@ -75,15 +75,24 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    // Build from all deterministic pages in this section; timing includes both
    // the luck and annual layers. Guidance also receives prior admitted sections.
    const packInterpretation={...interpretation,canonicalFacts:[...new Map(sourceNumbers.flatMap(n=>internal(n).canonicalFacts).map(f=>[f.sourceRefs[0],f])).values()]};
+   const topicCode=({S02_PERSONALITY:'CAPABILITY',S03_LIFE_STRUCTURE:'LIFE_OPERATION',S04_CAREER:'CAREER',S05_WEALTH:'WEALTH',S06_RELATIONSHIP:'RELATIONSHIPS',S07_HEALTH:'PRESSURE',S09_GUIDANCE:'LIFE_OPERATION'})[section.key];
+   const prompts=(reading.professionalModules.realityBridge.topicPrompts||[]).filter(p=>p.topicCode===topicCode).flatMap(p=>p.prompts||[]);
+   packInterpretation.counterSignals=prompts.filter(p=>p.promptType==='COUNTEREXAMPLE').map(p=>p.prompt[lang]);
+   packInterpretation.realityQuestions=prompts.filter(p=>p.promptType==='REPEAT_OR_CONTEXT').map(p=>p.prompt[lang]);
+   if(section.key==='S07_HEALTH'){
+    const pressure=topic('PRESSURE');
+    if(pressure){const ref=`professionalModules/customerNarrative/topicNarratives/${topics.indexOf(pressure)}`;packInterpretation.allowedInterpretations=['lead','development'].map(k=>({text:pressure[k][lang],sourceRef:`${ref}/${k}`}));packInterpretation.tensionSignals=[pressure.condition[lang]];}
+   }
    if(section.key==='S08_TIMING')packInterpretation.allowedInterpretations=sourceNumbers.flatMap(n=>internal(n).allowedInterpretations);
-   const pack=await buildSectionEvidencePack({interpretation:packInterpretation,locale,sectionKey:section.key,relatedInterpretations:internalSections.map(s=>s.interpretation)});
+   const pack=await buildSectionEvidencePack({interpretation:packInterpretation,locale,sectionKey:section.key,relatedInterpretations:t3Interpretations});
+   t3Interpretations.push(packInterpretation);
    t3=await composeBaziT3Section({pack,...composition,snapshot:composition.t3.snapshots?.[section.key]});
    t3.evidencePack=pack;
    if(t3.status==='PASS'&&canShowT3(composition.t3)){
     const n=t3.snapshot.finalNarrative,target=narrative||pageBlocks.find(p=>p.pageFamily==='TIMING_PAGE');
-    const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,...n.tensionConditions,n.closingInsight].filter(b=>b.text.trim());
+    const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,...n.counterSignals,n.closingInsight].filter(b=>b.text.trim());
     const secondary=pageBlocks.find(p=>p!==target&&['INSIGHT_LIST_PAGE','TIMING_PAGE'].includes(p.pageFamily));
-    const secondaryBlocks=[...n.supportingConditions,...n.counterSignals];
+    const secondaryBlocks=[...n.supportingConditions,...n.tensionConditions];
     if(!secondary)main.push(...secondaryBlocks);
     const maximum=REPORT_PAGE_FAMILIES[target.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
     // Preserve the frozen 36-page framework; too much text returns the whole
@@ -92,10 +101,11 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     const listFits=secondary?.pageFamily!=='INSIGHT_LIST_PAGE'||(secondaryBlocks.length>=3&&secondaryBlocks.length<=6&&secondaryBlocks.every(b=>textUnits(b.text,locale)>=listRange[0]&&textUnits(b.text,locale)<=listRange[1]));
     if(listFits&&main.reduce((sum,b)=>sum+textUnits(b.text,locale),0)<=maximum){
      target.contentBlocks=main.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
-     target.observations=n.realityCheck.map(b=>b.text);
-     if(secondary?.pageFamily==='INSIGHT_LIST_PAGE')secondary.items=[...n.supportingConditions,...n.counterSignals].map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
-     else if(secondary)secondary.contentBlocks=[...n.supportingConditions,...n.counterSignals].map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
-     for(const pb of pageBlocks)pb.boundary='';
+     target.items=[];
+     if(secondary?.pageFamily==='INSIGHT_LIST_PAGE')secondary.items=secondaryBlocks.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
+     else if(secondary)secondary.contentBlocks=secondaryBlocks.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
+     for(const pb of pageBlocks){pb.boundary='';pb.observations=[];}
+     pageBlocks.at(-1).observations=n.realityCheck.map(b=>b.text);
      pageBlocks.at(-1).boundary=n.boundaryNote.text;
     }else t3={...t3,status:'FALLBACK',internalOnly:{...t3.internalOnly,fallbackState:'T3_FALLBACK_USED',fallbackReason:'COMPOSITION_BUDGET_REJECTED'}};
    }

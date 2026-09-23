@@ -38,10 +38,10 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
      const seed={sectionKey:pack.sectionKey,locale:pack.locale,canonicalEvidenceHash:pack.canonicalEvidenceHash,temporalSnapshot:pack.temporalContext,compositionVersion:COMPOSITION_VERSION,verifierVersion:VERIFIER_VERSION,editorialVersion:EDITORIAL_VERSION,finalNarrative:candidate,verification:verdict};
      return {status:'PASS',snapshot:deepFreeze({...seed,snapshotDigest:await sha256Stable(seed)}),internalOnly:{route,attempts:attempt+1,usage,latencyMs:Date.now()-started,semanticStatus:'PASS',editorialStatus:'PASS'}};
     }
-    if(verdict?.status==='REJECT')return fallback('SEMANTIC_REJECTED');
+    if(verdict?.status==='REJECT')return {...fallback('SEMANTIC_REJECTED'),internalOnly:{...fallback('SEMANTIC_REJECTED').internalOnly,route,usage,latencyMs:Date.now()-started,attempts:attempt+1,verification:verdict,editorial,candidate}};
     repair={candidate,editorialIssues:editorial.issues,semanticIssues:verdict};
    }
-   return fallback('REPAIR_EXHAUSTED');
+   return {...fallback('REPAIR_EXHAUSTED'),internalOnly:{...fallback('REPAIR_EXHAUSTED').internalOnly,route,usage,latencyMs:Date.now()-started,attempts:2,lastRepair:repair}};
   })(),new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('T3_TIMEOUT'));},timeoutMs);})]);
  }catch(error){return {...fallback(error?.message==='T3_TIMEOUT'?'PROVIDER_TIMEOUT':'PROVIDER_OR_VERIFIER_FAILED'),providerFailure:{code:/^[A-Z0-9_]+$/.test(error?.code||'')?error.code:'PROVIDER_FAILED',httpStatus:Number.isInteger(error?.details?.status)?error.details.status:null}};}
  finally{clearTimeout(timer);controller.abort();}
