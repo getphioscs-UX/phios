@@ -20,10 +20,10 @@ function config(context){
 }
 function endpoint(url,issuer){const parsed=new URL(url);if(parsed.origin!==new URL(issuer).origin||parsed.protocol!=='https:'||parsed.username||parsed.password||parsed.hash)throw fail('AUTH_DISCOVERY_ENDPOINT_INVALID',503);return parsed.href;}
 async function fetchJson(context,url,options={}){
-  const response=await (context.fetch||fetch)(url,{...options,redirect:'error',signal:AbortSignal.timeout(10000)});
+  let response;try{response=await (context.fetch||fetch)(url,{...options,redirect:'error',signal:AbortSignal.timeout(10000)});}catch{throw fail('AUTH_PROVIDER_UNREACHABLE',502);}
   if(!response.ok)throw fail('AUTH_PROVIDER_UNAVAILABLE',502);
   const text=await response.text();if(text.length>1000000)throw fail('AUTH_PROVIDER_RESPONSE_INVALID',502);
-  return JSON.parse(text);
+  try{return JSON.parse(text);}catch{throw fail('AUTH_PROVIDER_RESPONSE_INVALID',502);}
 }
 export async function discover(context){
   const c=config(context),cached=metadataCache.get(c.issuer);
@@ -90,7 +90,8 @@ export async function authApi(context,action){
       if(tables?.n!==2)throw fail('AUTH_MIGRATION_REQUIRED',503);
       const metadata=await discover(context),state=random(),nonce=random(),verifier=random(),expires=now()+600;
       const challenge=btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.digest('SHA-256',encoder.encode(verifier))))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-      const tx=await seal(c,'transaction',{state,nonce,verifier},expires),destination=new URL(metadata.authorization_endpoint);
+      let tx;try{tx=await seal(c,'transaction',{state,nonce,verifier},expires);}catch{throw fail('AUTH_TRANSACTION_ENCRYPTION_FAILED',503);}
+      const destination=new URL(metadata.authorization_endpoint);
       for(const [k,v] of Object.entries({client_id:c.clientId,redirect_uri:c.callback,response_type:'code',scope:'openid profile email',state,nonce,code_challenge:challenge,code_challenge_method:'S256'}))destination.searchParams.set(k,v);
       if(url.searchParams.get('mode')==='signup')destination.searchParams.set('screen_hint','signup');
       if(url.searchParams.get('locale')==='zh-Hans')destination.searchParams.set('ui_locales','zh-CN');
