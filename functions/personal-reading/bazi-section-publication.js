@@ -83,7 +83,15 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     const pressure=topic('PRESSURE');
     if(pressure){const ref=`professionalModules/customerNarrative/topicNarratives/${topics.indexOf(pressure)}`;packInterpretation.allowedInterpretations=['lead','development'].map(k=>({text:pressure[k][lang],sourceRef:`${ref}/${k}`}));packInterpretation.tensionSignals=[pressure.condition[lang]];}
    }
-   if(section.key==='S08_TIMING')packInterpretation.allowedInterpretations=sourceNumbers.flatMap(n=>internal(n).allowedInterpretations);
+   if(section.key==='S08_TIMING'){
+    packInterpretation.allowedInterpretations=sourceNumbers.flatMap(n=>internal(n).allowedInterpretations);
+    packInterpretation.canonicalFacts.push({id:'SAVED_TEMPORAL_LAYERS',label:'Saved natal comparison window, luck cycle and year',displayValue:source(20).temporal,sourceRefs:[`${reading.summary.reportDigest}#professionalModules/professionalTimeline/currentWindow`]});
+   }
+   const relatedPriorities=(reading.professionalModules.customerNarrative.priorityChapters||[]).filter(p=>topic(topicCode)?.priorityRefs?.includes(p.priorityRef)||(section.key==='S08_TIMING'&&p.themeType==='TIMING'));
+   for(const chapter of relatedPriorities){
+    const index=reading.professionalModules.customerNarrative.priorityChapters.indexOf(chapter),ref=`professionalModules/customerNarrative/priorityChapters/${index}`;
+    packInterpretation.allowedInterpretations=[...packInterpretation.allowedInterpretations,...['thesis','development','condition'].filter(k=>chapter[k]?.[lang]).map(k=>({text:chapter[k][lang],sourceRef:`${ref}/${k}`}))];
+   }
    const pack=await buildSectionEvidencePack({interpretation:packInterpretation,locale,sectionKey:section.key,relatedInterpretations:t3Interpretations});
    t3Interpretations.push(packInterpretation);
    t3=await composeBaziT3Section({pack,...composition,snapshot:composition.t3.snapshots?.[section.key]});
@@ -111,9 +119,10 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    }
   }
   internalSections.push({sectionKey:section.key,interpretation,composition:composed.internalOnly,sectionComposition:sectionObject,...(t3?{t3}:{} )});
-  const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:section.title,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
+  const publicationTitle=composition.t3&&section.key==='S07_HEALTH'?{en:'Wellbeing & Daily Rhythm','zh-Hans':'身心状态与日常节奏'}:section.title;
+  const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:publicationTitle,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
   const admittedT3=t3?.status==='PASS'&&canShowT3(composition.t3);
-  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:section.key==='S07_HEALTH'&&admittedT3?pick('Wellbeing & Daily Rhythm','身心状态与日常节奏'):section.title[locale],paragraphs:[admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
+  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits});

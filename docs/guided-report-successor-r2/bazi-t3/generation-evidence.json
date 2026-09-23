@@ -126,6 +126,394 @@
       "fixtureClass": "SYNTHETIC_EXISTING_CANONICAL_BAZI_BENCHMARK",
       "liveProviderAttempt": true,
       "productionActivated": false
+    },
+    "second-en-personality.json": {
+      "status": "FALLBACK",
+      "snapshot": null,
+      "internalOnly": {
+        "fallbackState": "T3_FALLBACK_USED",
+        "fallbackReason": "SEMANTIC_REJECTED",
+        "canonicalEvidenceHash": "3e9f1596d338cc7ae372ec2c2ce45d4a89ed54d391df7f7e7ccff145adad55e0",
+        "route": {
+          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "providerRequired": true,
+          "selectedProvider": "OPENAI",
+          "selectedModel": "gpt-5.6-sol",
+          "providerAttemptLimit": 1,
+          "fallbackAllowed": true,
+          "fallbackCapabilityClass": "DEEP",
+          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+        },
+        "usage": [
+          {
+            "input_tokens": 2266,
+            "input_tokens_details": {
+              "cache_write_tokens": 2263,
+              "cached_tokens": 0
+            },
+            "output_tokens": 2092,
+            "output_tokens_details": {
+              "reasoning_tokens": 709
+            },
+            "total_tokens": 4358
+          },
+          {
+            "input_tokens": 3259,
+            "input_tokens_details": {
+              "cache_write_tokens": 3256,
+              "cached_tokens": 0
+            },
+            "output_tokens": 4418,
+            "output_tokens_details": {
+              "reasoning_tokens": 2070
+            },
+            "total_tokens": 7677
+          }
+        ],
+        "latencyMs": 89878,
+        "attempts": 1,
+        "verification": {
+          "status": "REJECT",
+          "unsupportedClaims": [
+            "Learning, support and absorption are asserted to be the route from potential to dependable expression; the evidence only identifies them as the leading functional group.",
+            "Understanding and consistent carrying are presented as distinct stages governed by structure and repetition rather than a single display; that contrast is not stated in the evidence.",
+            "Capability is described as a sequential cycle that ends by testing repeatability; the source lists functions but does not establish this cycle or sequence.",
+            "Taking in guidance and consolidating it through practice are added as the favored development mechanism.",
+            "One recorded root is interpreted as anchoring that can support continuity when an ability is exercised repeatedly; the root count alone does not establish that effect.",
+            "Rules, responsibility, and decisive action are said to provide learning with a practical container under clear expectations; this causal mechanism is not supplied by the evidence.",
+            "The everyday manifestation involving framework learning, rehearsal, repeatable methods, and reduced stability under contextual change is an inferred lived pattern rather than an evidenced customer reality.",
+            "A counterexample is expanded to include independence from external structure, although the source reflection target mentions repeated practice and support, not external structure.",
+            "The environment is said to explain more than the symbolic capability pattern in some cases; the source raises context as a question but does not establish that explanatory hierarchy."
+          ],
+          "scopeViolations": [
+            "candidate.howThisMayShowUp[0].text infers an everyday customer manifestation despite the boundary that the reading does not establish measured personality or lived events.",
+            "The phrases “main symbolic pattern” and “symbolic capability pattern” risk inventing a pattern verdict where the source only identifies a leading functional group and expressly says no single pattern path must stand alone.",
+            "Raw root and visible-support counts are converted into behavioral and developmental effects not authorized by the allowed claims."
+          ],
+          "factConflicts": [],
+          "terminologyIssues": [
+            "“Main symbolic pattern” conflates a leading functional group with a formally established pattern path.",
+            "The technical meanings of Seven Killings, Direct Officer, and Direct Resource match the evidence pack, but candidate.technicalNote does not cite the technical-term records and adds the unsupported characterization “interacting functions.”",
+            "“Root anchoring” is used as though the recorded root count itself establishes continuity or reliability; that semantic effect is not defined by the supplied fact."
+          ],
+          "repairInstructions": [
+            "Replace “main symbolic pattern” with “leading functional group” and retain the stated approximate weight of 23.1% if quantifying its prominence.",
+            "Limit the lead to the supplied formulation that capability is read through what can be absorbed, practiced, expressed, and repeatedly carried; remove the unsupported potential-to-dependability mechanism, separate-stage theory, and “single display” contrast.",
+            "Rewrite interpretation[0] as a non-sequential list rather than a cycle, and remove “workable structure” and “test whether.”",
+            "Remove the claims about taking in guidance, consolidation, root-based continuity, practical containers, and clear expectations unless additional evidence explicitly supports them.",
+            "Delete or recast howThisMayShowUp[0] as a reflection question rather than an inferred everyday manifestation.",
+            "In counterSignals[0], remove “external structure” and stay with the supplied contrast between abilities requiring repeated practice and support and abilities that appear easily but are harder to sustain.",
+            "In counterSignals[1], retain the question about context blocking expression but remove the unsupported conclusion that environment may explain more than the symbolic pattern.",
+            "Preserve the tension explicitly and neutrally: reliability depends on whether roots 1, support 0, and output cost 4 work together over time.",
+            "If retaining the technical note, cite or otherwise directly ground the supplied technical-term definitions and remove “interacting functions” unless supported."
+          ],
+          "assessments": [
+            {
+              "path": "candidate.headline.text",
+              "entailed": true,
+              "reason": "It closely paraphrases the admitted lead, which reads capability through absorption, practice, expression, and repeated carrying.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/lead"
+              ]
+            },
+            {
+              "path": "candidate.lead.text",
+              "entailed": false,
+              "reason": "The leading emphasis on learning, support, and absorption is supported, but the text adds a route from potential to dependable expression, separate developmental stages, a structural mechanism, and a contrast with a single display that the cited sources do not state.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/lead",
+                "professionalModules/customerNarrative/topicNarratives/4/development"
+              ]
+            },
+            {
+              "path": "candidate.closingInsight.text",
+              "entailed": true,
+              "reason": "The distinction between possessing an ability and carrying it repeatedly follows the lead, while the statement that actual experience determines applicability preserves the policy boundary and contextual counter-signal.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/lead",
+                "S02_PERSONALITY:counterSignals:0",
+                "policy:BOUNDED_SYMBOLIC_READING"
+              ]
+            },
+            {
+              "path": "candidate.technicalNote.text",
+              "entailed": false,
+              "reason": "The symbolic glosses are consistent with the pack’s technical-term definitions and the fixed-trait boundary is correct, but those definitions are not directly cited here and “interacting functions” is not established by the cited development text.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/development",
+                "policy:BOUNDED_SYMBOLIC_READING"
+              ]
+            },
+            {
+              "path": "candidate.boundaryNote.text",
+              "entailed": true,
+              "reason": "This faithfully restates the conditional-symbolic boundary and denial of measured personality or proven lived events.",
+              "factRefs": [
+                "policy:BOUNDED_SYMBOLIC_READING"
+              ]
+            },
+            {
+              "path": "candidate.interpretation[0].text",
+              "entailed": false,
+              "reason": "The evidence lists absorption, practice, expression, and repeated carrying, but does not define a cycle, prescribe a workable structure, or add a final testing stage.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/lead",
+                "professionalModules/customerNarrative/topicNarratives/4/development"
+              ]
+            },
+            {
+              "path": "candidate.interpretation[1].text",
+              "entailed": true,
+              "reason": "As a conditional alternative, it accurately preserves the supplied possibility that context can block expression even when an underlying skill is present.",
+              "factRefs": [
+                "S02_PERSONALITY:counterSignals:0",
+                "professionalModules/customerNarrative/topicNarratives/4/lead"
+              ]
+            },
+            {
+              "path": "candidate.supportingConditions[0].text",
+              "entailed": false,
+              "reason": "The leading functional emphasis is supported, but favoring guidance intake and consolidation through practice is an added developmental mechanism.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/development"
+              ]
+            },
+            {
+              "path": "candidate.supportingConditions[1].text",
+              "entailed": false,
+              "reason": "The evidence establishes one root record, not that this root provides anchoring or supports continuity through repeated exercise.",
+              "factRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total",
+                "professionalModules/customerNarrative/topicNarratives/4/lead"
+              ]
+            },
+            {
+              "path": "candidate.supportingConditions[2].text",
+              "entailed": false,
+              "reason": "The symbolic meanings of rules, responsibility, and decisive action are available, but their claimed causal role as a practical container for learning under clear expectations is unsupported.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/development"
+              ]
+            },
+            {
+              "path": "candidate.tensionConditions[0].text",
+              "entailed": true,
+              "reason": "It preserves the stated reliability tension among anchoring, support, and expression cost. The absence of visible peer and resource support is directly supported by both counts being zero, and the warning against assuming consistency matches the open reliability condition.",
+              "factRefs": [
+                "S02_PERSONALITY:tensionSignals:0",
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT",
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT"
+              ]
+            },
+            {
+              "path": "candidate.howThisMayShowUp[0].text",
+              "entailed": false,
+              "reason": "It invents an everyday manifestation involving framework learning, rehearsal, repeatable methods, and contextual instability. The cited material does not establish that this occurs in the customer’s life.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/lead",
+                "professionalModules/customerNarrative/topicNarratives/4/development",
+                "S02_PERSONALITY:tensionSignals:0"
+              ]
+            },
+            {
+              "path": "candidate.counterSignals[0].text",
+              "entailed": false,
+              "reason": "The practice-and-support contrast is grounded in the reflection target, but independence from external structure and the conclusion about a main route to reliability add conditions and a verdict not present in the source.",
+              "factRefs": [
+                "S02_PERSONALITY:realityQuestions:0",
+                "professionalModules/customerNarrative/topicNarratives/4/lead"
+              ]
+            },
+            {
+              "path": "candidate.counterSignals[1].text",
+              "entailed": false,
+              "reason": "Context blocking expression despite underlying skill is preserved, but saying the environment may explain more than the symbolic capability pattern is an unsupported explanatory ranking.",
+              "factRefs": [
+                "S02_PERSONALITY:counterSignals:0",
+                "policy:BOUNDED_SYMBOLIC_READING"
+              ]
+            },
+            {
+              "path": "candidate.realityCheck[0].text",
+              "entailed": true,
+              "reason": "This reproduces the supplied reflection target exactly.",
+              "factRefs": [
+                "S02_PERSONALITY:realityQuestions:0"
+              ]
+            },
+            {
+              "path": "candidate.realityCheck[1].text",
+              "entailed": true,
+              "reason": "It faithfully preserves the supplied question about context consistently blocking expression while underlying skill is present; “evidence” keeps it grounded rather than asserting the skill as fact.",
+              "factRefs": [
+                "S02_PERSONALITY:counterSignals:0"
+              ]
+            },
+            {
+              "path": "candidate.factRefs",
+              "entailed": true,
+              "reason": "Every listed reference appears in the evidence pack’s sourceFactIds; this verifies reference membership only, not the unsupported interpretations identified above.",
+              "factRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total",
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT",
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT",
+                "policy:BOUNDED_SYMBOLIC_READING",
+                "professionalModules/customerNarrative/topicNarratives/4/lead",
+                "professionalModules/customerNarrative/topicNarratives/4/development",
+                "S02_PERSONALITY:tensionSignals:0",
+                "S02_PERSONALITY:counterSignals:0",
+                "S02_PERSONALITY:realityQuestions:0"
+              ]
+            }
+          ],
+          "conditionsPreserved": false,
+          "counterSignalsPreserved": false,
+          "temporalPreserved": true
+        },
+        "editorial": {
+          "version": "BAZI_EDITORIAL_VALIDATOR_V1",
+          "status": "PASS",
+          "issues": []
+        },
+        "candidate": {
+          "headline": {
+            "text": "Capability Builds Through Absorption, Practice and Repetition",
+            "factRefs": [
+              "professionalModules/customerNarrative/topicNarratives/4/lead"
+            ]
+          },
+          "lead": {
+            "text": "The main symbolic pattern emphasizes learning, support and absorption as the route from potential to dependable expression. It matters because understanding something and carrying it consistently are treated as separate stages: capability becomes more reliable through practice, structure and repetition rather than through a single display.",
+            "factRefs": [
+              "professionalModules/customerNarrative/topicNarratives/4/lead",
+              "professionalModules/customerNarrative/topicNarratives/4/development"
+            ]
+          },
+          "closingInsight": {
+            "text": "The useful distinction is not simply whether an ability exists, but what helps it remain available under repeated demands. Your actual experience—not the symbolism—determines whether practice, support or context makes the decisive difference.",
+            "factRefs": [
+              "professionalModules/customerNarrative/topicNarratives/4/lead",
+              "S02_PERSONALITY:counterSignals:0",
+              "policy:BOUNDED_SYMBOLIC_READING"
+            ]
+          },
+          "technicalNote": {
+            "text": "Seven Killings, Direct Officer and Direct Resource are used here as contextual symbols for decisive action under pressure, structured responsibility, and learning or absorption. They describe interacting functions, not fixed traits.",
+            "factRefs": [
+              "professionalModules/customerNarrative/topicNarratives/4/development",
+              "policy:BOUNDED_SYMBOLIC_READING"
+            ]
+          },
+          "boundaryNote": {
+            "text": "This is a conditional symbolic reading, not a measurement of personality or proof of lived events; experience may differ.",
+            "factRefs": [
+              "policy:BOUNDED_SYMBOLIC_READING"
+            ]
+          },
+          "interpretation": [
+            {
+              "text": "Capability is read as a cycle: absorb what is useful, practice it within a workable structure, express it, and then test whether it can be carried repeatedly.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/lead",
+                "professionalModules/customerNarrative/topicNarratives/4/development"
+              ]
+            },
+            {
+              "text": "A conditional alternative is that the underlying skill may already be present while expression remains uneven because the surrounding context does not provide a clear route for using it.",
+              "factRefs": [
+                "S02_PERSONALITY:counterSignals:0",
+                "professionalModules/customerNarrative/topicNarratives/4/lead"
+              ]
+            }
+          ],
+          "supportingConditions": [
+            {
+              "text": "Learning, support and absorption are the leading functional emphasis, favoring development through taking in guidance and consolidating it through practice.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/development"
+              ]
+            },
+            {
+              "text": "Some root anchoring is present, which can support continuity when the ability is repeatedly exercised rather than left at the level of understanding.",
+              "factRefs": [
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total",
+                "professionalModules/customerNarrative/topicNarratives/4/lead"
+              ]
+            },
+            {
+              "text": "Rules, responsibility and decisive action can give learning a practical container, especially when expectations are clear enough to turn absorption into expression.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/development"
+              ]
+            }
+          ],
+          "tensionConditions": [
+            {
+              "text": "Reliability remains an open question because anchoring, available support and the cost of expression must work together over time. Peer and resource support are not visibly emphasized, so consistency should not be assumed from potential alone.",
+              "factRefs": [
+                "S02_PERSONALITY:tensionSignals:0",
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT",
+                "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT"
+              ]
+            }
+          ],
+          "howThisMayShowUp": [
+            {
+              "text": "In everyday situations, this may appear as taking time to understand a framework, becoming more capable through rehearsal, and expressing it more steadily once there is a repeatable method. The harder part may be sustaining that expression when support or context changes.",
+              "factRefs": [
+                "professionalModules/customerNarrative/topicNarratives/4/lead",
+                "professionalModules/customerNarrative/topicNarratives/4/development",
+                "S02_PERSONALITY:tensionSignals:0"
+              ]
+            }
+          ],
+          "counterSignals": [
+            {
+              "text": "A meaningful counterexample would be an ability that appears easily and remains dependable without repeated practice, external structure or support. That would weaken the idea that absorption and consolidation are the main route to reliability in that area.",
+              "factRefs": [
+                "S02_PERSONALITY:realityQuestions:0",
+                "professionalModules/customerNarrative/topicNarratives/4/lead"
+              ]
+            },
+            {
+              "text": "Another counter-signal is a context that repeatedly blocks expression even when the underlying skill is present; in that case, the environment may explain more than the symbolic capability pattern.",
+              "factRefs": [
+                "S02_PERSONALITY:counterSignals:0",
+                "policy:BOUNDED_SYMBOLIC_READING"
+              ]
+            }
+          ],
+          "realityCheck": [
+            {
+              "text": "Which ability becomes reliable only after repeated practice and support, and which one appears easily but is harder to sustain?",
+              "factRefs": [
+                "S02_PERSONALITY:realityQuestions:0"
+              ]
+            },
+            {
+              "text": "What context consistently blocks expression even when you have evidence that the underlying skill is present?",
+              "factRefs": [
+                "S02_PERSONALITY:counterSignals:0"
+              ]
+            }
+          ],
+          "factRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT",
+            "policy:BOUNDED_SYMBOLIC_READING",
+            "professionalModules/customerNarrative/topicNarratives/4/lead",
+            "professionalModules/customerNarrative/topicNarratives/4/development",
+            "S02_PERSONALITY:tensionSignals:0",
+            "S02_PERSONALITY:counterSignals:0",
+            "S02_PERSONALITY:realityQuestions:0"
+          ]
+        }
+      },
+      "generatedAt": "2026-09-23T01:52:43.321Z",
+      "fixtureClass": "SYNTHETIC_EXISTING_CANONICAL_BAZI_BENCHMARK",
+      "liveProviderAttempt": true,
+      "productionActivated": false
     }
   },
   "productionActivated": false

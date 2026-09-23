@@ -42,3 +42,4 @@ document.querySelector('#generate').onclick=async()=>{
  catch{status.textContent='Preview request failed. No production activation.';}
  finally{button.disabled=false;}
 };
+document.querySelector('#generate').disabled=false;

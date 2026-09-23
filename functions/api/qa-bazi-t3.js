@@ -30,7 +30,7 @@ export async function onRequest(context){
   // profiles rejected upstream have no callable pack.
   const reserved=await env.RUNTIME_DB.prepare('INSERT OR IGNORE INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,created_at,updated_at) VALUES(?,?,?,?,?,?,?)').bind(id,runtime,'BAZI_T3_SHADOW_V1','RUNNING',JSON.stringify({objectKey:key,evidenceHash:pack.canonicalEvidenceHash}),now,now).run();
   if(Number(reserved.meta?.changes??reserved.changes)!==1)return reply({ok:false,code:'SHADOW_ALREADY_RESERVED'},409);
-  const result=await composeBaziT3Section({pack,registry,env,timeoutMs:90000});
+  const result=await composeBaziT3Section({pack,registry,env,timeoutMs:240000});
   const evidence={...result,generatedAt:now,fixtureClass:fixtures.fixtureClass,liveProviderAttempt:!['PROVIDER_CREDENTIAL_NOT_CONFIGURED','NO_ADMITTED_PROVIDER_ROUTE','INSUFFICIENT_ADMITTED_INTERPRETATION'].includes(result.internalOnly?.fallbackReason),productionActivated:false};
   await env.PRIVATE_REPORTS.put(key,JSON.stringify(evidence),{httpMetadata:{contentType:'application/json'}});
   await env.RUNTIME_DB.prepare('UPDATE runtime_artifacts SET stage=?,updated_at=? WHERE artifact_id=?').bind(result.status,new Date().toISOString(),id).run();
