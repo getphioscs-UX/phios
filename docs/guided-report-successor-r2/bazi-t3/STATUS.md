@@ -1,4 +1,29 @@
-# Addendum D — staged implementation and acceptance
+# Addendum E — licensed explanatory authority and staged acceptance
+
+## Current checkpoint — 2026-09-23
+
+Implementation commit `1e708ba4` is deployed to QA at https://baba8ef8.phios-github.pages.dev (stable alias https://qa.phios-github.pages.dev). Production is unchanged. The following results are real authenticated Preview model calls, with frozen result bytes retrieved from sandbox PRIVATE_REPORTS; they are not local fixture acceptance.
+
+| S02 stage | English | Chinese | Bilingual parity |
+| --- | --- | --- | --- |
+| BASELINE_NOW | PASS | PASS | PASS |
+| HIGH_EVIDENCE / BAZI-FP-W17-005 | PASS | PASS | REJECT: verifier returned PASS with nonempty differences; strict zero-difference contract rejected the inconsistent output |
+| LOW_EVIDENCE / BAZI-FP-W17-033 | PASS | FALLBACK: NARRATIVE_PROVIDER_SCHEMA_OUTPUT_UNREADABLE | Blocked: accepted Chinese snapshot missing |
+| MIXED / BAZI-FP-W17-006 | PASS | SEMANTIC_REJECTED: UNLICENSED_SEQUENCE at lead | Blocked: accepted Chinese snapshot missing |
+
+The mixed Chinese candidate changed reading emphasis into “阅读顺序”; the independent verifier rejected this as an unlicensed sequence. The low-evidence failure records an unreadable structured provider output; the retained record does not establish whether the writer or verifier produced it, or whether truncation caused it. Do not invent a more specific diagnosis.
+
+The high-evidence bilingual verifier described equivalent wording differences while also returning PASS. The strict consumer rejected this contradictory response; it has not been manually promoted. A future contract revision should distinguish nonmaterial observations from actual semantic differences, preserving fail-closed handling and digest-bound evidence.
+
+S03–S09 and the 216-check full matrix remain blocked by S02 strata quality. No identical failed reservation was cleared or retried. The one-repair ceiling is unchanged. BASELINE_NOW S02 is admitted into the bilingual 36-page review; all other baseline chapters retain T2 fallback. Browser/PDF checks do not mean human acceptance.
+
+Implemented: deterministic `BAZI_EXPLANATORY_AUTHORITY_V1` from the existing professional modules; V3 evidence packs; licensed relation/operator checks; evidence-adaptive empty lists; distinct claim/question blocks; source-bound temporal and integrated-guidance IR; server-enforced staged generation; bilingual structural coverage; digest-bound human review export. No new method engine, provider router, persistence authority or migration was introduced.
+
+Release gates still outstanding: all S02 strata, baseline S03–S09, full live matrix, all bilingual pairs, accepted-candidate browser/PDF coverage for the remaining sections, explicit human ACCEPT decisions for both locales and every section, then canary. `BAZI_R2_T3_ACCEPTED` and `BAZI_PRODUCTION_SUCCESSOR_ACTIVE` remain false. Human decisions must be made by the reviewer; the export form does not itself activate a release.
+
+Validation: the complete `npm.cmd run check` command exited 0 in this checkpoint. The bilingual review passed 1440/390 and print geometry checks, with no overflow or footer overlap. Both PDFs contain 36 A4 pages; only S02 is an accepted live candidate. See `addendum-e-evidence.json` for exact pack hashes, snapshot digests, provider failure code and verifier defects. The real full-matrix button returned `STAGED_QUALITY_GATE`, naming low-evidence Chinese and mixed Chinese as missing; it did not run the matrix.
+
+## Historical Addendum D checkpoint
 
 Baseline: owner-deployed main `9f50857`; the owner's subsequent `5e077e09` includes the first versioned contract/writer additions from this work. Existing assets and R2 WebP bindings are complete. Production and historical T2 publications are unchanged.
 
