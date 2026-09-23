@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildBaZiNarrativeClaimIR,RELATION_TYPES,DEFECT_CODES} from '../functions/personal-reading/narrative/bazi-explanatory-authority.js';
+import {validateEditorial,validateSemanticVerdict,semanticCoverage} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
+import {checkBaziShadowStage} from '../functions/personal-reading/narrative/bazi-t3-shadow-stages.js';
+import {editorialFixture} from './lib/bazi-t3-test-fixture.mjs';
+const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json'));
+const [en,zh]=await Promise.all(['en','zh-Hans'].map(locale=>buildBaZiNarrativeClaimIR({...source,sectionKey:'S02_PERSONALITY',locale})));
+const structural=ir=>ir.claims.map(({text,...claim})=>claim);
+assert.deepEqual(structural(en),structural(zh));
+assert.equal(en.version,'BAZI_EXPLANATORY_AUTHORITY_V1');assert.equal(en.manifestationLicenses.length,0);
+for(const c of en.claims){assert(RELATION_TYPES.includes(c.relationType));assert(c.sourceRefs.length);for(const k of ['allowCausalLanguage','allowSequenceLanguage','allowManifestation','allowObservedRealityClaim'])assert.equal(c[k],false);}
+assert.equal(en.claims.find(c=>c.relationType==='EMPHASIS').objects[0],'RESOURCE');
+assert.equal(en.claims.filter(c=>c.relationType==='CONTEXT_MODIFIER').length,2);
+assert.equal(en.claims.filter(c=>c.relationType==='SUPPORT_CONDITION').length,0);
+assert(en.claims.some(c=>c.relationType==='OPEN_CONDITION'));
+const timing=await buildBaZiNarrativeClaimIR({...source,sectionKey:'S08_TIMING',locale:'en'});assert(timing.temporalAuthority.available);assert(timing.temporalAuthority.topicTemporalRelevance.length);assert(timing.temporalAuthority.boundaries.fortunePredictionCreated===false);
+const guidance=await buildBaZiNarrativeClaimIR({...source,sectionKey:'S09_GUIDANCE',locale:'en'});assert.equal(guidance.integratedGuidanceIR.primaryThemeId,source.reading.professionalModules.wholeChartPriority.themes[0].priorityId);
+const {pack,candidate,verdict}=editorialFixture();assert.equal(validateEditorial(candidate,pack).status,'PASS','unlicensed manifestation/support remain empty without penalty');
+for(const [mutate,code] of [[n=>n.interpretation[0].operator='SEQUENCE','UNLICENSED_SEQUENCE'],[n=>n.lead.operator='CAUSE','UNLICENSED_CAUSAL'],[n=>n.observationPrompt[0].kind='CUSTOMER_CLAIM','QUESTION_TO_FACT_PROMOTION'],[n=>n.howThisMayShowUp=[n.lead],'UNLICENSED_MANIFESTATION'],[n=>n.lead.factRefs=['dimensions'],'RANK_FLATTENING']]){const n=structuredClone(candidate);mutate(n);assert(validateEditorial(n,pack).issues.some(x=>x.includes(code)));}
+for(const code of DEFECT_CODES)assert.equal(validateSemanticVerdict({...verdict,defects:[{code,path:'lead',detail:'A genuine semantic defect must block publication.'}]},candidate,pack),false);
+assert.equal(validateSemanticVerdict({...verdict,assessments:verdict.assessments.map((a,i)=>i? a:{...a,candidateRelationType:'SEQUENCE'})},candidate,pack),false,'mislabelled actual semantics cannot be admitted');
+assert.equal(semanticCoverage(candidate,pack).claims.length,3);
+const stagedProfiles={HIGH_EVIDENCE:'high',LOW_EVIDENCE:'low',MIXED:'mixed'},passed=new Set(),pass=async(p,l,s)=>passed.has(`${p}:${l}:${s}`),gate=(profileId,sectionKey,action)=>checkBaziShadowStage({profileId,sectionKey,action,stagedProfiles,passed:pass});
+assert((await gate('BASELINE_NOW','S02_PERSONALITY')).allowed);assert(!(await gate('high','S02_PERSONALITY')).allowed);assert(!(await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','matrix-status')).allowed);
+for(const l of ['en','zh-Hans'])passed.add(`BASELINE_NOW:${l}:S02_PERSONALITY`);
+assert((await gate('high','S02_PERSONALITY')).allowed);assert(!(await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);
+for(const p of Object.values(stagedProfiles))for(const l of ['en','zh-Hans'])passed.add(`${p}:${l}:S02_PERSONALITY`);
+assert((await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);assert(!(await gate('BASELINE_NOW','S04_CAREER')).allowed);
+console.log('PASS Addendum E: native-only licensed IR, locale-neutral relation IDs, adaptive empty lists, operator/defect rejection, timing/guidance ownership and staged shadow admission. No live acceptance implied.');

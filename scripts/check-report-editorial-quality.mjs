@@ -13,5 +13,5 @@ assert(!validateSemanticVerdict({...verdict,assessments:[]},candidate,pack),'ref
 assert(!validateSemanticVerdict({...verdict,temporalPreserved:false},candidate,pack));
 assert(!validateSemanticVerdict({...verdict,unsupportedClaims:['invented outcome']},candidate,pack));
 assert.equal(crossSectionEditorialCheck([{sectionKey:'a',finalNarrative:candidate},{sectionKey:'b',finalNarrative:candidate}]).status,'REJECT');
-assert(narrativeBlocks(candidate).every(b=>b.factRefs.length));
+assert(narrativeBlocks(candidate).filter(b=>b.text).every(b=>b.factRefs.length));
 console.log('PASS: editorial leak, banned prose, completeness, per-block entailment verdict, repetition and temporal fail-closed regressions. Synthetic tests do not establish live acceptance.');

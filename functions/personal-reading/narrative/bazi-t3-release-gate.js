@@ -4,6 +4,7 @@ import {T3_SECTIONS,COMPOSITION_VERSION,VERIFIER_VERSION,EDITORIAL_VERSION} from
 // body. Missing evidence always leaves customer traffic on the previous release.
 export function evaluateBaziT3Release(e={}){
  const remaining=[];
+ if(e.explanatoryAuthorityVersion!=='BAZI_EXPLANATORY_AUTHORITY_V1')remaining.push('LICENSED_EXPLANATORY_AUTHORITY_VERSION');
  for(const key of ['liveProvider','semantic','editorial','frozenSnapshots','fallback','nowPreserved','bilingualParity','browserPdf','shadowMatrix'])if(e[key]?.status!=='PASS'||!e[key]?.artifactDigest||!/^[a-f0-9]{64}$/.test(e[key].artifactDigest))remaining.push(key);
  if(e.liveProvider?.evidenceClass!=='REAL_PROVIDER_RESPONSE')remaining.push('REAL_PROVIDER_PROVENANCE');
  if(e.shadowMatrix?.profiles!==12||e.shadowMatrix?.completedChecks!==216||e.shadowMatrix?.unresolvedFailures!==0)remaining.push('COMPLETE_SHADOW_MATRIX');

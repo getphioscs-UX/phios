@@ -92,13 +92,13 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     const index=reading.professionalModules.customerNarrative.priorityChapters.indexOf(chapter),ref=`professionalModules/customerNarrative/priorityChapters/${index}`;
     packInterpretation.allowedInterpretations=[...packInterpretation.allowedInterpretations,...['thesis','development','condition'].filter(k=>chapter[k]?.[lang]).map(k=>({text:chapter[k][lang],sourceRef:`${ref}/${k}`}))];
    }
-   const pack=await buildSectionEvidencePack({interpretation:packInterpretation,locale,sectionKey:section.key,relatedInterpretations:t3Interpretations});
+   const pack=await buildSectionEvidencePack({interpretation:packInterpretation,locale,sectionKey:section.key,relatedInterpretations:t3Interpretations,reading});
    t3Interpretations.push(packInterpretation);
    t3=await composeBaziT3Section({pack,...composition,snapshot:composition.t3.snapshots?.[section.key]});
    t3.evidencePack=pack;
    if(t3.status==='PASS'&&canShowT3(composition.t3)){
     const n=t3.snapshot.finalNarrative,target=narrative||pageBlocks.find(p=>p.pageFamily==='TIMING_PAGE');
-    const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,...n.counterSignals,n.closingInsight].filter(b=>b.text.trim());
+    const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,n.closingInsight].filter(b=>b.text.trim());
     const secondary=pageBlocks.find(p=>p!==target&&['INSIGHT_LIST_PAGE','TIMING_PAGE'].includes(p.pageFamily));
     const secondaryBlocks=[...n.supportingConditions,...n.tensionConditions];
     if(!secondary)main.push(...secondaryBlocks);
@@ -106,14 +106,14 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     // Preserve the frozen 36-page framework; too much text returns the whole
     // section to T2 rather than silently deleting claims or conditions.
     const listRange=REPORT_PAGE_FAMILIES.INSIGHT_LIST_PAGE.budget[locale==='en'?'enItem':'zhItem'];
-    const listFits=secondary?.pageFamily!=='INSIGHT_LIST_PAGE'||(secondaryBlocks.length>=3&&secondaryBlocks.length<=6&&secondaryBlocks.every(b=>textUnits(b.text,locale)>=listRange[0]&&textUnits(b.text,locale)<=listRange[1]));
+    const listFits=secondary?.pageFamily!=='INSIGHT_LIST_PAGE'||(secondaryBlocks.length<=6&&secondaryBlocks.every(b=>textUnits(b.text,locale)<=listRange[1]));
     if(listFits&&main.reduce((sum,b)=>sum+textUnits(b.text,locale),0)<=maximum){
      target.contentBlocks=main.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
      target.items=[];
      if(secondary?.pageFamily==='INSIGHT_LIST_PAGE')secondary.items=secondaryBlocks.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
      else if(secondary)secondary.contentBlocks=secondaryBlocks.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
      for(const pb of pageBlocks){pb.boundary='';pb.observations=[];}
-     pageBlocks.at(-1).observations=n.realityCheck.map(b=>b.text);
+     pageBlocks.at(-1).observations=[...n.observationPrompt,...n.counterSignals,...n.realityCheck].map(b=>b.text);
      pageBlocks.at(-1).boundary=n.boundaryNote.text;
     }else t3={...t3,status:'FALLBACK',internalOnly:{...t3.internalOnly,fallbackState:'T3_FALLBACK_USED',fallbackReason:'COMPOSITION_BUDGET_REJECTED'}};
    }

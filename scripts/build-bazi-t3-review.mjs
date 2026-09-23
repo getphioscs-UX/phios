@@ -23,7 +23,7 @@ for(const locale of ['en','zh-Hans']){
  fs.writeFileSync(`${root}/bazi-${locale}.json`,JSON.stringify(bundle.customer,null,2)+'\n');
  fs.writeFileSync(`${root}/bazi-${locale}-internal.json`,JSON.stringify(bundle.internalOnly,null,2)+'\n');
  const status=projection.internalSections.filter(s=>s.t3).map(s=>({locale,sectionKey:s.sectionKey,status:projection.t3Fallback?'FALLBACK':s.t3.status,reason:projection.t3Fallback||s.t3.internalOnly?.fallbackReason||null,snapshotDigest:s.t3.snapshot?.snapshotDigest||null}));summaries.push(...status);
- const comparison=T3_SECTIONS.map(sectionKey=>({sectionKey,status:status.find(s=>s.sectionKey===sectionKey).status,current:baseline.pages.filter(p=>p.sectionKey===sectionKey).flatMap(p=>[...p.paragraphs,...(p.items||[])]),candidate:projection.pages.filter(p=>p.sectionKey===sectionKey).flatMap(p=>[...p.paragraphs,...(p.items||[])])}));
+ const comparison=T3_SECTIONS.map(sectionKey=>({sectionKey,snapshotDigest:status.find(s=>s.sectionKey===sectionKey)?.snapshotDigest||null,status:status.find(s=>s.sectionKey===sectionKey).status,current:baseline.pages.filter(p=>p.sectionKey===sectionKey).flatMap(p=>[...p.paragraphs,...(p.items||[])]),candidate:projection.pages.filter(p=>p.sectionKey===sectionKey).flatMap(p=>[...p.paragraphs,...(p.items||[])])}));
  fs.writeFileSync(`${root}/comparison-${locale}.json`,JSON.stringify(comparison,null,2)+'\n');
  fs.mkdirSync(`${root}/${locale}`,{recursive:true});
  fs.writeFileSync(`${root}/${locale}/review.html`,review(locale));

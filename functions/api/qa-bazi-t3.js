@@ -1,3 +1,4 @@
+import {checkBaziShadowStage} from '../personal-reading/narrative/bazi-t3-shadow-stages.js';
 import fixtures from '../personal-reading/narrative/bazi-t3-preview-packs.generated.json';
 import registry from '../../content/ai-economics/providers/ai-provider-cost-registry-v1.json';
 import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
@@ -18,9 +19,19 @@ export async function onRequest(context){
   let raw='',size=0;const decoder=new TextDecoder();
   for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>256){await reader.cancel();return reply({ok:false},413);}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
   const body=JSON.parse(raw);
-  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity'].includes(body.action)))return reply({ok:false},400);
+  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status'].includes(body.action)))return reply({ok:false},400);
   const pack=fixtures.packs[`${body.profileId||'BASELINE_NOW'}:${body.locale}:${body.sectionKey}`];if(!pack)return reply({ok:false},400);
   if(!env.PRIVATE_REPORTS||!env.RUNTIME_DB)return reply({ok:false,code:'PREVIEW_STORAGE_UNAVAILABLE'},503);
+  if(body.action!=='parity'){
+   const admission=await checkBaziShadowStage({profileId:body.profileId||'BASELINE_NOW',sectionKey:body.sectionKey,action:body.action,stagedProfiles:fixtures.stagedProfiles,passed:async(profileId,locale,sectionKey)=>{
+    const p=fixtures.packs[profileId+':'+locale+':'+sectionKey];if(!p)return false;
+    const object=await env.PRIVATE_REPORTS.get('qa/bazi-t3/'+COMPOSITION_VERSION+'/'+p.canonicalEvidenceHash+'.json');if(!object)return false;
+    const r=await object.json();if(r.status!=='PASS'||!r.snapshot)return false;
+    return (await composeBaziT3Section({pack:p,snapshot:r.snapshot})).status==='PASS';
+   }});
+   if(!admission.allowed)return reply({ok:false,code:'STAGED_QUALITY_GATE',...admission},409);
+   if(body.action==='matrix-status')return reply({ok:true,...admission});
+  }
   let evidenceHash=pack.canonicalEvidenceHash,kind=COMPOSITION_VERSION,pair=null;
   if(body.action==='parity'){
    const snapshots=[];
