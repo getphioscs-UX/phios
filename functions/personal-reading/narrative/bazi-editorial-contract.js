@@ -44,11 +44,13 @@ export function validateEditorial(n,pack){
   if(b.text.length>1800)issues.push(`BLOCK_TOO_LONG:${b.path}`);
   if(b.text.trim()&&(!b.factRefs.length||b.factRefs.some(r=>!refs.has(r))))issues.push(`UNGROUNDED_BLOCK:${b.path}`);
   if(LEAK.test(b.text))issues.push(`INTERNAL_LEAK:${b.path}`);
+  if(pack.sourceFactIds.some(r=>r.length>10&&b.text.includes(r)))issues.push(`SOURCE_ID_LEAK:${b.path}`);
   if(b.path!=='technicalNote'&&BANNED.test(b.text))issues.push(`TECHNICAL_PROSE:${b.path}`);
  }
  if(!Array.isArray(n?.factRefs)||n.factRefs.some(r=>!refs.has(r))||blocks.some(b=>(b.factRefs||[]).some(r=>!n?.factRefs?.includes(r))))issues.push('REFERENCE_INDEX');
  for(const k of ['headline','lead','closingInsight','boundaryNote'])if(!n?.[k]?.text?.trim())issues.push(`MISSING:${k}`);
  for(const k of LIST_FIELDS)if((n?.[k]||[]).filter(b=>b.text?.trim()).length<(k==='supportingConditions'?2:1))issues.push(`THIN:${k}`);
+ if(pack.sectionKey==='S09_GUIDANCE'&&(n?.interpretation?.length!==3||n?.supportingConditions?.length!==2||n?.tensionConditions?.length!==2||n?.counterSignals?.length!==1))issues.push('GUIDANCE_SYNTHESIS_STRUCTURE');
  const texts=blocks.filter(b=>b.text?.trim()).map(b=>b.text.trim().toLowerCase());
  if(new Set(texts).size!==texts.length)issues.push('REPEATED_BLOCK');
  return {version:EDITORIAL_VERSION,status:issues.length?'REJECT':'PASS',issues};

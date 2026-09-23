@@ -16,7 +16,7 @@ try{for(const locale of ['zh-Hans','en'])for(const width of [1440,390]){
  if(width===1440){await page.emulateMedia({media:'print'});await page.evaluate(()=>window.fitPublication());
   const print=await page.evaluate(()=>[...document.querySelectorAll('.pub-page')].map(p=>{const footer=p.querySelector('footer'),top=footer.getBoundingClientRect().top;return {pageNumber:Number(p.dataset.pageNumber),height:p.getBoundingClientRect().height,overflow:p.scrollHeight>p.clientHeight+2,footerOverlap:[...p.children].filter(el=>!['svg','HEADER','FOOTER'].includes(el.tagName)&&!el.classList.contains('pub-motif')&&el.getAttribute('aria-hidden')!=='true').some(el=>el.getBoundingClientRect().bottom>top+1)};}));
   evidence.print.push({locale,metrics:print});if(print.some(m=>m.overflow||m.footerOverlap))evidence.errors.push(`PRINT_FIT:${locale}`);
-  await page.pdf({path:`${root}/bazi-${locale}.pdf`,preferCSSPageSize:true,printBackground:true});
+  await page.pdf({path:`${root}/${process.env.PHIOS_REPORT_PDF_PREFIX||'bazi-'}${locale}.pdf`,preferCSSPageSize:true,printBackground:true});
  }await page.close();
 }}finally{await browser.close();}
 evidence.machinePass=evidence.errors.length===0;fs.writeFileSync(`${root}/browser-evidence.json`,JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify({machinePass:evidence.machinePass,errors:evidence.errors,print:evidence.print.map(p=>({locale:p.locale,issues:p.metrics.filter(m=>m.overflow||m.footerOverlap)}))},null,2));if(!evidence.machinePass)process.exitCode=1;

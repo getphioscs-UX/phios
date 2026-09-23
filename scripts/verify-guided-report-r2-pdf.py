@@ -11,7 +11,7 @@ out = root / 'pdf-review'
 out.mkdir(exist_ok=True)
 records = []
 for locale in ['zh-Hans', 'en']:
-    pdf = root / f'bazi-{locale}.pdf'
+    pdf = root / f'{os.environ.get("PHIOS_REPORT_PDF_PREFIX", "bazi-")}{locale}.pdf'
     reader = PdfReader(pdf)
     snapshot = json.loads((root / f'bazi-{locale}.json').read_text(encoding='utf-8'))
     total = snapshot['totalPages']
