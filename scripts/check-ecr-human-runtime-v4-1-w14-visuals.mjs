@@ -1,5 +1,6 @@
 import {buildEcrHumanRuntime} from '../functions/embodied-configuration/ecr-canonical-projection-runtime-v2.js';
 import fs from 'node:fs';import assert from 'node:assert/strict';
+import './check-ecr-human-runtime-v4-1-p64-orientation.mjs';
 import {projectEcrHumanRuntimeVisual} from '../functions/embodied-configuration/ecr-human-runtime-visual-projection.js';
 import {renderPhiMandalaVisual} from '../assets/customer-ui/js/specialists/ecr/mandala-renderer.js';
 const ir=await buildEcrHumanRuntime({canonicalInput:JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json')).cases[0].canonicalInput}),p=projectEcrHumanRuntimeVisual(ir);
