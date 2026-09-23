@@ -1,3 +1,4 @@
+import editorialAcceptance from '../../../../config/reports/bazi-editorial-quality-acceptance.json';
 import {renderVisualReportPages} from './visual-report-pages.js';
 import {fitPublicationForPrint,settlePublicationAssets} from './publication-report-pages.js';
 const root='/docs/guided-report-successor-r2/bazi-t3';
@@ -20,18 +21,20 @@ const parity=document.createElement('button');parity.textContent='Verify selecte
 runMatrix.disabled=true;runMatrix.textContent='Full matrix paused — Addendum F';
 parity.disabled=true;parity.textContent='Parity follows baseline editorial acceptance';
 profile.value='BASELINE_NOW';profile.disabled=true;
-for(const option of document.querySelector('#section').options)option.disabled=option.value!=='S02_PERSONALITY';
-document.querySelector('#section').value='S02_PERSONALITY';
+const sectionOptions=[...document.querySelector('#section').options];
+const activeSection=sectionOptions.find(option=>!['en','zh-Hans'].every(language=>editorialAcceptance.humanReviews.some(r=>r.profileId==='BASELINE_NOW'&&r.sectionKey===option.value&&r.locale===language&&r.decision==='ACCEPT'&&r.snapshotDigest&&r.briefDigest&&r.reviewer&&r.reviewedAt)))?.value;
+for(const option of sectionOptions)option.disabled=option.value!==activeSection;
+if(activeSection)document.querySelector('#section').value=activeSection;else document.querySelector('#generate').disabled=true;
 document.querySelector('#compare').textContent='Historical Addendum E comparison — not Addendum F acceptance';
 const editorialReview=document.createElement('section');editorialReview.id='editorial-f-result';
 editorialReview.style.cssText='max-width:900px;margin:24px auto;padding:24px;background:#fffcf4;line-height:1.8';
 document.querySelector('nav').after(editorialReview);
-editorialReview.textContent='Addendum F: run only BASELINE_NOW S02 in each language. Read the new prose here before any next-section request. Historical PDF/comparison snapshots do not count as F acceptance.';
+editorialReview.textContent=`Addendum F: BASELINE_NOW ${activeSection||'baseline review complete'} only. Both languages require human acceptance before the next section. Historical snapshots do not count as F acceptance.`;
 function showEditorialCandidate(result){
  const accepted=result?.status==='PASS'&&result.snapshot&&result.editorialReassessment?.status!=='REJECT';
  const candidate=result?.snapshot?.finalNarrative||result?.internalOnly?.candidate||result?.internalOnly?.lastRepair?.candidate;
  editorialReview.replaceChildren();
- const heading=document.createElement('h2');heading.textContent=`Addendum F · S02 · ${locale} · ${accepted?'Awaiting human editorial review':'Machine rejected / unavailable — not accepted'}`;editorialReview.append(heading);
+ const heading=document.createElement('h2');heading.textContent=`Addendum F · ${activeSection} · ${locale} · ${accepted?'Awaiting human editorial review':'Machine rejected / unavailable — not accepted'}`;editorialReview.append(heading);
  if(!candidate){const p=document.createElement('p');p.textContent=result?.internalOnly?.fallbackReason||result?.reason||'No prose returned.';editorialReview.append(p);return;}
  for(const field of ['headline','lead','interpretation','supportingConditions','tensionConditions','howThisMayShowUp','closingInsight','observationPrompt','counterSignals','realityCheck','boundaryNote','technicalNote']){
   const blocks=Array.isArray(candidate[field])?candidate[field]:[candidate[field]];
@@ -45,7 +48,7 @@ function showEditorialCandidate(result){
  const decision=document.createElement('select');decision.setAttribute('aria-label','Addendum F decision');
  for(const [value,label] of [['','Not reviewed'],['ACCEPT','Accept editorial quality'],['REVISE','Needs revision'],['REJECT','Reject']]){const option=document.createElement('option');option.value=value;option.textContent=label;decision.append(option);}
  const button=document.createElement('button');button.textContent='Export digest-bound Addendum F review';
- button.onclick=()=>{if(!reviewer.value.trim()||!decision.value)return;const record={version:'BAZI_EDITORIAL_QUALITY_F_V1',humanReviews:[{profileId:'BASELINE_NOW',sectionKey:'S02_PERSONALITY',locale,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,decision:decision.value,reviewer:reviewer.value.trim(),reviewedAt:new Date().toISOString()}],productionActivated:false};const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=`bazi-editorial-f-s02-${locale}-human-review.json`;link.click();URL.revokeObjectURL(url);};
+ button.onclick=()=>{if(!reviewer.value.trim()||!decision.value)return;const record={version:'BAZI_EDITORIAL_QUALITY_F_V1',humanReviews:[{profileId:'BASELINE_NOW',sectionKey:result.snapshot.sectionKey,locale,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,decision:decision.value,reviewer:reviewer.value.trim(),reviewedAt:new Date().toISOString()}],productionActivated:false};const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=`bazi-editorial-f-${activeSection}-${locale}-human-review.json`;link.click();URL.revokeObjectURL(url);};
  editorialReview.append(reviewer,decision,button);
 }
 document.querySelector('#compare').onclick=async()=>{

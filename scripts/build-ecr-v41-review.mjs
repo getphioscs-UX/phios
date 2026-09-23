@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import {buildEcrHumanRuntime} from '../functions/embodied-configuration/ecr-canonical-projection-runtime-v2.js';
+import {adaptEcrPersonalRealityProduct} from '../functions/personal-reality-product/adapters/ecr-production-adapter.js';
+import {renderEcrProduct} from '../assets/customer-ui/js/specialists/ecr/product-renderer.js';
+import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
+const root='docs/ecr-human-runtime-v4-1';fs.mkdirSync(root,{recursive:true});
+const input=JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json')).cases[0].canonicalInput;
+const ir=await buildEcrHumanRuntime({canonicalInput:input});
+const entitlement={schemaVersion:'PHI-OS-KAP-W45-METHOD-JOURNEY-ENTITLEMENT-v1.0.0',methodCode:'ECR',access:{methodAllowed:true,readingDepthAllowed:true}};
+const candidates=[];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+for(const locale of ['en','zh-Hans']){
+ const product=adaptEcrPersonalRealityProduct({humanRuntime:ir,runtimeReviewMode:true,locale,sharedEntitlement:entitlement});
+ const rendered=renderEcrProduct({product});
+ const report=product.sourceProduct.fullReport;
+ for(const section of report.sections)candidates.push({reviewId:`ECR-V4.1:${locale}:${section.sectionId}`,locale,sectionId:section.sectionId,contentDigest:await sha256Stable(section),decision:'PENDING',reviewer:null,reviewedAt:null});
+ fs.writeFileSync(`${root}/review-${locale}.html`,`<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ECR V4.1 · ${locale} · Review</title><link rel="stylesheet" href="/assets/customer-ui/surfaces/ecr-specialist.css"><style>body{font:17px/1.8 system-ui;margin:0;background:#f7f2e9;color:#20394c}main,header{max-width:1000px;margin:auto;padding:24px}section{padding:20px 0;border-top:1px solid #c5b591}svg{width:100%;height:auto;max-height:800px}article section{break-inside:avoid}p,li{overflow-wrap:anywhere}.cx-ecr-mandala__code{font-size:10px}.cx-ecr-mandala__viewport{max-width:100%;overflow:auto}[data-ecr-mandala-node]:focus{stroke:#b04717;stroke-width:3}@media(max-width:600px){main,header{padding:14px}svg{min-width:340px}}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}@media(forced-colors:active){svg path,svg circle{stroke:CanvasText}}@media print{button{display:none}body{background:white}}</style></head><body><header><h1>ECR Human Runtime V4.1</h1><p>INTERNAL REVIEW · SYNTHETIC FIXTURE · HUMAN REVIEW PENDING</p><p>${locale==='en'?'Architecture and unknown states are review candidates, not a released personal interpretation.':'本页使用合成测试资料，架构及未知状态待审，不是已发布的个人解读。'}</p><a href="review-${locale==='en'?'zh-Hans':'en'}.html">${locale==='en'?'简体中文':'English'}</a></header><main>${rendered.visualHtml}${rendered.readingHtml}</main><script type="module">import{installPhiMandalaInteractions}from'/assets/customer-ui/js/specialists/ecr/mandala-renderer.js';installPhiMandalaInteractions(document);</script></body></html>`);
+}
+fs.mkdirSync('content/embodied-configuration/v4-1/review',{recursive:true});
+fs.writeFileSync('content/embodied-configuration/v4-1/review/human-review-cases-v1.json',JSON.stringify({version:'ECR-V4.1',syntheticFixtureOnly:true,candidates,semanticMappingGaps:['Gate/Line source identity does not supply a person-specific runtime-owner mapping','48-card groups do not supply an exact six-runtime-slot mapping','Source taxonomy has no admitted PHI-neutral personal resolver'],humanAccepted:false,productionAdmitted:false},null,2)+'\n');
+fs.writeFileSync(`${root}/runtime-lineage-proof.json`,JSON.stringify({configurationId:ir.configurationId,initializationDigest:ir.initialization.calculationDigest,birthInstant:ir.initialization.birth.instantUTC,designInstant:ir.initialization.design.instantUTC,driverDigest:ir.driverField.outputDigest,carrierLineage:ir.carrier.architecture.lineage,c1:ir.carrier.c1.lineage,consciousRuntime:Object.fromEntries(Object.entries(ir.consciousRuntime).map(([k,v])=>[k,v.lineage])),feedback:ir.feedback,currentReality:ir.currentReality,unknown:ir.unknown},null,2)+'\n');
+console.log('Review artifacts built: en/zh-Hans, 28 pending section records. No human acceptance or deployment.');

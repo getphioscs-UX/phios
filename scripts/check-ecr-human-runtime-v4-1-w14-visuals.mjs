@@ -1,0 +1,9 @@
+import {buildEcrHumanRuntime} from '../functions/embodied-configuration/ecr-canonical-projection-runtime-v2.js';
+import fs from 'node:fs';import assert from 'node:assert/strict';
+import {projectEcrHumanRuntimeVisual} from '../functions/embodied-configuration/ecr-human-runtime-visual-projection.js';
+import {renderPhiMandalaVisual} from '../assets/customer-ui/js/specialists/ecr/mandala-renderer.js';
+const ir=await buildEcrHumanRuntime({canonicalInput:JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json')).cases[0].canonicalInput}),p=projectEcrHumanRuntimeVisual(ir);
+assert.equal(p.sectors.length,64);assert.equal(p.markers.length,26);assert.equal(p.sectors[0].eclipticStartDeg,302);assert.equal(p.sectors[0].ecrConfigurationRef,'ECR-H48');
+const html=renderPhiMandalaVisual({payload:p});assert.equal((html.match(/cx-ecr-mandala__v41-sector/g)||[]).length,128);assert(html.includes('Runtime pipeline'));assert(html.includes('Continuity architecture'));assert(html.includes('UNBOUND'));
+const source=fs.readFileSync('assets/customer-ui/js/specialists/ecr/mandala-renderer.js','utf8');assert.doesNotMatch(source,/import[^;]*(gate-wheel|gate-line|astronomy|ecr-calculation)/);assert(!source.includes('302'));
+console.log('PASS V4.1 W14: existing Mandala renderer, shared aligned rings and separate runtime/continuity views.');

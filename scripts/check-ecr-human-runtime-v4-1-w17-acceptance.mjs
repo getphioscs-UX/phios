@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+import {buildEcrHumanRuntime} from '../functions/embodied-configuration/ecr-canonical-projection-runtime-v2.js';
+import {buildEcrHumanRuntimeReport} from '../functions/ecr-full-report/ecr-human-runtime-report-v4-1.js';
+const input=JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json')).cases[0].canonicalInput,ir=await buildEcrHumanRuntime({canonicalInput:input});
+const entitlement={schemaVersion:'PHI-OS-KAP-W45-METHOD-JOURNEY-ENTITLEMENT-v1.0.0',methodCode:'ECR',access:{methodAllowed:true,readingDepthAllowed:true}};
+const en=buildEcrHumanRuntimeReport({ir,reviewMode:true,locale:'en',sharedEntitlement:entitlement}),zh=buildEcrHumanRuntimeReport({ir,reviewMode:true,locale:'zh-Hans',sharedEntitlement:entitlement});
+assert.deepEqual(en.sections.map(s=>[s.sectionId,s.scope,s.sourceRefs]),zh.sections.map(s=>[s.sectionId,s.scope,s.sourceRefs]));
+const reviews=JSON.parse(fs.readFileSync('content/embodied-configuration/v4-1/review/human-review-cases-v1.json'));assert.equal(reviews.candidates.length,28);assert(reviews.candidates.every(r=>r.decision==='PENDING'&&r.reviewer===null));
+assert.equal(ir.driverField.drivers[10].status,'UNKNOWN');assert.equal(ir.currentReality.dynamicRuntime,null);assert.equal(ir.boundaries.customerProductionAdmitted,false);
+console.log('PASS V4.1 W17: bilingual structural parity, honest UNKNOWN and separate human/production gates. Prose acceptance is pending.');

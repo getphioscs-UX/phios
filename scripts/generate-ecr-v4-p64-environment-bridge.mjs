@@ -1,0 +1,8 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {GATE_COUNT,GATE_SPAN_DEG,LINE_COUNT,LINE_SPAN_DEG,gateWheelAngleToEclipticLongitude} from '../functions/method-runtime/personal-structure/gate-wheel.js';
+import {resolveEcrEnvironment} from '../functions/embodied-configuration/ecr-p64-environment-bridge-runtime.js';
+const entries=Array.from({length:GATE_COUNT},(_,i)=>{const start=gateWheelAngleToEclipticLongitude(i*GATE_SPAN_DEG),p=resolveEcrEnvironment(start);return {sectorOrdinal:i+1,gate:p.p64.gate,eclipticStartDeg:start,eclipticEndDeg:gateWheelAngleToEclipticLongitude((i+1)*GATE_SPAN_DEG),hexagramRef:p.hexagramRef,ecrConfigurationRef:p.ecrConfigurationRef,upperTrigramRef:p.upperTrigramRef,lowerTrigramRef:p.lowerTrigramRef,environmentPriorityMotionId:p.environmentPriorityMotionId,embodiedResponseMotionId:p.embodiedResponseMotionId,lineBoundaries:Array.from({length:LINE_COUNT},(_,line)=>gateWheelAngleToEclipticLongitude(i*GATE_SPAN_DEG+line*LINE_SPAN_DEG))};});
+const result={schemaVersion:'PHI-OS-ECR-P64-ENVIRONMENT-BRIDGE-v1.0.0',status:'ACTIVE_CANONICAL_BRIDGE',mechanicalAuthority:'content/method/personal-structure/gate-wheel-registry-v1.json',semanticAuthority:'content/embodied-configuration/ecr-environment-first-configuration-v1.json',intervalConvention:'[start,end)',entries,boundaries:{ecrEnvironmentOrderIsAstronomicalOrder:false,gateNumberEqualsEcrHNumber:false,semanticRegistryRenumbered:false,secondGateWheelCreated:false}};
+const path='content/embodied-configuration/ecr-p64-environment-bridge-v1.json';
+if(process.argv.includes('--check'))assert.deepEqual(JSON.parse(fs.readFileSync(path)),result);else fs.writeFileSync(path,JSON.stringify(result,null,2)+'\n');

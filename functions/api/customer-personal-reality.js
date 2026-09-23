@@ -394,7 +394,7 @@ export async function onRequestPost(context){
   let hdrTransitOverlay=null;
   if(hdrTargetContext&&confirmedXpf){try{hdrTransitOverlay=await buildHdrTransitOverlay({targetContext:hdrTargetContext,confirmedProfile:confirmedXpf})}catch(error){hdrTransitOverlay=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'HDR_TRANSIT_OVERLAY_UNAVAILABLE',boundary:freeze({usesConfirmedNatalChart:true,natalBaselineImmutable:true,transitDesignLayerCalculated:false,confirmedChartChanged:false,interpretationCreated:false,persisted:false})})}}
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
-  const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
+  const productRoute=await buildPersonalRealityProductRoute({canonicalBirthInput:input,selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
   let ecrHumanDesignComparison=null;
   let ecrHumanDesignRealityBridge=null;
   if(humanDesignContext){

@@ -1,0 +1,11 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+const hash=p=>createHash('sha256').update(fs.readFileSync(p,'utf8').replace(/\r\n?/g,'\n')).digest('hex');
+const registry=JSON.parse(fs.readFileSync('content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v4.json'));
+const rows=registry.entries.filter(e=>e.workCode.startsWith('ECR-V4.1-'));
+assert.equal(rows.length,17);assert.equal(new Set(rows.map(r=>r.workCode)).size,17);
+for(const row of rows)assert.equal(hash(row.implementationFile),row.implementationDigest,row.workCode);
+const audit=JSON.parse(fs.readFileSync('content/embodied-configuration/v4/acceptance/ecr-v4-w0-baseline-audit-v1.json'));
+for(const row of audit.relevantAuthorityFiles)assert.equal(createHash('sha256').update(fs.readFileSync(row.path)).digest('hex'),row.sha256,'Predecessor changed: '+row.path);
+const pkg=JSON.parse(fs.readFileSync('package.json'));assert(pkg.scripts.postcheck.includes('check:ecr-human-runtime-v4-1'));
+for(const script of ['check:ecr-mandala','check:ecr-r3','check:ecr-full-r1','check:ecr-full-r1a'])assert(pkg.scripts[script]);
+console.log('PASS V4.1 W16: 17 governed checker aliases; predecessor mechanics and meanings remain byte-identical.');

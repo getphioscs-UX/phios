@@ -1,6 +1,16 @@
 import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from './product-envelope-core.js';
+import {buildEcrHumanRuntimeReport} from '../../ecr-full-report/ecr-human-runtime-report-v4-1.js';
+import {projectEcrHumanRuntimeVisual} from '../../embodied-configuration/ecr-human-runtime-visual-projection.js';
+import {projectEcrHumanRuntimeCards} from '../../ecr-phi-card/ecr-human-runtime-cards-v4-1.js';
 function reportSectionPayload(item){return {card:item.card,acceptedInterpretation:item.acceptedInterpretation};}
-export function adaptEcrPersonalRealityProduct({readingIR,mandalaProjection=null,phiCardSpread=null,fullReport=null,customerAdmission=null,mandalaExperienceState='FREE_SNAPSHOT',mandalaTopicProjection=null,locale=readingIR?.locale||mandalaProjection?.locale||phiCardSpread?.locale||'en'}={}){
+export function adaptEcrPersonalRealityProduct({humanRuntime=null,sharedEntitlement=null,runtimeReviewMode=false,readingIR,mandalaProjection=null,phiCardSpread=null,fullReport=null,customerAdmission=null,mandalaExperienceState='FREE_SNAPSHOT',mandalaTopicProjection=null,locale=readingIR?.locale||mandalaProjection?.locale||phiCardSpread?.locale||'en'}={}){
+ if(humanRuntime){
+  const report=buildEcrHumanRuntimeReport({ir:humanRuntime,locale,sharedEntitlement,reviewMode:runtimeReviewMode});
+  const publishable=report.publicationState==='CUSTOMER_PUBLISHABLE';
+  const visualPayload=projectEcrHumanRuntimeVisual(humanRuntime,locale);
+  const cards=report.depth==='PAID'?projectEcrHumanRuntimeCards(humanRuntime):null;
+  return buildMethodProductEnvelope({methodId:'ECR',productType:'PHI_CONFIGURATION_READING',locale,state:publishable?'CUSTOMER_PUBLISHABLE':'PRODUCT_AUTHORITY_INCOMPLETE',publication:{customerPublishable:publishable,status:report.publicationState,edition:report.edition,mandalaExperienceState:report.depth==='PAID'?'PAID_DEPTH':'FREE_SNAPSHOT',serverEntitlementStillRequiredForPaidData:true},hero:{title:locale==='zh-Hans'?'PHI 构型':'PHI Configuration'},navigation:report.sections.map(s=>s.sectionId),sections:report.sections.map(s=>section({...s,payload:s.content})),visuals:[visual({visualId:'ECR_PHI_MANDALA',type:'ECR_PHI_MANDALA_V1',payload:visualPayload})],lineage:report.lineage,boundaries:report.boundaries,sourceProduct:{fullReport:report,phiCardSpread:cards},specialistRenderer:{rendererId:'PPR_R3_ECR_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['PHI_MANDALA','FULL_REPORT']}});
+ }
  if(fullReport?.edition==='ECR_FULL_R1'){
   if(fullReport.sourceProjectionId!==readingIR?.sourceProjectionId||mandalaProjection?.sourceProjectionId!==readingIR?.sourceProjectionId)fail('ECR_FULL_REPORT_PRODUCT_SOURCE_MISMATCH');
   const publishable=fullReport.publicationState==='CUSTOMER_PUBLISHABLE',paid=fullReport.depth==='PAID';

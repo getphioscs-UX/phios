@@ -6,7 +6,7 @@ import {renderMotionConfigurationVisual} from './motion-renderer.js';
 import {renderActivationTimelineVisual} from './activation-renderer.js';
 import {renderTechnicalDisclosure} from './technical-disclosure-renderer.js';
 import {renderEcrNavigation,renderEcrReadingReport} from './reading-report-renderer.js';
-import {renderEcrFullReportSections,renderEcrFullReportNavigation} from './full-report-sections-renderer.js';
+import {renderEcrHumanRuntimeReport,renderEcrFullReportSections,renderEcrFullReportNavigation} from './full-report-sections-renderer.js';
 import {renderVisualReportPages} from '../../personal-products/visual-report-pages.js';
 
 const arr=value=>Array.isArray(value)?value:[];
@@ -23,6 +23,7 @@ export function renderEcrProduct({product,visualReport=null}={}){
     if(full?.publicationState!=='INTERNAL_REVIEW'||visualReport.sourceReportRef!==full.reportId||visualReport.depth!==full.depth||visualReport.locale!==full.locale)throw Error('VRPT_ECR_REVIEW_BINDING_REQUIRED');
     return Object.freeze({status:'RENDERED',navigationHtml:'',visualHtml:'',readingHtml:renderVisualReportPages(visualReport,{primaryVisuals:mandala?{'VRPT-ECR-OVERVIEW':renderPhiMandalaVisual(mandala,{experienceState:product.publication.mandalaExperienceState,svgOnly:true})}:{}}),technicalHtml:'',afterMount:()=>0});
   }
+  if(full?.edition==='ECR_HUMAN_RUNTIME_V4_1')return Object.freeze({status:'RENDERED',navigationHtml:'',visualHtml:mandala?renderPhiMandalaVisual(mandala):'',readingHtml:renderEcrHumanRuntimeReport(full),technicalHtml:'',afterMount:mount=>installPhiMandalaInteractions(mount?.visual)});
   if(full?.edition==='ECR_FULL_R1')return Object.freeze({status:'RENDERED',navigationHtml:renderEcrFullReportNavigation(full),visualHtml:'',readingHtml:renderEcrFullReportSections(full)+(mandala?renderPhiMandalaVisual(mandala,{experienceState:product.publication.mandalaExperienceState}):''),technicalHtml:'',afterMount:mount=>mandala?installPhiMandalaInteractions(mount?.reading):0});
   const visualHtml=mandala?[renderPhiMandalaVisual(mandala,{experienceState:product?.publication?.mandalaExperienceState||'FREE_SNAPSHOT',topicProjection:product?.publication?.mandalaTopicProjection||null}),renderCalculationStoryVisual(mandala),renderCoordinateStoryVisual(mandala),renderDriverProfileVisual(mandala),renderMotionConfigurationVisual(mandala),renderActivationTimelineVisual(mandala)].join(''):'';
   return Object.freeze({

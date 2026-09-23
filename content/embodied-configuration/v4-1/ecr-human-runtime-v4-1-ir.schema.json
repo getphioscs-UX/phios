@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "methodId",
+    "configurationId",
+    "initialization",
+    "p64",
+    "driverField",
+    "carrier",
+    "consciousRuntime",
+    "currentReality",
+    "feedback",
+    "provenance",
+    "unknown",
+    "lineage",
+    "boundaries"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-ECR-HUMAN-RUNTIME-CONFIGURATION-v4.1"
+    },
+    "methodId": {
+      "const": "ECR"
+    },
+    "configurationId": {
+      "type": "string"
+    },
+    "initialization": {
+      "type": "object",
+      "required": [
+        "birth",
+        "design",
+        "activations"
+      ]
+    },
+    "p64": {
+      "type": "object",
+      "required": [
+        "mechanicalAuthorityRef",
+        "environmentBridgeAuthorityRef"
+      ]
+    },
+    "driverField": {
+      "type": "object",
+      "required": [
+        "drivers"
+      ]
+    },
+    "carrier": {
+      "type": "object",
+      "required": [
+        "architecture",
+        "c1",
+        "continuityBaseline"
+      ]
+    },
+    "consciousRuntime": {
+      "type": "object",
+      "required": [
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ]
+    },
+    "currentReality": {
+      "type": "object",
+      "required": [
+        "status",
+        "observations",
+        "dynamicRuntime"
+      ]
+    },
+    "feedback": {
+      "type": "object",
+      "required": [
+        "consciousRealitySelectionLoop",
+        "carrierContinuityLoop"
+      ]
+    },
+    "provenance": {
+      "type": "array"
+    },
+    "unknown": {
+      "type": "array"
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "boundaries": {
+      "type": "object"
+    }
+  }
+}
