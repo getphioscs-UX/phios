@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import {build} from 'esbuild';
 import {buildBaziCustomerPublication} from '../functions/personal-reading/bazi-customer-publication.js';
 import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
+import {BAZI_SECTION_REGISTRY} from '../functions/canonical-presentation-runtime/report-section-contract.js';
 import {resolveReportProduct} from '../functions/pws/commercial/report-successor-contract.js';
 const root='docs/guided-report-successor-r2/visual-commerce';fs.mkdirSync(root,{recursive:true});
 const {reading,temporalSnapshot}=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json'));
@@ -9,7 +10,7 @@ const price=resolveReportProduct('BAZI_FULL_REPORT');
 for(const locale of ['en','zh-Hans'])for(const mode of ['free','locked','paid']){
  const full=mode==='paid',report=await buildBaziCustomerPublication({reading,locale,temporalSnapshot,full});
  const native=adaptBaziPersonalRealityProduct({report:reading,locale});
- const product={schemaVersion:native.schemaVersion,methodId:native.methodId,locale:native.locale,state:native.state,hero:native.hero,sections:[],visuals:[],navigation:[],sourceProduct:full?reading:null,publicationReport:report,reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',verifiedPurchase:full,entitlementKey:price.entitlementKey,offer:{productId:'COM-REPORT-BAZI-FULL',contractProductId:price.productId,amountMinor:price.amountMinor,currency:price.currency,href:'/account/?product=COM-REPORT-BAZI-FULL#commerce'}},reviewEvidenceClass:'SYNTHETIC_PRESENTATION_ONLY_NOT_PURCHASE_EVIDENCE'};
+ const product={schemaVersion:native.schemaVersion,methodId:native.methodId,locale:native.locale,state:native.state,hero:native.hero,sections:[],visuals:[],navigation:[],sourceProduct:full?reading:null,publicationReport:report,lockedOutline:full?[]:BAZI_SECTION_REGISTRY.sections.map(s=>({title:s.title[locale]})),reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',verifiedPurchase:full,entitlementKey:price.entitlementKey,offer:{productId:'COM-REPORT-BAZI-FULL',contractProductId:price.productId,amountMinor:price.amountMinor,currency:price.currency,href:'/account/?product=COM-REPORT-BAZI-FULL#commerce'}},reviewEvidenceClass:'SYNTHETIC_PRESENTATION_ONLY_NOT_PURCHASE_EVIDENCE'};
  fs.writeFileSync(`${root}/${mode}-${locale}.json`,JSON.stringify(product,null,2)+'\n');
  const folder=`${root}/${mode}/${locale}`;fs.mkdirSync(folder,{recursive:true});
  fs.writeFileSync(`${folder}/review.html`,html(mode,locale));

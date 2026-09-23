@@ -6,7 +6,8 @@ export function orderReportPresentation(order){return JSON.parse(order.context_j
 export function validateOrderReportPresentation(product,order){
  const stored=orderReportPresentation(order);
  if(!stored)return null; // Orders predating language selection retain their original contract.
- const quote=commerceReportQuote(product,stored,JSON.parse(order.selected_products_json));
+ // Pricing versions come only from the persisted server order, never checkout input.
+ const quote=quoteReportPresentation(reportContractId(product.productId),stored,product.productId.includes('BUNDLE')?JSON.parse(order.selected_products_json).map(reportContractId):[],stored.pricingVersion);
  if(JSON.stringify(quote)!==JSON.stringify(stored)||quote.amountMinor!==order.amount_minor)throw Object.assign(new Error('Stored presentation mismatch.'),{code:'commerce_provider_mismatch',status:422});
  return quote;
 }

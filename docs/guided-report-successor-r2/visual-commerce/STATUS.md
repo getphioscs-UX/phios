@@ -18,9 +18,9 @@ Repository work continues from owner commit `4019aabb` (which captured the initi
 
 The existing QA browser account is authenticated and lists no report purchases. Before this deployment the catalog displayed RM39 for BaZi, but purchasing was disabled. The Preview configuration now explicitly enables the existing `PHIOS_COMMERCE_QA_ENABLED` gate. Checkout additionally requires the existing QA environment and a test Stripe credential; those server checks are unchanged.
 
-Still required: deploy this revision to stable Preview, verify real free report generation and CTA, then verify an actual QA purchase/webhook/active entitlement and full report for the purchased language. The owner must handle any required acceptance of purchase terms and payment interaction. No entitlement has been synthesized to stand in for that evidence.
+Commit `47081a54` was deployed to stable Preview (`c3022b80`). Real EN/zh-Hans Personal Reality generation produced the 11-page free report and Commerce CTA at 1440/390 without overflow; see `preview-evidence.json`. Still required: actual QA purchase/webhook/active entitlement and full report for the purchased language. The owner must handle any required acceptance of purchase terms and payment interaction. No entitlement has been synthesized to stand in for that evidence.
 
-Full repository regression is in progress. Historical freeze records are retained; authorized Preview configuration and response-only API changes are registered in the existing successor registries.
+Full repository regression for that visual checkpoint passed (exit 0). The subsequent shared delivery and product-specific language pricing work is tracked in `../report-delivery/STATUS.md` and has a separate regression run. Historical freeze records are retained; authorized Preview configuration and response-only API changes are registered in the existing successor registries.
 
 `PREVIEW_ACCEPTED = false`
 

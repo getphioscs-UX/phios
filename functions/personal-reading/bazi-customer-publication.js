@@ -1,9 +1,8 @@
-import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
-import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
-import {requirePurchasedReportPresentation,resolveReportProduct} from '../pws/commercial/report-successor-contract.js';
+import {resolveReportAccess} from '../report-delivery/report-access-resolver.js';
+import {buildReportDeliveryEnvelope} from '../report-delivery/report-delivery-envelope.js';
 import {projectBaziSectionPublication} from './bazi-section-publication.js';
 import {assemblePublicationSnapshot} from '../canonical-presentation-runtime/visual-report-page-runtime.js';
-import {SECTION_LAYOUT} from '../canonical-presentation-runtime/report-section-contract.js';
+import {SECTION_LAYOUT,BAZI_SECTION_REGISTRY} from '../canonical-presentation-runtime/report-section-contract.js';
 import {visualModules} from '../canonical-presentation-runtime/report-section-config.generated.js';
 import {REPORT_EDITORIAL_ASSETS} from '../canonical-presentation-runtime/report-editorial-registry.js';
 import {resolveReportEditorialAsset} from '../canonical-presentation-runtime/report-editorial-resolver.js';
@@ -28,19 +27,16 @@ export function readingPublicationTime(reading,generatedAt=new Date().toISOStrin
 }
 // The caller supplies trusted middleware identity, never browser entitlement
 // assertions. Reuse the existing purchase/entitlement storage authority.
-export async function attachBaziPublicationAccess(view,context,{loadEntitlement=ownedReportPresentation}={}){
+export async function attachBaziPublicationAccess(view,context,dependencies={}){
  const native=view.methodNativeReading?.BZR;if(!native)return view;
  const locale=view.productRoute?.products?.find(p=>p.methodId==='BZR')?.locale||'en';
- const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
- let owned=null,accessReason=null;
- if(identity){try{owned=await loadEntitlement(context.env,identity.userId,'COM-REPORT-BAZI-FULL');if(owned){const selection=requirePurchasedReportPresentation(owned);if(selection.reportLocale!==locale&&selection.reportLocale!=='bilingual'){owned=null;accessReason='PURCHASED_LANGUAGE_MISMATCH';}}}catch{owned=null;accessReason='ENTITLEMENT_UNAVAILABLE';}}
- let full=Boolean(owned)&&['qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT);
- if(owned&&!full)accessReason='FULL_REPORT_RELEASE_PENDING';
+ const deliveryAccess=await resolveReportAccess({methodId:'BZR',locale,context,admitted:native.publicationDecision?.customerPublishable===true},dependencies);
+ let full=deliveryAccess.state==='ENTITLED',accessReason=deliveryAccess.reason;
  let report=null;
  try{report=await buildBaziCustomerPublication({reading:native,locale,temporalSnapshot:readingPublicationTime(native),full});}
  catch{full=false;accessReason='PUBLICATION_UNAVAILABLE';}
- const price=resolveReportProduct('BAZI_FULL_REPORT');
- const replace=p=>{if(p?.methodId!=='BZR')return p;return {schemaVersion:p.schemaVersion,methodId:p.methodId,productType:p.productType,locale:p.locale,state:p.state,publication:p.publication,specialistRenderer:p.specialistRenderer,hero:{eyebrow:'BaZi',title:locale==='en'?'Your BaZi Report':'你的八字报告',highlights:[]},navigation:[],sections:[],visuals:[],publicationReport:report,reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',entitlementKey:price.entitlementKey,verifiedPurchase:full,reason:accessReason,offer:{productId:'COM-REPORT-BAZI-FULL',contractProductId:price.productId,amountMinor:price.amountMinor,currency:price.currency,href:'/account/?product=COM-REPORT-BAZI-FULL#commerce'}},...(full?{sourceProduct:native}:{}),boundaries:{publicationCreatesMeaning:false,paymentSuccessIsAuthority:false}};};
+ const delivery=buildReportDeliveryEnvelope({methodId:'BZR',access:deliveryAccess,admitted:native.publicationDecision?.customerPublishable===true,reportAvailable:Boolean(report)});
+ const replace=p=>{if(p?.methodId!=='BZR')return p;return {schemaVersion:p.schemaVersion,methodId:p.methodId,productType:p.productType,locale:p.locale,state:p.state,publication:p.publication,specialistRenderer:p.specialistRenderer,hero:{eyebrow:'BaZi',title:locale==='en'?'Your BaZi Report':'你的八字报告',highlights:[]},navigation:[],sections:[],visuals:[],publicationReport:report,reportDelivery:delivery,lockedOutline:full?[]:BAZI_SECTION_REGISTRY.sections.map(s=>({title:s.title[locale]})),reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',entitlementKey:deliveryAccess.entitlementKey,verifiedPurchase:full,reason:accessReason,offer:deliveryAccess.offer},...(full?{sourceProduct:native}:{}),boundaries:{publicationCreatesMeaning:false,paymentSuccessIsAuthority:false}};};
  const products=(view.productRoute.products||[]).map(replace),productRoute={...view.productRoute,products,...(view.productRoute.primaryProduct?{primaryProduct:replace(view.productRoute.primaryProduct)}:{})};
  // Exclude alternate copies of the full BaZi workspace from the free response.
  // Other methods and the separately governed Cross owner retain their payloads.

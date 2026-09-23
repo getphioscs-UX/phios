@@ -51,7 +51,9 @@ export async function commerceApi(context,action){
       const portal=await createCommercePortal(env,binding.stripe_customer_id,origin,fetcher);
       return json({success:true,url:portal.url});
     }
-    const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale']);
+    // Client amount hints are ignored. Only the canonical product/language quote
+    // below is persisted and sent to Stripe; unknown identity/price IDs still fail.
+    const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale','amount','surcharge','total']);
     if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
     const product=commerceProduct(body.productId), selected=commerceSelection(product.productId,body.selectedProducts||[]);
     // A registered price does not establish that the private book can be delivered.

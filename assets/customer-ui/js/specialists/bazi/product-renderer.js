@@ -17,7 +17,7 @@ import {
  renderBaziRealityComparisonSurface
 } from '../../surfaces/bazi-professional-reading.js';
 import {renderPvpPhase10MethodSnapshot,ensurePvpPhase10SnapshotCss} from '../phase10/method-snapshot.js';
-import {renderPublicationReport,settlePublicationAssets,fitPublicationForPrint} from '../../personal-products/publication-report-pages.bundle.js';
+import {renderCustomerPublication} from '../../personal-products/report-delivery.js';
 
 const NAV=Object.freeze([
  ['overview','Overview','总览'],
@@ -82,17 +82,6 @@ export function renderBaziSpecialistWorkspace({product,mount}={}){
  return Object.freeze({status:'RENDERED',navigationHtml:navigationHtml(),visualHtml:phase10Snapshot,readingHtml:html,technicalHtml:renderTechnical(native,product),customerDefaultSurface:'BAZI_PROFESSIONAL_READING',governanceSurfaceDefault:false,technicalSurfaceMode:'ON_DEMAND',marketGradeCutoverState:native.governance?.marketGradeCustomerCutoverActive===true?(native.governance?.marketGradeCustomerCutoverFrozen===true?'ACTIVE_FROZEN':'ACTIVE'):'CANDIDATE_PENDING_W13_HUMAN_ACCEPTANCE',marketGradeCutoverFrozen:native.governance?.marketGradeCustomerCutoverFrozen===true});
 }
 export function renderBaziProduct({product,mount}={}){
- const report=product?.publicationReport,access=product?.reportAccess;
- if(!report)return Object.freeze({status:'RENDERED',navigationHtml:'',visualHtml:'',readingHtml:`<section data-bazi-access="FREE_REPORT_PREVIEW"><p>${esc(tr('Generate your free BaZi report from the Personal Reality form.','请从 Personal Reality 表单生成你的免费八字报告。'))}</p></section>`,technicalHtml:'',customerDefaultSurface:'FREE_REPORT_PREVIEW'});
- const paid=access?.state==='FULL_REPORT'&&access?.verifiedPurchase===true;
- const offer=access?.offer,amount=offer&&new Intl.NumberFormat(product.locale==='en'?'en-MY':'zh-MY',{style:'currency',currency:offer.currency,maximumFractionDigits:0}).format(offer.amountMinor/100);
- const lock=paid?'':`<section class="bazi-report-unlock" data-bazi-paid-state="PAID_LOCKED"><h2>${esc(tr('Full Report','完整报告'))}</h2><p>${esc(tr('Pattern paths, carrying conditions, sources, career, wealth, relationships and timing.','格局路径、承载条件、来源、事业、财富、关系与时间层。'))}</p>${offer?`<a class="cx-button" href="${esc(offer.href)}">${esc(tr('Unlock Full BaZi Report','解锁完整八字报告'))} · ${esc(amount)}</a>`:''}${access?.reason==='FULL_REPORT_RELEASE_PENDING'?`<p>${esc(tr('Your purchase is recorded. The new report edition awaits release acceptance.','购买已记录，新版报告等待发布验收。'))}</p>`:''}</section>`;
- const detail=paid&&product.sourceProduct?renderBaziSpecialistWorkspace({product,mount}):null;
- const technical=detail?`<details data-bazi-technical-detail><summary>${esc(tr('Technical / interactive detail','技术／交互详情'))}</summary>${detail.navigationHtml}${detail.visualHtml}${detail.readingHtml}${detail.technicalHtml}</details>`:'';
- return {status:'RENDERED',navigationHtml:'',visualHtml:'',readingHtml:`<div data-bazi-access="${paid?'FULL_REPORT':'FREE_REPORT_PREVIEW'}">${lock}${renderPublicationReport(report)}${lock}</div>`,technicalHtml:technical,customerDefaultSurface:paid?'GUIDED_REPORT_SUCCESSOR_R2':'FREE_REPORT_PREVIEW',afterMount:async slots=>{
-  const doc=slots.host?.ownerDocument||globalThis.document;
-  for(const name of ['visual-report','report-publication']){if(!doc.querySelector(`link[data-bazi-report-css="${name}"]`)){const link=doc.createElement('link');link.rel='stylesheet';link.href=`/assets/customer-ui/surfaces/${name}.css`;link.dataset.baziReportCss=name;doc.head.appendChild(link);}}
-  await settlePublicationAssets(slots.reading);fitPublicationForPrint(slots.reading);
- }};
+ return renderCustomerPublication({product,mount,renderDetail:renderBaziSpecialistWorkspace,labels:{unlock:tr('Unlock Full BaZi Report','解锁完整八字报告'),includes:tr('Pattern paths, carrying conditions, sources, career, wealth, relationships and timing.','格局路径、承载条件、来源、事业、财富、关系与时间层。'),generate:tr('Generate your free BaZi report from the Personal Reality form.','请从 Personal Reality 表单生成你的免费八字报告。')}});
 }
 export default Object.freeze({renderBaziProduct});

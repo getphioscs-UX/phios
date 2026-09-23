@@ -20,6 +20,7 @@ let queries=0;const free=await attachBaziPublicationAccess(view,ctx,{loadEntitle
 const p=free.productRoute.primaryProduct;assert.equal(p.reportAccess.state,'FREE_REPORT_PREVIEW');assert(!p.sourceProduct);assert(!free.methodNativeReading.BZR);assert.equal(free.singleMethodReading,null);assert.deepEqual(free.methodNativeReading.AST,other);assert.deepEqual(free.reading.methods,[other]);assert.equal(free.structure.methods.length,1);assert.equal(free.patterns.items.length,1);
 assert.equal(defaultPersonalReadingTab(free),'details');assert.equal(defaultPersonalReadingTab({productRoute:{products:[p,other]}}),'overview');
 const freeHtml=renderBaziProduct({product:p}).readingHtml;assert(!freeHtml.includes('cx-bazi-w12-workspace'));assert(freeHtml.includes('PAID_LOCKED'));assert(freeHtml.includes('COM-REPORT-BAZI-FULL'));assert.match(freeHtml,/RM\s*39/);
+assert.equal(p.reportDelivery.access.state,'FREE');assert.equal(p.lockedOutline.length,10);assert(p.lockedOutline.every(s=>Object.keys(s).join(',')==='title'));assert(freeHtml.includes('data-report-locked-outline'));
 for(const key of ['FOUR_PILLARS','FIVE_ELEMENTS','TEN_GOD_OVERVIEW','TEN_GOD_FUNCTION_GROUPS'])assert(freeHtml.includes(`data-publication-visual="${key}"`),key);
 for(const key of ['TEN_GOD_DETAILS','DAY_MASTER_CARRYING','PATTERN_PATHS','PROFESSIONAL_TOPICS'])assert(!freeHtml.includes(`data-publication-visual="${key}"`));
 assert(!renderBaziProduct({product}).readingHtml.includes('cx-bazi-w12-workspace'),'missing access envelope must fail closed');

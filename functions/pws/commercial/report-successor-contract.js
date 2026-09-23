@@ -10,19 +10,25 @@ export const REPORT_PRODUCT_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products
 export const REPORT_PRICE_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products.map(p=>({price_code:`${p.productCode}-myr`,price_version:version,currency_code:p.currency,amount_minor:p.amountMinor,status:'draft',effective_at:effectiveAt})));
 export const REPORT_OFFER_DEFINITIONS=freeze(REPORT_COMMERCE_CONTRACT.products.map(p=>({offer_code:`${p.productCode}-myr`,offer_version:version,display_name:p.productId.replaceAll('_',' '),product_code:p.productCode,product_version:version,price_code:`${p.productCode}-myr`,region_code:'my',customer_segment_code:'public-customer',status:'draft'})));
 export function resolveReportProduct(reference){const p=REPORT_COMMERCE_CONTRACT.products.find(p=>p.productId===reference||p.productCode===reference);if(!p)throw new Error('PWS_REPORT_PRODUCT_NOT_FOUND');return p;}
-export const REPORT_LANGUAGE_PRICING_VERSION='REPORT-LANGUAGE-R2-2026-09-20-CORRECTED';
+export const REPORT_LANGUAGE_PRICING_VERSION='REPORT-LANGUAGE-R3-2026-09-23';
+export const REPORT_LANGUAGE_PRICING_POLICIES=freeze({
+ [REPORT_LANGUAGE_PRICING_VERSION]:Object.fromEntries(REPORT_COMMERCE_CONTRACT.products.map(p=>[p.productId,{BILINGUAL:{surchargeMinor:p.productId==='BUNDLE_5PLUS'?2000:1000}}])),
+ 'REPORT-LANGUAGE-R2-2026-09-20-CORRECTED':Object.fromEntries(REPORT_COMMERCE_CONTRACT.products.map(p=>[p.productId,{BILINGUAL:{surchargeMinor:p.productId==='BUNDLE_2'?0:p.productId==='BUNDLE_5PLUS'?2000:1000}}]))
+});
 export function normalizeReportPresentation(input={}) {
  const {reportLanguageMode,reportLocale}=input;
  if(!((reportLanguageMode==='SINGLE'&&['en','zh-Hans'].includes(reportLocale))||(reportLanguageMode==='BILINGUAL'&&reportLocale==='bilingual')))
   throw Object.assign(new Error('Choose the report language explicitly.'),{code:'REPORT_PRESENTATION_REQUIRED',status:422});
  return freeze({reportLanguageMode,reportLocale});
 }
-export function quoteReportPresentation(productId,input,selectedProductIds=[]) {
+export function quoteReportPresentation(productId,input,selectedProductIds=[],pricingVersion=REPORT_LANGUAGE_PRICING_VERSION) {
  const product=resolveReportProduct(productId), presentation=normalizeReportPresentation(input);
  const plan=mapReportEntitlements(product.productId,selectedProductIds);
- const surcharge=presentation.reportLanguageMode==='SINGLE'?0:({BUNDLE_2:0,BUNDLE_3:1000,BUNDLE_5PLUS:2000}[product.productId]??1000);
+ const policy=REPORT_LANGUAGE_PRICING_POLICIES[pricingVersion]?.[product.productId];
+ if(!policy)throw new Error('REPORT_PRICING_POLICY_NOT_FOUND');
+ const surcharge=presentation.reportLanguageMode==='SINGLE'?0:policy.BILINGUAL.surchargeMinor;
  return freeze({...presentation,productId:product.productId,currency:product.currency,baseAmountMinor:product.amountMinor,
-  surchargeAmountMinor:surcharge,amountMinor:product.amountMinor+surcharge,pricingVersion:REPORT_LANGUAGE_PRICING_VERSION,
+  surchargeAmountMinor:surcharge,amountMinor:product.amountMinor+surcharge,pricingVersion,
   modifierRule:presentation.reportLanguageMode==='SINGLE'?'SINGLE_NO_SURCHARGE':product.kind==='BUNDLE'?`${product.productId}_BILINGUAL`:'INDIVIDUAL_BILINGUAL',
   selectedProductIds:plan.selectedProductIds});
 }

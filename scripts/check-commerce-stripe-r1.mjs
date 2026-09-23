@@ -4,7 +4,8 @@ import {DatabaseSync} from 'node:sqlite';
 import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
 import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
 import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity} from '../functions/pws/commercial/stripe-product-registry.js';
-import {isLanguageReport} from '../functions/commerce/report-presentation.js';
+import {isLanguageReport,validateOrderReportPresentation} from '../functions/commerce/report-presentation.js';
+import {quoteReportPresentation} from '../functions/pws/commercial/report-successor-contract.js';
 import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
 import {createStripeTestSignature} from '../functions/commerce/stripe-client.js';
 import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
@@ -78,7 +79,7 @@ let bundleOrder,bundleSession;
 await test('checkout authenticated, tamper rejected, live keys fail closed, origin protected',async()=>{
   const productId='COM-REPORT-BAZI-FULL';
   assert.equal((await commerceApi(context({productId},{data:{}}),'checkout')).status,401);
-  for(const key of ['amount','priceId','currency','customerId'])assert.equal((await commerceApi(context({productId,[key]:'tamper'}),'checkout')).status,422);
+  for(const key of ['priceId','currency','customerId'])assert.equal((await commerceApi(context({productId,[key]:'tamper'}),'checkout')).status,422);
   assert.equal((await commerceApi(context({productId},{env:{...env,STRIPE_SECRET_KEY:'sk_live_fixture'}}),'checkout')).status,503);
   const ctx=context({productId});ctx.request.headers.set('origin','https://attacker.test');assert.equal((await commerceApi(ctx,'checkout')).status,403);
   const beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
@@ -178,7 +179,7 @@ await test('unknown order or absent metadata records terminal review without gra
   assert.equal((await commerceAccountProjection(env,identity.userId)).entitlements.length,before);
 });
 await test('bilingual bundle settlement persists one language across every child and blocks tampered provider price',async()=>{
- for(const [productId,count,total] of [['COM-REPORT-BUNDLE-2',2,6900],['COM-REPORT-BUNDLE-3',3,10900],['COM-REPORT-BUNDLE-5PLUS',5,17900]]){
+ for(const [productId,count,total] of [['COM-REPORT-BUNDLE-2',2,7900],['COM-REPORT-BUNDLE-3',3,10900],['COM-REPORT-BUNDLE-5PLUS',5,17900]]){
   const selectedProducts=standardBundleProducts().slice(0,count);
   const r=await commerceApi(context({productId,selectedProducts,reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');assert.equal(r.status,201);const result=await r.json();
   const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);assert.equal(session.amount_total,total);session.payment_status='paid';
@@ -189,6 +190,25 @@ await test('bilingual bundle settlement persists one language across every child
  const r=await commerceApi(context({productId:'COM-REPORT-HD-FULL',reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');const result=await r.json();const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);session.line_items.data[1].price.unit_amount=1;session.payment_status='paid';
  const invalid=await send('checkout.session.completed',session);assert.equal((await invalid.json()).eventStatus,'review_required');
  assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).n,0);
+});
+await test('bundle language policy: six totals, order-level modifier, browser totals ignored',async()=>{
+ for(const [suffix,count,base,total] of [['2',2,6900,7900],['3',3,9900,10900],['5PLUS',5,15900,17900]])for(const bilingual of [false,true]){
+  const productId=`COM-REPORT-BUNDLE-${suffix}`,selectedProducts=standardBundleProducts().slice(0,count);
+  const response=await commerceApi(context({productId,selectedProducts,reportLanguageMode:bilingual?'BILINGUAL':'SINGLE',reportLocale:bilingual?'bilingual':'en',amount:1,surcharge:1,total:16900}),'checkout');
+  assert.equal(response.status,201);const {orderId}=await response.json();
+  const order=sqlite.prepare('SELECT * FROM commerce_checkout_attempts WHERE checkout_attempt_id=?').get(orderId);
+  const quote=JSON.parse(order.context_json).reportPresentation;
+  assert.equal(quote.baseAmountMinor,base);assert.equal(quote.amountMinor,bilingual?total:base);assert.equal(order.amount_minor,quote.amountMinor);
+  assert.equal(quote.surchargeAmountMinor,bilingual?total-base:0);assert.deepEqual(JSON.parse(order.selected_products_json),[...selectedProducts].sort());
+  const session=[...sessions.values()].find(s=>s.metadata.order_id===orderId);assert.equal(session.amount_total,quote.amountMinor);
+  assert.equal(session.line_items.data.length,bilingual?2:1);if(bilingual)assert.equal(session.line_items.data[1].quantity,1);
+ }
+ const six=quoteReportPresentation('BUNDLE_5PLUS',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT','ASTROLOGY_FULL_REPORT','PROFILE_FULL_REPORT','NUMEROLOGY_FULL_REPORT','ECR_FULL_REPORT']);assert.equal(six.amountMinor,17900);assert.equal(six.surchargeAmountMinor,2000);
+ const legacy=quoteReportPresentation('BUNDLE_2',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT'],'REPORT-LANGUAGE-R2-2026-09-20-CORRECTED');
+ const product=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId==='COM-REPORT-BUNDLE-2');
+ const legacyOrder={context_json:JSON.stringify({reportPresentation:legacy}),selected_products_json:JSON.stringify(['COM-REPORT-BAZI-FULL','COM-REPORT-ZIWEI-FULL']),amount_minor:6900};
+ assert.equal(validateOrderReportPresentation(product,legacyOrder).amountMinor,6900);
+ const altered={...legacy,pricingVersion:'UNKNOWN'};assert.throws(()=>validateOrderReportPresentation(product,{...legacyOrder,context_json:JSON.stringify({reportPresentation:altered})}));
 });
 fs.mkdirSync('docs/qa/commerce-stripe-r1',{recursive:true});
 fs.writeFileSync('docs/qa/commerce-stripe-r1/machine-results.json',JSON.stringify({work:'COM-STRIPE-R1',status:'PASS',cases,providerEndToEnd:'NOT_RUN',humanReview:'PENDING',liveOperations:'NOT_EXECUTED'},null,2)+'\n');
