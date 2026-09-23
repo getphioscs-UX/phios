@@ -58,8 +58,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   for(const def of definitions){
    if(def.primaryVisualRef){
     const count=def.primaryVisualRef==='BZR-VIS-TEN-GOD-DETAILS'?reading.professionalModules.tenGods.items.length:1;
-    for(let offset=0;offset<count;offset+=5){const visual=buildBaziPublicationVisual({reading,primaryVisualRef:def.primaryVisualRef,locale,topicCode:def.visualTopic,offset});
-     pageBlocks.push({definitionKey:def.key,visualContinuation:offset?`_CONT_${offset/5+1}`:'',pageFamily:def.family,title:def.title[locale],contentBlocks:def.primaryVisualRef==='BZR-VIS-FOUR-PILLARS'?modules.baziChart.blocks:[],items:[],sourcePages:[],facts:[],observations:[],boundary:visual.boundary,primaryVisualRef:visual.primaryVisualRef,primaryVisualHtml:visual.primaryVisualHtml});
+    for(let offset=0;offset<count;offset+=4){const visual=buildBaziPublicationVisual({reading,primaryVisualRef:def.primaryVisualRef,locale,topicCode:def.visualTopic,offset});
+     pageBlocks.push({definitionKey:def.key,visualContinuation:offset?`_CONT_${offset/4+1}`:'',pageFamily:def.family,title:def.title[locale],contentBlocks:def.primaryVisualRef==='BZR-VIS-FOUR-PILLARS'?modules.baziChart.blocks:[],items:[],sourcePages:[],facts:[],observations:[],boundary:visual.boundary,primaryVisualRef:visual.primaryVisualRef,primaryVisualHtml:visual.primaryVisualHtml});
     }continue;
    }
    const selected=def.dataModules.map(k=>modules[k]).filter(Boolean),blocks=selected.flatMap(m=>m.blocks||[]),items=selected.flatMap(m=>m.items||[]);

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import {attachBaziPublicationAccess} from '../functions/personal-reading/bazi-customer-publication.js';
 import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
 import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
@@ -8,6 +9,7 @@ import {buildBaziPublicationVisual} from '../functions/canonical-presentation-ru
 import {visualModules} from '../functions/canonical-presentation-runtime/report-section-config.generated.js';
 globalThis.document={documentElement:{lang:'en'}};
 const read=p=>JSON.parse(fs.readFileSync(p)),{reading}=read('docs/guided-report-successor-r2/bazi-source.json');
+for(const [file,expected] of Object.entries(read('docs/guided-report-successor-r2/visual-commerce/semantic-freeze.json').files))assert.equal(createHash('sha256').update(fs.readFileSync(file,'utf8').replace(/\r\n?/g,'\n')).digest('hex'),expected,`Frozen BaZi source: ${file}`);
 const original=JSON.stringify(reading),product=adaptBaziPersonalRealityProduct({report:reading,locale:'en'}),other={methodId:'AST',preserved:true};
 const view={methodNativeReading:{BZR:reading,AST:other},singleMethodReading:{secret:'full'},structure:{methods:[{publicMethodCode:'BAZI',projectionId:'bzr',privateDetail:true},{publicMethodCode:'AST',projectionId:'ast'}]},patterns:{items:[{projectionId:'bzr',privateDetail:true},{projectionId:'ast'}]},productRoute:{mode:'SINGLE_METHOD',methodId:'BZR',primaryProduct:product,products:[product]},reading:{methods:[{methodId:'BZR',secret:'full'},other]}};
 const ctx={env:{PHIOS_ENVIRONMENT:'qa'},data:{},request:new Request('https://qa.phios-github.pages.dev/api/customer-personal-reality',{method:'POST',body:JSON.stringify({paid:true,entitlementKey:'report:bazi:full',customerId:'attacker'})})};
@@ -27,6 +29,9 @@ assert(html.includes('VIS-REPORT-BAZI-BODY.webp'));assert(html.includes('VIS-REP
 for(const color of ['#3aa878','#e66d52','#c79b52','#9a9da3','#438fc4','#c87949','#f0aa2f','#3c8fd0','#48c094','#e26d71'])assert(html.includes(color),color);
 const prod=await attachBaziPublicationAccess(view,{...ctx,env:{PHIOS_ENVIRONMENT:'production'}},{loadEntitlement:async()=>purchased});assert.equal(prod.productRoute.primaryProduct.reportAccess.reason,'FULL_REPORT_RELEASE_PENDING');assert(!prod.productRoute.primaryProduct.sourceProduct);
 assert.equal(JSON.stringify(reading),original,'publication must not mutate native semantics');
+const unavailable=await attachBaziPublicationAccess({...view,methodNativeReading:{BZR:{...reading,publicationDecision:{customerPublishable:false}},AST:other}},ctx,{loadEntitlement:async()=>purchased});
+assert.equal(unavailable.productRoute.primaryProduct.reportAccess.reason,'PUBLICATION_UNAVAILABLE');
+assert(!unavailable.productRoute.primaryProduct.sourceProduct);assert(!unavailable.methodNativeReading.BZR);assert.deepEqual(unavailable.methodNativeReading.AST,other);
 assert.throws(()=>buildBaziPublicationVisual({reading,primaryVisualRef:'UNKNOWN'}));
 const store=fs.readFileSync('functions/commerce/book-commerce-store.js','utf8');assert.match(store,/p.purchase_state='purchased'/);assert.match(store,/o.customer_id=e.customer_id/);assert.match(store,/expires_at>\?3/);
 console.log('PASS: free payload excludes specialist detail; forged client payment cannot unlock; existing owned purchase + language + expiry boundaries; full visual registry, category colours, BODY and both motifs; Production release remains closed.');

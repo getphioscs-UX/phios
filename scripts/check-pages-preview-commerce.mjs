@@ -8,6 +8,7 @@ export function validatePreview(preview){
  assert.deepEqual(preview.r2_buckets,[{binding:'BOOKS',bucket_name:'phios-private-books-sandbox'},{binding:'PRIVATE_REPORTS',bucket_name:'phios-private-reports-sandbox'}]);
  assert.equal(preview.vars.PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED,'false');
  assert.equal(preview.vars.PHIOS_ENVIRONMENT,'qa');
+ assert.equal(preview.vars.PHIOS_COMMERCE_QA_ENABLED,'true');
  assert.equal(preview.vars.AUTH_PROVIDER,'auth0');
  assert.equal(preview.vars.AUTH_ISSUER,'https://dev-2g55joboofph0ax7.us.auth0.com/');
  assert.equal(preview.vars.AUTH_CLIENT_ID,'eSmR58lhvWkRCTyo7RdMxTuQzLM85Axr');
