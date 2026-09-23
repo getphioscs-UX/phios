@@ -2,6 +2,7 @@ import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.j
 import {selectPaiRoute} from '../../_lib/pai-r1-economics.js';
 import {createPublicationProviderAdapters} from './narrative-provider.js';
 import {COMPOSITION_VERSION,VERIFIER_VERSION,EDITORIAL_VERSION,COMPOSITION_SCHEMA,VERIFICATION_SCHEMA,COMPOSITION_PROMPT,VERIFIER_PROMPT,validateEditorial,validateSemanticVerdict} from './bazi-editorial-contract.js';
+import {evaluateBaziT3Release} from './bazi-t3-release-gate.js';
 
 // This is the section lane of the existing writer/provider/router, not a new
 // method or provider authority. Callers must be trusted server/build owners.
@@ -42,13 +43,13 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
    }
    return fallback('REPAIR_EXHAUSTED');
   })(),new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('T3_TIMEOUT'));},timeoutMs);})]);
- }catch(error){return fallback(error?.message==='T3_TIMEOUT'?'PROVIDER_TIMEOUT':'PROVIDER_OR_VERIFIER_FAILED');}
+ }catch(error){return {...fallback(error?.message==='T3_TIMEOUT'?'PROVIDER_TIMEOUT':'PROVIDER_OR_VERIFIER_FAILED'),providerFailure:{code:/^[A-Z0-9_]+$/.test(error?.code||'')?error.code:'PROVIDER_FAILED',httpStatus:Number.isInteger(error?.details?.status)?error.details.status:null}};}
  finally{clearTimeout(timer);controller.abort();}
 }
 
 export function canShowT3({stage='SHADOW',environment,staff=false,acceptance}={}){
  if(stage==='QA')return ['preview','qa'].includes(environment);
- if(stage==='CANARY')return staff===true&&acceptance?.canaryAccepted===true;
- if(stage==='PRODUCTION')return acceptance?.productionAccepted===true;
+ if(stage==='CANARY')return staff===true&&evaluateBaziT3Release(acceptance).accepted;
+ if(stage==='PRODUCTION')return acceptance?.canary?.status==='PASS'&&evaluateBaziT3Release(acceptance).accepted;
  return false;
 }

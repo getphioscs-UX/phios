@@ -2,6 +2,8 @@ import {projectBaziPublicationPages} from './bazi-visual-report-projection.js';
 import {compilePublicationInterpretation} from './narrative/narrative-brief-compiler.js';
 import {composePublicationNarrative,humanizePublicationStatement} from './narrative/narrative-writer.js';
 import {BAZI_SECTION_EDITORIAL} from './bazi-section-editorial.js';
+import {buildSectionEvidencePack,T3_SECTIONS,crossSectionEditorialCheck} from './narrative/bazi-editorial-contract.js';
+import {composeBaziT3Section,canShowT3} from './narrative/bazi-t3-composition.js';
 import {BAZI_SECTION_REGISTRY,REPORT_PAGE_FAMILIES,validateSectionRegistry,bindSectionVisual,splitSemanticBlocks,textUnits} from '../canonical-presentation-runtime/report-section-contract.js';
 
 // Adapter inside the existing projection owner: native facts are calculated
@@ -62,15 +64,46 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const narrative=pageBlocks.find(p=>p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'||p.pageFamily==='SUMMARY_PAGE');
   const allowed=(narrative||pageBlocks[0]).contentBlocks;
   const interpretation=await compilePublicationInterpretation({methodId:'BZR',page:{...sourcePage,pageId:section.key,evidenceRefs:[...new Set(sourceNumbers.flatMap(n=>internal(n).evidence))]},temporalContext,allowedStatements:allowed.map(b=>({text:b.text,sourceRef:b.sourceRef})),conditions:sectionObject.boundaryNotes,realityQuestions:sectionObject.practicalObservations});
-  const composed=await composePublicationNarrative({interpretation,locale,executionClass:narrative?'T3_DEEP_COMPOSITION':'T2_LIGHT_COMPOSITION',...composition,sectionComposition:sectionObject});
+  const composed=await composePublicationNarrative({interpretation,locale,executionClass:narrative?'T3_DEEP_COMPOSITION':'T2_LIGHT_COMPOSITION',...composition,...(composition.t3?{providerAdapters:{}}:{}),sectionComposition:sectionObject});
   if(narrative&&composed.internalOnly.evidenceAdmission==='SEMANTIC_VERIFIER_ACCEPTED'){
    const maximum=REPORT_PAGE_FAMILIES[narrative.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
    if(composed.paragraphs.every(text=>textUnits(text,locale)<=maximum))narrative.contentBlocks=composed.paragraphs.map(text=>block(text,section.key,'VERIFIED_SECTION_COMPOSITION'));
    else composed.internalOnly={...composed.internalOnly,executionClass:'T2_LIGHT_COMPOSITION',evidenceAdmission:'SOURCE_BOUND_CANONICAL_STATEMENTS',fallbackState:'DEEP_COMPOSITION_FALLBACK',fallbackReason:'COMPOSITION_BUDGET_REJECTED'};
   }
-  internalSections.push({sectionKey:section.key,interpretation,composition:composed.internalOnly,sectionComposition:sectionObject});
+  let t3=null;
+  if(composition.t3&&T3_SECTIONS.includes(section.key)){
+   // Build from all deterministic pages in this section; timing includes both
+   // the luck and annual layers. Guidance also receives prior admitted sections.
+   const packInterpretation={...interpretation,canonicalFacts:[...new Map(sourceNumbers.flatMap(n=>internal(n).canonicalFacts).map(f=>[f.sourceRefs[0],f])).values()]};
+   if(section.key==='S08_TIMING')packInterpretation.allowedInterpretations=sourceNumbers.flatMap(n=>internal(n).allowedInterpretations);
+   const pack=await buildSectionEvidencePack({interpretation:packInterpretation,locale,sectionKey:section.key,relatedInterpretations:internalSections.map(s=>s.interpretation)});
+   t3=await composeBaziT3Section({pack,...composition,snapshot:composition.t3.snapshots?.[section.key]});
+   t3.evidencePack=pack;
+   if(t3.status==='PASS'&&canShowT3(composition.t3)){
+    const n=t3.snapshot.finalNarrative,target=narrative||pageBlocks.find(p=>p.pageFamily==='TIMING_PAGE');
+    const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,...n.tensionConditions,n.closingInsight].filter(b=>b.text.trim());
+    const secondary=pageBlocks.find(p=>p!==target&&['INSIGHT_LIST_PAGE','TIMING_PAGE'].includes(p.pageFamily));
+    const secondaryBlocks=[...n.supportingConditions,...n.counterSignals];
+    if(!secondary)main.push(...secondaryBlocks);
+    const maximum=REPORT_PAGE_FAMILIES[target.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
+    // Preserve the frozen 36-page framework; too much text returns the whole
+    // section to T2 rather than silently deleting claims or conditions.
+    const listRange=REPORT_PAGE_FAMILIES.INSIGHT_LIST_PAGE.budget[locale==='en'?'enItem':'zhItem'];
+    const listFits=secondary?.pageFamily!=='INSIGHT_LIST_PAGE'||(secondaryBlocks.length>=3&&secondaryBlocks.length<=6&&secondaryBlocks.every(b=>textUnits(b.text,locale)>=listRange[0]&&textUnits(b.text,locale)<=listRange[1]));
+    if(listFits&&main.reduce((sum,b)=>sum+textUnits(b.text,locale),0)<=maximum){
+     target.contentBlocks=main.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
+     target.observations=n.realityCheck.map(b=>b.text);
+     if(secondary?.pageFamily==='INSIGHT_LIST_PAGE')secondary.items=[...n.supportingConditions,...n.counterSignals].map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
+     else if(secondary)secondary.contentBlocks=[...n.supportingConditions,...n.counterSignals].map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
+     for(const pb of pageBlocks)pb.boundary='';
+     pageBlocks.at(-1).boundary=n.boundaryNote.text;
+    }else t3={...t3,status:'FALLBACK',internalOnly:{...t3.internalOnly,fallbackState:'T3_FALLBACK_USED',fallbackReason:'COMPOSITION_BUDGET_REJECTED'}};
+   }
+  }
+  internalSections.push({sectionKey:section.key,interpretation,composition:composed.internalOnly,sectionComposition:sectionObject,...(t3?{t3}:{} )});
   const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:section.title,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
-  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:section.title[locale],paragraphs:[editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
+  const admittedT3=t3?.status==='PASS'&&canShowT3(composition.t3);
+  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:section.key==='S07_HEALTH'&&admittedT3?pick('Wellbeing & Daily Rhythm','身心状态与日常节奏'):section.title[locale],paragraphs:[admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits});
@@ -81,5 +114,10 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  }
  const sectionSequence=new Map();
  pages.forEach((p,i)=>{p.pageNumber=i+7;p.sequenceWithinSection=(sectionSequence.get(p.sectionKey)||0)+1;sectionSequence.set(p.sectionKey,p.sequenceWithinSection);p.isSectionOpener=p.pageFamily==='SECTION_OPENER_PAGE';p.contentDensity=p.isSectionOpener?'LOW':p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'?'NARRATIVE':'STRUCTURED';p.compositionBudget=REPORT_PAGE_FAMILIES[p.pageFamily].budget;});
- return {pages,sections,internalSections,legacy};
+ const crossSection=composition.t3?crossSectionEditorialCheck(internalSections.filter(s=>s.t3?.status==='PASS').map(s=>s.t3.snapshot)):null;
+ if(crossSection?.status==='REJECT'&&canShowT3(composition.t3)){
+  const safe=await projectBaziSectionPublication({reading,locale,temporalContext,unavailableModules,composition:{}});
+  return {...safe,internalSections,crossSection,t3Fallback:'CROSS_SECTION_REPETITION'};
+ }
+ return {pages,sections,internalSections,legacy,...(crossSection?{crossSection}:{})};
 }
