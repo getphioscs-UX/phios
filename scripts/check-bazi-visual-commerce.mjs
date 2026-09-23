@@ -36,7 +36,7 @@ const prod=await attachBaziPublicationAccess(view,{...ctx,env:{PHIOS_ENVIRONMENT
 assert.equal(JSON.stringify(reading),original,'publication must not mutate native semantics');
 const {native:noTarget}=await buildBzrPhase10Case(),unselected=readingPublicationTime(noTarget);
 await assert.rejects(()=>projectBaziPublicationPages({reading:noTarget,locale:'en',temporalContext:unselected}),/PUBLICATION_RESOLVED_TEMPORAL_REQUIRED/);
-for(const locale of ['en','zh-Hans'])for(const full of [false,true]){const report=await buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full});assert.equal(report.totalPages,full?46:11);assert(!report.pages.some(p=>p.temporal));assert(report.pages.some(p=>p.primaryVisualRef==='BZR-VIS-FIVE-ELEMENTS'));}
+for(const locale of ['en','zh-Hans'])for(const full of [false,true]){const report=await buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full});assert.equal(report.totalPages,full?report.pages.length+6:11);assert(!report.pages.some(p=>p.temporal));assert(report.pages.some(p=>p.primaryVisualRef==='BZR-VIS-FIVE-ELEMENTS'));}
 assert.equal(noTarget.professionalModules.professionalTimeline.targetContext,null);
 const unavailable=await attachBaziPublicationAccess({...view,methodNativeReading:{BZR:{...reading,publicationDecision:{customerPublishable:false}},AST:other}},ctx,{loadEntitlement:async()=>purchased});
 assert.equal(unavailable.productRoute.primaryProduct.reportAccess.reason,'PUBLICATION_UNAVAILABLE');

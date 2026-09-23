@@ -3,6 +3,7 @@ import {selectPaiRoute} from '../../_lib/pai-r1-economics.js';
 import {createPublicationProviderAdapters} from './narrative-provider.js';
 import {COMPOSITION_VERSION,VERIFIER_VERSION,EDITORIAL_VERSION,COMPOSITION_SCHEMA,VERIFICATION_SCHEMA,COMPOSITION_PROMPT,VERIFIER_PROMPT,validateEditorial,validateSemanticVerdict,narrativeBlocks,semanticCoverage} from './bazi-editorial-contract.js';
 import {evaluateBaziT3Release} from './bazi-t3-release-gate.js';
+import {QUALITY_VERSION} from './bazi-editorial-quality.js';
 
 // This is the section lane of the existing writer/provider/router, not a new
 // method or provider authority. Callers must be trusted server/build owners.
@@ -30,7 +31,7 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
    let repair=null;
    for(let attempt=0;attempt<2;attempt++){
     const editorialIntent={maximumMainUnits:pack.locale==='en'?230:420,maximumItemUnits:pack.locale==='en'?40:65,noMinimumLength:true};
-    const candidate=await call('REPORT_SECTION_COMPOSITION',{repair,editorialIntent},COMPOSITION_SCHEMA,COMPOSITION_PROMPT+' Observe editorialIntent as maximum layout limits, never minimum content requirements.');
+    const candidate=await call('REPORT_SECTION_COMPOSITION',{repair,editorialIntent,sectionNarrativeBrief:pack.sectionNarrativeBrief||null},COMPOSITION_SCHEMA,COMPOSITION_PROMPT+' Observe editorialIntent as maximum layout limits, never minimum content requirements. Follow SectionNarrativeBrief and its locale-specific style contract. Explain only the ordered licensed meaning atoms. Do not repeat preceding visual counts or percentages. Preserve substantive conditions without repeating general disclaimers in every paragraph; one local scope sentence is enough, with complete limits in Method & Appendix.');
     const editorial=validateEditorial(candidate,pack);
     // A verifier sees the complete evidence and every candidate block. Reference
     // membership alone is never reported as semantic acceptance.
@@ -39,7 +40,7 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
     schema.properties.assessments.items.properties.path.enum=claims.map(b=>b.path);
     const verdict=await call('REPORT_SECTION_SEMANTIC_VERIFICATION',{candidate,claimsToVerify:claims},schema,VERIFIER_PROMPT+' Assess only claimsToVerify, using each supplied path exactly once (for example headline or interpretation.0). Do not add candidate prefixes, .text suffixes, or an assessment of the factRefs index.');
     if(editorial.status==='PASS'&&validateSemanticVerdict(verdict,candidate,pack)){
-     const seed={sectionKey:pack.sectionKey,locale:pack.locale,canonicalEvidenceHash:pack.canonicalEvidenceHash,temporalSnapshot:pack.temporalContext,compositionVersion:COMPOSITION_VERSION,verifierVersion:VERIFIER_VERSION,editorialVersion:EDITORIAL_VERSION,explanatoryAuthorityVersion:pack.explanatoryAuthorityVersion,semanticCoverage:semanticCoverage(candidate,pack),finalNarrative:candidate,verification:verdict};
+     const seed={sectionKey:pack.sectionKey,locale:pack.locale,canonicalEvidenceHash:pack.canonicalEvidenceHash,temporalSnapshot:pack.temporalContext,compositionVersion:COMPOSITION_VERSION,verifierVersion:VERIFIER_VERSION,editorialVersion:EDITORIAL_VERSION,explanatoryAuthorityVersion:pack.explanatoryAuthorityVersion,semanticCoverage:semanticCoverage(candidate,pack),finalNarrative:candidate,verification:verdict,...(pack.editorialQualityVersion?{editorialQualityVersion:QUALITY_VERSION,sectionNarrativeBriefDigest:pack.sectionNarrativeBriefDigest,editorialQuality:editorial.quality}: {})};
      return {status:'PASS',snapshot:deepFreeze({...seed,snapshotDigest:await sha256Stable(seed)}),internalOnly:{route,attempts:attempt+1,usage,latencyMs:Date.now()-started,semanticStatus:'PASS',editorialStatus:'PASS'}};
     }
     if(verdict?.status==='REJECT')return {...fallback('SEMANTIC_REJECTED'),internalOnly:{...fallback('SEMANTIC_REJECTED').internalOnly,route,usage,latencyMs:Date.now()-started,attempts:attempt+1,verification:verdict,editorial,candidate}};
@@ -51,10 +52,10 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
  finally{clearTimeout(timer);controller.abort();}
 }
 
-export function canShowT3({stage='SHADOW',environment,staff=false,acceptance}={}){
- if(stage==='QA')return ['preview','qa'].includes(environment);
- if(stage==='CANARY')return staff===true&&evaluateBaziT3Release(acceptance).accepted;
- if(stage==='PRODUCTION')return acceptance?.canary?.status==='PASS'&&evaluateBaziT3Release(acceptance).accepted;
+export function canShowT3({stage='SHADOW',environment,staff=false,acceptance,snapshot}={}){
+ if(stage==='QA')return ['preview','qa'].includes(environment)&&snapshot?.editorialQualityVersion===QUALITY_VERSION&&acceptance?.version===QUALITY_VERSION&&Boolean(acceptance.humanReviews?.some(r=>r.decision==='ACCEPT'&&r.reviewer&&r.reviewedAt&&r.locale===snapshot.locale&&r.sectionKey===snapshot.sectionKey&&r.snapshotDigest===snapshot.snapshotDigest&&r.briefDigest===snapshot.sectionNarrativeBriefDigest));
+ if(stage==='CANARY')return staff===true&&canShowT3({stage:'QA',environment,acceptance,snapshot})&&evaluateBaziT3Release(acceptance).accepted;
+ if(stage==='PRODUCTION')return false; // Addendum F: no paid Production T3 activation.
  return false;
 }
 

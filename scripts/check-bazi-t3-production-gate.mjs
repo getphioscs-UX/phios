@@ -24,7 +24,7 @@ let repairs=0;const repair=await composeBaziT3Section({...args,providerAdapters:
 let attempts=0;assert.equal((await composeBaziT3Section({...args,providerAdapters:{test:async r=>{attempts++;return r.taskType==='REPORT_SECTION_COMPOSITION'?candidate:{...verdict,status:'REJECT'};}}})).status,'FALLBACK');assert.equal(attempts,2);
 assert.equal((await composeBaziT3Section({...args,providerAdapters:{test:async()=>{throw Error('private provider detail');}}})).internalOnly.fallbackReason,'PROVIDER_OR_VERIFIER_FAILED');
 assert.equal((await composeBaziT3Section({...args,timeoutMs:5,providerAdapters:{test:()=>new Promise(()=>{})}})).internalOnly.fallbackReason,'PROVIDER_TIMEOUT');
-assert.equal(canShowT3({stage:'SHADOW',environment:'qa'}),false);assert.equal(canShowT3({stage:'QA',environment:'production'}),false);assert.equal(canShowT3({stage:'QA',environment:'qa'}),true);assert.equal(canShowT3({stage:'PRODUCTION',acceptance:{productionAccepted:true}}),false);
+assert.equal(canShowT3({stage:'SHADOW',environment:'qa'}),false);assert.equal(canShowT3({stage:'QA',environment:'production'}),false);assert.equal(canShowT3({stage:'QA',environment:'qa'}),false);assert.equal(canShowT3({stage:'PRODUCTION',acceptance:{productionAccepted:true}}),false);
 assert.equal(evaluateBaziT3Release({}).accepted,false);
 const path='docs/guided-report-successor-r2/bazi-t3/acceptance.json';
 const evidence=fs.existsSync(path)?JSON.parse(fs.readFileSync(path)):{};

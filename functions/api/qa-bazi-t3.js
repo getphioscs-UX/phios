@@ -1,4 +1,6 @@
 import {checkBaziShadowStage} from '../personal-reading/narrative/bazi-t3-shadow-stages.js';
+import {withEditorialMeaningBrief,QUALITY_VERSION} from '../personal-reading/narrative/bazi-editorial-quality.js';
+import editorialAcceptance from '../../config/reports/bazi-editorial-quality-acceptance.json';
 import fixtures from '../personal-reading/narrative/bazi-t3-preview-packs.generated.json';
 import registry from '../../content/ai-economics/providers/ai-provider-cost-registry-v1.json';
 import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
@@ -20,14 +22,28 @@ export async function onRequest(context){
   for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>256){await reader.cancel();return reply({ok:false},413);}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
   const body=JSON.parse(raw);
   if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status'].includes(body.action)))return reply({ok:false},400);
-  const pack=fixtures.packs[`${body.profileId||'BASELINE_NOW'}:${body.locale}:${body.sectionKey}`];if(!pack)return reply({ok:false},400);
+  const originalPack=fixtures.packs[`${body.profileId||'BASELINE_NOW'}:${body.locale}:${body.sectionKey}`];if(!originalPack)return reply({ok:false},400);
+  const pack=await withEditorialMeaningBrief(originalPack);
   if(!env.PRIVATE_REPORTS||!env.RUNTIME_DB)return reply({ok:false,code:'PREVIEW_STORAGE_UNAVAILABLE'},503);
-  if(body.action!=='parity'){
+  {
    const admission=await checkBaziShadowStage({profileId:body.profileId||'BASELINE_NOW',sectionKey:body.sectionKey,action:body.action,stagedProfiles:fixtures.stagedProfiles,passed:async(profileId,locale,sectionKey)=>{
-    const p=fixtures.packs[profileId+':'+locale+':'+sectionKey];if(!p)return false;
+    const source=fixtures.packs[profileId+':'+locale+':'+sectionKey];if(!source)return false;
+    const p=await withEditorialMeaningBrief(source);
     const object=await env.PRIVATE_REPORTS.get('qa/bazi-t3/'+COMPOSITION_VERSION+'/'+p.canonicalEvidenceHash+'.json');if(!object)return false;
     const r=await object.json();if(r.status!=='PASS'||!r.snapshot)return false;
     return (await composeBaziT3Section({pack:p,snapshot:r.snapshot})).status==='PASS';
+   },humanAccepted:async(profileId,locale,sectionKey)=>{
+    const source=fixtures.packs[profileId+':'+locale+':'+sectionKey];if(!source)return false;
+    const p=await withEditorialMeaningBrief(source),object=await env.PRIVATE_REPORTS.get(`qa/bazi-t3/${COMPOSITION_VERSION}/${p.canonicalEvidenceHash}.json`);
+    const snapshot=object&&(await object.json()).snapshot;
+    return Boolean(snapshot&&editorialAcceptance.version===QUALITY_VERSION&&editorialAcceptance.humanReviews.some(r=>r.profileId===profileId&&r.locale===locale&&r.sectionKey===sectionKey&&r.decision==='ACCEPT'&&r.reviewer&&r.reviewedAt&&r.snapshotDigest===snapshot.snapshotDigest&&r.briefDigest===p.sectionNarrativeBriefDigest));
+   },parityAccepted:async(profileId,sectionKey)=>{
+    const digests=[];
+    for(const locale of ['en','zh-Hans']){const source=fixtures.packs[`${profileId}:${locale}:${sectionKey}`];if(!source)return false;const p=await withEditorialMeaningBrief(source),object=await env.PRIVATE_REPORTS.get(`qa/bazi-t3/${COMPOSITION_VERSION}/${p.canonicalEvidenceHash}.json`);const snapshot=object&&(await object.json()).snapshot;if(!snapshot)return false;digests.push(snapshot.snapshotDigest);}
+    const object=await env.PRIVATE_REPORTS.get(`qa/bazi-t3/BILINGUAL_PARITY_V1/${await sha256Stable(digests)}.json`),record=object&&await object.json();
+    if(!record||record.status!=='PASS'||record.englishSnapshotDigest!==digests[0]||record.chineseSnapshotDigest!==digests[1])return false;
+    const seed={status:record.status,englishSnapshotDigest:record.englishSnapshotDigest,chineseSnapshotDigest:record.chineseSnapshotDigest,verifierVersion:record.verifierVersion,verdict:record.verdict};
+    return record.artifactDigest===await sha256Stable(seed);
    }});
    if(!admission.allowed)return reply({ok:false,code:'STAGED_QUALITY_GATE',...admission},409);
    if(body.action==='matrix-status')return reply({ok:true,...admission});
@@ -36,7 +52,7 @@ export async function onRequest(context){
   if(body.action==='parity'){
    const snapshots=[];
    for(const locale of ['en','zh-Hans']){
-    const p=fixtures.packs[`${body.profileId||'BASELINE_NOW'}:${locale}:${body.sectionKey}`];
+    const source=fixtures.packs[`${body.profileId||'BASELINE_NOW'}:${locale}:${body.sectionKey}`],p=source&&await withEditorialMeaningBrief(source);
     const object=p&&await env.PRIVATE_REPORTS.get(`qa/bazi-t3/${COMPOSITION_VERSION}/${p.canonicalEvidenceHash}.json`);
     const record=object&&await object.json();
     if(record?.status!=='PASS'||!record.snapshot)return reply({ok:false,code:'BILINGUAL_ACCEPTED_PAIR_REQUIRED'},409);

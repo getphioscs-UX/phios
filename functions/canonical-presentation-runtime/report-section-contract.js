@@ -12,10 +12,17 @@ export function validateSectionRegistry(plan=registry){
  }return plan;
 }
 export function textUnits(text,locale){return locale==='en'?String(text).trim().split(/\s+/).filter(Boolean).length:[...String(text).replace(/\s/g,'')].length;}
-export function splitSemanticBlocks(blocks,{locale,maxUnits}){
+export function splitSemanticBlocks(blocks,{locale,maxUnits,minUnits=0}){
  const pages=[];let current=[],size=0;
  for(const block of blocks){const units=textUnits(block.text,locale);if(units>maxUnits)throw Error('SECTION_SINGLE_BLOCK_OVER_BUDGET');if(size+units>maxUnits&&current.length){pages.push(current);current=[];size=0;}current.push(block);size+=units;}
- if(current.length)pages.push(current);return pages;
+ if(current.length)pages.push(current);
+ // Keep a short final continuation with a complete preceding semantic block
+ // when both resulting pages still meet their budgets. Never pad or split prose.
+ if(pages.length>1&&minUnits){
+  const last=pages.at(-1),previous=pages.at(-2),sizeOf=page=>page.reduce((n,b)=>n+textUnits(b.text,locale),0);
+  while(sizeOf(last)<minUnits&&previous.length>1){const candidate=previous.at(-1),units=textUnits(candidate.text,locale);if(sizeOf(last)+units>maxUnits||sizeOf(previous)-units<minUnits)break;last.unshift(previous.pop());}
+ }
+ return pages;
 }
 export function bindSectionVisual(sectionKey,{assets=visualAssets}={}){
  const sectionNumber=Number(sectionKey.match(/^S(\d+)/)?.[1]||1),motifKey=assets.global.motifs?.[(sectionNumber-1)%2]||assets.global.motifLayer;

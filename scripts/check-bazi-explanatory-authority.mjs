@@ -21,10 +21,12 @@ for(const [mutate,code] of [[n=>n.interpretation[0].operator='SEQUENCE','UNLICEN
 for(const code of DEFECT_CODES)assert.equal(validateSemanticVerdict({...verdict,defects:[{code,path:'lead',detail:'A genuine semantic defect must block publication.'}]},candidate,pack),false);
 assert.equal(validateSemanticVerdict({...verdict,assessments:verdict.assessments.map((a,i)=>i? a:{...a,candidateRelationType:'SEQUENCE'})},candidate,pack),false,'mislabelled actual semantics cannot be admitted');
 assert.equal(semanticCoverage(candidate,pack).claims.length,3);
-const stagedProfiles={HIGH_EVIDENCE:'high',LOW_EVIDENCE:'low',MIXED:'mixed'},passed=new Set(),pass=async(p,l,s)=>passed.has(`${p}:${l}:${s}`),gate=(profileId,sectionKey,action)=>checkBaziShadowStage({profileId,sectionKey,action,stagedProfiles,passed:pass});
-assert((await gate('BASELINE_NOW','S02_PERSONALITY')).allowed);assert(!(await gate('high','S02_PERSONALITY')).allowed);assert(!(await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','matrix-status')).allowed);
+const stagedProfiles={HIGH_EVIDENCE:'high',LOW_EVIDENCE:'low',MIXED:'mixed'},passed=new Set(),human=new Set(),pass=async(p,l,s)=>passed.has(`${p}:${l}:${s}`),gate=(profileId,sectionKey,action)=>checkBaziShadowStage({profileId,sectionKey,action,stagedProfiles,passed:pass,humanAccepted:async(p,l,s)=>human.has(`${p}:${l}:${s}`)});
+assert((await gate('BASELINE_NOW','S02_PERSONALITY')).allowed);
 for(const l of ['en','zh-Hans'])passed.add(`BASELINE_NOW:${l}:S02_PERSONALITY`);
-assert((await gate('high','S02_PERSONALITY')).allowed);assert(!(await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);
-for(const p of Object.values(stagedProfiles))for(const l of ['en','zh-Hans'])passed.add(`${p}:${l}:S02_PERSONALITY`);
-assert((await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);assert(!(await gate('BASELINE_NOW','S04_CAREER')).allowed);
-console.log('PASS Addendum E: native-only licensed IR, locale-neutral relation IDs, adaptive empty lists, operator/defect rejection, timing/guidance ownership and staged shadow admission. No live acceptance implied.');
+assert(!(await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed,'machine pass alone cannot authorize next section');
+for(const l of ['en','zh-Hans'])human.add(`BASELINE_NOW:${l}:S02_PERSONALITY`);
+assert((await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);
+assert(!(await gate('high','S02_PERSONALITY')).allowed);assert(!(await gate('BASELINE_NOW','S04_CAREER')).allowed);
+assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','matrix-status')).allowed);assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','parity')).allowed);
+console.log('PASS native licensed IR and semantic operator boundaries; Addendum F supersedes machine-only staging with per-section human editorial gates.');

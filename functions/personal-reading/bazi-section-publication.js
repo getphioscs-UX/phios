@@ -5,6 +5,7 @@ import {composePublicationNarrative,humanizePublicationStatement} from './narrat
 import {BAZI_SECTION_EDITORIAL} from './bazi-section-editorial.js';
 import {buildSectionEvidencePack,T3_SECTIONS,crossSectionEditorialCheck} from './narrative/bazi-editorial-contract.js';
 import {composeBaziT3Section,canShowT3} from './narrative/bazi-t3-composition.js';
+import {buildBaZiNarrativeClaimIR} from './narrative/bazi-explanatory-authority.js';
 import {BAZI_SECTION_REGISTRY,REPORT_PAGE_FAMILIES,validateSectionRegistry,bindSectionVisual,splitSemanticBlocks,textUnits} from '../canonical-presentation-runtime/report-section-contract.js';
 
 // Adapter inside the existing projection owner: native facts are calculated
@@ -21,20 +22,26 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const edRef='functions/personal-reading/bazi-section-editorial.js';
  const paragraphs=(key,texts,sourceRef)=>modules[key]={blocks:texts.filter(Boolean).map(t=>block(t,sourceRef))};
  const e=s=>BAZI_SECTION_EDITORIAL[s];
- const makeNarrative=(key,section,code)=>{
+ const appendixConditions=[];
+ const makeNarrative=async(key,section,code)=>{
   const t=topic(code);if(!t)return;
   const idx=topics.indexOf(t),ref=`professionalModules/customerNarrative/topicNarratives/${idx}`;
-  modules[key]={blocks:[block(t.lead[lang],`${ref}/lead`,'METHOD_INTERPRETATION'),block(t.development[lang],`${ref}/development`,'METHOD_INTERPRETATION'),block(e(section).bridge[locale],`${edRef}#${section}`)],boundary:humanizePublicationStatement(t.condition[lang])};
+  const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:section,locale,temporalSnapshot:temporalContext});
+  const selected=authority.claims.filter(c=>c.relationType!=='BOUNDARY');
+  // Raw percentages/counts remain in the native visuals and optional detail.
+  // Narrative text is projected from admitted meaning, never regex-reinterpreted.
+  modules[key]={blocks:selected.map(c=>block(c.text,c.sourceRefs.join('|'),'METHOD_INTERPRETATION')),boundary:authority.claims.find(c=>c.relationType==='BOUNDARY')?.text||''};
+  appendixConditions.push(block(t.condition[lang],`${ref}/condition`,'METHOD_BOUNDARY'));
  };
  for(const [key,n] of [['baziChart',7],['dayMaster',8],['fiveElements',9],['chartStructure',12],['usefulElements',14]])modules[key]={blocks:[],sourcePages:[n],facts:source(n).facts,evidence:internal(n).evidence};
  modules.baziChart.blocks=[block(e('S01_OVERVIEW').bridge[locale],`${edRef}#S01_OVERVIEW`)];
  modules.chartStructure.blocks=[block(source(12).paragraphs.concat(source(13).paragraphs).join(' '),internal(12).evidence[0],'METHOD_INTERPRETATION'),block(pick('Read each candidate alongside the conditions that would establish it, keeping a visible path separate from a completed judgment.','请把候选模式与成立所需的条件一起阅读，分清路径可见与判断完成之间的差别。'),`${edRef}#S03_LIFE_STRUCTURE`)];
  modules.chartStructure.boundary=source(12).boundary;
- makeNarrative('personalityNarrative','S02_PERSONALITY','CAPABILITY');
- makeNarrative('lifeStructureNarrative','S03_LIFE_STRUCTURE','LIFE_OPERATION');
- makeNarrative('careerNarrative','S04_CAREER','CAREER');
- makeNarrative('wealthNarrative','S05_WEALTH','WEALTH');
- makeNarrative('relationshipNarrative','S06_RELATIONSHIP','RELATIONSHIPS');
+ await makeNarrative('personalityNarrative','S02_PERSONALITY','CAPABILITY');
+ await makeNarrative('lifeStructureNarrative','S03_LIFE_STRUCTURE','LIFE_OPERATION');
+ await makeNarrative('careerNarrative','S04_CAREER','CAREER');
+ await makeNarrative('wealthNarrative','S05_WEALTH','WEALTH');
+ await makeNarrative('relationshipNarrative','S06_RELATIONSHIP','RELATIONSHIPS');
  paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale],pick('Keep a distinction between a busy schedule, your own description of strain, and any explanation proposed for it. Neither an element count nor a pressure symbol can establish a bodily cause. If you revisit this chapter later, compare the circumstances you recorded, rather than looking for a predicted condition to confirm. Your experience may change while the birth chart remains the same.','请区分繁忙的安排、自己感受到的负担，以及对它提出的解释。五行数量或压力符号都不能建立身体病因。以后回到本章时，比较记录中的实际情境，而不是寻找某种预测中的状态。出生结构保持不变，经验仍可能随环境而改变。')],`${edRef}#S07_HEALTH`);
  const itemMap={chartHighlights:'S01_OVERVIEW',strengths:'S02_PERSONALITY',careerFields:'S04_CAREER',financialAdvice:'S05_WEALTH',relationshipAdvice:'S06_RELATIONSHIP',wellnessAdvice:'S07_HEALTH',nextSteps:'S09_GUIDANCE'};
  for(const [key,section] of Object.entries(itemMap))modules[key]={blocks:[],items:e(section).items.map(i=>block(i[locale],`${edRef}#${section}`))};
@@ -48,6 +55,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  paragraphs('integratedGuidance',[e('S09_GUIDANCE').bridge[locale]],`${edRef}#S09_GUIDANCE`);
  modules.integratedGuidance.items=['CAREER','WEALTH','RELATIONSHIPS'].map(code=>block(topic(code).lead[lang],`professionalModules/customerNarrative/topicNarratives/${topics.indexOf(topic(code))}/lead`,'METHOD_INTERPRETATION'));
  paragraphs('boundaries',[e('S10_APPENDIX').bridge[locale]],`${edRef}#S10_APPENDIX`);
+ modules.boundaries.blocks.push(...appendixConditions);
  paragraphs('methodology',[pick('BaZi organizes a birth reading around four pillars and uses the Day Master as a reference position. The diagrams in this report preserve the distinctions between visible stems, branches, hidden stems and element counts. Structural candidates are shown with their conditions, so an open pattern remains open rather than becoming a final verdict. The timing chapter adds only the layers resolved by the existing method engine for the saved observation window. These layers accompany the birth structure; they do not replace it. Read the prose as a bounded explanation of that structure, then compare it with independent experience.','八字围绕四柱组织出生读取，并以日主作为参照位置。本报告的图表区分天干、地支、藏干与五行计数；结构候选与成立条件一同呈现，因此仍开放的格局不会被写成最终判断。时间章节只加入既有方法引擎针对保存的观察窗口所解析的层次，它们与本命结构一起阅读，不取代本命。请把文字看作有范围的结构说明，再用独立经验来比较。')],`${edRef}#S10_APPENDIX`);
  for(const name of unavailableModules)delete modules[name];
  const sections=[],internalSections=[],pages=[],t3Interpretations=[];
@@ -102,9 +110,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    }
    const pack=await buildSectionEvidencePack({interpretation:packInterpretation,locale,sectionKey:section.key,relatedInterpretations:t3Interpretations,reading});
    t3Interpretations.push(packInterpretation);
-   t3=await composeBaziT3Section({pack,...composition,snapshot:composition.t3.snapshots?.[section.key]});
+   // Rendering may consume accepted snapshots, never start an implicit eight-
+   // section provider run. New generation belongs to the staged QA endpoint.
+   const frozenSnapshot=composition.t3.snapshots?.[section.key];
+   t3=frozenSnapshot?await composeBaziT3Section({pack,snapshot:frozenSnapshot}):{status:'FALLBACK',snapshot:null,internalOnly:{fallbackState:'T3_FALLBACK_USED',fallbackReason:'ACCEPTED_SNAPSHOT_REQUIRED'}};
    t3.evidencePack=pack;
-   if(t3.status==='PASS'&&canShowT3(composition.t3)){
+   if(t3.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot})){
     const n=t3.snapshot.finalNarrative,target=narrative||pageBlocks.find(p=>p.pageFamily==='TIMING_PAGE');
     const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,n.closingInsight].filter(b=>b.text.trim());
     const secondary=pageBlocks.find(p=>p!==target&&['INSIGHT_LIST_PAGE','TIMING_PAGE'].includes(p.pageFamily));
@@ -129,11 +140,11 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   internalSections.push({sectionKey:section.key,interpretation,composition:composed.internalOnly,sectionComposition:sectionObject,...(t3?{t3}:{} )});
   const publicationTitle=composition.t3&&section.key==='S07_HEALTH'?{en:'Wellbeing & Daily Rhythm','zh-Hans':'身心状态与日常节奏'}:section.title;
   const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:publicationTitle,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
-  const admittedT3=t3?.status==='PASS'&&canShowT3(composition.t3);
+  const admittedT3=t3?.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot});
   pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
-   const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits});
+   const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits,minUnits:budget[locale==='en'?'en':'zh']?.[0]||0});
    if(!chunks.length)chunks.push([]);
    for(const [i,chunk] of chunks.entries())pages.push({...base,pageKey:pb.definitionKey+(pb.visualContinuation||'')+(i?`_CONT_${i+1}`:''),definitionKey:pb.definitionKey,pageFamily:pb.pageFamily,title:pb.title+(i||pb.visualContinuation?pick(' · continued',' · 续'):''),paragraphs:chunk.map(b=>b.text),facts:i?[]:pb.facts,sourcePages:i?[]:pb.sourcePages,primaryVisualRef:pb.primaryVisualRef||null,primaryVisualHtml:i?null:pb.primaryVisualHtml||null,items:i?[]:pb.items.map(b=>b.text),temporal:pb.temporal,observations:i?[]:pb.observations,boundary:i===chunks.length-1?pb.boundary:'',visualVariant:'BODY',contentBudget:{units:chunk.reduce((sum,b)=>sum+textUnits(b.text,locale),0),maximum:maxUnits}});
   }
@@ -142,7 +153,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const sectionSequence=new Map();
  pages.forEach((p,i)=>{p.pageNumber=i+7;p.sequenceWithinSection=(sectionSequence.get(p.sectionKey)||0)+1;sectionSequence.set(p.sectionKey,p.sequenceWithinSection);p.isSectionOpener=p.pageFamily==='SECTION_OPENER_PAGE';p.contentDensity=p.isSectionOpener?'LOW':p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'?'NARRATIVE':'STRUCTURED';p.compositionBudget=REPORT_PAGE_FAMILIES[p.pageFamily].budget;});
  const crossSection=composition.t3?crossSectionEditorialCheck(internalSections.filter(s=>s.t3?.status==='PASS').map(s=>s.t3.snapshot)):null;
- if(crossSection?.status==='REJECT'&&canShowT3(composition.t3)){
+ if(crossSection?.status==='REJECT'&&internalSections.some(s=>canShowT3({...composition.t3,snapshot:s.t3?.snapshot}))){
   const safe=await projectBaziSectionPublication({reading,locale,temporalContext,unavailableModules,composition:{}});
   return {...safe,internalSections,crossSection,t3Fallback:'CROSS_SECTION_REPETITION'};
  }

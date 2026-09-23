@@ -16,29 +16,38 @@ for(const id of new Set(shadow.matrix.map(r=>r.profileId))){const option=documen
 document.querySelector('#section').before(profile);
 const runMatrix=document.createElement('button');runMatrix.textContent='Run fixed shadow matrix';runMatrix.id='run-matrix';document.querySelector('#generate').after(runMatrix);
 const parity=document.createElement('button');parity.textContent='Verify selected bilingual pair';runMatrix.after(parity);
-parity.onclick=async()=>{
- parity.disabled=true;const status=document.querySelector('#generation-status');status.textContent='Checking the two frozen locale snapshots…';
- try{const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'parity',locale,sectionKey:document.querySelector('#section').value,profileId:profile.value})});status.textContent=JSON.stringify({httpStatus:response.status,...await response.json()},null,2);}
- catch{status.textContent='Bilingual parity request failed. No acceptance recorded.';}finally{parity.disabled=false;}
-};
-runMatrix.onclick=async()=>{
- runMatrix.disabled=true;document.querySelector('#generate').disabled=true;
- const results=[],status=document.querySelector('#generation-status');
- try{
- const gate=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'matrix-status',locale,sectionKey:'S02_PERSONALITY',profileId:'BASELINE_NOW'})});
- if(!gate.ok){status.textContent=JSON.stringify(await gate.json(),null,2);return;}
- for(const row of shadow.matrix){
-  if(row.control||row.state==='SOURCE_REJECTED'){results.push(row);continue;}
-  status.textContent=`Shadow progress ${results.length} / ${shadow.matrix.length}`;
-  const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({profileId:row.profileId,locale:row.locale,sectionKey:row.sectionKey})});
-  const data=await response.json();results.push({profileId:row.profileId,locale:row.locale,sectionKey:row.sectionKey,httpStatus:response.status,...data});
-  // Stop the matrix on infrastructure/provider failure; do not repeat a bad
-  // configuration across every case. Semantic rejections remain useful cases.
-  if(!response.ok||data.result?.providerFailure||['PROVIDER_TIMEOUT','PROVIDER_CREDENTIAL_NOT_CONFIGURED','NO_ADMITTED_PROVIDER_ROUTE'].includes(data.result?.internalOnly?.fallbackReason))break;
- }status.textContent=JSON.stringify({completed:results.length,total:shadow.matrix.length,productionActivated:false,results},null,2);}
- catch{status.textContent=JSON.stringify({completed:results.length,total:shadow.matrix.length,error:'SHADOW_REQUEST_FAILED',results},null,2);}
- finally{runMatrix.disabled=false;document.querySelector('#generate').disabled=false;}
-};
+// F-W0: no browser action can launch a matrix or parity before human prose review.
+runMatrix.disabled=true;runMatrix.textContent='Full matrix paused — Addendum F';
+parity.disabled=true;parity.textContent='Parity follows baseline editorial acceptance';
+profile.value='BASELINE_NOW';profile.disabled=true;
+for(const option of document.querySelector('#section').options)option.disabled=option.value!=='S02_PERSONALITY';
+document.querySelector('#section').value='S02_PERSONALITY';
+document.querySelector('#compare').textContent='Historical Addendum E comparison — not Addendum F acceptance';
+const editorialReview=document.createElement('section');editorialReview.id='editorial-f-result';
+editorialReview.style.cssText='max-width:900px;margin:24px auto;padding:24px;background:#fffcf4;line-height:1.8';
+document.querySelector('nav').after(editorialReview);
+editorialReview.textContent='Addendum F: run only BASELINE_NOW S02 in each language. Read the new prose here before any next-section request. Historical PDF/comparison snapshots do not count as F acceptance.';
+function showEditorialCandidate(result){
+ const accepted=result?.status==='PASS'&&result.snapshot;
+ const candidate=result?.snapshot?.finalNarrative||result?.internalOnly?.candidate||result?.internalOnly?.lastRepair?.candidate;
+ editorialReview.replaceChildren();
+ const heading=document.createElement('h2');heading.textContent=`Addendum F · S02 · ${locale} · ${accepted?'Awaiting human editorial review':'Machine rejected / unavailable — not accepted'}`;editorialReview.append(heading);
+ if(!candidate){const p=document.createElement('p');p.textContent=result?.internalOnly?.fallbackReason||result?.reason||'No prose returned.';editorialReview.append(p);return;}
+ for(const field of ['headline','lead','interpretation','supportingConditions','tensionConditions','howThisMayShowUp','closingInsight','observationPrompt','counterSignals','realityCheck','boundaryNote','technicalNote']){
+  const blocks=Array.isArray(candidate[field])?candidate[field]:[candidate[field]];
+  if(!blocks.some(b=>b?.text?.trim()))continue;
+  const title=document.createElement('h3');title.textContent=field;editorialReview.append(title);
+  for(const b of blocks){if(!b?.text?.trim())continue;const p=document.createElement('p');p.textContent=b.text;editorialReview.append(p);}
+ }
+ if(!accepted)return;
+ const metadata=document.createElement('pre');metadata.style.overflowWrap='anywhere';metadata.style.whiteSpace='pre-wrap';metadata.textContent=JSON.stringify({snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,quality:result.snapshot.editorialQuality},null,2);editorialReview.append(metadata);
+ const reviewer=document.createElement('input');reviewer.placeholder='Human reviewer name';reviewer.setAttribute('aria-label','Addendum F reviewer');
+ const decision=document.createElement('select');decision.setAttribute('aria-label','Addendum F decision');
+ for(const [value,label] of [['','Not reviewed'],['ACCEPT','Accept editorial quality'],['REVISE','Needs revision'],['REJECT','Reject']]){const option=document.createElement('option');option.value=value;option.textContent=label;decision.append(option);}
+ const button=document.createElement('button');button.textContent='Export digest-bound Addendum F review';
+ button.onclick=()=>{if(!reviewer.value.trim()||!decision.value)return;const record={version:'BAZI_EDITORIAL_QUALITY_F_V1',humanReviews:[{profileId:'BASELINE_NOW',sectionKey:'S02_PERSONALITY',locale,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,decision:decision.value,reviewer:reviewer.value.trim(),reviewedAt:new Date().toISOString()}],productionActivated:false};const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=`bazi-editorial-f-s02-${locale}-human-review.json`;link.click();URL.revokeObjectURL(url);};
+ editorialReview.append(reviewer,decision,button);
+}
 document.querySelector('#compare').onclick=async()=>{
  const container=document.querySelector('#comparison');container.replaceChildren();
  const comparison=await(await fetch(`${root}/comparison-${locale}.json`)).json();
@@ -57,7 +66,7 @@ document.querySelector('#compare').onclick=async()=>{
 };
 document.querySelector('#generate').onclick=async()=>{
  const button=document.querySelector('#generate'),status=document.querySelector('#generation-status');button.disabled=true;status.textContent='Running one bounded Preview shadow attempt…';
- try{const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({locale,sectionKey:document.querySelector('#section').value,profileId:profile.value})});const data=await response.json();status.textContent=JSON.stringify({httpStatus:response.status,...data},null,2);}
+ try{const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({locale,sectionKey:document.querySelector('#section').value,profileId:profile.value})});const data=await response.json();status.textContent=JSON.stringify({httpStatus:response.status,...data},null,2);showEditorialCandidate(data.result);}
  catch{status.textContent='Preview request failed. No production activation.';}
  finally{button.disabled=false;}
 };
