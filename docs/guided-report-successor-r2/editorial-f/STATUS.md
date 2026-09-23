@@ -59,7 +59,7 @@ Current snapshot digests:
 - en: `614b4b6a9121409202bf2db76d8f17ff7291818d1b15d059905e4a4d3d3392fa`
 - zh-Hans: `01d5bece462951c478ca13f20a46f733886214d8f4a9d0e0a11d93e595c53264`
 
-The current `s02-review.html` and `s02-live-evidence.json` contain this revised pair. The first rejected pair is retained at `attempt-1/s02-live-evidence.json`. Local 1440/390 review-page checks pass with no overflow or page errors. Targeted BaZi checks and Pages build pass. The new full repository check is still running at this checkpoint.
+The current `s02-review.html` and `s02-live-evidence.json` contain this revised pair. The first rejected pair is retained at `attempt-1/s02-live-evidence.json`. Local 1440/390 review-page checks pass with no overflow or page errors. Targeted BaZi checks and Pages build pass. The complete `npm.cmd run check` passed with exit 0, including precheck, main checks and postcheck. No new migration or Production change was made.
 
 ## Remaining
 
