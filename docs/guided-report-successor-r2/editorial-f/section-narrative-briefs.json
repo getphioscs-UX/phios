@@ -1,7 +1,7 @@
 {
   "BASELINE_NOW:en:S02_PERSONALITY": {
-    "canonicalEvidenceHash": "529a08d5d9d2c941385e719356fccf2638601251ccb7daab4ac6aba574b200dc",
-    "briefDigest": "cd97c88de3f85ff02bad82430d874bc95ef67129ff32249c40891166ec4d317b",
+    "canonicalEvidenceHash": "acf6fbfc9c47107caee73fbe813fe87c603321e1c90bab5463a4aef8b443bd2b",
+    "briefDigest": "2f474f959946882e2ad822ea2316859cb5b566a51dd4af11c4a71f3b89ee9725",
     "brief": {
       "version": "BAZI_SECTION_NARRATIVE_BRIEF_F_V1",
       "sectionKey": "S02_PERSONALITY",
@@ -59,7 +59,128 @@
         "boundaries": "One local scope sentence; full method limits belong in Method & Appendix. Preserve every substantive uncertainty and condition.",
         "structure": "Lead with the selected meaning; explain its specific context and tension; close with one licensed reflection. No invented examples or causal links."
       },
-      "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion."
+      "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion.",
+      "editorialRevision": "BAZI_S02_EDITORIAL_SCOPE_R1",
+      "scopeDistribution": {
+        "version": "BAZI_S02_EDITORIAL_SCOPE_R1",
+        "sharedScope": {
+          "field": "boundaryNote",
+          "claimId": "S02_PERSONALITY:BOUNDARY",
+          "appliesTo": [
+            "S02_PERSONALITY:PRIMARY",
+            "S02_PERSONALITY:DIMENSIONS",
+            "S02_PERSONALITY:SECONDARY",
+            "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-01",
+            "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-02",
+            "S02_PERSONALITY:TENSION",
+            "S02_PERSONALITY:OPEN_STRENGTH"
+          ],
+          "required": true
+        },
+        "measurementCaveat": {
+          "field": "lead",
+          "claimId": "S02_PERSONALITY:PRIMARY",
+          "maximumOccurrences": 1
+        },
+        "localConditions": [
+          {
+            "claimId": "S02_PERSONALITY:PRIMARY",
+            "conditions": [],
+            "openConditions": [],
+            "relationType": "EMPHASIS",
+            "subject": "CAPABILITY",
+            "objects": [
+              "RESOURCE"
+            ],
+            "rank": 1
+          },
+          {
+            "claimId": "S02_PERSONALITY:DIMENSIONS",
+            "conditions": [
+              "DIMENSIONS_ARE_SIMULTANEOUS_NOT_A_SEQUENCE"
+            ],
+            "openConditions": [],
+            "relationType": "CO_OCCURRING_DIMENSIONS",
+            "subject": "CAPABILITY",
+            "objects": [
+              "CAPABILITY"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:SECONDARY",
+            "conditions": [],
+            "openConditions": [],
+            "relationType": "ASSOCIATION",
+            "subject": "CAPABILITY",
+            "objects": [
+              "PEER",
+              "OFFICER"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-01",
+            "conditions": [
+              "KEEP_THIS_PAIR_DISTINCT",
+              "NO_BEHAVIORAL_EFFECT"
+            ],
+            "openConditions": [],
+            "relationType": "CONTEXT_MODIFIER",
+            "subject": "DAY",
+            "objects": [
+              "HOUR"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-02",
+            "conditions": [
+              "KEEP_THIS_PAIR_DISTINCT",
+              "NO_BEHAVIORAL_EFFECT"
+            ],
+            "openConditions": [],
+            "relationType": "CONTEXT_MODIFIER",
+            "subject": "MONTH",
+            "objects": [
+              "DAY"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:TENSION",
+            "conditions": [
+              "NO_OBSERVED_PRESSURE_ASSERTION"
+            ],
+            "openConditions": [],
+            "relationType": "TENSION",
+            "subject": "CAPABILITY",
+            "objects": [
+              "SUPPORT",
+              "EXPRESSION",
+              "EXTERNAL_DEMAND"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:OPEN_STRENGTH",
+            "conditions": [],
+            "openConditions": [
+              "FINAL_STRENGTH_WITHHELD"
+            ],
+            "relationType": "OPEN_CONDITION",
+            "subject": "FINAL_STRENGTH",
+            "objects": [],
+            "rank": null
+          }
+        ],
+        "singleFieldPlan": {
+          "headline": "Name the primary theme briefly.",
+          "lead": "State the primary reading priority and its measurement caveat once.",
+          "closingInsight": "Retain the simultaneous dimensions; do not repeat the heading or primary theme list."
+        },
+        "instruction": "For S02 follow scopeDistribution. General no-observed-effect and no-prediction limits may be stated once in boundaryNote and apply to every explicitly symbolic/structural paragraph. This is editorial placement only: do not remove a substantive condition, turn a relation into a real-life effect, or promote a reading priority into a measured trait. Keep unresolved verdicts local, each pair separate, secondary rank explicit, and dimensions simultaneous. Verify each paragraph in the context of that explicit shared scope; reject absent shared scope or any contradictory assertion. Do not demand the same general disclaimer after each pair. Keep the measurement caveat once in lead, not again in headline or closingInsight. Use closingInsight to retain the dimensions together, rather than repeat the primary theme list."
+      }
     }
   },
   "BASELINE_NOW:en:S03_LIFE_STRUCTURE": {
@@ -494,8 +615,8 @@
     }
   },
   "BASELINE_NOW:zh-Hans:S02_PERSONALITY": {
-    "canonicalEvidenceHash": "d7ff3bc733576c3f4cf7228b2ef98ed2df1bb48aa552a8b6f7c5ac47270bebb4",
-    "briefDigest": "391496d6e0db2fb1666fbd7c432445c47fa62989fbb99eab6fba90f1c10e7571",
+    "canonicalEvidenceHash": "be6fa07092d02895676c2c7948cd6b21d43e2e0eb817ea9d9756c28caa24cfb2",
+    "briefDigest": "9bf448c70b64523e716c31a5cce85e7fb32a7f8fb9239bb915ecad0918ff7a2f",
     "brief": {
       "version": "BAZI_SECTION_NARRATIVE_BRIEF_F_V1",
       "sectionKey": "S02_PERSONALITY",
@@ -553,7 +674,128 @@
         "boundaries": "局部仅留一句范围说明，完整限制归入方法与附录；实质条件和不确定性必须保留。",
         "structure": "以本节获许可的意义开篇，说明具体背景与张力，以获许可的观察问题收束。不新增行为实例或因果关系。"
       },
-      "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion."
+      "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion.",
+      "editorialRevision": "BAZI_S02_EDITORIAL_SCOPE_R1",
+      "scopeDistribution": {
+        "version": "BAZI_S02_EDITORIAL_SCOPE_R1",
+        "sharedScope": {
+          "field": "boundaryNote",
+          "claimId": "S02_PERSONALITY:BOUNDARY",
+          "appliesTo": [
+            "S02_PERSONALITY:PRIMARY",
+            "S02_PERSONALITY:DIMENSIONS",
+            "S02_PERSONALITY:SECONDARY",
+            "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-01",
+            "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-02",
+            "S02_PERSONALITY:TENSION",
+            "S02_PERSONALITY:OPEN_STRENGTH"
+          ],
+          "required": true
+        },
+        "measurementCaveat": {
+          "field": "lead",
+          "claimId": "S02_PERSONALITY:PRIMARY",
+          "maximumOccurrences": 1
+        },
+        "localConditions": [
+          {
+            "claimId": "S02_PERSONALITY:PRIMARY",
+            "conditions": [],
+            "openConditions": [],
+            "relationType": "EMPHASIS",
+            "subject": "CAPABILITY",
+            "objects": [
+              "RESOURCE"
+            ],
+            "rank": 1
+          },
+          {
+            "claimId": "S02_PERSONALITY:DIMENSIONS",
+            "conditions": [
+              "DIMENSIONS_ARE_SIMULTANEOUS_NOT_A_SEQUENCE"
+            ],
+            "openConditions": [],
+            "relationType": "CO_OCCURRING_DIMENSIONS",
+            "subject": "CAPABILITY",
+            "objects": [
+              "CAPABILITY"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:SECONDARY",
+            "conditions": [],
+            "openConditions": [],
+            "relationType": "ASSOCIATION",
+            "subject": "CAPABILITY",
+            "objects": [
+              "PEER",
+              "OFFICER"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-01",
+            "conditions": [
+              "KEEP_THIS_PAIR_DISTINCT",
+              "NO_BEHAVIORAL_EFFECT"
+            ],
+            "openConditions": [],
+            "relationType": "CONTEXT_MODIFIER",
+            "subject": "DAY",
+            "objects": [
+              "HOUR"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-02",
+            "conditions": [
+              "KEEP_THIS_PAIR_DISTINCT",
+              "NO_BEHAVIORAL_EFFECT"
+            ],
+            "openConditions": [],
+            "relationType": "CONTEXT_MODIFIER",
+            "subject": "MONTH",
+            "objects": [
+              "DAY"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:TENSION",
+            "conditions": [
+              "NO_OBSERVED_PRESSURE_ASSERTION"
+            ],
+            "openConditions": [],
+            "relationType": "TENSION",
+            "subject": "CAPABILITY",
+            "objects": [
+              "SUPPORT",
+              "EXPRESSION",
+              "EXTERNAL_DEMAND"
+            ],
+            "rank": null
+          },
+          {
+            "claimId": "S02_PERSONALITY:OPEN_STRENGTH",
+            "conditions": [],
+            "openConditions": [
+              "FINAL_STRENGTH_WITHHELD"
+            ],
+            "relationType": "OPEN_CONDITION",
+            "subject": "FINAL_STRENGTH",
+            "objects": [],
+            "rank": null
+          }
+        ],
+        "singleFieldPlan": {
+          "headline": "Name the primary theme briefly.",
+          "lead": "State the primary reading priority and its measurement caveat once.",
+          "closingInsight": "Retain the simultaneous dimensions; do not repeat the heading or primary theme list."
+        },
+        "instruction": "For S02 follow scopeDistribution. General no-observed-effect and no-prediction limits may be stated once in boundaryNote and apply to every explicitly symbolic/structural paragraph. This is editorial placement only: do not remove a substantive condition, turn a relation into a real-life effect, or promote a reading priority into a measured trait. Keep unresolved verdicts local, each pair separate, secondary rank explicit, and dimensions simultaneous. Verify each paragraph in the context of that explicit shared scope; reject absent shared scope or any contradictory assertion. Do not demand the same general disclaimer after each pair. Keep the measurement caveat once in lead, not again in headline or closingInsight. Use closingInsight to retain the dimensions together, rather than repeat the primary theme list."
+      }
     }
   },
   "BASELINE_NOW:zh-Hans:S03_LIFE_STRUCTURE": {

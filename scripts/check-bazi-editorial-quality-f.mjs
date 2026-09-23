@@ -12,6 +12,11 @@ for(const locale of ['en','zh-Hans']){
  assert.equal(pack.meaningCanon.version,MEANING_CANON_VERSION);assert.equal(pack.sectionNarrativeBrief.styleContract,STYLE_CONTRACTS[locale]);
  for(const theme of pack.meaningCanon.themes)for(const key of ['customerMeaning','roleInWholeChart','supportingContext','tension','contrast','openCondition','allowedReflection','prohibitedInference'])assert(key in theme);
  assert.deepEqual(await withEditorialMeaningBrief(source),pack);assert.notEqual(pack.canonicalEvidenceHash,source.canonicalEvidenceHash);
+ assert.deepEqual(await withEditorialMeaningBrief(pack),pack,'reopening a revised brief is idempotent');
+ assert.equal(pack.sectionNarrativeBrief.editorialRevision,'BAZI_S02_EDITORIAL_SCOPE_R1');
+ assert.equal(pack.sectionNarrativeBrief.scopeDistribution.sharedScope.field,'boundaryNote');
+ assert.deepEqual(pack.sectionNarrativeBrief.scopeDistribution.localConditions.map(c=>c.claimId),pack.sectionNarrativeBrief.orderedMeaningIds);
+ assert.equal((await withEditorialMeaningBrief(packs[`BASELINE_NOW:${locale}:S03_LIFE_STRUCTURE`])).sectionNarrativeBrief.editorialRevision,undefined,'S02 revision must not revise later sections implicitly');
  assert.equal(pack.sectionNarrativeBrief.orderedMeaningIds[0],source.primaryThemes[0].id);
  const bad={lead:{text:'The functionalGroupId repeats 23.1% and 23.1%. This is not a prediction. This is not a prediction.'}};
  const result=validateEditorialQuality(bad,pack);assert.equal(result.status,'REJECT');assert(result.issues.includes('TECHNICAL_DENSITY'));assert(result.issues.includes('NUMBER_REPETITION'));assert(result.issues.includes('BOUNDARY_DENSITY'));

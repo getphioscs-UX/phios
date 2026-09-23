@@ -2,6 +2,8 @@ import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.j
 export const MEANING_CANON_VERSION='BAZI_EDITORIAL_MEANING_CANON_V1';
 export const QUALITY_VERSION='BAZI_EDITORIAL_QUALITY_F_V1';
 export const METRICS_VERSION='BAZI_EDITORIAL_METRICS_F_V2';
+export const S02_REVISION='BAZI_S02_EDITORIAL_SCOPE_R1';
+export const S02_SCOPE_INSTRUCTIONS='For S02 follow scopeDistribution. General no-observed-effect and no-prediction limits may be stated once in boundaryNote and apply to every explicitly symbolic/structural paragraph. This is editorial placement only: do not remove a substantive condition, turn a relation into a real-life effect, or promote a reading priority into a measured trait. Keep unresolved verdicts local, each pair separate, secondary rank explicit, and dimensions simultaneous. Verify each paragraph in the context of that explicit shared scope; reject absent shared scope or any contradictory assertion. Do not demand the same general disclaimer after each pair. Keep the measurement caveat once in lead, not again in headline or closingInsight. Use closingInsight to retain the dimensions together, rather than repeat the primary theme list.';
 export const STYLE_CONTRACTS=deepFreeze({
  en:{version:'BAZI_EDITORIAL_EN_V1',voice:'Direct, concrete, calm English. Explain the admitted meaning rather than narrating the report machinery.',avoid:['source-designated','visible count','interface','the method records','this topic'],numbers:'No chart counts or percentages in narrative. Essential timing dates belong to the timing visual.',boundaries:'One local scope sentence; full method limits belong in Method & Appendix. Preserve every substantive uncertainty and condition.',structure:'Lead with the selected meaning; explain its specific context and tension; close with one licensed reflection. No invented examples or causal links.'},
  'zh-Hans':{version:'BAZI_EDITORIAL_ZH_V1',voice:'自然、清楚、克制的中文。直接说明已获许可的意义，不描述报告生成流程。',avoid:['来源指定','可见计数','接口','方法记录到','本章需要'],numbers:'叙事不复述图表百分比和计数；必要日期留在时间图表。',boundaries:'局部仅留一句范围说明，完整限制归入方法与附录；实质条件和不确定性必须保留。',structure:'以本节获许可的意义开篇，说明具体背景与张力，以获许可的观察问题收束。不新增行为实例或因果关系。'}
@@ -10,7 +12,7 @@ const relations=(claims,...types)=>claims.filter(c=>types.includes(c.relationTyp
 // An editorial projection of admitted Claim IR. Empty facets stay empty; no
 // meaning, rule, ranking, contrast or real-world manifestation is manufactured.
 export async function withEditorialMeaningBrief(pack){
- if(pack.editorialQualityVersion===QUALITY_VERSION)return pack;
+ if(pack.editorialQualityVersion===QUALITY_VERSION&&(pack.sectionKey!=='S02_PERSONALITY'||pack.sectionNarrativeBrief?.editorialRevision===S02_REVISION))return pack;
  const claims=pack.licensedClaims||[];
  const themes=claims.filter(c=>c.relationType!=='BOUNDARY').map(c=>({themeId:c.id,customerMeaning:{claimId:c.id,text:c.text},roleInWholeChart:{rank:c.rank,relationType:c.relationType,subject:c.subject,objects:c.objects},
   supportingContext:relations(claims,'SUPPORT_CONDITION','CONTEXT_MODIFIER'),tension:relations(claims,'TENSION'),contrast:relations(claims,'CONTRAST'),openCondition:relations(claims,'OPEN_CONDITION'),
@@ -22,7 +24,12 @@ export async function withEditorialMeaningBrief(pack){
  const contentPlan=Object.fromEntries(Object.entries(pack.contentPlan).map(([field,ids])=>[field,ids.slice().sort((a,b)=>ordered.findIndex(c=>c.id===a)-ordered.findIndex(c=>c.id===b))]));
  const brief={version:'BAZI_SECTION_NARRATIVE_BRIEF_F_V1',sectionKey:pack.sectionKey,locale:pack.locale,meaningCanonDigest,orderedMeaningIds:ordered.map(c=>c.id),contentPlan,
   mainProseExcludes:['canonicalFacts','percentages','counts','technicalIdentifiers'],localScopeClaimId:claims.find(c=>c.relationType==='BOUNDARY')?.id||null,fullBoundaryDestination:'S10_APPENDIX',styleContract:STYLE_CONTRACTS[pack.locale],selectionRule:'Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion.'};
- const {canonicalEvidenceHash:sourceEvidenceHash,...source}=pack;
+ if(pack.sectionKey==='S02_PERSONALITY'){
+  brief.editorialRevision=S02_REVISION;
+  brief.scopeDistribution={version:S02_REVISION,sharedScope:{field:'boundaryNote',claimId:brief.localScopeClaimId,appliesTo:ordered.map(c=>c.id),required:true},measurementCaveat:{field:'lead',claimId:claims.find(c=>c.rank===1)?.id,maximumOccurrences:1},localConditions:ordered.map(c=>({claimId:c.id,conditions:c.conditions,openConditions:c.openConditions,relationType:c.relationType,subject:c.subject,objects:c.objects,rank:c.rank})),singleFieldPlan:{headline:'Name the primary theme briefly.',lead:'State the primary reading priority and its measurement caveat once.',closingInsight:'Retain the simultaneous dimensions; do not repeat the heading or primary theme list.'},instruction:S02_SCOPE_INSTRUCTIONS};
+ }
+ const {canonicalEvidenceHash,sourceEvidenceHash:originalHash,editorialQualityVersion:oldQuality,meaningCanon:oldCanon,sectionNarrativeBrief:oldBrief,sectionNarrativeBriefDigest:oldDigest,...source}=pack;
+ const sourceEvidenceHash=originalHash||canonicalEvidenceHash;
  const enriched={...source,sourceEvidenceHash,editorialQualityVersion:QUALITY_VERSION,meaningCanon:canon,sectionNarrativeBrief:brief,sectionNarrativeBriefDigest:await sha256Stable(brief),contentPlan};
  return deepFreeze({...enriched,canonicalEvidenceHash:await sha256Stable(enriched)});
 }
