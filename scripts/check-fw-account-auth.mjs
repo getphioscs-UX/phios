@@ -55,6 +55,7 @@ for(const issuer of ['https://custom-auth.example/','https://tenant.example/']){
  assert.equal(await authenticate(context('/api/private',{headers:{cookie:session}})),null);
  sqlite.prepare('UPDATE account_verified_sessions SET expires_at=? WHERE session_hash=?').run(originalExpiry,who.sessionId);
  assert.equal((await authApi(context('/api/auth/logout',{method:'POST',headers:{cookie:session,origin:'https://evil.example'}}),'logout')).status,403);
+ const jsonLogout=await authApi(context('/api/auth/logout',{method:'POST',headers:{cookie:session,origin:'https://app.example',accept:'application/json'}}),'logout');assert.equal(jsonLogout.status,200);assert.match(jsonLogout.headers.get('set-cookie'),/Max-Age=0/);assert.equal(new URL((await jsonLogout.json()).logoutUrl).origin,new URL(issuer).origin);assert.equal(await authenticate(context('/api/test',{headers:{cookie:session}})),null);
  const logout=await authApi(context('/api/auth/logout',{method:'POST',headers:{cookie:session,origin:'https://app.example'}}),'logout');assert.equal(logout.status,303);assert.equal(new URL(logout.headers.get('location')).origin,new URL(issuer).origin);
  assert.equal(await authenticate(context('/api/private',{headers:{cookie:session}})),null);
  assert.equal(await authenticate(context('/api/private',{headers:{cookie:session+'tampered'}})),null);

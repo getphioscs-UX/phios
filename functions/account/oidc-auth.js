@@ -115,6 +115,9 @@ export async function authApi(context,action){
       let destination=`${c.origin}/account/`;
       const metadata=await discover(context).catch(()=>null);
       if(metadata?.end_session_endpoint){const target=new URL(metadata.end_session_endpoint);target.searchParams.set('client_id',c.clientId);target.searchParams.set('post_logout_redirect_uri',destination);destination=target.href;}
+      // Fetch-based logout clears the local session before a top-level provider
+      // navigation, avoiding a cross-origin redirect of a CSP self-only form.
+      if(context.request.headers.get('accept')?.includes('application/json'))return response(JSON.stringify({ok:true,logoutUrl:destination}),200,{'Content-Type':'application/json','Set-Cookie':setCookie(SESSION_COOKIE,'',0)});
       return response(null,303,{Location:destination,'Set-Cookie':setCookie(SESSION_COOKIE,'',0)});
     }
     return json({ok:false,code:'NOT_FOUND'},404);
