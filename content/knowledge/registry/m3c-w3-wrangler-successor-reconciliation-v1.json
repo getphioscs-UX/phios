@@ -38,14 +38,19 @@
         "authorization": "USER_EXPLICIT_FW_PREVIEW_CHECKPOINT_2026_09_22",
         "change": "BIND_OWNER_CONFIRMED_PRIVATE_REPORTS_IN_BOTH_ENVIRONMENTS_AND_RECONCILE_ACTUAL_PAGES_PROJECT",
         "wranglerSha256": "9bbac8328774c55dbc2a9149aa36ca32a9cff6e1e05007e332d7b26c52c8920e"
+      },
+      {
+        "authorization": "OWNER_EXPLICIT_PREVIEW_AUTH0_PUBLIC_VARS_2026_09_23",
+        "change": "PREVIEW_ONLY_OWNER_SUPPLIED_PUBLIC_AUTH0_VARIABLES",
+        "wranglerSha256": "a13c44cb43f931dfde16cbc9eaa739abc281724227534b0f9bdaed55875446c5"
       }
     ],
     "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts. The 2026-09-22 owner request authorizes exact private report bucket bindings, actual Pages project name reconciliation, and explicit manuscript retrieval disablement in isolated Preview.",
-    "wranglerSha256": "9bbac8328774c55dbc2a9149aa36ca32a9cff6e1e05007e332d7b26c52c8920e",
+    "wranglerSha256": "a13c44cb43f931dfde16cbc9eaa739abc281724227534b0f9bdaed55875446c5",
     "currentAuthorization": {
-      "basis": "USER_EXPLICIT_FW_PREVIEW_CHECKPOINT_2026_09_22",
-      "baselineCommit": "c50d336b",
-      "evidence": "docs/financial-will-successor-r1/fw-production/PREVIEW-CHECKPOINT.md"
+      "basis": "OWNER_EXPLICIT_PREVIEW_AUTH0_PUBLIC_VARS_2026_09_23",
+      "baselineCommit": "30f60ae6ff1353cbeaec23c0039e3a795437d507",
+      "evidence": "docs/financial-will-successor-r1/fw-production/PREVIEW-AUTH-RECONCILIATION.md"
     }
   },
   "allowedDelta": {
@@ -66,7 +71,8 @@
       "secretValuesCommitted": false
     },
     "pagesProjectName": "phios-github",
-    "previewManuscriptsEnabled": false
+    "previewManuscriptsEnabled": false,
+    "previewAuth0PublicVars": "https://qa.phios-github.pages.dev/api/auth/callback"
   },
   "preserved": {
     "m3cEntryArtifacts": true,
