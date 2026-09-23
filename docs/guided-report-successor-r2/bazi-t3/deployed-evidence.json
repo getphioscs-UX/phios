@@ -14,5 +14,63 @@
   "authenticatedRefresh": true,
   "providerLogoutReturn": false,
   "providerLogoutReason": "QA client still rejects exact https://qa.phios-github.pages.dev/account/ as an Allowed Logout URL",
-  "productionTouched": false
+  "productionTouched": false,
+  "latestProbeDeployment": {
+    "commit": "4ca07b4e",
+    "url": "https://b72d8d8b.phios-github.pages.dev",
+    "observedAt": "2026-09-23T02:12:51.302Z",
+    "realProviderResults": [
+      {
+        "locale": "en",
+        "sectionKey": "S02_PERSONALITY",
+        "status": "FALLBACK",
+        "reason": "REPAIR_EXHAUSTED",
+        "evidenceHash": "b54339d2ee5f143666f4d21645ebd7db9fb425f284dc7d74518a503901278327",
+        "generatedAt": "2026-09-23T02:09:26.177Z",
+        "latencyMs": 125467,
+        "attempts": 2,
+        "privateR2Retrieved": true
+      },
+      {
+        "locale": "zh-Hans",
+        "sectionKey": "S02_PERSONALITY",
+        "status": "FALLBACK",
+        "reason": "SEMANTIC_REJECTED",
+        "evidenceHash": "672e4a26fd6b6cdc7c95013db811f7496349081e8080d44ddb2f58b555df8149",
+        "generatedAt": "2026-09-23T02:09:38.424Z",
+        "latencyMs": 74129,
+        "attempts": 1,
+        "privateR2Retrieved": true
+      }
+    ]
+  },
+  "currentAcceptance": {
+    "liveMatrixComplete": false,
+    "acceptedT3Sections": 0,
+    "bilingualParity": "BLOCKED_NO_ACCEPTED_PAIR",
+    "humanAccepted": false,
+    "productionActivated": false
+  },
+  "verification": {
+    "targeted": "PASS",
+    "pagesBuild": "PASS",
+    "browser": {
+      "status": "PASS",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "viewports": [
+        1440,
+        390
+      ],
+      "content": "T2_FALLBACK"
+    },
+    "pdf": {
+      "status": "PASS",
+      "pagesPerLocale": 36,
+      "all72PagesVisuallyInspected": true,
+      "content": "T2_FALLBACK"
+    }
+  }
 }

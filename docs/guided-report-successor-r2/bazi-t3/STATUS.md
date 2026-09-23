@@ -27,6 +27,7 @@ No second method engine, report-release runtime or provider router is introduced
 - Leak/banned-prose/completeness checks, cross-section similarity, trusted release gate, and explicit SHADOW / QA / CANARY / PRODUCTION separation.
 - Preview-only, authenticated, same-origin fixed-benchmark generation. Arbitrary evidence, models and prompts are not accepted from the browser. Global D1 reservations bound generation to one attempt per fixed pack, including concurrent requests. Keys remain in Cloudflare.
 - Bilingual review HTML with T2/Candidate comparison. Unavailable T3 is labelled explicitly; fallback text is never called accepted T3.
+- Authenticated bilingual-pair verification resolves both accepted snapshots from private R2, compares every claim in both directions through the existing provider, and binds the result to both snapshot digests. A missing accepted locale returns 409 without a model call. This implementation has synthetic regression coverage; live bilingual parity remains unaccepted because no accepted pair exists.
 
 ## Current gates — not accepted
 
@@ -39,6 +40,20 @@ The attachment specifies eight T3-capable sections (S02–S09) but asks for nine
 Real Preview probe at `fd7f65b9` / `https://4f239f5a.phios-github.pages.dev`: authenticated S02 English generation reached the existing model and semantic verifier, which rejected the candidate. The result was written to sandbox PRIVATE_REPORTS; reopening returned `cacheHit:true` with the same generation timestamp and no second model call. This validates connectivity and fail-closed private persistence, not T3 narrative acceptance. The first probe exposed omitted canonical counterexample prompts; the next evidence-pack revision includes them and retains detailed verifier diagnostics privately.
 
 Remaining release evidence: successful real provider composition and semantic verification, full high/low/open/mixed/CUSTOM/NOW shadow corpus, bilingual claim/condition parity, accepted candidate browser/PDF checks, explicit per-section human decisions bound to snapshot digests, canary outcomes. No human decisions are synthesized. Current review PDFs may contain T2 fallback and cannot satisfy T3 human acceptance.
+
+### Latest real Preview checkpoint — 2026-09-23
+
+The owner-confirmed Preview OPENAI_API_KEY was used successfully through the existing route. This is no longer a credential/configuration blocker. The latest provider revision was deployed at `4ca07b4e` / `https://b72d8d8b.phios-github.pages.dev`.
+
+| Probe | Outcome | Remaining defect |
+| --- | --- | --- |
+| English S02, expanded canonical evidence (`a7e9a912`) | REPAIR_EXHAUSTED after one repair | Individual claims were supported, but the text flattened ranked themes into an equal list. |
+| English S02, explicit rank-preservation policy (`4ca07b4e`) | REPAIR_EXHAUSTED after one repair | Rank was preserved, but the candidate invented an ordered capability-development path, causal effects and an expanded counterexample; one block retained technical prose. |
+| Chinese S02, same policy | SEMANTIC_REJECTED | Unsupported developmental sequence, causal support effects and a new counterexample. |
+
+All results were retrieved from `phios-private-reports-sandbox`; no rejected narrative is admitted to customer pages. The current policy revision participates in the evidence digest, so old results cannot silently satisfy a changed contract. Further identical retries are blocked by the existing reservation; the one-repair ceiling has not been increased. The 216-check inventory is registered, but the full live matrix is **not complete**: expansion stopped at failed baseline quality. Current review/PDF content remains T2 fallback.
+
+The current bilingual 36-page PDFs were rendered and visually inspected across all 72 pages; browser checks passed at 1440 and 390, with no page overflow, duplicate dynamic folios or footer overlap. These are layout/fallback checks, not accepted-T3 evidence. Targeted composition/parity/Preview regressions and the Pages build pass. See deployed-evidence.json for deployment and full-check evidence.
 
 `node scripts/check-bazi-t3-production-gate.mjs` tests fail-closed behavior and reports all remaining gates. Add `--require-accepted` for a release-blocking exit code. `BAZI_R2_T3_ACCEPTED` and `BAZI_PRODUCTION_SUCCESSOR_ACTIVE` remain false.
 

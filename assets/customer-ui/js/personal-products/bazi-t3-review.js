@@ -15,6 +15,12 @@ const profile=document.createElement('select');profile.id='profile';profile.setA
 for(const id of new Set(shadow.matrix.map(r=>r.profileId))){const option=document.createElement('option');option.value=id;option.textContent=id;profile.append(option);}
 document.querySelector('#section').before(profile);
 const runMatrix=document.createElement('button');runMatrix.textContent='Run fixed shadow matrix';runMatrix.id='run-matrix';document.querySelector('#generate').after(runMatrix);
+const parity=document.createElement('button');parity.textContent='Verify selected bilingual pair';runMatrix.after(parity);
+parity.onclick=async()=>{
+ parity.disabled=true;const status=document.querySelector('#generation-status');status.textContent='Checking the two frozen locale snapshots…';
+ try{const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'parity',locale,sectionKey:document.querySelector('#section').value,profileId:profile.value})});status.textContent=JSON.stringify({httpStatus:response.status,...await response.json()},null,2);}
+ catch{status.textContent='Bilingual parity request failed. No acceptance recorded.';}finally{parity.disabled=false;}
+};
 runMatrix.onclick=async()=>{
  runMatrix.disabled=true;document.querySelector('#generate').disabled=true;
  const results=[],status=document.querySelector('#generation-status');

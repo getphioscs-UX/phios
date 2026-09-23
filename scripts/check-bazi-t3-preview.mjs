@@ -14,6 +14,7 @@ const env={PHIOS_ENVIRONMENT:'qa',BAZI_T3_PREVIEW_SHADOW:'enabled',PRIVATE_REPOR
 const identity={verified:true,authenticated:true,userId:'SYNTHETIC',providerId:'TEST'};
 const context=(body={},options={})=>({request:new Request(options.url||'https://qa.phios-github.pages.dev/api/qa-bazi-t3',{method:'POST',headers:{Origin:options.origin||'https://qa.phios-github.pages.dev','Content-Type':'application/json'},body:JSON.stringify(body)}),env:options.env||env,data:{symbolicAccountIdentity:options.anonymous?null:identity}});
 const input={locale:'en',sectionKey:'S02_PERSONALITY'};
+assert.equal((await onRequest(context({...input,action:'parity'}))).status,409,'no provider call before both locales have accepted snapshots');
 assert.equal((await onRequest(context(input,{anonymous:true}))).status,401);
 assert.equal((await onRequest(context(input,{url:'https://phios-github.pages.dev/api/qa-bazi-t3'}))).status,404);
 assert.equal((await onRequest(context(input,{env:{...env,PHIOS_ENVIRONMENT:'production'}}))).status,404);
