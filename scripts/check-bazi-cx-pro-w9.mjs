@@ -5,7 +5,7 @@ import {buildBaziProfessionalSurfaceModules} from '../functions/personal-profess
 import {buildBaziFullReading} from '../functions/api/bazi-full-reading.js';
 import {buildInputs,generateCampaignCases} from './lib/bazi-fp-w17-campaign.mjs';
 import {renderBaziTimingSurface,renderBaziWholeChartFirst} from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
-import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderBaziSpecialistWorkspace as renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 
 const readJson=rel=>JSON.parse(fs.readFileSync(new URL(rel,import.meta.url),'utf8'));
 const fixture=readJson('../content/professional/bzr-full-production/fixtures/bazi-da-yun-integration-fixture-v1.json');
@@ -103,3 +103,4 @@ assert.equal(acceptance.acceptance.daYunLiuNianProfessionalTimelineAuthorized,tr
 
 console.log('✓ BAZI-CX-PRO W9 Da Yun / Liu Nian professional timeline passed.');
 console.log(`  No-target Da Yun ${nt.daYunTimeline.length}/8; explicit seven-topic window ${t.currentWindow.topicTimeline.length}/7; 24-case timing regression PASS.`);
+

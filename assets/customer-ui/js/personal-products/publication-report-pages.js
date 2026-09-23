@@ -48,7 +48,8 @@ export function renderPublicationReport(snapshot){
 
 function decorativeLayers(p){
  const binding=p.visualBinding||{},urls=[[0,binding.bodyUrl],[1,binding.motifUrl],[2,p.pageFamily==='SECTION_OPENER_PAGE'?binding.url:null]].filter(([,url])=>url);
- return `<div class="pub-decoration" aria-hidden="true">${urls.map(([i,url])=>`<img data-decorative-layer="${i}" ${i===2?`data-fallback-sources="${esc(JSON.stringify(binding.candidates||[]))}"`:''} src="${esc(url)}" alt="">`).join('')}</div>`;
+ const intensity=binding.intensityByFamily?.[p.pageFamily]??.17;
+ return `<div class="pub-decoration" aria-hidden="true">${urls.map(([i,url])=>`<img data-decorative-layer="${i}" style="opacity:${i===1?.16:i===0&&p.pageFamily==='SECTION_OPENER_PAGE'?.22:intensity}" ${i===2?`data-fallback-sources="${esc(JSON.stringify(binding.candidates||[]))}"`:''} src="${esc(url)}" alt="">`).join('')}</div>`;
 }
 function sectionLandscape(number){
  const n=Number(number),shift=(n%3)*45;
@@ -61,7 +62,7 @@ function renderSectionFamily(p,{locale,totalPages,skin,t}){
  const timing=p.temporal?`<dl class="pub-time"><div><dt>${t('Observation time','观察时间')}</dt><dd>${esc(p.temporal.date)}<small>${esc(p.temporal.localTime||'')} · ${esc(p.temporal.timezone)}</small></dd></div><div><dt>${t('Luck cycle','大运')}</dt><dd>${esc(p.temporal.selectedLuck||t('Outside resolved range','超出已解析范围'))}</dd></div><div><dt>${t('Year pillar','流年')}</dt><dd>${esc(p.temporal.annual||t('Not admitted','未获准'))}</dd></div></dl>`:'';
  const items=p.items?.length?`<ol class="pub-insights">${p.items.map((s,i)=>`<li><span aria-hidden="true">${String(i+1).padStart(2,'0')}</span><p>${esc(s)}</p></li>`).join('')}</ol>`:'';
  const facts=p.facts?.length?`<div class="pub-facts">${p.facts.map(f=>`<div><b>${esc(f.value)}</b><span>${esc(f.label)}</span></div>`).join('')}</div>`:'';
- const observations=p.observations?.length?`<aside class="pub-reflection"><h3>${t('Questions for this period','这一阶段的观察问题')}</h3>${p.observations.map(s=>`<p>${esc(s)}</p>`).join('')}</aside>`:'';
+ const observations=p.observations?.length?`<aside class="pub-reflection"><h3>${p.sectionKey==='S08_TIMING'?t('Questions for this period','这一阶段的观察问题'):t('Questions to consider','观察问题')}</h3>${p.observations.map(s=>`<p>${esc(s)}</p>`).join('')}</aside>`:'';
  return `<section class="pub-page pub-family" data-page-number="${p.pageNumber}" data-page-key="${esc(p.pageKey)}" data-page-family="${esc(p.pageFamily)}" data-section="${esc(p.sectionKey)}" data-hero-placement="${variant}" data-body-variant="BODY_${['A','B','C'][(p.pageNumber-7)%3]}" data-text-fit="STANDARD">${decorativeLayers(p)}${opener?sectionLandscape(p.sectionNumber):motif(skin.motif)}${header}${heading}${p.primaryVisualHtml?`<figure class="pub-visual">${p.primaryVisualHtml}</figure>`:''}${timing}${facts}<div class="pub-narrative">${p.paragraphs.map(s=>`<p>${esc(s)}</p>`).join('')}</div>${items}${observations}${p.boundary?`<p class="pub-boundary">${esc(p.boundary)}</p>`:''}<footer class="pub-footer"><span>${t('Your life, in context.','在情境中理解你的人生。')}</span>${renderGlobalReportPagination(p.pageNumber,totalPages)}</footer></section>`;
 }
 

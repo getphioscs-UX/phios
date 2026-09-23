@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {attachBaziPublicationAccess} from '../functions/personal-reading/bazi-customer-publication.js';
+import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
+import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {buildBaziPublicationVisual} from '../functions/canonical-presentation-runtime/bazi-publication-visuals.js';
+import {visualModules} from '../functions/canonical-presentation-runtime/report-section-config.generated.js';
+globalThis.document={documentElement:{lang:'en'}};
+const read=p=>JSON.parse(fs.readFileSync(p)),{reading}=read('docs/guided-report-successor-r2/bazi-source.json');
+const original=JSON.stringify(reading),product=adaptBaziPersonalRealityProduct({report:reading,locale:'en'}),other={methodId:'AST',preserved:true};
+const view={methodNativeReading:{BZR:reading,AST:other},singleMethodReading:{secret:'full'},structure:{methods:[{publicMethodCode:'BAZI',projectionId:'bzr',privateDetail:true},{publicMethodCode:'AST',projectionId:'ast'}]},patterns:{items:[{projectionId:'bzr',privateDetail:true},{projectionId:'ast'}]},productRoute:{mode:'SINGLE_METHOD',methodId:'BZR',primaryProduct:product,products:[product]},reading:{methods:[{methodId:'BZR',secret:'full'},other]}};
+const ctx={env:{PHIOS_ENVIRONMENT:'qa'},data:{},request:new Request('https://qa.phios-github.pages.dev/api/customer-personal-reality',{method:'POST',body:JSON.stringify({paid:true,entitlementKey:'report:bazi:full',customerId:'attacker'})})};
+let queries=0;const free=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async()=>{queries++;return {entitlement_status:'active'}}});assert.equal(queries,0);
+const p=free.productRoute.primaryProduct;assert.equal(p.reportAccess.state,'FREE_REPORT_PREVIEW');assert(!p.sourceProduct);assert(!free.methodNativeReading.BZR);assert.equal(free.singleMethodReading,null);assert.deepEqual(free.methodNativeReading.AST,other);assert.deepEqual(free.reading.methods,[other]);assert.equal(free.structure.methods.length,1);assert.equal(free.patterns.items.length,1);
+const freeHtml=renderBaziProduct({product:p}).readingHtml;assert(!freeHtml.includes('cx-bazi-w12-workspace'));assert(freeHtml.includes('PAID_LOCKED'));assert(freeHtml.includes('COM-REPORT-BAZI-FULL'));assert.match(freeHtml,/RM\s*39/);
+for(const key of ['FOUR_PILLARS','FIVE_ELEMENTS','TEN_GOD_OVERVIEW','TEN_GOD_FUNCTION_GROUPS'])assert(freeHtml.includes(`data-publication-visual="${key}"`),key);
+for(const key of ['TEN_GOD_DETAILS','DAY_MASTER_CARRYING','PATTERN_PATHS','PROFESSIONAL_TOPICS'])assert(!freeHtml.includes(`data-publication-visual="${key}"`));
+assert(!renderBaziProduct({product}).readingHtml.includes('cx-bazi-w12-workspace'),'missing access envelope must fail closed');
+const identity={userId:'account-a',providerId:'auth0',verified:true,authenticated:true};ctx.data.symbolicAccountIdentity=identity;
+for(const row of [null,{entitlement_status:'refunded',purchase_id:'p'},{entitlement_status:'active',purchase_id:'p',reportPresentation:{reportLanguageMode:'SINGLE',reportLocale:'zh-Hans'}}]){const denied=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async(_env,id,sku)=>{assert.equal(id,'account-a');assert.equal(sku,'COM-REPORT-BAZI-FULL');return row;}});assert.equal(denied.productRoute.primaryProduct.reportAccess.verifiedPurchase,false);}
+const purchased={entitlement_status:'active',purchase_id:'verified-payment',reportPresentation:{reportLanguageMode:'SINGLE',reportLocale:'en'}};
+const paid=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async()=>purchased});assert.equal(paid.productRoute.primaryProduct.reportAccess.state,'FULL_REPORT');
+const full=paid.productRoute.primaryProduct.publicationReport,html=renderPublicationReport(full);assert(full.totalPages>36);assert.equal(full.totalPages,full.pages.length+6);
+for(const module of visualModules.modules){assert.equal(module.publicationCreatesMeaning,false);assert(module.sourceRefs.length);assert(html.includes(`data-publication-visual="${module.key}"`),module.key);}
+assert(html.includes('VIS-REPORT-BAZI-BODY.webp'));assert(html.includes('VIS-REPORT-BAZI-MOTIF.svg'));assert(html.includes('VIS-REPORT-BAZI-MOTIF-2.svg'));assert(html.includes('opacity:0.22'));assert(html.includes('opacity:0.17'));assert(html.includes('opacity:0.12'));assert(html.includes('opacity:0.4'));
+for(const color of ['#3aa878','#e66d52','#c79b52','#9a9da3','#438fc4','#c87949','#f0aa2f','#3c8fd0','#48c094','#e26d71'])assert(html.includes(color),color);
+const prod=await attachBaziPublicationAccess(view,{...ctx,env:{PHIOS_ENVIRONMENT:'production'}},{loadEntitlement:async()=>purchased});assert.equal(prod.productRoute.primaryProduct.reportAccess.reason,'FULL_REPORT_RELEASE_PENDING');assert(!prod.productRoute.primaryProduct.sourceProduct);
+assert.equal(JSON.stringify(reading),original,'publication must not mutate native semantics');
+assert.throws(()=>buildBaziPublicationVisual({reading,primaryVisualRef:'UNKNOWN'}));
+const store=fs.readFileSync('functions/commerce/book-commerce-store.js','utf8');assert.match(store,/p.purchase_state='purchased'/);assert.match(store,/o.customer_id=e.customer_id/);assert.match(store,/expires_at>\?3/);
+console.log('PASS: free payload excludes specialist detail; forged client payment cannot unlock; existing owned purchase + language + expiry boundaries; full visual registry, category colours, BODY and both motifs; Production release remains closed.');

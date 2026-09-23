@@ -18,10 +18,11 @@ export function splitSemanticBlocks(blocks,{locale,maxUnits}){
  if(current.length)pages.push(current);return pages;
 }
 export function bindSectionVisual(sectionKey,{assets=visualAssets}={}){
- const assetKey=assets.sections[sectionKey],hero=assets.bindings[assetKey],style=assets.bindings[assets.global.sectionStyle],bodyUrl=assets.bindings[assets.global.bodyBackground]||null,motifUrl=assets.bindings[assets.global.motifLayer]||null,url=hero||style||bodyUrl;
+ const sectionNumber=Number(sectionKey.match(/^S(\d+)/)?.[1]||1),motifKey=assets.global.motifs?.[(sectionNumber-1)%2]||assets.global.motifLayer;
+ const assetKey=assets.sections[sectionKey],hero=assets.bindings[assetKey],style=assets.bindings[assets.global.sectionStyle],bodyUrl=assets.bindings[assets.global.bodyBackground]||null,motifUrl=assets.bindings[motifKey]||null,url=hero||style||bodyUrl;
  // Only explicit registry bindings become images; symbolic asset IDs never do.
  for(const v of [hero,style,bodyUrl,motifUrl].filter(Boolean))if(!/^https:\/\//.test(v)&&!/^\/assets\//.test(v))throw Error('SECTION_VISUAL_URL_INVALID');
- return {assetKey,url:url||null,bodyUrl,motifUrl,candidates:[hero,style,bodyUrl].filter(Boolean),fallback:assets.fallback,selected:hero?'SECTION_HERO':style?'SECTION_STYLE':bodyUrl?(motifUrl?'BODY_WITH_MOTIF':'BODY'):'CSS_PREMIUM',motif:'LANDSCAPE_RINGS'};
+ return {assetKey,url:url||null,bodyUrl,motifUrl,motifKey,intensityByFamily:assets.intensityByFamily||{},candidates:[hero,style,bodyUrl].filter(Boolean),fallback:assets.fallback,selected:hero?'SECTION_HERO':style?'SECTION_STYLE':bodyUrl?(motifUrl?'BODY_WITH_MOTIF':'BODY'):'CSS_PREMIUM',motif:'LANDSCAPE_RINGS'};
 }
 export function validateExpandedSections(pages,plan=registry){
  let cursor=0;

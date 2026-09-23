@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {renderBaziDayMasterStrengthSurface,renderBaziFiveElementSurface,renderBaziWholeChartFirst} from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
-import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderBaziSpecialistWorkspace as renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 
 const fixture=JSON.parse(fs.readFileSync(new URL('../content/professional/bzr-full-production/fixtures/bazi-da-yun-integration-fixture-v1.json',import.meta.url),'utf8'));
 const product=await buildBaziMethodNativeReading({canonicalProjection:fixture,locale:'zh-Hans'});
@@ -81,3 +81,4 @@ assert.equal(acceptance.acceptance.dayMasterStrengthProfessionalCompositionAutho
 
 console.log('✓ BAZI-CX-PRO W3/W4 passed.');
 console.log(`  Product ${product.productVersion}; ten-god touches ${modules.tenGods.totalTouches}; carrying tendency ${modules.dayMasterStrength.carriers.overallTendency}.`);
+

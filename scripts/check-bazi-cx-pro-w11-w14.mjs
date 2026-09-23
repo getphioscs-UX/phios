@@ -10,7 +10,7 @@ import {
  renderBaziRealityBridgeSummarySurface,
  renderBaziCustomerSafeStructureGraph
 } from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
-import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderBaziSpecialistWorkspace as renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 
 const readJson=rel=>JSON.parse(fs.readFileSync(new URL(rel,import.meta.url),'utf8'));
 const readText=rel=>fs.readFileSync(new URL(rel,import.meta.url),'utf8');
@@ -195,3 +195,4 @@ console.log(`  W11: ${bridge.summary.totalPromptCount} no-target prompts, exact 
 console.log('  W12: customer main reading is interpretation-first; school/source/open technical detail is on-demand in Sources & Technical.');
 console.log('  W13: 24/24 human accepted under the six-dimension gate; numeric scores were not fabricated.');
 console.log('  W14: market-grade professional reading is ACTIVE_FROZEN; governance is not the customer default and Sources & Technical remains on-demand.');
+

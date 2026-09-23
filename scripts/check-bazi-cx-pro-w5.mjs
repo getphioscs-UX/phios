@@ -5,7 +5,7 @@ import {buildBaziProfessionalSurfaceModules} from '../functions/personal-profess
 import {buildBaziFullReading} from '../functions/api/bazi-full-reading.js';
 import {buildInputs,generateCampaignCases} from './lib/bazi-fp-w17-campaign.mjs';
 import {renderBaziRelationshipInteractionSurface,renderBaziWholeChartFirst} from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
-import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderBaziSpecialistWorkspace as renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 
 const readJson=url=>JSON.parse(fs.readFileSync(new URL(url,import.meta.url),'utf8'));
 const fixture=readJson('../content/professional/bzr-full-production/fixtures/bazi-da-yun-integration-fixture-v1.json');
@@ -75,3 +75,4 @@ assert.equal(acceptance.acceptance.relationshipPillarInteractionProfessionalComp
 
 console.log('✓ BAZI-CX-PRO W5 Relationship / Pillar Interaction Professional Composition passed.');
 console.log(`  Fixture: ${rel.items[0].type} ${rel.items[0].positions.join('↔')} · ${rel.items[0].positionThemeCode}; synthetic relationship coverage ${expectedTypes.length}/${expectedTypes.length}.`);
+

@@ -17,6 +17,7 @@ import {consumeConfirmedBirthLocationSnapshot} from '../location/confirmed-birth
 import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production/ziwei-full-production-customer-runtime.js';
 import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
 import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
+import {attachBaziPublicationAccess} from '../personal-reading/bazi-customer-publication.js';
 import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-reading-production.js';
 import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignContextProfile} from '../external-profile/human-design-context-transport.js';
 import {buildEcrHumanDesignComparisonIR} from '../external-profile/ecr-human-design-comparison-ir.js';
@@ -411,7 +412,7 @@ export async function onRequestPost(context){
   const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,currentReality,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge,ecrTargetContext:ecrTargetContextSnapshot,hdrTransitOverlay,hdrTargetActivationReference:hdrTransitOverlay});
   return json({
     ok:true,
-    view,
+    view:await attachBaziPublicationAccess(view,context),
     location:location?{state:'CONFIRMED',displayName:location.displayName,locality:location.locality,region:location.region,country:location.country,timeZone:location.timezone.iana}:null,
     privacy:{saved:false}
   });

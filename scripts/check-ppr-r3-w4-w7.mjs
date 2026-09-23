@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
 import {renderAstrologyProduct} from '../assets/customer-ui/js/specialists/ast/product-renderer.js';
-import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderBaziSpecialistWorkspace as renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 import {renderNumerologyProduct} from '../assets/customer-ui/js/specialists/num/product-renderer.js';
 import {renderZiweiProduct} from '../assets/customer-ui/js/specialists/ziwei/product-renderer.js';
 import {renderEcrProduct} from '../assets/customer-ui/js/specialists/ecr/product-renderer.js';
@@ -26,3 +26,4 @@ const zwrProduct={methodId:'ZWR',productType:'ZIWEI_FULL_PRODUCTION',locale:'zh-
 const ecrProduct={methodId:'ECR',productType:'PHI_CONFIGURATION_READING',hero:{title:'PHI 构型'},sections:[{sectionId:'CORE',title:'核心',payload:['正文']}],visuals:[{type:'ECR_SIX_CARD_SPREAD',title:'六张视觉摘要',payload:{cards:[]}}]};const ecrPlan=renderEcrProduct({product:ecrProduct});assert.equal(ecrPlan.status,'RENDERED');assert.match(ecrPlan.readingHtml,/cx-ecr-specialist-reading/);
 await new Promise(resolve=>setTimeout(resolve,0));
 console.log('✓ PPR-R3 W4–W7 passed: method-owned navigation/visual slots exist, all five methods use the shared specialist lifecycle, failures remain bounded, and responsive behavior stays host-only.');
+

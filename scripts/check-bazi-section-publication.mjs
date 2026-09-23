@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {BAZI_SECTION_REGISTRY as plan,REPORT_PAGE_FAMILIES as families,BAZI_SECTION_VISUAL_ASSETS as assets,validateSectionRegistry,validateExpandedSections,bindSectionVisual,splitSemanticBlocks,textUnits} from '../functions/canonical-presentation-runtime/report-section-contract.js';
 import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
 import {renderVisualReportPages} from '../assets/customer-ui/js/personal-products/visual-report-pages.js';
-const root='docs/guided-report-successor-r2/addendum-b',read=p=>JSON.parse(fs.readFileSync(p));
+const root='docs/guided-report-successor-r2/visual-commerce',read=p=>JSON.parse(fs.readFileSync(p));
 const reports=['zh-Hans','en'].map(l=>read(`${root}/bazi-${l}.json`));
 validateSectionRegistry();
 for(const [name,data] of [['bazi-section-registry',plan],['report-page-families',{version:'2.1.0',families}],['bazi-visual-assets',assets]])assert.deepEqual(data,read(`config/reports/${name}.json`),'generated config must match canonical JSON');
@@ -30,12 +30,12 @@ for(const report of reports){
  assert.equal(new Set(report.pages.map(p=>p.pageFamily)).size,7);
  for(const p of report.pages){
   const budget=families[p.pageFamily].budget,range=budget[report.locale==='en'?'en':'zh'];
-  if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert(units>=range[0]&&units<=range[1],`CONTENT_BUDGET:${p.pageKey}:${units}`);}
+  if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert((p.primaryVisualRef||units>=range[0])&&units<=range[1],`CONTENT_BUDGET:${p.pageKey}:${units}`);}
   if(p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'){const units=textUnits(p.paragraphs.join(' '),report.locale);assert(units>=range[0],`THIN_NARRATIVE:${p.pageKey}`);}
   if(p.pageFamily==='INSIGHT_LIST_PAGE'){assert(p.items.length>=3&&p.items.length<=6);const range=budget[report.locale==='en'?'enItem':'zhItem'];for(const item of p.items){const units=textUnits(item,report.locale);assert(units>=range[0]&&units<=range[1],`${p.pageKey}:${units}`);}}
   if(p.pageFamily==='TIMING_PAGE'){assert(p.temporal.date&&p.temporal.annual&&p.temporal.selectedLuck);assert(p.observations.length>=2&&p.observations.length<=4);}
  }
- const internal=read(`${root}/bazi-${report.locale}-internal.json`);assert.equal(internal.internalPages.length,10);
+ const liveSource=read('docs/guided-report-successor-r2/bazi-source.json');const built=await projectBaziSectionPublication({reading:liveSource.reading,locale:report.locale,temporalContext:liveSource.temporalSnapshot});const internal={internalPages:built.internalSections};assert.equal(internal.internalPages.length,10);
  for(const s of internal.internalPages){assert(s.sectionComposition.pageBlocks.length>=1);assert.equal(s.sectionComposition.sectionKey,s.sectionKey);assert.equal(s.interpretation.topic,s.sectionKey);assert.equal(s.composition.executionClass,'T2_LIGHT_COMPOSITION');}
 }
 assert.deepEqual(reports[0].pages.map(p=>[p.pageKey,p.pageFamily,p.pageNumber]),reports[1].pages.map(p=>[p.pageKey,p.pageFamily,p.pageNumber]));

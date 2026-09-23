@@ -4,7 +4,7 @@ import {buildBaziMethodNativeReading} from '../functions/personal-professional-r
 import {buildBaziProfessionalSurfaceModules} from '../functions/personal-professional-reading/bazi-professional-surface-projection.js';
 import {buildBaziFullReading} from '../functions/api/bazi-full-reading.js';
 import {renderBaziPatternSurface} from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
-import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderBaziSpecialistWorkspace as renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 import {generateCampaignCases,buildInputs} from './lib/bazi-fp-w17-campaign.mjs';
 
 const readJson=rel=>JSON.parse(fs.readFileSync(new URL(rel,import.meta.url),'utf8'));
@@ -120,3 +120,4 @@ assert.equal(acceptance.acceptance.patternProfessionalReadingAuthorized,true);
 
 console.log('✓ BAZI-CX-PRO W6 Pattern Professional Reading passed.');
 console.log(`  Fixture 3/3 candidates composed; source-admitted framework verified; synthetic family coverage ${seen.size}/7 in ${casesUsed} cases.`);
+

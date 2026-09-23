@@ -1,4 +1,5 @@
 import {projectBaziPublicationPages} from './bazi-visual-report-projection.js';
+import {buildBaziPublicationVisual} from '../canonical-presentation-runtime/bazi-publication-visuals.js';
 import {compilePublicationInterpretation} from './narrative/narrative-brief-compiler.js';
 import {composePublicationNarrative,humanizePublicationStatement} from './narrative/narrative-writer.js';
 import {BAZI_SECTION_EDITORIAL} from './bazi-section-editorial.js';
@@ -55,6 +56,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const definitions=section.pages.slice(1).filter(p=>!p.optional||p.dataModules.every(k=>modules[k]));
   const pageBlocks=[];
   for(const def of definitions){
+   if(def.primaryVisualRef){
+    const count=def.primaryVisualRef==='BZR-VIS-TEN-GOD-DETAILS'?reading.professionalModules.tenGods.items.length:1;
+    for(let offset=0;offset<count;offset+=5){const visual=buildBaziPublicationVisual({reading,primaryVisualRef:def.primaryVisualRef,locale,topicCode:def.visualTopic,offset});
+     pageBlocks.push({definitionKey:def.key,visualContinuation:offset?`_CONT_${offset/5+1}`:'',pageFamily:def.family,title:def.title[locale],contentBlocks:def.primaryVisualRef==='BZR-VIS-FOUR-PILLARS'?modules.baziChart.blocks:[],items:[],sourcePages:[],facts:[],observations:[],boundary:visual.boundary,primaryVisualRef:visual.primaryVisualRef,primaryVisualHtml:visual.primaryVisualHtml});
+    }continue;
+   }
    const selected=def.dataModules.map(k=>modules[k]).filter(Boolean),blocks=selected.flatMap(m=>m.blocks||[]),items=selected.flatMap(m=>m.items||[]);
    if(def.omitWhenInsufficient&&(!selected.length||def.family==='INSIGHT_LIST_PAGE'&&items.length<3))continue;
    if(!selected.length)throw Error(`SECTION_REQUIRED_MODULE_MISSING:${def.key}`);
@@ -62,7 +69,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   }
   const sectionObject={sectionKey:section.key,title:section.title,openerIntro:editorial.intro[locale],keyThemes:pageBlocks.map(p=>p.title),pageBlocks,boundaryNotes:pageBlocks.map(p=>p.boundary).filter(Boolean),practicalObservations:pageBlocks.flatMap(p=>p.observations),temporalContext};
   const narrative=pageBlocks.find(p=>p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'||p.pageFamily==='SUMMARY_PAGE');
-  const allowed=(narrative||pageBlocks[0]).contentBlocks;
+  const allowed=(narrative||pageBlocks.find(p=>p.contentBlocks.length)||pageBlocks[0]).contentBlocks;
   const interpretation=await compilePublicationInterpretation({methodId:'BZR',page:{...sourcePage,pageId:section.key,evidenceRefs:[...new Set(sourceNumbers.flatMap(n=>internal(n).evidence))]},temporalContext,allowedStatements:allowed.map(b=>({text:b.text,sourceRef:b.sourceRef})),conditions:sectionObject.boundaryNotes,realityQuestions:sectionObject.practicalObservations});
   const composed=await composePublicationNarrative({interpretation,locale,executionClass:narrative?'T3_DEEP_COMPOSITION':'T2_LIGHT_COMPOSITION',...composition,...(composition.t3?{providerAdapters:{}}:{}),sectionComposition:sectionObject});
   if(narrative&&composed.internalOnly.evidenceAdmission==='SEMANTIC_VERIFIER_ACCEPTED'){
@@ -103,7 +110,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     const secondaryBlocks=[...n.supportingConditions,...n.tensionConditions];
     if(!secondary)main.push(...secondaryBlocks);
     const maximum=REPORT_PAGE_FAMILIES[target.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
-    // Preserve the frozen 36-page framework; too much text returns the whole
+    // Preserve registered page families; too much text returns the whole
     // section to T2 rather than silently deleting claims or conditions.
     const listRange=REPORT_PAGE_FAMILIES.INSIGHT_LIST_PAGE.budget[locale==='en'?'enItem':'zhItem'];
     const listFits=secondary?.pageFamily!=='INSIGHT_LIST_PAGE'||(secondaryBlocks.length<=6&&secondaryBlocks.every(b=>textUnits(b.text,locale)<=listRange[1]));
@@ -112,7 +119,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      target.items=[];
      if(secondary?.pageFamily==='INSIGHT_LIST_PAGE')secondary.items=secondaryBlocks.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
      else if(secondary)secondary.contentBlocks=secondaryBlocks.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
-     for(const pb of pageBlocks){pb.boundary='';pb.observations=[];}
+     for(const pb of pageBlocks){if(!pb.primaryVisualRef)pb.boundary='';pb.observations=[];}
      pageBlocks.at(-1).observations=[...n.observationPrompt,...n.counterSignals,...n.realityCheck].map(b=>b.text);
      pageBlocks.at(-1).boundary=n.boundaryNote.text;
     }else t3={...t3,status:'FALLBACK',internalOnly:{...t3.internalOnly,fallbackState:'T3_FALLBACK_USED',fallbackReason:'COMPOSITION_BUDGET_REJECTED'}};
@@ -127,7 +134,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits});
    if(!chunks.length)chunks.push([]);
-   for(const [i,chunk] of chunks.entries())pages.push({...base,pageKey:pb.definitionKey+(i?`_CONT_${i+1}`:''),definitionKey:pb.definitionKey,pageFamily:pb.pageFamily,title:pb.title+(i?pick(' · continued',' · 续'):''),paragraphs:chunk.map(b=>b.text),facts:i?[]:pb.facts,sourcePages:i?[]:pb.sourcePages,items:i?[]:pb.items.map(b=>b.text),temporal:pb.temporal,observations:i?[]:pb.observations,boundary:i===chunks.length-1?pb.boundary:'',visualVariant:'BODY',contentBudget:{units:chunk.reduce((sum,b)=>sum+textUnits(b.text,locale),0),maximum:maxUnits}});
+   for(const [i,chunk] of chunks.entries())pages.push({...base,pageKey:pb.definitionKey+(pb.visualContinuation||'')+(i?`_CONT_${i+1}`:''),definitionKey:pb.definitionKey,pageFamily:pb.pageFamily,title:pb.title+(i||pb.visualContinuation?pick(' · continued',' · 续'):''),paragraphs:chunk.map(b=>b.text),facts:i?[]:pb.facts,sourcePages:i?[]:pb.sourcePages,primaryVisualRef:pb.primaryVisualRef||null,primaryVisualHtml:i?null:pb.primaryVisualHtml||null,items:i?[]:pb.items.map(b=>b.text),temporal:pb.temporal,observations:i?[]:pb.observations,boundary:i===chunks.length-1?pb.boundary:'',visualVariant:'BODY',contentBudget:{units:chunk.reduce((sum,b)=>sum+textUnits(b.text,locale),0),maximum:maxUnits}});
   }
   sections.push({key:section.key,title:section.title});
  }

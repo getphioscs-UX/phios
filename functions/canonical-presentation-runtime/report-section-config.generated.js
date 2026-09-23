@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_ADDENDUM_B",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_VISUAL_COMMERCE_R1",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -72,17 +72,29 @@ export const registry = {
           }
         },
         {
-          "key": "S01_P2",
+          "key": "S01_OVERVIEW_FOUR_PILLARS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T0_T1_T2",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
           "dataModules": [
-            "baziChart",
-            "dayMaster",
-            "fiveElements"
+            "visual:FOUR_PILLARS"
           ],
+          "primaryVisualRef": "BZR-VIS-FOUR-PILLARS",
           "title": {
-            "zh-Hans": "你的八字命盘",
-            "en": "Your BaZi Chart"
+            "en": "Four Pillars",
+            "zh-Hans": "四柱命盘"
+          }
+        },
+        {
+          "key": "S01_OVERVIEW_FIVE_ELEMENTS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:FIVE_ELEMENTS"
+          ],
+          "primaryVisualRef": "BZR-VIS-FIVE-ELEMENTS",
+          "title": {
+            "en": "Five Elements · Structure & Season",
+            "zh-Hans": "五行 · 结构与季节"
           }
         },
         {
@@ -120,6 +132,19 @@ export const registry = {
           "title": {
             "zh-Hans": "核心性格",
             "en": "Core Personality"
+          }
+        },
+        {
+          "key": "S02_PERSONALITY_TEN_GOD_OVERVIEW",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:TEN_GOD_OVERVIEW"
+          ],
+          "primaryVisualRef": "BZR-VIS-TEN-GOD-OVERVIEW",
+          "title": {
+            "en": "Ten Gods · Composition",
+            "zh-Hans": "十神 · 结构占比"
           }
         },
         {
@@ -174,16 +199,68 @@ export const registry = {
           }
         },
         {
-          "key": "S03_P2",
+          "key": "S03_LIFE_STRUCTURE_DAY_MASTER_CARRYING",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T0_T1_T2",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
           "dataModules": [
-            "chartStructure",
-            "usefulElements"
+            "visual:DAY_MASTER_CARRYING"
           ],
+          "primaryVisualRef": "BZR-VIS-DAY-MASTER-CARRYING",
           "title": {
-            "zh-Hans": "命格与格局",
-            "en": "Chart Structure"
+            "en": "Day Master · Carrying Conditions",
+            "zh-Hans": "日主 · 承载条件"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_TEN_GOD_FUNCTION_GROUPS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:TEN_GOD_FUNCTION_GROUPS"
+          ],
+          "primaryVisualRef": "BZR-VIS-TEN-GOD-FUNCTION-GROUPS",
+          "title": {
+            "en": "Five Functional Groups",
+            "zh-Hans": "五类功能组"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_TEN_GOD_DETAILS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:TEN_GOD_DETAILS"
+          ],
+          "primaryVisualRef": "BZR-VIS-TEN-GOD-DETAILS",
+          "title": {
+            "en": "Ten Gods · Sources & Repetition",
+            "zh-Hans": "十神 · 来源与重复"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_PATTERN_PATHS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:PATTERN_PATHS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PATTERN-PATHS",
+          "title": {
+            "en": "Pattern Paths & Open Conditions",
+            "zh-Hans": "格局路径与未定条件"
+          }
+        },
+        {
+          "key": "S03_LIFE_STRUCTURE_PILLAR_RELATIONSHIPS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:PILLAR_RELATIONSHIPS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PILLAR-RELATIONSHIPS",
+          "title": {
+            "en": "Relationships between Pillars",
+            "zh-Hans": "柱位之间的关系"
           }
         },
         {
@@ -221,6 +298,20 @@ export const registry = {
           "title": {
             "zh-Hans": "事业发展",
             "en": "Career Development"
+          }
+        },
+        {
+          "key": "S04_CAREER_PROFESSIONAL_TOPICS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:PROFESSIONAL_TOPICS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PROFESSIONAL-TOPICS",
+          "visualTopic": "CAREER",
+          "title": {
+            "en": "Career · Structural Context",
+            "zh-Hans": "事业 · 结构背景"
           }
         },
         {
@@ -287,6 +378,20 @@ export const registry = {
           }
         },
         {
+          "key": "S05_WEALTH_PROFESSIONAL_TOPICS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:PROFESSIONAL_TOPICS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PROFESSIONAL-TOPICS",
+          "visualTopic": "WEALTH",
+          "title": {
+            "en": "Wealth · Structural Context",
+            "zh-Hans": "财富 · 结构背景"
+          }
+        },
+        {
           "key": "S05_P2",
           "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "T3",
@@ -333,6 +438,20 @@ export const registry = {
           "title": {
             "zh-Hans": "感情婚姻",
             "en": "Relationships & Marriage"
+          }
+        },
+        {
+          "key": "S06_RELATIONSHIP_PROFESSIONAL_TOPICS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:PROFESSIONAL_TOPICS"
+          ],
+          "primaryVisualRef": "BZR-VIS-PROFESSIONAL-TOPICS",
+          "visualTopic": "RELATIONSHIPS",
+          "title": {
+            "en": "Relationships · Structural Context",
+            "zh-Hans": "关系 · 结构背景"
           }
         },
         {
@@ -431,6 +550,19 @@ export const registry = {
           "title": {
             "zh-Hans": "时间结构",
             "en": "Timing & Cycles"
+          }
+        },
+        {
+          "key": "S08_TIMING_TIMING_LAYERS",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "dataModules": [
+            "visual:TIMING_LAYERS"
+          ],
+          "primaryVisualRef": "BZR-VIS-TIMING-LAYERS",
+          "title": {
+            "en": "Timing Layers",
+            "zh-Hans": "时间层次"
           }
         },
         {
@@ -718,7 +850,11 @@ export const visualAssets = {
   "global": {
     "bodyBackground": "VIS-REPORT-BAZI-BODY",
     "motifLayer": "VIS-REPORT-BAZI-MOTIF",
-    "sectionStyle": "VIS-REPORT-BAZI-SECTION-STYLE"
+    "sectionStyle": "VIS-REPORT-BAZI-SECTION-STYLE",
+    "motifs": [
+      "VIS-REPORT-BAZI-MOTIF",
+      "VIS-REPORT-BAZI-MOTIF-2"
+    ]
   },
   "sections": {
     "S01_OVERVIEW": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
@@ -745,7 +881,8 @@ export const visualAssets = {
     "VIS-REPORT-BAZI-SEC-07-HEALTH": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
     "VIS-REPORT-BAZI-SEC-08-TIMING": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
     "VIS-REPORT-BAZI-SEC-09-GUIDANCE": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
-    "VIS-REPORT-BAZI-SEC-10-APPENDIX": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp"
+    "VIS-REPORT-BAZI-SEC-10-APPENDIX": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
+    "VIS-REPORT-BAZI-MOTIF-2": "/assets/images/report/VIS-REPORT-BAZI-MOTIF-2.svg"
   },
   "fallback": "CSS_SECTION_STYLE_BODY_MOTIF",
   "allowEmptySlots": false,
@@ -1060,6 +1197,187 @@ export const visualAssets = {
       },
       "status": "R2_BOUND",
       "humanVisualAcceptance": "PENDING"
+    }
+  ],
+  "motifAliases": {
+    "MOTIF_1": "VIS-REPORT-BAZI-MOTIF",
+    "MOTIF_2": "VIS-REPORT-BAZI-MOTIF-2"
+  },
+  "intensityByFamily": {
+    "STRUCTURED_ANALYSIS_PAGE": 0.22,
+    "NARRATIVE_ANALYSIS_PAGE": 0.17,
+    "INSIGHT_LIST_PAGE": 0.12,
+    "SECTION_OPENER_PAGE": 0.4,
+    "TIMING_PAGE": 0.22,
+    "SUMMARY_PAGE": 0.17,
+    "METHOD_APPENDIX_PAGE": 0.17
+  }
+};
+
+export const visualModules = {
+  "version": "BAZI_PUBLICATION_VISUAL_MODULES_V1",
+  "methodId": "BZR",
+  "publicationCreatesMeaning": false,
+  "modules": [
+    {
+      "key": "FOUR_PILLARS",
+      "id": "BZR-VIS-FOUR-PILLARS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "structuralModel/pillars"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "DAY_MASTER_CARRYING",
+      "id": "BZR-VIS-DAY-MASTER-CARRYING",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/dayMasterStrength"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "FIVE_ELEMENTS",
+      "id": "BZR-VIS-FIVE-ELEMENTS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/fiveElements"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TEN_GOD_OVERVIEW",
+      "id": "BZR-VIS-TEN-GOD-OVERVIEW",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/tenGods"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TEN_GOD_FUNCTION_GROUPS",
+      "id": "BZR-VIS-TEN-GOD-FUNCTION-GROUPS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/tenGods/functionGroups"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PREVIEW",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TEN_GOD_DETAILS",
+      "id": "BZR-VIS-TEN-GOD-DETAILS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/tenGods/items"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "PATTERN_PATHS",
+      "id": "BZR-VIS-PATTERN-PATHS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/pattern"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "PILLAR_RELATIONSHIPS",
+      "id": "BZR-VIS-PILLAR-RELATIONSHIPS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/relationships"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "TIMING_LAYERS",
+      "id": "BZR-VIS-TIMING-LAYERS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/timing"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
+    },
+    {
+      "key": "PROFESSIONAL_TOPICS",
+      "id": "BZR-VIS-PROFESSIONAL-TOPICS",
+      "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+      "sourceRefs": [
+        "professionalModules/professionalTopics/topics"
+      ],
+      "allowedPageFamilies": [
+        "STRUCTURED_ANALYSIS_PAGE",
+        "TIMING_PAGE"
+      ],
+      "freeVisibility": "PAID_LOCKED",
+      "paidVisibility": "OPEN",
+      "semanticOwner": "BZR_EXISTING_PROFESSIONAL_READING",
+      "publicationCreatesMeaning": false
     }
   ]
 };

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
 import {buildPersonalRealityProductRoute} from '../functions/personal-reality-product/product-assembly.js';
-import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
+import {renderBaziSpecialistWorkspace as renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 import {renderBaziRealityComparisonSurface} from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
 import {assertPprC1CurrentSuccessor} from './lib/ppr-c1-current-successor.mjs';
 
@@ -100,3 +100,4 @@ console.log('✓ PPR-C1-W11/W12 BaZi Reality Comparison + PPR-R3 specialist Over
 console.log(`  W11: ${rc.questionCount} deduplicated semantic owners → ${rc.questionCount} chart-level primary questions; repeated support, context specificity and counter-evidence preserved.`);
 console.log('  W12: 8-section method-owned IA rendered through the committed PPR-R3 specialist port.');
 console.log(`  Historical PPR-R3 freeze snapshot retained; PPR-R4 input successor is validated as a narrow, versioned successor rather than a rollback.`);
+
