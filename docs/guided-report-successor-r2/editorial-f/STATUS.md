@@ -46,13 +46,26 @@ The existing results were reassessed offline without another model call or modif
 
 After this detector correction, targeted BaZi checks and Pages build passed (worker 16,586,688 bytes; gzip 2,544,571 bytes). The bilingual review artifact passed local 1440/390 browser checks with no overflow or page errors. The earlier full repository run passed before this focused correction; it was not repeated afterward.
 
+## S02 scope revision R1 — current candidate
+
+Owner requested continuing S02 revision from `42664add`. Runtime `1c28097d` was deployed to `https://d7eb39bc.phios-github.pages.dev` (stable QA alias unchanged).
+
+The writer and independent semantic verifier now receive the same digest-bound S02 scope distribution: general symbolic/no-observed-effect scope can be stated once; measurement caveat is retained in the lead; distinct pairs, secondary rank, simultaneous dimensions and unresolved verdicts remain local. This changes editorial placement, not method rules or inference permissions. S03–S09 briefs are unchanged. Old reservations/snapshots remain intact.
+
+Only S02 en/zh-Hans was generated again. Both real QA responses were HTTP 200 / cacheHit false / PASS. Current semantic verification and METRICS_F_V2 both pass. Technical density, number repetition and repeated clauses are zero in both locales. `s02-r1-meaning-preservation.json` verifies that the exact semantic coverage digest is unchanged from the first attempt in both languages; this is not a substitute for the later bilingual parity review.
+
+Current snapshot digests:
+
+- en: `614b4b6a9121409202bf2db76d8f17ff7291818d1b15d059905e4a4d3d3392fa`
+- zh-Hans: `01d5bece462951c478ca13f20a46f733886214d8f4a9d0e0a11d93e595c53264`
+
+The current `s02-review.html` and `s02-live-evidence.json` contain this revised pair. The first rejected pair is retained at `attempt-1/s02-live-evidence.json`. Local 1440/390 review-page checks pass with no overflow or page errors. Targeted BaZi checks and Pages build pass. The new full repository check is still running at this checkpoint.
+
 ## Remaining
 
-S02 requires human prose feedback and revision. Repeated "without establishing any real-life effect" / "不能据此认定现实作用" clauses and repeated opening/closing emphasis must be resolved without discarding substantive open conditions or inventing meaning. Existing T2 fallback retains its full qualifiers and is not marked publication-quality. No further live call has been made after the two S02 runs.
+Digest-bound owner editorial acceptance of this revised S02 pair is still required by F-W10/F-W11. The request to continue revision does not itself accept unseen replacement prose. After acceptance, S03 can run as one section; the remaining baseline sections follow in order. No S03, high/low/mixed, parity or full matrix call has been made in this revision.
 
-S03 remains blocked until both S02 locales pass current machine checks and receive digest-bound human acceptance. S04–S09 follow the same sequence. Only after all eight baseline pairs are accepted may high/low/mixed, bilingual parity, full matrix, human acceptance and canary proceed. Paid Production remains off.
-
-The separate Commerce QA checkout is unpaid, as confirmed by the owner; payment/webhook/paid customer-delivery acceptance remains pending and is not inferred from these synthetic editorial fixtures.
+Paid Production remains closed. The separate Commerce QA checkout remains unpaid as clarified by the owner; these synthetic editorial fixtures do not establish purchase or private customer-delivery acceptance.
 
 `BASELINE_S02_EDITORIAL_ACCEPTED = false`
 
