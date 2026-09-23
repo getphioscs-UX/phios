@@ -29,9 +29,30 @@ The EN narrative pages P13, P23, P26, P30 and P34 repeat percentages, functional
 
 - Full `npm.cmd run check` passed, including precheck, main checks and postcheck. Final Pages build passed: worker 16,585,811 bytes; gzip 2,544,448 bytes.
 
+## Real Preview S02 results
+
+Implementation `0f223ef6` was deployed to `https://64f7a774.phios-github.pages.dev`, alias `https://qa.phios-github.pages.dev`. ONLY BASELINE_NOW S02 was invoked in English and Simplified Chinese. Both responses were HTTP 200, cacheHit false; immutable sandbox R2 snapshots were downloaded and their evidence, snapshot and brief digests verified. English used the existing bounded repair (two attempts); Chinese used one attempt. No S03, parity or full-matrix generation was invoked.
+
+Both originally passed the semantic verifier and first editorial metrics. Codex prose review then found the same scope clause repeated inside different sentences. `BAZI_EDITORIAL_METRICS_F_V2` now detects clause repetition and the previously missed English/Chinese scope formulations. It also provides Chinese lexical specificity and returns null, not a misleading zero, when cross-section comparison has no other section.
+
+The existing results were reassessed offline without another model call or modification of their immutable snapshots:
+
+| Locale | Technical density | Number repetition | Repeated clauses | Main-prose boundary hits | Current result |
+| --- | --- | --- | --- | --- | --- |
+| en | 0 | 0 | 1 | 5 | EDITORIAL_REVISION_REQUIRED |
+| zh-Hans | 0 | 0 | 1 | 4 | EDITORIAL_REVISION_REQUIRED |
+
+`s02-review.html` displays both actual candidates and the exact reasons. `s02-live-evidence.json` keeps original machine results separate from current reassessment. Existing saved API results are reopened with current editorial reassessment, without replacing the original record or making a new provider call. Current snapshot validation rejects these candidates, and the review UI does not offer acceptance export for a machine-rejected candidate.
+
+After this detector correction, targeted BaZi checks and Pages build passed (worker 16,586,688 bytes; gzip 2,544,571 bytes). The bilingual review artifact passed local 1440/390 browser checks with no overflow or page errors. The earlier full repository run passed before this focused correction; it was not repeated afterward.
+
 ## Remaining
 
-Deploy this revision to QA, then run ONLY BASELINE_NOW S02 in en and zh-Hans. Stop for human prose review before S03. No new live generation has yet been recorded for Addendum F.
+S02 requires human prose feedback and revision. Repeated "without establishing any real-life effect" / "不能据此认定现实作用" clauses and repeated opening/closing emphasis must be resolved without discarding substantive open conditions or inventing meaning. Existing T2 fallback retains its full qualifiers and is not marked publication-quality. No further live call has been made after the two S02 runs.
+
+S03 remains blocked until both S02 locales pass current machine checks and receive digest-bound human acceptance. S04–S09 follow the same sequence. Only after all eight baseline pairs are accepted may high/low/mixed, bilingual parity, full matrix, human acceptance and canary proceed. Paid Production remains off.
+
+The separate Commerce QA checkout is unpaid, as confirmed by the owner; payment/webhook/paid customer-delivery acceptance remains pending and is not inferred from these synthetic editorial fixtures.
 
 `BASELINE_S02_EDITORIAL_ACCEPTED = false`
 

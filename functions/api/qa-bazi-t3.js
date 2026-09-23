@@ -1,5 +1,5 @@
 import {checkBaziShadowStage} from '../personal-reading/narrative/bazi-t3-shadow-stages.js';
-import {withEditorialMeaningBrief,QUALITY_VERSION} from '../personal-reading/narrative/bazi-editorial-quality.js';
+import {withEditorialMeaningBrief,QUALITY_VERSION,validateEditorialQuality} from '../personal-reading/narrative/bazi-editorial-quality.js';
 import editorialAcceptance from '../../config/reports/bazi-editorial-quality-acceptance.json';
 import fixtures from '../personal-reading/narrative/bazi-t3-preview-packs.generated.json';
 import registry from '../../content/ai-economics/providers/ai-provider-cost-registry-v1.json';
@@ -63,7 +63,13 @@ export async function onRequest(context){
   }
   const id=`bazi-t3:${kind}:${evidenceHash}`,key=`qa/bazi-t3/${kind}/${evidenceHash}.json`;
   const saved=await env.PRIVATE_REPORTS.get(key);
-  if(saved)return reply({ok:true,cacheHit:true,result:await saved.json(),objectKey:key});
+  if(saved){
+   const record=await saved.json();
+   // Preserve the original immutable result, but expose current quality policy
+   // when reopening it. Reassessment never spends another provider call.
+   const editorialReassessment=record.snapshot?validateEditorialQuality(record.snapshot.finalNarrative,pack):null;
+   return reply({ok:true,cacheHit:true,result:{...record,...(editorialReassessment?{editorialReassessment}:{})},objectKey:key});
+  }
   const now=new Date().toISOString(),runtime='QA-BAZI-T3-SYNTHETIC-SHADOW-V1';
   await env.RUNTIME_DB.prepare('INSERT OR IGNORE INTO runtimes(runtime_id,status,current_stage,state,created_at,updated_at) VALUES(?,?,?,?,?,?)').bind(runtime,'active','shadow','{}',now,now).run();
   // Global idempotent reservation, not per account: at most one bounded run for

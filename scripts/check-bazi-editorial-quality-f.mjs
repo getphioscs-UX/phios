@@ -17,6 +17,11 @@ for(const locale of ['en','zh-Hans']){
  const result=validateEditorialQuality(bad,pack);assert.equal(result.status,'REJECT');assert(result.issues.includes('TECHNICAL_DENSITY'));assert(result.issues.includes('NUMBER_REPETITION'));assert(result.issues.includes('BOUNDARY_DENSITY'));
 }
 const m=editorialQualityMetrics('Learning and expression remain distinct themes here.',{otherSections:['Learning and expression remain distinct themes here.'],sectionTerms:['learning']});assert.equal(m.CROSS_SECTION_SIMILARITY,1);assert.equal(m.SECTION_SPECIFICITY,1);
+for(const [locale,text] of [['en','The first pair provides context, without establishing any real-life effect. A different pair provides context, without establishing any real-life effect.'],['zh-Hans','自我位置与表达保留为背景，但不能据此认定现实作用。环境与自我位置是另一背景，但不能据此认定现实作用。']]){
+ const result=validateEditorialQuality({interpretation:[{text}]},await withEditorialMeaningBrief(packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`]));
+ assert(result.issues.includes('TEMPLATE_PHRASE_REPETITION'));assert(result.issues.includes('BOUNDARY_DENSITY'));
+ assert.equal(typeof result.metrics.SECTION_SPECIFICITY,'number');assert.equal(result.metrics.CROSS_SECTION_SIMILARITY,null,'no other section is not evidence of zero similarity');
+}
 const gateArgs={profileId:'BASELINE_NOW',sectionKey:'S03_LIFE_STRUCTURE',stagedProfiles:{HIGH:'high',LOW:'low',MIXED:'mixed'},passed:async()=>true};
 assert.equal((await checkBaziShadowStage(gateArgs)).allowed,false);
 assert.equal((await checkBaziShadowStage({...gateArgs,humanAccepted:async(_p,_l,s)=>s===T3_SECTIONS[0]})).allowed,true);

@@ -1,6 +1,7 @@
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
 export const MEANING_CANON_VERSION='BAZI_EDITORIAL_MEANING_CANON_V1';
 export const QUALITY_VERSION='BAZI_EDITORIAL_QUALITY_F_V1';
+export const METRICS_VERSION='BAZI_EDITORIAL_METRICS_F_V2';
 export const STYLE_CONTRACTS=deepFreeze({
  en:{version:'BAZI_EDITORIAL_EN_V1',voice:'Direct, concrete, calm English. Explain the admitted meaning rather than narrating the report machinery.',avoid:['source-designated','visible count','interface','the method records','this topic'],numbers:'No chart counts or percentages in narrative. Essential timing dates belong to the timing visual.',boundaries:'One local scope sentence; full method limits belong in Method & Appendix. Preserve every substantive uncertainty and condition.',structure:'Lead with the selected meaning; explain its specific context and tension; close with one licensed reflection. No invented examples or causal links.'},
  'zh-Hans':{version:'BAZI_EDITORIAL_ZH_V1',voice:'自然、清楚、克制的中文。直接说明已获许可的意义，不描述报告生成流程。',avoid:['来源指定','可见计数','接口','方法记录到','本章需要'],numbers:'叙事不复述图表百分比和计数；必要日期留在时间图表。',boundaries:'局部仅留一句范围说明，完整限制归入方法与附录；实质条件和不确定性必须保留。',structure:'以本节获许可的意义开篇，说明具体背景与张力，以获许可的观察问题收束。不新增行为实例或因果关系。'}
@@ -26,7 +27,7 @@ export async function withEditorialMeaningBrief(pack){
  return deepFreeze({...enriched,canonicalEvidenceHash:await sha256Stable(enriched)});
 }
 const technical=/functionalGroupId|professionalModules|sourceFactIds|canonical|interface|visible count|supportVisible|priorityRef|计数|接口|来源指定|承载支持/gi;
-const boundary=/not (?:a |an )?(?:prediction|diagnosis|fact|proof)|does not (?:establish|predict|prove)|cannot (?:establish|prove)|不(?:代表|等于|证明|预测)|不能(?:证明|建立|认定)/gi;
+const boundary=/not (?:a |an )?(?:prediction|diagnosis|fact|proof|measurement)|not (?:as )?a measured|does not (?:establish|predict|prove)|cannot (?:establish|prove)|without establishing|不(?:代表|等于|证明|预测)|不能(?:据此)?(?:证明|建立|认定)|不是对[^。；;]{0,16}测量/gi;
 const numbers=s=>s.match(/\d+(?:\.\d+)?\s*[%％]?/g)||[];
 const tokens=s=>s.toLowerCase().match(/[a-z]+|[\u3400-\u9fff]/g)||[];
 const shingles=s=>{const t=tokens(s);return new Set(t.slice(0,-4).map((_,i)=>t.slice(i,i+5).join(' ')));};
@@ -40,14 +41,20 @@ export function classifyEditorialText(text,{visual=false,boundaryRole=false,obse
 export function editorialQualityMetrics(text,{precedingVisualText='',otherSections=[],sectionTerms=[]}={}){
  const units=Math.max(1,tokens(text).length),technicalHits=[...text.matchAll(technical)].length,boundaryHits=[...text.matchAll(boundary)].length;
  const previous=new Set(numbers(precedingVisualText)),repeated=numbers(text).filter(n=>previous.has(n)).length;
- const sentences=text.split(/[.!?。！？]+/).map(s=>s.trim().toLowerCase()).filter(Boolean),duplicates=sentences.length-new Set(sentences).size;
+ const sentences=text.split(/[.!?。！？]+/).map(s=>s.trim().toLowerCase()).filter(Boolean);
+ // Repeated disclaimers can sit inside different sentences. Count complete
+ // clauses too, while ignoring short list fragments such as "support".
+ const clauses=text.split(/[.!?。！？,;，；]+/).map(s=>s.trim().toLowerCase()).filter(s=>tokens(s).length>=4);
+ const duplicates=clauses.length-new Set(clauses).size;
  const here=shingles(text),similarity=otherSections.map(s=>{const there=shingles(s);return [...here].filter(x=>there.has(x)).length/Math.max(1,Math.min(here.size,there.size));});
- return {version:QUALITY_VERSION,TECHNICAL_DENSITY:technicalHits/units,NUMBER_REPETITION:repeated,TEMPLATE_PHRASE_REPETITION:duplicates/Math.max(1,sentences.length),BOUNDARY_DENSITY:boundaryHits/Math.max(1,sentences.length),SECTION_SPECIFICITY:sectionTerms.length?sectionTerms.filter(s=>text.toLowerCase().includes(s.toLowerCase())).length/sectionTerms.length:null,CROSS_SECTION_SIMILARITY:Math.max(0,...similarity),counts:{units,sentences:sentences.length,technicalHits,boundaryHits}};
+ return {version:METRICS_VERSION,TECHNICAL_DENSITY:technicalHits/units,NUMBER_REPETITION:repeated,TEMPLATE_PHRASE_REPETITION:duplicates/Math.max(1,clauses.length),BOUNDARY_DENSITY:boundaryHits/Math.max(1,sentences.length),SECTION_SPECIFICITY:sectionTerms.length?sectionTerms.filter(s=>text.toLowerCase().includes(s.toLowerCase())).length/sectionTerms.length:null,CROSS_SECTION_SIMILARITY:similarity.length?Math.max(...similarity):null,counts:{units,sentences:sentences.length,clauses:clauses.length,repeatedClauses:duplicates,technicalHits,boundaryHits,comparisonSections:otherSections.length}};
 }
 export function validateEditorialQuality(n,pack){
  const fields=['headline','lead','interpretation','supportingConditions','tensionConditions','howThisMayShowUp','closingInsight'];
  const blocks=fields.flatMap(k=>Array.isArray(n?.[k])?n[k]:[n?.[k]]).filter(Boolean),text=blocks.map(b=>b.text||'').join(' ');
- const metrics=editorialQualityMetrics(text,{precedingVisualText:JSON.stringify(pack.canonicalFacts||[]),sectionTerms:(pack.licensedClaims||[]).filter(c=>c.rank===1).flatMap(c=>tokens(c.text).filter(t=>t.length>4)).slice(0,8)});
+ const segmenter=new Intl.Segmenter(pack.locale,{granularity:'word'});
+ const sectionTerms=[...new Set((pack.licensedClaims||[]).filter(c=>c.rank===1).flatMap(c=>[...segmenter.segment(c.text)].filter(s=>s.isWordLike&&s.segment.length>=(pack.locale==='en'?5:2)).map(s=>s.segment.toLowerCase())))].slice(0,12);
+ const metrics=editorialQualityMetrics(text,{precedingVisualText:JSON.stringify(pack.canonicalFacts||[]),sectionTerms});
  const issues=[];
  if(metrics.TECHNICAL_DENSITY>0)issues.push('TECHNICAL_DENSITY');
  if(metrics.NUMBER_REPETITION>0||/\d+(?:\.\d+)?\s*[%％]/.test(text))issues.push('NUMBER_REPETITION');

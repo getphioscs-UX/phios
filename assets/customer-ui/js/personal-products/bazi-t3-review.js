@@ -28,7 +28,7 @@ editorialReview.style.cssText='max-width:900px;margin:24px auto;padding:24px;bac
 document.querySelector('nav').after(editorialReview);
 editorialReview.textContent='Addendum F: run only BASELINE_NOW S02 in each language. Read the new prose here before any next-section request. Historical PDF/comparison snapshots do not count as F acceptance.';
 function showEditorialCandidate(result){
- const accepted=result?.status==='PASS'&&result.snapshot;
+ const accepted=result?.status==='PASS'&&result.snapshot&&result.editorialReassessment?.status!=='REJECT';
  const candidate=result?.snapshot?.finalNarrative||result?.internalOnly?.candidate||result?.internalOnly?.lastRepair?.candidate;
  editorialReview.replaceChildren();
  const heading=document.createElement('h2');heading.textContent=`Addendum F · S02 · ${locale} · ${accepted?'Awaiting human editorial review':'Machine rejected / unavailable — not accepted'}`;editorialReview.append(heading);
@@ -39,7 +39,7 @@ function showEditorialCandidate(result){
   const title=document.createElement('h3');title.textContent=field;editorialReview.append(title);
   for(const b of blocks){if(!b?.text?.trim())continue;const p=document.createElement('p');p.textContent=b.text;editorialReview.append(p);}
  }
- if(!accepted)return;
+ if(!accepted){if(result?.editorialReassessment){const p=document.createElement('p');p.textContent='Current editorial check: '+result.editorialReassessment.issues.join(', ');editorialReview.append(p);}return;}
  const metadata=document.createElement('pre');metadata.style.overflowWrap='anywhere';metadata.style.whiteSpace='pre-wrap';metadata.textContent=JSON.stringify({snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,quality:result.snapshot.editorialQuality},null,2);editorialReview.append(metadata);
  const reviewer=document.createElement('input');reviewer.placeholder='Human reviewer name';reviewer.setAttribute('aria-label','Addendum F reviewer');
  const decision=document.createElement('select');decision.setAttribute('aria-label','Addendum F decision');
