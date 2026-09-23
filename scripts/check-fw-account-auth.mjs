@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
-import {authApi,authenticate,verifyIdToken,SESSION_COOKIE} from '../functions/account/oidc-auth.js';
+import {authApi,authenticate,verifyIdToken,SESSION_COOKIE,discover} from '../functions/account/oidc-auth.js';
 import {onRequest as middleware} from '../functions/api/_middleware.js';
 
 const sqlite=new DatabaseSync(':memory:');
@@ -16,6 +16,7 @@ for(const issuer of ['https://custom-auth.example/','https://tenant.example/']){
  let nonce,claimedSub='subject-1',emailVerified=true;
  const token=async overrides=>new SignJWT({nonce,email_verified:emailVerified,...overrides}).setProtectedHeader({alg:'RS256',kid:'test-key'}).setIssuer(issuer).setAudience(env.AUTH_CLIENT_ID).setSubject(claimedSub).setIssuedAt().setExpirationTime('5m').sign(privateKey);
  const fetcher=async (url,options={})=>{
+  assert.equal(options.redirect,'manual');
   assert.equal(new URL(url).origin,new URL(issuer).origin);
   if(url.endsWith('openid-configuration'))return Response.json({issuer,authorization_endpoint:`${issuer}authorize`,token_endpoint:`${issuer}oauth/token`,jwks_uri:`${issuer}jwks`,end_session_endpoint:`${issuer}oidc/logout`,id_token_signing_alg_values_supported:['RS256']});
   if(url.endsWith('/jwks'))return Response.json({keys:[jwk]});
@@ -23,6 +24,7 @@ for(const issuer of ['https://custom-auth.example/','https://tenant.example/']){
   throw new Error('Unexpected request');
  };
  const context=(path,options={})=>({request:new Request(`https://app.example${path}`,options),env,fetch:fetcher,data:{}});
+ await assert.rejects(()=>discover({...context('/'),env:{...env,AUTH_ISSUER:'https://redirect-'+new URL(issuer).host+'/'},fetch:async()=>new Response(null,{status:302,headers:{Location:'https://untrusted.example/'}})}),e=>e.code==='AUTH_PROVIDER_UNAVAILABLE');
  assert.equal(await authenticate(context('/api/test',{headers:{'X-User-Id':'forged'}})),null);
  const login=await authApi(context('/api/auth/login'),'login');assert.equal(login.status,302);
  const location=new URL(login.headers.get('location'));nonce=location.searchParams.get('nonce');assert.equal(location.origin,new URL(issuer).origin);assert.equal(location.searchParams.get('code_challenge_method'),'S256');

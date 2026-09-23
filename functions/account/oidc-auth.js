@@ -20,7 +20,9 @@ function config(context){
 }
 function endpoint(url,issuer){const parsed=new URL(url);if(parsed.origin!==new URL(issuer).origin||parsed.protocol!=='https:'||parsed.username||parsed.password||parsed.hash)throw fail('AUTH_DISCOVERY_ENDPOINT_INVALID',503);return parsed.href;}
 async function fetchJson(context,url,options={}){
-  let response;try{response=await (context.fetch||fetch)(url,{...options,redirect:'error',signal:AbortSignal.timeout(10000)});}catch{throw fail('AUTH_PROVIDER_UNREACHABLE',502);}
+  // workerd supports manual/follow only. Reject all non-2xx below without
+  // following redirects, including token requests containing client credentials.
+  let response;try{response=await (context.fetch||fetch)(url,{...options,redirect:'manual',signal:AbortSignal.timeout(10000)});}catch{throw fail('AUTH_PROVIDER_UNREACHABLE',502);}
   if(!response.ok)throw fail('AUTH_PROVIDER_UNAVAILABLE',502);
   const text=await response.text();if(text.length>1000000)throw fail('AUTH_PROVIDER_RESPONSE_INVALID',502);
   try{return JSON.parse(text);}catch{throw fail('AUTH_PROVIDER_RESPONSE_INVALID',502);}
