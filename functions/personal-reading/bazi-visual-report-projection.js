@@ -44,9 +44,10 @@ export function projectBaziVisualReport({reading:r,locale='en',depth='FREE',revi
 
 // Successor projection under the existing BaZi Page IR owner; calculation and
 // professional interpretation remain upstream. Existing batch output is intact.
-export async function projectBaziPublicationPages({reading:r,locale,temporalContext,composition={}}){
+export async function projectBaziPublicationPages({reading:r,locale,temporalContext,composition={},allowUnselectedTiming=false}){
  if(r?.publicationDecision?.customerPublishable!==true||!['zh-Hans','en'].includes(locale))throw Error('PUBLICATION_ADMITTED_BAZI_REQUIRED');
- if(!temporalContext||r.professionalModules.professionalTimeline.state!=='EXPLICIT')throw Error('PUBLICATION_RESOLVED_TEMPORAL_REQUIRED');
+ const noTarget=allowUnselectedTiming&&temporalContext?.mode==='UNAVAILABLE'&&r.professionalModules.professionalTimeline.state==='UNAVAILABLE'&&r.professionalModules.professionalTimeline.targetContext===null;
+ if(!temporalContext||(!noTarget&&r.professionalModules.professionalTimeline.state!=='EXPLICIT'))throw Error('PUBLICATION_RESOLVED_TEMPORAL_REQUIRED');
  const reports=[1,2,3,4,5].map(n=>projectBaziVisualReport({reading:r,locale,depth:'PAID',reviewMode:true,batch:`BAZI-DYNAMIC-R1-BATCH-0${n}`}));
  const originals=reports.flatMap(report=>report.pages),pick=(en,zh)=>locale==='en'?en:zh,language=locale==='en'?'en':'zhHans';
  const topicMap={16:'LIFE_OPERATION',17:'RELATIONSHIPS',18:'CAREER',19:'WEALTH',22:'CAREER',23:'CAREER',24:'PRESSURE',25:'LIFE_OPERATION'};
@@ -85,6 +86,8 @@ export async function projectBaziPublicationPages({reading:r,locale,temporalCont
   if(structuralExplanation[n])statements=[{text:pick(...structuralExplanation[n]),sourceRef:source.evidenceRefs[0]}];
   if(n===21)statements=[{text:pick(`At the selected observation time, the year pillar is ${annual?annual.stem.zh+annual.branch.zh:''}${selected?', alongside the '+selected.pillar.stem.zh+selected.pillar.branch.zh+' luck cycle':''}. Compare this time window with the birth structure before relating it to your experience. These are different layers, not interchangeable descriptions of you.`,`在所选观察时点，流年为${annual?annual.stem.zh+annual.branch.zh:''}${selected?'，大运为'+selected.pillar.stem.zh+selected.pillar.branch.zh:''}。把这一时间范围放回本命结构中比较，再联系实际经验；不同时间层并不是可以互相替代的自我描述。`),sourceRef:`${sourceRef}#professionalModules/professionalTimeline/currentWindow`}];
   if(n===25)statements[0]={text:pick(`Return to the work reading for this chart: ${r.professionalModules.customerNarrative.topicNarratives.find(t=>t.topicCode==='CAREER').development.en.split('. ')[0]}. Use that emphasis to choose the situation you will examine, rather than treating the following steps as a general instruction for everyone.`,`回到这张命盘的事业读取：${r.professionalModules.customerNarrative.topicNarratives.find(t=>t.topicCode==='CAREER').development.zhHans.split('。')[0]}。用这个重点选择你要观察的情境，而不是把下面的步骤当成适用于所有人的统一答案。`),sourceRef:topicRef('CAREER','development')};
+  if(noTarget&&(n===20||n===21)){statements=[{text:pick('The calculated luck-cycle sequence is available. No observation window was selected, so this report does not select a current luck cycle or annual layer.','已计算的大运序列仍然可用。本次未选择观察时点，因此报告不选择当前大运或流年层。'),sourceRef:`${sourceRef}#professionalModules/professionalTimeline`}];boundary=pick('A sequence is not a current-period selection or an event prediction.','周期序列不等于当前阶段选择，也不是事件预测。');observation='';counter='';}
+  if(noTarget&&n===26)statements=[{text:pick('Your report brings together the calculated birth structure and the admitted method reading. Compare it with independent experience; no current-period selection is implied.','报告连接计算所得的出生结构与已准入方法解读。请与独立经验比较；本次不暗示已选择当前时间层。'),sourceRef:`${sourceRef}#professionalModules/customerSafeGraph`}];
   statements=statements.filter(s=>!seenParagraphs.has(s.text));
   boundary=humanizePublicationStatement(boundary);observation=humanizePublicationStatement(observation);counter=humanizePublicationStatement(counter);
   if(seenBoundaries.has(boundary))boundary='';
@@ -98,7 +101,7 @@ export async function projectBaziPublicationPages({reading:r,locale,temporalCont
    provenanceHighlights:n===26?[pick('Birth structure established','命盘结构已建立'),pick('Method sources retained','方法证据已追溯'),pick('Interpretation boundaries preserved','解读边界已保留'),pick('Observation time saved','观察时间已保存'),pick('Lived evidence remains independent','现实证据保持独立')]:[],
    // Only visible diagram fields cross to the customer projection.
    facts:(n===26?[]:interpretation.canonicalFacts.filter(f=>typeof f.value==='number'&&Number.isFinite(f.value))).map(({label,value})=>({label,...(value!==undefined?{value}:{} )})),
-   temporal:n>=20&&n<=24?{date:temporalContext.localDate,timezone:temporalContext.timezone,mode:temporalContext.mode,selectedLuck:selected?`${selected.pillar.stem.zh}${selected.pillar.branch.zh}`:null,annual:annual?`${annual.stem.zh}${annual.branch.zh}`:null}:null});
+   temporal:!noTarget&&n>=20&&n<=24?{date:temporalContext.localDate,timezone:temporalContext.timezone,mode:temporalContext.mode,selectedLuck:selected?`${selected.pillar.stem.zh}${selected.pillar.branch.zh}`:null,annual:annual?`${annual.stem.zh}${annual.branch.zh}`:null}:null});
   internalPages.push({pageNumber:n,internalOnly:true,interpretation,composition:narrative.internalOnly,sourcePage:source});
  }
  return {versions:PUBLICATION_VERSIONS,pages,internalPages,reports};

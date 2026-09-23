@@ -9,9 +9,10 @@ import {BAZI_SECTION_REGISTRY,REPORT_PAGE_FAMILIES,validateSectionRegistry,bindS
 
 // Adapter inside the existing projection owner: native facts are calculated
 // upstream. The section engine never interprets raw birth data.
-export async function projectBaziSectionPublication({reading,locale,temporalContext,composition={},unavailableModules=[]}={}){
+export async function projectBaziSectionPublication({reading,locale,temporalContext,composition={},unavailableModules=[],allowUnselectedTiming=false}={}){
  validateSectionRegistry();
- const legacy=await projectBaziPublicationPages({reading,locale,temporalContext});
+ const legacy=await projectBaziPublicationPages({reading,locale,temporalContext,allowUnselectedTiming});
+ const noTarget=allowUnselectedTiming&&temporalContext?.mode==='UNAVAILABLE';
  const lang=locale==='en'?'en':'zhHans',pick=(en,zh)=>locale==='en'?en:zh;
  const source=n=>legacy.pages.find(p=>p.pageNumber===n),internal=n=>legacy.internalPages.find(p=>p.pageNumber===n).interpretation;
  const topics=reading.professionalModules.customerNarrative.topicNarratives;
@@ -53,7 +54,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  for(const section of BAZI_SECTION_REGISTRY.sections){
   const editorial=e(section.key),sourceNumbers=({S01_OVERVIEW:[7,8,9],S02_PERSONALITY:[14],S03_LIFE_STRUCTURE:[11,12,13,14,15],S04_CAREER:[18],S05_WEALTH:[19],S06_RELATIONSHIP:[17],S07_HEALTH:[24],S08_TIMING:[20,21],S09_GUIDANCE:[16,18,19,17],S10_APPENDIX:[26]})[section.key];
   const sourcePage=legacy.reports.flatMap(r=>r.pages).find(p=>p.pageNumber===sourceNumbers[0]);
-  const definitions=section.pages.slice(1).filter(p=>!p.optional||p.dataModules.every(k=>modules[k]));
+  const definitions=section.pages.slice(1).filter(p=>(!p.optional||p.dataModules.every(k=>modules[k]))&&!(noTarget&&p.dataModules.some(k=>['timingContext','currentYearInsight'].includes(k))));
   const pageBlocks=[];
   for(const def of definitions){
    if(def.primaryVisualRef){
@@ -69,7 +70,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   }
   const sectionObject={sectionKey:section.key,title:section.title,openerIntro:editorial.intro[locale],keyThemes:pageBlocks.map(p=>p.title),pageBlocks,boundaryNotes:pageBlocks.map(p=>p.boundary).filter(Boolean),practicalObservations:pageBlocks.flatMap(p=>p.observations),temporalContext};
   const narrative=pageBlocks.find(p=>p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'||p.pageFamily==='SUMMARY_PAGE');
-  const allowed=(narrative||pageBlocks.find(p=>p.contentBlocks.length)||pageBlocks[0]).contentBlocks;
+  const allowed=noTarget&&section.key==='S08_TIMING'?modules.timingContext.blocks.slice(0,1):(narrative||pageBlocks.find(p=>p.contentBlocks.length)||pageBlocks[0]).contentBlocks;
   const interpretation=await compilePublicationInterpretation({methodId:'BZR',page:{...sourcePage,pageId:section.key,evidenceRefs:[...new Set(sourceNumbers.flatMap(n=>internal(n).evidence))]},temporalContext,allowedStatements:allowed.map(b=>({text:b.text,sourceRef:b.sourceRef})),conditions:sectionObject.boundaryNotes,realityQuestions:sectionObject.practicalObservations});
   const composed=await composePublicationNarrative({interpretation,locale,executionClass:narrative?'T3_DEEP_COMPOSITION':'T2_LIGHT_COMPOSITION',...composition,...(composition.t3?{providerAdapters:{}}:{}),sectionComposition:sectionObject});
   if(narrative&&composed.internalOnly.evidenceAdmission==='SEMANTIC_VERIFIER_ACCEPTED'){
@@ -129,7 +130,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const publicationTitle=composition.t3&&section.key==='S07_HEALTH'?{en:'Wellbeing & Daily Rhythm','zh-Hans':'身心状态与日常节奏'}:section.title;
   const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:publicationTitle,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
   const admittedT3=t3?.status==='PASS'&&canShowT3(composition.t3);
-  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
+  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits});

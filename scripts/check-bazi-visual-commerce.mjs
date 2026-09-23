@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {attachBaziPublicationAccess} from '../functions/personal-reading/bazi-customer-publication.js';
+import {attachBaziPublicationAccess,buildBaziCustomerPublication,readingPublicationTime} from '../functions/personal-reading/bazi-customer-publication.js';
+import {buildBzrPhase10Case} from './lib/pvp-phase10-method-fixture.mjs';
+import {projectBaziPublicationPages} from '../functions/personal-reading/bazi-visual-report-projection.js';
+import {defaultPersonalReadingTab} from '../assets/customer-ui/js/personal-products/final-personal-reading-experience.js';
 import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
 import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
@@ -15,6 +18,7 @@ const view={methodNativeReading:{BZR:reading,AST:other},singleMethodReading:{sec
 const ctx={env:{PHIOS_ENVIRONMENT:'qa'},data:{},request:new Request('https://qa.phios-github.pages.dev/api/customer-personal-reality',{method:'POST',body:JSON.stringify({paid:true,entitlementKey:'report:bazi:full',customerId:'attacker'})})};
 let queries=0;const free=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async()=>{queries++;return {entitlement_status:'active'}}});assert.equal(queries,0);
 const p=free.productRoute.primaryProduct;assert.equal(p.reportAccess.state,'FREE_REPORT_PREVIEW');assert(!p.sourceProduct);assert(!free.methodNativeReading.BZR);assert.equal(free.singleMethodReading,null);assert.deepEqual(free.methodNativeReading.AST,other);assert.deepEqual(free.reading.methods,[other]);assert.equal(free.structure.methods.length,1);assert.equal(free.patterns.items.length,1);
+assert.equal(defaultPersonalReadingTab(free),'details');assert.equal(defaultPersonalReadingTab({productRoute:{products:[p,other]}}),'overview');
 const freeHtml=renderBaziProduct({product:p}).readingHtml;assert(!freeHtml.includes('cx-bazi-w12-workspace'));assert(freeHtml.includes('PAID_LOCKED'));assert(freeHtml.includes('COM-REPORT-BAZI-FULL'));assert.match(freeHtml,/RM\s*39/);
 for(const key of ['FOUR_PILLARS','FIVE_ELEMENTS','TEN_GOD_OVERVIEW','TEN_GOD_FUNCTION_GROUPS'])assert(freeHtml.includes(`data-publication-visual="${key}"`),key);
 for(const key of ['TEN_GOD_DETAILS','DAY_MASTER_CARRYING','PATTERN_PATHS','PROFESSIONAL_TOPICS'])assert(!freeHtml.includes(`data-publication-visual="${key}"`));
@@ -29,6 +33,10 @@ assert(html.includes('VIS-REPORT-BAZI-BODY.webp'));assert(html.includes('VIS-REP
 for(const color of ['#3aa878','#e66d52','#c79b52','#9a9da3','#438fc4','#c87949','#f0aa2f','#3c8fd0','#48c094','#e26d71'])assert(html.includes(color),color);
 const prod=await attachBaziPublicationAccess(view,{...ctx,env:{PHIOS_ENVIRONMENT:'production'}},{loadEntitlement:async()=>purchased});assert.equal(prod.productRoute.primaryProduct.reportAccess.reason,'FULL_REPORT_RELEASE_PENDING');assert(!prod.productRoute.primaryProduct.sourceProduct);
 assert.equal(JSON.stringify(reading),original,'publication must not mutate native semantics');
+const {native:noTarget}=await buildBzrPhase10Case(),unselected=readingPublicationTime(noTarget);
+await assert.rejects(()=>projectBaziPublicationPages({reading:noTarget,locale:'en',temporalContext:unselected}),/PUBLICATION_RESOLVED_TEMPORAL_REQUIRED/);
+for(const locale of ['en','zh-Hans'])for(const full of [false,true]){const report=await buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full});assert.equal(report.totalPages,full?46:11);assert(!report.pages.some(p=>p.temporal));assert(report.pages.some(p=>p.primaryVisualRef==='BZR-VIS-FIVE-ELEMENTS'));}
+assert.equal(noTarget.professionalModules.professionalTimeline.targetContext,null);
 const unavailable=await attachBaziPublicationAccess({...view,methodNativeReading:{BZR:{...reading,publicationDecision:{customerPublishable:false}},AST:other}},ctx,{loadEntitlement:async()=>purchased});
 assert.equal(unavailable.productRoute.primaryProduct.reportAccess.reason,'PUBLICATION_UNAVAILABLE');
 assert(!unavailable.productRoute.primaryProduct.sourceProduct);assert(!unavailable.methodNativeReading.BZR);assert.deepEqual(unavailable.methodNativeReading.AST,other);

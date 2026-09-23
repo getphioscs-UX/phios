@@ -98,7 +98,7 @@ function decorateMethodProducts(view){
     if(node.closest('[data-cx-method-disclosure]'))continue;
     const product=byId.get(text(node.dataset.method).toUpperCase())||{methodId:node.dataset.method};
     const disclosure=document.createElement('details');disclosure.className='cx-method-disclosure';disclosure.dataset.cxMethodDisclosure=methodId(product)||text(node.dataset.method).toUpperCase();
-    const summary=document.createElement('summary');summary.className='cx-method-disclosure__summary';summary.innerHTML=`<div>${methodGuide(product)}<small>${esc(tr('Open full method reading','打开完整方法读取'))}</small></div><span aria-hidden="true">＋</span>`;
+    const summary=document.createElement('summary');summary.className='cx-method-disclosure__summary';summary.innerHTML=`<div>${methodGuide(product)}<small>${esc(product.reportAccess?.state==='FREE_REPORT_PREVIEW'?tr('Read free report','阅读免费报告'):product.reportAccess?.state==='FULL_REPORT'?tr('Read full report','阅读完整报告'):tr('Open full method reading','打开完整方法读取'))}</small></div><span aria-hidden="true">＋</span>`;
     node.before(disclosure);disclosure.append(summary,node);node.classList.add('cx-method-disclosure__body');node.hidden=false;
   }
   const all=[...document.querySelectorAll('[data-cx-method-disclosure]')];
@@ -132,10 +132,11 @@ export function mountFinalPersonalReadingExperience(view){
   document.querySelector('[data-cx-specialist-products]')?.setAttribute('id','cx-personal-method-readings');
   document.querySelector('[data-cx-cross-perspective]')?.setAttribute('id','cx-cross-perspective');
   document.querySelector('[data-cx-current-reality-w42-w46]')?.setAttribute('id','cx-current-reality');
-  decorateMethodProducts(view);renderCrossGroups(view);switchResultTab(root,'overview');
+  decorateMethodProducts(view);renderCrossGroups(view);switchResultTab(root,defaultPersonalReadingTab(view));
   root.querySelectorAll('[data-cx-r12-result-tab]').forEach(button=>button.addEventListener('click',()=>{switchResultTab(root,button.dataset.cxR12ResultTab);root.scrollIntoView({behavior:'smooth',block:'start'})}));
   root.querySelectorAll('[data-cx-reading-action]').forEach(button=>button.addEventListener('click',()=>{switchResultTab(root,button.dataset.cxReadingAction);root.scrollIntoView({behavior:'smooth',block:'start'})}));
   root.querySelector('[data-cx-final-print]')?.addEventListener('click',()=>window.print());root.querySelector('[data-cx-final-pdf]')?.addEventListener('click',()=>window.print());
 }
+export function defaultPersonalReadingTab(view){const selected=products(view);return selected.length===1&&selected[0].methodId==='BZR'&&selected[0].publicationReport?'details':'overview';}
 
 export default Object.freeze({mountFinalPersonalReadingExperience,populateMyRealityHandoffOptions,collectMyRealityHandoffSelection,customerLifecycleLabel,buildClientInputPrecision});

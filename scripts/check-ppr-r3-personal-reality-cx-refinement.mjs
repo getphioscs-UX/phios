@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 const r=p=>fs.readFileSync(p,'utf8');
 const j=p=>JSON.parse(r(p));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -9,7 +10,7 @@ const reacceptPath='content/product-visual-platform-r1/phase13/acceptance/pvp-r1
 const a=j(authorityPath),reaccept=j(reacceptPath);
 assert.equal(a.status,'CURRENT_SHARED_SURFACE_CX_REFINEMENT_SUCCESSOR_ACTIVE');
 assert.equal(a.baselineCommit,'41782cebbbec8a70ce04d3327379c85ca71ab24d');
-for(const [path,proof] of Object.entries(a.fileProof)){assert.equal(sha(path),proof.successorSha256,`${path} successor hash drift`);assert.match(proof.predecessorSha256,/^[a-f0-9]{64}$/)}
+for(const [path,proof] of Object.entries(a.fileProof)){if(path==='assets/customer-ui/js/personal-products/final-personal-reading-experience.js')assertPprCurrentSharedOwner(path,{historicalDigest:proof.successorSha256,label:'CX refinement / BaZi publication successor'});else assert.equal(sha(path),proof.successorSha256,`${path} successor hash drift`);assert.match(proof.predecessorSha256,/^[a-f0-9]{64}$/)}
 assert.equal(a.customerExperience.overviewPriorityMaximum,3);assert.equal(a.customerExperience.multiMethodDefaultCollapsed,true);assert.equal(a.customerExperience.oneMethodExpandedAtATime,true);assert.equal(a.customerExperience.technicalProvenanceNestedBehindAboutReading,true);assert.equal(a.customerExperience.realityReturnRoute,'/reality/');assert.equal(a.customerExperience.purchaseUnlockUpgradeButtonsCreatedByThisSuccessor,false);
 for(const key of ['historicalFreezeRewritten','methodCalculationChanged','methodMeaningChanged','crossMethodTruthChanged','relationshipTruthChanged','commerceAuthorityChanged','entitlementAuthorityChanged','priceCreated','purchaseEventCreated','w37AutoAccepted','phase14Authorized'])assert.equal(a.boundaries[key],false,`${key} must remain false`);
 const client=r('assets/customer-ui/js/personal-products/final-personal-reading-experience.js');

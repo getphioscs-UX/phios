@@ -12,7 +12,7 @@ import {renderFrozenBaziIntro} from '../../assets/customer-ui/js/personal-produc
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
 export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false}){
  if(reading?.publicationDecision?.customerPublishable!==true)throw Error('BZR_PUBLICATION_NOT_ADMITTED');
- const projection=await projectBaziSectionPublication({reading,locale,temporalContext:temporalSnapshot,composition:{}});
+ const projection=await projectBaziSectionPublication({reading,locale,temporalContext:temporalSnapshot,composition:{},allowUnselectedTiming:true});
  const permitted=new Set(visualModules.modules.filter(m=>m.freeVisibility==='PREVIEW').map(m=>m.id));
  const pages=full?projection.pages:projection.pages.filter(p=>permitted.has(p.primaryVisualRef)||p.definitionKey==='S01_P3').map((p,i)=>({...p,pageNumber:i+7}));
  const total=pages.length+6;

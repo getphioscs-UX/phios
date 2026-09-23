@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 for(const script of ['scripts/check-pvp-r1-vis-w25-ast-snapshot.mjs','scripts/check-pvp-r1-vis-w26-bzr-snapshot.mjs','scripts/check-pvp-r1-vis-w27-num-snapshot.mjs','scripts/check-pvp-r1-vis-w28-paid-depth-projection.mjs']){
@@ -14,7 +15,7 @@ const contract=j('content/product-visual-platform-r1/method-snapshots/pvp-r1-vis
 assert.equal(rec.status,'CURRENT_AST_BZR_NUM_SUCCESSORS_RECONCILED_W25_W28_VERIFIED');
 assert.equal(rec.phase10ExitComplete,true); assert.equal(rec.phase11Authorized,true); assert.equal(rec.boundaries.visualProjectionOnly,true);
 assert.equal(rec.boundaries.newAstCalculationRuntimeCreated,false);assert.equal(rec.boundaries.newBzrCalculationRuntimeCreated,false);assert.equal(rec.boundaries.newNumCalculationRuntimeCreated,false);assert.equal(rec.boundaries.newMfigScopeCreated,false);assert.equal(rec.boundaries.paidCommerceActivatedByPvp,false);assert.equal(rec.boundaries.existingProfessionalReadingRetroactivelyLocked,false);
-for(const x of rec.authoritySnapshot){assert.equal(sha(x.path),x.sha256,`authority snapshot drift ${x.path}`)}
+for(const x of rec.authoritySnapshot){if(x.path==='assets/customer-ui/js/specialists/bazi/product-renderer.js')assertPprCurrentSharedOwner(x.path,{historicalDigest:x.sha256,label:'PVP Phase 10 retained specialist / authorized publication successor'});else assert.equal(sha(x.path),x.sha256,`authority snapshot drift ${x.path}`)}
 assert.equal(acc.status,'MACHINE_ACCEPTED_CURRENT_AST_BZR_NUM_W25_W28'); assert.equal(acc.phase11Authorized,true); assert.equal(acc.phase11Executed,false);
 for(const v of Object.values(acc.checks))assert.equal(v,true,'aggregate acceptance check false');
 assert.equal(freeze.status,'PVP_R1_VIS_AST_BZR_NUM_W25_W28_PHASE10_FROZEN');assert.equal(freeze.frozenExit.phase11Authorized,true);assert.equal(freeze.preservedBoundaries.phase11ExecutedByThisFreeze,false);
