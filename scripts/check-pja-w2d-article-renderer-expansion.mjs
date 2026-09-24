@@ -391,6 +391,31 @@ const book4BilingualRelease = await readJson(
 const book5BilingualRelease = await readJson(
   'content/knowledge/public/successors/book5-publication-v1/visual-article-release.json'
 );
+const book6BilingualRelease = await readJson(
+  'content/knowledge/public/successors/book6-publication-v1/visual-article-release.json'
+);
+const book6PjaReconciliation = await readJson(
+  'content/knowledge/reconciliation/pja-w2d/pja-w2d-book6-publication-successor-v1.json'
+);
+assert.equal(
+  book6PjaReconciliation.status,
+  'ACTIVE_SUCCESSOR_AWARE_HISTORICAL_CHECKER_RECONCILIATION'
+);
+assert.equal(
+  book6PjaReconciliation.successorRule.requiredManifestStatus,
+  book6BilingualRelease.status
+);
+assert.equal(book6BilingualRelease.bookCode,'BOOK-6');
+assert.equal(book6BilingualRelease.records.length,56);
+assert.equal(
+  book6BilingualRelease.records.filter(record=>record.locale==='zh-Hans').length,
+  28
+);
+assert.equal(
+  book6BilingualRelease.records.filter(record=>record.locale==='en').length,
+  28
+);
+assert.equal(book6BilingualRelease.humanDecision,'PENDING_HUMAN_REVIEW');
 const publishedArticleIndex = await readJson(
   'content/knowledge/public/published-articles.json'
 );
@@ -398,7 +423,8 @@ const successorReleaseRecords = [
   ...(visualArticleRelease.records || []),
   ...(ablBilingualRelease.records || []),
   ...(book4BilingualRelease.records || []),
-  ...(book5BilingualRelease.records || [])
+  ...(book5BilingualRelease.records || []),
+  ...(book6BilingualRelease.records || [])
 ].filter(record => record.status === 'published');
 const expectedPublishedKeys = locale => new Set([
   ...(publishedArticleIndex.records || [])
@@ -483,7 +509,14 @@ for (const release of successorReleaseRecords) {
     article.locale === release.locale
   ));
   assert.ok(metadata, `Published successor metadata missing: ${release.slug}:${release.locale}`);
-  const publicArticle = metadata.metadataOnly ? await readJson(release.path.replace(/^\//,'')) : metadata;
+  const successorMetadataOnly = (
+    metadata.metadataOnly === true ||
+    release.metadataOnly === true ||
+    release.identityClass === 'PUBLICATION_ARTICLE_IDENTITY_NOT_CANONICAL_KNOWLEDGE_NODE'
+  );
+  const publicArticle = successorMetadataOnly
+    ? await readJson(release.path.replace(/^\//,''))
+    : metadata;
   assert.ok(publicArticle, `Published successor is not loadable: ${release.nodeCode}:${release.locale}`);
   assert.equal(publicArticle.slug, release.slug);
   assert.equal(publicArticle.publicHref, release.href);
@@ -932,5 +965,5 @@ console.log(
   '  23 valid/invalid rendering fixtures pass semantic, security and accessibility checks.'
 );
 console.log(
-  '  Frozen Registries, six production Articles and KN-PREFACE-001 publication state remain unchanged.'
+  '  Frozen predecessor Articles remain unchanged; governed Book IV/V/VI successor releases are validated separately.'
 );

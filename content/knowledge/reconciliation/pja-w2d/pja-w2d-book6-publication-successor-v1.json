@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-PJA-W2D-BOOK6-PUBLICATION-SUCCESSOR-RECONCILIATION-v1.0.0",
+  "status": "ACTIVE_SUCCESSOR_AWARE_HISTORICAL_CHECKER_RECONCILIATION",
+  "baselineCommit": "93761b47cd1aaf4e2b3d20fcebf764245de4021d",
+  "scope": "PJA-W2D published-content regression only",
+  "problem": "Book VI publication activated 28 bilingual article identities per locale through the existing published-content loader, while PJA-W2D expected-release enumeration stopped at Book V.",
+  "preservedAuthority": {
+    "legacyPjaArticlesRemainFrozen": true,
+    "book6UsesExistingPublishedContentRuntime": true,
+    "parallelArticleRuntimeCreated": false,
+    "parallelKnowledgeMasterCreated": false,
+    "publicationCreatedByThisReconciliation": false,
+    "book6HumanSemanticParityAcceptedByThisReconciliation": false
+  },
+  "successorRule": {
+    "requiredManifest": "content/knowledge/public/successors/book6-publication-v1/visual-article-release.json",
+    "requiredManifestStatus": "ACTIVE_PUBLICATION_SUCCESSOR",
+    "bookCode": "BOOK-6",
+    "requiredRecordCount": 56,
+    "requiredPerLocale": 28,
+    "publicationRecordStatus": "published",
+    "identityClass": "PUBLICATION_ARTICLE_IDENTITY_NOT_CANONICAL_KNOWLEDGE_NODE"
+  },
+  "rendererRegressionBoundary": {
+    "publishedContentLoaderMayReturnManifestMetadataRows": true,
+    "bodyAssertionsResolveReleasePathForBook6IdentityClass": true,
+    "legacyFourSectionAssertionAppliesOnlyToPredecessorPublicationKeys": true,
+    "book6HumanDecisionRemains": "PENDING_HUMAN_REVIEW"
+  }
+}

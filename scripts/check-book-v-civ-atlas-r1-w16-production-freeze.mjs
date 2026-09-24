@@ -123,6 +123,24 @@ assert.equal(eightVolume.productionAdmissionChanged,false);
 assert.equal(eightVolume.humanReview,'PENDING');
 assert.match(editorialHtml,/eight books/i);
 authorizedMaintenance.set(priorEditorial.path,{...priorEditorial,successorSha256:eightVolume.change.successorSha256});
+
+// Book VI extends the shared data loader. Reconcile that frozen Book V path
+// through a versioned NEW_ATLAS_RELEASE_SUCCESSOR instead of rewriting history.
+const bookViDataSuccessor=json('content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v1.json');
+assert.equal(bookViDataSuccessor.status,'ACTIVE_VERSIONED_SUCCESSOR');
+assert.equal(bookViDataSuccessor.change.path,'assets/js/pages/civilization-atlas/atlas-data.js');
+const priorAtlasData=authorizedMaintenance.get(bookViDataSuccessor.change.path);
+assert.ok(priorAtlasData,'Book V atlas-data maintenance predecessor is required');
+assert.equal(bookViDataSuccessor.change.previousSha256,priorAtlasData.successorSha256);
+assert.equal(bookViDataSuccessor.change.changeClass,'NEW_ATLAS_RELEASE_SUCCESSOR');
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessor.change.changeClass));
+assert.equal(digest(bookViDataSuccessor.change.path),bookViDataSuccessor.change.successorSha256,'Book VI atlas-data successor digest drift');
+assert.equal(bookViDataSuccessor.scope.bookVCanonicalTheoryChanged,false);
+assert.equal(bookViDataSuccessor.scope.bookVHistoricalRegistriesChanged,false);
+assert.equal(bookViDataSuccessor.scope.parallelAtlasRuntimeCreated,false);
+assert.equal(bookViDataSuccessor.scope.parallelAskRuntimeCreated,false);
+authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessor.change.successorSha256,changeClass:bookViDataSuccessor.change.changeClass});
+
 for(const f of freeze.frozenFiles){
   assert.ok(fs.existsSync(path.join(root,f.path)),`frozen file missing: ${f.path}`);
   const current=digest(f.path);
@@ -138,4 +156,5 @@ console.log('✓ BOOK-V-CIV-ATLAS-R1-W16 Production Admission + Freeze passed.')
 console.log('  W15 human acceptance is explicit; 20/120/6/15/16/32/24 registry surface admitted.');
 console.log(`  ${freeze.frozenFiles.length} authority/runtime/customer files are digest-frozen.`);
 if(maintenance) console.log(`  Authorized maintenance successor: ${maintenance.work} · ${maintenance.status}.`);
+console.log('  Book VI shared data-loader extension is reconciled by a versioned NEW_ATLAS_RELEASE_SUCCESSOR record.');
 console.log('  Future substantive changes require a versioned successor / maintenance record.');
