@@ -7,13 +7,13 @@ import {createPtrcAskRequestContract} from '../functions/_lib/ptrc-ask-contract.
 import {classifyAsk2Consumption} from '../functions/ask2/ask2-consumption-runtime.js';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const env={ASSETS:{fetch:async request=>{const rel=new URL(request.url).pathname.replace(/^\//,'');try{return new Response(await fs.readFile(path.join(root,rel)),{status:200,headers:{'content-type':'application/json'}});}catch{return new Response('',{status:404});}}}};
-const scope=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode:'BOOK-6',partCode:'PART-13',activeLayer:'cases',entityId:'RC-01'});
+const scope=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode:'BOOK-6',partCode:'PART-13',activeLayer:'cases',entityId:'RC-04'});
 assert(scope);assert.equal(scope.scopeType,'CIVILIZATION_RECONFIGURATION_ATLAS');assert.equal(scope.bookCode,'BOOK-6');assert.equal(scope.partCode,'PART-13');
 const contract=createPtrcAskRequestContract({q:'第一次世界大战如何改变文明重组？',locale:'zh-Hans',entryContext:{bookCode:'BOOK-6',partCode:'PART-13',retrievalScope:scope}});
 assert(contract.retrievalScope.partIds.includes('PART-13'));assert(contract.retrievalScope.allowedCollections.includes('CIVILIZATION_ATLAS'));assert.equal(contract.retrievalScope.atlasScope.scopeType,'CIVILIZATION_RECONFIGURATION_ATLAS');
 assert.equal(classifyAsk2Consumption({question:'第一次世界大战如何改变文明重组？',body:{entryContext:{bookCode:'BOOK-6',retrievalScope:scope}}}).mode,'CKA');
 const result=await retrieveAtlasScope({env,scope,locale:'zh-Hans',question:'第一次世界大战'});
-assert.equal(result.sources[0].bookCode,'BOOK-6');assert.equal(result.sources[0].partCode,'PART-13');assert.equal(result.sources[0].atlasEntityId,'RC-01');assert.match(result.sources[0].text,/第一次世界大战/);
+assert.equal(result.sources[0].bookCode,'BOOK-6');assert.equal(result.sources[0].partCode,'PART-13');assert.equal(result.sources[0].atlasEntityId,'RC-04');assert.match(result.sources[0].text,/第一次世界大战/);
 assert.deepEqual(result.chain.map(x=>x.stage),['ATLAS_ENTITY','RECONFIGURATION_CASE','RECONFIGURATION_WINDOW','WORLD_RECONFIGURATION_SNAPSHOT','CONTEMPORARY_RUNTIME_DOSSIER','LIVED_REALITY_LAYER','BOOK_VI_CANONICAL_SECTION','PART_13','BROADER_KNOWLEDGE']);
 const snapshotScope=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode:'BOOK-6',partCode:'PART-13',activeLayer:'snapshots',entityId:'WORLD_RECONFIGURATION_SNAPSHOT_2026'});
 const snapshot=await retrieveAtlasScope({env,scope:snapshotScope,locale:'en',question:'2026 world snapshot'});

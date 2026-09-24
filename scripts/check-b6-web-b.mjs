@@ -6,7 +6,7 @@ const book=j('content/registry/successors/eight-volume-v1/book-6-manifest.json')
 const release=j('content/knowledge/public/successors/book6-publication-v1/visual-article-release.json');
 const map=j('content/books/book-6/articles/article-production-map-v1.json');
 const parity=j('content/books/book-6/articles/semantic-parity-v1.json');
-const relations=j('content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json').relationships;
+const relations=j('content/civilization-atlas/reconfiguration/versions/book-vi-atlas-relationships-v2.0.0.json').relationships;
 assert.equal(sections.length,85);assert.equal(book.parts[0].chapters.length,85);
 assert.equal(sections[83].number,'13.84');assert.equal(sections[83].titleZh,'四十八运行投影矩阵');
 assert.equal(sections[84].number,'13.85');assert.equal(sections[84].titleZh,'文明可能空间与观察阈值');

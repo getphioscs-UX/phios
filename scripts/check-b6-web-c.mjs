@@ -1,0 +1,1 @@
+import {checkCoverage,checkCurrent,checkLived,checkNoRanking,checkVersions} from './lib/book6-atlas-data-closure-checks.mjs';checkCoverage();checkCurrent();checkLived();checkNoRanking();checkVersions();console.log('✓ B6-WEB-C Atlas Data Closure PASS');console.log('  Article pages untouched; Current Data population NOT_RUN by package boundary; B6-WEB-D not started.');
