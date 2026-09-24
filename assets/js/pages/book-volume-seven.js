@@ -156,6 +156,29 @@ async function render() {
       }
     }
 
+    if (bookId === 'book-6') {
+      const registryResponse=await fetch('/content/civilization-atlas/reconfiguration/book-vi-reconfiguration-atlas-registry-v2.json');
+      if(registryResponse.ok){
+        const book6=await registryResponse.json();
+        if(generation!==renderGeneration)return;
+        const actions=root.querySelector('.knowledge-actions');
+        const read=document.createElement('a');read.className='knowledge-action knowledge-action--primary';read.href='#book6-contents';read.textContent=locale==='zh-Hans'?'阅读第六册目录':'Read Book VI contents';actions?.prepend(read);
+        const atlasLink=document.createElement('a');atlasLink.className='knowledge-action';atlasLink.href='#reconfiguration-atlas';atlasLink.textContent=locale==='zh-Hans'?'探索文明重组图谱':'Explore Reconfiguration Atlas';actions?.append(atlasLink);
+        const section=document.createElement('section');section.id='book6-contents';section.className='knowledge-section knowledge-section--paper';
+        const shell=document.createElement('div');shell.className='knowledge-shell';section.append(shell);
+        const heading=document.createElement('h2');heading.textContent=locale==='zh-Hans'?'第 13 部 · 文明重组图谱':'Part 13 · Civilization Reconfiguration Atlas';shell.append(heading);
+        const note=document.createElement('p');note.textContent=locale==='zh-Hans'?'最终稿共 7 编、85 个正文节点；公开页面保留目录与结构化图谱，完整书册的购买与交付状态以账户页面为准。':'The final manuscript contains seven sections and 85 body nodes. This public surface exposes the contents and structured Atlas; purchase and delivery availability remains governed by the account surface.';shell.append(note);
+        for(const group of book6.sections||[]){
+          const details=document.createElement('details');details.open=group.number===1;
+          const summary=document.createElement('summary');summary.textContent=(locale==='zh-Hans'?group.titleZh:group.titleEn)+' · '+group.range[0]+'–'+group.range[1];details.append(summary);
+          const list=document.createElement('ol');list.start=group.range[0];
+          for(const ch of (book6.chapters||[]).filter(ch=>ch.sectionGroup===group.id)){const item=document.createElement('li');item.value=ch.number;item.textContent=ch.section+' · '+(locale==='zh-Hans'?ch.titleZh:ch.titleEn);list.append(item);}
+          details.append(list);shell.append(details);
+        }
+        root.append(section);
+      }
+    }
+
     // Public static samples are independent of checkout and paid delivery.
     fetch('/api/commerce-catalog').then(r=>{if(!r.ok)throw new Error('CATALOG_UNAVAILABLE');return r.json();}).then(catalog=>{
       if(generation!==renderGeneration)return;
