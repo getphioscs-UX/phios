@@ -1,15 +1,15 @@
 {
   "schemaVersion": "BAZI_S03_OWNER_REVIEW_READINESS_V1",
-  "startingHead": "c846cd9428469b07a7f383da47599c2d2206c832",
+  "startingHead": "228594a13148c8e0bca655be5813392388a6cb29",
   "sectionId": "S03_LIFE_STRUCTURE",
-  "status": "READY_FOR_QA_GENERATION",
+  "status": "BLOCKED_BY_S02_V2",
   "engineering": {
     "baseline": "PASS_RECORDED",
     "sectionRegistry": "PASS_RECORDED",
     "methodCoverage": "PASS_RECORDED",
     "richClaimIr": "PASS_RECORDED",
     "explanationLayer": "PASS_RECORDED",
-    "predecessorAcceptance": "S02_BILINGUAL_ACCEPTED",
+    "predecessorAcceptance": "S02_V1_SUPERSEDED",
     "canonicalAcceptedSnapshotLoader": "IMPLEMENTED",
     "releaseEvidenceSync": "IMPLEMENTED",
     "parityUiAction": "IMPLEMENTED_SOURCE_AND_BUNDLE"
@@ -21,16 +21,15 @@
     "renderedCandidate": "NOT_RUN"
   },
   "ownerGate": {
-    "status": "NOT_READY_FOR_OWNER_ACCEPTANCE",
-    "reason": "S03 requires real QA T3 PASS snapshots in both locales plus bilingual parity before owner review can be digest-bound.",
+    "status": "BLOCKED",
+    "reason": "S02 must be regenerated under BAZI_EXPLANATORY_AUTHORITY_V2 and explicitly accepted in both locales before S03 can resume.",
     "accepted": false
   },
   "productionEligible": false,
   "nextActions": [
-    "Deploy this commit to QA.",
-    "Generate BASELINE_NOW S03_LIFE_STRUCTURE en through the authenticated QA T3 route.",
-    "Generate BASELINE_NOW S03_LIFE_STRUCTURE zh-Hans through the same route.",
-    "Run bilingual parity on the two immutable PASS snapshots.",
-    "Build the review artifact and present both locale candidates with claim/runtime evidence for explicit owner acceptance."
+    "Complete S02 V2 engineering rebuild and local checks.",
+    "Generate only S02 English and zh-Hans in QA.",
+    "Run S02 bilingual parity.",
+    "Obtain explicit owner acceptance before reopening S03."
   ]
 }

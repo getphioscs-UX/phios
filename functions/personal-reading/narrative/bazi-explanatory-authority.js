@@ -1,6 +1,6 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
-export const EXPLANATORY_AUTHORITY_VERSION='BAZI_EXPLANATORY_AUTHORITY_V1';
-export const RELATION_TYPES=Object.freeze(['EMPHASIS','ASSOCIATION','CO_OCCURRING_DIMENSIONS','CONTEXT_MODIFIER','SUPPORT_CONDITION','TENSION','CONTRAST','OPEN_CONDITION','COUNTER_SIGNAL','TEMPORAL_RELEVANCE','CROSS_SECTION_RELEVANCE','BOUNDARY']);
+export const EXPLANATORY_AUTHORITY_VERSION='BAZI_EXPLANATORY_AUTHORITY_V2';
+export const RELATION_TYPES=Object.freeze(['EMPHASIS','LIFE_DOMAIN_EXPLANATION','OPERATING_CONDITION','ASSOCIATION','CO_OCCURRING_DIMENSIONS','CONTEXT_MODIFIER','SUPPORT_CONDITION','TENSION','CONTRAST','OPEN_CONDITION','COUNTER_SIGNAL','TEMPORAL_RELEVANCE','CROSS_SECTION_RELEVANCE','BOUNDARY']);
 export const PROHIBITED_OPERATORS=Object.freeze(['CAUSE','SEQUENCE','BEHAVIORAL_EFFECT','EVENT_INFERENCE','REALITY_ASSERTION']);
 export const BLOCK_KINDS=Object.freeze(['CUSTOMER_CLAIM','OBSERVATION_PROMPT','COUNTER_PROMPT','BOUNDARY','TECHNICAL_NOTE']);
 export const COMPOSER_OPERATORS=Object.freeze(['PARAPHRASE','PLAIN_LANGUAGE_ABSTRACTION','RANK_PRESERVING_SUMMARY','CONDITIONAL_REFRAME','CONTRAST','QUESTION_GENERATION']);
@@ -30,20 +30,22 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
   if(group(topic.leadGroup?.groupCode))add('PRIMARY','EMPHASIS',topicCode,[topic.leadGroup.groupCode],say(`Within this topic, ${group(topic.leadGroup.groupCode)} receives the first emphasis. This is a reading priority, not a measured trait.`,`在这个主题中，${group(topic.leadGroup.groupCode)}是首先关注的内容。这表示解读重点，不是测得的人格特质。`),[`${topicRef}/leadGroup`,`${narrativeRef}/development`],{rank:1});
   const secondary=arr(topic.relevantGroups).filter(g=>g.groupCode!==topic.leadGroup?.groupCode&&group(g.groupCode));
   if(secondary.length)add('SECONDARY','ASSOCIATION',topicCode,secondary.map(g=>g.groupCode),say(`Other associated themes are ${secondary.map(g=>group(g.groupCode)).join('; ')}. They do not replace the topic's first emphasis.`,`同时相关的主题包括${secondary.map(g=>group(g.groupCode)).join('、')}，它们不取代本章的首要重点。`),[`${topicRef}/relevantGroups`,`${topicRef}/leadGroup`]);
+  if(narrative.development?.[lang])add('DOMAIN_EXPLANATION','LIFE_DOMAIN_EXPLANATION',topicCode,[topicCode],narrative.development[lang],[`${narrativeRef}/development`,`${topicRef}/leadGroup`,`${topicRef}/relevantTenGods`,`${topicRef}/relationshipInterfaces`,`${topicRef}/carryingContext`,`${topicRef}/priorityRefs`],{conditions:['METHOD_OWNED_MULTI_FACTOR_EXPLANATION','NOT_OBSERVED_REALITY'],explanationScope:'LIFE_DOMAIN'});
   add('DIMENSIONS','CO_OCCURRING_DIMENSIONS',topicCode,[topicCode],narrative.lead[lang],[`${narrativeRef}/lead`],{conditions:['DIMENSIONS_ARE_SIMULTANEOUS_NOT_A_SEQUENCE']});
   // S02's accepted evidence is frozen. Successor sections retain every
   // section-owned relation, including contradictory pairs, without a top-N cap.
-  for(const rel of sectionKey==='S02_PERSONALITY'?arr(topic.relationshipInterfaces).slice(0,2):arr(topic.relationshipInterfaces)){
+  for(const rel of arr(topic.relationshipInterfaces)){
    const i=topic.relationshipInterfaces.indexOf(rel),positions=arr(rel.positions);
    if((positions.length===2||sectionKey!=='S02_PERSONALITY'&&positions.length>2)&&positions.every(x=>POSITION[x])){
     const family={LINK:['symbolic linkage','象征性联结'],TENSION:['structural tension','结构张力'],REPEAT_TENSION:['repeated structural tension','重复的结构张力']}[rel.relationFamily];
-    const text=sectionKey!=='S02_PERSONALITY'?say(`The relation among ${positions.map(x=>POSITION[x][0]).join(', ')} is ${family?.[0]||'a recorded structural relation'}. Keep its complete membership distinct from other relations in the reading.`,`${positions.map(x=>POSITION[x][1]).join('、')}之间呈现${family?.[1]||'已记录的结构关系'}，阅读时应完整保留其成员，不与其他关系合并。`):say(`The structural relation between ${POSITION[positions[0]][0]} and ${POSITION[positions[1]][0]} is part of the context for this topic. It does not establish a real-life effect.`,`${POSITION[positions[0]][1]}与${POSITION[positions[1]][1]}之间的结构关系，是理解本章时需要保留的背景，不能由此认定现实中的作用。`);
+    const text=say(`The relation among ${positions.map(x=>POSITION[x][0]).join(', ')} is ${family?.[0]||'a recorded structural relation'}. It modifies how the method reads this topic together with the other chart factors, without establishing an observed behavior.`,`${positions.map(x=>POSITION[x][1]).join('、')}之间呈现${family?.[1]||'已记录的结构关系'}。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。`);
     add(`PAIR_${rel.relationId}`,'CONTEXT_MODIFIER',positions[0],positions.slice(1),text,[`${topicRef}/relationshipInterfaces/${i}`],{conditions:['KEEP_THIS_PAIR_DISTINCT','NO_BEHAVIORAL_EFFECT'],relationQualifier:rel.relationFamily});
    }
   }
   const carry=topic.carryingContext;
   if(carry?.supportVisible>0)add('SUPPORT','SUPPORT_CONDITION',topicCode,['STRUCTURAL_SUPPORT'],say('The method records support within the structure. This does not establish how much practical help is available.','方法在结构中记录到支持，但这不能证明现实中有多少帮助可用。'),[`${topicRef}/carryingContext`, 'professionalModules/dayMasterStrength/supportBalance']);
   if(carry?.pressureVisible>0||carry?.outwardVisible>0)add('TENSION','TENSION',topicCode,['SUPPORT','EXPRESSION','EXTERNAL_DEMAND'],say('Support, expression and external demands must be considered together in this reading; the chart does not establish how they are experienced.','这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。'),[`${topicRef}/carryingContext`,`${narrativeRef}/condition`],{conditions:['NO_OBSERVED_PRESSURE_ASSERTION']});
+  if(narrative.condition?.[lang])add('OPERATING_CONDITION','OPERATING_CONDITION',topicCode,[topicCode],narrative.condition[lang],[`${narrativeRef}/condition`,`${topicRef}/carryingContext`],{conditions:['METHOD_OWNED_OPERATING_CONDITION','NOT_OBSERVED_REALITY']});
  }
  if(topic&&p.dayMasterStrength?.withheldVerdict?.strongWeakLabelCreated===false)add('OPEN_STRENGTH','OPEN_CONDITION','FINAL_STRENGTH',[],say('The reading leaves a final strong-or-weak judgment open; it is not a fixed identity.','解读保留最终强弱判断，不据此定义固定身份。'),['professionalModules/dayMasterStrength/withheldVerdict'],{modality:'UNRESOLVED',openConditions:['FINAL_STRENGTH_WITHHELD']});
  if(sectionKey==='S03_LIFE_STRUCTURE'&&p.pattern?.summary?.primaryPatternEstablished===false)add('OPEN_PATTERN','OPEN_CONDITION','PRIMARY_PATTERN',[],say('A final primary pattern has not been established; visible candidates remain conditional.','最终主格局尚未成立；可见候选仍须保留条件。'),['professionalModules/pattern/summary','professionalModules/pattern/state'],{modality:'UNRESOLVED',openConditions:arr(p.pattern.qualifierCodes)});
@@ -67,7 +69,7 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
  const questions=anchor?[{id:`${sectionKey}:OBSERVE`,kind:'OBSERVATION_PROMPT',relationType:anchor.relationType,claimIds:[anchor.id],text:say('Which of these themes fits a concrete experience, and which does not?','这些主题中，哪些符合你的一段具体经历，哪些并不符合？')}]:[];
  const counters=boundary?[{id:`${sectionKey}:COUNTER`,kind:'COUNTER_PROMPT',relationType:'COUNTER_SIGNAL',claimIds:[boundary.id],text:say('What in your experience does not fit this reading?','你的经历中，有哪些部分并不符合这份解读？')}]:[];
  let depth=null;
- if(sectionKey!=='S02_PERSONALITY'){
+ {
   const bi=arr(p.realityBridge?.topicPrompts).findIndex(t=>t.topicCode===topicCode),nativePrompts=p.realityBridge?.topicPrompts?.[bi]?.prompts||[];
   for(const [index,prompt] of nativePrompts.entries())if(anchor&&prompt.prompt?.[lang]){
    const counter=prompt.promptType==='COUNTEREXAMPLE';
@@ -90,7 +92,7 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
   for(const key of ['supportBalance','seasonalSupport','roots','withheldVerdict'])if(p.dayMasterStrength?.[key])semanticFacts.push({sourceRef:`professionalModules/dayMasterStrength/${key}`,value:p.dayMasterStrength[key]});
   for(const r of relations){const index=arr(p.relationships?.items).findIndex(x=>x.relationId===r.relationId);if(index>=0)semanticFacts.push({sourceRef:`professionalModules/relationships/items/${index}`,value:p.relationships.items[index]});}
   if(sectionKey==='S03_LIFE_STRUCTURE')for(const key of ['candidates','summary','counterEvidenceRefs','qualifierCodes'])if(p.pattern?.[key])semanticFacts.push({sourceRef:`professionalModules/pattern/${key}`,value:p.pattern[key]});
-  depth={version:'BAZI_RICH_CLAIM_IR_V1',selection:'ALL_SECTION_OWNED_RELATIONS_NO_TOP_N',relations,semanticFacts,patternCandidates:topic?.patternCandidates||[],carryingContext:topic?.carryingContext||null,priorityRefs:topic?.priorityRefs||[],rawFactsAreNotNarrativeLicenses:true,observableLifeClaims:'NOT_LICENSED_UNLESS_EXPLICIT_NATIVE_SOURCE',missingFacets:['NO_AUTOMATIC_REAL_WORLD_MANIFESTATION']};
+  depth={version:'BAZI_RICH_CLAIM_IR_V2',selection:'FULL_SECTION_RELATIONS_PLUS_METHOD_OWNED_LIFE_LAYER',relations,semanticFacts,patternCandidates:topic?.patternCandidates||[],carryingContext:topic?.carryingContext||null,priorityRefs:topic?.priorityRefs||[],rawFactsAreNotNarrativeLicenses:true,licensedLifeLayerExplanation:true,observableLifeClaims:'QUESTIONS_ONLY_UNLESS_EXPLICIT_NATIVE_SOURCE',missingFacets:['NO_AUTOMATIC_OBSERVED_REALITY']};
  }
  const provenance=await Promise.all([...MODULES,...(depth?['realityBridge']:[])].filter(k=>p[k]).map(async module=>({module:`professionalModules/${module}`,digest:await sha256Stable(p[module])})));
  return deepFreeze({version:EXPLANATORY_AUTHORITY_VERSION,claims,reflectionQuestions:questions,counterPrompts:counters,manifestationLicenses:[],temporalAuthority:['S08_TIMING','S09_GUIDANCE'].includes(sectionKey)?timeline:null,integratedGuidanceIR:guidance,sourceLineage:provenance,...(depth?{depth}: {})});

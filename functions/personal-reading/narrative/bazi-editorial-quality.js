@@ -1,8 +1,8 @@
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
-export const MEANING_CANON_VERSION='BAZI_EDITORIAL_MEANING_CANON_V1';
-export const QUALITY_VERSION='BAZI_EDITORIAL_QUALITY_F_V1';
+export const MEANING_CANON_VERSION='BAZI_EDITORIAL_MEANING_CANON_V2';
+export const QUALITY_VERSION='BAZI_EDITORIAL_QUALITY_F_V2';
 export const METRICS_VERSION='BAZI_EDITORIAL_METRICS_F_V2';
-export const S02_REVISION='BAZI_S02_EDITORIAL_SCOPE_R1';
+export const S02_REVISION='BAZI_S02_EDITORIAL_SCOPE_R2';
 export const S02_SCOPE_INSTRUCTIONS='For S02 follow scopeDistribution. General no-observed-effect and no-prediction limits may be stated once in boundaryNote and apply to every explicitly symbolic/structural paragraph. This is editorial placement only: do not remove a substantive condition, turn a relation into a real-life effect, or promote a reading priority into a measured trait. Keep unresolved verdicts local, each pair separate, secondary rank explicit, and dimensions simultaneous. Verify each paragraph in the context of that explicit shared scope; reject absent shared scope or any contradictory assertion. Do not demand the same general disclaimer after each pair. Keep the measurement caveat once in lead, not again in headline or closingInsight. Use closingInsight to retain the dimensions together, rather than repeat the primary theme list.';
 export const STYLE_CONTRACTS=deepFreeze({
  en:{version:'BAZI_EDITORIAL_EN_V1',voice:'Direct, concrete, calm English. Explain the admitted meaning rather than narrating the report machinery.',avoid:['source-designated','visible count','interface','the method records','this topic'],numbers:'No chart counts or percentages in narrative. Essential timing dates belong to the timing visual.',boundaries:'One local scope sentence; full method limits belong in Method & Appendix. Preserve every substantive uncertainty and condition.',structure:'Lead with the selected meaning; explain its specific context and tension; close with one licensed reflection. No invented examples or causal links.'},
@@ -19,7 +19,7 @@ export async function withEditorialMeaningBrief(pack){
   allowedReflection:(pack.reflectionQuestions||[]).filter(q=>q.claimIds?.includes(c.id)),prohibitedInference:['CAUSE','SEQUENCE','BEHAVIORAL_EFFECT','EVENT_INFERENCE','REALITY_ASSERTION'],sourceRefs:c.sourceRefs,conditions:c.conditions,openConditions:c.openConditions}));
  const canon={version:MEANING_CANON_VERSION,sectionKey:pack.sectionKey,locale:pack.locale,themes,sourceLineage:pack.sourceLineage,createsMeaning:false};
  const meaningCanonDigest=await sha256Stable(canon);
- const order=['EMPHASIS','CO_OCCURRING_DIMENSIONS','ASSOCIATION','CONTEXT_MODIFIER','SUPPORT_CONDITION','TENSION','CONTRAST','OPEN_CONDITION','TEMPORAL_RELEVANCE','CROSS_SECTION_RELEVANCE'];
+ const order=['EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS','OPERATING_CONDITION','SUPPORT_CONDITION','TENSION','CONTRAST','OPEN_CONDITION','TEMPORAL_RELEVANCE','CROSS_SECTION_RELEVANCE','ASSOCIATION','CONTEXT_MODIFIER'];
  const ordered=claims.filter(c=>c.relationType!=='BOUNDARY').slice().sort((a,b)=>order.indexOf(a.relationType)-order.indexOf(b.relationType)||(a.rank??999)-(b.rank??999)||a.id.localeCompare(b.id));
  const contentPlan=Object.fromEntries(Object.entries(pack.contentPlan).map(([field,ids])=>[field,ids.slice().sort((a,b)=>ordered.findIndex(c=>c.id===a)-ordered.findIndex(c=>c.id===b))]));
  const brief={version:'BAZI_SECTION_NARRATIVE_BRIEF_F_V1',sectionKey:pack.sectionKey,locale:pack.locale,meaningCanonDigest,orderedMeaningIds:ordered.map(c=>c.id),contentPlan,

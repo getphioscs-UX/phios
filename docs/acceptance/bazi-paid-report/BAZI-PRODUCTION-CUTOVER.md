@@ -1,5 +1,5 @@
 # Production cutover
 
-OFF. S03–S09 are not owner accepted. Full bilingual snapshot coverage, real paid rendering, multi-profile acceptance and production acceptance have not passed. S01 and S10 retain their existing deterministic roles. The API key is capability only and is not evidence that a section rendered T3.
+OFF. The prior S02 V1 acceptance was superseded by owner quality feedback on 2026-09-24. S02–S09 therefore have no current owner-accepted V2 bilingual snapshot coverage.
 
-Do not turn production on until all Master Work cutover gates are supported by actual evidence. The existing T1/T2 and commerce/entitlement owners remain unchanged.
+Do not activate Production until the V2 explanatory authority, rebuilt evidence packs, real provider generation, semantic/editorial validation, bilingual parity, browser/PDF evidence and explicit owner acceptance all pass section by section. S01 and S10 retain their deterministic roles. The API key is capability only and is never evidence that a section rendered T3.

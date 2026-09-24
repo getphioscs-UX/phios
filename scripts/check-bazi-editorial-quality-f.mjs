@@ -8,14 +8,15 @@ import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-
 const packs=JSON.parse(fs.readFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json')).packs;
 for(const locale of ['en','zh-Hans']){
  const source=packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`],before=JSON.stringify(source),pack=await withEditorialMeaningBrief(source);
+ assert.equal(source.explanatoryAuthorityVersion,'BAZI_EXPLANATORY_AUTHORITY_V2');assert(source.licensedClaims.some(c=>c.relationType==='LIFE_DOMAIN_EXPLANATION'));assert(source.licensedClaims.some(c=>c.relationType==='OPERATING_CONDITION'));
  assert.equal(JSON.stringify(source),before);assert.deepEqual(pack.licensedClaims,source.licensedClaims);
  assert.equal(pack.meaningCanon.version,MEANING_CANON_VERSION);assert.deepEqual(pack.sectionNarrativeBrief.styleContract,STYLE_CONTRACTS[locale]);
  for(const theme of pack.meaningCanon.themes)for(const key of ['customerMeaning','roleInWholeChart','supportingContext','tension','contrast','openCondition','allowedReflection','prohibitedInference'])assert(key in theme);
  assert.deepEqual(await withEditorialMeaningBrief(source),pack);
- if(source.sectionNarrativeBrief?.editorialRevision==='BAZI_S02_EDITORIAL_SCOPE_R1')assert.equal(pack.canonicalEvidenceHash,source.canonicalEvidenceHash,'serialized current briefs retain their exact evidence binding');
+ if(source.sectionNarrativeBrief?.editorialRevision==='BAZI_S02_EDITORIAL_SCOPE_R2')assert.equal(pack.canonicalEvidenceHash,source.canonicalEvidenceHash,'serialized current briefs retain their exact evidence binding');
  else assert.notEqual(pack.canonicalEvidenceHash,source.canonicalEvidenceHash);
  assert.deepEqual(await withEditorialMeaningBrief(pack),pack,'reopening a revised brief is idempotent');
- assert.equal(pack.sectionNarrativeBrief.editorialRevision,'BAZI_S02_EDITORIAL_SCOPE_R1');
+ assert.equal(pack.sectionNarrativeBrief.editorialRevision,'BAZI_S02_EDITORIAL_SCOPE_R2');
  assert.equal(pack.sectionNarrativeBrief.scopeDistribution.sharedScope.field,'boundaryNote');
  assert.deepEqual(pack.sectionNarrativeBrief.scopeDistribution.localConditions.map(c=>c.claimId),pack.sectionNarrativeBrief.orderedMeaningIds);
  assert.equal((await withEditorialMeaningBrief(packs[`BASELINE_NOW:${locale}:S03_LIFE_STRUCTURE`])).sectionNarrativeBrief.editorialRevision,undefined,'S02 revision must not revise later sections implicitly');

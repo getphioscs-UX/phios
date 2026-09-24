@@ -1,32 +1,7 @@
 {
-  "acceptedReviews": [
-    {
-      "profileId": "BASELINE_NOW",
-      "sectionKey": "S02_PERSONALITY",
-      "locale": "en",
-      "snapshotDigest": "614b4b6a9121409202bf2db76d8f17ff7291818d1b15d059905e4a4d3d3392fa",
-      "briefDigest": "2f474f959946882e2ad822ea2316859cb5b566a51dd4af11c4a71f3b89ee9725",
-      "decision": "ACCEPT",
-      "reviewer": "Owner (explicit chat acceptance)",
-      "reviewedAt": "2026-09-23T06:15:44Z",
-      "evidence": "接受本轮 S02 中英文，继续 S03",
-      "questionId": "call_IUMpyEzroaQYHmaGy1ts8HkX"
-    },
-    {
-      "profileId": "BASELINE_NOW",
-      "sectionKey": "S02_PERSONALITY",
-      "locale": "zh-Hans",
-      "snapshotDigest": "01d5bece462951c478ca13f20a46f733886214d8f4a9d0e0a11d93e595c53264",
-      "briefDigest": "9bf448c70b64523e716c31a5cce85e7fb32a7f8fb9239bb915ecad0918ff7a2f",
-      "decision": "ACCEPT",
-      "reviewer": "Owner (explicit chat acceptance)",
-      "reviewedAt": "2026-09-23T06:15:44Z",
-      "evidence": "接受本轮 S02 中英文，继续 S03",
-      "questionId": "call_IUMpyEzroaQYHmaGy1ts8HkX"
-    }
-  ],
+  "acceptedReviews": [],
   "allSectionsAccepted": false,
-  "currentSection": "S03_LIFE_STRUCTURE",
+  "currentSection": "S02_PERSONALITY",
   "nextSectionBlockedUntilOwnerAcceptance": true,
   "sections": [
     {
@@ -36,12 +11,12 @@
     },
     {
       "sectionId": "S02_PERSONALITY",
-      "status": "ACCEPTED_BASELINE_PAIR",
+      "status": "REVISE_REQUIRED_V2",
       "production": false
     },
     {
       "sectionId": "S03_LIFE_STRUCTURE",
-      "status": "READY_FOR_QA_GENERATION",
+      "status": "BLOCKED_BY_S02_V2",
       "production": false
     },
     {
@@ -80,18 +55,36 @@
       "production": false
     }
   ],
-  "currentGate": "S03_QA_GENERATION",
+  "currentGate": "S02_V2_REGENERATION",
   "engineeringCheckpoint": {
-    "startingHead": "c846cd9428469b07a7f383da47599c2d2206c832",
-    "canonicalAcceptedSnapshotLoader": "IMPLEMENTED",
-    "s02BilingualAcceptedSnapshotCount": 2,
-    "s03ClaimIr": "ENGINEERING_READY",
-    "s03LiveT3Pair": "NOT_RUN",
-    "s03BilingualParity": "NOT_RUN",
-    "ownerAcceptanceEligible": false,
-    "productionEligible": false,
-    "mergedMainVerified": true,
-    "releaseEvidenceSync": "IMPLEMENTED",
-    "s03ParityUiAction": "IMPLEMENTED_SOURCE_AND_BUNDLE"
-  }
+    "startingHead": "228594a13148c8e0bca655be5813392388a6cb29",
+    "explanatoryAuthority": "BAZI_EXPLANATORY_AUTHORITY_V2",
+    "claimIr": "BAZI_RICH_CLAIM_IR_V2",
+    "compositionVersion": "BAZI_EDITORIAL_COMPOSITION_V2",
+    "verifierVersion": "BAZI_SEMANTIC_VERIFIER_V2",
+    "editorialVersion": "BAZI_EDITORIAL_VALIDATOR_V2",
+    "previousS02Acceptance": "SUPERSEDED",
+    "activeAcceptedSnapshotCount": 0,
+    "providerSpendFrozenUntilRebuild": true,
+    "nextSectionBlockedUntilOwnerAcceptance": true,
+    "productionEligible": false
+  },
+  "supersededReviews": [
+    {
+      "profileId": "BASELINE_NOW",
+      "sectionKey": "S02_PERSONALITY",
+      "locale": "en",
+      "snapshotDigest": "614b4b6a9121409202bf2db76d8f17ff7291818d1b15d059905e4a4d3d3392fa",
+      "decision": "SUPERSEDED",
+      "reason": "Owner explicitly rejected the market quality of the prior S02 prose on 2026-09-24; historical bytes remain immutable."
+    },
+    {
+      "profileId": "BASELINE_NOW",
+      "sectionKey": "S02_PERSONALITY",
+      "locale": "zh-Hans",
+      "snapshotDigest": "01d5bece462951c478ca13f20a46f733886214d8f4a9d0e0a11d93e595c53264",
+      "decision": "SUPERSEDED",
+      "reason": "Owner explicitly rejected the market quality of the prior S02 prose on 2026-09-24; historical bytes remain immutable."
+    }
+  ]
 }

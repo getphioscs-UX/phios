@@ -14,7 +14,7 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
   if(snapshot.sectionKey!==pack.sectionKey||snapshot.locale!==pack.locale||snapshot.canonicalEvidenceHash!==pack.canonicalEvidenceHash||snapshot.compositionVersion!==COMPOSITION_VERSION||snapshot.verifierVersion!==VERIFIER_VERSION||snapshot.editorialVersion!==EDITORIAL_VERSION||snapshotDigest!==await sha256Stable(seed)||validateEditorial(snapshot.finalNarrative,pack).status!=='PASS'||!validateSemanticVerdict(snapshot.verification,snapshot.finalNarrative,pack))return fallback('FROZEN_SNAPSHOT_INVALID');
   return {status:'PASS',snapshot:deepFreeze(snapshot),internalOnly:{cacheHit:true}};
  }
- if(pack.schemaVersion!=='BAZI_SECTION_EVIDENCE_PACK_V3'||!pack.licensedClaims.some(c=>c.relationType!=='BOUNDARY'))return fallback('INSUFFICIENT_ADMITTED_INTERPRETATION');
+ if(pack.schemaVersion!=='BAZI_SECTION_EVIDENCE_PACK_V4'||!pack.licensedClaims.some(c=>c.relationType!=='BOUNDARY'))return fallback('INSUFFICIENT_ADMITTED_INTERPRETATION');
  const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:true},registry);
  const invoke=(providerAdapters||createPublicationProviderAdapters({env,fetcher}))[route.selectedProvider];
  if(!invoke||!route.selectedModel)return fallback('NO_ADMITTED_PROVIDER_ROUTE');
@@ -32,7 +32,7 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
    for(let attempt=0;attempt<2;attempt++){
     const scopeInstructions=pack.sectionNarrativeBrief?.editorialRevision===S02_REVISION?' '+S02_SCOPE_INSTRUCTIONS:'';
     const planned=Object.values(pack.contentPlan||{}).reduce((n,ids)=>n+ids.length,0);
-    const editorialIntent={maximumMainUnits:pack.claimIrVersion?Math.max(pack.locale==='en'?230:420,planned*(pack.locale==='en'?40:70)):pack.locale==='en'?230:420,maximumItemUnits:pack.locale==='en'?40:65,noMinimumLength:true,semanticContinuationPages:Boolean(pack.claimIrVersion)};
+    const editorialIntent={maximumMainUnits:pack.claimIrVersion?Math.max(pack.locale==='en'?420:700,planned*(pack.locale==='en'?70:110)):pack.locale==='en'?320:520,maximumItemUnits:pack.locale==='en'?90:140,noMinimumLength:true,semanticContinuationPages:Boolean(pack.claimIrVersion)};
     const candidate=await call('REPORT_SECTION_COMPOSITION',{repair,editorialIntent,sectionNarrativeBrief:pack.sectionNarrativeBrief||null},COMPOSITION_SCHEMA,COMPOSITION_PROMPT+' Observe editorialIntent as maximum layout limits, never minimum content requirements. Follow SectionNarrativeBrief and its locale-specific style contract. Explain only the ordered licensed meaning atoms. Do not repeat preceding visual counts or percentages. Preserve substantive conditions without repeating general disclaimers in every paragraph; one local scope sentence is enough, with complete limits in Method & Appendix.'+scopeInstructions);
     const editorial=validateEditorial(candidate,pack);
     // A verifier sees the complete evidence and every candidate block. Reference

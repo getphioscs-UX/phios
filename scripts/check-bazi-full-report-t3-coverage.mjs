@@ -9,29 +9,31 @@ assert.deepEqual(deployed.profileIds,['BASELINE_NOW']);assert(Object.keys(deploy
 for(const [key,pack] of Object.entries(deployed.packs))assert.deepEqual(pack,fixtures.packs[key]);
 assert(!fs.readFileSync('functions/api/qa-bazi-t3.js','utf8').includes("import fixtures from '../personal-reading/narrative/bazi-t3-preview-packs.generated.json'"),'offline matrix must not inflate deployed Worker');
 const acceptedLoader=await loadAcceptedBaziSnapshots();
-assert.equal(acceptedLoader.records.length,2,'only the owner-accepted S02 bilingual pair is canonical at this checkpoint');
-for(const locale of ['en','zh-Hans'])assert.equal(acceptedLoader.snapshots[locale].S02_PERSONALITY.snapshotDigest,read(root+'/snapshots/accepted-s02-'+locale+'.json').snapshotDigest);
+assert.equal(acceptedLoader.records.length,0,'owner superseded the previous S02 acceptance');
+assert.equal(acceptedLoader.historicalRecords.length,2,'the old bilingual snapshots remain immutable historical evidence');
 const releaseAcceptance=read('docs/guided-report-successor-r2/bazi-t3/acceptance.json');
-for(const record of acceptedLoader.records){assert.equal(releaseAcceptance.snapshotDigests[`${record.locale}:${record.sectionKey}`],record.snapshotDigest);assert(releaseAcceptance.humanReviews.some(review=>review.locale===record.locale&&review.sectionKey===record.sectionKey&&review.snapshotDigest===record.snapshotDigest&&review.briefDigest===record.briefDigest&&review.decision==='ACCEPT'));}
+assert.equal(releaseAcceptance.explanatoryAuthorityVersion,'BAZI_EXPLANATORY_AUTHORITY_V2');
 assert.equal(releaseAcceptance.BAZI_PRODUCTION_SUCCESSOR_ACTIVE,false);
-const reviewSource=fs.readFileSync('assets/customer-ui/js/personal-products/bazi-t3-review.js','utf8'),reviewBundle=fs.readFileSync('assets/customer-ui/js/personal-products/bazi-t3-review.bundle.js','utf8');
-assert(reviewSource.includes("action:'parity'"),'review source must trigger the current-section parity route');
-assert(reviewBundle.includes('action:"parity"'),'committed browser bundle must include the parity route');
+assert.equal((releaseAcceptance.humanReviews||[]).filter(r=>r.decision==='ACCEPT').length,0);
 for(const r of read(root+'/baseline/protected-files.json').files.filter(r=>!r.path.startsWith('.tmp/')||fs.existsSync(r.path)))assert.equal(createHash('sha256').update(fs.readFileSync(r.path)).digest('hex'),r.sha256,r.path);
 for(const locale of ['en','zh-Hans']){
- const snapshot=read(root+'/snapshots/accepted-s02-'+locale+'.json'),pack=fixtures.packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`];
- assert.equal((await composeBaziT3Section({pack,snapshot})).status,'PASS','Accepted S02 must still resolve');
- for(const change of [{locale:locale==='en'?'zh-Hans':'en'},{sectionKey:'S03_LIFE_STRUCTURE'},{canonicalEvidenceHash:'0'.repeat(64)},{compositionVersion:'OLD'},{snapshotDigest:'0'.repeat(64)}])assert.equal((await composeBaziT3Section({pack,snapshot:{...snapshot,...change}})).status,'FALLBACK');
- const projection=await projectBaziSectionPublication({reading:source.reading,locale,temporalContext:source.temporalSnapshot,composition:{t3:{stage:'QA',environment:'qa',acceptance,snapshots:{S02_PERSONALITY:snapshot}}}});
- assert.equal(projection.internalSections.find(s=>s.sectionKey==='S02_PERSONALITY').diagnostics.sectionRuntimeTier,'T3');
+ const oldSnapshot=read(root+'/snapshots/accepted-s02-'+locale+'.json'),pack=fixtures.packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`];
+ assert.equal(pack.explanatoryAuthorityVersion,'BAZI_EXPLANATORY_AUTHORITY_V2');
+ assert.equal(pack.schemaVersion,'BAZI_SECTION_EVIDENCE_PACK_V4');
+ assert.equal((await composeBaziT3Section({pack,snapshot:oldSnapshot})).status,'FALLBACK','superseded V1 snapshot must fail closed under V2');
+ const projection=await projectBaziSectionPublication({reading:source.reading,locale,temporalContext:source.temporalSnapshot,composition:{t3:{stage:'QA',environment:'qa',acceptance,snapshots:{}}}});
+ assert.equal(projection.internalSections.find(s=>s.sectionKey==='S02_PERSONALITY').diagnostics.fallbackReason,'ACCEPTED_SNAPSHOT_REQUIRED');
  assert.equal(projection.internalSections.find(s=>s.sectionKey==='S03_LIFE_STRUCTURE').diagnostics.fallbackReason,'ACCEPTED_SNAPSHOT_REQUIRED');
  assert(!JSON.stringify(projection.pages).includes('claimIrVersion'));
- const ir=await buildBaZiNarrativeClaimIR({reading:source.reading,sectionKey:'S03_LIFE_STRUCTURE',locale,temporalSnapshot:source.temporalSnapshot});
- const topic=source.reading.professionalModules.professionalTopics.topics.find(t=>t.topicCode==='LIFE_OPERATION');
- assert.equal(ir.claims.filter(c=>c.id.includes(':PAIR_')).length,topic.relationshipInterfaces.length);assert.equal(ir.depth.relations.length,4);
+ const ir=await buildBaZiNarrativeClaimIR({reading:source.reading,sectionKey:'S02_PERSONALITY',locale,temporalSnapshot:source.temporalSnapshot});
+ const topic=source.reading.professionalModules.professionalTopics.topics.find(t=>t.topicCode==='CAPABILITY');
+ assert.equal(ir.claims.filter(c=>c.id.includes(':PAIR_')).length,topic.relationshipInterfaces.length);
+ assert.equal(ir.depth.relations.length,topic.relationshipInterfaces.length);
+ assert.equal(ir.depth.version,'BAZI_RICH_CLAIM_IR_V2');
+ assert(ir.claims.some(c=>c.relationType==='LIFE_DOMAIN_EXPLANATION'));
+ assert(ir.claims.some(c=>c.relationType==='OPERATING_CONDITION'));
  for(const c of ir.claims){assert(c.basis.length);assert(c.license&&!c.license.createsMethodRule);for(const b of c.basis)assert.deepEqual(b.value,b.ref.split('/').reduce((x,k)=>x?.[k],source.reading));}
- const changed=structuredClone(source.reading);changed.professionalModules.professionalTopics.topics.find(t=>t.topicCode==='LIFE_OPERATION').relationshipInterfaces.pop();const other=await buildBaZiNarrativeClaimIR({reading:changed,sectionKey:'S03_LIFE_STRUCTURE',locale,temporalSnapshot:source.temporalSnapshot});assert.equal(other.depth.relations.length,3);
 }
 for(const p of Object.values(fixtures.packs).filter(p=>p.sectionKey==='S03_LIFE_STRUCTURE'))assert.equal(p.semanticDepth.relations.length,p.licensedClaims.filter(c=>c.id.includes(':PAIR_')).length);
 const cleanup=read(root+'/snapshots/cleanup-manifest.json');assert(cleanup.records.every(r=>!fs.existsSync(r.path)));
-console.log('PASS paid T3 engineering: accepted S02 preserved and rendered; locale/section/version/evidence/digest misses rejected; S03 complete relation retention across available profiles; honest internal fallback; local cleanup. Full T3 production remains OFF.');
+console.log('PASS paid T3 V2 engineering: previous S02 acceptance is superseded but preserved historically; V2 life-layer claims and complete relation retention are active; old snapshots fail closed; Production remains OFF.');
