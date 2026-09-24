@@ -2,6 +2,10 @@ import editorialAcceptance from '../../../../config/reports/bazi-editorial-quali
 import {renderVisualReportPages} from './visual-report-pages.js';
 import {fitPublicationForPrint,settlePublicationAssets} from './publication-report-pages.js';
 const root='/docs/guided-report-successor-r2/bazi-t3';
+const EXPECTED_COMPOSITION_VERSION='BAZI_EDITORIAL_COMPOSITION_V2';
+const EXPECTED_AUTHORITY_VERSION='BAZI_EXPLANATORY_AUTHORITY_V2';
+const EXPECTED_QUALITY_VERSION='BAZI_EDITORIAL_QUALITY_F_V2';
+
 const locale=document.querySelector('script[data-locale]').dataset.locale||new URLSearchParams(location.search).get('locale')||'en';
 if(!['en','zh-Hans'].includes(locale))throw Error('LOCALE_INVALID');
 document.documentElement.lang=locale;
@@ -33,6 +37,16 @@ editorialReview.style.cssText='max-width:900px;margin:24px auto;padding:24px;bac
 document.querySelector('nav').after(editorialReview);
 editorialReview.textContent=`Addendum F: BASELINE_NOW ${activeSection||'baseline review complete'} only. Both languages require human acceptance before the next section. Historical snapshots do not count as F acceptance.`;
 function showEditorialCandidate(result){
+ const snapshotVersion=result?.snapshot?.compositionVersion||null;
+ const authorityVersion=result?.snapshot?.explanatoryAuthorityVersion||null;
+ const qualityVersion=result?.snapshot?.editorialQualityVersion||null;
+ if(result?.snapshot&&(snapshotVersion!==EXPECTED_COMPOSITION_VERSION||authorityVersion!==EXPECTED_AUTHORITY_VERSION||qualityVersion!==EXPECTED_QUALITY_VERSION)){
+  editorialReview.innerHTML='';
+  const h=document.createElement('h2');h.textContent='STALE QA DEPLOYMENT / SNAPSHOT';editorialReview.append(h);
+  const p=document.createElement('p');p.textContent='This candidate is not BaZi T3 V2 and cannot be reviewed or accepted. Deploy the current main and generate S02 again.';editorialReview.append(p);
+  const pre=document.createElement('pre');pre.textContent=JSON.stringify({compositionVersion:snapshotVersion,authorityVersion,qualityVersion,expectedCompositionVersion:EXPECTED_COMPOSITION_VERSION,expectedAuthorityVersion:EXPECTED_AUTHORITY_VERSION,expectedQualityVersion:EXPECTED_QUALITY_VERSION,canonicalEvidenceHash:result?.snapshot?.canonicalEvidenceHash||null},null,2);editorialReview.append(pre);
+  return;
+ }
  const accepted=result?.status==='PASS'&&result.snapshot&&result.editorialReassessment?.status!=='REJECT';
  const candidate=result?.snapshot?.finalNarrative||result?.internalOnly?.candidate||result?.internalOnly?.lastRepair?.candidate;
  editorialReview.replaceChildren();
@@ -45,12 +59,12 @@ function showEditorialCandidate(result){
   for(const b of blocks){if(!b?.text?.trim())continue;const p=document.createElement('p');p.textContent=b.text;editorialReview.append(p);}
  }
  if(!accepted){if(result?.editorialReassessment){const p=document.createElement('p');p.textContent='Current editorial check: '+result.editorialReassessment.issues.join(', ');editorialReview.append(p);}return;}
- const metadata=document.createElement('pre');metadata.style.overflowWrap='anywhere';metadata.style.whiteSpace='pre-wrap';metadata.textContent=JSON.stringify({snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,quality:result.snapshot.editorialQuality},null,2);editorialReview.append(metadata);
+ const metadata=document.createElement('pre');metadata.style.overflowWrap='anywhere';metadata.style.whiteSpace='pre-wrap';metadata.textContent=JSON.stringify({compositionVersion:result.snapshot.compositionVersion,authorityVersion:result.snapshot.explanatoryAuthorityVersion,qualityVersion:result.snapshot.editorialQualityVersion,canonicalEvidenceHash:result.snapshot.canonicalEvidenceHash,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,quality:result.snapshot.editorialQuality},null,2);editorialReview.append(metadata);
  const reviewer=document.createElement('input');reviewer.placeholder='Human reviewer name';reviewer.setAttribute('aria-label','Addendum F reviewer');
  const decision=document.createElement('select');decision.setAttribute('aria-label','Addendum F decision');
  for(const [value,label] of [['','Not reviewed'],['ACCEPT','Accept editorial quality'],['REVISE','Needs revision'],['REJECT','Reject']]){const option=document.createElement('option');option.value=value;option.textContent=label;decision.append(option);}
  const button=document.createElement('button');button.textContent='Export digest-bound Addendum F review';
- button.onclick=()=>{if(!reviewer.value.trim()||!decision.value)return;const record={version:'BAZI_EDITORIAL_QUALITY_F_V1',humanReviews:[{profileId:'BASELINE_NOW',sectionKey:result.snapshot.sectionKey,locale,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,decision:decision.value,reviewer:reviewer.value.trim(),reviewedAt:new Date().toISOString()}],productionActivated:false};const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=`bazi-editorial-f-${activeSection}-${locale}-human-review.json`;link.click();URL.revokeObjectURL(url);};
+ button.onclick=()=>{if(!reviewer.value.trim()||!decision.value)return;const record={version:EXPECTED_QUALITY_VERSION,humanReviews:[{profileId:'BASELINE_NOW',sectionKey:result.snapshot.sectionKey,locale,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,decision:decision.value,reviewer:reviewer.value.trim(),reviewedAt:new Date().toISOString()}],productionActivated:false};const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=`bazi-editorial-f-${activeSection}-${locale}-human-review.json`;link.click();URL.revokeObjectURL(url);};
  editorialReview.append(reviewer,decision,button);
 }
 document.querySelector('#compare').onclick=async()=>{
@@ -65,7 +79,7 @@ document.querySelector('#compare').onclick=async()=>{
  const exportReview=document.createElement('button');exportReview.textContent='Export human review evidence';
  const reviewStatus=document.createElement('p');reviewStatus.textContent='Decisions are bound to the displayed snapshot. Exported evidence still requires validation by the release owner; it does not activate production.';
  exportReview.onclick=()=>{const name=reviewer.value.trim(),choices=[...container.querySelectorAll('[data-human-section]')].filter(s=>s.value);if(!name||!choices.length){reviewStatus.textContent='Enter the reviewer name and an explicit section decision.';return;}
- const record={locale,authorityVersion:'BAZI_EXPLANATORY_AUTHORITY_V1',humanReviews:choices.map(s=>({sectionKey:s.dataset.humanSection,locale,snapshotDigest:s.dataset.snapshotDigest,decision:s.value,reviewer:name,reviewedAt:new Date().toISOString()})),productionActivated:false};
+ const record={locale,authorityVersion:EXPECTED_AUTHORITY_VERSION,humanReviews:choices.map(s=>({sectionKey:s.dataset.humanSection,locale,snapshotDigest:s.dataset.snapshotDigest,decision:s.value,reviewer:name,reviewedAt:new Date().toISOString()})),productionActivated:false};
  const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download='bazi-human-review-'+locale+'.json';link.click();URL.revokeObjectURL(url);reviewStatus.textContent='Review evidence exported. Release acceptance remains separate.';};container.append(reviewer,exportReview,reviewStatus);
  container.hidden=!container.hidden;report.hidden=!container.hidden;
 };
