@@ -11,6 +11,12 @@ assert(!fs.readFileSync('functions/api/qa-bazi-t3.js','utf8').includes("import f
 const acceptedLoader=await loadAcceptedBaziSnapshots();
 assert.equal(acceptedLoader.records.length,2,'only the owner-accepted S02 bilingual pair is canonical at this checkpoint');
 for(const locale of ['en','zh-Hans'])assert.equal(acceptedLoader.snapshots[locale].S02_PERSONALITY.snapshotDigest,read(root+'/snapshots/accepted-s02-'+locale+'.json').snapshotDigest);
+const releaseAcceptance=read('docs/guided-report-successor-r2/bazi-t3/acceptance.json');
+for(const record of acceptedLoader.records){assert.equal(releaseAcceptance.snapshotDigests[`${record.locale}:${record.sectionKey}`],record.snapshotDigest);assert(releaseAcceptance.humanReviews.some(review=>review.locale===record.locale&&review.sectionKey===record.sectionKey&&review.snapshotDigest===record.snapshotDigest&&review.briefDigest===record.briefDigest&&review.decision==='ACCEPT'));}
+assert.equal(releaseAcceptance.BAZI_PRODUCTION_SUCCESSOR_ACTIVE,false);
+const reviewSource=fs.readFileSync('assets/customer-ui/js/personal-products/bazi-t3-review.js','utf8'),reviewBundle=fs.readFileSync('assets/customer-ui/js/personal-products/bazi-t3-review.bundle.js','utf8');
+assert(reviewSource.includes("action:'parity'"),'review source must trigger the current-section parity route');
+assert(reviewBundle.includes('action:"parity"'),'committed browser bundle must include the parity route');
 for(const r of read(root+'/baseline/protected-files.json').files.filter(r=>!r.path.startsWith('.tmp/')||fs.existsSync(r.path)))assert.equal(createHash('sha256').update(fs.readFileSync(r.path)).digest('hex'),r.sha256,r.path);
 for(const locale of ['en','zh-Hans']){
  const snapshot=read(root+'/snapshots/accepted-s02-'+locale+'.json'),pack=fixtures.packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`];

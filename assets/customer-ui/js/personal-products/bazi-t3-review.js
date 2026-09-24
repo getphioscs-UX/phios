@@ -26,6 +26,7 @@ const sectionOptions=[...document.querySelector('#section').options];
 const activeSection=sectionOptions.find(option=>!['en','zh-Hans'].every(language=>editorialAcceptance.humanReviews.some(r=>r.profileId==='BASELINE_NOW'&&r.sectionKey===option.value&&r.locale===language&&r.decision==='ACCEPT'&&r.snapshotDigest&&r.briefDigest&&r.reviewer&&r.reviewedAt)))?.value;
 for(const option of sectionOptions)option.disabled=option.value!==activeSection;
 if(activeSection)document.querySelector('#section').value=activeSection;else document.querySelector('#generate').disabled=true;
+parity.disabled=!activeSection;
 document.querySelector('#compare').textContent='Historical Addendum E comparison — not Addendum F acceptance';
 const editorialReview=document.createElement('section');editorialReview.id='editorial-f-result';
 editorialReview.style.cssText='max-width:900px;margin:24px auto;padding:24px;background:#fffcf4;line-height:1.8';
@@ -67,6 +68,12 @@ document.querySelector('#compare').onclick=async()=>{
  const record={locale,authorityVersion:'BAZI_EXPLANATORY_AUTHORITY_V1',humanReviews:choices.map(s=>({sectionKey:s.dataset.humanSection,locale,snapshotDigest:s.dataset.snapshotDigest,decision:s.value,reviewer:name,reviewedAt:new Date().toISOString()})),productionActivated:false};
  const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download='bazi-human-review-'+locale+'.json';link.click();URL.revokeObjectURL(url);reviewStatus.textContent='Review evidence exported. Release acceptance remains separate.';};container.append(reviewer,exportReview,reviewStatus);
  container.hidden=!container.hidden;report.hidden=!container.hidden;
+};
+parity.onclick=async()=>{
+ const status=document.querySelector('#generation-status');parity.disabled=true;status.textContent='Verifying current bilingual pair…';
+ try{const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({locale,sectionKey:document.querySelector('#section').value,profileId:profile.value,action:'parity'})});const data=await response.json();status.textContent=JSON.stringify({httpStatus:response.status,...data},null,2);}
+ catch{status.textContent='Bilingual parity request failed. No acceptance or production activation.';}
+ finally{parity.disabled=!activeSection;}
 };
 document.querySelector('#generate').onclick=async()=>{
  const button=document.querySelector('#generate'),status=document.querySelector('#generation-status');button.disabled=true;status.textContent='Running one bounded Preview shadow attempt…';
