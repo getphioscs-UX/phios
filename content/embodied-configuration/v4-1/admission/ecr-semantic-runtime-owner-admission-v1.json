@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "ECR-V4.1A-SEMANTIC-OWNER-ADMISSION-v1",
+  "status": "PENDING",
+  "mappings": [],
+  "requiredMappingFields": [
+    "mappingId",
+    "sourceIdentityRef",
+    "sourceClass",
+    "primaryOwner",
+    "secondaryOwners",
+    "scope",
+    "birthOrDesignRole",
+    "driverRole",
+    "phiCompositionRuleRef",
+    "evidenceRefs",
+    "humanReviewRef",
+    "customerMeaningAllowed",
+    "provenance",
+    "status"
+  ],
+  "allowedStatuses": [
+    "PENDING",
+    "ACCEPTED",
+    "REVISED",
+    "REJECTED",
+    "UNKNOWN"
+  ],
+  "rule": "Use deepest justified owner; multiple owners require primary/secondary rationale. Source coverage is not admission.",
+  "customerMeaningAllowed": false
+}

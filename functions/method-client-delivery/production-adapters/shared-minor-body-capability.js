@@ -24,9 +24,11 @@ export function createSharedMinorBodyCapability({provider=null,admission=null}={
         return deepFreeze({...result,outputDigest:await sha256Stable(result)});
       };
       if(!valid)return finish('INVALID_INPUT');
-      const gates=['licenseAccepted','runtimeAccepted','precisionAccepted','independentValidationAccepted','dataAccepted'];
+      const gates=['licenseAccepted','runtimeAccepted','precisionAccepted','independentValidationAccepted','dataAccepted','determinismAccepted','supportedRangeAccepted','productionReliabilityAccepted'];
       if(!provider || admission?.status!=='FROZEN' || !gates.every(g=>admission[g]===true))
         return finish('EPHEMERIS_DATA_MISSING',null,['CHIRON_PROVIDER_NOT_ADMITTED']);
+      if(!['providerCode','providerVersion','coordinateFrame'].every(k=>typeof admission[k]==='string'&&admission[k].length>0))
+        return finish('PROVIDER_ERROR',null,['INVALID_PROVIDER_ADMISSION']);
       if(provider.providerCode!==admission.providerCode || provider.providerVersion!==admission.providerVersion)
         return finish('PROVIDER_ERROR',null,['PROVIDER_ADMISSION_MISMATCH']);
       const t=Date.parse(canonicalInstant),lo=Date.parse(admission.startUtc),hi=Date.parse(admission.endUtc);
