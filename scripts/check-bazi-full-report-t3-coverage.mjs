@@ -2,11 +2,15 @@ import fs from 'node:fs';import assert from 'node:assert/strict';import {createH
 import {composeBaziT3Section} from '../functions/personal-reading/narrative/bazi-t3-composition.js';
 import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
 import {buildBaZiNarrativeClaimIR} from '../functions/personal-reading/narrative/bazi-explanatory-authority.js';
+import {loadAcceptedBaziSnapshots} from './lib/bazi-accepted-snapshot-loader.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p)),root='docs/acceptance/bazi-paid-report',source=read('docs/guided-report-successor-r2/bazi-source.json'),fixtures=read('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json'),acceptance=read('config/reports/bazi-editorial-quality-acceptance.json');
 const deployed=read('functions/personal-reading/narrative/bazi-t3-preview-baseline.generated.json');
 assert.deepEqual(deployed.profileIds,['BASELINE_NOW']);assert(Object.keys(deployed.packs).every(k=>k.startsWith('BASELINE_NOW:')));
 for(const [key,pack] of Object.entries(deployed.packs))assert.deepEqual(pack,fixtures.packs[key]);
 assert(!fs.readFileSync('functions/api/qa-bazi-t3.js','utf8').includes("import fixtures from '../personal-reading/narrative/bazi-t3-preview-packs.generated.json'"),'offline matrix must not inflate deployed Worker');
+const acceptedLoader=await loadAcceptedBaziSnapshots();
+assert.equal(acceptedLoader.records.length,2,'only the owner-accepted S02 bilingual pair is canonical at this checkpoint');
+for(const locale of ['en','zh-Hans'])assert.equal(acceptedLoader.snapshots[locale].S02_PERSONALITY.snapshotDigest,read(root+'/snapshots/accepted-s02-'+locale+'.json').snapshotDigest);
 for(const r of read(root+'/baseline/protected-files.json').files.filter(r=>!r.path.startsWith('.tmp/')||fs.existsSync(r.path)))assert.equal(createHash('sha256').update(fs.readFileSync(r.path)).digest('hex'),r.sha256,r.path);
 for(const locale of ['en','zh-Hans']){
  const snapshot=read(root+'/snapshots/accepted-s02-'+locale+'.json'),pack=fixtures.packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`];
