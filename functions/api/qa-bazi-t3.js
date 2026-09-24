@@ -1,13 +1,14 @@
 import {checkBaziShadowStage} from '../personal-reading/narrative/bazi-t3-shadow-stages.js';
 import {withEditorialMeaningBrief,QUALITY_VERSION,validateEditorialQuality} from '../personal-reading/narrative/bazi-editorial-quality.js';
 import editorialAcceptance from '../../config/reports/bazi-editorial-quality-acceptance.json';
+import goldStandardAcceptance from '../../config/reports/bazi-s02-editorial-gold-standard-acceptance.json';
 import fixtures from '../personal-reading/narrative/bazi-t3-preview-baseline.generated.json';
 import registry from '../../content/ai-economics/providers/ai-provider-cost-registry-v1.json';
 import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
 import {requireSameOrigin} from '../account/oidc-auth.js';
 import {composeBaziT3Section,verifyBaziT3BilingualParity} from '../personal-reading/narrative/bazi-t3-composition.js';
 import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
-import {COMPOSITION_VERSION} from '../personal-reading/narrative/bazi-editorial-contract.js';
+import {COMPOSITION_VERSION,validateEditorial} from '../personal-reading/narrative/bazi-editorial-contract.js';
 const headers={'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow, noarchive','Referrer-Policy':'no-referrer'};
 export async function onRequest(context){
  const reply=(body,status=200)=>Response.json(body,{status,headers});
@@ -22,7 +23,14 @@ export async function onRequest(context){
   for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>256){await reader.cancel();return reply({ok:false},413);}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
   const body=JSON.parse(raw);
   if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status'].includes(body.action)))return reply({ok:false},400);
-  const originalPack=fixtures.packs[`${body.profileId||'BASELINE_NOW'}:${body.locale}:${body.sectionKey}`];if(!originalPack)return reply({ok:false},400);
+  const profileId=body.profileId||'BASELINE_NOW',generating=!body.action||body.action==='generate';
+  const originalPack=fixtures.packs[`${profileId}:${body.locale}:${body.sectionKey}`];if(!originalPack)return reply({ok:false},400);
+  if(generating&&profileId==='BASELINE_NOW'&&body.sectionKey==='S02_PERSONALITY'){
+   const goldAccepted=goldStandardAcceptance?.decision==='ACCEPT'&&goldStandardAcceptance?.profileId==='BASELINE_NOW'&&goldStandardAcceptance?.sectionKey==='S02_PERSONALITY'&&goldStandardAcceptance?.goldStandardVersion==='BAZI_S02_EDITORIAL_GOLD_STANDARD_V1'&&goldStandardAcceptance?.depthGateVersion==='BAZI_S02_EDITORIAL_DEPTH_GATE_V1';
+   if(!goldAccepted)return reply({ok:false,code:'S02_GOLD_STANDARD_OWNER_ACCEPTANCE_REQUIRED'},409);
+   const englishOwnerAccepted=editorialAcceptance.humanReviews.some(r=>r.profileId==='BASELINE_NOW'&&r.sectionKey==='S02_PERSONALITY'&&r.locale==='en'&&r.decision==='ACCEPT'&&r.snapshotDigest&&r.briefDigest&&r.reviewer&&r.reviewedAt);
+   if(body.locale==='zh-Hans'&&!englishOwnerAccepted)return reply({ok:false,code:'S02_ENGLISH_OWNER_ACCEPTANCE_REQUIRED'},409);
+  }
   const pack=await withEditorialMeaningBrief(originalPack);
   if(!env.PRIVATE_REPORTS||!env.RUNTIME_DB)return reply({ok:false,code:'PREVIEW_STORAGE_UNAVAILABLE'},503);
   {
@@ -67,7 +75,7 @@ export async function onRequest(context){
    const record=await saved.json();
    // Preserve the original immutable result, but expose current quality policy
    // when reopening it. Reassessment never spends another provider call.
-   const editorialReassessment=record.snapshot?validateEditorialQuality(record.snapshot.finalNarrative,pack):null;
+   const editorialReassessment=record.snapshot?validateEditorial(record.snapshot.finalNarrative,pack):null;
    return reply({ok:true,cacheHit:true,result:{...record,...(editorialReassessment?{editorialReassessment}:{})},objectKey:key});
   }
   const now=new Date().toISOString(),runtime='QA-BAZI-T3-SYNTHETIC-SHADOW-V1';
