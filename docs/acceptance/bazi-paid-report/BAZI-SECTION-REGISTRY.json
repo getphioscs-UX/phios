@@ -1,5 +1,5 @@
 {
-  "authority": "PROJECTION_OF_EXISTING_REGISTRY_NOT_SECOND_OWNER",
+  "authority": "READ_MODEL_OF_EXISTING_REGISTRY_NOT_NEW_RUNTIME_OWNER",
   "sections": [
     {
       "sectionId": "S01_OVERVIEW",
@@ -7,48 +7,28 @@
         "zh-Hans": "命盘总览",
         "en": "Chart Overview"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "INSIGHT_LIST_PAGE"
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "Begin with the chart itself. The four pillars, Day Master and element inventory provide a shared reference for the chapters that follow. Read the visible structure before drawing conclusions about work, relationships or timing; each later chapter returns to a different part of this starting point.",
+        "zh-Hans": "先从命盘本身开始。四柱、日主与五行清单为后面的章节建立共同参照。先看清结构，再讨论事业、关系与时间；后续每章会从不同角度回到这个起点，而不是把一个符号当成全部答案。"
+      },
+      "requiredFacts": [],
+      "requiredRelationships": [],
+      "requiredDerivedInterpretations": [],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
       ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "visual:FOUR_PILLARS",
-        "visual:FIVE_ELEMENTS",
-        "chartHighlights"
-      ],
-      "t3Required": false,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "DETERMINISTIC",
-          "fallbackReason": null,
-          "claimCount": 0,
-          "relationshipClaimCount": 0,
-          "evidenceHash": null,
-          "sourceRefs": [],
-          "renderedPages": 4,
-          "production": false
-        },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "DETERMINISTIC",
-          "fallbackReason": null,
-          "claimCount": 0,
-          "relationshipClaimCount": 0,
-          "evidenceHash": null,
-          "sourceRefs": [],
-          "renderedPages": 4,
-          "production": false
-        }
-      }
+      "t3Status": "DETERMINISTIC_REGISTERED_SECTION",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S02_PERSONALITY",
@@ -56,72 +36,64 @@
         "zh-Hans": "核心性格",
         "en": "Core Personality"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "NARRATIVE_ANALYSIS_PAGE",
-        "INSIGHT_LIST_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "visual:TEN_GOD_OVERVIEW",
-        "personalityNarrative",
-        "strengths",
-        "challenges",
-        "socialStyle"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "ACCEPTED_BASELINE_FIXTURE",
-          "accepted": true,
-          "acceptedSnapshotDigest": "614b4b6a9121409202bf2db76d8f17ff7291818d1b15d059905e4a4d3d3392fa",
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "acf6fbfc9c47107caee73fbe813fe87c603321e1c90bab5463a4aef8b443bd2b",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "This chapter explores how learning, expression and repeated practice appear in the method reading. It invites you to compare that reading with situations you recognize. Personality is approached through context and response, leaving room for different behavior at work, at home and under changing demands.",
+        "zh-Hans": "本章从学习、表达与反复练习的角度理解方法中的个人主题，再邀请你用熟悉的情境核对。性格需要放在环境与回应方式中观察，工作、家庭及不同要求之下的表现，都可能有所不同。"
+      },
+      "requiredFacts": [
+        {
+          "id": "ROOTS",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/4/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/4/development",
-            "professionalModules/professionalTopics/topics/4/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/4/lead",
-            "professionalModules/professionalTopics/topics/4/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/4/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/4/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/4/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "ACCEPTED_BASELINE_FIXTURE",
-          "accepted": true,
-          "acceptedSnapshotDigest": "01d5bece462951c478ca13f20a46f733886214d8f4a9d0e0a11d93e595c53264",
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "be6fa07092d02895676c2c7948cd6b21d43e2e0eb817ea9d9756c28caa24cfb2",
+        {
+          "id": "PEER",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/4/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/4/development",
-            "professionalModules/professionalTopics/topics/4/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/4/lead",
-            "professionalModules/professionalTopics/topics/4/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/4/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/4/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/4/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT"
+          ]
+        },
+        {
+          "id": "RESOURCE",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [],
+      "requiredDerivedInterpretations": [
+        "S02_PERSONALITY:PRIMARY",
+        "S02_PERSONALITY:SECONDARY",
+        "S02_PERSONALITY:DIMENSIONS",
+        "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-01",
+        "S02_PERSONALITY:PAIR_BAZI-CX-PRO-W5-REL-02",
+        "S02_PERSONALITY:TENSION",
+        "S02_PERSONALITY:OPEN_STRENGTH",
+        "S02_PERSONALITY:BOUNDARY"
+      ],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [
+        "EMPHASIS",
+        "ASSOCIATION",
+        "CO_OCCURRING_DIMENSIONS",
+        "CONTEXT_MODIFIER",
+        "TENSION",
+        "OPEN_CONDITION",
+        "BOUNDARY"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "ACCEPTED_BASELINE_PAIR",
+      "acceptanceStatus": "ACCEPTED_BASELINE_PAIR",
+      "snapshotStatus": "PRESERVED_AND_MATCH_TESTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S03_LIFE_STRUCTURE",
@@ -129,80 +101,163 @@
         "zh-Hans": "人生格局",
         "en": "Life Structure"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "NARRATIVE_ANALYSIS_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "visual:DAY_MASTER_CARRYING",
-        "visual:TEN_GOD_FUNCTION_GROUPS",
-        "visual:TEN_GOD_DETAILS",
-        "visual:PATTERN_PATHS",
-        "visual:PILLAR_RELATIONSHIPS",
-        "lifeStructureNarrative"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 9,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "0f9a39f75a05f61f93a67610ae441e145b081ddb199064f1f7f89285ef6e14f5",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "A chart contains conditions as well as visible patterns. This chapter brings those two sides together: what the method has established, what remains open, and how support and demand should be read together. It is a structural reference for later chapters, rather than a ranking of lives.",
+        "zh-Hans": "命盘中既有可见模式，也有尚待满足的条件。本章把已经建立的结构、仍然开放的判断，以及支持和负荷放在一起阅读。它为后面的章节提供结构参照，而不是给人生高低作排名。"
+      },
+      "requiredFacts": [
+        {
+          "id": "SUPPORT",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/6/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/6/development",
-            "professionalModules/professionalTopics/topics/6/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/6/lead",
-            "professionalModules/professionalTopics/topics/6/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/6/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/6/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/6/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/pattern/summary",
-            "professionalModules/pattern/state",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 9,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/supportVisible"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 9,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "f70c22c3212210cd00121e2a9d8a7a0824bf34527197a76d8191f93d315536b9",
+        {
+          "id": "OUTWARD",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/6/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/6/development",
-            "professionalModules/professionalTopics/topics/6/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/6/lead",
-            "professionalModules/professionalTopics/topics/6/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/6/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/6/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/6/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/pattern/summary",
-            "professionalModules/pattern/state",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 9,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/outwardVisible"
+          ]
+        },
+        {
+          "id": "PRESSURE",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/pressureVisible"
+          ]
+        },
+        {
+          "id": "PRIMARY_OPEN",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/verdict/primaryPattern"
+          ]
+        },
+        {
+          "id": "MONTH_COMMAND_JI",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1"
+          ]
+        },
+        {
+          "id": "MONTH_COMMAND_DING",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0"
+          ]
+        },
+        {
+          "id": "MONTH_COMMAND_DING:WEALTH_GENERATES_OFFICER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/0"
+          ]
+        },
+        {
+          "id": "MONTH_COMMAND_DING:WEALTH_RECEIVES_OUTPUT_WITH_CARRYING_SUPPORT",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/1"
+          ]
+        },
+        {
+          "id": "MONTH_COMMAND_DING:WEALTH_RESOURCE_POSITIONAL_ORDER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/0/professionalReading/formation/paths/2"
+          ]
+        },
+        {
+          "id": "MONTH_COMMAND_JI:SEVEN_KILLINGS_WITH_CONTROL_AND_CARRYING",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/pattern/candidates/1/professionalReading/formation/paths/0"
+          ]
+        },
+        {
+          "id": "ROOTS",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/roots/total"
+          ]
+        },
+        {
+          "id": "PEER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/PEER_SUPPORT"
+          ]
+        },
+        {
+          "id": "RESOURCE",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/dayMasterStrength/supportBalance/visibleCounts/RESOURCE_SUPPORT"
+          ]
+        },
+        {
+          "id": "YEAR",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/0"
+          ]
+        },
+        {
+          "id": "MONTH",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/1"
+          ]
+        },
+        {
+          "id": "DAY",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/2"
+          ]
+        },
+        {
+          "id": "HOUR",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars/3"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [
+        "BAZI-CX-PRO-W5-REL-01",
+        "BAZI-CX-PRO-W5-REL-02",
+        "BAZI-CX-PRO-W5-REL-03",
+        "BAZI-CX-PRO-W5-REL-04"
+      ],
+      "requiredDerivedInterpretations": [
+        "S03_LIFE_STRUCTURE:PRIMARY",
+        "S03_LIFE_STRUCTURE:SECONDARY",
+        "S03_LIFE_STRUCTURE:DIMENSIONS",
+        "S03_LIFE_STRUCTURE:PAIR_BAZI-CX-PRO-W5-REL-01",
+        "S03_LIFE_STRUCTURE:PAIR_BAZI-CX-PRO-W5-REL-02",
+        "S03_LIFE_STRUCTURE:PAIR_BAZI-CX-PRO-W5-REL-03",
+        "S03_LIFE_STRUCTURE:PAIR_BAZI-CX-PRO-W5-REL-04",
+        "S03_LIFE_STRUCTURE:TENSION",
+        "S03_LIFE_STRUCTURE:OPEN_STRENGTH",
+        "S03_LIFE_STRUCTURE:OPEN_PATTERN",
+        "S03_LIFE_STRUCTURE:BOUNDARY",
+        "S03_LIFE_STRUCTURE:OPERATING_CONDITION",
+        "S03_LIFE_STRUCTURE:WHOLE_BAZI-CX-PRO-W7-PRI-01",
+        "S03_LIFE_STRUCTURE:WHOLE_BAZI-CX-PRO-W7-PRI-02",
+        "S03_LIFE_STRUCTURE:WHOLE_BAZI-CX-PRO-W7-PRI-03",
+        "S03_LIFE_STRUCTURE:WHOLE_BAZI-CX-PRO-W7-PRI-04"
+      ],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [
+        "EMPHASIS",
+        "ASSOCIATION",
+        "CO_OCCURRING_DIMENSIONS",
+        "CONTEXT_MODIFIER",
+        "TENSION",
+        "OPEN_CONDITION",
+        "BOUNDARY",
+        "CONTRAST",
+        "CROSS_SECTION_RELEVANCE"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S04_CAREER",
@@ -210,72 +265,81 @@
         "zh-Hans": "事业发展",
         "en": "Career Development"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "NARRATIVE_ANALYSIS_PAGE",
-        "INSIGHT_LIST_PAGE",
-        "TIMING_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "visual:PROFESSIONAL_TOPICS",
-        "careerNarrative",
-        "careerFields",
-        "careerTiming"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "d1403d636d8121c11ae40fb951fd8f659355da061107fef765b41d8f92dc7ca2",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "Work brings responsibility, output and support into a concrete setting. This chapter reads the career theme through roles and working conditions, then asks how those conditions compare with your experience. The aim is a clearer understanding of a workable role, without assigning a guaranteed profession or outcome.",
+        "zh-Hans": "工作把责任、产出与支持放进具体环境。本章从角色和工作条件阅读事业主题，再与你的经历比较。重点是理解怎样的工作方式能够运作，不直接指定某个职业，也不把一种结构写成必然成败。"
+      },
+      "requiredFacts": [
+        {
+          "id": "OFFICER",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/0/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/0/development",
-            "professionalModules/professionalTopics/topics/0/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/0/lead",
-            "professionalModules/professionalTopics/topics/0/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/0/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/0/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/0/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/leadGroup"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "5c0cc64f05c9178b565edaccba5c4bdd1cc2d69b29dda9e4c2dfdf5ae505c811",
+        {
+          "id": "RESOURCE",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/0/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/0/development",
-            "professionalModules/professionalTopics/topics/0/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/0/lead",
-            "professionalModules/professionalTopics/topics/0/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/0/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/0/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/0/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/leadGroup"
+          ]
+        },
+        {
+          "id": "WEALTH",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/leadGroup"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [
+        "BAZI-CX-PRO-W5-REL-01",
+        "BAZI-CX-PRO-W5-REL-02",
+        "BAZI-CX-PRO-W5-REL-03",
+        "BAZI-CX-PRO-W5-REL-04"
+      ],
+      "requiredDerivedInterpretations": [
+        "S04_CAREER:PRIMARY",
+        "S04_CAREER:SECONDARY",
+        "S04_CAREER:DIMENSIONS",
+        "S04_CAREER:PAIR_BAZI-CX-PRO-W5-REL-01",
+        "S04_CAREER:PAIR_BAZI-CX-PRO-W5-REL-02",
+        "S04_CAREER:PAIR_BAZI-CX-PRO-W5-REL-03",
+        "S04_CAREER:PAIR_BAZI-CX-PRO-W5-REL-04",
+        "S04_CAREER:TENSION",
+        "S04_CAREER:OPEN_STRENGTH",
+        "S04_CAREER:BOUNDARY",
+        "S04_CAREER:OPERATING_CONDITION",
+        "S04_CAREER:WHOLE_BAZI-CX-PRO-W7-PRI-01",
+        "S04_CAREER:WHOLE_BAZI-CX-PRO-W7-PRI-02",
+        "S04_CAREER:WHOLE_BAZI-CX-PRO-W7-PRI-03",
+        "S04_CAREER:WHOLE_BAZI-CX-PRO-W7-PRI-04"
+      ],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [
+        "EMPHASIS",
+        "ASSOCIATION",
+        "CO_OCCURRING_DIMENSIONS",
+        "CONTEXT_MODIFIER",
+        "TENSION",
+        "OPEN_CONDITION",
+        "BOUNDARY",
+        "CONTRAST",
+        "CROSS_SECTION_RELEVANCE"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S05_WEALTH",
@@ -283,70 +347,79 @@
         "zh-Hans": "财富运势",
         "en": "Wealth Outlook"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "NARRATIVE_ANALYSIS_PAGE",
-        "INSIGHT_LIST_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "visual:PROFESSIONAL_TOPICS",
-        "wealthNarrative",
-        "financialAdvice"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "aae07afe01cb629cd0e698113c30e7e199f8914d4329b782d0ca771c54888df6",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "Resources move through production, exchange and responsibility. This chapter keeps those relationships visible while separating symbolic wealth language from actual financial outcomes. Use it to ask clearer questions about a situation you already know, with real records and obligations providing the context for any practical decision.",
+        "zh-Hans": "资源会经过产出、交换与责任而流动。本章保留这些关系，同时区分方法中的财富语言与实际财务结果。请用熟悉的情境提出更清楚的问题，现实记录与义务才是具体决定所需的背景。"
+      },
+      "requiredFacts": [
+        {
+          "id": "WEALTH",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/1/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/1/development",
-            "professionalModules/professionalTopics/topics/1/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/1/lead",
-            "professionalModules/professionalTopics/topics/1/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/1/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/1/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/1/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/leadGroup"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "1b5b3bc647ec0795865d0ddca6831a3f1a2b1ed8d4136a05b6f4a144966cca6f",
+        {
+          "id": "OFFICER",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/1/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/1/development",
-            "professionalModules/professionalTopics/topics/1/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/1/lead",
-            "professionalModules/professionalTopics/topics/1/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/1/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/1/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/1/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/leadGroup"
+          ]
+        },
+        {
+          "id": "PEER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/leadGroup"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [
+        "BAZI-CX-PRO-W5-REL-01",
+        "BAZI-CX-PRO-W5-REL-02",
+        "BAZI-CX-PRO-W5-REL-03",
+        "BAZI-CX-PRO-W5-REL-04"
+      ],
+      "requiredDerivedInterpretations": [
+        "S05_WEALTH:PRIMARY",
+        "S05_WEALTH:SECONDARY",
+        "S05_WEALTH:DIMENSIONS",
+        "S05_WEALTH:PAIR_BAZI-CX-PRO-W5-REL-01",
+        "S05_WEALTH:PAIR_BAZI-CX-PRO-W5-REL-02",
+        "S05_WEALTH:PAIR_BAZI-CX-PRO-W5-REL-03",
+        "S05_WEALTH:PAIR_BAZI-CX-PRO-W5-REL-04",
+        "S05_WEALTH:TENSION",
+        "S05_WEALTH:OPEN_STRENGTH",
+        "S05_WEALTH:BOUNDARY",
+        "S05_WEALTH:OPERATING_CONDITION",
+        "S05_WEALTH:WHOLE_BAZI-CX-PRO-W7-PRI-01",
+        "S05_WEALTH:WHOLE_BAZI-CX-PRO-W7-PRI-02"
+      ],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [
+        "EMPHASIS",
+        "ASSOCIATION",
+        "CO_OCCURRING_DIMENSIONS",
+        "CONTEXT_MODIFIER",
+        "TENSION",
+        "OPEN_CONDITION",
+        "BOUNDARY",
+        "CONTRAST",
+        "CROSS_SECTION_RELEVANCE"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S06_RELATIONSHIP",
@@ -354,70 +427,87 @@
         "zh-Hans": "感情婚姻",
         "en": "Relationships & Marriage"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "NARRATIVE_ANALYSIS_PAGE",
-        "INSIGHT_LIST_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "visual:PROFESSIONAL_TOPICS",
-        "relationshipNarrative",
-        "relationshipAdvice"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "9ad887ec927b1a64e67e23e08a7a58ca2ea278a0a167795afcf815a1e033ef19",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "Relationships take shape between people, not inside a single chart label. This chapter uses the method reading to explore recurring positions, expectations and support. Compare its themes with specific interactions while preserving the other person’s perspective and the possibility that the same pattern changes in a different setting.",
+        "zh-Hans": "关系发生在人与人之间，不能压缩成命盘中的一个标签。本章借方法读取观察位置、期待与支持怎样重复出现。比较具体互动时，请保留对方的视角，也保留同一种模式在不同环境中改变的可能。"
+      },
+      "requiredFacts": [
+        {
+          "id": "OFFICER",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/2/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/2/development",
-            "professionalModules/professionalTopics/topics/2/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/2/lead",
-            "professionalModules/professionalTopics/topics/2/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/2/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/2/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/2/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "62e548c1036a16584f363c10ca4b74420cc799ae47ab25c8f03be92926f8715b",
+        {
+          "id": "WEALTH",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/2/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/2/development",
-            "professionalModules/professionalTopics/topics/2/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/2/lead",
-            "professionalModules/professionalTopics/topics/2/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/2/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/2/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/2/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
+        },
+        {
+          "id": "PEER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
+        },
+        {
+          "id": "RESOURCE",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/3",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [
+        "BAZI-CX-PRO-W5-REL-01",
+        "BAZI-CX-PRO-W5-REL-02",
+        "BAZI-CX-PRO-W5-REL-03",
+        "BAZI-CX-PRO-W5-REL-04"
+      ],
+      "requiredDerivedInterpretations": [
+        "S06_RELATIONSHIP:PRIMARY",
+        "S06_RELATIONSHIP:SECONDARY",
+        "S06_RELATIONSHIP:DIMENSIONS",
+        "S06_RELATIONSHIP:PAIR_BAZI-CX-PRO-W5-REL-01",
+        "S06_RELATIONSHIP:PAIR_BAZI-CX-PRO-W5-REL-02",
+        "S06_RELATIONSHIP:PAIR_BAZI-CX-PRO-W5-REL-03",
+        "S06_RELATIONSHIP:PAIR_BAZI-CX-PRO-W5-REL-04",
+        "S06_RELATIONSHIP:TENSION",
+        "S06_RELATIONSHIP:OPEN_STRENGTH",
+        "S06_RELATIONSHIP:BOUNDARY",
+        "S06_RELATIONSHIP:OPERATING_CONDITION",
+        "S06_RELATIONSHIP:WHOLE_BAZI-CX-PRO-W7-PRI-01",
+        "S06_RELATIONSHIP:WHOLE_BAZI-CX-PRO-W7-PRI-02",
+        "S06_RELATIONSHIP:WHOLE_BAZI-CX-PRO-W7-PRI-03"
+      ],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [
+        "EMPHASIS",
+        "ASSOCIATION",
+        "CO_OCCURRING_DIMENSIONS",
+        "CONTEXT_MODIFIER",
+        "TENSION",
+        "OPEN_CONDITION",
+        "BOUNDARY",
+        "CONTRAST",
+        "CROSS_SECTION_RELEVANCE"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S07_HEALTH",
@@ -425,68 +515,78 @@
         "zh-Hans": "健康养生",
         "en": "Health & Wellbeing"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "NARRATIVE_ANALYSIS_PAGE",
-        "INSIGHT_LIST_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "healthNarrative",
-        "wellnessAdvice"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "bc2b48ebdd6eb9b2ca985793e2c55d3ba67fc4760e7558f1892f13ed3da7e871",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "Wellbeing is approached here through lived rhythm and observed pressure. The available chart reading does not establish medical conditions, vulnerable organs or treatment needs. This chapter therefore offers a space to describe daily demands and support, keeping those observations distinct from any clinical assessment or health decision.",
+        "zh-Hans": "这里从生活节奏与观察到的压力讨论身心状态。当前命盘读取不能建立疾病、器官弱点或治疗需要的判断。本章因此提供记录日常要求与支持的空间，并让这些观察与临床评估及健康决定保持区分。"
+      },
+      "requiredFacts": [
+        {
+          "id": "OPPORTUNITY",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/5/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/5/development",
-            "professionalModules/professionalTopics/topics/5/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/5/lead",
-            "professionalModules/professionalTopics/topics/5/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/5/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/5/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/5/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 3,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/realityBridge/topicPrompts/5/prompts/1/prompt"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 8,
-          "relationshipClaimCount": 2,
-          "evidenceHash": "229afe72633ad3dae6be2ee629dff53083094761db92c929b71d5f1d6e5265ba",
+        {
+          "id": "CONDITION",
           "sourceRefs": [
-            "professionalModules/professionalTopics/topics/5/leadGroup",
-            "professionalModules/customerNarrative/topicNarratives/5/development",
-            "professionalModules/professionalTopics/topics/5/relevantGroups",
-            "professionalModules/customerNarrative/topicNarratives/5/lead",
-            "professionalModules/professionalTopics/topics/5/relationshipInterfaces/0",
-            "professionalModules/professionalTopics/topics/5/relationshipInterfaces/1",
-            "professionalModules/professionalTopics/topics/5/carryingContext",
-            "professionalModules/customerNarrative/topicNarratives/5/condition",
-            "professionalModules/dayMasterStrength/withheldVerdict",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 3,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/customerNarrative/topicNarratives/4/condition"
+          ]
+        },
+        {
+          "id": "RISK",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/realityBridge/topicPrompts/0/prompts/1/prompt"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [
+        "BAZI-CX-PRO-W5-REL-01",
+        "BAZI-CX-PRO-W5-REL-02",
+        "BAZI-CX-PRO-W5-REL-03",
+        "BAZI-CX-PRO-W5-REL-04"
+      ],
+      "requiredDerivedInterpretations": [
+        "S07_HEALTH:PRIMARY",
+        "S07_HEALTH:SECONDARY",
+        "S07_HEALTH:DIMENSIONS",
+        "S07_HEALTH:PAIR_BAZI-CX-PRO-W5-REL-01",
+        "S07_HEALTH:PAIR_BAZI-CX-PRO-W5-REL-02",
+        "S07_HEALTH:PAIR_BAZI-CX-PRO-W5-REL-03",
+        "S07_HEALTH:PAIR_BAZI-CX-PRO-W5-REL-04",
+        "S07_HEALTH:TENSION",
+        "S07_HEALTH:OPEN_STRENGTH",
+        "S07_HEALTH:BOUNDARY",
+        "S07_HEALTH:OPERATING_CONDITION",
+        "S07_HEALTH:WHOLE_BAZI-CX-PRO-W7-PRI-01",
+        "S07_HEALTH:WHOLE_BAZI-CX-PRO-W7-PRI-02",
+        "S07_HEALTH:WHOLE_BAZI-CX-PRO-W7-PRI-03",
+        "S07_HEALTH:WHOLE_BAZI-CX-PRO-W7-PRI-04"
+      ],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [
+        "EMPHASIS",
+        "ASSOCIATION",
+        "CO_OCCURRING_DIMENSIONS",
+        "CONTEXT_MODIFIER",
+        "TENSION",
+        "OPEN_CONDITION",
+        "BOUNDARY",
+        "CONTRAST",
+        "CROSS_SECTION_RELEVANCE"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S08_TIMING",
@@ -494,56 +594,124 @@
         "zh-Hans": "时间结构",
         "en": "Timing & Cycles"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "STRUCTURED_ANALYSIS_PAGE",
-        "TIMING_PAGE",
-        "TIMING_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "visual:TIMING_LAYERS",
-        "timingContext",
-        "currentYearInsight"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 6,
-          "relationshipClaimCount": 0,
-          "evidenceHash": "aa4513a8298285fe529152884a9469e86ccf926f7e1af10af861236562d04a20",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "The observation window is anchored to the saved generation time and customer timezone. This chapter places the supported luck cycle and year layer beside the birth structure. Time supplies a frame for comparison; your lived observations determine whether a theme is relevant to the period you are reviewing.",
+        "zh-Hans": "观察窗口以保存的生成时间和客户时区为起点。本章把已支持的大运与流年层放在本命结构旁边比较。时间提供对照范围；主题是否与这段经历有关，仍需要现实观察来核对。"
+      },
+      "requiredFacts": [
+        {
+          "id": "CYCLE-1",
           "sourceRefs": [
-            "professionalModules/professionalTimeline/currentWindow",
-            "professionalModules/professionalTimeline/natalPriorityRefs",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/0"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 6,
-          "relationshipClaimCount": 0,
-          "evidenceHash": "ef135a3a5af7ada5f852f57afb74772503a0c6ed3d325e9182f358b618c43f21",
+        {
+          "id": "CYCLE-2",
           "sourceRefs": [
-            "professionalModules/professionalTimeline/currentWindow",
-            "professionalModules/professionalTimeline/natalPriorityRefs",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 4,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/1"
+          ]
+        },
+        {
+          "id": "CYCLE-3",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/2"
+          ]
+        },
+        {
+          "id": "CYCLE-4",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/3"
+          ]
+        },
+        {
+          "id": "CYCLE-5",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/4"
+          ]
+        },
+        {
+          "id": "CYCLE-6",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/5"
+          ]
+        },
+        {
+          "id": "CYCLE-7",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/6"
+          ]
+        },
+        {
+          "id": "CYCLE-8",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/7"
+          ]
+        },
+        {
+          "id": "NATAL",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#structuralModel/pillars"
+          ]
+        },
+        {
+          "id": "DA_YUN",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/currentDaYun"
+          ]
+        },
+        {
+          "id": "ANNUAL",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow/annual"
+          ]
+        },
+        {
+          "id": "SAVED_TEMPORAL_LAYERS",
+          "sourceRefs": [
+            "075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/currentWindow"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [],
+      "requiredDerivedInterpretations": [
+        "S08_TIMING:TIME_natalPriorityRelations",
+        "S08_TIMING:TIME_daYunRelevance",
+        "S08_TIMING:TIME_annualRelevance",
+        "S08_TIMING:TIME_crossLayerRelevance",
+        "S08_TIMING:TIME_topicTemporalRelevance",
+        "S08_TIMING:BOUNDARY"
+      ],
+      "requiredTimingInput": {
+        "mode": "NOW",
+        "localDate": "2026-09-21",
+        "localTime": "11:22:57",
+        "timezone": "Asia/Kuala_Lumpur",
+        "utcOffset": "+08:00",
+        "instant": "2026-09-21T03:22:57.333Z",
+        "resolvedMethodLayers": [
+          "NATAL",
+          "DA_YUN",
+          "LIU_NIAN"
+        ],
+        "generatedAt": "2026-09-21T03:22:57.333Z"
+      },
+      "allowedClaimTypes": [
+        "TEMPORAL_RELEVANCE",
+        "BOUNDARY"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S09_GUIDANCE",
@@ -551,62 +719,137 @@
         "zh-Hans": "人生建议",
         "en": "Guidance & Recommendations"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "SUMMARY_PAGE",
-        "INSIGHT_LIST_PAGE"
-      ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "integratedGuidance",
-        "nextSteps"
-      ],
-      "t3Required": true,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 4,
-          "relationshipClaimCount": 0,
-          "evidenceHash": "aff48a6edd096a29c8ba6b5bf431d88fdc53c8b3f293803a7416b8675d19d78c",
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "The earlier chapters offer different views of one reading. Bring them together by choosing a real situation that involves work, resources and relationships, rather than by adding every theme into a single verdict. This chapter turns that comparison into a small cycle of observation, action and review.",
+        "zh-Hans": "前面的章节从不同角度阅读同一张命盘。整合时，请选择一个同时涉及工作、资源与关系的真实情境，而不是把每个主题相加成单一结论。本章把这种比较带入观察、尝试与复盘的小循环。"
+      },
+      "requiredFacts": [
+        {
+          "id": "OFFICER",
           "sourceRefs": [
-            "professionalModules/wholeChartPriority/themes/0",
-            "professionalModules/customerNarrative/priorityChapters/0/development",
-            "professionalModules/wholeChartPriority/themes/1",
-            "professionalModules/customerNarrative/priorityChapters/1/development",
-            "professionalModules/wholeChartPriority/themes/2",
-            "professionalModules/customerNarrative/priorityChapters/2/development",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 3,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/leadGroup"
+          ]
         },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "T2_FALLBACK",
-          "fallbackReason": "ACCEPTED_SNAPSHOT_REQUIRED",
-          "claimCount": 4,
-          "relationshipClaimCount": 0,
-          "evidenceHash": "56d9dc46eaebf97177dec3289c2cc524d45579447ded7f7b90d2dbae16b41c8c",
+        {
+          "id": "RESOURCE",
           "sourceRefs": [
-            "professionalModules/wholeChartPriority/themes/0",
-            "professionalModules/customerNarrative/priorityChapters/0/development",
-            "professionalModules/wholeChartPriority/themes/1",
-            "professionalModules/customerNarrative/priorityChapters/1/development",
-            "professionalModules/wholeChartPriority/themes/2",
-            "professionalModules/customerNarrative/priorityChapters/2/development",
-            "professionalModules/customerNarrative/boundaries"
-          ],
-          "renderedPages": 3,
-          "production": false
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/leadGroup"
+          ]
+        },
+        {
+          "id": "WEALTH",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/leadGroup"
+          ]
+        },
+        {
+          "id": "PEER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/relevantGroups/3",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/6/leadGroup"
+          ]
+        },
+        {
+          "id": "OFFICER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/leadGroup"
+          ]
+        },
+        {
+          "id": "RESOURCE",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/leadGroup"
+          ]
+        },
+        {
+          "id": "WEALTH",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/relevantGroups/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/0/leadGroup"
+          ]
+        },
+        {
+          "id": "WEALTH",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/leadGroup"
+          ]
+        },
+        {
+          "id": "OFFICER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/leadGroup"
+          ]
+        },
+        {
+          "id": "PEER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/relevantGroups/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/1/leadGroup"
+          ]
+        },
+        {
+          "id": "OFFICER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/0",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
+        },
+        {
+          "id": "WEALTH",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/1",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
+        },
+        {
+          "id": "PEER",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/2",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
+        },
+        {
+          "id": "RESOURCE",
+          "sourceRefs": [
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/relevantGroups/3",
+            "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTopics/topics/2/leadGroup"
+          ]
         }
-      }
+      ],
+      "requiredRelationships": [],
+      "requiredDerivedInterpretations": [
+        "S09_GUIDANCE:GUIDANCE_BAZI-CX-PRO-W7-PRI-01",
+        "S09_GUIDANCE:GUIDANCE_BAZI-CX-PRO-W7-PRI-02",
+        "S09_GUIDANCE:GUIDANCE_BAZI-CX-PRO-W7-PRI-03",
+        "S09_GUIDANCE:GUIDANCE_BAZI-CX-PRO-W7-PRI-04",
+        "S09_GUIDANCE:GUIDANCE_BAZI-CX-PRO-W7-PRI-05",
+        "S09_GUIDANCE:BOUNDARY"
+      ],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [
+        "CROSS_SECTION_RELEVANCE",
+        "BOUNDARY"
+      ],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
+      ],
+      "t3Status": "REQUIRES_MATCHING_ACCEPTED_SNAPSHOT",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     },
     {
       "sectionId": "S10_APPENDIX",
@@ -614,46 +857,28 @@
         "zh-Hans": "方法与附录",
         "en": "Method & Appendix"
       },
-      "canonicalSource": "config/reports/bazi-section-registry.json",
-      "pageFamilies": [
-        "SECTION_OPENER_PAGE",
-        "METHOD_APPENDIX_PAGE",
-        "METHOD_APPENDIX_PAGE"
+      "canonicalOwner": "config/reports/bazi-section-registry.json",
+      "customerPurpose": {
+        "en": "This chapter explains how to use the reading without giving it more authority than its evidence supports. Return here when a term, an unresolved condition or a time layer needs clarification. The method, its interpretation and your lived experience each have a distinct role in understanding the report.",
+        "zh-Hans": "本章说明怎样使用报告，同时不让解读超出证据所能支持的范围。术语、未定条件或时间层需要澄清时，可以回到这里。方法、解释与真实经验各有自己的作用，应当一起阅读，也应保持区分。"
+      },
+      "requiredFacts": [],
+      "requiredRelationships": [],
+      "requiredDerivedInterpretations": [],
+      "requiredTimingInput": null,
+      "allowedClaimTypes": [],
+      "forbiddenClaimTypes": [
+        "CAUSE",
+        "SEQUENCE",
+        "BEHAVIORAL_EFFECT",
+        "EVENT_INFERENCE",
+        "REALITY_ASSERTION"
       ],
-      "requiredDataModules": [
-        "sectionIntroduction",
-        "boundaries",
-        "methodology"
-      ],
-      "t3Required": false,
-      "locales": {
-        "en": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "DETERMINISTIC",
-          "fallbackReason": null,
-          "claimCount": 0,
-          "relationshipClaimCount": 0,
-          "evidenceHash": null,
-          "sourceRefs": [],
-          "renderedPages": 4,
-          "production": false
-        },
-        "zh-Hans": {
-          "editorialStatus": "NOT_ACCEPTED",
-          "accepted": false,
-          "acceptedSnapshotDigest": null,
-          "runtimeTier": "DETERMINISTIC",
-          "fallbackReason": null,
-          "claimCount": 0,
-          "relationshipClaimCount": 0,
-          "evidenceHash": null,
-          "sourceRefs": [],
-          "renderedPages": 4,
-          "production": false
-        }
-      }
+      "t3Status": "DETERMINISTIC_REGISTERED_SECTION",
+      "editorialStatus": "PENDING",
+      "acceptanceStatus": "NOT_ACCEPTED",
+      "snapshotStatus": "NOT_ACCEPTED",
+      "productionStatus": "OFF"
     }
   ]
 }

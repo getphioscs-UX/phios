@@ -68,17 +68,22 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
  const counters=boundary?[{id:`${sectionKey}:COUNTER`,kind:'COUNTER_PROMPT',relationType:'COUNTER_SIGNAL',claimIds:[boundary.id],text:say('What in your experience does not fit this reading?','你的经历中，有哪些部分并不符合这份解读？')}]:[];
  let depth=null;
  if(sectionKey!=='S02_PERSONALITY'){
+  const bi=arr(p.realityBridge?.topicPrompts).findIndex(t=>t.topicCode===topicCode),nativePrompts=p.realityBridge?.topicPrompts?.[bi]?.prompts||[];
+  for(const [index,prompt] of nativePrompts.entries())if(anchor&&prompt.prompt?.[lang]){
+   const counter=prompt.promptType==='COUNTEREXAMPLE';
+   (counter?counters:questions).push({id:`${sectionKey}:${prompt.promptId}`,kind:counter?'COUNTER_PROMPT':'OBSERVATION_PROMPT',relationType:counter?'COUNTER_SIGNAL':anchor.relationType,claimIds:[anchor.id],text:prompt.prompt[lang],sourceRefs:[`professionalModules/realityBridge/topicPrompts/${bi}/prompts/${index}`],scope:'QUESTION_ONLY_NEVER_OBSERVED_FACT'});
+  }
   if(narrative?.condition?.[lang])add('OPERATING_CONDITION','CONTRAST',topicCode,[topicCode],narrative.condition[lang],[`${narrativeRef}/condition`],{conditions:['NATIVE_TOPIC_CONDITION_NOT_OBSERVED_REALITY']});
   for(const priorityRef of arr(topic?.priorityRefs)){
    const ci=arr(p.customerNarrative?.priorityChapters).findIndex(c=>c.priorityRef===priorityRef),chapter=p.customerNarrative?.priorityChapters?.[ci];
    const pi=arr(p.wholeChartPriority?.themes).findIndex(t=>t.priorityId===priorityRef);
-   if(chapter?.development?.[lang]&&pi>=0)add(`WHOLE_${priorityRef}`,'CROSS_SECTION_RELEVANCE',priorityRef,[topicCode],chapter.development[lang],[`professionalModules/customerNarrative/priorityChapters/${ci}/development`,`professionalModules/wholeChartPriority/themes/${pi}`],{rank:null,wholeChartRank:chapter.rank,conditions:chapter.condition?.[lang]?[chapter.condition[lang]]:[]});
+   if(chapter?.development?.[lang]&&pi>=0)add(`WHOLE_${priorityRef}`,'CROSS_SECTION_RELEVANCE',priorityRef,[topicCode],chapter.development[lang],[`professionalModules/customerNarrative/priorityChapters/${ci}/development`,`professionalModules/wholeChartPriority/themes/${pi}`,...(chapter.condition?.[lang]?[`professionalModules/customerNarrative/priorityChapters/${ci}/condition`]:[])],{rank:null,wholeChartRank:chapter.rank,conditions:chapter.condition?.[lang]?['NATIVE_PRIORITY_CONDITION']:[],conditionText:chapter.condition?.[lang]||null});
   }
   for(const claim of claims){
    claim.claimId=claim.id;claim.claimType=claim.relationType;claim.priority=claim.rank===1?'PRIMARY':claim.relationType==='TENSION'?'CONTRADICTORY':claim.relationType==='TEMPORAL_RELEVANCE'?'TIMING':claim.relationType==='ASSOCIATION'?'SECONDARY':'SUPPORTING';
    claim.basis=claim.sourceRefs.map(ref=>({ref,value:pathGet(reading,ref)}));
    claim.counterweights=arr(topic?.patternCandidates).filter(c=>c.conclusionState?.startsWith('OPEN')).map(c=>({candidateId:c.candidateId,state:c.conclusionState,sourceRef:`${topicRef}/patternCandidates/${topic.patternCandidates.indexOf(c)}`,scope:'SECTION_CONTEXT_NOT_NEW_RELATION',permission:'UNCERTAINTY_ONLY'}));
-   claim.timing=claim.temporalContext?[claim.temporalContext]:[];claim.lifeDomains=[topicCode];claim.observableSignals=[];claim.confidence='BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY';claim.license={owner:EXPLANATORY_AUTHORITY_VERSION,createsMethodRule:false,allowsObservedReality:false};claim.provenance=claim.sourceRefs;
+   claim.timing=claim.temporalContext?[claim.temporalContext]:[];claim.lifeDomains=[topicCode];claim.observableSignals=questions.filter(q=>q.sourceRefs).map(q=>({questionId:q.id,sourceRefs:q.sourceRefs,scope:'REFLECTION_ONLY_NOT_PREDICTED_MANIFESTATION'}));claim.confidence='BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY';claim.license={owner:EXPLANATORY_AUTHORITY_VERSION,createsMethodRule:false,allowsObservedReality:false};claim.provenance=claim.sourceRefs;
   }
   const relations=arr(topic?.relationshipInterfaces).map(r=>({relationId:r.relationId,priority:r.relationFamily==='TENSION'||r.relationFamily==='REPEAT_TENSION'?'CONTRADICTORY':r.dayMasterDirect?'PRIMARY':'SUPPORTING',source:r,canonicalRelation:arr(p.relationships?.items).find(x=>x.relationId===r.relationId)||null}));
   const semanticFacts=arr(p.tenGods?.items).filter(t=>arr(topic?.relevantTenGods).some(x=>x.tenGodCode===t.tenGodCode)).map(t=>({sourceRef:`professionalModules/tenGods/items/${p.tenGods.items.indexOf(t)}`,value:t}));
@@ -87,7 +92,7 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
   if(sectionKey==='S03_LIFE_STRUCTURE')for(const key of ['candidates','summary','counterEvidenceRefs','qualifierCodes'])if(p.pattern?.[key])semanticFacts.push({sourceRef:`professionalModules/pattern/${key}`,value:p.pattern[key]});
   depth={version:'BAZI_RICH_CLAIM_IR_V1',selection:'ALL_SECTION_OWNED_RELATIONS_NO_TOP_N',relations,semanticFacts,patternCandidates:topic?.patternCandidates||[],carryingContext:topic?.carryingContext||null,priorityRefs:topic?.priorityRefs||[],rawFactsAreNotNarrativeLicenses:true,observableLifeClaims:'NOT_LICENSED_UNLESS_EXPLICIT_NATIVE_SOURCE',missingFacets:['NO_AUTOMATIC_REAL_WORLD_MANIFESTATION']};
  }
- const provenance=await Promise.all(MODULES.filter(k=>p[k]).map(async module=>({module:`professionalModules/${module}`,digest:await sha256Stable(p[module])})));
+ const provenance=await Promise.all([...MODULES,...(depth?['realityBridge']:[])].filter(k=>p[k]).map(async module=>({module:`professionalModules/${module}`,digest:await sha256Stable(p[module])})));
  return deepFreeze({version:EXPLANATORY_AUTHORITY_VERSION,claims,reflectionQuestions:questions,counterPrompts:counters,manifestationLicenses:[],temporalAuthority:['S08_TIMING','S09_GUIDANCE'].includes(sectionKey)?timeline:null,integratedGuidanceIR:guidance,sourceLineage:provenance,...(depth?{depth}: {})});
 }
 export function buildTemporalRelevanceIR(p){

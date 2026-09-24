@@ -17,9 +17,10 @@ for(const id of new Set(shadow.matrix.map(r=>r.profileId))){const option=documen
 document.querySelector('#section').before(profile);
 const runMatrix=document.createElement('button');runMatrix.textContent='Run fixed shadow matrix';runMatrix.id='run-matrix';document.querySelector('#generate').after(runMatrix);
 const parity=document.createElement('button');parity.textContent='Verify selected bilingual pair';runMatrix.after(parity);
-// F-W0: no browser action can launch a matrix or parity before human prose review.
+// Full matrix remains paused. The successor allows current-section parity
+// after both machine-valid snapshots, before owner editorial acceptance.
 runMatrix.disabled=true;runMatrix.textContent='Full matrix paused — Addendum F';
-parity.disabled=true;parity.textContent='Parity follows baseline editorial acceptance';
+parity.disabled=false;parity.textContent='Verify current section bilingual pair';
 profile.value='BASELINE_NOW';profile.disabled=true;
 const sectionOptions=[...document.querySelector('#section').options];
 const activeSection=sectionOptions.find(option=>!['en','zh-Hans'].every(language=>editorialAcceptance.humanReviews.some(r=>r.profileId==='BASELINE_NOW'&&r.sectionKey===option.value&&r.locale===language&&r.decision==='ACCEPT'&&r.snapshotDigest&&r.briefDigest&&r.reviewer&&r.reviewedAt)))?.value;

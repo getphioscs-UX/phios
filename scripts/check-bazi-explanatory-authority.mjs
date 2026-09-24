@@ -28,5 +28,5 @@ assert(!(await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed,'machine pass 
 for(const l of ['en','zh-Hans'])human.add(`BASELINE_NOW:${l}:S02_PERSONALITY`);
 assert((await gate('BASELINE_NOW','S03_LIFE_STRUCTURE')).allowed);
 assert(!(await gate('high','S02_PERSONALITY')).allowed);assert(!(await gate('BASELINE_NOW','S04_CAREER')).allowed);
-assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','matrix-status')).allowed);assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','parity')).allowed);
+assert(!(await gate('BASELINE_NOW','S02_PERSONALITY','matrix-status')).allowed);assert((await gate('BASELINE_NOW','S02_PERSONALITY','parity')).allowed,'Master Work permits current-section parity after two machine-valid snapshots; it does not admit the next section');
 console.log('PASS native licensed IR and semantic operator boundaries; Addendum F supersedes machine-only staging with per-section human editorial gates.');

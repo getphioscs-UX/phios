@@ -5,6 +5,13 @@ export async function checkBaziShadowStage({profileId,sectionKey,action,stagedPr
  if(!T3_SECTIONS.includes(sectionKey))return {allowed:false,stage:'UNKNOWN_SECTION',missing};
  const baselinePair=async section=>{for(const locale of ['en','zh-Hans'])if(!await passed('BASELINE_NOW',locale,section)||!await humanAccepted('BASELINE_NOW',locale,section))missing.push({profileId:'BASELINE_NOW',locale,sectionKey:section,required:'DIGEST_BOUND_HUMAN_EDITORIAL_ACCEPTANCE'});};
  const generating=!action||action==='generate';
+ // Paid Report Master Work W7: compare the current bilingual candidates before
+ // requesting owner acceptance. This does not authorize the next section.
+ if(action==='parity'&&profileId==='BASELINE_NOW'){
+  for(const section of T3_SECTIONS.slice(0,T3_SECTIONS.indexOf(sectionKey)))await baselinePair(section);
+  for(const locale of ['en','zh-Hans'])if(!await passed(profileId,locale,sectionKey))missing.push({profileId,locale,sectionKey,required:'CURRENT_SECTION_MACHINE_PASS'});
+  return {allowed:!missing.length,stage:'BASELINE_SECTION_BILINGUAL_PARITY',missing};
+ }
  if(generating&&profileId==='BASELINE_NOW'){
   for(const section of T3_SECTIONS.slice(0,T3_SECTIONS.indexOf(sectionKey)))await baselinePair(section);
   return {allowed:!missing.length,stage:sectionKey===T3_SECTIONS[0]?'BASELINE_S02':'BASELINE_SECTION_HUMAN_REVIEW',missing};

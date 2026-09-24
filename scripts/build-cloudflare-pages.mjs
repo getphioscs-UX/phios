@@ -18,6 +18,8 @@ if(routes.version!==1||!routes.include?.length)throw new Error('Missing generate
 const bytes=fs.readFileSync(path.join(out,'index.js'));
 const compressed=gzipSync(bytes).length;
 console.log(`Pages Worker: ${bytes.length} bytes; gzip ${compressed} bytes`);
+// Pages' Functions upload also limits the uncompressed generated bundle.
+if(bytes.length>25*1024*1024)throw new Error('Pages Functions bundle exceeds the 25 MiB upload limit');
 // Conservative free-plan ceiling; paid-plan eligibility is not assumed.
 if(compressed>3*1024*1024)throw new Error('Worker exceeds the 3 MiB preflight budget');
 if(!process.argv.includes('--check-only')){

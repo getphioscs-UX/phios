@@ -30,7 +30,10 @@ if(!mixed)throw Error('NO_GOVERNED_MIXED_PROFILE');
 const stagedProfiles={HIGH_EVIDENCE:high.id,LOW_EVIDENCE:low.id,MIXED:mixed.id};
 const evidenceStrata={selection:'Relative licensed-claim coverage within the existing callable corpus; mixed uses the native MIXED_CARRY state. No synthetic facts are added.',candidates,selected:stagedProfiles};
 const fixtureClass='SYNTHETIC_EXISTING_CANONICAL_BAZI_BENCHMARK';
-fs.writeFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:profiles.map(p=>p.id),packs},null,2)+'\n');
+fs.writeFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:profiles.map(p=>p.id),packs})+'\n');
+// Keep the offline multi-profile audit corpus out of the Worker. Addendum F
+// currently authorizes only sequential BASELINE_NOW editorial production.
+fs.writeFileSync('functions/personal-reading/narrative/bazi-t3-preview-baseline.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:['BASELINE_NOW'],packs:Object.fromEntries(Object.entries(packs).filter(([key])=>key.startsWith('BASELINE_NOW:')))})+'\n');
 fs.mkdirSync('docs/guided-report-successor-r2/bazi-t3',{recursive:true});
 fs.writeFileSync('docs/guided-report-successor-r2/bazi-t3/shadow-matrix.json',JSON.stringify({fixtureClass,evidenceStrata,liveAccepted:false,profiles:profiles.length,locales:2,t3Sections:8,deterministicControls:1,matrix},null,2)+'\n');
 console.log(JSON.stringify({profiles:profiles.length,matrixChecks:matrix.length,packs:Object.keys(packs).length,sourceRejections:matrix.filter(x=>x.state==='SOURCE_REJECTED').length,liveProviderInvoked:false}));
