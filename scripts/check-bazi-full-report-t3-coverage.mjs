@@ -19,7 +19,7 @@ for(const r of read(root+'/baseline/protected-files.json').files.filter(r=>!r.pa
 for(const locale of ['en','zh-Hans']){
  const oldSnapshot=read(root+'/snapshots/accepted-s02-'+locale+'.json'),pack=fixtures.packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`];
  assert.equal(pack.explanatoryAuthorityVersion,'BAZI_EXPLANATORY_AUTHORITY_V2');
- assert.equal(pack.schemaVersion,'BAZI_SECTION_EVIDENCE_PACK_V4');
+ assert.equal(pack.schemaVersion,'BAZI_SECTION_EVIDENCE_PACK_V5');assert(pack.editorialDepthContract);assert(pack.editorialGoldStandard);
  assert.equal((await composeBaziT3Section({pack,snapshot:oldSnapshot})).status,'FALLBACK','superseded V1 snapshot must fail closed under V2');
  const projection=await projectBaziSectionPublication({reading:source.reading,locale,temporalContext:source.temporalSnapshot,composition:{t3:{stage:'QA',environment:'qa',acceptance,snapshots:{}}}});
  assert.equal(projection.internalSections.find(s=>s.sectionKey==='S02_PERSONALITY').diagnostics.fallbackReason,'ACCEPTED_SNAPSHOT_REQUIRED');

@@ -2,9 +2,10 @@ import editorialAcceptance from '../../../../config/reports/bazi-editorial-quali
 import {renderVisualReportPages} from './visual-report-pages.js';
 import {fitPublicationForPrint,settlePublicationAssets} from './publication-report-pages.js';
 const root='/docs/guided-report-successor-r2/bazi-t3';
-const EXPECTED_COMPOSITION_VERSION='BAZI_EDITORIAL_COMPOSITION_V2';
+const EXPECTED_COMPOSITION_VERSION='BAZI_EDITORIAL_COMPOSITION_V3';
 const EXPECTED_AUTHORITY_VERSION='BAZI_EXPLANATORY_AUTHORITY_V2';
 const EXPECTED_QUALITY_VERSION='BAZI_EDITORIAL_QUALITY_F_V2';
+const EXPECTED_EDITORIAL_VERSION='BAZI_EDITORIAL_VALIDATOR_V3';
 
 const locale=document.querySelector('script[data-locale]').dataset.locale||new URLSearchParams(location.search).get('locale')||'en';
 if(!['en','zh-Hans'].includes(locale))throw Error('LOCALE_INVALID');
@@ -40,11 +41,12 @@ function showEditorialCandidate(result){
  const snapshotVersion=result?.snapshot?.compositionVersion||null;
  const authorityVersion=result?.snapshot?.explanatoryAuthorityVersion||null;
  const qualityVersion=result?.snapshot?.editorialQualityVersion||null;
- if(result?.snapshot&&(snapshotVersion!==EXPECTED_COMPOSITION_VERSION||authorityVersion!==EXPECTED_AUTHORITY_VERSION||qualityVersion!==EXPECTED_QUALITY_VERSION)){
+ const editorialVersion=result?.snapshot?.editorialVersion||null;
+ if(result?.snapshot&&(snapshotVersion!==EXPECTED_COMPOSITION_VERSION||authorityVersion!==EXPECTED_AUTHORITY_VERSION||qualityVersion!==EXPECTED_QUALITY_VERSION||editorialVersion!==EXPECTED_EDITORIAL_VERSION)){
   editorialReview.innerHTML='';
   const h=document.createElement('h2');h.textContent='STALE QA DEPLOYMENT / SNAPSHOT';editorialReview.append(h);
   const p=document.createElement('p');p.textContent='This candidate is not BaZi T3 V2 and cannot be reviewed or accepted. Deploy the current main and generate S02 again.';editorialReview.append(p);
-  const pre=document.createElement('pre');pre.textContent=JSON.stringify({compositionVersion:snapshotVersion,authorityVersion,qualityVersion,expectedCompositionVersion:EXPECTED_COMPOSITION_VERSION,expectedAuthorityVersion:EXPECTED_AUTHORITY_VERSION,expectedQualityVersion:EXPECTED_QUALITY_VERSION,canonicalEvidenceHash:result?.snapshot?.canonicalEvidenceHash||null},null,2);editorialReview.append(pre);
+  const pre=document.createElement('pre');pre.textContent=JSON.stringify({compositionVersion:snapshotVersion,authorityVersion,qualityVersion,editorialVersion,expectedCompositionVersion:EXPECTED_COMPOSITION_VERSION,expectedAuthorityVersion:EXPECTED_AUTHORITY_VERSION,expectedQualityVersion:EXPECTED_QUALITY_VERSION,expectedEditorialVersion:EXPECTED_EDITORIAL_VERSION,canonicalEvidenceHash:result?.snapshot?.canonicalEvidenceHash||null},null,2);editorialReview.append(pre);
   return;
  }
  const accepted=result?.status==='PASS'&&result.snapshot&&result.editorialReassessment?.status!=='REJECT';
@@ -59,7 +61,7 @@ function showEditorialCandidate(result){
   for(const b of blocks){if(!b?.text?.trim())continue;const p=document.createElement('p');p.textContent=b.text;editorialReview.append(p);}
  }
  if(!accepted){if(result?.editorialReassessment){const p=document.createElement('p');p.textContent='Current editorial check: '+result.editorialReassessment.issues.join(', ');editorialReview.append(p);}return;}
- const metadata=document.createElement('pre');metadata.style.overflowWrap='anywhere';metadata.style.whiteSpace='pre-wrap';metadata.textContent=JSON.stringify({compositionVersion:result.snapshot.compositionVersion,authorityVersion:result.snapshot.explanatoryAuthorityVersion,qualityVersion:result.snapshot.editorialQualityVersion,canonicalEvidenceHash:result.snapshot.canonicalEvidenceHash,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,quality:result.snapshot.editorialQuality},null,2);editorialReview.append(metadata);
+ const metadata=document.createElement('pre');metadata.style.overflowWrap='anywhere';metadata.style.whiteSpace='pre-wrap';metadata.textContent=JSON.stringify({compositionVersion:result.snapshot.compositionVersion,authorityVersion:result.snapshot.explanatoryAuthorityVersion,qualityVersion:result.snapshot.editorialQualityVersion,editorialVersion:result.snapshot.editorialVersion,canonicalEvidenceHash:result.snapshot.canonicalEvidenceHash,snapshotDigest:result.snapshot.snapshotDigest,briefDigest:result.snapshot.sectionNarrativeBriefDigest,quality:result.snapshot.editorialQuality},null,2);editorialReview.append(metadata);
  const reviewer=document.createElement('input');reviewer.placeholder='Human reviewer name';reviewer.setAttribute('aria-label','Addendum F reviewer');
  const decision=document.createElement('select');decision.setAttribute('aria-label','Addendum F decision');
  for(const [value,label] of [['','Not reviewed'],['ACCEPT','Accept editorial quality'],['REVISE','Needs revision'],['REJECT','Reject']]){const option=document.createElement('option');option.value=value;option.textContent=label;decision.append(option);}

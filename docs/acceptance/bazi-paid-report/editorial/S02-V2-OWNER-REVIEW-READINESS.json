@@ -1,14 +1,15 @@
 {
   "schemaVersion": "BAZI_S02_V2_OWNER_REVIEW_READINESS_V1",
-  "startingHead": "228594a13148c8e0bca655be5813392388a6cb29",
+  "startingHead": "471fe8b7d6bd0e6133c4b055e319211acf9f0c46",
   "sectionId": "S02_PERSONALITY",
-  "status": "ENGINEERING_REBUILD_REQUIRED",
+  "status": "EDITORIAL_GOLD_STANDARD_ENGINEERING",
   "authority": "BAZI_EXPLANATORY_AUTHORITY_V2",
   "claimIr": "BAZI_RICH_CLAIM_IR_V2",
   "costGuard": {
     "fullMatrix": false,
     "otherSections": false,
-    "providerGenerationAllowedAfterLocalRebuildPassOnly": true
+    "providerGenerationAllowedAfterLocalRebuildPassOnly": true,
+    "goldStandardBuildUsesProvider": false
   },
   "liveEvidence": {
     "enSnapshot": "NOT_RUN_V2",
@@ -20,5 +21,19 @@
     "status": "NOT_READY_FOR_OWNER_ACCEPTANCE",
     "accepted": false
   },
-  "productionEligible": false
+  "productionEligible": false,
+  "editorialGoldStandard": {
+    "version": "BAZI_S02_EDITORIAL_GOLD_STANDARD_V1",
+    "status": "BUILD_WIRED_NOT_OWNER_ACCEPTED"
+  },
+  "editorialDepthGate": {
+    "version": "BAZI_S02_EDITORIAL_DEPTH_GATE_V1",
+    "status": "WIRED_FAIL_CLOSED"
+  },
+  "nextActions": [
+    "Run npm run check:bazi-t3 to build and verify the bilingual deterministic S02 Gold Standard.",
+    "Review s02-gold-standard.html before any provider call.",
+    "Only after owner approves the depth target, generate one English S02 V3 QA candidate.",
+    "Do not generate zh-Hans or parity until English quality is accepted for continuation."
+  ]
 }
