@@ -57,7 +57,8 @@ function atlasEntityIds(scope={}){
   return unique([
     scope.timeWindowId,scope.snapshotId,scope.primaryCaseId,scope.comparisonFamilyId,
     scope.transitionWindowId,scope.lossFamilyId,scope.lossTypeId,
-    ...(scope.regionIds||[]),...(scope.caseIds||[]),...(scope.trajectoryIds||[])
+    scope.entityId,scope.windowId,scope.dossierId,scope.livedRealityDimensionId,scope.sectionId,
+    ...(scope.regionIds||[]),...(scope.caseIds||[]),...(scope.trajectoryIds||[]),...(scope.comparisonIds||[])
   ]);
 }
 
@@ -65,7 +66,10 @@ export function normalizePtrcRetrievalScope(input={},entryContext={}){
   const raw=object(input);
   const entry=object(entryContext);
   const atlas=object(raw.atlasScope||entry.retrievalScope);
-  const atlasActive=String(atlas.scopeType||'').toUpperCase()==='CIVILIZATION_ATLAS'||String(atlas.bookCode||'').toUpperCase()==='BOOK-5';
+  const atlasType=String(atlas.scopeType||'').toUpperCase();
+  const atlasBook=String(atlas.bookCode||'').toUpperCase();
+  const atlasActive=atlasType==='CIVILIZATION_ATLAS'||atlasType==='CIVILIZATION_RECONFIGURATION_ATLAS'||atlasBook==='BOOK-5'||atlasBook==='BOOK-6';
+  const reconfigurationAtlas=atlasType==='CIVILIZATION_RECONFIGURATION_ATLAS'||atlasBook==='BOOK-6';
   const parts=unique(raw.partIds);
   const articleIds=unique(raw.articleIds);
   const knowledgeNodeIds=unique(raw.knowledgeNodeIds);
@@ -77,7 +81,8 @@ export function normalizePtrcRetrievalScope(input={},entryContext={}){
   if(atlasActive){
     for(const id of atlasEntityIds(atlas))if(!atlasIds.includes(id))atlasIds.push(id);
     if(atlas.activeLayer&&!atlasLayers.includes(String(atlas.activeLayer).toLowerCase()))atlasLayers.push(String(atlas.activeLayer).toLowerCase());
-    if(!parts.includes('PART-12'))parts.push('PART-12');
+    const ownerPart=reconfigurationAtlas?'PART-13':'PART-12';
+    if(!parts.includes(ownerPart))parts.push(ownerPart);
   }
   const allowedCollections=unique(raw.allowedCollections);
   if(atlasActive&&!allowedCollections.includes('CIVILIZATION_ATLAS'))allowedCollections.push('CIVILIZATION_ATLAS');

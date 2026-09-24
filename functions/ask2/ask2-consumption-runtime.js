@@ -29,7 +29,9 @@ export function classifyAsk2Consumption({ question, body = {}, env = {} } = {}) 
   }
   if (health.healthIntent) return Object.freeze({ mode: 'HEALTH', reasonCode:'HEALTH_SAFETY_PRECEDENCE',health });
   const explicitRuntime=Boolean(body?.taxonomyHint||Object.keys(body?.runtimeInputs||{}).length||Object.keys(body?.runtimeResults||{}).length||body?.currentContextSnapshot);
-  const atlasScope=body?.entryContext?.retrievalScope?.scopeType==='CIVILIZATION_ATLAS'||body?.entryContext?.bookCode==='BOOK-5';
+  const atlasType=String(body?.entryContext?.retrievalScope?.scopeType||'').toUpperCase();
+  const atlasBook=String(body?.entryContext?.bookCode||body?.entryContext?.retrievalScope?.bookCode||'').toUpperCase();
+  const atlasScope=['CIVILIZATION_ATLAS','CIVILIZATION_RECONFIGURATION_ATLAS'].includes(atlasType)||['BOOK-5','BOOK-6'].includes(atlasBook);
   if(atlasScope)return Object.freeze({mode:'CKA',reasonCode:'STRUCTURED_ATLAS_KNOWLEDGE_SCOPE'});
   if(body?.entryContext?.retrievalScope?.scopeType==='STRUCTURED_KNOWLEDGE')return Object.freeze({mode:'CKA',reasonCode:'STRUCTURED_BOOK_KNOWLEDGE_SCOPE'});
   if(explicitRuntime)return Object.freeze({mode:'ASK2',reasonCode:'EXPLICIT_RUNTIME_INPUT'});

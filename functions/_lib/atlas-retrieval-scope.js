@@ -2,6 +2,7 @@ const clean=value=>String(value??'').normalize('NFKC').trim();
 const scalar=(value,max=120)=>clean(value).slice(0,max)||null;
 const list=(value,max=8)=>[...new Set((Array.isArray(value)?value:[]).map(item=>scalar(item)).filter(Boolean))].slice(0,max);
 const LAYERS=new Set(['timeline','cases','comparison','world','trajectories','transitions','loss']);
+const RECONFIG_LAYERS=new Set(['search','cases','windows','snapshots','dossiers','lived','compare','dossiercompare','sections']);
 const EVIDENCE_CLASSES=new Set(['EVIDENCE_SERIES','HISTORICAL_RECONSTRUCTION','CONCEPTUAL_TRAJECTORY']);
 
 export function normalizeAtlasRetrievalScope(input={}){
@@ -9,6 +10,20 @@ export function normalizeAtlasRetrievalScope(input={}){
   const bookCode=scalar(input.bookCode)?.toUpperCase();
   const partCode=scalar(input.partCode)?.toUpperCase();
   const activeLayer=scalar(input.activeLayer)?.toLowerCase();
+  const scopeType=scalar(input.scopeType)?.toUpperCase();
+  const isReconfiguration=scopeType==='CIVILIZATION_RECONFIGURATION_ATLAS'||bookCode==='BOOK-6';
+  if(isReconfiguration){
+    if(bookCode!=='BOOK-6'||partCode!=='PART-13'||!RECONFIG_LAYERS.has(activeLayer))return null;
+    return Object.freeze({
+      schemaVersion:'PHI-OS-ATLAS-RETRIEVAL-SCOPE-v2.0.0',
+      scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode,partCode,activeLayer,
+      entityId:scalar(input.entityId),caseIds:Object.freeze(list(input.caseIds,4)),
+      windowId:scalar(input.windowId||input.transitionWindowId),snapshotId:scalar(input.snapshotId),
+      dossierId:scalar(input.dossierId),livedRealityDimensionId:scalar(input.livedRealityDimensionId),
+      sectionId:scalar(input.sectionId),comparisonIds:Object.freeze(list(input.comparisonIds,4)),
+      evidenceClasses:Object.freeze(list(input.evidenceClasses).filter(item=>EVIDENCE_CLASSES.has(item)))
+    });
+  }
   if(bookCode!=='BOOK-5'||partCode!=='PART-12'||!LAYERS.has(activeLayer))return null;
   return Object.freeze({
     schemaVersion:'PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0',
@@ -65,9 +80,59 @@ const CONFIG=Object.freeze({
 });
 const wantedIds=(scope,keys)=>[...new Set(keys.flatMap(key=>Array.isArray(scope[key])?scope[key]:[scope[key]]).filter(Boolean))];
 
+const RECONFIG_CONFIG=Object.freeze({
+  cases:{path:'content/civilization-atlas/reconfiguration/reconfiguration-case-registry-v1.json',array:'cases',id:'id',stage:'RECONFIGURATION_CASE'},
+  windows:{path:'content/civilization-atlas/reconfiguration/reconfiguration-windows-v1.json',array:'windows',id:'id',stage:'RECONFIGURATION_WINDOW'},
+  snapshots:{path:'content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json',array:'snapshots',id:'id',stage:'WORLD_RECONFIGURATION_SNAPSHOT'},
+  dossiers:{path:'content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json',array:'dossiers',id:'id',stage:'CONTEMPORARY_RUNTIME_DOSSIER'},
+  lived:{path:'content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json',array:'dimensions',id:'id',stage:'LIVED_REALITY_LAYER'},
+  sections:{path:'content/civilization-atlas/reconfiguration/book-vi-sections-v1.json',array:'sections',id:'id',stage:'BOOK_VI_CANONICAL_SECTION'}
+});
+const reconfigSelection=(scope)=>{
+  const explicit=scope.entityId||scope.windowId||scope.snapshotId||scope.dossierId||scope.livedRealityDimensionId||scope.sectionId;
+  const ids=[explicit,...(scope.caseIds||[]),...(scope.comparisonIds||[])].filter(Boolean);
+  return [...new Set(ids)];
+};
+const sourceFor=(record,idKey,stage,locale,question)=>({
+  sourceType:'CIVILIZATION_ATLAS_ENTITY',
+  sourceId:`ATLAS:BOOK-6:${stage}:${record[idKey]}`,
+  bookCode:'BOOK-6',partCode:'PART-13',atlasLayer:stage.toLowerCase(),atlasEntityId:record[idKey],
+  authorityClass:record.evidenceQuality||record.dataClass||'HISTORICAL_RECONSTRUCTION',
+  scopeMatch:true,href:'/books/reality-configuration/#atlas',
+  text:flattenLocalized(record,locale,question)
+});
+
+async function retrieveReconfigurationScope({env,scope,locale,question}){
+  const wanted=reconfigSelection(scope);
+  const ordered=['cases','windows','snapshots','dossiers','lived','sections'];
+  const loaded={};
+  await Promise.all(ordered.map(async key=>{loaded[key]=await readJson(env,RECONFIG_CONFIG[key].path);}));
+  const sources=[];
+  const stageRows=[];
+  for(const key of ordered){
+    const cfg=RECONFIG_CONFIG[key],rows=loaded[key]?.[cfg.array]||[];
+    const selected=rows.filter(row=>wanted.includes(row?.[cfg.id])).slice(0,8);
+    const projected=selected.map(row=>sourceFor(row,cfg.id,cfg.stage,locale,question)).filter(source=>source.text);
+    sources.push(...projected);
+    stageRows.push({stage:cfg.stage,status:projected.length?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:projected.length});
+  }
+  const entityCount=sources.length;
+  return {
+    scope,
+    sources,
+    chain:[
+      {stage:'ATLAS_ENTITY',status:entityCount?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:entityCount},
+      ...stageRows,
+      {stage:'PART_13',status:'AUTHORIZED_FALLBACK'},
+      {stage:'BROADER_KNOWLEDGE',status:'AUTHORIZED_FALLBACK'}
+    ]
+  };
+}
+
 export async function retrieveAtlasScope({env={},scope,locale='zh-Hans',question=''}={}){
   const normalized=normalizeAtlasRetrievalScope(scope);
   if(!normalized)return {scope:null,sources:[],chain:[]};
+  if(normalized.scopeType==='CIVILIZATION_RECONFIGURATION_ATLAS')return retrieveReconfigurationScope({env,scope:normalized,locale,question});
   const config=CONFIG[normalized.activeLayer];
   const [registry,evidence]=await Promise.all([
     readJson(env,config.path),
