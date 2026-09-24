@@ -18,7 +18,7 @@ const fetchJson=async path=>{const response=await fetch(path,{credentials:'same-
 const state={articles:new Map(),books:null,concepts:null,figures:null,parts:null,catalog:null,searchIndex:new Map()};
 
 const BOOK_ROLE={
- 'BOOK-6':{en:'Reality Configuration',zh:'世界如何重组'},
+ 'BOOK-6':{en:'Reality Reconfiguration',zh:'世界如何重组'},
  'BOOK-1':{en:'How reality forms',zh:'现实如何形成'},
  'BOOK-2':{en:'How reality runs',zh:'现实如何运行'},
  'BOOK-3':{en:'How reality maintains continuity',zh:'现实如何维持与延续'},

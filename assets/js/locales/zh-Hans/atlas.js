@@ -62,6 +62,15 @@ const atlas = Object.freeze({
       bookFiveTitle: "世界如何分化",
       bookFiveEnglish: "Reality Differentiation",
       bookFiveDescription: "文明图谱",
+      bookSixTitle: "世界如何重组",
+      bookSixEnglish: "Reality Reconfiguration",
+      bookSixDescription: "文明重组图谱",
+      bookSevenTitle: "世界如何被观察",
+      bookSevenEnglish: "Reality Observation",
+      bookSevenDescription: "观察、证据与边界",
+      bookEightTitle: "世界将如何继续",
+      bookEightEnglish: "Reality Navigation",
+      bookEightDescription: "现实导航与现实延续",
       exploreParts: '探索第 1–4 部',
       explorePartsTwo: "探索第 5–7 部",
       explorePartsThree: "探索第 8–9 部",
@@ -188,8 +197,8 @@ const atlas = Object.freeze({
         description: '如何在不作确定性预测的前提下比较文明模式。'
       },
       part13: {
-        title: '读取科学 Reading Science',
-        description: '现实为何能够被观察，证据如何形成，解释接口如何参与，以及 PHI OS 如何形成统一 Reading。'
+        title: '文明重组图谱 Civilization Reconfiguration Atlas',
+        description: '已经形成的文明如何在压力中重新配置结构、载体与日常现实，以及怎样在不把投影写成预测的前提下观察有边界的未来可能。'
       },
       part14: {
         title: '导航科学 Navigation Science',

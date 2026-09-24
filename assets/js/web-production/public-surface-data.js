@@ -9,8 +9,9 @@ export const BOOK_ROUTE_BY_ID = Object.freeze({
   'book-3': '/books/reality-continuity/',
   'book-4': '/books/reality-expansion/',
   'book-5': '/books/reality-differentiation/',
-  'book-6': '/books/reality-observation/',
-  'book-7': '/books/reality-navigation/'
+  'book-6': '/books/reality-configuration/',
+  'book-7': '/books/reality-observation/',
+  'book-8': '/books/reality-navigation/'
 });
 
 export const BOOK_COMPATIBILITY_ROUTES = Object.freeze({
@@ -300,5 +301,5 @@ export function readingPathVolumeTransition(
 }
 
 function toRoman(value) {
-  return ['I', 'II', 'III', 'IV', 'V'][Number(value) - 1] || String(value || '');
+  return ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][Number(value) - 1] || String(value || '');
 }

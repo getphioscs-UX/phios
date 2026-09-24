@@ -62,6 +62,15 @@ const atlas = Object.freeze({
       bookFiveTitle: "Reality Differentiation",
       bookFiveEnglish: "Reality Differentiation",
       bookFiveDescription: "Civilization Atlas",
+      bookSixTitle: "Reality Reconfiguration",
+      bookSixEnglish: "Reality Reconfiguration",
+      bookSixDescription: "Civilization Reconfiguration Atlas",
+      bookSevenTitle: "Reality Observation",
+      bookSevenEnglish: "Reality Observation",
+      bookSevenDescription: "How reality is observed and evidence is bounded",
+      bookEightTitle: "Reality Navigation",
+      bookEightEnglish: "Reality Navigation",
+      bookEightDescription: "Navigation and continuation",
       exploreParts: 'Explore Parts 1–4',
       explorePartsTwo: "Explore Parts 5–7",
       explorePartsThree: "Explore Parts 8–9",
@@ -188,8 +197,8 @@ const atlas = Object.freeze({
         description: 'How civilization patterns can be compared without deterministic prediction.'
       },
       part13: {
-        title: 'Reading Science',
-        description: 'Why reality can be observed, how evidence forms, how interpretive interfaces contribute, and how PHI OS creates a unified reading.'
+        title: 'Civilization Reconfiguration Atlas',
+        description: 'How established civilizations reconfigure structures, carriers and lived reality under pressure, and how bounded future possibilities can be observed without prediction.'
       },
       part14: {
         title: 'Navigation Science',
