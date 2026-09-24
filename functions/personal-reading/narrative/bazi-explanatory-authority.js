@@ -35,10 +35,10 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
   // section-owned relation, including contradictory pairs, without a top-N cap.
   for(const rel of sectionKey==='S02_PERSONALITY'?arr(topic.relationshipInterfaces).slice(0,2):arr(topic.relationshipInterfaces)){
    const i=topic.relationshipInterfaces.indexOf(rel),positions=arr(rel.positions);
-   if(positions.length===2&&positions.every(x=>POSITION[x])){
+   if((positions.length===2||sectionKey!=='S02_PERSONALITY'&&positions.length>2)&&positions.every(x=>POSITION[x])){
     const family={LINK:['symbolic linkage','象征性联结'],TENSION:['structural tension','结构张力'],REPEAT_TENSION:['repeated structural tension','重复的结构张力']}[rel.relationFamily];
-    const text=sectionKey!=='S02_PERSONALITY'&&family?say(`The relation between ${POSITION[positions[0]][0]} and ${POSITION[positions[1]][0]} is ${family[0]}. Keep this relation distinct from other links and tensions in the reading.`,`${POSITION[positions[0]][1]}与${POSITION[positions[1]][1]}之间呈现${family[1]}，阅读时应与其他联结或张力分别保留。`):say(`The structural relation between ${POSITION[positions[0]][0]} and ${POSITION[positions[1]][0]} is part of the context for this topic. It does not establish a real-life effect.`,`${POSITION[positions[0]][1]}与${POSITION[positions[1]][1]}之间的结构关系，是理解本章时需要保留的背景，不能由此认定现实中的作用。`);
-    add(`PAIR_${rel.relationId}`,'CONTEXT_MODIFIER',positions[0],[positions[1]],text,[`${topicRef}/relationshipInterfaces/${i}`],{conditions:['KEEP_THIS_PAIR_DISTINCT','NO_BEHAVIORAL_EFFECT'],relationQualifier:rel.relationFamily});
+    const text=sectionKey!=='S02_PERSONALITY'?say(`The relation among ${positions.map(x=>POSITION[x][0]).join(', ')} is ${family?.[0]||'a recorded structural relation'}. Keep its complete membership distinct from other relations in the reading.`,`${positions.map(x=>POSITION[x][1]).join('、')}之间呈现${family?.[1]||'已记录的结构关系'}，阅读时应完整保留其成员，不与其他关系合并。`):say(`The structural relation between ${POSITION[positions[0]][0]} and ${POSITION[positions[1]][0]} is part of the context for this topic. It does not establish a real-life effect.`,`${POSITION[positions[0]][1]}与${POSITION[positions[1]][1]}之间的结构关系，是理解本章时需要保留的背景，不能由此认定现实中的作用。`);
+    add(`PAIR_${rel.relationId}`,'CONTEXT_MODIFIER',positions[0],positions.slice(1),text,[`${topicRef}/relationshipInterfaces/${i}`],{conditions:['KEEP_THIS_PAIR_DISTINCT','NO_BEHAVIORAL_EFFECT'],relationQualifier:rel.relationFamily});
    }
   }
   const carry=topic.carryingContext;
@@ -81,7 +81,11 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
    claim.timing=claim.temporalContext?[claim.temporalContext]:[];claim.lifeDomains=[topicCode];claim.observableSignals=[];claim.confidence='BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY';claim.license={owner:EXPLANATORY_AUTHORITY_VERSION,createsMethodRule:false,allowsObservedReality:false};claim.provenance=claim.sourceRefs;
   }
   const relations=arr(topic?.relationshipInterfaces).map(r=>({relationId:r.relationId,priority:r.relationFamily==='TENSION'||r.relationFamily==='REPEAT_TENSION'?'CONTRADICTORY':r.dayMasterDirect?'PRIMARY':'SUPPORTING',source:r,canonicalRelation:arr(p.relationships?.items).find(x=>x.relationId===r.relationId)||null}));
-  depth={version:'BAZI_RICH_CLAIM_IR_V1',selection:'ALL_SECTION_OWNED_RELATIONS_NO_TOP_N',relations,tenGods:arr(p.tenGods?.items).filter(t=>arr(topic?.relevantTenGods).some(x=>x.tenGodCode===t.tenGodCode)),patternCandidates:topic?.patternCandidates||[],carryingContext:topic?.carryingContext||null,priorityRefs:topic?.priorityRefs||[],rawFactsAreNotNarrativeLicenses:true,observableLifeClaims:'NOT_LICENSED_UNLESS_EXPLICIT_NATIVE_SOURCE',missingFacets:['NO_AUTOMATIC_REAL_WORLD_MANIFESTATION']};
+  const semanticFacts=arr(p.tenGods?.items).filter(t=>arr(topic?.relevantTenGods).some(x=>x.tenGodCode===t.tenGodCode)).map(t=>({sourceRef:`professionalModules/tenGods/items/${p.tenGods.items.indexOf(t)}`,value:t}));
+  for(const key of ['supportBalance','seasonalSupport','roots','withheldVerdict'])if(p.dayMasterStrength?.[key])semanticFacts.push({sourceRef:`professionalModules/dayMasterStrength/${key}`,value:p.dayMasterStrength[key]});
+  for(const r of relations){const index=arr(p.relationships?.items).findIndex(x=>x.relationId===r.relationId);if(index>=0)semanticFacts.push({sourceRef:`professionalModules/relationships/items/${index}`,value:p.relationships.items[index]});}
+  if(sectionKey==='S03_LIFE_STRUCTURE')for(const key of ['candidates','summary','counterEvidenceRefs','qualifierCodes'])if(p.pattern?.[key])semanticFacts.push({sourceRef:`professionalModules/pattern/${key}`,value:p.pattern[key]});
+  depth={version:'BAZI_RICH_CLAIM_IR_V1',selection:'ALL_SECTION_OWNED_RELATIONS_NO_TOP_N',relations,semanticFacts,patternCandidates:topic?.patternCandidates||[],carryingContext:topic?.carryingContext||null,priorityRefs:topic?.priorityRefs||[],rawFactsAreNotNarrativeLicenses:true,observableLifeClaims:'NOT_LICENSED_UNLESS_EXPLICIT_NATIVE_SOURCE',missingFacets:['NO_AUTOMATIC_REAL_WORLD_MANIFESTATION']};
  }
  const provenance=await Promise.all(MODULES.filter(k=>p[k]).map(async module=>({module:`professionalModules/${module}`,digest:await sha256Stable(p[module])})));
  return deepFreeze({version:EXPLANATORY_AUTHORITY_VERSION,claims,reflectionQuestions:questions,counterPrompts:counters,manifestationLicenses:[],temporalAuthority:['S08_TIMING','S09_GUIDANCE'].includes(sectionKey)?timeline:null,integratedGuidanceIR:guidance,sourceLineage:provenance,...(depth?{depth}: {})});
@@ -93,6 +97,6 @@ export function buildTemporalRelevanceIR(p){
 }
 export function buildIntegratedGuidanceIR(p){
  const topics=arr(p.professionalTopics?.topics),timeline=buildTemporalRelevanceIR(p);
- const themes=arr(p.wholeChartPriority?.themes).slice().sort((a,b)=>a.rank-b.rank).slice(0,3).map(t=>({priorityId:t.priorityId,rank:t.rank,themeType:t.themeType,themeKey:t.themeKey,topicCodes:topics.filter(x=>arr(x.priorityRefs).includes(t.priorityId)).map(x=>x.topicCode),temporalRelevance:arr(timeline.topicTemporalRelevance).filter(x=>arr(x.priorityRefs).includes(t.priorityId)).map(x=>({topicCode:x.topicCode,activationState:x.activationState})),sourceRefs:t.sourceRefs}));
+ const themes=arr(p.wholeChartPriority?.themes).slice().sort((a,b)=>a.rank-b.rank).map(t=>({priorityId:t.priorityId,rank:t.rank,themeType:t.themeType,themeKey:t.themeKey,topicCodes:topics.filter(x=>arr(x.priorityRefs).includes(t.priorityId)).map(x=>x.topicCode),temporalRelevance:arr(timeline.topicTemporalRelevance).filter(x=>arr(x.priorityRefs).includes(t.priorityId)).map(x=>({topicCode:x.topicCode,activationState:x.activationState})),sourceRefs:t.sourceRefs}));
  return {version:'BAZI_INTEGRATED_GUIDANCE_IR_V1',themes,primaryThemeId:themes[0]?.priorityId||null,temporalAuthority:timeline.available?timeline.authority:null,methodOwned:true,eventPrediction:false};
 }

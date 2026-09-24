@@ -9,9 +9,11 @@ const packs=JSON.parse(fs.readFileSync('functions/personal-reading/narrative/baz
 for(const locale of ['en','zh-Hans']){
  const source=packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`],before=JSON.stringify(source),pack=await withEditorialMeaningBrief(source);
  assert.equal(JSON.stringify(source),before);assert.deepEqual(pack.licensedClaims,source.licensedClaims);
- assert.equal(pack.meaningCanon.version,MEANING_CANON_VERSION);assert.equal(pack.sectionNarrativeBrief.styleContract,STYLE_CONTRACTS[locale]);
+ assert.equal(pack.meaningCanon.version,MEANING_CANON_VERSION);assert.deepEqual(pack.sectionNarrativeBrief.styleContract,STYLE_CONTRACTS[locale]);
  for(const theme of pack.meaningCanon.themes)for(const key of ['customerMeaning','roleInWholeChart','supportingContext','tension','contrast','openCondition','allowedReflection','prohibitedInference'])assert(key in theme);
- assert.deepEqual(await withEditorialMeaningBrief(source),pack);assert.notEqual(pack.canonicalEvidenceHash,source.canonicalEvidenceHash);
+ assert.deepEqual(await withEditorialMeaningBrief(source),pack);
+ if(source.sectionNarrativeBrief?.editorialRevision==='BAZI_S02_EDITORIAL_SCOPE_R1')assert.equal(pack.canonicalEvidenceHash,source.canonicalEvidenceHash,'serialized current briefs retain their exact evidence binding');
+ else assert.notEqual(pack.canonicalEvidenceHash,source.canonicalEvidenceHash);
  assert.deepEqual(await withEditorialMeaningBrief(pack),pack,'reopening a revised brief is idempotent');
  assert.equal(pack.sectionNarrativeBrief.editorialRevision,'BAZI_S02_EDITORIAL_SCOPE_R1');
  assert.equal(pack.sectionNarrativeBrief.scopeDistribution.sharedScope.field,'boundaryNote');
