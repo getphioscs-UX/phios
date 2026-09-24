@@ -2,7 +2,7 @@ import {renderBookPublicSamples} from '../knowledge/book-public-samples.js';
 import { getLocale, onLocaleChange, t } from '../i18n.js';
 import {bookRoute,canonicalPartsForBook,loadSevenVolumeBooks,loadSevenVolumeParts,resolveSevenVolumeBookCover} from '../web-production/public-surface-data-seven.js';
 import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
-import {loadBook5PublicationMetadata} from '../knowledge/published-content.js';
+import {loadBook5PublicationMetadata,loadBook6PublicationMetadata} from '../knowledge/published-content.js';
 import {readBookArticleProgress} from '../knowledge/reading-progress.js';
 import {atlasStateFromUrl} from './civilization-atlas/atlas-url-state.js';
 
@@ -74,7 +74,7 @@ async function render() {
       : bookId === 'book-5'
         ? `<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何分化》':'Read World Differentiation')}</a>`
         : bookId === 'book-6'
-          ? `<a class="knowledge-action knowledge-action--primary" href="#atlas">${escapeHtml(locale==='zh-Hans'?'探索《世界如何重组》':'Explore Reality Reconfiguration')}</a>`
+          ? `<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何重组》':'Read Reality Reconfiguration')}</a>`
           : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
     const readAction=['book-1','book-2','book-3','book-4'].includes(bookId)
       ? `<a class="knowledge-action knowledge-action--primary" data-book-read href="#structured-sources">${locale==='zh-Hans'?'阅读 · 来源与文章':'Read · sources and articles'}</a>` : '';
@@ -156,6 +156,45 @@ async function render() {
       root.querySelector('#book-parts').after(original);
       const actions=root.querySelector('.knowledge-actions');
       for(const [href,label] of [['#book-manuscript',locale==='zh-Hans'?'阅读原文':'Read manuscript (Chinese)'],['#book-parts',locale==='zh-Hans'?'阅读相关文章':'Browse articles'],['/search/?q='+encodeURIComponent(locale==='zh-Hans'?'文明':'civilization'),locale==='zh-Hans'?'搜索文明与历史':'Search civilizations and history']]){
+        const link=document.createElement('a');link.className='knowledge-action';link.href=href;link.textContent=label;actions.append(link);
+      }
+    }
+
+    if (bookId === 'book-6') {
+      const manifest = await loadBook6PublicationMetadata();
+      if (generation !== renderGeneration) return;
+      const records=manifest.records.filter(r=>r.locale===locale);
+      const currentSlug=readBookArticleProgress('BOOK-6');
+      const contents=root.querySelector('#book-parts .knowledge-shell');
+      contents.replaceChildren();
+      const heading=document.createElement('h2');heading.textContent=locale==='zh-Hans'?'阅读《世界如何重组》':'Read Reality Reconfiguration';contents.append(heading);
+      const intro=document.createElement('p');intro.textContent=locale==='zh-Hans'?'按七个编辑分组阅读 28 篇文章；85 个书稿章节继续作为完整来源结构，不被强制压缩成 85 篇重复文章。':'Read 28 articles across seven editorial groups. All 85 manuscript sections remain the complete source structure rather than being forced into 85 duplicate articles.';contents.append(intro);
+      for (const part of manifest.parts) {
+        const section=document.createElement('section');section.id='book-part-'+part.code.replace('.','-');
+        const h=document.createElement('h3');h.textContent=part.title[locale];section.append(h);
+        const list=document.createElement('ol');
+        for (const article of records.filter(r=>r.part===part.code)) {
+          const item=document.createElement('li'),link=document.createElement('a');link.href=article.href+'?locale='+locale;link.textContent=article.title;
+          if(article.slug===currentSlug){link.setAttribute('aria-current','location');link.textContent+=(locale==='zh-Hans'?' · 上次阅读':' · Last read');}
+          item.append(link);list.append(item);
+        }
+        section.append(list);contents.append(section);
+      }
+      const original=document.createElement('section');original.id='book-manuscript';original.className='knowledge-section';
+      const originalShell=document.createElement('div');originalShell.className='knowledge-shell';original.append(originalShell);
+      const originalHeading=document.createElement('h2');originalHeading.textContent=locale==='zh-Hans'?'第 13 部 · 85 节书稿结构':'Part 13 · 85-section manuscript structure';originalShell.append(originalHeading);
+      const originalBoundary=document.createElement('p');originalBoundary.textContent=locale==='zh-Hans'?'这里保留完整章节结构与文章映射；公开文章不会替代或改写完整书稿。':'This preserves the complete section structure and article mapping; public articles do not replace or rewrite the full manuscript.';originalShell.append(originalBoundary);
+      for(const part of manifest.parts){
+        const group=document.createElement('details'),summary=document.createElement('summary');summary.textContent=part.title[locale];group.append(summary);
+        const list=document.createElement('ul');
+        for(const section of manifest.manuscriptContents||[]){if(section.part!==part.code)continue;
+          const item=document.createElement('li'),link=document.createElement('a');link.href=section.href+'?locale='+locale+'#'+section.anchor;link.textContent=(section.title?.[locale]||section.title?.en||section.section);item.append(link);list.append(item);
+        }
+        group.append(list);originalShell.append(group);
+      }
+      root.querySelector('#book-parts').after(original);
+      const actions=root.querySelector('.knowledge-actions');
+      for(const [href,label] of [['#book-manuscript',locale==='zh-Hans'?'查看 85 节书稿结构':'View the 85-section manuscript structure'],['#book-parts',locale==='zh-Hans'?'浏览相关文章':'Browse articles'],['#atlas',locale==='zh-Hans'?'探索文明重组图谱':'Explore Reconfiguration Atlas'],['/search/?q='+encodeURIComponent(locale==='zh-Hans'?'文明重组':'civilization reconfiguration'),locale==='zh-Hans'?'搜索重组知识':'Search reconfiguration knowledge'],['/books/reality-observation/',locale==='zh-Hans'?'继续第七册 · 世界如何被观察':'Continue to Book VII · Reality Observation']]){
         const link=document.createElement('a');link.className='knowledge-action';link.href=href;link.textContent=label;actions.append(link);
       }
     }

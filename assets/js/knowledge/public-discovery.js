@@ -1,5 +1,5 @@
 import {loadSevenVolumeBooks,bookRoute} from '../web-production/public-surface-data-seven.js';
-import {loadBook5PublicationMetadata} from './published-content.js';
+import {loadBook5PublicationMetadata,loadBook6PublicationMetadata} from './published-content.js';
 const BASE='/content/knowledge/public/successors/book4-discovery-v1';
 const PATHS=Object.freeze({
   search:`${BASE}/public-search-index.json`,
@@ -16,17 +16,18 @@ async function load(name){
  cache.set(name,promise);promise.catch(()=>cache.delete(name));return promise;
 }
 export async function loadPublicSearchIndex(locale){
- const [data,book5]=await Promise.all([load('search'),loadBook5PublicationMetadata()]);
- const records=[...(data.records||[]),...book5.records.map(r=>({...r,bookTitle:r.publicationContext.bookTitle,partTitle:r.publicationContext.partTitle})),...book5.atlasDiscovery];
+ const [data,book5,book6]=await Promise.all([load('search'),loadBook5PublicationMetadata(),loadBook6PublicationMetadata()]);
+ const records=[...(data.records||[]),...book5.records.map(r=>({...r,bookTitle:r.publicationContext.bookTitle,partTitle:r.publicationContext.partTitle})),...(book5.atlasDiscovery||[]),...book6.records.map(r=>({...r,bookTitle:r.publicationContext.bookTitle,partTitle:r.publicationContext.partTitle}))];
  return records.filter(record=>!locale||record.locale===locale);
 }
 export async function loadPublicKnowledgeCatalog(){
- const [catalog,registry,book5]=await Promise.all([load('catalog'),loadSevenVolumeBooks(),loadBook5PublicationMetadata()]);
+ const [catalog,registry,book5,book6]=await Promise.all([load('catalog'),loadSevenVolumeBooks(),loadBook5PublicationMetadata(),loadBook6PublicationMetadata()]);
  // Semantic route joins preserve article counts when publication numbers move.
  const previous=new Map(catalog.books.map(b=>[b.canonicalRoute,b]));
  return {...catalog,bookCount:registry.books.length,books:registry.books.map(b=>{
   const route=bookRoute(b.book_id),prior=previous.get(route);
-  return {...prior,bookCode:b.bookCode,volume:b.volume,title:b.title,subtitle:b.subtitle,canonicalRoute:route,partCodes:b.parts.map(n=>'P'+n),hasPublishedKnowledge:b.bookCode==='BOOK-5'||prior?.hasPublishedKnowledge||false,publishedArticleCount:b.bookCode==='BOOK-5'?book5.articlePlanCount:prior?.publishedArticleCount||0};
+  const successorCount=b.bookCode==='BOOK-5'?book5.articlePlanCount:b.bookCode==='BOOK-6'?book6.articlePlanCount:null;
+  return {...prior,bookCode:b.bookCode,volume:b.volume,title:b.title,subtitle:b.subtitle,canonicalRoute:route,partCodes:b.parts.map(n=>'P'+n),hasPublishedKnowledge:successorCount!==null||prior?.hasPublishedKnowledge||false,publishedArticleCount:successorCount??prior?.publishedArticleCount??0};
  })};
 }
 export async function loadCrossBookDiscovery(locale){

@@ -571,7 +571,7 @@ function renderExitNavigation(documentRef, article, translate) {
 
 function renderHeroVisual(documentRef, article) {
   if (!article.hero?.assetCode) {
-    if (article.sourceReading) return null;
+    if (article.sourceReading?.path) return null;
     const figure=documentRef.createElement('figure');figure.className='knowledge-article__hero-visual';
     const image=documentRef.createElement('img');image.setAttribute('data-ks-asset','HERO-004');image.alt='';image.loading='eager';figure.append(image);return figure;
   }
@@ -646,7 +646,7 @@ function renderHeader(documentRef, article, translate) {
   if (article.publicationContext) {
     const locale = article.locale === 'zh-Hans' ? 'zh-Hans' : 'en';
     const bookTitle = article.publicationContext.bookTitle?.[locale] || article.publicationContext.bookTitle?.en || '';
-    metadataParts.push(article.sourceReading ? bookTitle : `Volume ${article.publicationContext.publicationVolume}${bookTitle ? ` · ${bookTitle}` : ''} · ${article.publicationContext.partCode}`);
+    metadataParts.push(article.sourceReading?.path ? bookTitle : `Volume ${article.publicationContext.publicationVolume}${bookTitle ? ` · ${bookTitle}` : ''} · ${article.publicationContext.partCode}`);
   }
   metadata.textContent = metadataParts.join(' · ');
   if (metadata.textContent) {
@@ -668,7 +668,7 @@ function renderHeader(documentRef, article, translate) {
 
   for (const action of [
     [article.publicationContext?.bookRoute || '/books', (article.locale==='zh-Hans'?'阅读本册：':'Read volume: ')+(article.publicationContext?.bookTitle?.[article.locale]||article.publicationContext?.bookTitle?.en||article.publicationContext?.bookCode||'PHI OS')],
-    [article.sourceReading ? '/books/reality-differentiation/#atlas' : '/explore', translated(translate, 'knowledge.articles.viewAtlas')]
+    [article.publicationContext?.atlasRoute || (article.sourceReading?.path ? '/books/reality-differentiation/#atlas' : '/explore'), translated(translate, 'knowledge.articles.viewAtlas')]
   ]) {
     const link = createInternalLink(documentRef, {
       href: action[0],
@@ -725,7 +725,7 @@ export function renderArticleDocument(
   ));
   layout.append(renderArticleAside(documentRef, article, translate));
   container.append(layout);
-  if (article.sourceReading) {
+  if (article.sourceReading?.path) {
     const details = documentRef.createElement('details');
     details.className = 'knowledge-article__source-reading';
     details.id = 'manuscript';

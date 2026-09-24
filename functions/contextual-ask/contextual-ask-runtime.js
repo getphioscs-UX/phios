@@ -81,7 +81,7 @@ export async function resolveSelectedArticle(env,slug,locale='en') {
  if(!/^[a-zA-Z0-9_-]+$/.test(slug||'')||!env?.ASSETS?.fetch)return null;
  const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));return r.ok?r.json():null;};
  try{
-  const paths=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json'];
+  const paths=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book6-publication-v1/visual-article-release.json'];
   const manifests=await Promise.all(paths.map(read));
   const row=manifests.flatMap(m=>m?.records||[]).find(r=>(r.slug===slug||r.nodeCode?.toLowerCase()===slug.toLowerCase())&&r.locale===locale&&r.status==='published');
   if(!row?.path?.startsWith('/content/knowledge/public/'))return null;

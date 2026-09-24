@@ -36,13 +36,23 @@ const BOOK4_PUBLICATION_SUCCESSOR_MANIFEST =
   '/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json';
 const BOOK5_PUBLICATION_SUCCESSOR_MANIFEST =
   '/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json';
+const BOOK6_PUBLICATION_SUCCESSOR_MANIFEST =
+  '/content/knowledge/public/successors/book6-publication-v1/visual-article-release.json';
 let book5Manifest;
+let book6Manifest;
 export function loadBook5PublicationMetadata() {
   book5Manifest ||= fetchJson(BOOK5_PUBLICATION_SUCCESSOR_MANIFEST).catch(error => {
     book5Manifest = null;
     throw error;
   });
   return book5Manifest;
+}
+export function loadBook6PublicationMetadata() {
+  book6Manifest ||= fetchJson(BOOK6_PUBLICATION_SUCCESSOR_MANIFEST).catch(error => {
+    book6Manifest = null;
+    throw error;
+  });
+  return book6Manifest;
 }
 
 async function fetchJson(path) {
@@ -175,7 +185,8 @@ async function loadLocale(locale) {
     loadCanonicalParts(),
     fetchJson(BOOK4_PUBLICATION_SUCCESSOR_MANIFEST).catch(() => ({ records: [] })),
     loadFiveVolumePublicationContextRegistry(),
-    loadBook5PublicationMetadata().catch(() => ({records:[]}))
+    loadBook5PublicationMetadata().catch(() => ({records:[]})),
+    loadBook6PublicationMetadata().catch(() => ({records:[]}))
   ]).then(async ([
     nodeRegistry,
     localizedRegistry,
@@ -187,7 +198,8 @@ async function loadLocale(locale) {
     partsRegistry,
     book4PublicationSuccessorManifest,
     publicationContextRegistry,
-    book5PublicationManifest
+    book5PublicationManifest,
+    book6PublicationManifest
   ]) => {
     const localizedByNode = new Map(
       localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
@@ -262,7 +274,7 @@ async function loadLocale(locale) {
     );
 
     return Object.freeze(
-      [...publishedByNode.values(), ...book5PublicationManifest.records.filter(record => record.locale === normalizedLocale && record.status === 'published')]
+      [...publishedByNode.values(), ...book5PublicationManifest.records.filter(record => record.locale === normalizedLocale && record.status === 'published'), ...book6PublicationManifest.records.filter(record => record.locale === normalizedLocale && record.status === 'published')]
         .sort((left, right) => (
           left.publicationOrder - right.publicationOrder
         ))
@@ -281,8 +293,8 @@ export function loadPublishedArticles(locale) {
 
 export async function loadPublishedArticleBySlug(slug, locale) {
   // Successor manifests carry route metadata. Fetch only the selected body.
-  const manifest = await loadBook5PublicationMetadata().catch(() => ({records:[]}));
-  const row = manifest.records.find(record => record.slug === slug && record.locale === normalizeLocale(locale) && record.status === 'published');
+  const manifests = await Promise.all([loadBook5PublicationMetadata().catch(() => ({records:[]})), loadBook6PublicationMetadata().catch(() => ({records:[]}))]);
+  const row = manifests.flatMap(manifest => manifest.records || []).find(record => record.slug === slug && record.locale === normalizeLocale(locale) && record.status === 'published');
   if (row) {
     const article = await fetchJson(row.path);
     return isApprovedPublication(article) && article.slug === row.slug && article.locale === row.locale ? article : null;
