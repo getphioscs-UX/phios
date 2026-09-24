@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "ECR-V4.1A-SEMANTIC-SOURCE-CONFLICT-AUDIT-R6-v1",
+  "status": "PASS_WITH_NON_BLOCKING_SECONDARY_DRIFT",
+  "sourceOwnershipPolicyRef": "source-ownership-policy-v1.json",
+  "driftCount": 2,
+  "drift": [
+    {
+      "gate": 11,
+      "dimension": "SHADOW",
+      "primaryValue": "晦涩",
+      "secondaryValue": null,
+      "classification": "NON_BLOCKING_SECONDARY_SOURCE_DRIFT",
+      "resolution": "USE_PRIMARY_GATE_SPECTRUM_OWNER",
+      "primarySourceRef": "人类图总结(4).xlsx#基因天命!A12:H12",
+      "secondarySourceRef": "人类图总结(4).xlsx#BG5!A12:K12"
+    },
+    {
+      "gate": 56,
+      "dimension": "SHADOW",
+      "primaryValue": "分心",
+      "secondaryValue": "不安",
+      "classification": "NON_BLOCKING_SECONDARY_SOURCE_DRIFT",
+      "resolution": "USE_PRIMARY_GATE_SPECTRUM_OWNER",
+      "primarySourceRef": "人类图总结(4).xlsx#基因天命!A57:H57",
+      "secondarySourceRef": "人类图总结(4).xlsx#BG5!A57:K57"
+    }
+  ],
+  "materialBlockingConflicts": [],
+  "notes": [
+    "Gate 56 Shadow differs between 基因天命 (分心 / Distraction) and BG5 duplicated spectrum (不安). BG5 B:D is secondary-only, so it does not override the primary bilingual spectrum.",
+    "Gate 11 BG5 duplicated Shadow is blank while 基因天命 provides 晦涩 / Obscurity; this is missing secondary data, not a primary-source conflict."
+  ]
+}
