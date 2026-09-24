@@ -126,7 +126,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     // section to T2 rather than silently deleting claims or conditions.
     const listRange=REPORT_PAGE_FAMILIES.INSIGHT_LIST_PAGE.budget[locale==='en'?'enItem':'zhItem'];
     const listFits=secondary?.pageFamily!=='INSIGHT_LIST_PAGE'||(secondaryBlocks.length<=6&&secondaryBlocks.every(b=>textUnits(b.text,locale)<=listRange[1]));
-    if(listFits&&main.reduce((sum,b)=>sum+textUnits(b.text,locale),0)<=maximum){
+    if(listFits&&(pack.claimIrVersion||main.reduce((sum,b)=>sum+textUnits(b.text,locale),0)<=maximum)){
      target.contentBlocks=main.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
      target.items=[];
      if(secondary?.pageFamily==='INSIGHT_LIST_PAGE')secondary.items=secondaryBlocks.map(b=>block(b.text,section.key,'VERIFIED_SECTION_COMPOSITION'));
@@ -141,6 +141,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const publicationTitle=composition.t3&&section.key==='S07_HEALTH'?{en:'Wellbeing & Daily Rhythm','zh-Hans':'身心状态与日常节奏'}:section.title;
   const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:publicationTitle,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
   const admittedT3=t3?.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot});
+  internalSections.at(-1).diagnostics={sectionRuntimeTier:admittedT3?'T3':t3?'T2_FALLBACK':'DETERMINISTIC',snapshotMatch:t3?.snapshot?'VALIDATED':composition.t3?.snapshots?.[section.key]?'INVALID':'ABSENT',fallbackReason:admittedT3?null:t3?.internalOnly?.fallbackReason||(t3?.snapshot?'SNAPSHOT_NOT_HUMAN_ACCEPTED_FOR_STAGE':null),claimIrVersion:t3?.evidencePack?.claimIrVersion||t3?.evidencePack?.explanatoryAuthorityVersion||null,editorialVersion:t3?.snapshot?.editorialVersion||null};
   pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
@@ -155,7 +156,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const crossSection=composition.t3?crossSectionEditorialCheck(internalSections.filter(s=>s.t3?.status==='PASS').map(s=>s.t3.snapshot)):null;
  if(crossSection?.status==='REJECT'&&internalSections.some(s=>canShowT3({...composition.t3,snapshot:s.t3?.snapshot}))){
   const safe=await projectBaziSectionPublication({reading,locale,temporalContext,unavailableModules,composition:{}});
-  return {...safe,internalSections,crossSection,t3Fallback:'CROSS_SECTION_REPETITION'};
+  return {...safe,internalSections:internalSections.map(s=>({...s,diagnostics:{...s.diagnostics,sectionRuntimeTier:s.t3?'T2_FALLBACK':'DETERMINISTIC',fallbackReason:s.t3?'CROSS_SECTION_REPETITION':null}})),crossSection,t3Fallback:'CROSS_SECTION_REPETITION'};
  }
  return {pages,sections,internalSections,legacy,...(crossSection?{crossSection}:{})};
 }

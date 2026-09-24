@@ -31,11 +31,15 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
   const secondary=arr(topic.relevantGroups).filter(g=>g.groupCode!==topic.leadGroup?.groupCode&&group(g.groupCode));
   if(secondary.length)add('SECONDARY','ASSOCIATION',topicCode,secondary.map(g=>g.groupCode),say(`Other associated themes are ${secondary.map(g=>group(g.groupCode)).join('; ')}. They do not replace the topic's first emphasis.`,`同时相关的主题包括${secondary.map(g=>group(g.groupCode)).join('、')}，它们不取代本章的首要重点。`),[`${topicRef}/relevantGroups`,`${topicRef}/leadGroup`]);
   add('DIMENSIONS','CO_OCCURRING_DIMENSIONS',topicCode,[topicCode],narrative.lead[lang],[`${narrativeRef}/lead`],{conditions:['DIMENSIONS_ARE_SIMULTANEOUS_NOT_A_SEQUENCE']});
-  // Preserve each pair separately. A display cap selects the same first two
-  // source relations in both locales; it never merges their endpoints.
-  for(const rel of arr(topic.relationshipInterfaces).slice(0,2)){
+  // S02's accepted evidence is frozen. Successor sections retain every
+  // section-owned relation, including contradictory pairs, without a top-N cap.
+  for(const rel of sectionKey==='S02_PERSONALITY'?arr(topic.relationshipInterfaces).slice(0,2):arr(topic.relationshipInterfaces)){
    const i=topic.relationshipInterfaces.indexOf(rel),positions=arr(rel.positions);
-   if(positions.length===2&&positions.every(x=>POSITION[x]))add(`PAIR_${rel.relationId}`,'CONTEXT_MODIFIER',positions[0],[positions[1]],say(`The structural relation between ${POSITION[positions[0]][0]} and ${POSITION[positions[1]][0]} is part of the context for this topic. It does not establish a real-life effect.`,`${POSITION[positions[0]][1]}与${POSITION[positions[1]][1]}之间的结构关系，是理解本章时需要保留的背景，不能由此认定现实中的作用。`),[`${topicRef}/relationshipInterfaces/${i}`],{conditions:['KEEP_THIS_PAIR_DISTINCT','NO_BEHAVIORAL_EFFECT'],relationQualifier:rel.relationFamily});
+   if(positions.length===2&&positions.every(x=>POSITION[x])){
+    const family={LINK:['symbolic linkage','象征性联结'],TENSION:['structural tension','结构张力'],REPEAT_TENSION:['repeated structural tension','重复的结构张力']}[rel.relationFamily];
+    const text=sectionKey!=='S02_PERSONALITY'&&family?say(`The relation between ${POSITION[positions[0]][0]} and ${POSITION[positions[1]][0]} is ${family[0]}. Keep this relation distinct from other links and tensions in the reading.`,`${POSITION[positions[0]][1]}与${POSITION[positions[1]][1]}之间呈现${family[1]}，阅读时应与其他联结或张力分别保留。`):say(`The structural relation between ${POSITION[positions[0]][0]} and ${POSITION[positions[1]][0]} is part of the context for this topic. It does not establish a real-life effect.`,`${POSITION[positions[0]][1]}与${POSITION[positions[1]][1]}之间的结构关系，是理解本章时需要保留的背景，不能由此认定现实中的作用。`);
+    add(`PAIR_${rel.relationId}`,'CONTEXT_MODIFIER',positions[0],[positions[1]],text,[`${topicRef}/relationshipInterfaces/${i}`],{conditions:['KEEP_THIS_PAIR_DISTINCT','NO_BEHAVIORAL_EFFECT'],relationQualifier:rel.relationFamily});
+   }
   }
   const carry=topic.carryingContext;
   if(carry?.supportVisible>0)add('SUPPORT','SUPPORT_CONDITION',topicCode,['STRUCTURAL_SUPPORT'],say('The method records support within the structure. This does not establish how much practical help is available.','方法在结构中记录到支持，但这不能证明现实中有多少帮助可用。'),[`${topicRef}/carryingContext`, 'professionalModules/dayMasterStrength/supportBalance']);
@@ -62,8 +66,25 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
  const anchor=claims.find(c=>c.id.endsWith(':DIMENSIONS'))||claims.find(c=>!['BOUNDARY','OPEN_CONDITION'].includes(c.relationType));
  const questions=anchor?[{id:`${sectionKey}:OBSERVE`,kind:'OBSERVATION_PROMPT',relationType:anchor.relationType,claimIds:[anchor.id],text:say('Which of these themes fits a concrete experience, and which does not?','这些主题中，哪些符合你的一段具体经历，哪些并不符合？')}]:[];
  const counters=boundary?[{id:`${sectionKey}:COUNTER`,kind:'COUNTER_PROMPT',relationType:'COUNTER_SIGNAL',claimIds:[boundary.id],text:say('What in your experience does not fit this reading?','你的经历中，有哪些部分并不符合这份解读？')}]:[];
+ let depth=null;
+ if(sectionKey!=='S02_PERSONALITY'){
+  if(narrative?.condition?.[lang])add('OPERATING_CONDITION','CONTRAST',topicCode,[topicCode],narrative.condition[lang],[`${narrativeRef}/condition`],{conditions:['NATIVE_TOPIC_CONDITION_NOT_OBSERVED_REALITY']});
+  for(const priorityRef of arr(topic?.priorityRefs)){
+   const ci=arr(p.customerNarrative?.priorityChapters).findIndex(c=>c.priorityRef===priorityRef),chapter=p.customerNarrative?.priorityChapters?.[ci];
+   const pi=arr(p.wholeChartPriority?.themes).findIndex(t=>t.priorityId===priorityRef);
+   if(chapter?.development?.[lang]&&pi>=0)add(`WHOLE_${priorityRef}`,'CROSS_SECTION_RELEVANCE',priorityRef,[topicCode],chapter.development[lang],[`professionalModules/customerNarrative/priorityChapters/${ci}/development`,`professionalModules/wholeChartPriority/themes/${pi}`],{rank:null,wholeChartRank:chapter.rank,conditions:chapter.condition?.[lang]?[chapter.condition[lang]]:[]});
+  }
+  for(const claim of claims){
+   claim.claimId=claim.id;claim.claimType=claim.relationType;claim.priority=claim.rank===1?'PRIMARY':claim.relationType==='TENSION'?'CONTRADICTORY':claim.relationType==='TEMPORAL_RELEVANCE'?'TIMING':claim.relationType==='ASSOCIATION'?'SECONDARY':'SUPPORTING';
+   claim.basis=claim.sourceRefs.map(ref=>({ref,value:pathGet(reading,ref)}));
+   claim.counterweights=arr(topic?.patternCandidates).filter(c=>c.conclusionState?.startsWith('OPEN')).map(c=>({candidateId:c.candidateId,state:c.conclusionState,sourceRef:`${topicRef}/patternCandidates/${topic.patternCandidates.indexOf(c)}`,scope:'SECTION_CONTEXT_NOT_NEW_RELATION',permission:'UNCERTAINTY_ONLY'}));
+   claim.timing=claim.temporalContext?[claim.temporalContext]:[];claim.lifeDomains=[topicCode];claim.observableSignals=[];claim.confidence='BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY';claim.license={owner:EXPLANATORY_AUTHORITY_VERSION,createsMethodRule:false,allowsObservedReality:false};claim.provenance=claim.sourceRefs;
+  }
+  const relations=arr(topic?.relationshipInterfaces).map(r=>({relationId:r.relationId,priority:r.relationFamily==='TENSION'||r.relationFamily==='REPEAT_TENSION'?'CONTRADICTORY':r.dayMasterDirect?'PRIMARY':'SUPPORTING',source:r,canonicalRelation:arr(p.relationships?.items).find(x=>x.relationId===r.relationId)||null}));
+  depth={version:'BAZI_RICH_CLAIM_IR_V1',selection:'ALL_SECTION_OWNED_RELATIONS_NO_TOP_N',relations,tenGods:arr(p.tenGods?.items).filter(t=>arr(topic?.relevantTenGods).some(x=>x.tenGodCode===t.tenGodCode)),patternCandidates:topic?.patternCandidates||[],carryingContext:topic?.carryingContext||null,priorityRefs:topic?.priorityRefs||[],rawFactsAreNotNarrativeLicenses:true,observableLifeClaims:'NOT_LICENSED_UNLESS_EXPLICIT_NATIVE_SOURCE',missingFacets:['NO_AUTOMATIC_REAL_WORLD_MANIFESTATION']};
+ }
  const provenance=await Promise.all(MODULES.filter(k=>p[k]).map(async module=>({module:`professionalModules/${module}`,digest:await sha256Stable(p[module])})));
- return deepFreeze({version:EXPLANATORY_AUTHORITY_VERSION,claims,reflectionQuestions:questions,counterPrompts:counters,manifestationLicenses:[],temporalAuthority:['S08_TIMING','S09_GUIDANCE'].includes(sectionKey)?timeline:null,integratedGuidanceIR:guidance,sourceLineage:provenance});
+ return deepFreeze({version:EXPLANATORY_AUTHORITY_VERSION,claims,reflectionQuestions:questions,counterPrompts:counters,manifestationLicenses:[],temporalAuthority:['S08_TIMING','S09_GUIDANCE'].includes(sectionKey)?timeline:null,integratedGuidanceIR:guidance,sourceLineage:provenance,...(depth?{depth}: {})});
 }
 export function buildTemporalRelevanceIR(p){
  const t=p.professionalTimeline,w=t?.currentWindow;

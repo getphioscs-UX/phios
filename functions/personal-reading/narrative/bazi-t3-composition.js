@@ -31,7 +31,8 @@ export async function composeBaziT3Section({pack,registry={},env={},fetcher,prov
    let repair=null;
    for(let attempt=0;attempt<2;attempt++){
     const scopeInstructions=pack.sectionNarrativeBrief?.editorialRevision===S02_REVISION?' '+S02_SCOPE_INSTRUCTIONS:'';
-    const editorialIntent={maximumMainUnits:pack.locale==='en'?230:420,maximumItemUnits:pack.locale==='en'?40:65,noMinimumLength:true};
+    const planned=Object.values(pack.contentPlan||{}).reduce((n,ids)=>n+ids.length,0);
+    const editorialIntent={maximumMainUnits:pack.claimIrVersion?Math.max(pack.locale==='en'?230:420,planned*(pack.locale==='en'?40:70)):pack.locale==='en'?230:420,maximumItemUnits:pack.locale==='en'?40:65,noMinimumLength:true,semanticContinuationPages:Boolean(pack.claimIrVersion)};
     const candidate=await call('REPORT_SECTION_COMPOSITION',{repair,editorialIntent,sectionNarrativeBrief:pack.sectionNarrativeBrief||null},COMPOSITION_SCHEMA,COMPOSITION_PROMPT+' Observe editorialIntent as maximum layout limits, never minimum content requirements. Follow SectionNarrativeBrief and its locale-specific style contract. Explain only the ordered licensed meaning atoms. Do not repeat preceding visual counts or percentages. Preserve substantive conditions without repeating general disclaimers in every paragraph; one local scope sentence is enough, with complete limits in Method & Appendix.'+scopeInstructions);
     const editorial=validateEditorial(candidate,pack);
     // A verifier sees the complete evidence and every candidate block. Reference

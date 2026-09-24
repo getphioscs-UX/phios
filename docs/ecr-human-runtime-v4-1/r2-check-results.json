@@ -1,0 +1,56 @@
+{
+  "scope": "LOCAL_REPOSITORY_AND_BROWSER_ONLY",
+  "baselineHead": "f56a622c110496068e2f2946ae605f43913e93ae",
+  "checkpointAcceptanceChanged": false,
+  "checks": [
+    {
+      "command": "npm.cmd run check:ecr-human-runtime-v4-1",
+      "status": "PASS",
+      "evidence": ".tmp/ecr-r2/targeted.log"
+    },
+    {
+      "command": "node scripts/check-ecr-v41a-admission-workspace.mjs",
+      "status": "PASS",
+      "scope": "14 bilingual pairs, exact human content binding, reusable composition, missing-factor/owner denial, many-to-many cards, tie denial, D/M/A lineage, 134 G/Q/R identities"
+    },
+    {
+      "command": "npm.cmd run check:shared-astronomy:chiron",
+      "status": "PASS",
+      "evidence": ".tmp/ecr-r2/chiron-regression.log",
+      "realChironNumericalVerification": "NOT_RUN_PROVIDER_NOT_AUTHORIZED"
+    },
+    {
+      "command": "node .tmp/ecr-r2/protected.mjs",
+      "status": "PASS",
+      "evidence": "r2-protected-baseline-proof.json"
+    },
+    {
+      "command": "local Edge browser 1440/390 en/zh-Hans + R2 workspace",
+      "status": "PASS",
+      "evidence": "r2-browser-evidence.json"
+    },
+    {
+      "command": "npm.cmd run check:pages-build",
+      "status": "PASS",
+      "evidence": ".tmp/ecr-r2/pages-build-final.log"
+    },
+    {
+      "command": "npm.cmd run check",
+      "status": "PASS",
+      "evidence": ".tmp/ecr-r2/full-check.log",
+      "exitCode": 0,
+      "includesPostcheck": true
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS"
+    }
+  ],
+  "humanAccepted": false,
+  "customerProductionAdmitted": false,
+  "deployedPreviewE2E": "NOT_RUN",
+  "commitByAgent": false,
+  "pushByAgent": false,
+  "productionTouched": false,
+  "completedAt": "2026-09-24T02:17:40.701Z"
+}
