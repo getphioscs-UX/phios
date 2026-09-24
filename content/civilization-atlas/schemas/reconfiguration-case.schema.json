@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book VI Reconfiguration Case",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "titleZh",
+    "titleEn",
+    "timeStart",
+    "timeEnd",
+    "caseTypes",
+    "evidenceQuality",
+    "version",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "titleZh": {
+      "type": "string"
+    },
+    "titleEn": {
+      "type": "string"
+    },
+    "timeStart": {
+      "type": "integer"
+    },
+    "timeEnd": {
+      "type": "integer"
+    },
+    "caseTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidenceQuality": {
+      "enum": [
+        "UNKNOWN",
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -22,7 +22,7 @@ async function render() {
   const locale = getLocale();
   try {
     const registry = await loadCanonicalBooks();
-    if (registry.books.length !== 7) throw new Error('WPR_SEVEN_VOLUME_PROJECTION_REQUIRED');
+    if (registry.books.length !== 8) throw new Error('WPR_EIGHT_VOLUME_PROJECTION_REQUIRED');
     const cards = await Promise.all(registry.books.slice().sort((a,b) => a.volume-b.volume).map(async book => {
       const branding = await resolveBookBranding(book.book_id, { surface: 'BOOKS', locale });
       const cover = await resolveBookCover(book.book_id, { surface: 'BOOK', locale, variant: 'CARD' })
