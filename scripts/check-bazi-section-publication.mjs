@@ -5,6 +5,15 @@ import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-
 import {renderVisualReportPages} from '../assets/customer-ui/js/personal-products/visual-report-pages.js';
 const root='docs/guided-report-successor-r2/visual-commerce',read=p=>JSON.parse(fs.readFileSync(p));
 const reports=['zh-Hans','en'].map(l=>read(`${root}/bazi-${l}.json`));
+const semanticPagination=report=>{
+ const rows=[];
+ for(const p of report.pages){
+  const row=[p.sectionKey,p.definitionKey,p.pageFamily];
+  const prev=rows.at(-1);
+  if(!prev||prev.some((value,index)=>value!==row[index]))rows.push(row);
+ }
+ return rows;
+};
 validateSectionRegistry();
 for(const [name,data] of [['bazi-section-registry',plan],['report-page-families',{version:'2.1.0',families}],['bazi-visual-assets',assets]])assert.deepEqual(data,read(`config/reports/${name}.json`),'generated config must match canonical JSON');
 const invalid=structuredClone(plan);invalid.sections[0].pages[0].family='NARRATIVE_ANALYSIS_PAGE';assert.throws(()=>validateSectionRegistry(invalid));
@@ -38,7 +47,21 @@ for(const report of reports){
  const liveSource=read('docs/guided-report-successor-r2/bazi-source.json');const built=await projectBaziSectionPublication({reading:liveSource.reading,locale:report.locale,temporalContext:liveSource.temporalSnapshot});const internal={internalPages:built.internalSections};assert.equal(internal.internalPages.length,10);
  for(const s of internal.internalPages){assert(s.sectionComposition.pageBlocks.length>=1);assert.equal(s.sectionComposition.sectionKey,s.sectionKey);assert.equal(s.interpretation.topic,s.sectionKey);assert.equal(s.composition.executionClass,'T2_LIGHT_COMPOSITION');}
 }
-assert.deepEqual(reports[0].pages.map(p=>[p.pageKey,p.pageFamily,p.pageNumber]),reports[1].pages.map(p=>[p.pageKey,p.pageFamily,p.pageNumber]));
+// Different locales use different text-unit systems and budgets. A semantic
+// block may therefore require an extra continuation page in one locale without
+// any information gain or loss. Bilingual parity is semantic, not identical
+// physical pagination.
+assert.deepEqual(
+ semanticPagination(reports[0]),
+ semanticPagination(reports[1]),
+ 'bilingual semantic page structure must match even when locale pagination differs'
+);
+for(const report of reports){
+ for(let i=1;i<report.pages.length;i++){
+  const p=report.pages[i],previous=report.pages[i-1];
+  if(/_CONT_\d+$/.test(p.pageKey))assert.equal(p.definitionKey,previous.definitionKey,`ORPHAN_CONTINUATION:${report.locale}:${p.pageKey}`);
+ }
+}
 const source=read('docs/guided-report-successor-r2/bazi-source.json');
 const shorter=await projectBaziSectionPublication({reading:source.reading,temporalContext:source.temporalSnapshot,locale:'en',unavailableModules:['careerFields']});
 assert.equal(shorter.pages.length,reports[1].pages.length-1);validateExpandedSections(shorter.pages);assert.equal(shorter.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,10);
@@ -46,5 +69,5 @@ const chunks=splitSemanticBlocks([{text:'one two three'},{text:'four five six'},
 let requests=[];
 await projectBaziSectionPublication({reading:source.reading,temporalContext:source.temporalSnapshot,locale:'en',composition:{registry:{models:[{providerId:'test',modelId:'test',capabilityClass:'DEEP',planningCostRank:1,status:'AVAILABLE'}]},providerAdapters:{test:async r=>{requests.push(r);return {paragraphs:['Unsupported invented conclusion.']};}},verifyComposition:async()=>({accepted:false})}});
 assert(requests.length>0&&requests.length<=10);for(const r of requests){assert.equal(r.taskType,'PUBLICATION_SECTION');assert(r.sectionComposition.pageBlocks.length>=1);assert.equal(r.compositionPolicy.scope,'SECTION');}
-fs.writeFileSync(`${root}/contract-evidence.json`,JSON.stringify({machinePass:true,totalPages:reports.map(r=>({locale:r.locale,total:r.totalPages})),shorterFixturePages:shorter.pages.length+6,sectionLevelProviderRequests:requests.length,budgets,humanAccepted:false},null,2)+'\n');
-console.log('PASS: section order, seven families, variable totals, section-level composition, frozen intro, shared pagination, bilingual parity, text budgets, temporal data, 13-asset registry and fallback chain.');
+fs.writeFileSync(`${root}/contract-evidence.json`,JSON.stringify({machinePass:true,totalPages:reports.map(r=>({locale:r.locale,total:r.totalPages})),semanticPaginationParity:true,physicalPaginationMayDifferByLocale:true,shorterFixturePages:shorter.pages.length+6,sectionLevelProviderRequests:requests.length,budgets,humanAccepted:false},null,2)+'\n');
+console.log('PASS: section order, seven families, variable locale-safe totals, section-level composition, frozen intro, bilingual semantic parity, text budgets, temporal data, 13-asset registry and fallback chain.');
