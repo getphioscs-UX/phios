@@ -75,7 +75,6 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
    const counter=prompt.promptType==='COUNTEREXAMPLE';
    (counter?counters:questions).push({id:`${sectionKey}:${prompt.promptId}`,kind:counter?'COUNTER_PROMPT':'OBSERVATION_PROMPT',relationType:counter?'COUNTER_SIGNAL':anchor.relationType,claimIds:[anchor.id],text:prompt.prompt[lang],sourceRefs:[`professionalModules/realityBridge/topicPrompts/${bi}/prompts/${index}`],scope:'QUESTION_ONLY_NEVER_OBSERVED_FACT'});
   }
-  if(narrative?.condition?.[lang])add('OPERATING_CONDITION','CONTRAST',topicCode,[topicCode],narrative.condition[lang],[`${narrativeRef}/condition`],{conditions:['NATIVE_TOPIC_CONDITION_NOT_OBSERVED_REALITY']});
   for(const priorityRef of arr(topic?.priorityRefs)){
    const ci=arr(p.customerNarrative?.priorityChapters).findIndex(c=>c.priorityRef===priorityRef),chapter=p.customerNarrative?.priorityChapters?.[ci];
    const pi=arr(p.wholeChartPriority?.themes).findIndex(t=>t.priorityId===priorityRef);
