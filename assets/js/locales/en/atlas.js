@@ -188,16 +188,16 @@ const atlas = Object.freeze({
         description: 'How civilization patterns can be compared without deterministic prediction.'
       },
       part13: {
+        title: 'Civilization Reconfiguration Atlas',
+        description: 'How existing civilizations reconfigure across pressure, succession, global systems, lived reality, carriers and conditional future paths.'
+      },
+      part14: {
         title: 'Reading Science',
         description: 'Why reality can be observed, how evidence forms, how interpretive interfaces contribute, and how PHI OS creates a unified reading.'
       },
-      part14: {
-        title: 'Navigation Science',
-        description: 'How evidence and position become bounded direction and action.'
-      },
       part15: {
-        title: 'Reality Continuation',
-        description: 'How outcomes, memory and formation carry Reality into its next continuation.'
+        title: 'Navigation Science and Reality Continuation',
+        description: 'How evidence and position become bounded direction and action, and how outcomes carry Reality into its next continuation.'
       }
     },
     continuation: {

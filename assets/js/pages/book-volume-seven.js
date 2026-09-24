@@ -73,7 +73,9 @@ async function render() {
          <a class="knowledge-action" href="/book-one-preview">${escapeHtml(t('knowledge.production.bookOnePreview'))}</a>`
       : bookId === 'book-5'
         ? `<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何分化》':'Read World Differentiation')}</a>`
-        : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
+        : bookId === 'book-6'
+          ? `<a class="knowledge-action knowledge-action--primary" href="#atlas">${escapeHtml(locale==='zh-Hans'?'探索《世界如何重组》':'Explore Reality Reconfiguration')}</a>`
+          : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
     const readAction=['book-1','book-2','book-3','book-4'].includes(bookId)
       ? `<a class="knowledge-action knowledge-action--primary" data-book-read href="#structured-sources">${locale==='zh-Hans'?'阅读 · 来源与文章':'Read · sources and articles'}</a>` : '';
     const askHref = buildCkaEntryHref({
@@ -89,7 +91,9 @@ async function render() {
     const askLabel = ckaEntryLabel('BOOK', locale);
     const atlasAction = bookId === 'book-5'
       ? `<a class="knowledge-action knowledge-action--primary" href="#atlas">${escapeHtml(locale==='zh-Hans'?'探索文明图谱':'Explore Civilization Atlas')}</a>`
-      : '';
+      : bookId === 'book-6'
+        ? `<a class="knowledge-action" href="#atlas">${escapeHtml(locale==='zh-Hans'?'文明重组图谱':'Reconfiguration Atlas')}</a>`
+        : '';
 
     const persistentAtlas = bookId === 'book-5' ? document.querySelector('[data-civilization-atlas-root]') : null;
     if (persistentAtlas && root.contains(persistentAtlas)) root.insertAdjacentElement('afterend', persistentAtlas);

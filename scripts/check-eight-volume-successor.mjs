@@ -9,9 +9,9 @@ const pointer=json('content/registry/current-book-architecture.json');
 assert.equal(pointer.architecture,'eight-volume');assert.equal(pointer.historicalPredecessor.mutable,false);
 const books=json(pointer.books.slice(1)).books,parts=json(pointer.parts.slice(1)).parts;
 assert.equal(books.length,8);assert.equal(parts.length,15);
-assert.deepEqual(books.map(b=>b.parts),[[1,2,3,4],[5,6,7],[8,9],[10,11],[12],[],[13],[14,15]]);
-assert.equal(books[5].title.en,'Reality Configuration');assert.equal(books[5].title['zh-Hans'],'世界如何重组');
-assert.equal(books[5].partAdmission,'PENDING_USER_AUTHORITY');
+assert.deepEqual(books.map(b=>b.parts),[[1,2,3,4],[5,6,7],[8,9],[10,11],[12],[13],[14],[15]]);
+assert.equal(books[5].title.en,'Reality Reconfiguration');assert.equal(books[5].title['zh-Hans'],'世界如何重组');
+assert.equal(books[5].content_status,'completed');
 const validate=new Ajv2020({strict:false}).compile(json('data/schemas/book-publication-successor.schema.json'));
 for(const n of [6,7,8]){const manifest=json(`content/registry/successors/eight-volume-v1/book-${n}-manifest.json`);assert(validate(manifest),JSON.stringify(validate.errors));assert.equal(manifest.volume,n);assert.equal(manifest.bookCode,`BOOK-${n}`);}
 for(const p of parts)assert(books.find(b=>b.book_id===p.book)?.parts.includes(p.number));
@@ -24,7 +24,9 @@ const context=json(root+'wpr-eight-volume-publication-context-registry-v1.json')
 const assets=json(root+'wpr-eight-volume-r2-public-assets-v1.json');
 assert.equal(projection.books.length,8);
 for(const b of projection.books){const html=text(b.route.slice(1)+'index.html');assert(html.includes(`data-book-id="${b.bookId}"`));assert(html.includes('/assets/js/pages/book-volume-seven.js'));assert(text('sitemap.xml').includes(b.route));}
-for(const n of [13,14,15])assert.equal(context.partOwnership.find(p=>p.partNumber===n).publicationBookCode,n===13?'BOOK-7':'BOOK-8');
+assert.equal(context.partOwnership.find(p=>p.partNumber===13).publicationBookCode,'BOOK-6');
+assert.equal(context.partOwnership.find(p=>p.partNumber===14).publicationBookCode,'BOOK-7');
+assert.equal(context.partOwnership.find(p=>p.partNumber===15).publicationBookCode,'BOOK-8');
 for(const n of [1,2,3,4,5])assert.equal(assets.assets.find(a=>a.assetId===`BOOK-${n}-HARDCOVER`).available,true);
 for(const id of ['HERO-8V-SYSTEM',...[6,7,8].flatMap(n=>[`BOOK-${n}-HARDCOVER`,`BOOK-${n}-BRANDING`])]){
  const a=assets.assets.find(a=>a.assetId===id);

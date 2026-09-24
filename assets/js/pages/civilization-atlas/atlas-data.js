@@ -13,3 +13,10 @@ export async function loadTransitionRegistry(){return getJson('/content/civiliza
 export async function loadLossRegistry(){return getJson('/content/civilization-atlas/loss/reversal-loss-atlas-v1.json');}
 export async function loadAtlasLayers(){return getJson('/content/civilization-atlas/atlas-layers-v1.json');}
 export function clearAtlasDataCache(){CACHE.clear();}
+
+export async function loadReconfigurationSections(){return getJson('/content/civilization-atlas/reconfiguration/book-vi-sections-v1.json');}
+export async function loadReconfigurationCases(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-case-registry-v1.json');}
+export async function loadReconfigurationWindows(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-windows-v1.json');}
+export async function loadReconfigurationSnapshots(){return getJson('/content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json');}
+export async function loadContemporaryRuntimeDossiers(){return getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json');}
+export async function loadLivedRealityDimensions(){return getJson('/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json');}

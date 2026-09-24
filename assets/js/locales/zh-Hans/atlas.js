@@ -188,16 +188,16 @@ const atlas = Object.freeze({
         description: '如何在不作确定性预测的前提下比较文明模式。'
       },
       part13: {
+        title: '文明重组图谱 Civilization Reconfiguration Atlas',
+        description: '已经存在的文明如何在压力、继任、全球系统、日常现实、载体与条件性未来路径中重新配置。'
+      },
+      part14: {
         title: '读取科学 Reading Science',
         description: '现实为何能够被观察，证据如何形成，解释接口如何参与，以及 PHI OS 如何形成统一 Reading。'
       },
-      part14: {
-        title: '导航科学 Navigation Science',
-        description: '证据与位置如何成为有边界的方向与行动。'
-      },
       part15: {
-        title: '现实延续 Reality Continuation',
-        description: '结果、记忆与形成如何把现实带入下一次延续。'
+        title: '导航科学与现实延续 Navigation Science and Reality Continuation',
+        description: '证据与位置如何成为有边界的方向与行动，并让结果、记忆与形成进入下一次延续。'
       }
     },
     continuation: {
