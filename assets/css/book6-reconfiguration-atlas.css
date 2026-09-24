@@ -1,0 +1,24 @@
+.book6-atlas-shell{padding:clamp(2.5rem,5vw,5rem) 0;background:var(--surface,#0b1018)}
+.book6-atlas{display:grid;gap:1.25rem}
+.book6-atlas__nav{display:flex;gap:.5rem;overflow:auto;padding:.25rem 0 .75rem}
+.book6-atlas__nav button{white-space:nowrap}
+.book6-atlas__toolbar{display:grid;grid-template-columns:minmax(12rem,2fr) repeat(2,minmax(10rem,1fr));gap:.75rem}
+.book6-atlas__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
+.book6-card,.book6-panel{border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:1rem;padding:1rem;background:color-mix(in srgb,var(--surface,#0b1018) 82%,white 5%)}
+.book6-card h3,.book6-card h4{margin:.25rem 0 .5rem}
+.book6-card__meta{font-size:.88rem;opacity:.76}
+.book6-atlas__status{display:inline-flex;padding:.2rem .55rem;border:1px solid currentColor;border-radius:999px;font-size:.78rem}
+.book6-atlas__actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.book6-atlas__table-wrap{overflow:auto}
+.book6-atlas table{width:100%;border-collapse:collapse;min-width:44rem}
+.book6-atlas th,.book6-atlas td{text-align:left;vertical-align:top;padding:.65rem;border-bottom:1px solid color-mix(in srgb,currentColor 16%,transparent)}
+.book6-snapshot__visual{position:relative;border-radius:1rem;overflow:hidden;min-height:16rem;background:color-mix(in srgb,var(--surface,#0b1018) 75%,white 4%)}
+.book6-snapshot__visual img{display:block;width:100%;height:auto}
+.book6-snapshot__overlay{position:absolute;inset:auto 1rem 1rem;background:color-mix(in srgb,#080b12 86%,transparent);padding:.75rem;border-radius:.75rem;max-width:32rem}
+.book6-layer-buttons{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0}
+.book6-layer-buttons button[aria-pressed="true"],.book6-atlas__nav button[aria-current="page"]{outline:2px solid currentColor;outline-offset:2px}
+.book6-profile{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.65rem}
+.book6-profile div{border-inline-start:.2rem solid currentColor;padding:.55rem .7rem}
+.book6-unknown{opacity:.82;font-style:italic}
+.book6-pagination{display:flex;align-items:center;gap:.75rem;justify-content:center;margin-top:1rem}
+@media(max-width:700px){.book6-atlas__toolbar{grid-template-columns:1fr}.book6-atlas__nav{scroll-snap-type:x proximity}.book6-atlas__nav button{scroll-snap-align:start}.book6-snapshot__overlay{position:static;margin:0;border-radius:0}.book6-atlas table{min-width:36rem}}
