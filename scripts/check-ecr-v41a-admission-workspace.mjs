@@ -4,8 +4,9 @@ import {resolveEcrSemanticComposition,isEcrHumanAdmitted} from '../functions/emb
 import {selectEcrRuntimeSlotCards} from '../functions/ecr-phi-card/ecr-human-runtime-cards-v4-1.js';
 import {evaluateEcrV41ProductionBlockers} from '../functions/embodied-configuration/ecr-v41-production-blockers-r2.js';
 import {buildEcrHumanRuntime} from '../functions/embodied-configuration/ecr-canonical-projection-runtime-v2.js';
+import {buildEcrHumanRuntimeReport} from '../functions/ecr-full-report/ecr-human-runtime-report-v4-1.js';
 import {projectEcrTopicSuccessorSelection} from '../functions/embodied-configuration/ecr-topic-successor-projection.js';
-const read=p=>JSON.parse(fs.readFileSync(p)),root='content/embodied-configuration/v4-1/semantic-admission-r2/';
+const read=p=>JSON.parse(fs.readFileSync(p)),root='content/embodied-configuration/v4-1/semantic-admission-r2/',admission='content/embodied-configuration/v4-1/admission/';
 const pkg=read('docs/ecr-human-runtime-v4-1/semantic-review-pairs.json'),canonical=read('content/embodied-configuration/v4-1/review/human-review-cases-v1.json');
 assert.equal(pkg.pairs.length,14);assert.equal(pkg.localeCount,28);assert.equal(canonical.reviewPairs.length,14);assert.equal(canonical.candidates,undefined);
 for(const p of pkg.pairs){assert.equal(p.decision,'PENDING');assert.equal(p.en.sectionId,p.zhHans.sectionId);assert.equal(await sha256Stable(p.en),p.contentDigests.en);assert.equal(await sha256Stable(p.zhHans),p.contentDigests['zh-Hans']);assert.equal(await sha256Stable(p.contentDigests),p.pairDigest);assert.equal(canonical.reviewPairs.find(c=>c.sectionId===p.sectionId).pairDigest,p.pairDigest);}
@@ -31,7 +32,7 @@ const selected=selectEcrRuntimeSlotCards(semantic,{runtimeSlotEligibility:[row]}
 assert(selectEcrRuntimeSlotCards([{...semantic[0],customerSurfaceAllowed:false}],{runtimeSlotEligibility:[row]},deck).every(c=>c.status==='UNKNOWN'));
 const tie=admit({...cards.runtimeSlotEligibility[1],runtimeSlots:['CARRIER'],requiredSemanticTags:['TEST_TAG'],priority:1});assert.equal(selectEcrRuntimeSlotCards(semantic,{runtimeSlotEligibility:[row,tie]},deck)[0].unknownReason,'ADMITTED_ELIGIBILITY_PRIORITY_CONFLICT');
 const proof=read(root+'topic-identity-proof.json');assert.equal(proof.identityProof.length,134);assert(proof.identityProof.every(x=>x.predecessorDigest===x.successorDigest&&!x.humanReviewRequired));
-const topic=read('content/embodied-configuration/v4-1/admission/ecr-topic-geometry-migration-v1.json');assert.equal(topic.mappings.length,222);assert.equal(topic.humanReviewQueue.length,3);
+const topic=read(admission+'ecr-topic-geometry-migration-v1.json');assert.equal(topic.mappings.length,222);assert.equal(topic.humanReviewQueue.length,3);
 const ir=await buildEcrHumanRuntime({canonicalInput:read('content/embodied-configuration/v4-1/acceptance/birth-fixtures-v1.json').cases[0].canonicalInput});
 const selection=projectEcrTopicSuccessorSelection(ir.driverField,ir.semanticDepth);
 assert(selection.topics.every(t=>t.GQRPersonalSelection==='UNKNOWN'&&!t.customerNarrativeAllowed));
@@ -43,6 +44,37 @@ for(const t of selection.topics)for(const e of t.structuralEvidence){
  assert.equal(e.coordinate,expected[e.source]);seen.add(e.source);
 }
 assert.equal(seen.size,3);
+
+// R4 owner-decision authorities. These record decisions without bypassing the
+// still-pending operational semantic/tag/priority admission.
+const r4Pairs=read(admission+'ecr-bilingual-review-owner-decisions-r4.json');
+assert.deepEqual(r4Pairs.summary,{ACCEPT:5,REVISE:9,REJECT:0});
+const r4Cards=read(admission+'ecr-phi-card-runtime-slot-owner-decisions-r4.json');
+assert.deepEqual(r4Cards.summary,{ACCEPT:43,REVISE:5,REJECT:0});assert.equal(r4Cards.cards.length,48);
+const r4Topics=read(admission+'ecr-topic-personal-selection-owner-decisions-r4.json');
+assert.deepEqual(r4Topics.summary,{ACCEPT:2,REVISE:1,REJECT:0});
+assert.deepEqual(r4Topics.rules.map(r=>[r.ruleId,r.ownerDecision]),[
+ ['D_LEGACY_AFFINITY_RANK_TO_PHYSICAL_BODY_ACTIVATIONS','REVISE'],
+ ['M_ZERO_DEGREE_SECTOR_TO_P64_UPPER_TRIGRAM','ACCEPT'],
+ ['A_OLD_H64_SECTOR_TO_P64_INDEPENDENT_A8','ACCEPT']
+]);
+
+// The nine revised bilingual copies are live in the report candidate and bound
+// to new digests. Five unchanged pairs retain their accepted source digests.
+const entitlement={schemaVersion:'PHI-OS-KAP-W45-METHOD-JOURNEY-ENTITLEMENT-v1.0.0',methodCode:'ECR',access:{methodAllowed:true,readingDepthAllowed:true}};
+const en=buildEcrHumanRuntimeReport({ir,locale:'en',sharedEntitlement:entitlement,reviewMode:true}),zh=buildEcrHumanRuntimeReport({ir,locale:'zh-Hans',sharedEntitlement:entitlement,reviewMode:true});
+for(const decision of r4Pairs.pairs){
+ const e=en.sections.find(s=>s.sectionId===decision.sectionId),z=zh.sections.find(s=>s.sectionId===decision.sectionId);
+ assert(e&&z);
+ const digests={en:await sha256Stable(e),'zh-Hans':await sha256Stable(z)},pairDigest=await sha256Stable(digests);
+ if(decision.ownerDecision==='ACCEPT')assert.equal(pairDigest,decision.sourcePairDigest,decision.sectionId);
+ else {assert.deepEqual(digests,decision.revisedContentDigests,decision.sectionId);assert.equal(pairDigest,decision.revisedPairDigest,decision.sectionId);}
+}
+
+// R4 decisions do not masquerade as operational selection admission.
+assert(cards.runtimeSlotEligibility.every(r=>!isEcrHumanAdmitted(r)));
+assert.equal(r4Cards.operationalBoundary.selectorMustRemainUnknownWithoutOperationalAdmission,true);
+assert.equal(r4Topics.operationalBoundary.customerNarrativeRequiresAdmittedComposition,true);
 const blockers=evaluateEcrV41ProductionBlockers({reviewPairs:canonical.reviewPairs,cardPolicy:cards});assert.equal(blockers.blockers.length,6);assert.equal(blockers.customerProductionAdmitted,false);assert.equal(blockers.nonBlockers.length,3);assert(!blockers.blockers.some(x=>/CHIRON|DYNAMIC/.test(x)));
-assert.equal(read('content/embodied-configuration/v4-1/admission/ecr-current-reality-dynamic-candidates-v1.json').blocksV41Production,false);
-console.log('PASS R2: 14 bilingual pairs; four-factor review binding; many-to-many cards/tie denial; 134 identities; three selector reviews; six real gates.');
+assert.equal(read(admission+'ecr-current-reality-dynamic-candidates-v1.json').blocksV41Production,false);
+console.log('PASS R4: owner decisions recorded 5/9 bilingual, 43/5 cards, 2/1 D-M-A; revised copy live; operational admission remains fail-closed.');
