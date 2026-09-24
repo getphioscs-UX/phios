@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-KNOWLEDGE-STATE-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "bookCode": "BOOK-6",
+  "partCode": "PART-13",
+  "states": [
+    {
+      "id": "CANONICAL_HISTORY",
+      "labelZh": "已发生历史",
+      "labelEn": "Historical",
+      "rule": "Completed historical claims grounded in admitted manuscript/evidence. Never mutate into current data."
+    },
+    {
+      "id": "HISTORICAL_RECONSTRUCTION",
+      "labelZh": "历史重建",
+      "labelEn": "Historical Reconstruction",
+      "rule": "Reconstructed historical state; uncertainty and source limits must remain visible."
+    },
+    {
+      "id": "CURRENT_DATA",
+      "labelZh": "当前资料",
+      "labelEn": "Current",
+      "rule": "Requires asOfDate, sourceDate, retrievedAt/lastReviewedAt and freshness. STALE data must not present as current."
+    },
+    {
+      "id": "DERIVED_RUNTIME_READOUT",
+      "labelZh": "推导运行读数",
+      "labelEn": "Derived Runtime Readout",
+      "rule": "Derived from admitted inputs; derivation is not an observed fact."
+    },
+    {
+      "id": "CONDITIONAL_PROJECTION",
+      "labelZh": "条件性投影",
+      "labelEn": "Projection",
+      "rule": "Projection ≠ Prediction. No forecast certainty, guaranteed outcome or future fact."
+    },
+    {
+      "id": "UNKNOWN",
+      "labelZh": "未知",
+      "labelEn": "Unknown",
+      "rule": "A valid governed output. Missing evidence must not be hidden or filled by confident inference."
+    }
+  ],
+  "sourceClasses": [
+    "PRIMARY_SOURCE",
+    "OFFICIAL_RECORD",
+    "OFFICIAL_DATASET",
+    "SCHOLARLY_SYNTHESIS",
+    "VALIDATED_SURVEY",
+    "MANUSCRIPT_AUTHORITY",
+    "UNCERTAIN_OR_CONTESTED"
+  ],
+  "rules": {
+    "cases": [
+      "Historical identity/time/linkage may be CANONICAL_HISTORY when grounded; contested granular fields remain UNKNOWN or HISTORICAL_RECONSTRUCTION."
+    ],
+    "windows": [
+      "Window membership is historical indexing; causal weighting remains case-scoped and may remain UNKNOWN."
+    ],
+    "snapshots": [
+      "Historical snapshots may be CANONICAL_HISTORY; 2026 remains UNKNOWN until current data is admitted. Static visual availability never proves data currency."
+    ],
+    "dossiers": [
+      "CURRENT_DATA requires dates/freshness/source provenance. No current values are admitted by B6-WEB-C."
+    ],
+    "livedReality": [
+      "Observed and derived values must remain distinguishable; no universal 0–100 score."
+    ],
+    "projection": [
+      "13.84 is CONDITIONAL_PROJECTION only; 13.85 is possibility-space/observation-threshold framing. Projection ≠ Prediction."
+    ]
+  },
+  "prohibited": [
+    "CURRENT_DATA_AS_CANONICAL_HISTORY",
+    "UNKNOWN_HIDDEN_AS_CONFIDENT_FILLER",
+    "PROJECTION_AS_FORECAST_CERTAINTY",
+    "EXTERNAL_RANKING_AS_PHI_OS_VERDICT"
+  ]
+}

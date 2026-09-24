@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {evaluateS02EditorialDepth,evaluateS02GoldStandard,S02_DEPTH_GATE_VERSION,S02_GOLD_STANDARD_VERSION} from '../functions/personal-reading/narrative/bazi-s02-editorial-depth.js';
-const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),packs=read('functions/personal-reading/narrative/bazi-t3-preview-baseline.generated.json').packs,artifact=read('docs/acceptance/bazi-paid-report/editorial/S02-EDITORIAL-GOLD-STANDARD.json');
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),packs=read('functions/personal-reading/narrative/bazi-t3-preview-baseline.generated.json').packs,artifact=read('docs/acceptance/bazi-paid-report/editorial/S02-EDITORIAL-GOLD-STANDARD.json'),ownerDecision=read('config/reports/bazi-s02-editorial-gold-standard-acceptance.json');
+assert.equal(ownerDecision.decision,'ACCEPT');assert.equal(ownerDecision.goldStandardVersion,'BAZI_S02_EDITORIAL_GOLD_STANDARD_V1');assert.equal(ownerDecision.depthGateVersion,'BAZI_S02_EDITORIAL_DEPTH_GATE_V1');assert.deepEqual(ownerDecision.unlocks,['BASELINE_NOW:en:S02_PERSONALITY:GENERATE']);assert.equal(ownerDecision.productionActivated,false);
 for(const locale of ['en','zh-Hans']){
  const pack=packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`],entry=artifact.entries[locale];
  assert.equal(pack.schemaVersion,'BAZI_SECTION_EVIDENCE_PACK_V5');assert.equal(pack.editorialDepthContract.version,S02_DEPTH_GATE_VERSION);assert.equal(pack.editorialGoldStandard.version,S02_GOLD_STANDARD_VERSION);

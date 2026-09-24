@@ -1,39 +1,49 @@
 {
   "schemaVersion": "BAZI_S02_V2_OWNER_REVIEW_READINESS_V1",
-  "startingHead": "471fe8b7d6bd0e6133c4b055e319211acf9f0c46",
+  "startingHead": "3448b49e6007d53ea9eefba3bd7ec8d6515cae93",
   "sectionId": "S02_PERSONALITY",
-  "status": "EDITORIAL_GOLD_STANDARD_ENGINEERING",
+  "status": "GOLD_STANDARD_OWNER_ACCEPTED_ENGLISH_QA_READY",
   "authority": "BAZI_EXPLANATORY_AUTHORITY_V2",
   "claimIr": "BAZI_RICH_CLAIM_IR_V2",
   "costGuard": {
     "fullMatrix": false,
     "otherSections": false,
     "providerGenerationAllowedAfterLocalRebuildPassOnly": true,
-    "goldStandardBuildUsesProvider": false
+    "goldStandardBuildUsesProvider": false,
+    "allowedLiveProviderScope": [
+      "BASELINE_NOW:en:S02_PERSONALITY"
+    ],
+    "blockedUntilEnglishOwnerAcceptance": [
+      "BASELINE_NOW:zh-Hans:S02_PERSONALITY",
+      "S02_PERSONALITY:PARITY",
+      "S03_LIFE_STRUCTURE"
+    ]
   },
   "liveEvidence": {
-    "enSnapshot": "NOT_RUN_V2",
-    "zhHansSnapshot": "NOT_RUN_V2",
-    "bilingualParity": "NOT_RUN_V2",
+    "enSnapshot": "READY_FOR_ONE_V3_QA_GENERATION",
+    "zhHansSnapshot": "BLOCKED_UNTIL_ENGLISH_OWNER_ACCEPTANCE",
+    "bilingualParity": "BLOCKED",
     "renderedCandidate": "NOT_RUN_V2"
   },
   "ownerGate": {
-    "status": "NOT_READY_FOR_OWNER_ACCEPTANCE",
+    "status": "GOLD_STANDARD_ACCEPTED_CANDIDATE_NOT_YET_REVIEWED",
     "accepted": false
   },
   "productionEligible": false,
   "editorialGoldStandard": {
     "version": "BAZI_S02_EDITORIAL_GOLD_STANDARD_V1",
-    "status": "BUILD_WIRED_NOT_OWNER_ACCEPTED"
+    "status": "OWNER_ACCEPTED",
+    "ownerDecisionSource": "config/reports/bazi-s02-editorial-gold-standard-acceptance.json"
   },
   "editorialDepthGate": {
     "version": "BAZI_S02_EDITORIAL_DEPTH_GATE_V1",
     "status": "WIRED_FAIL_CLOSED"
   },
   "nextActions": [
-    "Run npm run check:bazi-t3 to build and verify the bilingual deterministic S02 Gold Standard.",
-    "Review s02-gold-standard.html before any provider call.",
-    "Only after owner approves the depth target, generate one English S02 V3 QA candidate.",
-    "Do not generate zh-Hans or parity until English quality is accepted for continuation."
+    "Run npm run check:bazi-t3 locally and commit regenerated V3 artifacts.",
+    "Deploy the resulting commit to QA.",
+    "Generate exactly one BASELINE_NOW / S02_PERSONALITY / English V3 candidate.",
+    "Review the English candidate against the accepted Gold Standard.",
+    "Only after explicit English owner acceptance may zh-Hans generation be enabled."
   ]
 }

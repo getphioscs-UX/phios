@@ -1,0 +1,1 @@
+import {checkCoverage} from './lib/book6-atlas-data-closure-checks.mjs';checkCoverage();console.log('✓ B6-WEB-C coverage PASS: 60 meaningful cases, 24 windows, 12 snapshots, 12+ dossier versions, 14 lived-reality dimensions');
