@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book VI Contemporary Runtime Dossier",
+  "type": "object",
+  "required": [
+    "id",
+    "entity",
+    "entityType",
+    "asOfDate",
+    "livedReality",
+    "evidenceQuality",
+    "sourceFreshness",
+    "version",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "entityType": {
+      "enum": [
+        "STATE",
+        "REGION",
+        "MULTI_STATE_SYSTEM",
+        "GLOBAL_RUNTIME"
+      ]
+    },
+    "dataClass": {
+      "enum": [
+        "CANONICAL_HISTORY",
+        "CURRENT_DATA",
+        "DERIVED_RUNTIME_READOUT",
+        "CONDITIONAL_PROJECTION",
+        "UNKNOWN"
+      ]
+    },
+    "livedReality": {
+      "type": "object"
+    },
+    "sourceFreshness": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
