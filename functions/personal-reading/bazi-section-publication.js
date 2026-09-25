@@ -78,7 +78,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   makeFacet('personalityExpression',pick(
    'Expression is separate from learning. A capability may exist internally yet need different conditions to become repeatable visible output. Recorded links between self-position and expression refine this reading.',
    '表达需要与学习分开阅读。一项能力可以已经存在于内部，但要变成可见输出、反复使用并持续承担，可能需要不同条件。命盘中自我位置与表达之间的已记录联结，会进一步修正这一层。'
-  ),[...linkPairs,byId(':OPERATING_CONDITION')]);
+  ),[...linkPairs]);
 
   makeFacet('personalityFriction',pick(
    'Friction is not treated as a flaw. It is the part of the structure where support, expression, standards or external demand do not automatically move in the same direction. Repeated tension across chart positions shows where capability may need more deliberate coordination.',
@@ -87,7 +87,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
 
   makeFacet('personalityReliability',pick(
    'Reliability asks a different question from talent: can the capability remain usable when expression, responsibility and demand continue over time? Carrying conditions and unresolved strength judgments therefore belong here, without being converted into a fixed strong-or-weak identity.',
-   '稳定性问的不是“有没有能力”，而是当表达、责任与要求持续存在时，这项能力是否仍然可用。因此，承载条件与尚未定论的强弱判断应该放在这里阅读，而不能被转换成固定的身强或身弱身份。'
+   '稳定性问的不是“有没有能力”，而是当表达、责任与要求持续存在时，这项能力是否仍然可用。承载条件与未定的强弱判断需要一起阅读，但不能变成固定身份。'
   ),[byId(':OPERATING_CONDITION'),byId(':OPEN_STRENGTH')]);
  }
  // Domain-specific deterministic facets keep the publication readable without
@@ -127,7 +127,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {key:'lifeStructureConditions',lead:pick(
    'The second question is whether the visible structure can be sustained. Pattern candidates, tension, carrying limits and unresolved conditions belong together here because they determine how far an interpretation can safely go.',
    '第二个问题是：眼前可见的结构能否被持续承载。格局候选、张力、承载限制与未定条件必须放在一起，因为它们共同决定这份解释可以走多远。'
-  ),types:['TENSION','OPERATING_CONDITION','OPEN_CONDITION']}
+  ),types:['OPERATING_CONDITION','OPEN_CONDITION']}
  ]);
 
  await makeDomainFacets('S04_CAREER','CAREER',[
@@ -137,7 +137,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   ),types:['EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS','ASSOCIATION']},
   {key:'careerWorkingConditions',lead:pick(
    'A role can look suitable on paper and still become difficult when authority, standards, support or workload are mismatched. This page focuses on the conditions that make the same capability easier or harder to carry in practice.',
-   '一个角色在名称上看起来合适，仍可能因为权限、标准、支持或工作量不匹配而变得困难。本页关注的是：什么条件会让同一套能力在现实中更容易或更难持续运作。'
+   '一个角色看起来合适，仍可能因为权限、标准、支持或工作量不匹配而变得困难。本页关注什么条件让同一套能力更容易或更难持续运作。'
   ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION']},
   {key:'careerDirection',lead:pick(
    'Career direction is read from repeated themes across the chart rather than from a single profession label. Cross-chart priorities and unresolved conditions help separate a durable work pattern from a temporary or incomplete signal.',
@@ -168,7 +168,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {key:'relationshipInteraction',lead:pick(
    'The next layer is interaction. Recorded links and tensions between chart positions show where expectations, support, responsibility and self-expression may need active negotiation instead of moving automatically in the same direction.',
    '下一层是互动。柱位之间已记录的联结与张力，会显示期待、支持、责任与自我表达在哪里需要主动协商，而不是自然地朝同一方向运行。'
-  ),types:['TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  ),types:['OPERATING_CONDITION','CONTEXT_MODIFIER']},
   {key:'relationshipBoundaries',lead:pick(
    'Relationship guidance becomes more reliable when recurring interaction structure is separated from fixed outcome claims. Open conditions keep marriage, separation and partner outcomes outside unsupported certainty.',
    '关系建议只有在反复出现的互动结构与固定结果被分开后才更可靠。未定条件会避免把婚姻、分离或伴侣结果写成没有依据的确定结论。'
