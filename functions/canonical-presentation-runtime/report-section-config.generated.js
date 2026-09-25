@@ -977,7 +977,7 @@ export const familyRegistry = {
     "TIMING_PAGE": {
       "budget": {
         "observations": [
-          2,
+          1,
           4
         ]
       },
