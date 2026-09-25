@@ -1,4 +1,4 @@
-name: BaZi R9 Human Review Package
+name: BaZi R10 Compressed Human Review Package
 
 on:
   push:
@@ -16,6 +16,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: bazi-r10-compressed-human-review
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -37,16 +41,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/customer-ui/js/personal-products/bazi-r9-review-runtime.bundle.js docs/acceptance/bazi-paid-report/r9
+          git add assets/customer-ui/js/personal-products/bazi-r9-review-runtime.bundle.js docs/acceptance/bazi-paid-report/r10
           if git diff --cached --quiet; then
             echo "No R9 package changes"
           else
-            git commit -m "bazi: materialize R9 human review package"
-            git push
+            git commit -m "bazi: materialize R10 compressed human review package"
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi
       - name: Upload R9 review package
         uses: actions/upload-artifact@v4
         with:
-          name: bazi-r9-human-review
-          path: docs/acceptance/bazi-paid-report/r9
+          name: bazi-r10-compressed-human-review
+          path: docs/acceptance/bazi-paid-report/r10
           if-no-files-found: error
