@@ -7,7 +7,7 @@
     "evidenceClass": "OWNER_REAL_BROWSER_SCREENSHOTS_AND_HUMAN_REVIEW",
     "date": "2026-09-25"
   },
-  "status": "MACHINE_REPAIR_PASS_DEPLOYMENT_AND_REAL_BROWSER_RETEST_PENDING",
+  "status": "MACHINE_REPAIR_WITH_CANONICAL_RRE_BRIDGE_PASS_DEPLOYMENT_AND_BROWSER_RETEST_PENDING",
   "defects": [
     {
       "id": "B6FR-01",
@@ -48,8 +48,17 @@
       "id": "B6FR-06",
       "area": "RUNTIME_BRIDGE",
       "finding": "The frozen Reality Readout Engine exists, but Book VI has no admitted current-data adapter or canonical readout record feeding this customer surface.",
-      "repair": "Do not fabricate a bridge. Preserve RRE ownership and require an evidence-admission + adapter successor before claiming live Contemporary Runtime.",
-      "state": "OPEN_STRUCTURAL_GAP"
+      "repair": "Connected Book VI Contemporary Runtime to the existing frozen Reality Readout Engine through a Book VI adapter and WPR CPR handoff. With current data still unadmitted, the canonical engine returns an explicit evidence-gate readout instead of fabricated runtime values.",
+      "state": "MACHINE_PASS_DEPLOYMENT_AND_BROWSER_RETEST_REQUIRED",
+      "implementation": {
+        "adapter": "scripts/lib/civilization-atlas/book6-rre-adapter-v1.mjs",
+        "endpoint": "functions/api/book6-runtime-readout.js",
+        "customerConsumer": "assets/js/pages/civilization-atlas/reconfiguration-renderer.js",
+        "rreOwnerPreserved": true,
+        "newParallelRuntime": false,
+        "cprTarget": "WPR",
+        "currentDataInvented": false
+      }
     }
   ],
   "visualTruth": {
@@ -60,8 +69,11 @@
   "runtimeBoundary": {
     "rreFreeze": "RRE_V1_FROZEN_CANONICAL_READOUT_RUNTIME",
     "canonicalReadoutAvailable": true,
-    "surfaceActivationByRre": false,
+    "bookViRreAdapterActiveInCode": true,
+    "cprWprHandoffActiveInCode": true,
+    "surfaceActivationOwnedByRre": false,
     "bookViCurrentDataAdmitted": false,
+    "behaviorWithoutAdmittedCurrentData": "CANONICAL_RRE_EVIDENCE_GATE_READOUT",
     "fakeRuntimeFillAllowed": false
   },
   "gates": {
@@ -76,7 +88,7 @@
   "completeClaimAllowed": false,
   "machineEvidence": {
     "commit": "47ba48f8824418a354b37bb62e8ef27fd5973cac",
-    "workflowRunId": 36096369403,
+    "workflowRunId": 36097196609,
     "status": "SUCCESS",
     "checks": [
       "check:b6-web-e",
@@ -93,6 +105,16 @@
     "visualBindingCensus": {
       "accepted": 392,
       "resolvedThroughExistingResolver": 392
+    },
+    "rreBridgeCommit": "c736fad1708750931af137fe71985efa84ce1b21",
+    "rreAdapterValidatedForDossiers": 12,
+    "articleRendererCoverage": {
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "articlesPerLocale": 28,
+      "total": 56
     }
   }
 }
