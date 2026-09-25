@@ -79,11 +79,11 @@ function visualFigure(doc,a,locale){
  expand.addEventListener('click',()=>{const dialog=doc.createElement('dialog');dialog.className='civ-visual-dialog';dialog.setAttribute('aria-label',title);const close=doc.createElement('button');close.type='button';close.textContent=zh?'关闭图片':'Close image';const large=img.cloneNode();large.loading='eager';dialog.append(close,large);const label=doc.createElement('p');label.textContent=title+' · '+note.textContent;dialog.append(label);doc.body.append(dialog);close.addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{dialog.remove();expand.focus();},{once:true});dialog.showModal();close.focus();});
  img.src=a.publicUrl;figure.append(img,caption);return figure;
 }
-export function renderAtlasStaticVisuals(root,{bindings,state,locale='en'}={}){
+export function renderAtlasStaticVisuals(root,{bindings,state,locale='en',data={}}={}){
  root.querySelector('[data-atlas-static-visuals]')?.remove();
  const structured=root.querySelector('[data-atlas-structured-visual]');if(!structured?.firstElementChild)return;
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&root.dataset.atlasReady!=='true')return;
- const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},data=arguments[1]?.data||{},assets=resolveAtlasStaticVisuals(bindings,state,options,data);
+ const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},assets=resolveAtlasStaticVisuals(bindings,state,options,data);
  const library=bindings?.assets?.filter(a=>resolveAtlasVisualById(bindings,a.assetId,options))||[];
  if(!assets.length&&!library.length)return;ensureStyle(doc);
  const host=doc.createElement('div');host.dataset.atlasStaticVisuals='';
