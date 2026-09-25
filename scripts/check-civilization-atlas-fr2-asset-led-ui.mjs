@@ -46,7 +46,7 @@ assert.ok(comparison.includes("'CASE_HERO'"),'comparison representative cases mu
 for(const token of [
  'renderTimeline(content,{registry:data.timeline,casesRegistry:data.cases,visualBindings:data.staticVisuals',
  'renderCases(content,{registry:data.cases,visualBindings:data.staticVisuals',
- 'renderComparison(content,{registry:data.comparison,casesRegistry:data.cases,visualBindings:data.staticVisuals',
+ 'renderComparison(content,{registry:data.comparison,casesRegistry:data.cases,transitionsRegistry:data.transitions,worldRegistry:data.world,visualBindings:data.staticVisuals',
  'renderWorldSlice(content,{registry:data.world,casesRegistry:data.cases,visualBindings:data.staticVisuals',
  'renderTrajectories(content,{registry:data.trajectories,visualBindings:data.staticVisuals',
  'renderTransitions(content,{registry:data.transitions,visualBindings:data.staticVisuals',
@@ -69,5 +69,11 @@ assert.ok(world.includes("'WORLD_SNAPSHOT_ATMOSPHERE'"),'World snapshot atmosphe
 assert.ok(world.includes('civ-world__globe'),'World snapshot visual must occupy the map field, not a detached hero.');
 assert.ok(css.includes('FR2 atlas-board visual language'),'FR2 Atlas board theme missing.');
 assert.ok(css.includes('--phi-action-knowledge:#d5b36c'),'FR2 Atlas board must retain the gold interaction language.');
+
+
+assert.ok(comparison.includes('const factRows=['),'FR2 comparison must use case-specific fact rows.');
+assert.ok(comparison.includes("'关联转型':'Linked transitions'"),'FR2 comparison must resolve linked transitions.');
+assert.ok(comparison.includes("'世界横切面':'World snapshots'"),'FR2 comparison must resolve world snapshots.');
+assert.ok(comparison.includes('civ-compare-dimension-grid'),'Comparison dimensions must be presented separately from case fact cells.');
 
 console.log('B6-WEB-FR2 asset-led Atlas UI gate PASS: comparison board repaired and accepted visuals are structural layer components.');
