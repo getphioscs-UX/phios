@@ -55,13 +55,13 @@ assert.ok(reconfig.includes('civ-reconfig-more'),'Book VI secondary navigation m
 
 
 const firstScreenOrder=[
-  shell.indexOf('data-atlas-primary-visual'),
-  shell.indexOf('data-atlas-layer-content'),
+  shell.indexOf('data-atlas-template-projection'),
+  shell.indexOf('civ-template-controls'),
   shell.indexOf('data-atlas-structured-section'),
   shell.indexOf('data-atlas-visual-resources')
 ];
-assert.ok(firstScreenOrder.every(x=>x>=0),'Atlas first-screen composition placeholders must all exist.');
-assert.deepEqual([...firstScreenOrder].sort((a,b)=>a-b),firstScreenOrder,'Atlas first screen must order primary visual → readable content → structured view → visual resources.');
+assert.ok(firstScreenOrder.every(x=>x>=0),'Atlas FR3 first-screen composition placeholders must all exist.');
+assert.deepEqual([...firstScreenOrder].sort((a,b)=>a-b),firstScreenOrder,'Atlas FR3 first screen must order Library template → interactive controls → structured fallback → visual resources.');
 assert.ok(shell.includes('civ-atlas-secondary'),'Structured data view must be progressive disclosure.');
 
 const staticVisual=read('assets/js/pages/civilization-atlas/atlas-static-visual.js');
