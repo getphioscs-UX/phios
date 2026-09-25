@@ -6,8 +6,8 @@ export const formatHistoricalYear=(year,lang='en')=>{
   return lang==='zh-Hans'?`公元${year}年`:`${year} CE`;
 };
 export const formatHistoricalRange=(a,b,lang='en')=>`${formatHistoricalYear(a,lang)} – ${formatHistoricalYear(b,lang)}`;
-export function renderTimeline(container,{registry,state,locale='en',onPeriodSelect=()=>{},onCaseSelect=()=>{}}={}){
-  const lang=locale==='zh-Hans'?'zh-Hans':'en'; const periods=registry?.periods||[];
+export function renderTimeline(container,{registry,casesRegistry,state,locale='en',onPeriodSelect=()=>{},onCaseSelect=()=>{}}={}){
+  const lang=locale==='zh-Hans'?'zh-Hans':'en'; const periods=registry?.periods||[]; const caseMap=new Map((casesRegistry?.cases||[]).map(c=>[c.caseId,c]));
   if(!periods.length){container.innerHTML=`<p>${lang==='zh-Hans'?'历史脊柱尚未激活。':'Timeline data is not active yet.'}</p>`;return;}
   const selected=periods.find(p=>p.periodId===state.timeWindowId)||periods.find(p=>state.time!==null&&state.time>=p.startYear&&state.time<=p.endYear)||periods[0];
   container.innerHTML=`<div class="civ-timeline" data-atlas-timeline>
@@ -18,7 +18,7 @@ export function renderTimeline(container,{registry,state,locale='en',onPeriodSel
       <p class="knowledge-eyebrow">${esc(formatHistoricalRange(selected.startYear,selected.endYear,lang))}</p><h4>${esc(loc(selected.title,lang))}</h4>
       <p>${esc(loc(selected.summary,lang))}</p>
       <dl class="civ-atlas-meta"><div><dt>${lang==='zh-Hans'?'时间':'Time'}</dt><dd>${esc(formatHistoricalRange(selected.startYear,selected.endYear,lang))}</dd></div><div><dt>${lang==='zh-Hans'?'代表文明':'Civilizations'}</dt><dd>${selected.caseIds?.length||0}</dd></div></dl>
-      ${selected.caseIds?.length?`<div class="civ-atlas-related"><h5>${lang==='zh-Hans'?'继续看这一时期的文明':'Explore civilizations in this period'}</h5>${selected.caseIds.map((id,index)=>`<button type="button" class="knowledge-action knowledge-action--quiet" data-case-id="${esc(id)}">${esc(lang==='zh-Hans'?\`文明 ${index+1}\`:\`Civilization ${index+1}\`)}</button>`).join('')}</div>`:''}
+      ${selected.caseIds?.length?`<div class="civ-atlas-related"><h5>${lang==='zh-Hans'?'继续看这一时期的文明':'Explore civilizations in this period'}</h5>${selected.caseIds.map(id=>{const c=caseMap.get(id);return `<button type="button" class="knowledge-action knowledge-action--quiet" data-case-id="${esc(id)}">${esc(c?loc(c.title,lang):(lang==='zh-Hans'?'文明案例':'Civilization case'))}</button>`}).join('')}</div>`:''}
       ${selected.unknown?.note?`<p class="civ-atlas-note">${esc(loc(selected.unknown.note,lang))}</p>`:''}
     </article>
     <details class="civ-atlas-detail-table"><summary>${lang==='zh-Hans'?'查看完整时间表':'View full timeline table'}</summary><div class="civ-atlas-table-wrap"><table class="civ-atlas-table"><caption class="civ-sr-only">${lang==='zh-Hans'?'文明历史时期完整表格':'Complete civilization timeline table'}</caption><thead><tr><th scope="col">${lang==='zh-Hans'?'时期':'Period'}</th><th scope="col">${lang==='zh-Hans'?'时间范围':'Range'}</th><th scope="col">${lang==='zh-Hans'?'历史主线':'Historical line'}</th><th scope="col">${lang==='zh-Hans'?'代表案例':'Cases'}</th></tr></thead><tbody>
