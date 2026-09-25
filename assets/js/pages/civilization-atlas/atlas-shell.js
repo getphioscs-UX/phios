@@ -40,24 +40,24 @@ ${CIVILIZATION_LAYERS.has(state.activeLayer)?`<div class="civ-atlas-subnav" aria
   const content=root.querySelector('[data-atlas-layer-content]'); const inspector=root.querySelector('[data-atlas-inspector]');
   renderStructuredAtlasVisual(root.querySelector('[data-atlas-structured-visual]'),{data,state,locale:lang,onStateChange});
   if(state.activeLayer==='timeline'&&data.timeline){
-    renderTimeline(content,{registry:data.timeline,casesRegistry:data.cases,state,locale:lang,onPeriodSelect:p=>onStateChange({timeWindowId:p.periodId,time:p.startYear,caseIds:p.caseIds||[],primaryCaseId:p.caseIds?.[0]||null},{source:'timeline-period'}),onCaseSelect:id=>onStateChange({activeLayer:'cases',primaryCaseId:id,caseIds:[id]},{source:'timeline-case'})});
+    renderTimeline(content,{registry:data.timeline,casesRegistry:data.cases,visualBindings:data.staticVisuals,state,locale:lang,onPeriodSelect:p=>onStateChange({timeWindowId:p.periodId,time:p.startYear,caseIds:p.caseIds||[],primaryCaseId:p.caseIds?.[0]||null},{source:'timeline-period'}),onCaseSelect:id=>onStateChange({activeLayer:'cases',primaryCaseId:id,caseIds:[id]},{source:'timeline-case'})});
   }else if(state.activeLayer==='cases'&&data.cases){
-    const active=renderCases(content,{registry:data.cases,state,locale:lang,onCaseSelect:id=>onStateChange({primaryCaseId:id,caseIds:[id]},{source:'case-select'}),onCompareToggle:id=>{const current=new Set(state.compareBasket||[]); current.has(id)?current.delete(id):current.add(id); onStateChange({compareBasket:[...current].slice(0,6)},{source:'case-compare'});},onSearchChange:q=>onStateChange({caseSearch:q},{source:'case-search'})});
+    const active=renderCases(content,{registry:data.cases,visualBindings:data.staticVisuals,state,locale:lang,onCaseSelect:id=>onStateChange({primaryCaseId:id,caseIds:[id]},{source:'case-select'}),onCompareToggle:id=>{const current=new Set(state.compareBasket||[]); current.has(id)?current.delete(id):current.add(id); onStateChange({compareBasket:[...current].slice(0,6)},{source:'case-compare'});},onSearchChange:q=>onStateChange({caseSearch:q},{source:'case-search'})});
     renderCaseInspector(inspector,{caseRecord:active,state,locale:lang});
   }else if(state.activeLayer==='comparison'&&data.comparison&&data.cases){
     const family=renderComparison(content,{registry:data.comparison,casesRegistry:data.cases,visualBindings:data.staticVisuals,state,locale:lang,onFamilySelect:id=>onStateChange({comparisonFamilyId:id},{source:'comparison-family'}),onCaseSelect:id=>onStateChange({activeLayer:'cases',primaryCaseId:id,caseIds:[id]},{source:'comparison-case'}),onCompareToggle:id=>{const current=new Set(state.compareBasket||[]); current.has(id)?current.delete(id):current.add(id); onStateChange({compareBasket:[...current].slice(0,6)},{source:'comparison-basket'});}});
     renderComparisonInspector(inspector,{family,state,locale:lang});
   }else if(state.activeLayer==='world'&&data.world&&data.cases){
-    const snapshot=renderWorldSlice(content,{registry:data.world,casesRegistry:data.cases,state,locale:lang,onSnapshotSelect:s=>onStateChange({snapshotId:s.snapshotId,time:s.year,caseIds:s.majorCaseIds||[],primaryCaseId:s.majorCaseIds?.[0]||null},{source:'world-snapshot'}),onCaseSelect:id=>onStateChange({activeLayer:'cases',primaryCaseId:id,caseIds:[id]},{source:'world-case'})});
+    const snapshot=renderWorldSlice(content,{registry:data.world,casesRegistry:data.cases,visualBindings:data.staticVisuals,state,locale:lang,onSnapshotSelect:s=>onStateChange({snapshotId:s.snapshotId,time:s.year,caseIds:s.majorCaseIds||[],primaryCaseId:s.majorCaseIds?.[0]||null},{source:'world-snapshot'}),onCaseSelect:id=>onStateChange({activeLayer:'cases',primaryCaseId:id,caseIds:[id]},{source:'world-case'})});
     renderWorldInspector(inspector,{snapshot,locale:lang});
   }else if(state.activeLayer==='trajectories'&&data.trajectories){
-    const selected=renderTrajectories(content,{registry:data.trajectories,state,locale:lang,onToggle:ids=>onStateChange({trajectoryIds:ids},{source:'trajectory-select'})});
+    const selected=renderTrajectories(content,{registry:data.trajectories,visualBindings:data.staticVisuals,state,locale:lang,onToggle:ids=>onStateChange({trajectoryIds:ids},{source:'trajectory-select'})});
     renderTrajectoryInspector(inspector,{trajectories:selected,locale:lang});
   }else if(state.activeLayer==='transitions'&&data.transitions){
-    const active=renderTransitions(content,{registry:data.transitions,state,locale:lang,onSelect:id=>onStateChange({transitionWindowId:id},{source:'transition-select'})});
+    const active=renderTransitions(content,{registry:data.transitions,visualBindings:data.staticVisuals,state,locale:lang,onSelect:id=>onStateChange({transitionWindowId:id},{source:'transition-select'})});
     renderTransitionInspector(inspector,{windowRecord:active,locale:lang});
   }else if(state.activeLayer==='loss'&&data.loss){
-    const selection=renderLossAtlas(content,{registry:data.loss,casesRegistry:data.cases,state,locale:lang,onFamilySelect:id=>onStateChange({lossFamilyId:id,lossTypeId:null},{source:'loss-family'}),onLossSelect:id=>onStateChange({lossTypeId:id},{source:'loss-type'})});
+    const selection=renderLossAtlas(content,{registry:data.loss,casesRegistry:data.cases,visualBindings:data.staticVisuals,state,locale:lang,onFamilySelect:id=>onStateChange({lossFamilyId:id,lossTypeId:null},{source:'loss-family'}),onLossSelect:id=>onStateChange({lossTypeId:id},{source:'loss-type'})});
     renderLossInspector(inspector,{selection,locale:lang});
   }else{
     content.innerHTML=`<div class="civ-atlas-empty"><span aria-hidden="true">Φ</span><p>${esc(c.empty)}</p><small>${esc(c.evidence)}</small></div>`;
