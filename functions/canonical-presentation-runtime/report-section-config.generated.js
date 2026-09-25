@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R2",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R3",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -105,7 +105,7 @@ export const registry = {
             "chartHighlights"
           ],
           "title": {
-            "zh-Hans": "命盘重点摘要",
+            "zh-Hans": "重点摘要",
             "en": "Key Insights"
           },
           "omitWhenInsufficient": true
@@ -169,8 +169,8 @@ export const registry = {
             "socialStyle"
           ],
           "title": {
-            "zh-Hans": "优势与挑战",
-            "en": "Strengths & Challenges"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -284,7 +284,7 @@ export const registry = {
             "lifeStructureInsights"
           ],
           "title": {
-            "zh-Hans": "格局重点摘要",
+            "zh-Hans": "重点摘要",
             "en": "Key Insights"
           },
           "omitWhenInsufficient": false
@@ -347,8 +347,8 @@ export const registry = {
             "careerFields"
           ],
           "title": {
-            "zh-Hans": "工作方式与注意事项",
-            "en": "Work Patterns & Considerations"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         },
@@ -424,8 +424,8 @@ export const registry = {
             "financialAdvice"
           ],
           "title": {
-            "zh-Hans": "资源机会与现实核对",
-            "en": "Resources & Reality Checks"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -487,8 +487,8 @@ export const registry = {
             "relationshipAdvice"
           ],
           "title": {
-            "zh-Hans": "相处建议",
-            "en": "Relationship Advice"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -536,8 +536,8 @@ export const registry = {
             "wellnessAdvice"
           ],
           "title": {
-            "zh-Hans": "生活观察建议",
-            "en": "Wellbeing Reflections"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -611,7 +611,7 @@ export const registry = {
             "timingInsights"
           ],
           "title": {
-            "zh-Hans": "时间重点摘要",
+            "zh-Hans": "重点摘要",
             "en": "Key Insights"
           },
           "omitWhenInsufficient": false
@@ -660,8 +660,8 @@ export const registry = {
             "nextSteps"
           ],
           "title": {
-            "zh-Hans": "下一步建议",
-            "en": "Next Steps"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -722,7 +722,7 @@ export const registry = {
             "appendixInsights"
           ],
           "title": {
-            "zh-Hans": "阅读重点摘要",
+            "zh-Hans": "重点摘要",
             "en": "Key Insights"
           },
           "omitWhenInsufficient": false
