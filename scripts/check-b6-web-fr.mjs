@@ -6,6 +6,7 @@ import {setLocale} from '../assets/js/i18n.js';
 import {createReconfigurationAtlasState,RECONFIG_ATLAS_LAYERS} from '../assets/js/pages/civilization-atlas/atlas-state.js';
 import {mountReconfigurationAtlas} from '../assets/js/pages/civilization-atlas/reconfiguration-renderer.js';
 import {resolveAtlasVisualById} from '../assets/js/pages/civilization-atlas/atlas-static-visual.js';
+import {buildBook6DossierRreProjection} from './lib/civilization-atlas/book6-rre-adapter-v1.mjs';
 
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const renderer=fs.readFileSync('assets/js/pages/civilization-atlas/reconfiguration-renderer.js','utf8');
@@ -33,6 +34,9 @@ assert.match(renderer,/function renderVisualLibrary/);
 assert.match(renderer,/activeLayer==='visuals'/);
 assert.match(renderer,/currentDataNotAdmitted/);
 assert.match(renderer,/currentDataBoundary/);
+assert.match(renderer,/hydrateDossierRuntimeReadout/);
+assert.match(renderer,/\/api\/book6-runtime-readout/);
+assert.match(renderer,/data-runtime-readout/);
 assert.match(renderer,/PHRASE_KEY_BY_TEXT/);
 for(const token of ['visualLibrary','visualFamily','visualSubject','currentDataNotAdmitted','currentDataBoundary','CASE_PRESSURE_BOUNDARY','WINDOW_PRESSURE_BOUNDARY']) {
  assert.match(en,new RegExp(token));
@@ -51,10 +55,47 @@ const data={
  visualStatus:read('content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json'),
  visualBindings:read('content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json')
 };
+const rreRegistries={
+ inputContract:read('content/runtime/reality-readout-engine/contracts/reality-readout-input-contract-v1.json'),
+ dimensionRegistry:read('content/runtime/reality-readout-engine/registries/canonical-observable-dimension-registry-v1.json'),
+ signatureRegistry:read('content/runtime/reality-readout-engine/registries/canonical-runtime-signature-role-registry-v1.json'),
+ patternRegistry:read('content/runtime/reality-readout-engine/registries/canonical-pattern-runtime-registry-v1.json'),
+ constraintRegistry:read('content/runtime/reality-readout-engine/registries/canonical-constraint-reading-class-registry-v1.json'),
+ loadRegistry:read('content/runtime/reality-readout-engine/registries/canonical-load-reading-state-registry-v1.json'),
+ stabilityRegistry:read('content/runtime/reality-readout-engine/registries/canonical-stability-reading-registry-v1.json'),
+ driftRegistry:read('content/runtime/reality-readout-engine/registries/canonical-drift-reading-registry-v1.json'),
+ recoveryRegistry:read('content/runtime/reality-readout-engine/registries/canonical-recovery-reading-registry-v1.json'),
+ resolutionRegistry:read('content/runtime/reality-readout-engine/registries/canonical-resolution-limit-registry-v1.json'),
+ confidenceRegistry:read('content/runtime/reality-readout-engine/registries/canonical-confidence-runtime-registry-v1.json'),
+ rmoConstraintRegistry:read('content/runtime/reality-model-runtime/registries/canonical-constraint-type-registry-v1.json'),
+ rmoUnknownRegistry:read('content/runtime/reality-model-runtime/registries/canonical-unknown-kind-registry-v1.json'),
+ successorRegistry:read('content/governance/reality-data-governance/extensions/rre-readout/registries/rre-readout-data-contract-successor-v1.json'),
+ targetRegistry:read('content/runtime/reality-readout-engine/registries/rre-cpr-projection-target-registry-v1.json'),
+ cprSurfaceRegistry:read('content/professional/canonical-presentation-runtime/registries/cpr-surface-projection-registry-v1.json')
+};
 
 assert.equal(data.visualBindings.assets.length,392,'accepted Civilization Atlas binding census drifted');
 const resolved=data.visualBindings.assets.map(a=>resolveAtlasVisualById(data.visualBindings,a.assetId)).filter(Boolean);
 assert.equal(resolved.length,392,'all 392 accepted Civilization Atlas bindings must resolve through the existing resolver');
+
+const dossierRre=(data.dossiers.dossiers||[]).map(dossier=>buildBook6DossierRreProjection({dossier,cases:data.cases.cases||[],registries:rreRegistries}));
+assert.equal(dossierRre.length,12,'all initial Book VI dossier targets must have a canonical RRE adapter projection');
+for(const projection of dossierRre){
+ assert.equal(projection.dataClass,'DERIVED_RUNTIME_READOUT');
+ assert.equal(projection.currentDataAdmitted,false);
+ assert.equal(projection.readoutState,'EVIDENCE_GATE_OPEN');
+ assert.equal(projection.confidenceClass,'UNKNOWN');
+ assert.ok(projection.resolutionLimitKinds.includes('INPUT_DATA_QUALITY_UNKNOWN'));
+ assert.ok(projection.resolutionLimitKinds.includes('MISSING_REQUIRED_INPUT_AUTHORITY'));
+ assert.equal(projection.cprHandoff.target.targetCode,'WPR');
+ assert.equal(projection.cprHandoff.surfaceActivatedByRre,false);
+ assert.equal(projection.boundaries.currentFactsInvented,false);
+ assert.equal(projection.boundaries.missingEvidenceFilledByInference,false);
+}
+const endpointSource=fs.readFileSync('functions/api/book6-runtime-readout.js','utf8');
+assert.match(endpointSource,/buildBook6DossierRreProjection/);
+assert.match(endpointSource,/RRE-READOUT/);
+assert.doesNotMatch(endpointSource,/with\s*\{\s*type\s*:\s*['"]json['"]\s*\}/);
 
 const {document}=parseHTML('<html><head></head><body><main data-civilization-atlas-root data-atlas-mode="reconfiguration"></main></body></html>');
 globalThis.document=document;globalThis.window=document.defaultView;
@@ -105,4 +146,4 @@ assert.notEqual(browser.status,'ACCEPTED','repair must not fabricate browser acc
 assert.equal(cutover.completionBoundary?.completeClaimAllowed,false);
 assert.equal(cutover.completionBoundary?.cutover,'BLOCKED');
 
-console.log('PASS: B6-WEB-FR repairs article admission, Atlas card ownership, zh-Hans structural copy, 392-visual customer projection and bounded unadmitted-current-data presentation without fabricating final acceptance.');
+console.log('PASS: B6-WEB-FR repairs article admission, Atlas card ownership, zh-Hans structural copy, 392-visual customer projection, canonical RRE→CPR/WPR dossier adapter and bounded unadmitted-current-data presentation without fabricating final acceptance.');
