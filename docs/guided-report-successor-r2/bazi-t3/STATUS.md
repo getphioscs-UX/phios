@@ -1,6 +1,16 @@
-# Addendum E — licensed explanatory authority and staged acceptance
+# Addendum F — S02 human editorial quality and staged acceptance
 
-## Current checkpoint — 2026-09-23
+## Current checkpoint — 2026-09-25
+
+The owner has explicitly **REJECTED** the historical English S02 snapshot `614b4b6a9121409202bf2db76d8f17ff7291818d1b15d059905e4a4d3d3392fa`. That snapshot was a `BAZI_EDITORIAL_COMPOSITION_V1` / `BAZI_EXPLANATORY_AUTHORITY_V1` machine PASS, but its customer prose remained too close to internal-structure paraphrase and did not meet paid-report explanatory depth. The previous repository acceptance for this snapshot had already been marked `SUPERSEDED`; this checkpoint now records the later human REJECT as separate audit evidence instead of rewriting history.
+
+Current main remains on `BAZI_EXPLANATORY_AUTHORITY_V2`, `BAZI_RICH_CLAIM_IR_V2`, `BAZI_EDITORIAL_COMPOSITION_V3`, `BAZI_SEMANTIC_VERIFIER_V2` and `BAZI_EDITORIAL_VALIDATOR_V3`. The owner-accepted English S02 Gold Standard and fail-closed editorial depth gate remain authoritative. This checkpoint does **not** change BaZi semantic authority, rank, pairwise direction, modality, open verdicts or verifier semantics.
+
+The V3 composition call now receives a narrowly scoped English-S02 human-review follow-up together with the existing Gold Standard. The follow-up requires substantive LIFE_DOMAIN_EXPLANATION and OPERATING_CONDITION prose, keeps the unresolved strong/weak verdict subordinate, and makes reflection prompts supplementary rather than a substitute for interpretation. It explicitly forbids filling `howThisMayShowUp` while manifestation licenses are empty. This is an editorial-generation constraint only; the Gold Standard is not promoted into factual evidence.
+
+No current V3 English S02 snapshot has been human accepted. English must be regenerated as a new V3 candidate before review. Chinese S02 generation, bilingual parity, S03 and Paid Production remain blocked. `BAZI_PRODUCTION_SUCCESSOR_ACTIVE` remains false.
+
+## Previous checkpoint — 2026-09-23
 
 Implementation commit `1e708ba4` is deployed to QA at https://baba8ef8.phios-github.pages.dev (stable alias https://qa.phios-github.pages.dev). Production is unchanged. The following results are real authenticated Preview model calls, with frozen result bytes retrieved from sandbox PRIVATE_REPORTS; they are not local fixture acceptance.
 
