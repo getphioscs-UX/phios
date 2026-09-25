@@ -99,11 +99,53 @@ try{
 </script></html>`;
 }
 
+function focusedReviewDocument(locale,sectionKey,label){
+ const snapshot=snapshots[locale];
+ const focused={...snapshot,intro:[],pages:snapshot.pages.filter(p=>p.sectionKey===sectionKey)};
+ const rendered=renderVisualReportPages(focused);
+ const title=locale==='en'?\`BaZi R11 · \${label} Human Review\`:\`BaZi R11 · \${label} 人工验收\`;
+ return \`<!doctype html><html lang="\${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>\${title}</title>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/customer-ui/surfaces/visual-report.css">
+<link rel="stylesheet" href="/assets/customer-ui/surfaces/report-publication.css">
+<style>
+body{margin:0;background:#e8e5de;color:#223;min-width:320px}
+.focus-nav{position:sticky;top:0;z-index:20;background:#fffdf7ee;backdrop-filter:blur(12px);border-bottom:1px solid #cbb88e;padding:12px 16px;font:14px/1.5 system-ui}
+.focus-inner{max-width:1080px;margin:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.focus-inner strong{margin-right:auto}.focus-inner button{font:inherit;padding:7px 10px;border:1px solid #bca879;background:#fff;color:#263843;border-radius:6px}
+.focus-status{max-width:1080px;margin:14px auto;padding:12px 16px;background:#fffdf7;border:1px solid #cbb88e;font:14px/1.55 system-ui}
+.focus-error{max-width:1080px;margin:10px auto;padding:10px 16px;background:#fff0f0;border:1px solid #b66;display:none;font:14px system-ui}
+@media print{.focus-nav,.focus-status,.focus-error{display:none!important}body{background:white}}
+</style>
+<nav class="focus-nav"><div class="focus-inner"><strong>\${title}</strong><button id="print">A4 Print / PDF</button></div></nav>
+<section class="focus-status"><b>Scope:</b> \${sectionKey}. Review content depth, section specificity, timing relevance and navigation. The 10-section visual system is not under redesign.</section>
+<div id="focus-error" class="focus-error"></div><main id="report">\${rendered}</main>
+<script type="module">
+import {settlePublicationAssets,fitPublicationForPrint} from '/assets/customer-ui/js/personal-products/publication-report-pages.js';
+const report=document.querySelector('#report'),errorBox=document.querySelector('#focus-error'),printButton=document.querySelector('#print');
+try{
+ printButton.disabled=true;
+ await document.fonts?.ready;
+ await settlePublicationAssets(report);
+ const fit=fitPublicationForPrint(report),failed=fit.filter(x=>!x.fits);
+ if(failed.length)throw new Error('PRINT_FIT_FAILED:'+failed.map(x=>x.pageNumber).join(','));
+ printButton.disabled=false;
+ printButton.onclick=async()=>{printButton.disabled=true;try{await document.fonts?.ready;await settlePublicationAssets(report);const next=fitPublicationForPrint(report),bad=next.filter(x=>!x.fits);if(bad.length)throw new Error('PRINT_FIT_FAILED:'+bad.map(x=>x.pageNumber).join(','));window.print();}finally{printButton.disabled=false;}};
+ window.focusReviewReady=true;
+}catch(error){errorBox.style.display='block';errorBox.textContent='Review preparation failed: '+String(error);window.focusReviewReady=false;}
+</script></html>\`;
+}
+
 const zhHtml=reviewDocument('zh-Hans');
 const enHtml=reviewDocument('en');
 fs.writeFileSync(`${out}/review.html`,zhHtml);
 fs.writeFileSync(`${out}/review-zh-Hans.html`,zhHtml);
 fs.writeFileSync(`${out}/review-en.html`,enHtml);
+fs.writeFileSync(`${out}/review-s04-career-zh-Hans.html`,focusedReviewDocument('zh-Hans','S04_CAREER','S04 Career'));
+fs.writeFileSync(`${out}/review-s04-career-en.html`,focusedReviewDocument('en','S04_CAREER','S04 Career'));
+fs.writeFileSync(`${out}/review-s05-wealth-zh-Hans.html`,focusedReviewDocument('zh-Hans','S05_WEALTH','S05 Wealth'));
+fs.writeFileSync(`${out}/review-s05-wealth-en.html`,focusedReviewDocument('en','S05_WEALTH','S05 Wealth'));
 
 fs.writeFileSync(`${out}/human-review-decision.template.json`,JSON.stringify({
  schemaVersion:'BAZI_R11_CONTENT_QUALITY_HUMAN_REVIEW_DECISION_V1',decision:'PENDING',reviewer:'',reviewedAt:'',
