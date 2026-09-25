@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "PHI-OS-B6-WEB-FR-REJECTED-ACCEPTANCE-REPAIR-v1.0.0",
+  "package": "B6-WEB-FR",
+  "predecessor": "B6-WEB-F",
+  "trigger": {
+    "decision": "REJECT",
+    "evidenceClass": "OWNER_REAL_BROWSER_SCREENSHOTS_AND_HUMAN_REVIEW",
+    "date": "2026-09-25"
+  },
+  "status": "MACHINE_VALIDATION_PENDING",
+  "defects": [
+    {
+      "id": "B6FR-01",
+      "area": "ARTICLE_PUBLICATION",
+      "finding": "Published Book VI ART-* articles are rejected by a KN-only renderer identity gate.",
+      "repair": "Canonical renderer admits governed KN-* and ART-* article node codes without bypassing block safety validation.",
+      "state": "IMPLEMENTED_PENDING_MACHINE_PASS"
+    },
+    {
+      "id": "B6FR-02",
+      "area": "LAYOUT",
+      "finding": "Atlas cards reuse a generic WPR card presentation and collapse text/actions into narrow vertical columns.",
+      "repair": "Book VI owns civ-reconfig-card layout, wider responsive grid, wrapping guards and mobile horizontal tabs.",
+      "state": "IMPLEMENTED_PENDING_BROWSER_RETEST"
+    },
+    {
+      "id": "B6FR-03",
+      "area": "I18N",
+      "finding": "zh-Hans surfaces display English-only structural values stored in the case/window registries.",
+      "repair": "Canonical Book VI locales project the bounded structural phrase families and transition-duration template into zh-Hans.",
+      "state": "IMPLEMENTED_PENDING_BROWSER_RETEST"
+    },
+    {
+      "id": "B6FR-04",
+      "area": "VISUAL_ACTIVATION",
+      "finding": "392 accepted and delivery-verified Civilization Atlas bindings are loaded but not exposed by the Book VI customer surface.",
+      "repair": "A Visual Atlas layer reuses the existing resolver and lazy-projects one selected accepted visual at a time.",
+      "state": "IMPLEMENTED_PENDING_MACHINE_AND_BROWSER_RETEST"
+    },
+    {
+      "id": "B6FR-05",
+      "area": "UNKNOWN_PRESENTATION",
+      "finding": "Contract-only Contemporary Runtime renders repeated UNKNOWN fields as if it were a finished runtime readout.",
+      "repair": "Unadmitted current data collapses to one explicit evidence boundary; genuine UNKNOWN remains governed and is not filled by inference.",
+      "state": "IMPLEMENTED_PENDING_BROWSER_RETEST"
+    },
+    {
+      "id": "B6FR-06",
+      "area": "RUNTIME_BRIDGE",
+      "finding": "The frozen Reality Readout Engine exists, but Book VI has no admitted current-data adapter or canonical readout record feeding this customer surface.",
+      "repair": "Do not fabricate a bridge. Preserve RRE ownership and require an evidence-admission + adapter successor before claiming live Contemporary Runtime.",
+      "state": "OPEN_STRUCTURAL_GAP"
+    }
+  ],
+  "visualTruth": {
+    "acceptedCivilizationAtlasBindings": 392,
+    "bookViCoreVisualsPresent": 23,
+    "bookViCoreVisualsExpected": 23
+  },
+  "runtimeBoundary": {
+    "rreFreeze": "RRE_V1_FROZEN_CANONICAL_READOUT_RUNTIME",
+    "canonicalReadoutAvailable": true,
+    "surfaceActivationByRre": false,
+    "bookViCurrentDataAdmitted": false,
+    "fakeRuntimeFillAllowed": false
+  },
+  "gates": {
+    "staticRepairChecker": "PENDING",
+    "b6WebERegression": "PENDING",
+    "liveR2Regression": "PENDING",
+    "cloudflareDeployment": "PENDING",
+    "realBrowserRetest": "REQUIRED",
+    "humanReacceptance": "REQUIRED",
+    "finalCutover": "BLOCKED"
+  },
+  "completeClaimAllowed": false
+}
