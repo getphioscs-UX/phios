@@ -263,34 +263,40 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    r11TenGodStructure('QI_SHA'),
    r11TenGodStructure('ZHENG_YIN'),
    pick(
-    'These two structures do different work in the reading. Resource/support describes how material, guidance or prior knowledge can be taken in; the Officer/pressure side describes standards, obligations and demands that must also be carried. Their coexistence is more informative than calling either one a personality trait.',
-    '这两组结构在读取中承担不同作用：印星／支持说明资料、指导或既有知识怎样进入系统；官杀／压力则描述标准、责任与需要承载的要求。两者同时存在，比把其中任何一项写成固定性格标签更有解释力。'
+    'The output/expression group has no counted occurrence in this inventory. That is not the same as “no ability to express.” It means expression should not be inferred from a high-count output symbol here; the later relationship interfaces and real situations carry more of that question.',
+    '这份清单中，输出／表达功能组没有计数出现。这不等于“没有表达能力”，而是说明这里不能靠一个高占比输出符号直接推断表达；后面的关系接口与真实情境，才承担更多关于表达方式的判断。'
    ),
    pick(
-    `The chart also records ${tensionCount} tension interface${tensionCount===1?'':'s'} involving environment, self-position or expression. That makes context important: the same capability can be easier to access in one setting and harder to carry in another. Compare situations with different standards, support and freedom of expression to see which condition actually changes the result.`,
-    `命盘同时记录了 ${tensionCount} 组涉及环境、自我位置或表达的张力关系。因此，情境差异很重要：同一项能力在不同环境中可能更容易调用或更难承载。可以比较标准、支持与表达空间不同的情境，看真正改变结果的是哪一个条件。`
+    'Resource/support and rules/pressure therefore describe different parts of the operating style: one concerns what can be taken in and used as support, while the other concerns standards, obligations and demands that must be carried. Their coexistence is more informative than turning either one into a personality label.',
+    '因此，印星／支持与官杀／压力描述的是运作方式的不同部分：一边是能够吸收并作为支持使用的内容，另一边是需要承载的标准、责任与要求。两者同时存在，比把其中任何一项写成固定性格标签更有解释力。'
    )
-  ],{boundary:'',observations:r11Prompts('CAPABILITY')});
+  ],{boundary:'',observations:[]});
 
   const supportPhrase=carry.supportVisible===0?pick('visible support is not prominent','可见支持并不突出'):pick('visible support is present','可见支持存在');
   const loadPhrase=(carry.outwardVisible>0&&carry.pressureVisible>0)?pick('outward demand and pressure are both present','向外投入与压力同时存在'):pick('support and demand need to be read together','支持与要求需要一起阅读');
   {
    const link=rels.find(x=>x.relationFamily==='LINK');
-   r11Module('personalityDevelopment','CAPABILITY',[
-    pick(
-     `Capability development is easier to read as three separate questions: what can be absorbed, what can be expressed, and what can still be carried when demands continue. In this chart, ${supportPhrase}, while ${loadPhrase}.`,
-     `能力发展更适合拆成三个问题：什么能够被吸收、什么能够被表达，以及当要求持续存在时，什么仍能被稳定承载。这张命盘里，${supportPhrase}，同时${loadPhrase}。`
-    ),
-    r11TenGodStructure('ZHENG_YIN'),
-    pick(
-     `The chart also records ${link?R11_RELATION_TYPE[link.type]||pick('a linkage','一组联结'):pick('a recorded linkage','一组已记录联结')} at ${link?R11_RELATION_THEME[link.positionThemeCode]||pick('the self–expression interface','自我位置与表达') : pick('the self–expression interface','自我位置与表达')}. This matters because internal availability and outward expression are not the same layer of the reading.`,
-     `命盘也在${link?R11_RELATION_THEME[link.positionThemeCode]||'自我位置与表达':'自我位置与表达'}记录到${link?R11_RELATION_TYPE[link.type]||'一组联结':'一组已记录联结'}。这提醒我们：能力在内部是否存在，与它能否稳定转成外在表达，并不是同一个层次。`
-    ),
-    pick(
-     'In real life, compare a situation where learning was easy but sustained delivery was difficult with one where both were stable. The difference in support, time, standards or freedom of expression gives more information than treating ability as a single yes-or-no trait.',
-     '现实中可以比较两种情境：一种是学得快但持续交付困难，另一种是学习与持续输出都稳定。两者在支持、时间、标准或表达空间上的差异，比把能力理解成单一的“有／没有”更有信息量。'
-    )
-   ],{boundary:'',observations:r11Prompts('CAPABILITY')});
+   {
+    const directResource=r11TenGodDetail('ZHENG_YIN'),indirectResource=r11TenGodDetail('PIAN_YIN');
+    r11Module('personalityDevelopment','CAPABILITY',[
+     pick(
+      `Capability development is easier to read as three separate questions: what can be absorbed, what can be expressed, and what can still be carried when demands continue. In this chart, ${supportPhrase}, while ${loadPhrase}.`,
+      `能力发展更适合拆成三个问题：什么能够被吸收、什么能够被表达，以及当要求持续存在时，什么仍能被稳定承载。这张命盘里，${supportPhrase}，同时${loadPhrase}。`
+     ),
+     pick(
+      `The support layer is itself distributed: Direct Resource has ${directResource?.visibleCount??0} visible and ${directResource?.hiddenCount??0} hidden occurrence${(directResource?.hiddenCount??0)===1?'':'s'}, while Indirect Resource is recorded only in the hidden layer. This gives the learning/support side more structure than a single “resource is present” statement.`,
+      `支持层本身也有分布差异：正印有 ${directResource?.visibleCount??0} 次透干、${directResource?.hiddenCount??0} 次藏干；偏印则只记录在藏干层。这样的分布比一句“有印星”更能说明学习／支持结构并不是单一来源。`
+     ),
+     pick(
+      `The chart also records ${link?R11_RELATION_TYPE[link.type]||pick('a linkage','一组联结'):pick('a recorded linkage','一组已记录联结')} at ${link?R11_RELATION_THEME[link.positionThemeCode]||pick('the self–expression interface','自我位置与表达') : pick('the self–expression interface','自我位置与表达')}. Internal availability and outward expression are therefore separate layers of the reading, rather than two names for the same capability.`,
+      `命盘也在${link?R11_RELATION_THEME[link.positionThemeCode]||'自我位置与表达':'自我位置与表达'}记录到${link?R11_RELATION_TYPE[link.type]||'一组联结':'一组已记录联结'}。因此，能力在内部是否存在，与它能否转成外在表达，是两个不同层次，而不是同一件事的两个名称。`
+     ),
+     pick(
+      'In real life, compare a situation where learning was easy but sustained delivery was difficult with one where both were stable. Differences in preparation time, feedback, support or freedom to respond help test which stage of the capability chain is actually changing.',
+      '现实中可以比较两种情境：一种是学得快但持续交付困难，另一种是学习与持续输出都稳定。准备时间、反馈、支持或回应空间的差异，可以帮助判断能力链条里真正发生变化的是哪一个阶段。'
+     )
+    ],{boundary:'',observations:[]});
+   }
   }
 
   const tensionRelations=rels.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily));
