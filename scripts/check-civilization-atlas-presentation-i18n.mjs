@@ -29,6 +29,10 @@ assert.ok(!/knowledge-eyebrow[^\n]*familyId/.test(comparison),'Comparison should
 assert.ok(!/relationType/.test(comparison),'Comparison customer view should not render raw relationType.');
 assert.ok(timeline.includes('civ-atlas-detail-table'),'Timeline full table must be progressive disclosure.');
 assert.ok(worldRenderer.includes('civ-atlas-evidence-note'),'World evidence boundary must be progressive disclosure.');
+assert.ok(worldRenderer.includes('loc(selected.technologyContext,lang)'),'World technology context must read the localized object directly.');
+assert.ok(worldRenderer.includes('loc(selected.energyContext,lang)'),'World energy context must read the localized object directly.');
+assert.ok(!timeline.includes("(p.caseIds||[]).join(','"),'Timeline table must not expose raw case ID lists.');
+assert.ok(!shell.includes("state.time!==null?"),'Atlas context strip must not expose unformatted raw year state.');
 assert.ok(cases.includes('civ-atlas-evidence-note'),'Case evidence boundary must be progressive disclosure.');
 
 
