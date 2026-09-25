@@ -13,10 +13,15 @@ const articleBlocks=fs.readFileSync('assets/js/knowledge/article-blocks.js','utf
 const en=fs.readFileSync('assets/js/locales/en/book6-reconfiguration-atlas.js','utf8');
 const zh=fs.readFileSync('assets/js/locales/zh-Hans/book6-reconfiguration-atlas.js','utf8');
 
-const zhArticle=read('content/knowledge/public/successors/book6-publication-v1/visual-articles/zh-Hans/book6-what-is-reconfiguration.json');
-const enArticle=read('content/knowledge/public/successors/book6-publication-v1/visual-articles/en/book6-what-is-reconfiguration.json');
-assert.doesNotThrow(()=>normalizeArticleForRenderer(zhArticle),'Book VI zh-Hans ART node must pass the canonical article renderer');
-assert.doesNotThrow(()=>normalizeArticleForRenderer(enArticle),'Book VI English ART node must pass the canonical article renderer');
+const articleBase='content/knowledge/public/successors/book6-publication-v1/visual-articles';
+for(const locale of ['en','zh-Hans']){
+ const files=fs.readdirSync(`${articleBase}/${locale}`).filter(x=>x.endsWith('.json')).sort();
+ assert.equal(files.length,28,`Book VI ${locale} publication article count drifted`);
+ for(const file of files){
+  const article=read(`${articleBase}/${locale}/${file}`);
+  assert.doesNotThrow(()=>normalizeArticleForRenderer(article),`Book VI ${locale} article must pass canonical renderer: ${file}`);
+ }
+}
 assert.match(articleBlocks,/\^\(\?:KN\|ART\)-/);
 
 assert.ok(RECONFIG_ATLAS_LAYERS.includes('visuals'),'Book VI Atlas must expose the visual library as a governed layer');
