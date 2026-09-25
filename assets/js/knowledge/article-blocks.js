@@ -303,7 +303,7 @@ export function normalizeArticleForRenderer(article) {
   if (
     !article ||
     typeof article !== 'object' ||
-    !/^KN-[A-Z0-9-]+$/.test(article.nodeCode || '') ||
+    !/^(?:KN|ART)-[A-Z0-9-]+$/.test(article.nodeCode || '') ||
     !['zh-Hans', 'en'].includes(article.locale) ||
     !Array.isArray(article.sections) ||
     !article.sections.length
