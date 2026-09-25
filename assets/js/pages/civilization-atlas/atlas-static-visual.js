@@ -36,7 +36,8 @@ export function resolveAtlasStaticVisuals(bindings,state,options={},data={}){
   add(firstResolved(bindings,'WORLD_SNAPSHOT_ATMOSPHERE',snapshot?.snapshotId||state.snapshotId,options));
   resolvedCaseVisuals(bindings,snapshot?.majorCaseIds,options,3).forEach(add);
  }else if(layer==='cases'){
-  resolvedCaseVisuals(bindings,[state.primaryCaseId],options,2).forEach(add);
+  const caseId=state.primaryCaseId||(data.cases?.cases||[])[0]?.caseId;
+  resolvedCaseVisuals(bindings,[caseId],options,2).forEach(add);
  }else if(layer==='comparison'){
   const families=data.comparison?.families||[],family=families.find(x=>x.familyId===state.comparisonFamilyId)||families[0];
   add(firstResolved(bindings,'COMPARISON_FAMILY',family?.familyId||state.comparisonFamilyId,options));
