@@ -7,13 +7,13 @@ import {REPORT_EDITORIAL_ASSETS} from '../functions/canonical-presentation-runti
 import {renderFrozenBaziIntro} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {renderVisualReportPages} from '../assets/customer-ui/js/personal-products/visual-report-pages.js';
 
-const out='docs/acceptance/bazi-paid-report/r9';
+const out='docs/acceptance/bazi-paid-report/r10';
 fs.mkdirSync(out,{recursive:true});
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
 const frozen=JSON.parse(fs.readFileSync('docs/guided-report-successor-r1/batch-1/cases.json','utf8'));
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
 
-const machine={schemaVersion:'BAZI_R9_REVIEW_MACHINE_EVIDENCE_V1',generatedAt:new Date().toISOString(),locales:{}};
+const machine={schemaVersion:'BAZI_R10_COMPRESSED_REVIEW_MACHINE_EVIDENCE_V1',generatedAt:new Date().toISOString(),locales:{}};
 const snapshots={};
 
 for(const locale of ['en','zh-Hans']){
@@ -31,8 +31,9 @@ for(const locale of ['en','zh-Hans']){
  machine.locales[locale]={
   totalPages:bundle.customer.totalPages,
   bodyPages:bundle.customer.pages.length,
-  sectionOpeners:bundle.customer.pages.filter(p=>p.isSectionOpener).length,
-  keyInsights:bundle.customer.pages.filter(p=>p.pageFamily==='INSIGHT_LIST_PAGE').length,
+  sectionMasters:bundle.customer.pages.filter(p=>p.isSectionOpener&&p.items?.length===3).length,
+  integratedKeyInsightItems:bundle.customer.pages.filter(p=>p.isSectionOpener).reduce((sum,p)=>sum+(p.items?.length||0),0),
+  standaloneKeyInsightPages:bundle.customer.pages.filter(p=>p.pageFamily==='INSIGHT_LIST_PAGE').length,
   t3Pages:bundle.customer.pages.filter(p=>String(p.executionClass||'').includes('T3')).length
  };
 }
@@ -48,7 +49,7 @@ function reviewDocument(locale){
  const rendered=renderVisualReportPages(snapshot);
  const other=locale==='en'?'zh-Hans':'en';
  const otherLabel=locale==='en'?'中文':'English';
- const title=locale==='en'?'BaZi R9 · Human Review':'BaZi R9 · 人工验收';
+ const title=locale==='en'?'BaZi R10 · Compressed Human Review':'BaZi R10 · 压缩版人工验收';
  const sectionOptions=snapshot.pages.filter(p=>p.isSectionOpener).map(p=>`<option value="${p.sectionNumber}">${p.sectionNumber} · ${p.sectionTitle[locale]}</option>`).join('');
  return `<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title>
@@ -69,10 +70,10 @@ body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 <nav class="r9-nav"><div class="r9-nav-inner"><strong>${title}</strong>
 <a href="./review-${other}.html">${otherLabel}</a>
 <select id="section">${sectionOptions}</select><button id="jump">Go</button><button id="print">A4 Print / PDF</button></div></nav>
-<section class="r9-status"><b>Review authority:</b> STATIC_EDITORIAL + DETERMINISTIC_PERSONALIZED. T3/OpenAI is not part of this customer publication.
-<div class="r9-checks"><span>62 pages EN</span><span>62 pages 中文</span><span>10 section openers</span><span>10 Key Insights</span><span>T3 pages: 0</span></div>
-<p>Human review focus: section hero hierarchy, chart/text balance, whitespace, font density, Key Insights readability, mobile wrapping, print fit, and overall paid-report quality.</p>
-<p><strong>Static pre-render:</strong> the 62-page report below is embedded in this HTML at build time and does not depend on JavaScript to appear.</p></section>
+<section class="r9-status"><b>Review authority:</b> STATIC_EDITORIAL + DETERMINISTIC_PERSONALIZED. Existing registered Section visuals are reused; no new Section Master image assets are required. T3/OpenAI is not part of this customer publication.
+<div class="r9-checks"><span>${snapshots.en.totalPages} pages EN</span><span>${snapshots['zh-Hans'].totalPages} pages 中文</span><span>10 Section Masters</span><span>30 integrated Key Insights</span><span>0 standalone Key Insights pages</span><span>T3 pages: 0</span></div>
+<p>Human review focus: existing section visual reuse, title/intro/Key Insights overlay readability, chart/text balance, whitespace, mobile wrapping, print fit, and overall paid-report quality.</p>
+<p><strong>Static pre-render:</strong> the ${snapshot.totalPages}-page report below is embedded in this HTML at build time and does not depend on JavaScript to appear.</p></section>
 <div id="r9-error" class="r9-error"></div>
 <main id="report">${rendered}</main>
 <script type="module">
@@ -97,7 +98,7 @@ fs.writeFileSync(`${out}/review-zh-Hans.html`,zhHtml);
 fs.writeFileSync(`${out}/review-en.html`,enHtml);
 
 fs.writeFileSync(`${out}/human-review-decision.template.json`,JSON.stringify({
- schemaVersion:'BAZI_R9_HUMAN_REVIEW_DECISION_V1',decision:'PENDING',reviewer:'',reviewedAt:'',
+ schemaVersion:'BAZI_R10_COMPRESSED_HUMAN_REVIEW_DECISION_V1',decision:'PENDING',reviewer:'',reviewedAt:'',
  scope:['DESKTOP','MOBILE','PRINT_PDF','EN','ZH_HANS'],
  findings:[],acceptedHead:null
 },null,2)+'\n');
