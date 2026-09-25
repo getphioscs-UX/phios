@@ -32,5 +32,5 @@ export function renderComparison(container,{registry,casesRegistry,state,locale=
 }
 export function renderComparisonInspector(container,{family,state,locale='en'}={}){
   if(!family)return false; const lang=locale==='zh-Hans'?'zh-Hans':'en';
-  container.innerHTML=`<p class="knowledge-eyebrow">${esc(lang==='zh-Hans'?'比较主题':'Comparison theme')}</p><h3>${esc(loc(family.title,lang))}</h3><p>${esc(loc(family.coreRuntimeProblem,lang))}</p><dl><div><dt>${lang==='zh-Hans'?'相关文明':'Civilizations'}</dt><dd>${family.caseIds.length}</dd></div><div><dt>${lang==='zh-Hans'?'已选择比较':'Selected'}</dt><dd>${(state.compareBasket||[]).length}</dd></div></dl><p class="civ-atlas-note">${esc(lang==='zh-Hans'?'比较用于理解结构差异，不用于判断文明优劣。':'Comparison is for understanding structural differences, not judging civilizations as better or worse.')}</p>`; return true;
+  container.innerHTML=`<div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(lang==='zh-Hans'?'比较主题':'Comparison theme')}</p><h3>${esc(loc(family.title,lang))}</h3><p>${esc(loc(family.coreRuntimeProblem,lang))}</p><dl><div><dt>${lang==='zh-Hans'?'已选择':'Selected'}</dt><dd>${(state.compareBasket||[]).length}</dd></div></dl></div>`; return true;
 }
