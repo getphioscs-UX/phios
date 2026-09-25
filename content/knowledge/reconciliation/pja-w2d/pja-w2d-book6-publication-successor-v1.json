@@ -1,16 +1,16 @@
 {
-  "schemaVersion": "PHI-OS-PJA-W2D-BOOK6-PUBLICATION-SUCCESSOR-RECONCILIATION-v1.0.0",
+  "schemaVersion": "PHI-OS-PJA-W2D-BOOK6-PUBLICATION-SUCCESSOR-RECONCILIATION-v1.1.0",
   "status": "ACTIVE_SUCCESSOR_AWARE_HISTORICAL_CHECKER_RECONCILIATION",
-  "baselineCommit": "93761b47cd1aaf4e2b3d20fcebf764245de4021d",
+  "baselineCommit": "b786a5d57c8c06a7da8a9ae3ddf344a69e7e0367",
   "scope": "PJA-W2D published-content regression only",
-  "problem": "Book VI publication activated 28 bilingual article identities per locale through the existing published-content loader, while PJA-W2D expected-release enumeration stopped at Book V.",
+  "problem": "The Book VI successor is now human-accepted at the package semantic-parity authority, while the PJA-W2D reconciliation still hard-coded the earlier PENDING_HUMAN_REVIEW state.",
   "preservedAuthority": {
     "legacyPjaArticlesRemainFrozen": true,
     "book6UsesExistingPublishedContentRuntime": true,
     "parallelArticleRuntimeCreated": false,
     "parallelKnowledgeMasterCreated": false,
     "publicationCreatedByThisReconciliation": false,
-    "book6HumanSemanticParityAcceptedByThisReconciliation": false
+    "humanAcceptanceInventedByThisReconciliation": false
   },
   "successorRule": {
     "requiredManifest": "content/knowledge/public/successors/book6-publication-v1/visual-article-release.json",
@@ -21,10 +21,18 @@
     "publicationRecordStatus": "published",
     "identityClass": "PUBLICATION_ARTICLE_IDENTITY_NOT_CANONICAL_KNOWLEDGE_NODE"
   },
+  "humanDecisionAuthority": {
+    "semanticParity": "content/books/book-6/articles/semantic-parity-v1.json",
+    "humanReviewEvidence": "content/books/book-6/review/b6-web-b-human-review-results-v1.json",
+    "requiredSemanticParityStatus": "HUMAN_SEMANTIC_PARITY_ACCEPTED",
+    "requiredHumanDecision": "APPROVED_28_OF_28",
+    "requiredHumanReviewOverallStatus": "ALL_APPROVED",
+    "requiredDecisionCount": 28
+  },
   "rendererRegressionBoundary": {
     "publishedContentLoaderMayReturnManifestMetadataRows": true,
     "bodyAssertionsResolveReleasePathForBook6IdentityClass": true,
     "legacyFourSectionAssertionAppliesOnlyToPredecessorPublicationKeys": true,
-    "book6HumanDecisionRemains": "PENDING_HUMAN_REVIEW"
+    "book6HumanDecisionMustFollowCanonicalHumanReviewAuthority": true
   }
 }

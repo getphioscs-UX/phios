@@ -415,7 +415,27 @@ assert.equal(
   book6BilingualRelease.records.filter(record=>record.locale==='en').length,
   28
 );
-assert.equal(book6BilingualRelease.humanDecision,'PENDING_HUMAN_REVIEW');
+const book6SemanticParity = await readJson(
+  'content/books/book-6/articles/semantic-parity-v1.json'
+);
+const book6HumanReview = await readJson(
+  'content/books/book-6/review/b6-web-b-human-review-results-v1.json'
+);
+assert.equal(
+  book6SemanticParity.overallStatus,
+  'HUMAN_SEMANTIC_PARITY_ACCEPTED'
+);
+assert.equal(
+  book6SemanticParity.humanDecision,
+  'APPROVED_28_OF_28'
+);
+assert.equal(book6HumanReview.overallStatus,'ALL_APPROVED');
+assert.equal(book6HumanReview.decisions.length,28);
+assert.ok(book6HumanReview.decisions.every(row=>row.decision==='APPROVED'));
+assert.equal(
+  book6BilingualRelease.humanDecision,
+  book6SemanticParity.humanDecision
+);
 const publishedArticleIndex = await readJson(
   'content/knowledge/public/published-articles.json'
 );
