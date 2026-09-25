@@ -490,3 +490,39 @@
 .civ-compare-dimension-grid p{margin:.4rem 0 0;color:var(--phi-text-secondary);line-height:1.5;font-size:.9rem}
 @media(max-width:900px){.civ-compare-dimension-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.civ-compare-dimension-grid{grid-template-columns:1fr}}
+
+
+/* FR3 Library template compositor */
+.civ-template-board{display:grid;gap:.9rem;margin:.5rem 0 1.2rem}
+.civ-template-board__heading{display:flex;justify-content:space-between;gap:1rem;align-items:end}
+.civ-template-board__heading h4{margin:.2rem 0 0;font-size:clamp(1.4rem,2.2vw,2rem);color:#f2dfa9}
+.civ-template-board__viewport{overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-gutter:stable;border:1px solid rgba(213,179,108,.34);border-radius:18px;background:#04111b}
+.civ-template-board__stage{position:relative;width:100%;min-width:0;overflow:hidden;background:#04111b}
+.civ-template-board__stage>img{display:block;width:100%;height:100%;object-fit:contain}
+.civ-template-board__fallback{position:absolute;inset:0;display:grid;place-items:center;align-content:center;text-align:center;padding:2rem;background:#071725}
+.civ-template-board__fallback[hidden]{display:none}
+.civ-template-board__note{margin:0;color:var(--phi-text-secondary);font-size:.86rem;line-height:1.55}
+.civ-template-slot{position:absolute;z-index:2;pointer-events:none}
+.civ-template-slot>svg{display:block;width:100%;height:100%;overflow:visible}
+.civ-template-trajectory-grid line{stroke:rgba(245,240,230,.14);stroke-width:1}
+.civ-template-trajectory-line{fill:none;stroke-width:5;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 5px rgba(255,255,255,.22))}
+.civ-template-trajectory-line.series-0{stroke:#67d6ff}
+.civ-template-trajectory-line.series-1{stroke:#ff9b5e}
+.civ-template-trajectory-line.series-2{stroke:#ffd46a}
+.civ-template-trajectory-line.series-3{stroke:#b98cff}
+.civ-template-trajectory-line.series-4{stroke:#63d88c}
+.civ-template-trajectory-line.series-5{stroke:#ff6f9f}
+.civ-template-trajectory-line.is-reconstructed{stroke-dasharray:12 6;opacity:.92}
+.civ-template-trajectory-line.is-conceptual{stroke-dasharray:3 7;opacity:.9}
+.civ-template-controls,.civ-atlas-secondary,.civ-atlas-visual-resources{border-top:1px solid rgba(213,179,108,.2);padding-top:.85rem;margin-top:.75rem}
+.civ-template-controls>summary{cursor:pointer;font-weight:700;color:#e9d8aa}
+.civ-template-controls[open]>summary{margin-bottom:1rem}
+@media(max-width:900px){
+ .civ-template-board__heading{align-items:start;flex-direction:column}
+ .civ-template-board__heading .knowledge-action{width:100%;justify-content:center}
+ .civ-template-board__stage{width:max(100%,64rem)}
+}
+@media(max-width:560px){
+ .civ-template-board__stage{width:max(100%,58rem)}
+ .civ-template-board__note{font-size:.8rem}
+}
