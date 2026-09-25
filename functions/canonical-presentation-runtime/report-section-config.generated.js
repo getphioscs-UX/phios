@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R7",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R8",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -185,7 +185,7 @@ export const registry = {
         },
         {
           "key": "S02_FRICTION",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "personalityFriction"
