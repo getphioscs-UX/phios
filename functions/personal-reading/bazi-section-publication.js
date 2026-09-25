@@ -82,7 +82,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
 
   makeFacet('personalityFriction',pick(
    'Friction is not treated as a flaw. It is the part of the structure where support, expression, standards or external demand do not automatically move in the same direction. Repeated tension across chart positions shows where capability may need more deliberate coordination.',
-   '张力不等于缺点。它指的是支持、表达、标准与外部要求并不会自动朝同一方向运作的部分。若张力在多个柱位反复出现，就更需要有意识地协调这些功能。'
+   '张力不等于缺点。它指支持、表达、标准与外部要求并不自动同向运作。若张力在多个柱位反复出现，就更需要主动协调这些功能。'
   ),[...tensionPairs,byId(':TENSION'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/pressure|责任|规则/i.test(x.text))]);
 
   makeFacet('personalityReliability',pick(
