@@ -43,7 +43,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  await makeNarrative('wealthNarrative','S05_WEALTH','WEALTH');
  await makeNarrative('relationshipNarrative','S06_RELATIONSHIP','RELATIONSHIPS');
  paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale],pick('Keep a distinction between a busy schedule, your own description of strain, and any explanation proposed for it. Neither an element count nor a pressure symbol can establish a bodily cause. If you revisit this chapter later, compare the circumstances you recorded, rather than looking for a predicted condition to confirm. Your experience may change while the birth chart remains the same.','请区分繁忙的安排、自己感受到的负担，以及对它提出的解释。五行数量或压力符号都不能建立身体病因。以后回到本章时，比较记录中的实际情境，而不是寻找某种预测中的状态。出生结构保持不变，经验仍可能随环境而改变。')],`${edRef}#S07_HEALTH`);
- const itemMap={chartHighlights:'S01_OVERVIEW',strengths:'S02_PERSONALITY',careerFields:'S04_CAREER',financialAdvice:'S05_WEALTH',relationshipAdvice:'S06_RELATIONSHIP',wellnessAdvice:'S07_HEALTH',nextSteps:'S09_GUIDANCE'};
+ const itemMap={chartHighlights:'S01_OVERVIEW',strengths:'S02_PERSONALITY',lifeStructureInsights:'S03_LIFE_STRUCTURE',careerFields:'S04_CAREER',financialAdvice:'S05_WEALTH',relationshipAdvice:'S06_RELATIONSHIP',wellnessAdvice:'S07_HEALTH',timingInsights:'S08_TIMING',nextSteps:'S09_GUIDANCE',appendixInsights:'S10_APPENDIX'};
  for(const [key,section] of Object.entries(itemMap))modules[key]={blocks:[],items:e(section).items.map(i=>block(i[locale],`${edRef}#${section}`))};
  // Strengths, challenges and social style share the admitted observation set;
  // they are not fabricated independent measurements.
@@ -118,7 +118,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    if(t3.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot})){
     const n=t3.snapshot.finalNarrative,target=narrative||pageBlocks.find(p=>p.pageFamily==='TIMING_PAGE');
     const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,n.closingInsight].filter(b=>b.text.trim());
-    const secondary=pageBlocks.find(p=>p!==target&&['INSIGHT_LIST_PAGE','TIMING_PAGE'].includes(p.pageFamily));
+    // Static publication pages are immutable. T3 may enrich only dynamic narrative/timing pages.
+    const secondary=pageBlocks.find(p=>p!==target&&p.pageFamily==='TIMING_PAGE');
     const secondaryBlocks=[...n.supportingConditions,...n.tensionConditions];
     if(!secondary)main.push(...secondaryBlocks);
     const maximum=REPORT_PAGE_FAMILIES[target.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
@@ -142,7 +143,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:publicationTitle,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
   const admittedT3=t3?.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot});
   internalSections.at(-1).diagnostics={sectionRuntimeTier:admittedT3?'T3':t3?'T2_FALLBACK':'DETERMINISTIC',snapshotMatch:t3?.snapshot?'VALIDATED':composition.t3?.snapshots?.[section.key]?'INVALID':'ABSENT',fallbackReason:admittedT3?null:t3?.internalOnly?.fallbackReason||(t3?.snapshot?'SNAPSHOT_NOT_HUMAN_ACCEPTED_FOR_STAGE':null),claimIrVersion:t3?.evidencePack?.claimIrVersion||t3?.evidencePack?.explanatoryAuthorityVersion||null,editorialVersion:t3?.snapshot?.editorialVersion||null};
-  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
+  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits,minUnits:budget[locale==='en'?'en':'zh']?.[0]||0});
