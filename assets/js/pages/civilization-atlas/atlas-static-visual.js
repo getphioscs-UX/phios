@@ -36,7 +36,7 @@ function ensureStyle(doc){
  .civ-visual-frame img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#071828}
  .civ-visual-frame figcaption{padding:1rem;line-height:1.6}.civ-visual-frame h4{margin:0 0 .4rem;color:#f1dfb0}.civ-visual-frame p{margin:.4rem 0}
  .civ-visual-frame button,.civ-visual-dialog button{padding:.65rem 1rem;border-radius:8px;border:1px solid #d5b36c;background:#122b40;color:#fff;cursor:pointer}
- .civ-visual-library{padding:1rem;border:1px solid #d5b36c66;border-radius:14px}.civ-visual-library summary{cursor:pointer;font-weight:600}.civ-visual-controls{display:grid;gap:.8rem;margin-block:1rem}.civ-visual-controls label{display:grid;gap:.3rem}.civ-visual-controls select{max-width:100%;min-width:0;padding:.65rem}
+ .civ-visual-library{display:grid;gap:.75rem;padding:1rem;border:1px solid #d5b36c66;border-radius:14px}.civ-visual-library__head{display:flex;justify-content:space-between;gap:1rem;align-items:end}.civ-visual-library__head h4{margin:0}.civ-visual-library__count{font-size:.85rem;opacity:.78}.civ-visual-controls{display:grid;gap:.8rem;margin-block:.35rem}.civ-visual-controls label{display:grid;gap:.3rem}.civ-visual-controls select{max-width:100%;min-width:0;padding:.65rem}
  .civ-visual-dialog{max-width:94vw;max-height:94vh;padding:1rem;background:#071828;color:#fff;border:1px solid #d5b36c;border-radius:14px}.civ-visual-dialog::backdrop{background:#000b}.civ-visual-dialog img{display:block;max-width:88vw;max-height:76vh;object-fit:contain}
  [data-atlas-static-visuals] :focus-visible,.civ-visual-dialog :focus-visible{outline:3px solid #d5b36c;outline-offset:4px}
  @media(min-width:800px){.civ-visual-controls{grid-template-columns:1fr 2fr}}`;
@@ -64,18 +64,19 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en'}={}){
  const host=doc.createElement('div');host.dataset.atlasStaticVisuals='';
  for(const a of assets)host.append(visualFigure(doc,a,locale));
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'){
-  const details=doc.createElement('details');details.className='civ-visual-library';const summary=doc.createElement('summary');summary.textContent=locale==='zh-Hans'?'浏览插画、人物与现代国旗':'Browse illustrations, figures and modern flags';details.append(summary);
-  const note=doc.createElement('p');note.textContent=locale==='zh-Hans'?'此处独立选择参考图，不会改变当前图谱的历史情境或提问范围。':'Choose a reference image independently. This does not change the historical context or scope of your Atlas question.';details.append(note);
+  const panel=doc.createElement('section');panel.className='civ-visual-library';panel.setAttribute('aria-label',locale==='zh-Hans'?'文明图谱视觉资料库':'Civilization Atlas visual library');
+  const head=doc.createElement('div');head.className='civ-visual-library__head';const title=doc.createElement('h4');title.textContent=locale==='zh-Hans'?'视觉资料库':'Visual Library';const count=doc.createElement('span');count.className='civ-visual-library__count';count.textContent=locale==='zh-Hans'?\`${library.length} 张已绑定视觉 · ${new Set(library.map(a=>a.family)).size} 类\`:\`${library.length} bound visuals · ${new Set(library.map(a=>a.family)).size} families\`;head.append(title,count);panel.append(head);
+  const note=doc.createElement('p');note.textContent=locale==='zh-Hans'?'所有已接受并绑定的视觉都可在这里浏览；页面只加载当前选择的图片，不会一次下载全部资产，也不会改变当前图谱的历史情境或 Ask 范围。':'All accepted and bound visuals can be browsed here. Only the current selection is loaded, so the page does not download the whole library or alter the current Atlas/Ask context.';panel.append(note);
   const controls=doc.createElement('div');controls.className='civ-visual-controls';const family=doc.createElement('select'),choice=doc.createElement('select');family.dataset.atlasVisualFamily='';choice.dataset.atlasVisualChoice='';
   for(const [control,text] of [[family,locale==='zh-Hans'?'图像类别':'Image category'],[choice,locale==='zh-Hans'?'图像主题':'Image subject']]){const label=doc.createElement('label');label.textContent=text;label.append(control);controls.append(label);}
-  for(const id of [...new Set(library.map(a=>a.family))]){const option=doc.createElement('option');option.value=id;option.textContent=atlasVisualFamilyLabel(id,locale);family.append(option);}
+  for(const id of [...new Set(library.map(a=>a.family))]){const familyAssets=library.filter(a=>a.family===id);const option=doc.createElement('option');option.value=id;option.textContent=\`${atlasVisualFamilyLabel(id,locale)} (${familyAssets.length})\`;family.append(option);}
   const display=doc.createElement('div');display.dataset.atlasVisualSelection='';
-  const show=()=>{display.replaceChildren();if(!details.open)return;const a=resolveAtlasVisualById(bindings,choice.value,options);if(a)display.append(visualFigure(doc,a,locale));};
-  const choices=()=>{choice.replaceChildren();for(const a of library.filter(a=>a.family===family.value)){const option=doc.createElement('option');option.value=a.assetId;option.textContent=a.subjectTitle?.[locale]||a.subjectTitle?.en;choice.append(option);}show();};
-  family.addEventListener('change',choices);choice.addEventListener('change',show);details.addEventListener('toggle',show);details.append(controls,display);choices();host.append(details);
+  const show=()=>{display.replaceChildren();const a=resolveAtlasVisualById(bindings,choice.value,options);if(a)display.append(visualFigure(doc,a,locale));};
+  const choices=()=>{choice.replaceChildren();for(const a of library.filter(a=>a.family===family.value)){const option=doc.createElement('option');option.value=a.assetId;option.textContent=a.subjectTitle?.[locale]||a.subjectTitle?.en||a.assetId;choice.append(option);}show();};
+  family.addEventListener('change',choices);choice.addEventListener('change',show);panel.append(controls,display);choices();host.append(panel);
   const requested=new URLSearchParams(doc.defaultView?.location?.search||'').get('visual');
   const selected=library.find(a=>a.assetId===requested);
-  if(selected){family.value=selected.family;choices();choice.value=selected.assetId;details.open=true;show();}
+  if(selected){family.value=selected.family;choices();choice.value=selected.assetId;show();}
  }
  structured.before(host);
 }
