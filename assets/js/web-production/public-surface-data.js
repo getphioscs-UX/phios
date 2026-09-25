@@ -9,7 +9,7 @@ export const BOOK_ROUTE_BY_ID = Object.freeze({
   'book-3': '/books/reality-continuity/',
   'book-4': '/books/reality-expansion/',
   'book-5': '/books/reality-differentiation/',
-  'book-6': '/books/reality-configuration/',
+  'book-6': '/books/reality-reconfiguration/',
   'book-7': '/books/reality-observation/',
   'book-8': '/books/reality-navigation/'
 });
