@@ -1,0 +1,59 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+
+const shell=read('assets/js/pages/civilization-atlas/atlas-shell.js');
+const timeline=read('assets/js/pages/civilization-atlas/timeline-renderer.js');
+const cases=read('assets/js/pages/civilization-atlas/cases-renderer.js');
+const comparison=read('assets/js/pages/civilization-atlas/comparison-renderer.js');
+const world=read('assets/js/pages/civilization-atlas/world-slice-renderer.js');
+const trajectories=read('assets/js/pages/civilization-atlas/trajectory-renderer.js');
+const transitions=read('assets/js/pages/civilization-atlas/transition-renderer.js');
+const loss=read('assets/js/pages/civilization-atlas/loss-renderer.js');
+const staticVisual=read('assets/js/pages/civilization-atlas/atlas-static-visual.js');
+const css=read('assets/css/civilization-atlas.css');
+const rejection=json('content/civilization-atlas/evidence/b6-web-f-human-rejection-v1.json');
+
+assert.equal(rejection.status,'HUMAN_REJECTED');
+assert.equal(rejection.successor,'B6-WEB-FR2');
+
+assert.ok(!comparison.includes('<table class="civ-atlas-table civ-comparison-matrix"'),'FR2 comparison must not regress to the rejected generic table.');
+assert.ok(comparison.includes('class="civ-compare-matrix"'),'FR2 comparison board missing.');
+assert.ok(comparison.includes('data-case-label='),'Mobile comparison cells must carry explicit civilization labels.');
+assert.ok(css.includes('FR2 comparison board'),'FR2 comparison CSS missing.');
+assert.ok(css.includes('grid-template-columns:minmax(11.5rem,14rem) repeat(var(--compare-cols),minmax(11rem,1fr))'),'Desktop comparison matrix must preserve a readable dimension column.');
+assert.ok(css.includes('.civ-compare-matrix__cell::before{content:attr(data-case-label)'),'Mobile comparison must label each civilization cell.');
+assert.ok(css.includes('@media(max-width:700px)'),'Comparison mobile breakpoint missing.');
+
+for(const [name,source,family] of [
+ ['timeline',timeline,'TIMELINE_ANCHOR'],
+ ['cases',cases,'CASE_HERO'],
+ ['world',world,'CASE_HERO'],
+ ['trajectories',trajectories,'TRAJECTORY_MOTIF'],
+ ['transitions',transitions,'TRANSITION_WINDOW'],
+ ['loss',loss,'LOSS_FAMILY']
+]){
+ assert.ok(source.includes("resolveAtlasVisualById"),`${name} must consume the canonical Atlas visual resolver.`);
+ assert.ok(source.includes(family),`${name} must activate ${family} inside its customer interface.`);
+ assert.ok(source.includes('visualBindings'),`${name} must receive accepted visual bindings.`);
+}
+assert.ok(comparison.includes("resolveAtlasVisualById"),'comparison must consume the canonical Atlas visual resolver.');
+assert.ok(comparison.includes("'COMPARISON_FAMILY'"),'comparison family visuals must be structural UI assets.');
+assert.ok(comparison.includes("'CASE_HERO'"),'comparison representative cases must use case visuals.');
+
+for(const token of [
+ 'renderTimeline(content,{registry:data.timeline,casesRegistry:data.cases,visualBindings:data.staticVisuals',
+ 'renderCases(content,{registry:data.cases,visualBindings:data.staticVisuals',
+ 'renderComparison(content,{registry:data.comparison,casesRegistry:data.cases,visualBindings:data.staticVisuals',
+ 'renderWorldSlice(content,{registry:data.world,casesRegistry:data.cases,visualBindings:data.staticVisuals',
+ 'renderTrajectories(content,{registry:data.trajectories,visualBindings:data.staticVisuals',
+ 'renderTransitions(content,{registry:data.transitions,visualBindings:data.staticVisuals',
+ 'renderLossAtlas(content,{registry:data.loss,casesRegistry:data.cases,visualBindings:data.staticVisuals'
+]) assert.ok(shell.includes(token),`Shell missing FR2 visual binding: ${token}`);
+
+assert.ok(staticVisual.includes("const componentOwned=new Set(['cases','comparison','trajectories','transitions','loss'])"),'FR2 component-owned layers must suppress duplicate generic primary visuals.');
+assert.ok(css.includes('FR2 asset-led layer interfaces'),'FR2 asset-led CSS missing.');
+
+console.log('B6-WEB-FR2 asset-led Atlas UI gate PASS: comparison board repaired and accepted visuals are structural layer components.');
