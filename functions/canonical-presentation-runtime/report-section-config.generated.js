@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_VISUAL_COMMERCE_R1",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R3",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -61,7 +61,7 @@ export const registry = {
         {
           "key": "S01_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
           "dataModules": [
             "sectionIntroduction"
@@ -74,7 +74,7 @@ export const registry = {
         {
           "key": "S01_OVERVIEW_FOUR_PILLARS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:FOUR_PILLARS"
           ],
@@ -87,7 +87,7 @@ export const registry = {
         {
           "key": "S01_OVERVIEW_FIVE_ELEMENTS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:FIVE_ELEMENTS"
           ],
@@ -100,12 +100,12 @@ export const registry = {
         {
           "key": "S01_P3",
           "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "chartHighlights"
           ],
           "title": {
-            "zh-Hans": "命盘重点摘要",
+            "zh-Hans": "重点摘要",
             "en": "Key Insights"
           },
           "omitWhenInsufficient": true
@@ -124,7 +124,7 @@ export const registry = {
         {
           "key": "S02_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
           "dataModules": [
             "sectionIntroduction"
@@ -137,7 +137,7 @@ export const registry = {
         {
           "key": "S02_PERSONALITY_TEN_GOD_OVERVIEW",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:TEN_GOD_OVERVIEW"
           ],
@@ -150,7 +150,7 @@ export const registry = {
         {
           "key": "S02_P2",
           "family": "NARRATIVE_ANALYSIS_PAGE",
-          "executionClass": "T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "personalityNarrative"
           ],
@@ -162,15 +162,15 @@ export const registry = {
         {
           "key": "S02_P3",
           "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "strengths",
             "challenges",
             "socialStyle"
           ],
           "title": {
-            "zh-Hans": "优势与挑战",
-            "en": "Strengths & Challenges"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -188,7 +188,7 @@ export const registry = {
         {
           "key": "S03_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
           "dataModules": [
             "sectionIntroduction"
@@ -201,7 +201,7 @@ export const registry = {
         {
           "key": "S03_LIFE_STRUCTURE_DAY_MASTER_CARRYING",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:DAY_MASTER_CARRYING"
           ],
@@ -214,7 +214,7 @@ export const registry = {
         {
           "key": "S03_LIFE_STRUCTURE_TEN_GOD_FUNCTION_GROUPS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:TEN_GOD_FUNCTION_GROUPS"
           ],
@@ -227,7 +227,7 @@ export const registry = {
         {
           "key": "S03_LIFE_STRUCTURE_TEN_GOD_DETAILS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:TEN_GOD_DETAILS"
           ],
@@ -240,7 +240,7 @@ export const registry = {
         {
           "key": "S03_LIFE_STRUCTURE_PATTERN_PATHS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:PATTERN_PATHS"
           ],
@@ -253,7 +253,7 @@ export const registry = {
         {
           "key": "S03_LIFE_STRUCTURE_PILLAR_RELATIONSHIPS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:PILLAR_RELATIONSHIPS"
           ],
@@ -266,7 +266,7 @@ export const registry = {
         {
           "key": "S03_P3",
           "family": "NARRATIVE_ANALYSIS_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "lifeStructureNarrative"
           ],
@@ -275,6 +275,19 @@ export const registry = {
             "en": "How Structure Shapes Life Pattern"
           },
           "omitWhenInsufficient": true
+        },
+        {
+          "key": "S03_KEY_INSIGHTS",
+          "family": "INSIGHT_LIST_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "dataModules": [
+            "lifeStructureInsights"
+          ],
+          "title": {
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
+          },
+          "omitWhenInsufficient": false
         }
       ]
     },
@@ -290,7 +303,7 @@ export const registry = {
         {
           "key": "S04_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-04-CAREER",
           "dataModules": [
             "sectionIntroduction"
@@ -303,7 +316,7 @@ export const registry = {
         {
           "key": "S04_CAREER_PROFESSIONAL_TOPICS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:PROFESSIONAL_TOPICS"
           ],
@@ -317,7 +330,7 @@ export const registry = {
         {
           "key": "S04_P2",
           "family": "NARRATIVE_ANALYSIS_PAGE",
-          "executionClass": "T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "careerNarrative"
           ],
@@ -329,20 +342,20 @@ export const registry = {
         {
           "key": "S04_P3",
           "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "careerFields"
           ],
           "title": {
-            "zh-Hans": "工作方式与注意事项",
-            "en": "Work Patterns & Considerations"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         },
         {
           "key": "S04_P4",
           "family": "TIMING_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "careerTiming"
           ],
@@ -367,7 +380,7 @@ export const registry = {
         {
           "key": "S05_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-05-WEALTH",
           "dataModules": [
             "sectionIntroduction"
@@ -380,7 +393,7 @@ export const registry = {
         {
           "key": "S05_WEALTH_PROFESSIONAL_TOPICS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:PROFESSIONAL_TOPICS"
           ],
@@ -394,7 +407,7 @@ export const registry = {
         {
           "key": "S05_P2",
           "family": "NARRATIVE_ANALYSIS_PAGE",
-          "executionClass": "T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "wealthNarrative"
           ],
@@ -406,13 +419,13 @@ export const registry = {
         {
           "key": "S05_P3",
           "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "financialAdvice"
           ],
           "title": {
-            "zh-Hans": "资源机会与现实核对",
-            "en": "Resources & Reality Checks"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -430,7 +443,7 @@ export const registry = {
         {
           "key": "S06_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
           "dataModules": [
             "sectionIntroduction"
@@ -443,7 +456,7 @@ export const registry = {
         {
           "key": "S06_RELATIONSHIP_PROFESSIONAL_TOPICS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:PROFESSIONAL_TOPICS"
           ],
@@ -457,7 +470,7 @@ export const registry = {
         {
           "key": "S06_P2",
           "family": "NARRATIVE_ANALYSIS_PAGE",
-          "executionClass": "T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "relationshipNarrative"
           ],
@@ -469,13 +482,13 @@ export const registry = {
         {
           "key": "S06_P3",
           "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "relationshipAdvice"
           ],
           "title": {
-            "zh-Hans": "相处建议",
-            "en": "Relationship Advice"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -493,7 +506,7 @@ export const registry = {
         {
           "key": "S07_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-07-HEALTH",
           "dataModules": [
             "sectionIntroduction"
@@ -506,7 +519,7 @@ export const registry = {
         {
           "key": "S07_P2",
           "family": "NARRATIVE_ANALYSIS_PAGE",
-          "executionClass": "T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "healthNarrative"
           ],
@@ -518,13 +531,13 @@ export const registry = {
         {
           "key": "S07_P3",
           "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "wellnessAdvice"
           ],
           "title": {
-            "zh-Hans": "生活观察建议",
-            "en": "Wellbeing Reflections"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -542,7 +555,7 @@ export const registry = {
         {
           "key": "S08_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-08-TIMING",
           "dataModules": [
             "sectionIntroduction"
@@ -555,7 +568,7 @@ export const registry = {
         {
           "key": "S08_TIMING_TIMING_LAYERS",
           "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "T1_CANONICAL_ASSEMBLY",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "visual:TIMING_LAYERS"
           ],
@@ -568,7 +581,7 @@ export const registry = {
         {
           "key": "S08_P2",
           "family": "TIMING_PAGE",
-          "executionClass": "T0_T1_T2",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "timingContext"
           ],
@@ -580,13 +593,26 @@ export const registry = {
         {
           "key": "S08_P3",
           "family": "TIMING_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "currentYearInsight"
           ],
           "title": {
             "zh-Hans": "当前流年观察",
             "en": "Current-Year Insights"
+          },
+          "omitWhenInsufficient": false
+        },
+        {
+          "key": "S08_KEY_INSIGHTS",
+          "family": "INSIGHT_LIST_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "dataModules": [
+            "timingInsights"
+          ],
+          "title": {
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": false
         }
@@ -604,7 +630,7 @@ export const registry = {
         {
           "key": "S09_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
           "dataModules": [
             "sectionIntroduction"
@@ -617,7 +643,7 @@ export const registry = {
         {
           "key": "S09_P2",
           "family": "SUMMARY_PAGE",
-          "executionClass": "T3",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "integratedGuidance"
           ],
@@ -629,13 +655,13 @@ export const registry = {
         {
           "key": "S09_P3",
           "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "T2_T3",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "nextSteps"
           ],
           "title": {
-            "zh-Hans": "下一步建议",
-            "en": "Next Steps"
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": true
         }
@@ -653,7 +679,7 @@ export const registry = {
         {
           "key": "S10_P1",
           "family": "SECTION_OPENER_PAGE",
-          "executionClass": "T2",
+          "executionClass": "STATIC_EDITORIAL",
           "visualAsset": "VIS-REPORT-BAZI-SEC-10-APPENDIX",
           "dataModules": [
             "sectionIntroduction"
@@ -666,7 +692,7 @@ export const registry = {
         {
           "key": "S10_P2",
           "family": "METHOD_APPENDIX_PAGE",
-          "executionClass": "T0_T1_T2",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "boundaries"
           ],
@@ -678,13 +704,26 @@ export const registry = {
         {
           "key": "S10_P3",
           "family": "METHOD_APPENDIX_PAGE",
-          "executionClass": "T1_T2",
+          "executionClass": "STATIC_EDITORIAL",
           "dataModules": [
             "methodology"
           ],
           "title": {
             "zh-Hans": "分析方法",
             "en": "Methodology"
+          },
+          "omitWhenInsufficient": false
+        },
+        {
+          "key": "S10_KEY_INSIGHTS",
+          "family": "INSIGHT_LIST_PAGE",
+          "executionClass": "STATIC_EDITORIAL",
+          "dataModules": [
+            "appendixInsights"
+          ],
+          "title": {
+            "zh-Hans": "重点摘要",
+            "en": "Key Insights"
           },
           "omitWhenInsufficient": false
         }
@@ -706,7 +745,13 @@ export const registry = {
   "policy": {
     "minimumBodyPagesPerSection": 1,
     "calculatedStandardTotal": 36,
-    "notes": "The attachment's 33-page sum is an arithmetic error: 6 + 10 × 3 = 36. No hard total limit; optional evidence and overflow change the total."
+    "notes": "The attachment's 33-page sum is an arithmetic error: 6 + 10 × 3 = 36. No hard total limit; optional evidence and overflow change the total.",
+    "executionModel": {
+      "STATIC_EDITORIAL": "Fixed bilingual publication copy; never provider-generated.",
+      "DETERMINISTIC_PERSONALIZED": "Personalized from admitted BaZi engine facts/relationships without provider generation.",
+      "DYNAMIC_T3": "Not part of canonical customer publication; retained only as explicit editorial experiment evidence."
+    },
+    "canonicalCustomerPublicationT3": false
   }
 };
 

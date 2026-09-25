@@ -1,0 +1,41 @@
+name: B6-WEB-E visual delivery probe
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/js/pages/book6-reconfiguration-atlas.js'
+      - 'assets/js/pages/civilization-atlas/**'
+      - 'assets/js/locales/**'
+      - 'content/civilization-atlas/reconfiguration/**'
+      - 'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json'
+      - 'scripts/check-b6-web-e.mjs'
+      - 'scripts/check-b6-web-c.mjs'
+      - 'scripts/check-b6-web-d.mjs'
+      - 'scripts/check-book6-reconfiguration-atlas.mjs'
+      - 'scripts/check-book6-reconfiguration-atlas-ask.mjs'
+      - 'functions/_lib/atlas-retrieval-scope.js'
+      - 'scripts/lib/book6-atlas-data-closure-checks.mjs'
+      - 'scripts/check-book6-r2-visual-assets.mjs'
+      - 'scripts/check-book6-snapshot-visual-contract.mjs'
+      - 'package.json'
+      - '.github/workflows/b6-web-e-visual-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  b6-web-e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - name: Static B6-WEB-E contracts
+        run: npm run check:b6-web-e
+      - name: B6-WEB-C and B6-WEB-D predecessor regressions
+        run: npm run check:b6-web-c && npm run check:b6-web-d
+      - name: Live R2 23-core-visual probe
+        run: npm run check:b6-web-e:live

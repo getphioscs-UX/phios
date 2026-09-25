@@ -2538,7 +2538,11 @@
     "check:book6-lived-reality-contract": "node scripts/check-book6-lived-reality-contract.mjs",
     "check:book6-atlas-no-ranking": "node scripts/check-book6-atlas-no-ranking.mjs",
     "check:b6-web-c": "node scripts/check-b6-web-c.mjs && npm run check:book6-reconfiguration-atlas",
-    "check:b6-web-d": "node scripts/check-b6-web-d.mjs"
+    "check:b6-web-d": "node scripts/check-b6-web-d.mjs",
+    "check:book6-snapshot-visual-contract": "node scripts/check-book6-snapshot-visual-contract.mjs",
+    "check:book6-r2-visual-assets": "node scripts/check-book6-r2-visual-assets.mjs",
+    "check:b6-web-e": "node scripts/check-b6-web-e.mjs && node scripts/check-book6-snapshot-visual-contract.mjs && node scripts/check-book6-r2-visual-assets.mjs",
+    "check:b6-web-e:live": "node scripts/check-book6-r2-visual-assets.mjs --live"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

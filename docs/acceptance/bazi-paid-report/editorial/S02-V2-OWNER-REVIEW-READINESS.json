@@ -2,7 +2,7 @@
   "schemaVersion": "BAZI_S02_V2_OWNER_REVIEW_READINESS_V1",
   "startingHead": "3448b49e6007d53ea9eefba3bd7ec8d6515cae93",
   "sectionId": "S02_PERSONALITY",
-  "status": "GOLD_STANDARD_OWNER_ACCEPTED_ENGLISH_QA_READY",
+  "status": "LEGACY_V1_EN_HUMAN_REJECTED_V3_EN_REGENERATION_READY",
   "authority": "BAZI_EXPLANATORY_AUTHORITY_V2",
   "claimIr": "BAZI_RICH_CLAIM_IR_V2",
   "costGuard": {
@@ -20,13 +20,13 @@
     ]
   },
   "liveEvidence": {
-    "enSnapshot": "READY_FOR_ONE_V3_QA_GENERATION",
-    "zhHansSnapshot": "BLOCKED_UNTIL_ENGLISH_OWNER_ACCEPTANCE",
+    "enSnapshot": "LEGACY_V1_REJECTED; V3_NOT_RUN",
+    "zhHansSnapshot": "BLOCKED_UNTIL_V3_ENGLISH_OWNER_ACCEPTANCE",
     "bilingualParity": "BLOCKED",
-    "renderedCandidate": "NOT_RUN_V2"
+    "renderedCandidate": "V3_NOT_RUN"
   },
   "ownerGate": {
-    "status": "GOLD_STANDARD_ACCEPTED_CANDIDATE_NOT_YET_REVIEWED",
+    "status": "LEGACY_V1_REJECTED_V3_CANDIDATE_NOT_YET_REVIEWED",
     "accepted": false
   },
   "productionEligible": false,
@@ -40,10 +40,17 @@
     "status": "WIRED_FAIL_CLOSED"
   },
   "nextActions": [
-    "Run npm run check:bazi-t3 locally and commit regenerated V3 artifacts.",
-    "Deploy the resulting commit to QA.",
-    "Generate exactly one BASELINE_NOW / S02_PERSONALITY / English V3 candidate.",
-    "Review the English candidate against the accepted Gold Standard.",
-    "Only after explicit English owner acceptance may zh-Hans generation be enabled."
-  ]
+    "Run npm run check:bazi-t3 against the current V3 composition / V2 explanatory-authority contract.",
+    "Deploy the resulting current main to QA if the deployed QA build is older than BAZI_EDITORIAL_COMPOSITION_V3.",
+    "Generate exactly one BASELINE_NOW / S02_PERSONALITY / English V3 candidate using the accepted Gold Standard plus the recorded human-review follow-up.",
+    "Review that V3 English candidate as a new candidate; do not reuse or promote the rejected V1 snapshot.",
+    "Only after explicit V3 English owner acceptance may zh-Hans generation, bilingual parity, S03 or any later activation continue."
+  ],
+  "updatedAt": "2026-09-25T10:20:00+08:00",
+  "humanReviewEvidence": {
+    "decision": "REJECT",
+    "path": "docs/acceptance/bazi-paid-report/editorial/S02-EN-HUMAN-REJECTION-2026-09-25.json",
+    "snapshotDigest": "614b4b6a9121409202bf2db76d8f17ff7291818d1b15d059905e4a4d3d3392fa",
+    "reviewedAt": "2026-09-25T10:20:00+08:00"
+  }
 }

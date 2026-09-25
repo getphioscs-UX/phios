@@ -24,14 +24,26 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const e=s=>BAZI_SECTION_EDITORIAL[s];
  const appendixConditions=[];
  const makeNarrative=async(key,section,code)=>{
-  const t=topic(code);if(!t)return;
-  const idx=topics.indexOf(t),ref=`professionalModules/customerNarrative/topicNarratives/${idx}`;
+  const t=topic(code),idx=t?topics.indexOf(t):-1,ref=idx>=0?`professionalModules/customerNarrative/topicNarratives/${idx}`:null;
   const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:section,locale,temporalSnapshot:temporalContext});
   const selected=authority.claims.filter(c=>c.relationType!=='BOUNDARY');
-  // Raw percentages/counts remain in the native visuals and optional detail.
-  // Narrative text is projected from admitted meaning, never regex-reinterpreted.
-  modules[key]={blocks:selected.map(c=>block(c.text,c.sourceRefs.join('|'),'METHOD_INTERPRETATION')),boundary:authority.claims.find(c=>c.relationType==='BOUNDARY')?.text||''};
-  appendixConditions.push(block(t.condition[lang],`${ref}/condition`,'METHOD_BOUNDARY'));
+  const byType=(...types)=>selected.filter(c=>types.includes(c.relationType));
+  const joinClaims=claims=>claims.map(c=>humanizePublicationStatement(c.text)).filter(Boolean).join(' ');
+  // Deterministic publication composition: licensed claims are grouped by
+  // reading function so the customer receives a coherent explanation instead
+  // of a schema-like list. No new method meaning is created here.
+  const groups=[
+   byType('EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS'),
+   byType('SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER'),
+   byType('CROSS_SECTION_RELEVANCE','OPEN_CONDITION','TEMPORAL_RELEVANCE','CONTRAST','ASSOCIATION')
+  ];
+  const blocks=groups.map(claims=>{
+   const text=joinClaims(claims);if(!text)return null;
+   const refs=[...new Set(claims.flatMap(c=>c.sourceRefs||[]))];
+   return block(text,refs.join('|'),'METHOD_INTERPRETATION');
+  }).filter(Boolean);
+  modules[key]={blocks,boundary:authority.claims.find(c=>c.relationType==='BOUNDARY')?.text||''};
+  if(t?.condition?.[lang]&&ref)appendixConditions.push(block(t.condition[lang],`${ref}/condition`,'METHOD_BOUNDARY'));
  };
  for(const [key,n] of [['baziChart',7],['dayMaster',8],['fiveElements',9],['chartStructure',12],['usefulElements',14]])modules[key]={blocks:[],sourcePages:[n],facts:source(n).facts,evidence:internal(n).evidence};
  modules.baziChart.blocks=[block(e('S01_OVERVIEW').bridge[locale],`${edRef}#S01_OVERVIEW`)];
@@ -42,8 +54,13 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  await makeNarrative('careerNarrative','S04_CAREER','CAREER');
  await makeNarrative('wealthNarrative','S05_WEALTH','WEALTH');
  await makeNarrative('relationshipNarrative','S06_RELATIONSHIP','RELATIONSHIPS');
- paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale],pick('Keep a distinction between a busy schedule, your own description of strain, and any explanation proposed for it. Neither an element count nor a pressure symbol can establish a bodily cause. If you revisit this chapter later, compare the circumstances you recorded, rather than looking for a predicted condition to confirm. Your experience may change while the birth chart remains the same.','请区分繁忙的安排、自己感受到的负担，以及对它提出的解释。五行数量或压力符号都不能建立身体病因。以后回到本章时，比较记录中的实际情境，而不是寻找某种预测中的状态。出生结构保持不变，经验仍可能随环境而改变。')],`${edRef}#S07_HEALTH`);
- const itemMap={chartHighlights:'S01_OVERVIEW',strengths:'S02_PERSONALITY',careerFields:'S04_CAREER',financialAdvice:'S05_WEALTH',relationshipAdvice:'S06_RELATIONSHIP',wellnessAdvice:'S07_HEALTH',nextSteps:'S09_GUIDANCE'};
+ await makeNarrative('healthNarrative','S07_HEALTH','PRESSURE');
+ if(modules.healthNarrative){
+  modules.healthNarrative.blocks.push(block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'));
+ }else{
+  paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale]],`${edRef}#S07_HEALTH`);
+ }
+ const itemMap={chartHighlights:'S01_OVERVIEW',strengths:'S02_PERSONALITY',lifeStructureInsights:'S03_LIFE_STRUCTURE',careerFields:'S04_CAREER',financialAdvice:'S05_WEALTH',relationshipAdvice:'S06_RELATIONSHIP',wellnessAdvice:'S07_HEALTH',timingInsights:'S08_TIMING',nextSteps:'S09_GUIDANCE',appendixInsights:'S10_APPENDIX'};
  for(const [key,section] of Object.entries(itemMap))modules[key]={blocks:[],items:e(section).items.map(i=>block(i[locale],`${edRef}#${section}`))};
  // Strengths, challenges and social style share the admitted observation set;
  // they are not fabricated independent measurements.
@@ -52,8 +69,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  modules.currentYearInsight={blocks:source(21).paragraphs.map(t=>block(t,internal(21).evidence[0],'METHOD_INTERPRETATION')),temporal:modules.timingContext.temporal,observations:[e('S08_TIMING').items[2][locale],pick('What stayed consistent across the year boundary, despite the change in the named time layer?','时间层名称改变前后，哪些经验仍然保持一致？')],boundary:pick('The year layer frames observation; this reading does not identify specific events as opportunities or warnings.','流年层用于界定观察范围；本次读取不把具体事件判断为机会或预警。')};
  // Optional career timing is absent unless an upstream adapter supplies an
  // admitted career-specific module. Generic current-year data is insufficient.
- paragraphs('integratedGuidance',[e('S09_GUIDANCE').bridge[locale]],`${edRef}#S09_GUIDANCE`);
- modules.integratedGuidance.items=['CAREER','WEALTH','RELATIONSHIPS'].map(code=>block(topic(code).lead[lang],`professionalModules/customerNarrative/topicNarratives/${topics.indexOf(topic(code))}/lead`,'METHOD_INTERPRETATION'));
+ await makeNarrative('integratedGuidance','S09_GUIDANCE','GUIDANCE');
+ if(modules.integratedGuidance){
+  modules.integratedGuidance.blocks.unshift(block(e('S09_GUIDANCE').bridge[locale],`${edRef}#S09_GUIDANCE`,'EDITORIAL_GUIDANCE'));
+ }else{
+  paragraphs('integratedGuidance',[e('S09_GUIDANCE').bridge[locale]],`${edRef}#S09_GUIDANCE`);
+ }
  paragraphs('boundaries',[e('S10_APPENDIX').bridge[locale]],`${edRef}#S10_APPENDIX`);
  modules.boundaries.blocks.push(...appendixConditions);
  paragraphs('methodology',[pick('BaZi organizes a birth reading around four pillars and uses the Day Master as a reference position. The diagrams in this report preserve the distinctions between visible stems, branches, hidden stems and element counts. Structural candidates are shown with their conditions, so an open pattern remains open rather than becoming a final verdict. The timing chapter adds only the layers resolved by the existing method engine for the saved observation window. These layers accompany the birth structure; they do not replace it. Read the prose as a bounded explanation of that structure, then compare it with independent experience.','八字围绕四柱组织出生读取，并以日主作为参照位置。本报告的图表区分天干、地支、藏干与五行计数；结构候选与成立条件一同呈现，因此仍开放的格局不会被写成最终判断。时间章节只加入既有方法引擎针对保存的观察窗口所解析的层次，它们与本命结构一起阅读，不取代本命。请把文字看作有范围的结构说明，再用独立经验来比较。')],`${edRef}#S10_APPENDIX`);
@@ -80,7 +101,9 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const narrative=pageBlocks.find(p=>p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'||p.pageFamily==='SUMMARY_PAGE');
   const allowed=noTarget&&section.key==='S08_TIMING'?modules.timingContext.blocks.slice(0,1):(narrative||pageBlocks.find(p=>p.contentBlocks.length)||pageBlocks[0]).contentBlocks;
   const interpretation=await compilePublicationInterpretation({methodId:'BZR',page:{...sourcePage,pageId:section.key,evidenceRefs:[...new Set(sourceNumbers.flatMap(n=>internal(n).evidence))]},temporalContext,allowedStatements:allowed.map(b=>({text:b.text,sourceRef:b.sourceRef})),conditions:sectionObject.boundaryNotes,realityQuestions:sectionObject.practicalObservations});
-  const composed=await composePublicationNarrative({interpretation,locale,executionClass:narrative?'T3_DEEP_COMPOSITION':'T2_LIGHT_COMPOSITION',...composition,...(composition.t3?{providerAdapters:{}}:{}),sectionComposition:sectionObject});
+  // Canonical customer publication is deterministic. Provider-backed prose is
+  // an explicit T3 editorial experiment below and never the default composer.
+  const composed=await composePublicationNarrative({interpretation,locale,executionClass:'T2_LIGHT_COMPOSITION',sectionComposition:sectionObject});
   if(narrative&&composed.internalOnly.evidenceAdmission==='SEMANTIC_VERIFIER_ACCEPTED'){
    const maximum=REPORT_PAGE_FAMILIES[narrative.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
    if(composed.paragraphs.every(text=>textUnits(text,locale)<=maximum))narrative.contentBlocks=composed.paragraphs.map(text=>block(text,section.key,'VERIFIED_SECTION_COMPOSITION'));
@@ -118,7 +141,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    if(t3.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot})){
     const n=t3.snapshot.finalNarrative,target=narrative||pageBlocks.find(p=>p.pageFamily==='TIMING_PAGE');
     const main=[n.lead,...n.interpretation,...n.howThisMayShowUp,n.closingInsight].filter(b=>b.text.trim());
-    const secondary=pageBlocks.find(p=>p!==target&&['INSIGHT_LIST_PAGE','TIMING_PAGE'].includes(p.pageFamily));
+    // Static publication pages are immutable. T3 may enrich only dynamic narrative/timing pages.
+    const secondary=pageBlocks.find(p=>p!==target&&p.pageFamily==='TIMING_PAGE');
     const secondaryBlocks=[...n.supportingConditions,...n.tensionConditions];
     if(!secondary)main.push(...secondaryBlocks);
     const maximum=REPORT_PAGE_FAMILIES[target.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
@@ -142,7 +166,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:publicationTitle,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
   const admittedT3=t3?.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot});
   internalSections.at(-1).diagnostics={sectionRuntimeTier:admittedT3?'T3':t3?'T2_FALLBACK':'DETERMINISTIC',snapshotMatch:t3?.snapshot?'VALIDATED':composition.t3?.snapshots?.[section.key]?'INVALID':'ABSENT',fallbackReason:admittedT3?null:t3?.internalOnly?.fallbackReason||(t3?.snapshot?'SNAPSHOT_NOT_HUMAN_ACCEPTED_FOR_STAGE':null),claimIrVersion:t3?.evidencePack?.claimIrVersion||t3?.evidencePack?.explanatoryAuthorityVersion||null,editorialVersion:t3?.snapshot?.editorialVersion||null};
-  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):admittedT3?t3.snapshot.finalNarrative.headline.text:editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
+  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits,minUnits:budget[locale==='en'?'en':'zh']?.[0]||0});

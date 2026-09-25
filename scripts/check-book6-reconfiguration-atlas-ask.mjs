@@ -17,11 +17,11 @@ assert.equal(result.sources[0].bookCode,'BOOK-6');assert.equal(result.sources[0]
 assert.deepEqual(result.chain.map(x=>x.stage),['ATLAS_ENTITY','RECONFIGURATION_CASE','RECONFIGURATION_WINDOW','WORLD_RECONFIGURATION_SNAPSHOT','CONTEMPORARY_RUNTIME_DOSSIER','LIVED_REALITY_LAYER','BOOK_VI_CANONICAL_SECTION','PART_13','BROADER_KNOWLEDGE']);
 const snapshotScope=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode:'BOOK-6',partCode:'PART-13',activeLayer:'snapshots',entityId:'WORLD_RECONFIGURATION_SNAPSHOT_2026'});
 const snapshot=await retrieveAtlasScope({env,scope:snapshotScope,locale:'en',question:'2026 world snapshot'});
-assert.equal(snapshot.sources[0].atlasEntityId,'WORLD_RECONFIGURATION_SNAPSHOT_2026');assert.match(snapshot.sources[0].text,/MISSING/);
+assert.equal(snapshot.sources[0].atlasEntityId,'WORLD_RECONFIGURATION_SNAPSHOT_2026');assert.match(snapshot.sources[0].text,/PRESENT/);
 const dossierScope=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode:'BOOK-6',partCode:'PART-13',activeLayer:'dossiers',entityId:'DOSSIER-CN'});
 const dossier=await retrieveAtlasScope({env,scope:dossierScope,locale:'en',question:'China current Runtime'});
 assert.equal(dossier.sources[0].atlasEntityId,'DOSSIER-CN');assert.match(dossier.sources[0].text,/UNKNOWN/);
 const legacy=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_ATLAS',bookCode:'BOOK-5',partCode:'PART-12',activeLayer:'cases',primaryCaseId:'CA-T00-01'});
 assert.equal(legacy.scopeType,'CIVILIZATION_ATLAS');assert.equal(legacy.bookCode,'BOOK-5');
 console.log('✓ Book VI Atlas Ask routing PASS: BOOK-6 / PART-13 scope, PTRC contract, CKA route, structured chain and Book V compatibility.');
-console.log('  Current dossier values remain UNKNOWN until current-data evidence is admitted; 2026 snapshot visual remains MISSING.');
+console.log('  Current dossier values remain UNKNOWN until current-data evidence is admitted; 2026 snapshot visual is PRESENT only after B6-WEB-E live resolver verification.');

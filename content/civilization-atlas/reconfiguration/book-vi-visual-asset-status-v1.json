@@ -1,164 +1,419 @@
 {
-  "schemaVersion": "PHI-OS-BOOK-VI-VISUAL-ASSET-STATUS-v1.0.0",
-  "version": "1.0.0",
-  "status": "ACTIVE_TRUTHFUL_STATUS",
+  "schemaVersion": "PHI-OS-BOOK-VI-VISUAL-ASSET-STATUS-v1.2.0",
+  "version": "1.2.0",
+  "status": "B6_WEB_E_LIVE_PROBE_RECONCILED",
   "expectedCoreAssets": 23,
   "assets": [
     {
       "assetId": "BOOK_6_COVER",
       "kind": "BOOK_VISUAL",
-      "status": "UNVERIFIED",
-      "expectedResolverKey": "BOOK-6-COVER"
+      "status": "PRESENT",
+      "expectedResolverKey": "BOOK-6-COVER",
+      "expectedR2Path": "books/covers/book-6/book-6-3d-hard cover.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 574442,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "BOOK_6_HERO",
       "kind": "BOOK_VISUAL",
       "status": "PRESENT",
-      "evidence": "content/web-production/registries/wpr-eight-volume-r2-public-assets-v1.json#BOOK-6-HARDCOVER"
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature.",
+      "expectedR2Path": "images/hero/books/PHIOS-HERO-BOOK-6-REALITY-RECONFIGURATION-v1.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 645884,
+        "webpSignature": true
+      }
     },
     {
       "assetId": "BOOK_6_DIRECTORY_COVER",
       "kind": "BOOK_VISUAL",
-      "status": "UNVERIFIED",
-      "expectedResolverKey": "BOOK-6-DIRECTORY-COVER"
+      "status": "PRESENT",
+      "expectedResolverKey": "BOOK-6-DIRECTORY-COVER",
+      "expectedR2Path": "images/branding/books/PHIOS-BRANDING-VOLUME-VI-REALITY-RECONFIGURATION-v1.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 254186,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "FIG_13A",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13A.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13A.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "FIG_13B",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13B.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13B.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "FIG_13C",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13C.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13C.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "FIG_13D",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13D.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13D.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "FIG_13E",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13E.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13E.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "FIG_13F",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13F.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13F.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "FIG_13G",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13G.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13G.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "FIG_13H",
       "kind": "CANONICAL_BOOK_FIGURE",
-      "status": "UNVERIFIED",
-      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13H.webp"
+      "status": "MISSING",
+      "expectedR2Path": "images/civilization-atlas/reconfiguration/FIG_13H.webp",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "MISSING",
+        "httpStatus": 404,
+        "contentType": "text/html",
+        "bytes": 0
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned HTTP 404 at the canonical expected R2 path."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1914",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1914.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 764948,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1919",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1919.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 721502,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1929",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1929.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 756536,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1939",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1939.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 703798,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1945",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1945.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 748392,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1955",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1955.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 713262,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1965",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1965.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 709328,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1975",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1975.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 693040,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_1989",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_1989.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 698992,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_2001",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_2001.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 730166,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_2008",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
       "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_2008.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 735754,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     },
     {
       "assetId": "WORLD_RECONFIGURATION_SNAPSHOT_2026",
       "kind": "STATIC_ATLAS_BASE_VISUAL",
-      "status": "MISSING",
+      "status": "PRESENT",
       "expectedR2Path": "images/civilization-atlas/reconfiguration/WORLD_RECONFIGURATION_SNAPSHOT_2026.webp",
-      "evidenceClass": "OWNER_SUPPLIED_R2_EVIDENCE"
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "liveProbe": {
+        "checkedAt": "2026-09-25T02:33:00Z",
+        "workflowRunId": 36086656928,
+        "status": "PRESENT",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 735046,
+        "webpSignature": true
+      },
+      "evidence": "GitHub Actions B6-WEB-E live public GET returned 200 image/webp with RIFF/WEBP signature."
     }
   ],
   "snapshotSummary": {
     "expected": 12,
-    "present": 11,
-    "missing": 1,
-    "missingAssetId": "WORLD_RECONFIGURATION_SNAPSHOT_2026"
+    "present": 12,
+    "missing": 0,
+    "unverified": 0
+  },
+  "liveProbe": {
+    "required": true,
+    "lastRun": "2026-09-25T02:33:00Z",
+    "status": "PASS",
+    "workflowRunId": 36086656928,
+    "result": {
+      "expected": 23,
+      "present": 15,
+      "missing": 8,
+      "unverified": 0
+    },
+    "policy": "Registry presence is not delivery evidence. PRESENT requires public GET 200, image/webp, and RIFF/WEBP signature. MISSING is a live HTTP 404 at the canonical expected path.",
+    "checker": "scripts/check-book6-r2-visual-assets.mjs"
+  },
+  "coreSummary": {
+    "expected": 23,
+    "present": 15,
+    "missing": 8,
+    "unverified": 0
   }
 }

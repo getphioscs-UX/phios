@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "PHI-OS-BOOK-VI-RECONFIGURATION-ATLAS-v2.3.0",
-  "version": "2.3.0",
-  "status": "B6_WEB_D_CUSTOMER_UI_IMPLEMENTED",
+  "schemaVersion": "PHI-OS-BOOK-VI-RECONFIGURATION-ATLAS-v2.4.0",
+  "version": "2.4.0",
+  "status": "B6_WEB_E_VISUAL_I18N_ACCESSIBILITY_PERFORMANCE_AUDITED",
   "owner": "content/civilization-atlas/atlas-manifest-v1.json",
   "bookId": "book-6",
   "bookCode": "BOOK-6",
@@ -80,5 +80,104 @@
       "deepLinkContract": "STATIC_PASS",
       "browser": "NOT_RUN"
     }
+  },
+  "visualDelivery": {
+    "package": "B6-WEB-E",
+    "statusOwner": "content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json",
+    "existingResolverOwner": "assets/js/pages/civilization-atlas/atlas-static-visual.js",
+    "bindingOwner": "content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json",
+    "coreVisuals": {
+      "expected": 23,
+      "present": 15,
+      "missing": 8,
+      "unverified": 0
+    },
+    "bookVisuals": {
+      "expected": 3,
+      "present": 3,
+      "missing": 0,
+      "unverified": 0
+    },
+    "canonicalFigures": {
+      "expected": 8,
+      "present": 0,
+      "missing": 8,
+      "unverified": 0,
+      "missingAssetIds": [
+        "FIG_13A",
+        "FIG_13B",
+        "FIG_13C",
+        "FIG_13D",
+        "FIG_13E",
+        "FIG_13F",
+        "FIG_13G",
+        "FIG_13H"
+      ]
+    },
+    "snapshots": {
+      "expected": 12,
+      "present": 12,
+      "missing": 0,
+      "unverified": 0
+    },
+    "snapshot2026": {
+      "status": "PRESENT",
+      "evidenceClass": "B6_WEB_E_LIVE_PUBLIC_GET",
+      "httpStatus": 200,
+      "contentType": "image/webp",
+      "bytes": 735046,
+      "webpSignature": true,
+      "checkedAt": "2026-09-25T02:34:31Z",
+      "workflowRunId": 36086783645
+    },
+    "liveProbe": {
+      "status": "PASS",
+      "workflowRunId": 36086783645,
+      "rule": "PRESENT requires live public GET 200 + image/webp + RIFF/WEBP signature; registry presence alone is never sufficient."
+    }
+  },
+  "interfaceQuality": {
+    "package": "B6-WEB-E",
+    "i18n": {
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "canonicalLocaleOwner": true,
+      "rawEnumGuard": "PASS_MACHINE"
+    },
+    "accessibility": {
+      "semanticTablist": "PASS_MACHINE",
+      "keyboardTabNavigation": "PASS_MACHINE",
+      "visibleFocus": "PASS_MACHINE",
+      "textualSnapshotAlternative": "PASS_MACHINE",
+      "accessibleComparisonRegion": "PASS_MACHINE",
+      "browserAcceptance": "NOT_RUN_B6_WEB_F"
+    },
+    "performance": {
+      "casePageSize": 12,
+      "searchPageSize": 24,
+      "snapshotImageLoading": "lazy",
+      "snapshotImageDecoding": "async",
+      "noMassInitialVisualRender": true,
+      "newLargeFramework": false,
+      "browserPerformanceAcceptance": "NOT_RUN_B6_WEB_F"
+    },
+    "mobile": {
+      "responsiveContract": "PASS_MACHINE",
+      "real390pxAcceptance": "NOT_RUN_B6_WEB_F"
+    }
+  },
+  "phaseBoundary": {
+    "currentPackage": "B6-WEB-E",
+    "nextPackage": "B6-WEB-F",
+    "browserAcceptance": "NOT_RUN",
+    "humanAcceptance": "NOT_RUN",
+    "finalCutover": "NOT_RUN",
+    "finalCompleteClaimAllowed": false,
+    "blockers": [
+      "FIG_13A–FIG_13H live resolver paths return HTTP 404.",
+      "B6-WEB-F real browser and human acceptance has not run."
+    ]
   }
 }

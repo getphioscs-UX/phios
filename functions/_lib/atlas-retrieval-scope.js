@@ -115,9 +115,28 @@ async function retrieveReconfigurationScope({env,scope,locale,question}){
   for(const id of initial.sections){const r=(loaded.relationships?.relationships||[]).find(x=>x.bookSection===id);add('cases',r?.relatedCases);add('windows',r?.relatedWindows);add('snapshots',r?.relatedSnapshots);add('dossiers',r?.relatedDossiers);add('lived',r?.relatedLivedRealityDimensions);}
   for(const id of initial.dossiers)for(const r of loaded.relationships?.relationships||[])if((r.relatedDossiers||[]).includes(id)){add('sections',[r.bookSection]);add('cases',r.relatedCases);add('lived',r.relatedLivedRealityDimensions);}
   for(const id of initial.lived)for(const r of loaded.relationships?.relationships||[])if((r.relatedLivedRealityDimensions||[]).includes(id)){add('sections',[r.bookSection]);add('dossiers',r.relatedDossiers);}
-  const sources=[],stageRows=[];
-  for(const key of ordered){const cfg=RECONFIG_CONFIG[key],rows=rowsByKey[key].filter(row=>selected[key].has(row?.[cfg.id])).slice(0,8),projected=rows.map(row=>sourceFor(row,cfg.id,cfg.stage,locale,question)).filter(source=>source.text);sources.push(...projected);stageRows.push({stage:cfg.stage,status:projected.length?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:projected.length});}
-  const entityCount=sources.length;
+  const directIds=[...new Set(wanted)];
+  const directSources=[];
+  for(const id of directIds){
+    for(const key of ordered){
+      const cfg=RECONFIG_CONFIG[key],record=rowsByKey[key].find(row=>row?.[cfg.id]===id);
+      if(record){
+        const source=sourceFor(record,cfg.id,cfg.stage,locale,question);
+        if(source.text)directSources.push(source);
+        break;
+      }
+    }
+  }
+  const expandedSources=[],stageRows=[];
+  for(const key of ordered){
+    const cfg=RECONFIG_CONFIG[key];
+    const rows=rowsByKey[key].filter(row=>selected[key].has(row?.[cfg.id])).slice(0,8);
+    const projected=rows.map(row=>sourceFor(row,cfg.id,cfg.stage,locale,question)).filter(source=>source.text);
+    expandedSources.push(...projected.filter(source=>!directIds.includes(source.atlasEntityId)));
+    stageRows.push({stage:cfg.stage,status:projected.length?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:projected.length});
+  }
+  const sources=[...directSources,...expandedSources];
+  const entityCount=directSources.length;
   return {scope,sources,chain:[{stage:'ATLAS_ENTITY',status:entityCount?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:entityCount},...stageRows,{stage:'PART_13',status:'AUTHORIZED_FALLBACK'},{stage:'BROADER_KNOWLEDGE',status:'AUTHORIZED_FALLBACK'}]};
 }
 

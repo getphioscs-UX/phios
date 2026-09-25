@@ -1,7 +1,15 @@
 # BaZi paid report baseline
 
-10 actual sections; eight narrative T3 sections (S02–S09). S01 and S10 remain deterministic sections.
+Canonical customer publication no longer depends on T3.
 
-The previous bilingual S02 V1 acceptance is now **SUPERSEDED** by explicit owner feedback on 2026-09-24 that the prose was not market-grade. Its immutable snapshots remain historical evidence only and are not current publication authority.
+The paid report now has three execution classes:
 
-Current work returns to S02 under BAZI_EXPLANATORY_AUTHORITY_V2 / BAZI_RICH_CLAIM_IR_V2. S03–S09 remain blocked until the new S02 bilingual candidate is generated, parity-checked and explicitly accepted. Production T3 remains OFF.
+- `STATIC_EDITORIAL`: fixed bilingual publication copy. This includes the frozen front matter, all ten section openers, all ten Key Insights pages, and the appendix explanatory pages.
+- `DETERMINISTIC_PERSONALIZED`: customer-specific content assembled from admitted BaZi engine facts, relationships, topic narratives and timing layers without provider generation.
+- `DYNAMIC_T3`: not part of canonical customer publication. Retained only as explicit QA/editorial experiment evidence.
+
+The previous S02 T3 acceptance/rejection records and bilingual snapshots remain immutable historical evidence. They no longer gate customer publication and must not be treated as publication authority.
+
+Canonical publication must remain reproducible for the same admitted reading, locale and temporal snapshot without OpenAI/provider calls. T3 generation requires an explicit QA-only `BAZI_T3_EDITORIAL_EXPERIMENT=enabled` opt-in.
+
+The owner rejection recorded on 2026-09-25 remains valid evidence about the former T3 approach: provider-generated prose was too costly and insufficiently stable for the fixed publication layer.

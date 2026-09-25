@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "PHI-OS-B6-WEB-E-VISUAL-R2-I18N-ACCESSIBILITY-PERFORMANCE-v1.0.0",
+  "package": "B6-WEB-E",
+  "baselineCommit": "cc8fec24c54d327b643d4c35757950c882696e92",
+  "status": "MACHINE_AND_LIVE_R2_VALIDATED_WITH_RECORDED_CORE_FIGURE_GAPS",
+  "scope": [
+    "23_CORE_VISUALS",
+    "R2_RESOLVER",
+    "EN_ZH_HANS",
+    "MOBILE_CONTRACT",
+    "KEYBOARD",
+    "LAZY_LOADING",
+    "NO_RAW_ENUMS"
+  ],
+  "architecture": {
+    "extendedExistingOwners": true,
+    "newParallelRuntime": false,
+    "newAssetResolver": false,
+    "newI18nRuntime": false,
+    "resolverOwner": "assets/js/pages/civilization-atlas/atlas-static-visual.js",
+    "visualBindingOwner": "content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json",
+    "localeOwners": [
+      "assets/js/locales/en/book6-reconfiguration-atlas.js",
+      "assets/js/locales/zh-Hans/book6-reconfiguration-atlas.js"
+    ]
+  },
+  "visualTruth": {
+    "expected": 23,
+    "present": 15,
+    "missing": 8,
+    "unverified": 0,
+    "bookVisuals": {
+      "expected": 3,
+      "present": 3
+    },
+    "figures": {
+      "expected": 8,
+      "present": 0,
+      "missing": 8,
+      "missingAssetIds": [
+        "FIG_13A",
+        "FIG_13B",
+        "FIG_13C",
+        "FIG_13D",
+        "FIG_13E",
+        "FIG_13F",
+        "FIG_13G",
+        "FIG_13H"
+      ]
+    },
+    "snapshots": {
+      "expected": 12,
+      "present": 12,
+      "missing": 0
+    },
+    "snapshot2026": {
+      "priorMasterWorkState": "MISSING",
+      "currentState": "PRESENT",
+      "stateChangeReason": "A new B6-WEB-E live public resolver probe returned HTTP 200, content-type image/webp and a valid RIFF/WEBP signature.",
+      "bytes": 735046,
+      "checkedAt": "2026-09-25T02:34:31Z",
+      "workflowRunId": 36086783645
+    },
+    "registryPresenceAcceptedAsDeliveryEvidence": false,
+    "liveProbePolicy": "Only a public GET 200 with image/webp and a RIFF/WEBP signature may establish PRESENT. HTTP 404 establishes MISSING; network or ambiguous responses establish UNVERIFIED."
+  },
+  "i18n": {
+    "canonicalLocales": [
+      "en",
+      "zh-Hans"
+    ],
+    "uiCopyMovedToCanonicalLocales": true,
+    "customerRawEnumGuards": "PASS_MACHINE",
+    "coveredFamilies": [
+      "RESULT_TYPE",
+      "KNOWLEDGE_STATE",
+      "CASE_TYPE",
+      "ENTITY_TYPE",
+      "REGION",
+      "FIELD",
+      "SNAPSHOT_LAYER",
+      "STRUCTURAL_CHANGE",
+      "STATUS_VALUE"
+    ]
+  },
+  "accessibility": {
+    "machineStatus": "PASS",
+    "semanticTabs": true,
+    "rovingKeyboardTabs": [
+      "ArrowLeft",
+      "ArrowRight",
+      "Home",
+      "End"
+    ],
+    "visibleFocus": true,
+    "comparisonKeyboardScrollable": true,
+    "snapshotTextAlternative": true,
+    "localizedImageAlt": true,
+    "runtimeImageFailureState": true,
+    "realBrowserAcceptance": "NOT_RUN"
+  },
+  "performance": {
+    "machineStatus": "PASS",
+    "casePagination": 12,
+    "searchPagination": 24,
+    "snapshotLoading": "lazy",
+    "snapshotDecoding": "async",
+    "oneBaseImagePerSnapshot": true,
+    "layerSwitchReplacesBaseImage": false,
+    "massInitialVisualRender": false,
+    "largeFrameworkAdded": false,
+    "realBrowserPerformance": "NOT_RUN"
+  },
+  "checks": {
+    "dedicatedWorkflow": {
+      "id": 36087258028,
+      "status": "SUCCESS"
+    },
+    "staticB6WebE": "PASS",
+    "snapshotVisualContract": "PASS",
+    "liveR2Probe": "PASS",
+    "liveR2Summary": {
+      "present": 15,
+      "missing": 8,
+      "unverified": 0
+    },
+    "predecessorRegression": "PASS",
+    "globalPTRC": {
+      "status": "FAIL_OUTSIDE_B6_SCOPE",
+      "reason": ".node-version is 22.16.0 while scripts/check-ptrc-w10-consolidation.mjs expects 24.18.0.",
+      "changedByB6WebE": false
+    },
+    "predecessorRegressionScope": [
+      "B6-WEB-C",
+      "BOOK-VI-RECONFIGURATION-ATLAS",
+      "ASK-RETRIEVAL",
+      "B6-WEB-D"
+    ],
+    "finalValidation": {
+      "workflowRunId": 36087258028,
+      "staticB6WebE": "PASS",
+      "b6WebC": "PASS",
+      "bookViAtlas": "PASS",
+      "askRetrieval": "PASS",
+      "b6WebD": "PASS",
+      "liveR2": "PASS"
+    }
+  },
+  "knownGaps": [
+    "FIG_13A–FIG_13H have no discovered repository owner mapping to alternate R2 object keys and the canonical expected public paths returned HTTP 404 in the live probe.",
+    "B6-WEB-F real desktop/mobile browser acceptance has not run.",
+    "B6-WEB-F human acceptance has not run."
+  ],
+  "completionBoundary": {
+    "b6WebEImplementationAndAudit": "COMPLETE_WITH_TRUTHFUL_MISSING_ASSETS",
+    "bookViAtlasWebLayerComplete": false,
+    "finalCompleteClaimAllowed": false,
+    "nextPackage": "B6-WEB-F"
+  }
+}

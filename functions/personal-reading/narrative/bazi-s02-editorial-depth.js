@@ -44,6 +44,24 @@ export function buildS02EditorialGoldStandard(pack){
  return {version:S02_GOLD_STANDARD_VERSION,sectionKey:'S02_PERSONALITY',locale,evidenceClass:'EDITORIAL_BENCHMARK_FROM_LICENSED_CLAIMS',createsMeaning:false,humanAccepted:false,meaningEvidenceHash:pack.canonicalEvidenceHash||null,claimIds:[...new Set(blocks.flatMap(b=>b.claimIds))],blocks,observationPrompts,boundary:{text:zh?'这是有条件的象征性结构读取，不代表已经观察到的行为，也不预测事件。':'This is a conditional symbolic reading; it does not assert observed behavior or predict events.',claimIds:[boundary?.id].filter(Boolean)}};
 }
 
+export const S02_EN_HUMAN_REJECTION_REVISION='BAZI_S02_EN_HUMAN_REJECTION_2026_09_25';
+export function buildS02HumanReviewFollowup(pack){
+ if(pack?.sectionKey!=='S02_PERSONALITY'||pack?.locale!=='en')return null;
+ const benchmarkRoles=arr(pack?.editorialGoldStandard?.blocks).map(b=>({role:b.role,claimIds:arr(b.claimIds)}));
+ return {version:S02_EN_HUMAN_REJECTION_REVISION,decision:'REJECT_PREVIOUS_CANDIDATE',changesSemanticAuthority:false,productionActivated:false,requiredCoreRelations:['LIFE_DOMAIN_EXPLANATION','OPERATING_CONDITION','CO_OCCURRING_DIMENSIONS'],requirements:[
+  'Do not write claim-by-claim schema paraphrases. Explain the licensed capability structure as customer meaning.',
+  'Make LIFE_DOMAIN_EXPLANATION and OPERATING_CONDITION substantive enough to explain what the factors mean together and which admitted conditions change reliability.',
+  'Preserve learning, support and absorption as the first emphasis while keeping secondary peer/self-position and rules/responsibility/pressure visible only through claims allowed by contentPlan.',
+  'Keep absorption, practice, expression and repeated carrying simultaneous, never sequential.',
+  'Where the licensed life-domain claim synthesizes self-position, environment and expression relations, keep those positions distinct and context-sensitive without inventing a behavioral effect. Do not force omitted CONTEXT_MODIFIER claims into separate customer blocks.',
+  'Keep the unresolved strong-or-weak verdict brief and subordinate; do not use it as the headline, closing thesis or a fixed identity.',
+  'Give substantive interpretation before reflection or counter prompts; prompts supplement explanation and never replace it.',
+  'If manifestationLicenses is empty, howThisMayShowUp must remain empty. An evidence gap is not permission to add generic manifestations.',
+  'Avoid standalone filler such as "forms part of the reading context", "associated themes" or "is considered through" when it does not explain licensed meaning.',
+  'Treat editorialGoldStandard as a depth and readability benchmark only, never as an additional factual license.'
+ ],benchmarkRoles};
+}
+
 export function evaluateS02GoldStandard(gold,pack){
  const issues=[],valid=new Set(arr(pack?.sourceFactIds)),texts=arr(gold?.blocks).map(b=>b.text||'').join(' '),total=units(texts,pack?.locale);
  if(gold?.version!==S02_GOLD_STANDARD_VERSION)issues.push('GOLD_STANDARD_VERSION');
