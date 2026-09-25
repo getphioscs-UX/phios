@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import {chromium} from 'playwright';
+import {PDFDocument} from 'pdf-lib';
 
 const root='artifacts/bazi-r9-browser';
 const origin='http://127.0.0.1:8788';
 const widths=[1440,390];
-const screenshotPages=new Set([1,6,7,11,20,30,40,50,60,63]);
-const evidence={schemaVersion:'BAZI_R9_BROWSER_AUDIT_V1',variants:[],print:[],errors:[],humanAccepted:false};
+const screenshotPages=new Set([1,6,7,11,20,23,24,25,26,27,28,29,30,39,40,44]);
+const evidence={schemaVersion:'BAZI_R11_CANONICAL_BROWSER_PDF_AUDIT_V1',variants:[],print:[],physicalPdf:[],errors:[],humanAccepted:false};
 const browser=await chromium.launch({headless:true});
 try{
  for(const locale of ['en','zh-Hans']){
@@ -38,7 +39,7 @@ try{
     if(m.overflowY)evidence.errors.push(`OVERFLOW_Y:${locale}:${width}:P${m.pageNumber}`);
     if(m.pageNumber>=6&&(m.paginationCount!==1||m.headerCount!==1||m.footerCount!==1))evidence.errors.push(`PAGE_CHROME:${locale}:${width}:P${m.pageNumber}`);
     if(m.minBodyFont!==null&&m.minBodyFont<16)evidence.errors.push(`FONT_MIN:${locale}:${width}:P${m.pageNumber}:${m.minBodyFont}`);
-    if(/BAZI_FULL_REPORT:|PPR-C1-|CMP-|[a-f0-9]{32,}|OpenAI|DeepSeek|T[0-3]_|PROVIDER_|SECTION_BLOCK_|claimIr|sourceRefs/i.test(m.text))evidence.errors.push(`INTERNAL_LEAK:${locale}:P${m.pageNumber}`);
+    if(/BAZI_FULL_REPORT:|PPR-C1-|CMP-|[a-f0-9]{32,}|OpenAI|DeepSeek|T[0-3]_|PROVIDER_|SECTION_BLOCK_|claimIr|sourceRefs|STEM_COMBINATION|BRANCH_(?:HARM|SELF_PUNISHMENT|REPEAT)|\b(?:YEAR|MONTH|DAY|HOUR)\b(?=\s*(?:and|且|，|\.|$))/i.test(m.text))evidence.errors.push(`INTERNAL_LEAK:${locale}:P${m.pageNumber}`);
     if(width===1440&&screenshotPages.has(m.pageNumber)){
      await page.locator(`#report [data-page-number="${m.pageNumber}"]`).screenshot({path:`${root}/${locale}-desktop-P${String(m.pageNumber).padStart(2,'0')}.png`});
     }
@@ -65,7 +66,12 @@ try{
     }));
     if(print.some(x=>x.overflow||x.footerOverlap))evidence.errors.push(`PRINT_FIT:${locale}`);
     evidence.print.push({locale,metrics:print});
-    await page.pdf({path:`${root}/bazi-r9-${locale}.pdf`,preferCSSPageSize:true,printBackground:true});
+    const pdfPath=`${root}/bazi-r11-${locale}.pdf`;
+    await page.pdf({path:pdfPath,preferCSSPageSize:true,printBackground:true});
+    const pdf=await PDFDocument.load(fs.readFileSync(pdfPath));
+    const physicalPages=pdf.getPageCount();
+    evidence.physicalPdf.push({locale,logicalPages:snapshot.totalPages,physicalPages,match:physicalPages===snapshot.totalPages});
+    if(physicalPages!==snapshot.totalPages)evidence.errors.push(`PHYSICAL_PAGE_COUNT:${locale}:${physicalPages}/${snapshot.totalPages}`);
    }
    await page.close();
   }
