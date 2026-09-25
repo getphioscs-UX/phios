@@ -1,5 +1,5 @@
 import { resolvePublicAssetForWeb } from '../runtime/web-production/asset-resolver.js';
-import { loadSevenVolumeBooks, loadSevenVolumeParts, resolveSevenVolumeBookCover, resolveSevenVolumeBookBranding } from './public-surface-data-seven.js';
+import { loadEightVolumeBooks, loadEightVolumeParts, resolveSevenVolumeBookCover, resolveSevenVolumeBookBranding } from './public-surface-data-seven.js';
 
 const JSON_HEADERS = Object.freeze({ Accept: 'application/json' });
 
@@ -27,8 +27,11 @@ export const BOOK_BRANDING_ASSET_CODE_BY_ID = Object.freeze({
   'book-1': 'PHIOS-BRANDING-VOLUME-I-REALITY-FORMATION-V1',
   'book-2': 'PHIOS-BRANDING-VOLUME-II-REALITY-RUNTIME-V1',
   'book-3': 'PHIOS-BRANDING-VOLUME-III-REALITY-CONTINUITY-V1',
-  'book-4': 'PHIOS-BRANDING-VOLUME-IV-REALITY-CIVILIZATION-V1',
-  'book-5': 'PHIOS-BRANDING-VOLUME-V-REALITY-NAVIGATION-V1'
+  'book-4': 'BOOK-4-BRANDING',
+  'book-5': 'BOOK-5-BRANDING',
+  'book-6': 'BOOK-6-BRANDING',
+  'book-7': 'BOOK-7-BRANDING',
+  'book-8': 'BOOK-8-BRANDING'
 });
 
 export const BOOK_ASSET_CODE_BY_ID = Object.freeze({
@@ -36,7 +39,10 @@ export const BOOK_ASSET_CODE_BY_ID = Object.freeze({
   'book-2': 'BOOK-2-HARDCOVER',
   'book-3': 'BOOK-3-HARDCOVER',
   'book-4': 'BOOK-4-HARDCOVER',
-  'book-5': 'BOOK-5-HARDCOVER'
+  'book-5': 'BOOK-5-HARDCOVER',
+  'book-6': 'BOOK-6-HARDCOVER',
+  'book-7': 'BOOK-7-HARDCOVER',
+  'book-8': 'BOOK-8-HARDCOVER'
 });
 
 async function fetchJson(path) {
@@ -49,11 +55,11 @@ async function fetchJson(path) {
 }
 
 export async function loadCanonicalBooks() {
-  return loadSevenVolumeBooks();
+  return loadEightVolumeBooks();
 }
 
 export async function loadCanonicalParts() {
-  return loadSevenVolumeParts();
+  return loadEightVolumeParts();
 }
 
 export async function loadFigureRegistry() {
@@ -159,7 +165,7 @@ export async function loadFiveVolumePublicationContextRegistry() {
   ) {
     throw new Error('WPR_PUBLICATION_CONTEXT_REGISTRY_INVALID');
   }
-  const [books, parts] = await Promise.all([loadSevenVolumeBooks(), loadSevenVolumeParts()]);
+  const [books, parts] = await Promise.all([loadEightVolumeBooks(), loadEightVolumeParts()]);
   return {
     ...registry,
     architecture: books.architecture,
@@ -301,5 +307,5 @@ export function readingPathVolumeTransition(
 }
 
 function toRoman(value) {
-  return ['I', 'II', 'III', 'IV', 'V'][Number(value) - 1] || String(value || '');
+  return ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][Number(value) - 1] || String(value || '');
 }
