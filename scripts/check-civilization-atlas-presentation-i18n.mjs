@@ -118,4 +118,14 @@ assert.ok(shell.includes('aria-pressed'),'In-page Atlas entrance buttons must ex
 assert.ok(accessibility.includes("querySelectorAll('[data-atlas-entry]')"),'Keyboard navigation must include the Reconfiguration link as a focusable entrance.');
 assert.ok(accessibility.includes("if(entry?.dataset.atlasLayer)"),'Keyboard navigation must not fake-activate the Reconfiguration link.');
 
+const askContext=read('assets/js/pages/civilization-atlas/atlas-ask-context.js');
+const crossLayer=read('assets/js/pages/civilization-atlas/cross-layer-context.js');
+assert.ok(crossLayer.includes('trajectoryMap'),'Ask summary must resolve trajectory titles instead of exposing raw IDs.');
+assert.ok(!crossLayer.includes('Case=${current.caseId}'),'Ask summary must not expose raw case IDs.');
+assert.ok(!crossLayer.includes('Snapshot=${snapshot.snapshotId}'),'Ask summary must not expose raw snapshot IDs.');
+assert.ok(!crossLayer.includes('Transition=${transition.transitionWindowId}'),'Ask summary must not expose raw transition IDs.');
+assert.ok(askContext.includes('primaryCaseId:state.primaryCaseId||null'),'Machine retrieval scope must retain precise case identity.');
+assert.ok(askContext.includes('snapshotId:state.snapshotId||null'),'Machine retrieval scope must retain precise snapshot identity.');
+assert.ok(!askContext.includes('sourceReading')&&!askContext.includes('manuscriptPath'),'Atlas Ask context must not carry private manuscript paths.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
