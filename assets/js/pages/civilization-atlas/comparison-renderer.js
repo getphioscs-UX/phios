@@ -1,3 +1,4 @@
+import {resolveAtlasVisualById} from './atlas-static-visual.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
 const loc=(v,lang)=>v?.[lang]||v?.en||v?.['zh-Hans']||'';
 const label=(obj,lang)=>loc(obj?.label,lang)||'—';
@@ -8,8 +9,7 @@ const DIMENSION_FIELD={
   ENERGY_DENSITY:'energyBase',INDUSTRIAL_CAPACITY:'technology',INFORMATION_SPEED:'externalNetwork',GLOBAL_DEPENDENCY:'externalNetwork'
 };
 function cellFor(caseRecord,dimensionId,lang){if(!caseRecord)return'—'; const field=DIMENSION_FIELD[dimensionId]; return field?label(caseRecord[field],lang):'—';}
-const PAGE=12;
-const visualBy=(bindings,family,subjectId)=>(bindings?.assets||[]).find(a=>a.family===family&&a.subjectId===subjectId&&a.reviewState==='ACCEPTED'&&a.bindingState==='BOUND')||null;
+const visualBy=(bindings,family,subjectId)=>{const a=(bindings?.assets||[]).find(x=>x.family===family&&x.subjectId===subjectId);return a?resolveAtlasVisualById(bindings,a.assetId):null;};
 const short=(v,max=92)=>{const x=String(v||'—').trim();return x.length>max?x.slice(0,max-1)+'…':x;};
 const matrixCell=(caseRecord,dimensionId,lang)=>{
  const value=cellFor(caseRecord,dimensionId,lang);
@@ -19,7 +19,7 @@ export function renderComparison(container,{registry,casesRegistry,visualBinding
   const lang=locale==='zh-Hans'?'zh-Hans':'en'; const families=registry?.families||[]; const cases=casesRegistry?.cases||[];
   const selected=families.find(f=>f.familyId===state.comparisonFamilyId)||families.find(f=>(state.compareBasket||[]).some(id=>f.caseIds.includes(id)))||families[0]||null;
   const caseMap=new Map(cases.map(c=>[c.caseId,c])); const familyMap=new Map(families.map(f=>[f.familyId,f]));
-  const basket=(state.compareBasket||[]).filter(id=>selected?.caseIds.includes(id)); const matrixIds=(basket.length>=2?basket:selected?.caseIds||[]).slice(0,4);
+  const basket=(state.compareBasket||[]).filter(id=>selected?.caseIds.includes(id));
   const familyVisual=visualBy(visualBindings,'COMPARISON_FAMILY',selected?.familyId);
   const representatives=(basket.length>=2?basket:selected?.caseIds||[]).slice(0,6);
   const matrixCases=(basket.length>=2?basket:representatives.slice(0,4));
