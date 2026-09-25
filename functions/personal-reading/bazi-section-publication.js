@@ -185,8 +185,10 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const temporal=claims.filter(x=>x.relationType==='TEMPORAL_RELEVANCE');
   const open=claims.filter(x=>x.relationType==='OPEN_CONDITION');
   const mk=(key,lead,list)=>{
-   const refs=[...new Set(list.flatMap(x=>x.sourceRefs||[]))],body=list.map(x=>humanizePublicationStatement(x.text)).join(' ');
-   modules[key]={blocks:[block(lead,`${edRef}#S09_GUIDANCE`,'EDITORIAL_GUIDANCE'),...(body?[block(body,refs.join('|'),'METHOD_INTERPRETATION')]:[])],boundary:authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||''};
+   modules[key]={blocks:[
+    block(lead,`${edRef}#S09_GUIDANCE`,'EDITORIAL_GUIDANCE'),
+    ...list.map(x=>block(humanizePublicationStatement(x.text),(x.sourceRefs||[]).join('|'),'METHOD_INTERPRETATION'))
+   ],boundary:authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||''};
   };
   mk('guidancePriorities',pick(
    'The most useful guidance comes from themes that repeat across several parts of the chart. This page brings those recurring priorities into one reading order so they can be acted on without collapsing the whole report into a single verdict.',
