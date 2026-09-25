@@ -36,8 +36,8 @@ const book6Atlas = Object.freeze({
       contextFigures: '相关第六册图件',
       currentDataNotAdmitted: '这个运行档案尚未接入已获准的当前资料。',
       currentDataBoundary: '当前资料结构已经就绪，但尚未发布通过证据门槛的实时数值，因此不会用推断填满。',
-      runtimeReadout: 'Reality Readout 运行读数',
-      runtimeReadoutLead: 'Canonical Reality Readout Engine 已经接入；当当前证据不足时，它会返回证据边界，而不是自行补造数值。',
+      runtimeReadout: '现实运行读数',
+      runtimeReadoutLead: '规范运行读取引擎已经接入；当当前证据不足时，它会返回证据边界，而不是自行补造数值。',
       runtimeEvidenceGateOpen: '当前证据门槛尚未满足',
       runtimeConfidence: '读数置信状态',
       runtimeConfidenceUnknown: '依据已接纳证据暂时无法判定',
@@ -130,12 +130,12 @@ const book6Atlas = Object.freeze({
       SUCCESSOR_ECONOMIC: '重新配置的经济与网络安排',
       SUCCESSOR_TECH: '重新配置的技术与协调层',
       SUCCESSOR_POSTCOLONIAL: '后殖民国家或区域配置',
-      CASE_PRESSURE_BOUNDARY: '压力范围以书稿已建立的案例边界为准；B6-WEB-C 不额外断言细颗粒因果权重。',
+      CASE_PRESSURE_BOUNDARY: '压力范围以书稿与已登记案例边界为准；证据不足时不额外断言细颗粒因果权重。',
       CASE_UNKNOWN_BOUNDARY: '细颗粒因果归因、量化影响与争议性解释，不以推断补填。',
       WINDOW_PRESSURE_BOUNDARY: '窗口压力由其重叠案例的受治理集合表示；不会生成合成排名。',
       WINDOW_SUCCESSOR_BOUNDARY: '继任配置仍以各案例为边界；这个窗口不主张单一确定结果。',
       WINDOW_UNKNOWN_BOUNDARY: '窗口层面的因果权重仍保持未知；关联案例各自保留证据边界。',
-      DOSSIER_CURRENT_NOT_ADMITTED: '当前资料证据尚未通过正式接纳；未知是当前受治理结果。'
+      DOSSIER_CURRENT_NOT_ADMITTED: '当前资料证据尚未通过正式接纳；在证据接纳以前不以推断值补填。'
     },
     value: {
       UNKNOWN: '未知', UNVERIFIED: '尚未验证', NOT_APPLICABLE: '不适用',
