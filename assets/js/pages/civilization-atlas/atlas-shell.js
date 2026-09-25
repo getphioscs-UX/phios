@@ -57,7 +57,7 @@ ${CIVILIZATION_LAYERS.has(state.activeLayer)?`<div class="civ-atlas-subnav" aria
     const active=renderTransitions(content,{registry:data.transitions,state,locale:lang,onSelect:id=>onStateChange({transitionWindowId:id},{source:'transition-select'})});
     renderTransitionInspector(inspector,{windowRecord:active,locale:lang});
   }else if(state.activeLayer==='loss'&&data.loss){
-    const selection=renderLossAtlas(content,{registry:data.loss,state,locale:lang,onFamilySelect:id=>onStateChange({lossFamilyId:id,lossTypeId:null},{source:'loss-family'}),onLossSelect:id=>onStateChange({lossTypeId:id},{source:'loss-type'})});
+    const selection=renderLossAtlas(content,{registry:data.loss,casesRegistry:data.cases,state,locale:lang,onFamilySelect:id=>onStateChange({lossFamilyId:id,lossTypeId:null},{source:'loss-family'}),onLossSelect:id=>onStateChange({lossTypeId:id},{source:'loss-type'})});
     renderLossInspector(inspector,{selection,locale:lang});
   }else{
     content.innerHTML=`<div class="civ-atlas-empty"><span aria-hidden="true">Φ</span><p>${esc(c.empty)}</p><small>${esc(c.evidence)}</small></div>`;
