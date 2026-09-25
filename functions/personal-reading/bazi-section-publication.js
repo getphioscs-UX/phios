@@ -97,7 +97,18 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:section,locale,temporalSnapshot:temporalContext});
   const claims=authority.claims.filter(x=>x.relationType!=='BOUNDARY');
   const boundary=authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||'';
-  const select=types=>claims.filter(x=>types.includes(x.relationType));
+  const select=types=>{
+   const pool=claims.filter(x=>types.includes(x.relationType));
+   const limited=[];
+   for(const type of types){
+    let rows=pool.filter(x=>x.relationType===type);
+    if(type==='CONTEXT_MODIFIER')rows=rows.slice(0,1);
+    if(type==='CROSS_SECTION_RELEVANCE')rows=rows.slice().sort((a,b)=>(a.wholeChartRank??a.rank??99)-(b.wholeChartRank??b.rank??99)).slice(0,2);
+    if(type==='ASSOCIATION')rows=rows.slice(0,1);
+    limited.push(...rows);
+   }
+   return limited;
+  };
   const toBlock=(key,lead,selected)=>{
    const unique=[...new Map(selected.filter(Boolean).map(x=>[x.id,x])).values()];
    modules[key]={blocks:[
@@ -163,11 +174,22 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    '关系建议只有在“反复结构”与“固定结果”被分开后才更可靠。跨结构重点可以识别持续出现的关系主线；未定条件则避免把婚姻、分离或伴侣结果写成没有依据的确定结论。'
   ),types:['CROSS_SECTION_RELEVANCE','OPEN_CONDITION','CONTRAST']}
  ]);
- await makeNarrative('healthNarrative','S07_HEALTH','PRESSURE');
- if(modules.healthNarrative){
-  modules.healthNarrative.blocks.unshift(block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'));
- }else{
-  paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale]],`${edRef}#S07_HEALTH`);
+ {
+  const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S07_HEALTH',locale,temporalSnapshot:temporalContext});
+  const claims=authority.claims.filter(x=>x.relationType!=='BOUNDARY');
+  const first=type=>claims.find(x=>x.relationType===type);
+  const cross=claims.filter(x=>x.relationType==='CROSS_SECTION_RELEVANCE').slice().sort((a,b)=>(a.wholeChartRank??a.rank??99)-(b.wholeChartRank??b.rank??99))[0];
+  const selected=[
+   first('LIFE_DOMAIN_EXPLANATION'),
+   first('TENSION'),
+   first('OPERATING_CONDITION'),
+   cross,
+   first('OPEN_CONDITION')
+  ].filter(Boolean);
+  modules.healthNarrative={blocks:[
+   block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'),
+   ...selected.map(x=>block(humanizePublicationStatement(x.text),(x.sourceRefs||[]).join('|'),'METHOD_INTERPRETATION'))
+  ],boundary:authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||''};
  }
  const itemMap={chartHighlights:'S01_OVERVIEW',strengths:'S02_PERSONALITY',lifeStructureInsights:'S03_LIFE_STRUCTURE',careerFields:'S04_CAREER',financialAdvice:'S05_WEALTH',relationshipAdvice:'S06_RELATIONSHIP',wellnessAdvice:'S07_HEALTH',timingInsights:'S08_TIMING',nextSteps:'S09_GUIDANCE',appendixInsights:'S10_APPENDIX'};
  for(const [key,section] of Object.entries(itemMap))modules[key]={blocks:[],items:e(section).items.map(i=>block(i[locale],`${edRef}#${section}`))};
@@ -181,7 +203,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  {
   const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S09_GUIDANCE',locale,temporalSnapshot:temporalContext});
   const claims=authority.claims.filter(x=>x.relationType!=='BOUNDARY');
-  const ranked=claims.filter(x=>x.relationType==='CROSS_SECTION_RELEVANCE').slice().sort((a,b)=>(a.rank??99)-(b.rank??99));
+  const ranked=claims.filter(x=>x.relationType==='CROSS_SECTION_RELEVANCE').slice().sort((a,b)=>(a.rank??99)-(b.rank??99)).slice(0,3);
   const temporal=claims.filter(x=>x.relationType==='TEMPORAL_RELEVANCE');
   const open=claims.filter(x=>x.relationType==='OPEN_CONDITION');
   const mk=(key,lead,list)=>{
