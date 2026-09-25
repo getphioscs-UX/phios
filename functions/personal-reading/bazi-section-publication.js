@@ -295,7 +295,14 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
-   const chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits,minUnits:budget[locale==='en'?'en':'zh']?.[0]||0});
+   let chunks;
+   try{
+    chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits,minUnits:budget[locale==='en'?'en':'zh']?.[0]||0});
+   }catch(error){
+    const units=pb.contentBlocks.map(b=>textUnits(b.text,locale));
+    const e=new Error(`${error?.message||'SECTION_BLOCK_PARTITION_FAILED'}:${locale}:${pb.definitionKey}:${pb.pageFamily}:units=${units.join(',')}:min=${budget[locale==='en'?'en':'zh']?.[0]||0}:max=${maxUnits}`);
+    e.cause=error;throw e;
+   }
    if(!chunks.length)chunks.push([]);
    for(const [i,chunk] of chunks.entries())pages.push({...base,pageKey:pb.definitionKey+(pb.visualContinuation||'')+(i?`_CONT_${i+1}`:''),definitionKey:pb.definitionKey,pageFamily:pb.pageFamily,title:pb.title+(i||pb.visualContinuation?pick(' · continued',' · 续'):''),paragraphs:chunk.map(b=>b.text),facts:i?[]:pb.facts,sourcePages:i?[]:pb.sourcePages,primaryVisualRef:pb.primaryVisualRef||null,primaryVisualHtml:i?null:pb.primaryVisualHtml||null,items:i?[]:pb.items.map(b=>b.text),temporal:pb.temporal,observations:i?[]:pb.observations,boundary:i===chunks.length-1?pb.boundary:'',visualVariant:'BODY',contentBudget:{units:chunk.reduce((sum,b)=>sum+textUnits(b.text,locale),0),maximum:maxUnits}});
   }
