@@ -241,10 +241,10 @@ function renderLived(host,data,l,state,store){
 }
 function renderVisualLibrary(host,data,l){
  const c=COPY[l];
- const assets=(data.visualBindings?.assets||[]).map(a=>resolveAtlasVisualById(data.visualBindings,a.assetId)).filter(Boolean);
+ const assets=(data.visualBindings?.assets||[]).filter(a=>a.family==='WORLD_RECONFIGURATION_SNAPSHOT').map(a=>resolveAtlasVisualById(data.visualBindings,a.assetId)).filter(Boolean);
  const families=uniq(assets.map(a=>a.family)).sort();
  if(!assets.length){host.innerHTML=`<p>${esc(c.unverified)}</p>`;return;}
- host.innerHTML=`<section class="civ-reconfig-visual-library"><h3>${esc(c.visualLibrary)}</h3><p>${esc(c.visualLibraryLead)}</p><p class="cx-meta">${assets.length} ${esc(c.visualCount)}</p><div class="civ-reconfig-snapshot-controls"><label>${esc(c.visualFamily)}<select data-visual-family>${families.map(f=>`<option value="${esc(f)}">${esc(visualFamilyLabel(f))}</option>`).join('')}</select></label><label>${esc(c.visualSubject)}<select data-visual-subject></select></label></div><div data-visual-preview></div></section>`;
+ host.innerHTML=`<section class="civ-reconfig-visual-library"><h3>${esc(c.visualLibrary)}</h3><p>${esc(l==='zh-Hans'?'这里显示第六册正式绑定的 12 张世界重组横切面；完整 392 张文明视觉资料库保留在第五册 Civilization Atlas。':'This view shows the 12 world-reconfiguration snapshots formally bound to Book VI. The full 392-asset visual library remains in the Book V Civilization Atlas.')}</p><p class="cx-meta">${assets.length} ${esc(c.visualCount)}</p><div class="civ-reconfig-snapshot-controls"><label>${esc(c.visualFamily)}<select data-visual-family>${families.map(f=>`<option value="${esc(f)}">${esc(visualFamilyLabel(f))}</option>`).join('')}</select></label><label>${esc(c.visualSubject)}<select data-visual-subject></select></label></div><div data-visual-preview></div></section>`;
  const family=host.querySelector('[data-visual-family]'),subject=host.querySelector('[data-visual-subject]'),preview=host.querySelector('[data-visual-preview]');
  const renderPreview=()=>{
   const a=assets.find(x=>x.assetId===selectedValue(subject));
