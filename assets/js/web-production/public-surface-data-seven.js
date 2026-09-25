@@ -1,7 +1,7 @@
 const BOOKS='/content/registry/successors/eight-volume-v1/books.json';
 const PARTS='/content/registry/successors/eight-volume-v1/parts.json';
 const ASSETS='/content/web-production/registries/wpr-eight-volume-r2-public-assets-v1.json';
-export const BOOK_ROUTE_BY_ID=Object.freeze({'book-1':'/books/reality-formation/','book-2':'/books/reality-runtime/','book-3':'/books/reality-continuity/','book-4':'/books/reality-expansion/','book-5':'/books/reality-differentiation/','book-6':'/books/reality-configuration/','book-7':'/books/reality-observation/','book-8':'/books/reality-navigation/'});
+export const BOOK_ROUTE_BY_ID=Object.freeze({'book-1':'/books/reality-formation/','book-2':'/books/reality-runtime/','book-3':'/books/reality-continuity/','book-4':'/books/reality-expansion/','book-5':'/books/reality-differentiation/','book-6':'/books/reality-reconfiguration/','book-7':'/books/reality-observation/','book-8':'/books/reality-navigation/'});
 const json=async p=>{const r=await fetch(p,{credentials:'same-origin',signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});if(!r.ok)throw new Error(`EIGHT_VOLUME_SOURCE_UNAVAILABLE:${p}`);return r.json()};
 export async function loadEightVolumeBooks(){const r=await json(BOOKS);if(r.architecture!=='eight-volume'||!Array.isArray(r.books)||r.books.length!==8)throw new Error('EIGHT_VOLUME_BOOK_REGISTRY_INVALID');return r}
 export async function loadEightVolumeParts(){const r=await json(PARTS);if(r.architecture!=='eight-volume'||!Array.isArray(r.parts)||r.parts.length!==15)throw new Error('EIGHT_VOLUME_PART_REGISTRY_INVALID');return r}
