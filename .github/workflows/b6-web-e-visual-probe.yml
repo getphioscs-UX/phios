@@ -23,6 +23,7 @@ on:
       - 'scripts/check-book6-public-articles-bilingual.mjs'
       - 'scripts/check-civilization-atlas-customer-visual-activation.mjs'
       - 'scripts/check-civilization-atlas-presentation-i18n.mjs'
+      - 'scripts/check-civilization-atlas-live-public.mjs'
       - 'articles/book6-*.html'
       - 'content/books/book-6/articles/**'
       - 'content/knowledge/public/successors/book6-publication-v1/**'
@@ -50,5 +51,7 @@ jobs:
         run: npm run check:b6-web-c && npm run check:b6-web-d
       - name: Atlas customer cutover
         run: npm run check:civilization-atlas:customer-cutover
+      - name: Canonical live Atlas + bilingual article smoke
+        run: npm run check:civilization-atlas:live-public
       - name: Live R2 23-core-visual probe
         run: npm run check:b6-web-e:live
