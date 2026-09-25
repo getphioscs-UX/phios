@@ -26,7 +26,9 @@ on:
       - 'scripts/check-civilization-atlas-fr2-asset-led-ui.mjs'
       - 'scripts/check-civilization-atlas-live-public.mjs'
       - 'scripts/check-b6-web-f-successor-human-review.mjs'
+      - 'scripts/check-b6-web-fr2-human-review.mjs'
       - 'tools/review/B6-WEB-F-SUCCESSOR-HUMAN-REVIEW.html'
+      - 'tools/review/B6-WEB-FR2-HUMAN-REVIEW.html'
       - 'articles/book6-*.html'
       - 'content/books/book-6/articles/**'
       - 'content/knowledge/public/successors/book6-publication-v1/**'
@@ -56,6 +58,8 @@ jobs:
         run: npm run check:civilization-atlas:customer-cutover
       - name: B6-WEB-F human review surface guard
         run: npm run check:b6-web-f:human-review-surface
+      - name: B6-WEB-FR2 human review surface guard
+        run: npm run check:b6-web-fr2:human-review-surface
       - name: Canonical live Atlas + bilingual article smoke
         run: npm run check:civilization-atlas:live-public
       - name: Live R2 23-core-visual probe
