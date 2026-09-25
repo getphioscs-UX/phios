@@ -353,16 +353,16 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const t=r11Topic('CAREER'),repeated=r11Repeated(t),carry=t.carryingContext||{};
   r11Module('careerRoleSystem','CAREER',[
    pick(
-    'Work is one of the places where this chart is likely to feel responsibility very directly. Seven Killings and Direct Officer both recur, so roles that carry standards, deadlines, accountability or other people’s expectations are unlikely to feel “neutral” to you: how responsibility is assigned and how much control you have over delivery can strongly affect whether the same role feels purposeful or draining.',
-    '工作是这张命盘里最容易直接感受到“责任”的领域之一。七杀与正官都反复出现，因此只要角色里带有标准、期限、问责或他人期待，你通常不会把它当成一件很中性的事：责任怎样分配、你对执行有多少掌控，会明显影响同一个职位究竟让你觉得有方向，还是越来越消耗。'
+    'Work is one of the places where this chart is likely to feel responsibility most directly. Seven Killings and Direct Officer both recur, so roles with standards, deadlines, accountability or other people’s expectations rarely feel neutral: how responsibility is assigned, and how much control you have over delivery, strongly affects whether the same role feels purposeful or draining.',
+    '工作是这张命盘最容易直接感受到“责任”的领域之一。七杀与正官反复出现，所以只要角色带有标准、期限、问责或他人期待，你通常不会把它当成中性的事：责任怎样分配、你对执行有多少掌控，会明显影响这个职位让你更有方向，还是越来越消耗。'
    ),
    pick(
-    'The Resource side remains active at the same time. That means taking on more responsibility is not the whole story; your work tends to function better when there is something solid to learn from, a framework you can rely on, or enough information and support to turn pressure into competent action. Responsibility without support can feel very different from responsibility backed by knowledge and structure.',
-    '同时，印星／支持这一侧也持续参与。也就是说，事业并不是“责任越多越好”；当你有可以依靠的知识、方法、框架或足够的信息支持时，压力更容易转化成能力与执行。相反，如果责任不断增加，却没有相应的学习空间、资讯或支持，同样的工作要求就更容易变成消耗。'
+    'The Resource side remains active too. Taking on more responsibility is therefore not the whole story: work tends to function better when you have solid knowledge, a usable framework, and enough information or support to turn pressure into competent action. Responsibility without support can feel very different from responsibility backed by structure.',
+    '同时，印星／支持也持续参与。事业并不是“责任越多越好”；当有可依靠的知识、方法、框架和资讯支持时，压力更容易转化成能力与执行。相反，如果责任增加，却没有学习空间、资讯或支持，同样的要求就更容易变成消耗。'
    ),
    pick(
-    'Wealth functions are also present inside the career frame, so work is not only about meeting standards. Resource access matters too: whether you can mobilize budget, tools, people, opportunities or decision space changes how effectively you can carry what is being asked of you. A demanding role with real resources can operate very differently from a demanding role that expects results without giving you enough means to produce them.',
-    '财星也进入事业框架，所以工作并不只是“把标准做到”。你能不能实际调动资源同样重要——预算、工具、人手、机会、决策空间是否到位，会直接改变你承接责任的方式。一个要求高、但资源真实可用的角色，和一个只要求结果、却不给足资源的角色，对你来说会是两种完全不同的工作体验。'
+    'Wealth functions are also present inside the career frame, so work is not only about meeting standards. Whether you can mobilize budget, tools, people, opportunities or decision space changes how effectively you can carry responsibility. A demanding role with real resources is very different from one that expects results without giving you enough means to deliver.',
+    '财星也进入事业框架，所以工作不只是“把标准做到”。你能否调动预算、工具、人手、机会或决策空间，会改变你承接责任的方式。一个要求高但资源可用的角色，和一个只要结果却不给足资源的角色，会是两种完全不同的工作体验。'
    )
   ],{boundary:'',observations:[]});
   r11Module('careerWorkingDirection','CAREER',[
