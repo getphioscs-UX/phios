@@ -33,9 +33,9 @@ export const BAZI_SECTION_EDITORIAL={
    '十神描述的是相对于日主的不同功能：自我位置、学习与支持、表达与产出、资源与交换、责任与压力。真正有用的性格读取，需要看哪些功能突出、哪些功能彼此协作，以及什么条件会让这些能力更容易或更难稳定发挥。'
   ),
   items:[
-   pair('Personality is read as a functional pattern, not a fixed identity. The same underlying structure can appear differently when support, role and expectations change.','性格应被理解为功能模式，而不是固定身份。同一套底层结构，在支持、角色与期待改变时，可以呈现出不同表现。'),
-   pair('Ten God prominence is most useful when read in combination. Learning, expression, resources, peers and responsibility can reinforce or compete with one another.','十神的重点必须放在组合中阅读。学习、表达、资源、同类与责任之间，可能互相支持，也可能彼此争夺空间。'),
-   pair('A strong interpretation explains how capability is developed and sustained. It should connect the visible structure to repeatable ways of learning, acting and responding—not merely list traits.','好的性格解读要说明能力怎样形成、怎样被维持。它应把可见结构连接到反复出现的学习、行动与回应方式，而不是只列出性格形容词。')
+   pair('Core style comes from the relationship between the leading capability function and the other functions that remain active around it, not from one personality label.','核心运作方式来自首要能力功能与周围其他功能的关系，而不是一个性格标签。'),
+   pair('Learning, absorption and expression are different layers of capability. A skill may be available internally while still needing different conditions to become consistent output.','学习、吸收与表达是能力的不同层次。一项能力可以已经存在，但仍需要不同条件才能成为稳定输出。'),
+   pair('Reliability depends on carrying conditions. Support, external demand and the cost of expression influence whether capability remains usable over time.','能力能否稳定使用取决于承载条件。支持、外部要求与表达成本会共同影响能力能否长期保持可用。')
   ]
  },
  S03_LIFE_STRUCTURE:{
@@ -63,9 +63,9 @@ export const BAZI_SECTION_EDITORIAL={
    '事业主题只有从符号转换成工作条件后才真正有用：需要交付什么、拥有多少自主权、标准如何设定、有哪些支持、资源如何在角色中流动。同一张命盘，在两种结构完全不同的工作里，实际运作方式可以差异很大。'
   ),
   items:[
-   pair('Responsibility and output should be read together. A role becomes sustainable when what you are expected to carry is matched by enough authority, information and support to deliver it.','责任与产出需要一起阅读。一个角色要长期可持续，所承担的要求必须与足够的权限、信息与支持相匹配。'),
-   pair('Career fit is more specific than job title. Decision scope, pace, accountability, collaboration and resource access often matter more than the industry label itself.','事业适配比职位名称更具体。决策范围、节奏、责任方式、协作结构与资源获取，往往比行业标签本身更重要。'),
-   pair('Repeated career patterns are most informative when they appear across more than one role. Look for the working condition that keeps recurring beneath different titles or employers.','事业模式在不同角色中反复出现时最有解释力。与其只看职位或公司，更值得观察的是哪些工作条件一直重复出现。')
+   pair('Career fit depends more on role structure than on job title: responsibility, autonomy, standards, resources and support need to be read together.','事业适配更取决于角色结构，而不是职位名称：责任、自主权、标准、资源与支持需要一起阅读。'),
+   pair('The same capability can operate very differently under different working conditions. Authority, workload and clarity of expectations materially change how the structure is carried.','同一套能力在不同工作条件下可以表现得很不一样。权限、工作量与期待是否清楚，会明显改变结构如何被承载。'),
+   pair('Long-term career direction is best read from themes that repeat across several parts of the chart, not from one isolated profession symbol.','长期事业方向更适合从整盘反复出现的主题中判断，而不是从一个孤立的职业符号推出。')
   ]
  },
  S05_WEALTH:{
@@ -78,9 +78,9 @@ export const BAZI_SECTION_EDITORIAL={
    '有用的财富读取不会只停在“得到资源”，而是追踪完整的资源循环：资源从哪里来、需要交换什么、哪些力量会分流资源，以及需要怎样的结构才能保留、管理或重新投入。'
   ),
   items:[
-   pair('Wealth symbols describe resource interaction, not guaranteed money. The interpretation becomes stronger when production, exchange and responsibility are read as one connected process.','财星描述资源互动，不等于保证金钱结果。把产出、交换与责任放在同一条链上阅读，解释才会更完整。'),
-   pair('Resource opportunity and resource retention are different questions. A chart may show how resources enter a system without automatically answering how easily they are kept.','资源机会与资源留存是两个不同问题。命盘可以说明资源怎样进入系统，却不自动说明这些资源是否容易被保留下来。'),
-   pair('Timing can change which resource theme is more visible, but financial decisions still require actual cash flow, obligations, risk and evidence outside the symbolic reading.','时间层会改变某些资源主题的可见度，但真实财务决定仍必须依据现金流、义务、风险与命盘之外的现实证据。')
+   pair('Wealth is read as a resource cycle: how value enters, what must be exchanged for it and what competing demands act on it afterward.','财富要按资源循环来读：价值如何进入、需要交换什么，以及之后有哪些要求会分流资源。'),
+   pair('Resource opportunity and resource retention are different structural questions. Receiving more does not automatically mean keeping more.','资源机会与资源留存是两个不同问题。得到更多，并不自动等于能够留下更多。'),
+   pair('Symbolic wealth structure does not equal a financial outcome. Real decisions still require cash flow, obligations, risk and market evidence outside the chart.','象征性的财富结构不等于现实财务结果。真实决定仍需要命盘之外的现金流、义务、风险与市场证据。')
   ]
  },
  S06_RELATIONSHIP:{
@@ -93,9 +93,9 @@ export const BAZI_SECTION_EDITORIAL={
    '关系结构需要把自我位置与面向伴侣的功能放在一起阅读。吸引、责任、支持与边界，可能分别属于同一个关系模式的不同部分。真正需要理解的不只是“谁会出现”，而是两个人开始互动以后，关系怎样被组织起来。'
   ),
   items:[
-   pair('Relationship reading is relational, not solitary. The chart can describe your recurring position and expectations, while the other person remains an independent participant with their own structure and choices.','关系读取必须保留“双方”这一事实。命盘可以描述你反复出现的位置与期待，但对方仍然是拥有自己结构与选择的独立参与者。'),
-   pair('Support and responsibility can coexist with tension. A mature reading looks at how these functions are negotiated instead of labeling a relationship simply good or bad.','支持、责任与张力可以同时存在。成熟的关系解读，会观察这些功能如何被协商，而不是简单把一段关系标成好或坏。'),
-   pair('Recurring relationship themes are best understood through interaction patterns: expectations, communication, exchange and boundaries across more than one meaningful situation.','反复出现的关系主题，最适合从互动模式理解：期待、沟通、交换与边界，是否在多个重要情境中持续出现。')
+   pair('Relationship reading begins with your recurring position: expectations, exchange, support, responsibility and boundaries need to be read together.','关系读取先看你反复出现的位置：期待、交换、支持、责任与边界需要一起理解。'),
+   pair('Recorded links and tensions show where interaction may require negotiation. They describe relational structure, not the other person’s hidden motives.','已记录的联结与张力显示哪些互动需要协商；它们描述关系结构，不代表对方的隐藏动机。'),
+   pair('The chart can identify recurring relationship themes, but it cannot by itself guarantee marriage, separation or one fixed partner outcome.','命盘可以识别反复出现的关系主题，但不能单独保证婚姻、分离或某一种伴侣结果。')
   ]
  },
  S07_HEALTH:{
@@ -138,9 +138,9 @@ export const BAZI_SECTION_EDITORIAL={
    '整合时要分清：哪些主题在多个章节中重复出现，哪些主题依赖特定条件，哪些判断仍然开放。最有价值的建议，来自反复出现的结构与现实反馈，而不是最戏剧化的一句孤立结论。'
   ),
   items:[
-   pair('Prioritize repeated cross-section themes. When the same structural issue appears in work, resources and relationships, it is usually more actionable than a single isolated observation.','优先处理跨章节重复出现的主题。同一个结构问题若同时出现在事业、资源与关系中，通常比单一观察更具有行动价值。'),
-   pair('Separate stable structure from temporary timing. A current period may intensify a theme without turning it into a permanent identity or lifelong condition.','区分稳定结构与暂时时间层。当前阶段可以放大某个主题，但不应因此把它写成永久身份或终身状态。'),
-   pair('Turn interpretation into a small observable adjustment. The purpose of guidance is to improve navigation: change one condition, observe the result and update the next decision.','把解读转换成一个可以观察的小调整。建议的目的，是改善现实导航：改变一个条件、观察结果，再据此更新下一步决定。')
+   pair('Give priority to themes that repeat across several chapters. Repetition across work, resources, relationships and timing is more informative than one isolated statement.','优先关注跨章节重复出现的主题。事业、资源、关系与时间中反复出现的结构，比一句孤立判断更有解释力。'),
+   pair('Keep stable structure separate from temporary timing. A current period can intensify a theme without turning it into a permanent identity.','把稳定结构与阶段性时间分开。当前时期可以放大某个主题，却不会因此变成永久身份。'),
+   pair('Guidance becomes useful when it changes navigation: identify one condition that matters now, make a bounded adjustment and observe what actually changes.','建议只有进入现实导航才真正有用：找出当前最重要的一个条件，做有限调整，再观察真实变化。')
   ]
  },
  S10_APPENDIX:{
