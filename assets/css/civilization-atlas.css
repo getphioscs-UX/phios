@@ -121,3 +121,28 @@
 .civ-world__regions h5,.civ-world__networks h5{font-size:1rem}
 @media(max-width:1024px){.civ-atlas-inspector{position:static}.civ-atlas-inspector__lead{max-width:46rem}}
 @media(max-width:768px){.civ-atlas-shell__intro>div>p:last-child{font-size:1rem}.civ-atlas-canvas>h3{font-size:1.7rem}}
+
+
+/* Civilization Atlas first-screen composition */
+.civ-atlas-primary-visual{margin:1rem 0 1.5rem}
+.civ-atlas-primary-visual .civ-visual-frame{border-radius:22px;box-shadow:0 18px 50px rgb(0 0 0 / .14)}
+.civ-atlas-primary-visual .civ-visual-frame img{width:100%;max-height:34rem;object-fit:cover;aspect-ratio:16/9}
+.civ-atlas-primary-visual .civ-visual-frame figcaption{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1rem;align-items:center}
+.civ-atlas-primary-visual .civ-visual-frame figcaption h4{font-size:1.15rem;margin:0}
+.civ-atlas-primary-visual .civ-visual-frame figcaption p{grid-column:1;margin:0;font-size:.9rem;opacity:.82}
+.civ-atlas-primary-visual .civ-visual-frame figcaption button{grid-column:2;grid-row:1/3}
+.civ-atlas-secondary,.civ-atlas-visual-resources{margin-top:1.5rem;border-top:1px solid var(--phi-border-subtle);padding-top:1rem}
+.civ-atlas-secondary>summary,.civ-atlas-visual-resources>summary{cursor:pointer;font-weight:600;color:var(--phi-text-secondary);padding:.25rem 0}
+.civ-atlas-secondary[open]>summary,.civ-atlas-visual-resources[open]>summary{margin-bottom:1rem}
+.civ-atlas-related-visuals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1rem}
+.civ-atlas-related-visuals>h4{grid-column:1/-1;margin:.25rem 0}
+.civ-atlas-related-visuals .civ-visual-frame figcaption p{font-size:.86rem}
+.civ-atlas-visual-resources .civ-visual-library{margin-top:1rem}
+[data-atlas-layer-content]{margin-top:.25rem}
+[data-atlas-structured-section] [data-atlas-structured-visual]{margin-top:.75rem}
+@media(max-width:768px){
+ .civ-atlas-primary-visual .civ-visual-frame img{max-height:24rem;object-fit:cover}
+ .civ-atlas-primary-visual .civ-visual-frame figcaption{grid-template-columns:1fr}
+ .civ-atlas-primary-visual .civ-visual-frame figcaption button{grid-column:1;grid-row:auto;width:100%}
+ .civ-atlas-related-visuals{grid-template-columns:1fr}
+}
