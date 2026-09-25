@@ -353,32 +353,35 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const t=r11Topic('CAREER'),repeated=r11Repeated(t),carry=t.carryingContext||{};
   r11Module('careerRoleSystem','CAREER',[
    pick(
-    `Career is anchored in ${R11_GROUP[t.leadGroup.groupCode]}. Seven Killings and Direct Officer both recur across visible and hidden layers, while Direct Resource also remains structurally active and Indirect Wealth repeats mainly through the hidden layer. The work question is therefore not simply “how much pressure is present,” but how responsibility, support and resource access are organized around the same role.`,
-    `事业主题以「${R11_GROUP[t.leadGroup.groupCode]}」为主轴。七杀与正官都跨透干、藏干重复进入结构，正印也持续参与，而偏财主要保留在藏干层。真正要读的不是“压力有多少”，而是责任、支持与资源取得怎样围绕同一个角色被组织起来。`
+    'Work is one of the places where this chart is likely to feel responsibility most directly. Seven Killings and Direct Officer both recur, so roles with standards, deadlines, accountability or other people’s expectations rarely feel neutral: how responsibility is assigned, and how much control you have over delivery, strongly affects whether the same role feels purposeful or draining.',
+    '工作是这张命盘最容易直接感受到“责任”的领域之一。七杀与正官反复出现，所以只要角色带有标准、期限、问责或他人期待，你通常不会把它当成中性的事：责任怎样分配、你对执行有多少掌控，会明显影响这个职位让你更有方向，还是越来越消耗。'
    ),
    pick(
-    'Seven Killings and Direct Officer both recur through visible and hidden layers, so responsibility is structurally repeated rather than carried by one isolated symbol. Yet the Seven-Killings pattern path remains open even with a visible-stem match, and the Wealth path also remains conditional. Career interpretation therefore keeps recurring responsibility separate from a completed pattern verdict.',
-    '七杀与正官都跨透干、藏干重复进入结构，因此责任并不是由一个孤立符号承担。但七杀格路径即使有透干对应，仍未完成成立条件；财格路径也继续保持条件性。因此，事业解释必须把“反复出现的责任结构”与“已经形成的格局结论”分开。'
+    'The Resource side remains active too. Taking on more responsibility is therefore not the whole story: work tends to function better when you have solid knowledge, a usable framework, and enough information or support to turn pressure into competent action. Responsibility without support can feel very different from responsibility backed by structure.',
+    '同时，印星／支持也持续参与。事业并不是“责任越多越好”；当有可依靠的知识、方法、框架和资讯支持时，压力更容易转化成能力与执行。相反，如果责任增加，却没有学习空间、资讯或支持，同样的要求就更容易变成消耗。'
    ),
    pick(
-    `The carrying context is ${R11_CARRY[carry.overallTendency]||pick('mixed carrying conditions','混合承载条件')}. At the same time, the natal interfaces connect environment, self-position and expression through a stem combination, branch harms and self-punishment. In career terms, role demand, self-position and outward delivery therefore belong to one joined reading rather than three separate labels.`,
-    `承载状态为「${R11_CARRY[carry.overallTendency]||'混合承载条件'}」。与此同时，本命接口通过天干合、地支害与自刑，把环境、自我位置与表达连接起来。放到事业里，角色要求、自我位置与向外交付需要合读，而不是拆成三个互不相关的标签。`
+    'Wealth functions are also present inside the career frame, so work is not only about meeting standards. Whether you can mobilize budget, tools, people, opportunities or decision space changes how effectively you can carry responsibility. A demanding role with real resources is very different from one that expects results without giving you enough means to deliver.',
+    '财星也进入事业框架，所以工作不只是“把标准做到”。你能否调动预算、工具、人手、机会或决策空间，会改变你承接责任的方式。一个要求高但资源可用的角色，和一个只要结果却不给足资源的角色，会是两种完全不同的工作体验。'
    )
   ],{boundary:'',observations:[]});
   r11Module('careerWorkingDirection','CAREER',[
    pick(
-    'Long-term career direction should be read from the recurring structure rather than a profession label. Here, responsibility is the foreground, but support and resource exchange remain inside the same frame. The durable question is whether the role gives those three functions a workable relationship, not whether a job title sounds compatible.',
-    '长期事业方向应该从反复出现的结构来读，而不是从职业名称判断。这里责任处于前景，但支持与资源交换仍在同一框架内。真正影响长期可持续性的，是角色能否让这三类功能形成可运行的关系，而不是职位名称听起来是否“适合”。'
+    'The career pattern is therefore less about one “correct profession” and more about the kind of role you can keep carrying over time. A workable role gives you clear responsibility, enough authority to act, access to the resources needed to deliver, and room to keep learning. When those pieces stay aligned, pressure can become focus; when they separate, the same sense of duty can turn into over-carrying.',
+    '因此，事业真正要看的并不是“哪一个职业最适合”，而是你能长期承载哪一种角色。更适合你的工作结构，通常会同时具备：责任清楚、你有足够的行动权限、完成任务所需的资源能够取得，而且还能持续学习和更新。几项条件能够对齐时，压力比较容易变成专注；一旦责任、权限与资源分开，同样的责任感就更容易变成过度承接。'
    ),
    pick(
-    `The current Jia-Xu Da Yun brings output into the career topic while retaining officer, resource and wealth functions in the same window; the Bing-Wu annual layer adds wealth and officer emphasis. This makes the present period especially relevant for observing how delivery, responsibility and resource exchange meet, without implying a job change or success outcome.`,
-    `当前甲戌大运把输出功能带入事业主题，同时仍保留官杀、印星与财星；丙午流年则进一步加入财星与官杀重点。因此，本阶段特别适合观察“交付—责任—资源交换”怎样相遇，但这并不等于预测换工作或事业成败。`
+    'The current Jia-Xu Da Yun adds more emphasis on output and expression. In practice, this can make the question “how do I deliver what I know?” more important than before. The Bing-Wu annual layer also brings wealth and responsibility themes forward, so this period is especially useful for noticing whether increased output is matched by real resources and clear responsibility, or whether you are being asked to produce more while carrying the same or greater pressure.',
+    '当前甲戌大运把“输出／表达”带得更前面，所以这一阶段比过去更值得观察的是：你怎样把已经具备的能力真正交付出来。丙午流年又同时把财星与官杀带到前景，因此现在很适合看一件很现实的事——你的产出增加时，资源和权限有没有同步增加？还是要求变多了，但你仍然承担同样甚至更高的压力？'
    ),
    pick(
-    'Navigation should therefore separate the stable career structure from the current timing emphasis. If responsibility remains the same but support, resource access or delivery demands change, treat that difference as evidence about role design before turning it into a conclusion about the entire occupation.',
-    '因此，导航时要把稳定的事业结构与当前时间重点分开。如果责任主题没有改变，但支持、资源取得或交付要求发生变化，应先把这种差异视为角色设计的证据，再决定是否需要上升为对整个职业的判断。'
+    'A useful career decision now is to compare roles by operating conditions rather than prestige or title. Ask: Is the responsibility mine to carry? Do I have enough authority to make the decisions I am accountable for? Are the tools, people or budget available? Can I keep learning instead of only absorbing pressure? Those answers are more informative for this chart than the job title alone.',
+    '所以，现在判断一个工作是否值得继续、扩大或调整时，比职位名称更重要的是运行条件：这项责任是否真的由你承担？你是否拥有与责任相匹配的决策权？工具、人手或预算是否到位？你还能继续学习和提升，还是只剩下不断吸收压力？对这张命盘来说，这些答案比职位名称本身更有价值。'
    )
-  ],{boundary:'',observations:r11Prompts('CAREER')});
+  ],{boundary:'',observations:[
+   pick('Which current responsibility feels worth carrying because you also have the authority, support and resources to do it well?','现在有哪些责任，你会觉得“值得承担”，因为你同时拥有足够的权限、支持与资源把它做好？'),
+   pick('Where are you currently responsible for an outcome without having enough control, information or resources to deliver it sustainably?','目前有没有哪一项工作，是你要对结果负责，却没有足够的控制权、资讯或资源让它长期做得下去？')
+  ]});
  }
 
  {
