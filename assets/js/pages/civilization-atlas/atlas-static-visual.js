@@ -96,7 +96,8 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en',data={
  const [primary,...related]=assets;
  if(primary&&primaryHost){
   primaryHost.className='civ-atlas-primary-visual';
-  primaryHost.append(visualFigure(doc,primary,locale));
+  const figure=visualFigure(doc,primary,locale),img=figure.querySelector('img');if(img){img.loading='eager';img.setAttribute('fetchpriority','high');}
+  primaryHost.append(figure);
  }
  if(!resourcesHost)return;
  const details=doc.createElement('details');details.className='civ-atlas-visual-resources';
