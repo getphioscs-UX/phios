@@ -68,12 +68,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   makeFacet('personalityCoreStyle',pick(
    'Your core operating style is read from the function that receives first emphasis, together with the other functions that remain active around it. The point is not to assign a permanent personality label, but to identify the structure that repeatedly organizes how capability is approached.',
    '你的核心运作方式，要从命盘里首先被强调的功能开始，再把同时参与的其他功能放回来一起看。重点不是贴上永久人格标签，而是找出反复组织你如何发展与使用能力的那套结构。'
-  ),[byId(':PRIMARY'),byId(':DOMAIN_EXPLANATION'),byId(':DIMENSIONS'),byId(':SECONDARY')]);
+  ),[byId(':DOMAIN_EXPLANATION'),byId(':DIMENSIONS'),byId(':SECONDARY')]);
 
   makeFacet('personalityLearning',pick(
    'Learning and processing are read through the chart’s support-and-absorption function and the conditions around it. This layer asks how information is taken in, supported and made usable before expression is expected.',
    '学习与处理方式主要从命盘中的支持与吸收功能，以及包围它的条件来阅读。这一层关注信息如何被接收、获得支持并变成可用能力，再进入表达与输出。'
-  ),[byId(':PRIMARY'),byId(':SUPPORT'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/RESOURCE|CARRY/i.test(x.text))]);
+  ),[byId(':PRIMARY'),byId(':SUPPORT'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/learning|support|absorption|学习|支持|吸收/i.test(x.text))]);
 
   makeFacet('personalityExpression',pick(
    'Expression is separate from learning. A capability may exist internally yet need different conditions to become repeatable visible output. Recorded links between self-position and expression refine this reading.',
@@ -237,7 +237,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   for(const def of definitions){
    if(def.primaryVisualRef){
     const count=def.primaryVisualRef==='BZR-VIS-TEN-GOD-DETAILS'?reading.professionalModules.tenGods.items.length:1;
-    for(let offset=0;offset<count;offset+=4){const visual=buildBaziPublicationVisual({reading,primaryVisualRef:def.primaryVisualRef,locale,topicCode:def.visualTopic,offset});
+    const visualPageSize=def.primaryVisualRef==='BZR-VIS-TEN-GOD-DETAILS'?6:1;
+    for(let offset=0;offset<count;offset+=visualPageSize){const visual=buildBaziPublicationVisual({reading,primaryVisualRef:def.primaryVisualRef,locale,topicCode:def.visualTopic,offset,limit:visualPageSize});
      pageBlocks.push({definitionKey:def.key,visualContinuation:offset?`_CONT_${offset/4+1}`:'',pageFamily:def.family,title:def.title[locale],contentBlocks:def.primaryVisualRef==='BZR-VIS-FOUR-PILLARS'?modules.baziChart.blocks:[],items:[],sourcePages:[],facts:[],observations:[],boundary:visual.boundary,primaryVisualRef:visual.primaryVisualRef,primaryVisualHtml:visual.primaryVisualHtml});
     }continue;
    }
