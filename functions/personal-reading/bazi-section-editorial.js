@@ -1,45 +1,161 @@
-// Reader guidance is editorial, not a new method verdict. Chart claims are
-// supplied separately by the admitted native reading and retain their sources.
+// Publication-owned editorial copy for BaZi fixed pages.
+//
+// Contract:
+// - Section openers and Key Insights are static bilingual publication copy.
+// - They explain what each chapter reads and how to use its structure.
+// - They do not create a person-specific verdict and must never be replaced by T3.
+// - Person-specific narrative remains owned by admitted native facts / dynamic pages.
 const pair=(en,zh)=>({en,'zh-Hans':zh});
+
 export const BAZI_SECTION_EDITORIAL={
  S01_OVERVIEW:{
-  intro:pair('Begin with the chart itself. The four pillars, Day Master and element inventory provide a shared reference for the chapters that follow. Read the visible structure before drawing conclusions about work, relationships or timing; each later chapter returns to a different part of this starting point.','先从命盘本身开始。四柱、日主与五行清单为后面的章节建立共同参照。先看清结构，再讨论事业、关系与时间；后续每章会从不同角度回到这个起点，而不是把一个符号当成全部答案。'),
-  bridge:pair('Read the columns from year to hour, keeping the stem, branch and hidden stems distinct. The Day Master provides a reference position; the element inventory records what is present. Counts describe this inventory, rather than measuring personal worth or deciding which life outcome must follow.','按年、月、日、时阅读四柱，并区分天干、地支与藏干。日主提供参照位置，五行清单记录命盘中的分布。数量用来说明清单，不用于衡量个人价值，也不直接决定人生结果。'),
-  items:[pair('Start with the Day Master and month setting; keep their positions distinct before considering the wider chart.','先找到日主与月令的位置，分清两者，再回到整张命盘一起阅读。'),pair('Compare the element counts as an inventory, without converting a larger count into a stronger personality trait.','比较五行数量时先把它当作清单，不把较多的计数直接解释为较强的性格。'),pair('Carry one concrete question into the next chapter and return to this chart when an interpretation needs context.','带着一个具体问题进入下一章；解读需要背景时，再回到这张命盘核对。')]},
+  intro:pair(
+   'Every later interpretation begins with the same chart. This chapter establishes that common reference: the Four Pillars, the Day Master, the month setting and the distribution of the Five Elements. Read it as the map of the system before moving into personality, work, relationships or timing.',
+   '后面的所有解读，都从同一张命盘开始。本章先建立共同参照：四柱、日主、月令，以及五行在命盘中的分布。先把它当作整套系统的地图看清楚，再进入性格、事业、关系与时间等主题。'
+  ),
+  bridge:pair(
+   'The Four Pillars show where each stem and branch is positioned; the Day Master gives the chart its reference point; the month setting supplies the seasonal context; the Five Elements show what is visibly present and how that presence is distributed. These layers should be read together rather than reduced to a single count.',
+   '四柱说明每个天干地支位于哪里；日主提供整张命盘的参照点；月令提供季节背景；五行则显示哪些元素出现，以及它们如何分布。阅读时要把这些层次放在一起，而不是把命盘压缩成一个数字。'
+  ),
+  items:[
+   pair('The Day Master is the reference point of the chart. Its meaning depends on the season, surrounding stems and branches, roots and support—not on the Day Master label alone.','日主是命盘的参照点。它需要结合季节、周围干支、根气与支持一起阅读，不能只凭日主名称下结论。'),
+   pair('Element counts describe composition, not final strength. Seasonal influence and structural relationships determine how that composition functions.','五行数量说明的是组成，不等于最终强弱。季节作用与结构关系，才决定这些组成怎样运作。'),
+   pair('The chart is a system of positions and relationships. Later chapters do not introduce a different chart; they return to this same structure from a different question.','命盘是一套位置与关系组成的系统。后面的章节不是换一张命盘，而是带着不同问题重新回到同一套结构。')
+  ]
+ },
  S02_PERSONALITY:{
-  intro:pair('This chapter explores how learning, expression and repeated practice appear in the method reading. It invites you to compare that reading with situations you recognize. Personality is approached through context and response, leaving room for different behavior at work, at home and under changing demands.','本章从学习、表达与反复练习的角度理解方法中的个人主题，再邀请你用熟悉的情境核对。性格需要放在环境与回应方式中观察，工作、家庭及不同要求之下的表现，都可能有所不同。'),
-  bridge:pair('Use this theme to examine how a capability becomes dependable in practice. Choose an example where you learned something, expressed it and carried it through more than once. Then compare a setting where the same approach was harder to sustain. The difference may help you formulate a question about support, expectations or practice; it does not establish a permanent identity. Keep both examples available as you read the strengths and challenges on the following page.','把这个主题用来观察能力怎样在实践中变得可靠。选择一个学习、表达并多次完成的例子，再对照同样做法难以持续的环境。两者的差异可以帮助你提出关于支持、期待或练习的问题，却不能直接定义一个固定的自己。阅读下一页的优势与挑战时，请同时保留顺利与不顺利的例子。'),
-  items:[pair('Look for a skill that remains usable across several settings; describe the practice that helps you sustain it.','寻找一项在不同环境中仍能使用的能力，写下帮助你维持它的练习。'),pair('Compare one easy learning experience with one difficult experience, noting the available support rather than judging yourself.','比较一次顺利与一次困难的学习经历，记录可用支持，而不是急着评价自己。'),pair('Notice how your expression changes with familiar people and unfamiliar people before giving your social style a fixed label.','观察面对熟人与陌生人时表达怎样变化，再决定某个社交风格描述是否贴切。')]},
+  intro:pair(
+   'Core Personality reads the recurring way the chart receives information, develops capability, expresses itself and meets expectations. In BaZi, personality is not one isolated trait. It emerges from the relationship between the Day Master, the Ten Gods and the conditions that support or constrain how those functions are used.',
+   '核心性格读取的不是一个孤立标签，而是命盘如何吸收信息、发展能力、表达自己，以及面对期待时反复出现的运作方式。在八字里，性格来自日主、十神与支持或限制这些功能的条件之间的关系。'
+  ),
+  bridge:pair(
+   'The Ten Gods describe functions relative to the Day Master: self-position, learning and support, expression and output, resources and exchange, responsibility and pressure. A useful personality reading asks which functions are prominent, which ones cooperate, and what conditions make them easier or harder to use consistently.',
+   '十神描述的是相对于日主的不同功能：自我位置、学习与支持、表达与产出、资源与交换、责任与压力。真正有用的性格读取，需要看哪些功能突出、哪些功能彼此协作，以及什么条件会让这些能力更容易或更难稳定发挥。'
+  ),
+  items:[
+   pair('Personality is read as a functional pattern, not a fixed identity. The same underlying structure can appear differently when support, role and expectations change.','性格应被理解为功能模式，而不是固定身份。同一套底层结构，在支持、角色与期待改变时，可以呈现出不同表现。'),
+   pair('Ten God prominence is most useful when read in combination. Learning, expression, resources, peers and responsibility can reinforce or compete with one another.','十神的重点必须放在组合中阅读。学习、表达、资源、同类与责任之间，可能互相支持，也可能彼此争夺空间。'),
+   pair('A strong interpretation explains how capability is developed and sustained. It should connect the visible structure to repeatable ways of learning, acting and responding—not merely list traits.','好的性格解读要说明能力怎样形成、怎样被维持。它应把可见结构连接到反复出现的学习、行动与回应方式，而不是只列出性格形容词。')
+  ]
+ },
  S03_LIFE_STRUCTURE:{
-  intro:pair('A chart contains conditions as well as visible patterns. This chapter brings those two sides together: what the method has established, what remains open, and how support and demand should be read together. It is a structural reference for later chapters, rather than a ranking of lives.','命盘中既有可见模式，也有尚待满足的条件。本章把已经建立的结构、仍然开放的判断，以及支持和负荷放在一起阅读。它为后面的章节提供结构参照，而不是给人生高低作排名。'),
-  bridge:pair('Consider support and demand together rather than isolating one favorable symbol. A visible candidate does not become an established pattern merely because its name appears in a diagram. Where a condition remains open, keep the corresponding conclusion open too. In experience, compare a demanding situation with and without practical support. This comparison can sharpen your question about the structure without turning the chart into a verdict about what you can achieve.','把支持与负荷放在一起，而不是单独挑出一个看似有利的符号。候选模式出现在图中，并不等于已经成格；条件仍开放时，相应结论也应保留。在现实中，可以比较同一种要求在有支持与缺少支持时怎样不同，用具体差异帮助理解结构，而不把命盘当作能力上限。'),
-  items:[]},
+  intro:pair(
+   'Life Structure brings the chart’s main mechanics into one view. It considers the carrying conditions of the Day Master, the functional balance of the Ten Gods, candidate pattern paths and the relationships between pillars. The purpose is to understand how the chart organizes support, demand and direction before applying it to specific life domains.',
+   '人生格局把命盘最主要的运作机制放到同一张图里阅读：日主的承载条件、十神功能的分布、可能形成的格局路径，以及柱位之间的关系。先理解命盘如何组织支持、负荷与方向，再把这些结构带入具体人生领域。'
+  ),
+  bridge:pair(
+   'A pattern is not established because one symbol is present. It is established only when the required relationships and conditions are present together. Life Structure therefore keeps confirmed structure, candidate paths and unresolved conditions distinct.',
+   '格局并不会因为某个符号出现就自动成立。只有相关关系与必要条件同时具备，判断才有足够基础。因此，本章会把已经确认的结构、候选路径与仍未满足的条件明确区分。'
+  ),
+  items:[
+   pair('Day Master carrying conditions describe how much support and counter-pressure the reference point is working with. They are the base layer for later interpretation, not a judgment of personal worth.','日主承载条件说明这个参照点同时面对多少支持与反向负荷。它是后续解读的基础层，不是对个人价值的评价。'),
+   pair('Pattern paths show how several functions may organize into a larger structure. A visible path is meaningful, but it remains different from a fully established pattern when conditions are still open.','格局路径显示多个功能可能怎样组织成更大的结构。路径可见本身有意义，但只要关键条件仍开放，就必须与“已经成格”区分。'),
+   pair('Pillar relationships reveal where structural interaction occurs. Repetition, support, control or tension becomes more informative when its position in the chart is preserved.','柱位关系揭示结构互动发生在哪里。重复、支持、制约或张力，只有在保留其具体位置后，才具有更完整的解释价值。')
+  ]
+ },
  S04_CAREER:{
-  intro:pair('Work brings responsibility, output and support into a concrete setting. This chapter reads the career theme through roles and working conditions, then asks how those conditions compare with your experience. The aim is a clearer understanding of a workable role, without assigning a guaranteed profession or outcome.','工作把责任、产出与支持放进具体环境。本章从角色和工作条件阅读事业主题，再与你的经历比较。重点是理解怎样的工作方式能够运作，不直接指定某个职业，也不把一种结构写成必然成败。'),
-  bridge:pair('Translate this theme into a question about a real role. What were you expected to deliver, who set the standard, and which resources were available? Compare two projects with different expectations before deciding whether the reading fits. A role title alone tells you little about these conditions. The useful distinction is between a responsibility you can carry with clear support and one whose requirements remain unclear. Record the actual difference before choosing an adjustment.','把这个主题转成对真实角色的问题：你需要交付什么，由谁界定标准，又有哪些资源可用？比较两个要求不同的项目后，再判断读取是否贴近经验。职位名称本身不能说明这些条件；更值得分清的是有清楚支持的责任，与要求仍含糊的责任。先记录实际差异，再选择可以尝试的调整。'),
-  items:[pair('Compare possible work settings by their actual tasks, decision boundaries and available support, rather than a promising job title.','比较工作环境时看实际任务、决策边界与支持条件，不只看吸引人的职位名称。'),pair('Choose a recent successful delivery and identify what made its responsibilities and expectations clear enough to carry.','回看一次完成得较好的交付，找出哪些条件让责任与期待变得清楚可承载。'),pair('Before changing a working pattern, describe one small reversible experiment and the observation that would make you reconsider it.','调整工作方式前，先写下一个小而可撤回的尝试，以及需要重新考虑它的迹象。')]},
+  intro:pair(
+   'Career Development reads how the chart handles responsibility, output, standards, resources and role boundaries. Rather than assigning a single “best profession,” this chapter looks at the kinds of working conditions in which the chart’s functions can be used coherently and sustained over time.',
+   '事业发展读取的是命盘如何处理责任、产出、标准、资源与角色边界。本章不会把你指定到某一个“最佳职业”，而是观察什么样的工作条件，能让命盘中的功能更连贯、更持续地被使用。'
+  ),
+  bridge:pair(
+   'Career themes become useful when they are translated from symbols into working conditions: what must be delivered, how much autonomy is available, how standards are set, what support exists and how resources move through the role. The same chart can function very differently across two jobs with different structures.',
+   '事业主题只有从符号转换成工作条件后才真正有用：需要交付什么、拥有多少自主权、标准如何设定、有哪些支持、资源如何在角色中流动。同一张命盘，在两种结构完全不同的工作里，实际运作方式可以差异很大。'
+  ),
+  items:[
+   pair('Responsibility and output should be read together. A role becomes sustainable when what you are expected to carry is matched by enough authority, information and support to deliver it.','责任与产出需要一起阅读。一个角色要长期可持续，所承担的要求必须与足够的权限、信息与支持相匹配。'),
+   pair('Career fit is more specific than job title. Decision scope, pace, accountability, collaboration and resource access often matter more than the industry label itself.','事业适配比职位名称更具体。决策范围、节奏、责任方式、协作结构与资源获取，往往比行业标签本身更重要。'),
+   pair('Repeated career patterns are most informative when they appear across more than one role. Look for the working condition that keeps recurring beneath different titles or employers.','事业模式在不同角色中反复出现时最有解释力。与其只看职位或公司，更值得观察的是哪些工作条件一直重复出现。')
+  ]
+ },
  S05_WEALTH:{
-  intro:pair('Resources move through production, exchange and responsibility. This chapter keeps those relationships visible while separating symbolic wealth language from actual financial outcomes. Use it to ask clearer questions about a situation you already know, with real records and obligations providing the context for any practical decision.','资源会经过产出、交换与责任而流动。本章保留这些关系，同时区分方法中的财富语言与实际财务结果。请用熟悉的情境提出更清楚的问题，现实记录与义务才是具体决定所需的背景。'),
-  bridge:pair('Follow the resource through one concrete exchange: what was contributed, what was returned, and what had to be maintained afterward? This helps keep the symbolic reading connected to an observable process. Do not treat a wealth label as evidence of a windfall or as a reason to take a financial position. If the actual record differs from the theme, retain that difference. It may show that the current circumstances matter more than this part of the interpretation.','沿着一次具体交换观察：投入了什么，获得了什么，事后还需要承担什么？这样可以把象征性的读取放回可观察的过程。财富标签不能证明会有横财，也不构成投资依据。现实记录若与主题不同，请保留这个差异；它可能说明当前情境比这一部分解读更重要。'),
-  items:[pair('Describe a resource exchange using actual contributions and obligations, keeping the chart interpretation in a separate note.','用真实投入与义务描述一次资源交换，把命盘解读另行记录，避免两者混为一谈。'),pair('Check whether a perceived opportunity rests on verifiable circumstances or only on an attractive interpretation of a symbol.','核对某个机会来自可验证的现实条件，还是仅来自对一个符号的吸引人解释。'),pair('Leave age bands and windfall claims open when the admitted timing evidence does not support those specific conclusions.','已核准的时间证据不足时，保留年龄段与横财判断，不补写具体结论。')]},
+  intro:pair(
+   'Wealth Outlook reads the chart’s relationship with resources: how value is produced, exchanged, directed, maintained and placed under responsibility. In BaZi, “wealth” is first a structural function. Actual income, assets and financial outcomes still depend on real-world decisions and conditions outside the chart.',
+   '财富运势读取的是命盘与资源之间的关系：价值如何被创造、交换、调动、维持，以及怎样进入责任结构。在八字里，“财”首先是一种结构功能；真实收入、资产与财务结果仍取决于命盘之外的现实决定与条件。'
+  ),
+  bridge:pair(
+   'A useful wealth reading follows the full resource cycle rather than stopping at acquisition. It asks where resources come from, what must be exchanged for them, what competes for them and what structure is needed to retain or redeploy them.',
+   '有用的财富读取不会只停在“得到资源”，而是追踪完整的资源循环：资源从哪里来、需要交换什么、哪些力量会分流资源，以及需要怎样的结构才能保留、管理或重新投入。'
+  ),
+  items:[
+   pair('Wealth symbols describe resource interaction, not guaranteed money. The interpretation becomes stronger when production, exchange and responsibility are read as one connected process.','财星描述资源互动，不等于保证金钱结果。把产出、交换与责任放在同一条链上阅读，解释才会更完整。'),
+   pair('Resource opportunity and resource retention are different questions. A chart may show how resources enter a system without automatically answering how easily they are kept.','资源机会与资源留存是两个不同问题。命盘可以说明资源怎样进入系统，却不自动说明这些资源是否容易被保留下来。'),
+   pair('Timing can change which resource theme is more visible, but financial decisions still require actual cash flow, obligations, risk and evidence outside the symbolic reading.','时间层会改变某些资源主题的可见度，但真实财务决定仍必须依据现金流、义务、风险与命盘之外的现实证据。')
+  ]
+ },
  S06_RELATIONSHIP:{
-  intro:pair('Relationships take shape between people, not inside a single chart label. This chapter uses the method reading to explore recurring positions, expectations and support. Compare its themes with specific interactions while preserving the other person’s perspective and the possibility that the same pattern changes in a different setting.','关系发生在人与人之间，不能压缩成命盘中的一个标签。本章借方法读取观察位置、期待与支持怎样重复出现。比较具体互动时，请保留对方的视角，也保留同一种模式在不同环境中改变的可能。'),
-  bridge:pair('Choose an interaction you can describe without guessing the other person’s motives. Who asked for what, what was understood, and how was support offered or withheld? Compare a second interaction where the outcome differed. This can help distinguish an expectation from an observation. Use the reading as a prompt for that comparison, rather than proof of an ideal partner, a marriage date or a fixed relationship outcome. The other person’s account remains an independent source of understanding.','选一段不需要猜测对方动机也能描述的互动：谁提出了什么，彼此怎样理解，支持怎样出现或缺席？再比较一次结果不同的互动，以分清期待与观察。读取可以提示这种比较，却不能证明理想伴侣、婚期或固定关系结果。对方的叙述仍是独立而重要的理解来源。'),
-  items:[pair('Separate what was said from what you inferred, then compare your account with the other person’s account when appropriate.','分开记录听到的话与自己的推测，在合适的时候，再与对方的叙述比较。'),pair('Look for an interaction that changed when expectations became clearer; describe the change without assigning a permanent partner label.','寻找期待更清楚后有所改变的互动，描述变化，不给伴侣贴固定标签。'),pair('Ask which forms of support work for both people, leaving marriage timing unresolved unless specific evidence has been admitted.','询问哪些支持方式对双方都有效；没有具体核准证据时，保留婚姻时间判断。')]},
+  intro:pair(
+   'Relationships & Marriage reads how the chart approaches closeness, reciprocity, expectations, responsibility and personal position within important bonds. It does not reduce another person to a symbol; instead, it examines the recurring relational functions carried by this chart.',
+   '感情婚姻读取的是命盘在重要关系中如何处理亲近、互惠、期待、责任，以及自己的位置。它不会把另一个人压缩成一个符号，而是观察这张命盘反复携带怎样的关系功能。'
+  ),
+  bridge:pair(
+   'Relationship structure becomes clearer when self-position and partner-facing functions are read together. Attraction, obligation, support and boundary-setting may belong to different parts of the same pattern. The practical question is not only who appears, but how the relationship is organized once two people begin interacting.',
+   '关系结构需要把自我位置与面向伴侣的功能放在一起阅读。吸引、责任、支持与边界，可能分别属于同一个关系模式的不同部分。真正需要理解的不只是“谁会出现”，而是两个人开始互动以后，关系怎样被组织起来。'
+  ),
+  items:[
+   pair('Relationship reading is relational, not solitary. The chart can describe your recurring position and expectations, while the other person remains an independent participant with their own structure and choices.','关系读取必须保留“双方”这一事实。命盘可以描述你反复出现的位置与期待，但对方仍然是拥有自己结构与选择的独立参与者。'),
+   pair('Support and responsibility can coexist with tension. A mature reading looks at how these functions are negotiated instead of labeling a relationship simply good or bad.','支持、责任与张力可以同时存在。成熟的关系解读，会观察这些功能如何被协商，而不是简单把一段关系标成好或坏。'),
+   pair('Recurring relationship themes are best understood through interaction patterns: expectations, communication, exchange and boundaries across more than one meaningful situation.','反复出现的关系主题，最适合从互动模式理解：期待、沟通、交换与边界，是否在多个重要情境中持续出现。')
+  ]
+ },
  S07_HEALTH:{
-  intro:pair('Wellbeing is approached here through lived rhythm and observed pressure. The available chart reading does not establish medical conditions, vulnerable organs or treatment needs. This chapter therefore offers a space to describe daily demands and support, keeping those observations distinct from any clinical assessment or health decision.','这里从生活节奏与观察到的压力讨论身心状态。当前命盘读取不能建立疾病、器官弱点或治疗需要的判断。本章因此提供记录日常要求与支持的空间，并让这些观察与临床评估及健康决定保持区分。'),
-  bridge:pair('This report does not make health predictions. The pressure theme can only supply a question about experience: which demands felt manageable, and what support was present at the time? Describe your own observations without assigning a medical cause to a chart symbol. A useful record distinguishes the situation, your response and what changed afterward. It can remain meaningful even if the chart theme does not fit. Health decisions require evidence appropriate to health, beyond the scope of this report.','本报告不作健康预测。压力主题只能帮助提出经验问题：哪些要求当时能够承受，又有哪些支持在场？请记录自己的观察，不给命盘符号附加医学病因。把情境、回应与后来发生的变化分开，即使主题不贴合，记录仍有意义。健康决定需要本报告范围之外、适用于健康问题的证据。'),
-  items:[pair('Record the context of a demanding day and the support you actually had, without translating elements into organ or disease labels.','记录负荷较大的一天及实际拥有的支持，不把五行转换成器官或疾病标签。'),pair('Compare your own account of daily rhythm across different settings, leaving causes open when the record cannot establish them.','比较不同环境下自己对生活节奏的记录；记录无法解释原因时，先保持开放。'),pair('Keep any health assessment separate from the symbolic reading; use this page only for describing your experience and questions.','让健康评估与象征性读取保持独立；本页仅用来描述自己的经验与问题。')]},
+  intro:pair(
+   'Health & Wellbeing translates the chart’s load, rhythm and support structure into a non-clinical view of daily functioning. It focuses on how pressure, recovery and routine are organized. It does not diagnose disease, identify vulnerable organs or replace medical assessment.',
+   '健康养生把命盘中的负荷、节奏与支持结构，转换成对日常运作的非临床观察。重点是压力、恢复与生活规律怎样被组织；本章不诊断疾病、不判断器官弱点，也不能代替医疗评估。'
+  ),
+  bridge:pair(
+   'In this report, wellbeing is read through the balance between demand and recovery. Structural pressure may be useful as a lens for noticing rhythm, but it is not a biological diagnosis. The meaningful comparison is between periods with different workloads, routines and available support.',
+   '在本报告里，身心状态主要通过“负荷与恢复之间的平衡”来阅读。结构压力可以帮助观察生活节奏，却不是生理诊断。更有意义的比较，是不同工作量、作息与支持条件下，你的日常运作有何变化。'
+  ),
+  items:[
+   pair('Pressure is a structural theme before it is a health theme. It may describe demand, accountability or sustained load without implying illness.','压力首先是结构主题，其次才是生活观察主题。它可以代表要求、责任或持续负荷，但不等于疾病。'),
+   pair('Recovery conditions matter as much as demand. Sleep, routine, workload, environment and practical support belong to real-life wellbeing evidence and should remain visible.','恢复条件与负荷同样重要。睡眠、作息、工作量、环境与实际支持，都属于真实生活中的身心证据，需要被保留下来。'),
+   pair('Any medical conclusion requires medical evidence. Use this chapter to organize observations about rhythm and pressure, not to convert symbolic elements into diagnoses.','任何医学结论都需要医学证据。本章只用于整理节奏与压力的观察，不把象征性的五行或十神转换成诊断。')
+  ]
+ },
  S08_TIMING:{
-  intro:pair('The observation window is anchored to the saved generation time and customer timezone. This chapter places the supported luck cycle and year layer beside the birth structure. Time supplies a frame for comparison; your lived observations determine whether a theme is relevant to the period you are reviewing.','观察窗口以保存的生成时间和客户时区为起点。本章把已支持的大运与流年层放在本命结构旁边比较。时间提供对照范围；主题是否与这段经历有关，仍需要现实观察来核对。'),
-  bridge:pair('Keep the birth chart, luck cycle and year layer distinct as you compare them. They describe different levels of the method and should not replace one another. Use the saved observation date to identify which period you are examining, then record what actually occurred within that period.','比较时请区分本命、大运与流年，它们属于不同层次，不能相互替代。用保存的观察日期界定正在回顾的范围，再记录这段时间实际发生的事情。'),
-  items:[pair('Which responsibility became more noticeable during this observation window, and what concrete example supports your account?','在这段观察范围内，哪项责任变得更明显？请找一个具体例子支持自己的描述。'),pair('What changed in the support available to you, and did your response change when that support changed?','这段时间可用的支持有哪些变化？支持改变时，你的回应是否也随之不同？'),pair('Which experience contradicts the first theme you noticed, and what context helps explain that difference?','哪段经历与最初注意到的主题相反？有哪些情境可以帮助理解这个差异？')]},
+  intro:pair(
+   'Timing & Cycles adds movement to the natal structure. The birth chart remains the base; luck cycles and annual layers show which parts of that structure are being revisited, supported, challenged or made more visible during a defined period.',
+   '时间结构是在本命结构之上加入“变化”。本命仍是底图；大运与流年显示在特定时期里，命盘中的哪些部分被重新触发、得到支持、受到挑战，或变得更加明显。'
+  ),
+  bridge:pair(
+   'Timing works by layering rather than replacing. Natal structure, luck cycle and year each answer a different question. The most useful reading keeps those levels separate first, then examines where their themes intersect.',
+   '时间读取采用“叠层”而不是“替换”。本命、大运与流年分别回答不同问题。最有效的做法，是先把这些层次分清楚，再观察它们在哪里发生交汇。'
+  ),
+  items:[
+   pair('The natal chart describes the persistent structure; the luck cycle changes the medium-term operating environment; the annual layer narrows the observation window further.','本命描述持续存在的结构；大运改变中期运行环境；流年则把观察范围进一步收窄。'),
+   pair('A repeated theme across natal, luck-cycle and annual layers deserves more attention than a symbol appearing in only one layer, but repetition still does not guarantee a specific event.','同一主题若同时出现在本命、大运与流年中，通常比只出现于单一层更值得注意；但重复仍不等于保证某件具体事件发生。'),
+   pair('Timing is most useful when anchored to a real period and a real question. It should help compare changing conditions, not turn every symbol into a prediction.','时间读取最适合绑定真实时期与真实问题，用来比较条件怎样变化，而不是把每个符号都转换成预测。')
+  ]
+ },
  S09_GUIDANCE:{
-  intro:pair('The earlier chapters offer different views of one reading. Bring them together by choosing a real situation that involves work, resources and relationships, rather than by adding every theme into a single verdict. This chapter turns that comparison into a small cycle of observation, action and review.','前面的章节从不同角度阅读同一张命盘。整合时，请选择一个同时涉及工作、资源与关系的真实情境，而不是把每个主题相加成单一结论。本章把这种比较带入观察、尝试与复盘的小循环。'),
-  bridge:pair('Choose one situation where a work responsibility, a resource exchange and a relationship expectation meet. Ask which part of each chapter helps you describe that situation more precisely. Keep only the interpretations supported by your experience, including examples that challenge them. Then choose a small reversible adjustment and decide what you will observe before judging its value. Integration means making the connections useful in context; it does not require every theme to fit at once.','选择一个工作责任、资源交换与关系期待交汇的情境，看看各章哪一部分让描述变得更准确。只保留经验能够支持的解释，同时留下挑战解释的例子。随后选一个小而可撤回的调整，先决定观察什么，再评价它的价值。整合是让联系在具体环境中有用，不要求每一个主题同时贴合。'),
-  items:[pair('Reflect on one concrete situation and identify the difference between a chart theme and an observation you can describe.','回看一个具体情境，分清命盘主题与自己能够描述的实际观察。'),pair('Try one small reversible change to the situation, noting what you expect to observe before you act.','尝试一个小而可撤回的改变，行动前先写下自己预计会观察什么。'),pair('Review both supporting and contradictory examples, then adjust your question rather than forcing the experience to fit.','复盘支持与反对的例子，再调整问题，而不是强迫经验符合解读。')]},
+  intro:pair(
+   'Guidance & Recommendations brings the report back together. Instead of adding every chapter into one final verdict, it identifies the recurring structural themes that matter across work, resources, relationships and timing, then translates them into practical points of attention.',
+   '人生建议把整份报告重新收拢。它不是把所有章节相加成一个最终结论，而是找出在事业、资源、关系与时间中反复出现的结构主题，再把这些主题转换成现实中值得注意的行动重点。'
+  ),
+  bridge:pair(
+   'Integration asks which themes repeat across several chapters, which ones depend on a specific condition and which ones remain unresolved. The strongest guidance comes from recurring structure plus real-world feedback, not from the most dramatic isolated statement.',
+   '整合时要分清：哪些主题在多个章节中重复出现，哪些主题依赖特定条件，哪些判断仍然开放。最有价值的建议，来自反复出现的结构与现实反馈，而不是最戏剧化的一句孤立结论。'
+  ),
+  items:[
+   pair('Prioritize repeated cross-section themes. When the same structural issue appears in work, resources and relationships, it is usually more actionable than a single isolated observation.','优先处理跨章节重复出现的主题。同一个结构问题若同时出现在事业、资源与关系中，通常比单一观察更具有行动价值。'),
+   pair('Separate stable structure from temporary timing. A current period may intensify a theme without turning it into a permanent identity or lifelong condition.','区分稳定结构与暂时时间层。当前阶段可以放大某个主题，但不应因此把它写成永久身份或终身状态。'),
+   pair('Turn interpretation into a small observable adjustment. The purpose of guidance is to improve navigation: change one condition, observe the result and update the next decision.','把解读转换成一个可以观察的小调整。建议的目的，是改善现实导航：改变一个条件、观察结果，再据此更新下一步决定。')
+  ]
+ },
  S10_APPENDIX:{
-  intro:pair('This chapter explains how to use the reading without giving it more authority than its evidence supports. Return here when a term, an unresolved condition or a time layer needs clarification. The method, its interpretation and your lived experience each have a distinct role in understanding the report.','本章说明怎样使用报告，同时不让解读超出证据所能支持的范围。术语、未定条件或时间层需要澄清时，可以回到这里。方法、解释与真实经验各有自己的作用，应当一起阅读，也应保持区分。'),
-  bridge:pair('Start with the visible chart and distinguish it from the prose that interprets it. A recorded symbol or count is a method fact; the meaning attached to it depends on conditions and scope. When a verdict is unresolved, do not fill the gap with a more certain story. Compare a reading with specific experience and preserve disagreement as well as agreement. The report can help organize a question, but it cannot replace independent evidence about another person, a financial outcome or a health condition. Revisit a chapter when you have a concrete example that makes the question clearer.','先看可见命盘，再区分对它进行解释的文字。符号与计数是方法中的事实，附加的含义则取决于条件和范围。判断未定时，不要用更确定的故事填补空白。用具体经验比较解读，同时保留相符与不符之处。报告可以帮助整理问题，却不能代替关于他人、财务结果或健康状况的独立证据。有了能让问题更清楚的例子时，再回到相应章节阅读。'),
-  items:[]}
+  intro:pair(
+   'Method & Appendix explains what the report is built from, what each layer can support and where interpretation must stop. Use it whenever you want to distinguish a calculated chart fact from an interpretive statement, a candidate pattern from a confirmed one, or a timing frame from an event claim.',
+   '方法与附录说明这份报告由什么组成、每一层证据能够支持到哪里，以及解释应该在哪里停止。当你需要区分“计算事实与解释文字”“候选格局与已确认格局”“时间框架与事件判断”时，可以回到这里。'
+  ),
+  bridge:pair(
+   'The report contains several evidence levels: calculated chart structure, admitted method relationships, editorial explanation and lived-reality comparison. Keeping these levels distinct makes the report more useful because a strong conclusion can be traced back to the kind of evidence that actually supports it.',
+   '本报告包含几个不同证据层：计算得到的命盘结构、已核准的方法关系、编辑解释，以及现实经验对照。把这些层次分清楚，报告反而会更有用，因为每个重要结论都能追溯到真正支持它的证据类型。'
+  ),
+  items:[
+   pair('Calculated facts and interpretation are different layers. Stems, branches, counts and resolved timing positions are method facts; the meaning attached to them requires an explicit interpretive rule.','计算事实与解释属于不同层次。天干、地支、计数与已解析的时间位置属于方法事实；附加其上的意义则需要明确的解释规则。'),
+   pair('Open conditions stay open. When a pattern, strength judgment or timing conclusion is not fully established, the report should preserve that uncertainty instead of filling it with stronger prose.','未定条件必须保持未定。当格局、强弱或时间结论尚未完全成立时，报告应保留这种不确定性，而不是用更肯定的文字填补。'),
+   pair('Use the report as a structured lens, then compare it with independent evidence from your actual life. Agreement can be useful, and disagreement is equally valuable information for interpretation.','把报告当作结构化观察镜头，再与真实生活中的独立证据比较。相符可以提供线索，不相符同样是重要的解释信息。')
+  ]
+ }
 };
