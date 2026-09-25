@@ -18,6 +18,8 @@ validateSectionRegistry();
 for(const [name,data] of [['bazi-section-registry',plan],['report-page-families',{version:'2.1.0',families}],['bazi-visual-assets',assets]])assert.deepEqual(data,read(`config/reports/${name}.json`),'generated config must match canonical JSON');
 const invalid=structuredClone(plan);invalid.sections[0].pages[0].family='NARRATIVE_ANALYSIS_PAGE';assert.throws(()=>validateSectionRegistry(invalid));
 assert.equal(Object.keys(families).length,7);assert.equal(assets.assets.length,13);
+const declaredPageFamilies=[...new Set(plan.sections.flatMap(section=>section.pages.map(page=>page.family)))];
+assert(declaredPageFamilies.every(family=>families[family]),'every BaZi-declared page family must exist in the global family registry');
 for(const asset of assets.assets){assert.equal(asset.containsText,false);assert.equal(asset.localeIndependent,true);assert(asset.objectKey.endsWith(`${asset.assetId}.${asset.preferredFormat}`));assert(!asset.objectKey.includes('LIFE_STRUCTURE'));}
 for(const [id,url] of Object.entries(assets.bindings)){if(url.startsWith('https://')){assert.equal(new URL(url).origin,'https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev');assert.equal(url.split('/').at(-1),id+'.webp');continue;}assert(fs.existsSync('.'+url),id);assert(url.endsWith('.svg')||url.endsWith('.webp'));if(url.endsWith('.svg')){const svg=fs.readFileSync('.'+url,'utf8');assert(!/<(?:text|foreignObject|script)\b|\bon\w+\s*=/.test(svg));for(const match of svg.matchAll(/(?:xlink:)?href="([^"]+)"/g))assert(/^data:image\/(png|webp);base64,|^#/.test(match[1]));}}
 const layers=structuredClone(assets),key=plan.sections[0].key;
@@ -36,7 +38,8 @@ for(const report of reports){
  const html=renderVisualReportPages(report);assert.equal((html.match(/data-pagination-owner=/g)||[]).length,report.totalPages-5);
  assert(!/CMP-|PPR-C1-|BAZI_FULL_REPORT:|未选择目标时间|T3_DEEP_COMPOSITION/.test(html));
  assert.equal(report.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,10);
- assert.equal(new Set(report.pages.map(p=>p.pageFamily)).size,7);
+ const renderedFamilies=[...new Set(report.pages.map(p=>p.pageFamily))];
+ assert.deepEqual(renderedFamilies.slice().sort(),declaredPageFamilies.slice().sort(),'rendered BaZi report must cover exactly the page families declared by the BaZi section registry');
  for(const p of report.pages){
   const budget=families[p.pageFamily].budget,range=budget[report.locale==='en'?'en':'zh'];
   if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert((p.primaryVisualRef||units>=range[0])&&units<=range[1],`CONTENT_BUDGET:${p.pageKey}:${units}`);}
