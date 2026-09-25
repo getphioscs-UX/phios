@@ -74,7 +74,7 @@
         ],
         "supportingSignals": [
           {
-            "text": "按年、月、日、时阅读四柱，并区分天干、地支与藏干。日主提供参照位置，五行清单记录命盘中的分布。数量用来说明清单，不用于衡量个人价值，也不直接决定人生结果。",
+            "text": "四柱说明每个天干地支位于哪里；日主提供整张命盘的参照点；月令提供季节背景；五行则显示哪些元素出现，以及它们如何分布。阅读时要把这些层次放在一起，而不是把命盘压缩成一个数字。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S01_OVERVIEW"
           }
         ],
@@ -97,7 +97,7 @@
         },
         "allowedInterpretations": [
           {
-            "text": "按年、月、日、时阅读四柱，并区分天干、地支与藏干。日主提供参照位置，五行清单记录命盘中的分布。数量用来说明清单，不用于衡量个人价值，也不直接决定人生结果。",
+            "text": "四柱说明每个天干地支位于哪里；日主提供整张命盘的参照点；月令提供季节背景；五行则显示哪些元素出现，以及它们如何分布。阅读时要把这些层次放在一起，而不是把命盘压缩成一个数字。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S01_OVERVIEW"
           }
         ],
@@ -116,7 +116,7 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "9119efd13c1d0b05fb7c899d7a8ebc1011ede70310789ecc5e94dcf44af61b45"
+        "semanticDigest": "8ac38faa8e0c75cd8d4fd0bbc864c6f6511990033601a5e6f9ee5e31c607f2b5"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
@@ -125,17 +125,17 @@
         "route": {
           "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-luna",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "LIGHT",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
         "fallbackState": "CANONICAL_HUMANIZATION",
-        "sourceDigest": "9119efd13c1d0b05fb7c899d7a8ebc1011ede70310789ecc5e94dcf44af61b45"
+        "sourceDigest": "8ac38faa8e0c75cd8d4fd0bbc864c6f6511990033601a5e6f9ee5e31c607f2b5"
       },
       "sectionComposition": {
         "sectionKey": "S01_OVERVIEW",
@@ -143,11 +143,11 @@
           "zh-Hans": "命盘总览",
           "en": "Chart Overview"
         },
-        "openerIntro": "先从命盘本身开始。四柱、日主与五行清单为后面的章节建立共同参照。先看清结构，再讨论事业、关系与时间；后续每章会从不同角度回到这个起点，而不是把一个符号当成全部答案。",
+        "openerIntro": "后面的所有解读，都从同一张命盘开始。本章先建立共同参照：四柱、日主、月令，以及五行在命盘中的分布。先把它当作整套系统的地图看清楚，再进入性格、事业、关系与时间等主题。",
         "keyThemes": [
           "四柱命盘",
           "五行 · 结构与季节",
-          "命盘重点摘要"
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -157,7 +157,7 @@
             "title": "四柱命盘",
             "contentBlocks": [
               {
-                "text": "按年、月、日、时阅读四柱，并区分天干、地支与藏干。日主提供参照位置，五行清单记录命盘中的分布。数量用来说明清单，不用于衡量个人价值，也不直接决定人生结果。",
+                "text": "四柱说明每个天干地支位于哪里；日主提供整张命盘的参照点；月令提供季节背景；五行则显示哪些元素出现，以及它们如何分布。阅读时要把这些层次放在一起，而不是把命盘压缩成一个数字。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S01_OVERVIEW",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -187,21 +187,21 @@
           {
             "definitionKey": "S01_P3",
             "pageFamily": "INSIGHT_LIST_PAGE",
-            "title": "命盘重点摘要",
+            "title": "重点摘要",
             "contentBlocks": [],
             "items": [
               {
-                "text": "先找到日主与月令的位置，分清两者，再回到整张命盘一起阅读。",
+                "text": "日主是命盘的参照点。它需要结合季节、周围干支、根气与支持一起阅读，不能只凭日主名称下结论。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S01_OVERVIEW",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "比较五行数量时先把它当作清单，不把较多的计数直接解释为较强的性格。",
+                "text": "五行数量说明的是组成，不等于最终强弱。季节作用与结构关系，才决定这些组成怎样运作。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S01_OVERVIEW",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "带着一个具体问题进入下一章；解读需要背景时，再回到这张命盘核对。",
+                "text": "命盘是一套位置与关系组成的系统。后面的章节不是换一张命盘，而是带着不同问题重新回到同一套结构。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S01_OVERVIEW",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -292,12 +292,12 @@
         ],
         "supportingSignals": [
           {
-            "text": "「学习、支持与吸收」是能力主题的第一阅读视角，但它代表阅读优先级，不是测得的人格特质。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/leadGroup|professionalModules/customerNarrative/topicNarratives/4/development"
+            "text": "你的核心运作方式，要从命盘里首先被强调的功能开始，再把同时参与的其他功能放回来一起看。重点不是贴上永久人格标签，而是找出反复组织你如何发展与使用能力的那套结构。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY"
           },
           {
-            "text": "同时相关的主题包括同类关系与自我位置、规则、责任与压力，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relevantGroups|professionalModules/professionalTopics/topics/4/leadGroup"
+            "text": "「学习、支持与吸收」是能力主题的第一阅读视角，但它代表阅读优先级，不是测得的人格特质。",
+            "sourceRef": "professionalModules/professionalTopics/topics/4/leadGroup|professionalModules/customerNarrative/topicNarratives/4/development"
           },
           {
             "text": "能力在这里不是单一特质。「学习、支持与吸收」是第一重点，同时同类关系与自我位置、规则、责任与压力仍属于同一幅结构图。方法因此把吸收、练习、表达与反复承载放在一起阅读；自我位置、环境与表达之间已经记录的关系，也要求能力保持情境性，而不是被压成一句固定人格标签。",
@@ -308,44 +308,16 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/3"
-          },
-          {
-            "text": "支持、表达与外部要求是能力主题里同时存在的条件。任何一项都不能单独证明现实中的能力表现；更有用的读取，是观察这些因素在现有承载条件下能否一起维持。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/carryingContext|professionalModules/customerNarrative/topicNarratives/4/condition"
-          },
-          {
-            "text": "能力是否稳定，仍取决于可用支持、向外表达所需的投入与压力能否在时间中一起被承载。因此，承载条件必须与固定的强弱身份分开。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/condition|professionalModules/professionalTopics/topics/4/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "规则、责任与压力是整盘优先主题，也会进入能力读取。它们构成对“只看学习与支持”的修正：标准与要求需要保留，但不能被写成固定人格评分。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "承载条件是整盘另一条独立优先主线。在能力主题里，“拥有一项能力”与“在持续表达和要求之下仍能使用它”是相关但不能混为一谈的两个问题。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition"
+            "text": "同时相关的主题包括同类关系与自我位置、规则、责任与压力，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/4/relevantGroups|professionalModules/professionalTopics/topics/4/leadGroup"
           }
         ],
         "tensionSignals": [
           "来源出现次数，不是人格评分；各类别保留既有功能组颜色。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "temporalContext": {
@@ -364,12 +336,12 @@
         },
         "allowedInterpretations": [
           {
-            "text": "「学习、支持与吸收」是能力主题的第一阅读视角，但它代表阅读优先级，不是测得的人格特质。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/leadGroup|professionalModules/customerNarrative/topicNarratives/4/development"
+            "text": "你的核心运作方式，要从命盘里首先被强调的功能开始，再把同时参与的其他功能放回来一起看。重点不是贴上永久人格标签，而是找出反复组织你如何发展与使用能力的那套结构。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY"
           },
           {
-            "text": "同时相关的主题包括同类关系与自我位置、规则、责任与压力，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relevantGroups|professionalModules/professionalTopics/topics/4/leadGroup"
+            "text": "「学习、支持与吸收」是能力主题的第一阅读视角，但它代表阅读优先级，不是测得的人格特质。",
+            "sourceRef": "professionalModules/professionalTopics/topics/4/leadGroup|professionalModules/customerNarrative/topicNarratives/4/development"
           },
           {
             "text": "能力在这里不是单一特质。「学习、支持与吸收」是第一重点，同时同类关系与自我位置、规则、责任与压力仍属于同一幅结构图。方法因此把吸收、练习、表达与反复承载放在一起阅读；自我位置、环境与表达之间已经记录的关系，也要求能力保持情境性，而不是被压成一句固定人格标签。",
@@ -380,40 +352,8 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/3"
-          },
-          {
-            "text": "支持、表达与外部要求是能力主题里同时存在的条件。任何一项都不能单独证明现实中的能力表现；更有用的读取，是观察这些因素在现有承载条件下能否一起维持。",
-            "sourceRef": "professionalModules/professionalTopics/topics/4/carryingContext|professionalModules/customerNarrative/topicNarratives/4/condition"
-          },
-          {
-            "text": "能力是否稳定，仍取决于可用支持、向外表达所需的投入与压力能否在时间中一起被承载。因此，承载条件必须与固定的强弱身份分开。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/condition|professionalModules/professionalTopics/topics/4/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "规则、责任与压力是整盘优先主题，也会进入能力读取。它们构成对“只看学习与支持”的修正：标准与要求需要保留，但不能被写成固定人格评分。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "承载条件是整盘另一条独立优先主线。在能力主题里，“拥有一项能力”与“在持续表达和要求之下仍能使用它”是相关但不能混为一谈的两个问题。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition"
+            "text": "同时相关的主题包括同类关系与自我位置、规则、责任与压力，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/4/relevantGroups|professionalModules/professionalTopics/topics/4/leadGroup"
           }
         ],
         "prohibitedClaims": [
@@ -431,26 +371,26 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "d89bb0ba377dd33d99f59bc1aa00e447fdb21e79ff9365d33138930070074351"
+        "semanticDigest": "dec27ef33428dbc67ddb5cab3e12aff70050474bf91aa8abc11c8e8826ad002d"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
-        "requestedExecutionClass": "T3_DEEP_COMPOSITION",
+        "requestedExecutionClass": "T2_LIGHT_COMPOSITION",
         "evidenceAdmission": "SOURCE_BOUND_CANONICAL_STATEMENTS",
         "route": {
-          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-sol",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "DEEP",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
-        "fallbackState": "DEEP_COMPOSITION_FALLBACK",
-        "sourceDigest": "d89bb0ba377dd33d99f59bc1aa00e447fdb21e79ff9365d33138930070074351"
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
+        "fallbackState": "CANONICAL_HUMANIZATION",
+        "sourceDigest": "dec27ef33428dbc67ddb5cab3e12aff70050474bf91aa8abc11c8e8826ad002d"
       },
       "sectionComposition": {
         "sectionKey": "S02_PERSONALITY",
@@ -458,11 +398,15 @@
           "zh-Hans": "核心性格",
           "en": "Core Personality"
         },
-        "openerIntro": "本章从学习、表达与反复练习的角度理解方法中的个人主题，再邀请你用熟悉的情境核对。性格需要放在环境与回应方式中观察，工作、家庭及不同要求之下的表现，都可能有所不同。",
+        "openerIntro": "核心性格读取的不是一个孤立标签，而是命盘如何吸收信息、发展能力、表达自己，以及面对期待时反复出现的运作方式。在八字里，性格来自日主、十神与支持或限制这些功能的条件之间的关系。",
         "keyThemes": [
           "十神 · 结构占比",
-          "性格特质分析",
-          "优势与挑战"
+          "核心运作方式",
+          "学习与吸收",
+          "表达与输出",
+          "张力与外部要求",
+          "能力的稳定条件",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -480,18 +424,18 @@
             "primaryVisualHtml": "<div class=\"bzpub-module\" data-publication-visual=\"TEN_GOD_OVERVIEW\"><div class=\"bzpub-ten-bars\"><article data-function-group=\"PEER\" style=\"--bzpub-color:#c87949\"><h3>比肩</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"7.7%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#c87949\" opacity=\".12\"/><rect width=\"7.7\" height=\"8\" rx=\"4\" fill=\"#c87949\"/></svg><strong>7.7%</strong><small>计数 1</small></article><article data-function-group=\"PEER\" style=\"--bzpub-color:#c87949\"><h3>劫财</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"0%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#c87949\" opacity=\".12\"/><rect width=\"0\" height=\"8\" rx=\"4\" fill=\"#c87949\"/></svg><strong>0%</strong><small>计数 0</small></article><article data-function-group=\"OUTPUT\" style=\"--bzpub-color:#f0aa2f\"><h3>食神</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"0%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#f0aa2f\" opacity=\".12\"/><rect width=\"0\" height=\"8\" rx=\"4\" fill=\"#f0aa2f\"/></svg><strong>0%</strong><small>计数 0</small></article><article data-function-group=\"OUTPUT\" style=\"--bzpub-color:#f0aa2f\"><h3>伤官</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"0%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#f0aa2f\" opacity=\".12\"/><rect width=\"0\" height=\"8\" rx=\"4\" fill=\"#f0aa2f\"/></svg><strong>0%</strong><small>计数 0</small></article><article data-function-group=\"WEALTH\" style=\"--bzpub-color:#3c8fd0\"><h3>偏财</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"15.4%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\" opacity=\".12\"/><rect width=\"15.4\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\"/></svg><strong>15.4%</strong><small>计数 2</small></article><article data-function-group=\"WEALTH\" style=\"--bzpub-color:#3c8fd0\"><h3>正财</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"7.7%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\" opacity=\".12\"/><rect width=\"7.7\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\"/></svg><strong>7.7%</strong><small>计数 1</small></article><article data-function-group=\"OFFICER\" style=\"--bzpub-color:#48c094\"><h3>七杀</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"30.8%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#48c094\" opacity=\".12\"/><rect width=\"30.8\" height=\"8\" rx=\"4\" fill=\"#48c094\"/></svg><strong>30.8%</strong><small>计数 4</small></article><article data-function-group=\"OFFICER\" style=\"--bzpub-color:#48c094\"><h3>正官</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"15.4%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#48c094\" opacity=\".12\"/><rect width=\"15.4\" height=\"8\" rx=\"4\" fill=\"#48c094\"/></svg><strong>15.4%</strong><small>计数 2</small></article><article data-function-group=\"RESOURCE\" style=\"--bzpub-color:#e26d71\"><h3>偏印</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"7.7%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#e26d71\" opacity=\".12\"/><rect width=\"7.7\" height=\"8\" rx=\"4\" fill=\"#e26d71\"/></svg><strong>7.7%</strong><small>计数 1</small></article><article data-function-group=\"RESOURCE\" style=\"--bzpub-color:#e26d71\"><h3>正印</h3><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"15.4%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#e26d71\" opacity=\".12\"/><rect width=\"15.4\" height=\"8\" rx=\"4\" fill=\"#e26d71\"/></svg><strong>15.4%</strong><small>计数 2</small></article></div></div>"
           },
           {
-            "definitionKey": "S02_P2",
+            "definitionKey": "S02_CORE_OPERATING_STYLE",
             "pageFamily": "NARRATIVE_ANALYSIS_PAGE",
-            "title": "性格特质分析",
+            "title": "核心运作方式",
             "contentBlocks": [
+              {
+                "text": "你的核心运作方式，要从命盘里首先被强调的功能开始，再把同时参与的其他功能放回来一起看。重点不是贴上永久人格标签，而是找出反复组织你如何发展与使用能力的那套结构。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
+                "role": "EDITORIAL_GUIDANCE"
+              },
               {
                 "text": "「学习、支持与吸收」是能力主题的第一阅读视角，但它代表阅读优先级，不是测得的人格特质。",
                 "sourceRef": "professionalModules/professionalTopics/topics/4/leadGroup|professionalModules/customerNarrative/topicNarratives/4/development",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "同时相关的主题包括同类关系与自我位置、规则、责任与压力，它们不取代本章的首要重点。",
-                "sourceRef": "professionalModules/professionalTopics/topics/4/relevantGroups|professionalModules/professionalTopics/topics/4/leadGroup",
                 "role": "METHOD_INTERPRETATION"
               },
               {
@@ -505,9 +449,73 @@
                 "role": "METHOD_INTERPRETATION"
               },
               {
+                "text": "同时相关的主题包括同类关系与自我位置、规则、责任与压力，它们不取代本章的首要重点。",
+                "sourceRef": "professionalModules/professionalTopics/topics/4/relevantGroups|professionalModules/professionalTopics/topics/4/leadGroup",
+                "role": "METHOD_INTERPRETATION"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S02_LEARNING_PROCESSING",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "学习与吸收",
+            "contentBlocks": [
+              {
+                "text": "学习与处理方式主要从命盘中的支持与吸收功能，以及包围它的条件来阅读。这一层关注信息如何被接收、获得支持并变成可用能力，再进入表达与输出。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
+                "text": "「学习、支持与吸收」是能力主题的第一阅读视角，但它代表阅读优先级，不是测得的人格特质。",
+                "sourceRef": "professionalModules/professionalTopics/topics/4/leadGroup|professionalModules/customerNarrative/topicNarratives/4/development",
+                "role": "METHOD_INTERPRETATION"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S02_EXPRESSION_CAPABILITY",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "表达与输出",
+            "contentBlocks": [
+              {
+                "text": "表达需要与学习分开阅读。一项能力可以已经存在于内部，但要变成可见输出、反复使用并持续承担，可能需要不同条件。命盘中自我位置与表达之间的已记录联结，会进一步修正这一层。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
                 "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
                 "sourceRef": "professionalModules/professionalTopics/topics/4/relationshipInterfaces/0",
                 "role": "METHOD_INTERPRETATION"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S02_FRICTION",
+            "pageFamily": "NARRATIVE_ANALYSIS_PAGE",
+            "title": "张力与外部要求",
+            "contentBlocks": [
+              {
+                "text": "张力不等于缺点。它指支持、表达、标准与外部要求并不自动同向运作。若张力在多个柱位反复出现，就更需要主动协调这些功能。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
+                "role": "EDITORIAL_GUIDANCE"
               },
               {
                 "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
@@ -530,6 +538,29 @@
                 "role": "METHOD_INTERPRETATION"
               },
               {
+                "text": "规则、责任与压力是整盘优先主题，也会进入能力读取。它们构成对“只看学习与支持”的修正：标准与要求需要保留，但不能被写成固定人格评分。",
+                "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition",
+                "role": "METHOD_INTERPRETATION"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S02_RELIABILITY",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "能力的稳定条件",
+            "contentBlocks": [
+              {
+                "text": "稳定性问的不是“有没有能力”，而是当表达、责任与要求持续存在时，这项能力是否仍然可用。承载条件与未定的强弱判断需要一起阅读，但不能变成固定身份。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
                 "text": "能力是否稳定，仍取决于可用支持、向外表达所需的投入与压力能否在时间中一起被承载。因此，承载条件必须与固定的强弱身份分开。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/condition|professionalModules/professionalTopics/topics/4/carryingContext",
                 "role": "METHOD_INTERPRETATION"
@@ -537,16 +568,6 @@
               {
                 "text": "解读保留最终强弱判断，不据此定义固定身份。",
                 "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "规则、责任与压力是整盘优先主题，也会进入能力读取。它们构成对“只看学习与支持”的修正：标准与要求需要保留，但不能被写成固定人格评分。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "承载条件是整盘另一条独立优先主线。在能力主题里，“拥有一项能力”与“在持续表达和要求之下仍能使用它”是相关但不能混为一谈的两个问题。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition",
                 "role": "METHOD_INTERPRETATION"
               }
             ],
@@ -560,21 +581,21 @@
           {
             "definitionKey": "S02_P3",
             "pageFamily": "INSIGHT_LIST_PAGE",
-            "title": "优势与挑战",
+            "title": "重点摘要",
             "contentBlocks": [],
             "items": [
               {
-                "text": "寻找一项在不同环境中仍能使用的能力，写下帮助你维持它的练习。",
+                "text": "核心运作方式来自首要能力功能与周围其他功能的关系，而不是一个性格标签。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "比较一次顺利与一次困难的学习经历，记录可用支持，而不是急着评价自己。",
+                "text": "学习、吸收与表达是能力的不同层次。一项能力可以已经存在，但仍需要不同条件才能成为稳定输出。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "观察面对熟人与陌生人时表达怎样变化，再决定某个社交风格描述是否贴切。",
+                "text": "能力能否稳定使用取决于承载条件。支持、外部要求与表达成本会共同影响能力能否长期保持可用。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S02_PERSONALITY",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -588,6 +609,10 @@
         ],
         "boundaryNotes": [
           "来源出现次数，不是人格评分；各类别保留既有功能组颜色。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "practicalObservations": [],
@@ -5464,68 +5489,20 @@
         ],
         "supportingSignals": [
           {
+            "text": "命盘的结构中心，要把承载条件、功能分布与反复出现的关系放在同一框架里阅读。本页先说明整套系统怎样组织起来，再判断任何单一格局名称是否真的具有决定性。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S03_LIFE_STRUCTURE"
+          },
+          {
             "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/6/leadGroup|professionalModules/customerNarrative/topicNarratives/6/development"
           },
           {
-            "text": "同时相关的主题包括学习、支持与吸收、资源与交换、同类关系与自我位置，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relevantGroups|professionalModules/professionalTopics/topics/6/leadGroup"
-          },
-          {
-            "text": "就「生活运行」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+            "text": "人生格局以「规则、责任与压力」如何与学习、支持与吸收、资源与交换、同类关系与自我位置共同运作为主线。读取会把承载条件、格局候选与已经记录的柱位关系放在同一框架中，因为任何一层单独拿出来都不足以代表整盘。真正要理解的是支持、负荷与方向如何被组织，同时让尚未成立的条件继续保持开放。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/development|professionalModules/professionalTopics/topics/6/leadGroup|professionalModules/professionalTopics/topics/6/relevantTenGods|professionalModules/professionalTopics/topics/6/relationshipInterfaces|professionalModules/professionalTopics/topics/6/carryingContext|professionalModules/professionalTopics/topics/6/priorityRefs"
           },
           {
             "text": "生活运行看支持、输出、资源、责任与关系能不能形成一套可持续循环。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/lead"
-          },
-          {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/carryingContext|professionalModules/customerNarrative/topicNarratives/6/condition"
-          },
-          {
-            "text": "生活运行的关键不是哪一组永远占上风，而是支持、输出、资源与责任能否在不同阶段重新找到可持续的循环。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/condition|professionalModules/professionalTopics/topics/6/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "最终主格局尚未成立；可见候选仍须保留条件。",
-            "sourceRef": "professionalModules/pattern/summary|professionalModules/pattern/state"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition"
-          },
-          {
-            "text": "这组结构决定其他主题落到现实运行时有多少支撑、多少输出成本、又要面对多少外部要求，因此它比单独贴“身强／身弱”更有解释力。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition"
           }
         ],
         "tensionSignals": [
@@ -5533,6 +5510,7 @@
           "功能组描述既有命盘清单；比例不衡量人生结果。",
           "路径可见不等于成格；未定条件保持开放，读取优先级不是质量排名。",
           "每组配对保持独立。结构关系不证明事件或关系结果。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "temporalContext": {
@@ -5551,68 +5529,20 @@
         },
         "allowedInterpretations": [
           {
+            "text": "命盘的结构中心，要把承载条件、功能分布与反复出现的关系放在同一框架里阅读。本页先说明整套系统怎样组织起来，再判断任何单一格局名称是否真的具有决定性。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S03_LIFE_STRUCTURE"
+          },
+          {
             "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/6/leadGroup|professionalModules/customerNarrative/topicNarratives/6/development"
           },
           {
-            "text": "同时相关的主题包括学习、支持与吸收、资源与交换、同类关系与自我位置，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relevantGroups|professionalModules/professionalTopics/topics/6/leadGroup"
-          },
-          {
-            "text": "就「生活运行」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+            "text": "人生格局以「规则、责任与压力」如何与学习、支持与吸收、资源与交换、同类关系与自我位置共同运作为主线。读取会把承载条件、格局候选与已经记录的柱位关系放在同一框架中，因为任何一层单独拿出来都不足以代表整盘。真正要理解的是支持、负荷与方向如何被组织，同时让尚未成立的条件继续保持开放。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/development|professionalModules/professionalTopics/topics/6/leadGroup|professionalModules/professionalTopics/topics/6/relevantTenGods|professionalModules/professionalTopics/topics/6/relationshipInterfaces|professionalModules/professionalTopics/topics/6/carryingContext|professionalModules/professionalTopics/topics/6/priorityRefs"
           },
           {
             "text": "生活运行看支持、输出、资源、责任与关系能不能形成一套可持续循环。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/lead"
-          },
-          {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/6/carryingContext|professionalModules/customerNarrative/topicNarratives/6/condition"
-          },
-          {
-            "text": "生活运行的关键不是哪一组永远占上风，而是支持、输出、资源与责任能否在不同阶段重新找到可持续的循环。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/condition|professionalModules/professionalTopics/topics/6/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "最终主格局尚未成立；可见候选仍须保留条件。",
-            "sourceRef": "professionalModules/pattern/summary|professionalModules/pattern/state"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition"
-          },
-          {
-            "text": "这组结构决定其他主题落到现实运行时有多少支撑、多少输出成本、又要面对多少外部要求，因此它比单独贴“身强／身弱”更有解释力。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition"
           }
         ],
         "prohibitedClaims": [
@@ -5630,26 +5560,26 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "ae44b416b785aaf14513947293777d6a815ca2c0e7cd5dfacac9b1e35ab9a818"
+        "semanticDigest": "e4a7ff08fd256ad543311c0ea3d84d10f02dbb38dea063944899e3c98d8d9b7c"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
-        "requestedExecutionClass": "T3_DEEP_COMPOSITION",
+        "requestedExecutionClass": "T2_LIGHT_COMPOSITION",
         "evidenceAdmission": "SOURCE_BOUND_CANONICAL_STATEMENTS",
         "route": {
-          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-sol",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "DEEP",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
-        "fallbackState": "DEEP_COMPOSITION_FALLBACK",
-        "sourceDigest": "ae44b416b785aaf14513947293777d6a815ca2c0e7cd5dfacac9b1e35ab9a818"
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
+        "fallbackState": "CANONICAL_HUMANIZATION",
+        "sourceDigest": "e4a7ff08fd256ad543311c0ea3d84d10f02dbb38dea063944899e3c98d8d9b7c"
       },
       "sectionComposition": {
         "sectionKey": "S03_LIFE_STRUCTURE",
@@ -5657,7 +5587,7 @@
           "zh-Hans": "人生格局",
           "en": "Life Structure"
         },
-        "openerIntro": "命盘中既有可见模式，也有尚待满足的条件。本章把已经建立的结构、仍然开放的判断，以及支持和负荷放在一起阅读。它为后面的章节提供结构参照，而不是给人生高低作排名。",
+        "openerIntro": "人生格局把命盘最主要的运作机制放到同一张图里阅读：日主的承载条件、十神功能的分布、可能形成的格局路径，以及柱位之间的关系。先理解命盘如何组织支持、负荷与方向，再把这些结构带入具体人生领域。",
         "keyThemes": [
           "日主 · 承载条件",
           "五类功能组",
@@ -5666,7 +5596,9 @@
           "十神 · 来源与重复",
           "格局路径与未定条件",
           "柱位之间的关系",
-          "结构如何影响人生节奏"
+          "整盘如何组织",
+          "成立条件与开放判断",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -5768,22 +5700,22 @@
             "primaryVisualHtml": "<div class=\"bzpub-module\" data-publication-visual=\"PILLAR_RELATIONSHIPS\"><div class=\"bzpub-grid\" style=\"--bzpub-columns:2\"><article class=\"bzpub-card\" style=\"--bzpub-color:#986536\" ><h3>日 ↔ 时</h3><strong>癸 · 戊</strong><p>天干合</p><p>未建立化气判断</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#986536\" ><h3>月 ↔ 日</h3><strong>午 · 丑</strong><p>害</p><p>未建立化气判断</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#986536\" ><h3>日 ↔ 时</h3><strong>丑 · 午</strong><p>害</p><p>未建立化气判断</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#986536\" ><h3>月 ↔ 时</h3><strong></strong><p>自刑</p><p>未建立化气判断</p></article></div></div>"
           },
           {
-            "definitionKey": "S03_P3",
+            "definitionKey": "S03_SYSTEM",
             "pageFamily": "NARRATIVE_ANALYSIS_PAGE",
-            "title": "结构如何影响人生节奏",
+            "title": "整盘如何组织",
             "contentBlocks": [
+              {
+                "text": "命盘的结构中心，要把承载条件、功能分布与反复出现的关系放在同一框架里阅读。本页先说明整套系统怎样组织起来，再判断任何单一格局名称是否真的具有决定性。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S03_LIFE_STRUCTURE",
+                "role": "EDITORIAL_GUIDANCE"
+              },
               {
                 "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
                 "sourceRef": "professionalModules/professionalTopics/topics/6/leadGroup|professionalModules/customerNarrative/topicNarratives/6/development",
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "同时相关的主题包括学习、支持与吸收、资源与交换、同类关系与自我位置，它们不取代本章的首要重点。",
-                "sourceRef": "professionalModules/professionalTopics/topics/6/relevantGroups|professionalModules/professionalTopics/topics/6/leadGroup",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "就「生活运行」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+                "text": "人生格局以「规则、责任与压力」如何与学习、支持与吸收、资源与交换、同类关系与自我位置共同运作为主线。读取会把承载条件、格局候选与已经记录的柱位关系放在同一框架中，因为任何一层单独拿出来都不足以代表整盘。真正要理解的是支持、负荷与方向如何被组织，同时让尚未成立的条件继续保持开放。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/development|professionalModules/professionalTopics/topics/6/leadGroup|professionalModules/professionalTopics/topics/6/relevantTenGods|professionalModules/professionalTopics/topics/6/relationshipInterfaces|professionalModules/professionalTopics/topics/6/carryingContext|professionalModules/professionalTopics/topics/6/priorityRefs",
                 "role": "METHOD_INTERPRETATION"
               },
@@ -5791,31 +5723,24 @@
                 "text": "生活运行看支持、输出、资源、责任与关系能不能形成一套可持续循环。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/lead",
                 "role": "METHOD_INTERPRETATION"
-              },
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S03_CONDITIONS",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "成立条件与开放判断",
+            "contentBlocks": [
               {
-                "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/0",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/1",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/2",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/6/relationshipInterfaces/3",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-                "sourceRef": "professionalModules/professionalTopics/topics/6/carryingContext|professionalModules/customerNarrative/topicNarratives/6/condition",
-                "role": "METHOD_INTERPRETATION"
+                "text": "第二个问题是：眼前可见的结构能否被持续承载。格局候选、张力、承载限制与未定条件必须放在一起，因为它们共同决定这份解释可以走多远。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S03_LIFE_STRUCTURE",
+                "role": "EDITORIAL_GUIDANCE"
               },
               {
                 "text": "生活运行的关键不是哪一组永远占上风，而是支持、输出、资源与责任能否在不同阶段重新找到可持续的循环。",
@@ -5831,26 +5756,6 @@
                 "text": "最终主格局尚未成立；可见候选仍须保留条件。",
                 "sourceRef": "professionalModules/pattern/summary|professionalModules/pattern/state",
                 "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这组结构决定其他主题落到现实运行时有多少支撑、多少输出成本、又要面对多少外部要求，因此它比单独贴“身强／身弱”更有解释力。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition",
-                "role": "METHOD_INTERPRETATION"
               }
             ],
             "items": [],
@@ -5859,6 +5764,34 @@
             "temporal": null,
             "observations": [],
             "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S03_KEY_INSIGHTS",
+            "pageFamily": "INSIGHT_LIST_PAGE",
+            "title": "重点摘要",
+            "contentBlocks": [],
+            "items": [
+              {
+                "text": "日主承载条件说明这个参照点同时面对多少支持与反向负荷。它是后续解读的基础层，不是对个人价值的评价。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S03_LIFE_STRUCTURE",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
+                "text": "格局路径显示多个功能可能怎样组织成更大的结构。路径可见本身有意义，但只要关键条件仍开放，就必须与“已经成格”区分。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S03_LIFE_STRUCTURE",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
+                "text": "柱位关系揭示结构互动发生在哪里。重复、支持、制约或张力，只有在保留其具体位置后，才具有更完整的解释价值。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S03_LIFE_STRUCTURE",
+                "role": "EDITORIAL_GUIDANCE"
+              }
+            ],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": ""
           }
         ],
         "boundaryNotes": [
@@ -5866,6 +5799,7 @@
           "功能组描述既有命盘清单；比例不衡量人生结果。",
           "路径可见不等于成格；未定条件保持开放，读取优先级不是质量排名。",
           "每组配对保持独立。结构关系不证明事件或关系结果。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "practicalObservations": [],
@@ -6116,7 +6050,7 @@
                 "NOT_OBSERVED_REALITY"
               ],
               "openConditions": [],
-              "text": "就「生活运行」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+              "text": "人生格局以「规则、责任与压力」如何与学习、支持与吸收、资源与交换、同类关系与自我位置共同运作为主线。读取会把承载条件、格局候选与已经记录的柱位关系放在同一框架中，因为任何一层单独拿出来都不足以代表整盘。真正要理解的是支持、负荷与方向如何被组织，同时让尚未成立的条件继续保持开放。",
               "explanationScope": "LIFE_DOMAIN",
               "claimId": "S03_LIFE_STRUCTURE:DOMAIN_EXPLANATION",
               "claimType": "LIFE_DOMAIN_EXPLANATION",
@@ -10141,7 +10075,7 @@
               "NO_AUTOMATIC_OBSERVED_REALITY"
             ]
           },
-          "sourceEvidenceHash": "6cbb0d1911dd90403d7195f185e2b1b8df2a5c22ddd4971426eed62010e9c3a1",
+          "sourceEvidenceHash": "d8d220ee85f4175fbd29b093ad70cc70d80f881e30b13347bbfdc195b5ec5ee1",
           "editorialQualityVersion": "BAZI_EDITORIAL_QUALITY_F_V2",
           "meaningCanon": {
             "version": "BAZI_EDITORIAL_MEANING_CANON_V2",
@@ -10408,7 +10342,7 @@
                 "themeId": "S03_LIFE_STRUCTURE:DOMAIN_EXPLANATION",
                 "customerMeaning": {
                   "claimId": "S03_LIFE_STRUCTURE:DOMAIN_EXPLANATION",
-                  "text": "就「生活运行」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。"
+                  "text": "人生格局以「规则、责任与压力」如何与学习、支持与吸收、资源与交换、同类关系与自我位置共同运作为主线。读取会把承载条件、格局候选与已经记录的柱位关系放在同一框架中，因为任何一层单独拿出来都不足以代表整盘。真正要理解的是支持、负荷与方向如何被组织，同时让尚未成立的条件继续保持开放。"
                 },
                 "roleInWholeChart": {
                   "rank": null,
@@ -12285,7 +12219,7 @@
             "version": "BAZI_SECTION_NARRATIVE_BRIEF_F_V1",
             "sectionKey": "S03_LIFE_STRUCTURE",
             "locale": "zh-Hans",
-            "meaningCanonDigest": "a779e5bedddf1574789ad3630978778d549b7daad7db58edc3856318a0861ad1",
+            "meaningCanonDigest": "fbd5bcf3d2be6f9a9df2682b095e330c8976c2afa56945b273c3b031c93a0c15",
             "orderedMeaningIds": [
               "S03_LIFE_STRUCTURE:PRIMARY",
               "S03_LIFE_STRUCTURE:DOMAIN_EXPLANATION",
@@ -12356,8 +12290,8 @@
             },
             "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion."
           },
-          "sectionNarrativeBriefDigest": "1f62e79dfa8b1433f5824c2db7cc7e5c75d43382486b55be4d77578bb0e6581d",
-          "canonicalEvidenceHash": "002f53e50ea4bbce611ffa60c3898252c0b3f6a2335627cc80f8f27dd312401e"
+          "sectionNarrativeBriefDigest": "c292438b7843c2a78ae209e63056272ae1df2bf0933a694b5bee1e018db2ad86",
+          "canonicalEvidenceHash": "66d87c61a5db673bb714e4acc80a62c7b9cf1366ecaef9cf6ca39d861936f628"
         }
       },
       "diagnostics": {
@@ -12421,15 +12355,15 @@
         ],
         "supportingSignals": [
           {
+            "text": "事业首先要看角色结构：需要承担什么、需要产出什么，以及资源与学习支持怎样进入这个角色。把这些功能当作一套工作系统一起阅读，命盘才真正具有现实解释力。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER"
+          },
+          {
             "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/0/leadGroup|professionalModules/customerNarrative/topicNarratives/0/development"
           },
           {
-            "text": "同时相关的主题包括学习、支持与吸收、资源与交换，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relevantGroups|professionalModules/professionalTopics/topics/0/leadGroup"
-          },
-          {
-            "text": "就「事业与工作」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+            "text": "事业主题以「规则、责任与压力」与学习、支持与吸收、资源与交换之间的互动为主线，把责任、产出、资源取得与学习支持放进同一套工作系统。已经记录的柱位关系与承载条件会进一步修正这套系统怎样运作，因此本章关注的是可持续的角色条件，而不是从一个符号直接指定职业。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/development|professionalModules/professionalTopics/topics/0/leadGroup|professionalModules/professionalTopics/topics/0/relevantTenGods|professionalModules/professionalTopics/topics/0/relationshipInterfaces|professionalModules/professionalTopics/topics/0/carryingContext|professionalModules/professionalTopics/topics/0/priorityRefs"
           },
           {
@@ -12437,52 +12371,14 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/carryingContext|professionalModules/customerNarrative/topicNarratives/0/condition"
-          },
-          {
-            "text": "事业结构会随角色、组织环境与阶段而改变；这里说明的是工作运行方式，不把它直接写成某个职业的固定成败结论。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/condition|professionalModules/professionalTopics/topics/0/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition"
-          },
-          {
-            "text": "这组结构决定其他主题落到现实运行时有多少支撑、多少输出成本、又要面对多少外部要求，因此它比单独贴“身强／身弱”更有解释力。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition"
+            "text": "同时相关的主题包括学习、支持与吸收、资源与交换，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/0/relevantGroups|professionalModules/professionalTopics/topics/0/leadGroup"
           }
         ],
         "tensionSignals": [
           "保留既有主题优先级。主题是多因素读取，不是预测。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "temporalContext": {
@@ -12501,15 +12397,15 @@
         },
         "allowedInterpretations": [
           {
+            "text": "事业首先要看角色结构：需要承担什么、需要产出什么，以及资源与学习支持怎样进入这个角色。把这些功能当作一套工作系统一起阅读，命盘才真正具有现实解释力。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER"
+          },
+          {
             "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/0/leadGroup|professionalModules/customerNarrative/topicNarratives/0/development"
           },
           {
-            "text": "同时相关的主题包括学习、支持与吸收、资源与交换，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relevantGroups|professionalModules/professionalTopics/topics/0/leadGroup"
-          },
-          {
-            "text": "就「事业与工作」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+            "text": "事业主题以「规则、责任与压力」与学习、支持与吸收、资源与交换之间的互动为主线，把责任、产出、资源取得与学习支持放进同一套工作系统。已经记录的柱位关系与承载条件会进一步修正这套系统怎样运作，因此本章关注的是可持续的角色条件，而不是从一个符号直接指定职业。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/development|professionalModules/professionalTopics/topics/0/leadGroup|professionalModules/professionalTopics/topics/0/relevantTenGods|professionalModules/professionalTopics/topics/0/relationshipInterfaces|professionalModules/professionalTopics/topics/0/carryingContext|professionalModules/professionalTopics/topics/0/priorityRefs"
           },
           {
@@ -12517,48 +12413,8 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/0/carryingContext|professionalModules/customerNarrative/topicNarratives/0/condition"
-          },
-          {
-            "text": "事业结构会随角色、组织环境与阶段而改变；这里说明的是工作运行方式，不把它直接写成某个职业的固定成败结论。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/condition|professionalModules/professionalTopics/topics/0/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition"
-          },
-          {
-            "text": "这组结构决定其他主题落到现实运行时有多少支撑、多少输出成本、又要面对多少外部要求，因此它比单独贴“身强／身弱”更有解释力。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition"
+            "text": "同时相关的主题包括学习、支持与吸收、资源与交换，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/0/relevantGroups|professionalModules/professionalTopics/topics/0/leadGroup"
           }
         ],
         "prohibitedClaims": [
@@ -12576,26 +12432,26 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "e4081d9d0c25230654443005682168f14207507b1a8b068e2bbd45a961895662"
+        "semanticDigest": "6b506f3e5a7a89f7538bd5e3364f5cc518ca0c2297bfca283aa2946e216f3639"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
-        "requestedExecutionClass": "T3_DEEP_COMPOSITION",
+        "requestedExecutionClass": "T2_LIGHT_COMPOSITION",
         "evidenceAdmission": "SOURCE_BOUND_CANONICAL_STATEMENTS",
         "route": {
-          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-sol",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "DEEP",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
-        "fallbackState": "DEEP_COMPOSITION_FALLBACK",
-        "sourceDigest": "e4081d9d0c25230654443005682168f14207507b1a8b068e2bbd45a961895662"
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
+        "fallbackState": "CANONICAL_HUMANIZATION",
+        "sourceDigest": "6b506f3e5a7a89f7538bd5e3364f5cc518ca0c2297bfca283aa2946e216f3639"
       },
       "sectionComposition": {
         "sectionKey": "S04_CAREER",
@@ -12603,11 +12459,13 @@
           "zh-Hans": "事业发展",
           "en": "Career Development"
         },
-        "openerIntro": "工作把责任、产出与支持放进具体环境。本章从角色和工作条件阅读事业主题，再与你的经历比较。重点是理解怎样的工作方式能够运作，不直接指定某个职业，也不把一种结构写成必然成败。",
+        "openerIntro": "事业发展读取的是命盘如何处理责任、产出、标准、资源与角色边界。本章不会把你指定到某一个“最佳职业”，而是观察什么样的工作条件，能让命盘中的功能更连贯、更持续地被使用。",
         "keyThemes": [
           "事业 · 结构背景",
-          "事业主题分析",
-          "工作方式与注意事项"
+          "你的工作结构",
+          "适合怎样的工作条件",
+          "事业发展的长期主线",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -12625,22 +12483,22 @@
             "primaryVisualHtml": "<div class=\"bzpub-module\" data-publication-visual=\"PROFESSIONAL_TOPICS\"><div class=\"bzpub-grid\" style=\"--bzpub-columns:2\"><article class=\"bzpub-card\" style=\"--bzpub-color:#48c094\" data-category=\"OFFICER\"><h3>官杀／规则压力</h3><strong>46.2%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"46.2%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#48c094\" opacity=\".12\"/><rect width=\"46.2\" height=\"8\" rx=\"4\" fill=\"#48c094\"/></svg><p>计数: 6</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#e26d71\" data-category=\"RESOURCE\"><h3>印星／吸收支持</h3><strong>23.1%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"23.1%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#e26d71\" opacity=\".12\"/><rect width=\"23.1\" height=\"8\" rx=\"4\" fill=\"#e26d71\"/></svg><p>计数: 3</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#3c8fd0\" data-category=\"WEALTH\"><h3>财星／资源交换</h3><strong>23.1%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"23.1%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\" opacity=\".12\"/><rect width=\"23.1\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\"/></svg><p>计数: 3</p></article></div><p class=\"bzpub-focus\">本章重点: 官杀／规则压力</p></div>"
           },
           {
-            "definitionKey": "S04_P2",
+            "definitionKey": "S04_ROLE_SYSTEM",
             "pageFamily": "NARRATIVE_ANALYSIS_PAGE",
-            "title": "事业主题分析",
+            "title": "你的工作结构",
             "contentBlocks": [
+              {
+                "text": "事业首先要看角色结构：需要承担什么、需要产出什么，以及资源与学习支持怎样进入这个角色。把这些功能当作一套工作系统一起阅读，命盘才真正具有现实解释力。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER",
+                "role": "EDITORIAL_GUIDANCE"
+              },
               {
                 "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
                 "sourceRef": "professionalModules/professionalTopics/topics/0/leadGroup|professionalModules/customerNarrative/topicNarratives/0/development",
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "同时相关的主题包括学习、支持与吸收、资源与交换，它们不取代本章的首要重点。",
-                "sourceRef": "professionalModules/professionalTopics/topics/0/relevantGroups|professionalModules/professionalTopics/topics/0/leadGroup",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "就「事业与工作」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+                "text": "事业主题以「规则、责任与压力」与学习、支持与吸收、资源与交换之间的互动为主线，把责任、产出、资源取得与学习支持放进同一套工作系统。已经记录的柱位关系与承载条件会进一步修正这套系统怎样运作，因此本章关注的是可持续的角色条件，而不是从一个符号直接指定职业。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/development|professionalModules/professionalTopics/topics/0/leadGroup|professionalModules/professionalTopics/topics/0/relevantTenGods|professionalModules/professionalTopics/topics/0/relationshipInterfaces|professionalModules/professionalTopics/topics/0/carryingContext|professionalModules/professionalTopics/topics/0/priorityRefs",
                 "role": "METHOD_INTERPRETATION"
               },
@@ -12650,24 +12508,27 @@
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/0",
+                "text": "同时相关的主题包括学习、支持与吸收、资源与交换，它们不取代本章的首要重点。",
+                "sourceRef": "professionalModules/professionalTopics/topics/0/relevantGroups|professionalModules/professionalTopics/topics/0/leadGroup",
                 "role": "METHOD_INTERPRETATION"
-              },
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S04_WORKING_CONDITIONS",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "适合怎样的工作条件",
+            "contentBlocks": [
               {
-                "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/1",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/2",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/0/relationshipInterfaces/3",
-                "role": "METHOD_INTERPRETATION"
+                "text": "一个角色看起来合适，仍可能因为权限、标准、支持或工作量不匹配而变得困难。本页关注什么条件让同一套能力更容易或更难持续运作。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER",
+                "role": "EDITORIAL_GUIDANCE"
               },
               {
                 "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
@@ -12678,30 +12539,28 @@
                 "text": "事业结构会随角色、组织环境与阶段而改变；这里说明的是工作运行方式，不把它直接写成某个职业的固定成败结论。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/condition|professionalModules/professionalTopics/topics/0/carryingContext",
                 "role": "METHOD_INTERPRETATION"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S04_DIRECTION",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "事业发展的长期主线",
+            "contentBlocks": [
+              {
+                "text": "事业方向应从整盘反复出现的主题中读取，而不是从一个职业标签直接推出。跨结构重点与未定条件，可以帮助区分长期工作模式与暂时或尚未完成的讯号。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER",
+                "role": "EDITORIAL_GUIDANCE"
               },
               {
                 "text": "解读保留最终强弱判断，不据此定义固定身份。",
                 "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这组结构决定其他主题落到现实运行时有多少支撑、多少输出成本、又要面对多少外部要求，因此它比单独贴“身强／身弱”更有解释力。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/3/development|professionalModules/wholeChartPriority/themes/3|professionalModules/customerNarrative/priorityChapters/3/condition",
                 "role": "METHOD_INTERPRETATION"
               }
             ],
@@ -12715,21 +12574,21 @@
           {
             "definitionKey": "S04_P3",
             "pageFamily": "INSIGHT_LIST_PAGE",
-            "title": "工作方式与注意事项",
+            "title": "重点摘要",
             "contentBlocks": [],
             "items": [
               {
-                "text": "比较工作环境时看实际任务、决策边界与支持条件，不只看吸引人的职位名称。",
+                "text": "事业适配更取决于角色结构，而不是职位名称：责任、自主权、标准、资源与支持需要一起阅读。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "回看一次完成得较好的交付，找出哪些条件让责任与期待变得清楚可承载。",
+                "text": "同一套能力在不同工作条件下可以表现得很不一样。权限、工作量与期待是否清楚，会明显改变结构如何被承载。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "调整工作方式前，先写下一个小而可撤回的尝试，以及需要重新考虑它的迹象。",
+                "text": "长期事业方向更适合从整盘反复出现的主题中判断，而不是从一个孤立的职业符号推出。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S04_CAREER",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -12743,6 +12602,8 @@
         ],
         "boundaryNotes": [
           "保留既有主题优先级。主题是多因素读取，不是预测。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "practicalObservations": [],
@@ -12987,7 +12848,7 @@
                 "NOT_OBSERVED_REALITY"
               ],
               "openConditions": [],
-              "text": "就「事业与工作」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+              "text": "事业主题以「规则、责任与压力」与学习、支持与吸收、资源与交换之间的互动为主线，把责任、产出、资源取得与学习支持放进同一套工作系统。已经记录的柱位关系与承载条件会进一步修正这套系统怎样运作，因此本章关注的是可持续的角色条件，而不是从一个符号直接指定职业。",
               "explanationScope": "LIFE_DOMAIN",
               "claimId": "S04_CAREER:DOMAIN_EXPLANATION",
               "claimType": "LIFE_DOMAIN_EXPLANATION",
@@ -16174,7 +16035,7 @@
               "NO_AUTOMATIC_OBSERVED_REALITY"
             ]
           },
-          "sourceEvidenceHash": "33544095b0e8ffb4ce2819d956a7cefa895e3857003d83278dd8700b55d66a69",
+          "sourceEvidenceHash": "775e1237557cae1d3279582dc12eebc535a8ba92561fae53f819ded2b1cde9d6",
           "editorialQualityVersion": "BAZI_EDITORIAL_QUALITY_F_V2",
           "meaningCanon": {
             "version": "BAZI_EDITORIAL_MEANING_CANON_V2",
@@ -16412,7 +16273,7 @@
                 "themeId": "S04_CAREER:DOMAIN_EXPLANATION",
                 "customerMeaning": {
                   "claimId": "S04_CAREER:DOMAIN_EXPLANATION",
-                  "text": "就「事业与工作」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。"
+                  "text": "事业主题以「规则、责任与压力」与学习、支持与吸收、资源与交换之间的互动为主线，把责任、产出、资源取得与学习支持放进同一套工作系统。已经记录的柱位关系与承载条件会进一步修正这套系统怎样运作，因此本章关注的是可持续的角色条件，而不是从一个符号直接指定职业。"
                 },
                 "roleInWholeChart": {
                   "rank": null,
@@ -17979,7 +17840,7 @@
             "version": "BAZI_SECTION_NARRATIVE_BRIEF_F_V1",
             "sectionKey": "S04_CAREER",
             "locale": "zh-Hans",
-            "meaningCanonDigest": "de028a45d53e67a8fda33065b8758282e55ce51c59630945f70ea0c20e53377b",
+            "meaningCanonDigest": "760c304f632ab41e6fcb27bf1b5abd851f82d765fd14d2a730dae13b3b52f7a4",
             "orderedMeaningIds": [
               "S04_CAREER:PRIMARY",
               "S04_CAREER:DOMAIN_EXPLANATION",
@@ -18048,8 +17909,8 @@
             },
             "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion."
           },
-          "sectionNarrativeBriefDigest": "ed0f472df2925decb20dcd3e624777400b501b6e29f1006966902d5c499fa6ba",
-          "canonicalEvidenceHash": "6a6ea6d4250bd9a0813cda86b70d27fc80c0332870a917155d57ba7361e3076f"
+          "sectionNarrativeBriefDigest": "3f8c048dd526aa1f69f6f36cd9528133e90e825457e6a42065e0dc86e7b3b5c2",
+          "canonicalEvidenceHash": "5f298920b2305f37100dd72c0661e7eda251c6ba61830de24078ca33ba02681b"
         }
       },
       "diagnostics": {
@@ -18113,15 +17974,15 @@
         ],
         "supportingSignals": [
           {
+            "text": "财富首先从资源流动来读：价值怎样被创造、交换并进入系统。本页先看什么功能让资源出现，再进入资源之后如何被处理的问题。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH"
+          },
+          {
             "text": "在这个主题中，资源与交换是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/1/leadGroup|professionalModules/customerNarrative/topicNarratives/1/development"
           },
           {
-            "text": "同时相关的主题包括规则、责任与压力、同类关系与自我位置，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relevantGroups|professionalModules/professionalTopics/topics/1/leadGroup"
-          },
-          {
-            "text": "就「财富与资源」而言，在这个主题里，「资源与交换」是当前最靠前的功能组（约 23.1%），主要连接到七杀、偏财、正官。同时可连接到财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 2 个优先主线直接相连，因此不是独立的小结。",
+            "text": "财富主题把「资源与交换」与规则、责任与压力、同类关系与自我位置放进同一套资源系统中阅读，因此会区分资源进入、交换、分流，以及保留或重新调动资源所需的条件。结构关系可以改变这些功能如何相遇，但不会把象征性的财富语言直接变成保证的财务结果。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/development|professionalModules/professionalTopics/topics/1/leadGroup|professionalModules/professionalTopics/topics/1/relevantTenGods|professionalModules/professionalTopics/topics/1/relationshipInterfaces|professionalModules/professionalTopics/topics/1/carryingContext|professionalModules/professionalTopics/topics/1/priorityRefs"
           },
           {
@@ -18129,44 +17990,14 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/carryingContext|professionalModules/customerNarrative/topicNarratives/1/condition"
-          },
-          {
-            "text": "资源结构说明钱、机会与交换怎样进入命盘，不等同实际收入承诺；现实结果仍取决于选择、市场、责任与时间条件。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/condition|professionalModules/professionalTopics/topics/1/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
+            "text": "同时相关的主题包括规则、责任与压力、同类关系与自我位置，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/1/relevantGroups|professionalModules/professionalTopics/topics/1/leadGroup"
           }
         ],
         "tensionSignals": [
           "保留既有主题优先级。主题是多因素读取，不是预测。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "temporalContext": {
@@ -18185,15 +18016,15 @@
         },
         "allowedInterpretations": [
           {
+            "text": "财富首先从资源流动来读：价值怎样被创造、交换并进入系统。本页先看什么功能让资源出现，再进入资源之后如何被处理的问题。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH"
+          },
+          {
             "text": "在这个主题中，资源与交换是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/1/leadGroup|professionalModules/customerNarrative/topicNarratives/1/development"
           },
           {
-            "text": "同时相关的主题包括规则、责任与压力、同类关系与自我位置，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relevantGroups|professionalModules/professionalTopics/topics/1/leadGroup"
-          },
-          {
-            "text": "就「财富与资源」而言，在这个主题里，「资源与交换」是当前最靠前的功能组（约 23.1%），主要连接到七杀、偏财、正官。同时可连接到财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 2 个优先主线直接相连，因此不是独立的小结。",
+            "text": "财富主题把「资源与交换」与规则、责任与压力、同类关系与自我位置放进同一套资源系统中阅读，因此会区分资源进入、交换、分流，以及保留或重新调动资源所需的条件。结构关系可以改变这些功能如何相遇，但不会把象征性的财富语言直接变成保证的财务结果。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/development|professionalModules/professionalTopics/topics/1/leadGroup|professionalModules/professionalTopics/topics/1/relevantTenGods|professionalModules/professionalTopics/topics/1/relationshipInterfaces|professionalModules/professionalTopics/topics/1/carryingContext|professionalModules/professionalTopics/topics/1/priorityRefs"
           },
           {
@@ -18201,40 +18032,8 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/1/carryingContext|professionalModules/customerNarrative/topicNarratives/1/condition"
-          },
-          {
-            "text": "资源结构说明钱、机会与交换怎样进入命盘，不等同实际收入承诺；现实结果仍取决于选择、市场、责任与时间条件。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/condition|professionalModules/professionalTopics/topics/1/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
+            "text": "同时相关的主题包括规则、责任与压力、同类关系与自我位置，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/1/relevantGroups|professionalModules/professionalTopics/topics/1/leadGroup"
           }
         ],
         "prohibitedClaims": [
@@ -18252,26 +18051,26 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "a4327c4f512d73e686d85daa2a79aee696b8087e532a2ca77dd4b34c6c8ada22"
+        "semanticDigest": "24d160184ef45283ed90a03262b25f9d0b812528938b6240fff53dc834358da4"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
-        "requestedExecutionClass": "T3_DEEP_COMPOSITION",
+        "requestedExecutionClass": "T2_LIGHT_COMPOSITION",
         "evidenceAdmission": "SOURCE_BOUND_CANONICAL_STATEMENTS",
         "route": {
-          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-sol",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "DEEP",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
-        "fallbackState": "DEEP_COMPOSITION_FALLBACK",
-        "sourceDigest": "a4327c4f512d73e686d85daa2a79aee696b8087e532a2ca77dd4b34c6c8ada22"
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
+        "fallbackState": "CANONICAL_HUMANIZATION",
+        "sourceDigest": "24d160184ef45283ed90a03262b25f9d0b812528938b6240fff53dc834358da4"
       },
       "sectionComposition": {
         "sectionKey": "S05_WEALTH",
@@ -18279,11 +18078,13 @@
           "zh-Hans": "财富运势",
           "en": "Wealth Outlook"
         },
-        "openerIntro": "资源会经过产出、交换与责任而流动。本章保留这些关系，同时区分方法中的财富语言与实际财务结果。请用熟悉的情境提出更清楚的问题，现实记录与义务才是具体决定所需的背景。",
+        "openerIntro": "财富运势读取的是命盘与资源之间的关系：价值如何被创造、交换、调动、维持，以及怎样进入责任结构。在八字里，“财”首先是一种结构功能；真实收入、资产与财务结果仍取决于命盘之外的现实决定与条件。",
         "keyThemes": [
           "财富 · 结构背景",
-          "财富与资源分析",
-          "资源机会与现实核对"
+          "你的资源流动方式",
+          "资源如何被留住或消耗",
+          "财富解读的现实边界",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -18301,22 +18102,22 @@
             "primaryVisualHtml": "<div class=\"bzpub-module\" data-publication-visual=\"PROFESSIONAL_TOPICS\"><div class=\"bzpub-grid\" style=\"--bzpub-columns:2\"><article class=\"bzpub-card\" style=\"--bzpub-color:#3c8fd0\" data-category=\"WEALTH\"><h3>财星／资源交换</h3><strong>23.1%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"23.1%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\" opacity=\".12\"/><rect width=\"23.1\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\"/></svg><p>计数: 3</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#48c094\" data-category=\"OFFICER\"><h3>官杀／规则压力</h3><strong>46.2%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"46.2%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#48c094\" opacity=\".12\"/><rect width=\"46.2\" height=\"8\" rx=\"4\" fill=\"#48c094\"/></svg><p>计数: 6</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#c87949\" data-category=\"PEER\"><h3>同类／自我位置</h3><strong>7.7%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"7.7%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#c87949\" opacity=\".12\"/><rect width=\"7.7\" height=\"8\" rx=\"4\" fill=\"#c87949\"/></svg><p>计数: 1</p></article></div><p class=\"bzpub-focus\">本章重点: 财星／资源交换</p></div>"
           },
           {
-            "definitionKey": "S05_P2",
+            "definitionKey": "S05_RESOURCE_FLOW",
             "pageFamily": "NARRATIVE_ANALYSIS_PAGE",
-            "title": "财富与资源分析",
+            "title": "你的资源流动方式",
             "contentBlocks": [
+              {
+                "text": "财富首先从资源流动来读：价值怎样被创造、交换并进入系统。本页先看什么功能让资源出现，再进入资源之后如何被处理的问题。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH",
+                "role": "EDITORIAL_GUIDANCE"
+              },
               {
                 "text": "在这个主题中，资源与交换是首先关注的内容。这表示解读重点，不是测得的人格特质。",
                 "sourceRef": "professionalModules/professionalTopics/topics/1/leadGroup|professionalModules/customerNarrative/topicNarratives/1/development",
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "同时相关的主题包括规则、责任与压力、同类关系与自我位置，它们不取代本章的首要重点。",
-                "sourceRef": "professionalModules/professionalTopics/topics/1/relevantGroups|professionalModules/professionalTopics/topics/1/leadGroup",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "就「财富与资源」而言，在这个主题里，「资源与交换」是当前最靠前的功能组（约 23.1%），主要连接到七杀、偏财、正官。同时可连接到财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 2 个优先主线直接相连，因此不是独立的小结。",
+                "text": "财富主题把「资源与交换」与规则、责任与压力、同类关系与自我位置放进同一套资源系统中阅读，因此会区分资源进入、交换、分流，以及保留或重新调动资源所需的条件。结构关系可以改变这些功能如何相遇，但不会把象征性的财富语言直接变成保证的财务结果。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/development|professionalModules/professionalTopics/topics/1/leadGroup|professionalModules/professionalTopics/topics/1/relevantTenGods|professionalModules/professionalTopics/topics/1/relationshipInterfaces|professionalModules/professionalTopics/topics/1/carryingContext|professionalModules/professionalTopics/topics/1/priorityRefs",
                 "role": "METHOD_INTERPRETATION"
               },
@@ -18326,24 +18127,27 @@
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/0",
+                "text": "同时相关的主题包括规则、责任与压力、同类关系与自我位置，它们不取代本章的首要重点。",
+                "sourceRef": "professionalModules/professionalTopics/topics/1/relevantGroups|professionalModules/professionalTopics/topics/1/leadGroup",
                 "role": "METHOD_INTERPRETATION"
-              },
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S05_RETENTION",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "资源如何被留住或消耗",
+            "contentBlocks": [
               {
-                "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/1",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/2",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/1/relationshipInterfaces/3",
-                "role": "METHOD_INTERPRETATION"
+                "text": "得到资源与保留资源，是两个不同的结构问题。支持条件、竞争性要求、责任与交换压力，会共同影响资源能否被保留、重新调动，或持续被消耗。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH",
+                "role": "EDITORIAL_GUIDANCE"
               },
               {
                 "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
@@ -18354,20 +18158,28 @@
                 "text": "资源结构说明钱、机会与交换怎样进入命盘，不等同实际收入承诺；现实结果仍取决于选择、市场、责任与时间条件。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/condition|professionalModules/professionalTopics/topics/1/carryingContext",
                 "role": "METHOD_INTERPRETATION"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S05_REALITY_BOUNDARY",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "财富解读的现实边界",
+            "contentBlocks": [
+              {
+                "text": "最后一层财富读取，要把象征性的资源结构与真实财务结果分开。未定条件会保留方法能够描述的范围，以及仍必须由真实财务证据确认的部分。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH",
+                "role": "EDITORIAL_GUIDANCE"
               },
               {
                 "text": "解读保留最终强弱判断，不据此定义固定身份。",
                 "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition",
                 "role": "METHOD_INTERPRETATION"
               }
             ],
@@ -18381,21 +18193,21 @@
           {
             "definitionKey": "S05_P3",
             "pageFamily": "INSIGHT_LIST_PAGE",
-            "title": "资源机会与现实核对",
+            "title": "重点摘要",
             "contentBlocks": [],
             "items": [
               {
-                "text": "用真实投入与义务描述一次资源交换，把命盘解读另行记录，避免两者混为一谈。",
+                "text": "财富要按资源循环来读：价值如何进入、需要交换什么，以及之后有哪些要求会分流资源。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "核对某个机会来自可验证的现实条件，还是仅来自对一个符号的吸引人解释。",
+                "text": "资源机会与资源留存是两个不同问题。得到更多，并不自动等于能够留下更多。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "已核准的时间证据不足时，保留年龄段与横财判断，不补写具体结论。",
+                "text": "象征性的财富结构不等于现实财务结果。真实决定仍需要命盘之外的现金流、义务、风险与市场证据。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S05_WEALTH",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -18409,6 +18221,8 @@
         ],
         "boundaryNotes": [
           "保留既有主题优先级。主题是多因素读取，不是预测。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "practicalObservations": [],
@@ -18639,7 +18453,7 @@
                 "NOT_OBSERVED_REALITY"
               ],
               "openConditions": [],
-              "text": "就「财富与资源」而言，在这个主题里，「资源与交换」是当前最靠前的功能组（约 23.1%），主要连接到七杀、偏财、正官。同时可连接到财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 2 个优先主线直接相连，因此不是独立的小结。",
+              "text": "财富主题把「资源与交换」与规则、责任与压力、同类关系与自我位置放进同一套资源系统中阅读，因此会区分资源进入、交换、分流，以及保留或重新调动资源所需的条件。结构关系可以改变这些功能如何相遇，但不会把象征性的财富语言直接变成保证的财务结果。",
               "explanationScope": "LIFE_DOMAIN",
               "claimId": "S05_WEALTH:DOMAIN_EXPLANATION",
               "claimType": "LIFE_DOMAIN_EXPLANATION",
@@ -21384,7 +21198,7 @@
               "NO_AUTOMATIC_OBSERVED_REALITY"
             ]
           },
-          "sourceEvidenceHash": "9620f18101b4bf1b781635fc417b79885675fbd97e7f6790d37a449033a1a587",
+          "sourceEvidenceHash": "bcda3b801bb96d1f86445948630f5ebc18bcff52180bd5c770318d03a15850b7",
           "editorialQualityVersion": "BAZI_EDITORIAL_QUALITY_F_V2",
           "meaningCanon": {
             "version": "BAZI_EDITORIAL_MEANING_CANON_V2",
@@ -21622,7 +21436,7 @@
                 "themeId": "S05_WEALTH:DOMAIN_EXPLANATION",
                 "customerMeaning": {
                   "claimId": "S05_WEALTH:DOMAIN_EXPLANATION",
-                  "text": "就「财富与资源」而言，在这个主题里，「资源与交换」是当前最靠前的功能组（约 23.1%），主要连接到七杀、偏财、正官。同时可连接到财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 2 个优先主线直接相连，因此不是独立的小结。"
+                  "text": "财富主题把「资源与交换」与规则、责任与压力、同类关系与自我位置放进同一套资源系统中阅读，因此会区分资源进入、交换、分流，以及保留或重新调动资源所需的条件。结构关系可以改变这些功能如何相遇，但不会把象征性的财富语言直接变成保证的财务结果。"
                 },
                 "roleInWholeChart": {
                   "rank": null,
@@ -22957,7 +22771,7 @@
             "version": "BAZI_SECTION_NARRATIVE_BRIEF_F_V1",
             "sectionKey": "S05_WEALTH",
             "locale": "zh-Hans",
-            "meaningCanonDigest": "3468a406f39e4a1cb11f17cbd96939a03a858105ac843bb5378e13584d70af5d",
+            "meaningCanonDigest": "a13e08c00a401c7d5408303a80821d5faed277df20c30127a27ea3d1375306b3",
             "orderedMeaningIds": [
               "S05_WEALTH:PRIMARY",
               "S05_WEALTH:DOMAIN_EXPLANATION",
@@ -23022,8 +22836,8 @@
             },
             "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion."
           },
-          "sectionNarrativeBriefDigest": "0700d13f2a21ec96bf90db1522c4f55e2fc3719ac5ace7a2aacd5c19a6c0417f",
-          "canonicalEvidenceHash": "a1b1c3c35d6695042ccde401a34ecde7cb3b4647e111e15c64a9faa302644ced"
+          "sectionNarrativeBriefDigest": "d871c5033971137f7193a93dd76a342fee2fd2b17447ea3235b55b61e73589e9",
+          "canonicalEvidenceHash": "c124861954e8c69dd89da4aab5b8e27d474ac483f6ca871191d0a067f7f2fbed"
         }
       },
       "diagnostics": {
@@ -23097,15 +22911,15 @@
         ],
         "supportingSignals": [
           {
+            "text": "关系读取先从你在重要关系中反复出现的位置开始：期待什么、交换什么、承担什么，以及什么样的支持会进入关系。它描述的是你的互动位置，而不会把对方压缩成命盘符号。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP"
+          },
+          {
             "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/2/leadGroup|professionalModules/customerNarrative/topicNarratives/2/development"
           },
           {
-            "text": "同时相关的主题包括资源与交换、同类关系与自我位置、学习、支持与吸收，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relevantGroups|professionalModules/professionalTopics/topics/2/leadGroup"
-          },
-          {
-            "text": "就「关系」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 3 个优先主线直接相连，因此不是独立的小结。",
+            "text": "关系主题读取「规则、责任与压力」如何在已记录的关系位置中与资源与交换、同类关系与自我位置、学习、支持与吸收相遇，把自我位置、期待、交换、支持与责任放在一起理解，而不把另一个人压缩成命盘符号。同一套底层结构在不同关系中仍可能被不同方式协商，因为对方与现实环境始终是独立变量。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/development|professionalModules/professionalTopics/topics/2/leadGroup|professionalModules/professionalTopics/topics/2/relevantTenGods|professionalModules/professionalTopics/topics/2/relationshipInterfaces|professionalModules/professionalTopics/topics/2/carryingContext|professionalModules/professionalTopics/topics/2/priorityRefs"
           },
           {
@@ -23113,48 +22927,14 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/carryingContext|professionalModules/customerNarrative/topicNarratives/2/condition"
-          },
-          {
-            "text": "关系结构更适合观察互动方式、边界与反复柱位关系，不把它直接翻译成结婚、分手或某一种伴侣结果。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/condition|professionalModules/professionalTopics/topics/2/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition"
+            "text": "同时相关的主题包括资源与交换、同类关系与自我位置、学习、支持与吸收，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/2/relevantGroups|professionalModules/professionalTopics/topics/2/leadGroup"
           }
         ],
         "tensionSignals": [
           "保留既有主题优先级。主题是多因素读取，不是预测。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "temporalContext": {
@@ -23173,15 +22953,15 @@
         },
         "allowedInterpretations": [
           {
+            "text": "关系读取先从你在重要关系中反复出现的位置开始：期待什么、交换什么、承担什么，以及什么样的支持会进入关系。它描述的是你的互动位置，而不会把对方压缩成命盘符号。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP"
+          },
+          {
             "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
             "sourceRef": "professionalModules/professionalTopics/topics/2/leadGroup|professionalModules/customerNarrative/topicNarratives/2/development"
           },
           {
-            "text": "同时相关的主题包括资源与交换、同类关系与自我位置、学习、支持与吸收，它们不取代本章的首要重点。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relevantGroups|professionalModules/professionalTopics/topics/2/leadGroup"
-          },
-          {
-            "text": "就「关系」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 3 个优先主线直接相连，因此不是独立的小结。",
+            "text": "关系主题读取「规则、责任与压力」如何在已记录的关系位置中与资源与交换、同类关系与自我位置、学习、支持与吸收相遇，把自我位置、期待、交换、支持与责任放在一起理解，而不把另一个人压缩成命盘符号。同一套底层结构在不同关系中仍可能被不同方式协商，因为对方与现实环境始终是独立变量。",
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/development|professionalModules/professionalTopics/topics/2/leadGroup|professionalModules/professionalTopics/topics/2/relevantTenGods|professionalModules/professionalTopics/topics/2/relationshipInterfaces|professionalModules/professionalTopics/topics/2/carryingContext|professionalModules/professionalTopics/topics/2/priorityRefs"
           },
           {
@@ -23189,44 +22969,8 @@
             "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/lead"
           },
           {
-            "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/0"
-          },
-          {
-            "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/1"
-          },
-          {
-            "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/2"
-          },
-          {
-            "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/3"
-          },
-          {
-            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-            "sourceRef": "professionalModules/professionalTopics/topics/2/carryingContext|professionalModules/customerNarrative/topicNarratives/2/condition"
-          },
-          {
-            "text": "关系结构更适合观察互动方式、边界与反复柱位关系，不把它直接翻译成结婚、分手或某一种伴侣结果。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/condition|professionalModules/professionalTopics/topics/2/carryingContext"
-          },
-          {
-            "text": "解读保留最终强弱判断，不据此定义固定身份。",
-            "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict"
-          },
-          {
-            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition"
-          },
-          {
-            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition"
-          },
-          {
-            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-            "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition"
+            "text": "同时相关的主题包括资源与交换、同类关系与自我位置、学习、支持与吸收，它们不取代本章的首要重点。",
+            "sourceRef": "professionalModules/professionalTopics/topics/2/relevantGroups|professionalModules/professionalTopics/topics/2/leadGroup"
           }
         ],
         "prohibitedClaims": [
@@ -23244,26 +22988,26 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "3a7818435883ae506634b2efe16565a31b9b927fb4edc77f346a6d7960b9495b"
+        "semanticDigest": "bdec86de8ff63d79bd15a594b7cf39cdb9624353d4969710e7017ac07cfe82a2"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
-        "requestedExecutionClass": "T3_DEEP_COMPOSITION",
+        "requestedExecutionClass": "T2_LIGHT_COMPOSITION",
         "evidenceAdmission": "SOURCE_BOUND_CANONICAL_STATEMENTS",
         "route": {
-          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-sol",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "DEEP",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
-        "fallbackState": "DEEP_COMPOSITION_FALLBACK",
-        "sourceDigest": "3a7818435883ae506634b2efe16565a31b9b927fb4edc77f346a6d7960b9495b"
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
+        "fallbackState": "CANONICAL_HUMANIZATION",
+        "sourceDigest": "bdec86de8ff63d79bd15a594b7cf39cdb9624353d4969710e7017ac07cfe82a2"
       },
       "sectionComposition": {
         "sectionKey": "S06_RELATIONSHIP",
@@ -23271,11 +23015,13 @@
           "zh-Hans": "感情婚姻",
           "en": "Relationships & Marriage"
         },
-        "openerIntro": "关系发生在人与人之间，不能压缩成命盘中的一个标签。本章借方法读取观察位置、期待与支持怎样重复出现。比较具体互动时，请保留对方的视角，也保留同一种模式在不同环境中改变的可能。",
+        "openerIntro": "感情婚姻读取的是命盘在重要关系中如何处理亲近、互惠、期待、责任，以及自己的位置。它不会把另一个人压缩成一个符号，而是观察这张命盘反复携带怎样的关系功能。",
         "keyThemes": [
           "关系 · 结构背景",
-          "感情模式分析",
-          "相处建议"
+          "你在重要关系中的位置",
+          "关系如何形成互动",
+          "关系判断的边界",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -23293,22 +23039,22 @@
             "primaryVisualHtml": "<div class=\"bzpub-module\" data-publication-visual=\"PROFESSIONAL_TOPICS\"><div class=\"bzpub-grid\" style=\"--bzpub-columns:2\"><article class=\"bzpub-card\" style=\"--bzpub-color:#48c094\" data-category=\"OFFICER\"><h3>官杀／规则压力</h3><strong>46.2%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"46.2%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#48c094\" opacity=\".12\"/><rect width=\"46.2\" height=\"8\" rx=\"4\" fill=\"#48c094\"/></svg><p>计数: 6</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#3c8fd0\" data-category=\"WEALTH\"><h3>财星／资源交换</h3><strong>23.1%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"23.1%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\" opacity=\".12\"/><rect width=\"23.1\" height=\"8\" rx=\"4\" fill=\"#3c8fd0\"/></svg><p>计数: 3</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#c87949\" data-category=\"PEER\"><h3>同类／自我位置</h3><strong>7.7%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"7.7%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#c87949\" opacity=\".12\"/><rect width=\"7.7\" height=\"8\" rx=\"4\" fill=\"#c87949\"/></svg><p>计数: 1</p></article><article class=\"bzpub-card\" style=\"--bzpub-color:#e26d71\" data-category=\"RESOURCE\"><h3>印星／吸收支持</h3><strong>23.1%</strong><svg class=\"bzpub-bar\" viewBox=\"0 0 100 8\" role=\"img\" aria-label=\"23.1%\"><rect width=\"100\" height=\"8\" rx=\"4\" fill=\"#e26d71\" opacity=\".12\"/><rect width=\"23.1\" height=\"8\" rx=\"4\" fill=\"#e26d71\"/></svg><p>计数: 3</p></article></div><p class=\"bzpub-focus\">本章重点: 官杀／规则压力</p></div>"
           },
           {
-            "definitionKey": "S06_P2",
+            "definitionKey": "S06_POSITION",
             "pageFamily": "NARRATIVE_ANALYSIS_PAGE",
-            "title": "感情模式分析",
+            "title": "你在重要关系中的位置",
             "contentBlocks": [
+              {
+                "text": "关系读取先从你在重要关系中反复出现的位置开始：期待什么、交换什么、承担什么，以及什么样的支持会进入关系。它描述的是你的互动位置，而不会把对方压缩成命盘符号。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP",
+                "role": "EDITORIAL_GUIDANCE"
+              },
               {
                 "text": "在这个主题中，规则、责任与压力是首先关注的内容。这表示解读重点，不是测得的人格特质。",
                 "sourceRef": "professionalModules/professionalTopics/topics/2/leadGroup|professionalModules/customerNarrative/topicNarratives/2/development",
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "同时相关的主题包括资源与交换、同类关系与自我位置、学习、支持与吸收，它们不取代本章的首要重点。",
-                "sourceRef": "professionalModules/professionalTopics/topics/2/relevantGroups|professionalModules/professionalTopics/topics/2/leadGroup",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "就「关系」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位柱位关系修正。它与整盘 3 个优先主线直接相连，因此不是独立的小结。",
+                "text": "关系主题读取「规则、责任与压力」如何在已记录的关系位置中与资源与交换、同类关系与自我位置、学习、支持与吸收相遇，把自我位置、期待、交换、支持与责任放在一起理解，而不把另一个人压缩成命盘符号。同一套底层结构在不同关系中仍可能被不同方式协商，因为对方与现实环境始终是独立变量。",
                 "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/development|professionalModules/professionalTopics/topics/2/leadGroup|professionalModules/professionalTopics/topics/2/relevantTenGods|professionalModules/professionalTopics/topics/2/relationshipInterfaces|professionalModules/professionalTopics/topics/2/carryingContext|professionalModules/professionalTopics/topics/2/priorityRefs",
                 "role": "METHOD_INTERPRETATION"
               },
@@ -23318,29 +23064,27 @@
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/0",
+                "text": "同时相关的主题包括资源与交换、同类关系与自我位置、学习、支持与吸收，它们不取代本章的首要重点。",
+                "sourceRef": "professionalModules/professionalTopics/topics/2/relevantGroups|professionalModules/professionalTopics/topics/2/leadGroup",
                 "role": "METHOD_INTERPRETATION"
-              },
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S06_INTERACTION",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "关系如何形成互动",
+            "contentBlocks": [
               {
-                "text": "环境、自我位置之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/1",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "自我位置、表达之间呈现结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/2",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "环境、表达之间呈现重复的结构张力。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
-                "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/3",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
-                "sourceRef": "professionalModules/professionalTopics/topics/2/carryingContext|professionalModules/customerNarrative/topicNarratives/2/condition",
-                "role": "METHOD_INTERPRETATION"
+                "text": "下一层是互动。柱位之间已记录的联结与张力，会显示期待、支持、责任与自我表达在哪里需要主动协商，而不是自然地朝同一方向运行。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP",
+                "role": "EDITORIAL_GUIDANCE"
               },
               {
                 "text": "关系结构更适合观察互动方式、边界与反复柱位关系，不把它直接翻译成结婚、分手或某一种伴侣结果。",
@@ -23348,23 +23092,31 @@
                 "role": "METHOD_INTERPRETATION"
               },
               {
+                "text": "自我位置、表达之间呈现象征性联结。它会修正本章与其他命盘因素的组合读取方式，但不据此认定已经观察到的行为。",
+                "sourceRef": "professionalModules/professionalTopics/topics/2/relationshipInterfaces/0",
+                "role": "METHOD_INTERPRETATION"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S06_BOUNDARIES",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "关系判断的边界",
+            "contentBlocks": [
+              {
+                "text": "关系建议只有在反复出现的互动结构与固定结果被分开后才更可靠。未定条件会避免把婚姻、分离或伴侣结果写成没有依据的确定结论。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
                 "text": "解读保留最终强弱判断，不据此定义固定身份。",
                 "sourceRef": "professionalModules/dayMasterStrength/withheldVerdict",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/0/development|professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/1/development|professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/condition",
-                "role": "METHOD_INTERPRETATION"
-              },
-              {
-                "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
-                "sourceRef": "professionalModules/customerNarrative/priorityChapters/2/development|professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/condition",
                 "role": "METHOD_INTERPRETATION"
               }
             ],
@@ -23378,21 +23130,21 @@
           {
             "definitionKey": "S06_P3",
             "pageFamily": "INSIGHT_LIST_PAGE",
-            "title": "相处建议",
+            "title": "重点摘要",
             "contentBlocks": [],
             "items": [
               {
-                "text": "分开记录听到的话与自己的推测，在合适的时候，再与对方的叙述比较。",
+                "text": "关系读取先看你反复出现的位置：期待、交换、支持、责任与边界需要一起理解。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "寻找期待更清楚后有所改变的互动，描述变化，不给伴侣贴固定标签。",
+                "text": "已记录的联结与张力显示哪些互动需要协商；它们描述关系结构，不代表对方的隐藏动机。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "询问哪些支持方式对双方都有效；没有具体核准证据时，保留婚姻时间判断。",
+                "text": "命盘可以识别反复出现的关系主题，但不能单独保证婚姻、分离或某一种伴侣结果。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S06_RELATIONSHIP",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -23406,6 +23158,8 @@
         ],
         "boundaryNotes": [
           "保留既有主题优先级。主题是多因素读取，不是预测。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
           "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
         ],
         "practicalObservations": [],
@@ -23656,7 +23410,7 @@
                 "NOT_OBSERVED_REALITY"
               ],
               "openConditions": [],
-              "text": "就「关系」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 3 个优先主线直接相连，因此不是独立的小结。",
+              "text": "关系主题读取「规则、责任与压力」如何在已记录的关系位置中与资源与交换、同类关系与自我位置、学习、支持与吸收相遇，把自我位置、期待、交换、支持与责任放在一起理解，而不把另一个人压缩成命盘符号。同一套底层结构在不同关系中仍可能被不同方式协商，因为对方与现实环境始终是独立变量。",
               "explanationScope": "LIFE_DOMAIN",
               "claimId": "S06_RELATIONSHIP:DOMAIN_EXPLANATION",
               "claimType": "LIFE_DOMAIN_EXPLANATION",
@@ -26794,7 +26548,7 @@
               "NO_AUTOMATIC_OBSERVED_REALITY"
             ]
           },
-          "sourceEvidenceHash": "0faa9ff11cb30d477283e553e1a7ad9e2afdd58188b3ea06b77da817a48545c1",
+          "sourceEvidenceHash": "2fbe2f79c529645ca76c02bdda55b206e4b96b4b7b0b0c2e215a886718204035",
           "editorialQualityVersion": "BAZI_EDITORIAL_QUALITY_F_V2",
           "meaningCanon": {
             "version": "BAZI_EDITORIAL_MEANING_CANON_V2",
@@ -27033,7 +26787,7 @@
                 "themeId": "S06_RELATIONSHIP:DOMAIN_EXPLANATION",
                 "customerMeaning": {
                   "claimId": "S06_RELATIONSHIP:DOMAIN_EXPLANATION",
-                  "text": "就「关系」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、偏财、正官。同时可连接到七杀格路径、财格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 3 个优先主线直接相连，因此不是独立的小结。"
+                  "text": "关系主题读取「规则、责任与压力」如何在已记录的关系位置中与资源与交换、同类关系与自我位置、学习、支持与吸收相遇，把自我位置、期待、交换、支持与责任放在一起理解，而不把另一个人压缩成命盘符号。同一套底层结构在不同关系中仍可能被不同方式协商，因为对方与现实环境始终是独立变量。"
                 },
                 "roleInWholeChart": {
                   "rank": null,
@@ -28484,7 +28238,7 @@
             "version": "BAZI_SECTION_NARRATIVE_BRIEF_F_V1",
             "sectionKey": "S06_RELATIONSHIP",
             "locale": "zh-Hans",
-            "meaningCanonDigest": "07aaac4d5b8dbbcf7e9c4f996275ded9e654166fdebab5c6f4d876923b1b8fd1",
+            "meaningCanonDigest": "90714ab45e338528d7ee8e4f44a7ad296205402bef6647238500b99bf7f86296",
             "orderedMeaningIds": [
               "S06_RELATIONSHIP:PRIMARY",
               "S06_RELATIONSHIP:DOMAIN_EXPLANATION",
@@ -28551,8 +28305,8 @@
             },
             "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion."
           },
-          "sectionNarrativeBriefDigest": "da14cfad44608b93f80eb8475af97341ddc72e0169827530f993e974988b7102",
-          "canonicalEvidenceHash": "d5beb98efd409f6dec64927a378022f4c0d741f35d91eb3c596dd74f172d94fd"
+          "sectionNarrativeBriefDigest": "387de86c76e9c62d4bea28d8409ff233595234264ee9e40129a77b88edd10c36",
+          "canonicalEvidenceHash": "764d5b909fd7ceba1fa5854dc0afd1d52194ce53b3ef20f79bc2a8b0bb688526"
         }
       },
       "diagnostics": {
@@ -28603,15 +28357,25 @@
         ],
         "supportingSignals": [
           {
-            "text": "本报告不作健康预测。压力主题只能帮助提出经验问题：哪些要求当时能够承受，又有哪些支持在场？请记录自己的观察，不给命盘符号附加医学病因。把情境、回应与后来发生的变化分开，即使主题不贴合，记录仍有意义。健康决定需要本报告范围之外、适用于健康问题的证据。",
+            "text": "在本报告里，身心状态主要通过“负荷与恢复之间的平衡”来阅读。结构压力可以帮助观察生活节奏，却不是生理诊断。更有意义的比较，是不同工作量、作息与支持条件下，你的日常运作有何变化。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH"
           },
           {
-            "text": "请区分繁忙的安排、自己感受到的负担，以及对它提出的解释。五行数量或压力符号都不能建立身体病因。以后回到本章时，比较记录中的实际情境，而不是寻找某种预测中的状态。出生结构保持不变，经验仍可能随环境而改变。",
-            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH"
+            "text": "身心状态以非临床方式读取「规则、责任与压力」如何与学习、支持与吸收、同类关系与自我位置及承载条件并存，由此观察负荷、支持与日常节奏，而不是形成诊断。结构压力可以帮助理解负荷与恢复，但任何医学结论都不属于命盘的判断权限。",
+            "sourceRef": "professionalModules/customerNarrative/topicNarratives/5/development|professionalModules/professionalTopics/topics/5/leadGroup|professionalModules/professionalTopics/topics/5/relevantTenGods|professionalModules/professionalTopics/topics/5/relationshipInterfaces|professionalModules/professionalTopics/topics/5/carryingContext|professionalModules/professionalTopics/topics/5/priorityRefs"
+          },
+          {
+            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
+            "sourceRef": "professionalModules/professionalTopics/topics/5/carryingContext|professionalModules/customerNarrative/topicNarratives/5/condition"
+          },
+          {
+            "text": "承载侧目前呈「支持、外泄与压力并见」，所以压力要同时看可用支持 0 与受克 3，不能只看官杀数量。",
+            "sourceRef": "professionalModules/customerNarrative/topicNarratives/5/condition|professionalModules/professionalTopics/topics/5/carryingContext"
           }
         ],
-        "tensionSignals": [],
+        "tensionSignals": [
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+        ],
         "temporalContext": {
           "mode": "NOW",
           "localDate": "2026-09-21",
@@ -28628,12 +28392,20 @@
         },
         "allowedInterpretations": [
           {
-            "text": "本报告不作健康预测。压力主题只能帮助提出经验问题：哪些要求当时能够承受，又有哪些支持在场？请记录自己的观察，不给命盘符号附加医学病因。把情境、回应与后来发生的变化分开，即使主题不贴合，记录仍有意义。健康决定需要本报告范围之外、适用于健康问题的证据。",
+            "text": "在本报告里，身心状态主要通过“负荷与恢复之间的平衡”来阅读。结构压力可以帮助观察生活节奏，却不是生理诊断。更有意义的比较，是不同工作量、作息与支持条件下，你的日常运作有何变化。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH"
           },
           {
-            "text": "请区分繁忙的安排、自己感受到的负担，以及对它提出的解释。五行数量或压力符号都不能建立身体病因。以后回到本章时，比较记录中的实际情境，而不是寻找某种预测中的状态。出生结构保持不变，经验仍可能随环境而改变。",
-            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH"
+            "text": "身心状态以非临床方式读取「规则、责任与压力」如何与学习、支持与吸收、同类关系与自我位置及承载条件并存，由此观察负荷、支持与日常节奏，而不是形成诊断。结构压力可以帮助理解负荷与恢复，但任何医学结论都不属于命盘的判断权限。",
+            "sourceRef": "professionalModules/customerNarrative/topicNarratives/5/development|professionalModules/professionalTopics/topics/5/leadGroup|professionalModules/professionalTopics/topics/5/relevantTenGods|professionalModules/professionalTopics/topics/5/relationshipInterfaces|professionalModules/professionalTopics/topics/5/carryingContext|professionalModules/professionalTopics/topics/5/priorityRefs"
+          },
+          {
+            "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
+            "sourceRef": "professionalModules/professionalTopics/topics/5/carryingContext|professionalModules/customerNarrative/topicNarratives/5/condition"
+          },
+          {
+            "text": "承载侧目前呈「支持、外泄与压力并见」，所以压力要同时看可用支持 0 与受克 3，不能只看官杀数量。",
+            "sourceRef": "professionalModules/customerNarrative/topicNarratives/5/condition|professionalModules/professionalTopics/topics/5/carryingContext"
           }
         ],
         "prohibitedClaims": [
@@ -28651,26 +28423,26 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "63f6a8df683cb5a354970774aea497e02ca063149692b94cfc3818bb62597d8a"
+        "semanticDigest": "82faab8d4857224e4199297640e1e385f38e76fc06c2cb0b9fc0e6bdb69bf585"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
-        "requestedExecutionClass": "T3_DEEP_COMPOSITION",
+        "requestedExecutionClass": "T2_LIGHT_COMPOSITION",
         "evidenceAdmission": "SOURCE_BOUND_CANONICAL_STATEMENTS",
         "route": {
-          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-sol",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "DEEP",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
-        "fallbackState": "DEEP_COMPOSITION_FALLBACK",
-        "sourceDigest": "63f6a8df683cb5a354970774aea497e02ca063149692b94cfc3818bb62597d8a"
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
+        "fallbackState": "CANONICAL_HUMANIZATION",
+        "sourceDigest": "82faab8d4857224e4199297640e1e385f38e76fc06c2cb0b9fc0e6bdb69bf585"
       },
       "sectionComposition": {
         "sectionKey": "S07_HEALTH",
@@ -28678,10 +28450,10 @@
           "zh-Hans": "健康养生",
           "en": "Health & Wellbeing"
         },
-        "openerIntro": "这里从生活节奏与观察到的压力讨论身心状态。当前命盘读取不能建立疾病、器官弱点或治疗需要的判断。本章因此提供记录日常要求与支持的空间，并让这些观察与临床评估及健康决定保持区分。",
+        "openerIntro": "健康养生把命盘中的负荷、节奏与支持结构，转换成对日常运作的非临床观察。重点是压力、恢复与生活规律怎样被组织；本章不诊断疾病、不判断器官弱点，也不能代替医疗评估。",
         "keyThemes": [
           "压力与生活节奏",
-          "生活观察建议"
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -28690,14 +28462,24 @@
             "title": "压力与生活节奏",
             "contentBlocks": [
               {
-                "text": "本报告不作健康预测。压力主题只能帮助提出经验问题：哪些要求当时能够承受，又有哪些支持在场？请记录自己的观察，不给命盘符号附加医学病因。把情境、回应与后来发生的变化分开，即使主题不贴合，记录仍有意义。健康决定需要本报告范围之外、适用于健康问题的证据。",
+                "text": "在本报告里，身心状态主要通过“负荷与恢复之间的平衡”来阅读。结构压力可以帮助观察生活节奏，却不是生理诊断。更有意义的比较，是不同工作量、作息与支持条件下，你的日常运作有何变化。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "请区分繁忙的安排、自己感受到的负担，以及对它提出的解释。五行数量或压力符号都不能建立身体病因。以后回到本章时，比较记录中的实际情境，而不是寻找某种预测中的状态。出生结构保持不变，经验仍可能随环境而改变。",
-                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH",
-                "role": "EDITORIAL_GUIDANCE"
+                "text": "身心状态以非临床方式读取「规则、责任与压力」如何与学习、支持与吸收、同类关系与自我位置及承载条件并存，由此观察负荷、支持与日常节奏，而不是形成诊断。结构压力可以帮助理解负荷与恢复，但任何医学结论都不属于命盘的判断权限。",
+                "sourceRef": "professionalModules/customerNarrative/topicNarratives/5/development|professionalModules/professionalTopics/topics/5/leadGroup|professionalModules/professionalTopics/topics/5/relevantTenGods|professionalModules/professionalTopics/topics/5/relationshipInterfaces|professionalModules/professionalTopics/topics/5/carryingContext|professionalModules/professionalTopics/topics/5/priorityRefs",
+                "role": "METHOD_INTERPRETATION"
+              },
+              {
+                "text": "这份解读需要把支持、表达与外部要求放在一起考虑；命盘不能证明它们在现实中如何被体验。",
+                "sourceRef": "professionalModules/professionalTopics/topics/5/carryingContext|professionalModules/customerNarrative/topicNarratives/5/condition",
+                "role": "METHOD_INTERPRETATION"
+              },
+              {
+                "text": "承载侧目前呈「支持、外泄与压力并见」，所以压力要同时看可用支持 0 与受克 3，不能只看官杀数量。",
+                "sourceRef": "professionalModules/customerNarrative/topicNarratives/5/condition|professionalModules/professionalTopics/topics/5/carryingContext",
+                "role": "METHOD_INTERPRETATION"
               }
             ],
             "items": [],
@@ -28705,26 +28487,26 @@
             "facts": [],
             "temporal": null,
             "observations": [],
-            "boundary": ""
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
           },
           {
             "definitionKey": "S07_P3",
             "pageFamily": "INSIGHT_LIST_PAGE",
-            "title": "生活观察建议",
+            "title": "重点摘要",
             "contentBlocks": [],
             "items": [
               {
-                "text": "记录负荷较大的一天及实际拥有的支持，不把五行转换成器官或疾病标签。",
+                "text": "压力首先是结构主题，其次才是生活观察主题。它可以代表要求、责任或持续负荷，但不等于疾病。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "比较不同环境下自己对生活节奏的记录；记录无法解释原因时，先保持开放。",
+                "text": "恢复条件与负荷同样重要。睡眠、作息、工作量、环境与实际支持，都属于真实生活中的身心证据，需要被保留下来。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "让健康评估与象征性读取保持独立；本页仅用来描述自己的经验与问题。",
+                "text": "任何医学结论都需要医学证据。本章只用于整理节奏与压力的观察，不把象征性的五行或十神转换成诊断。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S07_HEALTH",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -28736,7 +28518,9 @@
             "boundary": ""
           }
         ],
-        "boundaryNotes": [],
+        "boundaryNotes": [
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+        ],
         "practicalObservations": [],
         "temporalContext": {
           "mode": "NOW",
@@ -28965,7 +28749,7 @@
                 "NOT_OBSERVED_REALITY"
               ],
               "openConditions": [],
-              "text": "就「压力与责任」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、正官、正印。同时可连接到七杀格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。",
+              "text": "身心状态以非临床方式读取「规则、责任与压力」如何与学习、支持与吸收、同类关系与自我位置及承载条件并存，由此观察负荷、支持与日常节奏，而不是形成诊断。结构压力可以帮助理解负荷与恢复，但任何医学结论都不属于命盘的判断权限。",
               "explanationScope": "LIFE_DOMAIN",
               "claimId": "S07_HEALTH:DOMAIN_EXPLANATION",
               "claimType": "LIFE_DOMAIN_EXPLANATION",
@@ -31948,7 +31732,7 @@
               "NO_AUTOMATIC_OBSERVED_REALITY"
             ]
           },
-          "sourceEvidenceHash": "e20282119127895d7305b18979f2396143eee4e6a2b524c8057dc02079f240cc",
+          "sourceEvidenceHash": "fdce089914f8a9bc376a44a660a85c583b65dc6fe02d563a060b52c5b6862c59",
           "editorialQualityVersion": "BAZI_EDITORIAL_QUALITY_F_V2",
           "meaningCanon": {
             "version": "BAZI_EDITORIAL_MEANING_CANON_V2",
@@ -32186,7 +31970,7 @@
                 "themeId": "S07_HEALTH:DOMAIN_EXPLANATION",
                 "customerMeaning": {
                   "claimId": "S07_HEALTH:DOMAIN_EXPLANATION",
-                  "text": "就「压力与责任」而言，在这个主题里，「规则、责任与压力」是当前最靠前的功能组（约 46.2%），主要连接到七杀、正官、正印。同时可连接到七杀格路径，并经过自我锚点 ↔ 后续表达、月令环境 ↔ 自我锚点等柱位接口修正。它与整盘 4 个优先主线直接相连，因此不是独立的小结。"
+                  "text": "身心状态以非临床方式读取「规则、责任与压力」如何与学习、支持与吸收、同类关系与自我位置及承载条件并存，由此观察负荷、支持与日常节奏，而不是形成诊断。结构压力可以帮助理解负荷与恢复，但任何医学结论都不属于命盘的判断权限。"
                 },
                 "roleInWholeChart": {
                   "rank": null,
@@ -33753,7 +33537,7 @@
             "version": "BAZI_SECTION_NARRATIVE_BRIEF_F_V1",
             "sectionKey": "S07_HEALTH",
             "locale": "zh-Hans",
-            "meaningCanonDigest": "55d735c5724aa14262ce3487e94ace67f95baba47aeaa2463a36edb86001733c",
+            "meaningCanonDigest": "a3e2830afa7335b559e5b6b57e5c2177e94dcf68e54ab512959b111445a80d98",
             "orderedMeaningIds": [
               "S07_HEALTH:PRIMARY",
               "S07_HEALTH:DOMAIN_EXPLANATION",
@@ -33822,8 +33606,8 @@
             },
             "selectionRule": "Preserve admitted section scope, source ranks, distinct pairs and conditions; deterministic relation-role order; no unlicensed expansion."
           },
-          "sectionNarrativeBriefDigest": "2dd2e3f10ffa23d6576e641592c78107464d02ff5e465e48a9a6cfeff64f3ad5",
-          "canonicalEvidenceHash": "30983649d87197cf163bd566f53caa33f16c95d0196d59fb21a4104232e13aec"
+          "sectionNarrativeBriefDigest": "4747405ace6fec66c20b08da40b0d216a60320fe6fbacc3bac16cdcc3a372925",
+          "canonicalEvidenceHash": "c166b4f4f00a0f9ccc18423d2469b9fc5dc946db8a3d8102a98bf088be598f96"
         }
       },
       "diagnostics": {
@@ -33929,7 +33713,7 @@
             "sourceRef": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/0"
           },
           {
-            "text": "比较时请区分本命、大运与流年，它们属于不同层次，不能相互替代。用保存的观察日期界定正在回顾的范围，再记录这段时间实际发生的事情。",
+            "text": "时间读取采用“叠层”而不是“替换”。本命、大运与流年分别回答不同问题。最有效的做法，是先把这些层次分清楚，再观察它们在哪里发生交汇。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S08_TIMING"
           }
         ],
@@ -33958,7 +33742,7 @@
             "sourceRef": "BAZI_FULL_REPORT:075cff15500b0a6d97fe4879c3f93969e6dea82fc1419ec435d0af06f5aa919f#professionalModules/professionalTimeline/daYunTimeline/0"
           },
           {
-            "text": "比较时请区分本命、大运与流年，它们属于不同层次，不能相互替代。用保存的观察日期界定正在回顾的范围，再记录这段时间实际发生的事情。",
+            "text": "时间读取采用“叠层”而不是“替换”。本命、大运与流年分别回答不同问题。最有效的做法，是先把这些层次分清楚，再观察它们在哪里发生交汇。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S08_TIMING"
           }
         ],
@@ -33972,9 +33756,9 @@
         "counterSignals": [],
         "unresolvedItems": [],
         "realityQuestions": [
-          "在这段观察范围内，哪项责任变得更明显？请找一个具体例子支持自己的描述。",
-          "这段时间可用的支持有哪些变化？支持改变时，你的回应是否也随之不同？",
-          "哪段经历与最初注意到的主题相反？有哪些情境可以帮助理解这个差异？",
+          "本命描述持续存在的结构；大运改变中期运行环境；流年则把观察范围进一步收窄。",
+          "同一主题若同时出现在本命、大运与流年中，通常比只出现于单一层更值得注意；但重复仍不等于保证某件具体事件发生。",
+          "时间读取最适合绑定真实时期与真实问题，用来比较条件怎样变化，而不是把每个符号都转换成预测。",
           "时间层名称改变前后，哪些经验仍然保持一致？"
         ],
         "provenance": {
@@ -33982,7 +33766,7 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "143b8c645a3fa2fd5517f43cf1456a90d619d85d9b89177211a61cd8e2bf7b62"
+        "semanticDigest": "910ff209b86b3fda12171c1a341cc610180fd1cb5976939f6888273da4ad8a4d"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
@@ -33991,17 +33775,17 @@
         "route": {
           "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-luna",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "LIGHT",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
         "fallbackState": "CANONICAL_HUMANIZATION",
-        "sourceDigest": "143b8c645a3fa2fd5517f43cf1456a90d619d85d9b89177211a61cd8e2bf7b62"
+        "sourceDigest": "910ff209b86b3fda12171c1a341cc610180fd1cb5976939f6888273da4ad8a4d"
       },
       "sectionComposition": {
         "sectionKey": "S08_TIMING",
@@ -34009,11 +33793,12 @@
           "zh-Hans": "时间结构",
           "en": "Timing & Cycles"
         },
-        "openerIntro": "观察窗口以保存的生成时间和客户时区为起点。本章把已支持的大运与流年层放在本命结构旁边比较。时间提供对照范围；主题是否与这段经历有关，仍需要现实观察来核对。",
+        "openerIntro": "时间结构是在本命结构之上加入“变化”。本命仍是底图；大运与流年显示在特定时期里，命盘中的哪些部分被重新触发、得到支持、受到挑战，或变得更加明显。",
         "keyThemes": [
           "时间层次",
           "当前时间层",
-          "当前流年观察"
+          "当前流年观察",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -34041,7 +33826,7 @@
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "比较时请区分本命、大运与流年，它们属于不同层次，不能相互替代。用保存的观察日期界定正在回顾的范围，再记录这段时间实际发生的事情。",
+                "text": "时间读取采用“叠层”而不是“替换”。本命、大运与流年分别回答不同问题。最有效的做法，是先把这些层次分清楚，再观察它们在哪里发生交汇。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S08_TIMING",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -34059,8 +33844,8 @@
               "localTime": "11:22:57"
             },
             "observations": [
-              "在这段观察范围内，哪项责任变得更明显？请找一个具体例子支持自己的描述。",
-              "这段时间可用的支持有哪些变化？支持改变时，你的回应是否也随之不同？"
+              "本命描述持续存在的结构；大运改变中期运行环境；流年则把观察范围进一步收窄。",
+              "同一主题若同时出现在本命、大运与流年中，通常比只出现于单一层更值得注意；但重复仍不等于保证某件具体事件发生。"
             ],
             "boundary": "时间层用于界定对照范围，不能据此认定某件事已经发生或必然发生。"
           },
@@ -34088,10 +33873,38 @@
               "localTime": "11:22:57"
             },
             "observations": [
-              "哪段经历与最初注意到的主题相反？有哪些情境可以帮助理解这个差异？",
+              "时间读取最适合绑定真实时期与真实问题，用来比较条件怎样变化，而不是把每个符号都转换成预测。",
               "时间层名称改变前后，哪些经验仍然保持一致？"
             ],
             "boundary": "流年层用于界定观察范围；本次读取不把具体事件判断为机会或预警。"
+          },
+          {
+            "definitionKey": "S08_KEY_INSIGHTS",
+            "pageFamily": "INSIGHT_LIST_PAGE",
+            "title": "重点摘要",
+            "contentBlocks": [],
+            "items": [
+              {
+                "text": "本命描述持续存在的结构；大运改变中期运行环境；流年则把观察范围进一步收窄。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S08_TIMING",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
+                "text": "同一主题若同时出现在本命、大运与流年中，通常比只出现于单一层更值得注意；但重复仍不等于保证某件具体事件发生。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S08_TIMING",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
+                "text": "时间读取最适合绑定真实时期与真实问题，用来比较条件怎样变化，而不是把每个符号都转换成预测。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S08_TIMING",
+                "role": "EDITORIAL_GUIDANCE"
+              }
+            ],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": ""
           }
         ],
         "boundaryNotes": [
@@ -34100,9 +33913,9 @@
           "流年层用于界定观察范围；本次读取不把具体事件判断为机会或预警。"
         ],
         "practicalObservations": [
-          "在这段观察范围内，哪项责任变得更明显？请找一个具体例子支持自己的描述。",
-          "这段时间可用的支持有哪些变化？支持改变时，你的回应是否也随之不同？",
-          "哪段经历与最初注意到的主题相反？有哪些情境可以帮助理解这个差异？",
+          "本命描述持续存在的结构；大运改变中期运行环境；流年则把观察范围进一步收窄。",
+          "同一主题若同时出现在本命、大运与流年中，通常比只出现于单一层更值得注意；但重复仍不等于保证某件具体事件发生。",
+          "时间读取最适合绑定真实时期与真实问题，用来比较条件怎样变化，而不是把每个符号都转换成预测。",
           "时间层名称改变前后，哪些经验仍然保持一致？"
         ],
         "temporalContext": {
@@ -44846,11 +44659,26 @@
         ],
         "supportingSignals": [
           {
-            "text": "选择一个工作责任、资源交换与关系期待交汇的情境，看看各章哪一部分让描述变得更准确。只保留经验能够支持的解释，同时留下挑战解释的例子。随后选一个小而可撤回的调整，先决定观察什么，再评价它的价值。整合是让联系在具体环境中有用，不要求每一个主题同时贴合。",
+            "text": "最有价值的建议，来自在整张命盘不同部分反复出现的主题。本页把这些重复主线按阅读顺序重新收拢，让它们可以转化成行动重点，而不是把整份报告压成一个单一结论。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S09_GUIDANCE"
+          },
+          {
+            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
+            "sourceRef": "professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/development"
+          },
+          {
+            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
+            "sourceRef": "professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/development"
+          },
+          {
+            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
+            "sourceRef": "professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/development"
           }
         ],
-        "tensionSignals": [],
+        "tensionSignals": [
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+        ],
         "temporalContext": {
           "mode": "NOW",
           "localDate": "2026-09-21",
@@ -44867,8 +44695,20 @@
         },
         "allowedInterpretations": [
           {
-            "text": "选择一个工作责任、资源交换与关系期待交汇的情境，看看各章哪一部分让描述变得更准确。只保留经验能够支持的解释，同时留下挑战解释的例子。随后选一个小而可撤回的调整，先决定观察什么，再评价它的价值。整合是让联系在具体环境中有用，不要求每一个主题同时贴合。",
+            "text": "最有价值的建议，来自在整张命盘不同部分反复出现的主题。本页把这些重复主线按阅读顺序重新收拢，让它们可以转化成行动重点，而不是把整份报告压成一个单一结论。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S09_GUIDANCE"
+          },
+          {
+            "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
+            "sourceRef": "professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/development"
+          },
+          {
+            "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
+            "sourceRef": "professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/development"
+          },
+          {
+            "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
+            "sourceRef": "professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/development"
           }
         ],
         "prohibitedClaims": [
@@ -44886,26 +44726,26 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "be45516ec069df5f2992994cfedbc31a2739ccec9af850007287e4d48a879308"
+        "semanticDigest": "6d3c1fff54730db1f4a276fd1b7ceb8fccb525f26cf09e6124649d1f894b7200"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
-        "requestedExecutionClass": "T3_DEEP_COMPOSITION",
+        "requestedExecutionClass": "T2_LIGHT_COMPOSITION",
         "evidenceAdmission": "SOURCE_BOUND_CANONICAL_STATEMENTS",
         "route": {
-          "aiExecutionClass": "T3_DEEP_COMPOSITION",
+          "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-sol",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "DEEP",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
-        "fallbackState": "DEEP_COMPOSITION_FALLBACK",
-        "sourceDigest": "be45516ec069df5f2992994cfedbc31a2739ccec9af850007287e4d48a879308"
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
+        "fallbackState": "CANONICAL_HUMANIZATION",
+        "sourceDigest": "6d3c1fff54730db1f4a276fd1b7ceb8fccb525f26cf09e6124649d1f894b7200"
       },
       "sectionComposition": {
         "sectionKey": "S09_GUIDANCE",
@@ -44913,64 +44753,82 @@
           "zh-Hans": "人生建议",
           "en": "Guidance & Recommendations"
         },
-        "openerIntro": "前面的章节从不同角度阅读同一张命盘。整合时，请选择一个同时涉及工作、资源与关系的真实情境，而不是把每个主题相加成单一结论。本章把这种比较带入观察、尝试与复盘的小循环。",
+        "openerIntro": "人生建议把整份报告重新收拢。它不是把所有章节相加成一个最终结论，而是找出在事业、资源、关系与时间中反复出现的结构主题，再把这些主题转换成现实中值得注意的行动重点。",
         "keyThemes": [
-          "综合建议",
-          "下一步建议"
+          "贯穿整份报告的主线",
+          "现阶段最值得关注什么",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
-            "definitionKey": "S09_P2",
-            "pageFamily": "SUMMARY_PAGE",
-            "title": "综合建议",
+            "definitionKey": "S09_PRIORITIES",
+            "pageFamily": "NARRATIVE_ANALYSIS_PAGE",
+            "title": "贯穿整份报告的主线",
             "contentBlocks": [
               {
-                "text": "选择一个工作责任、资源交换与关系期待交汇的情境，看看各章哪一部分让描述变得更准确。只保留经验能够支持的解释，同时留下挑战解释的例子。随后选一个小而可撤回的调整，先决定观察什么，再评价它的价值。整合是让联系在具体环境中有用，不要求每一个主题同时贴合。",
+                "text": "最有价值的建议，来自在整张命盘不同部分反复出现的主题。本页把这些重复主线按阅读顺序重新收拢，让它们可以转化成行动重点，而不是把整份报告压成一个单一结论。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S09_GUIDANCE",
                 "role": "EDITORIAL_GUIDANCE"
-              }
-            ],
-            "items": [
+              },
               {
-                "text": "事业主题看的是表达产出、规则责任、资源交换与学习支持怎样组织成可持续的工作方式。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/lead",
+                "text": "这条柱位关系把学习、支持与吸收、资源与交换、规则、责任与压力、同类与自我位置拉进同一处阅读。也就是说，规则、资源、支持或表达不宜各自孤立解释，要看它们在环境与自我之间怎样同时发生。",
+                "sourceRef": "professionalModules/wholeChartPriority/themes/0|professionalModules/customerNarrative/priorityChapters/0/development",
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "财富主题看的是资源怎样被产出、管理、交换与保留，而不是把一个财星直接等同于财富结果。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/lead",
+                "text": "「规则、责任与压力」值得优先读，不是因为占比越高就越“好”或越像人格标签，而是因为它和整盘其他结构有更多重复连接。",
+                "sourceRef": "professionalModules/wholeChartPriority/themes/1|professionalModules/customerNarrative/priorityChapters/1/development",
                 "role": "METHOD_INTERPRETATION"
               },
               {
-                "text": "关系主题看自我位置、规则、资源与支持怎样在不同关系柱位关系里反复出现，而不是把某一柱直接等同某个人。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/lead",
+                "text": "因此这里真正要读的不是“有没有一个格局名称”，而是这些支持条件能否和日主承载、十神组合及关系修正同时成立。",
+                "sourceRef": "professionalModules/wholeChartPriority/themes/2|professionalModules/customerNarrative/priorityChapters/2/development",
                 "role": "METHOD_INTERPRETATION"
               }
             ],
+            "items": [],
             "sourcePages": [],
             "facts": [],
             "temporal": null,
             "observations": [],
-            "boundary": ""
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+          },
+          {
+            "definitionKey": "S09_CURRENT_FOCUS",
+            "pageFamily": "STRUCTURED_ANALYSIS_PAGE",
+            "title": "现阶段最值得关注什么",
+            "contentBlocks": [
+              {
+                "text": "当前重点要看哪些重复主线正在与现阶段时间层发生关联，同时保留仍未确定的判断。目标是找出现在最值得注意的内容，同时把阶段性放大与长期结构清楚分开。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S09_GUIDANCE",
+                "role": "EDITORIAL_GUIDANCE"
+              }
+            ],
+            "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
           },
           {
             "definitionKey": "S09_P3",
             "pageFamily": "INSIGHT_LIST_PAGE",
-            "title": "下一步建议",
+            "title": "重点摘要",
             "contentBlocks": [],
             "items": [
               {
-                "text": "回看一个具体情境，分清命盘主题与自己能够描述的实际观察。",
+                "text": "优先关注跨章节重复出现的主题。事业、资源、关系与时间中反复出现的结构，比一句孤立判断更有解释力。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S09_GUIDANCE",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "尝试一个小而可撤回的改变，行动前先写下自己预计会观察什么。",
+                "text": "把稳定结构与阶段性时间分开。当前时期可以放大某个主题，却不会因此变成永久身份。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S09_GUIDANCE",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "复盘支持与反对的例子，再调整问题，而不是强迫经验符合解读。",
+                "text": "建议只有进入现实导航才真正有用：找出当前最重要的一个条件，做有限调整，再观察真实变化。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S09_GUIDANCE",
                 "role": "EDITORIAL_GUIDANCE"
               }
@@ -44982,7 +44840,10 @@
             "boundary": ""
           }
         ],
-        "boundaryNotes": [],
+        "boundaryNotes": [
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。",
+          "这是一份有条件的象征性解读，不代表已经观察到的行为，也不预测事件。"
+        ],
         "practicalObservations": [],
         "temporalContext": {
           "mode": "NOW",
@@ -47447,28 +47308,12 @@
         ],
         "supportingSignals": [
           {
-            "text": "先看可见命盘，再区分对它进行解释的文字。符号与计数是方法中的事实，附加的含义则取决于条件和范围。判断未定时，不要用更确定的故事填补空白。用具体经验比较解读，同时保留相符与不符之处。报告可以帮助整理问题，却不能代替关于他人、财务结果或健康状况的独立证据。有了能让问题更清楚的例子时，再回到相应章节阅读。",
+            "text": "本报告包含几个不同证据层：计算得到的命盘结构、已核准的方法关系、编辑解释，以及现实经验对照。把这些层次分清楚，报告反而会更有用，因为每个重要结论都能追溯到真正支持它的证据类型。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX"
           },
           {
-            "text": "能力是否稳定，要继续看根气 1、生扶 0 与输出成本 4 能不能长期配合。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/condition"
-          },
-          {
-            "text": "生活运行的关键不是哪一组永远占上风，而是支持、输出、资源与责任能否在不同阶段重新找到可持续的循环。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/condition"
-          },
-          {
-            "text": "事业结构会随角色、组织环境与阶段而改变；这里说明的是工作运行方式，不把它直接写成某个职业的固定成败结论。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/condition"
-          },
-          {
-            "text": "资源结构说明钱、机会与交换怎样进入命盘，不等同实际收入承诺；现实结果仍取决于选择、市场、责任与时间条件。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/condition"
-          },
-          {
-            "text": "关系结构更适合观察互动方式、边界与反复柱位关系，不把它直接翻译成结婚、分手或某一种伴侣结果。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/condition"
+            "text": "阅读本报告时，请区分四个证据层：计算得到的命盘事实、已核准的方法关系、编辑解释，以及真实生活证据。一个判断只有在清楚知道由哪一层证据支持时才更可靠；不同层之间即使相符，也不应因此失去各自的角色。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX"
           }
         ],
         "tensionSignals": [],
@@ -47488,28 +47333,12 @@
         },
         "allowedInterpretations": [
           {
-            "text": "先看可见命盘，再区分对它进行解释的文字。符号与计数是方法中的事实，附加的含义则取决于条件和范围。判断未定时，不要用更确定的故事填补空白。用具体经验比较解读，同时保留相符与不符之处。报告可以帮助整理问题，却不能代替关于他人、财务结果或健康状况的独立证据。有了能让问题更清楚的例子时，再回到相应章节阅读。",
+            "text": "本报告包含几个不同证据层：计算得到的命盘结构、已核准的方法关系、编辑解释，以及现实经验对照。把这些层次分清楚，报告反而会更有用，因为每个重要结论都能追溯到真正支持它的证据类型。",
             "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX"
           },
           {
-            "text": "能力是否稳定，要继续看根气 1、生扶 0 与输出成本 4 能不能长期配合。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/condition"
-          },
-          {
-            "text": "生活运行的关键不是哪一组永远占上风，而是支持、输出、资源与责任能否在不同阶段重新找到可持续的循环。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/condition"
-          },
-          {
-            "text": "事业结构会随角色、组织环境与阶段而改变；这里说明的是工作运行方式，不把它直接写成某个职业的固定成败结论。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/condition"
-          },
-          {
-            "text": "资源结构说明钱、机会与交换怎样进入命盘，不等同实际收入承诺；现实结果仍取决于选择、市场、责任与时间条件。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/condition"
-          },
-          {
-            "text": "关系结构更适合观察互动方式、边界与反复柱位关系，不把它直接翻译成结婚、分手或某一种伴侣结果。",
-            "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/condition"
+            "text": "阅读本报告时，请区分四个证据层：计算得到的命盘事实、已核准的方法关系、编辑解释，以及真实生活证据。一个判断只有在清楚知道由哪一层证据支持时才更可靠；不同层之间即使相符，也不应因此失去各自的角色。",
+            "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX"
           }
         ],
         "prohibitedClaims": [
@@ -47527,7 +47356,7 @@
           "internalOnly": true
         },
         "customerVisible": false,
-        "semanticDigest": "8f2eced96f9198dc452a06f7d8441df3400d5fe669cfd99a23e2ddf0ba0dd976"
+        "semanticDigest": "89279496be6c809d984fc9873c59539bf166ff48c637a5a3e6b651a3b1e34cb5"
       },
       "composition": {
         "executionClass": "T2_LIGHT_COMPOSITION",
@@ -47536,17 +47365,17 @@
         "route": {
           "aiExecutionClass": "T2_LIGHT_COMPOSITION",
           "providerRequired": true,
-          "selectedProvider": "OPENAI",
-          "selectedModel": "gpt-5.6-luna",
-          "providerAttemptLimit": 1,
-          "fallbackAllowed": true,
-          "fallbackCapabilityClass": "LIGHT",
-          "routingReason": "MINIMUM_SUFFICIENT_CAPABILITY"
+          "selectedProvider": null,
+          "selectedModel": null,
+          "providerAttemptLimit": 0,
+          "fallbackAllowed": false,
+          "degradedDisposition": "DETERMINISTIC_FALLBACK",
+          "routingReason": "NO_ADMITTED_PROVIDER_AVAILABLE"
         },
         "compositionVersion": "2.0.0",
-        "fallbackReason": "SEMANTIC_VERIFIER_NOT_ADMITTED",
+        "fallbackReason": "NO_ADMITTED_PROVIDER_ROUTE",
         "fallbackState": "CANONICAL_HUMANIZATION",
-        "sourceDigest": "8f2eced96f9198dc452a06f7d8441df3400d5fe669cfd99a23e2ddf0ba0dd976"
+        "sourceDigest": "89279496be6c809d984fc9873c59539bf166ff48c637a5a3e6b651a3b1e34cb5"
       },
       "sectionComposition": {
         "sectionKey": "S10_APPENDIX",
@@ -47554,10 +47383,11 @@
           "zh-Hans": "方法与附录",
           "en": "Method & Appendix"
         },
-        "openerIntro": "本章说明怎样使用报告，同时不让解读超出证据所能支持的范围。术语、未定条件或时间层需要澄清时，可以回到这里。方法、解释与真实经验各有自己的作用，应当一起阅读，也应保持区分。",
+        "openerIntro": "方法与附录说明这份报告由什么组成、每一层证据能够支持到哪里，以及解释应该在哪里停止。当你需要区分“计算事实与解释文字”“候选格局与已确认格局”“时间框架与事件判断”时，可以回到这里。",
         "keyThemes": [
           "如何理解这份报告",
-          "分析方法"
+          "分析方法",
+          "重点摘要"
         ],
         "pageBlocks": [
           {
@@ -47566,34 +47396,14 @@
             "title": "如何理解这份报告",
             "contentBlocks": [
               {
-                "text": "先看可见命盘，再区分对它进行解释的文字。符号与计数是方法中的事实，附加的含义则取决于条件和范围。判断未定时，不要用更确定的故事填补空白。用具体经验比较解读，同时保留相符与不符之处。报告可以帮助整理问题，却不能代替关于他人、财务结果或健康状况的独立证据。有了能让问题更清楚的例子时，再回到相应章节阅读。",
+                "text": "本报告包含几个不同证据层：计算得到的命盘结构、已核准的方法关系、编辑解释，以及现实经验对照。把这些层次分清楚，报告反而会更有用，因为每个重要结论都能追溯到真正支持它的证据类型。",
                 "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX",
                 "role": "EDITORIAL_GUIDANCE"
               },
               {
-                "text": "能力是否稳定，要继续看根气 1、生扶 0 与输出成本 4 能不能长期配合。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/4/condition",
-                "role": "METHOD_BOUNDARY"
-              },
-              {
-                "text": "生活运行的关键不是哪一组永远占上风，而是支持、输出、资源与责任能否在不同阶段重新找到可持续的循环。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/6/condition",
-                "role": "METHOD_BOUNDARY"
-              },
-              {
-                "text": "事业结构会随角色、组织环境与阶段而改变；这里说明的是工作运行方式，不把它直接写成某个职业的固定成败结论。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/0/condition",
-                "role": "METHOD_BOUNDARY"
-              },
-              {
-                "text": "资源结构说明钱、机会与交换怎样进入命盘，不等同实际收入承诺；现实结果仍取决于选择、市场、责任与时间条件。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/1/condition",
-                "role": "METHOD_BOUNDARY"
-              },
-              {
-                "text": "关系结构更适合观察互动方式、边界与反复柱位关系，不把它直接翻译成结婚、分手或某一种伴侣结果。",
-                "sourceRef": "professionalModules/customerNarrative/topicNarratives/2/condition",
-                "role": "METHOD_BOUNDARY"
+                "text": "阅读本报告时，请区分四个证据层：计算得到的命盘事实、已核准的方法关系、编辑解释，以及真实生活证据。一个判断只有在清楚知道由哪一层证据支持时才更可靠；不同层之间即使相符，也不应因此失去各自的角色。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX",
+                "role": "EDITORIAL_GUIDANCE"
               }
             ],
             "items": [],
@@ -47615,6 +47425,34 @@
               }
             ],
             "items": [],
+            "sourcePages": [],
+            "facts": [],
+            "temporal": null,
+            "observations": [],
+            "boundary": ""
+          },
+          {
+            "definitionKey": "S10_KEY_INSIGHTS",
+            "pageFamily": "INSIGHT_LIST_PAGE",
+            "title": "重点摘要",
+            "contentBlocks": [],
+            "items": [
+              {
+                "text": "计算事实与解释属于不同层次。天干、地支、计数与已解析的时间位置属于方法事实；附加其上的意义则需要明确的解释规则。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
+                "text": "未定条件必须保持未定。当格局、强弱或时间结论尚未完全成立时，报告应保留这种不确定性，而不是用更肯定的文字填补。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX",
+                "role": "EDITORIAL_GUIDANCE"
+              },
+              {
+                "text": "把报告当作结构化观察镜头，再与真实生活中的独立证据比较。相符可以提供线索，不相符同样是重要的解释信息。",
+                "sourceRef": "functions/personal-reading/bazi-section-editorial.js#S10_APPENDIX",
+                "role": "EDITORIAL_GUIDANCE"
+              }
+            ],
             "sourcePages": [],
             "facts": [],
             "temporal": null,
