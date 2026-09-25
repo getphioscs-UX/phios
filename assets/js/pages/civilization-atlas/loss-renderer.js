@@ -14,5 +14,5 @@ export function renderLossAtlas(root,{registry,casesRegistry,state,locale='en',o
 }
 export function renderLossInspector(root,{selection,locale='en'}={}){
  const l=locale==='zh-Hans'?'zh-Hans':'en'; if(!root||!selection?.family)return;
- root.innerHTML=`<h3>${esc(loc(selection.family.title,l))}</h3><p>${esc(loc(selection.family.description,l))}</p>${selection.active?`<p><strong>${esc(loc(selection.active.title,l))}</strong></p>`:''}<p>${esc(l==='zh-Hans'?'没有文明总分；损失、继任与延续可以同时存在。':'There is no civilization total score; loss, succession, and continuation can coexist.')}</p>`;
+ root.innerHTML=`<div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(l==='zh-Hans'?'损失与延续':'Loss & continuity')}</p><h3>${esc(loc(selection.active?.title||selection.family.title,l))}</h3><p>${esc(loc(selection.active?.positionShift||selection.family.description,l))}</p></div>`;
 }
