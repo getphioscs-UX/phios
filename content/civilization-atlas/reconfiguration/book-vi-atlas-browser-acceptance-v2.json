@@ -1,12 +1,12 @@
 {
   "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-BROWSER-ACCEPTANCE-v2.1.0",
-  "version": "2.1.0",
-  "status": "READY_FOR_REAL_BROWSER_ACCEPTANCE",
-  "reason": "B6-WEB-F code and figure-path reconciliation are prepared. A real interactive browser session has not yet been executed; no browser item is promoted to PASS.",
-  "desktop": "NOT_RUN",
+  "version": "2.2.0",
+  "status": "REJECTED_PARTIAL_REAL_BROWSER_REVIEW",
+  "reason": "Owner real-browser screenshots demonstrate customer-visible layout, article rendering and zh-Hans parity failures. Untested items remain NOT_RUN; no item is promoted to PASS.",
+  "desktop": "REJECTED",
   "mobile": "NOT_RUN",
   "keyboard": "NOT_RUN",
-  "localeSwitch": "NOT_RUN",
+  "localeSwitch": "REJECTED",
   "deepLinkReload": "NOT_RUN",
   "requiredChecks": [
     "Book VI → Atlas",
@@ -31,5 +31,12 @@
     "Refresh",
     "Deep-link reload",
     "FIG_13A–FIG_13H figure detail"
+  ],
+  "observedFailures": [
+    "Desktop Atlas card layout / typography wrapping failure.",
+    "Published Book VI article invalid-render state.",
+    "zh-Hans case detail includes English body copy.",
+    "Contemporary Runtime surface is dominated by contract-only UNKNOWN values.",
+    "Registered Civilization Atlas visual library is not exposed from the Book VI customer surface."
   ]
 }
