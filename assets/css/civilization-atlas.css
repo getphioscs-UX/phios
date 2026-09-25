@@ -373,3 +373,20 @@
  .civ-trajectory-picker,.civ-loss-families{grid-template-columns:1fr}
  .civ-timeline__navigator .civ-timeline__period{min-width:12.5rem}
 }
+
+
+/* FR2 secondary case + scale shift visuals */
+.civ-case-secondary{margin-top:.3rem;padding-top:.7rem;border-top:1px solid var(--phi-border-subtle)}
+.civ-case-secondary>summary{cursor:pointer;font-weight:600;color:var(--phi-text-secondary)}
+.civ-case-secondary[open]>summary{margin-bottom:.6rem}
+.civ-case-secondary img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:.55rem}
+
+.civ-scale-shifts>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem}
+.civ-scale-shift-card{display:grid;border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-md);overflow:hidden;background:var(--phi-surface-solid)}
+.civ-scale-shift-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--phi-border-subtle)}
+.civ-scale-shift-card>span{display:grid;gap:.2rem;padding:.7rem}
+.civ-scale-shift-card strong{line-height:1.3}
+.civ-scale-shift-card small{color:var(--phi-text-secondary)}
+.civ-scale-shift-card.is-open{border-style:dashed;border-color:var(--phi-action-knowledge)}
+@media(max-width:900px){.civ-scale-shifts>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.civ-scale-shifts>div{grid-template-columns:1fr}}
