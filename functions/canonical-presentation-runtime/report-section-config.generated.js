@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R10",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R11_COMPRESSED_44",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -69,6 +69,12 @@ export const registry = {
           "title": {
             "zh-Hans": "命盘总览",
             "en": "Chart Overview"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-01-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-01-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-01-OVERVIEW"
           }
         },
         {
@@ -96,19 +102,6 @@ export const registry = {
             "en": "Five Elements · Structure & Season",
             "zh-Hans": "五行 · 结构与季节"
           }
-        },
-        {
-          "key": "S01_P3",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "chartHighlights"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": true
         }
       ]
     },
@@ -132,6 +125,12 @@ export const registry = {
           "title": {
             "zh-Hans": "核心性格",
             "en": "Core Personality"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-02-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-02-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-02-PERSONALITY"
           }
         },
         {
@@ -160,27 +159,15 @@ export const registry = {
           }
         },
         {
-          "key": "S02_LEARNING_PROCESSING",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "key": "S02_CAPABILITY_DEVELOPMENT",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
-            "personalityLearning"
+            "personalityDevelopment"
           ],
           "title": {
-            "zh-Hans": "学习与吸收",
-            "en": "Learning & Absorption"
-          }
-        },
-        {
-          "key": "S02_EXPRESSION_CAPABILITY",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "DETERMINISTIC_PERSONALIZED",
-          "dataModules": [
-            "personalityExpression"
-          ],
-          "title": {
-            "zh-Hans": "表达与输出",
-            "en": "Expression & Output"
+            "zh-Hans": "能力如何形成并稳定",
+            "en": "Capability Development"
           }
         },
         {
@@ -194,33 +181,6 @@ export const registry = {
             "zh-Hans": "张力与外部要求",
             "en": "Friction & External Demands"
           }
-        },
-        {
-          "key": "S02_RELIABILITY",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "DETERMINISTIC_PERSONALIZED",
-          "dataModules": [
-            "personalityReliability"
-          ],
-          "title": {
-            "zh-Hans": "能力的稳定条件",
-            "en": "Conditions for Reliability"
-          }
-        },
-        {
-          "key": "S02_P3",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "strengths",
-            "challenges",
-            "socialStyle"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": true
         }
       ]
     },
@@ -244,6 +204,12 @@ export const registry = {
           "title": {
             "zh-Hans": "人生格局",
             "en": "Life Structure"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-03-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-03-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE"
           }
         },
         {
@@ -322,31 +288,6 @@ export const registry = {
             "zh-Hans": "整盘如何组织",
             "en": "How the Chart Organizes"
           }
-        },
-        {
-          "key": "S03_CONDITIONS",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "DETERMINISTIC_PERSONALIZED",
-          "dataModules": [
-            "lifeStructureConditions"
-          ],
-          "title": {
-            "zh-Hans": "成立条件与开放判断",
-            "en": "Conditions & Open Judgments"
-          }
-        },
-        {
-          "key": "S03_KEY_INSIGHTS",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "lifeStructureInsights"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": false
         }
       ]
     },
@@ -370,6 +311,12 @@ export const registry = {
           "title": {
             "zh-Hans": "事业发展",
             "en": "Career Development"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-04-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-04-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-04-CAREER"
           }
         },
         {
@@ -399,41 +346,16 @@ export const registry = {
           }
         },
         {
-          "key": "S04_WORKING_CONDITIONS",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "key": "S04_WORKING_DIRECTION",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
-            "careerWorkingConditions"
+            "careerWorkingDirection"
           ],
           "title": {
-            "zh-Hans": "适合怎样的工作条件",
-            "en": "Work Conditions That Matter"
+            "zh-Hans": "工作条件与长期方向",
+            "en": "Work Conditions & Long-Term Direction"
           }
-        },
-        {
-          "key": "S04_DIRECTION",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "DETERMINISTIC_PERSONALIZED",
-          "dataModules": [
-            "careerDirection"
-          ],
-          "title": {
-            "zh-Hans": "事业发展的长期主线",
-            "en": "Long-Term Career Themes"
-          }
-        },
-        {
-          "key": "S04_P3",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "careerFields"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": true
         },
         {
           "key": "S04_P4",
@@ -471,6 +393,12 @@ export const registry = {
           "title": {
             "zh-Hans": "财富运势",
             "en": "Wealth Outlook"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-05-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-05-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-05-WEALTH"
           }
         },
         {
@@ -500,41 +428,16 @@ export const registry = {
           }
         },
         {
-          "key": "S05_RETENTION",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "key": "S05_RETENTION_REALITY",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
-            "wealthRetentionPressure"
+            "wealthRetentionReality"
           ],
           "title": {
-            "zh-Hans": "资源如何被留住或消耗",
-            "en": "Retention, Demand & Outflow"
+            "zh-Hans": "资源留存、流出与现实财务",
+            "en": "Retention, Outflow & Real Finance"
           }
-        },
-        {
-          "key": "S05_REALITY_BOUNDARY",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "DETERMINISTIC_PERSONALIZED",
-          "dataModules": [
-            "wealthRealityBoundary"
-          ],
-          "title": {
-            "zh-Hans": "财富解读的现实边界",
-            "en": "From Symbolic Wealth to Real Finance"
-          }
-        },
-        {
-          "key": "S05_P3",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "financialAdvice"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": true
         }
       ]
     },
@@ -558,6 +461,12 @@ export const registry = {
           "title": {
             "zh-Hans": "感情婚姻",
             "en": "Relationships & Marriage"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-06-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-06-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP"
           }
         },
         {
@@ -587,41 +496,16 @@ export const registry = {
           }
         },
         {
-          "key": "S06_INTERACTION",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
+          "key": "S06_INTERACTION_BOUNDARY",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
-            "relationshipInteraction"
+            "relationshipInteractionBoundary"
           ],
           "title": {
-            "zh-Hans": "关系如何形成互动",
-            "en": "How Interaction Takes Shape"
+            "zh-Hans": "互动、边界与结果",
+            "en": "Interaction, Boundaries & Outcomes"
           }
-        },
-        {
-          "key": "S06_BOUNDARIES",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "DETERMINISTIC_PERSONALIZED",
-          "dataModules": [
-            "relationshipBoundaries"
-          ],
-          "title": {
-            "zh-Hans": "关系判断的边界",
-            "en": "What the Chart Can—and Cannot—Say"
-          }
-        },
-        {
-          "key": "S06_P3",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "relationshipAdvice"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": true
         }
       ]
     },
@@ -645,6 +529,12 @@ export const registry = {
           "title": {
             "zh-Hans": "健康养生",
             "en": "Health & Wellbeing"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-07-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-07-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-07-HEALTH"
           }
         },
         {
@@ -658,19 +548,6 @@ export const registry = {
             "zh-Hans": "压力与生活节奏",
             "en": "Pressure & Daily Rhythm"
           }
-        },
-        {
-          "key": "S07_P3",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "wellnessAdvice"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": true
         }
       ]
     },
@@ -694,6 +571,12 @@ export const registry = {
           "title": {
             "zh-Hans": "时间结构",
             "en": "Timing & Cycles"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-08-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-08-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-08-TIMING"
           }
         },
         {
@@ -733,19 +616,6 @@ export const registry = {
             "en": "Current-Year Insights"
           },
           "omitWhenInsufficient": false
-        },
-        {
-          "key": "S08_KEY_INSIGHTS",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "timingInsights"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": false
         }
       ]
     },
@@ -769,44 +639,25 @@ export const registry = {
           "title": {
             "zh-Hans": "人生建议",
             "en": "Guidance & Recommendations"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-09-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-09-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-09-GUIDANCE"
           }
         },
         {
-          "key": "S09_PRIORITIES",
+          "key": "S09_INTEGRATED_GUIDANCE",
           "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
-            "guidancePriorities"
+            "guidanceIntegrated"
           ],
           "title": {
-            "zh-Hans": "贯穿整份报告的主线",
-            "en": "Themes Across Your Report"
+            "zh-Hans": "跨章节主线与当前重点",
+            "en": "Themes & Current Focus"
           }
-        },
-        {
-          "key": "S09_CURRENT_FOCUS",
-          "family": "STRUCTURED_ANALYSIS_PAGE",
-          "executionClass": "DETERMINISTIC_PERSONALIZED",
-          "dataModules": [
-            "guidanceCurrentFocus"
-          ],
-          "title": {
-            "zh-Hans": "现阶段最值得关注什么",
-            "en": "What Deserves Attention Now"
-          }
-        },
-        {
-          "key": "S09_P3",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "nextSteps"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": true
         }
       ]
     },
@@ -830,45 +681,25 @@ export const registry = {
           "title": {
             "zh-Hans": "方法与附录",
             "en": "Method & Appendix"
+          },
+          "masterAsset": {
+            "zhHans": "VIS-REPORT-BAZI-SEC-10-MASTER-ZH",
+            "en": "VIS-REPORT-BAZI-SEC-10-MASTER-EN",
+            "status": "MISSING_ASSET",
+            "fallbackAsset": "VIS-REPORT-BAZI-SEC-10-APPENDIX"
           }
         },
         {
-          "key": "S10_P2",
+          "key": "S10_METHOD_GUIDE",
           "family": "METHOD_APPENDIX_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
-            "boundaries"
+            "methodGuide"
           ],
           "title": {
-            "zh-Hans": "如何理解这份报告",
-            "en": "How to Read This Report"
+            "zh-Hans": "如何理解方法与证据",
+            "en": "How to Read the Method"
           }
-        },
-        {
-          "key": "S10_P3",
-          "family": "METHOD_APPENDIX_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "methodology"
-          ],
-          "title": {
-            "zh-Hans": "分析方法",
-            "en": "Methodology"
-          },
-          "omitWhenInsufficient": false
-        },
-        {
-          "key": "S10_KEY_INSIGHTS",
-          "family": "INSIGHT_LIST_PAGE",
-          "executionClass": "STATIC_EDITORIAL",
-          "dataModules": [
-            "appendixInsights"
-          ],
-          "title": {
-            "zh-Hans": "重点摘要",
-            "en": "Key Insights"
-          },
-          "omitWhenInsufficient": false
         }
       ]
     }
@@ -899,6 +730,18 @@ export const registry = {
       "version": "R7",
       "rule": "Long-form narrative pages require reliable evidence density; shorter boundary/condition facets use structured analysis rather than filler.",
       "noFiller": true
+    },
+    "compression": {
+      "version": "R10",
+      "targetTotalPages": 44,
+      "targetBodyPages": 38,
+      "standaloneKeyInsights": false,
+      "sectionMasterOwns": [
+        "SECTION_OPENER",
+        "KEY_INSIGHTS",
+        "READING_FRAME"
+      ],
+      "thinPageMerge": true
     }
   }
 };
