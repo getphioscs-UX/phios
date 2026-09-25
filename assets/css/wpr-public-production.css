@@ -218,3 +218,21 @@
     scroll-behavior: auto;
   }
 }
+
+
+/* STATIC BOOK CONTENT ADMISSION
+   HTML owns content existence; the client renderer may enhance and replace this layer only after successful admission. */
+.wpr-static-admission[hidden]{display:none!important}
+.wpr-static-admission{border-bottom:1px solid var(--phi-border-subtle);background:var(--phi-surface-solid)}
+.wpr-static-admission__hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(12rem,22rem);gap:clamp(2rem,6vw,5rem);align-items:center;padding-block:clamp(3rem,8vw,7rem)}
+.wpr-static-admission__hero h1{max-width:15ch;margin-block:.35rem 1rem}
+.wpr-static-admission__cover{margin:0}.wpr-static-admission__cover img{display:block;width:100%;height:auto;max-height:34rem;object-fit:contain}
+.wpr-static-admission__reading,.wpr-static-admission__manuscript{border-top:1px solid var(--phi-border-subtle)}
+.wpr-static-admission__parts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.25rem,3vw,2.5rem);margin-top:2rem}
+.wpr-static-admission__part{min-width:0;padding:1.25rem;border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-lg);background:var(--phi-surface-subtle)}
+.wpr-static-admission__part h3{margin-top:0}.wpr-static-admission__part ol{margin-bottom:0;padding-left:1.35rem}.wpr-static-admission__part li+li{margin-top:.55rem}
+.wpr-static-admission__details{display:grid;gap:.75rem;margin-top:2rem}
+.wpr-static-admission__details details{border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-md);background:var(--phi-surface-subtle);padding:.9rem 1rem}
+.wpr-static-admission__details summary{cursor:pointer;font-weight:700}
+.wpr-static-admission__details ul{margin:1rem 0 0;padding-left:1.35rem}.wpr-static-admission__details li+li{margin-top:.45rem}
+@media(max-width:760px){.wpr-static-admission__hero{grid-template-columns:1fr}.wpr-static-admission__cover{max-width:20rem}.wpr-static-admission__parts{grid-template-columns:1fr}}
