@@ -1,0 +1,38 @@
+name: BaZi R11 Editorial Quality Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'functions/personal-reading/bazi-section-publication.js'
+      - 'functions/personal-reading/narrative/bazi-explanatory-authority.js'
+      - 'functions/personal-reading/narrative/bazi-editorial-quality.js'
+      - 'scripts/audit-bazi-r11-deterministic-editorial.mjs'
+      - 'docs/guided-report-successor-r2/bazi-source.json'
+      - '.github/workflows/bazi-r11-editorial-quality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bazi-r11-editorial-quality
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+      - name: Run R11 deterministic editorial audit
+        run: node scripts/audit-bazi-r11-deterministic-editorial.mjs
+      - name: Upload R11 editorial evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: bazi-r11-editorial-quality
+          path: docs/acceptance/bazi-paid-report/r11/EDITORIAL-QUALITY-AUDIT.json
+          if-no-files-found: error
