@@ -53,9 +53,9 @@ function reviewDocument(locale){
  const sectionOptions=snapshot.pages.filter(p=>p.isSectionOpener).map(p=>`<option value="${p.sectionNumber}">${p.sectionNumber} · ${p.sectionTitle[locale]}</option>`).join('');
  return `<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title>
-<link rel="stylesheet" href="/assets/css/tokens.css">
-<link rel="stylesheet" href="/assets/customer-ui/surfaces/visual-report.css">
-<link rel="stylesheet" href="/assets/customer-ui/surfaces/report-publication.css">
+<link rel="stylesheet" href="../../../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../../../assets/customer-ui/surfaces/visual-report.css">
+<link rel="stylesheet" href="../../../../assets/customer-ui/surfaces/report-publication.css">
 <style>
 body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 .r9-nav{position:sticky;top:0;z-index:20;background:#fffdf7ee;backdrop-filter:blur(12px);border-bottom:1px solid #cbb88e;padding:12px 16px;font:14px/1.5 system-ui}
@@ -77,7 +77,7 @@ body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 <div id="r9-error" class="r9-error"></div>
 <main id="report">${rendered}</main>
 <script type="module">
-import {settlePublicationAssets,fitPublicationForPrint} from '/assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {settlePublicationAssets,fitPublicationForPrint} from '../../../../assets/customer-ui/js/personal-products/publication-report-pages.js';
 const report=document.querySelector('#report'),sel=document.querySelector('#section'),errorBox=document.querySelector('#r9-error'),printButton=document.querySelector('#print');
 try{
  report.querySelectorAll('[data-page-family="SECTION_OPENER_PAGE"]').forEach(el=>el.id='r9-section-'+el.dataset.section.replace(/^S/,'').slice(0,2));
@@ -106,9 +106,9 @@ function focusedReviewDocument(locale,sectionKey,label){
  const title=locale==='en'?`BaZi R11 · ${label} Human Review`:`BaZi R11 · ${label} 人工验收`;
  return `<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title>
-<link rel="stylesheet" href="/assets/css/tokens.css">
-<link rel="stylesheet" href="/assets/customer-ui/surfaces/visual-report.css">
-<link rel="stylesheet" href="/assets/customer-ui/surfaces/report-publication.css">
+<link rel="stylesheet" href="../../../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../../../assets/customer-ui/surfaces/visual-report.css">
+<link rel="stylesheet" href="../../../../assets/customer-ui/surfaces/report-publication.css">
 <style>
 body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 .focus-nav{position:sticky;top:0;z-index:20;background:#fffdf7ee;backdrop-filter:blur(12px);border-bottom:1px solid #cbb88e;padding:12px 16px;font:14px/1.5 system-ui}
@@ -122,7 +122,7 @@ body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 <section class="focus-status"><b>Scope:</b> ${sectionKey}. Review content depth, section specificity, timing relevance and navigation. The 10-section visual system is not under redesign.</section>
 <div id="focus-error" class="focus-error"></div><main id="report">${rendered}</main>
 <script type="module">
-import {settlePublicationAssets,fitPublicationForPrint} from '/assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {settlePublicationAssets,fitPublicationForPrint} from '../../../../assets/customer-ui/js/personal-products/publication-report-pages.js';
 const report=document.querySelector('#report'),errorBox=document.querySelector('#focus-error'),printButton=document.querySelector('#print');
 try{
  printButton.disabled=true;
