@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "METHOD_REPORT_CONTENT_QUALITY_ROLLOUT_R1",
+  "status": "ACTIVE_GOVERNANCE",
+  "goldenExemplar": {
+    "methodId": "BZR",
+    "phase": "R11_CONTENT_QUALITY",
+    "ownerGate": "HUMAN_ACCEPTANCE_REQUIRED",
+    "pageArchitecture": "44_PAGE_COMPRESSED",
+    "sectionMasterVisuals": "ACCEPTED_BY_OWNER"
+  },
+  "sharedAcrossMethods": {
+    "mayReuse": [
+      "EXISTING_SECTION_VISUAL_AS_SECTION_MASTER_BACKGROUND",
+      "SECTION_MASTER_HTML_CSS_OVERLAY",
+      "EDITORIAL_QUALITY_METRIC_NAMES",
+      "HTML_PDF_ONE_SEMANTIC_SOURCE",
+      "MACHINE_BROWSER_PRINT_QA",
+      "NO_NEW_MASTER_BACKGROUND_JUST_FOR_KEY_INSIGHTS"
+    ],
+    "mustNotShare": [
+      "BAZI_CLAIM_IR",
+      "BAZI_SEMANTIC_OPERATORS_AS_METHOD_TRUTH",
+      "BAZI_SECTION_COMPOSER",
+      "BAZI_TIMING_RULES",
+      "BAZI_TEN_GOD_MEANINGS",
+      "BAZI_PATTERN_RULES"
+    ]
+  },
+  "methodSuccessorContract": {
+    "requiredPerMethod": [
+      "CURRENT_REPORT_BASELINE",
+      "METHOD_AUTHORITY_COVERAGE",
+      "SECTION_OWNERSHIP_MATRIX",
+      "METHOD_SPECIFIC_CLAIM_OR_SEMANTIC_IR",
+      "SECTION_SPECIFIC_DETERMINISTIC_COMPOSER",
+      "EDITORIAL_DUPLICATION_AUDIT",
+      "LOCALE_PARITY",
+      "BROWSER_PRINT_QA",
+      "OWNER_ACCEPTANCE"
+    ],
+    "qualityQuestions": [
+      "What does this section uniquely own?",
+      "Which method facts actually support it?",
+      "Which relationships or operators are licensed?",
+      "What conditions/counterweights remain visible?",
+      "What observable comparison is licensed?",
+      "What timing relevance is licensed?",
+      "What must remain open?"
+    ]
+  },
+  "rolloutOrder": [
+    {
+      "methodId": "BZR",
+      "status": "IN_PROGRESS_R11",
+      "action": "Finish content-quality exemplar and owner acceptance."
+    },
+    {
+      "methodId": "ZWR",
+      "status": "PRESERVE_EXISTING",
+      "action": "Independent Zi Wei content-quality successor after BZR acceptance."
+    },
+    {
+      "methodId": "AST",
+      "status": "PRESERVE_EXISTING",
+      "action": "Independent Astrology content-quality successor after BZR acceptance."
+    },
+    {
+      "methodId": "NUM",
+      "status": "PRESERVE_EXISTING",
+      "action": "Independent Numerology content-quality successor; do not inherit BaZi thresholds."
+    },
+    {
+      "methodId": "PROFILE",
+      "status": "PRESERVE_EXISTING",
+      "action": "Independent Profile successor using profile/evidence authority."
+    },
+    {
+      "methodId": "ECR",
+      "status": "PRESERVE_EXISTING",
+      "action": "Independent ECR successor using ECR configuration/driver authority."
+    },
+    {
+      "methodId": "HD",
+      "status": "PRESERVE_EXISTING",
+      "action": "Independent Human Design successor; preserve official-chart/user-confirmation boundaries."
+    },
+    {
+      "methodId": "CROSS",
+      "status": "PRESERVE_EXISTING",
+      "action": "Update last; consume only production-admitted claims from component methods."
+    }
+  ],
+  "admissionRule": "Do not start semantic rollout to the next method until BZR R11 owner acceptance establishes the content-quality calibration. Visual reuse policy may remain active immediately."
+}
