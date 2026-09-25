@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B6-WEB-FR2 Human Review — Civilization Atlas</title>
+<style>
+:root{font-family:Inter,system-ui,sans-serif;color:#f5f0e6;background:#06131f}
+*{box-sizing:border-box}body{margin:0}main{max-width:1700px;margin:auto;padding:24px}
+h1{font-size:clamp(32px,5vw,60px);max-width:18ch;margin:.2em 0}.lead{max-width:80rem;color:#b8c4cf;line-height:1.7}
+.meta,.controls,.layers,.review-grid{display:flex;flex-wrap:wrap;gap:10px}.meta span,.review-item,.toolbar{border:1px solid #4f6273;background:#0a1f30;border-radius:14px;padding:12px}
+button,a.action{min-height:44px;padding:.65rem .9rem;color:inherit;background:#102b3e;border:1px solid #6b7d8d;border-radius:9px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+button[aria-pressed="true"]{border-color:#d5b36c;box-shadow:inset 0 0 0 1px #d5b36c;color:#fff4d6}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #d5b36c;outline-offset:3px}
+.toolbar{display:grid;gap:12px;margin:18px 0}.toolbar-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.toolbar-row>strong{min-width:92px}
+.viewport{margin:18px 0;background:#02070c;border:1px solid #4f6273;border-radius:16px;padding:14px;overflow:auto;min-height:800px}
+iframe{display:block;border:0;background:white;margin:auto;min-height:780px;width:1440px;max-width:none}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:24px}.review-item{display:grid;gap:8px}.review-item header{display:flex;justify-content:space-between;gap:8px}.review-item.accepted{border-color:#69c891}.review-item.rejected{border-color:#ff8585}.review-actions{display:flex;gap:6px}.review-actions button{flex:1}.status,.small{font-size:.82rem;color:#b8c4cf}textarea{width:100%;background:#06131f;color:#f5f0e6;border:1px solid #4f6273;border-radius:8px;padding:8px}
+.note{border-left:3px solid #d5b36c;background:#0a1f30;padding:.85rem 1rem;line-height:1.65;color:#c9d1d8}
+.footer-actions{position:sticky;bottom:0;background:#06131ff2;padding:12px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+code{word-break:break-all}@media(max-width:700px){main{padding:14px}.viewport{padding:8px}iframe{min-height:680px}.review-grid{grid-template-columns:1fr}}
+</style></head>
+<body><main>
+<p>PHI OS · Civilization Atlas</p>
+<h1>B6-WEB-FR2 Human Review</h1>
+<p class="lead">FR2 follows the explicit rejection of the previous B6-WEB-F surface. The new standard is asset-led: the accepted static visuals are interface building blocks, not a detached gallery; comparison is a responsive civilization board rather than a generic table.</p>
+<div class="meta"><span>Successor: <code>B6-WEB-FR2</code></span><span>Rejected predecessor recorded</span><span>392 accepted visuals</span><span>15 visual families</span><span>Latest machine cutover: PASS</span></div>
+<p class="note"><b>Human acceptance remains required.</b> Review 1440 / 768 / 360 and both English / 中文. Pay special attention to Compare: no vertical “比较维度”, no generic spreadsheet look, no repeated template sentence in every cell.</p>
+
+<section class="toolbar">
+ <div class="toolbar-row"><strong>Layer</strong>
+  <button data-layer="timeline">Timeline</button><button data-layer="world">World</button><button data-layer="cases">Civilizations</button><button data-layer="comparison" aria-pressed="true">Compare</button><button data-layer="trajectories">Long Trends</button><button data-layer="transitions">Transitions</button><button data-layer="loss">Reversal & Loss</button>
+ </div>
+ <div class="toolbar-row"><strong>Locale</strong><button data-locale="en">English</button><button data-locale="zh-Hans" aria-pressed="true">中文</button></div>
+ <div class="toolbar-row"><strong>Viewport</strong><button data-width="360">360</button><button data-width="768">768</button><button data-width="1440" aria-pressed="true">1440</button></div>
+ <div class="toolbar-row"><a class="action" id="open-current" target="_blank" rel="noopener">Open current page</a><span class="small" id="current-url"></span></div>
+</section>
+
+<div class="viewport"><iframe id="frame" title="B6-WEB-FR2 real customer Atlas"></iframe></div>
+
+<h2>FR2 human decisions</h2>
+<div class="review-grid">
+ <article class="review-item" data-review="comparison-desktop"><header><strong>Compare · desktop board</strong><span class="status">PENDING</span></header><p class="small">Family map, representative civilizations and matrix read as one coherent Atlas board. Dimension column is readable and stable.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="comparison-mobile"><header><strong>Compare · mobile 360</strong><span class="status">PENDING</span></header><p class="small">No squeezed vertical labels. Each dimension becomes a readable civilization-labelled card sequence.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="comparison-content"><header><strong>Compare · content usefulness</strong><span class="status">PENDING</span></header><p class="small">Matrix uses case-specific facts; generic semantic definitions sit in the separate comparison-dimension overview instead of repeating in every cell.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="timeline"><header><strong>Timeline interface</strong><span class="status">PENDING</span></header><p class="small">Era reader and period navigation visibly use accepted Timeline visuals as UI components.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="cases"><header><strong>Civilization registry interface</strong><span class="status">PENDING</span></header><p class="small">Case Hero / Secondary visuals form the registry cards and active-case context. The surface resembles an Atlas registry, not a plain database list.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="world"><header><strong>World snapshot interface</strong><span class="status">PENDING</span></header><p class="small">Snapshot atmosphere visual occupies the map field; representative civilizations use case visuals; deeper networks remain readable.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="trajectories"><header><strong>Long Trends interface</strong><span class="status">PENDING</span></header><p class="small">Trajectory motifs are part of the reader/picker; chart and method remain secondary and do not revert to dashboard clutter.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="transitions"><header><strong>Transitions interface</strong><span class="status">PENDING</span></header><p class="small">Transition Window and Scale Shift visuals form the interface; narrative still reads before mechanics.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="loss"><header><strong>Reversal & Loss interface</strong><span class="status">PENDING</span></header><p class="small">Loss Family / Loss Type visuals are structural UI components; taxonomy remains understandable rather than decorative.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="visual-language"><header><strong>Atlas visual language</strong><span class="status">PENDING</span></header><p class="small">Deep navy + gold + ivory board styling matches the intended Civilization Atlas family and feels closer to the supplied references.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="zh-hans"><header><strong>中文完整性</strong><span class="status">PENDING</span></header><p class="small">Case regions/reach, World regions, labels and years do not leak unexplained English or raw enums.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="asset-role"><header><strong>392 visual asset role</strong><span class="status">PENDING</span></header><p class="small">Accepted visuals visibly build layer interfaces; they no longer feel like a detached “Visual Library”. Unmapped families are not guessed into false historical relationships.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+ <article class="review-item" data-review="responsive"><header><strong>Responsive 360 / 768 / 1440</strong><span class="status">PENDING</span></header><p class="small">No page-level horizontal overflow; dense structures intentionally reflow or scroll without destroying text orientation.</p><div class="review-actions"><button data-decision="ACCEPT">ACCEPT</button><button data-decision="REJECT">REJECT</button><button data-decision="PENDING">PENDING</button></div><textarea rows="2"></textarea></article>
+</div>
+
+<div class="footer-actions"><button id="export">Export FR2 decision JSON</button><button id="reset">Reset to PENDING</button><strong id="summary">0 / 13 accepted</strong></div>
+<script>
+const frame=document.getElementById('frame'),openCurrent=document.getElementById('open-current'),currentUrl=document.getElementById('current-url');
+let layer='comparison',locale='zh-Hans',width=1440;
+function url(){return '/books/reality-differentiation/?atlas='+encodeURIComponent(layer)+'&lang='+encodeURIComponent(locale)+'#atlas'}
+function refresh(){const u=url();frame.style.width=width+'px';frame.src=u;openCurrent.href=u;currentUrl.textContent=u}
+document.querySelectorAll('[data-layer]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.layer===layer));b.onclick=()=>{layer=b.dataset.layer;document.querySelectorAll('[data-layer]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));refresh()}});
+document.querySelectorAll('[data-locale]').forEach(b=>b.onclick=()=>{locale=b.dataset.locale;document.querySelectorAll('[data-locale]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));refresh()});
+document.querySelectorAll('[data-width]').forEach(b=>b.onclick=()=>{width=Number(b.dataset.width);document.querySelectorAll('[data-width]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));refresh()});refresh();
+
+const key='B6-WEB-FR2-HUMAN-REVIEW';
+const state=()=>[...document.querySelectorAll('[data-review]')].map(x=>({id:x.dataset.review,status:x.querySelector('.status').textContent,note:x.querySelector('textarea').value}));
+function update(){const s=state();document.getElementById('summary').textContent=s.filter(x=>x.status==='ACCEPT').length+' / '+s.length+' accepted';localStorage.setItem(key,JSON.stringify(s))}
+document.querySelectorAll('.review-item').forEach(item=>{item.querySelectorAll('[data-decision]').forEach(b=>b.onclick=()=>{const d=b.dataset.decision;item.querySelector('.status').textContent=d;item.classList.toggle('accepted',d==='ACCEPT');item.classList.toggle('rejected',d==='REJECT');update()});item.querySelector('textarea').oninput=update});
+try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved)for(const d of saved){const item=document.querySelector('[data-review="'+d.id+'"]');if(item){item.querySelector('.status').textContent=d.status;item.querySelector('textarea').value=d.note||'';item.classList.toggle('accepted',d.status==='ACCEPT');item.classList.toggle('rejected',d.status==='REJECT')}}}catch{}update();
+document.getElementById('reset').onclick=()=>{localStorage.removeItem(key);location.reload()};
+document.getElementById('export').onclick=()=>{const dimensions=state();const payload={schemaVersion:'PHI-OS-B6-WEB-FR2-HUMAN-v1.0.0',status:dimensions.every(x=>x.status==='ACCEPT')?'HUMAN_ACCEPTED':dimensions.some(x=>x.status==='REJECT')?'HUMAN_REJECTED':'PENDING_HUMAN_REVIEW',successorOf:'B6-WEB-F',requiredViewports:[360,768,1440],requiredLocales:['en','zh-Hans'],dimensions};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='B6-WEB-FR2-HUMAN-DECISION.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+</script></main></body></html>
