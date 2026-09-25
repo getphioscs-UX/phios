@@ -27,6 +27,7 @@ const slug = root?.dataset.articleSlug || '';
 let renderGeneration = 0;
 
 function renderLoadingState() {
+  if (root.querySelector('[data-static-article-admission]')) return;
   const status = document.createElement('div');
   status.className = 'knowledge-article-state knowledge-loading-state';
   status.setAttribute('data-state', 'loading');
@@ -148,7 +149,7 @@ async function render() {
     if(generation!==renderGeneration)return;
 
     if (!article) {
-      renderUnavailableState();
+      if (!root.querySelector('[data-static-article-admission]')) renderUnavailableState();
       return;
     }
 
@@ -169,10 +170,9 @@ async function render() {
     hydrateKnowledgeSpineVisuals(root);
   } catch (error) {
     if(generation!==renderGeneration)return;
-    if (error instanceof ArticleRenderError) {
-      renderInvalidState();
-    } else {
-      renderLoadErrorState();
+    if (!root.querySelector('[data-static-article-admission]')) {
+      if (error instanceof ArticleRenderError) renderInvalidState();
+      else renderLoadErrorState();
     }
   } finally {
     if(generation===renderGeneration)root.removeAttribute('aria-busy');
