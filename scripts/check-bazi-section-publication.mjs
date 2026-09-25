@@ -45,7 +45,7 @@ for(const report of reports){
   if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert((p.primaryVisualRef||units>=range[0])&&units<=range[1],`CONTENT_BUDGET:${p.pageKey}:${units}`);}
   if(p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'){const units=textUnits(p.paragraphs.join(' '),report.locale);assert(units>=range[0],`THIN_NARRATIVE:${p.pageKey}`);}
   if(p.pageFamily==='INSIGHT_LIST_PAGE'){assert(p.items.length>=3&&p.items.length<=6);const range=budget[report.locale==='en'?'enItem':'zhItem'];for(const item of p.items){const units=textUnits(item,report.locale);assert(units>=range[0]&&units<=range[1],`${p.pageKey}:${units}`);}}
-  if(p.pageFamily==='TIMING_PAGE'){assert(p.temporal.date&&p.temporal.annual&&p.temporal.selectedLuck);assert(p.observations.length>=2&&p.observations.length<=4);}
+  if(p.pageFamily==='TIMING_PAGE'){assert(p.temporal.date&&p.temporal.annual&&p.temporal.selectedLuck);const [minObs,maxObs]=budget.observations;assert(p.observations.length>=minObs&&p.observations.length<=maxObs,`TIMING_OBSERVATIONS:${p.pageKey}:${p.observations.length}`);}
  }
  const liveSource=read('docs/guided-report-successor-r2/bazi-source.json');const built=await projectBaziSectionPublication({reading:liveSource.reading,locale:report.locale,temporalContext:liveSource.temporalSnapshot});const internal={internalPages:built.internalSections};assert.equal(internal.internalPages.length,10);
  for(const s of internal.internalPages){assert(s.sectionComposition.pageBlocks.length>=1);assert.equal(s.sectionComposition.sectionKey,s.sectionKey);assert.equal(s.interpretation.topic,s.sectionKey);assert.equal(s.composition.executionClass,'T2_LIGHT_COMPOSITION');}
