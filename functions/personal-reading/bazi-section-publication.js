@@ -73,7 +73,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   makeFacet('personalityLearning',pick(
    'Learning and processing are read through the chart’s support-and-absorption function and the conditions around it. This layer asks how information is taken in, supported and made usable before expression is expected.',
    '学习与处理方式主要从命盘中的支持与吸收功能，以及包围它的条件来阅读。这一层关注信息如何被接收、获得支持并变成可用能力，再进入表达与输出。'
-  ),[byId(':PRIMARY'),byId(':SUPPORT'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/learning|support|absorption|学习|支持|吸收/i.test(x.text))]);
+  ),[byId(':PRIMARY'),byId(':SUPPORT')]);
 
   makeFacet('personalityExpression',pick(
    'Expression is separate from learning. A capability may exist internally yet need different conditions to become repeatable visible output. Recorded links between self-position and expression refine this reading.',
@@ -168,7 +168,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {key:'relationshipInteraction',lead:pick(
    'The next layer is interaction. Recorded links and tensions between chart positions show where expectations, support, responsibility and self-expression may need active negotiation instead of moving automatically in the same direction.',
    '下一层是互动。柱位之间已记录的联结与张力，会显示期待、支持、责任与自我表达在哪里需要主动协商，而不是自然地朝同一方向运行。'
-  ),types:['OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  ),types:['TENSION','OPERATING_CONDITION']},
   {key:'relationshipBoundaries',lead:pick(
    'Relationship guidance becomes more reliable when recurring interaction structure is separated from fixed outcome claims. Open conditions keep marriage, separation and partner outcomes outside unsupported certainty.',
    '关系建议只有在反复出现的互动结构与固定结果被分开后才更可靠。未定条件会避免把婚姻、分离或伴侣结果写成没有依据的确定结论。'
@@ -239,7 +239,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     const count=def.primaryVisualRef==='BZR-VIS-TEN-GOD-DETAILS'?reading.professionalModules.tenGods.items.length:1;
     const visualPageSize=def.primaryVisualRef==='BZR-VIS-TEN-GOD-DETAILS'?6:1;
     for(let offset=0;offset<count;offset+=visualPageSize){const visual=buildBaziPublicationVisual({reading,primaryVisualRef:def.primaryVisualRef,locale,topicCode:def.visualTopic,offset,limit:visualPageSize});
-     pageBlocks.push({definitionKey:def.key,visualContinuation:offset?`_CONT_${offset/4+1}`:'',pageFamily:def.family,title:def.title[locale],contentBlocks:def.primaryVisualRef==='BZR-VIS-FOUR-PILLARS'?modules.baziChart.blocks:[],items:[],sourcePages:[],facts:[],observations:[],boundary:visual.boundary,primaryVisualRef:visual.primaryVisualRef,primaryVisualHtml:visual.primaryVisualHtml});
+     pageBlocks.push({definitionKey:def.key,visualContinuation:offset?`_CONT_${offset/visualPageSize+1}`:'',pageFamily:def.family,title:def.title[locale],contentBlocks:def.primaryVisualRef==='BZR-VIS-FOUR-PILLARS'?modules.baziChart.blocks:[],items:[],sourcePages:[],facts:[],observations:[],boundary:visual.boundary,primaryVisualRef:visual.primaryVisualRef,primaryVisualHtml:visual.primaryVisualHtml});
     }continue;
    }
    const selected=def.dataModules.map(k=>modules[k]).filter(Boolean),blocks=selected.flatMap(m=>m.blocks||[]),items=selected.flatMap(m=>m.items||[]);
