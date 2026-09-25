@@ -89,7 +89,7 @@ for (const contract of ['loadFigureRegistry', 'figureHasCanonicalBookOwnership',
 assert.ok(knowledgeAdapter.includes('loadFigureRegistry'));
 assert.ok(knowledgeAdapter.includes('loadCanonicalParts'));
 assert.ok(publicSurfaceData.includes('/content/registry/figures.json'));
-assert.match(publicSurfaceData,/export async function loadCanonicalParts\(\)\s*\{\s*return loadSevenVolumeParts\(\)/);
+assert.match(publicSurfaceData,/export async function loadCanonicalParts\(\)\s*\{\s*return loadEightVolumeParts\(\)/);
 const sevenVolumeData = fs.readFileSync('assets/js/web-production/public-surface-data-seven.js','utf8');
 assert.ok(sevenVolumeData.includes('/content/registry/successors/eight-volume-v1/parts.json'));
 const currentParts = JSON.parse(fs.readFileSync('content/registry/successors/eight-volume-v1/parts.json','utf8'));
