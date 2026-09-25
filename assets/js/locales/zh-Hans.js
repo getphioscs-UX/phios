@@ -2,6 +2,7 @@
 import shared from './zh-Hans/shared.js';
 import home from './zh-Hans/home.js';
 import atlas from './zh-Hans/atlas.js';
+import book6ReconfigurationAtlas from './zh-Hans/book6-reconfiguration-atlas.js';
 import entry from './zh-Hans/entry.js';
 import reconstruction from './zh-Hans/reconstruction.js';
 import reading from './zh-Hans/reading.js';
@@ -23,6 +24,7 @@ const dictionary = Object.freeze({
   ...shared,
   ...home,
   ...atlas,
+  ...book6ReconfigurationAtlas,
   ...entry,
   ...reconstruction,
   ...reading,
