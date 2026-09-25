@@ -88,7 +88,7 @@ export function createCivilizationAtlasState(initial={}){
 }
 
 export const RECONFIG_ATLAS_LAYERS = Object.freeze([
-  'overview','search','cases','timeline','windows','snapshots','dossiers','lived','compare','dossiercompare'
+  'overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','dossiercompare'
 ]);
 export const DEFAULT_RECONFIGURATION_ATLAS_STATE = Object.freeze({
   version:'2.0.0',activeLayer:'overview',query:'',caseSearch:'',primaryCaseId:null,compareCaseIds:[],
