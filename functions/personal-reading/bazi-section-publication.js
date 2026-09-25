@@ -271,8 +271,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    r11TenGodStructure('QI_SHA'),
    r11TenGodStructure('ZHENG_YIN'),
    pick(
-    'The output/expression group has no counted occurrence in this inventory. That is not the same as “no ability to express.” It means expression should not be inferred from a high-count output symbol here; the later relationship interfaces and real situations carry more of that question.',
-    '这份清单中，输出／表达功能组没有计数出现。这不等于“没有表达能力”，而是说明这里不能靠一个高占比输出符号直接推断表达；后面的关系接口与真实情境，才承担更多关于表达方式的判断。'
+    'The output/expression group is not structurally prominent in this inventory. That is not the same as “no ability to express.” It means expression should not be inferred from a dominant output symbol here; the recorded relationship interfaces carry more of that question.',
+    '这份清单中，输出／表达功能组并不突出。这不等于“没有表达能力”，而是说明这里不能靠一个强势输出符号直接推断表达；已记录的关系接口承担了更多关于表达方式的判断。'
    ),
    pick(
     'Resource/support and rules/pressure therefore describe different parts of the operating style: one concerns what can be taken in and used as support, while the other concerns standards, obligations and demands that must be carried. Their coexistence is more informative than turning either one into a personality label.',
@@ -299,8 +299,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
       `命盘也在${link?R11_RELATION_THEME[link.positionThemeCode]||'自我位置与表达':'自我位置与表达'}记录到${link?R11_RELATION_TYPE[link.type]||'一组联结':'一组已记录联结'}。因此，能力在内部是否存在，与它能否转成外在表达，是两个不同层次，而不是同一件事的两个名称。`
      ),
      pick(
-      'In real life, compare a situation where learning was easy but sustained delivery was difficult with one where both were stable. Differences in preparation time, feedback, support or freedom to respond help test which stage of the capability chain is actually changing.',
-      '现实中可以比较两种情境：一种是学得快但持续交付困难，另一种是学习与持续输出都稳定。准备时间、反馈、支持或回应空间的差异，可以帮助判断能力链条里真正发生变化的是哪一个阶段。'
+      'The distinction to preserve is between absorption, expression and sustained carrying. If later lived evidence shows that one stage changes while the others remain stable, that evidence helps locate where the capability chain is most condition-sensitive.',
+      '这里需要保留的是“吸收—表达—持续承载”三个层次的差异。若后续现实证据显示其中一层改变、另外两层仍稳定，就能帮助定位能力链条里哪一段最受条件影响。'
      )
     ],{boundary:'',observations:[]});
    }
@@ -336,8 +336,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `整盘结构不是把功能从高到低排一次名。命盘里${repeated.slice(0,3).map(x=>R11_TEN_GOD[x.tenGodCode]).join('、')}反复出现，同时柱位关系把环境、自我位置与表达连在一起；在任何格局名称成为主结论之前，这些层次必须先放回同一张图中。`
    ),
    pick(
-    `The Seven-Killings candidate ${qisha?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} and remains ${R11_PATTERN_STATE[qisha?.conclusionState]||pick('open','保持开放')}; the Indirect-Wealth candidate ${cai?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} with ${cai?.visiblePathCount??0} recorded path${cai?.visiblePathCount===1?'':'s'}. The important point is the contrast between a visible route and a completed formation judgment.`,
-    `七杀候选${qisha?.visibleStemMatch?'有透干对应':'未见透干对应'}，但状态仍是「${R11_PATTERN_STATE[qisha?.conclusionState]||'保持开放'}」；偏财候选${cai?.visibleStemMatch?'有透干对应':'未见透干对应'}，并记录到 ${cai?.visiblePathCount??0} 条路径。真正重要的是把“路径可见”与“格局已经成立”分开。`
+    `The Seven-Killings candidate ${qisha?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} and remains ${R11_PATTERN_STATE[qisha?.conclusionState]||pick('open','保持开放')}; the Indirect-Wealth candidate ${cai?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} and also remains conditional. The important point is the contrast between a visible route and a completed formation judgment.`,
+    `七杀候选${qisha?.visibleStemMatch?'有透干对应':'未见透干对应'}，但状态仍是「${R11_PATTERN_STATE[qisha?.conclusionState]||'保持开放'}」；偏财候选${cai?.visibleStemMatch?'有透干对应':'未见透干对应'}，同样仍属于条件性候选。真正重要的是把“路径可见”与“格局已经成立”分开。`
    ),
    pick(
     `The natal structure contains several distinct relationship interfaces. Their value is not event prediction; they show where otherwise separate functions meet, and therefore where later career, wealth and relationship readings must return to the same underlying structure.`,
@@ -366,16 +366,16 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   ],{boundary:'',observations:[]});
   r11Module('careerWorkingDirection','CAREER',[
    pick(
-    'Long-term career direction is better tested through recurring role conditions than through one profession label. Compare responsibility, decision authority, learning support, resource access and delivery pressure across several jobs, and notice which combinations remain workable over time.',
-    '长期事业方向更适合通过反复出现的角色条件来检验，而不是从一个职业标签判断。可以跨不同工作比较责任、决策权、学习支持、资源取得与交付压力，观察哪些组合能够长期维持。'
+    'Long-term career direction is better understood through recurring role conditions than through one profession label. In this chart, responsibility, support and resource access belong to the same career frame, so durability depends on how those functions are organized together rather than on the title of the role.',
+    '长期事业方向更适合通过反复出现的角色条件来理解，而不是从一个职业标签判断。这张命盘把责任、支持与资源取得放在同一事业框架中，因此长期可持续性取决于这些功能怎样被组织，而不是职位名称本身。'
    ),
    pick(
     `This chart keeps ${R11_GROUP.OFFICER}, ${R11_GROUP.RESOURCE} and ${R11_GROUP.WEALTH} inside the career frame together. A useful comparison therefore asks three separate questions: what must be carried, what support or knowledge is available, and what resources the role can actually mobilize.`,
     `这张命盘的事业框架同时保留「${R11_GROUP.OFFICER}」「${R11_GROUP.RESOURCE}」与「${R11_GROUP.WEALTH}」。因此可以分开比较三件事：要承担什么、有哪些支持或知识、角色实际上能调动哪些资源。`
    ),
    pick(
-    'If a role becomes difficult only after sustained delivery begins, treat that change as evidence about carrying cost. Compare it with a similar role that remains sustainable because authority, support or resources differ. That contrast helps distinguish a role-structure issue from an occupation-wide conclusion, and a counterexample helps test whether organization or timing matters more than the chart theme.',
-    '如果某个角色只在持续交付后才变得困难，可以把变化当成承载成本的线索，再与一个工作内容相近、但因权限、支持或资源不同而更可持续的角色比较。这样的对照能把“角色结构问题”与“整个职业不适合”分开；反例也能帮助判断组织环境或时间阶段是否比命盘主题更关键。'
+    'The section therefore distinguishes role demand from carrying capacity. A role can activate the same responsibility theme under very different support and resource conditions; those conditions should remain explicit before any broad conclusion about career fit is made.',
+    '因此，本节需要把“角色要求”与“承载能力”分开。相同的责任主题，在不同支持与资源条件下可以形成不同的工作结构；在下任何广泛的事业适配结论之前，这些条件都必须保持显式。'
    )
   ],{boundary:'',observations:r11Prompts('CAREER')});
  }
@@ -392,8 +392,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     ),
     r11TenGodStructure('PIAN_CAI'),
     pick(
-     `The Indirect-Wealth pattern candidate remains ${R11_PATTERN_STATE[wealthPattern?.conclusionState]||pick('open','开放')}, with ${wealthPattern?.visiblePathCount??0} recorded path${wealthPattern?.visiblePathCount===1?'':'s'} and ${wealthPattern?.visibleStemMatch?'a visible-stem match':'no visible-stem match'}. This keeps resource structure separate from a completed pattern verdict.`,
-     `偏财格局候选仍处于「${R11_PATTERN_STATE[wealthPattern?.conclusionState]||'开放'}」，记录到 ${wealthPattern?.visiblePathCount??0} 条路径，${wealthPattern?.visibleStemMatch?'并有透干对应':'但未见透干对应'}。因此，资源结构与“格局已经成立”仍需分开。`
+     `The Indirect-Wealth pattern candidate remains ${R11_PATTERN_STATE[wealthPattern?.conclusionState]||pick('open','开放')} and ${wealthPattern?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'}. This keeps resource structure separate from a completed pattern verdict.`,
+     `偏财格局候选仍处于「${R11_PATTERN_STATE[wealthPattern?.conclusionState]||'开放'}」，${wealthPattern?.visibleStemMatch?'并有透干对应':'但未见透干对应'}。因此，资源结构与“格局已经成立”仍需分开。`
     ),
     pick(
      `${R11_GROUP.OFFICER} also remains active in this topic. A useful resource reading therefore follows the full cycle: how value enters, what must be exchanged for it, which obligations attach to it, and what remains available for retention or redeployment. A repeated inflow channel and a retained surplus are not the same evidence.`,
@@ -411,8 +411,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `这张命盘里，「${R11_GROUP.WEALTH}」并不是单独运行；「${R11_GROUP.OFFICER}」与「${R11_GROUP.PEER}」也仍在财富框架中。因此，更适合把“资源进入”“资源附带的责任”以及“同一资源面对的其他分流要求”分开看。`
    ),
    pick(
-    'A practical test is to compare two periods with similar inflow but different retention results. What changed—fixed obligations, discretionary spending, family demands, risk exposure, market conditions or timing? That contrast gives the symbolic reading a reality check without turning it into a financial forecast.',
-    '实际可以比较两个资源流入相近、但留存结果不同的时期。变化来自固定义务、可选支出、家庭需求、风险暴露、市场条件还是时机？这种对照能让象征性读取接受现实检验，而不会变成财务预测。'
+    'The structural distinction to preserve is between resource entry, attached obligation and retention. If lived financial evidence later shows that one layer changes while the others do not, that difference is the appropriate reality check for this section.',
+    '这里需要保留的是“资源进入—附带责任—最终留存”三个层次的差异。若后续现实财务证据显示其中一层改变、另外两层没有同步改变，这种差异才是本节适合使用的现实校验。'
    ),
    pick(
     'The report should therefore be used to organize questions about resource flow, not to replace budgets, cash-flow records or professional financial analysis. When real evidence contradicts the chart-like pattern, the real evidence takes priority for the financial decision.',
@@ -435,8 +435,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      `本命关系结构同时包含联结与张力，并分别落在${rels.map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join('、')}。位置之所以重要，是因为环境、自我位置与表达在关系中并不是可以互换的同一层。`
     ),
     pick(
-     'For lived comparison, separate what you expect from a relationship, what you actually exchange, what responsibility you take on, and what support is available. A repeated difficulty can look similar on the surface while being driven by a different condition in each relationship.',
-     '现实对照时，可以把关系中的期待、实际交换、承担的责任与可用支持分开。表面上相似的困难，在不同关系里可能由不同条件推动，因此不应过早归结成一个固定关系标签。'
+     'For relationship interpretation, expectations, exchange, responsibility and support remain distinct dimensions. The recorded linkage and tension relations show where these dimensions meet; they should not be collapsed into one generic relationship pattern.',
+     '在关系解释中，期待、交换、责任与支持仍是不同维度。已记录的联结与张力说明这些维度在哪里相遇，因此不应被压缩成一个笼统的“关系模式”。'
     ),
     pick(
      'The other person remains an independent variable. The chart can organize your side of the recurring interaction, but another person’s motives, choices and circumstances require their own evidence.',
@@ -446,8 +446,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   }
   r11Module('relationshipInteractionBoundary','RELATIONSHIPS',[
    pick(
-    'Interaction becomes more informative when the condition changes. Compare the same issue across different people or different stages of one relationship: what shifts when boundaries, expectations, available time, support or resource pressure changes?',
-    '互动最有信息量的时刻，是条件发生变化时。可以把同一个问题放到不同对象、或同一段关系的不同阶段比较：当边界、期待、可用时间、支持或资源压力改变时，互动怎样跟着变化？'
+    'Interaction becomes more informative when its structural conditions are kept separate. Boundaries, expectations, support and resource pressure belong to different parts of the relationship frame, so a change in one should not automatically be attributed to the others.',
+    '互动要有解释力，前提是把结构条件分开。边界、期待、支持与资源压力属于关系框架的不同部分，因此其中一项发生变化时，不应自动归因到另外几项。'
    ),
    pick(
     `The recorded natal relations include ${rels.map(x=>R11_RELATION_TYPE[x.type]).filter(Boolean).join(', ')}. These are not interchangeable labels: a linkage and a tension relation describe different structural connections, and neither one by itself specifies whether a relationship will continue, end or become formalized.`,
@@ -476,8 +476,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `承载图景同时呈现「${R11_CARRY[carry.overallTendency]||'混合承载条件'}」。因此，负荷与恢复应该一起观察：同样的高要求，在休息、支持或时间控制充足时可能仍可承载；这些条件改变后，现实体验也可能完全不同。`
    ),
    pick(
-    'Useful real-life evidence includes sleep quality, recovery after sustained work, appetite or routine changes, the effect of travel or environment, and whether practical support changes the load. These observations belong to lived evidence; they are not medical conclusions produced by the chart.',
-    '有价值的现实证据包括睡眠质量、持续工作后的恢复情况、食欲或作息变化、旅行或环境改变的影响，以及实际支持是否改变负荷。这些都属于生活证据，不是命盘产生的医学结论。'
+    'For this section, the method-owned meaning stops at load, support, recovery and rhythm. Any concrete bodily or behavioral observation belongs to lived evidence and should enter only through the Reality Bridge, not as a conclusion generated from the chart.',
+    '本节由方法直接拥有的意义只到负荷、支持、恢复与节奏为止。任何具体身体或行为观察都属于现实证据，只能通过 Reality Bridge 进入，不能被写成命盘直接生成的结论。'
    ),
    pick(
     'If there is a medical symptom, diagnosis or treatment question, use medical assessment. The report can help organize observations about rhythm and demand, but it should not name organs, diseases or treatment needs from Five Elements or Ten Gods.',
@@ -534,8 +534,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   }[x.themeType]||x.themeKey));
   r11Module('guidanceIntegrated','GUIDANCE',[
    pick(
-    `Four whole-chart themes deserve to be held together rather than repeated separately: ${topNames.join('; ')}. Their value is in the way they intersect across sections, not in turning the highest-ranked theme into a fate statement.`,
-    `整盘最值得合读的四条主线是：${topNames.join('；')}。重点不是把排名靠前的主题写成命运结论，而是看它们在不同章节怎样交会。`
+    `The whole-chart priorities deserve to be held together rather than repeated separately: ${topNames.join('; ')}. Their value is in the way they intersect across sections, not in turning the highest-ranked theme into a fate statement.`,
+    `整盘优先主线需要合读，而不是逐条重复：${topNames.join('；')}。重点不是把排名靠前的主题写成命运结论，而是看它们在不同章节怎样交会。`
    ),
    pick(
     'The first practical step is to identify which theme is actually active in one current situation. A work problem may be mostly about role pressure, a financial problem about retention and obligation, and a relationship problem about negotiation or boundaries even though all of them arise from the same underlying chart.',
