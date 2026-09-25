@@ -99,4 +99,15 @@ assert.ok(loss.includes('casesRegistry'),'Loss examples must resolve civilizatio
 assert.ok(loss.includes('civ-loss-examples'),'Loss case profiles must be progressive disclosure.');
 assert.ok(!loss.includes('p.caseId}</strong>'),'Loss customer UI must not foreground raw case IDs.');
 
+const css=read('assets/css/civilization-atlas.css');
+assert.ok(css.includes('Lightweight current-reading + Ask rail'),'Atlas must keep the lightweight current-reading rail styles.');
+assert.ok(css.includes('.civ-atlas-inspector__summary{display:none}'),'Mobile must hide repeated inspector summary content.');
+assert.ok(css.includes('.civ-atlas-ask .knowledge-action{width:100%'),'Mobile Ask must remain a full-width bottom action.');
+assert.ok(shell.includes('Ask using the current reading context.')&&shell.includes('使用当前阅读情境提问。'),'Ask helper copy must remain concise and context-specific.');
+
+for(const [name,source] of [['cases',cases],['comparison',comparison],['world',worldRenderer],['trajectories',trajectories],['transitions',transitions],['loss',loss]]){
+ assert.ok(source.includes('civ-atlas-inspector__summary'),`${name} inspector must use the lightweight summary wrapper.`);
+}
+assert.ok(!cases.includes("'政治结构':'Political architecture',label(caseRecord.politicalArchitecture"),'Case inspector must not repeat the full dossier field set.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
