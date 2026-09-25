@@ -9,7 +9,7 @@ import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-pro
 import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {buildBaziPublicationVisual} from '../functions/canonical-presentation-runtime/bazi-publication-visuals.js';
-import {visualModules} from '../functions/canonical-presentation-runtime/report-section-config.generated.js';
+import {visualModules,visualAssets} from '../functions/canonical-presentation-runtime/report-section-config.generated.js';
 globalThis.document={documentElement:{lang:'en'}};
 const read=p=>JSON.parse(fs.readFileSync(p)),{reading}=read('docs/guided-report-successor-r2/bazi-source.json');
 for(const [file,expected] of Object.entries(read('docs/guided-report-successor-r2/visual-commerce/semantic-freeze.json').files))assert.equal(createHash('sha256').update(fs.readFileSync(file,'utf8').replace(/\r\n?/g,'\n')).digest('hex'),expected,`Frozen BaZi source: ${file}`);
