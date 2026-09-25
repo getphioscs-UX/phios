@@ -83,6 +83,15 @@ const book6Atlas = Object.freeze({
     change: {
       carrier: '载体变化', boundary: '边界变化', institutional: '制度变化', economic: '经济变化'
     },
+    visualFamily: {
+      TIMELINE_ANCHOR: '时间锚点', CASE_HERO: '案例主视觉', CASE_SECONDARY: '案例补充视觉',
+      WORLD_SNAPSHOT_ATMOSPHERE: '世界横切面', COMPARISON_FAMILY: '比较家族',
+      TRAJECTORY_MOTIF: '长时段轨迹', TRANSITION_WINDOW: '转型窗口',
+      SCALE_SHIFT: '尺度变化', LOSS_FAMILY: '损失家族', LOSS_TYPE_VIGNETTE: '损失类型',
+      CIVILIZATION_INFRASTRUCTURE: '文明基础设施', GEOGRAPHIC_BASE: '地理底层',
+      HISTORICAL_FIGURE: '历史人物', MODERN_FLAG: '现代旗帜',
+      WORLD_RECONFIGURATION_SNAPSHOT: '世界重组横切面'
+    },
     phrase: {
       PRIOR_REFORM: '改革前既有制度配置',
       PRIOR_SYSTEM: '此前的体系配置',
