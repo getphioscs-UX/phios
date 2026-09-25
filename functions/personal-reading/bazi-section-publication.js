@@ -203,6 +203,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   SELF_EXPRESSION_INTERFACE:pick('the self–expression interface','自我位置与表达'),
   ENVIRONMENT_EXPRESSION_INTERFACE:pick('the environment–expression interface','环境与表达')
  };
+ const R11_RELATION_TYPE={
+  STEM_COMBINATION:pick('stem combination','天干合'),
+  BRANCH_HARM:pick('branch harm','地支害'),
+  BRANCH_SELF_PUNISHMENT:pick('branch self-punishment','地支自刑'),
+  BRANCH_REPEAT:pick('branch repetition','地支重复')
+ };
  const R11_PATTERN_STATE={
   OPEN_REQUIRES_MORE_FORMATION_SUPPORT:pick('open because additional formation support is still required','仍开放，因为成立条件仍不足'),
   OPEN_WITH_PARTIAL_FORMATION_SUPPORT:pick('open with partial formation support','已有部分成立条件，但仍保持开放'),
@@ -278,16 +284,25 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    )
   ],{boundary:''});
 
+  const tensionRelations=rels.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily));
   r11Module('personalityFriction','CAPABILITY',[
    pick(
-    `The friction in this chart is concentrated around ${rels.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily)).map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join(', ')||pick('recorded position interfaces','已记录的柱位关系')}. The practical issue is not whether friction is “good” or “bad,” but which part changes first when support, standards and expression pull in different directions.`,
-    `这张命盘的张力主要集中在${rels.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily)).map(x=>x.positionThemeCode).filter(Boolean).join('、')||'已记录的柱位接口'}。真正值得观察的不是张力“好不好”，而是当支持、标准与表达不同步时，哪一部分最先发生变化。`
+    `The friction in this chart is concentrated around ${tensionRelations.map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join(', ')||pick('recorded position interfaces','已记录的柱位关系')}. The practical issue is not whether friction is “good” or “bad,” but which part changes first when support, standards and expression pull in different directions.`,
+    `这张命盘的张力主要集中在${tensionRelations.map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join('、')||'已记录的柱位关系'}。真正值得观察的不是张力“好不好”，而是当支持、标准与表达不同步时，哪一部分最先发生变化。`
+   ),
+   pick(
+    `The recorded tension set is not one repeated copy: ${tensionRelations.map(x=>`${R11_RELATION_THEME[x.positionThemeCode]||pick('a position interface','一组柱位关系')} carries ${R11_RELATION_TYPE[x.type]||pick('a recorded relation','已记录关系')}`).join('; ')}. These relations occupy different positions, so they should not be collapsed into one generic statement about stress or personality.`,
+    `这几组张力并不是同一句话的重复：${tensionRelations.map(x=>`${R11_RELATION_THEME[x.positionThemeCode]||'一组柱位关系'}呈现${R11_RELATION_TYPE[x.type]||'已记录关系'}`).join('；')}。它们发生在不同位置，因此不应被压成一句笼统的“压力大”或固定性格判断。`
    ),
    pick(
     'A useful comparison is to separate environmental pressure from self-imposed pressure, and both from the cost of expression. If one changes while the others stay the same, that difference is more informative than repeating a general personality label.',
     '可以把环境压力、自我要求与表达成本分开比较：如果其中一项改变，而另外两项没有改变，这种差异比重复一个笼统性格标签更有解释价值。'
+   ),
+   pick(
+    'When the same tension appears across more than one position, look for what is actually repeated in life: the standard being imposed, the resource available, the freedom to respond, or the amount of sustained effort required. A clear counterexample is useful because it shows which condition may be carrying the most weight.',
+    '当类似张力出现在不止一个位置时，可以观察现实中真正重复的是什么：外部标准、可用资源、回应空间，还是持续投入的成本。一个清楚的反例同样重要，因为它能显示究竟哪一个条件在现实里承担了更大的作用。'
    )
-  ],{boundary:''});
+  ],{boundary:'',observations:r11Prompts('CAPABILITY')});
  }
 
  {
@@ -300,7 +315,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    ),
    pick(
     `The Seven-Killings candidate ${qisha?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} and remains ${R11_PATTERN_STATE[qisha?.conclusionState]||pick('open','保持开放')}; the Indirect-Wealth candidate ${cai?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} with ${cai?.visiblePathCount??0} recorded path${cai?.visiblePathCount===1?'':'s'}. The important point is the contrast between a visible route and a completed formation judgment.`,
-    `七杀候选${qisha?.visibleStemMatch?'有透干对应':'未见透干对应'}，但状态仍是「${qisha?.conclusionState||'开放'}」；偏财候选${cai?.visibleStemMatch?'有透干对应':'未见透干对应'}，并记录到 ${cai?.visiblePathCount??0} 条路径。真正重要的是把“路径可见”与“格局已经成立”分开。`
+    `七杀候选${qisha?.visibleStemMatch?'有透干对应':'未见透干对应'}，但状态仍是「${R11_PATTERN_STATE[qisha?.conclusionState]||'保持开放'}」；偏财候选${cai?.visibleStemMatch?'有透干对应':'未见透干对应'}，并记录到 ${cai?.visiblePathCount??0} 条路径。真正重要的是把“路径可见”与“格局已经成立”分开。`
    ),
    pick(
     `There are ${rels.length} recorded relationship interfaces in the natal structure. Their value is not that they predict events, but that they show where otherwise separate functions meet and therefore where a later career, wealth or relationship reading must return to the same underlying structure.`,
@@ -318,7 +333,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    ),
    pick(
     `The carrying context is ${R11_CARRY[carry.overallTendency]||pick('mixed carrying conditions','混合承载条件')}. That makes role design more important than job title: compare responsibility with decision authority, workload with available support, and output expectations with the time or resources actually available to meet them.`,
-    `承载状态为「${carry.overallTendency||'mixed'}」。因此，角色设计比职位名称更值得看：把责任与决策权、工作量与可用支持、产出要求与实际可用时间／资源分别对照。`
+    `承载状态为「${R11_CARRY[carry.overallTendency]||'混合承载条件'}」。因此，角色设计比职位名称更值得看：把责任与决策权、工作量与可用支持、产出要求与实际可用时间／资源分别对照。`
    )
   ],{boundary:'',observations:r11Prompts('CAREER')});
   r11Module('careerWorkingDirection','CAREER',[
