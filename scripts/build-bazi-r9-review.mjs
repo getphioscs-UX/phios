@@ -103,9 +103,9 @@ function focusedReviewDocument(locale,sectionKey,label){
  const snapshot=snapshots[locale];
  const focused={...snapshot,intro:[],pages:snapshot.pages.filter(p=>p.sectionKey===sectionKey)};
  const rendered=renderVisualReportPages(focused);
- const title=locale==='en'?\`BaZi R11 · \${label} Human Review\`:\`BaZi R11 · \${label} 人工验收\`;
- return \`<!doctype html><html lang="\${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>\${title}</title>
+ const title=locale==='en'?`BaZi R11 · ${label} Human Review`:`BaZi R11 · ${label} 人工验收`;
+ return `<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${title}</title>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/customer-ui/surfaces/visual-report.css">
 <link rel="stylesheet" href="/assets/customer-ui/surfaces/report-publication.css">
@@ -118,9 +118,9 @@ body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 .focus-error{max-width:1080px;margin:10px auto;padding:10px 16px;background:#fff0f0;border:1px solid #b66;display:none;font:14px system-ui}
 @media print{.focus-nav,.focus-status,.focus-error{display:none!important}body{background:white}}
 </style>
-<nav class="focus-nav"><div class="focus-inner"><strong>\${title}</strong><button id="print">A4 Print / PDF</button></div></nav>
-<section class="focus-status"><b>Scope:</b> \${sectionKey}. Review content depth, section specificity, timing relevance and navigation. The 10-section visual system is not under redesign.</section>
-<div id="focus-error" class="focus-error"></div><main id="report">\${rendered}</main>
+<nav class="focus-nav"><div class="focus-inner"><strong>${title}</strong><button id="print">A4 Print / PDF</button></div></nav>
+<section class="focus-status"><b>Scope:</b> ${sectionKey}. Review content depth, section specificity, timing relevance and navigation. The 10-section visual system is not under redesign.</section>
+<div id="focus-error" class="focus-error"></div><main id="report">${rendered}</main>
 <script type="module">
 import {settlePublicationAssets,fitPublicationForPrint} from '/assets/customer-ui/js/personal-products/publication-report-pages.js';
 const report=document.querySelector('#report'),errorBox=document.querySelector('#focus-error'),printButton=document.querySelector('#print');
@@ -134,7 +134,7 @@ try{
  printButton.onclick=async()=>{printButton.disabled=true;try{await document.fonts?.ready;await settlePublicationAssets(report);const next=fitPublicationForPrint(report),bad=next.filter(x=>!x.fits);if(bad.length)throw new Error('PRINT_FIT_FAILED:'+bad.map(x=>x.pageNumber).join(','));window.print();}finally{printButton.disabled=false;}};
  window.focusReviewReady=true;
 }catch(error){errorBox.style.display='block';errorBox.textContent='Review preparation failed: '+String(error);window.focusReviewReady=false;}
-</script></html>\`;
+</script></html>`;
 }
 
 const zhHtml=reviewDocument('zh-Hans');
