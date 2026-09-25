@@ -86,29 +86,41 @@ function visualFigure(doc,a,locale){
  img.src=a.publicUrl;figure.append(img,caption);return figure;
 }
 export function renderAtlasStaticVisuals(root,{bindings,state,locale='en',data={}}={}){
- root.querySelector('[data-atlas-static-visuals]')?.remove();
- const structured=root.querySelector('[data-atlas-structured-visual]');if(!structured?.firstElementChild)return;
+ const primaryHost=root.querySelector('[data-atlas-primary-visual]');
+ const resourcesHost=root.querySelector('[data-atlas-visual-resources]');
+ primaryHost?.replaceChildren();resourcesHost?.replaceChildren();
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&root.dataset.atlasReady!=='true')return;
  const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},assets=resolveAtlasStaticVisuals(bindings,state,options,data);
  const library=bindings?.assets?.filter(a=>resolveAtlasVisualById(bindings,a.assetId,options))||[];
  if(!assets.length&&!library.length)return;ensureStyle(doc);
- const host=doc.createElement('div');host.dataset.atlasStaticVisuals='';
- for(const a of assets)host.append(visualFigure(doc,a,locale));
+ const [primary,...related]=assets;
+ if(primary&&primaryHost){
+  primaryHost.className='civ-atlas-primary-visual';
+  primaryHost.append(visualFigure(doc,primary,locale));
+ }
+ if(!resourcesHost)return;
+ const details=doc.createElement('details');details.className='civ-atlas-visual-resources';
+ const summary=doc.createElement('summary');summary.textContent=locale==='zh-Hans'?'更多相关视觉与完整图库':'More related visuals and full library';details.append(summary);
+ if(related.length){
+  const relatedWrap=doc.createElement('div');relatedWrap.className='civ-atlas-related-visuals';
+  const heading=doc.createElement('h4');heading.textContent=locale==='zh-Hans'?'与当前阅读相关':'Related to this reading';relatedWrap.append(heading);
+  for(const a of related)relatedWrap.append(visualFigure(doc,a,locale));
+  details.append(relatedWrap);
+ }
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'){
   const panel=doc.createElement('section');panel.className='civ-visual-library';panel.setAttribute('aria-label',locale==='zh-Hans'?'文明图谱视觉资料库':'Civilization Atlas visual library');
   const head=doc.createElement('div');head.className='civ-visual-library__head';const title=doc.createElement('h4');title.textContent=locale==='zh-Hans'?'视觉资料库':'Visual Library';const count=doc.createElement('span');count.className='civ-visual-library__count';count.textContent=locale==='zh-Hans'?`${library.length} 张已绑定视觉 · ${new Set(library.map(a=>a.family)).size} 类`:`${library.length} bound visuals · ${new Set(library.map(a=>a.family)).size} families`;head.append(title,count);panel.append(head);
-  const note=doc.createElement('p');note.textContent=locale==='zh-Hans'?'所有已接受并绑定的视觉都可在这里浏览；页面只加载当前选择的图片，不会一次下载全部资产，也不会改变当前图谱的历史情境或 Ask 范围。':'All accepted and bound visuals can be browsed here. Only the current selection is loaded, so the page does not download the whole library or alter the current Atlas/Ask context.';panel.append(note);
+  const note=doc.createElement('p');note.textContent=locale==='zh-Hans'?'完整图库只在展开后使用；页面始终只加载当前选择的图片。':'The full library stays secondary and loads only the currently selected image.';panel.append(note);
   const controls=doc.createElement('div');controls.className='civ-visual-controls';const family=doc.createElement('select'),choice=doc.createElement('select');family.dataset.atlasVisualFamily='';choice.dataset.atlasVisualChoice='';
   for(const [control,text] of [[family,locale==='zh-Hans'?'图像类别':'Image category'],[choice,locale==='zh-Hans'?'图像主题':'Image subject']]){const label=doc.createElement('label');label.textContent=text;label.append(control);controls.append(label);}
   for(const id of [...new Set(library.map(a=>a.family))]){const familyAssets=library.filter(a=>a.family===id);const option=doc.createElement('option');option.value=id;option.textContent=`${atlasVisualFamilyLabel(id,locale)} (${familyAssets.length})`;family.append(option);}
   const preferredFamily={timeline:'TIMELINE_ANCHOR',world:'WORLD_SNAPSHOT_ATMOSPHERE',cases:'CASE_HERO',comparison:'COMPARISON_FAMILY',trajectories:'TRAJECTORY_MOTIF',transitions:'TRANSITION_WINDOW',loss:state.lossTypeId?'LOSS_TYPE_VIGNETTE':'LOSS_FAMILY'}[state.activeLayer];if(preferredFamily&&library.some(a=>a.family===preferredFamily))family.value=preferredFamily;
   const display=doc.createElement('div');display.dataset.atlasVisualSelection='';
-  const show=()=>{display.replaceChildren();const a=resolveAtlasVisualById(bindings,choice.value,options);if(a)display.append(visualFigure(doc,a,locale));};
+  const show=()=>{display.replaceChildren();if(!details.open)return;const a=resolveAtlasVisualById(bindings,choice.value,options);if(a)display.append(visualFigure(doc,a,locale));};
   const choices=()=>{choice.replaceChildren();for(const a of library.filter(a=>a.family===family.value)){const option=doc.createElement('option');option.value=a.assetId;option.textContent=a.subjectTitle?.[locale]||a.subjectTitle?.en||a.assetId;choice.append(option);}show();};
-  family.addEventListener('change',choices);choice.addEventListener('change',show);panel.append(controls,display);choices();host.append(panel);
-  const requested=new URLSearchParams(doc.defaultView?.location?.search||'').get('visual');
-  const selected=library.find(a=>a.assetId===requested);
-  if(selected){family.value=selected.family;choices();choice.value=selected.assetId;show();}
+  family.addEventListener('change',choices);choice.addEventListener('change',show);details.addEventListener('toggle',show);panel.append(controls,display);choices();details.append(panel);
+  const requested=new URLSearchParams(doc.defaultView?.location?.search||'').get('visual');const selected=library.find(a=>a.assetId===requested);
+  if(selected){family.value=selected.family;choices();choice.value=selected.assetId;details.open=true;show();}
  }
- structured.before(host);
+ resourcesHost.append(details);
 }
