@@ -252,6 +252,10 @@ async function render() {
       const dispose=await mountStructuredBacklinks(shell,bookId.toUpperCase(),locale);
       if(generation !== renderGeneration)dispose();else {const previous=disposeFormation;disposeFormation=()=>{previous?.();dispose();};}
     }
+    if (['book-5','book-6'].includes(bookId)) {
+      const staticAdmission=document.querySelector(`[data-static-book-admission="${bookId}"]`);
+      if(staticAdmission) staticAdmission.hidden=true;
+    }
     if (persistentAtlas) {
       const hero = root.querySelector('.wpr-book-hero');
       if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);
@@ -277,7 +281,9 @@ async function render() {
       const previous=disposeFormation;disposeFormation=()=>{previous?.();observer.disconnect();};
     }
   } catch {
-    root.innerHTML = `<section class="knowledge-section"><div class="knowledge-shell"><p>${escapeHtml(t('knowledge.production.sourceUnavailable'))}</p></div></section>`;
+    const staticAdmission=document.querySelector(`[data-static-book-admission="${bookId}"]`);
+    if(staticAdmission) staticAdmission.hidden=false;
+    root.innerHTML = staticAdmission ? '' : `<section class="knowledge-section"><div class="knowledge-shell"><p>${escapeHtml(t('knowledge.production.sourceUnavailable'))}</p></div></section>`;
   }
 }
 
