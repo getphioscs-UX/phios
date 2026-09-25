@@ -110,4 +110,12 @@ for(const [name,source] of [['cases',cases],['comparison',comparison],['world',w
 }
 assert.ok(!cases.includes("'政治结构':'Political architecture',label(caseRecord.politicalArchitecture"),'Case inspector must not repeat the full dossier field set.');
 
+const accessibility=read('assets/js/pages/civilization-atlas/atlas-accessibility.js');
+assert.ok(!shell.includes('role="tablist"'),'Atlas mixed destination navigation must not use tablist semantics.');
+assert.ok(!shell.includes('role="tabpanel"'),'Atlas content region must not pretend the Reconfiguration link is a tab.');
+assert.ok(shell.includes('data-atlas-entry'),'All five Atlas entrances must participate in one navigation model.');
+assert.ok(shell.includes('aria-pressed'),'In-page Atlas entrance buttons must expose pressed state.');
+assert.ok(accessibility.includes("querySelectorAll('[data-atlas-entry]')"),'Keyboard navigation must include the Reconfiguration link as a focusable entrance.');
+assert.ok(accessibility.includes("if(entry?.dataset.atlasLayer)"),'Keyboard navigation must not fake-activate the Reconfiguration link.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
