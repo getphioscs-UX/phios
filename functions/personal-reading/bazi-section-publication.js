@@ -24,14 +24,26 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const e=s=>BAZI_SECTION_EDITORIAL[s];
  const appendixConditions=[];
  const makeNarrative=async(key,section,code)=>{
-  const t=topic(code);if(!t)return;
-  const idx=topics.indexOf(t),ref=`professionalModules/customerNarrative/topicNarratives/${idx}`;
+  const t=topic(code),idx=t?topics.indexOf(t):-1,ref=idx>=0?`professionalModules/customerNarrative/topicNarratives/${idx}`:null;
   const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:section,locale,temporalSnapshot:temporalContext});
   const selected=authority.claims.filter(c=>c.relationType!=='BOUNDARY');
-  // Raw percentages/counts remain in the native visuals and optional detail.
-  // Narrative text is projected from admitted meaning, never regex-reinterpreted.
-  modules[key]={blocks:selected.map(c=>block(c.text,c.sourceRefs.join('|'),'METHOD_INTERPRETATION')),boundary:authority.claims.find(c=>c.relationType==='BOUNDARY')?.text||''};
-  appendixConditions.push(block(t.condition[lang],`${ref}/condition`,'METHOD_BOUNDARY'));
+  const byType=(...types)=>selected.filter(c=>types.includes(c.relationType));
+  const joinClaims=claims=>claims.map(c=>humanizePublicationStatement(c.text)).filter(Boolean).join(' ');
+  // Deterministic publication composition: licensed claims are grouped by
+  // reading function so the customer receives a coherent explanation instead
+  // of a schema-like list. No new method meaning is created here.
+  const groups=[
+   byType('EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS'),
+   byType('SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER'),
+   byType('CROSS_SECTION_RELEVANCE','OPEN_CONDITION','TEMPORAL_RELEVANCE','CONTRAST','ASSOCIATION')
+  ];
+  const blocks=groups.map(claims=>{
+   const text=joinClaims(claims);if(!text)return null;
+   const refs=[...new Set(claims.flatMap(c=>c.sourceRefs||[]))];
+   return block(text,refs.join('|'),'METHOD_INTERPRETATION');
+  }).filter(Boolean);
+  modules[key]={blocks,boundary:authority.claims.find(c=>c.relationType==='BOUNDARY')?.text||''};
+  if(t?.condition?.[lang]&&ref)appendixConditions.push(block(t.condition[lang],`${ref}/condition`,'METHOD_BOUNDARY'));
  };
  for(const [key,n] of [['baziChart',7],['dayMaster',8],['fiveElements',9],['chartStructure',12],['usefulElements',14]])modules[key]={blocks:[],sourcePages:[n],facts:source(n).facts,evidence:internal(n).evidence};
  modules.baziChart.blocks=[block(e('S01_OVERVIEW').bridge[locale],`${edRef}#S01_OVERVIEW`)];
@@ -57,8 +69,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  modules.currentYearInsight={blocks:source(21).paragraphs.map(t=>block(t,internal(21).evidence[0],'METHOD_INTERPRETATION')),temporal:modules.timingContext.temporal,observations:[e('S08_TIMING').items[2][locale],pick('What stayed consistent across the year boundary, despite the change in the named time layer?','时间层名称改变前后，哪些经验仍然保持一致？')],boundary:pick('The year layer frames observation; this reading does not identify specific events as opportunities or warnings.','流年层用于界定观察范围；本次读取不把具体事件判断为机会或预警。')};
  // Optional career timing is absent unless an upstream adapter supplies an
  // admitted career-specific module. Generic current-year data is insufficient.
- paragraphs('integratedGuidance',[e('S09_GUIDANCE').bridge[locale]],`${edRef}#S09_GUIDANCE`);
- modules.integratedGuidance.items=['CAREER','WEALTH','RELATIONSHIPS'].map(code=>block(topic(code).lead[lang],`professionalModules/customerNarrative/topicNarratives/${topics.indexOf(topic(code))}/lead`,'METHOD_INTERPRETATION'));
+ await makeNarrative('integratedGuidance','S09_GUIDANCE','GUIDANCE');
+ if(modules.integratedGuidance){
+  modules.integratedGuidance.blocks.unshift(block(e('S09_GUIDANCE').bridge[locale],`${edRef}#S09_GUIDANCE`,'EDITORIAL_GUIDANCE'));
+ }else{
+  paragraphs('integratedGuidance',[e('S09_GUIDANCE').bridge[locale]],`${edRef}#S09_GUIDANCE`);
+ }
  paragraphs('boundaries',[e('S10_APPENDIX').bridge[locale]],`${edRef}#S10_APPENDIX`);
  modules.boundaries.blocks.push(...appendixConditions);
  paragraphs('methodology',[pick('BaZi organizes a birth reading around four pillars and uses the Day Master as a reference position. The diagrams in this report preserve the distinctions between visible stems, branches, hidden stems and element counts. Structural candidates are shown with their conditions, so an open pattern remains open rather than becoming a final verdict. The timing chapter adds only the layers resolved by the existing method engine for the saved observation window. These layers accompany the birth structure; they do not replace it. Read the prose as a bounded explanation of that structure, then compare it with independent experience.','八字围绕四柱组织出生读取，并以日主作为参照位置。本报告的图表区分天干、地支、藏干与五行计数；结构候选与成立条件一同呈现，因此仍开放的格局不会被写成最终判断。时间章节只加入既有方法引擎针对保存的观察窗口所解析的层次，它们与本命结构一起阅读，不取代本命。请把文字看作有范围的结构说明，再用独立经验来比较。')],`${edRef}#S10_APPENDIX`);
