@@ -41,20 +41,27 @@ export function reconcileAtlasContextForLayer(targetLayer,state={},data={}){
 export function atlasContextSummary(state={},data={},locale='en'){
   const lang=locale==='zh-Hans'?'zh-Hans':'en';
   const label=value=>value?.[lang]||value?.en||null;
+  const year=value=>value===null||value===undefined?null:(Number(value)<0?(lang==='zh-Hans'?`公元前${Math.abs(Number(value))}年`:`${Math.abs(Number(value))} BCE`):(lang==='zh-Hans'?`公元${Number(value)}年`:`${Number(value)} CE`));
   const current=primaryCase(state,data);
   const snapshot=byId(data?.world?.snapshots,'snapshotId',state.snapshotId);
   const family=byId(data?.comparison?.families,'familyId',state.comparisonFamilyId);
   const transition=byId(data?.transitions?.transitionWindows,'transitionWindowId',state.transitionWindowId);
   const lossType=byId(data?.loss?.lossTypes,'lossTypeId',state.lossTypeId);
+  const trajectoryMap=new Map((data?.trajectories?.trajectories||[]).map(item=>[item.trajectoryId,item]));
+  const trajectories=(state.trajectoryIds||[]).map(id=>label(trajectoryMap.get(id)?.title)).filter(Boolean);
+  const layerLabel={
+    timeline:{en:'Timeline','zh-Hans':'时间线'},world:{en:'World','zh-Hans':'世界'},cases:{en:'Civilizations','zh-Hans':'文明'},
+    comparison:{en:'Compare','zh-Hans':'比较'},trajectories:{en:'Long Trends','zh-Hans':'长时段轨迹'},transitions:{en:'Transitions','zh-Hans':'转型窗口'},loss:{en:'Reversal & Loss','zh-Hans':'逆转与损失'}
+  }[state.activeLayer||'timeline']?.[lang]||state.activeLayer||'timeline';
   const pieces=[
-    `Layer=${state.activeLayer||'timeline'}`,
-    current?`Case=${current.caseId} ${label(current.title)}`:null,
-    snapshot?`Snapshot=${snapshot.snapshotId} ${label(snapshot.title)}`:null,
-    family?`Family=${family.familyId} ${label(family.title)}`:null,
-    (state.trajectoryIds||[]).length?`Trajectories=${state.trajectoryIds.join(',')}`:null,
-    transition?`Transition=${transition.transitionWindowId} ${label(transition.title)}`:null,
-    lossType?`Loss=${lossType.lossTypeId} ${label(lossType.title)}`:null,
-    state.time!==null&&state.time!==undefined?`Time=${state.time}`:null
+    layerLabel,
+    current?label(current.title):null,
+    snapshot?label(snapshot.title):null,
+    family?label(family.title):null,
+    trajectories.length?trajectories.join(' · '):null,
+    transition?label(transition.title):null,
+    lossType?label(lossType.title):null,
+    year(state.time)
   ].filter(Boolean);
-  return pieces.join(' · ').slice(0,320);
+  return [...new Set(pieces)].join(' · ').slice(0,320);
 }
