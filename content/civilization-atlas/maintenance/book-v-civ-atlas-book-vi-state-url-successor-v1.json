@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-STATE-URL-SUCCESSOR-v1.0.0",
+  "work": "BOOK-VI-ATLAS-STATE-URL-SUCCESSOR-V1",
+  "status": "ACTIVE_VERSIONED_SUCCESSOR",
+  "baselineCommit": "435238410d45939911313de23c86f0da7c74520e",
+  "predecessorFreeze": "content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json",
+  "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR",
+  "reason": "Book VI reconfiguration extends the existing shared Civilization Atlas state and URL-state owners while preserving the frozen Book V predecessor bytes.",
+  "changes": [
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-state.js",
+      "previousSha256": "58b57f60cd7df9d83c112bb0c05bf763590a53fa29e043eb8a3361cc4d69d4a0",
+      "successorSha256": "18254bec4f7c1c13d00f55815fb216dd9d7e77ae5cfe4fcf2f688af97f695469",
+      "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR",
+      "bookVPredecessorBytePreserved": true,
+      "bookVIExtension": [
+        "RECONFIG_ATLAS_LAYERS",
+        "DEFAULT_RECONFIGURATION_ATLAS_STATE",
+        "normalizeReconfigurationAtlasState",
+        "createReconfigurationAtlasState"
+      ]
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-url-state.js",
+      "previousSha256": "3cf2b438794a2de104a6b58ac7fb24c220dd302b45e8a2c6fecbbe5a7edc81f1",
+      "successorSha256": "77b2925924825a3e4ca3da5b1716f0d2226300a980d39b857722fbf6c30c4e4b",
+      "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR",
+      "bookVPredecessorReconstructionVerified": true,
+      "bookVIExtension": [
+        "reconfigurationAtlasStateFromUrl",
+        "reconfigurationAtlasUrlFromState",
+        "bindReconfigurationAtlasUrlState"
+      ]
+    }
+  ],
+  "scope": {
+    "bookVCanonicalTheoryChanged": false,
+    "bookVHistoricalRegistriesChanged": false,
+    "bookVStateBehaviorRewritten": false,
+    "bookVIStateAdded": true,
+    "bookVIUrlStateAdded": true,
+    "parallelAtlasRuntimeCreated": false,
+    "parallelAskRuntimeCreated": false,
+    "productionAdmissionChanged": false
+  },
+  "boundary": "The historical W16 freeze is not rewritten. This successor only admits the verified Book VI append/import extension on the two shared state-owner files."
+}
