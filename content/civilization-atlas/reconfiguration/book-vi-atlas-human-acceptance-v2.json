@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-HUMAN-ACCEPTANCE-v2.1.0",
-  "version": "2.1.0",
-  "status": "READY_FOR_HUMAN_REVIEW",
+  "version": "2.2.0",
+  "status": "REJECTED",
   "required": {
     "cases": 6,
     "windows": 4,
@@ -69,5 +69,19 @@
     "desktopSnapshots": [
       "WORLD_RECONFIGURATION_SNAPSHOT_1945"
     ]
-  }
+  },
+  "decision": {
+    "decision": "REJECT",
+    "decidedAt": "2026-09-25",
+    "evidenceClass": "OWNER_REAL_BROWSER_SCREENSHOTS_AND_HUMAN_REVIEW",
+    "findings": [
+      "Customer layout is visually disordered and cards wrap into narrow vertical text.",
+      "Published Book VI article page fails renderer completeness/safety gate and cannot display.",
+      "zh-Hans customer surfaces leak English case/runtime copy.",
+      "392 accepted Civilization Atlas visual bindings are not exposed by the Book VI customer renderer.",
+      "Contemporary Runtime is contract-only and renders repeated UNKNOWN values instead of a useful admitted readout.",
+      "Existing backend runtime/readout capability has no Book VI customer adapter in the current implementation."
+    ]
+  },
+  "repairPackage": "B6-WEB-FR"
 }
