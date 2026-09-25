@@ -49,7 +49,49 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  modules.baziChart.blocks=[block(e('S01_OVERVIEW').bridge[locale],`${edRef}#S01_OVERVIEW`)];
  modules.chartStructure.blocks=[block(source(12).paragraphs.concat(source(13).paragraphs).join(' '),internal(12).evidence[0],'METHOD_INTERPRETATION'),block(pick('Read each candidate alongside the conditions that would establish it, keeping a visible path separate from a completed judgment.','请把候选模式与成立所需的条件一起阅读，分清路径可见与判断完成之间的差别。'),`${edRef}#S03_LIFE_STRUCTURE`)];
  modules.chartStructure.boundary=source(12).boundary;
- await makeNarrative('personalityNarrative','S02_PERSONALITY','CAPABILITY');
+ // S02 uses a dedicated deterministic publication template rather than one
+ // generic narrative block. Each facet selects only licensed S02 claims.
+ {
+  const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S02_PERSONALITY',locale,temporalSnapshot:temporalContext});
+  const claims=authority.claims.filter(x=>x.relationType!=='BOUNDARY');
+  const byId=suffix=>claims.find(x=>x.id.endsWith(suffix));
+  const pairClaims=claims.filter(x=>x.id.includes(':PAIR_'));
+  const tensionPairs=pairClaims.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationQualifier));
+  const linkPairs=pairClaims.filter(x=>x.relationQualifier==='LINK');
+  const makeFacet=(key,lead,selected)=>{
+   const unique=[...new Map(selected.filter(Boolean).map(x=>[x.id,x])).values()];
+   const refs=[...new Set(unique.flatMap(x=>x.sourceRefs||[]))];
+   const body=unique.map(x=>humanizePublicationStatement(x.text)).filter(Boolean).join(' ');
+   modules[key]={blocks:[
+    block(lead,`${edRef}#S02_PERSONALITY`,'EDITORIAL_GUIDANCE'),
+    ...(body?[block(body,refs.join('|'),'METHOD_INTERPRETATION')]:[])
+   ],boundary:authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||''};
+  };
+  makeFacet('personalityCoreStyle',pick(
+   'Your core operating style is read from the function that receives first emphasis, together with the other functions that remain active around it. The point is not to assign a permanent personality label, but to identify the structure that repeatedly organizes how capability is approached.',
+   '你的核心运作方式，要从命盘里首先被强调的功能开始，再把同时参与的其他功能放回来一起看。重点不是贴上永久人格标签，而是找出反复组织你如何发展与使用能力的那套结构。'
+  ),[byId(':PRIMARY'),byId(':DOMAIN_EXPLANATION'),byId(':DIMENSIONS'),byId(':SECONDARY')]);
+
+  makeFacet('personalityLearning',pick(
+   'Learning and processing are read through the chart’s support-and-absorption function and the conditions around it. This layer asks how information is taken in, supported and made usable before expression is expected.',
+   '学习与处理方式主要从命盘中的支持与吸收功能，以及包围它的条件来阅读。这一层关注信息如何被接收、获得支持并变成可用能力，再进入表达与输出。'
+  ),[byId(':PRIMARY'),byId(':SUPPORT'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/RESOURCE|CARRY/i.test(x.text))]);
+
+  makeFacet('personalityExpression',pick(
+   'Expression is read separately from learning. A capability may be available internally yet require different conditions to be expressed, repeated or carried into visible output. The recorded links between self-position and expression refine this part of the reading.',
+   '表达需要与学习分开阅读。一项能力可以已经存在于内部，但要变成可见输出、反复使用并持续承担，可能需要不同条件。命盘中自我位置与表达之间的已记录联结，会进一步修正这一层。'
+  ),[...linkPairs,byId(':TENSION'),byId(':OPERATING_CONDITION')]);
+
+  makeFacet('personalityFriction',pick(
+   'Friction is not treated as a flaw. It is the part of the structure where support, expression, standards or external demand do not automatically move in the same direction. Repeated tension across chart positions shows where capability may need more deliberate coordination.',
+   '张力不等于缺点。它指的是支持、表达、标准与外部要求并不会自动朝同一方向运作的部分。若张力在多个柱位反复出现，就更需要有意识地协调这些功能。'
+  ),[...tensionPairs,byId(':TENSION'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/pressure|责任|规则/i.test(x.text))]);
+
+  makeFacet('personalityReliability',pick(
+   'Reliability asks a different question from talent: can the capability remain usable when expression, responsibility and demand continue over time? Carrying conditions and unresolved strength judgments therefore belong here, without being converted into a fixed strong-or-weak identity.',
+   '稳定性问的不是“有没有能力”，而是当表达、责任与要求持续存在时，这项能力是否仍然可用。因此，承载条件与尚未定论的强弱判断应该放在这里阅读，而不能被转换成固定的身强或身弱身份。'
+  ),[byId(':OPERATING_CONDITION'),byId(':OPEN_STRENGTH'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/carry|承载/i.test(x.text))]);
+ }
  await makeNarrative('lifeStructureNarrative','S03_LIFE_STRUCTURE','LIFE_OPERATION');
  await makeNarrative('careerNarrative','S04_CAREER','CAREER');
  await makeNarrative('wealthNarrative','S05_WEALTH','WEALTH');
