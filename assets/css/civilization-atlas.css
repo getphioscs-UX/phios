@@ -481,3 +481,12 @@
  .civ-timeline__focus--reader{grid-template-columns:1fr}
  .civ-timeline__focus-visual{min-height:0;max-height:24rem}
 }
+
+
+/* FR2 comparison dimension overview */
+.civ-compare-dimension-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.civ-compare-dimension-grid article{padding:.9rem;border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-md);background:#0a1f30}
+.civ-compare-dimension-grid strong{display:block;color:#f2dfa9;line-height:1.3}
+.civ-compare-dimension-grid p{margin:.4rem 0 0;color:var(--phi-text-secondary);line-height:1.5;font-size:.9rem}
+@media(max-width:900px){.civ-compare-dimension-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.civ-compare-dimension-grid{grid-template-columns:1fr}}
