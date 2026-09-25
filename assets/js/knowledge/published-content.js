@@ -55,6 +55,25 @@ export function loadBook6PublicationMetadata() {
   return book6Manifest;
 }
 
+function canonicalizeSuccessorArticleContext(article) {
+  if(!article || typeof article!=='object') return article;
+  if(article.publicationContext?.bookCode!=='BOOK-6') return article;
+  const canonical='/books/reality-reconfiguration/';
+  const legacy='/books/reality-configuration/';
+  const fix=value=>typeof value==='string'?value.replaceAll(legacy,canonical):value;
+  const publicationContext=article.publicationContext?{
+    ...article.publicationContext,
+    bookRoute:fix(article.publicationContext.bookRoute),
+    atlasRoute:fix(article.publicationContext.atlasRoute)
+  }:article.publicationContext;
+  const relatedBooks=(article.connections?.relatedBooks||[]).map(link=>({...link,href:fix(link.href)}));
+  return {
+    ...article,
+    publicationContext,
+    connections:article.connections?{...article.connections,relatedBooks}:article.connections
+  };
+}
+
 async function fetchJson(path) {
   const response = await fetch(path, {
     credentials: 'same-origin', signal: AbortSignal.timeout(12000),
@@ -296,7 +315,7 @@ export async function loadPublishedArticleBySlug(slug, locale) {
   const manifests = await Promise.all([loadBook5PublicationMetadata().catch(() => ({records:[]})), loadBook6PublicationMetadata().catch(() => ({records:[]}))]);
   const row = manifests.flatMap(manifest => manifest.records || []).find(record => record.slug === slug && record.locale === normalizeLocale(locale) && record.status === 'published');
   if (row) {
-    const article = await fetchJson(row.path);
+    const article = canonicalizeSuccessorArticleContext(await fetchJson(row.path));
     return isApprovedPublication(article) && article.slug === row.slug && article.locale === row.locale ? article : null;
   }
   const articles = await loadLocale(locale);
