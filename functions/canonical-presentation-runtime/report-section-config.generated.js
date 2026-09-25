@@ -936,7 +936,7 @@ export const familyRegistry = {
     "NARRATIVE_ANALYSIS_PAGE": {
       "budget": {
         "zh": [
-          180,
+          160,
           360
         ],
         "en": [
