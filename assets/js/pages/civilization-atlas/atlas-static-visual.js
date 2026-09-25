@@ -22,11 +22,36 @@ export function resolveAtlasVisualById(bindings,assetId,{allowPendingReview=fals
  if(prefixes[a.family]&&a.assetId!==prefixes[a.family])return null;
  return a;
 }
-export function resolveAtlasStaticVisuals(bindings,state,options={}){
- const selectors={timeline:['TIMELINE_ANCHOR',state.timeWindowId],cases:['CASE_HERO',state.primaryCaseId],comparison:['COMPARISON_FAMILY',state.comparisonFamilyId],world:['WORLD_SNAPSHOT_ATMOSPHERE',state.snapshotId],trajectories:['TRAJECTORY_MOTIF',state.trajectoryIds?.[0]],transitions:['TRANSITION_WINDOW',state.transitionWindowId],loss:[state.lossTypeId?'LOSS_TYPE_VIGNETTE':'LOSS_FAMILY',state.lossTypeId||state.lossFamilyId]};
- const selected=selectors[state.activeLayer];if(!selected)return [];
- const [family,id]=selected;const subject=id||bindings?.assets?.find(a=>a.family===family)?.subjectId;
- return (bindings?.assets||[]).filter(a=>a.subjectId===subject&&(a.family===family||(family==='CASE_HERO'&&a.family==='CASE_SECONDARY'))).map(a=>resolveAtlasVisualById(bindings,a.assetId,options)).filter(Boolean).slice(0,2);
+const firstResolved=(bindings,family,subjectId,options)=>subjectId?(bindings?.assets||[]).filter(a=>a.family===family&&a.subjectId===subjectId).map(a=>resolveAtlasVisualById(bindings,a.assetId,options)).find(Boolean)||null:null;
+const resolvedCaseVisuals=(bindings,caseIds,options,limit=3)=>{const out=[];for(const id of caseIds||[]){for(const family of ['CASE_HERO','CASE_SECONDARY']){const a=firstResolved(bindings,family,id,options);if(a&&!out.some(x=>x.assetId===a.assetId))out.push(a);if(out.length>=limit)return out;}}return out;};
+export function resolveAtlasStaticVisuals(bindings,state,options={},data={}){
+ const layer=state.activeLayer,assets=[];
+ const add=a=>{if(a&&!assets.some(x=>x.assetId===a.assetId))assets.push(a);};
+ if(layer==='timeline'){
+  const periods=data.timeline?.periods||[],period=periods.find(p=>p.periodId===state.timeWindowId)||periods.find(p=>state.time!==null&&state.time>=p.startYear&&state.time<=p.endYear)||periods[0];
+  add(firstResolved(bindings,'TIMELINE_ANCHOR',period?.periodId||state.timeWindowId,options));
+  resolvedCaseVisuals(bindings,period?.caseIds,options,3).forEach(add);
+ }else if(layer==='world'){
+  const rows=data.world?.snapshots||[],snapshot=rows.find(x=>x.snapshotId===state.snapshotId)||rows.reduce((best,x)=>state.time===null?best:(!best||Math.abs(x.year-state.time)<Math.abs(best.year-state.time)?x:best),null)||rows[0];
+  add(firstResolved(bindings,'WORLD_SNAPSHOT_ATMOSPHERE',snapshot?.snapshotId||state.snapshotId,options));
+  resolvedCaseVisuals(bindings,snapshot?.majorCaseIds,options,3).forEach(add);
+ }else if(layer==='cases'){
+  resolvedCaseVisuals(bindings,[state.primaryCaseId],options,2).forEach(add);
+ }else if(layer==='comparison'){
+  const families=data.comparison?.families||[],family=families.find(x=>x.familyId===state.comparisonFamilyId)||families[0];
+  add(firstResolved(bindings,'COMPARISON_FAMILY',family?.familyId||state.comparisonFamilyId,options));
+  const preferred=(state.compareBasket||[]).filter(id=>family?.caseIds?.includes(id));
+  resolvedCaseVisuals(bindings,preferred.length?preferred:family?.caseIds,options,3).forEach(add);
+ }else if(layer==='trajectories'){
+  add(firstResolved(bindings,'TRAJECTORY_MOTIF',state.trajectoryIds?.[0]||(data.trajectories?.trajectories||[])[0]?.trajectoryId,options));
+ }else if(layer==='transitions'){
+  add(firstResolved(bindings,'TRANSITION_WINDOW',state.transitionWindowId||(data.transitions?.windows||[])[0]?.windowId,options));
+ }else if(layer==='loss'){
+  const family=state.lossTypeId?'LOSS_TYPE_VIGNETTE':'LOSS_FAMILY';
+  const subject=state.lossTypeId||state.lossFamilyId||(family==='LOSS_FAMILY'?(data.loss?.families||[])[0]?.familyId:null);
+  add(firstResolved(bindings,family,subject,options));
+ }
+ return assets.slice(0,4);
 }
 function ensureStyle(doc){
  if(doc.getElementById('atlas-static-visual-style'))return;
@@ -58,7 +83,7 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en'}={}){
  root.querySelector('[data-atlas-static-visuals]')?.remove();
  const structured=root.querySelector('[data-atlas-structured-visual]');if(!structured?.firstElementChild)return;
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&root.dataset.atlasReady!=='true')return;
- const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},assets=resolveAtlasStaticVisuals(bindings,state,options);
+ const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},data=arguments[1]?.data||{},assets=resolveAtlasStaticVisuals(bindings,state,options,data);
  const library=bindings?.assets?.filter(a=>resolveAtlasVisualById(bindings,a.assetId,options))||[];
  if(!assets.length&&!library.length)return;ensureStyle(doc);
  const host=doc.createElement('div');host.dataset.atlasStaticVisuals='';
