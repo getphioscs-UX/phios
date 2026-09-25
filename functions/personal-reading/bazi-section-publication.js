@@ -92,10 +92,81 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    '稳定性问的不是“有没有能力”，而是当表达、责任与要求持续存在时，这项能力是否仍然可用。因此，承载条件与尚未定论的强弱判断应该放在这里阅读，而不能被转换成固定的身强或身弱身份。'
   ),[byId(':OPERATING_CONDITION'),byId(':OPEN_STRENGTH'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/carry|承载/i.test(x.text))]);
  }
- await makeNarrative('lifeStructureNarrative','S03_LIFE_STRUCTURE','LIFE_OPERATION');
- await makeNarrative('careerNarrative','S04_CAREER','CAREER');
- await makeNarrative('wealthNarrative','S05_WEALTH','WEALTH');
- await makeNarrative('relationshipNarrative','S06_RELATIONSHIP','RELATIONSHIPS');
+ // Domain-specific deterministic facets keep the publication readable without
+ // creating new method meaning. Each facet selects licensed claims from the
+ // same section authority and changes only editorial grouping.
+ const makeDomainFacets=async(section,code,facets)=>{
+  const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:section,locale,temporalSnapshot:temporalContext});
+  const claims=authority.claims.filter(x=>x.relationType!=='BOUNDARY');
+  const boundary=authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||'';
+  const select=types=>claims.filter(x=>types.includes(x.relationType));
+  const toBlock=(key,lead,selected)=>{
+   const unique=[...new Map(selected.filter(Boolean).map(x=>[x.id,x])).values()];
+   const refs=[...new Set(unique.flatMap(x=>x.sourceRefs||[]))];
+   const body=unique.map(x=>humanizePublicationStatement(x.text)).join(' ');
+   modules[key]={blocks:[
+    block(lead,`${edRef}#${section}`,'EDITORIAL_GUIDANCE'),
+    ...(body?[block(body,refs.join('|'),'METHOD_INTERPRETATION')]:[])
+   ],boundary};
+  };
+  for(const facet of facets)toBlock(facet.key,facet.lead,select(facet.types));
+ };
+
+ await makeDomainFacets('S03_LIFE_STRUCTURE','LIFE_OPERATION',[
+  {key:'lifeStructureSystem',lead:pick(
+   'The structural center of the chart is read by bringing carrying conditions, functional balance and recurring relationships into one frame. This page explains how the main system holds together before any single pattern name is treated as decisive.',
+   '命盘的结构中心，要把承载条件、功能分布与反复出现的关系放在同一框架里阅读。本页先说明整套系统怎样组织起来，再判断任何单一格局名称是否真的具有决定性。'
+  ),types:['EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS','SUPPORT_CONDITION']},
+  {key:'lifeStructureConditions',lead:pick(
+   'The second question is whether the visible structure can be sustained. Pattern candidates, tension, carrying limits and unresolved conditions belong together here because they determine how far an interpretation can safely go.',
+   '第二个问题是：眼前可见的结构能否被持续承载。格局候选、张力、承载限制与未定条件必须放在一起，因为它们共同决定这份解释可以走多远。'
+  ),types:['TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER','CROSS_SECTION_RELEVANCE','OPEN_CONDITION','ASSOCIATION']}
+ ]);
+
+ await makeDomainFacets('S04_CAREER','CAREER',[
+  {key:'careerRoleSystem',lead:pick(
+   'Career begins with role structure: what you are expected to carry, what you are expected to produce, and how resources and learning support enter the role. The chart is most useful here when these functions are read as one working system.',
+   '事业首先要看角色结构：需要承担什么、需要产出什么，以及资源与学习支持怎样进入这个角色。把这些功能当作一套工作系统一起阅读，命盘才真正具有现实解释力。'
+  ),types:['EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS','ASSOCIATION']},
+  {key:'careerWorkingConditions',lead:pick(
+   'A role can look suitable on paper and still become difficult when authority, standards, support or workload are mismatched. This page focuses on the conditions that make the same capability easier or harder to carry in practice.',
+   '一个角色在名称上看起来合适，仍可能因为权限、标准、支持或工作量不匹配而变得困难。本页关注的是：什么条件会让同一套能力在现实中更容易或更难持续运作。'
+  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  {key:'careerDirection',lead:pick(
+   'Career direction is read from repeated themes across the chart rather than from a single profession label. Cross-chart priorities and unresolved conditions help separate a durable work pattern from a temporary or incomplete signal.',
+   '事业方向应从整盘反复出现的主题中读取，而不是从一个职业标签直接推出。跨结构重点与未定条件，可以帮助区分长期工作模式与暂时或尚未完成的讯号。'
+  ),types:['CROSS_SECTION_RELEVANCE','OPEN_CONDITION','CONTRAST']}
+ ]);
+
+ await makeDomainFacets('S05_WEALTH','WEALTH',[
+  {key:'wealthResourceFlow',lead:pick(
+   'Wealth is first read as resource flow: how value is produced, exchanged and brought into the system. This page focuses on the functions that make resources visible before asking what happens to them afterward.',
+   '财富首先从资源流动来读：价值怎样被创造、交换并进入系统。本页先看什么功能让资源出现，再进入资源之后如何被处理的问题。'
+  ),types:['EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS','ASSOCIATION']},
+  {key:'wealthRetentionPressure',lead:pick(
+   'Receiving resources and keeping them are different structural questions. Support, competing demands, responsibility and exchange pressure determine whether resources can be retained, redirected or repeatedly consumed.',
+   '得到资源与保留资源，是两个不同的结构问题。支持条件、竞争性要求、责任与交换压力，会共同影响资源能否被保留、重新调动，或持续被消耗。'
+  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  {key:'wealthRealityBoundary',lead:pick(
+   'The final wealth layer separates symbolic resource structure from real financial outcomes. Cross-chart priorities can show where resource themes repeat, while open conditions preserve the boundary between a method reading and an actual financial result.',
+   '最后一层财富读取，要把象征性的资源结构与真实财务结果分开。跨结构重点可以显示资源主题在哪里反复出现；未定条件则保留方法解读与现实财务结果之间的边界。'
+  ),types:['CROSS_SECTION_RELEVANCE','OPEN_CONDITION','CONTRAST']}
+ ]);
+
+ await makeDomainFacets('S06_RELATIONSHIP','RELATIONSHIPS',[
+  {key:'relationshipPosition',lead:pick(
+   'Relationship reading begins with your recurring position inside important bonds: what you expect, what you exchange, what you carry and what kind of support enters the relationship. It describes your side of the interaction without turning the other person into a chart symbol.',
+   '关系读取先从你在重要关系中反复出现的位置开始：期待什么、交换什么、承担什么，以及什么样的支持会进入关系。它描述的是你的互动位置，而不会把对方压缩成命盘符号。'
+  ),types:['EMPHASIS','LIFE_DOMAIN_EXPLANATION','CO_OCCURRING_DIMENSIONS','ASSOCIATION']},
+  {key:'relationshipInteraction',lead:pick(
+   'The next layer is interaction. Recorded links and tensions between chart positions show where expectations, support, responsibility and self-expression may need active negotiation instead of moving automatically in the same direction.',
+   '下一层是互动。柱位之间已记录的联结与张力，会显示期待、支持、责任与自我表达在哪里需要主动协商，而不是自然地朝同一方向运行。'
+  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  {key:'relationshipBoundaries',lead:pick(
+   'Relationship guidance becomes more reliable when repeated chart themes are separated from fixed outcome claims. Cross-chart relevance can identify recurring relational priorities, while open conditions keep marriage, separation and partner outcomes outside unsupported certainty.',
+   '关系建议只有在“反复结构”与“固定结果”被分开后才更可靠。跨结构重点可以识别持续出现的关系主线；未定条件则避免把婚姻、分离或伴侣结果写成没有依据的确定结论。'
+  ),types:['CROSS_SECTION_RELEVANCE','OPEN_CONDITION','CONTRAST']}
+ ]);
  await makeNarrative('healthNarrative','S07_HEALTH','PRESSURE');
  if(modules.healthNarrative){
   modules.healthNarrative.blocks.push(block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'));
