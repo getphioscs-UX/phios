@@ -73,4 +73,12 @@ assert.ok(worldRenderer.includes('civ-world__deep-dive'),'World map and networks
 assert.ok(worldRenderer.indexOf('civ-world__featured')<worldRenderer.indexOf('civ-world__deep-dive'),'Representative civilizations must appear before deep world data.');
 assert.ok(timeline.includes('About this periodization')||timeline.includes('关于这个分期'),'Timeline evidence note must remain secondary.');
 
+
+assert.ok(cases.includes('const PAGE=12'),'Civilizations must retain a bounded first batch.');
+assert.ok(cases.includes('data-case-more'),'Civilizations must progressively reveal additional cases.');
+assert.ok(cases.includes("visible+PAGE"),'Civilizations show-more must advance by bounded batches.');
+assert.ok(comparison.includes('const PAGE=12'),'Comparison families must retain a bounded first batch.');
+assert.ok(comparison.includes('data-family-more'),'Comparison families must progressively reveal additional civilizations.');
+assert.ok(comparison.includes("basket.length>=2?' open':''"),'Comparison matrix should auto-open only after an intentional multi-case selection.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
