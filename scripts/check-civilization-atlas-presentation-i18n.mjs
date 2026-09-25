@@ -41,4 +41,24 @@ assert.ok(reconfig.includes("const tabs=[['overview',c.overview],['cases',c.case
 assert.ok(reconfig.includes("const tools=[['search',c.search],['windows',c.windows],['dossiers',c.dossiers],['visuals',c.visuals],['dossiercompare',c.compareRuntime]]"),'Book VI secondary tools must remain available behind More tools.');
 assert.ok(reconfig.includes('civ-reconfig-more'),'Book VI secondary navigation must use progressive disclosure.');
 
+
+const firstScreenOrder=[
+  shell.indexOf('data-atlas-primary-visual'),
+  shell.indexOf('data-atlas-layer-content'),
+  shell.indexOf('data-atlas-structured-section'),
+  shell.indexOf('data-atlas-visual-resources')
+];
+assert.ok(firstScreenOrder.every(x=>x>=0),'Atlas first-screen composition placeholders must all exist.');
+assert.deepEqual([...firstScreenOrder].sort((a,b)=>a-b),firstScreenOrder,'Atlas first screen must order primary visual → readable content → structured view → visual resources.');
+assert.ok(shell.includes('civ-atlas-secondary'),'Structured data view must be progressive disclosure.');
+
+const staticVisual=read('assets/js/pages/civilization-atlas/atlas-static-visual.js');
+assert.ok(staticVisual.includes("img.loading='eager'"),'Primary Atlas visual must load eagerly.');
+assert.ok(staticVisual.includes("fetchpriority','high'"),'Primary Atlas visual must receive high fetch priority.');
+assert.ok(staticVisual.includes("details.className='civ-atlas-visual-resources'"),'Related visuals and full library must remain secondary.');
+assert.ok(staticVisual.includes("const [primary,...related]=assets"),'Only one context visual may own the primary slot.');
+
+assert.ok(timeline.includes('casesRegistry'),'Timeline must resolve real civilization titles from the case registry.');
+assert.ok(timeline.includes('caseMap.get(id)'),'Timeline representative civilizations must use human-readable titles, not generated ordinal labels.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
