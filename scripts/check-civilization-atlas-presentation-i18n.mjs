@@ -24,8 +24,10 @@ for(const [name,source] of [['shell',shell],['timeline',timeline],['world',world
 }
 assert.ok(!/知识状态|Knowledge state/.test(timeline),'Timeline should not foreground knowledge-state enum.');
 assert.ok(!/知识状态|Knowledge state/.test(worldRenderer),'World should not foreground knowledge-state enum.');
-assert.ok(!/knowledge-eyebrow[^\n]*caseId/.test(cases),'Cases should not foreground raw case ID.');
-assert.ok(!/knowledge-eyebrow[^\n]*familyId/.test(comparison),'Comparison should not foreground raw family ID.');
+assert.ok(cases.includes("knowledge-eyebrow\">${esc(loc(c.region?.label,lang)||formatRange(c.timeWindow,lang))}"),'Cases must foreground region/time, not raw case ID.');
+assert.ok(!cases.includes('knowledge-eyebrow\">${esc(c.caseId)}'),'Cases should not foreground raw case ID.');
+assert.ok(comparison.includes("knowledge-eyebrow\">${esc(lang==='zh-Hans'?'文明比较':'Civilization comparison')}"),'Comparison must foreground a human-readable reading label.');
+assert.ok(!comparison.includes('knowledge-eyebrow\">${esc(selected.familyId)}'),'Comparison should not foreground raw family ID.');
 assert.ok(!/relationType/.test(comparison),'Comparison customer view should not render raw relationType.');
 assert.ok(timeline.includes('civ-atlas-detail-table'),'Timeline full table must be progressive disclosure.');
 assert.ok(worldRenderer.includes('civ-atlas-evidence-note'),'World evidence boundary must be progressive disclosure.');
