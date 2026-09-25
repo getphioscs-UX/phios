@@ -375,8 +375,14 @@ for (const shell of articleShells) {
   const html = await read(shell);
   assert.match(
     html,
-    /<main id="article-main"[^>]+data-article-slug="[^"]+"[^>]*><\/main>/
+    /<main id="article-main"[^>]+data-article-slug="[^"]+"[^>]*>[\s\S]*<\/main>/
   );
+  const mainMatch=html.match(/<main id="article-main"[^>]+data-article-slug="[^"]+"[^>]*>([\s\S]*?)<\/main>/);
+  assert(mainMatch,'governed article shell requires article-main');
+  const body=mainMatch[1].trim();
+  if(body){
+    assert.match(body,/<article\b[^>]*data-static-article-admission\b[^>]*>/,'server-rendered article body must carry static admission marker');
+  }
   assert(usesGovernedArticleEntry(html));
 }
 const vapW27Path = 'content/production/visual-article/release/website/VAP-W27-KN-PREFACE-001-ZH-HANS.json';
