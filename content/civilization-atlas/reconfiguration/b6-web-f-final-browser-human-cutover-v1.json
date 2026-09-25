@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-B6-WEB-F-FINAL-BROWSER-HUMAN-CUTOVER-v1.0.0",
   "package": "B6-WEB-F",
   "baselineCommit": "aca0044ff73b6fcd85860b6950a450b5f63fdfd8",
-  "status": "READINESS_IMPLEMENTED_FINAL_ACCEPTANCE_PENDING",
+  "status": "R2_VISUAL_GATE_PASSED_BROWSER_AND_HUMAN_PENDING",
   "figureR2Reconciliation": {
     "ownerScreenshotObserved": true,
     "ownerScreenshotDeliveryAuthority": false,
@@ -17,10 +17,18 @@
       "13G.webp",
       "13H.webp"
     ],
-    "recordedState": "UNVERIFIED_PENDING_PUBLIC_RESOLVER_PROBE"
+    "recordedState": "PRESENT_LIVE_PUBLIC_GET_VERIFIED",
+    "liveProbe": {
+      "workflowRunId": 36093020856,
+      "checkedAt": "2026-09-25T04:06:13Z",
+      "summary": {
+        "present": 8,
+        "missing": 0,
+        "unverified": 0
+      }
+    }
   },
   "blockers": [
-    "FIG_13A–FIG_13H require a new live public resolver probe at the corrected R2 keys before PRESENT.",
     "Real interactive desktop/mobile browser acceptance has not run.",
     "B6-WEB-F human review has not been approved."
   ],
@@ -33,7 +41,10 @@
   ],
   "completionBoundary": {
     "readiness": "READY",
-    "cutover": "BLOCKED_UNTIL_ALL_FINAL_GATES_PASS",
+    "r2VisualGate": "PASS_23_OF_23",
+    "browserAcceptance": "NOT_RUN",
+    "humanAcceptance": "PENDING",
+    "cutover": "BLOCKED_UNTIL_BROWSER_AND_HUMAN_GATES_PASS",
     "completeClaimAllowed": false
   }
 }
