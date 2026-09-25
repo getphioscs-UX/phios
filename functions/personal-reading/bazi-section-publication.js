@@ -350,23 +350,19 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `The carrying context is ${R11_CARRY[carry.overallTendency]||pick('mixed carrying conditions','混合承载条件')}. Role design therefore deserves direct comparison: responsibility versus decision authority, workload versus available support, and output expectations versus the time or resources actually available to meet them.`,
     `承载状态为「${R11_CARRY[carry.overallTendency]||'混合承载条件'}」。因此，角色设计值得直接比较：责任与决策权是否匹配、工作量与可用支持是否匹配、产出要求与实际可用的时间／资源是否匹配。`
    )
-  ],{boundary:'',observations:r11Prompts('CAREER')});
+  ],{boundary:'',observations:[]});
   r11Module('careerWorkingDirection','CAREER',[
    pick(
-    'The long-term career question is not “which profession fits?” but “which role conditions keep repeating when work is sustainable?” Compare accountability, autonomy, learning support, resource access and delivery pressure across several jobs rather than judging from one title.',
-    '长期事业问题不是“哪个职业最适合”，而是“哪些角色条件在工作可持续时反复出现”。可以跨不同工作比较责任、自主权、学习支持、资源取得与交付压力，而不是只从职位名称判断。'
+    'Long-term career direction is better tested through recurring role conditions than through one profession label. Compare responsibility, decision authority, learning support, resource access and delivery pressure across several jobs, and notice which combinations remain workable over time.',
+    '长期事业方向更适合通过反复出现的角色条件来检验，而不是从一个职业标签判断。可以跨不同工作比较责任、决策权、学习支持、资源取得与交付压力，观察哪些组合能够长期维持。'
    ),
    pick(
-    `This chart keeps ${R11_GROUP.OFFICER}, ${R11_GROUP.RESOURCE} and ${R11_GROUP.WEALTH} inside the career frame at the same time. That makes a useful work comparison three-sided: what must be carried, what support or knowledge is available, and what resources or exchanges the role controls.`,
-    `这张命盘的事业框架同时保留「${R11_GROUP.OFFICER}」「${R11_GROUP.RESOURCE}」与「${R11_GROUP.WEALTH}」。因此，一个有价值的工作比较至少有三面：需要承担什么、有哪些支持或知识、这个角色可以调动哪些资源或交换。`
+    `This chart keeps ${R11_GROUP.OFFICER}, ${R11_GROUP.RESOURCE} and ${R11_GROUP.WEALTH} inside the career frame together. A useful comparison therefore asks three separate questions: what must be carried, what support or knowledge is available, and what resources the role can actually mobilize.`,
+    `这张命盘的事业框架同时保留「${R11_GROUP.OFFICER}」「${R11_GROUP.RESOURCE}」与「${R11_GROUP.WEALTH}」。因此可以分开比较三件事：要承担什么、有哪些支持或知识、角色实际上能调动哪些资源。`
    ),
    pick(
-    'If a role looks attractive but becomes difficult only after sustained delivery begins, treat that difference as evidence about carrying cost. If another role with similar subject matter remains sustainable because authority, support or resources are different, that contrast is more useful than concluding that an entire occupation is right or wrong.',
-    '如果某个角色一开始看起来合适，却在持续交付后才变得困难，可以把差异当成“承载成本”的证据。若另一个工作内容相近的角色，因为权限、支持或资源不同而更可持续，这种对照比直接判断整个职业“适合／不适合”更有价值。'
-   ),
-   pick(
-    'The strongest career evidence will therefore come from repeated conditions across more than one work setting. A counterexample matters too: it helps show whether the chart theme is actually about the role structure, the organization, the timing, or a circumstance outside the chart.',
-    '因此，最有力的事业证据来自多个工作环境中反复出现的条件。反例同样重要：它能帮助判断这里真正起作用的，是角色结构、组织环境、时间阶段，还是命盘之外的现实因素。'
+    'If a role becomes difficult only after sustained delivery begins, treat that change as evidence about carrying cost. Compare it with a similar role that remains sustainable because authority, support or resources differ. That contrast helps distinguish a role-structure issue from an occupation-wide conclusion, and a counterexample helps test whether organization or timing matters more than the chart theme.',
+    '如果某个角色只在持续交付后才变得困难，可以把变化当成承载成本的线索，再与一个工作内容相近、但因权限、支持或资源不同而更可持续的角色比较。这样的对照能把“角色结构问题”与“整个职业不适合”分开；反例也能帮助判断组织环境或时间阶段是否比命盘主题更关键。'
    )
   ],{boundary:'',observations:r11Prompts('CAREER')});
  }
@@ -390,7 +386,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      `${R11_GROUP.OFFICER} also remains active in this topic. A useful resource reading therefore follows the full cycle: how value enters, what must be exchanged for it, which obligations attach to it, and what remains available for retention or redeployment. A repeated inflow channel and a retained surplus are not the same evidence.`,
      `「${R11_GROUP.OFFICER}」也同时参与财富主题。更有价值的资源读取因此要追踪完整循环：价值怎样进入、需要交换什么、附带哪些责任，以及最后还有多少可以留存或重新配置。反复出现的资源入口，与最终能够留下的盈余，不是同一种证据。`
     )
-   ],{boundary:pick('Symbolic wealth structure is not an income forecast or financial advice.','象征性的财富结构不是收入预测，也不是财务建议。'),observations:r11Prompts('WEALTH')});
+   ],{boundary:pick('Symbolic wealth structure is not an income forecast or financial advice.','象征性的财富结构不是收入预测，也不是财务建议。'),observations:[]});
   }
   r11Module('wealthRetentionReality','WEALTH',[
    pick(
@@ -433,7 +429,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      'The other person remains an independent variable. The chart can organize your side of the recurring interaction, but another person’s motives, choices and circumstances require their own evidence.',
      '对方始终是独立变量。命盘可以整理你这一侧反复出现的互动结构，但对方的动机、选择与处境仍需要独立证据。'
     )
-   ],{boundary:pick('The chart cannot guarantee marriage, separation or one fixed partner outcome.','命盘不能保证婚姻、分离或某一种固定伴侣结果。'),observations:r11Prompts('RELATIONSHIPS')});
+   ],{boundary:pick('The chart cannot guarantee marriage, separation or one fixed partner outcome.','命盘不能保证婚姻、分离或某一种固定伴侣结果。'),observations:[]});
   }
   r11Module('relationshipInteractionBoundary','RELATIONSHIPS',[
    pick(
