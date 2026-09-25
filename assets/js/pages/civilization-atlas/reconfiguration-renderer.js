@@ -37,7 +37,6 @@ function askHref(locale,layer,o={}){
  return '/knowledge/ask/?'+p.toString();
 }
 const badge=(value,l)=>`<span class="civ-reconfig-badge" data-state="${esc(value||'UNKNOWN')}">${esc(stateLabel(value,l))}</span>`;
-const listText=(v,l)=>Array.isArray(v)&&v.length?v.join(' · '):(l==='zh-Hans'?'未知':'Unknown');
 const options=(rows,value,label,all,l)=>`<option value="">${esc(all)}</option>`+rows.map(x=>`<option value="${esc(value(x))}">${esc(label(x,l))}</option>`).join('');
 function set(store,patch,source='ui'){store.set(patch,{source});}
 function resultRows(data,l){
@@ -53,13 +52,13 @@ function resultRows(data,l){
 function openPatch(row){return row.type==='CASE'?{activeLayer:'cases',primaryCaseId:row.id}:row.type==='WINDOW'?{activeLayer:'windows',windowId:row.id}:row.type==='SNAPSHOT'?{activeLayer:'snapshots',snapshotId:row.id}:row.type==='DOSSIER'?{activeLayer:'dossiers',dossierId:row.id}:row.type==='LIVED_REALITY'?{activeLayer:'lived',livedRealityDimensionId:row.id}:{activeLayer:'search',query:row.id,sectionId:row.id};}
 function pager(host,page,count,onPage,l){
  const pages=Math.max(1,Math.ceil(count/PAGE));if(pages<=1)return;
- const nav=document.createElement('nav');nav.className='civ-reconfig-pager';nav.setAttribute('aria-label',l==='zh-Hans'?'分页':'Pagination');
+ const nav=document.createElement('nav');nav.className='civ-reconfig-pager';nav.setAttribute('aria-label',COPY[l].pagination);
  nav.innerHTML=`<button type="button" data-prev ${page<=1?'disabled':''}>← ${esc(COPY[l].previous)}</button><span>${page} / ${pages}</span><button type="button" data-next ${page>=pages?'disabled':''}>${esc(COPY[l].next)} →</button>`;
  nav.querySelector('[data-prev]')?.addEventListener('click',()=>onPage(page-1));nav.querySelector('[data-next]')?.addEventListener('click',()=>onPage(page+1));host.append(nav);
 }
 function renderOverview(host,data,l,store){
  const c=COPY[l],cards=[[c.cases,data.cases?.cases?.length||0,'cases'],[c.timeline,data.windows?.windows?.length||0,'timeline'],[c.snapshots,data.snapshots?.snapshots?.length||0,'snapshots'],[c.dossiers,data.dossiers?.dossiers?.length||0,'dossiers'],[c.lived,data.lived?.dimensions?.length||0,'lived']];
- host.innerHTML=`<div class="civ-reconfig-overview">${cards.map(([label,n,tab])=>`<button class="wpr-part-card civ-reconfig-overview-card" data-open="${tab}"><strong>${esc(String(n))}</strong><span>${esc(label)}</span></button>`).join('')}</div><section class="civ-reconfig-state-legend"><h3>${esc(l==='zh-Hans'?'资料状态':'Knowledge state')}</h3><div class="civ-reconfig-chip-row">${['CANONICAL_HISTORY','HISTORICAL_RECONSTRUCTION','CURRENT_DATA','DERIVED_RUNTIME_READOUT','CONDITIONAL_PROJECTION','UNKNOWN'].map(s=>badge(s,l)).join('')}</div><p>${esc(c.noRank)}</p></section>`;
+ host.innerHTML=`<div class="civ-reconfig-overview">${cards.map(([label,n,tab])=>`<button class="wpr-part-card civ-reconfig-overview-card" data-open="${tab}"><strong>${esc(String(n))}</strong><span>${esc(label)}</span></button>`).join('')}</div><section class="civ-reconfig-state-legend"><h3>${esc(COPY[l].dataState)}</h3><div class="civ-reconfig-chip-row">${['CANONICAL_HISTORY','HISTORICAL_RECONSTRUCTION','CURRENT_DATA','DERIVED_RUNTIME_READOUT','CONDITIONAL_PROJECTION','UNKNOWN'].map(s=>badge(s,l)).join('')}</div><p>${esc(c.noRank)}</p></section>`;
  host.querySelectorAll('[data-open]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:btn.dataset.open},'overview-nav'));
 }
 function renderSearch(host,data,l,state,store){
