@@ -26,6 +26,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
+          cache: npm
+      - name: Install repository dependencies
+        run: npm ci
       - name: Build R9 browser runtime
         run: node scripts/sync-bazi-r9-review-browser.mjs
       - name: Build R9 review package
