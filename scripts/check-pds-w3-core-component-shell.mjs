@@ -91,7 +91,7 @@ const px2Successor = await readJson('content/web-production/px2/successors/px2-w
 assert.equal(px2Successor.status, 'ACTIVE');
 const cxHome = await readJson('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
 assert.equal(cxHome.route, '/');
-assert.equal(cxHome.status, 'HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED');
+assert.equal(cxHome.status, 'HOMEPAGE_EIGHT_VOLUME_IDENTITY_ALIGNED');
 assert.equal(cxHome.invariants.legacyStylesheetDependency, false);
 assert.equal(cxHome.invariants.legacyShellDependency, false);
 const cxPages = new Set(['index.html', 'about/index.html', 'explore/index.html']);
