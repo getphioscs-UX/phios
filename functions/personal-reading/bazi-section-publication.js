@@ -271,10 +271,16 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   'The final guidance layer combines repeated themes with the current timing context, while keeping temporary emphasis separate from the chart’s more stable structure.',
   '最后的建议层把跨章节重复主题与当前时间情境放在一起，同时把阶段性放大与较稳定的本命结构清楚分开。'
  ),['guidancePriorities','guidanceCurrentFocus'],{maxBlocks:5});
- compactModule('methodGuide',pick(
-  'Use the appendix as one reading guide: distinguish calculated facts, method relationships, editorial explanation and lived evidence, and keep every unresolved condition visibly unresolved.',
-  '把附录当成一份统一的阅读指南：区分计算事实、方法关系、编辑解释与现实证据，并让所有尚未成立的条件继续保持开放。'
- ),['boundaries','methodology'],{maxBlocks:5});
+ modules.methodGuide={blocks:[
+  block(pick(
+   'Read the report through four evidence levels: calculated chart facts, admitted method relationships, editorial explanation and lived-reality evidence. Keep them distinct so every conclusion can be traced to the kind of evidence that actually supports it, and keep unresolved conditions visibly unresolved.',
+   '阅读这份报告时，请区分四个证据层：计算得到的命盘事实、已核准的方法关系、编辑解释，以及真实生活证据。让它们保持各自边界，才能知道每个判断真正由什么支持；尚未成立的条件也必须继续保持开放。'
+  ),`${edRef}#S10_APPENDIX`,'EDITORIAL_GUIDANCE'),
+  block(pick(
+   'BaZi organizes the reading around the Four Pillars with the Day Master as reference. Visible stems, branches, hidden stems, element counts, pattern candidates and resolved timing layers remain separate parts of the method. Timing accompanies the birth structure rather than replacing it, and the interpretation should always be compared with independent experience.',
+   '八字围绕四柱组织读取，并以日主作为参照。天干、地支、藏干、五行计数、格局候选与已解析的时间层，都应保持为方法中的不同部分。时间层与本命结构一起阅读，不取代本命；所有解释最终仍应与独立的现实经验进行比较。'
+  ),`${edRef}#S10_APPENDIX`,'METHOD_INTERPRETATION')
+ ],items:[],boundary:''};
 
  for(const name of unavailableModules)delete modules[name];
  const sections=[],internalSections=[],pages=[],t3Interpretations=[];
