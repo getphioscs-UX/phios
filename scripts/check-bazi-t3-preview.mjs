@@ -13,9 +13,11 @@ assert.equal(reviewBundle.outputFiles[0].text,fs.readFileSync('assets/customer-u
 for(const locale of ['en','zh-Hans'])assert(fs.readFileSync(`docs/guided-report-successor-r2/bazi-t3/${locale}/review.html`,'utf8').includes('bazi-t3-review.bundle.js'));
 const objects=new Map(),reservations=new Set();
 const env={PHIOS_ENVIRONMENT:'qa',BAZI_T3_PREVIEW_SHADOW:'enabled',PRIVATE_REPORTS:{get:async k=>objects.has(k)?{json:async()=>JSON.parse(objects.get(k))}:null,put:async(k,v)=>objects.set(k,v)},RUNTIME_DB:{prepare(sql){return {bind(...args){return {async run(){if(sql.startsWith('INSERT OR IGNORE INTO runtime_artifacts')){if(reservations.has(args[0]))return {meta:{changes:0}};reservations.add(args[0]);}return {meta:{changes:1}};}};}}}}};
+const experimentEnv={...env,BAZI_T3_EDITORIAL_EXPERIMENT:'enabled'};
 const identity={verified:true,authenticated:true,userId:'SYNTHETIC',providerId:'TEST'};
-const context=(body={},options={})=>({request:new Request(options.url||'https://qa.phios-github.pages.dev/api/qa-bazi-t3',{method:'POST',headers:{Origin:options.origin||'https://qa.phios-github.pages.dev','Content-Type':'application/json'},body:JSON.stringify(body)}),env:options.env||env,data:{symbolicAccountIdentity:options.anonymous?null:identity}});
+const context=(body={},options={})=>({request:new Request(options.url||'https://qa.phios-github.pages.dev/api/qa-bazi-t3',{method:'POST',headers:{Origin:options.origin||'https://qa.phios-github.pages.dev','Content-Type':'application/json'},body:JSON.stringify(body)}),env:options.env||experimentEnv,data:{symbolicAccountIdentity:options.anonymous?null:identity}});
 const input={locale:'en',sectionKey:'S02_PERSONALITY'};
+const experimentDisabled=await onRequest(context(input,{env}));assert.equal(experimentDisabled.status,409);assert.equal((await experimentDisabled.json()).code,'T3_EDITORIAL_EXPERIMENT_DISABLED','T3 provider-backed QA must stay explicitly opt-in.');
 const zhBlocked=await onRequest(context({locale:'zh-Hans',sectionKey:'S02_PERSONALITY'}));assert.equal(zhBlocked.status,409);assert.equal((await zhBlocked.json()).code,'S02_ENGLISH_OWNER_ACCEPTANCE_REQUIRED','Gold Standard acceptance unlocks English only; Chinese remains blocked until English owner acceptance.');
 assert.equal((await onRequest(context({...input,action:'parity'}))).status,409,'no provider call before both locales have accepted snapshots');
 assert.equal((await onRequest(context(input,{anonymous:true}))).status,401);
