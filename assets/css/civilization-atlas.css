@@ -182,3 +182,23 @@
 .civ-case-more,.civ-family-more{display:flex;justify-content:center;margin:1.1rem 0 .4rem}
 .civ-case-more .knowledge-action,.civ-family-more .knowledge-action{min-width:min(100%,16rem);justify-content:center}
 .civ-case-card[hidden],.civ-family-cases article[hidden]{display:none!important}
+
+
+/* Long trends / transitions / loss editorial readers */
+.civ-trajectory-card--reader,.civ-transition-reader,.civ-loss-reader{padding:clamp(1.1rem,2.2vw,1.7rem);border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-lg);background:linear-gradient(180deg,var(--phi-surface-solid),var(--phi-surface-subtle))}
+.civ-trajectory-card--reader h4,.civ-transition-reader h4,.civ-loss-reader h4{font-size:clamp(1.45rem,2.2vw,2rem);line-height:1.25;margin:.25rem 0 .6rem}
+.civ-trajectory-lead,.civ-loss-lead,.civ-transition-story p{font-size:1rem;line-height:1.75}
+.civ-trajectory-data,.civ-transition-mechanism,.civ-loss-examples{margin-top:1rem;border-top:1px solid var(--phi-border-subtle);padding-top:.75rem}
+.civ-trajectory-data>summary,.civ-transition-mechanism>summary,.civ-loss-examples>summary{cursor:pointer;font-weight:600;color:var(--phi-text-secondary)}
+.civ-trajectory-data[open]>summary,.civ-transition-mechanism[open]>summary,.civ-loss-examples[open]>summary{margin-bottom:.8rem}
+.civ-trajectory-navigator,.civ-transition-navigator,.civ-loss-navigator{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--phi-border-subtle)}
+.civ-transition-story{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin-top:1rem}
+.civ-transition-story section{padding:1rem;border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-md);background:var(--phi-surface-solid)}
+.civ-transition-story small{color:var(--phi-text-secondary);font-weight:600}
+.civ-scale-shifts{margin-top:1rem;border-top:1px solid var(--phi-border-subtle);padding-top:.8rem}
+.civ-scale-shifts>summary{cursor:pointer;font-weight:600;color:var(--phi-text-secondary)}
+.civ-scale-shifts[open]>summary{margin-bottom:.8rem}
+.civ-scale-shifts>div{display:flex;flex-wrap:wrap;gap:.5rem}
+.civ-loss-reader>p{line-height:1.7}
+.civ-loss-navigator .civ-loss-families{margin-top:.75rem}
+@media(max-width:768px){.civ-transition-story{grid-template-columns:1fr}}
