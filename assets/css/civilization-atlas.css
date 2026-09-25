@@ -146,3 +146,23 @@
  .civ-atlas-primary-visual .civ-visual-frame figcaption button{grid-column:1;grid-row:auto;width:100%}
  .civ-atlas-related-visuals{grid-template-columns:1fr}
 }
+
+
+/* Timeline / World editorial reader */
+.civ-timeline__focus--reader,.civ-world__slice--reader{margin:0 0 1.5rem;padding:clamp(1.25rem,2.5vw,2rem);border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-lg);background:linear-gradient(180deg,var(--phi-surface-solid),var(--phi-surface-subtle))}
+.civ-timeline__focus--reader>p:not(.knowledge-eyebrow),.civ-world__slice--reader>p:not(.knowledge-eyebrow){max-width:62rem;font-size:clamp(1rem,1.2vw,1.12rem);line-height:1.8}
+.civ-timeline__focus--reader .knowledge-eyebrow,.civ-world__slice--reader .knowledge-eyebrow{margin-bottom:.35rem}
+.civ-timeline__focus--reader h4,.civ-world__slice--reader h4{font-size:clamp(1.65rem,2.6vw,2.4rem);line-height:1.2;max-width:24ch}
+.civ-timeline__navigator,.civ-world__navigator{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--phi-border-subtle)}
+.civ-atlas-nav-label{margin:0;color:var(--phi-text-secondary);font-size:var(--phi-text-sm);font-weight:600}
+.civ-timeline__navigator .civ-timeline__track,.civ-world__navigator .civ-world__selector{padding-top:.75rem;margin:0}
+.civ-timeline__navigator .civ-timeline__period,.civ-world__navigator .civ-world__time{min-height:4.6rem;background:transparent}
+.civ-timeline__navigator .civ-timeline__period:not(.is-active),.civ-world__navigator .civ-world__time:not(.is-active){border-color:var(--phi-border-subtle);opacity:.8}
+.civ-timeline__navigator .civ-timeline__period.is-active,.civ-world__navigator .civ-world__time.is-active{background:var(--phi-surface-subtle)}
+.civ-world__slice--reader .civ-world__map{margin-top:.5rem}
+@media(max-width:768px){
+ .civ-timeline__focus--reader,.civ-world__slice--reader{padding:1rem}
+ .civ-timeline__focus--reader h4,.civ-world__slice--reader h4{font-size:1.55rem}
+ .civ-timeline__navigator .civ-timeline__period{min-width:9.5rem}
+ .civ-world__navigator .civ-world__time{min-width:7rem}
+}
