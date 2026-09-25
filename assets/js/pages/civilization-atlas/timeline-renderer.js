@@ -22,7 +22,7 @@ export function renderTimeline(container,{registry,state,locale='en',onPeriodSel
       ${selected.unknown?.note?`<p class="civ-atlas-note">${esc(loc(selected.unknown.note,lang))}</p>`:''}
     </article>
     <details class="civ-atlas-detail-table"><summary>${lang==='zh-Hans'?'查看完整时间表':'View full timeline table'}</summary><div class="civ-atlas-table-wrap"><table class="civ-atlas-table"><caption class="civ-sr-only">${lang==='zh-Hans'?'文明历史时期完整表格':'Complete civilization timeline table'}</caption><thead><tr><th scope="col">${lang==='zh-Hans'?'时期':'Period'}</th><th scope="col">${lang==='zh-Hans'?'时间范围':'Range'}</th><th scope="col">${lang==='zh-Hans'?'历史主线':'Historical line'}</th><th scope="col">${lang==='zh-Hans'?'代表案例':'Cases'}</th></tr></thead><tbody>
-      ${periods.map(p=>`<tr><td><button type="button" class="civ-atlas-link" data-period-id="${esc(p.periodId)}">${esc(p.periodId)} · ${esc(loc(p.title,lang))}</button></td><td>${esc(formatHistoricalRange(p.startYear,p.endYear,lang))}</td><td>${esc(loc(p.summary,lang))}</td><td>${esc((p.caseIds||[]).join(', ')||'—')}</td></tr>`).join('')}
+      ${periods.map(p=>`<tr><td><button type="button" class="civ-atlas-link" data-period-id="${esc(p.periodId)}">${esc(loc(p.title,lang))}</button></td><td>${esc(formatHistoricalRange(p.startYear,p.endYear,lang))}</td><td>${esc(loc(p.summary,lang))}</td><td>${p.caseIds?.length||0}</td></tr>`).join('')}
     </tbody></table></div></details>
   </div>`;
   container.querySelectorAll('[data-period-id]').forEach(el=>el.addEventListener('click',()=>{const p=periods.find(x=>x.periodId===el.dataset.periodId); if(p) onPeriodSelect(p);}));
