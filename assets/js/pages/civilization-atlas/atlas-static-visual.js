@@ -43,13 +43,18 @@ export function resolveAtlasStaticVisuals(bindings,state,options={},data={}){
   const preferred=(state.compareBasket||[]).filter(id=>family?.caseIds?.includes(id));
   resolvedCaseVisuals(bindings,preferred.length?preferred:family?.caseIds,options,3).forEach(add);
  }else if(layer==='trajectories'){
-  add(firstResolved(bindings,'TRAJECTORY_MOTIF',state.trajectoryIds?.[0]||(data.trajectories?.trajectories||[])[0]?.trajectoryId,options));
+  const rows=data.trajectories?.trajectories||[],trajectory=rows.find(x=>x.trajectoryId===state.trajectoryIds?.[0])||rows[0];
+  add(firstResolved(bindings,'TRAJECTORY_MOTIF',trajectory?.trajectoryId,options));
+  resolvedCaseVisuals(bindings,trajectory?.relatedCases,options,3).forEach(add);
  }else if(layer==='transitions'){
-  add(firstResolved(bindings,'TRANSITION_WINDOW',state.transitionWindowId||(data.transitions?.windows||[])[0]?.windowId,options));
+  const rows=data.transitions?.transitionWindows||[],transition=rows.find(x=>x.transitionWindowId===state.transitionWindowId)||rows[0];
+  add(firstResolved(bindings,'TRANSITION_WINDOW',transition?.transitionWindowId,options));
+  resolvedCaseVisuals(bindings,transition?.relatedCases,options,3).forEach(add);
  }else if(layer==='loss'){
-  const family=state.lossTypeId?'LOSS_TYPE_VIGNETTE':'LOSS_FAMILY';
-  const subject=state.lossTypeId||state.lossFamilyId||(family==='LOSS_FAMILY'?(data.loss?.families||[])[0]?.familyId:null);
-  add(firstResolved(bindings,family,subject,options));
+  const families=data.loss?.families||[],types=data.loss?.lossTypes||[],lossType=types.find(x=>x.lossTypeId===state.lossTypeId);
+  const familyId=state.lossFamilyId||lossType?.familyId||families[0]?.familyId;
+  if(lossType){add(firstResolved(bindings,'LOSS_TYPE_VIGNETTE',lossType.lossTypeId,options));resolvedCaseVisuals(bindings,lossType.exampleCaseIds,options,3).forEach(add);}
+  else add(firstResolved(bindings,'LOSS_FAMILY',familyId,options));
  }
  return assets.slice(0,4);
 }
