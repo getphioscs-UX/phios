@@ -30,7 +30,6 @@ export function renderAtlasShell(root,state,{locale='en',data={},onLayerChange=(
 ${CIVILIZATION_LAYERS.has(state.activeLayer)?`<div class="civ-atlas-subnav" aria-label="${esc(c.civilizationViews)}">${CIVILIZATION_VIEWS.map(id=>`<button type="button" class="civ-atlas-subview${state.activeLayer===id?' is-active':''}" data-atlas-layer="${id}" aria-pressed="${state.activeLayer===id?'true':'false'}">${esc(LAYERS[id][lang])}</button>`).join('')}</div>`:''}
 <div class="civ-atlas-context-strip civ-atlas-context-strip--quiet" aria-label="${esc(c.context)}">
   <span><strong>${lang==='zh-Hans'?'视图':'View'}</strong> ${esc(LAYERS[state.activeLayer]?.[lang]||LAYERS.timeline[lang])}</span>
-  ${state.time!==null?`<span><strong>${lang==='zh-Hans'?'时间':'Time'}</strong> ${esc(state.time)}</span>`:''}
 </div>
 <div data-atlas-structured-visual></div>
 <div data-atlas-layer-content></div></section><aside class="civ-atlas-inspector" aria-labelledby="civ-atlas-inspector-title" data-atlas-inspector><h3 id="civ-atlas-inspector-title">${esc(c.inspector)}</h3><p class="civ-atlas-inspector__lead">${esc(lang==='zh-Hans'?'这里会随你的选择显示当前文明、时期或比较重点。':'This panel follows your selection and keeps the current civilization, period or comparison in view.')}</p></aside></div></div>`;
