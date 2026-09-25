@@ -23,21 +23,32 @@ for(const profile of profiles)for(const locale of ['en','zh-Hans']){
  matrix.push({profileId:profile.id,locale,sectionKey:'S01_OVERVIEW',control:true,state:error?'SOURCE_REJECTED':'DETERMINISTIC_CONTROL_PASS',reason:error});
 }
 const candidates=profiles.filter(p=>p.id!=='BASELINE_NOW'&&packs[p.id+':en:S02_PERSONALITY']).map(p=>({id:p.id,claims:packs[p.id+':en:S02_PERSONALITY'].licensedClaims.length,carrying:p.reading.professionalModules.dayMasterStrength.supportBalance.overallTendency}));
-if(candidates.length<3)throw Error('INSUFFICIENT_GOVERNED_T3_EVIDENCE_STRATA');
-const high=candidates.slice().sort((a,b)=>b.claims-a.claims||a.id.localeCompare(b.id))[0];
-const low=candidates.filter(p=>p.id!==high.id).sort((a,b)=>a.claims-b.claims||a.id.localeCompare(b.id))[0];
-const remaining=candidates.filter(p=>p.id!==high.id&&p.id!==low.id);
-const mixed=remaining.find(p=>p.carrying==='MIXED_CARRY');
-const third=mixed||remaining.slice().sort((a,b)=>Math.abs(b.claims-(high.claims+low.claims)/2)-Math.abs(a.claims-(high.claims+low.claims)/2)||a.id.localeCompare(b.id))[0];
-const stagedProfiles=mixed?{HIGH_EVIDENCE:high.id,LOW_EVIDENCE:low.id,MIXED:mixed.id}:{HIGH_EVIDENCE:high.id,LOW_EVIDENCE:low.id,MID_EVIDENCE:third.id};
+const rankedHigh=candidates.slice().sort((a,b)=>b.claims-a.claims||a.id.localeCompare(b.id));
+const high=rankedHigh[0]||null;
+const rankedLow=high?candidates.filter(p=>p.id!==high.id).sort((a,b)=>a.claims-b.claims||a.id.localeCompare(b.id)):[];
+const low=rankedLow[0]||null;
+const remaining=candidates.filter(p=>p.id!==high?.id&&p.id!==low?.id);
+const mixed=remaining.find(p=>p.carrying==='MIXED_CARRY')||null;
+const midpoint=high&&low?(high.claims+low.claims)/2:null;
+const third=mixed||(remaining.length?remaining.slice().sort((a,b)=>Math.abs(b.claims-midpoint)-Math.abs(a.claims-midpoint)||a.id.localeCompare(b.id))[0]:null);
+const stagedProfiles={};
+if(high)stagedProfiles.HIGH_EVIDENCE=high.id;
+if(low)stagedProfiles.LOW_EVIDENCE=low.id;
+if(third)stagedProfiles[mixed?'MIXED':'MID_EVIDENCE']=third.id;
+const coverageIncomplete=Object.keys(stagedProfiles).length<3;
 const evidenceStrata={
- selection:mixed
-  ?'Relative licensed-claim coverage within the existing callable corpus; MIXED uses the native MIXED_CARRY state. No synthetic facts are added.'
-  :'Relative licensed-claim coverage within the existing callable corpus. No callable native MIXED_CARRY profile was available after publication admission, so the third independent stratum is recorded as MID_EVIDENCE instead of fabricating a MIXED state. No synthetic facts are added.',
+ selection:coverageIncomplete
+  ?'T3 is retained only as an editorial experiment. Fewer than three callable governed profiles survived current publication admission, so the available strata are recorded without fabricating missing coverage. This does not block canonical Static + Deterministic BaZi publication.'
+  :mixed
+   ?'Relative licensed-claim coverage within the existing callable corpus; MIXED uses the native MIXED_CARRY state. No synthetic facts are added.'
+   :'Relative licensed-claim coverage within the existing callable corpus. No callable native MIXED_CARRY profile was available after publication admission, so the third independent stratum is recorded as MID_EVIDENCE instead of fabricating a MIXED state. No synthetic facts are added.',
  candidates,
  selected:stagedProfiles,
  nativeMixedAvailable:Boolean(mixed),
- thirdStratumBasis:mixed?'NATIVE_MIXED_CARRY':'CALLABLE_MID_EVIDENCE'
+ thirdStratumBasis:third?(mixed?'NATIVE_MIXED_CARRY':'CALLABLE_MID_EVIDENCE'):'UNAVAILABLE',
+ coverageIncomplete,
+ callableStrataCount:Object.keys(stagedProfiles).length,
+ canonicalProductionBlocked:false
 };
 const fixtureClass='SYNTHETIC_EXISTING_CANONICAL_BAZI_BENCHMARK';
 fs.writeFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json',JSON.stringify({fixtureClass,stagedProfiles,profileIds:profiles.map(p=>p.id),packs})+'\n');
