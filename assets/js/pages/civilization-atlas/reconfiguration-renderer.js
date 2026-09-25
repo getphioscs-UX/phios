@@ -89,6 +89,9 @@ function selectValue(el,value){
  const option=[...(el.options||[])].find(o=>o.value===target);
  if(option)option.selected=true;
 }
+function selectedValue(el){
+ return el?.querySelector?.('option:checked')?.value ?? el?.options?.[0]?.value ?? el?.value ?? '';
+}
 function resultRows(data,l){
  const rows=[];
  for(const x of data.sections?.sections||[])rows.push({type:'BOOK_SECTION',id:x.id,label:l==='zh-Hans'?x.titleZh:x.titleEn,detail:l==='zh-Hans'?x.groupZh:x.groupEn,layer:'search',scope:{sectionId:x.id,entityId:x.id},raw:x});
@@ -220,14 +223,14 @@ function renderVisualLibrary(host,data,l){
  host.innerHTML=`<section class="civ-reconfig-visual-library"><h3>${esc(c.visualLibrary)}</h3><p>${esc(c.visualLibraryLead)}</p><p class="cx-meta">${assets.length} ${esc(c.visualCount)}</p><div class="civ-reconfig-snapshot-controls"><label>${esc(c.visualFamily)}<select data-visual-family>${families.map(f=>`<option value="${esc(f)}">${esc(visualFamilyLabel(f))}</option>`).join('')}</select></label><label>${esc(c.visualSubject)}<select data-visual-subject></select></label></div><div data-visual-preview></div></section>`;
  const family=host.querySelector('[data-visual-family]'),subject=host.querySelector('[data-visual-subject]'),preview=host.querySelector('[data-visual-preview]');
  const renderPreview=()=>{
-  const a=assets.find(x=>x.assetId===subject.value);
+  const a=assets.find(x=>x.assetId===selectedValue(subject));
   if(!a){preview.replaceChildren();return;}
   const title=loc(a.subjectTitle,l)||a.assetId;
   preview.innerHTML=`<figure class="civ-reconfig-visual-preview"><img loading="lazy" decoding="async" src="${esc(a.publicUrl)}" alt="${esc(title)}"><figcaption><strong>${esc(title)}</strong><br><span>${esc(visualFamilyLabel(a.family))}</span></figcaption></figure>`;
  };
  const fillSubjects=()=>{
-  const rows=assets.filter(a=>a.family===family.value);
-  subject.innerHTML=rows.map(a=>`<option value="${esc(a.assetId)}">${esc(loc(a.subjectTitle,l)||a.assetId)}</option>`).join('');
+  const rows=assets.filter(a=>a.family===selectedValue(family));
+  subject.innerHTML=rows.map((a,index)=>`<option value="${esc(a.assetId)}" ${index===0?'selected':''}>${esc(loc(a.subjectTitle,l)||a.assetId)}</option>`).join('');
   renderPreview();
  };
  family.onchange=fillSubjects;
