@@ -5,6 +5,7 @@ import {SECTION_LAYOUT} from '../functions/canonical-presentation-runtime/report
 import {resolveReportEditorialAsset} from '../functions/canonical-presentation-runtime/report-editorial-resolver.js';
 import {REPORT_EDITORIAL_ASSETS} from '../functions/canonical-presentation-runtime/report-editorial-registry.js';
 import {renderFrozenBaziIntro} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {renderVisualReportPages} from '../assets/customer-ui/js/personal-products/visual-report-pages.js';
 
 const out='docs/acceptance/bazi-paid-report/r9';
 fs.mkdirSync(out,{recursive:true});
@@ -13,6 +14,7 @@ const frozen=JSON.parse(fs.readFileSync('docs/guided-report-successor-r1/batch-1
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
 
 const machine={schemaVersion:'BAZI_R9_REVIEW_MACHINE_EVIDENCE_V1',generatedAt:new Date().toISOString(),locales:{}};
+const snapshots={};
 
 for(const locale of ['en','zh-Hans']){
  const projection=await projectBaziSectionPublication({reading:source.reading,locale,temporalContext:source.temporalSnapshot,composition:{}});
@@ -24,6 +26,7 @@ for(const locale of ['en','zh-Hans']){
  }));
  intro.push({pageNumber:6,kind:'FROZEN_TEMPLATE',html:renderFrozenBaziIntro(frozen.reports[locale],total)});
  const bundle=assemblePublicationSnapshot({methodId:'BZR',locale,pages:projection.pages,intro,temporalSnapshot:source.temporalSnapshot,internalPages:projection.internalSections,generatedAt:source.temporalSnapshot.generatedAt,layout:SECTION_LAYOUT});
+ snapshots[locale]=bundle.customer;
  fs.writeFileSync(`${out}/snapshot-${locale}.json`,JSON.stringify(bundle.customer,null,2)+'\n');
  machine.locales[locale]={
   totalPages:bundle.customer.totalPages,
@@ -40,8 +43,15 @@ machine.parity={
 };
 fs.writeFileSync(`${out}/machine-evidence.json`,JSON.stringify(machine,null,2)+'\n');
 
-const html=`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BaZi R9 · Human Review</title>
+function reviewDocument(locale){
+ const snapshot=snapshots[locale];
+ const rendered=renderVisualReportPages(snapshot);
+ const other=locale==='en'?'zh-Hans':'en';
+ const otherLabel=locale==='en'?'中文':'English';
+ const title=locale==='en'?'BaZi R9 · Human Review':'BaZi R9 · 人工验收';
+ const sectionOptions=snapshot.pages.filter(p=>p.isSectionOpener).map(p=>`<option value="${p.sectionNumber}">${p.sectionNumber} · ${p.sectionTitle[locale]}</option>`).join('');
+ return `<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${title}</title>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/customer-ui/surfaces/visual-report.css">
 <link rel="stylesheet" href="/assets/customer-ui/surfaces/report-publication.css">
@@ -53,38 +63,38 @@ body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 .r9-status{max-width:1080px;margin:14px auto;padding:12px 16px;background:#fffdf7;border:1px solid #cbb88e;font:14px/1.55 system-ui}
 .r9-status b{color:#875b21}.r9-checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:8px}
 .r9-checks span{background:#f5f0e4;padding:8px;border-radius:6px}
-@media print{.r9-nav,.r9-status{display:none!important}body{background:white}}
+.r9-error{max-width:1080px;margin:10px auto;padding:10px 16px;background:#fff0f0;border:1px solid #b66;display:none;font:14px system-ui}
+@media print{.r9-nav,.r9-status,.r9-error{display:none!important}body{background:white}}
 </style>
-<nav class="r9-nav"><div class="r9-nav-inner"><strong>BaZi R9 · Human Review</strong>
-<button data-locale="zh-Hans">中文</button><button data-locale="en">English</button>
-<select id="section"></select><button id="jump">Go</button><button id="print">A4 Print / PDF</button></div></nav>
+<nav class="r9-nav"><div class="r9-nav-inner"><strong>${title}</strong>
+<a href="./review-${other}.html">${otherLabel}</a>
+<select id="section">${sectionOptions}</select><button id="jump">Go</button><button id="print">A4 Print / PDF</button></div></nav>
 <section class="r9-status"><b>Review authority:</b> STATIC_EDITORIAL + DETERMINISTIC_PERSONALIZED. T3/OpenAI is not part of this customer publication.
 <div class="r9-checks"><span>62 pages EN</span><span>62 pages 中文</span><span>10 section openers</span><span>10 Key Insights</span><span>T3 pages: 0</span></div>
-<p>Human review focus: section hero hierarchy, chart/text balance, whitespace, font density, Key Insights readability, mobile wrapping, print fit, and overall paid-report quality.</p></section>
-<main id="report"></main>
+<p>Human review focus: section hero hierarchy, chart/text balance, whitespace, font density, Key Insights readability, mobile wrapping, print fit, and overall paid-report quality.</p>
+<p><strong>Static pre-render:</strong> the 62-page report below is embedded in this HTML at build time and does not depend on JavaScript to appear.</p></section>
+<div id="r9-error" class="r9-error"></div>
+<main id="report">${rendered}</main>
 <script type="module">
-import {renderVisualReportPages,fitPublicationForPrint,settlePublicationAssets} from '/assets/customer-ui/js/personal-products/bazi-r9-review-runtime.bundle.js';
-let locale=new URLSearchParams(location.search).get('locale')||'zh-Hans';
-if(!['en','zh-Hans'].includes(locale))locale='zh-Hans';
-const report=document.querySelector('#report'),sel=document.querySelector('#section');
-async function load(next){
- locale=next;history.replaceState(null,'','?locale='+locale);
- const snapshot=await (await fetch('./snapshot-'+locale+'.json',{cache:'no-store'})).json();
- document.documentElement.lang=locale;report.innerHTML=renderVisualReportPages(snapshot);
- await settlePublicationAssets(report);
- await Promise.all([...report.querySelectorAll('img')].map(img=>img.decode().catch(()=>{})));
- await document.fonts.ready;
- sel.innerHTML=snapshot.pages.filter(p=>p.isSectionOpener).map(p=>'<option value="'+p.sectionNumber+'">'+p.sectionNumber+' · '+p.sectionTitle[locale]+'</option>').join('');
+const report=document.querySelector('#report'),sel=document.querySelector('#section'),errorBox=document.querySelector('#r9-error');
+try{
  report.querySelectorAll('[data-page-family="SECTION_OPENER_PAGE"]').forEach(el=>el.id='r9-section-'+el.dataset.section.replace(/^S/,'').slice(0,2));
- window.r9Snapshot=snapshot;window.r9PrintFit=fitPublicationForPrint(report);window.r9Ready=true;
+ document.querySelector('#jump').onclick=()=>document.querySelector('#r9-section-'+sel.value)?.scrollIntoView({behavior:'smooth'});
+ document.querySelector('#print').onclick=()=>window.print();
+ window.r9SnapshotMeta={locale:'${locale}',totalPages:${snapshot.totalPages},staticPrerender:true};
+ window.r9Ready=true;
+}catch(error){
+ errorBox.style.display='block';errorBox.textContent='Optional review controls failed: '+String(error);
+ window.r9Ready=true;
 }
-document.querySelectorAll('[data-locale]').forEach(b=>b.onclick=()=>load(b.dataset.locale));
-document.querySelector('#jump').onclick=()=>document.querySelector('#r9-section-'+sel.value)?.scrollIntoView({behavior:'smooth'});
-document.querySelector('#print').onclick=()=>{fitPublicationForPrint(report);window.print();};
-window.addEventListener('beforeprint',()=>fitPublicationForPrint(report));
-await load(locale);
 </script></html>`;
-fs.writeFileSync(`${out}/review.html`,html);
+}
+
+const zhHtml=reviewDocument('zh-Hans');
+const enHtml=reviewDocument('en');
+fs.writeFileSync(`${out}/review.html`,zhHtml);
+fs.writeFileSync(`${out}/review-zh-Hans.html`,zhHtml);
+fs.writeFileSync(`${out}/review-en.html`,enHtml);
 
 fs.writeFileSync(`${out}/human-review-decision.template.json`,JSON.stringify({
  schemaVersion:'BAZI_R9_HUMAN_REVIEW_DECISION_V1',decision:'PENDING',reviewer:'',reviewedAt:'',
