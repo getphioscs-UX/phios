@@ -244,6 +244,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const r11Module=(key,code,paragraphs,{boundary='',observations=r11Prompts(code),extraRefs=[]}={})=>{
   const ref=r11Ref(code);
   modules[key]={
+   r11Owned:true,
    blocks:paragraphs.filter(Boolean).map((text,i)=>block(text,extraRefs[i]||ref,i===0?'EDITORIAL_GUIDANCE':'METHOD_INTERPRETATION')),
    observations,
    boundary
@@ -428,6 +429,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const timeline=reading.professionalModules.professionalTimeline,current=timeline.currentWindow,dy=current?.currentDaYun,annual=current?.annual;
   const dyInteraction=current?.interactions?.daYunToNatal?.[0],annualRelations=current?.interactions?.liuNianToNatal||[];
   modules.timingContext={
+   r11Owned:true,
    blocks:[
     block(pick(
      `The selected Da Yun is ${dy?.pillar?.stem?.zh||''}${dy?.pillar?.branch?.zh||''} (${R11_TEN_GOD[dy?.stemTenGod?.code]||dy?.stemTenGod?.en||''}), while the annual layer is ${annual?.stem?.zh||''}${annual?.branch?.zh||''} (${R11_TEN_GOD[annual?.stemTenGod?.code]||annual?.stemTenGod?.en||''}). These layers add timing context to the natal chart; they do not replace it.`,
@@ -443,6 +445,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    boundary:pick('Timing relevance is not event certainty.','时间相关性不等于事件确定性。')
   };
   modules.currentYearInsight={
+   r11Owned:true,
    blocks:[
     block(pick(
      `The annual layer ${annual?.stem?.zh||''}${annual?.branch?.zh||''} brings wealth/exchange and officer/pressure functions into the selected window. The natal month and hour both contain ${annual?.branch?.zh||'the annual branch'}, and the recorded annual relations therefore revisit already-existing natal positions rather than creating a new chart.`,
@@ -486,8 +489,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  // Strengths, challenges and social style share the admitted observation set;
  // they are not fabricated independent measurements.
  modules.challenges={blocks:[]};modules.socialStyle={blocks:[]};
- modules.timingContext={blocks:[block(source(20).paragraphs[0],internal(20).evidence[0],'METHOD_INTERPRETATION'),block(e('S08_TIMING').bridge[locale],`${edRef}#S08_TIMING`)],temporal:{...source(20).temporal,generatedAt:temporalContext.generatedAt,localTime:temporalContext.localTime},observations:e('S08_TIMING').items.slice(0,2).map(x=>x[locale]),boundary:source(20).boundary};
- modules.currentYearInsight={blocks:source(21).paragraphs.map(t=>block(t,internal(21).evidence[0],'METHOD_INTERPRETATION')),temporal:modules.timingContext.temporal,observations:[e('S08_TIMING').items[2][locale],pick('What stayed consistent across the year boundary, despite the change in the named time layer?','时间层名称改变前后，哪些经验仍然保持一致？')],boundary:pick('The year layer frames observation; this reading does not identify specific events as opportunities or warnings.','流年层用于界定观察范围；本次读取不把具体事件判断为机会或预警。')};
+ if(!modules.timingContext?.r11Owned)modules.timingContext={blocks:[block(source(20).paragraphs[0],internal(20).evidence[0],'METHOD_INTERPRETATION'),block(e('S08_TIMING').bridge[locale],`${edRef}#S08_TIMING`)],temporal:{...source(20).temporal,generatedAt:temporalContext.generatedAt,localTime:temporalContext.localTime},observations:e('S08_TIMING').items.slice(0,2).map(x=>x[locale]),boundary:source(20).boundary};
+ if(!modules.currentYearInsight?.r11Owned)modules.currentYearInsight={blocks:source(21).paragraphs.map(t=>block(t,internal(21).evidence[0],'METHOD_INTERPRETATION')),temporal:modules.timingContext.temporal,observations:[e('S08_TIMING').items[2][locale],pick('What stayed consistent across the year boundary, despite the change in the named time layer?','时间层名称改变前后，哪些经验仍然保持一致？')],boundary:pick('The year layer frames observation; this reading does not identify specific events as opportunities or warnings.','流年层用于界定观察范围；本次读取不把具体事件判断为机会或预警。')};
  // Optional career timing is absent unless an upstream adapter supplies an
  // admitted career-specific module. Generic current-year data is insufficient.
  {
@@ -524,6 +527,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  // modules into denser customer pages. This is presentation ownership only;
  // no new BaZi meaning, calculation or provider prose is introduced here.
  const compactModule=(key,lead,parts,{maxBlocks=5,boundary=true}={})=>{
+  if(modules[key]?.r11Owned)return;
   const seen=new Set(),blocks=[];
   if(lead)blocks.push(block(lead,`${edRef}#R10_COMPRESSION`,'EDITORIAL_GUIDANCE'));
   for(const name of parts){
