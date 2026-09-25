@@ -53,7 +53,7 @@ for(const token of [
  'renderLossAtlas(content,{registry:data.loss,casesRegistry:data.cases,visualBindings:data.staticVisuals'
 ]) assert.ok(shell.includes(token),`Shell missing FR2 visual binding: ${token}`);
 
-assert.ok(staticVisual.includes("const componentOwned=new Set(['cases','comparison','trajectories','transitions','loss'])"),'FR2 component-owned layers must suppress duplicate generic primary visuals.');
+assert.ok(staticVisual.includes("const componentOwned=new Set(['timeline','world','cases','comparison','trajectories','transitions','loss'])"),'All seven Book V layers must own their visuals inside the layer interface.');
 assert.ok(css.includes('FR2 asset-led layer interfaces'),'FR2 asset-led CSS missing.');
 
 
@@ -62,5 +62,12 @@ assert.ok(cases.includes('civ-case-secondary'),'CASE_SECONDARY must be projected
 assert.ok(transitions.includes("'SCALE_SHIFT'"),'Transition scale shifts must use accepted SCALE_SHIFT visuals.');
 assert.ok(transitions.includes('civ-scale-shift-card'),'Scale shifts must render as visual interface cards.');
 assert.ok(css.includes('FR2 secondary case + scale shift visuals'),'FR2 secondary visual CSS missing.');
+
+
+assert.ok(timeline.includes('civ-timeline__focus-visual'),'Timeline anchor visual must live inside the era reader.');
+assert.ok(world.includes("'WORLD_SNAPSHOT_ATMOSPHERE'"),'World snapshot atmosphere must be consumed inside the World interface.');
+assert.ok(world.includes('civ-world__globe'),'World snapshot visual must occupy the map field, not a detached hero.');
+assert.ok(css.includes('FR2 atlas-board visual language'),'FR2 Atlas board theme missing.');
+assert.ok(css.includes('--phi-action-knowledge:#d5b36c'),'FR2 Atlas board must retain the gold interaction language.');
 
 console.log('B6-WEB-FR2 asset-led Atlas UI gate PASS: comparison board repaired and accepted visuals are structural layer components.');
