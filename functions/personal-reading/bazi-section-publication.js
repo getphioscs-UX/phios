@@ -78,7 +78,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   ),[byId(':PRIMARY'),byId(':SUPPORT'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/RESOURCE|CARRY/i.test(x.text))]);
 
   makeFacet('personalityExpression',pick(
-   'Expression is read separately from learning. A capability may be available internally yet require different conditions to be expressed, repeated or carried into visible output. The recorded links between self-position and expression refine this part of the reading.',
+   'Expression is separate from learning. A capability may exist internally yet need different conditions to become repeatable visible output. Recorded links between self-position and expression refine this reading.',
    '表达需要与学习分开阅读。一项能力可以已经存在于内部，但要变成可见输出、反复使用并持续承担，可能需要不同条件。命盘中自我位置与表达之间的已记录联结，会进一步修正这一层。'
   ),[...linkPairs,byId(':TENSION'),byId(':OPERATING_CONDITION')]);
 
