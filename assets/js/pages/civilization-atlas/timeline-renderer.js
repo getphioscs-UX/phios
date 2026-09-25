@@ -1,3 +1,4 @@
+import {resolveAtlasVisualById} from './atlas-static-visual.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
 const loc=(v,lang)=>v?.[lang]||v?.en||v?.['zh-Hans']||'';
 export const formatHistoricalYear=(year,lang='en')=>{
@@ -6,8 +7,8 @@ export const formatHistoricalYear=(year,lang='en')=>{
   return lang==='zh-Hans'?`公元${year}年`:`${year} CE`;
 };
 export const formatHistoricalRange=(a,b,lang='en')=>`${formatHistoricalYear(a,lang)} – ${formatHistoricalYear(b,lang)}`;
-export function renderTimeline(container,{registry,casesRegistry,state,locale='en',onPeriodSelect=()=>{},onCaseSelect=()=>{}}={}){
-  const lang=locale==='zh-Hans'?'zh-Hans':'en'; const periods=registry?.periods||[]; const caseMap=new Map((casesRegistry?.cases||[]).map(c=>[c.caseId,c]));
+export function renderTimeline(container,{registry,casesRegistry,visualBindings,state,locale='en',onPeriodSelect=()=>{},onCaseSelect=()=>{}}={}){
+  const lang=locale==='zh-Hans'?'zh-Hans':'en'; const periods=registry?.periods||[]; const caseMap=new Map((casesRegistry?.cases||[]).map(c=>[c.caseId,c])); const visual=id=>{const a=visualBindings?.assets?.find(x=>x.family==='TIMELINE_ANCHOR'&&x.subjectId===id);return a?resolveAtlasVisualById(visualBindings,a.assetId):null;};
   if(!periods.length){container.innerHTML=`<p>${lang==='zh-Hans'?'历史脊柱尚未激活。':'Timeline data is not active yet.'}</p>`;return;}
   const selected=periods.find(p=>p.periodId===state.timeWindowId)||periods.find(p=>state.time!==null&&state.time>=p.startYear&&state.time<=p.endYear)||periods[0];
   container.innerHTML=`<div class="civ-timeline" data-atlas-timeline>
@@ -21,7 +22,7 @@ export function renderTimeline(container,{registry,casesRegistry,state,locale='e
     <nav class="civ-timeline__navigator" aria-label="${esc(lang==='zh-Hans'?'切换历史时期':'Change historical period')}">
       <p class="civ-atlas-nav-label">${esc(lang==='zh-Hans'?'浏览其他时期':'Explore other periods')}</p>
       <div class="civ-timeline__track" role="list" aria-label="${esc(lang==='zh-Hans'?'文明历史时期':'Civilization periods')}">
-        ${periods.map(p=>`<button role="listitem" type="button" class="civ-timeline__period${selected?.periodId===p.periodId?' is-active':''}" data-period-id="${esc(p.periodId)}" aria-pressed="${selected?.periodId===p.periodId?'true':'false'}"><strong>${esc(loc(p.title,lang))}</strong><small>${esc(formatHistoricalRange(p.startYear,p.endYear,lang))}</small></button>`).join('')}
+        ${periods.map(p=>{const v=visual(p.periodId);return `<button role="listitem" type="button" class="civ-timeline__period${selected?.periodId===p.periodId?' is-active':''}" data-period-id="${esc(p.periodId)}" aria-pressed="${selected?.periodId===p.periodId?'true':'false'}">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span><strong>${esc(loc(p.title,lang))}</strong><small>${esc(formatHistoricalRange(p.startYear,p.endYear,lang))}</small></span></button>`}).join('')}
       </div>
     </nav>
     <details class="civ-atlas-detail-table"><summary>${lang==='zh-Hans'?'查看完整时间表':'View full timeline table'}</summary><div class="civ-atlas-table-wrap"><table class="civ-atlas-table"><caption class="civ-sr-only">${lang==='zh-Hans'?'文明历史时期完整表格':'Complete civilization timeline table'}</caption><thead><tr><th scope="col">${lang==='zh-Hans'?'时期':'Period'}</th><th scope="col">${lang==='zh-Hans'?'时间范围':'Range'}</th><th scope="col">${lang==='zh-Hans'?'历史主线':'Historical line'}</th><th scope="col">${lang==='zh-Hans'?'代表案例':'Cases'}</th></tr></thead><tbody>
