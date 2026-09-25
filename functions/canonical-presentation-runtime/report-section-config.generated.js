@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R6",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R7",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -161,50 +161,50 @@ export const registry = {
         },
         {
           "key": "S02_LEARNING_PROCESSING",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "personalityLearning"
           ],
           "title": {
-            "zh-Hans": "学习与处理方式",
-            "en": "Learning & Processing"
+            "zh-Hans": "学习与吸收",
+            "en": "Learning & Absorption"
           }
         },
         {
           "key": "S02_EXPRESSION_CAPABILITY",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "personalityExpression"
           ],
           "title": {
-            "zh-Hans": "能力如何表达",
-            "en": "Expression of Capability"
+            "zh-Hans": "表达与输出",
+            "en": "Expression & Output"
           }
         },
         {
           "key": "S02_FRICTION",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "personalityFriction"
           ],
           "title": {
-            "zh-Hans": "张力出现在哪里",
-            "en": "Where Friction Appears"
+            "zh-Hans": "张力与外部要求",
+            "en": "Friction & External Demands"
           }
         },
         {
           "key": "S02_RELIABILITY",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "personalityReliability"
           ],
           "title": {
-            "zh-Hans": "什么让能力变得稳定",
-            "en": "What Makes Capability Reliable"
+            "zh-Hans": "能力的稳定条件",
+            "en": "Conditions for Reliability"
           }
         },
         {
@@ -319,19 +319,19 @@ export const registry = {
             "lifeStructureSystem"
           ],
           "title": {
-            "zh-Hans": "结构怎样组织起来",
-            "en": "How the Structure Holds Together"
+            "zh-Hans": "整盘如何组织",
+            "en": "How the Chart Organizes"
           }
         },
         {
           "key": "S03_CONDITIONS",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "lifeStructureConditions"
           ],
           "title": {
-            "zh-Hans": "条件与未定判断",
+            "zh-Hans": "成立条件与开放判断",
             "en": "Conditions & Open Judgments"
           }
         },
@@ -394,32 +394,32 @@ export const registry = {
             "careerRoleSystem"
           ],
           "title": {
-            "zh-Hans": "角色与工作系统",
-            "en": "Role & Work System"
+            "zh-Hans": "你的工作结构",
+            "en": "Your Work Structure"
           }
         },
         {
           "key": "S04_WORKING_CONDITIONS",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "careerWorkingConditions"
           ],
           "title": {
-            "zh-Hans": "工作条件",
-            "en": "Working Conditions"
+            "zh-Hans": "适合怎样的工作条件",
+            "en": "Work Conditions That Matter"
           }
         },
         {
           "key": "S04_DIRECTION",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "careerDirection"
           ],
           "title": {
-            "zh-Hans": "事业方向",
-            "en": "Career Direction"
+            "zh-Hans": "事业发展的长期主线",
+            "en": "Long-Term Career Themes"
           }
         },
         {
@@ -495,32 +495,32 @@ export const registry = {
             "wealthResourceFlow"
           ],
           "title": {
-            "zh-Hans": "资源如何流动",
-            "en": "Resource Flow"
+            "zh-Hans": "你的资源流动方式",
+            "en": "Your Resource Flow"
           }
         },
         {
           "key": "S05_RETENTION",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "wealthRetentionPressure"
           ],
           "title": {
-            "zh-Hans": "资源留存与压力",
-            "en": "Retention & Pressure"
+            "zh-Hans": "资源如何被留住或消耗",
+            "en": "Retention, Demand & Outflow"
           }
         },
         {
           "key": "S05_REALITY_BOUNDARY",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "wealthRealityBoundary"
           ],
           "title": {
-            "zh-Hans": "现实边界",
-            "en": "Reality Boundary"
+            "zh-Hans": "财富解读的现实边界",
+            "en": "From Symbolic Wealth to Real Finance"
           }
         },
         {
@@ -582,32 +582,32 @@ export const registry = {
             "relationshipPosition"
           ],
           "title": {
-            "zh-Hans": "你在关系中的位置",
-            "en": "Your Position in Relationships"
+            "zh-Hans": "你在重要关系中的位置",
+            "en": "Your Position in Important Relationships"
           }
         },
         {
           "key": "S06_INTERACTION",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "relationshipInteraction"
           ],
           "title": {
-            "zh-Hans": "互动模式",
-            "en": "Interaction Pattern"
+            "zh-Hans": "关系如何形成互动",
+            "en": "How Interaction Takes Shape"
           }
         },
         {
           "key": "S06_BOUNDARIES",
-          "family": "NARRATIVE_ANALYSIS_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "relationshipBoundaries"
           ],
           "title": {
-            "zh-Hans": "边界与结果",
-            "en": "Boundaries & Outcomes"
+            "zh-Hans": "关系判断的边界",
+            "en": "What the Chart Can—and Cannot—Say"
           }
         },
         {
@@ -773,26 +773,26 @@ export const registry = {
         },
         {
           "key": "S09_PRIORITIES",
-          "family": "SUMMARY_PAGE",
+          "family": "NARRATIVE_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "guidancePriorities"
           ],
           "title": {
-            "zh-Hans": "跨章节主线",
-            "en": "Cross-Section Priorities"
+            "zh-Hans": "贯穿整份报告的主线",
+            "en": "Themes Across Your Report"
           }
         },
         {
           "key": "S09_CURRENT_FOCUS",
-          "family": "SUMMARY_PAGE",
+          "family": "STRUCTURED_ANALYSIS_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
             "guidanceCurrentFocus"
           ],
           "title": {
-            "zh-Hans": "当前行动重点",
-            "en": "Current Focus"
+            "zh-Hans": "现阶段最值得关注什么",
+            "en": "What Deserves Attention Now"
           }
         },
         {
@@ -894,7 +894,12 @@ export const registry = {
       "DETERMINISTIC_PERSONALIZED": "Personalized from admitted BaZi engine facts/relationships without provider generation.",
       "DYNAMIC_T3": "Not part of canonical customer publication; retained only as explicit editorial experiment evidence."
     },
-    "canonicalCustomerPublicationT3": false
+    "canonicalCustomerPublicationT3": false,
+    "publicationPolish": {
+      "version": "R7",
+      "rule": "Long-form narrative pages require reliable evidence density; shorter boundary/condition facets use structured analysis rather than filler.",
+      "noFiller": true
+    }
   }
 };
 
