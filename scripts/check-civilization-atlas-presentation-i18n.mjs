@@ -31,4 +31,10 @@ assert.ok(timeline.includes('civ-atlas-detail-table'),'Timeline full table must 
 assert.ok(worldRenderer.includes('civ-atlas-evidence-note'),'World evidence boundary must be progressive disclosure.');
 assert.ok(cases.includes('civ-atlas-evidence-note'),'Case evidence boundary must be progressive disclosure.');
 
+
+const reconfig=read('assets/js/pages/civilization-atlas/reconfiguration-renderer.js');
+assert.ok(reconfig.includes("const tabs=[['overview',c.overview],['cases',c.cases],['timeline',c.timeline],['snapshots',c.snapshots],['lived',c.lived],['compare',c.compare]]"),'Book VI primary navigation must stay reduced to six customer reading views.');
+assert.ok(reconfig.includes("const tools=[['search',c.search],['windows',c.windows],['dossiers',c.dossiers],['visuals',c.visuals],['dossiercompare',c.compareRuntime]]"),'Book VI secondary tools must remain available behind More tools.');
+assert.ok(reconfig.includes('civ-reconfig-more'),'Book VI secondary navigation must use progressive disclosure.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
