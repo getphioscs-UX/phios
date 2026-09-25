@@ -2,7 +2,7 @@
 
 ## Current state
 
-**MACHINE_PASS / HUMAN_REVIEW_PENDING**
+**QUALITY_REWORK_IN_PROGRESS / HUMAN_REVIEW_NOT_READY**
 
 R11 changes content quality only. The owner-approved R10 page count and 10 Section Master visual system remain unchanged.
 
@@ -101,6 +101,12 @@ Review the body content especially in:
 
 The Section Master visual design is frozen unless a rendering defect is found.
 
-Until explicit owner acceptance:
+Until the tightened quality gate passes and a new review package is generated:
 
-`R11 = HUMAN_REVIEW_PENDING`
+`R11 = QUALITY_REWORK_IN_PROGRESS`
+
+After that, and only then:
+
+`R11 = READY_FOR_OWNER_REVIEW`
+
+Owner acceptance remains separate from machine PASS.
