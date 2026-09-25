@@ -269,8 +269,10 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `This capability reading is anchored in ${R11_GROUP[t.leadGroup.groupCode]}. The recurring Ten-God pattern includes ${repeatedNames.join(', ')||'several repeated functions'}, so learning and support are not read in isolation from responsibility, pressure and self-position.`,
     `这张命盘的能力读取以「${R11_GROUP[t.leadGroup.groupCode]}」为入口；反复出现的十神包括${repeatedNames.join('、')||'多个重复功能'}。因此，学习与支持不能和责任、压力、自我位置分开阅读。`
    ),
-   r11TenGodStructure('QI_SHA'),
-   r11TenGodStructure('ZHENG_YIN'),
+   pick(
+    'Seven Killings and Direct Resource both recur across the chart and each reaches visible and hidden layers. Their coexistence keeps responsibility/pressure and learning/support inside the same capability frame without turning either one into a personality score.',
+    '七杀与正印都在命盘中重复出现，也都同时进入透干与藏干层。两者并存，使责任／压力与学习／支持处在同一个能力框架中，但任何一项都不应被写成人格评分。'
+   ),
    pick(
     'The output/expression group is not structurally prominent in this inventory. That is not the same as “no ability to express.” It means expression should not be inferred from a dominant output symbol here; the recorded relationship interfaces carry more of that question.',
     '这份清单中，输出／表达功能组并不突出。这不等于“没有表达能力”，而是说明这里不能靠一个强势输出符号直接推断表达；已记录的关系接口承担了更多关于表达方式的判断。'
@@ -354,11 +356,9 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `Career is anchored in ${R11_GROUP[t.leadGroup.groupCode]}. Seven Killings and Direct Officer both recur across visible and hidden layers, while Direct Resource also remains structurally active and Indirect Wealth repeats mainly through the hidden layer. The work question is therefore not simply “how much pressure is present,” but how responsibility, support and resource access are organized around the same role.`,
     `事业主题以「${R11_GROUP[t.leadGroup.groupCode]}」为主轴。七杀与正官都跨透干、藏干重复进入结构，正印也持续参与，而偏财主要保留在藏干层。真正要读的不是“压力有多少”，而是责任、支持与资源取得怎样围绕同一个角色被组织起来。`
    ),
-   r11TenGodStructure('QI_SHA'),
-   r11TenGodStructure('ZHENG_GUAN'),
    pick(
-    'Seven Killings and Direct Officer share the same rules/responsibility family, but the chart does not collapse them into one undifferentiated pressure signal. The Seven-Killings pattern path has a visible-stem match yet remains open, while the Wealth path also remains conditional. Career interpretation therefore needs to preserve the difference between a recurring responsibility structure and a completed pattern verdict.',
-    '七杀与正官同属官杀／规则责任体系，但命盘并没有把它们压成一个单一的“压力讯号”。七杀格路径虽有透干对应，仍未完成成立条件；财格路径也继续保持条件性。因此，事业解释必须区分“反复出现的责任结构”与“已经形成的格局结论”。'
+    'Seven Killings and Direct Officer both recur through visible and hidden layers, so responsibility is structurally repeated rather than carried by one isolated symbol. Yet the Seven-Killings pattern path remains open even with a visible-stem match, and the Wealth path also remains conditional. Career interpretation therefore keeps recurring responsibility separate from a completed pattern verdict.',
+    '七杀与正官都跨透干、藏干重复进入结构，因此责任并不是由一个孤立符号承担。但七杀格路径即使有透干对应，仍未完成成立条件；财格路径也继续保持条件性。因此，事业解释必须把“反复出现的责任结构”与“已经形成的格局结论”分开。'
    ),
    pick(
     `The carrying context is ${R11_CARRY[carry.overallTendency]||pick('mixed carrying conditions','混合承载条件')}. At the same time, the natal interfaces connect environment, self-position and expression through a stem combination, branch harms and self-punishment. In career terms, role demand, self-position and outward delivery therefore belong to one joined reading rather than three separate labels.`,
