@@ -155,9 +155,9 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    '得到资源与保留资源，是两个不同的结构问题。支持条件、竞争性要求、责任与交换压力，会共同影响资源能否被保留、重新调动，或持续被消耗。'
   ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION']},
   {key:'wealthRealityBoundary',lead:pick(
-   'The final wealth layer separates symbolic resource structure from real financial outcomes. Cross-chart priorities can show where resource themes repeat, while open conditions preserve the boundary between a method reading and an actual financial result.',
-   '最后一层财富读取，要把象征性的资源结构与真实财务结果分开。跨结构重点可以显示资源主题在哪里反复出现；未定条件则保留方法解读与现实财务结果之间的边界。'
-  ),types:['CROSS_SECTION_RELEVANCE','OPEN_CONDITION','CONTRAST']}
+   'The final wealth layer separates symbolic resource structure from real financial outcomes. Open conditions preserve the boundary between what the method can describe and what must still be established through actual financial evidence.',
+   '最后一层财富读取，要把象征性的资源结构与真实财务结果分开。未定条件会保留方法能够描述的范围，以及仍必须由真实财务证据确认的部分。'
+  ),types:['OPEN_CONDITION','CONTRAST']}
  ]);
 
  await makeDomainFacets('S06_RELATIONSHIP','RELATIONSHIPS',[
@@ -170,9 +170,9 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    '下一层是互动。柱位之间已记录的联结与张力，会显示期待、支持、责任与自我表达在哪里需要主动协商，而不是自然地朝同一方向运行。'
   ),types:['TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
   {key:'relationshipBoundaries',lead:pick(
-   'Relationship guidance becomes more reliable when repeated chart themes are separated from fixed outcome claims. Cross-chart relevance can identify recurring relational priorities, while open conditions keep marriage, separation and partner outcomes outside unsupported certainty.',
-   '关系建议只有在“反复结构”与“固定结果”被分开后才更可靠。跨结构重点可以识别持续出现的关系主线；未定条件则避免把婚姻、分离或伴侣结果写成没有依据的确定结论。'
-  ),types:['CROSS_SECTION_RELEVANCE','OPEN_CONDITION','CONTRAST']}
+   'Relationship guidance becomes more reliable when recurring interaction structure is separated from fixed outcome claims. Open conditions keep marriage, separation and partner outcomes outside unsupported certainty.',
+   '关系建议只有在反复出现的互动结构与固定结果被分开后才更可靠。未定条件会避免把婚姻、分离或伴侣结果写成没有依据的确定结论。'
+  ),types:['OPEN_CONDITION','CONTRAST']}
  ]);
  {
   const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S07_HEALTH',locale,temporalSnapshot:temporalContext});
