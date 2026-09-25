@@ -390,3 +390,94 @@
 .civ-scale-shift-card.is-open{border-style:dashed;border-color:var(--phi-action-knowledge)}
 @media(max-width:900px){.civ-scale-shifts>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.civ-scale-shifts>div{grid-template-columns:1fr}}
+
+
+/* FR2 atlas-board visual language */
+[data-civilization-atlas-root]{
+ --phi-text-primary:#f5f0e6;
+ --phi-text-secondary:#b8c4cf;
+ --phi-surface-solid:#081927;
+ --phi-surface-subtle:#0d2435;
+ --phi-border-strong:rgba(213,179,108,.42);
+ --phi-border-subtle:rgba(213,179,108,.18);
+ --phi-action-knowledge:#d5b36c;
+ color:var(--phi-text-primary);
+ background:
+   radial-gradient(circle at 15% 0%,rgba(70,110,140,.16),transparent 34%),
+   radial-gradient(circle at 90% 15%,rgba(213,179,108,.08),transparent 28%),
+   linear-gradient(180deg,#06131f,#081927 45%,#06131f);
+}
+[data-civilization-atlas-root] .civ-atlas-shell{max-width:1540px;margin-inline:auto}
+[data-civilization-atlas-root] .civ-atlas-canvas{
+ background:
+  radial-gradient(circle at 75% 8%,rgba(213,179,108,.06),transparent 22%),
+  linear-gradient(180deg,#081927,#0a1d2d);
+ border-color:rgba(213,179,108,.34);
+ box-shadow:0 22px 60px rgb(0 0 0 / .24);
+}
+[data-civilization-atlas-root] .civ-atlas-layer,
+[data-civilization-atlas-root] .civ-atlas-subview{
+ background:#0a1f30;
+ border-color:rgba(213,179,108,.22);
+}
+[data-civilization-atlas-root] .civ-atlas-layer.is-active,
+[data-civilization-atlas-root] .civ-atlas-subview.is-active{
+ background:#102b3e;
+ border-color:#d5b36c;
+ color:#fff4d6;
+}
+[data-civilization-atlas-root] .knowledge-action{
+ background:#102b3e;
+ border-color:rgba(213,179,108,.55);
+ color:#fff4d6;
+}
+[data-civilization-atlas-root] .knowledge-action:hover,
+[data-civilization-atlas-root] .knowledge-action:focus-visible{background:#17384e}
+[data-civilization-atlas-root] .knowledge-eyebrow{color:#d5b36c}
+[data-civilization-atlas-root] .civ-atlas-link{color:#f0d995}
+[data-civilization-atlas-root] summary{color:#e9d8aa}
+[data-civilization-atlas-root] input,
+[data-civilization-atlas-root] select{
+ background:#06131f;
+ color:#f5f0e6;
+ border-color:rgba(213,179,108,.35);
+}
+
+.civ-timeline__focus--reader{display:grid;grid-template-columns:minmax(15rem,.42fr) minmax(0,.58fr);gap:0;padding:0;overflow:hidden}
+.civ-timeline__focus-visual{width:100%;height:100%;min-height:20rem;object-fit:cover}
+.civ-timeline__focus-copy{padding:clamp(1rem,2vw,1.5rem)}
+.civ-timeline__focus-copy>p:not(.knowledge-eyebrow){line-height:1.75}
+
+.civ-world__globe{overflow:hidden;border-radius:var(--phi-radius-md);background:#05111b}
+.civ-world__globe>img{display:block;width:100%;height:100%;min-height:14rem;object-fit:cover}
+.civ-world__globe>span{display:grid;place-items:center;height:100%;min-height:12rem}
+
+[data-civilization-atlas-root] .civ-case-card,
+[data-civilization-atlas-root] .civ-family-node,
+[data-civilization-atlas-root] .civ-compare-case,
+[data-civilization-atlas-root] .civ-world-case-card,
+[data-civilization-atlas-root] .civ-trajectory-card--reader,
+[data-civilization-atlas-root] .civ-transition-reader,
+[data-civilization-atlas-root] .civ-loss-reader,
+[data-civilization-atlas-root] .civ-scale-shift-card{
+ background:linear-gradient(180deg,#0b2234,#081927);
+ border-color:rgba(213,179,108,.28);
+}
+[data-civilization-atlas-root] .civ-compare-matrix{
+ background:#081927;
+ border-color:rgba(213,179,108,.36);
+}
+[data-civilization-atlas-root] .civ-compare-matrix__corner,
+[data-civilization-atlas-root] .civ-compare-matrix__dimension{
+ background:#0a1f30;
+}
+[data-civilization-atlas-root] .civ-compare-matrix__case-head{
+ background:#10283a;
+}
+[data-civilization-atlas-root] .civ-compare-matrix__cell{
+ background:#081927;
+}
+@media(max-width:800px){
+ .civ-timeline__focus--reader{grid-template-columns:1fr}
+ .civ-timeline__focus-visual{min-height:0;max-height:24rem}
+}
