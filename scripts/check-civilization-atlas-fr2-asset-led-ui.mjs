@@ -56,4 +56,11 @@ for(const token of [
 assert.ok(staticVisual.includes("const componentOwned=new Set(['cases','comparison','trajectories','transitions','loss'])"),'FR2 component-owned layers must suppress duplicate generic primary visuals.');
 assert.ok(css.includes('FR2 asset-led layer interfaces'),'FR2 asset-led CSS missing.');
 
+
+assert.ok(cases.includes("'CASE_SECONDARY'"),'Active civilization cards must use accepted CASE_SECONDARY visuals when available.');
+assert.ok(cases.includes('civ-case-secondary'),'CASE_SECONDARY must be projected as a customer-facing secondary visual layer.');
+assert.ok(transitions.includes("'SCALE_SHIFT'"),'Transition scale shifts must use accepted SCALE_SHIFT visuals.');
+assert.ok(transitions.includes('civ-scale-shift-card'),'Scale shifts must render as visual interface cards.');
+assert.ok(css.includes('FR2 secondary case + scale shift visuals'),'FR2 secondary visual CSS missing.');
+
 console.log('B6-WEB-FR2 asset-led Atlas UI gate PASS: comparison board repaired and accepted visuals are structural layer components.');
