@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "ECR-V4.1A-R7-COMPOSITION-TAG-RULE-CANDIDATES-v1",
+  "status": "CANDIDATE_PENDING_HUMAN_REVIEW",
+  "model": [
+    "GATE_BASE",
+    "LINE_MODIFIER",
+    "DRIVER_ROLE",
+    "LAYER_ROLE",
+    "SEMANTIC_TAGS",
+    "RUNTIME_OWNER"
+  ],
+  "optionalEnglishEnrichment": {
+    "gateSpecificLineKeywords384": "OPTIONAL_SEMANTIC_ENRICHMENT",
+    "mayStopBlockingV41OnlyAfterOwnerAcceptsCompositionalModel": true,
+    "reason": "Bilingual Gate Base + bilingual generic Line + admitted Driver + admitted Layer can form the canonical bilingual model without forcing 384 Gate-specific English keywords."
+  },
+  "rules": [
+    {
+      "ruleId": "R7-COMP-01",
+      "meaning": "Only ACCEPTED exact-content factors may contribute semantic tags.",
+      "onMissingOrSourceGap": "CONTRIBUTE_NO_TAGS_AND_RECORD_GAP"
+    },
+    {
+      "ruleId": "R7-COMP-02",
+      "meaning": "Gate Base + Line Modifier + Driver Role + Layer Role contribute by explicit admitted tag membership; composition is set union plus governed tag rules.",
+      "forbidden": "NO_DIRECT_64x6_OWNER_TABLE"
+    },
+    {
+      "ruleId": "R7-COMP-03",
+      "meaning": "Tag rules may match only explicit admitted tags and declared conditions.",
+      "forbidden": "NO_KEYWORD_SIMILARITY_NO_LLM_INFERENCE_NO_GATE_NUMBER_OWNER"
+    },
+    {
+      "ruleId": "R7-COMP-04",
+      "meaning": "A SOURCE_GAP factor remains a visible gap. It must never be silently replaced by conventional astrology, Human Design, Gene Keys, or model-generated semantics.",
+      "onGap": "UNKNOWN_FOR_DEPENDENT_MEANING"
+    },
+    {
+      "ruleId": "R7-COMP-05",
+      "meaning": "Multiple owner surfaces are allowed through primaryOwner + secondaryOwners[].",
+      "forbidden": "NO_FORCED_SINGLE_OWNER"
+    },
+    {
+      "ruleId": "R7-COMP-06",
+      "meaning": "Equal priority among otherwise eligible outputs resolves to UNKNOWN.",
+      "onTie": "UNKNOWN"
+    },
+    {
+      "ruleId": "R7-COMP-07",
+      "meaning": "Missing required semantic tag resolves to UNKNOWN for the dependent composition/card/topic.",
+      "onMissingTag": "UNKNOWN"
+    },
+    {
+      "ruleId": "R7-COMP-08",
+      "meaning": "Customer wording must come from admitted customer meaning refs; raw source wording and source-brand identity are not automatically public.",
+      "forbidden": "NO_RAW_SOURCE_BRANDING"
+    },
+    {
+      "ruleId": "R7-COMP-09",
+      "meaning": "Human acceptance is exact-content bound. Any semantic content change invalidates the prior ACCEPT.",
+      "binding": "SHA_OR_ACCEPTED_CONTENT_EXACT_MATCH"
+    },
+    {
+      "ruleId": "R7-COMP-10",
+      "meaning": "Current Reality remains OBSERVATION + COMPARISON only in V4.1.",
+      "forbidden": "NO_DYNAMIC_DRIVER_PRIORITY_BOTTLENECK_DRIFT_RECOVERY_STATE_ACTION_CONCLUSION"
+    }
+  ]
+}
