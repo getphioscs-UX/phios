@@ -134,12 +134,53 @@ assert.ok(priorAtlasData,'Book V atlas-data maintenance predecessor is required'
 assert.equal(bookViDataSuccessor.change.previousSha256,priorAtlasData.successorSha256);
 assert.equal(bookViDataSuccessor.change.changeClass,'NEW_ATLAS_RELEASE_SUCCESSOR');
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessor.change.changeClass));
-assert.equal(digest(bookViDataSuccessor.change.path),bookViDataSuccessor.change.successorSha256,'Book VI atlas-data successor digest drift');
 assert.equal(bookViDataSuccessor.scope.bookVCanonicalTheoryChanged,false);
 assert.equal(bookViDataSuccessor.scope.bookVHistoricalRegistriesChanged,false);
 assert.equal(bookViDataSuccessor.scope.parallelAtlasRuntimeCreated,false);
 assert.equal(bookViDataSuccessor.scope.parallelAskRuntimeCreated,false);
+
+// v1 is a historical successor step, not necessarily the current file state.
 authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessor.change.successorSha256,changeClass:bookViDataSuccessor.change.changeClass});
+
+// B6-WEB-C/D extended the same shared loader after v1. Preserve the chain with
+// a second versioned successor rather than rewriting v1 or the Book V freeze.
+const bookViDataSuccessorV2=json('content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v2.json');
+assert.equal(bookViDataSuccessorV2.status,'ACTIVE_VERSIONED_SUCCESSOR');
+assert.equal(bookViDataSuccessorV2.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v1.json');
+assert.equal(bookViDataSuccessorV2.change.path,bookViDataSuccessor.change.path);
+assert.equal(bookViDataSuccessorV2.change.previousSha256,bookViDataSuccessor.change.successorSha256);
+assert.equal(bookViDataSuccessorV2.change.changeClass,'NEW_ATLAS_RELEASE_SUCCESSOR');
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV2.change.changeClass));
+assert.equal(digest(bookViDataSuccessorV2.change.path),bookViDataSuccessorV2.change.successorSha256,'Book VI atlas-data successor v2 digest drift');
+assert.equal(bookViDataSuccessorV2.scope.bookVCanonicalTheoryChanged,false);
+assert.equal(bookViDataSuccessorV2.scope.bookVHistoricalRegistriesChanged,false);
+assert.equal(bookViDataSuccessorV2.scope.parallelAtlasRuntimeCreated,false);
+assert.equal(bookViDataSuccessorV2.scope.parallelAskRuntimeCreated,false);
+const atlasDataSource=read(bookViDataSuccessorV2.change.path);
+assert.match(atlasDataSource,/loadReconfigurationRelationships/);
+assert.match(atlasDataSource,/loadReconfigurationKnowledgeStates/);
+authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessorV2.change.successorSha256,changeClass:bookViDataSuccessorV2.change.changeClass});
+
+// B6-WEB-E extended the same shared loader with visual-status and approved-binding
+// loaders. Keep that as a third successor step rather than mutating v2 history.
+const bookViDataSuccessorV3=json('content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v3.json');
+assert.equal(bookViDataSuccessorV3.status,'ACTIVE_VERSIONED_SUCCESSOR');
+assert.equal(bookViDataSuccessorV3.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v2.json');
+assert.equal(bookViDataSuccessorV3.change.path,bookViDataSuccessorV2.change.path);
+assert.equal(bookViDataSuccessorV3.change.previousSha256,bookViDataSuccessorV2.change.successorSha256);
+assert.equal(bookViDataSuccessorV3.change.changeClass,'NEW_ATLAS_RELEASE_SUCCESSOR');
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV3.change.changeClass));
+assert.equal(digest(bookViDataSuccessorV3.change.path),bookViDataSuccessorV3.change.successorSha256,'Book VI atlas-data successor v3 digest drift');
+assert.equal(bookViDataSuccessorV3.scope.bookVCanonicalTheoryChanged,false);
+assert.equal(bookViDataSuccessorV3.scope.bookVHistoricalRegistriesChanged,false);
+assert.equal(bookViDataSuccessorV3.scope.parallelAtlasRuntimeCreated,false);
+assert.equal(bookViDataSuccessorV3.scope.parallelAskRuntimeCreated,false);
+const atlasDataV3Source=read(bookViDataSuccessorV3.change.path);
+assert.match(atlasDataV3Source,/loadReconfigurationVisualStatus/);
+assert.match(atlasDataV3Source,/loadCivilizationVisualBindings/);
+assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json')));
+assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json')));
+authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessorV3.change.successorSha256,changeClass:bookViDataSuccessorV3.change.changeClass});
 
 for(const f of freeze.frozenFiles){
   assert.ok(fs.existsSync(path.join(root,f.path)),`frozen file missing: ${f.path}`);
@@ -156,5 +197,5 @@ console.log('✓ BOOK-V-CIV-ATLAS-R1-W16 Production Admission + Freeze passed.')
 console.log('  W15 human acceptance is explicit; 20/120/6/15/16/32/24 registry surface admitted.');
 console.log(`  ${freeze.frozenFiles.length} authority/runtime/customer files are digest-frozen.`);
 if(maintenance) console.log(`  Authorized maintenance successor: ${maintenance.work} · ${maintenance.status}.`);
-console.log('  Book VI shared data-loader extension is reconciled by a versioned NEW_ATLAS_RELEASE_SUCCESSOR record.');
+console.log('  Book VI shared data-loader extensions are reconciled through v3 chained NEW_ATLAS_RELEASE_SUCCESSOR records.');
 console.log('  Future substantive changes require a versioned successor / maintenance record.');
