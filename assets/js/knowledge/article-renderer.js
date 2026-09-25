@@ -571,7 +571,7 @@ function renderExitNavigation(documentRef, article, translate) {
 
 function renderHeroVisual(documentRef, article) {
   if (!article.hero?.assetCode) {
-    if (article.sourceReading?.path) return null;
+    if (article.sourceReading) return null;
     const figure=documentRef.createElement('figure');figure.className='knowledge-article__hero-visual';
     const image=documentRef.createElement('img');image.setAttribute('data-ks-asset','HERO-004');image.alt='';image.loading='eager';figure.append(image);return figure;
   }
