@@ -34,8 +34,12 @@ for (const entry of inventory.generatedSnapshots) {
 assert.equal(pkg.scripts['check:ptrc:w9-testamentary-report'], 'node scripts/check-ptrc-w9-testamentary-report.mjs');
 assert.ok(pkg.scripts.check.endsWith('npm run check:ptrc:w9-testamentary-report && npm run check:ptrc:w10-consolidation'));
 assert.ok(pkg.scripts['check:ptrc:machine'].startsWith('node scripts/check-ptrc-w0-production-truth-baseline.mjs && '));
-assert.equal(fs.readFileSync('.node-version', 'utf8').trim(), '24.18.0');
+const nodePin = json('content/production-truth/consolidation/ptrc-w10-node-runtime-pin-successor-v1.json');
+assert.equal(nodePin.status, 'ACTIVE_NODE_PIN_RECONCILIATION');
+assert.equal(fs.readFileSync('.node-version', 'utf8').trim(), nodePin.currentNodeVersion);
+assert.equal(nodePin.currentNodeVersion, '22.16.0');
 const workflow = fs.readFileSync('.github/workflows/ptrc-validation.yml', 'utf8');
+assert.ok(workflow.includes('node-version-file: .node-version'));
 for (const command of ['npm ci', 'npm run check:ptrc:machine', 'npm run check']) assert.ok(workflow.includes(command));
 assert.equal(candidate.deployment.preview, null);
 assert.equal(candidate.deployment.production, null);
