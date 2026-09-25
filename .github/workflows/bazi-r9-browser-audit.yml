@@ -1,4 +1,4 @@
-name: BaZi R10 Compressed Browser Audit
+name: BaZi R11 Canonical Browser + Physical PDF Audit
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: bazi-r10-compressed-browser-audit
+  group: bazi-r11-canonical-browser-pdf-audit
   cancel-in-progress: true
 
 jobs:
@@ -38,9 +38,11 @@ jobs:
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Build R9 browser runtime
+      - name: Build R11 browser runtime
         run: node scripts/sync-bazi-r9-review-browser.mjs
-      - name: Build R9 review snapshots
+      - name: Materialize canonical R11 review snapshots
+        run: node scripts/build-bazi-r9-review.mjs
+      - name: Build R11 browser audit fixture
         run: node scripts/build-bazi-r9-browser-review.mjs
       - name: Start local review server
         run: |
@@ -58,6 +60,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: bazi-r10-compressed-browser-audit
+          name: bazi-r11-canonical-browser-pdf-audit
           path: artifacts/bazi-r9-browser
           if-no-files-found: error
