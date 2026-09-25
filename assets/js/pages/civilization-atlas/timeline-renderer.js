@@ -10,14 +10,15 @@ export const formatHistoricalRange=(a,b,lang='en')=>`${formatHistoricalYear(a,la
 export function renderTimeline(container,{registry,casesRegistry,visualBindings,state,locale='en',onPeriodSelect=()=>{},onCaseSelect=()=>{}}={}){
   const lang=locale==='zh-Hans'?'zh-Hans':'en'; const periods=registry?.periods||[]; const caseMap=new Map((casesRegistry?.cases||[]).map(c=>[c.caseId,c])); const visual=id=>{const a=visualBindings?.assets?.find(x=>x.family==='TIMELINE_ANCHOR'&&x.subjectId===id);return a?resolveAtlasVisualById(visualBindings,a.assetId):null;};
   if(!periods.length){container.innerHTML=`<p>${lang==='zh-Hans'?'历史脊柱尚未激活。':'Timeline data is not active yet.'}</p>`;return;}
-  const selected=periods.find(p=>p.periodId===state.timeWindowId)||periods.find(p=>state.time!==null&&state.time>=p.startYear&&state.time<=p.endYear)||periods[0];
+  const selected=periods.find(p=>p.periodId===state.timeWindowId)||periods.find(p=>state.time!==null&&state.time>=p.startYear&&state.time<=p.endYear)||periods[0]; const selectedVisual=visual(selected?.periodId);
   container.innerHTML=`<div class="civ-timeline" data-atlas-timeline>
     <article class="civ-timeline__focus civ-timeline__focus--reader">
-      <p class="knowledge-eyebrow">${esc(formatHistoricalRange(selected.startYear,selected.endYear,lang))}</p><h4>${esc(loc(selected.title,lang))}</h4>
+      ${selectedVisual?`<img class="civ-timeline__focus-visual" src="${esc(selectedVisual.publicUrl)}" alt="" loading="eager" decoding="async">`:''}
+      <div class="civ-timeline__focus-copy"><p class="knowledge-eyebrow">${esc(formatHistoricalRange(selected.startYear,selected.endYear,lang))}</p><h4>${esc(loc(selected.title,lang))}</h4>
       <p>${esc(loc(selected.summary,lang))}</p>
       <dl class="civ-atlas-meta civ-atlas-meta--compact"><div><dt>${lang==='zh-Hans'?'代表文明':'Civilizations'}</dt><dd>${selected.caseIds?.length||0}</dd></div></dl>
       ${selected.caseIds?.length?`<div class="civ-atlas-related"><h5>${lang==='zh-Hans'?'继续看这一时期的文明':'Explore civilizations in this period'}</h5>${selected.caseIds.map(id=>{const c=caseMap.get(id);return `<button type="button" class="knowledge-action knowledge-action--quiet" data-case-id="${esc(id)}">${esc(c?loc(c.title,lang):(lang==='zh-Hans'?'文明案例':'Civilization case'))}</button>`}).join('')}</div>`:''}
-      ${selected.unknown?.note?`<details class="civ-atlas-evidence-note"><summary>${lang==='zh-Hans'?'关于这个分期':'About this periodization'}</summary><p>${esc(loc(selected.unknown.note,lang))}</p></details>`:''}
+      ${selected.unknown?.note?`<details class="civ-atlas-evidence-note"><summary>${lang==='zh-Hans'?'关于这个分期':'About this periodization'}</summary><p>${esc(loc(selected.unknown.note,lang))}</p></details>`:''}</div>
     </article>
     <nav class="civ-timeline__navigator" aria-label="${esc(lang==='zh-Hans'?'切换历史时期':'Change historical period')}">
       <p class="civ-atlas-nav-label">${esc(lang==='zh-Hans'?'浏览其他时期':'Explore other periods')}</p>
