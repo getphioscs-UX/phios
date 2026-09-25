@@ -78,7 +78,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   makeFacet('personalityExpression',pick(
    'Expression is separate from learning. A capability may exist internally yet need different conditions to become repeatable visible output. Recorded links between self-position and expression refine this reading.',
    '表达需要与学习分开阅读。一项能力可以已经存在于内部，但要变成可见输出、反复使用并持续承担，可能需要不同条件。命盘中自我位置与表达之间的已记录联结，会进一步修正这一层。'
-  ),[...linkPairs,byId(':TENSION'),byId(':OPERATING_CONDITION')]);
+  ),[...linkPairs,byId(':OPERATING_CONDITION')]);
 
   makeFacet('personalityFriction',pick(
    'Friction is not treated as a flaw. It is the part of the structure where support, expression, standards or external demand do not automatically move in the same direction. Repeated tension across chart positions shows where capability may need more deliberate coordination.',
@@ -88,7 +88,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   makeFacet('personalityReliability',pick(
    'Reliability asks a different question from talent: can the capability remain usable when expression, responsibility and demand continue over time? Carrying conditions and unresolved strength judgments therefore belong here, without being converted into a fixed strong-or-weak identity.',
    '稳定性问的不是“有没有能力”，而是当表达、责任与要求持续存在时，这项能力是否仍然可用。因此，承载条件与尚未定论的强弱判断应该放在这里阅读，而不能被转换成固定的身强或身弱身份。'
-  ),[byId(':OPERATING_CONDITION'),byId(':OPEN_STRENGTH'),...claims.filter(x=>x.id.includes(':WHOLE_')&&/carry|承载/i.test(x.text))]);
+  ),[byId(':OPERATING_CONDITION'),byId(':OPEN_STRENGTH')]);
  }
  // Domain-specific deterministic facets keep the publication readable without
  // creating new method meaning. Each facet selects licensed claims from the
@@ -127,7 +127,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {key:'lifeStructureConditions',lead:pick(
    'The second question is whether the visible structure can be sustained. Pattern candidates, tension, carrying limits and unresolved conditions belong together here because they determine how far an interpretation can safely go.',
    '第二个问题是：眼前可见的结构能否被持续承载。格局候选、张力、承载限制与未定条件必须放在一起，因为它们共同决定这份解释可以走多远。'
-  ),types:['TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER','CROSS_SECTION_RELEVANCE','OPEN_CONDITION','ASSOCIATION']}
+  ),types:['TENSION','OPERATING_CONDITION','OPEN_CONDITION']}
  ]);
 
  await makeDomainFacets('S04_CAREER','CAREER',[
@@ -138,11 +138,11 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {key:'careerWorkingConditions',lead:pick(
    'A role can look suitable on paper and still become difficult when authority, standards, support or workload are mismatched. This page focuses on the conditions that make the same capability easier or harder to carry in practice.',
    '一个角色在名称上看起来合适，仍可能因为权限、标准、支持或工作量不匹配而变得困难。本页关注的是：什么条件会让同一套能力在现实中更容易或更难持续运作。'
-  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION']},
   {key:'careerDirection',lead:pick(
    'Career direction is read from repeated themes across the chart rather than from a single profession label. Cross-chart priorities and unresolved conditions help separate a durable work pattern from a temporary or incomplete signal.',
    '事业方向应从整盘反复出现的主题中读取，而不是从一个职业标签直接推出。跨结构重点与未定条件，可以帮助区分长期工作模式与暂时或尚未完成的讯号。'
-  ),types:['CROSS_SECTION_RELEVANCE','OPEN_CONDITION','CONTRAST']}
+  ),types:['OPEN_CONDITION','CONTRAST']}
  ]);
 
  await makeDomainFacets('S05_WEALTH','WEALTH',[
@@ -153,7 +153,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {key:'wealthRetentionPressure',lead:pick(
    'Receiving resources and keeping them are different structural questions. Support, competing demands, responsibility and exchange pressure determine whether resources can be retained, redirected or repeatedly consumed.',
    '得到资源与保留资源，是两个不同的结构问题。支持条件、竞争性要求、责任与交换压力，会共同影响资源能否被保留、重新调动，或持续被消耗。'
-  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION']},
   {key:'wealthRealityBoundary',lead:pick(
    'The final wealth layer separates symbolic resource structure from real financial outcomes. Cross-chart priorities can show where resource themes repeat, while open conditions preserve the boundary between a method reading and an actual financial result.',
    '最后一层财富读取，要把象征性的资源结构与真实财务结果分开。跨结构重点可以显示资源主题在哪里反复出现；未定条件则保留方法解读与现实财务结果之间的边界。'
@@ -168,7 +168,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {key:'relationshipInteraction',lead:pick(
    'The next layer is interaction. Recorded links and tensions between chart positions show where expectations, support, responsibility and self-expression may need active negotiation instead of moving automatically in the same direction.',
    '下一层是互动。柱位之间已记录的联结与张力，会显示期待、支持、责任与自我表达在哪里需要主动协商，而不是自然地朝同一方向运行。'
-  ),types:['SUPPORT_CONDITION','TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
+  ),types:['TENSION','OPERATING_CONDITION','CONTEXT_MODIFIER']},
   {key:'relationshipBoundaries',lead:pick(
    'Relationship guidance becomes more reliable when repeated chart themes are separated from fixed outcome claims. Cross-chart relevance can identify recurring relational priorities, while open conditions keep marriage, separation and partner outcomes outside unsupported certainty.',
    '关系建议只有在“反复结构”与“固定结果”被分开后才更可靠。跨结构重点可以识别持续出现的关系主线；未定条件则避免把婚姻、分离或伴侣结果写成没有依据的确定结论。'
@@ -178,13 +178,10 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S07_HEALTH',locale,temporalSnapshot:temporalContext});
   const claims=authority.claims.filter(x=>x.relationType!=='BOUNDARY');
   const first=type=>claims.find(x=>x.relationType===type);
-  const cross=claims.filter(x=>x.relationType==='CROSS_SECTION_RELEVANCE').slice().sort((a,b)=>(a.wholeChartRank??a.rank??99)-(b.wholeChartRank??b.rank??99))[0];
   const selected=[
    first('LIFE_DOMAIN_EXPLANATION'),
    first('TENSION'),
-   first('OPERATING_CONDITION'),
-   cross,
-   first('OPEN_CONDITION')
+   first('OPERATING_CONDITION')
   ].filter(Boolean);
   modules.healthNarrative={blocks:[
    block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'),
