@@ -29,5 +29,7 @@ jobs:
       - run: npm ci
       - name: Static B6-WEB-E contracts
         run: npm run check:b6-web-e
+      - name: B6-WEB-C and B6-WEB-D predecessor regressions
+        run: npm run check:b6-web-c && npm run check:b6-web-d
       - name: Live R2 23-core-visual probe
         run: npm run check:b6-web-e:live
