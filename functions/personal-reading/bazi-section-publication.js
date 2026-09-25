@@ -193,7 +193,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    '最有价值的建议，来自在整张命盘不同部分反复出现的主题。本页把这些重复主线按阅读顺序重新收拢，让它们可以转化成行动重点，而不是把整份报告压成一个单一结论。'
   ),ranked);
   mk('guidanceCurrentFocus',pick(
-   'Current focus depends on which of those recurring themes are relevant to the present timing layer and which judgments still remain open. The aim is to identify what deserves attention now while keeping temporary emphasis separate from permanent structure.',
+   'Current focus depends on which of those recurring themes are relevant to the present timing layer and which judgments still remain open. The aim is to identify what deserves attention now while carefully keeping temporary emphasis separate from permanent structure.',
    '当前重点要看哪些重复主线正在与现阶段时间层发生关联，同时保留仍未确定的判断。目标是找出现在最值得注意的内容，同时把阶段性放大与长期结构清楚分开。'
   ),[...temporal,...open]);
  }
