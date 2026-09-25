@@ -695,6 +695,29 @@ function renderHeader(documentRef, article, translate) {
   return header;
 }
 
+function renderSourceProvenance(documentRef, article) {
+  const source=article.sourceReading;
+  if(!source || source.path) return null;
+  const sections=Array.isArray(source.sourceSections)?source.sourceSections.filter(Boolean):[];
+  const start=Number(source.pages?.start),end=Number(source.pages?.end);
+  const pages=Number.isFinite(start)&&Number.isFinite(end)?`${start}–${end}`:'';
+  if(!sections.length && !pages) return null;
+  const details=documentRef.createElement('details');
+  details.className='knowledge-article__source-reading';
+  details.id='manuscript';
+  const summary=documentRef.createElement('summary');
+  summary.textContent=article.locale==='zh-Hans'?'书稿来源':'Manuscript source';
+  details.append(summary);
+  const body=documentRef.createElement('div');
+  appendText(documentRef,body,'p',article.locale==='zh-Hans'
+    ?'本文依据已完成书稿整理；公开页面保留来源章节与页码，但不公开嵌入私有书稿全文。'
+    :'This article is grounded in the completed manuscript. The public page preserves section and page provenance without embedding the private manuscript text.');
+  if(sections.length) appendText(documentRef,body,'p',(article.locale==='zh-Hans'?'来源章节：':'Source sections: ')+sections.join(' · '));
+  if(pages) appendText(documentRef,body,'p',(article.locale==='zh-Hans'?'来源页码：':'Source pages: ')+pages);
+  details.append(body);
+  return details;
+}
+
 export function renderArticleDocument(
   documentRef,
   articleInput,
@@ -725,6 +748,8 @@ export function renderArticleDocument(
   ));
   layout.append(renderArticleAside(documentRef, article, translate));
   container.append(layout);
+  const provenanceOnly=renderSourceProvenance(documentRef,article);
+  if(provenanceOnly) container.append(provenanceOnly);
   if (article.sourceReading?.path) {
     const details = documentRef.createElement('details');
     details.className = 'knowledge-article__source-reading';
