@@ -85,7 +85,7 @@ export const BAZI_SECTION_EDITORIAL={
  },
  S06_RELATIONSHIP:{
   intro:pair(
-   'Relationships & Marriage reads how the chart approaches closeness, reciprocity, expectations, responsibility and personal position within important bonds. It does not reduce another person to a symbol; instead, it examines the recurring relational functions carried by this chart.',
+   'Relationships & Marriage reads how the chart approaches closeness, reciprocity, expectations, responsibility and personal position within important bonds over time. It does not reduce another person to a symbol; instead, it examines the recurring relational functions carried by this chart.',
    '感情婚姻读取的是命盘在重要关系中如何处理亲近、互惠、期待、责任，以及自己的位置。它不会把另一个人压缩成一个符号，而是观察这张命盘反复携带怎样的关系功能。'
   ),
   bridge:pair(
@@ -115,7 +115,7 @@ export const BAZI_SECTION_EDITORIAL={
  },
  S08_TIMING:{
   intro:pair(
-   'Timing & Cycles adds movement to the natal structure. The birth chart remains the base; luck cycles and annual layers show which parts of that structure are being revisited, supported, challenged or made more visible during a defined period.',
+   'Timing & Cycles adds movement to the natal structure. The birth chart remains the base; luck cycles and annual layers show clearly which parts of that structure are being revisited, supported, challenged or made more visible during a defined period.',
    '时间结构是在本命结构之上加入“变化”。本命仍是底图；大运与流年显示在特定时期里，命盘中的哪些部分被重新触发、得到支持、受到挑战，或变得更加明显。'
   ),
   bridge:pair(
@@ -130,7 +130,7 @@ export const BAZI_SECTION_EDITORIAL={
  },
  S09_GUIDANCE:{
   intro:pair(
-   'Guidance & Recommendations brings the report back together. Instead of adding every chapter into one final verdict, it identifies the recurring structural themes that matter across work, resources, relationships and timing, then translates them into practical points of attention.',
+   'Guidance & Recommendations brings the report back together. Instead of adding every chapter into one final verdict, it identifies the recurring structural themes that matter across work, resources, relationships and timing, then translates them into clear practical points of attention.',
    '人生建议把整份报告重新收拢。它不是把所有章节相加成一个最终结论，而是找出在事业、资源、关系与时间中反复出现的结构主题，再把这些主题转换成现实中值得注意的行动重点。'
   ),
   bridge:pair(
