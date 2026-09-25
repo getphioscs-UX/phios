@@ -1,13 +1,26 @@
-name: BaZi R9 Browser Audit
+name: BaZi R10 Compressed Browser Audit
 
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
       - ".github/workflows/bazi-r9-browser-audit.yml"
+      - "scripts/build-bazi-r9-browser-review.mjs"
+      - "scripts/audit-bazi-r9-browser.mjs"
+      - "scripts/sync-bazi-r9-review-browser.mjs"
+      - "functions/personal-reading/bazi-section-publication.js"
+      - "functions/canonical-presentation-runtime/report-section-config.generated.js"
+      - "config/reports/bazi-section-registry.json"
+      - "assets/customer-ui/js/personal-products/publication-report-pages.js"
+      - "assets/customer-ui/surfaces/report-publication.css"
 
 permissions:
   contents: read
+
+concurrency:
+  group: bazi-r10-compressed-browser-audit
+  cancel-in-progress: true
 
 jobs:
   browser-audit:
@@ -45,6 +58,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: bazi-r9-browser-audit
+          name: bazi-r10-compressed-browser-audit
           path: artifacts/bazi-r9-browser
           if-no-files-found: error
