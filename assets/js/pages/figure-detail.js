@@ -6,7 +6,8 @@ import {
   loadCanonicalParts,
   loadFiveVolumePublicationContextRegistry,
   loadFigureRegistry,
-  resolveFigurePublicationContext
+  resolveFigurePublicationContext,
+  resolveCanonicalVisual
 } from '../web-production/public-surface-data.js';
 import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
 
@@ -17,6 +18,7 @@ let englishCaptions = {};
 let partsRegistry = null;
 let booksRegistry = null;
 let publicationContextRegistry = null;
+let resolvedFigureSrc = null;
 
 function escapeHtml(value) {
   return String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
@@ -30,7 +32,7 @@ function render() {
   const locale = getLocale();
   const title = figure.title?.[locale] || figure.title?.en || figure.figure_number;
   const caption = locale === 'en' ? englishCaptions[figure.figure_id] || figure.purpose : figure.purpose;
-  const src = figurePublicSrc(figure);
+  const src = resolvedFigureSrc || figurePublicSrc(figure);
   const context = resolveFigurePublicationContext(figure, booksRegistry, partsRegistry, publicationContextRegistry);
   const bookTitle = context?.bookTitle?.[locale] || context?.bookTitle?.en || '';
   const askHref = buildCkaEntryHref({
@@ -70,6 +72,19 @@ Promise.all([
   partsRegistry = parts;
   publicationContextRegistry = contextRegistry;
   englishCaptions = translation.captions;
+  const resolveFigureAsset = async () => {
+    resolvedFigureSrc = null;
+    if (!figure?.asset_code) return;
+    const resolved = await resolveCanonicalVisual(figure.asset_code, { surface: 'FIGURE_DETAIL', locale: getLocale() });
+    if (resolved?.renderable) resolvedFigureSrc = resolved.src;
+  };
+  resolveFigureAsset().finally(render);
+});
+onLocaleChange(async () => {
+  resolvedFigureSrc = null;
+  if (figure?.asset_code) {
+    const resolved = await resolveCanonicalVisual(figure.asset_code, { surface: 'FIGURE_DETAIL', locale: getLocale() });
+    if (resolved?.renderable) resolvedFigureSrc = resolved.src;
+  }
   render();
 });
-onLocaleChange(render);

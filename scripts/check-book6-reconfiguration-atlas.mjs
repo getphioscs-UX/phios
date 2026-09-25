@@ -49,17 +49,29 @@ assert.equal(rels.relationships.length,85);
 assert.equal(visuals.expectedCoreAssets,23);
 assert.equal(visuals.assets.length,23);
 assert.deepEqual(visuals.snapshotSummary,{expected:12,present:12,missing:0,unverified:0});
-assert.deepEqual(visuals.coreSummary,{expected:23,present:15,missing:8,unverified:0});
-assert.equal(visuals.liveProbe?.status,'PASS');
+const coreCounts={expected:23,present:visuals.assets.filter(a=>a.status==='PRESENT').length,missing:visuals.assets.filter(a=>a.status==='MISSING').length,unverified:visuals.assets.filter(a=>a.status==='UNVERIFIED').length};
+assert.deepEqual(visuals.coreSummary,coreCounts);
 const snapshot2026=visuals.assets.find(a=>a.assetId==='WORLD_RECONFIGURATION_SNAPSHOT_2026');
 assert.equal(snapshot2026?.status,'PRESENT');
+assert.equal(snapshot2026?.liveProbe?.status,'PRESENT');
 assert.equal(snapshot2026?.liveProbe?.httpStatus,200);
-assert.equal(snapshot2026?.liveProbe?.contentType,'image/webp');
+assert.ok(String(snapshot2026?.liveProbe?.contentType||'').toLowerCase().startsWith('image/webp'));
 assert.equal(snapshot2026?.liveProbe?.webpSignature,true);
-for(const id of ['FIG_13A','FIG_13B','FIG_13C','FIG_13D','FIG_13E','FIG_13F','FIG_13G','FIG_13H']){
- const v=visuals.assets.find(a=>a.assetId===id);
- assert.equal(v?.status,'MISSING',id+' must remain truthfully missing until a future live resolver probe succeeds');
- assert.equal(v?.liveProbe?.httpStatus,404);
+for(const letter of 'ABCDEFGH'){
+ const id='FIG_13'+letter,v=visuals.assets.find(a=>a.assetId===id);
+ assert.ok(v,id+' visual status missing');
+ assert.equal(v.expectedR2Path,'images/figures/books/book-6/13'+letter+'.webp');
+ assert.ok(['PRESENT','MISSING','UNVERIFIED'].includes(v.status));
+ if(v.status==='PRESENT'){
+  assert.equal(v.liveProbe?.status,'PRESENT',id+' PRESENT requires live probe');
+  assert.equal(v.liveProbe?.httpStatus,200,id+' PRESENT requires HTTP 200');
+  assert.ok(String(v.liveProbe?.contentType||'').toLowerCase().startsWith('image/webp'),id+' PRESENT requires image/webp');
+  assert.equal(v.liveProbe?.webpSignature,true,id+' PRESENT requires RIFF/WEBP');
+ }else if(v.status==='UNVERIFIED'){
+  assert.equal(v.ownerUploadEvidence?.deliveryAuthority,false,id+' owner console evidence is not delivery proof');
+ }else{
+  assert.equal(v.liveProbe?.httpStatus,404,id+' MISSING requires live HTTP 404');
+ }
 }
 const banned=/\b(best country|worst country|best civilization|advanced civilization|backward civilization|country score|civilization score|winner|loser|happiest country)\b/i;
 for(const path of ['reconfiguration-case-registry-v1.json','contemporary-runtime-dossiers-v1.json','lived-reality-dimensions-v1.json'])assert(!banned.test(fs.readFileSync(base+path,'utf8')),path);
@@ -70,5 +82,5 @@ assert.match(ui,/dossiercompare/);
 assert.match(ui,/slice\(0,4\)/);
 assert.match(ui,/resolveAtlasVisualById/);
 console.log('✓ Book VI Reconfiguration Atlas structure PASS: 85 sections, 60 cases, 24 windows, 12 snapshot records, 12 dossier targets, 14 lived-reality dimensions, unified search and 2–4 comparison surfaces.');
-console.log('  B6-WEB-E live visual truth: Snapshots 12/12 PRESENT; 23 core visuals = 15 PRESENT / 8 MISSING / 0 UNVERIFIED; FIG 13A–13H are the eight live-404 gaps.');
+console.log(`  B6-WEB-E visual truth: Snapshots 12/12 PRESENT; 23 core visuals = ${coreCounts.present} PRESENT / ${coreCounts.missing} MISSING / ${coreCounts.unverified} UNVERIFIED.`);
 console.log('  Browser acceptance NOT_RUN; human acceptance remains B6-WEB-F.');

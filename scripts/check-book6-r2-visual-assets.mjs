@@ -20,7 +20,15 @@ for(const a of assets){
 }
 const snapshot2026=assets.find(a=>a.assetId==='WORLD_RECONFIGURATION_SNAPSHOT_2026');
 assert.ok(snapshot2026);
-if(status.liveProbe?.status!=='PASS') assert.equal(snapshot2026.status,'MISSING','2026 must remain MISSING until a new B6-WEB-E live probe passes');
+if(snapshot2026.status==='PRESENT'){
+ const probe=snapshot2026.liveProbe;
+ assert.equal(probe?.status,'PRESENT','2026 PRESENT requires its own live resolver evidence');
+ assert.equal(probe?.httpStatus,200,'2026 PRESENT requires HTTP 200');
+ assert.ok(String(probe?.contentType||'').toLowerCase().startsWith('image/webp'),'2026 PRESENT requires image/webp');
+ assert.equal(probe?.webpSignature,true,'2026 PRESENT requires a RIFF/WEBP signature');
+}else{
+ assert.equal(snapshot2026.status,'MISSING','2026 may only be MISSING or live-probe PRESENT');
+}
 
 if(!process.argv.includes('--live')){
  const counts=Object.fromEntries(['PRESENT','MISSING','UNVERIFIED'].map(k=>[k,assets.filter(a=>a.status===k).length]));

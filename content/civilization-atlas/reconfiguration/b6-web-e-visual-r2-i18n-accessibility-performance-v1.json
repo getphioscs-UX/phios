@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-B6-WEB-E-VISUAL-R2-I18N-ACCESSIBILITY-PERFORMANCE-v1.0.0",
   "package": "B6-WEB-E",
   "baselineCommit": "cc8fec24c54d327b643d4c35757950c882696e92",
-  "status": "MACHINE_AND_LIVE_R2_VALIDATED_WITH_RECORDED_CORE_FIGURE_GAPS",
+  "status": "MACHINE_AND_LIVE_R2_VALIDATED_23_OF_23",
   "scope": [
     "23_CORE_VISUALS",
     "R2_RESOLVER",
@@ -26,8 +26,8 @@
   },
   "visualTruth": {
     "expected": 23,
-    "present": 15,
-    "missing": 8,
+    "present": 23,
+    "missing": 0,
     "unverified": 0,
     "bookVisuals": {
       "expected": 3,
@@ -35,18 +35,9 @@
     },
     "figures": {
       "expected": 8,
-      "present": 0,
-      "missing": 8,
-      "missingAssetIds": [
-        "FIG_13A",
-        "FIG_13B",
-        "FIG_13C",
-        "FIG_13D",
-        "FIG_13E",
-        "FIG_13F",
-        "FIG_13G",
-        "FIG_13H"
-      ]
+      "present": 8,
+      "missing": 0,
+      "missingAssetIds": []
     },
     "snapshots": {
       "expected": 12,
@@ -120,8 +111,8 @@
     "snapshotVisualContract": "PASS",
     "liveR2Probe": "PASS",
     "liveR2Summary": {
-      "present": 15,
-      "missing": 8,
+      "present": 23,
+      "missing": 0,
       "unverified": 0
     },
     "predecessorRegression": "PASS",
@@ -137,7 +128,7 @@
       "B6-WEB-D"
     ],
     "finalValidation": {
-      "workflowRunId": 36087258028,
+      "workflowRunId": 36093020856,
       "staticB6WebE": "PASS",
       "b6WebC": "PASS",
       "bookViAtlas": "PASS",
@@ -147,12 +138,11 @@
     }
   },
   "knownGaps": [
-    "FIG_13A–FIG_13H have no discovered repository owner mapping to alternate R2 object keys and the canonical expected public paths returned HTTP 404 in the live probe.",
     "B6-WEB-F real desktop/mobile browser acceptance has not run.",
     "B6-WEB-F human acceptance has not run."
   ],
   "completionBoundary": {
-    "b6WebEImplementationAndAudit": "COMPLETE_WITH_TRUTHFUL_MISSING_ASSETS",
+    "b6WebEImplementationAndAudit": "COMPLETE_23_OF_23_CORE_VISUALS_LIVE_VERIFIED",
     "bookViAtlasWebLayerComplete": false,
     "finalCompleteClaimAllowed": false,
     "nextPackage": "B6-WEB-F"
