@@ -165,7 +165,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  ]);
  await makeNarrative('healthNarrative','S07_HEALTH','PRESSURE');
  if(modules.healthNarrative){
-  modules.healthNarrative.blocks.push(block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'));
+  modules.healthNarrative.blocks.unshift(block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'));
  }else{
   paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale]],`${edRef}#S07_HEALTH`);
  }
