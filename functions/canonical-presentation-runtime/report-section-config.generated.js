@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R5",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R6",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -772,15 +772,27 @@ export const registry = {
           }
         },
         {
-          "key": "S09_P2",
+          "key": "S09_PRIORITIES",
           "family": "SUMMARY_PAGE",
           "executionClass": "DETERMINISTIC_PERSONALIZED",
           "dataModules": [
-            "integratedGuidance"
+            "guidancePriorities"
           ],
           "title": {
-            "zh-Hans": "综合建议",
-            "en": "Integrated Guidance"
+            "zh-Hans": "跨章节主线",
+            "en": "Cross-Section Priorities"
+          }
+        },
+        {
+          "key": "S09_CURRENT_FOCUS",
+          "family": "SUMMARY_PAGE",
+          "executionClass": "DETERMINISTIC_PERSONALIZED",
+          "dataModules": [
+            "guidanceCurrentFocus"
+          ],
+          "title": {
+            "zh-Hans": "当前行动重点",
+            "en": "Current Focus"
           }
         },
         {
