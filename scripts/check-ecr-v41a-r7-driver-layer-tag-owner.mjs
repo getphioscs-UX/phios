@@ -5,9 +5,9 @@ import fs from 'node:fs';
 const readText = path => fs.readFileSync(path, 'utf8').replace(/\r\n?/g, '\n');
 const read = path => JSON.parse(readText(path));
 const gitBlobSha = path => {
-  const content = readText(path);
-  const header = `blob ${Buffer.byteLength(content, 'utf8')}\0`;
-  return crypto.createHash('sha1').update(header).update(content, 'utf8').digest('hex');
+  const content = fs.readFileSync(path);
+  const header = Buffer.from(`blob ${content.length}\0`, 'utf8');
+  return crypto.createHash('sha1').update(header).update(content).digest('hex');
 };
 
 const r7 = 'content/embodied-configuration/v4-1/semantic-admission-r7/';
