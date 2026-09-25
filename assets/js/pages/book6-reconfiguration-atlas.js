@@ -1,5 +1,5 @@
 import {getLocale,onLocaleChange} from '../i18n.js';
-import {loadReconfigurationSections,loadReconfigurationCases,loadReconfigurationWindows,loadReconfigurationSnapshots,loadContemporaryRuntimeDossiers,loadLivedRealityDimensions,loadReconfigurationRelationships,loadReconfigurationKnowledgeStates} from './civilization-atlas/atlas-data.js';
+import {loadReconfigurationSections,loadReconfigurationCases,loadReconfigurationWindows,loadReconfigurationSnapshots,loadContemporaryRuntimeDossiers,loadLivedRealityDimensions,loadReconfigurationRelationships,loadReconfigurationKnowledgeStates,loadReconfigurationVisualStatus,loadCivilizationVisualBindings} from './civilization-atlas/atlas-data.js';
 import {createReconfigurationAtlasState} from './civilization-atlas/atlas-state.js';
 import {bindReconfigurationAtlasUrlState} from './civilization-atlas/atlas-url-state.js';
 import {mountReconfigurationAtlas} from './civilization-atlas/reconfiguration-renderer.js';
@@ -9,14 +9,15 @@ async function render(){
  if(!root)return;const g=++generation;dispose();dispose=()=>{};
  try{
   const locale=getLocale();
-  const [sections,cases,windows,snapshots,dossiers,lived,relationships,knowledgeStates]=await Promise.all([
+  const [sections,cases,windows,snapshots,dossiers,lived,relationships,knowledgeStates,visualStatus,visualBindings]=await Promise.all([
    loadReconfigurationSections(),loadReconfigurationCases(),loadReconfigurationWindows(),loadReconfigurationSnapshots(),
-   loadContemporaryRuntimeDossiers(),loadLivedRealityDimensions(),loadReconfigurationRelationships(),loadReconfigurationKnowledgeStates()
+   loadContemporaryRuntimeDossiers(),loadLivedRealityDimensions(),loadReconfigurationRelationships(),loadReconfigurationKnowledgeStates(),
+   loadReconfigurationVisualStatus(),loadCivilizationVisualBindings()
   ]);
   if(g!==generation)return;
   const store=createReconfigurationAtlasState({locale});
   const unbind=bindReconfigurationAtlasUrlState(store,{locale});
-  const unmount=mountReconfigurationAtlas(root,{sections,cases,windows,snapshots,dossiers,lived,relationships,knowledgeStates},{locale,store});
+  const unmount=mountReconfigurationAtlas(root,{sections,cases,windows,snapshots,dossiers,lived,relationships,knowledgeStates,visualStatus,visualBindings},{locale,store});
   dispose=()=>{unbind?.();unmount?.();};
  }catch(error){
   root.dataset.atlasReady='error';
