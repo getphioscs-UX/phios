@@ -21,8 +21,7 @@ body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 <p>Human review focus: section hero hierarchy, chart/text balance, whitespace, font density, Key Insights readability, mobile wrapping, print fit, and overall paid-report quality.</p></section>
 <main id="report"></main>
 <script type="module">
-import {renderVisualReportPages} from '/assets/customer-ui/js/personal-products/visual-report-pages.js';
-import {fitPublicationForPrint,settlePublicationAssets} from '/assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {renderVisualReportPages,fitPublicationForPrint,settlePublicationAssets} from '/assets/customer-ui/js/personal-products/bazi-r9-review-runtime.bundle.js';
 let locale=new URLSearchParams(location.search).get('locale')||'zh-Hans';
 if(!['en','zh-Hans'].includes(locale))locale='zh-Hans';
 const report=document.querySelector('#report'),sel=document.querySelector('#section');
