@@ -42,7 +42,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  await makeNarrative('careerNarrative','S04_CAREER','CAREER');
  await makeNarrative('wealthNarrative','S05_WEALTH','WEALTH');
  await makeNarrative('relationshipNarrative','S06_RELATIONSHIP','RELATIONSHIPS');
- paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale],pick('Keep a distinction between a busy schedule, your own description of strain, and any explanation proposed for it. Neither an element count nor a pressure symbol can establish a bodily cause. If you revisit this chapter later, compare the circumstances you recorded, rather than looking for a predicted condition to confirm. Your experience may change while the birth chart remains the same.','请区分繁忙的安排、自己感受到的负担，以及对它提出的解释。五行数量或压力符号都不能建立身体病因。以后回到本章时，比较记录中的实际情境，而不是寻找某种预测中的状态。出生结构保持不变，经验仍可能随环境而改变。')],`${edRef}#S07_HEALTH`);
+ await makeNarrative('healthNarrative','S07_HEALTH','PRESSURE');
+ if(modules.healthNarrative){
+  modules.healthNarrative.blocks.push(block(e('S07_HEALTH').bridge[locale],`${edRef}#S07_HEALTH`,'EDITORIAL_GUIDANCE'));
+ }else{
+  paragraphs('healthNarrative',[e('S07_HEALTH').bridge[locale]],`${edRef}#S07_HEALTH`);
+ }
  const itemMap={chartHighlights:'S01_OVERVIEW',strengths:'S02_PERSONALITY',lifeStructureInsights:'S03_LIFE_STRUCTURE',careerFields:'S04_CAREER',financialAdvice:'S05_WEALTH',relationshipAdvice:'S06_RELATIONSHIP',wellnessAdvice:'S07_HEALTH',timingInsights:'S08_TIMING',nextSteps:'S09_GUIDANCE',appendixInsights:'S10_APPENDIX'};
  for(const [key,section] of Object.entries(itemMap))modules[key]={blocks:[],items:e(section).items.map(i=>block(i[locale],`${edRef}#${section}`))};
  // Strengths, challenges and social style share the admitted observation set;
@@ -80,7 +85,9 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const narrative=pageBlocks.find(p=>p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'||p.pageFamily==='SUMMARY_PAGE');
   const allowed=noTarget&&section.key==='S08_TIMING'?modules.timingContext.blocks.slice(0,1):(narrative||pageBlocks.find(p=>p.contentBlocks.length)||pageBlocks[0]).contentBlocks;
   const interpretation=await compilePublicationInterpretation({methodId:'BZR',page:{...sourcePage,pageId:section.key,evidenceRefs:[...new Set(sourceNumbers.flatMap(n=>internal(n).evidence))]},temporalContext,allowedStatements:allowed.map(b=>({text:b.text,sourceRef:b.sourceRef})),conditions:sectionObject.boundaryNotes,realityQuestions:sectionObject.practicalObservations});
-  const composed=await composePublicationNarrative({interpretation,locale,executionClass:narrative?'T3_DEEP_COMPOSITION':'T2_LIGHT_COMPOSITION',...composition,...(composition.t3?{providerAdapters:{}}:{}),sectionComposition:sectionObject});
+  // Canonical customer publication is deterministic. Provider-backed prose is
+  // an explicit T3 editorial experiment below and never the default composer.
+  const composed=await composePublicationNarrative({interpretation,locale,executionClass:'T2_LIGHT_COMPOSITION',sectionComposition:sectionObject});
   if(narrative&&composed.internalOnly.evidenceAdmission==='SEMANTIC_VERIFIER_ACCEPTED'){
    const maximum=REPORT_PAGE_FAMILIES[narrative.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
    if(composed.paragraphs.every(text=>textUnits(text,locale)<=maximum))narrative.contentBlocks=composed.paragraphs.map(text=>block(text,section.key,'VERIFIED_SECTION_COMPOSITION'));
