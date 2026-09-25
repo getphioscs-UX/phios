@@ -59,6 +59,3 @@ export async function onRequestGet({request}){
   }
 }
 
-export async function onRequest(){
-  return json({ok:false,error:'METHOD_NOT_ALLOWED'},405);
-}
