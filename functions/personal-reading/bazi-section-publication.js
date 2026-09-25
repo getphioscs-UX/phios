@@ -209,6 +209,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   BRANCH_SELF_PUNISHMENT:pick('branch self-punishment','地支自刑'),
   BRANCH_REPEAT:pick('branch repetition','地支重复')
  };
+ const R11_POSITION={YEAR:pick('Year pillar','年柱'),MONTH:pick('Month pillar','月柱'),DAY:pick('Day pillar','日柱'),HOUR:pick('Hour pillar','时柱')};
  const R11_PATTERN_STATE={
   OPEN_REQUIRES_MORE_FORMATION_SUPPORT:pick('open because additional formation support is still required','仍开放，因为成立条件仍不足'),
   OPEN_WITH_PARTIAL_FORMATION_SUPPORT:pick('open with partial formation support','已有部分成立条件，但仍保持开放'),
@@ -350,32 +351,32 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const t=r11Topic('CAREER'),repeated=r11Repeated(t),carry=t.carryingContext||{};
   r11Module('careerRoleSystem','CAREER',[
    pick(
-    `Career is anchored in ${R11_GROUP[t.leadGroup.groupCode]}, with ${repeated.slice(0,3).map(x=>R11_TEN_GOD[x.tenGodCode]).join(', ')} repeating in the relevant evidence. Learning/support and wealth/exchange remain secondary but active, so the work reading is about how standards, responsibility, resources and learning are combined inside a role—not about naming one ideal occupation.`,
-    `事业主题以「${R11_GROUP[t.leadGroup.groupCode]}」为主轴，相关证据里反复出现的十神包括${repeated.slice(0,3).map(x=>R11_TEN_GOD[x.tenGodCode]).join('、')}。学习支持与资源交换仍然参与，因此这里要读的是标准、责任、资源与学习怎样被组织进一个角色，而不是指定一个“最佳职业”。`
+    `Career is anchored in ${R11_GROUP[t.leadGroup.groupCode]}. Seven Killings and Direct Officer both recur across visible and hidden layers, while Direct Resource also remains structurally active and Indirect Wealth repeats mainly through the hidden layer. The work question is therefore not simply “how much pressure is present,” but how responsibility, support and resource access are organized around the same role.`,
+    `事业主题以「${R11_GROUP[t.leadGroup.groupCode]}」为主轴。七杀与正官都跨透干、藏干重复进入结构，正印也持续参与，而偏财主要保留在藏干层。真正要读的不是“压力有多少”，而是责任、支持与资源取得怎样围绕同一个角色被组织起来。`
    ),
    r11TenGodStructure('QI_SHA'),
    r11TenGodStructure('ZHENG_GUAN'),
    pick(
-    'Seven Killings and Direct Officer belong to the same rules/responsibility/pressure family but enter the chart through different visible and hidden sources. For work, that makes it useful to separate formal role expectations, ongoing accountability and situational demand instead of treating “pressure” as one undifferentiated condition.',
-    '七杀与正官都属于官杀／规则责任压力，但它们通过不同的透干与藏干来源进入命盘。放到工作里，更适合把正式角色要求、持续责任与情境压力分开观察，而不是把所有“压力”当成同一种东西。'
+    'Seven Killings and Direct Officer share the same rules/responsibility family, but the chart does not collapse them into one undifferentiated pressure signal. The Seven-Killings pattern path has a visible-stem match yet remains open, while the Wealth path also remains conditional. Career interpretation therefore needs to preserve the difference between a recurring responsibility structure and a completed pattern verdict.',
+    '七杀与正官同属官杀／规则责任体系，但命盘并没有把它们压成一个单一的“压力讯号”。七杀格路径虽有透干对应，仍未完成成立条件；财格路径也继续保持条件性。因此，事业解释必须区分“反复出现的责任结构”与“已经形成的格局结论”。'
    ),
    pick(
-    `The carrying context is ${R11_CARRY[carry.overallTendency]||pick('mixed carrying conditions','混合承载条件')}. Role design therefore deserves direct comparison: responsibility versus decision authority, workload versus available support, and output expectations versus the time or resources actually available to meet them.`,
-    `承载状态为「${R11_CARRY[carry.overallTendency]||'混合承载条件'}」。因此，角色设计值得直接比较：责任与决策权是否匹配、工作量与可用支持是否匹配、产出要求与实际可用的时间／资源是否匹配。`
+    `The carrying context is ${R11_CARRY[carry.overallTendency]||pick('mixed carrying conditions','混合承载条件')}. At the same time, the natal interfaces connect environment, self-position and expression through a stem combination, branch harms and self-punishment. In career terms, role demand, self-position and outward delivery therefore belong to one joined reading rather than three separate labels.`,
+    `承载状态为「${R11_CARRY[carry.overallTendency]||'混合承载条件'}」。与此同时，本命接口通过天干合、地支害与自刑，把环境、自我位置与表达连接起来。放到事业里，角色要求、自我位置与向外交付需要合读，而不是拆成三个互不相关的标签。`
    )
   ],{boundary:'',observations:[]});
   r11Module('careerWorkingDirection','CAREER',[
    pick(
-    'Long-term career direction is better understood through recurring role conditions than through one profession label. In this chart, responsibility, support and resource access belong to the same career frame, so durability depends on how those functions are organized together rather than on the title of the role.',
-    '长期事业方向更适合通过反复出现的角色条件来理解，而不是从一个职业标签判断。这张命盘把责任、支持与资源取得放在同一事业框架中，因此长期可持续性取决于这些功能怎样被组织，而不是职位名称本身。'
+    'Long-term career direction should be read from the recurring structure rather than a profession label. Here, responsibility is the foreground, but support and resource exchange remain inside the same frame. The durable question is whether the role gives those three functions a workable relationship, not whether a job title sounds compatible.',
+    '长期事业方向应该从反复出现的结构来读，而不是从职业名称判断。这里责任处于前景，但支持与资源交换仍在同一框架内。真正影响长期可持续性的，是角色能否让这三类功能形成可运行的关系，而不是职位名称听起来是否“适合”。'
    ),
    pick(
-    `This chart keeps ${R11_GROUP.OFFICER}, ${R11_GROUP.RESOURCE} and ${R11_GROUP.WEALTH} inside the career frame together. A useful comparison therefore asks three separate questions: what must be carried, what support or knowledge is available, and what resources the role can actually mobilize.`,
-    `这张命盘的事业框架同时保留「${R11_GROUP.OFFICER}」「${R11_GROUP.RESOURCE}」与「${R11_GROUP.WEALTH}」。因此可以分开比较三件事：要承担什么、有哪些支持或知识、角色实际上能调动哪些资源。`
+    `The current Jia-Xu Da Yun brings output into the career topic while retaining officer, resource and wealth functions in the same window; the Bing-Wu annual layer adds wealth and officer emphasis. This makes the present period especially relevant for observing how delivery, responsibility and resource exchange meet, without implying a job change or success outcome.`,
+    `当前甲戌大运把输出功能带入事业主题，同时仍保留官杀、印星与财星；丙午流年则进一步加入财星与官杀重点。因此，本阶段特别适合观察“交付—责任—资源交换”怎样相遇，但这并不等于预测换工作或事业成败。`
    ),
    pick(
-    'The section therefore distinguishes role demand from carrying capacity. A role can activate the same responsibility theme under very different support and resource conditions; those conditions should remain explicit before any broad conclusion about career fit is made.',
-    '因此，本节需要把“角色要求”与“承载能力”分开。相同的责任主题，在不同支持与资源条件下可以形成不同的工作结构；在下任何广泛的事业适配结论之前，这些条件都必须保持显式。'
+    'Navigation should therefore separate the stable career structure from the current timing emphasis. If responsibility remains the same but support, resource access or delivery demands change, treat that difference as evidence about role design before turning it into a conclusion about the entire occupation.',
+    '因此，导航时要把稳定的事业结构与当前时间重点分开。如果责任主题没有改变，但支持、资源取得或交付要求发生变化，应先把这种差异视为角色设计的证据，再决定是否需要上升为对整个职业的判断。'
    )
   ],{boundary:'',observations:r11Prompts('CAREER')});
  }
@@ -387,36 +388,36 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    const wealthPattern=r11Pattern(t).find(x=>x.tenGodCode==='PIAN_CAI');
    r11Module('wealthResourceFlow','WEALTH',[
     pick(
-     `The wealth reading is anchored in ${R11_GROUP[t.leadGroup.groupCode]}. The two wealth functions are distributed differently: ${R11_TEN_GOD[wealthRepeated?.tenGodCode]||pick('Indirect Wealth','偏财')} is repeated, while ${R11_TEN_GOD[wealthSingle?.tenGodCode]||pick('Direct Wealth','正财')} has a more limited occurrence. That means “resource opportunity” should not be treated as one undifferentiated channel.`,
-     `财富主题以「${R11_GROUP[t.leadGroup.groupCode]}」为主轴。两类财星的分布并不相同：${R11_TEN_GOD[wealthRepeated?.tenGodCode]||'偏财'}重复出现，而${R11_TEN_GOD[wealthSingle?.tenGodCode]||'正财'}出现更有限。因此，“资源机会”不能被当成单一、同质的渠道。`
+     `The wealth reading is anchored in ${R11_GROUP[t.leadGroup.groupCode]}, but the two wealth functions do not occupy the chart in the same way. Indirect Wealth repeats through the hidden layer, while Direct Wealth is more limited and also remains hidden. The natal resource theme is therefore present without becoming a simple visible “wealth signature.”`,
+     `财富主题以「${R11_GROUP[t.leadGroup.groupCode]}」为主轴，但两类财星进入命盘的方式并不相同：偏财在藏干层重复出现，正财出现较有限，也同样保留在藏干层。因此，本命资源主题虽然存在，却不能被简化成一个直接外显的“财富标志”。`
     ),
     r11TenGodStructure('PIAN_CAI'),
     pick(
-     `The Indirect-Wealth pattern candidate remains ${R11_PATTERN_STATE[wealthPattern?.conclusionState]||pick('open','开放')} and ${wealthPattern?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'}. This keeps resource structure separate from a completed pattern verdict.`,
-     `偏财格局候选仍处于「${R11_PATTERN_STATE[wealthPattern?.conclusionState]||'开放'}」，${wealthPattern?.visibleStemMatch?'并有透干对应':'但未见透干对应'}。因此，资源结构与“格局已经成立”仍需分开。`
+     `The Indirect-Wealth pattern candidate remains ${R11_PATTERN_STATE[wealthPattern?.conclusionState]||pick('open','开放')} and ${wealthPattern?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'}. That matters because repeated wealth-function evidence and a completed Wealth pattern are different claims; the report keeps the former without promoting it into the latter.`,
+     `偏财格局候选仍处于「${R11_PATTERN_STATE[wealthPattern?.conclusionState]||'开放'}」，${wealthPattern?.visibleStemMatch?'并有透干对应':'但未见透干对应'}。这一区分很重要：财星结构反复出现，与“财格已经成立”是两个不同层级的判断，本报告保留前者，不把它升级成后者。`
     ),
     pick(
-     `${R11_GROUP.OFFICER} also remains active in this topic. A useful resource reading therefore follows the full cycle: how value enters, what must be exchanged for it, which obligations attach to it, and what remains available for retention or redeployment. A repeated inflow channel and a retained surplus are not the same evidence.`,
-     `「${R11_GROUP.OFFICER}」也同时参与财富主题。更有价值的资源读取因此要追踪完整循环：价值怎样进入、需要交换什么、附带哪些责任，以及最后还有多少可以留存或重新配置。反复出现的资源入口，与最终能够留下的盈余，不是同一种证据。`
+     `${R11_GROUP.OFFICER} and ${R11_GROUP.PEER} remain inside the wealth frame, while the same natal interfaces connect environment, self-position and expression. Resource interpretation therefore needs three separate layers: entry, attached responsibility or competing claims, and what can actually be retained or redeployed.`,
+     `「${R11_GROUP.OFFICER}」与「${R11_GROUP.PEER}」仍在财富框架内，同时本命接口又把环境、自我位置与表达连接起来。因此，资源解释需要分成三个层次：资源怎样进入、附带哪些责任或分流要求，以及最后什么才真正能够留存或重新配置。`
     )
    ],{boundary:pick('Symbolic wealth structure is not an income forecast or financial advice.','象征性的财富结构不是收入预测，也不是财务建议。'),observations:[]});
   }
   r11Module('wealthRetentionReality','WEALTH',[
    pick(
-    'Acquisition and retention are different parts of the resource cycle. A chart can show repeated resource/exchange structure while the eventual financial result is dominated by obligations, market conditions, timing or personal decisions.',
-    '“得到资源”与“留下资源”是资源循环中的不同阶段。命盘可以呈现反复的资源／交换结构，但最终财务结果仍可能主要由义务、市场、时间条件或个人决定所主导。'
+    'The natal chart establishes a recurring resource/exchange theme, but the current timing adds a second layer. In the Jia-Xu Da Yun, output, officer and wealth functions converge on the Wealth topic; in the Bing-Wu annual layer, Direct Wealth is visible while Indirect Wealth and Seven Killings remain part of the same annual context.',
+    '本命已经建立反复出现的资源／交换主题，而当前时间层又加入第二层重点。甲戌大运中，输出、官杀与财星同时进入财富主题；丙午流年则由正财进入表层，同时偏财与七杀仍处在同一流年背景中。'
    ),
    pick(
-    `In this chart, ${R11_GROUP.WEALTH} does not operate alone; ${R11_GROUP.OFFICER} and ${R11_GROUP.PEER} remain part of the wealth frame. That makes it useful to distinguish incoming opportunity from responsibility attached to the opportunity, and both from competing claims on the same resources.`,
-    `这张命盘里，「${R11_GROUP.WEALTH}」并不是单独运行；「${R11_GROUP.OFFICER}」与「${R11_GROUP.PEER}」也仍在财富框架中。因此，更适合把“资源进入”“资源附带的责任”以及“同一资源面对的其他分流要求”分开看。`
+    'This means the present window can increase the relevance of resource questions without proving a financial event. The useful distinction is whether the change appears at resource entry, at the responsibility attached to it, or at the retention stage; those are different observations even when they occur in the same period.',
+    '这表示当前时间窗口会提高资源问题的相关性，但并不证明一定发生某个财务事件。真正需要区分的是：变化发生在资源进入、资源附带的责任，还是最终留存阶段；即使发生在同一个时期，这三者仍是不同的观察对象。'
    ),
    pick(
-    'The structural distinction to preserve is between resource entry, attached obligation and retention. If lived financial evidence later shows that one layer changes while the others do not, that difference is the appropriate reality check for this section.',
-    '这里需要保留的是“资源进入—附带责任—最终留存”三个层次的差异。若后续现实财务证据显示其中一层改变、另外两层没有同步改变，这种差异才是本节适合使用的现实校验。'
+    'Navigation therefore starts by separating natal structure from timing amplification, then comparing entry, obligation and retention against real cash-flow evidence. A stronger resource signal is useful only if it helps identify which layer changed; it should never substitute for the financial record itself.',
+    '因此，导航时先把本命结构与时间放大分开，再用真实现金流去比较“进入—责任—留存”三个层次。资源讯号变强只有在帮助定位究竟哪一层发生变化时才有意义，不能取代财务记录本身。'
    ),
    pick(
-    'The report should therefore be used to organize questions about resource flow, not to replace budgets, cash-flow records or professional financial analysis. When real evidence contradicts the chart-like pattern, the real evidence takes priority for the financial decision.',
-    '因此，这份报告适合用来整理资源流动的问题，而不能取代预算、现金流记录或专业财务分析。当现实证据与命盘式的资源模式不一致时，财务决定应以现实证据为先。'
+    'For a real financial decision, budgets, cash-flow records, obligations, risk and market evidence remain the deciding layer. The BaZi reading contributes a structured question about where the resource cycle is being activated, not a forecast of income, return or loss.',
+    '进入真实财务决定时，预算、现金流、义务、风险与市场证据仍然是决定层。八字在这里提供的是“资源循环的哪一层正在被强调”这一结构问题，而不是收入、回报或损失预测。'
    )
   ],{boundary:pick('Real financial decisions require actual cash-flow, obligation, risk and market evidence.','真实财务决定仍需要现金流、义务、风险与市场证据。'),observations:r11Prompts('WEALTH')});
  }
@@ -497,8 +498,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      `当前大运为${dy?.pillar?.stem?.zh||''}${dy?.pillar?.branch?.zh||''}（${R11_TEN_GOD[dy?.stemTenGod?.code]||dy?.stemTenGod?.zh||''}），流年为${annual?.stem?.zh||''}${annual?.branch?.zh||''}（${R11_TEN_GOD[annual?.stemTenGod?.code]||annual?.stemTenGod?.zh||''}）。这些时间层用于补充本命背景，不取代本命。`
     ),'professionalModules/professionalTimeline/currentWindow','METHOD_INTERPRETATION'),
     block(pick(
-     `The Da Yun records ${dyInteraction?.type||'a natal interaction'} with the natal ${dyInteraction?.natalPosition||'structure'} and no transformation verdict. The annual layer also revisits natal positions through the recorded repeat, self-punishment or harm relations where present. Read these as points of structural emphasis, not event predictions.`,
-     `大运与本命记录到${dyInteraction?.type||'一组关系'}，落在本命${dyInteraction?.natalPosition||'结构'}，且没有建立化气结论；流年层也会通过已记录的重复、自刑或害等关系重新触及本命位置。它们表示结构重点，不等于事件预测。`
+     `The Da Yun records ${R11_RELATION_TYPE[dyInteraction?.type]||pick('a natal interaction','一组本命关系')} with the ${R11_POSITION[dyInteraction?.natalPosition]||pick('natal structure','本命结构')} and no transformation verdict. The annual layer also revisits natal positions through the recorded repeat, self-punishment or harm relations where present. Read these as points of structural emphasis, not event predictions.`,
+     `大运与本命记录到${R11_RELATION_TYPE[dyInteraction?.type]||'一组本命关系'}，落在${R11_POSITION[dyInteraction?.natalPosition]||'本命结构'}，且没有建立化气结论；流年层也会通过已记录的重复、自刑或害等关系重新触及本命位置。它们表示结构重点，不等于事件预测。`
     ),'professionalModules/professionalTimeline/currentWindow/interactions','METHOD_INTERPRETATION')
    ],
    temporal:{...source(20).temporal,generatedAt:temporalContext.generatedAt,localTime:temporalContext.localTime},
