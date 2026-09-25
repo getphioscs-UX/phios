@@ -1,0 +1,32 @@
+name: BaZi R8 Baseline Render Audit
+
+on:
+  push:
+    paths:
+      - ".github/workflows/bazi-r8-baseline-audit.yml"
+      - "scripts/audit-bazi-r8-baseline-render.mjs"
+      - "functions/personal-reading/**"
+      - "functions/canonical-presentation-runtime/**"
+      - "config/reports/**"
+      - "docs/guided-report-successor-r2/bazi-source.json"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+      - name: Run R8 baseline render audit
+        run: node scripts/audit-bazi-r8-baseline-render.mjs
+      - name: Upload audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bazi-r8-baseline-render-audit
+          path: artifacts/bazi-r8-baseline
+          if-no-files-found: error
