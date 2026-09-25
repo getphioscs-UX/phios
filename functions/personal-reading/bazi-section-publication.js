@@ -227,6 +227,55 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  ],`${edRef}#S10_APPENDIX`);
  modules.boundaries.blocks.push(...appendixConditions);
  paragraphs('methodology',[pick('BaZi organizes a birth reading around four pillars and uses the Day Master as a reference position. The diagrams in this report preserve the distinctions between visible stems, branches, hidden stems and element counts. Structural candidates are shown with their conditions, so an open pattern remains open rather than becoming a final verdict. The timing chapter adds only the layers resolved by the existing method engine for the saved observation window. These layers accompany the birth structure; they do not replace it. Read the prose as a bounded explanation of that structure, then compare it with independent experience.','八字围绕四柱组织出生读取，并以日主作为参照位置。本报告的图表区分天干、地支、藏干与五行计数；结构候选与成立条件一同呈现，因此仍开放的格局不会被写成最终判断。时间章节只加入既有方法引擎针对保存的观察窗口所解析的层次，它们与本命结构一起阅读，不取代本命。请把文字看作有范围的结构说明，再用独立经验来比较。')],`${edRef}#S10_APPENDIX`);
+ // R10 publication compression: combine already-admitted deterministic
+ // modules into denser customer pages. This is presentation ownership only;
+ // no new BaZi meaning, calculation or provider prose is introduced here.
+ const compactModule=(key,lead,parts,{maxBlocks=5,boundary=true}={})=>{
+  const seen=new Set(),blocks=[];
+  if(lead)blocks.push(block(lead,`${edRef}#R10_COMPRESSION`,'EDITORIAL_GUIDANCE'));
+  for(const name of parts){
+   for(const b of modules[name]?.blocks||[]){
+    const text=String(b.text||'').trim();
+    if(!text||seen.has(text))continue;
+    seen.add(text);blocks.push(b);
+    if(blocks.length>=maxBlocks)break;
+   }
+   if(blocks.length>=maxBlocks)break;
+  }
+  modules[key]={
+   blocks,
+   items:parts.flatMap(name=>modules[name]?.items||[]),
+   boundary:boundary?[...new Set(parts.map(name=>modules[name]?.boundary).filter(Boolean))].join(' '):''
+  };
+ };
+ compactModule('personalityDevelopment',pick(
+  'Capability development is easier to understand as one sequence: how information is absorbed, how it becomes expression, and what conditions make that expression reliable over time.',
+  '能力发展更适合放在同一条链上理解：信息怎样被吸收、怎样进入表达，以及什么条件让这种表达能够长期稳定。'
+ ),['personalityLearning','personalityExpression','personalityReliability'],{maxBlocks:5});
+ // Life Structure keeps one integrated narrative page instead of a separate
+ // open-judgment page.
+ compactModule('lifeStructureSystem',null,['lifeStructureSystem','lifeStructureConditions'],{maxBlocks:5});
+ compactModule('careerWorkingDirection',pick(
+  'Work conditions and long-term direction belong together: the same capability can function very differently depending on authority, support, workload and the role structure that repeats across time.',
+  '工作条件与长期方向应该一起阅读：同一套能力会因为权限、支持、工作量与长期反复出现的角色结构，而呈现完全不同的运行结果。'
+ ),['careerWorkingConditions','careerDirection'],{maxBlocks:5});
+ compactModule('wealthRetentionReality',pick(
+  'Resource retention and real financial outcomes should be read together. What enters the system, what competes for it, and what can actually be retained are different questions from a guaranteed financial result.',
+  '资源留存与现实财务结果应该一起阅读。资源怎样进入、哪些要求会分流它、最终能留下多少，与“保证得到某种财务结果”是不同问题。'
+ ),['wealthRetentionPressure','wealthRealityBoundary'],{maxBlocks:5});
+ compactModule('relationshipInteractionBoundary',pick(
+  'Interaction and outcome boundaries belong on the same page: the chart can describe recurring negotiation patterns, but it cannot turn those patterns into guaranteed marriage, separation or partner outcomes.',
+  '互动模式与结果边界应该放在同一页：命盘可以描述反复出现的协商结构，但不能把这些结构直接写成确定的婚姻、分离或伴侣结果。'
+ ),['relationshipInteraction','relationshipBoundaries'],{maxBlocks:5});
+ compactModule('guidanceIntegrated',pick(
+  'The final guidance layer combines repeated themes with the current timing context, while keeping temporary emphasis separate from the chart’s more stable structure.',
+  '最后的建议层把跨章节重复主题与当前时间情境放在一起，同时把阶段性放大与较稳定的本命结构清楚分开。'
+ ),['guidancePriorities','guidanceCurrentFocus'],{maxBlocks:5});
+ compactModule('methodGuide',pick(
+  'Use the appendix as one reading guide: distinguish calculated facts, method relationships, editorial explanation and lived evidence, and keep every unresolved condition visibly unresolved.',
+  '把附录当成一份统一的阅读指南：区分计算事实、方法关系、编辑解释与现实证据，并让所有尚未成立的条件继续保持开放。'
+ ),['boundaries','methodology'],{maxBlocks:5});
+
  for(const name of unavailableModules)delete modules[name];
  const sections=[],internalSections=[],pages=[],t3Interpretations=[];
  for(const section of BAZI_SECTION_REGISTRY.sections){
@@ -316,7 +365,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const base={sectionKey:section.key,section:section.key,sectionNumber:section.number,sectionTitle:publicationTitle,visualBinding:bindSectionVisual(section.key),facts:[],paragraphs:[],boundary:'',observations:[],customerVisible:true};
   const admittedT3=t3?.status==='PASS'&&canShowT3({...composition.t3,snapshot:t3?.snapshot});
   internalSections.at(-1).diagnostics={sectionRuntimeTier:admittedT3?'T3':t3?'T2_FALLBACK':'DETERMINISTIC',snapshotMatch:t3?.snapshot?'VALIDATED':composition.t3?.snapshots?.[section.key]?'INVALID':'ABSENT',fallbackReason:admittedT3?null:t3?.internalOnly?.fallbackReason||(t3?.snapshot?'SNAPSHOT_NOT_HUMAN_ACCEPTED_FOR_STAGE':null),claimIrVersion:t3?.evidencePack?.claimIrVersion||t3?.evidencePack?.explanatoryAuthorityVersion||null,editorialVersion:t3?.snapshot?.editorialVersion||null};
-  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):editorial.intro[locale]],visualVariant:'SECTION_OPENER'});
+  pages.push({...base,pageKey:section.pages[0].key,definitionKey:section.pages[0].key,pageFamily:'SECTION_OPENER_PAGE',title:publicationTitle[locale],paragraphs:[noTarget&&section.key==='S08_TIMING'?pick('The calculated sequence remains available. Without a selected observation time, current-period and annual selections remain unavailable.','已计算的周期序列仍然可用；没有选定观察时点时，当前阶段与流年选择保持不可用。'):editorial.intro[locale]],items:editorial.items.map(i=>i[locale]),visualVariant:'SECTION_MASTER_FALLBACK'});
   for(const pb of pageBlocks){
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    let chunks;
