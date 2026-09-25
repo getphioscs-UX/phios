@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "ECR-V4.1A-R7-BASELINE-FREEZE-v1",
+  "stage": "ECR-V4.1A-R7-DRIVER-LAYER-TAG-OWNER-CANONICALIZATION",
+  "startHead": "b1ee052e5b64c3970ae06b425f491888c6dc93ff",
+  "freezeRule": "R6 authority is immutable input to R7. Git blob identity drift invalidates this baseline and requires explicit successor reconciliation.",
+  "authorityBoundary": {
+    "sourceMaterialIsNotCalculationAuthority": true,
+    "sourceMaterialIsNotAutomaticPublicWording": true,
+    "secondMethodRuntimeProhibited": true,
+    "geneKeysOrHumanDesignProductIdentityProhibited": true
+  },
+  "r6Authorities": [
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/source-provenance-permission-manifest-v1.json",
+      "gitBlobSha": "0e5f5a13af0a5b6eaae773e0043bb1a9a1395f4f"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/source-ownership-policy-v1.json",
+      "gitBlobSha": "0b97f9052265ed6f550422d0b7e24cb0ae680cb7"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/gate-base-source-canon-v1.json",
+      "gitBlobSha": "3330054f77e42bafb5375e3031bdbcb06b7cbd51"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/gate-line-keyword-source-v1.json",
+      "gitBlobSha": "013343786a07f21e593ea0c9842b0e7b96d19d69"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/line-sphere-role-source-v1.json",
+      "gitBlobSha": "19e2e2605bc81e8c95d5de86b8f9a7c62de65a61"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/line-modifier-source-canon-v1.json",
+      "gitBlobSha": "dbe79bb58a400e2d72d8dd06b33c64a8b62dfa7d"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/source-conflict-audit-v1.json",
+      "gitBlobSha": "5dcf68049bfb00d4afe96a92526ccbe015534225"
+    }
+  ],
+  "readinessRefs": [
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/driver-role-source-readiness-v1.json",
+      "gitBlobSha": "e592f145f1dbd99405edb1f2f70ada0291f432ca"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/layer-role-source-readiness-v1.json",
+      "gitBlobSha": "0b1cb5635d09b00ffdc410318257bacbcd2239b5"
+    },
+    {
+      "path": "content/embodied-configuration/v4-1/semantic-source-r6/r6-readiness-v1.json",
+      "gitBlobSha": "79bcbd999813ddb5ca4c6ec4e69ec32ceb811000"
+    }
+  ],
+  "pjaW2dPrecondition": {
+    "status": "ALREADY_RECONCILED_AT_R7_START",
+    "reconciliationRef": "content/knowledge/reconciliation/pja-w2d/pja-w2d-book6-publication-successor-v1.json",
+    "bookVIArticleAcceptanceRemainsSeparateFromAtlasBrowserHumanAcceptance": true
+  },
+  "customerProductionMutation": false
+}
