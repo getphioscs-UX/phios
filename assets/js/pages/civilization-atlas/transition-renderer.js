@@ -13,5 +13,5 @@ export function renderTransitions(root,{registry,state,locale='en',onSelect=()=>
 }
 export function renderTransitionInspector(root,{windowRecord,locale='en'}={}){
  const l=locale==='zh-Hans'?'zh-Hans':'en'; if(!root||!windowRecord)return;
- root.innerHTML=`<p class="knowledge-eyebrow">${esc(fmt(windowRecord.timeRange.startYear,l))} – ${esc(fmt(windowRecord.timeRange.endYear,l))}</p><h3>${esc(loc(windowRecord.title,l))}</h3><p>${esc(loc(windowRecord.irreversibility,l))}</p>${windowRecord.unknown?.note?`<details class="civ-atlas-evidence-note"><summary>${esc(l==='zh-Hans'?'资料边界':'Evidence note')}</summary><p>${esc(loc(windowRecord.unknown.note,l))}</p></details>`:''}`;
+ root.innerHTML=`<div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(fmt(windowRecord.timeRange.startYear,l))} – ${esc(fmt(windowRecord.timeRange.endYear,l))}</p><h3>${esc(loc(windowRecord.title,l))}</h3><p>${esc(loc(windowRecord.successorReality,l)||loc(windowRecord.irreversibility,l))}</p></div>`;
 }
