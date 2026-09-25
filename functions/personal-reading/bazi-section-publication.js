@@ -387,8 +387,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      `偏财格局候选仍处于「${R11_PATTERN_STATE[wealthPattern?.conclusionState]||'开放'}」，记录到 ${wealthPattern?.visiblePathCount??0} 条路径，${wealthPattern?.visibleStemMatch?'并有透干对应':'但未见透干对应'}。因此，资源结构与“格局已经成立”仍需分开。`
     ),
     pick(
-     `${R11_GROUP.OFFICER} also remains active in this topic. A useful resource reading therefore follows the full cycle: how value enters, what must be exchanged for it, which obligations attach to it, and what remains available for retention or redeployment.`,
-     `「${R11_GROUP.OFFICER}」也同时参与财富主题。更有价值的资源读取因此要追踪完整循环：价值怎样进入、需要交换什么、附带哪些责任，以及最后还有多少可以留存或重新配置。`
+     `${R11_GROUP.OFFICER} also remains active in this topic. A useful resource reading therefore follows the full cycle: how value enters, what must be exchanged for it, which obligations attach to it, and what remains available for retention or redeployment. A repeated inflow channel and a retained surplus are not the same evidence.`,
+     `「${R11_GROUP.OFFICER}」也同时参与财富主题。更有价值的资源读取因此要追踪完整循环：价值怎样进入、需要交换什么、附带哪些责任，以及最后还有多少可以留存或重新配置。反复出现的资源入口，与最终能够留下的盈余，不是同一种证据。`
     )
    ],{boundary:pick('Symbolic wealth structure is not an income forecast or financial advice.','象征性的财富结构不是收入预测，也不是财务建议。'),observations:r11Prompts('WEALTH')});
   }
