@@ -6,7 +6,7 @@ import {resolveReportEditorialAsset} from '../functions/canonical-presentation-r
 import {REPORT_EDITORIAL_ASSETS} from '../functions/canonical-presentation-runtime/report-editorial-registry.js';
 import {renderFrozenBaziIntro} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
 
-const out='artifacts/bazi-r9-review';
+const out='docs/acceptance/bazi-paid-report/r9';
 fs.mkdirSync(out,{recursive:true});
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
 const frozen=JSON.parse(fs.readFileSync('docs/guided-report-successor-r1/batch-1/cases.json','utf8'));
