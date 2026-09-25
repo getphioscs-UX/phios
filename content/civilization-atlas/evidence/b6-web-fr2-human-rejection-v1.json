@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "PHI-OS-B6-WEB-FR2-HUMAN-REJECTION-v1.0.0",
+  "status": "HUMAN_REJECTED",
+  "reviewedAt": "2026-09-25",
+  "successor": "B6-WEB-FR3-TEMPLATE-COMPOSITOR",
+  "reason": "LIBRARY_LAYER_WEBPS_ARE_LAYOUT_TEMPLATES_NOT_CARD_STYLE_REFERENCES",
+  "ownerClarification": [
+    "VIS-B5-ATLAS-L2 through L8 define the intended layer layouts.",
+    "Accepted static assets are intended to construct those layouts.",
+    "VIS-B5-ATLAS-L6-TRAJECTORIES intentionally reserves space for dynamic HTML/SVG line and graph rendering."
+  ],
+  "requiredCorrection": [
+    "Use explicit template-slot composition instead of generic card reconstruction.",
+    "Overlay dynamic HTML/SVG only in owner-authored reserved slots.",
+    "Do not OCR or infer historical data from the template pixels.",
+    "Keep canonical registries as text/data authority."
+  ]
+}
