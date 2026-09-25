@@ -5,11 +5,21 @@ const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
 
 const world=json('content/civilization-atlas/snapshots/world-snapshots-v1.json');
+const caseRegistry=json('content/civilization-atlas/cases/civilization-case-registry-v1.json');
 for(const snapshot of world.snapshots||[]){
   for(const group of snapshot.regionalGroups||[]){
     const zh=group.label?.['zh-Hans']||'';
     assert.ok(/[\u3400-\u9fff]/.test(zh), `${snapshot.snapshotId} region ${group.regionId} has non-Chinese zh-Hans label: ${zh}`);
     assert.notEqual(zh,group.label?.en,`${snapshot.snapshotId} region ${group.regionId} duplicates English label in zh-Hans`);
+  }
+}
+
+
+for(const c of caseRegistry.cases||[]){
+  for(const [field,obj] of [['region',c.region],['geographicReach',c.geographicReach]]){
+    const zh=obj?.label?.['zh-Hans']||'';
+    assert.ok(zh,`${c.caseId} ${field} missing zh-Hans label`);
+    assert.ok(!/[A-Za-z]/.test(zh),`${c.caseId} ${field} leaks Latin text into zh-Hans: ${zh}`);
   }
 }
 
