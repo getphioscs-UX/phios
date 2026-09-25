@@ -5,20 +5,20 @@ export function wireAtlasKeyboardNavigation(root,{onLayerActivate=()=>{}}={}){
   const nav=root.querySelector('[data-atlas-layer-nav]');
   if(!nav) return ()=>{};
   const handler=event=>{
-    const target=event.target.closest('[data-atlas-layer]');
+    const target=event.target.closest('[data-atlas-entry]');
     if(!target) return;
-    const buttons=[...nav.querySelectorAll('[data-atlas-layer]')];
-    const index=buttons.indexOf(target);
+    const entries=[...nav.querySelectorAll('[data-atlas-entry]')];
+    const index=entries.indexOf(target);
     if(index<0) return;
     let next=index;
-    if(event.key==='ArrowRight'||event.key==='ArrowDown') next=(index+1)%buttons.length;
-    else if(event.key==='ArrowLeft'||event.key==='ArrowUp') next=(index-1+buttons.length)%buttons.length;
+    if(event.key==='ArrowRight'||event.key==='ArrowDown') next=(index+1)%entries.length;
+    else if(event.key==='ArrowLeft'||event.key==='ArrowUp') next=(index-1+entries.length)%entries.length;
     else if(event.key==='Home') next=0;
-    else if(event.key==='End') next=buttons.length-1;
+    else if(event.key==='End') next=entries.length-1;
     else return;
     event.preventDefault();
-    buttons[next]?.focus();
-    onLayerActivate(buttons[next]?.dataset.atlasLayer,{source:'keyboard-layer-nav'});
+    const entry=entries[next];entry?.focus();
+    if(entry?.dataset.atlasLayer) onLayerActivate(entry.dataset.atlasLayer,{source:'keyboard-layer-nav'});
   };
   nav.addEventListener('keydown',handler);
   return ()=>nav.removeEventListener('keydown',handler);
