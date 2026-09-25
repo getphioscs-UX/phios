@@ -57,7 +57,20 @@ export function loadBook6PublicationMetadata() {
 
 function canonicalizeSuccessorArticleContext(article) {
   if(!article || typeof article!=='object') return article;
-  if(article.publicationContext?.bookCode!=='BOOK-6') return article;
+  const bookCode=article.publicationContext?.bookCode;
+  if(bookCode==='BOOK-5'){
+    const source=article.sourceReading;
+    const sourceReading=source?{
+      ...source,
+      path:undefined,
+      accessBoundary:'PRIVATE_MANUSCRIPT_TEXT_NOT_EMBEDDED_IN_PUBLIC_ARTICLE',
+      sourceSections:Array.isArray(source.sourceSections)&&source.sourceSections.length
+        ? source.sourceSections
+        : (article.sourceHeadings||[]).filter(Boolean)
+    }:source;
+    return {...article,sourceReading};
+  }
+  if(bookCode!=='BOOK-6') return article;
   const canonical='/books/reality-reconfiguration/';
   const legacy='/books/reality-configuration/';
   const fix=value=>typeof value==='string'?value.replaceAll(legacy,canonical):value;
@@ -67,8 +80,14 @@ function canonicalizeSuccessorArticleContext(article) {
     atlasRoute:fix(article.publicationContext.atlasRoute)
   }:article.publicationContext;
   const relatedBooks=(article.connections?.relatedBooks||[]).map(link=>({...link,href:fix(link.href)}));
+  const source=article.sourceReading;
+  const sourceReading=source?{
+    ...source,
+    accessBoundary:'PRIVATE_MANUSCRIPT_TEXT_NOT_EMBEDDED_IN_PUBLIC_ARTICLE'
+  }:source;
   return {
     ...article,
+    sourceReading,
     publicationContext,
     connections:article.connections?{...article.connections,relatedBooks}:article.connections
   };
