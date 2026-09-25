@@ -93,8 +93,11 @@ for(const projection of dossierRre){
  assert.equal(projection.boundaries.missingEvidenceFilledByInference,false);
 }
 const endpointSource=fs.readFileSync('functions/api/book6-runtime-readout.js','utf8');
+const adapterSource=fs.readFileSync('scripts/lib/civilization-atlas/book6-rre-adapter-v1.mjs','utf8');
 assert.match(endpointSource,/buildBook6DossierRreProjection/);
-assert.match(endpointSource,/RRE-READOUT/);
+assert.match(adapterSource,/buildCanonicalRuntimeReadout/);
+assert.match(adapterSource,/RRE-READOUT-B6-/);
+assert.match(adapterSource,/targetCodes:\['WPR'\]/);
 assert.doesNotMatch(endpointSource,/with\s*\{\s*type\s*:\s*['"]json['"]\s*\}/);
 
 const {document}=parseHTML('<html><head></head><body><main data-civilization-atlas-root data-atlas-mode="reconfiguration"></main></body></html>');
