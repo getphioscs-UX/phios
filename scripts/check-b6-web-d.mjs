@@ -3,15 +3,15 @@ import {normalizeReconfigurationAtlasState} from '../assets/js/pages/civilizatio
 import {reconfigurationAtlasStateFromUrl,reconfigurationAtlasUrlFromState} from '../assets/js/pages/civilization-atlas/atlas-url-state.js';
 import {normalizeAtlasRetrievalScope,retrieveAtlasScope} from '../functions/_lib/atlas-retrieval-scope.js';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),read=p=>fs.readFile(path.join(root,p),'utf8');
-const renderer=await read('assets/js/pages/civilization-atlas/reconfiguration-renderer.js'),discovery=await read('assets/js/knowledge/public-discovery.js'),knowledge=await read('assets/customer-ui/js/surfaces/knowledge.js'),book=await read('assets/js/pages/book-volume-seven.js');
+const renderer=await read('assets/js/pages/civilization-atlas/reconfiguration-renderer.js'),discovery=await read('assets/js/knowledge/public-discovery.js'),knowledge=await read('assets/customer-ui/js/surfaces/knowledge.js'),book=await read('assets/js/pages/book-volume-seven.js'),localeEn=await read('assets/js/locales/en/book6-reconfiguration-atlas.js'),localeZh=await read('assets/js/locales/zh-Hans/book6-reconfiguration-atlas.js');
 for(const token of ['data-window-filter','data-region','data-type','data-trigger','data-pressure','data-change','civ-reconfig-timeline','compareCaseIds','snapshotLayer','previousVersion','compareDossierIds','livedRealityDimensionId'])assert.match(renderer,new RegExp(token));
-assert.match(renderer,/slice\(0,4\)/);assert.match(renderer,/One static base visual|同一张静态底图/);assert.match(renderer,/No universal score|不转换为通用分数/);
+assert.match(renderer,/slice\(0,4\)/);assert.match(localeEn,/One static base visual/);assert.match(localeZh,/同一张静态底图/);assert.match(localeEn,/No universal score/);assert.match(localeZh,/不转换为通用分数/);
 for(const type of ['CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY']){assert.match(discovery,new RegExp("type:'"+type+"'"));assert.match(knowledge,new RegExp(type));}
 for(const type of ['CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY'])assert.match(discovery,new RegExp("locale:l,type:'"+type+"'"));
 assert.match(knowledge,/BOOK-6':\{en:'Reality Reconfiguration'/);
-for(const token of ['External Dependency','Pressure','Direction','Transition Signals'])assert.match(renderer,new RegExp(token));
+for(const token of ['External Dependency','Pressure','Direction','Transition Signals'])assert.match(localeEn,new RegExp(token));
 assert.match(renderer,/history\.filter\(h=>h\.id===d\.id\)/);
-assert.match(renderer,/dimMap\.get\(id\)\|\|id/);
+assert.match(renderer,/dimMap\.get\(id\)\|\|humanize\(id\)/);
 
 for(const entry of ['atlas=snapshots','atlas=compare','atlas=dossiers','atlas=lived'])assert.match(book,new RegExp(entry));
 const normalized=normalizeReconfigurationAtlasState({activeLayer:'compare',compareCaseIds:['RC-04','RC-05','RC-06','RC-07','RC-08'],snapshotLayer:'finance'});assert.equal(normalized.compareCaseIds.length,4);assert.equal(normalized.snapshotLayer,'finance');
@@ -19,6 +19,6 @@ const u=reconfigurationAtlasUrlFromState('https://getphios.com/books/reality-con
 const scope=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode:'BOOK-6',partCode:'PART-13',activeLayer:'compare',comparisonIds:['RC-04','RC-05']});assert.deepEqual(scope.comparisonIds,['RC-04','RC-05']);
 const env={ASSETS:{fetch:async req=>{const rel=new URL(req.url).pathname.replace(/^\//,'');try{return new Response(await fs.readFile(path.join(root,rel)),{status:200});}catch{return new Response('',{status:404});}}}};
 const result=await retrieveAtlasScope({env,scope,locale:'en',question:'compare First World War and Russian transition'});assert(result.sources.some(s=>s.atlasEntityId==='RC-04'));assert(result.sources.some(s=>s.atlasEntityId==='RC-05'));assert(result.sources.some(s=>s.sourceId.includes('RECONFIGURATION_WINDOW')));assert(result.sources.some(s=>s.sourceId.includes('BOOK_VI_CANONICAL_SECTION')));
-const manifest=JSON.parse(await read('content/civilization-atlas/reconfiguration/atlas-manifest-v2.json'));assert.equal(manifest.status,'B6_WEB_D_CUSTOMER_UI_IMPLEMENTED');assert.equal(manifest.customerUi.browserAcceptance,'NOT_RUN');
+const manifest=JSON.parse(await read('content/civilization-atlas/reconfiguration/atlas-manifest-v2.json'));assert.ok(['B6_WEB_D_CUSTOMER_UI_IMPLEMENTED','B6_WEB_E_VISUAL_I18N_ACCESSIBILITY_PERFORMANCE_AUDITED'].includes(manifest.status));assert.equal(manifest.customerUi.browserAcceptance,'NOT_RUN');
 console.log('✓ B6-WEB-D Customer UI PASS: existing Atlas owners extended with filters, timeline, 2–4 comparisons, snapshot layers, dossier/version history, lived reality, global Search and linked Ask scope.');
-console.log('  Browser/Human acceptance NOT_RUN; R2/i18n/accessibility/performance closure remains B6-WEB-E/F.');
+console.log('  Browser/Human acceptance NOT_RUN; B6-WEB-E may supersede this package without changing B6-WEB-D customer capability ownership.');
