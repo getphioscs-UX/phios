@@ -2,7 +2,7 @@
 // Browser and Pages Functions share this data; JSON files remain canonical.
 export const registry = {
   "reportType": "BAZI_FULL_REPORT",
-  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R12_SHARED_MASTER_BG",
+  "version": "GUIDED_REPORT_SUCCESSOR_R2_STATIC_DETERMINISTIC_R13_REUSE_EXISTING_SECTION_VISUALS",
   "methodId": "BZR",
   "frontMatter": [
     {
@@ -71,13 +71,23 @@ export const registry = {
             "en": "Chart Overview"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-01-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-01-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-01-OVERVIEW",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-01-OVERVIEW.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -130,13 +140,23 @@ export const registry = {
             "en": "Core Personality"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-02-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-02-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-02-PERSONALITY",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-02-PERSONALITY.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -212,13 +232,23 @@ export const registry = {
             "en": "Life Structure"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-03-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-03-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-03-LIFE-STRUCTURE.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -322,13 +352,23 @@ export const registry = {
             "en": "Career Development"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-04-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-04-CAREER",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-04-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-04-CAREER",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-04-CAREER.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -407,13 +447,23 @@ export const registry = {
             "en": "Wealth Outlook"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-05-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-05-WEALTH",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-05-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-05-WEALTH",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-05-WEALTH.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -478,13 +528,23 @@ export const registry = {
             "en": "Relationships & Marriage"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-06-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-06-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-06-RELATIONSHIP",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-06-RELATIONSHIP.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -549,13 +609,23 @@ export const registry = {
             "en": "Health & Wellbeing"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-07-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-07-HEALTH",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-07-HEALTH",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-07-HEALTH.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -594,13 +664,23 @@ export const registry = {
             "en": "Timing & Cycles"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-08-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-08-TIMING",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-08-TIMING",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-08-TIMING.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -665,13 +745,23 @@ export const registry = {
             "en": "Guidance & Recommendations"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-09-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-09-GUIDANCE",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-09-GUIDANCE.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -710,13 +800,23 @@ export const registry = {
             "en": "Method & Appendix"
           },
           "masterAsset": {
-            "assetId": "VIS-REPORT-BAZI-SEC-10-MASTER-BG",
+            "assetId": "VIS-REPORT-BAZI-SEC-10-APPENDIX",
             "role": "SECTION_MASTER_BACKGROUND",
             "localeIndependent": true,
-            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-MASTER-BG.webp",
-            "fallbackAsset": "VIS-REPORT-BAZI-SEC-10-APPENDIX",
-            "status": "MISSING_ASSET",
-            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY"
+            "objectKey": "images/reports/bazi/editorial/shared/VIS-REPORT-BAZI-SEC-10-APPENDIX.webp",
+            "reuseExistingRegisteredAsset": true,
+            "status": "ACTIVE_EXISTING_ASSET",
+            "textOwnership": "HTML_CSS_LOCALIZED_OVERLAY",
+            "imageOwnership": [
+              "BACKGROUND",
+              "SECTION_HERO_COMPOSITION"
+            ],
+            "overlayOwnership": [
+              "SECTION_NUMBER",
+              "SECTION_TITLE",
+              "SECTION_INTRO",
+              "THREE_KEY_INSIGHTS"
+            ]
           }
         },
         {
@@ -775,19 +875,18 @@ export const registry = {
     },
     "sectionMasterAssets": {
       "count": 10,
+      "reuseExistingRegisteredAssets": true,
+      "newAssetsRequired": 0,
       "localeIndependent": true,
       "bucketPrefix": "images/reports/bazi/editorial/shared/",
-      "imageOwns": [
-        "BACKGROUND",
-        "SECTION_HERO_COMPOSITION"
-      ],
+      "bakedText": false,
+      "backgroundTreatment": "CSS_OPACITY_SCRIM_ONLY",
       "htmlOwns": [
         "SECTION_NUMBER",
         "SECTION_TITLE",
         "SECTION_INTRO",
         "THREE_KEY_INSIGHTS"
-      ],
-      "bakedText": false
+      ]
     }
   }
 };
