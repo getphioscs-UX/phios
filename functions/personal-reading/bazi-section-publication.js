@@ -197,7 +197,13 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    '当前重点要看哪些重复主线正在与现阶段时间层发生关联，同时保留仍未确定的判断。目标是找出现在最值得注意的内容，同时把阶段性放大与长期结构清楚分开。'
   ),[...temporal,...open]);
  }
- paragraphs('boundaries',[e('S10_APPENDIX').bridge[locale]],`${edRef}#S10_APPENDIX`);
+ paragraphs('boundaries',[
+  e('S10_APPENDIX').bridge[locale],
+  pick(
+   'Use four evidence levels when reading the report: calculated chart facts, admitted method relationships, editorial explanation, and lived-reality evidence. A statement becomes stronger only when the kind of evidence supporting it is clear; agreement between layers should not erase their different roles.',
+   '阅读本报告时，请区分四个证据层：计算得到的命盘事实、已核准的方法关系、编辑解释，以及真实生活证据。一个判断只有在清楚知道由哪一层证据支持时才更可靠；不同层之间即使相符，也不应因此失去各自的角色。'
+  )
+ ],`${edRef}#S10_APPENDIX`);
  modules.boundaries.blocks.push(...appendixConditions);
  paragraphs('methodology',[pick('BaZi organizes a birth reading around four pillars and uses the Day Master as a reference position. The diagrams in this report preserve the distinctions between visible stems, branches, hidden stems and element counts. Structural candidates are shown with their conditions, so an open pattern remains open rather than becoming a final verdict. The timing chapter adds only the layers resolved by the existing method engine for the saved observation window. These layers accompany the birth structure; they do not replace it. Read the prose as a bounded explanation of that structure, then compare it with independent experience.','八字围绕四柱组织出生读取，并以日主作为参照位置。本报告的图表区分天干、地支、藏干与五行计数；结构候选与成立条件一同呈现，因此仍开放的格局不会被写成最终判断。时间章节只加入既有方法引擎针对保存的观察窗口所解析的层次，它们与本命结构一起阅读，不取代本命。请把文字看作有范围的结构说明，再用独立经验来比较。')],`${edRef}#S10_APPENDIX`);
  for(const name of unavailableModules)delete modules[name];
