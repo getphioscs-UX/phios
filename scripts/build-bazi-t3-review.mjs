@@ -12,6 +12,7 @@ fs.mkdirSync(root,{recursive:true});
 // Pages does not serve functions/** as static modules. Bundle the canonical
 // presentation imports into this review entry without copying their authority.
 await build({entryPoints:['assets/customer-ui/js/personal-products/bazi-t3-review.js'],outfile:'assets/customer-ui/js/personal-products/bazi-t3-review.bundle.js',bundle:true,format:'esm',platform:'browser',minify:true,logLevel:'silent'});
+await build({entryPoints:['assets/customer-ui/js/personal-products/publication-report-pages.js'],outfile:'assets/customer-ui/js/personal-products/publication-report-pages.bundle.js',bundle:true,format:'esm',platform:'browser',minify:true,logLevel:'silent'});
 const {reading,temporalSnapshot}=read('docs/guided-report-successor-r2/bazi-source.json');
 const registry=read('content/ai-economics/providers/ai-provider-cost-registry-v1.json');
 const records={},accepted=await loadAcceptedBaziSnapshots(),snapshots=accepted.snapshots;
