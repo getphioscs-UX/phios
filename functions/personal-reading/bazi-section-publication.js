@@ -182,11 +182,24 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  modules.currentYearInsight={blocks:source(21).paragraphs.map(t=>block(t,internal(21).evidence[0],'METHOD_INTERPRETATION')),temporal:modules.timingContext.temporal,observations:[e('S08_TIMING').items[2][locale],pick('What stayed consistent across the year boundary, despite the change in the named time layer?','时间层名称改变前后，哪些经验仍然保持一致？')],boundary:pick('The year layer frames observation; this reading does not identify specific events as opportunities or warnings.','流年层用于界定观察范围；本次读取不把具体事件判断为机会或预警。')};
  // Optional career timing is absent unless an upstream adapter supplies an
  // admitted career-specific module. Generic current-year data is insufficient.
- await makeNarrative('integratedGuidance','S09_GUIDANCE','GUIDANCE');
- if(modules.integratedGuidance){
-  modules.integratedGuidance.blocks.unshift(block(e('S09_GUIDANCE').bridge[locale],`${edRef}#S09_GUIDANCE`,'EDITORIAL_GUIDANCE'));
- }else{
-  paragraphs('integratedGuidance',[e('S09_GUIDANCE').bridge[locale]],`${edRef}#S09_GUIDANCE`);
+ {
+  const authority=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S09_GUIDANCE',locale,temporalSnapshot:temporalContext});
+  const claims=authority.claims.filter(x=>x.relationType!=='BOUNDARY');
+  const ranked=claims.filter(x=>x.relationType==='CROSS_SECTION_RELEVANCE').slice().sort((a,b)=>(a.rank??99)-(b.rank??99));
+  const temporal=claims.filter(x=>x.relationType==='TEMPORAL_RELEVANCE');
+  const open=claims.filter(x=>x.relationType==='OPEN_CONDITION');
+  const mk=(key,lead,list)=>{
+   const refs=[...new Set(list.flatMap(x=>x.sourceRefs||[]))],body=list.map(x=>humanizePublicationStatement(x.text)).join(' ');
+   modules[key]={blocks:[block(lead,`${edRef}#S09_GUIDANCE`,'EDITORIAL_GUIDANCE'),...(body?[block(body,refs.join('|'),'METHOD_INTERPRETATION')]:[])],boundary:authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||''};
+  };
+  mk('guidancePriorities',pick(
+   'The most useful guidance comes from themes that repeat across several parts of the chart. This page brings those recurring priorities into one reading order so they can be acted on without collapsing the whole report into a single verdict.',
+   '最有价值的建议，来自在整张命盘不同部分反复出现的主题。本页把这些重复主线按阅读顺序重新收拢，让它们可以转化成行动重点，而不是把整份报告压成一个单一结论。'
+  ),ranked);
+  mk('guidanceCurrentFocus',pick(
+   'Current focus depends on which of those recurring themes are relevant to the present timing layer and which judgments still remain open. The aim is to identify what deserves attention now while keeping temporary emphasis separate from permanent structure.',
+   '当前重点要看哪些重复主线正在与现阶段时间层发生关联，同时保留仍未确定的判断。目标是找出现在最值得注意的内容，同时把阶段性放大与长期结构清楚分开。'
+  ),[...temporal,...open]);
  }
  paragraphs('boundaries',[e('S10_APPENDIX').bridge[locale]],`${edRef}#S10_APPENDIX`);
  modules.boundaries.blocks.push(...appendixConditions);
