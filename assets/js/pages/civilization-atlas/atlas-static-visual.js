@@ -94,10 +94,13 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en',data={
  const library=bindings?.assets?.filter(a=>resolveAtlasVisualById(bindings,a.assetId,options))||[];
  if(!assets.length&&!library.length)return;ensureStyle(doc);
  const [primary,...related]=assets;
- if(primary&&primaryHost){
+ const componentOwned=new Set(['cases','comparison','trajectories','transitions','loss']);
+ if(primary&&primaryHost&&!componentOwned.has(state.activeLayer)){
   primaryHost.className='civ-atlas-primary-visual';
   const figure=visualFigure(doc,primary,locale),img=figure.querySelector('img');if(img){img.loading='eager';img.setAttribute('fetchpriority','high');}
   primaryHost.append(figure);
+ }else if(primaryHost){
+  primaryHost.className='';
  }
  if(!resourcesHost)return;
  const details=doc.createElement('details');details.className='civ-atlas-visual-resources';
