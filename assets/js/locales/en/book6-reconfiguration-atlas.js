@@ -85,6 +85,15 @@ const book6Atlas = Object.freeze({
       carrier: 'Carrier Change', boundary: 'Boundary Change', institutional: 'Institutional Change',
       economic: 'Economic Change'
     },
+    visualFamily: {
+      TIMELINE_ANCHOR: 'Timeline anchors', CASE_HERO: 'Case heroes', CASE_SECONDARY: 'Case details',
+      WORLD_SNAPSHOT_ATMOSPHERE: 'World snapshots', COMPARISON_FAMILY: 'Comparison families',
+      TRAJECTORY_MOTIF: 'Long-duration trajectories', TRANSITION_WINDOW: 'Transition windows',
+      SCALE_SHIFT: 'Scale shifts', LOSS_FAMILY: 'Loss families', LOSS_TYPE_VIGNETTE: 'Loss types',
+      CIVILIZATION_INFRASTRUCTURE: 'Civilization infrastructure', GEOGRAPHIC_BASE: 'Geographic bases',
+      HISTORICAL_FIGURE: 'Historical figures', MODERN_FLAG: 'Modern flags',
+      WORLD_RECONFIGURATION_SNAPSHOT: 'World reconfiguration snapshots'
+    },
     phrase: {
       PRIOR_REFORM: 'Existing institutional configuration before reform',
       PRIOR_SYSTEM: 'Prior system configuration',
