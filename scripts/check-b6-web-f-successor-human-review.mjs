@@ -6,7 +6,7 @@ assert.ok(html.includes('B6-WEB-F Successor Human Review'));
 assert.ok(html.includes('PENDING_HUMAN_REVIEW'),'Human review export must preserve a pending state when review is incomplete.');
 assert.ok(html.includes("dimensions.every(x=>x.status==='ACCEPT')?'HUMAN_ACCEPTED'"),'Acceptance must require every human dimension to be accepted.');
 assert.ok(html.includes("dimensions.some(x=>x.status==='REJECT')?'HUMAN_REJECTED'"),'Any rejection must keep the review rejected.');
-assert.equal((html.match(/data-review="/g)||[]).length,12,'Human review must expose exactly 12 explicit decision dimensions.');
+assert.equal((html.match(/<article class="review-item" data-review="/g)||[]).length,12,'Human review must expose exactly 12 explicit decision dimensions.');
 for(const viewport of ['360','768','1440']) assert.ok(html.includes(`data-width="${viewport}"`),`Missing review viewport ${viewport}`);
 for(const locale of ['en','zh-Hans']) assert.ok(html.includes(`data-locale="${locale}"`),`Missing review locale ${locale}`);
 for(const surface of ['book5','book6','article']) assert.ok(html.includes(`data-surface="${surface}"`),`Missing review surface ${surface}`);
