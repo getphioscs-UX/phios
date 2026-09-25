@@ -60,3 +60,34 @@
 @media(max-width:600px){.bzpub-grid,.bzpub-ten-bars{grid-template-columns:1fr}.bzpub-cycle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bzpub-element-heading{flex-wrap:wrap}}
 @media print{.bzpub-grid{grid-template-columns:repeat(var(--bzpub-columns,2),minmax(0,1fr))}.bzpub-ten-bars{grid-template-columns:1fr 1fr}.bzpub-cycle-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.bzpub-module{break-inside:avoid}}
 .bazi-report-unlock{box-sizing:border-box;max-width:940px;margin:20px auto;padding:24px;background:#fffaf1;border:1px solid #d4c6ab;border-radius:12px;color:#19364e}.bazi-report-unlock a{display:inline-block;max-width:100%;box-sizing:border-box;padding:12px 18px;background:#19364e;color:#fff;text-decoration:none;border-radius:6px;overflow-wrap:anywhere}details[data-bazi-technical-detail]{margin:24px auto;max-width:1100px}details[data-bazi-technical-detail]>summary{padding:18px;cursor:pointer}@media print{.bazi-report-unlock,details[data-bazi-technical-detail]{display:none!important}}
+
+/* R11 print hardening: one publication node must equal one physical A4 page. */
+@media print{
+ html,body{margin:0!important;padding:0!important;background:#fff!important}
+ .pub-report{margin:0!important;padding:0!important;max-width:none!important}
+ .pub-static,.pub-page{
+  width:210mm!important;
+  height:296mm!important;
+  min-height:296mm!important;
+  max-height:296mm!important;
+  margin:0!important;
+  overflow:hidden!important;
+  break-inside:avoid-page!important;
+  page-break-inside:avoid!important;
+  break-before:auto!important;
+  page-break-before:auto!important;
+  break-after:page!important;
+  page-break-after:always!important;
+ }
+ .pub-static img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+ }
+ .pub-page:last-child,.pub-static:last-child{break-after:auto!important;page-break-after:auto!important}
+ .pub-decoration{inset:0!important;overflow:hidden!important}
+ .pub-decoration img{max-width:100%!important;max-height:100%!important}
+}
