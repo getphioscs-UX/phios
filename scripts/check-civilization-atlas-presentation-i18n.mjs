@@ -81,4 +81,22 @@ assert.ok(comparison.includes('const PAGE=12'),'Comparison families must retain 
 assert.ok(comparison.includes('data-family-more'),'Comparison families must progressively reveal additional civilizations.');
 assert.ok(comparison.includes("basket.length>=2?' open':''"),'Comparison matrix should auto-open only after an intentional multi-case selection.');
 
+const trajectories=read('assets/js/pages/civilization-atlas/trajectory-renderer.js');
+const transitions=read('assets/js/pages/civilization-atlas/transition-renderer.js');
+const loss=read('assets/js/pages/civilization-atlas/loss-renderer.js');
+
+assert.ok(trajectories.includes('items.slice(0,1)'),'Long trends must default to one readable trajectory, not a multi-chart dashboard.');
+assert.ok(trajectories.indexOf('civ-trajectory-card--reader')<trajectories.indexOf('civ-trajectory-navigator'),'Long trends must present reading before controls.');
+assert.ok(trajectories.includes('civ-trajectory-data'),'Trajectory curve and method must be progressive disclosure.');
+
+assert.ok(transitions.indexOf('civ-transition-reader')<transitions.indexOf('civ-transition-navigator'),'Transitions must present the active story before the selector.');
+assert.ok(transitions.includes('civ-transition-story'),'Transitions must foreground before → transition → successor reality.');
+assert.ok(transitions.includes('civ-transition-mechanism'),'Full transition mechanics must be progressive disclosure.');
+assert.ok(!transitions.includes('authorityClass}</dd>'),'Transition inspector must not expose raw authority enums.');
+
+assert.ok(loss.indexOf('civ-loss-reader')<loss.indexOf('civ-loss-navigator'),'Loss must present the active interpretation before taxonomy controls.');
+assert.ok(loss.includes('casesRegistry'),'Loss examples must resolve civilization names from the case registry.');
+assert.ok(loss.includes('civ-loss-examples'),'Loss case profiles must be progressive disclosure.');
+assert.ok(!loss.includes('p.caseId}</strong>'),'Loss customer UI must not foreground raw case IDs.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
