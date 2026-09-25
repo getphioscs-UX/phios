@@ -30,14 +30,14 @@ nav a{margin-right:14px}
 <a href="?locale=en">English</a><a href="?locale=zh-Hans">中文</a>
 <span id="meta"></span></nav><main id="report"></main>
 <script type="module">
-import {renderVisualReportPages} from '/assets/customer-ui/js/personal-products/visual-report-pages.js';
-import {fitPublicationForPrint} from '/assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {renderVisualReportPages,fitPublicationForPrint,settlePublicationAssets} from '/assets/customer-ui/js/personal-products/bazi-r9-review-runtime.bundle.js';
 const locale=new URLSearchParams(location.search).get('locale')||'en';
 if(!['en','zh-Hans'].includes(locale))throw Error('LOCALE_INVALID');
 const snapshot=await (await fetch('./snapshot-'+locale+'.json')).json();
 document.documentElement.lang=locale;
 document.querySelector('#meta').textContent=' · '+snapshot.totalPages+' pages';
 document.querySelector('#report').innerHTML=renderVisualReportPages(snapshot);
+await settlePublicationAssets(document.querySelector('#report'));
 await Promise.all([...document.querySelectorAll('#report img')].map(async i=>{try{await i.decode()}catch{}}));
 await document.fonts.ready;
 window.fitPublication=()=>fitPublicationForPrint(document.querySelector('#report'));
