@@ -24,6 +24,10 @@ export async function onRequest(context){
   const body=JSON.parse(raw);
   if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status'].includes(body.action)))return reply({ok:false},400);
   const profileId=body.profileId||'BASELINE_NOW',generating=!body.action||body.action==='generate';
+  // T3 is no longer canonical BaZi publication authority. Provider-backed
+  // generation is retained only for explicitly enabled editorial experiments,
+  // preventing Library/QA tooling from spending provider calls by default.
+  if((generating||body.action==='parity')&&env.BAZI_T3_EDITORIAL_EXPERIMENT!=='enabled')return reply({ok:false,code:'T3_EDITORIAL_EXPERIMENT_DISABLED'},409);
   const originalPack=fixtures.packs[`${profileId}:${body.locale}:${body.sectionKey}`];if(!originalPack)return reply({ok:false},400);
   if(generating&&profileId==='BASELINE_NOW'&&body.sectionKey==='S02_PERSONALITY'){
    const goldAccepted=goldStandardAcceptance?.decision==='ACCEPT'&&goldStandardAcceptance?.profileId==='BASELINE_NOW'&&goldStandardAcceptance?.sectionKey==='S02_PERSONALITY'&&goldStandardAcceptance?.goldStandardVersion==='BAZI_S02_EDITORIAL_GOLD_STANDARD_V1'&&goldStandardAcceptance?.depthGateVersion==='BAZI_S02_EDITORIAL_DEPTH_GATE_V1';
