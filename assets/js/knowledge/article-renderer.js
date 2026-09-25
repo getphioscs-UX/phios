@@ -695,9 +695,14 @@ function renderHeader(documentRef, article, translate) {
   return header;
 }
 
+function shouldExposePublicSourceReading(article) {
+  return article?.publicationContext?.bookCode !== 'BOOK-5' &&
+    article?.sourceReading?.accessBoundary !== 'PRIVATE_MANUSCRIPT_TEXT_NOT_EMBEDDED_IN_PUBLIC_ARTICLE';
+}
+
 function renderSourceProvenance(documentRef, article) {
   const source=article.sourceReading;
-  if(!source || source.path) return null;
+  if(!source || (source.path && shouldExposePublicSourceReading(article))) return null;
   const sections=Array.isArray(source.sourceSections)?source.sourceSections.filter(Boolean):[];
   const start=Number(source.pages?.start),end=Number(source.pages?.end);
   const pages=Number.isFinite(start)&&Number.isFinite(end)?`${start}–${end}`:'';
@@ -750,7 +755,7 @@ export function renderArticleDocument(
   container.append(layout);
   const provenanceOnly=renderSourceProvenance(documentRef,article);
   if(provenanceOnly) container.append(provenanceOnly);
-  if (article.sourceReading?.path) {
+  if (article.sourceReading?.path && shouldExposePublicSourceReading(article)) {
     const details = documentRef.createElement('details');
     details.className = 'knowledge-article__source-reading';
     details.id = 'manuscript';
