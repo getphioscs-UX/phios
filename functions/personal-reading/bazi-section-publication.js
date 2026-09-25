@@ -224,7 +224,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  paragraphs('boundaries',[
   e('S10_APPENDIX').bridge[locale],
   pick(
-   'Use four evidence levels when reading the report: calculated chart facts, admitted method relationships, editorial explanation, and lived-reality evidence. A statement becomes stronger only when the kind of evidence supporting it is clear; agreement between layers should not erase their different roles.',
+   'Use four evidence levels when reading the report: calculated chart facts, admitted method relationships, editorial explanation, and lived-reality evidence. A statement becomes stronger only when the kind of evidence supporting it is clear; agreement between layers should not erase their different roles or collapse them into one source of certainty.',
    '阅读本报告时，请区分四个证据层：计算得到的命盘事实、已核准的方法关系、编辑解释，以及真实生活证据。一个判断只有在清楚知道由哪一层证据支持时才更可靠；不同层之间即使相符，也不应因此失去各自的角色。'
   )
  ],`${edRef}#S10_APPENDIX`);
