@@ -17,6 +17,6 @@ export function renderWorldSlice(container,{registry,casesRegistry,state,locale=
 }
 export function renderWorldInspector(container,{snapshot,locale='en'}={}){
   if(!snapshot) return false; const lang=locale==='zh-Hans'?'zh-Hans':'en';
-  container.innerHTML=`<p class="knowledge-eyebrow">${esc(formatYear(snapshot.year,lang))}</p><h3>${esc(loc(snapshot.title,lang))}</h3><p>${esc(loc(snapshot.summary,lang))}</p><dl><div><dt>${lang==='zh-Hans'?'代表文明':'Civilizations'}</dt><dd>${snapshot.majorCaseIds.length}</dd></div></dl><details class="civ-atlas-evidence-note"><summary>${lang==='zh-Hans'?'资料边界':'Evidence note'}</summary><p>${esc(loc(snapshot.unknown.note,lang))}</p></details>`;
+  container.innerHTML=`<div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(formatYear(snapshot.year,lang))}</p><h3>${esc(loc(snapshot.title,lang))}</h3><dl><div><dt>${lang==='zh-Hans'?'代表文明':'Civilizations'}</dt><dd>${snapshot.majorCaseIds.length}</dd></div></dl></div>`;
   return true;
 }
