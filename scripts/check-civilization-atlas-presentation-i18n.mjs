@@ -26,7 +26,7 @@ assert.ok(!/知识状态|Knowledge state/.test(timeline),'Timeline should not fo
 assert.ok(!/知识状态|Knowledge state/.test(worldRenderer),'World should not foreground knowledge-state enum.');
 assert.ok(cases.includes("knowledge-eyebrow\">${esc(loc(c.region?.label,lang)||formatRange(c.timeWindow,lang))}"),'Cases must foreground region/time, not raw case ID.');
 assert.ok(!cases.includes('knowledge-eyebrow\">${esc(c.caseId)}'),'Cases should not foreground raw case ID.');
-assert.ok(comparison.includes("knowledge-eyebrow\">${esc(lang==='zh-Hans'?'文明比较':'Civilization comparison')}"),'Comparison must foreground a human-readable reading label.');
+assert.ok(comparison.includes("lang==='zh-Hans'?'比较家族':'Comparison families'"),'Comparison must foreground a human-readable family-map label.');
 assert.ok(!comparison.includes('knowledge-eyebrow\">${esc(selected.familyId)}'),'Comparison should not foreground raw family ID.');
 assert.ok(!/relationType/.test(comparison),'Comparison customer view should not render raw relationType.');
 assert.ok(timeline.includes('civ-atlas-detail-table'),'Timeline full table must be progressive disclosure.');
@@ -79,9 +79,9 @@ assert.ok(timeline.includes('About this periodization')||timeline.includes('关�
 assert.ok(cases.includes('const PAGE=12'),'Civilizations must retain a bounded first batch.');
 assert.ok(cases.includes('data-case-more'),'Civilizations must progressively reveal additional cases.');
 assert.ok(cases.includes("visible+PAGE"),'Civilizations show-more must advance by bounded batches.');
-assert.ok(comparison.includes('const PAGE=12'),'Comparison families must retain a bounded first batch.');
-assert.ok(comparison.includes('data-family-more'),'Comparison families must progressively reveal additional civilizations.');
-assert.ok(comparison.includes("basket.length>=2?' open':''"),'Comparison matrix should auto-open only after an intentional multi-case selection.');
+assert.ok(comparison.includes('civ-compare-case-strip'),'FR2 comparison must foreground representative civilization cards before the matrix.');
+assert.ok(comparison.includes('civ-compare-matrix'),'FR2 comparison must use the responsive comparison board.');
+assert.ok(comparison.includes('data-case-label'),'FR2 mobile matrix cells must preserve civilization labels.');
 
 const trajectories=read('assets/js/pages/civilization-atlas/trajectory-renderer.js');
 const transitions=read('assets/js/pages/civilization-atlas/transition-renderer.js');
