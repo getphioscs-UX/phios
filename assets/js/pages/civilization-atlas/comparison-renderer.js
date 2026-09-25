@@ -2,27 +2,30 @@ import {resolveAtlasVisualById} from './atlas-static-visual.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
 const loc=(v,lang)=>v?.[lang]||v?.en||v?.['zh-Hans']||'';
 const label=(obj,lang)=>loc(obj?.label,lang)||'—';
-const DIMENSION_FIELD={
-  ADMINISTRATION:'politicalArchitecture',FRONTIER_GOVERNANCE:'geographicReach',LEGITIMACY:'alignment',INFRASTRUCTURE:'infrastructure',
-  CENTER_DISTRIBUTION:'politicalArchitecture',INTERCITY_NETWORK:'externalNetwork',SHARED_IDENTITY:'beliefSystem',PORT_SYSTEM:'infrastructure',SEA_LANES:'externalNetwork',COMMERCIAL_CARRIER:'economicRuntime',
-  MEMORY_SYSTEM:'knowledgeSystem',REPLICATION:'knowledgeSystem',PARTICIPATION:'civilizationDensity',CROSS_BORDER_REACH:'externalNetwork',MARKET_DENSITY:'economicRuntime',NETWORK_REACH:'externalNetwork',MONEY_CREDIT:'economicRuntime',DEPENDENCY:'load',
-  ENERGY_DENSITY:'energyBase',INDUSTRIAL_CAPACITY:'technology',INFORMATION_SPEED:'externalNetwork',GLOBAL_DEPENDENCY:'externalNetwork'
-};
-function cellFor(caseRecord,dimensionId,lang){if(!caseRecord)return'—'; const field=DIMENSION_FIELD[dimensionId]; return field?label(caseRecord[field],lang):'—';}
+const year=(v,lang)=>Number(v)<0?(lang==='zh-Hans'?`公元前${Math.abs(Number(v))}年`:`${Math.abs(Number(v))} BCE`):(lang==='zh-Hans'?`公元${Number(v)}年`:`${Number(v)} CE`);
+const range=(w,lang)=>w?`${year(w.startYear,lang)} – ${year(w.endYear,lang)}`:'—';
 const visualBy=(bindings,family,subjectId)=>{const a=(bindings?.assets||[]).find(x=>x.family===family&&x.subjectId===subjectId);return a?resolveAtlasVisualById(bindings,a.assetId):null;};
 const short=(v,max=92)=>{const x=String(v||'—').trim();return x.length>max?x.slice(0,max-1)+'…':x;};
 const matrixCell=(caseRecord,dimensionId,lang)=>{
  const value=cellFor(caseRecord,dimensionId,lang);
  return {headline:short(value,44),detail:short(label(caseRecord?.legacy,lang)||label(caseRecord?.externalNetwork,lang)||'',84)};
 };
-export function renderComparison(container,{registry,casesRegistry,visualBindings,state,locale='en',onFamilySelect=()=>{},onCaseSelect=()=>{},onCompareToggle=()=>{}}={}){
+export function renderComparison(container,{registry,casesRegistry,transitionsRegistry,worldRegistry,visualBindings,state,locale='en',onFamilySelect=()=>{},onCaseSelect=()=>{},onCompareToggle=()=>{}}={}){
   const lang=locale==='zh-Hans'?'zh-Hans':'en'; const families=registry?.families||[]; const cases=casesRegistry?.cases||[];
   const selected=families.find(f=>f.familyId===state.comparisonFamilyId)||families.find(f=>(state.compareBasket||[]).some(id=>f.caseIds.includes(id)))||families[0]||null;
-  const caseMap=new Map(cases.map(c=>[c.caseId,c])); const familyMap=new Map(families.map(f=>[f.familyId,f]));
+  const caseMap=new Map(cases.map(c=>[c.caseId,c])); const familyMap=new Map(families.map(f=>[f.familyId,f])); const transitionMap=new Map((transitionsRegistry?.transitionWindows||[]).map(x=>[x.transitionWindowId,x])); const snapshotMap=new Map((worldRegistry?.snapshots||[]).map(x=>[x.snapshotId,x]));
   const basket=(state.compareBasket||[]).filter(id=>selected?.caseIds.includes(id));
   const familyVisual=visualBy(visualBindings,'COMPARISON_FAMILY',selected?.familyId);
   const representatives=(basket.length>=2?basket:selected?.caseIds||[]).slice(0,6);
   const matrixCases=(basket.length>=2?basket:representatives.slice(0,4));
+  const factRows=[
+    {label:lang==='zh-Hans'?'时期':'Period',get:c=>range(c?.timeWindow,lang)},
+    {label:lang==='zh-Hans'?'地区':'Region',get:c=>loc(c?.region?.label,lang)||'—'},
+    {label:lang==='zh-Hans'?'空间范围':'Reach',get:c=>label(c?.geographicReach,lang)},
+    {label:lang==='zh-Hans'?'关联转型':'Linked transitions',get:c=>(c?.transitionWindows||[]).map(id=>loc(transitionMap.get(id)?.title,lang)).filter(Boolean).join(' · ')||(lang==='zh-Hans'?'未登记':'Not registered')},
+    {label:lang==='zh-Hans'?'世界横切面':'World snapshots',get:c=>(c?.snapshots||[]).map(id=>loc(snapshotMap.get(id)?.title,lang)).filter(Boolean).join(' · ')||(lang==='zh-Hans'?'未登记':'Not registered')},
+    {label:lang==='zh-Hans'?'相关案例':'Related cases',get:c=>lang==='zh-Hans'?`${c?.relatedCases?.length||0} 个`:`${c?.relatedCases?.length||0} cases`}
+  ];
   container.innerHTML=`<div class="civ-comparison civ-comparison--board" data-atlas-comparison>
     <section class="civ-compare-family-map">
       <div class="civ-compare-family-map__intro">
@@ -43,9 +46,11 @@ export function renderComparison(container,{registry,casesRegistry,visualBinding
         <div class="civ-compare-matrix" style="--compare-cols:${matrixCases.length}" role="table" aria-label="${esc(lang==='zh-Hans'?'文明比较矩阵':'Civilization comparison matrix')}">
           <div class="civ-compare-matrix__corner" role="columnheader">${esc(lang==='zh-Hans'?'比较维度':'Dimension')}</div>
           ${matrixCases.map(id=>{const c=caseMap.get(id),v=visualBy(visualBindings,'CASE_HERO',id);return `<div class="civ-compare-matrix__case-head" role="columnheader">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<strong>${esc(loc(c?.title,lang)||id)}</strong></div>`}).join('')}
-          ${selected.comparisonDimensions.map(d=>`<div class="civ-compare-matrix__dimension" role="rowheader"><strong>${esc(loc(d.title,lang))}</strong><small>${esc(loc(d.description,lang))}</small></div>${matrixCases.map(id=>{const cell=matrixCell(caseMap.get(id),d.dimensionId,lang);return `<div class="civ-compare-matrix__cell" role="cell" data-case-label="${esc(loc(caseMap.get(id)?.title,lang)||id)}"><strong>${esc(cell.headline)}</strong>${cell.detail&&cell.detail!==cell.headline?`<small>${esc(cell.detail)}</small>`:''}</div>`}).join('')}`).join('')}
+          ${factRows.map(row=>`<div class="civ-compare-matrix__dimension" role="rowheader"><strong>${esc(row.label)}</strong></div>${matrixCases.map(id=>{const c=caseMap.get(id);return `<div class="civ-compare-matrix__cell" role="cell" data-case-label="${esc(loc(c?.title,lang)||id)}"><strong>${esc(row.get(c))}</strong></div>`}).join('')}`).join('')}
         </div>
       </section>
+
+      <section class="civ-compare-dimensions"><div class="civ-compare-section-head"><div><p class="knowledge-eyebrow">${esc(lang==='zh-Hans'?'比较维度概览':'Comparison dimensions')}</p><h5>${esc(lang==='zh-Hans'?'这些维度定义“比较什么”，不把文明压成总分。':'These dimensions define what to compare without collapsing civilizations into a score.')}</h5></div></div><div class="civ-compare-dimension-grid">${selected.comparisonDimensions.map(d=>`<article><strong>${esc(loc(d.title,lang))}</strong><p>${esc(loc(d.description,lang))}</p></article>`).join('')}</div></section>
 
       <details class="civ-atlas-related-families"><summary>${esc(lang==='zh-Hans'?'相关比较家族':'Related comparison families')}</summary><div class="civ-family-relations">${selected.crossFamilyRelations.map(r=>`<button type="button" class="civ-family-relation" data-family-id="${esc(r.targetFamilyId)}"><strong>${esc(loc(familyMap.get(r.targetFamilyId)?.title,lang)||r.targetFamilyId)}</strong></button>`).join('')}</div></details>
     </section>`:''}
