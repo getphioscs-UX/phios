@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-B6-WEB-D-CUSTOMER-UI-v1.0.0",
+  "package": "B6-WEB-D",
+  "baselineCommit": "b786a5d57c8c06a7da8a9ae3ddf344a69e7e0367",
+  "status": "MACHINE_VALIDATED",
+  "owners": {
+    "renderer": "assets/js/pages/civilization-atlas/reconfiguration-renderer.js",
+    "state": "assets/js/pages/civilization-atlas/atlas-state.js",
+    "urlState": "assets/js/pages/civilization-atlas/atlas-url-state.js",
+    "search": "assets/js/knowledge/public-discovery.js",
+    "ask": "functions/_lib/atlas-retrieval-scope.js",
+    "route": "/books/reality-configuration/"
+  },
+  "capabilities": {
+    "filters": true,
+    "timeline": true,
+    "caseCompareMax": 4,
+    "snapshotSingleBaseImage": true,
+    "snapshotLayerSelector": true,
+    "dossierRuntime": true,
+    "dossierCompareMax": 4,
+    "versionHistory": true,
+    "livedReality": true,
+    "globalSearchTypes": [
+      "CASE",
+      "WINDOW",
+      "SNAPSHOT",
+      "DOSSIER",
+      "BOOK_SECTION",
+      "LIVED_REALITY"
+    ],
+    "askLinkedEntityExpansion": true
+  },
+  "boundaries": {
+    "newParallelRuntime": false,
+    "newSearchRuntime": false,
+    "newAskRuntime": false,
+    "articlePagesTouched": false,
+    "currentDataPopulation": false,
+    "r2Validation": false,
+    "finalAccessibility": false,
+    "finalPerformance": false,
+    "browserAcceptance": false,
+    "humanAcceptance": false,
+    "nextPackageNotStarted": "B6-WEB-E"
+  },
+  "uxHardening": {
+    "textInputsCommitOnChange": true,
+    "filterHistoryUsesReplaceState": true,
+    "previousVersionCustomerLanguage": true
+  },
+  "machineValidation": {
+    "syntax": "PASS",
+    "stateNormalization": "PASS",
+    "askLinkedScopeRuntime": "PASS",
+    "searchRegistration": "PASS",
+    "deepLinkContract": "STATIC_PASS",
+    "browser": "NOT_RUN"
+  }
+}
