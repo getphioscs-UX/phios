@@ -1,0 +1,48 @@
+name: BaZi R9 Browser Audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/bazi-r9-browser-audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  browser-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+          cache: npm
+      - name: Install repository dependencies
+        run: npm ci
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Build R9 review snapshots
+        run: node scripts/build-bazi-r9-browser-review.mjs
+      - name: Start local review server
+        run: |
+          python3 -m http.server 8788 --bind 127.0.0.1 > /tmp/bazi-r9-http.log 2>&1 &
+          echo $! > /tmp/bazi-r9-http.pid
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:8788/artifacts/bazi-r9-browser/review.html >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/bazi-r9-http.log
+          exit 1
+      - name: Run browser and print audit
+        run: node scripts/audit-bazi-r9-browser.mjs
+      - name: Upload R9 review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bazi-r9-browser-audit
+          path: artifacts/bazi-r9-browser
+          if-no-files-found: error
