@@ -76,3 +76,12 @@
   .civ-atlas-poster-dialog{width:100vw;height:100dvh;border-radius:0}
 }
 @media(prefers-reduced-motion:reduce){.civ-atlas-visual__frame img{transition:none}}
+
+
+/* Civilization Atlas customer IA: five entrances, existing runtime preserved */
+.civ-atlas-layer--link{text-decoration:none}
+.civ-atlas-subnav{display:flex;flex-wrap:wrap;gap:var(--phi-space-2);margin:0 0 var(--phi-space-4);padding:var(--phi-space-2);border:1px solid var(--phi-border-subtle);border-radius:var(--phi-radius-md);background:var(--phi-surface-subtle)}
+.civ-atlas-subview{min-height:44px;padding:.55rem .8rem;border:1px solid var(--phi-border-subtle);border-radius:999px;background:var(--phi-surface-solid);color:var(--phi-text-primary);cursor:pointer}
+.civ-atlas-subview:hover,.civ-atlas-subview:focus-visible,.civ-atlas-subview.is-active{border-color:var(--phi-action-knowledge)}
+.civ-atlas-subview.is-active{box-shadow:inset 0 -2px 0 var(--phi-action-knowledge)}
+@media(max-width:768px){.civ-atlas-subnav{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain}.civ-atlas-subview{flex:0 0 auto}}
