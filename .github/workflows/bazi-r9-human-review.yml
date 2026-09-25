@@ -1,4 +1,4 @@
-name: BaZi R10 Compressed Human Review Package
+name: BaZi R11 Content Quality Human Review Package
 
 on:
   push:
@@ -18,7 +18,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: bazi-r10-compressed-human-review
+  group: bazi-r11-content-quality-human-review
   cancel-in-progress: true
 
 jobs:
@@ -33,26 +33,26 @@ jobs:
           cache: npm
       - name: Install repository dependencies
         run: npm ci
-      - name: Build R9 browser runtime
+      - name: Build R11 browser runtime
         run: node scripts/sync-bazi-r9-review-browser.mjs
-      - name: Build R9 review package
+      - name: Build R11 review package
         run: node scripts/build-bazi-r9-review.mjs
-      - name: Commit R9 review package
+      - name: Commit R11 review package
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/customer-ui/js/personal-products/bazi-r9-review-runtime.bundle.js docs/acceptance/bazi-paid-report/r10
+          git add assets/customer-ui/js/personal-products/bazi-r9-review-runtime.bundle.js docs/acceptance/bazi-paid-report/r11
           if git diff --cached --quiet; then
             echo "No R9 package changes"
           else
-            git commit -m "bazi: materialize R10 compressed human review package"
+            git commit -m "bazi: materialize R11 content-quality human review package"
             git fetch origin main
             git rebase origin/main
             git push origin HEAD:main
           fi
-      - name: Upload R9 review package
+      - name: Upload R11 review package
         uses: actions/upload-artifact@v4
         with:
-          name: bazi-r10-compressed-human-review
+          name: bazi-r11-content-quality-human-review
           path: docs/acceptance/bazi-paid-report/r10
           if-no-files-found: error
