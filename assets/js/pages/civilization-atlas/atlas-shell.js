@@ -31,8 +31,10 @@ ${CIVILIZATION_LAYERS.has(state.activeLayer)?`<div class="civ-atlas-subnav" aria
 <div class="civ-atlas-context-strip civ-atlas-context-strip--quiet" aria-label="${esc(c.context)}">
   <span><strong>${lang==='zh-Hans'?'视图':'View'}</strong> ${esc(LAYERS[state.activeLayer]?.[lang]||LAYERS.timeline[lang])}</span>
 </div>
-<div data-atlas-structured-visual></div>
-<div data-atlas-layer-content></div></section><aside class="civ-atlas-inspector" aria-labelledby="civ-atlas-inspector-title" data-atlas-inspector><h3 id="civ-atlas-inspector-title">${esc(c.inspector)}</h3><p class="civ-atlas-inspector__lead">${esc(lang==='zh-Hans'?'这里会随你的选择显示当前文明、时期或比较重点。':'This panel follows your selection and keeps the current civilization, period or comparison in view.')}</p></aside></div></div>`;
+<div data-atlas-primary-visual></div>
+<div data-atlas-layer-content></div>
+<details class="civ-atlas-secondary" data-atlas-structured-section><summary>${esc(lang==='zh-Hans'?'查看结构图与数据视图':'Explore structured data view')}</summary><div data-atlas-structured-visual></div></details>
+<div data-atlas-visual-resources></div></section><aside class="civ-atlas-inspector" aria-labelledby="civ-atlas-inspector-title" data-atlas-inspector><h3 id="civ-atlas-inspector-title">${esc(c.inspector)}</h3><p class="civ-atlas-inspector__lead">${esc(lang==='zh-Hans'?'这里会随你的选择显示当前文明、时期或比较重点。':'This panel follows your selection and keeps the current civilization, period or comparison in view.')}</p></aside></div></div>`;
   root.querySelectorAll('[data-atlas-layer]').forEach(button=>button.addEventListener('click',()=>onLayerChange(button.dataset.atlasLayer)));
   wireAtlasKeyboardNavigation(root,{onLayerActivate:id=>{if(id&&id!==state.activeLayer)onLayerChange(id);}});
   const content=root.querySelector('[data-atlas-layer-content]'); const inspector=root.querySelector('[data-atlas-inspector]');
