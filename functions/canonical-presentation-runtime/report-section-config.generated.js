@@ -929,11 +929,11 @@ export const familyRegistry = {
     "STRUCTURED_ANALYSIS_PAGE": {
       "budget": {
         "zh": [
-          60,
+          36,
           160
         ],
         "en": [
-          40,
+          24,
           120
         ]
       },
