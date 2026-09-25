@@ -61,4 +61,16 @@ assert.ok(staticVisual.includes("const [primary,...related]=assets"),'Only one c
 assert.ok(timeline.includes('casesRegistry'),'Timeline must resolve real civilization titles from the case registry.');
 assert.ok(timeline.includes('caseMap.get(id)'),'Timeline representative civilizations must use human-readable titles, not generated ordinal labels.');
 
+
+const timelineFocus=timeline.indexOf('civ-timeline__focus--reader');
+const timelineNav=timeline.indexOf('civ-timeline__navigator');
+assert.ok(timelineFocus>=0&&timelineNav>timelineFocus,'Timeline must present the current era before the period navigator.');
+const worldReader=worldRenderer.indexOf('civ-world__slice--reader');
+const worldNav=worldRenderer.indexOf('civ-world__navigator');
+assert.ok(worldReader>=0&&worldNav>worldReader,'World must present the current snapshot before the snapshot navigator.');
+assert.ok(worldRenderer.includes('civ-world__featured'),'World reader must foreground representative civilizations.');
+assert.ok(worldRenderer.includes('civ-world__deep-dive'),'World map and networks must use progressive disclosure.');
+assert.ok(worldRenderer.indexOf('civ-world__featured')<worldRenderer.indexOf('civ-world__deep-dive'),'Representative civilizations must appear before deep world data.');
+assert.ok(timeline.includes('About this periodization')||timeline.includes('关于这个分期'),'Timeline evidence note must remain secondary.');
+
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
