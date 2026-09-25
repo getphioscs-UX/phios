@@ -526,19 +526,19 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   r11Module('guidanceIntegrated','GUIDANCE',[
    pick(
     `Four whole-chart themes deserve to be held together rather than repeated separately: ${topNames.join('; ')}. Their value is in the way they intersect across sections, not in turning the highest-ranked theme into a fate statement.`,
-    `有四条整盘主线更适合被放在一起，而不是在不同章节反复说一遍：${topNames.join('；')}。它们真正有价值的地方，是看这些主线怎样跨章节交会，而不是把排名靠前的主题写成命运结论。`
+    `整盘最值得合读的四条主线是：${topNames.join('；')}。重点不是把排名靠前的主题写成命运结论，而是看它们在不同章节怎样交会。`
    ),
    pick(
     'The first practical step is to identify which theme is actually active in one current situation. A work problem may be mostly about role pressure, a financial problem about retention and obligation, and a relationship problem about negotiation or boundaries even though all of them arise from the same underlying chart.',
-    '第一步不是把所有主线都套进现实，而是判断某一个当前情境真正由哪条主线主导。工作问题可能主要是角色压力，财务问题可能是留存与责任，关系问题可能是协商与边界；它们可以来自同一张命盘，却不应该被解释成同一件事。'
+    '先选一个真实情境，判断哪条主线真正起作用。工作可看角色压力，财务看留存与责任，关系看协商与边界；同一张命盘不等于同一种现实问题。'
    ),
    pick(
     'Next, separate stable structure from current timing. If a theme appears in both the natal chart and the selected Da Yun or annual layer, it deserves attention during this window; if it appears only in timing, do not turn a temporary emphasis into a permanent identity.',
-    '第二步是把稳定结构与当前时间层分开。如果一个主题同时出现在本命与当前大运／流年，它在这个阶段更值得注意；如果只出现在时间层，就不要把阶段性放大写成永久身份。'
+    '再把本命结构与时间层分开。主题若同时出现在本命与大运／流年，本阶段更值得观察；只出现在时间层，就不要写成永久身份。'
    ),
    pick(
     'Finally, choose one bounded adjustment and one counterexample to watch. The report becomes useful when it changes what you observe or test—not when it produces a more dramatic label. If real evidence consistently contradicts the reading, that contradiction should remain part of the interpretation.',
-    '最后，选择一个有限调整和一个要主动寻找的反例。报告真正有用，是因为它改变了你观察与验证什么，而不是因为它给出更戏剧化的标签。如果现实证据持续与读取不符，这种不符本身就应该继续留在解释里。'
+    '最后做一个有限调整，并主动找反例。报告的价值在于改变你观察与验证什么；如果现实持续不符，这个反例就应继续保留在解释里。'
    )
   ],{boundary:'',observations:(reading.professionalModules.realityBridge?.priorityPrompts||[]).flatMap(x=>x.prompts||[]).map(x=>x.prompt?.[lang]).filter(Boolean).slice(0,2)});
  }
