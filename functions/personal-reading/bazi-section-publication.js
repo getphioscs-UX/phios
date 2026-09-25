@@ -225,6 +225,14 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   return index>=0?`professionalModules/professionalTopics/topics/${index}`:'professionalModules/wholeChartPriority/themes';
  };
  const r11Repeated=topic=>(topic?.relevantTenGods||[]).filter(x=>x.repeatState==='REPEATED').sort((a,b)=>b.count-a.count);
+ const r11TenGodDetail=code=>reading.professionalModules.tenGods?.items?.find(x=>x.tenGodCode===code)||null;
+ const r11TenGodStructure=code=>{
+  const x=r11TenGodDetail(code);if(!x)return '';
+  return pick(
+   `${R11_TEN_GOD[code]||code} appears ${x.count} time${x.count===1?'':'s'} in the governed inventory (${x.visibleCount} visible, ${x.hiddenCount} hidden), with ${x.repeatState==='REPEATED'?'repetition across the chart':'a limited occurrence'}.`,
+   `${R11_TEN_GOD[code]||code}在已核准清单中出现 ${x.count} 次（透干 ${x.visibleCount}、藏干 ${x.hiddenCount}），${x.repeatState==='REPEATED'?'并在命盘中重复出现':'属于较有限的出现'}。`
+  );
+ };
  const r11Pattern=topic=>(topic?.patternCandidates||[]);
  const r11Relations=topic=>(topic?.relationshipInterfaces||[]);
  const r11Module=(key,code,paragraphs,{boundary='',observations=r11Prompts(code),extraRefs=[]}={})=>{
@@ -245,11 +253,17 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `This capability reading is anchored in ${R11_GROUP[t.leadGroup.groupCode]}. The recurring Ten-God pattern includes ${repeatedNames.join(', ')||'several repeated functions'}, so learning and support are not read in isolation from responsibility, pressure and self-position.`,
     `这张命盘的能力读取以「${R11_GROUP[t.leadGroup.groupCode]}」为入口；反复出现的十神包括${repeatedNames.join('、')||'多个重复功能'}。因此，学习与支持不能和责任、压力、自我位置分开阅读。`
    ),
+   r11TenGodStructure('QI_SHA'),
+   r11TenGodStructure('ZHENG_YIN'),
    pick(
-    `The chart also records ${tensionCount} tension interface${tensionCount===1?'':'s'} involving environment, self-position or expression. That makes context important: the same capability can be easier to access in one setting and harder to carry in another, without turning that difference into a fixed personality label.`,
-    `命盘同时记录了 ${tensionCount} 组涉及环境、自我位置或表达的张力关系。这里真正重要的是情境差异：同一项能力在不同环境中可能更容易调用或更难承载，但这不等于固定的人格标签。`
+    'These two structures do different work in the reading. Resource/support describes how material, guidance or prior knowledge can be taken in; the Officer/pressure side describes standards, obligations and demands that must also be carried. Their coexistence is more informative than calling either one a personality trait.',
+    '这两组结构在读取中承担不同作用：印星／支持说明资料、指导或既有知识怎样进入系统；官杀／压力则描述标准、责任与需要承载的要求。两者同时存在，比把其中任何一项写成固定性格标签更有解释力。'
+   ),
+   pick(
+    `The chart also records ${tensionCount} tension interface${tensionCount===1?'':'s'} involving environment, self-position or expression. That makes context important: the same capability can be easier to access in one setting and harder to carry in another. Compare situations with different standards, support and freedom of expression to see which condition actually changes the result.`,
+    `命盘同时记录了 ${tensionCount} 组涉及环境、自我位置或表达的张力关系。因此，情境差异很重要：同一项能力在不同环境中可能更容易调用或更难承载。可以比较标准、支持与表达空间不同的情境，看真正改变结果的是哪一个条件。`
    )
-  ],{boundary:''});
+  ],{boundary:'',observations:r11Prompts('CAPABILITY')});
 
   const supportPhrase=carry.supportVisible===0?pick('visible support is not prominent','可见支持并不突出'):pick('visible support is present','可见支持存在');
   const loadPhrase=(carry.outwardVisible>0&&carry.pressureVisible>0)?pick('outward demand and pressure are both present','向外投入与压力同时存在'):pick('support and demand need to be read together','支持与要求需要一起阅读');
