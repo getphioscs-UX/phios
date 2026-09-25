@@ -86,3 +86,41 @@ export function createCivilizationAtlasState(initial={}){
     }
   });
 }
+
+export const RECONFIG_ATLAS_LAYERS = Object.freeze([
+  'overview','search','cases','timeline','windows','snapshots','dossiers','lived','compare','dossiercompare'
+]);
+export const DEFAULT_RECONFIGURATION_ATLAS_STATE = Object.freeze({
+  version:'2.0.0',activeLayer:'overview',query:'',caseSearch:'',primaryCaseId:null,compareCaseIds:[],
+  windowId:null,snapshotId:null,snapshotLayer:'political',dossierId:null,compareDossierIds:[],
+  livedRealityDimensionId:null,sectionId:null,regionId:null,caseType:null,filterWindowId:null,
+  triggerQuery:'',pressureQuery:'',changeFilter:null,casePage:1,searchPage:1,locale:'en'
+});
+const RECONFIG_SNAPSHOT_LAYERS=new Set(['political','population','industry','energy','finance','trade','military','technology','information','colonialPostcolonial']);
+const positivePage=v=>{const n=Math.trunc(Number(v));return Number.isFinite(n)&&n>0?Math.min(n,99):1;};
+export function normalizeReconfigurationAtlasState(input={}){
+ const locale=LOCALES.has(input.locale)?input.locale:'en';
+ const activeLayer=RECONFIG_ATLAS_LAYERS.includes(input.activeLayer)?input.activeLayer:'overview';
+ return {
+  version:'2.0.0',activeLayer,query:String(input.query??'').slice(0,160),caseSearch:String(input.caseSearch??'').slice(0,160),
+  primaryCaseId:asString(input.primaryCaseId),compareCaseIds:asArray(input.compareCaseIds).slice(0,4),
+  windowId:asString(input.windowId),snapshotId:asString(input.snapshotId),
+  snapshotLayer:RECONFIG_SNAPSHOT_LAYERS.has(input.snapshotLayer)?input.snapshotLayer:'political',
+  dossierId:asString(input.dossierId),compareDossierIds:asArray(input.compareDossierIds).slice(0,4),
+  livedRealityDimensionId:asString(input.livedRealityDimensionId),sectionId:asString(input.sectionId),
+  regionId:asString(input.regionId),caseType:asString(input.caseType),filterWindowId:asString(input.filterWindowId),
+  triggerQuery:String(input.triggerQuery??'').slice(0,120),pressureQuery:String(input.pressureQuery??'').slice(0,120),
+  changeFilter:asString(input.changeFilter),casePage:positivePage(input.casePage),searchPage:positivePage(input.searchPage),locale
+ };
+}
+export function createReconfigurationAtlasState(initial={}){
+ let current=normalizeReconfigurationAtlasState({...DEFAULT_RECONFIGURATION_ATLAS_STATE,...initial});
+ const listeners=new Set();
+ return Object.freeze({
+  get(){return current;},
+  set(patch={},meta={source:'reconfiguration-ui'}){const previous=current;current=normalizeReconfigurationAtlasState({...current,...patch});listeners.forEach(fn=>fn(current,previous,meta));return current;},
+  replace(next={},meta={source:'replace'}){const previous=current;current=normalizeReconfigurationAtlasState(next);listeners.forEach(fn=>fn(current,previous,meta));return current;},
+  reset(meta={source:'reset'}){return this.replace(DEFAULT_RECONFIGURATION_ATLAS_STATE,meta);},
+  subscribe(listener){if(typeof listener!=='function')return()=>{};listeners.add(listener);return()=>listeners.delete(listener);}
+ });
+}

@@ -2,7 +2,7 @@ const clean=value=>String(value??'').normalize('NFKC').trim();
 const scalar=(value,max=120)=>clean(value).slice(0,max)||null;
 const list=(value,max=8)=>[...new Set((Array.isArray(value)?value:[]).map(item=>scalar(item)).filter(Boolean))].slice(0,max);
 const LAYERS=new Set(['timeline','cases','comparison','world','trajectories','transitions','loss']);
-const RECONFIG_LAYERS=new Set(['search','cases','windows','snapshots','dossiers','lived','compare','dossiercompare','sections']);
+const RECONFIG_LAYERS=new Set(['overview','search','cases','timeline','windows','snapshots','dossiers','lived','compare','dossiercompare','sections']);
 const EVIDENCE_CLASSES=new Set(['EVIDENCE_SERIES','HISTORICAL_RECONSTRUCTION','CONCEPTUAL_TRAJECTORY']);
 
 export function normalizeAtlasRetrievalScope(input={}){
@@ -88,11 +88,10 @@ const RECONFIG_CONFIG=Object.freeze({
   lived:{path:'content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json',array:'dimensions',id:'id',stage:'LIVED_REALITY_LAYER'},
   sections:{path:'content/civilization-atlas/reconfiguration/book-vi-sections-v1.json',array:'sections',id:'id',stage:'BOOK_VI_CANONICAL_SECTION'}
 });
-const reconfigSelection=(scope)=>{
-  const explicit=scope.entityId||scope.windowId||scope.snapshotId||scope.dossierId||scope.livedRealityDimensionId||scope.sectionId;
-  const ids=[explicit,...(scope.caseIds||[]),...(scope.comparisonIds||[])].filter(Boolean);
-  return [...new Set(ids)];
-};
+const reconfigSelection=(scope)=>[...new Set([
+ scope.entityId,scope.windowId,scope.snapshotId,scope.dossierId,scope.livedRealityDimensionId,scope.sectionId,
+ ...(scope.caseIds||[]),...(scope.comparisonIds||[])
+].filter(Boolean))];
 const sourceFor=(record,idKey,stage,locale,question)=>({
   sourceType:'CIVILIZATION_ATLAS_ENTITY',
   sourceId:`ATLAS:BOOK-6:${stage}:${record[idKey]}`,
@@ -103,30 +102,23 @@ const sourceFor=(record,idKey,stage,locale,question)=>({
 });
 
 async function retrieveReconfigurationScope({env,scope,locale,question}){
-  const wanted=reconfigSelection(scope);
-  const ordered=['cases','windows','snapshots','dossiers','lived','sections'];
-  const loaded={};
-  await Promise.all(ordered.map(async key=>{loaded[key]=await readJson(env,RECONFIG_CONFIG[key].path);}));
-  const sources=[];
-  const stageRows=[];
-  for(const key of ordered){
-    const cfg=RECONFIG_CONFIG[key],rows=loaded[key]?.[cfg.array]||[];
-    const selected=rows.filter(row=>wanted.includes(row?.[cfg.id])).slice(0,8);
-    const projected=selected.map(row=>sourceFor(row,cfg.id,cfg.stage,locale,question)).filter(source=>source.text);
-    sources.push(...projected);
-    stageRows.push({stage:cfg.stage,status:projected.length?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:projected.length});
-  }
+  const ordered=['cases','windows','snapshots','dossiers','lived','sections'],loaded={};
+  await Promise.all([...ordered.map(async key=>{loaded[key]=await readJson(env,RECONFIG_CONFIG[key].path);}),readJson(env,'content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json').then(v=>loaded.relationships=v)]);
+  const selected=Object.fromEntries(ordered.map(k=>[k,new Set()])),wanted=reconfigSelection(scope);
+  const rowsByKey=Object.fromEntries(ordered.map(k=>{const cfg=RECONFIG_CONFIG[k];return [k,loaded[k]?.[cfg.array]||[]]}));
+  for(const id of wanted)for(const key of ordered){const cfg=RECONFIG_CONFIG[key];if(rowsByKey[key].some(row=>row?.[cfg.id]===id))selected[key].add(id);}
+  const initial=Object.fromEntries(ordered.map(k=>[k,[...selected[k]]]));
+  const add=(key,ids)=>{for(const id of ids||[])if(rowsByKey[key].some(row=>row?.[RECONFIG_CONFIG[key].id]===id))selected[key].add(id);};
+  for(const id of initial.cases){const c=rowsByKey.cases.find(x=>x.id===id);add('windows',c?.relatedWindows);add('snapshots',c?.relatedSnapshots);add('dossiers',c?.relatedDossiers);add('sections',c?.relatedBookSections);}
+  for(const id of initial.windows){const w=rowsByKey.windows.find(x=>x.id===id);add('cases',w?.majorCases);add('snapshots',w?.relatedSnapshots);}
+  for(const id of initial.snapshots){const s=rowsByKey.snapshots.find(x=>x.id===id);add('cases',s?.majorReconfigurationCases);}
+  for(const id of initial.sections){const r=(loaded.relationships?.relationships||[]).find(x=>x.bookSection===id);add('cases',r?.relatedCases);add('windows',r?.relatedWindows);add('snapshots',r?.relatedSnapshots);add('dossiers',r?.relatedDossiers);add('lived',r?.relatedLivedRealityDimensions);}
+  for(const id of initial.dossiers)for(const r of loaded.relationships?.relationships||[])if((r.relatedDossiers||[]).includes(id)){add('sections',[r.bookSection]);add('cases',r.relatedCases);add('lived',r.relatedLivedRealityDimensions);}
+  for(const id of initial.lived)for(const r of loaded.relationships?.relationships||[])if((r.relatedLivedRealityDimensions||[]).includes(id)){add('sections',[r.bookSection]);add('dossiers',r.relatedDossiers);}
+  const sources=[],stageRows=[];
+  for(const key of ordered){const cfg=RECONFIG_CONFIG[key],rows=rowsByKey[key].filter(row=>selected[key].has(row?.[cfg.id])).slice(0,8),projected=rows.map(row=>sourceFor(row,cfg.id,cfg.stage,locale,question)).filter(source=>source.text);sources.push(...projected);stageRows.push({stage:cfg.stage,status:projected.length?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:projected.length});}
   const entityCount=sources.length;
-  return {
-    scope,
-    sources,
-    chain:[
-      {stage:'ATLAS_ENTITY',status:entityCount?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:entityCount},
-      ...stageRows,
-      {stage:'PART_13',status:'AUTHORIZED_FALLBACK'},
-      {stage:'BROADER_KNOWLEDGE',status:'AUTHORIZED_FALLBACK'}
-    ]
-  };
+  return {scope,sources,chain:[{stage:'ATLAS_ENTITY',status:entityCount?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:entityCount},...stageRows,{stage:'PART_13',status:'AUTHORIZED_FALLBACK'},{stage:'BROADER_KNOWLEDGE',status:'AUTHORIZED_FALLBACK'}]};
 }
 
 export async function retrieveAtlasScope({env={},scope,locale='zh-Hans',question=''}={}){

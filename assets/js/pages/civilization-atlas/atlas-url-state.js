@@ -1,4 +1,4 @@
-import {normalizeAtlasState,ATLAS_LAYERS} from './atlas-state.js';
+import {normalizeAtlasState,ATLAS_LAYERS,normalizeReconfigurationAtlasState,RECONFIG_ATLAS_LAYERS} from './atlas-state.js';
 
 const PARAMS=Object.freeze({
   activeLayer:'atlas',time:'time',timeWindowId:'period',snapshotId:'snapshot',
@@ -65,4 +65,33 @@ export function bindAtlasUrlState(store,{windowObject=globalThis.window,locale='
   };
   windowObject.addEventListener?.('popstate',onPopState);
   return ()=>{unsubscribe();windowObject.removeEventListener?.('popstate',onPopState);};
+}
+
+const RECONFIG_PARAMS=Object.freeze({
+ activeLayer:'atlas',query:'q',caseSearch:'caseQ',primaryCaseId:'case',compareCaseIds:'cases',
+ windowId:'window',snapshotId:'snapshot',snapshotLayer:'layer',dossierId:'dossier',compareDossierIds:'dossiers',
+ livedRealityDimensionId:'lived',sectionId:'section',regionId:'region',caseType:'caseType',filterWindowId:'period',
+ triggerQuery:'trigger',pressureQuery:'pressure',changeFilter:'change',casePage:'casePage',searchPage:'searchPage'
+});
+const RECONFIG_ARRAY_KEYS=new Set(['compareCaseIds','compareDossierIds']);
+export function reconfigurationAtlasStateFromUrl(urlLike,locale='en'){
+ const url=urlLike instanceof URL?urlLike:new URL(String(urlLike),'https://example.invalid'),draft={locale};
+ for(const [key,param] of Object.entries(RECONFIG_PARAMS)){const raw=url.searchParams.get(param);if(raw!==null)draft[key]=RECONFIG_ARRAY_KEYS.has(key)?split(raw):raw;}
+ if(draft.activeLayer&&!RECONFIG_ATLAS_LAYERS.includes(draft.activeLayer))draft.activeLayer='overview';
+ return normalizeReconfigurationAtlasState(draft);
+}
+export function reconfigurationAtlasUrlFromState(urlLike,state,{includeHash=true}={}){
+ const url=urlLike instanceof URL?new URL(urlLike.href):new URL(String(urlLike),'https://example.invalid');
+ const normalized=normalizeReconfigurationAtlasState(state);
+ for(const param of Object.values(RECONFIG_PARAMS))url.searchParams.delete(param);
+ const set=(key,value)=>{if(value!==null&&value!==undefined&&value!==''&&(!Array.isArray(value)||value.length))url.searchParams.set(RECONFIG_PARAMS[key],Array.isArray(value)?value.join(','):String(value));};
+ for(const key of Object.keys(RECONFIG_PARAMS))set(key,normalized[key]);
+ if(includeHash)url.hash='atlas';return url;
+}
+export function bindReconfigurationAtlasUrlState(store,{windowObject=globalThis.window,locale='en'}={}){
+ if(!windowObject?.location||!windowObject?.history)return()=>{};
+ let popping=false;store.replace({...store.get(),...reconfigurationAtlasStateFromUrl(windowObject.location.href,locale)},{source:'url-initial'});
+ const off=store.subscribe((next,_prev,meta={})=>{if(popping||meta.source==='url-popstate')return;const u=reconfigurationAtlasUrlFromState(windowObject.location.href,next),href=u.pathname+u.search+u.hash,state={...windowObject.history.state,phiosReconfigurationAtlas:true};if(['url-initial','locale','restore','search','case-filter','case-clear','case-page','search-page','snapshot-layer'].includes(meta.source))windowObject.history.replaceState(state,'',href);else windowObject.history.pushState(state,'',href);});
+ const pop=()=>{popping=true;try{store.replace(reconfigurationAtlasStateFromUrl(windowObject.location.href,store.get().locale),{source:'url-popstate'});}finally{popping=false;}};
+ windowObject.addEventListener?.('popstate',pop);return()=>{off();windowObject.removeEventListener?.('popstate',pop);};
 }

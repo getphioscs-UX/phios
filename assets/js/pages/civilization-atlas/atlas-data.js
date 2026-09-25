@@ -20,3 +20,6 @@ export async function loadReconfigurationWindows(){return getJson('/content/civi
 export async function loadReconfigurationSnapshots(){return getJson('/content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json');}
 export async function loadContemporaryRuntimeDossiers(){return getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json');}
 export async function loadLivedRealityDimensions(){return getJson('/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json');}
+
+export async function loadReconfigurationRelationships(){return getJson('/content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json');}
+export async function loadReconfigurationKnowledgeStates(){return getJson('/content/civilization-atlas/reconfiguration/knowledge-state-contract-v1.json');}

@@ -18,7 +18,7 @@ const fetchJson=async path=>{const response=await fetch(path,{credentials:'same-
 const state={articles:new Map(),books:null,concepts:null,figures:null,parts:null,catalog:null,searchIndex:new Map()};
 
 const BOOK_ROLE={
- 'BOOK-6':{en:'Reality Configuration',zh:'世界如何重组'},
+ 'BOOK-6':{en:'Reality Reconfiguration',zh:'世界如何重组'},
  'BOOK-1':{en:'How reality forms',zh:'现实如何形成'},
  'BOOK-2':{en:'How reality runs',zh:'现实如何运行'},
  'BOOK-3':{en:'How reality maintains continuity',zh:'现实如何维持与延续'},
@@ -33,6 +33,12 @@ const BOOK_ROUTE={'BOOK-1':'/books/reality-formation/','BOOK-2':'/books/reality-
 function askHref(kind,ref,labelText,route){
  const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:`${kind}:${ref}`,contextLabel:clean(labelText).slice(0,160),contextRoute:clean(route).slice(0,240)});
  return `/knowledge/ask/?${params.toString()}`;
+}
+const BOOK6_ATLAS_RESULT_TYPES=new Set(['CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY']);
+function atlasAskHref(record){
+ if(!record?.atlasScope)return null;
+ const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'BOOK:BOOK-6',contextLabel:clean(record.title).slice(0,160),contextRoute:clean(record.href).slice(0,240),readingPath:'BOOK-6 > PART-13 > RECONFIGURATION',relatedKnowledgeRef:'BOOK:BOOK-6',retrievalScope:JSON.stringify(record.atlasScope)});
+ return '/knowledge/ask/?'+params.toString();
 }
 function relatedLabel(article){
  const context=article?.publicationContext||{};
@@ -98,14 +104,14 @@ async function searchCorpus(){
  const recover=fallback=>()=>{failures++;if(summary)summary.dataset.partial='true';return fallback;};
  const [discoveryRows,bookRegistry,conceptRegistry,figureRegistry,partsRegistry]=await Promise.all([discoveryIndex().catch(recover([])),books().catch(recover({books:[]})),concepts().catch(recover({concepts:[]})),figures().catch(recover({figures:[]})),parts().catch(recover({parts:[]}))]);
  if(failures===5)throw new Error('SEARCH_SOURCES_UNAVAILABLE');
- const articleRows=discoveryRows.map(record=>({type:record.type||'ARTICLE',ids:[record.slug,record.nodeCode,record.articleCode],title:record.title,summary:record.summary,source:[label(record.bookTitle),label(record.partTitle)].filter(Boolean).join(' · '),related:[record.themeCode,...(record.tags||[])].filter(Boolean).slice(0,3).join(' · '),href:record.href,ask:record.type==='ATLAS'?null:askHref('ARTICLE',record.slug,record.title,record.href),terms:record.searchText||[record.title,record.summary,record.displayQuestion,...(record.keyConcepts||[]),...(record.tags||[])].join(' '),crossBook:record.crossBookNeighbors||[]}));
+ const articleRows=discoveryRows.map(record=>({type:record.type||'ARTICLE',ids:[record.slug,record.nodeCode,record.articleCode],title:record.title,summary:record.summary,source:[label(record.bookTitle),label(record.partTitle)].filter(Boolean).join(' · '),related:[record.themeCode,...(record.tags||[])].filter(Boolean).slice(0,3).join(' · '),href:record.href,ask:BOOK6_ATLAS_RESULT_TYPES.has(record.type)?atlasAskHref(record):record.type==='ATLAS'?null:askHref('ARTICLE',record.slug,record.title,record.href),terms:record.searchText||[record.title,record.summary,record.displayQuestion,...(record.keyConcepts||[]),...(record.tags||[])].join(' '),crossBook:record.crossBookNeighbors||[]}));
  const bookRows=(bookRegistry.books||[]).map(b=>{const title=label(b.title),href=BOOK_ROUTE[b.bookCode]||'/books/';return {type:'BOOK',ids:[b.bookCode],aliases:[b.title?.en,b.title?.['zh-Hans']],title,summary:label(b.subtitle),source:tr(`PHI OS Volume ${b.volume}`,`PHI OS 第 ${b.volume} 册`),related:BOOK_ROLE[b.bookCode]?.[locale()==='zh-Hans'?'zh':'en']||'',href,ask:askHref('BOOK',b.bookCode,title,href),terms:[title,label(b.subtitle),BOOK_ROLE[b.bookCode]?.en,BOOK_ROLE[b.bookCode]?.zh].join(' ')}});
  const conceptRows=(conceptRegistry.concepts||[]).map(c=>({type:'CONCEPT',ids:[c.id],aliases:[c.en,c['zh-Hans']],title:locale()==='zh-Hans'?c['zh-Hans']:c.en,summary:c.definition,source:tr('PHI OS concept registry','PHI OS 概念表'),related:tr(`Part ${c.part}`,`第 ${c.part} 部分`),href:`/knowledge/concepts/#term-${encodeURIComponent(c.id)}`,ask:null,terms:[c.id,c.en,c['zh-Hans'],c.definition].join(' ')}));
  const figureRows=(figureRegistry.figures||[]).filter(f=>figureHasCanonicalBookOwnership(f,partsRegistry)).map(f=>{const title=label(f.title),href=`/figure?id=${encodeURIComponent(f.figure_id)}`;return {type:'FIGURE',ids:[f.figure_id,'FIG '+f.figure_number],title,summary:f.purpose,source:tr(`Book ${f.book} · Figure ${f.figure_number}`,`第 ${f.book} 册 · 图 ${f.figure_number}`),related:tr(`Part ${f.part}`,`第 ${f.part} 部分`),href,ask:askHref('FIGURE',f.figure_id,title,href),terms:[title,f.purpose,f.figure_number,f.figure_id].join(' ')}});
  const [structured,index]=await Promise.all([fetchJson('/content/knowledge/structured/structured-knowledge-registry-v1.json'),fetchJson('/content/knowledge/structured/structured-knowledge-search-index-v1.json')]).catch(()=>{const summary=$('[data-cx-knowledge-search-summary]');if(summary)summary.dataset.partial='true';return [{objects:[]},[]];});
  return [...articleRows,...bookRows,...figureRows,...conceptRows,...structuredDiscoveryRows(structured,index.objects||index,bookRegistry,locale())];
 }
-function resultType(type){return ({ARTICLE:tr('Article','文章'),BOOK:tr('Book','书籍'),FIGURE:tr('Figure','图示'),CONCEPT:tr('Concept','概念'),STRUCTURED_OBJECT:tr('Structured object','结构化对象'),ATLAS:tr('Atlas','图谱')})[type]||type}
+function resultType(type){return ({ARTICLE:tr('Article','文章'),BOOK:tr('Book','书籍'),FIGURE:tr('Figure','图示'),CONCEPT:tr('Concept','概念'),STRUCTURED_OBJECT:tr('Structured object','结构化对象'),ATLAS:tr('Atlas','图谱'),CASE:tr('Case','案例'),WINDOW:tr('Window','重组窗口'),SNAPSHOT:tr('Snapshot','世界横切面'),DOSSIER:tr('Dossier','运行档案'),BOOK_SECTION:tr('Book section','正文节点'),LIVED_REALITY:tr('Lived Reality','日常现实')})[type]||type}
 function resultCard(item){const cross=(item.crossBook||[]).slice(0,3);return `<article class="cx-knowledge-result"><div class="cx-knowledge-result__type">${esc(resultType(item.type))}</div><div class="cx-stack"><h2 class="cx-heading-3"><a href="${esc(item.href)}">${esc(item.title)}</a></h2><p>${esc(item.summary)}</p><dl class="cx-knowledge-result__facts"><div><dt>${esc(tr('Source','来源'))}</dt><dd>${esc(item.source)}</dd></div><div><dt>${esc(tr('Related','相关'))}</dt><dd>${esc(item.related||tr('PHI OS knowledge','PHI OS 知识'))}</dd></div></dl>${cross.length?`<div class="cx-meta"><strong>${esc(tr('Across other volumes','跨册发现'))}</strong> · ${cross.map(link=>`<a href="${esc(link.href)}">${esc(link.title)}</a>`).join(' · ')}</div>`:''}<div class="cx-cluster"><a class="cx-button cx-button--text" href="${esc(item.href)}">${esc(tr('Open →','打开 →'))}</a>${item.ask?`<a class="cx-button cx-button--quiet" href="${esc(item.ask)}">${esc(tr('Ask about this','针对这个提问'))}</a>`:''}</div></div></article>`}
 async function renderSearch(){
  const form=$('[data-cx-knowledge-search-form]'),node=$('[data-cx-knowledge-search-results]'),summary=$('[data-cx-knowledge-search-summary]');if(!form||!node)return;loading(node);
@@ -113,8 +119,8 @@ async function renderSearch(){
   const corpus=await searchCorpus(),params=new URLSearchParams(location.search);form.elements.q.value=clean(params.get('q'));
   let limit=24;
   let type=form.querySelector('[data-search-type]');
-  if(!type){const label=document.createElement('label');label.textContent=tr('Result type ','结果类型 ');type=document.createElement('select');type.dataset.searchType='';type.name='type';for(const value of ['ALL','ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS']){const option=document.createElement('option');option.value=value;option.textContent=value==='ALL'?tr('All types','全部类型'):resultType(value);type.append(option);}label.append(type);form.append(label);}
-  type.value=['ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS'].includes((params.get('type')||'').toUpperCase())?params.get('type').toUpperCase():'ALL';
+  if(!type){const label=document.createElement('label');label.textContent=tr('Result type ','结果类型 ');type=document.createElement('select');type.dataset.searchType='';type.name='type';for(const value of ['ALL','ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS','CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY']){const option=document.createElement('option');option.value=value;option.textContent=value==='ALL'?tr('All types','全部类型'):resultType(value);type.append(option);}label.append(type);form.append(label);}
+  type.value=['ARTICLE','BOOK','FIGURE','CONCEPT','STRUCTURED_OBJECT','ATLAS','CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY'].includes((params.get('type')||'').toUpperCase())?params.get('type').toUpperCase():'ALL';
   const draw=()=>{
    const q=clean(form.elements.q.value),navigation=knowledgeNavigationIntent(q,locale());
    const rows=navigation?[{type:'NAVIGATION',title:navigation.title,href:navigation.href,summary:navigation.text,source:'',related:''}]:rankPublicSearch(corpus,q).filter(item=>type.value==='ALL'||item.type===type.value);
