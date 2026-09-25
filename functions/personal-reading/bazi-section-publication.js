@@ -60,11 +60,9 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const linkPairs=pairClaims.filter(x=>x.relationQualifier==='LINK');
   const makeFacet=(key,lead,selected)=>{
    const unique=[...new Map(selected.filter(Boolean).map(x=>[x.id,x])).values()];
-   const refs=[...new Set(unique.flatMap(x=>x.sourceRefs||[]))];
-   const body=unique.map(x=>humanizePublicationStatement(x.text)).filter(Boolean).join(' ');
    modules[key]={blocks:[
     block(lead,`${edRef}#S02_PERSONALITY`,'EDITORIAL_GUIDANCE'),
-    ...(body?[block(body,refs.join('|'),'METHOD_INTERPRETATION')]:[])
+    ...unique.map(x=>block(humanizePublicationStatement(x.text),(x.sourceRefs||[]).join('|'),'METHOD_INTERPRETATION'))
    ],boundary:authority.claims.find(x=>x.relationType==='BOUNDARY')?.text||''};
   };
   makeFacet('personalityCoreStyle',pick(
@@ -102,11 +100,9 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const select=types=>claims.filter(x=>types.includes(x.relationType));
   const toBlock=(key,lead,selected)=>{
    const unique=[...new Map(selected.filter(Boolean).map(x=>[x.id,x])).values()];
-   const refs=[...new Set(unique.flatMap(x=>x.sourceRefs||[]))];
-   const body=unique.map(x=>humanizePublicationStatement(x.text)).join(' ');
    modules[key]={blocks:[
     block(lead,`${edRef}#${section}`,'EDITORIAL_GUIDANCE'),
-    ...(body?[block(body,refs.join('|'),'METHOD_INTERPRETATION')]:[])
+    ...unique.map(x=>block(humanizePublicationStatement(x.text),(x.sourceRefs||[]).join('|'),'METHOD_INTERPRETATION'))
    ],boundary};
   };
   for(const facet of facets)toBlock(facet.key,facet.lead,select(facet.types));
