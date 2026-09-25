@@ -1,0 +1,36 @@
+name: BaZi R9 Human Review Package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-bazi-r9-review.mjs'
+      - 'functions/personal-reading/**'
+      - 'functions/canonical-presentation-runtime/**'
+      - 'assets/customer-ui/js/personal-products/**'
+      - 'assets/customer-ui/surfaces/**'
+      - 'config/reports/**'
+      - 'docs/guided-report-successor-r2/bazi-source.json'
+      - '.github/workflows/bazi-r9-human-review.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+      - name: Build R9 review package
+        run: node scripts/build-bazi-r9-review.mjs
+      - name: Upload R9 review package
+        uses: actions/upload-artifact@v4
+        with:
+          name: bazi-r9-human-review
+          path: artifacts/bazi-r9-review
+          if-no-files-found: error
