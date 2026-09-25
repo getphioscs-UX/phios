@@ -234,9 +234,17 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const r11TenGodDetail=code=>reading.professionalModules.tenGods?.items?.find(x=>x.tenGodCode===code)||null;
  const r11TenGodStructure=code=>{
   const x=r11TenGodDetail(code);if(!x)return '';
+  const presence=x.repeatState==='REPEATED'
+   ?pick('repeats across the chart','在命盘中重复出现')
+   :pick('has a more limited presence','出现较有限');
+  const visibility=x.visibleCount>0&&x.hiddenCount>0
+   ?pick('appears through both visible and hidden layers','同时通过透干与藏干进入结构')
+   :x.visibleCount>0
+    ?pick('is expressed through the visible layer','主要通过透干进入结构')
+    :pick('is carried in the hidden layer','主要保留在藏干层');
   return pick(
-   `${R11_TEN_GOD[code]||code} appears ${x.count} time${x.count===1?'':'s'} in the governed inventory (${x.visibleCount} visible, ${x.hiddenCount} hidden), with ${x.repeatState==='REPEATED'?'repetition across the chart':'a limited occurrence'}.`,
-   `${R11_TEN_GOD[code]||code}在已核准清单中出现 ${x.count} 次（透干 ${x.visibleCount}、藏干 ${x.hiddenCount}），${x.repeatState==='REPEATED'?'并在命盘中重复出现':'属于较有限的出现'}。`
+   `${R11_TEN_GOD[code]||code} ${presence} and ${visibility}. The distinction matters because repetition and visibility describe different structural roles; neither should be converted into a score.`,
+   `${R11_TEN_GOD[code]||code}${presence}，并且${visibility}。这里要区分“是否重复”与“通过哪一层进入结构”；两者都不应被转换成评分。`
   );
  };
  const r11Pattern=topic=>(topic?.patternCandidates||[]);
@@ -277,15 +285,14 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   {
    const link=rels.find(x=>x.relationFamily==='LINK');
    {
-    const directResource=r11TenGodDetail('ZHENG_YIN'),indirectResource=r11TenGodDetail('PIAN_YIN');
     r11Module('personalityDevelopment','CAPABILITY',[
      pick(
       `Capability development is easier to read as three separate questions: what can be absorbed, what can be expressed, and what can still be carried when demands continue. In this chart, ${supportPhrase}, while ${loadPhrase}.`,
       `能力发展更适合拆成三个问题：什么能够被吸收、什么能够被表达，以及当要求持续存在时，什么仍能被稳定承载。这张命盘里，${supportPhrase}，同时${loadPhrase}。`
      ),
      pick(
-      `The support layer is itself distributed: Direct Resource has ${directResource?.visibleCount??0} visible and ${directResource?.hiddenCount??0} hidden occurrence${(directResource?.hiddenCount??0)===1?'':'s'}, while Indirect Resource is recorded only in the hidden layer. This gives the learning/support side more structure than a single “resource is present” statement.`,
-      `支持层本身也有分布差异：正印有 ${directResource?.visibleCount??0} 次透干、${directResource?.hiddenCount??0} 次藏干；偏印则只记录在藏干层。这样的分布比一句“有印星”更能说明学习／支持结构并不是单一来源。`
+      `The support layer is itself differentiated: Direct Resource reaches both the visible and hidden layers, while Indirect Resource remains in the hidden layer. This means the learning/support side has more than one route into the chart and should not be reduced to a single “resource is present” statement.`,
+      `支持层本身也有分布差异：正印同时进入透干与藏干层，偏印则保留在藏干层。这样的差异说明学习／支持不是单一路径，不能只用一句“有印星”概括。`
      ),
      pick(
       `The chart also records ${link?R11_RELATION_TYPE[link.type]||pick('a linkage','一组联结'):pick('a recorded linkage','一组已记录联结')} at ${link?R11_RELATION_THEME[link.positionThemeCode]||pick('the self–expression interface','自我位置与表达') : pick('the self–expression interface','自我位置与表达')}. Internal availability and outward expression are therefore separate layers of the reading, rather than two names for the same capability.`,
@@ -333,8 +340,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `七杀候选${qisha?.visibleStemMatch?'有透干对应':'未见透干对应'}，但状态仍是「${R11_PATTERN_STATE[qisha?.conclusionState]||'保持开放'}」；偏财候选${cai?.visibleStemMatch?'有透干对应':'未见透干对应'}，并记录到 ${cai?.visiblePathCount??0} 条路径。真正重要的是把“路径可见”与“格局已经成立”分开。`
    ),
    pick(
-    `There are ${rels.length} recorded relationship interfaces in the natal structure. Their value is not that they predict events, but that they show where otherwise separate functions meet and therefore where a later career, wealth or relationship reading must return to the same underlying structure.`,
-    `本命结构里记录了 ${rels.length} 组柱位关系。它们的价值不是预测事件，而是说明原本分开的功能在哪里相遇，也解释了为什么后面的事业、财富与关系章节会不断回到同一套底层结构。`
+    `The natal structure contains several distinct relationship interfaces. Their value is not event prediction; they show where otherwise separate functions meet, and therefore where later career, wealth and relationship readings must return to the same underlying structure.`,
+    `本命结构里存在多组彼此独立的柱位关系。它们的价值不是预测事件，而是说明原本分开的功能在哪里相遇，也解释了为什么后面的事业、财富与关系章节会不断回到同一套底层结构。`
    )
   ],{boundary:pick('Pattern candidates remain conditional; no final strong/weak or primary-pattern verdict is created here.','格局候选继续保持条件性；这里不建立最终旺弱或主格局定论。')});
  }
@@ -424,8 +431,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      `关系读取是多因素的：「${R11_GROUP[t.leadGroup.groupCode]}」进入前景，同时${t.relevantGroups.filter(g=>g.groupCode!==t.leadGroup.groupCode).map(g=>R11_GROUP[g.groupCode]).join('、')}也都参与。因此，关系不能被压缩成一个“配偶星”或单一十神数量。`
     ),
     pick(
-     `The natal relationship set contains ${links.length} linkage and ${tensions.length} tension relation${tensions.length===1?'':'s'}. They occupy different interfaces: ${rels.map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join(', ')}. Their location matters because environment, self-position and expression are not interchangeable parts of a relationship.`,
-     `本命关系结构包含 ${links.length} 组联结与 ${tensions.length} 组张力，分别落在${rels.map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join('、')}。位置之所以重要，是因为环境、自我位置与表达在关系中并不是可以互换的同一层。`
+     `The natal relationship set contains both linkage and tension relations across ${rels.map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join(', ')}. Their location matters because environment, self-position and expression are not interchangeable parts of a relationship.`,
+     `本命关系结构同时包含联结与张力，并分别落在${rels.map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join('、')}。位置之所以重要，是因为环境、自我位置与表达在关系中并不是可以互换的同一层。`
     ),
     pick(
      'For lived comparison, separate what you expect from a relationship, what you actually exchange, what responsibility you take on, and what support is available. A repeated difficulty can look similar on the surface while being driven by a different condition in each relationship.',
@@ -490,8 +497,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
      `当前大运为${dy?.pillar?.stem?.zh||''}${dy?.pillar?.branch?.zh||''}（${R11_TEN_GOD[dy?.stemTenGod?.code]||dy?.stemTenGod?.zh||''}），流年为${annual?.stem?.zh||''}${annual?.branch?.zh||''}（${R11_TEN_GOD[annual?.stemTenGod?.code]||annual?.stemTenGod?.zh||''}）。这些时间层用于补充本命背景，不取代本命。`
     ),'professionalModules/professionalTimeline/currentWindow','METHOD_INTERPRETATION'),
     block(pick(
-     `The Da Yun records ${dyInteraction?.type||'a natal interaction'} with the natal ${dyInteraction?.natalPosition||'structure'} and no transformation verdict. The annual layer records ${annualRelations.length} natal interaction${annualRelations.length===1?'':'s'}, including repeat, self-punishment or harm relations where present. Read these as points of structural emphasis, not event predictions.`,
-     `大运与本命记录到${dyInteraction?.type||'一组关系'}，落在本命${dyInteraction?.natalPosition||'结构'}，且没有建立化气结论；流年层与本命记录到 ${annualRelations.length} 组互动，其中包括重复、自刑或害等已记录关系。它们表示结构重点，不等于事件预测。`
+     `The Da Yun records ${dyInteraction?.type||'a natal interaction'} with the natal ${dyInteraction?.natalPosition||'structure'} and no transformation verdict. The annual layer also revisits natal positions through the recorded repeat, self-punishment or harm relations where present. Read these as points of structural emphasis, not event predictions.`,
+     `大运与本命记录到${dyInteraction?.type||'一组关系'}，落在本命${dyInteraction?.natalPosition||'结构'}，且没有建立化气结论；流年层也会通过已记录的重复、自刑或害等关系重新触及本命位置。它们表示结构重点，不等于事件预测。`
     ),'professionalModules/professionalTimeline/currentWindow/interactions','METHOD_INTERPRETATION')
    ],
    temporal:{...source(20).temporal,generatedAt:temporalContext.generatedAt,localTime:temporalContext.localTime},
