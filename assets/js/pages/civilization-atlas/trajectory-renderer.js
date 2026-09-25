@@ -15,5 +15,5 @@ export function renderTrajectories(root,{registry,state,locale='en',onToggle=()=
 }
 export function renderTrajectoryInspector(root,{trajectories=[],locale='en'}={}){
  const l=locale==='zh-Hans'?'zh-Hans':'en'; if(!root||!trajectories.length)return;
- root.innerHTML=`<h3>${esc(l==='zh-Hans'?'长时段轨迹':'Long-Duration Trajectories')}</h3>${trajectories.map(t=>`<section><h4>${esc(loc(t.title,l))}</h4><p><strong>${esc(authority(t.authorityClass,l))}</strong></p><p>${esc(loc(t.uncertaintyNote,l))}</p></section>`).join('')}`;
+ root.innerHTML=`<div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(l==='zh-Hans'?'长时段轨迹':'Long trends')}</p><h3>${esc(trajectories.length===1?loc(trajectories[0].title,l):(l==='zh-Hans'?`${trajectories.length} 条轨迹`:`${trajectories.length} trajectories`))}</h3><p>${esc(trajectories.length===1?authority(trajectories[0].authorityClass,l):(l==='zh-Hans'?'一起阅读，不合并成总分。':'Read together without collapsing into a single score.'))}</p></div>`;
 }
