@@ -77,12 +77,20 @@ body{margin:0;background:#e8e5de;color:#223;min-width:320px}
 <div id="r9-error" class="r9-error"></div>
 <main id="report">${rendered}</main>
 <script type="module">
-const report=document.querySelector('#report'),sel=document.querySelector('#section'),errorBox=document.querySelector('#r9-error');
+import {settlePublicationAssets,fitPublicationForPrint} from '/assets/customer-ui/js/personal-products/publication-report-pages.js';
+const report=document.querySelector('#report'),sel=document.querySelector('#section'),errorBox=document.querySelector('#r9-error'),printButton=document.querySelector('#print');
 try{
  report.querySelectorAll('[data-page-family="SECTION_OPENER_PAGE"]').forEach(el=>el.id='r9-section-'+el.dataset.section.replace(/^S/,'').slice(0,2));
  document.querySelector('#jump').onclick=()=>document.querySelector('#r9-section-'+sel.value)?.scrollIntoView({behavior:'smooth'});
- document.querySelector('#print').onclick=()=>window.print();
- window.r9SnapshotMeta={locale:'${locale}',totalPages:${snapshot.totalPages},staticPrerender:true};
+ printButton.disabled=true;
+ await document.fonts?.ready;
+ await settlePublicationAssets(report);
+ const fit=fitPublicationForPrint(report);
+ const failed=fit.filter(x=>!x.fits);
+ if(failed.length)throw new Error('PRINT_FIT_FAILED:'+failed.map(x=>x.pageNumber).join(','));
+ printButton.disabled=false;
+ printButton.onclick=async()=>{printButton.disabled=true;try{await document.fonts?.ready;await settlePublicationAssets(report);const nextFit=fitPublicationForPrint(report);const nextFailed=nextFit.filter(x=>!x.fits);if(nextFailed.length)throw new Error('PRINT_FIT_FAILED:'+nextFailed.map(x=>x.pageNumber).join(','));window.print();}finally{printButton.disabled=false;}};
+ window.r9SnapshotMeta={locale:'${locale}',totalPages:${snapshot.totalPages},staticPrerender:true,assetsSettled:true,printFit:fit};
  window.r9Ready=true;
 }catch(error){
  errorBox.style.display='block';errorBox.textContent='Optional review controls failed: '+String(error);
