@@ -198,13 +198,32 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   PIAN_YIN:pick('Indirect Resource','偏印'),ZHENG_YIN:pick('Direct Resource','正印')
  };
  const R11_GROUP={PEER:pick('peer / self-position','同类／自我位置'),OUTPUT:pick('output / expression','输出／表达'),WEALTH:pick('wealth / exchange','财星／资源交换'),OFFICER:pick('rules / responsibility / pressure','官杀／规则责任压力'),RESOURCE:pick('learning / support / absorption','印星／学习支持吸收')};
+ const R11_RELATION_THEME={
+  ENVIRONMENT_SELF_INTERFACE:pick('the environment–self interface','环境与自我位置'),
+  SELF_EXPRESSION_INTERFACE:pick('the self–expression interface','自我位置与表达'),
+  ENVIRONMENT_EXPRESSION_INTERFACE:pick('the environment–expression interface','环境与表达')
+ };
+ const R11_PATTERN_STATE={
+  OPEN_REQUIRES_MORE_FORMATION_SUPPORT:pick('open because additional formation support is still required','仍开放，因为成立条件仍不足'),
+  OPEN_WITH_PARTIAL_FORMATION_SUPPORT:pick('open with partial formation support','已有部分成立条件，但仍保持开放'),
+  ESTABLISHED:pick('established','已成立')
+ };
+ const R11_CARRY={
+  MIXED_CARRY:pick('mixed carrying conditions','支持、外泄与压力并见'),
+  SUPPORT_HEAVY:pick('support-led carrying conditions','支持条件较突出'),
+  DRAIN_HEAVY:pick('outward-demand-led carrying conditions','向外投入较突出'),
+  PRESSURE_HEAVY:pick('pressure-led carrying conditions','压力条件较突出')
+ };
  const r11Topic=code=>reading.professionalModules.professionalTopics.topics.find(t=>t.topicCode===code);
  const r11TopicIndex=code=>reading.professionalModules.professionalTopics.topics.findIndex(t=>t.topicCode===code);
  const r11Prompts=code=>{
   const row=(reading.professionalModules.realityBridge?.topicPrompts||[]).find(x=>x.topicCode===code);
   return (row?.prompts||[]).map(x=>x.prompt?.[lang]).filter(Boolean).slice(0,2);
  };
- const r11Ref=code=>`professionalModules/professionalTopics/topics/${r11TopicIndex(code)}`;
+ const r11Ref=code=>{
+  const index=r11TopicIndex(code);
+  return index>=0?`professionalModules/professionalTopics/topics/${index}`:'professionalModules/wholeChartPriority/themes';
+ };
  const r11Repeated=topic=>(topic?.relevantTenGods||[]).filter(x=>x.repeatState==='REPEATED').sort((a,b)=>b.count-a.count);
  const r11Pattern=topic=>(topic?.patternCandidates||[]);
  const r11Relations=topic=>(topic?.relationshipInterfaces||[]);
@@ -247,7 +266,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
 
   r11Module('personalityFriction','CAPABILITY',[
    pick(
-    `The friction in this chart is concentrated around ${rels.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily)).map(x=>x.positionThemeCode).filter(Boolean).join(', ')||'recorded position interfaces'}. The practical issue is not whether friction is “good” or “bad,” but which part changes first when support, standards and expression pull in different directions.`,
+    `The friction in this chart is concentrated around ${rels.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily)).map(x=>R11_RELATION_THEME[x.positionThemeCode]).filter(Boolean).join(', ')||pick('recorded position interfaces','已记录的柱位关系')}. The practical issue is not whether friction is “good” or “bad,” but which part changes first when support, standards and expression pull in different directions.`,
     `这张命盘的张力主要集中在${rels.filter(x=>['TENSION','REPEAT_TENSION'].includes(x.relationFamily)).map(x=>x.positionThemeCode).filter(Boolean).join('、')||'已记录的柱位接口'}。真正值得观察的不是张力“好不好”，而是当支持、标准与表达不同步时，哪一部分最先发生变化。`
    ),
    pick(
@@ -266,7 +285,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `整盘结构不是把功能从高到低排一次名。命盘里${repeated.slice(0,3).map(x=>R11_TEN_GOD[x.tenGodCode]).join('、')}反复出现，同时柱位关系把环境、自我位置与表达连在一起；在任何格局名称成为主结论之前，这些层次必须先放回同一张图中。`
    ),
    pick(
-    `The Seven-Killings candidate ${qisha?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} and remains ${qisha?.conclusionState||'open'}; the Indirect-Wealth candidate ${cai?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} with ${cai?.visiblePathCount??0} recorded path${cai?.visiblePathCount===1?'':'s'}. The important point is the contrast between a visible route and a completed formation judgment.`,
+    `The Seven-Killings candidate ${qisha?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} and remains ${R11_PATTERN_STATE[qisha?.conclusionState]||pick('open','保持开放')}; the Indirect-Wealth candidate ${cai?.visibleStemMatch?'has a visible-stem match':'has no visible-stem match'} with ${cai?.visiblePathCount??0} recorded path${cai?.visiblePathCount===1?'':'s'}. The important point is the contrast between a visible route and a completed formation judgment.`,
     `七杀候选${qisha?.visibleStemMatch?'有透干对应':'未见透干对应'}，但状态仍是「${qisha?.conclusionState||'开放'}」；偏财候选${cai?.visibleStemMatch?'有透干对应':'未见透干对应'}，并记录到 ${cai?.visiblePathCount??0} 条路径。真正重要的是把“路径可见”与“格局已经成立”分开。`
    ),
    pick(
@@ -284,7 +303,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     `事业主题以「${R11_GROUP[t.leadGroup.groupCode]}」为主轴，相关证据里反复出现的十神包括${repeated.slice(0,3).map(x=>R11_TEN_GOD[x.tenGodCode]).join('、')}。学习支持与资源交换仍然参与，因此这里要读的是标准、责任、资源与学习怎样被组织进一个角色，而不是指定一个“最佳职业”。`
    ),
    pick(
-    `The carrying context is ${carry.overallTendency||'mixed'}. That makes role design more important than job title: compare responsibility with decision authority, workload with available support, and output expectations with the time or resources actually available to meet them.`,
+    `The carrying context is ${R11_CARRY[carry.overallTendency]||pick('mixed carrying conditions','混合承载条件')}. That makes role design more important than job title: compare responsibility with decision authority, workload with available support, and output expectations with the time or resources actually available to meet them.`,
     `承载状态为「${carry.overallTendency||'mixed'}」。因此，角色设计比职位名称更值得看：把责任与决策权、工作量与可用支持、产出要求与实际可用时间／资源分别对照。`
    )
   ],{boundary:'',observations:r11Prompts('CAREER')});
