@@ -6,7 +6,7 @@ const loc=(v,l)=>v?.[l]||v?.en||v?.['zh-Hans']||v||'';
 const clean=v=>String(v??'').normalize('NFKC').trim();
 const searchText=v=>clean(v).toLocaleLowerCase();
 const PAGE=12,SEARCH_PAGE=24;
-const tr=(key,fallback='')=>t('book6Atlas.'+key,{},fallback);
+const tr=(key,fallback='')=>t(`book6Atlas.${key}`,{},fallback);
 const humanize=v=>String(v??'').replaceAll('_',' ').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase());
 const UI_KEYS=['eyebrow','title','lead','overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','compareRuntime','unknown','missing','unverified','ask','noRank','open','previous','next','filters','clear','results','version','previousVersion','dataState','freshness','layer','textAlternative','selectDossier','selectSnapshot','selectDimension','pagination','imageBaseNote','resolverMissing','relatedCases','state','all','allTime','allRegions','allTypes','timeWindow','region','caseType','trigger','pressureField','structuralChange','reconfigurationWindow','linkedCases','dimension','evidenceDate','historicalVersionNote','selectCasesFirst','selectDossiersFirst','noUniversalScore','livedProfile','visualLibrary','visualLibraryLead','visualFamily','visualSubject','visualCount','contextFigures','currentDataNotAdmitted','currentDataBoundary','runtimeReadout','runtimeReadoutLead','runtimeEvidenceGateOpen','runtimeConfidence','runtimeConfidenceUnknown','runtimeNeeds','runtimeNeedEvidence','runtimeNeedObservation','runtimeNeedMethod','runtimeHistoricalContext','runtimeEngineBoundary','runtimeLoading','runtimeUnavailable','historicalEvidence','searchPlaceholder'];
 const copy=()=>Object.fromEntries(UI_KEYS.map(k=>[k,tr('ui.'+k,humanize(k))]));
