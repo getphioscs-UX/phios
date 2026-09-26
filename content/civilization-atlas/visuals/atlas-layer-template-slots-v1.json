@@ -100,22 +100,24 @@
       }
     },
     "world": {
-      "templateAssetRefPattern": "VIS-B5-ATLAS-L5-{snapshotId}.webp",
+      "presentationMode": "TEMPLATE_COMPOSITOR",
+      "templateAssetRef": "VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp",
+      "canonicalObjectKey": "images/figures/books/book-5/VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp",
       "referenceSize": {
         "width": 1536,
         "height": 1024
       },
       "slots": {
-        "map": {
-          "left": 0.205,
-          "top": 0.115,
-          "width": 0.6,
-          "height": 0.56
-        },
         "overview": {
           "left": 0.008,
           "top": 0.115,
           "width": 0.19,
+          "height": 0.56
+        },
+        "map": {
+          "left": 0.205,
+          "top": 0.115,
+          "width": 0.6,
           "height": 0.56
         },
         "civilizations": {
@@ -130,6 +132,25 @@
           "width": 0.6,
           "height": 0.2
         }
+      },
+      "dynamicOverlay": [
+        "overview",
+        "map",
+        "civilizations",
+        "cities"
+      ],
+      "sourceVisualFamilies": [
+        "WORLD_SNAPSHOT_ATMOSPHERE",
+        "CASE_HERO"
+      ],
+      "rules": {
+        "singleTemplateForAllSnapshots": true,
+        "bakedYear": false,
+        "bakedCivilizationNames": false,
+        "bakedCityNames": false,
+        "worldSnapshotDataFromRegistry": true,
+        "mapAtmosphereFromAcceptedAsset": true,
+        "noInventedGeographicCoordinates": true
       }
     },
     "trajectories": {
