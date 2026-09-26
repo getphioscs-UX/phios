@@ -339,7 +339,8 @@ const knowledgeRelease = Object.freeze({
       status: {
         'publication-preparation': 'Publication preparation',
         'in-development': 'In development',
-        'architecture-defined': 'Architecture defined'
+        'architecture-defined': 'Architecture defined',
+        'published': 'Published · available for purchase'
       },
       openVolume: 'Open volume',
       sourceUnavailable: "Book information is temporarily unavailable. Please try again.",
