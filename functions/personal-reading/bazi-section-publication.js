@@ -353,16 +353,16 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const t=r11Topic('CAREER'),repeated=r11Repeated(t),carry=t.carryingContext||{};
   r11Module('careerRoleSystem','CAREER',[
    pick(
-    'Work is one of the places where this chart is likely to feel responsibility most directly. Seven Killings and Direct Officer both recur, so roles with standards, deadlines, accountability or other people’s expectations rarely feel neutral: how responsibility is assigned, and how much control you have over delivery, strongly affects whether the same role feels purposeful or draining.',
-    '工作是这张命盘最容易直接感受到“责任”的领域之一。七杀与正官反复出现，所以只要角色带有标准、期限、问责或他人期待，你通常不会把它当成中性的事：责任怎样分配、你对执行有多少掌控，会明显影响这个职位让你更有方向，还是越来越消耗。'
+    'The career signature is not merely that Officer functions are present. Seven Killings spans all four pillars—visible in the Year pillar and repeated in the Month, Day and Hour hidden layers—while Direct Officer is visible in the Hour pillar and also appears in the Year hidden layer. This makes responsibility a repeated structural theme across different parts of the chart rather than a single isolated career symbol.',
+    '你的事业指纹并不只是“有官杀”。七杀横跨四柱：年柱透出，月、日、时三柱又分别在藏干层重复出现；正官则在时柱透出，同时也藏在年支。也就是说，责任不是集中在命盘某一个角落，而是从外部环境、自我承载到后续发展都反复进入事业结构。'
    ),
    pick(
-    'The Resource side remains active too. Taking on more responsibility is therefore not the whole story: work tends to function better when you have solid knowledge, a usable framework, and enough information or support to turn pressure into competent action. Responsibility without support can feel very different from responsibility backed by structure.',
-    '同时，印星／支持也持续参与。事业并不是“责任越多越好”；当有可依靠的知识、方法、框架和资讯支持时，压力更容易转化成能力与执行。相反，如果责任增加，却没有学习空间、资讯或支持，同样的要求就更容易变成消耗。'
+    'The support pattern is equally specific: Direct Resource is visible in the Month stem and repeats in the Year hidden layer, while Indirect Resource is held in the Day branch. In this chart, knowledge, method and internal processing sit close to the responsibility structure instead of appearing as a separate theme. The career reading therefore links pressure with how information is absorbed, organized and made usable.',
+    '你的支持结构也很具体：正印庚金直接透在月干，又在年支藏干重复；偏印辛金则藏在日支丑中。换句话说，知识、方法、理解与内部处理，并不是与责任分开的另一个主题，而是紧贴着责任结构存在。事业解读因此不能只看“压力”，还要看你怎样吸收、整理并使用信息。'
    ),
    pick(
-    'Wealth functions are also present inside the career frame, so work is not only about meeting standards. Whether you can mobilize budget, tools, people, opportunities or decision space changes how effectively you can carry responsibility. A demanding role with real resources is very different from one that expects results without giving you enough means to deliver.',
-    '财星也进入事业框架，所以工作不只是“把标准做到”。你能否调动预算、工具、人手、机会或决策空间，会改变你承接责任的方式。一个要求高但资源可用的角色，和一个只要结果却不给足资源的角色，会是两种完全不同的工作体验。'
+    'The Wealth side has another distinctive feature: Indirect Wealth repeats in the Month and Hour branches but remains hidden in both places, while Direct Wealth is limited and also hidden in the natal chart. Resource and opportunity themes are therefore present, but they are structurally embedded rather than strongly exposed at the surface. That is a different career signature from a chart where Wealth is repeatedly visible.',
+    '财星这一侧也有很鲜明的差异：偏财丁火分别藏在月支与时支，两处都重复但没有透出；正财丙火在本命中也只藏在年支。也就是说，资源与机会并不是不存在，而是更多嵌在环境、项目与后续发展层，而不是在本命表层反复外显。这与“财星直接多次透出”的事业结构并不相同。'
    )
   ],{boundary:'',observations:[]});
   r11Module('careerWorkingDirection','CAREER',[
@@ -371,8 +371,8 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
     '因此，事业真正要看的不是“哪一个职业最适合”，而是你能长期承载哪一种角色。更可持续的工作通常同时具备：责任清楚、权限足够、资源可用，而且还能持续学习。几项条件对齐时，压力比较容易变成专注；责任、权限与资源分开时，责任感就更容易变成过度承接。'
    ),
    pick(
-    'The current Jia-Xu Da Yun brings output and expression forward, making “how do I deliver what I know?” more important. The Bing-Wu annual layer also brings wealth and responsibility forward, so this period is useful for noticing whether higher output is matched by real resources and clear authority, or whether you are simply being asked to produce more under the same pressure.',
-    '当前甲戌大运把“输出／表达”带到前面，所以这一阶段更值得看的是：你怎样把已经具备的能力真正交付出来。丙午流年又把财星与官杀带到前景，因此要特别观察：产出增加时，资源和权限有没有同步增加？还是要求变多，但压力仍然主要由你承担？'
+    'Timing adds a particularly personal contrast. The natal chart has no counted Eating-God or Hurting-Officer presence, but the current Jia-Xu Da Yun places Hurting Officer directly in the visible stem. The 2026 Bing-Wu year then places Direct Wealth at the surface while repeating the Wu branch already present in both the natal Month and Hour. The current period therefore activates functions that are much less visible in the natal baseline.',
+    '时间层更能看出你的个人差异。本命里食神、伤官都没有计数出现，但当前甲戌大运的甲木直接以伤官透出；2026 丙午流年又把正财丙火推到表层，同时午支再次重复你本命月支与时支已有的午。也就是说，当前阶段正在把本命原本不显的“输出”与“正财”功能推到前景。'
    ),
    pick(
     'When evaluating a role now, compare operating conditions rather than title. Ask: Is the responsibility really mine? Do I have matching authority? Are the tools, people or budget available? Can I keep learning instead of only absorbing pressure? Those answers matter more for this chart than the job title.',
