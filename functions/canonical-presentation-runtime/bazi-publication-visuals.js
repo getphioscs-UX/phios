@@ -31,7 +31,31 @@ export function buildBaziPublicationVisual({reading,primaryVisualRef,locale='en'
  case 'DAY_MASTER_CARRYING':{const d=m.dayMasterStrength;html=cards([[t('Roots','根气'),d.roots.total],[t('Visible support','可见支持'),d.supportBalance.supportVisible],[t('Outward count','输出与消耗计数'),d.supportBalance.outwardVisible],[t('Pressure count','压力计数'),d.supportBalance.pressureVisible]].map(([k,v])=>card(k,v)),2);boundary=d.withheldVerdict.strongWeakLabelCreated===false?t('Final strong/weak judgment remains open. These are recorded conditions, not a strength score.','最终旺弱判断保持开放。这些是已记录的条件，不是强弱评分。'):t('Read the conditions together with the admitted method interpretation.','请将条件与已准入的方法解读一起阅读。');break;}
  case 'PATTERN_PATHS':html=cards(list(m.pattern.candidates).map(c=>card(l(c.tenGodCode),c.hiddenStemZh,`<p>${esc(c.visibleStemMatch?t('Visible stem match','有透干对应'):t('No visible stem match','未见透干对应'))}</p><p>${esc(t('Visible / recorded paths','可见／已记录路径'))}: ${val(c.professionalReading?.formation?.visiblePathCount)} / ${list(c.professionalReading?.formation?.paths).length}</p><p>${esc(c.professionalReading?.formation?.formedPatternDeclared===false?t('Formation not declared','尚未宣告成格'):t('See admitted verdict','参阅已准入判断'))}</p>`,GROUPS[c.professionalReading?.tenGodContext?.functionGroup]?.[2])),2);boundary=t('A visible path is not a formed pattern. Open conditions remain open; reading priority is not a quality ranking.','路径可见不等于成格；未定条件保持开放，读取优先级不是质量排名。');break;
  case 'PILLAR_RELATIONSHIPS':html=cards(list(m.relationships.items).map(r=>card(list(r.positions).map(l).join(' ↔ '),list(r.memberZh).join(' · '),`<p>${esc(l(r.type))}</p><p>${esc(r.transformationEstablished===false?t('Transformation not established','未建立化气判断'):t('See admitted relation','参阅既有关系判断'))}</p>`)),2);boundary=t('Each pair remains distinct. A structural relation does not establish an event or a relationship outcome.','每组配对保持独立。结构关系不证明事件或关系结果。');break;
- case 'PROFESSIONAL_TOPICS':{const topic=list(m.professionalTopics.topics).find(x=>x.topicCode===topicCode);if(!topic)throw Error('BZR_VISUAL_TOPIC_MISSING');html=cards(groupRows(topic.relevantGroups),2)+`<p class="bzpub-focus">${esc(t('Topic emphasis','本章重点'))}: ${esc(l(topic.leadGroup.groupCode))}</p>`;boundary=t('Existing topic priorities are retained. A topic is a multi-factor reading, not a prediction.','保留既有主题优先级。主题是多因素读取，不是预测。');break;}
+ case 'PROFESSIONAL_TOPICS':{
+  const topic=list(m.professionalTopics.topics).find(x=>x.topicCode===topicCode);if(!topic)throw Error('BZR_VISUAL_TOPIC_MISSING');
+  if(topicCode==='CAREER'){
+   const god=code=>list(m.tenGods?.items).find(x=>x.tenGodCode===code);
+   const qisha=god('QI_SHA'),zhengguan=god('ZHENG_GUAN'),zhengyin=god('ZHENG_YIN'),pianyin=god('PIAN_YIN'),piancai=god('PIAN_CAI'),zhengcai=god('ZHENG_CAI');
+   const current=m.professionalTimeline?.currentWindow?.currentDaYun,annual=m.professionalTimeline?.currentWindow?.annual;
+   const outputNatal=list(m.tenGods?.items).filter(x=>x.functionGroup==='OUTPUT').reduce((sum,x)=>sum+(x.count||0),0);
+   const fp=[
+    card(t('Responsibility distribution','责任分布'),t('Seven Killings across four pillars','七杀横跨四柱'),
+     `<p>${esc(t('Visible in Year; hidden repeats in Month, Day and Hour. Direct Officer is visible in Hour and also present in Year.','年柱透出；月、日、时藏干重复。正官在时柱透出，年支亦有对应。'))}</p>`,GROUPS.OFFICER[2],'OFFICER'),
+    card(t('Support path','支持路径'),t('Direct Resource visible · Indirect Resource hidden','正印显 · 偏印藏'),
+     `<p>${esc(t('Direct Resource is visible in Month and repeats in Year; Indirect Resource is held in the Day branch.','正印透月干并在年支重复；偏印藏于日支。'))}</p>`,GROUPS.RESOURCE[2],'RESOURCE'),
+    card(t('Resource visibility','资源显隐'),t('Indirect Wealth repeats but stays hidden','偏财重复 · 均藏'),
+     `<p>${esc(t('Indirect Wealth repeats in Month and Hour, both hidden; Direct Wealth is limited and also hidden in the natal chart.','偏财重复落在月支、时支但均未透；正财本命中出现较有限，也在藏干层。'))}</p>`,GROUPS.WEALTH[2],'WEALTH'),
+    card(t('Phase shift','阶段变化'),outputNatal===0?t('No natal Output → Hurting Officer visible now','本命无食伤 → 当前伤官透出'):t('Output emphasis changes in current cycle','当前周期输出重点改变'),
+     `<p>${esc(t(`Jia-Xu brings ${current?.stemTenGod?.en||'Hurting Officer'} to the visible stem; ${annual?.stem?.zh||''}${annual?.branch?.zh||''} brings ${annual?.stemTenGod?.en||'Direct Wealth'} forward.`,`甲戌大运由${current?.stemTenGod?.zh||'伤官'}透出；${annual?.stem?.zh||''}${annual?.branch?.zh||''}流年把${annual?.stemTenGod?.zh||'正财'}带到表层。`))}</p>`,GROUPS.OUTPUT[2],'OUTPUT')
+   ];
+   html=cards(fp,2);
+   boundary=t('These cards summarize admitted natal placement, visibility and current timing facts; they do not predict a career event.','这些卡片汇总已核准的本命落点、显隐与当前时间事实，不预测具体事业事件。');
+  }else{
+   html=cards(groupRows(topic.relevantGroups),2)+`<p class="bzpub-focus">${esc(t('Topic emphasis','本章重点'))}: ${esc(l(topic.leadGroup.groupCode))}</p>`;
+   boundary=t('Existing topic priorities are retained. A topic is a multi-factor reading, not a prediction.','保留既有主题优先级。主题是多因素读取，不是预测。');
+  }
+  break;
+ }
  case 'TIMING_LAYERS':{const current=m.timing.currentDaYun,annual=m.timing.annual;html=cards([card(t('Current luck cycle','当前大运'),current?current.pillar.stem.zh+current.pillar.branch.zh:t('Not resolved','未解析')),card(t('Annual layer','流年层'),annual?.stem&&annual?.branch?annual.stem.zh+annual.branch.zh:t('Not resolved','未解析'))],2);html+=`<div class="bzpub-cycle-grid">${list(m.timing.allDaYun).map(c=>card(`${c.startAge}–${c.endAge}`,c.pillar.stem.zh+c.pillar.branch.zh,`<p>${esc(l(c.stemTenGod?.code))}</p>`,ELEMENTS[c.pillar.stem.element]?.[2])).join('')}</div>`;boundary=t('The existing timing owner supplies these layers. Named cycles do not predict events.','时间层来自既有时间模块；周期名称不预测事件。');break;}
  default:throw Error('BZR_VISUAL_RENDERER_MISSING');
  }
