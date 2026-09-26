@@ -11,6 +11,45 @@ function pct(v){return `${Number(v||0)*100}%`;}
 function slotStyle(slot){
   return `left:${pct(slot.left)};top:${pct(slot.top)};width:${pct(slot.width)};height:${pct(slot.height)}`;
 }
+
+function formatYear(value,locale){
+  const y=Number(value);
+  if(!Number.isFinite(y)) return '—';
+  if(y<0) return locale==='zh-Hans'?\`公元前${Math.abs(y)}年\`:\`${Math.abs(y)} BCE\`;
+  return locale==='zh-Hans'?\`公元${y}年\`:\`${y} CE\`;
+}
+function formatRange(start,end,locale){return \`${formatYear(start,locale)} – ${formatYear(end,locale)}\`;}
+function acceptedVisual(bindings,family,subjectId){
+  return (bindings?.assets||[]).find(a=>a.family===family&&a.subjectId===subjectId&&a.bindingState==='BOUND'&&a.reviewState==='ACCEPTED')||null;
+}
+function timelineOverlay(data,state,locale,slotConfig){
+  const macros=data?.timelineMacro?.macroEras||[];
+  const periods=data?.timeline?.periods||[];
+  if(!macros.length||!periods.length) return '';
+  const periodMap=new Map(periods.map(p=>[p.periodId,p]));
+  const active=macros.find(m=>(m.periodIds||[]).includes(state.timeWindowId))||
+    macros.find(m=>state.time!==null&&state.time!==undefined&&Number(state.time)>=m.startYear&&Number(state.time)<=m.endYear)||
+    macros[0];
+  const header=slotConfig.slots?.headerTitle;
+  const spine=slotConfig.slots?.timelineSpine;
+  const matrix=slotConfig.slots?.overviewMatrix;
+  const footer=slotConfig.slots?.footerCaption;
+  const title=locale==='zh-Hans'?'第二层｜历史脊柱':'Layer 2 | Civilization Timeline Spine';
+  const subtitle=locale==='zh-Hans'?'长时间轴图':'Long-Horizon Timeline';
+  const lead=locale==='zh-Hans'?'从多元文明到一个更加紧密连接的世界':'From diverse civilizations to a more connected world';
+  const footerText=locale==='zh-Hans'?'人类的历史是一条多元并进、相互连接的河流':'Human history is a river of diverse civilizations, ever connected';
+  const headerHtml=header?\`<div class="civ-template-slot civ-template-slot--timeline-header" data-template-slot="headerTitle" style="${slotStyle(header)}"><strong>${esc(title)}</strong><span>${esc(subtitle)}</span><small>${esc(lead)}</small></div>\`:'';
+  const spineHtml=spine?\`<div class="civ-template-slot civ-template-slot--timeline-spine" data-template-slot="timelineSpine" style="${slotStyle(spine)}"><div class="civ-template-macro-grid">${macros.map((m,index)=>{
+    const firstPeriod=periodMap.get(m.periodIds?.[0]);
+    const vis=acceptedVisual(data.staticVisuals,'TIMELINE_ANCHOR',m.periodIds?.[0]);
+    const summary=(m.periodIds||[]).map(id=>loc(periodMap.get(id)?.title,locale)).filter(Boolean).join(' · ');
+    const count=(m.periodIds||[]).reduce((n,id)=>n+(periodMap.get(id)?.caseIds?.length||0),0);
+    return \`<button type="button" class="civ-template-macro ${m.macroEraId===active?.macroEraId?'is-active':''}" data-macro-era="${esc(m.macroEraId)}" data-first-period="${esc(m.periodIds?.[0]||'')}" aria-pressed="${m.macroEraId===active?.macroEraId?'true':'false'}">${vis?\`<img src="${esc(vis.publicUrl)}" alt="" loading="lazy" decoding="async">\`:''}<span class="civ-template-macro__number">${String(index+1).padStart(2,'0')}</span><strong>${esc(loc(m.title,locale))}</strong><small>${esc(formatRange(m.startYear,m.endYear,locale))}</small><em>${esc(summary)}</em><b>${count} ${locale==='zh-Hans'?'案例':'cases'}</b></button>\`;
+  }).join('')}</div></div>\`:'';
+  const matrixHtml=matrix?\`<div class="civ-template-slot civ-template-slot--timeline-matrix" data-template-slot="overviewMatrix" style="${slotStyle(matrix)}"><div class="civ-template-matrix-row civ-template-matrix-row--head"><span>${locale==='zh-Hans'?'时期':'Era'}</span>${macros.map(m=>\`<strong>${esc(loc(m.title,locale))}</strong>\`).join('')}</div><div class="civ-template-matrix-row"><span>${locale==='zh-Hans'?'时间':'Range'}</span>${macros.map(m=>\`<small>${esc(formatRange(m.startYear,m.endYear,locale))}</small>\`).join('')}</div><div class="civ-template-matrix-row"><span>${locale==='zh-Hans'?'阶段':'Periods'}</span>${macros.map(m=>\`<small>${esc((m.periodIds||[]).join(' + '))}</small>\`).join('')}</div><div class="civ-template-matrix-row"><span>${locale==='zh-Hans'?'案例':'Cases'}</span>${macros.map(m=>{const n=(m.periodIds||[]).reduce((sum,id)=>sum+(periodMap.get(id)?.caseIds?.length||0),0);return \`<small>${n}</small>\`;}).join('')}</div></div>\`:'';
+  const footerHtml=footer?\`<div class="civ-template-slot civ-template-slot--timeline-footer" data-template-slot="footerCaption" style="${slotStyle(footer)}"><strong>${esc(footerText)}</strong></div>\`:'';
+  return headerHtml+spineHtml+matrixHtml+footerHtml;
+}
 function linePoints(series,minYear,maxYear,minVal,maxVal){
   const dx=Math.max(1,maxYear-minYear),dy=Math.max(1,maxVal-minVal);
   return (series||[]).map(p=>{
@@ -43,7 +82,7 @@ function trajectoryOverlay(data,state,locale,slot){
     </svg>
   </div>`;
 }
-export function renderAtlasVisualProjection(container,{projection,slots,data={},state,locale='en'}={}){
+export function renderAtlasVisualProjection(container,{projection,slots,data={},state,locale='en',onStateChange=()=>{}}={}){
   if(!container) return;
   const l=locale==='zh-Hans'?'zh-Hans':'en';
   const config=(projection?.layers||[]).find(x=>x.layerId===state.activeLayer);
@@ -51,6 +90,9 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   const poster=posterFor(config,state);
   if(!config||!slotConfig||!poster){container.hidden=true;container.innerHTML='';return;}
   const overlays=[];
+  if(state.activeLayer==='timeline'){
+    overlays.push(timelineOverlay(data,state,l,slotConfig));
+  }
   if(state.activeLayer==='trajectories'&&slotConfig.slots?.trajectoryGraph){
     overlays.push(trajectoryOverlay(data,state,l,slotConfig.slots.trajectoryGraph));
   }
@@ -67,6 +109,11 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
     </div></div>
     <p class="civ-template-board__note">${esc(l==='zh-Hans'?'WebP 定义版式与视觉语法；动态 HTML / SVG 只写入已登记的预留区域，正式文字与数据仍来自 Registry。':'The WebP defines composition and visual grammar. Dynamic HTML/SVG is written only into registered reserved slots; canonical text and data remain registry-driven.')}</p>
   </section>`;
+  container.querySelectorAll('[data-macro-era]').forEach(button=>button.addEventListener('click',()=>{
+    const periodId=button.dataset.firstPeriod;
+    const period=(data.timeline?.periods||[]).find(p=>p.periodId===periodId);
+    if(period) onStateChange({timeWindowId:period.periodId,time:period.startYear,caseIds:period.caseIds||[],primaryCaseId:period.caseIds?.[0]||null},{source:'template-macro-era'});
+  }));
   const img=container.querySelector('[data-template-image]'),fallback=container.querySelector('[data-template-fallback]');
   img?.addEventListener('error',()=>{img.hidden=true;fallback.hidden=false;container.dataset.templateState='fallback';},{once:true});
   img?.addEventListener('load',()=>{container.dataset.templateState='ready';},{once:true});
