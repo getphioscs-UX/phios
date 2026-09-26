@@ -12,24 +12,56 @@
   "coordinateSystem": "NORMALIZED_0_TO_1",
   "layers": {
     "timeline": {
-      "templateAssetRef": "VIS-B5-ATLAS-L2-TIMELINE.webp",
+      "templateAssetRef": "VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp",
+      "canonicalObjectKey": "images/figures/books/book-5/VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp",
       "referenceSize": {
         "width": 1491,
         "height": 1055
       },
       "slots": {
-        "periodBand": {
-          "left": 0.01,
-          "top": 0.245,
-          "width": 0.98,
-          "height": 0.235
+        "headerTitle": {
+          "left": 0.22,
+          "top": 0.015,
+          "width": 0.57,
+          "height": 0.215
         },
-        "overviewTable": {
+        "timelineSpine": {
           "left": 0.012,
-          "top": 0.645,
+          "top": 0.255,
           "width": 0.976,
-          "height": 0.165
+          "height": 0.36
+        },
+        "overviewMatrix": {
+          "left": 0.015,
+          "top": 0.63,
+          "width": 0.97,
+          "height": 0.18
+        },
+        "footerCaption": {
+          "left": 0.27,
+          "top": 0.905,
+          "width": 0.46,
+          "height": 0.06
         }
+      },
+      "staticRegions": {
+        "leftGlobe": true,
+        "worldMap": true,
+        "rightCompass": true,
+        "bottomCivilizationPanorama": true
+      },
+      "dynamicOverlay": [
+        "headerTitle",
+        "timelineSpine",
+        "overviewMatrix",
+        "footerCaption"
+      ],
+      "rules": {
+        "fixedPeriodColumns": false,
+        "periodCountComesFromRegistry": true,
+        "bilingualTextFromHtml": true,
+        "noBakedDates": true,
+        "noBakedCaseNames": true
       }
     },
     "cases": {
