@@ -15,6 +15,16 @@ export function renderComparison(container,{registry,casesRegistry,transitionsRe
   const selected=families.find(f=>f.familyId===state.comparisonFamilyId)||families.find(f=>(state.compareBasket||[]).some(id=>f.caseIds.includes(id)))||families[0]||null;
   const caseMap=new Map(cases.map(c=>[c.caseId,c])); const familyMap=new Map(families.map(f=>[f.familyId,f])); const transitionMap=new Map((transitionsRegistry?.transitionWindows||[]).map(x=>[x.transitionWindowId,x])); const snapshotMap=new Map((worldRegistry?.snapshots||[]).map(x=>[x.snapshotId,x]));
   const basket=(state.compareBasket||[]).filter(id=>selected?.caseIds.includes(id));
+  const graphPositions=[[16,28],[50,20],[84,28],[16,72],[50,80],[84,72]];
+  const graphPoints=families.map((f,i)=>({f,x:graphPositions[i]?.[0]??50,y:graphPositions[i]?.[1]??50}));
+  const graphPointMap=new Map(graphPoints.map(p=>[p.f.familyId,p]));
+  const graphEdges=[];const graphSeen=new Set();
+  for(const f of families) for(const rel of (f.crossFamilyRelations||[])){
+    const key=[f.familyId,rel.targetFamilyId].sort().join('|');
+    if(graphSeen.has(key)) continue;graphSeen.add(key);
+    const a=graphPointMap.get(f.familyId),b=graphPointMap.get(rel.targetFamilyId);
+    if(a&&b) graphEdges.push({a,b,active:selected&&(f.familyId===selected.familyId||rel.targetFamilyId===selected.familyId)});
+  }
   const familyVisual=visualBy(visualBindings,'COMPARISON_FAMILY',selected?.familyId);
   const representatives=(basket.length>=2?basket:selected?.caseIds||[]).slice(0,6);
   const matrixCases=(basket.length>=2?basket:representatives.slice(0,4));
@@ -33,7 +43,10 @@ export function renderComparison(container,{registry,casesRegistry,transitionsRe
         <h4>${esc(lang==='zh-Hans'?'从共同运行问题进入比较，而不是从强弱排名开始。':'Compare shared runtime problems, not winners and losers.')}</h4>
         <p>${esc(lang==='zh-Hans'?'六个家族代表不同的文明组织方式。先选择家族，再看代表文明与结构差异。':'Six families represent different ways civilizations organize. Choose a family, then inspect representative civilizations and structural differences.')}</p>
       </div>
-      <div class="civ-family-network" role="list">${families.map(f=>{const v=visualBy(visualBindings,'COMPARISON_FAMILY',f.familyId);return `<button type="button" role="listitem" class="civ-family-node${selected?.familyId===f.familyId?' is-active':''}" data-family-id="${esc(f.familyId)}" aria-pressed="${selected?.familyId===f.familyId?'true':'false'}">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span class="civ-family-node__copy"><strong>${esc(loc(f.title,lang))}</strong><small>${esc(loc(f.coreRuntimeProblem,lang))}</small><em>${f.caseIds.length} ${lang==='zh-Hans'?'个案例':'cases'}</em></span></button>`}).join('')}</div>
+      <div class="civ-family-network-graph" role="list" aria-label="${esc(lang==='zh-Hans'?'比较家族关系网络':'Comparison family relationship network')}">
+        <svg class="civ-family-network-graph__links" viewBox="0 0 1000 560" aria-hidden="true">${graphEdges.map(e=>`<line x1="${e.a.x*10}" y1="${e.a.y*5.6}" x2="${e.b.x*10}" y2="${e.b.y*5.6}" class="${e.active?'is-active':''}"/>`).join('')}</svg>
+        ${graphPoints.map(({f,x,y})=>{const v=visualBy(visualBindings,'COMPARISON_FAMILY',f.familyId);return `<button type="button" role="listitem" class="civ-family-node civ-family-node--graph${selected?.familyId===f.familyId?' is-active':''}" style="--gx:${x}%;--gy:${y}%;" data-family-id="${esc(f.familyId)}" aria-pressed="${selected?.familyId===f.familyId?'true':'false'}">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span class="civ-family-node__copy"><strong>${esc(loc(f.title,lang))}</strong><small>${esc(loc(f.coreRuntimeProblem,lang))}</small><em>${f.caseIds.length} ${lang==='zh-Hans'?'个案例':'cases'}</em></span></button>`}).join('')}
+      </div>
     </section>
     ${selected?`<section class="civ-family-focus civ-family-focus--board">
       <div class="civ-family-focus__hero">${familyVisual?`<img src="${esc(familyVisual.publicUrl)}" alt="" loading="eager" decoding="async">`:''}<div><p class="knowledge-eyebrow">${esc(lang==='zh-Hans'?'当前比较家族':'Current comparison family')}</p><h4>${esc(loc(selected.title,lang))}</h4><p>${esc(loc(selected.coreRuntimeProblem,lang))}</p></div></div>
