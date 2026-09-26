@@ -62,33 +62,24 @@
         "bilingualTextFromHtml": true,
         "noBakedDates": true,
         "noBakedCaseNames": true
-      }
+      },
+      "presentationMode": "TEMPLATE_COMPOSITOR"
     },
     "cases": {
-      "templateAssetRef": "VIS-B5-ATLAS-L3-CASE-REGISTRY.webp",
-      "referenceSize": {
-        "width": 1672,
-        "height": 941
-      },
-      "slots": {
-        "caseGrid": {
-          "left": 0.012,
-          "top": 0.19,
-          "width": 0.976,
-          "height": 0.5
-        },
-        "registrySummary": {
-          "left": 0.012,
-          "top": 0.715,
-          "width": 0.74,
-          "height": 0.16
-        },
-        "compareBasket": {
-          "left": 0.765,
-          "top": 0.715,
-          "width": 0.22,
-          "height": 0.16
-        }
+      "presentationMode": "SYSTEM_COMPOSED_FROM_ASSETS",
+      "sourceVisualFamilies": [
+        "CASE_HERO",
+        "CASE_SECONDARY"
+      ],
+      "layoutReference": "VIS-B5-ATLAS-L3-CASE-REGISTRY.webp",
+      "rules": {
+        "templateWebPRequired": false,
+        "fixedCardCount": false,
+        "cardCountComesFromRegistry": true,
+        "responsiveGridRequired": true,
+        "compareBasketDynamic": true,
+        "searchAndFilterDynamic": true,
+        "htmlTextAuthority": true
       }
     },
     "comparison": {
