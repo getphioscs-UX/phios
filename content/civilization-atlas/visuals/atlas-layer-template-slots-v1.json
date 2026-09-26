@@ -214,36 +214,21 @@
       }
     },
     "loss": {
-      "templateAssetRef": "VIS-B5-ATLAS-L8-LOSS.webp",
-      "referenceSize": {
-        "width": 1536,
-        "height": 1024
-      },
-      "slots": {
-        "radialAtlas": {
-          "left": 0.245,
-          "top": 0.115,
-          "width": 0.51,
-          "height": 0.64
-        },
-        "leftFamilies": {
-          "left": 0.012,
-          "top": 0.255,
-          "width": 0.235,
-          "height": 0.5
-        },
-        "rightFamilies": {
-          "left": 0.755,
-          "top": 0.255,
-          "width": 0.23,
-          "height": 0.5
-        },
-        "examples": {
-          "left": 0.012,
-          "top": 0.79,
-          "width": 0.72,
-          "height": 0.12
-        }
+      "presentationMode": "SYSTEM_COMPOSED_FROM_ASSETS",
+      "sourceVisualFamilies": [
+        "LOSS_FAMILY",
+        "LOSS_TYPE_VIGNETTE",
+        "CASE_HERO"
+      ],
+      "layoutReference": "VIS-B5-ATLAS-L8-LOSS.webp",
+      "rules": {
+        "templateWebPRequired": false,
+        "radialAtlasDynamic": true,
+        "familyCountFromRegistry": true,
+        "lossTypesFromRegistry": true,
+        "exampleCasesDynamic": true,
+        "evidenceDynamic": true,
+        "htmlSvgAuthority": true
       }
     }
   }
