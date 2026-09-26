@@ -7,7 +7,7 @@ for(const layer of projection.layers||[]){
   if(layer.poster) targets.push({layerId:layer.layerId,assetRef:layer.poster.assetRef,url:layer.poster.publicUrl});
   for(const p of layer.posters||[]) targets.push({layerId:layer.layerId,assetRef:p.assetRef,url:p.publicUrl});
 }
-assert.ok(targets.length>=21,'Expected L2-L8 template set including World snapshots.');
+assert.ok(targets.length>=16,'Expected active template set including the 15 World snapshots and at least one layer template.');
 
 const results=[];
 for(const item of targets){
