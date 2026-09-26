@@ -4,7 +4,7 @@ const layerTitle=(id,l)=>({timeline:{en:'Civilization Timeline','zh-Hans':'文�
 
 function posterFor(config,state){
   if(!config) return null;
-  if(config.layerId==='world') return (config.posters||[]).find(x=>x.snapshotId===state.snapshotId)||(config.posters||[])[0]||null;
+  if(config.layerId==='world'&&(config.posters||[]).length) return (config.posters||[]).find(x=>x.snapshotId===state.snapshotId)||(config.posters||[])[0]||null;
   return config.poster||null;
 }
 function pct(v){return `${Number(v||0)*100}%`;}
@@ -50,6 +50,26 @@ function timelineOverlay(data,state,locale,slotConfig){
   const footerHtml=footer?`<div class="civ-template-slot civ-template-slot--timeline-footer" data-template-slot="footerCaption" style="${slotStyle(footer)}"><strong>${esc(footerText)}</strong></div>`:'';
   return headerHtml+spineHtml+matrixHtml+footerHtml;
 }
+
+function worldOverlay(data,state,locale,slotConfig){
+  const snapshots=data?.world?.snapshots||[];
+  const cases=data?.cases?.cases||[];
+  const selected=snapshots.find(s=>s.snapshotId===state.snapshotId)||
+    snapshots.reduce((best,s)=>state.time===null||state.time===undefined?best:(!best||Math.abs(Number(s.year)-Number(state.time))<Math.abs(Number(best.year)-Number(state.time))?s:best),null)||
+    snapshots[0]||null;
+  if(!selected) return '';
+  const caseMap=new Map(cases.map(c=>[c.caseId,c]));
+  const overview=slotConfig.slots?.overview;
+  const map=slotConfig.slots?.map;
+  const civilizations=slotConfig.slots?.civilizations;
+  const cities=slotConfig.slots?.cities;
+  const atmosphere=acceptedVisual(data.staticVisuals,'WORLD_SNAPSHOT_ATMOSPHERE',selected.snapshotId);
+  const overviewHtml=overview?`<div class="civ-template-slot civ-template-slot--world-overview" data-template-slot="overview" style="${slotStyle(overview)}"><p class="knowledge-eyebrow">${esc(formatYear(selected.year,locale))}</p><h4>${esc(loc(selected.title,locale))}</h4><p>${esc(loc(selected.summary,locale))}</p><dl><div><dt>${locale==='zh-Hans'?'主要文明':'Civilizations'}</dt><dd>${selected.majorCaseIds?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'贸易网络':'Trade networks'}</dt><dd>${selected.tradeNetworks?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'代表城市':'Cities'}</dt><dd>${selected.majorCities?.length||0}</dd></div></dl></div>`:'';
+  const mapHtml=map?`<div class="civ-template-slot civ-template-slot--world-map" data-template-slot="map" style="${slotStyle(map)}">${atmosphere?`<img src="${esc(atmosphere.publicUrl)}" alt="" loading="eager" decoding="async">`:''}<div class="civ-template-world-map__caption"><strong>${esc(formatYear(selected.year,locale))}</strong><span>${esc(locale==='zh-Hans'?'世界横切面':'World snapshot')}</span></div></div>`:'';
+  const civilizationsHtml=civilizations?`<div class="civ-template-slot civ-template-slot--world-civilizations" data-template-slot="civilizations" style="${slotStyle(civilizations)}"><h5>${locale==='zh-Hans'?'主要文明':'Major civilizations'}</h5><div>${(selected.majorCaseIds||[]).slice(0,8).map(id=>{const c=caseMap.get(id),v=acceptedVisual(data.staticVisuals,'CASE_HERO',id);return c?`<button type="button" data-template-world-case="${esc(id)}">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span><strong>${esc(loc(c.title,locale))}</strong><small>${esc(loc(c.region?.label,locale))}</small></span></button>`:''}).join('')}</div></div>`:'';
+  const citiesHtml=cities?`<div class="civ-template-slot civ-template-slot--world-cities" data-template-slot="cities" style="${slotStyle(cities)}"><h5>${locale==='zh-Hans'?'代表城市':'Representative cities'}</h5><div>${(selected.majorCities||[]).slice(0,8).map(city=>`<article><strong>${esc(loc(city.name,locale))}</strong></article>`).join('')}</div></div>`:'';
+  return overviewHtml+mapHtml+civilizationsHtml+citiesHtml;
+}
 function linePoints(series,minYear,maxYear,minVal,maxVal){
   const dx=Math.max(1,maxYear-minYear),dy=Math.max(1,maxVal-minVal);
   return (series||[]).map(p=>{
@@ -94,6 +114,9 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   if(state.activeLayer==='timeline'){
     overlays.push(timelineOverlay(data,state,l,slotConfig));
   }
+  if(state.activeLayer==='world'){
+    overlays.push(worldOverlay(data,state,l,slotConfig));
+  }
   if(state.activeLayer==='trajectories'&&slotConfig.slots?.trajectoryGraph){
     overlays.push(trajectoryOverlay(data,state,l,slotConfig.slots.trajectoryGraph));
   }
@@ -110,6 +133,10 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
     </div></div>
     <p class="civ-template-board__note">${esc(l==='zh-Hans'?'WebP 定义版式与视觉语法；动态 HTML / SVG 只写入已登记的预留区域，正式文字与数据仍来自 Registry。':'The WebP defines composition and visual grammar. Dynamic HTML/SVG is written only into registered reserved slots; canonical text and data remain registry-driven.')}</p>
   </section>`;
+  container.querySelectorAll('[data-template-world-case]').forEach(button=>button.addEventListener('click',()=>{
+    const id=button.dataset.templateWorldCase;
+    if(id) onStateChange({activeLayer:'cases',primaryCaseId:id,caseIds:[id]},{source:'template-world-case'});
+  }));
   container.querySelectorAll('[data-macro-era]').forEach(button=>button.addEventListener('click',()=>{
     const periodId=button.dataset.firstPeriod;
     const period=(data.timeline?.periods||[]).find(p=>p.periodId===periodId);
