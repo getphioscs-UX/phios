@@ -367,16 +367,16 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   ],{boundary:'',observations:[]});
   r11Module('careerWorkingDirection','CAREER',[
    pick(
-    'The career pattern is therefore less about one “correct profession” and more about the kind of role you can keep carrying over time. A workable role gives you clear responsibility, enough authority to act, access to the resources needed to deliver, and room to keep learning. When those pieces stay aligned, pressure can become focus; when they separate, the same sense of duty can turn into over-carrying.',
-    '因此，事业真正要看的并不是“哪一个职业最适合”，而是你能长期承载哪一种角色。更适合你的工作结构，通常会同时具备：责任清楚、你有足够的行动权限、完成任务所需的资源能够取得，而且还能持续学习和更新。几项条件能够对齐时，压力比较容易变成专注；一旦责任、权限与资源分开，同样的责任感就更容易变成过度承接。'
+    'The career pattern is less about one “correct profession” and more about the kind of role you can sustain. A workable role gives you clear responsibility, enough authority, usable resources and room to keep learning. When those pieces align, pressure can become focus; when they separate, duty can turn into over-carrying.',
+    '因此，事业真正要看的不是“哪一个职业最适合”，而是你能长期承载哪一种角色。更可持续的工作通常同时具备：责任清楚、权限足够、资源可用，而且还能持续学习。几项条件对齐时，压力比较容易变成专注；责任、权限与资源分开时，责任感就更容易变成过度承接。'
    ),
    pick(
-    'The current Jia-Xu Da Yun adds more emphasis on output and expression. In practice, this can make the question “how do I deliver what I know?” more important than before. The Bing-Wu annual layer also brings wealth and responsibility themes forward, so this period is especially useful for noticing whether increased output is matched by real resources and clear responsibility, or whether you are being asked to produce more while carrying the same or greater pressure.',
-    '当前甲戌大运把“输出／表达”带得更前面，所以这一阶段比过去更值得观察的是：你怎样把已经具备的能力真正交付出来。丙午流年又同时把财星与官杀带到前景，因此现在很适合看一件很现实的事——你的产出增加时，资源和权限有没有同步增加？还是要求变多了，但你仍然承担同样甚至更高的压力？'
+    'The current Jia-Xu Da Yun brings output and expression forward, making “how do I deliver what I know?” more important. The Bing-Wu annual layer also brings wealth and responsibility forward, so this period is useful for noticing whether higher output is matched by real resources and clear authority, or whether you are simply being asked to produce more under the same pressure.',
+    '当前甲戌大运把“输出／表达”带到前面，所以这一阶段更值得看的是：你怎样把已经具备的能力真正交付出来。丙午流年又把财星与官杀带到前景，因此要特别观察：产出增加时，资源和权限有没有同步增加？还是要求变多，但压力仍然主要由你承担？'
    ),
    pick(
-    'A useful career decision now is to compare roles by operating conditions rather than prestige or title. Ask: Is the responsibility mine to carry? Do I have enough authority to make the decisions I am accountable for? Are the tools, people or budget available? Can I keep learning instead of only absorbing pressure? Those answers are more informative for this chart than the job title alone.',
-    '所以，现在判断一个工作是否值得继续、扩大或调整时，比职位名称更重要的是运行条件：这项责任是否真的由你承担？你是否拥有与责任相匹配的决策权？工具、人手或预算是否到位？你还能继续学习和提升，还是只剩下不断吸收压力？对这张命盘来说，这些答案比职位名称本身更有价值。'
+    'When evaluating a role now, compare operating conditions rather than title. Ask: Is the responsibility really mine? Do I have matching authority? Are the tools, people or budget available? Can I keep learning instead of only absorbing pressure? Those answers matter more for this chart than the job title.',
+    '所以，现在判断一个工作是否值得继续、扩大或调整时，比职位名称更重要的是运行条件：责任是否真的由你承担？权限是否匹配？工具、人手或预算是否到位？你还能继续学习，还是只剩下吸收压力？对这张命盘来说，这些答案比职位名称更有价值。'
    )
   ],{boundary:'',observations:[
    pick('Which current responsibility feels worth carrying because you also have the authority, support and resources to do it well?','现在有哪些责任，你会觉得“值得承担”，因为你同时拥有足够的权限、支持与资源把它做好？'),
