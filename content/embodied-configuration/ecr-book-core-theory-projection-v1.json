@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-ECR-BOOK-CORE-THEORY-PROJECTION-v1.0.0",
   "work": "CX-R12R4B-R3R1-PDS-RECONCILIATION",
-  "status": "BOOK_ALIGNED_DERIVED_PROJECTION_PDS_RUNTIME_IMMUTABLE",
+  "status": "BOOK_ALIGNED_DERIVED_PROJECTION_R7_D11_EARTH_BASELINE",
   "authorityClass": "PHIOS_FIRST_PARTY_DERIVED_PROJECTION",
   "purpose": "Provide ECR with a machine-readable Book I / Figure 0A / Figure 3A projection without modifying PDS-W0 protected functions/runtime files.",
   "sourceAuthority": {
@@ -276,8 +276,8 @@
     ],
     [
       "D11",
-      "Chiron",
-      "凯龙星驱动"
+      "Earth",
+      "地球驱动"
     ],
     [
       "D12",
@@ -291,5 +291,13 @@
     "protectedRuntimeMutationAllowed": false,
     "bookLabelsMayDifferFromLegacyRuntimeDisplayLabels": true,
     "ecrMustNotWriteBackToProtectedRuntime": true
+  },
+  "r7BaselineCorrection": {
+    "driver": "D11",
+    "from": "Chiron",
+    "to": "Earth",
+    "canonicalRole": "Embodiment",
+    "ownerAcceptedAt": "2026-09-26",
+    "protectedRuntimeMutationRequired": false
   }
 }

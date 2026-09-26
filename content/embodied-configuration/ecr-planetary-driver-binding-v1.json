@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "PHI-OS-ECR-PLANETARY-DRIVER-BINDING-v1",
-  "sourceAuthority": "V4.1 Section 6",
+  "schemaVersion": "PHI-OS-ECR-PLANETARY-DRIVER-BINDING-v1.1-R7",
+  "sourceAuthority": "V4.1 R7-W1 Driver Role Canonicalization",
   "entries": [
     {
       "driverId": "D1",
@@ -19,7 +19,9 @@
       "customerVocabulary": {
         "en": "Solar"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D1",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D2",
@@ -38,7 +40,9 @@
       "customerVocabulary": {
         "en": "Lunar"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D2",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D3",
@@ -57,7 +61,9 @@
       "customerVocabulary": {
         "en": "Mercurial"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D3",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D4",
@@ -76,7 +82,9 @@
       "customerVocabulary": {
         "en": "Venusian"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D4",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D5",
@@ -95,7 +103,9 @@
       "customerVocabulary": {
         "en": "Martial"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D5",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D6",
@@ -114,7 +124,9 @@
       "customerVocabulary": {
         "en": "Jovian"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D6",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D7",
@@ -133,7 +145,9 @@
       "customerVocabulary": {
         "en": "Saturnian"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D7",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D8",
@@ -152,7 +166,9 @@
       "customerVocabulary": {
         "en": "Uranian"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D8",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D9",
@@ -171,7 +187,9 @@
       "customerVocabulary": {
         "en": "Neptunian"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D9",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D10",
@@ -190,26 +208,37 @@
       "customerVocabulary": {
         "en": "Plutonian"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D10",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     },
     {
       "driverId": "D11",
       "mechanicalSourceBodies": [
-        "CHIRON"
+        "EARTH"
       ],
-      "birthActivationRule": "EXACT_BODY_PERSONALITY",
-      "designActivationRule": "EXACT_BODY_DESIGN",
+      "birthActivationRule": "DERIVED_OPPOSITION_FROM_SUN_PERSONALITY",
+      "designActivationRule": "DERIVED_OPPOSITION_FROM_SUN_DESIGN",
       "semanticSourceRefs": [
         "content/interpretation/source/gate-line-source-registry-v1.json"
       ],
       "runtimeOwnerRefs": [
         "K1.PLANETARY_DRIVER_FIELD"
       ],
-      "missingCapabilityPolicy": "UNKNOWN",
+      "missingCapabilityPolicy": "UNKNOWN_ONLY_IF_SUN_OR_REQUIRED_TIMESTAMP_UNAVAILABLE",
       "customerVocabulary": {
-        "en": "Chiron"
+        "en": "Earth",
+        "zh-Hans": "地球"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D11",
+      "canonicalRoleStatus": "ACCEPTED",
+      "calculationRule": "normalize360(SUN_LONGITUDE + 180)",
+      "geneKeysStructuralCorrespondence": {
+        "personality": "EVOLUTION",
+        "design": "PURPOSE",
+        "boundary": "STRUCTURAL_ONLY_NOT_DIRECT_PHI_MEANING"
+      }
     },
     {
       "driverId": "D12",
@@ -229,9 +258,17 @@
       "customerVocabulary": {
         "en": "Nodal"
       },
-      "personalSemanticOwnerMapping": "PENDING_REVIEW"
+      "personalSemanticOwnerMapping": "DEFERRED_TO_R7_W5",
+      "semanticRoleRef": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json#D12",
+      "canonicalRoleStatus": "PENDING_HUMAN_REVIEW"
     }
   ],
   "currentDriverPriority": "K4_EVIDENCE_ONLY",
-  "legacySolarAffinity": "COMPATIBILITY_ONLY"
+  "legacySolarAffinity": "COMPATIBILITY_ONLY",
+  "canonicalRoleRegistry": "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json",
+  "r7Boundary": {
+    "noAutomaticDriverPriorityFromBodyPresence": true,
+    "noDirectOwnerMapping": true,
+    "chironOperationalIdentityRemoved": true
+  }
 }
