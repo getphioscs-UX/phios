@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECR R7-W2 Personality / Design Human Review</title>
+<style>
+body{margin:0;background:#f7f6f2;color:#1d1d1b;font:16px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+main{max-width:1050px;margin:auto;padding:44px 20px 80px}.eyebrow{font-size:12px;letter-spacing:.12em;color:#6d6a63;font-weight:800}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:8px 0 14px}.lead{color:#68655f;max-width:900px}
+.card{background:#fff;border:1px solid #dedbd1;border-radius:20px;padding:24px;margin:22px 0}.top{display:flex;justify-content:space-between;gap:20px}.top h2{margin:5px 0 0}.state{background:#fff3d6;color:#805600;padding:7px 10px;border-radius:999px;height:max-content;font-size:12px;font-weight:800}
+h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#6d6a63;margin-top:22px}.zh{font-size:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.buttons{display:flex;gap:10px;margin-top:22px}.buttons button{background:#fff;border:1px solid #d8d5cc;border-radius:10px;padding:10px 15px;font-weight:800;cursor:pointer}
+.buttons button.active[data-v="ACCEPT"]{background:#e7f4ea;color:#176b32}.buttons button.active[data-v="REVISE"]{background:#fff3d6;color:#805600}.buttons button.active[data-v="REJECT"]{background:#f8e6e6;color:#942424}
+textarea{width:100%;min-height:80px;margin-top:12px;padding:10px;border:1px solid #d8d5cc;border-radius:10px;font:inherit;box-sizing:border-box}
+.output{background:#121212;color:#eee;border-radius:18px;padding:20px;margin-top:30px}.output textarea{background:#1d1d1d;color:#eee;border-color:#333;min-height:260px;font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.output button{padding:10px 14px;border:0;border-radius:9px;font-weight:800;cursor:pointer}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.top{display:block}.state{display:inline-block;margin-top:12px}}
+</style></head><body><main>
+<div class="eyebrow">ECR-V4.1A · R7-W2</div><h1>Personality / Design Layer Canon</h1>
+<p class="lead">本页只审核两个 semantic layer。机械上的 Birth / Design 时间差并不会自动产生心理意义；Gene Keys sphere bindings 只作为已批准的结构对应证据，不直接成为 PHI customer meaning。</p>
+
+<section class="card" data-id="PERSONALITY">
+  <div class="top"><div><div class="eyebrow">PERSONALITY</div><h2>Conscious Interface｜觉察界面</h2></div><span class="state">PENDING REVIEW</span></div>
+  <h3>Canonical definition</h3><p>Organizes the part of a calculated configuration that is available to conscious observation, naming, interpretation and deliberate self-reference. It describes how configuration can enter the experienced and reportable interface without claiming that awareness creates the underlying Reality.</p><p class="zh">组织计算配置中能够进入觉察、命名、解释与主动自我参照的部分。它描述配置如何进入可体验、可报告的意识界面，但不主张意识创造了底层现实。</p>
+  <div class="grid"><div><h3>Scope</h3><ul><li>conscious_visibility</li><li>self_observation</li><li>naming</li><li>reportable_experience</li><li>deliberate_reference</li></ul></div>
+  <div><h3>Boundary</h3><ul><li>Does not mean every Personality activation is consciously understood.</li><li>Does not mean conscious awareness causes the underlying configuration.</li><li>Does not equate Personality with ego, identity, intelligence or free will.</li></ul></div></div>
+  <h3>Structural correspondence — evidence only</h3>
+  <ul><li><code>PERSONALITY.SUN -&gt; LIFE_THEME</code></li><li><code>PERSONALITY.EARTH -&gt; EVOLUTION</code></li><li><code>PERSONALITY.VENUS -&gt; IQ</code></li><li><code>PERSONALITY.MARS -&gt; EQ</code></li><li><code>PERSONALITY.JUPITER -&gt; PEARL</code></li></ul>
+  <h3>Forbidden inference</h3><ul><li><code>PERSONALITY_EQUALS_EGO</code></li><li><code>PERSONALITY_EQUALS_WHO_YOU_ARE</code></li><li><code>PERSONALITY_ACTIVATION_IS_ALWAYS_CONSCIOUSLY_KNOWN</code></li><li><code>PERSONALITY_CAUSES_REALITY</code></li><li><code>GENE_KEYS_PERSONALITY_SPHERE_TO_DIRECT_PHI_CONCLUSION</code></li></ul>
+  <div class="buttons">
+    <button data-v="ACCEPT" onclick="setD('PERSONALITY','ACCEPT')">ACCEPT</button>
+    <button data-v="REVISE" onclick="setD('PERSONALITY','REVISE')">REVISE</button>
+    <button data-v="REJECT" onclick="setD('PERSONALITY','REJECT')">REJECT</button>
+  </div>
+  <textarea id="note-PERSONALITY" placeholder="Revision note / rejection reason" oninput="sync()"></textarea>
+</section>
+<section class="card" data-id="DESIGN">
+  <div class="top"><div><div class="eyebrow">DESIGN</div><h2>Embodied Background｜载体背景</h2></div><span class="state">PENDING REVIEW</span></div>
+  <h3>Canonical definition</h3><p>Organizes the part of a calculated configuration that can continue operating through embodied, adaptive or background runtime without requiring direct conscious access. It describes a structural contribution carried by the system, not a hidden destiny or a claim that the person is unaware of it.</p><p class="zh">组织计算配置中能够通过载体、适应与背景运行持续发生，而不要求直接进入觉察的部分。它描述系统所承载的结构性贡献，并不等同隐藏命运，也不主张当事人必然对此毫无觉察。</p>
+  <div class="grid"><div><h3>Scope</h3><ul><li>embodied_operation</li><li>adaptive_imprinting</li><li>background_runtime</li><li>carrier_pattern</li><li>nonrequired_conscious_access</li></ul></div>
+  <div><h3>Boundary</h3><ul><li>Does not mean Design is permanently unconscious.</li><li>Does not mean Design is biologically deterministic.</li><li>Does not equate Design with body alone, fate, trauma or hidden truth.</li></ul></div></div>
+  <h3>Structural correspondence — evidence only</h3>
+  <ul><li><code>DESIGN.SUN -&gt; RADIANCE</code></li><li><code>DESIGN.EARTH -&gt; PURPOSE</code></li><li><code>DESIGN.MOON -&gt; ATTRACTION</code></li><li><code>DESIGN.VENUS -&gt; SQ</code></li><li><code>DESIGN.MARS -&gt; CORE_TRAUMA</code></li><li><code>DESIGN.JUPITER -&gt; CULTURE</code></li></ul>
+  <h3>Forbidden inference</h3><ul><li><code>DESIGN_EQUALS_UNCONSCIOUS_DESTINY</code></li><li><code>DESIGN_EQUALS_BODY_ONLY</code></li><li><code>DESIGN_ACTIVATION_CAN_NEVER_BE_CONSCIOUS</code></li><li><code>DESIGN_DETERMINES_BEHAVIOR</code></li><li><code>GENE_KEYS_DESIGN_SPHERE_TO_DIRECT_PHI_CONCLUSION</code></li></ul>
+  <div class="buttons">
+    <button data-v="ACCEPT" onclick="setD('DESIGN','ACCEPT')">ACCEPT</button>
+    <button data-v="REVISE" onclick="setD('DESIGN','REVISE')">REVISE</button>
+    <button data-v="REJECT" onclick="setD('DESIGN','REJECT')">REJECT</button>
+  </div>
+  <textarea id="note-DESIGN" placeholder="Revision note / rejection reason" oninput="sync()"></textarea>
+</section>
+<section class="output"><h2>Decision JSON</h2><button onclick="copyJ()">Copy JSON</button><p id="s">2 decisions required.</p><textarea id="out" readonly></textarea></section>
+</main><script>
+const ds={};const baseline="afd8a915e7fa12431659db96c0d6a77c851a8e26";
+function setD(id,v){ds[id]=v;document.querySelectorAll('[data-id="'+id+'"] button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));sync()}
+function sync(){const ids=["PERSONALITY","DESIGN"];const rows=ids.map(id=>({layerId:id,decision:ds[id]||"PENDING",note:(document.getElementById("note-"+id).value||"").trim()}));const pending=rows.filter(x=>x.decision==="PENDING").length;document.getElementById("s").textContent=pending?pending+" decisions required.":"Review complete — copy JSON back into ChatGPT.";document.getElementById("out").value=JSON.stringify({schemaVersion:"ECR-V4.1A-R7-W2-LAYER-OWNER-REVIEW-RESPONSE-v1",baselineCommit:baseline,reviewer:"OWNER",decisions:rows},null,2)}
+async function copyJ(){sync();const v=document.getElementById("out").value;try{await navigator.clipboard.writeText(v)}catch(e){document.getElementById("out").select();document.execCommand("copy")}document.getElementById("s").textContent="Copied. Paste the JSON into ChatGPT."}sync();
+</script></body></html>
