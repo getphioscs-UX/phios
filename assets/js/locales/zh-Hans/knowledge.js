@@ -339,7 +339,8 @@ const knowledgeRelease = Object.freeze({
       status: {
         'publication-preparation': '出版准备',
         'in-development': '开发中',
-        'architecture-defined': '架构已定义'
+        'architecture-defined': '架构已定义',
+        'published': '已出版 · 可购买'
       },
       openVolume: '打开本册',
       sourceUnavailable: "书籍资料暂时无法加载，请稍后重试。",
