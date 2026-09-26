@@ -68,14 +68,10 @@ async function render() {
       ? `<div class="wpr-cross-volume"><span>00</span><div><strong>${escapeHtml(partsRegistry.part_0.title?.[locale] || partsRegistry.part_0.title?.en)}</strong><p>${escapeHtml(t('knowledge.production.crossVolume'))}</p></div></div>`
       : '';
 
-    const bookOneActions = bookId === 'book-1'
-      ? `<a class="knowledge-action knowledge-action--primary" href="/checkout">${escapeHtml(t('knowledge.production.bookOnePurchase'))}</a>
-         <a class="knowledge-action" href="/book-one-preview">${escapeHtml(t('knowledge.production.bookOnePreview'))}</a>`
-      : bookId === 'book-5'
-        ? `<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何分化》':'Read World Differentiation')}</a>`
-        : bookId === 'book-6'
-          ? `<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何重组》':'Read Reality Reconfiguration')}</a>`
-          : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
+    const saleReady = Number(book.volume)<=6 && book.status==='published' && book.content_status==='completed';
+    const publicationActions = saleReady
+      ? `<span class="wpr-status">${escapeHtml(locale==='zh-Hans'?'已出版 · 完整版可购买':'Published · complete edition available')}</span>${bookId==='book-5'?`<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何分化》':'Read Reality Differentiation')}</a>`:bookId==='book-6'?`<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何重组》':'Read Reality Reconfiguration')}</a>`:''}`
+      : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
     const readAction=['book-1','book-2','book-3','book-4'].includes(bookId)
       ? `<a class="knowledge-action knowledge-action--primary" data-book-read href="#structured-sources">${locale==='zh-Hans'?'阅读 · 来源与文章':'Read · sources and articles'}</a>` : '';
     const askHref = buildCkaEntryHref({
@@ -106,7 +102,7 @@ async function render() {
             <h1>${escapeHtml(title)}</h1>
             <p class="knowledge-hero__lead">${escapeHtml(subtitle)}</p>
             <p>${escapeHtml(t('knowledge.production.registryLed'))}</p>
-            <div class="knowledge-actions">${readAction}${bookOneActions}${atlasAction}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部八册':'All eight volumes')}</a></div>
+            <div class="knowledge-actions">${readAction}${publicationActions}${atlasAction}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部八册':'All eight volumes')}</a></div>
           </div>
           <figure class="wpr-book-cover"><div>${heroVisual}</div><figcaption>${escapeHtml(t('knowledge.production.coverBoundary'))}</figcaption></figure>
         </div>
@@ -205,10 +201,12 @@ async function render() {
       const product=catalog.products?.find(p=>p.category==='BOOK'&&p.publicationBookCode===book.bookCode);
       if(!product)return;
       const price=document.createElement('p');price.dataset.bookCommercePrice=product.productId;
-      price.textContent=new Intl.NumberFormat(locale==='zh-Hans'?'zh-MY':'en-MY',{style:'currency',currency:product.currency}).format(product.amountMinor/100);
-      const link=document.createElement('a');link.className='knowledge-action';link.href='/account/';
-      link.textContent=locale==='zh-Hans'?'查看购买与交付状态':'View purchase and delivery availability';
-      price.append(' · ',link);root.querySelector('.knowledge-hero__lead')?.after(price);
+      const formatted=new Intl.NumberFormat(locale==='zh-Hans'?'zh-MY':'en-MY',{style:'currency',currency:product.currency}).format(product.amountMinor/100);
+      price.textContent=(locale==='zh-Hans'?'完整版 ':'Complete edition ')+formatted;
+      const link=document.createElement('a');link.className='knowledge-action knowledge-action--primary';link.href='/account/?product='+encodeURIComponent(product.productId)+'#commerce';
+      link.textContent=locale==='zh-Hans'?'购买完整书籍':'Buy complete volume';
+      const actions=root.querySelector('.knowledge-actions');if(actions)actions.prepend(link);
+      price.append(' · ',document.createTextNode(locale==='zh-Hans'?'数字版交付':'Digital delivery'));root.querySelector('.knowledge-hero__lead')?.after(price);
     }).catch(()=>{});
     fetch('/content/web-production/registries/book-public-samples-v1.json').then(r=>{if(!r.ok)throw new Error('SAMPLES_UNAVAILABLE');return r.json();}).then(registry=>{
       if(generation!==renderGeneration)return;const sample=registry.books.find(b=>b.bookId===bookId);if(!sample)return;
