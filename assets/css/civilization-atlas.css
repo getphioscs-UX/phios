@@ -627,3 +627,35 @@
 .civ-template-slot--world-cities>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.35rem}
 .civ-template-slot--world-cities article{display:grid;place-items:center;min-height:2.2rem;padding:.3rem;border:1px solid rgba(213,179,108,.18);border-radius:.35rem;background:rgba(8,31,47,.7);text-align:center}
 .civ-template-slot--world-cities strong{font-size:clamp(.4rem,.48vw,.58rem);line-height:1.2;color:#efe2bc}
+
+
+/* L6 system-composed trajectory panels */
+.civ-trajectories--system{display:grid;gap:1.25rem}
+.civ-trajectories__intro{max-width:68rem}
+.civ-trajectories__intro h4{margin:.25rem 0 .55rem;font-size:clamp(1.4rem,2.2vw,2rem);line-height:1.25;color:#f2dfa9}
+.civ-trajectories__intro p:last-child{color:var(--phi-text-secondary);line-height:1.7}
+.civ-trajectory-panel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.civ-trajectory-panel{overflow:hidden;border:1px solid rgba(213,179,108,.28);border-radius:var(--phi-radius-lg);background:linear-gradient(180deg,#0b2234,#081927)}
+.civ-trajectory-panel.is-active{box-shadow:0 0 0 2px #d5b36c,0 16px 40px rgba(0,0,0,.18)}
+.civ-trajectory-panel__focus{display:grid;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:left}
+.civ-trajectory-panel__visual{position:relative;aspect-ratio:16/10;overflow:hidden;background:#06131f}
+.civ-trajectory-panel__visual>img{display:block;width:100%;height:100%;object-fit:cover}
+.civ-trajectory-panel__graph{position:absolute;left:8%;right:8%;top:27%;bottom:18%;background:rgba(4,18,29,.58);border:1px solid rgba(213,179,108,.12);box-shadow:inset 0 0 22px rgba(0,0,0,.24)}
+.civ-trajectory-panel__graph svg{display:block;width:100%;height:100%}
+.civ-trajectory-panel__grid line{stroke:rgba(245,240,230,.12);stroke-width:1;vector-effect:non-scaling-stroke}
+.civ-trajectory-panel__line{fill:none;stroke:#69d6ff;stroke-width:4;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 4px rgba(105,214,255,.35))}
+.civ-trajectory-panel__line.is-reconstructed{stroke:#f0c96b;stroke-dasharray:12 6}
+.civ-trajectory-panel__line.is-conceptual{stroke:#b99cff;stroke-dasharray:3 7}
+.civ-trajectory-panel__line.is-evidence{stroke:#69d6ff}
+.civ-trajectory-panel__range{position:absolute;left:.4rem;right:.4rem;bottom:.25rem;display:flex;justify-content:space-between;font-size:.66rem;color:#d5dfe7}
+.civ-trajectory-panel__copy{display:grid;gap:.35rem;padding:1rem}
+.civ-trajectory-panel__copy h5{margin:0;font-size:1.15rem;color:#f2dfa9}
+.civ-trajectory-panel__copy p{margin:0;color:var(--phi-text-secondary);line-height:1.55}
+.civ-trajectory-panel__details{margin:0 1rem 1rem;border-top:1px solid var(--phi-border-subtle);padding-top:.65rem}
+.civ-trajectory-panel__details>summary{cursor:pointer;font-weight:600;color:#e9d8aa}
+.civ-trajectory-panel__details[open]>summary{margin-bottom:.65rem}
+@media(max-width:900px){.civ-trajectory-panel-grid{grid-template-columns:1fr}}
+@media(max-width:560px){
+ .civ-trajectory-panel__graph{left:5%;right:5%;top:25%;bottom:16%}
+ .civ-trajectory-panel__copy{padding:.85rem}
+}
