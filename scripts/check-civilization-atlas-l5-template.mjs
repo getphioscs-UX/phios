@@ -20,7 +20,7 @@ assert.equal(l5.rules.bakedYear,false);
 assert.equal(l5.rules.bakedCivilizationNames,false);
 assert.equal(l5.rules.bakedCityNames,false);
 assert.equal(l5.rules.noInventedGeographicCoordinates,true);
-assert.deepEqual(l5.dynamicOverlay,['overview','map','civilizations','cities']);
+assert.deepEqual(l5.dynamicOverlay,['headerTitle','overview','map','civilizations','features','cities','evidence']);
 
 const p5=projection.layers.find(x=>x.layerId==='world');
 assert.equal(p5.mode,'TEMPLATE_BASE_PLUS_DYNAMIC_OVERLAY');
@@ -31,10 +31,13 @@ assert.equal(p5.poster.assetRef,'VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp');
 assert.ok(compositor.includes('function worldOverlay'),'L5 generic template overlay missing.');
 assert.ok(compositor.includes("'WORLD_SNAPSHOT_ATMOSPHERE'"),'L5 must use accepted World atmosphere assets.');
 assert.ok(compositor.includes("'CASE_HERO'"),'L5 civilization panel must use accepted case visuals.');
-assert.ok(compositor.includes('data-template-slot="overview"'));
-assert.ok(compositor.includes('data-template-slot="map"'));
-assert.ok(compositor.includes('data-template-slot="civilizations"'));
-assert.ok(compositor.includes('data-template-slot="cities"'));
+for(const slot of ['headerTitle','overview','map','civilizations','features','cities','evidence']){
+  assert.ok(compositor.includes(`data-template-slot="${slot}"`),`L5 compositor missing slot: ${slot}`);
+}
+assert.ok(compositor.includes("'WORLD_SNAPSHOT_ATMOSPHERE'"),'L5 map must use accepted World snapshot atmosphere.');
+assert.ok(compositor.includes("'CASE_HERO'"),'L5 civilization and city panels must use accepted case visuals when available.');
+assert.ok(compositor.includes('selected.tradeNetworks'),'L5 features must derive from current snapshot data.');
+assert.ok(compositor.includes('selected.unknown?.note'),'L5 evidence boundary must derive from current snapshot registry.');
 
 assert.ok(css.includes('L5 generic World template compositor'),'L5 template CSS missing.');
 
