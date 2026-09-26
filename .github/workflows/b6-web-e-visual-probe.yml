@@ -42,6 +42,11 @@ on:
       - 'scripts/check-civilization-atlas-l5-template.mjs'
       - 'scripts/check-civilization-atlas-l7-system-composed.mjs'
       - 'scripts/check-civilization-atlas-l8-system-composed.mjs'
+      - 'scripts/check-books-1-6-publication-commerce.mjs'
+      - 'scripts/check-book6-preview-live.mjs'
+      - 'content/web-production/registries/book-public-samples-v1.json'
+      - 'content/knowledge/public/successors/eight-volume-v1/public-book-metadata.json'
+      - 'content/registry/successors/eight-volume-v1/books.json'
       - 'package.json'
       - '.github/workflows/b6-web-e-visual-probe.yml'
   workflow_dispatch:
@@ -70,6 +75,10 @@ jobs:
         run: npm run check:b6-web-f:human-review-surface
       - name: B6-WEB-FR2 human review surface guard
         run: npm run check:b6-web-fr2:human-review-surface
+      - name: Books I-VI publication commerce
+        run: npm run check:books-1-6:publication-commerce
+      - name: Book VI 50-page live preview
+        run: npm run check:book6:preview-live
       - name: Canonical live Atlas + bilingual article smoke
         run: npm run check:civilization-atlas:live-public
       - name: FR3 live Library template delivery
