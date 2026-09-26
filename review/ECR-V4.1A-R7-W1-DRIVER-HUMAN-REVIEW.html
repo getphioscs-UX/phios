@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECR V4.1A R7-W1 Driver Human Review</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1c1c1a;--muted:#6c6b66;--line:#dedbd1;--ok:#176b32;--warn:#8a5a00;--bad:#9b2525}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;line-height:1.62}
+main{max-width:1180px;margin:0 auto;padding:48px 24px 80px}.hero{margin-bottom:30px}.hero h1{font-size:clamp(30px,5vw,54px);line-height:1.04;margin:0 0 16px}.hero p{max-width:900px;color:var(--muted)}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0 34px}.summary div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}.summary strong{display:block;font-size:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;margin:18px 0;box-shadow:0 8px 30px rgba(0,0,0,.03)}
+.head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:700}.head h2{margin:5px 0 0;font-size:27px}.head h2 span{font-weight:500}
+.state{white-space:nowrap;padding:8px 10px;border-radius:999px;font-size:12px;font-weight:800}.state.accepted{background:#e7f4ea;color:var(--ok)}.state.pending{background:#fff3d6;color:var(--warn)}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;margin-top:20px}.grid h3{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}.zh{font-size:17px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:12px}
+ul{padding-left:19px}code{white-space:normal}
+.decision-row{display:flex;gap:10px;margin-top:20px}.decision-row button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer}.decision-row button.active[data-decision="ACCEPT"]{background:#e7f4ea;color:var(--ok);border-color:#9bc7a6}.decision-row button.active[data-decision="REVISE"]{background:#fff3d6;color:var(--warn);border-color:#d9ba70}.decision-row button.active[data-decision="REJECT"]{background:#f8e6e6;color:var(--bad);border-color:#d9a0a0}
+label{display:block;margin-top:14px;color:var(--muted);font-size:13px}textarea{display:block;width:100%;min-height:74px;margin-top:7px;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;color:var(--ink)}
+.locked-note{margin-top:18px;padding:12px 14px;border-radius:12px;background:#eef6ef;color:#245b31}
+.output{margin-top:36px;background:#111;color:#eee;border-radius:18px;padding:22px}.output h2{margin-top:0}.output textarea{min-height:330px;background:#191919;color:#eee;border-color:#333;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}
+.actions{display:flex;gap:10px;align-items:center}.actions button{padding:10px 14px;border-radius:10px;border:0;font-weight:800;cursor:pointer}.statusline{font-size:13px;color:#aaa}
+@media(max-width:760px){main{padding:28px 14px 60px}.summary{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.head{display:block}.state{display:inline-block;margin-top:12px}.decision-row{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div class="eyebrow">ECR-V4.1A · R7-W1 · DRIVER ROLE CANONICALIZATION</div>
+    <h1>12 Driver Human Review</h1>
+    <p>目标：关闭 Driver semantic role human gate。D11 Earth / Embodiment 已于 2026-09-26 OWNER ACCEPT，并锁定作为参照；本页只需要对 D1–D10 与 D12 作出 ACCEPT / REVISE / REJECT。此页不审核 Personality / Design、Semantic Tags 或 Runtime Owner。</p>
+  </div>
+  <div class="summary">
+    <div><span>Total</span><strong>12</strong></div>
+    <div><span>Locked ACCEPT</span><strong>1</strong></div>
+    <div><span>Pending</span><strong id="pendingCount">11</strong></div>
+    <div><span>Decided now</span><strong id="decidedCount">0</strong></div>
+  </div>
+  <section class="card" data-id="D1">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D1 · SUN</div>
+        <h2>Activation <span>｜启动</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes the transition by which a possibility becomes an active runtime priority.</p>
+        <p class="zh">组织一个可能如何从存在状态进入实际运行，并成为当前需要回应的优先事项。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">activation_priority</span><span class="chip">runtime_initiation</span><span class="chip">direction_to_operation</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not mean the Sun automatically defines identity or life purpose.</li><li>Does not establish that an activation is beneficial or should be acted on.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>SUN_EXISTS_THEREFORE_IDENTITY</code></li><li><code>SUN_POSITION_THEREFORE_PURPOSE</code></li><li><code>SOLAR_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D1','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D1','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D1','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D1" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D2">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D2 · MOON</div>
+        <h2>Attraction <span>｜吸引</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes what repeatedly draws response, attention or movement toward a condition within runtime.</p>
+        <p class="zh">组织现实中什么持续形成牵引，使注意、反应或运行朝某个条件聚集。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">response_pull</span><span class="chip">attention_pull</span><span class="chip">runtime_attraction</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not equal emotion by default.</li><li>Does not prove desire, attachment or need.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>MOON_EXISTS_THEREFORE_EMOTION</code></li><li><code>MOON_POSITION_THEREFORE_NEED</code></li><li><code>LUNAR_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D2','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D2','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D2','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D2" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D3">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D3 · MERCURY</div>
+        <h2>Interpretation <span>｜解释</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes how runtime information is translated, named and made communicable without making the translation identical to Reality.</p>
+        <p class="zh">组织运行中的信息如何被翻译、命名并形成可交流解释，同时保持解释不等于现实本身。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">translation</span><span class="chip">naming</span><span class="chip">interpretive_interface</span><span class="chip">communication</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not establish truth merely because a meaning can be articulated.</li><li>Does not equal intelligence or communication skill.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>MERCURY_EXISTS_THEREFORE_INTELLIGENCE</code></li><li><code>MERCURY_POSITION_THEREFORE_TRUTH</code></li><li><code>MERCURIAL_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D3','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D3','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D3','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D3" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D4">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D4 · VENUS</div>
+        <h2>Value <span>｜价值</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes value discrimination: what is treated as worth preserving, exchanging, protecting or refusing within runtime.</p>
+        <p class="zh">组织价值辨认：什么被视为值得保留、交换、保护或拒绝。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">value_discrimination</span><span class="chip">worth</span><span class="chip">exchange_boundary</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not reduce automatically to romance or relationship.</li><li>Does not determine moral correctness.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>VENUS_EXISTS_THEREFORE_RELATIONSHIP</code></li><li><code>VENUS_POSITION_THEREFORE_LOVE</code></li><li><code>VENUSIAN_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D4','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D4','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D4','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D4" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D5">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D5 · MARS</div>
+        <h2>Execution <span>｜执行</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes conversion of an active priority into force, effort, movement and direct execution.</p>
+        <p class="zh">组织已经形成的优先事项如何转化为力量、推进、行动与实际执行。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">execution</span><span class="chip">effort</span><span class="chip">direct_action</span><span class="chip">mobilization</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not imply aggression.</li><li>Does not establish that force or speed is appropriate.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>MARS_EXISTS_THEREFORE_AGGRESSION</code></li><li><code>MARS_POSITION_THEREFORE_CONFLICT</code></li><li><code>MARTIAL_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D5','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D5','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D5','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D5" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D6">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D6 · JUPITER</div>
+        <h2>Expansion <span>｜扩张</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes increase of scale, reach, resources or possibility once a runtime has room to grow.</p>
+        <p class="zh">组织运行在具备条件时如何扩大规模、范围、资源或可能空间。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">scale</span><span class="chip">reach</span><span class="chip">resource_expansion</span><span class="chip">possibility_expansion</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not mean growth is always beneficial.</li><li>Does not establish abundance, luck or success.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>JUPITER_EXISTS_THEREFORE_LUCK</code></li><li><code>JUPITER_POSITION_THEREFORE_SUCCESS</code></li><li><code>JOVIAN_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D6','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D6','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D6','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D6" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D7">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D7 · SATURN</div>
+        <h2>Structure <span>｜结构</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes the constraints, limits and durable conditions that give runtime a sustainable form.</p>
+        <p class="zh">组织约束、边界与可持续条件，使运行获得能够长期维持的结构。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">constraint</span><span class="chip">boundary</span><span class="chip">durable_structure</span><span class="chip">capacity_limit</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not equal punishment or hardship.</li><li>Does not prove that a limit is permanent.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>SATURN_EXISTS_THEREFORE_PUNISHMENT</code></li><li><code>SATURN_POSITION_THEREFORE_HARDSHIP</code></li><li><code>SATURNIAN_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D7','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D7','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D7','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D7" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D8">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D8 · URANUS</div>
+        <h2>Breakthrough <span>｜突破</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes discontinuous change when an existing arrangement can no longer contain an emerging possibility.</p>
+        <p class="zh">组织当既有结构无法继续容纳新可能时出现的非连续变化与突破。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">discontinuity</span><span class="chip">breakthrough</span><span class="chip">novel_reconfiguration</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not mean disruption is inherently desirable.</li><li>Does not predict sudden events.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>URANUS_EXISTS_THEREFORE_REBELLION</code></li><li><code>URANUS_POSITION_THEREFORE_SUDDEN_EVENT</code></li><li><code>URANIAN_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D8','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D8','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D8','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D8" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D9">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D9 · NEPTUNE</div>
+        <h2>Boundary Dissolution <span>｜边界消融</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes weakening, permeability or loss of distinction between previously separated runtime boundaries.</p>
+        <p class="zh">组织原本分离的运行边界如何变得松动、可渗透或失去清晰区分。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">boundary_permeability</span><span class="chip">dissolution</span><span class="chip">field_blending</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not imply spirituality, illusion or pathology.</li><li>Does not establish that boundaries should dissolve.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>NEPTUNE_EXISTS_THEREFORE_ILLUSION</code></li><li><code>NEPTUNE_POSITION_THEREFORE_SPIRITUALITY</code></li><li><code>NEPTUNIAN_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D9','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D9','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D9','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D9" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D10">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D10 · PLUTO</div>
+        <h2>Transformation <span>｜转化</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes deep reconfiguration when a prior operating structure can no longer remain intact.</p>
+        <p class="zh">组织当旧有运行结构无法继续维持时发生的深层重组与转化。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">deep_reconfiguration</span><span class="chip">structural_transformation</span><span class="chip">irreversible_change</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not predict crisis, destruction or death.</li><li>Does not treat every change as transformation.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>PLUTO_EXISTS_THEREFORE_CRISIS</code></li><li><code>PLUTO_POSITION_THEREFORE_DESTRUCTION</code></li><li><code>PLUTONIAN_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D10','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D10','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D10','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D10" oninput="sync()"></textarea>
+        </label>
+  </section>
+<section class="card" data-id="D11">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D11 · EARTH</div>
+        <h2>Embodiment <span>｜承载</span></h2>
+      </div>
+      <div class="state accepted">ACCEPTED / LOCKED</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes how an emerging Reality enters a carrier and obtains the concrete capacity, place, boundary and conditions required to continue existing.</p>
+        <p class="zh">组织一个已经形成的现实如何进入载体，并获得继续存在所需要的位置、容量、边界与实际条件。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">carrier_entry</span><span class="chip">embodiment</span><span class="chip">capacity</span><span class="chip">material_conditions</span><span class="chip">runtime_support</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not mean stability for its own sake.</li><li>Does not mean grounding as an automatic personality trait.</li><li>Does not inherit any former Chiron/Recovery meaning.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>EARTH_EXISTS_THEREFORE_GROUNDING</code></li><li><code>EARTH_POSITION_THEREFORE_PURPOSE</code></li><li><code>EARTH_EQUALS_RECOVERY</code></li><li><code>GENE_KEYS_SPHERE_TO_DIRECT_PHI_MEANING</code></li></ul></div>
+    </div>
+    <div class="locked-note">Owner ACCEPT recorded on 2026-09-26. This item is shown for reference only and is not part of this review closure.</div>
+  </section>
+<section class="card" data-id="D12">
+    <div class="head">
+      <div>
+        <div class="eyebrow">D12 · NORTH_NODE + SOUTH_NODE</div>
+        <h2>Continuity <span>｜延续</span></h2>
+      </div>
+      <div class="state pending">PENDING REVIEW</div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>Canonical definition</h3>
+        <p>Organizes continuity across time by relating inherited or established runtime context to the direction through which a system continues.</p>
+        <p class="zh">组织现实如何跨越时间延续，把已经形成或继承的运行背景与继续向前的方向连接起来。</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <div class="chips"><span class="chip">continuity</span><span class="chip">historical_context</span><span class="chip">future_direction</span><span class="chip">cross_stage_transfer</span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div><h3>Boundary</h3><ul><li>Does not predict destiny or future events.</li><li>North and South Node are structural poles, not automatic positive/negative meanings.</li></ul></div>
+      <div><h3>Forbidden inference</h3><ul><li><code>NODE_EXISTS_THEREFORE_DESTINY</code></li><li><code>NORTH_NODE_EQUALS_GOOD_FUTURE</code></li><li><code>SOUTH_NODE_EQUALS_BAD_PAST</code></li><li><code>NODAL_KEYWORD_TO_RUNTIME_OWNER</code></li></ul></div>
+    </div>
+    <div class="decision-row">
+          <button onclick="setDecision('D12','ACCEPT')" data-decision="ACCEPT">ACCEPT</button>
+          <button onclick="setDecision('D12','REVISE')" data-decision="REVISE">REVISE</button>
+          <button onclick="setDecision('D12','REJECT')" data-decision="REJECT">REJECT</button>
+        </div>
+        <label>Revision note / rejection reason
+          <textarea id="note-D12" oninput="sync()"></textarea>
+        </label>
+  </section>
+  <section class="output">
+    <h2>Decision JSON</h2>
+    <div class="actions">
+      <button onclick="copyJson()">Copy JSON</button>
+      <span class="statusline" id="copyStatus">11 decisions required.</span>
+    </div>
+    <textarea id="jsonOut" readonly></textarea>
+  </section>
+</main>
+<script>
+const baseline="b4415c06e5e5cd8f9fb9d4b0fa2d80cbf677017d";
+const decisions={};
+function setDecision(id,decision){
+  decisions[id]=decision;
+  document.querySelectorAll('[data-id="'+id+'"] button[data-decision]').forEach(b=>b.classList.toggle('active',b.dataset.decision===decision));
+  sync();
+}
+function sync(){
+  const ids=["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","D12"];
+  const rows=ids.map(id=>({driverId:id,decision:decisions[id]||"PENDING",note:(document.getElementById('note-'+id)?.value||"").trim()}));
+  const decided=rows.filter(x=>x.decision!=="PENDING").length;
+  document.getElementById('decidedCount').textContent=String(decided);
+  document.getElementById('pendingCount').textContent=String(ids.length-decided);
+  document.getElementById('copyStatus').textContent=(ids.length-decided===0)?"Review complete — copy JSON back into ChatGPT.":(ids.length-decided)+" decisions required.";
+  document.getElementById('jsonOut').value=JSON.stringify({
+    schemaVersion:"ECR-V4.1A-R7-W1-DRIVER-OWNER-REVIEW-RESPONSE-v1",
+    baselineCommit:baseline,
+    reviewer:"OWNER",
+    lockedAccepted:["D11"],
+    decisions:rows
+  },null,2);
+}
+async function copyJson(){
+  sync();
+  const v=document.getElementById('jsonOut').value;
+  try{await navigator.clipboard.writeText(v);document.getElementById('copyStatus').textContent="Copied. Paste the JSON into ChatGPT."}
+  catch(e){document.getElementById('jsonOut').select();document.execCommand('copy');document.getElementById('copyStatus').textContent="Copied. Paste the JSON into ChatGPT."}
+}
+sync();
+</script>
+</body></html>
