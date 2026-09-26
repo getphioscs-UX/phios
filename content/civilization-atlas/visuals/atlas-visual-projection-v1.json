@@ -74,19 +74,14 @@
     },
     {
       "layerId": "trajectories",
-      "mode": "TEMPLATE_BASE_PLUS_DYNAMIC_OVERLAY",
+      "mode": "SYSTEM_COMPOSED_FROM_ASSETS",
       "sourceRegistry": "content/civilization-atlas/trajectories/long-duration-trajectories-v1.json",
-      "poster": {
-        "assetRef": "VIS-B5-ATLAS-L6-TRAJECTORIES.webp",
-        "objectKey": "images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES.webp",
-        "publicUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES.webp",
-        "availability": "OWNER_TEMPLATE_UPLOAD_REQUIRED"
-      },
-      "fallback": "STRUCTURED_RENDERER",
-      "interactiveRegions": "REGISTERED_TRAJECTORY_GRAPH_SLOT",
+      "fallback": "REGISTRY_TRAJECTORY_READER",
+      "interactiveRegions": "HTML_SVG_TRAJECTORY_GRAPH_AND_CARDS",
       "sourceVisualFamilies": [
         "TRAJECTORY_MOTIF"
-      ]
+      ],
+      "optionalOverviewAssetRef": "VIS-B5-ATLAS-L6-TRAJECTORIES.webp"
     },
     {
       "layerId": "transitions",
