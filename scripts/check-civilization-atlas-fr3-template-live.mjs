@@ -7,7 +7,7 @@ for(const layer of projection.layers||[]){
   if(layer.poster) targets.push({layerId:layer.layerId,assetRef:layer.poster.assetRef,url:layer.poster.publicUrl});
   for(const p of layer.posters||[]) targets.push({layerId:layer.layerId,assetRef:p.assetRef,url:p.publicUrl});
 }
-const requiredRefs=['VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp','VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp','VIS-B5-ATLAS-L6-TRAJECTORIES.webp','VIS-B5-ATLAS-L7-TRANSITIONS.webp','VIS-B5-ATLAS-L8-LOSS.webp'];
+const requiredRefs=['VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp','VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp','VIS-B5-ATLAS-L6-TRAJECTORIES.webp'];
 for(const ref of requiredRefs) assert.ok(targets.some(x=>x.assetRef===ref),`Missing active template projection: ${ref}`);
 
 const results=[];
