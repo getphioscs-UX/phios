@@ -21,9 +21,16 @@ assert.equal(slots.authority.ocrWriteBackAllowed,false);
 assert.equal(slots.authority.registryRemainsDataAuthority,true);
 
 for(const layer of ['timeline','cases','comparison','world','trajectories','transitions','loss']){
-  assert.ok(slots.layers[layer],`Missing FR3 template slot layer: ${layer}`);
-  assert.ok(slots.layers[layer].referenceSize?.width>0&&slots.layers[layer].referenceSize?.height>0,`Missing reference geometry: ${layer}`);
-  assert.ok((projection.layers||[]).some(x=>x.layerId===layer),`Projection missing template layer: ${layer}`);
+  const slotLayer=slots.layers[layer];
+  const projectionLayer=(projection.layers||[]).find(x=>x.layerId===layer);
+  assert.ok(slotLayer,`Missing FR3 presentation layer: ${layer}`);
+  assert.ok(projectionLayer,`Projection missing presentation layer: ${layer}`);
+  if(slotLayer.presentationMode==='SYSTEM_COMPOSED_FROM_ASSETS'){
+    assert.equal(projectionLayer.mode,'SYSTEM_COMPOSED_FROM_ASSETS',`${layer} projection mode drift`);
+    assert.ok(Array.isArray(slotLayer.sourceVisualFamilies)&&slotLayer.sourceVisualFamilies.length>0,`${layer} missing source visual families`);
+  }else{
+    assert.ok(slotLayer.referenceSize?.width>0&&slotLayer.referenceSize?.height>0,`Missing reference geometry: ${layer}`);
+  }
 }
 const graph=slots.layers.trajectories.slots.trajectoryGraph;
 for(const key of ['left','top','width','height']) assert.ok(Number.isFinite(graph[key])&&graph[key]>=0&&graph[key]<=1,`Invalid trajectoryGraph ${key}`);
