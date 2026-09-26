@@ -659,3 +659,32 @@
  .civ-trajectory-panel__graph{left:5%;right:5%;top:25%;bottom:16%}
  .civ-trajectory-panel__copy{padding:.85rem}
 }
+
+
+/* L5 seven-slot World template refinements */
+.civ-template-slot--world-header{display:grid;place-items:center;align-content:center;text-align:center;color:#f3dfac;text-shadow:0 2px 10px rgba(0,0,0,.5);pointer-events:none}
+.civ-template-slot--world-header strong{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1rem,1.65vw,1.9rem);font-weight:500;letter-spacing:.035em}
+.civ-template-slot--world-header span{margin-top:.12rem;font-size:clamp(.65rem,.82vw,.95rem);color:#d5b36c;letter-spacing:.08em}
+.civ-template-slot--world-header small{margin-top:.1rem;font-size:clamp(.42rem,.5vw,.6rem);color:#c7d1d8;letter-spacing:.06em}
+
+.civ-template-slot--world-features,
+.civ-template-slot--world-evidence{padding:.5rem;background:rgba(5,22,35,.76);color:#f5f0e6;overflow:hidden;pointer-events:auto}
+.civ-template-slot--world-features h5,
+.civ-template-slot--world-evidence h5{margin:0 0 .45rem;color:#f0dda8;font-size:clamp(.52rem,.62vw,.76rem)}
+.civ-template-slot--world-features ul,
+.civ-template-slot--world-evidence ul{display:grid;gap:.32rem;margin:0;padding:0;list-style:none}
+.civ-template-slot--world-features li,
+.civ-template-slot--world-evidence li{position:relative;padding-left:.72rem;font-size:clamp(.38rem,.44vw,.54rem);line-height:1.35;color:#c8d1d8}
+.civ-template-slot--world-features li::before,
+.civ-template-slot--world-evidence li::before{content:"•";position:absolute;left:0;color:#d5b36c}
+
+.civ-template-slot--world-cities>div{grid-template-columns:repeat(6,minmax(0,1fr))}
+.civ-template-slot--world-cities article{grid-template-rows:minmax(0,1fr) auto;overflow:hidden;padding:0;min-height:0}
+.civ-template-slot--world-cities article>img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;border-bottom:1px solid rgba(213,179,108,.18)}
+.civ-template-slot--world-cities article>strong{padding:.28rem .2rem;font-size:clamp(.36rem,.42vw,.5rem);white-space:normal}
+
+@media(max-width:900px){
+ .civ-template-slot--world-header strong{font-size:1.1rem}
+ .civ-template-slot--world-header span{font-size:.7rem}
+ .civ-template-slot--world-header small{font-size:.48rem}
+}
