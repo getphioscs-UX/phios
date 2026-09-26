@@ -32,12 +32,21 @@ for(const layer of ['timeline','cases','comparison','world','trajectories','tran
     assert.ok(slotLayer.referenceSize?.width>0&&slotLayer.referenceSize?.height>0,`Missing reference geometry: ${layer}`);
   }
 }
-const graph=slots.layers.trajectories.slots.trajectoryGraph;
-for(const key of ['left','top','width','height']) assert.ok(Number.isFinite(graph[key])&&graph[key]>=0&&graph[key]<=1,`Invalid trajectoryGraph ${key}`);
-assert.ok(slots.layers.trajectories.dynamicOverlay.includes('trajectoryGraph'),'L6 must explicitly admit dynamic trajectoryGraph overlay.');
+const trajectoryLayer=slots.layers.trajectories;
+if(trajectoryLayer.presentationMode==='TEMPLATE_COMPOSITOR'){
+  const graph=trajectoryLayer.slots?.trajectoryGraph;
+  assert.ok(graph,'Template-composed L6 must define trajectoryGraph.');
+  for(const key of ['left','top','width','height']) assert.ok(Number.isFinite(graph[key])&&graph[key]>=0&&graph[key]<=1,`Invalid trajectoryGraph ${key}`);
+  assert.ok(trajectoryLayer.dynamicOverlay?.includes('trajectoryGraph'),'Template-composed L6 must explicitly admit dynamic trajectoryGraph overlay.');
+}else{
+  assert.equal(trajectoryLayer.presentationMode,'SYSTEM_COMPOSED_FROM_ASSETS','L6 presentation mode drift.');
+  assert.equal(trajectoryLayer.rules?.templateWebPRequired,false,'System-composed L6 must not require a template WebP.');
+}
 
 assert.ok(compositor.includes('function trajectoryOverlay'),'FR3 compositor must implement dynamic L6 graph overlay.');
-assert.ok(compositor.includes('data-template-slot="trajectoryGraph"'),'L6 overlay must target the registered graph slot.');
+if(slots.layers.trajectories.presentationMode==='TEMPLATE_COMPOSITOR'){
+  assert.ok(compositor.includes('data-template-slot="trajectoryGraph"'),'L6 overlay must target the registered graph slot.');
+}
 assert.ok(compositor.includes('slotStyle(slot)'),'Dynamic overlay must use registered normalized slot geometry.');
 assert.ok(compositor.includes('posterFor(config,state)'),'Compositor must use existing visual projection owner.');
 assert.ok(!compositor.toLowerCase().includes('ocr'),'Compositor must not use OCR.');
