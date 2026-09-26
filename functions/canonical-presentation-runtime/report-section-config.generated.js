@@ -381,8 +381,8 @@ export const registry = {
           "primaryVisualRef": "BZR-VIS-PROFESSIONAL-TOPICS",
           "visualTopic": "CAREER",
           "title": {
-            "en": "Career · Structural Context",
-            "zh-Hans": "事业 · 结构背景"
+            "en": "Career · Your Structural Fingerprint",
+            "zh-Hans": "事业 · 你的结构指纹"
           }
         },
         {
@@ -1549,7 +1549,9 @@ export const visualModules = {
       "id": "BZR-VIS-PROFESSIONAL-TOPICS",
       "sourceOwner": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
       "sourceRefs": [
-        "professionalModules/professionalTopics/topics"
+        "professionalModules/professionalTopics/topics",
+        "professionalModules/tenGods",
+        "professionalModules/professionalTimeline/currentWindow"
       ],
       "allowedPageFamilies": [
         "STRUCTURED_ANALYSIS_PAGE",
