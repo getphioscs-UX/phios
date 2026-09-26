@@ -16,7 +16,7 @@ if(root){
     onLayerChange:activeLayer=>store.set(reconcileAtlasContextForLayer(activeLayer,store.get(),data),{source:'layer-nav'}),
     onStateChange:(patch,meta)=>store.set(patch,meta)
   });
-  renderAtlasVisualProjection(root.querySelector('[data-atlas-template-projection]'),{projection:data.visualProjection,slots:data.templateSlots,data,state:store.get(),locale:getLocale()});
+  renderAtlasVisualProjection(root.querySelector('[data-atlas-template-projection]'),{projection:data.visualProjection,slots:data.templateSlots,data,state:store.get(),locale:getLocale(),onStateChange:(patch,meta)=>store.set(patch,meta)});
   renderAtlasStaticVisuals(root,{bindings:data.staticVisuals,state:store.get(),locale:getLocale(),data});};
   const unsubscribe=store.subscribe(render);
   const unbindLocale=onLocaleChange(()=>store.set({locale:getLocale()},{source:'locale'}));
