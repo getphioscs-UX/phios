@@ -97,9 +97,11 @@ const trajectories=read('assets/js/pages/civilization-atlas/trajectory-renderer.
 const transitions=read('assets/js/pages/civilization-atlas/transition-renderer.js');
 const loss=read('assets/js/pages/civilization-atlas/loss-renderer.js');
 
-assert.ok(trajectories.includes('items.slice(0,1)'),'Long trends must default to one readable trajectory, not a multi-chart dashboard.');
-assert.ok(trajectories.indexOf('civ-trajectory-card--reader')<trajectories.indexOf('civ-trajectory-navigator'),'Long trends must present reading before controls.');
-assert.ok(trajectories.includes('civ-trajectory-data'),'Trajectory curve and method must be progressive disclosure.');
+assert.ok(trajectories.includes('civ-trajectory-panel-grid'),'L6 must render the full system-composed trajectory panel grid.');
+assert.ok(trajectories.includes('items.map(t=>'),'L6 must project all canonical trajectories from the registry.');
+assert.ok(!trajectories.includes('slice(0,5)'),'L6 must not regress to the old five-trajectory subset.');
+assert.ok(trajectories.includes('<polyline class="civ-trajectory-panel__line'),'Each L6 trajectory must own a dynamic SVG curve.');
+assert.ok(trajectories.includes('civ-trajectory-panel__details'),'Method and uncertainty must remain progressive disclosure within each trajectory panel.');
 
 assert.ok(transitions.indexOf('civ-transition-reader')<transitions.indexOf('civ-transition-navigator'),'Transitions must present the active story before the selector.');
 assert.ok(transitions.includes('civ-transition-story'),'Transitions must foreground before → transition → successor reality.');
