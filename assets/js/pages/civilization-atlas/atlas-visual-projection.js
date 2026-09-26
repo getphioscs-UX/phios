@@ -59,17 +59,45 @@ function worldOverlay(data,state,locale,slotConfig){
     snapshots[0]||null;
   if(!selected) return '';
   const caseMap=new Map(cases.map(c=>[c.caseId,c]));
+  const header=slotConfig.slots?.headerTitle;
   const overview=slotConfig.slots?.overview;
   const map=slotConfig.slots?.map;
   const civilizations=slotConfig.slots?.civilizations;
+  const features=slotConfig.slots?.features;
   const cities=slotConfig.slots?.cities;
+  const evidence=slotConfig.slots?.evidence;
   const atmosphere=acceptedVisual(data.staticVisuals,'WORLD_SNAPSHOT_ATMOSPHERE',selected.snapshotId);
-  const overviewHtml=overview?`<div class="civ-template-slot civ-template-slot--world-overview" data-template-slot="overview" style="${slotStyle(overview)}"><p class="knowledge-eyebrow">${esc(formatYear(selected.year,locale))}</p><h4>${esc(loc(selected.title,locale))}</h4><p>${esc(loc(selected.summary,locale))}</p><dl><div><dt>${locale==='zh-Hans'?'主要文明':'Civilizations'}</dt><dd>${selected.majorCaseIds?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'贸易网络':'Trade networks'}</dt><dd>${selected.tradeNetworks?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'代表城市':'Cities'}</dt><dd>${selected.majorCities?.length||0}</dd></div></dl></div>`:'';
+
+  const headerHtml=header?`<div class="civ-template-slot civ-template-slot--world-header" data-template-slot="headerTitle" style="${slotStyle(header)}"><strong>${esc(locale==='zh-Hans'?'第五层｜世界横切面':'Layer 5 | World Snapshot')}</strong><span>${esc(formatYear(selected.year,locale))}</span><small>${esc(loc(selected.title,locale))}</small></div>`:'';
+
+  const overviewHtml=overview?`<div class="civ-template-slot civ-template-slot--world-overview" data-template-slot="overview" style="${slotStyle(overview)}"><p class="knowledge-eyebrow">${esc(locale==='zh-Hans'?'全球概览':'Global overview')}</p><h4>${esc(loc(selected.title,locale))}</h4><p>${esc(loc(selected.summary,locale))}</p><dl><div><dt>${locale==='zh-Hans'?'主要文明':'Civilizations'}</dt><dd>${selected.majorCaseIds?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'区域组':'Regions'}</dt><dd>${selected.regionalGroups?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'贸易网络':'Trade networks'}</dt><dd>${selected.tradeNetworks?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'知识网络':'Knowledge networks'}</dt><dd>${selected.knowledgeNetworks?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'信仰网络':'Belief networks'}</dt><dd>${selected.religiousNetworks?.length||0}</dd></div><div><dt>${locale==='zh-Hans'?'代表城市':'Cities'}</dt><dd>${selected.majorCities?.length||0}</dd></div></dl></div>`:'';
+
   const mapHtml=map?`<div class="civ-template-slot civ-template-slot--world-map" data-template-slot="map" style="${slotStyle(map)}">${atmosphere?`<img src="${esc(atmosphere.publicUrl)}" alt="" loading="eager" decoding="async">`:''}<div class="civ-template-world-map__caption"><strong>${esc(formatYear(selected.year,locale))}</strong><span>${esc(locale==='zh-Hans'?'世界横切面':'World snapshot')}</span></div></div>`:'';
-  const civilizationsHtml=civilizations?`<div class="civ-template-slot civ-template-slot--world-civilizations" data-template-slot="civilizations" style="${slotStyle(civilizations)}"><h5>${locale==='zh-Hans'?'主要文明':'Major civilizations'}</h5><div>${(selected.majorCaseIds||[]).slice(0,8).map(id=>{const c=caseMap.get(id),v=acceptedVisual(data.staticVisuals,'CASE_HERO',id);return c?`<button type="button" data-template-world-case="${esc(id)}">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span><strong>${esc(loc(c.title,locale))}</strong><small>${esc(loc(c.region?.label,locale))}</small></span></button>`:''}).join('')}</div></div>`:'';
-  const citiesHtml=cities?`<div class="civ-template-slot civ-template-slot--world-cities" data-template-slot="cities" style="${slotStyle(cities)}"><h5>${locale==='zh-Hans'?'代表城市':'Representative cities'}</h5><div>${(selected.majorCities||[]).slice(0,8).map(city=>`<article><strong>${esc(loc(city.name,locale))}</strong></article>`).join('')}</div></div>`:'';
-  return overviewHtml+mapHtml+civilizationsHtml+citiesHtml;
+
+  const civilizationsHtml=civilizations?`<div class="civ-template-slot civ-template-slot--world-civilizations" data-template-slot="civilizations" style="${slotStyle(civilizations)}"><h5>${locale==='zh-Hans'?'主要文明':'Major civilizations'}</h5><div>${(selected.majorCaseIds||[]).slice(0,7).map(id=>{const c=caseMap.get(id),v=acceptedVisual(data.staticVisuals,'CASE_HERO',id);return c?`<button type="button" data-template-world-case="${esc(id)}">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span><strong>${esc(loc(c.title,locale))}</strong><small>${esc(loc(c.region?.label,locale))}</small></span></button>`:''}).join('')}</div></div>`:'';
+
+  const featureItems=[
+    ...(selected.tradeNetworks||[]).slice(0,1).map(x=>loc(x.label,locale)),
+    ...(selected.knowledgeNetworks||[]).slice(0,1).map(x=>loc(x.label,locale)),
+    ...(selected.religiousNetworks||[]).slice(0,1).map(x=>loc(x.label,locale)),
+    loc(selected.technologyContext,locale),
+    loc(selected.energyContext,locale)
+  ].filter(Boolean).slice(0,5);
+  const featuresHtml=features?`<div class="civ-template-slot civ-template-slot--world-features" data-template-slot="features" style="${slotStyle(features)}"><h5>${locale==='zh-Hans'?'关键特征':'Key features'}</h5><ul>${featureItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:'';
+
+  const citiesHtml=cities?`<div class="civ-template-slot civ-template-slot--world-cities" data-template-slot="cities" style="${slotStyle(cities)}"><h5>${locale==='zh-Hans'?'代表城市':'Representative cities'}</h5><div>${(selected.majorCities||[]).slice(0,6).map(city=>{const v=acceptedVisual(data.staticVisuals,'CASE_HERO',city.caseId);return `<article>${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<strong>${esc(loc(city.name,locale))}</strong></article>`}).join('')}</div></div>`:'';
+
+  const evidenceItems=[
+    selected.approximate?(locale==='zh-Hans'?'时间为近似历史窗口':'Approximate historical window'):null,
+    selected.populationEvidence?.length?(locale==='zh-Hans'?`人口证据记录 ${selected.populationEvidence.length} 项`:`${selected.populationEvidence.length} population evidence records`):null,
+    selected.evidenceRefs?.length?(locale==='zh-Hans'?`已登记证据来源 ${selected.evidenceRefs.length} 项`:`${selected.evidenceRefs.length} registered evidence sources`):null,
+    loc(selected.unknown?.note,locale)
+  ].filter(Boolean);
+  const evidenceHtml=evidence?`<div class="civ-template-slot civ-template-slot--world-evidence" data-template-slot="evidence" style="${slotStyle(evidence)}"><h5>${locale==='zh-Hans'?'证据与边界':'Evidence & boundary'}</h5><ul>${evidenceItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:'';
+
+  return headerHtml+overviewHtml+mapHtml+civilizationsHtml+featuresHtml+citiesHtml+evidenceHtml;
 }
+
 function linePoints(series,minYear,maxYear,minVal,maxVal){
   const dx=Math.max(1,maxYear-minYear),dy=Math.max(1,maxVal-minVal);
   return (series||[]).map(p=>{
