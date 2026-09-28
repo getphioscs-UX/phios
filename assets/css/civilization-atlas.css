@@ -703,3 +703,19 @@
  .civ-template-board[data-layer="trajectories"] .civ-template-trajectory-line{stroke-width:3.5}
  .civ-world__globe>img{min-height:0;max-height:26rem}
 }
+
+
+/* CIV-ATLAS-FR5 trajectory overview */
+.civ-template-slot--trajectory-overview{pointer-events:none;background:rgba(5,24,39,.88);padding:1rem}
+.civ-template-trajectory-overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;height:100%}
+.civ-template-trajectory-overview-grid section{min-width:0;padding:.75rem;border:1px solid rgba(213,179,108,.2);border-radius:.7rem;background:rgba(8,31,47,.72)}
+.civ-template-trajectory-overview-grid strong{display:block;margin-bottom:.45rem;color:#f0dda8;font-size:clamp(.6rem,.8vw,.9rem)}
+.civ-template-trajectory-overview-grid ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.25rem .5rem;margin:0;padding:0;list-style:none}
+.civ-template-trajectory-overview-grid li{min-width:0;color:#c6d0d8;font-size:clamp(.42rem,.52vw,.64rem);line-height:1.3}
+.civ-trajectories--overview .civ-trajectory-panel{box-shadow:none}
+.civ-trajectories--overview .civ-trajectory-panel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:768px){
+ .civ-template-trajectory-overview-grid{grid-template-columns:1fr}
+ .civ-template-trajectory-overview-grid ul{grid-template-columns:1fr 1fr}
+ .civ-trajectories--overview .civ-trajectory-panel-grid{grid-template-columns:1fr}
+}
