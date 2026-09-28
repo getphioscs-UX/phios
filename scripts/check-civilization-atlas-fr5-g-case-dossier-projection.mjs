@@ -14,7 +14,7 @@ assert.equal(evidence.scope.customerProjection,'GROUPED_PROGRESSIVE_DOSSIER');
 
 for(const token of [
   '现实基础','组织与运行','资源、能源与承载','知识与技术','基础设施与网络','安全与冲突','转型与延续',
-  'Reality Base','Organization & Runtime','Resources, Energy & Capacity','Knowledge & Technology','Infrastructure & Networks','Security & Conflict','Transition & Continuity'
+  'Reality Base','Organization & Operation','Resources, Energy & Capacity','Knowledge & Technology','Infrastructure & Networks','Security & Conflict','Transition & Continuity'
 ]) assert.ok(renderer.includes(token),`Missing dossier section label: ${token}`);
 
 for(const field of [
