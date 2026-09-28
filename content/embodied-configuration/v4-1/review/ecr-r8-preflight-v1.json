@@ -1,35 +1,51 @@
 {
   "schemaVersion": "ECR-V4.1A-R8-PREFLIGHT-v1",
   "checkedAt": "2026-09-28",
-  "state": "BLOCKED_PRE_RENDER",
+  "state": "STATIC_ALIGNMENT_COMPLETE_MACHINE_CHECK_NOT_RUN",
   "findings": [
     {
       "code": "R7_ADMISSION_VALIDATOR_SCHEMA_MISMATCH",
-      "status": "OPEN",
-      "detail": "Runtime admission validator recognizes old acceptedContent binding only; R7 uses acceptedRecordSnapshot."
+      "status": "CLOSED",
+      "detail": "Runtime validator now accepts legacy acceptedContent and R7 acceptedRecordSnapshot exact bindings."
     },
     {
       "code": "W8_CARD_PRIORITY_SCHEMA_MISMATCH",
-      "status": "OPEN",
-      "detail": "Card selector expects numeric priority; R7-W8 uses governed priority object with tier/tieBreakers."
+      "status": "CLOSED",
+      "detail": "Phi Card selector now consumes priority.tier/tieBreakers contract, excludes overlay-only groups from primary six slots, and fails closed on equal governed score."
     },
     {
       "code": "OPERATIONAL_TAG_EVIDENCE_MISSING",
       "status": "CLOSED",
-      "detail": "64/64 Gate Base -> Semantic Tag evidence records owner-accepted in R7-W10B."
+      "detail": "64/64 Gate Base -> Semantic Tag evidence records owner-accepted and consumed by runtime."
     },
     {
       "code": "STALE_REPORT_COPY_AND_CHIRON_ASSERTIONS",
-      "status": "OPEN",
-      "detail": "Report/check scripts still contain pre-R7 wording and Chiron D11 expectations."
+      "status": "CLOSED",
+      "detail": "Report consumes W6 accepted bilingual copy; D11 runtime derives Earth; stale Chiron/UNKNOWN regression assertions updated."
     },
     {
       "code": "AUTHORITY_BUNDLE_REGEN_REQUIRED",
-      "status": "OPEN",
-      "detail": "Generated ECR authority bundle must be regenerated after runtime authority changes."
+      "status": "CLOSED",
+      "detail": "R7 authority entries and source order refreshed in ecr-v41-authorities.generated.js."
     }
   ],
   "visualAcceptance": "NOT_RUN",
   "mayRenderForAcceptance": false,
-  "updatedAt": "2026-09-28"
+  "updatedAt": "2026-09-28",
+  "machineCheck": {
+    "command": "npm run check:ecr-v41:r8-runtime-alignment",
+    "status": "NOT_RUN",
+    "reason": "Current execution environment cannot clone/access GitHub and no GitHub Actions workflow was triggered for branch HEAD."
+  },
+  "renderBuild": {
+    "command": "npm run build:ecr-v41:r8-review",
+    "status": "NOT_RUN",
+    "outputs": [
+      "docs/ecr-human-runtime-v4-1/r8/review-en.html",
+      "docs/ecr-human-runtime-v4-1/r8/review-zh-Hans.html",
+      "docs/ecr-human-runtime-v4-1/r8/r8-rendered-visual-acceptance.json",
+      "docs/ecr-human-runtime-v4-1/r8/runtime-lineage-proof.json"
+    ]
+  },
+  "nextRequiredAction": "RUN_R8_MACHINE_ALIGNMENT_CHECK_THEN_BUILD_RENDERED_REVIEW"
 }
