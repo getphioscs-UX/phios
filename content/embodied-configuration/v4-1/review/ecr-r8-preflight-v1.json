@@ -1,7 +1,7 @@
 {
   "schemaVersion": "ECR-V4.1A-R8-PREFLIGHT-v1",
   "checkedAt": "2026-09-28",
-  "state": "STATIC_ALIGNMENT_COMPLETE_MACHINE_CHECK_NOT_RUN",
+  "state": "HUMAN_VISUAL_REVIEW_READY",
   "findings": [
     {
       "code": "R7_ADMISSION_VALIDATOR_SCHEMA_MISMATCH",
@@ -29,23 +29,25 @@
       "detail": "R7 authority entries and source order refreshed in ecr-v41-authorities.generated.js."
     }
   ],
-  "visualAcceptance": "NOT_RUN",
-  "mayRenderForAcceptance": false,
+  "visualAcceptance": "PENDING_HUMAN_REVIEW",
+  "mayRenderForAcceptance": true,
   "updatedAt": "2026-09-28",
   "machineCheck": {
     "command": "npm run check:ecr-v41:r8-runtime-alignment",
-    "status": "NOT_RUN",
-    "reason": "Current execution environment cannot clone/access GitHub and no GitHub Actions workflow was triggered for branch HEAD."
+    "status": "PASS_OWNER_REPORTED",
+    "evidenceRef": "OWNER_REPORTED_LOCAL_EXECUTION_2026-09-28",
+    "independentlyVerifiedByAssistant": false
   },
   "renderBuild": {
     "command": "npm run build:ecr-v41:r8-review",
-    "status": "NOT_RUN",
+    "status": "PASS_OWNER_REPORTED",
     "outputs": [
       "docs/ecr-human-runtime-v4-1/r8/review-en.html",
       "docs/ecr-human-runtime-v4-1/r8/review-zh-Hans.html",
       "docs/ecr-human-runtime-v4-1/r8/r8-rendered-visual-acceptance.json",
       "docs/ecr-human-runtime-v4-1/r8/runtime-lineage-proof.json"
-    ]
+    ],
+    "artifactLocation": "LOCAL_WORKTREE_ONLY_NOT_COMMITTED"
   },
-  "nextRequiredAction": "RUN_R8_MACHINE_ALIGNMENT_CHECK_THEN_BUILD_RENDERED_REVIEW"
+  "nextRequiredAction": "OWNER_REVIEW_EN_ZH_1440_390_PRINT_AND_ACCEPT_OR_REJECT"
 }
