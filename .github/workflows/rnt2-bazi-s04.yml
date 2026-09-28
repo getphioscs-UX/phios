@@ -33,13 +33,15 @@ jobs:
           node-version-file: '.node-version'
           cache: npm
       - run: npm ci
+      - name: Audit BaZi S04 authority and Rich Claim IR
+        run: node scripts/check-rnt2-bazi-s04-authority.mjs
       - name: Build governed BaZi S04 T2 review
         run: node scripts/build-rnt2-bazi-s04-review.mjs
       - name: Commit review evidence
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/acceptance/report-narrative-t2-r1/bazi/s04
+          git add docs/acceptance/report-narrative-t2-r1/bazi
           if git diff --cached --quiet; then
             echo "No RNT2 S04 evidence changes"
           else
