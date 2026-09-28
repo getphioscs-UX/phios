@@ -9,6 +9,7 @@ on:
       - 'functions/personal-reading/narrative/bazi-explanatory-authority.js'
       - 'functions/personal-reading/narrative/bazi-s04-t2-runtime.js'
       - 'scripts/build-rnt2-bazi-s04-review.mjs'
+      - 'scripts/check-rnt2-bazi-s04-authority.mjs'
       - 'content/ai-economics/providers/ai-provider-cost-registry-v1.json'
       - '.github/workflows/rnt2-bazi-s04.yml'
 
@@ -40,5 +41,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: rnt2-bazi-s04
-          path: docs/acceptance/report-narrative-t2-r1/bazi/s04
+          path: docs/acceptance/report-narrative-t2-r1/bazi
           if-no-files-found: error
