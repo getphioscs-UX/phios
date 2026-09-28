@@ -1,7 +1,7 @@
 {
   "version": "RNT2-CSD-REVIEW-PACK-v2.0.0",
-  "generatedAt": "2026-09-28T05:07:10.340Z",
-  "state": "MACHINE_REVIEW_REQUIRED",
+  "generatedAt": "2026-09-28T05:14:10.145Z",
+  "state": "TECHNICAL_PASS / EDITORIAL_AUTOMATED_PASS / OWNER_ACCEPTANCE_PENDING",
   "reviewOnly": true,
   "ownerAcceptance": "PENDING",
   "productionActivated": false,
@@ -69,6 +69,18 @@
     "candidateParity": "PRESENT_BOTH",
     "reasons": [],
     "mechanismParity": true
+  },
+  "requestSummary": {
+    "initialGenerationRuns": 4,
+    "writerRequests": 8,
+    "targetedRepairs": 4,
+    "transportRetries": 0,
+    "semanticReviewRequests": 8,
+    "regenerationsAfterFreeze": 0,
+    "inputTokens": 542338,
+    "outputTokens": 45262,
+    "estimatedProviderCost": 0.22610849999999996,
+    "finalProviderCost": null
   },
   "initialReviews": {
     "zh-Hans": {
@@ -1979,6 +1991,165 @@
       }
     }
   },
+  "auditHistory": {
+    "zh-Hans": {
+      "artifactDigest": "ba01a1c3bf34631b70f745ed606bdffdb656041ba75fd4894106d2367338a84e",
+      "reviewAudit": {
+        "version": "CSD-REVIEW-v1.1.0",
+        "sourceArtifactDigest": "6d313acc766059f39f7045681e83c768c774ec8552b2512495c962afbe92a524",
+        "candidateDigest": "0e54fac7f91f9bf7e858f3a28c0b2b24e4183893c7b19327a879941c962d21c4",
+        "generationCalls": 0,
+        "semanticReviewReused": false,
+        "reviewCalls": 1,
+        "usageRecords": [
+          {
+            "schemaVersion": "PHI-OS-PAI-R1-USAGE-EVENT-v1.0.0",
+            "requestId": "rnt2-csd-review:227afce9cdf2bbce0787a4f10b6ded0510bee93fe29c9ee491ccc70f3aedda47",
+            "timestamp": "2026-09-28T05:07:42.804Z",
+            "aiExecutionClass": "T2_LIGHT_COMPOSITION",
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "inputTokens": 35775,
+            "cachedInputTokens": 0,
+            "outputTokens": 2463,
+            "estimatedProviderCost": 0.01386975,
+            "finalProviderCost": null,
+            "customerTier": "FREE",
+            "entitlementClass": "FREE",
+            "creditsCharged": 0,
+            "requestType": "QA_REVIEW",
+            "retrievalEvidenceTokens": 0,
+            "authorizedContextTokens": 0,
+            "composerInputTokens": 0,
+            "cacheHit": false,
+            "fallbackUsed": false,
+            "fallbackFrom": null,
+            "fallbackTo": null,
+            "providerAttemptCount": 1,
+            "firstAttemptFailureRecorded": false,
+            "latencyMs": 19107,
+            "success": true,
+            "failureClass": null
+          }
+        ]
+      },
+      "status": "PASS",
+      "reasons": []
+    },
+    "en": {
+      "artifactDigest": "d521a75b9432e3952faa38852a5ab287a54816e9af6bd33948d1f4981f85f6de",
+      "reviewAudit": {
+        "version": "CSD-REVIEW-v1.1.0",
+        "sourceArtifactDigest": "a1776626a2006e931d1c5d22ac380f1c795234df3b42f3944bae76e64c349bfb",
+        "candidateDigest": "5f2ee4cff041a2da039df386a7b4955d3166a186f8924abd0cfceaa5bad46ffc",
+        "generationCalls": 0,
+        "semanticReviewReused": true,
+        "reviewCalls": 0,
+        "usageRecords": []
+      },
+      "status": "PASS",
+      "reasons": []
+    },
+    "BAZI-FP-W17-001": {
+      "artifactDigest": "5de98fd9410cd88a81834c0b13449fefa26a6af125076d27cf51f294a066d479",
+      "reviewAudit": {
+        "version": "CSD-REVIEW-v1.1.0",
+        "sourceArtifactDigest": "463645868fb9908c10ea431fa2224d957e58fa80540f8a9ed4a9773949ae03a6",
+        "candidateDigest": "65bf426370f17cd2fdb91dcbecd92157794ac2ddb77e92aa3f99e7848b9411ac",
+        "generationCalls": 0,
+        "semanticReviewReused": false,
+        "reviewCalls": 1,
+        "usageRecords": [
+          {
+            "schemaVersion": "PHI-OS-PAI-R1-USAGE-EVENT-v1.0.0",
+            "requestId": "rnt2-csd-review:b7536f3c6fe2620ecefd55c2e16a9db5d77a49f937ec5a3dec233f25b317885f",
+            "timestamp": "2026-09-28T05:07:55.080Z",
+            "aiExecutionClass": "T2_LIGHT_COMPOSITION",
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "inputTokens": 29982,
+            "cachedInputTokens": 0,
+            "outputTokens": 2497,
+            "estimatedProviderCost": 0.0124895,
+            "finalProviderCost": null,
+            "customerTier": "FREE",
+            "entitlementClass": "FREE",
+            "creditsCharged": 0,
+            "requestType": "QA_REVIEW",
+            "retrievalEvidenceTokens": 0,
+            "authorizedContextTokens": 0,
+            "composerInputTokens": 0,
+            "cacheHit": false,
+            "fallbackUsed": false,
+            "fallbackFrom": null,
+            "fallbackTo": null,
+            "providerAttemptCount": 1,
+            "firstAttemptFailureRecorded": false,
+            "latencyMs": 22199,
+            "success": true,
+            "failureClass": null
+          }
+        ]
+      },
+      "status": "FALLBACK",
+      "reasons": [
+        "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
+        "EDITORIAL_REVIEW_REQUIRED:disclaimerCompression",
+        "EDITORIAL_REVIEW_REQUIRED:primitiveSuppression"
+      ]
+    },
+    "BAZI-FP-W17-031": {
+      "artifactDigest": "eb7aec3349e16b053bafc49bf8c0b163e5ef841fc092ea1361c7bd88a864766b",
+      "reviewAudit": {
+        "version": "CSD-REVIEW-v1.1.0",
+        "sourceArtifactDigest": "716df8801945beab70a35410839459877c1cc5ca49f066e406e003bea77fcf59",
+        "candidateDigest": "999de7ea523f1352618c8fdac567659d58a9bcbeda5df5ad6b8e6f97875af2f7",
+        "generationCalls": 0,
+        "semanticReviewReused": false,
+        "reviewCalls": 1,
+        "usageRecords": [
+          {
+            "schemaVersion": "PHI-OS-PAI-R1-USAGE-EVENT-v1.0.0",
+            "requestId": "rnt2-csd-review:16e154c3deedc4bcbbc996fba532dad40dd7c4a416e7373df720b71546543cf0",
+            "timestamp": "2026-09-28T05:07:52.027Z",
+            "aiExecutionClass": "T2_LIGHT_COMPOSITION",
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "inputTokens": 34973,
+            "cachedInputTokens": 0,
+            "outputTokens": 1634,
+            "estimatedProviderCost": 0.01201125,
+            "finalProviderCost": null,
+            "customerTier": "FREE",
+            "entitlementClass": "FREE",
+            "creditsCharged": 0,
+            "requestType": "QA_REVIEW",
+            "retrievalEvidenceTokens": 0,
+            "authorizedContextTokens": 0,
+            "composerInputTokens": 0,
+            "cacheHit": false,
+            "fallbackUsed": false,
+            "fallbackFrom": null,
+            "fallbackTo": null,
+            "providerAttemptCount": 1,
+            "firstAttemptFailureRecorded": false,
+            "latencyMs": 18811,
+            "success": true,
+            "failureClass": null
+          }
+        ]
+      },
+      "status": "FALLBACK",
+      "reasons": [
+        "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
+        "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
+        "EDITORIAL_REVIEW_REQUIRED:scenarioDensity",
+        "EDITORIAL_REVIEW_REQUIRED:thesisClarity",
+        "EDITORIAL_REVIEW_REQUIRED:navigationUsefulness",
+        "EDITORIAL_REVIEW_REQUIRED:sectionSubstitution"
+      ]
+    }
+  },
   "records": {
     "zh-Hans": {
       "identity": {
@@ -1990,13 +2161,15 @@
         "composer": "PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.3.0",
         "prompt": "PHI-OS-S04-CSD-PROMPT-v1.0.0",
         "verifier": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
-        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec"
+        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec",
+        "auditVersion": "CSD-REVIEW-v1.1.1"
       },
+      "sourceArtifactDigest": "6d313acc766059f39f7045681e83c768c774ec8552b2512495c962afbe92a524",
       "result": {
         "schemaVersion": "PHI-OS-BAZI-S04-T2-CANDIDATE-v1.0.0",
         "runtimeVersion": "PHI-OS-BAZI-S04-T2-RUNTIME-v1.0.0",
         "locale": "zh-Hans",
-        "status": "FALLBACK",
+        "status": "PASS",
         "richClaimIr": {
           "version": "BAZI_EXPLANATORY_AUTHORITY_V2",
           "claims": [
@@ -9538,81 +9711,280 @@
           "schemaVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFICATION-v1.1.0",
           "verifierVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
           "sourceBriefDigest": "9cd9754b7bb58ac3a0417ee8f64779571877e74c2bc5778043d817d2ec19b8cb",
-          "accepted": false,
+          "accepted": true,
           "sourceDigest": "5ddcc7472eed68b6848a48b45f3bd6542ee8d3b4dbe8c56939332c26b9bda76a",
-          "factsPreserved": false,
-          "semanticOperatorsPreserved": false,
-          "roleSemanticsPreserved": false,
-          "boundariesPreserved": false,
-          "conditionsPreserved": false,
-          "counterSignalsPreserved": false,
-          "uncertaintyPreserved": false,
-          "timingScopePreserved": false,
-          "observableScopePreserved": false,
-          "noInventedReality": false,
-          "noNewMethodFact": false,
+          "factsPreserved": true,
+          "semanticOperatorsPreserved": true,
+          "roleSemanticsPreserved": true,
+          "boundariesPreserved": true,
+          "conditionsPreserved": true,
+          "counterSignalsPreserved": true,
+          "uncertaintyPreserved": true,
+          "timingScopePreserved": true,
+          "observableScopePreserved": true,
+          "noInventedReality": true,
+          "noNewMethodFact": true,
           "claimReferenceCoverage": 1,
-          "claimCoverage": 0,
-          "semanticReview": null,
-          "technicalAccepted": false,
+          "claimCoverage": 1,
+          "semanticReview": {
+            "sourceBriefDigest": "9cd9754b7bb58ac3a0417ee8f64779571877e74c2bc5778043d817d2ec19b8cb",
+            "candidateDigest": "0e54fac7f91f9bf7e858f3a28c0b2b24e4183893c7b19327a879941c962d21c4",
+            "meaningfullyUsedClaimRefs": [
+              "CSD:AUTHORITY_LOAD",
+              "CSD:OUTPUT_BACKING",
+              "CSD:COMMERCIAL_DELIVERY",
+              "CSD:THESIS",
+              "CSD:CONDITIONS",
+              "CSD:TRADEOFFS",
+              "CSD:AUTHORITY_LOAD:SCENARIO:0",
+              "CSD:AUTHORITY_LOAD:SCENARIO:1",
+              "CSD:OUTPUT_BACKING:SCENARIO:0",
+              "CSD:OUTPUT_BACKING:SCENARIO:1",
+              "CSD:COMMERCIAL_DELIVERY:SCENARIO:0",
+              "CSD:COMMERCIAL_DELIVERY:SCENARIO:1",
+              "CSD:ROLE_COMPOSITION",
+              "CSD:TIMING",
+              "CSD:DECISION",
+              "CSD:BOUNDARY"
+            ],
+            "reasons": [],
+            "factsPreserved": true,
+            "boundariesPreserved": true,
+            "conditionsPreserved": true,
+            "counterSignalsPreserved": true,
+            "uncertaintyPreserved": true,
+            "timingScopePreserved": true,
+            "noInventedReality": true,
+            "noNewMethodFact": true,
+            "semanticOperatorsPreserved": true,
+            "rankPreserved": true,
+            "directionPreserved": true,
+            "editorialAssessments": [
+              {
+                "dimension": "causalExplanation",
+                "passed": true,
+                "evidence": "把清楚的职责、实际的决策权限、足够的准备支持与可兑现的交付连接起来",
+                "reason": ""
+              },
+              {
+                "dimension": "customerSpecificity",
+                "passed": true,
+                "evidence": "责任、产出或客户承诺增加，却没有相应的人员、优先级、预算或协商空间",
+                "reason": ""
+              },
+              {
+                "dimension": "domainSpecificity",
+                "passed": true,
+                "evidence": "书面职责范围、明确的决策人和优先级协调权限",
+                "reason": ""
+              },
+              {
+                "dimension": "realityTranslation",
+                "passed": true,
+                "evidence": "在一段可观察的试行后复查审批等待、返工、未解决依赖",
+                "reason": ""
+              },
+              {
+                "dimension": "scenarioDensity",
+                "passed": true,
+                "evidence": "如果交付岗位增加第二个项目",
+                "reason": ""
+              },
+              {
+                "dimension": "thesisClarity",
+                "passed": true,
+                "evidence": "事业上更容易发挥的，不是单纯承担更多责任",
+                "reason": ""
+              },
+              {
+                "dimension": "advantageCostBalance",
+                "passed": true,
+                "evidence": "责任本身不等于代价",
+                "reason": ""
+              },
+              {
+                "dimension": "conditionSpecificity",
+                "passed": true,
+                "evidence": "明确服务范围、修改次数、响应时限与对应预算",
+                "reason": ""
+              },
+              {
+                "dimension": "timingIntegration",
+                "passed": true,
+                "evidence": "两层重叠只提高这些议题的关注度，不提高具体事件的确定性",
+                "reason": ""
+              },
+              {
+                "dimension": "navigationUsefulness",
+                "passed": true,
+                "evidence": "第一步是写清楚承诺交付什么、期限是什么",
+                "reason": ""
+              },
+              {
+                "dimension": "disclaimerCompression",
+                "passed": true,
+                "evidence": "这是待实际工作检验的命盘可能性",
+                "reason": ""
+              },
+              {
+                "dimension": "primitiveSuppression",
+                "passed": true,
+                "evidence": "规则、责任与压力怎样和表达产出、资源交换、学习支持共同组织",
+                "reason": ""
+              },
+              {
+                "dimension": "nameRemoval",
+                "passed": true,
+                "evidence": "责任、产出或客户承诺增加，却没有相应的人员、优先级、预算或协商空间",
+                "reason": ""
+              },
+              {
+                "dimension": "sectionSubstitution",
+                "passed": true,
+                "evidence": "若客户提供持续合作，应同步核对承诺数量、响应时限和修改上限",
+                "reason": ""
+              },
+              {
+                "dimension": "paragraphFunction",
+                "passed": true,
+                "evidence": "判断岗位或项目时，第一步是写清楚承诺交付什么",
+                "reason": ""
+              },
+              {
+                "dimension": "observableExpression",
+                "passed": true,
+                "evidence": "若审批层级拖慢决策而期限不变，则应检查是否有可执行的例外处理或升级协调流程",
+                "reason": ""
+              }
+            ]
+          },
+          "technicalAccepted": true,
           "editorialQuality": {
-            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-            "state": "EDITORIAL_AUTOMATED_FAIL",
-            "accepted": false,
+            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+            "state": "EDITORIAL_AUTOMATED_PASS",
+            "accepted": true,
             "customerSpecificityDensity": {
               "thesis": 1,
-              "causalChains": 0,
-              "scenarios": 0,
-              "contrasts": 0,
-              "environmentDistinctions": 0,
-              "sustainable": 0,
-              "unsustainable": 0,
-              "synthesizedFacts": 0,
-              "timingWhenAvailable": 0,
-              "decisionSequence": 0
+              "causalChains": 3,
+              "scenarios": 6,
+              "contrasts": 3,
+              "environmentDistinctions": 3,
+              "sustainable": 1,
+              "unsustainable": 1,
+              "synthesizedFacts": 3,
+              "timingWhenAvailable": 1,
+              "decisionSequence": 1
             },
             "sentenceRatios": {
-              "DISCLAIMER": 0,
+              "DISCLAIMER": 0.036,
               "METHOD_EXPLANATION": 0,
-              "CUSTOMER_INTERPRETATION": 0.464,
-              "RAW_FACT": 0.536
+              "CUSTOMER_INTERPRETATION": 0.929,
+              "RAW_FACT": 0.036
             },
-            "observableInterpretationRatio": 0.75,
+            "observableInterpretationRatio": 1,
             "primitiveExposure": [],
-            "disclaimerCount": 0,
-            "nameRemoval": "FAIL",
+            "disclaimerCount": 1,
+            "nameRemoval": "PASS",
             "sectionSubstitution": "PASS",
-            "assessments": [],
-            "reasons": [
-              "CUSTOMER_DEPTH_MISSING:causalChains",
-              "CUSTOMER_DEPTH_MISSING:scenarios",
-              "CUSTOMER_DEPTH_MISSING:contrasts",
-              "CUSTOMER_DEPTH_MISSING:environmentDistinctions",
-              "CUSTOMER_DEPTH_MISSING:sustainable",
-              "CUSTOMER_DEPTH_MISSING:unsustainable",
-              "CUSTOMER_DEPTH_MISSING:synthesizedFacts",
-              "CUSTOMER_DEPTH_MISSING:timingWhenAvailable",
-              "CUSTOMER_DEPTH_MISSING:decisionSequence",
-              "SCENARIO_DIVERSITY_FAIL",
-              "CUSTOMER_VALUE_SENTENCE_RATIO",
-              "NAME_REMOVAL_FAIL",
-              "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-              "EDITORIAL_REVIEW_REQUIRED:customerSpecificity",
-              "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-              "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
-              "EDITORIAL_REVIEW_REQUIRED:scenarioDensity",
-              "EDITORIAL_REVIEW_REQUIRED:thesisClarity",
-              "EDITORIAL_REVIEW_REQUIRED:advantageCostBalance",
-              "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity",
-              "EDITORIAL_REVIEW_REQUIRED:timingIntegration",
-              "EDITORIAL_REVIEW_REQUIRED:navigationUsefulness",
-              "EDITORIAL_REVIEW_REQUIRED:disclaimerCompression",
-              "EDITORIAL_REVIEW_REQUIRED:primitiveSuppression",
-              "EDITORIAL_REVIEW_REQUIRED:nameRemoval",
-              "EDITORIAL_REVIEW_REQUIRED:sectionSubstitution",
-              "EDITORIAL_REVIEW_REQUIRED:paragraphFunction",
-              "EDITORIAL_REVIEW_REQUIRED:observableExpression"
+            "assessments": [
+              {
+                "dimension": "causalExplanation",
+                "passed": true,
+                "evidence": "把清楚的职责、实际的决策权限、足够的准备支持与可兑现的交付连接起来",
+                "reason": ""
+              },
+              {
+                "dimension": "customerSpecificity",
+                "passed": true,
+                "evidence": "责任、产出或客户承诺增加，却没有相应的人员、优先级、预算或协商空间",
+                "reason": ""
+              },
+              {
+                "dimension": "domainSpecificity",
+                "passed": true,
+                "evidence": "书面职责范围、明确的决策人和优先级协调权限",
+                "reason": ""
+              },
+              {
+                "dimension": "realityTranslation",
+                "passed": true,
+                "evidence": "在一段可观察的试行后复查审批等待、返工、未解决依赖",
+                "reason": ""
+              },
+              {
+                "dimension": "scenarioDensity",
+                "passed": true,
+                "evidence": "如果交付岗位增加第二个项目",
+                "reason": ""
+              },
+              {
+                "dimension": "thesisClarity",
+                "passed": true,
+                "evidence": "事业上更容易发挥的，不是单纯承担更多责任",
+                "reason": ""
+              },
+              {
+                "dimension": "advantageCostBalance",
+                "passed": true,
+                "evidence": "责任本身不等于代价",
+                "reason": ""
+              },
+              {
+                "dimension": "conditionSpecificity",
+                "passed": true,
+                "evidence": "明确服务范围、修改次数、响应时限与对应预算",
+                "reason": ""
+              },
+              {
+                "dimension": "timingIntegration",
+                "passed": true,
+                "evidence": "两层重叠只提高这些议题的关注度，不提高具体事件的确定性",
+                "reason": ""
+              },
+              {
+                "dimension": "navigationUsefulness",
+                "passed": true,
+                "evidence": "第一步是写清楚承诺交付什么、期限是什么",
+                "reason": ""
+              },
+              {
+                "dimension": "disclaimerCompression",
+                "passed": true,
+                "evidence": "这是待实际工作检验的命盘可能性",
+                "reason": ""
+              },
+              {
+                "dimension": "primitiveSuppression",
+                "passed": true,
+                "evidence": "规则、责任与压力怎样和表达产出、资源交换、学习支持共同组织",
+                "reason": ""
+              },
+              {
+                "dimension": "nameRemoval",
+                "passed": true,
+                "evidence": "责任、产出或客户承诺增加，却没有相应的人员、优先级、预算或协商空间",
+                "reason": ""
+              },
+              {
+                "dimension": "sectionSubstitution",
+                "passed": true,
+                "evidence": "若客户提供持续合作，应同步核对承诺数量、响应时限和修改上限",
+                "reason": ""
+              },
+              {
+                "dimension": "paragraphFunction",
+                "passed": true,
+                "evidence": "判断岗位或项目时，第一步是写清楚承诺交付什么",
+                "reason": ""
+              },
+              {
+                "dimension": "observableExpression",
+                "passed": true,
+                "evidence": "若审批层级拖慢决策而期限不变，则应检查是否有可执行的例外处理或升级协调流程",
+                "reason": ""
+              }
             ],
+            "reasons": [],
             "thresholdStatus": "INITIAL_CALIBRATION",
             "ownerAcceptance": "PENDING",
             "productionEligible": false
@@ -9638,55 +10010,8 @@
           ],
           "missingClaimRefs": [],
           "unsupportedRefs": [],
-          "reasons": [
-            "CERTAINTY_STRENGTHENING:4",
-            "ROLE_SUPPORT_MISMATCH:7:OBSERVABLE_EXPRESSION",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:AUTHORITY_LOAD",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:OUTPUT_BACKING",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:COMMERCIAL_DELIVERY",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:THESIS",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:CONDITIONS",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:TRADEOFFS",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:AUTHORITY_LOAD:SCENARIO:0",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:AUTHORITY_LOAD:SCENARIO:1",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:OUTPUT_BACKING:SCENARIO:0",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:OUTPUT_BACKING:SCENARIO:1",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:COMMERCIAL_DELIVERY:SCENARIO:0",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:COMMERCIAL_DELIVERY:SCENARIO:1",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:ROLE_COMPOSITION",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:TIMING",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:DECISION",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:BOUNDARY",
-            "CUSTOMER_DEPTH_MISSING:causalChains",
-            "CUSTOMER_DEPTH_MISSING:scenarios",
-            "CUSTOMER_DEPTH_MISSING:contrasts",
-            "CUSTOMER_DEPTH_MISSING:environmentDistinctions",
-            "CUSTOMER_DEPTH_MISSING:sustainable",
-            "CUSTOMER_DEPTH_MISSING:unsustainable",
-            "CUSTOMER_DEPTH_MISSING:synthesizedFacts",
-            "CUSTOMER_DEPTH_MISSING:timingWhenAvailable",
-            "CUSTOMER_DEPTH_MISSING:decisionSequence",
-            "SCENARIO_DIVERSITY_FAIL",
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "NAME_REMOVAL_FAIL",
-            "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-            "EDITORIAL_REVIEW_REQUIRED:customerSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
-            "EDITORIAL_REVIEW_REQUIRED:scenarioDensity",
-            "EDITORIAL_REVIEW_REQUIRED:thesisClarity",
-            "EDITORIAL_REVIEW_REQUIRED:advantageCostBalance",
-            "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:timingIntegration",
-            "EDITORIAL_REVIEW_REQUIRED:navigationUsefulness",
-            "EDITORIAL_REVIEW_REQUIRED:disclaimerCompression",
-            "EDITORIAL_REVIEW_REQUIRED:primitiveSuppression",
-            "EDITORIAL_REVIEW_REQUIRED:nameRemoval",
-            "EDITORIAL_REVIEW_REQUIRED:sectionSubstitution",
-            "EDITORIAL_REVIEW_REQUIRED:paragraphFunction",
-            "EDITORIAL_REVIEW_REQUIRED:observableExpression"
-          ],
-          "verificationDigest": "84e8a7237707e31b3bab10337078238ead3e42339e094764726fed5c078aa665"
+          "reasons": [],
+          "verificationDigest": "7d7a7f8e9598bf7bf1b08075101535ef8b235c369c29c8e5b20c881922a378b6"
         },
         "quality": {
           "schemaVersion": "PHI-OS-REPORT-EDITORIAL-QUALITY-R3-v1.0.0",
@@ -11025,71 +11350,139 @@
           "digest": "70b09a9c0881e000c3aa7f867ba2b66af8821ca61b5ac726ae5a678c9c57ca56"
         },
         "editorialQuality": {
-          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-          "state": "EDITORIAL_AUTOMATED_FAIL",
-          "accepted": false,
+          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+          "state": "EDITORIAL_AUTOMATED_PASS",
+          "accepted": true,
           "customerSpecificityDensity": {
             "thesis": 1,
-            "causalChains": 0,
-            "scenarios": 0,
-            "contrasts": 0,
-            "environmentDistinctions": 0,
-            "sustainable": 0,
-            "unsustainable": 0,
-            "synthesizedFacts": 0,
-            "timingWhenAvailable": 0,
-            "decisionSequence": 0
+            "causalChains": 3,
+            "scenarios": 6,
+            "contrasts": 3,
+            "environmentDistinctions": 3,
+            "sustainable": 1,
+            "unsustainable": 1,
+            "synthesizedFacts": 3,
+            "timingWhenAvailable": 1,
+            "decisionSequence": 1
           },
           "sentenceRatios": {
-            "DISCLAIMER": 0,
+            "DISCLAIMER": 0.036,
             "METHOD_EXPLANATION": 0,
-            "CUSTOMER_INTERPRETATION": 0.464,
-            "RAW_FACT": 0.536
+            "CUSTOMER_INTERPRETATION": 0.929,
+            "RAW_FACT": 0.036
           },
-          "observableInterpretationRatio": 0.75,
+          "observableInterpretationRatio": 1,
           "primitiveExposure": [],
-          "disclaimerCount": 0,
-          "nameRemoval": "FAIL",
+          "disclaimerCount": 1,
+          "nameRemoval": "PASS",
           "sectionSubstitution": "PASS",
-          "assessments": [],
-          "reasons": [
-            "CUSTOMER_DEPTH_MISSING:causalChains",
-            "CUSTOMER_DEPTH_MISSING:scenarios",
-            "CUSTOMER_DEPTH_MISSING:contrasts",
-            "CUSTOMER_DEPTH_MISSING:environmentDistinctions",
-            "CUSTOMER_DEPTH_MISSING:sustainable",
-            "CUSTOMER_DEPTH_MISSING:unsustainable",
-            "CUSTOMER_DEPTH_MISSING:synthesizedFacts",
-            "CUSTOMER_DEPTH_MISSING:timingWhenAvailable",
-            "CUSTOMER_DEPTH_MISSING:decisionSequence",
-            "SCENARIO_DIVERSITY_FAIL",
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "NAME_REMOVAL_FAIL",
-            "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-            "EDITORIAL_REVIEW_REQUIRED:customerSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
-            "EDITORIAL_REVIEW_REQUIRED:scenarioDensity",
-            "EDITORIAL_REVIEW_REQUIRED:thesisClarity",
-            "EDITORIAL_REVIEW_REQUIRED:advantageCostBalance",
-            "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:timingIntegration",
-            "EDITORIAL_REVIEW_REQUIRED:navigationUsefulness",
-            "EDITORIAL_REVIEW_REQUIRED:disclaimerCompression",
-            "EDITORIAL_REVIEW_REQUIRED:primitiveSuppression",
-            "EDITORIAL_REVIEW_REQUIRED:nameRemoval",
-            "EDITORIAL_REVIEW_REQUIRED:sectionSubstitution",
-            "EDITORIAL_REVIEW_REQUIRED:paragraphFunction",
-            "EDITORIAL_REVIEW_REQUIRED:observableExpression"
+          "assessments": [
+            {
+              "dimension": "causalExplanation",
+              "passed": true,
+              "evidence": "把清楚的职责、实际的决策权限、足够的准备支持与可兑现的交付连接起来",
+              "reason": ""
+            },
+            {
+              "dimension": "customerSpecificity",
+              "passed": true,
+              "evidence": "责任、产出或客户承诺增加，却没有相应的人员、优先级、预算或协商空间",
+              "reason": ""
+            },
+            {
+              "dimension": "domainSpecificity",
+              "passed": true,
+              "evidence": "书面职责范围、明确的决策人和优先级协调权限",
+              "reason": ""
+            },
+            {
+              "dimension": "realityTranslation",
+              "passed": true,
+              "evidence": "在一段可观察的试行后复查审批等待、返工、未解决依赖",
+              "reason": ""
+            },
+            {
+              "dimension": "scenarioDensity",
+              "passed": true,
+              "evidence": "如果交付岗位增加第二个项目",
+              "reason": ""
+            },
+            {
+              "dimension": "thesisClarity",
+              "passed": true,
+              "evidence": "事业上更容易发挥的，不是单纯承担更多责任",
+              "reason": ""
+            },
+            {
+              "dimension": "advantageCostBalance",
+              "passed": true,
+              "evidence": "责任本身不等于代价",
+              "reason": ""
+            },
+            {
+              "dimension": "conditionSpecificity",
+              "passed": true,
+              "evidence": "明确服务范围、修改次数、响应时限与对应预算",
+              "reason": ""
+            },
+            {
+              "dimension": "timingIntegration",
+              "passed": true,
+              "evidence": "两层重叠只提高这些议题的关注度，不提高具体事件的确定性",
+              "reason": ""
+            },
+            {
+              "dimension": "navigationUsefulness",
+              "passed": true,
+              "evidence": "第一步是写清楚承诺交付什么、期限是什么",
+              "reason": ""
+            },
+            {
+              "dimension": "disclaimerCompression",
+              "passed": true,
+              "evidence": "这是待实际工作检验的命盘可能性",
+              "reason": ""
+            },
+            {
+              "dimension": "primitiveSuppression",
+              "passed": true,
+              "evidence": "规则、责任与压力怎样和表达产出、资源交换、学习支持共同组织",
+              "reason": ""
+            },
+            {
+              "dimension": "nameRemoval",
+              "passed": true,
+              "evidence": "责任、产出或客户承诺增加，却没有相应的人员、优先级、预算或协商空间",
+              "reason": ""
+            },
+            {
+              "dimension": "sectionSubstitution",
+              "passed": true,
+              "evidence": "若客户提供持续合作，应同步核对承诺数量、响应时限和修改上限",
+              "reason": ""
+            },
+            {
+              "dimension": "paragraphFunction",
+              "passed": true,
+              "evidence": "判断岗位或项目时，第一步是写清楚承诺交付什么",
+              "reason": ""
+            },
+            {
+              "dimension": "observableExpression",
+              "passed": true,
+              "evidence": "若审批层级拖慢决策而期限不变，则应检查是否有可执行的例外处理或升级协调流程",
+              "reason": ""
+            }
           ],
+          "reasons": [],
           "thresholdStatus": "INITIAL_CALIBRATION",
           "ownerAcceptance": "PENDING",
           "productionEligible": false
         },
         "reviewState": {
-          "technicalStatus": "TECHNICAL_FAIL",
-          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_FAIL",
-          "editorialStatus": "EDITORIAL_NOT_ELIGIBLE",
+          "technicalStatus": "TECHNICAL_PASS",
+          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_PASS",
+          "editorialStatus": "EDITORIAL_PENDING",
           "ownerAcceptance": "PENDING",
           "productionActivated": false
         },
@@ -11098,8 +11491,8 @@
           "provider": "OPENAI",
           "model": "gpt-5.6-luna",
           "requestedTier": "T2_GOVERNED_NATURAL_COMPOSITION",
-          "actualTier": "DETERMINISTIC_FALLBACK",
-          "fallbackReason": "SEMANTIC_VERIFIER_REJECTED",
+          "actualTier": "T2_GOVERNED_NATURAL_COMPOSITION",
+          "fallbackReason": null,
           "route": {
             "aiExecutionClass": "T2_LIGHT_COMPOSITION",
             "providerRequired": true,
@@ -11112,7 +11505,7 @@
           },
           "providerCalled": true,
           "providerExecution": "LIVE_ADAPTER",
-          "fallbackUsed": true,
+          "fallbackUsed": false,
           "transportCalls": 3,
           "semanticReviewCalls": 1,
           "providerAttemptCount": 2,
@@ -11215,7 +11608,9 @@
                 "EDITORIAL_REVIEW_REQUIRED:observableExpression"
               ]
             }
-          ]
+          ],
+          "initialAdmission": "DETERMINISTIC_FALLBACK",
+          "reverificationOnly": true
         },
         "usageRecord": {
           "schemaVersion": "PHI-OS-PAI-R1-USAGE-EVENT-v1.0.0",
@@ -11277,12 +11672,22 @@
             "failureClass": null
           }
         ],
-        "ownerAcceptance": "PENDING"
+        "ownerAcceptance": "PENDING",
+        "reviewAudit": {
+          "version": "CSD-REVIEW-v1.1.1",
+          "sourceArtifactDigest": "6d313acc766059f39f7045681e83c768c774ec8552b2512495c962afbe92a524",
+          "previousAuditDigest": "ba01a1c3bf34631b70f745ed606bdffdb656041ba75fd4894106d2367338a84e",
+          "candidateDigest": "0e54fac7f91f9bf7e858f3a28c0b2b24e4183893c7b19327a879941c962d21c4",
+          "generationCalls": 0,
+          "semanticReviewReused": true,
+          "reviewCalls": 0,
+          "usageRecords": []
+        }
       },
-      "generatedAt": "2026-09-28T04:59:39.071Z",
+      "generatedAt": "2026-09-28T05:13:20.290Z",
       "ownerAcceptance": "PENDING",
       "productionActivated": false,
-      "artifactDigest": "6d313acc766059f39f7045681e83c768c774ec8552b2512495c962afbe92a524"
+      "artifactDigest": "6c12cd05af022ec34f4b61c200d9ef9fbe04cd384378b779dd1dc9a186f74edb"
     },
     "en": {
       "identity": {
@@ -11294,13 +11699,15 @@
         "composer": "PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.3.0",
         "prompt": "PHI-OS-S04-CSD-PROMPT-v1.0.0",
         "verifier": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
-        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec"
+        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec",
+        "auditVersion": "CSD-REVIEW-v1.1.1"
       },
+      "sourceArtifactDigest": "a1776626a2006e931d1c5d22ac380f1c795234df3b42f3944bae76e64c349bfb",
       "result": {
         "schemaVersion": "PHI-OS-BAZI-S04-T2-CANDIDATE-v1.0.0",
         "runtimeVersion": "PHI-OS-BAZI-S04-T2-RUNTIME-v1.0.0",
         "locale": "en",
-        "status": "FALLBACK",
+        "status": "PASS",
         "richClaimIr": {
           "version": "BAZI_EXPLANATORY_AUTHORITY_V2",
           "claims": [
@@ -18917,7 +19324,7 @@
           "schemaVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFICATION-v1.1.0",
           "verifierVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
           "sourceBriefDigest": "b88982f00f287128928b819c00dc50b132dcabda657fe8952cb138dd7056c61e",
-          "accepted": false,
+          "accepted": true,
           "sourceDigest": "2b9e739f3140474c6f75bcdfd1e4c07ab3493eab816c99718bbddede10763b07",
           "factsPreserved": true,
           "semanticOperatorsPreserved": true,
@@ -19066,9 +19473,9 @@
           },
           "technicalAccepted": true,
           "editorialQuality": {
-            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-            "state": "EDITORIAL_AUTOMATED_FAIL",
-            "accepted": false,
+            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+            "state": "EDITORIAL_AUTOMATED_PASS",
+            "accepted": true,
             "customerSpecificityDensity": {
               "thesis": 1,
               "causalChains": 3,
@@ -19082,15 +19489,15 @@
               "decisionSequence": 1
             },
             "sentenceRatios": {
-              "DISCLAIMER": 0,
+              "DISCLAIMER": 0.061,
               "METHOD_EXPLANATION": 0,
-              "CUSTOMER_INTERPRETATION": 0.636,
-              "RAW_FACT": 0.364
+              "CUSTOMER_INTERPRETATION": 0.848,
+              "RAW_FACT": 0.091
             },
             "observableInterpretationRatio": 0.8333333333333334,
             "primitiveExposure": [],
-            "disclaimerCount": 0,
-            "nameRemoval": "FAIL",
+            "disclaimerCount": 2,
+            "nameRemoval": "PASS",
             "sectionSubstitution": "PASS",
             "assessments": [
               {
@@ -19190,10 +19597,7 @@
                 "reason": ""
               }
             ],
-            "reasons": [
-              "CUSTOMER_VALUE_SENTENCE_RATIO",
-              "NAME_REMOVAL_FAIL"
-            ],
+            "reasons": [],
             "thresholdStatus": "INITIAL_CALIBRATION",
             "ownerAcceptance": "PENDING",
             "productionEligible": false
@@ -19219,11 +19623,8 @@
           ],
           "missingClaimRefs": [],
           "unsupportedRefs": [],
-          "reasons": [
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "NAME_REMOVAL_FAIL"
-          ],
-          "verificationDigest": "5a7da676fde116e99517957563725369f9f25de9898a8ae82bda8ffdcca90f6e"
+          "reasons": [],
+          "verificationDigest": "ddc654b1d15d089b54693771696af52fd465064296da7537461314477acb069d"
         },
         "quality": {
           "schemaVersion": "PHI-OS-REPORT-EDITORIAL-QUALITY-R3-v1.0.0",
@@ -20562,9 +20963,9 @@
           "digest": "9edd7abfbca4f07dde0a4a87068cca4fa622786e8e411bf0a0d4296109bb52d7"
         },
         "editorialQuality": {
-          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-          "state": "EDITORIAL_AUTOMATED_FAIL",
-          "accepted": false,
+          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+          "state": "EDITORIAL_AUTOMATED_PASS",
+          "accepted": true,
           "customerSpecificityDensity": {
             "thesis": 1,
             "causalChains": 3,
@@ -20578,15 +20979,15 @@
             "decisionSequence": 1
           },
           "sentenceRatios": {
-            "DISCLAIMER": 0,
+            "DISCLAIMER": 0.061,
             "METHOD_EXPLANATION": 0,
-            "CUSTOMER_INTERPRETATION": 0.636,
-            "RAW_FACT": 0.364
+            "CUSTOMER_INTERPRETATION": 0.848,
+            "RAW_FACT": 0.091
           },
           "observableInterpretationRatio": 0.8333333333333334,
           "primitiveExposure": [],
-          "disclaimerCount": 0,
-          "nameRemoval": "FAIL",
+          "disclaimerCount": 2,
+          "nameRemoval": "PASS",
           "sectionSubstitution": "PASS",
           "assessments": [
             {
@@ -20686,17 +21087,14 @@
               "reason": ""
             }
           ],
-          "reasons": [
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "NAME_REMOVAL_FAIL"
-          ],
+          "reasons": [],
           "thresholdStatus": "INITIAL_CALIBRATION",
           "ownerAcceptance": "PENDING",
           "productionEligible": false
         },
         "reviewState": {
           "technicalStatus": "TECHNICAL_PASS",
-          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_FAIL",
+          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_PASS",
           "editorialStatus": "EDITORIAL_PENDING",
           "ownerAcceptance": "PENDING",
           "productionActivated": false
@@ -20706,8 +21104,8 @@
           "provider": "OPENAI",
           "model": "gpt-5.6-luna",
           "requestedTier": "T2_GOVERNED_NATURAL_COMPOSITION",
-          "actualTier": "DETERMINISTIC_FALLBACK",
-          "fallbackReason": "SEMANTIC_VERIFIER_REJECTED",
+          "actualTier": "T2_GOVERNED_NATURAL_COMPOSITION",
+          "fallbackReason": null,
           "route": {
             "aiExecutionClass": "T2_LIGHT_COMPOSITION",
             "providerRequired": true,
@@ -20720,7 +21118,7 @@
           },
           "providerCalled": true,
           "providerExecution": "LIVE_ADAPTER",
-          "fallbackUsed": true,
+          "fallbackUsed": false,
           "transportCalls": 4,
           "semanticReviewCalls": 2,
           "providerAttemptCount": 2,
@@ -20801,7 +21199,9 @@
                 "NAME_REMOVAL_FAIL"
               ]
             }
-          ]
+          ],
+          "initialAdmission": "DETERMINISTIC_FALLBACK",
+          "reverificationOnly": true
         },
         "usageRecord": {
           "schemaVersion": "PHI-OS-PAI-R1-USAGE-EVENT-v1.0.0",
@@ -20892,12 +21292,22 @@
             "failureClass": null
           }
         ],
-        "ownerAcceptance": "PENDING"
+        "ownerAcceptance": "PENDING",
+        "reviewAudit": {
+          "version": "CSD-REVIEW-v1.1.1",
+          "sourceArtifactDigest": "a1776626a2006e931d1c5d22ac380f1c795234df3b42f3944bae76e64c349bfb",
+          "previousAuditDigest": "d521a75b9432e3952faa38852a5ab287a54816e9af6bd33948d1f4981f85f6de",
+          "candidateDigest": "5f2ee4cff041a2da039df386a7b4955d3166a186f8924abd0cfceaa5bad46ffc",
+          "generationCalls": 0,
+          "semanticReviewReused": true,
+          "reviewCalls": 0,
+          "usageRecords": []
+        }
       },
-      "generatedAt": "2026-09-28T04:59:39.024Z",
+      "generatedAt": "2026-09-28T05:13:20.297Z",
       "ownerAcceptance": "PENDING",
       "productionActivated": false,
-      "artifactDigest": "a1776626a2006e931d1c5d22ac380f1c795234df3b42f3944bae76e64c349bfb"
+      "artifactDigest": "4a7648dc34415000048c5b650a8c4a73b12433d979a51e012e2a16241b36e642"
     },
     "BAZI-FP-W17-001": {
       "identity": {
@@ -20909,13 +21319,15 @@
         "composer": "PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.3.0",
         "prompt": "PHI-OS-S04-CSD-PROMPT-v1.0.0",
         "verifier": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
-        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec"
+        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec",
+        "auditVersion": "CSD-REVIEW-v1.1.1"
       },
+      "sourceArtifactDigest": "463645868fb9908c10ea431fa2224d957e58fa80540f8a9ed4a9773949ae03a6",
       "result": {
         "schemaVersion": "PHI-OS-BAZI-S04-T2-CANDIDATE-v1.0.0",
         "runtimeVersion": "PHI-OS-BAZI-S04-T2-RUNTIME-v1.0.0",
         "locale": "en",
-        "status": "FALLBACK",
+        "status": "PASS",
         "richClaimIr": {
           "version": "BAZI_EXPLANATORY_AUTHORITY_V2",
           "claims": [
@@ -27501,82 +27913,280 @@
           "schemaVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFICATION-v1.1.0",
           "verifierVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
           "sourceBriefDigest": "b4e8bc5241dd36789d66d760e4ecabb116253619a22fc8ae2cfc758e1445bbff",
-          "accepted": false,
+          "accepted": true,
           "sourceDigest": "eb188486a8a4f77b49161fa66f14b6266028411dfbb4fcee146a018224eca8a9",
-          "factsPreserved": false,
-          "semanticOperatorsPreserved": false,
+          "factsPreserved": true,
+          "semanticOperatorsPreserved": true,
           "roleSemanticsPreserved": true,
-          "boundariesPreserved": false,
-          "conditionsPreserved": false,
-          "counterSignalsPreserved": false,
-          "uncertaintyPreserved": false,
-          "timingScopePreserved": false,
-          "observableScopePreserved": false,
-          "noInventedReality": false,
-          "noNewMethodFact": false,
+          "boundariesPreserved": true,
+          "conditionsPreserved": true,
+          "counterSignalsPreserved": true,
+          "uncertaintyPreserved": true,
+          "timingScopePreserved": true,
+          "observableScopePreserved": true,
+          "noInventedReality": true,
+          "noNewMethodFact": true,
           "claimReferenceCoverage": 1,
-          "claimCoverage": 0,
-          "semanticReview": null,
-          "technicalAccepted": false,
+          "claimCoverage": 1,
+          "semanticReview": {
+            "sourceBriefDigest": "b4e8bc5241dd36789d66d760e4ecabb116253619a22fc8ae2cfc758e1445bbff",
+            "candidateDigest": "65bf426370f17cd2fdb91dcbecd92157794ac2ddb77e92aa3f99e7848b9411ac",
+            "meaningfullyUsedClaimRefs": [
+              "CSD:EXPERTISE_OUTPUT",
+              "CSD:COMMERCIAL_DELIVERY",
+              "CSD:BACKED_ACCOUNTABILITY",
+              "CSD:THESIS",
+              "CSD:CONDITIONS",
+              "CSD:TRADEOFFS",
+              "CSD:EXPERTISE_OUTPUT:SCENARIO:0",
+              "CSD:EXPERTISE_OUTPUT:SCENARIO:1",
+              "CSD:COMMERCIAL_DELIVERY:SCENARIO:0",
+              "CSD:COMMERCIAL_DELIVERY:SCENARIO:1",
+              "CSD:BACKED_ACCOUNTABILITY:SCENARIO:0",
+              "CSD:BACKED_ACCOUNTABILITY:SCENARIO:1",
+              "CSD:ROLE_COMPOSITION",
+              "CSD:TIMING",
+              "CSD:DECISION",
+              "CSD:BOUNDARY"
+            ],
+            "reasons": [],
+            "factsPreserved": true,
+            "boundariesPreserved": true,
+            "conditionsPreserved": true,
+            "counterSignalsPreserved": true,
+            "uncertaintyPreserved": true,
+            "timingScopePreserved": true,
+            "noInventedReality": true,
+            "noNewMethodFact": true,
+            "semanticOperatorsPreserved": true,
+            "rankPreserved": true,
+            "directionPreserved": true,
+            "editorialAssessments": [
+              {
+                "dimension": "causalExplanation",
+                "passed": true,
+                "evidence": "Preparation has the greatest career value when it improves a decision, makes a recommendation more reliable or raises the quality of a deliverable.",
+                "reason": ""
+              },
+              {
+                "dimension": "customerSpecificity",
+                "passed": true,
+                "evidence": "Delivery has the leading emphasis, while learning, accountability and exchange remain important conditions around it.",
+                "reason": ""
+              },
+              {
+                "dimension": "domainSpecificity",
+                "passed": true,
+                "evidence": "Career is read here as one connected working arrangement: expertise must become visible output, output must meet standards and responsibilities, and the value promised to others must be matched by time, tools and support.",
+                "reason": ""
+              },
+              {
+                "dimension": "realityTranslation",
+                "passed": true,
+                "evidence": "These are chart-based possibilities to test against actual work.",
+                "reason": ""
+              },
+              {
+                "dimension": "scenarioDensity",
+                "passed": true,
+                "evidence": "When a project carries revenue responsibility, check whether its budget includes the tools and specialist help required for delivery.",
+                "reason": ""
+              },
+              {
+                "dimension": "thesisClarity",
+                "passed": true,
+                "evidence": "Your most useful contribution may emerge when learning is converted into a concrete recommendation, service or deliverable that others can use.",
+                "reason": ""
+              },
+              {
+                "dimension": "advantageCostBalance",
+                "passed": true,
+                "evidence": "Each mechanism has a corresponding cost.",
+                "reason": ""
+              },
+              {
+                "dimension": "conditionSpecificity",
+                "passed": true,
+                "evidence": "The more sustainable role conditions are concrete: access to relevant expertise or mentoring, a defined review and release milestone, agreed scope, revision limits, a budget tied to deliverables, and a named person who can resolve exceptions.",
+                "reason": ""
+              },
+              {
+                "dimension": "timingIntegration",
+                "passed": true,
+                "evidence": "The current timing gives this career system added relevance across two different layers.",
+                "reason": ""
+              },
+              {
+                "dimension": "navigationUsefulness",
+                "passed": true,
+                "evidence": "Use this order when evaluating a role or project: first write down the promised deliverable, the release milestone and who controls acceptance; second compare the expertise, review access, preparation time, tools, budget, revision limits and decision authority required by that promise with what is actually offered; third run a bounded assignment and review whether useful work was released on time, whether extra demand was priced or authorized, and whether unusual cases had a clear escalation path.",
+                "reason": ""
+              },
+              {
+                "dimension": "disclaimerCompression",
+                "passed": true,
+                "evidence": "The final strong-or-weak judgment and any single pattern interpretation remain open, and this reading does not assign an occupation or predict an event.",
+                "reason": ""
+              },
+              {
+                "dimension": "primitiveSuppression",
+                "passed": true,
+                "evidence": "The two recorded tensions are useful as separate comparison lenses.",
+                "reason": ""
+              },
+              {
+                "dimension": "nameRemoval",
+                "passed": true,
+                "evidence": "Delivery has the leading emphasis, while learning, accountability and exchange remain important conditions around it.",
+                "reason": ""
+              },
+              {
+                "dimension": "sectionSubstitution",
+                "passed": true,
+                "evidence": "If a client offers recurring work, compare the promised volume with response windows, deliverable definitions and revision limits before treating the arrangement as stable.",
+                "reason": ""
+              },
+              {
+                "dimension": "paragraphFunction",
+                "passed": true,
+                "evidence": "The less sustainable alternatives are equally specific: additional credentials without an application point, success judged only by incoming clients while capacity and scope remain unpriced, or formal responsibility with support that cannot remove practical obstacles.",
+                "reason": ""
+              },
+              {
+                "dimension": "observableExpression",
+                "passed": true,
+                "evidence": "In a specialist assignment, if a team needs a first recommendation, agree what evidence is sufficient, who will review it and when it will be released.",
+                "reason": ""
+              }
+            ]
+          },
+          "technicalAccepted": true,
           "editorialQuality": {
-            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-            "state": "EDITORIAL_AUTOMATED_FAIL",
-            "accepted": false,
+            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+            "state": "EDITORIAL_AUTOMATED_PASS",
+            "accepted": true,
             "customerSpecificityDensity": {
               "thesis": 1,
-              "causalChains": 0,
-              "scenarios": 0,
-              "contrasts": 0,
-              "environmentDistinctions": 0,
-              "sustainable": 0,
-              "unsustainable": 0,
-              "synthesizedFacts": 0,
-              "timingWhenAvailable": 0,
-              "decisionSequence": 0
+              "causalChains": 3,
+              "scenarios": 6,
+              "contrasts": 3,
+              "environmentDistinctions": 3,
+              "sustainable": 1,
+              "unsustainable": 1,
+              "synthesizedFacts": 2,
+              "timingWhenAvailable": 1,
+              "decisionSequence": 1
             },
             "sentenceRatios": {
-              "DISCLAIMER": 0.028,
+              "DISCLAIMER": 0.056,
               "METHOD_EXPLANATION": 0,
-              "CUSTOMER_INTERPRETATION": 0.556,
-              "RAW_FACT": 0.417
+              "CUSTOMER_INTERPRETATION": 0.75,
+              "RAW_FACT": 0.194
             },
-            "observableInterpretationRatio": 0.6363636363636364,
+            "observableInterpretationRatio": 0.7272727272727273,
             "primitiveExposure": [],
-            "disclaimerCount": 1,
-            "nameRemoval": "FAIL",
+            "disclaimerCount": 2,
+            "nameRemoval": "PASS",
             "sectionSubstitution": "PASS",
-            "assessments": [],
-            "reasons": [
-              "CUSTOMER_DEPTH_MISSING:causalChains",
-              "CUSTOMER_DEPTH_MISSING:scenarios",
-              "CUSTOMER_DEPTH_MISSING:contrasts",
-              "CUSTOMER_DEPTH_MISSING:environmentDistinctions",
-              "CUSTOMER_DEPTH_MISSING:sustainable",
-              "CUSTOMER_DEPTH_MISSING:unsustainable",
-              "CUSTOMER_DEPTH_MISSING:synthesizedFacts",
-              "CUSTOMER_DEPTH_MISSING:timingWhenAvailable",
-              "CUSTOMER_DEPTH_MISSING:decisionSequence",
-              "SCENARIO_DIVERSITY_FAIL",
-              "CUSTOMER_VALUE_SENTENCE_RATIO",
-              "OBSERVABLE_EXPRESSION_RATIO",
-              "NAME_REMOVAL_FAIL",
-              "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-              "EDITORIAL_REVIEW_REQUIRED:customerSpecificity",
-              "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-              "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
-              "EDITORIAL_REVIEW_REQUIRED:scenarioDensity",
-              "EDITORIAL_REVIEW_REQUIRED:thesisClarity",
-              "EDITORIAL_REVIEW_REQUIRED:advantageCostBalance",
-              "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity",
-              "EDITORIAL_REVIEW_REQUIRED:timingIntegration",
-              "EDITORIAL_REVIEW_REQUIRED:navigationUsefulness",
-              "EDITORIAL_REVIEW_REQUIRED:disclaimerCompression",
-              "EDITORIAL_REVIEW_REQUIRED:primitiveSuppression",
-              "EDITORIAL_REVIEW_REQUIRED:nameRemoval",
-              "EDITORIAL_REVIEW_REQUIRED:sectionSubstitution",
-              "EDITORIAL_REVIEW_REQUIRED:paragraphFunction",
-              "EDITORIAL_REVIEW_REQUIRED:observableExpression"
+            "assessments": [
+              {
+                "dimension": "causalExplanation",
+                "passed": true,
+                "evidence": "Preparation has the greatest career value when it improves a decision, makes a recommendation more reliable or raises the quality of a deliverable.",
+                "reason": ""
+              },
+              {
+                "dimension": "customerSpecificity",
+                "passed": true,
+                "evidence": "Delivery has the leading emphasis, while learning, accountability and exchange remain important conditions around it.",
+                "reason": ""
+              },
+              {
+                "dimension": "domainSpecificity",
+                "passed": true,
+                "evidence": "Career is read here as one connected working arrangement: expertise must become visible output, output must meet standards and responsibilities, and the value promised to others must be matched by time, tools and support.",
+                "reason": ""
+              },
+              {
+                "dimension": "realityTranslation",
+                "passed": true,
+                "evidence": "These are chart-based possibilities to test against actual work.",
+                "reason": ""
+              },
+              {
+                "dimension": "scenarioDensity",
+                "passed": true,
+                "evidence": "When a project carries revenue responsibility, check whether its budget includes the tools and specialist help required for delivery.",
+                "reason": ""
+              },
+              {
+                "dimension": "thesisClarity",
+                "passed": true,
+                "evidence": "Your most useful contribution may emerge when learning is converted into a concrete recommendation, service or deliverable that others can use.",
+                "reason": ""
+              },
+              {
+                "dimension": "advantageCostBalance",
+                "passed": true,
+                "evidence": "Each mechanism has a corresponding cost.",
+                "reason": ""
+              },
+              {
+                "dimension": "conditionSpecificity",
+                "passed": true,
+                "evidence": "The more sustainable role conditions are concrete: access to relevant expertise or mentoring, a defined review and release milestone, agreed scope, revision limits, a budget tied to deliverables, and a named person who can resolve exceptions.",
+                "reason": ""
+              },
+              {
+                "dimension": "timingIntegration",
+                "passed": true,
+                "evidence": "The current timing gives this career system added relevance across two different layers.",
+                "reason": ""
+              },
+              {
+                "dimension": "navigationUsefulness",
+                "passed": true,
+                "evidence": "Use this order when evaluating a role or project: first write down the promised deliverable, the release milestone and who controls acceptance; second compare the expertise, review access, preparation time, tools, budget, revision limits and decision authority required by that promise with what is actually offered; third run a bounded assignment and review whether useful work was released on time, whether extra demand was priced or authorized, and whether unusual cases had a clear escalation path.",
+                "reason": ""
+              },
+              {
+                "dimension": "disclaimerCompression",
+                "passed": true,
+                "evidence": "The final strong-or-weak judgment and any single pattern interpretation remain open, and this reading does not assign an occupation or predict an event.",
+                "reason": ""
+              },
+              {
+                "dimension": "primitiveSuppression",
+                "passed": true,
+                "evidence": "The two recorded tensions are useful as separate comparison lenses.",
+                "reason": ""
+              },
+              {
+                "dimension": "nameRemoval",
+                "passed": true,
+                "evidence": "Delivery has the leading emphasis, while learning, accountability and exchange remain important conditions around it.",
+                "reason": ""
+              },
+              {
+                "dimension": "sectionSubstitution",
+                "passed": true,
+                "evidence": "If a client offers recurring work, compare the promised volume with response windows, deliverable definitions and revision limits before treating the arrangement as stable.",
+                "reason": ""
+              },
+              {
+                "dimension": "paragraphFunction",
+                "passed": true,
+                "evidence": "The less sustainable alternatives are equally specific: additional credentials without an application point, success judged only by incoming clients while capacity and scope remain unpriced, or formal responsibility with support that cannot remove practical obstacles.",
+                "reason": ""
+              },
+              {
+                "dimension": "observableExpression",
+                "passed": true,
+                "evidence": "In a specialist assignment, if a team needs a first recommendation, agree what evidence is sufficient, who will review it and when it will be released.",
+                "reason": ""
+              }
             ],
+            "reasons": [],
             "thresholdStatus": "INITIAL_CALIBRATION",
             "ownerAcceptance": "PENDING",
             "productionEligible": false
@@ -27602,55 +28212,8 @@
           ],
           "missingClaimRefs": [],
           "unsupportedRefs": [],
-          "reasons": [
-            "CERTAINTY_STRENGTHENING:5",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:EXPERTISE_OUTPUT",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:COMMERCIAL_DELIVERY",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:BACKED_ACCOUNTABILITY",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:THESIS",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:CONDITIONS",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:TRADEOFFS",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:EXPERTISE_OUTPUT:SCENARIO:0",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:EXPERTISE_OUTPUT:SCENARIO:1",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:COMMERCIAL_DELIVERY:SCENARIO:0",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:COMMERCIAL_DELIVERY:SCENARIO:1",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:BACKED_ACCOUNTABILITY:SCENARIO:0",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:BACKED_ACCOUNTABILITY:SCENARIO:1",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:ROLE_COMPOSITION",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:TIMING",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:DECISION",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:BOUNDARY",
-            "CUSTOMER_DEPTH_MISSING:causalChains",
-            "CUSTOMER_DEPTH_MISSING:scenarios",
-            "CUSTOMER_DEPTH_MISSING:contrasts",
-            "CUSTOMER_DEPTH_MISSING:environmentDistinctions",
-            "CUSTOMER_DEPTH_MISSING:sustainable",
-            "CUSTOMER_DEPTH_MISSING:unsustainable",
-            "CUSTOMER_DEPTH_MISSING:synthesizedFacts",
-            "CUSTOMER_DEPTH_MISSING:timingWhenAvailable",
-            "CUSTOMER_DEPTH_MISSING:decisionSequence",
-            "SCENARIO_DIVERSITY_FAIL",
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "OBSERVABLE_EXPRESSION_RATIO",
-            "NAME_REMOVAL_FAIL",
-            "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-            "EDITORIAL_REVIEW_REQUIRED:customerSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
-            "EDITORIAL_REVIEW_REQUIRED:scenarioDensity",
-            "EDITORIAL_REVIEW_REQUIRED:thesisClarity",
-            "EDITORIAL_REVIEW_REQUIRED:advantageCostBalance",
-            "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:timingIntegration",
-            "EDITORIAL_REVIEW_REQUIRED:navigationUsefulness",
-            "EDITORIAL_REVIEW_REQUIRED:disclaimerCompression",
-            "EDITORIAL_REVIEW_REQUIRED:primitiveSuppression",
-            "EDITORIAL_REVIEW_REQUIRED:nameRemoval",
-            "EDITORIAL_REVIEW_REQUIRED:sectionSubstitution",
-            "EDITORIAL_REVIEW_REQUIRED:paragraphFunction",
-            "EDITORIAL_REVIEW_REQUIRED:observableExpression"
-          ],
-          "verificationDigest": "a0979885ec3ffbfa31c467fc6da29773019d387bc3a01bc33c7bf428b57d828c"
+          "reasons": [],
+          "verificationDigest": "948e85f68995d7168b41a56e2a249b30cba9f51aa3931da9592012359006335d"
         },
         "quality": {
           "schemaVersion": "PHI-OS-REPORT-EDITORIAL-QUALITY-R3-v1.0.0",
@@ -28824,72 +29387,139 @@
           "digest": "51049f2f25c16c7f03a5d27bb3833e0353155367a495bde220085f61aa40c9ea"
         },
         "editorialQuality": {
-          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-          "state": "EDITORIAL_AUTOMATED_FAIL",
-          "accepted": false,
+          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+          "state": "EDITORIAL_AUTOMATED_PASS",
+          "accepted": true,
           "customerSpecificityDensity": {
             "thesis": 1,
-            "causalChains": 0,
-            "scenarios": 0,
-            "contrasts": 0,
-            "environmentDistinctions": 0,
-            "sustainable": 0,
-            "unsustainable": 0,
-            "synthesizedFacts": 0,
-            "timingWhenAvailable": 0,
-            "decisionSequence": 0
+            "causalChains": 3,
+            "scenarios": 6,
+            "contrasts": 3,
+            "environmentDistinctions": 3,
+            "sustainable": 1,
+            "unsustainable": 1,
+            "synthesizedFacts": 2,
+            "timingWhenAvailable": 1,
+            "decisionSequence": 1
           },
           "sentenceRatios": {
-            "DISCLAIMER": 0.028,
+            "DISCLAIMER": 0.056,
             "METHOD_EXPLANATION": 0,
-            "CUSTOMER_INTERPRETATION": 0.556,
-            "RAW_FACT": 0.417
+            "CUSTOMER_INTERPRETATION": 0.75,
+            "RAW_FACT": 0.194
           },
-          "observableInterpretationRatio": 0.6363636363636364,
+          "observableInterpretationRatio": 0.7272727272727273,
           "primitiveExposure": [],
-          "disclaimerCount": 1,
-          "nameRemoval": "FAIL",
+          "disclaimerCount": 2,
+          "nameRemoval": "PASS",
           "sectionSubstitution": "PASS",
-          "assessments": [],
-          "reasons": [
-            "CUSTOMER_DEPTH_MISSING:causalChains",
-            "CUSTOMER_DEPTH_MISSING:scenarios",
-            "CUSTOMER_DEPTH_MISSING:contrasts",
-            "CUSTOMER_DEPTH_MISSING:environmentDistinctions",
-            "CUSTOMER_DEPTH_MISSING:sustainable",
-            "CUSTOMER_DEPTH_MISSING:unsustainable",
-            "CUSTOMER_DEPTH_MISSING:synthesizedFacts",
-            "CUSTOMER_DEPTH_MISSING:timingWhenAvailable",
-            "CUSTOMER_DEPTH_MISSING:decisionSequence",
-            "SCENARIO_DIVERSITY_FAIL",
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "OBSERVABLE_EXPRESSION_RATIO",
-            "NAME_REMOVAL_FAIL",
-            "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-            "EDITORIAL_REVIEW_REQUIRED:customerSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:realityTranslation",
-            "EDITORIAL_REVIEW_REQUIRED:scenarioDensity",
-            "EDITORIAL_REVIEW_REQUIRED:thesisClarity",
-            "EDITORIAL_REVIEW_REQUIRED:advantageCostBalance",
-            "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:timingIntegration",
-            "EDITORIAL_REVIEW_REQUIRED:navigationUsefulness",
-            "EDITORIAL_REVIEW_REQUIRED:disclaimerCompression",
-            "EDITORIAL_REVIEW_REQUIRED:primitiveSuppression",
-            "EDITORIAL_REVIEW_REQUIRED:nameRemoval",
-            "EDITORIAL_REVIEW_REQUIRED:sectionSubstitution",
-            "EDITORIAL_REVIEW_REQUIRED:paragraphFunction",
-            "EDITORIAL_REVIEW_REQUIRED:observableExpression"
+          "assessments": [
+            {
+              "dimension": "causalExplanation",
+              "passed": true,
+              "evidence": "Preparation has the greatest career value when it improves a decision, makes a recommendation more reliable or raises the quality of a deliverable.",
+              "reason": ""
+            },
+            {
+              "dimension": "customerSpecificity",
+              "passed": true,
+              "evidence": "Delivery has the leading emphasis, while learning, accountability and exchange remain important conditions around it.",
+              "reason": ""
+            },
+            {
+              "dimension": "domainSpecificity",
+              "passed": true,
+              "evidence": "Career is read here as one connected working arrangement: expertise must become visible output, output must meet standards and responsibilities, and the value promised to others must be matched by time, tools and support.",
+              "reason": ""
+            },
+            {
+              "dimension": "realityTranslation",
+              "passed": true,
+              "evidence": "These are chart-based possibilities to test against actual work.",
+              "reason": ""
+            },
+            {
+              "dimension": "scenarioDensity",
+              "passed": true,
+              "evidence": "When a project carries revenue responsibility, check whether its budget includes the tools and specialist help required for delivery.",
+              "reason": ""
+            },
+            {
+              "dimension": "thesisClarity",
+              "passed": true,
+              "evidence": "Your most useful contribution may emerge when learning is converted into a concrete recommendation, service or deliverable that others can use.",
+              "reason": ""
+            },
+            {
+              "dimension": "advantageCostBalance",
+              "passed": true,
+              "evidence": "Each mechanism has a corresponding cost.",
+              "reason": ""
+            },
+            {
+              "dimension": "conditionSpecificity",
+              "passed": true,
+              "evidence": "The more sustainable role conditions are concrete: access to relevant expertise or mentoring, a defined review and release milestone, agreed scope, revision limits, a budget tied to deliverables, and a named person who can resolve exceptions.",
+              "reason": ""
+            },
+            {
+              "dimension": "timingIntegration",
+              "passed": true,
+              "evidence": "The current timing gives this career system added relevance across two different layers.",
+              "reason": ""
+            },
+            {
+              "dimension": "navigationUsefulness",
+              "passed": true,
+              "evidence": "Use this order when evaluating a role or project: first write down the promised deliverable, the release milestone and who controls acceptance; second compare the expertise, review access, preparation time, tools, budget, revision limits and decision authority required by that promise with what is actually offered; third run a bounded assignment and review whether useful work was released on time, whether extra demand was priced or authorized, and whether unusual cases had a clear escalation path.",
+              "reason": ""
+            },
+            {
+              "dimension": "disclaimerCompression",
+              "passed": true,
+              "evidence": "The final strong-or-weak judgment and any single pattern interpretation remain open, and this reading does not assign an occupation or predict an event.",
+              "reason": ""
+            },
+            {
+              "dimension": "primitiveSuppression",
+              "passed": true,
+              "evidence": "The two recorded tensions are useful as separate comparison lenses.",
+              "reason": ""
+            },
+            {
+              "dimension": "nameRemoval",
+              "passed": true,
+              "evidence": "Delivery has the leading emphasis, while learning, accountability and exchange remain important conditions around it.",
+              "reason": ""
+            },
+            {
+              "dimension": "sectionSubstitution",
+              "passed": true,
+              "evidence": "If a client offers recurring work, compare the promised volume with response windows, deliverable definitions and revision limits before treating the arrangement as stable.",
+              "reason": ""
+            },
+            {
+              "dimension": "paragraphFunction",
+              "passed": true,
+              "evidence": "The less sustainable alternatives are equally specific: additional credentials without an application point, success judged only by incoming clients while capacity and scope remain unpriced, or formal responsibility with support that cannot remove practical obstacles.",
+              "reason": ""
+            },
+            {
+              "dimension": "observableExpression",
+              "passed": true,
+              "evidence": "In a specialist assignment, if a team needs a first recommendation, agree what evidence is sufficient, who will review it and when it will be released.",
+              "reason": ""
+            }
           ],
+          "reasons": [],
           "thresholdStatus": "INITIAL_CALIBRATION",
           "ownerAcceptance": "PENDING",
           "productionEligible": false
         },
         "reviewState": {
-          "technicalStatus": "TECHNICAL_FAIL",
-          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_FAIL",
-          "editorialStatus": "EDITORIAL_NOT_ELIGIBLE",
+          "technicalStatus": "TECHNICAL_PASS",
+          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_PASS",
+          "editorialStatus": "EDITORIAL_PENDING",
           "ownerAcceptance": "PENDING",
           "productionActivated": false
         },
@@ -28898,8 +29528,8 @@
           "provider": "OPENAI",
           "model": "gpt-5.6-luna",
           "requestedTier": "T2_GOVERNED_NATURAL_COMPOSITION",
-          "actualTier": "DETERMINISTIC_FALLBACK",
-          "fallbackReason": "SEMANTIC_VERIFIER_REJECTED",
+          "actualTier": "T2_GOVERNED_NATURAL_COMPOSITION",
+          "fallbackReason": null,
           "route": {
             "aiExecutionClass": "T2_LIGHT_COMPOSITION",
             "providerRequired": true,
@@ -28912,7 +29542,7 @@
           },
           "providerCalled": true,
           "providerExecution": "LIVE_ADAPTER",
-          "fallbackUsed": true,
+          "fallbackUsed": false,
           "transportCalls": 2,
           "semanticReviewCalls": 0,
           "providerAttemptCount": 2,
@@ -29032,7 +29662,9 @@
                 "EDITORIAL_REVIEW_REQUIRED:observableExpression"
               ]
             }
-          ]
+          ],
+          "initialAdmission": "DETERMINISTIC_FALLBACK",
+          "reverificationOnly": true
         },
         "usageRecord": {
           "schemaVersion": "PHI-OS-PAI-R1-USAGE-EVENT-v1.0.0",
@@ -29064,12 +29696,22 @@
           "failureClass": null
         },
         "verificationUsageRecords": [],
-        "ownerAcceptance": "PENDING"
+        "ownerAcceptance": "PENDING",
+        "reviewAudit": {
+          "version": "CSD-REVIEW-v1.1.1",
+          "sourceArtifactDigest": "463645868fb9908c10ea431fa2224d957e58fa80540f8a9ed4a9773949ae03a6",
+          "previousAuditDigest": "5de98fd9410cd88a81834c0b13449fefa26a6af125076d27cf51f294a066d479",
+          "candidateDigest": "65bf426370f17cd2fdb91dcbecd92157794ac2ddb77e92aa3f99e7848b9411ac",
+          "generationCalls": 0,
+          "semanticReviewReused": true,
+          "reviewCalls": 0,
+          "usageRecords": []
+        }
       },
-      "generatedAt": "2026-09-28T05:00:01.182Z",
+      "generatedAt": "2026-09-28T05:13:31.414Z",
       "ownerAcceptance": "PENDING",
       "productionActivated": false,
-      "artifactDigest": "463645868fb9908c10ea431fa2224d957e58fa80540f8a9ed4a9773949ae03a6"
+      "artifactDigest": "86abbe0afa2a985a41907912dfe84624cef44e90b5e9cf5efbd777abaef8a429"
     },
     "BAZI-FP-W17-031": {
       "identity": {
@@ -29081,13 +29723,15 @@
         "composer": "PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.3.0",
         "prompt": "PHI-OS-S04-CSD-PROMPT-v1.0.0",
         "verifier": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
-        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec"
+        "registryDigest": "be52b4f28aa9cc2052e178a6e932ff61496ca363c0b72bcab7f722c478b9caec",
+        "auditVersion": "CSD-REVIEW-v1.1.1"
       },
+      "sourceArtifactDigest": "716df8801945beab70a35410839459877c1cc5ca49f066e406e003bea77fcf59",
       "result": {
         "schemaVersion": "PHI-OS-BAZI-S04-T2-CANDIDATE-v1.0.0",
         "runtimeVersion": "PHI-OS-BAZI-S04-T2-RUNTIME-v1.0.0",
         "locale": "en",
-        "status": "FALLBACK",
+        "status": "PASS",
         "richClaimIr": {
           "version": "BAZI_EXPLANATORY_AUTHORITY_V2",
           "claims": [
@@ -36833,30 +37477,29 @@
           "schemaVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFICATION-v1.1.0",
           "verifierVersion": "PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1",
           "sourceBriefDigest": "18cafb9510f70cc6b08ae7b45a8e6c6e203e293003cc16c427406ab003d5fb5c",
-          "accepted": false,
+          "accepted": true,
           "sourceDigest": "77bdcf8f9ea5b9b7d6ed3a84505be75bd0ed59a8ff31b386df99d1f241e180fc",
-          "factsPreserved": false,
-          "semanticOperatorsPreserved": false,
+          "factsPreserved": true,
+          "semanticOperatorsPreserved": true,
           "roleSemanticsPreserved": true,
-          "boundariesPreserved": false,
+          "boundariesPreserved": true,
           "conditionsPreserved": true,
           "counterSignalsPreserved": true,
-          "uncertaintyPreserved": false,
+          "uncertaintyPreserved": true,
           "timingScopePreserved": true,
-          "observableScopePreserved": false,
+          "observableScopePreserved": true,
           "noInventedReality": true,
           "noNewMethodFact": true,
           "claimReferenceCoverage": 1,
-          "claimCoverage": 0.9375,
+          "claimCoverage": 1,
           "semanticReview": {
             "sourceBriefDigest": "18cafb9510f70cc6b08ae7b45a8e6c6e203e293003cc16c427406ab003d5fb5c",
             "candidateDigest": "999de7ea523f1352618c8fdac567659d58a9bcbeda5df5ad6b8e6f97875af2f7",
             "meaningfullyUsedClaimRefs": [
-              "CSD:THESIS",
               "CSD:AUTHORITY_LOAD",
               "CSD:EXPERTISE_OUTPUT",
               "CSD:COMMERCIAL_DELIVERY",
-              "CSD:ROLE_COMPOSITION",
+              "CSD:THESIS",
               "CSD:CONDITIONS",
               "CSD:TRADEOFFS",
               "CSD:AUTHORITY_LOAD:SCENARIO:0",
@@ -36865,94 +37508,82 @@
               "CSD:EXPERTISE_OUTPUT:SCENARIO:1",
               "CSD:COMMERCIAL_DELIVERY:SCENARIO:0",
               "CSD:COMMERCIAL_DELIVERY:SCENARIO:1",
+              "CSD:ROLE_COMPOSITION",
               "CSD:TIMING",
               "CSD:DECISION",
-              "CSD:SUPPORT",
-              "CSD:TENSION",
-              "CSD:OPEN_STRENGTH",
-              "CSD:TIME_TOPIC",
-              "CSD:WHOLE_BAZI-CX-PRO-W7-PRI-01",
-              "CSD:WHOLE_BAZI-CX-PRO-W7-PRI-02",
-              "CSD:WHOLE_BAZI-CX-PRO-W7-PRI-03",
-              "CSD:WHOLE_BAZI-CX-PRO-W7-PRI-04",
-              "CSD:OBSERVE",
-              "CSD:RB-TOPIC-CAREER-1"
+              "CSD:BOUNDARY"
             ],
-            "reasons": [
-              "The boundary treatment does not fully preserve the required qualification that no occupation is predicted; it states that no particular event or outcome is established but does not preserve the separate occupation boundary.",
-              "The operating-condition qualification that career structure can change with role, organization and timing, rather than fixing one profession into a guaranteed success-or-failure outcome, is not fully expressed.",
-              "The sentence “The same accountability is costly when results are assigned to the role but the conditions for producing them remain elsewhere” changes the licensed possibility that accountability without influence “can make the same demand costly” into a more categorical causal assertion."
-            ],
+            "reasons": [],
             "factsPreserved": true,
-            "boundariesPreserved": false,
+            "boundariesPreserved": true,
             "conditionsPreserved": true,
             "counterSignalsPreserved": true,
             "uncertaintyPreserved": true,
             "timingScopePreserved": true,
             "noInventedReality": true,
             "noNewMethodFact": true,
-            "semanticOperatorsPreserved": false,
+            "semanticOperatorsPreserved": true,
             "rankPreserved": true,
             "directionPreserved": true,
             "editorialAssessments": [
               {
                 "dimension": "causalExplanation",
-                "passed": false,
-                "evidence": "The same accountability is costly when results are assigned to the role but the conditions for producing them remain elsewhere.",
-                "reason": "This presents a conditional possibility as a categorical causal result."
+                "passed": true,
+                "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments.",
+                "reason": ""
               },
               {
                 "dimension": "customerSpecificity",
                 "passed": true,
-                "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
+                "evidence": "This chart-based career reading places responsibility first, with expertise, usable output and client value needing to be organized around it.",
                 "reason": ""
               },
               {
                 "dimension": "domainSpecificity",
                 "passed": true,
-                "evidence": "If a client offers recurring work, compare the promised volume with response windows and revision limits.",
+                "evidence": "For client-facing delivery, the workable arrangement includes agreed deliverables, revision limits and a budget tied to the capacity required.",
                 "reason": ""
               },
               {
                 "dimension": "realityTranslation",
                 "passed": true,
-                "evidence": "first state the promised deliverable and identify who controls its approvals, priorities and required inputs",
+                "evidence": "If a promotion adds a team or target, compare the added accountability with the decisions, staffing and priority control that move with it.",
                 "reason": ""
               },
               {
                 "dimension": "scenarioDensity",
                 "passed": true,
-                "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery",
+                "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery.",
                 "reason": ""
               },
               {
                 "dimension": "thesisClarity",
                 "passed": true,
-                "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments",
+                "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments.",
                 "reason": ""
               },
               {
                 "dimension": "advantageCostBalance",
                 "passed": true,
-                "evidence": "A defined mandate can make responsibility a route to trusted contribution, while a larger title can increase accountability without increasing control",
+                "evidence": "The advantage-cost balance is conditional rather than one-sided.",
                 "reason": ""
               },
               {
                 "dimension": "conditionSpecificity",
                 "passed": true,
-                "evidence": "Written scope, name the decision owner and allow priorities to be negotiated before delivery commitments are accepted",
+                "evidence": "A more sustainable role would set the scope in writing, name the decision owner and allow priorities to be negotiated before delivery commitments are accepted.",
                 "reason": ""
               },
               {
                 "dimension": "timingIntegration",
                 "passed": true,
-                "evidence": "The Da Yun layer is not adding a separate emphasis in this window, while the annual layer is supportive",
+                "evidence": "The annual emphasis raises relevance for these reviews; it does not establish a particular event or outcome.",
                 "reason": ""
               },
               {
                 "dimension": "navigationUsefulness",
                 "passed": true,
-                "evidence": "review the arrangement after a bounded trial against whether those agreed scope, authority, support and delivery conditions were actually available",
+                "evidence": "Use this ordered sequence when comparing a role, project or service arrangement.",
                 "reason": ""
               },
               {
@@ -36964,40 +37595,40 @@
               {
                 "dimension": "primitiveSuppression",
                 "passed": true,
-                "evidence": "These are distinct lenses for comparing role designs, not claims about behavior or conflict with a particular employer.",
+                "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
                 "reason": ""
               },
               {
                 "dimension": "nameRemoval",
                 "passed": true,
-                "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
+                "evidence": "This chart-based career reading places responsibility first, with expertise, usable output and client value needing to be organized around it.",
                 "reason": ""
               },
               {
                 "dimension": "sectionSubstitution",
                 "passed": true,
-                "evidence": "For client-facing delivery, the workable arrangement includes agreed deliverables, revision limits and a budget tied to the capacity required.",
+                "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery.",
                 "reason": ""
               },
               {
                 "dimension": "paragraphFunction",
                 "passed": true,
-                "evidence": "Use this ordered sequence when comparing a role, project or service arrangement",
+                "evidence": "The natal career mechanisms remain the primary context.",
                 "reason": ""
               },
               {
                 "dimension": "observableExpression",
                 "passed": true,
-                "evidence": "In a specialist assignment, agree what evidence is sufficient for the first recommendation",
+                "evidence": "In a specialist assignment, agree what evidence is sufficient for the first recommendation, because mentoring can improve accuracy while indefinite research may postpone a decision the team needs.",
                 "reason": ""
               }
             ]
           },
-          "technicalAccepted": false,
+          "technicalAccepted": true,
           "editorialQuality": {
-            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-            "state": "EDITORIAL_AUTOMATED_FAIL",
-            "accepted": false,
+            "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+            "state": "EDITORIAL_AUTOMATED_PASS",
+            "accepted": true,
             "customerSpecificityDensity": {
               "thesis": 1,
               "causalChains": 3,
@@ -37011,75 +37642,75 @@
               "decisionSequence": 1
             },
             "sentenceRatios": {
-              "DISCLAIMER": 0.031,
+              "DISCLAIMER": 0.063,
               "METHOD_EXPLANATION": 0,
-              "CUSTOMER_INTERPRETATION": 0.625,
-              "RAW_FACT": 0.344
+              "CUSTOMER_INTERPRETATION": 0.781,
+              "RAW_FACT": 0.156
             },
             "observableInterpretationRatio": 1,
             "primitiveExposure": [],
-            "disclaimerCount": 1,
-            "nameRemoval": "FAIL",
+            "disclaimerCount": 2,
+            "nameRemoval": "PASS",
             "sectionSubstitution": "PASS",
             "assessments": [
               {
                 "dimension": "causalExplanation",
-                "passed": false,
-                "evidence": "The same accountability is costly when results are assigned to the role but the conditions for producing them remain elsewhere.",
-                "reason": "This presents a conditional possibility as a categorical causal result."
+                "passed": true,
+                "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments.",
+                "reason": ""
               },
               {
                 "dimension": "customerSpecificity",
                 "passed": true,
-                "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
+                "evidence": "This chart-based career reading places responsibility first, with expertise, usable output and client value needing to be organized around it.",
                 "reason": ""
               },
               {
                 "dimension": "domainSpecificity",
                 "passed": true,
-                "evidence": "If a client offers recurring work, compare the promised volume with response windows and revision limits.",
+                "evidence": "For client-facing delivery, the workable arrangement includes agreed deliverables, revision limits and a budget tied to the capacity required.",
                 "reason": ""
               },
               {
                 "dimension": "realityTranslation",
                 "passed": true,
-                "evidence": "first state the promised deliverable and identify who controls its approvals, priorities and required inputs",
+                "evidence": "If a promotion adds a team or target, compare the added accountability with the decisions, staffing and priority control that move with it.",
                 "reason": ""
               },
               {
                 "dimension": "scenarioDensity",
                 "passed": true,
-                "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery",
+                "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery.",
                 "reason": ""
               },
               {
                 "dimension": "thesisClarity",
                 "passed": true,
-                "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments",
+                "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments.",
                 "reason": ""
               },
               {
                 "dimension": "advantageCostBalance",
                 "passed": true,
-                "evidence": "A defined mandate can make responsibility a route to trusted contribution, while a larger title can increase accountability without increasing control",
+                "evidence": "The advantage-cost balance is conditional rather than one-sided.",
                 "reason": ""
               },
               {
                 "dimension": "conditionSpecificity",
                 "passed": true,
-                "evidence": "Written scope, name the decision owner and allow priorities to be negotiated before delivery commitments are accepted",
+                "evidence": "A more sustainable role would set the scope in writing, name the decision owner and allow priorities to be negotiated before delivery commitments are accepted.",
                 "reason": ""
               },
               {
                 "dimension": "timingIntegration",
                 "passed": true,
-                "evidence": "The Da Yun layer is not adding a separate emphasis in this window, while the annual layer is supportive",
+                "evidence": "The annual emphasis raises relevance for these reviews; it does not establish a particular event or outcome.",
                 "reason": ""
               },
               {
                 "dimension": "navigationUsefulness",
                 "passed": true,
-                "evidence": "review the arrangement after a bounded trial against whether those agreed scope, authority, support and delivery conditions were actually available",
+                "evidence": "Use this ordered sequence when comparing a role, project or service arrangement.",
                 "reason": ""
               },
               {
@@ -37091,41 +37722,35 @@
               {
                 "dimension": "primitiveSuppression",
                 "passed": true,
-                "evidence": "These are distinct lenses for comparing role designs, not claims about behavior or conflict with a particular employer.",
+                "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
                 "reason": ""
               },
               {
                 "dimension": "nameRemoval",
                 "passed": true,
-                "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
+                "evidence": "This chart-based career reading places responsibility first, with expertise, usable output and client value needing to be organized around it.",
                 "reason": ""
               },
               {
                 "dimension": "sectionSubstitution",
                 "passed": true,
-                "evidence": "For client-facing delivery, the workable arrangement includes agreed deliverables, revision limits and a budget tied to the capacity required.",
+                "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery.",
                 "reason": ""
               },
               {
                 "dimension": "paragraphFunction",
                 "passed": true,
-                "evidence": "Use this ordered sequence when comparing a role, project or service arrangement",
+                "evidence": "The natal career mechanisms remain the primary context.",
                 "reason": ""
               },
               {
                 "dimension": "observableExpression",
                 "passed": true,
-                "evidence": "In a specialist assignment, agree what evidence is sufficient for the first recommendation",
+                "evidence": "In a specialist assignment, agree what evidence is sufficient for the first recommendation, because mentoring can improve accuracy while indefinite research may postpone a decision the team needs.",
                 "reason": ""
               }
             ],
-            "reasons": [
-              "CUSTOMER_VALUE_SENTENCE_RATIO",
-              "NAME_REMOVAL_FAIL",
-              "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-              "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-              "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity"
-            ],
+            "reasons": [],
             "thresholdStatus": "INITIAL_CALIBRATION",
             "ownerAcceptance": "PENDING",
             "productionEligible": false
@@ -37151,28 +37776,8 @@
           ],
           "missingClaimRefs": [],
           "unsupportedRefs": [],
-          "reasons": [
-            "SEMANTIC_REVIEW_FAILED:boundariesPreserved",
-            "SEMANTIC_REVIEW_FAILED:semanticOperatorsPreserved",
-            "SEMANTIC_REVIEW_REJECTED",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:SUPPORT",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:TENSION",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:OPEN_STRENGTH",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:TIME_TOPIC",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:WHOLE_BAZI-CX-PRO-W7-PRI-01",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:WHOLE_BAZI-CX-PRO-W7-PRI-02",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:WHOLE_BAZI-CX-PRO-W7-PRI-03",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:WHOLE_BAZI-CX-PRO-W7-PRI-04",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:OBSERVE",
-            "UNSUPPORTED_REVIEW_CLAIM:CSD:RB-TOPIC-CAREER-1",
-            "CLAIM_MEANING_NOT_VERIFIED:CSD:BOUNDARY",
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "NAME_REMOVAL_FAIL",
-            "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-            "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity"
-          ],
-          "verificationDigest": "059cba222ffc4acdef7a743ff3fe43b87908e2703466a2a55e43aa741805339f"
+          "reasons": [],
+          "verificationDigest": "58e21d1ac0c1e94daff1a803f5c5d1267a2203e9bbcc8cca0df3451d96c0984e"
         },
         "quality": {
           "schemaVersion": "PHI-OS-REPORT-EDITORIAL-QUALITY-R3-v1.0.0",
@@ -38456,9 +39061,9 @@
           "digest": "f63912229abad8c2ef20e2457bc7c2fc0b75a542621e108020498139bc530d7c"
         },
         "editorialQuality": {
-          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.0.0",
-          "state": "EDITORIAL_AUTOMATED_FAIL",
-          "accepted": false,
+          "version": "PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1",
+          "state": "EDITORIAL_AUTOMATED_PASS",
+          "accepted": true,
           "customerSpecificityDensity": {
             "thesis": 1,
             "causalChains": 3,
@@ -38472,75 +39077,75 @@
             "decisionSequence": 1
           },
           "sentenceRatios": {
-            "DISCLAIMER": 0.031,
+            "DISCLAIMER": 0.063,
             "METHOD_EXPLANATION": 0,
-            "CUSTOMER_INTERPRETATION": 0.625,
-            "RAW_FACT": 0.344
+            "CUSTOMER_INTERPRETATION": 0.781,
+            "RAW_FACT": 0.156
           },
           "observableInterpretationRatio": 1,
           "primitiveExposure": [],
-          "disclaimerCount": 1,
-          "nameRemoval": "FAIL",
+          "disclaimerCount": 2,
+          "nameRemoval": "PASS",
           "sectionSubstitution": "PASS",
           "assessments": [
             {
               "dimension": "causalExplanation",
-              "passed": false,
-              "evidence": "The same accountability is costly when results are assigned to the role but the conditions for producing them remain elsewhere.",
-              "reason": "This presents a conditional possibility as a categorical causal result."
+              "passed": true,
+              "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments.",
+              "reason": ""
             },
             {
               "dimension": "customerSpecificity",
               "passed": true,
-              "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
+              "evidence": "This chart-based career reading places responsibility first, with expertise, usable output and client value needing to be organized around it.",
               "reason": ""
             },
             {
               "dimension": "domainSpecificity",
               "passed": true,
-              "evidence": "If a client offers recurring work, compare the promised volume with response windows and revision limits.",
+              "evidence": "For client-facing delivery, the workable arrangement includes agreed deliverables, revision limits and a budget tied to the capacity required.",
               "reason": ""
             },
             {
               "dimension": "realityTranslation",
               "passed": true,
-              "evidence": "first state the promised deliverable and identify who controls its approvals, priorities and required inputs",
+              "evidence": "If a promotion adds a team or target, compare the added accountability with the decisions, staffing and priority control that move with it.",
               "reason": ""
             },
             {
               "dimension": "scenarioDensity",
               "passed": true,
-              "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery",
+              "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery.",
               "reason": ""
             },
             {
               "dimension": "thesisClarity",
               "passed": true,
-              "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments",
+              "evidence": "Responsibility is more sustainable when decision authority, practical support and delivery scope match the commitments.",
               "reason": ""
             },
             {
               "dimension": "advantageCostBalance",
               "passed": true,
-              "evidence": "A defined mandate can make responsibility a route to trusted contribution, while a larger title can increase accountability without increasing control",
+              "evidence": "The advantage-cost balance is conditional rather than one-sided.",
               "reason": ""
             },
             {
               "dimension": "conditionSpecificity",
               "passed": true,
-              "evidence": "Written scope, name the decision owner and allow priorities to be negotiated before delivery commitments are accepted",
+              "evidence": "A more sustainable role would set the scope in writing, name the decision owner and allow priorities to be negotiated before delivery commitments are accepted.",
               "reason": ""
             },
             {
               "dimension": "timingIntegration",
               "passed": true,
-              "evidence": "The Da Yun layer is not adding a separate emphasis in this window, while the annual layer is supportive",
+              "evidence": "The annual emphasis raises relevance for these reviews; it does not establish a particular event or outcome.",
               "reason": ""
             },
             {
               "dimension": "navigationUsefulness",
               "passed": true,
-              "evidence": "review the arrangement after a bounded trial against whether those agreed scope, authority, support and delivery conditions were actually available",
+              "evidence": "Use this ordered sequence when comparing a role, project or service arrangement.",
               "reason": ""
             },
             {
@@ -38552,49 +39157,43 @@
             {
               "dimension": "primitiveSuppression",
               "passed": true,
-              "evidence": "These are distinct lenses for comparing role designs, not claims about behavior or conflict with a particular employer.",
+              "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
               "reason": ""
             },
             {
               "dimension": "nameRemoval",
               "passed": true,
-              "evidence": "Responsibility and professional standards have the first emphasis, while delivery, expertise, support and commercial exchange determine whether that responsibility becomes usable contribution.",
+              "evidence": "This chart-based career reading places responsibility first, with expertise, usable output and client value needing to be organized around it.",
               "reason": ""
             },
             {
               "dimension": "sectionSubstitution",
               "passed": true,
-              "evidence": "For client-facing delivery, the workable arrangement includes agreed deliverables, revision limits and a budget tied to the capacity required.",
+              "evidence": "When a project carries revenue responsibility, check whether its budget covers the tools and specialist help required for delivery.",
               "reason": ""
             },
             {
               "dimension": "paragraphFunction",
               "passed": true,
-              "evidence": "Use this ordered sequence when comparing a role, project or service arrangement",
+              "evidence": "The natal career mechanisms remain the primary context.",
               "reason": ""
             },
             {
               "dimension": "observableExpression",
               "passed": true,
-              "evidence": "In a specialist assignment, agree what evidence is sufficient for the first recommendation",
+              "evidence": "In a specialist assignment, agree what evidence is sufficient for the first recommendation, because mentoring can improve accuracy while indefinite research may postpone a decision the team needs.",
               "reason": ""
             }
           ],
-          "reasons": [
-            "CUSTOMER_VALUE_SENTENCE_RATIO",
-            "NAME_REMOVAL_FAIL",
-            "EDITORIAL_REVIEW_REQUIRED:causalExplanation",
-            "EDITORIAL_REVIEW_REQUIRED:domainSpecificity",
-            "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity"
-          ],
+          "reasons": [],
           "thresholdStatus": "INITIAL_CALIBRATION",
           "ownerAcceptance": "PENDING",
           "productionEligible": false
         },
         "reviewState": {
-          "technicalStatus": "TECHNICAL_FAIL",
-          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_FAIL",
-          "editorialStatus": "EDITORIAL_NOT_ELIGIBLE",
+          "technicalStatus": "TECHNICAL_PASS",
+          "automatedEditorialStatus": "EDITORIAL_AUTOMATED_PASS",
+          "editorialStatus": "EDITORIAL_PENDING",
           "ownerAcceptance": "PENDING",
           "productionActivated": false
         },
@@ -38603,8 +39202,8 @@
           "provider": "OPENAI",
           "model": "gpt-5.6-luna",
           "requestedTier": "T2_GOVERNED_NATURAL_COMPOSITION",
-          "actualTier": "DETERMINISTIC_FALLBACK",
-          "fallbackReason": "SEMANTIC_VERIFIER_REJECTED",
+          "actualTier": "T2_GOVERNED_NATURAL_COMPOSITION",
+          "fallbackReason": null,
           "route": {
             "aiExecutionClass": "T2_LIGHT_COMPOSITION",
             "providerRequired": true,
@@ -38617,7 +39216,7 @@
           },
           "providerCalled": true,
           "providerExecution": "LIVE_ADAPTER",
-          "fallbackUsed": true,
+          "fallbackUsed": false,
           "transportCalls": 4,
           "semanticReviewCalls": 2,
           "providerAttemptCount": 2,
@@ -38720,7 +39319,9 @@
                 "EDITORIAL_REVIEW_REQUIRED:conditionSpecificity"
               ]
             }
-          ]
+          ],
+          "initialAdmission": "DETERMINISTIC_FALLBACK",
+          "reverificationOnly": true
         },
         "usageRecord": {
           "schemaVersion": "PHI-OS-PAI-R1-USAGE-EVENT-v1.0.0",
@@ -38811,12 +39412,22 @@
             "failureClass": null
           }
         ],
-        "ownerAcceptance": "PENDING"
+        "ownerAcceptance": "PENDING",
+        "reviewAudit": {
+          "version": "CSD-REVIEW-v1.1.1",
+          "sourceArtifactDigest": "716df8801945beab70a35410839459877c1cc5ca49f066e406e003bea77fcf59",
+          "previousAuditDigest": "eb7aec3349e16b053bafc49bf8c0b163e5ef841fc092ea1361c7bd88a864766b",
+          "candidateDigest": "999de7ea523f1352618c8fdac567659d58a9bcbeda5df5ad6b8e6f97875af2f7",
+          "generationCalls": 0,
+          "semanticReviewReused": true,
+          "reviewCalls": 0,
+          "usageRecords": []
+        }
       },
-      "generatedAt": "2026-09-28T05:00:18.310Z",
+      "generatedAt": "2026-09-28T05:13:34.826Z",
       "ownerAcceptance": "PENDING",
       "productionActivated": false,
-      "artifactDigest": "716df8801945beab70a35410839459877c1cc5ca49f066e406e003bea77fcf59"
+      "artifactDigest": "be83ae7d58a44150418e2dacfe03ec43d49779ed61e063f9caeeee9ffb947b85"
     }
   }
 }

@@ -1,7 +1,13 @@
+import {evaluateCareerIdentity} from './bazi-s04-identity-quality.js';
 // R4 extends R3 for the explicitly admitted S04 review successor only.
 // Heuristics support, never replace, the independent source-to-prose review.
 export const EDITORIAL_R4_DIMENSIONS=Object.freeze(['causalExplanation','customerSpecificity','domainSpecificity','realityTranslation','scenarioDensity','thesisClarity','advantageCostBalance','conditionSpecificity','timingIntegration','navigationUsefulness','disclaimerCompression','primitiveSuppression','nameRemoval','sectionSubstitution','paragraphFunction','observableExpression']);
-export const CSD_REVIEW_AUDIT_VERSION='CSD-REVIEW-v1.1.0';
+export const CSD_REVIEW_AUDIT_VERSION='CSD-REVIEW-v1.1.1';
+export function containsEditorialQuote(text,quote){
+ const normalize=s=>String(s||'').normalize('NFKC').replace(/\s+/gu,' ').toLocaleLowerCase().trim();
+ const fragment=normalize(quote).replace(/^["“‘]|["”’]$/gu,'').replace(/[.!?;:。！？；：]+$/u,'').trim();
+ return fragment.length>=8&&normalize(text).includes(fragment);
+}
 const primitive=/\b(?:structural tension|symbolic priority|carrying (?:condition|picture)|formation support|relationship modifier|self-position|semantic|operator|governance|claim)\b|当前结构|该组结构|承载条件|关系修正|形成支持|象征性解读/giu;
 const disclaimer=/\b(?:not (?:a prediction|observed behavior)|symbolic reading|does not (?:predict|establish)|conditional reading|chart-based possibilities|final strong-or-weak judgment)\b|不预测|不代表已经|象征性|不认定|不证明|待实际工作检验的命盘|最终强弱与格局判断/iu;
 const method=/\b(?:ten gods?|percentage|semantic|operator|reading priority|pattern label)\b|十神|占比|格局名称|读取优先/iu;
@@ -15,11 +21,13 @@ export function evaluateCustomerEditorialR4({brief,candidate,verification,identi
  if(new Set(blocks.map(b=>b.text.trim())).size<blocks.length)reasons.push('PARAGRAPH_REPETITION');
  const count=fn=>sentences.filter(fn).length;
  const categories={DISCLAIMER:count(s=>disclaimer.test(s)),METHOD_EXPLANATION:count(s=>!disclaimer.test(s)&&method.test(s)),CUSTOMER_INTERPRETATION:count(s=>!disclaimer.test(s)&&!method.test(s)&&domain.test(s)&&consequence.test(s))};
+ if(brief.identityContract&&verification?.semanticReview?.careerSentenceLabels){const labels=verification.semanticReview.careerSentenceLabels;categories.CUSTOMER_INTERPRETATION=labels.filter(x=>!['GENERIC_WORK_ADVICE','METHOD_EXPLANATION','DISCLAIMER'].includes(x.category)).length;categories.DISCLAIMER=Math.max(categories.DISCLAIMER,labels.filter(x=>x.category==='DISCLAIMER').length);categories.METHOD_EXPLANATION=Math.max(categories.METHOD_EXPLANATION,labels.filter(x=>x.category==='METHOD_EXPLANATION').length);}
  categories.RAW_FACT=sentences.length-Object.values(categories).reduce((a,b)=>a+b,0);
  const ratios=Object.fromEntries(Object.entries(categories).map(([k,v])=>[k,Number((v/total).toFixed(3))]));
  const exposed=[...whole.matchAll(primitive)].map(m=>m[0].toLowerCase());
  const repeatedDisclaimers=sentences.filter(s=>disclaimer.test(s));
  const observable=editorialSentences(blocks.filter(b=>b.role==='OBSERVABLE_EXPRESSION').map(b=>b.text).join('\n'));
+ const observableUseful=brief.identityContract?(()=>{let offset=0,count=0;const labels=verification?.semanticReview?.careerSentenceLabels||[];for(const b of blocks){const ss=editorialSentences(b.text);if(b.role==='OBSERVABLE_EXPRESSION')count+=ss.filter((s,i)=>!/[?？]/u.test(s)&&labels.some(x=>x.sentenceIndex===offset+i&&!['GENERIC_WORK_ADVICE','METHOD_EXPLANATION','DISCLAIMER'].includes(x.category))).length;offset+=ss.length;}return count;})():observable.filter(s=>domain.test(s)&&consequence.test(s)&&!/[?？]/u.test(s)).length;
  const observationQuestionRatio=observable.filter(s=>/[?？]/u.test(s)).length/Math.max(1,observable.length);
  const used=new Set(verification?.semanticReview?.meaningfullyUsedClaimRefs||[]);
  const meaningfulNodes=(ir?.nodes||[]).filter(n=>used.has(n.id));
@@ -28,17 +36,19 @@ export function evaluateCustomerEditorialR4({brief,candidate,verification,identi
  const thesis=blocks.filter(b=>b.role==='CAREER_THESIS');if(thesis.length!==1||editorialSentences(thesis[0]?.text).length>3)reasons.push('CAREER_THESIS_INVALID');
  const scenarioClasses=new Set(meaningfulNodes.filter(n=>n.kind==='SCENARIO').map(n=>n.scenarioClass));if(scenarioClasses.size<4)reasons.push('SCENARIO_DIVERSITY_FAIL');
  if(exposed.length>2||exposed.some((x,i)=>exposed.indexOf(x)!==i))reasons.push('SEMANTIC_PRIMITIVE_EXPOSURE');
- if(repeatedDisclaimers.length>2||ratios.DISCLAIMER>.10)reasons.push('DISCLAIMER_REPETITION');
+ if((!brief.identityContract&&repeatedDisclaimers.length>2)||ratios.DISCLAIMER>.10||new Set(repeatedDisclaimers).size<repeatedDisclaimers.length)reasons.push('DISCLAIMER_REPETITION');
  if(ratios.METHOD_EXPLANATION>.15||ratios.CUSTOMER_INTERPRETATION<.70)reasons.push('CUSTOMER_VALUE_SENTENCE_RATIO');
- if(!observable.length||observationQuestionRatio>.30||observable.filter(s=>domain.test(s)&&consequence.test(s)&&!/[?？]/u.test(s)).length/Math.max(1,observable.length)<.70)reasons.push('OBSERVABLE_EXPRESSION_RATIO');
+ if(!observable.length||observationQuestionRatio>.30||observableUseful/Math.max(1,observable.length)<.70)reasons.push('OBSERVABLE_EXPRESSION_RATIO');
  const stripped=removePersonalIdentifiers(whole,identifiers),strippedSentences=editorialSentences(stripped);
- const nameRemovalHeuristic=strippedSentences.filter(s=>domain.test(s)&&consequence.test(s)).length/Math.max(1,strippedSentences.length)>=.70;
+ const nameRemovalHeuristic=brief.identityContract?ratios.CUSTOMER_INTERPRETATION>=.70:strippedSentences.filter(s=>domain.test(s)&&consequence.test(s)).length/Math.max(1,strippedSentences.length)>=.70;
  const substitutionHeuristic=blocks.filter(b=>domain.test(b.text.replace(/\b(?:career|work)\b|事业|工作/giu,''))).length/Math.max(1,blocks.length)>=.70;
  if(!nameRemovalHeuristic)reasons.push('NAME_REMOVAL_FAIL');if(!substitutionHeuristic)reasons.push('SECTION_SUBSTITUTION_FAIL');
  const assessments=verification?.semanticReview?.editorialAssessments||[];
- for(const dimension of EDITORIAL_R4_DIMENSIONS){const rows=assessments.filter(r=>r.dimension===dimension);const quote=rows[0]?.evidence?.trim().replace(/^["“‘]|["”’]$/gu,'');if(rows.length!==1||rows[0].passed!==true||!quote||!whole.includes(quote))reasons.push('EDITORIAL_REVIEW_REQUIRED:'+dimension);}
+ for(const dimension of EDITORIAL_R4_DIMENSIONS){const rows=assessments.filter(r=>r.dimension===dimension);if(rows.length!==1||rows[0].passed!==true||!containsEditorialQuote(whole,rows[0].evidence))reasons.push('EDITORIAL_REVIEW_REQUIRED:'+dimension);}
  for(const b of blocks)if(!brief.paragraphFunctions.includes(b.function))reasons.push('PARAGRAPH_FUNCTION_INVALID');
- return {version:'PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.0',state:reasons.length?'EDITORIAL_AUTOMATED_FAIL':'EDITORIAL_AUTOMATED_PASS',accepted:!reasons.length,customerSpecificityDensity:density,sentenceRatios:ratios,observableInterpretationRatio:observable.filter(s=>domain.test(s)&&consequence.test(s)&&!/[?？]/u.test(s)).length/Math.max(1,observable.length),primitiveExposure:exposed,disclaimerCount:repeatedDisclaimers.length,nameRemoval:nameRemovalHeuristic?'PASS':'FAIL',sectionSubstitution:substitutionHeuristic?'PASS':'FAIL',assessments,reasons,thresholdStatus:'INITIAL_CALIBRATION',ownerAcceptance:'PENDING',productionEligible:false};
+ const identityQuality=brief.identityContract?evaluateCareerIdentity({brief,candidate:{blocks},review:verification?.semanticReview,containsQuote:containsEditorialQuote,sentences:editorialSentences}):null;
+ if(identityQuality)reasons.push(...identityQuality.reasons);
+ return {identityQuality,version:'PHI-OS-REPORT-EDITORIAL-QUALITY-R4-v1.1.1',state:reasons.length?'EDITORIAL_AUTOMATED_FAIL':'EDITORIAL_AUTOMATED_PASS',accepted:!reasons.length,customerSpecificityDensity:density,sentenceRatios:ratios,observableInterpretationRatio:observableUseful/Math.max(1,observable.length),primitiveExposure:exposed,disclaimerCount:repeatedDisclaimers.length,nameRemoval:nameRemovalHeuristic?'PASS':'FAIL',sectionSubstitution:substitutionHeuristic?'PASS':'FAIL',assessments,reasons,thresholdStatus:'INITIAL_CALIBRATION',ownerAcceptance:'PENDING',productionEligible:false};
 }
 function uniqueFacts(nodes){return new Set(nodes.filter(n=>n.kind==='CAUSAL_CHAIN').flatMap(n=>n.inputs||[]).map(x=>x.ref)).size;}
 export function crossSubjectDistinguishability(rows){

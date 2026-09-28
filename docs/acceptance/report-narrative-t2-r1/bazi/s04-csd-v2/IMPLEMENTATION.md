@@ -29,3 +29,17 @@ Passed before live generation: CSD ten-check suite, RNT2 core/adversarial/privat
 Final live results, request counts, retries, repairs, cache state, source facts, Career Narrative IR, provenance, verifier outputs and bilingual text are retained in REVIEW-EVIDENCE.json and review.html after import. Do not claim TECHNICAL_PASS or EDITORIAL_AUTOMATED_PASS without those frozen records. Owner acceptance remains PENDING until an explicit owner decision, even if every automated check passes.
 
 Implementation references: [OpenAI structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs), [Cloudflare Workers practices](https://developers.cloudflare.com/workers/best-practices/workers-best-practices/), [Pages direct upload](https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/).
+
+## Final live handoff — 2026-09-28
+
+The frozen Chinese and English S04 readings and both synthetic comparison readings are TECHNICAL_PASS / EDITORIAL_AUTOMATED_PASS. Three-profile generated-prose distinction and bilingual claim/mechanism parity also pass. All remain OWNER_ACCEPTANCE_PENDING and REVIEW_ONLY; no production activation or S03/S05 expansion occurred. The review pack is `review.html`, with digest-bound source and audit history in `REVIEW-EVIDENCE.json`.
+
+Four initial runs made eight writer requests (four initial compositions plus four bounded targeted repairs), eight independent semantic-review requests and zero transport retries. There were zero regenerations after freezing. The final CSD-REVIEW-v1.1.1 audits reused all four existing bound reviews, with zero new model requests. Recorded usage totals 542,338 input tokens and 45,262 output tokens; estimated provider cost is 0.2261085 in the registry currency, not final billing.
+
+The post-freeze validator correction recognizes direct decision language and normalizes quotation casing, whitespace and terminal punctuation. It does not accept changed wording or reduce the 70% useful-content and 10% disclaimer thresholds. The original admission failures and intervening review audits remain in the evidence; the frozen candidate digests are unchanged. Final CSD and private-review regression tests passed. The latter now deterministically holds the first composer open to test concurrent reservation, separately from a valid cached reopen.
+
+Final QA deployment: https://576d7341.phios-github.pages.dev, also available through the existing protected QA alias. Browser verification confirmed all four final states and the Chinese reading layout. The browser's local-file URL policy blocked direct inspection of the combined local HTML; it was opened through the Codex file panel instead. No workaround or additional model generation was used.
+
+Cleanup removed 15,225 temporary files totaling 607.17 MiB: this task's deployment staging, matching Worker build, and redundant downloaded snapshots after verified import. No screenshot files were retained. The final compact review pack, required source/tests and private immutable R2 records remain.
+
+W58 owner decision is still required: ACCEPT or REJECT this new S04 bilingual reading. Automated PASS is not editorial acceptance by the owner. Stop at this handoff until that decision.

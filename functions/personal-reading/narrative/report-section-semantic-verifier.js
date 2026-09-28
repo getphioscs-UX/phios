@@ -26,7 +26,12 @@ function assertionText(value){return value
  .replace(/(?:不能|无法|并未|未能|不曾)证明|(?:过于|过度)绝对/gu,' ')
  .replace(/(?:并不|也不|不)代表(?:某一|具体)?事件(?:已经发生或)?必然发生/gu,' ');
 }
-function detect(textValue){for(const [re,code] of FORBIDDEN)if(re.test(assertionText(textValue)))return code;return null;}
+function detect(textValue,careerIdentity=false){
+ // Technical problem diagnosis is licensed by the career expertise node; this
+ // exception cannot mask a diagnosis of a person or a medical condition.
+ const checked=careerIdentity?textValue.replace(/through diagnosis, explanation, or method/giu,'through problem analysis, explanation, or method'):textValue;
+ for(const [re,code] of FORBIDDEN)if(re.test(assertionText(checked)))return code;return null;
+}
 function licenseAllows(claims,operator){
  return claims.some(c=>arr(c.semanticOperators).includes(operator)||c?.license?.allowedSemanticOperators?.includes?.(operator));
 }
@@ -39,9 +44,10 @@ function hasMeaningForRole(claims,role){
  if(role==='NAVIGATION')return claims.some(c=>c.role==='NAVIGATION'||c.claimType==='CROSS_SECTION_RELEVANCE');
  return false;
 }
-function certaintyEscalated(body,claims,successor=false){
+function certaintyEscalated(body,claims,successor=false,careerIdentity=false){
  const weak=claims.some(c=>['UNRESOLVED','QUESTION','SYMBOLIC_CONDITIONAL','BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY'].includes(String(c.certainty||'').toUpperCase()));
- const assertions=successor?assertionText(body).replace(/\b(?:who|when(?:\s+it)?)\s+will\b/giu,' ').replace(/不必然/gu,' '):assertionText(body);
+ let assertions=successor?assertionText(body).replace(/\b(?:who|when(?:\s+it)?)\s+will\b/giu,' ').replace(/不必然/gu,' '):assertionText(body);
+ if(careerIdentity)assertions=assertions.replace(/不证明/gu,' ').replace(/不等于[^，。；]{0,24}必然/gu,' ').replace(/不表示(?:某个|具体)?事件必然发生/gu,' ').replace(/not predictions? of what will happen/giu,' ');
  return weak&&/\b(?:certainly|definitely|always|proves?|will)\b|(?:一定|必然|证明|就是|绝对)/iu.test(assertions);
 }
 
@@ -53,7 +59,7 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
  if(await sha256Stable(briefSeed)!==briefSemanticDigest)reasons.push('SOURCE_LINEAGE_LOSS');
  if(candidate?.sourceBriefDigest!==briefSemanticDigest)reasons.push('SOURCE_DIGEST_MISMATCH');
  if(!blocks.length)reasons.push('NO_BLOCKS');
- if(blocks.length<4||blocks.length>(brief.successorVersion?14:10))reasons.push('BLOCK_COUNT_INVALID');
+ if(blocks.length<4||blocks.length>(brief.identityContract?16:brief.successorVersion?14:10))reasons.push('BLOCK_COUNT_INVALID');
  for(const [index,b] of blocks.entries()){
   const role=text(b?.role).toUpperCase(),body=text(b?.text),refs=uniq(arr(b?.claimRefs));
   if(refs.length!==arr(b?.claimRefs).length||uniq(arr(b?.supportRefs)).length!==arr(b?.supportRefs).length)reasons.push(`DUPLICATE_REFERENCES:${index}`);
@@ -70,9 +76,9 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
   if(!arr(b?.supportRefs).length||arr(b.supportRefs).some(ref=>!permittedSupports.has(ref)))reasons.push(`SOURCE_LINEAGE_LOSS:${index}`);
   const conditionalRole=brief.successorVersion&&role==='OBSERVABLE_EXPRESSION'&&claims.some(c=>['MECHANISM','CAUSAL_CHAIN','SCENARIO'].includes(c.claimType)&&c.license?.allowsConditionalScenario);
   if(claims.length&&!hasMeaningForRole(claims,role)&&!conditionalRole)reasons.push(`ROLE_SUPPORT_MISMATCH:${index}:${role}`);
-  const prohibited=detect(body);if(prohibited)reasons.push(`${prohibited}:${index}`);
+  const prohibited=detect(body,Boolean(brief.identityContract));if(prohibited)reasons.push(`${prohibited}:${index}`);
   for(const [operator,re] of Object.entries(OPERATOR_PATTERNS))if(re.test(body)&&!licenseAllows(claims,operator))reasons.push(`UNLICENSED_${operator}:${index}`);
-  if(certaintyEscalated(body,claims,Boolean(brief.successorVersion)))reasons.push(`CERTAINTY_STRENGTHENING:${index}`);
+  if(certaintyEscalated(body,claims,Boolean(brief.successorVersion),Boolean(brief.identityContract)))reasons.push(`CERTAINTY_STRENGTHENING:${index}`);
   if(role==='OBSERVABLE_EXPRESSION'){
    const admitsObserved=claims.some(c=>c?.license?.allowsObservedReality===true);
    const questionOnly=claims.every(c=>c.claimType==='QUESTION'||arr(c.conditions).includes('QUESTION_ONLY_NOT_OBSERVED_FACT')||!admitsObserved);

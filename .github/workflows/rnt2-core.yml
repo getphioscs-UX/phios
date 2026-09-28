@@ -21,6 +21,7 @@ on:
       - 'functions/api/qa-bazi-t3.js'
       - 'scripts/check-rnt2-private-review.mjs'
       - 'scripts/check-bazi-s04-csd.mjs'
+      - 'scripts/check-bazi-s04-identity.mjs'
       - '.github/workflows/rnt2-core.yml'
 
 permissions:
@@ -42,4 +43,5 @@ jobs:
       - run: node scripts/check-rnt2-report-subject-flow.mjs
       - run: node scripts/check-rnt2-private-review.mjs
       - run: npm run check:bazi-s04-csd
+      - run: npm run check:bazi-s04-v3-editorial
       - run: node --check assets/customer-ui/js/personal-products/rnt2-s04-review.js

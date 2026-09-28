@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {prepareBaZiS04T2,buildBaZiS04T2} from '../functions/personal-reading/narrative/bazi-s04-t2-runtime.js';
 import {buildCareerNarrativeIR} from '../functions/personal-reading/narrative/bazi-s04-career-ir.js';
-import {evaluateCustomerEditorialR4,EDITORIAL_R4_DIMENSIONS,removePersonalIdentifiers,crossSubjectDistinguishability} from '../functions/personal-reading/narrative/report-editorial-quality-r4.js';
+import {evaluateCustomerEditorialR4,EDITORIAL_R4_DIMENSIONS,removePersonalIdentifiers,crossSubjectDistinguishability,containsEditorialQuote} from '../functions/personal-reading/narrative/report-editorial-quality-r4.js';
 import {verifyReportSectionComposition} from '../functions/personal-reading/narrative/report-section-semantic-verifier.js';
 import {buildInputs,generateCampaignCases} from './lib/bazi-fp-w17-campaign.mjs';
 import {buildBaziFullReading} from '../functions/api/bazi-full-reading.js';
@@ -49,6 +49,9 @@ if(requested==='all'||requested==='cross-subject-distinguishability'){
  console.log(JSON.stringify({syntheticCharts:24,distinctMechanismProfiles:rows.length,diversity:distinction.diversity,rawCanonRejected:true,finalCustomerProseComparison:'REQUIRES_GENERATED_REVIEW_CANDIDATES'},null,2));
 }
 if(requested==='all'){
+ assert(containsEditorialQuote('A role can improve delivery; the budget remains bounded.','The budget remains bounded.'));
+ assert(containsEditorialQuote('A role can improve delivery; the budget remains bounded.','A role can improve delivery.'));
+ assert(!containsEditorialQuote('A role can improve delivery; the budget remains bounded.','A role guarantees delivery.'));
  assert.equal(careerReviewState({technicalPass:true,editorialPass:true}).ownerAcceptance,'PENDING');
  assert.equal(careerReviewState({technicalPass:true,editorialPass:true,ownerDecision:'REJECT'}).editorialStatus,'EDITORIAL_REJECT');
  assert.equal(careerReviewState({technicalPass:false,editorialPass:true,ownerDecision:'ACCEPT'}).editorialStatus,'EDITORIAL_NOT_ELIGIBLE');

@@ -3,6 +3,7 @@ import {createReportSectionNarrativeContract} from './report-section-contract.js
 import {buildReportSectionNarrativeBrief} from './report-section-brief.js';
 import {composePublicationNarrative} from './narrative-writer.js';
 import {evaluateReportEditorialQuality} from './report-editorial-quality-r3.js';
+import {extendCareerIdentityBrief} from './bazi-s04-career-identity.js';
 import {extendCareerBrief} from './bazi-s04-career-ir.js';
 import {evaluateCustomerEditorialR4} from './report-editorial-quality-r4.js';
 import {careerReviewState} from './bazi-s04-customer-value.js';
@@ -29,6 +30,7 @@ export async function prepareBaZiS04T2({reading,locale,temporalSnapshot,successo
  const sectionContract=contract(locale);
  let brief=await buildReportSectionNarrativeBrief({contract:sectionContract,richClaimIr,locale,sourceAuthorityVersion:EXPLANATORY_AUTHORITY_VERSION,styleIntent:{tone:'WARM_PROFESSIONAL',depth:'PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false}});
  if(successor)brief=await extendCareerBrief(brief);
+ if(successor==='v3')brief=await extendCareerIdentityBrief(brief);
  return {richClaimIr,sectionContract,brief};
 }
 

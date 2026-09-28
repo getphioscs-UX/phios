@@ -30,7 +30,16 @@ assert.equal((await runBaZiS04PrivateReview({...base,env:{...env,OPENAI_API_KEY:
 assert.equal(store.reservations.size,0);
 assert.equal((await runBaZiS04PrivateReview({...base,body:{...body,action:'rnt2-s04-reverify'}})).body.code,'CSD_FROZEN_CANDIDATE_REQUIRED');
 assert.equal(store.reservations.size,0,'Review action cannot create a generation reservation');
-const pair=await Promise.all([runBaZiS04PrivateReview(base),runBaZiS04PrivateReview(base)]);
+// Hold the first composer open so the second request tests an in-flight
+// reservation, rather than legitimately reopening an already saved snapshot.
+let releaseComposer,composerStarted;
+const composerGate=new Promise(resolve=>{releaseComposer=resolve;});
+const composerEntered=new Promise(resolve=>{composerStarted=resolve;});
+const pending=runBaZiS04PrivateReview({...base,compose:async()=>{composerStarted();await composerGate;return compose();}});
+await composerEntered;
+const concurrent=await runBaZiS04PrivateReview(base);
+releaseComposer();
+const pair=[await pending,concurrent];
 assert.deepEqual(pair.map(x=>x.status).sort(),[200,409]);assert.equal(calls,1);
 const first=pair.find(x=>x.status===200);
 assert.equal(first.body.result.productionActivated,false);assert.equal(first.body.result.ownerAcceptance,'PENDING');
