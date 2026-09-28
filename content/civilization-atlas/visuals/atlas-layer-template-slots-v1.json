@@ -1,6 +1,6 @@
 {
   "schemaVersion": "PHI-OS-CIVILIZATION-ATLAS-LAYER-TEMPLATE-SLOTS-v1.0.0",
-  "status": "OWNER_AUTHORED_FR3",
+  "status": "FR5_I_TEMPLATE_DECOMPOSED",
   "successorOf": "B6-WEB-FR2",
   "authority": {
     "templatePixelsAreHistoricalAuthority": false,
@@ -50,20 +50,19 @@
         "rightCompass": true,
         "bottomCivilizationPanorama": true
       },
-      "dynamicOverlay": [
-        "headerTitle",
-        "timelineSpine",
-        "overviewMatrix",
-        "footerCaption"
-      ],
+      "dynamicOverlay": [],
       "rules": {
         "fixedPeriodColumns": false,
         "periodCountComesFromRegistry": true,
         "bilingualTextFromHtml": true,
         "noBakedDates": true,
-        "noBakedCaseNames": true
+        "noBakedCaseNames": true,
+        "templateAsAtmosphereOnly": true,
+        "structuredReaderOwnsPrimaryContent": true,
+        "templateOverlayDisabled": true,
+        "mobileSemanticReflow": true
       },
-      "presentationMode": "TEMPLATE_COMPOSITOR"
+      "presentationMode": "ATMOSPHERE_PLUS_STRUCTURED_READER"
     },
     "cases": {
       "presentationMode": "SYSTEM_COMPOSED_FROM_ASSETS",
@@ -177,7 +176,7 @@
       }
     },
     "trajectories": {
-      "presentationMode": "TEMPLATE_COMPOSITOR",
+      "presentationMode": "ATMOSPHERE_PLUS_STRUCTURED_READER",
       "sourceVisualFamilies": [
         "TRAJECTORY_MOTIF"
       ],
@@ -195,7 +194,10 @@
         "mobileSemanticReflow": true,
         "maxDesktopComparedTrajectories": 4,
         "defaultMobileTrajectoryCount": 1,
-        "templateContainsData": false
+        "templateContainsData": false,
+        "templateAsAtmosphereOnly": true,
+        "structuredReaderOwnsPrimaryContent": true,
+        "templateOverlayDisabled": true
       },
       "templateAssetRef": "VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp",
       "canonicalObjectKey": "images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp",
@@ -223,9 +225,7 @@
           "height": 0.12
         }
       },
-      "dynamicOverlay": [
-        "trajectoryGraph"
-      ]
+      "dynamicOverlay": []
     },
     "transitions": {
       "presentationMode": "SYSTEM_COMPOSED_FROM_ASSETS",
