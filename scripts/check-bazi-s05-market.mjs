@@ -26,3 +26,11 @@ assert.equal((await runBaZiS04PrivateReview({...input,userId:'other'})).status,4
 assert.equal((await runBaZiS04PrivateReview({...input,body:{...input.body,sectionKey:'S04_CAREER'}})).status,400);
 const first=await runBaZiS04PrivateReview(input);assert.equal(first.status,200);assert(first.body.objectKey.startsWith('qa/rnt2/market-v1/s05/'));assert.equal(first.body.result.productionActivated,false);assert.equal((await runBaZiS04PrivateReview(input)).body.cacheHit,true);assert.equal(composed,1);
 console.log('PASS: S04 acceptance bound to both final candidates; S05 wealth source/locale/digest/roles; missing authority blocks provider; financial prescription rejection; QA authorization, namespace separation, reservation and cached reopen. No live calls.');
+// A frozen editorial audit is a separate review, never another generation.
+const {auditFrozenCareerCandidate}=await import('../functions/personal-reading/narrative/bazi-s04-review-audit.js');
+const frozen=read('docs/acceptance/report-narrative-t2-r1/bazi/s05-market-v1/REVIEW-EVIDENCE.json');
+let reviewCalls=0;
+const auditInput={record:(frozen.originals||frozen.records).en,key:'qa/rnt2/market-v1/s05/editorial-test.json',env,registry,adapter:async request=>{reviewCalls++;assert.equal(request.taskType,'REPORT_SECTION_SEMANTIC_VERIFICATION');return {output:{sourceBriefDigest:request.payload.sourceBriefDigest,candidateDigest:request.payload.candidateDigest,meaningfullyUsedClaimRefs:[],reasons:['INJECTED_REJECTION'],editorialAssessments:[]}};}};
+const audited=await auditFrozenCareerCandidate(auditInput);assert.equal(audited.status,200);assert.equal(audited.body.result.result.status,'FALLBACK');assert.equal(audited.body.result.result.reviewAudit.generationCalls,0);assert.equal(audited.body.result.result.reviewAudit.version,'S05-MARKET-EDIT-v1.0.0');assert.equal(reviewCalls,1);
+assert.equal((await auditFrozenCareerCandidate(auditInput)).body.cacheHit,true);assert.equal(reviewCalls,1);
+console.log('PASS: S05 frozen edit uses one independent reviewer, preserves rejection and caches without regenerating. No live calls.');

@@ -1,3 +1,7 @@
+## Current S05 handoff
+
+S04 V4 and S05 final edited bilingual candidates are owner-accepted. S05 accepted reading: [review](bazi/s05-market-v1/review.html). Chinese 1,409 Han characters; English 669 words. Two writers plus four reviewers; no regeneration. QA only, no production activation. S02/S03 reconciled briefs now pass local preflight; see bazi/s02-s03-reconciliation/IMPLEMENTATION.md. Fresh generation and review remain pending scoped authorization and QA integration.
+
 > Current successor: S04 V4 final edited zh-Hans and en are OWNER_ACCEPTED. See bazi/s04-csd-v4/OWNER-ACCEPTANCE.json. Continue with S05 under the accepted market-style approach. The predecessor status below is historical.
 
 # REPORT-NARRATIVE-T2-R1 continuation — 2026-09-28

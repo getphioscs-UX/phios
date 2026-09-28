@@ -1,5 +1,6 @@
 import {naturalizeCareerLabels} from './bazi-s04-career-compression.js';
 import {editFrozenMarketCandidate,MARKET_EDIT_VERSION} from './bazi-s04-market-editorial.js';
+import {editFrozenWealthCandidate,WEALTH_EDIT_VERSION} from './bazi-s05-market-editorial.js';
 import {sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {createPublicationProviderAdapters,safeProviderFailure} from './narrative-provider.js';
 import {createReportSemanticReview,SEMANTIC_REVIEW_CHECKS} from './report-section-semantic-review.js';
@@ -12,19 +13,20 @@ import {createPaiUsageRecord,estimatePaiProviderCost} from '../../_lib/pai-r1-ec
 // This action can only verify an already frozen candidate; it has no composer.
 export async function auditFrozenCareerCandidate({record,key,env,registry,adapter=null}){
  const market=Boolean(record.result.brief?.marketContract);
- const auditVersion=market?MARKET_EDIT_VERSION:record.result.brief?.identityContract?'CSD-IDENTITY-REVIEW-v1.0.1':CSD_REVIEW_AUDIT_VERSION;
+ const wealth=record.result.brief?.marketDomain==='WEALTH';
+ const auditVersion=wealth?WEALTH_EDIT_VERSION:market?MARKET_EDIT_VERSION:record.result.brief?.identityContract?'CSD-IDENTITY-REVIEW-v1.0.1':CSD_REVIEW_AUDIT_VERSION;
  const auditKey=key.replace(/\.json$/,'.'+auditVersion+'.json');
  const saved=await env.PRIVATE_REPORTS.get(auditKey);
  if(saved){const value=await saved.json(),{artifactDigest,...seed}=value;if(await sha256Stable(seed)!==artifactDigest||value.sourceArtifactDigest!==record.artifactDigest)return {status:409,body:{ok:false,code:'CSD_AUDIT_INTEGRITY_FAILED'}};return {status:200,body:{ok:true,cacheHit:true,objectKey:auditKey,result:value}};}
  let r=record.result;const naturalization=r.candidate&&r.brief?.identityContract?await naturalizeCareerLabels(r.candidate,r.locale):null;if(naturalization)r={...r,candidate:naturalization.candidate};if(!r.candidate||!r.brief?.successorVersion)return {status:409,body:{ok:false,code:'CSD_FROZEN_CANDIDATE_REQUIRED'}};
- const editorial=market?await editFrozenMarketCandidate(r.candidate,r.locale):null;if(editorial)r={...r,candidate:editorial.candidate};
+ const editorial=wealth?await editFrozenWealthCandidate(r.candidate,r.locale):market?await editFrozenMarketCandidate(r.candidate,r.locale):null;if(editorial)r={...r,candidate:editorial.candidate};
  const candidateDigest=await sha256Stable(r.candidate);let prior=r.verification?.semanticReview,previousAuditDigest=null,previousAccepted=false;
  const previous=await env.PRIVATE_REPORTS.get(key.replace(/\.json$/,r.brief?.identityContract?'.CSD-IDENTITY-REVIEW-v1.0.0.json':'.CSD-REVIEW-v1.1.0.json'));
  if(previous){const previousRecord=await previous.json(),{artifactDigest,...seed}=previousRecord;if(await sha256Stable(seed)!==artifactDigest||previousRecord.sourceArtifactDigest!==record.artifactDigest||await sha256Stable(previousRecord.result.candidate)!==candidateDigest)return {status:409,body:{ok:false,code:'CSD_PRIOR_AUDIT_INTEGRITY_FAILED'}};prior=previousRecord.result.verification?.semanticReview;previousAuditDigest=artifactDigest;previousAccepted=previousRecord.result.verification?.accepted===true;}
  const reusable=!market&&(!r.brief?.identityContract||previousAccepted)&&prior?.candidateDigest===candidateDigest&&prior.sourceBriefDigest===r.brief.briefSemanticDigest&&SEMANTIC_REVIEW_CHECKS.every(k=>prior[k]===true)&&!prior.reasons?.length&&prior.meaningfullyUsedClaimRefs?.every(id=>r.brief.claims.some(c=>c.claimId===id));
  if(!reusable&&!adapter&&!env.OPENAI_API_KEY)return {status:503,body:{ok:false,code:'PROVIDER_CREDENTIAL_NOT_CONFIGURED'}};
  const id='rnt2-csd-review:'+await sha256Stable({source:record.artifactDigest,version:auditVersion}),now=new Date().toISOString();
- const reserved=await env.RUNTIME_DB.prepare('INSERT OR IGNORE INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,created_at,updated_at) VALUES(?,?,?,?,?,?,?)').bind(id,'QA-RNT2-S04-V1','RNT2_CSD_REVIEW_AUDIT','RUNNING',JSON.stringify({auditKey,sourceArtifactDigest:record.artifactDigest}),now,now).run();
+ const reserved=await env.RUNTIME_DB.prepare('INSERT OR IGNORE INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,created_at,updated_at) VALUES(?,?,?,?,?,?,?)').bind(id,wealth?'QA-RNT2-S05-V1':'QA-RNT2-S04-V1','RNT2_CSD_REVIEW_AUDIT','RUNNING',JSON.stringify({auditKey,sourceArtifactDigest:record.artifactDigest}),now,now).run();
  if(Number(reserved.meta?.changes??reserved.changes)!==1)return {status:409,body:{ok:false,code:'CSD_AUDIT_ALREADY_RESERVED'}};
  const invoke=adapter||createPublicationProviderAdapters({env}).OPENAI;
  const model=r.internalOnly.model,usageRecords=[];let reviewCalls=0;

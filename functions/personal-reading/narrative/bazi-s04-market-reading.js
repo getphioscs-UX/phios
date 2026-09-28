@@ -84,5 +84,5 @@ export function evaluateMarketReading({brief,candidate,verification}){
  if([...godNames].filter(x=>body.includes(x)).length<2)reasons.push('MARKET_TEN_GOD_VISIBILITY');
  const assessments=a(verification?.semanticReview?.editorialAssessments);
  for(const d of brief.marketContract.dimensions||MARKET_DIMENSIONS){const matches=assessments.filter(x=>x.dimension===d);if(matches.length!==1||matches[0].passed!==true||!matches[0].evidence||!body.includes(matches[0].evidence))reasons.push('MARKET_REVIEW:'+d);}
- return {version:MARKET_VERSION,accepted:!reasons.length,state:reasons.length?'EDITORIAL_AUTOMATED_FAIL':'EDITORIAL_AUTOMATED_PASS',hanCharacters,words,reasons};
+ return {version:brief.marketContract.version,accepted:!reasons.length,state:reasons.length?'EDITORIAL_AUTOMATED_FAIL':'EDITORIAL_AUTOMATED_PASS',hanCharacters,words,reasons};
 }

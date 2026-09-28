@@ -94,6 +94,7 @@ import {buildReportSectionGenerationIdentity,classifyProviderFailure,retryDecisi
 import {createReportSemanticReview} from './report-section-semantic-review.js';
 import {MARKET_PROMPT,MARKET_ROLES} from './bazi-s04-market-reading.js';
 import {WEALTH_PROMPT} from './bazi-s05-market-reading.js';
+import {reconciledMarketPrompt} from './bazi-s02-s03-reconciliation.js';
 
 export const REPORT_SECTION_T2_COMPOSER_VERSION='PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.3.0';
 export const REPORT_SECTION_T2_PROMPT_VERSION='PHI-OS-RNT2-T2-PROMPT-v2.2.0';
@@ -105,6 +106,7 @@ SECTION_OUTPUT_SCHEMA.properties.blocks.items.required.push('supportRefs');
 SECTION_OUTPUT_SCHEMA.properties.blocks.items.properties.supportRefs={type:'array',minItems:1,items:{type:'string'}};
 
 function sectionSystemPrompt(brief,{repairReasons=[]}={}){
+ if(brief.reconciliation)return reconciledMarketPrompt(brief);
  if(brief.marketContract)return brief.marketDomain==='WEALTH'?WEALTH_PROMPT:MARKET_PROMPT;
  const repair=repairReasons.length?[
   'A previous candidate was rejected by the semantic verifier.',
