@@ -13,7 +13,7 @@ on:
       - '.github/workflows/rnt2-bazi-s04.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: rnt2-bazi-s04
@@ -37,21 +37,6 @@ jobs:
         run: node scripts/check-rnt2-bazi-s04-authority.mjs
       - name: Build governed BaZi S04 T2 review
         run: node scripts/build-rnt2-bazi-s04-review.mjs
-      - name: Commit review evidence on latest main
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git reset --hard origin/main
-          node scripts/check-rnt2-bazi-s04-authority.mjs
-          node scripts/build-rnt2-bazi-s04-review.mjs
-          git add docs/acceptance/report-narrative-t2-r1/bazi
-          if git diff --cached --quiet; then
-            echo "No RNT2 S04 evidence changes"
-          else
-            git commit -m "rnt2: materialize BaZi S04 T2 review evidence"
-            git push origin HEAD:main
-          fi
       - uses: actions/upload-artifact@v4
         with:
           name: rnt2-bazi-s04
