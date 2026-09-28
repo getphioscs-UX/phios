@@ -22,6 +22,9 @@ assert.equal(new Set(cases.cases.map(c=>c.runtimeSummary['zh-Hans'])).size,120,'
 assert.equal(new Set(cases.cases.map(c=>c.runtimeSummary.en)).size,120,'English runtime summaries must remain case-specific.');
 assert.ok(schema.$defs.case.required.includes('runtimeSummary'),'Case schema must require runtimeSummary.');
 assert.ok(renderer.includes('loc(c.runtimeSummary,lang)||label(c.politicalArchitecture,lang)||label(c.economicRuntime,lang)'),'Case cards must prefer runtimeSummary over generic legacy semantic fields.');
+assert.ok(!renderer.includes("label(caseRecord.legacy,lang)"),'Case inspector must not foreground the generic legacy placeholder.');
+assert.ok(!renderer.includes("label(caseRecord.successorStructure,lang)"),'Case inspector must not foreground the generic successor placeholder.');
+assert.ok(renderer.includes('loc(caseRecord.runtimeSummary,lang)'),'Case inspector must use the case-specific runtime summary.');
 
 assert.ok(trajectories.includes("const focusedId=state.trajectoryIds?.[0]||null;"),'L6 must not implicitly select Population in empty state.');
 assert.ok(trajectories.includes('16 条长时段轨迹总览')&&trajectories.includes('Overview of 16 long-duration trajectories'),'L6 customer reader must expose an explicit overview state.');
