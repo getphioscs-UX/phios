@@ -29,10 +29,15 @@
       "result": "14/14 OWNER ACCEPTED"
     },
     "COMPOSITIONAL_SEMANTIC_ADMISSION": {
-      "status": "OPEN",
-      "result": "R8 preflight found governance admitted but executable Gate->tag evidence absent.",
-      "reason": "resolveEcrSemanticComposition requires operational tag evidence. W4 governance rules do not contain requiredFactorIds/outputTags mappings.",
-      "nextRequiredAction": "R7_W10B_OPERATIONAL_TAG_EVIDENCE_ADMISSION"
+      "status": "PENDING_MACHINE_VERIFICATION",
+      "result": "Governance + 64 Gate runtime tag evidence + validator/runtime wiring repaired; machine execution not yet run.",
+      "evidence": [
+        "content/embodied-configuration/v4-1/semantic-admission-r2/operational-tag-evidence-r7-v1.json",
+        "functions/embodied-configuration/ecr-semantic-composition-r2.js",
+        "functions/embodied-configuration/ecr-semantic-runtime-projection.js",
+        "scripts/check-ecr-v41-r8-runtime-alignment.mjs"
+      ],
+      "nextRequiredAction": "npm run check:ecr-v41:r8-runtime-alignment"
     },
     "CARD_SLOT_ELIGIBILITY": {
       "status": "CLOSED",
@@ -56,5 +61,5 @@
     "CARD_SLOT_ELIGIBILITY",
     "TOPIC_PERSONAL_SELECTION"
   ],
-  "nextRequiredAction": "R7_W10B_OPERATIONAL_TAG_EVIDENCE_ADMISSION"
+  "nextRequiredAction": "RUN_R8_MACHINE_ALIGNMENT_CHECK_THEN_BUILD_RENDERED_REVIEW"
 }
