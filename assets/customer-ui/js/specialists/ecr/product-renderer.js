@@ -11,7 +11,7 @@ import {renderVisualReportPages} from '../../personal-products/visual-report-pag
 
 const arr=value=>Array.isArray(value)?value:[];
 
-const ecrAssetUrl=key=>key?`https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/${String(key).replace(/^\\/+/, '')}`:'';
+const ecrAssetUrl=key=>key?`https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/${String(key).replace(/^\/+/, '')}`:'';
 const ecrLocal=(value,locale)=>value&&typeof value==='object'?(locale==='zh-Hans'?(value['zh-Hans']??value.en):(value.en??value['zh-Hans'])):(value??'');
 const renderV41PhiCards=(payload,locale)=>{
  const cards=arr(payload?.cards);
