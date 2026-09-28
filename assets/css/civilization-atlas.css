@@ -719,3 +719,42 @@
  .civ-template-trajectory-overview-grid ul{grid-template-columns:1fr 1fr}
  .civ-trajectories--overview .civ-trajectory-panel-grid{grid-template-columns:1fr}
 }
+
+
+/* CIV-ATLAS-FR5-G case dossier customer projection */
+.civ-case-dossier{display:grid;gap:1rem;margin-top:1.5rem;padding:clamp(1rem,2vw,1.5rem);border:1px solid rgba(213,179,108,.36);border-radius:22px;background:linear-gradient(180deg,#0a1f30,#081927);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.civ-case-dossier:focus{outline:3px solid rgba(213,179,108,.72);outline-offset:4px}
+.civ-case-dossier__header{display:grid;grid-template-columns:minmax(0,1fr) minmax(16rem,.42fr);gap:1rem;align-items:start}
+.civ-case-dossier__header h3{margin:.2rem 0 .35rem;font-size:clamp(1.7rem,2.6vw,2.4rem);color:#f1dfb0}
+.civ-case-dossier__meta{margin:.1rem 0 .6rem;color:var(--phi-text-secondary)}
+.civ-case-dossier__summary{max-width:62rem;margin:0;line-height:1.75;font-size:1.02rem}
+.civ-case-dossier__hero{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border:1px solid rgba(213,179,108,.25);border-radius:16px}
+.civ-case-dossier__actions{display:flex;justify-content:flex-end}
+.civ-case-dossier__sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.civ-case-dossier__section{border:1px solid rgba(213,179,108,.2);border-radius:14px;background:rgba(5,22,35,.68);overflow:hidden}
+.civ-case-dossier__section>summary{cursor:pointer;padding:.85rem 1rem;font-weight:700;color:#efd9a0}
+.civ-case-dossier__section[open]>summary{border-bottom:1px solid rgba(213,179,108,.16)}
+.civ-case-dossier__section dl{display:grid;gap:0;margin:0}
+.civ-case-dossier__field{display:grid;grid-template-columns:minmax(8rem,.32fr) minmax(0,1fr);gap:.75rem;padding:.85rem 1rem;border-bottom:1px solid rgba(213,179,108,.10)}
+.civ-case-dossier__field:last-child{border-bottom:0}
+.civ-case-dossier__field dt{font-weight:700;color:#f0dda8}
+.civ-case-dossier__field dd{margin:0;color:#c8d1d8;line-height:1.65}
+.civ-case-dossier__secondary{margin:0;padding-top:.3rem}
+.civ-case-dossier__secondary img{display:block;width:100%;max-height:28rem;object-fit:cover;border-radius:16px;border:1px solid rgba(213,179,108,.2)}
+.civ-case-dossier__secondary figcaption{padding:.55rem 0 0;color:var(--phi-text-secondary);font-size:.86rem}
+.civ-case-dossier__footer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.civ-case-dossier__footer>div{display:flex;justify-content:space-between;gap:.75rem;padding:.75rem .9rem;border:1px solid rgba(213,179,108,.16);border-radius:12px;background:#0a1f30}
+.civ-case-dossier__footer strong{color:#e9d8aa}
+.civ-case-dossier__footer span{font-variant-numeric:tabular-nums}
+.civ-case-dossier__evidence{margin-top:0}
+@media(max-width:900px){
+ .civ-case-dossier__header{grid-template-columns:1fr}
+ .civ-case-dossier__hero{max-height:24rem;object-fit:cover}
+ .civ-case-dossier__sections{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .civ-case-dossier{padding:.9rem;border-radius:16px}
+ .civ-case-dossier__field{grid-template-columns:1fr;gap:.3rem}
+ .civ-case-dossier__footer{grid-template-columns:1fr}
+ .civ-case-dossier__actions .knowledge-action{width:100%;justify-content:center}
+}
