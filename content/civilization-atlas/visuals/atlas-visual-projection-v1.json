@@ -74,14 +74,19 @@
     },
     {
       "layerId": "trajectories",
-      "mode": "SYSTEM_COMPOSED_FROM_ASSETS",
+      "mode": "TEMPLATE_BASE_PLUS_DYNAMIC_OVERLAY",
       "sourceRegistry": "content/civilization-atlas/trajectories/long-duration-trajectories-v1.json",
       "fallback": "REGISTRY_TRAJECTORY_READER",
-      "interactiveRegions": "HTML_SVG_TRAJECTORY_GRAPH_AND_CARDS",
+      "interactiveRegions": "REGISTERED_TEMPLATE_SLOTS_PLUS_DYNAMIC_SVG_GRAPH",
       "sourceVisualFamilies": [
         "TRAJECTORY_MOTIF"
       ],
-      "optionalOverviewAssetRef": "VIS-B5-ATLAS-L6-TRAJECTORIES.webp"
+      "poster": {
+        "assetRef": "VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp",
+        "objectKey": "images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp",
+        "publicUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp",
+        "availability": "PENDING_LIVE_R2_VERIFICATION"
+      }
     },
     {
       "layerId": "transitions",
@@ -114,6 +119,22 @@
     "verifiedAssets": [
       "VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp",
       "VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp"
-    ]
+    ],
+    "fr4": {
+      "status": "PARTIAL_PENDING_L6_R2",
+      "recordedAt": "2026-09-28",
+      "requiredAssets": [
+        "VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp",
+        "VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp",
+        "VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp"
+      ],
+      "verifiedAssets": [
+        "VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp",
+        "VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp"
+      ],
+      "pendingAssets": [
+        "VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp"
+      ]
+    }
   }
 }
