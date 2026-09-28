@@ -42,11 +42,19 @@ function timelineOverlay(data,state,locale,slotConfig){
   const spineHtml=spine?`<div class="civ-template-slot civ-template-slot--timeline-spine" data-template-slot="timelineSpine" style="${slotStyle(spine)}"><div class="civ-template-macro-grid">${macros.map((m,index)=>{
     const firstPeriod=periodMap.get(m.periodIds?.[0]);
     const vis=acceptedVisual(data.staticVisuals,'TIMELINE_ANCHOR',m.periodIds?.[0]);
-    const summary=(m.periodIds||[]).map(id=>loc(periodMap.get(id)?.title,locale)).filter(Boolean).join(' · ');
     const count=(m.periodIds||[]).reduce((n,id)=>n+(periodMap.get(id)?.caseIds?.length||0),0);
-    return `<button type="button" class="civ-template-macro ${m.macroEraId===active?.macroEraId?'is-active':''}" data-macro-era="${esc(m.macroEraId)}" data-first-period="${esc(m.periodIds?.[0]||'')}" aria-pressed="${m.macroEraId===active?.macroEraId?'true':'false'}">${vis?`<img src="${esc(vis.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span class="civ-template-macro__number">${String(index+1).padStart(2,'0')}</span><strong>${esc(loc(m.title,locale))}</strong><small>${esc(formatRange(m.startYear,m.endYear,locale))}</small><em>${esc(summary)}</em><b>${count} ${locale==='zh-Hans'?'案例':'cases'}</b></button>`;
+    return `<button type="button" class="civ-template-macro ${m.macroEraId===active?.macroEraId?'is-active':''}" data-macro-era="${esc(m.macroEraId)}" data-first-period="${esc(m.periodIds?.[0]||'')}" aria-pressed="${m.macroEraId===active?.macroEraId?'true':'false'}">${vis?`<img src="${esc(vis.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}<span class="civ-template-macro__number">${String(index+1).padStart(2,'0')}</span><strong>${esc(loc(m.title,locale))}</strong><small>${esc(formatRange(m.startYear,m.endYear,locale))}</small><b>${count} ${locale==='zh-Hans'?'案例':'cases'}</b></button>`;
   }).join('')}</div></div>`:'';
-  const matrixHtml=matrix?`<div class="civ-template-slot civ-template-slot--timeline-matrix" data-template-slot="overviewMatrix" style="${slotStyle(matrix)}"><div class="civ-template-matrix-row civ-template-matrix-row--head"><span>${locale==='zh-Hans'?'时期':'Era'}</span>${macros.map(m=>`<strong>${esc(loc(m.title,locale))}</strong>`).join('')}</div><div class="civ-template-matrix-row"><span>${locale==='zh-Hans'?'时间':'Range'}</span>${macros.map(m=>`<small>${esc(formatRange(m.startYear,m.endYear,locale))}</small>`).join('')}</div><div class="civ-template-matrix-row"><span>${locale==='zh-Hans'?'阶段':'Periods'}</span>${macros.map(m=>`<small>${esc((m.periodIds||[]).join(' + '))}</small>`).join('')}</div><div class="civ-template-matrix-row"><span>${locale==='zh-Hans'?'案例':'Cases'}</span>${macros.map(m=>{const n=(m.periodIds||[]).reduce((sum,id)=>sum+(periodMap.get(id)?.caseIds?.length||0),0);return `<small>${n}</small>`;}).join('')}</div></div>`:'';
+  const activePeriods=(active?.periodIds||[]).map(id=>periodMap.get(id)).filter(Boolean);
+  const activeCases=activePeriods.reduce((sum,p)=>sum+(p.caseIds?.length||0),0);
+  const matrixHtml=matrix?`<div class="civ-template-slot civ-template-slot--timeline-matrix civ-template-slot--timeline-summary" data-template-slot="overviewMatrix" style="${slotStyle(matrix)}">
+    <p class="knowledge-eyebrow">${esc(locale==='zh-Hans'?'当前时代':'Current era')}</p>
+    <h5>${esc(loc(active?.title,locale))}</h5>
+    <p>${esc(formatRange(active?.startYear,active?.endYear,locale))}</p>
+    <div class="civ-template-timeline-summary__meta"><span>${esc((active?.periodIds||[]).join(' + '))}</span><span>${activeCases} ${locale==='zh-Hans'?'案例':'cases'}</span></div>
+    <div class="civ-template-timeline-summary__periods">${activePeriods.map(p=>`<span>${esc(p.periodId)} · ${esc(loc(p.title,locale))}</span>`).join('')}</div>
+  </div>`:'';
+
   const footerHtml=footer?`<div class="civ-template-slot civ-template-slot--timeline-footer" data-template-slot="footerCaption" style="${slotStyle(footer)}"><strong>${esc(footerText)}</strong></div>`:'';
   return headerHtml+spineHtml+matrixHtml+footerHtml;
 }
