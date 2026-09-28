@@ -32,15 +32,17 @@ function graph(t,l){
 export function renderTrajectories(root,{registry,visualBindings,state,locale='en',onToggle=()=>{}}={}){
   const l=locale==='zh-Hans'?'zh-Hans':'en',c=COPY[l],items=registry?.trajectories||[];
   const focusedId=state.trajectoryIds?.[0]||null;
+  const displayItems=focusedId?items.filter(t=>t.trajectoryId===focusedId):items;
   const visual=id=>{const a=visualBindings?.assets?.find(x=>x.family==='TRAJECTORY_MOTIF'&&x.subjectId===id);return a?resolveAtlasVisualById(visualBindings,a.assetId):null;};
   root.innerHTML=`<div class="civ-trajectories civ-trajectories--system">
     <div class="civ-trajectories__intro">
       <p class="knowledge-eyebrow">${esc(focusedId?(l==='zh-Hans'?'当前长时段轨迹':'Current long-duration trajectory'):(l==='zh-Hans'?'16 条长时段轨迹总览':'Overview of 16 long-duration trajectories'))}</p>
       <h4>${esc(focusedId?(l==='zh-Hans'?'查看一条轨迹的视觉底层、动态曲线与证据说明。':'Read one trajectory through its visual foundation, dynamic curve, and evidence notes.'):(l==='zh-Hans'?'先同时看见人口、能源、知识、连接、制度与未来容量的长期变化。':'Start with the whole system: population, energy, knowledge, connectivity, institutions, and future capacity.'))}</h4>
       <p>${esc(l==='zh-Hans'?'每条曲线观察一种相对变化；16 条轨迹共同构成长时段总览，但不构成统一文明总分。':'Each curve tracks one kind of relative change. Together the 16 trajectories form the long-duration overview, not a unified civilization score.')}</p>
+      ${focusedId?`<button type="button" class="knowledge-action knowledge-action--quiet" data-trajectory-overview>${esc(l==='zh-Hans'?'返回 16 条轨迹总览':'Back to all 16 trajectories')}</button>`:''}
     </div>
-    <div class="civ-trajectory-panel-grid">
-      ${items.map(t=>{const v=visual(t.trajectoryId),active=t.trajectoryId===focusedId;return `<article class="civ-trajectory-panel${active?' is-active':''}" data-authority="${esc(t.authorityClass)}" data-trajectory-panel="${esc(t.trajectoryId)}">
+    <div class="civ-trajectory-panel-grid${focusedId?' is-detail':' is-overview'}">
+      ${displayItems.map(t=>{const v=visual(t.trajectoryId),active=t.trajectoryId===focusedId;return `<article class="civ-trajectory-panel${active?' is-active':''}" data-authority="${esc(t.authorityClass)}" data-trajectory-panel="${esc(t.trajectoryId)}">
         <button type="button" class="civ-trajectory-panel__focus" data-trajectory-focus="${esc(t.trajectoryId)}" aria-pressed="${active?'true':'false'}">
           <div class="civ-trajectory-panel__visual">${v?`<img src="${esc(v.publicUrl)}" alt="" loading="lazy" decoding="async">`:''}${graph(t,l)}</div>
           <div class="civ-trajectory-panel__copy"><p class="knowledge-eyebrow">${esc(authority(t.authorityClass,l))}</p><h5>${esc(loc(t.title,l))}</h5><p>${esc(loc(t.description,l))}</p></div>
@@ -50,6 +52,7 @@ export function renderTrajectories(root,{registry,visualBindings,state,locale='e
     </div>
   </div>`;
   root.querySelectorAll('[data-trajectory-focus]').forEach(button=>button.addEventListener('click',()=>onToggle([button.dataset.trajectoryFocus])));
+  root.querySelector('[data-trajectory-overview]')?.addEventListener('click',()=>onToggle([]));
   return items.filter(t=>t.trajectoryId===focusedId);
 }
 export function renderTrajectoryInspector(root,{trajectories=[],locale='en'}={}){
