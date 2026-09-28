@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "ECR-V4.1A-R9-DEPLOYED-PREVIEW-E2E-v1",
+  "updatedAt": "2026-09-28",
+  "previewBranch": "ecr-r9-preview-e2e",
+  "previewCutover": {
+    "scope": "QA_ONLY",
+    "environmentRequirement": "PHIOS_ENVIRONMENT=qa",
+    "explicitRequestFlag": "ecrV41PreviewAcceptance=true",
+    "productionRouteChanged": false,
+    "productionAdmissionChanged": false
+  },
+  "checks": [
+    "PREVIEW_PERSONAL_REALITY_ROUTE_200",
+    "PREVIEW_STATIC_ECR_ASSETS_200",
+    "EN_CUSTOMER_PERSONAL_REALITY_API",
+    "ZH_HANS_CUSTOMER_PERSONAL_REALITY_API",
+    "V4_1_HUMAN_RUNTIME_EDITION",
+    "14_SECTION_PAID_PREVIEW_REPORT",
+    "D11_PERSONALITY_AND_DESIGN_EARTH",
+    "NO_OPERATIONAL_CHIRON",
+    "64_SECTOR_28_MARKER_MANDALA",
+    "6_GOVERNED_PHI_CARD_SLOTS",
+    "R2_PHI_CARD_ASSET_HTTP",
+    "CURRENT_REALITY_UNBOUND",
+    "PREVIEW_ONLY_FIREWALL",
+    "CUSTOMER_PRODUCTION_REMAINS_FALSE"
+  ],
+  "checker": "npm run check:ecr-v41:r9-preview-e2e",
+  "status": "DEPLOYMENT_AND_E2E_PENDING",
+  "deployedPreviewEvidenceRef": null,
+  "customerProductionAdmitted": false
+}
