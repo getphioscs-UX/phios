@@ -111,14 +111,82 @@
       "maximumCalls": 8,
       "automaticRetries": 0
     },
-    "qaDeployment": "https://21c87197.phios-github.pages.dev",
-    "state": "LIVE_REQUESTS_SUBMITTED_AFTER_ROUTE_FIX",
+    "qaDeployment": "https://202289fc.phios-github.pages.dev",
+    "state": "S03_READY_S02_ZH_LOCAL_REVISION_PENDING_REVIEW",
     "productionActivated": false,
     "priorSubmission": {
       "state": "BLOCKED_BEFORE_PROVIDER",
       "code": "STAGED_QUALITY_GATE",
       "providerCalls": 0,
       "cause": "S02/S03 absent from the new route dispatch condition; fixed and exercised through bundled onRequest regression."
+    },
+    "initialProviderCalls": {
+      "writers": 4,
+      "independentReviews": 1,
+      "total": 5
+    },
+    "additionalAuthorization": {
+      "ownerAnswer": "1",
+      "additionalReviewCalls": 1,
+      "maximumTotalProviderCalls": 9,
+      "destination": "OpenAI API",
+      "data": "Four edited S02/S03 bilingual candidates and their original evidence",
+      "writerCalls": 0
+    },
+    "pendingAuditCalls": 0,
+    "completedProviderCalls": {
+      "writers": 4,
+      "independentReviews": 5,
+      "total": 9,
+      "regenerations": 0
+    },
+    "authorizedCallsRemaining": 0,
+    "finalQuality": {
+      "S02": {
+        "zh-Hans": {
+          "version": "PHI-OS-BAZI-S02-MARKET-v1.0.0",
+          "accepted": false,
+          "state": "EDITORIAL_AUTOMATED_FAIL",
+          "hanCharacters": 1436,
+          "words": 13,
+          "reasons": [
+            "MARKET_REVIEW:CUSTOMER_READABILITY",
+            "MARKET_REVIEW:REPORT_CONCISION"
+          ]
+        },
+        "en": {
+          "version": "PHI-OS-BAZI-S02-MARKET-v1.0.0",
+          "accepted": true,
+          "state": "EDITORIAL_AUTOMATED_PASS",
+          "hanCharacters": 137,
+          "words": 803,
+          "reasons": []
+        }
+      },
+      "S03": {
+        "zh-Hans": {
+          "version": "PHI-OS-BAZI-S03-MARKET-v1.0.0",
+          "accepted": true,
+          "state": "EDITORIAL_AUTOMATED_PASS",
+          "hanCharacters": 1660,
+          "words": 21,
+          "reasons": []
+        },
+        "en": {
+          "version": "PHI-OS-BAZI-S03-MARKET-v1.0.0",
+          "accepted": true,
+          "state": "EDITORIAL_AUTOMATED_PASS",
+          "hanCharacters": 54,
+          "words": 1001,
+          "reasons": []
+        }
+      }
+    },
+    "s02ChinesePendingDraft": {
+      "hanCharacters": 1316,
+      "candidateDigest": "7c6d2749288a90f0513ba565afadf762968d5df53ea5392c14fcce7e634b17ff",
+      "providerCalls": 0,
+      "requiresFreshReview": true
     }
   }
 }

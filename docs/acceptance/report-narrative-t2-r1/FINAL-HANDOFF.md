@@ -1,3 +1,9 @@
+## Current checkpoint: deployment repaired; S02/S03 review
+
+S04 and S05 remain owner-accepted. S03 bilingual review passed and awaits owner acceptance: [S03](bazi/s03-market-v1/review.html). S02 English passed; Chinese remains unaccepted after readability/concision rejection. A local 1,316-Han revision is ready for a fresh independent review: [draft](bazi/s02-market-v1/LOCAL-REVISION.md). Nine authorized calls completed (4 writers + 5 reviewers), no regeneration; further paid calls require authorization.
+
+Wrangler 3 JSON-import parser failure fixed using digest-checked JS receipts. New and old source builds passed, as did repeat builds with an existing root Worker. QA deployed at https://202289fc.phios-github.pages.dev. Production Git deployment has not been retried.
+
 ## Current S05 handoff
 
 S04 V4 and S05 final edited bilingual candidates are owner-accepted. S05 accepted reading: [review](bazi/s05-market-v1/review.html). Chinese 1,409 Han characters; English 669 words. Two writers plus four reviewers; no regeneration. QA only, no production activation. S02/S03 reconciled briefs now pass local preflight; see bazi/s02-s03-reconciliation/IMPLEMENTATION.md. Fresh generation and review remain pending scoped authorization and QA integration.
