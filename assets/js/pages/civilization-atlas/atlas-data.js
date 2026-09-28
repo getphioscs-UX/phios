@@ -6,7 +6,21 @@ async function getJson(path){
 }
 export async function loadTimelineRegistry(){return getJson('/content/civilization-atlas/timeline/timeline-periods-v1.json');}
 export async function loadTimelineMacroRegistry(){return getJson('/content/civilization-atlas/timeline/timeline-macro-eras-v1.json');}
-export async function loadCaseRegistry(){return getJson('/content/civilization-atlas/cases/civilization-case-registry-v1.json');}
+const CASE_DEPTH_SHARDS=[
+  '/content/civilization-atlas/cases/depth/fr5-f1-remaining-11-v1.json',
+  '/content/civilization-atlas/cases/depth/fr5-f2-remaining-11-v1.json',
+  '/content/civilization-atlas/cases/depth/fr5-f3-remaining-11-v1.json',
+  '/content/civilization-atlas/cases/depth/fr5-f4-remaining-11-v1.json',
+  '/content/civilization-atlas/cases/depth/fr5-f5-remaining-11-v1.json'
+];
+export async function loadCaseRegistry(){
+  const [base,...depth]=await Promise.all([
+    getJson('/content/civilization-atlas/cases/civilization-case-registry-v1.json'),
+    ...CASE_DEPTH_SHARDS.map(getJson)
+  ]);
+  const overlay=new Map(depth.flatMap(x=>x.records||[]).map(x=>[x.caseId,x]));
+  return {...base,cases:(base.cases||[]).map(c=>{const d=overlay.get(c.caseId);if(!d)return c;const {caseId,...fields}=d;return {...c,...fields};})};
+}
 export async function loadComparisonRegistry(){return getJson('/content/civilization-atlas/comparison/comparison-families-v1.json');}
 export async function loadWorldSnapshotRegistry(){return getJson('/content/civilization-atlas/snapshots/world-snapshots-v1.json');}
 export async function loadTrajectoryRegistry(){return getJson('/content/civilization-atlas/trajectories/long-duration-trajectories-v1.json');}
