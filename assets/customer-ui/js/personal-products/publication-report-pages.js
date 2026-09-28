@@ -1,6 +1,7 @@
 import {esc} from '../surfaces/runtime-ui.js';
 import {renderBaziStructuralBatch} from './bazi-structural-visual-pages.js';
 import {globalReportPagination,METHOD_VISUAL_SKINS,assertPublicationCandidate} from '../../../../functions/canonical-presentation-runtime/report-publication-contract.js';
+import {renderReportCoverOverlay} from '../../../../functions/canonical-presentation-runtime/report-cover-overlay.js';
 
 export function renderGlobalReportPagination(sequence,total){const text=globalReportPagination(sequence,total);return text?`<span data-pagination-owner="GlobalReportPagination" aria-label="${esc(text)}">${text}</span>`:'';}
 export function fitPublicationForPrint(root){
@@ -29,7 +30,7 @@ function motif(kind){
 }
 export function renderPublicationReport(snapshot){
  assertPublicationCandidate(snapshot);const {locale,totalPages,methodId}=snapshot,skin=METHOD_VISUAL_SKINS[methodId],t=(en,zh)=>locale==='en'?en:zh;
- const intro=snapshot.intro.map(p=>p.kind==='STATIC'?`<section class="pub-static" data-page-number="${p.pageNumber}" data-pagination-exception="APPROVED_BAKED_ASSET"><img src="${esc(p.src)}" alt="${esc(p.alt)}"></section>`:p.html).join('');
+ const intro=snapshot.intro.map(p=>p.kind==='STATIC'?`<section class="pub-static" data-page-number="${p.pageNumber}" data-pagination-exception="APPROVED_BAKED_ASSET"><img src="${esc(p.src)}" alt="${esc(p.alt)}"></section>`:p.kind==='STATIC_COVER'?`<section class="pub-static pub-cover" data-page-number="${p.pageNumber}" data-pagination-exception="APPROVED_BAKED_ASSET"><img src="${esc(p.src)}" alt="${esc(p.alt)}">${renderReportCoverOverlay({methodId:snapshot.methodId,subject:p.subject})}</section>`:p.html).join('');
  const pages=snapshot.pages.map(p=>{
   if(p.pageFamily)return renderSectionFamily(p,{locale,totalPages,skin,t});
   const facts=p.facts.filter(f=>f.value!==undefined);
