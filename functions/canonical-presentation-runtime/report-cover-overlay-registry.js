@@ -24,13 +24,13 @@ export const REPORT_COVER_OVERLAY_REGISTRY=Object.freeze({
   {left:36.0,top:82.0,width:27.0,height:4.7,align:'center'},
   {left:66.0,top:82.0,width:27.0,height:4.7,align:'center'})),
  ECR:base('ECR','RPT-ECR-P01-COVER-v1',slots(
-  {left:14.0,top:81.0,width:26.0,height:3.8,align:'center'},
-  {left:42.0,top:81.0,width:22.0,height:3.8,align:'center'},
-  {left:66.0,top:81.0,width:22.0,height:3.8,align:'center'})),
+  {left:21.5,top:80.9,width:18.5,height:3.2,align:'center',mask:true},
+  {left:45.0,top:80.9,width:18.5,height:3.2,align:'center',mask:true},
+  {left:69.0,top:80.9,width:17.5,height:3.2,align:'center',mask:true})),
  HD:base('HD','RPT-HD-P01-COVER-v1',slots(
-  {left:10.0,top:79.6,width:27.0,height:3.8,align:'center'},
-  {left:39.0,top:79.6,width:27.0,height:3.8,align:'center'},
-  {left:69.0,top:79.6,width:23.0,height:3.8,align:'center'})),
+  {left:11.0,top:79.7,width:25.0,height:2.9,align:'center',mask:true},
+  {left:40.0,top:79.7,width:25.0,height:2.9,align:'center',mask:true},
+  {left:70.0,top:79.7,width:21.0,height:2.9,align:'center',mask:true})),
  CROSS:base('CROSS','RPT-CROSS-P01-COVER-v1',slots(
   {left:5.0,top:88.7,width:28.0,height:3.4,align:'center'},
   {left:36.0,top:88.7,width:28.0,height:3.4,align:'center'},
