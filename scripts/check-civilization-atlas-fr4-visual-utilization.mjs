@@ -54,24 +54,18 @@ for(const token of [
 }
 
 const l6=slots.layers.trajectories;
-assert.equal(l6.presentationMode,'TEMPLATE_COMPOSITOR');
-assert.equal(l6.templateAssetRef,'VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp');
-assert.equal(l6.canonicalObjectKey,'images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp');
+assert.equal(l6.presentationMode,'STRUCTURED_READER_ONLY');
+assert.equal(l6.rules.customerRuntimeLoadsTemplate,false);
 assert.equal(l6.rules.graphDynamicSvg,true);
-assert.equal(l6.rules.templateContainsData,false);
-assert.equal(l6.rules.mobileSemanticReflow,true);
-assert.equal(l6.rules.maxDesktopComparedTrajectories,4);
-assert.equal(l6.rules.defaultMobileTrajectoryCount,1);
+assert.deepEqual(l6.sourceVisualFamilies,['TRAJECTORY_MOTIF']);
 
 const p6=projection.layers.find(x=>x.layerId==='trajectories');
-assert.equal(p6.mode,'TEMPLATE_BASE_PLUS_DYNAMIC_OVERLAY');
-assert.equal(p6.poster.assetRef,'VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp');
-assert.equal(p6.fallback,'REGISTRY_TRAJECTORY_READER');
-assert.equal(p6.poster.availability,'VERIFIED_LIVE_R2','L6 template must be verified live on R2 before FR4 final human review.');
+assert.equal(p6.mode,'STRUCTURED_READER_ONLY');
+assert.ok(!p6.poster,'L6 template poster must not be active in customer runtime.');
+assert.equal(p6.archivedPoster?.customerRuntime,false,'Archived L6 template may remain only as non-runtime history.');
 
-assert.ok(compositor.includes('state.trajectoryIds?.length?state.trajectoryIds.slice(0,4):all.slice(0,1)'),'L6 compositor must default to one trajectory and cap comparisons at four.');
 assert.ok(!trajectories.includes('trajectory registry'),'Raw trajectory registry language must not appear in customer copy.');
 assert.ok(trajectories.includes('观测资料')&&trajectories.includes('Observed evidence'),'Evidence class labels must be human-readable.');
 assert.ok(shell.includes('浏览其他长时段轨迹')&&shell.includes('Explore other long trends'),'L6 reader navigation must be customer-facing.');
 
-console.log('CIV-ATLAS-FR4 visual utilization PASS: 392/392 assets have semantic presentation paths, generic gallery UI is removed, and L6 template composition is admitted pending live R2 verification.');
+console.log('CIV-ATLAS-FR4 visual utilization PASS: 392/392 assets have semantic presentation paths, generic gallery UI is removed, and L6 now uses the structured reader without a customer template poster.');
