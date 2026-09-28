@@ -3,6 +3,7 @@ import {canonicalBirthUtcIso} from './ecr-calculation-runtime.js';
 import {createEcrSharedInitializationCapability} from './ecr-shared-initialization-capability.js';
 import {resolveEcrP64} from './ecr-p64-mechanical-adapter.js';
 import {sha256Stable,deepFreeze} from '../interpretation-runtime/mir7-utils.js';
+const normalize360=value=>((Number(value)%360)+360)%360;
 export async function initializeEcrAstronomy(canonicalInput,options={}){
  const validation=validateCanonicalBirthInput(canonicalInput);
  if(!validation.valid)throw Error(`ECR_CANONICAL_INPUT_INVALID:${validation.reasonCodes.join(',')}`);
@@ -12,7 +13,15 @@ export async function initializeEcrAstronomy(canonicalInput,options={}){
  const moment=await capability.priorDesign(birthRaw),designRaw=await capability.astronomy.calculateLongitudesAt(moment.instantUTC);
  const snapshot=async(raw,layer)=>{
   const bodyActivations=Object.entries(raw.longitudes).map(([bodyCode,longitude])=>({layer,bodyCode,instantUTC:raw.utcIso,eclipticLongitude:longitude,p64:resolveEcrP64(longitude),status:'CALCULATED',provenance:'CALCULATED',astronomyRef:capability.astronomy.adapterCode,designMomentRef:layer==='DESIGN'?moment.outputDigest:null,nodeConvention:bodyCode.includes('NODE')?raw.nodeConvention:null,lineage:{engineCode:raw.engineCode,engineVersion:raw.engineVersion,referenceFrame:raw.referenceFrame}}));
-  bodyActivations.push({layer,bodyCode:'CHIRON',instantUTC:raw.utcIso,status:'UNKNOWN',provenance:'UNKNOWN',p64:null,unknownReason:'SHARED_ASTRONOMY_CAPABILITY_NOT_AVAILABLE',lineage:{authority:'SHARED_AST_CAPABILITY_AUDIT'}});
+  if(!bodyActivations.some(a=>a.bodyCode==='EARTH')){
+   const sun=bodyActivations.find(a=>a.bodyCode==='SUN'&&a.status==='CALCULATED');
+   if(sun){
+    const longitude=normalize360(sun.eclipticLongitude+180);
+    bodyActivations.push({layer,bodyCode:'EARTH',instantUTC:raw.utcIso,eclipticLongitude:longitude,p64:resolveEcrP64(longitude),status:'CALCULATED',provenance:'DERIVED',astronomyRef:capability.astronomy.adapterCode,designMomentRef:layer==='DESIGN'?moment.outputDigest:null,nodeConvention:null,lineage:{authority:'ECR_D11_EARTH_OPPOSITION_FROM_SUN',sourceBody:'SUN',sourceLongitude:sun.eclipticLongitude,calculationRule:'normalize360(SUN_LONGITUDE + 180)',engineCode:raw.engineCode,engineVersion:raw.engineVersion,referenceFrame:raw.referenceFrame}});
+   }else{
+    bodyActivations.push({layer,bodyCode:'EARTH',instantUTC:raw.utcIso,status:'UNKNOWN',provenance:'UNKNOWN',p64:null,unknownReason:'SUN_LONGITUDE_UNAVAILABLE',lineage:{authority:'ECR_D11_EARTH_OPPOSITION_FROM_SUN'}});
+   }
+  }
   const result={snapshotType:layer,instantUTC:raw.utcIso,astronomyAuthorityRef:capability.astronomy.adapterCode,ephemerisVersion:raw.engineVersion,bodyActivations};return {...result,calculationDigest:await sha256Stable(result)};
  };
  const birth=await snapshot(birthRaw,'PERSONALITY'),design=await snapshot(designRaw,'DESIGN');

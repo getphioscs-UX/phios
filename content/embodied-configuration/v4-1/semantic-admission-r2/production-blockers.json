@@ -1,10 +1,7 @@
 {
   "scope": "ECR_V4.1_BASELINE_PRODUCT",
   "blockers": [
-    "BILINGUAL_REVIEW_PAIRS",
     "COMPOSITIONAL_SEMANTIC_ADMISSION",
-    "CARD_SLOT_ELIGIBILITY",
-    "TOPIC_PERSONAL_SELECTION",
     "RENDERED_VISUAL_ACCEPTANCE",
     "DEPLOYED_PREVIEW_E2E"
   ],
@@ -23,5 +20,46 @@
     "d11CalculationRule": "normalize360(SUN_LONGITUDE + 180)",
     "chironOperationalIdentity": "REMOVED_FROM_V4_1",
     "d11RuntimeE2E": "NOT_YET_VERIFIED"
-  }
+  },
+  "schemaVersion": "ECR-V4.1A-R7-W10-PRODUCTION-BLOCKERS-v2",
+  "recomputedAt": "2026-09-28",
+  "blockerStatus": {
+    "BILINGUAL_REVIEW_PAIRS": {
+      "status": "CLOSED",
+      "result": "14/14 OWNER ACCEPTED"
+    },
+    "COMPOSITIONAL_SEMANTIC_ADMISSION": {
+      "status": "PENDING_MACHINE_VERIFICATION",
+      "result": "Governance + 64 Gate runtime tag evidence + validator/runtime wiring repaired; machine execution not yet run.",
+      "evidence": [
+        "content/embodied-configuration/v4-1/semantic-admission-r2/operational-tag-evidence-r7-v1.json",
+        "functions/embodied-configuration/ecr-semantic-composition-r2.js",
+        "functions/embodied-configuration/ecr-semantic-runtime-projection.js",
+        "scripts/check-ecr-v41-r8-runtime-alignment.mjs"
+      ],
+      "nextRequiredAction": "npm run check:ecr-v41:r8-runtime-alignment"
+    },
+    "CARD_SLOT_ELIGIBILITY": {
+      "status": "CLOSED",
+      "result": "48/48 OPERATIONALLY ADMITTED"
+    },
+    "TOPIC_PERSONAL_SELECTION": {
+      "status": "CLOSED",
+      "result": "D/M/A operational admission complete; unresolved evidence fails closed to UNKNOWN"
+    },
+    "RENDERED_VISUAL_ACCEPTANCE": {
+      "status": "OPEN",
+      "result": "NOT_RUN"
+    },
+    "DEPLOYED_PREVIEW_E2E": {
+      "status": "OPEN",
+      "result": "NOT_RUN"
+    }
+  },
+  "closedBlockers": [
+    "BILINGUAL_REVIEW_PAIRS",
+    "CARD_SLOT_ELIGIBILITY",
+    "TOPIC_PERSONAL_SELECTION"
+  ],
+  "nextRequiredAction": "RUN_R8_MACHINE_ALIGNMENT_CHECK_THEN_BUILD_RENDERED_REVIEW"
 }

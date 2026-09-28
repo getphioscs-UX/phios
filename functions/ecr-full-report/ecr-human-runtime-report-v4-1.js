@@ -1,5 +1,6 @@
 import {ECR_V41_AUTHORITIES} from '../embodied-configuration/ecr-v41-authorities.generated.js';
 const admission=ECR_V41_AUTHORITIES['content/embodied-configuration/v4-1/admission/customer-admission-v1.json'];
+const bilingualAdmission=ECR_V41_AUTHORITIES['content/embodied-configuration/v4-1/admission/ecr-bilingual-review-owner-decisions-r4.json'];
 const sections=[['OVERVIEW','PHI Configuration Overview','PHI 构型概览'],['ORIENTATION','Question / Capability Orientation','问题与能力方向'],['INITIALIZATION','Birth / Design Configuration','出生与 Design 构型'],['DRIVER_FIELD','Planetary Driver Field','行星驱动场'],['CARRIER_ARCHITECTURE','Carrier Architecture','载体架构'],['C1','Carrier Runtime Style','载体运行方式'],['C2','Experience Integration','体验整合'],['C3','Expression Style','表达方式'],['C4','Agency Style','行动方式'],['C5','Identity Style','身份方式'],['CONTINUITY','Continuity & Recovery','持续与恢复'],['CURRENT_REALITY','Current Reality Comparison','当前现实对照'],['NAVIGATION','Navigation','现实导航'],['EVIDENCE','Evidence / Boundaries / Unknowns','证据、边界与未知']];
 const copy={
  ORIENTATION:{
@@ -44,21 +45,22 @@ export function buildEcrHumanRuntimeReport({ir,locale='en',sharedEntitlement=nul
  if(!reviewMode&&!admission.customerProductionAdmitted)throw Error('ECR_V41_HUMAN_REVIEW_REQUIRED');
  const paid=sharedEntitlement?.schemaVersion==='PHI-OS-KAP-W45-METHOD-JOURNEY-ENTITLEMENT-v1.0.0'&&sharedEntitlement.methodCode==='ECR'&&sharedEntitlement.access?.methodAllowed===true&&sharedEntitlement.access?.readingDepthAllowed===true;
  const zh=locale==='zh-Hans',pick=entry=>zh?entry.zh:entry.en;
+ const admittedCopy=sectionId=>{const pair=bilingualAdmission?.pairs?.find(p=>p.sectionId===sectionId&&p.ownerDecision==='ACCEPT');const accepted=pair?.acceptedCopy;return accepted?(zh?accepted['zh-Hans']:accepted.en):null;};
  const content={
   OVERVIEW:{text:zh?'这是基线构型参照，不能证明你现在的体验或处境。':'This is a baseline configuration reference; it does not establish your present experience or circumstances.'},
-  ORIENTATION:{text:pick(copy.ORIENTATION)},
+  ORIENTATION:{text:admittedCopy('ORIENTATION')||pick(copy.ORIENTATION)},
   INITIALIZATION:{activations:ir.initialization.activations.map(a=>({layer:a.layer,body:a.bodyCode,longitude:a.eclipticLongitude??null,gate:a.p64?.gate??null,line:a.p64?.line??null,activationStage:a.p64?.activationStage??null,status:a.status}))},
   DRIVER_FIELD:{drivers:ir.driverField.drivers.map(d=>({driverId:d.driverId,bodies:d.bodyBinding,status:d.status})),text:zh?'基线驱动场不等于当前驱动优先级。':'The baseline driver field is not a current priority ranking.'},
-  CARRIER_ARCHITECTURE:{text:pick(copy.CARRIER_ARCHITECTURE),scope:ir.carrier.architecture.personalScaleEnvelope},
-  C1:{text:pick(copy.C1),fields:ir.carrier.c1.outputSignature},
-  C2:{text:pick(copy.C2),fields:ir.consciousRuntime.c2.outputSignature},
-  C3:{text:pick(copy.C3),fields:ir.consciousRuntime.c3.outputSignature},
-  C4:{text:pick(copy.C4),fields:ir.consciousRuntime.c4.outputSignature},
-  C5:{text:pick(copy.C5),fields:ir.consciousRuntime.c5.outputSignature},
+  CARRIER_ARCHITECTURE:{text:admittedCopy('CARRIER_ARCHITECTURE')||pick(copy.CARRIER_ARCHITECTURE),scope:ir.carrier.architecture.personalScaleEnvelope},
+  C1:{text:admittedCopy('C1')||pick(copy.C1),fields:ir.carrier.c1.outputSignature},
+  C2:{text:admittedCopy('C2')||pick(copy.C2),fields:ir.consciousRuntime.c2.outputSignature},
+  C3:{text:admittedCopy('C3')||pick(copy.C3),fields:ir.consciousRuntime.c3.outputSignature},
+  C4:{text:admittedCopy('C4')||pick(copy.C4),fields:ir.consciousRuntime.c4.outputSignature},
+  C5:{text:admittedCopy('C5')||pick(copy.C5),fields:ir.consciousRuntime.c5.outputSignature},
   CONTINUITY:{text:zh?'持续架构描述可比较的状态，不预测人生阶段。':'The continuity architecture describes states for comparison, not a predicted life sequence.',currentState:ir.carrier.continuityBaseline.continuityState.currentState},
-  CURRENT_REALITY:{status:ir.currentReality.status,observations:ir.currentReality.observations,text:pick(copy.CURRENT_REALITY)},
+  CURRENT_REALITY:{status:ir.currentReality.status,observations:ir.currentReality.observations,text:admittedCopy('CURRENT_REALITY')||pick(copy.CURRENT_REALITY)},
   NAVIGATION:{text:zh?'可自愿记录现实观察，再与基线对照；出生构型本身不提供当前行动结论。':'You may record observations and compare them with the baseline; birth configuration alone supplies no current action conclusion.'},
-  EVIDENCE:{unknown:ir.unknown,text:pick(copy.EVIDENCE)}
+  EVIDENCE:{unknown:ir.unknown,text:admittedCopy('EVIDENCE')||pick(copy.EVIDENCE)}
  };
  const visible=paid?sections:sections.filter(s=>['OVERVIEW','INITIALIZATION','EVIDENCE'].includes(s[0]));
  return {schemaVersion:'PHI-OS-ECR-HUMAN-RUNTIME-REPORT-v4.1',edition:'ECR_HUMAN_RUNTIME_V4_1',locale,depth:paid?'PAID':'FREE',publicationState:admission.customerProductionAdmitted?'CUSTOMER_PUBLISHABLE':'HUMAN_REVIEW_REQUIRED',sourceProjectionId:ir.configurationId,sections:visible.map(([sectionId,en,cn])=>({sectionId,title:zh?cn:en,scope:sectionId==='CURRENT_REALITY'?'CURRENT':'BASELINE',content:content[sectionId],sourceRefs:[ir.configurationId]})),boundaries:{rendererCalculates:false,rendererCreatesMeaning:false,reviewModeDoesNotGrantPaidAccess:true,customerProductionAdmitted:admission.customerProductionAdmitted},lineage:ir.lineage};

@@ -2,10 +2,7 @@
   "schemaVersion": "ECR-V4.1-PRODUCT-SCOPE-R2",
   "status": "OWNER_SCOPE_FROZEN",
   "requiredHumanGates": [
-    "BILINGUAL_REVIEW_PAIRS",
     "COMPOSITIONAL_SEMANTIC_ADMISSION",
-    "CARD_SLOT_ELIGIBILITY",
-    "TOPIC_PERSONAL_SELECTION",
     "RENDERED_VISUAL_ACCEPTANCE"
   ],
   "requiredDeploymentGates": [
@@ -27,5 +24,12 @@
     "role": "EMBODIMENT",
     "semanticDecision": "ACCEPTED",
     "runtimeE2E": "NOT_YET_VERIFIED"
-  }
+  },
+  "closedR7Gates": [
+    "BILINGUAL_REVIEW_PAIRS",
+    "COMPOSITIONAL_SEMANTIC_ADMISSION",
+    "CARD_SLOT_ELIGIBILITY",
+    "TOPIC_PERSONAL_SELECTION"
+  ],
+  "r8RuntimeAlignment": "STATIC_REPAIR_COMPLETE_MACHINE_CHECK_NOT_RUN"
 }

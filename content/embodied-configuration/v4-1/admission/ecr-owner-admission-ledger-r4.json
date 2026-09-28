@@ -1,36 +1,38 @@
 {
-  "schemaVersion": "ECR-V4.1A-OWNER-ADMISSION-R4-LEDGER-v1",
+  "schemaVersion": "ECR-V4.1A-OWNER-ADMISSION-R7-LEDGER-v1",
   "baselineCommit": "228594a13148c8e0bca655be5813392388a6cb29",
-  "ownerDecisionEvidenceRef": "OWNER_CHAT_R4_2026-09-24",
-  "reviewedAt": "2026-09-24",
+  "ownerDecisionEvidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W6_15_ITEMS",
+  "reviewedAt": "2026-09-28",
   "bilingual": {
-    "accepted": 5,
-    "revised": 9,
+    "accepted": 14,
+    "revised": 0,
     "registry": "content/embodied-configuration/v4-1/admission/ecr-bilingual-review-owner-decisions-r4.json"
   },
   "phiCards": {
-    "accepted": 43,
-    "revised": 5,
+    "accepted": 48,
+    "revised": 0,
     "registry": "content/embodied-configuration/v4-1/admission/ecr-phi-card-runtime-slot-owner-decisions-r4.json"
   },
   "topicSelectors": {
-    "accepted": 2,
-    "revised": 1,
+    "accepted": 3,
+    "revised": 0,
     "registry": "content/embodied-configuration/v4-1/admission/ecr-topic-personal-selection-owner-decisions-r4.json"
   },
   "stillBlocked": [
-    "9_REVISED_BILINGUAL_PAIRS_REQUIRE_NEW_OWNER_ACCEPTANCE",
-    "COMPOSITIONAL_SEMANTIC_ADMISSION",
-    "5_REVISED_CARD_MAPPINGS_REQUIRE_NEW_OWNER_ACCEPTANCE",
-    "CARD_REQUIRED_SEMANTIC_TAGS_AND_PRIORITIES",
-    "D_SELECTOR_REVISED_RULE_REQUIRES_NEW_OWNER_ACCEPTANCE",
+    "R7_W8_OPERATIONAL_PHI_CARD_ADMISSION",
+    "R7_W9_D_M_A_OPERATIONAL_ADMISSION_RECONCILIATION",
     "RENDERED_VISUAL_ACCEPTANCE",
     "DEPLOYED_PREVIEW_E2E"
   ],
   "nonBlockers": [
-    "CHIRON_PROVIDER",
-    "CHIRON_R1_INTERPRETATION",
     "ECR_V4_2_DYNAMIC_INFERENCE"
   ],
-  "customerProductionAdmitted": false
+  "customerProductionAdmitted": false,
+  "semanticAdmission": {
+    "drivers": "12/12 ACCEPTED",
+    "layers": "2/2 ACCEPTED",
+    "tags": "14/14 ACCEPTED",
+    "compositionRules": "12/12 ACCEPTED",
+    "runtimeOwnerRules": "12/12 ACCEPTED"
+  }
 }
