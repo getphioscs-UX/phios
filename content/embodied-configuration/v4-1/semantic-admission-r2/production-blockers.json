@@ -1,7 +1,6 @@
 {
   "scope": "ECR_V4.1_BASELINE_PRODUCT",
   "blockers": [
-    "COMPOSITIONAL_SEMANTIC_ADMISSION",
     "RENDERED_VISUAL_ACCEPTANCE",
     "DEPLOYED_PREVIEW_E2E"
   ],
@@ -21,47 +20,32 @@
     "chironOperationalIdentity": "REMOVED_FROM_V4_1",
     "d11RuntimeE2E": "NOT_YET_VERIFIED"
   },
-  "schemaVersion": "ECR-V4.1A-R7-W10-PRODUCTION-BLOCKERS-v1",
+  "schemaVersion": "ECR-V4.1A-R7-W10-PRODUCTION-BLOCKERS-v2",
   "recomputedAt": "2026-09-28",
   "blockerStatus": {
     "BILINGUAL_REVIEW_PAIRS": {
       "status": "CLOSED",
-      "evidence": [
-        "content/embodied-configuration/v4-1/admission/ecr-bilingual-review-owner-decisions-r4.json",
-        "content/embodied-configuration/v4-1/review/ecr-r7-w6-human-review-pack-v1.json"
-      ],
       "result": "14/14 OWNER ACCEPTED"
     },
     "COMPOSITIONAL_SEMANTIC_ADMISSION": {
-      "status": "OPEN",
-      "reason": "Gate Base and Line Modifier source canons are canonicalized but still explicitly NOT_RUNTIME_ADMITTED; composition-policy factor rows remain PENDING.",
+      "status": "CLOSED",
+      "result": "64 Gate Base + 6 Line Modifier + 12 Driver + 2 Layer + 14 Tags + accepted composition/owner rules admitted",
       "evidence": [
-        "content/embodied-configuration/v4-1/semantic-source-r6/gate-base-source-canon-v1.json",
-        "content/embodied-configuration/v4-1/semantic-source-r6/line-modifier-source-canon-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/composition-policy.json"
-      ],
-      "unresolved": {
-        "gateBasePending": 64,
-        "lineModifierPending": 6,
-        "gateSourceStatus": "64_OF_64_SOURCE_CANONICALIZED_NOT_RUNTIME_ADMITTED",
-        "lineSourceStatus": "6_OF_6_SOURCE_CANONICALIZED_NOT_RUNTIME_ADMITTED"
-      }
+        "content/embodied-configuration/v4-1/semantic-admission-r2/gate-line-runtime-admission-candidates-r7-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/personality-design-layer-canon-r7-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/semantic-tag-canon-r7-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/compositional-tag-rules-r7-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/runtime-owner-rules-r7-v1.json"
+      ]
     },
     "CARD_SLOT_ELIGIBILITY": {
       "status": "CLOSED",
-      "evidence": [
-        "content/embodied-configuration/v4-1/admission/ecr-r7-w8-operational-phi-card-admission-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/card-eligibility.json"
-      ],
       "result": "48/48 OPERATIONALLY ADMITTED"
     },
     "TOPIC_PERSONAL_SELECTION": {
       "status": "CLOSED",
-      "evidence": [
-        "content/embodied-configuration/v4-1/admission/ecr-r7-w9-dma-operational-admission-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/topic-personal-selection-proof.json"
-      ],
-      "result": "D/M/A operational rules admitted; unresolved case evidence fails closed to UNKNOWN"
+      "result": "D/M/A operational admission complete; unresolved evidence fails closed to UNKNOWN"
     },
     "RENDERED_VISUAL_ACCEPTANCE": {
       "status": "OPEN",
@@ -74,8 +58,9 @@
   },
   "closedBlockers": [
     "BILINGUAL_REVIEW_PAIRS",
+    "COMPOSITIONAL_SEMANTIC_ADMISSION",
     "CARD_SLOT_ELIGIBILITY",
     "TOPIC_PERSONAL_SELECTION"
   ],
-  "nextRequiredAction": "ADMIT_64_GATE_BASE_AND_6_LINE_MODIFIER_RUNTIME_FACTORS_BEFORE_R8"
+  "nextRequiredAction": "R8_RENDERED_VISUAL_ACCEPTANCE"
 }
