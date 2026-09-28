@@ -31,13 +31,13 @@ function graph(t,l){
 }
 export function renderTrajectories(root,{registry,visualBindings,state,locale='en',onToggle=()=>{}}={}){
   const l=locale==='zh-Hans'?'zh-Hans':'en',c=COPY[l],items=registry?.trajectories||[];
-  const focusedId=state.trajectoryIds?.[0]||items[0]?.trajectoryId||null;
+  const focusedId=state.trajectoryIds?.[0]||null;
   const visual=id=>{const a=visualBindings?.assets?.find(x=>x.family==='TRAJECTORY_MOTIF'&&x.subjectId===id);return a?resolveAtlasVisualById(visualBindings,a.assetId):null;};
   root.innerHTML=`<div class="civ-trajectories civ-trajectories--system">
     <div class="civ-trajectories__intro">
-      <p class="knowledge-eyebrow">${esc(l==='zh-Hans'?'16 条长时段轨迹':'16 long-duration trajectories')}</p>
-      <h4>${esc(l==='zh-Hans'?'每一条轨迹都由自己的视觉底层、动态曲线与证据说明组成。':'Each trajectory combines its own visual foundation, dynamic curve, and evidence notes.')}</h4>
-      <p>${esc(l==='zh-Hans'?'曲线依据当前可用的历史资料与重建数据生成，用来观察长期相对变化，而不是计算文明总分。':'Curves are generated from the currently available historical evidence and reconstructed series. They show relative long-term change rather than a unified civilization score.')}</p>
+      <p class="knowledge-eyebrow">${esc(focusedId?(l==='zh-Hans'?'当前长时段轨迹':'Current long-duration trajectory'):(l==='zh-Hans'?'16 条长时段轨迹总览':'Overview of 16 long-duration trajectories'))}</p>
+      <h4>${esc(focusedId?(l==='zh-Hans'?'查看一条轨迹的视觉底层、动态曲线与证据说明。':'Read one trajectory through its visual foundation, dynamic curve, and evidence notes.'):(l==='zh-Hans'?'先同时看见人口、能源、知识、连接、制度与未来容量的长期变化。':'Start with the whole system: population, energy, knowledge, connectivity, institutions, and future capacity.'))}</h4>
+      <p>${esc(l==='zh-Hans'?'每条曲线观察一种相对变化；16 条轨迹共同构成长时段总览，但不构成统一文明总分。':'Each curve tracks one kind of relative change. Together the 16 trajectories form the long-duration overview, not a unified civilization score.')}</p>
     </div>
     <div class="civ-trajectory-panel-grid">
       ${items.map(t=>{const v=visual(t.trajectoryId),active=t.trajectoryId===focusedId;return `<article class="civ-trajectory-panel${active?' is-active':''}" data-authority="${esc(t.authorityClass)}" data-trajectory-panel="${esc(t.trajectoryId)}">
@@ -53,7 +53,8 @@ export function renderTrajectories(root,{registry,visualBindings,state,locale='e
   return items.filter(t=>t.trajectoryId===focusedId);
 }
 export function renderTrajectoryInspector(root,{trajectories=[],locale='en'}={}){
-  const l=locale==='zh-Hans'?'zh-Hans':'en'; if(!root||!trajectories.length)return;
+  const l=locale==='zh-Hans'?'zh-Hans':'en'; if(!root)return;
+  if(!trajectories.length){root.innerHTML=`<div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(l==='zh-Hans'?'轨迹总览':'Trajectory overview')}</p><h3>${esc(l==='zh-Hans'?'16 条长时段轨迹':'16 long-duration trajectories')}</h3><p>${esc(l==='zh-Hans'?'从人口、能源、知识、连接、制度与未来容量观察长期变化。':'Read long-run change across population, energy, knowledge, connectivity, institutions, and future capacity.')}</p></div>`;return;}
   const t=trajectories[0];
   root.innerHTML=`<div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(l==='zh-Hans'?'当前轨迹':'Current trajectory')}</p><h3>${esc(loc(t.title,l))}</h3><p>${esc(authority(t.authorityClass,l))}</p></div>`;
 }
