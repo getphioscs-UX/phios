@@ -12,7 +12,7 @@ const claims=roles.map((role,i)=>({claimId:'C'+(i+1),id:'C'+(i+1),explanationRol
 const contract=createReportSectionNarrativeContract({methodId:'BZR',sectionKey:'S04_CAREER',customerQuestion:'Career?',customerOutcome:'Understand career.',requiredClaimRoles:roles,timingPolicy:'WHEN_AUTHORITY_PRESENT'});
 const richClaimIr={version:'QA-IR-v1',claims,reflectionQuestions:[],counterPrompts:[]};
 const brief=await buildReportSectionNarrativeBrief({contract,richClaimIr,locale:'en',sourceAuthorityVersion:'QA-AUTH-v1'});
-const candidate={blocks:roles.map((role,i)=>({role,text:'Customer-readable licensed explanation for '+role.toLowerCase()+' in this governed QA fixture.',claimRefs:['C'+(i+1)]}))};
+const candidate={blocks:roles.map((role,i)=>({role,text:role==='OBSERVABLE_EXPRESSION'?'What should the customer compare or observe in this licensed QA fixture?':'Customer-readable licensed explanation for '+role.toLowerCase()+' in this governed QA fixture.',claimRefs:['C'+(i+1)]}))};
 const registry={models:[{providerId:'OPENAI',modelId:'gpt-5.6-luna',capabilityClass:'LIGHT',status:'AVAILABLE',planningCostRank:1}]};
 const providerAdapters={OPENAI:async()=>({output:candidate,provider:'OPENAI',model:'gpt-5.6-luna',usage:{inputTokens:100,outputTokens:200}})};
 const composed=await composeReportSectionT2({brief,registry,providerAdapters,requestId:'RNT2-CORE-QA'});
