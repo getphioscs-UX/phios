@@ -1,8 +1,8 @@
 import {resolveAtlasVisualById} from './atlas-static-visual.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
 const loc=(v,l)=>v?.[l]??v?.en??'';
-const COPY={en:{evidence:'Authority',method:'Method',uncertainty:'Uncertainty'},'zh-Hans':{evidence:'证据类型',method:'方法说明',uncertainty:'不确定性'}};
-function authority(v,l){const m={EVIDENCE_SERIES:{en:'Evidence series','zh-Hans':'资料系列'},HISTORICAL_RECONSTRUCTION:{en:'Historical reconstruction','zh-Hans':'历史重建'},CONCEPTUAL_TRAJECTORY:{en:'Conceptual trajectory','zh-Hans':'概念轨迹'}};return m[v]?.[l]||v;}
+const COPY={en:{evidence:'Evidence basis',method:'Method',uncertainty:'Uncertainty'},'zh-Hans':{evidence:'证据基础',method:'方法说明',uncertainty:'不确定性'}};
+function authority(v,l){const m={EVIDENCE_SERIES:{en:'Observed evidence','zh-Hans':'观测资料'},HISTORICAL_RECONSTRUCTION:{en:'Historical reconstruction','zh-Hans':'历史重建'},CONCEPTUAL_TRAJECTORY:{en:'Conceptual trajectory','zh-Hans':'概念轨迹'}};return m[v]?.[l]||v;}
 const year=(v,l)=>Number(v)<0?(l==='zh-Hans'?`公元前${Math.abs(Number(v))}年`:`${Math.abs(Number(v))} BCE`):(l==='zh-Hans'?`公元${Number(v)}年`:`${Number(v)} CE`);
 function points(series=[]){
   const valid=series.map(p=>({year:Number(p.year),value:Number(p.index)})).filter(p=>Number.isFinite(p.year)&&Number.isFinite(p.value));
@@ -37,7 +37,7 @@ export function renderTrajectories(root,{registry,visualBindings,state,locale='e
     <div class="civ-trajectories__intro">
       <p class="knowledge-eyebrow">${esc(l==='zh-Hans'?'16 条长时段轨迹':'16 long-duration trajectories')}</p>
       <h4>${esc(l==='zh-Hans'?'每一条轨迹都由自己的视觉底层、动态曲线与证据说明组成。':'Each trajectory combines its own visual foundation, dynamic curve, and evidence notes.')}</h4>
-      <p>${esc(l==='zh-Hans'?'所有曲线都来自当前 trajectory registry；这些指数用于观察相对变化，不是统一文明总分。':'All curves come from the current trajectory registry. The indexes show relative change and are not a unified civilization score.')}</p>
+      <p>${esc(l==='zh-Hans'?'曲线依据当前可用的历史资料与重建数据生成，用来观察长期相对变化，而不是计算文明总分。':'Curves are generated from the currently available historical evidence and reconstructed series. They show relative long-term change rather than a unified civilization score.')}</p>
     </div>
     <div class="civ-trajectory-panel-grid">
       ${items.map(t=>{const v=visual(t.trajectoryId),active=t.trajectoryId===focusedId;return `<article class="civ-trajectory-panel${active?' is-active':''}" data-authority="${esc(t.authorityClass)}" data-trajectory-panel="${esc(t.trajectoryId)}">
