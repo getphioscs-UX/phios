@@ -67,7 +67,7 @@ const p6=projection.layers.find(x=>x.layerId==='trajectories');
 assert.equal(p6.mode,'TEMPLATE_BASE_PLUS_DYNAMIC_OVERLAY');
 assert.equal(p6.poster.assetRef,'VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp');
 assert.equal(p6.fallback,'REGISTRY_TRAJECTORY_READER');
-assert.equal(p6.poster.availability,'PENDING_LIVE_R2_VERIFICATION');
+assert.ok(['PENDING_LIVE_R2_VERIFICATION','VERIFIED_LIVE_R2'].includes(p6.poster.availability),'L6 template delivery state must be pending verification or verified live.');
 
 assert.ok(compositor.includes('state.trajectoryIds?.length?state.trajectoryIds.slice(0,4):all.slice(0,1)'),'L6 compositor must default to one trajectory and cap comparisons at four.');
 assert.ok(!trajectories.includes('trajectory registry'),'Raw trajectory registry language must not appear in customer copy.');
