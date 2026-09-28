@@ -36,7 +36,7 @@ function sumUsage(records){
  return out;
 }
 
-export async function composeReportSectionT2({brief,registry,env={},fetcher,providerAdapters=null,requestId='RNT2-SECTION',verifier=verifyReportSectionComposition}={}){
+export async function composeReportSectionT2({brief,registry,env={},fetcher,providerAdapters=null,requestId='RNT2-SECTION',verifier=verifyReportSectionComposition,cache=null}={}){
  if(brief?.schemaVersion!==REPORT_SECTION_NARRATIVE_BRIEF_VERSION)throw Error('RNT2_T2_BRIEF_REQUIRED');
  const route=selectPaiRoute({aiExecutionClass:'T2_LIGHT_COMPOSITION',deterministicFallbackAvailable:true},registry||{});
  if(!route.selectedProvider||!route.selectedModel)return deepFreeze({status:'FALLBACK',candidate:null,verification:null,internalOnly:{requestedTier:'T2_GOVERNED_NATURAL_COMPOSITION',actualTier:'DETERMINISTIC_FALLBACK',fallbackReason:'NO_ADMITTED_PROVIDER_ROUTE',route,providerCalled:false}});
@@ -49,6 +49,10 @@ export async function composeReportSectionT2({brief,registry,env={},fetcher,prov
   verifierVersion:REPORT_SECTION_SEMANTIC_VERIFIER_VERSION,evidenceDigest:brief.sourceSemanticDigest,
   schemaVersion:brief.schemaVersion,provider:route.selectedProvider,model:route.selectedModel
  });
+ if(cache?.get){
+  const cached=await cache.get(generationIdentity);
+  if(cached?.candidate)return deepFreeze({...cached.candidate,cacheHit:true,generationIdentity,internalOnly:{...cached.candidate.internalOnly,providerCalled:false,cacheHit:true}});
+ }
  const started=Date.now(),providerResults=[],attemptLog=[];
  const invoke=async({repairReasons=[]}={})=>{
   const result=await adapter({
@@ -97,6 +101,8 @@ export async function composeReportSectionT2({brief,registry,env={},fetcher,prov
  });
  if(!verification?.accepted)return deepFreeze({status:'FALLBACK',candidate,verification,usageRecord,generationIdentity,internalOnly:{requestedTier:'T2_GOVERNED_NATURAL_COMPOSITION',actualTier:'DETERMINISTIC_FALLBACK',fallbackReason:'SEMANTIC_VERIFIER_REJECTED',route,providerCalled:true,providerAttemptCount,repairCount,attemptLog}});
  const compositionDigest=await sha256Stable({brief:brief.briefSemanticDigest,candidate,generationIdentity:generationIdentity.generationKey});
- return deepFreeze({status:'PASS',candidate,verification,usageRecord,compositionDigest,generationIdentity,internalOnly:{requestedTier:'T2_GOVERNED_NATURAL_COMPOSITION',actualTier:'T2_GOVERNED_NATURAL_COMPOSITION',fallbackReason:null,route,composerVersion:REPORT_SECTION_T2_COMPOSER_VERSION,promptVersion:REPORT_SECTION_T2_PROMPT_VERSION,providerCalled:true,providerAttemptCount,repairCount,attemptLog}});
+ const finalValue=deepFreeze({status:'PASS',candidate,verification,usageRecord,compositionDigest,generationIdentity,cacheHit:false,internalOnly:{requestedTier:'T2_GOVERNED_NATURAL_COMPOSITION',actualTier:'T2_GOVERNED_NATURAL_COMPOSITION',fallbackReason:null,route,composerVersion:REPORT_SECTION_T2_COMPOSER_VERSION,promptVersion:REPORT_SECTION_T2_PROMPT_VERSION,providerCalled:true,providerAttemptCount,repairCount,attemptLog,cacheHit:false}});
+ if(cache?.put)await cache.put(generationIdentity,finalValue);
+ return finalValue;
 }
 export default Object.freeze({composeReportSectionT2});
