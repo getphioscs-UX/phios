@@ -7,6 +7,7 @@ import {buildReportDeliveryR2} from '../functions/report-delivery/report-deliver
 import {createReportSectionGenerationCache} from '../functions/personal-reading/narrative/report-section-generation-cache.js';
 import {formatReportCoverFields,assertCoverOverlayValues} from '../functions/canonical-presentation-runtime/report-cover-overlay.js';
 import {REPORT_COVER_OVERLAY_REGISTRY} from '../functions/canonical-presentation-runtime/report-cover-overlay-registry.js';
+import {createReportSubjectPresentationFromAccountPerson,assertReportSubjectMatch} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
 
 const roles=['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION'];
 const claims=roles.map((role,i)=>({claimId:'C'+(i+1),id:'C'+(i+1),explanationRole:role,claimType:role==='OBSERVABLE_EXPRESSION'?'QUESTION':'LIFE_DOMAIN_EXPLANATION',text:'Licensed '+role+' meaning '+(i+1),priority:'PRIMARY',semanticOperators:[role==='TIMING_RELEVANCE'?'TIMING_RELEVANCE':role==='OBSERVABLE_EXPRESSION'?'QUESTION':'CONTEXTUALIZES'],conditions:[],counterweights:[],timing:role==='TIMING_RELEVANCE'?[{window:'QA'}]:[],observableSignals:[],certainty:role==='OBSERVABLE_EXPRESSION'?'QUESTION':'BOUNDED',sourceRefs:['professionalModules/qa/'+i],license:{allowsObservedReality:false}}));
@@ -36,7 +37,13 @@ if(!delivery.immutable||!render.renderSnapshotId)throw Error('RNT2_SNAPSHOT_FAIL
 const envelope=buildReportDeliveryR2({methodId:'BZR',access:{state:'ENTITLED',reason:null},admitted:true,reportAvailable:true,semanticSnapshot:delivery});
 if(envelope.access.state!=='FULL_REPORT'||envelope.providerRegenerationOnReopen!==false)throw Error('RNT2_DELIVERY_FAILED');
 
-const exact={displayName:'QA Client',birthDate:'1989-11-15',birthTime:'22:50:00',timeAccuracy:'EXACT'};
+const canonicalBirthInput={birthDate:'1989-11-15',birthTime:'22:50:00',birthPlace:{displayName:'QA Place',countryCode:'MY',latitude:3.1,longitude:101.7},timezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtBirth:'+08:00',source:'HUMAN_DECLARATION',confidence:'HIGH'},timeAccuracy:'EXACT',locale:'en',consent:{confirmed:true},inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'};
+const accountPersonReference={personId:'QA-PERSON',accountOwnerUserId:'QA-ACCOUNT',subjectClass:'SELF',displayName:'QA Client',relationshipToAccountOwner:'SELF',relationshipVerificationState:'SELF_DECLARED',createdAt:'2026-09-28T00:00:00Z',updatedAt:'2026-09-28T00:00:00Z',version:'1'};
+const reportSubject=await createReportSubjectPresentationFromAccountPerson({accountPersonReference,canonicalBirthInput,birthSourceRef:'QA-BIRTH'});
+assertReportSubjectMatch({presentation:reportSubject,subjectReference:'QA-PERSON',birthDate:'1989-11-15',birthTime:'22:50:00',timeAccuracy:'EXACT'});
+let subjectMismatchClosed=false;try{assertReportSubjectMatch({presentation:reportSubject,subjectReference:'WRONG'})}catch(e){subjectMismatchClosed=e.message==='COVER_SUBJECT_MISMATCH'}
+if(!subjectMismatchClosed)throw Error('RNT2_REPORT_SUBJECT_FAIL_CLOSED_FAILED');
+const exact=reportSubject;
 const unknown={...exact,birthTime:null,timeAccuracy:'UNKNOWN'};
 for(const methodId of Object.keys(REPORT_COVER_OVERLAY_REGISTRY)){
  const v=formatReportCoverFields({methodId,subject:exact});
@@ -44,4 +51,4 @@ for(const methodId of Object.keys(REPORT_COVER_OVERLAY_REGISTRY)){
  const u=formatReportCoverFields({methodId,subject:unknown});
  if(u.birthTime!=='—')throw Error('RNT2_UNKNOWN_TIME_FAILED:'+methodId);
 }
-console.log(JSON.stringify({status:'PASS',t2:{actualTier:composed.internalOnly.actualTier,claimCoverage:composed.verification.claimCoverage},generationKey:identity.generationKey,snapshots:{editorial:accepted.artifactDigest,semantic:delivery.semanticSnapshotId,render:render.renderSnapshotId},delivery:envelope.access.state,covers:Object.keys(REPORT_COVER_OVERLAY_REGISTRY)},null,2));
+console.log(JSON.stringify({status:'PASS',t2:{actualTier:composed.internalOnly.actualTier,claimCoverage:composed.verification.claimCoverage},reportSubject:{authority:'RDG_ACCOUNT_PERSON_REFERENCE + MCD3_CANONICAL_BIRTH_INPUT',subjectFingerprint:reportSubject.subjectFingerprint,failClosed:subjectMismatchClosed},generationKey:identity.generationKey,snapshots:{editorial:accepted.artifactDigest,semantic:delivery.semanticSnapshotId,render:render.renderSnapshotId},delivery:envelope.access.state,covers:Object.keys(REPORT_COVER_OVERLAY_REGISTRY)},null,2));
