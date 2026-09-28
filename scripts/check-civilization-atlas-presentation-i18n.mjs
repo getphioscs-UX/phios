@@ -57,18 +57,18 @@ assert.ok(reconfig.includes('civ-reconfig-more'),'Book VI secondary navigation m
 const firstScreenOrder=[
   shell.indexOf('data-atlas-template-projection'),
   shell.indexOf('civ-template-controls'),
-  shell.indexOf('data-atlas-structured-section'),
-  shell.indexOf('data-atlas-visual-resources')
+  shell.indexOf('data-atlas-structured-section')
 ];
-assert.ok(firstScreenOrder.every(x=>x>=0),'Atlas FR3 first-screen composition placeholders must all exist.');
-assert.deepEqual([...firstScreenOrder].sort((a,b)=>a-b),firstScreenOrder,'Atlas FR3 first screen must order Library template → interactive controls → structured fallback → visual resources.');
+assert.ok(firstScreenOrder.every(x=>x>=0),'Atlas FR4 first-screen composition placeholders must all exist.');
+assert.deepEqual([...firstScreenOrder].sort((a,b)=>a-b),firstScreenOrder,'Atlas FR4 first screen must order template → readable controls → structured detail.');
+assert.ok(!shell.includes('data-atlas-visual-resources'),'Generic visual-library host must not return to Book V customer UI.');
 assert.ok(shell.includes('civ-atlas-secondary'),'Structured data view must be progressive disclosure.');
 
 const staticVisual=read('assets/js/pages/civilization-atlas/atlas-static-visual.js');
 assert.ok(staticVisual.includes("img.loading='eager'"),'Primary Atlas visual must load eagerly.');
 assert.ok(staticVisual.includes("fetchpriority','high'"),'Primary Atlas visual must receive high fetch priority.');
-assert.ok(staticVisual.includes("details.className='civ-atlas-visual-resources'"),'Related visuals and full library must remain secondary.');
-assert.ok(staticVisual.includes("const [primary,...related]=assets"),'Only one context visual may own the primary slot.');
+assert.ok(!staticVisual.includes("civ-atlas-visual-resources"),'Generic related/full visual library must be removed.');
+assert.ok(staticVisual.includes("const [primary]=assets"),'Only one context visual may own the generic primary slot.');
 
 assert.ok(timeline.includes('casesRegistry'),'Timeline must resolve real civilization titles from the case registry.');
 assert.ok(timeline.includes('caseMap.get(id)'),'Timeline representative civilizations must use human-readable titles, not generated ordinal labels.');
@@ -97,10 +97,10 @@ const trajectories=read('assets/js/pages/civilization-atlas/trajectory-renderer.
 const transitions=read('assets/js/pages/civilization-atlas/transition-renderer.js');
 const loss=read('assets/js/pages/civilization-atlas/loss-renderer.js');
 
-assert.ok(trajectories.includes('civ-trajectory-panel-grid'),'L6 must render the full system-composed trajectory panel grid.');
-assert.ok(trajectories.includes('items.map(t=>'),'L6 must project all canonical trajectories from the registry.');
+assert.ok(trajectories.includes('civ-trajectory-panel-grid'),'L6 detail reader must retain all canonical trajectory panels.');
+assert.ok(trajectories.includes('items.map(t=>'),'L6 detail reader must keep all canonical trajectories reachable.');
 assert.ok(!trajectories.includes('slice(0,5)'),'L6 must not regress to the old five-trajectory subset.');
-assert.ok(trajectories.includes('<polyline class="civ-trajectory-panel__line'),'Each L6 trajectory must own a dynamic SVG curve.');
+assert.ok(trajectories.includes('<polyline class="civ-trajectory-panel__line'),'Each L6 trajectory detail must retain a dynamic SVG curve.');
 assert.ok(trajectories.includes('civ-trajectory-panel__details'),'Method and uncertainty must remain progressive disclosure within each trajectory panel.');
 
 assert.ok(transitions.indexOf('civ-transition-reader')<transitions.indexOf('civ-transition-navigator'),'Transitions must present the active story before the selector.');
@@ -143,3 +143,5 @@ assert.ok(askContext.includes('snapshotId:state.snapshotId||null'),'Machine retr
 assert.ok(!askContext.includes('sourceReading')&&!askContext.includes('manuscriptPath'),'Atlas Ask context must not carry private manuscript paths.');
 
 console.log('Civilization Atlas presentation + zh-Hans i18n gate PASS.');
+
+assert.ok(!trajectories.includes('trajectory registry'),'Chinese/English customer copy must not expose trajectory registry language.');
