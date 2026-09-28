@@ -1,4 +1,4 @@
-import {renderAtlasStaticVisuals,ATLAS_VISUAL_BINDINGS_PATH} from './civilization-atlas/atlas-static-visual.js';
+import {renderAtlasStaticVisuals,resolveAtlasVisualDeepLink,ATLAS_VISUAL_BINDINGS_PATH} from './civilization-atlas/atlas-static-visual.js';
 import {renderAtlasVisualProjection} from './civilization-atlas/atlas-visual-projection.js';
 import {getLocale,onLocaleChange} from '../i18n.js';
 import {createCivilizationAtlasState} from './civilization-atlas/atlas-state.js';
@@ -11,6 +11,17 @@ if(root){
   const store=createCivilizationAtlasState({locale:getLocale()});
   const unbindUrl=bindAtlasUrlState(store,{locale:getLocale()});
   const data={timeline:null,timelineMacro:null,cases:null,comparison:null,world:null,trajectories:null,transitions:null,loss:null,visualProjection:null,templateSlots:null};
+  let visualDeepLinkApplied=false;
+  const applyVisualDeepLink=()=>{
+    if(visualDeepLinkApplied||!data.staticVisuals||!data.timeline||!data.transitions)return;
+    const assetId=new URLSearchParams(globalThis.location?.search||'').get('visual');
+    if(!assetId){visualDeepLinkApplied=true;return;}
+    const resolved=resolveAtlasVisualDeepLink(data.staticVisuals,assetId,{data});
+    if(!resolved)return;
+    visualDeepLinkApplied=true;
+    if(resolved.externalHref){globalThis.location.assign(resolved.externalHref);return;}
+    if(resolved.patch)store.set(resolved.patch,{source:'visual-deep-link'});
+  };
   const render=()=>{renderAtlasShell(root,store.get(),{
     locale:getLocale(),data,
     onLayerChange:activeLayer=>store.set(reconcileAtlasContextForLayer(activeLayer,store.get(),data),{source:'layer-nav'}),
@@ -29,16 +40,17 @@ if(root){
     root.dataset.atlasReady='true';
     root.dataset.atlasRegistryCounts='20/120/6/15/16/32/24';
     root.dataset.atlasProjection='STRUCTURED_HTML_SVG_PRIMARY';
+    applyVisualDeepLink();
     render();
   }).catch(error=>{
     root.dataset.atlasReady='error'; console.error(error);
     const target=root.querySelector('[data-atlas-layer-content]');
     if(target) target.innerHTML=`<p role="alert">${getLocale()==='zh-Hans'?'文明图谱资料暂时无法载入。':'Civilization Atlas data could not be loaded.'}</p>`;
   });
-  fetch(ATLAS_VISUAL_BINDINGS_PATH).then(r=>{if(!r.ok)throw new Error('STATIC_VISUAL_BINDINGS_UNAVAILABLE');return r.json();}).then(bindings=>{data.staticVisuals=bindings;render();}).catch(()=>{/* Optional imagery: structured Atlas remains available. */});
+  fetch(ATLAS_VISUAL_BINDINGS_PATH).then(r=>{if(!r.ok)throw new Error('STATIC_VISUAL_BINDINGS_UNAVAILABLE');return r.json();}).then(bindings=>{data.staticVisuals=bindings;applyVisualDeepLink();render();}).catch(()=>{/* Optional imagery: structured Atlas remains available. */});
   Promise.all([
     fetch('/content/civilization-atlas/visuals/atlas-visual-projection-v1.json').then(r=>{if(!r.ok)throw new Error('ATLAS_VISUAL_PROJECTION_UNAVAILABLE');return r.json();}),
     fetch('/content/civilization-atlas/visuals/atlas-layer-template-slots-v1.json').then(r=>{if(!r.ok)throw new Error('ATLAS_TEMPLATE_SLOTS_UNAVAILABLE');return r.json();})
-  ]).then(([visualProjection,templateSlots])=>{data.visualProjection=visualProjection;data.templateSlots=templateSlots;root.dataset.atlasProjection='LIBRARY_TEMPLATE_COMPOSITOR';render();}).catch(()=>{root.dataset.atlasProjection='STRUCTURED_FALLBACK';});
+  ]).then(([visualProjection,templateSlots])=>{data.visualProjection=visualProjection;data.templateSlots=templateSlots;root.dataset.atlasProjection='CIV_ATLAS_TEMPLATE_COMPOSITOR';render();}).catch(()=>{root.dataset.atlasProjection='STRUCTURED_FALLBACK';});
   window.addEventListener('pagehide',()=>{unsubscribe();unbindUrl();unbindLocale();},{once:true});
 }
