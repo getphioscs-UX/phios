@@ -134,18 +134,34 @@ function trajectoryOverlay(data,state,locale,slot){
   if(!selected.length||!points.length) return '';
   const minYear=Math.min(...points.map(p=>p.year)),maxYear=Math.max(...points.map(p=>p.year));
   const minVal=Math.min(...points.map(p=>p.value)),maxVal=Math.max(...points.map(p=>p.value));
+  const authLabel=value=>({
+    EVIDENCE_SERIES:{en:'Observed evidence','zh-Hans':'观测资料'},
+    HISTORICAL_RECONSTRUCTION:{en:'Historical reconstruction','zh-Hans':'历史重建'},
+    CONCEPTUAL_TRAJECTORY:{en:'Conceptual trajectory','zh-Hans':'概念轨迹'}
+  }[value]?.[locale]||value||'');
   const lines=selected.map((t,i)=>{
     const authority=t.authorityClass||'';
     const cls=authority==='CONCEPTUAL_TRAJECTORY'?'is-conceptual':authority==='HISTORICAL_RECONSTRUCTION'?'is-reconstructed':'is-evidence';
     return `<polyline class="civ-template-trajectory-line ${cls} series-${i}" points="${linePoints(t.series,minYear,maxYear,minVal,maxVal)}"><title>${esc(loc(t.title,locale))}</title></polyline>`;
   }).join('');
-  return `<div class="civ-template-slot civ-template-slot--trajectory" data-template-slot="trajectoryGraph" style="${slotStyle(slot)}">
-    <svg viewBox="0 0 1000 400" preserveAspectRatio="none" role="img" aria-label="${esc(locale==='zh-Hans'?'动态长时段轨迹图':'Dynamic long-duration trajectory graph')}">
-      <g class="civ-template-trajectory-grid">
-        <line x1="0" y1="40" x2="1000" y2="40"/><line x1="0" y1="120" x2="1000" y2="120"/><line x1="0" y1="200" x2="1000" y2="200"/><line x1="0" y1="280" x2="1000" y2="280"/><line x1="0" y1="360" x2="1000" y2="360"/>
-      </g>
-      ${lines}
-    </svg>
+  const primary=selected[0];
+  const startYear=Math.min(...selected.flatMap(t=>(t.series||[]).map(p=>Number(p.year)).filter(Number.isFinite)));
+  const endYear=Math.max(...selected.flatMap(t=>(t.series||[]).map(p=>Number(p.year)).filter(Number.isFinite)));
+  return `<div class="civ-template-slot civ-template-slot--trajectory civ-template-slot--trajectory-detail" data-template-slot="trajectoryGraph" style="${slotStyle(slot)}">
+    <div class="civ-template-trajectory-head">
+      <div><strong>${esc(selected.length===1?loc(primary.title,locale):(locale==='zh-Hans'?'轨迹比较':'Trajectory comparison'))}</strong><span>${esc(selected.length===1?authLabel(primary.authorityClass):(locale==='zh-Hans'?selected.length+' 条轨迹':selected.length+' trajectories'))}</span></div>
+      <small>${esc(locale==='zh-Hans'?'相对指数 · 非统一文明评分':'Relative index · not a unified civilization score')}</small>
+    </div>
+    <div class="civ-template-trajectory-canvas">
+      <svg viewBox="0 0 1000 400" preserveAspectRatio="none" role="img" aria-label="${esc(locale==='zh-Hans'?'动态长时段轨迹图':'Dynamic long-duration trajectory graph')}">
+        <g class="civ-template-trajectory-grid">
+          <line x1="0" y1="40" x2="1000" y2="40"/><line x1="0" y1="120" x2="1000" y2="120"/><line x1="0" y1="200" x2="1000" y2="200"/><line x1="0" y1="280" x2="1000" y2="280"/><line x1="0" y1="360" x2="1000" y2="360"/>
+        </g>
+        ${lines}
+      </svg>
+      <div class="civ-template-trajectory-range"><span>${esc(formatYear(startYear,locale))}</span><span>${esc(formatYear(endYear,locale))}</span></div>
+    </div>
+    <div class="civ-template-trajectory-legend">${selected.map((t,i)=>`<span><i class="series-${i}"></i><b>${esc(loc(t.title,locale))}</b><small>${esc(authLabel(t.authorityClass))}</small></span>`).join('')}</div>
   </div>`;
 }
 export function renderAtlasVisualProjection(container,{projection,slots,data={},state,locale='en',onStateChange=()=>{}}={}){
