@@ -41,6 +41,7 @@
         "title",
         "aliases",
         "runtimeFamily",
+        "runtimeSummary",
         "timeWindow",
         "region",
         "geographicReach",
@@ -390,6 +391,24 @@
             "pattern": "^WS-"
           },
           "uniqueItems": true
+        },
+        "runtimeSummary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
         }
       }
     }
