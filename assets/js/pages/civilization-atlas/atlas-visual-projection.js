@@ -151,15 +151,14 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   container.hidden=false;
   container.innerHTML=`<section class="civ-template-board" data-atlas-template-board data-layer="${esc(state.activeLayer)}">
     <div class="civ-template-board__heading">
-      <div><p class="knowledge-eyebrow">${esc(l==='zh-Hans'?'Library 模板布局':'Library template layout')}</p><h4>${esc(layerTitle(state.activeLayer,l))}</h4></div>
+      <div><h4>${esc(layerTitle(state.activeLayer,l))}</h4></div>
       <button type="button" class="knowledge-action knowledge-action--quiet" data-template-expand>${esc(l==='zh-Hans'?'全屏查看':'Open full screen')}</button>
     </div>
     <div class="civ-template-board__viewport"><div class="civ-template-board__stage" style="aspect-ratio:${slotConfig.referenceSize.width}/${slotConfig.referenceSize.height}">
       <img src="${esc(poster.publicUrl)}" alt="${esc(layerTitle(state.activeLayer,l))}" loading="eager" decoding="async" data-template-image>
       ${overlays.join('')}
-      <div class="civ-template-board__fallback" data-template-fallback hidden><strong>${esc(l==='zh-Hans'?'模板视觉暂时无法载入':'Template visual unavailable')}</strong><p>${esc(l==='zh-Hans'?'下方 Registry 驱动内容仍可正常使用。':'Registry-driven content below remains available.')}</p></div>
+      <div class="civ-template-board__fallback" data-template-fallback hidden><strong>${esc(l==='zh-Hans'?'视觉暂时无法载入':'Visual unavailable')}</strong><p>${esc(l==='zh-Hans'?'下方阅读内容仍可正常使用。':'The reading content below remains available.')}</p></div>
     </div></div>
-    <p class="civ-template-board__note">${esc(l==='zh-Hans'?'WebP 定义版式与视觉语法；动态 HTML / SVG 只写入已登记的预留区域，正式文字与数据仍来自 Registry。':'The WebP defines composition and visual grammar. Dynamic HTML/SVG is written only into registered reserved slots; canonical text and data remain registry-driven.')}</p>
   </section>`;
   container.querySelectorAll('[data-template-world-case]').forEach(button=>button.addEventListener('click',()=>{
     const id=button.dataset.templateWorldCase;
