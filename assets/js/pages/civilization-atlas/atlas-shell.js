@@ -32,10 +32,9 @@ ${CIVILIZATION_LAYERS.has(state.activeLayer)?`<div class="civ-atlas-subnav" aria
   <span><strong>${lang==='zh-Hans'?'视图':'View'}</strong> ${esc(LAYERS[state.activeLayer]?.[lang]||LAYERS.timeline[lang])}</span>
 </div>
 <div data-atlas-template-projection></div>
-${systemComposed?'<div class="civ-system-composed-layer" data-atlas-layer-content></div>':`<details class="civ-template-controls"><summary>${esc(lang==='zh-Hans'?'打开互动资料与控制':'Open interactive data and controls')}</summary><div data-atlas-layer-content></div></details>`}
-<details class="civ-atlas-secondary" data-atlas-structured-section><summary>${esc(lang==='zh-Hans'?'查看结构图与数据视图':'Explore structured data view')}</summary><div data-atlas-structured-visual></div></details>
-<div data-atlas-primary-visual></div>
-<div data-atlas-visual-resources></div></section><aside class="civ-atlas-inspector" aria-labelledby="civ-atlas-inspector-title" data-atlas-inspector><div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(c.inspector)}</p><h3 id="civ-atlas-inspector-title">${esc(LAYERS[state.activeLayer]?.[lang]||LAYERS.timeline[lang])}</h3><p class="civ-atlas-inspector__lead">${esc(lang==='zh-Hans'?'跟随当前选择。':'Follows your current selection.')}</p></div></aside></div></div>`;
+${systemComposed?'<div class="civ-system-composed-layer" data-atlas-layer-content></div>':`<details class="civ-template-controls"><summary>${esc(state.activeLayer==='timeline'?(lang==='zh-Hans'?'浏览历史时期':'Explore periods'):state.activeLayer==='world'?(lang==='zh-Hans'?'浏览其他世界横切面':'Explore other world slices'):(lang==='zh-Hans'?'查看更多细节':'Explore details'))}</summary><div data-atlas-layer-content></div></details>`}
+<details class="civ-atlas-secondary" data-atlas-structured-section><summary>${esc(lang==='zh-Hans'?'查看更多细节':'Explore details')}</summary><div data-atlas-structured-visual></div></details>
+<div data-atlas-primary-visual></div></section><aside class="civ-atlas-inspector" aria-labelledby="civ-atlas-inspector-title" data-atlas-inspector><div class="civ-atlas-inspector__summary"><p class="knowledge-eyebrow">${esc(c.inspector)}</p><h3 id="civ-atlas-inspector-title">${esc(LAYERS[state.activeLayer]?.[lang]||LAYERS.timeline[lang])}</h3><p class="civ-atlas-inspector__lead">${esc(lang==='zh-Hans'?'跟随当前选择。':'Follows your current selection.')}</p></div></aside></div></div>`;
   root.querySelectorAll('[data-atlas-layer]').forEach(button=>button.addEventListener('click',()=>onLayerChange(button.dataset.atlasLayer)));
   wireAtlasKeyboardNavigation(root,{onLayerActivate:id=>{if(id&&id!==state.activeLayer)onLayerChange(id);}});
   const content=root.querySelector('[data-atlas-layer-content]'); const inspector=root.querySelector('[data-atlas-inspector]');
