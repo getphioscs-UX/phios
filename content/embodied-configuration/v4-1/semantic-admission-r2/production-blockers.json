@@ -2,7 +2,6 @@
   "scope": "ECR_V4.1_BASELINE_PRODUCT",
   "blockers": [
     "COMPOSITIONAL_SEMANTIC_ADMISSION",
-    "RENDERED_VISUAL_ACCEPTANCE",
     "DEPLOYED_PREVIEW_E2E"
   ],
   "nonBlockers": [
@@ -48,8 +47,9 @@
       "result": "D/M/A operational admission complete; unresolved evidence fails closed to UNKNOWN"
     },
     "RENDERED_VISUAL_ACCEPTANCE": {
-      "status": "OPEN",
-      "result": "NOT_RUN"
+      "status": "CLOSED",
+      "result": "OWNER_ACCEPTED",
+      "evidenceRef": "OWNER_ACCEPT_CHAT_2026-09-28:R8_RENDERED_VISUAL"
     },
     "DEPLOYED_PREVIEW_E2E": {
       "status": "OPEN",
@@ -59,7 +59,8 @@
   "closedBlockers": [
     "BILINGUAL_REVIEW_PAIRS",
     "CARD_SLOT_ELIGIBILITY",
-    "TOPIC_PERSONAL_SELECTION"
+    "TOPIC_PERSONAL_SELECTION",
+    "RENDERED_VISUAL_ACCEPTANCE"
   ],
-  "nextRequiredAction": "RUN_R8_MACHINE_ALIGNMENT_CHECK_THEN_BUILD_RENDERED_REVIEW"
+  "nextRequiredAction": "R9_DEPLOYED_PREVIEW_E2E"
 }
