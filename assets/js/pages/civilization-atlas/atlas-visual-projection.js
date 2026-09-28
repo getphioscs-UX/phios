@@ -137,7 +137,7 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   const slotConfig=slots?.layers?.[state.activeLayer]||null;
   if(slotConfig?.presentationMode==='SYSTEM_COMPOSED_FROM_ASSETS'||config?.mode==='SYSTEM_COMPOSED_FROM_ASSETS'){container.hidden=true;container.innerHTML='';return;}
   const poster=posterFor(config,state);
-  if(!config||!slotConfig||!poster){container.hidden=true;container.innerHTML='';return;}
+  if(!config||!slotConfig||!poster||poster.availability&&poster.availability!=='VERIFIED_LIVE_R2'){container.hidden=true;container.innerHTML='';return;}
   const overlays=[];
   if(state.activeLayer==='timeline'){
     overlays.push(timelineOverlay(data,state,l,slotConfig));
