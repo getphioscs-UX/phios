@@ -1,6 +1,7 @@
 import {ECR_V41_AUTHORITIES} from '../embodied-configuration/ecr-v41-authorities.generated.js';
 import {isEcrHumanAdmitted} from '../embodied-configuration/ecr-semantic-composition-r2.js';
 const deck=ECR_V41_AUTHORITIES['content/ecr-phi-card/ecr-phi-card-deck-registry-v2.json'];
+const assets=ECR_V41_AUTHORITIES['content/ecr-phi-card/ecr-phi-card-asset-registry-v1.json'];
 const slots=['CARRIER','EXPERIENCE','EXPRESSION','AGENCY','IDENTITY','FEEDBACK_CONTINUITY'];
 const policy=ECR_V41_AUTHORITIES['content/embodied-configuration/v4-1/semantic-admission-r2/card-eligibility.json'];
 
@@ -34,6 +35,7 @@ export function selectEcrRuntimeSlotCards(semanticDepth,eligibility,sourceDeck){
    oneLineInsight:card?.oneLineInsight||null,
    meaning:card?.canonicalCustomerMeaning||null,
    assetRef:card?.assetRef||null,
+   asset:card?assets?.assets?.find(a=>a.cardId===card.cardId)||null:null,
    status:card?'ADMITTED_SELECTION':'UNKNOWN',
    unknownReason:card?null:ambiguous?'ADMITTED_ELIGIBILITY_PRIORITY_CONFLICT':'NO_ADMITTED_CARD_MATCH',
    predecessorGroup:card?.groupId||null,
