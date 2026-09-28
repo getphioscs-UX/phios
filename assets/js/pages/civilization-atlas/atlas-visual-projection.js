@@ -110,7 +110,17 @@ function linePoints(series,minYear,maxYear,minVal,maxVal){
 }
 function trajectoryOverlay(data,state,locale,slot){
   const all=data?.trajectories?.trajectories||[];
-  const ids=state.trajectoryIds?.length?state.trajectoryIds.slice(0,4):all.slice(0,1).map(x=>x.trajectoryId);
+  const ids=state.trajectoryIds?.length?state.trajectoryIds.slice(0,4):[];
+  if(!ids.length){
+    const groups=[
+      {title:{en:'Population & Settlement','zh-Hans':'人口与聚落'},ids:['POPULATION','URBAN_DENSITY','SURPLUS_BUFFER','DISEASE_COUPLING']},
+      {title:{en:'Energy & Infrastructure','zh-Hans':'能源与基础设施'},ids:['ENERGY','MOBILITY_RADIUS','INFRASTRUCTURE_DEPENDENCY','ECONOMIC_CONNECTIVITY']},
+      {title:{en:'Knowledge & Coordination','zh-Hans':'知识与协调'},ids:['MEMORY_CAPACITY','INFORMATION_VELOCITY','COORDINATION_SCALE','INSTITUTIONAL_COMPLEXITY']},
+      {title:{en:'Meaning & Future Capacity','zh-Hans':'意义与未来容量'},ids:['MEANING_NETWORK_REACH','KNOWLEDGE_PARTICIPATION','COMPUTATIONAL_CAPACITY','LOAD_FUTURE_CAPACITY']}
+    ];
+    const byId=new Map(all.map(t=>[t.trajectoryId,t]));
+    return `<div class="civ-template-slot civ-template-slot--trajectory civ-template-slot--trajectory-overview" data-template-slot="trajectoryGraph" style="${slotStyle(slot)}"><div class="civ-template-trajectory-overview-grid">${groups.map(g=>`<section><strong>${esc(loc(g.title,locale))}</strong><ul>${g.ids.map(id=>byId.get(id)).filter(Boolean).map(t=>`<li>${esc(loc(t.title,locale))}</li>`).join('')}</ul></section>`).join('')}</div></div>`;
+  }
   const selected=all.filter(t=>ids.includes(t.trajectoryId)).slice(0,4);
   const points=selected.flatMap(t=>(t.series||[]).map(p=>({year:Number(p.year),value:Number(p.index)}))).filter(p=>Number.isFinite(p.year)&&Number.isFinite(p.value));
   if(!selected.length||!points.length) return '';
