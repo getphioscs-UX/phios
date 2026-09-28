@@ -7,6 +7,7 @@ import {extendCareerIdentityBrief} from './bazi-s04-career-identity.js';
 import {extendCareerBrief} from './bazi-s04-career-ir.js';
 import {evaluateCustomerEditorialR4} from './report-editorial-quality-r4.js';
 import {careerReviewState} from './bazi-s04-customer-value.js';
+import {buildMarketBrief,evaluateMarketReading} from './bazi-s04-market-reading.js';
 
 export const BAZI_S04_T2_RUNTIME_VERSION='PHI-OS-BAZI-S04-T2-RUNTIME-v1.0.0';
 
@@ -26,6 +27,7 @@ function contract(locale){
 }
 
 export async function prepareBaZiS04T2({reading,locale,temporalSnapshot,successor=false}={}){
+ if(successor==='v4'){const brief=await buildMarketBrief({reading,locale,temporalSnapshot});return {brief,richClaimIr:brief.careerNarrativeIR,sectionContract:{requiredClaimRoles:brief.requiredClaimRoles}};}
  const richClaimIr=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S04_CAREER',locale,temporalSnapshot});
  const sectionContract=contract(locale);
  let brief=await buildReportSectionNarrativeBrief({contract:sectionContract,richClaimIr,locale,sourceAuthorityVersion:EXPLANATORY_AUTHORITY_VERSION,styleIntent:{tone:'WARM_PROFESSIONAL',depth:'PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false}});
@@ -51,7 +53,7 @@ export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,e
   candidate:composition.candidate,
   verification:composition.verification,
   quality,
-  ...(successor?{careerNarrativeIR:brief.careerNarrativeIR,editorialQuality:evaluateCustomerEditorialR4({brief,candidate:composition.candidate,verification:composition.verification}),reviewState:careerReviewState({technicalPass:composition.verification?.technicalAccepted===true,editorialPass:composition.verification?.editorialQuality?.accepted===true}),reviewOnly:true}:{}),
+  ...(successor?{careerNarrativeIR:brief.careerNarrativeIR,editorialQuality:(brief.marketContract?evaluateMarketReading:evaluateCustomerEditorialR4)({brief,candidate:composition.candidate,verification:composition.verification}),reviewState:careerReviewState({technicalPass:composition.verification?.technicalAccepted===true,editorialPass:composition.verification?.editorialQuality?.accepted===true}),reviewOnly:true}:{}),
   internalOnly:composition.internalOnly,
   usageRecord:composition.usageRecord||null,
   verificationUsageRecords:composition.verificationUsageRecords||[],

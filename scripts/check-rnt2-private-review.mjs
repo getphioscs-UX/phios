@@ -26,6 +26,7 @@ assert.equal(unreadable.body.providerStatus,502);assert.equal(unreadable.body.co
 assert.equal((await runBaZiS04PrivateReview({...base,env:{...env,RNT2_S04_REVIEW:''}})).status,409);
 assert.equal((await runBaZiS04PrivateReview({...base,userId:'customer'})).status,403);
 assert.equal((await runBaZiS04PrivateReview({...base,body:{...body,sectionKey:'S05_WEALTH'}})).status,400);
+assert.equal((await runBaZiS04PrivateReview({...base,body:{...body,profileId:'BAZI-FP-W17-001'}})).body.code,'V4_BASELINE_ONLY');
 assert.equal((await runBaZiS04PrivateReview({...base,env:{...env,OPENAI_API_KEY:''}})).status,503);
 assert.equal(store.reservations.size,0);
 assert.equal((await runBaZiS04PrivateReview({...base,body:{...body,action:'rnt2-s04-reverify'}})).body.code,'CSD_FROZEN_CANDIDATE_REQUIRED');
@@ -45,6 +46,8 @@ const first=pair.find(x=>x.status===200);
 assert.equal(first.body.result.productionActivated,false);assert.equal(first.body.result.ownerAcceptance,'PENDING');
 const reopened=await runBaZiS04PrivateReview({...base,env:{...env,OPENAI_API_KEY:''}});
 assert.equal(reopened.body.cacheHit,true);assert.deepEqual(reopened.body.result,first.body.result);assert.equal(calls,1);
+assert(first.body.objectKey.startsWith('qa/rnt2/csd-v4/s04/'));
+assert.equal(calls,1);
 const key=first.body.objectKey,original=store.objects.get(key),tampered=JSON.parse(original);
 tampered.result.status='PASS';store.objects.set(key,JSON.stringify(tampered));
 assert.equal((await runBaZiS04PrivateReview(base)).body.code,'S04_SNAPSHOT_INTEGRITY_FAILED');assert.equal(calls,1);

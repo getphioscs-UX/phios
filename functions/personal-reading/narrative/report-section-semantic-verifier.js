@@ -1,6 +1,7 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {REPORT_SECTION_NARRATIVE_BRIEF_VERSION} from './report-section-brief.js';
 import {evaluateCustomerEditorialR4} from './report-editorial-quality-r4.js';
+import {MARKET_ROLES,evaluateMarketReading} from './bazi-s04-market-reading.js';
 
 export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1';
 const ROLES=new Set(['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION']);
@@ -63,7 +64,7 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
  for(const [index,b] of blocks.entries()){
   const role=text(b?.role).toUpperCase(),body=text(b?.text),refs=uniq(arr(b?.claimRefs));
   if(refs.length!==arr(b?.claimRefs).length||uniq(arr(b?.supportRefs)).length!==arr(b?.supportRefs).length)reasons.push(`DUPLICATE_REFERENCES:${index}`);
-  if(!ROLES.has(role)&&!(brief.successorVersion&&role==='CAREER_THESIS'))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
+  if(!(brief.marketContract?MARKET_ROLES.includes(role):ROLES.has(role)||brief.successorVersion&&role==='CAREER_THESIS'))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
   if(!body)reasons.push(`BLOCK_TEXT_REQUIRED:${index}`);
   if(typeof b?.text!=='string'||body.length<20||body.length>2600)reasons.push(`BLOCK_TEXT_SIZE_INVALID:${index}`);
   if(!refs.length)reasons.push(`BLOCK_CLAIM_REFS_REQUIRED:${index}`);
@@ -108,7 +109,7 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
  for(const ref of meaningful)if(!used.has(ref))reasons.push('UNSUPPORTED_REVIEW_CLAIM:'+ref);
  for(const c of materialClaims)if(!meaningful.has(c.claimId))reasons.push('CLAIM_MEANING_NOT_VERIFIED:'+c.claimId);
  const technicalAccepted=reasons.length===0;
- const editorialQuality=brief.successorVersion?evaluateCustomerEditorialR4({brief,candidate,verification:{semanticReview:review}}):null;
+ const editorialQuality=brief.successorVersion?(brief.marketContract?evaluateMarketReading:evaluateCustomerEditorialR4)({brief,candidate,verification:{semanticReview:review}}):null;
  if(editorialQuality&&!editorialQuality.accepted)reasons.push(...editorialQuality.reasons);
  const seed={
   schemaVersion:'PHI-OS-REPORT-SECTION-SEMANTIC-VERIFICATION-v1.1.0',

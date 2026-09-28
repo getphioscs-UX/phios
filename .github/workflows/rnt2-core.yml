@@ -22,6 +22,7 @@ on:
       - 'scripts/check-rnt2-private-review.mjs'
       - 'scripts/check-bazi-s04-csd.mjs'
       - 'scripts/check-bazi-s04-identity.mjs'
+      - 'scripts/check-bazi-s04-market.mjs'
       - '.github/workflows/rnt2-core.yml'
 
 permissions:
@@ -44,4 +45,5 @@ jobs:
       - run: node scripts/check-rnt2-private-review.mjs
       - run: npm run check:bazi-s04-csd
       - run: npm run check:bazi-s04-v3-editorial
+      - run: npm run check:bazi-s04-v4
       - run: node --check assets/customer-ui/js/personal-products/rnt2-s04-review.js
