@@ -19,3 +19,17 @@ export function assertReportSubjectMatch({presentation,subjectReference,birthDat
  if(timeAccuracy==='UNKNOWN'&&presentation.birthTime!==null)throw Error('COVER_UNKNOWN_TIME_FABRICATED');
  return true;
 }
+
+export async function createReportSubjectPresentationFromAccountPerson({accountPersonReference,canonicalBirthInput,birthSourceRef}={}){
+ if(!accountPersonReference||typeof accountPersonReference!=='object')throw Error('REPORT_SUBJECT_ACCOUNT_PERSON_REFERENCE_REQUIRED');
+ const personId=text(accountPersonReference.personId),displayName=text(accountPersonReference.displayName);
+ if(!personId)throw Error('REPORT_SUBJECT_PERSON_ID_REQUIRED');
+ if(!displayName)throw Error('REPORT_SUBJECT_DISPLAY_NAME_REQUIRED');
+ return createReportSubjectPresentation({
+  subjectReference:personId,
+  displayName,
+  canonicalBirthInput,
+  identitySourceRef:'RDG_ACCOUNT_PERSON_REFERENCE:'+personId,
+  birthSourceRef:text(birthSourceRef)||'MCD3_CANONICAL_BIRTH_INPUT'
+ });
+}
