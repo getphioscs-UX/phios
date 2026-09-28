@@ -5,7 +5,7 @@
   "authority": {
     "birth": "MCD3_CANONICAL_BIRTH_INPUT",
     "subjectReference": "MPA_SUBJECT_REFERENCE",
-    "displayName": "EXISTING_TRUSTED_REPORT_SUBJECT_IDENTITY_OWNER_REQUIRED"
+    "displayName": "RDG_ACCOUNT_PERSON_REFERENCE.displayName"
   },
   "rules": {
     "coverBaseRemainsStatic": true,
@@ -26,7 +26,9 @@
     "COVER_FIELD_MISSING"
   ],
   "currentAudit": {
-    "canonicalDisplayNameOwnerResolved": false,
-    "blockProductionUntilTrustedDisplayNameBinding": true
+    "canonicalDisplayNameOwnerResolved": true,
+    "displayNameOwner": "content/governance/reality-data-governance/contracts/account-person-reference-v1.json",
+    "runtimeAdapter": "functions/canonical-presentation-runtime/report-cover-subject.js#createReportSubjectPresentationFromAccountPerson",
+    "blockProductionUntilTrustedDisplayNameBinding": false
   }
 }
