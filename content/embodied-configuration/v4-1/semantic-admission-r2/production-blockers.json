@@ -1,8 +1,6 @@
 {
   "scope": "ECR_V4.1_BASELINE_PRODUCT",
   "blockers": [
-    "COMPOSITIONAL_SEMANTIC_ADMISSION",
-    "RENDERED_VISUAL_ACCEPTANCE",
     "DEPLOYED_PREVIEW_E2E"
   ],
   "nonBlockers": [
@@ -29,15 +27,9 @@
       "result": "14/14 OWNER ACCEPTED"
     },
     "COMPOSITIONAL_SEMANTIC_ADMISSION": {
-      "status": "PENDING_MACHINE_VERIFICATION",
-      "result": "Governance + 64 Gate runtime tag evidence + validator/runtime wiring repaired; machine execution not yet run.",
-      "evidence": [
-        "content/embodied-configuration/v4-1/semantic-admission-r2/operational-tag-evidence-r7-v1.json",
-        "functions/embodied-configuration/ecr-semantic-composition-r2.js",
-        "functions/embodied-configuration/ecr-semantic-runtime-projection.js",
-        "scripts/check-ecr-v41-r8-runtime-alignment.mjs"
-      ],
-      "nextRequiredAction": "npm run check:ecr-v41:r8-runtime-alignment"
+      "status": "CLOSED",
+      "result": "MACHINE_PASS_OWNER_REPORTED",
+      "evidenceRef": "OWNER_REPORTED_LOCAL_EXECUTION_2026-09-28:R8_MACHINE_PASS"
     },
     "CARD_SLOT_ELIGIBILITY": {
       "status": "CLOSED",
@@ -48,8 +40,9 @@
       "result": "D/M/A operational admission complete; unresolved evidence fails closed to UNKNOWN"
     },
     "RENDERED_VISUAL_ACCEPTANCE": {
-      "status": "OPEN",
-      "result": "NOT_RUN"
+      "status": "CLOSED",
+      "result": "OWNER_ACCEPTED",
+      "evidenceRef": "OWNER_ACCEPT_CHAT_2026-09-28:R8_RENDERED_VISUAL"
     },
     "DEPLOYED_PREVIEW_E2E": {
       "status": "OPEN",
@@ -59,7 +52,9 @@
   "closedBlockers": [
     "BILINGUAL_REVIEW_PAIRS",
     "CARD_SLOT_ELIGIBILITY",
-    "TOPIC_PERSONAL_SELECTION"
+    "TOPIC_PERSONAL_SELECTION",
+    "RENDERED_VISUAL_ACCEPTANCE",
+    "COMPOSITIONAL_SEMANTIC_ADMISSION"
   ],
-  "nextRequiredAction": "RUN_R8_MACHINE_ALIGNMENT_CHECK_THEN_BUILD_RENDERED_REVIEW"
+  "nextRequiredAction": "R9_DEPLOYED_PREVIEW_E2E"
 }

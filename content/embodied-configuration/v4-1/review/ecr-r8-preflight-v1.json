@@ -1,7 +1,7 @@
 {
   "schemaVersion": "ECR-V4.1A-R8-PREFLIGHT-v1",
   "checkedAt": "2026-09-28",
-  "state": "HUMAN_VISUAL_REVIEW_READY",
+  "state": "R8_COMPLETE_R9_PENDING",
   "findings": [
     {
       "code": "R7_ADMISSION_VALIDATOR_SCHEMA_MISMATCH",
@@ -29,13 +29,13 @@
       "detail": "R7 authority entries and source order refreshed in ecr-v41-authorities.generated.js."
     }
   ],
-  "visualAcceptance": "PENDING_HUMAN_REVIEW",
+  "visualAcceptance": "ACCEPTED",
   "mayRenderForAcceptance": true,
   "updatedAt": "2026-09-28",
   "machineCheck": {
     "command": "npm run check:ecr-v41:r8-runtime-alignment",
     "status": "PASS_OWNER_REPORTED",
-    "evidenceRef": "OWNER_REPORTED_LOCAL_EXECUTION_2026-09-28",
+    "evidenceRef": "OWNER_REPORTED_LOCAL_EXECUTION_2026-09-28:R8_MACHINE_PASS",
     "independentlyVerifiedByAssistant": false
   },
   "renderBuild": {
@@ -49,5 +49,7 @@
     ],
     "artifactLocation": "LOCAL_WORKTREE_ONLY_NOT_COMMITTED"
   },
-  "nextRequiredAction": "OWNER_REVIEW_EN_ZH_1440_390_PRINT_AND_ACCEPT_OR_REJECT"
+  "nextRequiredAction": "R9_DEPLOYED_PREVIEW_E2E",
+  "visualAcceptanceEvidenceRef": "OWNER_ACCEPT_CHAT_2026-09-28:R8_RENDERED_VISUAL",
+  "visualReviewedAt": "2026-09-28"
 }
