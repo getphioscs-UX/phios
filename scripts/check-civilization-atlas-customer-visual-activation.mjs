@@ -32,7 +32,7 @@ const visual=read('assets/js/pages/civilization-atlas/atlas-static-visual.js');
 for(const token of ['period?.caseIds','snapshot?.majorCaseIds','family?.caseIds','trajectory?.relatedCases','transition?.relatedCases','lossType.exampleCaseIds']) assert.ok(visual.includes(token),`Missing context relation: ${token}`);
 assert.ok(visual.includes("WORLD_SNAPSHOT_ATMOSPHERE"));
 assert.ok(visual.includes("COMPARISON_FAMILY"));
-assert.ok(visual.includes("Visual Library"));
+assert.ok(!visual.includes("Visual Library"),'Generic visual library must be removed from Book V customer UI.');
 assert.ok(visual.includes("392")===false,'Do not hardcode 392 in runtime UI; count must come from bindings.');
 
 const reconfig=read('assets/js/pages/civilization-atlas/reconfiguration-renderer.js');
