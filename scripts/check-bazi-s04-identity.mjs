@@ -11,6 +11,7 @@ import {buildBaziProfessionalSurfaceModules} from '../functions/personal-profess
 import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
 import {verifyReportSectionComposition} from '../functions/personal-reading/narrative/report-section-semantic-verifier.js';
 import {naturalizeCareerLabels} from '../functions/personal-reading/narrative/bazi-s04-career-compression.js';
+import {createReportSemanticReview} from '../functions/personal-reading/narrative/report-section-semantic-review.js';
 const checks=['career-identity','value-creation','multi-mechanism','advantage-specificity','role-function-differentiation','scenario-diversity-v2','scenario-semantic-similarity','timing-contrast-v3','decision-priority','generic-work-advice','v3-editorial'];
 assert(['all',...checks].includes(process.argv[2]||'all'));
 // Aliases deliberately execute the complete small contract suite: no partial
@@ -43,6 +44,7 @@ const lexicalFixture={sourceBriefDigest:brief.briefSemanticDigest,blocks:brief.r
 let reviewerReached=false;await verifyReportSectionComposition({brief,candidate:lexicalFixture,semanticReview:async()=>{reviewerReached=true;return {};}});assert(reviewerReached,'Scoped negative and work-analysis phrases must reach full semantic review');
 for(const forbidden of ['You will get promoted.','你一定会成功。','你必然获得收入。','A diagnosis of depression is shown in your chart.']){const bad=structuredClone(lexicalFixture);bad.blocks[0].text+=' '+forbidden;let reached=false;const result=await verifyReportSectionComposition({brief,candidate:bad,semanticReview:async()=>{reached=true;return {};}});assert(!reached);assert(result.reasons.some(x=>/CERTAINTY|GUARANTEED|DIAGNOSIS/.test(x)));}
 const naturalized=await naturalizeCareerLabels({blocks:[{text:'self-position and carrying picture; delivery proves judgment.',claimRefs:['source']}]},'en');assert.equal(naturalized.audit.changes.length,3);assert.deepEqual(naturalized.candidate.blocks[0].claimRefs,['source']);assert.equal(naturalized.audit.additionalComposerCalls,0);assert.notEqual(naturalized.audit.beforeDigest,naturalized.audit.afterDigest);
+const schemaReview=createReportSemanticReview({model:'TEST',invoke:async request=>{const quotes=request.schema.properties.editorialAssessments.items.properties.evidence.enum;assert.deepEqual(quotes,[...new Set(editorialSentences(lexicalFixture.blocks.map(b=>b.text).join('\n')))]);assert(!quotes.includes('not in candidate'));return {output:{}};}});await schemaReview({brief,candidate:lexicalFixture,candidateDigest:await sha256Stable(lexicalFixture)});
 const rows=[{id:'BASELINE_NOW',ir}];
 for(const spec of generateCampaignCases().slice(0,24)){
  const full=await buildBaziFullReading({schemaVersion:'PHI-OS-BAZI-FULL-READING-REQUEST-v1.0.0',...buildInputs(spec),locale:'en'});
