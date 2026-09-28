@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "ECR-V4.1A-R8-PREFLIGHT-v1",
+  "checkedAt": "2026-09-28",
+  "state": "BLOCKED_PRE_RENDER",
+  "findings": [
+    {
+      "code": "R7_ADMISSION_VALIDATOR_SCHEMA_MISMATCH",
+      "status": "OPEN",
+      "detail": "Runtime admission validator recognizes old acceptedContent binding only; R7 uses acceptedRecordSnapshot."
+    },
+    {
+      "code": "W8_CARD_PRIORITY_SCHEMA_MISMATCH",
+      "status": "OPEN",
+      "detail": "Card selector expects numeric priority; R7-W8 uses governed priority object with tier/tieBreakers."
+    },
+    {
+      "code": "OPERATIONAL_TAG_EVIDENCE_MISSING",
+      "status": "OPEN",
+      "detail": "W4 governance rules are accepted, but no executable Gate Base -> semantic tag evidence records exist."
+    },
+    {
+      "code": "STALE_REPORT_COPY_AND_CHIRON_ASSERTIONS",
+      "status": "OPEN",
+      "detail": "Report/check scripts still contain pre-R7 wording and Chiron D11 expectations."
+    },
+    {
+      "code": "AUTHORITY_BUNDLE_REGEN_REQUIRED",
+      "status": "OPEN",
+      "detail": "Generated ECR authority bundle must be regenerated after runtime authority changes."
+    }
+  ],
+  "visualAcceptance": "NOT_RUN",
+  "mayRenderForAcceptance": false
+}
