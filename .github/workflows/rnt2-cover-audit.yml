@@ -9,6 +9,8 @@ on:
       - 'assets/customer-ui/js/personal-products/publication-report-pages.js'
       - 'assets/customer-ui/surfaces/report-publication.css'
       - 'scripts/build-rnt2-cover-fixture.mjs'
+      - 'scripts/check-rnt2-bazi-cover-publication.mjs'
+      - 'functions/personal-reading/bazi-customer-publication.js'
       - 'scripts/audit-rnt2-report-covers.mjs'
       - '.github/workflows/rnt2-cover-audit.yml'
 
@@ -29,6 +31,8 @@ jobs:
       - run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+      - name: Verify real BaZi publication cover binding
+        run: node scripts/check-rnt2-bazi-cover-publication.mjs
       - run: node scripts/build-rnt2-cover-fixture.mjs
       - name: Start local server
         run: |

@@ -18,6 +18,7 @@ import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production
 import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
 import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
 import {attachBaziPublicationAccess} from '../personal-reading/bazi-customer-publication.js';
+import {createReportSubjectPresentation} from '../canonical-presentation-runtime/report-cover-subject.js';
 import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-reading-production.js';
 import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignContextProfile} from '../external-profile/human-design-context-transport.js';
 import {buildEcrHumanDesignComparisonIR} from '../external-profile/ecr-human-design-comparison-ir.js';
@@ -333,6 +334,21 @@ export async function onRequestPost(context){
   const input=canonicalInput(body,location,consentRecordId,locale);
   const shape=validateCanonicalBirthInput(input);
   if(!shape.valid)return json({ok:false,error:'PERSONAL_REALITY_INPUT_INVALID',reasonCodes:shape.reasonCodes},422);
+  const reportSubjectName=clean(body?.reportSubjectName);
+  if(!reportSubjectName)return json({ok:false,error:'REPORT_SUBJECT_NAME_REQUIRED'},422);
+  if(reportSubjectName.length>120)return json({ok:false,error:'REPORT_SUBJECT_NAME_INVALID'},422);
+  const accountIdentity=context.data?.symbolicAccountIdentity||null;
+  if(accountIdentity?.authenticated===true&&accountIdentity?.userId){
+    try{
+      context.data.reportSubjectPresentation=await createReportSubjectPresentation({
+        subjectReference:accountIdentity.userId,
+        displayName:reportSubjectName,
+        canonicalBirthInput:input,
+        identitySourceRef:'CUSTOMER_DECLARED_SELF_REPORT_DISPLAY_NAME',
+        birthSourceRef:'MCD3_CANONICAL_BIRTH_INPUT'
+      });
+    }catch(error){return json({ok:false,error:error?.code||error?.message||'REPORT_SUBJECT_PRESENTATION_INVALID'},422)}
+  }
 
   const parameters=executionParameters(body);
   const numExpansionInput=numerologyExpansionInput(body);
