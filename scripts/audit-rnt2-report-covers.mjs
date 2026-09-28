@@ -31,7 +31,13 @@ try{
  const doc=await pdfjs.getDocument({data:new Uint8Array(fs.readFileSync(pdfPath)),disableWorker:true}).promise;
  for(let i=1;i<=doc.numPages;i++){
   const p=await doc.getPage(i),tc=await p.getTextContent(),txt=tc.items.map(x=>x.str).join(' ');
-  if(!txt.includes(expected.subject.displayName))evidence.errors.push('PDF_COVER_NAME_MISSING:P'+i);
+  if(!txt.includes('RNT2 QA'))evidence.errors.push('PDF_COVER_NAME_MISSING:P'+i);
+  const methodId=Object.keys(expected.expected)[i-1];
+  if(methodId){
+   const v=expected.expected[methodId];
+   if(!txt.includes(v.birthDate.replace(/\s+/g,' ').trim()))evidence.errors.push('PDF_COVER_DATE_MISSING:'+methodId+':P'+i);
+   if(!txt.includes(v.birthTime.replace(/\s+/g,' ').trim()))evidence.errors.push('PDF_COVER_TIME_MISSING:'+methodId+':P'+i);
+  }
  }
 }finally{await browser.close();}
 evidence.machinePass=evidence.errors.length===0;
