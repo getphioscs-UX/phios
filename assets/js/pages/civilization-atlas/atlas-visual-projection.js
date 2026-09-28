@@ -169,6 +169,7 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   const l=locale==='zh-Hans'?'zh-Hans':'en';
   const config=(projection?.layers||[]).find(x=>x.layerId===state.activeLayer);
   const slotConfig=slots?.layers?.[state.activeLayer]||null;
+  if(config?.mode==='STRUCTURED_READER_ONLY'||slotConfig?.presentationMode==='STRUCTURED_READER_ONLY'){container.hidden=true;container.innerHTML='';return;}
   if(slotConfig?.presentationMode==='SYSTEM_COMPOSED_FROM_ASSETS'||config?.mode==='SYSTEM_COMPOSED_FROM_ASSETS'){container.hidden=true;container.innerHTML='';return;}
   const poster=posterFor(config,state);
   if(!config||!slotConfig||!poster||poster.availability&&poster.availability!=='VERIFIED_LIVE_R2'){container.hidden=true;container.innerHTML='';return;}
