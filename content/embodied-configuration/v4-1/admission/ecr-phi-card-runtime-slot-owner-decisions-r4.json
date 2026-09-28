@@ -1,6 +1,6 @@
 {
   "schemaVersion": "ECR-V4.1A-PHI-CARD-OWNER-ADMISSION-R4-v1",
-  "status": "PARTIAL_OWNER_ADMISSION_OPERATIONAL_SELECTOR_STILL_FAIL_CLOSED",
+  "status": "OWNER_ADMISSION_COMPLETE_R7_W6",
   "baselineCommit": "228594a13148c8e0bca655be5813392388a6cb29",
   "ownerDecisionEvidenceRef": "OWNER_CHAT_R4_2026-09-24",
   "sourceDeck": "content/ecr-phi-card/ecr-phi-card-deck-registry-v2.json",
@@ -8,8 +8,8 @@
   "predecessorMeaningsChanged": false,
   "predecessorTaxonomyChanged": false,
   "summary": {
-    "ACCEPT": 43,
-    "REVISE": 5,
+    "ACCEPT": 48,
+    "REVISE": 0,
     "REJECT": 0
   },
   "coverageDecision": {
@@ -397,11 +397,11 @@
     {
       "cardId": "ECR-PC-D06",
       "predecessorGroup": "DRIVER",
-      "ownerDecision": "REVISE",
-      "state": "REVISED_MAPPING_APPLIED_REVIEW_PENDING",
-      "reviewedAt": "2026-09-24",
+      "ownerDecision": "ACCEPT",
+      "state": "OWNER_ACCEPTED_REVISED_MAPPING_R7_W6",
+      "reviewedAt": "2026-09-28",
       "reviewer": "OWNER",
-      "evidenceRef": "OWNER_CHAT_R4_2026-09-24",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W6_15_ITEMS",
       "reason": "BREAKTHROUGH is better anchored in reorganization/continuity than as an Identity-primary card. Identity remains a strong secondary expression.",
       "mapping": {
         "libraryRole": "DRIVER_OVERLAY_AND_PRIMARY_ELIGIBLE",
@@ -422,10 +422,36 @@
           "C5.IDENTITY_RECONFIGURATION.SELF_EXPANSION",
           "C4.INTENTION_FORMATION.FUTURE_PERCEPTION"
         ],
-        "phaseRef": null,
         "primarySelectionAllowed": true,
         "overlaySelectionAllowed": true
-      }
+      },
+      "acceptedRecordSnapshot": {
+        "cardId": "ECR-PC-D06",
+        "mapping": {
+          "libraryRole": "DRIVER_OVERLAY_AND_PRIMARY_ELIGIBLE",
+          "primarySlotEligibility": [
+            "FEEDBACK_CONTINUITY"
+          ],
+          "secondarySlotEligibility": [
+            "IDENTITY",
+            "AGENCY"
+          ],
+          "overlaySlotEligibility": [
+            "FEEDBACK_CONTINUITY",
+            "IDENTITY",
+            "AGENCY"
+          ],
+          "runtimeOwnerRefs": [
+            "FEEDBACK.CARRIER_CONTINUITY.REORGANIZATION",
+            "C5.IDENTITY_RECONFIGURATION.SELF_EXPANSION",
+            "C4.INTENTION_FORMATION.FUTURE_PERCEPTION"
+          ],
+          "primarySelectionAllowed": true,
+          "overlaySelectionAllowed": true
+        }
+      },
+      "exactContentBinding": true,
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
     },
     {
       "cardId": "ECR-PC-D07",
@@ -731,11 +757,11 @@
     {
       "cardId": "ECR-PC-T01",
       "predecessorGroup": "TENSION",
-      "ownerDecision": "REVISE",
-      "state": "REVISED_MAPPING_APPLIED_REVIEW_PENDING",
-      "reviewedAt": "2026-09-24",
+      "ownerDecision": "ACCEPT",
+      "state": "OWNER_ACCEPTED_REVISED_MAPPING_R7_W6",
+      "reviewedAt": "2026-09-28",
       "reviewer": "OWNER",
-      "evidenceRef": "OWNER_CHAT_R4_2026-09-24",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W6_15_ITEMS",
       "reason": "OVERLOAD describes capacity/cost risk; mapping it directly to agency collapse or runtime failure overstates the canonical card meaning.",
       "mapping": {
         "libraryRole": "TENSION_OVERLAY_ONLY",
@@ -751,10 +777,31 @@
           "K2A.ADAPTATION_COST_RECOVERY.RUNTIME_COST",
           "C1.RUNTIME_REGULATION.BUFFER_CAPACITY"
         ],
-        "phaseRef": null,
         "primarySelectionAllowed": false,
         "overlaySelectionAllowed": true
-      }
+      },
+      "acceptedRecordSnapshot": {
+        "cardId": "ECR-PC-T01",
+        "mapping": {
+          "libraryRole": "TENSION_OVERLAY_ONLY",
+          "primarySlotEligibility": [],
+          "secondarySlotEligibility": [],
+          "overlaySlotEligibility": [
+            "CARRIER",
+            "AGENCY",
+            "FEEDBACK_CONTINUITY"
+          ],
+          "runtimeOwnerRefs": [
+            "K2A.CAPACITY",
+            "K2A.ADAPTATION_COST_RECOVERY.RUNTIME_COST",
+            "C1.RUNTIME_REGULATION.BUFFER_CAPACITY"
+          ],
+          "primarySelectionAllowed": false,
+          "overlaySelectionAllowed": true
+        }
+      },
+      "exactContentBinding": true,
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
     },
     {
       "cardId": "ECR-PC-T02",
@@ -785,11 +832,11 @@
     {
       "cardId": "ECR-PC-T03",
       "predecessorGroup": "TENSION",
-      "ownerDecision": "REVISE",
-      "state": "REVISED_MAPPING_APPLIED_REVIEW_PENDING",
-      "reviewedAt": "2026-09-24",
+      "ownerDecision": "ACCEPT",
+      "state": "OWNER_ACCEPTED_REVISED_MAPPING_R7_W6",
+      "reviewedAt": "2026-09-28",
       "reviewer": "OWNER",
-      "evidenceRef": "OWNER_CHAT_R4_2026-09-24",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W6_15_ITEMS",
       "reason": "STALL may arise from constraint or incomplete conditions; direct links to agency collapse and drift are stronger than the canonical card meaning supports.",
       "mapping": {
         "libraryRole": "TENSION_OVERLAY_ONLY",
@@ -803,10 +850,29 @@
           "K2A.CONSTRAINT",
           "C4.DECISION_FORMATION"
         ],
-        "phaseRef": null,
         "primarySelectionAllowed": false,
         "overlaySelectionAllowed": true
-      }
+      },
+      "acceptedRecordSnapshot": {
+        "cardId": "ECR-PC-T03",
+        "mapping": {
+          "libraryRole": "TENSION_OVERLAY_ONLY",
+          "primarySlotEligibility": [],
+          "secondarySlotEligibility": [],
+          "overlaySlotEligibility": [
+            "AGENCY",
+            "FEEDBACK_CONTINUITY"
+          ],
+          "runtimeOwnerRefs": [
+            "K2A.CONSTRAINT",
+            "C4.DECISION_FORMATION"
+          ],
+          "primarySelectionAllowed": false,
+          "overlaySelectionAllowed": true
+        }
+      },
+      "exactContentBinding": true,
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
     },
     {
       "cardId": "ECR-PC-T04",
@@ -864,11 +930,11 @@
     {
       "cardId": "ECR-PC-T06",
       "predecessorGroup": "TENSION",
-      "ownerDecision": "REVISE",
-      "state": "REVISED_MAPPING_APPLIED_REVIEW_PENDING",
-      "reviewedAt": "2026-09-24",
+      "ownerDecision": "ACCEPT",
+      "state": "OWNER_ACCEPTED_REVISED_MAPPING_R7_W6",
+      "reviewedAt": "2026-09-28",
       "reviewer": "OWNER",
-      "evidenceRef": "OWNER_CHAT_R4_2026-09-24",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W6_15_ITEMS",
       "reason": "LOOP is principally feedback/experience repetition. Identity eligibility is not directly supported by the canonical card meaning and should be removed unless a later admitted identity rule supplies evidence.",
       "mapping": {
         "libraryRole": "TENSION_OVERLAY_ONLY",
@@ -883,19 +949,39 @@
           "FEEDBACK.CONSCIOUS_REALITY_SELECTION.RE_ENTRY",
           "C2.EXPERIENCE_STABILIZATION.NARRATIVE_REINFORCEMENT"
         ],
-        "phaseRef": null,
         "primarySelectionAllowed": false,
         "overlaySelectionAllowed": true
-      }
+      },
+      "acceptedRecordSnapshot": {
+        "cardId": "ECR-PC-T06",
+        "mapping": {
+          "libraryRole": "TENSION_OVERLAY_ONLY",
+          "primarySlotEligibility": [],
+          "secondarySlotEligibility": [],
+          "overlaySlotEligibility": [
+            "FEEDBACK_CONTINUITY",
+            "EXPERIENCE"
+          ],
+          "runtimeOwnerRefs": [
+            "FEEDBACK.CARRIER_CONTINUITY",
+            "FEEDBACK.CONSCIOUS_REALITY_SELECTION.RE_ENTRY",
+            "C2.EXPERIENCE_STABILIZATION.NARRATIVE_REINFORCEMENT"
+          ],
+          "primarySelectionAllowed": false,
+          "overlaySelectionAllowed": true
+        }
+      },
+      "exactContentBinding": true,
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
     },
     {
       "cardId": "ECR-PC-T07",
       "predecessorGroup": "TENSION",
-      "ownerDecision": "REVISE",
-      "state": "REVISED_MAPPING_APPLIED_REVIEW_PENDING",
-      "reviewedAt": "2026-09-24",
+      "ownerDecision": "ACCEPT",
+      "state": "OWNER_ACCEPTED_REVISED_MAPPING_R7_W6",
+      "reviewedAt": "2026-09-28",
       "reviewer": "OWNER",
-      "evidenceRef": "OWNER_CHAT_R4_2026-09-24",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W6_15_ITEMS",
       "reason": "WITHDRAWAL describes reduced input/connectivity/openness as a protective contraction. Mapping it to Identity Dissolution/Openness risks reversing the meaning and turning a tension into identity semantics.",
       "mapping": {
         "libraryRole": "TENSION_OVERLAY_ONLY",
@@ -910,10 +996,30 @@
           "K2A.FUNCTIONAL_CONNECTIVITY",
           "C1.RUNTIME_REGULATION.INPUT_MODULATION"
         ],
-        "phaseRef": null,
         "primarySelectionAllowed": false,
         "overlaySelectionAllowed": true
-      }
+      },
+      "acceptedRecordSnapshot": {
+        "cardId": "ECR-PC-T07",
+        "mapping": {
+          "libraryRole": "TENSION_OVERLAY_ONLY",
+          "primarySlotEligibility": [],
+          "secondarySlotEligibility": [],
+          "overlaySlotEligibility": [
+            "CARRIER",
+            "FEEDBACK_CONTINUITY"
+          ],
+          "runtimeOwnerRefs": [
+            "K2A.INTEGRITY.BOUNDARY",
+            "K2A.FUNCTIONAL_CONNECTIVITY",
+            "C1.RUNTIME_REGULATION.INPUT_MODULATION"
+          ],
+          "primarySelectionAllowed": false,
+          "overlaySelectionAllowed": true
+        }
+      },
+      "exactContentBinding": true,
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
     },
     {
       "cardId": "ECR-PC-T08",
