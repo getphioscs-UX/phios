@@ -91,3 +91,15 @@
  .pub-decoration{inset:0!important;overflow:hidden!important}
  .pub-decoration img{max-width:100%!important;max-height:100%!important}
 }
+
+/* REPORT-NARRATIVE-T2-R1 cover subject overlay */
+.pub-cover{position:relative;overflow:hidden}
+.pub-cover>img{display:block;width:100%;height:auto}
+.pub-cover-overlay{position:absolute;inset:0;pointer-events:none}
+.pub-cover-value{position:absolute;display:flex;align-items:center;justify-content:center;padding:0 1.2%;font-family:var(--phi-report-font-title);font-size:clamp(14px,1.45vw,24px);line-height:1.2;color:var(--phi-report-navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em}
+@media(max-width:600px){.pub-cover-value{font-size:clamp(10px,2.8vw,16px)}}
+@media print{
+ .pub-cover{width:210mm!important;height:297mm!important;margin:0!important;break-after:page!important;page-break-after:always!important}
+ .pub-cover>img{width:100%!important;height:100%!important;object-fit:contain!important}
+ .pub-cover-value{font-size:4.2mm;line-height:1.15}
+}
