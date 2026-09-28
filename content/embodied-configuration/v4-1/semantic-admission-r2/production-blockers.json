@@ -1,6 +1,7 @@
 {
   "scope": "ECR_V4.1_BASELINE_PRODUCT",
   "blockers": [
+    "COMPOSITIONAL_SEMANTIC_ADMISSION",
     "RENDERED_VISUAL_ACCEPTANCE",
     "DEPLOYED_PREVIEW_E2E"
   ],
@@ -28,16 +29,10 @@
       "result": "14/14 OWNER ACCEPTED"
     },
     "COMPOSITIONAL_SEMANTIC_ADMISSION": {
-      "status": "CLOSED",
-      "result": "64 Gate Base + 6 Line Modifier + 12 Driver + 2 Layer + 14 Tags + accepted composition/owner rules admitted",
-      "evidence": [
-        "content/embodied-configuration/v4-1/semantic-admission-r2/gate-line-runtime-admission-candidates-r7-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/personality-design-layer-canon-r7-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/semantic-tag-canon-r7-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/compositional-tag-rules-r7-v1.json",
-        "content/embodied-configuration/v4-1/semantic-admission-r2/runtime-owner-rules-r7-v1.json"
-      ]
+      "status": "OPEN",
+      "result": "R8 preflight found governance admitted but executable Gate->tag evidence absent.",
+      "reason": "resolveEcrSemanticComposition requires operational tag evidence. W4 governance rules do not contain requiredFactorIds/outputTags mappings.",
+      "nextRequiredAction": "R7_W10B_OPERATIONAL_TAG_EVIDENCE_ADMISSION"
     },
     "CARD_SLOT_ELIGIBILITY": {
       "status": "CLOSED",
@@ -58,9 +53,8 @@
   },
   "closedBlockers": [
     "BILINGUAL_REVIEW_PAIRS",
-    "COMPOSITIONAL_SEMANTIC_ADMISSION",
     "CARD_SLOT_ELIGIBILITY",
     "TOPIC_PERSONAL_SELECTION"
   ],
-  "nextRequiredAction": "R8_RENDERED_VISUAL_ACCEPTANCE"
+  "nextRequiredAction": "R7_W10B_OPERATIONAL_TAG_EVIDENCE_ADMISSION"
 }
