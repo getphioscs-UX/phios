@@ -13,7 +13,7 @@ export function formatReportCoverFields({methodId,subject}={}){
 }
 export function renderReportCoverOverlay({methodId,subject}={}){
  const cfg=reportCoverOverlay(methodId),values=formatReportCoverFields({methodId,subject});
- const item=(key,value)=>{const s=cfg.slots[key];return '<span class="pub-cover-value" data-cover-field="'+key+'" style="left:'+s.left+'%;top:'+s.top+'%;width:'+s.width+'%;height:'+s.height+'%;text-align:'+(s.align||'center')+'">'+esc(value)+'</span>';};
+ const item=(key,value)=>{const s=cfg.slots[key],mask=s.mask===true?'background:rgba(255,253,247,.96);border-radius:2px;':'';return '<span class="pub-cover-value" data-cover-field="'+key+'" data-cover-mask="'+(s.mask===true?'true':'false')+'" style="left:'+s.left+'%;top:'+s.top+'%;width:'+s.width+'%;height:'+s.height+'%;text-align:'+(s.align||'center')+';'+mask+'">'+esc(value)+'</span>';};
  return '<div class="pub-cover-overlay" data-cover-overlay-version="1" data-cover-method="'+esc(methodId)+'">'+item('name',values.name)+item('birthDate',values.birthDate)+item('birthTime',values.birthTime)+'</div>';
 }
 export function assertCoverOverlayValues({methodId,subject,renderedValues}={}){
