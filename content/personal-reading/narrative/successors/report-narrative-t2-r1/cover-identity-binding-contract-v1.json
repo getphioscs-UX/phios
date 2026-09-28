@@ -5,7 +5,8 @@
   "authority": {
     "birth": "MCD3_CANONICAL_BIRTH_INPUT",
     "subjectReference": "MPA_SUBJECT_REFERENCE",
-    "displayName": "RDG_ACCOUNT_PERSON_REFERENCE.displayName"
+    "displayName": "RDG_ACCOUNT_PERSON_REFERENCE.displayName | CUSTOMER_DECLARED_SELF_REPORT_DISPLAY_NAME",
+    "displayNameRule": "Prefer an existing AccountPersonReference when the surface has a governed person selector. Current Personal Reality SELF flow may use an explicit per-request reportSubjectName bound to the authenticated userId; it is presentation-only and never method input."
   },
   "rules": {
     "coverBaseRemainsStatic": true,
@@ -29,6 +30,14 @@
     "canonicalDisplayNameOwnerResolved": true,
     "displayNameOwner": "content/governance/reality-data-governance/contracts/account-person-reference-v1.json",
     "runtimeAdapter": "functions/canonical-presentation-runtime/report-cover-subject.js#createReportSubjectPresentationFromAccountPerson",
-    "blockProductionUntilTrustedDisplayNameBinding": false
+    "blockProductionUntilTrustedDisplayNameBinding": false,
+    "currentSelfFlow": {
+      "page": "/perspectives/personal/",
+      "subjectClass": "SELF",
+      "explicitReportSubjectNameRequired": true,
+      "browserNameDoesNotGrantAccountIdentity": true,
+      "authenticatedUserIdBindsSubjectReference": true,
+      "nameNeverEntersCanonicalBirthInput": true
+    }
   }
 }
