@@ -1,5 +1,6 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {REPORT_SECTION_NARRATIVE_BRIEF_VERSION} from './report-section-brief.js';
+import {evaluateCustomerEditorialR4} from './report-editorial-quality-r4.js';
 
 export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1';
 const ROLES=new Set(['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION']);
@@ -38,9 +39,10 @@ function hasMeaningForRole(claims,role){
  if(role==='NAVIGATION')return claims.some(c=>c.role==='NAVIGATION'||c.claimType==='CROSS_SECTION_RELEVANCE');
  return false;
 }
-function certaintyEscalated(body,claims){
+function certaintyEscalated(body,claims,successor=false){
  const weak=claims.some(c=>['UNRESOLVED','QUESTION','SYMBOLIC_CONDITIONAL','BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY'].includes(String(c.certainty||'').toUpperCase()));
- return weak&&/\b(?:certainly|definitely|always|proves?|will)\b|(?:一定|必然|证明|就是|绝对)/iu.test(assertionText(body));
+ const assertions=successor?assertionText(body).replace(/\b(?:who|when(?:\s+it)?)\s+will\b/giu,' ').replace(/不必然/gu,' '):assertionText(body);
+ return weak&&/\b(?:certainly|definitely|always|proves?|will)\b|(?:一定|必然|证明|就是|绝对)/iu.test(assertions);
 }
 
 export async function verifyReportSectionComposition({brief,candidate,semanticReview=null}={}){
@@ -51,11 +53,11 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
  if(await sha256Stable(briefSeed)!==briefSemanticDigest)reasons.push('SOURCE_LINEAGE_LOSS');
  if(candidate?.sourceBriefDigest!==briefSemanticDigest)reasons.push('SOURCE_DIGEST_MISMATCH');
  if(!blocks.length)reasons.push('NO_BLOCKS');
- if(blocks.length<4||blocks.length>10)reasons.push('BLOCK_COUNT_INVALID');
+ if(blocks.length<4||blocks.length>(brief.successorVersion?14:10))reasons.push('BLOCK_COUNT_INVALID');
  for(const [index,b] of blocks.entries()){
   const role=text(b?.role).toUpperCase(),body=text(b?.text),refs=uniq(arr(b?.claimRefs));
   if(refs.length!==arr(b?.claimRefs).length||uniq(arr(b?.supportRefs)).length!==arr(b?.supportRefs).length)reasons.push(`DUPLICATE_REFERENCES:${index}`);
-  if(!ROLES.has(role))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
+  if(!ROLES.has(role)&&!(brief.successorVersion&&role==='CAREER_THESIS'))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
   if(!body)reasons.push(`BLOCK_TEXT_REQUIRED:${index}`);
   if(typeof b?.text!=='string'||body.length<20||body.length>2600)reasons.push(`BLOCK_TEXT_SIZE_INVALID:${index}`);
   if(!refs.length)reasons.push(`BLOCK_CLAIM_REFS_REQUIRED:${index}`);
@@ -66,14 +68,15 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
   }
   const permittedSupports=new Set(claims.flatMap(c=>c.sourceRefs));
   if(!arr(b?.supportRefs).length||arr(b.supportRefs).some(ref=>!permittedSupports.has(ref)))reasons.push(`SOURCE_LINEAGE_LOSS:${index}`);
-  if(claims.length&&!hasMeaningForRole(claims,role))reasons.push(`ROLE_SUPPORT_MISMATCH:${index}:${role}`);
+  const conditionalRole=brief.successorVersion&&role==='OBSERVABLE_EXPRESSION'&&claims.some(c=>['MECHANISM','CAUSAL_CHAIN','SCENARIO'].includes(c.claimType)&&c.license?.allowsConditionalScenario);
+  if(claims.length&&!hasMeaningForRole(claims,role)&&!conditionalRole)reasons.push(`ROLE_SUPPORT_MISMATCH:${index}:${role}`);
   const prohibited=detect(body);if(prohibited)reasons.push(`${prohibited}:${index}`);
   for(const [operator,re] of Object.entries(OPERATOR_PATTERNS))if(re.test(body)&&!licenseAllows(claims,operator))reasons.push(`UNLICENSED_${operator}:${index}`);
-  if(certaintyEscalated(body,claims))reasons.push(`CERTAINTY_STRENGTHENING:${index}`);
+  if(certaintyEscalated(body,claims,Boolean(brief.successorVersion)))reasons.push(`CERTAINTY_STRENGTHENING:${index}`);
   if(role==='OBSERVABLE_EXPRESSION'){
    const admitsObserved=claims.some(c=>c?.license?.allowsObservedReality===true);
    const questionOnly=claims.every(c=>c.claimType==='QUESTION'||arr(c.conditions).includes('QUESTION_ONLY_NOT_OBSERVED_FACT')||!admitsObserved);
-   if(questionOnly&&!/[?？]|\b(?:compare|notice|observe|look for|which|what|when)\b|(?:观察|比较|留意|哪些|什么|什么时候)/iu.test(body))reasons.push(`REALITY_INFERENCE:${index}`);
+   if(questionOnly&&!/[?？]|\b(?:compare|notice|observe|look for|which|what|when|if)\b|(?:观察|比较|留意|哪些|什么|什么时候|如果|若|当)/iu.test(body))reasons.push(`REALITY_INFERENCE:${index}`);
   }
  }
  for(const role of brief.requiredClaimRoles)if(!roles.has(role))reasons.push(`REQUIRED_ROLE_MISSING:${role}`);
@@ -98,6 +101,9 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
  const meaningful=new Set(reviewBound?arr(review.meaningfullyUsedClaimRefs):[]);
  for(const ref of meaningful)if(!used.has(ref))reasons.push('UNSUPPORTED_REVIEW_CLAIM:'+ref);
  for(const c of materialClaims)if(!meaningful.has(c.claimId))reasons.push('CLAIM_MEANING_NOT_VERIFIED:'+c.claimId);
+ const technicalAccepted=reasons.length===0;
+ const editorialQuality=brief.successorVersion?evaluateCustomerEditorialR4({brief,candidate,verification:{semanticReview:review}}):null;
+ if(editorialQuality&&!editorialQuality.accepted)reasons.push(...editorialQuality.reasons);
  const seed={
   schemaVersion:'PHI-OS-REPORT-SECTION-SEMANTIC-VERIFICATION-v1.1.0',
   verifierVersion:REPORT_SECTION_SEMANTIC_VERIFIER_VERSION,
@@ -118,6 +124,7 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
   claimReferenceCoverage:Number(coverage.toFixed(4)),
   claimCoverage:materialClaims.length?materialClaims.filter(c=>meaningful.has(c.claimId)).length/materialClaims.length:0,
   semanticReview:review,
+  ...(editorialQuality?{technicalAccepted,editorialQuality}:{}),
   candidateDigest,
   usedClaimRefs:[...used],
   missingClaimRefs:materialClaims.map(c=>c.claimId).filter(id=>!used.has(id)),

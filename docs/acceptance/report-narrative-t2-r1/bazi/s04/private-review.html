@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>S04 双语审核</title>
 <style>body{max-width:860px;margin:40px auto;padding:0 24px;background:#fffdf7;color:#173047;font:17px/1.8 system-ui}button,a{margin-right:16px}button{padding:10px 16px}article{border-top:1px solid #cfbd91;margin-top:28px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}p{white-space:pre-wrap}#status{min-height:2em}</style>
-<h1>BaZi S04 · 双语审核</h1><p>生成并保存中文或英文候选正文。再次打开会读取同一份结果。机器验证与人工验收分别记录。</p>
+<h1>BaZi S04 · 客户叙事深度 V2</h1><p>生成并冻结新版职业解读。技术验证、自动编辑检查和人工验收分别记录。此版本仅供审核。</p>
 <p><a href="/api/auth/login">登录审核账户</a><a href="/account/">账户</a></p>
 <button data-locale="zh-Hans">生成／打开中文</button><button data-locale="en">Generate / open English</button>
 <button id="provider-status">检查模型访问（不生成）</button>
+<p>仅重新审核已冻结正文：</p><button data-locale="zh-Hans" data-reverify="true">复核中文（不生成）</button><button data-locale="en" data-reverify="true">Review frozen English</button>
+<details><summary>合成命盘对照测试</summary><p>使用既有确定性测试命盘，检查不同命盘是否产生不同职业解读。</p><button data-locale="en" data-profile="BAZI-FP-W17-001">生成／打开对照 A</button><button data-locale="en" data-profile="BAZI-FP-W17-031">生成／打开对照 B</button><button data-locale="en" data-profile="BAZI-FP-W17-001" data-reverify="true">复核对照 A（不生成）</button><button data-locale="en" data-profile="BAZI-FP-W17-031" data-reverify="true">复核对照 B（不生成）</button></details>
 <p id="status" role="status" aria-live="polite">仅限已授权的 QA 审核账户。</p><main id="result"></main>
 <script type="module" src="/assets/customer-ui/js/personal-products/rnt2-s04-review.js"></script></html>

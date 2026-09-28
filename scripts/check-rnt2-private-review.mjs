@@ -2,6 +2,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {build} from 'esbuild';
 import {runBaZiS04PrivateReview,inspectBaZiS04Provider} from '../functions/personal-reading/narrative/bazi-s04-private-review.js';
+import {auditFrozenCareerCandidate} from '../functions/personal-reading/narrative/bazi-s04-review-audit.js';
+import {prepareBaZiS04T2} from '../functions/personal-reading/narrative/bazi-s04-t2-runtime.js';
+import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
+import {SEMANTIC_REVIEW_CHECKS} from '../functions/personal-reading/narrative/report-section-semantic-review.js';
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
 const registry=JSON.parse(fs.readFileSync('content/ai-economics/providers/ai-provider-cost-registry-v1.json','utf8'));
 function storage(){
@@ -24,6 +28,8 @@ assert.equal((await runBaZiS04PrivateReview({...base,userId:'customer'})).status
 assert.equal((await runBaZiS04PrivateReview({...base,body:{...body,sectionKey:'S05_WEALTH'}})).status,400);
 assert.equal((await runBaZiS04PrivateReview({...base,env:{...env,OPENAI_API_KEY:''}})).status,503);
 assert.equal(store.reservations.size,0);
+assert.equal((await runBaZiS04PrivateReview({...base,body:{...body,action:'rnt2-s04-reverify'}})).body.code,'CSD_FROZEN_CANDIDATE_REQUIRED');
+assert.equal(store.reservations.size,0,'Review action cannot create a generation reservation');
 const pair=await Promise.all([runBaZiS04PrivateReview(base),runBaZiS04PrivateReview(base)]);
 assert.deepEqual(pair.map(x=>x.status).sort(),[200,409]);assert.equal(calls,1);
 const first=pair.find(x=>x.status===200);
@@ -37,6 +43,15 @@ store.objects.delete(key);assert.equal((await runBaZiS04PrivateReview(base)).sta
 const failing=storage(),failed={...base,env:{...env,...failing},compose:async()=>{throw Error('TEST');}};
 await assert.rejects(runBaZiS04PrivateReview(failed));
 assert.equal((await runBaZiS04PrivateReview(failed)).status,409,'interrupted run cannot spend twice');
+
+const prepared=await prepareBaZiS04T2({...source,locale:'en',successor:true});
+const frozenCandidate={sourceBriefDigest:prepared.brief.briefSemanticDigest,blocks:[]};
+const prior={...Object.fromEntries(SEMANTIC_REVIEW_CHECKS.map(k=>[k,true])),candidateDigest:await sha256Stable(frozenCandidate),sourceBriefDigest:prepared.brief.briefSemanticDigest,meaningfullyUsedClaimRefs:[],reasons:[],editorialAssessments:[]};
+const frozen={artifactDigest:'TEST_SOURCE_DIGEST',identity:{locale:'en'},result:{brief:prepared.brief,candidate:frozenCandidate,verification:{semanticReview:prior},internalOnly:{model:'gpt-5.6-luna',providerExecution:'INJECTED_TEST',actualTier:'DETERMINISTIC_FALLBACK'}}};
+const auditStorage=storage(),auditInput={record:frozen,key:'qa/rnt2/csd-v2/s04/test.json',env:{...env,...auditStorage},registry,adapter:()=>{throw Error('Reused review must not call model')}};
+const audit=await auditFrozenCareerCandidate(auditInput);assert.equal(audit.status,200);assert.equal(audit.body.result.result.reviewAudit.generationCalls,0);assert.equal(audit.body.result.result.reviewAudit.reviewCalls,0);assert.equal(audit.body.result.result.status,'FALLBACK','Malformed prose cannot pass through reuse');
+assert.equal((await auditFrozenCareerCandidate(auditInput)).body.cacheHit,true);
+assert.equal(auditStorage.reservations.size,1);assert.equal(auditStorage.objects.size,1);
 
 // Bundle in memory: regression checks must not leave another generated artifact tree.
 const compiled=await build({entryPoints:['functions/api/qa-bazi-t3.js'],bundle:true,platform:'node',format:'esm',write:false,logLevel:'silent'});

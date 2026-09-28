@@ -2,6 +2,9 @@
 
 ## Status
 
+> Successor notice (2026-09-28): the owner explicitly rejected the predecessor S04 editorial quality in the RNT2-W30+ attachment. Its technical PASS remains historical evidence, not acceptance. Continue with bazi/s04-csd-v2/PREDECESSOR-REJECTION.json and IMPLEMENTATION.md.
+
+
 S04 bilingual real T2 candidates are **READY_FOR_OWNER_ACCEPTANCE**. Both locales passed independent semantic verification with full claim coverage and locale parity. The broader implementation remains partial: this is not W0–W29 completion, owner acceptance, canary acceptance, or eight-method production admission.
 
 Original attachment baseline HEAD: `6ce925dacb0d3e21fc419cbb3f05ddf480e42de3`.

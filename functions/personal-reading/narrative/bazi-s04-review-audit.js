@@ -1,0 +1,43 @@
+import {sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
+import {createPublicationProviderAdapters,safeProviderFailure} from './narrative-provider.js';
+import {createReportSemanticReview,SEMANTIC_REVIEW_CHECKS} from './report-section-semantic-review.js';
+import {verifyReportSectionComposition} from './report-section-semantic-verifier.js';
+import {CSD_REVIEW_AUDIT_VERSION} from './report-editorial-quality-r4.js';
+import {careerReviewState} from './bazi-s04-customer-value.js';
+import {createPaiUsageRecord,estimatePaiProviderCost} from '../../_lib/pai-r1-economics.js';
+
+// Caller owns QA host, authentication, CSRF, allowlist and fixed source gates.
+// This action can only verify an already frozen candidate; it has no composer.
+export async function auditFrozenCareerCandidate({record,key,env,registry,adapter=null}){
+ const auditKey=key.replace(/\.json$/,'.'+CSD_REVIEW_AUDIT_VERSION+'.json');
+ const saved=await env.PRIVATE_REPORTS.get(auditKey);
+ if(saved){const value=await saved.json(),{artifactDigest,...seed}=value;if(await sha256Stable(seed)!==artifactDigest||value.sourceArtifactDigest!==record.artifactDigest)return {status:409,body:{ok:false,code:'CSD_AUDIT_INTEGRITY_FAILED'}};return {status:200,body:{ok:true,cacheHit:true,objectKey:auditKey,result:value}};}
+ const r=record.result;if(!r.candidate||!r.brief?.successorVersion)return {status:409,body:{ok:false,code:'CSD_FROZEN_CANDIDATE_REQUIRED'}};
+ const candidateDigest=await sha256Stable(r.candidate),prior=r.verification?.semanticReview;
+ const reusable=prior?.candidateDigest===candidateDigest&&prior.sourceBriefDigest===r.brief.briefSemanticDigest&&SEMANTIC_REVIEW_CHECKS.every(k=>prior[k]===true)&&!prior.reasons?.length&&prior.meaningfullyUsedClaimRefs?.every(id=>r.brief.claims.some(c=>c.claimId===id));
+ if(!reusable&&!adapter&&!env.OPENAI_API_KEY)return {status:503,body:{ok:false,code:'PROVIDER_CREDENTIAL_NOT_CONFIGURED'}};
+ const id='rnt2-csd-review:'+await sha256Stable({source:record.artifactDigest,version:CSD_REVIEW_AUDIT_VERSION}),now=new Date().toISOString();
+ const reserved=await env.RUNTIME_DB.prepare('INSERT OR IGNORE INTO runtime_artifacts(artifact_id,runtime_id,artifact_type,stage,payload,created_at,updated_at) VALUES(?,?,?,?,?,?,?)').bind(id,'QA-RNT2-S04-V1','RNT2_CSD_REVIEW_AUDIT','RUNNING',JSON.stringify({auditKey,sourceArtifactDigest:record.artifactDigest}),now,now).run();
+ if(Number(reserved.meta?.changes??reserved.changes)!==1)return {status:409,body:{ok:false,code:'CSD_AUDIT_ALREADY_RESERVED'}};
+ const invoke=adapter||createPublicationProviderAdapters({env}).OPENAI;
+ const model=r.internalOnly.model,usageRecords=[];let reviewCalls=0;
+ const reviewer=reusable?async()=>prior:createReportSemanticReview({model,invoke:async request=>{
+  reviewCalls++;const started=Date.now();
+  const result=await invoke({...request,signal:AbortSignal.timeout(120000)});
+  const usage=result.usage||{},counts={inputTokens:usage.input_tokens||0,cachedInputTokens:usage.input_tokens_details?.cached_tokens||0,outputTokens:usage.output_tokens||0};
+  usageRecords.push(createPaiUsageRecord({requestId:id,timestamp:new Date().toISOString(),requestType:'QA_REVIEW',aiExecutionClass:'T2_LIGHT_COMPOSITION',provider:'openai',model,...counts,estimatedProviderCost:estimatePaiProviderCost(registry.models.find(m=>m.modelId===model)||{},counts),providerAttemptCount:1,success:true,fallbackUsed:false,latencyMs:Date.now()-started}));return result;
+ }});
+ let verification;
+ try{verification=await verifyReportSectionComposition({brief:r.brief,candidate:r.candidate,semanticReview:reviewer});}
+ catch(error){return {status:502,body:{ok:false,code:'CSD_AUDIT_FAILED',...safeProviderFailure(error)}};}
+ const reviewState=careerReviewState({technicalPass:verification.technicalAccepted===true,editorialPass:verification.editorialQuality?.accepted===true});
+ const result={...r,status:verification.accepted?'PASS':'FALLBACK',verification,editorialQuality:verification.editorialQuality,reviewState,
+  internalOnly:{...r.internalOnly,initialAdmission:r.internalOnly.actualTier,actualTier:verification.accepted?'T2_GOVERNED_NATURAL_COMPOSITION':r.internalOnly.actualTier,fallbackUsed:!verification.accepted,fallbackReason:verification.accepted?null:'FROZEN_CANDIDATE_REVIEW_FAILED',reverificationOnly:true},
+  reviewAudit:{version:CSD_REVIEW_AUDIT_VERSION,sourceArtifactDigest:record.artifactDigest,candidateDigest,generationCalls:0,semanticReviewReused:reusable,reviewCalls,usageRecords},ownerAcceptance:'PENDING'};
+ const payload={identity:{...record.identity,auditVersion:CSD_REVIEW_AUDIT_VERSION},sourceArtifactDigest:record.artifactDigest,result,generatedAt:now,ownerAcceptance:'PENDING',productionActivated:false};
+ const value={...payload,artifactDigest:await sha256Stable(payload)};
+ const written=await env.PRIVATE_REPORTS.put(auditKey,JSON.stringify(value),{onlyIf:new Headers({'If-None-Match':'*'}),httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
+ if(!written)return {status:409,body:{ok:false,code:'CSD_AUDIT_ALREADY_EXISTS'}};
+ await env.RUNTIME_DB.prepare('UPDATE runtime_artifacts SET stage=?,updated_at=? WHERE artifact_id=?').bind(result.status,new Date().toISOString(),id).run();
+ return {status:200,body:{ok:true,cacheHit:false,objectKey:auditKey,result:value}};
+}

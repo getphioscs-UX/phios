@@ -3,6 +3,9 @@ import {createReportSectionNarrativeContract} from './report-section-contract.js
 import {buildReportSectionNarrativeBrief} from './report-section-brief.js';
 import {composePublicationNarrative} from './narrative-writer.js';
 import {evaluateReportEditorialQuality} from './report-editorial-quality-r3.js';
+import {extendCareerBrief} from './bazi-s04-career-ir.js';
+import {evaluateCustomerEditorialR4} from './report-editorial-quality-r4.js';
+import {careerReviewState} from './bazi-s04-customer-value.js';
 
 export const BAZI_S04_T2_RUNTIME_VERSION='PHI-OS-BAZI-S04-T2-RUNTIME-v1.0.0';
 
@@ -21,15 +24,17 @@ function contract(locale){
  });
 }
 
-export async function prepareBaZiS04T2({reading,locale,temporalSnapshot}={}){
+export async function prepareBaZiS04T2({reading,locale,temporalSnapshot,successor=false}={}){
  const richClaimIr=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S04_CAREER',locale,temporalSnapshot});
  const sectionContract=contract(locale);
- const brief=await buildReportSectionNarrativeBrief({contract:sectionContract,richClaimIr,locale,sourceAuthorityVersion:EXPLANATORY_AUTHORITY_VERSION,styleIntent:{tone:'WARM_PROFESSIONAL',depth:'PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false}});
+ let brief=await buildReportSectionNarrativeBrief({contract:sectionContract,richClaimIr,locale,sourceAuthorityVersion:EXPLANATORY_AUTHORITY_VERSION,styleIntent:{tone:'WARM_PROFESSIONAL',depth:'PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false}});
+ if(successor)brief=await extendCareerBrief(brief);
  return {richClaimIr,sectionContract,brief};
 }
 
-export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,env={},fetcher,providerAdapters=null,requestId}={}){
- const {richClaimIr,sectionContract,brief}=await prepareBaZiS04T2({reading,locale,temporalSnapshot});
+export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,env={},fetcher,providerAdapters=null,requestId,successor=false}={}){
+ const {richClaimIr,sectionContract,brief}=await prepareBaZiS04T2({reading,locale,temporalSnapshot,successor});
+ if(successor&&!brief.careerNarrativeIR.eligibility.eligible)return {status:'NOT_ELIGIBLE',locale,brief,richClaimIr,sectionContract,ownerAcceptance:'PENDING',internalOnly:{providerCalled:false,actualTier:'NOT_RUN',fallbackUsed:false,reasons:brief.careerNarrativeIR.eligibility.reasons}};
  const composition=await composePublicationNarrative({sectionBrief:brief,registry,env,fetcher,providerAdapters,requestId:requestId||('RNT2-BZR-S04-'+locale)});
  const blocks=composition.candidate?.blocks||[];
  const quality=evaluateReportEditorialQuality({blocks,paragraphs:blocks.map(b=>b.text),claimCoverage:composition.verification?.claimCoverage??null,requiredRoles:sectionContract.requiredClaimRoles,presentRoles:[...new Set(blocks.map(b=>b.role))],sectionSpecificTerms:locale==='zh-Hans'?['事业','责任','支持','资源','工作','大运','流年']:['career','responsibility','support','resources','work','Da Yun','annual']});
@@ -44,6 +49,7 @@ export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,e
   candidate:composition.candidate,
   verification:composition.verification,
   quality,
+  ...(successor?{careerNarrativeIR:brief.careerNarrativeIR,editorialQuality:evaluateCustomerEditorialR4({brief,candidate:composition.candidate,verification:composition.verification}),reviewState:careerReviewState({technicalPass:composition.verification?.technicalAccepted===true,editorialPass:composition.verification?.editorialQuality?.accepted===true}),reviewOnly:true}:{}),
   internalOnly:composition.internalOnly,
   usageRecord:composition.usageRecord||null,
   verificationUsageRecords:composition.verificationUsageRecords||[],

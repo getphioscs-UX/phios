@@ -20,6 +20,7 @@ on:
       - 'functions/personal-reading/narrative/bazi-s04-*.js'
       - 'functions/api/qa-bazi-t3.js'
       - 'scripts/check-rnt2-private-review.mjs'
+      - 'scripts/check-bazi-s04-csd.mjs'
       - '.github/workflows/rnt2-core.yml'
 
 permissions:
@@ -40,4 +41,5 @@ jobs:
       - run: node scripts/check-rnt2-adversarial.mjs
       - run: node scripts/check-rnt2-report-subject-flow.mjs
       - run: node scripts/check-rnt2-private-review.mjs
+      - run: npm run check:bazi-s04-csd
       - run: node --check assets/customer-ui/js/personal-products/rnt2-s04-review.js
