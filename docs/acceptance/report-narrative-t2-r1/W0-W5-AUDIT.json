@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-RNT2-W0-W5-AUDIT-v1.0.0",
+  "work": [
+    "RNT2-W0",
+    "RNT2-W1",
+    "RNT2-W2",
+    "RNT2-W3",
+    "RNT2-W4",
+    "RNT2-W5"
+  ],
+  "baselineStartHead": "6ce925dacb0d3e21fc419cbb3f05ddf480e42de3",
+  "authorityFreeze": {
+    "secondMethodRuntimeForbidden": true,
+    "secondProviderRouterForbidden": true,
+    "rendererMeaningAuthorityForbidden": true,
+    "fabricatedBirthTimeForbidden": true,
+    "silentFallbackForbidden": true
+  },
+  "narrativeRuntime": {
+    "owner": "functions/personal-reading/narrative/narrative-writer.js",
+    "publicationEntry": "composePublicationNarrative",
+    "finding": "EXISTING_WRITER_PRESERVED",
+    "gap": "PUBLICATION_T2_WAS_NOT_PROOF_OF_PROVIDER_COMPOSITION_WITHOUT_VERIFIER"
+  },
+  "providerRouter": {
+    "adapter": "functions/personal-reading/narrative/narrative-provider.js",
+    "economicsRouter": "functions/_lib/pai-r1-economics.js",
+    "providerRegistry": "content/ai-economics/providers/ai-provider-cost-registry-v1.json",
+    "finding": "EXISTING_ROUTER_PRESERVED",
+    "secondRouterCreated": false
+  },
+  "verifier": {
+    "genericNarrativeVerifier": "functions/personal-reading/narrative/narrative-claim-verifier.js",
+    "sectionVerifier": "functions/personal-reading/narrative/report-section-semantic-verifier.js",
+    "finding": "SECTION_SUCCESSOR_REQUIRED_AND_PRESENT",
+    "requiredClosure": [
+      "semantic operator preservation",
+      "certainty preservation",
+      "condition/counterweight preservation",
+      "timing scope",
+      "claim coverage"
+    ]
+  },
+  "snapshot": {
+    "genericCache": "functions/personal-reading/narrative/narrative-generation-cache.js",
+    "paidService": "functions/personal-reading/narrative/narrative-generation-service.js",
+    "finding": "EXISTING_CACHE_OWNER_PRESERVED",
+    "successorNeed": "SECTION_GENERATION_IDENTITY_AND_DELIVERY_SNAPSHOT_VERSIONING"
+  },
+  "delivery": {
+    "owner": "functions/report-delivery/*",
+    "currentVersion": "PHI-OS-REPORT-DELIVERY-R1",
+    "currentPilot": "BZR",
+    "finding": "R1_PRESERVED_SUCCESSOR_R2_REQUIRED",
+    "entitlementOwner": "EXISTING_COMMERCE_ACCOUNT_AUTHORITY",
+    "browserMayGrantEntitlement": false
+  },
+  "coverSubject": {
+    "birthOwner": "MCD3_CANONICAL_BIRTH_INPUT",
+    "subjectReferenceOwner": "MPA_SUBJECT_REFERENCE",
+    "displayNameOwner": "RDG_ACCOUNT_PERSON_REFERENCE.displayName",
+    "displayNameContract": "content/governance/reality-data-governance/contracts/account-person-reference-v1.json",
+    "finding": "DISPLAY_NAME_OWNER_RESOLVED"
+  },
+  "status": "PASS_WITH_SUCCESSOR_WORK_REQUIRED"
+}
