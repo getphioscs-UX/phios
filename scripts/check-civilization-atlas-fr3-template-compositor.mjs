@@ -54,7 +54,7 @@ assert.ok(!compositor.toLowerCase().includes('ocr'),'Compositor must not use OCR
 const templateIndex=shell.indexOf('data-atlas-template-projection');
 const controlsIndex=shell.indexOf('civ-template-controls');
 assert.ok(templateIndex>=0&&controlsIndex>templateIndex,'Library template must render before interactive fallback controls.');
-assert.ok(shell.includes('Open interactive data and controls')||shell.includes('打开互动资料与控制'));
+assert.ok(shell.includes('Explore periods')&&shell.includes('浏览历史时期'));
 
 assert.ok(page.includes("renderAtlasVisualProjection(root.querySelector('[data-atlas-template-projection]')"),'Atlas page must render the FR3 compositor.');
 assert.ok(page.includes('atlas-layer-template-slots-v1.json'),'Atlas page must load the owner-authored slot contract.');
@@ -63,6 +63,6 @@ assert.ok(page.includes("root.dataset.atlasProjection='LIBRARY_TEMPLATE_COMPOSIT
 assert.ok(css.includes('FR3 Library template compositor'),'FR3 compositor CSS missing.');
 assert.ok(css.includes('.civ-template-slot{position:absolute'),'Dynamic slots must be absolute overlays inside the template.');
 assert.ok(css.includes('.civ-template-trajectory-line'),'L6 dynamic graph styling missing.');
-assert.ok(css.includes('width:max(100%,64rem)'),'Responsive template must preserve readable desktop composition instead of squeezing to mobile width.');
+assert.ok(css.includes('.civ-template-board__stage{width:100%}'),'FR4 mobile template must use semantic reflow rather than a forced oversized board.');
 
 console.log('B6-WEB-FR3 template compositor gate PASS: Library L2–L8 layouts are primary templates and L6 owns a registered dynamic graph slot.');
