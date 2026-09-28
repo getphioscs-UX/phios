@@ -24,7 +24,7 @@ export async function verifyReportSectionComposition({brief,candidate}={}){
   for(const ref of refs){if(!source.has(ref))reasons.push(`UNKNOWN_CLAIM_REF:${ref}`);else used.add(ref);}
   const prohibited=detect(body);if(prohibited)reasons.push(`${prohibited}:${index}`);
  }
- for(const role of brief.requiredClaimRoles)if(role!=='OBSERVABLE_EXPRESSION'&&!roles.has(role))reasons.push(`REQUIRED_ROLE_MISSING:${role}`);
+ for(const role of brief.requiredClaimRoles)if(!roles.has(role))reasons.push(`REQUIRED_ROLE_MISSING:${role}`);
  const timingClaims=brief.claims.filter(c=>c.role==='TIMING_RELEVANCE');
  if(timingClaims.length&&brief.timingPolicy==='WHEN_AUTHORITY_PRESENT'&&!roles.has('TIMING_RELEVANCE'))reasons.push('REQUIRED_ROLE_MISSING:TIMING_RELEVANCE');
  const materialClaims=brief.claims.filter(c=>!['BOUNDARY'].includes(c.claimType));
