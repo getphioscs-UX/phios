@@ -204,9 +204,10 @@ async function executeOne(context,input,key,consentRecordId,parameters,numExpans
       return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||'ZIWEI_CX_R1_FULL_PRODUCTION_UNAVAILABLE']};
     }
   }
-  const request=new Request(new URL(spec.endpoint,context.request.url),{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body)});
+  const ecrV41Preview=spec.methodCode==='EMBODIED_CONFIGURATION'&&context.ecrV41PreviewAcceptance===true;
+  const request=new Request(new URL(spec.endpoint,context.request.url),{method:'POST',headers:{'content-type':'application/json','accept':'application/json',...(ecrV41Preview?{'x-phios-ecr-v41-preview':'1'}:{})},body:JSON.stringify(body)});
   const handler=spec.endpoint.includes('ecr-execute')?runEcrExecute:spec.endpoint.includes('ast-structural')?runAstStructuralExecute:runMethodExecute;
-  const response=await handler({request});
+  const response=await handler({request,env:context.env});
   const payload=await response.json().catch(()=>({}));
   if(!response.ok||payload?.ok!==true)return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:payload?.reasonCodes||[payload?.error||'METHOD_EXECUTION_FAILED']};
 
@@ -225,7 +226,7 @@ async function executeOne(context,input,key,consentRecordId,parameters,numExpans
       return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||error?.message||'NUM_CX_PRODUCTION_READING_UNAVAILABLE']};
     }
   }
-  if(spec.methodCode!=='ASTROLOGY')return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod};
+  if(spec.methodCode!=='ASTROLOGY')return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod,humanRuntime:spec.methodCode==='EMBODIED_CONFIGURATION'?payload.previewHumanRuntime||null:null,ecrV41PreviewMode:payload.previewMode||null};
 
   let meaningPayload;
   try{
@@ -313,6 +314,7 @@ export async function onRequestPost(context){
   const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';
   context.locale=locale;
   context.customerIntent=body?.intent||null;
+  context.ecrV41PreviewAcceptance=context.env?.PHIOS_ENVIRONMENT==='qa'&&body?.ecrV41PreviewAcceptance===true;
   let confirmedXpf=null;
   let humanDesignContext=null;
   if(body?.confirmedExternalProfile!=null){
@@ -410,7 +412,7 @@ export async function onRequestPost(context){
   let hdrTransitOverlay=null;
   if(hdrTargetContext&&confirmedXpf){try{hdrTransitOverlay=await buildHdrTransitOverlay({targetContext:hdrTargetContext,confirmedProfile:confirmedXpf})}catch(error){hdrTransitOverlay=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'HDR_TRANSIT_OVERLAY_UNAVAILABLE',boundary:freeze({usesConfirmedNatalChart:true,natalBaselineImmutable:true,transitDesignLayerCalculated:false,confirmedChartChanged:false,interpretationCreated:false,persisted:false})})}}
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
-  const productRoute=await buildPersonalRealityProductRoute({canonicalBirthInput:input,selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
+  const productRoute=await buildPersonalRealityProductRoute({canonicalBirthInput:input,selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId,ecrPreviewV41:context.ecrV41PreviewAcceptance===true});
   let ecrHumanDesignComparison=null;
   let ecrHumanDesignRealityBridge=null;
   if(humanDesignContext){
