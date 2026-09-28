@@ -1,3 +1,4 @@
+import {acceptedS04,acceptedS05} from './bazi-owner-acceptance.generated.js';
 import {buildBaZiS04T2,prepareBaZiS04T2,BAZI_S04_T2_RUNTIME_VERSION} from './bazi-s04-t2-runtime.js';
 import {REPORT_SECTION_T2_COMPOSER_VERSION,REPORT_SECTION_T2_PROMPT_VERSION} from './narrative-writer.js';
 import {REPORT_SECTION_SEMANTIC_VERIFIER_VERSION} from './report-section-semantic-verifier.js';
@@ -9,8 +10,6 @@ import comparisonFixtures from './bazi-s04-csd-fixtures.generated.js';
 import {auditFrozenCareerCandidate} from './bazi-s04-review-audit.js';
 import {buildWealthBrief,WEALTH_VERSION} from './bazi-s05-market-reading.js';
 import {buildBaZiS05T2,WEALTH_RUNTIME_VERSION,validateS04OwnerAcceptance} from './bazi-s05-t2-runtime.js';
-import acceptedS04 from '../../../docs/acceptance/report-narrative-t2-r1/bazi/s04-csd-v4/OWNER-ACCEPTANCE.json' with {type:'json'};
-import acceptedS05 from '../../../docs/acceptance/report-narrative-t2-r1/bazi/s05-market-v1/OWNER-ACCEPTANCE.json' with {type:'json'};
 import {buildReconciledBaZiBrief} from './bazi-s02-s03-reconciliation.js';
 import {buildReconciledBaZiT2,validateS05OwnerAcceptance} from './bazi-s02-s03-runtime.js';
 
@@ -39,7 +38,7 @@ export async function runBaZiS04PrivateReview({env,body,userId,source,registry,c
  const reviewers=String(env.RNT2_REVIEWER_IDS||'').split(',').map(s=>s.trim()).filter(Boolean);
  if(!userId||!reviewers.includes(userId))return fail('REVIEWER_REQUIRED',403);
  if(!['en','zh-Hans'].includes(body.locale)||body.sectionKey!==sectionKey||(body.profileId&&body.profileId!=='BASELINE_NOW'&&!Object.hasOwn(comparisonFixtures,body.profileId)))return fail('S04_FIXED_FIXTURE_REQUIRED',400);
- if(reconciled&&body.action!==`rnt2-${lane.toLowerCase()}`)return fail('RECONCILED_ACTION_REQUIRED',400);
+ if(reconciled&&![`rnt2-${lane.toLowerCase()}`,`rnt2-${lane.toLowerCase()}-reverify`].includes(body.action))return fail('RECONCILED_ACTION_REQUIRED',400);
  if(reconciled&&!await validateS05OwnerAcceptance(s05Acceptance))return fail('S05_BILINGUAL_OWNER_ACCEPTANCE_REQUIRED',409);
  if(wealth&&!await validateS04OwnerAcceptance(ownerAcceptance))return fail('S04_BILINGUAL_OWNER_ACCEPTANCE_REQUIRED',409);
  if(body.profileId&&body.profileId!=='BASELINE_NOW')return fail('V4_BASELINE_ONLY',400);
@@ -54,10 +53,10 @@ export async function runBaZiS04PrivateReview({env,body,userId,source,registry,c
  if(saved){
   const record=await saved.json(),{artifactDigest,...payload}=record;
   if(await sha256Stable(payload)!==artifactDigest||await sha256Stable(record.identity)!==digest)return fail('S04_SNAPSHOT_INTEGRITY_FAILED',409);
-  if(body.action===(wealth?'rnt2-s05-reverify':'rnt2-s04-reverify'))return auditFrozenCareerCandidate({record,key,env,registry});
+  if(body.action===`rnt2-${lane.toLowerCase()}-reverify`)return auditFrozenCareerCandidate({record,key,env,registry});
   return {status:200,body:{ok:true,cacheHit:true,objectKey:key,result:record}};
  }
- if(body.action===(wealth?'rnt2-s05-reverify':'rnt2-s04-reverify'))return fail('CSD_FROZEN_CANDIDATE_REQUIRED',409);
+ if(body.action===`rnt2-${lane.toLowerCase()}-reverify`)return fail('CSD_FROZEN_CANDIDATE_REQUIRED',409);
  // A missing secret must not consume the one-run reservation.
  if(!String(env.OPENAI_API_KEY||'').trim())return fail('PROVIDER_CREDENTIAL_NOT_CONFIGURED',503);
  const now=new Date().toISOString(),runtime=`QA-RNT2-${lane}-V1`;

@@ -82,4 +82,8 @@ assert.equal((await request({overrides:{RNT2_S04_REVIEW:''}})).status,409);
 // This bypasses the retired T3 experiment gate, but cannot spend without a secret.
 const missing=await request({overrides:{...storage()}});
 assert.equal((await missing.json()).code,'PROVIDER_CREDENTIAL_NOT_CONFIGURED');
+for(const sectionKey of ['S02_PERSONALITY','S03_LIFE_STRUCTURE']){
+ const response=await request({input:{action:'rnt2-'+sectionKey.slice(0,3).toLowerCase(),sectionKey,locale:'en'},overrides:{...storage()}});
+ assert.equal((await response.json()).code,'PROVIDER_CREDENTIAL_NOT_CONFIGURED','Reconciled section must reach the private T2 lane, not the legacy T3 stage gate');
+}
 console.log('PASS: S04 QA auth/CSRF/input gates, reviewer allowlist, persistent reservation, immutable digest-bound reopen, tamper rejection; no live provider call or generated files.');

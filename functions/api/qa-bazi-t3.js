@@ -24,10 +24,10 @@ export async function onRequest(context){
   let raw='',size=0;const decoder=new TextDecoder();
   for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>256){await reader.cancel();return reply({ok:false},413);}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
   const body=JSON.parse(raw);
-  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status','rnt2-s04','rnt2-s04-reverify','rnt2-s04-provider-status','rnt2-s05','rnt2-s05-reverify','rnt2-s02','rnt2-s03'].includes(body.action)))return reply({ok:false},400);
-  if(['rnt2-s05','rnt2-s05-reverify'].includes(body.action)){
+  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status','rnt2-s04','rnt2-s04-reverify','rnt2-s04-provider-status','rnt2-s05','rnt2-s05-reverify','rnt2-s02','rnt2-s03','rnt2-s02-reverify','rnt2-s03-reverify'].includes(body.action)))return reply({ok:false},400);
+  if(['rnt2-s05','rnt2-s05-reverify','rnt2-s02','rnt2-s03','rnt2-s02-reverify','rnt2-s03-reverify'].includes(body.action)){
    const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
-   const response=await runBaZiS04PrivateReview({env,body,userId:identity.userId,source:s04Source,registry,lane:body.action==='rnt2-s02'?'S02':body.action==='rnt2-s03'?'S03':'S05'});
+   const response=await runBaZiS04PrivateReview({env,body,userId:identity.userId,source:s04Source,registry,lane:body.action.startsWith('rnt2-s02')?'S02':body.action.startsWith('rnt2-s03')?'S03':'S05'});
    return reply(response.body,response.status);
   }
   if(body.action==='rnt2-s04-provider-status'){

@@ -10,10 +10,15 @@ const config=JSON.parse(fs.readFileSync(path.join(root,'wrangler.jsonc'),'utf8')
 const wrangler=path.join(root,'node_modules/wrangler/bin/wrangler.js');
 const out=path.join(root,'.wrangler/pages-production-build');
 fs.mkdirSync(out,{recursive:true});
+// Never treat a previous root _worker.js as today's source. This directory has
+// no static Worker, so repeated builds always compile the Functions tree.
+const assets=path.join(out,'empty-assets');
+fs.mkdirSync(assets,{recursive:true});
+if(fs.readdirSync(assets).length)throw new Error('Functions-only build input must stay empty');
 const run=args=>{const result=spawnSync(process.execPath,[wrangler,...args],{cwd:root,stdio:'inherit'});if(result.error)throw result.error;if(result.status!==0)throw new Error(`Wrangler failed: ${result.status}`);};
-run(['pages','functions','build','--outdir',out,'--output-routes-path',path.join(out,'_routes.json'),'--compatibility-date',config.compatibility_date,'--compatibility-flags',...config.compatibility_flags]);
+run(['pages','functions','build','--build-output-directory',assets,'--outdir',out,'--output-routes-path',path.join(out,'_routes.json'),'--compatibility-date',config.compatibility_date,'--compatibility-flags',...config.compatibility_flags]);
 const files=fs.readdirSync(out);
-if(files.some(name=>!['index.js','_routes.json'].includes(name)))throw new Error('Unexpected bundle modules: review before producing a single-file Worker');
+if(files.some(name=>!['index.js','_routes.json','empty-assets'].includes(name)))throw new Error('Unexpected bundle modules: review before producing a single-file Worker');
 const routes=JSON.parse(fs.readFileSync(path.join(out,'_routes.json'),'utf8'));
 if(routes.version!==1||!routes.include?.length)throw new Error('Missing generated Functions routes');
 const bytes=fs.readFileSync(path.join(out,'index.js'));

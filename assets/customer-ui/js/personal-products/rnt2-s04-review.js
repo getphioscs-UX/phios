@@ -11,7 +11,7 @@ for(const button of buttons)button.addEventListener('click',async()=>{
  if(location.origin!=='https://qa.phios-github.pages.dev'){status.textContent='请在 QA 站点打开此页。';return;}
  buttons.forEach(b=>b.disabled=true);status.textContent=button.dataset.reverify?'正在独立复核编辑版（不生成正文）…':'正在读取或生成，请保持页面打开…';result.replaceChildren();
  try{
-  const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:reconciledSection?'rnt2-'+reconciledSection.slice(0,3).toLowerCase():wealthPage?(button.dataset.reverify?'rnt2-s05-reverify':'rnt2-s05'):button.dataset.reverify?'rnt2-s04-reverify':'rnt2-s04',sectionKey:reconciledSection|| (wealthPage?'S05_WEALTH':'S04_CAREER'),locale:button.dataset.locale,...(button.dataset.profile?{profileId:button.dataset.profile}:{})}),cache:'no-store'});
+  const response=await fetch('/api/qa-bazi-t3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:reconciledSection?'rnt2-'+reconciledSection.slice(0,3).toLowerCase()+(button.dataset.reverify?'-reverify':''):wealthPage?(button.dataset.reverify?'rnt2-s05-reverify':'rnt2-s05'):button.dataset.reverify?'rnt2-s04-reverify':'rnt2-s04',sectionKey:reconciledSection|| (wealthPage?'S05_WEALTH':'S04_CAREER'),locale:button.dataset.locale,...(button.dataset.profile?{profileId:button.dataset.profile}:{})}),cache:'no-store'});
   const payload=await response.json();
   if(!response.ok||!payload.ok){status.textContent=response.status===401?'请先登录上方审核账户，再返回此页。':`暂未完成：${payload.code||response.status}`;return;}
   const snapshot=payload.result,r=snapshot.result;

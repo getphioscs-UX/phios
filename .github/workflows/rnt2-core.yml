@@ -20,8 +20,11 @@ on:
       - 'functions/personal-reading/narrative/bazi-s04-*.js'
       - 'functions/personal-reading/narrative/bazi-s05-*.js'
       - 'scripts/check-bazi-s05-market.mjs'
-      - 'functions/personal-reading/narrative/bazi-s02-s03-reconciliation.js'
+      - 'functions/personal-reading/narrative/bazi-s02-s03-*.js'
       - 'scripts/check-bazi-s02-s03-reconciliation.mjs'
+      - 'functions/personal-reading/narrative/bazi-owner-acceptance.generated.js'
+      - 'scripts/check-bazi-owner-receipts.mjs'
+      - 'scripts/build-cloudflare-pages.mjs'
       - 'functions/api/qa-bazi-t3.js'
       - 'scripts/check-rnt2-private-review.mjs'
       - 'scripts/check-bazi-s04-csd.mjs'
@@ -52,4 +55,5 @@ jobs:
       - run: npm run check:bazi-s04-v4
       - run: npm run check:bazi-s05-market
       - run: node scripts/check-bazi-s02-s03-reconciliation.mjs
+      - run: node scripts/check-bazi-owner-receipts.mjs
       - run: node --check assets/customer-ui/js/personal-products/rnt2-s04-review.js

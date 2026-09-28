@@ -1,6 +1,7 @@
 import {naturalizeCareerLabels} from './bazi-s04-career-compression.js';
 import {editFrozenMarketCandidate,MARKET_EDIT_VERSION} from './bazi-s04-market-editorial.js';
 import {editFrozenWealthCandidate,WEALTH_EDIT_VERSION} from './bazi-s05-market-editorial.js';
+import {editFrozenReconciledCandidate,RECONCILED_EDIT_VERSION} from './bazi-s02-s03-editorial.js';
 import {sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {createPublicationProviderAdapters,safeProviderFailure} from './narrative-provider.js';
 import {createReportSemanticReview,SEMANTIC_REVIEW_CHECKS} from './report-section-semantic-review.js';
@@ -14,12 +15,13 @@ import {createPaiUsageRecord,estimatePaiProviderCost} from '../../_lib/pai-r1-ec
 export async function auditFrozenCareerCandidate({record,key,env,registry,adapter=null}){
  const market=Boolean(record.result.brief?.marketContract);
  const wealth=record.result.brief?.marketDomain==='WEALTH';
- const auditVersion=wealth?WEALTH_EDIT_VERSION:market?MARKET_EDIT_VERSION:record.result.brief?.identityContract?'CSD-IDENTITY-REVIEW-v1.0.1':CSD_REVIEW_AUDIT_VERSION;
+ const reconciled=Boolean(record.result.brief?.reconciliation);
+ const auditVersion=reconciled?RECONCILED_EDIT_VERSION:wealth?WEALTH_EDIT_VERSION:market?MARKET_EDIT_VERSION:record.result.brief?.identityContract?'CSD-IDENTITY-REVIEW-v1.0.1':CSD_REVIEW_AUDIT_VERSION;
  const auditKey=key.replace(/\.json$/,'.'+auditVersion+'.json');
  const saved=await env.PRIVATE_REPORTS.get(auditKey);
  if(saved){const value=await saved.json(),{artifactDigest,...seed}=value;if(await sha256Stable(seed)!==artifactDigest||value.sourceArtifactDigest!==record.artifactDigest)return {status:409,body:{ok:false,code:'CSD_AUDIT_INTEGRITY_FAILED'}};return {status:200,body:{ok:true,cacheHit:true,objectKey:auditKey,result:value}};}
  let r=record.result;const naturalization=r.candidate&&r.brief?.identityContract?await naturalizeCareerLabels(r.candidate,r.locale):null;if(naturalization)r={...r,candidate:naturalization.candidate};if(!r.candidate||!r.brief?.successorVersion)return {status:409,body:{ok:false,code:'CSD_FROZEN_CANDIDATE_REQUIRED'}};
- const editorial=wealth?await editFrozenWealthCandidate(r.candidate,r.locale):market?await editFrozenMarketCandidate(r.candidate,r.locale):null;if(editorial)r={...r,candidate:editorial.candidate};
+ const editorial=reconciled?await editFrozenReconciledCandidate(r.candidate,r.locale,r.brief.sectionKey):wealth?await editFrozenWealthCandidate(r.candidate,r.locale):market?await editFrozenMarketCandidate(r.candidate,r.locale):null;if(editorial)r={...r,candidate:editorial.candidate};
  const candidateDigest=await sha256Stable(r.candidate);let prior=r.verification?.semanticReview,previousAuditDigest=null,previousAccepted=false;
  const previous=await env.PRIVATE_REPORTS.get(key.replace(/\.json$/,r.brief?.identityContract?'.CSD-IDENTITY-REVIEW-v1.0.0.json':'.CSD-REVIEW-v1.1.0.json'));
  if(previous){const previousRecord=await previous.json(),{artifactDigest,...seed}=previousRecord;if(await sha256Stable(seed)!==artifactDigest||previousRecord.sourceArtifactDigest!==record.artifactDigest||await sha256Stable(previousRecord.result.candidate)!==candidateDigest)return {status:409,body:{ok:false,code:'CSD_PRIOR_AUDIT_INTEGRITY_FAILED'}};prior=previousRecord.result.verification?.semanticReview;previousAuditDigest=artifactDigest;previousAccepted=previousRecord.result.verification?.accepted===true;}

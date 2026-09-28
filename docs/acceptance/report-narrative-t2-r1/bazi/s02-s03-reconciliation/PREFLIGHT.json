@@ -17,6 +17,7 @@
         "zh-Hans": {
           "briefDigest": "1e0eaf7bfd35c33c1d4d2787f0e2ce998d2974d26eab416958f2dd340c054660",
           "sourceDigest": "6cbba78e7c8e7f29f1cacc6a36a0dd4c6daa31709d726be5d4639be61de1c820",
+          "objectKey": "qa/rnt2/market-v1/s02/c32b3e0a5443a55060264228c2fc18a7ff3206ab7d1e68bac85a77384f36c000.json",
           "claimIds": [
             "S02:MARKET1:CHART_HIGHLIGHTS",
             "S02:MARKET1:S02_CHARACTER",
@@ -34,6 +35,7 @@
         "en": {
           "briefDigest": "4b9b643a8e3f4b94734956df29a93162112c4d161214ae9a015a64385dd3dfad",
           "sourceDigest": "6cbba78e7c8e7f29f1cacc6a36a0dd4c6daa31709d726be5d4639be61de1c820",
+          "objectKey": "qa/rnt2/market-v1/s02/012b881ef8ad6be3f4744703f60379302ec7b29dccadbbd267bffda805cdef0b.json",
           "claimIds": [
             "S02:MARKET1:CHART_HIGHLIGHTS",
             "S02:MARKET1:S02_CHARACTER",
@@ -63,6 +65,7 @@
         "zh-Hans": {
           "briefDigest": "516ae74cc4b7c6c3578cdd7e765238c79c08453c2855f46fad133712a542bc36",
           "sourceDigest": "c2fc199e2360bc5d8efddb5d0ed7a2ab91d5d5e1cb54dc465573813f78c41c39",
+          "objectKey": "qa/rnt2/market-v1/s03/919af9721ae01c86516e9156d759d3403c959ec75f55c6abea31146fa0bb6380.json",
           "claimIds": [
             "S03:MARKET1:CHART_HIGHLIGHTS",
             "S03:MARKET1:S03_CHARACTER",
@@ -80,6 +83,7 @@
         "en": {
           "briefDigest": "dafc5ed0cb2cc23e1accf02471aed9112339ca04869e12172a53807a61ea1aba",
           "sourceDigest": "c2fc199e2360bc5d8efddb5d0ed7a2ab91d5d5e1cb54dc465573813f78c41c39",
+          "objectKey": "qa/rnt2/market-v1/s03/4d2ce6efd9e57ece8aef293fbf26e625c1d6c390920082aa64b6ab5718d79f68.json",
           "claimIds": [
             "S03:MARKET1:CHART_HIGHLIGHTS",
             "S03:MARKET1:S03_CHARACTER",
@@ -99,5 +103,22 @@
   },
   "providerCalls": 0,
   "productionActivated": false,
-  "next": "Wire reconciled briefs into the existing writer/reviewer and protected QA lane; request scoped authorization before any live calls."
+  "next": "Wire reconciled briefs into the existing writer/reviewer and protected QA lane; request scoped authorization before any live calls.",
+  "execution": {
+    "authorization": {
+      "ownerInstruction": "继续",
+      "scope": "Continuation of the explicitly stated 4 writer + 4 independent reviewer request for S02/S03 bilingual baseline; OpenAI API",
+      "maximumCalls": 8,
+      "automaticRetries": 0
+    },
+    "qaDeployment": "https://21c87197.phios-github.pages.dev",
+    "state": "LIVE_REQUESTS_SUBMITTED_AFTER_ROUTE_FIX",
+    "productionActivated": false,
+    "priorSubmission": {
+      "state": "BLOCKED_BEFORE_PROVIDER",
+      "code": "STAGED_QUALITY_GATE",
+      "providerCalls": 0,
+      "cause": "S02/S03 absent from the new route dispatch condition; fixed and exercised through bundled onRequest regression."
+    }
+  }
 }

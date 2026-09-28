@@ -18,3 +18,15 @@ Implemented: deterministic reconciled brief builder, seven section-specific clai
 Validation: node scripts/check-bazi-s02-s03-reconciliation.mjs; S05 market regression; git diff --check. CI runs the reconciliation check. PREFLIGHT.json is the compact reproducible evidence, generated with --write.
 
 Remaining: connect these briefs to the existing writer/reviewer and protected QA route, then generate and independently review both locales for both sections. Specific authorization for four writer plus four reviewer calls has been requested; no such calls have run. Customer prose and owner acceptance remain pending. S06 and later sections have not been started.
+
+## Live QA continuation
+
+The owner continued the expressly scoped eight-call plan. Reconciled briefs now use the existing writer/reviewer and private QA handler, with separate S02/S03 identities, frozen S05 owner-receipt gate, one-run D1 reservation and immutable R2 storage. Four locale requests submitted at QA deployment https://fdcb41d2.phios-github.pages.dev; no automatic retries. Results pending.
+
+## Deployment compatibility repair
+
+The reported Git build used bundled Wrangler 3.114.17 and rejected JSON import attributes. The two owner receipts are now plain-JavaScript exports, with a regression check requiring exact equality and digest validity against canonical JSON. Functions contain no import attributes. Actual Functions-source builds passed with Wrangler 3.114.17 and lockfile Wrangler 4.120.0.
+
+The Pages build also now uses an empty static-input directory, so an existing root _worker.js cannot replace current Functions source during repeat builds. Two consecutive lockfile builds passed. The npm audit messages were not the build failure; no dependency upgrade was performed. Only QA was deployed; the failing production Git deployment has not been retried by this task.
+
+The first four UI submissions returned STAGED_QUALITY_GATE before any provider invocation: the HTTP allowlist included S02/S03 but the private-lane dispatch did not. The dispatch was corrected and a bundled onRequest test now requires both sections to reach PROVIDER_CREDENTIAL_NOT_CONFIGURED with absent credentials, rather than the legacy stage gate. Corrected QA deployment: https://21c87197.phios-github.pages.dev. The same four unspent requests were then submitted.
