@@ -13,13 +13,13 @@ const contract=createReportSectionNarrativeContract({methodId:'BZR',sectionKey:'
 const richClaimIr={version:'QA-IR-v1',claims,reflectionQuestions:[],counterPrompts:[]};
 const brief=await buildReportSectionNarrativeBrief({contract,richClaimIr,locale:'en',sourceAuthorityVersion:'QA-AUTH-v1'});
 const candidate={blocks:roles.map((role,i)=>({role,text:'Customer-readable licensed explanation for '+role.toLowerCase()+' in this governed QA fixture.',claimRefs:['C'+(i+1)]}))};
-const registry={models:[{providerId:'OPENAI',modelId:'qa-light',capabilityClass:'LIGHT',status:'AVAILABLE',planningCostRank:1}]};
-const providerAdapters={OPENAI:async()=>({output:candidate,provider:'OPENAI',model:'qa-light',usage:{inputTokens:100,outputTokens:200}})};
+const registry={models:[{providerId:'OPENAI',modelId:'gpt-5.6-luna',capabilityClass:'LIGHT',status:'AVAILABLE',planningCostRank:1}]};
+const providerAdapters={OPENAI:async()=>({output:candidate,provider:'OPENAI',model:'gpt-5.6-luna',usage:{inputTokens:100,outputTokens:200}})};
 const composed=await composeReportSectionT2({brief,registry,providerAdapters,requestId:'RNT2-CORE-QA'});
 if(composed.status!=='PASS'||composed.internalOnly.actualTier!=='T2_GOVERNED_NATURAL_COMPOSITION'||composed.verification?.accepted!==true)throw Error('RNT2_CORE_T2_FAILED');
 if(composed.verification.claimCoverage!==1)throw Error('RNT2_CORE_CLAIM_COVERAGE_FAILED');
 
-const identity=await buildReportSectionGenerationIdentity({methodId:'BZR',sectionKey:'S04_CAREER',locale:'en',compositionVersion:'1',promptVersion:'1',authorityVersion:'1',claimIrVersion:'1',verifierVersion:'1',evidenceDigest:'abc',schemaVersion:'1',provider:'OPENAI',model:'qa-light'});
+const identity=await buildReportSectionGenerationIdentity({methodId:'BZR',sectionKey:'S04_CAREER',locale:'en',compositionVersion:'1',promptVersion:'1',authorityVersion:'1',claimIrVersion:'1',verifierVersion:'1',evidenceDigest:'abc',schemaVersion:'1',provider:'OPENAI',model:'gpt-5.6-luna'});
 if(!identity.generationKey.startsWith('RNT2-'))throw Error('RNT2_GENERATION_IDENTITY_FAILED');
 if(retryDecision({attemptCount:0,errorClass:'PROVIDER_TIMEOUT'}).retryAllowed!==true)throw Error('RNT2_RETRY_POLICY_FAILED');
 if(semanticRepairDecision({verification:{accepted:false},repairCount:0}).repairAllowed!==true)throw Error('RNT2_REPAIR_POLICY_FAILED');
