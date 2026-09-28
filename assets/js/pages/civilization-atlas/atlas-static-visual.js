@@ -101,10 +101,7 @@ function ensureStyle(doc){
  .civ-visual-frame img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#071828}
  .civ-visual-frame figcaption{padding:1rem;line-height:1.6}.civ-visual-frame h4{margin:0 0 .4rem;color:#f1dfb0}.civ-visual-frame p{margin:.4rem 0}
  .civ-visual-frame button,.civ-visual-dialog button{padding:.65rem 1rem;border-radius:8px;border:1px solid #d5b36c;background:#122b40;color:#fff;cursor:pointer}
- .civ-visual-library{display:grid;gap:.75rem;padding:1rem;border:1px solid #d5b36c66;border-radius:14px}.civ-visual-library__head{display:flex;justify-content:space-between;gap:1rem;align-items:end}.civ-visual-library__head h4{margin:0}.civ-visual-library__count{font-size:.85rem;opacity:.78}.civ-visual-controls{display:grid;gap:.8rem;margin-block:.35rem}.civ-visual-controls label{display:grid;gap:.3rem}.civ-visual-controls select{max-width:100%;min-width:0;padding:.65rem}
- .civ-visual-dialog{max-width:94vw;max-height:94vh;padding:1rem;background:#071828;color:#fff;border:1px solid #d5b36c;border-radius:14px}.civ-visual-dialog::backdrop{background:#000b}.civ-visual-dialog img{display:block;max-width:88vw;max-height:76vh;object-fit:contain}
- [data-atlas-static-visuals] :focus-visible,.civ-visual-dialog :focus-visible{outline:3px solid #d5b36c;outline-offset:4px}
- @media(min-width:800px){.civ-visual-controls{grid-template-columns:1fr 2fr}}`;
+`;
  (doc.head||doc.documentElement).append(style);
 }
 function visualFigure(doc,a,locale){
