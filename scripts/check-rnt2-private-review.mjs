@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {build} from 'esbuild';
-import {runBaZiS04PrivateReview} from '../functions/personal-reading/narrative/bazi-s04-private-review.js';
+import {runBaZiS04PrivateReview,inspectBaZiS04Provider} from '../functions/personal-reading/narrative/bazi-s04-private-review.js';
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
 const registry=JSON.parse(fs.readFileSync('content/ai-economics/providers/ai-provider-cost-registry-v1.json','utf8'));
 function storage(){
@@ -13,6 +13,12 @@ const env={...store,PHIOS_ENVIRONMENT:'qa',BAZI_T3_PREVIEW_SHADOW:'enabled',RNT2
 let calls=0;
 const compose=async()=>{calls++;return {status:'FALLBACK',candidate:null,internalOnly:{providerExecution:'INJECTED_TEST'}};};
 const base={env,body,userId:'reviewer',source,registry,compose};
+let probes=0;
+const probe=await inspectBaZiS04Provider({...base,fetcher:async(url,options)=>{probes++;assert(url.startsWith('https://api.openai.com/v1/models/'));assert.equal(options.body,undefined);return Response.json({error:{code:'model_not_found',type:'invalid_request_error',message:'synthetic-secret'}},{status:404});}});
+assert.equal(probe.body.providerErrorCode,'model_not_found');assert.equal(probe.body.generationCalled,false);assert(!JSON.stringify(probe).includes('synthetic-secret'));assert.equal(probes,1);
+assert.equal((await inspectBaZiS04Provider({...base,userId:'other',fetcher:()=>{throw Error('Unauthorized probe')}})).status,403);
+const unreadable=await inspectBaZiS04Provider({...base,fetcher:async(url,options)=>{assert.equal(options.redirect,'manual');return new Response('not json',{status:502});}});
+assert.equal(unreadable.body.providerStatus,502);assert.equal(unreadable.body.code,'PROVIDER_PROBE_UNREADABLE_RESPONSE');
 assert.equal((await runBaZiS04PrivateReview({...base,env:{...env,RNT2_S04_REVIEW:''}})).status,409);
 assert.equal((await runBaZiS04PrivateReview({...base,userId:'customer'})).status,403);
 assert.equal((await runBaZiS04PrivateReview({...base,body:{...body,sectionKey:'S05_WEALTH'}})).status,400);

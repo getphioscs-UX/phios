@@ -9,6 +9,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const config=JSON.parse(fs.readFileSync(path.join(root,'wrangler.jsonc'),'utf8'));
 const wrangler=path.join(root,'node_modules/wrangler/bin/wrangler.js');
 const out=path.join(root,'.wrangler/pages-production-build');
+fs.mkdirSync(out,{recursive:true});
 const run=args=>{const result=spawnSync(process.execPath,[wrangler,...args],{cwd:root,stdio:'inherit'});if(result.error)throw result.error;if(result.status!==0)throw new Error(`Wrangler failed: ${result.status}`);};
 run(['pages','functions','build','--outdir',out,'--output-routes-path',path.join(out,'_routes.json'),'--compatibility-date',config.compatibility_date,'--compatibility-flags',...config.compatibility_flags]);
 const files=fs.readdirSync(out);

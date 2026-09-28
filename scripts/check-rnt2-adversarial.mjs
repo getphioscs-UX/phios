@@ -9,6 +9,7 @@ import {classifyProviderFailure,retryDecision} from '../functions/personal-readi
 import {verifyReportLocaleParity} from '../functions/personal-reading/narrative/report-locale-parity.js';
 import {buildReportDeliveryR2} from '../functions/report-delivery/report-delivery-r2.js';
 import {SEMANTIC_REVIEW_CHECKS} from '../functions/personal-reading/narrative/report-section-semantic-review.js';
+import {safeProviderFailure} from '../functions/personal-reading/narrative/narrative-provider.js';
 
 const roles=['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS'];
 const contract=createReportSectionNarrativeContract({methodId:'BZR',sectionKey:'TEST',requiredClaimRoles:roles});
@@ -23,6 +24,7 @@ for(const mutate of [
  c=>{c.blocks[0].supportRefs=['someone-else']},
  c=>{c.blocks[0].text='This causes you to become the director next year.'},
  c=>{c.blocks[0].claimRefs=['unknown']}
+ ,c=>{c.blocks[0].claimRefs.push(c.blocks[0].claimRefs[0])}
 ]){
  const c=structuredClone(candidate);mutate(c);
  assert.equal((await verifyReportSectionComposition({brief,candidate:c,semanticReview:reviewer})).accepted,false);
@@ -33,12 +35,17 @@ assert.equal((await verifyReportSectionComposition({brief,candidate,semanticRevi
 const changed=await buildReportSectionNarrativeBrief({contract,richClaimIr:{...ir,claims:ir.claims.map(c=>({...c,conditions:['Different condition']}))},locale:'en'});
 assert.notEqual(changed.sourceSemanticDigest,brief.sourceSemanticDigest);
 const registry={models:[{providerId:'OPENAI',modelId:'qa-model',capabilityClass:'LIGHT',status:'AVAILABLE',planningCostRank:1}]};
+const providerRejected=await composeReportSectionT2({brief,registry,env:{OPENAI_API_KEY:'synthetic-secret'},fetcher:async()=>Response.json({error:{code:'model_not_found',type:'invalid_request_error',message:'Do not persist synthetic-secret or private source'}},{status:404})});
+assert.equal(providerRejected.internalOnly.attemptLog[0].httpStatus,404);
+assert.equal(providerRejected.internalOnly.attemptLog[0].providerErrorCode,'model_not_found');
+assert(!JSON.stringify(providerRejected).includes('synthetic-secret'));
+assert.equal(safeProviderFailure({details:{status:401,providerErrorCode:'secret-looking-value'}}).providerErrorCode,null);
 let networkCalls=0;
 const missing=await composeReportSectionT2({brief,registry,env:{},fetcher:()=>{networkCalls++;throw Error('not reachable')}});
 assert.equal(networkCalls,0);assert.equal(missing.internalOnly.providerCalled,false);
 assert.equal(missing.internalOnly.actualTier,'DETERMINISTIC_FALLBACK');
 let generationCalls=0;
-const failed=await composeReportSectionT2({brief,registry,providerAdapters:{OPENAI:async()=>{generationCalls++;return {output:{...candidate,sourceBriefDigest:'bad'}}}}});
+const failed=await composeReportSectionT2({brief,registry,providerAdapters:{OPENAI:async request=>{generationCalls++;assert(!JSON.stringify(request.schema).includes('uniqueItems'));return {output:{...candidate,sourceBriefDigest:'bad'}}}}});
 assert.equal(failed.status,'FALLBACK');assert.equal(generationCalls,2);assert.equal(failed.internalOnly.repairCount,1);
 assert.equal(classifyProviderFailure({code:'NARRATIVE_PROVIDER_REQUEST_FAILED',details:{status:429}}),'PROVIDER_RATE_LIMIT');
 assert.equal(retryDecision({attemptCount:0,errorClass:classifyProviderFailure({details:{status:503}})}).retryAllowed,true);

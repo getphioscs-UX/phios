@@ -25,6 +25,8 @@ Concurrent edits were observed; the user confirmed the other editor was paused, 
 - Locale checks now compare source lineage and semantic scope, candidate claim sets and Brief bindings. Two absent candidates are `NOT_RUN`, not accepted parity.
 - Core CI includes adversarial regressions. Narrative-writer changes trigger the S04 workflow.
 - Existing publication browser bundle rebuilt using `scripts/sync-bazi-publication-browser.mjs`; no parallel renderer added.
+- Added action `rnt2-s04` to the existing authenticated `/api/qa-bazi-t3` route. It uses the Cloudflare `OPENAI_API_KEY` binding, accepts only the fixed S04 source and en/zh-Hans, requires QA opt-in and a server-side reviewer allowlist, and stores digest-bound immutable QA results in PRIVATE_REPORTS. D1 reserves each Brief/version identity before any provider call. Missing credentials do not reserve; interrupted calls remain reserved to prevent automatic duplicate spending. This is a review snapshot, not customer production admission.
+- Removed unresolved merge markers from the core CI workflow while preserving both sides' tests. Added the private-review regression to CI.
 
 ## VERIFIED
 
@@ -38,18 +40,21 @@ Commands completed successfully:
 - `node scripts/check-report-editorial-quality.mjs`
 - `node scripts/check-cloudflare-function-import-compat.mjs`
 - `git diff --check`
+- `node scripts/check-rnt2-private-review.mjs` (mock storage/provider; authentication, CSRF, input limits, concurrency, frozen reopen, tamper rejection and interrupted-run reservation)
+- `node scripts/check-bazi-t3-preview.mjs` (existing QA route regression)
+- `node scripts/build-cloudflare-pages.mjs --check-only` (Worker 13,761,018 bytes; gzip 2,552,041 bytes; no deployment)
 - Cover builder and headless Edge audit: 8 methods × 8 fixtures, **64 logical / 64 physical PDF pages**, no machine field/parity/clipping failures. Includes short/long Latin and Chinese names, mixed name, exact time, approximate time and unknown time. Reproducible screenshots and PDF were subsequently removed at the user's request; the compact result remains in `COVER-QA.json`. These tests used fixture data, not customer production reports.
 
 Core composition tests inject both the writer and reviewer responses. They establish control flow and rejection behavior, **not live provider quality**. Regression checks of the previous BaZi publication path establish non-regression, not activation of the new paid T2 path.
 
 ## NOT_RUN / BLOCKED
 
-- User confirmed the API key is configured in **Cloudflare Secrets**. The local process and Windows User/Machine environments have no API key; no `.env`/`.dev.vars` exists in this checkout. The existing S04 builder only reads local process environment. No deployed protected S04 successor entry point was found. Cloudflare secret values were not requested, retrieved or logged.
-- Actual S04 writer and semantic-review provider calls: **NOT_RUN**. Current `bazi/s04/MACHINE-EVIDENCE.json` records this honestly. Both T2 candidates remain null; neither locale is ready for owner acceptance.
+- Cloudflare inspection confirmed `OPENAI_API_KEY` exists as a secret in both production and preview. Its value was not requested, retrieved or logged. The protected S04 action is now deployed to QA with `RNT2_S04_REVIEW` and the encrypted `RNT2_REVIEWER_IDS` configured for the user's verified existing account. Remaining blocker is the provider request failure described below, not identity or missing local credentials.
+- Actual S04 generation requests reached the provider for both locales and returned `NARRATIVE_PROVIDER_REQUEST_FAILED`; each frozen result records one attempt. English was generated at 2026-09-28T03:56:14.260Z; Chinese was already stored at 2026-09-28T03:55:26.672Z when reopened. Both candidates remain null; semantic review did not run. Private R2 snapshot digests were validated before importing the real results into `bazi/s04/MACHINE-EVIDENCE.json` using `RNT2_S04_SNAPSHOT_DIR`; this import performs no model calls.
 - Production persistent snapshot-store wiring, trusted report-subject binding construction in authenticated middleware, live entitlement/reopen/Explore integration and production activation remain incomplete. Strict helpers deliberately reject missing bindings.
 - Full report HTML/PDF semantic parity, mobile report navigation/reopen, per-method adapters/calibration/acceptance, canary and production are not verified by cover QA.
 - Full per-method editorial calibration remains pending. Section specificity is explicitly unmeasured rather than reusing claim coverage as a substitute.
-- No deployment, push, production switch, owner acceptance or additional method rollout was performed.
+- The protected S04 review entry was deployed to the existing **QA preview only**. No push, production switch, owner acceptance or additional method rollout was performed.
 
 ## READY_FOR_OWNER_ACCEPTANCE
 
@@ -68,6 +73,16 @@ None for S04. Once a protected environment executes the updated builder successf
 - File manifest: `CHANGED-FILES.txt`.
 
 Next: finish authenticated server-side execution/binding and persistence; run actual S04 composition and review in the protected environment; verify full-report browser/PDF parity; then present valid frozen candidates for the two owner decisions. Do not label the partial infrastructure as production-ready.
+
+### Protected S04 execution
+
+After deploying the reviewed changes to the existing QA preview, configure preview-only `RNT2_S04_REVIEW=enabled` and `RNT2_REVIEWER_IDS` as a comma-separated list of existing authenticated account userIds. Retain the existing account authentication and sandbox D1/R2 bindings. Using that account's normal same-origin session, POST to `/api/qa-bazi-t3` with `{"action":"rnt2-s04","locale":"en","sectionKey":"S04_CAREER"}`, then repeat for `zh-Hans`. The request does not accept user identity, source, model, prompt or secret overrides. Reopening returns the same frozen result and digest. A failed/interrupted reservation requires operator investigation; do not delete it and blindly repeat paid calls. Each result retains owner acceptance PENDING and productionActivated false.
+
+The user supplied the account's Auth0 subject after the email lookup failed. A read-only QA query confirmed its active existing PHI OS account mapping. Its userId is now configured in the preview's encrypted RNT2_REVIEWER_IDS binding; OPENAI_API_KEY was retained and production configuration was verified unchanged. Existing OIDC login succeeded in the browser. The user explicitly authorized the BaZi S04 source/Brief transfer to OpenAI and the real bilingual generation/review API costs after automatic approval review initially blocked the generation click. The rejected click did not execute.
+
+QA review UI: https://qa.phios-github.pages.dev/docs/acceptance/report-narrative-t2-r1/bazi/s04/private-review . The UI exposes saved text and machine evidence without granting owner acceptance. Added an authenticated read-only model-access probe: it sends no chart/Brief, calls no generation endpoint, and returns only status plus allowlisted error codes. Raw provider error messages are not persisted. The original failed snapshots remain immutable; diagnostic changes do not invalidate their reservation keys.
+
+The clean build initially exposed a missing temporary output directory. `build-cloudflare-pages.mjs` now creates it before invoking Wrangler. Clean build and private-review/adversarial regressions passed. Deployment staging copies and temporary downloaded snapshots are removed after verification.
 
 ## Final cover visual review
 

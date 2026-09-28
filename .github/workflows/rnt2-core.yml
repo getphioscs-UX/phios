@@ -11,6 +11,8 @@ on:
       - 'scripts/check-rnt2-core.mjs'
       - 'scripts/check-rnt2-adversarial.mjs'
       - 'functions/personal-reading/narrative/narrative-writer.js'
+      - 'functions/personal-reading/narrative/narrative-provider.js'
+      - 'assets/customer-ui/js/personal-products/rnt2-s04-review.js'
       - 'scripts/check-rnt2-report-subject-flow.mjs'
       - 'functions/api/customer-personal-reality.js'
       - 'assets/customer-ui/js/surfaces/personal-reality.js'
@@ -38,3 +40,4 @@ jobs:
       - run: node scripts/check-rnt2-adversarial.mjs
       - run: node scripts/check-rnt2-report-subject-flow.mjs
       - run: node scripts/check-rnt2-private-review.mjs
+      - run: node --check assets/customer-ui/js/personal-products/rnt2-s04-review.js

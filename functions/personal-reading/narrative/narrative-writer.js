@@ -1,5 +1,5 @@
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
-import {invokeOpenAIStructured,createPublicationProviderAdapters} from './narrative-provider.js';
+import {invokeOpenAIStructured,createPublicationProviderAdapters,safeProviderFailure} from './narrative-provider.js';
 import {selectPaiRoute} from '../../_lib/pai-r1-economics.js';
 export const NARRATIVE_DRAFT_SCHEMA='PHI-OS-NARRATIVE-DRAFT-v1.0.0';
 export const NARRATIVE_WRITER_VERSION='PHI-OS-NARRATIVE-WRITER-v1.0.0';
@@ -92,13 +92,14 @@ import {REPORT_SECTION_NARRATIVE_BRIEF_VERSION} from './report-section-brief.js'
 import {buildReportSectionGenerationIdentity,classifyProviderFailure,retryDecision,semanticRepairDecision} from './report-narrative-governance.js';
 import {createReportSemanticReview} from './report-section-semantic-review.js';
 
-export const REPORT_SECTION_T2_COMPOSER_VERSION='PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.2.0';
+export const REPORT_SECTION_T2_COMPOSER_VERSION='PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.2.1';
 export const REPORT_SECTION_T2_PROMPT_VERSION='PHI-OS-RNT2-T2-PROMPT-v2.1.0';
-const SECTION_OUTPUT_SCHEMA={type:'object',additionalProperties:false,required:['blocks'],properties:{blocks:{type:'array',minItems:4,maxItems:10,items:{type:'object',additionalProperties:false,required:['role','text','claimRefs'],properties:{role:{type:'string',enum:['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION']},text:{type:'string',minLength:20,maxLength:2600},claimRefs:{type:'array',minItems:1,items:{type:'string'},uniqueItems:true}}}}}};
+const SECTION_OUTPUT_SCHEMA={type:'object',additionalProperties:false,required:['blocks'],properties:{blocks:{type:'array',minItems:4,maxItems:10,items:{type:'object',additionalProperties:false,required:['role','text','claimRefs'],properties:{role:{type:'string',enum:['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION']},text:{type:'string',minLength:20,maxLength:2600},claimRefs:{type:'array',minItems:1,items:{type:'string'}}}}}}};
 SECTION_OUTPUT_SCHEMA.required.push('sourceBriefDigest');
 SECTION_OUTPUT_SCHEMA.properties.sourceBriefDigest={type:'string'};
 SECTION_OUTPUT_SCHEMA.properties.blocks.items.required.push('supportRefs');
-SECTION_OUTPUT_SCHEMA.properties.blocks.items.properties.supportRefs={type:'array',minItems:1,items:{type:'string'},uniqueItems:true};
+// Reference uniqueness is checked locally; uniqueItems is outside the provider schema subset.
+SECTION_OUTPUT_SCHEMA.properties.blocks.items.properties.supportRefs={type:'array',minItems:1,items:{type:'string'}};
 
 function sectionSystemPrompt(brief,{repairReasons=[]}={}){
  const repair=repairReasons.length?[
@@ -172,7 +173,7 @@ export async function composeReportSectionT2({brief,registry,env={},fetcher,prov
   try{providerAttemptCount++;result=await invoke();attemptLog.push({kind:'PROVIDER',attempt:providerAttemptCount,state:'SUCCESS'});lastProviderError=null;break;}
   catch(error){
    lastProviderError=error;const errorClass=classifyProviderFailure(error),decision=retryDecision({attemptCount:attempt,errorClass});
-   attemptLog.push({kind:'PROVIDER',attempt:providerAttemptCount,state:'FAIL',errorClass,retryAllowed:decision.retryAllowed});
+   attemptLog.push({kind:'PROVIDER',attempt:providerAttemptCount,state:'FAIL',errorClass,retryAllowed:decision.retryAllowed,...safeProviderFailure(error)});
    if(!decision.retryAllowed)break;
   }
  }
@@ -192,7 +193,7 @@ export async function composeReportSectionT2({brief,registry,env={},fetcher,prov
    verification=await verifier({brief,candidate,semanticReview});
    attemptLog.push({kind:'SEMANTIC_REPAIR',attempt:repairCount,state:verification.accepted?'SUCCESS':'FAIL',reasons:verification.reasons});
   }catch(error){
-   attemptLog.push({kind:'SEMANTIC_REPAIR',attempt:repairCount,state:'PROVIDER_FAIL',errorClass:classifyProviderFailure(error)});
+   attemptLog.push({kind:'SEMANTIC_REPAIR',attempt:repairCount,state:'PROVIDER_FAIL',errorClass:classifyProviderFailure(error),...safeProviderFailure(error)});
   }
  }
  const usage=sumUsage(providerResults.filter(r=>r.taskType==='REPORT_SECTION_COMPOSITION'));

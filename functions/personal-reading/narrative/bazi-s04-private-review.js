@@ -2,6 +2,21 @@ import {buildBaZiS04T2,prepareBaZiS04T2,BAZI_S04_T2_RUNTIME_VERSION} from './baz
 import {REPORT_SECTION_T2_COMPOSER_VERSION,REPORT_SECTION_T2_PROMPT_VERSION} from './narrative-writer.js';
 import {REPORT_SECTION_SEMANTIC_VERIFIER_VERSION} from './report-section-semantic-verifier.js';
 import {sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
+import {selectPaiRoute} from '../../_lib/pai-r1-economics.js';
+import {safeProviderFailure} from './narrative-provider.js';
+
+export async function inspectBaZiS04Provider({env,userId,registry,fetcher=fetch}){
+ if(env.PHIOS_ENVIRONMENT!=='qa'||env.RNT2_S04_REVIEW!=='enabled')return {status:409,body:{ok:false,code:'S04_REVIEW_DISABLED'}};
+ if(!userId||!String(env.RNT2_REVIEWER_IDS||'').split(',').map(x=>x.trim()).includes(userId))return {status:403,body:{ok:false,code:'REVIEWER_REQUIRED'}};
+ if(!String(env.OPENAI_API_KEY||'').trim())return {status:503,body:{ok:false,code:'PROVIDER_CREDENTIAL_NOT_CONFIGURED'}};
+ const route=selectPaiRoute({aiExecutionClass:'T2_LIGHT_COMPOSITION',deterministicFallbackAvailable:true},registry);
+ if(route.selectedProvider!=='OPENAI'||!route.selectedModel)return {status:409,body:{ok:false,code:'UNSUPPORTED_PROVIDER_PROBE'}};
+ let response;
+ try{response=await fetcher('https://api.openai.com/v1/models/'+encodeURIComponent(route.selectedModel),{headers:{Authorization:`Bearer ${env.OPENAI_API_KEY}`},signal:AbortSignal.timeout(15000),redirect:'manual'});}
+ catch{return {status:503,body:{ok:false,code:'PROVIDER_PROBE_NETWORK_FAILED',generationCalled:false,sourceTransmitted:false}};}
+ let data;try{data=await response.json();}catch{return {status:502,body:{ok:false,code:'PROVIDER_PROBE_UNREADABLE_RESPONSE',providerStatus:response.status,generationCalled:false,sourceTransmitted:false}};}
+ return {status:200,body:{ok:true,model:route.selectedModel,modelAccessible:response.ok,providerStatus:response.status,...safeProviderFailure({details:{status:response.status,providerErrorCode:data?.error?.code,providerErrorType:data?.error?.type}}),generationCalled:false,sourceTransmitted:false}};
+}
 
 // Uses existing account authentication, D1 reservations and private R2 binding.
 // This is a frozen QA candidate, never a customer delivery/admission snapshot.

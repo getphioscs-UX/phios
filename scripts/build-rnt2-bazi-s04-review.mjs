@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import {buildBaZiS04T2} from '../functions/personal-reading/narrative/bazi-s04-t2-runtime.js';
 import {verifyReportLocaleParity} from '../functions/personal-reading/narrative/report-locale-parity.js';
+import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
 
 const out='docs/acceptance/report-narrative-t2-r1/bazi/s04';
 fs.mkdirSync(out,{recursive:true});
@@ -9,6 +10,8 @@ const registry=JSON.parse(fs.readFileSync('content/ai-economics/providers/ai-pro
 const env={OPENAI_API_KEY:process.env.OPENAI_API_KEY||'',OPENAI_NARRATIVE_MODEL:process.env.OPENAI_NARRATIVE_MODEL||'gpt-5.6-luna',OPENAI_MODEL:process.env.OPENAI_MODEL||''};
 const results={schemaVersion:'PHI-OS-RNT2-BZR-S04-REVIEW-PACK-v1.1.0',generatedAt:new Date().toISOString(),locales:{},providerSecretPresent:Boolean(env.OPENAI_API_KEY),ownerAcceptance:'PENDING'};
 const runtimeResults={};
+const snapshotDir=process.env.RNT2_S04_SNAPSHOT_DIR||null;
+if(snapshotDir){results.providerSecretPresent=null;results.executionSource='IMPORTED_PRIVATE_QA_SNAPSHOTS';}
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function html(locale,r){
@@ -21,7 +24,14 @@ function html(locale,r){
 }
 
 for(const locale of ['zh-Hans','en']){
- const r=await buildBaZiS04T2({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,registry,env,requestId:'RNT2-BZR-S04-'+locale});
+ let r;
+ if(snapshotDir){
+  const record=JSON.parse(fs.readFileSync(`${snapshotDir}/rnt2-s04-${locale}.json`,'utf8'));
+  const {artifactDigest,...payload}=record;
+  if(artifactDigest!==await sha256Stable(payload)||record.identity?.locale!==locale||record.result?.locale!==locale||record.identity.briefDigest!==record.result?.brief?.briefSemanticDigest)throw Error('PRIVATE_SNAPSHOT_INTEGRITY_FAILED');
+  r=record.result;
+  results.privateSnapshots||={};results.privateSnapshots[locale]={artifactDigest,identity:record.identity,generatedAt:record.generatedAt};
+ }else r=await buildBaZiS04T2({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,registry,env,requestId:'RNT2-BZR-S04-'+locale});
  runtimeResults[locale]=r;
  results.locales[locale]={status:r.status,internalOnly:r.internalOnly,verification:r.verification,quality:r.quality,usageRecord:r.usageRecord,verificationUsageRecords:r.verificationUsageRecords,briefDigest:r.brief.briefSemanticDigest,sourceDigest:r.brief.sourceSemanticDigest};
  fs.writeFileSync(`${out}/S04-${locale}-CLAIM-IR.json`,JSON.stringify(r.richClaimIr,null,2)+'\n');
@@ -40,6 +50,6 @@ const localeParity=verifyReportLocaleParity({
 results.localeParity=localeParity;
 fs.writeFileSync(`${out}/LOCALE-PARITY.json`,JSON.stringify(localeParity,null,2)+'\n');
 results.machineReady=Object.values(results.locales).every(x=>x.status==='PASS'&&x.verification?.accepted===true&&x.internalOnly?.providerCalled===true&&x.internalOnly?.providerExecution==='LIVE_ADAPTER'&&x.internalOnly?.fallbackUsed===false)&&localeParity.accepted===true;
-results.state=results.machineReady?'READY_FOR_OWNER_ACCEPTANCE':results.providerSecretPresent?'MACHINE_REVIEW_REQUIRED':'NOT_RUN_PROVIDER_SECRET_MISSING';
+results.state=results.machineReady?'READY_FOR_OWNER_ACCEPTANCE':results.providerSecretPresent||Object.values(results.locales).some(x=>x.internalOnly?.providerCalled)?'MACHINE_REVIEW_REQUIRED':'NOT_RUN_PROVIDER_SECRET_MISSING';
 fs.writeFileSync(`${out}/MACHINE-EVIDENCE.json`,JSON.stringify(results,null,2)+'\n');
 console.log(JSON.stringify({state:results.state,machineReady:results.machineReady,locales:Object.fromEntries(Object.entries(results.locales).map(([k,v])=>[k,{status:v.status,fallbackReason:v.internalOnly?.fallbackReason,claimCoverage:v.verification?.claimCoverage}]))},null,2));

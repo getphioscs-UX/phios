@@ -1,7 +1,7 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {REPORT_SECTION_NARRATIVE_BRIEF_VERSION} from './report-section-brief.js';
 
-export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.2.0';
+export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.2.1';
 const ROLES=new Set(['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION']);
 const FORBIDDEN=[
  [/\bguaranteed\b|\bwill definitely\b|一定会|必然会/u,'GUARANTEED_FUTURE_EVENT'],
@@ -46,6 +46,7 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
  if(blocks.length<4||blocks.length>10)reasons.push('BLOCK_COUNT_INVALID');
  for(const [index,b] of blocks.entries()){
   const role=text(b?.role).toUpperCase(),body=text(b?.text),refs=uniq(arr(b?.claimRefs));
+  if(refs.length!==arr(b?.claimRefs).length||uniq(arr(b?.supportRefs)).length!==arr(b?.supportRefs).length)reasons.push(`DUPLICATE_REFERENCES:${index}`);
   if(!ROLES.has(role))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
   if(!body)reasons.push(`BLOCK_TEXT_REQUIRED:${index}`);
   if(typeof b?.text!=='string'||body.length<20||body.length>2600)reasons.push(`BLOCK_TEXT_SIZE_INVALID:${index}`);
