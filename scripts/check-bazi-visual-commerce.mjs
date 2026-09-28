@@ -10,6 +10,8 @@ import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/produ
 import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {buildBaziPublicationVisual} from '../functions/canonical-presentation-runtime/bazi-publication-visuals.js';
 import {visualModules,visualAssets} from '../functions/canonical-presentation-runtime/report-section-config.generated.js';
+import {createReportSubjectPresentation} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
+import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
 globalThis.document={documentElement:{lang:'en'}};
 const read=p=>JSON.parse(fs.readFileSync(p)),{reading}=read('docs/guided-report-successor-r2/bazi-source.json');
 for(const [file,expected] of Object.entries(read('docs/guided-report-successor-r2/visual-commerce/semantic-freeze.json').files))assert.equal(createHash('sha256').update(fs.readFileSync(file,'utf8').replace(/\r\n?/g,'\n')).digest('hex'),expected,`Frozen BaZi source: ${file}`);
@@ -27,6 +29,21 @@ assert(!renderBaziProduct({product}).readingHtml.includes('cx-bazi-w12-workspace
 const identity={userId:'account-a',providerId:'auth0',verified:true,authenticated:true};ctx.data.symbolicAccountIdentity=identity;
 for(const row of [null,{entitlement_status:'refunded',purchase_id:'p'},{entitlement_status:'active',purchase_id:'p',reportPresentation:{reportLanguageMode:'SINGLE',reportLocale:'zh-Hans'}}]){const denied=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async(_env,id,sku)=>{assert.equal(id,'account-a');assert.equal(sku,'COM-REPORT-BAZI-FULL');return row;}});assert.equal(denied.productRoute.primaryProduct.reportAccess.verifiedPurchase,false);}
 const purchased={entitlement_status:'active',purchase_id:'verified-payment',reportPresentation:{reportLanguageMode:'SINGLE',reportLocale:'en'}};
+// An owned purchase alone no longer admits a full report: the newer cover
+// contract also requires a trusted subject binding. Keep the missing-binding
+// rejection, then supply an explicit synthetic cover fixture for the paid case.
+const missingSubject=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async()=>purchased});
+assert.equal(missingSubject.productRoute.primaryProduct.reportAccess.state,'FREE_REPORT_PREVIEW');
+assert.equal(missingSubject.productRoute.primaryProduct.reportAccess.reason,'PUBLICATION_UNAVAILABLE');
+const coverBirth={inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0',birthDate:'2001-02-03',birthTime:null,timeAccuracy:'UNKNOWN',locale:'en',consent:{},birthPlace:{displayName:null,countryCode:null,latitude:null,longitude:null},timezone:{iana:null,utcOffsetAtBirth:null,source:'UNKNOWN',confidence:'UNKNOWN'}};
+const coverInput={subjectReference:'account-a',displayName:'Synthetic cover client',birthDate:coverBirth.birthDate,birthTime:null,timeAccuracy:'UNKNOWN',identitySourceRef:'QA_VISUAL_COMMERCE_PERSON',birthSourceRef:'QA_VISUAL_COMMERCE_COVER_ONLY'};
+// Expected fingerprint comes from the fixture input, not the submitted overlay.
+const coverFingerprint=await sha256Stable(coverInput);
+ctx.data.reportSubjectPresentation=await createReportSubjectPresentation({...coverInput,canonicalBirthInput:coverBirth});
+ctx.data.reportSubjectBinding={subjectReference:coverInput.subjectReference,birthDate:coverInput.birthDate,birthTime:null,timeAccuracy:'UNKNOWN',inputSubjectFingerprint:coverFingerprint,semanticSubjectFingerprint:coverFingerprint};
+const wrongSubject=await attachBaziPublicationAccess(view,{...ctx,data:{...ctx.data,reportSubjectPresentation:{...ctx.data.reportSubjectPresentation,displayName:'Different client'}}},{loadEntitlement:async()=>purchased});
+assert.equal(wrongSubject.productRoute.primaryProduct.reportAccess.reason,'PUBLICATION_UNAVAILABLE');
+assert(!wrongSubject.productRoute.primaryProduct.sourceProduct);
 const paid=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async()=>purchased});assert.equal(paid.productRoute.primaryProduct.reportAccess.state,'FULL_REPORT');
 const full=paid.productRoute.primaryProduct.publicationReport,html=renderPublicationReport(full);assert(full.totalPages>36);assert.equal(full.totalPages,full.pages.length+6);
 for(const module of visualModules.modules){assert.equal(module.publicationCreatesMeaning,false);assert(module.sourceRefs.length);assert(html.includes(`data-publication-visual="${module.key}"`),module.key);}
@@ -36,7 +53,17 @@ const prod=await attachBaziPublicationAccess(view,{...ctx,env:{PHIOS_ENVIRONMENT
 assert.equal(JSON.stringify(reading),original,'publication must not mutate native semantics');
 const {native:noTarget}=await buildBzrPhase10Case(),unselected=readingPublicationTime(noTarget);
 await assert.rejects(()=>projectBaziPublicationPages({reading:noTarget,locale:'en',temporalContext:unselected}),/PUBLICATION_RESOLVED_TEMPORAL_REQUIRED/);
-for(const locale of ['en','zh-Hans'])for(const full of [false,true]){const report=await buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full});assert.equal(report.totalPages,report.pages.length+6);if(!full)assert.equal(report.accessState,'FREE_REPORT_PREVIEW');assert(!report.pages.some(p=>p.temporal));assert(report.pages.some(p=>p.primaryVisualRef==='BZR-VIS-FIVE-ELEMENTS'));}
+for(const locale of ['en','zh-Hans']){
+ const untimed=await projectBaziPublicationPages({reading:noTarget,locale,temporalContext:unselected,allowUnselectedTiming:true});
+ assert(untimed.reports.length);assert(untimed.reports.every(r=>!r.pages.some(p=>p.temporal)),'No selected time may not invent a current-period layer');
+ for(const full of [false,true]){
+  // This older English natal-only fixture has 123 source words for S03's
+  // 130-word minimum. Its chart projection is valid, but premium publication
+  // must reject insufficient prose rather than pad it or lower the budget.
+  if(locale==='en'){await assert.rejects(()=>buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full}),/SECTION_BLOCK_PARTITION_UNDER_BUDGET:en:S03_SYSTEM/);continue;}
+  const report=await buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full});assert.equal(report.totalPages,report.pages.length+6);if(!full)assert.equal(report.accessState,'FREE_REPORT_PREVIEW');assert(!report.pages.some(p=>p.temporal));assert(report.pages.some(p=>p.primaryVisualRef==='BZR-VIS-FIVE-ELEMENTS'));
+ }
+}
 assert.equal(noTarget.professionalModules.professionalTimeline.targetContext,null);
 const unavailable=await attachBaziPublicationAccess({...view,methodNativeReading:{BZR:{...reading,publicationDecision:{customerPublishable:false}},AST:other}},ctx,{loadEntitlement:async()=>purchased});
 assert.equal(unavailable.productRoute.primaryProduct.reportAccess.reason,'PUBLICATION_UNAVAILABLE');
