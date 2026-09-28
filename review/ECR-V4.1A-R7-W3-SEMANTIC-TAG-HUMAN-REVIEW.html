@@ -1,0 +1,107 @@
+<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ECR R7-W3 Semantic Tag Review</title>
+<style>body{margin:0;background:#f7f6f2;color:#1d1d1b;font:16px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}main{max-width:1080px;margin:auto;padding:44px 20px 80px}.eyebrow{font-size:12px;letter-spacing:.12em;color:#6d6a63;font-weight:800}h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:8px 0 14px}.lead{color:#68655f}.card{background:#fff;border:1px solid #dedbd1;border-radius:20px;padding:24px;margin:18px 0}.head{display:flex;justify-content:space-between;gap:16px}.head h2{margin:5px 0}.head span{font-size:12px;background:#fff3d6;color:#805600;border-radius:999px;padding:7px 10px;height:max-content;font-weight:800}.zh{font-size:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#6d6a63}code{white-space:normal}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.buttons button{background:#fff;border:1px solid #d8d5cc;border-radius:10px;padding:10px 15px;font-weight:800}.buttons button.active[data-v="ACCEPT"]{background:#e7f4ea;color:#176b32}.buttons button.active[data-v="REVISE"]{background:#fff3d6;color:#805600}.buttons button.active[data-v="REJECT"]{background:#f8e6e6;color:#942424}textarea{width:100%;min-height:75px;margin-top:12px;padding:10px;border:1px solid #d8d5cc;border-radius:10px;box-sizing:border-box}.output{background:#111;color:#eee;border-radius:18px;padding:20px;margin-top:30px}.output textarea{background:#1d1d1d;color:#eee;border-color:#333;min-height:360px;font:12px/1.5 ui-monospace,Consolas,monospace}.output button{padding:10px 14px;border:0;border-radius:9px;font-weight:800}@media(max-width:720px){.grid{grid-template-columns:1fr}.head{display:block}.head span{display:inline-block}}</style></head>
+<body><main><div class="eyebrow">ECR-V4.1A · R7-W3</div><h1>Semantic Tag Canon</h1>
+<p class="lead">审核 14 个 PHI semantic dimensions。Tag 不是判断、不是 Runtime Owner、不是 customer verdict。RECOVERY 只引用 Book IV Part 8 Maintenance Runtime，不重新建立 Recovery Driver 或 ECR 独立章节。</p>
+<section class="card" data-id="ATTENTION">
+<div class="head"><div><div class="eyebrow">ATTENTION</div><h2>ATTENTION｜注意</h2></div><span>PENDING</span></div>
+<p>Marks what receives sustained runtime notice or observation relative to competing signals.</p><p class="zh">标记在多个讯号或条件之间，什么获得持续的运行注意或观察。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>observational_focus</li><li>signal_salience</li><li>runtime_notice</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not mean importance, truth or urgency by itself.</li><li>Does not imply conscious attention when the evidence comes only from Design/background operation.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>ATTENTION_EQUALS_IMPORTANCE</code></li><li><code>ATTENTION_EQUALS_TRUTH</code></li><li><code>ATTENTION_AUTOMATICALLY_EQUALS_PERSONALITY</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('ATTENTION','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('ATTENTION','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('ATTENTION','REJECT')">REJECT</button></div>
+<textarea id="note-ATTENTION" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="SELECTION">
+<div class="head"><div><div class="eyebrow">SELECTION</div><h2>SELECTION｜选择</h2></div><span>PENDING</span></div>
+<p>Marks that one option, signal, direction or response is being distinguished from alternatives for further runtime processing.</p><p class="zh">标记系统从多个选项、讯号、方向或回应中区分出某一项，进入下一步运行。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>option_discrimination</li><li>priority_selection</li><li>response_selection</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not prove free choice or preference.</li><li>Does not itself authorize action.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>SELECTION_EQUALS_FREE_WILL</code></li><li><code>SELECTION_EQUALS_PREFERENCE</code></li><li><code>SELECTION_TO_ACTION_WITHOUT_COMPOSITION</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('SELECTION','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('SELECTION','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('SELECTION','REJECT')">REJECT</button></div>
+<textarea id="note-SELECTION" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="BOUNDARY">
+<div class="head"><div><div class="eyebrow">BOUNDARY</div><h2>BOUNDARY｜边界</h2></div><span>PENDING</span></div>
+<p>Marks a distinction that separates, contains or regulates what may cross between runtime regions, roles, resources or conditions.</p><p class="zh">标记用于分隔、容纳或调节不同运行区域、角色、资源或条件之间可否跨越的界线。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>separation</li><li>containment</li><li>permeability_control</li><li>role_limit</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not mean isolation.</li><li>A boundary may be permeable, temporary or context-dependent.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>BOUNDARY_EQUALS_ISOLATION</code></li><li><code>BOUNDARY_EQUALS_PERMANENT_LIMIT</code></li><li><code>BOUNDARY_EQUALS_GOOD_OR_BAD</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('BOUNDARY','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('BOUNDARY','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('BOUNDARY','REJECT')">REJECT</button></div>
+<textarea id="note-BOUNDARY" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="EXPRESSION">
+<div class="head"><div><div class="eyebrow">EXPRESSION</div><h2>EXPRESSION｜表达</h2></div><span>PENDING</span></div>
+<p>Marks the translation of an internal or processed state into an observable, communicable or externally carried form.</p><p class="zh">标记内部或已处理状态如何转化为可观察、可交流或可由外部载体承接的形式。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>communication</li><li>externalization</li><li>observable_form</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not guarantee accurate representation of Reality.</li><li>Does not equal communication skill.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>EXPRESSION_EQUALS_TRUTH</code></li><li><code>EXPRESSION_EQUALS_SKILL</code></li><li><code>EXPRESSION_EQUALS_IDENTITY</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('EXPRESSION','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('EXPRESSION','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('EXPRESSION','REJECT')">REJECT</button></div>
+<textarea id="note-EXPRESSION" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="COMMITMENT">
+<div class="head"><div><div class="eyebrow">COMMITMENT</div><h2>COMMITMENT｜承诺</h2></div><span>PENDING</span></div>
+<p>Marks sustained allocation of position, time, resource or action to a selected runtime direction.</p><p class="zh">标记系统将位置、时间、资源或行动持续投入某个已选择的运行方向。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>sustained_allocation</li><li>follow_through</li><li>resource_binding</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not imply moral obligation.</li><li>Does not prove permanence or success.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>COMMITMENT_EQUALS_MORAL_DUTY</code></li><li><code>COMMITMENT_EQUALS_PERMANENCE</code></li><li><code>COMMITMENT_EQUALS_SUCCESS</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('COMMITMENT','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('COMMITMENT','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('COMMITMENT','REJECT')">REJECT</button></div>
+<textarea id="note-COMMITMENT" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="ADAPTATION">
+<div class="head"><div><div class="eyebrow">ADAPTATION</div><h2>ADAPTATION｜适应</h2></div><span>PENDING</span></div>
+<p>Marks a change in operating pattern that improves fit with changed conditions without requiring the system to return to a previous state.</p><p class="zh">标记系统因条件改变而调整运行方式，以提高适配度，而不要求回到原有状态。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>operational_adjustment</li><li>condition_fit</li><li>adaptive_change</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not mean compliance or improvement in every dimension.</li><li>Does not prove that the adapted state is healthy or optimal.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>ADAPTATION_EQUALS_COMPLIANCE</code></li><li><code>ADAPTATION_EQUALS_IMPROVEMENT</code></li><li><code>ADAPTATION_EQUALS_RECOVERY</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('ADAPTATION','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('ADAPTATION','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('ADAPTATION','REJECT')">REJECT</button></div>
+<textarea id="note-ADAPTATION" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="REORGANIZATION">
+<div class="head"><div><div class="eyebrow">REORGANIZATION</div><h2>REORGANIZATION｜重组</h2></div><span>PENDING</span></div>
+<p>Marks redistribution of roles, resources, relations, boundaries or structure within an existing runtime.</p><p class="zh">标记既有运行中角色、资源、关系、边界或结构的重新配置。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>role_redistribution</li><li>resource_redistribution</li><li>structural_reconfiguration</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not mean complete transformation.</li><li>Does not establish that the new arrangement is stable.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>REORGANIZATION_EQUALS_TRANSFORMATION</code></li><li><code>REORGANIZATION_EQUALS_STABILITY</code></li><li><code>REORGANIZATION_EQUALS_IMPROVEMENT</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('REORGANIZATION','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('REORGANIZATION','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('REORGANIZATION','REJECT')">REJECT</button></div>
+<textarea id="note-REORGANIZATION" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="CONTINUITY">
+<div class="head"><div><div class="eyebrow">CONTINUITY</div><h2>CONTINUITY｜延续</h2></div><span>PENDING</span></div>
+<p>Marks persistence, transfer, recurrence or maintained connection of runtime across time, contexts, versions or carriers.</p><p class="zh">标记运行如何跨越时间、情境、版本或载体保持持续、转移、重复或连接。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>persistence</li><li>transfer</li><li>recurrence</li><li>cross_carrier_continuation</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not prove permanence.</li><li>Does not imply metaphysical or biological inheritance without separate evidence.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>CONTINUITY_EQUALS_PERMANENCE</code></li><li><code>CONTINUITY_EQUALS_DESTINY</code></li><li><code>CONTINUITY_EQUALS_INHERITANCE_WITHOUT_EVIDENCE</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('CONTINUITY','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('CONTINUITY','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('CONTINUITY','REJECT')">REJECT</button></div>
+<textarea id="note-CONTINUITY" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="RECOVERY">
+<div class="head"><div><div class="eyebrow">RECOVERY</div><h2>RECOVERY｜恢复</h2></div><span>PENDING</span></div>
+<p>Marks restoration of sufficient operating capacity after loss, strain, disruption or degradation so that runtime can continue.</p><p class="zh">标记系统在损耗、压力、中断或退化之后，恢复足够运行能力以继续运作。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>capacity_restoration</li><li>post_disruption_function</li><li>maintenance_recovery</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Belongs to Book IV Part 8 Maintenance Runtime authority, not a celestial Driver.</li><li>Does not imply return to the previous state, trauma, healing diagnosis or full restoration.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>RECOVERY_EQUALS_DRIVER</code></li><li><code>RECOVERY_EQUALS_EARTH</code></li><li><code>RECOVERY_EQUALS_TRAUMA</code></li><li><code>RECOVERY_EQUALS_RETURN_TO_PAST</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('RECOVERY','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('RECOVERY','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('RECOVERY','REJECT')">REJECT</button></div>
+<textarea id="note-RECOVERY" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="VALUE">
+<div class="head"><div><div class="eyebrow">VALUE</div><h2>VALUE｜价值</h2></div><span>PENDING</span></div>
+<p>Marks what a runtime treats as worth preserving, exchanging, protecting, prioritizing or refusing under current conditions.</p><p class="zh">标记在当前条件下，系统把什么视为值得保存、交换、保护、优先处理或拒绝。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>worth</li><li>preservation_priority</li><li>exchange_criterion</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not establish universal morality or objective worth.</li><li>Does not reduce to romance, money or preference.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>VALUE_EQUALS_MORAL_TRUTH</code></li><li><code>VALUE_EQUALS_MONEY</code></li><li><code>VALUE_EQUALS_RELATIONSHIP</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('VALUE','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('VALUE','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('VALUE','REJECT')">REJECT</button></div>
+<textarea id="note-VALUE" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="RELATION">
+<div class="head"><div><div class="eyebrow">RELATION</div><h2>RELATION｜关系</h2></div><span>PENDING</span></div>
+<p>Marks a dependency, exchange, influence or coordinated position between two or more runtime elements.</p><p class="zh">标记两个或多个运行元素之间的依赖、交换、影响或协调位置。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>dependency</li><li>exchange</li><li>coordination</li><li>mutual_position</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not automatically mean interpersonal relationship.</li><li>Correlation or proximity alone does not establish a meaningful relation.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>RELATION_EQUALS_ROMANCE</code></li><li><code>RELATION_EQUALS_CAUSATION</code></li><li><code>RELATION_FROM_PROXIMITY_ONLY</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('RELATION','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('RELATION','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('RELATION','REJECT')">REJECT</button></div>
+<textarea id="note-RELATION" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="INPUT">
+<div class="head"><div><div class="eyebrow">INPUT</div><h2>INPUT｜输入</h2></div><span>PENDING</span></div>
+<p>Marks information, resource, condition or signal entering a runtime boundary for possible processing.</p><p class="zh">标记进入运行边界、等待被处理的信息、资源、条件或讯号。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>incoming_signal</li><li>incoming_resource</li><li>incoming_condition</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Input is not the same as accepted meaning, truth or action.</li><li>Presence of input does not prove salience.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>INPUT_EQUALS_TRUTH</code></li><li><code>INPUT_EQUALS_MEANING</code></li><li><code>INPUT_EQUALS_PRIORITY</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('INPUT','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('INPUT','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('INPUT','REJECT')">REJECT</button></div>
+<textarea id="note-INPUT" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="CAPACITY">
+<div class="head"><div><div class="eyebrow">CAPACITY</div><h2>CAPACITY｜容量</h2></div><span>PENDING</span></div>
+<p>Marks the amount or range of load, complexity, resource demand or operation a carrier or system can currently sustain.</p><p class="zh">标记载体或系统当前能够持续承担的负载、复杂度、资源需求或运行范围。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>sustainable_load</li><li>resource_capacity</li><li>operational_range</li><li>carrier_support</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not equal potential, talent or worth.</li><li>Capacity is conditional and may change.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>CAPACITY_EQUALS_POTENTIAL</code></li><li><code>CAPACITY_EQUALS_TALENT</code></li><li><code>CAPACITY_EQUALS_WORTH</code></li><li><code>CAPACITY_IS_PERMANENT</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('CAPACITY','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('CAPACITY','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('CAPACITY','REJECT')">REJECT</button></div>
+<textarea id="note-CAPACITY" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="card" data-id="CONSTRAINT">
+<div class="head"><div><div class="eyebrow">CONSTRAINT</div><h2>CONSTRAINT｜约束</h2></div><span>PENDING</span></div>
+<p>Marks a condition that narrows available options, movement, resources, timing or configuration within runtime.</p><p class="zh">标记限制运行中可用选项、移动、资源、时间或配置空间的条件。</p>
+<div class="grid"><div><h3>Scope</h3><ul><li>limitation</li><li>narrowing_condition</li><li>resource_limit</li><li>timing_limit</li></ul></div>
+<div><h3>Boundary</h3><ul><li>Does not mean punishment or failure.</li><li>A constraint may enable form as well as restrict it.</li></ul></div></div>
+<h3>Forbidden inference</h3><ul><li><code>CONSTRAINT_EQUALS_PUNISHMENT</code></li><li><code>CONSTRAINT_EQUALS_FAILURE</code></li><li><code>CONSTRAINT_IS_ALWAYS_NEGATIVE</code></li></ul>
+<div class="buttons"><button data-v="ACCEPT" onclick="setD('CONSTRAINT','ACCEPT')">ACCEPT</button><button data-v="REVISE" onclick="setD('CONSTRAINT','REVISE')">REVISE</button><button data-v="REJECT" onclick="setD('CONSTRAINT','REJECT')">REJECT</button></div>
+<textarea id="note-CONSTRAINT" placeholder="Revision note / rejection reason" oninput="sync()"></textarea></section><section class="output"><h2>Decision JSON</h2><button onclick="copyJ()">Copy JSON</button><p id="s">14 decisions required.</p><textarea id="out" readonly></textarea></section>
+</main><script>const ds={};const baseline="c92eea091da3e512443c5fe4af594ba810f93124";const ids=["ATTENTION","SELECTION","BOUNDARY","EXPRESSION","COMMITMENT","ADAPTATION","REORGANIZATION","CONTINUITY","RECOVERY","VALUE","RELATION","INPUT","CAPACITY","CONSTRAINT"];
+function setD(id,v){ds[id]=v;document.querySelectorAll('[data-id="'+id+'"] button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));sync()}
+function sync(){const rows=ids.map(id=>({tagId:id,decision:ds[id]||"PENDING",note:(document.getElementById("note-"+id).value||"").trim()}));const p=rows.filter(x=>x.decision==="PENDING").length;document.getElementById("s").textContent=p?p+" decisions required.":"Review complete — copy JSON back into ChatGPT.";document.getElementById("out").value=JSON.stringify({schemaVersion:"ECR-V4.1A-R7-W3-TAG-OWNER-REVIEW-RESPONSE-v1",baselineCommit:baseline,reviewer:"OWNER",decisions:rows},null,2)}
+async function copyJ(){sync();const v=document.getElementById("out").value;try{await navigator.clipboard.writeText(v)}catch(e){document.getElementById("out").select();document.execCommand("copy")}document.getElementById("s").textContent="Copied. Paste the JSON into ChatGPT."}sync();</script></body></html>
