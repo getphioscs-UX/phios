@@ -22,6 +22,40 @@ export function resolveAtlasVisualById(bindings,assetId,{allowPendingReview=fals
  if(prefixes[a.family]&&a.assetId!==prefixes[a.family])return null;
  return a;
 }
+const INFRA_TRAJECTORY={
+ 'INF-01':'POPULATION','INF-02':'SURPLUS_BUFFER','INF-03':'COORDINATION_SCALE','INF-04':'ECONOMIC_CONNECTIVITY','INF-05':'MOBILITY_RADIUS',
+ 'INF-06':'ECONOMIC_CONNECTIVITY','INF-07':'INFRASTRUCTURE_DEPENDENCY','INF-08':'MEANING_NETWORK_REACH','INF-09':'COORDINATION_SCALE','INF-10':'MEMORY_CAPACITY',
+ 'INF-11':'KNOWLEDGE_PARTICIPATION','INF-12':'INFORMATION_VELOCITY','INF-13':'SURPLUS_BUFFER','INF-14':'ENERGY','INF-15':'MOBILITY_RADIUS',
+ 'INF-16':'INFORMATION_VELOCITY','INF-17':'ENERGY','INF-18':'ECONOMIC_CONNECTIVITY','INF-19':'COMPUTATIONAL_CAPACITY','INF-20':'LOAD_FUTURE_CAPACITY'
+};
+const FIGURE_PERIOD={
+ 'HF-01':'T03','HF-02':'T03','HF-03':'T05','HF-04':'T05','HF-05':'T05','HF-06':'T06','HF-07':'T07','HF-08':'T08',
+ 'HF-09':'T09','HF-10':'T10','HF-11':'T10','HF-12':'T11','HF-13':'T13','HF-14':'T15','HF-15':'T16','HF-16':'T15'
+};
+export function resolveAtlasVisualDeepLink(bindings,assetId,{data={},allowPendingReview=false}={}){
+ const asset=resolveAtlasVisualById(bindings,assetId,{allowPendingReview});
+ if(!asset)return null;
+ let patch=null,externalHref=null;
+ if(asset.family==='TIMELINE_ANCHOR')patch={activeLayer:'timeline',timeWindowId:asset.subjectId};
+ else if(asset.family==='CASE_HERO'||asset.family==='CASE_SECONDARY')patch={activeLayer:'cases',primaryCaseId:asset.subjectId,caseIds:[asset.subjectId]};
+ else if(asset.family==='WORLD_SNAPSHOT_ATMOSPHERE')patch={activeLayer:'world',snapshotId:asset.subjectId};
+ else if(asset.family==='COMPARISON_FAMILY')patch={activeLayer:'comparison',comparisonFamilyId:asset.subjectId};
+ else if(asset.family==='TRAJECTORY_MOTIF')patch={activeLayer:'trajectories',trajectoryIds:[asset.subjectId]};
+ else if(asset.family==='TRANSITION_WINDOW')patch={activeLayer:'transitions',transitionWindowId:asset.subjectId};
+ else if(asset.family==='SCALE_SHIFT'){
+  const shift=(data.transitions?.scaleShifts||[]).find(x=>x.scaleShiftId===asset.subjectId);
+  patch={activeLayer:'transitions',transitionWindowId:shift?.transitionWindowIds?.[0]||null};
+ }
+ else if(asset.family==='LOSS_FAMILY')patch={activeLayer:'loss',lossFamilyId:asset.subjectId,lossTypeId:null};
+ else if(asset.family==='LOSS_TYPE_VIGNETTE')patch={activeLayer:'loss',lossTypeId:asset.subjectId};
+ else if(asset.family==='CIVILIZATION_INFRASTRUCTURE')patch={activeLayer:'trajectories',trajectoryIds:[INFRA_TRAJECTORY[asset.subjectId]||'INFRASTRUCTURE_DEPENDENCY']};
+ else if(asset.family==='GEOGRAPHIC_BASE')patch={activeLayer:'world'};
+ else if(asset.family==='HISTORICAL_FIGURE')patch={activeLayer:'timeline',timeWindowId:FIGURE_PERIOD[asset.subjectId]||null};
+ else if(asset.family==='MODERN_FLAG')patch={activeLayer:'world',snapshotId:'WS-2026',time:2026};
+ else if(asset.family==='WORLD_RECONFIGURATION_SNAPSHOT')externalHref='/books/reality-configuration/?visual='+encodeURIComponent(asset.assetId)+'#atlas';
+ return {asset,patch,externalHref};
+}
+
 const firstResolved=(bindings,family,subjectId,options)=>subjectId?(bindings?.assets||[]).filter(a=>a.family===family&&a.subjectId===subjectId).map(a=>resolveAtlasVisualById(bindings,a.assetId,options)).find(Boolean)||null:null;
 const resolvedCaseVisuals=(bindings,caseIds,options,limit=3)=>{const out=[];for(const id of caseIds||[]){for(const family of ['CASE_HERO','CASE_SECONDARY']){const a=firstResolved(bindings,family,id,options);if(a&&!out.some(x=>x.assetId===a.assetId))out.push(a);if(out.length>=limit)return out;}}return out;};
 export function resolveAtlasStaticVisuals(bindings,state,options={},data={}){
@@ -91,12 +125,15 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en',data={
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&root.dataset.atlasReady!=='true')return;
  const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},assets=resolveAtlasStaticVisuals(bindings,state,options,data);
  const [primary]=assets;
+ const requestedId=new URLSearchParams(doc.defaultView?.location?.search||'').get('visual');
+ const requested=requestedId?resolveAtlasVisualById(bindings,requestedId,options):null;
  const componentOwned=new Set(['timeline','world','cases','comparison','trajectories','transitions','loss']);
- if(primary&&primaryHost&&!componentOwned.has(state.activeLayer)){
+ const display=requested||(!componentOwned.has(state.activeLayer)?primary:null);
+ if(display&&primaryHost){
   ensureStyle(doc);
-  primaryHost.className='civ-atlas-primary-visual';
-  const figure=visualFigure(doc,primary,locale),img=figure.querySelector('img');
-  if(img){img.loading='eager';img.setAttribute('fetchpriority','high');}
+  primaryHost.className=requested?'civ-atlas-primary-visual civ-atlas-deep-linked-visual':'civ-atlas-primary-visual';
+  const figure=visualFigure(doc,display,locale),img=figure.querySelector('img');
+  if(img){img.loading=requested?'lazy':'eager';if(!requested)img.setAttribute('fetchpriority','high');}
   primaryHost.append(figure);
  }else if(primaryHost){
   primaryHost.className='';
