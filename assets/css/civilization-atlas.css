@@ -449,7 +449,7 @@
 .civ-timeline__focus-copy>p:not(.knowledge-eyebrow){line-height:1.75}
 
 .civ-world__globe{overflow:hidden;border-radius:var(--phi-radius-md);background:#05111b}
-.civ-world__globe>img{display:block;width:100%;height:100%;min-height:14rem;object-fit:cover}
+.civ-world__globe>img{display:block;width:100%;height:100%;min-height:14rem;object-fit:contain}
 .civ-world__globe>span{display:grid;place-items:center;height:100%;min-height:12rem}
 
 [data-civilization-atlas-root] .civ-case-card,
@@ -524,17 +524,21 @@
 .civ-template-trajectory-line.series-5{stroke:#ff6f9f}
 .civ-template-trajectory-line.is-reconstructed{stroke-dasharray:12 6;opacity:.92}
 .civ-template-trajectory-line.is-conceptual{stroke-dasharray:3 7;opacity:.9}
-.civ-template-controls,.civ-atlas-secondary,.civ-atlas-visual-resources{border-top:1px solid rgba(213,179,108,.2);padding-top:.85rem;margin-top:.75rem}
+.civ-template-controls,.civ-atlas-secondary{border-top:1px solid rgba(213,179,108,.2);padding-top:.85rem;margin-top:.75rem}
 .civ-template-controls>summary{cursor:pointer;font-weight:700;color:#e9d8aa}
 .civ-template-controls[open]>summary{margin-bottom:1rem}
 @media(max-width:900px){
  .civ-template-board__heading{align-items:start;flex-direction:column}
- .civ-template-board__heading .knowledge-action{width:100%;justify-content:center}
- .civ-template-board__stage{width:max(100%,64rem)}
+ .civ-template-board__stage{width:100%}
+}
+@media(max-width:768px){
+ .civ-template-board[data-layer="timeline"] .civ-template-slot,
+ .civ-template-board[data-layer="world"] .civ-template-slot{display:none}
+ .civ-template-board__viewport{overflow:hidden}
+ .civ-template-controls[open]>summary{margin-bottom:.75rem}
 }
 @media(max-width:560px){
- .civ-template-board__stage{width:max(100%,58rem)}
- .civ-template-board__note{font-size:.8rem}
+ .civ-template-board__heading h4{font-size:1.25rem}
 }
 
 
@@ -687,4 +691,15 @@
  .civ-template-slot--world-header strong{font-size:1.1rem}
  .civ-template-slot--world-header span{font-size:.7rem}
  .civ-template-slot--world-header small{font-size:.48rem}
+}
+
+
+/* CIV-ATLAS-FR4 visual-utilization presentation contract */
+.civ-template-board[data-layer="trajectories"] .civ-template-board__stage{background:#04111b}
+.civ-template-board[data-layer="trajectories"] .civ-template-slot--trajectory{pointer-events:none}
+.civ-template-controls[open]{display:block}
+@media(max-width:768px){
+ .civ-template-board[data-layer="trajectories"] .civ-template-slot--trajectory{background:rgba(5,24,39,.78)}
+ .civ-template-board[data-layer="trajectories"] .civ-template-trajectory-line{stroke-width:3.5}
+ .civ-world__globe>img{min-height:0;max-height:26rem}
 }
