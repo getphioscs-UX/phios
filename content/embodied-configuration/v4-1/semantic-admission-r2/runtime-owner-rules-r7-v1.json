@@ -43,7 +43,7 @@
         "functional_connectivity",
         "adaptation_cost_recovery"
       ],
-      "status": "CANDIDATE_PENDING_HUMAN_REVIEW"
+      "status": "ACCEPTED_ARCHITECTURAL_PROFILE"
     },
     {
       "ownerId": "C1",
@@ -71,7 +71,7 @@
         "runtime_regulation",
         "connectivity"
       ],
-      "status": "CANDIDATE_PENDING_HUMAN_REVIEW"
+      "status": "ACCEPTED_ARCHITECTURAL_PROFILE"
     },
     {
       "ownerId": "C2",
@@ -97,7 +97,7 @@
         "motivation_runtime",
         "meaning_orientation"
       ],
-      "status": "CANDIDATE_PENDING_HUMAN_REVIEW"
+      "status": "ACCEPTED_ARCHITECTURAL_PROFILE"
     },
     {
       "ownerId": "C3",
@@ -123,7 +123,7 @@
         "expression_threshold",
         "expression_medium"
       ],
-      "status": "CANDIDATE_PENDING_HUMAN_REVIEW"
+      "status": "ACCEPTED_ARCHITECTURAL_PROFILE"
     },
     {
       "ownerId": "C4",
@@ -151,7 +151,7 @@
         "commitment_stability",
         "execution_readiness"
       ],
-      "status": "CANDIDATE_PENDING_HUMAN_REVIEW"
+      "status": "ACCEPTED_ARCHITECTURAL_PROFILE"
     },
     {
       "ownerId": "C5",
@@ -177,7 +177,7 @@
         "identity_reconfiguration",
         "identity_openness"
       ],
-      "status": "CANDIDATE_PENDING_HUMAN_REVIEW"
+      "status": "ACCEPTED_ARCHITECTURAL_PROFILE"
     },
     {
       "ownerId": "FEEDBACK_CONTINUITY",
@@ -208,7 +208,7 @@
         "continued_runtime",
         "re_entry"
       ],
-      "status": "CANDIDATE_PENDING_HUMAN_REVIEW"
+      "status": "ACCEPTED_ARCHITECTURAL_PROFILE"
     }
   ],
   "rules": [
@@ -231,7 +231,35 @@
         "PLANET_TO_OWNER",
         "GENE_KEYS_LABEL_TO_OWNER"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R1",
+          "name": "SEMANTIC_COMPOSITION_FIRST",
+          "statement": {
+            "zh-Hans": "Runtime Owner 只能读取已 admission 的组合语义结果。原始 Gate、Line、Driver、Layer、行星、Gene Keys 标签或关键词不能直接选择 owner。"
+          },
+          "requirements": [
+            "ADMITTED_COMPOSITION_RESULT",
+            "ACCEPTED_SEMANTIC_TAGS"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "RAW_GATE_TO_OWNER",
+            "LINE_TO_OWNER",
+            "DRIVER_TO_OWNER",
+            "LAYER_TO_OWNER",
+            "PLANET_TO_OWNER",
+            "GENE_KEYS_LABEL_TO_OWNER"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R2",
@@ -248,7 +276,31 @@
         "TAG_TO_FIXED_OWNER",
         "SAME_NAME_COMPONENT_TO_OWNER"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R2",
+          "name": "TAG_IS_ELIGIBILITY_NOT_DESTINATION",
+          "statement": {
+            "zh-Hans": "Eligible tag 只能缩小可能 owner 范围，不能独立决定 owner；还必须与组合意义所回答的架构问题和 scope 一致。"
+          },
+          "requirements": [
+            "TAG_ACCEPTED",
+            "OWNER_SCOPE_MATCH"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "TAG_TO_FIXED_OWNER",
+            "SAME_NAME_COMPONENT_TO_OWNER"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R3",
@@ -265,7 +317,31 @@
         "SHALLOW_DEFAULT_OWNER",
         "FIRST_MATCH_OWNER"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R3",
+          "name": "DEEPEST_JUSTIFIED_OWNER",
+          "statement": {
+            "zh-Hans": "选择能够直接拥有该组合语义对象的最深既有 owner；如果已有充分证据支持下游 owner，不应停留在更宽泛的上游 owner。"
+          },
+          "requirements": [
+            "ARCHITECTURAL_SCOPE_MATCH",
+            "DEPTH_CHECK"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "SHALLOW_DEFAULT_OWNER",
+            "FIRST_MATCH_OWNER"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R4",
@@ -281,7 +357,30 @@
         "FORCE_SINGLE_OWNER",
         "SECONDARY_WITHOUT_EVIDENCE"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R4",
+          "name": "PRIMARY_AND_SECONDARY_ALLOWED",
+          "statement": {
+            "zh-Hans": "当组合意义跨越多个架构时，允许一个 primary owner 与零到多个 secondary owners；secondary owner 必须有明确跨 owner evidence。"
+          },
+          "requirements": [
+            "PRIMARY_OWNER_JUSTIFIED"
+          ],
+          "onFailure": "PRIMARY_ONLY_IF_NO_SECONDARY_EVIDENCE",
+          "forbidden": [
+            "FORCE_SINGLE_OWNER",
+            "SECONDARY_WITHOUT_EVIDENCE"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R5",
@@ -297,7 +396,30 @@
         "CAPACITY_ALWAYS_C1",
         "INPUT_ALWAYS_K2A"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R5",
+          "name": "CARRIER_VS_C1_BOUNDARY",
+          "statement": {
+            "zh-Hans": "当意义关于载体容量、约束、完整性、承载或恢复基线时使用 K2A；当意义关于已配置的输入、感知、认知、调节、环境或连接方式时使用 C1。"
+          },
+          "requirements": [
+            "K2A_OR_C1_SCOPE_CHECK"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "CAPACITY_ALWAYS_C1",
+            "INPUT_ALWAYS_K2A"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R6",
@@ -313,7 +435,30 @@
         "SELECTION_ALWAYS_C2",
         "SELECTION_ALWAYS_C4"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R6",
+          "name": "C2_VS_C4_SELECTION_BOUNDARY",
+          "statement": {
+            "zh-Hans": "当 Selection 描述体验中的注意／价值过滤时属于 C2；当它描述决策排除、承诺、资源配置或行动方向时属于 C4。"
+          },
+          "requirements": [
+            "SELECTION_CONTEXT_PRESENT"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "SELECTION_ALWAYS_C2",
+            "SELECTION_ALWAYS_C4"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R7",
@@ -328,7 +473,29 @@
       "forbidden": [
         "EXPRESSION_TAG_ALWAYS_C3"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R7",
+          "name": "C3_EXPRESSION_BOUNDARY",
+          "statement": {
+            "zh-Hans": "C3 必须存在明确的翻译、压缩、外化、媒介或表达阈值对象；只有 EXPRESSION tag 而无此类 context 不足以选择 C3。"
+          },
+          "requirements": [
+            "EXPRESSION_CONTEXT_PRESENT"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "EXPRESSION_TAG_ALWAYS_C3"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R8",
@@ -345,7 +512,31 @@
         "CONTINUITY_TAG_ALWAYS_C5",
         "VALUE_TAG_TO_IDENTITY"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R8",
+          "name": "C5_IDENTITY_EVIDENCE_REQUIRED",
+          "statement": {
+            "zh-Hans": "只有组合明确涉及身份稳定、自我模型／角色连续、身份边界、身份漂移或身份重组时，才允许选择 C5。"
+          },
+          "requirements": [
+            "IDENTITY_CONTEXT_PRESENT"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "PERSONALITY_LAYER_TO_C5",
+            "CONTINUITY_TAG_ALWAYS_C5",
+            "VALUE_TAG_TO_IDENTITY"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R9",
@@ -361,7 +552,30 @@
         "RECOVERY_TAG_ALWAYS_CONTINUITY",
         "CONTINUITY_TAG_ALWAYS_FEEDBACK"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R9",
+          "name": "FEEDBACK_CONTINUITY_CYCLE_BOUNDARY",
+          "statement": {
+            "zh-Hans": "FEEDBACK／CONTINUITY 必须具有跨周期或反馈循环 context，例如适应、维护、恢复、重组、重复、重新进入或持续运行。"
+          },
+          "requirements": [
+            "CROSS_CYCLE_CONTEXT_PRESENT"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "RECOVERY_TAG_ALWAYS_CONTINUITY",
+            "CONTINUITY_TAG_ALWAYS_FEEDBACK"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R10",
@@ -378,7 +592,31 @@
         "MODEL_PREFERENCE_OWNER",
         "FIRST_OWNER_WINS"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R10",
+          "name": "CONFLICT_RETURNS_UNKNOWN",
+          "statement": {
+            "zh-Hans": "如果两个 primary owner 具有同等充分依据，而治理规则无法区分，则 primaryOwner 必须为 UNKNOWN；不得随机选择或使用模型偏好。"
+          },
+          "requirements": [
+            "OWNER_CONFLICT_CHECK"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "RANDOM_OWNER",
+            "MODEL_PREFERENCE_OWNER",
+            "FIRST_OWNER_WINS"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R11",
@@ -394,7 +632,30 @@
         "OWNER_TO_CURRENT_STATE",
         "TAG_TO_CURRENT_DIAGNOSIS"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R11",
+          "name": "CUSTOMER_STATE_REQUIRES_EVIDENCE",
+          "statement": {
+            "zh-Hans": "Owner assignment 只识别架构归属，不等于客户当前状态。任何声称客户目前过载、漂移、恢复、受阻或正在重组的结论，仍需要已 admission 的 current evidence。"
+          },
+          "requirements": [
+            "ARCHITECTURE_STATE_SEPARATION"
+          ],
+          "onFailure": "ARCHITECTURE_ONLY",
+          "forbidden": [
+            "OWNER_TO_CURRENT_STATE",
+            "TAG_TO_CURRENT_DIAGNOSIS"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     },
     {
       "ruleId": "OWNER-R12",
@@ -410,7 +671,30 @@
         "LLM_CREATED_OWNER",
         "DYNAMIC_OWNER_ALIAS"
       ],
-      "reviewState": "PENDING_HUMAN_REVIEW"
+      "reviewState": "ACCEPTED",
+      "humanReview": {
+        "decision": "ACCEPT",
+        "reviewer": "OWNER",
+        "reviewedAt": "2026-09-28",
+        "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W5_12_OWNER_RULES",
+        "exactContentBinding": true,
+        "acceptedRecordSnapshot": {
+          "ruleId": "OWNER-R12",
+          "name": "NO_OWNER_CREATION",
+          "statement": {
+            "zh-Hans": "只允许选择 K2A/CARRIER、C1、C2、C3、C4、C5 与 FEEDBACK/CONTINUITY；LLM 与 runtime composition 不得创造新 owner 或 alias。"
+          },
+          "requirements": [
+            "OWNER_IN_ALLOWLIST"
+          ],
+          "onFailure": "UNKNOWN",
+          "forbidden": [
+            "LLM_CREATED_OWNER",
+            "DYNAMIC_OWNER_ALIAS"
+          ]
+        },
+        "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+      }
     }
   ],
   "outputContract": {
@@ -427,8 +711,9 @@
     "customerStateClaimAllowed": false
   },
   "admissionSummary": {
-    "accepted": 0,
-    "pendingHumanReview": 12,
+    "accepted": 12,
+    "pendingHumanReview": 0,
     "rejected": 0
-  }
+  },
+  "r7w5HumanGate": "CLOSED_ALL_12_RULES_ACCEPTED"
 }
