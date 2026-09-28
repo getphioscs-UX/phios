@@ -8,6 +8,8 @@ export async function createEditorialAcceptanceArtifact(input={}){
  return deepFreeze({...seed,artifactDigest:await sha256Stable(seed)});
 }
 export async function createCustomerDeliverySnapshot(input={}){
+ if(!input.semanticContent||typeof input.semanticContent!=='object')throw Error('DELIVERY_SEMANTIC_CONTENT_REQUIRED');
+ if(!['BZR','ZWR','AST','NUM','PROFILE','ECR','HD','CROSS'].includes(input.methodId)||!['en','zh-Hans'].includes(input.locale))throw Error('DELIVERY_METHOD_OR_LOCALE_INVALID');
  const seed={schemaVersion:'PHI-OS-CUSTOMER-DELIVERY-SNAPSHOT-v1.0.0',methodId:required(input.methodId,'DELIVERY_METHOD_REQUIRED'),locale:required(input.locale,'DELIVERY_LOCALE_REQUIRED'),subjectFingerprint:required(input.subjectFingerprint,'DELIVERY_SUBJECT_FINGERPRINT_REQUIRED'),inputFingerprint:required(input.inputFingerprint,'DELIVERY_INPUT_FINGERPRINT_REQUIRED'),compositionVersion:required(input.compositionVersion,'DELIVERY_COMPOSITION_VERSION_REQUIRED'),authorityVersion:required(input.authorityVersion,'DELIVERY_AUTHORITY_VERSION_REQUIRED'),claimIrVersion:required(input.claimIrVersion,'DELIVERY_CLAIM_IR_VERSION_REQUIRED'),verifierVersion:required(input.verifierVersion,'DELIVERY_VERIFIER_VERSION_REQUIRED'),semanticContent:input.semanticContent,createdAt:input.createdAt||new Date(0).toISOString(),supersedes:input.supersedes||null};
  const semanticSnapshotId='RDS-'+(await sha256Stable(seed)).toUpperCase();
  return deepFreeze({...seed,semanticSnapshotId,immutable:true,providerRegenerationOnReopen:false});

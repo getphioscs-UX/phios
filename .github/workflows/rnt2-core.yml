@@ -9,6 +9,8 @@ on:
       - 'functions/report-delivery/report-delivery-r2.js'
       - 'functions/canonical-presentation-runtime/report-cover-*.js'
       - 'scripts/check-rnt2-core.mjs'
+      - 'scripts/check-rnt2-adversarial.mjs'
+      - 'functions/personal-reading/narrative/narrative-writer.js'
       - '.github/workflows/rnt2-core.yml'
 
 permissions:
@@ -26,3 +28,4 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/check-rnt2-core.mjs
+      - run: node scripts/check-rnt2-adversarial.mjs

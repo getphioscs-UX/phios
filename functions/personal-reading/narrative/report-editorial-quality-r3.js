@@ -36,7 +36,8 @@ export function evaluateReportEditorialQuality({paragraphs=[],blocks=[],claimCov
   realityExplanationDensity:Number((roleUnits('OBSERVABLE_EXPRESSION')/n).toFixed(4)),
   timingExplanationDepth:Number((roleUnits('TIMING_RELEVANCE')/n).toFixed(4)),
   navigationDepth:Number((roleUnits('NAVIGATION')/n).toFixed(4)),
-  sectionSpecificity:claimCoverage==null?null:Number(claimCoverage),
+  sectionSpecificity:null,
+  sectionSpecificityState:'REQUIRES_CROSS_FIXTURE_SEMANTIC_REVIEW',
   calibrationState:'OWNER_EXEMPLAR_REQUIRED',
   machineAcceptanceDoesNotEqualHumanAcceptance:true
  });

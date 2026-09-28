@@ -10,17 +10,20 @@ export async function buildReportSectionGenerationIdentity(input={}){
 }
 export function classifyProviderFailure(error){
  const code=text(error?.code||error?.message).toUpperCase();
+ const status=Number(error?.details?.status||error?.status);
+ if(status===429)return 'PROVIDER_RATE_LIMIT';
+ if(status>=500&&status<=599)return 'PROVIDER_TRANSIENT';
  if(/429|RATE/.test(code))return 'PROVIDER_RATE_LIMIT';
  if(/TIMEOUT/.test(code))return 'PROVIDER_TIMEOUT';
  if(/NETWORK|FETCH|CONNECT/.test(code))return 'PROVIDER_NETWORK';
  return 'PROVIDER_OTHER';
 }
 export function retryDecision({attemptCount=0,errorClass=null}={}){
- const retryable=['PROVIDER_RATE_LIMIT','PROVIDER_TIMEOUT','PROVIDER_NETWORK'].includes(errorClass);
+ const retryable=['PROVIDER_RATE_LIMIT','PROVIDER_TIMEOUT','PROVIDER_NETWORK','PROVIDER_TRANSIENT'].includes(errorClass);
  return deepFreeze({retryAllowed:retryable&&attemptCount<1,maxProviderRetries:1,nextAttempt:retryable&&attemptCount<1?attemptCount+1:null});
 }
 export function semanticRepairDecision({verification,repairCount=0}={}){
- const rejected=verification?.accepted===false;
+ const rejected=verification?.accepted===false&&!verification?.reasons?.some(reason=>['SEMANTIC_REVIEW_UNAVAILABLE','SEMANTIC_REVIEW_REQUIRED'].includes(reason));
  return deepFreeze({repairAllowed:rejected&&repairCount<1,maxRepair:1,mode:rejected&&repairCount<1?'TARGETED_SEMANTIC_REPAIR':'NO_REPAIR'});
 }
 export default Object.freeze({buildReportSectionGenerationIdentity,classifyProviderFailure,retryDecision,semanticRepairDecision});

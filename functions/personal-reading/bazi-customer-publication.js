@@ -7,10 +7,12 @@ import {visualModules} from '../canonical-presentation-runtime/report-section-co
 import {REPORT_EDITORIAL_ASSETS} from '../canonical-presentation-runtime/report-editorial-registry.js';
 import {resolveReportEditorialAsset} from '../canonical-presentation-runtime/report-editorial-resolver.js';
 import {renderFrozenBaziIntro} from '../../assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {assertReportSubjectBinding} from '../canonical-presentation-runtime/report-cover-subject.js';
 
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
-export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,requireSubjectOverlay=false}){
+export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,reportSubjectBinding=null,requireSubjectOverlay=false}){
  if(reading?.publicationDecision?.customerPublishable!==true)throw Error('BZR_PUBLICATION_NOT_ADMITTED');
+ if(full&&requireSubjectOverlay)await assertReportSubjectBinding({presentation:reportSubjectPresentation,expectedBinding:reportSubjectBinding});
  const projection=await projectBaziSectionPublication({reading,locale,temporalContext:temporalSnapshot,composition:{},allowUnselectedTiming:true});
  const permitted=new Set(visualModules.modules.filter(m=>m.freeVisibility==='PREVIEW').map(m=>m.id));
  const pages=full?projection.pages:projection.pages.filter(p=>permitted.has(p.primaryVisualRef)||p.definitionKey==='S01_P3').map((p,i)=>({...p,pageNumber:i+7}));
@@ -34,7 +36,7 @@ export async function attachBaziPublicationAccess(view,context,dependencies={}){
  const deliveryAccess=await resolveReportAccess({methodId:'BZR',locale,context,admitted:native.publicationDecision?.customerPublishable===true},dependencies);
  let full=deliveryAccess.state==='ENTITLED',accessReason=deliveryAccess.reason;
  let report=null;
- try{report=await buildBaziCustomerPublication({reading:native,locale,temporalSnapshot:readingPublicationTime(native),full,reportSubjectPresentation:context.data?.reportSubjectPresentation||null,requireSubjectOverlay:full});}
+ try{report=await buildBaziCustomerPublication({reading:native,locale,temporalSnapshot:readingPublicationTime(native),full,reportSubjectPresentation:context.data?.reportSubjectPresentation||null,reportSubjectBinding:context.data?.reportSubjectBinding||null,requireSubjectOverlay:full});}
  catch{full=false;accessReason='PUBLICATION_UNAVAILABLE';}
  const delivery=buildReportDeliveryEnvelope({methodId:'BZR',access:deliveryAccess,admitted:native.publicationDecision?.customerPublishable===true,reportAvailable:Boolean(report)});
  const replace=p=>{if(p?.methodId!=='BZR')return p;return {schemaVersion:p.schemaVersion,methodId:p.methodId,productType:p.productType,locale:p.locale,state:p.state,publication:p.publication,specialistRenderer:p.specialistRenderer,hero:{eyebrow:'BaZi',title:locale==='en'?'Your BaZi Report':'你的八字报告',highlights:[]},navigation:[],sections:[],visuals:[],publicationReport:report,reportDelivery:delivery,lockedOutline:full?[]:BAZI_SECTION_REGISTRY.sections.map(s=>({title:s.title[locale]})),reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',entitlementKey:deliveryAccess.entitlementKey,verifiedPurchase:full,reason:accessReason,offer:deliveryAccess.offer},...(full?{sourceProduct:native}:{}),boundaries:{publicationCreatesMeaning:false,paymentSuccessIsAuthority:false}};};
@@ -53,4 +55,3 @@ export async function attachBaziPublicationAccess(view,context,dependencies={}){
  }
  return next;
 }
-

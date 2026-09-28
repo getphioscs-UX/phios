@@ -1,10 +1,11 @@
 import {esc} from '../surfaces/runtime-ui.js';
 import {renderBaziStructuralBatch} from './bazi-structural-visual-pages.js';
 import {globalReportPagination,METHOD_VISUAL_SKINS,assertPublicationCandidate} from '../../../../functions/canonical-presentation-runtime/report-publication-contract.js';
-import {renderReportCoverOverlay} from '../../../../functions/canonical-presentation-runtime/report-cover-overlay.js';
+import {renderReportCoverOverlay,fitReportCoverFields} from '../../../../functions/canonical-presentation-runtime/report-cover-overlay.js';
 
 export function renderGlobalReportPagination(sequence,total){const text=globalReportPagination(sequence,total);return text?`<span data-pagination-owner="GlobalReportPagination" aria-label="${esc(text)}">${text}</span>`:'';}
 export function fitPublicationForPrint(root){
+ fitReportCoverFields(root);
  return [...root.querySelectorAll('.pub-page')].map(page=>{
   let fits=false;for(const variant of ['STANDARD','COMPACT','REFLOW']){page.dataset.textFit=variant;const end=page.getBoundingClientRect().bottom,footer=page.querySelector('footer').getBoundingClientRect();fits=page.scrollHeight<=page.clientHeight+2&&footer.bottom<=end;if(fits)break;}
   return {pageNumber:Number(page.dataset.pageNumber),variant:page.dataset.textFit,fits};

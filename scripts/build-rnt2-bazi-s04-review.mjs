@@ -23,7 +23,7 @@ function html(locale,r){
 for(const locale of ['zh-Hans','en']){
  const r=await buildBaZiS04T2({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,registry,env,requestId:'RNT2-BZR-S04-'+locale});
  runtimeResults[locale]=r;
- results.locales[locale]={status:r.status,internalOnly:r.internalOnly,verification:r.verification,quality:r.quality,usageRecord:r.usageRecord,briefDigest:r.brief.briefSemanticDigest,sourceDigest:r.brief.sourceSemanticDigest};
+ results.locales[locale]={status:r.status,internalOnly:r.internalOnly,verification:r.verification,quality:r.quality,usageRecord:r.usageRecord,verificationUsageRecords:r.verificationUsageRecords,briefDigest:r.brief.briefSemanticDigest,sourceDigest:r.brief.sourceSemanticDigest};
  fs.writeFileSync(`${out}/S04-${locale}-CLAIM-IR.json`,JSON.stringify(r.richClaimIr,null,2)+'\n');
  fs.writeFileSync(`${out}/S04-${locale}-NARRATIVE-BRIEF.json`,JSON.stringify(r.brief,null,2)+'\n');
  fs.writeFileSync(`${out}/S04-${locale}-T2-CANDIDATE.json`,JSON.stringify(r.candidate,null,2)+'\n');
@@ -39,7 +39,7 @@ const localeParity=verifyReportLocaleParity({
 });
 results.localeParity=localeParity;
 fs.writeFileSync(`${out}/LOCALE-PARITY.json`,JSON.stringify(localeParity,null,2)+'\n');
-results.machineReady=Object.values(results.locales).every(x=>x.status==='PASS'&&x.verification?.accepted===true)&&localeParity.accepted===true;
+results.machineReady=Object.values(results.locales).every(x=>x.status==='PASS'&&x.verification?.accepted===true&&x.internalOnly?.providerCalled===true&&x.internalOnly?.providerExecution==='LIVE_ADAPTER'&&x.internalOnly?.fallbackUsed===false)&&localeParity.accepted===true;
 results.state=results.machineReady?'READY_FOR_OWNER_ACCEPTANCE':results.providerSecretPresent?'MACHINE_REVIEW_REQUIRED':'NOT_RUN_PROVIDER_SECRET_MISSING';
 fs.writeFileSync(`${out}/MACHINE-EVIDENCE.json`,JSON.stringify(results,null,2)+'\n');
 console.log(JSON.stringify({state:results.state,machineReady:results.machineReady,locales:Object.fromEntries(Object.entries(results.locales).map(([k,v])=>[k,{status:v.status,fallbackReason:v.internalOnly?.fallbackReason,claimCoverage:v.verification?.claimCoverage}]))},null,2));

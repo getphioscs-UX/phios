@@ -1,7 +1,7 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {REPORT_SECTION_NARRATIVE_BRIEF_VERSION} from './report-section-brief.js';
 
-export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.1.0';
+export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.2.0';
 const ROLES=new Set(['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION']);
 const FORBIDDEN=[
  [/\bguaranteed\b|\bwill definitely\b|一定会|必然会/u,'GUARANTEED_FUTURE_EVENT'],
@@ -35,21 +35,28 @@ function certaintyEscalated(body,claims){
  return weak&&/\b(?:certainly|definitely|always|proves?|will)\b|(?:一定|必然|证明|就是|绝对)/iu.test(body);
 }
 
-export async function verifyReportSectionComposition({brief,candidate}={}){
+export async function verifyReportSectionComposition({brief,candidate,semanticReview=null}={}){
  if(brief?.schemaVersion!==REPORT_SECTION_NARRATIVE_BRIEF_VERSION)throw Error('RNT2_VERIFIER_BRIEF_REQUIRED');
  const source=new Map(brief.claims.map(c=>[c.claimId,c])),reasons=[],used=new Set(),roles=new Set();
  const blocks=arr(candidate?.blocks);
+ const {briefSemanticDigest,...briefSeed}=brief;
+ if(await sha256Stable(briefSeed)!==briefSemanticDigest)reasons.push('SOURCE_LINEAGE_LOSS');
+ if(candidate?.sourceBriefDigest!==briefSemanticDigest)reasons.push('SOURCE_DIGEST_MISMATCH');
  if(!blocks.length)reasons.push('NO_BLOCKS');
+ if(blocks.length<4||blocks.length>10)reasons.push('BLOCK_COUNT_INVALID');
  for(const [index,b] of blocks.entries()){
   const role=text(b?.role).toUpperCase(),body=text(b?.text),refs=uniq(arr(b?.claimRefs));
   if(!ROLES.has(role))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
   if(!body)reasons.push(`BLOCK_TEXT_REQUIRED:${index}`);
+  if(typeof b?.text!=='string'||body.length<20||body.length>2600)reasons.push(`BLOCK_TEXT_SIZE_INVALID:${index}`);
   if(!refs.length)reasons.push(`BLOCK_CLAIM_REFS_REQUIRED:${index}`);
   const claims=[];
   for(const ref of refs){
    if(!source.has(ref))reasons.push(`UNKNOWN_CLAIM_REF:${ref}`);
    else {used.add(ref);claims.push(source.get(ref));}
   }
+  const permittedSupports=new Set(claims.flatMap(c=>c.sourceRefs));
+  if(!arr(b?.supportRefs).length||arr(b.supportRefs).some(ref=>!permittedSupports.has(ref)))reasons.push(`SOURCE_LINEAGE_LOSS:${index}`);
   if(claims.length&&!hasMeaningForRole(claims,role))reasons.push(`ROLE_SUPPORT_MISMATCH:${index}:${role}`);
   const prohibited=detect(body);if(prohibited)reasons.push(`${prohibited}:${index}`);
   for(const [operator,re] of Object.entries(OPERATOR_PATTERNS))if(re.test(body)&&!licenseAllows(claims,operator))reasons.push(`UNLICENSED_${operator}:${index}`);
@@ -67,22 +74,42 @@ export async function verifyReportSectionComposition({brief,candidate}={}){
  const usedMaterial=materialClaims.filter(c=>used.has(c.claimId));
  const coverage=materialClaims.length?usedMaterial.length/materialClaims.length:0;
  const unsupportedRefs=reasons.filter(x=>x.startsWith('UNKNOWN_CLAIM_REF:')).map(x=>x.split(':').slice(1).join(':'));
+ const candidateDigest=await sha256Stable(candidate??null);
+ const checks=['factsPreserved','boundariesPreserved','conditionsPreserved','counterSignalsPreserved','uncertaintyPreserved','timingScopePreserved','noInventedReality','noNewMethodFact','semanticOperatorsPreserved','rankPreserved','directionPreserved'];
+ const structuralChecksPassed=reasons.length===0;
+ let review=null;
+ if(!reasons.length&&typeof semanticReview==='function'){
+  try{review=await semanticReview({brief,candidate,candidateDigest});}catch{reasons.push('SEMANTIC_REVIEW_UNAVAILABLE');}
+ }
+ const reviewBound=review?.sourceBriefDigest===briefSemanticDigest&&review?.candidateDigest===candidateDigest;
+ const reviewed=reviewBound&&checks.every(key=>review?.[key]===true);
+ if(structuralChecksPassed&&!reviewBound)reasons.push('SEMANTIC_REVIEW_REQUIRED');
+ if(reviewBound)for(const key of checks)if(review[key]!==true)reasons.push('SEMANTIC_REVIEW_FAILED:'+key);
+ if(reviewBound&&arr(review.reasons).length)reasons.push('SEMANTIC_REVIEW_REJECTED');
+ const meaningful=new Set(reviewBound?arr(review.meaningfullyUsedClaimRefs):[]);
+ for(const ref of meaningful)if(!used.has(ref))reasons.push('UNSUPPORTED_REVIEW_CLAIM:'+ref);
+ for(const c of materialClaims)if(!meaningful.has(c.claimId))reasons.push('CLAIM_MEANING_NOT_VERIFIED:'+c.claimId);
  const seed={
   schemaVersion:'PHI-OS-REPORT-SECTION-SEMANTIC-VERIFICATION-v1.1.0',
   verifierVersion:REPORT_SECTION_SEMANTIC_VERIFIER_VERSION,
   sourceBriefDigest:brief.briefSemanticDigest,
   accepted:reasons.length===0,
   sourceDigest:brief.sourceSemanticDigest,
-  factsPreserved:unsupportedRefs.length===0,
-  semanticOperatorsPreserved:!reasons.some(x=>x.startsWith('UNLICENSED_')),
+  factsPreserved:reviewed&&unsupportedRefs.length===0,
+  semanticOperatorsPreserved:reviewed&&!reasons.some(x=>x.startsWith('UNLICENSED_')),
   roleSemanticsPreserved:!reasons.some(x=>x.startsWith('ROLE_SUPPORT_MISMATCH:')),
-  boundariesPreserved:true,
-  conditionsPreserved:brief.claims.some(c=>arr(c.conditions).length)?roles.has('CONDITIONS')||roles.has('COUNTERWEIGHTS'):true,
-  counterSignalsPreserved:brief.claims.some(c=>c.role==='COUNTERWEIGHTS'||arr(c.counterweights).length)?roles.has('COUNTERWEIGHTS'):true,
-  uncertaintyPreserved:!reasons.some(x=>x.startsWith('CERTAINTY_STRENGTHENING:')),
-  timingScopePreserved:timingClaims.length?roles.has('TIMING_RELEVANCE'):true,
-  observableScopePreserved:!reasons.some(x=>x.startsWith('REALITY_INFERENCE:')),
-  claimCoverage:Number(coverage.toFixed(4)),
+  boundariesPreserved:reviewBound&&review.boundariesPreserved===true,
+  conditionsPreserved:reviewBound&&review.conditionsPreserved===true,
+  counterSignalsPreserved:reviewBound&&review.counterSignalsPreserved===true,
+  uncertaintyPreserved:reviewed&&!reasons.some(x=>x.startsWith('CERTAINTY_STRENGTHENING:')),
+  timingScopePreserved:reviewBound&&review.timingScopePreserved===true,
+  observableScopePreserved:reviewed&&!reasons.some(x=>x.startsWith('REALITY_INFERENCE:')),
+  noInventedReality:reviewBound&&review.noInventedReality===true,
+  noNewMethodFact:reviewBound&&review.noNewMethodFact===true,
+  claimReferenceCoverage:Number(coverage.toFixed(4)),
+  claimCoverage:materialClaims.length?materialClaims.filter(c=>meaningful.has(c.claimId)).length/materialClaims.length:0,
+  semanticReview:review,
+  candidateDigest,
   usedClaimRefs:[...used],
   missingClaimRefs:materialClaims.map(c=>c.claimId).filter(id=>!used.has(id)),
   unsupportedRefs,

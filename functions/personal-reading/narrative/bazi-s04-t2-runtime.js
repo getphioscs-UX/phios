@@ -1,7 +1,7 @@
 import {buildBaZiNarrativeClaimIR,EXPLANATORY_AUTHORITY_VERSION} from './bazi-explanatory-authority.js';
 import {createReportSectionNarrativeContract} from './report-section-contract.js';
 import {buildReportSectionNarrativeBrief} from './report-section-brief.js';
-import {composeReportSectionT2} from './report-section-t2-composer.js';
+import {composePublicationNarrative} from './narrative-writer.js';
 import {evaluateReportEditorialQuality} from './report-editorial-quality-r3.js';
 
 export const BAZI_S04_T2_RUNTIME_VERSION='PHI-OS-BAZI-S04-T2-RUNTIME-v1.0.0';
@@ -25,7 +25,7 @@ export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,e
  const richClaimIr=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S04_CAREER',locale,temporalSnapshot});
  const sectionContract=contract(locale);
  const brief=await buildReportSectionNarrativeBrief({contract:sectionContract,richClaimIr,locale,sourceAuthorityVersion:EXPLANATORY_AUTHORITY_VERSION,styleIntent:{tone:'WARM_PROFESSIONAL',depth:'PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false}});
- const composition=await composeReportSectionT2({brief,registry,env,fetcher,providerAdapters,requestId:requestId||('RNT2-BZR-S04-'+locale)});
+ const composition=await composePublicationNarrative({sectionBrief:brief,registry,env,fetcher,providerAdapters,requestId:requestId||('RNT2-BZR-S04-'+locale)});
  const blocks=composition.candidate?.blocks||[];
  const quality=evaluateReportEditorialQuality({blocks,paragraphs:blocks.map(b=>b.text),claimCoverage:composition.verification?.claimCoverage??null,requiredRoles:sectionContract.requiredClaimRoles,presentRoles:[...new Set(blocks.map(b=>b.role))],sectionSpecificTerms:locale==='zh-Hans'?['事业','责任','支持','资源','工作','大运','流年']:['career','responsibility','support','resources','work','Da Yun','annual']});
  return Object.freeze({
@@ -41,6 +41,7 @@ export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,e
   quality,
   internalOnly:composition.internalOnly,
   usageRecord:composition.usageRecord||null,
+  verificationUsageRecords:composition.verificationUsageRecords||[],
   ownerAcceptance:'PENDING'
  });
 }

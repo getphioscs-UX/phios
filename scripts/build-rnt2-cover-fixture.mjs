@@ -26,11 +26,24 @@ for(const methodId of Object.keys(REPORT_COVER_OVERLAY_REGISTRY)){
   hardGateTests.push({methodId,field,failClosed:threw});
  }
 }
-const pages=Object.entries(REPORT_COVER_OVERLAY_REGISTRY).map(([methodId,cfg])=>{
+const variants=[
+ {id:'short-en',displayName:'Alex Lee'},
+ {id:'long-en',displayName:'Alexandra Elizabeth Morgan'},
+ {id:'short-zh',displayName:'陈晓明'},
+ {id:'long-zh',displayName:'陈欧阳晓明林雅惠'},
+ {id:'mixed',displayName:'陈晓明 Alex Lee'},
+ {id:'exact',displayName:'Exact QA',birthDate:'2001-02-03',birthTime:'06:12:45'},
+ {id:'approximate',displayName:'Approximate QA',timeAccuracy:'APPROXIMATE',birthTime:'18:30:12'},
+ {id:'unknown',displayName:'Unknown QA',timeAccuracy:'UNKNOWN',birthTime:null}
+];
+const cases=[];
+const pages=Object.entries(REPORT_COVER_OVERLAY_REGISTRY).flatMap(([methodId,cfg])=>variants.map(variant=>{
+ const caseSubject={...subject,...variant},caseId=methodId+'-'+variant.id;
+ cases.push({caseId,methodId,variant:variant.id,values:formatReportCoverFields({methodId,subject:caseSubject})});
  const src=base+'/images/reports/'+folders[methodId]+'/editorial/bilingual/'+cfg.assetCode+'.webp';
- return '<section class="cover" data-method="'+methodId+'"><img src="'+src+'" alt="'+methodId+' cover">'+renderReportCoverOverlay({methodId,subject})+'</section>';
-}).join('');
+ return '<section class="cover" data-case="'+caseId+'" data-method="'+methodId+'"><img src="'+src+'" alt="'+methodId+' cover">'+renderReportCoverOverlay({methodId,subject:caseSubject})+'</section>';
+})).join('');
 const html='<!doctype html><html><meta charset="utf-8"><style>@page{size:A4;margin:0}html,body{margin:0;padding:0}.cover{box-sizing:border-box;width:210mm;height:296mm;min-height:296mm;max-height:296mm;position:relative;overflow:hidden;margin:0;break-inside:avoid-page;page-break-inside:avoid;break-after:page;page-break-after:always}.cover:last-child{break-after:auto;page-break-after:auto}.cover>img{width:100%;height:100%;object-fit:contain;display:block}.pub-cover-overlay{position:absolute;inset:0}.pub-cover-value{position:absolute;display:flex;align-items:center;justify-content:center;font:16px Georgia,serif;color:#173047;white-space:nowrap;overflow:hidden}@media print{html,body{margin:0!important;padding:0!important}.cover{width:210mm!important;height:296mm!important;min-height:296mm!important;max-height:296mm!important;margin:0!important;break-inside:avoid-page!important;page-break-inside:avoid!important;break-after:page!important;page-break-after:always!important}.cover:last-child{break-after:auto!important;page-break-after:auto!important}}</style>'+pages+'</html>';
 fs.writeFileSync(out+'/review.html',html);
-fs.writeFileSync(out+'/expected.json',JSON.stringify({subject,unknown,expected,unknownExpected,hardGateTests},null,2)+'\n');
+fs.writeFileSync(out+'/expected.json',JSON.stringify({subject,unknown,expected,unknownExpected,hardGateTests,cases},null,2)+'\n');
 console.log('Built RNT2 8-cover fixture.');

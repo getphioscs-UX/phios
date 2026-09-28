@@ -18,14 +18,17 @@ export async function buildReportSectionNarrativeBrief({contract,richClaimIr,loc
  if(!['en','zh-Hans'].includes(locale))fail('RNT2_BRIEF_LOCALE_REQUIRED');
  const claims=arr(richClaimIr?.claims).filter(c=>c&&text(c.claimId||c.id)&&text(c.text)).map(c=>{
   const claimId=text(c.claimId||c.id),role=text(c.explanationRole)||roleForClaim(c);
-  return Object.freeze({claimId,role:role||'STRUCTURE',text:text(c.text),claimType:text(c.claimType||c.relationType),priority:text(c.priority)||'SUPPORTING',semanticOperators:Object.freeze(arr(c.semanticOperators)),conditions:Object.freeze(arr(c.conditions)),counterweights:Object.freeze(arr(c.counterweights)),timing:Object.freeze(arr(c.timing)),observableSignals:Object.freeze(arr(c.observableSignals)),certainty:text(c.certainty)||text(c.modality)||'BOUNDED',sourceRefs:Object.freeze(arr(c.sourceRefs).map(String)),license:c.license||null});
+  return Object.freeze({claimId,role:role||'STRUCTURE',text:text(c.text),claimType:text(c.claimType||c.relationType),subject:c.subject??null,objects:c.objects??[],rank:c.rank??null,direction:c.direction??null,basis:c.basis??[],boundaries:c.boundaries??[],openConditions:c.openConditions??[],provenance:c.provenance??[],priority:text(c.priority)||'SUPPORTING',semanticOperators:Object.freeze(arr(c.semanticOperators)),conditions:Object.freeze(arr(c.conditions)),counterweights:Object.freeze(arr(c.counterweights)),timing:Object.freeze(arr(c.timing)),observableSignals:Object.freeze(arr(c.observableSignals)),certainty:text(c.certainty)||text(c.modality)||'BOUNDED',sourceRefs:Object.freeze(arr(c.sourceRefs).map(String)),license:c.license||null});
  });
  for(const q of arr(richClaimIr?.reflectionQuestions)){
   if(!text(q?.id)||!text(q?.text))continue;
-  claims.push(Object.freeze({claimId:text(q.id),role:'OBSERVABLE_EXPRESSION',text:text(q.text),claimType:'QUESTION',priority:'SUPPORTING',semanticOperators:Object.freeze(['QUESTION']),conditions:Object.freeze(['QUESTION_ONLY_NOT_OBSERVED_FACT']),counterweights:Object.freeze([]),timing:Object.freeze([]),observableSignals:Object.freeze([]),certainty:'QUESTION',sourceRefs:Object.freeze(arr(q.sourceRefs).map(String)),license:Object.freeze({allowsObservedReality:false})}));
+  const questionSources=arr(q.sourceRefs).length?q.sourceRefs:claims.filter(c=>arr(q.claimIds).includes(c.claimId)).flatMap(c=>c.sourceRefs);
+  claims.push(Object.freeze({claimId:text(q.id),role:'OBSERVABLE_EXPRESSION',text:text(q.text),claimType:'QUESTION',priority:'SUPPORTING',semanticOperators:Object.freeze(['QUESTION']),conditions:Object.freeze(['QUESTION_ONLY_NOT_OBSERVED_FACT']),counterweights:Object.freeze([]),timing:Object.freeze([]),observableSignals:Object.freeze([]),certainty:'QUESTION',sourceRefs:Object.freeze([...new Set(questionSources.map(String))]),license:Object.freeze({allowsObservedReality:false})}));
  }
  if(!claims.length)fail('RNT2_BRIEF_CLAIMS_REQUIRED');
- const sourceDigest=await sha256Stable({version:richClaimIr.version||null,claims:claims.map(c=>({claimId:c.claimId,text:c.text,sourceRefs:c.sourceRefs,certainty:c.certainty,role:c.role}))});
+ if(new Set(claims.map(c=>c.claimId)).size!==claims.length)fail('RNT2_DUPLICATE_CLAIM_ID');
+ if(claims.some(c=>!c.sourceRefs.length))fail('RNT2_SOURCE_LINEAGE_REQUIRED');
+ const sourceDigest=await sha256Stable({methodId:contract.methodId,sectionKey:contract.sectionKey,version:richClaimIr.version||null,claims});
  const briefSeed={
   schemaVersion:REPORT_SECTION_NARRATIVE_BRIEF_VERSION,
   methodId:contract.methodId,sectionKey:contract.sectionKey,locale,

@@ -1,3 +1,4 @@
+import {SEMANTIC_REVIEW_CHECKS} from '../functions/personal-reading/narrative/report-section-semantic-review.js';
 import {createReportSectionNarrativeContract} from '../functions/personal-reading/narrative/report-section-contract.js';
 import {buildReportSectionNarrativeBrief} from '../functions/personal-reading/narrative/report-section-brief.js';
 import {composeReportSectionT2} from '../functions/personal-reading/narrative/report-section-t2-composer.js';
@@ -14,16 +15,16 @@ const claims=roles.map((role,i)=>({claimId:'C'+(i+1),id:'C'+(i+1),explanationRol
 const contract=createReportSectionNarrativeContract({methodId:'BZR',sectionKey:'S04_CAREER',customerQuestion:'Career?',customerOutcome:'Understand career.',requiredClaimRoles:roles,timingPolicy:'WHEN_AUTHORITY_PRESENT'});
 const richClaimIr={version:'QA-IR-v1',claims,reflectionQuestions:[],counterPrompts:[]};
 const brief=await buildReportSectionNarrativeBrief({contract,richClaimIr,locale:'en',sourceAuthorityVersion:'QA-AUTH-v1'});
-const candidate={blocks:roles.map((role,i)=>({role,text:role==='OBSERVABLE_EXPRESSION'?'What should the customer compare or observe in this licensed QA fixture?':'Customer-readable licensed explanation for '+role.toLowerCase()+' in this governed QA fixture.',claimRefs:['C'+(i+1)]}))};
+const candidate={sourceBriefDigest:brief.briefSemanticDigest,blocks:roles.map((role,i)=>({role,text:role==='OBSERVABLE_EXPRESSION'?'What should the customer compare or observe in this licensed QA fixture?':'Customer-readable licensed explanation for '+role.toLowerCase()+' in this governed QA fixture.',claimRefs:['C'+(i+1)],supportRefs:['professionalModules/qa/'+i]}))};
 const registry={models:[{providerId:'OPENAI',modelId:'gpt-5.6-luna',capabilityClass:'LIGHT',status:'AVAILABLE',planningCostRank:1}]};
 let providerCalls=0;
-const providerAdapters={OPENAI:async()=>{providerCalls++;return {output:candidate,provider:'OPENAI',model:'gpt-5.6-luna',usage:{inputTokens:100,outputTokens:200}}}};
+const providerAdapters={OPENAI:async(request)=>{providerCalls++;if(request.taskType==='REPORT_SECTION_SEMANTIC_VERIFICATION')return {output:{...Object.fromEntries(SEMANTIC_REVIEW_CHECKS.map(k=>[k,true])),candidateDigest:request.payload.candidateDigest,sourceBriefDigest:brief.briefSemanticDigest,meaningfullyUsedClaimRefs:brief.claims.map(c=>c.claimId),reasons:[]}};return {output:candidate,provider:'OPENAI',model:'gpt-5.6-luna',usage:{inputTokens:100,outputTokens:200}}}};
 const sectionCache=createReportSectionGenerationCache();
 const composed=await composeReportSectionT2({brief,registry,providerAdapters,requestId:'RNT2-CORE-QA',cache:sectionCache});
 if(composed.status!=='PASS'||composed.internalOnly.actualTier!=='T2_GOVERNED_NATURAL_COMPOSITION'||composed.verification?.accepted!==true)throw Error('RNT2_CORE_T2_FAILED');
 if(composed.verification.claimCoverage!==1)throw Error('RNT2_CORE_CLAIM_COVERAGE_FAILED');
 const cached=await composeReportSectionT2({brief,registry,providerAdapters,requestId:'RNT2-CORE-QA-REOPEN',cache:sectionCache});
-if(cached.cacheHit!==true||cached.internalOnly.providerCalled!==false||providerCalls!==1)throw Error('RNT2_SECTION_CACHE_REOPEN_FAILED');
+if(cached.cacheHit!==true||cached.internalOnly.providerCalled!==false||providerCalls!==2)throw Error('RNT2_SECTION_CACHE_REOPEN_FAILED');
 
 const identity=await buildReportSectionGenerationIdentity({methodId:'BZR',sectionKey:'S04_CAREER',locale:'en',compositionVersion:'1',promptVersion:'1',authorityVersion:'1',claimIrVersion:'1',verifierVersion:'1',evidenceDigest:'abc',schemaVersion:'1',provider:'OPENAI',model:'gpt-5.6-luna'});
 if(!identity.generationKey.startsWith('RNT2-'))throw Error('RNT2_GENERATION_IDENTITY_FAILED');
@@ -34,7 +35,7 @@ const accepted=await createEditorialAcceptanceArtifact({methodId:'BZR',sectionKe
 const delivery=await createCustomerDeliverySnapshot({methodId:'BZR',locale:'en',subjectFingerprint:'subject-fp',inputFingerprint:'input-fp',compositionVersion:'1',authorityVersion:'1',claimIrVersion:'1',verifierVersion:'1',semanticContent:{acceptedArtifact:accepted.artifactDigest}});
 const render=await createRenderedArtifactSnapshot({semanticSnapshotId:delivery.semanticSnapshotId,renderVersion:'1',surface:'PDF',assetBindingVersion:'1',coverBindingVersion:'1',paginationVersion:'1',outputDigest:'abc'});
 if(!delivery.immutable||!render.renderSnapshotId)throw Error('RNT2_SNAPSHOT_FAILED');
-const envelope=buildReportDeliveryR2({methodId:'BZR',access:{state:'ENTITLED',reason:null},admitted:true,reportAvailable:true,semanticSnapshot:delivery});
+const envelope=buildReportDeliveryR2({methodId:'BZR',access:{state:'ENTITLED',reason:null},admitted:true,reportAvailable:true,semanticSnapshot:delivery,expectedBinding:{locale:'en',subjectFingerprint:'subject-fp',inputFingerprint:'input-fp'},productionAdmission:{state:'PRODUCTION_ADMITTED',semanticSnapshotId:delivery.semanticSnapshotId}});
 if(envelope.access.state!=='FULL_REPORT'||envelope.providerRegenerationOnReopen!==false)throw Error('RNT2_DELIVERY_FAILED');
 
 const canonicalBirthInput={birthDate:'1989-11-15',birthTime:'22:50:00',birthPlace:{displayName:'QA Place',countryCode:'MY',latitude:3.1,longitude:101.7},timezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtBirth:'+08:00',source:'HUMAN_DECLARATION',confidence:'HIGH'},timeAccuracy:'EXACT',locale:'en',consent:{confirmed:true},inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'};
