@@ -110,8 +110,8 @@ function linePoints(series,minYear,maxYear,minVal,maxVal){
 }
 function trajectoryOverlay(data,state,locale,slot){
   const all=data?.trajectories?.trajectories||[];
-  const ids=state.trajectoryIds?.length?state.trajectoryIds:all.slice(0,6).map(x=>x.trajectoryId);
-  const selected=all.filter(t=>ids.includes(t.trajectoryId)).slice(0,6);
+  const ids=state.trajectoryIds?.length?state.trajectoryIds.slice(0,4):all.slice(0,1).map(x=>x.trajectoryId);
+  const selected=all.filter(t=>ids.includes(t.trajectoryId)).slice(0,4);
   const points=selected.flatMap(t=>(t.series||[]).map(p=>({year:Number(p.year),value:Number(p.index)}))).filter(p=>Number.isFinite(p.year)&&Number.isFinite(p.value));
   if(!selected.length||!points.length) return '';
   const minYear=Math.min(...points.map(p=>p.year)),maxYear=Math.max(...points.map(p=>p.year));
@@ -152,7 +152,6 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   container.innerHTML=`<section class="civ-template-board" data-atlas-template-board data-layer="${esc(state.activeLayer)}">
     <div class="civ-template-board__heading">
       <div><h4>${esc(layerTitle(state.activeLayer,l))}</h4></div>
-      <button type="button" class="knowledge-action knowledge-action--quiet" data-template-expand>${esc(l==='zh-Hans'?'全屏查看':'Open full screen')}</button>
     </div>
     <div class="civ-template-board__viewport"><div class="civ-template-board__stage" style="aspect-ratio:${slotConfig.referenceSize.width}/${slotConfig.referenceSize.height}">
       <img src="${esc(poster.publicUrl)}" alt="${esc(layerTitle(state.activeLayer,l))}" loading="eager" decoding="async" data-template-image>
@@ -172,7 +171,6 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   const img=container.querySelector('[data-template-image]'),fallback=container.querySelector('[data-template-fallback]');
   img?.addEventListener('error',()=>{img.hidden=true;fallback.hidden=false;container.dataset.templateState='fallback';},{once:true});
   img?.addEventListener('load',()=>{container.dataset.templateState='ready';},{once:true});
-  container.querySelector('[data-template-expand]')?.addEventListener('click',()=>openPosterViewer({src:poster.publicUrl,alt:layerTitle(state.activeLayer,l),locale:l}));
 }
 export function openPosterViewer({src,alt='',locale='en'}={}){
   const old=document.querySelector('[data-atlas-poster-dialog]'); if(old) old.remove();
