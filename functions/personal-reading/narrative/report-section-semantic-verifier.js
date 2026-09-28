@@ -1,7 +1,7 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {REPORT_SECTION_NARRATIVE_BRIEF_VERSION} from './report-section-brief.js';
 
-export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.2.1';
+export const REPORT_SECTION_SEMANTIC_VERIFIER_VERSION='PHI-OS-REPORT-SECTION-SEMANTIC-VERIFIER-v1.3.1';
 const ROLES=new Set(['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION']);
 const FORBIDDEN=[
  [/\bguaranteed\b|\bwill definitely\b|一定会|必然会/u,'GUARANTEED_FUTURE_EVENT'],
@@ -17,7 +17,15 @@ const OPERATOR_PATTERNS=Object.freeze({
 });
 function arr(v){return Array.isArray(v)?v:[];} function text(v){return String(v??'').trim();}
 function uniq(v){return [...new Set(v.filter(Boolean).map(String))];}
-function detect(textValue){for(const [re,code] of FORBIDDEN)if(re.test(textValue))return code;return null;}
+// These narrow negative constructions are not affirmative certainty claims.
+// The independent reviewer always receives the original, unmodified prose.
+function assertionText(value){return value
+ .replace(/\brather than\b[^.!?;,\n]{0,100}\bguaranteed\b/giu,' ')
+ .replace(/\b(?:not|never|without)\s+(?:a\s+)?(?:guaranteed|certainly|definitely|always|proves?)\b/giu,' ')
+ .replace(/(?:不能|无法|并未|未能|不曾)证明|(?:过于|过度)绝对/gu,' ')
+ .replace(/(?:并不|也不|不)代表(?:某一|具体)?事件(?:已经发生或)?必然发生/gu,' ');
+}
+function detect(textValue){for(const [re,code] of FORBIDDEN)if(re.test(assertionText(textValue)))return code;return null;}
 function licenseAllows(claims,operator){
  return claims.some(c=>arr(c.semanticOperators).includes(operator)||c?.license?.allowedSemanticOperators?.includes?.(operator));
 }
@@ -32,7 +40,7 @@ function hasMeaningForRole(claims,role){
 }
 function certaintyEscalated(body,claims){
  const weak=claims.some(c=>['UNRESOLVED','QUESTION','SYMBOLIC_CONDITIONAL','BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY'].includes(String(c.certainty||'').toUpperCase()));
- return weak&&/\b(?:certainly|definitely|always|proves?|will)\b|(?:一定|必然|证明|就是|绝对)/iu.test(body);
+ return weak&&/\b(?:certainly|definitely|always|proves?|will)\b|(?:一定|必然|证明|就是|绝对)/iu.test(assertionText(body));
 }
 
 export async function verifyReportSectionComposition({brief,candidate,semanticReview=null}={}){

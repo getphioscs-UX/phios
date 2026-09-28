@@ -19,12 +19,21 @@ const candidate={sourceBriefDigest:brief.briefSemanticDigest,blocks:brief.claims
 const reviewer=async({brief,candidateDigest})=>({...Object.fromEntries(SEMANTIC_REVIEW_CHECKS.map(k=>[k,true])),candidateDigest,sourceBriefDigest:brief.briefSemanticDigest,meaningfullyUsedClaimRefs:brief.claims.map(c=>c.claimId),reasons:[]});
 assert.equal((await verifyReportSectionComposition({brief,candidate})).accepted,false,'No semantic review must fail closed');
 assert.equal((await verifyReportSectionComposition({brief,candidate,semanticReview:reviewer})).accepted,true);
+for(const text of ['It describes work dynamics rather than fixing one profession into a guaranteed success-or-failure outcome.','命盘不能证明现实中的体验，不能把结构解释得过于绝对。','时间层不会取代它，也不代表事件已经发生或必然发生。']){
+ const negated=structuredClone(candidate);negated.blocks[0].text=text;
+ assert.equal((await verifyReportSectionComposition({brief,candidate:negated,semanticReview:reviewer})).accepted,true);
+ assert.equal((await verifyReportSectionComposition({brief,candidate:negated})).accepted,false,'Negation does not bypass independent review');
+}
+for(const text of ['You have guaranteed success in this career.','这张命盘证明你一定成功，这是绝对的现实结论。','不代表事件必然发生，但你必然成功。','代表事件已经发生或必然发生。']){
+ const asserted=structuredClone(candidate);asserted.blocks[0].text=text;
+ assert.equal((await verifyReportSectionComposition({brief,candidate:asserted,semanticReview:reviewer})).accepted,false);
+}
 for(const mutate of [
  c=>{c.sourceBriefDigest='wrong'},
  c=>{c.blocks[0].supportRefs=['someone-else']},
  c=>{c.blocks[0].text='This causes you to become the director next year.'},
- c=>{c.blocks[0].claimRefs=['unknown']}
- ,c=>{c.blocks[0].claimRefs.push(c.blocks[0].claimRefs[0])}
+ c=>{c.blocks[0].claimRefs=['unknown']},
+ c=>{c.blocks[0].claimRefs.push(c.blocks[0].claimRefs[0])}
 ]){
  const c=structuredClone(candidate);mutate(c);
  assert.equal((await verifyReportSectionComposition({brief,candidate:c,semanticReview:reviewer})).accepted,false);
@@ -35,7 +44,7 @@ assert.equal((await verifyReportSectionComposition({brief,candidate,semanticRevi
 const changed=await buildReportSectionNarrativeBrief({contract,richClaimIr:{...ir,claims:ir.claims.map(c=>({...c,conditions:['Different condition']}))},locale:'en'});
 assert.notEqual(changed.sourceSemanticDigest,brief.sourceSemanticDigest);
 const registry={models:[{providerId:'OPENAI',modelId:'qa-model',capabilityClass:'LIGHT',status:'AVAILABLE',planningCostRank:1}]};
-const providerRejected=await composeReportSectionT2({brief,registry,env:{OPENAI_API_KEY:'synthetic-secret'},fetcher:async()=>Response.json({error:{code:'model_not_found',type:'invalid_request_error',message:'Do not persist synthetic-secret or private source'}},{status:404})});
+const providerRejected=await composeReportSectionT2({brief,registry,env:{OPENAI_API_KEY:'synthetic-secret'},fetcher:async(url,options)=>{const payload=JSON.parse(JSON.parse(options.body).input[1].content);assert(payload.sectionNarrativeBrief);assert.equal(payload.sectionEvidencePack,undefined);return Response.json({error:{code:'model_not_found',type:'invalid_request_error',message:'Do not persist synthetic-secret or private source'}},{status:404});}});
 assert.equal(providerRejected.internalOnly.attemptLog[0].httpStatus,404);
 assert.equal(providerRejected.internalOnly.attemptLog[0].providerErrorCode,'model_not_found');
 assert(!JSON.stringify(providerRejected).includes('synthetic-secret'));
@@ -45,7 +54,7 @@ const missing=await composeReportSectionT2({brief,registry,env:{},fetcher:()=>{n
 assert.equal(networkCalls,0);assert.equal(missing.internalOnly.providerCalled,false);
 assert.equal(missing.internalOnly.actualTier,'DETERMINISTIC_FALLBACK');
 let generationCalls=0;
-const failed=await composeReportSectionT2({brief,registry,providerAdapters:{OPENAI:async request=>{generationCalls++;assert(!JSON.stringify(request.schema).includes('uniqueItems'));return {output:{...candidate,sourceBriefDigest:'bad'}}}}});
+const failed=await composeReportSectionT2({brief,registry,providerAdapters:{OPENAI:async request=>{generationCalls++;assert(!JSON.stringify(request.schema).includes('uniqueItems'));assert.deepEqual(request.schema.properties.blocks.items.properties.claimRefs.items.enum,brief.claims.map(c=>c.claimId));if(generationCalls===2)assert.equal(request.payload.previousCandidate.sourceBriefDigest,'bad');return {output:{...candidate,sourceBriefDigest:'bad'}}}}});
 assert.equal(failed.status,'FALLBACK');assert.equal(generationCalls,2);assert.equal(failed.internalOnly.repairCount,1);
 assert.equal(classifyProviderFailure({code:'NARRATIVE_PROVIDER_REQUEST_FAILED',details:{status:429}}),'PROVIDER_RATE_LIMIT');
 assert.equal(retryDecision({attemptCount:0,errorClass:classifyProviderFailure({details:{status:503}})}).retryAllowed,true);

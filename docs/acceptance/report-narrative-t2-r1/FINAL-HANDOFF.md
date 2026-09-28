@@ -2,7 +2,7 @@
 
 ## Status
 
-Partial implementation and local verification. This is **not** W0–W29 completion, owner acceptance, canary acceptance, or eight-method production admission.
+S04 bilingual real T2 candidates are **READY_FOR_OWNER_ACCEPTANCE**. Both locales passed independent semantic verification with full claim coverage and locale parity. The broader implementation remains partial: this is not W0–W29 completion, owner acceptance, canary acceptance, or eight-method production admission.
 
 Original attachment baseline HEAD: `6ce925dacb0d3e21fc419cbb3f05ddf480e42de3`.
 Resume first observed HEAD: `496efce52e3b5b6e70daab82e468fe16eec2d201`.
@@ -49,8 +49,8 @@ Core composition tests inject both the writer and reviewer responses. They estab
 
 ## NOT_RUN / BLOCKED
 
-- Cloudflare inspection confirmed `OPENAI_API_KEY` exists as a secret in both production and preview. Its value was not requested, retrieved or logged. The protected S04 action is now deployed to QA with `RNT2_S04_REVIEW` and the encrypted `RNT2_REVIEWER_IDS` configured for the user's verified existing account. Remaining blocker is the provider request failure described below, not identity or missing local credentials.
-- Actual S04 generation requests reached the provider for both locales and returned `NARRATIVE_PROVIDER_REQUEST_FAILED`; each frozen result records one attempt. English was generated at 2026-09-28T03:56:14.260Z; Chinese was already stored at 2026-09-28T03:55:26.672Z when reopened. Both candidates remain null; semantic review did not run. Private R2 snapshot digests were validated before importing the real results into `bazi/s04/MACHINE-EVIDENCE.json` using `RNT2_S04_SNAPSHOT_DIR`; this import performs no model calls.
+- Cloudflare inspection confirmed `OPENAI_API_KEY` exists as a secret in production and preview. Its value was not requested, retrieved or logged. QA has the protected S04 action, preview opt-in and encrypted reviewer allowlist for the verified existing account. The read-only model probe returned HTTP 200.
+- Initial provider failures are retained as immutable historical snapshots. Removing unsupported schema `uniqueItems` resolved generation; local duplicate-reference validation remains mandatory. Later snapshots contain real model prose and independent semantic review. Current results are recorded in `bazi/s04/MACHINE-EVIDENCE.json`; importing digest-validated private snapshots performs no model calls.
 - Production persistent snapshot-store wiring, trusted report-subject binding construction in authenticated middleware, live entitlement/reopen/Explore integration and production activation remain incomplete. Strict helpers deliberately reject missing bindings.
 - Full report HTML/PDF semantic parity, mobile report navigation/reopen, per-method adapters/calibration/acceptance, canary and production are not verified by cover QA.
 - Full per-method editorial calibration remains pending. Section specificity is explicitly unmeasured rather than reusing claim coverage as a substitute.
@@ -58,7 +58,9 @@ Core composition tests inject both the writer and reviewer responses. They estab
 
 ## READY_FOR_OWNER_ACCEPTANCE
 
-None for S04. Once a protected environment executes the updated builder successfully, review the actual Chinese and English candidates separately. The attachment's owner gate still requires **S04 zh-Hans ACCEPT** and **S04 en ACCEPT** before S05 rollout. Do not request acceptance of the current null candidates.
+S04 Chinese and English frozen candidates are ready in `bazi/s04/review-s04-zh-Hans.html` and `bazi/s04/review-s04-en.html`. Both record LIVE_ADAPTER, actual T2, fallbackUsed false, accepted verification, claim coverage 1 and accepted locale parity. The attachment's sections 61, 63 and 124–125 require separate **S04 zh-Hans ACCEPT** and **S04 en ACCEPT** before S05 rollout. Owner acceptance remains PENDING; productionActivated remains false.
+
+Frozen private QA keys: English `qa/rnt2/s04/47a90e3370ae0a6a7b7750a57f9a797dcb31ab47421837b6174972347d6b9be0.json`; Chinese `qa/rnt2/s04/e6b953e43de838bd20ea91ef527484b1d99ddeaa15b8ce9555478ee5bc72e342.json`. Exact identities, timestamps, digests, provider attempts, repair counts, reviewer calls and usage are retained in MACHINE-EVIDENCE.json. English uses verifier v1.3.0 (also passed read-only v1.3.1 revalidation); Chinese uses v1.3.1. No successful snapshot was overwritten or relabeled.
 
 ## PRE-EXISTING_FAILURE
 
@@ -72,7 +74,7 @@ None for S04. Once a protected environment executes the updated builder successf
 - Admission matrix: `METHOD-ADMISSION-MATRIX.json`. All eight methods remain unadmitted in this successor.
 - File manifest: `CHANGED-FILES.txt`.
 
-Next: finish authenticated server-side execution/binding and persistence; run actual S04 composition and review in the protected environment; verify full-report browser/PDF parity; then present valid frozen candidates for the two owner decisions. Do not label the partial infrastructure as production-ready.
+Next: obtain the two S04 owner decisions, then proceed within the attachment's sequence. Production subject binding, persistent delivery integration and full-report browser/PDF parity remain outstanding and must be completed before production admission. Do not label the partial infrastructure as production-ready.
 
 ### Protected S04 execution
 
@@ -84,6 +86,12 @@ QA review UI: https://qa.phios-github.pages.dev/docs/acceptance/report-narrative
 
 The clean build initially exposed a missing temporary output directory. `build-cloudflare-pages.mjs` now creates it before invoking Wrangler. Clean build and private-review/adversarial regressions passed. Deployment staging copies and temporary downloaded snapshots are removed after verification.
 
+The live read-only model probe returned HTTP 200 for gpt-5.6-luna. Unsupported `uniqueItems` was removed from the provider schema; uniqueness remains enforced locally. Composer v1.3.0 / prompt v2.2.0 constrain references to the actual Brief, explicitly require source boundaries, and include the previous candidate and concrete review defects in the single permitted repair. Input no longer duplicates the Brief. The independent reviewer returns rejection defects only, with no praise in its reasons array. Verifier v1.3.1 distinguishes tested negative certainty constructions from affirmative guarantees; the independent reviewer receives unmodified prose and remains mandatory. Positive guarantees and mixed negative/positive claims still fail regression tests. Source authority and model route were unchanged. Schema reference: https://developers.openai.com/api/docs/guides/structured-outputs .
+
+Latest QA deployment: https://301de467.phios-github.pages.dev (alias `qa`). English passed live review under verifier v1.3.0 and was additionally revalidated read-only under v1.3.1 with its original digest-bound semantic review; its immutable identity is preserved, avoiding another paid generation. Usage estimates use the existing planning registry and are not final billed costs. Historical usage events retain the pre-existing `requestType: PRODUCTION` default even though execution was QA only.
+
 ## Final cover visual review
 
 All 64 fixture PDF pages were rasterized and their field strips inspected. After finding raster-label overlap, affected overlays were corrected and the full 64-case HTML/PDF machine audit rerun successfully. The final affected pages were rendered and visually rechecked. All 152 reproducible files in artifacts/rnt2-cover and the temporary bazi-t3-test bundle were then removed at the user's request (190.87 MiB total). Generated cover outputs are now ignored by Git. To recreate them, run the cover fixture builder and audit scripts; historical machine results remain in COVER-QA.json. Design-owner acceptance of typography/masks remains pending.
+
+After the final live bilingual PASS, removed 15,205 additional temporary files (602.65 MiB): this task's QA deployment staging, Pages build output and duplicate downloaded private snapshots. Resolved paths were checked to remain in C:/phios and contain no reparse points. Source, compact review records and private immutable R2 snapshots remain. Total removed across these cleanup passes: approximately 793.52 MiB. Unrelated active task directories were preserved.
