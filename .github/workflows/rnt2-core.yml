@@ -1,0 +1,28 @@
+name: REPORT-NARRATIVE-T2-R1 · Core Contracts
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'functions/personal-reading/narrative/report-*.js'
+      - 'functions/report-delivery/report-delivery-r2.js'
+      - 'functions/canonical-presentation-runtime/report-cover-*.js'
+      - 'scripts/check-rnt2-core.mjs'
+      - '.github/workflows/rnt2-core.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+      - run: npm ci
+      - run: node scripts/check-rnt2-core.mjs
