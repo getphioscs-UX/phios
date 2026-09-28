@@ -61,6 +61,18 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
  if(topic&&p.dayMasterStrength?.withheldVerdict?.strongWeakLabelCreated===false)add('OPEN_STRENGTH','OPEN_CONDITION','FINAL_STRENGTH',[],say('The reading leaves a final strong-or-weak judgment open; it is not a fixed identity.','解读保留最终强弱判断，不据此定义固定身份。'),['professionalModules/dayMasterStrength/withheldVerdict'],{modality:'UNRESOLVED',openConditions:['FINAL_STRENGTH_WITHHELD']});
  if(sectionKey==='S03_LIFE_STRUCTURE'&&p.pattern?.summary?.primaryPatternEstablished===false)add('OPEN_PATTERN','OPEN_CONDITION','PRIMARY_PATTERN',[],say('A final primary pattern has not been established; visible candidates remain conditional.','最终主格局尚未成立；可见候选仍须保留条件。'),['professionalModules/pattern/summary','professionalModules/pattern/state'],{modality:'UNRESOLVED',openConditions:arr(p.pattern.qualifierCodes)});
  const timeline=buildTemporalRelevanceIR(p);
+ if(sectionKey!=='S08_TIMING'&&topic&&p.professionalTimeline?.currentWindow?.available){
+  const ti=arr(p.professionalTimeline.currentWindow.topicTimeline).findIndex(x=>x.topicCode===topicCode),tw=p.professionalTimeline.currentWindow.topicTimeline?.[ti];
+  if(tw?.activationState){
+   const band=x=>x?.activationBand||null;
+   const matched=[...new Set([...arr(tw.daYun?.matchedGroups),...arr(tw.liuNian?.matchedGroups)])].map(group).filter(Boolean);
+   const timingText=say(
+    `In the selected timing window, this topic is active across both Da Yun and annual layers (${band(tw.daYun)} / ${band(tw.liuNian)}). The overlapping functions include ${matched.join(', ')||'the section-owned functions'}. This raises the topic's relevance for observation without predicting a specific event.`,
+    `在当前选定的时间窗口里，这个主题同时受到大运与流年层关注（${band(tw.daYun)}／${band(tw.liuNian)}）。两层共同涉及的功能包括${matched.join('、')||'本章已有功能'}。这会提高本阶段观察这个主题的相关性，但不预测具体事件。`
+   );
+   add('TIME_TOPIC','TEMPORAL_RELEVANCE',topicCode,[topicCode],timingText,[`professionalModules/professionalTimeline/currentWindow/topicTimeline/${ti}`],{conditions:['NATAL_TOPIC_REMAINS_PRIMARY_CONTEXT','ACTIVATION_IS_NOT_PREDICTION'],temporalContext:temporalSnapshot});
+  }
+ }
  if(sectionKey==='S08_TIMING'){
   if(timeline.available){
    for(const [key,value] of Object.entries(timeline).filter(([key])=>key.endsWith('Relevance')||key==='natalPriorityRelations')){
@@ -91,8 +103,11 @@ export async function buildBaZiNarrativeClaimIR({reading,sectionKey,locale,tempo
    const pi=arr(p.wholeChartPriority?.themes).findIndex(t=>t.priorityId===priorityRef);
    if(chapter?.development?.[lang]&&pi>=0){let wholeText=chapter.development[lang];if(sectionKey==='S02_PERSONALITY'&&chapter.themeType==='TEN_GOD_GROUP'&&chapter.themeKey==='OFFICER')wholeText=say('Rules, responsibility and pressure are a wider chart priority that also reaches this capability reading. They remain a counterweight to a learning-only interpretation: standards and demand need to stay visible without becoming a personality score.','规则、责任与压力是整盘优先主题，也会进入能力读取。它们构成对“只看学习与支持”的修正：标准与要求需要保留，但不能被写成固定人格评分。');if(sectionKey==='S02_PERSONALITY'&&chapter.themeType==='CARRYING')wholeText=say('Carrying is a separate whole-chart priority. In this capability reading, having access to a skill and being able to keep it usable under continued expression and demand are related but not identical questions.','承载条件是整盘另一条独立优先主线。在能力主题里，“拥有一项能力”与“在持续表达和要求之下仍能使用它”是相关但不能混为一谈的两个问题。');add(`WHOLE_${priorityRef}`,'CROSS_SECTION_RELEVANCE',priorityRef,[topicCode],wholeText,[`professionalModules/customerNarrative/priorityChapters/${ci}/development`,`professionalModules/wholeChartPriority/themes/${pi}`,...(chapter.condition?.[lang]?[`professionalModules/customerNarrative/priorityChapters/${ci}/condition`]:[])],{rank:null,wholeChartRank:chapter.rank,conditions:chapter.condition?.[lang]?['NATIVE_PRIORITY_CONDITION']:[],conditionText:chapter.condition?.[lang]||null});}
   }
+  const OPERATOR_BY_RELATION={EMPHASIS:'CONTEXTUALIZES',LIFE_DOMAIN_EXPLANATION:'CONTEXTUALIZES',OPERATING_CONDITION:'CONSTRAINS',ASSOCIATION:'ASSOCIATED_WITH',CO_OCCURRING_DIMENSIONS:'CO_OCCURS_WITH',CONTEXT_MODIFIER:'MODIFIES',SUPPORT_CONDITION:'SUPPORTS',TENSION:'CONSTRAINS',CONTRAST:'CONTEXTUALIZES',OPEN_CONDITION:'OPEN',COUNTER_SIGNAL:'CONSTRAINS',TEMPORAL_RELEVANCE:'TIMING_RELEVANCE',CROSS_SECTION_RELEVANCE:'CONTEXTUALIZES',BOUNDARY:'CONSTRAINS'};
+  const ROLE_BY_RELATION={EMPHASIS:'STRUCTURE',LIFE_DOMAIN_EXPLANATION:'MEANING',OPERATING_CONDITION:'CONDITIONS',ASSOCIATION:'STRUCTURE',CO_OCCURRING_DIMENSIONS:'STRUCTURE',CONTEXT_MODIFIER:'STRUCTURE',SUPPORT_CONDITION:'CONDITIONS',TENSION:'COUNTERWEIGHTS',CONTRAST:'COUNTERWEIGHTS',OPEN_CONDITION:'COUNTERWEIGHTS',COUNTER_SIGNAL:'COUNTERWEIGHTS',TEMPORAL_RELEVANCE:'TIMING_RELEVANCE',CROSS_SECTION_RELEVANCE:'NAVIGATION',BOUNDARY:'COUNTERWEIGHTS'};
   for(const claim of claims){
    claim.claimId=claim.id;claim.claimType=claim.relationType;claim.priority=claim.rank===1?'PRIMARY':claim.relationType==='TENSION'?'CONTRADICTORY':claim.relationType==='TEMPORAL_RELEVANCE'?'TIMING':claim.relationType==='ASSOCIATION'?'SECONDARY':'SUPPORTING';
+   claim.semanticOperators=[OPERATOR_BY_RELATION[claim.relationType]||'CONTEXTUALIZES'];claim.explanationRole=ROLE_BY_RELATION[claim.relationType]||'STRUCTURE';
    claim.basis=claim.sourceRefs.map(ref=>({ref,value:pathGet(reading,ref)}));
    claim.counterweights=arr(topic?.patternCandidates).filter(c=>c.conclusionState?.startsWith('OPEN')).map(c=>({candidateId:c.candidateId,state:c.conclusionState,sourceRef:`${topicRef}/patternCandidates/${topic.patternCandidates.indexOf(c)}`,scope:'SECTION_CONTEXT_NOT_NEW_RELATION',permission:'UNCERTAINTY_ONLY'}));
    claim.timing=claim.temporalContext?[claim.temporalContext]:[];claim.lifeDomains=[topicCode];claim.observableSignals=questions.filter(q=>q.sourceRefs).map(q=>({questionId:q.id,sourceRefs:q.sourceRefs,scope:'REFLECTION_ONLY_NOT_PREDICTED_MANIFESTATION'}));claim.confidence='BOUNDED_SOURCE_PROJECTION_NOT_EMPIRICAL_CERTAINTY';claim.license={owner:EXPLANATORY_AUTHORITY_VERSION,createsMethodRule:false,allowsObservedReality:false};claim.provenance=claim.sourceRefs;
