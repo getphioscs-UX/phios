@@ -58,7 +58,7 @@ assert.ok(shell.includes('Explore periods')&&shell.includes('浏览历史时期'
 
 assert.ok(page.includes("renderAtlasVisualProjection(root.querySelector('[data-atlas-template-projection]')"),'Atlas page must render the FR3 compositor.');
 assert.ok(page.includes('atlas-layer-template-slots-v1.json'),'Atlas page must load the owner-authored slot contract.');
-assert.ok(page.includes("root.dataset.atlasProjection='LIBRARY_TEMPLATE_COMPOSITOR'"),'Atlas runtime must identify the FR3 projection mode.');
+assert.ok(page.includes("root.dataset.atlasProjection='CIV_ATLAS_TEMPLATE_COMPOSITOR'"),'Atlas runtime must identify the FR3 projection mode.');
 
 assert.ok(css.includes('FR3 Library template compositor'),'FR3 compositor CSS missing.');
 assert.ok(css.includes('.civ-template-slot{position:absolute'),'Dynamic slots must be absolute overlays inside the template.');
