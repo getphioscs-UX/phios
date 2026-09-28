@@ -22,3 +22,9 @@ export function assertCoverOverlayValues({methodId,subject,renderedValues}={}){
  if(subject?.timeAccuracy==='UNKNOWN'&&expected.birthTime!=='—')throw Error('COVER_UNKNOWN_TIME_FABRICATED');
  return true;
 }
+
+export function renderReportCoverPage({methodId,subject,src,alt='',pageNumber=1}={}){
+ if(!src)throw Error('REPORT_COVER_BASE_ASSET_REQUIRED');
+ if(!subject?.subjectReference)throw Error('REPORT_COVER_SUBJECT_REQUIRED');
+ return '<section class="pub-static pub-cover-page" data-page-number="'+Number(pageNumber||1)+'" data-cover-method="'+esc(methodId)+'"><img class="pub-cover-base" src="'+esc(src)+'" alt="'+esc(alt)+'">'+renderReportCoverOverlay({methodId,subject})+'</section>';
+}
