@@ -172,6 +172,15 @@ export function renderAtlasVisualProjection(container,{projection,slots,data={},
   if(slotConfig?.presentationMode==='SYSTEM_COMPOSED_FROM_ASSETS'||config?.mode==='SYSTEM_COMPOSED_FROM_ASSETS'){container.hidden=true;container.innerHTML='';return;}
   const poster=posterFor(config,state);
   if(!config||!slotConfig||!poster||poster.availability&&poster.availability!=='VERIFIED_LIVE_R2'){container.hidden=true;container.innerHTML='';return;}
+  if(config.mode==='ATMOSPHERE_PLUS_STRUCTURED_READER'||slotConfig.presentationMode==='ATMOSPHERE_PLUS_STRUCTURED_READER'){
+    container.hidden=false;
+    container.innerHTML=`<section class="civ-template-atmosphere" data-atlas-template-atmosphere data-layer="${esc(state.activeLayer)}">
+      <img src="${esc(poster.publicUrl)}" alt="" loading="eager" decoding="async" data-template-image>
+    </section>`;
+    const img=container.querySelector('[data-template-image]');
+    img?.addEventListener('error',()=>{container.hidden=true;container.innerHTML='';},{once:true});
+    return;
+  }
   const overlays=[];
   if(state.activeLayer==='timeline'){
     overlays.push(timelineOverlay(data,state,l,slotConfig));
