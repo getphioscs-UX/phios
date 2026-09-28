@@ -20,6 +20,10 @@ export async function buildReportSectionNarrativeBrief({contract,richClaimIr,loc
   const claimId=text(c.claimId||c.id),role=text(c.explanationRole)||roleForClaim(c);
   return Object.freeze({claimId,role:role||'STRUCTURE',text:text(c.text),claimType:text(c.claimType||c.relationType),priority:text(c.priority)||'SUPPORTING',semanticOperators:Object.freeze(arr(c.semanticOperators)),conditions:Object.freeze(arr(c.conditions)),counterweights:Object.freeze(arr(c.counterweights)),timing:Object.freeze(arr(c.timing)),observableSignals:Object.freeze(arr(c.observableSignals)),certainty:text(c.certainty)||text(c.modality)||'BOUNDED',sourceRefs:Object.freeze(arr(c.sourceRefs).map(String)),license:c.license||null});
  });
+ for(const q of arr(richClaimIr?.reflectionQuestions)){
+  if(!text(q?.id)||!text(q?.text))continue;
+  claims.push(Object.freeze({claimId:text(q.id),role:'OBSERVABLE_EXPRESSION',text:text(q.text),claimType:'QUESTION',priority:'SUPPORTING',semanticOperators:Object.freeze(['QUESTION']),conditions:Object.freeze(['QUESTION_ONLY_NOT_OBSERVED_FACT']),counterweights:Object.freeze([]),timing:Object.freeze([]),observableSignals:Object.freeze([]),certainty:'QUESTION',sourceRefs:Object.freeze(arr(q.sourceRefs).map(String)),license:Object.freeze({allowsObservedReality:false})}));
+ }
  if(!claims.length)fail('RNT2_BRIEF_CLAIMS_REQUIRED');
  const sourceDigest=await sha256Stable({version:richClaimIr.version||null,claims:claims.map(c=>({claimId:c.claimId,text:c.text,sourceRefs:c.sourceRefs,certainty:c.certainty,role:c.role}))});
  const briefSeed={
