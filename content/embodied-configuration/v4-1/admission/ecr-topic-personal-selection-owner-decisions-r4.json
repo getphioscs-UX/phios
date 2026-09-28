@@ -1,24 +1,45 @@
 {
   "schemaVersion": "ECR-V4.1A-TOPIC-PERSONAL-SELECTION-OWNER-ADMISSION-R4-v1",
-  "status": "PARTIAL_OWNER_ADMISSION_D_REVISED_PENDING",
+  "status": "OWNER_ADMITTED_D_M_A",
   "baselineCommit": "228594a13148c8e0bca655be5813392388a6cb29",
   "ownerDecisionEvidenceRef": "OWNER_CHAT_R4_2026-09-24",
   "summary": {
-    "ACCEPT": 2,
-    "REVISE": 1,
+    "ACCEPT": 3,
+    "REVISE": 0,
     "REJECT": 0
   },
   "rules": [
     {
-      "ruleId": "D_LEGACY_AFFINITY_RANK_TO_PHYSICAL_BODY_ACTIVATIONS",
-      "ownerDecision": "REVISE",
-      "reviewedAt": "2026-09-24",
+      "ruleId": "D_PHYSICAL_BODY_PLUS_ADMITTED_SEMANTIC_COMPOSITION",
+      "ownerDecision": "ACCEPT",
+      "reviewedAt": "2026-09-28",
       "reviewer": "OWNER",
-      "evidenceRef": "OWNER_CHAT_R4_2026-09-24",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W6_15_ITEMS",
       "mechanicalBasis": "ACCEPT",
-      "reason": "Physical body binding is a correct upstream identity, but body existence is not discriminative: nearly every person has the same governed D1–D10/D12 bodies. Presence alone cannot serve as a personal topic selector.",
-      "state": "REVISED_RULE_APPLIED_REVIEW_PENDING",
-      "revisedRule": "Keep physical body binding as evidence, but require admitted semantic composition and/or an explicit salience rule tied to Birth/Design activation meaning before D can affect personal topic selection. D11 remains UNKNOWN while Chiron is unavailable."
+      "state": "OWNER_ACCEPTED_STRUCTURAL_AND_SEMANTIC_SELECTOR_RULE_R7_W6",
+      "revisedRule": "Physical body binding remains structural evidence only. D may affect personal topic selection only when the specific Birth/Design activation resolves through admitted Gate Base + Line Modifier + Driver Role + Personality/Design Layer composition and produces admitted semantic tags and/or a separately governed salience rule. Body presence alone cannot select a topic. D11 Earth is deterministically derived from the corresponding Sun longitude + 180° and follows the same rule; there is no Chiron exception in V4.1.",
+      "revisedRuleZhHans": "Physical body binding 继续只作为结构证据。只有当具体 Birth／Design activation 经过已获准的 Gate Base + Line Modifier + Driver Role + Personality／Design Layer 组合，并产生已获准的 semantic tags，和／或满足另行治理的 salience rule 时，D 才能影响个人 topic selection。仅仅因为某个天体存在，不能选择 topic。D11 Earth 由对应 Sun longitude + 180° 确定性推导，并遵循同一规则；V4.1 不再存在 Chiron 例外。",
+      "boundaries": [
+        "PLANET_EXISTS -> TOPIC is forbidden",
+        "Gate number -> topic is forbidden",
+        "Keyword similarity -> topic is forbidden",
+        "Equal salience or insufficient evidence -> UNKNOWN",
+        "D11 = EARTH; former Chiron rule is deleted"
+      ],
+      "acceptedRecordSnapshot": {
+        "ruleId": "D_PHYSICAL_BODY_PLUS_ADMITTED_SEMANTIC_COMPOSITION",
+        "en": "Physical body binding remains structural evidence only. D may affect personal topic selection only when the specific Birth/Design activation resolves through admitted Gate Base + Line Modifier + Driver Role + Personality/Design Layer composition and produces admitted semantic tags and/or a separately governed salience rule. Body presence alone cannot select a topic. D11 Earth is deterministically derived from the corresponding Sun longitude + 180° and follows the same rule; there is no Chiron exception in V4.1.",
+        "zh-Hans": "Physical body binding 继续只作为结构证据。只有当具体 Birth／Design activation 经过已获准的 Gate Base + Line Modifier + Driver Role + Personality／Design Layer 组合，并产生已获准的 semantic tags，和／或满足另行治理的 salience rule 时，D 才能影响个人 topic selection。仅仅因为某个天体存在，不能选择 topic。D11 Earth 由对应 Sun longitude + 180° 确定性推导，并遵循同一规则；V4.1 不再存在 Chiron 例外。",
+        "boundaries": [
+          "PLANET_EXISTS -> TOPIC is forbidden",
+          "Gate number -> topic is forbidden",
+          "Keyword similarity -> topic is forbidden",
+          "Equal salience or insufficient evidence -> UNKNOWN",
+          "D11 = EARTH; former Chiron rule is deleted"
+        ]
+      },
+      "exactContentBinding": true,
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
     },
     {
       "ruleId": "M_ZERO_DEGREE_SECTOR_TO_P64_UPPER_TRIGRAM",
@@ -52,7 +73,10 @@
     "MAndAAcceptanceIsStructuralEvidenceOnly": true,
     "DPhysicalBodyBindingAloneIsNotPersonalTopicSelection": true,
     "customerNarrativeRequiresAdmittedComposition": true,
-    "D11RemainsUnknownWithoutChironProvider": true
+    "d11BodyBinding": "EARTH",
+    "d11CalculationRule": "normalize360(SUN_LONGITUDE + 180)",
+    "chironOperationalIdentity": "REMOVED_FROM_V4_1",
+    "insufficientOrEqualSalience": "UNKNOWN"
   },
   "customerProductionAdmitted": false
 }
