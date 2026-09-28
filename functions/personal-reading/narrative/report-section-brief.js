@@ -39,6 +39,7 @@ export async function buildReportSectionNarrativeBrief({contract,richClaimIr,loc
   timingPolicy:contract.timingPolicy,boundaryPolicy:contract.boundaryPolicy,realityBridgePolicy:contract.realityBridgePolicy,
   styleIntent:Object.freeze({tone:'WARM_PROFESSIONAL',depth:'PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false,...styleIntent}),
   depthTarget:contract.depthTarget,
+  claimIrVersion:richClaimIr.version||'UNVERSIONED_CLAIM_IR',
   sourceAuthorityVersion:sourceAuthorityVersion||richClaimIr.version||null,
   sourceSemanticDigest:sourceDigest,
   narrativeFreedom:Object.freeze({mayVary:['paragraph order','transitions','natural phrasing','licensed explanation depth'],mustPreserve:['claim meaning','uncertainty','conditions','counterweights','timing scope','boundaries','source lineage'],mayRecalculateFacts:false,mayInventLifeEvents:false,mayInventCurrentReality:false})
