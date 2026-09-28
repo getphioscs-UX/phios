@@ -1,0 +1,48 @@
+name: REPORT-NARRATIVE-T2-R1 · Cover HTML PDF Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'functions/canonical-presentation-runtime/report-cover-*.js'
+      - 'assets/customer-ui/js/personal-products/publication-report-pages.js'
+      - 'assets/customer-ui/surfaces/report-publication.css'
+      - 'scripts/build-rnt2-cover-fixture.mjs'
+      - 'scripts/audit-rnt2-report-covers.mjs'
+      - '.github/workflows/rnt2-cover-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+      - run: npm ci
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: node scripts/build-rnt2-cover-fixture.mjs
+      - name: Start local server
+        run: |
+          python3 -m http.server 8791 --bind 127.0.0.1 > /tmp/rnt2-cover-http.log 2>&1 &
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:8791/artifacts/rnt2-cover/review.html >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/rnt2-cover-http.log
+          exit 1
+      - run: node scripts/audit-rnt2-report-covers.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rnt2-cover-audit
+          path: artifacts/rnt2-cover
+          if-no-files-found: error
