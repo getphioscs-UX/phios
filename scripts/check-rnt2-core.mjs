@@ -25,14 +25,10 @@ const composed=await composeReportSectionT2({brief,registry,providerAdapters,req
 if(composed.status!=='PASS'||composed.internalOnly.actualTier!=='T2_GOVERNED_NATURAL_COMPOSITION'||composed.verification?.accepted!==true)throw Error('RNT2_CORE_T2_FAILED');
 if(composed.verification.claimCoverage!==1)throw Error('RNT2_CORE_CLAIM_COVERAGE_FAILED');
 const cached=await composeReportSectionT2({brief,registry,providerAdapters,requestId:'RNT2-CORE-QA-REOPEN',cache:sectionCache});
-<<<<<<< HEAD
 if(cached.cacheHit!==true||cached.internalOnly.providerCalled!==false||providerCalls!==2)throw Error('RNT2_SECTION_CACHE_REOPEN_FAILED');
-=======
-if(cached.cacheHit!==true||cached.internalOnly.providerCalled!==false||providerCalls!==1)throw Error('RNT2_SECTION_CACHE_REOPEN_FAILED');
 const publicationIr=await buildReportPublicationIrV2({methodId:'BZR',reportVersion:'QA-R1',sectionKey:'S04_CAREER',locale:'en',brief,candidate:composed.candidate,semanticOwner:'QA-AUTH-v1',compositionOwner:'REPORT-NARRATIVE-T2-R1'});
 const pubCheck=assertPublicationIrV2Preservation({publicationIr,brief});
 if(pubCheck.accepted!==true||publicationIr.blocks.length!==roles.length)throw Error('RNT2_PUBLICATION_IR_V2_FAILED');
->>>>>>> 09bbc9702b202a76c9846cc4d01772e9431a0f6c
 
 const identity=await buildReportSectionGenerationIdentity({methodId:'BZR',sectionKey:'S04_CAREER',locale:'en',compositionVersion:'1',promptVersion:'1',authorityVersion:'1',claimIrVersion:'1',verifierVersion:'1',evidenceDigest:'abc',schemaVersion:'1',provider:'OPENAI',model:'gpt-5.6-luna'});
 if(!identity.generationKey.startsWith('RNT2-'))throw Error('RNT2_GENERATION_IDENTITY_FAILED');

@@ -1,13 +1,16 @@
 {
   "schemaVersion": "RNT2-COVER-QA-v1",
-  "status": "MACHINE_PASS_VISUAL_REVIEW_PENDING",
+  "status": "MACHINE_PASS_VISUAL_RECHECK_COMPLETE_OWNER_PENDING",
   "methods": 8,
   "cases": 64,
   "logicalPages": 64,
   "physicalPages": 64,
   "errors": [],
-  "evidenceRoot": "artifacts/rnt2-cover",
+  "artifactRetention": "Reproducible screenshots and PDF removed at user request; historical QA result retained",
   "fixtureDataOnly": true,
   "productionAdmission": false,
-  "mobile": "NOT_RUN"
+  "mobile": "NOT_RUN",
+  "visualReview": "64 field strips inspected; affected layouts corrected; full machine audit rerun; final changed layouts visually rechecked",
+  "regenerate": ["node scripts/build-rnt2-cover-fixture.mjs", "node scripts/audit-rnt2-report-covers.mjs"],
+  "designOwnerAcceptance": "PENDING"
 }

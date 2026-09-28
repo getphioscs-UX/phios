@@ -26,7 +26,7 @@ export function assertReportSubjectMatch({presentation,subjectReference,birthDat
 // Never derive expected fingerprints from the supplied overlay itself.
 export async function assertReportSubjectBinding({presentation,expectedBinding}={}){
  if(!expectedBinding?.subjectReference||!expectedBinding.inputSubjectFingerprint||!expectedBinding.semanticSubjectFingerprint)throw Error('REPORT_SUBJECT_MATCH_REQUIRED');
- assertReportSubjectMatch({presentation,...expectedBinding});
+ assertReportSubjectMatch({...expectedBinding,presentation});
  const keys=['subjectReference','displayName','birthDate','birthTime','timeAccuracy','identitySourceRef','birthSourceRef'];
  const fingerprint=await sha256Stable(Object.fromEntries(keys.map(k=>[k,presentation[k]])));
  if(fingerprint!==presentation.subjectFingerprint||fingerprint!==expectedBinding.inputSubjectFingerprint||fingerprint!==expectedBinding.semanticSubjectFingerprint)throw Error('COVER_SUBJECT_MISMATCH');

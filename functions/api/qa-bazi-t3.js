@@ -9,6 +9,8 @@ import {requireSameOrigin} from '../account/oidc-auth.js';
 import {composeBaziT3Section,verifyBaziT3BilingualParity} from '../personal-reading/narrative/bazi-t3-composition.js';
 import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
 import {COMPOSITION_VERSION,validateEditorial} from '../personal-reading/narrative/bazi-editorial-contract.js';
+import s04Source from '../../docs/guided-report-successor-r2/bazi-source.json';
+import {runBaZiS04PrivateReview} from '../personal-reading/narrative/bazi-s04-private-review.js';
 const headers={'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow, noarchive','Referrer-Policy':'no-referrer'};
 export async function onRequest(context){
  const reply=(body,status=200)=>Response.json(body,{status,headers});
@@ -22,7 +24,12 @@ export async function onRequest(context){
   let raw='',size=0;const decoder=new TextDecoder();
   for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>256){await reader.cancel();return reply({ok:false},413);}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
   const body=JSON.parse(raw);
-  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status'].includes(body.action)))return reply({ok:false},400);
+  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status','rnt2-s04'].includes(body.action)))return reply({ok:false},400);
+  if(body.action==='rnt2-s04'){
+   const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
+   const response=await runBaZiS04PrivateReview({env,body,userId:identity.userId,source:s04Source,registry});
+   return reply(response.body,response.status);
+  }
   const profileId=body.profileId||'BASELINE_NOW',generating=!body.action||body.action==='generate';
   // T3 is no longer canonical BaZi publication authority. Provider-backed
   // generation is retained only for explicitly enabled editorial experiments,

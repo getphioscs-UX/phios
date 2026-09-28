@@ -21,10 +21,15 @@ function contract(locale){
  });
 }
 
-export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,env={},fetcher,providerAdapters=null,requestId}={}){
+export async function prepareBaZiS04T2({reading,locale,temporalSnapshot}={}){
  const richClaimIr=await buildBaZiNarrativeClaimIR({reading,sectionKey:'S04_CAREER',locale,temporalSnapshot});
  const sectionContract=contract(locale);
  const brief=await buildReportSectionNarrativeBrief({contract:sectionContract,richClaimIr,locale,sourceAuthorityVersion:EXPLANATORY_AUTHORITY_VERSION,styleIntent:{tone:'WARM_PROFESSIONAL',depth:'PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false}});
+ return {richClaimIr,sectionContract,brief};
+}
+
+export async function buildBaZiS04T2({reading,locale,temporalSnapshot,registry,env={},fetcher,providerAdapters=null,requestId}={}){
+ const {richClaimIr,sectionContract,brief}=await prepareBaZiS04T2({reading,locale,temporalSnapshot});
  const composition=await composePublicationNarrative({sectionBrief:brief,registry,env,fetcher,providerAdapters,requestId:requestId||('RNT2-BZR-S04-'+locale)});
  const blocks=composition.candidate?.blocks||[];
  const quality=evaluateReportEditorialQuality({blocks,paragraphs:blocks.map(b=>b.text),claimCoverage:composition.verification?.claimCoverage??null,requiredRoles:sectionContract.requiredClaimRoles,presentRoles:[...new Set(blocks.map(b=>b.role))],sectionSpecificTerms:locale==='zh-Hans'?['事业','责任','支持','资源','工作','大运','流年']:['career','responsibility','support','resources','work','Da Yun','annual']});
