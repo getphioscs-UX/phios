@@ -1,0 +1,1772 @@
+{
+  "schemaVersion": "ECR-V4.1A-R7-W8-PHI-CARD-OPERATIONAL-HUMAN-REVIEW-v1",
+  "reviewUnit": "OPERATIONAL_PHI_CARD",
+  "decisionVocabulary": [
+    "ACCEPT",
+    "REVISE",
+    "REJECT"
+  ],
+  "rules": {
+    "randomSelectionAllowed": false,
+    "keywordSimilarityFallbackAllowed": false,
+    "ordinalFallbackAllowed": false,
+    "missingRequiredSemanticTag": "UNKNOWN",
+    "insufficientSemanticDepth": "UNKNOWN",
+    "equalPriorityAfterGovernedTieBreak": "UNKNOWN",
+    "unadmittedCard": "UNKNOWN",
+    "phaseCardsRequireExactPhaseRef": true,
+    "phaseCardsDoNotCompeteForPrimarySelection": true,
+    "tensionAndFieldCardsOverlayOnly": true
+  },
+  "priorityContract": {
+    "tiers": {
+      "CORE": 300,
+      "DRIVER": 250,
+      "GIFT": 200,
+      "TENSION": 150,
+      "FIELD": 100,
+      "PHASE": 50
+    },
+    "note": "Tier orders output roles, not card quality. Within a tier, explicit semantic evidence controls eligibility; unresolved ties remain UNKNOWN."
+  },
+  "cards": [
+    {
+      "cardId": "ECR-PC-C01",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "成形",
+        "en": "FORMING"
+      },
+      "runtimeSlots": [
+        "IDENTITY",
+        "CARRIER",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "REORGANIZATION"
+      ],
+      "optionalSemanticTags": [
+        "CONTINUITY",
+        "RELATION"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表一个结构正从差异、线索或尚未定形的内容中出现。它强调「形成中的秩序」，而不是已经完成的答案。",
+        "en": "A structure is emerging from differences, signals, or material that has not fully settled. It points to order in formation rather than a finished answer."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-C02",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "聚焦",
+        "en": "FOCUS"
+      },
+      "runtimeSlots": [
+        "EXPERIENCE",
+        "AGENCY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ATTENTION",
+        "SELECTION"
+      ],
+      "optionalSemanticTags": [
+        "VALUE"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表注意力与判断正在从多个可能收束到一个更值得优先处理的主题。",
+        "en": "Attention and judgment are converging from many possibilities toward what deserves priority."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-C03",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "扎根",
+        "en": "GROUNDING"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "CAPACITY",
+        "BOUNDARY"
+      ],
+      "optionalSemanticTags": [
+        "CONTINUITY",
+        "CONSTRAINT"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表结构需要边界、资源、载体或稳定条件，才能从想法变成可持续运行。",
+        "en": "A structure needs boundaries, resources, a carrier, or stable conditions before it can operate sustainably."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-C04",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "整合",
+        "en": "INTEGRATION"
+      },
+      "runtimeSlots": [
+        "EXPERIENCE",
+        "IDENTITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "REORGANIZATION",
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表多个结构、需求或现实层面需要被放进同一个更完整的框架中理解。",
+        "en": "Several structures, demands, or reality layers need to be understood within one coherent frame."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-C05",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "展开",
+        "en": "EXPANSION"
+      },
+      "runtimeSlots": [
+        "EXPRESSION",
+        "IDENTITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "EXPRESSION",
+        "CAPACITY"
+      ],
+      "optionalSemanticTags": [
+        "REORGANIZATION"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表已经形成的结构开始增加范围、表达、触达或可用空间。",
+        "en": "An established structure is gaining range, expression, reach, or usable space."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-C06",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "重构",
+        "en": "RECONFIGURATION"
+      },
+      "runtimeSlots": [
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "REORGANIZATION"
+      ],
+      "optionalSemanticTags": [
+        "ADAPTATION",
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表既有结构仍有可用部分，但原来的组合已经无法继续支持新的条件。",
+        "en": "Useful parts may remain, but their previous arrangement no longer supports current conditions."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-C07",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "深化",
+        "en": "DEEPENING"
+      },
+      "runtimeSlots": [
+        "EXPERIENCE",
+        "EXPRESSION"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ATTENTION"
+      ],
+      "optionalSemanticTags": [
+        "INPUT",
+        "VALUE",
+        "EXPRESSION"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表当前价值来自更准确的辨识、解释与理解，而不是增加更多表面讯号。",
+        "en": "The value now lies in clearer recognition and interpretation rather than more surface input."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-C08",
+      "predecessorGroup": "CORE",
+      "title": {
+        "zh-Hans": "定向",
+        "en": "ORIENTATION"
+      },
+      "runtimeSlots": [
+        "AGENCY",
+        "EXPERIENCE"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "SELECTION"
+      ],
+      "optionalSemanticTags": [
+        "COMMITMENT",
+        "ATTENTION",
+        "VALUE"
+      ],
+      "priority": {
+        "tier": 300,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表当前结构需要一个可行方向，让注意、行动与资源不再各自移动。",
+        "en": "The current structure needs a viable direction so attention, action, and resources stop moving separately."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D01",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "寻找",
+        "en": "SEEKING"
+      },
+      "runtimeSlots": [
+        "EXPERIENCE",
+        "AGENCY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ATTENTION",
+        "INPUT"
+      ],
+      "optionalSemanticTags": [
+        "SELECTION"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表运行由寻找、理解或定位尚未清楚的部分推动。",
+        "en": "The runtime is driven by seeking, understanding, or locating what is not yet clear."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D02",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "回应",
+        "en": "RESPONSE"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "AGENCY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ADAPTATION",
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "SELECTION",
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表动力来自反馈、条件变化或一个已经进入场域的需求。",
+        "en": "Momentum comes from feedback, changing conditions, or a demand that has entered the field."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D03",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "推进",
+        "en": "ADVANCE"
+      },
+      "runtimeSlots": [
+        "AGENCY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "COMMITMENT",
+        "SELECTION"
+      ],
+      "optionalSemanticTags": [
+        "EXPRESSION"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表驱动力来自启动、执行或把已经形成的优先级带入现实。",
+        "en": "Drive comes from initiation, execution, or bringing an organized priority into reality."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D04",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "修正",
+        "en": "CORRECTION"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "AGENCY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ADAPTATION"
+      ],
+      "optionalSemanticTags": [
+        "REORGANIZATION",
+        "RELATION"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表现实反馈正在要求调整权重、关系或运行方式。",
+        "en": "Reality feedback is asking for adjustment in weight, relationships, or operation."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D05",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "完成",
+        "en": "COMPLETION"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "AGENCY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "COMMITMENT",
+        "CONTINUITY"
+      ],
+      "optionalSemanticTags": [
+        "RELATION"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表运行被未关闭的责任、流程、关系或结构持续牵引。",
+        "en": "The runtime is pulled by responsibilities, processes, relationships, or structures that remain open."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D06",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "突破",
+        "en": "BREAKTHROUGH"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "IDENTITY",
+        "AGENCY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "REORGANIZATION",
+        "CONSTRAINT"
+      ],
+      "optionalSemanticTags": [
+        "CONTINUITY",
+        "CAPACITY"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表动力来自扩张、突变或旧结构无法继续容纳新条件。",
+        "en": "Momentum comes from expansion, mutation, or an old structure that can no longer contain new conditions."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D07",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "承担",
+        "en": "STEWARDSHIP"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "AGENCY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "CAPACITY",
+        "CONTINUITY"
+      ],
+      "optionalSemanticTags": [
+        "COMMITMENT",
+        "BOUNDARY"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表动力来自结构化、保护、责任或把仍可运行的部分带入下一轮。",
+        "en": "Drive comes from structuring, protection, responsibility, or carrying what remains workable into the next cycle."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-D08",
+      "predecessorGroup": "DRIVER",
+      "title": {
+        "zh-Hans": "召唤",
+        "en": "CALLING"
+      },
+      "runtimeSlots": [
+        "AGENCY",
+        "EXPERIENCE"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ATTENTION",
+        "VALUE"
+      ],
+      "optionalSemanticTags": [
+        "SELECTION",
+        "COMMITMENT"
+      ],
+      "priority": {
+        "tier": 250,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示当前动力来自一种持续存在的方向性吸引。即使尚未能完全解释为什么，注意、好奇、投入或想象仍不断回到同一个方向。召唤并不证明这个方向一定正确，它只是说明：这个主题具有足够持续性，值得被认真观察和验证，而不是立即忽略。",
+        "en": "This card points to a persistent directional attraction. Even before the reason is fully understood, attention, curiosity, investment, or imagination keeps returning to the same direction. Calling does not prove that direction is correct; it means the theme is persistent enough to deserve observation and validation rather than dismissal."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G01",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "组织",
+        "en": "ORGANIZE"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "AGENCY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "REORGANIZATION",
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "CAPACITY"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表把方向、位置、资源或差异重新组织成可操作结构的能力。",
+        "en": "The capacity to organize direction, position, resources, or differences into a workable structure."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G02",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "洞察",
+        "en": "DISCERN"
+      },
+      "runtimeSlots": [
+        "EXPERIENCE",
+        "EXPRESSION"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ATTENTION",
+        "SELECTION"
+      ],
+      "optionalSemanticTags": [
+        "INPUT",
+        "VALUE"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表识别、解释、比较与形成可用理解的能力。",
+        "en": "The capacity for recognition, interpretation, comparison, and workable understanding."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G03",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "连接",
+        "en": "CONNECT"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "CONTINUITY",
+        "CAPACITY"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表在关系、共同结构与不同位置之间协调回应的能力。",
+        "en": "The capacity to coordinate response across relationships, shared structures, and different positions."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G04",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "表达",
+        "en": "EXPRESS"
+      },
+      "runtimeSlots": [
+        "EXPRESSION"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "EXPRESSION"
+      ],
+      "optionalSemanticTags": [
+        "RELATION",
+        "ATTENTION"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表表达、输出、说明与让内部结构进入共享现实的能力。",
+        "en": "The capacity to express, externalize, explain, and bring internal structure into shared reality."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G05",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "承载",
+        "en": "HOLD"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "CAPACITY",
+        "BOUNDARY"
+      ],
+      "optionalSemanticTags": [
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表维持可生存性、保护必要结构与在约束中持续运行的能力。",
+        "en": "The capacity to maintain viability, protect necessary structure, and continue under constraint."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G06",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "建构",
+        "en": "BUILD"
+      },
+      "runtimeSlots": [
+        "AGENCY",
+        "CARRIER"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "COMMITMENT",
+        "CAPACITY"
+      ],
+      "optionalSemanticTags": [
+        "REORGANIZATION"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表执行、资源组织与把回应落实为具体结构的能力。",
+        "en": "The capacity to execute, organize resources, and turn a response into concrete structure."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G07",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "调整",
+        "en": "ADAPT"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "CARRIER"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "ADAPTATION"
+      ],
+      "optionalSemanticTags": [
+        "REORGANIZATION",
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表根据现实条件改变方法的能力。当原有路径不再适用，系统可以根据反馈重新调整角度、顺序、节奏或工具，而不需要彻底否定原本目标。调整的价值在于保留方向，同时改变实现方式，使结构能够继续适应变化中的现实。",
+        "en": "This card represents the capacity to change method in response to real conditions. When an existing path stops fitting, angle, sequence, rhythm, or tools can be adjusted without abandoning the underlying direction. Adaptation preserves what matters while changing how it is realized."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-G08",
+      "predecessorGroup": "GIFT",
+      "title": {
+        "zh-Hans": "转化",
+        "en": "TRANSFORM"
+      },
+      "runtimeSlots": [
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "PRIMARY_OR_OVERLAY",
+      "requiredSemanticTags": [
+        "REORGANIZATION"
+      ],
+      "optionalSemanticTags": [
+        "CONTINUITY",
+        "ADAPTATION"
+      ],
+      "priority": {
+        "tier": 200,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表动员驱动力并让原有形式进入不同运行方式的能力。",
+        "en": "The capacity to mobilize drive and move an existing form into a different way of operating."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T01",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "过载",
+        "en": "OVERLOAD"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "AGENCY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CAPACITY",
+        "CONSTRAINT"
+      ],
+      "optionalSemanticTags": [
+        "RECOVERY"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表结构在持续激活、承载或执行时可能出现的容量风险。",
+        "en": "A capacity risk that can appear when activation, holding, or execution remains too high."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T02",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "拉扯",
+        "en": "PULL"
+      },
+      "runtimeSlots": [
+        "AGENCY",
+        "EXPERIENCE"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CONSTRAINT",
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "SELECTION",
+        "VALUE"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表多个驱动力、责任或现实要求之间可能出现的竞争性牵引。",
+        "en": "Potential competing pull between drivers, responsibilities, or reality demands."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T03",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "迟滞",
+        "en": "STALL"
+      },
+      "runtimeSlots": [
+        "AGENCY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CONSTRAINT"
+      ],
+      "optionalSemanticTags": [
+        "CAPACITY",
+        "COMMITMENT"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表限制、边界或尚未完成的条件可能让运行停留在同一位置。",
+        "en": "Constraints, boundaries, or incomplete conditions may keep the runtime in place."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T04",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "分散",
+        "en": "DISPERSION"
+      },
+      "runtimeSlots": [
+        "EXPERIENCE",
+        "AGENCY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "ATTENTION",
+        "SELECTION"
+      ],
+      "optionalSemanticTags": [
+        "CONSTRAINT"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表多个驱动力权重接近时可能形成的资源与注意分散。",
+        "en": "A potential dispersion of resources and attention when several drivers carry similar weight."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T05",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "压缩",
+        "en": "COMPRESSION"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CONSTRAINT",
+        "CAPACITY"
+      ],
+      "optionalSemanticTags": [
+        "EXPRESSION"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表限制、承载或边界让多个需求集中在有限容量中的张力。",
+        "en": "Tension created when constraints, holding, or boundaries concentrate many demands into limited capacity."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T06",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "反复",
+        "en": "LOOP"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "EXPERIENCE"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CONTINUITY"
+      ],
+      "optionalSemanticTags": [
+        "REORGANIZATION",
+        "ADAPTATION"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表反馈、持续性或未关闭问题可能形成重复运行。",
+        "en": "Feedback, continuity, or unresolved structures may form a repeating runtime."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T07",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "封闭",
+        "en": "WITHDRAWAL"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "BOUNDARY",
+        "INPUT"
+      ],
+      "optionalSemanticTags": [
+        "RELATION",
+        "CONSTRAINT"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表系统为了避免进一步负荷、冲突或不确定性，开始减少输入、连接与开放程度。适度收紧有时是必要的保护，但当这个过程持续扩大，原本用于维持稳定的边界可能逐渐变成限制，使新的资源、关系、讯息或变化难以进入。",
+        "en": "This card describes a system reducing input, connection, and openness to avoid further load, conflict, or uncertainty. Some contraction can be protective, but if it keeps expanding, boundaries that once preserved stability can become restrictions that block new resources, relationships, information, or change."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-T08",
+      "predecessorGroup": "TENSION",
+      "title": {
+        "zh-Hans": "耗散",
+        "en": "DRAIN"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CAPACITY",
+        "RECOVERY"
+      ],
+      "optionalSemanticTags": [
+        "CONSTRAINT",
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 150,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表能量、场域支持或可用容量下降时的持续成本。",
+        "en": "The continuing cost that can arise as energy, field support, or available capacity declines."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F01",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "容器",
+        "en": "CONTAINER"
+      },
+      "runtimeSlots": [
+        "CARRIER"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "BOUNDARY",
+        "CAPACITY"
+      ],
+      "optionalSemanticTags": [
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表稳定容器、承载与保持必要结构的环境条件。",
+        "en": "Environmental conditions of containment, holding, and keeping necessary structure together."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F02",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "边界",
+        "en": "BOUNDARY"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "AGENCY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "BOUNDARY"
+      ],
+      "optionalSemanticTags": [
+        "CONSTRAINT"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表停止、区分、界定与稳定边界的场域条件。",
+        "en": "Field conditions that stop, distinguish, delimit, and stabilize boundaries."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F03",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "协作",
+        "en": "COLLABORATION"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "CAPACITY",
+        "CONTINUITY"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表关系与共同结构通过协调、角色差异和共享承载形成支持。",
+        "en": "Support formed through coordination, differentiated roles, and shared holding across relationships."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F04",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "交换",
+        "en": "EXCHANGE"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "EXPRESSION"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "EXPRESSION",
+        "ADAPTATION"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表通过交换、回应与相互运动形成变化的条件。",
+        "en": "Conditions in which change proceeds through exchange, response, and reciprocal movement."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F05",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "节律",
+        "en": "RHYTHM"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "CARRIER"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CONTINUITY",
+        "ADAPTATION"
+      ],
+      "optionalSemanticTags": [
+        "RECOVERY"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表通过流动、循环与绕开阻力来支持变化的环境节律。",
+        "en": "A field rhythm that supports change through movement, circulation, and adaptation around obstacles."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F06",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "留白",
+        "en": "SPACE"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPRESSION"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CAPACITY"
+      ],
+      "optionalSemanticTags": [
+        "EXPRESSION"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表扩大范围、触达与组织空间所需要的现实余量。",
+        "en": "The margin needed for range, reach, and organizational space to expand."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F07",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "校准",
+        "en": "CALIBRATION"
+      },
+      "runtimeSlots": [
+        "FEEDBACK_CONTINUITY",
+        "CARRIER"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "ADAPTATION",
+        "ATTENTION"
+      ],
+      "optionalSemanticTags": [
+        "RELATION"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表通过渐进进入、反馈与分布式影响让环境逐步适配。",
+        "en": "A field that becomes supportive through gradual entry, feedback, and distributed influence."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-F08",
+      "predecessorGroup": "FIELD",
+      "title": {
+        "zh-Hans": "支持",
+        "en": "SUPPORT"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "AGENCY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [
+        "CAPACITY",
+        "RELATION"
+      ],
+      "optionalSemanticTags": [
+        "INPUT",
+        "COMMITMENT"
+      ],
+      "priority": {
+        "tier": 100,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": null,
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌代表能够打开入口、提供资源或让结构更容易进入运行的条件。",
+        "en": "Conditions that open an entry, provide resources, or make operation more available."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P01",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "开启",
+        "en": "OPENING"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A1",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口处于入口打开阶段。",
+        "en": "This card represents the opening position of the ECR baseline activation window."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P02",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "启动",
+        "en": "ACTIVATING"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A2",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口越过入口阈值并开始运行。",
+        "en": "This card represents the ECR baseline window crossing its entry threshold and beginning to operate."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P03",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "成势",
+        "en": "GAINING WEIGHT"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A3",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口中的运动模式开始取得足够权重，能够影响下一步。",
+        "en": "This card represents the motion pattern gaining enough weight in the ECR baseline window to shape what comes next."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P04",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "放大",
+        "en": "AMPLIFYING"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A4",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口处于场域放大阶段。",
+        "en": "This card represents field amplification in the ECR baseline activation window."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P05",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "对齐",
+        "en": "ALIGNMENT"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A5",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口处于条件对齐阶段。",
+        "en": "This card represents an alignment position in the ECR baseline activation window."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P06",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "过度放大",
+        "en": "OVERAMPLIFICATION"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A6",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口处于激活过度放大阶段，结构成本可能提高。",
+        "en": "This card represents over-amplification in the ECR baseline activation window, where structural cost may rise."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P07",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "回落",
+        "en": "DECAY"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A7",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口处于激活回落阶段。",
+        "en": "This card represents activation decay in the ECR baseline window."
+      },
+      "decision": "PENDING",
+      "note": ""
+    },
+    {
+      "cardId": "ECR-PC-P08",
+      "predecessorGroup": "PHASE",
+      "title": {
+        "zh-Hans": "收束",
+        "en": "CLOSURE"
+      },
+      "runtimeSlots": [
+        "CARRIER",
+        "EXPERIENCE",
+        "EXPRESSION",
+        "AGENCY",
+        "IDENTITY",
+        "FEEDBACK_CONTINUITY"
+      ],
+      "selectionMode": "OVERLAY_ONLY",
+      "requiredSemanticTags": [],
+      "optionalSemanticTags": [],
+      "priority": {
+        "tier": 50,
+        "tieBreakers": [
+          "REQUIRED_TAGS_SATISFIED",
+          "OPTIONAL_TAG_MATCH_COUNT",
+          "SEMANTIC_SPECIFICITY"
+        ],
+        "equalAfterTieBreak": "UNKNOWN"
+      },
+      "phaseRef": "A8",
+      "canonicalCustomerMeaning": {
+        "zh-Hans": "这张牌表示 ECR 基线窗口处于时间性收束位置，并接近配置转换。",
+        "en": "This card represents temporal closure in the ECR baseline window and an approach toward configuration transition."
+      },
+      "decision": "PENDING",
+      "note": ""
+    }
+  ],
+  "completion": {
+    "total": 48,
+    "accepted": 0,
+    "pending": 48,
+    "complete": false
+  }
+}
