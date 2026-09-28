@@ -1,12 +1,14 @@
 import fs from 'node:fs';
 import {buildBaZiS04T2} from '../functions/personal-reading/narrative/bazi-s04-t2-runtime.js';
+import {verifyReportLocaleParity} from '../functions/personal-reading/narrative/report-locale-parity.js';
 
 const out='docs/acceptance/report-narrative-t2-r1/bazi/s04';
 fs.mkdirSync(out,{recursive:true});
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
 const registry=JSON.parse(fs.readFileSync('content/ai-economics/providers/ai-provider-cost-registry-v1.json','utf8'));
 const env={OPENAI_API_KEY:process.env.OPENAI_API_KEY||'',OPENAI_NARRATIVE_MODEL:process.env.OPENAI_NARRATIVE_MODEL||'gpt-5.6-luna',OPENAI_MODEL:process.env.OPENAI_MODEL||''};
-const results={schemaVersion:'PHI-OS-RNT2-BZR-S04-REVIEW-PACK-v1.0.0',generatedAt:new Date().toISOString(),locales:{},providerSecretPresent:Boolean(env.OPENAI_API_KEY),ownerAcceptance:'PENDING'};
+const results={schemaVersion:'PHI-OS-RNT2-BZR-S04-REVIEW-PACK-v1.1.0',generatedAt:new Date().toISOString(),locales:{},providerSecretPresent:Boolean(env.OPENAI_API_KEY),ownerAcceptance:'PENDING'};
+const runtimeResults={};
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function html(locale,r){
@@ -20,6 +22,7 @@ function html(locale,r){
 
 for(const locale of ['zh-Hans','en']){
  const r=await buildBaZiS04T2({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,registry,env,requestId:'RNT2-BZR-S04-'+locale});
+ runtimeResults[locale]=r;
  results.locales[locale]={status:r.status,internalOnly:r.internalOnly,verification:r.verification,quality:r.quality,usageRecord:r.usageRecord,briefDigest:r.brief.briefSemanticDigest,sourceDigest:r.brief.sourceSemanticDigest};
  fs.writeFileSync(`${out}/S04-${locale}-CLAIM-IR.json`,JSON.stringify(r.richClaimIr,null,2)+'\n');
  fs.writeFileSync(`${out}/S04-${locale}-NARRATIVE-BRIEF.json`,JSON.stringify(r.brief,null,2)+'\n');
@@ -28,7 +31,15 @@ for(const locale of ['zh-Hans','en']){
  fs.writeFileSync(`${out}/S04-${locale}-QUALITY.json`,JSON.stringify(r.quality,null,2)+'\n');
  fs.writeFileSync(`${out}/review-s04-${locale}.html`,html(locale,r));
 }
-results.machineReady=Object.values(results.locales).every(x=>x.status==='PASS'&&x.verification?.accepted===true);
+const localeParity=verifyReportLocaleParity({
+ zhBrief:runtimeResults['zh-Hans'].brief,
+ enBrief:runtimeResults.en.brief,
+ zhCandidate:runtimeResults['zh-Hans'].candidate,
+ enCandidate:runtimeResults.en.candidate
+});
+results.localeParity=localeParity;
+fs.writeFileSync(`${out}/LOCALE-PARITY.json`,JSON.stringify(localeParity,null,2)+'\n');
+results.machineReady=Object.values(results.locales).every(x=>x.status==='PASS'&&x.verification?.accepted===true)&&localeParity.accepted===true;
 results.state=results.machineReady?'READY_FOR_OWNER_ACCEPTANCE':results.providerSecretPresent?'MACHINE_REVIEW_REQUIRED':'NOT_RUN_PROVIDER_SECRET_MISSING';
 fs.writeFileSync(`${out}/MACHINE-EVIDENCE.json`,JSON.stringify(results,null,2)+'\n');
 console.log(JSON.stringify({state:results.state,machineReady:results.machineReady,locales:Object.fromEntries(Object.entries(results.locales).map(([k,v])=>[k,{status:v.status,fallbackReason:v.internalOnly?.fallbackReason,claimCoverage:v.verification?.claimCoverage}]))},null,2));
