@@ -5,6 +5,7 @@ import {buildReportSectionGenerationIdentity,retryDecision,semanticRepairDecisio
 import {createEditorialAcceptanceArtifact,createCustomerDeliverySnapshot,createRenderedArtifactSnapshot} from '../functions/personal-reading/narrative/report-section-snapshot.js';
 import {buildReportDeliveryR2} from '../functions/report-delivery/report-delivery-r2.js';
 import {createReportSectionGenerationCache} from '../functions/personal-reading/narrative/report-section-generation-cache.js';
+import {buildReportPublicationIrV2,assertPublicationIrV2Preservation} from '../functions/personal-reading/narrative/report-publication-ir-v2.js';
 import {formatReportCoverFields,assertCoverOverlayValues} from '../functions/canonical-presentation-runtime/report-cover-overlay.js';
 import {REPORT_COVER_OVERLAY_REGISTRY} from '../functions/canonical-presentation-runtime/report-cover-overlay-registry.js';
 import {createReportSubjectPresentationFromAccountPerson,assertReportSubjectMatch} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
@@ -24,6 +25,9 @@ if(composed.status!=='PASS'||composed.internalOnly.actualTier!=='T2_GOVERNED_NAT
 if(composed.verification.claimCoverage!==1)throw Error('RNT2_CORE_CLAIM_COVERAGE_FAILED');
 const cached=await composeReportSectionT2({brief,registry,providerAdapters,requestId:'RNT2-CORE-QA-REOPEN',cache:sectionCache});
 if(cached.cacheHit!==true||cached.internalOnly.providerCalled!==false||providerCalls!==1)throw Error('RNT2_SECTION_CACHE_REOPEN_FAILED');
+const publicationIr=await buildReportPublicationIrV2({methodId:'BZR',reportVersion:'QA-R1',sectionKey:'S04_CAREER',locale:'en',brief,candidate:composed.candidate,semanticOwner:'QA-AUTH-v1',compositionOwner:'REPORT-NARRATIVE-T2-R1'});
+const pubCheck=assertPublicationIrV2Preservation({publicationIr,brief});
+if(pubCheck.accepted!==true||publicationIr.blocks.length!==roles.length)throw Error('RNT2_PUBLICATION_IR_V2_FAILED');
 
 const identity=await buildReportSectionGenerationIdentity({methodId:'BZR',sectionKey:'S04_CAREER',locale:'en',compositionVersion:'1',promptVersion:'1',authorityVersion:'1',claimIrVersion:'1',verifierVersion:'1',evidenceDigest:'abc',schemaVersion:'1',provider:'OPENAI',model:'gpt-5.6-luna'});
 if(!identity.generationKey.startsWith('RNT2-'))throw Error('RNT2_GENERATION_IDENTITY_FAILED');
@@ -51,4 +55,4 @@ for(const methodId of Object.keys(REPORT_COVER_OVERLAY_REGISTRY)){
  const u=formatReportCoverFields({methodId,subject:unknown});
  if(u.birthTime!=='—')throw Error('RNT2_UNKNOWN_TIME_FAILED:'+methodId);
 }
-console.log(JSON.stringify({status:'PASS',t2:{actualTier:composed.internalOnly.actualTier,claimCoverage:composed.verification.claimCoverage},reportSubject:{authority:'RDG_ACCOUNT_PERSON_REFERENCE + MCD3_CANONICAL_BIRTH_INPUT',subjectFingerprint:reportSubject.subjectFingerprint,failClosed:subjectMismatchClosed},generationKey:identity.generationKey,snapshots:{editorial:accepted.artifactDigest,semantic:delivery.semanticSnapshotId,render:render.renderSnapshotId},delivery:envelope.access.state,covers:Object.keys(REPORT_COVER_OVERLAY_REGISTRY)},null,2));
+console.log(JSON.stringify({status:'PASS',t2:{actualTier:composed.internalOnly.actualTier,claimCoverage:composed.verification.claimCoverage},publicationIr:{version:publicationIr.schemaVersion,blocks:publicationIr.blocks.length,preservation:pubCheck.accepted},reportSubject:{authority:'RDG_ACCOUNT_PERSON_REFERENCE + MCD3_CANONICAL_BIRTH_INPUT',subjectFingerprint:reportSubject.subjectFingerprint,failClosed:subjectMismatchClosed},generationKey:identity.generationKey,snapshots:{editorial:accepted.artifactDigest,semantic:delivery.semanticSnapshotId,render:render.renderSnapshotId},delivery:envelope.access.state,covers:Object.keys(REPORT_COVER_OVERLAY_REGISTRY)},null,2));
