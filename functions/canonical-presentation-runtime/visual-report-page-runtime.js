@@ -5,14 +5,15 @@ import {REPORT_EDITORIAL_COPY} from './report-editorial-copy.js';
 import {GUIDED_REPORT_SUCCESSOR,PUBLICATION_VERSIONS,REPORT_PAGE_REGISTRY} from './report-publication-contract.js';
 import {SECTION_LAYOUT,validateExpandedSections} from './report-section-contract.js';
 
-export function assemblePublicationSnapshot({methodId,locale,pages,intro,temporalSnapshot,internalPages,generatedAt,layout=null}={}){
+export function assemblePublicationSnapshot({methodId,locale,pages,intro,temporalSnapshot,internalPages,generatedAt,layout=null,subjectPresentation=null}={}){
  const plan=REPORT_PAGE_REGISTRY.find(p=>p.method===methodId);
  if(!plan||!['en','zh-Hans'].includes(locale)||!temporalSnapshot||!generatedAt)throw Error('PUBLICATION_ASSEMBLY_INPUT_INVALID');
  const sequence=[...intro,...pages].map(p=>p.pageNumber);
  if(layout&&layout!==SECTION_LAYOUT)throw Error('PUBLICATION_LAYOUT_INVALID');
  if(layout===SECTION_LAYOUT){if(methodId!=='BZR'||intro.length!==6)throw Error('PUBLICATION_SECTION_METHOD_INVALID');validateExpandedSections(pages);}
  if((!layout&&sequence.length!==plan.totalPages)||sequence.some((n,i)=>n!==i+1))throw Error('PUBLICATION_PAGE_SEQUENCE_INVALID');
- const customer={schemaVersion:GUIDED_REPORT_SUCCESSOR,...PUBLICATION_VERSIONS,...(layout?{layout,pageRegistryVersion:'2.1.0'}:{}),methodId,locale,totalPages:sequence.length,customerPublishable:false,successorBaselineActivated:false,intro,pages};
+ const boundIntro=subjectPresentation?intro.map(p=>p.pageNumber===1&&p.kind==='STATIC'?{...p,kind:'STATIC_COVER',subject:subjectPresentation}:p):intro;
+ const customer={schemaVersion:GUIDED_REPORT_SUCCESSOR,...PUBLICATION_VERSIONS,...(layout?{layout,pageRegistryVersion:'2.1.0'}:{}),methodId,locale,totalPages:sequence.length,customerPublishable:false,successorBaselineActivated:false,intro:boundIntro,pages,...(subjectPresentation?{subjectPresentation}:{} )};
  return {customer,internalOnly:{generatedAt,temporalSnapshot,internalPages,versions:PUBLICATION_VERSIONS,humanAcceptance:'PENDING',productionCutover:'NOT_ACTIVATED'}};
 }
 export const VISUAL_PAGE_SCHEMA = 'PHI-OS-PERSONAL-READING-VISUAL-PAGE-v1.0.0';
@@ -21,14 +22,14 @@ const unique = xs => [...new Set(xs)];
 export const REPORT_ACCESS_STATES=Object.freeze(['OPEN','PREVIEW','PAID_LOCKED','DATA_REQUIRED','CONDITIONAL','NOT_APPLICABLE']);
 // Locale changes presentation only. Callers supply translations bound to the
 // existing Page IR source/evidence; this owner never recalculates a reading.
-export function presentVisualReport({report,presentation,entitlement=null,access='FREE',editorialRegistry,publicBaseUrl,localizedCopy={},reviewMode=false}={}){
+export function presentVisualReport({report,presentation,entitlement=null,access='FREE',editorialRegistry,publicBaseUrl,localizedCopy={},reviewMode=false,subjectPresentation=null}={}){
  const selection=access==='PAID'?requirePurchasedReportPresentation(entitlement,presentation):normalizeReportPresentation(presentation);
  if(!['FREE','PAID'].includes(access)||report?.schemaVersion!=='PHI-OS-PERSONAL-READING-VISUAL-PAGES-v1.0.0')throw Error('VISUAL_REPORT_PRESENTATION_INVALID');
  const languages=selection.reportLocale==='bilingual'?['zh-Hans','en']:[selection.reportLocale];
  const staticPages=[1,2,3,4,5].map(page=>{
   let asset=null,error=null;try{asset=resolveReportEditorialAsset({registry:editorialRegistry,methodId:report.methodId,page,locale:selection.reportLocale,publicBaseUrl});}catch(e){if(!reviewMode)throw e;error=e.code;}
   const copy=REPORT_EDITORIAL_COPY.find(x=>x.methodId===report.methodId&&x.pageRole===['COVER','METHOD_INTRO','ORIGIN','PHIOS_LENS','HOW_TO_READ'][page-1]);
-  return {pageId:`EDITORIAL-${report.methodId}-${page}`,pageNumber:page,kind:'STATIC_EDITORIAL',asset,error,copy,accessState:error?'DATA_REQUIRED':'OPEN',locale:selection.reportLocale};
+  return {pageId:`EDITORIAL-${report.methodId}-${page}`,pageNumber:page,kind:'STATIC_EDITORIAL',asset,error,copy,accessState:error?'DATA_REQUIRED':'OPEN',locale:selection.reportLocale,...(page===1&&subjectPresentation?{subjectPresentation}:{} )};
  });
  const dynamic=report.pages.filter(p=>p.templateId!=='RPT-T00').map((page,index)=>{
   const bound=localizedCopy[page.pageId];
