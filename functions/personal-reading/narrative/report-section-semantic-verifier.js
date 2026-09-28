@@ -64,7 +64,7 @@ export async function verifyReportSectionComposition({brief,candidate,semanticRe
  for(const [index,b] of blocks.entries()){
   const role=text(b?.role).toUpperCase(),body=text(b?.text),refs=uniq(arr(b?.claimRefs));
   if(refs.length!==arr(b?.claimRefs).length||uniq(arr(b?.supportRefs)).length!==arr(b?.supportRefs).length)reasons.push(`DUPLICATE_REFERENCES:${index}`);
-  if(!(brief.marketContract?MARKET_ROLES.includes(role):ROLES.has(role)||brief.successorVersion&&role==='CAREER_THESIS'))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
+  if(!(brief.marketContract?brief.marketContract.roles.includes(role):ROLES.has(role)||brief.successorVersion&&role==='CAREER_THESIS'))reasons.push(`BLOCK_ROLE_INVALID:${index}`);else roles.add(role);
   if(!body)reasons.push(`BLOCK_TEXT_REQUIRED:${index}`);
   if(typeof b?.text!=='string'||body.length<20||body.length>2600)reasons.push(`BLOCK_TEXT_SIZE_INVALID:${index}`);
   if(!refs.length)reasons.push(`BLOCK_CLAIM_REFS_REQUIRED:${index}`);

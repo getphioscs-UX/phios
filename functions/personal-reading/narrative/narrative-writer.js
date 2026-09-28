@@ -93,6 +93,7 @@ import {REPORT_SECTION_NARRATIVE_BRIEF_VERSION} from './report-section-brief.js'
 import {buildReportSectionGenerationIdentity,classifyProviderFailure,retryDecision,semanticRepairDecision} from './report-narrative-governance.js';
 import {createReportSemanticReview} from './report-section-semantic-review.js';
 import {MARKET_PROMPT,MARKET_ROLES} from './bazi-s04-market-reading.js';
+import {WEALTH_PROMPT} from './bazi-s05-market-reading.js';
 
 export const REPORT_SECTION_T2_COMPOSER_VERSION='PHI-OS-REPORT-SECTION-T2-COMPOSER-v1.3.0';
 export const REPORT_SECTION_T2_PROMPT_VERSION='PHI-OS-RNT2-T2-PROMPT-v2.2.0';
@@ -104,7 +105,7 @@ SECTION_OUTPUT_SCHEMA.properties.blocks.items.required.push('supportRefs');
 SECTION_OUTPUT_SCHEMA.properties.blocks.items.properties.supportRefs={type:'array',minItems:1,items:{type:'string'}};
 
 function sectionSystemPrompt(brief,{repairReasons=[]}={}){
- if(brief.marketContract)return MARKET_PROMPT;
+ if(brief.marketContract)return brief.marketDomain==='WEALTH'?WEALTH_PROMPT:MARKET_PROMPT;
  const repair=repairReasons.length?[
   'A previous candidate was rejected by the semantic verifier.',
   'Repair only the verifier-rejected semantic spans. Do not broaden the claim set or increase certainty.',
@@ -196,7 +197,7 @@ export async function composeReportSectionT2({brief,registry,env={},fetcher,prov
   outputSchema.properties.blocks.items.required.push('function');
   outputSchema.properties.blocks.items.properties.function={type:'string',enum:brief.paragraphFunctions};
  }
- if(brief.marketContract){outputSchema.properties.blocks.minItems=7;outputSchema.properties.blocks.maxItems=7;outputSchema.properties.blocks.items.properties.role.enum=MARKET_ROLES;}
+ if(brief.marketContract){outputSchema.properties.blocks.minItems=7;outputSchema.properties.blocks.maxItems=7;outputSchema.properties.blocks.items.properties.role.enum=brief.marketContract.roles;}
  outputSchema.properties.sourceBriefDigest.enum=[brief.briefSemanticDigest];
  outputSchema.properties.blocks.items.properties.claimRefs.items.enum=brief.claims.map(c=>c.claimId);
  outputSchema.properties.blocks.items.properties.supportRefs.items.enum=[...new Set(brief.claims.flatMap(c=>c.sourceRefs))];

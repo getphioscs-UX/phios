@@ -14,7 +14,7 @@ const get=(o,p)=>p.split('/').reduce((v,k)=>v?.[k],o);
 const a=x=>Array.isArray(x)?x:[];
 // Read existing canonical projections only; never infer strength from counts or
 // turn co-presence into a generating/controlling/transformation verdict.
-export async function buildMarketBrief({reading,locale,temporalSnapshot}){
+export async function buildMarketBrief({reading,locale,temporalSnapshot,topicCode='CAREER'}){
  if(!['en','zh-Hans'].includes(locale))throw Error('MARKET_LOCALE_REQUIRED');
  const p=reading?.professionalModules||{},pillars=reading?.structuralModel?.pillars||[],t=p.timing||{};
  const reasons=[];
@@ -35,8 +35,8 @@ export async function buildMarketBrief({reading,locale,temporalSnapshot}){
  require(t.annual?.year&&t.annual?.stem?.zh&&t.annual?.branch?.zh&&t.annual?.stemTenGod?.code,'ANNUAL_AUTHORITY_REQUIRED');
  require(t.targetContext?.targetDate===temporalSnapshot?.localDate,'TIMING_SNAPSHOT_MISMATCH');
  require(a(t.authorityRefs).length>=2&&a(t.evidenceRefs).length>=2,'TIMING_PROVENANCE_REQUIRED');
- const ti=a(p.professionalTopics?.topics).findIndex(x=>x.topicCode==='CAREER');
- require(ti>=0,'CAREER_TOPIC_REQUIRED');
+ const ti=a(p.professionalTopics?.topics).findIndex(x=>x.topicCode===topicCode);
+ require(ti>=0,topicCode+'_TOPIC_REQUIRED');
  const refs=['structuralModel/pillars','professionalModules/tenGods/dayMaster','professionalModules/tenGods/monthCommand','professionalModules/tenGods/items','professionalModules/tenGods/functionGroups','professionalModules/fiveElements/rawInventory','professionalModules/fiveElements/items','professionalModules/fiveElements/correction','professionalModules/dayMasterStrength/roots','professionalModules/relationships/items','professionalModules/timing',`professionalModules/professionalTopics/topics/${ti}/leadGroup`];
  const authorityFacts=Object.fromEntries(refs.filter(ref=>get(reading,ref)!==undefined).map(ref=>[ref,structuredClone(get(reading,ref))]));
  // Timing history and duplicated aggregate carrying data are not needed by S04.
@@ -70,18 +70,19 @@ Every block must cite its matching S04:V4 claim and actual supportRefs from that
 
 export function evaluateMarketReading({brief,candidate,verification}){
  const reasons=[],blocks=a(candidate?.blocks),body=blocks.map(b=>b.text||'').join('\n'),zh=brief.locale==='zh-Hans';
- if(JSON.stringify(blocks.map(b=>b.role))!==JSON.stringify(MARKET_ROLES))reasons.push('MARKET_SEVEN_BLOCK_ORDER');
+ if(JSON.stringify(blocks.map(b=>b.role))!==JSON.stringify(brief.marketContract.roles))reasons.push('MARKET_SEVEN_BLOCK_ORDER');
  for(const [i,b] of blocks.entries()){const paragraphs=String(b.text||'').trim().split(/\n\s*\n/);if(paragraphs.length<1||paragraphs.length>3)reasons.push('MARKET_PARAGRAPH_COUNT:'+i);if(b.function!==b.role)reasons.push('MARKET_FUNCTION:'+i);}
  const hanCharacters=(body.match(/\p{Script=Han}/gu)||[]).length,words=(body.match(/\b[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu)||[]).length;
  if(zh?(hanCharacters<1200||hanCharacters>1800):(words<650||words>1150))reasons.push('MARKET_LENGTH');
  if(/这只是条件性可能|不是观察行为|不代表已经发生|不代表确定事件|final judgment remains open|symbolic context|structural relation|source mechanism|career operating style|interaction graph/iu.test(body))reasons.push('MARKET_GOVERNANCE_LANGUAGE');
  if(/首次引入|first.ever|七杀[^。\n]{0,30}遍藏四支/iu.test(body))reasons.push('MARKET_UNSUPPORTED_HISTORY_OR_POSITION');
+ if(brief.marketDomain==='WEALTH'&&/\b(?:buy|sell|invest in|borrow to|leverage your|guaranteed returns?)\b|买入|卖出|加杠杆|借钱投资|保证收益|一定发财|必有横财|年化收益/iu.test(body))reasons.push('WEALTH_FINANCIAL_PRESCRIPTION');
  if((body.match(/\b(?:scope|handoff|decision owner|escalation|workflow|deliverable|stakeholder|blocked dependencies|review capacity|commercial accountability)\b/giu)||[]).length>3)reasons.push('MARKET_CONSULTING_LANGUAGE');
  const facts=brief.authorityFacts,dm=facts['professionalModules/tenGods/dayMaster'],month=facts['professionalModules/tenGods/monthCommand'],t=facts['professionalModules/timing'];
  for(const token of [dm?.zh,month?.branchZh,t?.currentDaYun?.pillar?.stem?.zh+t?.currentDaYun?.pillar?.branch?.zh,String(t?.annual?.year),t?.annual?.stem?.zh+t?.annual?.branch?.zh])if(!token||!body.includes(token))reasons.push('MARKET_FACT_VISIBILITY:'+token);
  const godNames=new Set(a(facts['structuralModel/pillars']).flatMap(p=>[p.stemRole?.tenGodZh,...a(p.hiddenStems).map(h=>h.tenGodZh)]).filter(x=>x&&x!=='日主'));
  if([...godNames].filter(x=>body.includes(x)).length<2)reasons.push('MARKET_TEN_GOD_VISIBILITY');
  const assessments=a(verification?.semanticReview?.editorialAssessments);
- for(const d of MARKET_DIMENSIONS){const matches=assessments.filter(x=>x.dimension===d);if(matches.length!==1||matches[0].passed!==true||!matches[0].evidence||!body.includes(matches[0].evidence))reasons.push('MARKET_REVIEW:'+d);}
+ for(const d of brief.marketContract.dimensions||MARKET_DIMENSIONS){const matches=assessments.filter(x=>x.dimension===d);if(matches.length!==1||matches[0].passed!==true||!matches[0].evidence||!body.includes(matches[0].evidence))reasons.push('MARKET_REVIEW:'+d);}
  return {version:MARKET_VERSION,accepted:!reasons.length,state:reasons.length?'EDITORIAL_AUTOMATED_FAIL':'EDITORIAL_AUTOMATED_PASS',hanCharacters,words,reasons};
 }

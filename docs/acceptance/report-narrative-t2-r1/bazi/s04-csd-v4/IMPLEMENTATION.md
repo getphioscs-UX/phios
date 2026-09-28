@@ -39,3 +39,7 @@ Both edited locales: TECHNICAL_PASS / EDITORIAL_AUTOMATED_PASS / OWNER_ACCEPTANC
 Final QA deployment: https://4f4482f3.phios-github.pages.dev (qa alias). Only one bilingual writer round: 2 writer requests, 0 writer repairs/retries/regenerations; 2 assistant editorial revisions and 4 independent semantic-review requests total. Usage: 123,884 input tokens, 11,458 output tokens; estimated provider cost 0.053887 in registry currency, not a final bill. Original candidates, original reviewer outcomes, final edited candidates, fresh reviews and provenance are preserved in REVIEW-EVIDENCE.json and private R2.
 
 No S03, S05, other methods or production admission expansion. Await owner review of review.html. Changes remain in the workspace; this task did not push a new production commit.
+
+## Owner acceptance
+
+The owner explicitly approved both final edited bilingual candidates with “approve，继续”. OWNER-ACCEPTANCE.json binds the decision to their immutable artifact, candidate and brief digests. Prior machine records retain their historical pending state. Production admission is separate. Next: S05 wealth per original master work §125; apply the accepted V4 editorial approach.

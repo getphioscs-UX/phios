@@ -7,6 +7,9 @@ import {safeProviderFailure} from './narrative-provider.js';
 import {MARKET_VERSION as CAREER_CSD_VERSION} from './bazi-s04-market-reading.js';
 import comparisonFixtures from './bazi-s04-csd-fixtures.generated.js';
 import {auditFrozenCareerCandidate} from './bazi-s04-review-audit.js';
+import {buildWealthBrief,WEALTH_VERSION} from './bazi-s05-market-reading.js';
+import {buildBaZiS05T2,WEALTH_RUNTIME_VERSION,validateS04OwnerAcceptance} from './bazi-s05-t2-runtime.js';
+import acceptedS04 from '../../../docs/acceptance/report-narrative-t2-r1/bazi/s04-csd-v4/OWNER-ACCEPTANCE.json' with {type:'json'};
 
 export async function inspectBaZiS04Provider({env,userId,registry,fetcher=fetch}){
  if(env.PHIOS_ENVIRONMENT!=='qa'||env.RNT2_S04_REVIEW!=='enabled')return {status:409,body:{ok:false,code:'S04_REVIEW_DISABLED'}};
@@ -23,18 +26,22 @@ export async function inspectBaZiS04Provider({env,userId,registry,fetcher=fetch}
 
 // Uses existing account authentication, D1 reservations and private R2 binding.
 // This is a frozen QA candidate, never a customer delivery/admission snapshot.
-export async function runBaZiS04PrivateReview({env,body,userId,source,registry,compose=buildBaZiS04T2}){
+export async function runBaZiS04PrivateReview({env,body,userId,source,registry,compose=null,lane='S04',ownerAcceptance=acceptedS04}){
  const fail=(code,status)=>({status,body:{ok:false,code}});
+ const wealth=lane==='S05';
+ compose=compose||(wealth?buildBaZiS05T2:buildBaZiS04T2);
  if(env.PHIOS_ENVIRONMENT!=='qa'||env.RNT2_S04_REVIEW!=='enabled')return fail('S04_REVIEW_DISABLED',409);
  const reviewers=String(env.RNT2_REVIEWER_IDS||'').split(',').map(s=>s.trim()).filter(Boolean);
  if(!userId||!reviewers.includes(userId))return fail('REVIEWER_REQUIRED',403);
- if(!['en','zh-Hans'].includes(body.locale)||body.sectionKey!=='S04_CAREER'||(body.profileId&&body.profileId!=='BASELINE_NOW'&&!Object.hasOwn(comparisonFixtures,body.profileId)))return fail('S04_FIXED_FIXTURE_REQUIRED',400);
+ if(!['en','zh-Hans'].includes(body.locale)||body.sectionKey!==(wealth?'S05_WEALTH':'S04_CAREER')||(body.profileId&&body.profileId!=='BASELINE_NOW'&&!Object.hasOwn(comparisonFixtures,body.profileId)))return fail('S04_FIXED_FIXTURE_REQUIRED',400);
+ if(wealth&&!await validateS04OwnerAcceptance(ownerAcceptance))return fail('S04_BILINGUAL_OWNER_ACCEPTANCE_REQUIRED',409);
  if(body.profileId&&body.profileId!=='BASELINE_NOW')return fail('V4_BASELINE_ONLY',400);
  if(!env.PRIVATE_REPORTS||!env.RUNTIME_DB)return fail('PREVIEW_STORAGE_UNAVAILABLE',503);
- const prepared=await prepareBaZiS04T2({reading:source.reading,temporalSnapshot:source.temporalSnapshot,locale:body.locale,successor:'v4'});
- if(!prepared.brief.careerNarrativeIR.eligibility.eligible)return fail('CSD_SOURCE_NOT_ELIGIBLE',409);
- const identity={schemaVersion:'RNT2-S04-PRIVATE-REVIEW-v1',successor:CAREER_CSD_VERSION,briefDigest:prepared.brief.briefSemanticDigest,locale:body.locale,runtime:BAZI_S04_T2_RUNTIME_VERSION,composer:REPORT_SECTION_T2_COMPOSER_VERSION,prompt:prepared.brief.successorPromptVersion||REPORT_SECTION_T2_PROMPT_VERSION,verifier:REPORT_SECTION_SEMANTIC_VERIFIER_VERSION,registryDigest:await sha256Stable(registry)};
- const digest=await sha256Stable(identity),key=`qa/rnt2/csd-v4/s04/${digest}.json`,id=`rnt2-csd-s04:${digest}`;
+ const input={reading:source.reading,temporalSnapshot:source.temporalSnapshot,locale:body.locale,successor:'v4'};
+ const prepared=wealth?{brief:await buildWealthBrief(input)}:await prepareBaZiS04T2(input);
+ if(!(wealth?prepared.brief.wealthNarrativeIR:prepared.brief.careerNarrativeIR).eligibility.eligible)return fail('CSD_SOURCE_NOT_ELIGIBLE',409);
+ const identity={schemaVersion:wealth?'RNT2-S05-PRIVATE-REVIEW-v1':'RNT2-S04-PRIVATE-REVIEW-v1',successor:wealth?WEALTH_VERSION:CAREER_CSD_VERSION,briefDigest:prepared.brief.briefSemanticDigest,locale:body.locale,runtime:wealth?WEALTH_RUNTIME_VERSION:BAZI_S04_T2_RUNTIME_VERSION,composer:REPORT_SECTION_T2_COMPOSER_VERSION,prompt:prepared.brief.successorPromptVersion||REPORT_SECTION_T2_PROMPT_VERSION,verifier:REPORT_SECTION_SEMANTIC_VERIFIER_VERSION,registryDigest:await sha256Stable(registry)};
+ const digest=await sha256Stable(identity),key=`qa/rnt2/${wealth?'market-v1/s05':'csd-v4/s04'}/${digest}.json`,id=`rnt2-${wealth?'market-s05':'csd-s04'}:${digest}`;
  const saved=await env.PRIVATE_REPORTS.get(key);
  if(saved){
   const record=await saved.json(),{artifactDigest,...payload}=record;

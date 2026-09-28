@@ -1,3 +1,5 @@
+> Current successor: S04 V4 final edited zh-Hans and en are OWNER_ACCEPTED. See bazi/s04-csd-v4/OWNER-ACCEPTANCE.json. Continue with S05 under the accepted market-style approach. The predecessor status below is historical.
+
 # REPORT-NARRATIVE-T2-R1 continuation — 2026-09-28
 
 ## Status

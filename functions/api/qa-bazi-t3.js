@@ -24,7 +24,12 @@ export async function onRequest(context){
   let raw='',size=0;const decoder=new TextDecoder();
   for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>256){await reader.cancel();return reply({ok:false},413);}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
   const body=JSON.parse(raw);
-  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status','rnt2-s04','rnt2-s04-reverify','rnt2-s04-provider-status'].includes(body.action)))return reply({ok:false},400);
+  if(!body||Object.keys(body).some(k=>!['locale','sectionKey','profileId','action'].includes(k))||(body.action&&!['generate','parity','matrix-status','rnt2-s04','rnt2-s04-reverify','rnt2-s04-provider-status','rnt2-s05'].includes(body.action)))return reply({ok:false},400);
+  if(body.action==='rnt2-s05'){
+   const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
+   const response=await runBaZiS04PrivateReview({env,body,userId:identity.userId,source:s04Source,registry,lane:'S05'});
+   return reply(response.body,response.status);
+  }
   if(body.action==='rnt2-s04-provider-status'){
    const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
    const response=await inspectBaZiS04Provider({env,userId:identity.userId,registry});
