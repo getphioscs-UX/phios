@@ -8,6 +8,8 @@ for(const layer of projection.layers||[]){
   for(const p of layer.posters||[]) targets.push({layerId:layer.layerId,assetRef:p.assetRef,url:p.publicUrl});
 }
 const requiredRefs=['VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp','VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp'];
+const l6=projection.layers?.find(x=>x.layerId==='trajectories');
+if(l6?.poster?.availability==='VERIFIED_LIVE_R2') requiredRefs.push('VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp');
 for(const ref of requiredRefs) assert.ok(targets.some(x=>x.assetRef===ref),`Missing active template projection: ${ref}`);
 
 const results=[];
@@ -25,4 +27,4 @@ if(missing.length) console.error('FR3_TEMPLATE_MISSING\n'+missing.map(x=>`${x.as
 if(wrongType.length) console.error('FR3_TEMPLATE_WRONG_TYPE\n'+wrongType.map(x=>`${x.assetRef}\t${x.type}`).join('\n'));
 assert.equal(missing.length,0,`FR3 missing template WebPs: ${missing.length}/${targets.length}`);
 assert.equal(wrongType.length,0,`FR3 wrong template content types: ${wrongType.length}`);
-console.log(`FR3 live template delivery PASS: ${results.length}/${targets.length} Library template WebPs reachable.`);
+console.log(`FR3/FR4 live template delivery PASS: ${results.length}/${targets.length} admitted template WebPs reachable; L6 is enforced once marked VERIFIED_LIVE_R2.`);
