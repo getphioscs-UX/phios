@@ -40,6 +40,8 @@ try{
   }
  }
 }finally{await browser.close();}
+evidence.hardGateTests=expected.hardGateTests||[];
+if(!evidence.hardGateTests.length||evidence.hardGateTests.some(x=>x.failClosed!==true))evidence.errors.push('COVER_FAIL_CLOSED_GATES_INCOMPLETE');
 evidence.machinePass=evidence.errors.length===0;
 fs.writeFileSync(root+'/cover-evidence.json',JSON.stringify(evidence,null,2)+'\n');
 console.log(JSON.stringify({machinePass:evidence.machinePass,errors:evidence.errors,physicalPdf:evidence.physicalPdf},null,2));
