@@ -2603,7 +2603,9 @@
     "build:ecr-v41:r8-review": "node scripts/build-ecr-v41-review.mjs",
     "check:civilization-atlas:fr5-i-template-decomposition": "node scripts/check-civilization-atlas-fr5-i-template-decomposition.mjs",
     "check:civilization-atlas:fr5-j-remove-l2-l6-templates": "node scripts/check-civilization-atlas-fr5-j-remove-l2-l6-templates.mjs",
-    "check:bazi-s06-market-preflight": "node scripts/check-bazi-s06-market-preflight.mjs"
+    "check:bazi-s06-market-preflight": "node scripts/check-bazi-s06-market-preflight.mjs",
+    "check:b6-fr1-reconfiguration-customer-reader": "node scripts/check-b6-fr1-reconfiguration-customer-reader.mjs",
+    "check:book6-reconfiguration-customer-cutover": "npm run check:b6-web-f:cutover && npm run check:b6-fr1-reconfiguration-customer-reader"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
