@@ -5,7 +5,7 @@ export const ECR_BOOK_CORE_THEORY_RUNTIME = Object.freeze({
   "schemaVersion": "PHI-OS-ECR-BOOK-CORE-THEORY-RUNTIME-v1.0.0",
   "source": {
     "path": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json",
-    "sha256": "dc2c3ffa1a19ff1390725946f8a1417f0237646057fb1b40c058267497481c34"
+    "sha256": "bc4dd5c810c56f8d41ada3b7aef486d9ec9e79b35d3ebb81f23fdedf46e71d93"
   },
   "grammarCodes": [
     "G1",
@@ -316,8 +316,8 @@ export const ECR_BOOK_CORE_THEORY_RUNTIME = Object.freeze({
     },
     {
       "id": "D11",
-      "label": "Chiron",
-      "zh": "凯龙星驱动"
+      "label": "Earth",
+      "zh": "地球驱动"
     },
     {
       "id": "D12",
@@ -332,6 +332,6 @@ export const ECR_BOOK_CORE_THEORY_RUNTIME = Object.freeze({
     "bookLabelsMayDifferFromLegacyRuntimeDisplayLabels": true,
     "ecrMustNotWriteBackToProtectedRuntime": true
   },
-  "authorityDigest": "8d8d46e6f6eda6a19cb90bdcb34a9d4a2cf4288c162a2c514d22ec42d33e093e"
+  "authorityDigest": "1d706d3f812f4dc4d5341ceb411f2bf7a5f6d621cfca5b61bcda87720140f782"
 });
 export default ECR_BOOK_CORE_THEORY_RUNTIME;
