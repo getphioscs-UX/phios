@@ -1,3 +1,13 @@
+# Current owner checkpoint — 2026-09-29
+
+S02 能力与表达 and S03 生活结构与取舍 are now explicitly OWNER_ACCEPTED. Canonical receipts are stored at ../s02-market-v1/OWNER-ACCEPTANCE.json and ../s03-market-v1/OWNER-ACCEPTANCE.json and mirrored into functions/personal-reading/narrative/bazi-owner-acceptance.generated.js. Production remains inactive.
+
+S02 Chinese acceptance binds the 1,316-Han LOCAL-REVISION candidate. Its fresh independent reviewer was NOT_RUN after the nine-call authorization was exhausted; the receipt records that fact explicitly rather than relabeling the earlier failed machine audit. S02 English and both S03 locales retain their completed machine-review evidence.
+
+S04 and S05 remain owner-accepted and unchanged. The next section is S06_RELATIONSHIP. A zero-provider deterministic market-style preflight has been added in functions/personal-reading/narrative/bazi-s06-market-reading.js with scripts/check-bazi-s06-market-preflight.mjs. It consumes existing RELATIONSHIPS topic authority, Day-pillar/natal relationships and timing facts, and forbids partner profiling or marriage-event prediction. No S06 writer or reviewer call has been authorized or executed.
+
+---
+
 # S02 / S03 reconciliation after S05 acceptance
 
 The owner accepted both final S05 edited candidates with “approve，继续”. The receipt in ../s05-market-v1/OWNER-ACCEPTANCE.json binds the two artifact, candidate and brief digests. Original provider/audit records retain their historical pending states. Production remains inactive.
