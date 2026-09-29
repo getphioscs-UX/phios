@@ -954,3 +954,28 @@
  .civ-reconfig-mini-chain{grid-template-columns:1fr}
  .civ-reconfig-mini-chain b{transform:rotate(90deg);justify-self:start}
 }
+
+
+/* B6-FR1-W3 reconfiguration window reader */
+.civ-reconfig-window-reader{display:grid;gap:1rem}
+.civ-reconfig-window-reader>header h3{margin:.2rem 0 .35rem;font-size:clamp(1.8rem,3vw,2.5rem);color:#f0dda8}
+.civ-reconfig-window-reader>header p{margin:.15rem 0;color:var(--phi-text-secondary)}
+.civ-reconfig-window-rail{display:flex;gap:.55rem;overflow-x:auto;overscroll-behavior-inline:contain;padding:.35rem 0 .65rem;scroll-snap-type:x proximity}
+.civ-reconfig-window-rail button{flex:0 0 auto;min-width:8.5rem;display:grid;gap:.15rem;padding:.7rem .8rem;border:1px solid rgba(213,179,108,.24);border-radius:12px;background:rgba(5,24,39,.35);color:inherit;text-align:left;scroll-snap-align:start}
+.civ-reconfig-window-rail button[aria-pressed="true"]{border-color:#d5b36c;box-shadow:inset 0 -3px 0 #d5b36c}
+.civ-reconfig-window-rail time{font-weight:700;color:#eedca9}
+.civ-reconfig-window-rail span{font-size:.78rem;color:var(--phi-text-secondary)}
+.civ-reconfig-window-chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem}
+.civ-reconfig-window-chain>section{min-width:0;padding:1rem;border:1px solid rgba(213,179,108,.18);border-radius:14px;background:rgba(4,18,29,.52)}
+.civ-reconfig-window-chain>section>span:first-child{display:inline-grid;place-items:center;width:1.8rem;height:1.8rem;border:1px solid rgba(213,179,108,.4);border-radius:999px;color:#efd9a0;font-size:.72rem}
+.civ-reconfig-window-chain h4{margin:.45rem 0 .55rem;font-size:1rem}
+.civ-reconfig-window-chain ul{margin:.25rem 0;padding-left:1.1rem}
+.civ-reconfig-window-chain li{margin:.35rem 0;color:#bdc8d0;line-height:1.5}
+.civ-reconfig-tag-list{display:flex;flex-wrap:wrap;gap:.4rem}
+.civ-reconfig-tag-list span{padding:.3rem .55rem;border:1px solid rgba(213,179,108,.2);border-radius:999px;font-size:.8rem;color:#d5dfe5}
+.civ-reconfig-window-cases{display:grid;gap:.4rem}
+.civ-reconfig-window-cases button{padding:.45rem .6rem;border:1px solid rgba(213,179,108,.18);border-radius:9px;background:transparent;color:inherit;text-align:left}
+.civ-reconfig-window-snapshots{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;padding-top:.3rem}
+.civ-reconfig-window-snapshots button{padding:.38rem .65rem;border:1px solid rgba(213,179,108,.25);border-radius:999px;background:transparent;color:inherit}
+@media(max-width:900px){.civ-reconfig-window-chain{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.civ-reconfig-window-chain{grid-template-columns:1fr}}
