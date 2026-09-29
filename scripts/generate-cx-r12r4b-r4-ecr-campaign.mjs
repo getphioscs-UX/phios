@@ -23,7 +23,26 @@ write('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campa
 const reviewCasesPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-cases-v1.json';
 const previousReviewFile=fs.existsSync(reviewCasesPath)?JSON.parse(fs.readFileSync(reviewCasesPath,'utf8')):null;
 const previousReviewById=new Map((previousReviewFile?.cases||[]).map(x=>[x.caseId,x]));
-const reviewCaseDigest=value=>sha({...value,reviewCaseDigest:undefined});
+const reviewableCase=value=>({
+ caseId:value.caseId,
+ locale:value.locale,
+ longitude:value.longitude,
+ coordinateCodes:Object.fromEntries(Object.entries(value.coordinate||{}).map(([group,items])=>[group,(items||[]).map(x=>x.code)])),
+ interpretationUnits:(value.interpretationUnits||[]).map(u=>({
+  title:u.title,
+  plainLanguageExplanation:u.plainLanguageExplanation,
+  structuralReason:u.structuralReason,
+  relationContext:u.relationContext,
+  constructiveExpression:u.constructiveExpression,
+  frictionExpression:u.frictionExpression,
+  observableSignals:u.observableSignals,
+  realityComparisonQuestions:u.realityComparisonQuestions,
+  meaningRefs:u.meaningRefs,
+  ruleRefs:u.ruleRefs,
+  confidenceBoundary:u.confidenceBoundary
+ }))
+});
+const reviewCaseDigest=value=>sha(reviewableCase(value));
 const reviewCases=[];for(let i=0;i<48;i++){const machine=cases[(i*5)%64];const hIndex=Number(machine.ids.H.split('H')[1])-1;const a=i%8;const longitude=hIndex*hSize+(a+0.5)*aSize;const locale=i%2?'zh-Hans':'en';const canonicalInput=input(locale),anchor={utcIso:'2000-01-01T04:00:00.000Z',longitude,referenceFrame:'HUMAN_REVIEW_MATERIALIZED_ANCHOR',engineCode:'ECR_REVIEW_ANCHOR',engineVersion:'1.0.0'};const projection=await buildEcrCanonicalProjectionFromAnchor({canonicalInput,anchor,requestId:`ECR-HR-${String(i+1).padStart(2,'0')}`});const meaning=await buildMethodMeaningPayloadV2({canonicalProjection:projection,locale});const interpretationInput=await createMethodInterpretationInput({canonicalProjection:projection,methodId:'ECR',locale,requestedDepth:'STANDARD',authorityState:{meaningBundleCode:meaning.meaningBundle.bundleCode}});const candidate=await createMethodInterpretationCandidate({input:interpretationInput,meaningPayload:meaning});const reviewCase={caseId:`ECR-HR-${String(i+1).padStart(2,'0')}`,locale,longitude:Number(longitude.toFixed(9)),projectionId:projection.projectionId,candidateId:candidate.candidateId,coordinate:Object.fromEntries(projection.calculation.structures.map(g=>[g.code,g.items.map(x=>({code:x.code,value:x.value,meta:x.meta}))])),interpretationUnits:candidate.interpretationUnits.map(u=>({interpretationUnitId:u.interpretationUnitId,title:u.title,plainLanguageExplanation:u.plainLanguageExplanation,structuralReason:u.structuralReason,relationContext:u.relationContext,constructiveExpression:u.constructiveExpression,frictionExpression:u.frictionExpression,observableSignals:u.observableSignals,realityComparisonQuestions:u.realityComparisonQuestions,projectionRefs:u.projectionRefs,meaningRefs:u.meaningRefs,ruleRefs:u.ruleRefs,confidenceBoundary:u.confidenceBoundary})),semanticDigest:candidate.semanticDigest};
  reviewCases.push({...reviewCase,reviewCaseDigest:reviewCaseDigest(reviewCase)});}
 const review={schemaVersion:'PHI-OS-ECR-HUMAN-REVIEW-CASES-v1.1.0',work:'CX-R12R4B-R4-W33R',status:'PENDING_HUMAN_REVIEW',requiredCaseCount:48,reviewDimensions:['methodFidelityAccepted','customerClarityAccepted','nonFortuneTellingBoundaryAccepted','lineageAccepted'],cases:reviewCases};write(reviewCasesPath,JSON.stringify(review,null,2)+'\n');
@@ -34,8 +53,7 @@ const existingResultById=new Map((existingResults?.results||[]).map(x=>[x.caseId
 const migratedResults=reviewCases.map(current=>{
  const previousCase=previousReviewById.get(current.caseId);
  const previousResult=existingResultById.get(current.caseId);
- const previousComparable=previousCase?{...previousCase,reviewCaseDigest:undefined}:null;
- const unchanged=Boolean(previousComparable)&&reviewCaseDigest(previousComparable)===current.reviewCaseDigest;
+ const unchanged=Boolean(previousCase)&&reviewCaseDigest(previousCase)===current.reviewCaseDigest;
  const previouslyAccepted=Boolean(previousResult)&&dims.every(k=>previousResult[k]===true);
  if(unchanged&&previouslyAccepted)return {...previousResult,reviewCaseDigest:current.reviewCaseDigest};
  return {caseId:current.caseId,reviewCaseDigest:current.reviewCaseDigest,methodFidelityAccepted:null,customerClarityAccepted:null,nonFortuneTellingBoundaryAccepted:null,lineageAccepted:null,reviewerRef:null,reviewedAt:null,notes:unchanged?'PREVIOUS_REVIEW_NOT_FULLY_ACCEPTED':'CONTENT_CHANGED_REVIEW_REQUIRED'};
