@@ -1538,3 +1538,17 @@
     padding: 0 1rem 1.2rem;
   }
 }
+
+
+/* B6-FR2-A figure detail de-duplication */
+.figure-detail-page{padding-top:clamp(2rem,5vw,4rem)}
+.figure-detail-page .knowledge-shell{width:min(1180px,calc(100% - 2rem));margin-inline:auto}
+.figure-detail-page .figure-detail{grid-template-columns:minmax(0,1fr) minmax(18rem,.42fr);gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.figure-detail-page .figure-detail>img{max-height:78vh;object-fit:contain;background:#071828;border-radius:14px}
+.figure-detail-page .figure-detail>article{align-self:start;padding:1rem 0}
+.figure-detail-page .figure-detail>article h1{margin:.3rem 0 1rem;font-size:clamp(2rem,4vw,3.4rem);line-height:1.05}
+.figure-detail-page .figure-detail>article h2{margin:1.5rem 0 .45rem}
+@media(max-width:850px){
+ .figure-detail-page .figure-detail{grid-template-columns:1fr}
+ .figure-detail-page .figure-detail>img{max-height:none}
+}
