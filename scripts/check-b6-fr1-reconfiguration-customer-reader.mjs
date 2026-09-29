@@ -34,7 +34,7 @@ assert.ok(!renderer.includes("['timeline',c.timeline]"));
 assert.ok(!renderer.includes("['overview',c.overview]"));
 
 assert.ok(state.includes("legacyLayerMap={overview:'cases',timeline:'windows',visuals:'snapshots'}"));
-assert.ok(state.includes("activeLayer:'cases'"));
+assert.ok(state.includes("activeLayer:'windows'"));
 
 for(const token of ['civ-reconfig-case-reader','原有结构','触发与压力','结构变化','继任结构','可观察结果','Evidence & unknown']) assert.ok(renderer.includes(token),'Case reader missing: '+token);
 assert.ok(!renderer.includes("<small>${esc(x.id)} · ${badge(x.knowledgeState||x.dataClass,l)}</small>"));
