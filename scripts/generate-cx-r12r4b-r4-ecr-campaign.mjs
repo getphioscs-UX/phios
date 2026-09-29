@@ -50,12 +50,37 @@ const resultsPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-
 const dims=['methodFidelityAccepted','customerClarityAccepted','nonFortuneTellingBoundaryAccepted','lineageAccepted'];
 const existingResults=fs.existsSync(resultsPath)?JSON.parse(fs.readFileSync(resultsPath,'utf8')):null;
 const existingResultById=new Map((existingResults?.results||[]).map(x=>[x.caseId,x]));
+const deltaReceiptPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-r4-d11-earth-delta-owner-acceptance-v1.json';
+const deltaReceipt=fs.existsSync(deltaReceiptPath)?JSON.parse(fs.readFileSync(deltaReceiptPath,'utf8')):null;
+const deltaAcceptanceById=new Map();
+if(deltaReceipt){
+ const {acceptanceDigest,...receiptSeed}=deltaReceipt;
+ if(deltaReceipt.schemaVersion!=='PHI-OS-ECR-R4-D11-EARTH-DELTA-OWNER-ACCEPTANCE-v1.0.0')throw new Error('ECR_D11_DELTA_RECEIPT_SCHEMA_INVALID');
+ if(deltaReceipt.decision!=='ACCEPT')throw new Error('ECR_D11_DELTA_RECEIPT_NOT_ACCEPTED');
+ if(sha(receiptSeed)!==acceptanceDigest)throw new Error('ECR_D11_DELTA_RECEIPT_DIGEST_INVALID');
+ if(deltaReceipt.correction?.driver!=='D11'||deltaReceipt.correction?.identity!=='Earth'||deltaReceipt.correction?.canonicalRole!=='Embodiment'||deltaReceipt.correction?.retiredMeaning!=='Recovery')throw new Error('ECR_D11_DELTA_RECEIPT_SCOPE_INVALID');
+ for(const row of deltaReceipt.cases||[]){
+  if(row.decision!=='ACCEPT')throw new Error('ECR_D11_DELTA_CASE_NOT_ACCEPTED:'+row.caseId);
+  if(!row.reviewCaseDigest||!/^([a-f0-9]{64})$/.test(row.reviewCaseDigest))throw new Error('ECR_D11_DELTA_CASE_DIGEST_INVALID:'+row.caseId);
+  if(!dims.every(k=>row.dimensions?.[k]===true))throw new Error('ECR_D11_DELTA_DIMENSION_NOT_ACCEPTED:'+row.caseId);
+  deltaAcceptanceById.set(row.caseId,row);
+ }
+}
 const migratedResults=reviewCases.map(current=>{
  const previousCase=previousReviewById.get(current.caseId);
  const previousResult=existingResultById.get(current.caseId);
  const unchanged=Boolean(previousCase)&&reviewCaseDigest(previousCase)===current.reviewCaseDigest;
  const previouslyAccepted=Boolean(previousResult)&&dims.every(k=>previousResult[k]===true);
  if(unchanged&&previouslyAccepted)return {...previousResult,reviewCaseDigest:current.reviewCaseDigest};
+ const delta=deltaAcceptanceById.get(current.caseId);
+ if(delta){
+  if(delta.reviewCaseDigest!==current.reviewCaseDigest)throw new Error('ECR_D11_DELTA_RECEIPT_CASE_DRIFT:'+current.caseId);
+  return {
+   caseId:current.caseId,reviewCaseDigest:current.reviewCaseDigest,
+   methodFidelityAccepted:true,customerClarityAccepted:true,nonFortuneTellingBoundaryAccepted:true,lineageAccepted:true,
+   reviewerRef:'TL',reviewedAt:deltaReceipt.reviewedAt,notes:'OWNER_ACCEPTED_D11_EARTH_EMBODIMENT_DELTA'
+  };
+ }
  return {caseId:current.caseId,reviewCaseDigest:current.reviewCaseDigest,methodFidelityAccepted:null,customerClarityAccepted:null,nonFortuneTellingBoundaryAccepted:null,lineageAccepted:null,reviewerRef:null,reviewedAt:null,notes:unchanged?'PREVIOUS_REVIEW_NOT_FULLY_ACCEPTED':'CONTENT_CHANGED_REVIEW_REQUIRED'};
 });
 const acceptedCaseCount=migratedResults.filter(x=>dims.every(k=>x[k]===true)).length;
@@ -66,7 +91,11 @@ const migratedPayload={
  schemaVersion:'PHI-OS-ECR-HUMAN-REVIEW-RESULTS-v1.1.0',work:'CX-R12R4B-R4-W33R',
  status:allAccepted?'HUMAN_REVIEW_COMPLETE':'PENDING_HUMAN_REVIEW',
  requiredCaseCount:48,acceptedCaseCount,rejectedCaseCount,pendingCaseCount,
- aggregateAttestation:allAccepted?(existingResults?.aggregateAttestation||{reviewCaseDigestsBound:true}):null,
+ aggregateAttestation:allAccepted?(deltaReceipt?{
+  reviewedBy:'TL',reviewedAt:deltaReceipt.reviewedAt,
+  statement:'45 unchanged ECR review cases retain prior acceptance by review digest; ECR-HR-12, ECR-HR-25 and ECR-HR-38 were re-reviewed and accepted after the D11 Earth / Embodiment correction.',
+  deltaAcceptanceRef:deltaReceiptPath,reviewCaseDigestsBound:true
+ }:(existingResults?.aggregateAttestation||{reviewCaseDigestsBound:true})):null,
  results:migratedResults
 };
 const migratedText=JSON.stringify(migratedPayload,null,2)+'\n';
