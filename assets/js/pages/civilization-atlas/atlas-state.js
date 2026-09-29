@@ -100,7 +100,7 @@ const RECONFIG_SNAPSHOT_LAYERS=new Set(['political','population','industry','ene
 const positivePage=v=>{const n=Math.trunc(Number(v));return Number.isFinite(n)&&n>0?Math.min(n,99):1;};
 export function normalizeReconfigurationAtlasState(input={}){
  const locale=LOCALES.has(input.locale)?input.locale:'en';
- const activeLayer=RECONFIG_ATLAS_LAYERS.includes(input.activeLayer)?input.activeLayer:'cases';
+ const legacyLayerMap={overview:'cases',timeline:'windows',visuals:'snapshots'}; const requestedLayer=legacyLayerMap[input.activeLayer]||input.activeLayer; const activeLayer=RECONFIG_ATLAS_LAYERS.includes(requestedLayer)?requestedLayer:'cases';
  return {
   version:'2.0.0',activeLayer,query:String(input.query??'').slice(0,160),caseSearch:String(input.caseSearch??'').slice(0,160),
   primaryCaseId:asString(input.primaryCaseId),compareCaseIds:asArray(input.compareCaseIds).slice(0,4),
