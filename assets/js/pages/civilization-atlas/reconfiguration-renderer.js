@@ -11,6 +11,22 @@ const humanize=v=>String(v??'').replaceAll('_',' ').replace(/([a-z])([A-Z])/g,'$
 const UI_KEYS=['eyebrow','title','lead','overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','compareRuntime','unknown','missing','unverified','ask','noRank','open','previous','next','filters','clear','results','version','previousVersion','dataState','freshness','layer','textAlternative','selectDossier','selectSnapshot','selectDimension','pagination','imageBaseNote','resolverMissing','relatedCases','state','all','allTime','allRegions','allTypes','timeWindow','region','caseType','trigger','pressureField','structuralChange','reconfigurationWindow','linkedCases','dimension','evidenceDate','historicalVersionNote','selectCasesFirst','selectDossiersFirst','noUniversalScore','livedProfile','visualLibrary','visualLibraryLead','visualFamily','visualSubject','visualCount','contextFigures','currentDataNotAdmitted','currentDataBoundary','runtimeReadout','runtimeReadoutLead','runtimeEvidenceGateOpen','runtimeConfidence','runtimeConfidenceUnknown','runtimeNeeds','runtimeNeedEvidence','runtimeNeedObservation','runtimeNeedMethod','runtimeHistoricalContext','runtimeEngineBoundary','runtimeLoading','runtimeUnavailable','historicalEvidence','searchPlaceholder'];
 const copy=()=>Object.fromEntries(UI_KEYS.map(k=>[k,tr('ui.'+k,humanize(k))]));
 const COPY={get en(){return copy();},get 'zh-Hans'(){return copy();}};
+const LIVED_GUIDE=Object.freeze({
+ livingEnvironment:{'zh-Hans':'观察居住环境、基础服务、城市条件与日常稳定性如何受到重组影响。',en:'Tracks how housing environment, basic services, urban conditions, and everyday stability are affected by reconfiguration.'},
+ employmentOpportunity:{'zh-Hans':'观察工作机会、进入门槛、岗位分布与机会可得性如何变化。',en:'Tracks changes in job availability, entry barriers, opportunity distribution, and access to work.'},
+ jobQuality:{'zh-Hans':'观察工作稳定性、保障、技能使用、劳动条件与长期可持续性。',en:'Tracks stability, protection, skill use, working conditions, and long-term sustainability of work.'},
+ incomeCostBalance:{'zh-Hans':'观察收入能力、生活成本、家庭预算空间与实际购买力之间的关系。',en:'Tracks the relationship among earning capacity, living costs, household budget room, and real purchasing power.'},
+ housingPressure:{'zh-Hans':'观察住房可得性、租购负担、居住稳定性与空间压力。',en:'Tracks housing access, rent or ownership burden, residential stability, and spatial pressure.'},
+ timePressure:{'zh-Hans':'观察通勤、照护、工作与制度摩擦如何占用个人可支配时间。',en:'Tracks how commuting, care, work, and institutional friction consume discretionary time.'},
+ workPressure:{'zh-Hans':'观察工作强度、绩效要求、不稳定性与职业风险如何进入日常生活。',en:'Tracks how work intensity, performance demands, instability, and career risk enter daily life.'},
+ healthLoad:{'zh-Hans':'观察医疗可得性、环境暴露、照护负担与身体健康压力。',en:'Tracks healthcare access, environmental exposure, care burden, and physical health pressure.'},
+ psychologicalLoad:{'zh-Hans':'观察不确定性、工作与生活压力如何累积为心理负担。',en:'Tracks how uncertainty and work-life pressures accumulate into psychological load.'},
+ subjectiveWellbeing:{'zh-Hans':'观察个人对生活质量、稳定感、希望感与整体处境的评价。',en:'Tracks how people assess quality of life, stability, hope, and their overall situation.'},
+ security:{'zh-Hans':'观察人身、经济、制度与未来不确定性对安全感的影响。',en:'Tracks how personal, economic, institutional, and future uncertainty shape felt security.'},
+ socialConnection:{'zh-Hans':'观察家庭、社区、工作关系与社会支持网络的连接强度。',en:'Tracks the strength of family, community, workplace, and social-support connections.'},
+ mobility:{'zh-Hans':'观察教育、职业、迁移与社会位置改变的可进入路径。',en:'Tracks access to education, careers, migration, and pathways for changing social position.'},
+ personalFutureCapacity:{'zh-Hans':'观察一个人是否仍拥有学习、选择、调整与建立未来的现实空间。',en:'Tracks whether a person still has practical room to learn, choose, adapt, and build a future.'}
+});
 const PHRASE_KEY_BY_TEXT=Object.freeze({
  'Existing institutional configuration before reform':'PRIOR_REFORM',
  'Prior system configuration':'PRIOR_SYSTEM',
@@ -323,7 +339,7 @@ function renderLived(host,data,l,state,store){
  const preferred=['livingEnvironment','employmentOpportunity','incomeCostBalance','housingPressure','personalFutureCapacity'];
  const keyDims=preferred.map(id=>dims.find(d=>d.id===id)).filter(Boolean).slice(0,5);
  const otherDims=dims.filter(d=>!preferred.includes(d.id));
- const dimCard=dim=>{const value=dossier?.livedReality?.[dim.id];const stateText=admitted?status(value?.state,l):(zh?'等待当前资料':'Awaiting current evidence');return '<article class="civ-reconfig-lived-card"><p class="knowledge-eyebrow">'+esc(zh?dim.labelZh:dim.labelEn)+'</p><h4>'+esc(stateText)+'</h4>'+(admitted?'<button type="button" data-dim="'+esc(dim.id)+'">'+esc(zh?'查看细节':'View detail')+'</button>':'')+'</article>';};
+ const dimCard=dim=>{const value=dossier?.livedReality?.[dim.id],guide=loc(LIVED_GUIDE[dim.id],l);const stateText=admitted?status(value?.state,l):null;return '<article class="civ-reconfig-lived-card"><p class="knowledge-eyebrow">'+esc(zh?dim.labelZh:dim.labelEn)+'</p>'+(stateText?'<h4>'+esc(stateText)+'</h4>':'')+'<p>'+esc(guide||'')+'</p>'+(admitted?'<button type="button" data-dim="'+esc(dim.id)+'">'+esc(zh?'查看细节':'View detail')+'</button>':'')+'</article>';};
  host.innerHTML='<section class="civ-reconfig-lived-reader">'
   +'<header><p class="knowledge-eyebrow">'+esc(zh?'日常现实':'Lived reality')+'</p><h3>'+esc(loc(dossier?.entity,l)||c.unknown)+'</h3><p>'+esc(zh?'重组只有落到居住、工作、成本、压力与未来容量时，才真正进入人的现实。':'Reconfiguration reaches lived reality through housing, work, cost pressure, daily load, and future capacity.')+'</p></header>'
   +'<label class="civ-reconfig-dossier-picker">'+esc(c.selectDossier)+'<select data-lived-dossier>'+dossiers.map(d=>'<option value="'+esc(d.id)+'">'+esc(loc(d.entity,l))+'</option>').join('')+'</select></label>'
