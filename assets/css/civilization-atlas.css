@@ -979,3 +979,25 @@
 .civ-reconfig-window-snapshots button{padding:.38rem .65rem;border:1px solid rgba(213,179,108,.25);border-radius:999px;background:transparent;color:inherit}
 @media(max-width:900px){.civ-reconfig-window-chain{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.civ-reconfig-window-chain{grid-template-columns:1fr}}
+
+
+/* B6-FR1-W4 world shift compare reader */
+.civ-reconfig-shift-reader{display:grid;gap:1rem}
+.civ-reconfig-shift-reader>header h3{margin:.2rem 0 .4rem;font-size:clamp(1.8rem,3vw,2.45rem);color:#f0dda8}
+.civ-reconfig-shift-reader>header p:last-child{max-width:62rem;color:var(--phi-text-secondary);line-height:1.65}
+.civ-reconfig-snapshot-rail{display:flex;gap:.45rem;overflow-x:auto;padding:.25rem 0 .55rem;scroll-snap-type:x proximity}
+.civ-reconfig-snapshot-rail button{flex:0 0 auto;min-width:5.25rem;padding:.55rem .7rem;border:1px solid rgba(213,179,108,.22);border-radius:999px;background:transparent;color:inherit;scroll-snap-align:start}
+.civ-reconfig-snapshot-rail button[aria-pressed="true"]{border-color:#d5b36c;background:rgba(213,179,108,.08);font-weight:700}
+.civ-reconfig-shift-triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;align-items:start}
+.civ-reconfig-shift-card{display:grid;gap:.45rem;padding:.85rem;border:1px solid rgba(213,179,108,.18);border-radius:14px;background:rgba(4,18,29,.45);opacity:.8}
+.civ-reconfig-shift-card.is-current{opacity:1;border-color:#d5b36c;box-shadow:0 12px 30px rgba(0,0,0,.12)}
+.civ-reconfig-shift-card h4{margin:.1rem 0;font-size:1rem}
+.civ-reconfig-shift-card time{color:#d8c591;font-weight:700}
+.civ-reconfig-shift-card img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;border-radius:10px;background:#06131f}
+.civ-reconfig-shift-card button{justify-self:start;padding:.45rem .7rem;border:1px solid rgba(213,179,108,.24);border-radius:999px;background:transparent;color:inherit}
+.civ-reconfig-change-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.civ-reconfig-change-summary>div{padding:.9rem;border:1px solid rgba(213,179,108,.16);border-radius:12px;background:rgba(5,24,39,.32)}
+.civ-reconfig-change-summary ul{margin:.35rem 0 0;padding-left:1rem}
+.civ-reconfig-change-summary li{margin:.3rem 0}
+.civ-reconfig-change-summary button{padding:0;border:0;background:transparent;color:#e9d8aa;text-align:left}
+@media(max-width:900px){.civ-reconfig-shift-triptych,.civ-reconfig-change-summary{grid-template-columns:1fr}.civ-reconfig-shift-card.is-previous,.civ-reconfig-shift-card.is-next{opacity:.7}}
