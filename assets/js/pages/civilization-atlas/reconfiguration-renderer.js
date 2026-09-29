@@ -279,25 +279,32 @@ async function hydrateDossierRuntimeReadout(host,dossier,l){
  }
 }
 function renderDossiers(host,data,l,state,store){
- const c=COPY[l],rows=data.dossiers?.dossiers||[],d=rows.find(x=>x.id===state.dossierId)||rows[0],history=data.dossiers?.history||[];
+ const c=COPY[l],rows=data.dossiers?.dossiers||[],d=rows.find(x=>x.id===state.dossierId)||rows[0],zh=l==='zh-Hans';
  if(!d){host.textContent=c.unknown;return;}
- const priors=history.filter(h=>h.id===d.id).sort((a,b)=>String(b.version).localeCompare(String(a.version),undefined,{numeric:true}));
- const dimMap=new Map((data.lived?.dimensions||[]).map(dim=>[dim.id,l==='zh-Hans'?dim.labelZh:dim.labelEn]));
- const linkedCases=(data.cases?.cases||[]).filter(x=>(x.relatedDossiers||[]).includes(d.id));
+ const linkedCases=(data.cases?.cases||[]).filter(x=>(x.relatedDossiers||[]).includes(d.id)).sort((a,b)=>a.timeStart-b.timeStart);
  const admitted=d.dataClass==='CURRENT_DATA'&&Boolean(d.asOfDate||d.sourceDate);
- const body=admitted
-  ?runtimeDl(d,l)
-  :`<section class="civ-reconfig-current-boundary"><h4>${esc(c.currentDataNotAdmitted)}</h4><p>${esc(c.currentDataBoundary)}</p>${linkedCases.length?`<p><strong>${esc(c.historicalEvidence)}:</strong> ${esc(linkedCases.slice(0,8).map(x=>l==='zh-Hans'?x.titleZh:x.titleEn).join(' · '))}</p>`:''}<div data-runtime-readout="${esc(d.id)}"><p>${esc(c.runtimeLoading)}</p></div></section>`;
- host.innerHTML=`<label>${esc(c.selectDossier)}<select data-dossier-select>${rows.map(x=>`<option value="${esc(x.id)}">${esc(loc(x.entity,l))}</option>`).join('')}</select></label><section class="civ-reconfig-detail"><div class="civ-reconfig-detail-head"><div><small>${badge(d.knowledgeState||d.dataClass,l)}</small><h3>${esc(loc(d.entity,l))}</h3><p>${esc(c.version)}: ${esc(d.version)} · ${esc(c.freshness)}: ${esc(status(d.sourceFreshness,l))}</p></div><a href="${esc(askHref(l,'dossiers',{dossierId:d.id,entityId:d.id}))}">${esc(c.ask)}</a></div>${body}<label><input type="checkbox" data-dossier-compare="${esc(d.id)}" ${state.compareDossierIds.includes(d.id)?'checked':''}> ${esc(c.compareRuntime)}</label>${priors.map(prior=>`<details><summary>${esc(c.previousVersion)} · ${esc(prior.version)}</summary><p>${esc(c.historicalVersionNote)}</p><p>${esc(c.evidenceDate)}: ${esc(prior.sourceDate||c.unknown)}</p></details>`).join('')}${admitted?`<details><summary>${esc(c.livedProfile)}</summary>${Object.entries(d.livedReality||{}).map(([id,v])=>`<p><strong>${esc(dimMap.get(id)||humanize(id))}</strong>: ${esc(status(v?.state,l))}</p>`).join('')}</details>`:''}</section>`;
- const sel=host.querySelector('[data-dossier-select]');
- selectValue(sel,d.id);
- sel.onchange=e=>set(store,{dossierId:e.target.value},'dossier-select');
- host.querySelector('[data-dossier-compare]')?.addEventListener('change',e=>{
-  const s=new Set(state.compareDossierIds);
-  e.target.checked?s.add(e.target.dataset.dossierCompare):s.delete(e.target.dataset.dossierCompare);
-  set(store,{compareDossierIds:[...s].slice(0,4)},'dossier-compare');
- });
- if(!admitted)hydrateDossierRuntimeReadout(host,d,l);
+ const currentConfig=admitted?[d.stage,d.scale,d.capacity,d.load,d.alignment].filter(v=>v&&String(v).toUpperCase()!=='UNKNOWN').map(v=>status(v,l)):[];
+ const pressures=admitted?(d.pressureFields||[]).map(v=>valueLabel(v,l)):[];
+ const directions=admitted?(d.direction||[]).map(v=>valueLabel(v,l)):[];
+ const signals=admitted?(d.transitionSignals||[]).map(v=>valueLabel(v,l)):[];
+ const unknown=(d.unknown||[]).map(v=>valueLabel(v,l));
+ host.innerHTML='<section class="civ-reconfig-dossier-reader">'
+  +'<header class="civ-reconfig-dossier-reader__head"><div><p class="knowledge-eyebrow">'+esc(zh?'当前运行档案':'Current runtime dossier')+'</p><h3>'+esc(loc(d.entity,l))+'</h3><p>'+esc(zh?'历史形成、当前证据、正在发生的重组与未知边界分开呈现。':'Historical formation, current evidence, active reconfiguration, and unknown boundaries are kept separate.')+'</p></div><a class="knowledge-action" href="'+esc(askHref(l,'dossiers',{dossierId:d.id,entityId:d.id}))+'">'+esc(c.ask)+'</a></header>'
+  +'<label class="civ-reconfig-dossier-picker">'+esc(zh?'选择档案':'Select dossier')+'<select data-dossier-select>'+rows.map(x=>'<option value="'+esc(x.id)+'">'+esc(loc(x.entity,l))+'</option>').join('')+'</select></label>'
+  +'<div class="civ-reconfig-dossier-sections">'
+   +'<section><p class="knowledge-eyebrow">01 · '+esc(zh?'当前结构':'Current configuration')+'</p>'+(currentConfig.length?'<ul>'+currentConfig.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p class="knowledge-boundary">'+esc(zh?'尚未接入经过验收的当前资料，因此不填入当前状态。':'Verified current data has not yet been admitted, so no current state is filled in.')+'</p>')+'</section>'
+   +'<section><p class="knowledge-eyebrow">02 · '+esc(zh?'历史形成':'Historical formation')+'</p>'+(linkedCases.length?'<ol>'+linkedCases.slice(-8).map(x=>'<li><button type="button" data-case="'+esc(x.id)+'"><time>'+esc(x.timeLabel)+'</time><span>'+esc(zh?x.titleZh:x.titleEn)+'</span></button></li>').join('')+'</ol>':'<p>'+esc(zh?'尚无已登记历史案例。':'No linked historical cases are registered.')+'</p>')+'</section>'
+   +'<section><p class="knowledge-eyebrow">03 · '+esc(zh?'当前压力':'Current pressures')+'</p>'+(pressures.length?'<ul>'+pressures.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'当前压力需要经过时效性资料验收后才显示。':'Current pressures appear only after time-sensitive evidence is admitted.')+'</p>')+'</section>'
+   +'<section><p class="knowledge-eyebrow">04 · '+esc(zh?'正在重组':'Active reconfiguration')+'</p>'+(directions.length?'<ul>'+directions.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'目前不从历史案例推断当代方向。':'Contemporary direction is not inferred from historical cases.')+'</p>')+'</section>'
+   +'<section><p class="knowledge-eyebrow">05 · '+esc(zh?'已观察讯号':'Observed signals')+'</p>'+(signals.length?'<ul>'+signals.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'尚无已验收的当前讯号。':'No current signals have been admitted yet.')+'</p>')+'</section>'
+   +'<section><p class="knowledge-eyebrow">06 · '+esc(zh?'尚未知':'Not yet known')+'</p><ul>'+(unknown.length?unknown.map(v=>'<li>'+esc(v)+'</li>').join(''):'<li>'+esc(c.unknown)+'</li>')+'</ul></section>'
+   +'<section><p class="knowledge-eyebrow">07 · '+esc(zh?'条件性投影':'Conditional projection')+'</p><p>'+esc(admitted?(zh?'只有在证据和方法满足投影门槛时才显示条件性投影。':'Conditional projections appear only when evidence and method gates are satisfied.'):(zh?'当前资料未获准，因此不生成投影。':'Current data is not admitted, so no projection is generated.'))+'</p></section>'
+  +'</div>'
+  +'<div class="civ-reconfig-actions"><label><input type="checkbox" data-dossier-compare="'+esc(d.id)+'" '+(state.compareDossierIds.includes(d.id)?'checked':'')+'> '+esc(c.compareRuntime)+'</label></div>'
+  +'</section>';
+ const sel=host.querySelector('[data-dossier-select]');selectValue(sel,d.id);sel.onchange=e=>set(store,{dossierId:e.target.value},'dossier-select');
+ host.querySelectorAll('[data-case]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'cases',primaryCaseId:btn.dataset.case},'dossier-case'));
+ host.querySelector('[data-dossier-compare]')?.addEventListener('change',e=>{const s=new Set(state.compareDossierIds);e.target.checked?s.add(e.target.dataset.dossierCompare):s.delete(e.target.dataset.dossierCompare);set(store,{compareDossierIds:[...s].slice(0,4)},'dossier-compare');});
 }
 function renderLived(host,data,l,state,store){
  const c=COPY[l],dims=data.lived?.dimensions||[],dossiers=data.dossiers?.dossiers||[],dossier=dossiers.find(d=>d.id===state.dossierId)||dossiers[0];
