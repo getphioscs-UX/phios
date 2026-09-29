@@ -307,15 +307,21 @@ function renderDossiers(host,data,l,state,store){
  host.querySelector('[data-dossier-compare]')?.addEventListener('change',e=>{const s=new Set(state.compareDossierIds);e.target.checked?s.add(e.target.dataset.dossierCompare):s.delete(e.target.dataset.dossierCompare);set(store,{compareDossierIds:[...s].slice(0,4)},'dossier-compare');});
 }
 function renderLived(host,data,l,state,store){
- const c=COPY[l],dims=data.lived?.dimensions||[],dossiers=data.dossiers?.dossiers||[],dossier=dossiers.find(d=>d.id===state.dossierId)||dossiers[0];
+ const c=COPY[l],dims=data.lived?.dimensions||[],dossiers=data.dossiers?.dossiers||[],dossier=dossiers.find(d=>d.id===state.dossierId)||dossiers[0],zh=l==='zh-Hans';
  const admitted=dossier?.dataClass==='CURRENT_DATA'&&Boolean(dossier?.asOfDate||dossier?.sourceDate);
- if(!admitted){
-  host.innerHTML=`<p>${esc(c.noRank)}</p><label>${esc(c.selectDossier)}<select data-lived-dossier>${dossiers.map(d=>`<option value="${esc(d.id)}">${esc(loc(d.entity,l))}</option>`).join('')}</select></label><section class="civ-reconfig-current-boundary"><h3>${esc(c.currentDataNotAdmitted)}</h3><p>${esc(c.currentDataBoundary)}</p><div class="civ-reconfig-dimension-list">${dims.map(dim=>`<span>${esc(l==='zh-Hans'?dim.labelZh:dim.labelEn)}</span>`).join('')}</div></section>`;
- }else{
-  host.innerHTML=`<p>${esc(c.noRank)}</p><label>${esc(c.selectDossier)}<select data-lived-dossier>${dossiers.map(d=>`<option value="${esc(d.id)}">${esc(loc(d.entity,l))}</option>`).join('')}</select></label><div class="civ-reconfig-grid">${dims.map(dim=>{const value=dossier?.livedReality?.[dim.id];return `<article class="civ-reconfig-card ${state.livedRealityDimensionId===dim.id?'is-current':''}"><small>${badge(value?.dataClass||'UNKNOWN',l)}</small><h4>${esc(l==='zh-Hans'?dim.labelZh:dim.labelEn)}</h4><p>${esc(c.state)}: ${esc(status(value?.state,l))}</p><p>${esc(c.noUniversalScore)}</p><button type="button" data-dim="${esc(dim.id)}">${esc(c.open)}</button><a href="${esc(askHref(l,'lived',{dossierId:dossier?.id,livedRealityDimensionId:dim.id,entityId:dim.id}))}">${esc(c.ask)}</a></article>`;}).join('')}</div>`;
- }
- const sel=host.querySelector('[data-lived-dossier]');
- if(sel){selectValue(sel,dossier?.id||'');sel.onchange=e=>set(store,{dossierId:e.target.value},'lived-dossier');}
+ const preferred=['livingEnvironment','employmentOpportunity','incomeCostBalance','housingPressure','personalFutureCapacity'];
+ const keyDims=preferred.map(id=>dims.find(d=>d.id===id)).filter(Boolean).slice(0,5);
+ const otherDims=dims.filter(d=>!preferred.includes(d.id));
+ const dimCard=dim=>{const value=dossier?.livedReality?.[dim.id];const stateText=admitted?status(value?.state,l):(zh?'等待当前资料':'Awaiting current evidence');return '<article class="civ-reconfig-lived-card"><p class="knowledge-eyebrow">'+esc(zh?dim.labelZh:dim.labelEn)+'</p><h4>'+esc(stateText)+'</h4>'+(admitted?'<button type="button" data-dim="'+esc(dim.id)+'">'+esc(zh?'查看细节':'View detail')+'</button>':'')+'</article>';};
+ host.innerHTML='<section class="civ-reconfig-lived-reader">'
+  +'<header><p class="knowledge-eyebrow">'+esc(zh?'日常现实':'Lived reality')+'</p><h3>'+esc(loc(dossier?.entity,l)||c.unknown)+'</h3><p>'+esc(zh?'重组只有落到居住、工作、成本、压力与未来容量时，才真正进入人的现实。':'Reconfiguration reaches lived reality through housing, work, cost pressure, daily load, and future capacity.')+'</p></header>'
+  +'<label class="civ-reconfig-dossier-picker">'+esc(c.selectDossier)+'<select data-lived-dossier>'+dossiers.map(d=>'<option value="'+esc(d.id)+'">'+esc(loc(d.entity,l))+'</option>').join('')+'</select></label>'
+  +(!admitted?'<div class="knowledge-boundary"><strong>'+esc(zh?'当前资料尚未验收':'Current evidence not yet admitted')+'</strong><p>'+esc(zh?'因此这些维度只显示为阅读框架，不填入推测值。':'These dimensions are shown as a reading framework only; no speculative values are filled in.')+'</p></div>':'')
+  +'<div class="civ-reconfig-lived-key">'+keyDims.map(dimCard).join('')+'</div>'
+  +'<details class="civ-reconfig-lived-more"><summary>'+esc(zh?'查看其余日常现实维度':'View other lived-reality dimensions')+'</summary><div class="civ-reconfig-lived-list">'+otherDims.map(dim=>'<span>'+esc(zh?dim.labelZh:dim.labelEn)+'</span>').join('')+'</div></details>'
+  +(admitted&&state.livedRealityDimensionId?(()=>{const dim=dims.find(d=>d.id===state.livedRealityDimensionId),value=dossier?.livedReality?.[state.livedRealityDimensionId];return dim?'<section class="civ-reconfig-lived-detail"><p class="knowledge-eyebrow">'+esc(zh?dim.labelZh:dim.labelEn)+'</p><h4>'+esc(status(value?.state,l))+'</h4><a class="knowledge-action" href="'+esc(askHref(l,'lived',{dossierId:dossier?.id,livedRealityDimensionId:dim.id,entityId:dim.id}))+'">'+esc(c.ask)+'</a></section>':'';})():'')
+  +'</section>';
+ const sel=host.querySelector('[data-lived-dossier]');if(sel){selectValue(sel,dossier?.id||'');sel.onchange=e=>set(store,{dossierId:e.target.value,livedRealityDimensionId:null},'lived-dossier');}
  host.querySelectorAll('[data-dim]').forEach(btn=>btn.onclick=()=>set(store,{livedRealityDimensionId:btn.dataset.dim},'lived-dimension'));
 }
 function renderVisualLibrary(host,data,l){
