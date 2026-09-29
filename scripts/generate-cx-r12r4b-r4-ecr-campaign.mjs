@@ -100,7 +100,10 @@ const migratedPayload={
 };
 const migratedText=JSON.stringify(migratedPayload,null,2)+'\n';
 if(check){
- if(!fs.existsSync(resultsPath)||fs.readFileSync(resultsPath,'utf8')!==migratedText)throw new Error(`CAMPAIGN_DRIFT:${resultsPath}`);
+ if(!fs.existsSync(resultsPath))throw new Error(`CAMPAIGN_DRIFT:${resultsPath}`);
+ let actualResults;
+ try{actualResults=JSON.parse(fs.readFileSync(resultsPath,'utf8'));}catch{throw new Error(`CAMPAIGN_RESULTS_UNREADABLE:${resultsPath}`);}
+ if(stable(actualResults)!==stable(migratedPayload))throw new Error(`CAMPAIGN_DRIFT:${resultsPath}`);
 }else write(resultsPath,migratedText);
 
 const html=`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><title>ECR Human Review 48</title><style>body{font:16px/1.55 system-ui;margin:0;background:#f6f3ed;color:#202020}main{max-width:1100px;margin:auto;padding:32px}.case{background:#fff;border:1px solid #ddd;border-radius:14px;padding:22px;margin:18px 0}.unit{border-top:1px solid #eee;padding:14px 0}.coord{font-family:ui-monospace,monospace;background:#f3f3f3;padding:10px;border-radius:8px}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}label{background:#fafafa;padding:8px;border-radius:8px}h1,h2,h3{line-height:1.2}.note{color:#666}</style><main><h1>CX-R12R4B ECR｜48-case Human Review</h1><p class="note">此页面只用于审核 W32R 的解释组合。机器已通过不代表客户解释已获准；请逐例检查方法忠实度、客户清晰度、非算命边界与 lineage。</p>${reviewCases.map(c=>`<section class="case"><h2>${c.caseId} · ${c.locale}</h2><div class="coord">${Object.entries(c.coordinate).map(([k,v])=>`${k}: ${v.map(x=>x.code).join(', ')}`).join('<br>')}</div>${c.interpretationUnits.map(u=>`<article class="unit"><h3>${u.title}</h3><p>${u.plainLanguageExplanation}</p><p><b>Observe:</b> ${u.observableSignals.join(' ')}</p><p><b>Reality question:</b> ${u.realityComparisonQuestions.join(' ')}</p></article>`).join('')}<div class="checks"><label><input type="checkbox"> 方法忠实度接受</label><label><input type="checkbox"> 客户清晰度接受</label><label><input type="checkbox"> 非算命边界接受</label><label><input type="checkbox"> Lineage 接受</label></div></section>`).join('')}</main></html>`;write('content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review.html',html);
