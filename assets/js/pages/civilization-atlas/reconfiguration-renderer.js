@@ -208,13 +208,30 @@ function renderTimeline(host,data,l,store){
  host.querySelectorAll('[data-window]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'windows',windowId:btn.dataset.window},'timeline-window'));
 }
 function renderWindows(host,data,l,state,store){
- const c=COPY[l],rows=data.windows?.windows||[],selected=rows.find(w=>w.id===state.windowId)||rows[0],caseMap=new Map((data.cases?.cases||[]).map(x=>[x.id,x]));
- host.innerHTML=`<label>${esc(c.reconfigurationWindow)}<select data-window-select>${rows.map(w=>`<option value="${esc(w.id)}">${w.startYear}–${w.endYear}</option>`).join('')}</select></label>${selected?`<section class="civ-reconfig-detail"><small>${badge(selected.knowledgeState||selected.dataClass,l)}</small><h3>${esc(l==='zh-Hans'?selected.titleZh:selected.titleEn)}</h3><p>${selected.startYear}–${selected.endYear}</p><dl class="civ-reconfig-dl"><dt>${esc(fieldLabel('pressure'))}</dt><dd>${esc(listText(selected.pressure,l))}</dd><dt>${esc(fieldLabel('reconfiguration'))}</dt><dd>${esc((selected.majorCases||[]).map(id=>l==='zh-Hans'?caseMap.get(id)?.titleZh:caseMap.get(id)?.titleEn).filter(Boolean).join(' · ')||c.unknown)}</dd><dt>${esc(fieldLabel('successorState'))}</dt><dd>${esc(listText(selected.successorState,l))}</dd><dt>${esc(fieldLabel('unknown'))}</dt><dd>${esc(listText(selected.unknown,l))}</dd></dl><div class="civ-reconfig-chip-row">${(selected.majorCases||[]).slice(0,12).map(id=>`<button type="button" data-case="${esc(id)}">${esc(id)}</button>`).join('')}${(selected.relatedSnapshots||[]).map(id=>`<button type="button" data-snapshot="${esc(id)}">${esc(id.replace('WORLD_RECONFIGURATION_SNAPSHOT_',''))}</button>`).join('')}</div><a href="${esc(askHref(l,'windows',{windowId:selected.id,entityId:selected.id}))}">${esc(c.ask)}</a></section>`:''}`;
- const sel=host.querySelector('[data-window-select]');if(sel){selectValue(sel,selected?.id||'');sel.onchange=e=>set(store,{windowId:e.target.value},'window-select');}
- host.querySelectorAll('[data-case]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'cases',primaryCaseId:btn.dataset.case},'window-case'));host.querySelectorAll('[data-snapshot]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'snapshots',snapshotId:btn.dataset.snapshot},'window-snapshot'));
+ const c=COPY[l],rows=[...(data.windows?.windows||[])].sort((a,b)=>a.startYear-b.startYear||a.endYear-b.endYear),selected=rows.find(w=>w.id===state.windowId)||rows[0],caseMap=new Map((data.cases?.cases||[]).map(x=>[x.id,x])),zh=l==='zh-Hans';
+ if(!selected){host.textContent=c.unknown;return;}
+ const linked=(selected.majorCases||[]).map(id=>caseMap.get(id)).filter(Boolean);
+ const before=uniq(linked.map(x=>status(x.priorRuntime,l)).filter(Boolean));
+ const after=uniq(linked.map(x=>status(x.successorRuntime,l)).filter(Boolean));
+ const affected=(selected.systemLayers||[]).map(v=>typeLabel(v,l));
+ const unknown=(selected.unknown||[]).map(v=>valueLabel(v,l));
+ host.innerHTML='<section class="civ-reconfig-window-reader">'
+  +'<header><p class="knowledge-eyebrow">'+esc(zh?'重组时间脊柱':'Reconfiguration timeline')+'</p><h3>'+esc(zh?selected.titleZh:selected.titleEn)+'</h3><p>'+String(selected.startYear)+'–'+String(selected.endYear)+'</p></header>'
+  +'<nav class="civ-reconfig-window-rail" aria-label="'+esc(zh?'切换重组窗口':'Change reconfiguration window')+'">'+rows.map(w=>'<button type="button" data-window="'+esc(w.id)+'" aria-pressed="'+(w.id===selected.id?'true':'false')+'"><time>'+String(w.startYear)+'–'+String(w.endYear)+'</time><span>'+String(w.majorCases?.length||0)+' '+esc(zh?'案例':'cases')+'</span></button>').join('')+'</nav>'
+  +'<div class="civ-reconfig-window-chain">'
+   +'<section><span>01</span><p class="knowledge-eyebrow">'+esc(zh?'之前':'Before')+'</p><h4>'+esc(zh?'进入窗口前的主要结构':'Main structures entering the window')+'</h4><ul>'+before.slice(0,6).map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></section>'
+   +'<section><span>02</span><p class="knowledge-eyebrow">'+esc(zh?'压力':'Pressure')+'</p><h4>'+esc(zh?'哪些系统正在承压':'Systems under pressure')+'</h4><div class="civ-reconfig-tag-list">'+affected.slice(0,8).map(v=>'<span>'+esc(v)+'</span>').join('')+'</div></section>'
+   +'<section><span>03</span><p class="knowledge-eyebrow">'+esc(zh?'重组过程':'During')+'</p><h4>'+esc(zh?'窗口内发生的重组案例':'Reconfigurations inside the window')+'</h4><div class="civ-reconfig-window-cases">'+linked.slice(0,10).map(x=>'<button type="button" data-case="'+esc(x.id)+'">'+esc(zh?x.titleZh:x.titleEn)+'</button>').join('')+'</div></section>'
+   +'<section><span>04</span><p class="knowledge-eyebrow">'+esc(zh?'之后':'After')+'</p><h4>'+esc(zh?'形成的继任结构':'Successor configurations')+'</h4><ul>'+after.slice(0,6).map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></section>'
+  +'</div>'
+  +(selected.relatedSnapshots?.length?'<div class="civ-reconfig-window-snapshots"><strong>'+esc(zh?'相关世界变化':'Related world shifts')+'</strong>'+selected.relatedSnapshots.map(id=>'<button type="button" data-snapshot="'+esc(id)+'">'+esc(id.replace('WORLD_RECONFIGURATION_SNAPSHOT_',''))+'</button>').join('')+'</div>':'')
+  +'<details class="civ-reconfig-evidence"><summary>'+esc(zh?'证据与未知':'Evidence & unknown')+'</summary><p><strong>'+esc(zh?'知识状态':'Knowledge state')+'</strong> '+badge(selected.knowledgeState||selected.dataClass,l)+'</p>'+(unknown.length?'<ul>'+unknown.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'')+'</details>'
+  +'<a class="knowledge-action" href="'+esc(askHref(l,'windows',{windowId:selected.id,entityId:selected.id}))+'">'+esc(c.ask)+'</a>'
+  +'</section>';
+ host.querySelectorAll('[data-window]').forEach(btn=>btn.onclick=()=>set(store,{windowId:btn.dataset.window},'window-select'));
+ host.querySelectorAll('[data-case]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'cases',primaryCaseId:btn.dataset.case},'window-case'));
+ host.querySelectorAll('[data-snapshot]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'snapshots',snapshotId:btn.dataset.snapshot},'window-snapshot'));
 }
-const SNAPSHOT_FIELDS={political:['politicalOrder','majorStates','majorEmpires'],population:['populationCenters'],industry:['industrialCores'],energy:['energyNodes'],finance:['financialNodes'],trade:['tradeNetworks'],military:['militaryNetworks'],technology:['technologyNodes'],information:['informationNetworks'],colonialPostcolonial:['colonialStatus','postColonialStatus']};
-const LAYER_LABEL={political:['Political','政治'],population:['Population','人口'],industry:['Industry','工业'],energy:['Energy','能源'],finance:['Finance','金融'],trade:['Trade','贸易'],military:['Military','军事'],technology:['Technology','技术'],information:['Information','信息'],colonialPostcolonial:['Colonial / Postcolonial','殖民／后殖民']};
 function renderSnapshots(host,data,l,state,store){
  const c=COPY[l],rows=data.snapshots?.snapshots||[],s=rows.find(x=>x.id===state.snapshotId)||rows[0];if(!s){host.textContent=c.unknown;return;}const fields=SNAPSHOT_FIELDS[state.snapshotLayer]||SNAPSHOT_FIELDS.political,values=fields.flatMap(k=>Array.isArray(s[k])?s[k]:s[k]&&s[k]!=='UNKNOWN'?[s[k]]:[]),cases=(s.majorReconfigurationCases||[]),caseMap=new Map((data.cases?.cases||[]).map(x=>[x.id,x]));
  const visualRecord=(data.visualStatus?.assets||[]).find(a=>a.assetId===s.visualAssetId);
