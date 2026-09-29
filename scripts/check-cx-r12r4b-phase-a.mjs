@@ -80,7 +80,7 @@ const customerApiResponse=await executeCustomerPersonalReality({
   request:new Request('https://phios.local/api/customer-personal-reality',{
     method:'POST',
     headers:{'content-type':'application/json'},
-    body:JSON.stringify({birthDate:'1990-01-15',birthTimeUnknown:true,methods:['numeric'],consent:true,locale:'en'})
+    body:JSON.stringify({reportSubjectName:'Synthetic Check Subject',birthDate:'1990-01-15',birthTimeUnknown:true,methods:['numeric'],consent:true,locale:'en'})
   }),
   env:{}
 });

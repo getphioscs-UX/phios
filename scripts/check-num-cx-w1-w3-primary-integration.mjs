@@ -40,7 +40,7 @@ assert.match(client,/m\.methodId==='NUM'&&view\?\.numerology\?\.integratedReadin
 assert.equal(client.includes('globalThis.fetch'),false,'Primary NUM route must not depend on fetch monkey-patching to create meaning.');
 
 async function run(body){
- const response=await executeCustomerPersonalReality({request:new Request('https://phios.local/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env:{}});
+ const response=await executeCustomerPersonalReality({request:new Request('https://phios.local/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reportSubjectName:'Synthetic Check Subject',...body})}),env:{}});
  const payload=await response.json();
  assert.equal(response.status,200,JSON.stringify(payload));
  assert.equal(payload.ok,true);

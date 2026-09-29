@@ -38,7 +38,7 @@ function mockExternalFetch(){return async input=>{const url=String(input?.url||i
 const oldFetch=globalThis.fetch;globalThis.fetch=mockExternalFetch();
 try{
  const i=regression.input;
- const body={birthDate:i.birthDate,birthTime:i.birthTime,birthTimeUnknown:false,placeRef:i.placeRef,methods:['ziwei'],traditionalCalculationSex:i.traditionalCalculationSex,ziweiTargetDate:i.targetDate,ziweiTargetTime:i.targetTime,ziweiTargetTimezoneIana:i.targetTimezone,ziweiTargetUtcOffset:i.targetUtcOffset,ziweiTargetContextSource:'EXPLICIT_REQUEST',consent:true,locale:i.locale};
+ const body={reportSubjectName:'Synthetic Check Subject',birthDate:i.birthDate,birthTime:i.birthTime,birthTimeUnknown:false,placeRef:i.placeRef,methods:['ziwei'],traditionalCalculationSex:i.traditionalCalculationSex,ziweiTargetDate:i.targetDate,ziweiTargetTime:i.targetTime,ziweiTargetTimezoneIana:i.targetTimezone,ziweiTargetUtcOffset:i.targetUtcOffset,ziweiTargetContextSource:'EXPLICIT_REQUEST',consent:true,locale:i.locale};
  const response=await customerPersonalReality({request:new Request('https://getphios.com/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env:{}});const payload=await response.json();
  assert.equal(response.status,regression.expected.apiStatus);assert.equal(payload.ok,true);const route=payload.view?.productRoute,product=route?.primaryProduct;
  assert.equal(route?.mode,regression.expected.productRouteMode);assert.equal(product?.methodId,regression.expected.methodId);assert.equal(product?.state,regression.expected.productState);

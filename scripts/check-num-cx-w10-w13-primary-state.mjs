@@ -20,7 +20,7 @@ if(pprR3Active){
  assert(css.includes('NUM-CX-W10–W12'));
 }
 assert(numCss.includes('NUM-CX-W11–W12'));
-async function run(body){const r=await onRequestPost({request:new Request('https://phios.local/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env:{}});const p=await r.json();assert.equal(r.status,200,JSON.stringify(p));return p.view}
+async function run(body){const r=await onRequestPost({request:new Request('https://phios.local/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reportSubjectName:'Synthetic Check Subject',...body})}),env:{}});const p=await r.json();assert.equal(r.status,200,JSON.stringify(p));return p.view}
 const v=await run({birthDate:'1989-11-15',birthTimeUnknown:true,methods:['numeric'],consent:true,locale:'zh-Hans',numerologyTargetDate:'2025-05-15'});
 const m=new Map(v.reading.map.map(x=>[x.stageId,x]));
 if(pprR3Active){

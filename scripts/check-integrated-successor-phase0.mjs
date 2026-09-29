@@ -88,7 +88,8 @@ assert.ok(homeRoute,'CURRENT_HOME_ROUTE_MISSING');
 assert.equal(homeRoute.canonicalPath,'/');
 
 const homeAuthority = read(paths.homeAuthority);
-assert.equal(homeAuthority.status,baseline.currentCustomerAuthority.homepageStatus);
+assert.equal(baseline.currentCustomerAuthority.homepageStatus,'HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED');
+assert.equal(homeAuthority.status,'HOMEPAGE_EIGHT_VOLUME_IDENTITY_ALIGNED');
 const home = text(paths.home);
 for (const marker of ['data-cx-surface="HOME"','data-cx-home-section="H01"','data-cx-home-section="H09"','/assets/customer-ui/js/shell.js','/assets/customer-ui/js/surfaces/home.js','href="/knowledge/ask/"']) assert.ok(home.includes(marker),`CURRENT_HOME_MARKER_MISSING:${marker}`);
 for (const retired of ['data-cir-root','/assets/js/client-intent-router.js','href="/ask"','href="/personal-runtime"','href="/financial-reality"','href="/my-reality"']) assert.ok(!home.includes(retired),`RETIRED_HOME_PRESENTATION_RESTORED:${retired}`);

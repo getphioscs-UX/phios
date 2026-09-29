@@ -211,6 +211,8 @@ assert.deepEqual(wrangler.r2_buckets, [
   { binding: 'PRIVATE_REPORTS', bucket_name: 'phios-private-reports' }
 ]);
 assert.equal(wranglerReconciliation.allowedDelta.privateReports.previewBucket, 'phios-private-reports-sandbox');
+assert.equal(wrangler.env.preview.vars.RNT2_S04_REVIEW, wranglerReconciliation.allowedDelta.previewRnt2S04Review);
+assert.equal(wrangler.vars?.RNT2_S04_REVIEW, undefined, 'Review flag must remain Preview-only');
 assert.equal(wranglerReconciliation.preserved.runtimeContractsChanged, false);
 assert.equal(wranglerReconciliation.preserved.entryPresentationChanged, false);
 

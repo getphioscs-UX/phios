@@ -91,7 +91,7 @@ assert.throws(()=>buildConfirmedHumanDesignContextTransport(unconfirmed,transpor
 
 // The canonical personal route must fail closed without explicit context transport consent,
 // reject a digest-tampered profile, and rebuild the accepted external context server-side.
-const baseRequest={birthDate:'1989-11-15',birthTime:null,birthTimeUnknown:true,placeRef:null,intent:'W4 route transport',methods:['numeric'],consent:true,locale:'zh-Hans'};
+const baseRequest={reportSubjectName:'Synthetic Check Subject',birthDate:'1989-11-15',birthTime:null,birthTimeUnknown:true,placeRef:null,intent:'W4 route transport',methods:['numeric'],consent:true,locale:'zh-Hans'};
 async function callPersonal(extra={}){
   const request=new Request('https://example.test/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...baseRequest,...extra})});
   const response=await personalRealityApi({request,env:{}});

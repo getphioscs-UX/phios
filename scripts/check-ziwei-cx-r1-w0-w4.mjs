@@ -146,7 +146,7 @@ globalThis.fetch=async input=>{
   throw new Error(`ZIWEI_CX_R1_UNEXPECTED_FETCH:${url}`);
 };
 try{
-  const body={birthDate:'2023-01-22',birthTime:'05:00',birthTimeUnknown:false,placeRef:'N123',methods:['ziwei'],traditionalCalculationSex:'MALE',ziweiTargetDate:'2026-08-28',ziweiTargetTime:'12:00',ziweiTargetTimezoneIana:'Asia/Kuala_Lumpur',ziweiTargetUtcOffset:'+08:00',ziweiTargetContextSource:'EXPLICIT_REQUEST',consent:true,locale:'zh-Hans'};
+  const body={reportSubjectName:'Synthetic Check Subject',birthDate:'2023-01-22',birthTime:'05:00',birthTimeUnknown:false,placeRef:'N123',methods:['ziwei'],traditionalCalculationSex:'MALE',ziweiTargetDate:'2026-08-28',ziweiTargetTime:'12:00',ziweiTargetTimezoneIana:'Asia/Kuala_Lumpur',ziweiTargetUtcOffset:'+08:00',ziweiTargetContextSource:'EXPLICIT_REQUEST',consent:true,locale:'zh-Hans'};
   const request=new Request('https://getphios.com/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
   const response=await customerPersonalReality({request,env:{}});
   assert.equal(response.status,200);

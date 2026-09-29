@@ -19,7 +19,16 @@ assert.equal(audit.baselineCommit,baseline);
 assert.equal(audit.status,'RECONCILED_ONE_AUTHORITY_PER_LAYER');
 assert.equal(audit.baselineVerification.criticalAuthorityFilesComparedToGitHub,11);
 assert.equal(audit.baselineVerification.allCriticalAuthorityGitBlobsMatchBaseline,true);
-for(const record of audit.authorities){assert.equal(fs.existsSync(record.path),true,record.path);assert.equal(sha(record.path),record.sha256,`W0 authority drift: ${record.path}`);assert.equal(record.matchesBaselineGitBlob,true,`W0 baseline mismatch: ${record.path}`);}
+for(const record of audit.authorities){
+ assert.equal(fs.existsSync(record.path),true,record.path);
+ if(record.path==='content/embodied-configuration/ecr-book-core-theory-projection-v1.json'){
+  // b5b003cb records the owner-admitted D11 Earth correction; W0 stays historical.
+  assert.equal(sha(record.path),'bc4dd5c810c56f8d41ada3b7aef486d9ec9e79b35d3ebb81f23fdedf46e71d93','R7 book successor drift');
+  assert.equal(record.sha256,'dc2c3ffa1a19ff1390725946f8a1417f0237646057fb1b40c058267497481c34');
+  assert.deepEqual(book.r7BaselineCorrection,{driver:'D11',from:'Chiron',to:'Earth',canonicalRole:'Embodiment',ownerAcceptedAt:'2026-09-26',protectedRuntimeMutationRequired:false});
+ }else assert.equal(sha(record.path),record.sha256,`W0 authority drift: ${record.path}`);
+ assert.equal(record.matchesBaselineGitBlob,true,`W0 baseline mismatch: ${record.path}`);
+}
 assert.deepEqual(audit.gate,{oneCalculationAuthority:true,oneOntologyAuthority:true,oneCustomerVisualProjectionPath:'functions/embodied-configuration/ecr-customer-mandala-projection.js',duplicatedEcrSemanticsAllowed:false});
 assert.deepEqual(audit.currentBookCapabilityOrder,[['R1','Direction','方向能力'],['R2','Understanding','理解能力'],['R3','Expression','表达能力'],['R4','Position','位置能力'],['R5','Resources','资源能力'],['R6','Execution','执行能力'],['R7','Relational','关系能力'],['R8','Survival','生存能力'],['R9','Drive','驱动能力']]);
 assert.deepEqual(book.capabilities.map(x=>x.slice(0,3)),audit.currentBookCapabilityOrder,'W0 Book-aligned R1-R9 order drift');

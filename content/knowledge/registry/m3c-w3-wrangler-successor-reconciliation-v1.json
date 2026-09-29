@@ -53,14 +53,20 @@
         "authorization": "OWNER_BAZI_VISUAL_COMMERCE_W15_PREVIEW_ACCEPTANCE",
         "change": "ENABLE_EXISTING_TEST_ONLY_COMMERCE_GATE_IN_PREVIEW",
         "wranglerSha256": "29fd5ef838d0f6879c0afec2aefb1f28a8f1d5a9685e9ed561630ee6ac1adbf3"
+      },
+      {
+        "commit": "2e452f07fb0dcde658de69b4b012bf128747fa49",
+        "authorization": "OWNER_REPORT_NARRATIVE_T2_S04_PRIVATE_QA_REVIEW",
+        "change": "ENABLE_EXISTING_ALLOWLISTED_S04_REVIEW_IN_PREVIEW_ONLY",
+        "wranglerSha256": "60cfc8d91696193ad8489db89f50f1f4318362c12e34ceaa16ba6f8758cfbbe3"
       }
     ],
     "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts. The 2026-09-22 owner request authorizes exact private report bucket bindings, actual Pages project name reconciliation, and explicit manuscript retrieval disablement in isolated Preview.",
-    "wranglerSha256": "29fd5ef838d0f6879c0afec2aefb1f28a8f1d5a9685e9ed561630ee6ac1adbf3",
+    "wranglerSha256": "60cfc8d91696193ad8489db89f50f1f4318362c12e34ceaa16ba6f8758cfbbe3",
     "currentAuthorization": {
-      "basis": "OWNER_BAZI_VISUAL_COMMERCE_W15_PREVIEW_ACCEPTANCE",
-      "baselineCommit": "575884962b1aaef79ecc55dfbb5adbcceb540f80",
-      "evidence": "docs/guided-report-successor-r2/visual-commerce/INVENTORY.md"
+      "basis": "OWNER_REPORT_NARRATIVE_T2_S04_PRIVATE_QA_REVIEW",
+      "baselineCommit": "2e452f07fb0dcde658de69b4b012bf128747fa49",
+      "evidence": "docs/acceptance/report-narrative-t2-r1/FINAL-HANDOFF.md"
     }
   },
   "allowedDelta": {
@@ -84,7 +90,8 @@
     "previewManuscriptsEnabled": false,
     "previewAuth0PublicVars": "https://qa.phios-github.pages.dev/api/auth/callback",
     "previewBaziT3Shadow": "enabled",
-    "previewCommerceQaEnabled": true
+    "previewCommerceQaEnabled": true,
+    "previewRnt2S04Review": "enabled"
   },
   "preserved": {
     "m3cEntryArtifacts": true,
