@@ -1001,3 +1001,21 @@
 .civ-reconfig-change-summary li{margin:.3rem 0}
 .civ-reconfig-change-summary button{padding:0;border:0;background:transparent;color:#e9d8aa;text-align:left}
 @media(max-width:900px){.civ-reconfig-shift-triptych,.civ-reconfig-change-summary{grid-template-columns:1fr}.civ-reconfig-shift-card.is-previous,.civ-reconfig-shift-card.is-next{opacity:.7}}
+
+
+/* B6-FR1-W5 current runtime dossier reader */
+.civ-reconfig-dossier-reader{display:grid;gap:1rem}
+.civ-reconfig-dossier-reader__head{display:flex;justify-content:space-between;gap:1rem;align-items:start}
+.civ-reconfig-dossier-reader__head h3{margin:.2rem 0 .35rem;font-size:clamp(1.8rem,3vw,2.45rem);color:#f0dda8}
+.civ-reconfig-dossier-reader__head p:last-child{max-width:58rem;color:var(--phi-text-secondary);line-height:1.65}
+.civ-reconfig-dossier-picker{display:grid;gap:.35rem;max-width:28rem}
+.civ-reconfig-dossier-picker select{padding:.65rem}
+.civ-reconfig-dossier-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.civ-reconfig-dossier-sections>section{min-width:0;padding:1rem;border:1px solid rgba(213,179,108,.18);border-radius:14px;background:rgba(4,18,29,.48)}
+.civ-reconfig-dossier-sections>section p{line-height:1.6}
+.civ-reconfig-dossier-sections ul,.civ-reconfig-dossier-sections ol{margin:.35rem 0 0;padding-left:1.15rem}
+.civ-reconfig-dossier-sections li{margin:.35rem 0;line-height:1.5}
+.civ-reconfig-dossier-sections button{display:grid;gap:.1rem;padding:0;border:0;background:transparent;color:#e9d8aa;text-align:left}
+.civ-reconfig-dossier-sections button time{font-size:.75rem;color:var(--phi-text-secondary)}
+.civ-reconfig-dossier-sections .knowledge-boundary{padding:.7rem .8rem;border-left:3px solid #d5b36c;background:rgba(213,179,108,.06);border-radius:8px}
+@media(max-width:800px){.civ-reconfig-dossier-sections{grid-template-columns:1fr}.civ-reconfig-dossier-reader__head{display:grid}.civ-reconfig-dossier-reader__head .knowledge-action{width:100%;justify-content:center}}
