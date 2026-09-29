@@ -305,45 +305,57 @@ async function hydrateDossierRuntimeReadout(host,dossier,l){
 function renderDossiers(host,data,l,state,store){
  const c=COPY[l],rows=data.dossiers?.dossiers||[],d=rows.find(x=>x.id===state.dossierId)||rows[0],zh=l==='zh-Hans';
  if(!d){host.textContent=c.unknown;return;}
+ const dt=v=>zh?(v?.zh||v?.['zh-Hans']||v?.en||''):(v?.en||v?.zh||v?.['zh-Hans']||'');
  const linkedCases=(data.cases?.cases||[]).filter(x=>(x.relatedDossiers||[]).includes(d.id)).sort((a,b)=>a.timeStart-b.timeStart);
  const admitted=d.dataClass==='CURRENT_DATA'&&Boolean(d.asOfDate||d.sourceDate);
+ const depth=d.knowledgeDepth||{};
  const currentConfig=admitted?[d.stage,d.scale,d.capacity,d.load,d.alignment].filter(v=>v&&String(v).toUpperCase()!=='UNKNOWN').map(v=>status(v,l)):[];
- const pressures=admitted?(d.pressureFields||[]).map(v=>valueLabel(v,l)):[];
- const directions=admitted?(d.direction||[]).map(v=>valueLabel(v,l)):[];
- const signals=admitted?(d.transitionSignals||[]).map(v=>valueLabel(v,l)):[];
- const unknown=(d.unknown||[]).map(v=>valueLabel(v,l));
- const recentHistorical=linkedCases.slice(-3);
- const knownBackground=uniq(recentHistorical.map(x=>status(x.successorRuntime,l)).filter(Boolean));
+ const currentPressures=admitted?(d.pressureFields||[]).map(v=>valueLabel(v,l)):[];
+ const recentHistorical=linkedCases.slice(-8);
  const latestHistorical=linkedCases.at(-1)||null;
+ const structuralPressures=depth.structuralPressures||[];
+ const reconfigurationAxes=depth.reconfigurationAxes||[];
+ const signals=depth.signals||[];
+ const unknowns=(depth.unknowns||[]).length?depth.unknowns:(d.unknown||[]).map(v=>({zh:valueLabel(v,'zh-Hans'),en:valueLabel(v,'en')}));
+ const projectionBoundary=admitted
+  ?(zh?'当前值已经接入，但条件性投影仍必须经过独立的方法与证据门槛；此页不自动把趋势写成预测。':'Current values are admitted, but conditional projection still requires a separate method and evidence gate; this page never turns a trend into a forecast automatically.')
+  :(zh?'未接入通过时效性验收的当前值，因此不生成数值预测；结构知识、历史形成和观察讯号仍正常呈现。':'No time-sensitive current values are admitted, so no numeric forecast is generated. Structural knowledge, historical formation, and observation signals remain available.');
  host.innerHTML='<section class="civ-reconfig-dossier-reader">'
-  +'<header class="civ-reconfig-dossier-reader__head"><div><p class="knowledge-eyebrow">'+esc(zh?'当前运行档案':'Current runtime dossier')+'</p><h3>'+esc(loc(d.entity,l))+'</h3><p>'+esc(zh?'历史形成、当前证据、正在发生的重组与未知边界分开呈现。':'Historical formation, current evidence, active reconfiguration, and unknown boundaries are kept separate.')+'</p></div><a class="knowledge-action" href="'+esc(askHref(l,'dossiers',{dossierId:d.id,entityId:d.id}))+'">'+esc(c.ask)+'</a></header>'
+  +'<header class="civ-reconfig-dossier-reader__head"><div><p class="knowledge-eyebrow">'+esc(zh?'运行档案':'Runtime dossier')+'</p><h3>'+esc(loc(d.entity,l))+'</h3><p>'+esc(zh?'把历史形成、结构知识、当前资料、观察讯号与未知边界分层呈现；没有最新数值不等于没有知识。':'Historical formation, structural knowledge, current data, observation signals, and unknowns are separated. Missing live values do not erase what is already known.')+'</p></div><a class="knowledge-action" href="'+esc(askHref(l,'dossiers',{dossierId:d.id,entityId:d.id}))+'">'+esc(c.ask)+'</a></header>'
   +'<label class="civ-reconfig-dossier-picker">'+esc(zh?'选择档案':'Select dossier')+'<select data-dossier-select>'+rows.map(x=>'<option value="'+esc(x.id)+'">'+esc(loc(x.entity,l))+'</option>').join('')+'</select></label>'
+  +(admitted?'<section class="civ-reconfig-current-overlay"><p class="knowledge-eyebrow">'+esc(zh?'CURRENT · 已验收当前资料':'CURRENT · Admitted current data')+'</p>'+(currentConfig.length?'<ul>'+currentConfig.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'')+(currentPressures.length?'<ul>'+currentPressures.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'')+'</section>':'')
   +'<div class="civ-reconfig-dossier-sections">'
-   +'<section><p class="knowledge-eyebrow">01 · '+esc(admitted?(zh?'当前结构':'Current configuration'):(zh?'已知结构背景':'Known structural background'))+'</p>'+(currentConfig.length?'<ul>'+currentConfig.map(v=>'<li>'+esc(v)+'</li>').join(''):(knownBackground.length?'<ul>'+knownBackground.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'')+'<p class="knowledge-boundary">'+esc(zh?'当前资料层尚未验收；这里先显示已经登记的历史结构，不把历史状态冒充为今天。':'The current-data layer has not yet been admitted. This section shows registered historical structures without presenting them as today’s state.')+'</p>'+(latestHistorical?'<p><strong>'+esc(zh?'最近已登记历史节点':'Latest registered historical node')+'</strong><br>'+esc(latestHistorical.timeLabel)+' · '+esc(zh?latestHistorical.titleZh:latestHistorical.titleEn)+'</p>':'')+'</section>'
-   +'<section><p class="knowledge-eyebrow">02 · '+esc(zh?'历史形成':'Historical formation')+'</p>'+(linkedCases.length?'<ol>'+linkedCases.slice(-8).map(x=>'<li><button type="button" data-case="'+esc(x.id)+'"><time>'+esc(x.timeLabel)+'</time><span>'+esc(zh?x.titleZh:x.titleEn)+'</span></button></li>').join('')+'</ol>':'<p>'+esc(zh?'尚无已登记历史案例。':'No linked historical cases are registered.')+'</p>')+'</section>'
-   +'<section><p class="knowledge-eyebrow">03 · '+esc(zh?'当前压力':'Current pressures')+'</p>'+(pressures.length?'<ul>'+pressures.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'当前压力需要经过时效性资料验收后才显示。':'Current pressures appear only after time-sensitive evidence is admitted.')+'</p>')+'</section>'
-   +'<section><p class="knowledge-eyebrow">04 · '+esc(zh?'正在重组':'Active reconfiguration')+'</p>'+(directions.length?'<ul>'+directions.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'目前不从历史案例推断当代方向。':'Contemporary direction is not inferred from historical cases.')+'</p>')+'</section>'
-   +'<section><p class="knowledge-eyebrow">05 · '+esc(zh?'已观察讯号':'Observed signals')+'</p>'+(signals.length?'<ul>'+signals.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'尚无已验收的当前讯号。':'No current signals have been admitted yet.')+'</p>')+'</section>'
-   +'<section><p class="knowledge-eyebrow">06 · '+esc(zh?'尚未知':'Not yet known')+'</p><ul>'+(unknown.length?unknown.map(v=>'<li>'+esc(v)+'</li>').join(''):'<li>'+esc(c.unknown)+'</li>')+'</ul></section>'
-   +'<section><p class="knowledge-eyebrow">07 · '+esc(zh?'条件性投影':'Conditional projection')+'</p><p>'+esc(admitted?(zh?'只有在证据和方法满足投影门槛时才显示条件性投影。':'Conditional projections appear only when evidence and method gates are satisfied.'):(zh?'当前资料未获准，因此不生成投影。':'Current data is not admitted, so no projection is generated.'))+'</p></section>'
+   +'<section><p class="knowledge-eyebrow">01 · '+esc(zh?'结构底盘':'Structural runtime')+'</p><p>'+esc(dt(depth.structuralProfile)|| (zh?'结构资料正在整理。':'Structural profile is being prepared.'))+'</p>'+(latestHistorical?'<p class="cx-meta"><strong>'+esc(zh?'最近历史节点':'Latest historical node')+'</strong><br>'+esc(latestHistorical.timeLabel)+' · '+esc(zh?latestHistorical.titleZh:latestHistorical.titleEn)+'</p>':'')+'<p class="knowledge-boundary">'+esc(zh?'此处为结构知识，不冒充 2026 即时统计值。':'This is structural knowledge, not a substitute for live 2026 statistics.')+'</p></section>'
+   +'<section><p class="knowledge-eyebrow">02 · '+esc(zh?'历史形成':'Historical formation')+'</p>'+(recentHistorical.length?'<ol>'+recentHistorical.map(x=>'<li><button type="button" data-case="'+esc(x.id)+'"><time>'+esc(x.timeLabel)+'</time><span>'+esc(zh?x.titleZh:x.titleEn)+'</span></button><p class="cx-meta">'+esc(valueLabel(x.priorRuntime,l))+' → '+esc(valueLabel(x.successorRuntime,l))+'</p></li>').join('')+'</ol>':'<p>'+esc(zh?'尚无已登记历史案例。':'No linked historical cases are registered.')+'</p>')+'</section>'
+   +'<section><p class="knowledge-eyebrow">03 · '+esc(zh?'结构性压力':'Structural pressures')+'</p>'+(structuralPressures.length?'<ul>'+structuralPressures.map(v=>'<li>'+esc(dt(v))+'</li>').join('')+'</ul>':'<p>'+esc(zh?'尚无结构压力条目。':'No structural pressure entries are registered.')+'</p>')+(admitted&&currentPressures.length?'<p class="cx-meta">'+esc(zh?'上方 current overlay 另列已经验收的当前压力。':'The current overlay above separately lists admitted current pressures.')+'</p>':'')+'</section>'
+   +'<section><p class="knowledge-eyebrow">04 · '+esc(zh?'正在重组的结构轴':'Observed reconfiguration axes')+'</p>'+(reconfigurationAxes.length?'<ul>'+reconfigurationAxes.map(v=>'<li>'+esc(dt(v))+'</li>').join('')+'</ul>':'<p>'+esc(zh?'尚无已登记结构轴。':'No registered reconfiguration axes.')+'</p>')+'<p class="knowledge-boundary">'+esc(zh?'结构轴描述已登记的变化方向，不等于短期预测。':'These axes describe registered directions of change; they are not short-term forecasts.')+'</p></section>'
+   +'<section><p class="knowledge-eyebrow">05 · '+esc(zh?'观察讯号':'Observation signals')+'</p>'+(signals.length?'<ul>'+signals.map(v=>'<li>'+esc(dt(v))+'</li>').join('')+'</ul>':'<p>'+esc(zh?'尚无已登记观察讯号。':'No observation signals are registered.')+'</p>')+'<p class="cx-meta">'+esc(zh?'讯号用于持续观察，不自动转化为 CURRENT_DATA。':'Signals are observation targets and do not automatically become CURRENT_DATA.')+'</p></section>'
+   +'<section><p class="knowledge-eyebrow">06 · '+esc(zh?'尚未知':'Unknown boundary')+'</p><ul>'+(unknowns.length?unknowns.map(v=>'<li>'+esc(dt(v))+'</li>').join(''):'<li>'+esc(c.unknown)+'</li>')+'</ul></section>'
+   +'<section><p class="knowledge-eyebrow">07 · '+esc(zh?'条件性投影':'Conditional projection')+'</p><p>'+esc(projectionBoundary)+'</p></section>'
   +'</div>'
   +'<div class="civ-reconfig-actions"><label><input type="checkbox" data-dossier-compare="'+esc(d.id)+'" '+(state.compareDossierIds.includes(d.id)?'checked':'')+'> '+esc(c.compareRuntime)+'</label></div>'
   +'</section>';
  const sel=host.querySelector('[data-dossier-select]');selectValue(sel,d.id);sel.onchange=e=>set(store,{dossierId:e.target.value},'dossier-select');
  host.querySelectorAll('[data-case]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'cases',primaryCaseId:btn.dataset.case},'dossier-case'));
- host.querySelector('[data-dossier-compare]')?.addEventListener('change',e=>{const s=new Set(state.compareDossierIds);e.target.checked?s.add(e.target.dataset.dossierCompare):s.delete(e.target.dataset.dossierCompare);set(store,{compareDossierIds:[...s].slice(0,4)},'dossier-compare');});
+ host.querySelector('[data-dossier-compare]')?.addEventListener('change',e=>{const setIds=new Set(state.compareDossierIds);e.target.checked?setIds.add(e.target.dataset.dossierCompare):setIds.delete(e.target.dataset.dossierCompare);set(store,{compareDossierIds:[...setIds].slice(0,4)},'dossier-compare');});
 }
 function renderLived(host,data,l,state,store){
  const c=COPY[l],dims=data.lived?.dimensions||[],dossiers=data.dossiers?.dossiers||[],dossier=dossiers.find(d=>d.id===state.dossierId)||dossiers[0],zh=l==='zh-Hans';
+ const dt=v=>zh?(v?.zh||v?.['zh-Hans']||v?.en||''):(v?.en||v?.zh||v?.['zh-Hans']||'');
  const admitted=dossier?.dataClass==='CURRENT_DATA'&&Boolean(dossier?.asOfDate||dossier?.sourceDate);
+ const depth=dossier?.knowledgeDepth?.lived||{};
  const preferred=['livingEnvironment','employmentOpportunity','incomeCostBalance','housingPressure','personalFutureCapacity'];
  const keyDims=preferred.map(id=>dims.find(d=>d.id===id)).filter(Boolean).slice(0,5);
  const otherDims=dims.filter(d=>!preferred.includes(d.id));
- const dimCard=dim=>{const value=dossier?.livedReality?.[dim.id],guide=loc(LIVED_GUIDE[dim.id],l);const stateText=admitted?status(value?.state,l):null;return '<article class="civ-reconfig-lived-card"><p class="knowledge-eyebrow">'+esc(zh?dim.labelZh:dim.labelEn)+'</p>'+(stateText?'<h4>'+esc(stateText)+'</h4>':'')+'<p>'+esc(guide||'')+'</p>'+(admitted?'<button type="button" data-dim="'+esc(dim.id)+'">'+esc(zh?'查看细节':'View detail')+'</button>':'')+'</article>';};
+ const dimCard=dim=>{
+  const value=dossier?.livedReality?.[dim.id],deep=depth[dim.id]||{},guide=dt(deep)||loc(LIVED_GUIDE[dim.id],l),observe=zh?(deep.observeZh||[]):(deep.observeEn||[]);
+  const current=admitted?status(value?.state,l):null;
+  return '<article class="civ-reconfig-lived-card"><p class="knowledge-eyebrow">'+esc(zh?dim.labelZh:dim.labelEn)+'</p>'+(current?'<h4>'+esc(current)+'</h4>':'')+'<p>'+esc(guide||'')+'</p>'+(observe.length?'<div class="civ-reconfig-chip-row">'+observe.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>':'')+(admitted?'<button type="button" data-dim="'+esc(dim.id)+'">'+esc(zh?'查看当前资料细节':'View current-data detail')+'</button>':'')+'</article>';
+ };
  host.innerHTML='<section class="civ-reconfig-lived-reader">'
-  +'<header><p class="knowledge-eyebrow">'+esc(zh?'日常现实':'Lived reality')+'</p><h3>'+esc(loc(dossier?.entity,l)||c.unknown)+'</h3><p>'+esc(zh?'重组只有落到居住、工作、成本、压力与未来容量时，才真正进入人的现实。':'Reconfiguration reaches lived reality through housing, work, cost pressure, daily load, and future capacity.')+'</p></header>'
+  +'<header><p class="knowledge-eyebrow">'+esc(zh?'日常现实':'Lived reality')+'</p><h3>'+esc(loc(dossier?.entity,l)||c.unknown)+'</h3><p>'+esc(zh?'这里读取宏观重组如何穿过城市、工作、家庭预算、住房与行动空间，最终变成个人每天能够感觉到的现实。':'This layer reads how macro reconfiguration passes through cities, work, household budgets, housing, and room for action until it becomes everyday reality.')+'</p></header>'
   +'<label class="civ-reconfig-dossier-picker">'+esc(c.selectDossier)+'<select data-lived-dossier>'+dossiers.map(d=>'<option value="'+esc(d.id)+'">'+esc(loc(d.entity,l))+'</option>').join('')+'</select></label>'
-  +(!admitted?'<div class="knowledge-boundary"><strong>'+esc(zh?'当前资料尚未验收':'Current evidence not yet admitted')+'</strong><p>'+esc(zh?'因此这些维度只显示为阅读框架，不填入推测值。':'These dimensions are shown as a reading framework only; no speculative values are filled in.')+'</p></div>':'')
+  +(!admitted?'<div class="knowledge-boundary"><strong>'+esc(zh?'当前数值层尚未验收':'Current-value layer not yet admitted')+'</strong><p>'+esc(zh?'下方仍显示已登记的结构传导关系与观察维度；只有即时数值保持为空。':'The registered transmission mechanisms and observation dimensions remain visible below; only live values stay unfilled.')+'</p></div>':'')
   +'<div class="civ-reconfig-lived-key">'+keyDims.map(dimCard).join('')+'</div>'
   +'<details class="civ-reconfig-lived-more"><summary>'+esc(zh?'查看其余日常现实维度':'View other lived-reality dimensions')+'</summary><div class="civ-reconfig-lived-list">'+otherDims.map(dim=>'<span>'+esc(zh?dim.labelZh:dim.labelEn)+'</span>').join('')+'</div></details>'
   +(admitted&&state.livedRealityDimensionId?(()=>{const dim=dims.find(d=>d.id===state.livedRealityDimensionId),value=dossier?.livedReality?.[state.livedRealityDimensionId];return dim?'<section class="civ-reconfig-lived-detail"><p class="knowledge-eyebrow">'+esc(zh?dim.labelZh:dim.labelEn)+'</p><h4>'+esc(status(value?.state,l))+'</h4><a class="knowledge-action" href="'+esc(askHref(l,'lived',{dossierId:dossier?.id,livedRealityDimensionId:dim.id,entityId:dim.id}))+'">'+esc(c.ask)+'</a></section>':'';})():'')
