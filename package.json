@@ -2605,10 +2605,11 @@
     "check:civilization-atlas:fr5-j-remove-l2-l6-templates": "node scripts/check-civilization-atlas-fr5-j-remove-l2-l6-templates.mjs",
     "check:bazi-s06-market-preflight": "node scripts/check-bazi-s06-market-preflight.mjs",
     "check:b6-fr1-reconfiguration-customer-reader": "node scripts/check-b6-fr1-reconfiguration-customer-reader.mjs",
-    "check:book6-reconfiguration-customer-cutover": "npm run check:b6-web-f:cutover && npm run check:b6-fr1-reconfiguration-customer-reader && npm run check:b6-fr2-projection-repair",
+    "check:book6-reconfiguration-customer-cutover": "npm run check:b6-web-f:cutover && npm run check:b6-fr1-reconfiguration-customer-reader && npm run check:b6-fr2-projection-repair && npm run check:b6-fr3-dossier-lived-depth",
     "check:b6-fr1-human-review-readiness": "node scripts/check-b6-fr1-human-review-readiness.mjs",
     "book6:b6-fr1:review": "node -e \"console.log('Open tools/review/B6-FR1-RECONFIGURATION-HUMAN-REVIEW.html through your local/site server.')\"",
-    "check:b6-fr2-projection-repair": "node scripts/check-b6-fr2-projection-repair.mjs"
+    "check:b6-fr2-projection-repair": "node scripts/check-b6-fr2-projection-repair.mjs",
+    "check:b6-fr3-dossier-lived-depth": "node scripts/check-b6-fr3-dossier-lived-depth.mjs"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
