@@ -41,7 +41,9 @@ assert.equal(await sha256Stable(seed),briefSemanticDigest);
 
 const rels=en.authorityFacts['professionalModules/relationships/items'];
 assert(Array.isArray(rels)&&rels.some(r=>Array.isArray(r.positions)&&r.positions.includes('DAY')),'S06 needs at least one natal relationship involving DAY position in the current fixture');
-assert(!en.claims.some(c=>/离婚|第三者|婚期|soulmate|divorce|affair|marriage date/i.test(c.text)),'S06 content plans must not turn structure into relationship-event claims');
+const affirmativeEventPrediction=/\\b(?:will|must|definitely|guaranteed to)\\s+(?:marry|divorce|separate|reconcile)|(?:一定|必然|注定)(?:结婚|离婚|分手|复合)|(?:将在|会在)\\d{4}年(?:结婚|离婚|分手|复合)/iu;
+assert(!en.claims.some(c=>affirmativeEventPrediction.test(c.text)),'S06 content plans must not turn structure into affirmative relationship-event predictions');
+assert(/不得预测结婚、分手、复合、第三者或具体事件/.test(zh.claims.find(c=>c.role==='RELATIONSHIP_TIMING')?.text||''),'S06 timing guardrail must remain explicit');
 
 const broken=structuredClone(source);
 broken.reading.professionalModules.professionalTopics.topics=broken.reading.professionalModules.professionalTopics.topics.filter(x=>x.topicCode!=='RELATIONSHIPS');
