@@ -1037,3 +1037,37 @@
 .civ-reconfig-lived-detail{padding:1rem;border:1px solid rgba(213,179,108,.25);border-radius:14px;background:rgba(5,24,39,.4)}
 @media(max-width:1100px){.civ-reconfig-lived-key{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:650px){.civ-reconfig-lived-key{grid-template-columns:1fr}}
+
+
+/* B6-FR2-B contrast and action normalization */
+[data-atlas-mode="reconfiguration"]{--b6-text:#eef3f6;--b6-text-soft:#c7d2da;--b6-gold:#f0d997;--b6-border:rgba(240,217,151,.28)}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-shell,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-card,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-case-reader,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-window-reader,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-shift-reader,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-reader,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-lived-reader{color:var(--b6-text)}
+[data-atlas-mode="reconfiguration"] p,
+[data-atlas-mode="reconfiguration"] li,
+[data-atlas-mode="reconfiguration"] dd,
+[data-atlas-mode="reconfiguration"] .cx-meta,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-mini-chain span{color:var(--b6-text-soft)}
+[data-atlas-mode="reconfiguration"] h2,
+[data-atlas-mode="reconfiguration"] h3,
+[data-atlas-mode="reconfiguration"] h4,
+[data-atlas-mode="reconfiguration"] strong,
+[data-atlas-mode="reconfiguration"] dt,
+[data-atlas-mode="reconfiguration"] .knowledge-eyebrow{color:var(--b6-gold)}
+[data-atlas-mode="reconfiguration"] .knowledge-boundary{color:#e4e9ed}
+[data-atlas-mode="reconfiguration"] button,
+[data-atlas-mode="reconfiguration"] .knowledge-action,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-chip-row>a{
+ min-height:42px;border:1px solid rgba(240,217,151,.42);border-radius:999px;background:#0a2233;color:#f4e3ae;font-weight:650;text-decoration:none
+}
+[data-atlas-mode="reconfiguration"] button:hover,
+[data-atlas-mode="reconfiguration"] .knowledge-action:hover,
+[data-atlas-mode="reconfiguration"] .civ-reconfig-chip-row>a:hover{background:#123047}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-chip-row>*{margin:.2rem;padding:.42rem .7rem}
+[data-atlas-mode="reconfiguration"] select,
+[data-atlas-mode="reconfiguration"] input{background:#061724;color:#f1f4f6;border-color:rgba(240,217,151,.35)}
