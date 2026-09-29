@@ -91,7 +91,7 @@ export const RECONFIG_ATLAS_LAYERS = Object.freeze([
   'overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','dossiercompare'
 ]);
 export const DEFAULT_RECONFIGURATION_ATLAS_STATE = Object.freeze({
-  version:'2.0.0',activeLayer:'overview',query:'',caseSearch:'',primaryCaseId:null,compareCaseIds:[],
+  version:'2.0.0',activeLayer:'cases',query:'',caseSearch:'',primaryCaseId:null,compareCaseIds:[],
   windowId:null,snapshotId:null,snapshotLayer:'political',dossierId:null,compareDossierIds:[],
   livedRealityDimensionId:null,sectionId:null,regionId:null,caseType:null,filterWindowId:null,
   triggerQuery:'',pressureQuery:'',changeFilter:null,casePage:1,searchPage:1,locale:'en'
@@ -100,7 +100,7 @@ const RECONFIG_SNAPSHOT_LAYERS=new Set(['political','population','industry','ene
 const positivePage=v=>{const n=Math.trunc(Number(v));return Number.isFinite(n)&&n>0?Math.min(n,99):1;};
 export function normalizeReconfigurationAtlasState(input={}){
  const locale=LOCALES.has(input.locale)?input.locale:'en';
- const activeLayer=RECONFIG_ATLAS_LAYERS.includes(input.activeLayer)?input.activeLayer:'overview';
+ const activeLayer=RECONFIG_ATLAS_LAYERS.includes(input.activeLayer)?input.activeLayer:'cases';
  return {
   version:'2.0.0',activeLayer,query:String(input.query??'').slice(0,160),caseSearch:String(input.caseSearch??'').slice(0,160),
   primaryCaseId:asString(input.primaryCaseId),compareCaseIds:asArray(input.compareCaseIds).slice(0,4),
