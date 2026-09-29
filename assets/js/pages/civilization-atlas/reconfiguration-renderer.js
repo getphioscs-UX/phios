@@ -172,7 +172,7 @@ function caseDetail(x,l,data,store){
    +'<section><span>05</span><p class="knowledge-eyebrow">'+esc(zh?'可观察结果':'Observed consequences')+'</p>'+(consequences.length?'<ul>'+consequences.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'本案例不在没有证据时补写量化结果。':'No quantitative outcome is filled when evidence is not admitted.')+'</p>')+'</section>'
   +'</div>'
   +'<details class="civ-reconfig-evidence"><summary>'+esc(zh?'证据与未知':'Evidence & unknown')+'</summary><div><p><strong>'+esc(zh?'知识状态':'Knowledge state')+'</strong> '+badge(x.knowledgeState||x.dataClass,l)+'</p>'+(evidence.length?'<ul>'+evidence.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'')+(unknown.length?'<div class="knowledge-boundary"><strong>'+esc(zh?'仍未知':'Still unknown')+'</strong><ul>'+unknown.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></div>':'')+'</div></details>'
-  +'<div class="civ-reconfig-chip-row">'+(x.relatedWindows||[]).map(id=>'<button type="button" data-window="'+esc(id)+'">'+esc(zh?'查看相关重组窗口':'Related window')+'</button>').join('')+(x.relatedSnapshots||[]).map(id=>'<button type="button" data-snapshot="'+esc(id)+'">'+esc(zh?'查看相关世界横切面':'Related world shift')+'</button>').join('')+'</div>'
+  +'<div class="civ-reconfig-chip-row">'+(x.relatedWindows||[]).map(id=>'<button type="button" data-window="'+esc(id)+'">'+esc(zh?'查看相关重组窗口':'Related window')+'</button>').join('')+(x.relatedSnapshots||[]).map(id=>'<button type="button" data-snapshot="'+esc(id)+'">'+esc(zh?'查看相关世界横切面':'Related world shift')+'</button>').join('')+(x.relatedFigures||[]).map(id=>'<a href="/figure?id='+encodeURIComponent(id)+'">'+esc(zh?'相关图解':'Related figure')+'</a>').join('')+'</div>'
   +'</section>';
 }
 function renderCases(host,data,l,state,store){
