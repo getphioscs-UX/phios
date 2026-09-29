@@ -15,9 +15,10 @@ const sha=v=>crypto.createHash('sha256').update(stable(v)).digest('hex');
 const cases=read(CASES),results=read(RESULTS),acceptance=read(ACCEPTANCE);
 assert.equal(cases.requiredCaseCount,48);
 assert.equal(results.requiredCaseCount,48);
-assert.equal(results.acceptedCaseCount,45,'Expected 45 inherited accepts before D11 delta acceptance');
-assert.equal(results.pendingCaseCount,3,'Expected exactly 3 pending D11 delta cases');
 assert.equal(results.rejectedCaseCount,0);
+const preDeltaState=results.acceptedCaseCount===45&&results.pendingCaseCount===3;
+const alreadyAcceptedState=results.acceptedCaseCount===48&&results.pendingCaseCount===0;
+assert(preDeltaState||alreadyAcceptedState,'Expected either 45 inherited + 3 pending or an idempotent 48/48 accepted state');
 
 const caseById=new Map(cases.cases.map(x=>[x.caseId,x]));
 const resultById=new Map(results.results.map(x=>[x.caseId,x]));
@@ -26,7 +27,8 @@ for(const id of TARGETS){
  assert(c, `Missing review case ${id}`);
  assert(r, `Missing review result ${id}`);
  assert(c.reviewCaseDigest&&/^[a-f0-9]{64}$/.test(c.reviewCaseDigest),`Missing digest for ${id}`);
- assert(dims.some(k=>r[k]!==true),`${id} is not pending`);
+ if(preDeltaState)assert(dims.some(k=>r[k]!==true),`${id} is not pending`);
+ if(alreadyAcceptedState)assert(dims.every(k=>r[k]===true),`${id} lost accepted dimensions`);
  const drivers=(c.coordinate?.ECR_DRIVER_PRIORITY||[]).slice().sort((a,b)=>(a.meta?.rank||99)-(b.meta?.rank||99));
  assert.equal(drivers[0]?.code,'D11',`${id} must be D11-primary`);
  const unit=(c.interpretationUnits||[]).find(u=>(u.ruleRefs||[]).includes('CX-COMP-ECR-DRIVER-PRIORITY-v1'));
@@ -51,6 +53,14 @@ const receiptSeed={
 };
 const receipt={...receiptSeed,acceptanceDigest:sha(receiptSeed)};
 fs.writeFileSync(RECEIPT,JSON.stringify(receipt,null,2)+'\n');
+
+// Bind every retained/inherited acceptance to the current human-review content digest.
+for(const currentCase of cases.cases){
+ const r=resultById.get(currentCase.caseId);
+ assert(r,`Missing review result ${currentCase.caseId}`);
+ assert(currentCase.reviewCaseDigest&&/^[a-f0-9]{64}$/.test(currentCase.reviewCaseDigest),`Missing digest for ${currentCase.caseId}`);
+ r.reviewCaseDigest=currentCase.reviewCaseDigest;
+}
 
 for(const id of TARGETS){
  const r=resultById.get(id);
@@ -85,6 +95,6 @@ acceptance.completed.W33R.d11RecoveryRetired=true;
 fs.writeFileSync(ACCEPTANCE,JSON.stringify(acceptance,null,2)+'\n');
 
 console.log('PASS: D11 Earth delta owner acceptance applied.');
-console.log('  45 inherited + 3 delta accepted = 48/48.');
+console.log('  45 inherited + 3 delta accepted = 48/48; all 48 results are reviewCaseDigest-bound.');
 console.log('  Receipt: '+RECEIPT);
 console.log('  Production admission remains a separate R5 step.');
