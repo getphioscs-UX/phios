@@ -47,13 +47,22 @@ const expectedCapabilities=[
 ];
 assert.deepEqual(ECR_BOOK_CORE_THEORY_RUNTIME.capabilities.map(x=>[x.id,x.label,x.bookZh]),expectedCapabilities);
 assert.deepEqual(RUNTIME_CAPABILITIES.map(x=>[x.id,x.label]),expectedCapabilities.map(x=>x.slice(0,2)));
-const expectedDrivers=[
+const expectedBookAlignedDrivers=[
   ['D1','Solar','太阳驱动'],['D2','Lunar','月亮驱动'],['D3','Mercurial','水星驱动'],['D4','Venusian','金星驱动'],
   ['D5','Martial','火星驱动'],['D6','Jovian','木星驱动'],['D7','Saturnian','土星驱动'],['D8','Uranian','天王星驱动'],
-  ['D9','Neptunian','海王星驱动'],['D10','Plutonian','冥王星驱动'],['D11','Chiron','凯龙星驱动'],['D12','Nodal','交点驱动']
+  ['D9','Neptunian','海王星驱动'],['D10','Plutonian','冥王星驱动'],['D11','Earth','地球驱动'],['D12','Nodal','交点驱动']
 ];
-assert.deepEqual(ECR_BOOK_CORE_THEORY_RUNTIME.drivers.map(x=>[x.id,x.label,x.zh]),expectedDrivers);
-assert.deepEqual(RUNTIME_DRIVERS.map(x=>[x.id,x.label]),expectedDrivers.map(x=>x.slice(0,2)));
+// R7 owner correction changes the Book-aligned ECR projection only.
+// PDS-W0 protected predecessor runtime remains immutable and may still expose
+// the historical D11 Chiron display label until a separately admitted successor
+// explicitly migrates that protected owner.
+const expectedProtectedRuntimeDrivers=[
+  ['D1','Solar'],['D2','Lunar'],['D3','Mercurial'],['D4','Venusian'],
+  ['D5','Martial'],['D6','Jovian'],['D7','Saturnian'],['D8','Uranian'],
+  ['D9','Neptunian'],['D10','Plutonian'],['D11','Chiron'],['D12','Nodal']
+];
+assert.deepEqual(ECR_BOOK_CORE_THEORY_RUNTIME.drivers.map(x=>[x.id,x.label,x.zh]),expectedBookAlignedDrivers);
+assert.deepEqual(RUNTIME_DRIVERS.map(x=>[x.id,x.label]),expectedProtectedRuntimeDrivers);
 
 assert.deepEqual(motion.entries.map(x=>[x.motionId,x.trigramCode,x.labelZhHans]),[
   ['M1','KUN','承载运动'],['M2','ZHEN','启动运动'],['M3','KAN','流动运动'],['M4','XUN','渗透运动'],
