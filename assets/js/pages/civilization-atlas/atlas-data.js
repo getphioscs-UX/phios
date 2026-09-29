@@ -33,7 +33,14 @@ export async function loadReconfigurationSections(){return getJson('/content/civ
 export async function loadReconfigurationCases(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-case-registry-v1.json');}
 export async function loadReconfigurationWindows(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-windows-v1.json');}
 export async function loadReconfigurationSnapshots(){return getJson('/content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json');}
-export async function loadContemporaryRuntimeDossiers(){return getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json');}
+export async function loadContemporaryRuntimeDossiers(){
+  const [base,depth]=await Promise.all([
+    getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json'),
+    getJson('/content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json')
+  ]);
+  const overlay=new Map((depth.dossiers||[]).map(x=>[x.id,x]));
+  return {...base,knowledgeDepthContract:depth.contract,knowledgeDepthVersion:depth.version,dossiers:(base.dossiers||[]).map(d=>({...d,knowledgeDepth:overlay.get(d.id)||null}))};
+}
 export async function loadLivedRealityDimensions(){return getJson('/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json');}
 
 export async function loadReconfigurationRelationships(){return getJson('/content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json');}
