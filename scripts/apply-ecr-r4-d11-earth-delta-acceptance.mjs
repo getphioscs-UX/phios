@@ -34,8 +34,13 @@ for(const id of TARGETS){
  const unit=(c.interpretationUnits||[]).find(u=>(u.ruleRefs||[]).includes('CX-COMP-ECR-DRIVER-PRIORITY-v1'));
  assert(unit,`${id} driver interpretation missing`);
  const text=JSON.stringify(unit);
- assert(/Embodiment|具身/.test(text),`${id} does not contain Earth/Embodiment meaning`);
- assert(!/Recovery|恢复容量|凯龙星驱动|Chiron/.test(text),`${id} retains retired D11 Recovery/Chiron meaning`);
+ assert.equal(drivers[0]?.meta?.label,'Earth',`${id} D11 primary identity is not Earth`);
+ assert.equal(drivers[0]?.meta?.labelZhHans,'地球驱动',`${id} D11 Chinese identity is not 地球驱动`);
+ const expectedDefinition=c.locale==='zh-Hans'
+  ?'把方向、责任与回应落实到载体所处的具体现实与条件之中。'
+  :'Grounds orientation, responsibility and response into embodied reality and concrete conditions.';
+ assert(String(unit.constructiveExpression||'').includes(expectedDefinition),`${id} does not contain the admitted Earth/Embodiment definition`);
+ assert(!/Recovery|Restores capacity after load|恢复容量|凯龙星驱动|Chiron/.test(text),`${id} retains retired D11 Recovery/Chiron meaning`);
  assert((unit.meaningRefs||[]).includes('ECR-D-D11@1.0.0'),`${id} lost D11 meaning lineage`);
 }
 
