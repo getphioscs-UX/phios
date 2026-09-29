@@ -58,6 +58,7 @@ const book6Atlas = Object.freeze({
     },
     knowledgeState: {
       CANONICAL_HISTORY: 'Historical', HISTORICAL_RECONSTRUCTION: 'Historical Reconstruction',
+      STRUCTURAL_KNOWLEDGE: 'Structural Knowledge', OBSERVED_SIGNAL: 'Observed Signal',
       CURRENT_DATA: 'Current', DERIVED_RUNTIME_READOUT: 'Derived Runtime Readout',
       CONDITIONAL_PROJECTION: 'Projection', UNKNOWN: 'Unknown'
     },
