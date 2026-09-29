@@ -58,6 +58,7 @@ const book6Atlas = Object.freeze({
     },
     knowledgeState: {
       CANONICAL_HISTORY: '已发生历史', HISTORICAL_RECONSTRUCTION: '历史重建',
+      STRUCTURAL_KNOWLEDGE: '结构知识', OBSERVED_SIGNAL: '观察讯号',
       CURRENT_DATA: '当前资料', DERIVED_RUNTIME_READOUT: '推导运行读数',
       CONDITIONAL_PROJECTION: '条件性投影', UNKNOWN: '未知'
     },
