@@ -127,7 +127,7 @@ function pager(host,page,count,onPage,l){
 }
 function renderOverview(host,data,l,store){
  const c=COPY[l],cards=[[c.cases,data.cases?.cases?.length||0,'cases'],[c.timeline,data.windows?.windows?.length||0,'timeline'],[c.snapshots,data.snapshots?.snapshots?.length||0,'snapshots'],[c.dossiers,data.dossiers?.dossiers?.length||0,'dossiers'],[c.lived,data.lived?.dimensions?.length||0,'lived']];
- host.innerHTML=`<div class="civ-reconfig-overview">${cards.map(([label,n,tab])=>`<button class="civ-reconfig-card civ-reconfig-overview-card" data-open="${tab}"><strong>${esc(String(n))}</strong><span>${esc(label)}</span></button>`).join('')}</div><section class="civ-reconfig-state-legend"><h3>${esc(COPY[l].dataState)}</h3><div class="civ-reconfig-chip-row">${['CANONICAL_HISTORY','HISTORICAL_RECONSTRUCTION','CURRENT_DATA','DERIVED_RUNTIME_READOUT','CONDITIONAL_PROJECTION','UNKNOWN'].map(s=>badge(s,l)).join('')}</div><p>${esc(c.noRank)}</p></section>`;
+ host.innerHTML=`<div class="civ-reconfig-overview">${cards.map(([label,n,tab])=>`<button class="civ-reconfig-card civ-reconfig-overview-card" data-open="${tab}"><strong>${esc(String(n))}</strong><span>${esc(label)}</span></button>`).join('')}</div><section class="civ-reconfig-state-legend"><h3>${esc(COPY[l].dataState)}</h3><div class="civ-reconfig-chip-row">${['CANONICAL_HISTORY','HISTORICAL_RECONSTRUCTION','STRUCTURAL_KNOWLEDGE','OBSERVED_SIGNAL','CURRENT_DATA','DERIVED_RUNTIME_READOUT','CONDITIONAL_PROJECTION','UNKNOWN'].map(s=>badge(s,l)).join('')}</div><p>${esc(c.noRank)}</p></section>`;
  host.querySelectorAll('[data-open]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:btn.dataset.open},'overview-nav'));
 }
 function renderSearch(host,data,l,state,store){
