@@ -160,6 +160,14 @@ function caseDetail(x,l,data,store){
   ...(x.historicalLegacy||[]).map(v=>(zh?'长期遗产：':'Legacy: ')+valueLabel(v,l))
  ];
  const prior=status(x.priorRuntime,l),trigger=status(x.trigger,l),pressure=listText(x.pressureField,l),successor=status(x.successorRuntime,l);
+ const scopeTypes=(x.caseTypes||[]).map(v=>typeLabel(v,l));
+ const scopeSections=(x.relatedBookSections||[]).slice(0,4);
+ const changeFallback=zh
+  ?`已确认本案例属于${scopeTypes.join('、')||'结构重组'}范围，并连接${scopeSections.length?scopeSections.join('、'):'相关书稿段落'}；未获证据支持的边界、经济、知识、技术与军事变化继续保留，不作推断。`
+  :`This case is confirmed within ${scopeTypes.join(', ')||'structural reconfiguration'} and is linked to ${scopeSections.length?scopeSections.join(', '):'the relevant manuscript scope'}. Boundary, economic, knowledge, technology, and military changes remain unfilled where evidence is not admitted.`;
+ const consequenceFallback=zh
+  ?`已确认该窗口形成了“${successor}”这一继任结构；关于规模、持续性和跨区域影响的量化结果，在证据不足时不补写。`
+  :`The registered successor configuration is “${successor}”. Quantitative claims about scale, persistence, or cross-regional effects are not filled where evidence is insufficient.`;
  const evidence=(x.evidenceNotes||[]).map(v=>valueLabel(v,l));
  const unknown=(x.unknown||[]).map(v=>valueLabel(v,l));
  return '<section class="civ-reconfig-case-reader" data-reconfig-case-reader="'+esc(x.id)+'">'
@@ -167,12 +175,12 @@ function caseDetail(x,l,data,store){
   +'<div class="civ-reconfig-chain">'
    +'<section><span>01</span><p class="knowledge-eyebrow">'+esc(zh?'原有结构':'Prior configuration')+'</p><h4>'+esc(prior)+'</h4></section>'
    +'<section><span>02</span><p class="knowledge-eyebrow">'+esc(zh?'触发与压力':'Trigger & pressure')+'</p><h4>'+esc(trigger)+'</h4><p>'+esc(pressure)+'</p></section>'
-   +'<section><span>03</span><p class="knowledge-eyebrow">'+esc(zh?'结构变化':'Structural change')+'</p>'+(changes?'<dl>'+changes+'</dl>':'<p>'+esc(zh?'具体变化维度仍按证据边界保留。':'Specific change dimensions remain governed by the evidence boundary.')+'</p>')+'</section>'
+   +'<section><span>03</span><p class="knowledge-eyebrow">'+esc(zh?'结构变化':'Structural change')+'</p>'+(changes?'<dl>'+changes+'</dl>':'<p>'+esc(changeFallback)+'</p>')+'</section>'
    +'<section><span>04</span><p class="knowledge-eyebrow">'+esc(zh?'继任结构':'Successor configuration')+'</p><h4>'+esc(successor)+'</h4><p>'+esc(zh?'登记窗口：':'Registry window: ')+esc(status(x.transitionDuration,l))+'</p></section>'
-   +'<section><span>05</span><p class="knowledge-eyebrow">'+esc(zh?'可观察结果':'Observed consequences')+'</p>'+(consequences.length?'<ul>'+consequences.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'本案例不在没有证据时补写量化结果。':'No quantitative outcome is filled when evidence is not admitted.')+'</p>')+'</section>'
+   +'<section><span>05</span><p class="knowledge-eyebrow">'+esc(zh?'可观察结果':'Observed consequences')+'</p>'+(consequences.length?'<ul>'+consequences.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(consequenceFallback)+'</p>')+'</section>'
   +'</div>'
   +'<details class="civ-reconfig-evidence"><summary>'+esc(zh?'证据与未知':'Evidence & unknown')+'</summary><div><p><strong>'+esc(zh?'知识状态':'Knowledge state')+'</strong> '+badge(x.knowledgeState||x.dataClass,l)+'</p>'+(evidence.length?'<ul>'+evidence.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'')+(unknown.length?'<div class="knowledge-boundary"><strong>'+esc(zh?'仍未知':'Still unknown')+'</strong><ul>'+unknown.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></div>':'')+'</div></details>'
-  +'<div class="civ-reconfig-chip-row">'+(x.relatedWindows||[]).map(id=>'<button type="button" data-window="'+esc(id)+'">'+esc(zh?'查看相关重组窗口':'Related window')+'</button>').join('')+(x.relatedSnapshots||[]).map(id=>'<button type="button" data-snapshot="'+esc(id)+'">'+esc(zh?'查看相关世界横切面':'Related world shift')+'</button>').join('')+(x.relatedFigures||[]).map(id=>'<a href="/figure?id='+encodeURIComponent(id)+'">'+esc(zh?'相关图解':'Related figure')+'</a>').join('')+'</div>'
+  +'<div class="civ-reconfig-chip-row">'+(x.relatedWindows||[]).map(id=>'<button type="button" data-window="'+esc(id)+'">'+esc(zh?'查看相关重组窗口':'Related window')+'</button>').join('')+(x.relatedSnapshots||[]).map(id=>'<button type="button" data-snapshot="'+esc(id)+'">'+esc(zh?'查看相关世界横切面':'Related world shift')+'</button>').join('')+(x.relatedFigures||[]).map(id=>'<a href="/figure?id='+encodeURIComponent(id)+'">'+esc(id+' · '+(zh?'相关图解':'Related figure'))+'</a>').join('')+'</div>'
   +'</section>';
 }
 function renderCases(host,data,l,state,store){
