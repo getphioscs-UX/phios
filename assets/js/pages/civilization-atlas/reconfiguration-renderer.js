@@ -142,7 +142,38 @@ function filteredCases(data,state){
 }
 function caseDetail(x,l,data,store){
  const c=COPY[l];if(!x)return'';
- return `<section class="civ-reconfig-detail"><div class="civ-reconfig-detail-head"><div><small>${esc(x.id)} · ${badge(x.knowledgeState||x.dataClass,l)}</small><h3>${esc(l==='zh-Hans'?x.titleZh:x.titleEn)}</h3><p>${esc(x.timeLabel)} · ${esc((x.regions||[]).map(regionLabel).join(' · '))}</p></div><a href="${esc(askHref(l,'cases',{entityId:x.id}))}">${esc(c.ask)}</a></div><dl class="civ-reconfig-dl"><dt>${esc(fieldLabel('priorRuntime'))}</dt><dd>${esc(status(x.priorRuntime,l))}</dd><dt>${esc(fieldLabel('trigger'))}</dt><dd>${esc(status(x.trigger,l))}</dd><dt>${esc(fieldLabel('pressure'))}</dt><dd>${esc(listText(x.pressureField,l))}</dd><dt>${esc(fieldLabel('successorRuntime'))}</dt><dd>${esc(status(x.successorRuntime,l))}</dd><dt>${esc(fieldLabel('transitionDuration'))}</dt><dd>${esc(status(x.transitionDuration,l))}</dd><dt>${esc(fieldLabel('unknown'))}</dt><dd>${esc(listText(x.unknown,l))}</dd></dl><div class="civ-reconfig-chip-row">${(x.relatedBookSections||[]).map(s=>`<button type="button" data-section="${esc(s)}">${esc(s)}</button>`).join('')}${(x.relatedWindows||[]).map(id=>`<button type="button" data-window="${esc(id)}">${esc(id)}</button>`).join('')}${(x.relatedSnapshots||[]).map(id=>`<button type="button" data-snapshot="${esc(id)}">${esc(id.replace('WORLD_RECONFIGURATION_SNAPSHOT_',''))}</button>`).join('')}${(x.relatedFigures||[]).map(id=>`<a href="/figure?id=${encodeURIComponent(id)}">${esc(id)}</a>`).join('')}</div></section>`;
+ const zh=l==='zh-Hans';
+ const title=zh?x.titleZh:x.titleEn;
+ const region=(x.regions||[]).map(regionLabel).join(' · ');
+ const changes=[
+  ['boundaryChange',zh?'边界变化':'Boundary change'],
+  ['institutionalChange',zh?'制度变化':'Institutional change'],
+  ['economicChange',zh?'经济变化':'Economic change'],
+  ['knowledgeChange',zh?'知识变化':'Knowledge change'],
+  ['technologyChange',zh?'技术变化':'Technology change'],
+  ['militaryChange',zh?'安全与军事变化':'Security & military change']
+ ].map(([key,label])=>{const raw=x[key];const visible=raw&&String(raw).toUpperCase()!=='UNKNOWN';return visible?'<div><dt>'+esc(label)+'</dt><dd>'+esc(status(raw,l))+'</dd></div>':'';}).join('');
+ const consequences=[
+  ...(x.capacityGain||[]).map(v=>(zh?'能力增加：':'Capacity gained: ')+valueLabel(v,l)),
+  ...(x.loadTransfer||[]).map(v=>(zh?'负载转移：':'Load transferred: ')+valueLabel(v,l)),
+  ...(x.dependencyCreated||[]).map(v=>(zh?'新依赖：':'Dependency created: ')+valueLabel(v,l)),
+  ...(x.historicalLegacy||[]).map(v=>(zh?'长期遗产：':'Legacy: ')+valueLabel(v,l))
+ ];
+ const prior=status(x.priorRuntime,l),trigger=status(x.trigger,l),pressure=listText(x.pressureField,l),successor=status(x.successorRuntime,l);
+ const evidence=(x.evidenceNotes||[]).map(v=>valueLabel(v,l));
+ const unknown=(x.unknown||[]).map(v=>valueLabel(v,l));
+ return '<section class="civ-reconfig-case-reader" data-reconfig-case-reader="'+esc(x.id)+'">'
+  +'<header class="civ-reconfig-case-reader__head"><div><p class="knowledge-eyebrow">'+esc(zh?'重组案例':'Reconfiguration case')+'</p><h3>'+esc(title)+'</h3><p>'+esc(x.timeLabel)+' · '+esc(region)+'</p></div><a class="knowledge-action" href="'+esc(askHref(l,'cases',{entityId:x.id}))+'">'+esc(c.ask)+'</a></header>'
+  +'<div class="civ-reconfig-chain">'
+   +'<section><span>01</span><p class="knowledge-eyebrow">'+esc(zh?'原有结构':'Prior configuration')+'</p><h4>'+esc(prior)+'</h4></section>'
+   +'<section><span>02</span><p class="knowledge-eyebrow">'+esc(zh?'触发与压力':'Trigger & pressure')+'</p><h4>'+esc(trigger)+'</h4><p>'+esc(pressure)+'</p></section>'
+   +'<section><span>03</span><p class="knowledge-eyebrow">'+esc(zh?'结构变化':'Structural change')+'</p>'+(changes?'<dl>'+changes+'</dl>':'<p>'+esc(zh?'具体变化维度仍按证据边界保留。':'Specific change dimensions remain governed by the evidence boundary.')+'</p>')+'</section>'
+   +'<section><span>04</span><p class="knowledge-eyebrow">'+esc(zh?'继任结构':'Successor configuration')+'</p><h4>'+esc(successor)+'</h4><p>'+esc(zh?'登记窗口：':'Registry window: ')+esc(status(x.transitionDuration,l))+'</p></section>'
+   +'<section><span>05</span><p class="knowledge-eyebrow">'+esc(zh?'可观察结果':'Observed consequences')+'</p>'+(consequences.length?'<ul>'+consequences.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p>'+esc(zh?'本案例不在没有证据时补写量化结果。':'No quantitative outcome is filled when evidence is not admitted.')+'</p>')+'</section>'
+  +'</div>'
+  +'<details class="civ-reconfig-evidence"><summary>'+esc(zh?'证据与未知':'Evidence & unknown')+'</summary><div><p><strong>'+esc(zh?'知识状态':'Knowledge state')+'</strong> '+badge(x.knowledgeState||x.dataClass,l)+'</p>'+(evidence.length?'<ul>'+evidence.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'')+(unknown.length?'<div class="knowledge-boundary"><strong>'+esc(zh?'仍未知':'Still unknown')+'</strong><ul>'+unknown.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></div>':'')+'</div></details>'
+  +'<div class="civ-reconfig-chip-row">'+(x.relatedWindows||[]).map(id=>'<button type="button" data-window="'+esc(id)+'">'+esc(zh?'查看相关重组窗口':'Related window')+'</button>').join('')+(x.relatedSnapshots||[]).map(id=>'<button type="button" data-snapshot="'+esc(id)+'">'+esc(zh?'查看相关世界横切面':'Related world shift')+'</button>').join('')+'</div>'
+  +'</section>';
 }
 function renderCases(host,data,l,state,store){
  const c=COPY[l],all=filteredCases(data,state),pages=Math.max(1,Math.ceil(all.length/PAGE)),page=Math.min(state.casePage,pages),rows=all.slice((page-1)*PAGE,page*PAGE),regions=uniq((data.cases?.cases||[]).flatMap(x=>x.regions||[])).sort(),types=uniq((data.cases?.cases||[]).flatMap(x=>x.caseTypes||[])).sort(),selected=(data.cases?.cases||[]).find(x=>x.id===state.primaryCaseId);
