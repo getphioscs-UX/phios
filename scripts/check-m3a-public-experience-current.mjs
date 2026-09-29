@@ -11,7 +11,7 @@ const knowledge = json('content/customer-experience-rebuild/authority/knowledge-
 const redirects = read('_redirects');
 
 assert.equal(deletePlan.status, 'PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE');
-assert.equal(homepage.status, 'HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED');
+assert.equal(homepage.status, 'HOMEPAGE_EIGHT_VOLUME_IDENTITY_ALIGNED');
 assert.equal(explore.invariants.singleCustomerShell, true);
 assert.equal(knowledge.invariants.singleCustomerShell, true);
 
