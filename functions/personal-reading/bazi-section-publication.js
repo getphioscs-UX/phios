@@ -16,6 +16,16 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  validateSectionRegistry();
  const legacy=await projectBaziPublicationPages({reading,locale,temporalContext,allowUnselectedTiming});
  const noTarget=allowUnselectedTiming&&temporalContext?.mode==='UNAVAILABLE';
+ const professionalTimeline=reading.professionalModules?.professionalTimeline;
+ const selectedLuckCycle=professionalTimeline?.daYunTimeline?.find(cycle=>cycle.isSelected);
+ const annualLayer=professionalTimeline?.currentWindow?.annual;
+ const temporalPresentation=noTarget?null:{
+  date:temporalContext?.localDate||null,
+  timezone:temporalContext?.timezone||null,
+  mode:temporalContext?.mode||null,
+  selectedLuck:selectedLuckCycle?`${selectedLuckCycle.pillar.stem.zh}${selectedLuckCycle.pillar.branch.zh}`:null,
+  annual:annualLayer?`${annualLayer.stem.zh}${annualLayer.branch.zh}`:null
+ };
  const lang=locale==='en'?'en':'zhHans',pick=(en,zh)=>locale==='en'?en:zh;
  const source=n=>legacy.pages.find(p=>p.pageNumber===n),internal=n=>legacy.internalPages.find(p=>p.pageNumber===n).interpretation;
  const topics=reading.professionalModules.customerNarrative.topicNarratives;
@@ -680,7 +690,10 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const rows=acceptedCoreBlocks('S04_CAREER');
   modules.careerRoleSystem={r11Owned:true,blocks:rows.slice(0,2),items:[],boundary:''};
   modules.careerWorkingDirection={r11Owned:true,blocks:rows.slice(2,5),items:[],boundary:''};
-  modules.careerTiming={r11Owned:true,blocks:rows.slice(5),items:[],observations:[],boundary:''};
+  modules.careerTiming={r11Owned:true,blocks:rows.slice(5),items:[],temporal:temporalPresentation,observations:[
+   pick('Which part of the current career emphasis is actually visible in your work now: clearer expression, a stronger client need, or a heavier responsibility load?','当前事业阶段真正已经出现在现实里的，是表达更清楚、客户需求更明显，还是责任负荷变重？'),
+   pick('What recent work example supports this timing reading, and what example does not fit it?','最近哪一个工作例子支持这段时间读取？又有哪一个例子并不符合？')
+  ],boundary:''};
  }
  {
   const rows=acceptedCoreBlocks('S05_WEALTH');
@@ -703,8 +716,12 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  }
  {
   const rows=acceptedBlocks('S08_TIMING');
-  modules.timingContext={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(0,4),items:[],temporal:{localDate:temporalContext.localDate,localTime:temporalContext.localTime,timezone:temporalContext.timezone,generatedAt:temporalContext.generatedAt},observations:[],boundary:''};
-  modules.currentYearInsight={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(4),items:[],temporal:modules.timingContext.temporal,observations:[],boundary:''};
+  modules.timingContext={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(0,4),items:[],temporal:temporalPresentation,observations:[
+   pick('Which theme belongs to the natal baseline, which belongs to the current Da Yun, and which is only being amplified by the current year?','哪些主题属于本命长期结构，哪些属于当前大运，哪些只是被当前流年放大？')
+  ],boundary:''};
+  modules.currentYearInsight={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(4),items:[],temporal:temporalPresentation,observations:[
+   pick('What concrete evidence this year shows a change in expression, demand, resource exchange or responsibility—and what evidence would contradict that reading?','今年有哪些具体证据显示表达、需求、资源交换或责任发生变化？又有哪些现实证据会反驳这个读取？')
+  ],boundary:''};
  }
  {
   const rows=acceptedBlocks('S09_GUIDANCE');
