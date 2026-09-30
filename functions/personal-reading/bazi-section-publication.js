@@ -8,6 +8,7 @@ import {composeBaziT3Section,canShowT3} from './narrative/bazi-t3-composition.js
 import {buildBaZiNarrativeClaimIR} from './narrative/bazi-explanatory-authority.js';
 import {BAZI_SECTION_REGISTRY,REPORT_PAGE_FAMILIES,validateSectionRegistry,bindSectionVisual,splitSemanticBlocks,textUnits} from '../canonical-presentation-runtime/report-section-contract.js';
 import {getAcceptedBaziRemainingSection,BAZI_S06_S10_ACCEPTED_VERSION} from './narrative/bazi-s06-s10-accepted-copy.generated.js';
+import {getAcceptedBaziCoreSection} from './narrative/bazi-s02-s05-accepted-copy.generated.js';
 
 // Adapter inside the existing projection owner: native facts are calculated
 // upstream. The section engine never interprets raw birth data.
@@ -707,7 +708,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const narrative=pageBlocks.find(p=>p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'||p.pageFamily==='SUMMARY_PAGE');
   const allowed=noTarget&&section.key==='S08_TIMING'?modules.timingContext.blocks.slice(0,1):(narrative||pageBlocks.find(p=>p.contentBlocks.length)||pageBlocks[0]).contentBlocks;
   const interpretation=await compilePublicationInterpretation({methodId:'BZR',page:{...sourcePage,pageId:section.key,evidenceRefs:[...new Set(sourceNumbers.flatMap(n=>internal(n).evidence))]},temporalContext,allowedStatements:allowed.map(b=>({text:b.text,sourceRef:b.sourceRef})),conditions:sectionObject.boundaryNotes,realityQuestions:sectionObject.practicalObservations});
-  const ownerAcceptedRemaining=['S06_RELATIONSHIP','S07_HEALTH','S08_TIMING','S09_GUIDANCE','S10_APPENDIX'].includes(section.key);
+  const ownerAcceptedRemaining=['S02_PERSONALITY','S03_LIFE_STRUCTURE','S04_CAREER','S05_WEALTH','S06_RELATIONSHIP','S07_HEALTH','S08_TIMING','S09_GUIDANCE','S10_APPENDIX'].includes(section.key);
   // S06-S10 copy was explicitly owner-reviewed and accepted. Canonical
   // publication preserves it byte-for-byte at semantic-block level; pagination
   // may split blocks across pages but no composer or T3 layer may rewrite it.
