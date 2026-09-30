@@ -20,7 +20,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  const source=n=>legacy.pages.find(p=>p.pageNumber===n),internal=n=>legacy.internalPages.find(p=>p.pageNumber===n).interpretation;
  const topics=reading.professionalModules.customerNarrative.topicNarratives;
  const topic=code=>topics.find(t=>t.topicCode===code);
- const modules={},block=(text,sourceRef,role='EDITORIAL_GUIDANCE')=>({text:humanizePublicationStatement(text),sourceRef,role});
+ const modules={},block=(text,sourceRef,role='EDITORIAL_GUIDANCE')=>({text:role==='OWNER_ACCEPTED_CUSTOMER_COPY'?String(text):humanizePublicationStatement(text),sourceRef,role});
  const edRef='functions/personal-reading/bazi-section-editorial.js';
  const paragraphs=(key,texts,sourceRef)=>modules[key]={blocks:texts.filter(Boolean).map(t=>block(t,sourceRef))};
  const e=s=>BAZI_SECTION_EDITORIAL[s];
