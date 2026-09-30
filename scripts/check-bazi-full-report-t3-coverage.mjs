@@ -22,8 +22,12 @@ for(const locale of ['en','zh-Hans']){
  assert.equal(pack.schemaVersion,'BAZI_SECTION_EVIDENCE_PACK_V5');assert(pack.editorialDepthContract);assert(pack.editorialGoldStandard);
  assert.equal((await composeBaziT3Section({pack,snapshot:oldSnapshot})).status,'FALLBACK','superseded V1 snapshot must fail closed under V2');
  const projection=await projectBaziSectionPublication({reading:source.reading,locale,temporalContext:source.temporalSnapshot,composition:{t3:{stage:'QA',environment:'qa',acceptance,snapshots:{}}}});
- assert.equal(projection.internalSections.find(s=>s.sectionKey==='S02_PERSONALITY').diagnostics.fallbackReason,'ACCEPTED_SNAPSHOT_REQUIRED');
- assert.equal(projection.internalSections.find(s=>s.sectionKey==='S03_LIFE_STRUCTURE').diagnostics.fallbackReason,'ACCEPTED_SNAPSHOT_REQUIRED');
+ const s02=projection.internalSections.find(s=>s.sectionKey==='S02_PERSONALITY'),s03=projection.internalSections.find(s=>s.sectionKey==='S03_LIFE_STRUCTURE');
+ assert.equal(s02.diagnostics.sectionRuntimeTier,'DETERMINISTIC');
+ assert.equal(s03.diagnostics.sectionRuntimeTier,'DETERMINISTIC');
+ assert.equal(s02.diagnostics.fallbackReason,null);
+ assert.equal(s03.diagnostics.fallbackReason,null);
+ assert(!('t3' in s02)&&!('t3' in s03),'owner-accepted publication must not attach T3 runtime state');
  assert(!JSON.stringify(projection.pages).includes('claimIrVersion'));
  const ir=await buildBaZiNarrativeClaimIR({reading:source.reading,sectionKey:'S02_PERSONALITY',locale,temporalSnapshot:source.temporalSnapshot});
  const topic=source.reading.professionalModules.professionalTopics.topics.find(t=>t.topicCode==='CAPABILITY');
@@ -36,4 +40,4 @@ for(const locale of ['en','zh-Hans']){
 }
 for(const p of Object.values(fixtures.packs).filter(p=>p.sectionKey==='S03_LIFE_STRUCTURE'))assert.equal(p.semanticDepth.relations.length,p.licensedClaims.filter(c=>c.id.includes(':PAIR_')).length);
 const cleanup=read(root+'/snapshots/cleanup-manifest.json');assert(cleanup.records.every(r=>!fs.existsSync(r.path)));
-console.log('PASS paid T3 V2 engineering: previous S02 acceptance is superseded but preserved historically; V2 life-layer claims and complete relation retention are active; old snapshots fail closed; Production remains OFF.');
+console.log('PASS paid T3 V2 engineering: shadow evidence packs remain buildable from canonical interpretation; owner-accepted customer publication stays deterministic; old snapshots fail closed; Production remains OFF.');
