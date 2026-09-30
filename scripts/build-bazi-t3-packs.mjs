@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {buildInputs,generateCampaignCases} from './lib/bazi-fp-w17-campaign.mjs';
-import {T3_SECTIONS} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
+import {T3_SECTIONS,buildSectionEvidencePack} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json'));
 const packs={},profiles=[{id:'BASELINE_NOW',...source}],matrix=[];
 const campaign=generateCampaignCases();
@@ -13,12 +13,14 @@ for(const index of [1,4,5,6,8,16,24,32,40,48,72]){
 }
 for(const profile of profiles)for(const locale of ['en','zh-Hans']){
  let projection,error=null;
- try{projection=await projectBaziSectionPublication({reading:profile.reading,locale,temporalContext:profile.temporalSnapshot,composition:{t3:{stage:'SHADOW'}}});}catch(e){error=e.code||e.message;}
+ try{projection=await projectBaziSectionPublication({reading:profile.reading,locale,temporalContext:profile.temporalSnapshot});}catch(e){error=e.code||e.message;}
  for(const sectionKey of T3_SECTIONS){
   const section=projection?.internalSections.find(s=>s.sectionKey===sectionKey);
   const key=`${profile.id}:${locale}:${sectionKey}`;
-  if(section?.t3)packs[key]=section.t3.evidencePack;
-  matrix.push({profileId:profile.id,locale,sectionKey,mode:profile.temporalSnapshot.mode,scenario:profile.scenario||'CANONICAL_NOW_BENCHMARK',variant:profile.variant||'OPEN_PATTERN',state:error?'SOURCE_REJECTED':'LIVE_NOT_RUN',reason:error||null,evidenceHash:section?.t3?.evidencePack.canonicalEvidenceHash||null});
+  let pack=null;
+  if(!error&&section?.interpretation)pack=await buildSectionEvidencePack({interpretation:section.interpretation,locale,sectionKey,reading:profile.reading});
+  if(pack)packs[key]=pack;
+  matrix.push({profileId:profile.id,locale,sectionKey,mode:profile.temporalSnapshot.mode,scenario:profile.scenario||'CANONICAL_NOW_BENCHMARK',variant:profile.variant||'OPEN_PATTERN',state:error?'SOURCE_REJECTED':pack?'SHADOW_PACK_READY':'PACK_UNAVAILABLE',reason:error||null,evidenceHash:pack?.canonicalEvidenceHash||null});
  }
  matrix.push({profileId:profile.id,locale,sectionKey:'S01_OVERVIEW',control:true,state:error?'SOURCE_REJECTED':'DETERMINISTIC_CONTROL_PASS',reason:error});
 }
