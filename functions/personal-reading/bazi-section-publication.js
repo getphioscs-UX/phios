@@ -707,16 +707,20 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   const narrative=pageBlocks.find(p=>p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'||p.pageFamily==='SUMMARY_PAGE');
   const allowed=noTarget&&section.key==='S08_TIMING'?modules.timingContext.blocks.slice(0,1):(narrative||pageBlocks.find(p=>p.contentBlocks.length)||pageBlocks[0]).contentBlocks;
   const interpretation=await compilePublicationInterpretation({methodId:'BZR',page:{...sourcePage,pageId:section.key,evidenceRefs:[...new Set(sourceNumbers.flatMap(n=>internal(n).evidence))]},temporalContext,allowedStatements:allowed.map(b=>({text:b.text,sourceRef:b.sourceRef})),conditions:sectionObject.boundaryNotes,realityQuestions:sectionObject.practicalObservations});
-  // Canonical customer publication is deterministic. Provider-backed prose is
-  // an explicit T3 editorial experiment below and never the default composer.
-  const composed=await composePublicationNarrative({interpretation,locale,executionClass:'T2_LIGHT_COMPOSITION',sectionComposition:sectionObject});
-  if(narrative&&composed.internalOnly.evidenceAdmission==='SEMANTIC_VERIFIER_ACCEPTED'){
+  const ownerAcceptedRemaining=['S06_RELATIONSHIP','S07_HEALTH','S08_TIMING','S09_GUIDANCE','S10_APPENDIX'].includes(section.key);
+  // S06-S10 copy was explicitly owner-reviewed and accepted. Canonical
+  // publication preserves it byte-for-byte at semantic-block level; pagination
+  // may split blocks across pages but no composer or T3 layer may rewrite it.
+  const composed=ownerAcceptedRemaining
+   ?{paragraphs:allowed.map(b=>b.text),internalOnly:{executionClass:'OWNER_ACCEPTED_FROZEN_COPY',evidenceAdmission:'OWNER_ACCEPTED',acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION}}
+   :await composePublicationNarrative({interpretation,locale,executionClass:'T2_LIGHT_COMPOSITION',sectionComposition:sectionObject});
+  if(!ownerAcceptedRemaining&&narrative&&composed.internalOnly.evidenceAdmission==='SEMANTIC_VERIFIER_ACCEPTED'){
    const maximum=REPORT_PAGE_FAMILIES[narrative.pageFamily].budget[locale==='en'?'en':'zh']?.[1]||500;
    if(composed.paragraphs.every(text=>textUnits(text,locale)<=maximum))narrative.contentBlocks=composed.paragraphs.map(text=>block(text,section.key,'VERIFIED_SECTION_COMPOSITION'));
    else composed.internalOnly={...composed.internalOnly,executionClass:'T2_LIGHT_COMPOSITION',evidenceAdmission:'SOURCE_BOUND_CANONICAL_STATEMENTS',fallbackState:'DEEP_COMPOSITION_FALLBACK',fallbackReason:'COMPOSITION_BUDGET_REJECTED'};
   }
   let t3=null;
-  if(composition.t3&&T3_SECTIONS.includes(section.key)){
+  if(!ownerAcceptedRemaining&&composition.t3&&T3_SECTIONS.includes(section.key)){
    // Build from all deterministic pages in this section; timing includes both
    // the luck and annual layers. Guidance also receives prior admitted sections.
    const packInterpretation={...interpretation,canonicalFacts:[...new Map(sourceNumbers.flatMap(n=>internal(n).canonicalFacts).map(f=>[f.sourceRefs[0],f])).values()]};
