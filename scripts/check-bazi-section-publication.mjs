@@ -65,7 +65,13 @@ for(const report of reports){
   if(p.pageFamily==='TIMING_PAGE')assert(p.temporal?.date&&p.temporal?.annual&&p.temporal?.selectedLuck,`TIMING_TEMPORAL:${p.pageKey}`);
  }
  const liveSource=read('docs/guided-report-successor-r2/bazi-source.json');const built=await projectBaziSectionPublication({reading:liveSource.reading,locale:report.locale,temporalContext:liveSource.temporalSnapshot});const internal={internalPages:built.internalSections};assert.equal(internal.internalPages.length,10);
- for(const s of internal.internalPages){assert(s.sectionComposition.pageBlocks.length>=1);assert.equal(s.sectionComposition.sectionKey,s.sectionKey);assert.equal(s.interpretation.topic,s.sectionKey);assert.equal(s.composition.executionClass,'T2_LIGHT_COMPOSITION');}
+ for(const s of internal.internalPages){
+  assert(s.sectionComposition.pageBlocks.length>=1);
+  assert.equal(s.sectionComposition.sectionKey,s.sectionKey);
+  assert.equal(s.interpretation.topic,s.sectionKey);
+  const expectedFrozen=s.sectionKey!=='S01_OVERVIEW';
+  assert.equal(s.composition.executionClass,expectedFrozen?'OWNER_ACCEPTED_FROZEN_COPY':'T2_LIGHT_COMPOSITION');
+ }
 }
 // Different locales use different text-unit systems and budgets. A semantic
 // block may therefore require an extra continuation page in one locale without
@@ -90,7 +96,7 @@ const rebalanceSizes=[4,4,13,4,5,5,5,5,4,5,2,9,6],rebalanceBlocks=rebalanceSizes
 let requests=[];
 const deterministicProbe=await projectBaziSectionPublication({reading:source.reading,temporalContext:source.temporalSnapshot,locale:'en',composition:{registry:{models:[{providerId:'test',modelId:'test',capabilityClass:'DEEP',planningCostRank:1,status:'AVAILABLE'}]},providerAdapters:{test:async r=>{requests.push(r);return {paragraphs:['Unsupported invented conclusion.']};}},verifyComposition:async()=>({accepted:false})}});
 assert.equal(requests.length,0,'canonical BaZi publication must not invoke provider-backed PUBLICATION_SECTION composition');
-assert(deterministicProbe.internalSections.every(s=>s.composition.executionClass==='T2_LIGHT_COMPOSITION'));
+assert(deterministicProbe.internalSections.every(s=>s.sectionKey==='S01_OVERVIEW'?s.composition.executionClass==='T2_LIGHT_COMPOSITION':s.composition.executionClass==='OWNER_ACCEPTED_FROZEN_COPY'));
 assert(deterministicProbe.internalSections.every(s=>s.composition.evidenceAdmission!=='SEMANTIC_VERIFIER_ACCEPTED'));
 fs.writeFileSync(`${root}/contract-evidence.json`,JSON.stringify({machinePass:true,totalPages:reports.map(r=>({locale:r.locale,total:r.totalPages})),semanticPaginationParity:true,physicalPaginationMayDifferByLocale:true,withoutLegacyCareerItemsPages:withoutLegacyCareerItems.pages.length+6,sectionLevelProviderRequests:requests.length,canonicalProviderInvocation:false,budgets,humanAccepted:false},null,2)+'\n');
 console.log('PASS: section order, registered/deployed family alignment, variable locale-safe totals, deterministic section composition, frozen intro, bilingual semantic parity, text budgets, temporal data, 13-asset registry and fallback chain.');
