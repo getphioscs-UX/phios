@@ -38,6 +38,15 @@ for(const report of reports){
  const html=renderVisualReportPages(report);assert.equal((html.match(/data-pagination-owner=/g)||[]).length,report.totalPages-5);
  assert(!/CMP-|PPR-C1-|BAZI_FULL_REPORT:|未选择目标时间|T3_DEEP_COMPOSITION/.test(html));
  assert.equal(report.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,10);
+ const timingGroups=new Map();
+ for(const p of report.pages.filter(p=>p.pageFamily==='TIMING_PAGE')){
+  if(!timingGroups.has(p.definitionKey))timingGroups.set(p.definitionKey,[]);
+  timingGroups.get(p.definitionKey).push(...(p.observations||[]));
+ }
+ for(const [definitionKey,observations] of timingGroups){
+  const [minObs,maxObs]=families.TIMING_PAGE.budget.observations;
+  assert(observations.length>=minObs&&observations.length<=maxObs,`TIMING_OBSERVATIONS:${definitionKey}:${observations.length}`);
+ }
  const renderedFamilies=[...new Set(report.pages.map(p=>p.pageFamily))];
  assert.deepEqual(renderedFamilies.slice().sort(),declaredPageFamilies.slice().sort(),'rendered BaZi report must cover exactly the page families declared by the BaZi section registry');
  for(const p of report.pages){
@@ -45,7 +54,7 @@ for(const report of reports){
   if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert((p.primaryVisualRef||units>=range[0])&&units<=range[1],`CONTENT_BUDGET:${p.pageKey}:${units}`);}
   if(p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'){const units=textUnits(p.paragraphs.join(' '),report.locale);assert(units>=range[0],`THIN_NARRATIVE:${p.pageKey}`);}
   if(p.pageFamily==='INSIGHT_LIST_PAGE'){assert(p.items.length>=3&&p.items.length<=6);const range=budget[report.locale==='en'?'enItem':'zhItem'];for(const item of p.items){const units=textUnits(item,report.locale);assert(units>=range[0]&&units<=range[1],`${p.pageKey}:${units}`);}}
-  if(p.pageFamily==='TIMING_PAGE'){assert(p.temporal.date&&p.temporal.annual&&p.temporal.selectedLuck);const [minObs,maxObs]=budget.observations;assert(p.observations.length>=minObs&&p.observations.length<=maxObs,`TIMING_OBSERVATIONS:${p.pageKey}:${p.observations.length}`);}
+  if(p.pageFamily==='TIMING_PAGE')assert(p.temporal?.date&&p.temporal?.annual&&p.temporal?.selectedLuck,`TIMING_TEMPORAL:${p.pageKey}`);
  }
  const liveSource=read('docs/guided-report-successor-r2/bazi-source.json');const built=await projectBaziSectionPublication({reading:liveSource.reading,locale:report.locale,temporalContext:liveSource.temporalSnapshot});const internal={internalPages:built.internalSections};assert.equal(internal.internalPages.length,10);
  for(const s of internal.internalPages){assert(s.sectionComposition.pageBlocks.length>=1);assert.equal(s.sectionComposition.sectionKey,s.sectionKey);assert.equal(s.interpretation.topic,s.sectionKey);assert.equal(s.composition.executionClass,'T2_LIGHT_COMPOSITION');}
