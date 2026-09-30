@@ -657,6 +657,37 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
 
  // Owner-accepted S06-S10 customer copy is the canonical publication prose for
  // these sections. Existing calculation, Page IR, visuals and evidence remain owners.
+ const acceptedCoreReceipt={
+  S02_PERSONALITY:'docs/acceptance/report-narrative-t2-r1/bazi/s02-market-v1/OWNER-ACCEPTANCE.json',
+  S03_LIFE_STRUCTURE:'docs/acceptance/report-narrative-t2-r1/bazi/s03-market-v1/OWNER-ACCEPTANCE.json',
+  S04_CAREER:'docs/acceptance/report-narrative-t2-r1/bazi/s04-csd-v4/OWNER-ACCEPTANCE.json',
+  S05_WEALTH:'docs/acceptance/report-narrative-t2-r1/bazi/s05-market-v1/OWNER-ACCEPTANCE.json'
+ };
+ const acceptedCoreBlocks=sectionKey=>getAcceptedBaziCoreSection(sectionKey,locale).blocks.map((row,i)=>
+  block(row.text,`${acceptedCoreReceipt[sectionKey]}#accepted-block-${i+1}`,'OWNER_ACCEPTED_CUSTOMER_COPY')
+ );
+ {
+  const rows=acceptedCoreBlocks('S02_PERSONALITY');
+  modules.personalityCoreStyle={r11Owned:true,blocks:rows.slice(0,2),items:[],boundary:''};
+  modules.personalityDevelopment={r11Owned:true,blocks:rows.slice(2,5),items:[],boundary:''};
+  modules.personalityFriction={r11Owned:true,blocks:rows.slice(5),items:[],boundary:''};
+ }
+ {
+  const rows=acceptedCoreBlocks('S03_LIFE_STRUCTURE');
+  modules.lifeStructureSystem={r11Owned:true,blocks:rows,items:[],boundary:''};
+ }
+ {
+  const rows=acceptedCoreBlocks('S04_CAREER');
+  modules.careerRoleSystem={r11Owned:true,blocks:rows.slice(0,2),items:[],boundary:''};
+  modules.careerWorkingDirection={r11Owned:true,blocks:rows.slice(2,5),items:[],boundary:''};
+  modules.careerTiming={r11Owned:true,blocks:rows.slice(5),items:[],observations:[],boundary:''};
+ }
+ {
+  const rows=acceptedCoreBlocks('S05_WEALTH');
+  modules.wealthResourceFlow={r11Owned:true,blocks:rows.slice(0,3),items:[],boundary:''};
+  modules.wealthRetentionReality={r11Owned:true,blocks:rows.slice(3),items:[],boundary:''};
+ }
+
  const acceptedRef='docs/acceptance/report-narrative-t2-r1/bazi/s06-s10-actual-v1/OWNER-ACCEPTANCE.json';
  const acceptedBlocks=sectionKey=>getAcceptedBaziRemainingSection(sectionKey,locale).blocks.map((row,i)=>
   block(row.text,`${acceptedRef}#${sectionKey}/${i+1}`,'OWNER_ACCEPTED_CUSTOMER_COPY')
