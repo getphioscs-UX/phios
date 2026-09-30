@@ -51,8 +51,16 @@ for(const report of reports){
  assert.deepEqual(renderedFamilies.slice().sort(),declaredPageFamilies.slice().sort(),'rendered BaZi report must cover exactly the page families declared by the BaZi section registry');
  for(const p of report.pages){
   const budget=families[p.pageFamily].budget,range=budget[report.locale==='en'?'en':'zh'];
-  if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert((p.primaryVisualRef||units>=range[0])&&units<=range[1],`CONTENT_BUDGET:${p.pageKey}:${units}`);}
-  if(p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'){const units=textUnits(p.paragraphs.join(' '),report.locale);assert(units>=range[0],`THIN_NARRATIVE:${p.pageKey}`);}
+  if(range){const units=textUnits(p.paragraphs.join(' '),report.locale);budgets.push({locale:report.locale,key:p.pageKey,units,range});assert(units<=range[1],`CONTENT_BUDGET_MAX:${p.pageKey}:${units}`);}
+  if(p.pageFamily==='NARRATIVE_ANALYSIS_PAGE'&&!/_CONT_\d+$/.test(p.pageKey)){
+   const group=report.pages.filter(x=>x.definitionKey===p.definitionKey&&x.pageFamily==='NARRATIVE_ANALYSIS_PAGE');
+   const groupUnits=group.map(x=>textUnits(x.paragraphs.join(' '),report.locale));
+   if(group.length===1)assert(p.primaryVisualRef||groupUnits[0]>=range[0],`THIN_NARRATIVE:${p.pageKey}:${groupUnits[0]}`);
+   else{
+    assert(groupUnits.every(units=>units>0&&units<=range[1]),`NARRATIVE_CONTINUATION_BUDGET:${p.definitionKey}:${groupUnits.join(',')}`);
+    assert(groupUnits.reduce((sum,units)=>sum+units,0)>range[1],`UNNECESSARY_NARRATIVE_CONTINUATION:${p.definitionKey}:${groupUnits.join(',')}`);
+   }
+  }
   if(p.pageFamily==='INSIGHT_LIST_PAGE'){assert(p.items.length>=3&&p.items.length<=6);const range=budget[report.locale==='en'?'enItem':'zhItem'];for(const item of p.items){const units=textUnits(item,report.locale);assert(units>=range[0]&&units<=range[1],`${p.pageKey}:${units}`);}}
   if(p.pageFamily==='TIMING_PAGE')assert(p.temporal?.date&&p.temporal?.annual&&p.temporal?.selectedLuck,`TIMING_TEMPORAL:${p.pageKey}`);
  }
