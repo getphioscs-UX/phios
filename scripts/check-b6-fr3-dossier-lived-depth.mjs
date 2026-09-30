@@ -6,6 +6,7 @@ const json=p=>JSON.parse(read(p));
 const depth=json('content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json');
 const knowledge=json('content/civilization-atlas/reconfiguration/knowledge-state-contract-v1.json');
 const renderer=read('assets/js/pages/civilization-atlas/reconfiguration-renderer.js');
+const css=read('assets/css/civilization-atlas.css');
 const loader=read('assets/js/pages/civilization-atlas/atlas-data.js');
 
 assert.equal(depth.dossiers.length,12,'FR3 requires knowledge-depth records for all 12 dossiers.');
@@ -39,5 +40,10 @@ assert.ok(renderer.includes('观察讯号')&&renderer.includes('Observation sign
 assert.ok(renderer.includes('Unknown boundary'),'FR3-F unknown containment missing.');
 assert.ok(renderer.includes('Current-value layer not yet admitted'),'FR3-I current-value optional overlay boundary missing.');
 assert.ok(renderer.includes('The registered transmission mechanisms and observation dimensions remain visible below'),'FR3-G/H lived transmission must survive missing current values.');
+assert.ok(css.includes('B6-FR3L dossier layout repair'),'FR3-K layout repair marker missing.');
+assert.ok(css.includes('section:nth-child(2) ol')&&css.includes('grid-template-columns:repeat(2,minmax(0,1fr))'),'Historical formation must render as a compact responsive grid on desktop.');
+assert.ok(css.includes('section:nth-child(1)')&&css.includes('grid-column:1 / -1'),'Structural runtime summary must span the full dossier width.');
+assert.ok(css.includes('section:nth-child(7)')&&css.includes('grid-column:1 / -1'),'Conditional projection boundary must span the full dossier width.');
+assert.ok(css.includes('min-height:0')&&css.includes('border-radius:0'),'Historical case links must not inherit pill-button geometry.');
 
 console.log('B6-FR3 PASS: dossier semantic depth, structural derivation, pressures, reconfiguration axes, signals, unknown containment, lived-reality transmission, optional current overlay, bilingual projection, and representative Southeast Asia review target are wired.');
