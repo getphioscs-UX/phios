@@ -7,6 +7,7 @@ import {buildSectionEvidencePack,T3_SECTIONS,crossSectionEditorialCheck} from '.
 import {composeBaziT3Section,canShowT3} from './narrative/bazi-t3-composition.js';
 import {buildBaZiNarrativeClaimIR} from './narrative/bazi-explanatory-authority.js';
 import {BAZI_SECTION_REGISTRY,REPORT_PAGE_FAMILIES,validateSectionRegistry,bindSectionVisual,splitSemanticBlocks,textUnits} from '../canonical-presentation-runtime/report-section-contract.js';
+import {getAcceptedBaziRemainingSection,BAZI_S06_S10_ACCEPTED_VERSION} from './narrative/bazi-s06-s10-accepted-copy.generated.js';
 
 // Adapter inside the existing projection owner: native facts are calculated
 // upstream. The section engine never interprets raw birth data.
@@ -651,6 +652,36 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    '八字围绕四柱组织读取，并以日主作为参照。天干、地支、藏干、五行计数、格局候选与已解析的时间层，都应保持为方法中的不同部分。时间层与本命结构一起阅读，不取代本命；所有解释最终仍应与独立的现实经验进行比较。'
   ),`${edRef}#S10_APPENDIX`,'METHOD_INTERPRETATION')
  ],items:[],boundary:''};
+
+
+ // Owner-accepted S06-S10 customer copy is the canonical publication prose for
+ // these sections. Existing calculation, Page IR, visuals and evidence remain owners.
+ const acceptedRef='docs/acceptance/report-narrative-t2-r1/bazi/s06-s10-actual-v1/OWNER-ACCEPTANCE.json';
+ const acceptedBlocks=sectionKey=>getAcceptedBaziRemainingSection(sectionKey,locale).blocks.map((row,i)=>
+  block(row.text,`${acceptedRef}#${sectionKey}/${i+1}`,'OWNER_ACCEPTED_CUSTOMER_COPY')
+ );
+ {
+  const rows=acceptedBlocks('S06_RELATIONSHIP');
+  modules.relationshipPosition={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(0,3),items:[],boundary:''};
+  modules.relationshipInteractionBoundary={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(3),items:[],boundary:''};
+ }
+ {
+  const rows=acceptedBlocks('S07_HEALTH');
+  modules.healthNarrative={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows,items:[],boundary:''};
+ }
+ {
+  const rows=acceptedBlocks('S08_TIMING');
+  modules.timingContext={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(0,4),items:[],temporal:{localDate:temporalContext.localDate,localTime:temporalContext.localTime,timezone:temporalContext.timezone,generatedAt:temporalContext.generatedAt},observations:[],boundary:''};
+  modules.currentYearInsight={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows.slice(4),items:[],temporal:modules.timingContext.temporal,observations:[],boundary:''};
+ }
+ {
+  const rows=acceptedBlocks('S09_GUIDANCE');
+  modules.guidanceIntegrated={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows,items:[],boundary:''};
+ }
+ {
+  const rows=acceptedBlocks('S10_APPENDIX');
+  modules.methodGuide={r11Owned:true,acceptedCopyVersion:BAZI_S06_S10_ACCEPTED_VERSION,blocks:rows,items:[],boundary:''};
+ }
 
  for(const name of unavailableModules)delete modules[name];
  const sections=[],internalSections=[],pages=[],t3Interpretations=[];
