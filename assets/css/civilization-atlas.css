@@ -1071,3 +1071,59 @@
 [data-atlas-mode="reconfiguration"] .civ-reconfig-chip-row>*{margin:.2rem;padding:.42rem .7rem}
 [data-atlas-mode="reconfiguration"] select,
 [data-atlas-mode="reconfiguration"] input{background:#061724;color:#f1f4f6;border-color:rgba(240,217,151,.35)}
+
+/* B6-FR3L dossier layout repair: prevent tall history column from creating a blank paired card */
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;
+}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(1),
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2),
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(7){
+  grid-column:1 / -1;
+}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2) ol{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.8rem 1.1rem;
+  padding-left:1.25rem;
+}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2) li{
+  margin:0;
+  min-width:0;
+  padding:.7rem .75rem .75rem .2rem;
+  border-bottom:1px solid rgba(240,217,151,.14);
+}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2) button{
+  display:grid;
+  gap:.18rem;
+  width:100%;
+  min-height:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--b6-gold);
+  font-weight:700;
+  text-align:left;
+}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2) button:hover{
+  background:transparent;
+  color:#fff0bd;
+}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2) button time{
+  color:var(--b6-text-soft);
+  font-size:.78rem;
+  font-weight:600;
+}
+[data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2) .cx-meta{
+  margin:.38rem 0 0;
+  line-height:1.45;
+}
+@media(max-width:800px){
+  [data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections{grid-template-columns:1fr}
+  [data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(1),
+  [data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2),
+  [data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(7){grid-column:auto}
+  [data-atlas-mode="reconfiguration"] .civ-reconfig-dossier-sections>section:nth-child(2) ol{grid-template-columns:1fr}
+}
