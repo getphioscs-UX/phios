@@ -1,3 +1,4 @@
+import './check-cx-r12r4b-smr-ecr-authority-guard.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {METHODS,BASELINE_COMMIT} from './smr-benchmark-support.mjs';
