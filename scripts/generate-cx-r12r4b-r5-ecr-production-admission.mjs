@@ -5,14 +5,16 @@ const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const shaFile=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const write=(p,text)=>{if(check){if(!fs.existsSync(p)||fs.readFileSync(p,'utf8')!==text)throw new Error(`R5_ADMISSION_DRIFT:${p}`)}else{fs.mkdirSync(p.split('/').slice(0,-1).join('/'),{recursive:true});fs.writeFileSync(p,text)}};
 const reviewPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json';
+const deltaReceiptPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-r4-d11-earth-delta-owner-acceptance-v1.json';
 const reviewCasesPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-cases-v1.json';
 const machinePath='content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json';
 const meaningPath='content/embodied-configuration/meaning/ecr-atomic-meaning-registry-v1.json';
 const calcPath='content/embodied-configuration/ecr-calculation-spec-v1.json';
-const review=read(reviewPath),reviewCases=read(reviewCasesPath),machine=read(machinePath),meaning=read(meaningPath),calc=read(calcPath);
+const review=read(reviewPath),reviewCases=read(reviewCasesPath),machine=read(machinePath),meaning=read(meaningPath),calc=read(calcPath),deltaReceipt=read(deltaReceiptPath);
 const dims=['methodFidelityAccepted','customerClarityAccepted','nonFortuneTellingBoundaryAccepted','lineageAccepted'];
 if(review.status!=='HUMAN_REVIEW_COMPLETE'||review.requiredCaseCount!==48||review.acceptedCaseCount!==48||review.rejectedCaseCount!==0||review.pendingCaseCount!==0||!review.aggregateAttestation)throw new Error('ECR_R5_REQUIRES_48_OF_48_HUMAN_ACCEPTANCE');
-if(review.results.length!==48||reviewCases.cases.length!==48||review.results.some((x,i)=>x.caseId!==reviewCases.cases[i].caseId||!dims.every(k=>x[k]===true)))throw new Error('ECR_R5_HUMAN_REVIEW_CASE_BINDING_INVALID');
+if(review.results.length!==48||reviewCases.cases.length!==48||review.results.some((x,i)=>x.caseId!==reviewCases.cases[i].caseId||!dims.every(k=>x[k]===true)||!x.reviewCaseDigest||x.reviewCaseDigest!==reviewCases.cases[i].reviewCaseDigest))throw new Error('ECR_R5_HUMAN_REVIEW_CASE_BINDING_INVALID');
+if(deltaReceipt.decision!=='ACCEPT'||deltaReceipt.correction?.driver!=='D11'||deltaReceipt.correction?.identity!=='Earth'||deltaReceipt.correction?.canonicalRole!=='Embodiment'||deltaReceipt.correction?.retiredMeaning!=='Recovery')throw new Error('ECR_R5_D11_EARTH_DELTA_ACCEPTANCE_REQUIRED');
 if(machine.caseCount!==64||!Object.values(machine.assertions).every(Boolean))throw new Error('ECR_R5_MACHINE_CAMPAIGN_NOT_ACCEPTED');
 if(meaning.entries?.length!==145||!meaning.entries.every(x=>x.status==='PRODUCTION'))throw new Error('ECR_R5_MEANING_AUTHORITY_NOT_PRODUCTION');
 if(calc.status!=='FROZEN_FOR_DETERMINISTIC_PROJECTION')throw new Error('ECR_R5_CALCULATION_SPEC_NOT_FROZEN');
@@ -20,6 +22,7 @@ const evidence={
   machineCampaignRef:machinePath,machineCampaignSha256:shaFile(machinePath),machineCaseCount:64,
   humanReviewCasesRef:reviewCasesPath,humanReviewCasesSha256:shaFile(reviewCasesPath),
   humanReviewResultsRef:reviewPath,humanReviewResultsSha256:shaFile(reviewPath),humanAcceptedCaseCount:48,
+  d11EarthDeltaAcceptanceRef:deltaReceiptPath,d11EarthDeltaAcceptanceSha256:shaFile(deltaReceiptPath),
   meaningAuthorityRef:meaningPath,meaningAuthoritySha256:shaFile(meaningPath),atomicMeaningCount:145,
   calculationAuthorityRef:calcPath,calculationAuthoritySha256:shaFile(calcPath)
 };
@@ -29,6 +32,7 @@ const admission={
   evidence,
   composition:{sharedRuntimeVersion:'2.0.0',compositionRuleVersion:'CX-R12R3B-COMPOSITION-RULES-v1.0.0',ecrRuleRefs:['CX-COMP-ECR-CONTEXT-GRAMMAR-QUESTION-v1','CX-COMP-ECR-QUESTION-CAPABILITY-v1','CX-COMP-ECR-DRIVER-PRIORITY-v1','CX-COMP-ECR-MOTION-CONFIGURATION-v1','CX-COMP-ECR-CONFIGURATION-ACTIVATION-v1']},
   boundaries:{calculationAuthorityChanged:false,atomicMeaningAuthorityChanged:false,compositionRulesChangedByAdmission:false,admissionCreatesNewMeaning:false,liveCustomerHumanReviewClaimed:false,currentRealityAssumed:false,humanDesignAuthorityConsumed:false,xpfExternalProfileConsumed:false,crossPerspectiveCompositionStarted:false,rendererCreatesMeaning:false,aiCreatesMeaning:false},
+  successor:{d11Identity:'Earth',d11CanonicalRole:'Embodiment',retiredPredecessorIdentity:'Chiron',retiredPredecessorMeaning:'Recovery',deltaAcceptanceRef:deltaReceiptPath},
   publication:{publicationAllowed:true,customerPublishable:true,methodId:'ECR',publicMethodCode:'EMBODIED_CONFIGURATION_PROJECTION'}
 };
 const admissionPath='content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json';
