@@ -813,7 +813,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
    const budget=REPORT_PAGE_FAMILIES[pb.pageFamily].budget,maxUnits=budget[locale==='en'?'en':'zh']?.[1]||500;
    let chunks;
    try{
-    chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits,minUnits:budget[locale==='en'?'en':'zh']?.[0]||0});
+    chunks=splitSemanticBlocks(pb.contentBlocks,{locale,maxUnits,minUnits:ownerAcceptedRemaining?0:(budget[locale==='en'?'en':'zh']?.[0]||0)});
    }catch(error){
     const units=pb.contentBlocks.map(b=>textUnits(b.text,locale));
     const e=new Error(`${error?.message||'SECTION_BLOCK_PARTITION_FAILED'}:${locale}:${pb.definitionKey}:${pb.pageFamily}:units=${units.join(',')}:min=${budget[locale==='en'?'en':'zh']?.[0]||0}:max=${maxUnits}`);
