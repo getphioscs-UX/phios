@@ -4,12 +4,14 @@ import {resolveReportEditorialAsset} from './report-editorial-resolver.js';
 import {REPORT_EDITORIAL_COPY} from './report-editorial-copy.js';
 import {GUIDED_REPORT_SUCCESSOR,PUBLICATION_VERSIONS,REPORT_PAGE_REGISTRY} from './report-publication-contract.js';
 import {SECTION_LAYOUT,validateExpandedSections} from './report-section-contract.js';
+import {PHYSICAL_COMPOSITION_R1,validatePhysicalComposition} from './physical-composition-contract.js';
 
-export function assemblePublicationSnapshot({methodId,locale,pages,intro,temporalSnapshot,internalPages,generatedAt,layout=null,subjectPresentation=null,compositionSourcePages=null}={}){
+export function assemblePublicationSnapshot({methodId,locale,pages,intro,temporalSnapshot,internalPages,generatedAt,layout=null,subjectPresentation=null,compositionSourcePages=null,physicalComposition=null}={}){
  const plan=REPORT_PAGE_REGISTRY.find(p=>p.method===methodId);
  if(!plan||!['en','zh-Hans'].includes(locale)||!temporalSnapshot||!generatedAt)throw Error('PUBLICATION_ASSEMBLY_INPUT_INVALID');
  const sequence=[...intro,...pages].map(p=>p.pageNumber);
- if(layout&&layout!==SECTION_LAYOUT)throw Error('PUBLICATION_LAYOUT_INVALID');
+ if(layout&&layout!==SECTION_LAYOUT&&layout!==PHYSICAL_COMPOSITION_R1)throw Error('PUBLICATION_LAYOUT_INVALID');
+ if(layout===PHYSICAL_COMPOSITION_R1){if(!physicalComposition)throw Error('PHYSICAL_COMPOSITION_REQUIRED');validatePhysicalComposition({pages,intro,...physicalComposition});}
  if(layout===SECTION_LAYOUT){if(methodId!=='BZR'||intro.length!==6)throw Error('PUBLICATION_SECTION_METHOD_INVALID');validateExpandedSections(compositionSourcePages||pages);
   if(compositionSourcePages){
    const ids=new Set(compositionSourcePages.map(p=>p.pageKey));
@@ -21,7 +23,7 @@ export function assemblePublicationSnapshot({methodId,locale,pages,intro,tempora
  }
  if((!layout&&sequence.length!==plan.totalPages)||sequence.some((n,i)=>n!==i+1))throw Error('PUBLICATION_PAGE_SEQUENCE_INVALID');
  const boundIntro=subjectPresentation?intro.map(p=>p.pageNumber===1&&p.kind==='STATIC'?{...p,kind:'STATIC_COVER',subject:subjectPresentation}:p):intro;
- const customer={schemaVersion:GUIDED_REPORT_SUCCESSOR,...PUBLICATION_VERSIONS,...(layout?{layout,pageRegistryVersion:'2.1.0'}:{}),methodId,locale,totalPages:sequence.length,customerPublishable:false,successorBaselineActivated:false,intro:boundIntro,pages,...(subjectPresentation?{subjectPresentation}:{} )};
+ const customer={schemaVersion:GUIDED_REPORT_SUCCESSOR,...PUBLICATION_VERSIONS,...(layout?{layout,pageRegistryVersion:'2.1.0'}:{}),methodId,locale,totalPages:sequence.length,customerPublishable:false,successorBaselineActivated:false,intro:boundIntro,pages,...(subjectPresentation?{subjectPresentation}:{} ),...(physicalComposition?{physicalComposition}:{})};
  return {customer,internalOnly:{generatedAt,temporalSnapshot,internalPages,versions:PUBLICATION_VERSIONS,humanAcceptance:'PENDING',productionCutover:'NOT_ACTIVATED'}};
 }
 export const VISUAL_PAGE_SCHEMA = 'PHI-OS-PERSONAL-READING-VISUAL-PAGE-v1.0.0';

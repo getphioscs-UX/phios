@@ -7,6 +7,9 @@ import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-
 
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
 const compositionR1=process.argv.includes('--composition-r1');
+if(compositionR1&&fs.existsSync('docs/acceptance/bazi-paid-report/composition-r1/HUMAN-ACCEPTANCE.json')){
+ console.log('FROZEN: Composition R1 has human ACCEPT; existing review artifacts are retained. Use the independent controlled-subject proof for binding work.');process.exit(0);
+}
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const renderLocale=async locale=>{
  const projection=await projectBaziSectionPublication({reading:source.reading,locale,temporalContext:source.temporalSnapshot,composition:{},allowUnselectedTiming:false});

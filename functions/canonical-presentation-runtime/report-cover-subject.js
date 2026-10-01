@@ -1,6 +1,9 @@
 import {sha256Stable,deepFreeze} from '../interpretation-runtime/mir7-utils.js';
 import {validateCanonicalBirthInput} from '../method-client-delivery/canonical-birth-input-runtime.js';
 function text(v){return String(v??'').trim();}
+export async function reportBirthInputFingerprint(input){
+ return sha256Stable(Object.fromEntries(['birthDate','birthTime','timeAccuracy','birthPlace','timezone'].map(k=>[k,input[k]])));
+}
 export async function createReportSubjectPresentation({subjectReference,displayName,canonicalBirthInput,identitySourceRef,birthSourceRef,allowMissingName=false}={}){
  const subjectRef=text(subjectReference),name=text(displayName);
  if(!subjectRef)throw Error('REPORT_SUBJECT_REFERENCE_REQUIRED');
@@ -10,7 +13,7 @@ export async function createReportSubjectPresentation({subjectReference,displayN
  if(!valid.valid)throw Object.assign(new Error('REPORT_SUBJECT_BIRTH_INPUT_INVALID'),{reasonCodes:valid.reasonCodes});
  const seed={subjectReference:subjectRef,displayName:name||null,birthDate:canonicalBirthInput.birthDate,birthTime:canonicalBirthInput.birthTime,timeAccuracy:canonicalBirthInput.timeAccuracy,identitySourceRef:text(identitySourceRef),birthSourceRef:text(birthSourceRef)};
  const subjectFingerprint=await sha256Stable(seed);
- return deepFreeze({schemaVersion:'PHI-OS-REPORT-SUBJECT-PRESENTATION-v1.0.0',subjectReference:subjectRef,displayName:name||null,birthDate:canonicalBirthInput.birthDate,birthTime:canonicalBirthInput.birthTime,timeAccuracy:canonicalBirthInput.timeAccuracy,locale:canonicalBirthInput.locale,identitySourceRef:seed.identitySourceRef,birthSourceRef:seed.birthSourceRef,subjectFingerprint});
+ return deepFreeze({schemaVersion:'PHI-OS-REPORT-SUBJECT-PRESENTATION-v1.0.0',subjectReference:subjectRef,displayName:name||null,birthDate:canonicalBirthInput.birthDate,birthTime:canonicalBirthInput.birthTime,timeAccuracy:canonicalBirthInput.timeAccuracy,locale:canonicalBirthInput.locale,identitySourceRef:seed.identitySourceRef,birthSourceRef:seed.birthSourceRef,subjectFingerprint,birthContext:{birthPlace:canonicalBirthInput.birthPlace,timezone:canonicalBirthInput.timezone},canonicalBirthInputFingerprint:await reportBirthInputFingerprint(canonicalBirthInput)});
 }
 export function assertReportSubjectMatch({presentation,subjectReference,birthDate,birthTime,timeAccuracy}={}){
  if(presentation?.schemaVersion!=='PHI-OS-REPORT-SUBJECT-PRESENTATION-v1.0.0')throw Error('REPORT_SUBJECT_PRESENTATION_REQUIRED');
@@ -30,6 +33,10 @@ export async function assertReportSubjectBinding({presentation,expectedBinding}=
  const keys=['subjectReference','displayName','birthDate','birthTime','timeAccuracy','identitySourceRef','birthSourceRef'];
  const fingerprint=await sha256Stable(Object.fromEntries(keys.map(k=>[k,presentation[k]])));
  if(fingerprint!==presentation.subjectFingerprint||fingerprint!==expectedBinding.inputSubjectFingerprint||fingerprint!==expectedBinding.semanticSubjectFingerprint)throw Error('COVER_SUBJECT_MISMATCH');
+ if(expectedBinding.canonicalBirthInputFingerprint){
+  const actual=await reportBirthInputFingerprint({...presentation,...presentation.birthContext});
+  if(actual!==presentation.canonicalBirthInputFingerprint||actual!==expectedBinding.canonicalBirthInputFingerprint)throw Error('COVER_BIRTH_INPUT_MISMATCH');
+ }
  return true;
 }
 

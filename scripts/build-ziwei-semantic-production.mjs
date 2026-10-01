@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {buildZiweiSemanticCanon,buildZiweiTerminologyCanon,ZIWEI_REPORT_SECTIONS,ZIWEI_REPORT_VERSION,CLAIM_TYPES,AUTHORITIES} from '../functions/personal-reading/narrative/ziwei-semantic-canon.js';
 import {buildZiweiReportEvidence,buildZiweiPublicationSection} from '../functions/personal-reading/narrative/ziwei-publication-adapter.js';
 const root='content/reports/ziwei',out='docs/reports/ziwei/semantic-production';
+if(fs.existsSync(out+'/HUMAN-ACCEPTANCE.json')){console.log('FROZEN: representative semantics have human ACCEPT; use build:ziwei-full-report for the authorized successor.');process.exit(0);}
 fs.mkdirSync(out,{recursive:true});
 const write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
 const authorityDigests=Object.fromEntries(Object.values(AUTHORITIES).flat().map(p=>[p,createHash('sha256').update(fs.readFileSync(p)).digest('hex')]));

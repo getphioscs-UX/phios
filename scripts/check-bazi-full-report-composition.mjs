@@ -61,12 +61,13 @@ try{
 }finally{await browser.close();}
 fs.writeFileSync(dir+'/browser-measurements.json',JSON.stringify(results,null,2)+'\n');
 const passed=results.every(r=>!r.overflowPages.length&&!r.rawTechnicalEnums.length&&!r.brokenImages.length&&!r.errors.length&&r.pages.every(p=>!p.clipped&&!p.blank&&(p.minBodyFont===null||p.minBodyFont>=16)));
-manifest.status=passed?'READY_FOR_HUMAN_REVIEW':'FIT_REPAIR_REQUIRED';
+const frozen=fs.existsSync(dir+'/HUMAN-ACCEPTANCE.json');
+manifest.status=passed?(frozen?'ACCEPTED_FROZEN':'READY_FOR_HUMAN_REVIEW'):'FIT_REPAIR_REQUIRED';
 fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2)+'\n');
 // Local-file iframe origins cannot be inspected reliably. Embed the measured
 // manifest so the review switcher displays the actual verified fit evidence.
 const reviewPath='tools/review/BAZI-FULL-REPORT-COMPOSITION-R1-REVIEW.html';
 const reviewData=JSON.stringify(manifest.artifacts).replaceAll('<','\\u003c');
-fs.writeFileSync(reviewPath,fs.readFileSync(reviewPath,'utf8').replace(/const data=.*?;function show\(i\)/s,()=>`const data=${reviewData};function show(i)`));
+if(!frozen)fs.writeFileSync(reviewPath,fs.readFileSync(reviewPath,'utf8').replace(/const data=.*?;function show\(i\)/s,()=>`const data=${reviewData};function show(i)`));
 assert(passed,'Composition browser/asset/readability gate failed; see browser-measurements.json');
 console.log(`PASS: accepted copy unchanged, physical pages ${manifest.artifacts.map(a=>a.locale+': '+a.physicalPageCount).join(', ')}, actual A4 measurement without overflow/clipping, bound assets decoded; human composition decision remains pending.`);
