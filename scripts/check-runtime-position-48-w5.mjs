@@ -14,6 +14,8 @@ const correspondence=read('content/civilization-atlas/reconfiguration/runtime-po
 const dossiers=read('content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json');
 const manifest=read('content/civilization-atlas/reconfiguration/atlas-manifest-v2.json');
 const crosswalk=read('content/registry/runtime-position-48-crosswalk-v1.json');
+const review=read('content/civilization-atlas/reconfiguration/runtime-position-w5-human-review-v1.json');
+const status=read('content/civilization-atlas/reconfiguration/runtime-position-w5-status-v1.json');
 
 assert(source.positions?.length===48,'SOURCE_WINDOW_COUNT');
 assert(history.alignments?.length===48,'HISTORICAL_ALIGNMENT_COUNT');
@@ -38,12 +40,23 @@ for(const row of correspondence.correspondences||[]){
   assert(row.primary?.knowledgeState==='UNKNOWN','CURRENT_POSITION_NOT_UNKNOWN_'+row.dossierId);
   assert(row.currentDataAdmission==='NOT_ADMITTED','CURRENT_DATA_ADMISSION_'+row.dossierId);
   assert((row.reachablePositions||[]).length===0,'FUTURE_POSITION_INFERRED_'+row.dossierId);
+  assert(row.historicalPositionReferenceBasis==='SOURCE_WINDOW_CONTAINS_2026','SOURCE_TIME_REFERENCE_BASIS_'+row.dossierId);
+  assert(row.historicalPositionReferenceSemanticEquivalence===false,'SOURCE_TIME_SEMANTIC_EQUIVALENCE_'+row.dossierId);
 }
 
 assert(manifest.registryRefs?.runtimePositionSourceWindows==='content/registry/runtime-position-48-source-windows-v1.json','MANIFEST_SOURCE_WINDOWS');
 assert(manifest.registryRefs?.runtimePositionHistoricalAlignment==='content/civilization-atlas/reconfiguration/runtime-position-book5-historical-alignment-v1.json','MANIFEST_HISTORY');
 assert(manifest.registryRefs?.runtimePositionCorrespondenceData==='content/civilization-atlas/reconfiguration/runtime-position-correspondence-v1.json','MANIFEST_CORRESPONDENCE_DATA');
 assert(crosswalk.w5?.bookVMappingMethod==='TEMPORAL_OVERLAP_ONLY','CROSSWALK_MAPPING_METHOD');
+assert(review.records?.length===11,'REPRESENTATIVE_REVIEW_COUNT');
+assert(review.status==='READY_FOR_HUMAN_REVIEW','REPRESENTATIVE_REVIEW_STATUS');
+for(const row of review.records||[]){
+  assert(row.semanticEquivalenceAsserted===false,'REVIEW_SEMANTIC_EQUIVALENCE_'+row.positionId);
+  assert(row.humanDecision==='PENDING','REVIEW_PREMATURE_DECISION_'+row.positionId);
+}
+assert(review.records.some(x=>x.positionId==='RP-44'),'REVIEW_PHASE_44');
+assert(review.records.some(x=>x.positionId==='RP-45'),'REVIEW_PHASE_45');
+assert(status.completed?.representativeSemanticReviewRecords===11,'W5_STATUS_REVIEW_COUNT');
 
 const loader=text('assets/js/pages/civilization-atlas/atlas-data.js');
 assert(loader.includes('runtime-position-book5-historical-alignment-v1.json'),'LOADER_HISTORY');
@@ -58,4 +71,4 @@ const discovery=text('assets/js/knowledge/public-discovery.js');
 assert(discovery.includes("type:'RUNTIME_POSITION'"),'GLOBAL_SEARCH_POSITION');
 assert(discovery.includes("positions:'/content/registry/runtime-position-48-v1.json'"),'GLOBAL_SEARCH_POSITION_SOURCE');
 
-console.log('PASS runtime-position-48 W5: source windows preserved, Book V temporal crosswalk active, Phase 45–48 excluded from history, 12 dossier correspondences governed UNKNOWN, UI/Search/Ask overlays wired.');
+console.log('PASS runtime-position-48 W5: source windows preserved, Book V temporal crosswalk active, Phase 45–48 excluded from history, 12 dossier correspondences governed UNKNOWN with explicit source-time boundary, representative semantic review pack ready, UI/Search/Ask overlays wired.');
