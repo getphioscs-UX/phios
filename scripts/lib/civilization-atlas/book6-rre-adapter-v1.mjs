@@ -27,13 +27,18 @@ const isoAt=(date,seconds=0)=>{
   return new Date(`${value}T00:00:${String(seconds).padStart(2,'0')}.000Z`).toISOString();
 };
 
-export function buildBook6DossierRreProjection({dossier,cases=[],registries}={}){
+export function buildBook6DossierRreProjection({dossier,cases=[],registries,currentEvidenceRecord=null}={}){
   if(!dossier?.id)throw new Error('B6_RRE_DOSSIER_REQUIRED');
   if(!registries)throw new Error('B6_RRE_REGISTRIES_REQUIRED');
 
   const relatedCases=(cases||[]).filter(row=>(row.relatedDossiers||[]).includes(dossier.id));
   const knowledgeReferences=uniq(relatedCases.map(row=>row.id));
   const meaningReferences=uniq(relatedCases.flatMap(row=>row.relatedBookSections||[]));
+  const admittedClaims=(currentEvidenceRecord?.currentEvidence?.admittedClaims||[]).filter(Boolean);
+  const evidenceReferences=uniq(admittedClaims.map(row=>row.claimId||row.evidenceId||row.sourceId).filter(Boolean));
+  const observationReferences=uniq((currentEvidenceRecord?.transitionSignals?.observed||[]).map(row=>typeof row==='string'?row:(row.id||row.signalId)).filter(Boolean));
+  const evidenceConflictState=String(currentEvidenceRecord?.currentEvidence?.conflictState||'UNKNOWN').toUpperCase();
+  const dataQuality=evidenceReferences.length?(evidenceConflictState==='CONFLICTED'?'CONFLICTING':'PARTIAL'):'UNKNOWN';
   const observedAt=isoAt(dossier.lastReviewedAt||dossier.updatedAt||dossier.createdAt,0);
   const assessmentTime=isoAt(dossier.lastReviewedAt||dossier.updatedAt||dossier.createdAt,1);
   const suffix=token(dossier.id.replace(/^DOSSIER-/,''))+'-'+token(dossier.version||'V1');
@@ -55,14 +60,14 @@ export function buildBook6DossierRreProjection({dossier,cases=[],registries}={})
   const input=buildReadoutInput({
     inputCode:`RRE-INPUT-B6-${suffix}`,
     realityReference,
-    observationReferences:[],
-    evidenceReferences:[],
+    observationReferences,
+    evidenceReferences,
     methodProjectionReferences:[],
     meaningReferences,
     knowledgeReferences,
     previousRealityReference:null,
     timeReference:{observedAt,timezone:'UTC'},
-    dataQuality:'UNKNOWN',
+    dataQuality,
     governanceReferences:[
       'PHI-OS-BOOK-VI-CURRENT-DATA-CONTRACT',
       'PHI-OS-RDG-RRE-READOUT-DATA-CONTRACT-SUCCESSOR-v1'
@@ -148,6 +153,11 @@ export function buildBook6DossierRreProjection({dossier,cases=[],registries}={})
     sourceFreshness:dossier.sourceFreshness,
     historicalKnowledgeReferences:knowledgeReferences,
     meaningReferences,
+    currentEvidenceReferences:evidenceReferences,
+    currentObservationReferences:observationReferences,
+    currentEvidenceAdmissionState:currentEvidenceRecord?.currentEvidence?.admissionState||'NO_ADMITTED_CURRENT_EVIDENCE',
+    observationThresholdState:currentEvidenceRecord?.observationThreshold?.state||'NOT_EVALUATED',
+    reachablePositionCount:(currentEvidenceRecord?.reachablePositions?.positions||[]).length,
     resolutionLimitKinds:uniq(readout.resolutionLimits.map(row=>row.limitKind)),
     missingLineageDimensions:uniq(readout.lineage.conclusionFragments.flatMap(row=>row.missingLineageDimensions||[])),
     readoutReference:{code:readout.readoutCode,version:readout.readoutVersion,digest:readout.readoutDigest},
