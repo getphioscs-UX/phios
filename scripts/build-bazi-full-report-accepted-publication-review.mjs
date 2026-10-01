@@ -1,4 +1,8 @@
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {build} from 'esbuild';
+import {buildBaziCustomerPublication} from '../functions/personal-reading/bazi-customer-publication.js';
+import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
 
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
@@ -18,3 +22,30 @@ fs.mkdirSync('tools/review',{recursive:true});
 fs.writeFileSync('tools/review/BAZI-FULL-REPORT-ACCEPTED-PUBLICATION-REVIEW.html',html);
 console.log('PASS: wrote tools/review/BAZI-FULL-REPORT-ACCEPTED-PUBLICATION-REVIEW.html');
 console.log('  Source: actual canonical section publication output; provider calls 0.');
+
+// MR-W1: use the customer composer and renderer, including the six opening
+// pages. The historical side-by-side section review above remains available.
+const sourceDigest=createHash('sha256').update(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json')).digest('hex');
+const css=['assets/css/tokens.css','assets/customer-ui/surfaces/visual-report.css','assets/customer-ui/surfaces/report-publication.css'].map(p=>fs.readFileSync(p,'utf8')).join('\n').replaceAll('url(/','url(../../');
+const artifacts=[];
+const reviewRuntime=await build({stdin:{contents:`import {fitPublicationForPrint,settlePublicationAssets} from './assets/customer-ui/js/personal-products/publication-report-pages.js';
+const root=document.querySelector('main');
+await document.fonts.ready;
+await settlePublicationAssets(root);
+const pageFit=fitPublicationForPrint(root);
+window.reviewQuality={pageFit,overflowPages:pageFit.filter(p=>!p.fits),humanDecision:null};
+window.batchReady=true;`,resolveDir:process.cwd(),sourcefile:'full-report-review-entry.js'},bundle:true,write:false,format:'esm',platform:'browser',minify:true});
+const runtime=reviewRuntime.outputFiles[0].text.replaceAll('</script','<\\/script');
+for(const [locale,suffix] of [['zh-Hans','ZH'],['en','EN']]){
+ const report=await buildBaziCustomerPublication({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,full:true});
+ const body=renderPublicationReport(report).replaceAll('src="/','src="../../').replaceAll('url(/','url(../../');
+ const file=`tools/review/BAZI-FULL-REPORT-REVIEW-${suffix}.html`;
+ const notice=locale==='en'
+  ?'Full customer reading order. Human decision pending: ACCEPT / REJECT. This historical chart fixture has no trusted account subject binding; identity acceptance remains blocked. Do not attach an invented name or birth date. Remote editorial images require network access.'
+  :'完整客户阅读顺序。等待人工决定：ACCEPT / REJECT。此历史命盘样本缺少可信账户主体绑定，身份验收仍受阻；不得补造姓名或出生日期。远端编辑图片需要联网。';
+ fs.writeFileSync(file,`<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>BaZi Full Report Review ${suffix}</title><style>${css}\nbody{margin:0;background:#e8e5de}.review-notice{max-width:940px;margin:24px auto;padding:20px;background:white;font:16px/1.6 system-ui;overflow-wrap:anywhere}@media print{.review-notice{display:none}}</style></head><body><aside class="review-notice"><h1>BaZi · ${suffix}</h1><p>${notice}</p><p>SHA-256: ${sourceDigest}</p><p>${report.totalPages} pages · fixture: 己巳・庚午・癸丑・戊午</p></aside><main>${body}</main><script type="module">${runtime}</script></body></html>`);
+ artifacts.push({locale,path:file,totalPages:report.totalPages,sections:[...new Set(report.pages.map(p=>p.sectionKey))],sourceDigest,subjectBindingVerified:false});
+ console.log(`PASS: wrote ${file} (${report.totalPages} pages)`);
+}
+fs.mkdirSync('content/reports/shared',{recursive:true});
+fs.writeFileSync('content/reports/shared/bazi-full-review-manifest.json',JSON.stringify({workId:'PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT',status:'READY_FOR_REVIEW',humanDecision:null,allowedDecisions:['ACCEPT','REJECT'],artifacts,blockers:['TRUSTED_SUBJECT_BINDING_MISSING_IN_HISTORICAL_FIXTURE'],productionAdmissionGranted:false},null,2)+'\n');

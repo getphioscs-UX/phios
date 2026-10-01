@@ -8,19 +8,21 @@ import {REPORT_EDITORIAL_ASSETS} from '../canonical-presentation-runtime/report-
 import {resolveReportEditorialAsset} from '../canonical-presentation-runtime/report-editorial-resolver.js';
 import {renderFrozenBaziIntro} from '../../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {assertReportSubjectBinding} from '../canonical-presentation-runtime/report-cover-subject.js';
+import {composeBaziPhysicalPages} from '../canonical-presentation-runtime/bazi-physical-composition.js';
 
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
-export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,reportSubjectBinding=null,requireSubjectOverlay=false}){
+export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,reportSubjectBinding=null,requireSubjectOverlay=false,compositionR1=false}){
  if(reading?.publicationDecision?.customerPublishable!==true)throw Error('BZR_PUBLICATION_NOT_ADMITTED');
  if(full&&requireSubjectOverlay)await assertReportSubjectBinding({presentation:reportSubjectPresentation,expectedBinding:reportSubjectBinding});
  const projection=await projectBaziSectionPublication({reading,locale,temporalContext:temporalSnapshot,composition:{},allowUnselectedTiming:true});
  const permitted=new Set(visualModules.modules.filter(m=>m.freeVisibility==='PREVIEW').map(m=>m.id));
- const pages=full?projection.pages:projection.pages.filter(p=>permitted.has(p.primaryVisualRef)||p.definitionKey==='S01_P3').map((p,i)=>({...p,pageNumber:i+7}));
+ const physical=full&&compositionR1?composeBaziPhysicalPages(projection.pages,locale):null;
+ const pages=full?(physical?.pages||projection.pages):projection.pages.filter(p=>permitted.has(p.primaryVisualRef)||p.definitionKey==='S01_P3').map((p,i)=>({...p,pageNumber:i+7}));
  const total=pages.length+6;
  if(full&&requireSubjectOverlay&&!reportSubjectPresentation)throw Error('REPORT_SUBJECT_PRESENTATION_REQUIRED');
  const intro=[1,2,3,4,5].map(page=>({pageNumber:page,kind:page===1&&reportSubjectPresentation?'STATIC_COVER':'STATIC',src:resolveReportEditorialAsset({registry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},methodId:'BZR',page,locale:page===1?'bilingual':locale,publicBaseUrl:PUBLIC_BASE}).src,alt:`BaZi ${page===1?'bilingual cover':locale+' P'+page}`,...(page===1&&reportSubjectPresentation?{subject:reportSubjectPresentation}:{})}));
  intro.push({pageNumber:6,kind:'FROZEN_TEMPLATE',html:renderFrozenBaziIntro(projection.legacy.reports.find(r=>r.pages.some(p=>p.pageNumber===6)),total)});
- if(full)return assemblePublicationSnapshot({methodId:'BZR',locale,pages,intro,temporalSnapshot,generatedAt:temporalSnapshot.generatedAt,internalPages:projection.internalSections,layout:SECTION_LAYOUT}).customer;
+ if(full){const customer=assemblePublicationSnapshot({methodId:'BZR',locale,pages,intro,temporalSnapshot,generatedAt:temporalSnapshot.generatedAt,internalPages:projection.internalSections,layout:SECTION_LAYOUT}).customer;return physical?{...customer,physicalComposition:physical}:customer;}
  // Free subset retains the same report renderer; no separate report runtime.
  return {schemaVersion:'GUIDED_REPORT_SUCCESSOR_R2',methodId:'BZR',locale,totalPages:total,intro,pages,customerPublishable:false,successorBaselineActivated:false,accessState:'FREE_REPORT_PREVIEW'};
 }
