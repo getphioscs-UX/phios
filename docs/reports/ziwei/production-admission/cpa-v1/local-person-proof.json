@@ -1,0 +1,89 @@
+{
+  "scope": "LOCAL_REAL_SQL_AND_CALCULATION_ONLY",
+  "canonicalPersonOwner": "IMPLEMENTED_AND_BOUND_LOCAL",
+  "encryptedAtRest": true,
+  "methodIndependent": true,
+  "subjectBinding": "PASS",
+  "birthVersioning": "PASS",
+  "oldReleasedMaterialUnchanged": true,
+  "tests": [
+    {
+      "name": "guest cannot create",
+      "result": "DENIED"
+    },
+    {
+      "name": "client owner cannot be supplied",
+      "result": "DENIED"
+    },
+    {
+      "name": "missing consent",
+      "result": "DENIED"
+    },
+    {
+      "name": "invalid date",
+      "result": "DENIED"
+    },
+    {
+      "name": "A cannot load B",
+      "result": "DENIED"
+    },
+    {
+      "name": "B cannot load A",
+      "result": "DENIED"
+    },
+    {
+      "name": "B cannot update A",
+      "result": "DENIED"
+    },
+    {
+      "name": "no entitlement",
+      "result": "DENIED"
+    },
+    {
+      "name": "client birth replacement",
+      "result": "DENIED"
+    },
+    {
+      "name": "unconfigured server browser verifier cannot release",
+      "result": "DENIED"
+    },
+    {
+      "name": "bad server browser receipt cannot release",
+      "result": "DENIED"
+    },
+    {
+      "name": "failed render cannot release",
+      "result": "DENIED"
+    },
+    {
+      "name": "other account cannot open",
+      "result": "DENIED"
+    },
+    {
+      "name": "stale version write",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked consent cannot generate",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked consent follows existing open policy",
+      "result": "DENIED"
+    },
+    {
+      "name": "tampered ciphertext",
+      "result": "DENIED"
+    }
+  ],
+  "qaAccountDelivery": "NOT_PROVEN",
+  "realStripeEntitlement": "NOT_PROVEN",
+  "renderReceipt": "LOCAL_POLICY_FIXTURE_NOT_DEPLOYED_BROWSER_PROOF",
+  "productionDelivery": "NOT_RUN",
+  "sourceHashes": {
+    "functions/account/canonical-person-store.js": "683e686c9538194e800de30982809fb55f891f9afb320a2b77c1a4fa3b1029ac",
+    "functions/api/account-persons.js": "ccdeb6c8384fe97ce5133f2c63ff3276abd242b2f108713f9f95f15e7174e84f",
+    "functions/report-delivery/ziwei-canonical-person-binding.js": "cb215f0c09edeb9159349920476af32337bd0074f830be000b0ff34559f7f33e",
+    "db/migrations/0009_canonical_account_person.sql": "40fb104c46f8cf08cc4b74b11d5795cf772c132657326eae9cf6dd97304e1026"
+  }
+}

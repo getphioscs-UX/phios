@@ -1,0 +1,40 @@
+import {esc,tr} from './runtime-ui.js';
+import {accountRequest} from './secure-drafts.js';
+const host=document.createElement('section');host.className='cx-card cx-stack';host.id='account-persons';
+document.querySelector('#main .cx-container')?.append(host);
+let persons=[],reports=[],editing=null,message='',available=false;
+const field=(name,en,zh,type='text',value='',extra='')=>`<label>${esc(tr(en,zh))}<input name="${name}" type="${type}" value="${esc(value)}" ${extra}></label>`;
+function render(){
+ const p=persons.find(p=>p.personId===editing),birth=p?.canonicalBirthInput;
+ host.innerHTML=`<h2>${esc(tr('Your birth profile','你的出生资料'))}</h2><p>${esc(tr('Save your own birth details with consent. Updates create a new version; released reports stay unchanged.','经你同意保存本人的出生资料。修改会建立新版本，已发布报告保持不变。'))}</p><p role="status">${esc(message)}</p>${available?`
+ <div class="cx-stack">${persons.map(p=>`<article><h3>${esc(p.name)}</h3><p>${esc(p.consentState==='ACTIVE'?tr('Consent active','同意有效'):tr('Consent withdrawn','已撤回同意'))} · ${esc(tr('Version','版本'))} ${p.version}</p><button class="cx-button" data-edit="${esc(p.personId)}">${esc(tr('Edit','修改'))}</button> <button class="cx-button cx-button--secondary" data-revoke="${esc(p.personId)}">${esc(tr('Withdraw consent','撤回同意'))}</button></article>`).join('')}</div>
+ <form data-person-form class="cx-stack"><h3>${esc(p?tr('Update your profile','更新资料'):tr('Add your profile','新增资料'))}</h3>
+ ${field('name','Name on report','报告显示姓名','text',p?.name??'','required maxlength="120"')}
+ ${field('birthDate','Birth date','出生日期','date',birth?.birthDate??'','required')}
+ ${field('birthTime','Birth time','出生时间','time',birth?.birthTime??'','step="1"')}
+ <label>${esc(tr('Time accuracy','时间准确度'))}<select name="timeAccuracy">${[['EXACT','Exact','准确'],['APPROXIMATE','Approximate','约略'],['UNKNOWN','Unknown','未知']].map(([v,en,zh])=>`<option value="${v}" ${birth?.timeAccuracy===v?'selected':''}>${esc(tr(en,zh))}</option>`).join('')}</select></label>
+ ${field('place','Birth place','出生地点','text',birth?.birthPlace.displayName??'','required')}
+ ${field('country','Country code (two letters)','国家代码（两个字母）','text',birth?.birthPlace.countryCode??'','required pattern="[A-Za-z]{2}" maxlength="2"')}
+ ${field('latitude','Latitude (optional)','纬度（可选）','number',birth?.birthPlace.latitude??'','step="any" min="-90" max="90"')}
+ ${field('longitude','Longitude (optional)','经度（可选）','number',birth?.birthPlace.longitude??'','step="any" min="-180" max="180"')}
+ ${field('timezone','Birth timezone, e.g. Asia/Hong_Kong','出生时区，例如 Asia/Hong_Kong','text',birth?.timezone.iana??'','required')}
+ ${field('offset','UTC offset at birth, e.g. +08:00','出生时 UTC 偏移，例如 +08:00','text',birth?.timezone.utcOffsetAtBirth??'','required pattern="[+-][0-9]{2}:[0-9]{2}"')}
+ <label>${esc(tr('Sex used for traditional calculation','传统计算采用的性别'))}<select name="calculationSex"><option value="">${esc(tr('Not supplied','未提供'))}</option><option value="MALE" ${p?.calculationSex==='MALE'?'selected':''}>${esc(tr('Male','男'))}</option><option value="FEMALE" ${p?.calculationSex==='FEMALE'?'selected':''}>${esc(tr('Female','女'))}</option></select></label>
+ <label><input type="checkbox" name="save" required>${esc(tr('These are my details. I consent to saving them and using them for personal method calculations and reports.','这是本人的资料。我同意保存，并用于个人方法计算与报告。'))}</label>
+ ${field('expires','Consent expiry','同意有效至','date','','required')}
+ <button class="cx-button" type="submit">${esc(tr('Save profile','保存资料'))}</button></form>
+ <form data-generate-form class="cx-stack"><h3>${esc(tr('Generate Zi Wei report','生成紫微报告'))}</h3><label>${esc(tr('Profile','资料'))}<select name="personId" required>${persons.filter(p=>p.consentState==='ACTIVE').map(p=>`<option value="${esc(p.personId)}">${esc(p.name)}</option>`).join('')}</select></label><label>${esc(tr('Report language','报告语言'))}<select name="locale"><option value="zh-Hans">中文</option><option value="en">English</option></select></label>
+ ${field('targetDate','Reading reference date','读取参考日期','date',new Date().toISOString().slice(0,10),'required')}
+ <p>${esc(tr('The reference uses noon UTC on your selected date. Your purchased report language and active consent are required.','参考时间为所选日期的 UTC 中午。需要已购买对应语言的报告权益及有效同意。'))}</p><button class="cx-button" type="submit">${esc(tr('Generate report','生成报告'))}</button></form>
+ <section><h3>${esc(tr('Released method reports','已发布的方法报告'))}</h3>${reports.map(r=>`<article><h4>${esc(tr('Zi Wei report','紫微报告'))} · ${esc(r.subjectName)}</h4><p>${r.locale==='zh-Hans'?'中文':'English'} · ${esc(tr('Version','版本'))} ${r.version} · ${esc(new Date(r.releasedAt).toLocaleString())} · ${esc(tr('Released','已发布'))}</p><a class="cx-button" target="_blank" rel="noopener" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr('Open report','打开报告'))}</a></article>`).join('')||`<p>${esc(tr('No released method reports yet.','目前没有已发布的方法报告。'))}</p>`}</section>`:''}`;
+ host.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{editing=b.dataset.edit;render();});
+ host.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=async()=>{const p=persons.find(p=>p.personId===b.dataset.revoke);try{await accountRequest('/api/account-persons',{action:'revoke',personId:p.personId,expectedVersion:p.version});await refresh();}catch{message=tr('Unable to withdraw consent. Try again.','无法撤回同意，请重试。');render();}});
+ host.querySelector('[data-person-form]')?.addEventListener('submit',async e=>{
+  e.preventDefault();const f=new FormData(e.target),button=e.target.querySelector('button[type=submit]');button.disabled=true;
+  const time=f.get('timeAccuracy')==='UNKNOWN'?null:f.get('birthTime');
+  try{await accountRequest('/api/account-persons',{action:'save',...(p?{personId:p.personId}:{}),expectedVersion:p?.version??0,name:f.get('name'),birth:{birthDate:f.get('birthDate'),birthTime:time?(time.length===5?time+':00':time):null,timeAccuracy:f.get('timeAccuracy'),birthPlace:{displayName:f.get('place'),countryCode:f.get('country').toUpperCase(),latitude:f.get('latitude')===''?null:Number(f.get('latitude')),longitude:f.get('longitude')===''?null:Number(f.get('longitude'))},timezone:{iana:f.get('timezone'),utcOffsetAtBirth:f.get('offset')}},calculationSex:f.get('calculationSex')||null,consent:{personalMethod:f.has('save'),report:f.has('save'),saveBirthInput:f.has('save')},expiresAt:f.get('expires')+'T23:59:59Z'});editing=null;message=tr('Profile saved.','资料已保存。');await refresh();}catch{message=tr('Unable to save. Check the birth details and choose a consent expiry within one year.','无法保存。请检查出生资料，并将同意有效期设在一年以内。');render();}
+ });
+ host.querySelector('[data-generate-form]')?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);e.target.querySelector('button').disabled=true;try{await accountRequest('/api/account-method-reports',{personId:f.get('personId'),locale:f.get('locale'),targetContext:{targetDate:f.get('targetDate'),targetTime:'12:00:00',targetTimezone:{iana:'Etc/UTC',utcOffsetAtTarget:'+00:00'},source:'EXPLICIT_REQUEST'}});message=tr('Your report is released.','报告已发布。');await refresh();}catch{message=tr('The report could not be released. Check access and consent; report verification must also be available.','报告暂未能发布。请核对权益及同意状态；报告验证服务也必须可用。');render();}});
+}
+async function refresh(){try{persons=(await accountRequest('/api/account-persons')).persons;available=true;reports=(await accountRequest('/api/account-method-reports').catch(()=>({reports:[]}))).reports;}catch(e){persons=[];reports=[];available=false;message=e.status===401?tr('Sign in to manage your birth profile.','请登录以管理出生资料。'):tr('Birth profiles are temporarily unavailable.','出生资料暂不可用。');}render();}
+refresh();window.addEventListener('phios:localechange',render);window.addEventListener('pageshow',e=>{if(e.persisted)refresh();});window.addEventListener('pagehide',()=>{persons=[];reports=[];editing=null;available=false;render();});
