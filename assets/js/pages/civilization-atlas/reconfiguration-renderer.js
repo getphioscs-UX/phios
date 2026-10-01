@@ -105,6 +105,21 @@ const W7_STATE_ZH=Object.freeze({
  REJECTED:'已否决'
 });
 const w7StateLabel=(v,l='en')=>l==='zh-Hans'?(W7_STATE_ZH[String(v||'NOT_STARTED')]||humanize(v||'NOT_STARTED')):humanize(v||'NOT_STARTED');
+const W7_LANE_LABEL=Object.freeze({
+ DEMOGRAPHY:{'zh-Hans':'人口',en:'Demography'},
+ INDUSTRY:{'zh-Hans':'产业',en:'Industry'},
+ INFRASTRUCTURE:{'zh-Hans':'基础设施',en:'Infrastructure'},
+ ENERGY:{'zh-Hans':'能源',en:'Energy'},
+ TRADE_SUPPLY_CHAIN:{'zh-Hans':'贸易与供应链',en:'Trade & supply chain'},
+ FINANCE_FISCAL:{'zh-Hans':'金融与财政',en:'Finance & fiscal'},
+ TECHNOLOGY:{'zh-Hans':'科技',en:'Technology'},
+ LABOUR_SKILLS:{'zh-Hans':'劳动与技能',en:'Labour & skills'},
+ HOUSING_URBAN:{'zh-Hans':'住房与城市',en:'Housing & urban'},
+ EXTERNAL_DEPENDENCY:{'zh-Hans':'外部依赖',en:'External dependency'},
+ CARRIER_STRUCTURE:{'zh-Hans':'载体结构',en:'Carrier structure'},
+ PRESSURE_FIELD:{'zh-Hans':'压力场',en:'Pressure field'}
+});
+const w7LaneLabel=(id,l='en')=>W7_LANE_LABEL[id]?.[l]||W7_LANE_LABEL[id]?.en||humanize(id);
 const valueLabel=(v,l='en')=>{
  if(v==null||v==='')return tr('ui.unknown','Unknown');
  if(typeof v==='string'){
@@ -386,7 +401,7 @@ function renderDossiers(host,data,l,state,store){
    +'<section><p class="knowledge-eyebrow">06 · '+esc(zh?'尚未知':'Unknown boundary')+'</p><ul>'+(unknowns.length?unknowns.map(v=>'<li>'+esc(dt(v))+'</li>').join(''):'<li>'+esc(c.unknown)+'</li>')+'</ul></section>'
    +'<section><p class="knowledge-eyebrow">07 · '+esc(zh?'当前证据 → 四十八运行位置':'Current evidence → 48 runtime positions')+'</p><dl class="civ-reconfig-dl"><dt>'+esc(zh?'当前证据门':'Current evidence gate')+'</dt><dd>'+esc(w6StateLabel(w6.currentEvidence?.admissionState||'UNKNOWN',l))+'</dd><dt>'+esc(zh?'已验收证据':'Admitted evidence')+'</dt><dd>'+esc(String(admittedClaimCount))+'</dd><dt>'+esc(zh?'当前位置读取':'Current position readout')+'</dt><dd>'+esc(primaryPosition?loc(primaryPosition.shortLabel,l):(zh?'未知':'Unknown'))+'</dd></dl>'+(primaryPosition?'':'<p>'+esc(zh?'没有通过时效性、来源与证据 admission 的 CURRENT_DATA，因此当前位置保持 UNKNOWN。':'No CURRENT_DATA has passed freshness, provenance, and evidence admission, so current position remains UNKNOWN.')+'</p>')+(historicalPositionRefs.length?'<p class="cx-meta">'+esc(zh?'来源时间窗参照：':'Source time-window reference: ')+historicalPositionRefs.map(x=>x.id+' · '+(x.sourceWindow?.sourceWindowLabel||'')+' · '+loc(x.shortLabel,l)).join(' · ')+'</p>':'')+'<p class="knowledge-boundary">'+esc(zh?'来源时间窗不是当前位置证据；日期重叠不会把对象自动放进某个运行位置。':'A source time window is not current-position evidence; date overlap never assigns an entity to a runtime position automatically.')+'</p></section>'
    +'<section><p class="knowledge-eyebrow">08 · '+esc(zh?'转移讯号 → 观察阈值 → 可达位置':'Transition signals → observation threshold → reachable positions')+'</p><dl class="civ-reconfig-dl"><dt>'+esc(zh?'已验收转移讯号':'Admitted transition signals')+'</dt><dd>'+esc(String(observedTransitionSignals.length))+'</dd><dt>'+esc(zh?'观察阈值':'Observation threshold')+'</dt><dd>'+esc(w6StateLabel(threshold.state||'NOT_EVALUATED',l))+'</dd><dt>'+esc(zh?'可达位置':'Reachable positions')+'</dt><dd>'+esc(String(reachablePositionRows.length))+'</dd></dl>'+(thresholdCriteria.length?'<ul>'+thresholdCriteria.map(x=>'<li><strong>'+esc(x.criterionId)+'</strong> · '+esc(w6StateLabel(x.state||'UNKNOWN',l))+'</li>').join('')+'</ul>':'')+'<p>'+esc(projectionBoundary)+'</p><p class="knowledge-boundary">'+esc(zh?'观察目标不等于讯号；讯号不等于跨过阈值；跨过阈值也不等于未来必然到达某个位置。可达位置始终属于条件性投影。':'Observation target ≠ signal; signal ≠ threshold crossing; threshold crossing ≠ guaranteed future position. Reachable positions remain conditional projection.')+'</p></section>'
-   +'<section><p class="knowledge-eyebrow">09 · '+esc(zh?'当前证据验收准备':'Current-evidence admission readiness')+'</p><dl class="civ-reconfig-dl"><dt>'+esc(zh?'工作状态':'Workflow state')+'</dt><dd>'+esc(w7StateLabel(w7.state||'NOT_STARTED',l))+'</dd><dt>'+esc(zh?'必要证据通道':'Required evidence lanes')+'</dt><dd>'+esc(String(w7RequiredLanes.length))+'</dd><dt>'+esc(zh?'已有验收证据的必要通道':'Required lanes with admitted evidence')+'</dt><dd>'+esc(String(w7ReadyLanes.length))+'</dd><dt>'+esc(zh?'运行位置候选':'Runtime-position candidates')+'</dt><dd>'+esc(String(w7Candidates.length))+'</dd></dl>'+(w7RequiredLanes.length?'<div class="civ-reconfig-dimension-list">'+w7RequiredLanes.map(x=>'<span>'+esc(x.laneId)+' · '+esc(w7StateLabel(x.admissionState||'NOT_STARTED',l))+'</span>').join('')+'</div>':'')+'<p class="knowledge-boundary">'+esc(zh?'这一层只说明为了产生当前位置候选还缺哪些 current evidence。它不会自己搜索后把结果直接写成事实，也不会因为资料齐全就自动分配 Phase。':'This layer shows which current-evidence lanes are still needed before a position candidate can be formed. Search results never become facts automatically, and evidence readiness never auto-assigns a Phase.')+'</p></section>'
+   +'<section><p class="knowledge-eyebrow">09 · '+esc(zh?'当前证据验收准备':'Current-evidence admission readiness')+'</p><dl class="civ-reconfig-dl"><dt>'+esc(zh?'工作状态':'Workflow state')+'</dt><dd>'+esc(w7StateLabel(w7.state||'NOT_STARTED',l))+'</dd><dt>'+esc(zh?'必要证据通道':'Required evidence lanes')+'</dt><dd>'+esc(String(w7RequiredLanes.length))+'</dd><dt>'+esc(zh?'已有验收证据的必要通道':'Required lanes with admitted evidence')+'</dt><dd>'+esc(String(w7ReadyLanes.length))+'</dd><dt>'+esc(zh?'运行位置候选':'Runtime-position candidates')+'</dt><dd>'+esc(String(w7Candidates.length))+'</dd></dl>'+(w7RequiredLanes.length?'<div class="civ-reconfig-dimension-list">'+w7RequiredLanes.map(x=>'<span>'+esc(w7LaneLabel(x.laneId,l))+' · '+esc(w7StateLabel(x.admissionState||'NOT_STARTED',l))+'</span>').join('')+'</div>':'')+'<p class="knowledge-boundary">'+esc(zh?'这一层只说明为了产生当前位置候选还缺哪些 current evidence。它不会自己搜索后把结果直接写成事实，也不会因为资料齐全就自动分配 Phase。':'This layer shows which current-evidence lanes are still needed before a position candidate can be formed. Search results never become facts automatically, and evidence readiness never auto-assigns a Phase.')+'</p></section>'
   +'</div>'
   +'<div data-runtime-readout></div>'
   +'<div class="civ-reconfig-actions"><label><input type="checkbox" data-dossier-compare="'+esc(d.id)+'" '+(state.compareDossierIds.includes(d.id)?'checked':'')+'> '+esc(c.compareRuntime)+'</label></div>'
