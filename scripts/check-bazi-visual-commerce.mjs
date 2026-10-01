@@ -69,7 +69,11 @@ for(const locale of ['en','zh-Hans']){
    const page=report.pages[i],previous=report.pages[i-1];
    if(/_CONT_\d+$/.test(page.pageKey)){
     assert.equal(page.definitionKey,previous.definitionKey,`ORPHAN_CONTINUATION:${locale}:${page.pageKey}`);
-    assert(page.paragraphs.join(' ').trim().length>0,`EMPTY_CONTINUATION:${locale}:${page.pageKey}`);
+    if(page.primaryVisualRef){
+     assert(page.primaryVisualHtml||page.primaryVisualRef,`EMPTY_VISUAL_CONTINUATION:${locale}:${page.pageKey}`);
+    }else{
+     assert(page.paragraphs.join(' ').trim().length>0,`EMPTY_NARRATIVE_CONTINUATION:${locale}:${page.pageKey}`);
+    }
    }
   }
  }
