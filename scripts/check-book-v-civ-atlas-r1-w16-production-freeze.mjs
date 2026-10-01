@@ -206,7 +206,6 @@ assert.equal(bookViDataSuccessorV5.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_R
 assert.equal(bookViDataSuccessorV5.scope.productionAdmissionChanged,false);
 assert.equal(bookViDataSuccessorV5.scope.bookVHistoricalRegistriesChanged,false);
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV5.change.changeClass));
-assert.equal(digest(bookViDataSuccessorV5.change.path),bookViDataSuccessorV5.change.successorSha256,'Atlas data successor v5 digest drift');
 const bookViDataSuccessorV6=json('content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v6.json');
 assert.equal(bookViDataSuccessorV6.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v5.json');
 assert.equal(bookViDataSuccessorV6.predecessorSha256,digest(bookViDataSuccessorV6.predecessor));
@@ -216,7 +215,16 @@ assert.equal(bookViDataSuccessorV6.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_R
 assert.equal(bookViDataSuccessorV6.scope.productionAdmissionChanged,false);
 assert.equal(bookViDataSuccessorV6.scope.bookVHistoricalRegistriesChanged,false);
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV6.change.changeClass));
-assert.equal(digest(bookViDataSuccessorV6.change.path),bookViDataSuccessorV6.change.successorSha256,'Atlas data successor v6 digest drift');
+const bookViDataSuccessorV7=json('content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v7.json');
+assert.equal(bookViDataSuccessorV7.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v6.json');
+assert.equal(bookViDataSuccessorV7.predecessorSha256,digest(bookViDataSuccessorV7.predecessor));
+assert.equal(bookViDataSuccessorV7.change.path,bookViDataSuccessorV6.change.path);
+assert.equal(bookViDataSuccessorV7.change.previousSha256,bookViDataSuccessorV6.change.successorSha256);
+assert.equal(bookViDataSuccessorV7.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');
+assert.equal(bookViDataSuccessorV7.scope.productionAdmissionChanged,false);
+assert.equal(bookViDataSuccessorV7.scope.bookVHistoricalRegistriesChanged,false);
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV7.change.changeClass));
+assert.equal(digest(bookViDataSuccessorV7.change.path),bookViDataSuccessorV7.change.successorSha256,'Atlas data successor v7 digest drift');
 assert.equal(bookViDataSuccessorV3.scope.bookVCanonicalTheoryChanged,false);
 assert.equal(bookViDataSuccessorV3.scope.bookVHistoricalRegistriesChanged,false);
 assert.equal(bookViDataSuccessorV3.scope.parallelAtlasRuntimeCreated,false);
@@ -226,7 +234,7 @@ assert.match(atlasDataV3Source,/loadReconfigurationVisualStatus/);
 assert.match(atlasDataV3Source,/loadCivilizationVisualBindings/);
 assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json')));
 assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json')));
-authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessorV6.change.successorSha256,changeClass:bookViDataSuccessorV6.change.changeClass});
+authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessorV7.change.successorSha256,changeClass:bookViDataSuccessorV7.change.changeClass});
 
 // Book VI shares the existing Atlas state and URL-state owners with Book V.
 // Verify the frozen Book V predecessor bytes first, then authorize only the
