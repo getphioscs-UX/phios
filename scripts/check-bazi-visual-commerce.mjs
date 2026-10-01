@@ -57,11 +57,21 @@ for(const locale of ['en','zh-Hans']){
  const untimed=await projectBaziPublicationPages({reading:noTarget,locale,temporalContext:unselected,allowUnselectedTiming:true});
  assert(untimed.reports.length);assert(untimed.reports.every(r=>!r.pages.some(p=>p.temporal)),'No selected time may not invent a current-period layer');
  for(const full of [false,true]){
-  // This older English natal-only fixture has 123 source words for S03's
-  // 130-word minimum. Its chart projection is valid, but premium publication
-  // must reject insufficient prose rather than pad it or lower the budget.
-  if(locale==='en'){await assert.rejects(()=>buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full}),/SECTION_BLOCK_PARTITION_UNDER_BUDGET:en:S03_SYSTEM/);continue;}
-  const report=await buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full});assert.equal(report.totalPages,report.pages.length+6);if(!full)assert.equal(report.accessState,'FREE_REPORT_PREVIEW');assert(!report.pages.some(p=>p.temporal));assert(report.pages.some(p=>p.primaryVisualRef==='BZR-VIS-FIVE-ELEMENTS'));
+  // Owner-accepted semantic blocks are immutable. A natal-only fixture may
+  // legitimately produce a thinner continuation page rather than padding,
+  // rewriting, or rejecting the publication solely to meet a density target.
+  const report=await buildBaziCustomerPublication({reading:noTarget,locale,temporalSnapshot:unselected,full});
+  assert.equal(report.totalPages,report.pages.length+6);
+  if(!full)assert.equal(report.accessState,'FREE_REPORT_PREVIEW');
+  assert(!report.pages.some(p=>p.temporal),'unselected timing must not invent temporal metadata');
+  assert(report.pages.some(p=>p.primaryVisualRef==='BZR-VIS-FIVE-ELEMENTS'));
+  for(let i=1;i<report.pages.length;i++){
+   const page=report.pages[i],previous=report.pages[i-1];
+   if(/_CONT_\d+$/.test(page.pageKey)){
+    assert.equal(page.definitionKey,previous.definitionKey,`ORPHAN_CONTINUATION:${locale}:${page.pageKey}`);
+    assert(page.paragraphs.join(' ').trim().length>0,`EMPTY_CONTINUATION:${locale}:${page.pageKey}`);
+   }
+  }
  }
 }
 assert.equal(noTarget.professionalModules.professionalTimeline.targetContext,null);
