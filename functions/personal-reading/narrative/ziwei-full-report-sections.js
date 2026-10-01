@@ -62,6 +62,19 @@ export async function buildZiweiFullReportSections({evidence,locale}){
   }
   const digest=sha256Stable({subject:s.subjectKey,sectionId,structure});
   const claims=rows.map((r,i)=>({claimId:`ZWR:${s.subjectKey}:${sectionId}:${digest.slice(0,16)}:C${i+1}`,subjectId:s.subjectId,inputFingerprint:s.inputFingerprint,sectionId,claimType:r.type,structure,meaning:{text:r.text,selectedPlacements:[first.entityId,second.entityId]},conditions:[{text:stars[first.starCode].dimensions.highExpression}],counterweights:[{text:stars[first.starCode].dimensions.strainedExpression}],observableExpressions:[],timingRelevance:timing,navigationImplications:[],sourceRefs:[...s.sourceRefs,`input:${s.inputFingerprint}`,...r.priorClaimRefs.map(x=>'claim:'+x)],priorClaimRefs:r.priorClaimRefs,authority:AUTHORITIES,confidence:'SYMBOLIC_CONDITIONAL',unknowns:s.unknowns.filter(u=>!u.placementId||structure.placements.includes(u.placementId)),prohibitedExtensions:PROHIBITED,semanticOperators:r.type==='UNKNOWN'?['OPEN']:r.type==='NAVIGATION_IMPLICATION'?['QUESTION']:['CONTEXTUALIZES'],certainty:r.type==='UNKNOWN'?'UNRESOLVED':'CONDITIONAL'}));
+  if(sectionId==='S11'){
+   const prior=new Map(sections.flatMap(section=>section.claims.map(c=>[c.claimId,c])));
+   for(const claim of claims){
+    const sources=claim.priorClaimRefs.map(id=>prior.get(id));
+    if(!sources.length||sources.some(c=>!c))throw Error('ZIWEI_NAVIGATION_PRIOR_CLAIM_REQUIRED');
+    claim.conditions=sources.flatMap(c=>c.conditions);
+    claim.counterweights=sources.flatMap(c=>c.counterweights);
+    claim.observableExpressions=sources.flatMap(c=>c.observableExpressions);
+    claim.timingRelevance=sources.flatMap(c=>c.timingRelevance);
+    claim.navigationImplications=sources.flatMap(c=>c.navigationImplications);
+    claim.meaning={priorClaimRefs:claim.priorClaimRefs,composition:claim.meaning.text};
+   }
+  }
   claims.forEach(c=>assertZiweiClaimBinding(c,evidence));
   const brief={methodId:'ZWR',sectionKey:sectionId,claims:claims.map(c=>({...c,conditions:c.conditions.map(x=>x.text[locale]),counterweights:c.counterweights.map(x=>x.text[locale]),timing:c.timingRelevance})),briefSemanticDigest:digest,sourceSemanticDigest:digest,sourceAuthorityVersion:ZIWEI_FULL_REPORT_VERSION};
   const publicationIr=await buildReportPublicationIrV2({methodId:'ZWR',reportVersion:ZIWEI_FULL_REPORT_VERSION,sectionKey:sectionId,locale,brief,candidate:{blocks:rows.map((r,i)=>({role:r.type,text:r.text,claimRefs:[claims[i].claimId]}))},semanticOwner:'ZIWEI_PRO_R2_AUTHORITY_V2',compositionOwner:ZIWEI_FULL_REPORT_VERSION,snapshotLineage:{subjectId:s.subjectId,inputFingerprint:s.inputFingerprint,sourceCalculationDigest:s.sourceDigests.sourceCalculationDigest}});

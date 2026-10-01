@@ -7,7 +7,9 @@ import {assertZiweiClaimBinding} from '../functions/personal-reading/narrative/z
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const root='content/reports/ziwei',m=read(root+'/representative-review-manifest.json'),canon=read(root+'/semantic-canon.json'),registry=read(root+'/section-registry.json');
 const validate=new Ajv({strict:false}).compile(read(root+'/publication-ir-schema.json'));
-assert.equal(m.outputCount,12);assert.equal(m.outputs.length,12);assert.equal(m.fullReport,'NOT_STARTED');assert.equal(m.productionAdmissionGranted,false);assert.equal(m.humanDecision,null);
+assert.equal(m.outputCount,12);assert.equal(m.outputs.length,12);assert.equal(m.fullReport,'READY_FOR_HUMAN_REVIEW');assert.equal(m.productionAdmissionGranted,false);assert.equal(m.humanDecision,'ACCEPT');
+const acceptance=read('docs/reports/ziwei/semantic-production/HUMAN-ACCEPTANCE.json');assert.equal(acceptance.decision,'ACCEPT');
+for(const row of acceptance.outputs)assert.equal(createHash('sha256').update(fs.readFileSync(row.path)).digest('hex'),row.sha256);
 assert.equal(canon.stars.length,28);assert.equal(canon.palaces.length,12);assert.equal(registry.sections.length,12);assert(canon.historicalAtomicEightStarOwnerUnchanged);
 assert.deepEqual(canon.timingLayers.map(t=>t.id.split(':').at(-1)),['NATAL','DA_XIAN','LIU_NIAN']);
 assert(canon.relationshipOperators.every(o=>o.topologyAloneSufficient===false));
@@ -55,5 +57,5 @@ for(const sectionId of ['S02','S04','S05']){
  assert(overlap<0.75,'names-masked reports too similar');differences.push({sectionId,namesMaskedTrigramJaccard:overlap,primaryA:a.selectedComposition.primary,primaryB:b.selectedComposition.primary});
 }
 assert(forbidden('You will become rich'));assert(forbidden('你患有糖尿病'));
-fs.writeFileSync('docs/reports/ziwei/semantic-production/qa-results.json',JSON.stringify({status:'PASS',outputs:12,claims:records.reduce((n,r)=>n+r.record.claims.length,0),localeClaimParity:'PASS',sourceAuthorityClosure:'PASS',unknownPreservation:'PASS',bindingNegativeTests:'PASS',differences,humanDecision:null},null,2)+'\n');
+fs.writeFileSync('docs/reports/ziwei/semantic-production/qa-results.json',JSON.stringify({status:'PASS',outputs:12,claims:records.reduce((n,r)=>n+r.record.claims.length,0),localeClaimParity:'PASS',sourceAuthorityClosure:'PASS',unknownPreservation:'PASS',bindingNegativeTests:'PASS',differences,humanDecision:m.humanDecision},null,2)+'\n');
 console.log('PASS: 12 prototypes / 84 claims; shared IR preservation, authority/source closure, bilingual IDs, evidence ownership, unavailable-scope retention, negative binding tests and names-masked differentiation.');

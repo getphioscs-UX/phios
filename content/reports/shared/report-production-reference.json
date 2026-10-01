@@ -16,19 +16,17 @@
   ],
   "acceptedSectionReceiptScope": "S02-S10; verified existing owner receipts are preserved; not a new full-report acceptance",
   "allowedChanges": [
-    "full report flow issue",
-    "page break",
-    "visual binding",
-    "broken locale",
-    "wrong subject binding",
-    "duplication discovered during full review",
-    "technical rendering defect"
+    "concrete regression repair",
+    "subject-binding defect repair"
   ],
   "prohibitedChanges": [
     "mass narrative rewrite",
     "section architecture redesign",
     "10 Section Master redesign",
-    "T2/T3 architecture restart"
+    "T2/T3 architecture restart",
+    "reopen accepted S01–S10 copy",
+    "reopen Career, Wealth or Guidance",
+    "reopen Composition R1"
   ],
   "owners": [
     {
@@ -137,13 +135,17 @@
       "notes": "Persist released material without regenerating on refresh."
     }
   ],
-  "nextGate": "Controlled subject binding and independent production admission",
+  "nextGate": "Independent production admission and commerce E2E; frozen historical sample remains unbound.",
   "productionAdmissionGranted": false,
   "BAZI_EDITORIAL": "ACCEPT",
   "BAZI_COMPOSITION": "ACCEPT",
-  "BAZI_SUBJECT_BINDING": "PENDING",
+  "BAZI_SUBJECT_BINDING": "CONTROLLED_PROOF_PASS",
   "BAZI_PRODUCTION_ADMISSION": "PENDING",
   "compositionReviewRef": "tools/review/BAZI-FULL-REPORT-COMPOSITION-R1-REVIEW.html",
   "decisionSource": "Explicit user decision in current conversation, 2026-10-01",
-  "commerceE2E": "NOT_PROVEN"
+  "commerceE2E": "NOT_PROVEN",
+  "historicalSubjectBindingVerified": false,
+  "controlledSubjectProof": "docs/acceptance/bazi-paid-report/controlled-subject-r1/proof.json",
+  "controlledSubjectValidation": "docs/acceptance/bazi-paid-report/controlled-subject-r1/validation.json",
+  "physicalCompositionContract": "content/reports/shared/physical-composition-contract-r1.json"
 }

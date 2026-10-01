@@ -30033,14 +30033,22 @@
             ]
           },
           "meaning": {
-            "text": "把核心运行方式带回现实，先观察「证据足够且边界明确后的果断行动」成立时有哪些具体条件，再对照「过度强硬、孤立或反复以危机模式决策」出现时哪些条件已经改变。这是前文命宫的七杀所支持的导航范围；优先选择能够被复盘的小步行动。",
-            "selectedPlacements": [
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-            ]
+            "priorClaimRefs": [
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S02:b1d3e4cbad99c19c:COUNTERWEIGHT",
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S02:b1d3e4cbad99c19c:NAVIGATION_IMPLICATION"
+            ],
+            "composition": "把核心运行方式带回现实，先观察「证据足够且边界明确后的果断行动」成立时有哪些具体条件，再对照「过度强硬、孤立或反复以危机模式决策」出现时哪些条件已经改变。这是前文命宫的七杀所支持的导航范围；优先选择能够被复盘的小步行动。"
           },
           "conditions": [
             {
+              "entityId": "ZWR:CONDITION:QI_SHA:HIGH",
+              "text": {
+                "en": "decisive action after enough evidence and with explicit limits",
+                "zh-Hans": "证据足够且边界明确后的果断行动"
+              }
+            },
+            {
+              "entityId": "ZWR:CONDITION:QI_SHA:HIGH",
               "text": {
                 "en": "decisive action after enough evidence and with explicit limits",
                 "zh-Hans": "证据足够且边界明确后的果断行动"
@@ -30049,21 +30057,154 @@
           ],
           "counterweights": [
             {
+              "entityId": "ZWR:COUNTERWEIGHT:QI_SHA:STRAINED",
               "text": {
                 "en": "hardness, isolation or repeated crisis-style decision making",
                 "zh-Hans": "过度强硬、孤立或反复以危机模式决策"
               }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TIAN_XIANG:CONTEXT",
+              "text": {
+                "en": "fair coordination that still permits judgment",
+                "zh-Hans": "公平协调同时保留判断空间"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:QI_SHA:STRAINED",
+              "text": {
+                "en": "hardness, isolation or repeated crisis-style decision making",
+                "zh-Hans": "过度强硬、孤立或反复以危机模式决策"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TIAN_XIANG:CONTEXT",
+              "text": {
+                "en": "fair coordination that still permits judgment",
+                "zh-Hans": "公平协调同时保留判断空间"
+              }
             }
           ],
-          "observableExpressions": [],
+          "observableExpressions": [
+            {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:QI_SHA:decisionPattern",
+              "text": {
+                "en": "decide quickly when continuation requires a hard choice",
+                "zh-Hans": "当继续前进需要明确取舍时快速决定"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+            },
+            {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:QI_SHA:decisionPattern",
+              "text": {
+                "en": "decide quickly when continuation requires a hard choice",
+                "zh-Hans": "当继续前进需要明确取舍时快速决定"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+            }
+          ],
           "timingRelevance": [
             {
               "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
               "layer": "NATAL",
               "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+              "layer": "LIU_NIAN",
+              "role": "YEAR_LEVEL_ACTIVATION",
+              "focus": {
+                "lunarYear": 2026,
+                "yearStem": "BING",
+                "yearBranch": "WU",
+                "lifeBranch": "WU",
+                "natalDomainCode": "TRAVEL",
+                "natalDomainLabel": "迁移宫"
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+              "layer": "NATAL",
+              "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+              "layer": "LIU_NIAN",
+              "role": "YEAR_LEVEL_ACTIVATION",
+              "focus": {
+                "lunarYear": 2026,
+                "yearStem": "BING",
+                "yearBranch": "WU",
+                "lifeBranch": "WU",
+                "natalDomainCode": "TRAVEL",
+                "natalDomainLabel": "迁移宫"
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+              ]
             }
           ],
-          "navigationImplications": [],
+          "navigationImplications": [
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:QI_SHA:HIGH",
+              "text": {
+                "en": "decisive action after enough evidence and with explicit limits",
+                "zh-Hans": "证据足够且边界明确后的果断行动"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            },
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:QI_SHA:HIGH",
+              "text": {
+                "en": "decisive action after enough evidence and with explicit limits",
+                "zh-Hans": "证据足够且边界明确后的果断行动"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            }
+          ],
           "sourceRefs": [
             "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
             "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -30302,37 +30443,178 @@
             ]
           },
           "meaning": {
-            "text": "把工作与方向带回现实，先观察「保留有效部分的有意识更新」成立时有哪些具体条件，再对照「连续破坏、失稳或难以维持成果」出现时哪些条件已经改变。这是前文官禄宫的破军所支持的导航范围；优先选择能够被复盘的小步行动。",
-            "selectedPlacements": [
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-            ]
+            "priorClaimRefs": [
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S04:54d06b1ffeeeeb21:COUNTERWEIGHT",
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S04:54d06b1ffeeeeb21:NAVIGATION_IMPLICATION"
+            ],
+            "composition": "把工作与方向带回现实，先观察「保留有效部分的有意识更新」成立时有哪些具体条件，再对照「连续破坏、失稳或难以维持成果」出现时哪些条件已经改变。这是前文官禄宫的破军所支持的导航范围；优先选择能够被复盘的小步行动。"
           },
           "conditions": [
             {
+              "entityId": "ZWR:CONDITION:PO_JUN:HIGH",
               "text": {
-                "en": "decisive action after enough evidence and with explicit limits",
-                "zh-Hans": "证据足够且边界明确后的果断行动"
+                "en": "deliberate renewal that preserves what still works",
+                "zh-Hans": "保留有效部分的有意识更新"
+              }
+            },
+            {
+              "entityId": "ZWR:CONDITION:PO_JUN:HIGH",
+              "text": {
+                "en": "deliberate renewal that preserves what still works",
+                "zh-Hans": "保留有效部分的有意识更新"
               }
             }
           ],
           "counterweights": [
             {
+              "entityId": "ZWR:COUNTERWEIGHT:PO_JUN:STRAINED",
               "text": {
-                "en": "hardness, isolation or repeated crisis-style decision making",
-                "zh-Hans": "过度强硬、孤立或反复以危机模式决策"
+                "en": "serial disruption, instability or difficulty maintaining gains",
+                "zh-Hans": "连续破坏、失稳或难以维持成果"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TIAN_FU:CONTEXT",
+              "text": {
+                "en": "stable stewardship with deliberate flexibility",
+                "zh-Hans": "稳定承载并保有适度弹性"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:PO_JUN:STRAINED",
+              "text": {
+                "en": "serial disruption, instability or difficulty maintaining gains",
+                "zh-Hans": "连续破坏、失稳或难以维持成果"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TIAN_FU:CONTEXT",
+              "text": {
+                "en": "stable stewardship with deliberate flexibility",
+                "zh-Hans": "稳定承载并保有适度弹性"
               }
             }
           ],
-          "observableExpressions": [],
+          "observableExpressions": [
+            {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:PO_JUN:workExpression",
+              "text": {
+                "en": "rebuild systems after breakdown, transition or strategic reset",
+                "zh-Hans": "在失效、转折或策略重置后重建系统"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+            },
+            {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:PO_JUN:workExpression",
+              "text": {
+                "en": "rebuild systems after breakdown, transition or strategic reset",
+                "zh-Hans": "在失效、转折或策略重置后重建系统"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+            }
+          ],
           "timingRelevance": [
             {
               "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
               "layer": "NATAL",
               "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+              "layer": "LIU_NIAN",
+              "role": "YEAR_LEVEL_ACTIVATION",
+              "focus": {
+                "lunarYear": 2026,
+                "yearStem": "BING",
+                "yearBranch": "WU",
+                "lifeBranch": "WU",
+                "natalDomainCode": "TRAVEL",
+                "natalDomainLabel": "迁移宫"
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+              "layer": "NATAL",
+              "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+              "layer": "LIU_NIAN",
+              "role": "YEAR_LEVEL_ACTIVATION",
+              "focus": {
+                "lunarYear": 2026,
+                "yearStem": "BING",
+                "yearBranch": "WU",
+                "lifeBranch": "WU",
+                "natalDomainCode": "TRAVEL",
+                "natalDomainLabel": "迁移宫"
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+              ]
             }
           ],
-          "navigationImplications": [],
+          "navigationImplications": [
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:PO_JUN:HIGH",
+              "text": {
+                "en": "deliberate renewal that preserves what still works",
+                "zh-Hans": "保留有效部分的有意识更新"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            },
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:PO_JUN:HIGH",
+              "text": {
+                "en": "deliberate renewal that preserves what still works",
+                "zh-Hans": "保留有效部分的有意识更新"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            }
+          ],
           "sourceRefs": [
             "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
             "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -30571,37 +30853,144 @@
             ]
           },
           "meaning": {
-            "text": "把资源与财富带回现实，先观察「在清楚优先级与边界内探索」成立时有哪些具体条件，再对照「分散、欲求过量或承诺超过容量」出现时哪些条件已经改变。这是前文财帛宫的贪狼所支持的导航范围；优先选择能够被复盘的小步行动。",
-            "selectedPlacements": [
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-            ]
+            "priorClaimRefs": [
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S05:698b69d05198e457:COUNTERWEIGHT",
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S05:698b69d05198e457:NAVIGATION_IMPLICATION"
+            ],
+            "composition": "把资源与财富带回现实，先观察「在清楚优先级与边界内探索」成立时有哪些具体条件，再对照「分散、欲求过量或承诺超过容量」出现时哪些条件已经改变。这是前文财帛宫的贪狼所支持的导航范围；优先选择能够被复盘的小步行动。"
           },
           "conditions": [
             {
+              "entityId": "ZWR:CONDITION:TAN_LANG:HIGH",
+              "text": {
+                "en": "exploration constrained by clear priorities and limits",
+                "zh-Hans": "在清楚优先级与边界内探索"
+              }
+            },
+            {
+              "entityId": "ZWR:CONDITION:TAN_LANG:HIGH",
+              "text": {
+                "en": "exploration constrained by clear priorities and limits",
+                "zh-Hans": "在清楚优先级与边界内探索"
+              }
+            }
+          ],
+          "counterweights": [
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TAN_LANG:STRAINED",
+              "text": {
+                "en": "dispersion, excess appetite or commitments outrunning capacity",
+                "zh-Hans": "分散、欲求过量或承诺超过容量"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:QI_SHA:CONTEXT",
+              "text": {
+                "en": "decisive action after enough evidence and with explicit limits",
+                "zh-Hans": "证据足够且边界明确后的果断行动"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TAN_LANG:STRAINED",
+              "text": {
+                "en": "dispersion, excess appetite or commitments outrunning capacity",
+                "zh-Hans": "分散、欲求过量或承诺超过容量"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:QI_SHA:CONTEXT",
               "text": {
                 "en": "decisive action after enough evidence and with explicit limits",
                 "zh-Hans": "证据足够且边界明确后的果断行动"
               }
             }
           ],
-          "counterweights": [
+          "observableExpressions": [
             {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:TAN_LANG:resourceExpression",
               "text": {
-                "en": "hardness, isolation or repeated crisis-style decision making",
-                "zh-Hans": "过度强硬、孤立或反复以危机模式决策"
-              }
+                "en": "draw resources toward growth, access and optionality",
+                "zh-Hans": "把资源引向成长、入口与选择空间"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+            },
+            {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:TAN_LANG:resourceExpression",
+              "text": {
+                "en": "draw resources toward growth, access and optionality",
+                "zh-Hans": "把资源引向成长、入口与选择空间"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
             }
           ],
-          "observableExpressions": [],
           "timingRelevance": [
             {
               "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
               "layer": "NATAL",
               "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+              "layer": "NATAL",
+              "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
             }
           ],
-          "navigationImplications": [],
+          "navigationImplications": [
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:TAN_LANG:HIGH",
+              "text": {
+                "en": "exploration constrained by clear priorities and limits",
+                "zh-Hans": "在清楚优先级与边界内探索"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            },
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:TAN_LANG:HIGH",
+              "text": {
+                "en": "exploration constrained by clear priorities and limits",
+                "zh-Hans": "在清楚优先级与边界内探索"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            }
+          ],
           "sourceRefs": [
             "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
             "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -30840,37 +31229,240 @@
             ]
           },
           "meaning": {
-            "text": "三个领域放在一起，不需要选出一颗“最重要”的星。可以先选一个当前决定，把要求、可用资源和恢复空间写清楚，再根据实际反馈修正。前文留下的条件与未知仍然有效，综合不会把它们变成确定结论。",
-            "selectedPlacements": [
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-              "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-            ]
+            "priorClaimRefs": [
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S02:b1d3e4cbad99c19c:UNKNOWN",
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S04:54d06b1ffeeeeb21:UNKNOWN",
+              "ZWR:SUBJECT_A:dab2a4acdfb6e379:S05:698b69d05198e457:UNKNOWN"
+            ],
+            "composition": "三个领域放在一起，不需要选出一颗“最重要”的星。可以先选一个当前决定，把要求、可用资源和恢复空间写清楚，再根据实际反馈修正。前文留下的条件与未知仍然有效，综合不会把它们变成确定结论。"
           },
           "conditions": [
             {
+              "entityId": "ZWR:CONDITION:QI_SHA:HIGH",
+              "text": {
+                "en": "decisive action after enough evidence and with explicit limits",
+                "zh-Hans": "证据足够且边界明确后的果断行动"
+              }
+            },
+            {
+              "entityId": "ZWR:CONDITION:PO_JUN:HIGH",
+              "text": {
+                "en": "deliberate renewal that preserves what still works",
+                "zh-Hans": "保留有效部分的有意识更新"
+              }
+            },
+            {
+              "entityId": "ZWR:CONDITION:TAN_LANG:HIGH",
+              "text": {
+                "en": "exploration constrained by clear priorities and limits",
+                "zh-Hans": "在清楚优先级与边界内探索"
+              }
+            }
+          ],
+          "counterweights": [
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:QI_SHA:STRAINED",
+              "text": {
+                "en": "hardness, isolation or repeated crisis-style decision making",
+                "zh-Hans": "过度强硬、孤立或反复以危机模式决策"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TIAN_XIANG:CONTEXT",
+              "text": {
+                "en": "fair coordination that still permits judgment",
+                "zh-Hans": "公平协调同时保留判断空间"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:PO_JUN:STRAINED",
+              "text": {
+                "en": "serial disruption, instability or difficulty maintaining gains",
+                "zh-Hans": "连续破坏、失稳或难以维持成果"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TIAN_FU:CONTEXT",
+              "text": {
+                "en": "stable stewardship with deliberate flexibility",
+                "zh-Hans": "稳定承载并保有适度弹性"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:TAN_LANG:STRAINED",
+              "text": {
+                "en": "dispersion, excess appetite or commitments outrunning capacity",
+                "zh-Hans": "分散、欲求过量或承诺超过容量"
+              }
+            },
+            {
+              "entityId": "ZWR:COUNTERWEIGHT:QI_SHA:CONTEXT",
               "text": {
                 "en": "decisive action after enough evidence and with explicit limits",
                 "zh-Hans": "证据足够且边界明确后的果断行动"
               }
             }
           ],
-          "counterweights": [
+          "observableExpressions": [
             {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:QI_SHA:decisionPattern",
               "text": {
-                "en": "hardness, isolation or repeated crisis-style decision making",
-                "zh-Hans": "过度强硬、孤立或反复以危机模式决策"
-              }
+                "en": "decide quickly when continuation requires a hard choice",
+                "zh-Hans": "当继续前进需要明确取舍时快速决定"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+            },
+            {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:PO_JUN:workExpression",
+              "text": {
+                "en": "rebuild systems after breakdown, transition or strategic reset",
+                "zh-Hans": "在失效、转折或策略重置后重建系统"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+            },
+            {
+              "entityId": "ZWR:OBSERVABLE_EXPRESSION:TAN_LANG:resourceExpression",
+              "text": {
+                "en": "draw resources toward growth, access and optionality",
+                "zh-Hans": "把资源引向成长、入口与选择空间"
+              },
+              "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
             }
           ],
-          "observableExpressions": [],
           "timingRelevance": [
             {
               "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
               "layer": "NATAL",
               "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+              "layer": "LIU_NIAN",
+              "role": "YEAR_LEVEL_ACTIVATION",
+              "focus": {
+                "lunarYear": 2026,
+                "yearStem": "BING",
+                "yearBranch": "WU",
+                "lifeBranch": "WU",
+                "natalDomainCode": "TRAVEL",
+                "natalDomainLabel": "迁移宫"
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+              "layer": "NATAL",
+              "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+              "layer": "LIU_NIAN",
+              "role": "YEAR_LEVEL_ACTIVATION",
+              "focus": {
+                "lunarYear": 2026,
+                "yearStem": "BING",
+                "yearBranch": "WU",
+                "lifeBranch": "WU",
+                "natalDomainCode": "TRAVEL",
+                "natalDomainLabel": "迁移宫"
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+              ]
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+              "layer": "NATAL",
+              "role": "STRUCTURAL_BASELINE"
+            },
+            {
+              "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+              "layer": "DA_XIAN",
+              "role": "LONG_CYCLE_MODIFICATION",
+              "focus": {
+                "natalDomainCode": "CHILDREN",
+                "natalDomainLabel": "子女宫",
+                "lifeBranch": "YOU",
+                "lifeBranchLabel": "酉",
+                "cycleIndex": 4,
+                "startNominalAge": 32,
+                "endNominalAge": 41,
+                "nominalAge": 38
+              },
+              "sourceRefs": [
+                "functions/zi-wei-dynamic/dynamic-runtime.js",
+                "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+              ]
             }
           ],
-          "navigationImplications": [],
+          "navigationImplications": [
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:QI_SHA:HIGH",
+              "text": {
+                "en": "decisive action after enough evidence and with explicit limits",
+                "zh-Hans": "证据足够且边界明确后的果断行动"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            },
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:PO_JUN:HIGH",
+              "text": {
+                "en": "deliberate renewal that preserves what still works",
+                "zh-Hans": "保留有效部分的有意识更新"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            },
+            {
+              "entityId": "ZWR:NAVIGATION_IMPLICATION:TAN_LANG:HIGH",
+              "text": {
+                "en": "exploration constrained by clear priorities and limits",
+                "zh-Hans": "在清楚优先级与边界内探索"
+              },
+              "mode": "CONDITIONAL_REFLECTION"
+            }
+          ],
           "sourceRefs": [
             "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
             "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -31116,27 +31708,142 @@
               ]
             },
             "meaning": {
-              "text": "把核心运行方式带回现实，先观察「证据足够且边界明确后的果断行动」成立时有哪些具体条件，再对照「过度强硬、孤立或反复以危机模式决策」出现时哪些条件已经改变。这是前文命宫的七杀所支持的导航范围；优先选择能够被复盘的小步行动。",
-              "selectedPlacements": [
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-              ]
+              "priorClaimRefs": [
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S02:b1d3e4cbad99c19c:COUNTERWEIGHT",
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S02:b1d3e4cbad99c19c:NAVIGATION_IMPLICATION"
+              ],
+              "composition": "把核心运行方式带回现实，先观察「证据足够且边界明确后的果断行动」成立时有哪些具体条件，再对照「过度强硬、孤立或反复以危机模式决策」出现时哪些条件已经改变。这是前文命宫的七杀所支持的导航范围；优先选择能够被复盘的小步行动。"
             },
             "conditions": [
+              "证据足够且边界明确后的果断行动",
               "证据足够且边界明确后的果断行动"
             ],
             "counterweights": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "过度强硬、孤立或反复以危机模式决策",
+              "公平协调同时保留判断空间",
+              "过度强硬、孤立或反复以危机模式决策",
+              "公平协调同时保留判断空间"
             ],
-            "observableExpressions": [],
+            "observableExpressions": [
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:QI_SHA:decisionPattern",
+                "text": {
+                  "en": "decide quickly when continuation requires a hard choice",
+                  "zh-Hans": "当继续前进需要明确取舍时快速决定"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              },
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:QI_SHA:decisionPattern",
+                "text": {
+                  "en": "decide quickly when continuation requires a hard choice",
+                  "zh-Hans": "当继续前进需要明确取舍时快速决定"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              }
+            ],
             "timingRelevance": [
               {
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
               }
             ],
-            "navigationImplications": [],
+            "navigationImplications": [
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:QI_SHA:HIGH",
+                "text": {
+                  "en": "decisive action after enough evidence and with explicit limits",
+                  "zh-Hans": "证据足够且边界明确后的果断行动"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              },
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:QI_SHA:HIGH",
+                "text": {
+                  "en": "decisive action after enough evidence and with explicit limits",
+                  "zh-Hans": "证据足够且边界明确后的果断行动"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              }
+            ],
             "sourceRefs": [
               "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
               "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -31277,6 +31984,83 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
               }
             ]
           },
@@ -31382,27 +32166,142 @@
               ]
             },
             "meaning": {
-              "text": "把工作与方向带回现实，先观察「保留有效部分的有意识更新」成立时有哪些具体条件，再对照「连续破坏、失稳或难以维持成果」出现时哪些条件已经改变。这是前文官禄宫的破军所支持的导航范围；优先选择能够被复盘的小步行动。",
-              "selectedPlacements": [
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-              ]
+              "priorClaimRefs": [
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S04:54d06b1ffeeeeb21:COUNTERWEIGHT",
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S04:54d06b1ffeeeeb21:NAVIGATION_IMPLICATION"
+              ],
+              "composition": "把工作与方向带回现实，先观察「保留有效部分的有意识更新」成立时有哪些具体条件，再对照「连续破坏、失稳或难以维持成果」出现时哪些条件已经改变。这是前文官禄宫的破军所支持的导航范围；优先选择能够被复盘的小步行动。"
             },
             "conditions": [
-              "证据足够且边界明确后的果断行动"
+              "保留有效部分的有意识更新",
+              "保留有效部分的有意识更新"
             ],
             "counterweights": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "连续破坏、失稳或难以维持成果",
+              "稳定承载并保有适度弹性",
+              "连续破坏、失稳或难以维持成果",
+              "稳定承载并保有适度弹性"
             ],
-            "observableExpressions": [],
+            "observableExpressions": [
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:PO_JUN:workExpression",
+                "text": {
+                  "en": "rebuild systems after breakdown, transition or strategic reset",
+                  "zh-Hans": "在失效、转折或策略重置后重建系统"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              },
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:PO_JUN:workExpression",
+                "text": {
+                  "en": "rebuild systems after breakdown, transition or strategic reset",
+                  "zh-Hans": "在失效、转折或策略重置后重建系统"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              }
+            ],
             "timingRelevance": [
               {
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
               }
             ],
-            "navigationImplications": [],
+            "navigationImplications": [
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:PO_JUN:HIGH",
+                "text": {
+                  "en": "deliberate renewal that preserves what still works",
+                  "zh-Hans": "保留有效部分的有意识更新"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              },
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:PO_JUN:HIGH",
+                "text": {
+                  "en": "deliberate renewal that preserves what still works",
+                  "zh-Hans": "保留有效部分的有意识更新"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              }
+            ],
             "sourceRefs": [
               "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
               "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -31543,6 +32442,83 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
               }
             ]
           },
@@ -31648,27 +32624,108 @@
               ]
             },
             "meaning": {
-              "text": "把资源与财富带回现实，先观察「在清楚优先级与边界内探索」成立时有哪些具体条件，再对照「分散、欲求过量或承诺超过容量」出现时哪些条件已经改变。这是前文财帛宫的贪狼所支持的导航范围；优先选择能够被复盘的小步行动。",
-              "selectedPlacements": [
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-              ]
+              "priorClaimRefs": [
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S05:698b69d05198e457:COUNTERWEIGHT",
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S05:698b69d05198e457:NAVIGATION_IMPLICATION"
+              ],
+              "composition": "把资源与财富带回现实，先观察「在清楚优先级与边界内探索」成立时有哪些具体条件，再对照「分散、欲求过量或承诺超过容量」出现时哪些条件已经改变。这是前文财帛宫的贪狼所支持的导航范围；优先选择能够被复盘的小步行动。"
             },
             "conditions": [
-              "证据足够且边界明确后的果断行动"
+              "在清楚优先级与边界内探索",
+              "在清楚优先级与边界内探索"
             ],
             "counterweights": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "分散、欲求过量或承诺超过容量",
+              "证据足够且边界明确后的果断行动",
+              "分散、欲求过量或承诺超过容量",
+              "证据足够且边界明确后的果断行动"
             ],
-            "observableExpressions": [],
+            "observableExpressions": [
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:TAN_LANG:resourceExpression",
+                "text": {
+                  "en": "draw resources toward growth, access and optionality",
+                  "zh-Hans": "把资源引向成长、入口与选择空间"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              },
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:TAN_LANG:resourceExpression",
+                "text": {
+                  "en": "draw resources toward growth, access and optionality",
+                  "zh-Hans": "把资源引向成长、入口与选择空间"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              }
+            ],
             "timingRelevance": [
               {
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
               }
             ],
-            "navigationImplications": [],
+            "navigationImplications": [
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:TAN_LANG:HIGH",
+                "text": {
+                  "en": "exploration constrained by clear priorities and limits",
+                  "zh-Hans": "在清楚优先级与边界内探索"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              },
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:TAN_LANG:HIGH",
+                "text": {
+                  "en": "exploration constrained by clear priorities and limits",
+                  "zh-Hans": "在清楚优先级与边界内探索"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              }
+            ],
             "sourceRefs": [
               "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
               "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -31809,6 +32866,49 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
               }
             ]
           },
@@ -31914,27 +33014,186 @@
               ]
             },
             "meaning": {
-              "text": "三个领域放在一起，不需要选出一颗“最重要”的星。可以先选一个当前决定，把要求、可用资源和恢复空间写清楚，再根据实际反馈修正。前文留下的条件与未知仍然有效，综合不会把它们变成确定结论。",
-              "selectedPlacements": [
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:LIFE:QI_SHA",
-                "ZWR:STAR_PLACEMENT:SUBJECT_A:dab2a4acdfb6e379:SIBLINGS:TIAN_LIANG"
-              ]
+              "priorClaimRefs": [
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S02:b1d3e4cbad99c19c:UNKNOWN",
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S04:54d06b1ffeeeeb21:UNKNOWN",
+                "ZWR:SUBJECT_A:dab2a4acdfb6e379:S05:698b69d05198e457:UNKNOWN"
+              ],
+              "composition": "三个领域放在一起，不需要选出一颗“最重要”的星。可以先选一个当前决定，把要求、可用资源和恢复空间写清楚，再根据实际反馈修正。前文留下的条件与未知仍然有效，综合不会把它们变成确定结论。"
             },
             "conditions": [
-              "证据足够且边界明确后的果断行动"
+              "证据足够且边界明确后的果断行动",
+              "保留有效部分的有意识更新",
+              "在清楚优先级与边界内探索"
             ],
             "counterweights": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "过度强硬、孤立或反复以危机模式决策",
+              "公平协调同时保留判断空间",
+              "连续破坏、失稳或难以维持成果",
+              "稳定承载并保有适度弹性",
+              "分散、欲求过量或承诺超过容量",
+              "证据足够且边界明确后的果断行动"
             ],
-            "observableExpressions": [],
+            "observableExpressions": [
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:QI_SHA:decisionPattern",
+                "text": {
+                  "en": "decide quickly when continuation requires a hard choice",
+                  "zh-Hans": "当继续前进需要明确取舍时快速决定"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              },
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:PO_JUN:workExpression",
+                "text": {
+                  "en": "rebuild systems after breakdown, transition or strategic reset",
+                  "zh-Hans": "在失效、转折或策略重置后重建系统"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              },
+              {
+                "entityId": "ZWR:OBSERVABLE_EXPRESSION:TAN_LANG:resourceExpression",
+                "text": {
+                  "en": "draw resources toward growth, access and optionality",
+                  "zh-Hans": "把资源引向成长、入口与选择空间"
+                },
+                "status": "SYMBOLIC_POSSIBILITY_NOT_OBSERVED"
+              }
+            ],
             "timingRelevance": [
               {
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
               }
             ],
-            "navigationImplications": [],
+            "navigationImplications": [
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:QI_SHA:HIGH",
+                "text": {
+                  "en": "decisive action after enough evidence and with explicit limits",
+                  "zh-Hans": "证据足够且边界明确后的果断行动"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              },
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:PO_JUN:HIGH",
+                "text": {
+                  "en": "deliberate renewal that preserves what still works",
+                  "zh-Hans": "保留有效部分的有意识更新"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              },
+              {
+                "entityId": "ZWR:NAVIGATION_IMPLICATION:TAN_LANG:HIGH",
+                "text": {
+                  "en": "exploration constrained by clear priorities and limits",
+                  "zh-Hans": "在清楚优先级与边界内探索"
+                },
+                "mode": "CONDITIONAL_REFLECTION"
+              }
+            ],
             "sourceRefs": [
               "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
               "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
@@ -32077,6 +33336,107 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
               }
             ]
           }
@@ -32132,7 +33492,8 @@
               "证据足够且边界明确后的果断行动"
             ],
             "counterSignals": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "过度强硬、孤立或反复以危机模式决策",
+              "公平协调同时保留判断空间"
             ],
             "openConditions": [],
             "timing": [
@@ -32140,6 +33501,83 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
               }
             ],
             "boundaries": [],
@@ -32207,10 +33645,11 @@
             "rank": null,
             "direction": null,
             "conditions": [
-              "证据足够且边界明确后的果断行动"
+              "保留有效部分的有意识更新"
             ],
             "counterSignals": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "连续破坏、失稳或难以维持成果",
+              "稳定承载并保有适度弹性"
             ],
             "openConditions": [],
             "timing": [
@@ -32218,6 +33657,83 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
               }
             ],
             "boundaries": [],
@@ -32285,10 +33801,11 @@
             "rank": null,
             "direction": null,
             "conditions": [
-              "证据足够且边界明确后的果断行动"
+              "在清楚优先级与边界内探索"
             ],
             "counterSignals": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "分散、欲求过量或承诺超过容量",
+              "证据足够且边界明确后的果断行动"
             ],
             "openConditions": [],
             "timing": [
@@ -32296,6 +33813,49 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
               }
             ],
             "boundaries": [],
@@ -32364,10 +33924,17 @@
             "rank": null,
             "direction": null,
             "conditions": [
-              "证据足够且边界明确后的果断行动"
+              "证据足够且边界明确后的果断行动",
+              "保留有效部分的有意识更新",
+              "在清楚优先级与边界内探索"
             ],
             "counterSignals": [
-              "过度强硬、孤立或反复以危机模式决策"
+              "过度强硬、孤立或反复以危机模式决策",
+              "公平协调同时保留判断空间",
+              "连续破坏、失稳或难以维持成果",
+              "稳定承载并保有适度弹性",
+              "分散、欲求过量或承诺超过容量",
+              "证据足够且边界明确后的果断行动"
             ],
             "openConditions": [],
             "timing": [
@@ -32375,6 +33942,107 @@
                 "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
                 "layer": "NATAL",
                 "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:LIU_NIAN",
+                "layer": "LIU_NIAN",
+                "role": "YEAR_LEVEL_ACTIVATION",
+                "focus": {
+                  "lunarYear": 2026,
+                  "yearStem": "BING",
+                  "yearBranch": "WU",
+                  "lifeBranch": "WU",
+                  "natalDomainCode": "TRAVEL",
+                  "natalDomainLabel": "迁移宫"
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#LIU_NIAN"
+                ]
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:NATAL",
+                "layer": "NATAL",
+                "role": "STRUCTURAL_BASELINE"
+              },
+              {
+                "entityId": "ZWR:TIMING_LAYER:SUBJECT_A:dab2a4acdfb6e379:DA_XIAN",
+                "layer": "DA_XIAN",
+                "role": "LONG_CYCLE_MODIFICATION",
+                "focus": {
+                  "natalDomainCode": "CHILDREN",
+                  "natalDomainLabel": "子女宫",
+                  "lifeBranch": "YOU",
+                  "lifeBranchLabel": "酉",
+                  "cycleIndex": 4,
+                  "startNominalAge": 32,
+                  "endNominalAge": 41,
+                  "nominalAge": 38
+                },
+                "sourceRefs": [
+                  "functions/zi-wei-dynamic/dynamic-runtime.js",
+                  "runtime:ZWDP-4CFB81290D68A692A5499B7D#DA_XIAN"
+                ]
               }
             ],
             "boundaries": [],
@@ -32406,7 +34074,7 @@
             }
           }
         ],
-        "publicationIrDigest": "076db442fcc991e84db263324632bc3fca3feee5e848449e6395719aabba3491"
+        "publicationIrDigest": "55354183b70757f5b63d799fbffb7549749dd4c3fa436eec6c73d26cf60cd3f9"
       },
       "paragraphs": [
         "把核心运行方式带回现实，先观察「证据足够且边界明确后的果断行动」成立时有哪些具体条件，再对照「过度强硬、孤立或反复以危机模式决策」出现时哪些条件已经改变。这是前文命宫的七杀所支持的导航范围；优先选择能够被复盘的小步行动。",

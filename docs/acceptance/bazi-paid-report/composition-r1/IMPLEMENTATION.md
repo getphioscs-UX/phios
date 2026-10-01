@@ -25,4 +25,4 @@ The manifest records each physical page's role, source nodes, merge count, measu
 
 Review: [switchable review](../../../../tools/review/BAZI-FULL-REPORT-COMPOSITION-R1-REVIEW.html), [Chinese](../../../../tools/review/BAZI-FULL-REPORT-COMPOSITION-R1-ZH.html), [English](../../../../tools/review/BAZI-FULL-REPORT-COMPOSITION-R1-EN.html).
 
-Editorial ACCEPT, composition READY_FOR_HUMAN_REVIEW, subject binding UNRESOLVED and production NOT_GRANTED are independent states. The candidate is not made the default customer release before acceptance. The user may now decide composition ACCEPT / REJECT without waiting on the historical subject fixture.
+Editorial and Composition R1 are now **ACCEPT**, frozen by [HUMAN-ACCEPTANCE.json](HUMAN-ACCEPTANCE.json). This is the cross-method physical composition reference; BaZi semantics and visual selectors remain method-specific. The historical review remains unbound and unchanged. A separate [controlled subject proof](../controlled-subject-r1/README.md) passes the positive and negative binding checks. Production admission and commerce E2E remain pending independently.

@@ -20,9 +20,12 @@ for(const s of sources.sources){assert(['calculation','semantic','editorial'].in
 for(const g of gaps.components){assert(['KEEP','REUSE_PARTIAL','DEPRECATE'].includes(g.disposition));g.refs.forEach(exists);}
 for(const section of gaps.proposedArchitecture.sections)for(const need of section.requires)assert(capability.capabilities.some(c=>c.capability===need&&c.status!=='MISSING'&&c.status!=='NOT_SUPPORTED'));
 assert(['ACCEPTABLE','ACCEPT'].includes(ref.BAZI_CONTENT_STATE));
-assert.equal(ref.humanDecision,null);
-assert.equal(ref.BAZI_CONTENT_FROZEN,false);
-assert.equal(ref.BAZI_REFERENCE_IMPLEMENTATION,false);
+assert.equal(ref.humanDecision,'ACCEPT');
+assert.equal(ref.BAZI_CONTENT_FROZEN,true);
+assert.equal(ref.BAZI_REFERENCE_IMPLEMENTATION,true);
+const accepted=read('docs/acceptance/bazi-paid-report/composition-r1/HUMAN-ACCEPTANCE.json');
+assert.equal(accepted.decision,'ACCEPT');
+for(const [p,h] of Object.entries(accepted.files))assert.equal(createHash('sha256').update(fs.readFileSync(p)).digest('hex'),h,'frozen reference changed');
 assert.equal(manifest.productionAdmissionGranted,false);
 assert.equal(manifest.humanDecision,null);
 assert([null,'ACCEPT'].includes(gaps.proposedArchitecture.humanDecision));

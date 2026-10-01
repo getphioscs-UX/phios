@@ -2,7 +2,7 @@
 
 ## 2026-10-01 successor decision
 
-The user has now accepted BaZi content, semantic depth, Career, Wealth and the ten Section Masters, while rejecting the old 74/64-page composition. [Composition R1](../acceptance/bazi-paid-report/composition-r1/IMPLEMENTATION.md) replaces that composition with a 38/38-page review candidate. Its human decision is independent of subject binding. The remaining text below records the earlier MR-W0–W2 delivery and is historical where it says content/architecture decisions are pending.
+The user has accepted and frozen BaZi content, semantic depth, Career, Wealth, Guidance, the ten Section Masters and the 38/38-page [Composition R1](../acceptance/bazi-paid-report/composition-r1/IMPLEMENTATION.md). It is now the cross-method physical composition reference. The historical sample remains unbound; an independent [controlled subject proof](../acceptance/bazi-paid-report/controlled-subject-r1/README.md) passes using a new subject and the real calculation chain. Production admission and commerce E2E remain pending. The remaining text below records the earlier MR-W0–W2 delivery and is historical where it says content/architecture decisions are pending.
 
 Work: `PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT`  
 Audit date: 2026-10-01  
