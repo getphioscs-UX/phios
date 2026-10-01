@@ -369,7 +369,9 @@ assert.deepEqual(migrationFiles, [
   '0005_pws_universal_registry.sql',
   '0006_commerce_stripe_r1.sql',
   '0007_account_oidc_sessions.sql',
-  '0008_financial_will_encrypted_drafts.sql'
+  '0008_financial_will_encrypted_drafts.sql',
+  '0009_canonical_account_person.sql',
+  '0010_account_method_report_material.sql'
 ]);
 
 assert.equal(

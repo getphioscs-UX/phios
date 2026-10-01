@@ -153,3 +153,83 @@
   System methods preserve routing, Runtime, payment and responsibility boundaries.
   Service API requires Method, capability and contract mappings; legacy catalog is read-only.
   W1 Universal Registry and W3 Capability Registry reused; no Migration added.
+✓ PWS-I2-W5 Product and Offer Registry passed.
+  Six Product Types, Reality Journey Pass v1 and Book I registered.
+  RM5 and RM89 are held canonically as MYR minor-unit Offers.
+  Payment and Product alone create no Journey or Professional entitlement.
+  W1 Universal Registry and W4 Reality Journey Method reused; no Migration added.
+✓ PWS-I2-W6 Knowledge and Deliverable Type Registry passed.
+  Seven Published Asset Types and five Deliverable Types registered.
+  PKR Canonical Nodes/Questions and the five-volume Blueprint Registry remain unchanged.
+  Type registration creates no content, Deliverable, Signature or responsibility.
+  W1 Universal Registry reused; W5 path restored; no Migration added.
+✓ PWS-I2-W7 Migration and Reconciliation passed.
+  ServiceProduct and ServiceEntitlement resolve to canonical objects with Service references.
+  18 Services, 7 Method aliases, 7 Capability aliases and 14 Report Types reconcile idempotently.
+  Book I Product/Offer is canonical; unapproved Professional prices remain deferred.
+  PKR remains Knowledge authority; no legacy deletion or D1 storage Migration added.
+✓ STEP 2.11 KH-W3.5E Preface Canonical Consolidation passed.
+  36 unique question identities = 13 canonical representatives + 23 supporting questions.
+  All mappings are resolved, bidirectional, bilingual and non-duplicative.
+  Four mechanism-based granularity rules are frozen.
+✓ KH-W3.5F Canonical Extraction and Scaling Freeze passed.
+  Domain → Theme → Node → Question → Alias is the frozen hierarchy.
+  Part thresholds are 18 flexible review, 24 mandatory audit and 30 hard stop.
+  Registry presence creates no production requirement; active articles remain capped at 8.
+  State: KH-W3.5F-Frozen.
+✓ KH-W4A Knowledge Runtime v2 Blueprint Registry and Loader passed.
+  Five registered Blueprints project 16 Parts and 931 current Canonical Node identities.
+  P5 resolves to BOOK-2; P8 resolves to BOOK-3; P10 resolves to BOOK-4; P13 resolves to BOOK-5.
+  Legacy single-Book authority is retired; digest mismatch fails closed.
+✓ KH-W4B/W4C Canonical Registry Authority and Universal Consumption passed.
+  Book, Part, Canonical Node and Blueprint authorities are unique and fail closed.
+  Current public runtime consumes the Blueprint Registry; legacy direct reads are allowlisted for later migration.
+✓ PJA-W2F-C0 Book I Canonical Registry Population passed.
+  13 existing Preface + 65 C0 identities = 78 Registry Nodes and 78 zh-Hans identities.
+  Default/explicit dry-run, apply, second-apply no-op, conflict blocking and unresolved mapping fixtures passed.
+  All 65 resolver calls are beyond NODE_NOT_FOUND; no Readiness, Article, Approval or Publication was created.
+✓ PJA-W2F-C1 Book I Readiness Skeleton Population passed.
+  78 Registry Nodes → 78 universal Skeleton records → 78 Index entries.
+  Resolver returns Skeleton/blocking/missing for all Nodes; NODE_NOT_FOUND and READINESS_FILE_NOT_FOUND are closed for registered Nodes.
+  Default dry-run, explicit dry-run, atomic apply, second-apply no-op, conflict and missing-file fixtures passed.
+  No Thesis, Boundary, Claim, Source plan, Question treatment, Figure plan, Article, approval, publication or export was created.
+✓ PWS-I2 v1.0.0 Acceptance and Freeze passed.
+  W0–W7, KH-W3.5F and KH-W3.5G acceptance evidence is closed.
+  71 Registry objects and 70 relationships reconcile from the frozen baseline.
+  Core Runtime, PKR, price, payment, production and D1 boundaries remain closed.
+  State: PWS-I2-v1.0.0-Frozen.
+✓ PJA-W0 Cross-System Boundary and Dependency Freeze passed.
+  PJA capabilities: read, render, route and link; write sources: 0.
+  10 dependency groups and every top-level public page are mapped.
+  No second Product, Entitlement or Provider Cost authority exists.
+  Core Runtime, PKR, PWS-I2 and future PWS-I4–I9 boundaries are preserved.
+  State: PJA-W0-v1.0.0-Frozen.
+✓ PJA-W1 Blueprint-led Public Knowledge Ecosystem passed.
+  3 frozen Canonical Nodes publish 3 Chinese articles and 3 required English localizations.
+  5 Wave 1 Nodes remain publication-deferred; their Registry identities are supplied by PKR population, not PJA.
+  Home, Hub, Articles, Book I, Thesis, Atlas and shared navigation use published-only projections.
+  No case Provider, personal judgment, default service recommendation, Runtime write or Entitlement substitute exists.
+  State: PJA-W1-v1.1.0-Blueprint-led.
+✓ PJA-W2A Canonical Article Editorial Contract passed.
+  PJA-W1 content and Registry hashes remain frozen: 13 Preface Nodes, 6 Preface Themes, 13 Registry files and 12 Registry schemas.
+  Legacy paragraphs and 10 strict optional Block types remain compatible; text is escaped and visual/next-node references are published-only.
+  Claim, source, review, lifecycle and AI authority boundaries are enforced without Runtime, Provider, Payment, Entitlement or D1 dependencies.
+  KN-PREFACE-001 has no public Article asset, English asset, shell, Registry asset or publication state; governed production drafts remain isolated.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+10 !== 8
+
+    at file:///C:/phios/scripts/check-pja-w2b-structured-article-schema.mjs:517:8 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 10,
+  expected: 8,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
