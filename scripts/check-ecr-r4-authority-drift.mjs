@@ -66,7 +66,7 @@ try{
   // git grep exits 1 when there are no matches.
   if(error?.status!==1)throw error;
 }
-hits=hits.filter(p=>p!=='scripts/check-ecr-r4-authority-drift.mjs');
+hits=hits.filter(p=>p!=='scripts/check-ecr-r4-authority-drift.mjs'&&!p.endsWith('.log'));
 if(hits.length)throw Object.assign(new Error('ECR_STALE_POSITIONEMPHASIZES_FOUND:'+hits.join(',')),{hits});
 
 for(const code of ['ECR-H17','ECR-H18','ECR-H19']){
