@@ -104,7 +104,12 @@ const sourceFor=(record,idKey,stage,locale,question)=>({
 
 async function retrieveReconfigurationScope({env,scope,locale,question}){
   const ordered=['cases','windows','snapshots','dossiers','lived','positions','sections'],loaded={};
-  await Promise.all([...ordered.map(async key=>{loaded[key]=await readJson(env,RECONFIG_CONFIG[key].path);}),readJson(env,'content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json').then(v=>loaded.relationships=v)]);
+  await Promise.all([
+    ...ordered.map(async key=>{loaded[key]=await readJson(env,RECONFIG_CONFIG[key].path);}),
+    readJson(env,'content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json').then(v=>loaded.relationships=v),
+    readJson(env,'content/civilization-atlas/reconfiguration/runtime-position-book5-historical-alignment-v1.json').then(v=>loaded.positionHistory=v),
+    readJson(env,'content/civilization-atlas/reconfiguration/runtime-position-correspondence-v1.json').then(v=>loaded.positionCorrespondence=v)
+  ]);
   const selected=Object.fromEntries(ordered.map(k=>[k,new Set()])),wanted=reconfigSelection(scope);
   const rowsByKey=Object.fromEntries(ordered.map(k=>{const cfg=RECONFIG_CONFIG[k];return [k,loaded[k]?.[cfg.array]||[]]}));
   for(const id of wanted)for(const key of ordered){const cfg=RECONFIG_CONFIG[key];if(rowsByKey[key].some(row=>row?.[cfg.id]===id))selected[key].add(id);}
@@ -137,6 +142,32 @@ async function retrieveReconfigurationScope({env,scope,locale,question}){
     stageRows.push({stage:cfg.stage,status:projected.length?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:projected.length});
   }
   const sources=[...directSources,...expandedSources];
+  if(scope.positionId){
+    const alignment=(loaded.positionHistory?.alignments||[]).find(x=>x.positionId===scope.positionId);
+    if(alignment){
+      const text=flattenLocalized(alignment,locale,question);
+      if(text)sources.push({
+        sourceType:'CIVILIZATION_ATLAS_POSITION_ALIGNMENT',
+        sourceId:'ATLAS:BOOK-6:RUNTIME_POSITION_ALIGNMENT:'+scope.positionId,
+        bookCode:'BOOK-6',partCode:'PART-13',atlasLayer:'runtime_position_alignment',atlasEntityId:scope.positionId,
+        authorityClass:alignment.knowledgeState||'HISTORICAL_RECONSTRUCTION',
+        scopeMatch:true,href:'/books/reality-configuration/#atlas',text
+      });
+    }
+  }
+  if(scope.dossierId){
+    const correspondence=(loaded.positionCorrespondence?.correspondences||[]).find(x=>x.dossierId===scope.dossierId);
+    if(correspondence){
+      const text=flattenLocalized(correspondence,locale,question);
+      if(text)sources.push({
+        sourceType:'CIVILIZATION_ATLAS_POSITION_CORRESPONDENCE',
+        sourceId:'ATLAS:BOOK-6:RUNTIME_POSITION_CORRESPONDENCE:'+scope.dossierId,
+        bookCode:'BOOK-6',partCode:'PART-13',atlasLayer:'runtime_position_correspondence',atlasEntityId:scope.dossierId,
+        authorityClass:correspondence.knowledgeState||'UNKNOWN',
+        scopeMatch:true,href:'/books/reality-configuration/#atlas',text
+      });
+    }
+  }
   const entityCount=directSources.length;
   return {scope,sources,chain:[{stage:'ATLAS_ENTITY',status:entityCount?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:entityCount},...stageRows,{stage:'PART_13',status:'AUTHORIZED_FALLBACK'},{stage:'BROADER_KNOWLEDGE',status:'AUTHORIZED_FALLBACK'}]};
 }
