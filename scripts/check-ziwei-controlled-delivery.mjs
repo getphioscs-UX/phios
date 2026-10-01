@@ -1,0 +1,55 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {DatabaseSync} from 'node:sqlite';import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';import path from 'node:path';import {build} from 'esbuild';import {PDFDocument} from 'pdf-lib';
+import {generateControlledZiweiReport,requireZiweiEntitlement,assertControlledZiweiShape,ZIWEI_PRODUCT} from '../functions/report-delivery/ziwei-controlled-generation.js';
+import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiweiReports} from '../functions/account/ziwei-controlled-report-material.js';
+import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {finalizeZiweiNavigation} from '../functions/canonical-presentation-runtime/ziwei-navigation-finalization.js';
+import {assertReportSubjectBinding} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
+const dir='docs/reports/ziwei/production-admission',record=JSON.parse(fs.readFileSync(dir+'/controlled-subject.json')),owner=record.person.accountOwnerUserId,personId=record.person.personId;
+const sqlite=new DatabaseSync(':memory:');for(const f of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+f,'utf8'));
+const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const r=[];for(const s of statements)r.push(await s.run());sqlite.exec('COMMIT');return r;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
+// Isolated test rows exercise the real Commerce query. No payment is made,
+// webhook simulated as verified, or remote account/entitlement created.
+sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,language,format,currency,amount_minor,source_object_key,created_at,updated_at) VALUES(?,'1','Zi Wei local test','bilingual','REPORT','MYR',3900,'controlled','2026-10-01','2026-10-01')").run(ZIWEI_PRODUCT);
+sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,context_json,created_at,updated_at) VALUES('local-order',?,?,'local-idempotency','paid','FULFILLED',?,'2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
+sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_id,checkout_attempt_id,stripe_checkout_session_id,currency,amount_minor,purchase_state,created_at,updated_at) VALUES('local-purchase',?,?,'local-order','SYNTHETIC-NOT-A-STRIPE-SESSION','MYR',3900,'purchased','2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT);
+sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('local-entitlement','local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT);
+const objects=new Map(),env={PHIOS_ENVIRONMENT:'local',RUNTIME_DB:db,PRIVATE_REPORTS:{async put(k,v){objects.set(k,v);},async get(k){return objects.has(k)?{text:async()=>objects.get(k)}:null;}}};
+const context={env,data:{symbolicAccountIdentity:{userId:owner,providerId:'EXISTING_LOCAL_FIXTURE_MECHANISM',verified:true,authenticated:true}}};
+let loads=0;const loadSubject=async(user,id)=>{loads++;if(user!==owner||id!==personId)throw Error('PERSON_USE_DENIED');return structuredClone(record);};
+const negatives=[];async function reject(name,call){await assert.rejects(call);negatives.push({name,result:'DENIED'});}
+await reject('anonymous',()=>requireZiweiEntitlement({...context,data:{}},'en'));
+await reject('client entitlement is not authority',()=>requireZiweiEntitlement({...context,data:{symbolicAccountIdentity:{...context.data.symbolicAccountIdentity,userId:'NO-PURCHASE'},entitled:true}},'en'));
+await reject('production stays closed',()=>requireZiweiEntitlement({...context,env:{...env,PHIOS_ENVIRONMENT:'production'}},'en'));
+await reject('canonical person owner absent',()=>generateControlledZiweiReport(context,{personId,locale:'en'}));
+await reject('wrong person',()=>generateControlledZiweiReport(context,{personId:'NOT-THE-PERSON',locale:'en'},{loadSubject}));
+await reject('mismatched birth input',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>({...structuredClone(record),canonicalBirthInput:{...record.canonicalBirthInput,birthDate:'1990-01-01'}})}));
+sqlite.exec("UPDATE commerce_checkout_attempts SET context_json='{"+'"reportPresentation":{"reportLanguageMode":"SINGLE","reportLocale":"en"}'+"}'");
+await reject('unpurchased locale',()=>requireZiweiEntitlement(context,'zh-Hans'));
+sqlite.prepare('UPDATE commerce_checkout_attempts SET context_json=?').run(JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
+const css=['tokens.css'].map(x=>fs.readFileSync('assets/css/'+x,'utf8')).concat(['visual-report.css','report-publication.css','ziwei-report-publication.css','ziwei-report-publication-r2.css','ziwei-navigation-finalization.css'].map(x=>fs.readFileSync('assets/customer-ui/surfaces/'+x,'utf8'))).join('\n');
+const runtime=(await build({stdin:{contents:`import {fitPublicationForPrint,settlePublicationAssets} from './assets/customer-ui/js/personal-products/publication-report-pages.js';await document.fonts.ready;await settlePublicationAssets(document);await Promise.all([...document.querySelectorAll('.pub-static img')].map(i=>i.decode()));window.fit=fitPublicationForPrint(document);window.batchReady=true;`,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'browser'})).outputFiles[0].text;
+const require=createRequire(import.meta.url),{chromium}=require(path.join(process.env.USERPROFILE,'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')),browser=await chromium.launch({channel:'msedge',headless:true}),results=[];
+try{for(const locale of ['en','zh-Hans']){
+ const candidate=await generateControlledZiweiReport(context,{personId,locale},{loadSubject});assert.equal(candidate.executionReuse.secondNatalCalculationPerformed,false);
+ const c=candidate.snapshot.semanticContent;
+ await reject('wrong cover binding '+locale,()=>assertReportSubjectBinding({presentation:{...c.subject,subjectReference:'WRONG'},expectedBinding:c.subjectBinding}));
+ const file=`tools/review/ZIWEI-CONTROLLED-DELIVERY-${locale}.html`;
+ fs.writeFileSync(file,`<!doctype html><html lang="${locale}"><meta charset="utf-8"><title>Controlled Zi Wei local delivery proof</title><style>${css}</style><main>${finalizeZiweiNavigation(renderPublicationReport(c.report),locale).replaceAll('src="/assets/','src="../../assets/')}</main><script type="module">${runtime}</script></html>`);
+ const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(pathToFileURL(path.resolve(file)).href);await page.waitForFunction(()=>window.batchReady,{timeout:90000});await page.emulateMedia({media:'print'});
+ const fits=await page.evaluate(()=>({pages:window.fit,broken:[...document.images].filter(i=>!i.complete||!i.naturalWidth).length}));assert(fits.pages.every(p=>p.fits));assert.equal(fits.broken,0);assert.deepEqual(errors,[]);
+ const pageCount=(await PDFDocument.load(await page.pdf({format:'A4',printBackground:true,preferCSSPageSize:true}))).getPageCount();assert.equal(pageCount,33);
+ await page.locator('[data-page-number="31"]').screenshot({path:`${dir}/controlled-${locale}-navigation.png`});await page.close();
+ const receipt={passed:true,pageCount,semanticSnapshotId:candidate.snapshot.semanticSnapshotId};
+ await reject('release without render verification '+locale,()=>releaseControlledZiweiReport(context,candidate,{loadSubject}));
+ const released=await releaseControlledZiweiReport(context,candidate,{loadSubject,renderVerification:receipt});
+ assert.equal((await releaseControlledZiweiReport(context,candidate,{loadSubject,renderVerification:receipt})).reportId,released.reportId);
+ const args={reportId:released.reportId,personId};const opened=await openControlledZiweiReport(context,args,{loadSubject});assert.deepEqual(opened,candidate);assert.deepEqual(await openControlledZiweiReport(context,args,{loadSubject}),opened);
+ await reject('cross-account read '+locale,()=>openControlledZiweiReport({...context,data:{symbolicAccountIdentity:{...context.data.symbolicAccountIdentity,userId:'ANOTHER-ACCOUNT'}}},args,{loadSubject}));
+ await reject('wrong report person '+locale,()=>openControlledZiweiReport(context,{...args,personId:'WRONG'},{loadSubject}));
+ await reject('revoked report consent '+locale,()=>openControlledZiweiReport(context,args,{loadSubject:async()=>({...structuredClone(record),reportConsent:{...record.reportConsent,revocationState:'REVOKED'}})}));
+ sqlite.exec("UPDATE digital_entitlements SET entitlement_status='revoked'");await reject('revoked entitlement on reopen '+locale,()=>openControlledZiweiReport(context,args,{loadSubject}));sqlite.exec("UPDATE digital_entitlements SET entitlement_status='active'");
+ const key=[...objects.keys()].at(-1),original=objects.get(key);objects.set(key,original.replace('Controlled Zi Wei Delivery Subject','Tampered Subject'));await reject('mutated released material '+locale,()=>openControlledZiweiReport(context,args,{loadSubject}));objects.set(key,original);
+ fs.writeFileSync(`${dir}/released-${locale}.json`,JSON.stringify(candidate,null,2)+'\n');results.push({locale,pageCount,reportId:released.reportId,snapshotId:released.semanticSnapshotId,refresh:'BYTE_EQUIVALENT_JSON_NO_GENERATION',accountLibrary:(await listControlledZiweiReports(context,{loadSubject})).length,sourceCalculationBuiltOnce:candidate.executionReuse.sourceCalculationBuiltOnce,render:file});console.log(locale,'PASS 33 pages, bound subject, immutable release and account isolation');
+}}finally{await browser.close();sqlite.close();}
+fs.writeFileSync(dir+'/local-delivery-evidence.json',JSON.stringify({scope:'LOCAL_CONTROLLED_ONLY',fixtureRef:dir+'/controlled-subject.json',commerceEvidence:'Seeded isolated SQLite rows; real ownedReportPresentation query. No Stripe payment/webhook E2E claimed.',privateStorage:'In-memory R2-compatible fixture; real runtime_artifacts SQL owner',ZIWEI_LOCAL_CALCULATION:'PASS',ZIWEI_LOCAL_SUBJECT_BINDING:'PASS',ZIWEI_LOCAL_ENTITLEMENT_NEGATIVE_TEST:'PASS',ZIWEI_LOCAL_IMMUTABLE_SNAPSHOT:'PASS',ZIWEI_LOCAL_RELEASED_MATERIAL:'PASS',ZIWEI_LOCAL_ACCOUNT_DELIVERY:'PASS',ZIWEI_QA_ACCOUNT_DELIVERY:'NOT_PROVEN',ZIWEI_PRODUCTION_DELIVERY:'NOT_RUN',results,negatives},null,2)+'\n');
+console.log('PASS: LOCAL controlled chain only. QA not proven; production not run.');

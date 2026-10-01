@@ -1,6 +1,6 @@
 # Zi Wei Full Report R2 — implementation and review record
 
-Status: READY_FOR_HUMAN_REVIEW. Human decision remains unset; production admission is not granted.
+Status: ACCEPTED_FROZEN. The user's ACCEPT_WITH_NARROW_REPAIR and F5 authorization are fulfilled by the verified S11 repair. Editorial acceptance and reference-implementation freeze are recorded; production admission, commerce E2E and customer release remain separate.
 
 Review: [bilingual, two-subject switcher](../../../tools/review/ZIWEI-FULL-REPORT-R2-REVIEW.html).
 The switcher exposes source-node/page mapping, measured fit modes, section assets and palace evidence roles. Its customer links open the reports without audit controls.
@@ -52,6 +52,14 @@ Evidence:
 
 Focused regressions passed: BaZi visual/commerce boundary, RNT2 adversarial checks and Zi Wei Publication IR. Rendering the two frozen 38-page BaZi snapshots through the shared renderer reproduced their existing HTML main content byte for byte. This establishes renderer compatibility; it does not establish commerce E2E or production admission.
 
-## Remaining human gate
+## Final narrow repair and acceptance
 
-Compare A/B in both locales for individual differentiation, evidence use, chapter variation, visual semantics, timing integration, navigation and density. Automated checks support that review; they do not substitute for ACCEPT. BaZi content and Composition R1 remain frozen, and its historical sample is not rebound to a manufactured identity.
+S11 retains its five accepted source paragraphs and all claims. Five visible headings now identify protection, change, overcommitment, current observation and revision evidence. A compact NEXT REVIEW WINDOW offers five customer prompts and explicitly describes the next 30–90 days as an observation/review horizon, not astrological event timing.
+
+The repair reuses the existing R2 records without regenerating any section narrative or Publication IR. All four evidence files remain byte-identical. The other 32 pages of each rendered report remain byte-identical within the report body. The shared renderer, visual registry, mappings, images and motifs remain unchanged. Only the S11 presentation adapter and its scoped stylesheet were added.
+
+All four actual printed reports remain 33 pages, with no overflow, clipped source text, clipped action panel, missing assets or browser errors. Chinese and English S11 screenshots were inspected. [Narrow-repair verification](full-report-r2/narrow-repair-verification.json) records preservation hashes and page counts; [acceptance](../../../content/reports/ziwei/full-report-r2-acceptance.json) records all seven editorial ACCEPT states and the content/reference freeze. The build command verifies frozen inputs and reuses the accepted reports.
+
+`ZIWEI_UNUSED_BAZI_CSS_INHERITANCE = TECH_DEBT` is recorded in the [technical-debt register](../../../content/reports/ziwei/technical-debt.json). It is not an acceptance blocker; no shared CSS or renderer refactor was performed.
+
+BaZi content and Composition R1 remain frozen, and its historical sample is not rebound to a manufactured identity. Editorial acceptance does not establish Zi Wei production admission, commerce E2E or customer release.
