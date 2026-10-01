@@ -54,5 +54,8 @@ assert(renderer.includes('temporal overlap only; not semantic equivalence'),'REN
 const ask=text('functions/_lib/atlas-retrieval-scope.js');
 assert(ask.includes('CIVILIZATION_ATLAS_POSITION_ALIGNMENT'),'ASK_POSITION_ALIGNMENT');
 assert(ask.includes('CIVILIZATION_ATLAS_POSITION_CORRESPONDENCE'),'ASK_POSITION_CORRESPONDENCE');
+const discovery=text('assets/js/knowledge/public-discovery.js');
+assert(discovery.includes("type:'RUNTIME_POSITION'"),'GLOBAL_SEARCH_POSITION');
+assert(discovery.includes("positions:'/content/registry/runtime-position-48-v1.json'"),'GLOBAL_SEARCH_POSITION_SOURCE');
 
-console.log('PASS runtime-position-48 W5: source windows preserved, Book V temporal crosswalk active, Phase 45–48 excluded from history, 12 dossier correspondences governed UNKNOWN, UI/Ask overlays wired.');
+console.log('PASS runtime-position-48 W5: source windows preserved, Book V temporal crosswalk active, Phase 45–48 excluded from history, 12 dossier correspondences governed UNKNOWN, UI/Search/Ask overlays wired.');
