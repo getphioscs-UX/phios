@@ -1,5 +1,6 @@
 import dossiers from '../../content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json';
 import cases from '../../content/civilization-atlas/reconfiguration/reconfiguration-case-registry-v1.json';
+import w6EvidenceGate from '../../content/civilization-atlas/reconfiguration/runtime-position-w6-evidence-gate-v1.json';
 import inputContract from '../../content/runtime/reality-readout-engine/contracts/reality-readout-input-contract-v1.json';
 import dimensionRegistry from '../../content/runtime/reality-readout-engine/registries/canonical-observable-dimension-registry-v1.json';
 import signatureRegistry from '../../content/runtime/reality-readout-engine/registries/canonical-runtime-signature-role-registry-v1.json';
@@ -52,7 +53,8 @@ export async function onRequestGet({request}){
   const dossier=(dossiers.dossiers||[]).find(row=>row.id===dossierId);
   if(!dossier)return json({ok:false,error:'BOOK6_DOSSIER_NOT_FOUND'},404);
   try{
-    const projection=buildBook6DossierRreProjection({dossier,cases:cases.cases||[],registries:REGISTRIES});
+    const currentEvidenceRecord=(w6EvidenceGate.records||[]).find(row=>row.dossierId===dossierId)||null;
+    const projection=buildBook6DossierRreProjection({dossier,cases:cases.cases||[],registries:REGISTRIES,currentEvidenceRecord});
     return json({ok:true,projection});
   }catch(error){
     return json({ok:false,error:'BOOK6_RRE_PROJECTION_FAILED',detail:String(error?.message||error)},500);
