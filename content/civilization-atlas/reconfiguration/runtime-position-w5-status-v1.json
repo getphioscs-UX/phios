@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W5-STATUS-v1.0.0",
+  "version": "1.0.0",
+  "status": "MACHINE_WIRED__SEMANTIC_ADMISSION_AND_CURRENT_DATA_PENDING",
+  "completed": {
+    "sourceWindows": 48,
+    "bookVTemporalAlignments": 48,
+    "bookVOverlapPositions": 36,
+    "bookVOutsideTimelinePositions": [
+      "RP-01",
+      "RP-02",
+      "RP-03",
+      "RP-04",
+      "RP-05",
+      "RP-06",
+      "RP-07",
+      "RP-08"
+    ],
+    "bookVFutureExcluded": [
+      "RP-45",
+      "RP-46",
+      "RP-47",
+      "RP-48"
+    ],
+    "phase44Boundary": "RP-44",
+    "dossierCorrespondenceRecords": 12,
+    "currentPositionAssignments": 0,
+    "globalSearchRegistered": true,
+    "atlasUiRegistered": true,
+    "askRegistered": true
+  },
+  "authorityBoundary": {
+    "bookV": "Temporal overlap is a navigation crosswalk only; semantic equivalence remains pending.",
+    "bookVI": "Current entity-to-position correspondence remains UNKNOWN until admitted current evidence and human review.",
+    "future": "Reachable positions remain CONDITIONAL_PROJECTION only.",
+    "source": "Source phase labels are preserved literally; anomalies are marked rather than corrected."
+  },
+  "pending": [
+    "Semantic admission of Book V historical correspondences against the owner-supplied phase narratives.",
+    "Admission of current-data evidence before any dossier receives a current runtime-position correspondence.",
+    "Human review of representative historical alignments and dossier UNKNOWN rendering.",
+    "Browser verification of runtime-position UI, URL state, global search and Ask scope.",
+    "Visual rebind/live verification for FIG_13H and FIG_13I remains separate from W5 semantic/data wiring."
+  ],
+  "checks": {
+    "backbone": "npm run check:runtime-position-48:backbone",
+    "w5": "npm run check:runtime-position-48:w5",
+    "aggregate": "npm run check:runtime-position-48"
+  }
+}
