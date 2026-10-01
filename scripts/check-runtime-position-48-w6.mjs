@@ -70,5 +70,10 @@ assert(renderer.includes('data-runtime-readout'),'RRE_SLOT');
 assert(renderer.includes('hydrateDossierRuntimeReadout(host,d,l)'),'RRE_HYDRATION');
 const ask=text('functions/_lib/atlas-retrieval-scope.js');
 assert(ask.includes('CIVILIZATION_ATLAS_CURRENT_EVIDENCE_GATE'),'ASK_W6_GATE');
+const rreAdapter=text('scripts/lib/civilization-atlas/book6-rre-adapter-v1.mjs');
+assert(rreAdapter.includes('currentEvidenceRecord=null'),'RRE_W6_INPUT');
+assert(rreAdapter.includes('currentEvidenceReferences:evidenceReferences'),'RRE_W6_EVIDENCE_LINEAGE');
+const rreApi=text('functions/api/book6-runtime-readout.js');
+assert(rreApi.includes('runtime-position-w6-evidence-gate-v1.json'),'RRE_API_W6_GATE');
 
 console.log('PASS runtime-position-48 W6: 12 dossier evidence gates fail closed, observation targets preserved, no current positions/signals/thresholds/reachable positions fabricated, existing Current Web Authority and Reality Readout Engine reused, UI/Ask/RRE pipeline wired, representative human review ready.');
