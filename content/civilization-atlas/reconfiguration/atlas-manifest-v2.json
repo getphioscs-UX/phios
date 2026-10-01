@@ -41,7 +41,13 @@
     "runtimePositionW6EvidenceGate": "content/civilization-atlas/reconfiguration/runtime-position-w6-evidence-gate-v1.json",
     "runtimePositionW6Status": "content/civilization-atlas/reconfiguration/runtime-position-w6-status-v1.json",
     "runtimePositionW6HumanReview": "content/civilization-atlas/reconfiguration/runtime-position-w6-human-review-v1.json",
-    "runtimePositionW6Acceptance": "content/civilization-atlas/reconfiguration/runtime-position-w6-human-acceptance-v1.json"
+    "runtimePositionW6Acceptance": "content/civilization-atlas/reconfiguration/runtime-position-w6-human-acceptance-v1.json",
+    "runtimePositionW7Contract": "content/civilization-atlas/reconfiguration/runtime-position-w7-contract-v1.json",
+    "runtimePositionW7Readiness": "content/civilization-atlas/reconfiguration/runtime-position-w7-readiness-v1.json",
+    "runtimePositionW7CurrentEvidence": "content/civilization-atlas/reconfiguration/runtime-position-w7-current-evidence-admission-v1.json",
+    "runtimePositionW7Candidates": "content/civilization-atlas/reconfiguration/runtime-position-w7-position-candidates-v1.json",
+    "runtimePositionW7Status": "content/civilization-atlas/reconfiguration/runtime-position-w7-status-v1.json",
+    "runtimePositionW7HumanReview": "content/civilization-atlas/reconfiguration/runtime-position-w7-human-review-v1.json"
   },
   "knowledgeStates": [
     "CANONICAL_HISTORY",
@@ -218,6 +224,14 @@
       "reachablePositions": 0,
       "rule": "W6 wires evidence, transition and threshold gates without fabricating current data.",
       "humanReview": "ACCEPT"
+    },
+    "w7": {
+      "status": "MACHINE_CLOSED__HUMAN_REVIEW_READY",
+      "dossierReadinessRecords": 12,
+      "admittedCurrentEvidenceRecords": 0,
+      "runtimePositionCandidates": 0,
+      "humanReview": "PENDING",
+      "rule": "Search discovery cannot become CURRENT_DATA or a runtime position without Current Web Authority admission, RRE lineage, and human review."
     }
   },
   "figureCanonicalization": {
