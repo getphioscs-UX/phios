@@ -43,10 +43,10 @@ for(const d of dossiers.dossiers||[]){
   assert(corr?.transitionThresholdState==='NOT_EVALUATED','CORRESPONDENCE_THRESHOLD_'+d.id);
 }
 
-assert(review.status==='READY_FOR_HUMAN_REVIEW','REVIEW_STATUS');
+assert(review.status==='HUMAN_ACCEPTED','REVIEW_STATUS');
 assert(review.records?.length===3,'REVIEW_COUNT');
-assert((review.records||[]).every(x=>x.humanDecision==='PENDING'),'REVIEW_PREMATURE_DECISION');
-assert(status.status==='MACHINE_CLOSED__REPRESENTATIVE_DOSSIER_HUMAN_REVIEW_READY','W6_STATUS');
+assert((review.records||[]).every(x=>x.humanDecision==='ACCEPT'),'REVIEW_NOT_ACCEPTED');
+assert(status.status==='HUMAN_ACCEPTED__CURRENT_EVIDENCE_ADMISSION_READY','W6_STATUS');
 assert(status.completed?.admittedCurrentEvidenceClaims===0,'W6_CURRENT_EVIDENCE_COUNT');
 assert(status.completed?.observedTransitionSignals===0,'W6_SIGNAL_COUNT');
 assert(status.completed?.currentPositionAssignments===0,'W6_POSITION_COUNT');
@@ -58,7 +58,7 @@ assert(manifest.registryRefs?.runtimePositionW6EvidenceGate==='content/civilizat
 assert(manifest.registryRefs?.runtimePositionW6Status==='content/civilization-atlas/reconfiguration/runtime-position-w6-status-v1.json','MANIFEST_W6_STATUS');
 assert(crosswalk.w6?.currentEvidenceOwner==='CURRENT_WEB_AUTHORITY','CROSSWALK_CWA');
 assert(crosswalk.w6?.readoutOwner==='REALITY_READOUT_ENGINE','CROSSWALK_RRE');
-assert(crosswalk.w6?.humanDecision==='PENDING','CROSSWALK_HUMAN_GATE');
+assert(crosswalk.w6?.humanDecision==='ACCEPT','CROSSWALK_HUMAN_GATE');
 
 const loader=text('assets/js/pages/civilization-atlas/atlas-data.js');
 assert(loader.includes('runtime-position-w6-evidence-gate-v1.json'),'LOADER_W6_GATE');
@@ -76,4 +76,4 @@ assert(rreAdapter.includes('currentEvidenceReferences:evidenceReferences'),'RRE_
 const rreApi=text('functions/api/book6-runtime-readout.js');
 assert(rreApi.includes('runtime-position-w6-evidence-gate-v1.json'),'RRE_API_W6_GATE');
 
-console.log('PASS runtime-position-48 W6: 12 dossier evidence gates fail closed, observation targets preserved, no current positions/signals/thresholds/reachable positions fabricated, existing Current Web Authority and Reality Readout Engine reused, UI/Ask/RRE pipeline wired, representative human review ready.');
+console.log('PASS runtime-position-48 W6: representative dossier evidence gate human-accepted; 12 dossier gates still fail closed, observation targets preserved, no current positions/signals/thresholds/reachable positions fabricated, existing Current Web Authority and Reality Readout Engine reused.');
