@@ -13,7 +13,8 @@ const BOOK6_ATLAS_PATHS=Object.freeze({
  windows:'/content/civilization-atlas/reconfiguration/reconfiguration-windows-v1.json',
  snapshots:'/content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json',
  dossiers:'/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json',
- lived:'/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json'
+ lived:'/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json',
+ positions:'/content/registry/runtime-position-48-v1.json'
 });
 let book6AtlasCache;
 async function loadBook6AtlasDiscovery(locale='en'){
@@ -28,6 +29,7 @@ async function loadBook6AtlasDiscovery(locale='en'){
  for(const x of data.dossiers?.dossiers||[])records.push({locale:l,type:'DOSSIER',slug:x.id,title:x.entity?.[l]||x.entity?.en||x.id,summary:[x.entityType,x.dataClass,x.version].filter(Boolean).join(' · '),href:route('dossiers','dossier',x.id),bookTitle,partTitle,themeCode:'CIVILIZATION_RECONFIGURATION',tags:[x.entityType,x.dataClass].filter(Boolean),searchText:[x.id,x.entity?.en,x.entity?.['zh-Hans'],x.entityType,x.version,x.stage,x.capacity,x.load,x.alignment,x.resilience,x.adaptability,...(x.pressureFields||[]),...(x.direction||[])].join(' '),atlasScope:scope('dossiers',x.id,{dossierId:x.id})});
  for(const x of data.sections?.sections||[])records.push({locale:l,type:'BOOK_SECTION',slug:x.id,title:title(x.titleZh,x.titleEn),summary:title(x.groupZh,x.groupEn),href:'/books/reality-configuration/?atlas=search&section='+encodeURIComponent(x.id)+'&q='+encodeURIComponent(x.id)+'#atlas',bookTitle,partTitle,themeCode:'CIVILIZATION_RECONFIGURATION',tags:[x.figure,x.groupEn,x.groupZh].filter(Boolean),searchText:[x.id,x.titleZh,x.titleEn,x.groupZh,x.groupEn,x.figure].join(' '),atlasScope:scope('sections',x.id,{sectionId:x.id})});
  for(const x of data.lived?.dimensions||[])records.push({locale:l,type:'LIVED_REALITY',slug:x.id,title:title(x.labelZh,x.labelEn),summary:l==='zh-Hans'?'观察值 · 推导 · 未知；不转换为通用分数':'Observed · Derived · Unknown; no universal score',href:route('lived','lived',x.id),bookTitle,partTitle,themeCode:'LIVED_REALITY',tags:x.allowedDataClasses||[],searchText:[x.id,x.labelZh,x.labelEn,...(x.states||[]),...(x.allowedDataClasses||[])].join(' '),atlasScope:scope('lived',x.id,{livedRealityDimensionId:x.id})});
+ for(const x of data.positions?.positions||[])records.push({locale:l,type:'RUNTIME_POSITION',slug:x.id,title:(x.shortLabel?.[l]||x.shortLabel?.en||x.id),summary:[x.realityDomain?.[l]||x.realityDomain?.en,x.sourceContext?.id,x.accessState].filter(Boolean).join(' · '),href:route('positions','position',x.id),bookTitle,partTitle,themeCode:'CIVILIZATION_RECONFIGURATION',tags:[x.grammarId,x.realityDomainId,x.sourceContext?.id,x.accessState].filter(Boolean),searchText:[x.id,x.phase,x.grammarId,x.grammar?.en,x.grammar?.['zh-Hans'],x.realityDomain?.en,x.realityDomain?.['zh-Hans'],x.sourceContext?.en,x.sourceContext?.['zh-Hans'],x.crossTheme,x.accessState].join(' '),atlasScope:scope('positions',x.id,{positionId:x.id})});
  return records;
 }
 async function load(name){
