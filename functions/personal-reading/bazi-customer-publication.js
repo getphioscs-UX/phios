@@ -22,7 +22,7 @@ export async function buildBaziCustomerPublication({reading,locale,temporalSnaps
  if(full&&requireSubjectOverlay&&!reportSubjectPresentation)throw Error('REPORT_SUBJECT_PRESENTATION_REQUIRED');
  const intro=[1,2,3,4,5].map(page=>({pageNumber:page,kind:page===1&&reportSubjectPresentation?'STATIC_COVER':'STATIC',src:resolveReportEditorialAsset({registry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},methodId:'BZR',page,locale:page===1?'bilingual':locale,publicBaseUrl:PUBLIC_BASE}).src,alt:`BaZi ${page===1?'bilingual cover':locale+' P'+page}`,...(page===1&&reportSubjectPresentation?{subject:reportSubjectPresentation}:{})}));
  intro.push({pageNumber:6,kind:'FROZEN_TEMPLATE',html:renderFrozenBaziIntro(projection.legacy.reports.find(r=>r.pages.some(p=>p.pageNumber===6)),total)});
- if(full){const customer=assemblePublicationSnapshot({methodId:'BZR',locale,pages,intro,temporalSnapshot,generatedAt:temporalSnapshot.generatedAt,internalPages:projection.internalSections,layout:SECTION_LAYOUT}).customer;return physical?{...customer,physicalComposition:physical}:customer;}
+ if(full){const customer=assemblePublicationSnapshot({methodId:'BZR',locale,pages,intro,temporalSnapshot,generatedAt:temporalSnapshot.generatedAt,internalPages:projection.internalSections,layout:SECTION_LAYOUT,compositionSourcePages:physical?projection.pages:null}).customer;return physical?{...customer,physicalComposition:physical}:customer;}
  // Free subset retains the same report renderer; no separate report runtime.
  return {schemaVersion:'GUIDED_REPORT_SUCCESSOR_R2',methodId:'BZR',locale,totalPages:total,intro,pages,customerPublishable:false,successorBaselineActivated:false,accessState:'FREE_REPORT_PREVIEW'};
 }

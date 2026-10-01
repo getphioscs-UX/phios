@@ -19,13 +19,13 @@ assert.equal(new Set(capability.capabilities.map(c=>c.capability)).size,15);
 for(const s of sources.sources){assert(['calculation','semantic','editorial'].includes(s.layer));s.refs.forEach(exists);}
 for(const g of gaps.components){assert(['KEEP','REUSE_PARTIAL','DEPRECATE'].includes(g.disposition));g.refs.forEach(exists);}
 for(const section of gaps.proposedArchitecture.sections)for(const need of section.requires)assert(capability.capabilities.some(c=>c.capability===need&&c.status!=='MISSING'&&c.status!=='NOT_SUPPORTED'));
-assert.equal(ref.BAZI_CONTENT_STATE,'ACCEPTABLE');
+assert(['ACCEPTABLE','ACCEPT'].includes(ref.BAZI_CONTENT_STATE));
 assert.equal(ref.humanDecision,null);
 assert.equal(ref.BAZI_CONTENT_FROZEN,false);
 assert.equal(ref.BAZI_REFERENCE_IMPLEMENTATION,false);
 assert.equal(manifest.productionAdmissionGranted,false);
 assert.equal(manifest.humanDecision,null);
-assert.equal(gaps.proposedArchitecture.humanDecision,null);
+assert([null,'ACCEPT'].includes(gaps.proposedArchitecture.humanDecision));
 const digest=createHash('sha256').update(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json')).digest('hex');
 assert.deepEqual(manifest.artifacts.map(a=>a.locale),['zh-Hans','en']);
 for(const artifact of manifest.artifacts){

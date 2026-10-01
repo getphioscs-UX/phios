@@ -5,12 +5,20 @@ import {REPORT_EDITORIAL_COPY} from './report-editorial-copy.js';
 import {GUIDED_REPORT_SUCCESSOR,PUBLICATION_VERSIONS,REPORT_PAGE_REGISTRY} from './report-publication-contract.js';
 import {SECTION_LAYOUT,validateExpandedSections} from './report-section-contract.js';
 
-export function assemblePublicationSnapshot({methodId,locale,pages,intro,temporalSnapshot,internalPages,generatedAt,layout=null,subjectPresentation=null}={}){
+export function assemblePublicationSnapshot({methodId,locale,pages,intro,temporalSnapshot,internalPages,generatedAt,layout=null,subjectPresentation=null,compositionSourcePages=null}={}){
  const plan=REPORT_PAGE_REGISTRY.find(p=>p.method===methodId);
  if(!plan||!['en','zh-Hans'].includes(locale)||!temporalSnapshot||!generatedAt)throw Error('PUBLICATION_ASSEMBLY_INPUT_INVALID');
  const sequence=[...intro,...pages].map(p=>p.pageNumber);
  if(layout&&layout!==SECTION_LAYOUT)throw Error('PUBLICATION_LAYOUT_INVALID');
- if(layout===SECTION_LAYOUT){if(methodId!=='BZR'||intro.length!==6)throw Error('PUBLICATION_SECTION_METHOD_INVALID');validateExpandedSections(pages);}
+ if(layout===SECTION_LAYOUT){if(methodId!=='BZR'||intro.length!==6)throw Error('PUBLICATION_SECTION_METHOD_INVALID');validateExpandedSections(compositionSourcePages||pages);
+  if(compositionSourcePages){
+   const ids=new Set(compositionSourcePages.map(p=>p.pageKey));
+   if(pages.some(p=>!p.compositionGroupId||!p.sourceNodeIds?.length||p.sourceNodeIds.some(id=>!ids.has(id))))throw Error('PUBLICATION_COMPOSITION_SOURCE_INVALID');
+   const represented=new Set(pages.flatMap(p=>p.sourceNodeIds));
+   if([...ids].some(id=>!represented.has(id)))throw Error('PUBLICATION_COMPOSITION_SOURCE_DROPPED');
+   if(pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length!==10)throw Error('PUBLICATION_COMPOSITION_MASTER_MISSING');
+  }
+ }
  if((!layout&&sequence.length!==plan.totalPages)||sequence.some((n,i)=>n!==i+1))throw Error('PUBLICATION_PAGE_SEQUENCE_INVALID');
  const boundIntro=subjectPresentation?intro.map(p=>p.pageNumber===1&&p.kind==='STATIC'?{...p,kind:'STATIC_COVER',subject:subjectPresentation}:p):intro;
  const customer={schemaVersion:GUIDED_REPORT_SUCCESSOR,...PUBLICATION_VERSIONS,...(layout?{layout,pageRegistryVersion:'2.1.0'}:{}),methodId,locale,totalPages:sequence.length,customerPublishable:false,successorBaselineActivated:false,intro:boundIntro,pages,...(subjectPresentation?{subjectPresentation}:{} )};

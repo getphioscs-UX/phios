@@ -1,5 +1,9 @@
 # Zi Wei Existing Capability Audit — MR-W2
 
+## Accepted successor scope
+
+The user accepted this audit and the proposed architecture on 2026-10-01. MR-W3/MR-W4/MR-W5/MR-W6A are now implemented for representative review; see [capability reconciliation](ZIWEI-CAPABILITY-STATE-RECONCILIATION.md). The legacy dynamic check has been repaired to verify the canonical successor route and now passes. Pending decisions and that failure below describe the original audit, not current state.
+
 Work: `PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT`  
 Audit date: 2026-10-01  
 Baseline: `611ddf2dd7e4bdced6358879a5bdb9656c0f0286`  
@@ -109,4 +113,3 @@ Failed: `check-zwd-w0-w9-zi-wei-dynamic-domain-runtime.mjs` — ENOENT `personal
 Machine inventories: [capabilities](../../../content/reports/ziwei/capability-inventory.json), [sources](../../../content/reports/ziwei/semantic-source-inventory.json), [report gaps and architecture](../../../content/reports/ziwei/report-gap-inventory.json).
 
 Next: resolve BaZi subject binding and full-report human gate; obtain the proposed Zi Wei architecture decision. Only then proceed to MR-W3 and later authorized rollout stages.
-

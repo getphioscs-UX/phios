@@ -1,5 +1,9 @@
 # BaZi Report Production Reference — MR-W0 / MR-W1
 
+## 2026-10-01 successor decision
+
+The user has now accepted BaZi content, semantic depth, Career, Wealth and the ten Section Masters, while rejecting the old 74/64-page composition. [Composition R1](../acceptance/bazi-paid-report/composition-r1/IMPLEMENTATION.md) replaces that composition with a 38/38-page review candidate. Its human decision is independent of subject binding. The remaining text below records the earlier MR-W0–W2 delivery and is historical where it says content/architecture decisions are pending.
+
 Work: `PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT`  
 Audit date: 2026-10-01  
 Baseline: `611ddf2dd7e4bdced6358879a5bdb9656c0f0286`
@@ -85,4 +89,3 @@ Record only **ACCEPT** or **REJECT** after review; pending is represented by a n
 Passed locally: owner-receipt digest check, accepted-copy closure (both locales, one opener per section, no exact accepted-block duplication), shared customer-delivery check, and rollout artifact integrity check. Accepted copy is unchanged and no provider call is needed.
 
 The historical shared delivery contract is still a BaZi-only QA/preview pilot; a report architecture reference does not prove production purchase→release→account delivery. Full visual/language review and trusted subject acceptance remain outstanding.
-

@@ -53,8 +53,18 @@ const caps=read('content/governance/multi-lens/successors/multi-lens-capability-
 const cur=read('content/governance/multi-lens/successors/multi-lens-current-successor-v4.json');assert.equal(cur.activatedExpansion,'ZI_WEI_DYNAMIC_DOMAIN_RUNTIME_V2');assert.equal(cur.roleChanges,false);
 const frontend=read('content/professional/zi-wei-dynamic/registries/zi-wei-dynamic-frontend-availability-v1.json');assert.equal(frontend.status,'AVAILABLE');
 const prod=read('content/professional/zi-wei-dynamic/acceptance/zi-wei-dynamic-production-acceptance-v1.json');assert.equal(prod.availability,'AVAILABLE');assert.equal(prod.deploymentVerified,false);const activation=read('content/professional/zi-wei-dynamic/authority/zi-wei-dynamic-production-activation-v1.json');assert.equal(activation.productionExecutionAllowed,true);assert.equal(activation.predictionAllowed,false);
-const html=text('personal-runtime.html');for(const needle of ['zwrTraditionalCalculationSex','data-zwd-dynamic-runtime','/assets/js/pages/zi-wei-dynamic-runtime.js','/assets/css/zi-wei-dynamic-runtime.css'])assert.ok(html.includes(needle),`personal-runtime missing ${needle}`);
-const client=text('assets/js/pages/zi-wei-dynamic-runtime.js');for(const needle of ['/api/zi-wei-dynamic-execute','/api/zi-wei-dynamic-meaning','targetTimezone','traditionalCalculationSex'])assert.ok(client.includes(needle),`ZWD client missing ${needle}`);assert.ok(!/new Date\(\)\.toISOString\(\)\.slice\(0,10\)|Intl\.DateTimeFormat\(\)\.resolvedOptions\(\)\.timeZone/.test(client),'frontend must not infer current target date/timezone');
+// The retired personal-runtime page no longer owns Zi Wei. Assert the
+// registered successor route while preserving every timing assertion above.
+const route=read('content/customer-experience-rebuild/ziwei-cx-r1/authority/ziwei-cx-r1-customer-route-authority-v1.json');
+assert.equal(route.rules.personalRuntimeHtmlMayOwnCurrentRoute,false);
+assert.equal(route.canonicalCustomerSurface.route,'/perspectives/personal/');
+assert.equal(route.canonicalCustomerSurface.api,'/api/customer-personal-reality');
+const html=text(route.canonicalCustomerSurface.html);
+for(const needle of ['data-cx-personal-form','traditionalCalculationSex','data-cx-personal-results'])assert.ok(html.includes(needle),`canonical personal surface missing ${needle}`);
+const client=text(route.canonicalCustomerSurface.client),targetClient=text('assets/customer-ui/js/personal-inputs/shared-target-context.js'),api=text('functions/api/customer-personal-reality.js');
+for(const needle of ['/api/customer-personal-reality','collectSharedTargetContext','traditionalCalculationSex'])assert.ok(client.includes(needle),`canonical client missing ${needle}`);
+for(const needle of ['buildZiweiFullProductionCustomerRuntime','resolveZiweiLiveTargetContext','targetContext:ziweiTargetContext'])assert.ok(api.includes(needle),`canonical API missing ${needle}`);
+assert.ok(!/new Date\(\)\.toISOString\(\)\.slice\(0,10\)|Intl\.DateTimeFormat\(\)\.resolvedOptions\(\)\.timeZone/.test(targetClient),'target context must not infer current date/timezone');
 for(const f of ['functions/api/zi-wei-dynamic-execute.js','functions/api/zi-wei-dynamic-meaning.js','functions/zi-wei-dynamic/dynamic-runtime.js','functions/zi-wei-dynamic/dynamic-meaning-runtime.js','functions/zi-wei-dynamic/dynamic-reading-ir.js'])assert.ok(exists(f),`${f} missing`);
 console.log('✓ MASTER-4 ZWD-W0–W9 Zi Wei Dynamic Domain Runtime passed.');
 console.log('  ZWR DOMAIN now covers Natal + Da Xian + Annual dynamic domain focus.');

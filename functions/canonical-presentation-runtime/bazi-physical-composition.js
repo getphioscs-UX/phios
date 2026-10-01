@@ -6,14 +6,14 @@ const role=(id,en,zh,selectors)=>({id,title:{en,'zh-Hans':zh},selectors});
 export const BAZI_PHYSICAL_PAGE_ARCHITECTURE=Object.freeze([
  ['S01',role('STRUCTURE_ELEMENTS','Chart Structure & Elements','命盘结构与五行',[['S01_OVERVIEW_FOUR_PILLARS'],['S01_OVERVIEW_FIVE_ELEMENTS']])],
  ['S02',role('CORE_STYLE','Core Operating Style','核心运作方式',[['S02_PERSONALITY_TEN_GOD_OVERVIEW'],['S02_CORE_OPERATING_STYLE']]),role('CAPABILITY','Capability Development','能力发展',[['S02_CAPABILITY_DEVELOPMENT']]),role('FRICTION','Friction & Current Expression','张力与当前表达',[['S02_FRICTION']])],
- ['S03',role('CARRYING','Carrying Conditions & Functional Groups','承载条件与功能组',[['S03_LIFE_STRUCTURE_DAY_MASTER_CARRYING'],['S03_LIFE_STRUCTURE_TEN_GOD_FUNCTION_GROUPS'],['S03_SYSTEM',[0,1]]]),role('GODS_PATTERNS','Ten Gods & Pattern Paths','十神与格局路径',[['S03_LIFE_STRUCTURE_TEN_GOD_DETAILS'],['S03_LIFE_STRUCTURE_PATTERN_PATHS'],['S03_SYSTEM',[2]]]),role('RELATIONSHIPS','Structural Relationships','结构关系',[['S03_LIFE_STRUCTURE_PILLAR_RELATIONSHIPS'],['S03_SYSTEM',[3,4]]]),role('INTEGRATED','Integrated Life Structure','整合人生结构',[['S03_SYSTEM',[5,6]]])],
+ ['S03',role('CARRYING','Carrying Conditions & Functional Groups','承载条件与功能组',[['S03_LIFE_STRUCTURE_DAY_MASTER_CARRYING'],['S03_LIFE_STRUCTURE_TEN_GOD_FUNCTION_GROUPS'],['S03_SYSTEM',[0,1]]]),role('GODS_PATTERNS','Ten Gods & Pattern Paths','十神与格局路径',[['S03_LIFE_STRUCTURE_TEN_GOD_DETAILS'],['S03_LIFE_STRUCTURE_PATTERN_PATHS']]),role('RELATIONSHIPS','Structural Relationships','结构关系',[['S03_LIFE_STRUCTURE_PILLAR_RELATIONSHIPS'],['S03_SYSTEM',[3,4]]]),role('INTEGRATED','Integrated Life Structure','整合人生结构',[['S03_SYSTEM',[2,5,6]]])],
  ['S04',role('FINGERPRINT','Career Structural Fingerprint','事业结构指纹',[['S04_CAREER_PROFESSIONAL_TOPICS'],['S04_ROLE_SYSTEM']]),role('CONDITIONS','Work Conditions & Direction','工作条件与方向',[['S04_WORKING_DIRECTION']]),role('TIMING','Career Timing & Navigation','事业时序与导航',[['S04_P4']])],
- ['S05',role('FLOW','Resource Flow','资源流动',[['S05_WEALTH_PROFESSIONAL_TOPICS'],['S05_RESOURCE_FLOW']]),role('RETENTION','Retention, Outflow & Real Finance','留存、流出与现实财务',[['S05_RETENTION_REALITY',[0,1]]]),role('TIMING','Wealth Timing & Action','财富时序与行动',[['S05_RETENTION_REALITY',[2,3]]])],
+ ['S05',role('FLOW','Resource Flow','资源流动',[['S05_WEALTH_PROFESSIONAL_TOPICS'],['S05_RESOURCE_FLOW']]),role('RETENTION_TIMING','Retention, Timing & Action','资源留存、时序与行动',[['S05_RETENTION_REALITY']])],
  ['S06',role('POSITION','Relationship Position','关系位置',[['S06_RELATIONSHIP_PROFESSIONAL_TOPICS'],['S06_POSITION']]),role('BOUNDARY','Interaction & Boundaries','互动与边界',[['S06_INTERACTION_BOUNDARY']])],
  ['S07',role('PRESSURE','Pressure & Recovery','压力与恢复',[['S07_P2',[0,1,2,3]]]),role('MAINTENANCE','Maintenance Takeaways','日常维护要点',[['S07_P2',[4,5,6]]])],
- ['S08',role('LAYERS','Natal → Da Yun → Liu Nian','本命 → 大运 → 流年',[['S08_TIMING_TIMING_LAYERS'],['S08_P2']]),role('YEAR','Current-Year Observation','当前年度观察',[['S08_P3']])],
+ ['S08',role('LAYERS','Natal → Da Yun → Liu Nian','本命 → 大运 → 流年',[['S08_TIMING_TIMING_LAYERS'],['S08_P2',[0,1]]]),role('YEAR','Current-Year Observation','当前年度观察',[['S08_P2',[2,3]],['S08_P3']])],
  ['S09',role('GUIDANCE','Integrated Guidance','整合建议',[['S09_INTEGRATED_GUIDANCE',[0,1,2,3]]]),role('DECISIONS','Decision Framework','决策框架',[['S09_INTEGRATED_GUIDANCE',[4,5,6]]])],
- ['S10',role('EVIDENCE','Method & Evidence','方法与证据',[['S10_METHOD_GUIDE',[0,1,2,3]]]),role('BOUNDARY','Boundary, Source & Version','边界、来源与版本',[['S10_METHOD_GUIDE',[4,5,6]]])]
+ ['S10',role('EVIDENCE_BOUNDARY','Method, Evidence & Boundaries','方法、证据与边界',[['S10_METHOD_GUIDE']])]
 ]);
 
 export function composeBaziPhysicalPages(sourcePages,locale){
@@ -67,7 +67,8 @@ export function composeBaziPhysicalPages(sourcePages,locale){
    coverage.push({sourceNodeId:p.pageKey,compositionGroupIds:groups.map(g=>g.compositionGroupId),state:'MERGED'});
   }
  }
- pages.forEach((p,i)=>{p.pageNumber=i+7;p.sequenceWithinSection=pages.filter(x=>x.sectionId===p.sectionId&&x.pageNumber<=p.pageNumber).length;});
+ const sequence=new Map();
+ pages.forEach((p,i)=>{p.pageNumber=i+7;p.sequenceWithinSection=(sequence.get(p.sectionId)||0)+1;sequence.set(p.sectionId,p.sequenceWithinSection);});
  if(JSON.stringify(sourcePages)!==sourceSnapshot)throw Error('COMPOSITION_MUTATED_SOURCE');
  return {version:BAZI_COMPOSITION_VERSION,pages,totalPages:pages.length+6,coverage,deduplications,timingOwner:'S08_TIMING',boundaryHierarchy:['LOCAL','SECTION','GLOBAL']};
 }

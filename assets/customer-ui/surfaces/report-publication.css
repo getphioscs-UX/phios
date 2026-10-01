@@ -61,7 +61,8 @@
 @media print{.bzpub-grid{grid-template-columns:repeat(var(--bzpub-columns,2),minmax(0,1fr))}.bzpub-ten-bars{grid-template-columns:1fr 1fr}.bzpub-cycle-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.bzpub-module{break-inside:avoid}}
 .bazi-report-unlock{box-sizing:border-box;max-width:940px;margin:20px auto;padding:24px;background:#fffaf1;border:1px solid #d4c6ab;border-radius:12px;color:#19364e}.bazi-report-unlock a{display:inline-block;max-width:100%;box-sizing:border-box;padding:12px 18px;background:#19364e;color:#fff;text-decoration:none;border-radius:6px;overflow-wrap:anywhere}details[data-bazi-technical-detail]{margin:24px auto;max-width:1100px}details[data-bazi-technical-detail]>summary{padding:18px;cursor:pointer}@media print{.bazi-report-unlock,details[data-bazi-technical-detail]{display:none!important}}
 
-/* R11 print hardening: one publication node must equal one physical A4 page. */
+/* Historical print shells remain A4. Composition R1 passes physical groups,
+   never individual semantic nodes, to these shells. */
 @media print{
  html,body{margin:0!important;padding:0!important;background:#fff!important}
  .pub-report{margin:0!important;padding:0!important;max-width:none!important}
@@ -101,5 +102,71 @@
 @media print{
  .pub-cover{width:210mm!important;height:297mm!important;margin:0!important;break-after:page!important;page-break-after:always!important}
  .pub-cover>img{width:100%!important;height:100%!important;object-fit:contain!important}
- .pub-cover-value{font-size:4.2mm;line-height:1.15}
+.pub-cover-value{font-size:4.2mm;line-height:1.15}
+}
+
+/* Composition R1: the existing customer renderer, measured A4 groups, no
+   prose scaling. The 16px body / 12px boundary floors are preserved. */
+.pub-report[data-physical-composition]{max-width:794px;letter-spacing:0}
+.pub-report[data-physical-composition] .pub-page{width:794px;height:1119px;min-height:1119px;max-height:1119px;padding:32px 40px 24px;overflow:visible;gap:12px}
+.pub-report[data-physical-composition] .pub-static{width:794px;height:1119px;margin:24px 0}
+.pub-report[data-physical-composition] .pub-static>img{width:100%;height:100%;object-fit:contain}
+.pub-composed-page .pub-heading{margin:10px 0 2px}
+.pub-composed-page .pub-heading h2{font-size:28px;margin-bottom:4px}
+.pub-composed-page .pub-header{font-size:22px;padding-bottom:8px}
+.pub-composed-content{font-size:16px;line-height:1.62;min-height:0;flex-shrink:0}
+.pub-composed-content p{margin:0 0 13px;orphans:3;widows:3}
+.pub-composed-node{display:contents}
+.pub-composed-content .pub-visual{padding:8px 0;margin:0 0 12px}
+.pub-composed-content .bzpub-grid{gap:8px}
+.pub-composed-content .bzpub-card{padding:8px;border-top-width:2px}
+.pub-composed-content .bzpub-card>strong{font-size:19px}
+.pub-composed-content .bzpub-card h3{font-size:16px;margin-bottom:4px}
+.pub-composed-content .bzpub-card p{font-size:14px;margin:4px 0;line-height:1.4}
+.pub-composed-content .bzpub-elements{gap:5px}
+.pub-composed-content .bzpub-element{padding:5px 10px}
+.pub-composed-content .bzpub-element p{margin:3px 0;font-size:14px}
+.pub-composed-content .bzpub-element h3,.pub-composed-content .bzpub-element strong{font-size:17px}
+.pub-composed-content .bzpub-bar{height:8px;margin:5px 0}
+.pub-composed-content .bzpub-focus{padding:8px;margin:4px 0;font-size:14px}
+.pub-composed-content .bzpub-ten-bars{gap:8px 18px}
+.pub-composed-content .bzpub-ten-bars h3{font-size:16px}
+.pub-composed-content .bzpub-cycle-grid{margin-top:8px;gap:5px}
+.pub-composed-content .pub-boundary{font-size:12px;line-height:1.45;margin:5px 0}
+.pub-composed-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:14px}
+.pub-composed-facts dd{margin:0}
+.pub-composed-content .pub-closing-takeaway{border-left:3px solid #ac8547;padding:14px 18px;background:#e4d5ad44;font-weight:500}
+.pub-composed-page[data-text-fit="COMPACT"] .pub-composed-content{line-height:1.5}
+.pub-composed-page[data-text-fit="COMPACT"] .pub-composed-content p{margin-bottom:8px}
+.pub-composed-page[data-text-fit="COMPACT"] .pub-visual{margin-bottom:6px;padding:4px 0}
+.pub-composed-page[data-text-fit="REFLOW"] .pub-composed-content{line-height:1.45}
+.pub-composed-page[data-text-fit="REFLOW"] .pub-composed-content p{margin-bottom:7px}
+.pub-composed-page[data-text-fit="REFLOW"] .bzpub-grid{gap:5px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.pub-composed-page[data-text-fit="REFLOW"] .bzpub-card{padding:5px}
+.pub-composed-page[data-text-fit="REFLOW"] .bzpub-card>strong{font-size:17px}
+.pub-composed-page[data-text-fit="REFLOW"] .pub-visual{padding:3px 0;margin-bottom:5px}
+.pub-composed-page[data-text-fit="REFLOW"] .bzpub-ten-bars{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pub-composed-content [data-publication-visual="DAY_MASTER_CARRYING"] .bzpub-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pub-composed-content [data-publication-visual="TEN_GOD_FUNCTION_GROUPS"] .bzpub-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.pub-composed-content [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-grid{display:block}
+.pub-composed-content [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-card{display:grid;grid-template-columns:85px 55px 88px 108px 130px 120px 1fr;gap:3px 4px;align-items:start;border:0;border-bottom:1px solid #cbb88e88;border-left:3px solid var(--bzpub-color);padding:5px}
+.pub-composed-content [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-card h3{font-size:14px}
+.pub-composed-content [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-card>strong{font-size:14px}
+.pub-composed-content [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-card p{margin:0;font-size:14px;line-height:1.3}
+.pub-composed-content [data-publication-visual="PATTERN_PATHS"] .bzpub-card{display:grid;grid-template-columns:110px 36px 1fr;gap:4px 8px;align-items:start}
+.pub-composed-content [data-publication-visual="PATTERN_PATHS"] .bzpub-grid{grid-template-columns:1fr}
+.pub-composed-content [data-publication-visual="PATTERN_PATHS"] .bzpub-card p{margin:0}
+.pub-composed-content [data-publication-visual="PATTERN_PATHS"] .bzpub-card h3{grid-column:1;grid-row:1 / span 3}
+.pub-composed-content [data-publication-visual="PATTERN_PATHS"] .bzpub-card>strong{grid-column:2;grid-row:1 / span 3}
+.pub-composed-content [data-publication-visual="PATTERN_PATHS"] .bzpub-card p{grid-column:3}
+.pub-composed-content [data-publication-visual="TIMING_LAYERS"] .bzpub-cycle-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.pub-composed-content [data-publication-visual="TIMING_LAYERS"] .bzpub-cycle-grid .bzpub-card{padding:5px}
+/* Short closing pages use a comfortable reading measure without adding copy. */
+.pub-report[lang="zh-Hans"] .pub-composed-page:is([data-page-role="MAINTENANCE"],[data-page-role="DECISIONS"]) .pub-composed-content{font-size:20px;line-height:1.85;max-width:640px;margin:12px auto 0}
+.pub-report[lang="zh-Hans"] .pub-composed-page:is([data-page-role="MAINTENANCE"],[data-page-role="DECISIONS"]) .pub-composed-content p{margin-bottom:26px}
+@media print{
+ .pub-report[data-physical-composition] .pub-page{padding:32px 40px 24px!important;overflow:visible!important}
+ .pub-report[data-physical-composition] .pub-composed-page .pub-heading{margin:10px 0 2px}
+ .pub-report[data-physical-composition] .pub-composed-page .pub-footer{font-size:12px}
+ .pub-report[data-physical-composition] .pub-composed-node{break-before:auto;break-after:auto}
 }
