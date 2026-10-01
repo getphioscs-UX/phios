@@ -34,12 +34,14 @@ export async function loadReconfigurationCases(){return getJson('/content/civili
 export async function loadReconfigurationWindows(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-windows-v1.json');}
 export async function loadReconfigurationSnapshots(){return getJson('/content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json');}
 export async function loadContemporaryRuntimeDossiers(){
-  const [base,depth]=await Promise.all([
+  const [base,depth,positions]=await Promise.all([
     getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json'),
-    getJson('/content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json')
+    getJson('/content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json'),
+    getJson('/content/civilization-atlas/reconfiguration/runtime-position-correspondence-v1.json')
   ]);
   const overlay=new Map((depth.dossiers||[]).map(x=>[x.id,x]));
-  return {...base,knowledgeDepthContract:depth.contract,knowledgeDepthVersion:depth.version,dossiers:(base.dossiers||[]).map(d=>({...d,knowledgeDepth:overlay.get(d.id)||null}))};
+  const positionOverlay=new Map((positions.correspondences||[]).map(x=>[x.dossierId,x]));
+  return {...base,knowledgeDepthContract:depth.contract,knowledgeDepthVersion:depth.version,runtimePositionCorrespondenceContract:positions.contract,dossiers:(base.dossiers||[]).map(d=>({...d,knowledgeDepth:overlay.get(d.id)||null,runtimePositionCorrespondence:positionOverlay.get(d.id)||null}))};
 }
 export async function loadLivedRealityDimensions(){return getJson('/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json');}
 
@@ -47,10 +49,14 @@ export async function loadReconfigurationRelationships(){return getJson('/conten
 export async function loadReconfigurationKnowledgeStates(){return getJson('/content/civilization-atlas/reconfiguration/knowledge-state-contract-v1.json');}
 export async function loadReconfigurationVisualStatus(){return getJson('/content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json');}
 export async function loadRuntimePositionRegistry(){
-  const [registry,crosswalk]=await Promise.all([
+  const [registry,crosswalk,sourceWindows,historicalAlignment]=await Promise.all([
     getJson('/content/registry/runtime-position-48-v1.json'),
-    getJson('/content/registry/runtime-position-48-crosswalk-v1.json')
+    getJson('/content/registry/runtime-position-48-crosswalk-v1.json'),
+    getJson('/content/registry/runtime-position-48-source-windows-v1.json'),
+    getJson('/content/civilization-atlas/reconfiguration/runtime-position-book5-historical-alignment-v1.json')
   ]);
-  return {...registry,crosswalk};
+  const sourceById=new Map((sourceWindows.positions||[]).map(x=>[x.positionId,x]));
+  const historyById=new Map((historicalAlignment.alignments||[]).map(x=>[x.positionId,x]));
+  return {...registry,crosswalk,sourceWindows,historicalAlignment,positions:(registry.positions||[]).map(x=>({...x,sourceWindow:sourceById.get(x.id)||null,historicalAlignment:historyById.get(x.id)||null}))};
 }
 export async function loadCivilizationVisualBindings(){return getJson('/content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json');}
