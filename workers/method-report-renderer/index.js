@@ -1,5 +1,6 @@
 import puppeteer from '@cloudflare/puppeteer';
-import {PDFDocument} from 'pdf-lib';
+import {Buffer} from 'node:buffer';
+import {countChromiumPdfPages} from './pdf-page-count.js';
 import {renderPublicationReport} from '../../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {finalizeZiweiNavigation} from '../../functions/canonical-presentation-runtime/ziwei-navigation-finalization.js';
 import {createCustomerDeliverySnapshot} from '../../functions/personal-reading/narrative/report-section-snapshot.js';
@@ -39,18 +40,22 @@ export default {
    });
    stage='PDF';
    // Workers-native stream avoids Puppeteer's Node-global Buffer.concat path.
-   const pdfStream=await page.createPDFStream({format:'A4',printBackground:true,preferCSSPageSize:true});
-   const pdfReader=pdfStream.getReader(),chunks=[];let pdfSize=0;
-   for(;;){const {done,value}=await pdfReader.read();if(done)break;pdfSize+=value.byteLength;if(pdfSize>32000000){await pdfReader.cancel();throw Error('PDF_SIZE_LIMIT');}chunks.push(value);}
-   const pdf=new Uint8Array(pdfSize);let offset=0;for(const chunk of chunks){pdf.set(chunk,offset);offset+=chunk.byteLength;}
-   const pageCount=(await PDFDocument.load(pdf)).getPageCount();
+   const cdp=await page.createCDPSession();
+   const {stream:handle}=await cdp.send('Page.printToPDF',{transferMode:'ReturnAsStream',printBackground:true,preferCSSPageSize:true,paperWidth:8.2677,paperHeight:11.6929,marginTop:0,marginBottom:0,marginLeft:0,marginRight:0});
+   if(!handle)throw Error('PDF_STREAM_REQUIRED');
+   const pdfStream=new ReadableStream({async pull(controller){
+    const {data,base64Encoded,eof}=await cdp.send('IO.read',{handle,size:262144});
+    controller.enqueue(base64Encoded?Buffer.from(data,'base64'):new TextEncoder().encode(data));
+    if(eof){await cdp.send('IO.close',{handle});controller.close();}
+   },async cancel(){await cdp.send('IO.close',{handle});}});
+   const pageCount=await countChromiumPdfPages(pdfStream);
    stage='VERIFY';
    if(pageCount!==33||measured.overflowCount||measured.brokenImages||measured.undefinedText||errors.length)throw Error('RENDER_VERIFICATION_FAILED');
    // Persist already-fitted static material; ordinary customer open runs no code.
    await page.evaluate(()=>document.querySelectorAll('script').forEach(s=>s.remove()));
    const html=await page.content();
    return Response.json({html,verification:{schemaVersion:'METHOD_BROWSER_VERIFICATION_V1',verifier:'CLOUDFLARE_BROWSER_QA',semanticSnapshotId:candidate.snapshot.semanticSnapshotId,passed:true,pageCount,overflowCount:0,brokenImages:0,errorCount:0,outputDigest:await hash(html)}},{headers:{'Cache-Control':'no-store'}});
-  }catch(error){return Response.json({ok:false,code:'REPORT_BROWSER_VERIFICATION_FAILED',stage,errorName:error.name,...(stage==='PDF'?{reason:String(error.message).slice(0,240)}:{})},{status:422,headers:{'Cache-Control':'no-store'}});}
+  }catch(error){return Response.json({ok:false,code:'REPORT_BROWSER_VERIFICATION_FAILED',stage,errorName:error.name,...(['PDF','BROWSER_LAUNCH'].includes(stage)?{reason:String(error.message).slice(0,240)}:{}),...(stage==='BROWSER_LAUNCH'?{limits:await puppeteer.limits(env.BROWSER).catch(()=>null)}:{})},{status:422,headers:{'Cache-Control':'no-store'}});}
   finally{if(browser)await browser.close();}
  }
 };

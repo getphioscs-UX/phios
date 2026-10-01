@@ -197,7 +197,16 @@ assert.equal(bookViDataSuccessorV4.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_R
 assert.equal(bookViDataSuccessorV4.scope.productionAdmissionChanged,false);
 assert.equal(bookViDataSuccessorV4.scope.bookVHistoricalRegistriesChanged,false);
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV4.change.changeClass));
-assert.equal(digest(bookViDataSuccessorV4.change.path),bookViDataSuccessorV4.change.successorSha256,'Atlas data successor v4 digest drift');
+const bookViDataSuccessorV5=json('content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v5.json');
+assert.equal(bookViDataSuccessorV5.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-data-loader-successor-v4.json');
+assert.equal(bookViDataSuccessorV5.predecessorSha256,digest(bookViDataSuccessorV5.predecessor));
+assert.equal(bookViDataSuccessorV5.change.path,bookViDataSuccessorV4.change.path);
+assert.equal(bookViDataSuccessorV5.change.previousSha256,bookViDataSuccessorV4.change.successorSha256);
+assert.equal(bookViDataSuccessorV5.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');
+assert.equal(bookViDataSuccessorV5.scope.productionAdmissionChanged,false);
+assert.equal(bookViDataSuccessorV5.scope.bookVHistoricalRegistriesChanged,false);
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV5.change.changeClass));
+assert.equal(digest(bookViDataSuccessorV5.change.path),bookViDataSuccessorV5.change.successorSha256,'Atlas data successor v5 digest drift');
 assert.equal(bookViDataSuccessorV3.scope.bookVCanonicalTheoryChanged,false);
 assert.equal(bookViDataSuccessorV3.scope.bookVHistoricalRegistriesChanged,false);
 assert.equal(bookViDataSuccessorV3.scope.parallelAtlasRuntimeCreated,false);
@@ -207,7 +216,7 @@ assert.match(atlasDataV3Source,/loadReconfigurationVisualStatus/);
 assert.match(atlasDataV3Source,/loadCivilizationVisualBindings/);
 assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json')));
 assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json')));
-authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessorV4.change.successorSha256,changeClass:bookViDataSuccessorV4.change.changeClass});
+authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessorV5.change.successorSha256,changeClass:bookViDataSuccessorV5.change.changeClass});
 
 // Book VI shares the existing Atlas state and URL-state owners with Book V.
 // Verify the frozen Book V predecessor bytes first, then authorize only the
@@ -226,6 +235,15 @@ assert.equal(json(stateV2.review).status,'READY_FOR_HUMAN_REVIEW');
 assert.equal(stateV2.change.path,'assets/js/pages/civilization-atlas/atlas-state.js');
 assert.equal(stateV2.change.previousSha256,bookViStateUrlSuccessor.changes.find(c=>c.path===stateV2.change.path).successorSha256);
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(stateV2.change.changeClass));
+const stateV3=json('content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-state-url-successor-v3.json');
+assert.equal(stateV3.predecessor,'content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-state-url-successor-v2.json');
+assert.equal(stateV3.predecessorSha256,digest(stateV3.predecessor));
+assert.equal(stateV3.change.path,stateV2.change.path);
+assert.equal(stateV3.change.previousSha256,stateV2.change.successorSha256);
+assert.equal(stateV3.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');
+assert.equal(stateV3.productionAdmissionChanged,false);
+assert.equal(stateV3.historicalRegistriesChanged,false);
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(stateV3.change.changeClass));
 const {normalizeReconfigurationAtlasState,DEFAULT_RECONFIGURATION_ATLAS_STATE}=await import('../assets/js/pages/civilization-atlas/atlas-state.js');
 assert.equal(DEFAULT_RECONFIGURATION_ATLAS_STATE.activeLayer,'windows');
 for(const [input,expected] of [['overview','cases'],['timeline','windows'],['visuals','snapshots'],['invalid','windows']])assert.equal(normalizeReconfigurationAtlasState({activeLayer:input}).activeLayer,expected);
@@ -233,7 +251,9 @@ for(const change of bookViStateUrlSuccessor.changes){
   const frozen=freeze.frozenFiles.find(row=>row.path===change.path);
   assert.ok(frozen,`Book VI state successor path is not W16-frozen: ${change.path}`);
   assert.equal(change.previousSha256,frozen.sha256,`Book VI state predecessor digest mismatch: ${change.path}`);
-  const currentDigest=change.path===stateV2.change.path?stateV2.change.successorSha256:change.successorSha256;
+  assert.equal(stateV3.urlChange.path,bookViStateUrlSuccessor.changes[1].path);
+  assert.equal(stateV3.urlChange.previousSha256,bookViStateUrlSuccessor.changes[1].successorSha256);
+  const currentDigest=change.path===stateV3.change.path?stateV3.change.successorSha256:stateV3.urlChange.successorSha256;
   assert.equal(digest(change.path),currentDigest,`Book VI state successor digest drift: ${change.path}`);
   assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(change.changeClass),`Book VI state change class not allowed: ${change.path}`);
   authorizedMaintenance.set(change.path,{
@@ -287,6 +307,6 @@ console.log('✓ BOOK-V-CIV-ATLAS-R1-W16 historical freeze and current engineeri
 console.log('  W15 human acceptance is explicit; 20/120/6/15/16/32/24 registry surface admitted.');
 console.log(`  ${freeze.frozenFiles.length} authority/runtime/customer files are digest-frozen.`);
 if(maintenance) console.log(`  Authorized maintenance successor: ${maintenance.work} · ${maintenance.status}.`);
-console.log('  Book VI shared data-loader extensions are reconciled through v4 chained NEW_ATLAS_RELEASE_SUCCESSOR records.');
+console.log('  Book VI shared data-loader extensions are reconciled through v5 chained NEW_ATLAS_RELEASE_SUCCESSOR records.');
 console.log('  Book VI shared state + URL-state extensions are reconciled through a versioned successor; Book V predecessor bytes remain frozen.');
 console.log('  Future substantive changes require a versioned successor / maintenance record.');

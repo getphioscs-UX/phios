@@ -6,8 +6,24 @@
       "status": 422,
       "verification": null,
       "code": "REPORT_BROWSER_VERIFICATION_FAILED",
-      "stage": "PDF",
-      "errorName": "Error"
+      "stage": "BROWSER_LAUNCH",
+      "errorName": "Error",
+      "reason": "Unable to create new browser: code: 429: message: Rate limit exceeded",
+      "limits": {
+        "activeSessions": [],
+        "maxConcurrentSessions": 4,
+        "allowedBrowserAcquisitions": 1,
+        "timeUntilNextAllowedBrowserAcquisition": 0,
+        "usedBrowserTimeSeconds": 649.8910000000001
+      }
     }
-  ]
+  ],
+  "observedAt": "2026-10-01T09:12:03.190Z",
+  "interpretation": "Browser-time quota is likely exhausted; no active session or acquisition wait. Latest native-buffer bounded CDP PDF fix remains remote-unverified.",
+  "planEvidence": {
+    "source": "Cloudflare Workers deployment API",
+    "errorCode": 100328,
+    "observedMessage": "CPU limits are not supported for the Free plan.",
+    "action": "Unsupported cpu_ms override removed; private QA deployment then succeeded."
+  }
 }
