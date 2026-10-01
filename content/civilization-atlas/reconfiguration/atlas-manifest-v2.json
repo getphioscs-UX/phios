@@ -38,7 +38,9 @@
     "runtimePositionW5Status": "content/civilization-atlas/reconfiguration/runtime-position-w5-status-v1.json",
     "runtimePositionW5Acceptance": "content/civilization-atlas/reconfiguration/runtime-position-w5-human-acceptance-v1.json",
     "runtimePositionW6Contract": "content/civilization-atlas/reconfiguration/runtime-position-w6-contract-v1.json",
-    "runtimePositionW6EvidenceGate": "content/civilization-atlas/reconfiguration/runtime-position-w6-evidence-gate-v1.json"
+    "runtimePositionW6EvidenceGate": "content/civilization-atlas/reconfiguration/runtime-position-w6-evidence-gate-v1.json",
+    "runtimePositionW6Status": "content/civilization-atlas/reconfiguration/runtime-position-w6-status-v1.json",
+    "runtimePositionW6HumanReview": "content/civilization-atlas/reconfiguration/runtime-position-w6-human-review-v1.json"
   },
   "knowledgeStates": [
     "CANONICAL_HISTORY",
@@ -208,12 +210,13 @@
     "acceptedHistoricalPrecedents": 10,
     "forwardBoundaryAccepted": "RP-45",
     "w6": {
-      "status": "GOVERNED_UNKNOWN_BASELINE",
+      "status": "MACHINE_CLOSED__REPRESENTATIVE_DOSSIER_HUMAN_REVIEW_READY",
       "currentEvidenceAssignments": 0,
       "observedTransitionSignals": 0,
       "thresholdCrossings": 0,
       "reachablePositions": 0,
-      "rule": "W6 wires evidence, transition and threshold gates without fabricating current data."
+      "rule": "W6 wires evidence, transition and threshold gates without fabricating current data.",
+      "humanReview": "PENDING"
     }
   },
   "figureCanonicalization": {
