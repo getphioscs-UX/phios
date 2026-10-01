@@ -59,14 +59,18 @@
         "authorization": "OWNER_REPORT_NARRATIVE_T2_S04_PRIVATE_QA_REVIEW",
         "change": "ENABLE_EXISTING_ALLOWLISTED_S04_REVIEW_IN_PREVIEW_ONLY",
         "wranglerSha256": "60cfc8d91696193ad8489db89f50f1f4318362c12e34ceaa16ba6f8758cfbbe3"
+      },
+      {
+        "authorization": "USER_CANONICAL_PERSON_ZIWEI_QA_DELIVERY_2026_10_01",
+        "change": "ADD_PREVIEW_ONLY_PRIVATE_METHOD_REPORT_BROWSER_VERIFIER_SERVICE",
+        "wranglerSha256": "b12d3a3a34ec627aa867f1db788451dde8c9be4b860faefb4c2e359a71ddecc9"
       }
     ],
     "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts. The 2026-09-22 owner request authorizes exact private report bucket bindings, actual Pages project name reconciliation, and explicit manuscript retrieval disablement in isolated Preview.",
-    "wranglerSha256": "60cfc8d91696193ad8489db89f50f1f4318362c12e34ceaa16ba6f8758cfbbe3",
+    "wranglerSha256": "b12d3a3a34ec627aa867f1db788451dde8c9be4b860faefb4c2e359a71ddecc9",
     "currentAuthorization": {
-      "basis": "OWNER_REPORT_NARRATIVE_T2_S04_PRIVATE_QA_REVIEW",
-      "baselineCommit": "2e452f07fb0dcde658de69b4b012bf128747fa49",
-      "evidence": "docs/acceptance/report-narrative-t2-r1/FINAL-HANDOFF.md"
+      "basis": "USER_CANONICAL_PERSON_ZIWEI_QA_DELIVERY_2026_10_01",
+      "evidence": "docs/reports/ziwei/production-admission/CPA-QA-DELIVERY.md"
     }
   },
   "allowedDelta": {
@@ -91,7 +95,13 @@
     "previewAuth0PublicVars": "https://qa.phios-github.pages.dev/api/auth/callback",
     "previewBaziT3Shadow": "enabled",
     "previewCommerceQaEnabled": true,
-    "previewRnt2S04Review": "enabled"
+    "previewRnt2S04Review": "enabled",
+    "previewMethodReportRenderer": {
+      "binding": "METHOD_REPORT_RENDERER",
+      "service": "phios-method-report-renderer-qa",
+      "publicEndpoint": false,
+      "productionBinding": false
+    }
   },
   "preserved": {
     "m3cEntryArtifacts": true,

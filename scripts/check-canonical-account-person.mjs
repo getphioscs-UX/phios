@@ -6,7 +6,8 @@ import {saveCanonicalPerson,loadCanonicalPerson,loadCanonicalPersonSubject,listC
 import {onRequest as personApi} from '../functions/api/account-persons.js';
 import {generateAccountZiweiCandidate} from '../functions/report-delivery/ziwei-canonical-person-binding.js';
 import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiweiReports} from '../functions/account/ziwei-controlled-report-material.js';
-import {generateAndReleaseAccountZiwei} from '../functions/account/ziwei-account-delivery.js';
+import {generateAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../functions/account/ziwei-account-delivery.js';
+import {digest} from '../functions/account/oidc-auth.js';
 const sqlite=new DatabaseSync(':memory:');
 for(const file of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+file,'utf8'));
 const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const result=[];for(const s of statements)result.push(await s.run());sqlite.exec('COMMIT');return result;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
@@ -45,6 +46,19 @@ sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,cust
 const candidate=await generateAccountZiweiCandidate(a,selection),loader=(owner,id)=>loadCanonicalPersonSubject(env,owner,id);
 await denied('unconfigured server browser verifier cannot release',()=>generateAndReleaseAccountZiwei(a,selection));
 await denied('bad server browser receipt cannot release',()=>generateAndReleaseAccountZiwei({...a,env:{...env,METHOD_REPORT_RENDERER:{fetch:async()=>Response.json({html:'bad',verification:{passed:true,pageCount:33}})}}},selection));
+// Explicit local service stub tests storage/open mechanics, not browser acceptance.
+let localRenderCalls=0;
+const renderedContext={...a,env:{...env,METHOD_REPORT_RENDERER:{async fetch(request){localRenderCalls++;const {candidate}=await request.json();const html='<html><body>LOCAL_STORAGE_POLICY_FIXTURE</body></html>';return Response.json({html,verification:{semanticSnapshotId:candidate.snapshot.semanticSnapshotId,passed:true,pageCount:33,brokenImages:0,overflowCount:0,errorCount:0,outputDigest:await digest(html)}});}}}};
+const renderedRelease=await generateAndReleaseAccountZiwei(renderedContext,selection);
+const renderedFirst=await openAccountZiweiMaterial(renderedContext,renderedRelease.reportId);
+assert.equal((await openAccountZiweiMaterial(renderedContext,renderedRelease.reportId)).html,renderedFirst.html);
+assert.equal((await listAccountZiweiMaterials(renderedContext))[0].subjectName,p.name);
+assert.equal(localRenderCalls,1,'Open/list must never invoke the renderer');
+await denied('other account cannot open rendered bytes',()=>openAccountZiweiMaterial(b,renderedRelease.reportId));
+assert.equal((await listAccountZiweiMaterials(b)).length,0);
+objects.set(renderedFirst.row.object_key,'tampered');
+await denied('rendered byte digest mismatch',()=>openAccountZiweiMaterial(renderedContext,renderedRelease.reportId));
+objects.set(renderedFirst.row.object_key,renderedFirst.html);
 assert.equal(candidate.personId,p.personId);assert.equal(candidate.snapshot.semanticContent.evidence.subjectId,p.personId);
 assert.equal(candidate.snapshot.semanticContent.subject.subjectReference,p.personId);
 await denied('failed render cannot release',()=>releaseControlledZiweiReport(a,candidate,{loadSubject:loader,renderVerification:{passed:false}}));
@@ -55,6 +69,8 @@ assert.equal((await listControlledZiweiReports(b,{loadSubject:loader})).length,0
 const p2=await saveCanonicalPerson(a,{...input,personId:p.personId,expectedVersion:1,birth:{...input.birth,birthDate:'1991-08-17'}});
 assert.equal(p2.version,2);
 assert.deepEqual(await openControlledZiweiReport(a,args,{loadSubject:loader}),first);
+assert.equal((await openAccountZiweiMaterial(renderedContext,renderedRelease.reportId)).html,renderedFirst.html);
+assert.equal(localRenderCalls,1);
 const next=await generateAccountZiweiCandidate(a,selection);
 assert.notEqual(next.snapshot.semanticSnapshotId,first.snapshot.semanticSnapshotId);assert.notEqual(next.birthSourceRef,first.birthSourceRef);
 await denied('stale version write',()=>saveCanonicalPerson(a,{...input,personId:p.personId,expectedVersion:1}));

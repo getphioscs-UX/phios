@@ -4,6 +4,8 @@ import {BOOK_ONE_PRODUCT,BOOK_PRODUCTS,resolveBookOneSourceKey} from '../functio
 const config=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));
 export function validatePreview(preview){
  assert.deepEqual(preview.ai,{binding:'AI'});
+ assert.deepEqual(preview.services,[{binding:'METHOD_REPORT_RENDERER',service:'phios-method-report-renderer-qa'}]);
+ assert.equal(config.services,undefined,'QA browser service cannot activate production');
  assert.deepEqual(preview.d1_databases,[{binding:'RUNTIME_DB',database_name:'phios-runtime-sandbox',database_id:'c2c6e313-9bc8-4fd4-89b1-36f3d764dad8',migrations_dir:'db/migrations'}]);
  assert.deepEqual(preview.r2_buckets,[{binding:'BOOKS',bucket_name:'phios-private-books-sandbox'},{binding:'PRIVATE_REPORTS',bucket_name:'phios-private-reports-sandbox'}]);
  assert.equal(preview.vars.PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED,'false');
