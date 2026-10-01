@@ -2,7 +2,7 @@ const clean=value=>String(value??'').normalize('NFKC').trim();
 const scalar=(value,max=120)=>clean(value).slice(0,max)||null;
 const list=(value,max=8)=>[...new Set((Array.isArray(value)?value:[]).map(item=>scalar(item)).filter(Boolean))].slice(0,max);
 const LAYERS=new Set(['timeline','cases','comparison','world','trajectories','transitions','loss']);
-const RECONFIG_LAYERS=new Set(['overview','search','cases','timeline','windows','snapshots','dossiers','lived','compare','dossiercompare','sections']);
+const RECONFIG_LAYERS=new Set(['overview','search','cases','timeline','windows','snapshots','dossiers','lived','positions','compare','dossiercompare','sections']);
 const EVIDENCE_CLASSES=new Set(['EVIDENCE_SERIES','HISTORICAL_RECONSTRUCTION','CONCEPTUAL_TRAJECTORY']);
 
 export function normalizeAtlasRetrievalScope(input={}){
@@ -20,7 +20,7 @@ export function normalizeAtlasRetrievalScope(input={}){
       entityId:scalar(input.entityId),caseIds:Object.freeze(list(input.caseIds,4)),
       windowId:scalar(input.windowId||input.transitionWindowId),snapshotId:scalar(input.snapshotId),
       dossierId:scalar(input.dossierId),livedRealityDimensionId:scalar(input.livedRealityDimensionId),
-      sectionId:scalar(input.sectionId),comparisonIds:Object.freeze(list(input.comparisonIds,4)),
+      positionId:scalar(input.positionId),sectionId:scalar(input.sectionId),comparisonIds:Object.freeze(list(input.comparisonIds,4)),
       evidenceClasses:Object.freeze(list(input.evidenceClasses).filter(item=>EVIDENCE_CLASSES.has(item)))
     });
   }
@@ -86,10 +86,11 @@ const RECONFIG_CONFIG=Object.freeze({
   snapshots:{path:'content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json',array:'snapshots',id:'id',stage:'WORLD_RECONFIGURATION_SNAPSHOT'},
   dossiers:{path:'content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json',array:'dossiers',id:'id',stage:'CONTEMPORARY_RUNTIME_DOSSIER'},
   lived:{path:'content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json',array:'dimensions',id:'id',stage:'LIVED_REALITY_LAYER'},
+  positions:{path:'content/registry/runtime-position-48-v1.json',array:'positions',id:'id',stage:'RUNTIME_POSITION'},
   sections:{path:'content/civilization-atlas/reconfiguration/book-vi-sections-v1.json',array:'sections',id:'id',stage:'BOOK_VI_CANONICAL_SECTION'}
 });
 const reconfigSelection=(scope)=>[...new Set([
- scope.entityId,scope.windowId,scope.snapshotId,scope.dossierId,scope.livedRealityDimensionId,scope.sectionId,
+ scope.entityId,scope.windowId,scope.snapshotId,scope.dossierId,scope.livedRealityDimensionId,scope.positionId,scope.sectionId,
  ...(scope.caseIds||[]),...(scope.comparisonIds||[])
 ].filter(Boolean))];
 const sourceFor=(record,idKey,stage,locale,question)=>({
@@ -102,7 +103,7 @@ const sourceFor=(record,idKey,stage,locale,question)=>({
 });
 
 async function retrieveReconfigurationScope({env,scope,locale,question}){
-  const ordered=['cases','windows','snapshots','dossiers','lived','sections'],loaded={};
+  const ordered=['cases','windows','snapshots','dossiers','lived','positions','sections'],loaded={};
   await Promise.all([...ordered.map(async key=>{loaded[key]=await readJson(env,RECONFIG_CONFIG[key].path);}),readJson(env,'content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json').then(v=>loaded.relationships=v)]);
   const selected=Object.fromEntries(ordered.map(k=>[k,new Set()])),wanted=reconfigSelection(scope);
   const rowsByKey=Object.fromEntries(ordered.map(k=>{const cfg=RECONFIG_CONFIG[k];return [k,loaded[k]?.[cfg.array]||[]]}));
