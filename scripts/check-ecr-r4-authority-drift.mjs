@@ -25,13 +25,37 @@ const hEntries=config.entries.map(item=>{
     lineage:{configurationRef:item.configurationId,upperMotionRef:upper.motionId,lowerMotionRef:lower.motionId,hexagramRef:item.hexagramRef,ichingCustomerMeaningImported:false}
   };
 });
-assert.deepEqual(registry.entries,[...source.entries,...hEntries],'ECR_ATOMIC_REGISTRY_DRIFT');
+const expectedEntries=[...source.entries,...hEntries];
+const stable=x=>JSON.stringify(x);
+if(registry.entries.length!==expectedEntries.length)throw Error(`ECR_ATOMIC_REGISTRY_LENGTH_DRIFT:actual=${registry.entries.length}:expected=${expectedEntries.length}`);
+for(let i=0;i<expectedEntries.length;i++){
+  if(stable(registry.entries[i])!==stable(expectedEntries[i])){
+    const a=registry.entries[i],e=expectedEntries[i];
+    const keys=[...new Set([...Object.keys(a||{}),...Object.keys(e||{})])];
+    const field=keys.find(k=>stable(a?.[k])!==stable(e?.[k]))||'UNKNOWN';
+    throw Error(`ECR_ATOMIC_REGISTRY_DRIFT:index=${i}:coordinate=${a?.coordinate||e?.coordinate||'UNKNOWN'}:field=${field}:actual=${stable(a?.[field])}:expected=${stable(e?.[field])}`);
+  }
+}
 
 const runtimeText=fs.readFileSync(runtimePath,'utf8');
 const match=runtimeText.match(/Object\.freeze\(([\s\S]*)\);\nexport default/);
 if(!match)throw Error('ECR_RUNTIME_REGISTRY_PARSE_FAILED');
 const runtime=JSON.parse(match[1]);
-assert.deepEqual(runtime,registry,'ECR_RUNTIME_REGISTRY_DRIFT');
+if(stable(runtime)!==stable(registry)){
+  if(runtime.entries?.length!==registry.entries?.length)throw Error(`ECR_RUNTIME_REGISTRY_LENGTH_DRIFT:runtime=${runtime.entries?.length}:registry=${registry.entries?.length}`);
+  const topKeys=[...new Set([...Object.keys(runtime||{}),...Object.keys(registry||{})])].filter(k=>k!=='entries');
+  const topField=topKeys.find(k=>stable(runtime?.[k])!==stable(registry?.[k]));
+  if(topField)throw Error(`ECR_RUNTIME_REGISTRY_DRIFT:field=${topField}:runtime=${stable(runtime?.[topField])}:registry=${stable(registry?.[topField])}`);
+  for(let i=0;i<registry.entries.length;i++){
+    if(stable(runtime.entries[i])!==stable(registry.entries[i])){
+      const a=runtime.entries[i],e=registry.entries[i];
+      const keys=[...new Set([...Object.keys(a||{}),...Object.keys(e||{})])];
+      const field=keys.find(k=>stable(a?.[k])!==stable(e?.[k]))||'UNKNOWN';
+      throw Error(`ECR_RUNTIME_REGISTRY_DRIFT:index=${i}:coordinate=${a?.coordinate||e?.coordinate||'UNKNOWN'}:field=${field}:runtime=${stable(a?.[field])}:registry=${stable(e?.[field])}`);
+    }
+  }
+  throw Error('ECR_RUNTIME_REGISTRY_DRIFT:UNKNOWN');
+}
 
 const bad='positionemphasizes';
 const roots=['content','functions','scripts','config','docs'];
@@ -55,4 +79,5 @@ for(const code of ['ECR-H17','ECR-H18','ECR-H19']){
   const row=registry.entries.find(x=>x.coordinate===code);
   assert(row&&row.definition.includes('response position emphasizes '),`ECR_H64_DEFINITION_INVALID:${code}`);
 }
-console.log('PASS ECR R4 authority drift: 81 source + 64 derived H64 = 145; registry/runtime identical; no stale positionemphasizes artifact found.');
+console.log(JSON.stringify({pass:true,sourceEntries:source.entries.length,derivedH64:hEntries.length,registryEntries:registry.entries.length,runtimeEntries:runtime.entries.length,d11:registry.entries.find(x=>x.coordinate==='D11')?.label,h17:registry.entries.find(x=>x.coordinate==='ECR-H17')?.definition,staleTokenHits:hits.length},null,2));
+console.log('PASS ECR R4 authority drift: source → registry → runtime aligned; no stale positionemphasizes artifact found.');
