@@ -70,7 +70,7 @@ export function bindAtlasUrlState(store,{windowObject=globalThis.window,locale='
 const RECONFIG_PARAMS=Object.freeze({
  activeLayer:'atlas',query:'q',caseSearch:'caseQ',primaryCaseId:'case',compareCaseIds:'cases',
  windowId:'window',snapshotId:'snapshot',snapshotLayer:'layer',dossierId:'dossier',compareDossierIds:'dossiers',
- livedRealityDimensionId:'lived',sectionId:'section',regionId:'region',caseType:'caseType',filterWindowId:'period',
+ livedRealityDimensionId:'lived',positionId:'position',sectionId:'section',regionId:'region',caseType:'caseType',filterWindowId:'period',
  triggerQuery:'trigger',pressureQuery:'pressure',changeFilter:'change',casePage:'casePage',searchPage:'searchPage'
 });
 const RECONFIG_ARRAY_KEYS=new Set(['compareCaseIds','compareDossierIds']);
