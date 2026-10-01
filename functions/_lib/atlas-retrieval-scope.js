@@ -97,7 +97,7 @@ const sourceFor=(record,idKey,stage,locale,question)=>({
   sourceType:'CIVILIZATION_ATLAS_ENTITY',
   sourceId:`ATLAS:BOOK-6:${stage}:${record[idKey]}`,
   bookCode:'BOOK-6',partCode:'PART-13',atlasLayer:stage.toLowerCase(),atlasEntityId:record[idKey],
-  authorityClass:record.evidenceQuality||record.dataClass||'HISTORICAL_RECONSTRUCTION',
+  authorityClass:record.knowledgeState||record.evidenceQuality||record.dataClass||'HISTORICAL_RECONSTRUCTION',
   scopeMatch:true,href:'/books/reality-configuration/#atlas',
   text:flattenLocalized(record,locale,question)
 });
