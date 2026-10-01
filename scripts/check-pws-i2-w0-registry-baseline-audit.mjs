@@ -44,7 +44,8 @@ const authorisedSevenVolumeSuccessorRegistryFiles = new Set([
   'report-visual-reference-freeze-r1.json',
   // Later shared runtime-position canon, outside the historical PWS baseline.
   'runtime-position-48-v1.json',
-  'runtime-position-48-crosswalk-v1.json'
+  'runtime-position-48-crosswalk-v1.json',
+  'runtime-position-48-source-windows-v1.json'
 ]);
 const authorisedKnowledgeSuccessorRegistryFiles = new Set([
   'm3c-w3-wrangler-successor-reconciliation-v1.json'
@@ -62,6 +63,7 @@ const preSevenVolumeRegistryFiles = contentRegistryFiles.filter(
 assert.equal(preSevenVolumeRegistryFiles.length, 114);
 assert.equal((await readJson('content/registry/runtime-position-48-v1.json')).schemaVersion,'PHI-OS-48-RUNTIME-POSITION-BACKBONE-v1.0.0');
 assert.equal((await readJson('content/registry/runtime-position-48-crosswalk-v1.json')).runtimePositionRegistry,'content/registry/runtime-position-48-v1.json');
+assert.equal((await readJson('content/registry/runtime-position-48-source-windows-v1.json')).schemaVersion,'PHI-OS-48-PHASE-SOURCE-WINDOWS-v1.0.0');
 const visualFreeze = await readJson('content/registry/report-visual-reference-freeze-r1.json');
 assert.equal(visualFreeze.schemaVersion, 'PHI-OS-REPORT-VISUAL-REFERENCE-FREEZE-R1');
 assert.equal(visualFreeze.tokenOwner, 'assets/css/tokens.css');
