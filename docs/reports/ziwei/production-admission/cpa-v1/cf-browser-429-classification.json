@@ -1,0 +1,115 @@
+{
+  "work": "CF-BROWSER-429-CLASSIFICATION",
+  "recordedAt": "2026-10-01T09:51:59.803Z",
+  "rawEvidence": "docs/reports/ziwei/production-admission/cpa-v1/cf-browser-429-raw.json",
+  "exactBodyFile": "docs/reports/ziwei/production-admission/cpa-v1/cf-browser-429-response-body.txt",
+  "result": "A_DAILY_BROWSER_TIME_QUOTA",
+  "confidence": "HIGH_COMBINED_EVIDENCE_NOT_EXPLICIT_BODY_LABEL",
+  "reason": "The generic 19-byte body alone does not classify the error. Retry-After 50957 seconds aligns with the next UTC day boundary; usedBrowserTimeSeconds is 649.891 on a confirmed Free plan; activeSessions is empty and a new acquisition is allowed immediately.",
+  "upstream": {
+    "transport": "QA BROWSER binding through existing @cloudflare/puppeteer acquire path",
+    "path": "/v1/devtools/browser",
+    "status": 429,
+    "body": "Rate limit exceeded",
+    "retryAfterSeconds": 50957,
+    "rateLimitHeaders": {},
+    "rateLimitHeadersPresent": false,
+    "headerScope": "Headers exposed by the Browser binding, not unseen internal provider headers"
+  },
+  "plan": {
+    "value": "Workers Free",
+    "lastAuthoritativeObservationAt": "2026-10-01T09:12:18Z",
+    "source": "Cloudflare Workers deployment API",
+    "errorCode": 100328,
+    "message": "CPU limits are not supported for the Free plan.",
+    "sourceLog": "C:/Users/Guest Account/AppData/Roaming/xdg.config/.wrangler/logs/wrangler-2026-10-01_09-12-18_632.log",
+    "billingPlanApiRequeried": false,
+    "changesPerformed": false,
+    "currentQuotaBehaviorConsistent": true
+  },
+  "atFailure": {
+    "activeBrowserCount": 0,
+    "maxConcurrentSessions": 4,
+    "allowedBrowserAcquisitions": 1,
+    "timeUntilNextAllowedBrowserAcquisition": 0,
+    "usedBrowserTimeSeconds": 649.891
+  },
+  "launchCadence": {
+    "diagnosticObservedAt": "2026-10-01T09:50:41.587Z",
+    "attempts": 1,
+    "retries": 0,
+    "serialization": "Single SDK launch; second diagnostic invocation rejected by guard.",
+    "priorRecordedObservationAt": "2026-10-01T09:12:03.190Z",
+    "priorProductionLaunchTimestamps": "NOT_INSTRUMENTED_DO_NOT_INFER_EXACT_CADENCE",
+    "minimumNewInstanceIntervalFromOfficialFreePlanSeconds": 20
+  },
+  "categories": [
+    {
+      "id": "A",
+      "type": "daily browser-time quota",
+      "finding": "SUPPORTED_HIGH_CONFIDENCE"
+    },
+    {
+      "id": "B",
+      "type": "new-browser-instance rate limit",
+      "finding": "RULED_OUT_BY_CURRENT_TELEMETRY",
+      "basis": "allowedBrowserAcquisitions=1; acquisition wait=0; one isolated attempt; Retry-After points to UTC rollover, not a short launch interval."
+    },
+    {
+      "id": "C",
+      "type": "concurrent browser limit",
+      "finding": "RULED_OUT_BY_CURRENT_TELEMETRY",
+      "basis": "0 active browsers, server-reported maximum 4. Keep observed maximum rather than substituting documentation defaults."
+    },
+    {
+      "id": "D",
+      "type": "Browser Run REST API rate limit",
+      "finding": "NOT_THE_OBSERVED_REQUEST_PATH",
+      "basis": "Failure is binding-based session acquisition, not a REST Quick Action request."
+    },
+    {
+      "id": "E",
+      "type": "Cloudflare general API rate limit",
+      "finding": "NOT_THE_OBSERVED_REQUEST_PATH",
+      "basis": "Wrangler preview setup succeeded; 429 is captured from the Browser binding; both limits reads succeeded."
+    },
+    {
+      "id": "F",
+      "type": "project-specific WAF / rate rule",
+      "finding": "NOT_THE_OBSERVED_REQUEST_PATH",
+      "basis": "Acquisition failed before navigation to any project hostname; no report URL was requested."
+    }
+  ],
+  "retryPolicy": {
+    "automaticRetry": false,
+    "reason": "Daily quota classification; do not retry in a tight loop.",
+    "nextUtcReset": "2026-10-02T00:00:00Z",
+    "nextLocalReset": "2026-10-02T08:00:00+08:00",
+    "notBeforeConservativeUtc": "2026-10-02T00:01:00Z",
+    "scheduleCreated": false,
+    "afterReset": "One serialized verification attempt; respect new Retry-After and live acquisition/concurrency limits. A plan change requires explicit user action and redeployment."
+  },
+  "state": {
+    "QA_REPORT_RELEASE": "NOT_PROVEN",
+    "ZIWEI_QA_ACCOUNT_DELIVERY": "NOT_PROVEN",
+    "blocker": "EXTERNAL_DAILY_BROWSER_TIME_QUOTA",
+    "releaseFailed": false,
+    "commerce": "VERIFIED_UNCHANGED",
+    "serverRenderVerification": "REQUIRED_UNCHANGED",
+    "promotionRequires": [
+      "deployed browser render passes",
+      "immutable release succeeds",
+      "account library open succeeds"
+    ],
+    "production": "NOT_STARTED",
+    "astrology": "NOT_STARTED"
+  },
+  "checks": {
+    "diagnosticCaptureAndOneAttemptGuard": "PASS",
+    "frozen74Files": "PASS"
+  },
+  "sources": [
+    "https://developers.cloudflare.com/browser-run/limits/",
+    "https://developers.cloudflare.com/fundamentals/api/reference/limits/"
+  ]
+}
