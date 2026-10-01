@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import assert from 'node:assert/strict';
 
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -58,21 +58,15 @@ if(stable(runtime)!==stable(registry)){
 }
 
 const bad='positionemphasizes';
-const roots=['content','functions','scripts','config','docs'];
-const hits=[];
-const walk=dir=>{
-  if(!fs.existsSync(dir))return;
-  for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
-    const p=path.join(dir,entry.name);
-    if(entry.isDirectory()){if(!['node_modules','.git','output','.tmp'].includes(entry.name))walk(p);continue;}
-    if(!/\.(?:js|mjs|json|md|html|txt)$/i.test(entry.name))continue;
-    const normalized=p.replaceAll('\\','/');
-    if(normalized==='scripts/check-ecr-r4-authority-drift.mjs')continue;
-    let text='';try{text=fs.readFileSync(p,'utf8')}catch{continue}
-    if(text.includes(bad))hits.push(normalized);
-  }
-};
-for(const root of roots)walk(root);
+let hits=[];
+try{
+  const out=execFileSync('git',['grep','-l','--fixed-strings',bad,'--','content','functions','scripts','config','docs'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
+  hits=out?out.split(/\r?\n/).filter(Boolean):[];
+}catch(error){
+  // git grep exits 1 when there are no matches.
+  if(error?.status!==1)throw error;
+}
+hits=hits.filter(p=>p!=='scripts/check-ecr-r4-authority-drift.mjs');
 if(hits.length)throw Object.assign(new Error('ECR_STALE_POSITIONEMPHASIZES_FOUND:'+hits.join(',')),{hits});
 
 for(const code of ['ECR-H17','ECR-H18','ECR-H19']){
