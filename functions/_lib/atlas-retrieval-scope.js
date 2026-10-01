@@ -108,7 +108,8 @@ async function retrieveReconfigurationScope({env,scope,locale,question}){
     ...ordered.map(async key=>{loaded[key]=await readJson(env,RECONFIG_CONFIG[key].path);}),
     readJson(env,'content/civilization-atlas/reconfiguration/book-vi-atlas-relationships-v2.json').then(v=>loaded.relationships=v),
     readJson(env,'content/civilization-atlas/reconfiguration/runtime-position-book5-historical-alignment-v1.json').then(v=>loaded.positionHistory=v),
-    readJson(env,'content/civilization-atlas/reconfiguration/runtime-position-correspondence-v1.json').then(v=>loaded.positionCorrespondence=v)
+    readJson(env,'content/civilization-atlas/reconfiguration/runtime-position-correspondence-v1.json').then(v=>loaded.positionCorrespondence=v),
+    readJson(env,'content/civilization-atlas/reconfiguration/runtime-position-w6-evidence-gate-v1.json').then(v=>loaded.positionEvidenceGate=v)
   ]);
   const selected=Object.fromEntries(ordered.map(k=>[k,new Set()])),wanted=reconfigSelection(scope);
   const rowsByKey=Object.fromEntries(ordered.map(k=>{const cfg=RECONFIG_CONFIG[k];return [k,loaded[k]?.[cfg.array]||[]]}));
@@ -164,6 +165,17 @@ async function retrieveReconfigurationScope({env,scope,locale,question}){
         sourceId:'ATLAS:BOOK-6:RUNTIME_POSITION_CORRESPONDENCE:'+scope.dossierId,
         bookCode:'BOOK-6',partCode:'PART-13',atlasLayer:'runtime_position_correspondence',atlasEntityId:scope.dossierId,
         authorityClass:correspondence.knowledgeState||'UNKNOWN',
+        scopeMatch:true,href:'/books/reality-configuration/#atlas',text
+      });
+    }
+    const evidenceGate=(loaded.positionEvidenceGate?.records||[]).find(x=>x.dossierId===scope.dossierId);
+    if(evidenceGate){
+      const text=flattenLocalized(evidenceGate,locale,question);
+      if(text)sources.push({
+        sourceType:'CIVILIZATION_ATLAS_CURRENT_EVIDENCE_GATE',
+        sourceId:'ATLAS:BOOK-6:CURRENT_EVIDENCE_GATE:'+scope.dossierId,
+        bookCode:'BOOK-6',partCode:'PART-13',atlasLayer:'current_evidence_gate',atlasEntityId:scope.dossierId,
+        authorityClass:evidenceGate.currentEvidence?.admissionState==='ADMITTED'?'CURRENT_DATA':'UNKNOWN',
         scopeMatch:true,href:'/books/reality-configuration/#atlas',text
       });
     }
