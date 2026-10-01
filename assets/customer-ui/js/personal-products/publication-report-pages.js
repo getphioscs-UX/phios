@@ -57,8 +57,8 @@ function decorativeLayers(p){
  const binding=p.visualBinding||{},opener=p.pageFamily==='SECTION_OPENER_PAGE',master=opener&&p.items?.length;
  const urls=[[0,binding.bodyUrl],[1,binding.motifUrl],[2,opener?binding.url:null]].filter(([,url])=>url);
  const intensity=binding.intensityByFamily?.[p.pageFamily]??.17;
- const opacity=i=>i===1?.12:i===0&&opener?.16:i===2&&master?.28:intensity;
- return `<div class="pub-decoration" aria-hidden="true">${urls.map(([i,url])=>`<img data-decorative-layer="${i}" style="opacity:${opacity(i)}" ${i===2?`data-fallback-sources="${esc(JSON.stringify(binding.candidates||[]))}"`:''} src="${esc(url)}" alt="">`).join('')}</div>`;
+ const opacity=i=>binding.opacityByLayer?.[['body','motif','hero'][i]]??(i===1?.12:i===0&&opener?.16:i===2&&master?.28:intensity);
+ return `<div class="pub-decoration" aria-hidden="true">${urls.map(([i,url])=>`<img data-decorative-layer="${i}"${binding.required?' data-required-decoration="true"':''} style="opacity:${opacity(i)}${i===2&&binding.objectPosition?';object-position:'+esc(binding.objectPosition):''}" ${i===2?`data-fallback-sources="${esc(JSON.stringify(binding.candidates||[]))}"`:''} src="${esc(url)}" alt="">`).join('')}</div>`;
 }
 function sectionLandscape(number){
  const n=Number(number),shift=(n%3)*45;
@@ -74,7 +74,7 @@ function renderSectionFamily(p,{locale,totalPages,skin,t}){
  const facts=p.facts?.length?`<div class="pub-facts">${p.facts.map(f=>`<div><b>${esc(f.value)}</b><span>${esc(f.label)}</span></div>`).join('')}</div>`:'';
  const observations=p.observations?.length?`<aside class="pub-reflection"><h3>${p.sectionKey==='S08_TIMING'?t('Questions for this period','这一阶段的观察问题'):t('Questions to consider','观察问题')}</h3>${p.observations.map(s=>`<p>${esc(s)}</p>`).join('')}</aside>`:'';
  const sectionMaster=opener&&p.items?.length?'true':'false';
- return `<section class="pub-page pub-family${p.compositionNodes?' pub-composed-page':''}" data-page-number="${p.pageNumber}" data-page-key="${esc(p.pageKey)}" data-page-family="${esc(p.pageFamily)}" data-section="${esc(p.sectionKey)}" data-section-master="${sectionMaster}" data-hero-placement="${variant}" data-body-variant="BODY_${['A','B','C'][(p.pageNumber-7)%3]}" data-text-fit="STANDARD"${p.compositionGroupId?` data-composition-group="${esc(p.compositionGroupId)}" data-page-role="${esc(p.physicalPageRole)}"`:''}>${decorativeLayers(p)}${opener&&skin.method==='BZR'?sectionLandscape(p.sectionNumber):motif(skin.motif)}${header}${heading}${p.compositionNodes?renderCompositionContent(p):`${p.primaryVisualHtml?`<figure class="pub-visual">${p.primaryVisualHtml}</figure>`:''}${timing}${facts}<div class="pub-narrative">${p.paragraphs.map(s=>`<p>${esc(s)}</p>`).join('')}</div>${items}${observations}${p.boundary?`<p class="pub-boundary">${esc(p.boundary)}</p>`:''}`}<footer class="pub-footer"><span>${t('Your life, in context.','在情境中理解你的人生。')}</span>${renderGlobalReportPagination(p.pageNumber,totalPages)}</footer></section>`;
+ return `<section class="pub-page pub-family${p.compositionNodes?' pub-composed-page':''}" data-page-number="${p.pageNumber}" data-page-key="${esc(p.pageKey)}" data-page-family="${esc(p.pageFamily)}" data-section="${esc(p.sectionKey)}" data-section-master="${sectionMaster}" data-hero-placement="${variant}" data-body-variant="BODY_${['A','B','C'][(p.pageNumber-7)%3]}" data-text-fit="STANDARD"${p.compositionGroupId?` data-composition-group="${esc(p.compositionGroupId)}" data-page-role="${esc(p.physicalPageRole)}"`:''}>${decorativeLayers(p)}${p.visualBinding?.suppressSyntheticMotif?'':opener&&skin.method==='BZR'?sectionLandscape(p.sectionNumber):motif(skin.motif)}${header}${heading}${p.compositionNodes?renderCompositionContent(p):`${p.primaryVisualHtml?`<figure class="pub-visual">${p.primaryVisualHtml}</figure>`:''}${timing}${facts}<div class="pub-narrative">${p.paragraphs.map(s=>`<p>${esc(s)}</p>`).join('')}</div>${items}${observations}${p.boundary?`<p class="pub-boundary">${esc(p.boundary)}</p>`:''}`}<footer class="pub-footer"><span>${t('Your life, in context.','在情境中理解你的人生。')}</span>${renderGlobalReportPagination(p.pageNumber,totalPages)}</footer></section>`;
 }
 
 // Decorative failures are removed before readiness/print. The CSS landscape
@@ -83,6 +83,7 @@ export async function settlePublicationAssets(root){
  await Promise.all([...root.querySelectorAll('.pub-decoration img')].map(async img=>{
   const candidates=img.dataset.fallbackSources?JSON.parse(img.dataset.fallbackSources):[img.getAttribute('src')];
   for(const url of candidates){try{img.src=url;await img.decode();return;}catch{}}
+  if(img.dataset.requiredDecoration==='true')throw Error('REQUIRED_REPORT_DECORATION_UNAVAILABLE:'+img.getAttribute('src'));
   img.remove();
  }));
 }

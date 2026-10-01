@@ -1,0 +1,314 @@
+// Generated from content/reports/ziwei/visual-registry-r2.json.
+export const ZIWEI_REPORT_VISUAL_REGISTRY={
+  "schemaVersion": "ZIWEI-REPORT-VISUAL-R2",
+  "bucket": "phios-public-assets",
+  "public_base_url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev",
+  "assets": [
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-BODY",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-BODY.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-BODY.webp",
+        "status": 200,
+        "etag": "\"8d1446f27936c79c3602f690f9503cc9\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SECTION-STYLE",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SECTION-STYLE.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SECTION-STYLE.webp",
+        "status": 200,
+        "etag": "\"2cc799921e90671a49d04b8efc8dfd11\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-01-PALACE-ARCHITECTURE",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-01-PALACE-ARCHITECTURE.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-01-PALACE-ARCHITECTURE.webp",
+        "status": 200,
+        "etag": "\"6591db0f3c49b884fe09ec43870d7690\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-02-PATTERN-RESOURCES",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-02-PATTERN-RESOURCES.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-02-PATTERN-RESOURCES.webp",
+        "status": 200,
+        "etag": "\"9c10c936b797f1290b33a085bbe3acc0\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-03-SELF-DEVELOPMENT",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-03-SELF-DEVELOPMENT.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-03-SELF-DEVELOPMENT.webp",
+        "status": 200,
+        "etag": "\"52729a666253f9114801e4e81973e2c8\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-04-RELATIONSHIP-PARTNERSHIP",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-04-RELATIONSHIP-PARTNERSHIP.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-04-RELATIONSHIP-PARTNERSHIP.webp",
+        "status": 200,
+        "etag": "\"02e51f7abb17eee5f8e8b9e45a3fd20c\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-05-FAMILY-CLOSE-RELATIONSHIPS",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-05-FAMILY-CLOSE-RELATIONSHIPS.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-05-FAMILY-CLOSE-RELATIONSHIPS.webp",
+        "status": 200,
+        "etag": "\"432397a5cfc8796d7fced3623b43d1e5\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-06-CAREER-SOCIAL",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-06-CAREER-SOCIAL.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-06-CAREER-SOCIAL.webp",
+        "status": 200,
+        "etag": "\"ce268a260db4fb05398b6a9e952789ed\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-07-RESOURCES-WEALTH",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-07-RESOURCES-WEALTH.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-07-RESOURCES-WEALTH.webp",
+        "status": 200,
+        "etag": "\"7c0bd37bab1f149c03636b14dec61588\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-08-MOVEMENT-ENVIRONMENT",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-08-MOVEMENT-ENVIRONMENT.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-08-MOVEMENT-ENVIRONMENT.webp",
+        "status": 200,
+        "etag": "\"1e0ebc81dd4af1403e4bd6988836c60d\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-09-TIMING-NAVIGATION",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-09-TIMING-NAVIGATION.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-09-TIMING-NAVIGATION.webp",
+        "status": 200,
+        "etag": "\"68d28e82c91858571d502ff898ebd02b\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-SEC-10-EVIDENCE-BOUNDARY",
+      "object_key": "images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-10-EVIDENCE-BOUNDARY.webp",
+      "format": "webp",
+      "content_type": "image/webp",
+      "verification": "verified-http-200",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "admissionSource": "User ZI WEI FULL REPORT R2 attachment",
+      "delivery": "R2",
+      "httpEvidence": {
+        "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/reports/ziwei/editorial/shared/VIS-REPORT-ZIWEI-SEC-10-EVIDENCE-BOUNDARY.webp",
+        "status": 200,
+        "etag": "\"bde9b69396648217c56e6b601aeaaa92\""
+      }
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-MOTIF-1",
+      "localPath": "assets/images/report/VIS-REPORT-ZIWEI-MOTIF-1.svg",
+      "format": "svg",
+      "content_type": "image/svg+xml",
+      "verification": "verified-local-source",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "delivery": "LOCAL_CANONICAL",
+      "sha256": "de0f707786f751964ec5880e9563e38ed14ca977813bff8045f7100d4a47799c"
+    },
+    {
+      "asset_code": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "localPath": "assets/images/report/VIS-REPORT-ZIWEI-MOTIF-2.svg",
+      "format": "svg",
+      "content_type": "image/svg+xml",
+      "verification": "verified-local-source",
+      "active": true,
+      "family": "ZIWEI_REPORT",
+      "delivery": "LOCAL_CANONICAL",
+      "sha256": "e8e3d154acedd495214110b4718195e76cc35c13491f8644c74e0d815ed95935"
+    }
+  ],
+  "sections": {
+    "S01": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-01-PALACE-ARCHITECTURE",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-1",
+      "placement": "hero-bottom",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S02": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-02-PATTERN-RESOURCES",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "placement": "hero-right",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S03": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-03-SELF-DEVELOPMENT",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-1",
+      "placement": "hero-left",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S04": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-06-CAREER-SOCIAL",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "placement": "hero-bottom",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S05": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-07-RESOURCES-WEALTH",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-1",
+      "placement": "hero-right",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S06": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-04-RELATIONSHIP-PARTNERSHIP",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "placement": "hero-left",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S07": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-05-FAMILY-CLOSE-RELATIONSHIPS",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-1",
+      "placement": "hero-bottom",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S08": {
+      "assetCode": "VIS-REPORT-ZIWEI-SECTION-STYLE",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "placement": "hero-right",
+      "objectPosition": "50% 55%",
+      "reason": "Generic section style: no forced Health illustration mismatch"
+    },
+    "S09": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-09-TIMING-NAVIGATION",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-1",
+      "placement": "hero-right",
+      "objectPosition": "25% 60%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S10": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-08-MOVEMENT-ENVIRONMENT",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "placement": "hero-bottom",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    },
+    "S11": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-09-TIMING-NAVIGATION",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "placement": "hero-left",
+      "objectPosition": "75% 45%",
+      "reason": "Timing family reused with distinct crop and motif for synthesis"
+    },
+    "S12": {
+      "assetCode": "VIS-REPORT-ZIWEI-SEC-10-EVIDENCE-BOUNDARY",
+      "motifCode": "VIS-REPORT-ZIWEI-MOTIF-2",
+      "placement": "hero-left",
+      "objectPosition": "50% 55%",
+      "reason": "Canonical R2 section mapping"
+    }
+  },
+  "bodyAssetCode": "VIS-REPORT-ZIWEI-BODY",
+  "motifAssetCodes": [
+    "VIS-REPORT-ZIWEI-MOTIF-1",
+    "VIS-REPORT-ZIWEI-MOTIF-2"
+  ],
+  "semanticDataInStaticImages": false
+};
