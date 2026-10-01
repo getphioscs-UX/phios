@@ -88,12 +88,12 @@ export function createCivilizationAtlasState(initial={}){
 }
 
 export const RECONFIG_ATLAS_LAYERS = Object.freeze([
-  'overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','dossiercompare'
+  'overview','search','cases','timeline','windows','snapshots','dossiers','lived','positions','visuals','compare','dossiercompare'
 ]);
 export const DEFAULT_RECONFIGURATION_ATLAS_STATE = Object.freeze({
   version:'2.0.0',activeLayer:'windows',query:'',caseSearch:'',primaryCaseId:null,compareCaseIds:[],
   windowId:null,snapshotId:null,snapshotLayer:'political',dossierId:null,compareDossierIds:[],
-  livedRealityDimensionId:null,sectionId:null,regionId:null,caseType:null,filterWindowId:null,
+  livedRealityDimensionId:null,positionId:null,sectionId:null,regionId:null,caseType:null,filterWindowId:null,
   triggerQuery:'',pressureQuery:'',changeFilter:null,casePage:1,searchPage:1,locale:'en'
 });
 const RECONFIG_SNAPSHOT_LAYERS=new Set(['political','population','industry','energy','finance','trade','military','technology','information','colonialPostcolonial']);
@@ -107,7 +107,7 @@ export function normalizeReconfigurationAtlasState(input={}){
   windowId:asString(input.windowId),snapshotId:asString(input.snapshotId),
   snapshotLayer:RECONFIG_SNAPSHOT_LAYERS.has(input.snapshotLayer)?input.snapshotLayer:'political',
   dossierId:asString(input.dossierId),compareDossierIds:asArray(input.compareDossierIds).slice(0,4),
-  livedRealityDimensionId:asString(input.livedRealityDimensionId),sectionId:asString(input.sectionId),
+  livedRealityDimensionId:asString(input.livedRealityDimensionId),positionId:asString(input.positionId),sectionId:asString(input.sectionId),
   regionId:asString(input.regionId),caseType:asString(input.caseType),filterWindowId:asString(input.filterWindowId),
   triggerQuery:String(input.triggerQuery??'').slice(0,120),pressureQuery:String(input.pressureQuery??'').slice(0,120),
   changeFilter:asString(input.changeFilter),casePage:positivePage(input.casePage),searchPage:positivePage(input.searchPage),locale
