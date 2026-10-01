@@ -42,8 +42,10 @@ const walk=dir=>{
     const p=path.join(dir,entry.name);
     if(entry.isDirectory()){if(!['node_modules','.git','output','.tmp'].includes(entry.name))walk(p);continue;}
     if(!/\.(?:js|mjs|json|md|html|txt)$/i.test(entry.name))continue;
+    const normalized=p.replaceAll('\\','/');
+    if(normalized==='scripts/check-ecr-r4-authority-drift.mjs')continue;
     let text='';try{text=fs.readFileSync(p,'utf8')}catch{continue}
-    if(text.includes(bad))hits.push(p.replaceAll('\\','/'));
+    if(text.includes(bad))hits.push(normalized);
   }
 };
 for(const root of roots)walk(root);
