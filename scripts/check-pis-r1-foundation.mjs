@@ -8,7 +8,19 @@ const baseline=read('docs/public-index-successor/pis-r1-w0-baseline-audit-v1.jso
 assert.equal(baseline.baselineCommit,'8772ca0821b7d5c2b84db47f17fee1ffde4039b3');
 assert.equal(baseline.sourceZip.sha256,null);
 assert.equal(sha(baseline.plan.path),baseline.plan.sha256);
-for(const authority of baseline.routeAuthorities)assert.equal(sha(authority.path),authority.sha256,'PIS must not silently change route authority');
+for(const authority of baseline.routeAuthorities){
+  if(authority.path==='_redirects'){
+    // Existing Book VI route migration (8dc34301), independent of PIS copy.
+    // Reconstruct exact predecessor bytes; no other redirect drift is allowed.
+    let current=fs.readFileSync(authority.path,'utf8');
+    for(const line of ['/books/reality-configuration/ /books/reality-reconfiguration/ 308','/books/reality-configuration /books/reality-reconfiguration/ 308']){
+      assert.equal(current.split(line+'\n').length,2,'Expected one governed Book VI redirect');
+      current=current.replace(line+'\n','');
+    }
+    assert.equal(crypto.createHash('sha256').update(current).digest('hex'),authority.sha256,'PIS route predecessor drift beyond Book VI aliases');
+    assert.ok(fs.existsSync('books/reality-reconfiguration/index.html'));
+  }else assert.equal(sha(authority.path),authority.sha256,'PIS must not silently change route authority');
+}
 const census=read('docs/public-index-successor/pis-r1-w1-surface-census-v1.json');
 assert.equal(new Set(census.surfaces.map(x=>x.path)).size,census.surfaces.length);
 assert.ok(census.surfaces.some(x=>x.path==='index.html'));

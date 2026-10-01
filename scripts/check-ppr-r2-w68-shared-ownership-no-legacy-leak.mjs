@@ -34,7 +34,23 @@ assert.equal(freeze.sharedPersonBInputOwner,'PERSONAL_REALITY_PRODUCT_ORCHESTRAT
 const narrativeFiles=walk(path.join(root,'functions/personal-reading/narrative')).filter(f=>/\.js$/.test(f));
 const rawMethodTokens=['functions/ast-full-production','functions/bzr-full-production','functions/zi-wei-full-production','functions/num-expansion','functions/embodied-configuration','functions/ecr-phi-card'];
 const sharedSurfaceTokens=['perspectives/personal/index.html','assets/customer-ui/js/surfaces/personal-reality.js','functions/api/customer-personal-reality.js'];
-for(const f of narrativeFiles){const s=fs.readFileSync(f,'utf8').replaceAll('\\','/');for(const token of [...rawMethodTokens,...sharedSurfaceTokens])assert.ok(!s.includes(token),`${rel(f)} leaked narrative ownership token ${token}`);}
+// The accepted Zi Wei canon records authority provenance as data. Recognize
+// only these exact existing bytes; this does not permit new raw-method imports
+// or specialist-surface ownership in any narrative module.
+const governedProvenance={
+  'functions/personal-reading/narrative/ziwei-semantic-canon.js':{
+    token:'functions/zi-wei-full-production',
+    sha256:'3aec169b2a0ecca0c08de0acec5b0b5882140ce620bee7e088bfba56838aa5bc'
+  }
+};
+for(const f of narrativeFiles){
+  const s=fs.readFileSync(f,'utf8').replaceAll('\\','/'),r=rel(f),provenance=governedProvenance[r];
+  if(provenance)assert.equal(sha(r),provenance.sha256,`W68 governed provenance bytes changed: ${r}`);
+  for(const token of [...rawMethodTokens,...sharedSurfaceTokens]){
+    if(provenance?.token===token)continue;
+    assert.ok(!s.includes(token),`${r} leaked narrative ownership token ${token}`);
+  }
+}
 // Model/provider identity and client success page are never customer/entitlement authority.
 const customerSurface=[txt('perspectives/personal/index.html'),txt('assets/customer-ui/js/personal-products/final-personal-reading-experience.js')].join('\n');
 for(const token of ['OPENAI_NARRATIVE_MODEL','OPENAI_API_KEY','fixture-model-v1'])assert.ok(!customerSurface.includes(token),`customer surface leaked provider authority token ${token}`);

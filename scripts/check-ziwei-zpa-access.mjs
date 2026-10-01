@@ -1,0 +1,48 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {DatabaseSync} from 'node:sqlite';import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';import path from 'node:path';import {build} from 'esbuild';import {PDFDocument} from 'pdf-lib';
+import {generateZiweiProductionCandidate as generateControlledZiweiReport,requireZiweiEntitlement,ZIWEI_PRODUCT} from '../functions/report-delivery/ziwei-production-generation-v1.js';
+import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiweiReports} from '../functions/account/ziwei-controlled-report-material.js';
+import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {finalizeZiweiNavigation} from '../functions/canonical-presentation-runtime/ziwei-navigation-finalization.js';
+import {assertReportSubjectBinding} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
+const dir='docs/reports/ziwei/production-admission/zpa-v1',record=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/controlled-subject.json')),owner=record.person.accountOwnerUserId,personId=record.person.personId;
+const sqlite=new DatabaseSync(':memory:');for(const f of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+f,'utf8'));
+const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const r=[];for(const s of statements)r.push(await s.run());sqlite.exec('COMMIT');return r;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
+// Isolated test rows exercise the real Commerce query. No payment is made,
+// webhook simulated as verified, or remote account/entitlement created.
+sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,language,format,currency,amount_minor,source_object_key,created_at,updated_at) VALUES(?,'1','Zi Wei local test','bilingual','REPORT','MYR',3900,'controlled','2026-10-01','2026-10-01')").run(ZIWEI_PRODUCT);
+sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,context_json,created_at,updated_at) VALUES('local-order',?,?,'local-idempotency','paid','FULFILLED',?,'2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
+sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_id,checkout_attempt_id,stripe_checkout_session_id,currency,amount_minor,purchase_state,created_at,updated_at) VALUES('local-purchase',?,?,'local-order','SYNTHETIC-NOT-A-STRIPE-SESSION','MYR',3900,'purchased','2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT);
+sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('local-entitlement','local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT);
+const objects=new Map(),env={PHIOS_ENVIRONMENT:'local',RUNTIME_DB:db,PRIVATE_REPORTS:{async put(k,v){objects.set(k,v);},async get(k){return objects.has(k)?{text:async()=>objects.get(k)}:null;}}};
+const context={env,data:{symbolicAccountIdentity:{userId:owner,providerId:'EXISTING_LOCAL_FIXTURE_MECHANISM',verified:true,authenticated:true}}};
+let loads=0;const loadSubject=async(user,id)=>{loads++;if(user!==owner||id!==personId)throw Error('PERSON_USE_DENIED');return structuredClone(record);};
+const negatives=[];async function reject(name,call){await assert.rejects(call);negatives.push({name,result:'DENIED'});}
+await reject('anonymous',()=>requireZiweiEntitlement({...context,data:{}},'en'));
+await reject('client entitlement is not authority',()=>requireZiweiEntitlement({...context,data:{symbolicAccountIdentity:{...context.data.symbolicAccountIdentity,userId:'NO-PURCHASE'},entitled:true}},'en'));
+await reject('production stays closed',()=>requireZiweiEntitlement({...context,env:{...env,PHIOS_ENVIRONMENT:'production'}},'en'));
+await reject('canonical person owner absent',()=>generateControlledZiweiReport(context,{personId,locale:'en'}));
+await reject('wrong person',()=>generateControlledZiweiReport(context,{personId:'NOT-THE-PERSON',locale:'en'},{loadSubject}));
+await reject('mismatched birth input',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>({...structuredClone(record),canonicalBirthInput:{...record.canonicalBirthInput,birthDate:'1990-01-01'}})}));
+sqlite.exec("UPDATE commerce_checkout_attempts SET context_json='{"+'"reportPresentation":{"reportLanguageMode":"SINGLE","reportLocale":"en"}'+"}'");
+await reject('unpurchased locale',()=>requireZiweiEntitlement(context,'zh-Hans'));
+sqlite.prepare('UPDATE commerce_checkout_attempts SET context_json=?').run(JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
+
+const candidate=await generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject,now:()=> '2026-10-01T00:00:00Z'});
+const receipt={passed:true,pageCount:33,semanticSnapshotId:candidate.snapshot.semanticSnapshotId};
+// Local access-policy fixture receipt only; actual 24-report rendering is a
+// separate browser gate. This direct call does not establish deployed QA E2E.
+const release=await releaseControlledZiweiReport(context,candidate,{loadSubject,renderVerification:receipt});
+const args={reportId:release.reportId,personId};const original=await openControlledZiweiReport(context,args,{loadSubject});
+await reject('other account owns requested person',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>({...structuredClone(record),person:{...record.person,accountOwnerUserId:'OTHER'}})}));
+await reject('revoked method consent',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>({...structuredClone(record),methodConsent:{...record.methodConsent,revocationState:'REVOKED'}})}));
+await reject('deleted person',()=>generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:async()=>null}));
+await reject('inaccessible person on open',()=>openControlledZiweiReport(context,args,{loadSubject:async()=>{throw Error('PERSON_INACCESSIBLE');}}));
+const changed=structuredClone(record);changed.person.birthDate='1991-08-17';changed.canonicalBirthInput.birthDate=changed.person.birthDate;
+const changedLoader=async()=>changed;
+assert.deepEqual(await openControlledZiweiReport(context,args,{loadSubject:changedLoader}),original,'Editing birth data must not alter released material');
+const newGeneration=await generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject:changedLoader,now:()=> '2026-10-01T00:00:00Z'});
+assert.notEqual(newGeneration.snapshot.semanticSnapshotId,original.snapshot.semanticSnapshotId);
+assert.notEqual(newGeneration.snapshot.inputFingerprint,original.snapshot.inputFingerprint);
+assert.deepEqual(await openControlledZiweiReport(context,args,{loadSubject}),original);
+const results={scope:'LOCAL_EXISTING_POLICY_AND_SQL_ONLY',canonicalPersonLoader:'SERVER_DEPENDENCY_NOT_BOUND_TO_DEPLOYED_OWNER',accessTests:negatives,birthChange:{oldReleaseUnchanged:true,newSnapshotVersionRequired:true,oldVersion:original.snapshot.semanticSnapshotId,newVersion:newGeneration.snapshot.semanticSnapshotId},qaAccountDelivery:'NOT_PROVEN',productionVerification:'NOT_RUN'};
+fs.writeFileSync(dir+'/person-access.json',JSON.stringify(results,null,2)+'\n');sqlite.close();console.log('PASS ZPA local owner/consent negatives and immutable birth-input versioning. Deployed canonical person binding not claimed.');

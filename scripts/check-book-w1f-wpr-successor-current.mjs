@@ -24,6 +24,28 @@ const currentSuccessorV6 = json('content/knowledge/migrations/book-w1f/wpr-book-
 const currentSuccessor = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v7.json');
 const partH5ABrandingSuccessor = json('content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json');
 const publicAssetVerificationSuccessor = json('content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json');
+const bookViAssets=json('content/web-production/client-visual-consumption/successors/book-vi-public-assets-successor-v1.json');
+assert.equal(bookViAssets.predecessor,'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json');
+assert.equal(bookViAssets.predecessorSha256,sha256(bookViAssets.predecessor));
+assert.equal(bookViAssets.previousSha256,partH5ABrandingSuccessor.publicAssetRegistry.currentSha256);
+assert.equal(bookViAssets.registryPath,'content/registry/public-assets.json');
+assert.equal(bookViAssets.currentSha256,sha256(bookViAssets.registryPath));
+assert.equal(bookViAssets.productionAdmissionChanged,false);
+assert.equal(bookViAssets.remoteVerificationPerformedByThisReconciliation,false);
+assert.deepEqual(bookViAssets.addedAssetCodes,'ABCDEFGH'.split('').map(x=>'FIG_13'+x));
+const fullAssets=json(bookViAssets.registryPath),bookViSource=json(bookViAssets.source);
+assert.equal(fullAssets.assets.length,157);
+for(const code of bookViAssets.addedAssetCodes){
+  const matches=fullAssets.assets.filter(a=>a.asset_code===code),source=bookViSource.assets.find(a=>a.assetId===code);
+  assert.equal(matches.length,1);assert.ok(source);
+  assert.equal(matches[0].object_key,source.expectedR2Path);
+  assert.equal(matches[0].source_registry,bookViAssets.source);
+  assert.equal(matches[0].family,'BOOK_VI_CANONICAL_FIGURE');
+}
+const historicalAssets={...fullAssets,assets:fullAssets.assets.filter(a=>!bookViAssets.addedAssetCodes.includes(a.asset_code))};
+const historicalAssetSha=crypto.createHash('sha256').update(JSON.stringify(historicalAssets,null,2)+'\n').digest('hex');
+assert.equal(historicalAssetSha,bookViAssets.previousSha256,'Original 149 public asset records must remain exact');
+const historicalSourceSha=p=>p===bookViAssets.registryPath?historicalAssetSha:sha256(p);
 assert.equal(record.status, 'accepted-successor-web-production-runtime-active');
 assert.equal(record.predecessor.freeze.status, 'HISTORICAL_ALLOWED');
 assert.equal(record.predecessor.freeze.rewritten, false);
@@ -39,7 +61,7 @@ assert.equal(currentSuccessorV3.status, 'BOOK_W1F_CURRENT_WPR_CHECKER_SUCCESSOR_
 assert.equal(currentSuccessor.predecessorCurrentSuccessor.rewritten, false);
 assert.equal(publicAssetVerificationSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_POC_A_REMOTE_VERIFICATION_MATERIALIZATION_RECONCILED');
 assert.equal(publicAssetVerificationSuccessor.publicAssetRegistry.currentSha256, partH5ABrandingSuccessor.publicAssetRegistry.predecessorSha256);
-assert.equal(partH5ABrandingSuccessor.publicAssetRegistry.currentSha256, sha256('content/registry/public-assets.json'));
+assert.equal(partH5ABrandingSuccessor.publicAssetRegistry.currentSha256, historicalAssetSha);
 assert.equal(partH5ABrandingSuccessor.remoteVerificationAdvancement.targetCount, 12);
 assert.equal(publicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount, 10);
 assert.equal(currentSuccessor.publicAssets.governancePath, 'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json');
@@ -92,15 +114,15 @@ for (const source of record.successor.currentSources) {
   const current = currentSourceByPath.get(source.path);
   assert(current, `Missing BOOK-W1F current successor source: ${source.path}`);
   assert.equal(current.w1fRecordedSha256, source.sha256);
-  assert.equal(current.currentSha256, sha256(source.path), `BOOK-W1F current source drift: ${source.path}`);
+  assert.equal(current.currentSha256, historicalSourceSha(source.path), `BOOK-W1F current source drift: ${source.path}`);
   const restoredMaterialization = [materializationReconciliation.publicAssets, materializationReconciliation.bookComposition, materializationReconciliation.routeRegistry, materializationReconciliation.publicDiscoveryRegistry].find(entry => entry.path === source.path);
   assert(restoredMaterialization, `Missing materialization reconciliation: ${source.path}`);
   assert.equal(source.sha256, restoredMaterialization.recordedButUnmaterializedSha256);
 }
 
 
-const assets = json('content/registry/public-assets.json');
-assert.equal(currentSuccessor.publicAssets.currentSha256, sha256('content/registry/public-assets.json'));
+const assets = historicalAssets;
+assert.equal(currentSuccessor.publicAssets.currentSha256, historicalAssetSha);
 assert.equal(currentSuccessor.publicAssets.governanceSha256, sha256(currentSuccessor.publicAssets.governancePath));
 assert.equal(assets.assets.length, currentSuccessor.publicAssets.currentRecordCount);
 assert.equal(assets.assets.length, 149);

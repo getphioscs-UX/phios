@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-STATE-URL-SUCCESSOR-v2.0.0",
+  "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+  "predecessor": "content/civilization-atlas/maintenance/book-v-civ-atlas-book-vi-state-url-successor-v1.json",
+  "predecessorSha256": "ad79d2dafcd50591ade5c4e316d46706262b30a926046b3fd4ba91598c866f86",
+  "change": {
+    "path": "assets/js/pages/civilization-atlas/atlas-state.js",
+    "previousSha256": "18254bec4f7c1c13d00f55815fb216dd9d7e77ae5cfe4fcf2f688af97f695469",
+    "successorSha256": "85c13fc372e0cc4a0f56147b7a0c818fdb2e809884139c20ab9637b37666c8c9",
+    "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+  },
+  "reason": "Recognize existing B6-FR1 legacy layer migration and B6-FR2 windows/world-shifts entry ordering; no runtime code changed by registration.",
+  "existingCommits": [
+    "051ae4df",
+    "1435920d",
+    "98010808",
+    "4f6977b2"
+  ],
+  "review": "content/civilization-atlas/evidence/b6-fr2-human-review-v1.json",
+  "productionAdmissionChanged": false,
+  "historicalRegistriesChanged": false,
+  "checks": [
+    "scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs#state-default-and-legacy-layer-migration"
+  ],
+  "historicalDiagnostics": {
+    "fr1": "SUPERSEDED_DOSSIER_COPY_ASSERTION_FAILED",
+    "fr2": "SUPERSEDED_DOSSIER_PROJECTION_ASSERTION_FAILED",
+    "currentFr3": "PASS"
+  }
+}

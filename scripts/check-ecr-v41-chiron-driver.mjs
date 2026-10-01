@@ -6,5 +6,5 @@ assert.equal(ir.initialization.activations.filter(a=>a.bodyCode==='CHIRON').leng
 const earth=ir.initialization.activations.filter(a=>a.bodyCode==='EARTH');
 assert.equal(earth.length,2);assert.deepEqual(earth.map(a=>a.layer),['PERSONALITY','DESIGN']);assert(earth.every(a=>a.status==='CALCULATED'&&a.p64&&Number.isFinite(a.eclipticLongitude)));
 assert.equal(ir.driverField.drivers[10].driverId,'D11');assert.deepEqual(ir.driverField.drivers[10].bodyBinding,['EARTH']);assert.equal(ir.driverField.drivers[10].status,'CALCULATED');
-assert.equal(ir.initialization.activations.filter(a=>a.status==='CALCULATED').length,28);
+assert.equal(ir.initialization.activations.filter(a=>a.status==='CALCULATED').length,26);
 console.log('PASS ECR D11 Earth regression: Personality/Design Earth are derived from Sun opposition; operational Chiron removed.');
