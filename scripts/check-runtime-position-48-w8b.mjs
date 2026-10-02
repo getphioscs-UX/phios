@@ -1,0 +1,58 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {buildW8bClaimWorkOrders,validateW8bClaimIntake,toW8bCwaReadyClaim} from './lib/civilization-atlas/runtime-position-w8b-claim-extraction-v1.mjs';
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
+const text=rel=>fs.readFileSync(path.join(root,rel),'utf8');
+const ok=(v,c)=>{if(!v)throw new Error('RUNTIME_POSITION_48_W8B:'+c);};
+
+const contract=read('content/civilization-atlas/reconfiguration/runtime-position-w8b-claim-extraction-contract-v1.json');
+const sources=read('content/civilization-atlas/reconfiguration/runtime-position-w8a-validated-sources-v1.json');
+const work=read('content/civilization-atlas/reconfiguration/runtime-position-w8b-claim-work-orders-v1.json');
+const intake=read('content/civilization-atlas/reconfiguration/runtime-position-w8b-claim-intake-v1.json');
+const validated=read('content/civilization-atlas/reconfiguration/runtime-position-w8b-validated-claims-v1.json');
+const cwaReady=read('content/civilization-atlas/reconfiguration/runtime-position-w8b-cwa-ready-claims-v1.json');
+const status=read('content/civilization-atlas/reconfiguration/runtime-position-w8b-status-v1.json');
+const crosswalk=read('content/registry/runtime-position-48-crosswalk-v1.json');
+const manifest=read('content/civilization-atlas/reconfiguration/atlas-manifest-v2.json');
+const w8Before=read('content/civilization-atlas/reconfiguration/runtime-position-w8-evidence-batches-v1.json');
+
+ok(contract.status==='ACTIVE_CLAIM_EXTRACTION','CONTRACT');
+ok(contract.boundaries?.cwaAdmissionPerformed===false,'CWA_BOUNDARY');
+ok(contract.boundaries?.mutatesW8EvidenceBatches===false,'W8_MUTATION_BOUNDARY');
+const rebuilt=buildW8bClaimWorkOrders({validatedSources:sources});
+ok((work.workOrders||[]).length===rebuilt.length,'WORK_ORDER_COUNT');
+ok((validated.records||[]).every(x=>x.claimState==='SOURCE_BOUNDED_CLAIM_CANDIDATE_NOT_ADMITTED'),'CLAIM_STATE');
+ok((validated.records||[]).every(x=>x.sourceLocator?.type&&x.sourceLocator?.value),'CLAIM_LOCATOR');
+ok((validated.records||[]).every(x=>x.boundaries?.isAdmittedEvidence===false&&x.boundaries?.runtimePositionCreated===false),'CLAIM_BOUNDARY');
+ok((cwaReady.records||[]).length===(validated.records||[]).length,'CWA_READY_COUNT');
+ok((cwaReady.records||[]).every(x=>x.admissionState==='NOT_EVALUATED_BY_CWA'),'CWA_READY_NOT_ADMITTED');
+ok(status.completed?.admittedEvidenceClaims===0,'ADMITTED_EVIDENCE');
+ok(status.completed?.w8EvidenceBatchesMutated===0,'W8_BATCH_MUTATED_STATUS');
+ok(status.completed?.runtimePositionCandidates===0,'POSITION_CANDIDATES');
+ok(status.completed?.dossiersAutoPopulated===0,'DOSSIER_AUTO_POPULATED');
+ok(crosswalk.w8b?.mutatesW8EvidenceBatches===false,'CROSSWALK_MUTATION');
+ok(manifest.registryRefs?.runtimePositionW8bClaimIntake==='content/civilization-atlas/reconfiguration/runtime-position-w8b-claim-intake-v1.json','MANIFEST_INTAKE');
+const runner=text('scripts/run-runtime-position-48-w8b-claim-extraction.mjs');
+ok(!runner.includes("write('content/civilization-atlas/reconfiguration/runtime-position-w8-evidence-batches-v1.json'"),'RUNNER_WRITES_W8_BATCH');
+const pkg=text('package.json');
+ok(pkg.includes('"build:runtime-position-48:w8b"')&&pkg.includes('"check:runtime-position-48:w8b"'),'PACKAGE');
+
+const fixtureSources={records:[{intakeId:'FIX-SRC-I1',sourceId:'FIX-SRC-1',dossierId:'DOSSIER-US',targetLanes:['DEMOGRAPHY','INDUSTRY'],url:'https://example.com/source',publisher:'Fixture Publisher',title:'Fixture Source',publishedAt:'2026-10-01T00:00:00.000Z',retrievedAt:'2026-10-02T01:00:00.000Z',authorityClassHint:'OFFICIAL_PRIMARY',sourceVersionOrDigest:'fixture-v1',jurisdiction:'US',sourceState:'STRUCTURALLY_VALIDATED_NOT_ADMITTED'}]};
+const fixture={producedAt:'2026-10-02T12:00:00.000Z',claims:[{claimCandidateId:'FIX-CLAIM-1',sourceId:'FIX-SRC-1',dossierId:'DOSSIER-US',laneId:'DEMOGRAPHY',claimType:'GENERAL_CURRENT_FACT',claimText:'Fixture bounded demographic fact.',sourceLocator:{type:'TABLE',value:'Table 1, row A'},supportLevel:'DIRECT',jurisdiction:'US'}]};
+const vr=validateW8bClaimIntake({intake:fixture,validatedSources:fixtureSources,contract});
+ok(vr.records.length===1&&vr.rejected.length===0,'FIXTURE_VALIDATION');
+ok(vr.records[0].sourceLineage.sourceVersionOrDigest==='fixture-v1','FIXTURE_LINEAGE');
+const handoff=toW8bCwaReadyClaim(vr.records[0]);
+ok(handoff.admissionState==='NOT_EVALUATED_BY_CWA'&&handoff.candidate.url==='https://example.com/source','FIXTURE_CWA_HANDOFF');
+const badLocator={...fixture,claims:[{...fixture.claims[0],claimCandidateId:'FIX-CLAIM-BAD',sourceLocator:null}]};
+const br=validateW8bClaimIntake({intake:badLocator,validatedSources:fixtureSources,contract});
+ok(br.records.length===0&&br.rejected[0]?.reasons.includes('SOURCE_LOCATOR_REQUIRED'),'FIXTURE_LOCATOR_REJECT');
+const badLane={...fixture,claims:[{...fixture.claims[0],claimCandidateId:'FIX-CLAIM-BAD-LANE',laneId:'TECHNOLOGY'}]};
+const lr=validateW8bClaimIntake({intake:badLane,validatedSources:fixtureSources,contract});
+ok(lr.records.length===0&&lr.rejected[0]?.reasons.includes('LANE_SOURCE_MISMATCH'),'FIXTURE_LANE_REJECT');
+const w8After=read('content/civilization-atlas/reconfiguration/runtime-position-w8-evidence-batches-v1.json');
+ok(JSON.stringify(w8Before)===JSON.stringify(w8After),'W8_BATCH_CHANGED_DURING_CHECK');
+console.log('PASS runtime-position-48 W8B: source-bounded claim extraction active; locator + source lineage required; CWA-ready handoff remains NOT_EVALUATED, with zero evidence/position authority leakage.');
