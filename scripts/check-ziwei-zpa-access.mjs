@@ -48,6 +48,13 @@ const results={scope:'LOCAL_EXISTING_POLICY_AND_SQL_ONLY',canonicalPersonLoader:
 fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'/zpa-access-current.json',JSON.stringify({...results,predecessorEvidence:frozenDir+'/person-access.json',successorScope:'CURRENT_CHECK_EVIDENCE_ONLY'},null,2)+'\n');
 const accountReportApi=fs.readFileSync('functions/api/account-method-reports.js','utf8');
 assert(accountReportApi.includes('https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev'),'Released report CSP must allow the governed public R2 report asset origin');
+const publicationRenderer=fs.readFileSync('assets/customer-ui/js/personal-products/publication-report-pages.js','utf8');
+assert(publicationRenderer.includes('PHI-OS-REPORT-PRINT-SHELL-V2'),'Zi Wei customer renderer must use Print Shell V2');
+assert(publicationRenderer.includes("fixed?['FIXED_A4']"),'Print Shell V2 must use one-pass fixed A4 verification');
+assert(publicationRenderer.includes('pub-page-background--section'),'Section masters must render as primary page backgrounds');
+const rendererBuild=fs.readFileSync('scripts/build-method-report-renderer.mjs','utf8');
+assert(rendererBuild.includes('ziwei-print-shell-v2.css'),'Private renderer build must include Zi Wei Print Shell V2');
+assert(!rendererBuild.includes("'report-publication.css'"),'Private Zi Wei renderer must not load the legacy cross-method publication CSS');
 const renderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
 assert(!renderer.includes('Page.printToPDF'),'Customer release renderer must not regenerate PDF in the hot path');
 assert(!renderer.includes('countChromiumPdfPages'),'Customer release renderer must not reparse Chromium PDF page trees');
