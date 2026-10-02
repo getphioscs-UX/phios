@@ -29,9 +29,16 @@ const generation=fs.readFileSync('functions/report-delivery/ziwei-natural-compos
 assert(generation.includes("generateZiweiProductionCandidate"));
 assert(generation.includes('buildZiweiNaturalComposerR4'));
 assert(generation.includes("naturalComposition?.status!=='PASS'"));
+assert(generation.includes("composerStatus!=='PASS'"));
 assert(generation.includes("providerCalled!==true"));
 assert(generation.includes("verificationAccepted!==true"));
+assert(generation.includes("editorialQuality?.accepted!==true"));
+assert(generation.includes("semanticReviewCalls>0"));
+assert(generation.includes("transportCalls>1"));
 assert(generation.includes("productionAdmissionGranted:false"));
+
+const publication=fs.readFileSync('functions/personal-reading/ziwei-production-publication-r3.js','utf8');
+assert(publication.includes("sections.find(section=>section.sectionId===p.sectionId)?.editorialVersion||'ZIWEI-CONTENT-DEPTH-R3'"),'R4 publication pages must preserve successor editorial lineage');
 
 const privateRenderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
 assert(privateRenderer.includes("ALLOWED_ZIWEI_COMPOSITIONS=new Set(['ZIWEI-PRODUCTION-COMPOSER-V1','ZIWEI-NATURAL-COMPOSER-R4'])"));
