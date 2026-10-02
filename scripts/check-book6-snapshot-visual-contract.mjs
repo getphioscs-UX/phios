@@ -18,7 +18,9 @@ for(const s of rows){
  assert.equal(s.asset?.supportsLayerOverlay,true);
  assert.ok(s.asset?.r2Path);
 }
-assert.match(renderer,/resolveAtlasVisualById\(data\.visualBindings,s\.visualAssetId\)/);
+assert.match(renderer,/const visual=declaredStatus==='PRESENT'\?resolveAtlasVisualById\(data\.visualBindings,snap\.visualAssetId\):null/);
+assert.match(renderer,/const visualState=visual\?'PRESENT':declaredStatus==='PRESENT'\?'MISSING':declaredStatus/);
+assert.match(renderer,/data-resolver-state="'\+esc\(visualState\)\+'"/);
 assert.doesNotMatch(renderer,/s\.asset\.publicUrl/);
 assert.match(renderer,/loading="lazy"/);
 assert.match(renderer,/decoding="async"/);
