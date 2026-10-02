@@ -73,7 +73,7 @@ const loader=text('assets/js/pages/civilization-atlas/atlas-data.js');
 assert(loader.includes('runtime-position-book5-historical-alignment-v1.json'),'LOADER_HISTORY');
 assert(loader.includes('runtime-position-correspondence-v1.json'),'LOADER_CORRESPONDENCE');
 const renderer=text('assets/js/pages/civilization-atlas/reconfiguration-renderer.js');
-assert(renderer.includes('48 runtime-position reading'),'RENDERER_POSITION_READING');
+assert(renderer.includes('Current evidence → 48 runtime positions')&&renderer.includes('48 Runtime Positions'),'RENDERER_POSITION_READING');
 assert(renderer.includes('temporal overlap only; not semantic equivalence'),'RENDERER_HISTORY_BOUNDARY');
 const ask=text('functions/_lib/atlas-retrieval-scope.js');
 assert(ask.includes('CIVILIZATION_ATLAS_POSITION_ALIGNMENT'),'ASK_POSITION_ALIGNMENT');
