@@ -1,9 +1,192 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-VALIDATED-SOURCES-v1.0.0",
   "version": "1.0.0",
-  "status": "IDLE_NO_SOURCE_INTAKE",
+  "status": "SOURCE_CANDIDATES_VALIDATED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A",
   "contract": "content/civilization-atlas/reconfiguration/runtime-position-w8a-source-production-contract-v1.json",
-  "records": [],
+  "records": [
+    {
+      "intakeId": "W8A-US-SRC-001",
+      "sourceId": "US-CENSUS-VINTAGE-2025-NATIONAL-STATE",
+      "dossierId": "DOSSIER-US",
+      "targetLanes": [
+        "DEMOGRAPHY"
+      ],
+      "url": "https://www.census.gov/newsroom/press-kits/2026/national-state-population-estimates.html",
+      "publisher": "U.S. Census Bureau",
+      "title": "Vintage 2025 National and State Population Estimates",
+      "publishedAt": "2026-01-27T00:00:00.000Z",
+      "retrievedAt": "2026-10-02T02:47:00.000Z",
+      "authorityClassHint": "OFFICIAL_PRIMARY",
+      "sourceVersionOrDigest": "VINTAGE-2025-NATIONAL-STATE-20260127",
+      "jurisdiction": "US",
+      "locale": "en-US",
+      "notes": "Official Census press kit and release tables for national/state population estimates. Source candidate only; no claim admitted in W8A.",
+      "preferredForEveryTargetLane": true,
+      "sourceState": "STRUCTURALLY_VALIDATED_NOT_ADMITTED",
+      "boundaries": {
+        "isFact": false,
+        "isClaim": false,
+        "isEvidence": false,
+        "isCurrentData": false
+      }
+    },
+    {
+      "intakeId": "W8A-US-SRC-002",
+      "sourceId": "US-BEA-GDP-BY-INDUSTRY-2026Q2",
+      "dossierId": "DOSSIER-US",
+      "targetLanes": [
+        "INDUSTRY"
+      ],
+      "url": "https://www.bea.gov/data/gdp/gdp-industry",
+      "publisher": "U.S. Bureau of Economic Analysis",
+      "title": "GDP by Industry",
+      "publishedAt": "2026-09-30T00:00:00.000Z",
+      "retrievedAt": "2026-10-02T02:47:00.000Z",
+      "authorityClassHint": "OFFICIAL_PRIMARY",
+      "sourceVersionOrDigest": "2026Q2-THIRD-ESTIMATE-20260930",
+      "jurisdiction": "US",
+      "locale": "en-US",
+      "notes": "Current BEA GDP-by-industry release page. Source candidate only; claim extraction remains W8B.",
+      "preferredForEveryTargetLane": true,
+      "sourceState": "STRUCTURALLY_VALIDATED_NOT_ADMITTED",
+      "boundaries": {
+        "isFact": false,
+        "isClaim": false,
+        "isEvidence": false,
+        "isCurrentData": false
+      }
+    },
+    {
+      "intakeId": "W8A-US-SRC-003",
+      "sourceId": "US-BTS-NTS-UPDATE-20260930",
+      "dossierId": "DOSSIER-US",
+      "targetLanes": [
+        "INFRASTRUCTURE"
+      ],
+      "url": "https://www.bts.gov/newsroom/bts-updates-national-transportation-statistics-93026",
+      "publisher": "U.S. Bureau of Transportation Statistics",
+      "title": "BTS Updates National Transportation Statistics 9/30/26",
+      "publishedAt": "2026-09-30T00:00:00.000Z",
+      "retrievedAt": "2026-10-02T02:47:00.000Z",
+      "authorityClassHint": "OFFICIAL_PRIMARY",
+      "sourceVersionOrDigest": "NTS-UPDATE-20260930",
+      "jurisdiction": "US",
+      "locale": "en-US",
+      "notes": "Official BTS update covering the extent, condition, use and performance of U.S. transportation infrastructure. Source candidate only.",
+      "preferredForEveryTargetLane": true,
+      "sourceState": "STRUCTURALLY_VALIDATED_NOT_ADMITTED",
+      "boundaries": {
+        "isFact": false,
+        "isClaim": false,
+        "isEvidence": false,
+        "isCurrentData": false
+      }
+    },
+    {
+      "intakeId": "W8A-US-SRC-004",
+      "sourceId": "US-NSF-NSB-SEP-2026-1",
+      "dossierId": "DOSSIER-US",
+      "targetLanes": [
+        "TECHNOLOGY"
+      ],
+      "url": "https://ncses.nsf.gov/pubs/nsbsep20261/preface",
+      "publisher": "National Center for Science and Engineering Statistics, U.S. National Science Foundation",
+      "title": "The State of U.S. Science and Engineering 2026",
+      "publishedAt": "2026-05-04T00:00:00.000Z",
+      "retrievedAt": "2026-10-02T02:47:00.000Z",
+      "authorityClassHint": "OFFICIAL_PRIMARY",
+      "sourceVersionOrDigest": "NSB-SEP-2026-1",
+      "jurisdiction": "US",
+      "locale": "en-US",
+      "notes": "Official NSF/NCSES Science and Engineering Indicators summary report. Source candidate only.",
+      "preferredForEveryTargetLane": true,
+      "sourceState": "STRUCTURALLY_VALIDATED_NOT_ADMITTED",
+      "boundaries": {
+        "isFact": false,
+        "isClaim": false,
+        "isEvidence": false,
+        "isCurrentData": false
+      }
+    },
+    {
+      "intakeId": "W8A-US-SRC-005",
+      "sourceId": "US-BEA-TRADE-GOODS-SERVICES-JULY-2026",
+      "dossierId": "DOSSIER-US",
+      "targetLanes": [
+        "EXTERNAL_DEPENDENCY"
+      ],
+      "url": "https://www.bea.gov/news/2026/us-international-trade-goods-and-services-july-2026",
+      "publisher": "U.S. Bureau of Economic Analysis and U.S. Census Bureau",
+      "title": "U.S. International Trade in Goods and Services, July 2026",
+      "publishedAt": "2026-09-03T00:00:00.000Z",
+      "retrievedAt": "2026-10-02T02:47:00.000Z",
+      "authorityClassHint": "OFFICIAL_PRIMARY",
+      "sourceVersionOrDigest": "BEA-26-40_CB-26-142_JULY-2026",
+      "jurisdiction": "US",
+      "locale": "en-US",
+      "notes": "Joint official BEA/Census monthly trade release. Source candidate only; dependency interpretation is deferred to bounded claims and later runtime reading.",
+      "preferredForEveryTargetLane": true,
+      "sourceState": "STRUCTURALLY_VALIDATED_NOT_ADMITTED",
+      "boundaries": {
+        "isFact": false,
+        "isClaim": false,
+        "isEvidence": false,
+        "isCurrentData": false
+      }
+    },
+    {
+      "intakeId": "W8A-US-SRC-006",
+      "sourceId": "US-SBA-FAQ-SMALL-BUSINESS-2026",
+      "dossierId": "DOSSIER-US",
+      "targetLanes": [
+        "CARRIER_STRUCTURE"
+      ],
+      "url": "https://advocacy.sba.gov/2026/02/03/frequently-asked-questions-about-small-business-2026/",
+      "publisher": "U.S. Small Business Administration, Office of Advocacy",
+      "title": "Frequently Asked Questions About Small Business 2026",
+      "publishedAt": "2026-02-03T00:00:00.000Z",
+      "retrievedAt": "2026-10-02T02:47:00.000Z",
+      "authorityClassHint": "GOVERNMENT",
+      "sourceVersionOrDigest": "SBA-ADVOCACY-FAQ-SMALL-BUSINESS-2026-02",
+      "jurisdiction": "US",
+      "locale": "en-US",
+      "notes": "Official government compilation describing the composition and role of U.S. businesses. Used only as a candidate source for carrier-structure claims.",
+      "preferredForEveryTargetLane": true,
+      "sourceState": "STRUCTURALLY_VALIDATED_NOT_ADMITTED",
+      "boundaries": {
+        "isFact": false,
+        "isClaim": false,
+        "isEvidence": false,
+        "isCurrentData": false
+      }
+    },
+    {
+      "intakeId": "W8A-US-SRC-007",
+      "sourceId": "US-FED-FSR-MAY-2026",
+      "dossierId": "DOSSIER-US",
+      "targetLanes": [
+        "PRESSURE_FIELD"
+      ],
+      "url": "https://www.federalreserve.gov/publications/2026-may-financial-stability-report-purpose-and-framework.htm",
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "title": "Financial Stability Report - May 2026",
+      "publishedAt": null,
+      "retrievedAt": "2026-10-02T02:47:00.000Z",
+      "authorityClassHint": "REGULATOR",
+      "sourceVersionOrDigest": "FED-FSR-MAY-2026",
+      "jurisdiction": "US",
+      "locale": "en-US",
+      "notes": "Federal Reserve current financial-stability assessment and vulnerability framework. Source candidate only; pressure claims require W8B locators.",
+      "preferredForEveryTargetLane": true,
+      "sourceState": "STRUCTURALLY_VALIDATED_NOT_ADMITTED",
+      "boundaries": {
+        "isFact": false,
+        "isClaim": false,
+        "isEvidence": false,
+        "isCurrentData": false
+      }
+    }
+  ],
   "rejected": []
 }
