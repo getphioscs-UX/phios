@@ -8,7 +8,7 @@ export async function onRequest(context){
   if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))return Response.json({ok:false,code:'METHOD_REPORT_DELIVERY_NOT_ADMITTED'},{status:403,headers});
   if(context.request.method==='GET'){
    const id=new URL(context.request.url).searchParams.get('reportId');
-   if(id){const {html}=await openAccountZiweiMaterial(context,id);return new Response(html,{headers:{...headers,'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; img-src 'self' data: https://assets.getphios.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'"}});}
+   if(id){const {html}=await openAccountZiweiMaterial(context,id);return new Response(html,{headers:{...headers,'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; img-src 'self' data: https://assets.getphios.com https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'"}});}
    return Response.json({ok:true,reports:await listAccountZiweiMaterials(context)},{headers});
   }
   if(context.request.method!=='POST')return Response.json({ok:false,code:'METHOD_NOT_ALLOWED'},{status:405,headers});
