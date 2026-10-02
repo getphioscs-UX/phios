@@ -34,6 +34,12 @@ ok(contract.boundaries?.mutatesW8EvidenceBatches===false,'W8_MUTATION_BOUNDARY')
 const rebuilt=buildW8cAdmissionWorkOrders({cwaReadyClaims:claims});
 ok((work.workOrders||[]).length===rebuilt.length,'WORK_ORDER_COUNT');
 ok((results.records||[]).length===(claims.records||[]).length,'RESULT_COUNT');
+if((claims.records||[]).length){
+  ok((decisions.decisions||[]).length===(claims.records||[]).length,'REAL_ADMISSION_DECISION_COUNT');
+  ok((results.records||[]).every(x=>x.admissionState==='ADMITTED'),'REAL_ADMISSION_NOT_COMPLETE');
+  ok((evidence.records||[]).length===(claims.records||[]).length,'REAL_EVIDENCE_COUNT');
+  ok((handoff.records||[]).length===(claims.records||[]).length,'REAL_RRE_HANDOFF_COUNT');
+}
 ok((evidence.records||[]).every(x=>x.evidenceState==='CWA_ADMITTED'||x.evidenceState==='CWA_ADMITTED_CONFLICTED'),'EVIDENCE_STATE');
 ok((evidence.records||[]).every(x=>x.boundaries?.sourceVotingUsed===false),'SOURCE_VOTING');
 ok((handoff.records||[]).every(x=>x.supportLevel==='DIRECT'&&x.rreEligibility==='RRE_ELIGIBLE'),'RRE_HANDOFF_GATE');

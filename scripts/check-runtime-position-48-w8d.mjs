@@ -40,7 +40,16 @@ const REGISTRIES={
 
 ok(contract.status==='ACTIVE_RRE_CURRENT_EVIDENCE_CONSUMPTION','CONTRACT');
 ok(contract.boundaries?.runtimePositionCandidateAllowed===false,'POSITION_BOUNDARY');
-ok((output.records||[]).length===new Set((handoff.records||[]).map(x=>x.dossierId)).size,'READOUT_DOSSIER_COUNT');
+const expectedDossiers=new Set((handoff.records||[]).map(x=>x.dossierId)).size;
+const buildPending=status.status==='RRE_CONSUMPTION_BUILD_REQUIRED';
+if(buildPending){
+  ok((handoff.records||[]).length>0,'BUILD_PENDING_WITHOUT_EVIDENCE');
+  ok((output.records||[]).length===0,'BUILD_PENDING_OUTPUT_NOT_EMPTY');
+  ok(status.completed?.rreEligibleEvidence===(handoff.records||[]).length,'BUILD_PENDING_EVIDENCE_COUNT');
+  ok(status.completed?.rreReadouts===0,'BUILD_PENDING_READOUT_COUNT');
+}else{
+  ok((output.records||[]).length===expectedDossiers,'READOUT_DOSSIER_COUNT');
+}
 ok((output.records||[]).every(x=>x.dataClass==='DERIVED_RUNTIME_READOUT'),'READOUT_DATA_CLASS');
 ok((output.records||[]).every(x=>x.readoutReference?.code&&x.readoutReference?.digest),'READOUT_REFERENCE');
 ok((output.records||[]).every(x=>x.boundaries?.canonicalDossierMutated===false&&x.boundaries?.runtimePositionCandidateCreated===false),'READOUT_BOUNDARY');
