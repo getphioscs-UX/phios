@@ -4,7 +4,7 @@ import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiw
 import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
 import {finalizeZiweiNavigation} from '../functions/canonical-presentation-runtime/ziwei-navigation-finalization.js';
 import {assertReportSubjectBinding} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
-const dir='docs/reports/ziwei/production-admission/zpa-v1',record=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/controlled-subject.json')),owner=record.person.accountOwnerUserId,personId=record.person.personId;
+const frozenDir='docs/reports/ziwei/production-admission/zpa-v1',dir='docs/reports/ziwei/production-admission/cpa-v1',record=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/controlled-subject.json')),owner=record.person.accountOwnerUserId,personId=record.person.personId;
 const sqlite=new DatabaseSync(':memory:');for(const f of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+f,'utf8'));
 const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const r=[];for(const s of statements)r.push(await s.run());sqlite.exec('COMMIT');return r;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
 // Isolated test rows exercise the real Commerce query. No payment is made,
@@ -45,7 +45,7 @@ assert.notEqual(newGeneration.snapshot.semanticSnapshotId,original.snapshot.sema
 assert.notEqual(newGeneration.snapshot.inputFingerprint,original.snapshot.inputFingerprint);
 assert.deepEqual(await openControlledZiweiReport(context,args,{loadSubject}),original);
 const results={scope:'LOCAL_EXISTING_POLICY_AND_SQL_ONLY',canonicalPersonLoader:'SERVER_DEPENDENCY_NOT_BOUND_TO_DEPLOYED_OWNER',accessTests:negatives,birthChange:{oldReleaseUnchanged:true,newSnapshotVersionRequired:true,oldVersion:original.snapshot.semanticSnapshotId,newVersion:newGeneration.snapshot.semanticSnapshotId},qaAccountDelivery:'NOT_PROVEN',productionVerification:'NOT_RUN'};
-fs.writeFileSync(dir+'/person-access.json',JSON.stringify(results,null,2)+'\n');
+fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'/zpa-access-current.json',JSON.stringify({...results,predecessorEvidence:frozenDir+'/person-access.json',successorScope:'CURRENT_CHECK_EVIDENCE_ONLY'},null,2)+'\n');
 const renderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
 assert(!renderer.includes('Page.printToPDF'),'Customer release renderer must not regenerate PDF in the hot path');
 assert(!renderer.includes('countChromiumPdfPages'),'Customer release renderer must not reparse Chromium PDF page trees');
