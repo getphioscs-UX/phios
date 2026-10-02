@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-PACKAGE-STATUS-v1.0.0",
   "version": "1.0.0",
-  "status": "PACKAGE_READY__NO_LIVE_SNAPSHOTS",
+  "status": "FIRST_LIVE_BACKBONE_COMPLETE__ENRICHMENT_PENDING",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
   "providerId": "MOOMOO_OPENAPI",
   "requestFamilies": [
@@ -9,9 +9,9 @@
       "requestId": "MOOMOO-US-HISTORY-KLINE-01",
       "capability": "HISTORY_KLINE",
       "plannedInstruments": 8,
-      "liveSnapshots": 0,
-      "observedInstruments": 0,
-      "state": "AUTH_REQUIRED_OR_NOT_RUN"
+      "liveSnapshots": 8,
+      "observedInstruments": 8,
+      "state": "SNAPSHOTS_COMPLETE_FOR_PLAN"
     },
     {
       "requestId": "MOOMOO-US-CAPITAL-FLOW-01",
@@ -48,14 +48,14 @@
       "VALUATION",
       "FINANCIAL_STATEMENTS"
     ],
-    "firstLiveBackboneComplete": false,
+    "firstLiveBackboneComplete": true,
     "fullPackageComplete": false,
-    "normalizedSnapshots": 0,
-    "w8aSourceCandidates": 0,
-    "providerClaimWorkOrders": 0,
+    "normalizedSnapshots": 8,
+    "w8aSourceCandidates": 8,
+    "providerClaimWorkOrders": 8,
     "providerClaims": 0,
     "cwaEvidence": 0,
     "w8ePromotions": 0
   },
-  "next": "Run the PKCE live import for HISTORY_KLINE, then rebuild this package."
+  "next": "Review provider source candidates and create bounded provider claims; do not auto-promote W8E."
 }
