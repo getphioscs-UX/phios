@@ -10,12 +10,20 @@ assert(r4.includes('PROFESSIONAL_ZIWEI_PERSONAL_READING'));
 assert(r4.includes('providerCalled'));
 assert(r4.includes('verificationAccepted'));
 assert(r4.includes('semanticReviewCalls'));
+assert(r4.includes('evaluateZiweiR4Editorial'));
+assert(r4.includes("'EDITORIAL_REJECTED'"));
+assert(r4.includes("'R4_LONG_FORM_TOO_THIN'"));
+assert(r4.includes("'R4_STAR_GLOSSARY_PATTERN'"));
 
 const writer=fs.readFileSync('functions/personal-reading/narrative/narrative-writer.js','utf8');
 assert(writer.includes("brief.methodId==='ZWR'"));
 assert(writer.includes('ZI WEI R4 PROFESSIONAL READING'));
 assert(writer.includes('not as a star glossary'));
 assert(writer.includes('semantic verifier'));
+
+const reviewBuilder=fs.readFileSync('scripts/build-ziwei-natural-composer-r4-review.mjs','utf8');
+assert(reviewBuilder.includes('ZIWEI_R4_OPENAI_API_KEY_REQUIRED'));
+assert(!reviewBuilder.includes('ZIWEI_R4_OPENAI_MODEL_REQUIRED'),'Canonical PAI registry must own model selection');
 
 const generation=fs.readFileSync('functions/report-delivery/ziwei-natural-composer-r4-generation.js','utf8');
 assert(generation.includes("generateZiweiProductionCandidate"));
