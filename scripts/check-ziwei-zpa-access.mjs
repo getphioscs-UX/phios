@@ -53,8 +53,12 @@ assert(publicationRenderer.includes('PHI-OS-REPORT-PRINT-SHELL-V2'),'Zi Wei cust
 assert(publicationRenderer.includes("fixed?['FIXED_A4']"),'Print Shell V2 must use one-pass fixed A4 verification');
 assert(publicationRenderer.includes('pub-page-background--section'),'Section masters must render as primary page backgrounds');
 const rendererBuild=fs.readFileSync('scripts/build-method-report-renderer.mjs','utf8');
-assert(rendererBuild.includes('ziwei-print-shell-v2.css'),'Private renderer build must include Zi Wei Print Shell V2');
+assert(rendererBuild.includes('report-print-shell-v2.css'),'Private renderer build must include shared Report Print Shell V2');
+assert(rendererBuild.includes('ziwei-print-shell-v2.css'),'Private renderer build must include the Zi Wei method skin');
 assert(!rendererBuild.includes("'report-publication.css'"),'Private Zi Wei renderer must not load the legacy cross-method publication CSS');
+const sharedPrintShell=fs.readFileSync('assets/customer-ui/surfaces/report-print-shell-v2.css','utf8');
+assert(sharedPrintShell.includes('210mm!important')&&sharedPrintShell.includes('297mm!important'),'Shared Print Shell V2 must own the single A4 physical contract');
+assert(!sharedPrintShell.includes('data-method="ZWR"'),'Shared Print Shell V2 must not encode Zi Wei method identity');
 const renderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
 assert(!renderer.includes('Page.printToPDF'),'Customer release renderer must not regenerate PDF in the hot path');
 assert(!renderer.includes('countChromiumPdfPages'),'Customer release renderer must not reparse Chromium PDF page trees');
