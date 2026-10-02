@@ -4,6 +4,7 @@ import puppeteer from '@cloudflare/puppeteer';
 import {Buffer} from 'node:buffer';
 let attempted=false;
 export default {async fetch(request,env){
+ if(env.PHIOS_ENVIRONMENT==='qa'&&request.method==='GET'&&new URL(request.url).pathname==='/status')return Response.json({observedAt:new Date().toISOString(),limits:await puppeteer.limits(env.BROWSER),history:(await puppeteer.history(env.BROWSER)).slice(0,5)},{headers:{'Cache-Control':'no-store'}});
  if(env.PHIOS_ENVIRONMENT!=='qa'||request.method!=='POST'||new URL(request.url).pathname!=='/diagnose')return new Response(null,{status:404});
  if(attempted)return Response.json({code:'DIAGNOSTIC_ALREADY_ATTEMPTED_NO_RETRY'},{status:409});
  attempted=true;
@@ -18,7 +19,7 @@ export default {async fetch(request,env){
   const response=await env.BROWSER.fetch(input,init);
   if(url.pathname==='/v1/devtools/browser'){
    evidence.acquisitionAttempts++;
-   evidence.upstream={endpointPath:url.pathname,method:init?.method??'GET',...await capture(response)};
+   evidence.upstream={endpointPath:url.pathname,method:init?.method??'GET',...(response.status===200?{status:200,statusText:response.statusText}:await capture(response))};
   }
   return response;
  }};
@@ -29,7 +30,7 @@ export default {async fetch(request,env){
   evidence.outcome='ACQUIRED_NO_429_REPRODUCED';
  }catch(error){evidence.outcome='ACQUISITION_BLOCKED';evidence.sdkError=String(error.message);}
  finally{
-  if(browser)await browser.close();
+  if(browser){await browser.close();evidence.browserExplicitlyClosed=true;}
   evidence.limitsAfter=await puppeteer.limits(env.BROWSER).catch(error=>({error:String(error.message)}));
  }
  return Response.json(evidence,{headers:{'Cache-Control':'no-store'}});

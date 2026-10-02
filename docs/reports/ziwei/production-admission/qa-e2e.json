@@ -10,8 +10,8 @@
   "personVersion": 1,
   "personLineageRef": "docs/reports/ziwei/production-admission/cpa-v1/qa-person-lineage.json",
   "entitlement": "VERIFIED_REAL_STRIPE_TEST_CHECKOUT_AND_WEBHOOK",
-  "blocker": "EXTERNAL_DAILY_BROWSER_TIME_QUOTA",
-  "generation": "ATTEMPTED_AUTHENTICATED_UI_NOT_RELEASED",
+  "blocker": "DEPLOYED_RENDER_CANCELED_AND_AUTH0_LOGOUT_CONFIGURATION",
+  "generation": "ATTEMPTED_ONCE_CANCELED_NO_RELEASE",
   "release": "NOT_PROVEN",
   "accountDelivery": "NOT_PROVEN",
   "productionDelivery": "NOT_RUN",
@@ -22,7 +22,14 @@
   "privateBrowserVerification": "NOT_PROVEN_LATEST_STREAM_FIX",
   "materialLineageRef": "docs/reports/ziwei/production-admission/cpa-v1/qa-material-lineage.json",
   "QA_REPORT_RELEASE": "NOT_PROVEN",
-  "externalBlocker": "EXTERNAL_DAILY_BROWSER_TIME_QUOTA",
+  "externalBlocker": "DEPLOYED_RENDER_WORKER_CPU_LIMIT",
   "quotaClassificationRef": "docs/reports/ziwei/production-admission/cpa-v1/cf-browser-429-classification.json",
-  "releaseFailed": false
+  "releaseFailed": false,
+  "ZIWEI_QA_REPORT_RELEASE": "NOT_PROVEN",
+  "ZIWEI_QA_ACCOUNT_DELIVERY": "NOT_PROVEN",
+  "browserReadiness": "PASS",
+  "readinessEvidence": "docs/reports/ziwei/production-admission/qa-browser-render.json",
+  "quotaBlockerResolved": true,
+  "currentDeliveryEvidence": "docs/reports/ziwei/production-admission/qa-release.json",
+  "auth0LogoutAllowlist": "USER_CONFIRMED_CONFIGURED_PENDING_RUNTIME_VERIFICATION"
 }

@@ -14,14 +14,34 @@
   "ZIWEI_LOCAL_ENTITLEMENT_NEGATIVE_TEST": "PASS",
   "ZIWEI_LOCAL_IMMUTABLE_SNAPSHOT": "PASS",
   "ZIWEI_LOCAL_ACCOUNT_DELIVERY": "PASS_CONTROLLED_SERVICE_ONLY",
-  "ZIWEI_CANONICAL_PERSON_BINDING": "NOT_BOUND_TO_DEPLOYED_OWNER",
+  "ZIWEI_CANONICAL_PERSON_BINDING": "IMPLEMENTED_AND_BOUND",
   "ZIWEI_QA_ACCOUNT_DELIVERY": "NOT_PROVEN",
   "ZIWEI_PRODUCTION_DELIVERY": "NOT_RUN",
   "ZIWEI_PRODUCTION_ADMISSION": "NOT_GRANTED",
   "ASTROLOGY_METHOD_REPORTS": "WAITING_FOR_ZIWEI_DELIVERY",
   "successorEditorialAcceptance": "NOT_GRANTED",
   "frozenR2AcceptanceUnaffected": true,
-  "npmCheck": "PASS",
+  "npmCheck": "NOT_RERUN_PENDING_QA_CHAIN",
+  "evidenceRoot": "docs/reports/ziwei/production-admission/zpa-v1",
+  "blockers": [
+    {
+      "code": "DEPLOYED_RENDER_WORKER_CPU_LIMIT",
+      "evidence": "docs/reports/ziwei/production-admission/cpa-v1/qa-render-resume-20261002.log"
+    },
+    {
+      "code": "ACCOUNT_ONE_RELEASE_AND_RELOGIN_REQUIRED_BEFORE_CROSS_ACCOUNT",
+      "evidence": "docs/reports/ziwei/production-admission/qa-access-control.json"
+    }
+  ],
+  "productionReleaseGranted": false,
+  "npmCheckExitCode": null,
+  "npmCheckIncludesPreAndPost": null,
+  "finalValidationRef": "docs/reports/ziwei/production-admission/zpa-v1/final-validation.json",
+  "ZIWEI_QA_REAL_ENTITLEMENT": "VERIFIED",
+  "ZIWEI_QA_REPORT_RELEASE": "NOT_PROVEN",
+  "currentDeliveryEvidence": "docs/reports/ziwei/production-admission/qa-release.json",
+  "browserReadiness": "PASS",
+  "npmCheckEvidenceScope": "Previously completed full lifecycle; no new full lifecycle before pending QA chain completes, per current user instruction.",
   "work": {
     "W0": "PASS_FROZEN_BASELINE",
     "W1": "PASS_ROOT_CAUSES_REPRODUCED",
@@ -45,23 +65,11 @@
     "W19": "NOT_RUN",
     "W20": "NOT_GRANTED"
   },
-  "evidenceRoot": "docs/reports/ziwei/production-admission/zpa-v1",
-  "blockers": [
-    {
-      "code": "CANONICAL_ACCOUNT_PERSON_OWNER_NOT_BOUND",
-      "detail": "Existing person-use-policy.js admits a supplied server record; no persisted account person loader was discovered in functions or db migrations. A new database or authentication owner is not introduced."
-    },
-    {
-      "code": "BLOCKED_BY_EXTERNAL_QA_SETUP",
-      "detail": "Canonical QA is unauthenticated; no reusable real account/person/paid Zi Wei entitlement lineage found. Seeded local SQL is only a policy test."
-    },
-    {
-      "code": "DEPLOYED_GENERATION_LIBRARY_INTEGRATION_NOT_PROVEN",
-      "detail": "Server dependency adapter is local, not a deployed generation route. W14-W18 need existing canonical person owner plus authenticated QA execution and library UI evidence."
-    }
-  ],
-  "productionReleaseGranted": false,
-  "npmCheckExitCode": 0,
-  "npmCheckIncludesPreAndPost": true,
-  "finalValidationRef": "docs/reports/ziwei/production-admission/zpa-v1/final-validation.json"
+  "workEvidenceScope": "Historical zpa-v1 work ledger; current delivery status is in currentDeliveryEvidence.",
+  "priorNpmCheck": {
+    "status": "PASS",
+    "exitCode": 0,
+    "includesPreAndPost": true,
+    "ref": "docs/reports/ziwei/production-admission/zpa-v1/final-validation.json"
+  }
 }
