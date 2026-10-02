@@ -10,13 +10,15 @@ const c=read('content/civilization-atlas/reconfiguration/moomoo-pkce-auth-helper
 ok(c.status==='EXECUTABLE_LOCAL_PKCE','CONTRACT');
 ok(c.pkceMethod==='S256'&&c.redirectUri==='http://localhost:60355/callback','PKCE_REDIRECT');
 ok(c.secretPersistence?.accessToken===false&&c.secretPersistence?.refreshToken===false&&c.secretPersistence?.codeVerifier===false,'SECRET_PERSISTENCE');
+ok(JSON.stringify(c.requestedScopes)==='["quote:read"]','MINIMUM_SCOPE');
+ok((c.forbiddenGrantedScopes||[]).includes('trade:write'),'TRADE_WRITE_FORBIDDEN');
 assertLoopbackRedirect(c.redirectUri);
 const verifier='A'.repeat(64);
 const challenge=pkceChallenge(verifier);
 ok(challenge.length>=43&&challenge.length<=128,'CHALLENGE_LENGTH');
-const u=buildAuthorizeUrl({clientId:'client-1',redirectUri:c.redirectUri,state:'state-1',codeChallenge:challenge});
+const u=buildAuthorizeUrl({clientId:'client-1',redirectUri:c.redirectUri,state:'state-1',codeChallenge:challenge,scope:'quote:read'});
 ok(u.startsWith('https://webapi.moomoo.com/oauth2/authorize/confirm?'),'AUTHORIZE_ENDPOINT');
-for(const q of ['client_id=client-1','code_challenge_method=S256','response_type=code','state=state-1'])ok(u.includes(q),'AUTHORIZE_QUERY_'+q);
+for(const q of ['client_id=client-1','code_challenge_method=S256','response_type=code','state=state-1','scope=quote%3Aread'])ok(u.includes(q),'AUTHORIZE_QUERY_'+q);
 const meta=sanitizeClientRegistration({client_id:'abc',client_id_issued_at:1,client_name:'x',redirect_uris:[c.redirectUri],pkce_required:true,registration_access_token:'DO_NOT_COPY'});
 ok(meta.clientId==='abc'&&!JSON.stringify(meta).includes('DO_NOT_COPY'),'REGISTRATION_SECRET_STRIPPED');
 const helper=text('scripts/run-moomoo-pkce-auth-helper.mjs');

@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 export const b64url=buf=>Buffer.from(buf).toString('base64url');
 export const randomToken=(bytes=32)=>b64url(crypto.randomBytes(bytes));
 export const pkceChallenge=verifier=>b64url(crypto.createHash('sha256').update(String(verifier),'utf8').digest());
-export function buildAuthorizeUrl({host='https://webapi.moomoo.com',clientId,redirectUri,state,codeChallenge}={}){
+export function buildAuthorizeUrl({host='https://webapi.moomoo.com',clientId,redirectUri,state,codeChallenge,scope='quote:read'}={}){
   if(!clientId||!redirectUri||!state||!codeChallenge)throw new Error('MOOMOO_PKCE_AUTHORIZE_INPUT_REQUIRED');
   const u=new URL('/oauth2/authorize/confirm',host);
   u.searchParams.set('client_id',clientId);
@@ -11,6 +11,7 @@ export function buildAuthorizeUrl({host='https://webapi.moomoo.com',clientId,red
   u.searchParams.set('redirect_uri',redirectUri);
   u.searchParams.set('response_type','code');
   u.searchParams.set('state',state);
+  if(scope)u.searchParams.set('scope',scope);
   return u.toString();
 }
 export function assertLoopbackRedirect(uri){

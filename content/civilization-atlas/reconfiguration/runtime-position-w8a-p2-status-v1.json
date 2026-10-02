@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-STATUS-v1.0.0",
-  "version": "1.5.0",
-  "status": "PKCE_AUTH_HELPER_WAIT_STATE_HARDENED__USER_AUTH_REQUIRED",
+  "version": "1.6.0",
+  "status": "PKCE_MINIMUM_SCOPE_REPAIR__USER_AUTH_REQUIRED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
   "completed": {
     "registeredProviders": 1,
@@ -24,8 +24,9 @@
     "packageClosureExecutable": true,
     "w8aProviderSourceHandoff": 0,
     "providerClaimWorkOrders": 0,
-    "pkceWaitStateHardened": true
+    "pkceWaitStateHardened": true,
+    "pkceMinimumScopeRequested": true
   },
-  "next": "Run npm run moomoo:pkce-live-import and do not run build commands while the helper shows WAITING_FOR_BROWSER_AUTHORIZATION. Complete the Moomoo browser authorization first.",
+  "next": "Pull the minimum-scope OAuth repair, delete the old local client metadata once, then rerun npm run moomoo:pkce-live-import. The authorization URL will explicitly request quote:read only.",
   "reviewHtml": "tools/review/PHI-OS-48-RUNTIME-POSITION-W8A-P2-MARKET-DATA-PROVIDER.html"
 }
