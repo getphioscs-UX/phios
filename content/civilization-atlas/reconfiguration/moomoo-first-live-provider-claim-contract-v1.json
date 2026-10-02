@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-LIVE-PROVIDER-CLAIM-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "EXECUTABLE_FROM_REAL_PROVIDER_SNAPSHOTS",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P3",
+  "providerId": "MOOMOO_OPENAPI",
+  "predecessorSnapshots": "content/civilization-atlas/reconfiguration/market-provider-snapshots-v1.json",
+  "predecessorSources": "content/civilization-atlas/reconfiguration/market-provider-w8a-source-handoff-v1.json",
+  "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8C",
+  "purpose": "Create source-bounded descriptive provider claim candidates from real normalized Moomoo snapshots without interpreting them as financial constraint, reconfiguration, continuity or runtime position evidence.",
+  "supportedCapabilities": [
+    "HISTORY_KLINE"
+  ],
+  "claimDesign": {
+    "oneClaimPerProviderSource": true,
+    "claimType": "GENERAL_CURRENT_FACT",
+    "supportLevel": "DIRECT",
+    "locatorType": "PROVIDER_SERIES_WINDOW",
+    "laneId": "PRESSURE_FIELD"
+  },
+  "rules": [
+    "Only normalized provider snapshots that already project to a W8A provider source candidate may be used.",
+    "Every claim must cite the provider sourceId, providerSnapshotId, response digest and explicit observation window.",
+    "Claims may report observation count and first/last observed values but may not characterize trend, causality, pressure, constraint, reconfiguration, persistence or continuity.",
+    "The last provider observation is not called current unless CWA freshness admission later allows it.",
+    "Provider claims remain NOT_EVALUATED_BY_CWA until W8C.",
+    "No provider claim may directly change W8E semantic-basis supportState."
+  ],
+  "boundaries": {
+    "investmentRecommendation": false,
+    "trendInterpretation": false,
+    "causality": false,
+    "cwaAdmission": false,
+    "rreExecution": false,
+    "w8ePromotion": false,
+    "runtimePositionCandidate": false
+  }
+}
