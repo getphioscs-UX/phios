@@ -1,9 +1,58 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D-P2-DERIVATION-READINESS-v1.0.0",
   "version": "1.0.0",
-  "status": "IDLE_NO_MERGED_READOUTS",
+  "status": "MERGED_RRE_READOUTS_EVALUATED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D-P2",
   "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2",
-  "records": [],
-  "boundary": "Merged readout readiness preserves 7 required lanes; multiple provider records in PRESSURE_FIELD do not create extra lanes."
+  "records": [
+    {
+      "dossierId": "DOSSIER-US",
+      "state": "REQUIRED_LANES_COMPLETE",
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-US-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "24583d2b49f99d8dcb054c1f50076945afcc01f8b7a9bbef7b2f9cc5d6ba9a8a"
+      },
+      "admittedLaneIds": [
+        "CARRIER_STRUCTURE",
+        "DEMOGRAPHY",
+        "EXTERNAL_DEPENDENCY",
+        "INDUSTRY",
+        "INFRASTRUCTURE",
+        "PRESSURE_FIELD",
+        "TECHNOLOGY"
+      ],
+      "requiredLaneIds": [
+        "DEMOGRAPHY",
+        "INDUSTRY",
+        "INFRASTRUCTURE",
+        "TECHNOLOGY",
+        "EXTERNAL_DEPENDENCY",
+        "CARRIER_STRUCTURE",
+        "PRESSURE_FIELD"
+      ],
+      "missingRequiredLanes": [],
+      "evidenceRefs": [
+        "MOOMOO-HISTORY-US-QQQ-7ed38bb436d6",
+        "MOOMOO-HISTORY-US-SPY-f159349bd998",
+        "MOOMOO-HISTORY-US-XLE-e2653235fef6",
+        "MOOMOO-HISTORY-US-XLF-4ffdd091ef10",
+        "MOOMOO-HISTORY-US-XLI-a06d1db8fb7e",
+        "MOOMOO-HISTORY-US-XLK-38b43e0def10",
+        "MOOMOO-HISTORY-US-XLV-eb3652f6f62f",
+        "MOOMOO-HISTORY-US-XLY-9731ca840f2a",
+        "US-CARRIER-STRUCTURE-2026-001",
+        "US-DEMOGRAPHY-2026-001",
+        "US-EXTERNAL-DEPENDENCY-2026-001",
+        "US-INDUSTRY-2026-001",
+        "US-INFRASTRUCTURE-2026-001",
+        "US-PRESSURE-FIELD-2026-001",
+        "US-TECHNOLOGY-2026-001"
+      ],
+      "positionCandidateCount": 0,
+      "humanDecision": "NOT_APPLICABLE",
+      "boundary": "This is readiness for the next derivation stage, not a runtime-position candidate."
+    }
+  ],
+  "boundary": "Merged readout readiness preserves required-lane identity; multiple evidence records in one lane do not create extra lanes."
 }

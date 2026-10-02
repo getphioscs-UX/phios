@@ -1,18 +1,98 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D-P2-STATUS-v1.0.0",
   "version": "1.0.0",
-  "status": "EXECUTOR_READY__LOCAL_PROVIDER_EVIDENCE_REQUIRED",
+  "status": "GOVERNED_MULTI_AUTHORITY_RRE_CONSUMED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D-P2",
   "completed": {
     "officialEvidence": 7,
-    "providerEvidence": 0,
-    "mergedEvidence": 0,
-    "distinctMergedLanes": 0,
-    "rreReadouts": 0,
-    "requiredLanesCompleteReadouts": 0,
+    "providerEvidence": 8,
+    "mergedEvidence": 15,
+    "distinctMergedLanes": 7,
+    "rreReadouts": 1,
+    "requiredLanesCompleteReadouts": 1,
     "baselineW8dMutated": 0,
     "runtimePositionCandidates": 0,
     "w8ePromotions": 0
   },
-  "next": "On the machine with admitted Moomoo provider evidence, run build:runtime-position-48:w8d:p2."
+  "authorityClasses": [
+    "GOVERNMENT",
+    "MARKET_DATA_PROVIDER",
+    "OFFICIAL_PRIMARY",
+    "REGULATOR"
+  ],
+  "laneComposition": {
+    "CARRIER_STRUCTURE": {
+      "evidenceCount": 1,
+      "authorityClasses": [
+        "GOVERNMENT"
+      ],
+      "claimIds": [
+        "US-CARRIER-STRUCTURE-2026-001"
+      ]
+    },
+    "DEMOGRAPHY": {
+      "evidenceCount": 1,
+      "authorityClasses": [
+        "OFFICIAL_PRIMARY"
+      ],
+      "claimIds": [
+        "US-DEMOGRAPHY-2026-001"
+      ]
+    },
+    "EXTERNAL_DEPENDENCY": {
+      "evidenceCount": 1,
+      "authorityClasses": [
+        "OFFICIAL_PRIMARY"
+      ],
+      "claimIds": [
+        "US-EXTERNAL-DEPENDENCY-2026-001"
+      ]
+    },
+    "INDUSTRY": {
+      "evidenceCount": 1,
+      "authorityClasses": [
+        "OFFICIAL_PRIMARY"
+      ],
+      "claimIds": [
+        "US-INDUSTRY-2026-001"
+      ]
+    },
+    "INFRASTRUCTURE": {
+      "evidenceCount": 1,
+      "authorityClasses": [
+        "OFFICIAL_PRIMARY"
+      ],
+      "claimIds": [
+        "US-INFRASTRUCTURE-2026-001"
+      ]
+    },
+    "PRESSURE_FIELD": {
+      "evidenceCount": 9,
+      "authorityClasses": [
+        "MARKET_DATA_PROVIDER",
+        "REGULATOR"
+      ],
+      "claimIds": [
+        "MOOMOO-HISTORY-US-QQQ-7ed38bb436d6",
+        "MOOMOO-HISTORY-US-SPY-f159349bd998",
+        "MOOMOO-HISTORY-US-XLE-e2653235fef6",
+        "MOOMOO-HISTORY-US-XLF-4ffdd091ef10",
+        "MOOMOO-HISTORY-US-XLI-a06d1db8fb7e",
+        "MOOMOO-HISTORY-US-XLK-38b43e0def10",
+        "MOOMOO-HISTORY-US-XLV-eb3652f6f62f",
+        "MOOMOO-HISTORY-US-XLY-9731ca840f2a",
+        "US-PRESSURE-FIELD-2026-001"
+      ]
+    },
+    "TECHNOLOGY": {
+      "evidenceCount": 1,
+      "authorityClasses": [
+        "OFFICIAL_PRIMARY"
+      ],
+      "claimIds": [
+        "US-TECHNOLOGY-2026-001"
+      ]
+    }
+  },
+  "next": "Use the separate W8D-P2 enriched readout for a governed W8E-P2 semantic-basis reassessment. Do not mutate the original W8E basis automatically."
 }
