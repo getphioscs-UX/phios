@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-MARKET-DATA-PROVIDER-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_PROVIDER_EXPANSION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
+  "title": "Market Data Provider Expansion",
+  "purpose": "Admit governed market-data providers as source-candidate producers for evidence gaps without allowing provider payloads to bypass claim extraction or Current Web Authority.",
+  "authorityClass": "MARKET_DATA_PROVIDER",
+  "cwaDomain": "FINANCIAL_MARKETS",
+  "predecessorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P1",
+  "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8B",
+  "stages": [
+    "PROVIDER_REGISTRY",
+    "AUTH_CONFIGURATION",
+    "PROVIDER_REQUEST",
+    "RAW_RESPONSE_DIGEST",
+    "NORMALIZED_PROVIDER_SNAPSHOT",
+    "W8A_SOURCE_CANDIDATE_HANDOFF"
+  ],
+  "rules": [
+    "Provider payload is never Current Evidence IR by itself.",
+    "Every provider record must retain providerId, capability, request parameters, retrievedAt and response digest.",
+    "Secrets, access tokens, refresh tokens, API keys and account credentials must never be persisted in provider snapshot files.",
+    "Moomoo market data is classified as MARKET_DATA_PROVIDER and is not promoted to OFFICIAL_PRIMARY.",
+    "Price, volume, order-book, flow, valuation and market-series claims belong to FINANCIAL_MARKETS CWA review.",
+    "Official filings, regulators, exchanges and official company disclosures retain higher authority for formal corporate or regulatory facts.",
+    "Provider-derived claims still pass W8B locator/lineage validation and W8C authority/freshness admission.",
+    "No provider call may directly change W8E grammar/domain support state."
+  ],
+  "boundaries": {
+    "providerPayloadIsFact": false,
+    "providerPayloadIsEvidence": false,
+    "providerSnapshotIsCurrentData": false,
+    "financialRecommendationAllowed": false,
+    "tradingActionAllowed": false,
+    "credentialsPersisted": false,
+    "autoClaimGenerationAllowed": false,
+    "autoW8ePromotionAllowed": false
+  },
+  "failClosed": true
+}
