@@ -1,21 +1,84 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-import {spawnSync} from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-// Git deployment uploads tracked repository assets. Check those before Worker
-// compilation; untracked local QA captures are not part of a Git deployment.
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const result=spawnSync(process.env.PHIOS_GIT_BIN||'git',['ls-files','-z'],{cwd:root,encoding:'utf8',maxBuffer:64*1024*1024});
-if(result.error||result.status!==0)throw result.error||new Error('Cannot enumerate Git deployment assets');
-const ignored=new Set(['functions','node_modules','.git','.wrangler']);
-const failures=[];let checked=0;
-for(const file of result.stdout.split('\0').filter(Boolean)){
-  const absolute=path.join(root,file);
-  if(ignored.has(file.split('/')[0])||!fs.existsSync(absolute))continue;
-  const stat=fs.statSync(absolute);if(!stat.isFile())continue;
-  checked++;
-  if(stat.size>25*1024*1024)failures.push(`${file}: ${(stat.size/1024/1024).toFixed(2)} MiB`);
+const root = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '..'
+);
+
+const output = path.join(root, '.pages-output');
+const MAX_FILE_SIZE = 25 * 1024 * 1024;
+
+const forbidden = new Set([
+  'content/civilization-atlas/reconfiguration/market-provider-intake-v1.json',
+  'content/civilization-atlas/reconfiguration/market-provider-snapshots-v1.json'
+]);
+
+if (!fs.existsSync(output)) {
+  throw new Error(
+    'PAGES_STATIC_ASSETS: .pages-output does not exist. Run npm run build:pages first.'
+  );
 }
-if(failures.length)throw new Error(`Pages static assets exceed 25 MiB:\n${failures.join('\n')}`);
-console.log(`PASS Pages static asset size: ${checked} tracked files, none exceeds 25 MiB.`);
+
+const files = [];
+
+function walk(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const absolute = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      walk(absolute);
+      continue;
+    }
+
+    if (entry.isFile()) {
+      files.push(absolute);
+    }
+  }
+}
+
+walk(output);
+
+const failures = [];
+
+for (const absolute of files) {
+  const rel = path
+    .relative(output, absolute)
+    .replaceAll('\\', '/');
+
+  const size = fs.statSync(absolute).size;
+
+  if (size > MAX_FILE_SIZE) {
+    failures.push(
+      `${rel}: ${(size / 1024 / 1024).toFixed(2)} MiB`
+    );
+  }
+
+  if (forbidden.has(rel)) {
+    failures.push(
+      `${rel}: governed runtime evidence leaked into Pages assets`
+    );
+  }
+}
+
+for (const required of [
+  'index.html',
+  '_worker.js',
+  '_routes.json'
+]) {
+  if (!fs.existsSync(path.join(output, required))) {
+    failures.push(`${required}: missing`);
+  }
+}
+
+if (failures.length) {
+  throw new Error(
+    `Pages publication boundary failed:\n${failures.join('\n')}`
+  );
+}
+
+console.log(
+  `PASS Pages publication boundary: ${files.length} files; ` +
+  `no asset exceeds 25 MiB; provider runtime payloads excluded.`
+);
