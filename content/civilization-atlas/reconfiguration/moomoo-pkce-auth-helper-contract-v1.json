@@ -1,6 +1,6 @@
 {
   "schemaVersion": "PHI-OS-MOOMOO-PKCE-AUTH-HELPER-CONTRACT-v1.0.0",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "status": "EXECUTABLE_LOCAL_PKCE",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P2A",
   "providerId": "MOOMOO_OPENAPI",
@@ -43,8 +43,9 @@
     "The callback listener must be confirmed listening before the authorization page is opened.",
     "On Windows, browser launch uses PowerShell Start-Process so ampersands in the OAuth query string are not interpreted by cmd.exe.",
     "The helper must print WAITING_FOR_BROWSER_AUTHORIZATION and remain alive until callback, timeout or explicit authorization failure.",
-    "Authorization URL explicitly requests the minimum scope quote:read.",
-    "Token exchange must return quote:read; a token containing trade:write is rejected by this helper."
+    "The authorization URL must match the six query parameters documented by Moomoo exactly; scope is selected on the Moomoo authorization page and is not injected into the authorize URL.",
+    "After token exchange, quote:read must be present and trade:write must be absent before the live quote import proceeds.",
+    "A redacted local diagnostic must verify required parameter presence, endpoint, fixed values and lengths without printing OAuth secrets."
   ],
   "boundaries": {
     "tokenPrinted": false,
@@ -54,10 +55,12 @@
     "tradingAllowed": false,
     "liveImportMayRunOnlyAfterStateValidation": true
   },
-  "requestedScopes": [
-    "quote:read"
-  ],
-  "forbiddenGrantedScopes": [
-    "trade:write"
+  "authorizeQueryParameters": [
+    "client_id",
+    "code_challenge",
+    "code_challenge_method",
+    "redirect_uri",
+    "response_type",
+    "state"
   ]
 }

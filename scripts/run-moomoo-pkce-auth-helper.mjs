@@ -10,7 +10,6 @@ const authDir=path.join(root,'.moomoo-auth');
 const clientFile=path.join(authDir,'client.json');
 const host='https://webapi.moomoo.com';
 const redirectUri='http://localhost:60355/callback';
-const requestedScope='quote:read';
 assertLoopbackRedirect(redirectUri);
 
 const safeJson=async res=>{const t=await res.text();try{return JSON.parse(t);}catch{throw new Error('MOOMOO_OAUTH_NON_JSON_RESPONSE:HTTP_'+res.status);}};
@@ -121,11 +120,11 @@ const state=randomToken(32);
 const verifier=randomToken(64);
 const challenge=pkceChallenge(verifier);
 const client=await registerClient();
-const authorizeUrl=buildAuthorizeUrl({host,clientId:client.clientId,redirectUri,state,codeChallenge:challenge,scope:requestedScope});
+const authorizeUrl=buildAuthorizeUrl({host,clientId:client.clientId,redirectUri,state,codeChallenge:challenge});
 console.log('Moomoo OAuth helper ready. Client source: '+client.source);
 const callbackServer=await startCallbackServer(state);
 console.log('OAuth callback listener ready: http://127.0.0.1:60355/callback');
-console.log('Opening the Moomoo authorization page in your browser. Requested OAuth scope: quote:read only. Do not grant trade execution.');
+console.log('Opening the Moomoo authorization page using the exact six documented OAuth query parameters. Select only the permissions you need; trade execution is not required for this import.');
 try{
   await openBrowser(authorizeUrl);
 }catch(e){
@@ -140,6 +139,6 @@ const token=await exchangeCode({code,clientId:client.clientId,verifier});
 const grantedScopes=String(token.scope||'').split(/\s+/).filter(Boolean);
 if(!grantedScopes.includes('quote:read'))throw new Error('MOOMOO_OAUTH_SCOPE_MISSING_QUOTE_READ');
 if(grantedScopes.includes('trade:write'))throw new Error('MOOMOO_OAUTH_OVERBROAD_SCOPE_TRADE_WRITE');
-console.log('Access token received in memory with quote:read scope. Starting governed HISTORY_KLINE live import...');
+console.log('Access token received in memory. Granted scope includes quote:read and excludes trade:write. Starting governed HISTORY_KLINE live import...');
 await runLiveImport(token.access_token);
 console.log('PKCE session complete. Access/refresh tokens were not persisted or printed.');
