@@ -46,6 +46,8 @@ assert.notEqual(newGeneration.snapshot.inputFingerprint,original.snapshot.inputF
 assert.deepEqual(await openControlledZiweiReport(context,args,{loadSubject}),original);
 const results={scope:'LOCAL_EXISTING_POLICY_AND_SQL_ONLY',canonicalPersonLoader:'SERVER_DEPENDENCY_NOT_BOUND_TO_DEPLOYED_OWNER',accessTests:negatives,birthChange:{oldReleaseUnchanged:true,newSnapshotVersionRequired:true,oldVersion:original.snapshot.semanticSnapshotId,newVersion:newGeneration.snapshot.semanticSnapshotId},qaAccountDelivery:'NOT_PROVEN',productionVerification:'NOT_RUN'};
 fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'/zpa-access-current.json',JSON.stringify({...results,predecessorEvidence:frozenDir+'/person-access.json',successorScope:'CURRENT_CHECK_EVIDENCE_ONLY'},null,2)+'\n');
+const accountReportApi=fs.readFileSync('functions/api/account-method-reports.js','utf8');
+assert(accountReportApi.includes('https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev'),'Released report CSP must allow the governed public R2 report asset origin');
 const renderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
 assert(!renderer.includes('Page.printToPDF'),'Customer release renderer must not regenerate PDF in the hot path');
 assert(!renderer.includes('countChromiumPdfPages'),'Customer release renderer must not reparse Chromium PDF page trees');
