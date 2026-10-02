@@ -1,8 +1,20 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P4-HUMAN-DECISION-v1.0.0",
   "version": "1.0.0",
-  "status": "PENDING_HUMAN_REVIEW",
+  "status": "HUMAN_ACCEPTED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P4",
-  "decisions": [],
-  "boundary": "No candidate is admitted until an explicit ACCEPT/REJECT decision is recorded."
+  "decisions": [
+    {
+      "candidateId": "US-W8E-P3-SELECTED-ISSUER-CONTINUITY",
+      "decision": "ACCEPT",
+      "decidedAt": "2026-10-02T10:40:00.000Z",
+      "reviewerRole": "OWNER_HUMAN_REVIEW",
+      "acceptedScope": "SUBSYSTEM",
+      "acceptedSubsystem": "SELECTED_ISSUER_OPERATING_CONTINUITY",
+      "grammarId": "G16",
+      "realityDomainId": "P3",
+      "notes": "Owner ACCEPT W8E-P4. Acceptance is bounded to the selected-issuer subsystem continuity candidate only. It does not promote DOSSIER-US global continuity and does not create an RP position."
+    }
+  ],
+  "boundary": "Human ACCEPT is bounded to US-W8E-P3-SELECTED-ISSUER-CONTINUITY as a SUBSYSTEM G16+P3 candidate only; no DOSSIER-US global promotion and no RP admission."
 }
