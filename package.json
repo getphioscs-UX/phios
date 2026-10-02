@@ -2686,7 +2686,8 @@
     "moomoo:pkce-gap-closure": "node scripts/run-moomoo-pkce-auth-helper.mjs gap-closure",
     "check:runtime-position-48:w8e:p2:gap-closure": "node scripts/check-runtime-position-48-w8e-p2-gap-closure.mjs",
     "build:runtime-position-48:w8e:p3": "node scripts/run-runtime-position-48-w8e-p3-mechanism-analysis.mjs",
-    "check:runtime-position-48:w8e:p3": "node scripts/check-runtime-position-48-w8e-p3.mjs"
+    "check:runtime-position-48:w8e:p3": "node scripts/check-runtime-position-48-w8e-p3.mjs",
+    "repair:moomoo:provider-metadata": "npm run build:runtime-position-48:w8a:p2 && npm run build:moomoo:first-data-package && npm run build:moomoo:provider-claims && npm run build:moomoo:w8c-admission && npm run build:runtime-position-48:w8d:p2 && npm run build:runtime-position-48:w8e:p3"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

@@ -47,9 +47,21 @@ for(const req of plan.requests.filter(x=>(plan.gapClosureExecutableRequestIds||[
   } else if(req.capability==='REVENUE_BREAKDOWN'){
     for(const symbol of req.instruments){
       try{
-        const u=new URL('/api/v1.0/quote/'+encodeURIComponent(symbol)+'/financials/revenue-breakdown',host);
-        const body=await fetchJson(u);
-        payloads.push({payloadId:req.requestId+'-'+symbol.replace('.','-')+'-'+runAt.replace(/[:.]/g,'-'),providerId:'MOOMOO_OPENAPI',capability:'REVENUE_BREAKDOWN',retrievedAt:runAt,request:{market:'US',symbols:[symbol],date:0,financialType:0},rawResponse:body,normalizedRecords:normalizeRevenueBreakdown({symbol,response:body})});
+        const latestUrl=new URL('/api/v1.0/quote/'+encodeURIComponent(symbol)+'/financials/revenue-breakdown',host);
+        const latest=await fetchJson(latestUrl);
+        const candidates=(latest?.data?.screen_date_list||[]).filter(x=>x?.date).slice(0,8);
+        const pages=[latest];
+        const seen=new Set([String((latest?.data?.screen_date_list||[])[0]?.date||'0')]);
+        for(const p of candidates){
+          if(seen.has(String(p.date)))continue;
+          const u=new URL('/api/v1.0/quote/'+encodeURIComponent(symbol)+'/financials/revenue-breakdown',host);
+          u.searchParams.set('date',String(p.date));
+          if(p.financial_type!=null)u.searchParams.set('financial_type',String(p.financial_type));
+          const body=await fetchJson(u);
+          pages.push(body);seen.add(String(p.date));
+        }
+        const rawResponse={pages};
+        payloads.push({payloadId:req.requestId+'-'+symbol.replace('.','-')+'-'+runAt.replace(/[:.]/g,'-'),providerId:'MOOMOO_OPENAPI',capability:'REVENUE_BREAKDOWN',retrievedAt:runAt,request:{market:'US',symbols:[symbol],historicalPeriodsRequested:pages.length},rawResponse,normalizedRecords:normalizeRevenueBreakdown({symbol,response:rawResponse})});
       }catch(e){failures.push({requestId:req.requestId,symbol,error:String(e.message)});}
     }
   }

@@ -32,13 +32,18 @@ export function normalizeFinancials({symbol,response,statementType}={}){
   return out;
 }
 export function normalizeRevenueBreakdown({symbol,response}={}){
-  const d=response?.data||{};
-  const stamp=(d.screen_date_list||[])[0]?.date?toIsoSec((d.screen_date_list||[])[0].date):null;
+  const responses=Array.isArray(response?.pages)?response.pages:[response];
   const out=[];
-  for(const group of d.breakdown_list||[]){
-    for(const item of group.item_list||[]){
-      if(item.main_oper_income!=null)out.push({fieldPath:'data.breakdown_list[type='+group.type+'].item_list['+item.name+'].main_oper_income',instrument:symbol,timestamp:stamp,value:val(item.main_oper_income),unit:d.currency_code||'currency',meta:{breakdownType:group.type,itemName:item.name,period:d.period}});
-      if(item.ratio!=null)out.push({fieldPath:'data.breakdown_list[type='+group.type+'].item_list['+item.name+'].ratio',instrument:symbol,timestamp:stamp,value:val(item.ratio),unit:'percent',meta:{breakdownType:group.type,itemName:item.name,period:d.period}});
+  for(const page of responses){
+    const d=page?.data||{};
+    const screen=(d.screen_date_list||[]).find(x=>x.period_text===d.period)||(d.screen_date_list||[])[0]||null;
+    const stamp=screen?.date?toIsoSec(screen.date):null;
+    for(const group of d.breakdown_list||[]){
+      for(const item of group.item_list||[]){
+        const meta={breakdownType:group.type,itemName:item.name,period:d.period||screen?.period_text||null,financialType:screen?.financial_type??null,currencyCode:d.currency_code||null};
+        if(item.main_oper_income!=null)out.push({fieldPath:'data.breakdown_list[type='+group.type+'].item_list['+item.name+'].main_oper_income',instrument:symbol,timestamp:stamp,value:val(item.main_oper_income),unit:d.currency_code||'currency',meta});
+        if(item.ratio!=null)out.push({fieldPath:'data.breakdown_list[type='+group.type+'].item_list['+item.name+'].ratio',instrument:symbol,timestamp:stamp,value:val(item.ratio),unit:'percent',meta});
+      }
     }
   }
   return out;

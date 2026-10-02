@@ -31,7 +31,8 @@ export function normalizeMarketProviderPayload({payload,registry}={}){
     instrument:String(row.instrument||'').trim(),
     timestamp:row.timestamp||null,
     value:row.value,
-    unit:row.unit||null
+    unit:row.unit||null,
+    meta:row.meta&&typeof row.meta==='object'?stable(row.meta):null
   })):[];
   if(records.some(x=>!x.fieldPath||!x.instrument))return {record:null,rejected:{payloadId:payload?.payloadId||null,reasons:['NORMALIZED_LINEAGE_REQUIRED']}};
   return {record:{
