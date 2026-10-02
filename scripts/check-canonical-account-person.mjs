@@ -79,6 +79,13 @@ await denied('revoked consent cannot generate',()=>generateAccountZiweiCandidate
 await denied('revoked consent follows existing open policy',()=>openControlledZiweiReport(a,args,{loadSubject:loader}));
 sqlite.prepare('UPDATE account_person_versions SET ciphertext=? WHERE person_id=?').run('tampered',q.personId);
 await denied('tampered ciphertext',()=>loadCanonicalPerson(env,'LOCAL-CPA-B',q.personId));
+const accountPersonUi=fs.readFileSync('assets/customer-ui/js/surfaces/account-persons.js','utf8');
+assert(accountPersonUi.includes('/api/location-search'),'Birth profile UI must use governed place search');
+assert(accountPersonUi.includes('locationProviderRef'),'Birth profile UI must submit a governed location reference');
+for(const forbidden of ["name=\"latitude\"","name=\"longitude\"","name=\"timezone\"","name=\"offset\"","name=\"country\""])assert(!accountPersonUi.includes(forbidden),'Technical birth field leaked into customer intake: '+forbidden);
+const canonicalPersonSource=fs.readFileSync('functions/account/canonical-person-store.js','utf8');
+assert(canonicalPersonSource.includes('resolveBirthPlace'),'Canonical person owner must resolve selected birth places server-side');
+assert(canonicalPersonSource.includes("source:'GOVERNED_RESOLUTION'"),'Resolved timezone authority must remain governed');
 const dir='docs/reports/ziwei/production-admission/cpa-v1';fs.mkdirSync(dir,{recursive:true});
 fs.writeFileSync(dir+'/local-person-proof.json',JSON.stringify({scope:'LOCAL_REAL_SQL_AND_CALCULATION_ONLY',canonicalPersonOwner:'IMPLEMENTED_AND_BOUND_LOCAL',encryptedAtRest:true,methodIndependent:true,subjectBinding:'PASS',birthVersioning:'PASS',oldReleasedMaterialUnchanged:true,tests,qaAccountDelivery:'NOT_PROVEN',realStripeEntitlement:'NOT_PROVEN',renderReceipt:'LOCAL_POLICY_FIXTURE_NOT_DEPLOYED_BROWSER_PROOF',productionDelivery:'NOT_RUN',sourceHashes:Object.fromEntries(['functions/account/canonical-person-store.js','functions/api/account-persons.js','functions/report-delivery/ziwei-canonical-person-binding.js','db/migrations/0009_canonical_account_person.sql'].map(path=>[path,createHash('sha256').update(fs.readFileSync(path)).digest('hex')]))},null,2)+'\n');
 sqlite.close();console.log('PASS canonical account person: real SQL, real Zi Wei calculation, owner isolation, encryption, consent, birth versioning, immutable local release. QA not claimed.');
