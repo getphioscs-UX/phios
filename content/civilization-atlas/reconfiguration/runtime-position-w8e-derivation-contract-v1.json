@@ -1,6 +1,6 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-DERIVATION-CONTRACT-v1.0.0",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "ACTIVE_GRAMMAR_DOMAIN_DERIVATION",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E",
   "title": "Grammar + Reality Domain Derivation",
@@ -14,7 +14,8 @@
   "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8F",
   "stages": [
     "DERIVATION_WORK_ORDER",
-    "SEMANTIC_BASIS_INTAKE",
+    "SEMANTIC_BASIS_SOURCE",
+    "W8D_READOUT_BINDING",
     "GRAMMAR_SUPPORT_VALIDATION",
     "DOMAIN_SUPPORT_VALIDATION",
     "GRAMMAR_DOMAIN_CANDIDATE",
@@ -47,11 +48,14 @@
     "grammarId must cite the canonical stable definition and evidence refs that directly support that definition.",
     "realityDomainId must satisfy its operational evidence test using cited evidence; currentness alone never implies P2.",
     "Every evidenceRef must belong to the W8D readout evidenceRefs for the same dossier.",
-    "The submitted readoutReference must exactly match the W8D readout reference for the dossier.",
     "A dossier may have multiple subsystem candidates; no single global candidate is forced.",
     "Grammar/domain candidate generation does not equal runtime-position candidate generation.",
     "Historical RP-44 or any source-window reference cannot determine a current grammar/domain candidate.",
-    "INSUFFICIENT_EVIDENCE and CONFLICTED remain governed outputs."
+    "INSUFFICIENT_EVIDENCE and CONFLICTED remain governed outputs.",
+    "Semantic basis is stored independently of a W8D digest and is bound at build time to the exact current W8D readoutReference for the same dossier.",
+    "Every semantic-basis evidenceRef must already exist as CWA-admitted current evidence for the same dossier before W8D binding.",
+    "EVIDENCE_READY semantic basis requires at least two distinct admitted evidence references; one-source interpretations stay insufficient unless a later contract explicitly allows a narrower exception.",
+    "The build-time bound readoutReference must exactly match the W8D readout reference for the dossier."
   ],
   "boundaries": {
     "positionIdCreated": false,
@@ -61,5 +65,6 @@
     "historicalPrecedentDeterminative": false,
     "autoPopulateDossiersAllowed": false
   },
-  "failClosed": true
+  "failClosed": true,
+  "semanticBasisSource": "content/civilization-atlas/reconfiguration/runtime-position-w8e-semantic-basis-v1.json"
 }
