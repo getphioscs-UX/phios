@@ -37,6 +37,10 @@ ok(crosswalk.w8b?.mutatesW8EvidenceBatches===false,'CROSSWALK_MUTATION');
 ok(manifest.registryRefs?.runtimePositionW8bClaimIntake==='content/civilization-atlas/reconfiguration/runtime-position-w8b-claim-intake-v1.json','MANIFEST_INTAKE');
 const runner=text('scripts/run-runtime-position-48-w8b-claim-extraction.mjs');
 ok(!runner.includes("write('content/civilization-atlas/reconfiguration/runtime-position-w8-evidence-batches-v1.json'"),'RUNNER_WRITES_W8_BATCH');
+const reviewHtml=text('tools/review/PHI-OS-48-RUNTIME-POSITION-W8B-CLAIM-EXTRACTION.html');
+ok(reviewHtml.includes('<strong>Sources:</strong> '+(sources.records||[]).length),'REVIEW_HTML_SOURCE_COUNT');
+ok(reviewHtml.includes('<strong>Work orders:</strong> '+(work.workOrders||[]).length),'REVIEW_HTML_WORK_ORDER_COUNT');
+ok(reviewHtml.includes('<strong>Validated claims:</strong> '+(validated.records||[]).length),'REVIEW_HTML_CLAIM_COUNT');
 const pkg=text('package.json');
 ok(pkg.includes('"build:runtime-position-48:w8b"')&&pkg.includes('"check:runtime-position-48:w8b"'),'PACKAGE');
 
