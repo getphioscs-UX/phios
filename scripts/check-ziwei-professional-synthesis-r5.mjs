@@ -45,7 +45,6 @@ for(const locale of ['zh-Hans','en']){
  assert.equal(report.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,12);
  assert(report.pages.every(p=>p.editorialVersion===ZIWEI_PROFESSIONAL_SYNTHESIS_R5_VERSION));
 }
-const writer=fs.readFileSync('functions/personal-reading/narrative/narrative-writer.js','utf8');
 assert(writer.includes("r5StructuralReject=brief.styleIntent?.methodStyleProfile==='ZIWEI_PROFESSIONAL_SYNTHESIS_R5'&&semanticReviewCalls===0"),'R5 structural reject must not trigger paid repair');
 
 const review=fs.readFileSync('scripts/build-ziwei-professional-synthesis-r5-review.mjs','utf8');
