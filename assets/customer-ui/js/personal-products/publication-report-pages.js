@@ -53,7 +53,7 @@ export function renderPublicationReport(snapshot){
   ${p.observation||p.counterSignal?`<aside class="pub-reflection"><h3>${t('Bring it into experience','把读取带回经验')}</h3>${p.observation?`<p>${esc(p.observation)}</p>`:''}${p.counterSignal?`<p>${esc(p.counterSignal)}</p>`:''}</aside>`:''}
   <p class="pub-boundary">${esc(p.boundary)}</p><footer class="pub-footer"><span>${t('Your life, in context.','在情境中理解你的人生。')}</span>${renderGlobalReportPagination(p.pageNumber,totalPages)}</footer></section>`;
  }).join('');
- return `<article class="pub-report" lang="${locale}" data-publication-version="2.0.0" data-method="${methodId}"${methodId==='ZWR'?' data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"':''}${snapshot.physicalComposition?` data-physical-composition="${esc(snapshot.physicalComposition.version)}"`:''}>${intro}${pages}</article>`;
+ return `<article class="pub-report" lang="${locale}" data-publication-version="2.0.0" data-method="${methodId}"${['ZWR','BZR'].includes(methodId)?' data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"':''}${snapshot.physicalComposition?` data-physical-composition="${esc(snapshot.physicalComposition.version)}"`:''}>${intro}${pages}</article>`;
 }
 
 function renderCompositionContent(p){
@@ -63,10 +63,10 @@ function renderCompositionContent(p){
 
 function decorativeLayers(p){
  const binding=p.visualBinding||{},opener=p.pageFamily==='SECTION_OPENER_PAGE';
- if(binding.backgroundMode==='SECTION_MASTER_FULL_BLEED'&&binding.url){
+ if(opener&&['SECTION_MASTER_FULL_BLEED','METHOD_PRINT_SHELL_V2'].includes(binding.backgroundMode)&&binding.url){
   return `<div class="pub-decoration pub-decoration--single" aria-hidden="true"><img class="pub-page-background pub-page-background--section" data-required-decoration="true" data-fallback-sources="${esc(JSON.stringify(binding.candidates||[binding.url]))}" src="${esc(binding.url)}" alt=""></div>`;
  }
- if(binding.backgroundMode==='READING_PAGE_DECORATION'&&binding.bodyUrl){
+ if(!opener&&['READING_PAGE_DECORATION','METHOD_PRINT_SHELL_V2'].includes(binding.backgroundMode)&&binding.bodyUrl){
   return `<div class="pub-decoration pub-decoration--single" aria-hidden="true"><img class="pub-page-background pub-page-background--body" data-required-decoration="true" src="${esc(binding.bodyUrl)}" alt=""></div>`;
  }
  const urls=[[0,binding.bodyUrl],[1,binding.motifUrl],[2,opener?binding.url:null]].filter(([,url])=>url);
