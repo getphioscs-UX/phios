@@ -8,7 +8,6 @@ const fixture=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admissio
 const registry=JSON.parse(fs.readFileSync('content/ai-economics/providers/ai-provider-cost-registry-v1.json','utf8'));
 const env={OPENAI_API_KEY:process.env.OPENAI_API_KEY,OPENAI_NARRATIVE_MODEL:process.env.OPENAI_NARRATIVE_MODEL||process.env.OPENAI_MODEL,OPENAI_MODEL:process.env.OPENAI_MODEL};
 if(!env.OPENAI_API_KEY)throw Error('ZIWEI_R4_OPENAI_API_KEY_REQUIRED');
-if(!env.OPENAI_NARRATIVE_MODEL&&!env.OPENAI_MODEL)throw Error('ZIWEI_R4_OPENAI_MODEL_REQUIRED');
 
 const css=[
  'assets/customer-ui/surfaces/report-print-shell-v2.css',
