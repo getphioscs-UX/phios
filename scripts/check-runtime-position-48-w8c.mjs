@@ -20,6 +20,12 @@ const status=read('content/civilization-atlas/reconfiguration/runtime-position-w
 const crosswalk=read('content/registry/runtime-position-48-crosswalk-v1.json');
 const manifest=read('content/civilization-atlas/reconfiguration/atlas-manifest-v2.json');
 const w8Before=read('content/civilization-atlas/reconfiguration/runtime-position-w8-evidence-batches-v1.json');
+const conflictMarker=/<<<<<<<|=======|>>>>>>>/;
+for(const rel of [
+  'content/civilization-atlas/reconfiguration/runtime-position-w8c-admission-results-v1.json',
+  'content/civilization-atlas/reconfiguration/runtime-position-w8c-status-v1.json',
+  'tools/review/PHI-OS-48-RUNTIME-POSITION-W8C-CWA-ADMISSION.html'
+]) ok(!conflictMarker.test(text(rel)),'MERGE_CONFLICT_MARKER_'+rel);
 
 ok(contract.status==='ACTIVE_CURRENT_WEB_AUTHORITY_ADMISSION','CONTRACT');
 ok(contract.boundaries?.authorityHintIsDecision===false,'HINT_BOUNDARY');
