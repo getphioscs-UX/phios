@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {buildMechanismAnalysis} from './lib/civilization-atlas/runtime-position-w8e-p3-mechanism-analysis-v1.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
+const write=(rel,v)=>fs.writeFileSync(path.join(root,rel),JSON.stringify(v,null,2)+'\n');
+const contract=read('content/civilization-atlas/reconfiguration/runtime-position-w8e-p3-mechanism-analysis-contract-v1.json');
+const snapshots=read('content/civilization-atlas/reconfiguration/market-provider-snapshots-v1.json');
+const provider=read('content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json');
+const official=read('content/civilization-atlas/reconfiguration/runtime-position-w8c-rre-eligible-handoff-v1.json');
+const out=buildMechanismAnalysis({snapshots,providerEvidence:provider,officialEvidence:official,thresholds:contract.thresholds});
+write('content/civilization-atlas/reconfiguration/runtime-position-w8e-p3-derived-mechanisms-v1.json',{schemaVersion:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P3-DERIVED-MECHANISMS-v1.0.0',version:'1.0.0',status:'MECHANISM_ANALYSIS_COMPLETE',work:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P3',admittedProviderSnapshotCount:out.admittedProviderSnapshotCount,records:out.records,subsystemCandidates:out.subsystemCandidates,boundary:'Derived mechanisms are analytical products over admitted evidence lineage. They are not source facts, CWA evidence or RP candidates.'});
+write('content/civilization-atlas/reconfiguration/runtime-position-w8e-p3-status-v1.json',{schemaVersion:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P3-STATUS-v1.0.0',version:'1.0.0',status:'EVIDENCE_DERIVED_MECHANISM_ANALYSIS_COMPLETE',work:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P3',completed:{mechanismRecords:out.records.length,subsystemCandidates:out.subsystemCandidates.length,humanReviewCandidates:out.records.filter(x=>x.humanReviewReady).length+out.subsystemCandidates.length,dossierPromotions:0,runtimePositionCandidates:0},next:out.subsystemCandidates.length?'Human-review subsystem candidates separately from DOSSIER-US global semantic basis; collect official/primary mechanism evidence for remaining G2/G14 gaps.':'Continue targeted gap closure; do not promote DOSSIER-US semantics.'});
+console.log('PASS W8E-P3 mechanism analysis: admittedSnapshots='+out.admittedProviderSnapshotCount+', mechanisms='+out.records.length+', subsystemCandidates='+out.subsystemCandidates.length+', dossierPromotions=0, RP-candidates=0.');
