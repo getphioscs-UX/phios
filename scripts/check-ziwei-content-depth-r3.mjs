@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import {buildZiweiProductionSections,ZIWEI_CONTENT_DEPTH_VERSION} from '../functions/personal-reading/narrative/ziwei-production-composer-v1.js';
-import {buildZiweiProductionPublication} from '../functions/personal-reading/ziwei-production-publication-v1.js';
+import {buildZiweiContentDepthR3Sections,ZIWEI_CONTENT_DEPTH_VERSION} from '../functions/personal-reading/narrative/ziwei-production-composer-r3.js';
+import {buildZiweiContentDepthR3Publication} from '../functions/personal-reading/ziwei-production-publication-r3.js';
 
 const fixture=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/zpa-v1/ZPA-CONTROLLED-01-en.json','utf8'));
 const expected={
