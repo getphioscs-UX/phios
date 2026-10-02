@@ -1,7 +1,7 @@
 import {buildZiweiContentDepthR3Sections} from './ziwei-production-composer-r3.js';
 import {createReportSectionNarrativeContract} from './report-section-contract.js';
 import {buildReportSectionNarrativeBrief} from './report-section-brief.js';
-import {composePublicationNarrative} from './narrative-writer.js';
+import {composeReportSectionT2} from './report-section-t2-composer.js';
 
 export const ZIWEI_NATURAL_COMPOSER_R4_VERSION='ZIWEI-NATURAL-COMPOSER-R4';
 
@@ -82,10 +82,11 @@ export async function buildZiweiNaturalComposerR4({evidence,locale,registry,env=
   if(!QUESTIONS[section.sectionId]){sections.push({...section,naturalComposition:{status:'NOT_REQUESTED',reason:'STRUCTURAL_OR_APPENDIX_SECTION'}});continue;}
   const ir=richClaimIr(section),roles=ir.claims.map(c=>c.explanationRole),contract=sectionContract(section,locale,roles);
   const brief=await buildReportSectionNarrativeBrief({contract,richClaimIr:ir,locale,sourceAuthorityVersion:section.editorialVersion,styleIntent:{
-   tone:'PROFESSIONAL_PERSONAL_READING',depth:'LONG_FORM_PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false,
-   sectionSpecific:true,avoidGlossaryProse:true,avoidRepeatedTemplates:true,realWorldScenes:'CONDITIONAL_ONLY'
+   tone:'PROFESSIONAL_ZIWEI_PERSONAL_READING',depth:'LONG_FORM_PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false,
+   methodStyleProfile:'ZIWEI_PROFESSIONAL_READING_R4',sectionSpecific:true,avoidGlossaryProse:true,avoidRepeatedTemplates:true,avoidRepeatedSentenceOpeners:true,
+   synthesizePalaceStarEvidence:true,realWorldScenes:'CONDITIONAL_ONLY',timingLayersStayDistinct:true
   }});
-  const composition=await composePublicationNarrative({sectionBrief:brief,registry,env,fetcher,providerAdapters,requestId:`${requestIdPrefix}-${section.sectionId}-${locale}`});
+  const composition=await composeReportSectionT2({brief,registry,env,fetcher,providerAdapters,requestId:`${requestIdPrefix}-${section.sectionId}-${locale}`,timeoutMs:120000});
   const candidate=composition.status==='PASS'?composition.candidate?.blocks||[]:[];
   const paragraphs=candidate.length?candidate.map(b=>b.text):section.paragraphs;
   const publicationIr={...section.publicationIr,blocks:paragraphs.map((prose,i)=>({
@@ -95,6 +96,8 @@ export async function buildZiweiNaturalComposerR4({evidence,locale,registry,env=
   sections.push({...section,paragraphs,publicationIr,editorialVersion:ZIWEI_NATURAL_COMPOSER_R4_VERSION,naturalComposition:{
    status:composition.status,providerCalled:composition.internalOnly?.providerCalled===true,actualTier:composition.internalOnly?.actualTier,
    verificationAccepted:composition.verification?.accepted===true,editorialQuality:composition.verification?.editorialQuality||null,
+   providerAttemptCount:composition.internalOnly?.providerAttemptCount||0,transportCalls:composition.internalOnly?.transportCalls||0,
+   semanticReviewCalls:composition.internalOnly?.semanticReviewCalls||0,compositionDigest:composition.compositionDigest||null,
    fallbackReason:composition.internalOnly?.fallbackReason||null,usageRecord:composition.usageRecord||null
   }});
  }
