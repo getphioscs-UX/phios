@@ -6,6 +6,7 @@ import {css,fitCode} from './render-assets.generated.js';
 
 const origin='https://qa.phios-github.pages.dev';
 const EXPECTED_ZIWEI_PHYSICAL_PAGES=33;
+const ALLOWED_ZIWEI_COMPOSITIONS=new Set(['ZIWEI-PRODUCTION-COMPOSER-V1','ZIWEI-NATURAL-COMPOSER-R4']);
 const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),b=>b.toString(16).padStart(2,'0')).join('');
 
 export default {
@@ -17,7 +18,7 @@ export default {
    const reader=request.body?.getReader();if(!reader)throw Error('BODY_REQUIRED');let size=0,raw='';const decoder=new TextDecoder();
    for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();throw Error('TOO_LARGE');}raw+=decoder.decode(value,{stream:true});}
    const {candidate,method,compositionVersion}=JSON.parse(raw+decoder.decode());
-   if(method!=='ZWR'||compositionVersion!=='ZIWEI-PRODUCTION-COMPOSER-V1'||candidate?.scope!=='CONTROLLED_QA_ONLY'||!['en','zh-Hans'].includes(candidate.locale)||candidate.snapshot?.methodId!=='ZWR'||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
+   if(method!=='ZWR'||!ALLOWED_ZIWEI_COMPOSITIONS.has(compositionVersion)||compositionVersion!==candidate?.snapshot?.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||!['en','zh-Hans'].includes(candidate.locale)||candidate.snapshot?.methodId!=='ZWR'||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
 
    stage='COMPOSE';
    const body=finalizeZiweiNavigation(renderPublicationReport(candidate.snapshot.semanticContent.report),candidate.locale).replaceAll('src="/assets/',`src="${origin}/assets/`);
