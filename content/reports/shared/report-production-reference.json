@@ -151,7 +151,7 @@
   "sharedPrintShell": {
     "version": "PHI-OS-REPORT-PRINT-SHELL-V2",
     "authority": "ZIWEI_QA_PRINT_SUCCESSOR_2026_10_02",
-    "status": "ACCEPTED_FOR_SHARED_ROLLOUT",
+    "status": "EXTRACTED_SHARED_OWNER_PENDING_BAZI_MIGRATION",
     "referenceMethod": "ZWR",
     "contract": {
       "coordinateSystem": "A4_210MM_X_297MM_SINGLE_CONTRACT",
@@ -165,9 +165,8 @@
       "serverPdfGeneration": "NOT_REQUIRED_ON_CUSTOMER_HOT_PATH"
     },
     "sharedPaths": [
-      "assets/customer-ui/js/personal-products/publication-report-pages.js",
-      "assets/customer-ui/surfaces/ziwei-print-shell-v2.css",
-      "scripts/build-method-report-renderer.mjs"
+      "assets/customer-ui/surfaces/report-print-shell-v2.css",
+      "assets/customer-ui/js/personal-products/publication-report-pages.js"
     ],
     "rolloutOrder": [
       "BZR",
@@ -178,7 +177,28 @@
       "HD",
       "ECR",
       "CROSS"
-    ]
+    ],
+    "methodSkinExample": "assets/customer-ui/surfaces/ziwei-print-shell-v2.css",
+    "buildIntegration": "scripts/build-method-report-renderer.mjs",
+    "extraction": {
+      "sharedOwns": [
+        "A4 geometry",
+        "screen/print parity",
+        "static full-page assets",
+        "section master placement",
+        "body background placement",
+        "page breaks",
+        "print color adjustment"
+      ],
+      "methodOwns": [
+        "palette",
+        "typography",
+        "section artwork mapping",
+        "method evidence layout",
+        "method navigation/chart styling"
+      ],
+      "sharedMethodTokenForbidden": true
+    }
   },
   "BAZI_PRINT_SHELL_MIGRATION": "PENDING",
   "ZIWEI_PRINT_SHELL_V2": "ACCEPT"
