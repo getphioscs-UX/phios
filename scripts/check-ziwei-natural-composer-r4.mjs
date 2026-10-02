@@ -33,6 +33,10 @@ assert(generation.includes("providerCalled!==true"));
 assert(generation.includes("verificationAccepted!==true"));
 assert(generation.includes("productionAdmissionGranted:false"));
 
+const privateRenderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
+assert(privateRenderer.includes("ALLOWED_ZIWEI_COMPOSITIONS=new Set(['ZIWEI-PRODUCTION-COMPOSER-V1','ZIWEI-NATURAL-COMPOSER-R4'])"));
+assert(privateRenderer.includes("compositionVersion!==candidate?.snapshot?.compositionVersion"));
+
 const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
 assert(binding.includes("ziwei-natural-composer-r4-generation.js"));
 assert(binding.includes('generateZiweiNaturalComposerR4Candidate'));
