@@ -5,7 +5,8 @@ const SAFE_ERROR_CODES=new Set(['invalid_api_key','model_not_found','insufficien
 const SAFE_ERROR_TYPES=new Set(['invalid_request_error','authentication_error','permission_error','insufficient_quota','rate_limit_error','server_error','service_unavailable_error']);
 export function safeProviderFailure(error){
  const d=error?.details||{};
- return {httpStatus:Number.isInteger(d.status)&&d.status>=400&&d.status<=599?d.status:null,providerErrorCode:SAFE_ERROR_CODES.has(d.providerErrorCode)?d.providerErrorCode:null,providerErrorType:SAFE_ERROR_TYPES.has(d.providerErrorType)?d.providerErrorType:null};
+ const safeNetworkCodes=new Set(['ENOTFOUND','EAI_AGAIN','ECONNREFUSED','ECONNRESET','ETIMEDOUT','UND_ERR_CONNECT_TIMEOUT','UND_ERR_SOCKET','UNABLE_TO_VERIFY_LEAF_SIGNATURE','SELF_SIGNED_CERT_IN_CHAIN','DEPTH_ZERO_SELF_SIGNED_CERT','CERT_HAS_EXPIRED','ERR_TLS_CERT_ALTNAME_INVALID']);
+ return {httpStatus:Number.isInteger(d.status)&&d.status>=400&&d.status<=599?d.status:null,providerErrorCode:SAFE_ERROR_CODES.has(d.providerErrorCode)?d.providerErrorCode:null,providerErrorType:SAFE_ERROR_TYPES.has(d.providerErrorType)?d.providerErrorType:null,networkErrorCode:safeNetworkCodes.has(d.networkErrorCode)?d.networkErrorCode:null};
 }
 function outputText(data){
   if(clean(data?.output_text))return clean(data.output_text);
@@ -28,7 +29,13 @@ export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,sy
     model,store:false,input:[{role:'system',content:String(systemPrompt||'')},{role:'user',content:typeof userPayload==='string'?userPayload:JSON.stringify(userPayload)}],
     text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens
   })});}
-  catch(error){const name=String(error?.name||'').toLowerCase(),code=String(error?.code||'').toUpperCase();if(name==='aborterror'||code==='ETIMEDOUT'||code==='UND_ERR_CONNECT_TIMEOUT')fail('NARRATIVE_PROVIDER_TIMEOUT');fail('NARRATIVE_PROVIDER_NETWORK_FAILED',{message:clean(error?.message)});}
+  catch(error){
+    const name=String(error?.name||'').toLowerCase();
+    const cause=error?.cause||null;
+    const code=String(cause?.code||error?.code||'').toUpperCase();
+    if(name==='aborterror'||code==='ETIMEDOUT'||code==='UND_ERR_CONNECT_TIMEOUT')fail('NARRATIVE_PROVIDER_TIMEOUT',{networkErrorCode:code||null});
+    fail('NARRATIVE_PROVIDER_NETWORK_FAILED',{message:clean(error?.message),networkErrorCode:code||null,networkErrorName:clean(cause?.name||error?.name)});
+  }
   const raw=await response.text();let data;
   try{data=JSON.parse(raw)}catch{fail('NARRATIVE_PROVIDER_UNREADABLE_RESPONSE');}
   if(!response.ok)fail('NARRATIVE_PROVIDER_REQUEST_FAILED',{status:response.status,providerErrorCode:SAFE_ERROR_CODES.has(data?.error?.code)?data.error.code:null,providerErrorType:SAFE_ERROR_TYPES.has(data?.error?.type)?data.error.type:null});
