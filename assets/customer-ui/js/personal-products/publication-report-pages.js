@@ -6,9 +6,17 @@ import {renderReportCoverOverlay,fitReportCoverFields} from '../../../../functio
 export function renderGlobalReportPagination(sequence,total){const text=globalReportPagination(sequence,total);return text?`<span data-pagination-owner="GlobalReportPagination" aria-label="${esc(text)}">${text}</span>`:'';}
 export function fitPublicationForPrint(root){
  fitReportCoverFields(root);
+ const report=root.querySelector('.pub-report'),fixed=report?.dataset.printShell==='PHI-OS-REPORT-PRINT-SHELL-V2';
  return [...root.querySelectorAll('.pub-page')].map(page=>{
-  let fits=false;for(const variant of ['STANDARD','COMPACT','REFLOW']){page.dataset.textFit=variant;const end=page.getBoundingClientRect().bottom,footer=page.querySelector('footer').getBoundingClientRect();const content=page.querySelector('.pub-composed-content');fits=page.scrollHeight<=page.clientHeight+2&&footer.bottom<=end&&(!content||content.getBoundingClientRect().bottom<=footer.top+1);if(fits)break;}
-  return {pageNumber:Number(page.dataset.pageNumber),variant:page.dataset.textFit,fits};
+  let fits=false;
+  const variants=fixed?['FIXED_A4']:['STANDARD','COMPACT','REFLOW'];
+  for(const variant of variants){
+   if(!fixed)page.dataset.textFit=variant;
+   const end=page.getBoundingClientRect().bottom,footer=page.querySelector('footer')?.getBoundingClientRect(),content=page.querySelector('.pub-composed-content');
+   fits=page.scrollHeight<=page.clientHeight+2&&(!footer||footer.bottom<=end)&&(!content||!footer||content.getBoundingClientRect().bottom<=footer.top+1);
+   if(fits)break;
+  }
+  return {pageNumber:Number(page.dataset.pageNumber),variant:fixed?'FIXED_A4':page.dataset.textFit,fits};
  });
 }
 // Presentation-only compatibility adapter. The page body's admitted diagram
@@ -45,7 +53,7 @@ export function renderPublicationReport(snapshot){
   ${p.observation||p.counterSignal?`<aside class="pub-reflection"><h3>${t('Bring it into experience','把读取带回经验')}</h3>${p.observation?`<p>${esc(p.observation)}</p>`:''}${p.counterSignal?`<p>${esc(p.counterSignal)}</p>`:''}</aside>`:''}
   <p class="pub-boundary">${esc(p.boundary)}</p><footer class="pub-footer"><span>${t('Your life, in context.','在情境中理解你的人生。')}</span>${renderGlobalReportPagination(p.pageNumber,totalPages)}</footer></section>`;
  }).join('');
- return `<article class="pub-report" lang="${locale}" data-publication-version="2.0.0" data-method="${methodId}"${snapshot.physicalComposition?` data-physical-composition="${esc(snapshot.physicalComposition.version)}"`:''}>${intro}${pages}</article>`;
+ return `<article class="pub-report" lang="${locale}" data-publication-version="2.0.0" data-method="${methodId}"${methodId==='ZWR'?' data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"':''}${snapshot.physicalComposition?` data-physical-composition="${esc(snapshot.physicalComposition.version)}"`:''}>${intro}${pages}</article>`;
 }
 
 function renderCompositionContent(p){
@@ -54,10 +62,16 @@ function renderCompositionContent(p){
 }
 
 function decorativeLayers(p){
- const binding=p.visualBinding||{},opener=p.pageFamily==='SECTION_OPENER_PAGE',master=opener&&p.items?.length;
+ const binding=p.visualBinding||{},opener=p.pageFamily==='SECTION_OPENER_PAGE';
+ if(binding.backgroundMode==='SECTION_MASTER_FULL_BLEED'&&binding.url){
+  return `<div class="pub-decoration pub-decoration--single" aria-hidden="true"><img class="pub-page-background pub-page-background--section" data-required-decoration="true" data-fallback-sources="${esc(JSON.stringify(binding.candidates||[binding.url]))}" src="${esc(binding.url)}" alt=""></div>`;
+ }
+ if(binding.backgroundMode==='READING_PAGE_DECORATION'&&binding.bodyUrl){
+  return `<div class="pub-decoration pub-decoration--single" aria-hidden="true"><img class="pub-page-background pub-page-background--body" data-required-decoration="true" src="${esc(binding.bodyUrl)}" alt=""></div>`;
+ }
  const urls=[[0,binding.bodyUrl],[1,binding.motifUrl],[2,opener?binding.url:null]].filter(([,url])=>url);
  const intensity=binding.intensityByFamily?.[p.pageFamily]??.17;
- const opacity=i=>binding.opacityByLayer?.[['body','motif','hero'][i]]??(i===1?.12:i===0&&opener?.16:i===2&&master?.28:intensity);
+ const opacity=i=>binding.opacityByLayer?.[['body','motif','hero'][i]]??(i===1?.12:i===0&&opener?.16:i===2?.28:intensity);
  return `<div class="pub-decoration" aria-hidden="true">${urls.map(([i,url])=>`<img data-decorative-layer="${i}"${binding.required?' data-required-decoration="true"':''} style="opacity:${opacity(i)}${i===2&&binding.objectPosition?';object-position:'+esc(binding.objectPosition):''}" ${i===2?`data-fallback-sources="${esc(JSON.stringify(binding.candidates||[]))}"`:''} src="${esc(url)}" alt="">`).join('')}</div>`;
 }
 function sectionLandscape(number){
