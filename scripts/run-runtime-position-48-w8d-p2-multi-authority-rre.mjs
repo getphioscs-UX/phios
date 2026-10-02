@@ -8,7 +8,9 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
 const write=(rel,v)=>fs.writeFileSync(path.join(root,rel),JSON.stringify(v,null,2)+'\n');
 
-const official=read('content/civilization-atlas/reconfiguration/runtime-position-w8c-rre-eligible-handoff-v1.json');
+const officialBase=read('content/civilization-atlas/reconfiguration/runtime-position-w8c-rre-eligible-handoff-v1.json');
+const officialGap=read('content/civilization-atlas/reconfiguration/runtime-position-w8e-p5-official-gap-evidence-v1.json');
+const official={...officialBase,records:[...(officialBase.records||[]),...(officialGap.records||[])]};
 const provider=read('content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json');
 const dossiers=read('content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json');
 const cases=read('content/civilization-atlas/reconfiguration/reconfiguration-case-registry-v1.json');
