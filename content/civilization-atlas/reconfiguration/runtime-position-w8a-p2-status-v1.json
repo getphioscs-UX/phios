@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-STATUS-v1.0.0",
-  "version": "1.1.0",
-  "status": "FIRST_MOOMOO_DATA_PACKAGE_READY__AUTH_REQUIRED",
+  "version": "1.2.0",
+  "status": "FIRST_LIVE_IMPORT_EXECUTABLE__AUTH_REQUIRED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
   "completed": {
     "registeredProviders": 1,
@@ -15,8 +15,11 @@
     "firstPackagePlanned": true,
     "requestFamilies": 4,
     "plannedMarketInstruments": 8,
-    "plannedCompanyFinancialInstruments": 5
+    "plannedCompanyFinancialInstruments": 5,
+    "liveImportExecutable": true,
+    "liveCapability": "HISTORY_KLINE",
+    "liveSymbolsPlanned": 8
   },
-  "next": "Configure runtime-only Moomoo authorization, execute the first data request plan, export sanitized payloads to market-provider-intake-v1.json, then run build:runtime-position-48:w8a:p2.",
+  "next": "Set MOOMOO_ACCESS_TOKEN only at runtime, run npm run moomoo:first-live-import, then build:runtime-position-48:w8a:p2. No live call has been made by the repository state.",
   "reviewHtml": "tools/review/PHI-OS-48-RUNTIME-POSITION-W8A-P2-MARKET-DATA-PROVIDER.html"
 }
