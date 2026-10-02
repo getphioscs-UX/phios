@@ -61,8 +61,8 @@ function networkText(s,primary,context,locale){
   const type=r.entityType==='OPPOSITION'?(zh?'对宫':'opposite'):r.entityType==='TRIAD'?(zh?'三方':'triad'):(zh?'夹宫':'flank');
   rows.push((zh?ziweiPalaceLabel(code,locale)+'通过'+type+'连接':ziweiPalaceLabel(code,locale)+' has a '+type+' link to ')+hit.map(x=>ziweiPalaceLabel(x,locale)).join(zh?'、':', '));
  }
- return zh?(rows.length?rows.join('；')+'。':'相关宫位仅作为共同阅读背景。')+'这些几何关系要求把相关生活领域一起阅读，但本身不证明支持、冲突或吉凶。':
-  (rows.length?rows.join('; ')+'. ':'The related palaces remain shared reading context. ')+'These geometric links require the domains to be read together but do not by themselves prove support, conflict or fortune.';
+ return zh?(rows.length?rows.join('；')+'。':'相关宫位仅作为共同阅读背景。')+'三方、对宫或夹宫属于宫位网络的几何关系，要求把相关生活领域一起阅读，但本身不证明支持、冲突或吉凶。':
+  (rows.length?rows.join('; ')+'. ':'The related palaces remain shared reading context. ')+'Opposite, triad and flank links belong to the palace network and require the domains to be read together, but do not by themselves prove support, conflict or fortune.';
 }
 function transformationText(s,codes,layers,locale){
  const zh=locale==='zh-Hans',rows=[];
