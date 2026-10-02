@@ -2688,7 +2688,8 @@
     "build:runtime-position-48:w8e:p3": "node scripts/run-runtime-position-48-w8e-p3-mechanism-analysis.mjs",
     "check:runtime-position-48:w8e:p3": "node scripts/check-runtime-position-48-w8e-p3.mjs",
     "repair:moomoo:provider-metadata": "npm run build:runtime-position-48:w8a:p2 && npm run build:moomoo:first-data-package && npm run build:moomoo:provider-claims && npm run build:moomoo:w8c-admission && npm run build:runtime-position-48:w8d:p2 && npm run build:runtime-position-48:w8e:p3",
-    "diagnose:ziwei-r5-section": "node scripts/diagnose-ziwei-r5-section.mjs"
+    "diagnose:ziwei-r5-section": "node scripts/diagnose-ziwei-r5-section.mjs",
+    "repair:moomoo:financial-claims": "npm run build:moomoo:provider-claims && npm run check:moomoo:provider-claims && npm run build:moomoo:w8c-admission && npm run check:moomoo:w8c-admission && npm run build:runtime-position-48:w8d:p2 && npm run build:runtime-position-48:w8e:p3 && npm run check:runtime-position-48:w8e:p3"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

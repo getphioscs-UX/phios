@@ -67,7 +67,10 @@ export function deriveFinancialStatementClaim({snapshot,source}={}){
   const stamps=rec.map(x=>iso(x.timestamp)).filter(Boolean).sort();
   const end=stamps.at(-1)||snapshot.retrievedAt;
   const statementType=String(rec[0]?.meta?.statementType||snapshot.request?.statementType||'UNKNOWN');
-  return baseClaim({snapshot,source,laneId:'INDUSTRY',slug:'FINANCIALS-'+instrument.replace(/[^A-Za-z0-9]+/g,'-')+'-S'+statementType,claimText:'Moomoo OpenAPI FINANCIAL_STATEMENTS for '+instrument+' statement type '+statementType+' contains '+periods.length+' reporting periods and '+fields.length+' distinct reported fields across '+rec.length+' normalized field observations.',locatorValue:instrument+' financial statements S'+statementType+'; periods='+periods.join('|')+'; snapshot='+snapshot.snapshotId+'; digest='+snapshot.responseDigest,observedAt:iso(end),supportNote:'Descriptive issuer financial-series claim only. No growth, deterioration, continuity or reconfiguration conclusion is asserted.'});
+  const sortedPeriods=[...periods].sort();
+  const firstPeriod=sortedPeriods[0]||'UNKNOWN';
+  const lastPeriod=sortedPeriods.at(-1)||'UNKNOWN';
+  return baseClaim({snapshot,source,laneId:'INDUSTRY',slug:'FINANCIALS-'+instrument.replace(/[^A-Za-z0-9]+/g,'-')+'-S'+statementType,claimText:'Moomoo OpenAPI FINANCIAL_STATEMENTS for '+instrument+' statement type '+statementType+' contains '+periods.length+' reporting periods and '+fields.length+' distinct reported fields across '+rec.length+' normalized field observations.',locatorValue:instrument+' financial statements S'+statementType+'; periodCount='+periods.length+'; firstPeriod='+firstPeriod+'; lastPeriod='+lastPeriod+'; snapshot='+snapshot.snapshotId+'; digest='+snapshot.responseDigest,observedAt:iso(end),supportNote:'Descriptive issuer financial-series claim only. No growth, deterioration, continuity or reconfiguration conclusion is asserted.'});
 }
 
 export function deriveRevenueBreakdownClaim({snapshot,source}={}){
