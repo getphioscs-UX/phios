@@ -74,3 +74,71 @@ export function validateW8eDerivation({intake,readouts,readiness,grammarCanon,do
   }
   return {records,rejected};
 }
+
+
+export function validateW8eSemanticBasis({semanticBasis,currentEvidence,grammarCanon,domainCriteria}={}){
+  const evidenceMap=new Map((currentEvidence?.records||[]).map(x=>[x.claimId,x]));
+  const grammarMap=new Map((grammarCanon?.grammars||[]).map(x=>[x.grammarId,x]));
+  const domainMap=new Map((domainCriteria?.domains||[]).map(x=>[x.domainId,x]));
+  const seen=new Set(),records=[],rejected=[];
+  for(const raw of semanticBasis?.records||[]){
+    const reasons=[];
+    if(!raw?.basisId||seen.has(raw.basisId))reasons.push(!raw?.basisId?'BASIS_ID_REQUIRED':'BASIS_ID_DUPLICATE');
+    if(raw?.basisId)seen.add(raw.basisId);
+    if(!['DOSSIER','SUBSYSTEM'].includes(raw?.scope))reasons.push('SCOPE_INVALID');
+    if(raw?.scope==='SUBSYSTEM'&&!String(raw?.subsystem||'').trim())reasons.push('SUBSYSTEM_REQUIRED');
+    if(!grammarMap.has(raw?.grammarId))reasons.push('GRAMMAR_ID_INVALID');
+    if(!domainMap.has(raw?.realityDomainId))reasons.push('DOMAIN_ID_INVALID');
+    const refs=uniq(raw?.evidenceRefs||[]);
+    if(!refs.length)reasons.push('EVIDENCE_REFS_REQUIRED');
+    for(const ref of refs){
+      const e=evidenceMap.get(ref);
+      if(!e)reasons.push('EVIDENCE_REF_NOT_CWA_ADMITTED:'+ref);
+      else if(e.dossierId!==raw.dossierId)reasons.push('EVIDENCE_DOSSIER_MISMATCH:'+ref);
+      else if(e.evidenceState!=='CWA_ADMITTED'||e.rreEligibility!=='RRE_ELIGIBLE')reasons.push('EVIDENCE_NOT_RRE_ELIGIBLE:'+ref);
+    }
+    if(!String(raw?.grammarBasis||'').trim())reasons.push('GRAMMAR_BASIS_REQUIRED');
+    if(!String(raw?.domainBasis||'').trim())reasons.push('DOMAIN_BASIS_REQUIRED');
+    if(!['EVIDENCE_READY','INSUFFICIENT_EVIDENCE','CONFLICTED'].includes(raw?.supportState))reasons.push('SUPPORT_STATE_INVALID');
+    if(raw?.supportState==='EVIDENCE_READY'&&refs.length<2)reasons.push('EVIDENCE_READY_REQUIRES_MULTI_SOURCE_SUPPORT');
+    if(reasons.length){rejected.push({basisId:raw?.basisId||null,dossierId:raw?.dossierId||null,reasons});continue;}
+    records.push({...raw,evidenceRefs:refs});
+  }
+  return {records,rejected};
+}
+
+export function buildW8eBoundIntake({semanticBasis,currentEvidence,readouts,readiness,grammarCanon,domainCriteria}={}){
+  const semantic=validateW8eSemanticBasis({semanticBasis,currentEvidence,grammarCanon,domainCriteria});
+  const readoutMap=new Map((readouts?.records||[]).map(x=>[x.dossierId,x]));
+  const readyMap=new Map((readiness?.records||[]).map(x=>[x.dossierId,x]));
+  const bound=[],waiting=[];
+  for(const row of semantic.records){
+    const readout=readoutMap.get(row.dossierId);
+    const ready=readyMap.get(row.dossierId);
+    if(!readout?.readoutReference||ready?.state!=='REQUIRED_LANES_COMPLETE'){
+      waiting.push({basisId:row.basisId,dossierId:row.dossierId,state:'WAITING_W8D_REQUIRED_LANES_COMPLETE'});
+      continue;
+    }
+    const allowed=new Set(readout.evidenceRefs||[]);
+    const outside=row.evidenceRefs.filter(ref=>!allowed.has(ref));
+    if(outside.length){
+      waiting.push({basisId:row.basisId,dossierId:row.dossierId,state:'W8D_LINEAGE_MISMATCH',outsideEvidenceRefs:outside});
+      continue;
+    }
+    bound.push({
+      derivationId:row.basisId,
+      dossierId:row.dossierId,
+      scope:row.scope,
+      subsystem:row.subsystem||null,
+      grammarId:row.grammarId,
+      realityDomainId:row.realityDomainId,
+      evidenceRefs:row.evidenceRefs,
+      readoutReference:readout.readoutReference,
+      grammarBasis:row.grammarBasis,
+      domainBasis:row.domainBasis,
+      supportState:row.supportState,
+      unknowns:row.unknowns||[]
+    });
+  }
+  return {intake:{records:bound},waiting,rejected:semantic.rejected};
+}
