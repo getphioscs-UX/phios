@@ -2635,7 +2635,7 @@
     "check:ziwei-production-composer-v1": "node scripts/check-ziwei-production-composer-v1.mjs",
     "check:ziwei-zpa-access": "node scripts/check-ziwei-zpa-access.mjs",
     "check:canonical-account-person": "node scripts/check-canonical-account-person.mjs",
-    "check:runtime-position-48": "npm run check:runtime-position-48:backbone && npm run check:runtime-position-48:w5 && npm run check:runtime-position-48:w6 && npm run check:runtime-position-48:w7 && npm run check:runtime-position-48:w8a && npm run check:runtime-position-48:w8a:p2 && npm run check:moomoo-first-data-package && npm run check:moomoo:auth-live-import && npm run check:runtime-position-48:w8b && npm run check:runtime-position-48:w8c && npm run check:runtime-position-48:w8d && npm run check:runtime-position-48:w8e && npm run check:runtime-position-48:w8",
+    "check:runtime-position-48": "npm run check:runtime-position-48:backbone && npm run check:runtime-position-48:w5 && npm run check:runtime-position-48:w6 && npm run check:runtime-position-48:w7 && npm run check:runtime-position-48:w8a && npm run check:runtime-position-48:w8a:p2 && npm run check:moomoo-first-data-package && npm run check:moomoo:auth-live-import && npm run check:moomoo:pkce-auth && npm run check:runtime-position-48:w8b && npm run check:runtime-position-48:w8c && npm run check:runtime-position-48:w8d && npm run check:runtime-position-48:w8e && npm run check:runtime-position-48:w8",
     "check:ziwei-production-v1-freeze": "node scripts/check-ziwei-production-v1-freeze.mjs",
     "check:runtime-position-48:w5": "node scripts/check-runtime-position-48-w5.mjs",
     "check:runtime-position-48:backbone": "node scripts/check-runtime-position-48-backbone.mjs",
@@ -2663,7 +2663,9 @@
     "check:ziwei-natural-composer-r4": "node scripts/check-ziwei-natural-composer-r4.mjs",
     "check:moomoo-first-data-package": "node scripts/check-moomoo-first-data-package.mjs",
     "moomoo:first-live-import": "node scripts/run-moomoo-first-live-import.mjs",
-    "check:moomoo:auth-live-import": "node scripts/check-moomoo-auth-live-import.mjs"
+    "check:moomoo:auth-live-import": "node scripts/check-moomoo-auth-live-import.mjs",
+    "moomoo:pkce-live-import": "node scripts/run-moomoo-pkce-auth-helper.mjs",
+    "check:moomoo:pkce-auth": "node scripts/check-moomoo-pkce-auth-helper.mjs"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

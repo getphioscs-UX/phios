@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-STATUS-v1.0.0",
-  "version": "1.2.0",
-  "status": "FIRST_LIVE_IMPORT_EXECUTABLE__AUTH_REQUIRED",
+  "version": "1.3.0",
+  "status": "PKCE_AUTH_HELPER_EXECUTABLE__USER_AUTH_REQUIRED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
   "completed": {
     "registeredProviders": 1,
@@ -18,8 +18,10 @@
     "plannedCompanyFinancialInstruments": 5,
     "liveImportExecutable": true,
     "liveCapability": "HISTORY_KLINE",
-    "liveSymbolsPlanned": 8
+    "liveSymbolsPlanned": 8,
+    "pkceHelperExecutable": true,
+    "pkceAuthorizationRun": false
   },
-  "next": "Set MOOMOO_ACCESS_TOKEN only at runtime, run npm run moomoo:first-live-import, then build:runtime-position-48:w8a:p2. No live call has been made by the repository state.",
+  "next": "Run npm run moomoo:pkce-live-import. The helper will register/reuse a local client_id, open Moomoo authorization, validate localhost state, exchange the code in memory and immediately invoke the governed HISTORY_KLINE live import.",
   "reviewHtml": "tools/review/PHI-OS-48-RUNTIME-POSITION-W8A-P2-MARKET-DATA-PROVIDER.html"
 }
