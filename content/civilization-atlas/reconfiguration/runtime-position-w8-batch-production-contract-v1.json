@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8-BATCH-PRODUCTION-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_PRODUCTION_PIPELINE",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8",
+  "title": "Evidence Batch → CWA Admission → RRE Candidate → Position Human Review",
+  "purpose": "Execute auditable current-evidence batches without auto-populating dossiers that do not have verifiable sources.",
+  "predecessorAcceptance": "content/civilization-atlas/reconfiguration/runtime-position-w7-human-acceptance-v1.json",
+  "owners": {
+    "evidenceBatch": "BOOK_VI_CURRENT_EVIDENCE_PRODUCTION",
+    "sourceAdmission": "CURRENT_WEB_AUTHORITY",
+    "evidenceIR": "CURRENT_WEB_AUTHORITY",
+    "derivedReadout": "REALITY_READOUT_ENGINE",
+    "positionCanon": "content/registry/runtime-position-48-v1.json",
+    "humanPositionAdmission": "OWNER_REVIEW"
+  },
+  "flow": [
+    "EVIDENCE_BATCH",
+    "CWA_SOURCE_ADMISSION",
+    "CURRENT_EVIDENCE_IR",
+    "RRE_DERIVED_READOUT",
+    "CANONICAL_POSITION_CANDIDATE",
+    "POSITION_HUMAN_REVIEW"
+  ],
+  "batchRequiredFields": [
+    "batchId",
+    "dossierId",
+    "runAt",
+    "claims"
+  ],
+  "claimRequiredFields": [
+    "laneId",
+    "candidate",
+    "authorityClass",
+    "sourceId",
+    "sourceVersionOrDigest",
+    "claimId",
+    "claimText"
+  ],
+  "candidateProposalRequiredFields": [
+    "proposalId",
+    "scope",
+    "grammarId",
+    "realityDomainId",
+    "candidateRole",
+    "evidenceRefs",
+    "grammarRationale",
+    "domainRationale"
+  ],
+  "candidateRules": [
+    "Every evidence reference used by a candidate must be CWA-admitted in the same auditable batch result.",
+    "All W7 required evidence lanes for the dossier must be admitted before a position candidate can enter human review.",
+    "Unresolved CWA evidence conflicts block candidate generation.",
+    "RRE readout lineage must exist before canonical position mapping.",
+    "Candidate input supplies grammarId and realityDomainId; W8 maps that pair to the 48-position canon and does not accept a raw phase/date shortcut.",
+    "Candidate generation never equals position admission; humanDecision remains PENDING until owner review.",
+    "No production batch is created merely to fill the 12 dossiers."
+  ],
+  "outputStates": [
+    "NO_ADMITTED_EVIDENCE",
+    "CURRENT_EVIDENCE_ADMITTED",
+    "RRE_READY_REQUIRED_LANES_INCOMPLETE",
+    "RRE_READY_NO_POSITION_PROPOSAL",
+    "POSITION_HUMAN_REVIEW"
+  ],
+  "fixturePolicy": "Fixture batches may exercise the machine pipeline only in FIXTURE mode and are rejected in PRODUCTION mode.",
+  "mutatesCanonicalDossierRegistry": false,
+  "failClosed": true
+}
