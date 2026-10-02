@@ -15,7 +15,7 @@ const artifacts=[];
 for(const [locale,suffix] of [['zh-Hans','ZH'],['en','EN']]){
  console.log('R5 START',locale,'10 natural sections · OpenAI Sol deep composition');
  const sections=await buildZiweiProfessionalSynthesisR5({
-  evidence:fixture.evidence,locale,registry:ZIWEI_R5_PAI_REGISTRY,env,requestIdPrefix:'ZIWEI-R5-REVIEW',
+  evidence:fixture.evidence,locale,registry:ZIWEI_R5_PAI_REGISTRY,env,requestIdPrefix:'ZIWEI-R5-REVIEW',failFast:true,
   onProgress:event=>{
    if(event.phase==='SECTION_START')console.log('R5',event.locale,event.sectionId,'START');
    if(event.phase==='SECTION_END')console.log('R5',event.locale,event.sectionId,event.status,'composer='+event.composerStatus,'model='+(event.model||'none'),'calls='+event.transportCalls,'semanticReviews='+event.semanticReviewCalls,'units='+event.totalUnits+(event.reasons?.length?' editorial='+event.reasons.join(','):'')+(event.verificationReasons?.length?' verifier='+event.verificationReasons.join(','):'')+(event.fallbackReason?' fallback='+event.fallbackReason:''));
