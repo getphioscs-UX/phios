@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
+const write=(rel,v)=>fs.writeFileSync(path.join(root,rel),JSON.stringify(v,null,2)+'\n');
+const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const p3=read('content/civilization-atlas/reconfiguration/runtime-position-w8e-p3-derived-mechanisms-v1.json');
+const decisions=read('content/civilization-atlas/reconfiguration/runtime-position-w8e-p4-human-decision-v1.json');
+const candidates=(p3.subsystemCandidates||[]).filter(x=>x.state==='HUMAN_REVIEW_READY');
+const decisionMap=new Map((decisions.decisions||[]).map(x=>[x.candidateId,x]));
+let accepted=0,rejected=0;
+for(const c of candidates){const d=decisionMap.get(c.candidateId);if(d?.decision==='ACCEPT')accepted++;if(d?.decision==='REJECT')rejected++;}
+write('content/civilization-atlas/reconfiguration/runtime-position-w8e-p4-status-v1.json',{schemaVersion:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P4-STATUS-v1.0.0',version:'1.0.0',status:candidates.length?'HUMAN_REVIEW_REQUIRED':'NO_HUMAN_REVIEW_CANDIDATES',work:'PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P4',completed:{reviewCandidates:candidates.length,accepted,rejected,dossierGlobalPromotions:0,runtimePositionCandidates:0},reviewHtml:'tools/review/PHI-OS-48-RUNTIME-POSITION-W8E-P4-SUBSYSTEM-CONTINUITY.html',next:candidates.length?'Record ACCEPT or REJECT in runtime-position-w8e-p4-human-decision-v1.json after review.':'No subsystem candidate is ready.'});
+const cards=candidates.map(c=>'<article class="card"><h2>'+esc(c.candidateId)+'</h2><p><strong>Scope:</strong> '+esc(c.scope)+' · <strong>Subsystem:</strong> '+esc(c.subsystem)+'</p><p><strong>Semantic pair:</strong> '+esc(c.grammarId)+' + '+esc(c.realityDomainId)+'</p><p><strong>Qualified issuers:</strong> '+esc((c.qualifiedIssuers||[]).join(' · '))+'</p><p><strong>Evidence class:</strong> '+esc(c.evidenceClass)+'</p><p><strong>Snapshots:</strong> '+(c.snapshotRefs||[]).length+'</p><div class="boundary">'+esc(c.boundary)+'</div><h3>Decision</h3><p>ACCEPT = accept only this bounded subsystem continuity candidate. REJECT = do not admit it. Neither decision creates a national continuity conclusion or RP position.</p></article>').join('');
+const html='<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>W8E-P4 Subsystem Continuity Human Review</title><style>body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;max-width:1100px;margin:0 auto;padding:32px;line-height:1.65;background:#f6f4ef;color:#202936}.card{background:white;border:1px solid #d8d2c4;border-radius:18px;padding:24px;margin:22px 0}.boundary{background:#f0eee7;border-left:4px solid #8b7b52;padding:12px 14px}code{background:#eee;padding:2px 5px}</style></head><body><h1>R1-W8E-P4｜SUBSYSTEM CONTINUITY HUMAN REVIEW</h1><p>Evidence-derived mechanism → bounded subsystem candidate → human ACCEPT / REJECT.</p><div class="boundary"><strong>Boundary:</strong> This review does not admit DOSSIER-US global G16/P3 and does not create RP-xx.</div>'+(cards||'<article class="card"><h2>No candidate ready</h2><p>Run W8E-P3 on the machine containing the admitted provider snapshots.</p></article>')+'</body></html>';
+fs.writeFileSync(path.join(root,'tools/review/PHI-OS-48-RUNTIME-POSITION-W8E-P4-SUBSYSTEM-CONTINUITY.html'),html);
+console.log('PASS W8E-P4 human-review workspace: candidates='+candidates.length+', accepted='+accepted+', rejected='+rejected+', dossierGlobalPromotions=0, RP-candidates=0.');
