@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-PACKAGE-REQUESTS-v1.0.0",
+  "version": "1.0.0",
+  "status": "REQUEST_PLAN_READY",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "providerId": "MOOMOO_OPENAPI",
+  "retrievalWindow": {
+    "start": "2022-01-01",
+    "end": "2026-10-02",
+    "rationale": "A multi-year window is required to test persistence, pressure response and structural change; one current snapshot is insufficient."
+  },
+  "proxyUniverse": {
+    "broadMarket": [
+      {
+        "instrument": "US.SPY",
+        "role": "BROAD_US_EQUITY_PROXY"
+      },
+      {
+        "instrument": "US.QQQ",
+        "role": "LARGE_GROWTH_TECH_HEAVY_PROXY"
+      }
+    ],
+    "sectors": [
+      {
+        "instrument": "US.XLK",
+        "role": "TECHNOLOGY_SECTOR_PROXY"
+      },
+      {
+        "instrument": "US.XLF",
+        "role": "FINANCIALS_SECTOR_PROXY"
+      },
+      {
+        "instrument": "US.XLI",
+        "role": "INDUSTRIALS_SECTOR_PROXY"
+      },
+      {
+        "instrument": "US.XLE",
+        "role": "ENERGY_SECTOR_PROXY"
+      },
+      {
+        "instrument": "US.XLY",
+        "role": "CONSUMER_DISCRETIONARY_PROXY"
+      },
+      {
+        "instrument": "US.XLP",
+        "role": "CONSUMER_STAPLES_PROXY"
+      }
+    ],
+    "boundary": "ETF instruments are market proxies only. Their behavior cannot by itself establish economy-wide structure, carrier change or continuity."
+  },
+  "requests": [
+    {
+      "requestId": "MOOMOO-P1-KLINE-BROAD-SECTOR",
+      "capability": "HISTORY_KLINE",
+      "instruments": [
+        "US.SPY",
+        "US.QQQ",
+        "US.XLK",
+        "US.XLF",
+        "US.XLI",
+        "US.XLE",
+        "US.XLY",
+        "US.XLP"
+      ],
+      "parameters": {
+        "start": "2022-01-01",
+        "end": "2026-10-02",
+        "interval": "DAY",
+        "adjustment": "QFQ",
+        "fields": [
+          "TIME_KEY",
+          "OPEN",
+          "CLOSE",
+          "HIGH",
+          "LOW",
+          "VOLUME",
+          "TURNOVER",
+          "TURNOVER_RATE"
+        ],
+        "pageSize": 1000
+      },
+      "gapTargets": [
+        "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+        "US-W8E-SEM-MACRO-RECONFIGURATION",
+        "US-W8E-SEM-SYSTEM-CONTINUITY"
+      ]
+    },
+    {
+      "requestId": "MOOMOO-P1-CAPITAL-FLOW-BROAD-SECTOR",
+      "capability": "CAPITAL_FLOW",
+      "instruments": [
+        "US.SPY",
+        "US.QQQ",
+        "US.XLK",
+        "US.XLF",
+        "US.XLI",
+        "US.XLE",
+        "US.XLY",
+        "US.XLP"
+      ],
+      "parameters": {
+        "periodType": "DAY",
+        "start": "2025-10-02",
+        "end": "2026-10-02"
+      },
+      "gapTargets": [
+        "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+        "US-W8E-SEM-MACRO-RECONFIGURATION"
+      ]
+    },
+    {
+      "requestId": "MOOMOO-P1-FINANCIALS-REPRESENTATIVE-ISSUERS",
+      "capability": "FINANCIAL_STATEMENTS",
+      "instruments": [
+        "US.AAPL",
+        "US.MSFT",
+        "US.NVDA",
+        "US.JPM",
+        "US.XOM"
+      ],
+      "parameters": {
+        "statementTypes": [
+          "INCOME",
+          "BALANCE_SHEET",
+          "CASH_FLOW",
+          "MAIN_INDEX"
+        ],
+        "financialType": "ANNUAL_AND_QUARTERLY",
+        "currency": "USD",
+        "pageSize": 50
+      },
+      "gapTargets": [
+        "US-W8E-SEM-MACRO-RECONFIGURATION",
+        "US-W8E-SEM-SYSTEM-CONTINUITY"
+      ],
+      "boundary": "These issuers are a cross-sector pilot for pipeline validation, not a statistically representative sample of the U.S. corporate sector."
+    }
+  ]
+}
