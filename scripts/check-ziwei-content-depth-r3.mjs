@@ -28,7 +28,7 @@ const expected={
 };
 const results=[];
 for(const locale of ['zh-Hans','en']){
- const sections=await buildZiweiProductionSections({evidence:fixture.evidence,locale});
+ const sections=await buildZiweiContentDepthR3Sections({evidence:fixture.evidence,locale});
  assert.equal(sections.length,12);
  for(const id of Object.keys(expected[locale])){
   const section=sections.find(s=>s.sectionId===id);
@@ -42,7 +42,7 @@ for(const locale of ['zh-Hans','en']){
  const oldReality=locale==='zh-Hans'?'把这些条件与实际经历核对。证据不足的部分保持开放，不作为确定结论。':'Compare these conditions with lived experience. Insufficient evidence remains open rather than becoming a certain conclusion.';
  assert.equal(prose.split(oldReality).length-1,0,'Legacy repeated reality-check paragraph returned');
  const subject=fixture.subject;
- const snapshot=buildZiweiProductionPublication({evidence:{structured:fixture.evidence},sections,locale,subjectPresentation:subject});
+ const snapshot=buildZiweiContentDepthR3Publication({evidence:{structured:fixture.evidence},sections,locale,subjectPresentation:subject});
  assert.equal(snapshot.totalPages,33);
  assert.equal(snapshot.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,12);
  results.push({locale,sections:12,pages:33,editorialVersion:ZIWEI_CONTENT_DEPTH_VERSION,legacyRepeatedSentences:0});
