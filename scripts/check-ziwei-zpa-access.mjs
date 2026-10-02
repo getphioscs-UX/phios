@@ -45,4 +45,11 @@ assert.notEqual(newGeneration.snapshot.semanticSnapshotId,original.snapshot.sema
 assert.notEqual(newGeneration.snapshot.inputFingerprint,original.snapshot.inputFingerprint);
 assert.deepEqual(await openControlledZiweiReport(context,args,{loadSubject}),original);
 const results={scope:'LOCAL_EXISTING_POLICY_AND_SQL_ONLY',canonicalPersonLoader:'SERVER_DEPENDENCY_NOT_BOUND_TO_DEPLOYED_OWNER',accessTests:negatives,birthChange:{oldReleaseUnchanged:true,newSnapshotVersionRequired:true,oldVersion:original.snapshot.semanticSnapshotId,newVersion:newGeneration.snapshot.semanticSnapshotId},qaAccountDelivery:'NOT_PROVEN',productionVerification:'NOT_RUN'};
-fs.writeFileSync(dir+'/person-access.json',JSON.stringify(results,null,2)+'\n');sqlite.close();console.log('PASS ZPA local owner/consent negatives and immutable birth-input versioning. Deployed canonical person binding not claimed.');
+fs.writeFileSync(dir+'/person-access.json',JSON.stringify(results,null,2)+'\n');
+const renderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
+assert(!renderer.includes('Page.printToPDF'),'Customer release renderer must not regenerate PDF in the hot path');
+assert(!renderer.includes('countChromiumPdfPages'),'Customer release renderer must not reparse Chromium PDF page trees');
+assert(renderer.includes('DOM_PHYSICAL_PAGE_CONTRACT_V1'),'Deployed renderer must record the bounded DOM physical-page verification mode');
+assert(renderer.includes('pageSequenceValid'),'Deployed renderer must verify the exact 1..33 physical page sequence');
+assert(renderer.includes('hiddenOrZeroGeometryCount'),'Deployed renderer must reject hidden or zero-geometry physical pages');
+sqlite.close();console.log('PASS ZPA local owner/consent negatives, immutable birth-input versioning, and lightweight deployed render hot-path contract.');
