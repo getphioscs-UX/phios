@@ -22,6 +22,7 @@ const w8Before=read('content/civilization-atlas/reconfiguration/runtime-position
 ok(contract.status==='ACTIVE_CLAIM_EXTRACTION','CONTRACT');
 ok(contract.boundaries?.cwaAdmissionPerformed===false,'CWA_BOUNDARY');
 ok(contract.boundaries?.mutatesW8EvidenceBatches===false,'W8_MUTATION_BOUNDARY');
+ok(contract.allowedLocatorTypes.includes('API_RESPONSE_FIELD')&&contract.allowedLocatorTypes.includes('PROVIDER_SERIES_WINDOW'),'PROVIDER_LOCATOR_TYPES');
 const rebuilt=buildW8bClaimWorkOrders({validatedSources:sources});
 ok((work.workOrders||[]).length===rebuilt.length,'WORK_ORDER_COUNT');
 ok((validated.records||[]).every(x=>x.claimState==='SOURCE_BOUNDED_CLAIM_CANDIDATE_NOT_ADMITTED'),'CLAIM_STATE');
@@ -54,6 +55,9 @@ ok(handoff.admissionState==='NOT_EVALUATED_BY_CWA'&&handoff.candidate.url==='htt
 const badLocator={...fixture,claims:[{...fixture.claims[0],claimCandidateId:'FIX-CLAIM-BAD',sourceLocator:null}]};
 const br=validateW8bClaimIntake({intake:badLocator,validatedSources:fixtureSources,contract});
 ok(br.records.length===0&&br.rejected[0]?.reasons.includes('SOURCE_LOCATOR_REQUIRED'),'FIXTURE_LOCATOR_REJECT');
+const providerLocator={...fixture,claims:[{...fixture.claims[0],claimCandidateId:'FIX-CLAIM-PROVIDER',sourceLocator:{type:'PROVIDER_SERIES_WINDOW',value:'US.SPY close 2025-01-01..2026-10-02'}}]};
+const pr=validateW8bClaimIntake({intake:providerLocator,validatedSources:fixtureSources,contract});
+ok(pr.records.length===1&&pr.rejected.length===0,'FIXTURE_PROVIDER_LOCATOR');
 const badLane={...fixture,claims:[{...fixture.claims[0],claimCandidateId:'FIX-CLAIM-BAD-LANE',laneId:'TECHNOLOGY'}]};
 const lr=validateW8bClaimIntake({intake:badLane,validatedSources:fixtureSources,contract});
 ok(lr.records.length===0&&lr.rejected[0]?.reasons.includes('LANE_SOURCE_MISMATCH'),'FIXTURE_LANE_REJECT');

@@ -47,7 +47,28 @@ assert(!wrongSubject.productRoute.primaryProduct.sourceProduct);
 const paid=await attachBaziPublicationAccess(view,ctx,{loadEntitlement:async()=>purchased});assert.equal(paid.productRoute.primaryProduct.reportAccess.state,'FULL_REPORT');
 const full=paid.productRoute.primaryProduct.publicationReport,html=renderPublicationReport(full);assert(full.totalPages>36);assert.equal(full.totalPages,full.pages.length+6);
 for(const module of visualModules.modules){assert.equal(module.publicationCreatesMeaning,false);assert(module.sourceRefs.length);assert(html.includes(`data-publication-visual="${module.key}"`),module.key);}
-assert(html.includes('VIS-REPORT-BAZI-BODY.webp'));assert(html.includes('VIS-REPORT-BAZI-MOTIF.svg'));assert(html.includes('VIS-REPORT-BAZI-MOTIF-2.svg'));assert(html.includes('opacity:0.22'));assert(html.includes('opacity:0.17'));assert(html.includes('opacity:0.12'));assert(html.includes('opacity:0.28'));assert(html.includes('opacity:0.16'));assert.equal(visualAssets.intensityByFamily.SECTION_OPENER_PAGE,0.4);
+// Print Shell V2 intentionally projects one required background per page:
+ // section masters on opener pages and the shared body on reading pages. The
+ // legacy motif assets remain registered fallbacks, but are not emitted as
+ // layered <img> nodes in the V2 publication HTML.
+assert(html.includes('data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"'));
+assert(html.includes('VIS-REPORT-BAZI-BODY.webp'));
+assert(html.includes('pub-page-background--body'));
+assert(html.includes('pub-page-background--section'));
+assert(full.pages.every(page=>page.visualBinding?.backgroundMode==='METHOD_PRINT_SHELL_V2'));
+assert(full.pages.every(page=>page.visualBinding?.suppressSyntheticMotif===true));
+for(const sectionAsset of Object.values(visualAssets.sections)){
+ const url=visualAssets.bindings[sectionAsset];
+ assert(url,sectionAsset);
+ assert(html.includes(url),sectionAsset);
+}
+for(const motifKey of visualAssets.global.motifs){
+ const url=visualAssets.bindings[motifKey];
+ assert(url,motifKey);
+ assert(!html.includes(url),`PRINT_SHELL_V2_MOTIF_SHOULD_NOT_RENDER:${motifKey}`);
+}
+assert(!html.includes('data-decorative-layer='),'Print Shell V2 must not emit legacy layered decoration');
+assert.equal(visualAssets.intensityByFamily.SECTION_OPENER_PAGE,0.4);
 for(const color of ['#3aa878','#e66d52','#c79b52','#9a9da3','#438fc4','#c87949','#f0aa2f','#3c8fd0','#48c094','#e26d71'])assert(html.includes(color),color);
 const prod=await attachBaziPublicationAccess(view,{...ctx,env:{PHIOS_ENVIRONMENT:'production'}},{loadEntitlement:async()=>purchased});assert.equal(prod.productRoute.primaryProduct.reportAccess.reason,'FULL_REPORT_RELEASE_PENDING');assert(!prod.productRoute.primaryProduct.sourceProduct);
 assert.equal(JSON.stringify(reading),original,'publication must not mutate native semantics');
@@ -84,4 +105,4 @@ assert.equal(unavailable.productRoute.primaryProduct.reportAccess.reason,'PUBLIC
 assert(!unavailable.productRoute.primaryProduct.sourceProduct);assert(!unavailable.methodNativeReading.BZR);assert.deepEqual(unavailable.methodNativeReading.AST,other);
 assert.throws(()=>buildBaziPublicationVisual({reading,primaryVisualRef:'UNKNOWN'}));
 const store=fs.readFileSync('functions/commerce/book-commerce-store.js','utf8');assert.match(store,/p.purchase_state='purchased'/);assert.match(store,/o.customer_id=e.customer_id/);assert.match(store,/expires_at>\?3/);
-console.log('PASS: free payload excludes specialist detail; forged client payment cannot unlock; existing owned purchase + language + expiry boundaries; full visual registry, category colours, BODY and both motifs; Production release remains closed.');
+console.log('PASS: free payload excludes specialist detail; forged client payment cannot unlock; existing owned purchase + language + expiry boundaries; Print Shell V2 body/section-master projection, registered motif fallbacks and category colours; Production release remains closed.');

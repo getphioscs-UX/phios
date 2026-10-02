@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-AUTH-LIVE-IMPORT-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "EXECUTABLE_AUTH_REQUIRED",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P2",
+  "providerId": "MOOMOO_OPENAPI",
+  "authMode": "OAUTH_BEARER_RUNTIME_ONLY",
+  "tokenSource": "MOOMOO_ACCESS_TOKEN",
+  "tokenPersistenceAllowed": false,
+  "firstLiveCapability": "HISTORY_KLINE",
+  "endpointTemplate": "GET https://webapi.moomoo.com/api/v1.0/quote/{symbol}/history-kline",
+  "rules": [
+    "Abort before network access when MOOMOO_ACCESS_TOKEN is missing.",
+    "Never print, persist, hash, serialize or forward the bearer token into provider intake files.",
+    "Only GET quote/history-kline endpoints are allowed in P2-P2.",
+    "Trading/account/order endpoints are prohibited.",
+    "Provider entitlement errors stop the run and do not create partial success records for the affected symbol.",
+    "Raw provider bodies may be persisted only after headers and credentials are excluded.",
+    "Successful live import writes sanitized payloads to market-provider-intake-v1.json; evidence admission still requires W8A-P2 normalization, W8B claims and W8C CWA."
+  ],
+  "boundaries": {
+    "accountAccessAllowed": false,
+    "tradingAllowed": false,
+    "credentialPersistenceAllowed": false,
+    "claimGenerationAllowed": false,
+    "evidenceGenerationAllowed": false,
+    "semanticPromotionAllowed": false
+  }
+}

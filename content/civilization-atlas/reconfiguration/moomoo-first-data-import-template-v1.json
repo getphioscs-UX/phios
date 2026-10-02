@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-IMPORT-TEMPLATE-v1.0.0",
+  "version": "1.0.0",
+  "status": "EMPTY_TEMPLATE",
+  "providerId": "MOOMOO_OPENAPI",
+  "instructions": [
+    "Each payload corresponds to one governed request result or paginated result bundle.",
+    "rawResponse contains the provider response body only, never headers containing credentials.",
+    "normalizedRecords must preserve fieldPath, instrument, timestamp/value/unit.",
+    "For series data, every claim later uses PROVIDER_SERIES_WINDOW or API_RESPONSE_FIELD locator."
+  ],
+  "payloadTemplate": {
+    "payloadId": "MOOMOO-<request-id>-<retrieved-timestamp>",
+    "providerId": "MOOMOO_OPENAPI",
+    "capability": "HISTORY_KLINE",
+    "retrievedAt": "<ISO-8601>",
+    "request": {
+      "market": "US",
+      "symbols": [
+        "US.SPY"
+      ],
+      "start": "2021-01-01",
+      "end": "2026-10-02"
+    },
+    "rawResponse": {},
+    "normalizedRecords": [
+      {
+        "fieldPath": "data[].close",
+        "instrument": "US.SPY",
+        "timestamp": "<ISO-8601>",
+        "value": null,
+        "unit": "USD"
+      }
+    ]
+  }
+}

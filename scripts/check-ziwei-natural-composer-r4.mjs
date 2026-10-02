@@ -1,0 +1,13 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const r4=fs.readFileSync('functions/personal-reading/narrative/ziwei-natural-composer-r4.js','utf8');
+assert(r4.includes('composePublicationNarrative'));
+assert(r4.includes('buildReportSectionNarrativeBrief'));
+assert(r4.includes('PROFESSIONAL_PERSONAL_READING'));
+assert(r4.includes('providerCalled'));
+assert(r4.includes('verificationAccepted'));
+const v1=fs.readFileSync('functions/personal-reading/narrative/ziwei-production-composer-v1.js','utf8');
+assert(!v1.includes('ZIWEI-NATURAL-COMPOSER-R4'));
+const bazi=fs.readFileSync('assets/customer-ui/surfaces/bazi-print-shell-v2.css','utf8');
+assert(bazi.includes('data-section="S07_HEALTH"'));
+assert(bazi.includes('right:17mm!important'));
+console.log('PASS Zi Wei Natural Composer R4 governance + BaZi S07 safe-zone repair.');

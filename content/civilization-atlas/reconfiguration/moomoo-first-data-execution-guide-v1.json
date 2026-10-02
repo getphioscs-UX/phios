@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-EXECUTION-GUIDE-v1.0.0",
+  "version": "1.1.0",
+  "status": "EXECUTABLE_OAUTH_BEARER",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "steps": [
+    "Obtain a Moomoo OAuth 2.1 access token with quote read permission.",
+    "Store the access token only in the current local/runtime environment as MOOMOO_ACCESS_TOKEN. Do not commit it or paste it into JSON.",
+    "Run npm run moomoo:first-live-import. P2-P2 calls only GET /api/v1.0/quote/{symbol}/history-kline for the eight planned U.S. market/sector instruments.",
+    "The importer paginates backward using next_time, strips all credential headers, and writes sanitized provider payloads into market-provider-intake-v1.json.",
+    "Run npm run build:runtime-position-48:w8a:p2 to compute governed response digests and normalized snapshots.",
+    "Run npm run check:runtime-position-48:w8a:p2 and inspect the provider review before W8B provider claim extraction."
+  ],
+  "stopConditions": [
+    "NO_VALID_AUTH",
+    "ENTITLEMENT_DENIED",
+    "RATE_LIMIT_OR_PROVIDER_ERROR",
+    "RESPONSE_SCHEMA_UNEXPECTED",
+    "SECRET_FOUND_IN_EXPORT"
+  ]
+}

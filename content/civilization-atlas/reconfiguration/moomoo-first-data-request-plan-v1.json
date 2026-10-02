@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-REQUEST-PLAN-v1.0.0",
+  "version": "1.1.0",
+  "status": "READY_AUTH_REQUIRED",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "providerId": "MOOMOO_OPENAPI",
+  "dossierId": "DOSSIER-US",
+  "marketUniverse": {
+    "broadMarket": [
+      "US.SPY",
+      "US.QQQ"
+    ],
+    "sectors": [
+      "US.XLK",
+      "US.XLF",
+      "US.XLI",
+      "US.XLY",
+      "US.XLE",
+      "US.XLV"
+    ],
+    "companyFinancialPilot": [
+      "US.AAPL",
+      "US.MSFT",
+      "US.AMZN",
+      "US.NVDA",
+      "US.JPM"
+    ]
+  },
+  "requests": [
+    {
+      "requestId": "MOOMOO-US-HISTORY-KLINE-01",
+      "capability": "HISTORY_KLINE",
+      "instruments": [
+        "US.SPY",
+        "US.QQQ",
+        "US.XLK",
+        "US.XLF",
+        "US.XLI",
+        "US.XLY",
+        "US.XLE",
+        "US.XLV"
+      ],
+      "window": {
+        "start": "2021-01-01",
+        "end": "2026-10-02",
+        "interval": "DAY"
+      },
+      "fields": [
+        "time_key",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "turnover",
+        "turnover_rate"
+      ],
+      "gapTargets": [
+        "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+        "US-W8E-SEM-MACRO-RECONFIGURATION",
+        "US-W8E-SEM-SYSTEM-CONTINUITY"
+      ],
+      "purpose": "Provide longitudinal market and sector observations for persistence, volatility and cross-sector relationship analysis."
+    },
+    {
+      "requestId": "MOOMOO-US-CAPITAL-FLOW-01",
+      "capability": "CAPITAL_FLOW",
+      "instruments": [
+        "US.SPY",
+        "US.QQQ",
+        "US.XLK",
+        "US.XLF",
+        "US.XLI",
+        "US.XLY",
+        "US.XLE",
+        "US.XLV"
+      ],
+      "window": {
+        "start": "2025-10-02",
+        "end": "2026-10-02",
+        "period": "DAY"
+      },
+      "fields": [
+        "in_flow",
+        "main_in_flow",
+        "super_in_flow",
+        "big_in_flow",
+        "mid_in_flow",
+        "sml_in_flow",
+        "capital_flow_item_time"
+      ],
+      "gapTargets": [
+        "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+        "US-W8E-SEM-MACRO-RECONFIGURATION"
+      ],
+      "purpose": "Observe sustained capital-flow direction and relative sector migration; not a causal claim."
+    },
+    {
+      "requestId": "MOOMOO-US-VALUATION-01",
+      "capability": "VALUATION",
+      "instruments": [
+        "US.SPY",
+        "US.QQQ",
+        "US.XLK",
+        "US.XLF",
+        "US.XLI",
+        "US.XLY",
+        "US.XLE",
+        "US.XLV"
+      ],
+      "window": {
+        "interval": "YEAR5"
+      },
+      "valuationTypes": [
+        "PE",
+        "PB",
+        "PS"
+      ],
+      "gapTargets": [
+        "US-W8E-SEM-FINANCIAL-CONSTRAINT"
+      ],
+      "purpose": "Observe longitudinal valuation pressure and percentile context; requires Fed/regulatory cross-check for constraint claims."
+    },
+    {
+      "requestId": "MOOMOO-US-FINANCIALS-01",
+      "capability": "FINANCIAL_STATEMENTS",
+      "instruments": [
+        "US.AAPL",
+        "US.MSFT",
+        "US.AMZN",
+        "US.NVDA",
+        "US.JPM"
+      ],
+      "window": {
+        "financialType": "QUARTERLY_ANNUAL",
+        "periodsTargeted": "2021-2026"
+      },
+      "statementTypes": [
+        "INCOME",
+        "BALANCE_SHEET",
+        "CASH_FLOW",
+        "MAIN_INDEX"
+      ],
+      "gapTargets": [
+        "US-W8E-SEM-MACRO-RECONFIGURATION",
+        "US-W8E-SEM-SYSTEM-CONTINUITY"
+      ],
+      "purpose": "Provide subsystem-level longitudinal issuer operating/financial series; issuer observations cannot be generalized to the whole U.S. dossier."
+    }
+  ],
+  "expectedOutput": "content/civilization-atlas/reconfiguration/market-provider-intake-v1.json",
+  "secretsRequiredAtRuntimeOnly": [
+    "MOOMOO_ACCESS_TOKEN",
+    "MOOMOO_API_KEY"
+  ],
+  "liveCallPerformed": false,
+  "firstExecutableLiveRequest": "MOOMOO-US-HISTORY-KLINE-01",
+  "liveImportCommand": "npm run moomoo:first-live-import"
+}
