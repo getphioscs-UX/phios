@@ -155,11 +155,13 @@ function contractFor(section,ir,locale){
  const q=QUESTION[section.sectionId],outcome=locale==='zh-Hans'?'形成整合宫位、组合、网络、四化与时序的专业长文读取。':'Produce a professional long-form reading integrating palaces, compositions, networks, transformations and timing.';
  return createReportSectionNarrativeContract({methodId:'ZWR',sectionKey:section.sectionId,customerQuestion:locale==='zh-Hans'?q[0]:q[1],customerOutcome:outcome,requiredClaimRoles:uniq(ir.claims.map(c=>c.explanationRole)),optionalClaimRoles:['CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION'],timingPolicy:'WHEN_AUTHORITY_PRESENT',boundaryPolicy:'KEEP_UNCERTAINTY_LOCAL_NOT_DISCLAIMER_HEAVY',realityBridgePolicy:'QUESTIONS_AND_COMPARISONS_ONLY_UNLESS_OBSERVED_REALITY_SOURCE_ADMITTED',forbiddenInferenceClasses:['PROFESSION_PREDICTION','WEALTH_EVENT_PREDICTION','MARRIAGE_EVENT_PREDICTION','HEALTH_EVENT_PREDICTION',...PROHIBITED],depthTarget:{minimumMeaningfulUnits:0,maximumMeaningfulUnits:0,calibrationState:'ZIWEI_R5_HUMAN_REVIEW_REQUIRED'}});
 }
-export async function buildZiweiProfessionalSynthesisR5({evidence,locale,registry,env={},fetcher,providerAdapters=null,requestIdPrefix='ZIWEI-R5',onProgress=null}={}){
+export async function buildZiweiProfessionalSynthesisR5({evidence,locale,registry,env={},fetcher,providerAdapters=null,requestIdPrefix='ZIWEI-R5',onProgress=null,onlySectionIds=null}={}){
  if(!['en','zh-Hans'].includes(locale))throw Error('ZIWEI_R5_LOCALE_REQUIRED');
  const base=await buildZiweiContentDepthR3Sections({evidence,locale}),out=[],prior=[];
+ const selected=Array.isArray(onlySectionIds)&&onlySectionIds.length?new Set(onlySectionIds):null;
  for(const section of base){
   if(!NATURAL.has(section.sectionId)){out.push({...section,editorialVersion:ZIWEI_PROFESSIONAL_SYNTHESIS_R5_VERSION,professionalSynthesis:{status:'NOT_REQUESTED',reason:'STRUCTURAL_OR_APPENDIX_SECTION'}});continue;}
+  if(selected&&!selected.has(section.sectionId)){out.push({...section,editorialVersion:ZIWEI_PROFESSIONAL_SYNTHESIS_R5_VERSION,professionalSynthesis:{status:'NOT_REQUESTED',reason:'DIAGNOSTIC_SECTION_FILTER'}});continue;}
   if(typeof onProgress==='function')onProgress({phase:'SECTION_START',locale,sectionId:section.sectionId});
   const synthesisIr=await buildZiweiSynthesisIrR5({evidence,section,locale,priorSynthesis:prior});prior.push(synthesisIr);
   const contract=contractFor(section,synthesisIr,locale);
