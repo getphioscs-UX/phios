@@ -1,6 +1,6 @@
 {
   "schemaVersion": "PHI-OS-MOOMOO-FIRST-LIVE-PROVIDER-CLAIM-CONTRACT-v1.0.0",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "EXECUTABLE_FROM_REAL_PROVIDER_SNAPSHOTS",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P3",
   "providerId": "MOOMOO_OPENAPI",
@@ -9,7 +9,11 @@
   "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8C",
   "purpose": "Create source-bounded descriptive provider claim candidates from real normalized Moomoo snapshots without interpreting them as financial constraint, reconfiguration, continuity or runtime position evidence.",
   "supportedCapabilities": [
-    "HISTORY_KLINE"
+    "HISTORY_KLINE",
+    "CAPITAL_FLOW",
+    "VALUATION",
+    "FINANCIAL_STATEMENTS",
+    "REVENUE_BREAKDOWN"
   ],
   "claimDesign": {
     "oneClaimPerProviderSource": true,
@@ -24,7 +28,9 @@
     "Claims may report observation count and first/last observed values but may not characterize trend, causality, pressure, constraint, reconfiguration, persistence or continuity.",
     "The last provider observation is not called current unless CWA freshness admission later allows it.",
     "Provider claims remain NOT_EVALUATED_BY_CWA until W8C.",
-    "No provider claim may directly change W8E semantic-basis supportState."
+    "No provider claim may directly change W8E semantic-basis supportState.",
+    "Gap-closure provider claims remain descriptive: capital-flow direction, valuation judgment, issuer growth, structural reconfiguration and continuity are not inferred by W8B.",
+    "FINANCIAL_STATEMENTS and REVENUE_BREAKDOWN are issuer/subsystem evidence and may not be generalized to the United States dossier as a whole."
   ],
   "boundaries": {
     "investmentRecommendation": false,

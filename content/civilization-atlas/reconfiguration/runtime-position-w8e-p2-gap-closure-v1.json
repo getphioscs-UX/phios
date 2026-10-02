@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2-GAP-CLOSURE-v1.0.0",
-  "version": "1.0.0",
-  "status": "READY",
+  "version": "1.1.0",
+  "status": "EXECUTABLE_GAP_CLOSURE_PLAN",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2",
   "targets": [
     {
@@ -19,7 +19,12 @@
       "requiredAuthorityMix": [
         "MARKET_DATA_PROVIDER",
         "REGULATOR_OR_OFFICIAL_PRIMARY"
-      ]
+      ],
+      "productionRequests": [
+        "MOOMOO-US-CAPITAL-FLOW-01",
+        "MOOMOO-US-VALUATION-01"
+      ],
+      "closureState": "PROVIDER_MECHANISM_CONTEXT_PENDING_PLUS_REGULATOR_CROSSCHECK"
     },
     {
       "semanticBasisId": "US-W8E-SEM-MACRO-RECONFIGURATION",
@@ -38,7 +43,13 @@
       "requiredAuthorityMix": [
         "MULTI_SOURCE_LONGITUDINAL",
         "PRIMARY_OR_OFFICIAL_CROSSCHECK"
-      ]
+      ],
+      "productionRequests": [
+        "MOOMOO-US-CAPITAL-FLOW-01",
+        "MOOMOO-US-FINANCIALS-01",
+        "MOOMOO-US-REVENUE-BREAKDOWN-01"
+      ],
+      "closureState": "STRUCTURAL_CHANGE_EVIDENCE_PENDING"
     },
     {
       "semanticBasisId": "US-W8E-SEM-SYSTEM-CONTINUITY",
@@ -56,7 +67,28 @@
       "requiredAuthorityMix": [
         "LONGITUDINAL_PROVIDER",
         "PRIMARY_OR_OFFICIAL_CROSSCHECK"
-      ]
+      ],
+      "productionRequests": [
+        "MOOMOO-US-FINANCIALS-01",
+        "MOOMOO-US-REVENUE-BREAKDOWN-01"
+      ],
+      "closureState": "FUNCTIONAL_CONTINUITY_EVIDENCE_PENDING"
     }
-  ]
+  ],
+  "productionPlan": {
+    "provider": "MOOMOO_OPENAPI",
+    "command": "npm run moomoo:pkce-gap-closure",
+    "requestIds": [
+      "MOOMOO-US-CAPITAL-FLOW-01",
+      "MOOMOO-US-VALUATION-01",
+      "MOOMOO-US-FINANCIALS-01",
+      "MOOMOO-US-REVENUE-BREAKDOWN-01"
+    ],
+    "rules": [
+      "CAPITAL_FLOW uses broad-market/sector ETFs because Moomoo historical capital flow supports US ETFs.",
+      "VALUATION uses common-stock pilots because Moomoo Valuation Detail does not support ETFs.",
+      "FINANCIAL_STATEMENTS and REVENUE_BREAKDOWN use company pilots and remain subsystem evidence only.",
+      "Provider observations do not themselves satisfy semantic thresholds; W8B/W8C/W8D-P2/W8E-P2 must be rerun."
+    ]
+  }
 }
