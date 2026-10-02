@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D-P2-MULTI-AUTHORITY-MERGE-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_GOVERNED_MULTI_AUTHORITY_EVIDENCE_MERGE",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D-P2",
+  "title": "Governed Official/Regulator + Market Data Provider Evidence Merge and RRE Consumption",
+  "officialHandoff": "content/civilization-atlas/reconfiguration/runtime-position-w8c-rre-eligible-handoff-v1.json",
+  "providerHandoff": "content/civilization-atlas/reconfiguration/moomoo-provider-rre-eligible-handoff-v1.json",
+  "rreOwner": "REALITY_READOUT_ENGINE",
+  "canonicalConsumer": "scripts/lib/civilization-atlas/runtime-position-w8d-rre-consumption-v1.mjs",
+  "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2",
+  "rules": [
+    "Only already CWA-admitted RRE_ELIGIBLE DIRECT evidence may enter the merge.",
+    "The merge does not re-admit sources and does not alter authority class, domain, freshness, sourceId, claimId, laneId or provenance.",
+    "Authority classes remain distinct after merge; MARKET_DATA_PROVIDER is never promoted to REGULATOR, GOVERNMENT or OFFICIAL_PRIMARY.",
+    "Evidence count never determines authority. Source voting is forbidden.",
+    "Required-lane completeness is based on distinct lane IDs, not number of sources or claims.",
+    "Multiple evidence records in one lane increase lineage depth only; they do not create additional lanes.",
+    "Duplicate claimId is allowed only when the records are byte-semantically identical; conflicting duplicate IDs fail closed.",
+    "The original W8D official/regulator readout remains unchanged. W8D-P2 writes a separate enriched RRE readout.",
+    "Merged RRE consumption does not derive grammar, reality domain, runtime position, transition threshold or projection."
+  ],
+  "boundaries": {
+    "officialEvidenceMutated": false,
+    "providerEvidenceMutated": false,
+    "sourceVotingAllowed": false,
+    "authorityPromotionAllowed": false,
+    "baselineW8dOverwriteAllowed": false,
+    "grammarDerivationAllowed": false,
+    "realityDomainDerivationAllowed": false,
+    "runtimePositionCandidateAllowed": false,
+    "w8ePromotionAllowed": false
+  }
+}
