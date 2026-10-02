@@ -37,7 +37,7 @@ export function bindSectionVisual(sectionKey,{assets=visualAssets}={}){
  const assetKey=assets.sections[sectionKey],hero=assets.bindings[assetKey],style=assets.bindings[assets.global.sectionStyle],bodyUrl=assets.bindings[assets.global.bodyBackground]||null,motifUrl=assets.bindings[motifKey]||null,url=hero||style||bodyUrl;
  // Only explicit registry bindings become images; symbolic asset IDs never do.
  for(const v of [hero,style,bodyUrl,motifUrl].filter(Boolean))if(!/^https:\/\//.test(v)&&!/^\/assets\//.test(v))throw Error('SECTION_VISUAL_URL_INVALID');
- return {assetKey,url:url||null,bodyUrl,motifUrl,motifKey,intensityByFamily:assets.intensityByFamily||{},candidates:[hero,style,bodyUrl].filter(Boolean),fallback:assets.fallback,selected:hero?'SECTION_HERO':style?'SECTION_STYLE':bodyUrl?(motifUrl?'BODY_WITH_MOTIF':'BODY'):'CSS_PREMIUM',motif:'LANDSCAPE_RINGS'};
+ return {assetKey,url:url||null,bodyUrl,motifUrl,motifKey,intensityByFamily:assets.intensityByFamily||{},candidates:[hero,style,bodyUrl].filter(Boolean),fallback:assets.fallback,selected:hero?'SECTION_HERO':style?'SECTION_STYLE':bodyUrl?(motifUrl?'BODY_WITH_MOTIF':'BODY'):'CSS_PREMIUM',motif:'LANDSCAPE_RINGS',backgroundMode:'METHOD_PRINT_SHELL_V2',placement:assets.openerRotation?.[(sectionNumber-1)%assets.openerRotation.length]||'hero-bottom',required:Boolean(hero||bodyUrl),suppressSyntheticMotif:true};
 }
 export function validateExpandedSections(pages,plan=registry){
  let cursor=0;
