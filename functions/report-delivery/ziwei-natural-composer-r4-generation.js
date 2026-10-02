@@ -16,8 +16,12 @@ function assertLiveR4(sections){
  const rows=sections.filter(section=>NATURAL_SECTIONS.includes(section.sectionId));
  if(rows.length!==NATURAL_SECTIONS.length)unavailable('ZIWEI_R4_SECTION_SET_INCOMPLETE');
  const failed=rows.filter(section=>section.naturalComposition?.status!=='PASS'
+  ||section.naturalComposition?.composerStatus!=='PASS'
   ||section.naturalComposition?.providerCalled!==true
   ||section.naturalComposition?.verificationAccepted!==true
+  ||section.naturalComposition?.editorialQuality?.accepted!==true
+  ||!(section.naturalComposition?.semanticReviewCalls>0)
+  ||!(section.naturalComposition?.transportCalls>1)
   ||!section.naturalComposition?.compositionDigest);
  if(failed.length){
   const error=new Error('ZIWEI_R4_COMPOSITION_UNAVAILABLE');
