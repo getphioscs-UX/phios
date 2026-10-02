@@ -13,7 +13,14 @@ const runtime=(await build({stdin:{contents:"import {fitPublicationForPrint,sett
 fs.mkdirSync('tools/review',{recursive:true});fs.mkdirSync('docs/reports/ziwei/professional-synthesis-r5',{recursive:true});
 const artifacts=[];
 for(const [locale,suffix] of [['zh-Hans','ZH'],['en','EN']]){
- const sections=await buildZiweiProfessionalSynthesisR5({evidence:fixture.evidence,locale,registry:ZIWEI_R5_PAI_REGISTRY,env,requestIdPrefix:'ZIWEI-R5-REVIEW'});
+ console.log('R5 START',locale,'10 natural sections · OpenAI Sol deep composition');
+ const sections=await buildZiweiProfessionalSynthesisR5({
+  evidence:fixture.evidence,locale,registry:ZIWEI_R5_PAI_REGISTRY,env,requestIdPrefix:'ZIWEI-R5-REVIEW',
+  onProgress:event=>{
+   if(event.phase==='SECTION_START')console.log('R5',event.locale,event.sectionId,'START');
+   if(event.phase==='SECTION_END')console.log('R5',event.locale,event.sectionId,event.status,'composer='+event.composerStatus,'model='+(event.model||'none'),'calls='+event.transportCalls,'semanticReviews='+event.semanticReviewCalls,'units='+event.totalUnits+(event.reasons?.length?' reasons='+event.reasons.join(','):'')+(event.fallbackReason?' fallback='+event.fallbackReason:''));
+  }
+ });
  const natural=sections.filter(s=>s.professionalSynthesis?.status!=='NOT_REQUESTED');
  const failed=natural.filter(s=>s.professionalSynthesis?.status!=='PASS'||s.professionalSynthesis?.composerStatus!=='PASS'||s.professionalSynthesis?.providerCalled!==true||s.professionalSynthesis?.verificationAccepted!==true||s.professionalSynthesis?.editorialQuality?.accepted!==true||s.professionalSynthesis?.actualTier!=='T3_GOVERNED_DEEP_COMPOSITION'||s.professionalSynthesis?.model!=='gpt-5.6-sol'||!(s.professionalSynthesis?.semanticReviewCalls>0)||!(s.professionalSynthesis?.transportCalls>1));
  if(failed.length){
