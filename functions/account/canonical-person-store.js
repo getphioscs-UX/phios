@@ -2,6 +2,7 @@ import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persi
 import {validateCanonicalBirthInput} from '../method-client-delivery/canonical-birth-input-runtime.js';
 import {admitPersonUse,assertNoPersistedIdentity} from './person-use-policy.js';
 import {digest} from './oidc-auth.js';
+import {resolveBirthPlace} from '../location/place-resolver.js';
 
 const schema='CANONICAL_ACCOUNT_PERSON_V1', encoder=new TextEncoder(),decoder=new TextDecoder();
 const fail=(code,status=400)=>Object.assign(new Error(code),{code,status});
@@ -49,7 +50,7 @@ function consent(owner,id,purpose,version,now,expires){
 // Third-party/dependent intake remains closed until its existing authority policy is bound.
 export async function saveCanonicalPerson(context,body){
  const owner=personIdentity(context).userId,env=context.env;
- only(body,['action','personId','expectedVersion','name','birth','calculationSex','consent','expiresAt']);assertNoPersistedIdentity(body);
+ only(body,['action','personId','expectedVersion','name','birth','locationProviderRef','locale','calculationSex','consent','expiresAt']);assertNoPersistedIdentity(body);
  if(!['save','revoke'].includes(body.action)||!Number.isInteger(body.expectedVersion)||body.expectedVersion<0)throw fail('PERSON_REQUEST_INVALID');
  const old=body.personId?await loadCanonicalPerson(env,owner,body.personId):null;
  if((old?.version??0)!==body.expectedVersion)throw fail('PERSON_VERSION_CONFLICT',409);
@@ -65,14 +66,23 @@ export async function saveCanonicalPerson(context,body){
   if(body.consent.personalMethod!==true||body.consent.report!==true||body.consent.saveBirthInput!==true)throw fail('PERSON_EXPLICIT_CONSENT_REQUIRED',403);
   const expires=Date.parse(body.expiresAt);if(!Number.isFinite(expires)||expires<=Date.now()||expires>Date.now()+366*86400000)throw fail('PERSON_CONSENT_EXPIRY_REQUIRED');
   only(body.birth,['birthDate','birthTime','birthPlace','timezone','timeAccuracy']);
-  only(body.birth.birthPlace,['displayName','countryCode','latitude','longitude']);
-  only(body.birth.timezone,['iana','utcOffsetAtBirth']);
+  const requestedLocale=body.locale==='zh-Hans'?'zh-Hans':'en';
+  let resolvedBirth=body.birth,locationProviderRef=null,timezoneAuthority={source:'HUMAN_DECLARATION',confidence:'UNKNOWN'};
+  if(typeof body.locationProviderRef==='string'&&body.locationProviderRef.trim()){
+   const location=await resolveBirthPlace(body.locationProviderRef,{birthDate:body.birth.birthDate??null,birthTime:body.birth.birthTime??null,locale:requestedLocale,env});
+   resolvedBirth={...body.birth,birthPlace:{displayName:location.displayName,countryCode:location.countryCode,latitude:location.latitude,longitude:location.longitude},timezone:{iana:location.timezone.iana,utcOffsetAtBirth:location.timezone.utcOffsetAtBirth}};
+   locationProviderRef=location.providerRef;
+   timezoneAuthority={source:'GOVERNED_RESOLUTION',confidence:location.timezone.confidence||'HIGH'};
+  }else{
+   only(body.birth.birthPlace,['displayName','countryCode','latitude','longitude']);
+   only(body.birth.timezone,['iana','utcOffsetAtBirth']);
+  }
   if(body.calculationSex!=null&&!['MALE','FEMALE'].includes(body.calculationSex))throw fail('PERSON_CALCULATION_SEX_INVALID');
   const methodConsent=consent(owner,id,'PERSONAL_METHOD',version,now,new Date(expires).toISOString()),reportConsent=consent(owner,id,'REPORT',version,now,new Date(expires).toISOString());
-  const canonicalBirthInput={...body.birth,timezone:{...body.birth.timezone,source:'HUMAN_DECLARATION',confidence:'UNKNOWN'},locale:'en',consent:{recordId:methodConsent.consentId,granted:true,purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',persistence:'EXPLICIT'},inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'};
+  const canonicalBirthInput={...resolvedBirth,timezone:{...resolvedBirth.timezone,...timezoneAuthority},locale:requestedLocale,consent:{recordId:methodConsent.consentId,granted:true,purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',persistence:'EXPLICIT'},inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'};
   if(!validateCanonicalBirthInput(canonicalBirthInput).valid)throw fail('PERSON_BIRTH_INPUT_INVALID');
   if(canonicalBirthInput.timezone.iana!==null){try{new Intl.DateTimeFormat('en',{timeZone:canonicalBirthInput.timezone.iana});}catch{throw fail('PERSON_TIMEZONE_INVALID');}}
-  record={schemaVersion:schema,personId:id,ownerAccountId:owner,name:body.name.trim(),...body.birth,canonicalBirthInput,calculationSex:body.calculationSex??null,subjectClass:'SELF',consentState:'ACTIVE',methodConsent,reportConsent,createdAt:old?.createdAt??now,updatedAt:now,version,birthSourceRef:`CANONICAL_ACCOUNT_PERSON:${id}:v${version}`};
+  record={schemaVersion:schema,personId:id,ownerAccountId:owner,name:body.name.trim(),...resolvedBirth,canonicalBirthInput,locationProviderRef:locationProviderRef??old?.locationProviderRef??null,calculationSex:body.calculationSex??null,subjectClass:'SELF',consentState:'ACTIVE',methodConsent,reportConsent,createdAt:old?.createdAt??now,updatedAt:now,version,birthSourceRef:`CANONICAL_ACCOUNT_PERSON:${id}:v${version}`};
  }
  const text=JSON.stringify(record),iv=crypto.getRandomValues(new Uint8Array(12)),hash=await digest(text);
  const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:aad(owner,id,version)},await key(env),encoder.encode(text));
