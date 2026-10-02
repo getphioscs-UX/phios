@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-PACKAGE-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "READY_AUTH_REQUIRED",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "title": "First Moomoo Data Package",
+  "purpose": "Retrieve a bounded first package of U.S. market and financial-series observations specifically targeted at current W8E evidence gaps, without creating investment recommendations or runtime-position conclusions.",
+  "providerId": "MOOMOO_OPENAPI",
+  "authorityClass": "MARKET_DATA_PROVIDER",
+  "cwaDomain": "FINANCIAL_MARKETS",
+  "principles": [
+    "Use broad-market and sector instruments to observe market structure; do not treat any one security as the United States.",
+    "Use company financial statements only as subsystem evidence; do not generalize issuer-level observations to the whole dossier.",
+    "Keep raw observations separate from derived claims.",
+    "Longitudinal evidence requires explicit start/end windows and field lineage.",
+    "Provider package cannot by itself promote G2/P3, G14/P2 or G16/P3."
+  ],
+  "forbidden": [
+    "BUY_SELL_HOLD_RECOMMENDATION",
+    "PORTFOLIO_OPTIMIZATION",
+    "PRICE_TARGET",
+    "TRADING_EXECUTION",
+    "AUTO_SEMANTIC_PROMOTION"
+  ]
+}

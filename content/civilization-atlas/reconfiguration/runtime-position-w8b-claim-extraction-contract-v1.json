@@ -1,6 +1,6 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8B-CLAIM-EXTRACTION-CONTRACT-v1.0.0",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "ACTIVE_CLAIM_EXTRACTION",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8B",
   "title": "Current Evidence Claim Extraction",
@@ -37,7 +37,9 @@
     "DATASET_FIELD",
     "URL_FRAGMENT",
     "FIGURE",
-    "APPENDIX"
+    "APPENDIX",
+    "API_RESPONSE_FIELD",
+    "PROVIDER_SERIES_WINDOW"
   ],
   "allowedSupportLevels": [
     "DIRECT",
@@ -60,7 +62,8 @@
     "Claim type is only a candidate classification until Current Web Authority admission.",
     "One source may support multiple claims and lanes, but each claimCandidateId must be unique.",
     "Conflict groups may link contradictory or materially different claims without resolving them by source count.",
-    "Claim extraction does not infer runtime grammar, reality domain, Phase, current position, threshold crossing or future reachability."
+    "Claim extraction does not infer runtime grammar, reality domain, Phase, current position, threshold crossing or future reachability.",
+    "Provider-derived claims may use API_RESPONSE_FIELD or PROVIDER_SERIES_WINDOW locators, but the referenced provider snapshot must preserve responseDigest and field/window lineage."
   ],
   "boundaries": {
     "claimCandidateIsFact": false,

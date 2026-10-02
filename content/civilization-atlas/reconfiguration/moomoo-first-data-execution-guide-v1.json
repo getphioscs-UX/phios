@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-FIRST-DATA-EXECUTION-GUIDE-v1.0.0",
+  "version": "1.0.0",
+  "status": "AUTH_REQUIRED",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P1",
+  "steps": [
+    "Obtain Moomoo OpenAPI access using OAuth 2.1 + PKCE or runtime API key, according to provider entitlement.",
+    "Set MOOMOO_ACCESS_TOKEN or MOOMOO_API_KEY only in local/runtime environment; never commit it.",
+    "Execute the four request families in the request plan under the user's entitled markets/data permissions.",
+    "Export provider responses into market-provider-intake-v1.json using the import template with secrets removed.",
+    "Run npm run build:runtime-position-48:w8a:p2 to normalize and hash payloads.",
+    "Review normalized snapshots before creating W8B provider claims."
+  ],
+  "stopConditions": [
+    "NO_VALID_AUTH",
+    "ENTITLEMENT_DENIED",
+    "RATE_LIMITED_WITHOUT_RETRY_POLICY",
+    "RESPONSE_SCHEMA_UNEXPECTED",
+    "SECRET_FOUND_IN_EXPORT"
+  ]
+}
