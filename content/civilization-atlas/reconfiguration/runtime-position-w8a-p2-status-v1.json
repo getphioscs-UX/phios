@@ -1,8 +1,7 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-STATUS-v1.0.0",
-  "version": "1.4.0",
-  "status": "PROVIDER_EXPANSION_ACTIVE__MOOMOO_REGISTERED_AUTH_REQUIRED__FIRST_PACKAGE_PRODUCTION_CLOSURE_READY__NO_LIVE_SNAPSHOTS",
-
+  "version": "1.5.0",
+  "status": "PKCE_AUTH_HELPER_WAIT_STATE_HARDENED__USER_AUTH_REQUIRED",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
   "completed": {
     "registeredProviders": 1,
@@ -24,8 +23,9 @@
     "pkceAuthorizationRun": false,
     "packageClosureExecutable": true,
     "w8aProviderSourceHandoff": 0,
-    "providerClaimWorkOrders": 0
+    "providerClaimWorkOrders": 0,
+    "pkceWaitStateHardened": true
   },
-  "next": "Configure runtime-only Moomoo authorization and import one governed market-data payload. Run npm run moomoo:pkce-live-import, then npm run build:runtime-position-48:w8a:p2 and npm run build:moomoo:first-data-package. Real normalized snapshots will then project to W8A source candidates and W8B provider claim work orders.",
+  "next": "Run npm run moomoo:pkce-live-import and do not run build commands while the helper shows WAITING_FOR_BROWSER_AUTHORIZATION. Complete the Moomoo browser authorization first.",
   "reviewHtml": "tools/review/PHI-OS-48-RUNTIME-POSITION-W8A-P2-MARKET-DATA-PROVIDER.html"
 }

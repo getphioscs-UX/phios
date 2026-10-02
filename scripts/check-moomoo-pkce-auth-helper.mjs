@@ -22,6 +22,9 @@ ok(meta.clientId==='abc'&&!JSON.stringify(meta).includes('DO_NOT_COPY'),'REGISTR
 const helper=text('scripts/run-moomoo-pkce-auth-helper.mjs');
 for(const forbidden of ['console.log(token.access_token)','console.log(token.refresh_token)','registration_access_token:body.registration_access_token'])ok(!helper.includes(forbidden),'SECRET_LOG_OR_PERSIST_'+forbidden);
 ok(helper.includes("server.listen(60355,'127.0.0.1')"),'LOOPBACK_BIND');
+ok(helper.includes("await startCallbackServer(state)"),'LISTEN_BEFORE_BROWSER');
+ok(helper.includes("WAITING_FOR_BROWSER_AUTHORIZATION"),'WAIT_STATE_VISIBLE');
+ok(helper.includes("Start-Process -FilePath"),'WINDOWS_BROWSER_START_PROCESS');
 ok(helper.includes("returnedState!==expectedState"),'STATE_VALIDATION');
 ok(helper.includes("MOOMOO_ACCESS_TOKEN:accessToken"),'CHILD_ENV_HANDOFF');
 ok(helper.includes("scripts/run-moomoo-first-live-import.mjs"),'LIVE_IMPORT_HANDOFF');

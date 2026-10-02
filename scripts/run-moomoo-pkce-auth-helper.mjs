@@ -13,12 +13,23 @@ const redirectUri='http://localhost:60355/callback';
 assertLoopbackRedirect(redirectUri);
 
 const safeJson=async res=>{const t=await res.text();try{return JSON.parse(t);}catch{throw new Error('MOOMOO_OAUTH_NON_JSON_RESPONSE:HTTP_'+res.status);}};
-const openBrowser=url=>{
+const openBrowser=async url=>{
   const platform=process.platform;
-  const cmd=platform==='win32'?'cmd':platform==='darwin'?'open':'xdg-open';
-  const args=platform==='win32'?['/c','start','',''+url]:[url];
-  const child=spawn(cmd,args,{detached:true,stdio:'ignore'});
-  child.unref();
+  if(platform==='win32'){
+    const escaped=String(url).replaceAll("'","''");
+    await new Promise((resolve,reject)=>{
+      const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-Command',"Start-Process -FilePath '"+escaped+"'"],{stdio:'ignore'});
+      child.on('error',reject);
+      child.on('exit',code=>code===0?resolve():reject(new Error('MOOMOO_BROWSER_LAUNCH_EXIT_'+code)));
+    });
+    return;
+  }
+  const cmd=platform==='darwin'?'open':'xdg-open';
+  await new Promise((resolve,reject)=>{
+    const child=spawn(cmd,[url],{stdio:'ignore'});
+    child.on('error',reject);
+    child.on('exit',code=>code===0?resolve():reject(new Error('MOOMOO_BROWSER_LAUNCH_EXIT_'+code)));
+  });
 };
 async function registerClient(){
   const envId=String(process.env.MOOMOO_CLIENT_ID||'').trim();
@@ -41,27 +52,50 @@ async function registerClient(){
   fs.writeFileSync(clientFile,JSON.stringify(meta,null,2)+'\n',{mode:0o600});
   return {clientId:meta.clientId,source:'DYNAMIC_REGISTRATION'};
 }
-function waitForCallback(expectedState){
-  return new Promise((resolve,reject)=>{
-    const timeout=setTimeout(()=>{server.close();reject(new Error('MOOMOO_OAUTH_CALLBACK_TIMEOUT'));},10*60*1000);
-    const server=http.createServer((req,res)=>{
-      try{
-        const u=new URL(req.url,'http://localhost:60355');
-        if(u.pathname!=='/callback'){res.writeHead(404);res.end('Not found');return;}
-        const error=u.searchParams.get('error');
-        if(error){res.writeHead(400,{'Content-Type':'text/plain; charset=utf-8'});res.end('Moomoo authorization failed. You may close this window.');clearTimeout(timeout);server.close();reject(new Error('MOOMOO_OAUTH_AUTHORIZE_ERROR:'+error));return;}
-        const returnedState=u.searchParams.get('state');
-        const code=u.searchParams.get('code');
-        if(!returnedState||returnedState!==expectedState){res.writeHead(400,{'Content-Type':'text/plain; charset=utf-8'});res.end('Invalid OAuth state. You may close this window.');clearTimeout(timeout);server.close();reject(new Error('MOOMOO_OAUTH_STATE_MISMATCH'));return;}
-        if(!code){res.writeHead(400,{'Content-Type':'text/plain; charset=utf-8'});res.end('Authorization code missing. You may close this window.');clearTimeout(timeout);server.close();reject(new Error('MOOMOO_OAUTH_CODE_MISSING'));return;}
-        res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});
-        res.end('<!doctype html><meta charset="utf-8"><title>PHI OS · Moomoo</title><body style="font-family:system-ui;padding:40px"><h1>授权完成</h1><p>PHI OS 已收到 Moomoo 授权。你可以关闭这个窗口，终端会继续执行第一批 live import。</p></body>');
-        clearTimeout(timeout);server.close();resolve(code);
-      }catch(e){clearTimeout(timeout);server.close();reject(e);}
-    });
-    server.listen(60355,'127.0.0.1');
-    server.on('error',reject);
+async function startCallbackServer(expectedState){
+  let settleResolve,settleReject;
+  const callbackPromise=new Promise((resolve,reject)=>{settleResolve=resolve;settleReject=reject;});
+  const server=http.createServer((req,res)=>{
+    try{
+      const u=new URL(req.url,'http://localhost:60355');
+      if(u.pathname!=='/callback'){res.writeHead(404);res.end('Not found');return;}
+      const error=u.searchParams.get('error');
+      if(error){
+        res.writeHead(400,{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'});
+        res.end('Moomoo authorization failed. You may close this window.');
+        clearTimeout(timeout);server.close();settleReject(new Error('MOOMOO_OAUTH_AUTHORIZE_ERROR:'+error));return;
+      }
+      const returnedState=u.searchParams.get('state');
+      const code=u.searchParams.get('code');
+      if(!returnedState||returnedState!==expectedState){
+        res.writeHead(400,{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'});
+        res.end('Invalid OAuth state. You may close this window.');
+        clearTimeout(timeout);server.close();settleReject(new Error('MOOMOO_OAUTH_STATE_MISMATCH'));return;
+      }
+      if(!code){
+        res.writeHead(400,{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'});
+        res.end('Authorization code missing. You may close this window.');
+        clearTimeout(timeout);server.close();settleReject(new Error('MOOMOO_OAUTH_CODE_MISSING'));return;
+      }
+      res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});
+      res.end('<!doctype html><meta charset="utf-8"><title>PHI OS · Moomoo</title><body style="font-family:system-ui;padding:40px"><h1>授权完成</h1><p>PHI OS 已收到 Moomoo 授权。你可以关闭这个窗口，终端会继续执行第一批 live import。</p></body>');
+      clearTimeout(timeout);server.close();settleResolve(code);
+    }catch(e){
+      clearTimeout(timeout);server.close();settleReject(e);
+    }
   });
+  await new Promise((resolve,reject)=>{
+    const onError=e=>{server.off('listening',onListening);reject(e);};
+    const onListening=()=>{server.off('error',onError);resolve();};
+    server.once('error',onError);
+    server.once('listening',onListening);
+    server.listen(60355,'127.0.0.1');
+  });
+  const timeout=setTimeout(()=>{
+    server.close();
+    settleReject(new Error('MOOMOO_OAUTH_CALLBACK_TIMEOUT'));
+  },10*60*1000);
+  return {server,callbackPromise};
 }
 async function exchangeCode({code,clientId,verifier}){
   const body=new URLSearchParams({grant_type:'authorization_code',code,client_id:clientId,redirect_uri:redirectUri,code_verifier:verifier});
@@ -88,10 +122,18 @@ const challenge=pkceChallenge(verifier);
 const client=await registerClient();
 const authorizeUrl=buildAuthorizeUrl({host,clientId:client.clientId,redirectUri,state,codeChallenge:challenge});
 console.log('Moomoo OAuth helper ready. Client source: '+client.source);
-console.log('Opening the Moomoo authorization page in your browser. Approve only the quote/read access you intend to use.');
-const callback=waitForCallback(state);
-openBrowser(authorizeUrl);
-const code=await callback;
+const callbackServer=await startCallbackServer(state);
+console.log('OAuth callback listener ready: http://127.0.0.1:60355/callback');
+console.log('Opening the Moomoo authorization page in your browser. Approve the quote/read access needed for this research import.');
+try{
+  await openBrowser(authorizeUrl);
+}catch(e){
+  console.error('Browser launch failed: '+e.message);
+  console.error('Open this one-time authorization URL manually in your browser:');
+  console.error(authorizeUrl);
+}
+console.log('WAITING_FOR_BROWSER_AUTHORIZATION — complete the Moomoo page before running any other npm command. Timeout: 10 minutes.');
+const code=await callbackServer.callbackPromise;
 console.log('OAuth callback validated. Exchanging authorization code without printing secrets...');
 const token=await exchangeCode({code,clientId:client.clientId,verifier});
 console.log('Access token received in memory. Starting governed HISTORY_KLINE live import...');

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "PHI-OS-MOOMOO-PKCE-AUTH-HELPER-CONTRACT-v1.0.0",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "EXECUTABLE_LOCAL_PKCE",
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P2A",
   "providerId": "MOOMOO_OPENAPI",
@@ -39,7 +39,10 @@
     "Persist only non-secret client_id metadata in the gitignored .moomoo-auth directory.",
     "After token exchange, pass access_token only through the child-process environment to the governed first-live-import script.",
     "Do not persist refresh_token in P2-P2A; re-authorize for a later session until a dedicated secure credential-store contract exists.",
-    "Trading and account endpoints remain prohibited."
+    "Trading and account endpoints remain prohibited.",
+    "The callback listener must be confirmed listening before the authorization page is opened.",
+    "On Windows, browser launch uses PowerShell Start-Process so ampersands in the OAuth query string are not interpreted by cmd.exe.",
+    "The helper must print WAITING_FOR_BROWSER_AUTHORIZATION and remain alive until callback, timeout or explicit authorization failure."
   ],
   "boundaries": {
     "tokenPrinted": false,
