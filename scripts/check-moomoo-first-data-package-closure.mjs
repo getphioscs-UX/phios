@@ -13,7 +13,7 @@ const handoff=read('content/civilization-atlas/reconfiguration/market-provider-w
 const work=read('content/civilization-atlas/reconfiguration/moomoo-provider-claim-work-orders-v1.json');
 const status=read('content/civilization-atlas/reconfiguration/moomoo-first-data-package-status-v1.json');
 const built=buildFirstMoomooPackage({plan,snapshots,liveState});
-ok((status.requestFamilies||[]).length===4,'REQUEST_FAMILY_COUNT');
+ok((status.requestFamilies||[]).length===5,'REQUEST_FAMILY_COUNT');
 ok(status.completion?.providerClaims===0&&status.completion?.cwaEvidence===0&&status.completion?.w8ePromotions===0,'AUTHORITY_LEAK');
 ok((handoff.records||[]).length===built.snapRows.length,'HANDOFF_SNAPSHOT_COUNT');
 ok((handoff.records||[]).every(x=>x.authorityClassHint==='MARKET_DATA_PROVIDER'),'AUTHORITY_CLASS');
@@ -23,7 +23,8 @@ ok((work.records||[]).every(x=>x.allowedLocatorTypes.includes('API_RESPONSE_FIEL
 const fxSnap={snapshotId:'S1',providerId:'MOOMOO_OPENAPI',capability:'HISTORY_KLINE',request:{market:'US',symbols:['US.SPY']},retrievedAt:'2026-10-02T04:00:00Z',responseDigest:'a'.repeat(64),records:[{fieldPath:'data.kline_list[].close',instrument:'US.SPY',timestamp:'2026-10-01T00:00:00Z',value:100,unit:'price'}]};
 const src=providerSnapshotToW8aSource(fxSnap);ok(src.targetLanes.length===1&&src.targetLanes[0]==='PRESSURE_FIELD','FIXTURE_LANE');ok(src.authorityClassHint==='MARKET_DATA_PROVIDER','FIXTURE_AUTHORITY');
 const wo=buildProviderClaimWorkOrders([src]);ok(wo.length===1&&wo[0].state==='CLAIM_REQUIRED','FIXTURE_WORK_ORDER');
-const fxPlan={requests:[{requestId:'MOOMOO-US-HISTORY-KLINE-01',capability:'HISTORY_KLINE',instruments:['US.SPY']},{requestId:'X2',capability:'CAPITAL_FLOW',instruments:['US.SPY']},{requestId:'X3',capability:'VALUATION',instruments:['US.SPY']},{requestId:'X4',capability:'FINANCIAL_STATEMENTS',instruments:['US.AAPL']}]};
+const revSrc=providerSnapshotToW8aSource({...fxSnap,snapshotId:'S2',capability:'REVENUE_BREAKDOWN',request:{market:'US',symbols:['US.AAPL']},responseDigest:'b'.repeat(64)});ok(revSrc.targetLanes.length===1&&revSrc.targetLanes[0]==='INDUSTRY','REVENUE_BREAKDOWN_LANE');
+const fxPlan={gapClosureExecutableRequestIds:['X2','X3','X4','X5'],requests:[{requestId:'MOOMOO-US-HISTORY-KLINE-01',capability:'HISTORY_KLINE',instruments:['US.SPY']},{requestId:'X2',capability:'CAPITAL_FLOW',instruments:['US.SPY']},{requestId:'X3',capability:'VALUATION',instruments:['US.AAPL']},{requestId:'X4',capability:'FINANCIAL_STATEMENTS',instruments:['US.AAPL']},{requestId:'X5',capability:'REVENUE_BREAKDOWN',instruments:['US.AAPL']}]};
 const bx=buildFirstMoomooPackage({plan:fxPlan,snapshots:{records:[fxSnap]},liveState:{networkInvoked:true}});ok(bx.firstLiveBackboneComplete===true&&bx.fullPackageComplete===false,'FIXTURE_COMPLETION');
 const pkg=text('package.json');ok(pkg.includes('"build:moomoo:first-data-package"')&&pkg.includes('"check:moomoo:first-data-package:closure"'),'PACKAGE');
 console.log('PASS first Moomoo data package closure: real snapshots project only to W8A source candidates + W8B claim work orders; zero claims/evidence/W8E promotions are preserved until later stages.');

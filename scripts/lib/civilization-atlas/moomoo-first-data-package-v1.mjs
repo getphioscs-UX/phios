@@ -2,13 +2,15 @@ const capabilityLanes=Object.freeze({
   HISTORY_KLINE:['PRESSURE_FIELD'],
   CAPITAL_FLOW:['PRESSURE_FIELD'],
   VALUATION:['PRESSURE_FIELD'],
-  FINANCIAL_STATEMENTS:['INDUSTRY','CARRIER_STRUCTURE']
+  FINANCIAL_STATEMENTS:['INDUSTRY'],
+  REVENUE_BREAKDOWN:['INDUSTRY']
 });
 const endpointByCapability=Object.freeze({
   HISTORY_KLINE:'https://webapi.moomoo.com/api/v1.0/quote/{symbol}/history-kline',
-  CAPITAL_FLOW:'https://webapi.moomoo.com/',
-  VALUATION:'https://webapi.moomoo.com/',
-  FINANCIAL_STATEMENTS:'https://webapi.moomoo.com/'
+  CAPITAL_FLOW:'https://webapi.moomoo.com/api/v1.0/quote/{symbol}/capital-flow/history',
+  VALUATION:'https://webapi.moomoo.com/api/v1.0/quote/{symbol}/valuation/detail',
+  FINANCIAL_STATEMENTS:'https://webapi.moomoo.com/api/v1.0/quote/{symbol}/financials/statements',
+  REVENUE_BREAKDOWN:'https://webapi.moomoo.com/api/v1.0/quote/{symbol}/financials/revenue-breakdown'
 });
 const uniq=v=>[...new Set(v||[])];
 
@@ -19,7 +21,7 @@ export function buildFirstMoomooPackage({plan,snapshots,liveState}={}){
   const requestFamilies=(plan?.requests||[]).map(req=>{
     const rows=byCapability.get(req.capability)||[];
     const instruments=uniq(rows.flatMap(x=>x.request?.symbols||[]));
-    const executable=req.requestId==='MOOMOO-US-HISTORY-KLINE-01';
+    const executable=req.requestId==='MOOMOO-US-HISTORY-KLINE-01'||(plan?.gapClosureExecutableRequestIds||[]).includes(req.requestId);
     return {
       requestId:req.requestId,
       capability:req.capability,
@@ -30,7 +32,7 @@ export function buildFirstMoomooPackage({plan,snapshots,liveState}={}){
     };
   });
   const hist=requestFamilies.find(x=>x.capability==='HISTORY_KLINE');
-  const fullCaps=['HISTORY_KLINE','CAPITAL_FLOW','VALUATION','FINANCIAL_STATEMENTS'];
+  const fullCaps=['HISTORY_KLINE','CAPITAL_FLOW','VALUATION','FINANCIAL_STATEMENTS','REVENUE_BREAKDOWN'];
   const firstLiveBackboneComplete=Boolean(hist&&hist.state==='SNAPSHOTS_COMPLETE_FOR_PLAN');
   const fullPackageComplete=fullCaps.every(cap=>requestFamilies.find(x=>x.capability===cap)?.state==='SNAPSHOTS_COMPLETE_FOR_PLAN');
   return {requestFamilies,firstLiveBackboneComplete,fullPackageComplete,snapRows};
