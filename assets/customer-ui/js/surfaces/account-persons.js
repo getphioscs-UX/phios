@@ -1,9 +1,16 @@
 import {esc,tr} from './runtime-ui.js';
 import {accountRequest} from './secure-drafts.js';
-const host=document.createElement('section');host.className='cx-card cx-stack';host.id='account-persons';
+const host=document.createElement('section');host.className='cx-card cx-stack cx-person-hub';host.id='account-persons';
 document.querySelector('#main .cx-container')?.append(host);
-let persons=[],reports=[],editing=null,message='',available=false;
-const field=(name,en,zh,type='text',value='',extra='')=>`<label class="cx-field">${esc(tr(en,zh))}<input class="cx-input" name="${name}" type="${type}" value="${esc(value)}" ${extra}></label>`;
+let persons=[],reports=[],editing=null,message='',available=false,locationCandidates=[],selectedLocation=null,locationBusy=false,searchTimer=null;
+const field=(name,en,zh,type='text',value='',extra='')=>`<label class="cx-field"><span>${esc(tr(en,zh))}</span><input class="cx-input" name="${name}" type="${type}" value="${esc(value)}" ${extra}></label>`;
+const locale=()=>document.documentElement.lang==='zh-Hans'?'zh-Hans':'en';
+const oneYearFromNow=()=>{const d=new Date();d.setUTCDate(d.getUTCDate()+365);return d.toISOString().slice(0,10)};
+function placeResults(){
+ if(locationBusy)return `<p class="cx-field-helper">${esc(tr('Finding places…','正在查找地点…'))}</p>`;
+ if(!locationCandidates.length)return '';
+ return `<div class="cx-place-results" role="listbox">${locationCandidates.map(c=>`<button type="button" class="cx-place-option" data-place-ref="${esc(c.providerRef)}"><strong>${esc(c.primaryLabel||c.label)}</strong>${c.secondaryLabel?`<small>${esc(c.secondaryLabel)}</small>`:''}</button>`).join('')}</div>`;
+}
 function render(){
  const p=persons.find(p=>p.personId===editing),birth=p?.canonicalBirthInput;
  host.innerHTML=`<h2>${esc(tr('Your birth profile','你的出生资料'))}</h2><p>${esc(tr('Save your own birth details with consent. Updates create a new version; released reports stay unchanged.','经你同意保存本人的出生资料。修改会建立新版本，已发布报告保持不变。'))}</p><p role="status">${esc(message)}</p>${available?`
