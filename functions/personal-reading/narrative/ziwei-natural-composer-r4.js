@@ -1,7 +1,7 @@
 import {buildZiweiContentDepthR3Sections} from './ziwei-production-composer-r3.js';
 import {createReportSectionNarrativeContract} from './report-section-contract.js';
 import {buildReportSectionNarrativeBrief} from './report-section-brief.js';
-import {composePublicationNarrative} from './narrative-writer.js';
+import {composeReportSectionT2} from './report-section-t2-composer.js';
 
 export const ZIWEI_NATURAL_COMPOSER_R4_VERSION='ZIWEI-NATURAL-COMPOSER-R4';
 
@@ -43,6 +43,33 @@ const ROLE_MAP={
  WHAT_TO_PROTECT:'STRUCTURE',WHAT_TO_CHANGE:'MEANING',WHAT_NOT_TO_OVERCOMMIT:'COUNTERWEIGHTS',WHAT_TO_OBSERVE_NOW:'OBSERVABLE_EXPRESSION',REVISION_EVIDENCE:'NAVIGATION'
 };
 
+function proseUnits(value,locale){
+ const text=String(value||'').trim();
+ return locale==='en'?text.split(/\s+/).filter(Boolean).length:[...text.replace(/\s/g,'')].length;
+}
+function sentenceCount(value,locale){
+ const text=String(value||'').trim();
+ return locale==='en'?(text.match(/[.!?](?:\s|$)/g)||[]).length:(text.match(/[。！？]/g)||[]).length;
+}
+export function evaluateZiweiR4Editorial(blocks,{locale,sectionId}={}){
+ const rows=Array.isArray(blocks)?blocks:[],twoPage=['S02','S04','S05'].includes(sectionId),reasons=[];
+ if(rows.length<4||rows.length>6)reasons.push('R4_BLOCK_COUNT');
+ const units=rows.map(row=>proseUnits(row?.text,locale)),total=units.reduce((a,b)=>a+b,0);
+ const minTotal=locale==='en'?(twoPage?450:230):(twoPage?650:350);
+ const maxTotal=locale==='en'?(twoPage?900:430):(twoPage?1300:700);
+ const minBlock=locale==='en'?45:70;
+ if(total<minTotal)reasons.push('R4_LONG_FORM_TOO_THIN');
+ if(total>maxTotal)reasons.push('R4_LONG_FORM_TOO_DENSE_FOR_FIXED_PAGE');
+ if(units.some(n=>n<minBlock))reasons.push('R4_BLOCK_TOO_THIN');
+ if(rows.some(row=>sentenceCount(row?.text,locale)<2))reasons.push('R4_BLOCK_NOT_DEVELOPED');
+ const openings=rows.map(row=>String(row?.text||'').trim().toLowerCase().replace(/^[\s"'“”‘’]+/u,'').slice(0,18)).filter(Boolean);
+ if(new Set(openings).size!==openings.length)reasons.push('R4_REPEATED_BLOCK_OPENING');
+ const joined=rows.map(row=>String(row?.text||'')).join('\n');
+ const templateHits=locale==='en'?(joined.match(/\b(?:this star|the star)\b[^.!?]{0,45}\b(?:presents|shows|brings)\b/gi)||[]).length:(joined.match(/星曜[^。！？]{0,20}(?:呈现|代表|表示)/g)||[]).length;
+ if(templateHits>2)reasons.push('R4_STAR_GLOSSARY_PATTERN');
+ return Object.freeze({accepted:reasons.length===0,reasons:Object.freeze(reasons),blockCount:rows.length,totalUnits:total,minTotal,maxTotal,unitSystem:locale==='en'?'WORDS':'CJK_CHARS'});
+}
+
 function sectionContract(section,locale,roles){
  const q=QUESTIONS[section.sectionId]||[section.title,section.title],o=OUTCOMES[section.sectionId]||q;
  return createReportSectionNarrativeContract({
@@ -82,19 +109,24 @@ export async function buildZiweiNaturalComposerR4({evidence,locale,registry,env=
   if(!QUESTIONS[section.sectionId]){sections.push({...section,naturalComposition:{status:'NOT_REQUESTED',reason:'STRUCTURAL_OR_APPENDIX_SECTION'}});continue;}
   const ir=richClaimIr(section),roles=ir.claims.map(c=>c.explanationRole),contract=sectionContract(section,locale,roles);
   const brief=await buildReportSectionNarrativeBrief({contract,richClaimIr:ir,locale,sourceAuthorityVersion:section.editorialVersion,styleIntent:{
-   tone:'PROFESSIONAL_PERSONAL_READING',depth:'LONG_FORM_PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false,
-   sectionSpecific:true,avoidGlossaryProse:true,avoidRepeatedTemplates:true,realWorldScenes:'CONDITIONAL_ONLY'
+   tone:'PROFESSIONAL_ZIWEI_PERSONAL_READING',depth:'LONG_FORM_PROFESSIONAL',customerReadable:true,explanationFirst:true,governanceJargonDefault:false,
+   methodStyleProfile:'ZIWEI_PROFESSIONAL_READING_R4',sectionSpecific:true,avoidGlossaryProse:true,avoidRepeatedTemplates:true,avoidRepeatedSentenceOpeners:true,
+   synthesizePalaceStarEvidence:true,realWorldScenes:'CONDITIONAL_ONLY',timingLayersStayDistinct:true
   }});
-  const composition=await composePublicationNarrative({sectionBrief:brief,registry,env,fetcher,providerAdapters,requestId:`${requestIdPrefix}-${section.sectionId}-${locale}`});
+  const composition=await composeReportSectionT2({brief,registry,env,fetcher,providerAdapters,requestId:`${requestIdPrefix}-${section.sectionId}-${locale}`,timeoutMs:120000});
   const candidate=composition.status==='PASS'?composition.candidate?.blocks||[]:[];
+  const editorialQuality=candidate.length?evaluateZiweiR4Editorial(candidate,{locale,sectionId:section.sectionId}):Object.freeze({accepted:false,reasons:Object.freeze(['R4_COMPOSER_NOT_PASS'])});
+  const admittedStatus=composition.status==='PASS'&&editorialQuality.accepted?'PASS':composition.status==='PASS'?'EDITORIAL_REJECTED':composition.status;
   const paragraphs=candidate.length?candidate.map(b=>b.text):section.paragraphs;
   const publicationIr={...section.publicationIr,blocks:paragraphs.map((prose,i)=>({
    blockId:`ZWR-R4:${section.sectionId}:${i+1}`,role:candidate[i]?.role||section.publicationIr.blocks[i]?.role||'MEANING',
    prose,claimRefs:candidate[i]?.claimRefs||section.claims.map(c=>c.claimId),supportRefs:candidate[i]?.supportRefs||[]
   }))};
   sections.push({...section,paragraphs,publicationIr,editorialVersion:ZIWEI_NATURAL_COMPOSER_R4_VERSION,naturalComposition:{
-   status:composition.status,providerCalled:composition.internalOnly?.providerCalled===true,actualTier:composition.internalOnly?.actualTier,
-   verificationAccepted:composition.verification?.accepted===true,editorialQuality:composition.verification?.editorialQuality||null,
+   status:admittedStatus,composerStatus:composition.status,providerCalled:composition.internalOnly?.providerCalled===true,actualTier:composition.internalOnly?.actualTier,
+   verificationAccepted:composition.verification?.accepted===true,semanticEditorialQuality:composition.verification?.editorialQuality||null,editorialQuality,
+   providerAttemptCount:composition.internalOnly?.providerAttemptCount||0,transportCalls:composition.internalOnly?.transportCalls||0,
+   semanticReviewCalls:composition.internalOnly?.semanticReviewCalls||0,compositionDigest:composition.compositionDigest||null,
    fallbackReason:composition.internalOnly?.fallbackReason||null,usageRecord:composition.usageRecord||null
   }});
  }

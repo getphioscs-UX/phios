@@ -1,7 +1,8 @@
 {
   "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-STATUS-v1.0.0",
-  "version": "1.0.0",
-  "status": "PROVIDER_EXPANSION_ACTIVE__MOOMOO_REGISTERED_AUTH_REQUIRED",
+  "version": "1.4.0",
+  "status": "PROVIDER_EXPANSION_ACTIVE__MOOMOO_REGISTERED_AUTH_REQUIRED__FIRST_PACKAGE_PRODUCTION_CLOSURE_READY__NO_LIVE_SNAPSHOTS",
+
   "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
   "completed": {
     "registeredProviders": 1,
@@ -11,8 +12,20 @@
     "normalizedSnapshots": 0,
     "providerClaimsGenerated": 0,
     "cwaEvidenceGenerated": 0,
-    "w8eBasisPromoted": 0
+    "w8eBasisPromoted": 0,
+    "firstPackagePlanned": true,
+    "requestFamilies": 4,
+    "plannedMarketInstruments": 8,
+    "plannedCompanyFinancialInstruments": 5,
+    "liveImportExecutable": true,
+    "liveCapability": "HISTORY_KLINE",
+    "liveSymbolsPlanned": 8,
+    "pkceHelperExecutable": true,
+    "pkceAuthorizationRun": false,
+    "packageClosureExecutable": true,
+    "w8aProviderSourceHandoff": 0,
+    "providerClaimWorkOrders": 0
   },
-  "next": "Configure runtime-only Moomoo authorization and import one governed market-data payload.",
+  "next": "Configure runtime-only Moomoo authorization and import one governed market-data payload. Run npm run moomoo:pkce-live-import, then npm run build:runtime-position-48:w8a:p2 and npm run build:moomoo:first-data-package. Real normalized snapshots will then project to W8A source candidates and W8B provider claim work orders.",
   "reviewHtml": "tools/review/PHI-OS-48-RUNTIME-POSITION-W8A-P2-MARKET-DATA-PROVIDER.html"
 }

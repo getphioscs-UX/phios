@@ -26,4 +26,8 @@ const skin=fs.readFileSync('assets/customer-ui/surfaces/bazi-print-shell-v2.css'
 assert(shared.includes('210mm!important')&&shared.includes('297mm!important'));
 assert(!shared.includes('data-method="BZR"')&&!shared.includes('data-method="ZWR"'),'Shared shell leaked method identity');
 assert(skin.includes('data-method="BZR"'),'BaZi skin must remain method-specific');
-console.log('PASS BaZi Print Shell V2 migration contract: accepted copy digests unchanged, 38/38 pages, 10 masters, shared A4 shell bound.');
+const s07='[data-section="S07_HEALTH"][data-page-family="SECTION_OPENER_PAGE"]';
+for(const selector of ['.pub-opener-heading','.pub-narrative','.pub-master-insights'])assert(skin.includes(s07+' '+selector),'S07 right-side safe-zone missing: '+selector);
+assert(skin.includes('left:auto!important;right:17mm!important;width:92mm!important'),'S07 copy must use right-side 92mm safe zone');
+assert(skin.includes(s07+' .pub-decoration:after'),'S07 right-side readability scrim missing');
+console.log('PASS BaZi Print Shell V2 migration contract: accepted copy digests unchanged, 38/38 pages, 10 masters, S07 right-side safe-zone, shared A4 shell bound.');

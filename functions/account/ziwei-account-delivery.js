@@ -12,7 +12,7 @@ export async function generateAndReleaseAccountZiwei(context,selection){
  // An actual private server browser verifier must be configured. Customer claims
  // and local test receipts cannot cross this boundary.
  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);
- const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({candidate,method:'ZWR',compositionVersion:'ZIWEI-PRODUCTION-COMPOSER-V1'})}));
+ const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({candidate,method:'ZWR',compositionVersion:candidate.snapshot.compositionVersion})}));
  if(!response.ok)throw fail('REPORT_RENDER_FAILED');
  const output=JSON.parse(await bounded(response,8000000)),receipt=output.verification;
  if(typeof output.html!=='string'||receipt?.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||receipt?.passed!==true||receipt?.pageCount!==33||receipt?.brokenImages!==0||receipt?.overflowCount!==0||receipt?.errorCount!==0||receipt?.outputDigest!==await digest(output.html))throw fail('REPORT_RENDER_VERIFICATION_REQUIRED');

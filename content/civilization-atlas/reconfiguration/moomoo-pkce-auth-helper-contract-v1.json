@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-MOOMOO-PKCE-AUTH-HELPER-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "EXECUTABLE_LOCAL_PKCE",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2-P2A",
+  "providerId": "MOOMOO_OPENAPI",
+  "apiHost": "https://webapi.moomoo.com",
+  "redirectUri": "http://localhost:60355/callback",
+  "endpoints": {
+    "register": "POST /oauth2/register",
+    "authorize": "GET /oauth2/authorize/confirm",
+    "token": "POST /oauth2/token"
+  },
+  "clientType": "PUBLIC_CLIENT",
+  "tokenEndpointAuthMethod": "none",
+  "grantTypes": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "responseTypes": [
+    "code"
+  ],
+  "pkceMethod": "S256",
+  "clientIdStorage": ".moomoo-auth/client.json",
+  "clientIdIsSecret": false,
+  "secretPersistence": {
+    "registrationAccessToken": false,
+    "authorizationCode": false,
+    "codeVerifier": false,
+    "accessToken": false,
+    "refreshToken": false
+  },
+  "postAuthorizationAction": "SPAWN_FIRST_LIVE_IMPORT_WITH_ACCESS_TOKEN_IN_CHILD_ENV",
+  "rules": [
+    "Generate state and code_verifier with cryptographically secure randomness for every authorization session.",
+    "Validate callback state exactly before exchanging the authorization code.",
+    "Bind callback server to loopback only on port 60355.",
+    "Never log authorization code, code_verifier, registration_access_token, access_token or refresh_token.",
+    "Persist only non-secret client_id metadata in the gitignored .moomoo-auth directory.",
+    "After token exchange, pass access_token only through the child-process environment to the governed first-live-import script.",
+    "Do not persist refresh_token in P2-P2A; re-authorize for a later session until a dedicated secure credential-store contract exists.",
+    "Trading and account endpoints remain prohibited."
+  ],
+  "boundaries": {
+    "tokenPrinted": false,
+    "tokenPersisted": false,
+    "refreshTokenPersisted": false,
+    "accountAccessAllowed": false,
+    "tradingAllowed": false,
+    "liveImportMayRunOnlyAfterStateValidation": true
+  }
+}
