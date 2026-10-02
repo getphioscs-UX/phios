@@ -315,8 +315,19 @@ function renderSnapshots(host,data,l,state,store){
  const caseTitle=id=>{const x=caseMap.get(id);return x?(zh?x.titleZh:x.titleEn):id};
  const currentSet=new Set(current.majorReconfigurationCases||[]),prevSet=new Set(prev?.majorReconfigurationCases||[]),nextSet=new Set(next?.majorReconfigurationCases||[]);
  const introduced=[...currentSet].filter(id=>!prevSet.has(id)),continued=[...currentSet].filter(id=>prevSet.has(id)),leaving=[...currentSet].filter(id=>!nextSet.has(id));
- const resolveVisual=snap=>{if(!snap)return null;const record=(data.visualStatus?.assets||[]).find(a=>a.assetId===snap.visualAssetId);if(record?.status!=='PRESENT')return null;return resolveAtlasVisualById(data.visualBindings,snap.visualAssetId);};
- const card=(snap,role)=>{if(!snap)return'';const v=resolveVisual(snap),title=zh?snap.metadata?.titleZh:snap.metadata?.titleEn;return '<article class="civ-reconfig-shift-card '+role+'"><p class="knowledge-eyebrow">'+esc(role==='is-current'?(zh?'当前横切面':'Current snapshot'):(role==='is-previous'?(zh?'之前':'Before'):(zh?'之后':'After')))+'</p><h4>'+esc(title)+'</h4><time>'+String(snap.year)+'</time>'+(v?'<img src="'+esc(v.publicUrl)+'" alt="'+esc(title)+'" loading="lazy" decoding="async">':'')+'<button type="button" data-snapshot="'+esc(snap.id)+'">'+esc(zh?'查看这一年':'Open this year')+'</button></article>';};
+ const resolveVisual=snap=>{
+  if(!snap)return {visual:null,visualState:'UNVERIFIED'};
+  const record=(data.visualStatus?.assets||[]).find(a=>a.assetId===snap.visualAssetId);
+  const declaredStatus=record?.status||'UNVERIFIED';
+  const visual=declaredStatus==='PRESENT'?resolveAtlasVisualById(data.visualBindings,snap.visualAssetId):null;
+  const visualState=visual?'PRESENT':declaredStatus==='PRESENT'?'MISSING':declaredStatus;
+  return {visual,visualState};
+ };
+ const card=(snap,role)=>{
+  if(!snap)return'';
+  const {visual:v,visualState}=resolveVisual(snap),title=zh?snap.metadata?.titleZh:snap.metadata?.titleEn;
+  return '<article class="civ-reconfig-shift-card '+role+'" data-resolver-state="'+esc(visualState)+'"><p class="knowledge-eyebrow">'+esc(role==='is-current'?(zh?'当前横切面':'Current snapshot'):(role==='is-previous'?(zh?'之前':'Before'):(zh?'之后':'After')))+'</p><h4>'+esc(title)+'</h4><time>'+String(snap.year)+'</time>'+(v?'<img src="'+esc(v.publicUrl)+'" alt="'+esc(title)+'" loading="lazy" decoding="async">':'<p class="cx-meta">'+esc(visualState==='MISSING'?c.missing:c.unverified)+'</p>')+'<button type="button" data-snapshot="'+esc(snap.id)+'">'+esc(zh?'查看这一年':'Open this year')+'</button></article>';
+ };
  host.innerHTML='<section class="civ-reconfig-shift-reader">'
   +'<header><p class="knowledge-eyebrow">'+esc(zh?'世界变化':'World shifts')+'</p><h3>'+esc(zh?'世界如何在重组窗口之间改变':'How the world changes between reconfiguration windows')+'</h3><p>'+esc(zh?'横切面用于比较结构变化，不把静态视觉当作精确地图或完整因果模型。':'Snapshots support structural comparison; the static visual is not treated as a precise map or complete causal model.')+'</p></header>'
   +'<nav class="civ-reconfig-snapshot-rail" aria-label="'+esc(zh?'选择世界横切面':'Select world snapshot')+'">'+rows.map(x=>'<button type="button" data-snapshot="'+esc(x.id)+'" aria-pressed="'+(x.id===current.id?'true':'false')+'">'+String(x.year)+'</button>').join('')+'</nav>'
