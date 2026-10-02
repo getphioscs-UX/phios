@@ -1,0 +1,37 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {mergeMultiAuthorityEvidence} from './lib/civilization-atlas/runtime-position-w8d-p2-multi-authority-merge-v1.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
+const text=rel=>fs.readFileSync(path.join(root,rel),'utf8');
+const ok=(v,c)=>{if(!v)throw new Error('RUNTIME_POSITION_48_W8D_P2:'+c);};
+const contract=read('content/civilization-atlas/reconfiguration/runtime-position-w8d-p2-multi-authority-merge-contract-v1.json');
+const merged=read('content/civilization-atlas/reconfiguration/runtime-position-w8d-p2-merged-rre-eligible-handoff-v1.json');
+const readouts=read('content/civilization-atlas/reconfiguration/runtime-position-w8d-p2-rre-readouts-v1.json');
+const readiness=read('content/civilization-atlas/reconfiguration/runtime-position-w8d-p2-derivation-readiness-v1.json');
+const status=read('content/civilization-atlas/reconfiguration/runtime-position-w8d-p2-status-v1.json');
+ok(contract.status==='ACTIVE_GOVERNED_MULTI_AUTHORITY_EVIDENCE_MERGE','CONTRACT');
+ok(contract.boundaries?.sourceVotingAllowed===false&&contract.boundaries?.authorityPromotionAllowed===false&&contract.boundaries?.baselineW8dOverwriteAllowed===false,'BOUNDARY');
+ok((merged.records||[]).every(x=>x.mergeLineage?.sourceVotingUsed===false&&x.mergeLineage?.authorityPromoted===false),'MERGE_LINEAGE');
+ok((merged.records||[]).filter(x=>x.authorityClass==='MARKET_DATA_PROVIDER').every(x=>x.mergeLineage?.originBatch==='MARKET_DATA_PROVIDER_BATCH'),'PROVIDER_ORIGIN');
+ok(status.completed?.runtimePositionCandidates===0&&status.completed?.w8ePromotions===0&&status.completed?.baselineW8dMutated===0,'AUTHORITY_LEAK');
+ok((readiness.records||[]).every(x=>x.positionCandidateCount===0),'READINESS_POSITION_LEAK');
+const us=(readouts.records||[]).find(x=>x.dossierId==='DOSSIER-US');
+if(us){
+  ok(us.requiredLaneIds.length===7,'US_REQUIRED_LANE_COUNT');
+  ok(us.admittedLaneIds.length===7,'US_ADMITTED_DISTINCT_LANES');
+  const pf=status.laneComposition?.PRESSURE_FIELD;
+  ok(Boolean(pf),'US_PRESSURE_FIELD_COMPOSITION');
+  ok((pf.authorityClasses||[]).includes('REGULATOR'),'US_PRESSURE_HAS_REGULATOR');
+  if(status.completed?.providerEvidence>0)ok((pf.authorityClasses||[]).includes('MARKET_DATA_PROVIDER'),'US_PRESSURE_HAS_PROVIDER');
+}
+const off={records:[{claimId:'A',sourceId:'FED',dossierId:'DOSSIER-US',laneId:'PRESSURE_FIELD',supportLevel:'DIRECT',evidenceState:'CWA_ADMITTED',rreEligibility:'RRE_ELIGIBLE',authorityClass:'REGULATOR'}]};
+const pro={records:[{claimId:'B',sourceId:'MOO',dossierId:'DOSSIER-US',laneId:'PRESSURE_FIELD',supportLevel:'DIRECT',evidenceState:'CWA_ADMITTED',rreEligibility:'RRE_ELIGIBLE',authorityClass:'MARKET_DATA_PROVIDER'}]};
+const fx=mergeMultiAuthorityEvidence({officialHandoff:off,providerHandoff:pro});
+ok(fx.records.length===2&&fx.summary.distinctLanes===1,'FIXTURE_LANE_NOT_SOURCE_COUNT');
+ok(fx.summary.laneComposition.PRESSURE_FIELD.evidenceCount===2,'FIXTURE_EVIDENCE_DEPTH');
+ok(fx.summary.sourceVotingUsed===false&&fx.summary.authorityPromotionUsed===false,'FIXTURE_GOVERNANCE');
+let collision=false;try{mergeMultiAuthorityEvidence({officialHandoff:off,providerHandoff:{records:[{...pro.records[0],claimId:'A'}]}});}catch(e){collision=String(e.message).includes('CONFLICTING_DUPLICATE_CLAIM_ID');}ok(collision,'FIXTURE_COLLISION_FAIL_CLOSED');
+const pkg=text('package.json');ok(pkg.includes('"build:runtime-position-48:w8d:p2"')&&pkg.includes('"check:runtime-position-48:w8d:p2"'),'PACKAGE');
+console.log('PASS W8D-P2: multi-authority evidence is merged without voting/promotion, lane completeness uses distinct lanes, enriched RRE stays separate from baseline W8D, positions remain 0.');
