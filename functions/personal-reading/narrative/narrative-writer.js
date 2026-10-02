@@ -276,13 +276,14 @@ export async function composeReportSectionT2({brief,registry,env={},fetcher,prov
  }
  const usage=sumUsage(providerResults.filter(r=>r.taskType==='REPORT_SECTION_COMPOSITION'));
  const costModel=(registry?.models||[]).find(m=>m.modelId===route.selectedModel)||{};
+ const usageRequestType=(brief.successorVersion||brief.styleIntent?.methodStyleProfile==='ZIWEI_PROFESSIONAL_SYNTHESIS_R5')?'QA_REVIEW':'PRODUCTION';
  const verificationUsageRecords=providerResults.filter(r=>r.taskType==='REPORT_SECTION_SEMANTIC_VERIFICATION').map((r,i)=>{
-  const u=sumUsage([r]);return createPaiUsageRecord({requestId:requestId+'-VERIFY-'+i,timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,u),aiExecutionClass,provider:r.provider||route.selectedProvider,model:r.model||route.selectedModel,...u,requestType:brief.successorVersion?'QA_REVIEW':'PRODUCTION',providerAttemptCount:1,success:true,fallbackUsed:false});
+  const u=sumUsage([r]);return createPaiUsageRecord({requestId:requestId+'-VERIFY-'+i,timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,u),aiExecutionClass,provider:r.provider||route.selectedProvider,model:r.model||route.selectedModel,...u,requestType:usageRequestType,providerAttemptCount:1,success:true,fallbackUsed:false});
  });
  const usageRecord=createPaiUsageRecord({
   requestId,timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,usage),aiExecutionClass,provider:result?.provider||route.selectedProvider,model:result?.model||route.selectedModel,
   inputTokens:usage.inputTokens,cachedInputTokens:usage.cachedInputTokens,outputTokens:usage.outputTokens,
-  requestType:brief.successorVersion?'QA_REVIEW':'PRODUCTION',providerAttemptCount,firstAttemptFailureRecorded:providerAttemptCount>1,
+  requestType:usageRequestType,providerAttemptCount,firstAttemptFailureRecorded:providerAttemptCount>1,
   latencyMs:Date.now()-started,success:verification?.accepted===true,fallbackUsed:verification?.accepted!==true,
   fallbackFrom:verification?.accepted?'':route.selectedModel,fallbackTo:verification?.accepted?'':'DETERMINISTIC_FALLBACK'
  });
