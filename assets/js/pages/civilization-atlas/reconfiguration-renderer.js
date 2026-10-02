@@ -308,11 +308,26 @@ function renderWindows(host,data,l,state,store){
  host.querySelectorAll('[data-case]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'cases',primaryCaseId:btn.dataset.case},'window-case'));
  host.querySelectorAll('[data-snapshot]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'snapshots',snapshotId:btn.dataset.snapshot},'window-snapshot'));
 }
+const SNAPSHOT_FIELDS=Object.freeze({
+ political:['politicalOrder','majorStates','majorEmpires'],
+ population:['populationCenters'],
+ industry:['industrialCores'],
+ energy:['energyNodes'],
+ finance:['financialNodes'],
+ trade:['tradeNetworks'],
+ military:['militaryNetworks'],
+ technology:['technologyNodes'],
+ information:['informationNetworks'],
+ colonialPostcolonial:['colonialStatus','postColonialStatus']
+});
 function renderSnapshots(host,data,l,state,store){
  const c=COPY[l],rows=[...(data.snapshots?.snapshots||[])].sort((a,b)=>a.year-b.year),current=rows.find(x=>x.id===state.snapshotId)||rows[0],zh=l==='zh-Hans';
  if(!current){host.textContent=c.unknown;return;}
  const index=rows.findIndex(x=>x.id===current.id),prev=rows[index-1]||null,next=rows[index+1]||null,caseMap=new Map((data.cases?.cases||[]).map(x=>[x.id,x]));
  const caseTitle=id=>{const x=caseMap.get(id);return x?(zh?x.titleZh:x.titleEn):id};
+ const fields=SNAPSHOT_FIELDS[state.snapshotLayer]||SNAPSHOT_FIELDS.political;
+ const values=fields.flatMap(k=>Array.isArray(current[k])?current[k]:current[k]&&current[k]!=='UNKNOWN'?[current[k]]:[]);
+ const layerValue=value=>typeof value==='object'?loc(value,l)||Object.values(value).map(v=>valueLabel(v,l)).join(' · '):valueLabel(value,l);
  const currentSet=new Set(current.majorReconfigurationCases||[]),prevSet=new Set(prev?.majorReconfigurationCases||[]),nextSet=new Set(next?.majorReconfigurationCases||[]);
  const introduced=[...currentSet].filter(id=>!prevSet.has(id)),continued=[...currentSet].filter(id=>prevSet.has(id)),leaving=[...currentSet].filter(id=>!nextSet.has(id));
  const resolveVisual=snap=>{
@@ -326,7 +341,7 @@ function renderSnapshots(host,data,l,state,store){
  const card=(snap,role)=>{
   if(!snap)return'';
   const {visual:v,visualState}=resolveVisual(snap),title=zh?snap.metadata?.titleZh:snap.metadata?.titleEn;
-  return '<article class="civ-reconfig-shift-card '+role+'" data-resolver-state="'+esc(visualState)+'"><p class="knowledge-eyebrow">'+esc(role==='is-current'?(zh?'当前横切面':'Current snapshot'):(role==='is-previous'?(zh?'之前':'Before'):(zh?'之后':'After')))+'</p><h4>'+esc(title)+'</h4><time>'+String(snap.year)+'</time>'+(v?'<img src="'+esc(v.publicUrl)+'" alt="'+esc(title)+'" loading="lazy" decoding="async">':'<p class="cx-meta">'+esc(visualState==='MISSING'?c.missing:c.unverified)+'</p>')+'<button type="button" data-snapshot="'+esc(snap.id)+'">'+esc(zh?'查看这一年':'Open this year')+'</button></article>';
+  return '<article class="civ-reconfig-shift-card '+role+'" data-resolver-state="'+esc(visualState)+'"><p class="knowledge-eyebrow">'+esc(role==='is-current'?(zh?'当前横切面':'Current snapshot'):(role==='is-previous'?(zh?'之前':'Before'):(zh?'之后':'After')))+'</p><h4>'+esc(title)+'</h4><time>'+String(snap.year)+'</time>'+(v?'<img data-snapshot-image data-snapshot-id="'+esc(snap.id)+'" src="'+esc(v.publicUrl)+'" alt="'+esc(title)+'" loading="lazy" decoding="async">':'<p class="cx-meta" data-resolver-state="'+esc(visualState)+'">'+esc(visualState==='MISSING'?c.missing:c.unverified)+'</p>')+'<button type="button" data-snapshot="'+esc(snap.id)+'">'+esc(zh?'查看这一年':'Open this year')+'</button></article>';
  };
  host.innerHTML='<section class="civ-reconfig-shift-reader">'
   +'<header><p class="knowledge-eyebrow">'+esc(zh?'世界变化':'World shifts')+'</p><h3>'+esc(zh?'世界如何在重组窗口之间改变':'How the world changes between reconfiguration windows')+'</h3><p>'+esc(zh?'横切面用于比较结构变化，不把静态视觉当作精确地图或完整因果模型。':'Snapshots support structural comparison; the static visual is not treated as a precise map or complete causal model.')+'</p></header>'
@@ -335,11 +350,20 @@ function renderSnapshots(host,data,l,state,store){
   +'<section class="civ-reconfig-change-summary"><div><p class="knowledge-eyebrow">'+esc(zh?'新进入':'New in this snapshot')+'</p><ul>'+(introduced.length?introduced.map(id=>'<li><button type="button" data-case="'+esc(id)+'">'+esc(caseTitle(id))+'</button></li>').join(''):'<li>'+esc(zh?'没有新增已登记案例':'No newly registered cases')+'</li>')+'</ul></div>'
   +'<div><p class="knowledge-eyebrow">'+esc(zh?'持续':'Continuing')+'</p><ul>'+(continued.length?continued.map(id=>'<li><button type="button" data-case="'+esc(id)+'">'+esc(caseTitle(id))+'</button></li>').join(''):'<li>'+esc(zh?'没有持续案例':'No continuing cases')+'</li>')+'</ul></div>'
   +'<div><p class="knowledge-eyebrow">'+esc(zh?'即将退出当前结构':'Leaving by next snapshot')+'</p><ul>'+(leaving.length?leaving.map(id=>'<li><button type="button" data-case="'+esc(id)+'">'+esc(caseTitle(id))+'</button></li>').join(''):'<li>'+esc(zh?'没有已登记退出':'No registered exits')+'</li>')+'</ul></div></section>'
+  +'<section class="civ-reconfig-snapshot-layer-reader"><div class="civ-reconfig-snapshot-controls"><label>'+esc(c.layer)+'<select data-layer>'+Object.keys(SNAPSHOT_FIELDS).map(k=>'<option value="'+esc(k)+'">'+esc(layerLabel(k))+'</option>').join('')+'</select></label></div>'
+  +'<section class="civ-reconfig-layer-panel"><h4>'+esc(layerLabel(state.snapshotLayer))+'</h4><p>'+(values.length?esc(values.map(layerValue).join(' · ')):esc(c.unknown))+'</p></section>'
+  +'<details open><summary>'+esc(c.textAlternative)+'</summary><p><strong>'+esc(c.dataState)+':</strong> '+esc(stateLabel(current.dataClass||current.knowledgeState))+'</p><p><strong>'+esc(c.relatedCases)+':</strong> '+esc((current.majorReconfigurationCases||[]).map(caseTitle).filter(Boolean).join(' · ')||c.unknown)+'</p><p><strong>'+esc(c.unknown)+':</strong> '+esc(listText(current.unknown,l))+'</p></details></section>'
   +'<details class="civ-reconfig-evidence"><summary>'+esc(zh?'证据与未知':'Evidence & unknown')+'</summary><p><strong>'+esc(zh?'知识状态':'Knowledge state')+'</strong> '+badge(current.knowledgeState||current.dataClass,l)+'</p><p>'+esc(listText(current.unknown,l))+'</p></details>'
   +'<a class="knowledge-action" href="'+esc(askHref(l,'snapshots',{snapshotId:current.id,entityId:current.id}))+'">'+esc(c.ask)+'</a>'
   +'</section>';
  host.querySelectorAll('[data-snapshot]').forEach(btn=>btn.onclick=()=>set(store,{snapshotId:btn.dataset.snapshot},'snapshot-select'));
  host.querySelectorAll('[data-case]').forEach(btn=>btn.onclick=()=>set(store,{activeLayer:'cases',primaryCaseId:btn.dataset.case},'snapshot-case'));
+ const layer=host.querySelector('[data-layer]');if(layer){layer.value=state.snapshotLayer;layer.onchange=e=>set(store,{snapshotLayer:e.target.value},'snapshot-layer');}
+ host.querySelectorAll('[data-snapshot-image]').forEach(img=>img.addEventListener('error',()=>{
+  const card=img.closest('.civ-reconfig-shift-card');if(!card)return;
+  card.dataset.resolverState='RUNTIME_LOAD_FAILED';
+  img.outerHTML='<div role="status" class="civ-reconfig-missing" data-resolver-state="RUNTIME_LOAD_FAILED"><strong>'+esc(c.missing)+'</strong><br><span>'+esc(c.resolverMissing)+'</span></div>';
+ },{once:true}));
 }
 function runtimeDl(d,l){const fields=['stage','scale','density','capacity','load','alignment','resilience','adaptability','expansionCapacity','futureCapacity'];const future=d.livedReality?.personalFutureCapacity;return `<dl class="civ-reconfig-dl">${fields.map(f=>`<dt>${esc(fieldLabel(f))}</dt><dd>${esc(status(d[f],l))}</dd>`).join('')}<dt>${esc(fieldLabel('externalDependency'))}</dt><dd>${esc(listText(d.externalDependency,l))}</dd><dt>${esc(fieldLabel('pressure'))}</dt><dd>${esc(listText(d.pressureFields,l))}</dd><dt>${esc(fieldLabel('direction'))}</dt><dd>${esc(listText(d.direction,l))}</dd><dt>${esc(fieldLabel('transitionSignals'))}</dt><dd>${esc(listText(d.transitionSignals,l))}</dd><dt>${esc(fieldLabel('personalFutureCapacity'))}</dt><dd>${esc(status(future?.state,l))}</dd><dt>${esc(fieldLabel('evidenceDate'))}</dt><dd>${esc(d.sourceDate||d.asOfDate||d.lastReviewedAt||COPY[l].unknown)}</dd><dt>${esc(fieldLabel('unknown'))}</dt><dd>${esc(listText(d.unknown,l))}</dd></dl>`;}
 function runtimeNeedLabel(dimension,c){
