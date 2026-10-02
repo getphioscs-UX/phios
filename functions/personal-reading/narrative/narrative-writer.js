@@ -261,7 +261,8 @@ export async function composeReportSectionT2({brief,registry,env={},fetcher,prov
  if(brief.successorVersion)attemptLog.push({kind:'VERIFICATION',attempt:0,state:verification.accepted?'PASS':'FAIL',reasons:verification.reasons,semanticReasons:verification.semanticReview?.reasons||[],editorialDefects:(verification.semanticReview?.editorialAssessments||[]).filter(a=>!a.passed)});
  let repairCount=0;
  const repair=semanticRepairDecision({verification,repairCount});
- if(!brief.marketContract&&!verification.accepted&&repair.repairAllowed){
+ const r5StructuralReject=brief.styleIntent?.methodStyleProfile==='ZIWEI_PROFESSIONAL_SYNTHESIS_R5'&&semanticReviewCalls===0;
+ if(!brief.marketContract&&!verification.accepted&&repair.repairAllowed&&!r5StructuralReject){
   repairCount=1;
   try{
    providerAttemptCount++;
