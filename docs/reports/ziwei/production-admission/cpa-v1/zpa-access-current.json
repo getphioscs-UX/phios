@@ -1,0 +1,60 @@
+{
+  "scope": "LOCAL_EXISTING_POLICY_AND_SQL_ONLY",
+  "canonicalPersonLoader": "SERVER_DEPENDENCY_NOT_BOUND_TO_DEPLOYED_OWNER",
+  "accessTests": [
+    {
+      "name": "anonymous",
+      "result": "DENIED"
+    },
+    {
+      "name": "client entitlement is not authority",
+      "result": "DENIED"
+    },
+    {
+      "name": "production stays closed",
+      "result": "DENIED"
+    },
+    {
+      "name": "canonical person owner absent",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong person",
+      "result": "DENIED"
+    },
+    {
+      "name": "mismatched birth input",
+      "result": "DENIED"
+    },
+    {
+      "name": "unpurchased locale",
+      "result": "DENIED"
+    },
+    {
+      "name": "other account owns requested person",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked method consent",
+      "result": "DENIED"
+    },
+    {
+      "name": "deleted person",
+      "result": "DENIED"
+    },
+    {
+      "name": "inaccessible person on open",
+      "result": "DENIED"
+    }
+  ],
+  "birthChange": {
+    "oldReleaseUnchanged": true,
+    "newSnapshotVersionRequired": true,
+    "oldVersion": "RDS-E8A004DBAFE8E71890C6A144F82D1FDBDFF3B77C35BAC26FBEEC93B50007E213",
+    "newVersion": "RDS-DDB313975B94D242A616C3BF6791186DD725203087DB171A5EBC7FF305AC4EC8"
+  },
+  "qaAccountDelivery": "NOT_PROVEN",
+  "productionVerification": "NOT_RUN",
+  "predecessorEvidence": "docs/reports/ziwei/production-admission/zpa-v1/person-access.json",
+  "successorScope": "CURRENT_CHECK_EVIDENCE_ONLY"
+}
