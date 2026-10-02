@@ -8,7 +8,7 @@
   "BAZI_CONTENT_FROZEN": true,
   "BAZI_REFERENCE_IMPLEMENTATION": true,
   "referenceDesignation": "PHI OS REPORT PRODUCTION REFERENCE IMPLEMENTATION",
-  "designationScope": "Accepted physical composition contract; method semantics and visual selectors excluded.",
+  "designationScope": "BaZi remains the accepted content/physical-composition reference; PHI OS Report Print Shell V2 is the shared rendering/print/low-CPU reference. Method semantics, section architectures, page counts and visual identities remain method-specific.",
   "humanDecision": "ACCEPT",
   "allowedDecisions": [
     "ACCEPT",
@@ -147,5 +147,39 @@
   "historicalSubjectBindingVerified": false,
   "controlledSubjectProof": "docs/acceptance/bazi-paid-report/controlled-subject-r1/proof.json",
   "controlledSubjectValidation": "docs/acceptance/bazi-paid-report/controlled-subject-r1/validation.json",
-  "physicalCompositionContract": "content/reports/shared/physical-composition-contract-r1.json"
+  "physicalCompositionContract": "content/reports/shared/physical-composition-contract-r1.json",
+  "sharedPrintShell": {
+    "version": "PHI-OS-REPORT-PRINT-SHELL-V2",
+    "authority": "ZIWEI_QA_PRINT_SUCCESSOR_2026_10_02",
+    "status": "ACCEPTED_FOR_SHARED_ROLLOUT",
+    "referenceMethod": "ZWR",
+    "contract": {
+      "coordinateSystem": "A4_210MM_X_297MM_SINGLE_CONTRACT",
+      "screenPrintParity": "SAME_DOM_NO_SECOND_PRINT_LAYOUT",
+      "staticEditorialPages": "FULL_PAGE_WEBP",
+      "sectionMaster": "METHOD_SPECIFIC_WEBP_PLUS_DYNAMIC_OVERLAY",
+      "bodyPages": "METHOD_BODY_WEBP_PLUS_DYNAMIC_DATA_AND_NARRATIVE",
+      "browserFit": "ONE_PASS_FIXED_A4",
+      "customerOpen": "IMMUTABLE_HTML_NO_REGENERATION",
+      "pdf": "CUSTOMER_BROWSER_PRINT_SAVE_PDF",
+      "serverPdfGeneration": "NOT_REQUIRED_ON_CUSTOMER_HOT_PATH"
+    },
+    "sharedPaths": [
+      "assets/customer-ui/js/personal-products/publication-report-pages.js",
+      "assets/customer-ui/surfaces/ziwei-print-shell-v2.css",
+      "scripts/build-method-report-renderer.mjs"
+    ],
+    "rolloutOrder": [
+      "BZR",
+      "ZWR",
+      "AST",
+      "NUM",
+      "PROFILE",
+      "HD",
+      "ECR",
+      "CROSS"
+    ]
+  },
+  "BAZI_PRINT_SHELL_MIGRATION": "PENDING",
+  "ZIWEI_PRINT_SHELL_V2": "ACCEPT"
 }
