@@ -104,9 +104,10 @@ async function exchangeCode({code,clientId,verifier}){
   if(!res.ok||!token?.access_token)throw new Error('MOOMOO_OAUTH_TOKEN_EXCHANGE_FAILED:HTTP_'+res.status);
   return token;
 }
-function runLiveImport(accessToken){
+function runLiveImport(accessToken,mode='first-live'){
   return new Promise((resolve,reject)=>{
-    const child=spawn(process.execPath,[path.join(root,'scripts/run-moomoo-first-live-import.mjs')],{
+    const childScript=mode==='gap-closure'?'scripts/run-moomoo-gap-closure-import.mjs':'scripts/run-moomoo-first-live-import.mjs';
+    const child=spawn(process.execPath,[path.join(root,childScript)],{
       cwd:root,
       stdio:'inherit',
       env:{...process.env,MOOMOO_ACCESS_TOKEN:accessToken}
@@ -139,6 +140,7 @@ const token=await exchangeCode({code,clientId:client.clientId,verifier});
 const grantedScopes=String(token.scope||'').split(/\s+/).filter(Boolean);
 if(!grantedScopes.includes('quote:read'))throw new Error('MOOMOO_OAUTH_SCOPE_MISSING_QUOTE_READ');
 if(grantedScopes.includes('trade:write'))throw new Error('MOOMOO_OAUTH_OVERBROAD_SCOPE_TRADE_WRITE');
-console.log('Access token received in memory. Granted scope includes quote:read and excludes trade:write. Starting governed HISTORY_KLINE live import...');
-await runLiveImport(token.access_token);
+const mode=process.argv.includes('gap-closure')?'gap-closure':'first-live';
+console.log('Access token received in memory. Granted scope includes quote:read and excludes trade:write. Starting governed '+(mode==='gap-closure'?'gap-closure provider import':'HISTORY_KLINE live import')+'...');
+await runLiveImport(token.access_token,mode);
 console.log('PKCE session complete. Access/refresh tokens were not persisted or printed.');
