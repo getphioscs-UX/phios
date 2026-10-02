@@ -19,7 +19,20 @@ export function buildZiweiContentDepthR3Publication({evidence,sections,locale,su
  for(const reg of ZIWEI_REPORT_SECTIONS){
   const section=sections.find(x=>x.sectionId===reg.sectionId),nodeId=`ZWR:${s.subjectKey}:${reg.sectionId}`;
   const first=s.placements.find(p=>p.entityId===section.selectedComposition.primary);
-  const items=reg.sectionId==='S12'?(zh?['十二宫与二十八颗已获准星曜','本命、大限与流年分层','来源、未知与解释边界']:['Twelve palaces and twenty-eight admitted stars','Natal, Da Xian and Liu Nian kept distinct','Sources, unknowns and interpretation boundaries']):reg.sectionId==='S01'?(zh?['命宫与身宫分别定位','十二宫与六条对宫轴','星曜落点先于情境解释']:['Locate Life and Body separately','Twelve palaces and six opposite axes','Locate placements before interpreting context']):['coreFunction','highExpression','strainedExpression'].map(key=>{const r=resolveZiweiProductionStar(first,key,locale);return r.state==='PRESENT'?(key==='coreFunction'?r.name+' · ':'')+r.text:(zh?'证据不足，保留结构背景与未知':'Insufficient evidence; structural context and unknowns retained');});
+  const dim=key=>{const r=resolveZiweiProductionStar(first,key,locale);return r.state==='PRESENT'?r.text:(zh?'证据不足，保留结构背景与未知':'Insufficient evidence; structural context and unknowns retained');};
+  const masterLabels={
+   S02:zh?['决策起点','可用条件','压力切换']:['Decision entry','Workable condition','Stress switch'],
+   S03:zh?['内在驱动','恢复条件','张力来源']:['Inner drive','Recovery condition','Tension source'],
+   S04:zh?['工作任务','交付条件','失效循环']:['Work task','Delivery condition','Failure loop'],
+   S05:zh?['资源入口','留存条件','过度承诺']:['Resource entry','Retention condition','Overcommitment'],
+   S06:zh?['互动方式','互惠条件','边界压力']:['Interaction style','Reciprocity condition','Boundary pressure'],
+   S07:zh?['支持方式','接收条件','责任归属']:['Support offered','Receiving condition','Responsibility ownership'],
+   S08:zh?['压力负荷','恢复条件','累积风险']:['Pressure load','Recovery condition','Accumulation risk'],
+   S09:zh?['长周期前景','持续问题','修饰重点']:['Long-cycle foreground','Persistent question','Modifier emphasis'],
+   S10:zh?['年度前景','当年差异','当前观察']:['Annual foreground','Year-specific difference','Current observation']
+  };
+  const sectionDims={S02:['decisionPattern','highExpression','strainedExpression'],S03:['motivatingTendency','highExpression','strainedExpression'],S04:['workExpression','highExpression','strainedExpression'],S05:['resourceExpression','highExpression','strainedExpression'],S06:['relationshipExpression','highExpression','strainedExpression'],S07:['relationshipExpression','highExpression','strainedExpression'],S08:['pressureMode','highExpression','strainedExpression'],S09:['coreFunction','highExpression','strainedExpression'],S10:['coreFunction','highExpression','strainedExpression']};
+  const items=reg.sectionId==='S12'?(zh?['十二宫与二十八颗已获准星曜','本命、大限与流年分层','来源、未知与解释边界']:['Twelve palaces and twenty-eight admitted stars','Natal, Da Xian and Liu Nian kept distinct','Sources, unknowns and interpretation boundaries']):reg.sectionId==='S11'?(zh?['保护可用资源与恢复空间','选择一个现实中可核对的决定','设置30–90天复盘窗口']:['Protect usable resources and recovery space','Choose one verifiable real-world decision','Set a 30–90 day review window']):reg.sectionId==='S01'?(zh?['命宫与身宫分别定位','十二宫与六条对宫轴','星曜落点先于情境解释']:['Locate Life and Body separately','Twelve palaces and six opposite axes','Locate placements before interpreting context']):(sectionDims[reg.sectionId]||['coreFunction','highExpression','strainedExpression']).map((key,i)=>`${masterLabels[reg.sectionId]?.[i]||''}${zh?' · ':': '}${dim(key)}`);
   pages.push({...base(reg,'SECTION_MASTER'),pageFamily:'SECTION_OPENER_PAGE',sourceNodeIds:[nodeId+':MASTER'],paragraphs:[],items,sourceClaimRefs:section.claims.map(c=>c.claimId)});
   const blocks=section.publicationIr.blocks.map((b,i)=>({text:b.prose,sourceNodeId:nodeId,sourceParagraphIndex:i,ordinal:i,blockId:b.blockId,claimRefs:b.claimRefs}));sourceBlocks.push(...blocks);
   const roles=ZIWEI_PAGE_ROLES[reg.sectionId],split=Math.ceil(blocks.length/roles.length);
