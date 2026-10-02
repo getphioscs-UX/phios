@@ -14,6 +14,11 @@ ok(contract.boundaries?.providerSeriesAlonePromotesConstraint===false&&contract.
 ok((derived.records||[]).length===0||(derived.records||[]).length===3,'MECHANISM_COUNT');
 ok((derived.subsystemCandidates||[]).every(x=>x.scope==='SUBSYSTEM'&&x.state==='HUMAN_REVIEW_READY'),'SUBSYSTEM_SCOPE');
 ok(status.completed?.dossierPromotions===0&&status.completed?.runtimePositionCandidates===0,'AUTHORITY_LEAK');
+const realSnapshots=read('content/civilization-atlas/reconfiguration/market-provider-snapshots-v1.json');
+const financialRows=(realSnapshots.records||[]).filter(x=>x.capability==='FINANCIAL_STATEMENTS').flatMap(x=>x.records||[]);
+const revenueRows=(realSnapshots.records||[]).filter(x=>x.capability==='REVENUE_BREAKDOWN').flatMap(x=>x.records||[]);
+if(financialRows.length)ok(financialRows.some(x=>x.meta?.periodText&&x.meta?.statementType!=null),'META_REQUIRED_FOR_REAL_FINANCIALS');
+if(revenueRows.length)ok(revenueRows.some(x=>x.meta?.period&&x.meta?.itemName&&x.meta?.breakdownType!=null),'META_REQUIRED_FOR_REAL_REVENUE_BREAKDOWN');
 
 const snapshots={records:[]}, provider={records:[]}, official={records:[]};
 const out=buildMechanismAnalysis({snapshots,providerEvidence:provider,officialEvidence:official,thresholds:contract.thresholds});
