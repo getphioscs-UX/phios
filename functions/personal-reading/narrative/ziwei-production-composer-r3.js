@@ -86,7 +86,7 @@ export async function buildZiweiContentDepthR3Sections({evidence,locale,sourceSe
    }else if(id==='S02'){
     rows.push({role:'DECISION_SEQUENCE',text:t(...starters.S02)+' '+descriptions.join(' ')});
     add('BODY_MODIFICATION','把“先怎么决定”与“决定之后如何进入关系、责任或现实场景”分开观察，身宫所在领域更适合用来检查后半段。','Separate how a decision is first made from how it enters relationships, responsibilities or lived situations; the Body domain is more useful for checking the latter.');
-    add('STRESS_SWITCH',condition+' 当条件不足时，留意是否会从清晰取舍切换成过度压缩、拖延或反复重开问题。',' '+counter);
+    add('STRESS_SWITCH',condition+' 当条件不足时，留意是否会从清晰取舍切换成过度压缩、拖延或反复重开问题。',condition+' When workable conditions weaken, watch for a shift from clear choice into over-compression, delay or repeatedly reopening the same question. '+counter);
    }else if(id==='S03'){
     rows.push({role:'INNER_EXPECTATION',text:t(...starters.S03)+' '+descriptions.join(' ')});
     add('SATISFACTION_CONDITIONS','真正值得观察的不是“喜欢什么”，而是什么条件满足时内在张力会下降、注意力会稳定，什么条件缺失时又会持续消耗。','The useful question is not simply what is liked, but which conditions lower inner tension and stabilize attention, and which missing conditions keep consuming it.');
@@ -95,13 +95,13 @@ export async function buildZiweiContentDepthR3Sections({evidence,locale,sourceSe
    }else if(id==='S04'){
     rows.push({role:'WORK_THESIS',text:t(...starters.S04)+' '+descriptions.join(' ')});
     add('DELIVERY_CONDITIONS','把重点放在任务如何被交付：何时适合拆解旧结构、何时需要持续承载、什么样的责任边界能让结果真正留下来。','Focus on how work is delivered: when an old structure needs dismantling, when continuity is required, and which responsibility boundaries let results endure.');
-    add('WORK_FAILURE_MODE',counter+' 如果现实里总在“重启—救火—再重启”之间循环，这比职位名称更值得追踪。',' '+t('如果现实里总在“重启—救火—再重启”之间循环，这比职位名称更值得追踪。','If lived work keeps cycling through restart, firefighting and restart again, that pattern matters more than the job title.'));
+    add('WORK_FAILURE_MODE',counter+' 如果现实里总在“重启—救火—再重启”之间循环，这比职位名称更值得追踪。',counter+' If lived work keeps cycling through restart, firefighting and restart again, that pattern matters more than the job title.');
     add('WORK_NAVIGATION',contextText+'下一步可核对的是：职责、资源与决定权是否匹配；如果三者长期分离，再强的执行力也容易变成补漏洞。',contextText+'Next, check whether responsibility, resources and decision authority actually match. When they stay separated, even strong execution can become repeated gap-filling.');
    }else if(id==='S05'){
     rows.push({role:'ACQUISITION',text:t(...starters.S05)+' '+descriptions.join(' ')});
     add('ALLOCATION','把“能获得资源”与“资源被放到哪里”分开。机会增加并不自动等于容量增加，分配方式才决定资源是否变成可用余地。','Separate acquiring resources from deciding where they go. More opportunity does not automatically mean more capacity; allocation determines whether resources become usable room.');
-    add('RETENTION_OWNERSHIP',condition+' 同时检查哪些资源需要长期维护、谁拥有决定权、哪些承诺会把未来选择提前锁死。',' '+t('同时检查哪些资源需要长期维护、谁拥有决定权、哪些承诺会把未来选择提前锁死。','Also check which resources require long maintenance, who owns the decision, and which commitments lock in future choices too early.'));
-    add('OPTIONALITY_TEST',counter+' 当投入开始减少选择空间时，先问“这是必要集中，还是承诺已经超过容量？”',t('','')+counter+t(' 当投入开始减少选择空间时，先问“这是必要集中，还是承诺已经超过容量？”',' When commitments begin reducing optionality, ask whether this is necessary concentration or capacity has already been exceeded.'));
+    add('RETENTION_OWNERSHIP',condition+' 同时检查哪些资源需要长期维护、谁拥有决定权、哪些承诺会把未来选择提前锁死。',condition+' Also check which resources require long maintenance, who owns the decision, and which commitments lock in future choices too early.');
+    add('OPTIONALITY_TEST',counter+' 当投入开始减少选择空间时，先问“这是必要集中，还是承诺已经超过容量？”',counter+' When commitments begin reducing optionality, ask whether this is necessary concentration or capacity has already been exceeded.');
    }else if(id==='S06'){
     rows.push({role:'INTERACTION_STYLE',text:t(...starters.S06)+' '+descriptions.join(' ')});
     add('RECIPROCITY','关系质量更适合看互动是否能往返：谁提出、谁回应、谁承担后果，以及协商之后角色有没有变得更清楚。','Relationship quality is better tested through reciprocity: who initiates, who responds, who carries consequences, and whether roles become clearer after negotiation.');
