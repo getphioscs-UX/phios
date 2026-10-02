@@ -1,5 +1,21 @@
 # BaZi Report Production Reference — MR-W0 / MR-W1
 
+## 2026-10-02 shared Print Shell V2 successor
+
+BaZi remains the accepted **content, editorial-depth and 38-page physical-composition reference**. It is no longer the sole rendering/print-layout reference.
+
+Zi Wei QA established `PHI-OS-REPORT-PRINT-SHELL-V2` as the shared customer rendering successor: one A4 coordinate system (210mm × 297mm), full-page static editorial WebP assets, method-specific Section Master WebP backgrounds with dynamic overlays, method BODY WebP backgrounds for reading pages, one-pass fixed-A4 verification, immutable released HTML, and customer-browser Print / Save as PDF. Server-side PDF generation/parsing is not part of the customer hot path.
+
+This successor does **not** reopen BaZi content, Career, Wealth, Guidance, Section Master artwork, Composition R1, or the accepted 38/38 page map. BaZi migration is presentation-only: reuse the existing P01–P05 editorial assets, ten accepted Section Master WebPs, body visual system, accepted dynamic content and Composition R1 groups inside Print Shell V2.
+
+Authority split after this decision:
+
+- **BaZi:** accepted content / semantic depth / 38-page physical composition reference.
+- **Zi Wei Print Shell V2:** shared rendering / print / low-CPU production reference.
+- **Each method:** retains its own semantics, visual identity, section architecture and page budget.
+
+Target state: `BAZI_PRINT_SHELL_V2_MIGRATION = PENDING`. Migration requires visual + print regression only; it is not a new BaZi editorial acceptance gate.
+
 ## 2026-10-01 successor decision
 
 The user has accepted and frozen BaZi content, semantic depth, Career, Wealth, Guidance, the ten Section Masters and the 38/38-page [Composition R1](../acceptance/bazi-paid-report/composition-r1/IMPLEMENTATION.md). It is now the cross-method physical composition reference. The historical sample remains unbound; an independent [controlled subject proof](../acceptance/bazi-paid-report/controlled-subject-r1/README.md) passes using a new subject and the real calculation chain. Production admission and commerce E2E remain pending. The remaining text below records the earlier MR-W0–W2 delivery and is historical where it says content/architecture decisions are pending.
