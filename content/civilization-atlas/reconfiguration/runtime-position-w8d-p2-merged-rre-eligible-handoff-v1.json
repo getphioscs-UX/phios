@@ -3133,6 +3133,59 @@
     },
     {
       "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+      "claimId": "US-FED-SLOOS-APR-2026-CONSTRAINT-001",
+      "claimText": "In the April 2026 Senior Loan Officer Opinion Survey, domestic banks reported on balance tighter standards for commercial and industrial loans to firms of all sizes; banks also reported tighter terms including higher premiums on riskier loans, tighter loan covenants, and tighter collateralization requirements for firms of all sizes.",
+      "claimType": "GENERAL_CURRENT_FACT",
+      "sourceId": "US-FED-SLOOS-APR-2026",
+      "sourceUrl": "https://www.federalreserve.gov/data/sloos/sloos-202604.htm",
+      "authorityClass": "REGULATOR",
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "title": "The April 2026 Senior Loan Officer Opinion Survey on Bank Lending Practices",
+      "publishedAt": "2026-05-04T00:00:00.000Z",
+      "retrievedAt": "2026-10-02T14:30:00.000Z",
+      "sourceVersion": "FED-SLOOS-202604-20260504",
+      "freshnessState": "FRESH",
+      "supportLevel": "DIRECT",
+      "jurisdiction": "US",
+      "domain": "FINANCIAL_MARKETS",
+      "conflicts": [],
+      "boundaries": {
+        "searchRankUsedAsAuthority": false,
+        "sourceVotingUsed": false,
+        "lensMutationAllowed": false,
+        "proseGenerationAllowed": false
+      },
+      "claimCandidateId": "US-FED-SLOOS-APR-2026-CONSTRAINT-001",
+      "dossierId": "DOSSIER-US",
+      "laneId": "PRESSURE_FIELD",
+      "sourceLocator": {
+        "type": "SECTION",
+        "value": "Lending to Businesses; April 2026 SLOOS summary and Table 1 questions 1-3"
+      },
+      "conflictGroup": null,
+      "authorityDecision": {
+        "authorityClass": "REGULATOR",
+        "domain": "FINANCIAL_MARKETS",
+        "reviewedAt": "2026-10-02T14:30:00.000Z",
+        "reviewerRole": "PHI_OS_SOURCE_AUTHORITY_REVIEW",
+        "decisionBasis": "The Federal Reserve is the primary regulator/publisher of SLOOS. The cited survey directly reports changes in lending standards and contractual terms; admission does not itself establish a Reality Grammar."
+      },
+      "evidenceState": "CWA_ADMITTED",
+      "rreEligibility": "RRE_ELIGIBLE",
+      "conflictDisposition": {
+        "conflictState": "NO_CONFLICT",
+        "selected": true
+      },
+      "mergeLineage": {
+        "originBatch": "OFFICIAL_REGULATOR_BATCH",
+        "originalAuthorityClass": "REGULATOR",
+        "authorityPrecedence": 95,
+        "sourceVotingUsed": false,
+        "authorityPromoted": false
+      }
+    },
+    {
+      "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
       "claimId": "US-INDUSTRY-2026-001",
       "claimText": "In the second quarter of 2026, real value added increased 2.5% for private services-producing industries, 2.3% for private goods-producing industries, and less than 0.1% for government; real GDP increased at a 2.2% annual rate.",
       "claimType": "GENERAL_CURRENT_FACT",
@@ -3345,9 +3398,9 @@
     }
   ],
   "mergeSummary": {
-    "officialOrRegulatorEvidence": 7,
+    "officialOrRegulatorEvidence": 8,
     "marketDataProviderEvidence": 56,
-    "totalEvidence": 63,
+    "totalEvidence": 64,
     "distinctLanes": 7,
     "authorityClasses": [
       "GOVERNMENT",
@@ -3428,7 +3481,7 @@
         ]
       },
       "PRESSURE_FIELD": {
-        "evidenceCount": 32,
+        "evidenceCount": 33,
         "authorityClasses": [
           "MARKET_DATA_PROVIDER",
           "REGULATOR"
@@ -3465,6 +3518,7 @@
           "MOOMOO-VALUATION-US-NVDA-PB-d808f14aa5be",
           "MOOMOO-VALUATION-US-NVDA-PE-d9c7cc989693",
           "MOOMOO-VALUATION-US-NVDA-PS-2c3b0489ae98",
+          "US-FED-SLOOS-APR-2026-CONSTRAINT-001",
           "US-PRESSURE-FIELD-2026-001"
         ]
       },
