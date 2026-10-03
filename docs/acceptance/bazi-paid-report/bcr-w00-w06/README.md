@@ -27,3 +27,6 @@ Run `node scripts/build-bazi-bcr-w00-w06.mjs`, then `node scripts/check-bazi-bcr
 
 ## Next candidate
 GEN-02 Chinese candidate v1 (DOMINANT_RESOURCE_OUTPUT) was explicitly ACCEPTED by the owner on 2026-10-03 at 15:24:22 Asia/Kuala_Lumpur. The exact body is in `content/reports/bazi/candidates/BCR-GEN-02-ZH-v1.md`; GEN-02-CANDIDATE-RECEIPT.json binds its body, PDF and Authoring Pack. It contains ten chapters and 6,718 Han characters. Full Han-text round trip through the ten-page PDF passes; no complete long paragraph is reused from accepted GEN-01. GEN-01 acceptance and its frozen body remain unchanged. The GEN-02 acceptance receipt and exact frozen body are registered; no production activation is granted.
+
+## GEN-03 candidate
+GEN-03 Chinese candidate v1 (STRONG_PRESSURE_COUNTERWEIGHT) is complete and PENDING Human ACCEPT/REJECT. Its ten chapters contain 6,562 Han characters. The ten-page review PDF passes visual inspection, text bounds and full Han-text round trip. Input, evidence, synthesis and Authoring Pack digests are verified; 92 Chinese source claims resolve to evidence. No complete long paragraph is reused from accepted GEN-01 or GEN-02; both accepted bodies remain unchanged. No GEN-03 accepted entry or production activation is created.
