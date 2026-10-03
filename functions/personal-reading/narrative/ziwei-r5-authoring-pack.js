@@ -50,7 +50,7 @@ function combinationsForPalace(s,palaceCode,locale){
  }));
 }
 function relationshipRows(s,codes,locale){
- return s.relationships.filter(r=>codes.includes(r.from)||r.to.some(x=>codes.includes(x))).map(r=>Object.freeze({
+ return s.relationships.filter(r=>codes.includes(r.from)||arr(r.to).some(x=>codes.includes(x))).map(r=>Object.freeze({
   entityType:r.entityType,from:r.from,fromLabel:ziweiProR2PalaceLabel(r.from,locale),
   to:Object.freeze(arr(r.to)),toLabels:Object.freeze(arr(r.to).map(x=>ziweiProR2PalaceLabel(x,locale))),
   topologyOnly:r.topologyOnly===true,semanticOperator:r.semanticOperator||null
@@ -69,7 +69,7 @@ function transformationRows(s,codes,locale){
 }
 function patternRows(s,codes){
  const byCode=new Map(ZIWEI_ADMITTED_PATTERN_RULE_REGISTRY.rules.map(r=>[r.patternCode,r]));
- return arr(s.patterns).filter(p=>p.palaceCodes.some(c=>codes.includes(c))).map(p=>{
+ return arr(s.patterns).filter(p=>arr(p.palaceCodes).some(c=>codes.includes(c))).map(p=>{
   const rule=byCode.get(p.patternCode)||null;
   return Object.freeze({
    patternCode:p.patternCode,labelZh:rule?.labelZh||p.patternCode,
