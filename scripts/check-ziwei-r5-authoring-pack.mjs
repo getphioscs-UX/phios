@@ -36,6 +36,14 @@ for(const locale of ['zh-Hans','en']){
  }
 }
 const registry=JSON.parse(fs.readFileSync('content/professional/ziwei-r5/accepted-candidates-v1.json','utf8'));
-assert.equal(registry.status,'EMPTY_AWAITING_HUMAN_ACCEPTED_CANDIDATES');
 assert.equal(registry.productionUse,false);
-console.log('PASS Zi Wei R5 authoring v2: 12-palace technical snapshot, star states/dimensions, combinations, palace network, transformations and qualified patterns; no API key, no live provider.');
+assert.equal(registry.productionAdmissionGranted,false);
+assert.equal(registry.acceptedCountZhHans,9);
+assert.deepEqual(registry.pendingExplicitAcceptZhHans,['S02']);
+assert.equal(registry.sections.S03.decision,'ACCEPT');
+assert.equal(registry.sections.S11.decision,'ACCEPT');
+assert.equal(registry.sections.S02.humanAccept,false);
+assert.equal(registry.customerFacingNaming.methodZh,'紫微斗数');
+assert(registry.customerFacingNaming.forbiddenTokens.includes('Authoring Pack'));
+assert(registry.customerFacingNaming.forbiddenTokens.includes('S03'));
+console.log('PASS Zi Wei R5 authoring v2: technical authoring evidence is deterministic; 9 zh-Hans sections human ACCEPT; S02 explicit ACCEPT still pending; customer naming boundary locked; no API key, no live provider.');
