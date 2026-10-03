@@ -24,3 +24,6 @@ Current registered chapter masters and their original background treatment remai
 
 ## Reproduce
 Run `node scripts/build-bazi-bcr-w00-w06.mjs`, then `node scripts/check-bazi-bcr-w00-w06.mjs`. The builder requires the frozen reference digests to match and fails on drift. It makes no model/provider calls. Repeated runs must be byte-identical. Run the existing accepted-copy closure and print-shell contract checks as regressions.
+
+## Next candidate
+GEN-02 Chinese candidate v1 (DOMINANT_RESOURCE_OUTPUT) is complete and PENDING human ACCEPT/REJECT. The exact body is in `content/reports/bazi/candidates/BCR-GEN-02-ZH-v1.md`; GEN-02-CANDIDATE-RECEIPT.json binds its body, PDF and Authoring Pack. It contains ten chapters and 6,718 Han characters. Full Han-text round trip through the ten-page PDF passes; no complete long paragraph is reused from accepted GEN-01. GEN-01 acceptance and its frozen body remain unchanged. No GEN-02 accepted-registry entry or production activation is created.
