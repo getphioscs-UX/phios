@@ -7,13 +7,12 @@ import {visualModules} from '../canonical-presentation-runtime/report-section-co
 import {REPORT_EDITORIAL_ASSETS} from '../canonical-presentation-runtime/report-editorial-registry.js';
 import {resolveReportEditorialAsset} from '../canonical-presentation-runtime/report-editorial-resolver.js';
 import {renderFrozenBaziIntro} from '../../assets/customer-ui/js/personal-products/publication-report-pages.js';
-import {assertReportSubjectBinding} from '../canonical-presentation-runtime/report-cover-subject.js';
 import {composeBaziPhysicalPages} from '../canonical-presentation-runtime/bazi-physical-composition.js';
 
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
-export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,reportSubjectBinding=null,requireSubjectOverlay=false,compositionR1=false}){
+export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,reportSubjectBinding=null,requireSubjectOverlay=false,compositionR1=false,historicalReferenceReview=false}){
  if(reading?.publicationDecision?.customerPublishable!==true)throw Error('BZR_PUBLICATION_NOT_ADMITTED');
- if(full&&requireSubjectOverlay)await assertReportSubjectBinding({presentation:reportSubjectPresentation,expectedBinding:reportSubjectBinding});
+ if(!historicalReferenceReview||requireSubjectOverlay||reportSubjectPresentation||reportSubjectBinding)throw Object.assign(new Error('BCR_HISTORICAL_REFERENCE_NOT_PRODUCTION_ADMITTED'),{code:'BCR_HISTORICAL_REFERENCE_NOT_PRODUCTION_ADMITTED'});
  const projection=await projectBaziSectionPublication({reading,locale,temporalContext:temporalSnapshot,composition:{},allowUnselectedTiming:true});
  const permitted=new Set(visualModules.modules.filter(m=>m.freeVisibility==='PREVIEW').map(m=>m.id));
  const physical=full&&compositionR1?composeBaziPhysicalPages(projection.pages,locale):null;

@@ -24,7 +24,7 @@ window.batchReady=true;`,resolveDir:process.cwd()},bundle:true,write:false,forma
 fs.mkdirSync('tools/review',{recursive:true});
 const artifacts=[];
 for(const [locale,suffix] of [['zh-Hans','ZH'],['en','EN']]){
- const report=await buildBaziCustomerPublication({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,full:true,compositionR1:true});
+ const report=await buildBaziCustomerPublication({historicalReferenceReview:true,reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,full:true,compositionR1:true});
  const body=renderPublicationReport(report).replaceAll('src="/','src="../../').replaceAll('url(/','url(../../');
  const file=`tools/review/BAZI-PRINT-SHELL-V2-${suffix}.html`;
  fs.writeFileSync(file,`<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>BaZi Print Shell V2 · ${suffix}</title><style>${css}
