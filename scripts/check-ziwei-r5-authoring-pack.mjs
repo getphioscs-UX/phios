@@ -10,17 +10,32 @@ assert(!source.includes('composeReportSectionT3('),'Authoring pack must not call
 const fixture=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/zpa-v1/ZPA-CONTROLLED-01-en.json','utf8'));
 for(const locale of ['zh-Hans','en']){
  const pack=await buildZiweiR5AuthoringPack({evidence:fixture.evidence,locale});
+ assert.equal(pack.schemaVersion,'ZIWEI-R5-AUTHORING-PACK-v2');
  assert.equal(pack.sectionCount,10);
  assert.equal(pack.apiKeyRequired,false);
  assert.equal(pack.liveProviderRequired,false);
  assert.deepEqual(pack.sections.map(s=>s.sectionId),['S02','S03','S04','S05','S06','S07','S08','S09','S10','S11']);
+ assert(pack.wholeChartTechnicalSnapshot?.palaces?.length===12,'whole-chart 12-palace technical snapshot required');
+ assert(Array.isArray(pack.wholeChartTechnicalSnapshot?.transformations),'whole-chart transformations required');
  for(const section of pack.sections){
   assert(section.claims.length>=7,section.sectionId+' claims too thin');
   assert(section.claims.every(c=>c.sourceRefs.length>0),section.sectionId+' source lineage missing');
-  assert(section.authoringContract.requiredShape.length>=6);
+  assert(section.authoringContract.requiredShape.length>=9,section.sectionId+' professional Zi Wei authoring contract too thin');
+  assert(section.technicalEvidence?.palaces?.length>0,section.sectionId+' palace technical evidence required');
+  assert(Array.isArray(section.technicalEvidence?.relationships),section.sectionId+' relationship network required');
+  assert(Array.isArray(section.technicalEvidence?.transformations),section.sectionId+' transformation rows required');
+  for(const palace of section.technicalEvidence.palaces){
+   assert(palace.label,'palace label required');
+   assert(Array.isArray(palace.stars),'resident stars required');
+   for(const star of palace.stars){
+    assert(star.label&&star.starCode,'star identity required');
+    assert(typeof star.stateKnown==='boolean','star-state known flag required');
+    assert(star.coreFunction&&star.decisionPattern,'professional star dimensions required');
+   }
+  }
  }
 }
 const registry=JSON.parse(fs.readFileSync('content/professional/ziwei-r5/accepted-candidates-v1.json','utf8'));
 assert.equal(registry.status,'EMPTY_AWAITING_HUMAN_ACCEPTED_CANDIDATES');
 assert.equal(registry.productionUse,false);
-console.log('PASS Zi Wei R5 authoring lane: deterministic governed packs, no API key, no live provider, human ACCEPT registry remains empty.');
+console.log('PASS Zi Wei R5 authoring v2: 12-palace technical snapshot, star states/dimensions, combinations, palace network, transformations and qualified patterns; no API key, no live provider.');
