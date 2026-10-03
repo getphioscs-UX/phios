@@ -53,3 +53,4 @@ export function buildCprReadoutProjection(readout,request,targetRegistry,cprSurf
 }
 
 export function assertCanonicalReadoutDigest(readout){const copy=clone(readout); const digest=copy.readoutDigest; delete copy.readoutDigest; if(stableDigest(copy)!==digest) throw new Error('RRE_CANONICAL_READOUT_DIGEST_INVALID'); return true;}
+
