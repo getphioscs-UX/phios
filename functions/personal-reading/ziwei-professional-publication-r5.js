@@ -54,7 +54,7 @@ export function buildZiweiProfessionalSynthesisR5Publication({evidence,sections,
  const base=(reg,role)=>({sectionId:reg.sectionId,sectionKey:'ZWR_'+PUBLIC_SECTION_KEY[reg.sectionId],sectionNumber:reg.sectionId.slice(1),sectionTitle:reg.title,title:TITLES[role]?.[zh?0:1]||reg.title[locale],pageKey:'ZWR:'+PUBLIC_SECTION_KEY[reg.sectionId]+':'+role,definitionKey:'ZWR:'+PUBLIC_SECTION_KEY[reg.sectionId]+':'+role,physicalPageRole:role,compositionGroupId:'ZWR:'+PUBLIC_SECTION_KEY[reg.sectionId]+':'+role,locale,fitMode:'STANDARD',priority:'REQUIRED',mustBreakBefore:true,mustBreakAfter:true,canMerge:false,paragraphs:[],items:[],facts:[],observations:[],boundary:'',visualBinding:{},temporal:null});
  for(const reg of ZIWEI_REPORT_SECTIONS){
   const section=sections.find(x=>x.sectionId===reg.sectionId);if(!section)throw Error('ZIWEI_R5_SECTION_MISSING:'+reg.sectionId);
-  const nodeId='ZWR-R5:'+s.subjectKey+':'+reg.sectionId,items=section.synthesisIr?.keyInsights||openerDefaults(reg.sectionId,locale);
+  const nodeId='ZWR:'+s.subjectKey+':'+PUBLIC_SECTION_KEY[reg.sectionId],items=section.synthesisIr?.keyInsights||openerDefaults(reg.sectionId,locale);
   pages.push({...base(reg,'SECTION_MASTER'),pageFamily:'SECTION_OPENER_PAGE',sourceNodeIds:[nodeId+':MASTER'],paragraphs:[],items,sourceClaimRefs:section.synthesisIr?.claims?.map(c=>c.claimId)||section.claims.map(c=>c.claimId)});
   const blocks=section.publicationIr.blocks.map((b,i)=>({text:b.prose,sourceNodeId:nodeId,sourceParagraphIndex:i,ordinal:i,blockId:b.blockId,claimRefs:b.claimRefs}));sourceBlocks.push(...blocks);
   const roles=ZIWEI_R5_PAGE_ROLES[reg.sectionId],split=Math.ceil(blocks.length/roles.length);
