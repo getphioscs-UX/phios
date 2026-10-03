@@ -18,7 +18,7 @@ The fixture carrying module contains aggregates inconsistent with transparent-st
 GEN-08 has unknown Hour and PARTIAL natal calculation. The upstream temporal fixture labels itself COMPLETE; the governed timing admission is therefore explicitly PARTIAL_NATAL_TIME_UNKNOWN. The upstream label is preserved for audit and is not silently promoted to full temporal authority. No Hour is inferred.
 
 ## Human review
-GEN-01 Chinese candidate v1 is chat-authored and remains PENDING. The candidate receipt binds exact candidate hash, case, locale and Authoring Pack digest. The owner may ACCEPT or REJECT that exact version. No approval receipt or Accepted Candidate Registry entry is fabricated here. Acceptance of prose would not by itself validate birth calculation, identity or production activation.
+GEN-01 Chinese candidate v1 is chat-authored and explicitly ACCEPTED by the owner on 2026-10-03. Its exact Markdown body is frozen in accepted-candidates; the original pending review artifact is unchanged. The candidate receipt binds exact candidate hash, case, locale and Authoring Pack digest. The owner may ACCEPT or REJECT that exact version. The signed owner-message receipt and Accepted Candidate Registry contain only BCR-GEN-01-ZH-v1; all other cases/locales remain unaccepted. Acceptance of prose would not by itself validate birth calculation, identity or production activation.
 
 Current registered chapter masters and their original background treatment remain unchanged. This work does not add contrast panels. A plain candidate review PDF is separate from the production print shell; production assembly is a later step after human acceptance.
 
