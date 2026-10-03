@@ -1,4 +1,4 @@
-import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 import {buildZiweiReportEvidence} from '../functions/personal-reading/narrative/ziwei-publication-adapter.js';
 import {buildZiweiFullReportSections} from '../functions/personal-reading/narrative/ziwei-full-report-sections.js';
 import {composeZiweiEditorialR2} from '../functions/personal-reading/narrative/ziwei-editorial-r2.js';
@@ -6,10 +6,26 @@ import {buildZiweiProductionSections,resolveZiweiProductionStar} from '../functi
 import {buildZiweiProductionPublication} from '../functions/personal-reading/ziwei-production-publication-v1.js';
 import {assertPublicationIrV2Preservation} from '../functions/personal-reading/narrative/report-publication-ir-v2.js';
 import {createReportSubjectPresentationFromAccountPerson} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
+import {bindZiweiReportVisual} from '../functions/canonical-presentation-runtime/ziwei-report-visuals.js';
 import {validatePhysicalComposition} from '../functions/canonical-presentation-runtime/physical-composition-contract.js';
 import {ZIWEI_STAR_PROFILES as stars} from '../functions/personal-reading/narrative/ziwei-semantic-canon.js';
-const dir='docs/reports/ziwei/production-admission/zpa-v1',read=p=>JSON.parse(fs.readFileSync(p)),write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
-const baseline=read(dir+'/baseline.json');for(const [p,d] of Object.entries(baseline.files))assert.equal(createHash('sha256').update(fs.readFileSync(p)).digest('hex'),d,'Frozen W0 evidence changed: '+p);
+// Regression execution keeps newly generated proof in memory; accepted fixture bytes are immutable.
+const generated=new Map(),dir='docs/reports/ziwei/production-admission/zpa-v1',read=p=>JSON.parse(generated.get(p)??fs.readFileSync(p,'utf8')),write=(p,v)=>generated.set(p,JSON.stringify(v,null,2)+'\n');
+const baseline=read(dir+'/baseline.json'),printSuccessor=read(dir+'/print-shell-v2-successor.json');
+const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+assert.equal(printSuccessor.scope,'EXISTING_SHARED_PRINT_SHELL_V2_PRESENTATION_SUCCESSOR_ONLY');
+assert.equal(printSuccessor.productionAdmissionCreated,false);assert.equal(printSuccessor.humanApprovalCreated,false);
+assert.equal(printSuccessor.predecessorCommit,baseline.HEAD);
+assert.equal(printSuccessor.successorCommit,'885c1a02e4b1f2f7c0a4c893edc5fae919ebb631');
+assert.deepEqual(Object.keys(printSuccessor.files),['assets/customer-ui/js/personal-products/publication-report-pages.js','assets/customer-ui/surfaces/ziwei-report-publication-r2.css','functions/canonical-presentation-runtime/ziwei-report-visuals.js']);
+for(const [p,d] of Object.entries(baseline.files)){
+ const successor=printSuccessor.files[p];
+ if(!successor){assert.equal(digest(fs.readFileSync(p)),d,'Frozen W0 evidence changed: '+p);continue;}
+ assert.equal(successor.predecessorSha256,d);
+ assert.equal(digest(execFileSync('git',['show',baseline.HEAD+':'+p])),d,'Frozen historical renderer must remain recoverable');
+ assert.equal(digest(execFileSync('git',['show',printSuccessor.successorCommit+':'+p])),successor.successorSha256,'Pinned print successor changed');
+ assert.equal(digest(fs.readFileSync(p)),successor.successorSha256,'Shared print renderer drift outside pinned successor');
+}
 const prior=read('docs/reports/ziwei/full-report-r2/SUBJECT_A-en.json');
 const inputs=[['1989-11-15','22:50:00','MALE'],['1992-06-04','06:30:00','FEMALE'],['1991-08-17','09:20:00','FEMALE'],['1985-01-12','14:10:00','MALE'],['2000-02-29','00:30:00','FEMALE'],['1978-07-21','18:15:00','MALE'],['1967-03-08','03:40:00','FEMALE'],['1995-12-28','11:55:00','MALE'],['2003-09-09','16:20:00','FEMALE'],['1982-04-23','07:05:00','MALE'],['1971-10-06','20:10:00','FEMALE'],['1998-05-19','01:25:00','MALE']];
 const results=[],roots=[],evidences=[];
@@ -47,8 +63,13 @@ const regressions=[];
 for(const subject of ['A','B'])for(const locale of ['en','zh-Hans']){
  const old=read(`docs/reports/ziwei/full-report-r2/SUBJECT_${subject}-${locale}.json`),sections=await buildZiweiProductionSections({evidence:old.evidence,locale,sourceSections:old.sections});
  const snapshot=buildZiweiProductionPublication({evidence:{structured:old.evidence},sections,locale,subjectPresentation:old.subject});
- assert.deepEqual(sections.map(s=>s.claims),old.sections.map(s=>s.claims));assert.deepEqual(snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole,p.visualBinding]),old.snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole,p.visualBinding]));assert(sections.every(s=>JSON.stringify(s.unknowns)===JSON.stringify(old.evidence.unknowns)));
- regressions.push({subject,locale,sourceClaims:'UNCHANGED',sectionOwnership:'UNCHANGED',visualBindings:'UNCHANGED',physicalArchitecture:'UNCHANGED',unknowns:'UNCHANGED',timingBoundary:'NATAL_DA_XIAN_LIU_NIAN_ONLY',proseByteEqualityRequired:false});
+ assert.deepEqual(sections.map(s=>s.claims),old.sections.map(s=>s.claims));assert.deepEqual(snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole]),old.snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole]));
+ for(const [i,page] of snapshot.pages.entries()){
+  const historic=old.snapshot.pages[i].visualBinding;
+  for(const key of ['assetKey','url','motifKey','objectPosition','candidates','required','suppressSyntheticMotif','placement','registryRef','owner'])assert.deepEqual(page.visualBinding[key],historic[key],'Frozen visual identity changed: '+key);
+  assert.deepEqual(page.visualBinding,bindZiweiReportVisual({sectionId:page.sectionId,pageNumber:page.pageNumber,isMaster:page.physicalPageRole==='SECTION_MASTER'}),'Visual binding must use pinned Print Shell V2 adapter');
+ }assert(sections.every(s=>JSON.stringify(s.unknowns)===JSON.stringify(old.evidence.unknowns)));
+ regressions.push({subject,locale,sourceClaims:'UNCHANGED',sectionOwnership:'UNCHANGED',visualBindings:'PINNED_PRINT_SHELL_V2_SUCCESSOR',physicalArchitecture:'UNCHANGED',unknowns:'UNCHANGED',timingBoundary:'NATAL_DA_XIAN_LIU_NIAN_ONLY',proseByteEqualityRequired:false});
 }
 const foreign=structuredClone(prior.sections);foreign[0].subjectId='FOREIGN-SUBJECT';
 await assert.rejects(buildZiweiProductionSections({evidence:prior.evidence,locale:'en',sourceSections:foreign}),/ZIWEI_SOURCE_IR_SUBJECT_MISMATCH/);

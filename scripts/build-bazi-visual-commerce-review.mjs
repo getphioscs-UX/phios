@@ -18,7 +18,7 @@ function atomicWrite(file,content){
 const {reading,temporalSnapshot}=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json'));
 const price=resolveReportProduct('BAZI_FULL_REPORT');
 for(const locale of ['en','zh-Hans'])for(const mode of ['free','locked','paid']){
- const full=mode==='paid',report=await buildBaziCustomerPublication({reading,locale,temporalSnapshot,full});
+ const full=mode==='paid',report=await buildBaziCustomerPublication({historicalReferenceReview:true,reading,locale,temporalSnapshot,full});
  const native=adaptBaziPersonalRealityProduct({report:reading,locale});
  const product={schemaVersion:native.schemaVersion,methodId:native.methodId,locale:native.locale,state:native.state,hero:native.hero,sections:[],visuals:[],navigation:[],sourceProduct:full?reading:null,publicationReport:report,lockedOutline:full?[]:BAZI_SECTION_REGISTRY.sections.map(s=>({title:s.title[locale]})),reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',verifiedPurchase:full,entitlementKey:price.entitlementKey,offer:{productId:'COM-REPORT-BAZI-FULL',contractProductId:price.productId,amountMinor:price.amountMinor,currency:price.currency,href:'/account/?product=COM-REPORT-BAZI-FULL#commerce'}},reviewEvidenceClass:'SYNTHETIC_PRESENTATION_ONLY_NOT_PURCHASE_EVIDENCE'};
  atomicWrite(`${root}/${mode}-${locale}.json`,JSON.stringify(product,null,2)+'\n');
