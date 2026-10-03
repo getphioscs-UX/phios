@@ -74,3 +74,4 @@ export function validateW8aSourceIntake({intake,readiness,contract}={}){
   }
   return {records,rejected,knownAuthorityClasses:[...(contract?.knownAuthorityClasses||AUTHORITY_CLASSES)]};
 }
+

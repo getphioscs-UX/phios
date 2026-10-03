@@ -1,6 +1,7 @@
+// Historical successor: separate claim vocabulary; current v1 is unchanged.
 const LOCATOR_TYPES=new Set(['PAGE','SECTION','TABLE','PARAGRAPH','ANCHOR','DATASET_FIELD','URL_FRAGMENT','FIGURE','APPENDIX','API_RESPONSE_FIELD','PROVIDER_SERIES_WINDOW']);
 const SUPPORT_LEVELS=new Set(['DIRECT','PARTIAL']);
-const CLAIM_TYPES=new Set(['GENERAL_CURRENT_FACT','BREAKING_NEWS','NEWS_DEVELOPMENT','POLICY_OR_REGULATION','COMPANY_PRODUCT_SPEC']);
+const CLAIM_TYPES=new Set(['HISTORICAL_SEGMENT_REVENUE','HISTORICAL_SEGMENT_REPORTING_EVENT']);
 const iso=value=>{const d=new Date(value);return value&&!Number.isNaN(d.valueOf())?d.toISOString():null;};
 
 export function buildW8bClaimWorkOrders({validatedSources}={}){
