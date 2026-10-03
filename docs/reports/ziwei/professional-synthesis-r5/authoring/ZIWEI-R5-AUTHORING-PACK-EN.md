@@ -2,7 +2,7 @@
 
 > Purpose: give governed Zi Wei structure to ChatGPT Sol for human-collaborative writing. This file is neither a calculator nor a production report.
 
-- schemaVersion: ZIWEI-R5-AUTHORING-PACK-v1
+- schemaVersion: ZIWEI-R5-AUTHORING-PACK-v2
 - sourceVersion: ZIWEI-PROFESSIONAL-SYNTHESIS-R5
 - apiKeyRequired: false
 - liveProviderRequired: false
@@ -14,13 +14,16 @@
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -32,6 +35,167 @@
 
 - Primary: LIFE, SPOUSE
 - Context: CAREER, WEALTH, TRAVEL
+
+### Zi Wei technical evidence
+
+#### Life · ZI
+- Di Kong [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected form and usable reality
+  - Decision: decide after testing what remains usable when an expectation falls away
+  - Work: work with gaps, discontinuities and redefinition of assumptions
+  - Resource: reassess resources whose expected utility is unstable
+  - Relationship: avoid treating symbolic absence as proof of rejection or loss
+  - Pressure: premature nihilism or assuming lack of form means lack of value
+  - Constructive: flexibility when expected forms dissolve
+  - Strained: disengagement, unreality or abandoning viable remnants too soon
+- Qi Sha [MAIN] · WANG
+  - Core: decisive cutting, high-pressure choice and directional action
+  - Decision: decide quickly when continuation requires a hard choice
+  - Work: act under pressure, transition or contested responsibility
+  - Resource: concentrate resources behind the option judged necessary
+  - Relationship: bring clarity through direct boundaries and consequential choices
+  - Pressure: premature cutting, compressed consultation or treating every issue as urgent
+  - Constructive: decisive action after enough evidence and with explicit limits
+  - Strained: hardness, isolation or repeated crisis-style decision making
+- Tian Kui [SUPPORT] · state unknown
+  - Core: qualifying support, timely recognition and enabling access
+  - Decision: decide which opportunity has enough support to be worth entering
+  - Work: enable access, introduction, sponsorship or qualified support
+  - Resource: connect resources to points of readiness and leverage
+  - Relationship: receive or offer recognition that opens a constructive next step
+  - Pressure: overreliance on sponsors or mistaking access for guaranteed success
+  - Constructive: use access while retaining independent judgment
+  - Strained: entitlement, passivity or waiting for rescue
+
+#### Spouse · Body · XU
+- Di Jie [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected holding and retained result
+  - Decision: decide by testing what can actually be retained rather than assumed
+  - Work: reconfigure plans where expected continuity is unreliable
+  - Resource: stress-test retention, transfer and dependency assumptions
+  - Relationship: avoid turning symbolic discontinuity into a guaranteed loss claim
+  - Pressure: scarcity fixation or reading every change as deprivation
+  - Constructive: realistic release and reallocation without catastrophe framing
+  - Strained: defensive withdrawal, loss fixation or overcorrecting after disruption
+- Tian Xiang [MAIN] · DE
+  - Core: mediation, procedure and role coordination
+  - Decision: decide by role fit, procedure and reciprocal obligations
+  - Work: coordinate interfaces, standards and handoffs
+  - Resource: allocate resources according to role and procedural fairness
+  - Relationship: seek reciprocity, proportion and workable mediation
+  - Pressure: over-accommodation to procedure or dependence on external validation
+  - Constructive: fair coordination that still permits judgment
+  - Strained: bureaucratic rigidity, people-pleasing or role confusion
+- Zi Wei [MAIN] · state unknown
+  - Core: central coordination and stewardship
+  - Decision: define priorities before distributing responsibility
+  - Work: integrate people, standards and responsibility
+  - Resource: concentrate resources around durable priorities
+  - Relationship: hold position without turning coordination into domination
+  - Pressure: over-centralization or carrying too much through one center
+  - Constructive: clear stewardship with room for other functions
+  - Strained: role rigidity, control pressure or excessive responsibility
+
+#### Career · CHEN
+- Po Jun [MAIN] · WANG
+  - Core: dismantling, restructuring and renewal
+  - Decision: decide by asking what must end before a new configuration can work
+  - Work: rebuild systems after breakdown, transition or strategic reset
+  - Resource: release sunk resources and redirect them into a new structure
+  - Relationship: renegotiate relationships when old arrangements stop working
+  - Pressure: destructive resetting, change for its own sake or loss of continuity
+  - Constructive: deliberate renewal that preserves what still works
+  - Strained: serial disruption, instability or difficulty maintaining gains
+
+#### Wealth · SHEN
+- Tan Lang [MAIN] · state unknown
+  - Core: exploration, appetite and opportunity-seeking engagement
+  - Decision: decide by comparing opportunity, interest and trade-offs
+  - Work: open new channels, markets, networks or experiences
+  - Resource: draw resources toward growth, access and optionality
+  - Relationship: engage through curiosity, attraction and social responsiveness
+  - Pressure: overextension, novelty-chasing or blurred limits
+  - Constructive: exploration constrained by clear priorities and limits
+  - Strained: dispersion, excess appetite or commitments outrunning capacity
+- Tian Yue [SUPPORT] · state unknown
+  - Core: facilitation, refined assistance and problem-solving support
+  - Decision: decide where targeted support can change feasibility
+  - Work: facilitate resolution, coordination and quality improvement
+  - Resource: bring specialized or relational resources to bottlenecks
+  - Relationship: offer discerning help that respects the other party’s agency
+  - Pressure: support dependency or over-intervening in others’ problems
+  - Constructive: targeted help that restores capacity
+  - Strained: rescuer role, hidden obligation or unequal reciprocity
+
+#### Travel · WU
+- Lu Cun [RESOURCE_SUPPORT] · MIAO
+  - Core: resource retention, allocation and continuity
+  - Decision: decide by what can be sustainably retained and allocated
+  - Work: stabilize recurring operations through retained capacity
+  - Resource: hold and allocate resources rather than equating them with wealth
+  - Relationship: express reliability through tangible continuity and provision
+  - Pressure: over-attachment to reserves or reluctance to release resources
+  - Constructive: steady allocation with room for circulation
+  - Strained: resource guarding, inertia or measuring security only by accumulation
+- Tian Fu [MAIN] · WANG
+  - Core: storage, administration and stable capacity
+  - Decision: choose for continuity, capacity and manageability
+  - Work: administer systems, assets and recurring responsibilities
+  - Resource: hold, budget and preserve resources for sustained use
+  - Relationship: create reliability through steady provision and containment
+  - Pressure: over-conservatism, hoarding or slow adaptation
+  - Constructive: stable stewardship with deliberate flexibility
+  - Strained: inertia, resource guarding or excessive caution
+- Wu Qu [MAIN] · WANG
+  - Core: resource discipline, execution and measurable allocation
+  - Decision: decide through cost, capacity and execution feasibility
+  - Work: convert plans into accountable execution
+  - Resource: measure, allocate, preserve and deploy resources
+  - Relationship: show reliability through practical commitments
+  - Pressure: hardening around efficiency or undervaluing softer signals
+  - Constructive: disciplined execution that still adapts to context
+  - Strained: rigidity, transactional thinking or pressure to quantify everything
+
+#### Palace network
+- OPPOSITION: Life → Travel (topology only)
+- TRIAD: Life → Career, Wealth (topology only)
+- PALACE_RELATIONSHIP: Life → Siblings, Parents (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- OPPOSITION: Spouse → Career (topology only)
+- TRIAD: Spouse → Wellbeing, Travel (topology only)
+- PALACE_RELATIONSHIP: Spouse → Children, Siblings (topology only)
+- PALACE_RELATIONSHIP: Children → Wealth, Spouse (topology only)
+- OPPOSITION: Wealth → Wellbeing (topology only)
+- TRIAD: Wealth → Life, Career (topology only)
+- PALACE_RELATIONSHIP: Wealth → Health, Children (topology only)
+- PALACE_RELATIONSHIP: Health → Travel, Wealth (topology only)
+- OPPOSITION: Travel → Life (topology only)
+- TRIAD: Travel → Spouse, Wellbeing (topology only)
+- PALACE_RELATIONSHIP: Travel → Friends, Health (topology only)
+- PALACE_RELATIONSHIP: Friends → Career, Travel (topology only)
+- OPPOSITION: Career → Spouse (topology only)
+- TRIAD: Career → Wealth, Life (topology only)
+- PALACE_RELATIONSHIP: Career → Property, Friends (topology only)
+- PALACE_RELATIONSHIP: Property → Wellbeing, Career (topology only)
+- OPPOSITION: Wellbeing → Wealth (topology only)
+- TRIAD: Wellbeing → Travel, Spouse (topology only)
+- PALACE_RELATIONSHIP: Parents → Life, Wellbeing (topology only)
+
+#### Transformations
+- NATAL · Wealth · Tan Lang · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- NATAL · Travel · Wu Qu · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- DA_XIAN · Career · Po Jun · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- DA_XIAN · Wealth · Tan Lang · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:DI_KONG","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:TIAN_KUI","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SPOUSE:DI_JIE","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SPOUSE:ZI_WEI","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TAN_LANG","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TIAN_YUE","state":"NOT_APPLICABLE"}
 
 ### Governed synthesis claims
 
@@ -83,13 +247,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -101,6 +268,118 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: WELLBEING
 - Context: LIFE, SPOUSE
+
+### Zi Wei technical evidence
+
+#### Wellbeing · YIN
+- Huo Xing [MALEFIC] · MIAO
+  - Core: rapid ignition, acute activation and immediate force
+  - Decision: decide under a short activation window and strong impulse
+  - Work: start, accelerate or break inertia
+  - Resource: deploy resources quickly rather than gradually
+  - Relationship: bring immediacy and intensity into interaction
+  - Pressure: impulsiveness, overshoot or insufficient cooling-off time
+  - Constructive: fast activation with explicit stop conditions
+  - Strained: reactivity, volatility or action outrunning information
+- Lian Zhen [MAIN] · MIAO
+  - Core: boundary evaluation, value tension and selective engagement
+  - Decision: decide by weighing desire, rules and consequences
+  - Work: manage roles where rules, incentives and discretion meet
+  - Resource: direct resources toward what passes value and boundary tests
+  - Relationship: negotiate closeness through boundaries, attraction and accountability
+  - Pressure: boundary conflict, entanglement or polarized attraction/rejection
+  - Constructive: clear standards with room for complexity
+  - Strained: control struggles, moralization or reactive boundary shifts
+
+#### Life · ZI
+- Di Kong [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected form and usable reality
+  - Decision: decide after testing what remains usable when an expectation falls away
+  - Work: work with gaps, discontinuities and redefinition of assumptions
+  - Resource: reassess resources whose expected utility is unstable
+  - Relationship: avoid treating symbolic absence as proof of rejection or loss
+  - Pressure: premature nihilism or assuming lack of form means lack of value
+  - Constructive: flexibility when expected forms dissolve
+  - Strained: disengagement, unreality or abandoning viable remnants too soon
+- Qi Sha [MAIN] · WANG
+  - Core: decisive cutting, high-pressure choice and directional action
+  - Decision: decide quickly when continuation requires a hard choice
+  - Work: act under pressure, transition or contested responsibility
+  - Resource: concentrate resources behind the option judged necessary
+  - Relationship: bring clarity through direct boundaries and consequential choices
+  - Pressure: premature cutting, compressed consultation or treating every issue as urgent
+  - Constructive: decisive action after enough evidence and with explicit limits
+  - Strained: hardness, isolation or repeated crisis-style decision making
+- Tian Kui [SUPPORT] · state unknown
+  - Core: qualifying support, timely recognition and enabling access
+  - Decision: decide which opportunity has enough support to be worth entering
+  - Work: enable access, introduction, sponsorship or qualified support
+  - Resource: connect resources to points of readiness and leverage
+  - Relationship: receive or offer recognition that opens a constructive next step
+  - Pressure: overreliance on sponsors or mistaking access for guaranteed success
+  - Constructive: use access while retaining independent judgment
+  - Strained: entitlement, passivity or waiting for rescue
+
+#### Spouse · Body · XU
+- Di Jie [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected holding and retained result
+  - Decision: decide by testing what can actually be retained rather than assumed
+  - Work: reconfigure plans where expected continuity is unreliable
+  - Resource: stress-test retention, transfer and dependency assumptions
+  - Relationship: avoid turning symbolic discontinuity into a guaranteed loss claim
+  - Pressure: scarcity fixation or reading every change as deprivation
+  - Constructive: realistic release and reallocation without catastrophe framing
+  - Strained: defensive withdrawal, loss fixation or overcorrecting after disruption
+- Tian Xiang [MAIN] · DE
+  - Core: mediation, procedure and role coordination
+  - Decision: decide by role fit, procedure and reciprocal obligations
+  - Work: coordinate interfaces, standards and handoffs
+  - Resource: allocate resources according to role and procedural fairness
+  - Relationship: seek reciprocity, proportion and workable mediation
+  - Pressure: over-accommodation to procedure or dependence on external validation
+  - Constructive: fair coordination that still permits judgment
+  - Strained: bureaucratic rigidity, people-pleasing or role confusion
+- Zi Wei [MAIN] · state unknown
+  - Core: central coordination and stewardship
+  - Decision: define priorities before distributing responsibility
+  - Work: integrate people, standards and responsibility
+  - Resource: concentrate resources around durable priorities
+  - Relationship: hold position without turning coordination into domination
+  - Pressure: over-centralization or carrying too much through one center
+  - Constructive: clear stewardship with room for other functions
+  - Strained: role rigidity, control pressure or excessive responsibility
+
+#### Palace network
+- OPPOSITION: Life → Travel (topology only)
+- TRIAD: Life → Career, Wealth (topology only)
+- PALACE_RELATIONSHIP: Life → Siblings, Parents (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- OPPOSITION: Spouse → Career (topology only)
+- TRIAD: Spouse → Wellbeing, Travel (topology only)
+- PALACE_RELATIONSHIP: Spouse → Children, Siblings (topology only)
+- PALACE_RELATIONSHIP: Children → Wealth, Spouse (topology only)
+- OPPOSITION: Wealth → Wellbeing (topology only)
+- TRIAD: Wealth → Life, Career (topology only)
+- OPPOSITION: Travel → Life (topology only)
+- TRIAD: Travel → Spouse, Wellbeing (topology only)
+- OPPOSITION: Career → Spouse (topology only)
+- TRIAD: Career → Wealth, Life (topology only)
+- PALACE_RELATIONSHIP: Property → Wellbeing, Career (topology only)
+- OPPOSITION: Wellbeing → Wealth (topology only)
+- TRIAD: Wellbeing → Travel, Spouse (topology only)
+- PALACE_RELATIONSHIP: Wellbeing → Parents, Property (topology only)
+- PALACE_RELATIONSHIP: Parents → Life, Wellbeing (topology only)
+
+#### Transformations
+- LIU_NIAN · Wellbeing · Lian Zhen · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:DI_KONG","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:TIAN_KUI","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SPOUSE:DI_JIE","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SPOUSE:ZI_WEI","state":"SOURCE_PENDING"}
 
 ### Governed synthesis claims
 
@@ -146,13 +425,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -164,6 +446,135 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: CAREER, TRAVEL
 - Context: LIFE, WEALTH
+
+### Zi Wei technical evidence
+
+#### Career · CHEN
+- Po Jun [MAIN] · WANG
+  - Core: dismantling, restructuring and renewal
+  - Decision: decide by asking what must end before a new configuration can work
+  - Work: rebuild systems after breakdown, transition or strategic reset
+  - Resource: release sunk resources and redirect them into a new structure
+  - Relationship: renegotiate relationships when old arrangements stop working
+  - Pressure: destructive resetting, change for its own sake or loss of continuity
+  - Constructive: deliberate renewal that preserves what still works
+  - Strained: serial disruption, instability or difficulty maintaining gains
+
+#### Travel · WU
+- Lu Cun [RESOURCE_SUPPORT] · MIAO
+  - Core: resource retention, allocation and continuity
+  - Decision: decide by what can be sustainably retained and allocated
+  - Work: stabilize recurring operations through retained capacity
+  - Resource: hold and allocate resources rather than equating them with wealth
+  - Relationship: express reliability through tangible continuity and provision
+  - Pressure: over-attachment to reserves or reluctance to release resources
+  - Constructive: steady allocation with room for circulation
+  - Strained: resource guarding, inertia or measuring security only by accumulation
+- Tian Fu [MAIN] · WANG
+  - Core: storage, administration and stable capacity
+  - Decision: choose for continuity, capacity and manageability
+  - Work: administer systems, assets and recurring responsibilities
+  - Resource: hold, budget and preserve resources for sustained use
+  - Relationship: create reliability through steady provision and containment
+  - Pressure: over-conservatism, hoarding or slow adaptation
+  - Constructive: stable stewardship with deliberate flexibility
+  - Strained: inertia, resource guarding or excessive caution
+- Wu Qu [MAIN] · WANG
+  - Core: resource discipline, execution and measurable allocation
+  - Decision: decide through cost, capacity and execution feasibility
+  - Work: convert plans into accountable execution
+  - Resource: measure, allocate, preserve and deploy resources
+  - Relationship: show reliability through practical commitments
+  - Pressure: hardening around efficiency or undervaluing softer signals
+  - Constructive: disciplined execution that still adapts to context
+  - Strained: rigidity, transactional thinking or pressure to quantify everything
+
+#### Life · ZI
+- Di Kong [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected form and usable reality
+  - Decision: decide after testing what remains usable when an expectation falls away
+  - Work: work with gaps, discontinuities and redefinition of assumptions
+  - Resource: reassess resources whose expected utility is unstable
+  - Relationship: avoid treating symbolic absence as proof of rejection or loss
+  - Pressure: premature nihilism or assuming lack of form means lack of value
+  - Constructive: flexibility when expected forms dissolve
+  - Strained: disengagement, unreality or abandoning viable remnants too soon
+- Qi Sha [MAIN] · WANG
+  - Core: decisive cutting, high-pressure choice and directional action
+  - Decision: decide quickly when continuation requires a hard choice
+  - Work: act under pressure, transition or contested responsibility
+  - Resource: concentrate resources behind the option judged necessary
+  - Relationship: bring clarity through direct boundaries and consequential choices
+  - Pressure: premature cutting, compressed consultation or treating every issue as urgent
+  - Constructive: decisive action after enough evidence and with explicit limits
+  - Strained: hardness, isolation or repeated crisis-style decision making
+- Tian Kui [SUPPORT] · state unknown
+  - Core: qualifying support, timely recognition and enabling access
+  - Decision: decide which opportunity has enough support to be worth entering
+  - Work: enable access, introduction, sponsorship or qualified support
+  - Resource: connect resources to points of readiness and leverage
+  - Relationship: receive or offer recognition that opens a constructive next step
+  - Pressure: overreliance on sponsors or mistaking access for guaranteed success
+  - Constructive: use access while retaining independent judgment
+  - Strained: entitlement, passivity or waiting for rescue
+
+#### Wealth · SHEN
+- Tan Lang [MAIN] · state unknown
+  - Core: exploration, appetite and opportunity-seeking engagement
+  - Decision: decide by comparing opportunity, interest and trade-offs
+  - Work: open new channels, markets, networks or experiences
+  - Resource: draw resources toward growth, access and optionality
+  - Relationship: engage through curiosity, attraction and social responsiveness
+  - Pressure: overextension, novelty-chasing or blurred limits
+  - Constructive: exploration constrained by clear priorities and limits
+  - Strained: dispersion, excess appetite or commitments outrunning capacity
+- Tian Yue [SUPPORT] · state unknown
+  - Core: facilitation, refined assistance and problem-solving support
+  - Decision: decide where targeted support can change feasibility
+  - Work: facilitate resolution, coordination and quality improvement
+  - Resource: bring specialized or relational resources to bottlenecks
+  - Relationship: offer discerning help that respects the other party’s agency
+  - Pressure: support dependency or over-intervening in others’ problems
+  - Constructive: targeted help that restores capacity
+  - Strained: rescuer role, hidden obligation or unequal reciprocity
+
+#### Palace network
+- OPPOSITION: Life → Travel (topology only)
+- TRIAD: Life → Career, Wealth (topology only)
+- PALACE_RELATIONSHIP: Life → Siblings, Parents (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- OPPOSITION: Spouse → Career (topology only)
+- TRIAD: Spouse → Wellbeing, Travel (topology only)
+- PALACE_RELATIONSHIP: Children → Wealth, Spouse (topology only)
+- OPPOSITION: Wealth → Wellbeing (topology only)
+- TRIAD: Wealth → Life, Career (topology only)
+- PALACE_RELATIONSHIP: Wealth → Health, Children (topology only)
+- PALACE_RELATIONSHIP: Health → Travel, Wealth (topology only)
+- OPPOSITION: Travel → Life (topology only)
+- TRIAD: Travel → Spouse, Wellbeing (topology only)
+- PALACE_RELATIONSHIP: Travel → Friends, Health (topology only)
+- PALACE_RELATIONSHIP: Friends → Career, Travel (topology only)
+- OPPOSITION: Career → Spouse (topology only)
+- TRIAD: Career → Wealth, Life (topology only)
+- PALACE_RELATIONSHIP: Career → Property, Friends (topology only)
+- PALACE_RELATIONSHIP: Property → Wellbeing, Career (topology only)
+- OPPOSITION: Wellbeing → Wealth (topology only)
+- TRIAD: Wellbeing → Travel, Spouse (topology only)
+- PALACE_RELATIONSHIP: Parents → Life, Wellbeing (topology only)
+
+#### Transformations
+- NATAL · Wealth · Tan Lang · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- NATAL · Travel · Wu Qu · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- DA_XIAN · Career · Po Jun · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- DA_XIAN · Wealth · Tan Lang · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:DI_KONG","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:TIAN_KUI","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TAN_LANG","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TIAN_YUE","state":"NOT_APPLICABLE"}
 
 ### Governed synthesis claims
 
@@ -215,13 +626,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -233,6 +647,120 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: WEALTH, PROPERTY
 - Context: LIFE, CAREER
+
+### Zi Wei technical evidence
+
+#### Wealth · SHEN
+- Tan Lang [MAIN] · state unknown
+  - Core: exploration, appetite and opportunity-seeking engagement
+  - Decision: decide by comparing opportunity, interest and trade-offs
+  - Work: open new channels, markets, networks or experiences
+  - Resource: draw resources toward growth, access and optionality
+  - Relationship: engage through curiosity, attraction and social responsiveness
+  - Pressure: overextension, novelty-chasing or blurred limits
+  - Constructive: exploration constrained by clear priorities and limits
+  - Strained: dispersion, excess appetite or commitments outrunning capacity
+- Tian Yue [SUPPORT] · state unknown
+  - Core: facilitation, refined assistance and problem-solving support
+  - Decision: decide where targeted support can change feasibility
+  - Work: facilitate resolution, coordination and quality improvement
+  - Resource: bring specialized or relational resources to bottlenecks
+  - Relationship: offer discerning help that respects the other party’s agency
+  - Pressure: support dependency or over-intervening in others’ problems
+  - Constructive: targeted help that restores capacity
+  - Strained: rescuer role, hidden obligation or unequal reciprocity
+
+#### Property · MAO
+- Wen Qu [SUPPORT] · state unknown
+  - Core: interpretive expression, nuance and cultural articulation
+  - Decision: decide by sensing tone, symbolism and interpretive fit
+  - Work: interpret, present, design and communicate meaning
+  - Resource: use aesthetic, linguistic or symbolic assets to create value
+  - Relationship: connect through nuance, resonance and expressive sensitivity
+  - Pressure: over-reading signals, aestheticizing problems or indirect communication
+  - Constructive: nuanced expression anchored to observable context
+  - Strained: ambiguity, impression management or meaning detached from facts
+
+#### Life · ZI
+- Di Kong [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected form and usable reality
+  - Decision: decide after testing what remains usable when an expectation falls away
+  - Work: work with gaps, discontinuities and redefinition of assumptions
+  - Resource: reassess resources whose expected utility is unstable
+  - Relationship: avoid treating symbolic absence as proof of rejection or loss
+  - Pressure: premature nihilism or assuming lack of form means lack of value
+  - Constructive: flexibility when expected forms dissolve
+  - Strained: disengagement, unreality or abandoning viable remnants too soon
+- Qi Sha [MAIN] · WANG
+  - Core: decisive cutting, high-pressure choice and directional action
+  - Decision: decide quickly when continuation requires a hard choice
+  - Work: act under pressure, transition or contested responsibility
+  - Resource: concentrate resources behind the option judged necessary
+  - Relationship: bring clarity through direct boundaries and consequential choices
+  - Pressure: premature cutting, compressed consultation or treating every issue as urgent
+  - Constructive: decisive action after enough evidence and with explicit limits
+  - Strained: hardness, isolation or repeated crisis-style decision making
+- Tian Kui [SUPPORT] · state unknown
+  - Core: qualifying support, timely recognition and enabling access
+  - Decision: decide which opportunity has enough support to be worth entering
+  - Work: enable access, introduction, sponsorship or qualified support
+  - Resource: connect resources to points of readiness and leverage
+  - Relationship: receive or offer recognition that opens a constructive next step
+  - Pressure: overreliance on sponsors or mistaking access for guaranteed success
+  - Constructive: use access while retaining independent judgment
+  - Strained: entitlement, passivity or waiting for rescue
+
+#### Career · CHEN
+- Po Jun [MAIN] · WANG
+  - Core: dismantling, restructuring and renewal
+  - Decision: decide by asking what must end before a new configuration can work
+  - Work: rebuild systems after breakdown, transition or strategic reset
+  - Resource: release sunk resources and redirect them into a new structure
+  - Relationship: renegotiate relationships when old arrangements stop working
+  - Pressure: destructive resetting, change for its own sake or loss of continuity
+  - Constructive: deliberate renewal that preserves what still works
+  - Strained: serial disruption, instability or difficulty maintaining gains
+
+#### Palace network
+- OPPOSITION: Life → Travel (topology only)
+- TRIAD: Life → Career, Wealth (topology only)
+- PALACE_RELATIONSHIP: Life → Siblings, Parents (topology only)
+- TRIAD: Siblings → Property, Health (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- OPPOSITION: Spouse → Career (topology only)
+- OPPOSITION: Children → Property (topology only)
+- PALACE_RELATIONSHIP: Children → Wealth, Spouse (topology only)
+- OPPOSITION: Wealth → Wellbeing (topology only)
+- TRIAD: Wealth → Life, Career (topology only)
+- PALACE_RELATIONSHIP: Wealth → Health, Children (topology only)
+- TRIAD: Health → Siblings, Property (topology only)
+- PALACE_RELATIONSHIP: Health → Travel, Wealth (topology only)
+- OPPOSITION: Travel → Life (topology only)
+- PALACE_RELATIONSHIP: Friends → Career, Travel (topology only)
+- OPPOSITION: Career → Spouse (topology only)
+- TRIAD: Career → Wealth, Life (topology only)
+- PALACE_RELATIONSHIP: Career → Property, Friends (topology only)
+- OPPOSITION: Property → Children (topology only)
+- TRIAD: Property → Health, Siblings (topology only)
+- PALACE_RELATIONSHIP: Property → Wellbeing, Career (topology only)
+- OPPOSITION: Wellbeing → Wealth (topology only)
+- PALACE_RELATIONSHIP: Wellbeing → Parents, Property (topology only)
+- PALACE_RELATIONSHIP: Parents → Life, Wellbeing (topology only)
+
+#### Transformations
+- NATAL · Wealth · Tan Lang · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- NATAL · Property · Wen Qu · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+- DA_XIAN · Career · Po Jun · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- DA_XIAN · Wealth · Tan Lang · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:DI_KONG","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:TIAN_KUI","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TAN_LANG","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TIAN_YUE","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:PROPERTY:WEN_QU","state":"SOURCE_PENDING"}
 
 ### Governed synthesis claims
 
@@ -284,13 +812,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -302,6 +833,122 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: SPOUSE
 - Context: CHILDREN, FRIENDS
+
+### Zi Wei technical evidence
+
+#### Spouse · Body · XU
+- Di Jie [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected holding and retained result
+  - Decision: decide by testing what can actually be retained rather than assumed
+  - Work: reconfigure plans where expected continuity is unreliable
+  - Resource: stress-test retention, transfer and dependency assumptions
+  - Relationship: avoid turning symbolic discontinuity into a guaranteed loss claim
+  - Pressure: scarcity fixation or reading every change as deprivation
+  - Constructive: realistic release and reallocation without catastrophe framing
+  - Strained: defensive withdrawal, loss fixation or overcorrecting after disruption
+- Tian Xiang [MAIN] · DE
+  - Core: mediation, procedure and role coordination
+  - Decision: decide by role fit, procedure and reciprocal obligations
+  - Work: coordinate interfaces, standards and handoffs
+  - Resource: allocate resources according to role and procedural fairness
+  - Relationship: seek reciprocity, proportion and workable mediation
+  - Pressure: over-accommodation to procedure or dependence on external validation
+  - Constructive: fair coordination that still permits judgment
+  - Strained: bureaucratic rigidity, people-pleasing or role confusion
+- Zi Wei [MAIN] · state unknown
+  - Core: central coordination and stewardship
+  - Decision: define priorities before distributing responsibility
+  - Work: integrate people, standards and responsibility
+  - Resource: concentrate resources around durable priorities
+  - Relationship: hold position without turning coordination into domination
+  - Pressure: over-centralization or carrying too much through one center
+  - Constructive: clear stewardship with room for other functions
+  - Strained: role rigidity, control pressure or excessive responsibility
+
+#### Children · YOU
+- Ju Men [MAIN] · MIAO
+  - Core: questioning, clarification and contested meaning
+  - Decision: decide after interrogating claims and ambiguities
+  - Work: investigate, explain, challenge and clarify
+  - Resource: use information and argument as resources for discernment
+  - Relationship: relate through dialogue, naming differences and negotiating meaning
+  - Pressure: argument loops, suspicion or language becoming the conflict itself
+  - Constructive: precise questioning that improves shared understanding
+  - Strained: chronic disputation, mistrust or fixation on what is wrong
+- Ling Xing [MALEFIC] · DE
+  - Core: sustained alert tension and signal-like activation
+  - Decision: decide after separating persistent signal from background noise
+  - Work: maintain vigilance where issues recur rather than disappear
+  - Resource: reserve capacity for recurring or intermittent demands
+  - Relationship: heighten sensitivity to unresolved relational tension
+  - Pressure: hypervigilance, irritability or overreacting to signals
+  - Constructive: attentive monitoring with thresholds for action
+  - Strained: chronic tension, alarm fatigue or treating every signal as urgent
+- Tian Ji [MAIN] · WANG
+  - Core: analysis, adjustment and strategic movement
+  - Decision: compare pathways before committing
+  - Work: solve changing problems through analysis and iteration
+  - Resource: reallocate attention and resources as conditions change
+  - Relationship: use dialogue to refine understanding and options
+  - Pressure: over-analysis, restless adjustment or difficulty settling
+  - Constructive: adaptive intelligence with a clear stopping rule
+  - Strained: fragmentation, indecision or constant re-planning
+- Combination: Ju Men × Tian Ji — Questioning and analysis form a cognitive work chain: surface assumptions, compare paths, and prevent discussion and adjustment from becoming endless loops.
+
+#### Friends · SI
+- Tian Tong [MAIN] · MIAO
+  - Core: accommodation, ease, support and recovery
+  - Decision: prefer paths that preserve continuity and relational ease
+  - Work: stabilize teams and routines by reducing avoidable strain
+  - Resource: use resources to sustain continuity and recovery
+  - Relationship: offer warmth, acceptance and shared comfort
+  - Pressure: avoidance of necessary tension or delayed confrontation
+  - Constructive: restorative support without abandoning difficult tasks
+  - Strained: passivity, comfort-seeking or difficulty setting limits
+- Tuo Luo [MALEFIC] · XIAN
+  - Core: drag, repetition and persistent resistance
+  - Decision: decide after identifying what keeps reintroducing resistance
+  - Work: work through recurring constraints with persistence
+  - Resource: account for friction costs before allocating more resources
+  - Relationship: surface recurring friction that needs patient renegotiation
+  - Pressure: stagnation, circular effort or normalizing chronic blockage
+  - Constructive: patient persistence with periodic re-evaluation
+  - Strained: endless delay, fixation or effort without structural change
+
+#### Palace network
+- OPPOSITION: Siblings → Friends (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- OPPOSITION: Spouse → Career (topology only)
+- TRIAD: Spouse → Wellbeing, Travel (topology only)
+- PALACE_RELATIONSHIP: Spouse → Children, Siblings (topology only)
+- OPPOSITION: Children → Property (topology only)
+- TRIAD: Children → Parents, Friends (topology only)
+- PALACE_RELATIONSHIP: Children → Wealth, Spouse (topology only)
+- PALACE_RELATIONSHIP: Wealth → Health, Children (topology only)
+- TRIAD: Travel → Spouse, Wellbeing (topology only)
+- PALACE_RELATIONSHIP: Travel → Friends, Health (topology only)
+- OPPOSITION: Friends → Siblings (topology only)
+- TRIAD: Friends → Children, Parents (topology only)
+- PALACE_RELATIONSHIP: Friends → Career, Travel (topology only)
+- OPPOSITION: Career → Spouse (topology only)
+- PALACE_RELATIONSHIP: Career → Property, Friends (topology only)
+- OPPOSITION: Property → Children (topology only)
+- TRIAD: Wellbeing → Travel, Spouse (topology only)
+- TRIAD: Parents → Friends, Children (topology only)
+
+#### Transformations
+- DA_XIAN · Children · Ju Men · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- LIU_NIAN · Friends · Tian Tong · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- LIU_NIAN · Children · Tian Ji · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+
+#### Qualified patterns
+- 巨机同宫 [JU_JI_TONG_GONG] · CHILDREN · qualification only; no traditional outcome imported
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SPOUSE:DI_JIE","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SPOUSE:ZI_WEI","state":"SOURCE_PENDING"}
 
 ### Governed synthesis claims
 
@@ -347,13 +994,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -365,6 +1015,146 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: PARENTS, SIBLINGS, FRIENDS
 - Context: LIFE
+
+### Zi Wei technical evidence
+
+#### Parents · CHOU
+- You Bi [SUPPORT] · state unknown
+  - Core: relational support and responsive facilitation
+  - Decision: decide by where responsiveness can unblock progress
+  - Work: facilitate cooperation and smooth handoffs
+  - Resource: connect people or resources to improve continuity
+  - Relationship: offer tactful, responsive assistance without taking over
+  - Pressure: over-accommodation or support becoming approval-seeking
+  - Constructive: responsive help with clear ownership
+  - Strained: blurred ownership, dependency or indirectness
+- Zuo Fu [SUPPORT] · state unknown
+  - Core: practical support and coordinating assistance
+  - Decision: decide where assistance creates real leverage
+  - Work: assist execution, coordination and follow-through
+  - Resource: add capacity without displacing the primary owner
+  - Relationship: support through practical presence and coordinated help
+  - Pressure: over-functioning for others or invisible support load
+  - Constructive: support that increases autonomy and completion
+  - Strained: dependency loops or carrying tasks that belong elsewhere
+
+#### Siblings · HAI
+- Tian Liang [MAIN] · XIAN
+  - Core: protection, standards, oversight and repair
+  - Decision: choose by durability, standards and downstream consequences
+  - Work: inspect, advise, safeguard and correct system drift
+  - Resource: reserve resources for maintenance, protection and remediation
+  - Relationship: protect relationships through guidance, boundaries and repair
+  - Pressure: over-responsibility, rescuing or turning standards into judgment
+  - Constructive: protective oversight with appropriate limits
+  - Strained: moral burden, chronic fixing or inability to let others carry consequences
+- Tian Ma [MOBILITY] · state unknown
+  - Core: mobility, environment switching and cross-context coordination
+  - Decision: decide by where movement or context change increases feasibility
+  - Work: operate across locations, interfaces or changing environments
+  - Resource: move resources across places, roles or contexts
+  - Relationship: negotiate distance, movement and changing availability in relationships
+  - Pressure: restlessness, logistical overload or confusing movement with progress
+  - Constructive: purposeful mobility tied to a clear destination or function
+  - Strained: constant switching, scattered attention or unstable routines
+- Wen Chang [SUPPORT] · state unknown
+  - Core: structured expression, learning and documentation
+  - Decision: decide by organizing facts and articulating criteria
+  - Work: write, document, teach, sequence and standardize
+  - Resource: turn information into reusable intellectual resources
+  - Relationship: build understanding through clear language and shared references
+  - Pressure: over-formalization, perfectionism in wording or substituting documentation for action
+  - Constructive: clear structure that supports real action
+  - Strained: rigid wording, over-editing or intellectual distance
+
+#### Friends · SI
+- Tian Tong [MAIN] · MIAO
+  - Core: accommodation, ease, support and recovery
+  - Decision: prefer paths that preserve continuity and relational ease
+  - Work: stabilize teams and routines by reducing avoidable strain
+  - Resource: use resources to sustain continuity and recovery
+  - Relationship: offer warmth, acceptance and shared comfort
+  - Pressure: avoidance of necessary tension or delayed confrontation
+  - Constructive: restorative support without abandoning difficult tasks
+  - Strained: passivity, comfort-seeking or difficulty setting limits
+- Tuo Luo [MALEFIC] · XIAN
+  - Core: drag, repetition and persistent resistance
+  - Decision: decide after identifying what keeps reintroducing resistance
+  - Work: work through recurring constraints with persistence
+  - Resource: account for friction costs before allocating more resources
+  - Relationship: surface recurring friction that needs patient renegotiation
+  - Pressure: stagnation, circular effort or normalizing chronic blockage
+  - Constructive: patient persistence with periodic re-evaluation
+  - Strained: endless delay, fixation or effort without structural change
+
+#### Life · ZI
+- Di Kong [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected form and usable reality
+  - Decision: decide after testing what remains usable when an expectation falls away
+  - Work: work with gaps, discontinuities and redefinition of assumptions
+  - Resource: reassess resources whose expected utility is unstable
+  - Relationship: avoid treating symbolic absence as proof of rejection or loss
+  - Pressure: premature nihilism or assuming lack of form means lack of value
+  - Constructive: flexibility when expected forms dissolve
+  - Strained: disengagement, unreality or abandoning viable remnants too soon
+- Qi Sha [MAIN] · WANG
+  - Core: decisive cutting, high-pressure choice and directional action
+  - Decision: decide quickly when continuation requires a hard choice
+  - Work: act under pressure, transition or contested responsibility
+  - Resource: concentrate resources behind the option judged necessary
+  - Relationship: bring clarity through direct boundaries and consequential choices
+  - Pressure: premature cutting, compressed consultation or treating every issue as urgent
+  - Constructive: decisive action after enough evidence and with explicit limits
+  - Strained: hardness, isolation or repeated crisis-style decision making
+- Tian Kui [SUPPORT] · state unknown
+  - Core: qualifying support, timely recognition and enabling access
+  - Decision: decide which opportunity has enough support to be worth entering
+  - Work: enable access, introduction, sponsorship or qualified support
+  - Resource: connect resources to points of readiness and leverage
+  - Relationship: receive or offer recognition that opens a constructive next step
+  - Pressure: overreliance on sponsors or mistaking access for guaranteed success
+  - Constructive: use access while retaining independent judgment
+  - Strained: entitlement, passivity or waiting for rescue
+
+#### Palace network
+- OPPOSITION: Life → Travel (topology only)
+- TRIAD: Life → Career, Wealth (topology only)
+- PALACE_RELATIONSHIP: Life → Siblings, Parents (topology only)
+- OPPOSITION: Siblings → Friends (topology only)
+- TRIAD: Siblings → Property, Health (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- PALACE_RELATIONSHIP: Spouse → Children, Siblings (topology only)
+- TRIAD: Children → Parents, Friends (topology only)
+- TRIAD: Wealth → Life, Career (topology only)
+- OPPOSITION: Health → Parents (topology only)
+- TRIAD: Health → Siblings, Property (topology only)
+- OPPOSITION: Travel → Life (topology only)
+- PALACE_RELATIONSHIP: Travel → Friends, Health (topology only)
+- OPPOSITION: Friends → Siblings (topology only)
+- TRIAD: Friends → Children, Parents (topology only)
+- PALACE_RELATIONSHIP: Friends → Career, Travel (topology only)
+- TRIAD: Career → Wealth, Life (topology only)
+- PALACE_RELATIONSHIP: Career → Property, Friends (topology only)
+- TRIAD: Property → Health, Siblings (topology only)
+- PALACE_RELATIONSHIP: Wellbeing → Parents, Property (topology only)
+- OPPOSITION: Parents → Health (topology only)
+- TRIAD: Parents → Friends, Children (topology only)
+- PALACE_RELATIONSHIP: Parents → Life, Wellbeing (topology only)
+
+#### Transformations
+- NATAL · Siblings · Tian Liang · Hua Ke — raises articulation, legibility, qualification or the chance of being understood；It does not guarantee fame, awards or recognition.
+- LIU_NIAN · Friends · Tian Tong · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- LIU_NIAN · Siblings · Wen Chang · Hua Ke — raises articulation, legibility, qualification or the chance of being understood；It does not guarantee fame, awards or recognition.
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:DI_KONG","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:TIAN_KUI","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SIBLINGS:TIAN_MA","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SIBLINGS:WEN_CHANG","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:PARENTS:YOU_BI","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:PARENTS:ZUO_FU","state":"NOT_APPLICABLE"}
 
 ### Governed synthesis claims
 
@@ -410,13 +1200,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -428,6 +1221,124 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: HEALTH
 - Context: LIFE, WELLBEING
+
+### Zi Wei technical evidence
+
+#### Health · WEI
+- Qing Yang [MALEFIC] · MIAO
+  - Core: cutting pressure, boundary collision and explicit choice
+  - Decision: decide by cutting through delay once the choice is sufficiently clear
+  - Work: handle obstruction through direct intervention
+  - Resource: redirect resources away from blocked or nonviable paths
+  - Relationship: make boundaries unmistakable, sometimes at the cost of softness
+  - Pressure: sharpness, compressed negotiation or unnecessary confrontation
+  - Constructive: direct boundary work with proportionate force
+  - Strained: escalation, brittleness or treating friction as proof of hostility
+- Tai Yang [MAIN] · state unknown
+  - Core: outward contribution, visibility and mobilization
+  - Decision: move toward what can be clarified, led or shared
+  - Work: lead, explain, represent or mobilize
+  - Resource: put resources into visible functions and collective use
+  - Relationship: express care through presence, contribution and openness
+  - Pressure: overextension, exposure pressure or giving beyond capacity
+  - Constructive: visible contribution with sustainable limits
+  - Strained: burnout, performative pressure or one-way giving
+- Tai Yin [MAIN] · state unknown
+  - Core: inward accumulation, reflection and protected reserve
+  - Decision: decide after internal review and sensitivity to context
+  - Work: support work requiring depth, continuity and behind-the-scenes care
+  - Resource: accumulate, preserve and quietly redeploy resources
+  - Relationship: create closeness through receptivity, privacy and attentive care
+  - Pressure: withdrawal, hidden load or difficulty making needs visible
+  - Constructive: deep reserve that can be shared when needed
+  - Strained: over-withdrawal, secrecy or silent accumulation of pressure
+- Combination: Tai Yang × Tai Yin — Read how outward contribution and inward reserve divide labor rather than reducing the pair to a stronger/weaker verdict.
+
+#### Life · ZI
+- Di Kong [MALEFIC] · state unknown
+  - Core: Kong-Jie family: discontinuity between expected form and usable reality
+  - Decision: decide after testing what remains usable when an expectation falls away
+  - Work: work with gaps, discontinuities and redefinition of assumptions
+  - Resource: reassess resources whose expected utility is unstable
+  - Relationship: avoid treating symbolic absence as proof of rejection or loss
+  - Pressure: premature nihilism or assuming lack of form means lack of value
+  - Constructive: flexibility when expected forms dissolve
+  - Strained: disengagement, unreality or abandoning viable remnants too soon
+- Qi Sha [MAIN] · WANG
+  - Core: decisive cutting, high-pressure choice and directional action
+  - Decision: decide quickly when continuation requires a hard choice
+  - Work: act under pressure, transition or contested responsibility
+  - Resource: concentrate resources behind the option judged necessary
+  - Relationship: bring clarity through direct boundaries and consequential choices
+  - Pressure: premature cutting, compressed consultation or treating every issue as urgent
+  - Constructive: decisive action after enough evidence and with explicit limits
+  - Strained: hardness, isolation or repeated crisis-style decision making
+- Tian Kui [SUPPORT] · state unknown
+  - Core: qualifying support, timely recognition and enabling access
+  - Decision: decide which opportunity has enough support to be worth entering
+  - Work: enable access, introduction, sponsorship or qualified support
+  - Resource: connect resources to points of readiness and leverage
+  - Relationship: receive or offer recognition that opens a constructive next step
+  - Pressure: overreliance on sponsors or mistaking access for guaranteed success
+  - Constructive: use access while retaining independent judgment
+  - Strained: entitlement, passivity or waiting for rescue
+
+#### Wellbeing · YIN
+- Huo Xing [MALEFIC] · MIAO
+  - Core: rapid ignition, acute activation and immediate force
+  - Decision: decide under a short activation window and strong impulse
+  - Work: start, accelerate or break inertia
+  - Resource: deploy resources quickly rather than gradually
+  - Relationship: bring immediacy and intensity into interaction
+  - Pressure: impulsiveness, overshoot or insufficient cooling-off time
+  - Constructive: fast activation with explicit stop conditions
+  - Strained: reactivity, volatility or action outrunning information
+- Lian Zhen [MAIN] · MIAO
+  - Core: boundary evaluation, value tension and selective engagement
+  - Decision: decide by weighing desire, rules and consequences
+  - Work: manage roles where rules, incentives and discretion meet
+  - Resource: direct resources toward what passes value and boundary tests
+  - Relationship: negotiate closeness through boundaries, attraction and accountability
+  - Pressure: boundary conflict, entanglement or polarized attraction/rejection
+  - Constructive: clear standards with room for complexity
+  - Strained: control struggles, moralization or reactive boundary shifts
+
+#### Palace network
+- OPPOSITION: Life → Travel (topology only)
+- TRIAD: Life → Career, Wealth (topology only)
+- PALACE_RELATIONSHIP: Life → Siblings, Parents (topology only)
+- TRIAD: Siblings → Property, Health (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- TRIAD: Spouse → Wellbeing, Travel (topology only)
+- OPPOSITION: Wealth → Wellbeing (topology only)
+- TRIAD: Wealth → Life, Career (topology only)
+- PALACE_RELATIONSHIP: Wealth → Health, Children (topology only)
+- OPPOSITION: Health → Parents (topology only)
+- TRIAD: Health → Siblings, Property (topology only)
+- PALACE_RELATIONSHIP: Health → Travel, Wealth (topology only)
+- OPPOSITION: Travel → Life (topology only)
+- TRIAD: Travel → Spouse, Wellbeing (topology only)
+- PALACE_RELATIONSHIP: Travel → Friends, Health (topology only)
+- TRIAD: Career → Wealth, Life (topology only)
+- TRIAD: Property → Health, Siblings (topology only)
+- PALACE_RELATIONSHIP: Property → Wellbeing, Career (topology only)
+- OPPOSITION: Wellbeing → Wealth (topology only)
+- TRIAD: Wellbeing → Travel, Spouse (topology only)
+- PALACE_RELATIONSHIP: Wellbeing → Parents, Property (topology only)
+- OPPOSITION: Parents → Health (topology only)
+- PALACE_RELATIONSHIP: Parents → Life, Wellbeing (topology only)
+
+#### Transformations
+- DA_XIAN · Health · Tai Yin · Hua Ke — raises articulation, legibility, qualification or the chance of being understood；It does not guarantee fame, awards or recognition.
+- LIU_NIAN · Wellbeing · Lian Zhen · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:DI_KONG","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:LIFE:TIAN_KUI","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:HEALTH:TAI_YANG","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:HEALTH:TAI_YIN","state":"SOURCE_PENDING"}
 
 ### Governed synthesis claims
 
@@ -473,13 +1384,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -491,6 +1405,145 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: CHILDREN
 - Context: CAREER, HEALTH, WEALTH
+
+### Zi Wei technical evidence
+
+#### Children · YOU
+- Ju Men [MAIN] · MIAO
+  - Core: questioning, clarification and contested meaning
+  - Decision: decide after interrogating claims and ambiguities
+  - Work: investigate, explain, challenge and clarify
+  - Resource: use information and argument as resources for discernment
+  - Relationship: relate through dialogue, naming differences and negotiating meaning
+  - Pressure: argument loops, suspicion or language becoming the conflict itself
+  - Constructive: precise questioning that improves shared understanding
+  - Strained: chronic disputation, mistrust or fixation on what is wrong
+- Ling Xing [MALEFIC] · DE
+  - Core: sustained alert tension and signal-like activation
+  - Decision: decide after separating persistent signal from background noise
+  - Work: maintain vigilance where issues recur rather than disappear
+  - Resource: reserve capacity for recurring or intermittent demands
+  - Relationship: heighten sensitivity to unresolved relational tension
+  - Pressure: hypervigilance, irritability or overreacting to signals
+  - Constructive: attentive monitoring with thresholds for action
+  - Strained: chronic tension, alarm fatigue or treating every signal as urgent
+- Tian Ji [MAIN] · WANG
+  - Core: analysis, adjustment and strategic movement
+  - Decision: compare pathways before committing
+  - Work: solve changing problems through analysis and iteration
+  - Resource: reallocate attention and resources as conditions change
+  - Relationship: use dialogue to refine understanding and options
+  - Pressure: over-analysis, restless adjustment or difficulty settling
+  - Constructive: adaptive intelligence with a clear stopping rule
+  - Strained: fragmentation, indecision or constant re-planning
+- Combination: Ju Men × Tian Ji — Questioning and analysis form a cognitive work chain: surface assumptions, compare paths, and prevent discussion and adjustment from becoming endless loops.
+
+#### Career · CHEN
+- Po Jun [MAIN] · WANG
+  - Core: dismantling, restructuring and renewal
+  - Decision: decide by asking what must end before a new configuration can work
+  - Work: rebuild systems after breakdown, transition or strategic reset
+  - Resource: release sunk resources and redirect them into a new structure
+  - Relationship: renegotiate relationships when old arrangements stop working
+  - Pressure: destructive resetting, change for its own sake or loss of continuity
+  - Constructive: deliberate renewal that preserves what still works
+  - Strained: serial disruption, instability or difficulty maintaining gains
+
+#### Health · WEI
+- Qing Yang [MALEFIC] · MIAO
+  - Core: cutting pressure, boundary collision and explicit choice
+  - Decision: decide by cutting through delay once the choice is sufficiently clear
+  - Work: handle obstruction through direct intervention
+  - Resource: redirect resources away from blocked or nonviable paths
+  - Relationship: make boundaries unmistakable, sometimes at the cost of softness
+  - Pressure: sharpness, compressed negotiation or unnecessary confrontation
+  - Constructive: direct boundary work with proportionate force
+  - Strained: escalation, brittleness or treating friction as proof of hostility
+- Tai Yang [MAIN] · state unknown
+  - Core: outward contribution, visibility and mobilization
+  - Decision: move toward what can be clarified, led or shared
+  - Work: lead, explain, represent or mobilize
+  - Resource: put resources into visible functions and collective use
+  - Relationship: express care through presence, contribution and openness
+  - Pressure: overextension, exposure pressure or giving beyond capacity
+  - Constructive: visible contribution with sustainable limits
+  - Strained: burnout, performative pressure or one-way giving
+- Tai Yin [MAIN] · state unknown
+  - Core: inward accumulation, reflection and protected reserve
+  - Decision: decide after internal review and sensitivity to context
+  - Work: support work requiring depth, continuity and behind-the-scenes care
+  - Resource: accumulate, preserve and quietly redeploy resources
+  - Relationship: create closeness through receptivity, privacy and attentive care
+  - Pressure: withdrawal, hidden load or difficulty making needs visible
+  - Constructive: deep reserve that can be shared when needed
+  - Strained: over-withdrawal, secrecy or silent accumulation of pressure
+- Combination: Tai Yang × Tai Yin — Read how outward contribution and inward reserve divide labor rather than reducing the pair to a stronger/weaker verdict.
+
+#### Wealth · SHEN
+- Tan Lang [MAIN] · state unknown
+  - Core: exploration, appetite and opportunity-seeking engagement
+  - Decision: decide by comparing opportunity, interest and trade-offs
+  - Work: open new channels, markets, networks or experiences
+  - Resource: draw resources toward growth, access and optionality
+  - Relationship: engage through curiosity, attraction and social responsiveness
+  - Pressure: overextension, novelty-chasing or blurred limits
+  - Constructive: exploration constrained by clear priorities and limits
+  - Strained: dispersion, excess appetite or commitments outrunning capacity
+- Tian Yue [SUPPORT] · state unknown
+  - Core: facilitation, refined assistance and problem-solving support
+  - Decision: decide where targeted support can change feasibility
+  - Work: facilitate resolution, coordination and quality improvement
+  - Resource: bring specialized or relational resources to bottlenecks
+  - Relationship: offer discerning help that respects the other party’s agency
+  - Pressure: support dependency or over-intervening in others’ problems
+  - Constructive: targeted help that restores capacity
+  - Strained: rescuer role, hidden obligation or unequal reciprocity
+
+#### Palace network
+- TRIAD: Life → Career, Wealth (topology only)
+- TRIAD: Siblings → Property, Health (topology only)
+- OPPOSITION: Spouse → Career (topology only)
+- PALACE_RELATIONSHIP: Spouse → Children, Siblings (topology only)
+- OPPOSITION: Children → Property (topology only)
+- TRIAD: Children → Parents, Friends (topology only)
+- PALACE_RELATIONSHIP: Children → Wealth, Spouse (topology only)
+- OPPOSITION: Wealth → Wellbeing (topology only)
+- TRIAD: Wealth → Life, Career (topology only)
+- PALACE_RELATIONSHIP: Wealth → Health, Children (topology only)
+- OPPOSITION: Health → Parents (topology only)
+- TRIAD: Health → Siblings, Property (topology only)
+- PALACE_RELATIONSHIP: Health → Travel, Wealth (topology only)
+- PALACE_RELATIONSHIP: Travel → Friends, Health (topology only)
+- TRIAD: Friends → Children, Parents (topology only)
+- PALACE_RELATIONSHIP: Friends → Career, Travel (topology only)
+- OPPOSITION: Career → Spouse (topology only)
+- TRIAD: Career → Wealth, Life (topology only)
+- PALACE_RELATIONSHIP: Career → Property, Friends (topology only)
+- OPPOSITION: Property → Children (topology only)
+- TRIAD: Property → Health, Siblings (topology only)
+- PALACE_RELATIONSHIP: Property → Wellbeing, Career (topology only)
+- OPPOSITION: Wellbeing → Wealth (topology only)
+- OPPOSITION: Parents → Health (topology only)
+- TRIAD: Parents → Friends, Children (topology only)
+
+#### Transformations
+- NATAL · Wealth · Tan Lang · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- DA_XIAN · Career · Po Jun · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- DA_XIAN · Children · Ju Men · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- DA_XIAN · Health · Tai Yin · Hua Ke — raises articulation, legibility, qualification or the chance of being understood；It does not guarantee fame, awards or recognition.
+- DA_XIAN · Wealth · Tan Lang · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+- LIU_NIAN · Children · Tian Ji · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+
+#### Qualified patterns
+- 巨机同宫 [JU_JI_TONG_GONG] · CHILDREN · qualification only; no traditional outcome imported
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TAN_LANG","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:WEALTH:TIAN_YUE","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:HEALTH:TAI_YANG","state":"SOURCE_PENDING"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:HEALTH:TAI_YIN","state":"SOURCE_PENDING"}
 
 ### Governed synthesis claims
 
@@ -542,13 +1595,16 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
-- Target depth: about 500–1000 English words in 6–8 substantial blocks
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
+- Target depth: about 600–1200 English words in 6–9 substantial blocks
 
 ### Key insights
 
@@ -560,6 +1616,185 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: TRAVEL
 - Context: FRIENDS, CHILDREN, SIBLINGS, WELLBEING
+
+### Zi Wei technical evidence
+
+#### Travel · WU
+- Lu Cun [RESOURCE_SUPPORT] · MIAO
+  - Core: resource retention, allocation and continuity
+  - Decision: decide by what can be sustainably retained and allocated
+  - Work: stabilize recurring operations through retained capacity
+  - Resource: hold and allocate resources rather than equating them with wealth
+  - Relationship: express reliability through tangible continuity and provision
+  - Pressure: over-attachment to reserves or reluctance to release resources
+  - Constructive: steady allocation with room for circulation
+  - Strained: resource guarding, inertia or measuring security only by accumulation
+- Tian Fu [MAIN] · WANG
+  - Core: storage, administration and stable capacity
+  - Decision: choose for continuity, capacity and manageability
+  - Work: administer systems, assets and recurring responsibilities
+  - Resource: hold, budget and preserve resources for sustained use
+  - Relationship: create reliability through steady provision and containment
+  - Pressure: over-conservatism, hoarding or slow adaptation
+  - Constructive: stable stewardship with deliberate flexibility
+  - Strained: inertia, resource guarding or excessive caution
+- Wu Qu [MAIN] · WANG
+  - Core: resource discipline, execution and measurable allocation
+  - Decision: decide through cost, capacity and execution feasibility
+  - Work: convert plans into accountable execution
+  - Resource: measure, allocate, preserve and deploy resources
+  - Relationship: show reliability through practical commitments
+  - Pressure: hardening around efficiency or undervaluing softer signals
+  - Constructive: disciplined execution that still adapts to context
+  - Strained: rigidity, transactional thinking or pressure to quantify everything
+
+#### Friends · SI
+- Tian Tong [MAIN] · MIAO
+  - Core: accommodation, ease, support and recovery
+  - Decision: prefer paths that preserve continuity and relational ease
+  - Work: stabilize teams and routines by reducing avoidable strain
+  - Resource: use resources to sustain continuity and recovery
+  - Relationship: offer warmth, acceptance and shared comfort
+  - Pressure: avoidance of necessary tension or delayed confrontation
+  - Constructive: restorative support without abandoning difficult tasks
+  - Strained: passivity, comfort-seeking or difficulty setting limits
+- Tuo Luo [MALEFIC] · XIAN
+  - Core: drag, repetition and persistent resistance
+  - Decision: decide after identifying what keeps reintroducing resistance
+  - Work: work through recurring constraints with persistence
+  - Resource: account for friction costs before allocating more resources
+  - Relationship: surface recurring friction that needs patient renegotiation
+  - Pressure: stagnation, circular effort or normalizing chronic blockage
+  - Constructive: patient persistence with periodic re-evaluation
+  - Strained: endless delay, fixation or effort without structural change
+
+#### Children · YOU
+- Ju Men [MAIN] · MIAO
+  - Core: questioning, clarification and contested meaning
+  - Decision: decide after interrogating claims and ambiguities
+  - Work: investigate, explain, challenge and clarify
+  - Resource: use information and argument as resources for discernment
+  - Relationship: relate through dialogue, naming differences and negotiating meaning
+  - Pressure: argument loops, suspicion or language becoming the conflict itself
+  - Constructive: precise questioning that improves shared understanding
+  - Strained: chronic disputation, mistrust or fixation on what is wrong
+- Ling Xing [MALEFIC] · DE
+  - Core: sustained alert tension and signal-like activation
+  - Decision: decide after separating persistent signal from background noise
+  - Work: maintain vigilance where issues recur rather than disappear
+  - Resource: reserve capacity for recurring or intermittent demands
+  - Relationship: heighten sensitivity to unresolved relational tension
+  - Pressure: hypervigilance, irritability or overreacting to signals
+  - Constructive: attentive monitoring with thresholds for action
+  - Strained: chronic tension, alarm fatigue or treating every signal as urgent
+- Tian Ji [MAIN] · WANG
+  - Core: analysis, adjustment and strategic movement
+  - Decision: compare pathways before committing
+  - Work: solve changing problems through analysis and iteration
+  - Resource: reallocate attention and resources as conditions change
+  - Relationship: use dialogue to refine understanding and options
+  - Pressure: over-analysis, restless adjustment or difficulty settling
+  - Constructive: adaptive intelligence with a clear stopping rule
+  - Strained: fragmentation, indecision or constant re-planning
+- Combination: Ju Men × Tian Ji — Questioning and analysis form a cognitive work chain: surface assumptions, compare paths, and prevent discussion and adjustment from becoming endless loops.
+
+#### Siblings · HAI
+- Tian Liang [MAIN] · XIAN
+  - Core: protection, standards, oversight and repair
+  - Decision: choose by durability, standards and downstream consequences
+  - Work: inspect, advise, safeguard and correct system drift
+  - Resource: reserve resources for maintenance, protection and remediation
+  - Relationship: protect relationships through guidance, boundaries and repair
+  - Pressure: over-responsibility, rescuing or turning standards into judgment
+  - Constructive: protective oversight with appropriate limits
+  - Strained: moral burden, chronic fixing or inability to let others carry consequences
+- Tian Ma [MOBILITY] · state unknown
+  - Core: mobility, environment switching and cross-context coordination
+  - Decision: decide by where movement or context change increases feasibility
+  - Work: operate across locations, interfaces or changing environments
+  - Resource: move resources across places, roles or contexts
+  - Relationship: negotiate distance, movement and changing availability in relationships
+  - Pressure: restlessness, logistical overload or confusing movement with progress
+  - Constructive: purposeful mobility tied to a clear destination or function
+  - Strained: constant switching, scattered attention or unstable routines
+- Wen Chang [SUPPORT] · state unknown
+  - Core: structured expression, learning and documentation
+  - Decision: decide by organizing facts and articulating criteria
+  - Work: write, document, teach, sequence and standardize
+  - Resource: turn information into reusable intellectual resources
+  - Relationship: build understanding through clear language and shared references
+  - Pressure: over-formalization, perfectionism in wording or substituting documentation for action
+  - Constructive: clear structure that supports real action
+  - Strained: rigid wording, over-editing or intellectual distance
+
+#### Wellbeing · YIN
+- Huo Xing [MALEFIC] · MIAO
+  - Core: rapid ignition, acute activation and immediate force
+  - Decision: decide under a short activation window and strong impulse
+  - Work: start, accelerate or break inertia
+  - Resource: deploy resources quickly rather than gradually
+  - Relationship: bring immediacy and intensity into interaction
+  - Pressure: impulsiveness, overshoot or insufficient cooling-off time
+  - Constructive: fast activation with explicit stop conditions
+  - Strained: reactivity, volatility or action outrunning information
+- Lian Zhen [MAIN] · MIAO
+  - Core: boundary evaluation, value tension and selective engagement
+  - Decision: decide by weighing desire, rules and consequences
+  - Work: manage roles where rules, incentives and discretion meet
+  - Resource: direct resources toward what passes value and boundary tests
+  - Relationship: negotiate closeness through boundaries, attraction and accountability
+  - Pressure: boundary conflict, entanglement or polarized attraction/rejection
+  - Constructive: clear standards with room for complexity
+  - Strained: control struggles, moralization or reactive boundary shifts
+
+#### Palace network
+- OPPOSITION: Life → Travel (topology only)
+- PALACE_RELATIONSHIP: Life → Siblings, Parents (topology only)
+- OPPOSITION: Siblings → Friends (topology only)
+- TRIAD: Siblings → Property, Health (topology only)
+- PALACE_RELATIONSHIP: Siblings → Spouse, Life (topology only)
+- TRIAD: Spouse → Wellbeing, Travel (topology only)
+- PALACE_RELATIONSHIP: Spouse → Children, Siblings (topology only)
+- OPPOSITION: Children → Property (topology only)
+- TRIAD: Children → Parents, Friends (topology only)
+- PALACE_RELATIONSHIP: Children → Wealth, Spouse (topology only)
+- OPPOSITION: Wealth → Wellbeing (topology only)
+- PALACE_RELATIONSHIP: Wealth → Health, Children (topology only)
+- TRIAD: Health → Siblings, Property (topology only)
+- PALACE_RELATIONSHIP: Health → Travel, Wealth (topology only)
+- OPPOSITION: Travel → Life (topology only)
+- TRIAD: Travel → Spouse, Wellbeing (topology only)
+- PALACE_RELATIONSHIP: Travel → Friends, Health (topology only)
+- OPPOSITION: Friends → Siblings (topology only)
+- TRIAD: Friends → Children, Parents (topology only)
+- PALACE_RELATIONSHIP: Friends → Career, Travel (topology only)
+- PALACE_RELATIONSHIP: Career → Property, Friends (topology only)
+- OPPOSITION: Property → Children (topology only)
+- TRIAD: Property → Health, Siblings (topology only)
+- PALACE_RELATIONSHIP: Property → Wellbeing, Career (topology only)
+- OPPOSITION: Wellbeing → Wealth (topology only)
+- TRIAD: Wellbeing → Travel, Spouse (topology only)
+- PALACE_RELATIONSHIP: Wellbeing → Parents, Property (topology only)
+- TRIAD: Parents → Friends, Children (topology only)
+- PALACE_RELATIONSHIP: Parents → Life, Wellbeing (topology only)
+
+#### Transformations
+- NATAL · Siblings · Tian Liang · Hua Ke — raises articulation, legibility, qualification or the chance of being understood；It does not guarantee fame, awards or recognition.
+- NATAL · Travel · Wu Qu · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- DA_XIAN · Children · Ju Men · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- LIU_NIAN · Friends · Tian Tong · Hua Lu — makes the related function more available for circulation, uptake or use；It does not guarantee money, profit or a desired outcome.
+- LIU_NIAN · Children · Tian Ji · Hua Quan — raises agency, responsibility or pressure to take charge；It does not guarantee promotion, authority or dominance.
+- LIU_NIAN · Siblings · Wen Chang · Hua Ke — raises articulation, legibility, qualification or the chance of being understood；It does not guarantee fame, awards or recognition.
+- LIU_NIAN · Wellbeing · Lian Zhen · Hua Ji — makes unfinished demand, attachment or friction harder to ignore；It does not guarantee misfortune, injury, loss or a bad event.
+
+#### Qualified patterns
+- 巨机同宫 [JU_JI_TONG_GONG] · CHILDREN · qualification only; no traditional outcome imported
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SIBLINGS:TIAN_MA","state":"NOT_APPLICABLE"}
+- {"kind":"BRIGHTNESS","placementId":"ZWR:STAR_PLACEMENT:ZPA-CONTROLLED-01:dab2a4acdfb6e379:SIBLINGS:WEN_CHANG","state":"SOURCE_PENDING"}
 
 ### Governed synthesis claims
 
@@ -611,12 +1846,15 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 ### Authoring contract
 
-- Lead with a section thesis rather than star-by-star definitions
-- Synthesize palace axis, same-palace composition, palace network, transformations and timing into one integrated reading
+- Establish the Zi Wei technical axis first: palaces, main stars, Body palace, San Fang Si Zheng, transformations and timing
+- Keep star and palace names visibly present in the prose rather than translating everything into generic psychology
+- Lead with a section thesis, then synthesize star combinations and palace network into one integrated reading
+- Known brightness/state may be used; unknown state must remain unknown
+- Qualified patterns may be named only as qualifications with the supplied structural meaning, never imported traditional outcome promises
 - Preserve constructive conditions, strain, counterexamples and unknowns
 - Use lived scenes only as conditional comparisons, never invented biography
-- Do not add Zi Wei rules, brightness, pattern outcomes, months or events absent from this pack
-- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or star glossary
+- Do not add Zi Wei rules, months or events absent from this pack
+- Write like a paid professional Zi Wei reading, not a methodology memo, governance report or generic psychology article
 - Target depth: about 300–600 English words in 5–7 substantial blocks
 
 ### Key insights
@@ -629,6 +1867,12 @@ Write only from the material above. Do not add Zi Wei rules absent from the pack
 
 - Primary: —
 - Context: —
+
+### Zi Wei technical evidence
+
+#### Unknowns and boundaries
+- {"kind":"LIU_YUE","state":"NOT_SUPPORTED"}
+- {"kind":"MISCELLANEOUS_STARS_OUTSIDE_28","state":"NOT_SUPPORTED"}
 
 ### Governed synthesis claims
 
