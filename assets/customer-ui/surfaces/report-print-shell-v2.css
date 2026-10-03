@@ -12,7 +12,7 @@ html,body{margin:0;padding:0}
 }
 .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static{padding:0!important}
 .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static>img{
- display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important
+ display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:fill!important
 }
 .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover{position:relative;overflow:hidden}
 .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover-overlay{position:absolute;inset:0;pointer-events:none}
@@ -78,12 +78,21 @@ html,body{margin:0;padding:0}
 .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-footer{
  position:absolute;left:17mm;right:17mm;bottom:11mm;z-index:2
 }
+@page phi-report-full-bleed{size:A4;margin:0}
 @page{size:A4;margin:0}
 @media print{
  html,body{margin:0!important;padding:0!important;background:#fff!important}
- .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{margin:0!important;background:#fff!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{page:phi-report-full-bleed;margin:0!important;background:#fff!important;zoom:1!important;transform:none!important}
  .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static,
  .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{margin:0!important;box-shadow:none!important}
  .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page:last-child{break-after:auto!important;page-break-after:auto!important}
  .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+
+/* P06 keeps its source-bound diagram, with the same physical A4 page owner. */
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-frozen-intro="P06"]{width:210mm!important;max-width:210mm!important;margin:0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-frozen-intro="P06"] .vrpt-page{width:210mm!important;height:297mm!important;min-height:297mm!important;margin:0 auto 10mm!important;padding:15mm 17mm 12mm!important;border:0!important;box-sizing:border-box;overflow:hidden;break-after:page!important}
+@media print{.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-frozen-intro="P06"] .vrpt-page{margin:0!important}}
+@media print{
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] :is(.pub-page,.pub-static,[data-frozen-intro="P06"],[data-frozen-intro="P06"] .vrpt-page){page:phi-report-full-bleed!important}
 }

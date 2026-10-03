@@ -7,6 +7,7 @@ const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-so
 const css=[
  'assets/css/tokens.css',
  'assets/customer-ui/surfaces/visual-report.css',
+ 'assets/customer-ui/surfaces/report-publication.css',
  'assets/customer-ui/surfaces/report-print-shell-v2.css',
  'assets/customer-ui/surfaces/bazi-print-shell-v2.css'
 ].map(p=>fs.readFileSync(p,'utf8')).join('\n').replaceAll('url(/','url(../../');
