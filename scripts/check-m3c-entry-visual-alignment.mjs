@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 
 const root = process.cwd();
 
@@ -201,7 +202,16 @@ for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
 assert.equal(wranglerReconciliation.predecessor.wranglerSha256, registry.frozenArtifacts['wrangler.jsonc']);
 assert.equal(await sha256('wrangler.jsonc'), wranglerReconciliation.successor.wranglerSha256);
 const wrangler = JSON.parse((await read('wrangler.jsonc')).replace(/^\uFEFF/, ''));
-assert.equal(wrangler.pages_build_output_dir, wranglerReconciliation.preserved.pagesBuildOutputDirectory);
+const publicationDelta=wranglerReconciliation.allowedDelta.pagesPublication;
+assert.equal(publicationDelta.commit,'25226cd27f50c4b7197bd5a6f0371d56202861bf');
+assert.equal(publicationDelta.predecessorOutputDirectory,wranglerReconciliation.preserved.pagesBuildOutputDirectory);
+assert.equal(publicationDelta.successorOutputDirectory,'.pages-output');
+assert.equal(wrangler.pages_build_output_dir,publicationDelta.successorOutputDirectory);
+const historicalWrangler=JSON.parse(execFileSync('git',['show',publicationDelta.commit+':wrangler.jsonc'],{cwd:root,encoding:'utf8'}));
+const priorWrangler=JSON.parse(execFileSync('git',['show',publicationDelta.commit+'^:wrangler.jsonc'],{cwd:root,encoding:'utf8'}));
+assert.equal(priorWrangler.pages_build_output_dir,publicationDelta.predecessorOutputDirectory);
+assert.deepEqual({...historicalWrangler,pages_build_output_dir:publicationDelta.predecessorOutputDirectory},priorWrangler,'Pages publication commit must change only output directory');
+assert.deepEqual(wrangler,historicalWrangler,'Current Wrangler must match the pinned publication successor');
 assert.equal(wrangler.ai.binding, wranglerReconciliation.preserved.aiBinding);
 assert.equal(wrangler.d1_databases.length, 1);
 assert.equal(wrangler.d1_databases[0].binding, wranglerReconciliation.preserved.d1Binding);

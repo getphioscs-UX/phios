@@ -1,4 +1,5 @@
 import fs from 'node:fs';import assert from 'node:assert/strict';import {DatabaseSync} from 'node:sqlite';import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';import path from 'node:path';import {build} from 'esbuild';import {PDFDocument} from 'pdf-lib';
+import {createSqliteD1Adapter} from './runtime-migration-loader.mjs';
 import {generateZiweiProductionCandidate as generateControlledZiweiReport,requireZiweiEntitlement,ZIWEI_PRODUCT} from '../functions/report-delivery/ziwei-production-generation-v1.js';
 import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiweiReports} from '../functions/account/ziwei-controlled-report-material.js';
 import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
@@ -6,7 +7,7 @@ import {finalizeZiweiNavigation} from '../functions/canonical-presentation-runti
 import {assertReportSubjectBinding} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
 const frozenDir='docs/reports/ziwei/production-admission/zpa-v1',dir='docs/reports/ziwei/production-admission/cpa-v1',record=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/controlled-subject.json')),owner=record.person.accountOwnerUserId,personId=record.person.personId;
 const sqlite=new DatabaseSync(':memory:');for(const f of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('db/migrations/'+f,'utf8'));
-const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},async first(){return sqlite.prepare(sql).get(...this.values)||null;},async all(){return {results:sqlite.prepare(sql).all(...this.values)};},async run(){return sqlite.prepare(sql).run(...this.values);}};},async batch(statements){sqlite.exec('BEGIN');try{const r=[];for(const s of statements)r.push(await s.run());sqlite.exec('COMMIT');return r;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
+const db=createSqliteD1Adapter(sqlite);
 // Isolated test rows exercise the real Commerce query. No payment is made,
 // webhook simulated as verified, or remote account/entitlement created.
 sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,language,format,currency,amount_minor,source_object_key,created_at,updated_at) VALUES(?,'1','Zi Wei local test','bilingual','REPORT','MYR',3900,'controlled','2026-10-01','2026-10-01')").run(ZIWEI_PRODUCT);

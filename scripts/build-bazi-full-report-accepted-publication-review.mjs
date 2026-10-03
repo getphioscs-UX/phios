@@ -43,7 +43,7 @@ window.measureReport=()=>{const fit=fitPublicationForPrint(root);return {pageFit
 window.batchReady=true;`,resolveDir:process.cwd(),sourcefile:'full-report-review-entry.js'},bundle:true,write:false,format:'esm',platform:'browser',minify:true});
 const runtime=reviewRuntime.outputFiles[0].text.replaceAll('</script','<\\/script');
 for(const [locale,suffix] of [['zh-Hans','ZH'],['en','EN']]){
- const report=await buildBaziCustomerPublication({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,full:true,compositionR1});
+ const report=await buildBaziCustomerPublication({historicalReferenceReview:true,reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,full:true,compositionR1});
  const body=renderPublicationReport(report).replaceAll('src="/','src="../../').replaceAll('url(/','url(../../');
  const file=`tools/review/BAZI-FULL-REPORT-${compositionR1?'COMPOSITION-R1':'REVIEW'}-${suffix}.html`;
  const notice=locale==='en'
