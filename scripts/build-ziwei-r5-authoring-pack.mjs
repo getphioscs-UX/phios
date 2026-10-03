@@ -21,6 +21,45 @@ function md(pack){
   lines.push('','### '+(zh?'宫位范围':'Palace scope'),'');
   lines.push('- '+(zh?'主宫位：':'Primary: ')+(s.primaryPalaces.join(', ')||'—'));
   lines.push('- '+(zh?'关联宫位：':'Context: ')+(s.contextPalaces.join(', ')||'—'),'');
+  lines.push('### '+(zh?'紫微技术资料':'Zi Wei technical evidence'),'');
+  for(const p of s.technicalEvidence.palaces){
+   lines.push('#### '+p.label+(p.isBodyPalace?(zh?' · 身宫':' · Body'):'')+(p.branchLabel?' · '+p.branchLabel:''));
+   if(p.stars.length){
+    for(const st of p.stars){
+     lines.push('- '+st.label+' ['+(st.starClass||'')+']'+(st.stateKnown?' · '+st.stateLabel:(zh?' · 状态未知':' · state unknown')));
+     if(st.coreFunction)lines.push('  - '+(zh?'核心：':'Core: ')+st.coreFunction);
+     if(st.decisionPattern)lines.push('  - '+(zh?'决策：':'Decision: ')+st.decisionPattern);
+     if(st.workExpression)lines.push('  - '+(zh?'事业：':'Work: ')+st.workExpression);
+     if(st.resourceExpression)lines.push('  - '+(zh?'资源：':'Resource: ')+st.resourceExpression);
+     if(st.relationshipExpression)lines.push('  - '+(zh?'关系：':'Relationship: ')+st.relationshipExpression);
+     if(st.pressureMode)lines.push('  - '+(zh?'压力：':'Pressure: ')+st.pressureMode);
+     if(st.highExpression)lines.push('  - '+(zh?'建设性：':'Constructive: ')+st.highExpression);
+     if(st.strainedExpression)lines.push('  - '+(zh?'失衡：':'Strained: ')+st.strainedExpression);
+    }
+   }
+   for(const c of p.combinations)lines.push('- '+(zh?'同宫组合：':'Combination: ')+c.label+' — '+c.interaction);
+   lines.push('');
+  }
+  if(s.technicalEvidence.relationships.length){
+   lines.push('#### '+(zh?'宫位网络':'Palace network'));
+   for(const r of s.technicalEvidence.relationships)lines.push('- '+r.entityType+': '+r.fromLabel+' → '+r.toLabels.join(zh?'、':', ')+(r.topologyOnly?(zh?'（仅结构关系）':' (topology only)'):''));
+   lines.push('');
+  }
+  if(s.technicalEvidence.transformations.length){
+   lines.push('#### '+(zh?'四化':'Transformations'));
+   for(const t of s.technicalEvidence.transformations)lines.push('- '+t.layer+' · '+t.palaceLabel+' · '+t.targetStarLabel+' · '+t.label+' — '+t.function+'；'+t.boundary);
+   lines.push('');
+  }
+  if(s.technicalEvidence.qualifiedPatterns.length){
+   lines.push('#### '+(zh?'已成立格局资格':'Qualified patterns'));
+   for(const p of s.technicalEvidence.qualifiedPatterns)lines.push('- '+p.labelZh+' ['+p.patternCode+'] · '+p.palaceCodes.join(', ')+' · '+(zh?'仅确认资格，不附加传统结果':'qualification only; no traditional outcome imported'));
+   lines.push('');
+  }
+  if(s.technicalEvidence.unknowns.length){
+   lines.push('#### '+(zh?'未知与边界':'Unknowns and boundaries'));
+   for(const u of s.technicalEvidence.unknowns)lines.push('- '+JSON.stringify(u));
+   lines.push('');
+  }
   lines.push('### '+(zh?'受治理综合命题':'Governed synthesis claims'),'');
   for(const c of s.claims){
    lines.push('#### '+c.role+' · '+c.claimType,'',c.text,'');
