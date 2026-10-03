@@ -28,7 +28,7 @@ function readJson(relativePath) {
 
   try {
     return JSON.parse(
-      fs.readFileSync(absolutePath, 'utf8')
+      fs.readFileSync(absolutePath, 'utf8').replace(/^\uFEFF/, '')
     );
   } catch (error) {
     throw new Error(
@@ -46,7 +46,9 @@ function jsonFiles(directory) {
     if (
       entry.name === '.git' ||
       entry.name === 'node_modules' ||
-      entry.name === '.tmp'
+      entry.name === '.tmp' ||
+      entry.name === '.pages-output' ||
+      entry.name === '.wrangler'
     ) {
       continue;
     }
@@ -114,7 +116,7 @@ function validateSchemaReference(absolutePath, document) {
   }
 
   try {
-    JSON.parse(fs.readFileSync(target, 'utf8'));
+    JSON.parse(fs.readFileSync(target, 'utf8').replace(/^\uFEFF/, ''));
   } catch (error) {
     throw new Error(
       `Referenced JSON Schema is invalid for ${relativePath}: ${reference}\n${error.message}`
