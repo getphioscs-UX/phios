@@ -21,7 +21,15 @@ for(const locale of ['zh-Hans','en']){
   assert(section.claims.length>=7,section.sectionId+' claims too thin');
   assert(section.claims.every(c=>c.sourceRefs.length>0),section.sectionId+' source lineage missing');
   assert(section.authoringContract.requiredShape.length>=9,section.sectionId+' professional Zi Wei authoring contract too thin');
-  assert(section.technicalEvidence?.palaces?.length>0,section.sectionId+' palace technical evidence required');
+  if(section.sectionId==='S11'){
+   assert.equal(section.technicalEvidence?.palaces?.length,0,'S11 navigation must not invent a focal palace');
+   assert(section.claims.some(c=>c.claimType==='WHOLE_CHART_PRIORITIES'),'S11 whole-chart priorities required');
+   assert(section.claims.some(c=>c.claimType==='INTEGRATED_MEANING'),'S11 integrated meaning required');
+   assert(section.claims.some(c=>c.claimType==='BOUNDED_NAVIGATION'),'S11 bounded navigation required');
+   assert(Array.isArray(section.technicalEvidence?.unknowns),'S11 unknowns/boundaries required');
+  }else{
+   assert(section.technicalEvidence?.palaces?.length>0,section.sectionId+' palace technical evidence required');
+  }
   assert(Array.isArray(section.technicalEvidence?.relationships),section.sectionId+' relationship network required');
   assert(Array.isArray(section.technicalEvidence?.transformations),section.sectionId+' transformation rows required');
   for(const palace of section.technicalEvidence.palaces){
