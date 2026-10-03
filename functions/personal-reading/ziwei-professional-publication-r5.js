@@ -21,6 +21,7 @@ export const ZIWEI_R5_PAGE_ROLES={
  S11:['WHOLE_CHART_NAVIGATION'],
  S12:['METHOD_BOUNDARIES']
 };
+const PUBLIC_SECTION_KEY={S01:'STRUCTURAL_COORDINATES',S02:'CORE_ORIENTATION',S03:'INNER_STRUCTURE',S04:'WORK_DIRECTION',S05:'RESOURCES_WEALTH',S06:'RELATIONSHIPS',S07:'FAMILY_SUPPORT',S08:'PRESSURE_VULNERABILITY',S09:'LONG_TERM_CYCLES',S10:'CURRENT_TIMING',S11:'REALITY_NAVIGATION',S12:'METHOD_BOUNDARIES'};
 const TITLES={
  STRUCTURE:['结构坐标','Structural Coordinates'],
  CORE_SYNTHESIS:['命身综合','Life–Body Synthesis'],DECISION_CONDITIONS:['条件与现实落地','Conditions & Lived Implementation'],
@@ -50,10 +51,10 @@ function openerDefaults(id,locale){
 }
 export function buildZiweiProfessionalSynthesisR5Publication({evidence,sections,locale,subjectPresentation}={}){
  const s=evidence.structured||evidence,zh=locale==='zh-Hans',pages=[],sourceBlocks=[];
- const base=(reg,role)=>({sectionId:reg.sectionId,sectionKey:reg.sectionId+'_'+reg.code,sectionNumber:reg.sectionId.slice(1),sectionTitle:reg.title,title:TITLES[role]?.[zh?0:1]||reg.title[locale],pageKey:'ZWR-R5:'+reg.sectionId+':'+role,definitionKey:'ZWR-R5:'+reg.sectionId+':'+role,physicalPageRole:role,compositionGroupId:'ZWR-R5:'+reg.sectionId+':'+role,locale,fitMode:'STANDARD',priority:'REQUIRED',mustBreakBefore:true,mustBreakAfter:true,canMerge:false,paragraphs:[],items:[],facts:[],observations:[],boundary:'',visualBinding:{},temporal:null});
+ const base=(reg,role)=>({sectionId:reg.sectionId,sectionKey:'ZWR_'+PUBLIC_SECTION_KEY[reg.sectionId],sectionNumber:reg.sectionId.slice(1),sectionTitle:reg.title,title:TITLES[role]?.[zh?0:1]||reg.title[locale],pageKey:'ZWR:'+PUBLIC_SECTION_KEY[reg.sectionId]+':'+role,definitionKey:'ZWR:'+PUBLIC_SECTION_KEY[reg.sectionId]+':'+role,physicalPageRole:role,compositionGroupId:'ZWR:'+PUBLIC_SECTION_KEY[reg.sectionId]+':'+role,locale,fitMode:'STANDARD',priority:'REQUIRED',mustBreakBefore:true,mustBreakAfter:true,canMerge:false,paragraphs:[],items:[],facts:[],observations:[],boundary:'',visualBinding:{},temporal:null});
  for(const reg of ZIWEI_REPORT_SECTIONS){
   const section=sections.find(x=>x.sectionId===reg.sectionId);if(!section)throw Error('ZIWEI_R5_SECTION_MISSING:'+reg.sectionId);
-  const nodeId='ZWR-R5:'+s.subjectKey+':'+reg.sectionId,items=section.synthesisIr?.keyInsights||openerDefaults(reg.sectionId,locale);
+  const nodeId='ZWR:'+s.subjectKey+':'+PUBLIC_SECTION_KEY[reg.sectionId],items=section.synthesisIr?.keyInsights||openerDefaults(reg.sectionId,locale);
   pages.push({...base(reg,'SECTION_MASTER'),pageFamily:'SECTION_OPENER_PAGE',sourceNodeIds:[nodeId+':MASTER'],paragraphs:[],items,sourceClaimRefs:section.synthesisIr?.claims?.map(c=>c.claimId)||section.claims.map(c=>c.claimId)});
   const blocks=section.publicationIr.blocks.map((b,i)=>({text:b.prose,sourceNodeId:nodeId,sourceParagraphIndex:i,ordinal:i,blockId:b.blockId,claimRefs:b.claimRefs}));sourceBlocks.push(...blocks);
   const roles=ZIWEI_R5_PAGE_ROLES[reg.sectionId],split=Math.ceil(blocks.length/roles.length);
