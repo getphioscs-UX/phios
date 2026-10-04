@@ -4,6 +4,7 @@ import {buildZiweiProfessionalSynthesisR5Publication} from '../personal-reading/
 import {createCustomerDeliverySnapshot} from '../personal-reading/narrative/report-section-snapshot.js';
 
 export const ZIWEI_R5_ACCEPTED_GENERATION_VERSION='ZIWEI-R5-ACCEPTED-COPY-GENERATION-v1';
+export const ZIWEI_R5_ACCEPTED_GENERATION_SCOPE='CONTROLLED_REFERENCE_ONLY';
 
 export async function generateZiweiR5AcceptedCopyCandidate(context,selection,deps={}){
  const base=await generateZiweiProductionCandidate(context,selection,deps);
@@ -39,6 +40,7 @@ export async function generateZiweiR5AcceptedCopyCandidate(context,selection,dep
   schemaVersion:'ZWR-R5-ACCEPTED-COPY-CANDIDATE-1',
   snapshot,
   generationSuccessor:ZIWEI_R5_ACCEPTED_GENERATION_VERSION,
+  scope:ZIWEI_R5_ACCEPTED_GENERATION_SCOPE,
   providerAuthority:'NONE_RUNTIME_DETERMINISTIC',
   naturalCompositionSummary:{
    requested:10,
