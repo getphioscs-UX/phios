@@ -20,7 +20,7 @@ export function buildReportDeliveryR2({methodId,access,admitted,reportAvailable,
   snapshotImmutable:semanticSnapshot?.immutable===true,
   providerRegenerationOnReopen:false,
   explore:Object.freeze({requested:exploreRequested===true,mutatesSnapshot:false,recalculatesMethod:false,productionClaimsOnly:true}),
-  governance:Object.freeze({entitlementRequiredForFullReport:true,browserMayGrantEntitlement:false,queryMayGrantEntitlement:false,localStorageMayGrantEntitlement:false})
+  governance:Object.freeze({entitlementRequiredForFullReport:true,browserMayGrantEntitlement:false,queryMayGrantEntitlement:false,localStorageMayGrantEntitlement:false,referenceGovernedComposerRequired:true,requiredComposerId:'REPORT-PRO-COMPOSER-R1',deterministicProseFallbackAllowed:false})
  });
 }
 export default Object.freeze({buildReportDeliveryR2});
