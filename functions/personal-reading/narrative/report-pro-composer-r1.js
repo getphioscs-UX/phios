@@ -61,9 +61,8 @@ async function governedBrief(brief,reference){
   return deepFreeze({...seed,briefSemanticDigest:await sha256Stable(seed)});
 }
 
-export async function composeReferenceGovernedSectionR1({
-  brief,reference,registry:providerRegistry,env={},fetcher,providerAdapters,requestId,cache,timeoutMs=180000,
-  subjectFingerprint,inputFingerprint,createdAt
+export async function composeReferenceGovernedDraftR1({
+  brief,reference,registry:providerRegistry,env={},fetcher,providerAdapters,requestId,cache,timeoutMs=180000
 }={}){
   const resolvedReference=reference||reportProReference(brief?.methodId);
   const {policy}=assertReferenceGovernance({brief,reference:resolvedReference});
@@ -79,9 +78,36 @@ export async function composeReferenceGovernedSectionR1({
       reason:result?.internalOnly?.fallbackReason||result?.verification?.reasons?.[0]||'REFERENCE_GOVERNED_COMPOSITION_FAILED',
       deterministicProseFallbackUsed:false,
       methodId:brief.methodId,sectionKey:brief.sectionKey,locale:brief.locale,
-      internalOnly:result?.internalOnly||null
+      referenceId:resolvedReference?.referenceId||null,
+      governedBrief:gBrief,
+      internalOnly:result?.internalOnly||null,
+      candidate:result?.candidate||null,
+      verification:result?.verification||null
     });
   }
+  return deepFreeze({
+    status:'PASS',
+    referenceId:resolvedReference.referenceId,
+    referenceState:policy.referenceState,
+    governedBrief:gBrief,
+    candidate:result.candidate,
+    verification:result.verification,
+    compositionDigest:result.compositionDigest||null,
+    usageRecord:result.usageRecord||null,
+    verificationUsageRecords:result.verificationUsageRecords||[],
+    internalOnly:result.internalOnly
+  });
+}
+
+export async function composeReferenceGovernedSectionR1({
+  brief,reference,registry:providerRegistry,env={},fetcher,providerAdapters,requestId,cache,timeoutMs=180000,
+  subjectFingerprint,inputFingerprint,createdAt
+}={}){
+  const resolvedReference=reference||reportProReference(brief?.methodId);
+  const draft=await composeReferenceGovernedDraftR1({brief,reference:resolvedReference,registry:providerRegistry,env,fetcher,providerAdapters,requestId,cache,timeoutMs});
+  if(draft.status!=='PASS')return draft;
+  const gBrief=draft.governedBrief;
+  const result={candidate:draft.candidate,verification:draft.verification,internalOnly:draft.internalOnly};
   const semanticContent={
     sectionKey:brief.sectionKey,
     referenceId:resolvedReference.referenceId,
@@ -130,4 +156,4 @@ export function reportProMethodReadiness(){
   })));
 }
 
-export default Object.freeze({composeReferenceGovernedSectionR1,assertReferenceGovernance,reportProMethodReadiness});
+export default Object.freeze({composeReferenceGovernedDraftR1,composeReferenceGovernedSectionR1,assertReferenceGovernance,reportProMethodReadiness});
