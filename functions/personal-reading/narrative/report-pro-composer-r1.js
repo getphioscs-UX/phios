@@ -1,10 +1,19 @@
-import registry from '../../../config/reports/report-pro-composer-r1.json' with {type:'json'};
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {composeReportSectionT3,REPORT_SECTION_T3_COMPOSER_VERSION} from './report-section-t3-composer.js';
 import {REPORT_SECTION_SEMANTIC_VERIFIER_VERSION} from './report-section-semantic-verifier.js';
 import {createCustomerDeliverySnapshot} from './report-section-snapshot.js';
 
 export const REPORT_PRO_COMPOSER_R1_VERSION='PHI-OS-REPORT-PRO-COMPOSER-R1-v1.0.0';
+const registry=Object.freeze({methods:Object.freeze([
+  Object.freeze({methodId:'BZR',name:'BaZi',referenceState:'ACTIVE'}),
+  Object.freeze({methodId:'ZWR',name:'Zi Wei',referenceState:'ACTIVE'}),
+  Object.freeze({methodId:'AST',name:'Astrology',referenceState:'REQUIRED'}),
+  Object.freeze({methodId:'NUM',name:'Numerology',referenceState:'REQUIRED'}),
+  Object.freeze({methodId:'PROFILE',name:'Profile',referenceState:'REQUIRED'}),
+  Object.freeze({methodId:'ECR',name:'Embodied Configuration',referenceState:'REQUIRED'}),
+  Object.freeze({methodId:'HD',name:'Human Design',referenceState:'REQUIRED'}),
+  Object.freeze({methodId:'CROSS',name:'Incarnation Cross',referenceState:'REQUIRED'})
+])});
 
 function fail(code,details={}){const e=new Error(code);e.code=code;e.details=details;throw e;}
 function methodPolicy(methodId){return (registry.methods||[]).find(x=>x.methodId===methodId)||null;}
