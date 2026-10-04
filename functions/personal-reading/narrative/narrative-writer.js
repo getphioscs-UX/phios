@@ -106,6 +106,14 @@ SECTION_OUTPUT_SCHEMA.properties.blocks.items.required.push('supportRefs');
 SECTION_OUTPUT_SCHEMA.properties.blocks.items.properties.supportRefs={type:'array',minItems:1,items:{type:'string'}};
 
 function sectionSystemPrompt(brief,{repairReasons=[]}={}){
+ const referenceInstructions=brief?.referenceGovernance?[
+  'REFERENCE-GOVERNED PAID REPORT: the supplied human-accepted reference controls editorial quality, section focus, paragraph rhythm and customer-facing depth. It does not supply subject facts.',
+  'Match the reference quality contract without copying subject-specific wording or conclusions. Keep this section inside its sectionOwnership boundary and do not pre-consume later sections.',
+  'Write as a personal professional report addressed to the customer, not as an essay, method lesson, governance memo or generic advice article.',
+  'Do not render a professional-note/methodology/source-admission block unless the section contract explicitly requires one. Method limits remain in internal authority and verification.',
+  'Prefer concrete interpretation of the admitted method facts over repeated caveats. Preserve every material uncertainty inside the relevant sentence rather than adding a separate disclaimer section.',
+  'If referenceGovernance.requireSectionIsolation is true, reject rhetorical expansion into career, wealth, relationship, family or timing domains that belong to other sections.'
+ ]:[];
  if(brief.reconciliation)return reconciledMarketPrompt(brief);
  if(brief.marketContract)return brief.marketDomain==='WEALTH'?WEALTH_PROMPT:MARKET_PROMPT;
  const repair=repairReasons.length?[
@@ -127,7 +135,7 @@ function sectionSystemPrompt(brief,{repairReasons=[]}={}){
   'Use concrete conditional scenes as tests of the reading, not invented biography. Preserve counterexamples and uncertainty. Do not mention claim IDs, source refs, runtime, governance, admission, verifier, semantic operators or candidate state in customer prose.',
   'Avoid repeated sentence openings and avoid the Chinese pattern “X星呈现……” or the English pattern “X star brings…”. Named stars may appear as evidence inside a synthesis, but the paragraph must be about the integrated pattern, not the glossary entry.',
   'Return only structured JSON and preserve every material condition, counterweight, timing boundary and source lineage carried by the brief.',
-  ...repair,
+  ...referenceInstructions,...repair,
   'Return only structured JSON.'
  ].join('\n');
  if(brief.methodId==='ZWR')return [
@@ -139,7 +147,7 @@ function sectionSystemPrompt(brief,{repairReasons=[]}={}){
   'Wellbeing sections may discuss symbolic pressure and recovery conditions only; never diagnose or imply medical causation. Timing sections must keep natal structure, Da Xian and Liu Nian distinct and describe foreground/relevance rather than guaranteed events or dates.',
   'Use natural transitions and varied sentence openings. Avoid internal terms such as claim IDs, source refs, admission, verifier, runtime, semantic operator or candidate state in customer prose.',
   'Preserve every material condition, counterweight, uncertainty and timing boundary carried by the brief. Do not add certainty to make the writing sound more authoritative.',
-  ...repair,
+  ...referenceInstructions,...repair,
   'Return only structured JSON.'
  ].join('\n');
  if(brief.successorVersion)return [
@@ -165,7 +173,7 @@ function sectionSystemPrompt(brief,{repairReasons=[]}={}){
   'Prohibit generic motivational advice, occupation fortune-telling, unsupported behavior/events, raw percentage personalization, category/operator lists, internal terminology, repeated disclaimers and a BaZi lesson. Do not write carrying conditions, symbolic priority, formation support, self-position, structural modifiers, 当前结构, 该组结构, 承载条件, 关系修正, 形成支持 or 象征性解读.',
   'Chinese and English must be independently natural, sharing the same mechanisms and scenario meanings. Source references are hidden metadata only.',
   'Every block cites the derived CSD claim IDs whose meanings it expresses and supportRefs from those claims. Express all derived claims meaningfully; IDs alone are insufficient. Return sourceBriefDigest unchanged. Do not invent chart facts, diagnoses, guarantees, hidden states or financial recommendations.',
-  ...repair,'Return only structured JSON.'
+  ...referenceInstructions,...repair,'Return only structured JSON.'
  ].join('\n');
  return [
   'You are the PHI OS paid-report section writer.',
@@ -180,7 +188,7 @@ function sectionSystemPrompt(brief,{repairReasons=[]}={}){
   'BOUNDARY claims are mandatory: express and cite their meaning in the relevant paragraph. Being labelled SUPPORTING does not make a boundary optional. Integrate the conditional symbolic nature of the reading naturally; do not imply observed behavior or predicted events.',
   'Preserve boundary flags in each claim basis as well as its text. If convergenceIsNotCertainty is true, explain locally that overlapping timing signals increase relevance while uncertainty remains. Keep the natal context primary. Do not replace these distinct boundaries with a generic disclaimer.',
   'OBSERVABLE_EXPRESSION must be framed as comparisons/questions/conditions unless the brief contains an admitted observed-reality claim.',
-  ...repair,
+  ...referenceInstructions,...repair,
   'Return only structured JSON.'
  ].join('\n');
 }
