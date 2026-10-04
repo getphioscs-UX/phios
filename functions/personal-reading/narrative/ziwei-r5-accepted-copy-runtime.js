@@ -4,9 +4,11 @@ import {buildReportPublicationIrV2,assertPublicationIrV2Preservation} from './re
 import {resolveZiweiR5AcceptedCopy} from './ziwei-r5-accepted-copy.generated.js';
 
 export const ZIWEI_R5_ACCEPTED_COPY_RUNTIME_VERSION='ZIWEI-R5-ACCEPTED-COPY-RUNTIME-v1';
+export const ZIWEI_R5_ACCEPTED_REFERENCE_SUBJECT='ZPA-CONTROLLED-01';
 const NATURAL=new Set(['S02','S03','S04','S05','S06','S07','S08','S09','S10','S11']);
 
 export async function buildZiweiR5AcceptedCopySections({evidence,locale}={}){
+ if((evidence?.structured||evidence)?.subjectId!==ZIWEI_R5_ACCEPTED_REFERENCE_SUBJECT)throw Error('ZIWEI_R5_ACCEPTED_COPY_REFERENCE_ONLY');
  const accepted=resolveZiweiR5AcceptedCopy(locale);
  if(accepted.humanDecision!=='ACCEPT'||accepted.productionUse!==false)throw Error('ZIWEI_R5_ACCEPTED_COPY_NOT_FROZEN');
  const base=await buildZiweiContentDepthR3Sections({evidence,locale});
