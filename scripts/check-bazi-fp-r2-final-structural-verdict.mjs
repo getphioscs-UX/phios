@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {analyzeBaziFinalStructuralVerdictR2} from '../functions/bzr-full-production/bazi-final-structural-verdict-r2.js';
 
 const chart={
@@ -42,5 +43,13 @@ assert.equal(out.pattern.formationPath,'SHANG_GUAN_SHENG_CAI');
 assert.equal(out.usefulGod.primaryReportUse.usefulGod,'EARTH');
 assert.deepEqual(out.usefulGod.primaryReportUse.supportingElements,['METAL']);
 assert.equal(out.usefulGod.schoolViews.find(x=>x.schoolCode==='DI_TIAN_SUI_TIAOHOU_R2').elementCandidates[0],'FIRE');
+
+const pack=JSON.parse(fs.readFileSync('docs/acceptance/bazi-paid-report/editorial/GEN-01-AUTHORITY-PACK-R2.json','utf8'));
+assert.equal(pack.chart.finalStructuralVerdictR2.dayMasterStrength.verdictCode,'BALANCED_LEAN_WEAK');
+assert.equal(pack.chart.finalStructuralVerdictR2.primaryPattern.familyCode,'SHANG_GUAN');
+assert.equal(pack.chart.finalStructuralVerdictR2.usefulGod.primary.element,'EARTH');
+const api=fs.readFileSync('functions/api/bazi-full-reading-r2.js','utf8');
+assert.match(api,/analyzeBaziFinalStructuralVerdictR2/);
+assert.match(api,/REPORT-PRO-COMPOSER-R1/);
 
 console.log('PASS BAZI-FP-R2 final structural verdict: GEN-01 resolves three-harmony configuration, strength, primary pattern and school-qualified useful-god views.');
