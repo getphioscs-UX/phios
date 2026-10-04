@@ -9,13 +9,16 @@ const MONTH=/\b(?:January|February|March|April|May|June|July|August|September|Oc
 const STATE_WORDS=['庙','旺','得','利','平','陷','Miao','Wang','De','Li','Ping','Xian'];
 const uniq=a=>[...new Set((Array.isArray(a)?a:[]).map(String))];
 const txKey=t=>[t.layer,t.palaceCode,t.targetStarCode,t.transformationCode].join(':');
+const reEscape=v=>String(v).replace(/[.*+?^\${}()|[\]\\]/g,'\\$&');
 
 function unknownStateLeak(text,section){
  const unknown=(section?.technicalEvidence?.palaces||[]).flatMap(p=>(p.stars||[]).filter(s=>!s.stateKnown));
+ const zhStates='庙|旺|得|利|平|陷',enStates='Miao|Wang|De|Li|Ping|Xian';
  for(const star of unknown){
-  const pos=text.indexOf(star.label);if(pos<0)continue;
-  const window=text.slice(Math.max(0,pos-8),pos+String(star.label).length+12);
-  if(STATE_WORDS.some(x=>window.includes(x)))return star.starCode;
+  const label=reEscape(star.label);
+  const zh=new RegExp(label+'(?:星)?(?:\\s|、|，|,|：|:)*(?:状态(?:为|是)?|为|是|处于)?(?:\\s|：|:)*('+zhStates+')(?=$|[，。；、,.;\\s])','u');
+  const en=new RegExp('\\b'+label+'\\b(?:\\s|,|:)*(?:is|state(?:\\s+is)?|in)?\\s*('+enStates+')\\b','iu');
+  if(zh.test(text)||en.test(text))return star.starCode;
  }
  return null;
 }
