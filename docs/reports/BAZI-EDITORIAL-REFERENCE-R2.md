@@ -9,6 +9,7 @@ Not a semantic source for other subjects.
 ## Human-accepted benchmark
 
 GEN-01 Section 1 — 核心性格与能力 — HUMAN ACCEPTED.
+GEN-01 Section 2 — 人生格局与发展主轴 — HUMAN ACCEPTED under BAZI-FP-R2 final structural authority.
 
 The accepted section establishes the customer-facing BaZi standard:
 - write a personal reading, not an essay or methodology memo;
@@ -64,3 +65,7 @@ A later section is not editorially accepted merely because it passes machine che
 ## GEN-01 governed authority pack
 
 The controlled semantic authority for GEN-01 is [GEN-01-AUTHORITY-PACK-R2.json](../acceptance/bazi-paid-report/editorial/GEN-01-AUTHORITY-PACK-R2.json). It explicitly preserves unresolved transformation, primary pattern, Day Master strength, useful-god and favorable/unfavorable-element verdicts. Editorial acceptance never licenses filling those unknowns.
+
+## Section 2 acceptance note
+
+Section 2 is accepted as the reference for whole-chart organization and long-range development. It may use resolved R2 verdicts (three-harmony configuration, Day Master strength, primary pattern, useful-god views) but must not repeat Section 1 personality/capability mechanics or pre-consume Career, Wealth, Relationships, Family or Timing.
