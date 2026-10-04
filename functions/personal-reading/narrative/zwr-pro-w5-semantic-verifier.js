@@ -15,6 +15,9 @@ const NEGATED_BOUNDARY=/(?:不能|不可|不应|不代表|不等于|不是|并�
 function medicalInferenceLeak(value){
  return String(value).split(/(?<=[。！？.!?])\s*/u).some(sentence=>MEDICAL.test(sentence)&&!NEGATED_BOUNDARY.test(sentence));
 }
+function guaranteedOutcomeLeak(value){
+ return String(value).split(/(?<=[。！？.!?])\s*/u).some(sentence=>GUARANTEE.test(sentence)&&!NEGATED_BOUNDARY.test(sentence));
+}
 function unknownStateLeak(text,section){
  const unknown=(section?.technicalEvidence?.palaces||[]).flatMap(p=>(p.stars||[]).filter(s=>!s.stateKnown));
  const zhStates='庙|旺|得|利|平|陷',enStates='Miao|Wang|De|Li|Ping|Xian';
@@ -53,7 +56,7 @@ export async function verifyZwrProSectionW5({authorityPack,candidate}={}){
  if(JSON.stringify(union)!==JSON.stringify(declared))reasons.push('CLAIM_LINEAGE_UNION_MISMATCH');
  const body=(candidate.paragraphs||[]).map(p=>p.text).join('\n');
  if(INTERNAL.test(body))reasons.push('INTERNAL_WORKFLOW_TOKEN_LEAK');
- if(GUARANTEE.test(body))reasons.push('GUARANTEED_OUTCOME');
+ if(guaranteedOutcomeLeak(body))reasons.push('GUARANTEED_OUTCOME');
  if(candidate.sectionId==='S08'&&medicalInferenceLeak(body))reasons.push('MEDICAL_DIAGNOSIS_OR_TREATMENT');
  if(FINANCIAL.test(body)&&candidate.sectionId==='S05')reasons.push('FINANCIAL_RECOMMENDATION');
  if(MONTH.test(body)&&['S09','S10'].includes(candidate.sectionId)&&!(section?.technicalEvidence?.timing||[]).some(t=>t.layer==='LIU_YUE'))reasons.push('UNADMITTED_MONTH_TIMING');
