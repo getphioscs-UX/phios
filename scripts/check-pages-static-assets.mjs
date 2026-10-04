@@ -1,4 +1,4 @@
-﻿import fs from 'node:fs';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -7,7 +7,11 @@ const root = path.resolve(
   '..'
 );
 
-const output = path.join(root, '.pages-output');
+const output = path.join(
+  root,
+  '.pages-output'
+);
+
 const MAX_FILE_SIZE = 25 * 1024 * 1024;
 
 const forbidden = new Set([
@@ -24,7 +28,10 @@ if (!fs.existsSync(output)) {
 const files = [];
 
 function walk(dir) {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+  for (const entry of fs.readdirSync(
+    dir,
+    { withFileTypes: true }
+  )) {
     const absolute = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
@@ -62,14 +69,16 @@ for (const absolute of files) {
   }
 }
 
-for (const required of [
-  'index.html',
-  '_worker.js',
-  '_routes.json'
-]) {
-  if (!fs.existsSync(path.join(output, required))) {
-    failures.push(`${required}: missing`);
-  }
+if (!fs.existsSync(path.join(output, 'index.html'))) {
+  failures.push('index.html: missing');
+}
+
+if (!fs.existsSync(path.join(output, '_worker.js'))) {
+  failures.push('_worker.js: missing');
+}
+
+if (!fs.existsSync(path.join(output, '_routes.json'))) {
+  failures.push('_routes.json: missing');
 }
 
 if (failures.length) {
@@ -79,6 +88,5 @@ if (failures.length) {
 }
 
 console.log(
-  `PASS Pages publication boundary: ${files.length} files; ` +
-  `no asset exceeds 25 MiB; provider runtime payloads excluded.`
+  `PASS Pages publication boundary: ${files.length} files; no asset exceeds 25 MiB; provider runtime payloads excluded.`
 );
