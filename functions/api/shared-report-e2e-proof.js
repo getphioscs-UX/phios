@@ -1,11 +1,10 @@
-import {personIdentity,digest,requireSameOrigin} from '../account/oidc-auth.js';
+import {authenticate,digest,requireSameOrigin} from '../account/oidc-auth.js';
 import {generateAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../account/ziwei-account-delivery.js';
 
 const headers={'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow, noarchive'};
 const NATURAL=new Set(['S02','S03','S04','S05','S06','S07','S08','S09','S10','S11']);
 const fail=(code,status=409,details={})=>Object.assign(new Error(code),{code,status,details});
 function proofKey(reportId){return 'qa/shared-report-e2e/'+reportId+'.json';}
-function safeCookieHash(request){return digest(String(request.headers.get('cookie')||''));}
 function parseReceipt(row){try{return JSON.parse(row?.verifier_receipt||'null')}catch{return null}}
 function assertR5(candidate){
  const s=candidate?.snapshot;
@@ -29,10 +28,10 @@ function assertR5(candidate){
  return rows;
 }
 async function phase1(context,body){
- const identity=personIdentity(context);
+ const identity=await authenticate(context);if(!identity)throw fail('ACCOUNT_REQUIRED',401);
  if(context.env?.PHIOS_ENVIRONMENT!=='qa')throw fail('SHARED_E2E_QA_ONLY',403);
  if(!context.env?.PRIVATE_REPORTS?.put||!context.env?.PRIVATE_REPORTS?.get)throw fail('SHARED_E2E_STORAGE_REQUIRED',503);
- const sessionCookieHash=await safeCookieHash(context.request);
+ const sessionId=identity.sessionId;
  const released=await generateAndReleaseAccountZiwei(context,{personId:body.personId,locale:body.locale,targetContext:body.targetContext});
  const opened=await openAccountZiweiMaterial(context,released.reportId);
  const candidate=opened.candidate,rows=assertR5(candidate),receipt=parseReceipt(opened.row);
@@ -61,7 +60,7 @@ async function phase1(context,body){
   rendererPageCount:receipt.pageCount,
   releasedMaterial:true,
   accountLibraryVisible:true,
-  firstSessionCookieHash:sessionCookieHash,
+  firstAuthenticatedSessionId:sessionId,
   firstOpenedAt:new Date().toISOString(),
   requiresDifferentAuthenticatedSessionForFinalProof:true
  };
@@ -69,13 +68,13 @@ async function phase1(context,body){
  return {...seed,nextAction:'LOGOUT_LOGIN_THEN_POST_REOPEN',proofKey:proofKey(released.reportId)};
 }
 async function phase2(context,body){
- const identity=personIdentity(context);
+ const identity=await authenticate(context);if(!identity)throw fail('ACCOUNT_REQUIRED',401);
  if(context.env?.PHIOS_ENVIRONMENT!=='qa')throw fail('SHARED_E2E_QA_ONLY',403);
  const object=await context.env?.PRIVATE_REPORTS?.get?.(proofKey(body.reportId));if(!object)throw fail('SHARED_E2E_PHASE1_PROOF_REQUIRED',404);
  const phase1=await object.json();
  if(phase1.accountIdHash!==await digest(identity.userId))throw fail('SHARED_E2E_ACCOUNT_MISMATCH',403);
- const secondSessionCookieHash=await safeCookieHash(context.request);
- if(!phase1.firstSessionCookieHash||phase1.firstSessionCookieHash===secondSessionCookieHash)throw fail('SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED',409);
+ const secondSessionId=identity.sessionId;
+ if(!phase1.firstAuthenticatedSessionId||phase1.firstAuthenticatedSessionId===secondSessionId)throw fail('SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED',409);
  const opened=await openAccountZiweiMaterial(context,body.reportId),candidate=opened.candidate,rows=assertR5(candidate),receipt=parseReceipt(opened.row);
  const library=await listAccountZiweiMaterials(context);
  if(!library.some(x=>x.reportId===body.reportId&&x.status==='RELEASED'))throw fail('SHARED_E2E_REOPEN_LIBRARY_MISSING');
@@ -85,7 +84,7 @@ async function phase2(context,body){
   state:'PASS',
   sharedDeliveryAuthorityEligible:true,
   reopenedAfterDifferentAuthenticatedSession:true,
-  secondSessionCookieHash,
+  secondAuthenticatedSessionId:secondSessionId,
   reopenedSemanticSnapshotId:candidate.snapshot.semanticSnapshotId,
   reopenedOutputDigest:opened.row.output_digest,
   reopenedAt:new Date().toISOString(),
