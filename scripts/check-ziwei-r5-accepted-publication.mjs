@@ -7,6 +7,9 @@ import {renderPublicationReport} from '../assets/customer-ui/js/personal-product
 const fixture=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/zpa-v1/ZPA-CONTROLLED-01-en.json','utf8'));
 const runtimeSource=fs.readFileSync('functions/personal-reading/narrative/ziwei-r5-accepted-copy-runtime.js','utf8');
 const generationSource=fs.readFileSync('functions/report-delivery/ziwei-r5-accepted-copy-generation.js','utf8');
+assert(runtimeSource.includes("ZIWEI_R5_ACCEPTED_REFERENCE_SUBJECT='ZPA-CONTROLLED-01'"),'accepted copy must be bound to controlled reference subject');
+assert(runtimeSource.includes('ZIWEI_R5_ACCEPTED_COPY_REFERENCE_ONLY'),'accepted copy must reject arbitrary customer evidence');
+assert(generationSource.includes("ZIWEI_R5_ACCEPTED_GENERATION_SCOPE='CONTROLLED_REFERENCE_ONLY'"),'accepted generation must remain reference-only');
 for(const source of [runtimeSource,generationSource]){
  assert(!source.includes('OPENAI_API_KEY'),'accepted-copy runtime must not depend on API key');
  assert(!source.includes('ZIWEI_R5_PAI_REGISTRY'),'accepted-copy runtime must not use provider registry');
@@ -30,4 +33,4 @@ const generator=fs.readFileSync('functions/report-delivery/ziwei-r5-accepted-cop
 assert(generator.includes('providerCalls:0'));
 assert(generator.includes('productionAdmissionGranted:false'));
 assert(!fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8').includes('ziwei-r5-accepted-copy-generation.js'),'accepted-copy lane must remain outside account cutover before final browser/print acceptance');
-console.log('PASS Zi Wei accepted publication binding: 39 pages bilingual, frozen copy, provider calls 0, no internal-token leakage, production cutover closed.');
+console.log('PASS Zi Wei accepted publication reference: 39 pages bilingual, frozen gold-standard copy, provider calls 0, reference subject locked, no internal-token leakage, production cutover closed.');
