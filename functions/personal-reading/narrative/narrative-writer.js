@@ -109,6 +109,7 @@ function sectionSystemPrompt(brief,{repairReasons=[]}={}){
  const referenceInstructions=brief?.referenceGovernance?[
   'REFERENCE-GOVERNED PAID REPORT: the supplied human-accepted reference controls editorial quality, section focus, paragraph rhythm and customer-facing depth. It does not supply subject facts.',
   'Match the reference quality contract without copying subject-specific wording or conclusions. Keep this section inside its sectionOwnership boundary and do not pre-consume later sections.',
+  'Use referenceGovernance.editorialExemplar only to match editorial rhythm, interpretive depth and section discipline. Never import its subject-specific chart facts, symbols or conclusions into the current customer.',
   'Write as a personal professional report addressed to the customer, not as an essay, method lesson, governance memo or generic advice article.',
   'Do not render a professional-note/methodology/source-admission block unless the section contract explicitly requires one. Method limits remain in internal authority and verification.',
   'Prefer concrete interpretation of the admitted method facts over repeated caveats. Preserve every material uncertainty inside the relevant sentence rather than adding a separate disclaimer section.',
