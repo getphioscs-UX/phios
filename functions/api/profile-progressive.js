@@ -24,6 +24,9 @@ import { PROFILE_PRODUCTION_AUTHORITY, resolveProfileExecution } from '../profil
 import { buildProfileCustomerOutputSuccessor } from '../profile/profile-customer-output-successor.js';
 import { buildProfileCustomerVisualProjection } from '../profile/profile-customer-visual-projection.js';
 import { buildProfileVisualDepthProjection } from '../profile/profile-visual-depth-projection.js';
+import { buildPersonalEvidenceDossierProjection } from '../profile/personal-evidence-dossier-projection.js';
+import { buildPersonalEvidencePublicationProjection } from '../profile/personal-evidence-publication-projection.js';
+import { buildPersonalEvidenceDomainHandoffs } from '../profile/personal-evidence-handoffs.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -104,6 +107,10 @@ export async function onRequestPost(context){
     const customerOutput=buildProfileCustomerOutputSuccessor(view);
     const visualProjection=buildProfileCustomerVisualProjection({progressiveView:view,customerOutput,confirmations:Array.isArray(body.patternConfirmations)?body.patternConfirmations:[],participantRef,asOfDate:body.asOfDate||assessmentDate||null});
     const visualDepthProjection=buildProfileVisualDepthProjection({visualProjection});
-    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,visualProjection:visualDepthProjection.freeSnapshot,visualDepthProjection,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview,profileVisualProjectionOwner:'PVP_R1',profileTruthOwner:'PROFILE_PPR',profileVisualDepth:'FREE_SNAPSHOT',clientPaidSelfUpgradeAllowed:false}});
+    const dossierProjection=buildPersonalEvidenceDossierProjection({visualProjection,participantRef,asOfDate:body.asOfDate||assessmentDate||null});
+    const consentReferences=body.consent===true?[`PRF-SESSION-CONSENT-${view.profileViewId}`]:[];
+    const publicationProjection=buildPersonalEvidencePublicationProjection({profileView:view,visualProjection,locale:lang,consentReferences});
+    const domainHandoffs=buildPersonalEvidenceDomainHandoffs({profileView:view,visualProjection,financialSummary});
+    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,visualProjection:visualDepthProjection.freeSnapshot,visualDepthProjection,dossierProjection,publicationProjection,domainHandoffs,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview,profileVisualProjectionOwner:'PVP_R1',profileTruthOwner:'PROFILE_PPR',profileVisualDepth:'FREE_SNAPSHOT',clientPaidSelfUpgradeAllowed:false,personalEvidenceDossierOwner:'RR_READY_PROJECTION_ONLY',domainHandoffsReferenceOnly:true}});
   }catch(error){return errorResponse(error)}
 }
