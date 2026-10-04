@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-EVIDENCE-DOMAIN-HANDOFF-v1.0.0",
+  "work": "PRD-W8",
+  "baselineCommit": "0ab7c6de9db3749913085de77a852957577128b8",
+  "status": "RELATIONSHIP_CAREER_FINANCIAL_REFERENCE_HANDOFFS_ACTIVE",
+  "sourceAuthority": "PROFILE_PPR",
+  "handoffs": {
+    "relationship": {
+      "target": "RELATIONSHIP_CURRENT_REALITY_EVIDENCE",
+      "sourcePfig": "PFIG-007",
+      "route": "/perspectives/relationship/",
+      "rules": [
+        "REFERENCE_ONLY",
+        "NO_COMPATIBILITY_SCORE",
+        "NO_PARTNER_HIDDEN_STATE",
+        "TARGET_PURPOSE_AND_CONSENT_REQUIRED"
+      ]
+    },
+    "career": {
+      "target": "PERSONAL_REALITY_CAREER_CONTEXT",
+      "sourcePfig": "PFIG-006",
+      "route": "/perspectives/personal/",
+      "rules": [
+        "REFERENCE_ONLY",
+        "INTEREST_NOT_JOB_FIT",
+        "NO_EMPLOYMENT_GUARANTEE",
+        "CURRENT_REALITY_CONTEXT_REQUIRED_FOR_REALITY_CLAIM"
+      ]
+    },
+    "financial": {
+      "target": "FINANCIAL_REALITY_CONTEXT_CANDIDATE",
+      "sourceClasses": [
+        "FINANCIAL_CAPABILITY",
+        "EXTERNAL_PROFILE_RESULT"
+      ],
+      "route": "/professional/financial/",
+      "rules": [
+        "REFERENCE_ONLY",
+        "NOT_FDR_FACT",
+        "NOT_FAR_INPUT_DIRECTLY",
+        "FDR_INTAKE_AND_FINANCIAL_CONSENT_REQUIRED",
+        "NO_FINANCIAL_ADVICE"
+      ]
+    }
+  },
+  "rules": {
+    "handoffDoesNotMutateTargetRuntime": true,
+    "handoffDoesNotCreateTargetFacts": true,
+    "downstreamOwnerMustAdmitReferences": true,
+    "explicitCustomerActionRequiredBeforeTargetUse": true,
+    "noAutomaticCrossDomainPersistence": true
+  }
+}
