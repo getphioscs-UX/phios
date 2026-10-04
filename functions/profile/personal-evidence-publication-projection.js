@@ -25,8 +25,8 @@ export function buildPersonalEvidencePublicationProjection({
   const rrSections=[
     {
       sectionCode:'EVIDENCE',
-      authority:'PROFILE_PPR',
-      dataType:'CAPABILITY_EVIDENCE_RECORD',
+      authority:'PROFILE_PPR_REFERENCE_PENDING_RRE_ADMISSION',
+      dataType:'CAPABILITY_EVIDENCE_REFERENCE',
       references:[...signalRefs,...pfigRefs],
       assemblyMode:'REFERENCE_ONLY'
     },
@@ -55,14 +55,16 @@ export function buildPersonalEvidencePublicationProjection({
     sourceSemanticDigest:profileView.semanticDigest||null,
     consentReferences:consentRefs,
     rrEligibility:{
-      candidateReady:signalRefs.length>0&&consentRefs.length>0,
+      publicationProjectionReady:signalRefs.length>0&&consentRefs.length>0,
+      rrHandoffReady:false,
+      rrHandoffBlock:'PROFILE_PPR_NOT_DIRECTLY_ADMITTED_BY_RR_EVIDENCE_SECTION',
       canonicalReportCreated:false,
       reviewPassed:false,
       approved:false,
       released:false
     },
     rrAssembly:{
-      serviceContractReference:'PRD-W6-PERSONAL-EVIDENCE-DOSSIER',
+      serviceContractReference:'PRD-W6-PERSONAL-EVIDENCE-DOSSIER-PROJECTION',
       allowedChannels:['HTML','PDF','WORKSPACE'],
       sections:rrSections,
       sourceReferences:[
@@ -85,6 +87,7 @@ export function buildPersonalEvidencePublicationProjection({
     governance:{
       evidenceTruthOwner:'PROFILE_PPR',
       reportAssemblyOwner:'RR',
+      rrEvidenceAdmissionRequired:true,
       presentationOwner:'CPR',
       publicationProjectionCreatesMeaning:false,
       publicationProjectionCreatesJudgment:false,
