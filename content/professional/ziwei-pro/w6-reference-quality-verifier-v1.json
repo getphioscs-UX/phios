@@ -32,5 +32,26 @@
     },
     "rule": "Candidate paragraph minimum is max(hard floor, 90% of the accepted reference section's shortest paragraph). Single-sentence paragraph floor is derived separately from the accepted reference's shortest single-sentence paragraph.",
     "purpose": "Allow intentional short closing paragraphs present in the gold reference without permitting greater fragmentation in generated customer copy."
+  },
+  "customerVoice": {
+    "acceptedModes": [
+      "DIRECT_CUSTOMER_SECOND_PERSON",
+      "CHART_ADDRESSED_PROFESSIONAL"
+    ],
+    "examples": {
+      "direct": [
+        "you",
+        "your",
+        "你",
+        "你的"
+      ],
+      "chartAddressed": [
+        "this chart",
+        "the chart",
+        "这张盘",
+        "命盘"
+      ]
+    },
+    "processOrGovernanceProseStillForbidden": true
   }
 }
