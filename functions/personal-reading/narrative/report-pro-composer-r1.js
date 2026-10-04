@@ -27,7 +27,7 @@ export function assertReferenceGovernance({brief,reference}={}){
   if(!reference||reference.accepted!==true)fail('REPORT_PRO_HUMAN_ACCEPTED_REFERENCE_REQUIRED',{methodId:brief.methodId});
   if(reference.methodId!==brief.methodId)fail('REPORT_PRO_REFERENCE_METHOD_MISMATCH');
   if(reference.locale&&reference.locale!==brief.locale)fail('REPORT_PRO_REFERENCE_LOCALE_MISMATCH');
-  if(!resolvedReference.referenceId||!reference.qualityContract)fail('REPORT_PRO_REFERENCE_CONTRACT_REQUIRED');
+  if(!reference.referenceId||!reference.qualityContract)fail('REPORT_PRO_REFERENCE_CONTRACT_REQUIRED');
   return deepFreeze({policy,reference});
 }
 
@@ -36,7 +36,7 @@ function governedBrief(brief,reference){
     ...brief,
     referenceGovernance:{
       schemaVersion:'PHI-OS-REPORT-REFERENCE-GOVERNANCE-v1.0.0',
-      referenceId:resolvedReference.referenceId,
+      referenceId:reference.referenceId,
       referenceDigest:reference.referenceDigest||null,
       qualityContract:reference.qualityContract,
       sectionOwnership:reference.sectionOwnership||null,
