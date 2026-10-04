@@ -64,13 +64,20 @@
         "authorization": "USER_CANONICAL_PERSON_ZIWEI_QA_DELIVERY_2026_10_01",
         "change": "ADD_PREVIEW_ONLY_PRIVATE_METHOD_REPORT_BROWSER_VERIFIER_SERVICE",
         "wranglerSha256": "b12d3a3a34ec627aa867f1db788451dde8c9be4b860faefb4c2e359a71ddecc9"
+      },
+      {
+        "commit": "25226cd27f50c4b7197bd5a6f0371d56202861bf",
+        "change": "PAGES_BUILD_OUTPUT_DIRECTORY_PUBLICATION_BOUNDARY",
+        "predecessorWranglerSha256": "b12d3a3a34ec627aa867f1db788451dde8c9be4b860faefb4c2e359a71ddecc9",
+        "wranglerSha256": "696145ed9d60af5a9cb8f388d6b2bc69639908692449f942b73114c24081e83f"
       }
     ],
     "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts. The 2026-09-22 owner request authorizes exact private report bucket bindings, actual Pages project name reconciliation, and explicit manuscript retrieval disablement in isolated Preview.",
-    "wranglerSha256": "b12d3a3a34ec627aa867f1db788451dde8c9be4b860faefb4c2e359a71ddecc9",
+    "wranglerSha256": "696145ed9d60af5a9cb8f388d6b2bc69639908692449f942b73114c24081e83f",
     "currentAuthorization": {
-      "basis": "USER_CANONICAL_PERSON_ZIWEI_QA_DELIVERY_2026_10_01",
-      "evidence": "docs/reports/ziwei/production-admission/CPA-QA-DELIVERY.md"
+      "basis": "EXISTING_OWNER_COMMIT_PAGES_DEPLOYMENT_REPAIR",
+      "commit": "25226cd27f50c4b7197bd5a6f0371d56202861bf",
+      "evidence": "scripts/build-cloudflare-pages.mjs"
     }
   },
   "allowedDelta": {
@@ -101,6 +108,12 @@
       "service": "phios-method-report-renderer-qa",
       "publicEndpoint": false,
       "productionBinding": false
+    },
+    "pagesPublication": {
+      "commit": "25226cd27f50c4b7197bd5a6f0371d56202861bf",
+      "predecessorOutputDirectory": ".",
+      "successorOutputDirectory": ".pages-output",
+      "sourceBoundaryScript": "scripts/build-cloudflare-pages.mjs"
     }
   },
   "preserved": {
