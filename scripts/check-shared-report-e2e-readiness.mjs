@@ -38,7 +38,7 @@ for(const token of [
  "generate-release-open","reopen","authenticate(context)","firstAuthenticatedSessionId",
  "SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED","sameImmutableSnapshot:true",
  "sameImmutableRenderedMaterial:true","noProviderRegenerationOnReopen:true",
- "sharedDeliveryAuthorityEligible:true","accountLibraryVisible:true"
+ "sharedDeliveryAuthorityEligible:true","accountLibraryVisible:true","admissionReceipt","privateProofDigest"
 ])assert.ok(proof.includes(token),token);
 assert.match(proof,/compositionVersion!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5'/);
 assert.match(proof,/model!=='gpt-5\.6-sol'/);
