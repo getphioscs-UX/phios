@@ -32,10 +32,10 @@ export const REPORT_PRO_REFERENCES=freeze({
  },
  ZWR:{
   schemaVersion:'PHI-OS-REPORT-PRO-REFERENCE-v1.0.0',
-  referenceId:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
+  referenceId:'ZWR-PRO-GOLD-STANDARD-W0-v1',
   methodId:'ZWR',
   accepted:true,
-  sourceRef:'docs/reports/ziwei/professional-synthesis-r5',
+  sourceRef:'content/professional/ziwei-pro/w0-gold-standard-reference-freeze-v1.json',
   qualityContract:{
    artifactType:'PERSONAL_PAID_REPORT_SECTION',
    voice:'PERSONAL_PROFESSIONAL',
@@ -44,13 +44,20 @@ export const REPORT_PRO_REFERENCES=freeze({
    sectionIsolation:true,
    palaceNetworkSynthesisRequired:true,
    timingLayersDistinct:true,
-   customerVisibleGovernanceJargon:false
+   customerVisibleGovernanceJargon:false,
+   contentDepthRequired:true,
+   customerVoiceRequired:true,
+   technicalGroundingRequired:true,
+   interpretationToTechnicalRatioRequired:true,
+   paragraphRhythmRequired:true,
+   subjectSpecificReferenceCopyForbidden:true
   },
   sectionOwnership:{rule:'Each section synthesizes only its governed palace/domain scope and does not duplicate adjacent sections.'},
   editorialExemplar:[
    'Lead with the section thesis, then synthesize palace purpose, star composition, network and timing.',
    'Never write a star-by-star glossary.',
-   'Use substantial integrated blocks with clear section ownership and no cross-section repetition.'
+   'Use substantial integrated blocks with clear section ownership and no cross-section repetition.',
+   'Match the accepted reference in depth, synthesis density and customer voice without copying its subject-specific facts or sentences.'
   ]
  }
 });
