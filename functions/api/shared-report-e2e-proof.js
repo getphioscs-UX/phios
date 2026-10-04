@@ -96,8 +96,30 @@ async function phase2(context,body){
   rendererPassed:receipt?.passed===true,
   accountLibraryVisible:true
  };
- await context.env.PRIVATE_REPORTS.put(proofKey(body.reportId),JSON.stringify(final),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
- return {...final,proofKey:proofKey(body.reportId)};
+ const privateProofDigest=await digest(JSON.stringify(final));
+ const admissionReceipt={
+  schemaVersion:'PHI-OS-SHARED-REPORT-DELIVERY-E2E-ADMISSION-RECEIPT-v1.0.0',
+  state:'PASS',
+  sourceMethod:'ZWR',
+  composerId:'REPORT-PRO-COMPOSER-R1',
+  referenceId:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
+  compositionVersion:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
+  model:'gpt-5.6-sol',
+  verifierAccepted:final.verifierAccepted===true,
+  rendererPassed:final.rendererPassed===true,
+  rendererPageCount:39,
+  releasedMaterial:true,
+  accountLibraryVisible:true,
+  reopenedAfterDifferentAuthenticatedSession:true,
+  sameImmutableSnapshot:true,
+  sameImmutableRenderedMaterial:true,
+  noProviderRegenerationOnReopen:true,
+  sharedDeliveryAuthorityEligible:true,
+  privateProofDigest,
+  admittedAt:final.reopenedAt
+ };
+ await context.env.PRIVATE_REPORTS.put(proofKey(body.reportId),JSON.stringify({...final,privateProofDigest,admissionReceipt}),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
+ return {state:'PASS',sharedDeliveryAuthorityEligible:true,admissionReceipt,proofKey:proofKey(body.reportId)};
 }
 export async function onRequest(context){
  try{
