@@ -31,9 +31,11 @@ export function assertReferenceGovernance({brief,reference}={}){
   return deepFreeze({policy,reference});
 }
 
-function governedBrief(brief,reference){
-  return deepFreeze({
-    ...brief,
+async function governedBrief(brief,reference){
+  const {briefSemanticDigest:previousBriefSemanticDigest,...baseBrief}=brief;
+  const seed={
+    ...baseBrief,
+    predecessorBriefSemanticDigest:previousBriefSemanticDigest||null,
     referenceGovernance:{
       schemaVersion:'PHI-OS-REPORT-REFERENCE-GOVERNANCE-v1.0.0',
       referenceId:reference.referenceId,
@@ -55,7 +57,8 @@ function governedBrief(brief,reference){
       noMethodologyMemo:true,
       sectionIsolation:true
     }
-  });
+  };
+  return deepFreeze({...seed,briefSemanticDigest:await sha256Stable(seed)});
 }
 
 export async function composeReferenceGovernedSectionR1({
@@ -64,7 +67,7 @@ export async function composeReferenceGovernedSectionR1({
 }={}){
   const resolvedReference=reference||reportProReference(brief?.methodId);
   const {policy}=assertReferenceGovernance({brief,reference:resolvedReference});
-  const gBrief=governedBrief(brief,resolvedReference);
+  const gBrief=await governedBrief(brief,resolvedReference);
   const result=await composeReportSectionT3({
     brief:gBrief,registry:providerRegistry,env,fetcher,providerAdapters,
     requestId:requestId||`REPORT-PRO:${brief.methodId}:${brief.sectionKey}:${brief.locale}`,
