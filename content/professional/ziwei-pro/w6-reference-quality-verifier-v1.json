@@ -23,5 +23,14 @@
     "rule": "Single-sentence substantial paragraphs are allowed only up to the count already present in the accepted reference for that section/locale, and must remain within the reference-derived minimum length band.",
     "fragmentationIncreaseForbidden": true,
     "sentencePerParagraphHardMinimum": false
+  },
+  "paragraphMinimum": {
+    "mode": "SECTION_AND_LOCALE_REFERENCE_DERIVED",
+    "hardFloor": {
+      "zhHansChars": 36,
+      "enWords": 24
+    },
+    "rule": "Candidate paragraph minimum is max(hard floor, 90% of the accepted reference section's shortest paragraph). Single-sentence paragraph floor is derived separately from the accepted reference's shortest single-sentence paragraph.",
+    "purpose": "Allow intentional short closing paragraphs present in the gold reference without permitting greater fragmentation in generated customer copy."
   }
 }
