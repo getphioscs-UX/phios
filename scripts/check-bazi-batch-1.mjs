@@ -26,5 +26,9 @@ const inconsistent=structuredClone(reading);inconsistent.professionalModules.fiv
 const changed=structuredClone(reading);changed.professionalModules.fiveElements.items[0].rawCount++;changed.professionalModules.fiveElements.rawInventory.total++;changed.professionalModules.fiveElements.items[0].breakdown.visibleStems++;
 assert.equal(project({reading:changed}).pages[3].visual.nodes[0].value,1);
 const css=fs.readFileSync('assets/customer-ui/surfaces/visual-report.css','utf8').split('/* BAZI-DYNAMIC-R1-BATCH-01')[1].split('/* END BAZI-DYNAMIC-R1-BATCH-01 */')[0];assert.deepEqual(reportCssErrors(css,registry),[]);
-assert.ok(JSON.parse(fs.readFileSync('package.json')).scripts.check.endsWith('npm run check:ptrc:w9-testamentary-report && npm run check:ptrc:w10-consolidation'));
+const commands=JSON.parse(fs.readFileSync('package.json')).scripts.check.split('&&').map(s=>s.trim());
+const w9='npm run check:ptrc:w9-testamentary-report',w10='npm run check:ptrc:w10-consolidation';
+assert.equal(commands.filter(s=>s===w9).length,1,'W9 must run exactly once');
+assert.equal(commands.filter(s=>s===w10).length,1,'W10 must run exactly once');
+assert.equal(commands[commands.indexOf(w9)+1],w10,'W10 must immediately follow W9');
 console.log('BaZi Batch 1: five source-bound Page IR pages; locales, no defaults, review gate and frozen styling verified.');
