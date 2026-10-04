@@ -5,7 +5,7 @@ export const ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION='ZWR-PRO-W6-REFERENCE
 
 const GENERIC=/\b(?:this section will|this chapter will|methodology|governance|authority pack|candidate|semantic verifier|runtime)\b|(?:本章将|本章会|这一章会|方法论|治理|权威包|候选|语义验证|运行时(?:系统|环境|版本|状态|层))/iu;
 const TECH=/命宫|身宫|官禄宫|财帛宫|迁移宫|夫妻宫|福德宫|疾厄宫|父母宫|兄弟宫|仆役宫|子女宫|三方|对宫|四化|大限|流年|Life Palace|Body Palace|Career Palace|Wealth Palace|Travel Palace|Spouse Palace|Wellbeing Palace|Health Palace|Parents Palace|Siblings Palace|Friends Palace|Children Palace|triad|opposite|Da Xian|Liu Nian/iu;
-const CUSTOMER=/\b(?:you|your|this chart)\b|(?:你|你的|这张盘|命盘)/iu;
+const CUSTOMER=/\b(?:you|your|this chart|the chart)\b|(?:你|你的|这张盘|命盘)/iu;
 function units(v,l){const x=String(v||'');return l==='en'?x.trim().split(/\s+/).filter(Boolean).length:[...x.replace(/\s/g,'')].length;}
 function sentences(v,l){const x=String(v||'');return l==='en'?(x.match(/[.!?](?:\s|$)/g)||[]).length:(x.match(/[。！？]/g)||[]).length;}
 function normalize(v){return String(v||'').normalize('NFKC').toLowerCase().replace(/\s+/g,' ').replace(/[“”"'‘’。，、；：!?！？;:]/g,'').trim();}
