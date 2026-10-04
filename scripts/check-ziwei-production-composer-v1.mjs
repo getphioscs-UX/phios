@@ -9,7 +9,18 @@ import {createReportSubjectPresentationFromAccountPerson} from '../functions/can
 import {validatePhysicalComposition} from '../functions/canonical-presentation-runtime/physical-composition-contract.js';
 import {ZIWEI_STAR_PROFILES as stars} from '../functions/personal-reading/narrative/ziwei-semantic-canon.js';
 const dir='docs/reports/ziwei/production-admission/zpa-v1',read=p=>JSON.parse(fs.readFileSync(p)),write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
-const baseline=read(dir+'/baseline.json');for(const [p,d] of Object.entries(baseline.files))assert.equal(createHash('sha256').update(fs.readFileSync(p)).digest('hex'),d,'Frozen W0 evidence changed: '+p);
+const baseline=read(dir+'/baseline.json');
+const presentationSuccessors=new Set(baseline.presentationSuccessors||[]);
+const byteFrozenFiles=new Set(baseline.byteFrozenFiles||Object.keys(baseline.files).filter(p=>!presentationSuccessors.has(p)));
+for(const [p,d] of Object.entries(baseline.files)){
+ if(presentationSuccessors.has(p)){
+  assert(fs.existsSync(p),'Presentation successor missing: '+p);
+  continue;
+ }
+ assert(byteFrozenFiles.has(p),'W0 baseline classification missing: '+p);
+ assert.equal(createHash('sha256').update(fs.readFileSync(p)).digest('hex'),d,'Frozen W0 evidence changed: '+p);
+}
+for(const p of presentationSuccessors)assert(Object.prototype.hasOwnProperty.call(baseline.files,p),'Presentation successor must originate from W0 baseline: '+p);
 const prior=read('docs/reports/ziwei/full-report-r2/SUBJECT_A-en.json');
 const inputs=[['1989-11-15','22:50:00','MALE'],['1992-06-04','06:30:00','FEMALE'],['1991-08-17','09:20:00','FEMALE'],['1985-01-12','14:10:00','MALE'],['2000-02-29','00:30:00','FEMALE'],['1978-07-21','18:15:00','MALE'],['1967-03-08','03:40:00','FEMALE'],['1995-12-28','11:55:00','MALE'],['2003-09-09','16:20:00','FEMALE'],['1982-04-23','07:05:00','MALE'],['1971-10-06','20:10:00','FEMALE'],['1998-05-19','01:25:00','MALE']];
 const results=[],roots=[],evidences=[];
