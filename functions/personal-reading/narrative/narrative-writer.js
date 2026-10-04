@@ -114,8 +114,8 @@ function sectionSystemPrompt(brief,{repairReasons=[]}={}){
   'Prefer concrete interpretation of the admitted method facts over repeated caveats. Preserve every material uncertainty inside the relevant sentence rather than adding a separate disclaimer section.',
   'If referenceGovernance.requireSectionIsolation is true, reject rhetorical expansion into career, wealth, relationship, family or timing domains that belong to other sections.'
  ]:[];
- if(brief.reconciliation)return reconciledMarketPrompt(brief);
- if(brief.marketContract)return brief.marketDomain==='WEALTH'?WEALTH_PROMPT:MARKET_PROMPT;
+ if(brief.reconciliation)return [...referenceInstructions,reconciledMarketPrompt(brief)].join('\n');
+ if(brief.marketContract)return [...referenceInstructions,brief.marketDomain==='WEALTH'?WEALTH_PROMPT:MARKET_PROMPT].join('\n');
  const repair=repairReasons.length?[
   'A previous candidate was rejected by the semantic verifier.',
   'Repair only the verifier-rejected semantic spans. Do not broaden the claim set or increase certainty.',
