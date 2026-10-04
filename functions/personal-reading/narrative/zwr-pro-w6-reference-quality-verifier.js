@@ -61,7 +61,8 @@ export async function verifyZwrProReferenceQualityW6({authorityPack,candidate}={
  const glossaryCeiling=Math.max(1,referenceGlossaryHits);
  if(glossaryHits>glossaryCeiling)reasons.push('STAR_GLOSSARY_PATTERN');
  if(!nav&&!TECH.test(body))reasons.push('TECHNICAL_GROUNDING_TOO_LOW');
- if(!CUSTOMER.test(body))reasons.push('CUSTOMER_VOICE_MISSING');
+ const referenceRequiresDirectCustomerVoice=CUSTOMER.test(referenceBody);
+ if(referenceRequiresDirectCustomerVoice&&!CUSTOMER.test(body))reasons.push('CUSTOMER_VOICE_MISSING');
  const visiblePalaces=(section?.technicalEvidence?.palaces||[]).filter(p=>body.includes(p.label)).length;
  const visibleStars=(section?.technicalEvidence?.palaces||[]).flatMap(p=>p.stars||[]).filter(st=>body.includes(st.label)).length;
  if(!nav&&visiblePalaces<1)reasons.push('PALACE_VISIBILITY_TOO_LOW');
@@ -70,7 +71,7 @@ export async function verifyZwrProReferenceQualityW6({authorityPack,candidate}={
  if(authorityPack.subjectBinding?.subjectId!=='ZPA-CONTROLLED-01'){
   const copied=exactReferenceCopy(body,reference);if(copied)reasons.push('REFERENCE_SENTENCE_COPY');
  }
- const seed={schemaVersion:'ZWR-PRO-W6-REFERENCE-QUALITY-VERIFICATION-v1',verifierVersion:ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,candidateDigest:candidate.candidateDigest,accepted:reasons.length===0,metrics:{paragraphs:rows.length,totalUnits:total,referenceParagraphs:m.paragraphs,referenceTotalUnits:m.total,referenceMinParagraphUnits:m.minParagraphUnits,referenceSingleSentenceParagraphs:m.singleSentenceParagraphs,referenceMinSingleSentenceUnits:m.minSingleSentenceUnits,referenceParagraphFloor,singleSentenceFloor,minTotal,maxTotal,visiblePalaces,visibleStars,glossaryHits,referenceGlossaryHits,glossaryCeiling},reasons};
+ const seed={schemaVersion:'ZWR-PRO-W6-REFERENCE-QUALITY-VERIFICATION-v1',verifierVersion:ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,candidateDigest:candidate.candidateDigest,accepted:reasons.length===0,metrics:{paragraphs:rows.length,totalUnits:total,referenceParagraphs:m.paragraphs,referenceTotalUnits:m.total,referenceMinParagraphUnits:m.minParagraphUnits,referenceSingleSentenceParagraphs:m.singleSentenceParagraphs,referenceMinSingleSentenceUnits:m.minSingleSentenceUnits,referenceParagraphFloor,singleSentenceFloor,minTotal,maxTotal,visiblePalaces,visibleStars,glossaryHits,referenceGlossaryHits,glossaryCeiling,referenceRequiresDirectCustomerVoice},reasons};
  return deepFreeze({...seed,verificationDigest:await sha256Stable(seed)});
 }
 export default Object.freeze({verifyZwrProReferenceQualityW6,ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION});
