@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BAZI-GEN-AUTHORING-PACK-R2-v1",
   "caseId": "GEN-01",
   "locale": "zh-Hans",
-  "status": "SECTION_1_HUMAN_ACCEPTED__SECTION_2_READY",
+  "status": "SECTION_1_HUMAN_ACCEPTED__FINAL_STRUCTURAL_VERDICT_R2_RESOLVED__SECTION_2_READY",
   "role": "CONTROLLED_AUTHORING_AUTHORITY",
   "chart": {
     "pillars": {
@@ -114,39 +114,89 @@
     ],
     "unresolvedAuthority": {
       "primaryPattern": {
-        "state": "NOT_ESTABLISHED",
-        "visibleCandidate": "伤官方向可作为候选读取",
-        "prohibited": [
-          "不得写成伤官格已经成立",
-          "不得写成伤官生财格已经成立"
-        ]
+        "state": "RESOLVED_BY_BAZI_FP_R2",
+        "resultRef": "chart.finalStructuralVerdictR2.primaryPattern"
       },
       "dayMasterStrength": {
-        "state": "NOT_ESTABLISHED",
-        "knownSupportFact": "申中庚为日主同干根",
-        "prohibited": [
-          "不得由单一根气判定身强",
-          "不得由出现次数合成旺衰评分"
-        ]
+        "state": "RESOLVED_BY_BAZI_FP_R2",
+        "resultRef": "chart.finalStructuralVerdictR2.dayMasterStrength"
       },
       "usefulGod": {
-        "state": "NOT_ESTABLISHED",
-        "prohibited": [
-          "不得补造用神",
-          "不得由未成立强弱或格局反推用神"
-        ]
+        "state": "RESOLVED_BY_BAZI_FP_R2",
+        "resultRef": "chart.finalStructuralVerdictR2.usefulGod"
       },
       "favorableUnfavorableElements": {
-        "state": "NOT_ESTABLISHED",
-        "prohibited": [
-          "不得补造喜神、忌神或五行吉凶排序"
-        ]
+        "state": "PARTIALLY_RESOLVED_BY_SCHOOL_QUALIFIED_USEFUL_GOD",
+        "resultRef": "chart.finalStructuralVerdictR2.usefulGod"
       },
       "transformation": {
-        "state": "NOT_ESTABLISHED",
-        "scope": "申子辰三合",
-        "prohibited": [
-          "不得宣告合化水成立"
+        "state": "RESOLVED_BY_BAZI_FP_R2",
+        "resultRef": "chart.finalStructuralVerdictR2.relationship"
+      }
+    },
+    "finalStructuralVerdictR2": {
+      "schemaVersion": "PHI-OS-BAZI-FINAL-STRUCTURAL-VERDICT-R2-v1.0.0",
+      "relationship": {
+        "threeHarmony": "申子辰水局",
+        "configurationEstablished": true,
+        "fullElementalTransformationEstablished": false,
+        "verdict": "三合水局成立；寅申冲仍构成成员修正，因此不把申、辰原有藏干与结构意义完全抹除。",
+        "modifier": "寅申冲"
+      },
+      "dayMasterStrength": {
+        "verdictCode": "BALANCED_LEAN_WEAK",
+        "verdictZh": "中和偏弱",
+        "evidence": [
+          "庚金生于子月，月令为输出泄气环境",
+          "年支申提供庚金同干根",
+          "年干与时干再见庚金比肩",
+          "申子辰水局提高水的结构显著度",
+          "戊土偏印分布于申、辰、寅，形成支持但多藏于地支"
+        ],
+        "numericalScore": null
+      },
+      "primaryPattern": {
+        "familyCode": "SHANG_GUAN",
+        "familyZh": "伤官格",
+        "formationPathCode": "SHANG_GUAN_SHENG_CAI",
+        "formationPathZh": "伤官生财",
+        "state": "ESTABLISHED_WITH_CARRYING_QUALIFIER",
+        "qualifier": "日主中和偏弱，伤官生财路径成立时必须同时保留印比承载条件；不把财与输出继续放大视为无条件有利。"
+      },
+      "usefulGod": {
+        "reportingAuthority": "SCHOOL_QUALIFIED_SYNTHESIS_R2",
+        "primary": {
+          "element": "EARTH",
+          "zh": "土",
+          "role": "扶身与承载的首要用神"
+        },
+        "secondary": [
+          {
+            "element": "METAL",
+            "zh": "金",
+            "role": "比劫支持与承载辅助"
+          }
+        ],
+        "tiaohou": [
+          {
+            "element": "FIRE",
+            "zh": "火",
+            "role": "冬令寒湿背景下的调候候选；不与扶抑/格局用神静默合并"
+          }
+        ],
+        "schoolViews": [
+          {
+            "school": "子平月令格局",
+            "verdict": "伤官生财路径成立，但日主偏弱侧，取印比承载为先。"
+          },
+          {
+            "school": "滴天髓体用",
+            "verdict": "偏弱侧优先印比，即土、金。"
+          },
+          {
+            "school": "调候",
+            "verdict": "冬令保留火的温暖候选，但不据季节单独覆盖前两层判断。"
+          }
         ]
       }
     }
@@ -156,7 +206,8 @@
     "noInventedBiography": true,
     "noMethodologyMemo": true,
     "sectionIsolationRequired": true,
-    "reference": "docs/reports/BAZI-EDITORIAL-REFERENCE-R2.md"
+    "reference": "docs/reports/BAZI-EDITORIAL-REFERENCE-R2.md",
+    "finalStructuralVerdictRef": "functions/bzr-full-production/bazi-final-structural-verdict-r2.js"
   },
   "sectionAuthority": {
     "section1": {
