@@ -60,3 +60,7 @@ Future BaZi reports should reproduce the editorial quality and section disciplin
 ## Acceptance rule
 
 A later section is not editorially accepted merely because it passes machine checks. Human ACCEPT remains section-specific.
+
+## GEN-01 governed authority pack
+
+The controlled semantic authority for GEN-01 is [GEN-01-AUTHORITY-PACK-R2.json](../acceptance/bazi-paid-report/editorial/GEN-01-AUTHORITY-PACK-R2.json). It explicitly preserves unresolved transformation, primary pattern, Day Master strength, useful-god and favorable/unfavorable-element verdicts. Editorial acceptance never licenses filling those unknowns.
