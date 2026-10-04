@@ -23,7 +23,7 @@ export async function verifyZwrProReferenceQualityW6({authorityPack,candidate}={
  const nav=sectionId==='S11';
  const minParagraphs=Math.max(5,m.paragraphs-1),maxParagraphs=Math.min(12,m.paragraphs+3);
  if(rows.length<minParagraphs||rows.length>maxParagraphs)reasons.push('REFERENCE_PARAGRAPH_RHYTHM_OUTSIDE_BAND');
- const minTotal=Math.floor(m.total*(nav?.65:.68)),maxTotal=Math.ceil(m.total*(nav?1.5:1.45));
+ const minTotal=Math.floor(m.total*(nav?0.65:0.68)),maxTotal=Math.ceil(m.total*(nav?1.5:1.45));
  if(total<minTotal)reasons.push('REFERENCE_DEPTH_TOO_THIN');
  if(total>maxTotal)reasons.push('REFERENCE_DEPTH_TOO_DENSE');
  if(rows.some(r=>units(r.text,locale)<(locale==='en'?35:55)))reasons.push('PARAGRAPH_TOO_THIN');
