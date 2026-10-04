@@ -10,7 +10,7 @@ for(const [path,digest] of Object.entries(baseline.acceptedCopyDigests)){
  assert.equal(createHash('sha256').update(fs.readFileSync(path)).digest('hex'),digest,'Accepted BaZi copy changed: '+path);
 }
 for(const locale of ['zh-Hans','en']){
- const report=await buildBaziCustomerPublication({reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,full:true,compositionR1:true});
+ const report=await buildBaziCustomerPublication({historicalReferenceReview:true,reading:source.reading,locale,temporalSnapshot:source.temporalSnapshot,full:true,compositionR1:true});
  assert.equal(report.totalPages,38,locale+' physical page count drift');
  assert.equal(report.pages.filter(p=>p.pageFamily==='SECTION_OPENER_PAGE').length,10,locale+' Section Master count drift');
  assert(report.pages.every(p=>p.visualBinding?.backgroundMode==='METHOD_PRINT_SHELL_V2'),locale+' Print Shell visual binding missing');

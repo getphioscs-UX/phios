@@ -1,3 +1,4 @@
+import {assertBaziReferenceCopyBinding} from './narrative/bazi-reference-copy-binding.js';
 import {projectBaziPublicationPages} from './bazi-visual-report-projection.js';
 import {buildBaziPublicationVisual} from '../canonical-presentation-runtime/bazi-publication-visuals.js';
 import {compilePublicationInterpretation} from './narrative/narrative-brief-compiler.js';
@@ -13,6 +14,7 @@ import {getAcceptedBaziCoreSection} from './narrative/bazi-s02-s05-accepted-copy
 // Adapter inside the existing projection owner: native facts are calculated
 // upstream. The section engine never interprets raw birth data.
 export async function projectBaziSectionPublication({reading,locale,temporalContext,composition={},unavailableModules=[],allowUnselectedTiming=false}={}){
+ await assertBaziReferenceCopyBinding({reading,temporalContext});
  validateSectionRegistry();
  const legacy=await projectBaziPublicationPages({reading,locale,temporalContext,allowUnselectedTiming});
  const noTarget=allowUnselectedTiming&&temporalContext?.mode==='UNAVAILABLE';

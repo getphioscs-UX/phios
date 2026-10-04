@@ -1,3 +1,4 @@
+import {BAZI_EDITORIAL_REVIEW_STATE} from './narrative/bazi-editorial-review-state.generated.js';
 import {resolveReportAccess} from '../report-delivery/report-access-resolver.js';
 import {buildReportDeliveryEnvelope} from '../report-delivery/report-delivery-envelope.js';
 import {projectBaziSectionPublication} from './bazi-section-publication.js';
@@ -7,13 +8,12 @@ import {visualModules} from '../canonical-presentation-runtime/report-section-co
 import {REPORT_EDITORIAL_ASSETS} from '../canonical-presentation-runtime/report-editorial-registry.js';
 import {resolveReportEditorialAsset} from '../canonical-presentation-runtime/report-editorial-resolver.js';
 import {renderFrozenBaziIntro} from '../../assets/customer-ui/js/personal-products/publication-report-pages.js';
-import {assertReportSubjectBinding} from '../canonical-presentation-runtime/report-cover-subject.js';
 import {composeBaziPhysicalPages} from '../canonical-presentation-runtime/bazi-physical-composition.js';
 
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev';
-export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,reportSubjectBinding=null,requireSubjectOverlay=false,compositionR1=false}){
+export async function buildBaziCustomerPublication({reading,locale,temporalSnapshot,full=false,reportSubjectPresentation=null,reportSubjectBinding=null,requireSubjectOverlay=false,compositionR1=false,historicalReferenceReview=false}){
  if(reading?.publicationDecision?.customerPublishable!==true)throw Error('BZR_PUBLICATION_NOT_ADMITTED');
- if(full&&requireSubjectOverlay)await assertReportSubjectBinding({presentation:reportSubjectPresentation,expectedBinding:reportSubjectBinding});
+ if(!historicalReferenceReview||requireSubjectOverlay||reportSubjectPresentation||reportSubjectBinding)throw Object.assign(new Error('BCR_HISTORICAL_REFERENCE_NOT_PRODUCTION_ADMITTED'),{code:'BCR_HISTORICAL_REFERENCE_NOT_PRODUCTION_ADMITTED'});
  const projection=await projectBaziSectionPublication({reading,locale,temporalContext:temporalSnapshot,composition:{},allowUnselectedTiming:true});
  const permitted=new Set(visualModules.modules.filter(m=>m.freeVisibility==='PREVIEW').map(m=>m.id));
  const physical=full&&compositionR1?composeBaziPhysicalPages(projection.pages,locale):null;
@@ -22,9 +22,9 @@ export async function buildBaziCustomerPublication({reading,locale,temporalSnaps
  if(full&&requireSubjectOverlay&&!reportSubjectPresentation)throw Error('REPORT_SUBJECT_PRESENTATION_REQUIRED');
  const intro=[1,2,3,4,5].map(page=>({pageNumber:page,kind:page===1&&reportSubjectPresentation?'STATIC_COVER':'STATIC',src:resolveReportEditorialAsset({registry:{bucket:'phios-public-assets',assets:REPORT_EDITORIAL_ASSETS},methodId:'BZR',page,locale:page===1?'bilingual':locale,publicBaseUrl:PUBLIC_BASE}).src,alt:`BaZi ${page===1?'bilingual cover':locale+' P'+page}`,...(page===1&&reportSubjectPresentation?{subject:reportSubjectPresentation}:{})}));
  intro.push({pageNumber:6,kind:'FROZEN_TEMPLATE',html:renderFrozenBaziIntro(projection.legacy.reports.find(r=>r.pages.some(p=>p.pageNumber===6)),total)});
- if(full){const customer=assemblePublicationSnapshot({methodId:'BZR',locale,pages,intro,temporalSnapshot,generatedAt:temporalSnapshot.generatedAt,internalPages:projection.internalSections,layout:SECTION_LAYOUT,compositionSourcePages:physical?projection.pages:null}).customer;return physical?{...customer,physicalComposition:physical}:customer;}
+ if(full){const customer=assemblePublicationSnapshot({methodId:'BZR',locale,pages,intro,temporalSnapshot,generatedAt:temporalSnapshot.generatedAt,internalPages:projection.internalSections,layout:SECTION_LAYOUT,compositionSourcePages:physical?projection.pages:null}).customer;return {...customer,...(physical?{physicalComposition:physical}:{}),customerPublishable:false,editorialReviewStatus:BAZI_EDITORIAL_REVIEW_STATE.currentEditorialAdmission,editorialHumanAcceptanceCurrent:false};}
  // Free subset retains the same report renderer; no separate report runtime.
- return {schemaVersion:'GUIDED_REPORT_SUCCESSOR_R2',methodId:'BZR',locale,totalPages:total,intro,pages,customerPublishable:false,successorBaselineActivated:false,accessState:'FREE_REPORT_PREVIEW'};
+ return {schemaVersion:'GUIDED_REPORT_SUCCESSOR_R2',methodId:'BZR',locale,totalPages:total,intro,pages,customerPublishable:false,successorBaselineActivated:false,accessState:'FREE_REPORT_PREVIEW',editorialReviewStatus:BAZI_EDITORIAL_REVIEW_STATE.currentEditorialAdmission,editorialHumanAcceptanceCurrent:false};
 }
 export function readingPublicationTime(reading,generatedAt=new Date().toISOString()){
  const target=reading.temporalContext?.targetContext;
@@ -57,3 +57,4 @@ export async function attachBaziPublicationAccess(view,context,dependencies={}){
  }
  return next;
 }
+

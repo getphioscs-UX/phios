@@ -3,7 +3,7 @@ import fs from 'node:fs';
 const read=p=>fs.readFileSync(p,'utf8');
 const routes=[
  ['reality-formation','book-1'],['reality-runtime','book-2'],['reality-continuity','book-3'],['reality-expansion','book-4'],
- ['reality-differentiation','book-5'],['reality-configuration','book-6'],['reality-observation','book-7'],['reality-navigation','book-8']
+ ['reality-differentiation','book-5'],['reality-reconfiguration','book-6'],['reality-observation','book-7'],['reality-navigation','book-8']
 ];
 for(const [slug,id] of routes){
  const path=`books/${slug}/index.html`,html=read(path);

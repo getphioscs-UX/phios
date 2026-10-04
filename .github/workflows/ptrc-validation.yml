@@ -20,5 +20,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check:ptrc:machine
+      - name: Build Pages publication assets before repository checks
+        run: npm run build:pages
+      - name: Verify source-schema and generated-output boundaries
+        run: node scripts/check-schema-references-ci-regression.mjs
       - run: npm run check
       - run: git diff --exit-code

@@ -13,7 +13,7 @@ const manifestPath='content/reports/shared/bazi-composition-r1-manifest.json',ma
 for(const [file,digest] of Object.entries(baseline.acceptedCopyDigests))assert.equal(createHash('sha256').update(fs.readFileSync(file)).digest('hex'),digest,'accepted source changed');
 let architecture=null;
 for(const a of manifest.artifacts){
- const r=await buildBaziCustomerPublication({...source,locale:a.locale,full:true,compositionR1:true}),old=baseline.reports[a.locale];
+ const r=await buildBaziCustomerPublication({historicalReferenceReview:true,...source,locale:a.locale,full:true,compositionR1:true}),old=baseline.reports[a.locale];
  assert(r.totalPages>=36&&r.totalPages<=40);assert.equal(r.pages.length,r.totalPages-6);
  const roles=r.pages.map(p=>[p.sectionId,p.physicalPageRole]);
  if(architecture)assert.deepEqual(roles,architecture);architecture=roles;

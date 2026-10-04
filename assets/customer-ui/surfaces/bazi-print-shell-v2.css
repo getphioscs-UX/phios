@@ -68,3 +68,26 @@ html,body{background:#e7e2d7;color:var(--phi-report-navy);font-family:var(--phi-
 .pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-section="S07_HEALTH"][data-page-family="SECTION_OPENER_PAGE"] .pub-decoration:after{
  background:linear-gradient(270deg,rgba(252,249,240,.96) 0%,rgba(252,249,240,.86) 32%,rgba(252,249,240,.28) 58%,rgba(252,249,240,0) 78%)!important
 }
+
+/* Larger master text; preserve the original artwork and background treatment. */
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-narrative{font-size:4mm!important;line-height:1.65!important;padding:0!important;background:transparent!important;color:#23364a!important;border:0!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights{top:145mm!important;color:#23364a!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights .pub-insights p{font-size:3.8mm!important;line-height:1.6!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading h2{color:#23364a!important;font-weight:600!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading>p{color:#23364a!important}
+@font-face{font-family:"BaZi Report SC";src:url(/assets/fonts/private-report/NotoSansSC-Regular.ttf) format("truetype");font-weight:100 900;font-display:block}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{--phi-report-font-title:Georgia,"BaZi Report SC",serif;--phi-report-font-label:Arial,"BaZi Report SC",sans-serif}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] :is(.pub-header,.pub-opener-heading,.pub-narrative,.pub-master-insights,.pub-footer){position:absolute!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-narrative p{margin:0!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights{bottom:auto!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-composed-content .bzpub-card{min-height:0!important}
+@media print{html,body,main:has(>.pub-report[data-method="BZR"]){width:210mm!important;max-width:210mm!important;min-width:0!important;margin:0!important;padding:0!important;overflow-x:clip!important}}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="DAY_MASTER_CARRYING"] .bzpub-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="TEN_GOD_FUNCTION_GROUPS"] .bzpub-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-grid{display:block!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-card{grid-template-columns:1.05fr .75fr 1fr 1.2fr 1.7fr 1.2fr 1fr!important;gap:1mm!important;padding:1.2mm!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="TEN_GOD_DETAILS"] .bzpub-card :is(h3,strong,p){font-size:3mm!important;line-height:1.4!important;overflow-wrap:normal!important;margin:0!important;min-width:0}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="PATTERN_PATHS"] .bzpub-grid{grid-template-columns:1fr!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"][lang="en"] .pub-composed-content{font-size:3.8mm!important;line-height:1.5!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="PATTERN_PATHS"] .bzpub-card{grid-template-columns:32mm 9mm minmax(0,1fr)!important;gap:.8mm 2mm!important;padding:1.5mm!important}
+.pub-report[data-method="BZR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] [data-publication-visual="PATTERN_PATHS"] .bzpub-card p{font-size:3mm!important;line-height:1.35!important;margin:0!important}
