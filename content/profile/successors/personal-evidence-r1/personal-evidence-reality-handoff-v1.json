@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-EVIDENCE-REALITY-HANDOFF-v1.0.0",
+  "work": "PRD-W7",
+  "baselineCommit": "0ab7c6de9db3749913085de77a852957577128b8",
+  "status": "EXPLICIT_PERSONAL_REALITY_HANDOFF_ACTIVE",
+  "sourceType": "PERSONAL_EVIDENCE",
+  "target": "PERSONAL_REALITY",
+  "api": "/api/customer-reality-handoff",
+  "requiredSelectionFields": [
+    "selectedEvidenceRefs",
+    "customerSelected",
+    "automaticPersistence"
+  ],
+  "rules": {
+    "explicitEvidenceSelectionRequired": true,
+    "explicitConsentRequired": true,
+    "minimumSelectedEvidenceCount": 1,
+    "fullDossierAutomaticTransfer": false,
+    "automaticPersistence": false,
+    "sourceClassPreserved": true,
+    "evidenceMayBecomeRealityFact": false,
+    "assessmentMayBecomeIdentityFact": false,
+    "selectedEvidenceRemainsReference": true,
+    "targetRmoAcceptanceStillRequired": true
+  }
+}
