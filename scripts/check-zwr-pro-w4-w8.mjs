@@ -75,6 +75,9 @@ const guaranteeBad=structuredClone(results.en.candidates.find(c=>c.sectionId==='
 guaranteeBad.paragraphs[0].text='This outcome is guaranteed. '+guaranteeBad.paragraphs[0].text;
 const guaranteeBadVerdict=await verifyZwrProSectionW5({authorityPack:results.en.pack,candidate:guaranteeBad});
 assert(!guaranteeBadVerdict.accepted&&guaranteeBadVerdict.reasons.includes('GUARANTEED_OUTCOME'),'W5 must reject affirmative guaranteed-outcome language');
+const s08en=structuredClone(results.en.candidates.find(c=>c.sectionId==='S08'));
+const s08enVerdict=await verifyZwrProSectionW5({authorityPack:results.en.pack,candidate:s08en});
+assert(s08enVerdict.accepted,'W5 must allow English medical-boundary negation such as neither: '+s08enVerdict.reasons.join(','));
 const bad=structuredClone(results.en.candidates[0]);bad.subjectBinding={...bad.subjectBinding,subjectId:'FOREIGN'};
 const bad5=await verifyZwrProSectionW5({authorityPack:results.en.pack,candidate:bad});
 assert(!bad5.accepted&&bad5.reasons.includes('SUBJECT_BINDING_MISMATCH'),'W5 must reject wrong subject');
