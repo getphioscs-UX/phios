@@ -139,7 +139,7 @@ function preservePersonalEvidenceReference(x = {}) {
     facetId: x.facetId || null,
     nativeValue: structuredClone(x.nativeValue ?? x.value ?? null),
     context: structuredClone(x.context ?? null),
-    confirmationState: x.confirmationState || null,
+    confirmationState: x.confirmationState || x.confidence || null,
     provenance: structuredClone(x.provenance || []),
     precisionBoundary: structuredClone(x.precisionBoundary || []),
     realityQuestion: x.realityQuestion || null,

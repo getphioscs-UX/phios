@@ -1,6 +1,8 @@
 // Consumer adapter only: lifecycle and digests are supplied by the existing RR v2.
 export function projectPersonalEvidenceRrRegistry(baseRegistry, extension) {
   if (extension?.sourceRegistryMutated !== false || extension?.authority !== 'PROFILE_PPR') throw new Error('PERSONAL_EVIDENCE_RR_EXTENSION_REQUIRED');
+  const admitted={EVIDENCE:'PERSONAL_EVIDENCE_SOURCE_REFERENCE',UNKNOWN:'PERSONAL_EVIDENCE_UNKNOWN_REFERENCE',BOUNDARY:'PERSONAL_EVIDENCE_BOUNDARY_REFERENCE'};
+  if(extension.contractCode!=='PHI-OS-RR-PERSONAL-EVIDENCE-CONSUMER-v1'||extension.sections?.length!==3||new Set(extension.sections.map(x=>x.sectionCode)).size!==3||extension.sections.some(x=>admitted[x.sectionCode]!==x.referenceKind))throw new Error('PERSONAL_EVIDENCE_RR_EXTENSION_NOT_ADMITTED');
   const registry = structuredClone(baseRegistry);
   for (const rule of extension.sections) {
     const section = registry.sections.find(x => x.sectionCode === rule.sectionCode);

@@ -49,7 +49,7 @@ assert.equal(publication.presentationPlan.staticPages.length,5);
 assert.equal(publication.presentationPlan.sections.length,10);
 assert.equal(publication.rrEligibility.publicationProjectionReady,true);
 assert.equal(publication.rrEligibility.rrHandoffReady,true);
-assert.equal(publication.rrEligibility.rrHandoffBlock,'VERSIONED_RR_CONSUMER_EXTENSION_REQUIRED');
+assert.equal(publication.rrEligibility.rrHandoffBlock,null);
 assert.equal(publication.governance.rawSectionContentIncluded,false);
 
 const handoff=buildPersonalEvidenceRealityHandoff({profileView,selectedEvidenceRefs:['SIG-FIN']});

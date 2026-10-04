@@ -38,7 +38,7 @@ const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:
 const previewFrom=context=>new URL(context.request.url).searchParams.get('preview')==='1';
 const locale=v=>v==='zh-Hans'?'zh-Hans':'en';
 const publicTask=item=>({taskId:item.taskId,family:item.family,difficultyTier:item.difficultyTier,prompt:item.prompt,options:item.options});
-const selfItem=item=>({itemId:item.itemId,domainId:item.domainId,facetId:item.facetId,prompt:item.prompt,sensitive:item.sensitive===true,responseScale:item.responseScale});
+const selfItem=item=>({itemId:item.itemId,domainId:item.domainId,domainLabel:instrument.domains.find(d=>d.domainId===item.domainId)?.label,facetId:item.facetId,prompt:item.prompt,sensitive:item.sensitive===true,responseScale:item.responseScale});
 const ipipItem=item=>({itemId:item.itemId,order:item.order,factorId:item.factorId??null,domainCode:item.domainCode??null,facetId:item.facetId??null,facetName:item.facetName??null,prompt:item.prompt,reverseKeyed:item.reverseKeyed===true,sensitive:item.sensitive===true,responseScale:item.responseScale});
 const financialItem=item=>({itemId:item.itemId,section:item.section,sourceClass:item.sourceClass,prompt:item.prompt,response:item.response,sensitive:item.sensitive===true,options:Array.isArray(item.scoring?.options)?item.scoring.options:[]});
 function execution(context,body={}){return resolveProfileExecution({preview:previewFrom(context)||body?.preview===true});}

@@ -57,7 +57,8 @@ export function buildPersonalEvidencePublicationProjection({
     rrEligibility:{
       publicationProjectionReady:signalRefs.length>0&&consentRefs.length>0,
       rrHandoffReady:consentRefs.length>0&&Boolean(profileView.profileViewId&&profileView.semanticDigest),
-      rrHandoffBlock:consentRefs.length?'VERSIONED_RR_CONSUMER_EXTENSION_REQUIRED':'EXPLICIT_CONSENT_REQUIRED',
+      rrHandoffBlock:consentRefs.length?null:'EXPLICIT_CONSENT_REQUIRED',
+      rrConsumerExtensionRef:'content/profile/successors/personal-evidence-r1/contracts/personal-evidence-rr-consumer-extension-v1.json',
       canonicalReportCreated:false,
       reviewPassed:false,
       approved:false,

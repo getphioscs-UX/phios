@@ -9,7 +9,7 @@ export function preservePersonalEvidenceReference(x={}){
   return {sourceId:clean(x.sourceId||x.signalRef),sourceClass:clean(x.sourceClass),providerFamily:x.providerFamily||null,
     assessmentDate:x.assessmentDate||null,observedAt:x.observedAt||null,domainId:x.domainId||null,facetId:x.facetId||null,
     nativeValue:structuredClone(x.nativeValue??x.value??null),context:structuredClone(x.context??null),
-    confirmationState:x.confirmationState||null,provenance:structuredClone(x.provenance||[]),precisionBoundary:structuredClone(x.precisionBoundary||[]),
+    confirmationState:x.confirmationState||x.confidence||null,provenance:structuredClone(x.provenance||[]),precisionBoundary:structuredClone(x.precisionBoundary||[]),
     realityQuestion:x.realityQuestion||null,unknownState:x.unknownState||'OPEN',statement:clean(x.statement)||`${x.sourceLabel||x.sourceClass}: ${x.domainId||''}${x.facetId?` · ${x.facetId}`:''}`.trim(),realityFact:false};
 }
 export function selectPersonalEvidenceHandoffReferences(view){
