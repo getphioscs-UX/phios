@@ -1,5 +1,6 @@
 import {REPORT_REFERENCE_BLUEPRINTS} from './report-blueprint-reference.js';
 import {commercialRuntime} from '../pws/commercial/commercial-runtime.js';
+import {resolveReportProduct} from '../pws/commercial/report-successor-contract.js';
 const commerceCatalog=commercialRuntime.projectReportCatalog();
 // Presentation reads all prices and eligibility from the existing PWS owner.
 // Method interpretation, calculation and entitlement remain with their owners.
@@ -18,7 +19,14 @@ export const VISUAL_TEMPLATES = freeze(Object.fromEntries(definitions.map(([purp
  const templateId = `RPT-T${String(i).padStart(2,'0')}`;
  return [templateId,{templateId,purpose,allowedVisualTypes,minVisualArea:.45,targetVisualArea:[.55,.70],maxBodyArea:.30,maxClaims:3,textBudget:{'zh-Hans':{target:[60,140],max:180,unit:'CHARACTERS'},en:{target:[40,90],max:110,unit:'WORDS'}},requiredSlots:['question','title','visual','evidenceRefs'],optionalSlots:['subtitle','insights','navigationPrompt'],forbiddenContent:['UNSOURCED_VALUE','INVENTED_RANK','UNADMITTED_CLAIM','FILLER','DUPLICATE_PROSE'],fallback:'SUPPRESS_UNBOUND_PAGE',mobile:'REFLOW_WITH_LABELS_AND_RELATIONS_PRESERVED',print:'A4_ONE_PAGE_NO_VISUAL_SPLIT',accessibility:'TEXT_LABELS_SOURCE_TABLE_AND_NON_COLOR_SELECTION'}];
 })));
-const report = (methodId, productId, accent, modules, authority) => ({methodId,productId,targetMyr:commerceCatalog.products.find(p=>p.productId===productId).price.amountMinor/100,currency:'MYR',accent,assetId:`COM-REPORT-${productId.replace('_FULL_REPORT','')}-FULL`,modules,authority,review:'PENDING',customerPublishable:false,commerceBinding:commerceCatalog.contractId});
+const report = (methodId, productId, accent, modules, authority) => {
+ const live=commerceCatalog.products.find(p=>p.productId===productId);
+ const contract=resolveReportProduct(productId);
+ const amountMinor=live?.price?.amountMinor ?? contract.amountMinor;
+ const currency=live?.price?.currency ?? contract.currency;
+ if(!Number.isSafeInteger(amountMinor)||!currency)throw new Error('VISUAL_REPORT_COMMERCE_BINDING_INVALID:'+productId);
+ return {methodId,productId,targetMyr:amountMinor/100,currency,accent,assetId:`COM-REPORT-${productId.replace('_FULL_REPORT','')}-FULL`,modules,authority,review:'PENDING',customerPublishable:false,commerceBinding:commerceCatalog.contractId,commerceProjection:live?'CURRENT_PRIMARY':'LEGACY_READABLE_CONTRACT'};
+};
 export const VISUAL_REPORT_PRODUCTS = freeze([
  report('BZR','BAZI_FULL_REPORT','#986536',['COVER','SNAPSHOT','FOUR_PILLARS','ELEMENTS','RELATIONSHIPS','PATTERNS','DOMAINS','RESOURCES','TIMING','SELECTED_TIMING','NAVIGATION','BOUNDARY'],'BZR_FULL_PRODUCTION'),
  report('ZWR','ZIWEI_FULL_REPORT','#786391',['COVER','SNAPSHOT','TWELVE_PALACES','LIFE_PALACE','STAR_NETWORK','DOMAINS','CAREER_RESOURCES','RELATIONSHIPS','SELF','TIMING','SELECTED_TIMING','NAVIGATION','BOUNDARY'],'ZIWEI_PRO_R2'),
