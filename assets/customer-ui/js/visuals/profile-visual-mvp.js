@@ -55,7 +55,7 @@ function workMap(fig,locale){
 }
 
 function relationshipMap(fig,locale){
-  if(!stateReady(fig)) return empty(fig,locale,zh(locale)?'加入关系情境的观察或已治理的关系证据后，这里会显示互动证据。':'Add governed relationship observations or evidence to open this interaction view.');
+  if(!stateReady(fig)) return empty(fig,locale,zh(locale)?'加入关系情境的观察或已治理的关系证据后，这里会显示互动证据。':'Add relationship observations or evidence to open this interaction view.');
   const observed=list(fig.data?.observations);
   const rel=fig.data?.relationshipEvidence;
   return `<section class="prf-pfig" data-pfig="PFIG-007"><header class="prf-pfig__head"><div><p class="prf-pfig__eyebrow">${zh(locale)?'关系证据':'RELATIONSHIP EVIDENCE'}</p><h3>${zh(locale)?'关系互动':'Relationship interaction'}</h3></div><p>${zh(locale)?'这里不产生兼容度、对方隐藏状态或关系结果预测。':'This view does not create compatibility scores, hidden-partner inference, or outcome predictions.'}</p></header><div class="prf-dimension-lanes">${observed.length?`<article class="prf-dimension-lane"><div class="prf-dimension-lane__source"><span>${zh(locale)?'已观察互动':'Observed interaction'}</span><small>RELATIONSHIP</small></div><div class="prf-dimension-lane__items">${observed.map(x=>`<div class="prf-dimension-chip"><span>${esc(itemLabel(x))}</span><strong>${esc(humanize(x.confirmation||'UNSURE'))}</strong></div>`).join('')}</div></article>`:''}${rel?`<article class="prf-dimension-lane"><div class="prf-dimension-lane__source"><span>${zh(locale)?'关系来源':'Relationship source'}</span><small>${esc(humanize(rel.sourceClass||rel.kind||'EVIDENCE'))}</small></div><div class="prf-dimension-lane__items"><div class="prf-dimension-chip"><span>${esc(itemLabel(rel))}</span><strong>${zh(locale)?'保留来源':'Source preserved'}</strong></div></div></article>`:''}</div></section>`;
@@ -90,7 +90,7 @@ function realityBridge(fig,locale){
 
 export function renderProfileVisualMvp(projection,{locale='en'}={}){
   if(!projection||!Array.isArray(projection.figures)) return '';
-  return `<div class="prf-visual-mvp" data-pvp-profile-mvp="W8"><div class="prf-visual-mvp__intro"><p class="cx-eyebrow">PERSONAL EVIDENCE VISUAL</p><h2>${zh(locale)?'把证据变成可阅读的地图':'Turn evidence into a readable map'}</h2><p>${zh(locale)?'视觉只投影已有 Personal Evidence / PPR 证据；没有资料的地方会明确保持空白。':'These visuals project governed Personal Evidence / PPR evidence only. Missing evidence remains visibly unresolved.'}</p></div>${dimensionMap(figBy(projection,'PFIG-001'),locale)}${patternRadar(figBy(projection,'PFIG-002'),locale)}${strengthCost(figBy(projection,'PFIG-003'),locale)}${contextVariation(figBy(projection,'PFIG-004'),locale)}${convergence(figBy(projection,'PFIG-005'),locale)}${workMap(figBy(projection,'PFIG-006'),locale)}${relationshipMap(figBy(projection,'PFIG-007'),locale)}${decisionMap(figBy(projection,'PFIG-008'),locale)}${realityBridge(figBy(projection,'PFIG-009'),locale)}</div>`;
+  return `<div class="prf-visual-mvp" data-pvp-profile-mvp="W8"><div class="prf-visual-mvp__intro"><p class="cx-eyebrow">PERSONAL EVIDENCE VISUAL</p><h2>${zh(locale)?'把证据变成可阅读的地图':'Turn evidence into a readable map'}</h2><p>${zh(locale)?'视觉只投影已有 个人证据；没有资料的地方会明确保持空白。':'These visuals project governed personal evidence only. Missing evidence remains visibly unresolved.'}</p></div>${dimensionMap(figBy(projection,'PFIG-001'),locale)}${patternRadar(figBy(projection,'PFIG-002'),locale)}${strengthCost(figBy(projection,'PFIG-003'),locale)}${contextVariation(figBy(projection,'PFIG-004'),locale)}${convergence(figBy(projection,'PFIG-005'),locale)}${workMap(figBy(projection,'PFIG-006'),locale)}${relationshipMap(figBy(projection,'PFIG-007'),locale)}${decisionMap(figBy(projection,'PFIG-008'),locale)}${realityBridge(figBy(projection,'PFIG-009'),locale)}</div>`;
 }
 
 export function mountProfileVisualMvp(root,projection,options={}){
@@ -101,3 +101,11 @@ export function mountProfileVisualMvp(root,projection,options={}){
 }
 
 export const PROFILE_VISUAL_MVP_IDS=Object.freeze(['PFIG-001','PFIG-002','PFIG-003','PFIG-004','PFIG-005','PFIG-006','PFIG-007','PFIG-008','PFIG-009']);
+
+// Dossier composition reuses the same governed figure without the screen opener.
+export function renderPersonalEvidenceFigure(figure,{locale='en'}={}){
+  const renderers={'PFIG-001':dimensionMap,'PFIG-002':patternRadar,'PFIG-003':strengthCost,'PFIG-004':contextVariation,'PFIG-005':convergence,'PFIG-006':workMap,'PFIG-007':relationshipMap,'PFIG-008':decisionMap,'PFIG-009':realityBridge};
+  const render=renderers[figure?.pfig];
+  if(!render)throw new Error('PERSONAL_EVIDENCE_FIGURE_NOT_ADMITTED');
+  return render(figure,locale);
+}

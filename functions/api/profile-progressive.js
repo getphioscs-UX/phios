@@ -26,6 +26,11 @@ import { buildProfileCustomerVisualProjection } from '../profile/profile-custome
 import { buildProfileVisualDepthProjection } from '../profile/profile-visual-depth-projection.js';
 import { buildPersonalEvidenceDossierProjection } from '../profile/personal-evidence-dossier-projection.js';
 import { buildPersonalEvidencePublicationProjection } from '../profile/personal-evidence-publication-projection.js';
+import * as rr from '../../scripts/lib/customer-report-runtime/report-runtime-v2.mjs';
+import rrRegistry from '../../content/runtime/customer-report-runtime/registries/canonical-report-section-registry-v2.json';
+import rrExtension from '../../content/profile/successors/personal-evidence-r1/contracts/personal-evidence-rr-consumer-extension-v1.json';
+import {assemblePersonalEvidenceReport} from '../profile/personal-evidence-report-adapter.js';
+import {buildPersonalEvidencePublicationIr} from '../profile/personal-evidence-publication-ir-adapter.js';
 import { buildPersonalEvidenceDomainHandoffs } from '../profile/personal-evidence-handoffs.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
@@ -107,10 +112,15 @@ export async function onRequestPost(context){
     const customerOutput=buildProfileCustomerOutputSuccessor(view);
     const visualProjection=buildProfileCustomerVisualProjection({progressiveView:view,customerOutput,confirmations:Array.isArray(body.patternConfirmations)?body.patternConfirmations:[],participantRef,asOfDate:body.asOfDate||assessmentDate||null});
     const visualDepthProjection=buildProfileVisualDepthProjection({visualProjection});
-    const dossierProjection=buildPersonalEvidenceDossierProjection({visualProjection,participantRef,asOfDate:body.asOfDate||assessmentDate||null});
     const consentReferences=body.consent===true?[`PRF-SESSION-CONSENT-${view.profileViewId}`]:[];
     const publicationProjection=buildPersonalEvidencePublicationProjection({profileView:view,visualProjection,locale:lang,consentReferences});
+    let dossierReport=null, publicationIr=null;
+    if(consentReferences.length){
+      dossierReport=assemblePersonalEvidenceReport({profileView:view,publicationProjection,caseReference:`PERSONAL-EVIDENCE-${view.profileViewId}`,customerReference:participantRef,assembledAt:new Date().toISOString(),rr,registry:rrRegistry,extension:rrExtension}).report;
+      publicationIr=await buildPersonalEvidencePublicationIr({profileView:view,report:dossierReport,publicationProjection});
+    }
+    const dossierProjection=buildPersonalEvidenceDossierProjection({visualProjection,participantRef,asOfDate:body.asOfDate||assessmentDate||null,profileView:view,locale:lang,consentRefs:consentReferences,reportReference:dossierReport?.reportReference||null,reportVersion:dossierReport?.reportVersion||null});
     const domainHandoffs=buildPersonalEvidenceDomainHandoffs({profileView:view,visualProjection,financialSummary});
-    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,visualProjection:visualDepthProjection.freeSnapshot,visualDepthProjection,dossierProjection,publicationProjection,domainHandoffs,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview,profileVisualProjectionOwner:'PVP_R1',profileTruthOwner:'PROFILE_PPR',profileVisualDepth:'FREE_SNAPSHOT',clientPaidSelfUpgradeAllowed:false,personalEvidenceDossierOwner:'RR_READY_PROJECTION_ONLY',domainHandoffsReferenceOnly:true}});
+    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,visualProjection:visualDepthProjection.freeSnapshot,visualDepthProjection,dossierProjection,publicationProjection,dossierReport,publicationIr,domainHandoffs,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview,profileVisualProjectionOwner:'PVP_R1',profileTruthOwner:'PROFILE_PPR',profileVisualDepth:'FREE_SNAPSHOT',clientPaidSelfUpgradeAllowed:false,personalEvidenceDossierOwner:'RR',dossierReleased:false,productionReleaseRequiresHumanAcceptance:true,domainHandoffsReferenceOnly:true}});
   }catch(error){return errorResponse(error)}
 }

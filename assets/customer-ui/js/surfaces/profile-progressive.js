@@ -1,5 +1,6 @@
 import { mountProfileFreePaid } from '../visuals/profile-free-paid.js';
 import { handoffToMyReality } from '../handoff.js';
+import {buildPersonalEvidenceRealityHandoff,renderPersonalEvidenceDossier,preparePersonalEvidenceDomainHandoff} from '../personal-products/personal-evidence-dossier.bundle.js';
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const state={mode:null,config:null,onetForm:'MINI_30',ipipForm:'IPIP_BIG_FIVE_50'};
@@ -10,7 +11,7 @@ const fields=$('[data-prf-fields]');
 const status=$('[data-prf-status]');
 const results=$('[data-prf-results]');
 const labels={
-  QUICK_PROFILE:['Quick Profile','快速 Profile'],
+  QUICK_PROFILE:['Quick Self Evidence','快速自陈证据'],
   FULL_SELF_ASSESSMENT:['Full Self-Assessment','完整自我评估'],
   REASONING_TASKS:['Reasoning Tasks','推理任务'],
   IMPORT_EXTERNAL_RESULT:['Import external result','导入外部结果'],
@@ -73,6 +74,8 @@ async function loadCareerDetail(button){const card=button.closest('.prf-career-c
 function valueHtml(value){if(value==null)return '<span>—</span>';if(typeof value!=='object')return `<strong>${esc(value)}</strong>`;return `<dl class="prf-value-list">${Object.entries(value).filter(([,v])=>v!==null&&typeof v!=='object').map(([k,v])=>`<div><dt>${esc(humanize(k))}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`}
 function render(data){
   latestProfileResult=data;
+  const domainRoot=$('[data-prf-domain-actions]');
+  if(domainRoot)domainRoot.innerHTML=['relationship','career','financial'].filter(k=>data.domainHandoffs?.[k]?.state==='AVAILABLE').map(k=>`<fieldset><legend>${{relationship:locale()==='zh-Hans'?'关系现实':'Relationship Reality',career:locale()==='zh-Hans'?'工作情境':'Career context',financial:locale()==='zh-Hans'?'财务现实':'Financial Reality'}[k]}</legend><label><input type="checkbox" data-prf-domain-consent="${k}">${locale()==='zh-Hans'?'我明确同意仅将勾选证据用于这个目标领域。':'I explicitly consent to use only checked evidence for this target domain.'}</label><button type="button" data-prf-domain-preview="${k}">${locale()==='zh-Hans'?'准备所选证据并继续':'Prepare selected evidence and continue'}</button><p data-prf-domain-status="${k}"></p></fieldset>`).join('');
   const view=data.view;results.hidden=false;
   const visualMvp=$('[data-prf-visual-mvp]');
   mountProfileFreePaid(visualMvp,data.visualDepthProjection,{locale:locale()});
@@ -81,7 +84,7 @@ function render(data){
   else if(data.profileSummary)visual=bigFiveBars(data.profileSummary);
   else if(data.financialSummary)visual=financialSummaryHtml(data.financialSummary);
   else if(data.reasoningView)visual=reasoningSummaryHtml(data.reasoningView);
-  else visual=`<p class="cx-eyebrow">SIX-DOMAIN SELF-ASSESSMENT</p><h3 class="cx-heading">${locale()==='zh-Hans'?'Profile 视觉':'Profile visual'}</h3>${view.freshness.oldResultWarningRequired?`<p class="prf-old-warning">${esc(view.freshness.message)}</p>`:''}${radarSvg(view.selfAssessmentRadar)}`;
+  else visual=`<p class="cx-eyebrow">SIX-DOMAIN SELF-ASSESSMENT</p><h3 class="cx-heading">${locale()==='zh-Hans'?'个人证据视觉':'Personal evidence visual'}</h3>${view.freshness.oldResultWarningRequired?`<p class="prf-old-warning">${esc(view.freshness.message)}</p>`:''}${radarSvg(view.selfAssessmentRadar)}`;
   $('[data-prf-radar]').innerHTML=visual;
   $('[data-prf-source-legend]').innerHTML=`<p class="cx-eyebrow">SOURCE LEGEND</p><h3 class="cx-heading">${locale()==='zh-Hans'?'这是什么类型的证据？':'What kind of evidence is this?'}</h3><div class="prf-source-list">${view.sourceLegend.map(x=>`<div class="prf-source-item"><b>${esc(x.label)}</b><small>${esc(x.description)}</small></div>`).join('')}</div>`;
   $('[data-prf-signals]').innerHTML=`<p class="cx-eyebrow">PERSONAL EVIDENCE SIGNALS</p><p class="cx-body cx-muted">${locale()==='zh-Hans'?'勾选你明确想带入 Personal Reality 的证据；未勾选项目不会被传入。':'Select only the evidence you explicitly want to carry into Personal Reality. Unselected items are not transferred.'}</p><div class="prf-signal-grid">${view.signalCards.map(x=>`<article class="prf-signal-card"><label class="prf-signal-select"><input type="checkbox" data-prf-handoff-signal value="${esc(x.signalRef)}"><span>${locale()==='zh-Hans'?'选择这项证据':'Select this evidence'}</span></label><small>${esc(x.sourceLabel)} · ${esc(x.assessmentDate||'undated')}</small><h3>${esc(humanize(x.domainId))}${x.facetId?` · ${esc(humanize(x.facetId))}`:''}</h3>${valueHtml(x.value)}<details><summary>${locale()==='zh-Hans'?'来源与精度':'Provenance / precision'}</summary><p><b>${esc(x.providerFamily||x.sourceClass)}</b></p><ul>${(x.precisionBoundary||[]).map(v=>`<li>${esc(humanize(v))}</li>`).join('')}</ul></details></article>`).join('')}</div>`;
@@ -96,22 +99,16 @@ const handoffConsent=$('[data-prf-handoff-consent]');
 const handoffStatus=$('[data-prf-handoff-status]');
 handoffButton?.addEventListener('click',async()=>{
   if(!latestProfileResult?.view)return;
-  const selected=$('input[data-prf-handoff-signal]:checked').map(x=>x.value);
+  const selected=$$('input[data-prf-handoff-signal]:checked').map(x=>x.value);
   if(!selected.length){handoffStatus.textContent=locale()==='zh-Hans'?'请至少选择一项证据。':'Select at least one evidence item.';return;}
   if(handoffConsent?.checked!==true){handoffStatus.textContent=locale()==='zh-Hans'?'请先明确同意这次 Personal Reality 衔接。':'Please explicitly consent to this Personal Reality handoff.';return;}
-  const cards=latestProfileResult.view.signalCards||[];
-  const evidenceReferences=selected.map(ref=>cards.find(x=>x.signalRef===ref)).filter(Boolean).map(x=>({
-    sourceId:x.signalRef,sourceClass:x.sourceClass,providerFamily:x.providerFamily||null,assessmentDate:x.assessmentDate||null,
-    domainId:x.domainId||null,facetId:x.facetId||null,
-    statement:`${x.sourceLabel||x.sourceClass}: ${humanize(x.domainId)}${x.facetId?` · ${humanize(x.facetId)}`:''}`,
-    realityFact:false
-  }));
-  const viewModel={schemaVersion:'PHI-OS-PERSONAL-EVIDENCE-REALITY-HANDOFF-v1.0.0',participantRef:latestProfileResult.view.participantRef||null,profileViewRef:latestProfileResult.view.profileViewId||null,customerSelected:true,automaticPersistence:false,selectedEvidenceRefs:selected,evidenceReferences,observationNote:'',openQuestion:''};
+  const viewModel=buildPersonalEvidenceRealityHandoff({profileView:latestProfileResult.view,selectedEvidenceRefs:selected,
+    selectionAction:$('[data-prf-handoff-action]')?.value||'KEEP_EVIDENCE',observationNote:$('[data-prf-handoff-note]')?.value||'',openQuestion:$('[data-prf-handoff-question]')?.value||''});
   handoffStatus.textContent=locale()==='zh-Hans'?'正在准备所选证据…':'Preparing selected evidence…';
   try{await handoffToMyReality({sourceType:'PERSONAL_EVIDENCE',viewModel,statusNode:handoffStatus})}catch(error){handoffStatus.textContent=error?.message||'PERSONAL_EVIDENCE_HANDOFF_FAILED'}
 });
 form.addEventListener('submit',async e=>{
-  e.preventDefault();setStatus(locale()==='zh-Hans'?'正在准备 Profile…':'Preparing Profile…');
+  e.preventDefault();setStatus(locale()==='zh-Hans'?'正在准备个人证据…':'Preparing personal evidence…');
   const fd=new FormData(form),body={mode:state.mode,participantRef:fd.get('participantRef'),assessmentDate:fd.get('assessmentDate'),asOfDate:today(),locale:locale(),consent:fd.get('consent')==='on',sensitiveConsent:fd.get('sensitiveConsent')==='on',customerConfirmed:true};
   if(state.mode==='IMPORT_EXTERNAL_RESULT'){
     body.providerFamily=fd.get('providerFamily');body.providerName=fd.get('providerName');body.resultLabel=fd.get('resultLabel');body.assessmentDate=fd.get('externalAssessmentDate')||null;try{body.resultDimensions=fd.get('resultDimensions')?JSON.parse(fd.get('resultDimensions')):{}}catch{return setStatus('Result dimensions must be valid JSON.',true)}
@@ -122,3 +119,8 @@ form.addEventListener('submit',async e=>{
   }else body.responses=collectResponses();
   try{const r=await fetch('/api/profile-progressive',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body)}),data=await r.json();if(!r.ok)throw new Error(data.error||'PROFILE_REQUEST_FAILED');setStatus('');render(data)}catch(err){setStatus(err.message,true)}
 });
+
+$('[data-prf-dossier]')?.addEventListener('click',()=>{if(!latestProfileResult?.dossierProjection)return;const html=renderPersonalEvidenceDossier({dossier:latestProfileResult.dossierProjection,profileView:latestProfileResult.view,locale:locale(),reviewPreview:true});$('[data-prf-dossier-frame]').srcdoc=`<!doctype html><html lang="${locale()}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/customer-ui/visuals/profile-visual-mvp.css"><link rel="stylesheet" href="/assets/customer-ui/surfaces/report-print-shell-v2.css"><link rel="stylesheet" href="/assets/customer-ui/surfaces/personal-evidence-dossier.css"></head><body>${html}</body></html>`;$('[data-prf-dossier-dialog]').showModal()});
+$('[data-prf-dossier-close]')?.addEventListener('click',()=>$('[data-prf-dossier-dialog]').close());
+$('[data-prf-dossier-print]')?.addEventListener('click',()=>(()=>{const frame=$('[data-prf-dossier-frame]');if([...frame.contentDocument.images].some(i=>!i.complete||!i.naturalWidth)){alert(locale()==='zh-Hans'?'静态视觉尚未加载，无法打印完整档案。':'Static visuals are unavailable. The complete dossier cannot be printed yet.');return}frame.contentWindow.print()})());
+$('[data-prf-domain-actions]')?.addEventListener('click',event=>{const key=event.target.dataset.prfDomainPreview;if(!key||!latestProfileResult)return;const status=$('[data-prf-domain-status="'+key+'"]');try{const lane=latestProfileResult.domainHandoffs[key];const refs=$$('input[data-prf-handoff-signal]:checked').map(x=>x.value).filter(ref=>lane.evidenceRefs.includes(ref));const handoff=preparePersonalEvidenceDomainHandoff({bundle:latestProfileResult.domainHandoffs,targetDomain:key.toUpperCase(),purpose:'Customer-selected '+key+' evidence context',selectedEvidenceRefs:refs,explicitConsent:$('[data-prf-domain-consent="'+key+'"]').checked,consentRef:'SESSION-'+key+'-'+latestProfileResult.view.profileViewId,time:new Date().toISOString()});status.innerHTML=`${locale()==='zh-Hans'?'所选证据已准备；目标页面不会自动接收或保存。这次衔接仍需目标产品确认。':'Selected evidence is prepared. The target page will not automatically receive or save it; target-product confirmation is still required.'} <a href="${esc(handoff.route)}">${locale()==='zh-Hans'?'继续':'Continue'}</a>`;}catch(error){status.textContent=locale()==='zh-Hans'?'请选择该领域的证据，并明确同意这次衔接。':'Select evidence for this domain and explicitly consent to this handoff.'}});

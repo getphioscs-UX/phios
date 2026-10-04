@@ -272,13 +272,13 @@ export function createCommercialRuntime(options = {}) {
     listOffers: () => freeze([...offers.values()]),
     listPrices: () => freeze([...prices.values()]),
     projectReportCatalog() {
-      return freeze({contractId:REPORT_COMMERCE_CONTRACT.contractId,products:REPORT_COMMERCE_CONTRACT.products.map(p=>{
+      return freeze({contractId:REPORT_COMMERCE_CONTRACT.contractId,products:REPORT_COMMERCE_CONTRACT.products.filter(p=>p.newPrimaryPromotion!==false).map(p=>{
         const offer=runtime.resolveOffer(`${p.productCode}-myr`),price=runtime.resolvePrice(offer.price_code),product=productRuntime.resolveProduct(p.productCode);
         return {productId:p.productId,productCode:p.productCode,methodId:p.methodId,kind:p.kind,offerCode:offer.offer_code,price:{currency:price.currency_code,amountMinor:price.amount_minor,version:price.price_version},eligibleProductIds:p.kind==='BUNDLE'?eligibleReportIds(p.productId):[],selection:p.selection,checkoutEnabled:REPORT_COMMERCE_CONTRACT.policy.productionPaymentEnabled&&product.state==='active'&&offer.status==='active'&&price.status==='active',independentReportsOnly:p.kind==='BUNDLE',bundleCreatesCross:false};
       })});
     },
     previewReportSelection(productId, selectedProductIds=[]) {
-      const product=resolveReportProduct(productId),offer=runtime.resolveOffer(`${product.productCode}-myr`);
+      const product=resolveReportProduct(productId);if(product.newPurchaseDefault===false)throw new CommercialRuntimeError('PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED','Legacy reports remain readable for existing customers.');const offer=runtime.resolveOffer(`${product.productCode}-myr`);
       return freeze({offer,price:runtime.resolvePrice(offer.price_code),entitlementPlan:mapReportEntitlements(product.productId,selectedProductIds),createsOrder:false,createsEntitlement:false});
     },
     resolveOffer(offerCode) {
@@ -296,6 +296,7 @@ export function createCommercialRuntime(options = {}) {
       const price = runtime.resolvePrice(offer.price_code);
       const product = productRuntime.resolveProduct(offer.product_code);
       const reportProduct=REPORT_COMMERCE_CONTRACT.products.find(p=>p.productCode===product.product_code);
+      if(reportProduct?.newPurchaseDefault===false)throw new CommercialRuntimeError('PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED','Legacy reports remain readable for existing customers.');
       if(offer.status!=='active'||price.status!=='active'||product.state!=='active')throw new CommercialRuntimeError('PWS_OFFER_NOT_ACTIVE','Only active products, offers and prices may create orders.');
       if(reportProduct&&!REPORT_COMMERCE_CONTRACT.policy.productionPaymentEnabled)throw new CommercialRuntimeError('PWS_REPORT_PRODUCTION_GATE_CLOSED','Report contract approval does not activate payment.');
       const productVersion = productRuntime.resolveProductVersion(

@@ -23,7 +23,8 @@ export function assemblePersonalEvidenceReport({profileView, publicationProjecti
     {sectionCode:'UNKNOWN', sourceReferences:[ref(profileView.profileViewId, 'PERSONAL_EVIDENCE_UNKNOWN_REFERENCE')]},
     {sectionCode:'BOUNDARY', sourceReferences:[ref(profileView.profileViewId, 'PERSONAL_EVIDENCE_BOUNDARY_REFERENCE')]}
   ];
-  const assembly = rr.assembleReport({reportCode:'PERSONAL_EVIDENCE_DOSSIER', case:caseReference, customer:customerReference,
+  if(customerReference!==profileView.participantRef)throw new Error('PERSONAL_EVIDENCE_REPORT_SUBJECT_MISMATCH');
+  const assembly = rr.assembleReport({reportCode:`PERSONAL_EVIDENCE_DOSSIER-${profileView.profileViewId}`, case:caseReference, customer:customerReference,
     locale:publicationProjection.locale, assembledAt, revision,
     consentReferences:publicationProjection.consentReferences, sections,
     serviceContract:{reference:extension.contractCode, requiredSectionTypes:['EVIDENCE','UNKNOWN','BOUNDARY'], optionalSectionTypes:[],

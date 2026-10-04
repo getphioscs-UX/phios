@@ -33,7 +33,7 @@ const SECTION_SOURCE_KEYS=Object.freeze({
 
 const clone=v=>v==null?v:JSON.parse(JSON.stringify(v));
 
-export function buildPersonalEvidenceDossierProjection({visualProjection=null,participantRef=null,asOfDate=null}={}){
+export function buildPersonalEvidenceDossierProjection({visualProjection=null,participantRef=null,asOfDate=null,profileView=null,locale='en',consentRefs=[],reportReference=null,reportVersion=null}={}){
   const figures=Array.isArray(visualProjection?.figures)?visualProjection.figures:[];
   const bySection=new Map(Array.from({length:10},(_,i)=>[`SEC-${String(i+1).padStart(2,'0')}`,[]]));
   for(const figure of figures){
@@ -58,6 +58,16 @@ export function buildPersonalEvidenceDossierProjection({visualProjection=null,pa
   }));
   return Object.freeze({
     schemaVersion:PERSONAL_EVIDENCE_DOSSIER_PROJECTION_SCHEMA,
+    dossierId:profileView?.profileViewId?`DOSSIER-${profileView.profileViewId}`:null,
+    locale:locale==='zh-Hans'?'zh-Hans':'en',
+    sourceEvidenceRefs:Object.freeze((profileView?.signalCards||[]).map(x=>x.signalRef)),
+    visualProjectionRef:visualProjection?.schemaVersion||null,
+    boundaryRefs:Object.freeze(profileView?.boundaries?.length?[profileView.profileViewId]:[]),
+    unknownRefs:Object.freeze(profileView?.profileViewId?[profileView.profileViewId]:[]),
+    consentRefs:Object.freeze([...consentRefs]),
+    sourceReferences:Object.freeze((profileView?.signalCards||[]).map(x=>({reference:x.signalRef,sourceClass:x.sourceClass,provider:x.providerFamily||null,assessmentDate:x.assessmentDate||null}))),
+    reportReference,
+    reportVersion,
     participantRef:participantRef||visualProjection?.participantRef||null,
     asOfDate:asOfDate||visualProjection?.asOfDate||null,
     staticPages:Object.freeze(staticPages),

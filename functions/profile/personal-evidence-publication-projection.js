@@ -25,23 +25,23 @@ export function buildPersonalEvidencePublicationProjection({
   const rrSections=[
     {
       sectionCode:'EVIDENCE',
-      authority:'PROFILE_PPR_REFERENCE_PENDING_RRE_ADMISSION',
+      authority:'PROFILE_PPR',
       dataType:'CAPABILITY_EVIDENCE_REFERENCE',
       references:[...signalRefs,...pfigRefs],
       assemblyMode:'REFERENCE_ONLY'
     },
     {
       sectionCode:'UNKNOWN',
-      authority:'RRE',
+      authority:'PROFILE_PPR',
       dataType:'REALITY_READOUT_RECORD',
       references:list(profileView.signalCards).filter(x=>x?.freshness?.state==='UNDATED'||x?.freshness?.state==='OLD_RESULT').map(x=>x.signalRef),
       assemblyMode:'REFERENCE_ONLY'
     },
     {
       sectionCode:'BOUNDARY',
-      authority:'RDG',
+      authority:'PROFILE_PPR',
       dataType:'GOVERNANCE_RECORD',
-      references:boundaries.map((_,i)=>`PROFILE_BOUNDARY_${i+1}`),
+      references:boundaries.length?[profileView.profileViewId]:[],
       assemblyMode:'REFERENCE_ONLY'
     }
   ];
@@ -56,8 +56,8 @@ export function buildPersonalEvidencePublicationProjection({
     consentReferences:consentRefs,
     rrEligibility:{
       publicationProjectionReady:signalRefs.length>0&&consentRefs.length>0,
-      rrHandoffReady:false,
-      rrHandoffBlock:'PROFILE_PPR_NOT_DIRECTLY_ADMITTED_BY_RR_EVIDENCE_SECTION',
+      rrHandoffReady:consentRefs.length>0&&Boolean(profileView.profileViewId&&profileView.semanticDigest),
+      rrHandoffBlock:consentRefs.length?'VERSIONED_RR_CONSUMER_EXTENSION_REQUIRED':'EXPLICIT_CONSENT_REQUIRED',
       canonicalReportCreated:false,
       reviewPassed:false,
       approved:false,
