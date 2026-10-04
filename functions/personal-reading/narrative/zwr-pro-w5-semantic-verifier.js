@@ -11,7 +11,7 @@ const uniq=a=>[...new Set((Array.isArray(a)?a:[]).map(String))];
 const txKey=t=>[t.layer,t.palaceCode,t.targetStarCode,t.transformationCode].join(':');
 const reEscape=v=>String(v).replace(/[.*+?^\${}()|[\]\\]/g,'\\$&');
 
-const NEGATED_BOUNDARY=/(?:不能|不可|不应|不代表|不等于|不是|并非|不提供|不构成|不能把)|\b(?:not|never|cannot|does not|do not|is not|are not)\b/iu;
+const NEGATED_BOUNDARY=/(?:不能|不可|不应|不代表|不等于|不是|并非|不提供|不构成|不能把)|\b(?:not|never|neither|cannot|does not|do not|is not|are not)\b/iu;
 function medicalInferenceLeak(value){
  return String(value).split(/(?<=[。！？.!?])\s*/u).some(sentence=>MEDICAL.test(sentence)&&!NEGATED_BOUNDARY.test(sentence));
 }
