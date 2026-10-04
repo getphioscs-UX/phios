@@ -13,10 +13,13 @@ export function renderPersonalEvidenceDossier({dossier,profileView,locale='en',c
   for(const section of dossier.sections){
     html+=staticPage(section.master);
     for(const fig of section.pfigs)html+=page(renderPersonalEvidenceFigure(fig,{locale}),`data-pe-section="${esc(section.section)}"`);
-    const refs=new Set(section.pfigs.flatMap(f=>f.evidenceRefs||[]));
-    const selected=section.section==='SEC-02'?cards:section.section==='SEC-08'?cards.filter(c=>c.domainId==='FINANCIAL_CAPABILITY'||c.sourceClass==='EXTERNAL_PROFILE_RESULT'):cards.filter(c=>refs.has(c.signalRef));
-    for(const card of selected)html+=page(rows(card),`data-pe-section="${esc(section.section)}"`);
-    if(!section.pfigs.length&&!selected.length)html+=page(`<p>${zh?'此章节尚无已知证据；未知保持开放。':'No evidence for this section yet. Unknowns remain open.'}</p>`,`data-pe-section="${esc(section.section)}" data-pe-sparse="true"`);
+    // Source lanes carry native data once. Figures in their primary sections
+    // already contain the customer evidence; do not duplicate it on extra pages.
+    const selected=section.section==='SEC-02'?cards:section.section==='SEC-08'?cards.filter(c=>String(c.domainId).startsWith('FINANCIAL_CAPABILITY')||c.sourceClass==='EXTERNAL_PROFILE_RESULT'):[];
+    let group=[],lineCount=0;
+    const emit=()=>{if(group.length)html+=page(group.map(rows).join(''),`data-pe-section="${esc(section.section)}"`);group=[];lineCount=0};
+    for(const card of selected){const lines=JSON.stringify(card.value??null,null,2).split('\n').length+(card.precisionBoundary||[]).length+6;if(lineCount+lines>32)emit();group.push(card);lineCount+=lines;}emit();
+    if(!section.pfigs.length&&!selected.length&&section.section!=='SEC-10')html+=page(`<p>${zh?'此章节尚无已知证据；未知保持开放。':'No evidence for this section yet. Unknowns remain open.'}</p>`,`data-pe-section="${esc(section.section)}" data-pe-sparse="true"`);
     if(section.section==='SEC-10')html+=page(`<ul>${(profileView.boundaries||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p>${zh?'评估结果不自动成为当下现实，也不自动保存。':'Assessment evidence does not automatically become Current Reality and is not saved automatically.'}</p>`,`data-pe-section="SEC-10"`);
   }
   return `<div class="pub-report pe-dossier" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-review-preview="${reviewPreview}">${html}</div>`;

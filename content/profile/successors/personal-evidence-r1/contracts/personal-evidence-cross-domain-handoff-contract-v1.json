@@ -1,0 +1,37 @@
+{
+  "work": "PRD-W8",
+  "status": "PRODUCER_READY_TARGET_ADMISSION_REQUIRED",
+  "requiredFields": ["purpose", "targetDomain", "selectedEvidenceRefs", "consentRef", "time", "participantRef"],
+  "explicitTargetDomainConsentRequired": true,
+  "personalRealityConsentDoesNotAuthorizeOtherDomains": true,
+  "automaticPersistence": false,
+  "automaticFactPromotion": false,
+  "relationship": {
+    "ownerContract": "content/profile/relationship/contracts/relationship-profile-evidence-contract-v1.json",
+    "lane": "SEPARATE_PROFILE_EVIDENCE_LANE",
+    "mustNotBecome": "REL-W4_METHOD_COMPOSITION",
+    "participantIdentityMustRemainDistinct": true,
+    "newComparisonSemanticsCreated": false,
+    "compatibilityPercentage": false,
+    "partnerHiddenStateInference": false,
+    "relationshipFailurePrediction": false,
+    "stayLeaveDirective": false
+  },
+  "career": {
+    "target": "PERSONAL_REALITY_CAREER_CONTEXT",
+    "newCareerRuntimeCreated": false,
+    "interestIsAbility": false,
+    "interestIsJobFit": false,
+    "interestIsEmployability": false,
+    "interestIsCareerDestiny": false
+  },
+  "financial": {
+    "ownerContract": "content/financial/analysis-runtime/contracts/financial-analysis-input-contract-v1.json",
+    "output": "CONTEXT_PROJECTION_ONLY",
+    "farAdmission": false,
+    "fdrMutation": false,
+    "fcrMutation": false,
+    "assetOrLiabilityOrCashflowMutation": false,
+    "financialRecommendation": false
+  }
+}

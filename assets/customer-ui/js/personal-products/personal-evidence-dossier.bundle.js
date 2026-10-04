@@ -107,10 +107,21 @@ function renderPersonalEvidenceDossier({ dossier, profileView, locale = "en", cu
   for (const section of dossier.sections) {
     html += staticPage(section.master);
     for (const fig of section.pfigs) html += page(renderPersonalEvidenceFigure(fig, { locale }), `data-pe-section="${esc2(section.section)}"`);
-    const refs = new Set(section.pfigs.flatMap((f) => f.evidenceRefs || []));
-    const selected = section.section === "SEC-02" ? cards : section.section === "SEC-08" ? cards.filter((c) => c.domainId === "FINANCIAL_CAPABILITY" || c.sourceClass === "EXTERNAL_PROFILE_RESULT") : cards.filter((c) => refs.has(c.signalRef));
-    for (const card of selected) html += page(rows(card), `data-pe-section="${esc2(section.section)}"`);
-    if (!section.pfigs.length && !selected.length) html += page(`<p>${zh2 ? "\u6B64\u7AE0\u8282\u5C1A\u65E0\u5DF2\u77E5\u8BC1\u636E\uFF1B\u672A\u77E5\u4FDD\u6301\u5F00\u653E\u3002" : "No evidence for this section yet. Unknowns remain open."}</p>`, `data-pe-section="${esc2(section.section)}" data-pe-sparse="true"`);
+    const selected = section.section === "SEC-02" ? cards : section.section === "SEC-08" ? cards.filter((c) => String(c.domainId).startsWith("FINANCIAL_CAPABILITY") || c.sourceClass === "EXTERNAL_PROFILE_RESULT") : [];
+    let group = [], lineCount = 0;
+    const emit = () => {
+      if (group.length) html += page(group.map(rows).join(""), `data-pe-section="${esc2(section.section)}"`);
+      group = [];
+      lineCount = 0;
+    };
+    for (const card of selected) {
+      const lines = JSON.stringify(card.value ?? null, null, 2).split("\n").length + (card.precisionBoundary || []).length + 6;
+      if (lineCount + lines > 32) emit();
+      group.push(card);
+      lineCount += lines;
+    }
+    emit();
+    if (!section.pfigs.length && !selected.length && section.section !== "SEC-10") html += page(`<p>${zh2 ? "\u6B64\u7AE0\u8282\u5C1A\u65E0\u5DF2\u77E5\u8BC1\u636E\uFF1B\u672A\u77E5\u4FDD\u6301\u5F00\u653E\u3002" : "No evidence for this section yet. Unknowns remain open."}</p>`, `data-pe-section="${esc2(section.section)}" data-pe-sparse="true"`);
     if (section.section === "SEC-10") html += page(`<ul>${(profileView.boundaries || []).map((x) => `<li>${esc2(x)}</li>`).join("")}</ul><p>${zh2 ? "\u8BC4\u4F30\u7ED3\u679C\u4E0D\u81EA\u52A8\u6210\u4E3A\u5F53\u4E0B\u73B0\u5B9E\uFF0C\u4E5F\u4E0D\u81EA\u52A8\u4FDD\u5B58\u3002" : "Assessment evidence does not automatically become Current Reality and is not saved automatically."}</p>`, `data-pe-section="SEC-10"`);
   }
   return `<div class="pub-report pe-dossier" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-review-preview="${reviewPreview}">${html}</div>`;

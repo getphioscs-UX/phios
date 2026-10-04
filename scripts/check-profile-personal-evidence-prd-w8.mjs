@@ -16,4 +16,5 @@ const context=buildPersonalEvidenceFinancialContext({profileView:view,selectedEv
 assert.equal(context.contextualEvidence[0].nativeValue.adaptedIndex,42);
 assert.equal(context.fdrMutation,false);assert.equal(context.fcrMutation,false);assert.equal(context.farAdmission,false);
 assert.equal(context.contextualEvidence[0].realityFact,false);
+assert.throws(()=>buildPersonalEvidenceFinancialContext({profileView:view,selectedEvidenceRefs:['EXTERNAL-MBTI']}),/CONTEXT_NOT_ADMITTED/);
 console.log('PRD_W8_CROSS_DOMAIN_HANDOFF = PASS');

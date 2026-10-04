@@ -110,10 +110,13 @@ export function preparePersonalEvidenceDomainHandoff({bundle,targetDomain,purpos
     targetMutation:false,automaticPersistence:false,contextProjectionOnly:true,governance:lane.governance});
 }
 
-export function buildPersonalEvidenceFinancialContext({profileView,selectedEvidenceRefs=[]}={}){
+export function buildPersonalEvidenceFinancialContext({profileView,selectedEvidenceRefs=[],visualProjection=null}={}){
   if(profileView?.schemaVersion!=='PHI-OS-PROGRESSIVE-PROFILE-VIEW-v1')throw new Error('PERSONAL_EVIDENCE_PROFILE_VIEW_REQUIRED');
   const cards=list(profileView.signalCards).filter(x=>unique(selectedEvidenceRefs).includes(x.signalRef));
   if(cards.length!==unique(selectedEvidenceRefs).length)throw new Error('PERSONAL_EVIDENCE_FINANCIAL_SELECTION_INVALID');
+  const decision=figBy(visualProjection,'PFIG-008');
+  const decisionRefs=decision?.state==='READY'?list(decision.evidenceRefs):[];
+  if(cards.some(x=>!String(x.domainId).startsWith('FINANCIAL_CAPABILITY')&&!decisionRefs.includes(x.signalRef)))throw new Error('PERSONAL_EVIDENCE_FINANCIAL_CONTEXT_NOT_ADMITTED');
   return freeze({participantRef:profileView.participantRef,financialCapabilityEvidenceRefs:cards.filter(x=>String(x.domainId).startsWith('FINANCIAL_CAPABILITY')).map(x=>x.signalRef),
     contextualEvidence:cards.map(preservePersonalEvidenceReference),limitations:['CONTEXT_ONLY','NOT_FDR_FACT','NOT_FCR_CALCULATION','NOT_FAR_INPUT','NOT_FINANCIAL_ADVICE'],
     farAdmission:false,fdrMutation:false,fcrMutation:false,automaticPersistence:false});

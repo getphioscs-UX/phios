@@ -25,6 +25,7 @@ assert.throws(()=>assemblePersonalEvidenceReport({...input,customerReference:'PE
 assert.throws(()=>assemblePersonalEvidenceReport({...input,publicationProjection:{...projection,consentReferences:[]}}),/CONSENT_REQUIRED/);
 const ir=await buildPersonalEvidencePublicationIr({profileView:view,report,publicationProjection:projection});
 assert.equal(ir.blocks[0].sourceRefs[0],'SOURCE-A');
+assert.deepEqual(ir.blocks[0].semanticOperators,[]);
 assert.equal(ir.blocks[0].snapshotLineage.reportReference,report.reportReference);
 const dossier=buildPersonalEvidenceDossierProjection({visualProjection,participantRef:'PERSON-A'});
 const html=renderPersonalEvidenceDossier({dossier,profileView:view,reviewPreview:true});

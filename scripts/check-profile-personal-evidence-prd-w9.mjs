@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {resolveReportProduct,eligibleReportIds,mapReportEntitlements,quoteReportPresentation,requirePurchasedReportPresentation} from '../functions/pws/commercial/report-successor-contract.js';
+import {REPORT_COMMERCE_CONTRACT,resolveReportProduct,eligibleReportIds,mapReportEntitlements,quoteReportPresentation,requirePurchasedReportPresentation} from '../functions/pws/commercial/report-successor-contract.js';
 const legacy=resolveReportProduct('PROFILE_FULL_REPORT');
 assert.equal(legacy.kind,'LEGACY_COMPATIBILITY');
 assert.equal(legacy.newPrimaryPromotion,false);assert.equal(legacy.newPurchaseDefault,false);
 assert.equal(legacy.methodId,null);
 assert.equal(mapReportEntitlements('PROFILE_FULL_REPORT').entitlements[0].entitlementKey,'report:profile:full');
+assert.equal(mapReportEntitlements('PROFILE_FULL_REPORT').entitlements[0].methodId,'PROFILE');
+assert.ok(REPORT_COMMERCE_CONTRACT.eligibilityRegistries.find(x=>x.registryId==='standard-myr39-v1').productIds.includes('PROFILE_FULL_REPORT'));
 for(const id of ['BUNDLE_2','BUNDLE_3','BUNDLE_5PLUS'])assert.ok(!eligibleReportIds(id).includes('PROFILE_FULL_REPORT'));
 assert.throws(()=>mapReportEntitlements('BUNDLE_2',['PROFILE_FULL_REPORT','BAZI_FULL_REPORT']),/INELIGIBLE/);
 assert.throws(()=>quoteReportPresentation('PROFILE_FULL_REPORT',{reportLanguageMode:'SINGLE',reportLocale:'en'}),/LEGACY_NEW_PURCHASE_DISABLED/);
