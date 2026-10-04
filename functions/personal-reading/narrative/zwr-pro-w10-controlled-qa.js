@@ -50,14 +50,15 @@ export async function buildZwrProW10DeterministicCase({fixtureId,input}={}){
  const enDigest=await sha256Stable(enStructure),zhDigest=await sha256Stable(zhStructure);
  if(enDigest!==zhDigest)throw Error('ZWR_PRO_W10_BILINGUAL_AUTHORITY_DRIFT:'+fixtureId);
  if(enPack.subjectBinding.inputFingerprint!==zhPack.subjectBinding.inputFingerprint)throw Error('ZWR_PRO_W10_INPUT_FINGERPRINT_DRIFT:'+fixtureId);
- const unknownCount=enPack.wholeChartTechnicalSnapshot.unknowns.length;
+ const sourceUnknownCount=enEvidence.structured.unknowns.length,unknownCount=enPack.wholeChartTechnicalSnapshot.unknowns.length,zhUnknownCount=zhPack.wholeChartTechnicalSnapshot.unknowns.length;
+ if(unknownCount!==sourceUnknownCount||zhUnknownCount!==sourceUnknownCount)throw Error('ZWR_PRO_W10_UNKNOWN_PRESERVATION_DRIFT:'+fixtureId);
  const timingLayers=[...new Set(enPack.wholeChartTechnicalSnapshot.timing.map(t=>t.layer))].sort();
  const tokens=structuralTokens(enEvidence.structured);
  return deepFreeze({
   fixtureId,subjectId,inputFingerprint:enPack.subjectBinding.inputFingerprint,
   authorityDigest:enDigest,structuralTokens:tokens,
   structuralSignature:await sha256Stable(tokens),
-  unknownCount,timingLayers,
+  sourceUnknownCount,unknownCount,zhUnknownCount,timingLayers,
   sectionCountEn:enPack.sections.length,sectionCountZhHans:zhPack.sections.length,
   evidence:enEvidence
  });
@@ -90,7 +91,7 @@ export async function summarizeZwrProW10Campaign(cases){
   uniqueStructuralSignatures:uniqueStructural,
   allTenSections:cases.every(c=>c.sectionCountEn===10&&c.sectionCountZhHans===10),
   timingLayersBounded:cases.every(c=>c.timingLayers.every(x=>['NATAL','DA_XIAN','LIU_NIAN'].includes(x))),
-  unknownsPreserved:cases.every(c=>c.unknownCount>=0),
+  unknownsPreserved:cases.every(c=>c.unknownCount===c.sourceUnknownCount&&c.zhUnknownCount===c.sourceUnknownCount),
   sentinels,
   providerCalls:0,
   liveCompositionExecuted:false,
