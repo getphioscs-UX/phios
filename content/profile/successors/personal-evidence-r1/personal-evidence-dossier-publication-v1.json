@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-EVIDENCE-DOSSIER-PUBLICATION-v1.0.0",
+  "work": "PRD-W6",
+  "baselineCommit": "0ab7c6de9db3749913085de77a852957577128b8",
+  "status": "RR_READY_PUBLICATION_PROJECTION_ACTIVE",
+  "reportIdentity": {
+    "reportCode": "PERSONAL_EVIDENCE_DOSSIER",
+    "customerName": {
+      "en": "Personal Evidence Dossier",
+      "zh-Hans": "个人证据档案"
+    },
+    "reportClass": "EVIDENCE_DOSSIER_NOT_METHOD_REPORT",
+    "methodId": null
+  },
+  "authorities": {
+    "evidenceTruthOwner": "PROFILE_PPR",
+    "visualProjectionOwner": "PVP_R1",
+    "reportAssemblyOwner": "RR",
+    "presentationOwner": "CPR",
+    "releaseOwner": "RR_RELEASE_AUTHORITY"
+  },
+  "inputs": [
+    "PHI-OS-PROGRESSIVE-PROFILE-VIEW-v1",
+    "PHI-OS-PROFILE-CUSTOMER-VISUAL-PROJECTION-v1.0.0",
+    "PHI-OS-PERSONAL-EVIDENCE-DOSSIER-PROJECTION-v1.0.0"
+  ],
+  "publicationModel": {
+    "staticEditorialPages": "P01-P05_REFERENCE_ONLY",
+    "sectionMasters": "SEC-01..SEC-10_REFERENCE_ONLY",
+    "dynamicEvidence": "PFIG_AND_PROFILE_SIGNAL_REFERENCES_ONLY",
+    "rawSectionContentWrittenByProjection": false,
+    "rrCanonicalReportCreatedByThisWork": false,
+    "releasePerformedByThisWork": false
+  },
+  "allowedChannels": [
+    "HTML",
+    "PDF",
+    "WORKSPACE"
+  ],
+  "rules": {
+    "fullStaticPageEditorialCopyMayBeRepeatedInHtmlBody": false,
+    "sectionMasterEditorialCopyMayBeRepeatedInDynamicBody": false,
+    "missingEvidenceRemainsUnknown": true,
+    "reportMayNotCreateMeaning": true,
+    "reportMayNotCreateProfessionalJudgment": true,
+    "reportMayNotCreateRecommendation": true,
+    "liveProviderWritingRequired": false,
+    "liveLlmWritingRequired": false
+  }
+}
