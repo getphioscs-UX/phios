@@ -61,6 +61,13 @@ internalRuntime.paragraphs[0].text='运行时系统会在这里处理候选状�
 const internalRuntimeVerdict=await verifyZwrProReferenceQualityW6({authorityPack:results['zh-Hans'].pack,candidate:internalRuntime});
 assert(!internalRuntimeVerdict.accepted&&internalRuntimeVerdict.reasons.includes('GOVERNANCE_OR_PROCESS_PROSE'),'W6 must reject internal runtime jargon');
 
+const s03en=structuredClone(results.en.candidates.find(c=>c.sectionId==='S03'));
+const s03enVerdict=await verifyZwrProReferenceQualityW6({authorityPack:results.en.pack,candidate:s03en});
+assert(s03enVerdict.accepted,'W6 must allow gold-reference star anchor phrasing: '+s03enVerdict.reasons.join(','));
+const s03Glossary=structuredClone(s03en);
+s03Glossary.paragraphs[0].text='Huo Xing means rapid activation. Lian Zhen means boundary evaluation. Qi Sha means decisive cutting. '+s03Glossary.paragraphs[0].text;
+const s03GlossaryVerdict=await verifyZwrProReferenceQualityW6({authorityPack:results.en.pack,candidate:s03Glossary});
+assert(!s03GlossaryVerdict.accepted&&s03GlossaryVerdict.reasons.includes('STAR_GLOSSARY_PATTERN'),'W6 must reject excessive star-dictionary prose');
 const bad=structuredClone(results.en.candidates[0]);bad.subjectBinding={...bad.subjectBinding,subjectId:'FOREIGN'};
 const bad5=await verifyZwrProSectionW5({authorityPack:results.en.pack,candidate:bad});
 assert(!bad5.accepted&&bad5.reasons.includes('SUBJECT_BINDING_MISMATCH'),'W5 must reject wrong subject');
