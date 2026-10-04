@@ -48,9 +48,9 @@ export function buildProfileCustomerVisualProjection({progressiveView=null,custo
   const costs=[...confirmedCosts,...tensionCosts];
   const p003=(resources.length||costs.length)?fig('PFIG-003','PHI-OS-PFIG-003-PROFILE-STRENGTH-COST-MAP-IR-v1.0.0',{en:'Resources & costs','zh-Hans':'资源与成本'},{resources,costs},'READY',[...resources,...costs].map(signalRef),['OBSERVED_RESOURCE_NOT_OBJECTIVE_STRENGTH','NO_HIGH_LOW_SCORE_INFERENCE']):unknown('PFIG-003','PHI-OS-PFIG-003-PROFILE-STRENGTH-COST-MAP-IR-v1.0.0',{en:'Resources & costs','zh-Hans':'资源与成本'},['CONFIRMATION_OR_TENSION_EVIDENCE_REQUIRED']);
 
-  const contextConfirms=confirms.filter(x=>x.contextType&&x.contextType!=='GENERAL');
+  const contextConfirms=confirms.filter(x=>x.contextType&&x.contextType!=='GENERAL'&&Boolean(x.label||x.title||x.statement||x.note));
   const ctxs=contexts(contextConfirms);
-  const hasContext=Boolean(output.contextEvidence)||contextConfirms.length>0;
+  const hasContext=ctxs.length>0&&contextConfirms.length>0;
   const p004=hasContext?fig('PFIG-004','PHI-OS-PFIG-004-PROFILE-CONTEXT-VARIATION-IR-v1.0.0',{en:'Context variation','zh-Hans':'情境变化'},{contexts:ctxs,observations:clone(contextConfirms),contextEvidence:clone(output.contextEvidence)},'READY',contextConfirms.map(signalRef),['NO_CONTEXT_PERSONALITY_TYPE','UNOBSERVED_CONTEXTS_UNKNOWN']):unknown('PFIG-004','PHI-OS-PFIG-004-PROFILE-CONTEXT-VARIATION-IR-v1.0.0',{en:'Context variation','zh-Hans':'情境变化'},['EXPLICIT_CONTEXT_EVIDENCE_REQUIRED']);
 
   const cross=list(progressiveView?.crossSource?.perspectives||output.contextEvidence?.currentReality?.crossSource?.perspectives||output.contextEvidence?.crossSource?.perspectives);
