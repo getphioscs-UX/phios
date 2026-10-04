@@ -42,6 +42,16 @@ for(const locale of ['zh-Hans','en']){
 const w8=await verifyZwrProBilingualParityW8({zhCandidates:results['zh-Hans'].candidates,enCandidates:results.en.candidates,zhAuthorityPack:results['zh-Hans'].pack,enAuthorityPack:results.en.pack});
 assert(w8.accepted,'W8 '+w8.reasons.join(','));
 
+const zhS03Pack=results['zh-Hans'].pack,zhS03=structuredClone(results['zh-Hans'].candidates.find(c=>c.sectionId==='S03'));
+const falsePositiveText='命宫七杀旺坐命，旁见地空、天魁；这里的旺只属于七杀。';
+zhS03.paragraphs[0].text=falsePositiveText;
+const fp=await verifyZwrProSectionW5({authorityPack:zhS03Pack,candidate:zhS03});
+assert(fp.accepted,'W5 must not attach Qi Sha brightness to Di Kong: '+fp.reasons.join(','));
+const badBrightness=structuredClone(results['zh-Hans'].candidates.find(c=>c.sectionId==='S03'));
+badBrightness.paragraphs[0].text='地空旺。'+badBrightness.paragraphs[0].text;
+const badBrightnessVerdict=await verifyZwrProSectionW5({authorityPack:zhS03Pack,candidate:badBrightness});
+assert(!badBrightnessVerdict.accepted&&badBrightnessVerdict.reasons.some(x=>x==='UNKNOWN_BRIGHTNESS_INFERENCE:DI_KONG'),'W5 must reject explicit unknown brightness assignment');
+
 const bad=structuredClone(results.en.candidates[0]);bad.subjectBinding={...bad.subjectBinding,subjectId:'FOREIGN'};
 const bad5=await verifyZwrProSectionW5({authorityPack:results.en.pack,candidate:bad});
 assert(!bad5.accepted&&bad5.reasons.includes('SUBJECT_BINDING_MISMATCH'),'W5 must reject wrong subject');
