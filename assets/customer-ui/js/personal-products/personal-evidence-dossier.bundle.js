@@ -7,6 +7,34 @@ var add = (key, en, zh2) => {
   terms[en.toUpperCase()] = [en, zh2];
 };
 [
+  ["PATTERN_RECOGNITION", "Pattern recognition", "\u6A21\u5F0F\u8BC6\u522B"],
+  ["QUANTITATIVE_REASONING_SELF_VIEW", "Self-reported quantitative reasoning", "\u91CF\u5316\u63A8\u7406\u81EA\u9648"],
+  ["ABSTRACT_REASONING_SELF_VIEW", "Self-reported abstract reasoning", "\u62BD\u8C61\u63A8\u7406\u81EA\u9648"],
+  ["RELATIONAL_REASONING_SELF_VIEW", "Self-reported relational reasoning", "\u5173\u7CFB\u63A8\u7406\u81EA\u9648"],
+  ["METACOGNITIVE_AWARENESS", "Metacognitive awareness", "\u5143\u8BA4\u77E5\u89C9\u5BDF"],
+  ["SELF_AWARENESS", "Self-awareness", "\u81EA\u6211\u89C9\u5BDF"],
+  ["EMOTIONAL_REGULATION", "Emotional regulation", "\u60C5\u7EEA\u8C03\u8282"],
+  ["OTHER_AWARENESS", "Awareness of others", "\u4ED6\u4EBA\u89C9\u5BDF"],
+  ["EMPATHY_PERSPECTIVE_TAKING", "Empathy and perspective-taking", "\u5171\u60C5\u4E0E\u6362\u4F4D\u601D\u8003"],
+  ["RELATIONSHIP_REGULATION", "Relationship regulation", "\u5173\u7CFB\u8C03\u8282"],
+  ["PRESSURE_TOLERANCE", "Pressure tolerance", "\u538B\u529B\u627F\u53D7"],
+  ["RECOVERY", "Recovery", "\u6062\u590D"],
+  ["FLEXIBILITY", "Flexibility", "\u7075\u6D3B\u6027"],
+  ["SELF_REGULATION", "Self-regulation", "\u81EA\u6211\u8C03\u8282"],
+  ["SUPPORT_USE", "Use of support", "\u652F\u6301\u8D44\u6E90\u4F7F\u7528"],
+  ["SLEEP_RECOVERY", "Sleep and recovery", "\u7761\u7720\u4E0E\u6062\u590D"],
+  ["EATING_BEHAVIOUR", "Eating behaviour", "\u996E\u98DF\u884C\u4E3A"],
+  ["ACTIVITY_LIFESTYLE", "Activity and lifestyle", "\u6D3B\u52A8\u4E0E\u751F\u6D3B\u65B9\u5F0F"],
+  ["BODY_AWARENESS", "Body awareness", "\u8EAB\u4F53\u89C9\u5BDF"],
+  ["ENVIRONMENT_FIT", "Environment fit", "\u73AF\u5883\u9002\u914D"],
+  ["FINANCIAL_KNOWLEDGE_SELF_VIEW", "Self-reported financial knowledge", "\u8D22\u52A1\u77E5\u8BC6\u81EA\u9648"],
+  ["VALUES_CLARITY", "Values clarity", "\u4EF7\u503C\u6E05\u6670\u5EA6"],
+  ["MEANING_PURPOSE", "Meaning and purpose", "\u610F\u4E49\u4E0E\u76EE\u6807"],
+  ["REFLECTIVE_AWARENESS", "Reflective awareness", "\u53CD\u601D\u89C9\u5BDF"],
+  ["INNER_COHERENCE", "Inner coherence", "\u5185\u5728\u4E00\u81F4\u6027"],
+  ["CONTRIBUTION_CONNECTION", "Contribution and connection", "\u8D21\u732E\u4E0E\u8FDE\u63A5"]
+].forEach((x) => add(...x));
+[
   ["CUSTOMER_SELF_REPORT", "Your self-report", "\u4F60\u7684\u81EA\u9648"],
   ["MEASURED_TASK_PERFORMANCE", "Observed task performance", "\u4EFB\u52A1\u8868\u73B0"],
   ["EXTERNAL_PROFILE_RESULT", "Imported external profile", "\u5BFC\u5165\u7684\u5916\u90E8\u6D4B\u8BC4"],
@@ -105,7 +133,18 @@ var add = (key, en, zh2) => {
   ["MORE", "More", "\u66F4\u591A"],
   ["CANNOT_TELL", "Cannot tell", "\u65E0\u6CD5\u5224\u65AD"],
   ["TRUE", "True", "\u6B63\u786E"],
-  ["FALSE", "False", "\u9519\u8BEF"]
+  ["FALSE", "False", "\u9519\u8BEF"],
+  ["MORE_THAN_RM110", "More than RM110", "\u591A\u4E8E RM110"],
+  ["EXACTLY_RM110", "Exactly RM110", "\u6B63\u597D RM110"],
+  ["LESS_THAN_RM110", "Less than RM110", "\u5C11\u4E8E RM110"],
+  ["HIGHER_RISK", "Higher risk", "\u98CE\u9669\u8F83\u9AD8"],
+  ["LOWER_RISK", "Lower risk", "\u98CE\u9669\u8F83\u4F4E"],
+  ["NO_RISK_DIFFERENCE", "No difference in risk", "\u98CE\u9669\u6CA1\u6709\u5DEE\u522B"],
+  ["GUARANTEED_RETURN", "Guaranteed return", "\u4FDD\u8BC1\u56DE\u62A5"],
+  ["RISE", "Rise", "\u4E0A\u6DA8"],
+  ["FALL", "Fall", "\u4E0B\u8DCC"],
+  ["STAY_SAME", "Stay the same", "\u4FDD\u6301\u4E0D\u53D8"],
+  ["NO_RELATIONSHIP", "No relationship", "\u6CA1\u6709\u5173\u8054"]
 ].forEach((x) => add(...x));
 [
   ["STANDARDIZED_SELF_REPORT", "Standardized self-report", "\u6807\u51C6\u5316\u81EA\u9648"],
@@ -135,6 +174,15 @@ var add = (key, en, zh2) => {
   ["Provider result supplied by customer", "Provider result supplied by customer", "\u5BA2\u6237\u63D0\u4F9B\u7684\u5916\u90E8\u6D4B\u8BC4\u7ED3\u679C"]
 ].forEach((x) => add(...x));
 [
+  ["What happened on this task sample.", "\u8FD9\u6B21\u4EFB\u52A1\u6837\u672C\u4E2D\u5B9E\u9645\u53D1\u751F\u7684\u8868\u73B0\u3002"],
+  ["Answers scored under an admitted questionnaire or external scoring method.", "\u4F9D\u636E\u5DF2\u51C6\u5165\u95EE\u5377\u6216\u5916\u90E8\u8BA1\u5206\u65B9\u5F0F\u6574\u7406\u7684\u81EA\u9648\u7ED3\u679C\u3002"],
+  ["How you describe yourself in this assessment.", "\u4F60\u5728\u8FD9\u6B21\u8BC4\u4F30\u4E2D\u5982\u4F55\u63CF\u8FF0\u81EA\u5DF1\u3002"],
+  ["A result you supplied from another provider; its provider identity stays visible.", "\u4F60\u4ECE\u5176\u4ED6\u63D0\u4F9B\u65B9\u5E26\u5165\u7684\u7ED3\u679C\uFF1B\u63D0\u4F9B\u65B9\u8EAB\u4EFD\u4F1A\u4E00\u76F4\u4FDD\u7559\u3002"],
+  ["An interpretive perspective, not a measured trait or scientific validation.", "\u4E00\u79CD\u8BE0\u91CA\u89C6\u89D2\uFF0C\u4E0D\u7B49\u540C\u4E8E\u6D4B\u91CF\u7279\u8D28\u6216\u79D1\u5B66\u9A8C\u8BC1\u3002"],
+  ["What you report is happening now.", "\u4F60\u6240\u62A5\u544A\u7684\u73B0\u5728\u6B63\u5728\u53D1\u751F\u4EC0\u4E48\u3002"],
+  ["Evidence supplied under a separate professional scope.", "\u5728\u72EC\u7ACB\u4E13\u4E1A\u8303\u56F4\u5185\u63D0\u4F9B\u7684\u8BC1\u636E\u3002"]
+].forEach(([en, zh2]) => add(en, en, zh2));
+[
   ["Each source keeps its own evidence class.", "\u4E0D\u540C\u6765\u6E90\u4FDD\u7559\u5404\u81EA\u7684\u8BC1\u636E\u7C7B\u522B\u3002"],
   ["No universal personality master score is created.", "\u4E0D\u4F1A\u751F\u6210\u603B\u4EBA\u683C\u5206\u6570\u3002"],
   ["Reasoning task performance is not IQ and is not a normed percentile.", "\u63A8\u7406\u4EFB\u52A1\u8868\u73B0\u4E0D\u662F IQ\uFF0C\u4E5F\u4E0D\u662F\u5E38\u6A21\u767E\u5206\u4F4D\u3002"],
@@ -149,6 +197,7 @@ var add = (key, en, zh2) => {
   ["Compared with Current Reality", "\u4E0E\u5F53\u4E0B\u73B0\u5B9E\u5BF9\u7167"],
   ["Adapted from the OECD/INFE Toolkit for Measuring Financial Literacy, Inclusion and Well-Being 2026. PHI OS has modified and shortened content; this is not an official OECD score or OECD-endorsed instrument.", "\u6839\u636E OECD/INFE 2026 \u5E74\u91D1\u878D\u7D20\u517B\u3001\u666E\u60E0\u91D1\u878D\u4E0E\u798F\u7949\u6D4B\u91CF\u5DE5\u5177\u6539\u7F16\u3002PHI OS \u5BF9\u5185\u5BB9\u8FDB\u884C\u4E86\u4FEE\u6539\u548C\u7F29\u51CF\uFF1B\u8FD9\u4E0D\u662F\u5B98\u65B9 OECD \u5206\u6570\uFF0C\u4E5F\u4E0D\u662F OECD \u8BA4\u53EF\u7684\u6D4B\u91CF\u5DE5\u5177\u3002"]
 ].forEach(([en, zh2]) => add(en, en, zh2));
+[["N1", "anxiety", "\u7126\u8651"], ["N2", "anger", "\u6124\u6012"], ["N3", "depression", "\u4F4E\u843D\u503E\u5411"], ["N4", "self consciousness", "\u81EA\u6211\u610F\u8BC6"], ["N5", "immoderation", "\u51B2\u52A8\u5931\u63A7"], ["N6", "vulnerability", "\u8106\u5F31\u6027"], ["E1", "friendliness", "\u53CB\u5584"], ["E2", "gregariousness", "\u5408\u7FA4"], ["E3", "assertiveness", "\u81EA\u4FE1\u8868\u8FBE"], ["E4", "activity level", "\u6D3B\u52A8\u6C34\u5E73"], ["E5", "excitement seeking", "\u5BFB\u6C42\u523A\u6FC0"], ["E6", "cheerfulness", "\u6109\u60A6"], ["O1", "imagination", "\u60F3\u8C61\u529B"], ["O2", "artistic interests", "\u827A\u672F\u5174\u8DA3"], ["O3", "emotionality", "\u60C5\u611F\u4F53\u9A8C"], ["O4", "adventurousness", "\u63A2\u7D22\u5C1D\u8BD5"], ["O5", "intellect", "\u667A\u6027"], ["O6", "liberalism", "\u5F00\u653E\u89C2\u5FF5"], ["A1", "trust", "\u4FE1\u4EFB"], ["A2", "morality", "\u8BDA\u5B9E"], ["A3", "altruism", "\u5229\u4ED6"], ["A4", "cooperation", "\u5408\u4F5C"], ["A5", "modesty", "\u8C26\u900A"], ["A6", "sympathy", "\u540C\u60C5"], ["C1", "self efficacy", "\u81EA\u6211\u6548\u80FD"], ["C2", "orderliness", "\u6761\u7406\u6027"], ["C3", "dutifulness", "\u8D23\u4EFB\u611F"], ["C4", "achievement striving", "\u6210\u5C31\u8FFD\u6C42"], ["C5", "self discipline", "\u81EA\u5F8B"], ["C6", "cautiousness", "\u8C28\u614E"]].forEach((x) => add(...x));
 function evidenceLabel(value, locale = "en") {
   if (value == null || value === "") return "";
   if (typeof value === "object") return value[locale] || value.en || "";

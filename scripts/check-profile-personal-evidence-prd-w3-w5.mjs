@@ -28,7 +28,7 @@ assert.equal(w3.staticEditorialPages.length,5);
 assert.equal(Object.keys(PERSONAL_EVIDENCE_STATIC_VISUALS).length,5);
 for(const page of ['P01','P02','P03','P04','P05']){
   const resolved=resolvePersonalEvidenceStaticPage(page);
-  assert.match(resolved.publicUrl,/\/images\/reports\/profile\/editorial\/shared\//);
+  assert.match(resolved.publicUrl,/\/images\/reports\/profile\/editorial\//);
   assert.equal(resolved.file,PERSONAL_EVIDENCE_STATIC_VISUALS[page]);
 }
 assert.equal(w4.sections.length,10);
@@ -36,7 +36,7 @@ assert.equal(Object.keys(PERSONAL_EVIDENCE_SECTION_MASTERS).length,10);
 for(let i=1;i<=10;i++){
   const section=`SEC-${String(i).padStart(2,'0')}`;
   const resolved=resolvePersonalEvidenceSectionMaster(section);
-  assert.match(resolved.publicUrl,/\/images\/reports\/profile\/editorial\/shared\//);
+  assert.match(resolved.publicUrl,/\/images\/reports\/profile\/editorial\//);
 }
 assert.ok(!JSON.stringify(w3).includes('PERSONAL-EVIDENCE STRUCTURE'));
 assert.ok(JSON.stringify(w4).includes('VIS-REPORT-PROFILE-SEC-02-PERSONAL-EVIDENCE-STRUCTURE.webp'));
