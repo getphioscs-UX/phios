@@ -25,7 +25,8 @@ export async function releaseControlledZiweiReport(context,candidate,{loadSubjec
  const owned=await requireZiweiEntitlement(context,candidate.locale);if(owned.purchase_id!==candidate.purchaseId)deny();
  await personAccess(identity.userId,candidate.personId,loadSubject);await intact(candidate);
  // Receipt is supplied by the server render verifier, never a customer route.
- if(renderVerification?.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||renderVerification.passed!==true||renderVerification.pageCount!==33)throw Error('REPORT_RENDER_VERIFICATION_REQUIRED');
+ const expectedPages=Number(candidate.snapshot?.semanticContent?.report?.totalPages||0);
+ if(!expectedPages||renderVerification?.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||renderVerification.passed!==true||renderVerification.pageCount!==expectedPages)throw Error('REPORT_RENDER_VERIFICATION_REQUIRED');
  const db=storage(context),digest=await sha256Stable(candidate),id='zwr-'+digest,key='controlled-ziwei/'+digest+'.json',now=new Date().toISOString();
  const metadata={scope:'CONTROLLED_QA_ONLY',customerId:identity.userId,personId:candidate.personId,locale:candidate.locale,purchaseId:candidate.purchaseId,snapshotId:candidate.snapshot.semanticSnapshotId,key,digest,releaseStatus:'ACTIVE',releasedAt:now,renderVerification};
  await context.env.PRIVATE_REPORTS.put(key,JSON.stringify(candidate),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
