@@ -11,6 +11,10 @@ const uniq=a=>[...new Set((Array.isArray(a)?a:[]).map(String))];
 const txKey=t=>[t.layer,t.palaceCode,t.targetStarCode,t.transformationCode].join(':');
 const reEscape=v=>String(v).replace(/[.*+?^\${}()|[\]\\]/g,'\\$&');
 
+const NEGATED_BOUNDARY=/(?:不能|不可|不应|不代表|不等于|不是|并非|不提供|不构成|不能把)|\b(?:not|never|cannot|does not|do not|is not|are not)\b/iu;
+function medicalInferenceLeak(value){
+ return String(value).split(/(?<=[。！？.!?])\s*/u).some(sentence=>MEDICAL.test(sentence)&&!NEGATED_BOUNDARY.test(sentence));
+}
 function unknownStateLeak(text,section){
  const unknown=(section?.technicalEvidence?.palaces||[]).flatMap(p=>(p.stars||[]).filter(s=>!s.stateKnown));
  const zhStates='庙|旺|得|利|平|陷',enStates='Miao|Wang|De|Li|Ping|Xian';
@@ -50,7 +54,7 @@ export async function verifyZwrProSectionW5({authorityPack,candidate}={}){
  const body=(candidate.paragraphs||[]).map(p=>p.text).join('\n');
  if(INTERNAL.test(body))reasons.push('INTERNAL_WORKFLOW_TOKEN_LEAK');
  if(GUARANTEE.test(body))reasons.push('GUARANTEED_OUTCOME');
- if(MEDICAL.test(body)&&candidate.sectionId==='S08')reasons.push('MEDICAL_DIAGNOSIS_OR_TREATMENT');
+ if(candidate.sectionId==='S08'&&medicalInferenceLeak(body))reasons.push('MEDICAL_DIAGNOSIS_OR_TREATMENT');
  if(FINANCIAL.test(body)&&candidate.sectionId==='S05')reasons.push('FINANCIAL_RECOMMENDATION');
  if(MONTH.test(body)&&['S09','S10'].includes(candidate.sectionId)&&!(section?.technicalEvidence?.timing||[]).some(t=>t.layer==='LIU_YUE'))reasons.push('UNADMITTED_MONTH_TIMING');
  const stateLeak=unknownStateLeak(body,section);if(stateLeak)reasons.push('UNKNOWN_BRIGHTNESS_INFERENCE:'+stateLeak);
