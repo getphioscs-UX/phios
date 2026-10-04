@@ -52,6 +52,15 @@ badBrightness.paragraphs[0].text='地空旺。'+badBrightness.paragraphs[0].text
 const badBrightnessVerdict=await verifyZwrProSectionW5({authorityPack:zhS03Pack,candidate:badBrightness});
 assert(!badBrightnessVerdict.accepted&&badBrightnessVerdict.reasons.some(x=>x==='UNKNOWN_BRIGHTNESS_INFERENCE:DI_KONG'),'W5 must reject explicit unknown brightness assignment');
 
+const s04zh=structuredClone(results['zh-Hans'].candidates.find(c=>c.sectionId==='S04'));
+s04zh.paragraphs[0].text='当系统已经无法继续靠旧方式运行时，需要重新建立结构。'+s04zh.paragraphs[0].text;
+const s04zhVerdict=await verifyZwrProReferenceQualityW6({authorityPack:results['zh-Hans'].pack,candidate:s04zh});
+assert(s04zhVerdict.accepted,'W6 must allow ordinary Chinese “运行时” grammar: '+s04zhVerdict.reasons.join(','));
+const internalRuntime=structuredClone(results['zh-Hans'].candidates.find(c=>c.sectionId==='S04'));
+internalRuntime.paragraphs[0].text='运行时系统会在这里处理候选状态。'+internalRuntime.paragraphs[0].text;
+const internalRuntimeVerdict=await verifyZwrProReferenceQualityW6({authorityPack:results['zh-Hans'].pack,candidate:internalRuntime});
+assert(!internalRuntimeVerdict.accepted&&internalRuntimeVerdict.reasons.includes('GOVERNANCE_OR_PROCESS_PROSE'),'W6 must reject internal runtime jargon');
+
 const bad=structuredClone(results.en.candidates[0]);bad.subjectBinding={...bad.subjectBinding,subjectId:'FOREIGN'};
 const bad5=await verifyZwrProSectionW5({authorityPack:results.en.pack,candidate:bad});
 assert(!bad5.accepted&&bad5.reasons.includes('SUBJECT_BINDING_MISMATCH'),'W5 must reject wrong subject');
