@@ -5,8 +5,8 @@ import {createCustomerDeliverySnapshot} from '../../functions/personal-reading/n
 import {css,fitCode} from './render-assets.generated.js';
 
 const origin='https://qa.phios-github.pages.dev';
-const EXPECTED_ZIWEI_PHYSICAL_PAGES=33;
-const ALLOWED_ZIWEI_COMPOSITIONS=new Set(['ZIWEI-PRODUCTION-COMPOSER-V1','ZIWEI-NATURAL-COMPOSER-R4']);
+const ZIWEI_PAGE_COUNTS=Object.freeze({'ZIWEI-PRODUCTION-COMPOSER-V1':33,'ZIWEI-NATURAL-COMPOSER-R4':33,'ZIWEI-PROFESSIONAL-SYNTHESIS-R5':39});
+const ALLOWED_ZIWEI_COMPOSITIONS=new Set(Object.keys(ZIWEI_PAGE_COUNTS));
 const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),b=>b.toString(16).padStart(2,'0')).join('');
 
 export default {
@@ -18,7 +18,8 @@ export default {
    const reader=request.body?.getReader();if(!reader)throw Error('BODY_REQUIRED');let size=0,raw='';const decoder=new TextDecoder();
    for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();throw Error('TOO_LARGE');}raw+=decoder.decode(value,{stream:true});}
    const {candidate,method,compositionVersion}=JSON.parse(raw+decoder.decode());
-   if(method!=='ZWR'||!ALLOWED_ZIWEI_COMPOSITIONS.has(compositionVersion)||compositionVersion!==candidate?.snapshot?.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||!['en','zh-Hans'].includes(candidate.locale)||candidate.snapshot?.methodId!=='ZWR'||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
+   const expectedPageCount=ZIWEI_PAGE_COUNTS[compositionVersion]||0;
+   if(method!=='ZWR'||!ALLOWED_ZIWEI_COMPOSITIONS.has(compositionVersion)||!expectedPageCount||compositionVersion!==candidate?.snapshot?.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||!['en','zh-Hans'].includes(candidate.locale)||candidate.snapshot?.methodId!=='ZWR'||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
 
    stage='COMPOSE';
    const body=finalizeZiweiNavigation(renderPublicationReport(candidate.snapshot.semanticContent.report),candidate.locale).replaceAll('src="/assets/',`src="${origin}/assets/`);
@@ -59,10 +60,10 @@ export default {
      brokenImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).length,
      undefinedText:/undefined|\[object Object\]/.test(document.querySelector('main').innerText)
     };
-   },EXPECTED_ZIWEI_PHYSICAL_PAGES);
+   },expectedPageCount);
 
    stage='VERIFY';
-   if(measured.pageCount!==EXPECTED_ZIWEI_PHYSICAL_PAGES||!measured.pageSequenceValid||measured.hiddenOrZeroGeometryCount||measured.overflowCount||measured.brokenImages||measured.undefinedText||errors.length)throw Error('RENDER_VERIFICATION_FAILED');
+   if(measured.pageCount!==expectedPageCount||!measured.pageSequenceValid||measured.hiddenOrZeroGeometryCount||measured.overflowCount||measured.brokenImages||measured.undefinedText||errors.length)throw Error('RENDER_VERIFICATION_FAILED');
 
    // The 24-report admission campaign separately proves Chromium/Edge PDF pagination
    // at 33 pages. Customer release verifies the deployed physical DOM contract
