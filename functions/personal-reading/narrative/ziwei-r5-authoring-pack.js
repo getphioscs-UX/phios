@@ -155,6 +155,7 @@ export async function buildZiweiR5AuthoringPack({evidence,locale}={}){
  }
  return Object.freeze({
   schemaVersion:ZIWEI_R5_AUTHORING_PACK_VERSION,work:'ZIWEI-R5-PROFESSIONAL-SYNTHESIS-AUTHORING',locale,
+  subjectBinding:Object.freeze({subjectId:s.subjectId,subjectKey:s.subjectKey,inputFingerprint:s.inputFingerprint,targetContext:s.targetContext||null,sourceDigests:Object.freeze({...s.sourceDigests})}),
   sourceVersion:ZIWEI_PROFESSIONAL_SYNTHESIS_R5_VERSION,sectionCount:sections.length,
   wholeChartTechnicalSnapshot:buildWholeChartTechnicalSnapshot(s,locale),
   sections:Object.freeze(sections),
