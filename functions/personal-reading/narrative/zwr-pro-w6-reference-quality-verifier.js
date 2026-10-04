@@ -10,7 +10,10 @@ const CUSTOMER=/\b(?:you|your|this chart)\b|(?:你|你的|这张盘|命盘)/iu;
 function units(v,l){const x=String(v||'');return l==='en'?x.trim().split(/\s+/).filter(Boolean).length:[...x.replace(/\s/g,'')].length;}
 function sentences(v,l){const x=String(v||'');return l==='en'?(x.match(/[.!?](?:\s|$)/g)||[]).length:(x.match(/[。！？]/g)||[]).length;}
 function normalize(v){return String(v||'').normalize('NFKC').toLowerCase().replace(/\s+/g,' ').replace(/[“”"'‘’。，、；：!?！？;:]/g,'').trim();}
-function referenceMetric(section,locale){const ps=section.paragraphs||[],total=ps.reduce((n,p)=>n+units(p,locale),0);return {paragraphs:ps.length,total,avg:Math.round(total/Math.max(1,ps.length))};}
+function referenceMetric(section,locale){
+ const ps=section.paragraphs||[],total=ps.reduce((n,p)=>n+units(p,locale),0),sentenceCounts=ps.map(p=>sentences(p,locale)),singleSentenceUnits=ps.filter((p,i)=>sentenceCounts[i]<2).map(p=>units(p,locale));
+ return {paragraphs:ps.length,total,avg:Math.round(total/Math.max(1,ps.length)),singleSentenceParagraphs:singleSentenceUnits.length,minSingleSentenceUnits:singleSentenceUnits.length?Math.min(...singleSentenceUnits):null};
+}
 function exactReferenceCopy(body,reference){const refSentences=(reference.paragraphs||[]).flatMap(p=>String(p).split(/(?<=[.!?。！？])\s*/u)).map(normalize).filter(x=>x.length>=20);const candidate=String(body).split(/(?<=[.!?。！？])\s*/u).map(normalize).filter(x=>x.length>=20);return candidate.find(x=>refSentences.includes(x))||null;}
 
 export async function verifyZwrProReferenceQualityW6({authorityPack,candidate}={}){
@@ -26,8 +29,12 @@ export async function verifyZwrProReferenceQualityW6({authorityPack,candidate}={
  const minTotal=Math.floor(m.total*(nav?0.65:0.68)),maxTotal=Math.ceil(m.total*(nav?1.5:1.45));
  if(total<minTotal)reasons.push('REFERENCE_DEPTH_TOO_THIN');
  if(total>maxTotal)reasons.push('REFERENCE_DEPTH_TOO_DENSE');
- if(rows.some(r=>units(r.text,locale)<(locale==='en'?35:55)))reasons.push('PARAGRAPH_TOO_THIN');
- if(rows.some(r=>sentences(r.text,locale)<2))reasons.push('PARAGRAPH_NOT_DEVELOPED');
+ const absoluteMin=locale==='en'?35:55;
+ if(rows.some(r=>units(r.text,locale)<absoluteMin))reasons.push('PARAGRAPH_TOO_THIN');
+ const singleRows=rows.filter(r=>sentences(r.text,locale)<2);
+ if(singleRows.length>m.singleSentenceParagraphs)reasons.push('PARAGRAPH_FRAGMENTATION_ABOVE_REFERENCE');
+ const permittedSingleMin=m.minSingleSentenceUnits??Number.POSITIVE_INFINITY;
+ if(singleRows.some(r=>units(r.text,locale)<Math.max(absoluteMin,Math.floor(permittedSingleMin*.9))))reasons.push('SINGLE_SENTENCE_PARAGRAPH_TOO_THIN');
  if(GENERIC.test(body))reasons.push('GOVERNANCE_OR_PROCESS_PROSE');
  const glossaryHits=(body.match(GLOSSARY)||[]).length;if(glossaryHits>1)reasons.push('STAR_GLOSSARY_PATTERN');
  if(!nav&&!TECH.test(body))reasons.push('TECHNICAL_GROUNDING_TOO_LOW');
@@ -41,7 +48,7 @@ export async function verifyZwrProReferenceQualityW6({authorityPack,candidate}={
  if(authorityPack.subjectBinding?.subjectId!=='ZPA-CONTROLLED-01'){
   const copied=exactReferenceCopy(body,reference);if(copied)reasons.push('REFERENCE_SENTENCE_COPY');
  }
- const seed={schemaVersion:'ZWR-PRO-W6-REFERENCE-QUALITY-VERIFICATION-v1',verifierVersion:ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,candidateDigest:candidate.candidateDigest,accepted:reasons.length===0,metrics:{paragraphs:rows.length,totalUnits:total,referenceParagraphs:m.paragraphs,referenceTotalUnits:m.total,minTotal,maxTotal,visiblePalaces,visibleStars,glossaryHits},reasons};
+ const seed={schemaVersion:'ZWR-PRO-W6-REFERENCE-QUALITY-VERIFICATION-v1',verifierVersion:ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,candidateDigest:candidate.candidateDigest,accepted:reasons.length===0,metrics:{paragraphs:rows.length,totalUnits:total,referenceParagraphs:m.paragraphs,referenceTotalUnits:m.total,referenceSingleSentenceParagraphs:m.singleSentenceParagraphs,referenceMinSingleSentenceUnits:m.minSingleSentenceUnits,minTotal,maxTotal,visiblePalaces,visibleStars,glossaryHits},reasons};
  return deepFreeze({...seed,verificationDigest:await sha256Stable(seed)});
 }
 export default Object.freeze({verifyZwrProReferenceQualityW6,ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION});
