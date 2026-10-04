@@ -10,6 +10,8 @@ const baziRef=JSON.parse(fs.readFileSync(path.join(root,'config/reports/bazi-edi
 const ziweiRef=JSON.parse(fs.readFileSync(path.join(root,'config/reports/ziwei-editorial-reference-r5.json'),'utf8'));
 const writer=fs.readFileSync(path.join(root,'functions/personal-reading/narrative/narrative-writer.js'),'utf8');
 const composer=fs.readFileSync(path.join(root,'functions/personal-reading/narrative/report-pro-composer-r1.js'),'utf8');
+const refRegistry=fs.readFileSync(path.join(root,'functions/personal-reading/narrative/report-pro-reference-registry.js'),'utf8');
+const deliveryR2=fs.readFileSync(path.join(root,'functions/report-delivery/report-delivery-r2.js'),'utf8');
 
 assert.equal(registry.composerId,'REPORT-PRO-COMPOSER-R1');
 assert.equal(registry.execution.productionTier,'T3_DEEP_COMPOSITION');
@@ -24,6 +26,11 @@ assert.match(composer,/deterministicProseFallbackUsed:false/);
 assert.match(composer,/composeReportSectionT3/);
 assert.match(composer,/createCustomerDeliverySnapshot/);
 assert.match(composer,/REFERENCE_GOVERNED_COMPOSITION/);
+assert.match(composer,/predecessorBriefSemanticDigest/);
+assert.match(refRegistry,/GEN-01-S01-HUMAN-ACCEPTED/);
+assert.match(writer,/referenceGovernance\.editorialExemplar/);
+assert.match(deliveryR2,/referenceGovernedComposerRequired:true/);
+assert.match(deliveryR2,/deterministicProseFallbackAllowed:false/);
 assert.equal(typeof REPORT_PRO_COMPOSER_R1_VERSION,'string');
 
 const readiness=reportProMethodReadiness();
