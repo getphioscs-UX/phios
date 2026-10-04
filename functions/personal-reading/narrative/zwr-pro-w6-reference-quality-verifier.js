@@ -3,7 +3,7 @@ import {resolveZiweiR5AcceptedCopy} from './ziwei-r5-accepted-copy.generated.js'
 
 export const ZWR_PRO_W6_REFERENCE_QUALITY_VERIFIER_VERSION='ZWR-PRO-W6-REFERENCE-QUALITY-VERIFIER-v1';
 
-const GENERIC=/\b(?:this section will|this chapter will|methodology|governance|authority pack|candidate|semantic verifier|runtime)\b|(?:本章将|本章会|这一章会|方法论|治理|权威包|候选|语义验证|运行时)/iu;
+const GENERIC=/\b(?:this section will|this chapter will|methodology|governance|authority pack|candidate|semantic verifier|runtime)\b|(?:本章将|本章会|这一章会|方法论|治理|权威包|候选|语义验证|运行时(?:系统|环境|版本|状态|层))/iu;
 const GLOSSARY=/\b[A-Z][A-Za-z ]{1,18}\s+(?:means|brings)\b|[^。；\n]{0,14}(?:代表|呈现|意味着)「/gu;
 const TECH=/命宫|身宫|官禄宫|财帛宫|迁移宫|夫妻宫|福德宫|疾厄宫|父母宫|兄弟宫|仆役宫|子女宫|三方|对宫|四化|大限|流年|Life Palace|Body Palace|Career Palace|Wealth Palace|Travel Palace|Spouse Palace|Wellbeing Palace|Health Palace|Parents Palace|Siblings Palace|Friends Palace|Children Palace|triad|opposite|Da Xian|Liu Nian/iu;
 const CUSTOMER=/\b(?:you|your|this chart)\b|(?:你|你的|这张盘|命盘)/iu;
