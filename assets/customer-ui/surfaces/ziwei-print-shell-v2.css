@@ -50,3 +50,19 @@ html,body{background:#e7e2d7;color:var(--phi-report-navy);font-family:var(--phi-
 .pub-report[data-method="ZWR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-master-insights{
  left:17mm!important;right:auto!important
 }
+
+
+/* Accepted long-form body readability.
+   Preserve authored Zi Wei artwork, but place a stronger ivory reading scrim
+   between the background image and customer copy on every non-opener body page. */
+.pub-report[data-method="ZWR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family:not([data-page-family="SECTION_OPENER_PAGE"]) .pub-decoration:after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:rgba(252,250,245,.88);
+ pointer-events:none;
+}
+.pub-report[data-method="ZWR"][data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family:not([data-page-family="SECTION_OPENER_PAGE"]) .pub-composed-content{
+ position:relative;
+ z-index:2;
+}
