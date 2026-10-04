@@ -1,5 +1,8 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
-import {invokeOpenAIStructured} from './narrative-provider.js';
+import {createReportSectionNarrativeContract} from './report-section-contract.js';
+import {buildReportSectionNarrativeBrief} from './report-section-brief.js';
+import {composeReferenceGovernedDraftR1} from './report-pro-composer-r1.js';
+import {ZIWEI_R5_PAI_REGISTRY} from './ziwei-r5-provider-registry.js';
 
 export const ZWR_PRO_W4_COMPOSER_VERSION='ZWR-PRO-W4-LLM-PROFESSIONAL-COMPOSER-v1';
 export const ZWR_PRO_W4_PROMPT_VERSION='ZWR-PRO-W4-PROMPT-v1';
@@ -16,53 +19,65 @@ const SECTION_OWNERSHIP=Object.freeze({
  S10:{titleZh:'当前时序',titleEn:'Current Timing',owns:['LIU_NIAN','ANNUAL_FOREGROUND','ANNUAL_TRANSFORMATIONS','CURRENT_OBSERVATION_WINDOW']},
  S11:{titleZh:'现实导航',titleEn:'Reality Navigation',owns:['WHOLE_CHART_INTEGRATION','DECISION_NAVIGATION','REALITY_VALIDATION','REVISION_RULE']}
 });
-const ALLOWED_ROLES=['TECHNICAL_AXIS','SYNTHESIS','CONDITIONS','TENSION','TIMING','LIVED_TRANSLATION','NAVIGATION'];
-const schema={
- type:'object',additionalProperties:false,
- required:['sectionId','title','paragraphs','usedClaimRefs','usedPalaceCodes','usedTransformationKeys'],
- properties:{
-  sectionId:{type:'string'},title:{type:'string'},
-  paragraphs:{type:'array',minItems:5,maxItems:12,items:{type:'object',additionalProperties:false,required:['role','text','claimRefs'],properties:{
-   role:{type:'string',enum:ALLOWED_ROLES},text:{type:'string',minLength:40,maxLength:3200},claimRefs:{type:'array',minItems:1,items:{type:'string'},uniqueItems:true}
-  }}},
-  usedClaimRefs:{type:'array',minItems:1,items:{type:'string'},uniqueItems:true},
-  usedPalaceCodes:{type:'array',items:{type:'string'},uniqueItems:true},
-  usedTransformationKeys:{type:'array',items:{type:'string'},uniqueItems:true}
- }
-};
-function systemPrompt(locale){
- const zh=locale==='zh-Hans';
- return [
-  'You are the PHI OS Zi Wei Dou Shu professional report writer. Writing authority only; never recalculate.',
-  'The supplied customer-specific Authority Pack is the complete factual authority. Never import facts from the gold-standard reference.',
-  'The reference profile controls depth, synthesis, customer voice, technical visibility and paragraph rhythm only; it is not customer semantic authority.',
-  'Keep palace names, star names, known states, transformations and timing visibly present when the Authority Pack supplies them. Unknown states remain unknown.',
-  'Qualified patterns may be named only as qualifications; do not import traditional fortune, wealth, marriage, health or event outcomes.',
-  'Write one coherent paid professional reading, not a star glossary, governance memo, methodology note, or generic psychology article.',
-  'Respect section ownership. Supporting references to other palaces remain subordinate and must not turn this section into another chapter.',
-  'Do not invent biography, current events, months, medical diagnosis, financial recommendations, guaranteed outcomes, or hidden intentions.',
-  zh?'Write natural publication-quality Simplified Chinese. Use direct customer voice such as “你的命盘／这张盘” where natural.':'Write natural publication-quality English in direct customer voice.',
-  'Every paragraph must cite the supplied claim IDs that support it. usedClaimRefs is the union of all paragraph claimRefs.',
-  'usedPalaceCodes and usedTransformationKeys are lineage declarations, not prose. Include only identities actually used in the prose.',
-  'Return only the requested JSON.'
- ].join('\n');
+const uniq=a=>[...new Set((Array.isArray(a)?a:[]).filter(Boolean).map(String))];
+const txKey=t=>[t.layer,t.palaceCode,t.targetStarCode,t.transformationCode].join(':');
+
+async function governedAuthorityBrief(authorityPack,section,locale){
+ const roles=uniq(section.claims.map(c=>c.role));
+ const contract=createReportSectionNarrativeContract({
+  methodId:'ZWR',sectionKey:section.sectionId,
+  customerQuestion:section.keyInsights?.[0]||section.title,
+  customerOutcome:locale==='zh-Hans'?'形成达到金标准深度、但只属于当前客户命盘的专业紫微斗数长文。':'Produce gold-standard-depth professional Zi Wei prose grounded only in this customer chart.',
+  requiredClaimRoles:roles,optionalClaimRoles:['CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION'],
+  timingPolicy:'WHEN_AUTHORITY_PRESENT',
+  boundaryPolicy:'KEEP_UNCERTAINTY_LOCAL_NOT_DISCLAIMER_HEAVY',
+  realityBridgePolicy:'QUESTIONS_AND_COMPARISONS_ONLY_UNLESS_OBSERVED_REALITY_SOURCE_ADMITTED',
+  forbiddenInferenceClasses:['PROFESSION_PREDICTION','WEALTH_EVENT_PREDICTION','MARRIAGE_EVENT_PREDICTION','HEALTH_EVENT_PREDICTION','REFERENCE_FACT_COPYING'],
+  depthTarget:{minimumMeaningfulUnits:0,maximumMeaningfulUnits:0,calibrationState:'ZWR_PRO_W3_REFERENCE_PROFILE'}
+ });
+ const richClaimIr={version:authorityPack.sourceVersion,claims:section.claims.map(c=>({...c,explanationRole:c.role})),reflectionQuestions:[],counterPrompts:[]};
+ const base=await buildReportSectionNarrativeBrief({
+  contract,richClaimIr,locale,sourceAuthorityVersion:authorityPack.sourceVersion,
+  styleIntent:{tone:'PROFESSIONAL_ZIWEI_PERSONAL_READING',depth:'REFERENCE_GOLD_STANDARD',customerReadable:true,explanationFirst:true,methodStyleProfile:'ZIWEI_PROFESSIONAL_SYNTHESIS_R5',sectionSpecific:true,avoidGlossaryProse:true,synthesizePalaceNetwork:true,synthesizeTransformations:true,timingLayersStayDistinct:true}
+ });
+ const {briefSemanticDigest:previous,...rest}=base;
+ const technicalAuthorityPack=Object.freeze({
+  subjectBinding:authorityPack.subjectBinding,
+  sectionIdentity:{sectionId:section.sectionId,title:section.title,primaryPalaces:section.primaryPalaces,contextPalaces:section.contextPalaces},
+  technicalEvidence:section.technicalEvidence,
+  wholeChartTechnicalSnapshot:authorityPack.wholeChartTechnicalSnapshot,
+  authoringContract:section.authoringContract
+ });
+ const seed={...rest,preProductionBriefDigest:previous,successorPromptVersion:ZWR_PRO_W4_PROMPT_VERSION,technicalAuthorityPack,sectionOwnership:SECTION_OWNERSHIP[section.sectionId],referenceQualityProfile:{qualityOnly:true,lexicalCopyTarget:false,dimensions:['CONTENT_DEPTH','SECTION_ISOLATION','NARRATIVE_DENSITY','CUSTOMER_VOICE','TECHNICAL_GROUNDING','MULTI_PLACEMENT_SYNTHESIS','INTERPRETATION_TO_TECHNICAL_RATIO','PARAGRAPH_RHYTHM','UNKNOWN_PRESERVATION','NO_GOVERNANCE_PROSE']}};
+ return deepFreeze({...seed,briefSemanticDigest:await sha256Stable(seed)});
 }
-function txKey(t){return [t.layer,t.palaceCode,t.targetStarCode,t.transformationCode].join(':');}
-export async function composeZwrProSectionW4({authorityPack,sectionId,locale,env={},fetcher,provider}={}){
+function visibleUsage(section,blocks){
+ const body=blocks.map(b=>b.text).join('\n');
+ const usedPalaceCodes=(section.technicalEvidence.palaces||[]).filter(p=>body.includes(p.label)).map(p=>p.palaceCode);
+ const usedTransformationKeys=(section.technicalEvidence.transformations||[]).filter(t=>{
+  const state=t.label&&body.includes(t.label);
+  const star=t.targetStarLabel&&body.includes(t.targetStarLabel);
+  return state&&star;
+ }).map(txKey);
+ return {usedPalaceCodes:uniq(usedPalaceCodes),usedTransformationKeys:uniq(usedTransformationKeys)};
+}
+export async function composeZwrProSectionW4({authorityPack,sectionId,locale,env={},fetcher,providerAdapters,registry=ZIWEI_R5_PAI_REGISTRY,requestId,cache}={}){
  if(authorityPack?.schemaVersion!=='ZIWEI-R5-AUTHORING-PACK-v2')throw Error('ZWR_PRO_W4_AUTHORITY_PACK_REQUIRED');
+ if(!authorityPack.subjectBinding?.subjectId||!authorityPack.subjectBinding?.inputFingerprint)throw Error('ZWR_PRO_W4_SUBJECT_BINDING_REQUIRED');
  if(authorityPack.locale!==locale||!['zh-Hans','en'].includes(locale))throw Error('ZWR_PRO_W4_LOCALE_MISMATCH');
- const section=authorityPack.sections.find(s=>s.sectionId===sectionId),ownership=SECTION_OWNERSHIP[sectionId];
- if(!section||!ownership)throw Error('ZWR_PRO_W4_SECTION_UNSUPPORTED');
- const claims=section.claims.map(c=>c.claimId),palaces=section.technicalEvidence.palaces.map(p=>p.palaceCode),transformations=section.technicalEvidence.transformations.map(txKey);
- const referenceProfile={qualityOnly:true,dimensions:['CONTENT_DEPTH','SECTION_ISOLATION','NARRATIVE_DENSITY','CUSTOMER_VOICE','TECHNICAL_GROUNDING','MULTI_PLACEMENT_SYNTHESIS','INTERPRETATION_TO_TECHNICAL_RATIO','PARAGRAPH_RHYTHM','UNKNOWN_PRESERVATION','NO_GOVERNANCE_PROSE'],lexicalCopyTarget:false};
- const payload={authorityPack:{schemaVersion:authorityPack.schemaVersion,locale,wholeChartTechnicalSnapshot:authorityPack.wholeChartTechnicalSnapshot,section},sectionOwnership:ownership,referenceQualityProfile:referenceProfile,outputLineage:{allowedClaimRefs:claims,allowedPalaceCodes:palaces,allowedTransformationKeys:transformations}};
- const invoke=provider||((args)=>invokeOpenAIStructured({...args,env,fetcher}));
- const response=await invoke({systemPrompt:systemPrompt(locale),userPayload:payload,schema,schemaName:'zwr_pro_section_v1',maxOutputTokens:locale==='zh-Hans'?7200:6200});
- const output=response?.output??response;
- if(output?.sectionId!==sectionId)throw Error('ZWR_PRO_W4_SECTION_ID_DRIFT');
- const paragraphRefs=[...new Set((output.paragraphs||[]).flatMap(p=>p.claimRefs||[]))];
- if(JSON.stringify([...paragraphRefs].sort())!==JSON.stringify([...(output.usedClaimRefs||[])].sort()))throw Error('ZWR_PRO_W4_LINEAGE_UNION_MISMATCH');
- const seed={schemaVersion:'ZWR-PRO-W4-CANDIDATE-v1',composerVersion:ZWR_PRO_W4_COMPOSER_VERSION,promptVersion:ZWR_PRO_W4_PROMPT_VERSION,subjectKey:authorityPack.wholeChartTechnicalSnapshot?.subjectKey||null,locale,sectionId,title:output.title,paragraphs:output.paragraphs,usedClaimRefs:output.usedClaimRefs,usedPalaceCodes:output.usedPalaceCodes,usedTransformationKeys:output.usedTransformationKeys,authorityPackVersion:authorityPack.schemaVersion,writer:{provider:response?.provider||'injected-test-provider',model:response?.model||'test-model',usage:response?.usage||null}};
+ const section=authorityPack.sections.find(s=>s.sectionId===sectionId);
+ if(!section||!SECTION_OWNERSHIP[sectionId])throw Error('ZWR_PRO_W4_SECTION_UNSUPPORTED');
+ const brief=await governedAuthorityBrief(authorityPack,section,locale);
+ const composition=await composeReferenceGovernedDraftR1({
+  brief,registry,env,fetcher,providerAdapters,
+  requestId:requestId||'ZWR-PRO-W4:'+authorityPack.subjectBinding.subjectKey+':'+sectionId+':'+locale,
+  cache,timeoutMs:180000
+ });
+ if(composition.status!=='PASS'||composition.verification?.accepted!==true) return deepFreeze({status:'CONTROLLED_NOT_READY',sectionId,locale,subjectBinding:authorityPack.subjectBinding,brief,composition});
+ const blocks=composition.candidate.blocks.map(b=>({role:b.role,text:b.text,claimRefs:uniq(b.claimRefs),supportRefs:uniq(b.supportRefs)}));
+ const usedClaimRefs=uniq(blocks.flatMap(b=>b.claimRefs));
+ const usage=visibleUsage(section,blocks);
+ const seed={schemaVersion:'ZWR-PRO-W4-CANDIDATE-v1',status:'PASS',composerVersion:ZWR_PRO_W4_COMPOSER_VERSION,promptVersion:ZWR_PRO_W4_PROMPT_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,title:locale==='zh-Hans'?SECTION_OWNERSHIP[sectionId].titleZh:SECTION_OWNERSHIP[sectionId].titleEn,paragraphs:blocks,usedClaimRefs,...usage,authorityPackVersion:authorityPack.schemaVersion,sourceBriefDigest:composition.governedBrief.briefSemanticDigest,provider:{provider:composition.internalOnly?.provider||null,model:composition.internalOnly?.model||null,actualTier:composition.internalOnly?.actualTier||null,transportCalls:composition.internalOnly?.transportCalls||0,semanticReviewCalls:composition.internalOnly?.semanticReviewCalls||0},upstreamSemanticVerification:composition.verification};
  return deepFreeze({...seed,candidateDigest:await sha256Stable(seed)});
 }
 export default Object.freeze({composeZwrProSectionW4,ZWR_PRO_W4_COMPOSER_VERSION});
