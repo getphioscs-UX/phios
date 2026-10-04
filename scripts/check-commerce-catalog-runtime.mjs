@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
+
+const request=new Request('https://qa.phios-github.pages.dev/api/commerce-catalog',{method:'GET'});
+const context={request,env:{STRIPE_ENVIRONMENT:'QA',PHIOS_COMMERCE_QA_ENABLED:'true',STRIPE_SECRET_KEY:'sk_test_placeholder'}};
+const response=await commerceApi(context,'catalog');
+assert.equal(response.status,200);
+const body=await response.json();
+assert.equal(body.success,true);
+assert(Array.isArray(body.products));
+assert(body.products.length>0);
+const profile=body.products.find(p=>p.productId==='COM-REPORT-PROFILE-FULL');
+assert(profile);
+assert.equal(profile.reportPurchaseState,'LEGACY_READABLE_NEW_PURCHASE_DISABLED');
+assert.deepEqual(profile.reportPresentationOptions,[]);
+const ziwei=body.products.find(p=>p.productId==='COM-REPORT-ZIWEI-FULL');
+assert(ziwei);
+assert.equal(ziwei.reportPurchaseState,'AVAILABLE');
+assert.equal(ziwei.reportPresentationOptions.length,3);
+console.log('PASS commerce catalog: legacy-readable report does not crash catalog; current Zi Wei report retains three language presentation quotes.');

@@ -21,7 +21,21 @@ function sameOrigin(request){
 export async function commerceApi(context,action){
   const {request,env={},fetch:fetcher}=context;
   try{
-    if(action==='catalog') return json({success:true,environment:'QA',liveEnabled:false,checkoutAvailable:env.STRIPE_ENVIRONMENT==='QA'&&env.PHIOS_COMMERCE_QA_ENABLED==='true'&&/^(sk|rk)_test_/.test(env.STRIPE_SECRET_KEY||''),products:STRIPE_PRODUCT_REGISTRY.map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>({...p,reportPresentationOptions:isLanguageReport(p)?['zh-Hans','en','bilingual'].map(reportLocale=>commerceReportQuote(p,{reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'},p.productId.includes('BUNDLE')?standardBundleProducts().slice(0,p.productId.endsWith('-2')?2:p.productId.endsWith('-3')?3:5):[])):null})),eligibleBundleProducts:standardBundleProducts()});
+    if(action==='catalog') return json({success:true,environment:'QA',liveEnabled:false,checkoutAvailable:env.STRIPE_ENVIRONMENT==='QA'&&env.PHIOS_COMMERCE_QA_ENABLED==='true'&&/^(sk|rk)_test_/.test(env.STRIPE_SECRET_KEY||''),products:STRIPE_PRODUCT_REGISTRY.map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
+      let reportPresentationOptions=null,reportPurchaseState=null;
+      if(isLanguageReport(p)){
+        try{
+          reportPresentationOptions=['zh-Hans','en','bilingual'].map(reportLocale=>commerceReportQuote(p,{reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'},p.productId.includes('BUNDLE')?standardBundleProducts().slice(0,p.productId.endsWith('-2')?2:p.productId.endsWith('-3')?3:5):[]));
+          reportPurchaseState='AVAILABLE';
+        }catch(error){
+          if(error?.message==='PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED'){
+            reportPresentationOptions=[];
+            reportPurchaseState='LEGACY_READABLE_NEW_PURCHASE_DISABLED';
+          }else throw error;
+        }
+      }
+      return {...p,reportPresentationOptions,reportPurchaseState};
+    }),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
     if(action==='status'){

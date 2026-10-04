@@ -1,7 +1,7 @@
 {
   "schemaVersion": "ZWR-PRO-W6-REFERENCE-QUALITY-VERIFIER-CONTRACT-v1",
   "work": "ZWR-PRO-W6",
-  "status": "IMPLEMENTED_MACHINE_GATE_PENDING",
+  "status": "IMPLEMENTED_MACHINE_GATE_PENDING_REFERENCE_CALIBRATION_FIXED",
   "reference": "ZWR-PRO-GOLD-STANDARD-W0-v1",
   "comparisonMode": "QUALITY_DIMENSIONS_NOT_LEXICAL_TEMPLATE",
   "checks": [
@@ -17,5 +17,11 @@
     "NO_STAR_GLOSSARY",
     "NO_REFERENCE_SENTENCE_COPY_FOR_OTHER_SUBJECT"
   ],
-  "productionAdmissionGranted": false
+  "productionAdmissionGranted": false,
+  "paragraphDevelopment": {
+    "mode": "REFERENCE_DERIVED",
+    "rule": "Single-sentence substantial paragraphs are allowed only up to the count already present in the accepted reference for that section/locale, and must remain within the reference-derived minimum length band.",
+    "fragmentationIncreaseForbidden": true,
+    "sentencePerParagraphHardMinimum": false
+  }
 }
