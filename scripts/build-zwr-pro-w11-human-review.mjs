@@ -18,7 +18,7 @@ const css=['assets/customer-ui/surfaces/report-print-shell-v2.css','assets/custo
 const runtime=(await build({stdin:{contents:"import {fitPublicationForPrint,settlePublicationAssets} from './assets/customer-ui/js/personal-products/publication-report-pages.js';const root=document.querySelector('main');await document.fonts.ready;await settlePublicationAssets(root);const fit=fitPublicationForPrint(root);window.reviewQuality={pageFit:fit,overflowPages:fit.filter(p=>!p.fits),humanDecision:null};window.batchReady=true;",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'browser',minify:true})).outputFiles[0].text.replaceAll('</script','<\\/script');
 
 const ids=['S02','S03','S04','S05','S06','S07','S08','S09','S10','S11'];
-const forbidden=['Authoring Pack','Candidate','ZIWEI-R5','ZWR-R5:'];
+const forbidden=['Authoring Pack','Candidate','ZIWEI-R5','ZWR-R5:','S02','S03','S04','S05','S06','S07','S08','S09','S10','S11'];
 fs.mkdirSync('tools/review',{recursive:true});
 fs.mkdirSync('docs/reports/ziwei/production-admission',{recursive:true});
 
