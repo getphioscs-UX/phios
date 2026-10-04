@@ -1,5 +1,19 @@
 # BaZi Report Production Reference — MR-W0 / MR-W1
 
+## 2026-10-04 editorial reference successor
+
+The Human-accepted GEN-01 `核心性格与能力` section is now formalized as the active BaZi editorial quality reference in [BAZI-EDITORIAL-REFERENCE-R2.md](./BAZI-EDITORIAL-REFERENCE-R2.md).
+
+This successor changes the writing reference, not BaZi calculation authority:
+- future BaZi reports inherit the accepted section discipline, depth and customer-facing tone;
+- each section owns a distinct question and must not pre-consume later sections;
+- the reference sample is a quality benchmark, never reusable subject-specific semantics;
+- professional limitations stay in Authoring/QA unless customer-facing disclosure is specifically required; no repeated `专业附注` block is rendered by default;
+- old accepted/full-report artifacts remain historical evidence but do not override this successor when they conflict on editorial style or section overlap.
+
+`BAZI_EDITORIAL_REFERENCE = R2_ACTIVE`.
+`BAZI_GEN01_SECTION_1_HUMAN_ACCEPTED = true`.
+
 ## 2026-10-02 shared Print Shell V2 successor
 
 BaZi remains the accepted **content, editorial-depth and 38-page physical-composition reference**. It is no longer the sole rendering/print-layout reference.
