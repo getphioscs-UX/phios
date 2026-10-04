@@ -28,11 +28,16 @@ export async function verifyZwrProSectionW5({authorityPack,candidate}={}){
  if(authorityPack?.schemaVersion!=='ZIWEI-R5-AUTHORING-PACK-v2')throw Error('ZWR_PRO_W5_AUTHORITY_PACK_REQUIRED');
  if(candidate?.schemaVersion!=='ZWR-PRO-W4-CANDIDATE-v1')throw Error('ZWR_PRO_W5_CANDIDATE_REQUIRED');
  if(candidate.locale!==authorityPack.locale)reasons.push('LOCALE_MISMATCH');
+ if(candidate.subjectBinding?.subjectId!==authorityPack.subjectBinding?.subjectId||candidate.subjectBinding?.inputFingerprint!==authorityPack.subjectBinding?.inputFingerprint)reasons.push('SUBJECT_BINDING_MISMATCH');
  const section=authorityPack.sections.find(s=>s.sectionId===candidate.sectionId);
  if(!section)reasons.push('SECTION_NOT_IN_AUTHORITY_PACK');
  const allowedClaims=new Set((section?.claims||[]).map(c=>c.claimId));
  const allowedPalaces=new Set((section?.technicalEvidence?.palaces||[]).map(p=>p.palaceCode));
  const paragraphRefs=uniq((candidate.paragraphs||[]).flatMap(p=>p.claimRefs||[]));
+ for(const [i,p] of (candidate.paragraphs||[]).entries()){
+  const supports=new Set((section?.claims||[]).filter(c=>(p.claimRefs||[]).includes(c.claimId)).flatMap(c=>c.sourceRefs||[]));
+  if(!(p.supportRefs||[]).length||(p.supportRefs||[]).some(ref=>!supports.has(ref)))reasons.push('SOURCE_LINEAGE_LOSS:'+i);
+ }
  for(const ref of paragraphRefs)if(!allowedClaims.has(ref))reasons.push('UNKNOWN_CLAIM_REF:'+ref);
  for(const ref of candidate.usedClaimRefs||[])if(!allowedClaims.has(ref))reasons.push('UNBOUND_USED_CLAIM:'+ref);
  for(const code of candidate.usedPalaceCodes||[])if(!allowedPalaces.has(code))reasons.push('UNBOUND_PALACE:'+code);
