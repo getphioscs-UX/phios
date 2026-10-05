@@ -75,8 +75,42 @@ function timing(data){
 function domains(data){
  return '<div class="zv-domains">'+Object.entries(data.domains||{}).map(([k,v])=>card(k,(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[0]).join(' · '),(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[1]).join(' · '))).join('')+'</div>';
 }
-export function renderZwrVfrDiagram(d){
- const type=d?.type||'UNKNOWN',data=d?.data||{},title=pair(TITLES,type);
+function projectDiagramData(type,data,ctx={}){
+ const pageKey=ctx.pageKey||'',sectionId=ctx.sectionId||'';
+ if(type==='PALACE_NETWORK'){
+  const scopes={S02:['LIFE','TRAVEL','CAREER','WEALTH'],S06:['SPOUSE','CHILDREN','FRIENDS'],S07:['PARENTS','SIBLINGS','FRIENDS','LIFE']};
+  const allowed=scopes[sectionId];
+  if(allowed){
+   const set=new Set(allowed);
+   return {...data,relationships:(data.relationships||[]).filter(r=>set.has(r.from)||(r.to||[]).some(x=>set.has(x)))};
+  }
+ }
+ if(type==='TRANSFORMATION_LAYER_COMPARISON'||type==='FOUR_TRANSFORMATION_ROUTE'){
+  let layers=null,palaces=null;
+  if(pageKey.startsWith('S04_')){layers=new Set(['DA_XIAN','LIU_NIAN']);palaces=new Set(['CAREER','TRAVEL']);}
+  else if(pageKey.startsWith('S05_')){layers=new Set(['NATAL','LIU_NIAN']);palaces=new Set(['WEALTH','PROPERTY']);}
+  else if(pageKey.startsWith('S09_'))layers=new Set(['NATAL','DA_XIAN']);
+  else if(pageKey.startsWith('S10_'))layers=new Set(['DA_XIAN','LIU_NIAN']);
+  const keep=t=>(!layers||layers.has(t.layer))&&(!palaces||palaces.has(t.palaceCode));
+  if(Array.isArray(data.transformations))return {...data,transformations:data.transformations.filter(keep)};
+  if(Array.isArray(data.layers))return {...data,layers:data.layers.map(x=>({...x,transformations:(x.transformations||[]).filter(keep)})).filter(x=>!layers||layers.has(x.layer))};
+ }
+ if(type==='LIFE_CAREER_WEALTH_TRAVEL_CROSS'){
+  const scopes={S04:['LIFE','CAREER','TRAVEL'],S05:['LIFE','WEALTH','CAREER']};
+  const allowed=scopes[sectionId];
+  if(allowed){
+   const set=new Set(allowed);
+   return {...data,palaces:(data.palaces||[]).filter(p=>set.has(p.palaceCode)),stars:(data.stars||[]).filter(s=>set.has(s.palaceCode)),relationships:(data.relationships||[]).filter(r=>set.has(r.from)||(r.to||[]).some(x=>set.has(x)))};
+  }
+ }
+ return data;
+}
+export function renderZwrVfrDiagram(d,ctx={}){
+ const type=d?.type||'UNKNOWN',data=projectDiagramData(type,d?.data||{},ctx),baseTitle=pair(TITLES,type);
+ let title=baseTitle;
+ if(type==='LIFE_BODY_AXIS'&&ctx.sectionId==='S08')title=['压力下的命身调节','Life-Body Regulation Under Pressure'];
+ if(type==='PALACE_NETWORK'&&ctx.sectionId==='S06')title=['关系宫位联动','Relationship Palace Interactions'];
+ if(type==='PALACE_NETWORK'&&ctx.sectionId==='S07')title=['支持网络联动','Support Network Interactions'];
  let body='';
  if(type==='TWELVE_PALACE_NATAL_MAP')body=palaceGrid(data);
  else if(type==='LIFE_BODY_AXIS')body=axis(data);
@@ -118,7 +152,7 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   const binding=getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
   if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
   let body='';
-  const diagramHtml=ds.map(renderZwrVfrDiagram).join('');
+  const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily})).join('');
   if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml);
   else if(p.pageFamily==='INTERPRETATION')body=interpretation(s);
   else if(ds.length)body=diagramHtml;
