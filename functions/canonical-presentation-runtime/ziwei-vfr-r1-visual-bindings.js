@@ -1,5 +1,7 @@
 import {ZIWEI_REPORT_VISUAL_REGISTRY} from './ziwei-report-visual-registry.generated.js';
 
+export const ZWR_VFR_VISUAL_BINDING_VERSION='ZWR-VFR-R1-VISUAL-BINDING-v2';
+
 const base=ZIWEI_REPORT_VISUAL_REGISTRY.public_base_url;
 const assetByCode=new Map((ZIWEI_REPORT_VISUAL_REGISTRY.assets||[]).map(a=>[a.asset_code,a]));
 const frontMatter=Object.freeze({
@@ -48,4 +50,4 @@ export function getZwrVfrVisualBinding({pageNumber,sectionId,pageFamily}={}){
 }
 export const ZWR_VFR_FRONT_MATTER=frontMatter;
 export const ZWR_VFR_SECTION_ART=sectionArt;
-export default Object.freeze({getZwrVfrVisualBinding,ZWR_VFR_FRONT_MATTER,ZWR_VFR_SECTION_ART});
+export default Object.freeze({getZwrVfrVisualBinding,ZWR_VFR_FRONT_MATTER,ZWR_VFR_SECTION_ART,ZWR_VFR_VISUAL_BINDING_VERSION});
