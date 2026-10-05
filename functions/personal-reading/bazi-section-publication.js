@@ -10,10 +10,12 @@ import {BAZI_SECTION_REGISTRY,REPORT_PAGE_FAMILIES,validateSectionRegistry,bindS
 import {getAcceptedBaziRemainingSection,BAZI_S06_S10_ACCEPTED_VERSION} from './narrative/bazi-s06-s10-accepted-copy.generated.js';
 import {getAcceptedBaziCoreSection} from './narrative/bazi-s02-s05-accepted-copy.generated.js';
 import {projectBaziFullReportC1} from './bazi-full-report-c1-publication.js';
+import {projectBaziVfrReference} from './bazi-vfr-r1-publication.js';
 
 // Adapter inside the existing projection owner: native facts are calculated
 // upstream. The section engine never interprets raw birth data.
-export async function projectBaziSectionPublication({reading,locale,temporalContext,composition={},unavailableModules=[],allowUnselectedTiming=false,acceptedCopyEdition=null,reviewOnly=false,natalAuthority=null,timingAuthority=null}={}){
+export async function projectBaziSectionPublication({reading,locale,temporalContext,composition={},unavailableModules=[],allowUnselectedTiming=false,acceptedCopyEdition=null,reviewOnly=false,natalAuthority=null,timingAuthority=null,authorityPack=null,authorityDigest=null,sourceDigests=null}={}){
+ if(acceptedCopyEdition==='BAZI-VFR-R1')return projectBaziVfrReference({reviewOnly,locale,authorityPack,timingAuthority,authorityDigest,sourceDigests});
  if(acceptedCopyEdition==='BAZI-FR-C1')return projectBaziFullReportC1({locale,reviewOnly,natalAuthority,timingAuthority});
  validateSectionRegistry();
  const legacy=await projectBaziPublicationPages({reading,locale,temporalContext,allowUnselectedTiming});

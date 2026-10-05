@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-05T01:40:26.199Z",
+  "recordedAt": "2026-10-05T02:19:46.164Z",
   "passes": [
     "check-reading-evidence-boundary",
     "check-runtime-memory-contract",
@@ -10,26 +10,37 @@
     "check-shared-report-e2e-readiness",
     "check-pages-preview-commerce",
     "git diff --check",
-    "private-renderer wrangler deploy --dry-run"
+    "private-renderer build"
   ],
   "pagesBuild": {
     "result": "PASS",
     "copied": 10961,
-    "skipped": 6464,
+    "skipped": 6519,
     "files": 10963,
-    "workerBytes": 15170109,
-    "gzipBytes": 2820461,
+    "workerBytes": 15645111,
+    "gzipBytes": 2890535,
     "assetOver25MiB": false,
-    "reviewToolsExcluded": true,
-    "privateContextFixtureExcluded": true
+    "reviewToolsExcluded": true
   },
-  "failures": [
+  "knownFailures": [
     {
-      "code": "ZIWEI_R5_OPENAI_API_KEY_REQUIRED",
-      "check": "npm run check:canonical-account-person",
-      "scope": "Existing canonical R5 generation fails closed before provider invocation."
+      "check": "check:canonical-account-person",
+      "scope": "Local lacks provider key; QA key exists and actual requests were invoked."
+    },
+    {
+      "check": "check-report-customer-delivery",
+      "scope": "Pre-existing eight-versus-seven method registry assertion; authority files unchanged."
     }
   ],
-  "globalCheck": "NOT_RUN_WHILE_REQUIRED_CANONICAL_REGRESSION_IS_BLOCKED",
+  "liveBlockers": [
+    {
+      "code": "ZIWEI_R5_SYNTHESIS_UNAVAILABLE",
+      "scope": "Real EN/ZH QA canonical generation failed closed. All EN S02-S11 fallback reasons: SEMANTIC_VERIFIER_REJECTED."
+    },
+    {
+      "code": "LIVE_QA_RELEASE_NOT_PROVEN",
+      "scope": "Complete bilingual 41-page report, immutable release/reopen, mobile and native A4 remain unproven."
+    }
+  ],
   "providerBypass": false
 }

@@ -20,6 +20,9 @@ function outputText(data){
   fail('NARRATIVE_PROVIDER_EMPTY_OUTPUT');
 }
 export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,systemPrompt,userPayload,schema,schemaName,maxOutputTokens=5200}){
+  const replay=typeof process!=='undefined'&&process.env?.REPORT_ZERO_COST_REPLAY==='true';
+  const allowed=env.REPORT_PROVIDER_LIVE_ALLOWED===true||env.REPORT_PROVIDER_LIVE_ALLOWED==='true';
+  if(fetcher===globalThis.fetch&&(replay||!allowed))fail('REPORT_PROVIDER_LIVE_OPT_IN_REQUIRED');
   if(!clean(env.OPENAI_API_KEY))fail('OPENAI_API_KEY_NOT_CONFIGURED');
   const model=clean(env.OPENAI_NARRATIVE_MODEL)||clean(env.OPENAI_MODEL);
   if(!model)fail('OPENAI_NARRATIVE_MODEL_NOT_CONFIGURED');

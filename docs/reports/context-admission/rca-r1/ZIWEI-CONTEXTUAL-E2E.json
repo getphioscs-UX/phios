@@ -1,64 +1,65 @@
 {
-  "recordedAt": "2026-10-05T01:40:26.199Z",
+  "recordedAt": "2026-10-05T02:19:46.164Z",
   "state": "BLOCKED_QA_END_TO_END",
   "local": {
-    "realSqlPrivateApiChecks": "PASS",
-    "accountsAndPurchase": "SYNTHETIC",
+    "security": "10_PASS",
+    "contracts": "21_PASS",
     "encryption": "AES_GCM_DEDICATED_KEY",
     "ownedBriefSingleUse": "PASS",
-    "canonicalClaimsAndParagraphsPreserved": "SYNTHETIC_OVERLAY_PASS",
+    "canonicalPreservation": "SYNTHETIC_OVERLAY_PASS",
     "contextPages": 2,
-    "contextualCompositionPages": 41,
-    "workerDryRun": "PASS"
+    "contextualCompositionPages": 41
   },
   "live": {
-    "realR5Generation": "NOT_PROVEN",
-    "providerCallsDuringRcaTests": 0,
+    "entitledOwnedConsentedPerson": "PASS",
+    "guidedWorkConfirmation": "PASS",
+    "vagueAdmissionRejection": "PASS",
+    "separateSensitiveConsentRejection": "PASS",
+    "realR5Generation": "FAILED_CLOSED",
+    "providerCallCount": "NOT_CAPTURED",
     "privateBrowserVerification": "NOT_PROVEN",
     "immutableRelease": "NOT_PROVEN",
     "readOnlyReopen": "NOT_PROVEN",
     "fullReportMobile": "NOT_PROVEN",
     "fullReportA4Print": "NOT_PROVEN"
   },
-  "requiredQaSetup": [
-    "Existing entitled test account and owned consented person",
-    "R5 generation provider configuration",
-    "Apply migration 0012 to isolated QA D1",
-    "Dedicated REPORT_CONTEXT_ENCRYPTION_KEY and PRIVATE_REPORTS binding",
-    "Private browser worker successor supporting ZIWEI-CONTEXTUAL-RCA-R1",
-    "Generate canonical and contextual reports; verify release receipts and digest-preserving reopen"
-  ],
-  "blockers": [
-    {
-      "code": "ZIWEI_R5_OPENAI_API_KEY_REQUIRED",
-      "check": "npm run check:canonical-account-person",
-      "scope": "Existing canonical R5 generation fails closed before provider invocation."
-    },
-    {
-      "code": "LIVE_QA_RELEASE_NOT_PROVEN",
-      "scope": "Supplied QA account is verified and entitled, but RCA controls are not deployed; actual release remains unproven."
-    },
-    {
-      "code": "QA_DEPLOYMENT_APPROVAL_REQUIRED",
-      "scope": "Real Worker deployment has external effects; reviewer considers retained no-deployment constraint applicable and requires explicit authorization."
-    }
-  ],
   "qaReadiness": {
     "qaUrl": "https://qa.phios-github.pages.dev/account/",
-    "checkedAt": "2026-10-05",
+    "checkedAt": "2026-10-05T02:19:46.164Z",
+    "authorizedScope": "QA_ONLY",
     "authenticatedAccount": "VERIFIED_IN_BROWSER",
     "ziweiEntitlement": "AVAILABLE_ZH_AND_EN",
     "consentedControlledTestPerson": "AVAILABLE",
-    "deployedReportModeControls": "ABSENT_OLD_ACCOUNT_UI",
+    "deployedReportModeControls": "PRESENT_NO_PRESELECTION",
     "previewOpenAiSecret": "NAME_PRESENT_VALUE_NOT_READ",
     "qaContextMigration0012": "APPLIED_TO_SANDBOX_ONLY",
     "qaDedicatedContextEncryptionSecret": "CREATED_PREVIEW_ONLY_VALUE_NOT_LOGGED",
-    "privateQaWorkerDeployment": "NOT_EXECUTED_AUTO_REVIEW_REJECTED",
-    "qaPagesDeployment": "NOT_EXECUTED",
-    "approvalReviewReason": "Real Worker deployment has external effects; reviewer considers retained no-deployment constraint applicable and requires explicit authorization.",
-    "pendingApproval": "Deploy phios-method-report-renderer-qa and phios-github qa preview branch only, then run actual account acceptance.",
+    "privateQaWorkerDeployment": {
+      "name": "phios-method-report-renderer-qa",
+      "version": "6f11073c-9a65-4357-8174-01139d8645e7",
+      "publicRoute": false
+    },
+    "qaPagesDeployment": {
+      "branch": "qa",
+      "deployments": [
+        "7dc91469-65ef-4ef4-905e-9e615fd97bd4",
+        "08ded173-d075-4243-8ac3-a2fa97a426a0",
+        "86ee10a2-8318-4e69-91df-b8879123447b"
+      ],
+      "current": "86ee10a2-8318-4e69-91df-b8879123447b"
+    },
     "productionModified": false,
-    "r5Generation": "NOT_INVOKED",
-    "liveContextualRelease": "NOT_PROVEN"
-  }
+    "r5Generation": "INVOKED_FAILED_CLOSED",
+    "pendingApproval": null
+  },
+  "blockers": [
+    {
+      "code": "ZIWEI_R5_SYNTHESIS_UNAVAILABLE",
+      "scope": "Real EN/ZH QA canonical generation failed closed. All EN S02-S11 fallback reasons: SEMANTIC_VERIFIER_REJECTED."
+    },
+    {
+      "code": "LIVE_QA_RELEASE_NOT_PROVEN",
+      "scope": "Complete bilingual 41-page report, immutable release/reopen, mobile and native A4 remain unproven."
+    }
+  ]
 }

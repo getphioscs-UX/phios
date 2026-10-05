@@ -1,4 +1,5 @@
 import {esc} from '../surfaces/runtime-ui.js';
+import {renderVisualFirstReport} from './visual-first-report-pages.js';
 import {renderBaziStructuralBatch} from './bazi-structural-visual-pages.js';
 import {globalReportPagination,METHOD_VISUAL_SKINS,assertPublicationCandidate} from '../../../../functions/canonical-presentation-runtime/report-publication-contract.js';
 import {renderReportCoverOverlay,fitReportCoverFields} from '../../../../functions/canonical-presentation-runtime/report-cover-overlay.js';
@@ -38,6 +39,7 @@ function motif(kind){
  return `<svg class="pub-motif" viewBox="0 0 720 340" aria-hidden="true" focusable="false">${shapes[kind]||shapes.LAYERS}</svg>`;
 }
 export function renderPublicationReport(snapshot){
+ if(snapshot?.physicalComposition?.version==='VISUAL_FIRST_REPORT_CONTRACT_V1')return renderVisualFirstReport(snapshot);
  assertPublicationCandidate(snapshot);const {locale,totalPages,methodId}=snapshot,skin=METHOD_VISUAL_SKINS[methodId],t=(en,zh)=>locale==='en'?en:zh;
  const intro=snapshot.intro.map(p=>p.kind==='STATIC'?`<section class="pub-static" data-page-number="${p.pageNumber}" data-pagination-exception="APPROVED_BAKED_ASSET"><img src="${esc(p.src)}" alt="${esc(p.alt)}"></section>`:p.kind==='STATIC_COVER'?`<section class="pub-static pub-cover" data-page-number="${p.pageNumber}" data-pagination-exception="APPROVED_BAKED_ASSET"><img src="${esc(p.src)}" alt="${esc(p.alt)}">${renderReportCoverOverlay({methodId:snapshot.methodId,subject:p.subject})}</section>`:p.html).join('');
  const pages=snapshot.pages.map(p=>{
