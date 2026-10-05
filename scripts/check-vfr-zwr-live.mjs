@@ -1,17 +1,19 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
 
 const root='docs/reports/ziwei/vfr-r1/';
 const deepRoot=root+'five-call-experiment/';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-for(const name of ['COMPACT-AUTHORING-PACK.json','DIAGRAM-DATA.json','PAGE-PLAN.json'])assert(fs.existsSync(root+name),'missing W8 artifact: '+name);
+for(const name of ['COMPACT-AUTHORING-PACK.json','DIAGRAM-DATA.json'])assert(fs.existsSync(root+name),'missing W8 artifact: '+name);
 for(const name of ['REPAIRED-RESULT.json'])assert(fs.existsSync(deepRoot+name),'missing deep W8 artifact: '+name);
 
 const result=read(deepRoot+'REPAIRED-RESULT.json');
 const pack=read(root+'COMPACT-AUTHORING-PACK.json');
 const diagrams=read(root+'DIAGRAM-DATA.json');
-const pages=read(root+'PAGE-PLAN.json');
+const pages=ZWR_VFR_PAGE_PLAN;
+const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id)});
 
 assert.equal(result.status,'PASS');
 assert.equal(result.schemaVersion,'ZWR-VFR-R1-TARGETED-REPAIRED-RESULT-v1');
@@ -25,6 +27,7 @@ assert.equal(result.rawManuscriptSections.length,10);
 assert.equal(new Set(result.rawManuscriptSections.map(s=>s.sectionId)).size,10);
 assert(result.rawManuscriptSections.every(s=>String(s.zhHansManuscript||'').trim()&&String(s.enManuscript||'').trim()),'every W8 section must contain complete bilingual manuscript');
 assert.equal(diagrams.diagramCount,15);
+assert.equal(pageCheck.accepted,true,pageCheck.reasons.join(','));
 assert.equal(pages.length,47);
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
