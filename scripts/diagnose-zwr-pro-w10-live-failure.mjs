@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {verifyReportSectionComposition} from '../functions/personal-reading/narrative/report-section-semantic-verifier.js';
 
 const path='docs/reports/ziwei/production-admission/zwr-pro-w10-live-campaign.json';
 if(!fs.existsSync(path))throw Error('ZWR_PRO_W10_FAILURE_EVIDENCE_MISSING');
@@ -40,4 +41,35 @@ const out={
  usageRecord:composition.usageRecord||null,
  verificationUsageRecords:composition.verificationUsageRecords||[]
 };
+let replay=null;
+if(composition.governedBrief&&composition.candidate){
+ const allRefs=[...new Set((composition.candidate.blocks||[]).flatMap(b=>b.claimRefs||[]))];
+ replay=await verifyReportSectionComposition({
+  brief:composition.governedBrief,
+  candidate:composition.candidate,
+  semanticReview:async({brief,candidateDigest})=>({
+   sourceBriefDigest:brief.briefSemanticDigest,
+   candidateDigest,
+   factsPreserved:true,
+   boundariesPreserved:true,
+   conditionsPreserved:true,
+   counterSignalsPreserved:true,
+   uncertaintyPreserved:true,
+   timingScopePreserved:true,
+   noInventedReality:true,
+   noNewMethodFact:true,
+   semanticOperatorsPreserved:true,
+   rankPreserved:true,
+   directionPreserved:true,
+   meaningfullyUsedClaimRefs:allRefs,
+   reasons:[]
+  })
+ });
+}
+out.zeroCostReplay=replay?{
+ accepted:replay.accepted,
+ reasons:replay.reasons,
+ claimCoverage:replay.claimCoverage,
+ semanticReviewPresent:Boolean(replay.semanticReview)
+}:null;
 console.log(JSON.stringify(out,null,2));
