@@ -2731,8 +2731,11 @@
     "check:zwr-pro:w12-readiness": "node scripts/run-zero-cost-regression.mjs check:zwr-pro:w12-readiness",
     "check:rca-r1": "node scripts/run-zero-cost-regression.mjs check:rca-r1",
     "diagnose:zwr-pro:w10-live": "node scripts/diagnose-zwr-pro-w10-live-failure.mjs",
-    "check:bazi-vfr-r1": "node scripts/run-zero-cost-regression.mjs check:bazi-vfr-r1",
-    "build:bazi-vfr-r1": "node --import=./scripts/lib/report-zero-cost-preload.mjs scripts/build-bazi-vfr-r1.mjs"
+    "check:bazi-vfr-r1": "node --import=./scripts/lib/report-zero-cost-preload.mjs scripts/check-bazi-vfr-r1.mjs",
+    "build:bazi-vfr-r1": "node --import=./scripts/lib/report-zero-cost-preload.mjs scripts/build-bazi-vfr-r1.mjs",
+    "check:vfr:shared-core": "node scripts/check-vfr-shared-core.mjs",
+    "check:vfr:zwr-prelive": "npm run check:vfr:shared-core && node scripts/check-vfr-zwr-prelive.mjs && npm run check:vfr:zwr-visual-prelive",
+    "check:vfr:zwr-visual-prelive": "node scripts/check-vfr-zwr-visual-prelive.mjs"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
