@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "PHI-OS-PROGRESSIVE-PROFILE-VIEW-v1",
+  "profileViewId": "PRF-VIEW-31FF2B08F370CEDFDAB26E9C",
+  "mode": "IMPORT_EXTERNAL_RESULT",
+  "participantRef": "PERSON-A",
+  "asOfDate": "2026-09-01",
+  "sourceLegend": [
+    {
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "family": "SELF_REPORTED",
+      "label": "Your self-report",
+      "description": "How you describe yourself in this assessment."
+    },
+    {
+      "sourceClass": "EXTERNAL_PROFILE_RESULT",
+      "family": "EXTERNAL",
+      "label": "Imported external profile",
+      "description": "A result you supplied from another provider; its provider identity stays visible."
+    }
+  ],
+  "signalCards": [
+    {
+      "signalRef": "PRF-SIG-7B0766C3B5DC7EA6DA9CCCBF",
+      "sourceClass": "EXTERNAL_PROFILE_RESULT",
+      "sourceLabel": "Imported external profile",
+      "sourceFamily": "EXTERNAL",
+      "providerFamily": "OTHER_BIG_FIVE",
+      "domainId": "EXTERNAL_PROFILE::OTHER_BIG_FIVE::COGNITIVE_NAVIGATION",
+      "facetId": null,
+      "value": 20,
+      "confidence": "EXTERNAL_RESULT_CONFIRMED",
+      "assessmentDate": "2026-09-01",
+      "freshness": {
+        "state": "RECENT_RESULT",
+        "ageDays": 0,
+        "currentPresentationAllowed": true
+      },
+      "precisionBoundary": [
+        "PROVIDER_DIMENSION_SEMANTICS_PRESERVED",
+        "NO_CROSS_PROVIDER_EQUIVALENCE_ASSUMED"
+      ],
+      "provenance": [
+        {
+          "source": "CUSTOMER_ENTRY"
+        }
+      ]
+    },
+    {
+      "signalRef": "PRF-SIG-599D217B3257200F8AFDB8F2",
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "sourceLabel": "Your self-report",
+      "sourceFamily": "SELF_REPORTED",
+      "providerFamily": null,
+      "domainId": "COGNITIVE_NAVIGATION",
+      "facetId": null,
+      "value": 100,
+      "confidence": "CUSTOMER_CONFIRMED",
+      "assessmentDate": "2026-09-01",
+      "freshness": {
+        "state": "RECENT_RESULT",
+        "ageDays": 0,
+        "currentPresentationAllowed": true
+      },
+      "precisionBoundary": [
+        "PARTIAL_RESPONSE_SET",
+        "LOW_RESPONSE_COMPLETENESS",
+        "SELF_REPORTED_INDEX_NOT_OBJECTIVE_TRAIT_SCORE"
+      ],
+      "provenance": [
+        {
+          "source": "PHI-SA2-RESULT-PERSON-A",
+          "instrumentCode": "PHI-OS-SELF-ASSESSMENT-INSTRUMENT-v2",
+          "instrumentVersion": "2.0.0"
+        }
+      ]
+    }
+  ],
+  "selfAssessmentRadar": {
+    "kind": "SIX_DOMAIN_RADAR",
+    "axes": [
+      {
+        "domainId": "COGNITIVE_NAVIGATION",
+        "label": "Cognitive Navigation",
+        "value": 100,
+        "signalRef": "PRF-SIG-599D217B3257200F8AFDB8F2",
+        "missing": false
+      },
+      {
+        "domainId": "EMOTIONAL_SOCIAL_REGULATION",
+        "label": "Emotional & Social Regulation",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "ADAPTATION_COPING",
+        "label": "Adaptation & Coping",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "BODY_LIFESTYLE_STEWARDSHIP",
+        "label": "Body & Lifestyle Stewardship",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "FINANCIAL_CAPABILITY",
+        "label": "Financial Capability",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "MEANING_VALUES",
+        "label": "Meaning & Values",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      }
+    ],
+    "completeCount": 1,
+    "complete": false,
+    "masterScore": null,
+    "quotientScore": null,
+    "interpretation": "Each axis is a relative position from this self-assessment only; it is not an IQ/EQ-style quotient or a normed percentile."
+  },
+  "currentReality": null,
+  "crossSource": {
+    "groups": [
+      {
+        "group": "SOURCE_CONTRADICTION",
+        "count": 1
+      }
+    ],
+    "perspectives": [
+      {
+        "id": "PRF-XSP-4BBBEF56136F23D3B7628C9E",
+        "group": "SOURCE_CONTRADICTION",
+        "topicId": "COGNITIVE_NAVIGATION",
+        "statement": "The imported result and the customer self-report are not flattened into one conclusion.",
+        "sourceClasses": [
+          "CUSTOMER_SELF_REPORT",
+          "EXTERNAL_PROFILE_RESULT"
+        ],
+        "signalRefs": [
+          "PRF-SIG-7B0766C3B5DC7EA6DA9CCCBF",
+          "PRF-SIG-599D217B3257200F8AFDB8F2"
+        ],
+        "realityCorrelationRefs": []
+      }
+    ],
+    "boundary": "Different sources may align, complement or conflict, but they are not collapsed into one master score and do not validate one another."
+  },
+  "relationshipProfile": null,
+  "freshness": {
+    "oldSignalRefs": [],
+    "oldResultWarningRequired": false,
+    "message": null
+  },
+  "customerPublication": {
+    "customerPublishable": false,
+    "preview": true,
+    "state": "REVIEW_PREVIEW"
+  },
+  "boundaries": [
+    "Each source keeps its own evidence class.",
+    "No universal personality master score is created.",
+    "Reasoning task performance is not IQ and is not a normed percentile.",
+    "Self-assessment is not a diagnosis.",
+    "A symbolic perspective does not become scientifically validated because it resembles a questionnaire result."
+  ],
+  "governance": {
+    "progressiveOptionalLane": true,
+    "personalReadingGateCreated": false,
+    "skipAllowed": true,
+    "sourceClassesPreserved": true,
+    "sourceClassFlatteningAllowed": false,
+    "universalMasterScoreCreated": false,
+    "iqOrQuotientCreated": false,
+    "diagnosisCreated": false,
+    "symbolicScientificValidationCreated": false,
+    "relationshipCompatibilityScoreCreated": false,
+    "partnerHiddenStateInferenceCreated": false,
+    "customerPublishableBeforePrfW12HumanAcceptance": false
+  },
+  "semanticDigest": "31ff2b08f370cedfdab26e9c3d33fe9afaa267b55a9503ec2fa3fd4e752ac69c"
+}

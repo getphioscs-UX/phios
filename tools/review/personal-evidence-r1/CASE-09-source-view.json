@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "PHI-OS-PROGRESSIVE-PROFILE-VIEW-v1",
+  "profileViewId": "PRF-VIEW-171B6ADCE1AF8CCCB0276720",
+  "mode": "QUICK_PROFILE",
+  "participantRef": "PERSON-A",
+  "asOfDate": "2026-09-01",
+  "sourceLegend": [
+    {
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "family": "SELF_REPORTED",
+      "label": "Your self-report",
+      "description": "How you describe yourself in this assessment."
+    },
+    {
+      "sourceClass": "SYMBOLIC_INTERPRETATION",
+      "family": "SYMBOLIC",
+      "label": "Symbolic interpretation",
+      "description": "An interpretive perspective, not a measured trait or scientific validation."
+    }
+  ],
+  "signalCards": [
+    {
+      "signalRef": "PRF-SIG-599D217B3257200F8AFDB8F2",
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "sourceLabel": "Your self-report",
+      "sourceFamily": "SELF_REPORTED",
+      "providerFamily": null,
+      "domainId": "COGNITIVE_NAVIGATION",
+      "facetId": null,
+      "value": 100,
+      "confidence": "CUSTOMER_CONFIRMED",
+      "assessmentDate": "2026-09-01",
+      "freshness": {
+        "state": "RECENT_RESULT",
+        "ageDays": 0,
+        "currentPresentationAllowed": true
+      },
+      "precisionBoundary": [
+        "PARTIAL_RESPONSE_SET",
+        "LOW_RESPONSE_COMPLETENESS",
+        "SELF_REPORTED_INDEX_NOT_OBJECTIVE_TRAIT_SCORE"
+      ],
+      "provenance": [
+        {
+          "source": "PHI-SA2-RESULT-PERSON-A",
+          "instrumentCode": "PHI-OS-SELF-ASSESSMENT-INSTRUMENT-v2",
+          "instrumentVersion": "2.0.0"
+        }
+      ]
+    },
+    {
+      "signalRef": "PRF-SIG-4A10B56AAC7901080B8F62A1",
+      "sourceClass": "SYMBOLIC_INTERPRETATION",
+      "sourceLabel": "Symbolic interpretation",
+      "sourceFamily": "SYMBOLIC",
+      "providerFamily": null,
+      "domainId": "COGNITIVE_NAVIGATION",
+      "facetId": null,
+      "value": "Symbolic lens emphasizes a different operating pattern",
+      "confidence": "UNKNOWN",
+      "assessmentDate": "2026-09-01",
+      "freshness": {
+        "state": "RECENT_RESULT",
+        "ageDays": 0,
+        "currentPresentationAllowed": true
+      },
+      "precisionBoundary": [
+        "SYMBOLIC_INTERPRETATION_ONLY",
+        "NOT_MEASURED_TRAIT"
+      ],
+      "provenance": [
+        {
+          "source": "PRF-W12-SYMBOLIC-FIXTURE"
+        }
+      ]
+    }
+  ],
+  "selfAssessmentRadar": {
+    "kind": "SIX_DOMAIN_RADAR",
+    "axes": [
+      {
+        "domainId": "COGNITIVE_NAVIGATION",
+        "label": "Cognitive Navigation",
+        "value": 100,
+        "signalRef": "PRF-SIG-599D217B3257200F8AFDB8F2",
+        "missing": false
+      },
+      {
+        "domainId": "EMOTIONAL_SOCIAL_REGULATION",
+        "label": "Emotional & Social Regulation",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "ADAPTATION_COPING",
+        "label": "Adaptation & Coping",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "BODY_LIFESTYLE_STEWARDSHIP",
+        "label": "Body & Lifestyle Stewardship",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "FINANCIAL_CAPABILITY",
+        "label": "Financial Capability",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "MEANING_VALUES",
+        "label": "Meaning & Values",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      }
+    ],
+    "completeCount": 1,
+    "complete": false,
+    "masterScore": null,
+    "quotientScore": null,
+    "interpretation": "Each axis is a relative position from this self-assessment only; it is not an IQ/EQ-style quotient or a normed percentile."
+  },
+  "currentReality": {
+    "counts": {
+      "CURRENTLY_RESONANT": 0,
+      "PARTIALLY_RESONANT": 0,
+      "CURRENTLY_NOT_RESONANT": 1,
+      "OPEN": 0
+    },
+    "total": 1,
+    "label": "Compared with Current Reality",
+    "boundary": "Current Reality may support, weaken or leave a profile signal open; it does not prove a profile model true."
+  },
+  "crossSource": {
+    "groups": [
+      {
+        "group": "SOURCE_TENSION",
+        "count": 1
+      },
+      {
+        "group": "CURRENTLY_CONTRADICTED",
+        "count": 1
+      }
+    ],
+    "perspectives": [
+      {
+        "id": "PRF-XSP-FCFBCB4DF37AD635E08AB99B",
+        "group": "SOURCE_TENSION",
+        "topicId": "COGNITIVE_NAVIGATION",
+        "statement": "The two source classes remain in tension.",
+        "sourceClasses": [
+          "CUSTOMER_SELF_REPORT",
+          "SYMBOLIC_INTERPRETATION"
+        ],
+        "signalRefs": [
+          "PRF-SIG-599D217B3257200F8AFDB8F2",
+          "PRF-SIG-4A10B56AAC7901080B8F62A1"
+        ],
+        "realityCorrelationRefs": []
+      },
+      {
+        "id": "PRF-XSP-560B3F638C5D904403EEC600",
+        "group": "CURRENTLY_CONTRADICTED",
+        "topicId": "COGNITIVE_NAVIGATION",
+        "statement": "Current Reality currently contradicts this self-reported signal.",
+        "sourceClasses": [
+          "CUSTOMER_SELF_REPORT"
+        ],
+        "signalRefs": [
+          "PRF-SIG-599D217B3257200F8AFDB8F2"
+        ],
+        "realityCorrelationRefs": [
+          "PRF-RC-ABF0C92A9C2B39C9D7AD3EBA"
+        ]
+      }
+    ],
+    "boundary": "Different sources may align, complement or conflict, but they are not collapsed into one master score and do not validate one another."
+  },
+  "relationshipProfile": null,
+  "freshness": {
+    "oldSignalRefs": [],
+    "oldResultWarningRequired": false,
+    "message": null
+  },
+  "customerPublication": {
+    "customerPublishable": false,
+    "preview": true,
+    "state": "REVIEW_PREVIEW"
+  },
+  "boundaries": [
+    "Each source keeps its own evidence class.",
+    "No universal personality master score is created.",
+    "Reasoning task performance is not IQ and is not a normed percentile.",
+    "Self-assessment is not a diagnosis.",
+    "A symbolic perspective does not become scientifically validated because it resembles a questionnaire result."
+  ],
+  "governance": {
+    "progressiveOptionalLane": true,
+    "personalReadingGateCreated": false,
+    "skipAllowed": true,
+    "sourceClassesPreserved": true,
+    "sourceClassFlatteningAllowed": false,
+    "universalMasterScoreCreated": false,
+    "iqOrQuotientCreated": false,
+    "diagnosisCreated": false,
+    "symbolicScientificValidationCreated": false,
+    "relationshipCompatibilityScoreCreated": false,
+    "partnerHiddenStateInferenceCreated": false,
+    "customerPublishableBeforePrfW12HumanAcceptance": false
+  },
+  "semanticDigest": "171b6adce1af8cccb0276720bf0d0beff71cb9165dfc43f66239f56a9a6d1c7c"
+}

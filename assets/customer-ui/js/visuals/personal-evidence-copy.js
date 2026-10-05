@@ -36,6 +36,8 @@ const add=(key,en,zh)=>{terms[key]=[en,zh];terms[key.toUpperCase()]=[en,zh];term
 ['Adapted from the OECD/INFE Toolkit for Measuring Financial Literacy, Inclusion and Well-Being 2026. PHI OS has modified and shortened content; this is not an official OECD score or OECD-endorsed instrument.','根据 OECD/INFE 2026 年金融素养、普惠金融与福祉测量工具改编。PHI OS 对内容进行了修改和缩减；这不是官方 OECD 分数，也不是 OECD 认可的测量工具。'],
 ].forEach(([en,zh])=>add(en,en,zh));
 [["N1","anxiety","焦虑"],["N2","anger","愤怒"],["N3","depression","低落倾向"],["N4","self consciousness","自我意识"],["N5","immoderation","冲动失控"],["N6","vulnerability","脆弱性"],["E1","friendliness","友善"],["E2","gregariousness","合群"],["E3","assertiveness","自信表达"],["E4","activity level","活动水平"],["E5","excitement seeking","寻求刺激"],["E6","cheerfulness","愉悦"],["O1","imagination","想象力"],["O2","artistic interests","艺术兴趣"],["O3","emotionality","情感体验"],["O4","adventurousness","探索尝试"],["O5","intellect","智性"],["O6","liberalism","开放观念"],["A1","trust","信任"],["A2","morality","诚实"],["A3","altruism","利他"],["A4","cooperation","合作"],["A5","modesty","谦逊"],["A6","sympathy","同情"],["C1","self efficacy","自我效能"],["C2","orderliness","条理性"],["C3","dutifulness","责任感"],["C4","achievement striving","成就追求"],["C5","self discipline","自律"],["C6","cautiousness","谨慎"]].forEach(x=>add(...x));
+[['Compared two options before choosing.','作出选择前比较了两个选项。'],['Both records describe comparing two options before choosing.','两份记录都描述了作出选择前比较两个选项。']].forEach(([en,zh])=>add(en,en,zh));
+add('Provider result supplied by customer','External assessment result supplied by you','你提供的外部测评结果');
 export function evidenceLabel(value,locale='en'){
   if(value==null||value==='')return '';
   if(typeof value==='object')return value[locale]||value.en||'';

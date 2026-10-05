@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "PHI-OS-PROGRESSIVE-PROFILE-VIEW-v1",
+  "profileViewId": "PRF-VIEW-1959B729E614CF30C27E2FC0",
+  "mode": "FULL_SELF_ASSESSMENT",
+  "participantRef": "PERSON-A",
+  "asOfDate": "2026-10-04",
+  "sourceLegend": [
+    {
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "family": "SELF_REPORTED",
+      "label": "Your self-report",
+      "description": "How you describe yourself in this assessment."
+    },
+    {
+      "sourceClass": "EXTERNAL_PROFILE_RESULT",
+      "family": "EXTERNAL",
+      "label": "Imported external profile",
+      "description": "A result you supplied from another provider; its provider identity stays visible."
+    }
+  ],
+  "signalCards": [
+    {
+      "signalRef": "PRF-SIG-364BA162F3D10293C140F288",
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "sourceLabel": "Your self-report",
+      "sourceFamily": "SELF_REPORTED",
+      "providerFamily": null,
+      "domainId": "COGNITIVE_NAVIGATION",
+      "facetId": null,
+      "value": "Compared two options before choosing.",
+      "confidence": "UNKNOWN",
+      "assessmentDate": "2026-10-04",
+      "freshness": {
+        "state": "RECENT_RESULT",
+        "ageDays": 0,
+        "currentPresentationAllowed": true
+      },
+      "precisionBoundary": [
+        "NO_CROSS_PROVIDER_EQUIVALENCE_ASSUMED"
+      ],
+      "provenance": [
+        {
+          "source": "W11R2-SYNTHETIC-COMPARISON-0"
+        }
+      ]
+    },
+    {
+      "signalRef": "PRF-SIG-33CE6BADACFC9DDBAA5333B5",
+      "sourceClass": "EXTERNAL_PROFILE_RESULT",
+      "sourceLabel": "Imported external profile",
+      "sourceFamily": "EXTERNAL",
+      "providerFamily": "OTHER_EXTERNAL_PROFILE",
+      "domainId": "COGNITIVE_NAVIGATION",
+      "facetId": null,
+      "value": "Compared two options before choosing.",
+      "confidence": "UNKNOWN",
+      "assessmentDate": "2026-10-04",
+      "freshness": {
+        "state": "RECENT_RESULT",
+        "ageDays": 0,
+        "currentPresentationAllowed": true
+      },
+      "precisionBoundary": [
+        "NO_CROSS_PROVIDER_EQUIVALENCE_ASSUMED"
+      ],
+      "provenance": [
+        {
+          "source": "W11R2-SYNTHETIC-COMPARISON-1"
+        }
+      ]
+    }
+  ],
+  "selfAssessmentRadar": {
+    "kind": "SIX_DOMAIN_RADAR",
+    "axes": [
+      {
+        "domainId": "COGNITIVE_NAVIGATION",
+        "label": "Cognitive Navigation",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "EMOTIONAL_SOCIAL_REGULATION",
+        "label": "Emotional & Social Regulation",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "ADAPTATION_COPING",
+        "label": "Adaptation & Coping",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "BODY_LIFESTYLE_STEWARDSHIP",
+        "label": "Body & Lifestyle Stewardship",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "FINANCIAL_CAPABILITY",
+        "label": "Financial Capability",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      },
+      {
+        "domainId": "MEANING_VALUES",
+        "label": "Meaning & Values",
+        "value": null,
+        "signalRef": null,
+        "missing": true
+      }
+    ],
+    "completeCount": 0,
+    "complete": false,
+    "masterScore": null,
+    "quotientScore": null,
+    "interpretation": "Each axis is a relative position from this self-assessment only; it is not an IQ/EQ-style quotient or a normed percentile."
+  },
+  "careerInterest": null,
+  "currentReality": null,
+  "crossSource": {
+    "groups": [
+      {
+        "group": "SOURCE_ALIGNED",
+        "count": 1
+      }
+    ],
+    "perspectives": [
+      {
+        "id": "PRF-XSP-531C3786C2CC2149516697FA",
+        "group": "SOURCE_ALIGNED",
+        "topicId": "COGNITIVE_NAVIGATION",
+        "statement": "Both records describe comparing two options before choosing.",
+        "sourceClasses": [
+          "CUSTOMER_SELF_REPORT",
+          "EXTERNAL_PROFILE_RESULT"
+        ],
+        "signalRefs": [
+          "PRF-SIG-364BA162F3D10293C140F288",
+          "PRF-SIG-33CE6BADACFC9DDBAA5333B5"
+        ],
+        "realityCorrelationRefs": []
+      }
+    ],
+    "boundary": "Different sources may align, complement or conflict, but they are not collapsed into one master score and do not validate one another."
+  },
+  "relationshipProfile": null,
+  "freshness": {
+    "oldSignalRefs": [],
+    "oldResultWarningRequired": false,
+    "message": null
+  },
+  "customerPublication": {
+    "customerPublishable": false,
+    "preview": true,
+    "state": "REVIEW_PREVIEW"
+  },
+  "boundaries": [
+    "Each source keeps its own evidence class.",
+    "No universal personality master score is created.",
+    "Reasoning task performance is not IQ and is not a normed percentile.",
+    "Self-assessment is not a diagnosis.",
+    "A symbolic perspective does not become scientifically validated because it resembles a questionnaire result."
+  ],
+  "governance": {
+    "progressiveOptionalLane": true,
+    "personalReadingGateCreated": false,
+    "skipAllowed": true,
+    "sourceClassesPreserved": true,
+    "sourceClassFlatteningAllowed": false,
+    "universalMasterScoreCreated": false,
+    "iqOrQuotientCreated": false,
+    "diagnosisCreated": false,
+    "symbolicScientificValidationCreated": false,
+    "relationshipCompatibilityScoreCreated": false,
+    "partnerHiddenStateInferenceCreated": false,
+    "customerPublishableBeforePrfW12HumanAcceptance": false
+  },
+  "semanticDigest": "1959b729e614cf30c27e2fc0b0d0f9109cf19f009a2ac1a71a15aa89da7545c2"
+}

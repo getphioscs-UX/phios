@@ -1,26 +1,29 @@
-import {renderPersonalEvidenceFigure,hasRenderablePersonalEvidenceFigure} from '../../assets/customer-ui/js/visuals/profile-visual-mvp.js';
-import {evidenceLabel,evidenceStatement,evidenceValueRows} from '../../assets/customer-ui/js/visuals/personal-evidence-copy.js';
+import {evidenceLabel,evidenceValueRows} from '../../assets/customer-ui/js/visuals/personal-evidence-copy.js';
+import {buildPersonalEvidenceBilingualReading} from './personal-evidence-bilingual-reading.js';
+import {resolvePersonalEvidenceSharedVisual} from '../profile/personal-evidence-visual-assets.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const human=v=>String(v??'').replaceAll('::',' · ').replaceAll('_',' ');
-export function renderPersonalEvidenceDossier({dossier,profileView,locale='en',customerName='',subject='',reviewPreview=false,report=null,cprHandoff=null}){
-  if(!reviewPreview && (report?.canonicalState!=='RELEASED'||cprHandoff?.sourceReportDigest!==report.reportDigest||cprHandoff?.targetRuntime!=='CPR'))throw new Error('CPR_PERSONAL_EVIDENCE_RELEASE_REQUIRED');
-  if(!reviewPreview && report.customer!==profileView?.participantRef)throw new Error('CPR_PERSONAL_EVIDENCE_CUSTOMER_MISMATCH');
-  if(dossier?.participantRef!==profileView?.participantRef)throw new Error('CPR_PERSONAL_EVIDENCE_SUBJECT_MISMATCH');
-  const zh=locale==='zh-Hans',cards=profileView.signalCards||[];
-  const page=(body,attrs='')=>`<article class="pub-page pe-body" ${attrs}>${body}</article>`;
-  const staticPage=(asset,cover=false)=>`<article class="pub-static" data-pe-static="${esc(asset.id)}"><img src="${esc(asset.publicUrl)}" alt="${zh?'档案静态视觉':'Dossier static visual'}" loading="eager" onerror="this.nextElementSibling.hidden=false"><p class="pe-asset-error" hidden>${zh?'现有静态视觉暂时无法加载；打印尚未就绪。':'Existing static visual is unavailable. Print is not ready.'}</p>${cover?`<div class="pe-cover-values"><span>${esc(customerName||profileView.participantRef)}</span><span>${esc(dossier.asOfDate||'')}</span><span>${esc(subject)}</span></div>`:''}</article>`;
-  const rows=card=>`<div class="pe-source"><strong>${esc(evidenceLabel(card.sourceClass,locale))}</strong><p>${esc(evidenceLabel(card.domainId,locale))} ${esc(evidenceLabel(card.facetId,locale))}</p><dl>${evidenceValueRows(card.value,locale).map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl><p>${esc(evidenceLabel(card.providerFamily,locale))} · ${esc(card.assessmentDate||(zh?'日期未知':'Date unknown'))}</p><ul>${(card.precisionBoundary||[]).map(x=>`<li>${esc(evidenceStatement(x,locale))}</li>`).join('')}</ul></div>`;
-  let html=dossier.staticPages.map((a,i)=>staticPage(a,i===0)).join('');
-  for(const section of dossier.sections){
-    html+=staticPage(section.master);
-    for(const fig of section.pfigs)if(hasRenderablePersonalEvidenceFigure(fig))html+=page(renderPersonalEvidenceFigure(fig,{locale}),`data-pe-section="${esc(section.section)}"`);
-    // Source lanes carry native data once. Figures in their primary sections
-    // already contain the customer evidence; do not duplicate it on extra pages.
-    const selected=section.section==='SEC-02'?cards:section.section==='SEC-08'?cards.filter(c=>String(c.domainId).startsWith('FINANCIAL_CAPABILITY')||c.sourceClass==='EXTERNAL_PROFILE_RESULT'):[];
-    let group=[],lineCount=0;
-    const emit=()=>{if(group.length)html+=page(group.map(rows).join(''),`data-pe-section="${esc(section.section)}"`);group=[];lineCount=0};
-    for(const card of selected){const lines=JSON.stringify(card.value??null,null,2).split('\n').length+(card.precisionBoundary||[]).length+6;if(lineCount+lines>32)emit();group.push(card);lineCount+=lines;}emit();
-    // Rich masters already explain empty sections and general boundaries.
-  }
-  return `<div class="pub-report pe-dossier" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-review-preview="${reviewPreview}">${html}</div>`;
+const bi=(zh,en)=>`${esc(zh)}<small lang="en">${esc(en)}</small>`;
+export function renderPersonalEvidenceDossier({dossier,profileView,customerName='',subject='',reviewPreview=false,report=null,cprHandoff=null}){
+ if(!reviewPreview&&(report?.canonicalState!=='RELEASED'||cprHandoff?.sourceReportDigest!==report.reportDigest||cprHandoff?.targetRuntime!=='CPR'))throw new Error('CPR_PERSONAL_EVIDENCE_RELEASE_REQUIRED');
+ if(!reviewPreview&&report.customer!==profileView?.participantRef)throw new Error('CPR_PERSONAL_EVIDENCE_CUSTOMER_MISMATCH');
+ if(dossier?.participantRef!==profileView?.participantRef)throw new Error('CPR_PERSONAL_EVIDENCE_SUBJECT_MISMATCH');
+ const art=resolvePersonalEvidenceSharedVisual('BODY');
+ if(!dossier.sections?.length||dossier.sections.some(s=>s.body?.objectKey!==art.objectKey||s.body?.publicUrl!==art.publicUrl))throw new Error('PROFILE_BODY_VISUAL_RESOLUTION_REQUIRED');
+ const reading=buildPersonalEvidenceBilingualReading({profileView,dossier});let number=0;
+ const staticPage=(a,cover=false)=>{number++;return `<article class="pub-static" data-pe-static="${esc(a.id)}"><img src="${esc(a.publicUrl)}" alt="原有档案视觉 / Original dossier artwork" loading="eager" onerror="this.closest('.pe-dossier').dataset.publicationBlocked='true'">${cover?`<div class="pe-cover-values"><span>${esc(customerName||profileView.participantRef)}</span><span>${esc(dossier.asOfDate)}</span><span>${esc(subject)}</span></div>`:''}</article>`;};
+ const pair=u=>`<div class="pe-paragraph-pair" data-paragraph-pair-id="${u.paragraphPairId}"><p class="pe-narrative pe-zh" lang="zh-Hans">${esc(u.zh)}</p><div class="pe-language-divider">ENGLISH</div><p class="pe-narrative pe-en" lang="en">${esc(u.en)}</p></div>`;
+ const note=n=>`<aside class="pe-evidence-note"><strong>证据说明 / Evidence note</strong>${n.sourceZh?`<p>来源 / Source: ${esc(n.sourceZh)} · ${esc(n.sourceEn)}</p>`:''}${n.dates.length?`<p>日期 / Date: ${esc(n.dates.join(' · '))}</p>`:''}<p>覆盖 / Coverage: ${esc(n.coverageZh)}<br>${esc(n.coverageEn)}</p><p>解读边界 / Reading boundary: ${esc(n.boundaryZh)}<br>${esc(n.boundaryEn)}</p></aside>`;
+ const tableRows=(t,rs)=>`<section class="pe-reading-table" data-reading-structure="${t.kind}"><h3>${bi(t.headingZh,t.headingEn)}</h3>${rs.map(r=>`<div class="pe-reading-row"><div>${bi(r.zh,r.en)}</div><div>${bi(r.stateZh,r.stateEn)}${r.detailZh?`<p>${bi(r.detailZh,r.detailEn)}</p>`:''}</div></div>`).join('')}</section>`;
+ const evidenceRow=card=>{const zh=evidenceValueRows(card.value,'zh-Hans'),en=evidenceValueRows(card.value,'en');return `<div class="pe-evidence-row" data-evidence-record="${esc(card.signalRef)}"><span>${bi(evidenceLabel(card.facetId||card.domainId,'zh-Hans'),evidenceLabel(card.facetId||card.domainId,'en'))}</span><dl>${zh.map(([k,v],i)=>`<div><dt>${bi(k,en[i]?.[0]||k)}</dt><dd>${esc(v===en[i]?.[1]?v:v+' / '+(en[i]?.[1]||''))}</dd></div>`).join('')}</dl></div>`;};
+ const cost=u=>Math.ceil(u.zh.length/38)*28.8+Math.ceil(u.en.length/85)*24.6+40;
+ const bodyPage=(c,content,part,n)=>`<article class="pub-page pe-body pub-composed-page" data-pe-section="${c.sectionId}" data-body-page="true" data-page-family="${c.family}" data-bilingual-report="true"><div class="pub-decoration pub-decoration--single"><img class="pub-page-background" data-body-visual="true" src="${esc(art.publicUrl)}" alt="个人证据正文底图 / Personal evidence body artwork" loading="eager" onerror="this.closest('.pe-dossier').dataset.publicationBlocked='true'"></div><header class="pub-header"><span>PHIOS · PERSONAL EVIDENCE</span><span>${c.sectionId.slice(-2)} · ${part}</span></header><div class="pe-reading-field"><h2>${bi(c.titleZh,c.titleEn)}</h2><div class="pe-reading-content">${content}</div></div><footer class="pub-footer"><span>PHIOS · ${esc(dossier.asOfDate)}</span><span>个人证据 / Personal Evidence · ${n}</span></footer></article>`;
+ let html=dossier.staticPages.map((a,i)=>staticPage(a,i===0)).join('');
+ if(!profileView.signalCards?.length)return '<div class="pub-report pe-dossier" data-profile-product="ONE_BILINGUAL_REPORT" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2">'+html+dossier.sections.map(x=>staticPage(x.master)).join('')+'</div>';
+ for(const section of dossier.sections){html+=staticPage(section.master);const c=reading.chapters.find(x=>x.sectionId===section.section),blocks=c.units.filter(u=>!u.secondary).map(u=>({html:pair(u),height:cost(u)}));
+  for(const u of c.units.filter(u=>u.secondary)){const layer=u.secondary.kind==='evidence'?'<section class="pe-source-detail"><h3>'+bi(evidenceLabel(u.secondary.cards[0].providerFamily||u.secondary.cards[0].sourceClass,'zh-Hans'),evidenceLabel(u.secondary.cards[0].providerFamily||u.secondary.cards[0].sourceClass,'en'))+'</h3><p class="pe-source-date">'+esc(u.secondary.cards[0].assessmentDate||'日期未提供 / Date not supplied')+'</p>'+u.secondary.cards.map(evidenceRow).join('')+'</section>':tableRows(u.secondary.table,u.secondary.rows);blocks.push({html:pair(u)+layer,height:cost(u)+u.secondary.height});}
+  const noteBlock=['SEC-08','SEC-09'].includes(c.sectionId)?blocks[0]:blocks.at(-1);noteBlock.html+=note(c.note);noteBlock.height+=220;
+  let chunk=[],height=0,part=1;const emit=()=>{if(chunk.length){html+=bodyPage(c,chunk.map(b=>b.html).join(''),part++,++number);chunk=[];height=0;}};
+  for(const b of blocks){if(height+b.height>700)emit();chunk.push(b);height+=b.height;}emit();
+ }
+ return `<div class="pub-report pe-dossier" data-profile-product="ONE_BILINGUAL_REPORT" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-review-preview="${reviewPreview}">${html}</div>`;
 }

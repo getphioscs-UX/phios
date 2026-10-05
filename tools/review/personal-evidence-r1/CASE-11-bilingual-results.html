@@ -1,0 +1,177 @@
+<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CASE-11 · Personal Evidence Profile / 个人证据档案</title><style>@layer pvp.profile.mvp {
+  .prf-visual-mvp{display:grid;gap:clamp(18px,3vw,28px);margin:22px 0 8px}
+  .prf-visual-mvp__intro{max-width:760px}.prf-visual-mvp__intro h2{margin:.2rem 0 .5rem;font-size:clamp(1.45rem,3vw,2rem)}.prf-visual-mvp__intro p{margin:0;color:var(--pvp-supporting,#676a61);line-height:1.65}
+  .prf-pfig{border:1px solid var(--cx-color-border,rgba(23,25,20,.14));border-radius:clamp(16px,2vw,22px);background:linear-gradient(145deg,var(--pvp-visual-surface,#fff),color-mix(in srgb,var(--pvp-visual-surface-raised,#fffefa) 88%,var(--pvp-method-profile,#b59a5c)));padding:clamp(18px,3vw,28px);box-shadow:0 14px 38px rgba(23,25,20,.055)}
+  .prf-pfig__head{display:grid;grid-template-columns:minmax(0,.8fr) minmax(240px,.55fr);gap:20px;align-items:start;margin-bottom:20px}.prf-pfig__head h3{margin:.2rem 0 0;font-size:clamp(1.2rem,2vw,1.6rem)}.prf-pfig__head>p{margin:0;color:var(--pvp-supporting,#676a61);line-height:1.6;font-size:.92rem}.prf-pfig__eyebrow{margin:0;font-size:.72rem;letter-spacing:.14em;font-weight:700;color:var(--pvp-supporting,#676a61);text-transform:uppercase}
+  .prf-pfig--empty{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:var(--pvp-visual-surface,#fff);box-shadow:none}.prf-pfig--empty h3{margin:.15rem 0 .3rem}.prf-pfig--empty p:last-child{margin:0;color:var(--pvp-supporting,#676a61)}.prf-pfig-empty__mark{width:44px;height:44px;border-radius:50%;border:1px dashed var(--pvp-chart-muted,rgba(23,25,20,.24));position:relative}.prf-pfig-empty__mark:after{content:"";position:absolute;inset:13px;border-radius:50%;background:var(--pvp-method-profile,#b59a5c);opacity:.28}
+  .prf-dimension-lanes{display:grid;gap:12px}.prf-dimension-lane{display:grid;grid-template-columns:minmax(150px,.28fr) minmax(0,.72fr);gap:14px;padding:14px;border-radius:16px;background:color-mix(in srgb,var(--pvp-visual-surface,#fff) 92%,var(--pvp-method-profile,#b59a5c));border:1px solid color-mix(in srgb,var(--pvp-method-profile,#b59a5c) 28%,transparent)}.prf-dimension-lane__source{display:grid;align-content:center;gap:3px}.prf-dimension-lane__source span{font-weight:750}.prf-dimension-lane__source small{color:var(--pvp-supporting,#676a61)}.prf-dimension-lane__items{display:flex;gap:8px;flex-wrap:wrap}.prf-dimension-chip{display:grid;gap:2px;min-width:110px;padding:9px 11px;border-radius:12px;background:var(--pvp-visual-surface,#fff);border:1px solid var(--cx-color-border,rgba(23,25,20,.12))}.prf-dimension-chip span{font-size:.76rem;color:var(--pvp-supporting,#676a61)}.prf-dimension-chip strong{font-size:.96rem}
+  .prf-sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.prf-sc-col{padding:16px;border-radius:16px;border:1px solid var(--cx-color-border,rgba(23,25,20,.12));background:var(--pvp-visual-surface,#fff)}.prf-sc-col__title{display:flex;align-items:center;gap:8px;margin-bottom:11px}.prf-sc-col__title span{width:10px;height:10px;border-radius:50%;background:var(--pvp-reality,#2f6a4f)}.prf-sc-col[data-kind="cost"] .prf-sc-col__title span{background:var(--pvp-topic,#7a6331)}.prf-sc-col article{display:grid;gap:3px;padding:10px 0;border-top:1px solid var(--cx-color-border,rgba(23,25,20,.09))}.prf-sc-col article small,.prf-sc-col__none{color:var(--pvp-supporting,#676a61);font-size:.8rem}.prf-sc-col__none{margin:.6rem 0 0}
+  .prf-convergence-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.prf-convergence-state{min-height:150px;padding:14px;border:1px solid var(--cx-color-border,rgba(23,25,20,.12));border-radius:15px;background:var(--pvp-visual-surface,#fff)}.prf-convergence-state__top{display:grid;grid-template-columns:auto 1fr auto;gap:7px;align-items:center}.prf-convergence-state__top span{width:9px;height:9px;border-radius:50%;background:var(--pvp-chart-muted)}.prf-convergence-state[data-state="CONVERGES"] .prf-convergence-state__top span{background:var(--pvp-reality,#2f6a4f)}.prf-convergence-state[data-state="CONTEXT_DEPENDENT"] .prf-convergence-state__top span{background:var(--pvp-method-profile,#b59a5c)}.prf-convergence-state[data-state="DIVERGES"] .prf-convergence-state__top span{background:var(--pvp-topic,#7a6331)}.prf-convergence-state__top b{font-size:1.2rem}.prf-convergence-state>small{display:block;color:var(--pvp-supporting,#676a61);margin:.5rem 0 .7rem;line-height:1.4}.prf-convergence-state>p{font-size:.8rem;line-height:1.45;margin:.4rem 0;padding-top:.45rem;border-top:1px solid var(--cx-color-border,rgba(23,25,20,.09))}
+  .prf-bridge-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}.prf-bridge-stage{position:relative;display:grid;grid-template-columns:auto 1fr;gap:10px;padding:14px 18px 14px 0}.prf-bridge-stage:not(:last-child):after{content:"";position:absolute;top:26px;right:2px;width:18px;border-top:1px solid var(--pvp-chart-muted)}.prf-bridge-stage__n{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--pvp-method-profile,#b59a5c);font-size:.68rem;font-weight:800}.prf-bridge-stage[data-active="false"]{opacity:.48}.prf-bridge-stage strong{font-size:.9rem}.prf-bridge-stage p{margin:.3rem 0 0;color:var(--pvp-supporting,#676a61);font-size:.8rem;line-height:1.45}.prf-bridge-actions{margin-top:14px}
+  @media(max-width:900px){.prf-pfig__head{grid-template-columns:1fr}.prf-convergence-grid,.prf-bridge-flow{grid-template-columns:1fr 1fr}.prf-bridge-stage:nth-child(2):after{display:none}.prf-dimension-lane{grid-template-columns:1fr}}
+  @media(max-width:600px){.prf-sc-grid,.prf-convergence-grid,.prf-bridge-flow{grid-template-columns:1fr}.prf-bridge-stage:after{display:none}.prf-pfig{padding:16px}.prf-dimension-lane__items{display:grid;grid-template-columns:1fr 1fr}.prf-dimension-chip{min-width:0}}
+  @media print{.prf-pfig{break-inside:avoid;box-shadow:none}.prf-bridge-actions{display:none}}
+}
+
+/* PHI OS REPORT PRINT SHELL V2 — shared physical publication owner.
+   Method skins own palette, typography, section artwork and data visuals. */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{width:210mm;max-width:210mm;margin:0 auto;letter-spacing:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static,
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{
+ position:relative;isolation:isolate;box-sizing:border-box;
+ width:210mm!important;height:297mm!important;min-width:210mm!important;max-width:210mm!important;
+ min-height:297mm!important;max-height:297mm!important;margin:0 auto 10mm!important;overflow:hidden!important;
+ break-inside:avoid-page!important;page-break-inside:avoid!important;break-after:page!important;page-break-after:always!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static{padding:0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static>img{
+ display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover{position:relative;overflow:hidden}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover-overlay{position:absolute;inset:0;pointer-events:none}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover-value{
+ position:absolute;display:flex;align-items:center;justify-content:center;padding:0 1.2%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{padding:15mm 17mm 12mm!important;gap:4mm!important;border:0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page:before{
+ content:"";position:absolute;inset:5mm;z-index:1;pointer-events:none;border:1px solid var(--report-shell-line,rgba(188,168,121,.55))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page>*:not(.pub-decoration){position:relative;z-index:2}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-decoration{
+ position:absolute!important;inset:0!important;z-index:0!important;overflow:hidden!important;pointer-events:none!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-decoration--single .pub-page-background{
+ position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;
+ max-width:none!important;max-height:none!important;object-fit:cover!important;opacity:1!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-header{
+ display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--report-shell-line,var(--phi-report-gold-line));
+ padding-bottom:3mm
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-header>span:last-child{text-align:right}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-header small{display:block}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-heading{text-align:left}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-footer{
+ display:flex;gap:6mm;justify-content:space-between;align-items:flex-end;margin-top:auto;border-top:1px solid var(--report-shell-line,var(--phi-report-gold-line))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights{display:grid;list-style:none;padding:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights li{display:grid;align-items:start;border-bottom:1px solid var(--report-shell-soft-line,rgba(203,184,142,.45))}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights li>span{display:grid;place-items:center;border:1px solid var(--report-shell-line,var(--phi-report-gold-line));border-radius:50%}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights p{margin:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-composed-page{display:flex!important;flex-direction:column!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-composed-content{min-height:0;flex-shrink:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-composed-node{display:contents}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-visual{margin:0;padding:2mm 0;border-block:1px solid var(--report-shell-soft-line,rgba(203,184,142,.55))}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"]{padding:0!important;display:block!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-decoration:after{
+ content:"";position:absolute;inset:0;background:var(--report-shell-opener-scrim,linear-gradient(90deg,rgba(250,247,239,.9) 0%,rgba(250,247,239,.78) 27%,rgba(250,247,239,.28) 48%,rgba(250,247,239,0) 68%))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-decoration:after{
+ background:var(--report-shell-opener-scrim-reverse,linear-gradient(270deg,rgba(250,247,239,.9) 0%,rgba(250,247,239,.78) 27%,rgba(250,247,239,.28) 48%,rgba(250,247,239,0) 68%))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-header{
+ position:absolute;top:11mm;left:17mm;right:17mm;z-index:2
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading{
+ position:absolute;left:17mm;top:34mm;z-index:2;width:92mm;margin:0!important;text-align:left!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-opener-heading{
+ left:auto;right:17mm;text-align:right!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-section-number{display:block;margin:0 0 9mm!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading h2{margin:0 0 2mm!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading>p{margin:0!important;padding:0 0 4mm!important;border-bottom:1px solid var(--report-shell-line,var(--phi-report-gold-line))}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights{
+ position:absolute;left:17mm;top:116mm;z-index:2;width:105mm;max-width:none!important;padding:5mm 6mm!important;margin:0!important;backdrop-filter:none!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-master-insights{left:auto;right:17mm}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights .pub-insights{gap:1mm!important;margin:0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights .pub-insights li{grid-template-columns:8mm 1fr!important;gap:3mm!important;padding:2.5mm 0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights .pub-insights li>span{width:7mm!important;height:7mm!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-footer{
+ position:absolute;left:17mm;right:17mm;bottom:11mm;z-index:2
+}
+@page{size:A4;margin:0}
+@media print{
+ html,body{margin:0!important;padding:0!important;background:#fff!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{margin:0!important;background:#fff!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static,
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{margin:0!important;box-shadow:none!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page:last-child{break-after:auto!important;page-break-after:auto!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+
+.pe-dossier{color:#283833;background:#f9f6ef;font-family:Georgia,'Noto Serif SC','Songti SC',serif}
+.pe-dossier .pub-static{position:relative;padding:0;overflow:hidden}
+.pe-dossier .pub-static>img{display:block;width:100%;height:100%;object-fit:fill}
+.pe-dossier .pe-body{font-size:11.4pt;line-height:1.62;overflow-wrap:anywhere;background:transparent}
+.pe-dossier pre{white-space:pre-wrap;font:inherit}
+.pe-cover-values{position:absolute;left:15%;right:15%;bottom:12%;display:grid;gap:3mm;text-align:center}
+.pe-asset-error{position:absolute;top:15%;left:10%;right:10%;padding:20px;color:#6b302c;border:1px solid #bca59e;background:#fff}
+.pe-asset-error[hidden]{display:none}
+.pe-dossier .prf-pfig{box-shadow:none;margin:0;padding:0}
+.pe-dossier .prf-pfig__head{display:block}
+.pe-review-toolbar{position:sticky;top:0;z-index:5;background:#fff;padding:12px;display:flex;gap:12px;flex-wrap:wrap}
+/* One body family: artwork remains visible at the perimeter and beneath a light reading field. */
+.pe-dossier[data-publication-blocked=true]{outline:4px solid #903d26}
+.pe-dossier .pe-body:before{border:0!important}
+.pe-dossier .pub-header{font:9pt/1.4 system-ui,sans-serif;letter-spacing:.05em;color:#554a34;border-color:#a88d55;margin-bottom:5mm}
+.pe-dossier .pub-header small{font-size:8pt;letter-spacing:0}
+.pe-dossier .pe-reading-field{background:rgba(255,252,243,.86);padding:6mm 7mm;border:1px solid rgba(177,145,85,.32);border-radius:1mm}
+.pe-dossier .pe-reading-field h2{font-size:21pt;line-height:1.24;font-weight:500;color:#35473c;margin:0 0 5mm}
+.pe-dossier .pe-reading-field h2 small{font-size:10pt}
+.pe-dossier .pe-narrative{margin:0 0 4mm;orphans:3;widows:3}
+.pe-dossier .pe-narrative:last-child{margin-bottom:0}
+.pe-dossier .pub-footer{position:absolute!important;left:17mm;right:17mm;bottom:12mm;font:8.5pt/1.4 system-ui,sans-serif;color:#50432c;padding-top:2mm;border-color:#a88d55}
+.pe-dossier .pe-evidence-heading{font:600 10.5pt/1.5 system-ui,sans-serif;margin:4mm 0 2mm;break-after:avoid}
+.pe-dossier .pe-evidence-row{display:grid;grid-template-columns:1fr 1fr;gap:4mm;border-bottom:1px solid rgba(177,145,85,.3);padding:2mm 0;break-inside:avoid;font:10pt/1.45 system-ui,sans-serif}
+.pe-dossier .pe-evidence-row dl{margin:0}
+.pe-dossier .pe-evidence-row dl>div{display:flex;justify-content:space-between;gap:2mm}
+.pe-dossier .pe-evidence-row dt,.pe-dossier .pe-evidence-row dd{margin:0}
+.pe-dossier .pe-evidence-note{font:9pt/1.5 system-ui,sans-serif;margin:4mm 0 0;padding-top:3mm;border-top:1px solid rgba(177,145,85,.5)}
+.pe-dossier .pe-evidence-note p{margin:1mm 0 0}
+.pe-dossier .pe-support-figure{font:10pt/1.5 system-ui,sans-serif;margin:4mm 0 0;padding:4mm 0 0;border-top:1px solid #b9a272;break-inside:avoid}
+.pe-dossier .pe-support-figure figcaption{font-size:9pt;color:#63583d;margin:2mm 0}
+.pe-dossier .pe-support-figure p{margin:2mm 0}
+.pe-dossier .prf-pfig{box-shadow:none;margin:0;padding:0;background:transparent;border:0;border-radius:0}
+.pe-dossier .prf-pfig__head{display:block;margin-bottom:2mm}
+.pe-dossier .prf-pfig__head h3{font-size:13pt;margin:1mm 0}
+.pe-dossier .prf-pfig__head p{font-size:9pt;margin:1mm 0}
+.pe-dossier .prf-dimension-lane,.pe-dossier .prf-dimension-chip,.pe-dossier .prf-sc-card,.pe-dossier .prf-sc-col,.pe-dossier .prf-cross-row,.pe-dossier .prf-bridge-stage{background:transparent;border-radius:0;box-shadow:none;padding:2mm;border-color:rgba(177,145,85,.35)}
+.pe-dossier .prf-dimension-chip{font-size:9pt}
+.pe-dossier .prf-bridge-actions{display:none}
+html[lang=zh-Hans] .pe-dossier .pe-body{font-size:12pt;line-height:1.8}
+@media screen and (max-width:800px){
+ .pub-report.pe-dossier[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{width:100%;max-width:100%;margin:0;zoom:1}
+ .pub-report.pe-dossier[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page,.pub-report.pe-dossier[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static{width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0 0 16px!important;overflow:visible!important}
+ .pub-report.pe-dossier[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static{aspect-ratio:210/297;overflow:hidden!important}
+ .pub-report.pe-dossier[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{padding:22px 16px!important;font-size:17px;line-height:1.7}
+ .pe-dossier .pe-reading-field{padding:18px 14px;background:rgba(255,252,243,.91)}
+ .pe-dossier .pe-reading-field h2{font-size:25px;line-height:1.35}
+ .pe-dossier .pub-header{font-size:12px;gap:12px;margin-bottom:18px}
+ .pe-dossier .pub-header small{font-size:11px}
+ .pe-dossier .pub-footer{position:relative!important;left:auto;right:auto;bottom:auto;font-size:12px;margin-top:24px;padding-top:10px}
+ .pe-dossier .pe-evidence-row{display:block;font-size:15px;padding:10px 0}
+ .pe-dossier .pe-evidence-row dl{margin-top:8px}
+ .pe-dossier .pe-evidence-note{font-size:14px}
+ .pe-dossier .prf-sc-grid,.pe-dossier .prf-bridge-flow,.pe-dossier .prf-dimension-lane__items{display:block}
+ .pe-dossier .prf-pfig__head p,.pe-dossier .pe-support-figure figcaption{font-size:14px}
+ html[lang=zh-Hans] .pe-dossier .pe-body{font-size:17px;line-height:1.8}
+}
+@media print{.pe-review-toolbar{display:none}}
+/* W11R3: Chinese and English share a reading page and preserve readable A4 type. */
+.pe-dossier .pe-zh{font-size:12pt;line-height:1.8;margin:0 0 3mm}
+.pe-dossier .pe-en{font-size:11.4pt;line-height:1.62;margin:0 0 4mm}
+.pe-dossier .pe-paragraph-pair{margin-bottom:5mm;break-inside:avoid}
+.pe-dossier small[lang=en]{display:block;font:inherit;font-size:.84em;line-height:1.45;margin-top:1mm}
+.pe-dossier h2 small[lang=en]{font-size:13pt}
+.pe-dossier .pe-language-divider{font:7.5pt/1.3 system-ui;color:#8b744a;letter-spacing:.16em;border-top:1px solid rgba(177,145,85,.28);padding-top:2mm;margin:2mm 0}
+.pe-dossier .pe-reading-table{font:10pt/1.5 system-ui;margin:4mm 0}
+.pe-dossier .pe-reading-table h3,.pe-dossier .pe-source-detail h3{font:600 11pt/1.4 system-ui;margin:3mm 0}
+.pe-dossier .pe-reading-row{display:grid;grid-template-columns:1fr 1.6fr;gap:4mm;padding:2.5mm 0;border-bottom:1px solid rgba(177,145,85,.3);break-inside:avoid}
+.pe-dossier .pe-reading-row p{margin:1mm 0}
+@media screen and (max-width:800px){.pe-dossier .pe-zh,.pe-dossier .pe-en{font-size:17px;line-height:1.8}.pe-dossier .pe-reading-table{font-size:15px}.pe-dossier .pe-reading-row{grid-template-columns:1fr 1.2fr;gap:12px}.pe-dossier h2 small[lang=en]{font-size:19px}.pe-dossier .pe-language-divider{font-size:11px}}
+.pe-dossier .pe-reading-table small[lang=en],.pe-dossier .pe-evidence-row small[lang=en]{font-size:1em}
+</style></head><body><main style="max-width:900px;margin:auto;padding:24px"><h1>个人证据 / Personal Evidence</h1><p>同一份双语档案 / One bilingual profile</p><p>资料按来源分别阅读，未知仍保持未知。 / Sources remain separate; unknown states stay unresolved.</p><section><article class="pe-reading-table" data-pfig="PFIG-001"><h2>Profile 维度<small lang="en">Profile dimensions</small></h2><p>已有可读来源 / Source material available</p><p>哪些来源覆盖哪些领域？<br>Which source covers which areas?</p><p><strong>你的自陈 / Your self-report</strong> — 适应与应对 / Adaptation and coping · 身体与生活方式 / Body and lifestyle · 认知导航 / Cognitive navigation · 情绪与社交调节 / Emotional and social regulation · 财务能力 / Financial capability · 意义与价值 / Meaning and values</p><p>今天的档案包含 6 条证据记录，来自 1 类来源，覆盖 6 个已记录领域。这首先是一张关于已有资料的个人地图：其中 6 条来自自己的作答，让我们看见你如何理解若干方面的日常运作。<br>Today's profile contains 6 evidence records from 1 source class, covering 6 recorded domains. This is a personal map of the material available: 6 records come from your own responses, showing how you understand several aspects of your functioning.</p></article><article class="pe-reading-table" data-pfig="PFIG-002"><h2>模式雷达<small lang="en">Pattern radar</small></h2><p>已有可读来源 / Source material available</p><p>同一来源呈现什么模式？<br>What pattern appears within a source?</p><p><strong>你的自陈 / Your self-report</strong> — 适应与应对 / Adaptation and coping · 身体与生活方式 / Body and lifestyle · 认知导航 / Cognitive navigation · 情绪与社交调节 / Emotional and social regulation · 财务能力 / Financial capability · 意义与价值 / Meaning and values<br>来源内记录位置相同；维度含义各自保留 / Equal positions within this source; distinct dimension meanings retained</p><p>当前可读的是你在不同经验领域中的自我描述模式。应对、作息、推理、情绪与价值即使出现相同数字，也仍在回答不同问题。把这些领域分别阅读，能保留你的自我理解的层次，而不是把它们压成一项总人格。<br>The current reading is your self-description across different areas of experience. Coping, routines, reasoning, emotion and values still answer different questions when their numbers are equal. Reading them separately preserves the layers of your self-understanding rather than compressing them into one overall personality.</p></article><article class="pe-reading-table" data-pfig="PFIG-003"><h2>资源与成本<small lang="en">Resources & costs</small></h2><p>未知 / Unknown</p><p>什么被记录为帮助或成本？<br>What is recorded as help or cost?</p><p>关于适应与应对、认知导航、情绪与社交调节、意义与价值的自我描述，为资源与阻力提供了可检验的线索。这些主题可以帮助你区分：什么让一步行动更容易完成，什么在特定条件下增加消耗。当前最有用的读法，是保留线索并观察它在哪种要求下发挥作用。<br>Your self-description of Adaptation and coping, Cognitive navigation, Emotional and social regulation, Meaning and values offers testable leads for resources and friction. These topics can help distinguish what makes a next step easier from what adds effort under particular conditions. The useful reading is to retain the lead and observe the demands under which it matters.</p></article><article class="pe-reading-table" data-pfig="PFIG-004"><h2>情境变化<small lang="en">Context variation</small></h2><p>未知 / Unknown</p><p>证据在已记录的情境中如何变化？<br>How does evidence vary across recorded contexts?</p><p>把证据与当下生活连接，是让个人理解变得更具体的一步。现有记录已经为对照提供了主题：它可以与某一次行动、条件和结果核对。下表保留这些主题的当前状态，使值得检验的问题清楚可见。<br>Connecting evidence with current life makes personal understanding more specific. The records already provide topics for comparison with an action, its conditions and its outcome. The grid retains the current state of those topics, making the questions worth testing visible.</p></article><article class="pe-reading-table" data-pfig="PFIG-005"><h2>跨来源视图<small lang="en">Cross-source view</small></h2><p>未知 / Unknown</p><p>明确的来源对照如何相互关联？<br>How do explicit source comparisons relate?</p><p>把证据与当下生活连接，是让个人理解变得更具体的一步。现有记录已经为对照提供了主题：它可以与某一次行动、条件和结果核对。下表保留这些主题的当前状态，使值得检验的问题清楚可见。<br>Connecting evidence with current life makes personal understanding more specific. The records already provide topics for comparison with an action, its conditions and its outcome. The grid retains the current state of those topics, making the questions worth testing visible.</p></article><article class="pe-reading-table" data-pfig="PFIG-006"><h2>工作兴趣与表达<small lang="en">Work interest & expression</small></h2><p>未知 / Unknown</p><p>兴趣与工作表达分别有什么记录？<br>What is recorded about interests and work expression?</p><p>来源中的个人描述可以帮助把工作观察的问题具体化：如何理解任务、排列优先事项、面对变化或维持日常节奏。先把这些主题带入一项真实工作，会比直接跳到职业名称更能看见个人的运作方式。<br>The source account helps make work observation specific: understanding a task, arranging priorities, responding to change or maintaining a routine. Bringing these topics into an actual piece of work can reveal how you function more clearly than jumping straight to an occupation name.</p></article><article class="pe-reading-table" data-pfig="PFIG-007"><h2>关系互动<small lang="en">Relationship interaction</small></h2><p>已有可读来源 / Source material available</p><p>有哪些关系证据视角？<br>Which relationship evidence lanes are available?</p><p>认知导航 / Cognitive navigation — 两份自陈在这个领域存在差异，可作为现实核对目标，不构成兼容度判断。 / The two self-reports differ on this domain; this opens a reality-check target rather than a compatibility verdict.</p><p>你的情绪与社交自陈，为理解关系中的自己提供了第一人称入口。它让表达感受、回应他人与调节互动成为可以细分的主题。其意义在于看清你如何描述自己的参与方式，而不是替另一个人说明他们如何体验你。<br>Your emotional and social self-report offers a first-person entry point into understanding yourself in relationships. Expressing feelings, responding to others and regulating an exchange become topics that can be examined separately. Its contribution is to clarify how you describe your participation, rather than speak for another person’s experience of you.</p></article><article class="pe-reading-table" data-pfig="PFIG-008"><h2>决策证据<small lang="en">Decision evidence</small></h2><p>未知 / Unknown</p><p>哪些决策主题有资料？<br>What decision topics are represented?</p><p>理解决策，可以先把过程拆成察觉、理解、权衡、选择与调整。已有资料覆盖其中的部分主题，让你能够看见哪些问题已经有来源可读。它们可以连接起来提出问题，但并不等于已经观察到一条完整的个人决策链。<br>Understanding a decision starts by distinguishing noticing, understanding, weighing, choosing and adapting. The available material represents some of these topics, showing which questions already have a source to read. They can be connected to frame questions, without implying that a complete personal decision sequence has been observed.</p></article><article class="pe-reading-table" data-pfig="PFIG-009"><h2>现实桥接<small lang="en">Reality bridge</small></h2><p>未知 / Unknown</p><p>证据与当下现实有什么连接？<br>What connects evidence to current reality?</p><p>把证据与当下生活连接，是让个人理解变得更具体的一步。现有记录已经为对照提供了主题：它可以与某一次行动、条件和结果核对。下表保留这些主题的当前状态，使值得检验的问题清楚可见。<br>Connecting evidence with current life makes personal understanding more specific. The records already provide topics for comparison with an action, its conditions and its outcome. The grid retains the current state of those topics, making the questions worth testing visible.</p></article></section><h2>证据衔接 / Evidence handoff</h2><p>仅打开现有目标页面。资料不会自动传送；后续用途需要你选择资料并明确同意。 / These links open existing destinations. Evidence is not transferred automatically; selecting evidence and explicit consent remain required.</p><p><a href="/professional/financial/">继续到财务现实 / Continue to Financial Reality</a></p></main></body></html>
