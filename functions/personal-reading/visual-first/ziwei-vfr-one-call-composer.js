@@ -6,7 +6,7 @@ import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../..
 import {planVfrProviderBudget,assertVfrLiveAllowed,assertVfrCallCount} from './report-provider-budget.js';
 import {buildZwrVfrProviderSchema,createZwrVfrReportIr} from './ziwei-vfr-report-ir.js';
 
-export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v1';
+export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v2';
 const MAX_OUTPUT_TOKENS=VFR_BILINGUAL_SINGLE_CALL_V1.maxOutputTokens;
 
 function systemPrompt(){
@@ -15,11 +15,11 @@ function systemPrompt(){
   'The supplied Compact Authoring Pack is the complete authority. Do not calculate the chart and do not invent technical facts.',
   'Use professional Zi Wei terminology, then translate it into concise lived meaning. Avoid generic psychology and avoid star-by-star glossary prose.',
   'Return both zhHans and en for every section in this one call. Do not split generation by locale or by section.',
-  'Each section needs a concise headline, subheadline, 3–5 short key insights, 2–3 compact interpretation paragraphs, and two short diagram captions.',
+  'Each section must contain exactly 3 short key insights, exactly 2 compact interpretation paragraphs, and two very short diagram captions in each language.'
   'The diagrams themselves are deterministic and already owned by PHI OS. Do not invent diagram values or palace connections.',
   'Preserve unknowns. Do not predict guaranteed events, diagnose illness, give transaction-level financial advice, or expose internal workflow language.',
   'Use authorityRefs only from the supplied section claims. References license the interpretation but must not be shown in customer prose.',
-  'The finished physical report is limited to 50 pages and is diagram-led, so do not write long essays.',
+  'The finished physical report is limited to 50 pages and is diagram-led. Stay well below every schema maxLength; prioritize dense professional meaning over prose volume. Do not write long essays.'
   'Return JSON only.'
  ].join('\n');
 }
