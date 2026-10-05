@@ -31,8 +31,11 @@ const bi=(m,k)=>{const x=pair(m,k);return esc(x[0])+'<small>'+esc(x[1])+'</small
 const plain=(m,k)=>pair(m,k).join(' · ');
 const branch=v=>esc(v||'—');
 
-function card(title,value,detail=''){
- return '<div class="zv-card"><small>'+esc(title)+'</small><b>'+value+'</b>'+(detail?'<p>'+detail+'</p>':'')+'</div>';
+function card(title,value,detail='',opts={}){
+ const t=opts.titleHtml?String(title):esc(title);
+ const v=opts.valueHtml?String(value):esc(value);
+ const d=opts.detailHtml?String(detail):esc(detail);
+ return '<div class="zv-card"><small>'+t+'</small><b>'+v+'</b>'+(detail?'<p>'+d+'</p>':'')+'</div>';
 }
 function palaceGrid(data){
  return '<div class="zv-palace-grid">'+(data.palaces||[]).map((p,i)=>'<div class="zv-palace '+(p.isLifePalace?'is-life ':'')+(p.isBodyPalace?'is-body':'')+'"><span class="idx">'+String(i+1).padStart(2,'0')+'</span><b>'+bi(PAL,p.palaceCode)+'</b><em>'+branch(p.branch)+'</em><p>'+((p.stars||[]).slice(0,4).map(s=>plain(STAR,s.starCode)).join(' · ')||'—')+'</p></div>').join('')+'</div>';
@@ -40,7 +43,7 @@ function palaceGrid(data){
 function axis(data){
  const ls=(data.lifeStars||[]).map(s=>plain(STAR,s.starCode)).join(' · ');
  const bs=(data.bodyStars||[]).map(s=>plain(STAR,s.starCode)).join(' · ');
- return '<div class="zv-axis">'+card('命宫 / Life',bi(PAL,data.lifePalace),esc(ls))+'<div class="zv-arrow">↔</div>'+card('身宫 / Body',bi(PAL,data.bodyPalace),esc(bs))+'</div>';
+ return '<div class="zv-axis">'+card('命宫 / Life',bi(PAL,data.lifePalace),ls,{valueHtml:true})+'<div class="zv-arrow">↔</div>'+card('身宫 / Body',bi(PAL,data.bodyPalace),bs,{valueHtml:true})+'</div>';
 }
 function network(data){
  const rel=data.relationships||[];
@@ -51,7 +54,7 @@ function network(data){
  return '<svg class="zv-svg" viewBox="0 0 760 420" role="img">'+edges.map(([a,b])=>{const A=by.get(a),B=by.get(b);return '<line x1="'+A.x+'" y1="'+A.y+'" x2="'+B.x+'" y2="'+B.y+'" class="zv-line"/>';}).join('')+pts.map(p=>'<g><circle cx="'+p.x+'" cy="'+p.y+'" r="45" class="zv-node"/><text x="'+p.x+'" y="'+(p.y-2)+'" text-anchor="middle">'+esc(pair(PAL,p.code)[0])+'</text><text x="'+p.x+'" y="'+(p.y+14)+'" text-anchor="middle" class="en">'+esc(pair(PAL,p.code)[1])+'</text></g>').join('')+'</svg>';
 }
 function stars(data){
- return '<div class="zv-star-grid">'+(data.stars||[]).map(s=>card(bi(STAR,s.starCode),bi(PAL,s.palaceCode),esc(s.stateKnown?(s.state||''):'状态未定 / state unknown'))).join('')+'</div>';
+ return '<div class="zv-star-grid">'+(data.stars||[]).map(s=>card(bi(STAR,s.starCode),bi(PAL,s.palaceCode),s.stateKnown?(s.state||''):'状态未定 / state unknown',{titleHtml:true,valueHtml:true})).join('')+'</div>';
 }
 function transformations(data){
  const xs=data.transformations||data.layers?.flatMap(x=>x.transformations||[])||[];
@@ -60,7 +63,7 @@ function transformations(data){
 function focus(data){
  const ps=Array.isArray(data.palaces)?data.palaces:(data.palace?[data.palace]:[]);
  const stars=data.stars||[];
- return '<div class="zv-focus">'+ps.map(p=>card(bi(PAL,p.palaceCode),branch(p.branch),(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''))).join('')+'<div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span>'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></div>';
+ return '<div class="zv-focus">'+ps.map(p=>card(bi(PAL,p.palaceCode),p.branch||'—',(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true})).join('')+'<div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span>'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></div>';
 }
 function timing(data){
  const rows=[];
@@ -70,7 +73,7 @@ function timing(data){
  return '<div class="zv-timing">'+rows.slice(0,6).map((t,i)=>'<div><span>'+String(i+1).padStart(2,'0')+'</span><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(ROLE,t.role)+'</strong></div>').join('')+(data.currentTransformations?.length?'<section><h4>当前四化 / Current transformations</h4>'+transformations({transformations:data.currentTransformations})+'</section>':'')+'</div>';
 }
 function domains(data){
- return '<div class="zv-domains">'+Object.entries(data.domains||{}).map(([k,v])=>card(k,esc((Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[0]).join(' · ')),esc((Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[1]).join(' · ')))).join('')+'</div>';
+ return '<div class="zv-domains">'+Object.entries(data.domains||{}).map(([k,v])=>card(k,(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[0]).join(' · '),(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[1]).join(' · '))).join('')+'</div>';
 }
 export function renderZwrVfrDiagram(d){
  const type=d?.type||'UNKNOWN',data=d?.data||{},title=pair(TITLES,type);
