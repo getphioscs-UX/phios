@@ -20,6 +20,16 @@ const LAYER={NATAL:['本命','Natal'],DA_XIAN:['大限','Da Xian'],LIU_NIAN:['�
 const ROLE={STRUCTURAL_BASELINE:['本命基线','Natal baseline'],LONG_CYCLE_MODIFICATION:['长期周期','Long-cycle emphasis'],YEAR_LEVEL_ACTIVATION:['年度激活','Annual activation']};
 const BRANCH={ZI:['子','Zi'],CHOU:['丑','Chou'],YIN:['寅','Yin'],MAO:['卯','Mao'],CHEN:['辰','Chen'],SI:['巳','Si'],WU:['午','Wu'],WEI:['未','Wei'],SHEN:['申','Shen'],YOU:['酉','You'],XU:['戌','Xu'],HAI:['亥','Hai']};
 const STATE={MIAO:['庙','Miao'],WANG:['旺','Wang'],DE:['得','De'],LI:['利','Li'],PING:['平','Ping'],BU:['不','Bu'],XIAN:['陷','Xian']};
+const SECTION_TONE={
+ S02:['#6d4bc3','#d6a84b'],S03:['#2f7fa7','#7b5bd6'],S04:['#2f6f8f','#d49b43'],S05:['#b07a2c','#6d9a65'],
+ S06:['#a85778','#6a58c8'],S07:['#5a8f68','#c59a46'],S08:['#8e4e62','#4d7da6'],S09:['#6f4bb8','#c98d36'],
+ S10:['#3b78a8','#a65d88'],S11:['#4e6b9e','#b98942']
+};
+const PAL_TONE={LIFE:'#7a58c7',SIBLINGS:'#4c7fb2',SPOUSE:'#b85d86',CHILDREN:'#d47a47',WEALTH:'#c89a37',HEALTH:'#a04f57',TRAVEL:'#3b93a3',FRIENDS:'#4f8c72',CAREER:'#4667a9',PROPERTY:'#8a6b55',WELLBEING:'#7658a8',PARENTS:'#8a7a4e'};
+const TX_TONE={HUA_LU:'#8da53f',HUA_QUAN:'#7b4fc6',HUA_KE:'#3f91ba',HUA_JI:'#b74f4f'};
+const LAYER_TONE={NATAL:'#485c8f',DA_XIAN:'#7350b6',LIU_NIAN:'#c18436'};
+const cssVars=(a,b)=>'--zv-accent:'+a+';--zv-accent2:'+b+';';
+const sectionVars=id=>{const [a,b]=SECTION_TONE[id]||['#6d4bc3','#c59647'];return cssVars(a,b);};
 const TITLES={
  TWELVE_PALACE_NATAL_MAP:['十二宫本命结构','Twelve-palace Natal Structure'],
  LIFE_BODY_AXIS:['命身轴','Life-Body Axis'],PALACE_NETWORK:['宫位关系网络','Palace Relationship Network'],KEY_STAR_STRUCTURE:['主星结构','Key Star Structure'],
@@ -42,7 +52,7 @@ function card(title,value,detail='',opts={}){
  return '<div class="zv-card"><small>'+t+'</small><b>'+v+'</b>'+(detail?'<p>'+d+'</p>':'')+'</div>';
 }
 function palaceGrid(data){
- return '<div class="zv-palace-grid">'+(data.palaces||[]).map((p,i)=>'<div class="zv-palace '+(p.isLifePalace?'is-life ':'')+(p.isBodyPalace?'is-body':'')+'"><span class="idx">'+String(i+1).padStart(2,'0')+'</span><b>'+bi(PAL,p.palaceCode)+'</b><em>'+branch(p.branch)+'</em><p>'+((p.stars||[]).slice(0,4).map(s=>plain(STAR,s.starCode)).join(' · ')||'—')+'</p></div>').join('')+'</div>';
+ return '<div class="zv-palace-grid">'+(data.palaces||[]).map((p,i)=>'<div class="zv-palace '+(p.isLifePalace?'is-life ':'')+(p.isBodyPalace?'is-body':'')+'" style="--pal:'+esc(PAL_TONE[p.palaceCode]||'#7a6b8d')+'"><span class="idx">'+String(i+1).padStart(2,'0')+'</span><b>'+bi(PAL,p.palaceCode)+'</b><em>'+branch(p.branch)+'</em><p>'+((p.stars||[]).slice(0,4).map(s=>plain(STAR,s.starCode)).join(' · ')||'—')+'</p></div>').join('')+'</div>';
 }
 function axis(data){
  const ls=(data.lifeStars||[]).map(s=>plain(STAR,s.starCode)).join(' · ');
@@ -55,7 +65,7 @@ function network(data){
  const pts=codes.map((code,i)=>{const a=-Math.PI/2+i*Math.PI*2/Math.max(1,codes.length);return {code,x:380+250*Math.cos(a),y:205+145*Math.sin(a)};});
  const by=new Map(pts.map(x=>[x.code,x]));
  const edges=rel.flatMap(r=>(r.to||[]).map(to=>[r.from,to])).filter(([a,b])=>by.has(a)&&by.has(b)).slice(0,18);
- return '<svg class="zv-svg" viewBox="0 0 760 420" role="img">'+edges.map(([a,b])=>{const A=by.get(a),B=by.get(b);return '<line x1="'+A.x+'" y1="'+A.y+'" x2="'+B.x+'" y2="'+B.y+'" class="zv-line"/>';}).join('')+pts.map(p=>'<g><circle cx="'+p.x+'" cy="'+p.y+'" r="45" class="zv-node"/><text x="'+p.x+'" y="'+(p.y-2)+'" text-anchor="middle">'+esc(pair(PAL,p.code)[0])+'</text><text x="'+p.x+'" y="'+(p.y+14)+'" text-anchor="middle" class="en">'+esc(pair(PAL,p.code)[1])+'</text></g>').join('')+'</svg>';
+ return '<svg class="zv-svg" viewBox="0 0 760 420" role="img">'+edges.map(([a,b])=>{const A=by.get(a),B=by.get(b);return '<line x1="'+A.x+'" y1="'+A.y+'" x2="'+B.x+'" y2="'+B.y+'" class="zv-line"/>';}).join('')+pts.map(p=>'<g style="--pal:'+esc(PAL_TONE[p.code]||'#6c668d')+'"><circle cx="'+p.x+'" cy="'+p.y+'" r="45" class="zv-node"/><text x="'+p.x+'" y="'+(p.y-2)+'" text-anchor="middle">'+esc(pair(PAL,p.code)[0])+'</text><text x="'+p.x+'" y="'+(p.y+14)+'" text-anchor="middle" class="en">'+esc(pair(PAL,p.code)[1])+'</text></g>').join('')+'</svg>';
 }
 function stars(data){
  return '<div class="zv-star-grid">'+(data.stars||[]).map(s=>card(bi(STAR,s.starCode),bi(PAL,s.palaceCode),s.stateKnown?state(s.state):'状态未定 / state unknown',{titleHtml:true,valueHtml:true})).join('')+'</div>';
@@ -63,14 +73,14 @@ function stars(data){
 function transformations(data){
  const xs=data.transformations||data.layers?.flatMap(x=>x.transformations||[])||[];
  const rows=xs.slice(0,16);
- if(rows.length<=3)return '<div class="zv-flow zv-flow-sparse">'+rows.map((t,i)=>'<article class="zv-tx-card"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div></article>').join('')+'</div>';
- return '<div class="zv-flow">'+rows.map((t,i)=>'<div class="zv-flow-row"><span>'+String(i+1).padStart(2,'0')+'</span><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div>').join('')+'</div>';
+ if(rows.length<=3)return '<div class="zv-flow zv-flow-sparse">'+rows.map((t,i)=>'<article class="zv-tx-card" style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+';--layer:'+esc(LAYER_TONE[t.layer]||'#6f6f86')+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div></article>').join('')+'</div>';
+ return '<div class="zv-flow">'+rows.map((t,i)=>'<div class="zv-flow-row" style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+';--layer:'+esc(LAYER_TONE[t.layer]||'#6f6f86')+'"><span>'+String(i+1).padStart(2,'0')+'</span><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div>').join('')+'</div>';
 }
 function focus(data){
  const ps=Array.isArray(data.palaces)?data.palaces:(data.palace?[data.palace]:[]);
  const stars=data.stars||[],rels=data.relationships||[],tx=data.transformations||[];
  const palaceCards=ps.map(p=>card(bi(PAL,p.palaceCode),branch(p.branch),(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true,valueHtml:true})).join('');
- const starCloud='<section class="zv-focus-band"><h4>星曜 / Stars</h4><div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span>'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></section>';
+ const starCloud='<section class="zv-focus-band"><h4>星曜 / Stars</h4><div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span style="--pal:'+esc(PAL_TONE[s.palaceCode]||'#6c668d')+'">'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></section>';
  const relCloud=rels.length?'<section class="zv-focus-band"><h4>宫位联动 / Palace links</h4><div class="zv-rel-tags">'+rels.slice(0,10).flatMap(r=>(r.to||[]).map(to=>'<span>'+esc(pair(PAL,r.from)[0])+' ↔ '+esc(pair(PAL,to)[0])+'</span>')).join('')+'</div></section>':'';
  const txCloud=tx.length?'<section class="zv-focus-band"><h4>相关四化 / Relevant transformations</h4>'+transformations({transformations:tx})+'</section>':'';
  return '<div class="zv-focus">'+palaceCards+starCloud+relCloud+txCloud+'</div>';
@@ -86,7 +96,7 @@ function timing(data,ctx={}){
   const tx=Array.isArray(layerTx?.[t.layer])?layerTx[t.layer]:[];
   const cls=focus===t.layer?' is-focus':'';
   const txHtml=tx.length?'<ul>'+tx.slice(0,4).map(x=>'<li>'+bi(STAR,x.targetStarCode)+' → '+bi(TX,x.transformationCode)+' · '+bi(PAL,x.palaceCode)+'</li>').join('')+'</ul>':'';
-  return '<article class="zv-time-layer'+cls+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(ROLE,t.role)+'</strong>'+txHtml+'</div></article>';
+  return '<article class="zv-time-layer'+cls+'" style="--layer:'+esc(LAYER_TONE[t.layer]||'#6f6f86')+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(ROLE,t.role)+'</strong>'+txHtml+'</div></article>';
  }).join('');
  const current=data.currentTransformations?.length?'<section class="zv-current-tx"><h4>当前四化 / Current transformations</h4>'+transformations({transformations:data.currentTransformations})+'</section>':'';
  return '<div class="zv-timing" data-focus-layer="'+esc(focus||'ALL')+'">'+cards+current+'</div>';
@@ -186,6 +196,6 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   else if(p.pageFamily==='INTERPRETATION')body=interpretation(s);
   else if(ds.length)body=diagramHtml;
   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
-  return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+  return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
  }).join('');
 }
