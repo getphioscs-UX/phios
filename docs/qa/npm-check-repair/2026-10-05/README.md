@@ -24,3 +24,7 @@ Real Stripe transactions, deployed browser admission, and production cutover wer
 ## Concurrent review integration
 
 After the complete run, main advanced with Zi Wei VFR review rendering, page-plan presentation, an optional review-readiness alias, and a review timestamp. These changes were rebased without altering the recorded precheck/check/postcheck commands. The current VFR prelive/cache checks, zero-cost route protection, Cloudflare import compatibility, and Pages build were revalidated; each exited 0. The full-run baseline and later integration baseline are recorded separately in result.json.
+
+## Published commit verification
+
+Commit `6964e08defeda1309331de3f179899accc071e92` (tree `7d79f71ac2f54eaed2b9835c005b1348029f298e`) was published to main and then verified with a complete `npm run check`: all three lifecycle hooks exited 0. `npm run build:pages` also exited 0. Complete logs are retained in `published-npm-run-check.log` and `published-build-pages.log`; their SHA-256 hashes are in `result.json`. This final integration also fixes missing commas in the concurrent VFR prompt array. The subsequent upstream change at `88b3f61f` only updates a review evidence timestamp.
