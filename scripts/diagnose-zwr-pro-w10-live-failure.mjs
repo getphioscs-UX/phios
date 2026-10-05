@@ -35,6 +35,8 @@ const out={
  historicalCompositionCalls:internal?.historicalCompositionCalls??null,
  historicalCompositionUsageUnavailable:internal?.historicalCompositionUsageUnavailable??null,
  currentResumeCalls:internal?.currentResumeCalls??null,
+ targetedRepairRoles:internal?.targetedRepairRoles||[],
+ targetedRepairAttempted:Number(internal?.repairCount||0)>0,
  attemptLog:internal?.attemptLog||[],
  verificationAccepted:verification?.accepted??null,
  verificationReasons:verification?.reasons||[],
