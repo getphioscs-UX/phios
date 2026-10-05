@@ -65,12 +65,21 @@ function focus(data){
  const stars=data.stars||[];
  return '<div class="zv-focus">'+ps.map(p=>card(bi(PAL,p.palaceCode),p.branch||'—',(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true})).join('')+'<div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span>'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></div>';
 }
-function timing(data){
+function timing(data,ctx={}){
  const rows=[];
  for(const t of data.timing||[])rows.push(t);
  if(data.daXian&&!rows.some(x=>x.layer==='DA_XIAN'))rows.push(data.daXian);
  if(data.liuNian&&!rows.some(x=>x.layer==='LIU_NIAN'))rows.push(data.liuNian);
- return '<div class="zv-timing">'+rows.slice(0,6).map((t,i)=>'<div><span>'+String(i+1).padStart(2,'0')+'</span><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(ROLE,t.role)+'</strong></div>').join('')+(data.currentTransformations?.length?'<section><h4>当前四化 / Current transformations</h4>'+transformations({transformations:data.currentTransformations})+'</section>':'')+'</div>';
+ const focus=ctx.sectionId==='S09'?'DA_XIAN':ctx.sectionId==='S10'?'LIU_NIAN':null;
+ const layerTx=data.transformations||{};
+ const cards=rows.slice(0,6).map((t,i)=>{
+  const tx=Array.isArray(layerTx?.[t.layer])?layerTx[t.layer]:[];
+  const cls=focus===t.layer?' is-focus':'';
+  const txHtml=tx.length?'<ul>'+tx.slice(0,4).map(x=>'<li>'+bi(STAR,x.targetStarCode)+' → '+bi(TX,x.transformationCode)+' · '+bi(PAL,x.palaceCode)+'</li>').join('')+'</ul>':'';
+  return '<article class="zv-time-layer'+cls+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(ROLE,t.role)+'</strong>'+txHtml+'</div></article>';
+ }).join('');
+ const current=data.currentTransformations?.length?'<section class="zv-current-tx"><h4>当前四化 / Current transformations</h4>'+transformations({transformations:data.currentTransformations})+'</section>':'';
+ return '<div class="zv-timing" data-focus-layer="'+esc(focus||'ALL')+'">'+cards+current+'</div>';
 }
 function domains(data){
  return '<div class="zv-domains">'+Object.entries(data.domains||{}).map(([k,v])=>card(k,(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[0]).join(' · '),(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[1]).join(' · '))).join('')+'</div>';
@@ -118,7 +127,7 @@ export function renderZwrVfrDiagram(d,ctx={}){
  else if(type==='KEY_STAR_STRUCTURE')body=stars(data);
  else if(type==='FOUR_TRANSFORMATION_ROUTE'||type==='TRANSFORMATION_LAYER_COMPARISON')body=transformations(data);
  else if(['CAREER_PALACE_NETWORK','WEALTH_PALACE_NETWORK','RELATIONSHIP_PALACE_NETWORK','FAMILY_SUPPORT_PALACES','PRESSURE_COUNTERWEIGHT_MAP','LIFE_CAREER_WEALTH_TRAVEL_CROSS'].includes(type))body=focus(data);
- else if(['NATAL_DAXIAN_LIUNIAN_STACK','CURRENT_PALACE_ACTIVATION'].includes(type))body=timing(data);
+ else if(['NATAL_DAXIAN_LIUNIAN_STACK','CURRENT_PALACE_ACTIVATION'].includes(type))body=timing(data,ctx);
  else if(type==='WHOLE_CHART_NAVIGATION')body=domains(data);
  else body='<div class="zv-empty">Missing deterministic renderer</div>';
  return '<figure class="zv-diagram" data-diagram-id="'+esc(d.id)+'" data-diagram-type="'+esc(type)+'"><figcaption><b>'+esc(title[0])+'</b><span>'+esc(title[1])+'</span></figcaption>'+body+'</figure>';
@@ -144,6 +153,10 @@ function interpretation(section){
  const zh=section?.zhHans||{},en=section?.en||{};
  return '<div class="zv-copy-grid"><article lang="zh-Hans"><h3>中文解读</h3>'+(zh.interpretation||[]).map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en"><h3>English Reading</h3>'+(en.interpretation||[]).map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
 }
+function closingPage(reportIr,binding){
+ const zh=reportIr?.closingSummary?.zhHans||[],en=reportIr?.closingSummary?.en||[];
+ return '<div class="zv-closing-art">'+(binding.hero?'<img src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-closing-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div><div class="zv-closing"><span>47</span><h1>读取边界</h1><h2>Reading Boundary</h2><p>命盘提供结构化观察，不替代现实证据、专业判断或你的实际选择。</p><p lang="en">The chart provides structured observation; it does not replace real-world evidence, professional judgment, or your own decisions.</p><div class="zv-closing-points">'+zh.slice(0,3).map((x,i)=>'<article><b>0'+(i+1)+'</b><p>'+esc(x)+'</p><small>'+esc(en[i]||'')+'</small></article>').join('')+'</div></div>';
+}
 export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
  const sections=new Map((reportIr?.sections||[]).map(s=>[s.sectionId,s]));
  const diagrams=new Map((diagramData?.diagrams||[]).map(d=>[d.id,d]));
@@ -151,6 +164,7 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   const s=sections.get(p.sectionId),ds=(p.diagramIds||[]).map(id=>diagrams.get(id)).filter(Boolean);
   const binding=getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
   if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
+  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'">'+closingPage(reportIr,binding)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
   let body='';
   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily})).join('');
   if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml);
