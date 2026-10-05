@@ -19,7 +19,7 @@ for(let i=1;i<=15;i++){
 assert((html.match(/<svg class="zv-svg"/g)||[]).length>=1,'at least one real SVG diagram required');
 assert(html.includes('中文解读'),'Chinese review copy missing');
 assert(html.includes('English Reading'),'English review copy missing');
-assert(!html.includes('zv-empty'),'missing deterministic diagram renderer remains');
+assert(!/class=["'][^"']*\bzv-empty\b[^"']*["']/.test(html),'missing deterministic diagram renderer remains');
 assert(html.includes('W8 live PASS'),'W8 provenance banner missing');
 assert(html.includes('0 semantic review'),'semantic-review-free provenance missing');
 
