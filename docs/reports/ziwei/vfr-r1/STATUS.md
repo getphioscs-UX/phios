@@ -10,9 +10,9 @@ Work: VFR-ZWR-0 through VFR-ZWR-10
 - VFR-ZWR-5 15+ deterministic diagram-data bindings: IMPLEMENTED. 15 deterministic diagrams, zero provider calls.
 - VFR-ZWR-6 47-page visual-first publication: IMPLEMENTED. 47-page deterministic plan, <=50 page guard, visual/prose density constraints.
 - VFR-ZWR-7 zero-cost rerender + immutable cache: IMPLEMENTED. Immutable cache identity/conflict contract plus composer replay hook.
-- VFR-ZWR-8 one representative live Sol generation: READY_TO_RUN. Requires explicit REPORT_PROVIDER_LIVE_ALLOWED=true and OPENAI_API_KEY. Evidence written to LIVE-RESULT.json and LIVE-EVIDENCE.json.
-- VFR-ZWR-9 Browser / print Human Review: READY_TO_BUILD after W8. Review artifact: tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html. HUMAN ACCEPT must be explicit.
-- VFR-ZWR-10 Production cutover: GATED. check:vfr:zwr-cutover-readiness requires W8 evidence + W9 HUMAN ACCEPT. cutover:vfr:zwr-production then swaps canonical binding from old R5 generation to Zi Wei VFR R1 and writes PRODUCTION-CUTOVER.json.
+- VFR-ZWR-8 one representative live Sol generation: HISTORICAL PASS on composer v3 (1 provider call, 0 semantic review, USD0.158980, 10 bilingual sections, 15 diagrams, 47 pages). Current v4 semantic contract requires one final candidate regeneration before W9 acceptance.
+- VFR-ZWR-9 Browser / print Human Review: REPAIR IN PROGRESS / NOT ACCEPTED. R2 P01-P05, BODY, both motifs and all ten section assets are bound; section-scoped diagram projections, customer-facing Zi Wei labels, timing differentiation, closing boundary, print-fit diagnostics and editorial completeness gates are active. Existing v3 English copy is rejected for clipped sentences.
+- VFR-ZWR-10 Production cutover: GATED. Requires current v4 live evidence + W9 readiness PASS + explicit HUMAN ACCEPT. Old R5 hot path remains active.
 
 ## Required execution order
 
