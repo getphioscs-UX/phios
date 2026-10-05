@@ -36,8 +36,10 @@ await assert.rejects(
 assert.equal(providerFetchTouched,false,'pre-live opt-in guard must run before provider fetch');
 const irSource=fs.readFileSync('functions/personal-reading/visual-first/ziwei-vfr-report-ir.js','utf8');
 assert(!irSource.includes('diagramNarratives'),'Sol provider schema must not own diagram narratives');
+assert(!irSource.includes("required:['headline','subheadline','keyInsights','interpretation']"),'Sol provider schema must not own fixed presentation structure');
+assert(irSource.includes("required:['coreMeaning','livedExpression','counterweight','navigation']"),'Sol provider schema must expose semantic content primitives only');
 const composerSource=fs.readFileSync('functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js','utf8');
-assert(composerSource.includes('Do not generate, describe, or redesign diagrams.'),'Sol role must explicitly exclude diagram ownership');
+assert(composerSource.includes('PHI OS owns all presentation structure and diagrams.'),'Sol role must explicitly exclude presentation and diagram ownership');
 const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
 assert(!binding.includes('ziwei-vfr-one-call-composer.js'),'pre-live VFR must not cut over canonical account binding');
 console.log('PASS ZWR-VFR pre-live: bilingual compact pack sections=10; planned provider calls=1; semantic reviewer calls=0; estimated input tokens='+plan.budget.inputTokens+'; max output='+plan.maxOutputTokens+'; planned max cost=$'+plan.budget.estimatedNextCallCost+'; production binding unchanged; live provider not called.');
