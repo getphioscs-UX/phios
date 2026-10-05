@@ -76,10 +76,28 @@ async function finalizeVerifiedComposition({authorityPack,section,sectionId,loca
 
 
 const W4_ROLES=['STRUCTURE','MEANING','CONDITIONS','COUNTERWEIGHTS','OBSERVABLE_EXPRESSION','TIMING_RELEVANCE','NAVIGATION'];
-function repairRolesFromReview(verification){
- const joined=(verification?.semanticReview?.reasons||[]).join('\n');
- const roles=W4_ROLES.filter(role=>new RegExp('\\b'+role+'\\b','u').test(joined));
- return roles.length?roles:null;
+function repairRolesFromReview(verification,candidate){
+ const reasons=verification?.semanticReview?.reasons||[],roles=new Set();
+ const joined=reasons.join('\n');
+ for(const role of W4_ROLES)if(new RegExp('\\b'+role+'\\b','u').test(joined))roles.add(role);
+ const chineseRoleHints=[
+  ['结构段','STRUCTURE'],['开篇','STRUCTURE'],['命身轴','STRUCTURE'],
+  ['意义段','MEANING'],['三方四正','MEANING'],
+  ['条件段','CONDITIONS'],
+  ['反向表现','COUNTERWEIGHTS'],['压力下','COUNTERWEIGHTS'],
+  ['时序段','TIMING_RELEVANCE'],['时序','TIMING_RELEVANCE'],
+  ['现实检验','OBSERVABLE_EXPRESSION'],['对照来检验','OBSERVABLE_EXPRESSION'],
+  ['导航段','NAVIGATION'],['实际运用','NAVIGATION']
+ ];
+ for(const [hint,role] of chineseRoleHints)if(joined.includes(hint))roles.add(role);
+ for(const reason of reasons){
+  const quoted=[...String(reason).matchAll(/[“”]([^“”]{3,80})[“”]/gu)].map(m=>m[1]);
+  for(const q of quoted){
+   const hit=(candidate?.blocks||[]).find(b=>String(b.text||'').includes(q));
+   if(hit?.role)roles.add(hit.role);
+  }
+ }
+ return roles.size?[...roles]:null;
 }
 function targetedRepairSchema(brief,candidate){
  return {
@@ -153,7 +171,7 @@ export async function resumeZwrProSectionW4FromSavedComposition({authorityPack,s
  let verification=await verifyReportSectionComposition({brief:governedBrief,candidate:workingCandidate,semanticReview});
  let repairCount=0,targetedRepairRoles=[];
  if(!verification.accepted){
-  const roles=repairRolesFromReview(verification);
+  const roles=repairRolesFromReview(verification,workingCandidate);
   if(roles?.length){
    targetedRepairRoles=roles;
    const repairResult=await invoke({
