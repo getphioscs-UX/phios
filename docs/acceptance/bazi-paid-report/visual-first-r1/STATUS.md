@@ -14,7 +14,7 @@ One shared VFR contract and one shared budget decision owner are reused. Canonic
 
 Ordinary npm precheck/check/postcheck, regression aliases and Pages build inherit ZERO_COST_REPLAY. Their runner forces live=false, removes provider credentials and preloads fetch/HTTP protections into Node children. A child with parent live=true still cannot send OpenAI or arbitrary external composition POSTs. Future live Sol requires explicit REPORT_PROVIDER_LIVE_ALLOWED=true outside ordinary checks plus the budget and price-validation gates. No live request was made.
 
-31 VFR checks, inherited guard test, shared budget core, historical accepted-copy/section/owner-receipt regressions and package-alias checks pass. Pages build passes: 10968 files, Worker 15696774 bytes, gzip 2902587; docs/tools/private provider payloads excluded. Desktop and 390px-frame mobile report have 48 pages, 28 diagram surfaces, 9 openers, no missing images, content overflow, clipping or SVG-label overlap. Desktop body 19px; mobile body 18px; captions 17px. Full historical npm check was not run.
+31 VFR checks, inherited guard test, shared budget core, historical accepted-copy/section/owner-receipt regressions and package-alias checks pass. Pages build passes: 10968 files, Worker 15695819 bytes, gzip 2902556; docs/tools/private provider payloads excluded. Desktop and 390px-frame mobile report have 48 pages, 28 diagram surfaces, 9 openers, no missing images, content overflow, clipping or SVG-label overlap. Desktop body 19px; mobile body 18px; captions 17px. Full historical npm check was not run.
 
 [Complete human review](../../../../tools/review/BAZI-VFR-R1-HUMAN-REVIEW.html) · [Page map](PAGE-MAP.json) · [Diagram registry](DIAGRAM-REGISTRY.json) · [Compact copy lineage](COMPACT-COPY-LINEAGE.json) · [Machine evidence](MACHINE-EVIDENCE.json) · [Changed files](CHANGED-FILES.json)
 
@@ -29,4 +29,4 @@ Known limitations:
 - This work did not start Zi Wei W9 or deploy/push. Concurrent worktree additions are not BaZi acceptance evidence.
 - Full historical npm check not executed; targeted zero-cost checks and build passed.
 
-Observed HEAD: a2787331f902600a55f425327815d29a5ccec36d. Concurrent main changes occurred; no Git mutation was performed by this work.
+Observed HEAD: 629c8cde8e571f1b509fdaef8d0bee2519935b10. Concurrent main changes occurred; no Git mutation was performed by this work.
