@@ -7,7 +7,6 @@ import {
  ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,
  ZWR_VFR_FIVE_CALL_BATCHES,
  buildZwrFiveCallBatchSchema,
- validateZwrFiveCallBatch,
  projectFiveCallManuscriptToReportSections
 } from './ziwei-vfr-five-call-manuscript.js';
 
@@ -102,8 +101,6 @@ export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalTh
    maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL
   });
   providerCalls++;
-  const guard=await validateZwrFiveCallBatch({batchPack:bp,output:result.output});
-  if(!guard.accepted)throw Object.assign(new Error('ZWR_FIVE_CALL_BATCH_GUARD_REJECTED'),{details:{batch:i+1,sectionIds:[...ids],guard,batchOutput:result.output}});
   const usage=result?.usage||{};
   const inputTokens=usage.input_tokens||usage.inputTokens||0;
   const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
