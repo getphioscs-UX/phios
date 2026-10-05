@@ -25,7 +25,8 @@ function assertionText(value){return value
  .replace(/\brather than\b[^.!?;,\n]{0,100}\bguaranteed\b/giu,' ')
  .replace(/\b(?:not|never|without)\s+(?:a\s+)?(?:guaranteed|certainly|definitely|always|proves?)\b/giu,' ')
  .replace(/(?:不能|无法|并未|未能|不曾)证明|(?:过于|过度)绝对/gu,' ')
- .replace(/(?:并不|也不|不)代表(?:某一|具体)?事件(?:已经发生或)?必然发生/gu,' ');
+ .replace(/(?:并不|也不|不)代表(?:某一|具体)?事件(?:已经发生或)?必然发生/gu,' ')
+ .replace(/(?:而非|并非|不是|不等于|不代表|不能视为|不可视为)[^，。；！？\n]{0,40}(?:一定|必然|绝对|证明)/gu,' ');
 }
 function detect(textValue,careerIdentity=false){
  // Technical problem diagnosis is licensed by the career expertise node; this
