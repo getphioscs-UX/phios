@@ -51,6 +51,24 @@ function normalizedPackStructure(pack){
   timing:pack.wholeChartTechnicalSnapshot.timing.map(t=>({layer:t.layer,role:t.role,focus:localeNeutralFocus(t.focus)}))
  };
 }
+function firstDiff(a,b,path='root'){
+ if(Object.is(a,b))return null;
+ if(typeof a!==typeof b)return path+':TYPE';
+ if(a===null||b===null)return path+':NULL';
+ if(Array.isArray(a)||Array.isArray(b)){
+  if(!Array.isArray(a)||!Array.isArray(b))return path+':ARRAY_TYPE';
+  if(a.length!==b.length)return path+':LENGTH:'+a.length+'!='+b.length;
+  for(let i=0;i<a.length;i++){const d=firstDiff(a[i],b[i],path+'['+i+']');if(d)return d;}
+  return null;
+ }
+ if(typeof a==='object'){
+  const ak=Object.keys(a).sort(),bk=Object.keys(b).sort();
+  if(ak.join('|')!==bk.join('|'))return path+':KEYS:'+ak.join(',')+'!='+bk.join(',');
+  for(const k of ak){const d=firstDiff(a[k],b[k],path+'.'+k);if(d)return d;}
+  return null;
+ }
+ return path+':VALUE:'+String(a)+'!='+String(b);
+}
 export async function buildZwrProW10DeterministicCase({fixtureId,input}={}){
  if(!fixtureId||!input?.executionRequest)throw Error('ZWR_PRO_W10_FIXTURE_INPUT_REQUIRED');
  const subjectId=`ZPA-CONTROLLED-${fixtureId}`;
@@ -61,7 +79,7 @@ export async function buildZwrProW10DeterministicCase({fixtureId,input}={}){
  const zhPack=await buildZiweiR5AuthoringPack({evidence:zhEvidence,locale:'zh-Hans'});
  const enStructure=normalizedPackStructure(enPack),zhStructure=normalizedPackStructure(zhPack);
  const enDigest=await sha256Stable(enStructure),zhDigest=await sha256Stable(zhStructure);
- if(enDigest!==zhDigest)throw Error('ZWR_PRO_W10_BILINGUAL_AUTHORITY_DRIFT:'+fixtureId);
+ if(enDigest!==zhDigest)throw Error('ZWR_PRO_W10_BILINGUAL_AUTHORITY_DRIFT:'+fixtureId+':'+firstDiff(enStructure,zhStructure));
  if(enPack.subjectBinding.inputFingerprint!==zhPack.subjectBinding.inputFingerprint)throw Error('ZWR_PRO_W10_INPUT_FINGERPRINT_DRIFT:'+fixtureId);
  const sourceUnknownCount=enEvidence.structured.unknowns.length,unknownCount=enPack.wholeChartTechnicalSnapshot.unknowns.length,zhUnknownCount=zhPack.wholeChartTechnicalSnapshot.unknowns.length;
  if(unknownCount!==sourceUnknownCount||zhUnknownCount!==sourceUnknownCount)throw Error('ZWR_PRO_W10_UNKNOWN_PRESERVATION_DRIFT:'+fixtureId);
