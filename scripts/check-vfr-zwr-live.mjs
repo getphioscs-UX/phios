@@ -1,0 +1,40 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+
+const root='docs/reports/ziwei/vfr-r1/';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const required=['LIVE-RESULT.json','LIVE-EVIDENCE.json','COMPACT-AUTHORING-PACK.json','DIAGRAM-DATA.json','PAGE-PLAN.json','IMMUTABLE-CACHE.json'];
+for(const name of required)assert(fs.existsSync(root+name),'missing W8 artifact: '+name);
+
+const result=read(root+'LIVE-RESULT.json');
+const evidence=read(root+'LIVE-EVIDENCE.json');
+const pack=read(root+'COMPACT-AUTHORING-PACK.json');
+const diagrams=read(root+'DIAGRAM-DATA.json');
+const pages=read(root+'PAGE-PLAN.json');
+
+assert.equal(result.status,'PASS');
+assert.equal(result.providerCalls,1,'representative live run must make exactly one provider call');
+assert.equal(result.semanticReviewCalls,0,'W8 forbids semantic AI review calls');
+assert.equal(result.cacheHit,false,'representative W8 evidence must come from the live call, not cache replay');
+assert.equal(evidence.providerCalls,1);
+assert.equal(evidence.semanticReviewCalls,0);
+assert.equal(evidence.cacheHit,false);
+assert.equal(evidence.authorityDigest,pack.authorityDigest);
+assert.equal(evidence.pageCount,47);
+assert.equal(evidence.diagramCount,15);
+assert.equal(diagrams.diagramCount,15);
+assert.equal(pages.length,47);
+assert.equal(result.reportIr?.providerUsage?.providerCalls,1);
+assert.equal(result.reportIr?.providerUsage?.semanticReviewCalls,0);
+assert(Number(result.reportIr?.providerUsage?.estimatedProviderCost)>=0);
+assert(Number(result.reportIr?.providerUsage?.estimatedProviderCost)<=1,'live provider cost exceeds USD1');
+assert(Number(evidence.estimatedProviderCost)<=1,'W8 evidence cost exceeds USD1');
+assert(Number(evidence.inputTokens)>0,'live input token usage required');
+assert(Number(evidence.outputTokens)>0,'live output token usage required');
+assert.equal(result.reportIr?.authorityDigest,pack.authorityDigest);
+assert.equal(result.reportIr?.sections?.length,10);
+assert.equal(new Set(result.reportIr.sections.map(s=>s.sectionId)).size,10);
+assert(result.reportIr.sections.every(s=>s.zhHans&&s.en),'every W8 section must contain both zhHans and en');
+const digest=createHash('sha256').update(fs.readFileSync(root+'LIVE-RESULT.json')).digest('hex');
+console.log('PASS ZWR-VFR W8 representative live Sol: providerCalls=1; semanticReviewCalls=0; cacheHit=false; cost=$'+Number(evidence.estimatedProviderCost).toFixed(6)+'; inputTokens='+evidence.inputTokens+'; outputTokens='+evidence.outputTokens+'; sections=10 bilingual; diagrams=15; pages=47; liveResultSha256='+digest+'.');
