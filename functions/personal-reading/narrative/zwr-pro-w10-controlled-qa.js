@@ -25,6 +25,19 @@ function jaccardDistance(a,b){
  const union=A.size+B.size-hit;
  return union?1-hit/union:0;
 }
+function localeNeutralFocus(focus){
+ if(!focus||typeof focus!=='object')return null;
+ const out={};
+ for(const key of [
+  'natalDomainCode','palaceCode','branch','lifeBranch','roleCode',
+  'daXianNatalDomainCode','liuNianNatalDomainCode',
+  'annualRoleAtDaXianLifeBranch','daXianRoleAtLiuNianLifeBranch',
+  'sameNatalDomainFocus','classification','lunarYear','yearStem','yearBranch'
+ ]){
+  if(Object.hasOwn(focus,key))out[key]=focus[key];
+ }
+ return out;
+}
 function normalizedPackStructure(pack){
  return {
   subjectId:pack.subjectBinding.subjectId,
@@ -35,7 +48,7 @@ function normalizedPackStructure(pack){
   })),
   transformations:pack.wholeChartTechnicalSnapshot.transformations.map(t=>({layer:t.layer,palaceCode:t.palaceCode,targetStarCode:t.targetStarCode,transformationCode:t.transformationCode})),
   patterns:pack.wholeChartTechnicalSnapshot.qualifiedPatterns.map(p=>({patternCode:p.patternCode,palaceCodes:[...p.palaceCodes]})),
-  timing:pack.wholeChartTechnicalSnapshot.timing.map(t=>({layer:t.layer,role:t.role,focus:t.focus}))
+  timing:pack.wholeChartTechnicalSnapshot.timing.map(t=>({layer:t.layer,role:t.role,focus:localeNeutralFocus(t.focus)}))
  };
 }
 export async function buildZwrProW10DeterministicCase({fixtureId,input}={}){
