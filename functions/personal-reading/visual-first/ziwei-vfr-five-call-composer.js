@@ -13,7 +13,7 @@ import {
 
 export const ZWR_VFR_FIVE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-FIVE-CALL-DEEP-SOL-v1';
 const EXPERIMENT_BUDGET_USD=1.00;
-const MAX_OUTPUT_TOKENS_PER_CALL=6000;
+const MAX_OUTPUT_TOKENS_PER_CALL=8000;
 
 function modelRecord(){
  const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
@@ -29,11 +29,11 @@ function batchPrompt(batchIds){
   'For each section, synthesize the palace network, star combination, transformations and timing only when admitted by that section evidence.',
   'structuralMechanism: explain why the admitted Zi Wei configuration produces this operating structure, with causal links rather than glossary definitions.',
   'livedScenarios: give three distinct, concrete and recognizable life situations specific to the section domain.',
-  'constructiveExpression: explain how the structure operates when conditions are supportive.',
-  'pressureDistortion: explain how the same structure distorts under strain and what becomes overused, rigid, avoidant or unstable.',
-  'counterweight: explain which chart factors or real conditions moderate the structure; do not give generic reassurance.',
-  'timingOverlay: distinguish natal baseline from Da Xian and Liu Nian emphasis where timing is admitted; if timing is not central, state the bounded role of timing without fabricating events.',
-  'realityNavigation: use section-specific observational guidance, not generic checklists, review-date formulas, responsibility lists, or repeated boundary advice.',
+  'constructiveExpression: write one dense paragraph explaining how the structure operates when conditions are supportive.'
+  'pressureDistortion: write one dense paragraph explaining how the same structure distorts under strain and what becomes overused, rigid, avoidant or unstable.'
+  'counterweight: write one dense paragraph explaining which chart factors or real conditions moderate the structure; do not give generic reassurance.'
+  'timingOverlay: write one bounded paragraph distinguishing natal baseline from Da Xian and Liu Nian emphasis where timing is admitted; if timing is not central, state the bounded role of timing without fabricating events.'
+  'realityNavigation: write one section-specific observational paragraph, not a generic checklist, review-date formula, responsibility list, or repeated boundary advice.'
   'Chinese and English must be semantically equivalent but naturally written in each language. Do not mechanically translate sentence-by-sentence.',
   'Do not generate layout, diagrams, captions, colors, page counts or presentation structure. PHI OS owns all deterministic presentation.',
   'Do not expose internal workflow terms. Preserve uncertainty. Do not guarantee events, diagnose illness, or give transaction-level financial advice.',
