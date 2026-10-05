@@ -15,7 +15,34 @@ fs.writeFileSync(path.join(root,'PLAN.json'),JSON.stringify(plan,null,2)+'\n');
 if(!plan.allowed)throw Error('ZWR_FIVE_CALL_EXPERIMENT_BUDGET_PRECHECK_BLOCKED');
 
 const checkpointPath=path.join(root,'CHECKPOINT.json');
-const resume=fs.existsSync(checkpointPath)?JSON.parse(fs.readFileSync(checkpointPath,'utf8')):null;
+let resume=fs.existsSync(checkpointPath)?JSON.parse(fs.readFileSync(checkpointPath,'utf8')):null;
+
+function flattenLegacyLocale(x){
+ if(!x||typeof x!=='object')return '';
+ const parts=[
+  x.sectionThesis,
+  ...(x.structuralMechanism||[]),
+  ...(x.livedScenarios||[]),
+  ...(x.constructiveExpression||[]),
+  ...(x.pressureDistortion||[]),
+  ...(x.counterweight||[]),
+  ...(x.timingOverlay||[]),
+  ...(x.realityNavigation||[])
+ ].filter(Boolean);
+ return parts.join('\n\n');
+}
+if(resume?.manuscriptSections?.length){
+ resume.manuscriptSections=resume.manuscriptSections.map(s=>{
+  if(typeof s.zhHansManuscript==='string'&&typeof s.enManuscript==='string')return s;
+  return {
+   sectionId:s.sectionId,
+   zhHansManuscript:flattenLegacyLocale(s.zhHans),
+   enManuscript:flattenLegacyLocale(s.en)
+  };
+ });
+ fs.writeFileSync(path.join(root,'CHECKPOINT-MIGRATED.json'),JSON.stringify(resume,null,2)+'\n');
+}
+
 let result;
 try{
  result=await composeZwrFiveCallExperiment({
