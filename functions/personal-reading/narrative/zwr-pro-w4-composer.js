@@ -3,6 +3,10 @@ import {createReportSectionNarrativeContract} from './report-section-contract.js
 import {buildReportSectionNarrativeBrief} from './report-section-brief.js';
 import {composeReferenceGovernedDraftR1} from './report-pro-composer-r1.js';
 import {ZIWEI_R5_PAI_REGISTRY} from './ziwei-r5-provider-registry.js';
+import {createPublicationProviderAdapters} from './narrative-provider.js';
+import {createReportSemanticReview} from './report-section-semantic-review.js';
+import {verifyReportSectionComposition} from './report-section-semantic-verifier.js';
+import {selectPaiRoute,createPaiUsageRecord,estimatePaiProviderCost} from '../../_lib/pai-r1-economics.js';
 
 export const ZWR_PRO_W4_COMPOSER_VERSION='ZWR-PRO-W4-LLM-PROFESSIONAL-COMPOSER-v1';
 export const ZWR_PRO_W4_PROMPT_VERSION='ZWR-PRO-W4-PROMPT-v1';
@@ -61,6 +65,52 @@ function visibleUsage(section,blocks){
  }).map(txKey);
  return {usedPalaceCodes:uniq(usedPalaceCodes),usedTransformationKeys:uniq(usedTransformationKeys)};
 }
+async function finalizeVerifiedComposition({authorityPack,section,sectionId,locale,composition,providerAuditOverride=null}){
+ const blocks=composition.candidate.blocks.map(b=>({role:b.role,text:b.text,claimRefs:uniq(b.claimRefs),supportRefs:uniq(b.supportRefs)}));
+ const usedClaimRefs=uniq(blocks.flatMap(b=>b.claimRefs));
+ const usage=visibleUsage(section,blocks);
+ const providerAudit=providerAuditOverride||{provider:composition.internalOnly?.provider||null,model:composition.internalOnly?.model||null,actualTier:composition.internalOnly?.actualTier||null,transportCalls:composition.internalOnly?.transportCalls||0,semanticReviewCalls:composition.internalOnly?.semanticReviewCalls||0,providerAttemptCount:composition.internalOnly?.providerAttemptCount||0,repairCount:composition.internalOnly?.repairCount||0,usageRecord:composition.usageRecord||null,verificationUsageRecords:composition.verificationUsageRecords||[]};
+ const seed={schemaVersion:'ZWR-PRO-W4-CANDIDATE-v1',status:'PASS',composerVersion:ZWR_PRO_W4_COMPOSER_VERSION,promptVersion:ZWR_PRO_W4_PROMPT_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,title:locale==='zh-Hans'?SECTION_OWNERSHIP[sectionId].titleZh:SECTION_OWNERSHIP[sectionId].titleEn,paragraphs:blocks,usedClaimRefs,...usage,authorityPackVersion:authorityPack.schemaVersion,sourceBriefDigest:composition.governedBrief.briefSemanticDigest,provider:providerAudit,upstreamSemanticVerification:composition.verification};
+ return deepFreeze({...seed,candidateDigest:await sha256Stable(seed)});
+}
+
+export async function resumeZwrProSectionW4FromSavedComposition({authorityPack,sectionId,locale,savedW4,env={},fetcher,providerAdapters,registry=ZIWEI_R5_PAI_REGISTRY,timeoutMs=180000}={}){
+ if(authorityPack?.schemaVersion!=='ZIWEI-R5-AUTHORING-PACK-v2')throw Error('ZWR_PRO_W4_RESUME_AUTHORITY_PACK_REQUIRED');
+ if(authorityPack.locale!==locale)throw Error('ZWR_PRO_W4_RESUME_LOCALE_MISMATCH');
+ const section=authorityPack.sections.find(s=>s.sectionId===sectionId);
+ if(!section)throw Error('ZWR_PRO_W4_RESUME_SECTION_REQUIRED');
+ const currentBrief=await governedAuthorityBrief(authorityPack,section,locale);
+ const savedComposition=savedW4?.composition||savedW4;
+ const governedBrief=savedComposition?.governedBrief,candidate=savedComposition?.candidate;
+ if(!governedBrief||!candidate)throw Error('ZWR_PRO_W4_RESUME_SAVED_COMPOSITION_REQUIRED');
+ if(governedBrief.predecessorBriefSemanticDigest!==currentBrief.briefSemanticDigest)throw Error('ZWR_PRO_W4_RESUME_BRIEF_DRIFT');
+ if(candidate.sourceBriefDigest!==governedBrief.briefSemanticDigest)throw Error('ZWR_PRO_W4_RESUME_CANDIDATE_DIGEST_MISMATCH');
+ const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},registry||{});
+ const provider=savedComposition?.internalOnly?.provider||route.selectedProvider,model=savedComposition?.internalOnly?.model||route.selectedModel;
+ if(!provider||!model)throw Error('ZWR_PRO_W4_RESUME_PROVIDER_ROUTE_REQUIRED');
+ const adapter=(providerAdapters||createPublicationProviderAdapters({env,fetcher}))[provider];
+ if(typeof adapter!=='function')throw Error('ZWR_PRO_W4_RESUME_PROVIDER_ADAPTER_REQUIRED');
+ if(!providerAdapters&&!String(env.OPENAI_API_KEY||'').trim())throw Error('ZWR_PRO_W4_RESUME_OPENAI_API_KEY_REQUIRED');
+ const providerResults=[];let transportCalls=0,semanticReviewCalls=0;
+ const invoke=async request=>{
+  const controller=new AbortController();let timer;transportCalls++;if(request.taskType==='REPORT_SECTION_SEMANTIC_VERIFICATION')semanticReviewCalls++;
+  try{
+   const result=await Promise.race([adapter({...request,signal:controller.signal}),new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Object.assign(new Error('NARRATIVE_PROVIDER_TIMEOUT'),{code:'NARRATIVE_PROVIDER_TIMEOUT'}));},timeoutMs);})]);
+   providerResults.push({...result,taskType:request.taskType});return result;
+  }finally{clearTimeout(timer);}
+ };
+ const semanticReview=createReportSemanticReview({invoke,model});
+ const verification=await verifyReportSectionComposition({brief:governedBrief,candidate,semanticReview});
+ if(!verification.accepted)return deepFreeze({status:'CONTROLLED_NOT_READY',reason:'RESUMED_SEMANTIC_VERIFIER_REJECTED',sectionId,locale,subjectBinding:authorityPack.subjectBinding,brief:currentBrief,composition:{...savedComposition,verification,internalOnly:{...(savedComposition.internalOnly||{}),provider,model,transportCalls:1+transportCalls,semanticReviewCalls,providerAttemptCount:1,resumedFromSavedComposition:true,historicalCompositionCalls:1,currentResumeCalls:transportCalls}}});
+ const reviewUsage=providerResults.filter(r=>r.taskType==='REPORT_SECTION_SEMANTIC_VERIFICATION').map((r,i)=>{
+  const u=r?.usage||{},inputTokens=u.input_tokens||u.inputTokens||0,cachedInputTokens=u.input_tokens_details?.cached_tokens||u.cachedInputTokens||0,outputTokens=u.output_tokens||u.outputTokens||0;
+  const costModel=(registry?.models||[]).find(m=>m.modelId===model)||{};
+  return createPaiUsageRecord({requestId:'ZWR-PRO-W4-RESUME:'+authorityPack.subjectBinding.subjectKey+':'+sectionId+':'+locale+':VERIFY:'+i,timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,{inputTokens,cachedInputTokens,outputTokens}),aiExecutionClass:'T3_DEEP_COMPOSITION',provider:r.provider||provider,model,inputTokens,cachedInputTokens,outputTokens,requestType:'QA_REVIEW',providerAttemptCount:1,success:true,fallbackUsed:false});
+ });
+ const resumed={status:'PASS',governedBrief,candidate,verification,usageRecord:null,verificationUsageRecords:reviewUsage,internalOnly:{provider,model,actualTier:'T3_GOVERNED_DEEP_COMPOSITION',transportCalls:1+transportCalls,semanticReviewCalls,providerAttemptCount:1,repairCount:0,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls}};
+ return finalizeVerifiedComposition({authorityPack,section,sectionId,locale,composition:resumed,providerAuditOverride:{provider,model,actualTier:'T3_GOVERNED_DEEP_COMPOSITION',transportCalls:1+transportCalls,semanticReviewCalls,providerAttemptCount:1,repairCount:0,usageRecord:null,verificationUsageRecords:reviewUsage,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls}});
+}
+
 export async function composeZwrProSectionW4({authorityPack,sectionId,locale,env={},fetcher,providerAdapters,registry=ZIWEI_R5_PAI_REGISTRY,requestId,cache}={}){
  if(authorityPack?.schemaVersion!=='ZIWEI-R5-AUTHORING-PACK-v2')throw Error('ZWR_PRO_W4_AUTHORITY_PACK_REQUIRED');
  if(!authorityPack.subjectBinding?.subjectId||!authorityPack.subjectBinding?.inputFingerprint)throw Error('ZWR_PRO_W4_SUBJECT_BINDING_REQUIRED');
@@ -74,10 +124,6 @@ export async function composeZwrProSectionW4({authorityPack,sectionId,locale,env
   cache,timeoutMs:180000
  });
  if(composition.status!=='PASS'||composition.verification?.accepted!==true) return deepFreeze({status:'CONTROLLED_NOT_READY',sectionId,locale,subjectBinding:authorityPack.subjectBinding,brief,composition});
- const blocks=composition.candidate.blocks.map(b=>({role:b.role,text:b.text,claimRefs:uniq(b.claimRefs),supportRefs:uniq(b.supportRefs)}));
- const usedClaimRefs=uniq(blocks.flatMap(b=>b.claimRefs));
- const usage=visibleUsage(section,blocks);
- const seed={schemaVersion:'ZWR-PRO-W4-CANDIDATE-v1',status:'PASS',composerVersion:ZWR_PRO_W4_COMPOSER_VERSION,promptVersion:ZWR_PRO_W4_PROMPT_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,title:locale==='zh-Hans'?SECTION_OWNERSHIP[sectionId].titleZh:SECTION_OWNERSHIP[sectionId].titleEn,paragraphs:blocks,usedClaimRefs,...usage,authorityPackVersion:authorityPack.schemaVersion,sourceBriefDigest:composition.governedBrief.briefSemanticDigest,provider:{provider:composition.internalOnly?.provider||null,model:composition.internalOnly?.model||null,actualTier:composition.internalOnly?.actualTier||null,transportCalls:composition.internalOnly?.transportCalls||0,semanticReviewCalls:composition.internalOnly?.semanticReviewCalls||0,providerAttemptCount:composition.internalOnly?.providerAttemptCount||0,repairCount:composition.internalOnly?.repairCount||0,usageRecord:composition.usageRecord||null,verificationUsageRecords:composition.verificationUsageRecords||[]},upstreamSemanticVerification:composition.verification};
- return deepFreeze({...seed,candidateDigest:await sha256Stable(seed)});
+ return finalizeVerifiedComposition({authorityPack,section,sectionId,locale,composition});
 }
 export default Object.freeze({composeZwrProSectionW4,ZWR_PRO_W4_COMPOSER_VERSION});

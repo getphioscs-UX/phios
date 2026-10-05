@@ -29,7 +29,16 @@
     ],
     "noDeterministicProseFallback": true,
     "requiresRealProviderExecution": true,
-    "evidenceFile": "docs/reports/ziwei/production-admission/zwr-pro-w10-live-campaign.json"
+    "evidenceFile": "docs/reports/ziwei/production-admission/zwr-pro-w10-live-campaign.json",
+    "checkpointFile": "docs/reports/ziwei/production-admission/zwr-pro-w10-live-checkpoint.json",
+    "resumePolicy": {
+      "COMPOSITION_SAVED": "Reuse paid composition and request independent semantic review only",
+      "W5_REJECT": "Reuse W4-passed candidate and rerun local W5/W6 only",
+      "W6_REJECT": "Reuse W4-passed candidate and rerun local W5/W6 only",
+      "SECTION_PASS": "Reuse verified section with zero provider calls",
+      "W7_OR_W8_REJECT": "Reuse all passed sections and rerun report-level verifiers only"
+    },
+    "historicalUsagePolicy": "If a pre-checkpoint provider call lacks token usage, count the transport call and mark estimatedProviderCostIsLowerBound=true; never invent cost."
   },
   "productionAdmissionGranted": false
 }
