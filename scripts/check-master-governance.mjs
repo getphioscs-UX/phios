@@ -219,8 +219,10 @@ for (const phrase of [
 const packageJson = await readJson('package.json');
 assert.equal(
   packageJson.scripts['check:master-governance'],
-  'node scripts/check-master-governance.mjs'
+  'node scripts/run-zero-cost-regression.mjs check:master-governance'
 );
+const zeroCostCommands = await readJson('config/reports/zero-cost-check-commands.json');
+assert.equal(zeroCostCommands['check:master-governance'], 'node scripts/check-master-governance.mjs');
 const pdsW0Check = await read('scripts/check-pds-w0-baseline-boundary.mjs');
 assert(
   pdsW0Check.includes("import './check-master-governance.mjs';"),

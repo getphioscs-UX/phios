@@ -1,3 +1,4 @@
+import {VFR_BILINGUAL_SINGLE_CALL_V1} from '../../canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js';
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
 import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
 import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
@@ -6,7 +7,7 @@ import {planVfrProviderBudget,assertVfrLiveAllowed,assertVfrCallCount} from './r
 import {buildZwrVfrProviderSchema,createZwrVfrReportIr} from './ziwei-vfr-report-ir.js';
 
 export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v1';
-const MAX_OUTPUT_TOKENS=10000;
+const MAX_OUTPUT_TOKENS=VFR_BILINGUAL_SINGLE_CALL_V1.maxOutputTokens;
 
 function systemPrompt(){
  return [

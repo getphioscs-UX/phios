@@ -11,6 +11,8 @@ export function planBaziVfrR2(pack){
 }
 export function guardBaziVfrR2(ir,expected){
  assertTriLayerSections(ir.sections,ir.diagrams);
+ if(ir.sections.length!==expected.sections.length)throw Error('SECTION_TOPOLOGY_MUTATION');
+ for(let i=0;i<ir.sections.length;i++)for(const k of ['id','technicalAnchors','technicalAnchorsEn','professionalDiagramIds','applicationDiagramIds','livedInterpretationSource'])if(JSON.stringify(ir.sections[i][k])!==JSON.stringify(expected.sections[i][k]))throw Error('SECTION_AUTHORITY_BINDING_MUTATION');
  if(JSON.stringify(ir.natal)!==JSON.stringify(expected.natal)||JSON.stringify(ir.timing)!==JSON.stringify(expected.timing)||JSON.stringify(ir.diagrams)!==JSON.stringify(expected.diagrams))throw Error('AUTHORITY_DATA_MUTATION');
  if(ir.pages.length>50)throw Error('PAGE_LIMIT_EXCEEDED');
  const text=JSON.stringify(ir.sections);
@@ -26,7 +28,9 @@ export async function composeBaziVfrR2({pack,reference,env={},pricingVerified=fa
   const r=await invokeOpenAIStructured({env:{...env,OPENAI_NARRATIVE_MODEL:model.modelId},fetcher,systemPrompt:BAZI_VFR_R2_SYSTEM_PROMPT,userPayload:payload,schema:pack.outputSchema,schemaName:'bazi_vfr_r2_bilingual_report',maxOutputTokens:8000});return {output:r.output,usage:r.usage};
  }});
  if(output.sections?.length!==reference.sections.length)throw Error('BILINGUAL_STRUCTURE_REQUIRED');
- const ir=structuredClone(reference);ir.sections=reference.sections.map(s=>{const o=output.sections.find(x=>x.sectionId===s.id);if(!o)throw Error('BILINGUAL_STRUCTURE_REQUIRED');return {...s,...o};});
- ir.providerUsage={...ir.providerUsage,providerCalls:ledger.calls,estimatedProviderCost:ledger.spent,mode:'LIVE_CANDIDATE',cacheHit:false};guardBaziVfrR2(ir,reference);
+ const allowedKeys=new Set(['sectionId','headlineZh','headlineEn','subheadlineZh','subheadlineEn','technicalCaptionZh','technicalCaptionEn','applicationCaptionZh','applicationCaptionEn','interpretationZh','interpretationEn','takeaways']);
+ const ir=structuredClone(reference);ir.sections=reference.sections.map(s=>{const o=output.sections.find(x=>x.sectionId===s.id);if(!o||Object.keys(o).some(k=>!allowedKeys.has(k)))throw Error('BILINGUAL_STRUCTURE_REQUIRED');return {...s,...o};});
+ const record=ledger.records.at(-1);
+ ir.providerUsage={...ir.providerUsage,providerCalls:ledger.calls,inputTokens:record.inputTokens,outputTokens:record.outputTokens,cachedInputTokens:record.cachedInputTokens,estimatedProviderCost:ledger.spent,usageRecord:record,mode:'LIVE_CANDIDATE',cacheHit:false};guardBaziVfrR2(ir,reference);
  if(cache&&cacheKey)await cache.put(cacheKey,ir);return ir;
 }

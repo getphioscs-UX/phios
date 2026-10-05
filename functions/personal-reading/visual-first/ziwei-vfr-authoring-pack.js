@@ -1,3 +1,4 @@
+import {VFR_BILINGUAL_SINGLE_CALL_V1} from '../../canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js';
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {buildZiweiR5AuthoringPack} from '../narrative/ziwei-r5-authoring-pack.js';
 
@@ -91,6 +92,7 @@ export async function buildZwrVfrCompactAuthoringPack({evidence,realityContext=n
   schemaVersion:ZWR_VFR_COMPACT_AUTHORING_PACK_VERSION,
   methodId:'ZWR',
   localeMode:'BILINGUAL_SINGLE_CALL',
+  bilingualContract:VFR_BILINGUAL_SINGLE_CALL_V1,
   subjectBinding:zh.subjectBinding,
   sourceAuthorityVersion:zh.sourceVersion,
   reportRules:{

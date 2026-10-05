@@ -1,8 +1,4 @@
 export const VFR_BILINGUAL_SINGLE_CALL_V1=Object.freeze({version:'VFR_BILINGUAL_SINGLE_CALL_V1',providerCallsPlanned:1,semanticReviewCallsPlanned:0,fullBilingualInputDuplication:false,EnglishOutputRequired:true,ChineseOutputRequired:true,sourceBilingualEvidenceMayRemain:true,maxOutputTokens:8000});
-export function canonicalClaimProjection(claim){
- const {textZh,textEn,text,...rest}=claim;
- return {...rest,canonicalText:textZh||text||textEn,authorityRefs:claim.authorityRefs||claim.authority||[]};
-}
 export function assertTriLayerSections(sections,diagrams){
  for(const s of sections){
   if(!s.technicalAnchors?.length||!s.professionalDiagramIds?.length||!s.applicationDiagramIds?.length||!s.livedInterpretationSource||!s.compactInterpretation)throw Error('TRI_LAYER_BINDING_REQUIRED');
