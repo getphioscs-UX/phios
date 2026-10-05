@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const root='docs/reports/ziwei/vfr-r1';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),hash=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+for(const p of [root+'/LIVE-RESULT.json',root+'/LIVE-EVIDENCE.json',root+'/HUMAN-DECISION.json','tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html'])assert(fs.existsSync(p),'missing cutover evidence: '+p);
+const live=read(root+'/LIVE-RESULT.json'),evidence=read(root+'/LIVE-EVIDENCE.json'),decision=read(root+'/HUMAN-DECISION.json');
+assert.equal(live.status,'PASS');
+assert.equal(evidence.pageCount,47);
+assert.equal(evidence.diagramCount,15);
+assert(evidence.providerCalls<=1,'representative live generation must use <=1 provider call');
+assert.equal(evidence.semanticReviewCalls,0);
+assert.equal(decision.decision,'ACCEPT');
+assert.equal(decision.liveResultSha256,hash(root+'/LIVE-RESULT.json'));
+assert.equal(decision.reviewHtmlSha256,hash('tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html'));
+const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
+assert(binding.includes('ziwei-professional-synthesis-r5-generation.js'),'production binding changed before explicit VFR cutover implementation');
+console.log('PASS ZWR-VFR cutover readiness: live evidence + 47-page/15-diagram publication + HUMAN ACCEPT are intact. Ready for explicit production binding cutover; old R5 hot path still active until that commit.');
