@@ -1,0 +1,30 @@
+{
+  "passes": [
+    "check:bazi-full-report-accepted-copy (historical bilingual plus 18 C1 checks)",
+    "check-bazi-owner-receipts",
+    "check-bazi-section-publication",
+    "check-bazi-print-shell-v2 (historical 38/38, ten masters unchanged)",
+    "check-reading-evidence-boundary",
+    "check:rca-r1 (21+10)",
+    "git diff --check"
+  ],
+  "existingFailure": {
+    "check": "check-report-customer-delivery",
+    "line": 6,
+    "expectedMethods": 8,
+    "actualMethods": 7,
+    "preexisting": true,
+    "scope": "Profile is absent from existing seven-method delivery registry; frozen commerce owner not modified."
+  },
+  "browserCompositionCheck": "Existing external-Playwright checker was not invoked; CUA measured actual C1 desktop/mobile output instead.",
+  "build": {
+    "result": "PASS",
+    "copied": 10961,
+    "skipped": 6514,
+    "files": 10963,
+    "workerBytes": 15645624,
+    "gzipBytes": 2890665,
+    "reviewToolsAndPrivateDocsExcluded": true,
+    "assetOver25MiB": false
+  }
+}

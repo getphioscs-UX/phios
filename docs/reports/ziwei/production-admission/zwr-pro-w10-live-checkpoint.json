@@ -10,7 +10,6 @@
   "sections": {
     "02:zh-Hans:S02": {
       "state": "COMPOSITION_SAVED",
-      "fixtureId": "02",
       "locale": "zh-Hans",
       "sectionId": "S02",
       "subjectBinding": {
@@ -39,6 +38,7 @@
       },
       "savedW4": {
         "status": "CONTROLLED_NOT_READY",
+        "reason": "RESUMED_SEMANTIC_VERIFIER_REJECTED",
         "sectionId": "S02",
         "locale": "zh-Hans",
         "subjectBinding": {
@@ -7775,8 +7775,8 @@
             "providerCalled": true,
             "providerExecution": "LIVE_ADAPTER",
             "fallbackUsed": true,
-            "transportCalls": 1,
-            "semanticReviewCalls": 0,
+            "transportCalls": 2,
+            "semanticReviewCalls": 1,
             "providerAttemptCount": 1,
             "repairCount": 0,
             "attemptLog": [
@@ -7785,7 +7785,10 @@
                 "attempt": 1,
                 "state": "SUCCESS"
               }
-            ]
+            ],
+            "resumedFromSavedComposition": true,
+            "historicalCompositionCalls": 1,
+            "currentResumeCalls": 1
           },
           "candidate": {
             "blocks": [
@@ -7906,17 +7909,44 @@
             "factsPreserved": false,
             "semanticOperatorsPreserved": false,
             "roleSemanticsPreserved": true,
-            "boundariesPreserved": false,
-            "conditionsPreserved": false,
-            "counterSignalsPreserved": false,
+            "boundariesPreserved": true,
+            "conditionsPreserved": true,
+            "counterSignalsPreserved": true,
             "uncertaintyPreserved": false,
-            "timingScopePreserved": false,
+            "timingScopePreserved": true,
             "observableScopePreserved": false,
-            "noInventedReality": false,
-            "noNewMethodFact": false,
+            "noInventedReality": true,
+            "noNewMethodFact": true,
             "claimReferenceCoverage": 1,
-            "claimCoverage": 0,
-            "semanticReview": null,
+            "claimCoverage": 1,
+            "semanticReview": {
+              "sourceBriefDigest": "37b1d3888c5026ae5b9385935af47ed08b9d50284fd39f89dd0c4558ae3b4813",
+              "candidateDigest": "735f477d249e4cbd9b8c28eed819a27b65ef246984faa18f9e72a926755e0a63",
+              "meaningfullyUsedClaimRefs": [
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:SECTION_THESIS",
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:PALACE_STAR_SYNTHESIS",
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:PALACE_NETWORK_SYNTHESIS",
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:CONSTRUCTIVE_CONDITIONS",
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:STRAINED_COUNTERWEIGHTS",
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:TIMING_SYNTHESIS",
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:REALITY_COMPARISON",
+                "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:BOUNDED_NAVIGATION"
+              ],
+              "reasons": [
+                "COUNTERWEIGHTS 段新增“官禄宫对标准与后续影响的重视、财帛宫对保留容量的要求……让你不断检查却迟迟不落地”。获许可的反向表现仅覆盖命宫太阴、命宫天魁与迁移宫天同，并未授权官禄宫、财帛宫共同导致该表现；该句把并列读取关系提升为有方向的条件性因果和新增表现。"
+              ],
+              "factsPreserved": false,
+              "boundariesPreserved": true,
+              "conditionsPreserved": true,
+              "counterSignalsPreserved": true,
+              "uncertaintyPreserved": true,
+              "timingScopePreserved": true,
+              "noInventedReality": true,
+              "noNewMethodFact": true,
+              "semanticOperatorsPreserved": false,
+              "rankPreserved": true,
+              "directionPreserved": false
+            },
             "candidateDigest": "735f477d249e4cbd9b8c28eed819a27b65ef246984faa18f9e72a926755e0a63",
             "usedClaimRefs": [
               "ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:SECTION_THESIS",
@@ -7931,26 +7961,18 @@
             "missingClaimRefs": [],
             "unsupportedRefs": [],
             "reasons": [
-              "CERTAINTY_STRENGTHENING:1",
-              "CERTAINTY_STRENGTHENING:4",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:SECTION_THESIS",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:PALACE_STAR_SYNTHESIS",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:PALACE_NETWORK_SYNTHESIS",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:CONSTRUCTIVE_CONDITIONS",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:STRAINED_COUNTERWEIGHTS",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:TIMING_SYNTHESIS",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:REALITY_COMPARISON",
-              "CLAIM_MEANING_NOT_VERIFIED:ZWR-R5:ZPA-CONTROLLED-02:aba1f344613a0ef1:S02:BOUNDED_NAVIGATION"
+              "SEMANTIC_REVIEW_FAILED:factsPreserved",
+              "SEMANTIC_REVIEW_FAILED:semanticOperatorsPreserved",
+              "SEMANTIC_REVIEW_FAILED:directionPreserved",
+              "SEMANTIC_REVIEW_REJECTED"
             ],
-            "verificationDigest": "516720c208adb7b3c6ca3c64441384d4afb4e3e65066cfd9ab77b6f6e08cb486"
+            "verificationDigest": "efde87c2b2e2ecebfc585046729e5f75fb8cfde07d88977e351e6898af8dd850"
           }
         }
       },
-      "salvagedFrom": "zwr-pro-w10-live-campaign.json",
-      "historicalCompositionCalls": 1,
-      "historicalCompositionUsageUnavailable": true
+      "fixtureId": "02"
     }
   },
   "completedResults": [],
-  "updatedAt": "2026-10-05T02:07:18.973Z"
+  "updatedAt": "2026-10-05T02:07:55.136Z"
 }

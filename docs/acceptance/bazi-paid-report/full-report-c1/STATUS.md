@@ -1,31 +1,27 @@
-BAZI-FR-C1 — BLOCKED_MISSING_NEW_ACCEPTED_MANUSCRIPTS
+BAZI-FR-C1
 
-C1-A 仓库审计完成。C1-B–C1-L 未执行；无法把缺失原文作为不可变编辑输入，也不能完成逐段归属、语义去重或最终排版。
+CURRENT_DECISION = READY_FOR_FULL_REPORT_HUMAN_REVIEW
+FULL_REPORT_HUMAN_DECISION = PENDING
+PRODUCTION_ACTIVATED = false
+PROVIDER_CALL_COUNT = 0
 
-目标：庚申／甲子／庚辰／庚寅；己巳大运 × 丙寅年度层；新接受的 S02–S10 九章。
+九份新中文接受稿已经在本目录逐一按 MANIFEST 的 SHA-256 与字节数核验。旧的缺稿阻塞已解除；原稿、接受凭证、历史双语版、命盘解释权威、商业目录与原视觉资产保持不变。
 
-找到的新目标命盘文稿：
+全文收敛包含 148 项可追踪段落处理：去除完整重复解释，移动少量家庭／负荷材料，修复过渡，将直接指导语气转成已接受条件与后果。原稿仍可逐段对照。九章保留长文，约 85%–104% 原章节正文长度，未回到短模板。
 
-- docs/acceptance/bazi-paid-report/editorial/GEN-01-S01-HUMAN-ACCEPTED.md：2026-10-04 ACCEPT，标题“核心性格与能力”。此文件仍使用 GEN-01／Section 1 身份；不得未经完整新稿谱系核对就替代生产 S02。
-- docs/acceptance/bazi-paid-report/editorial/GEN-01-AUTHORITY-PACK-R2.json：庚金目标命盘的受控写作权威，未找到本次己巳／丙寅新时序文件。
+新版本通过既有 publication owner 的显式 reviewOnly 门槛接入相同客户渲染器。完整 HTML 内含客户正文，124 页、五张说明／封面资产、十张原章节图、所有正文背景及九章全部收敛段落。审阅者附录与十五项问题位于客户报告外；打印时隐藏。S07 标题裁切已在本候选的局部样式中修复；全报告桌面和 390px 框架检查无缺图、横向溢出或内容裁切。A4 页面为 210×297mm，原生打印预览尚未观察。
 
-现有确定性已接受生产路径：
+四柱锁为庚申／甲子／庚辰／庚寅，日主庚，中和偏弱结论及土主、金辅、火调候的原权威不修改。S10 仅使用己巳大运 × 丙寅年度柱；保留合、冲、害、刑等关系，不推出化土、公历年份、年龄、起运或具体事件。客户正文的时序范围说明与 S10 同处一章。
 
-- functions/personal-reading/narrative/bazi-s02-s05-accepted-copy.generated.js
-- functions/personal-reading/narrative/bazi-s06-s10-accepted-copy.generated.js
-- functions/personal-reading/narrative/bazi-owner-acceptance.generated.js
-- functions/personal-reading/bazi-section-publication.js
-- scripts/check-bazi-full-report-accepted-copy-closure.mjs
-- scripts/build-bazi-section-review.mjs → visual-report-page-runtime.js → publication-report-pages.js
+检查：18 项 C1 来源、权威、门槛与真实 HTML 绑定检查通过；历史双语、接受凭证、章节、打印壳及证据边界回归通过；Pages 构建通过。共享交付 checker 仍在八种方法与七种注册方法的既存断言处失败，已保留证据；未为过关修改商业权威。
 
-这些历史正文绑定的是己巳／庚午／癸丑／戊午。历史 S06–S10 接受凭证为 docs/acceptance/report-narrative-t2-r1/bazi/s06-s10-actual-v1/OWNER-ACCEPTANCE.json，日期 2026-09-30；大运甲戌、34–44 岁、2026 丙午。历史 S07 是健康、S08 是时序、S09 是指引、S10 是附录，不能用于本次家庭／压力／长期周期／当前时序章节。
+[完整中文报告](../../../../tools/review/BAZI-FR-C1-FULL-REPORT-ZH-HUMAN-REVIEW.html) · [桌面／手机对照](../../../../tools/review/BAZI-FR-C1-RESPONSIVE.html) · [机器证据](MACHINE-EVIDENCE.json) · [最小编辑变更](EDITORIAL-CHANGES.json) · [时序锁](TIMING-AUTHORITY.json)
 
-已搜索 docs、content、functions、scripts、tools、config，包括隐藏路径，排除依赖、Git 和构建输出；同时读取“撰写核心性格与能力”聊天，其可读取历史未包含九章原文。
+- Final full-report HUMAN ACCEPT is pending; accepted section manuscripts and this convergence decision are separate.
+- No accepted English equivalent for this new nine-section edition. Historical bilingual edition remains unchanged.
+- Birth Gregorian date, clock time, age, and timing start date are absent. Cover keeps missing identity fields empty.
+- Timing JSON is a faithful projection of the user execution specification and hash-bound accepted S10 manuscript; no independent dated timing object was supplied.
+- Native print preview / saved PDF was not observed. All pages were checked using actual desktop A4 CSS geometry; mobile uses responsive reading geometry.
+- Existing shared customer-delivery checker fails at eight expected methods versus seven registered methods. Its script and commerce/delivery owners are byte-identical to pre-C1 baseline; no registry/scoring/product change was made to pass it.
 
-明确缺失：新接受的其余八章全文及新接受的 S10 时序权威载体。当前附件是执行规范，不含九章正文。需要这些原稿的本地路径、文件附件或含全文的聊天位置，才能继续。
-
-本次仅新增审计文件。生产文案、注册表、Human ACCEPT 凭证、视觉、命盘计算、Profile、Zi Wei、商业目录均未修改。Provider 调用次数为 0；未生成候选稿，未执行部署、发布、推送或最终冻结。
-
-机器检查／构建／视觉验证：NOT_RUN，缺少本次候选。去重结果、内部词泄露、完整视觉绑定与时序验证均 NOT_EVALUATED，不能以旧报告检查通过代替本次验证。
-
-CURRENT DECISION = BLOCKED_MISSING_NEW_ACCEPTED_MANUSCRIPTS
+等待明确的全文 owner ACCEPT 后才可讨论最终生产冻结。本轮未自动接受、未翻译新英文稿、未发布客户 BaZi 候选。RCA 的 QA 部署与 provider 验收是另一个已授权任务，其调用不计作本次 BaZi 文案流程调用。

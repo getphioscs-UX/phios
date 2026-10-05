@@ -17,8 +17,9 @@ export function projectBaziFullReportC1({locale,reviewOnly,natalAuthority,timing
  for(let i=0;i<10;i++){
   const registered=BAZI_SECTION_REGISTRY.sections[i];
   const section={sectionKey:registered.key,sectionNumber:registered.number,sectionTitle:{'zh-Hans':titles[i],en:''},visualBinding:bindSectionVisual(registered.key),heroPlacement:bindSectionVisual(registered.key).placement};
-  add(section,{pageFamily:'SECTION_OPENER_PAGE',title:titles[i],paragraphs:[]});
-  const paragraphs=i===0?[{id:'AUTHORITY:NATAL',text:'庚申／甲子／庚辰／庚寅\n\n日主：庚金。\n\n这份读取以这组四柱为基础。出生公历日期、年龄与起运日期未在当前资料中提供，因此不从四柱反推这些身份资料。'}]:i===9?[{id:'AUTHORITY:TIMING',text:'这里以己巳大运与丙寅年度柱来理解阶段关系。目前尚未核实它们对应的公历年份、年龄与起运日期，因此下文讨论的是这组干支叠加的主题，不据此确定具体年份的事件。'},...copy.sections[i-1].paragraphs]:copy.sections[i-1].paragraphs;
+  add(section,{pageFamily:'SECTION_OPENER_PAGE',title:titles[i],paragraphs:i===0?['庚申／甲子／庚辰／庚寅','日主：庚金。']:[]});
+  if(i===0)continue;
+  const paragraphs=i===9?[{id:'AUTHORITY:TIMING',text:'己巳大运与丙寅年度柱构成这一阶段的读取范围。它们对应的公历年份、年龄与起运日期尚未明确。'},...copy.sections[i-1].paragraphs]:copy.sections[i-1].paragraphs;
   // Preserve each accepted paragraph and its sequence. Page allocation estimates
   // actual lines and paragraph spacing, rather than shrinking long-form prose.
   const heights=paragraphs.map(p=>p.text.split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil([...line].length/41)),0)*25+11);
