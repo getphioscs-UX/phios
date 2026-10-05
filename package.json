@@ -2738,7 +2738,13 @@
     "check:vfr:zwr-visual-prelive": "node scripts/run-zero-cost-regression.mjs check:vfr:zwr-visual-prelive",
     "check:report-provider-spend-protection": "node scripts/run-zero-cost-regression.mjs check:report-provider-spend-protection",
     "check:bazi-vfr-r2": "node scripts/run-zero-cost-regression.mjs check:bazi-vfr-r2",
-    "build:bazi-vfr-r2": "node scripts/run-zero-cost-regression.mjs build:bazi-vfr-r2"
+    "build:bazi-vfr-r2": "node scripts/run-zero-cost-regression.mjs build:bazi-vfr-r2",
+    "check:vfr:zwr-cache-prelive": "node scripts/run-zero-cost-regression.mjs check:vfr:zwr-cache-prelive",
+    "run:vfr:zwr-live": "node scripts/run-zwr-vfr-live-campaign.mjs",
+    "build:vfr:zwr-human-review": "node scripts/build-zwr-vfr-human-review.mjs",
+    "accept:vfr:zwr-human-review": "node scripts/accept-zwr-vfr-human-review.mjs",
+    "check:vfr:zwr-cutover-readiness": "node scripts/run-zero-cost-regression.mjs check:vfr:zwr-cutover-readiness",
+    "cutover:vfr:zwr-production": "node scripts/apply-zwr-vfr-production-cutover.mjs"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
