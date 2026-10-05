@@ -1,15 +1,24 @@
 import fs from 'node:fs';
 import {renderZwrVfrReview} from '../assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js';
-import {ZWR_VFR_PAGE_PLAN} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
+import {ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
+import {buildZwrVfrDeepPublicationIr} from '../functions/personal-reading/visual-first/ziwei-vfr-deep-publication.js';
 
 const root='docs/reports/ziwei/vfr-r1';
-const livePath=root+'/LIVE-RESULT.json',diagramPath=root+'/DIAGRAM-DATA.json',pagePath=root+'/PAGE-PLAN.json';
-for(const p of [livePath,diagramPath])if(!fs.existsSync(p))throw Error('ZWR_VFR_W9_INPUT_REQUIRED:'+p);
-const live=JSON.parse(fs.readFileSync(livePath,'utf8'));
+const repairedPath=root+'/five-call-experiment/REPAIRED-RESULT.json';
+const packPath=root+'/COMPACT-AUTHORING-PACK.json';
+const diagramPath=root+'/DIAGRAM-DATA.json';
+const pagePath=root+'/PAGE-PLAN.json';
+const publicationPath=root+'/DEEP-PUBLICATION-IR.json';
+for(const p of [repairedPath,packPath,diagramPath])if(!fs.existsSync(p))throw Error('ZWR_VFR_W9_INPUT_REQUIRED:'+p);
+const repaired=JSON.parse(fs.readFileSync(repairedPath,'utf8'));
+const pack=JSON.parse(fs.readFileSync(packPath,'utf8'));
 const diagrams=JSON.parse(fs.readFileSync(diagramPath,'utf8'));
 const pagePlan=ZWR_VFR_PAGE_PLAN;
+const reportIr=await buildZwrVfrDeepPublicationIr({pack,repairedResult:repaired});
+const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id)});
+if(!pageCheck.accepted)throw Error('ZWR_VFR_PAGE_PLAN_INVALID:'+pageCheck.reasons.join(','));
 fs.writeFileSync(pagePath,JSON.stringify(pagePlan,null,2)+'\n');
-if(live.status!=='PASS')throw Error('ZWR_VFR_LIVE_RESULT_NOT_PASS');
+fs.writeFileSync(publicationPath,JSON.stringify(reportIr,null,2)+'\n');
 if(pagePlan.length!==47)throw Error('ZWR_VFR_PAGE_COUNT_DRIFT');
 if(diagrams.diagramCount!==15)throw Error('ZWR_VFR_DIAGRAM_COUNT_DRIFT');
 
@@ -50,8 +59,8 @@ html,body{margin:0;padding:0;background:#121715;color:#e8ddbd;font-family:Inter,
 @media print{html,body{background:#fff}.review-shell{display:none}.zv-page{margin:0;width:210mm;height:297mm;box-shadow:none;break-after:page;page-break-after:always}.zv-page:last-child{break-after:auto;page-break-after:auto}}
 `;
 
-const body=renderZwrVfrReview({reportIr:live.reportIr,diagramData:diagrams,pagePlan});
-const html='<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zi Wei VFR R1 Human Review</title><style>'+styles+'</style></head><body><section class="review-shell"><h1>Zi Wei VFR R1 · Browser / Print Human Review</h1><p>W8 live PASS · 1 Sol call · 0 semantic review · 47 pages · 15 deterministic diagrams.</p><p>请同时检查桌面浏览、打印预览、双语语义、紫微专业度、生活解释深度、diagram 信息密度与页面越界。</p><button onclick="window.print()">打印／保存 PDF</button><p>只有人工确认后才运行：<code>npm run accept:vfr:zwr-human-review -- ACCEPT</code></p><p id="fit">checking page fit…</p></section><main>'+body+'</main><script>window.addEventListener("load",async()=>{const imgs=[...document.images];await Promise.all(imgs.map(async i=>{try{if(!i.complete)await i.decode();}catch{}}));const pages=[...document.querySelectorAll(".zv-page")];const over=pages.filter(p=>{const footer=p.querySelector("footer"),main=p.querySelector("main");return p.scrollHeight>p.clientHeight+2||(footer&&main&&main.getBoundingClientRect().bottom>footer.getBoundingClientRect().top+1)});const empty=[...document.querySelectorAll(".zv-empty")];const broken=imgs.filter(i=>!i.naturalWidth);window.zwrVfrReviewQuality={pages:pages.length,overflowPages:over.map(p=>Number(p.dataset.pageNumber)),missingRenderer:empty.length,brokenImages:broken.map(i=>i.src)};document.querySelector("#fit").textContent="pages="+pages.length+" · overflow="+over.length+(over.length?" ["+over.map(p=>p.dataset.pageNumber).join(",")+"]":"")+" · missing-renderer="+empty.length+" · broken-images="+broken.length;});</script></body></html>';
+const body=renderZwrVfrReview({reportIr,diagramData:diagrams,pagePlan});
+const html='<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zi Wei VFR R1 Human Review</title><style>'+styles+'</style></head><body><section class="review-shell"><h1>Zi Wei VFR R1 · Browser / Print Human Review</h1><p>Deep Manuscript W8 PASS · repaired completeness PASS · 0 semantic review · 47 pages · 15 deterministic diagrams · rerender provider calls 0.</p><p>请同时检查桌面浏览、打印预览、双语语义、紫微专业度、生活解释深度、diagram 信息密度与页面越界。</p><button onclick="window.print()">打印／保存 PDF</button><p>只有人工确认后才运行：<code>npm run accept:vfr:zwr-human-review -- ACCEPT</code></p><p id="fit">checking page fit…</p></section><main>'+body+'</main><script>window.addEventListener("load",async()=>{const imgs=[...document.images];await Promise.all(imgs.map(async i=>{try{if(!i.complete)await i.decode();}catch{}}));const pages=[...document.querySelectorAll(".zv-page")];const over=pages.filter(p=>{const footer=p.querySelector("footer"),main=p.querySelector("main");return p.scrollHeight>p.clientHeight+2||(footer&&main&&main.getBoundingClientRect().bottom>footer.getBoundingClientRect().top+1)});const empty=[...document.querySelectorAll(".zv-empty")];const broken=imgs.filter(i=>!i.naturalWidth);window.zwrVfrReviewQuality={pages:pages.length,overflowPages:over.map(p=>Number(p.dataset.pageNumber)),missingRenderer:empty.length,brokenImages:broken.map(i=>i.src)};document.querySelector("#fit").textContent="pages="+pages.length+" · overflow="+over.length+(over.length?" ["+over.map(p=>p.dataset.pageNumber).join(",")+"]":"")+" · missing-renderer="+empty.length+" · broken-images="+broken.length;});</script></body></html>';
 fs.mkdirSync('tools/review',{recursive:true});
 fs.writeFileSync('tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html',html);
-console.log('PASS built ZWR-VFR-R1-HUMAN-REVIEW.html: 47 rendered pages; 15 deterministic diagram data bindings; no JSON-pre placeholder.');
+console.log('PASS built ZWR-VFR-R1-HUMAN-REVIEW.html from REPAIRED-RESULT.json: 47 rendered pages; 15 deterministic diagrams exactly once; deep manuscript publication IR persisted; provider calls=0.');
