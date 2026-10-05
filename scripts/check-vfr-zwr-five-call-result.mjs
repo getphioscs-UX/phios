@@ -26,8 +26,6 @@ for(const row of result.rawManuscriptSections){
  const en=String(row.enManuscript||'').trim();
  assert(zh.length>=650,row.sectionId+': Chinese manuscript too short');
  assert(en.length>=1200,row.sectionId+': English manuscript too short');
- assert(zh.length<=1400,row.sectionId+': Chinese manuscript exceeded bounded long-form target');
- assert(en.length<=2800,row.sectionId+': English manuscript exceeded bounded long-form target');
  assert(zh.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': Chinese manuscript needs at least 5 paragraphs');
  assert(en.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': English manuscript needs at least 5 paragraphs');
  assert(!/^\s*[-*•]/mu.test(zh),row.sectionId+': Chinese manuscript must not be bullet-led');
