@@ -273,7 +273,7 @@ async function createReportRealityBrief({ intent, mode = "QUICK", answers, local
   if (!explicitOptIn) fail2("CONTEXTUAL_REALITY_OPT_IN_REQUIRED", 403);
   if (!REALITY_COMPARISON_STATES.includes(comparisonState)) fail2("REPORT_COMPARISON_INVALID");
   confirmGuidedReality({ mode, answers, locale, confirmation, confirmedSummary });
-  if (answers.intent !== intent.primaryQuestion) fail2("REALITY_CONTEXT_INTENT_MISMATCH");
+  if (answers.intent?.trim() !== intent.primaryQuestion) fail2("REALITY_CONTEXT_INTENT_MISMATCH");
   const sensitive = CURRENT_REALITY_SENSITIVE_DOMAINS.includes(domain), raw = { domain, promptId: "ACTIVE_NOW", text: answers.happening || "" };
   if (!sensitive && /诊断|病史|创伤|自杀|负债|收入金额|薪资|账户余额|diagnos|trauma|suicid|account balance|salary|debt amount/i.test(raw.text)) fail2("REALITY_SENSITIVE_DOMAIN_SELECTION_REQUIRED", 403);
   const canonical = canonicalizeCurrentRealityObservations(normalizePersonalCurrentRealityInput({ optIn: true, purposeCode: CURRENT_REALITY_PURPOSE, observations: sensitive ? [] : [raw], sensitiveObservations: sensitive && sensitiveConsent ? [raw] : [], sensitiveConsent }, locale));
@@ -286,5 +286,6 @@ async function createReportRealityBrief({ intent, mode = "QUICK", answers, local
 export {
   createReportContextIntent,
   createReportRealityBrief,
+  guidedRealityQuestions,
   summarizeGuidedReality
 };

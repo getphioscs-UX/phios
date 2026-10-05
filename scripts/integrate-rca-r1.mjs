@@ -5,7 +5,7 @@ if(!s.includes("body?.action?.startsWith('REPORT_CONTEXT_')"))s=s.replace(old,"i
 fs.writeFileSync(path,s);
 // Account request helper consumes `code`; retain the existing API's `error`
 // field as well for other Current Reality callers.
-s=s.replace("error:e.code||'REPORT_CONTEXT_UNAVAILABLE'","error:e.code||'REPORT_CONTEXT_UNAVAILABLE',code:e.code||'REPORT_CONTEXT_UNAVAILABLE'");fs.writeFileSync(path,s);
+if(!s.includes("code:e.code||'REPORT_CONTEXT_UNAVAILABLE'"))s=s.replace("error:e.code||'REPORT_CONTEXT_UNAVAILABLE'","error:e.code||'REPORT_CONTEXT_UNAVAILABLE',code:e.code||'REPORT_CONTEXT_UNAVAILABLE'");fs.writeFileSync(path,s);
 const ui='assets/customer-ui/js/surfaces/account-persons.js';let u=fs.readFileSync(ui,'utf8');
 if(!u.includes("import {installReportModeChoice"))u="import {installReportModeChoice,prepareReportContext} from '../report-context-ui.js';\n"+u;
 u=u.replace('installReportModeChoice,prepareReportContext}', 'installReportModeChoice,prepareReportContext,reportContextErrorLabel}');

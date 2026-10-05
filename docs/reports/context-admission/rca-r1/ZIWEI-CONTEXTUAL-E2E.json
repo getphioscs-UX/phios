@@ -1,0 +1,42 @@
+{
+  "recordedAt": "2026-10-05T01:34:12.740Z",
+  "state": "BLOCKED_QA_END_TO_END",
+  "local": {
+    "realSqlPrivateApiChecks": "PASS",
+    "accountsAndPurchase": "SYNTHETIC",
+    "encryption": "AES_GCM_DEDICATED_KEY",
+    "ownedBriefSingleUse": "PASS",
+    "canonicalClaimsAndParagraphsPreserved": "SYNTHETIC_OVERLAY_PASS",
+    "contextPages": 2,
+    "contextualCompositionPages": 41,
+    "workerDryRun": "PASS"
+  },
+  "live": {
+    "realR5Generation": "NOT_PROVEN",
+    "providerCallsDuringRcaTests": 0,
+    "privateBrowserVerification": "NOT_PROVEN",
+    "immutableRelease": "NOT_PROVEN",
+    "readOnlyReopen": "NOT_PROVEN",
+    "fullReportMobile": "NOT_PROVEN",
+    "fullReportA4Print": "NOT_PROVEN"
+  },
+  "requiredQaSetup": [
+    "Existing entitled test account and owned consented person",
+    "R5 generation provider configuration",
+    "Apply migration 0012 to isolated QA D1",
+    "Dedicated REPORT_CONTEXT_ENCRYPTION_KEY and PRIVATE_REPORTS binding",
+    "Private browser worker successor supporting ZIWEI-CONTEXTUAL-RCA-R1",
+    "Generate canonical and contextual reports; verify release receipts and digest-preserving reopen"
+  ],
+  "blockers": [
+    {
+      "code": "ZIWEI_R5_OPENAI_API_KEY_REQUIRED",
+      "check": "npm run check:canonical-account-person",
+      "scope": "Existing canonical R5 generation fails closed before provider invocation."
+    },
+    {
+      "code": "LIVE_QA_RELEASE_NOT_PROVEN",
+      "scope": "No supplied/configured authenticated QA run proves entitlement, real R5 generation, private browser verification, immutable release and reopen."
+    }
+  ]
+}

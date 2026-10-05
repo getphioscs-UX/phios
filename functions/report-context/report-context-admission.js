@@ -39,7 +39,7 @@ export async function createReportRealityBrief({intent,mode='QUICK',answers,loca
  if(intent?.reportMode!=='CONTEXTUAL_READING')fail('REALITY_BRIEF_NOT_ADMITTED');if(!explicitOptIn)fail('CONTEXTUAL_REALITY_OPT_IN_REQUIRED',403);
  if(!REALITY_COMPARISON_STATES.includes(comparisonState))fail('REPORT_COMPARISON_INVALID');
  confirmGuidedReality({mode,answers,locale,confirmation,confirmedSummary});
- if(answers.intent!==intent.primaryQuestion)fail('REALITY_CONTEXT_INTENT_MISMATCH');
+ if(answers.intent?.trim()!==intent.primaryQuestion)fail('REALITY_CONTEXT_INTENT_MISMATCH');
  // Intent and desired outcome are not evidence. Only happening is consumed;
  // additional answers remain intake, never silently promoted to observations.
  const sensitive=CURRENT_REALITY_SENSITIVE_DOMAINS.includes(domain),raw={domain,promptId:'ACTIVE_NOW',text:answers.happening||''};

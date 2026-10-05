@@ -15,7 +15,7 @@ Owners traced before implementation:
 - Private subject: functions/account/canonical-person-store.js uses AES-GCM, owner-scoped queries, associated data and digest. Report brief storage follows that protected pattern with a separate encryption binding; metadata has no text.
 - Snapshot/release: report-section-snapshot.js → account/ziwei-controlled-report-material.js → PRIVATE_REPORTS and account_method_report_materials. Reopen is read-only and hashes released bytes.
 - Browser: workers/method-report-renderer/index.js validates snapshot/composition/physical pages/assets/overflow/digest. Existing R5 contract is 39 pages; account delivery still hard-codes 33, a pre-existing mismatch. Successor account dispatch will retain canonical behavior and use an explicit contextual page contract. No forged browser receipt grants.
-- Visual: ziwei-professional-publication-r5.js and canonical-presentation-runtime/ziwei-section-assets.js, publication-report-pages.js. Context uses existing body asset, additional physical pages, original masters/copy preserved.
+- Visual: ziwei-professional-publication-r5.js and canonical-presentation-runtime/ziwei-report-visuals.js, publication-report-pages.js. Context uses existing body asset, additional physical pages, original masters/copy preserved.
 - Build: scripts/build-cloudflare-pages.mjs excludes docs/tools/fixtures/functions/scripts/workers from static publication. Never put private context into public assets or URLs.
 
 Affected checks: reading-evidence-boundary, runtime-memory-contract, reality-continuity-contract, profile W7 and W7–W10, canonical-account-person, controlled Zi Wei delivery, renderer/admission checks, Pages check-only build. New focused RCA check stays outside global check until owner acceptance.

@@ -1,0 +1,49 @@
+{
+  "scope": "LOCAL_REAL_SQL_SYNTHETIC_AUTH_AND_ENTITLEMENT_NOT_QA_STRIPE",
+  "tests": [
+    {
+      "name": "ENTITLEMENT_REQUIRED_BEFORE_CONTEXT_START",
+      "result": "DENIED"
+    },
+    {
+      "name": "NO_CLIENT_OWNER",
+      "result": "DENIED"
+    },
+    {
+      "name": "SAME_ORIGIN_REQUIRED",
+      "result": "DENIED"
+    },
+    {
+      "name": "CROSS_OWNER_INTENT_READ",
+      "result": "DENIED"
+    },
+    {
+      "name": "NO_UNCONFIRMED_BRIEF",
+      "result": "DENIED"
+    },
+    {
+      "name": "CROSS_OWNER_SUMMARY_CONFIRM",
+      "result": "DENIED"
+    },
+    {
+      "name": "SAME_ACCOUNT_DIFFERENT_PERSON",
+      "result": "DENIED"
+    },
+    {
+      "name": "NEW_GENERATION_REQUIRES_NEW_CONFIRMATION",
+      "result": "DENIED"
+    },
+    {
+      "name": "AUTHENTICATED_CONTEXT_START_SUMMARY_CONFIRM_ENCRYPTED_BRIEF_SQL_E2E",
+      "result": "PASS"
+    },
+    {
+      "name": "NO_RUNTIME_OR_ARTIFACT_MEMORY_WRITES",
+      "result": "PASS"
+    }
+  ],
+  "providerCalls": 0,
+  "privatePayloadEncrypted": true,
+  "metadataHasNoText": true,
+  "liveBrowserRelease": "NOT_PROVEN"
+}
