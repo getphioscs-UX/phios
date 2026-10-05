@@ -1,3 +1,5 @@
+import {installAskReportHandoff} from '../report-context-ui.js';
+import {accountRequest} from './secure-drafts.js';
 import {normalizeAskContext} from '../ask-context-contract.js';
 import {renderStructuredAnswer} from './structured-answer.js';
 import {arr,esc,locale,postJson,reRenderOnLocale,setStatus,tr} from './runtime-ui.js';
@@ -253,6 +255,7 @@ function errorMessage(code){
 function isPaidBoundary(code){return /(ENTITLEMENT|CREDIT|ALLOWANCE|QUOTA|PAID|UPGRADE)/i.test(String(code||''))}
 
 function boot(){
+ installAskReportHandoff(document.querySelector('[data-cx-contextual-ask-form]'),{request:accountRequest,locale});
   const form=document.querySelector('[data-cx-contextual-ask-form]'),status=document.querySelector('[data-cx-contextual-ask-status]');
   if(!form)return;
   const routing=document.createElement('label');routing.innerHTML=tr('How would you like to continue? ','你想如何继续？ ')+'<select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);

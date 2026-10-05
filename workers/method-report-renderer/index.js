@@ -3,9 +3,11 @@ import {renderPublicationReport} from '../../assets/customer-ui/js/personal-prod
 import {finalizeZiweiNavigation} from '../../functions/canonical-presentation-runtime/ziwei-navigation-finalization.js';
 import {createCustomerDeliverySnapshot} from '../../functions/personal-reading/narrative/report-section-snapshot.js';
 import {css,fitCode} from './render-assets.generated.js';
+import {assertZiweiContextSnapshot} from '../../functions/report-context/ziwei-contextual-snapshot-contract.js';
+import {CONTEXTUAL_REPORT_CSS} from '../../functions/report-context/contextual-report-presentation.js';
 
 const origin='https://qa.phios-github.pages.dev';
-const ZIWEI_PAGE_COUNTS=Object.freeze({'ZIWEI-PRODUCTION-COMPOSER-V1':33,'ZIWEI-NATURAL-COMPOSER-R4':33,'ZIWEI-PROFESSIONAL-SYNTHESIS-R5':39});
+const ZIWEI_PAGE_COUNTS=Object.freeze({'ZIWEI-PRODUCTION-COMPOSER-V1':33,'ZIWEI-NATURAL-COMPOSER-R4':33,'ZIWEI-PROFESSIONAL-SYNTHESIS-R5':39,'ZIWEI-CONTEXTUAL-RCA-R1':41});
 const ALLOWED_ZIWEI_COMPOSITIONS=new Set(Object.keys(ZIWEI_PAGE_COUNTS));
 const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),b=>b.toString(16).padStart(2,'0')).join('');
 
@@ -20,6 +22,7 @@ export default {
    const {candidate,method,compositionVersion}=JSON.parse(raw+decoder.decode());
    const expectedPageCount=ZIWEI_PAGE_COUNTS[compositionVersion]||0;
    if(method!=='ZWR'||!ALLOWED_ZIWEI_COMPOSITIONS.has(compositionVersion)||!expectedPageCount||compositionVersion!==candidate?.snapshot?.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||!['en','zh-Hans'].includes(candidate.locale)||candidate.snapshot?.methodId!=='ZWR'||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
+   if(compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1')await assertZiweiContextSnapshot(candidate);
 
    stage='COMPOSE';
    const body=finalizeZiweiNavigation(renderPublicationReport(candidate.snapshot.semanticContent.report),candidate.locale).replaceAll('src="/assets/',`src="${origin}/assets/`);
@@ -35,7 +38,7 @@ export default {
    page.on('request',r=>{const u=new URL(r.url());const allowed=u.protocol==='data:'||(u.protocol==='https:'&&(u.origin===origin||u.hostname.endsWith('.getphios.com')||u.hostname.endsWith('.r2.dev')));return allowed?r.continue():r.abort();});
 
    stage='ASSET_LOAD';
-   await page.setContent(`<!doctype html><html lang="${candidate.locale}"><head><meta charset="utf-8"><title>PHI OS · Zi Wei</title><style>${css}</style></head><body><main>${body}</main></body></html>`,{waitUntil:'networkidle0',timeout:60000});
+   await page.setContent(`<!doctype html><html lang="${candidate.locale}"><head><meta charset="utf-8"><title>PHI OS · Zi Wei</title><style>${css}${compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1'?CONTEXTUAL_REPORT_CSS:''}</style></head><body><main>${body}</main></body></html>`,{waitUntil:'networkidle0',timeout:60000});
    await page.addScriptTag({content:fitCode});
    await page.emulateMediaType('print');
 

@@ -3,19 +3,21 @@ import {controlledZiweiIdentity} from '../report-delivery/ziwei-production-gener
 import {loadCanonicalPersonSubject} from './canonical-person-store.js';
 import {releaseControlledZiweiReport,openControlledZiweiReport} from './ziwei-controlled-report-material.js';
 import {digest} from './oidc-auth.js';
+import {generateContextualAccountZiweiCandidate} from '../report-delivery/ziwei-contextual-person-binding-r1.js';
 const fail=(code,status=409)=>Object.assign(new Error(code),{code,status});
 const loader=env=>(owner,id)=>loadCanonicalPersonSubject(env,owner,id);
 async function bounded(response,max){const reader=response.body?.getReader();if(!reader)throw fail('REPORT_RENDER_FAILED');let bytes=0,text='';const decoder=new TextDecoder();for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>max){await reader.cancel();throw fail('REPORT_RENDER_TOO_LARGE');}text+=decoder.decode(value,{stream:true});}return text+decoder.decode();}
 export async function generateAndReleaseAccountZiwei(context,selection){
  controlledZiweiIdentity(context);
- const candidate=await generateAccountZiweiCandidate(context,selection);
+ const candidate=selection?.reportMode!=null||selection?.realityBriefId!=null?await generateContextualAccountZiweiCandidate(context,selection):await generateAccountZiweiCandidate(context,selection);
  // An actual private server browser verifier must be configured. Customer claims
  // and local test receipts cannot cross this boundary.
  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);
  const response=await context.env.METHOD_REPORT_RENDERER.fetch(new Request('https://method-report-renderer.internal/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({candidate,method:'ZWR',compositionVersion:candidate.snapshot.compositionVersion})}));
  if(!response.ok)throw fail('REPORT_RENDER_FAILED');
  const output=JSON.parse(await bounded(response,8000000)),receipt=output.verification;
- if(typeof output.html!=='string'||receipt?.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||receipt?.passed!==true||receipt?.pageCount!==33||receipt?.brokenImages!==0||receipt?.overflowCount!==0||receipt?.errorCount!==0||receipt?.outputDigest!==await digest(output.html))throw fail('REPORT_RENDER_VERIFICATION_REQUIRED');
+ const expectedPages=candidate.snapshot.semanticContent.report.totalPages;
+ if(typeof output.html!=='string'||receipt?.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||receipt?.passed!==true||receipt?.pageCount!==expectedPages||receipt?.brokenImages!==0||receipt?.overflowCount!==0||receipt?.errorCount!==0||receipt?.outputDigest!==await digest(output.html))throw fail('REPORT_RENDER_VERIFICATION_REQUIRED');
  const release=await releaseControlledZiweiReport(context,candidate,{loadSubject:loader(context.env),renderVerification:receipt});
  const objectKey=`released-method/${release.reportId}/${receipt.outputDigest}.html`,now=new Date().toISOString();
  await context.env.PRIVATE_REPORTS.put(objectKey,output.html,{httpMetadata:{contentType:'text/html; charset=utf-8',cacheControl:'private, no-store'}});
