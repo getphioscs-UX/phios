@@ -32,26 +32,69 @@ function completeEn(text){
  return ['.','!','?'].includes(t.at(-1)) || ['."','!"','?"',".'","!'","?'"].some(x=>t.endsWith(x));
 }
 
+const defects=[];
+const observations=[];
 let zhChars=0,enWords=0;
+
 for(const row of result.rawManuscriptSections){
  const zh=String(row.zhHansManuscript||'').trim();
  const en=String(row.enManuscript||'').trim();
- assert(zh.length>=650,row.sectionId+': Chinese manuscript too short');
- assert(en.length>=1200,row.sectionId+': English manuscript too short');
  const zhParagraphs=splitParagraphs(zh);
  const enParagraphs=splitParagraphs(en);
- assert(zhParagraphs.length>=5,row.sectionId+': Chinese manuscript needs at least 5 paragraphs');
- assert(enParagraphs.length>=5,row.sectionId+': English manuscript needs at least 5 paragraphs');
- assert(completeZh(zh),row.sectionId+': Chinese manuscript ends mid-sentence');
- assert(completeEn(en),row.sectionId+': English manuscript ends mid-sentence');
- assert(zhParagraphs.every(completeZh),row.sectionId+': Chinese manuscript contains truncated paragraph');
- assert(enParagraphs.every(completeEn),row.sectionId+': English manuscript contains truncated paragraph');
- assert(!/^\s*[-*•]/mu.test(zh),row.sectionId+': Chinese manuscript must not be bullet-led');
- assert(!/^\s*[-*•]/mu.test(en),row.sectionId+': English manuscript must not be bullet-led');
+
+ if(zh.length<650)defects.push({sectionId:row.sectionId,locale:'zhHans',code:'MANUSCRIPT_TOO_SHORT',actual:zh.length});
+ if(en.length<1200)defects.push({sectionId:row.sectionId,locale:'en',code:'MANUSCRIPT_TOO_SHORT',actual:en.length});
+ if(zhParagraphs.length<5)defects.push({sectionId:row.sectionId,locale:'zhHans',code:'TOO_FEW_PARAGRAPHS',actual:zhParagraphs.length});
+ if(enParagraphs.length<5)defects.push({sectionId:row.sectionId,locale:'en',code:'TOO_FEW_PARAGRAPHS',actual:enParagraphs.length});
+ if(/^\s*[-*•]/mu.test(zh))defects.push({sectionId:row.sectionId,locale:'zhHans',code:'BULLET_LED'});
+ if(/^\s*[-*•]/mu.test(en))defects.push({sectionId:row.sectionId,locale:'en',code:'BULLET_LED'});
+ if(!completeZh(zh))defects.push({sectionId:row.sectionId,locale:'zhHans',code:'ENDS_MID_SENTENCE',tail:zh.slice(-180)});
+ if(!completeEn(en))defects.push({sectionId:row.sectionId,locale:'en',code:'ENDS_MID_SENTENCE',tail:en.slice(-180)});
+
+ zhParagraphs.forEach((p,index)=>{
+  if(!completeZh(p))defects.push({sectionId:row.sectionId,locale:'zhHans',code:'TRUNCATED_PARAGRAPH',paragraph:index+1,tail:p.slice(-180)});
+ });
+ enParagraphs.forEach((p,index)=>{
+  if(!completeEn(p))defects.push({sectionId:row.sectionId,locale:'en',code:'TRUNCATED_PARAGRAPH',paragraph:index+1,tail:p.slice(-180)});
+ });
+
+ if(zh.length>1400)observations.push({sectionId:row.sectionId,locale:'zhHans',code:'LENGTH_ADVISORY',actual:zh.length,targetMax:1400});
+ if(en.length>2800)observations.push({sectionId:row.sectionId,locale:'en',code:'LENGTH_ADVISORY',actual:en.length,targetMax:2800});
+
  zhChars+=zh.length;
  enWords+=en.split(/\s+/).filter(Boolean).length;
 }
-assert(zhChars>7500,'five-call Chinese manuscript not materially deeper than summary mode');
-assert(enWords>1500,'five-call English manuscript not materially deeper than summary mode');
 
-console.log('PASS ZWR-VFR five-call experiment: calls='+result.providerUsage.providerCalls+'; semantic review=0; cost=$'+Number(result.providerUsage.estimatedProviderCost).toFixed(6)+'; input='+result.providerUsage.inputTokens+'; output='+result.providerUsage.outputTokens+'; sections=10; chapter-first deep manuscripts complete.');
+if(zhChars<=7500)defects.push({sectionId:'ALL',locale:'zhHans',code:'TOTAL_DEPTH_TOO_LOW',actual:zhChars});
+if(enWords<=1500)defects.push({sectionId:'ALL',locale:'en',code:'TOTAL_DEPTH_TOO_LOW',actual:enWords});
+
+const manifest={
+ schemaVersion:'ZWR-VFR-R1-FIVE-CALL-COMPLETENESS-MANIFEST-v1',
+ generatedAt:new Date().toISOString(),
+ status:defects.length?'REJECT':'PASS',
+ providerCalls:result.providerUsage.providerCalls,
+ estimatedProviderCost:result.providerUsage.estimatedProviderCost,
+ defectCount:defects.length,
+ affectedSections:[...new Set(defects.filter(d=>d.sectionId!=='ALL').map(d=>d.sectionId))],
+ defects,
+ observations
+};
+fs.writeFileSync(root+'COMPLETENESS-MANIFEST.json',JSON.stringify(manifest,null,2)+'\n');
+
+if(defects.length){
+ console.error(
+  'REJECT ZWR-VFR five-call completeness: defects='+defects.length+
+  '; affectedSections='+manifest.affectedSections.join(',')+
+  '; see '+root+'COMPLETENESS-MANIFEST.json'
+ );
+ process.exitCode=1;
+}else{
+ console.log(
+  'PASS ZWR-VFR five-call experiment: calls='+result.providerUsage.providerCalls+
+  '; semantic review=0; cost=$'+Number(result.providerUsage.estimatedProviderCost).toFixed(6)+
+  '; input='+result.providerUsage.inputTokens+
+  '; output='+result.providerUsage.outputTokens+
+  '; sections=10; completeness PASS.'+
+  (observations.length?' lengthAdvisories='+observations.length:'')
+ );
+}
