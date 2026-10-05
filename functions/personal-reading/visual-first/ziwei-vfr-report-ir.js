@@ -14,9 +14,7 @@ function stringsForLocale(localized){
  return [
   localized?.headline,localized?.subheadline,
   ...(localized?.keyInsights||[]).flatMap(x=>[x?.label,x?.text]),
-  ...(localized?.interpretation||[]),
-  localized?.diagramNarratives?.primary,
-  localized?.diagramNarratives?.secondary
+  ...(localized?.interpretation||[])
  ].filter(Boolean).map(String);
 }
 function sectionClaims(packSection){return new Set((packSection?.claims||[]).map(c=>c.claimId));}
@@ -26,13 +24,12 @@ export function buildZwrVfrProviderSchema(pack){
   const zh=locale==='zhHans';
   return {
    type:'object',additionalProperties:false,
-   required:['headline','subheadline','keyInsights','interpretation','diagramNarratives'],
+   required:['headline','subheadline','keyInsights','interpretation'],
    properties:{
     headline:{type:'string',minLength:1,maxLength:zh?24:50},
     subheadline:{type:'string',minLength:1,maxLength:zh?40:80},
     keyInsights:{type:'array',minItems:3,maxItems:3,items:{type:'object',additionalProperties:false,required:['label','text'],properties:{label:{type:'string',minLength:1,maxLength:zh?12:20},text:{type:'string',minLength:1,maxLength:zh?50:90}}}},
-    interpretation:{type:'array',minItems:2,maxItems:2,items:{type:'string',minLength:20,maxLength:zh?100:180}},
-    diagramNarratives:{type:'object',additionalProperties:false,required:['primary','secondary'],properties:{primary:{type:'string',minLength:1,maxLength:zh?35:70},secondary:{type:'string',minLength:1,maxLength:zh?35:70}}}
+    interpretation:{type:'array',minItems:2,maxItems:2,items:{type:'string',minLength:20,maxLength:zh?100:180}}
    }
   };
  };
