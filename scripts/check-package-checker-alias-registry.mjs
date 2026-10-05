@@ -49,9 +49,12 @@ for (const command of registry.protectedCanonicalCommands) {
   }
 }
 
-assert.match(packageJson.scripts.check, /npm run check:package-aliases/);
-assert.match(packageJson.scripts.check, /npm run check:cross-final-production-admission/);
-assert.doesNotMatch(packageJson.scripts.check, /npm run check:cross-r2-w24-w26-pre-admission/);
+const canonicalCheck = packageJson.scripts.check.includes('run-zero-cost-regression.mjs')
+  ? (await readJson('config/reports/zero-cost-check-commands.json')).check
+  : packageJson.scripts.check;
+assert.match(canonicalCheck, /npm run check:package-aliases/);
+assert.match(canonicalCheck, /npm run check:cross-final-production-admission/);
+assert.doesNotMatch(canonicalCheck, /npm run check:cross-r2-w24-w26-pre-admission/);
 
 const runner = await fs.readFile(path.join(root, registry.runner), 'utf8');
 assert.doesNotMatch(runner, /writeFile|unlink|rmSync|rename/i);

@@ -25,3 +25,6 @@ PROVIDER_CALL_COUNT = 0
 - Existing shared customer-delivery checker fails at eight expected methods versus seven registered methods. Its script and commerce/delivery owners are byte-identical to pre-C1 baseline; no registry/scoring/product change was made to pass it.
 
 等待明确的全文 owner ACCEPT 后才可讨论最终生产冻结。本轮未自动接受、未翻译新英文稿、未发布客户 BaZi 候选。RCA 的 QA 部署与 provider 验收是另一个已授权任务，其调用不计作本次 BaZi 文案流程调用。
+
+CUSTOMER_PHYSICAL_COMPOSITION = REJECTED
+Reason: LONG_FORM_PAGE_EXPLOSION; VISUAL_FIRST_REQUIREMENT_NOT_MET. Accepted manuscript and editorial/authority lineage preserved. Replacement candidate: BAZI-VFR-R1; Human ACCEPT remains pending.

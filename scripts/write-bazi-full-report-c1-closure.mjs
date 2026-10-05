@@ -1,4 +1,8 @@
 import fs from 'node:fs';
+if(fs.existsSync('docs/acceptance/bazi-paid-report/full-report-c1/PHYSICAL-COMPOSITION-DISPOSITION.json')){
+ console.log('C1 physical composition remains HUMAN REJECTED. Historical lineage retained; VFR candidate owns the next review.');
+ process.exit(0);
+}
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';

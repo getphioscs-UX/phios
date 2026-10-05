@@ -5,6 +5,10 @@ import path from 'node:path';
 const commands=JSON.parse(fs.readFileSync('config/reports/zero-cost-check-commands.json','utf8'));
 const key=process.argv[2];if(!commands[key])throw Error('ZERO_COST_COMMAND_UNKNOWN');
 const preload=pathToFileURL(path.resolve('scripts/lib/report-zero-cost-preload.mjs')).href;
-const env={...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true',NODE_OPTIONS:`${process.env.NODE_OPTIONS||''} --import=${preload}`};
-const result=spawnSync(commands[key],{shell:true,stdio:'inherit',env});
+const inherited=process.env.NODE_OPTIONS||'';
+const env={...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true',NODE_OPTIONS:inherited.includes(preload)?inherited:`${inherited} --import=${preload}`};
+// Non-Node grandchildren cannot spend using inherited model credentials either.
+for(const key of Object.keys(env))if(/^(OPENAI|ANTHROPIC|DEEPSEEK|GEMINI|GOOGLE_AI|OPENROUTER).*(API_KEY|ACCESS_TOKEN|SECRET)$/.test(key))delete env[key];
+const extra=process.argv.slice(3);if(extra.some(a=>!/^[-A-Za-z0-9:_.=]+$/.test(a)))throw Error('ZERO_COST_ARGUMENT_INVALID');
+const result=spawnSync(commands[key]+(extra.length?' '+extra.join(' '):''),{shell:true,stdio:'inherit',env});
 if(result.error)throw result.error;process.exit(result.status??1);

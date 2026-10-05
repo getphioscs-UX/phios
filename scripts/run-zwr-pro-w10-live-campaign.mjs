@@ -4,6 +4,7 @@ import {buildZwrProW10DeterministicCase,summarizeZwrProW10Campaign} from '../fun
 import {buildZwrProBilingualCandidateW4W8} from '../functions/personal-reading/narrative/zwr-pro-w4-w8-pipeline.js';
 import {createZwrProImmutableSnapshotW9} from '../functions/personal-reading/narrative/zwr-pro-w9-immutable-snapshot.js';
 
+if(process.env.REPORT_PROVIDER_LIVE_ALLOWED!=='true'||process.env.REPORT_ZERO_COST_REPLAY==='true')throw Error('REPORT_PROVIDER_LIVE_OPT_IN_REQUIRED');
 if(!String(process.env.OPENAI_API_KEY||'').trim())throw Error('ZWR_PRO_W10_OPENAI_API_KEY_REQUIRED');
 
 const ids=Array.from({length:12},(_,i)=>String(i+1).padStart(2,'0'));
