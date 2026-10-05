@@ -1,7 +1,10 @@
 import fs from 'node:fs';
-import {renderZwrVfrReview} from '../assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js';
-import {ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
-import {buildZwrVfrDeepPublicationIr} from '../functions/personal-reading/visual-first/ziwei-vfr-deep-publication.js';
+import {renderZwrVfrReview,ZWR_VFR_RENDERER_VERSION} from '../assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js';
+import {ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan,ZWR_VFR_PAGE_PLAN_VERSION} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
+import {buildZwrVfrDeepPublicationIr,ZWR_VFR_DEEP_PUBLICATION_IR_VERSION} from '../functions/personal-reading/visual-first/ziwei-vfr-deep-publication.js';
+import {ZWR_VFR_DIAGRAM_DATA_VERSION} from '../functions/personal-reading/visual-first/ziwei-vfr-diagram-data.js';
+import {ZWR_VFR_VISUAL_BINDING_VERSION} from '../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
+import {zwrVfrDeepPublicationCacheIdentity} from '../functions/personal-reading/visual-first/ziwei-vfr-cache.js';
 
 const root='docs/reports/ziwei/vfr-r1';
 const repairedPath=root+'/five-call-experiment/REPAIRED-RESULT.json';
@@ -9,6 +12,7 @@ const packPath=root+'/COMPACT-AUTHORING-PACK.json';
 const diagramPath=root+'/DIAGRAM-DATA.json';
 const pagePath=root+'/PAGE-PLAN.json';
 const publicationPath=root+'/DEEP-PUBLICATION-IR.json';
+const renderCachePath=root+'/DEEP-RENDER-CACHE.json';
 for(const p of [repairedPath,packPath,diagramPath])if(!fs.existsSync(p))throw Error('ZWR_VFR_W9_INPUT_REQUIRED:'+p);
 const repaired=JSON.parse(fs.readFileSync(repairedPath,'utf8'));
 const pack=JSON.parse(fs.readFileSync(packPath,'utf8'));
@@ -19,6 +23,34 @@ const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id
 if(!pageCheck.accepted)throw Error('ZWR_VFR_PAGE_PLAN_INVALID:'+pageCheck.reasons.join(','));
 fs.writeFileSync(pagePath,JSON.stringify(pagePlan,null,2)+'\n');
 fs.writeFileSync(publicationPath,JSON.stringify(reportIr,null,2)+'\n');
+const renderCacheKey=zwrVfrDeepPublicationCacheIdentity({
+ authorityDigest:pack.authorityDigest,
+ repairedResultDigest:repaired.resultDigest,
+ pagePlanVersion:ZWR_VFR_PAGE_PLAN_VERSION,
+ diagramDataVersion:ZWR_VFR_DIAGRAM_DATA_VERSION,
+ diagramDataDigest:diagrams.diagramDataDigest,
+ visualBindingVersion:ZWR_VFR_VISUAL_BINDING_VERSION,
+ rendererVersion:ZWR_VFR_RENDERER_VERSION,
+ publicationIrVersion:ZWR_VFR_DEEP_PUBLICATION_IR_VERSION
+});
+const renderCacheRecord={
+ schemaVersion:'ZWR-VFR-R1-DEEP-RENDER-CACHE-v1',
+ cacheKey:renderCacheKey,
+ authorityDigest:pack.authorityDigest,
+ repairedResultDigest:repaired.resultDigest,
+ publicationIrDigest:reportIr.publicationIrDigest,
+ pagePlanVersion:ZWR_VFR_PAGE_PLAN_VERSION,
+ diagramDataVersion:ZWR_VFR_DIAGRAM_DATA_VERSION,
+ diagramDataDigest:diagrams.diagramDataDigest,
+ visualBindingVersion:ZWR_VFR_VISUAL_BINDING_VERSION,
+ rendererVersion:ZWR_VFR_RENDERER_VERSION,
+ providerCallsDuringRerender:0
+};
+if(fs.existsSync(renderCachePath)){
+ const prior=JSON.parse(fs.readFileSync(renderCachePath,'utf8'));
+ if(prior.cacheKey===renderCacheKey&&JSON.stringify(prior)!==JSON.stringify(renderCacheRecord))throw Error('ZWR_VFR_DEEP_RENDER_CACHE_CONFLICT');
+}
+fs.writeFileSync(renderCachePath,JSON.stringify(renderCacheRecord,null,2)+'\n');
 if(pagePlan.length!==47)throw Error('ZWR_VFR_PAGE_COUNT_DRIFT');
 if(diagrams.diagramCount!==15)throw Error('ZWR_VFR_DIAGRAM_COUNT_DRIFT');
 
