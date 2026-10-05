@@ -62,7 +62,9 @@ function stars(data){
 }
 function transformations(data){
  const xs=data.transformations||data.layers?.flatMap(x=>x.transformations||[])||[];
- return '<div class="zv-flow">'+xs.slice(0,16).map((t,i)=>'<div class="zv-flow-row"><span>'+String(i+1).padStart(2,'0')+'</span><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div>').join('')+'</div>';
+ const rows=xs.slice(0,16);
+ if(rows.length<=3)return '<div class="zv-flow zv-flow-sparse">'+rows.map((t,i)=>'<article class="zv-tx-card"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div></article>').join('')+'</div>';
+ return '<div class="zv-flow">'+rows.map((t,i)=>'<div class="zv-flow-row"><span>'+String(i+1).padStart(2,'0')+'</span><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div>').join('')+'</div>';
 }
 function focus(data){
  const ps=Array.isArray(data.palaces)?data.palaces:(data.palace?[data.palace]:[]);
