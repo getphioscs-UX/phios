@@ -2,11 +2,14 @@ import fs from 'node:fs';
 
 const root='docs/reports/ziwei/vfr-r1';
 const onePath=root+'/LIVE-RESULT.json';
-const fivePath=root+'/five-call-experiment/RESULT.json';
+const repairedPath=root+'/five-call-experiment/REPAIRED-RESULT.json';
+const rawFivePath=root+'/five-call-experiment/RESULT.json';
+const fivePath=fs.existsSync(repairedPath)?repairedPath:rawFivePath;
 if(!fs.existsSync(onePath)||!fs.existsSync(fivePath))throw Error('ZWR_FIVE_CALL_COMPARISON_INPUT_REQUIRED');
 
 const one=JSON.parse(fs.readFileSync(onePath,'utf8'));
 const five=JSON.parse(fs.readFileSync(fivePath,'utf8'));
+const fiveSource=fivePath===repairedPath?'TARGETED_REPAIRED':'RAW_FIVE_CALL';
 const wc=s=>String(s||'').trim().split(/\s+/).filter(Boolean).length;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -31,10 +34,12 @@ const summary={
   outputTokens:one.reportIr?.providerUsage?.outputTokens
  },
  fiveCall:{
-  providerCalls:five.providerUsage.providerCalls,
-  estimatedProviderCost:five.providerUsage.estimatedProviderCost,
-  inputTokens:five.providerUsage.inputTokens,
-  outputTokens:five.providerUsage.outputTokens
+  source:fiveSource,
+  providerCalls:five.providerUsage.providerCalls??five.providerUsage.originalProviderCalls,
+  repairProviderCalls:five.providerUsage.repairProviderCalls??0,
+  estimatedProviderCost:five.providerUsage.estimatedProviderCost??five.providerUsage.totalEstimatedProviderCost,
+  inputTokens:five.providerUsage.inputTokens??five.providerUsage.repairInputTokens,
+  outputTokens:five.providerUsage.outputTokens??five.providerUsage.repairOutputTokens
  },
  sections:rows
 };
