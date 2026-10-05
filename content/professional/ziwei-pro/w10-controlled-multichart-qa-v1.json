@@ -36,9 +36,21 @@
       "W5_REJECT": "Reuse W4-passed candidate and rerun local W5/W6 only",
       "W6_REJECT": "Reuse W4-passed candidate and rerun local W5/W6 only",
       "SECTION_PASS": "Reuse verified section with zero provider calls",
-      "W7_OR_W8_REJECT": "Reuse all passed sections and rerun report-level verifiers only"
+      "W7_OR_W8_REJECT": "Reuse all passed sections and rerun report-level verifiers only",
+      "SEMANTIC_REVIEW_REJECT": "Perform one governed targeted span repair limited to reviewer-identified block roles; unchanged blocks, refs and order must remain byte-for-byte/stable.",
+      "TARGETED_REPAIR_REJECT": "Preserve repaired candidate and evidence; do not broaden verifier or silently full-regenerate. Diagnose before another paid attempt."
     },
-    "historicalUsagePolicy": "If a pre-checkpoint provider call lacks token usage, count the transport call and mark estimatedProviderCostIsLowerBound=true; never invent cost."
+    "historicalUsagePolicy": "If a pre-checkpoint provider call lacks token usage, count the transport call and mark estimatedProviderCostIsLowerBound=true; never invent cost.",
+    "targetedRepairInvariants": [
+      "ONLY_REVIEWER_IDENTIFIED_ROLES_MAY_CHANGE_TEXT",
+      "UNCHANGED_BLOCK_TEXT_BYTE_FOR_BYTE",
+      "BLOCK_ORDER_STABLE",
+      "ROLE_STABLE",
+      "CLAIM_REFS_STABLE",
+      "SUPPORT_REFS_STABLE",
+      "SOURCE_BRIEF_DIGEST_STABLE",
+      "INDEPENDENT_SEMANTIC_REVIEW_REQUIRED_AFTER_REPAIR"
+    ]
   },
   "productionAdmissionGranted": false
 }
