@@ -18,7 +18,7 @@ function systemPrompt(){
   'Do not decide headlines, subheadlines, insight counts, paragraph counts, captions, diagram content, diagram labels, page structure or layout. PHI OS projects those deterministically.',
   'Preserve unknowns. Do not predict guaranteed events, diagnose illness, or give transaction-level financial advice.',
   'Use authorityRefs only from the supplied section claims.',
-  'Keep every semantic field compact and information-dense, but never truncate a sentence to satisfy length. navigation must be specific to that section and must not recycle a generic checklist, review-date formula, or the same advice pattern across sections. Return JSON only.'
+  'counterweight must explain how the same structure changes under strain, including what specifically becomes distorted or overused. navigation must be specific to that section and framed as a concrete observation or reality test, not a generic checklist; do not recycle review-date, responsibility-list, boundary-list, or set-a-plan formulas across sections. Keep every field compact and information-dense, but never truncate a sentence to satisfy length. Return JSON only.'
  ].join('\n');
 }
 function modelRecord(){
