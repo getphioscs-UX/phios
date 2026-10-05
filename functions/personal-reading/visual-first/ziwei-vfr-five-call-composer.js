@@ -24,7 +24,7 @@ function batchPrompt(batchIds){
  return [
   'You are writing a premium bilingual Zi Wei Dou Shu customer manuscript for exactly two supplied report sections.',
   'The supplied compact batch is the complete authority. Do not calculate new chart facts and do not invent missing evidence.',
-  'For each section, write one coherent Chinese long-form chapter and one coherent English long-form chapter. Do not decompose the response into semantic subfields, bullet points, checklists, or mini-summaries.',
+  'For each section, write one coherent Chinese long-form chapter and one coherent English long-form chapter. Target roughly 900-1200 Chinese characters and 1400-2200 English characters per section; finish cleanly and do not fill the maximum merely because space remains. Do not decompose the response into semantic subfields, bullet points, checklists, or mini-summaries.',
   'The prose should read like a professional human-written Zi Wei Dou Shu interpretation: begin from the admitted palace and star structure, explain how the configuration works together, then move naturally into recognizable lived situations, constructive expression, pressure distortion, counterweights, timing emphasis where admitted, and a grounded closing observation.',
   'Use Zi Wei terminology densely enough that the chapter could not be mistaken for generic personality writing, but always translate technical structure into lived meaning.',
   'Include concrete situations from the section domain rather than generic advice. Show how the same structure may look different under supportive conditions and under strain.',
@@ -87,15 +87,22 @@ export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalTh
   const remaining=EXPERIMENT_BUDGET_USD-spent;
   if(remaining<=0)throw Object.assign(new Error('ZWR_FIVE_CALL_BUDGET_EXHAUSTED'),{details:{spent,providerCalls}});
   const started=Date.now();
-  const result=await invokeOpenAIStructured({
-   env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
-   fetcher,
-   systemPrompt:batchPrompt(ids),
-   userPayload:{compactBatch:bp},
-   schema:buildZwrFiveCallBatchSchema(bp),
-   schemaName:'zwr_vfr_five_call_batch_'+String(i+1),
-   maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL
-  });
+  let result;
+  try{
+   result=await invokeOpenAIStructured({
+    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
+    fetcher,
+    systemPrompt:batchPrompt(ids),
+    userPayload:{compactBatch:bp},
+    schema:buildZwrFiveCallBatchSchema(bp),
+    schemaName:'zwr_vfr_five_call_batch_'+String(i+1),
+    maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL
+   });
+  }catch(error){
+   const details=error?.details&&typeof error.details==='object'?error.details:{};
+   error.details={...details,batch:i+1,sectionIds:[...ids],completedSectionIds:[...completed]};
+   throw error;
+  }
   providerCalls++;
   const usage=result?.usage||{};
   const inputTokens=usage.input_tokens||usage.inputTokens||0;

@@ -39,11 +39,11 @@ function localeManuscriptSchema(locale){
  const zh=locale==='zhHans';
  return {
   type:'string',
-  minLength:zh?700:1600,
-  maxLength:zh?2200:5200,
+  minLength:zh?650:1200,
+  maxLength:zh?1400:2800,
   description:zh
-   ?'Write one coherent publication-quality Chinese Zi Wei Dou Shu chapter in 6-9 substantial paragraphs. Integrate structural mechanism, concrete lived situations, constructive expression, pressure distortion, counterweights, timing where admitted, and section-specific reality navigation naturally. Do not use headings or bullet lists inside the manuscript.'
-   :'Write one coherent publication-quality English Zi Wei Dou Shu chapter in 6-9 substantial paragraphs, semantically equivalent to the Chinese but naturally written in English. Integrate structural mechanism, concrete lived situations, constructive expression, pressure distortion, counterweights, timing where admitted, and section-specific reality navigation naturally. Do not use headings or bullet lists inside the manuscript.'
+   ?'Write one coherent publication-quality Chinese Zi Wei Dou Shu chapter in 5-7 substantial paragraphs, normally about 900-1200 Chinese characters and never above 1400. Integrate structural mechanism, concrete lived situations, constructive expression, pressure distortion, counterweights, timing where admitted, and section-specific reality navigation naturally. Do not use headings or bullet lists inside the manuscript. Finish the chapter cleanly rather than filling the maximum length.'
+   :'Write one coherent publication-quality English Zi Wei Dou Shu chapter in 5-7 substantial paragraphs, normally about 1400-2200 characters and never above 2800, semantically equivalent to the Chinese but naturally written in English. Integrate structural mechanism, concrete lived situations, constructive expression, pressure distortion, counterweights, timing where admitted, and section-specific reality navigation naturally. Do not use headings or bullet lists inside the manuscript. Finish the chapter cleanly rather than filling the maximum length.'
  };
 }
 export function buildZwrFiveCallBatchSchema(batchPack){

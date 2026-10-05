@@ -24,14 +24,18 @@ let zhChars=0,enWords=0;
 for(const row of result.rawManuscriptSections){
  const zh=String(row.zhHansManuscript||'').trim();
  const en=String(row.enManuscript||'').trim();
- assert(zh.length>=700,row.sectionId+': Chinese manuscript too short');
- assert(en.length>=1600,row.sectionId+': English manuscript too short');
+ assert(zh.length>=650,row.sectionId+': Chinese manuscript too short');
+ assert(en.length>=1200,row.sectionId+': English manuscript too short');
+ assert(zh.length<=1400,row.sectionId+': Chinese manuscript exceeded bounded long-form target');
+ assert(en.length<=2800,row.sectionId+': English manuscript exceeded bounded long-form target');
+ assert(zh.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': Chinese manuscript needs at least 5 paragraphs');
+ assert(en.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': English manuscript needs at least 5 paragraphs');
  assert(!/^\s*[-*•]/mu.test(zh),row.sectionId+': Chinese manuscript must not be bullet-led');
  assert(!/^\s*[-*•]/mu.test(en),row.sectionId+': English manuscript must not be bullet-led');
  zhChars+=zh.length;
  enWords+=en.split(/\s+/).filter(Boolean).length;
 }
-assert(zhChars>9000,'five-call Chinese manuscript not materially deeper than summary mode');
-assert(enWords>1800,'five-call English manuscript not materially deeper than summary mode');
+assert(zhChars>7500,'five-call Chinese manuscript not materially deeper than summary mode');
+assert(enWords>1500,'five-call English manuscript not materially deeper than summary mode');
 
 console.log('PASS ZWR-VFR five-call experiment: calls='+result.providerUsage.providerCalls+'; semantic review=0; cost=$'+Number(result.providerUsage.estimatedProviderCost).toFixed(6)+'; input='+result.providerUsage.inputTokens+'; output='+result.providerUsage.outputTokens+'; sections=10; chapter-first deep manuscripts complete.');
