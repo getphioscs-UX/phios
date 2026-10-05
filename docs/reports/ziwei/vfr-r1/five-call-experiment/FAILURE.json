@@ -1,21 +1,16 @@
 {
   "schemaVersion": "ZWR-VFR-R1-FIVE-CALL-FAILURE-v1",
-  "recordedAt": "2026-10-05T06:52:50.838Z",
-  "errorCode": "NARRATIVE_PROVIDER_INCOMPLETE_OUTPUT",
+  "recordedAt": "2026-10-05T07:09:36.725Z",
+  "errorCode": "ZWR_FIVE_CALL_BATCH_GUARD_REJECTED",
   "details": {
-    "responseStatus": "incomplete",
-    "incompleteReason": "max_output_tokens",
-    "usage": {
-      "input_tokens": 5466,
-      "input_tokens_details": {
-        "cache_write_tokens": 5463,
-        "cached_tokens": 0
-      },
-      "output_tokens": 6000,
-      "output_tokens_details": {
-        "reasoning_tokens": 417
-      },
-      "total_tokens": 11466
+    "batch": 4,
+    "guard": {
+      "schemaVersion": "ZWR-VFR-R1-FIVE-CALL-GUARD-v1",
+      "accepted": false,
+      "reasons": [
+        "FIVE_CALL_FORBIDDEN_ASSERTION:S08:zhHans"
+      ],
+      "verificationDigest": "09556b03cec1caaf94be6d1cc913ee5de5381b4fed23c4a4938d8564d88131db"
     }
   }
 }
