@@ -16,13 +16,21 @@ async function runLocale({evidence,locale,env,fetcher,providerAdapters,registry,
   onProgress?.({phase:'SECTION_START',locale,sectionId});
   const key=locale+':'+sectionId,resume=resumeSections?.[key]||null;
   let candidate=null,semantic=null,quality=null;
-  if(resume?.state==='SECTION_PASS'){
+  if(['SECTION_PASS','W5_REJECT','W6_REJECT'].includes(resume?.state)){
    candidate=resume.candidate;
    if(candidate?.subjectBinding?.subjectId!==authorityPack.subjectBinding.subjectId||candidate?.subjectBinding?.inputFingerprint!==authorityPack.subjectBinding.inputFingerprint)throw Error('ZWR_PRO_RESUME_SECTION_BINDING_DRIFT:'+key);
    semantic=await verifyZwrProSectionW5({authorityPack,candidate});
-   quality=semantic.accepted?await verifyZwrProReferenceQualityW6({authorityPack,candidate}):null;
-   if(!semantic.accepted||!quality?.accepted)throw Error('ZWR_PRO_RESUME_SECTION_NO_LONGER_VALID:'+key);
-   onProgress?.({phase:'SECTION_RESUME_HIT',locale,sectionId,state:'SECTION_PASS'});
+   if(!semantic.accepted){
+    onCheckpoint?.({state:'W5_REJECT',locale,sectionId,subjectBinding:authorityPack.subjectBinding,candidate,semantic});
+    return {status:'CONTROLLED_NOT_READY',locale,sectionId,authorityPack,candidates,sectionVerifications,reason:'W5_SEMANTIC_REJECT',candidate,semantic};
+   }
+   quality=await verifyZwrProReferenceQualityW6({authorityPack,candidate});
+   if(!quality.accepted){
+    onCheckpoint?.({state:'W6_REJECT',locale,sectionId,subjectBinding:authorityPack.subjectBinding,candidate,semantic,quality});
+    return {status:'CONTROLLED_NOT_READY',locale,sectionId,authorityPack,candidates,sectionVerifications,reason:'W6_REFERENCE_QUALITY_REJECT',candidate,semantic,quality};
+   }
+   if(resume.state!=='SECTION_PASS')onCheckpoint?.({state:'SECTION_PASS',locale,sectionId,subjectBinding:authorityPack.subjectBinding,candidate,semantic,quality});
+   onProgress?.({phase:'SECTION_RESUME_HIT',locale,sectionId,state:resume.state});
   }else{
    candidate=resume?.state==='COMPOSITION_SAVED'
     ?await resumeZwrProSectionW4FromSavedComposition({authorityPack,sectionId,locale,savedW4:resume.savedW4,env,fetcher,providerAdapters,registry})
