@@ -17,5 +17,11 @@ export async function onRequest(context){
   for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>2048){await reader.cancel();return Response.json({ok:false,code:'REQUEST_TOO_LARGE'},{status:413,headers});}raw+=decoder.decode(value,{stream:true});}
   raw+=decoder.decode();
   return Response.json({ok:true,...await generateAndReleaseAccountZiwei(context,JSON.parse(raw))},{headers,status:201});
- }catch(e){return Response.json({ok:false,code:e.status===503?e.code:'METHOD_REPORT_UNAVAILABLE'},{status:e.status??403,headers});}
+ }catch(e){
+  if(context.env?.PHIOS_ENVIRONMENT==='qa'){
+   const token=v=>typeof v==='string'&&/^[A-Z0-9_:-]{1,120}$/.test(v)?v:null;
+   console.warn('METHOD_REPORT_QA_FAILURE',JSON.stringify({code:token(e.code)||'METHOD_REPORT_UNAVAILABLE',sections:(e.details?.sections||[]).map(s=>({sectionId:token(s.sectionId),status:token(s.status),reasons:(s.reasons||[]).map(token).filter(Boolean)}))}));
+  }
+  return Response.json({ok:false,code:e.status===503?e.code:'METHOD_REPORT_UNAVAILABLE'},{status:e.status??403,headers});
+ }
 }
