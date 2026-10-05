@@ -57,17 +57,15 @@ function localeSchema(locale){
 }
 export function buildZwrFiveCallBatchSchema(batchPack){
  const ids=batchPack.sections.map(s=>s.sectionId);
- const refs=[...new Set(batchPack.sections.flatMap(s=>s.claims.map(c=>c.claimId)))];
  return {
   type:'object',additionalProperties:false,
   required:['sections'],
   properties:{
    sections:{type:'array',minItems:ids.length,maxItems:ids.length,items:{
     type:'object',additionalProperties:false,
-    required:['sectionId','authorityRefs','zhHans','en'],
+    required:['sectionId','zhHans','en'],
     properties:{
      sectionId:{type:'string',enum:ids},
-     authorityRefs:{type:'array',minItems:1,maxItems:10,items:{type:'string',enum:refs}},
      zhHans:localeSchema('zhHans'),
      en:localeSchema('en')
     }
@@ -133,7 +131,7 @@ export function projectFiveCallManuscriptToReportSections({pack,manuscriptSectio
   });
   return {
    sectionId:ps.sectionId,
-   authorityRefs:row.authorityRefs,
+   authorityRefs:ps.claims.map(c=>c.claimId),
    zhHans:project('zhHans',row.zhHans),
    en:project('en',row.en)
   };
