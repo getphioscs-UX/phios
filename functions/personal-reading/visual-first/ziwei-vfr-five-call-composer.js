@@ -78,15 +78,17 @@ export function planZwrFiveCallExperiment({pack}={}){
   batches
  });
 }
-export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalThis.fetch}={}){
+export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalThis.fetch,resume=null,onBatchCompleted=null}={}){
  const plan=planZwrFiveCallExperiment({pack});
  if(!plan.allowed)return deepFreeze({status:'EXPERIMENT_BUDGET_PRECHECK_BLOCKED',plan,providerCalls:0,semanticReviewCalls:0});
  assertVfrLiveAllowed(env);
  const {model}=modelRecord();
- const manuscriptSections=[],usageRecords=[];
- let spent=0,providerCalls=0,totalInput=0,totalCached=0,totalOutput=0;
+ const manuscriptSections=[...(resume?.manuscriptSections||[])],usageRecords=[...(resume?.usageRecords||[])];
+ let spent=Number(resume?.spent||0),providerCalls=usageRecords.length,totalInput=Number(resume?.totalInput||0),totalCached=Number(resume?.totalCached||0),totalOutput=Number(resume?.totalOutput||0);
+ const completed=new Set(manuscriptSections.map(s=>s.sectionId));
  for(let i=0;i<ZWR_VFR_FIVE_CALL_BATCHES.length;i++){
   const ids=ZWR_VFR_FIVE_CALL_BATCHES[i],bp=batchPack(pack,ids);
+  if(ids.every(id=>completed.has(id)))continue;
   const remaining=EXPERIMENT_BUDGET_USD-spent;
   if(remaining<=0)throw Object.assign(new Error('ZWR_FIVE_CALL_BUDGET_EXHAUSTED'),{details:{spent,providerCalls}});
   const started=Date.now();
@@ -101,7 +103,7 @@ export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalTh
   });
   providerCalls++;
   const guard=await validateZwrFiveCallBatch({batchPack:bp,output:result.output});
-  if(!guard.accepted)throw Object.assign(new Error('ZWR_FIVE_CALL_BATCH_GUARD_REJECTED'),{details:{batch:i+1,guard}});
+  if(!guard.accepted)throw Object.assign(new Error('ZWR_FIVE_CALL_BATCH_GUARD_REJECTED'),{details:{batch:i+1,sectionIds:[...ids],guard,batchOutput:result.output}});
   const usage=result?.usage||{};
   const inputTokens=usage.input_tokens||usage.inputTokens||0;
   const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
@@ -125,6 +127,14 @@ export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalTh
    success:true,
    fallbackUsed:false
   }));
+  for(const s of result.output.sections)completed.add(s.sectionId);
+  if(onBatchCompleted)await onBatchCompleted({
+   batch:i+1,
+   sectionIds:[...ids],
+   manuscriptSections:[...manuscriptSections],
+   usageRecords:[...usageRecords],
+   spent,totalInput,totalCached,totalOutput
+  });
  }
  const sections=projectFiveCallManuscriptToReportSections({pack,manuscriptSections});
  const seed={
