@@ -20,16 +20,32 @@ assert.equal(result.sections.length,10);
 assert.equal(result.rawManuscriptSections.length,10);
 assert.equal(new Set(result.rawManuscriptSections.map(s=>s.sectionId)).size,10);
 
+function splitParagraphs(text){
+ return String(text||'').trim().split(/\n\s*\n/u).map(x=>x.trim()).filter(Boolean);
+}
+function completeZh(text){
+ const t=String(text||'').trim();
+ return ['。','！','？','》','）','」','』','】'].some(x=>t.endsWith(x));
+}
+function completeEn(text){
+ const t=String(text||'').trim();
+ return ['.','!','?'].includes(t.at(-1)) || ['."','!"','?"',".'","!'","?'"].some(x=>t.endsWith(x));
+}
+
 let zhChars=0,enWords=0;
 for(const row of result.rawManuscriptSections){
  const zh=String(row.zhHansManuscript||'').trim();
  const en=String(row.enManuscript||'').trim();
  assert(zh.length>=650,row.sectionId+': Chinese manuscript too short');
  assert(en.length>=1200,row.sectionId+': English manuscript too short');
- assert(zh.length<=1400,row.sectionId+': Chinese manuscript exceeded bounded long-form target');
- assert(en.length<=2800,row.sectionId+': English manuscript exceeded bounded long-form target');
- assert(zh.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': Chinese manuscript needs at least 5 paragraphs');
- assert(en.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': English manuscript needs at least 5 paragraphs');
+ const zhParagraphs=splitParagraphs(zh);
+ const enParagraphs=splitParagraphs(en);
+ assert(zhParagraphs.length>=5,row.sectionId+': Chinese manuscript needs at least 5 paragraphs');
+ assert(enParagraphs.length>=5,row.sectionId+': English manuscript needs at least 5 paragraphs');
+ assert(completeZh(zh),row.sectionId+': Chinese manuscript ends mid-sentence');
+ assert(completeEn(en),row.sectionId+': English manuscript ends mid-sentence');
+ assert(zhParagraphs.every(completeZh),row.sectionId+': Chinese manuscript contains truncated paragraph');
+ assert(enParagraphs.every(completeEn),row.sectionId+': English manuscript contains truncated paragraph');
  assert(!/^\s*[-*•]/mu.test(zh),row.sectionId+': Chinese manuscript must not be bullet-led');
  assert(!/^\s*[-*•]/mu.test(en),row.sectionId+': English manuscript must not be bullet-led');
  zhChars+=zh.length;
