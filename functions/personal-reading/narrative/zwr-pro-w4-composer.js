@@ -69,7 +69,7 @@ async function finalizeVerifiedComposition({authorityPack,section,sectionId,loca
  const blocks=composition.candidate.blocks.map(b=>({role:b.role,text:b.text,claimRefs:uniq(b.claimRefs),supportRefs:uniq(b.supportRefs)}));
  const usedClaimRefs=uniq(blocks.flatMap(b=>b.claimRefs));
  const usage=visibleUsage(section,blocks);
- const providerAudit=providerAuditOverride||{provider:composition.internalOnly?.provider||null,model:composition.internalOnly?.model||null,actualTier:composition.internalOnly?.actualTier||null,transportCalls:composition.internalOnly?.transportCalls||0,semanticReviewCalls:composition.internalOnly?.semanticReviewCalls||0,providerAttemptCount:composition.internalOnly?.providerAttemptCount||0,repairCount:composition.internalOnly?.repairCount||0,usageRecord:composition.usageRecord||null,verificationUsageRecords:composition.verificationUsageRecords||[]};
+ const providerAudit=providerAuditOverride||{provider:composition.internalOnly?.provider||null,model:composition.internalOnly?.model||null,actualTier:composition.internalOnly?.actualTier||null,transportCalls:composition.internalOnly?.transportCalls||0,semanticReviewCalls:composition.internalOnly?.semanticReviewCalls||0,providerAttemptCount:composition.internalOnly?.providerAttemptCount||0,repairCount:composition.internalOnly?.repairCount||0,usageRecord:composition.usageRecord||null,compositionUsageRecords:composition.usageRecord?[composition.usageRecord]:[],verificationUsageRecords:composition.verificationUsageRecords||[]};
  const seed={schemaVersion:'ZWR-PRO-W4-CANDIDATE-v1',status:'PASS',composerVersion:ZWR_PRO_W4_COMPOSER_VERSION,promptVersion:ZWR_PRO_W4_PROMPT_VERSION,subjectBinding:authorityPack.subjectBinding,locale,sectionId,title:locale==='zh-Hans'?SECTION_OWNERSHIP[sectionId].titleZh:SECTION_OWNERSHIP[sectionId].titleEn,paragraphs:blocks,usedClaimRefs,...usage,authorityPackVersion:authorityPack.schemaVersion,sourceBriefDigest:composition.governedBrief.briefSemanticDigest,provider:providerAudit,upstreamSemanticVerification:composition.verification};
  return deepFreeze({...seed,candidateDigest:await sha256Stable(seed)});
 }
@@ -168,7 +168,16 @@ export async function resumeZwrProSectionW4FromSavedComposition({authorityPack,s
  };
  const semanticReview=createReportSemanticReview({invoke,model});
  let workingCandidate=candidate;
- let verification=await verifyReportSectionComposition({brief:governedBrief,candidate:workingCandidate,semanticReview});
+ const currentCandidateDigest=await sha256Stable(workingCandidate);
+ const savedVerification=savedComposition?.verification||null;
+ const reusableSavedSemanticReview=Boolean(
+  savedVerification?.candidateDigest===currentCandidateDigest
+  && savedVerification?.semanticReview?.sourceBriefDigest===governedBrief.briefSemanticDigest
+  && savedVerification?.semanticReview?.candidateDigest===currentCandidateDigest
+ );
+ let verification=reusableSavedSemanticReview
+  ?savedVerification
+  :await verifyReportSectionComposition({brief:governedBrief,candidate:workingCandidate,semanticReview});
  let repairCount=0,targetedRepairRoles=[];
  if(!verification.accepted){
   const roles=repairRolesFromReview(verification,workingCandidate);
@@ -196,16 +205,26 @@ export async function resumeZwrProSectionW4FromSavedComposition({authorityPack,s
   }
  }
  const costModel=(registry?.models||[]).find(m=>m.modelId===model)||{};
- const reviewUsage=providerResults.filter(r=>r.taskType==='REPORT_SECTION_SEMANTIC_VERIFICATION').map((r,i)=>{
+ const priorReviewUsage=Array.isArray(savedComposition?.verificationUsageRecords)?savedComposition.verificationUsageRecords:[];
+ const newReviewUsage=providerResults.filter(r=>r.taskType==='REPORT_SECTION_SEMANTIC_VERIFICATION').map((r,i)=>{
   const u=sumProviderUsage([r]);
-  return createPaiUsageRecord({requestId:'ZWR-PRO-W4-RESUME:'+authorityPack.subjectBinding.subjectKey+':'+sectionId+':'+locale+':VERIFY:'+i,timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,u),aiExecutionClass:'T3_DEEP_COMPOSITION',provider:r.provider||provider,model,...u,requestType:'QA_REVIEW',providerAttemptCount:1,success:true,fallbackUsed:false});
+  return createPaiUsageRecord({requestId:'ZWR-PRO-W4-RESUME:'+authorityPack.subjectBinding.subjectKey+':'+sectionId+':'+locale+':VERIFY:'+(priorReviewUsage.length+i),timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,u),aiExecutionClass:'T3_DEEP_COMPOSITION',provider:r.provider||provider,model,...u,requestType:'QA_REVIEW',providerAttemptCount:1,success:true,fallbackUsed:false});
  });
+ const reviewUsage=[...priorReviewUsage,...newReviewUsage];
  const repairProviderResults=providerResults.filter(r=>r.taskType==='REPORT_SECTION_COMPOSITION');
  const repairUsageRaw=sumProviderUsage(repairProviderResults);
- const repairUsage=repairProviderResults.length?createPaiUsageRecord({requestId:'ZWR-PRO-W4-RESUME:'+authorityPack.subjectBinding.subjectKey+':'+sectionId+':'+locale+':TARGETED_REPAIR',timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,repairUsageRaw),aiExecutionClass:'T3_DEEP_COMPOSITION',provider:repairProviderResults.at(-1)?.provider||provider,model,...repairUsageRaw,requestType:'QA_REVIEW',providerAttemptCount:repairProviderResults.length,success:verification.accepted===true,fallbackUsed:verification.accepted!==true}):null;
- if(!verification.accepted)return deepFreeze({status:'CONTROLLED_NOT_READY',reason:repairCount?'TARGETED_REPAIR_SEMANTIC_REJECTED':'RESUMED_SEMANTIC_VERIFIER_REJECTED',sectionId,locale,subjectBinding:authorityPack.subjectBinding,brief:currentBrief,composition:{...savedComposition,candidate:workingCandidate,verification,usageRecord:repairUsage,verificationUsageRecords:reviewUsage,internalOnly:{...(savedComposition.internalOnly||{}),provider,model,transportCalls:1+transportCalls,semanticReviewCalls,providerAttemptCount:1+repairProviderResults.length,repairCount,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls,targetedRepairRoles}}});
- const resumed={status:'PASS',governedBrief,candidate:workingCandidate,verification,usageRecord:repairUsage,verificationUsageRecords:reviewUsage,internalOnly:{provider,model,actualTier:'T3_GOVERNED_DEEP_COMPOSITION',transportCalls:1+transportCalls,semanticReviewCalls,providerAttemptCount:1+repairProviderResults.length,repairCount,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls,targetedRepairRoles}};
- return finalizeVerifiedComposition({authorityPack,section,sectionId,locale,composition:resumed,providerAuditOverride:{provider,model,actualTier:'T3_GOVERNED_DEEP_COMPOSITION',transportCalls:1+transportCalls,semanticReviewCalls,providerAttemptCount:1+repairProviderResults.length,repairCount,usageRecord:repairUsage,verificationUsageRecords:reviewUsage,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls,targetedRepairRoles}});
+ const priorCompositionUsage=Array.isArray(savedComposition?.compositionUsageRecords)?savedComposition.compositionUsageRecords:(savedComposition?.usageRecord?[savedComposition.usageRecord]:[]);
+ const repairUsage=repairProviderResults.length?createPaiUsageRecord({requestId:'ZWR-PRO-W4-RESUME:'+authorityPack.subjectBinding.subjectKey+':'+sectionId+':'+locale+':TARGETED_REPAIR:'+priorCompositionUsage.length,timestamp:new Date().toISOString(),estimatedProviderCost:estimatePaiProviderCost(costModel,repairUsageRaw),aiExecutionClass:'T3_DEEP_COMPOSITION',provider:repairProviderResults.at(-1)?.provider||provider,model,...repairUsageRaw,requestType:'QA_REVIEW',providerAttemptCount:repairProviderResults.length,success:verification.accepted===true,fallbackUsed:verification.accepted!==true}):null;
+ const compositionUsageRecords=[...priorCompositionUsage,...(repairUsage?[repairUsage]:[])];
+ const priorTransportCalls=Number(savedComposition?.internalOnly?.transportCalls||1);
+ const priorSemanticReviewCalls=Number(savedComposition?.internalOnly?.semanticReviewCalls||0);
+ const priorProviderAttemptCount=Number(savedComposition?.internalOnly?.providerAttemptCount||1);
+ const totalTransportCalls=priorTransportCalls+transportCalls;
+ const totalSemanticReviewCalls=priorSemanticReviewCalls+semanticReviewCalls;
+ const totalProviderAttemptCount=priorProviderAttemptCount+repairProviderResults.length;
+ if(!verification.accepted)return deepFreeze({status:'CONTROLLED_NOT_READY',reason:repairCount?'TARGETED_REPAIR_SEMANTIC_REJECTED':'RESUMED_SEMANTIC_VERIFIER_REJECTED',sectionId,locale,subjectBinding:authorityPack.subjectBinding,brief:currentBrief,composition:{...savedComposition,candidate:workingCandidate,verification,usageRecord:repairUsage,compositionUsageRecords,verificationUsageRecords:reviewUsage,internalOnly:{...(savedComposition.internalOnly||{}),provider,model,transportCalls:totalTransportCalls,semanticReviewCalls:totalSemanticReviewCalls,providerAttemptCount:totalProviderAttemptCount,repairCount,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls,targetedRepairRoles,reusedSavedSemanticReview}}});
+ const resumed={status:'PASS',governedBrief,candidate:workingCandidate,verification,usageRecord:repairUsage,compositionUsageRecords,verificationUsageRecords:reviewUsage,internalOnly:{provider,model,actualTier:'T3_GOVERNED_DEEP_COMPOSITION',transportCalls:totalTransportCalls,semanticReviewCalls:totalSemanticReviewCalls,providerAttemptCount:totalProviderAttemptCount,repairCount,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls,targetedRepairRoles,reusedSavedSemanticReview}};
+ return finalizeVerifiedComposition({authorityPack,section,sectionId,locale,composition:resumed,providerAuditOverride:{provider,model,actualTier:'T3_GOVERNED_DEEP_COMPOSITION',transportCalls:totalTransportCalls,semanticReviewCalls:totalSemanticReviewCalls,providerAttemptCount:totalProviderAttemptCount,repairCount,usageRecord:repairUsage,compositionUsageRecords,verificationUsageRecords:reviewUsage,resumedFromSavedComposition:true,historicalCompositionCalls:1,historicalCompositionUsageUnavailable:true,currentResumeCalls:transportCalls,targetedRepairRoles,reusedSavedSemanticReview}});
 }
 
 export async function composeZwrProSectionW4({authorityPack,sectionId,locale,env={},fetcher,providerAdapters,registry=ZIWEI_R5_PAI_REGISTRY,requestId,cache}={}){

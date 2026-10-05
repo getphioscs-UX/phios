@@ -77,7 +77,8 @@ function usageSummary(cp){
   providerCalls+=Number(p.transportCalls||0);
   semanticReviewCalls+=Number(p.semanticReviewCalls||0);
   providerAttempts+=Number(p.providerAttemptCount||0);
-  estimatedProviderCost+=Number(p.usageRecord?.estimatedProviderCost||0);
+  const compositionUsage=Array.isArray(p.compositionUsageRecords)&&p.compositionUsageRecords.length?p.compositionUsageRecords:(p.usageRecord?[p.usageRecord]:[]);
+  for(const u of compositionUsage)estimatedProviderCost+=Number(u?.estimatedProviderCost||0);
   for(const v of p.verificationUsageRecords||[])estimatedProviderCost+=Number(v?.estimatedProviderCost||0);
   if(p.historicalCompositionUsageUnavailable===true)unpricedHistoricalTransportCalls+=Number(p.historicalCompositionCalls||1);
  }
