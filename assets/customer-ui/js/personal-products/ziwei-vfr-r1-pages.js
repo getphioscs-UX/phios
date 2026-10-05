@@ -62,8 +62,12 @@ function transformations(data){
 }
 function focus(data){
  const ps=Array.isArray(data.palaces)?data.palaces:(data.palace?[data.palace]:[]);
- const stars=data.stars||[];
- return '<div class="zv-focus">'+ps.map(p=>card(bi(PAL,p.palaceCode),p.branch||'—',(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true})).join('')+'<div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span>'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></div>';
+ const stars=data.stars||[],rels=data.relationships||[],tx=data.transformations||[];
+ const palaceCards=ps.map(p=>card(bi(PAL,p.palaceCode),p.branch||'—',(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true})).join('');
+ const starCloud='<section class="zv-focus-band"><h4>星曜 / Stars</h4><div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span>'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></section>';
+ const relCloud=rels.length?'<section class="zv-focus-band"><h4>宫位联动 / Palace links</h4><div class="zv-rel-tags">'+rels.slice(0,10).flatMap(r=>(r.to||[]).map(to=>'<span>'+esc(pair(PAL,r.from)[0])+' ↔ '+esc(pair(PAL,to)[0])+'</span>')).join('')+'</div></section>':'';
+ const txCloud=tx.length?'<section class="zv-focus-band"><h4>相关四化 / Relevant transformations</h4>'+transformations({transformations:tx})+'</section>':'';
+ return '<div class="zv-focus">'+palaceCards+starCloud+relCloud+txCloud+'</div>';
 }
 function timing(data,ctx={}){
  const rows=[];
@@ -130,7 +134,7 @@ export function renderZwrVfrDiagram(d,ctx={}){
  else if(['NATAL_DAXIAN_LIUNIAN_STACK','CURRENT_PALACE_ACTIVATION'].includes(type))body=timing(data,ctx);
  else if(type==='WHOLE_CHART_NAVIGATION')body=domains(data);
  else body='<div class="zv-empty">Missing deterministic renderer</div>';
- return '<figure class="zv-diagram" data-diagram-id="'+esc(d.id)+'" data-diagram-type="'+esc(type)+'"><figcaption><b>'+esc(title[0])+'</b><span>'+esc(title[1])+'</span></figcaption>'+body+'</figure>';
+ return '<figure class="zv-diagram" data-diagram-id="'+esc(d.id)+'" data-diagram-type="'+esc(type)+'" data-projection="'+esc(ctx.pageKey||'GLOBAL')+'"><figcaption><b>'+esc(title[0])+'</b><span>'+esc(title[1])+'</span></figcaption>'+body+'</figure>';
 }
 
 const PURPOSE_EN={
@@ -145,9 +149,14 @@ const PURPOSE_EN={
  S10:'Liu Nian adds an annual layer without replacing the natal baseline.',
  S11:'Navigation protects usable resources, boundaries and recovery space first.'
 };
-function sectionMaster(section,binding,diagrams=''){
+function sectionMaster(section,binding,diagrams='',compact=false){
  const zh=section?.zhHans||{},en=section?.en||{},enSub=PURPOSE_EN[section?.sectionId]||en.subheadline;
- return '<div class="zv-master-art">'+(binding.hero?'<img class="zv-hero" src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div><div class="zv-master"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-insights">'+(zh.keyInsights||[]).map((x,i)=>'<article><b>0'+(i+1)+'</b><h3>'+esc(x.label)+'</h3><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.label||'')+' · '+esc(en.keyInsights?.[i]?.text||'')+'</small></article>').join('')+'</div>'+diagrams+'</div>';
+ const art='<div class="zv-master-art">'+(binding.hero?'<img class="zv-hero" src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div>';
+ if(compact){
+  const rows=(zh.keyInsights||[]).map((x,i)=>'<div><b>'+esc(x.label)+'</b><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.text||'')+'</small></div>').join('');
+  return art+'<div class="zv-master zv-master-summary"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-summary-insights">'+rows+'</div>'+diagrams+'</div>';
+ }
+ return art+'<div class="zv-master"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-insights">'+(zh.keyInsights||[]).map((x,i)=>'<article><b>0'+(i+1)+'</b><h3>'+esc(x.label)+'</h3><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.label||'')+' · '+esc(en.keyInsights?.[i]?.text||'')+'</small></article>').join('')+'</div>'+diagrams+'</div>';
 }
 function interpretation(section){
  const zh=section?.zhHans||{},en=section?.en||{};
@@ -167,7 +176,7 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'">'+closingPage(reportIr,binding)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
   let body='';
   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily})).join('');
-  if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml);
+  if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml,p.pageFamily==='SECTION_MASTER_SUMMARY');
   else if(p.pageFamily==='INTERPRETATION')body=interpretation(s);
   else if(ds.length)body=diagramHtml;
   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
