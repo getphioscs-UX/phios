@@ -16,6 +16,8 @@ assert.equal(plan.postCallVerifierCallsPlanned,0);
 assert.equal(plan.allowed,true,'targeted repair projected total exceeds USD1: '+plan.estimatedTotalExperimentCost);
 assert(plan.repairCallsPlanned>0,'targeted repair should have at least one affected section');
 assert(!plan.repairs.some(r=>r.sectionId==='S05'),'S05 must remain untouched because completeness passed');
+assert(plan.repairs.filter(r=>r.locales.length===2).every(r=>r.maxOutputTokens===3500),'bilingual targeted repairs must use 3500 output tokens');
+assert(plan.repairs.filter(r=>r.locales.length===1&&r.locales[0]==='en').every(r=>r.maxOutputTokens===2200),'English-only targeted repairs must use 2200 output tokens');
 const s02=plan.repairs.find(r=>r.sectionId==='S02');
 const s03=plan.repairs.find(r=>r.sectionId==='S03');
 assert.deepEqual(s02?.locales,['zhHans','en']);
