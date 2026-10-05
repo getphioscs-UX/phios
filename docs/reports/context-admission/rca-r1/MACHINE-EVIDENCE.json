@@ -1,7 +1,7 @@
 {
   "work": "RCA-R1",
-  "recordedAt": "2026-10-05T01:34:12.740Z",
-  "observedHead": "00e053536836e9c2aaf3a959f86cddf134bfadeb",
+  "recordedAt": "2026-10-05T01:40:26.199Z",
+  "observedHead": "8dd04bb1dbeb28a308fd7890d6fcbc728348be11",
   "engineering": "PARTIAL_LOCAL_IMPLEMENTATION",
   "state": "BLOCKED_QA_END_TO_END",
   "humanDecision": "PENDING",
@@ -41,10 +41,32 @@
     },
     {
       "code": "LIVE_QA_RELEASE_NOT_PROVEN",
-      "scope": "No supplied/configured authenticated QA run proves entitlement, real R5 generation, private browser verification, immutable release and reopen."
+      "scope": "Supplied QA account is verified and entitled, but RCA controls are not deployed; actual release remains unproven."
+    },
+    {
+      "code": "QA_DEPLOYMENT_APPROVAL_REQUIRED",
+      "scope": "Real Worker deployment has external effects; reviewer considers retained no-deployment constraint applicable and requires explicit authorization."
     }
   ],
   "deployed": false,
   "pushed": false,
-  "productionAdmission": false
+  "productionAdmission": false,
+  "qaReadiness": {
+    "qaUrl": "https://qa.phios-github.pages.dev/account/",
+    "checkedAt": "2026-10-05",
+    "authenticatedAccount": "VERIFIED_IN_BROWSER",
+    "ziweiEntitlement": "AVAILABLE_ZH_AND_EN",
+    "consentedControlledTestPerson": "AVAILABLE",
+    "deployedReportModeControls": "ABSENT_OLD_ACCOUNT_UI",
+    "previewOpenAiSecret": "NAME_PRESENT_VALUE_NOT_READ",
+    "qaContextMigration0012": "APPLIED_TO_SANDBOX_ONLY",
+    "qaDedicatedContextEncryptionSecret": "CREATED_PREVIEW_ONLY_VALUE_NOT_LOGGED",
+    "privateQaWorkerDeployment": "NOT_EXECUTED_AUTO_REVIEW_REJECTED",
+    "qaPagesDeployment": "NOT_EXECUTED",
+    "approvalReviewReason": "Real Worker deployment has external effects; reviewer considers retained no-deployment constraint applicable and requires explicit authorization.",
+    "pendingApproval": "Deploy phios-method-report-renderer-qa and phios-github qa preview branch only, then run actual account acceptance.",
+    "productionModified": false,
+    "r5Generation": "NOT_INVOKED",
+    "liveContextualRelease": "NOT_PROVEN"
+  }
 }
