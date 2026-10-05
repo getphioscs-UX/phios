@@ -9,11 +9,31 @@ export const ZWR_VFR_FIVE_CALL_BATCHES=Object.freeze([
  Object.freeze(['S10','S11'])
 ]);
 
-const FORBIDDEN=[
+const HARD_FORBIDDEN=[
  /\bguaranteed\b|\bwill definitely\b|\bmust happen\b|一定(?:会|能|可以)|必然(?:会|发生|获得|成功|升职|发财)/iu,
- /\bdiagnos(?:e|is|ed)\b|诊断为|确诊|表示患有/u,
  /Authoring Pack|semantic verifier|candidate state|claimRefs|sourceRefs|authorityRefs|运行时系统|语义验证|权威包/iu
 ];
+function hasForbiddenMedicalAssertion(text){
+ const t=String(text||'');
+ const zh=t.match(/(?:诊断为|确诊|表示患有)/gu)||[];
+ for(const hit of zh){
+  const i=t.indexOf(hit),pre=t.slice(Math.max(0,i-8),i);
+  if(!/(?:不|并不|不能|不可|并非|不等于|无法|勿|不应)\s*$/u.test(pre))return true;
+ }
+ const en=[...t.matchAll(/\bdiagnos(?:e|es|ed|is|ing)\b/giu)];
+ for(const m of en){
+  const pre=t.slice(Math.max(0,m.index-24),m.index);
+  if(!/(?:does\s+not|do\s+not|did\s+not|cannot|can't|is\s+not|not\s+a|should\s+not|must\s+not)\s*$/iu.test(pre))return true;
+ }
+ return false;
+}
+function forbiddenReason(text){
+ const t=String(text||'');
+ const hard=HARD_FORBIDDEN.find(re=>re.test(t));
+ if(hard)return 'HARD_ASSERTION';
+ if(hasForbiddenMedicalAssertion(t))return 'MEDICAL_ASSERTION';
+ return null;
+}
 
 function paragraphSchema(zh){
  return {type:'string',minLength:zh?45:90,maxLength:zh?420:760};
@@ -75,7 +95,10 @@ export async function validateZwrFiveCallBatch({batchPack,output}={}){
    const copy=row?.[locale];
    const strings=allStrings(copy);
    if(!strings.length)reasons.push('FIVE_CALL_COPY_REQUIRED:'+row.sectionId+':'+locale);
-   if(strings.some(t=>FORBIDDEN.some(re=>re.test(t))))reasons.push('FIVE_CALL_FORBIDDEN_ASSERTION:'+row.sectionId+':'+locale);
+   for(const t of strings){
+    const why=forbiddenReason(t);
+    if(why)reasons.push('FIVE_CALL_FORBIDDEN_ASSERTION:'+row.sectionId+':'+locale+':'+why+':'+t.slice(0,180));
+   }
    for(const k of ['structuralMechanism','livedScenarios','constructiveExpression','pressureDistortion','counterweight','timingOverlay','realityNavigation']){
     if(!Array.isArray(copy?.[k])||!copy[k].length)reasons.push('FIVE_CALL_FIELD_REQUIRED:'+row.sectionId+':'+locale+':'+k);
    }
