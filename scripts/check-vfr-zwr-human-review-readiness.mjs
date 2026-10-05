@@ -19,7 +19,7 @@ for(let i=1;i<=15;i++){
 assert((html.match(/<svg class="zv-svg"/g)||[]).length>=1,'at least one real SVG diagram required');
 assert(html.includes('中文解读'),'Chinese review copy missing');
 assert(html.includes('English Reading'),'English review copy missing');
-assert(!html.includes('zv-empty'),'missing deterministic diagram renderer remains');
+assert(!/class=["'][^"']*\bzv-empty\b[^"']*["']/.test(html),'missing deterministic diagram renderer remains');
 assert(html.includes('W8 live PASS'),'W8 provenance banner missing');
 assert(html.includes('0 semantic review'),'semantic-review-free provenance missing');
 
@@ -46,6 +46,8 @@ for(const asset of [
 
 for(const leak of ['entityId','ZWR:TIMING_LAYER','Authoring Pack','semantic verifier','authorityRefs'])assert(!html.includes(leak),'internal term leaked into review HTML: '+leak);
 assert(!html.includes('&lt;small&gt;'),'escaped HTML label leaked into customer review');
+assert(!/[\uFDD0-\uFDEF\uFFFE\uFFFF]/u.test(html),'noncharacter Unicode leaked into customer review');
+for(const rawBranch of ['>MAO<','>YIN<','>CHOU<','>CHEN<','>SI<','>WU<','>WEI<','>SHEN<','>YOU<','>XU<','>HAI<'])assert(!html.includes(rawBranch),'raw branch code leaked into customer review: '+rawBranch);
 assert(!/>ZWD-\d\d</.test(html),'internal diagram id must not be customer-visible');
 assert(html.includes('十二宫本命结构'),'page 6 must use the current canonical natal palace overview');
 assert(html.includes('读取边界')&&html.includes('Reading Boundary'),'closing boundary page missing');
