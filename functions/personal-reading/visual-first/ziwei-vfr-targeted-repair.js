@@ -6,7 +6,9 @@ import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.j
 
 export const ZWR_VFR_TARGETED_REPAIR_VERSION='ZWR-VFR-R1-TARGETED-COMPLETENESS-REPAIR-v1';
 const TOTAL_EXPERIMENT_BUDGET_USD=1.00;
-const MAX_OUTPUT_TOKENS=6000;
+const MAX_OUTPUT_TOKENS_BILINGUAL=3500;
+const MAX_OUTPUT_TOKENS_EN_ONLY=2200;
+function maxOutputFor(locales){return locales.length===2?MAX_OUTPUT_TOKENS_BILINGUAL:MAX_OUTPUT_TOKENS_EN_ONLY;}
 
 function modelRecord(){
  const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
@@ -103,8 +105,9 @@ export function buildTargetedRepairPlan({pack,result,manifest}={}){
    payload:{sectionAuthority:sp,existingChineseAnchor:anchorZh}
   };
   const inputTokens=estimateVfrTokens(input);
-  const estimatedMaxCost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens:0,outputTokens:MAX_OUTPUT_TOKENS}));
-  return {...r,index:index+1,inputTokens,maxOutputTokens:MAX_OUTPUT_TOKENS,estimatedMaxCost};
+  const maxOutputTokens=maxOutputFor(r.locales);
+  const estimatedMaxCost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens:0,outputTokens:maxOutputTokens}));
+  return {...r,index:index+1,inputTokens,maxOutputTokens,estimatedMaxCost};
  });
  const originalCost=Number(result.providerUsage?.estimatedProviderCost||0);
  const estimatedRepairMaxCost=Number(planned.reduce((a,b)=>a+b.estimatedMaxCost,0).toFixed(8));
@@ -152,7 +155,7 @@ export async function runTargetedRepair({pack,result,manifest,env={},fetcher=glo
     userPayload:{sectionAuthority:sp,existingChineseAnchor:anchorZh},
     schema:schemaFor(repair.locales,repair.sectionId),
     schemaName:'zwr_vfr_targeted_repair_'+repair.sectionId.toLowerCase(),
-    maxOutputTokens:MAX_OUTPUT_TOKENS
+    maxOutputTokens:repair.maxOutputTokens
    });
   }catch(error){
    const details=error?.details&&typeof error.details==='object'?error.details:{};
