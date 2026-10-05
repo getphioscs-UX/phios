@@ -60,15 +60,53 @@ const voiceEdits=[
  ['S10','真正重要的是，不要因为还能运行，就误以为不需要改变。','仍能运行与仍然适合，并不是同一个判断。']
 ];
 for(const [id,before,after]of voiceEdits){const s=section(id),p=s.paragraphs.find(p=>p.text.replace(/\r\n/g,'\n')===before.replace(/\r\n/g,'\n'));assert(p,'Voice edit anchor: '+before);edit(id,p.text,after,'Interpretive customer voice; retain the accepted meaning.');}
+const voiceByParagraph=[
+ ['S04:P032','这些领域的共同点，是认知能够转换成现实结果。'],
+ ['S04:P087','如果职业上限只建立在“我本人能做多少事情”上，增长就会受到个人时间的限制。'],
+ ['S04:P118','职业成熟以后，机会筛选会逐渐比机会数量更重要。'],
+ ['S04:P132','行业标签本身，并不足以解释一份工作是否适合你。'],
+ ['S04:P154','所以职业走到更高层以后，发展的关键会从更多工作量，转向更好的结构。'],
+ ['S04:P173','当所有责任集中到一个人身上，而制度支撑不足，发展就容易转成消耗。'],
+ ['S05:P052','这也是财富容易被日常运行消耗的一种方式。'],
+ ['S05:P056','财富积累的意义，不只在“赚更多”，也在于“拥有更多不必立刻工作的空间”。'],
+ ['S06:P079','一个本身有自己判断、也尊重你判断的人，更容易与你形成这样的关系。'],
+ ['S06:P114','这种处理方式，会影响双方是否真正觉得被理解。'],
+ ['S06:P196','承诺能够兑现，困难可以提前说，改变想法不必隐藏，这些都是透明度的具体表现。'],
+ ['S06:P198','这种透明度，也同样包括你自己的感受与变化。'],
+ ['S06:P199','如果只要求对方稳定，却把自己的内部变化留到最后才说，双方就很难共同理解关系的走向。'],
+ ['S06:P209','真正适合你的亲密关系，更接近这样一种状态：'],
+ ['S07:P051','所以越往后，清楚的家庭责任安排，对支持能否持续越重要。'],
+ ['S07:P068','但看得比较远，也容易让个人节奏逐渐成为对其他家庭成员的期待。'],
+ ['S07:P113','所以越成熟，能力的传递越能减轻家庭对单一个人的依赖。'],
+ ['S07:P134','当家庭成员能够自己承担沟通责任，中间人的位置才不会变成持续消耗。'],
+ ['S07:P135','帮助与长期代替，并不是同一种支持。'],
+ ['S07:P152','支持能否真正有效，也取决于一件事：'],
+ ['S07:P163','而帮助能否持续，与边界是否清楚有关。'],
+ ['S07:P169','家庭中的资源支持，有两种不同的作用：'],
+ ['S07:P172','这两类支持，对家庭的长期作用并不相同。'],
+ ['S07:P185','所以真正支持你的家，不只在于运作顺畅。'],
+ ['S07:P203','但当你成为所有人的唯一支柱，支持就容易失去平衡。'],
+ ['S08:P088','暂时疲惫与长期环境失配，背后的处理条件并不相同。'],
+ ['S08:P112','因此，不以“解决问题”为目的的空间，也有它的恢复作用。'],
+ ['S08:P127','压力到了这一层，往往已经累积了很长时间。'],
+ ['S08:P129','这也说明，压力恢复的关键并不是“忍耐更多”。'],
+ ['S08:P145','恢复只有进入日常结构，才不会一直被下一件事推后。'],
+ ['S08:P150','如果已经长时间面对复杂信息，更多资讯也可能延续这种消耗。'],
+ ['S08:P178','这种倾向在于：理性判断常常比身体反应慢一步。'],
+ ['S09:P075','筛选与全面切断之间，也存在一个边界。'],
+ ['S09:P185','这也是能够容纳长期变化的生活结构。']
+];
+for(const [paragraphId,after]of voiceByParagraph){const id=paragraphId.slice(0,3),p=section(id).paragraphs.find(p=>p.id===paragraphId);assert(p,paragraphId);edit(id,p.text,after,'Interpretive customer voice; replace a direct instruction with its accepted condition or consequence.');}
 const themes={THREE_GENG:/三庚|三庚并见/,WATER_NETWORK:/申.{0,2}子.{0,2}辰|水势|水局/,OUTPUT_TO_VALUE:/食伤生财|输出.{0,12}价值|金生水|水.{0,8}生.{0,4}木/,CLASH_GROWTH:/寅申冲|寅申相冲|寅与申|申与寅/,RESPONSIBILITY:/责任|承担|权限/,PROBLEM_SOLVING:/解决问题|处理问题|看见问题|找到问题|修正问题|收拾残局/,RESOURCE_RETENTION:/留存|净资产|资产|留住|留下来的/,STAGE_TRANSITION:/重组|阶段.{0,8}结束|周期/,SENSITIVE_CAPACITY:/压力|超负荷|疲惫/};
 const paragraphMap=source.flatMap(s=>s.paragraphs.map(p=>({...p,primaryOwnership:s.sectionId,themes:Object.entries(themes).filter(([,r])=>r.test(p.text)).map(([k])=>k),disposition:changes.find(c=>c.paragraphId===p.id)?.disposition||'KEEP',destinationSection:changes.find(c=>c.paragraphId===p.id)?.owningSection||s.sectionId})));
-const overlap=[];for(const [theme,re]of Object.entries(themes)){const members=rows.flatMap(s=>s.paragraphs.filter(p=>re.test(p.text)).map(p=>({section:s.sectionId,paragraphId:p.id,text:p.text})));for(const a of members)for(const b of members)if(a.section<b.section&&a.text.length>=25&&b.text.length>=25){const bigrams=t=>new Set([...t].slice(0,-1).map((_,i)=>t.slice(i,i+2))),x=bigrams(a.text),y=bigrams(b.text),shared=[...x].filter(z=>y.has(z)).length,score=shared/Math.min(x.size,y.size);if(score>=.18)overlap.push({theme,originatingSection:a.section,duplicateSection:b.section,originatingParagraph:a.paragraphId,duplicateParagraph:b.paragraphId,semanticHeuristicScore:Number(score.toFixed(3)),disposition:a.text===b.text?'KEEP':'DOMAIN-SPECIFIC-KEEP',reason:'Shared admitted natal theme serves distinct chapter ownership; full explanatory duplicates were handled by explicit editorial operations.',origin:a.text,duplicate:b.text});}}
-const advice=rows.flatMap(s=>s.paragraphs.flatMap(p=>[...p.text.matchAll(/应该|不应该|必须|建议|最好|需要|你要|可以这样|不能这样/g)].map(m=>({section:s.sectionId,paragraphId:p.id,token:m[0],context:p.text,classification:'INTERPRETIVE_CONDITION_OR_QUOTED_SELF_TALK',disposition:'KEEP',reason:'Retained occurrence expresses an accepted structural requirement, inner expectation, or conditional life context; not automatically removed.'}))));
+const chapterFunctions={S02:'判断、认知与能力倾向',S03:'四柱进入人生阶段与位置',S04:'职业输出形成现实价值',S05:'收入之后的积累、留存与资源成本',S06:'伴侣、亲密感受与共同生活',S07:'家庭、代际与支持分配',S08:'持续扫描、压力及恢复容量',S09:'一般周期辨识与转折机制',S10:'己巳与丙寅当前层叠加'};
+const overlap=[];for(const [theme,re]of Object.entries(themes)){const members=rows.flatMap(s=>s.paragraphs.filter(p=>re.test(p.text)).map(p=>({section:s.sectionId,paragraphId:p.id,text:p.text})));for(const a of members)for(const b of members)if(a.section<b.section&&a.text.length>=25&&b.text.length>=25){const bigrams=t=>new Set([...t].slice(0,-1).map((_,i)=>t.slice(i,i+2))),x=bigrams(a.text),y=bigrams(b.text),shared=[...x].filter(z=>y.has(z)).length,score=shared/Math.min(x.size,y.size);if(score>=.18)overlap.push({theme,originatingSection:a.section,duplicateSection:b.section,originatingParagraph:a.paragraphId,duplicateParagraph:b.paragraphId,semanticHeuristicScore:Number(score.toFixed(3)),disposition:a.text===b.text?'KEEP':'DOMAIN-SPECIFIC-KEEP',reason:chapterFunctions[a.section]+'；'+chapterFunctions[b.section]+'。共用命局依据，但分别服务 '+theme+' 的不同生活领域。',origin:a.text,duplicate:b.text});}}
+const advice=rows.flatMap(s=>s.paragraphs.flatMap(p=>[...p.text.matchAll(/应该|不应该|必须|建议|最好|需要|你要|可以这样|不能这样/g)].map(m=>({section:s.sectionId,paragraphId:p.id,token:m[0],context:p.text,classification:/既然|[“”]|会认为|会告诉自己|双方都可能觉得/.test(p.text)?'QUOTED_OR_INNER_EXPECTATION':m[0]==='最好'?'COMPARATIVE_WORD_NOT_AN_INSTRUCTION':/需要.{0,5}学会|你应该|建议你|你要/.test(p.text)?'REVIEW_REQUIRED_DIRECT_ADDRESS':'ALREADY_INTERPRETIVE_NEED_OR_CONDITION',disposition:'KEEP',reason:chapterFunctions[s.sectionId]+'：'+(/既然|[“”]|会认为|会告诉自己|双方都可能觉得/.test(p.text)?'描述内在期待、引语或概念对比，不作为对客户的任务指令。':'描述已接受结构的偏好、运行条件或实际需求；不把关键词一律删除。')}))));
 const packPath='docs/acceptance/bazi-paid-report/editorial/GEN-01-AUTHORITY-PACK-R2.json',packBytes=fs.readFileSync(packPath),pack=JSON.parse(packBytes);assert.deepEqual(Object.values(pack.chart.pillars),['庚申','甲子','庚辰','庚寅']);
 const timing={schemaVersion:'BAZI-FR-C1-TIMING-LOCK-v1',source:'User execution specification D plus immutable S10 accepted manuscript; a faithful lock projection, not a newly calculated chart.',sourceManuscript:rows.find(s=>s.sectionId==='S10').sourcePath,sourceSha256:manifest.sections.find(s=>s.sectionId==='S10').sha256,natal:pack.chart.pillars,daYun:'己巳',annual:'丙寅',identityState:'PARTIAL_TEST_STRUCTURE',relations:['甲己合','巳申六合兼破','巳寅害','寅巳申刑','年度寅重复原局寅','年度寅冲原局申','年度寅害大运巳'],gregorianYear:null,age:null,startDate:null,transformationConclusion:null,eventForecasts:false};
 const candidate={version:'BAZI-FR-C1',locale:'zh-Hans',sourceAcceptance:'ACCEPTED',fullReportHumanDecision:'PENDING',editorialConvergence:'PENDING_HUMAN_REVIEW',contentFrozen:false,referenceImplementation:false,productionActivated:false,providerCalls:0,natalAuthority:{sourcePath:packPath,sha256:sha(packBytes),pillars:pack.chart.pillars},timingAuthority:timing,sections:rows.map(s=>({sectionId:s.sectionId,title:s.titleZh,sourcePath:s.sourcePath,sourceSha256:s.sha256,paragraphs:s.paragraphs,originalUnits:source.find(x=>x.sectionId===s.sectionId).paragraphs.reduce((n,p)=>n+[...p.text.replace(/\s/g,'')].length,0),units:s.paragraphs.reduce((n,p)=>n+[...p.text.replace(/\s/g,'')].length,0)}))};
 fs.mkdirSync(root+'converged',{recursive:true});for(const s of candidate.sections)fs.writeFileSync(root+'converged/'+s.sectionId+'-ZH-CANDIDATE.md','# '+s.title+'\n\n'+s.paragraphs.map(p=>p.text).join('\n\n')+'\n');
 const json=(name,v)=>fs.writeFileSync(root+name,JSON.stringify(v,null,2)+'\n');
-json('EDITORIAL-INPUT-SNAPSHOT.json',{sourceAcceptance:'ACCEPTED',immutableInputs:manifest.sections,sections:source,providerCalls:0});json('PARAGRAPH-OWNERSHIP.json',paragraphMap);json('EDITORIAL-CHANGES.json',changes);json('DEDUP-AUDIT.json',{method:'Paragraph ownership plus multi-theme bigram semantic-candidate heuristics, followed by explicit minimal editorial dispositions; no provider.',candidates:overlap,operations:changes.filter(c=>['TRIM','REASSIGN'].includes(c.disposition)),remainingExactDuplicates:overlap.filter(x=>x.origin===x.duplicate)});json('ADVICE-LANGUAGE-AUDIT.json',{minimalVoiceEdits:changes.filter(c=>c.reason.includes('customer voice')),retainedOccurrences:advice});json('TIMING-AUTHORITY.json',timing);json('CONVERGED-CANDIDATE.json',candidate);
+json('EDITORIAL-INPUT-SNAPSHOT.json',{sourceAcceptance:'ACCEPTED',immutableInputs:manifest.sections,sections:source,providerCalls:0});json('PARAGRAPH-OWNERSHIP.json',paragraphMap);json('EDITORIAL-CHANGES.json',changes);json('DEDUP-AUDIT.json',{method:'Paragraph ownership plus multi-theme bigram semantic-candidate heuristics, followed by explicit minimal editorial dispositions; no provider.',candidates:overlap,operations:changes.filter(c=>['TRIM','REASSIGN'].includes(c.disposition)),remainingExactDuplicates:overlap.filter(x=>x.origin===x.duplicate)});json('ADVICE-LANGUAGE-AUDIT.json',{originalOccurrences:source.flatMap(s=>s.paragraphs.flatMap(p=>[...p.text.matchAll(/应该|不应该|必须|建议|最好|需要|你要|可以这样|不能这样/g)].map(m=>({section:s.sectionId,paragraphId:p.id,token:m[0],context:p.text,editorialDispositions:changes.filter(c=>c.paragraphId===p.id).map(c=>({disposition:c.disposition,reason:c.reason,after:c.after})),finalSection:rows.find(r=>r.paragraphs.some(x=>x.id===p.id))?.sectionId||null})))),minimalVoiceEdits:changes.filter(c=>c.reason.includes('customer voice')),retainedOccurrences:advice});json('TIMING-AUTHORITY.json',timing);json('CONVERGED-CANDIDATE.json',candidate);
 fs.writeFileSync('functions/personal-reading/narrative/bazi-full-report-c1-copy.generated.js','// Deterministic edition extension of the existing BaZi accepted-copy publication owner.\n// Source manuscripts stay immutable; final convergence remains pending Human Review.\nexport const BAZI_FULL_REPORT_C1='+JSON.stringify(candidate,null,2)+';\n');
 console.log('Built C1 candidate from 9 hash-verified accepted sources; '+changes.length+' paragraph dispositions; provider calls 0; final acceptance pending.');

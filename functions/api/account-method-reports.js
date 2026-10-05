@@ -20,7 +20,7 @@ export async function onRequest(context){
  }catch(e){
   if(context.env?.PHIOS_ENVIRONMENT==='qa'){
    const token=v=>typeof v==='string'&&/^[A-Z0-9_:-]{1,120}$/.test(v)?v:null;
-   console.warn('METHOD_REPORT_QA_FAILURE',JSON.stringify({code:token(e.code)||'METHOD_REPORT_UNAVAILABLE',sections:(e.details?.sections||[]).map(s=>({sectionId:token(s.sectionId),status:token(s.status),reasons:(s.reasons||[]).map(token).filter(Boolean)}))}));
+   console.warn('METHOD_REPORT_QA_FAILURE',JSON.stringify({code:token(e.code)||'METHOD_REPORT_UNAVAILABLE',sections:(e.details?.sections||[]).map(s=>({sectionId:token(s.sectionId),status:token(s.status),reasons:(s.reasons||[]).map(token).filter(Boolean),fallbackReason:token(s.fallbackReason)}))}));
   }
   return Response.json({ok:false,code:e.status===503?e.code:'METHOD_REPORT_UNAVAILABLE'},{status:e.status??403,headers});
  }

@@ -5,6 +5,7 @@ import {getAcceptedBaziCoreSection} from '../functions/personal-reading/narrativ
 import {getAcceptedBaziRemainingSection,BAZI_S06_S10_ACCEPTED_VERSION} from '../functions/personal-reading/narrative/bazi-s06-s10-accepted-copy.generated.js';
 import {acceptedS02,acceptedS03,acceptedS04,acceptedS05,acceptedS06S10} from '../functions/personal-reading/narrative/bazi-owner-acceptance.generated.js';
 import {bindSectionVisual} from '../functions/canonical-presentation-runtime/report-section-contract.js';
+import {checkBaziFullReportC1} from './check-bazi-full-report-c1.mjs';
 
 const source=JSON.parse(fs.readFileSync('docs/guided-report-successor-r2/bazi-source.json','utf8'));
 for(const receipt of [acceptedS02,acceptedS03,acceptedS04,acceptedS05,acceptedS06S10]){
@@ -63,6 +64,7 @@ assert(!publicationSource.includes("ownerAcceptedRemaining?await composePublicat
 
 console.log('PASS: BaZi S02-S10 owner-accepted copy is frozen into canonical publication.');
 console.log('  Both locales preserve every accepted block exactly once.');
+if(fs.existsSync('docs/acceptance/bazi-paid-report/full-report-c1/MANIFEST.json'))await checkBaziFullReportC1();
 console.log('  Section Master bindings remain active; each section has exactly one opener.');
 console.log('  T2/T3/provider overwrite is blocked for owner-accepted sections.');
 console.log('  Cross-section exact accepted-block duplication: 0.');
