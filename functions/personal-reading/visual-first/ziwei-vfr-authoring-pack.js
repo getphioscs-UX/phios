@@ -53,7 +53,6 @@ function sectionCompact(zh,en){
   claimType:c.claimType,
   certainty:c.certainty,
   textZh:txt(c.text),
-  textEn:txt((en?.claims||[]).find(x=>x.role===c.role&&x.claimType===c.claimType)?.text),
   conditions:c.conditions||[],
   counterweights:c.counterweights||[]
  }));
