@@ -13,7 +13,7 @@ import {
 
 export const ZWR_VFR_FIVE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-FIVE-CALL-DEEP-SOL-v1';
 const EXPERIMENT_BUDGET_USD=1.00;
-const MAX_OUTPUT_TOKENS_PER_CALL=8000;
+const MAX_OUTPUT_TOKENS_PER_CALL=6000;
 
 function modelRecord(){
  const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
