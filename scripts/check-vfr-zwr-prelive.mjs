@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {buildZwrVfrCompactAuthoringPack} from '../functions/personal-reading/visual-first/ziwei-vfr-authoring-pack.js';
-import {planZwrVfrOneCall} from '../functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js';
+import {planZwrVfrOneCall,composeZwrVfrOneCall} from '../functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js';
 
 const fixture=JSON.parse(fs.readFileSync('docs/reports/ziwei/production-admission/zpa-v1/ZPA-CONTROLLED-02-en.json','utf8'));
 const pack=await buildZwrVfrCompactAuthoringPack({evidence:fixture.evidence});
@@ -23,7 +23,17 @@ assert.equal(plan.budget.allowed,true);
 const composer=fs.readFileSync('functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js','utf8');
 assert(!composer.includes("report-section-semantic-review"),'VFR composer must not import AI semantic reviewer');
 assert(!composer.includes("verifyReportSectionComposition"),'VFR composer must not use old shared semantic verifier');
-assert(composer.includes("REPORT_PROVIDER_LIVE_ALLOWED"),'VFR live provider must require explicit opt-in');
+let providerFetchTouched=false;
+await assert.rejects(
+  ()=>composeZwrVfrOneCall({
+    pack,
+    env:{},
+    fetcher:async()=>{providerFetchTouched=true;throw Error('PRELIVE_PROVIDER_FETCH_MUST_NOT_RUN');}
+  }),
+  /VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED/,
+  'VFR live provider must require explicit opt-in'
+);
+assert.equal(providerFetchTouched,false,'pre-live opt-in guard must run before provider fetch');
 const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
 assert(!binding.includes('ziwei-vfr-one-call-composer.js'),'pre-live VFR must not cut over canonical account binding');
 console.log('PASS ZWR-VFR pre-live: bilingual compact pack sections=10; planned provider calls=1; semantic reviewer calls=0; estimated input tokens='+plan.budget.inputTokens+'; max output='+plan.maxOutputTokens+'; planned max cost=$'+plan.budget.estimatedNextCallCost+'; production binding unchanged; live provider not called.');
