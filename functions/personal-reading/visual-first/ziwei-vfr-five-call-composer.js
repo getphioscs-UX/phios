@@ -22,21 +22,17 @@ function modelRecord(){
 }
 function batchPrompt(batchIds){
  return [
-  'You are writing a premium bilingual Zi Wei Dou Shu semantic manuscript for exactly two supplied report sections.',
+  'You are writing a premium bilingual Zi Wei Dou Shu customer manuscript for exactly two supplied report sections.',
   'The supplied compact batch is the complete authority. Do not calculate new chart facts and do not invent missing evidence.',
-  'Write publication-quality semantic content, not summary bullets. The purpose of this experiment is depth comparable to a strong human-reviewed long-form chapter.',
-  'For each section, synthesize the palace network, star combination, transformations and timing only when admitted by that section evidence.',
-  'structuralMechanism: explain why the admitted Zi Wei configuration produces this operating structure, with causal links rather than glossary definitions.',
-  'livedScenarios: give three distinct, concrete and recognizable life situations specific to the section domain.',
-  'constructiveExpression: write one dense paragraph explaining how the structure operates when conditions are supportive.',
-  'pressureDistortion: write one dense paragraph explaining how the same structure distorts under strain and what becomes overused, rigid, avoidant or unstable.',
-  'counterweight: write one dense paragraph explaining which chart factors or real conditions moderate the structure; do not give generic reassurance.',
-  'timingOverlay: write one bounded paragraph distinguishing natal baseline from Da Xian and Liu Nian emphasis where timing is admitted; if timing is not central, state the bounded role of timing without fabricating events.',
-  'realityNavigation: write one section-specific observational paragraph, not a generic checklist, review-date formula, responsibility list, or repeated boundary advice.',
-  'Chinese and English must be semantically equivalent but naturally written in each language. Do not mechanically translate sentence-by-sentence.',
-  'Do not generate layout, diagrams, captions, colors, page counts or presentation structure. PHI OS owns all deterministic presentation.',
-  'Do not expose internal workflow terms. Preserve uncertainty. Do not guarantee events, diagnose illness, or give transaction-level financial advice.',
-  'Target sections: '+batchIds.join(', ')+'. Return JSON only.'
+  'For each section, write one coherent Chinese long-form chapter and one coherent English long-form chapter. Do not decompose the response into semantic subfields, bullet points, checklists, or mini-summaries.',
+  'The prose should read like a professional human-written Zi Wei Dou Shu interpretation: begin from the admitted palace and star structure, explain how the configuration works together, then move naturally into recognizable lived situations, constructive expression, pressure distortion, counterweights, timing emphasis where admitted, and a grounded closing observation.',
+  'Use Zi Wei terminology densely enough that the chapter could not be mistaken for generic personality writing, but always translate technical structure into lived meaning.',
+  'Include concrete situations from the section domain rather than generic advice. Show how the same structure may look different under supportive conditions and under strain.',
+  'For timing, clearly distinguish natal baseline from Da Xian and Liu Nian emphasis when the Authority Pack admits timing. Never fabricate guaranteed events.',
+  'Chinese and English must carry the same substantive meaning but should each read naturally in their own language; do not mechanically translate sentence by sentence.',
+  'Do not generate layout, diagrams, captions, colors, page counts, headings, cards or presentation structure. PHI OS owns all deterministic presentation.',
+  'Do not expose internal workflow terms. Preserve uncertainty. Do not diagnose illness or give transaction-level financial advice.',
+  'Target sections: '+batchIds.join(', ')+'. Return JSON only in the required schema.'
  ].join('\n');
 }
 function batchPack(pack,ids){
