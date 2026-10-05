@@ -20,6 +20,18 @@ assert.equal(result.sections.length,10);
 assert.equal(result.rawManuscriptSections.length,10);
 assert.equal(new Set(result.rawManuscriptSections.map(s=>s.sectionId)).size,10);
 
+function splitParagraphs(text){
+ return String(text||'').trim().split(/\n\s*\n/u).map(x=>x.trim()).filter(Boolean);
+}
+function completeZh(text){
+ const t=String(text||'').trim();
+ return ['。','！','？','》','）','」','』','】'].some(x=>t.endsWith(x));
+}
+function completeEn(text){
+ const t=String(text||'').trim();
+ return ['.','!','?'].includes(t.at(-1)) || ['."','!"','?"',".'","!'","?'"].some(x=>t.endsWith(x));
+}
+
 let zhChars=0,enWords=0;
 for(const row of result.rawManuscriptSections){
  const zh=String(row.zhHansManuscript||'').trim();
