@@ -1,14 +1,11 @@
 import {estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
+import {admitVfrReportRequest} from '../visual-first/report-provider-budget.js';
 export function planReportProviderRequest({model,usage,calls=0,spent=0,reason=null}){
+ if(!Number.isInteger(calls)||calls<0||!Number.isFinite(spent)||spent<0||spent>1)throw Error('PROVIDER_LEDGER_INVALID');
  if(!model||['inputPricePerMillion','cachedInputPricePerMillion','outputPricePerMillion'].some(k=>!Number.isFinite(model[k])||model[k]<0)||!usage||!Number.isFinite(usage.inputTokens)||!Number.isFinite(usage.outputTokens))throw Error('PROVIDER_PRICING_OR_USAGE_REQUIRED');
+ if(usage.inputTokens<0||usage.outputTokens<0||(usage.cachedInputTokens!=null&&(!Number.isFinite(usage.cachedInputTokens)||usage.cachedInputTokens<0||usage.cachedInputTokens>usage.inputTokens)))throw Error('PROVIDER_PRICING_OR_USAGE_REQUIRED');
  const projected=Number(estimatePaiProviderCost(model,usage));
- const boundedReasons=['MALFORMED_JSON','ONE_MISSING_SECTION','BOUNDED_FACT_REPAIR','TRUNCATION','TRANSPORT_FAILURE'];
- if(calls>=2)return {allowed:false,code:'PROVIDER_CALL_LIMIT_EXCEEDED',projected};
- if(calls===0&&projected>.8)return {allowed:false,code:'PROVIDER_BUDGET_PRECHECK_BLOCKED',projected};
- // Conservative repair reserve includes the owner's explicit $0.88 deny case.
- if(calls===1&&(spent>=.88||!boundedReasons.includes(reason)))return {allowed:false,code:'PROVIDER_REPAIR_DENIED',projected};
- if(spent+projected>1)return {allowed:false,code:'PROVIDER_BUDGET_EXCEEDED',projected};
- return {allowed:true,projected,budgetRemaining:1-spent-projected};
+ return admitVfrReportRequest({projectedCost:projected,calls,spent,reason});
 }
 export function recordVisualReportUsage({requestId,model,usage,callCount,firstAttemptFailureRecorded=false}){
  const estimatedProviderCost=Number(estimatePaiProviderCost(model,usage));
@@ -21,7 +18,8 @@ export async function composeVisualReportAttempt({env={},ledger,model,usage,reas
  const plan=planReportProviderRequest({model,usage,calls:ledger.calls,spent:ledger.spent,reason});if(!plan.allowed)throw Error(plan.code);
  ledger.calls++;ledger.spent+=plan.projected; // Reserve worst-case cost before transport, including failure.
  const response=await invoke(payload);
- const actual=response.usage?{inputTokens:response.usage.input_tokens,cachedInputTokens:response.usage.input_tokens_details?.cached_tokens||0,outputTokens:response.usage.output_tokens}:usage;
+ const completeUsage=Number.isFinite(response.usage?.input_tokens)&&Number.isFinite(response.usage?.output_tokens);
+ const actual=completeUsage?{inputTokens:response.usage.input_tokens,cachedInputTokens:response.usage.input_tokens_details?.cached_tokens||0,outputTokens:response.usage.output_tokens}:usage;
  const record=recordVisualReportUsage({requestId:ledger.requestId,model,usage:actual,callCount:ledger.calls,firstAttemptFailureRecorded:ledger.calls>1});
  ledger.spent+=record.estimatedProviderCost-plan.projected;(ledger.records||=[]).push(record);
  if(ledger.spent>1)throw Error('PROVIDER_BUDGET_EXCEEDED');return response.output;

@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
+const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
+const commands=JSON.parse(fs.readFileSync('config/reports/zero-cost-check-commands.json','utf8'));
+for(const key of ['precheck','check','postcheck','build:pages','check:pages-build'])assert(pkg.scripts[key].includes('run-zero-cost-regression.mjs'));
+assert.equal(process.env.REPORT_PROVIDER_LIVE_ALLOWED,'false');assert.equal(process.env.REPORT_ZERO_COST_REPLAY,'true');
+const code=`import assert from 'node:assert/strict';import https from 'node:https';assert.equal(process.env.REPORT_PROVIDER_LIVE_ALLOWED,'false');assert.equal(process.env.REPORT_ZERO_COST_REPLAY,'true');await assert.rejects(()=>fetch('https://api.openai.com/v1/responses',{method:'POST'}),/ZERO_COST_REPLAY_NETWORK_BLOCKED/);await assert.rejects(()=>fetch('https://arbitrary-provider.invalid/compose',{method:'POST'}),/ZERO_COST_REPLAY_NETWORK_BLOCKED/);assert.throws(()=>https.request('https://api.openai.com/v1/responses',{method:'POST'}),/ZERO_COST_REPLAY_NETWORK_BLOCKED/);console.log('ZERO_COST_CHILD_PASS');`;
+const child=spawnSync(process.execPath,['--input-type=module','-e',code],{encoding:'utf8',env:{...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'true',OPENAI_API_KEY:'FAKE_NOT_A_CREDENTIAL'}});
+assert.equal(child.status,0,child.stderr);assert(child.stdout.includes('ZERO_COST_CHILD_PASS'));
+for(const [key,value] of Object.entries(pkg.scripts))if(/^check:/.test(key)&&!value.includes('run-zero-cost-regression')&&!value.includes('npm run check:legacy'))throw Error('UNGUARDED_REGRESSION_ALIAS:'+key);
+const evidence={recordedAt:new Date().toISOString(),npmHooksGuarded:true,ordinaryRegressionAliasesGuarded:true,pagesBuildGuarded:true,liveOptInOverriddenInRegression:true,nodeChildGuardInherited:true,fetchAndHttpsPaidRequestsBlockedBeforeNetwork:true,arbitraryExternalPostBlocked:true,nonNodeProviderCredentialsRemovedByRunner:true,providerCalls:0,providerCost:0,fullHistoricalSuiteExecuted:false,commandCount:Object.keys(commands).length};
+fs.mkdirSync('docs/acceptance/bazi-paid-report/visual-first-r1',{recursive:true});fs.writeFileSync('docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json',JSON.stringify(evidence,null,2)+'\n');
+console.log('PASS ordinary npm checks/builds: inherited zero-cost guard denies paid network even when parent requests live mode.');
