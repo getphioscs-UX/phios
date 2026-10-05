@@ -10,13 +10,15 @@ export function safeProviderFailure(error){
 }
 function outputText(data){
   if(clean(data?.output_text))return clean(data.output_text);
+  const chunks=[];
   for(const item of Array.isArray(data?.output)?data.output:[]){
     if(item?.type!=='message')continue;
     for(const c of Array.isArray(item.content)?item.content:[]){
       if(c?.type==='refusal')fail('NARRATIVE_PROVIDER_REFUSAL',{message:clean(c.refusal)});
-      if(c?.type==='output_text'&&clean(c.text))return clean(c.text);
+      if(c?.type==='output_text'&&clean(c.text))chunks.push(clean(c.text));
     }
   }
+  if(chunks.length)return chunks.join('');
   fail('NARRATIVE_PROVIDER_EMPTY_OUTPUT');
 }
 export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,systemPrompt,userPayload,schema,schemaName,maxOutputTokens=5200}){
@@ -44,8 +46,12 @@ export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,sy
   const raw=await response.text();let data;
   try{data=JSON.parse(raw)}catch{fail('NARRATIVE_PROVIDER_UNREADABLE_RESPONSE');}
   if(!response.ok)fail('NARRATIVE_PROVIDER_REQUEST_FAILED',{status:response.status,providerErrorCode:SAFE_ERROR_CODES.has(data?.error?.code)?data.error.code:null,providerErrorType:SAFE_ERROR_TYPES.has(data?.error?.type)?data.error.type:null});
-  let output;try{output=JSON.parse(outputText(data))}catch(error){if(error?.code)throw error;fail('NARRATIVE_PROVIDER_SCHEMA_OUTPUT_UNREADABLE');}
-  return Object.freeze({provider:'openai',model,output,usage:data?.usage&&typeof data.usage==='object'?data.usage:null});
+  const usage=data?.usage&&typeof data.usage==='object'?data.usage:null;
+  if(data?.status==='incomplete'||data?.incomplete_details)fail('NARRATIVE_PROVIDER_INCOMPLETE_OUTPUT',{responseStatus:data?.status||null,incompleteReason:clean(data?.incomplete_details?.reason)||null,usage});
+  let text;
+  try{text=outputText(data);}catch(error){if(error?.code)throw error;throw error;}
+  let output;try{output=JSON.parse(text)}catch(error){if(error?.code)throw error;fail('NARRATIVE_PROVIDER_SCHEMA_OUTPUT_UNREADABLE',{responseStatus:data?.status||null,outputCharacters:text.length,usage});}
+  return Object.freeze({provider:'openai',model,output,usage});
 }
 export default Object.freeze({invokeOpenAIStructured});
 
