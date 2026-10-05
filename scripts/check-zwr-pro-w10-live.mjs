@@ -15,6 +15,10 @@ assert(doc.providerCalls>0,'W10 live campaign must contain real provider calls')
 assert(doc.semanticReviewCalls>0,'W10 live campaign must contain real semantic review calls');
 assert(doc.providerAttempts>0,'W10 live campaign must contain provider attempts');
 assert.equal(doc.productionAdmissionGranted,false);
+assert.equal(typeof doc.unpricedHistoricalTransportCalls,'number');
+assert.equal(typeof doc.estimatedProviderCostIsLowerBound,'boolean');
+if(doc.unpricedHistoricalTransportCalls>0)assert.equal(doc.estimatedProviderCostIsLowerBound,true,'historical unpriced calls require lower-bound cost flag');
+assert(doc.checkpointPath&&fs.existsSync(doc.checkpointPath),'W10 resumable checkpoint evidence required');
 assert.equal(new Set(doc.results.map(x=>x.inputFingerprint)).size,doc.results.length,'W10 live subjects must be input-distinct');
 assert.equal(new Set(doc.results.map(x=>x.reportSnapshotId)).size,doc.results.length,'W10 snapshots must be distinct');
 for(const row of doc.results){
