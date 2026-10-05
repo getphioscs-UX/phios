@@ -17,6 +17,8 @@ const PAL={
 const TX={HUA_LU:['化禄','Hua Lu'],HUA_QUAN:['化权','Hua Quan'],HUA_KE:['化科','Hua Ke'],HUA_JI:['化忌','Hua Ji']};
 const LAYER={NATAL:['本命','Natal'],DA_XIAN:['大限','Da Xian'],LIU_NIAN:['流年','Liu Nian']};
 const ROLE={STRUCTURAL_BASELINE:['本命基线','Natal baseline'],LONG_CYCLE_MODIFICATION:['长期周期','Long-cycle emphasis'],YEAR_LEVEL_ACTIVATION:['年度激活','Annual activation']};
+const BRANCH={ZI:['子','Zi'],CHOU:['丑','Chou'],YIN:['寅','Yin'],MAO:['卯','Mao'],CHEN:['辰','Chen'],SI:['巳','Si'],WU:['午','Wu'],WEI:['未','Wei'],SHEN:['申','Shen'],YOU:['酉','You'],XU:['戌','Xu'],HAI:['亥','Hai']};
+const STATE={MIAO:['庙','Miao'],WANG:['旺','Wang'],DE:['得','De'],LI:['利','Li'],PING:['平','Ping'],BU:['不','Bu'],XIAN:['陷','Xian']};
 const TITLES={
  TWELVE_PALACE_NATAL_MAP:['十二宫本命结构','Twelve-palace Natal Structure'],
  LIFE_BODY_AXIS:['命身轴','Life-Body Axis'],PALACE_NETWORK:['宫位关系网络','Palace Relationship Network'],KEY_STAR_STRUCTURE:['主星结构','Key Star Structure'],
@@ -29,7 +31,8 @@ const TITLES={
 const pair=(m,k)=>m[k]||[String(k||'—'),String(k||'—')];
 const bi=(m,k)=>{const x=pair(m,k);return esc(x[0])+'<small>'+esc(x[1])+'</small>';};
 const plain=(m,k)=>pair(m,k).join(' · ');
-const branch=v=>esc(v||'—');
+const branch=v=>{const x=pair(BRANCH,v);return esc(x[0]+' · '+x[1]);};
+const state=v=>{if(!v)return '状态未定 / state unknown';const x=pair(STATE,v);return x[0]+' · '+x[1];};
 
 function card(title,value,detail='',opts={}){
  const t=opts.titleHtml?String(title):esc(title);
@@ -54,7 +57,7 @@ function network(data){
  return '<svg class="zv-svg" viewBox="0 0 760 420" role="img">'+edges.map(([a,b])=>{const A=by.get(a),B=by.get(b);return '<line x1="'+A.x+'" y1="'+A.y+'" x2="'+B.x+'" y2="'+B.y+'" class="zv-line"/>';}).join('')+pts.map(p=>'<g><circle cx="'+p.x+'" cy="'+p.y+'" r="45" class="zv-node"/><text x="'+p.x+'" y="'+(p.y-2)+'" text-anchor="middle">'+esc(pair(PAL,p.code)[0])+'</text><text x="'+p.x+'" y="'+(p.y+14)+'" text-anchor="middle" class="en">'+esc(pair(PAL,p.code)[1])+'</text></g>').join('')+'</svg>';
 }
 function stars(data){
- return '<div class="zv-star-grid">'+(data.stars||[]).map(s=>card(bi(STAR,s.starCode),bi(PAL,s.palaceCode),s.stateKnown?(s.state||''):'状态未定 / state unknown',{titleHtml:true,valueHtml:true})).join('')+'</div>';
+ return '<div class="zv-star-grid">'+(data.stars||[]).map(s=>card(bi(STAR,s.starCode),bi(PAL,s.palaceCode),s.stateKnown?state(s.state):'状态未定 / state unknown',{titleHtml:true,valueHtml:true})).join('')+'</div>';
 }
 function transformations(data){
  const xs=data.transformations||data.layers?.flatMap(x=>x.transformations||[])||[];
