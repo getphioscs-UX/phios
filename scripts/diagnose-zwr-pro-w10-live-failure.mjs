@@ -36,6 +36,7 @@ const out={
  semanticReviewReasons:verification?.semanticReview?.reasons||[],
  semanticReviewPresent:Boolean(verification?.semanticReview),
  candidateBlockCount:composition.candidate?.blocks?.length??null,
+ candidateBlocks:(composition.candidate?.blocks||[]).map((b,i)=>({index:i,role:b.role,text:b.text,claimRefs:b.claimRefs||[]})),
  usageRecord:composition.usageRecord||null,
  verificationUsageRecords:composition.verificationUsageRecords||[]
 };
