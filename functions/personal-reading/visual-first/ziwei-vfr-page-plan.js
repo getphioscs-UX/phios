@@ -3,11 +3,11 @@ export const ZWR_VFR_PAGE_PLAN_VERSION='ZWR-VFR-R1-47-PAGE-PLAN-v1';
 const P=(pageNumber,pageKey,pageFamily,{sectionId=null,diagramIds=[],visual=true,textRole='SUPPORTING'}={})=>Object.freeze({pageNumber,pageKey,pageFamily,sectionId,diagramIds:Object.freeze(diagramIds),visual,textRole});
 export const ZWR_VFR_PAGE_PLAN=Object.freeze([
  P(1,'COVER','COVER',{visual:true}),
- P(2,'HOW_TO_READ','FRONT_MATTER',{visual:true}),
- P(3,'NATAL_OVERVIEW','OVERVIEW',{diagramIds:['ZWD-04'],visual:true}),
- P(4,'TWELVE_PALACE_MAP','OVERVIEW',{diagramIds:['ZWD-01']}),
- P(5,'LIFE_BODY_AXIS','OVERVIEW',{diagramIds:['ZWD-02']}),
- P(6,'FOUR_TRANSFORMATIONS','OVERVIEW',{diagramIds:['ZWD-05']}),
+ P(2,'METHOD_INTRO','FRONT_MATTER',{visual:true}),
+ P(3,'ORIGIN','FRONT_MATTER',{visual:true}),
+ P(4,'PHIOS_LENS','FRONT_MATTER',{visual:true}),
+ P(5,'HOW_TO_READ','FRONT_MATTER',{visual:true}),
+ P(6,'TWELVE_PALACE_MAP','OVERVIEW',{diagramIds:['ZWD-01']}),
 
  P(7,'S02_MASTER','SECTION_MASTER',{sectionId:'S02'}),
  P(8,'S02_LIFE_BODY','DIAGRAM',{sectionId:'S02',diagramIds:['ZWD-02']}),
