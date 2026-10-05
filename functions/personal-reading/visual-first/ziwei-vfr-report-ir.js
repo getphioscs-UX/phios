@@ -23,15 +23,16 @@ export function buildZwrVfrProviderSchema(pack){
  const allRefs=[...new Set(pack.sections.flatMap(s=>s.claims.map(c=>c.claimId)))];
  const semantic=locale=>{
   const zh=locale==='zhHans';
-  const max=zh?90:160;
+  const max=zh?180:300;
+  const target=zh?'Write one complete Chinese sentence, normally 55-95 Chinese characters; end with Chinese punctuation and do not fill the maximum.':'Write one complete English sentence, normally 90-160 characters; end with punctuation and do not fill the maximum.';
   return {
    type:'object',additionalProperties:false,
    required:['coreMeaning','livedExpression','counterweight','navigation'],
    properties:{
-    coreMeaning:{type:'string',minLength:12,maxLength:max},
-    livedExpression:{type:'string',minLength:12,maxLength:max},
-    counterweight:{type:'string',minLength:12,maxLength:max},
-    navigation:{type:'string',minLength:12,maxLength:max}
+    coreMeaning:{type:'string',minLength:12,maxLength:max,description:target},
+    livedExpression:{type:'string',minLength:12,maxLength:max,description:target},
+    counterweight:{type:'string',minLength:12,maxLength:max,description:target},
+    navigation:{type:'string',minLength:12,maxLength:max,description:target}
    }
   };
  };
