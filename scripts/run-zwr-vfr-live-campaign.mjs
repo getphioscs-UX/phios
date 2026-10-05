@@ -20,7 +20,31 @@ const cache={
   if(!store[k]){store[k]=v;fs.writeFileSync(cachePath,JSON.stringify(store,null,2)+'\n');}
  }
 };
-const result=await composeZwrVfrOneCall({pack,env:process.env,cache});
+let result;
+try{
+ result=await composeZwrVfrOneCall({pack,env:process.env,cache});
+}catch(error){
+ const d=error?.details&&typeof error.details==='object'?error.details:{};
+ const usage=d.usage&&typeof d.usage==='object'?d.usage:null;
+ const failure={
+  schemaVersion:'ZWR-VFR-R1-LIVE-FAILURE-v1',
+  recordedAt:new Date().toISOString(),
+  status:'FAIL',
+  errorCode:error?.code||error?.message||'UNKNOWN',
+  responseStatus:d.responseStatus||null,
+  incompleteReason:d.incompleteReason||null,
+  outputCharacters:Number.isFinite(d.outputCharacters)?d.outputCharacters:null,
+  providerCalls:1,
+  semanticReviewCalls:0,
+  usage,
+  inputTokens:usage?.input_tokens||usage?.inputTokens||null,
+  outputTokens:usage?.output_tokens||usage?.outputTokens||null,
+  usageUnavailable:!usage,
+  authorityDigest:pack.authorityDigest
+ };
+ fs.writeFileSync(path.join(root,'LIVE-FAILURE.json'),JSON.stringify(failure,null,2)+'\n');
+ throw error;
+}
 if(result.status!=='PASS')throw Error('ZWR_VFR_LIVE_GENERATION_NOT_PASS:'+result.status);
 const diagrams=await buildZwrVfrDiagramData({evidence:fixture.evidence});
 const pagePlan=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id)});
