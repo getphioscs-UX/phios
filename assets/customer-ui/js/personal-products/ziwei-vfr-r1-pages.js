@@ -165,18 +165,37 @@ const PURPOSE_EN={
  S10:'Liu Nian adds an annual layer without replacing the natal baseline.',
  S11:'Navigation protects usable resources, boundaries and recovery space first.'
 };
+function localeParagraphs(copy){
+ if(Array.isArray(copy?.paragraphs))return copy.paragraphs;
+ if(Array.isArray(copy?.interpretation))return copy.interpretation;
+ return String(copy?.manuscript||'').split(/\n\s*\n/u).map(x=>x.trim()).filter(Boolean);
+}
 function sectionMaster(section,binding,diagrams='',compact=false){
  const zh=section?.zhHans||{},en=section?.en||{},enSub=PURPOSE_EN[section?.sectionId]||en.subheadline;
  const art='<div class="zv-master-art">'+(binding.hero?'<img class="zv-hero" src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div>';
+ const deep=Boolean(zh.manuscript||en.manuscript||zh.paragraphs||en.paragraphs);
+ if(deep){
+  const z=localeParagraphs(zh).slice(0,2),e=localeParagraphs(en).slice(0,2);
+  return art+'<div class="zv-master zv-master-deep"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p class="zv-purpose">'+esc(zh.subheadline)+'</p><p class="zv-purpose" lang="en">'+esc(enSub)+'</p><div class="zv-master-reading"><article lang="zh-Hans">'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en">'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>'+diagrams+'</div>';
+ }
  if(compact){
   const rows=(zh.keyInsights||[]).map((x,i)=>'<div><b>'+esc(x.label)+'</b><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.text||'')+'</small></div>').join('');
   return art+'<div class="zv-master zv-master-summary"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-summary-insights">'+rows+'</div>'+diagrams+'</div>';
  }
  return art+'<div class="zv-master"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-insights">'+(zh.keyInsights||[]).map((x,i)=>'<article><b>0'+(i+1)+'</b><h3>'+esc(x.label)+'</h3><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.label||'')+' · '+esc(en.keyInsights?.[i]?.text||'')+'</small></article>').join('')+'</div>'+diagrams+'</div>';
 }
-function interpretation(section){
+function readingSlice(copy,page){
+ const all=localeParagraphs(copy).slice(2);
+ const count=Math.max(1,Number(page?.readingCount||1));
+ const index=Math.max(0,Number(page?.readingIndex||0));
+ const size=Math.ceil(all.length/count);
+ return all.slice(index*size,Math.min(all.length,(index+1)*size));
+}
+function interpretation(section,page={}){
  const zh=section?.zhHans||{},en=section?.en||{};
- return '<div class="zv-copy-grid"><article lang="zh-Hans"><h3>中文解读</h3>'+(zh.interpretation||[]).map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en"><h3>English Reading</h3>'+(en.interpretation||[]).map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
+ const z=readingSlice(zh,page),e=readingSlice(en,page);
+ const suffix=Number(page.readingCount||1)>1?' · '+String(Number(page.readingIndex||0)+1)+'/'+String(page.readingCount):'';
+ return '<div class="zv-reading-head"><span>'+esc(section?.sectionId||'')+'</span><h2>'+esc(zh.headline||'')+'</h2><small>'+esc(en.headline||'')+suffix+'</small></div><div class="zv-copy-grid zv-reading-grid"><article lang="zh-Hans"><h3>中文解读</h3>'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en"><h3>English Reading</h3>'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
 }
 function closingPage(reportIr,binding){
  const zh=reportIr?.closingSummary?.zhHans||[],en=reportIr?.closingSummary?.en||[];
@@ -193,7 +212,7 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   let body='';
   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily})).join('');
   if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml,p.pageFamily==='SECTION_MASTER_SUMMARY');
-  else if(p.pageFamily==='INTERPRETATION')body=interpretation(s);
+  else if(p.pageFamily==='INTERPRETATION'||p.pageFamily==='READING')body=interpretation(s,p);
   else if(ds.length)body=diagramHtml;
   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
   return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
