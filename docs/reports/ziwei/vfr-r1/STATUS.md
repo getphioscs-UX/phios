@@ -42,6 +42,7 @@ Control:
 - Same compact authority pack, same gpt-5.6-sol route, same bilingual requirement.
 - PHI OS still owns all diagrams, colors, layout, page plan and publication structure.
 - No semantic AI reviewer.
+- No post-call deterministic semantic verifier in the paid live path. Structured Output shape is enforced by the provider schema; PHI OS deterministically restores authorityRefs from each section's Authority Pack after generation.
 - Experiment hard budget: <= USD1 total.
 - Output ceiling: 6000 tokens per batch.
 - W10 production cutover remains prohibited from using the five-call result unless a later explicit human decision changes the production architecture.
