@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+
+const campaignPath='docs/reports/ziwei/production-admission/zwr-pro-w10-live-campaign.json';
+const manifestPath='docs/reports/ziwei/production-admission/zwr-pro-w11-review-manifest.json';
+const decisionPath='docs/reports/ziwei/production-admission/zwr-pro-w11-human-decision.json';
+assert(fs.existsSync(campaignPath),'W11 requires W10 live campaign evidence');
+assert(fs.existsSync(manifestPath),'W11 review manifest missing: run npm run build:zwr-pro:w11-review');
+const campaign=JSON.parse(fs.readFileSync(campaignPath,'utf8'));
+const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
+const decision=JSON.parse(fs.readFileSync(decisionPath,'utf8'));
+assert.equal(campaign.status,'PASS_LIVE_CAMPAIGN');
+assert.equal(manifest.status,'READY_FOR_HUMAN_REVIEW');
+assert.equal(manifest.subjectCount,campaign.subjectCount);
+assert.equal(manifest.artifacts.length,campaign.subjectCount*2);
+assert(manifest.artifacts.every(a=>a.totalPages===39&&a.humanDecision===null));
+assert(manifest.artifacts.every(a=>fs.existsSync(a.file)),'one or more W11 browser/print artifacts are missing');
+assert(['PENDING','ACCEPT','REJECT'].includes(decision.decision));
+assert.equal(manifest.productionAdmissionGranted,false);
+if(decision.decision==='PENDING')console.log('READY ZWR-PRO W11: browser/print artifacts complete; HUMAN ACCEPT/REJECT is pending; production remains closed.');
+else console.log('ZWR-PRO W11 human decision:',decision.decision);
