@@ -25,13 +25,13 @@ function localeSchema(locale){
   required:['sectionThesis','structuralMechanism','livedScenarios','constructiveExpression','pressureDistortion','counterweight','timingOverlay','realityNavigation'],
   properties:{
    sectionThesis:{type:'string',minLength:zh?30:70,maxLength:zh?220:420},
-   structuralMechanism:{type:'array',minItems:2,maxItems:3,items:p},
-   livedScenarios:{type:'array',minItems:3,maxItems:3,items:{type:'string',minLength:zh?35:75,maxLength:zh?260:480}},
-   constructiveExpression:{type:'array',minItems:2,maxItems:2,items:p},
-   pressureDistortion:{type:'array',minItems:2,maxItems:2,items:p},
-   counterweight:{type:'array',minItems:2,maxItems:2,items:p},
-   timingOverlay:{type:'array',minItems:1,maxItems:2,items:p},
-   realityNavigation:{type:'array',minItems:2,maxItems:2,items:p}
+   structuralMechanism:{type:'array',minItems:2,maxItems:2,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
+   livedScenarios:{type:'array',minItems:3,maxItems:3,items:{type:'string',minLength:zh?30:65,maxLength:zh?170:320}},
+   constructiveExpression:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
+   pressureDistortion:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
+   counterweight:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
+   timingOverlay:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?35:75,maxLength:zh?190:360}},
+   realityNavigation:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?40:85,maxLength:zh?210:390}}
   }
  };
 }
