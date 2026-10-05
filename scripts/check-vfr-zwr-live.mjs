@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {ZWR_VFR_ONE_CALL_COMPOSER_VERSION} from '../functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js';
 
 const root='docs/reports/ziwei/vfr-r1/';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -14,6 +15,7 @@ const diagrams=read(root+'DIAGRAM-DATA.json');
 const pages=read(root+'PAGE-PLAN.json');
 
 assert.equal(result.status,'PASS');
+assert.equal(result.schemaVersion,ZWR_VFR_ONE_CALL_COMPOSER_VERSION,'W8 live result is stale relative to current composer contract');
 assert.equal(result.providerCalls,1,'representative live run must make exactly one provider call');
 assert.equal(result.semanticReviewCalls,0,'W8 forbids semantic AI review calls');
 assert.equal(result.cacheHit,false,'representative W8 evidence must come from the live call, not cache replay');
