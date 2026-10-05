@@ -1,12 +1,14 @@
 import fs from 'node:fs';
 import {renderZwrVfrReview} from '../assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js';
+import {ZWR_VFR_PAGE_PLAN} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
 
 const root='docs/reports/ziwei/vfr-r1';
 const livePath=root+'/LIVE-RESULT.json',diagramPath=root+'/DIAGRAM-DATA.json',pagePath=root+'/PAGE-PLAN.json';
-for(const p of [livePath,diagramPath,pagePath])if(!fs.existsSync(p))throw Error('ZWR_VFR_W9_INPUT_REQUIRED:'+p);
+for(const p of [livePath,diagramPath])if(!fs.existsSync(p))throw Error('ZWR_VFR_W9_INPUT_REQUIRED:'+p);
 const live=JSON.parse(fs.readFileSync(livePath,'utf8'));
 const diagrams=JSON.parse(fs.readFileSync(diagramPath,'utf8'));
-const pagePlan=JSON.parse(fs.readFileSync(pagePath,'utf8'));
+const pagePlan=ZWR_VFR_PAGE_PLAN;
+fs.writeFileSync(pagePath,JSON.stringify(pagePlan,null,2)+'\n');
 if(live.status!=='PASS')throw Error('ZWR_VFR_LIVE_RESULT_NOT_PASS');
 if(pagePlan.length!==47)throw Error('ZWR_VFR_PAGE_COUNT_DRIFT');
 if(diagrams.diagramCount!==15)throw Error('ZWR_VFR_DIAGRAM_COUNT_DRIFT');
