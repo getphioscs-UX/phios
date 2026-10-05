@@ -22,24 +22,31 @@ function stringsForLocale(localized){
 function sectionClaims(packSection){return new Set((packSection?.claims||[]).map(c=>c.claimId));}
 export function buildZwrVfrProviderSchema(pack){
  const allRefs=[...new Set(pack.sections.flatMap(s=>s.claims.map(c=>c.claimId)))];
- const localized={
-  type:'object',additionalProperties:false,
-  required:['headline','subheadline','keyInsights','interpretation','diagramNarratives'],
-  properties:{
-   headline:{type:'string',minLength:1,maxLength:120},
-   subheadline:{type:'string',minLength:1,maxLength:220},
-   keyInsights:{type:'array',minItems:3,maxItems:5,items:{type:'object',additionalProperties:false,required:['label','text'],properties:{label:{type:'string',minLength:1,maxLength:100},text:{type:'string',minLength:1,maxLength:700}}}},
-   interpretation:{type:'array',minItems:2,maxItems:3,items:{type:'string',minLength:20,maxLength:1800}},
-   diagramNarratives:{type:'object',additionalProperties:false,required:['primary','secondary'],properties:{primary:{type:'string',minLength:1,maxLength:500},secondary:{type:'string',minLength:1,maxLength:500}}}
-  }
+ const localized=locale=>{
+  const zh=locale==='zhHans';
+  return {
+   type:'object',additionalProperties:false,
+   required:['headline','subheadline','keyInsights','interpretation','diagramNarratives'],
+   properties:{
+    headline:{type:'string',minLength:1,maxLength:zh?24:50},
+    subheadline:{type:'string',minLength:1,maxLength:zh?40:80},
+    keyInsights:{type:'array',minItems:3,maxItems:3,items:{type:'object',additionalProperties:false,required:['label','text'],properties:{label:{type:'string',minLength:1,maxLength:zh?12:20},text:{type:'string',minLength:1,maxLength:zh?50:90}}}},
+    interpretation:{type:'array',minItems:2,maxItems:2,items:{type:'string',minLength:20,maxLength:zh?100:180}},
+    diagramNarratives:{type:'object',additionalProperties:false,required:['primary','secondary'],properties:{primary:{type:'string',minLength:1,maxLength:zh?35:70},secondary:{type:'string',minLength:1,maxLength:zh?35:70}}}
+   }
+  };
+ };
+ const thesis=locale=>{
+  const zh=locale==='zhHans';
+  return {type:'object',additionalProperties:false,required:['headline','summary'],properties:{headline:{type:'string',minLength:1,maxLength:zh?28:60},summary:{type:'string',minLength:1,maxLength:zh?120:220}}};
  };
  return {
   type:'object',additionalProperties:false,
   required:['reportThesis','sections','closingSummary'],
   properties:{
-   reportThesis:{type:'object',additionalProperties:false,required:['zhHans','en'],properties:{zhHans:{type:'object',additionalProperties:false,required:['headline','summary'],properties:{headline:{type:'string'},summary:{type:'string'}}},en:{type:'object',additionalProperties:false,required:['headline','summary'],properties:{headline:{type:'string'},summary:{type:'string'}}}}},
-   sections:{type:'array',minItems:10,maxItems:10,items:{type:'object',additionalProperties:false,required:['sectionId','authorityRefs','zhHans','en'],properties:{sectionId:{type:'string',enum:[...ZWR_VFR_SECTION_IDS]},authorityRefs:{type:'array',minItems:1,items:{type:'string',enum:allRefs}},zhHans:localized,en:localized}}},
-   closingSummary:{type:'object',additionalProperties:false,required:['zhHans','en'],properties:{zhHans:{type:'array',minItems:3,maxItems:5,items:{type:'string'}},en:{type:'array',minItems:3,maxItems:5,items:{type:'string'}}}}
+   reportThesis:{type:'object',additionalProperties:false,required:['zhHans','en'],properties:{zhHans:thesis('zhHans'),en:thesis('en')}},
+   sections:{type:'array',minItems:10,maxItems:10,items:{type:'object',additionalProperties:false,required:['sectionId','authorityRefs','zhHans','en'],properties:{sectionId:{type:'string',enum:[...ZWR_VFR_SECTION_IDS]},authorityRefs:{type:'array',minItems:1,maxItems:8,items:{type:'string',enum:allRefs}},zhHans:localized('zhHans'),en:localized('en')}}},
+   closingSummary:{type:'object',additionalProperties:false,required:['zhHans','en'],properties:{zhHans:{type:'array',minItems:3,maxItems:3,items:{type:'string',minLength:1,maxLength:60}},en:{type:'array',minItems:3,maxItems:3,items:{type:'string',minLength:1,maxLength:110}}}}
   }
  };
 }
