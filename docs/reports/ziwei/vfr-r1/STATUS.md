@@ -28,3 +28,29 @@ Work: VFR-ZWR-0 through VFR-ZWR-10
 10. npm run check
 
 No live provider call is permitted in zero-cost regression scripts. No HUMAN ACCEPT is synthesized automatically.
+
+
+## FIVE-CALL DEEP SEMANTIC MANUSCRIPT experiment
+
+Status: READY FOR CONTROLLED A/B TEST. This lane does not modify production cutover authority.
+
+Purpose: test whether the one-call bilingual 10-section constraint is the primary cause of shallow prose.
+
+Control:
+- Existing one-call candidate remains the production reference lane.
+- Five-call experiment uses 5 batches x 2 sections.
+- Same compact authority pack, same gpt-5.6-sol route, same bilingual requirement.
+- PHI OS still owns all diagrams, colors, layout, page plan and publication structure.
+- No semantic AI reviewer.
+- Experiment hard budget: <= USD1 total.
+- Output ceiling: 6000 tokens per batch.
+- W10 production cutover remains prohibited from using the five-call result unless a later explicit human decision changes the production architecture.
+
+Execution:
+1. npm run check:vfr:zwr-five-call-prelive
+2. Set REPORT_PROVIDER_LIVE_ALLOWED=true locally.
+3. npm run run:vfr:zwr-five-call-experiment
+4. Remove REPORT_PROVIDER_LIVE_ALLOWED.
+5. npm run check:vfr:zwr-five-call-result
+6. npm run build:vfr:zwr-five-call-comparison
+7. Open tools/review/ZWR-VFR-FIVE-CALL-COMPARISON.html
