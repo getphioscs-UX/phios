@@ -38,8 +38,14 @@ for(const row of result.rawManuscriptSections){
  const en=String(row.enManuscript||'').trim();
  assert(zh.length>=650,row.sectionId+': Chinese manuscript too short');
  assert(en.length>=1200,row.sectionId+': English manuscript too short');
- assert(zh.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': Chinese manuscript needs at least 5 paragraphs');
- assert(en.split(/\n\s*\n/u).filter(Boolean).length>=5,row.sectionId+': English manuscript needs at least 5 paragraphs');
+ const zhParagraphs=splitParagraphs(zh);
+ const enParagraphs=splitParagraphs(en);
+ assert(zhParagraphs.length>=5,row.sectionId+': Chinese manuscript needs at least 5 paragraphs');
+ assert(enParagraphs.length>=5,row.sectionId+': English manuscript needs at least 5 paragraphs');
+ assert(completeZh(zh),row.sectionId+': Chinese manuscript ends mid-sentence');
+ assert(completeEn(en),row.sectionId+': English manuscript ends mid-sentence');
+ assert(zhParagraphs.every(completeZh),row.sectionId+': Chinese manuscript contains truncated paragraph');
+ assert(enParagraphs.every(completeEn),row.sectionId+': English manuscript contains truncated paragraph');
  assert(!/^\s*[-*•]/mu.test(zh),row.sectionId+': Chinese manuscript must not be bullet-led');
  assert(!/^\s*[-*•]/mu.test(en),row.sectionId+': English manuscript must not be bullet-led');
  zhChars+=zh.length;
