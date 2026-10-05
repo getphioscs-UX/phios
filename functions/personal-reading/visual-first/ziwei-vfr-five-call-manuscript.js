@@ -35,24 +35,15 @@ function forbiddenReason(text){
  return null;
 }
 
-function paragraphSchema(zh){
- return {type:'string',minLength:zh?45:90,maxLength:zh?420:760};
-}
-function localeSchema(locale){
- const zh=locale==='zhHans',p=paragraphSchema(zh);
+function localeManuscriptSchema(locale){
+ const zh=locale==='zhHans';
  return {
-  type:'object',additionalProperties:false,
-  required:['sectionThesis','structuralMechanism','livedScenarios','constructiveExpression','pressureDistortion','counterweight','timingOverlay','realityNavigation'],
-  properties:{
-   sectionThesis:{type:'string',minLength:zh?30:70,maxLength:zh?220:420},
-   structuralMechanism:{type:'array',minItems:2,maxItems:2,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
-   livedScenarios:{type:'array',minItems:3,maxItems:3,items:{type:'string',minLength:zh?30:65,maxLength:zh?170:320}},
-   constructiveExpression:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
-   pressureDistortion:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
-   counterweight:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?45:90,maxLength:zh?220:420}},
-   timingOverlay:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?35:75,maxLength:zh?190:360}},
-   realityNavigation:{type:'array',minItems:1,maxItems:1,items:{type:'string',minLength:zh?40:85,maxLength:zh?210:390}}
-  }
+  type:'string',
+  minLength:zh?700:1600,
+  maxLength:zh?2200:5200,
+  description:zh
+   ?'Write one coherent publication-quality Chinese Zi Wei Dou Shu chapter in 6-9 substantial paragraphs. Integrate structural mechanism, concrete lived situations, constructive expression, pressure distortion, counterweights, timing where admitted, and section-specific reality navigation naturally. Do not use headings or bullet lists inside the manuscript.'
+   :'Write one coherent publication-quality English Zi Wei Dou Shu chapter in 6-9 substantial paragraphs, semantically equivalent to the Chinese but naturally written in English. Integrate structural mechanism, concrete lived situations, constructive expression, pressure distortion, counterweights, timing where admitted, and section-specific reality navigation naturally. Do not use headings or bullet lists inside the manuscript.'
  };
 }
 export function buildZwrFiveCallBatchSchema(batchPack){
@@ -63,11 +54,11 @@ export function buildZwrFiveCallBatchSchema(batchPack){
   properties:{
    sections:{type:'array',minItems:ids.length,maxItems:ids.length,items:{
     type:'object',additionalProperties:false,
-    required:['sectionId','zhHans','en'],
+    required:['sectionId','zhHansManuscript','enManuscript'],
     properties:{
      sectionId:{type:'string',enum:ids},
-     zhHans:localeSchema('zhHans'),
-     en:localeSchema('en')
+     zhHansManuscript:localeManuscriptSchema('zhHans'),
+     enManuscript:localeManuscriptSchema('en')
     }
    }}
   }
@@ -107,33 +98,25 @@ export async function validateZwrFiveCallBatch({batchPack,output}={}){
 }
 export function projectFiveCallManuscriptToReportSections({pack,manuscriptSections}={}){
  const by=new Map(manuscriptSections.map(s=>[s.sectionId,s]));
+ const split=t=>String(t||'').split(/\n\s*\n/u).map(x=>x.trim()).filter(Boolean);
  return pack.sections.map(ps=>{
   const row=by.get(ps.sectionId);
   if(!row)throw Error('FIVE_CALL_SECTION_MISSING:'+ps.sectionId);
-  const project=(locale,src)=>({
-   headline:locale==='zhHans'?ps.titleZh:ps.titleEn,
-   subheadline:locale==='zhHans'?ps.purposeZh:ps.purposeEn,
-   keyInsights:[
-    {label:locale==='zhHans'?'结构主轴':'Structural axis',text:src.sectionThesis},
-    {label:locale==='zhHans'?'现实场景':'Lived scenarios',text:src.livedScenarios.join(' ')},
-    {label:locale==='zhHans'?'压力与制衡':'Pressure & counterweight',text:[...src.pressureDistortion,...src.counterweight].join(' ')}
-   ],
-   interpretation:[
-    ...src.structuralMechanism,
-    ...src.constructiveExpression,
-    ...src.livedScenarios,
-    ...src.pressureDistortion,
-    ...src.counterweight,
-    ...src.timingOverlay,
-    ...src.realityNavigation
-   ],
-   manuscript:src
-  });
+  const project=(locale,text)=>{
+   const paragraphs=split(text);
+   return {
+    headline:locale==='zhHans'?ps.titleZh:ps.titleEn,
+    subheadline:locale==='zhHans'?ps.purposeZh:ps.purposeEn,
+    keyInsights:[],
+    interpretation:paragraphs,
+    manuscript:text
+   };
+  };
   return {
    sectionId:ps.sectionId,
    authorityRefs:ps.claims.map(c=>c.claimId),
-   zhHans:project('zhHans',row.zhHans),
-   en:project('en',row.en)
+   zhHans:project('zhHans',row.zhHansManuscript),
+   en:project('en',row.enManuscript)
   };
  });
 }
