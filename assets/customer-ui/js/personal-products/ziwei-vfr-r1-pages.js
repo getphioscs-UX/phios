@@ -1,6 +1,7 @@
 import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
 
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sanitizeDisplay=v=>String(v??'').replace(/[\uFDD0-\uFDEF\uFFFE\uFFFF]/gu,'-').replace(/\s+-\s+/g,' - ').trim();
+const esc=v=>sanitizeDisplay(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const STAR={
  TAI_YIN:['太阴','Tai Yin'],TIAN_KUI:['天魁','Tian Kui'],TIAN_FU:['天府','Tian Fu'],TIAN_MA:['天马','Tian Ma'],ZI_WEI:['紫微','Zi Wei'],
  DI_JIE:['地劫','Di Jie'],LING_XING:['铃星','Ling Xing'],TIAN_JI:['天机','Tian Ji'],PO_JUN:['破军','Po Jun'],QING_YANG:['擎羊','Qing Yang'],
@@ -66,7 +67,7 @@ function transformations(data){
 function focus(data){
  const ps=Array.isArray(data.palaces)?data.palaces:(data.palace?[data.palace]:[]);
  const stars=data.stars||[],rels=data.relationships||[],tx=data.transformations||[];
- const palaceCards=ps.map(p=>card(bi(PAL,p.palaceCode),p.branch||'—',(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true})).join('');
+ const palaceCards=ps.map(p=>card(bi(PAL,p.palaceCode),branch(p.branch),(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true,valueHtml:true})).join('');
  const starCloud='<section class="zv-focus-band"><h4>星曜 / Stars</h4><div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span>'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></section>';
  const relCloud=rels.length?'<section class="zv-focus-band"><h4>宫位联动 / Palace links</h4><div class="zv-rel-tags">'+rels.slice(0,10).flatMap(r=>(r.to||[]).map(to=>'<span>'+esc(pair(PAL,r.from)[0])+' ↔ '+esc(pair(PAL,to)[0])+'</span>')).join('')+'</div></section>':'';
  const txCloud=tx.length?'<section class="zv-focus-band"><h4>相关四化 / Relevant transformations</h4>'+transformations({transformations:tx})+'</section>':'';
