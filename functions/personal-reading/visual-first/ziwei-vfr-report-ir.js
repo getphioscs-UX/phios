@@ -12,38 +12,34 @@ const FORBIDDEN=[
 
 function stringsForLocale(localized){
  return [
-  localized?.headline,localized?.subheadline,
-  ...(localized?.keyInsights||[]).flatMap(x=>[x?.label,x?.text]),
-  ...(localized?.interpretation||[])
+  localized?.coreMeaning,
+  localized?.livedExpression,
+  localized?.counterweight,
+  localized?.navigation
  ].filter(Boolean).map(String);
 }
 function sectionClaims(packSection){return new Set((packSection?.claims||[]).map(c=>c.claimId));}
 export function buildZwrVfrProviderSchema(pack){
  const allRefs=[...new Set(pack.sections.flatMap(s=>s.claims.map(c=>c.claimId)))];
- const localized=locale=>{
+ const semantic=locale=>{
   const zh=locale==='zhHans';
+  const max=zh?90:160;
   return {
    type:'object',additionalProperties:false,
-   required:['headline','subheadline','keyInsights','interpretation'],
+   required:['coreMeaning','livedExpression','counterweight','navigation'],
    properties:{
-    headline:{type:'string',minLength:1,maxLength:zh?24:50},
-    subheadline:{type:'string',minLength:1,maxLength:zh?40:80},
-    keyInsights:{type:'array',minItems:3,maxItems:3,items:{type:'object',additionalProperties:false,required:['label','text'],properties:{label:{type:'string',minLength:1,maxLength:zh?12:20},text:{type:'string',minLength:1,maxLength:zh?50:90}}}},
-    interpretation:{type:'array',minItems:2,maxItems:2,items:{type:'string',minLength:20,maxLength:zh?100:180}}
+    coreMeaning:{type:'string',minLength:12,maxLength:max},
+    livedExpression:{type:'string',minLength:12,maxLength:max},
+    counterweight:{type:'string',minLength:12,maxLength:max},
+    navigation:{type:'string',minLength:12,maxLength:max}
    }
   };
  };
- const thesis=locale=>{
-  const zh=locale==='zhHans';
-  return {type:'object',additionalProperties:false,required:['headline','summary'],properties:{headline:{type:'string',minLength:1,maxLength:zh?28:60},summary:{type:'string',minLength:1,maxLength:zh?120:220}}};
- };
  return {
   type:'object',additionalProperties:false,
-  required:['reportThesis','sections','closingSummary'],
+  required:['sections'],
   properties:{
-   reportThesis:{type:'object',additionalProperties:false,required:['zhHans','en'],properties:{zhHans:thesis('zhHans'),en:thesis('en')}},
-   sections:{type:'array',minItems:10,maxItems:10,items:{type:'object',additionalProperties:false,required:['sectionId','authorityRefs','zhHans','en'],properties:{sectionId:{type:'string',enum:[...ZWR_VFR_SECTION_IDS]},authorityRefs:{type:'array',minItems:1,maxItems:8,items:{type:'string',enum:allRefs}},zhHans:localized('zhHans'),en:localized('en')}}},
-   closingSummary:{type:'object',additionalProperties:false,required:['zhHans','en'],properties:{zhHans:{type:'array',minItems:3,maxItems:3,items:{type:'string',minLength:1,maxLength:60}},en:{type:'array',minItems:3,maxItems:3,items:{type:'string',minLength:1,maxLength:110}}}}
+   sections:{type:'array',minItems:10,maxItems:10,items:{type:'object',additionalProperties:false,required:['sectionId','authorityRefs','zhHans','en'],properties:{sectionId:{type:'string',enum:[...ZWR_VFR_SECTION_IDS]},authorityRefs:{type:'array',minItems:1,maxItems:8,items:{type:'string',enum:allRefs}},zhHans:semantic('zhHans'),en:semantic('en')}}}
   }
  };
 }
@@ -63,8 +59,7 @@ export async function validateZwrVfrProviderOutput({pack,output}={}){
    const body=stringsForLocale(localized).join('\n');
    if(!body.trim())reasons.push('REPORT_IR_TEXT_REQUIRED:'+row.sectionId+':'+locale);
    if(FORBIDDEN.some(re=>re.test(body)))reasons.push('FORBIDDEN_CUSTOMER_ASSERTION:'+row.sectionId+':'+locale);
-   if((localized?.keyInsights||[]).length<3||(localized?.keyInsights||[]).length>5)reasons.push('REPORT_IR_INSIGHT_COUNT:'+row.sectionId+':'+locale);
-   if((localized?.interpretation||[]).length<2||(localized?.interpretation||[]).length>3)reasons.push('REPORT_IR_INTERPRETATION_COUNT:'+row.sectionId+':'+locale);
+   for(const key of ['coreMeaning','livedExpression','counterweight','navigation'])if(!String(localized?.[key]||'').trim())reasons.push('REPORT_IR_SEMANTIC_FIELD_REQUIRED:'+row.sectionId+':'+locale+':'+key);
   }
  }
  const seed={schemaVersion:'ZWR-VFR-R1-DETERMINISTIC-GUARD-v1',accepted:reasons.length===0,reasons:[...new Set(reasons)]};
@@ -73,15 +68,47 @@ export async function validateZwrVfrProviderOutput({pack,output}={}){
 export async function createZwrVfrReportIr({pack,providerOutput,usage}={}){
  const guard=await validateZwrVfrProviderOutput({pack,output:providerOutput});
  if(!guard.accepted)throw Object.assign(new Error('ZWR_VFR_DETERMINISTIC_GUARD_REJECTED'),{details:guard});
+ const labels={
+  zhHans:['核心结构','现实表现','反向与制衡'],
+  en:['Core structure','Lived expression','Counterweight']
+ };
+ const sections=providerOutput.sections.map(row=>{
+  const ps=pack.sections.find(s=>s.sectionId===row.sectionId);
+  const project=(locale,source)=>({
+   headline:locale==='zhHans'?ps.titleZh:ps.titleEn,
+   subheadline:locale==='zhHans'?ps.purposeZh:ps.purposeEn,
+   keyInsights:[
+    {label:labels[locale][0],text:source.coreMeaning},
+    {label:labels[locale][1],text:source.livedExpression},
+    {label:labels[locale][2],text:source.counterweight}
+   ],
+   interpretation:[
+    source.coreMeaning+' '+source.livedExpression,
+    source.counterweight+' '+source.navigation
+   ]
+  });
+  return {
+   sectionId:row.sectionId,
+   authorityRefs:row.authorityRefs,
+   zhHans:project('zhHans',row.zhHans),
+   en:project('en',row.en)
+  };
+ });
  const seed={
   schemaVersion:ZWR_VFR_REPORT_IR_VERSION,
   methodId:'ZWR',
   localeMode:'BILINGUAL',
   subjectBinding:pack.subjectBinding,
   authorityDigest:pack.authorityDigest,
-  reportThesis:providerOutput.reportThesis,
-  sections:providerOutput.sections,
-  closingSummary:providerOutput.closingSummary,
+  reportThesis:{
+   zhHans:{headline:'紫微斗数结构总览',summary:sections.map(s=>s.zhHans.keyInsights[0].text).join('；')},
+   en:{headline:'Zi Wei Dou Shu Structural Overview',summary:sections.map(s=>s.en.keyInsights[0].text).join('; ')}
+  },
+  sections,
+  closingSummary:{
+   zhHans:sections.slice(-3).map(s=>s.zhHans.interpretation[1]),
+   en:sections.slice(-3).map(s=>s.en.interpretation[1])
+  },
   providerUsage:usage,
   visualFirst:true,
   maxPhysicalPages:50,
