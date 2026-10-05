@@ -6,21 +6,19 @@ import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../..
 import {planVfrProviderBudget,assertVfrLiveAllowed,assertVfrCallCount} from './report-provider-budget.js';
 import {buildZwrVfrProviderSchema,createZwrVfrReportIr} from './ziwei-vfr-report-ir.js';
 
-export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v2';
+export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v3';
 const MAX_OUTPUT_TOKENS=VFR_BILINGUAL_SINGLE_CALL_V1.maxOutputTokens;
 
 function systemPrompt(){
  return [
-  'You write one complete bilingual visual-first Zi Wei Dou Shu customer report interpretation in a single response.',
+  'You generate bilingual Zi Wei Dou Shu semantic content only. PHI OS owns all presentation structure and diagrams.',
   'The supplied Compact Authoring Pack is the complete authority. Do not calculate the chart and do not invent technical facts.',
-  'Use professional Zi Wei terminology, then translate it into concise lived meaning. Avoid generic psychology and avoid star-by-star glossary prose.',
-  'Return both zhHans and en for every section in this one call. Do not split generation by locale or by section.',
-  'Each section must contain exactly 3 short key insights, exactly 2 compact interpretation paragraphs, and two very short diagram captions in each language.'
-  'Diagrams, diagram data, technical captions, visual labels, page placement and palace connections are deterministic PHI OS responsibilities. Do not generate, describe, or redesign diagrams.'
-  'Preserve unknowns. Do not predict guaranteed events, diagnose illness, give transaction-level financial advice, or expose internal workflow language.',
-  'Use authorityRefs only from the supplied section claims. References license the interpretation but must not be shown in customer prose.',
-  'The finished physical report is limited to 50 pages and is diagram-led. Stay well below every schema maxLength; prioritize dense professional meaning over prose volume. Do not write long essays.'
-  'Return JSON only.'
+  'For each supplied section return exactly four semantic fields in zhHans and en: coreMeaning, livedExpression, counterweight, navigation.',
+  'Use professional Zi Wei terminology and concrete lived meaning. Avoid generic psychology, star-by-star glossary prose, and workflow language.',
+  'Do not decide headlines, subheadlines, insight counts, paragraph counts, captions, diagram content, diagram labels, page structure or layout. PHI OS projects those deterministically.',
+  'Preserve unknowns. Do not predict guaranteed events, diagnose illness, or give transaction-level financial advice.',
+  'Use authorityRefs only from the supplied section claims.',
+  'Keep every semantic field compact and information-dense. Return JSON only.'
  ].join('\n');
 }
 function modelRecord(){
