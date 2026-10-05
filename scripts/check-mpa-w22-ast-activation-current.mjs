@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { BASELINE, readJson, sha256File } from './lib/method-production-activation/mpa-ast-activation-v1.mjs';
@@ -73,7 +74,7 @@ for (const fixture of timezoneFixtures.fixtures) {
 assert.equal(timezoneFixtures.fixtureRole, 'HOST_RUNTIME_SMOKE_NOT_AUTHORITY_PROOF');
 
 for (const item of regression.fingerprints) assert.equal(sha256File(item.path), item.sha256, `AST_W22_REGRESSION_DRIFT:${item.path}`);
-const pkg = readJson('package.json');
+const pkg = effectivePackageScripts(readJson('package.json'));
 for (const alias of regression.checkerAliases) {
   const command = pkg.scripts[alias]; assert.ok(command?.startsWith('node '), `AST_CHECKER_ALIAS_MISSING:${alias}`);
   const run = spawnSync(process.execPath, [command.slice('node '.length)], {cwd:process.cwd(), encoding:'utf8'});

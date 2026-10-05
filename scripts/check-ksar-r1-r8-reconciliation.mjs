@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -120,7 +121,7 @@ assert.equal(freeze.acceptance.all448HumanReadabilityReviewsComplete,true);
 assert.equal(freeze.acceptance.reviewedCorpusPromotionComplete,true);
 assert.deepEqual(freeze.productionBlockers,['REMOTE_R2_GET_SHA256_VERIFICATION_PENDING']);
 
-const pkg=json('package.json');
+const pkg=effectivePackageScripts(json('package.json'));
 assert.equal(pkg.scripts['check:ksar-r1-r8'],'node scripts/check-ksar-r1-r8-reconciliation.mjs');
 assert(pkg.scripts.check.includes('npm run check:ksar-r1-r8'));
 assert.equal(pkg.scripts['ksar:review'],'node scripts/build-ksar-manuscript-review-projection.mjs');

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -74,7 +75,7 @@ const [
   readJson('content/knowledge/registry/assets.json'),
   readJson('content/knowledge/registry/themes.json'),
   readJson('content/knowledge/registry/sources.json'),
-  readJson('package.json'),
+  effectivePackageScripts(readJson('package.json')),
   read('assets/js/pages/article.js'),
   read('assets/js/knowledge/published-content.js')
 ]);
@@ -229,7 +230,7 @@ assert.deepEqual(
   [...frozenKnowledgeRegistryFiles].sort()
 );
 assert.equal(registrySchemas.length, 12);
-assert.equal(migrationFiles.length, 10); // Shared person/material successors; article authority is unchanged.
+assert.equal(migrationFiles.length, 12); // Shared person/material successors; article authority is unchanged.
 assert.equal(contract.preservation.canonicalNodeCount, blueprint.prefaceCanonicalNodes);
 assert.equal(
   contract.preservation.canonicalThemeCount,

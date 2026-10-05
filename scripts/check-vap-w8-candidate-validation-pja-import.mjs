@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -285,7 +286,7 @@ try {
   fs.rmSync(tempRoot, { recursive: true, force: true });
 }
 
-const packageJson = read('package.json');
+const packageJson = effectivePackageScripts(read('package.json'));
 assert.equal(packageJson.scripts['build:vap-w8'], 'node scripts/build-vap-w8-candidate-validation-pja-import.mjs');
 assert.equal(packageJson.scripts['vap:w8:import'], 'node scripts/import-vap-w8-batch-candidates-to-pja.mjs');
 assert.equal(packageJson.scripts['check:vap-w8'], 'node scripts/check-vap-w8-candidate-validation-pja-import.mjs');

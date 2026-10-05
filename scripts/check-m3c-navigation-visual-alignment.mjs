@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -242,7 +243,7 @@ for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   );
 }
 
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['check:m3c-navigation-visual-alignment'],
   'node scripts/check-m3c-navigation-visual-alignment.mjs'

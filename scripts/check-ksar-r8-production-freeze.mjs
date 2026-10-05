@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -14,7 +15,7 @@ const predecessor=json('content/knowledge/source-access/freeze/ksar-r1-r8-reconc
 const closure=json('content/knowledge/review/ksar-r4-human-review-closure-v1.json');
 const reviewed=json('content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json');
 const verification=json('content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json');
-const pkg=json('package.json');
+const pkg=effectivePackageScripts(json('package.json'));
 
 assert.equal(freeze.schemaVersion,'PHI-OS-KSAR-R8-PRODUCTION-FREEZE-v1.0.0');
 assert.equal(freeze.stage,'KSAR-R8');

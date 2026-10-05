@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=p=>fs.readFileSync(p,'utf8');const json=p=>JSON.parse(read(p));
@@ -53,7 +54,7 @@ assert.match(read('functions/reality-orchestration/reality-orchestrator.js'),/au
 assert.match(css,/cx-graph-boundary/);assert.match(css,/cx-cross-perspective-compare/);assert.match(css,/cx-source-boundary-list/);assert.match(css,/@media\(max-width:620px\)/);
 assert.equal(iconRecon.authorityBoundary.pagePrivateIconAuthorityForbidden,true);assert.equal(iconRecon.forbiddenNewIdentities.includes('PERSPECTIVE_NOT_FACT'),true);assert.equal(html.includes('PHIOS-ICON-PERSPECTIVE-NOT-FACT'),false);
 assert.equal(campaign.status,'PENDING_REAL_BROWSER_AND_HUMAN_REVIEW');assert.equal(campaign.claims.realBrowserAccepted,false);assert.equal(campaign.claims.humanVisualAccepted,false);
-const packageJson=json('package.json');const globalCheck=packageJson.scripts.check,r3Index=globalCheck.indexOf('npm run check:cx-r12r3b'),r4Index=globalCheck.indexOf('npm run check:cx-r12r4');assert(r3Index>=0&&r4Index>r3Index,'CX-R12R4 must remain the current global CX successor after CX-R12R3B even when later independent method gates follow');assert(packageJson.scripts['check:cx-r12r4'].startsWith('npm run check:cx-r12r3b &&'),'CX-R12R4 must preserve R12R3B predecessor gate');
+const packageJson=effectivePackageScripts(json('package.json'));const globalCheck=packageJson.scripts.check,r3Index=globalCheck.indexOf('npm run check:cx-r12r3b'),r4Index=globalCheck.indexOf('npm run check:cx-r12r4');assert(r3Index>=0&&r4Index>r3Index,'CX-R12R4 must remain the current global CX successor after CX-R12R3B even when later independent method gates follow');assert(packageJson.scripts['check:cx-r12r4'].startsWith('npm run check:cx-r12r3b &&'),'CX-R12R4 must preserve R12R3B predecessor gate');
 assert.equal(acceptance.work,'CX-R12R4-W0-W19');assert.equal(acceptance.claims.sourceAccepted,true);assert.equal(acceptance.claims.realBrowserAccepted,false);assert.equal(acceptance.claims.humanVisualAccepted,false);assert.equal(acceptance.claims.fullProduction,false);
 console.log('✓ CX-R12R4 W10–W19 source completion passed.');
 console.log(pprR3SpecialistHost?'  Historical R12R4 graph/structure/pattern/context/reality/source contracts and P2 assets remain source-accepted while the frozen PPR-R3 specialist host owns the current customer result surface; W18 historical browser/human claims remain unchanged.':'  Governed graph/structure/pattern/context/reality/source layers, explicit handoff context, responsive P2 figures and claim authority typing are source-accepted; W18 real-browser + human visual acceptance remains pending.');

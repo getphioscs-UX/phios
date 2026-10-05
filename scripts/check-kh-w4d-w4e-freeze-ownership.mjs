@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -45,7 +46,7 @@ for (let index = 1; index <= 13; index += 1) {
   assert.equal(lineage.canonicalIdentityRetained, true);
 }
 
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['knowledge:freeze'],
   'node scripts/knowledge-blueprints-freeze.mjs write'

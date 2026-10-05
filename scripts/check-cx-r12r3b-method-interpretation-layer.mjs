@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -184,7 +185,7 @@ const acceptedR12R4Successor=api.includes('buildAcceptedMethodCustomerResult')&&
 assert(developmentSurface||acceptedR12R4Successor,'customer API must consume the R12R3B development result or an admitted R12R4 presentation successor');
 assert.equal(html.includes('legacy.css'),false);assert.equal(html.includes('DETERMINISTIC badge'),false);assert.equal(graphClient.includes('placeholder interpretation'),false);
 
-const packageJson=read('package.json');
+const packageJson=effectivePackageScripts(read('package.json'));
 assert.equal(packageJson.scripts['check:cx-r12r3b'],'node scripts/check-cx-r12r3b-method-interpretation-layer.mjs');
 const r12r4Aggregate=packageJson.scripts['check:cx-r12r4'];assert(typeof r12r4Aggregate==='string'&&r12r4Aggregate.startsWith('npm run check:cx-r12r3b &&'),'CX-R12R4 successor must preserve CX-R12R3B as its first aggregate gate');const globalCheck=packageJson.scripts.check;const r3Index=globalCheck.indexOf('npm run check:cx-r12r3b'),r4Index=globalCheck.indexOf('npm run check:cx-r12r4');assert(r3Index>=0&&r4Index>r3Index,'CX-R12R4 successor aggregate must remain after the explicit CX-R12R3B gate; later independent production gates may follow it');
 assert.equal(acceptance.claims.humanAccepted,false);assert.equal(acceptance.claims.liveBrowserAccepted,false);assert.equal(acceptance.claims.fullProduction,false);

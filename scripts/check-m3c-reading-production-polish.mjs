@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -27,7 +28,7 @@ const [
   read('assets/js/locales/en/reading.js'),
   read('assets/js/locales/zh-Hans/reading.js'),
   read('content/registry/m3c-reading-experience.json').then(JSON.parse),
-  read('package.json').then(JSON.parse)
+  effectivePackageScripts(read('package.json')).then(JSON.parse)
 ]);
 
 assert.match(atlasEn, /title: 'Reading Science'/);

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -318,7 +319,7 @@ assert.equal(registry.boundaries.runtimeTimelineOverwriteAllowed, false);
 assert.equal(registry.boundaries.externalReaderRequiredActionAllowed, false);
 assert.deepEqual(registry.responsiveAcceptance, [360, 768, 1440]);
 
-const packageJson = await json('package.json');
+const packageJson = await effectivePackageScripts(json('package.json'));
 assert.equal(
   packageJson.scripts[
     'check:m4b-professional-revision-navigation-follow-up'

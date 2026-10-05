@@ -242,4 +242,3 @@ export function buildPatternRuntime(extraction, request, patternRegistry) {
   result.patternRuntimeDigest = stableDigest(result);
   return deepFreeze(result);
 }
-

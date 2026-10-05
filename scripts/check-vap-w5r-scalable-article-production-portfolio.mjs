@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -107,7 +108,7 @@ assert.equal(p4004.portfolioState, 'EXPLICIT_NON_ARTICLE_WAVE_OUTPUT');
 assert.equal(p4004.productionDecision.productionRole, 'MULTI_ASSET');
 assert.equal(p4004.productionDecision.articleIntent, false);
 
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(packageJson.scripts['build:vap-w5r'], 'node scripts/build-vap-w5r-scalable-article-production-portfolio.mjs');
 assert.equal(packageJson.scripts['check:vap-w5r'], 'node scripts/check-vap-w5r-scalable-article-production-portfolio.mjs');
 assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-b') || packageJson.scripts.postcheck.includes('npm run check:vap-w5r'));

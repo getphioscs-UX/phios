@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -9,7 +10,7 @@ import {getEcrCanonicalOntology} from '../functions/embodied-configuration/ecr-o
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const deltaReceiptPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-r4-d11-earth-delta-owner-acceptance-v1.json';
 const reviewPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json',casesPath='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-cases-v1.json',machinePath='content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json',admissionPath='content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json';
-const review=read(reviewPath),cases=read(casesPath),machine=read(machinePath),deltaReceipt=read(deltaReceiptPath),admissionAuthority=read(admissionPath),acceptance=read('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r5-acceptance-v1.json'),pkg=read('package.json');
+const review=read(reviewPath),cases=read(casesPath),machine=read(machinePath),deltaReceipt=read(deltaReceiptPath),admissionAuthority=read(admissionPath),acceptance=read('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r5-acceptance-v1.json'),pkg=effectivePackageScripts(read('package.json'));
 const dims=['methodFidelityAccepted','customerClarityAccepted','nonFortuneTellingBoundaryAccepted','lineageAccepted'];
 assert.equal(review.status,'HUMAN_REVIEW_COMPLETE');assert.equal(review.requiredCaseCount,48);assert.equal(review.acceptedCaseCount,48);assert.equal(review.rejectedCaseCount,0);assert.equal(review.pendingCaseCount,0);assert(review.aggregateAttestation);assert.equal(review.results.length,48);assert.equal(new Set(review.results.map(x=>x.caseId)).size,48);review.results.forEach((x,i)=>{assert.equal(x.caseId,cases.cases[i].caseId);for(const d of dims)assert.equal(x[d],true);assert.equal(x.reviewCaseDigest,cases.cases[i].reviewCaseDigest);assert(x.reviewerRef);assert(x.reviewedAt)});assert.equal(deltaReceipt.decision,'ACCEPT');assert.equal(deltaReceipt.correction.driver,'D11');assert.equal(deltaReceipt.correction.identity,'Earth');assert.equal(deltaReceipt.correction.canonicalRole,'Embodiment');assert.equal(deltaReceipt.correction.retiredMeaning,'Recovery');
 assert.equal(machine.caseCount,64);for(const v of Object.values(machine.assertions))assert.equal(v,true);

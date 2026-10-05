@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import {
   BASELINE,
@@ -311,7 +312,7 @@ const cpr = readJson(
 );
 assert.deepEqual(cpr.productionRecords, []);
 
-const pkg = readJson('package.json');
+const pkg = effectivePackageScripts(readJson('package.json'));
 assert.equal(
   pkg.scripts['check:wpr-w20'],
   'node scripts/check-wpr-w20-reality-journey-production.mjs'

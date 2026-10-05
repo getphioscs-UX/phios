@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -88,7 +89,7 @@ for (const boundary of contract.legacyCompatibility) {
   }
 }
 
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['check:pws-i1-t07'],
   'node scripts/check-pws-i1-t07-canonical-errors.mjs'

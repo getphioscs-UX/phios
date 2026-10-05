@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -37,7 +38,7 @@ const [
   readJson('content/knowledge/migrations/five-volume-migration-contract-v1.json'),
   readJson('content/knowledge/blueprints/blueprint-registry.json'),
   readJson('content/knowledge/registry/nodes.json'),
-  readJson('package.json'),
+  effectivePackageScripts(readJson('package.json')),
   read('docs/audits/BOOK-W1-five-volume-migration.md'),
   read('docs/audits/BOOK-W0-four-volume-migration.md'),
   read('content/knowledge/authoring/freeze/kau-r0-five-volume-baseline-freeze-v1.json')

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -23,7 +24,7 @@ const [contract20, registry20, audit20, contract21, acceptance, activation, carP
   readJson('content/professional/canonical-asset-runtime/registries/asset-media-registry-v1.json'),
   readJson('content/registry/public-assets.json'),
   readJson('content/knowledge/articles/zh-Hans/why-phi-os-is-needed.json'),
-  readJson('package.json'),
+  effectivePackageScripts(readJson('package.json')),
   read('assets/js/knowledge/article-renderer.js'),
   read('assets/js/knowledge/article-assets.js')
 ]);

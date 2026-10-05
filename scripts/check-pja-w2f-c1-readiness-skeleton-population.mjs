@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -13,7 +14,7 @@ import { loadPjaBlueprintContext } from './lib/knowledge-production/blueprint-co
 
 const root = process.cwd();
 const readJson = async (base, relative) => JSON.parse(await fs.readFile(path.join(base, relative), 'utf8'));
-const pkg = await readJson(root, 'package.json');
+const pkg = await effectivePackageScripts(readJson(root, 'package.json'));
 assert.equal(pkg.scripts['check:pja-w2f-c1'], 'npm run check:pja-w2f-c0 && node scripts/check-pja-w2f-c1-readiness-skeleton-population.mjs');
 assert.equal(pkg.scripts['knowledge:sync-readiness'], 'node scripts/sync-pja-w2f-c1-readiness-skeletons.mjs');
 assert.equal(pkg.scripts['knowledge:validate-readiness-skeletons'], 'node scripts/validate-pja-w2f-c1-readiness-skeletons.mjs');

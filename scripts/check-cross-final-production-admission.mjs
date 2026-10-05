@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
@@ -31,5 +32,5 @@ await assert.rejects(()=>maybeBuildProductionCombinedReading({acceptedMethodRead
 const api=fs.readFileSync('functions/api/customer-personal-reality.js','utf8');
 assert.match(api,/runtime-reading\/cross-reading-production\.js/);assert.match(api,/maybeBuildProductionCombinedReading/);assert.match(api,/selected\.length>=2&&selected\.length<=5/);assert.match(api,/buildReadingView\(\{methods:readingMethods,selectedCount:selected\.length,calculationCount:projections\.length,locale,combinedReading\}\)/);assert.match(api,/combinedReading:combinedReady\?combinedReading/);
 const ui=fs.readFileSync('assets/customer-ui/js/surfaces/personal-reality.js','utf8');assert.match(ui,/view\?\.reading\?\.combinedReading/);assert.match(ui,/PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2\.0\.0/);assert.match(ui,/combined\.claims/);assert.doesNotMatch(ui,/results\.length!==4/);
-const pkg=j('package.json');assert.match(pkg.scripts.check,/check:cross-final-production-admission/);assert.doesNotMatch(pkg.scripts.check,/check:cross-r2-w24-w26-pre-admission/);
+const pkg=effectivePackageScripts(j('package.json'));assert.match(pkg.scripts.check,/check:cross-final-production-admission/);assert.doesNotMatch(pkg.scripts.check,/check:cross-r2-w24-w26-pre-admission/);
 console.log('✓ R2-W26 Cross final production gate passed: W24 64/64 machine + W25 36/36 human; 2–5 method production builder deterministic; customer combinedReading API + governed renderer cutover active; Current Reality remains separately gated.');

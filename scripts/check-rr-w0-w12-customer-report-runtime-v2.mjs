@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -36,7 +37,7 @@ const nextRev=createReportRevision(custReleased,fixtures.revised); assert.equal(
 assert.throws(()=>assembleReport({...fixtures['customer-only'],revision:createInitialRevision('BAD','1.0.0','2026-08-11T05:00:00Z'),sections:[{sectionCode:'READOUT',content:'invented',sourceReferences:fixtures['customer-only'].sections.find(x=>x.sectionCode==='READOUT').sourceReferences}]},sectionReg),/RR_SECTION_SEMANTIC_CONTENT_FORBIDDEN/);
 const acceptance=j(`${base}/acceptance/rr-v2-acceptance-v1.json`); assert.deepEqual(acceptance.cases,['customer-only','professional','revised','low-confidence','metric-unavailable']); const freeze=j(`${base}/freeze/rr-v2-freeze-v1.json`); assert.equal(freeze.status,'RR-v2.0.0-FROZEN'); assert.deepEqual(freeze.completedWorks,Array.from({length:13},(_,i)=>`RR-W${i}`)); for(const file of freeze.frozenOutputs) assert.ok(exists(file),`RR_FREEZE_OUTPUT_MISSING:${file}`);
 const schema=j(`${base}/schemas/canonical-report-v2.schema.json`); for(const field of contract.requiredFields) assert.ok(schema.required.includes(field)); assert.equal(schema.properties.dataType.const,'REPORT_RECORD');
-const pkg=j('package.json'); assert.equal(pkg.scripts['check:rr-w0-w12'],'node scripts/check-rr-w0-w12-customer-report-runtime-v2.mjs'); assert.equal(pkg.scripts['check:rr'],'npm run check:rr-w0-w12'); const postCommands=pkg.scripts.postcheck.split(/\s*&&\s*/).map(x=>x.trim()).filter(Boolean); const rrePostIndex=postCommands.indexOf('npm run check:rre'), rrPostIndex=postCommands.indexOf('npm run check:rr'); assert.ok(rrePostIndex>=0&&rrPostIndex>rrePostIndex);
+const pkg=effectivePackageScripts(j('package.json')); assert.equal(pkg.scripts['check:rr-w0-w12'],'node scripts/check-rr-w0-w12-customer-report-runtime-v2.mjs'); assert.equal(pkg.scripts['check:rr'],'npm run check:rr-w0-w12'); const postCommands=pkg.scripts.postcheck.split(/\s*&&\s*/).map(x=>x.trim()).filter(Boolean); const rrePostIndex=postCommands.indexOf('npm run check:rre'), rrPostIndex=postCommands.indexOf('npm run check:rr'); assert.ok(rrePostIndex>=0&&rrPostIndex>rrePostIndex);
 console.log('✓ RR v2 W0-W12 Customer Report Runtime passed.');
 console.log('✓ REPORT_RECORD assembly, Candidate → Review → Approval → Release → Revision, and CPR/LRM handoffs are governed and fail closed.');
 console.log('✓ RR creates no Knowledge, Meaning, Professional Judgment, Readout, Metric, Professional Approval, CPR rendering or LRM persistence.');

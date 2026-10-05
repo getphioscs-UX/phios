@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -36,7 +37,7 @@ assert.equal(actual.effects.candidateCreated, false);
 assert.equal(actual.effects.providerInvoked, false);
 assert.equal(actual.effects.publicationCreated, false);
 
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(packageJson.scripts['knowledge:export-brief'], 'node scripts/export-knowledge-production-brief.mjs');
 assert.equal(packageJson.scripts['build:vap-w5'], 'node scripts/build-vap-w5-pja-production-brief-export-acceptance.mjs');
 assert.equal(packageJson.scripts['check:vap-w5'], 'node scripts/check-vap-w5-pja-production-brief-export.mjs');

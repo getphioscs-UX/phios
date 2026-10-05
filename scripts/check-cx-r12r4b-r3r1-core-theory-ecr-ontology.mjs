@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { GRAMMAR_CODES, GRAMMAR_REGISTRY } from '../functions/runtime/formation/grammar-registry.js';
@@ -14,7 +15,7 @@ const config=readJson('content/embodied-configuration/ecr-environment-first-conf
 const source=readJson('content/embodied-configuration/ecr-founder-reference-authority-v1.json');
 const acceptance=readJson('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r3r1-acceptance-v1.json');
 const hexagrams=readJson('content/professional/core-method-runtime/iching-hexagram-registry-v1.json');
-const pkg=readJson('package.json');
+const pkg=effectivePackageScripts(readJson('package.json'));
 
 const expectedGrammar=[
   ['G1','Difference','差异'],['G2','Constraint','约束'],['G3','Structure','结构'],['G4','Field','场域'],

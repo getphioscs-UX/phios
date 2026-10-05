@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -5,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { C3_CONTRACT, C3_INDEX, C3_SUMMARY, resolveProductionReadiness, validateProductionReadiness } from './lib/knowledge-readiness/universal-production-readiness.mjs';
 
 const root = process.cwd(), read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
-const pkg = read('package.json');
+const pkg = effectivePackageScripts(read('package.json'));
 assert.equal(pkg.scripts['check:pja-w2f-c3'], 'npm run check:pja-w2f-c2 && node scripts/check-pja-w2f-c3-universal-production-readiness.mjs');
 assert.equal(pkg.scripts['knowledge:assess-production-readiness'], 'node scripts/assess-book-i-production-readiness.mjs');
 assert.equal(pkg.scripts['knowledge:apply-production-readiness'], 'node scripts/apply-book-i-production-readiness.mjs');

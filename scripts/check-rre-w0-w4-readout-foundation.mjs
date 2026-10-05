@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -37,7 +38,7 @@ const masterWork = readJson('content/governance/canonical-master-work/registries
 const runtimeInventory = readJson('content/governance/operational-architecture/runtime-inventory-v1.json');
 const rdgDataContracts = readJson('content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json');
 const rmoEvidenceContract = readJson('content/runtime/reality-model-runtime/contracts/evidence-binding-runtime-contract-v1.json');
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 
 assert.equal(audit.baselineCommit, '1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7');
 assert.equal(audit.status, 'reconciled_with_legacy_evidence_compatibility');

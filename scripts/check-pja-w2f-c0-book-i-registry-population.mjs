@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -23,7 +24,7 @@ const paths = {
 const read = relative => fs.readFile(path.join(root, relative), 'utf8');
 const readJson = async relative => JSON.parse(await read(relative));
 const [pkg, blueprint, policy, nodes, localized, collections, themes, sources, supporting, nodeSchema] = await Promise.all([
-  readJson('package.json'),
+  effectivePackageScripts(readJson('package.json')),
   readJson(historicalBlueprintPath),
   readJson(paths.policy),
   readJson(paths.nodes),

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {resolveEcrCoordinateFromSolarLongitude} from '../functions/embodied-configuration/ecr-calculation-runtime.js';
@@ -8,7 +9,7 @@ import {createMethodInterpretationInput,createMethodInterpretationCandidate,proj
 import {resolveCustomerCompositionAdmission} from '../functions/interpretation-runtime/customer-composition-admission-resolver-v1.js';
 import {getEcrCanonicalOntology} from '../functions/embodied-configuration/ecr-ontology-registry.js';
 
-const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));const spec=read('content/embodied-configuration/ecr-calculation-spec-v1.json'),meaning=read('content/embodied-configuration/meaning/ecr-atomic-meaning-registry-v1.json'),campaign=read('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json'),review=read('content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json'),acceptance=read('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-acceptance-v1.json'),pkg=read('package.json');
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));const spec=read('content/embodied-configuration/ecr-calculation-spec-v1.json'),meaning=read('content/embodied-configuration/meaning/ecr-atomic-meaning-registry-v1.json'),campaign=read('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json'),review=read('content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json'),acceptance=read('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-acceptance-v1.json'),pkg=effectivePackageScripts(read('package.json'));
 assert.equal(spec.status,'FROZEN_FOR_DETERMINISTIC_PROJECTION');assert.equal(spec.anchor.engine,'ASTRONOMY_ENGINE_JS');assert.equal(spec.anchor.engineVersion,'2.1.19');assert.equal(spec.boundaries.externalHumanDesignAuthorityConsumed,false);assert.equal(spec.boundaries.currentRealityPriorityClaimed,false);
 assert.deepEqual(Object.fromEntries(Object.entries(spec.layerRules).map(([k,v])=>[k,v.count||null])),{CC12:12,G16:16,Q16:null,R9:null,D12:12,M8:8,H64:64,A8:8});assert.equal(Object.keys(spec.questionCapabilityMatrix).length,16);
 const ontology=getEcrCanonicalOntology();assert.equal(ontology.boundary.calculationImplemented,true);assert.equal(ontology.boundary.customerMeaningCreated,true);assert.equal(ontology.boundary.customerPublicationAdmitted,true);

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -112,7 +113,7 @@ const invalid = structuredClone(decisions); invalid.entries[0].reviewerCode = 'C
 assert.equal(validateDecisionEnvelope(invalid, reviewQueue, { requireAllDecided: true }).valid, false);
 const authorityBefore = await snapshotAuthorityDigests(root); const authorityAfter = await snapshotAuthorityDigests(root); assert.deepEqual(authorityAfter, authorityBefore);
 
-const pkg = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'));
+const pkg = effectivePackageScripts(JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8')));
 assert.equal(pkg.scripts['check:vap-w9'], 'node scripts/check-vap-w9-human-editorial-review-candidate-promotion.mjs');
 assert.equal(pkg.scripts['vap:w9:apply'], 'node scripts/apply-vap-w9-human-editorial-review-candidate-promotion.mjs --apply');
 console.log('✓ VAP-W9 Human Editorial Review & Candidate Promotion passed after explicit TL decisions.');

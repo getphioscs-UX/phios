@@ -6,8 +6,9 @@ import {renderProfileFreePaid} from '../assets/customer-ui/js/visuals/profile-fr
 const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
 const mvp=json('content/product-visual-platform-r1/profile/mvp/pvp-r1-vis-w8-profile-visual-mvp-v1.json');
-assert.deepEqual(PROFILE_VISUAL_MVP_IDS,['PFIG-001','PFIG-003','PFIG-005','PFIG-009']);
-assert.deepEqual(mvp.implemented,PROFILE_VISUAL_MVP_IDS);
+assert.deepEqual(PROFILE_VISUAL_MVP_IDS,Object.keys(json('content/product-visual-platform-r1/profile/pfig-authority-admission-v1.json').pfigStates));
+assert.deepEqual(mvp.implemented,['PFIG-001','PFIG-003','PFIG-005','PFIG-009']);
+assert(mvp.implemented.every(id=>PROFILE_VISUAL_MVP_IDS.includes(id)));
 const customerOutput={
   sourceScopedDimensions:[{sourceKey:'CUSTOMER_SELF_REPORT::PHI',sourceClass:'CUSTOMER_SELF_REPORT',providerFamily:'PHI',dimensions:[{signalRef:'S1',domainId:'SELF_REGULATION',facetId:'PLANNING',value:{normalizedSelfReportIndex:72},assessmentDate:'2026-09-10',provenance:[]}]}],
   tensionSignals:[{kind:'CROSS_SOURCE_TENSION',id:'T1',statement:'A tension remains visible',signalRefs:['S1']}],
@@ -20,8 +21,8 @@ const html=renderProfileVisualMvp(projection,{locale:'en'});
 for(const id of PROFILE_VISUAL_MVP_IDS)assert.match(html,new RegExp(`data-pfig="${id}"`));
 const wrapper=renderProfileFreePaid({level:'FREE_SNAPSHOT',freeSnapshot:projection,locked:[{level:'DEEP_PROFILE',preview:'deeper'}],commerce:{offerResolved:false}},{locale:'en'});
 assert.match(wrapper,/data-pvp-profile-depth="W9"/);
-assert.match(wrapper,/What deeper Profile adds/);
-assert.match(wrapper,/commerce authority/);
+assert.match(wrapper,/What deeper Personal Evidence adds/);
+assert.doesNotMatch(wrapper,/commerce authority|href="[^"]*(?:checkout|account\/\?product)/i);
 const freePaid=read('assets/customer-ui/js/visuals/profile-free-paid.js');
 assert.match(freePaid,/renderProfileVisualMvp/);
 const surface=read('assets/customer-ui/js/surfaces/profile-progressive.js');

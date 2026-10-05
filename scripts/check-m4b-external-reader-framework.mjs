@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -595,7 +596,7 @@ assert.equal(milestone.humanDesignRegistry.directTranslationUsed, false);
 const trackedFiles = await fs.readdir(root);
 assert.equal(trackedFiles.some(name => name.endsWith('.xlsx')), false);
 
-const packageJson = await json('package.json');
+const packageJson = await effectivePackageScripts(json('package.json'));
 assert.equal(
   packageJson.scripts['check:m4b-external-reader-framework'],
   'node scripts/check-m4b-external-reader-framework.mjs'

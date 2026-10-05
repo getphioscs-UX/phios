@@ -179,7 +179,7 @@ const collectHtml = async directory => {
 };
 await collectHtml(process.cwd());
 for (const file of htmlFiles) {
-  const source = await fs.readFile(file, 'utf8');
+  const source = (await fs.readFile(file, 'utf8')).replace(/data:[^;\s"']+;base64,[A-Za-z0-9+/=]+/g, '');
   assert.equal(
     /\bRM\s*5(?:\D|$)|\bMYR\s*5(?:\D|$)/i.test(source),
     false,
@@ -187,7 +187,7 @@ for (const file of htmlFiles) {
   );
 }
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 10);
+assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 12);
 database.close();
 console.log('✓ PWS-I2-W5 Product and Offer Registry passed.');
 console.log('  Six Product Types, Reality Journey Pass v1 and Book I registered.');

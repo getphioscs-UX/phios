@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -12,7 +13,7 @@ const freeze=json(successor.historicalFreeze.path);
 const acceptance=json('content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json');
 const handoff=json('content/professional/method-client-delivery/registries/mcd-8-guided-reading-consumption-handoff-v1.json');
 const mpa=json('content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json');
-const pkg=json('package.json');
+const pkg=effectivePackageScripts(json('package.json'));
 
 assert.equal(successor.status,'ACTIVE_CURRENT_MCD8_AUTHORITY_PRESERVED_PRESENTATION_DECOUPLED');
 assert.equal(sha(successor.predecessor.path),successor.predecessor.sha256,'MCD8_CURRENT_MIR4_HISTORICAL_EVIDENCE_DRIFT');

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -56,7 +57,7 @@ for (const entry of actual.entries) {
   assert.equal(entry.governanceGates.boundaryFrozen, true, `${entry.nodeCode}: C2 boundary`);
 }
 
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(packageJson.scripts['build:vap-w4r'], 'node scripts/build-vap-w4r-article-execution-eligibility-reconciliation.mjs');
 assert.equal(packageJson.scripts['check:vap-w4r'], 'node scripts/check-vap-w4r-article-execution-eligibility-reconciliation.mjs');
 assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-b') || packageJson.scripts.postcheck.includes('npm run check:vap-w4r'));

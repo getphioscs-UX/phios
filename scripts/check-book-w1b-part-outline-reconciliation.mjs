@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -30,7 +31,7 @@ const [
   read('content/knowledge/registry/nodes.json'),
   read('content/knowledge/blueprints/blueprint-registry.json'),
   readJson('content/knowledge/migrations/five-volume-migration-contract-v1.json'),
-  readJson(SOURCE_AUTHORITY_PATH), readJson('package.json'), read(REVIEW_SUMMARY_PATH),
+  readJson(SOURCE_AUTHORITY_PATH), effectivePackageScripts(readJson('package.json')), read(REVIEW_SUMMARY_PATH),
   readJson(R5_FREEZE_PATH), buildBookW1BOutlineMigrationMaps(root)
 ]);
 

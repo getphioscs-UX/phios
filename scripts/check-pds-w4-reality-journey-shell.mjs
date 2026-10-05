@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 
@@ -90,7 +91,7 @@ assert.equal(
   './pds-w4-reality-journey-shell-contract.json'
 );
 
-const packageJson = await json('package.json');
+const packageJson = await effectivePackageScripts(json('package.json'));
 assert.equal(
   packageJson.scripts['check:pds-w4'],
   'node scripts/check-pds-w4-reality-journey-shell.mjs'

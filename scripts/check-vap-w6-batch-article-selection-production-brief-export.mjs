@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -145,7 +146,7 @@ const w5Activation = readJson('content/production/visual-article/activation/vap-
 const exporterSource = fs.readFileSync(path.join(root, 'scripts/export-knowledge-production-brief.mjs'), 'utf8');
 assert.equal(`sha256:${sha(exporterSource)}`, w5Activation.sourceDigests['scripts/export-knowledge-production-brief.mjs'], 'Existing PJA exporter must remain byte-equivalent to the W5 accepted exporter.');
 
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(packageJson.scripts['build:vap-w6'], 'node scripts/build-vap-w6-batch-article-selection-production-brief-export.mjs');
 assert.equal(packageJson.scripts['vap:batch:export-briefs'], 'node scripts/export-vap-w6-batch-production-briefs.mjs');
 assert.equal(packageJson.scripts['check:vap-w6'], 'node scripts/check-vap-w6-batch-article-selection-production-brief-export.mjs');

@@ -97,5 +97,8 @@ export async function commerceApi(context,action){
     await attachCommerceCheckout(env,order,session);
     commerceLog('CHECKOUT_CREATED',{order_id:order.checkout_attempt_id,checkout_session_id:session.id,product_id:product.productId,amount_minor:order.amount_minor,currency:'MYR'});
     return json({success:true,orderId:order.checkout_attempt_id,checkoutUrl:session.url},201);
-  }catch(error){return commerceError(error,'commerce_request_failed');}
+  }catch(error){
+    if(error.message==='PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED')Object.assign(error,{status:422,code:'PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED'});
+    return commerceError(error,'commerce_request_failed');
+  }
 }

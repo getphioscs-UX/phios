@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -116,7 +117,7 @@ const [
   readJson('content/knowledge/registry/localized-content.json'),
   readJson('content/knowledge/registry/assets.json'),
   readJson('content/knowledge/registry/sources.json'),
-  readJson('package.json'),
+  effectivePackageScripts(readJson('package.json')),
   read('assets/js/pages/article.js'),
   read('assets/js/knowledge/article-renderer.js'),
   read('assets/js/knowledge/article-blocks.js'),

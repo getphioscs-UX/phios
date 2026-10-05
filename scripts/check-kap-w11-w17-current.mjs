@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -37,7 +38,7 @@ const p1Deleted = fs.existsSync(p1DeletePath) && read(p1DeletePath).status === '
 for (const path of Object.values(paths)) assert.ok(fs.existsSync(path), `MISSING:${path}`);
 if (p1Deleted) assert.ok(fs.existsSync(p1PresentationSuccessorPath), `MISSING:${p1PresentationSuccessorPath}`);
 
-const pkg = read(paths.package);
+const pkg = effectivePackageScripts(read(paths.package));
 for (const step of ['11', '12', '13', '14', '15', '16', '17']) {
   const alias = `check:kap-w${step}`;
   const command = pkg.scripts[alias];

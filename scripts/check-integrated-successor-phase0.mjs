@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -163,7 +164,7 @@ for (const [path,digest] of Object.entries(freeze.artifactDigests)) {
 }
 for (const boundary of Object.values(freeze.boundaries)) assert.equal(boundary,false,'PHASE0_FREEZE_BOUNDARY_DRIFT');
 
-const pkg = read(paths.package);
+const pkg = effectivePackageScripts(read(paths.package));
 assert.equal(pkg.scripts['check:integrated-phase0'],'node scripts/check-integrated-successor-phase0.mjs');
 assert.ok(pkg.scripts.check.includes('npm run check:integrated-phase0'),'FULL_CHECK_MISSING_INTEGRATED_PHASE0');
 assert.equal(pkg.scripts['check:kap-answer'],'node scripts/check-kap-w11-w17-current.mjs');

@@ -3,8 +3,9 @@ import {REPORT_DELIVERY_METHODS,REPORT_ACCESS_STATES} from '../functions/report-
 import {resolveReportAccess} from '../functions/report-delivery/report-access-resolver.js';
 import {resolveReportRoute} from '../functions/report-delivery/report-route-resolver.js';
 import {buildReportDeliveryEnvelope} from '../functions/report-delivery/report-delivery-envelope.js';
-assert.equal(REPORT_DELIVERY_METHODS.length,8);
-assert.equal(new Set(REPORT_DELIVERY_METHODS.map(p=>p.commerceProductId)).size,8);
+assert.equal(REPORT_DELIVERY_METHODS.length,7);
+assert.equal(new Set(REPORT_DELIVERY_METHODS.map(p=>p.commerceProductId)).size,7);
+assert(!REPORT_DELIVERY_METHODS.some(p=>p.methodId==='PROFILE'), 'Retired method Profile must not become a new delivery method');
 assert(REPORT_DELIVERY_METHODS.every(p=>p.commerceProductId&&!p.productionActive&&!p.humanAccepted));
 const context={env:{PHIOS_ENVIRONMENT:'qa'},data:{}};
 let calls=0;
@@ -24,4 +25,4 @@ assert.equal((await resolveReportAccess({methodId:'BZR',locale:'en',context:{...
 const locked=await resolveReportAccess({methodId:'BZR',locale:'en',context,previewLocked:true},{loadEntitlement:async()=>null});assert.equal(locked.state,'LOCKED');assert.equal(resolveReportRoute({access:locked}),'PUBLICATION_LOCKED');
 assert(!('sourceProduct' in locked));
 assert.deepEqual(REPORT_ACCESS_STATES,['FREE','LOCKED','ENTITLED','UNAVAILABLE','DATA_REQUIRED']);
-console.log('PASS: shared delivery mapping/access/routes; eight existing products; BaZi-only QA pilot; no global cutover; no new entitlement authority.');
+console.log('PASS: shared delivery mapping/access/routes; seven active method products; legacy Profile excluded; BaZi-only QA pilot; no global cutover; no new entitlement authority.');

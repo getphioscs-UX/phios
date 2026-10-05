@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -57,7 +58,7 @@ await fs.mkdir(temporary, { recursive: true });
 try {
   const [packageJson, report, editorialContract, sourceRegistry] =
     await Promise.all([
-      readJson('package.json'),
+      effectivePackageScripts(readJson('package.json')),
       read(reportPath),
       readJson('docs/pja/pja-w2a-canonical-article-editorial-contract-v1.json'),
       readJson('content/knowledge/registry/sources.json')

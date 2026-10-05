@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import {BASELINE,readJson,readText} from './lib/web-production/wpr-integrity-v1.mjs';
 const c=readJson('content/web-production/contracts/wpr-privacy-security-production-v1.json');assert.equal(c.baselineCommit,BASELINE);assert.equal(c.work,'WPR-W26');assert.equal(c.status,'ACTIVE_FAIL_CLOSED_RESPONSE_BOUNDARY');assert.equal(c.rules.robotsIsNotAuthorization,true);assert.equal(c.rules.headersDoNotGrantDataAccess,true);assert.equal(c.rules.wprDoesNotCreateConsent,true);assert.equal(c.rules.wprDoesNotChangeRetention,true);
@@ -9,5 +10,5 @@ for(const route of ['/reality-dashboard*','/personal-runtime*','/professional-wo
 const asset=readText('assets/js/runtime/web-production/asset-resolver.js');assert.ok(asset.includes("url.protocol !== 'https:'"));assert.ok(asset.includes('url.username || url.password || url.search || url.hash'));
 const audit=readJson('content/web-production/audits/wpr-w26-security-header-reconciliation-v1.json');assert.equal(audit.resolution.arbitraryHttpsImageWildcardAdded,false);assert.equal(audit.authorityExpansionGranted,false);
 const a=readJson('content/web-production/acceptance/wpr-w26-privacy-security-acceptance-v1.json');assert.equal(a.baselineCommit,BASELINE);for(const v of Object.values(a.nonActivation))assert.equal(v,false);
-const pkg=readJson('package.json');assert.equal(pkg.scripts['check:wpr-w26'],'node scripts/check-wpr-w26-privacy-security-production.mjs');assert.equal(pkg.scripts['check:wpr-security'],'npm run check:wpr-w26');assert.ok(pkg.scripts['check:wpr'].includes('npm run check:wpr-security'));assert.equal(pkg.scripts.postcheck.includes('check:wpr'),false);
+const pkg=effectivePackageScripts(readJson('package.json'));assert.equal(pkg.scripts['check:wpr-w26'],'node scripts/check-wpr-w26-privacy-security-production.mjs');assert.equal(pkg.scripts['check:wpr-security'],'npm run check:wpr-w26');assert.ok(pkg.scripts['check:wpr'].includes('npm run check:wpr-security'));assert.equal(pkg.scripts.postcheck.includes('check:wpr'),false);
 console.log('✓ WPR-W26 Privacy / Security Production Boundary passed.');console.log('  Private routes are no-store/noindex and CSP narrowly reconciles Google Fonts plus governed R2/getphios image origins.');

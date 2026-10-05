@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -12,7 +13,7 @@ const materialization = read('content/knowledge/manuscripts/materialization/book
 const inventory = read('content/knowledge/manuscripts/extraction/book-3-full-section-inventory-v1.json');
 const integrity = read('content/knowledge/manuscripts/extraction/book-3-section-integrity-v1.json');
 const admission = read('content/knowledge/knowledge-intelligence-r2/registries/kir-r2-book-i-iii-source-admission-v1.json');
-const packageJson = read('package.json');
+const packageJson = effectivePackageScripts(read('package.json'));
 
 assert.equal(contract.stage, 'KAU-R6D');
 assert.equal(contract.status, 'REVIEW_WORKFLOW_READY_HUMAN_DECISIONS_PENDING');

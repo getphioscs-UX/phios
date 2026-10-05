@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -209,7 +210,7 @@ try {
   fs.rmSync(tempRoot, { recursive: true, force: true });
 }
 
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(packageJson.scripts['build:vap-w7'], 'node scripts/build-vap-w7-governed-provider-generation.mjs');
 assert.equal(packageJson.scripts['vap:provider:generate'], 'node scripts/run-vap-w7-governed-provider-generation.mjs');
 assert.equal(packageJson.scripts['check:vap-w7'], 'node scripts/check-vap-w7-governed-provider-generation.mjs');

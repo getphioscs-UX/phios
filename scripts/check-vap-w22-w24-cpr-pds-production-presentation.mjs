@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -87,7 +88,7 @@ const [
   readJson(paths.tokenRegistry),
   read(paths.tokensCss),
   read(paths.articlePdsCss),
-  readJson(paths.pkg),
+  effectivePackageScripts(readJson(paths.pkg)),
   read(paths.canonicalRegistry),
   readJson(paths.retrievalProjectionSuccessor)
 ]);

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -605,7 +606,7 @@ assert.doesNotMatch(
   'M4A-W7 must not contain a public client file URL'
 );
 
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['check:m4a-professional-data-privacy'],
   'node scripts/check-m4a-professional-data-privacy.mjs'

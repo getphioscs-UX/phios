@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -129,7 +130,7 @@ for (const [file, expected] of Object.entries(registry.frozenArtifacts)) {
   assert.equal(await sha256(file), expected, `Frozen M3C-W7 artifact changed: ${file}`);
 }
 
-const packageJson = await json('package.json');
+const packageJson = await effectivePackageScripts(json('package.json'));
 assert.equal(
   packageJson.scripts['check:m3c-review'],
   'node scripts/check-m3c-review.mjs'

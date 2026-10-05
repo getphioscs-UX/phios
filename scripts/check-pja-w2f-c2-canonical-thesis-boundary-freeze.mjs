@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -7,7 +8,7 @@ import { VAP_W6A_DECISIONS, VAP_W6A_NODE_CODES, resolveVapW6aEditorialApprovals 
 
 const root = process.cwd();
 const read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
-const pkg = read('package.json');
+const pkg = effectivePackageScripts(read('package.json'));
 assert.equal(pkg.scripts['check:pja-w2f-c2'], 'npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-canonical-thesis-boundary-freeze.mjs');
 assert.equal(pkg.scripts['knowledge:plan-book-i-thesis'], 'node scripts/plan-pja-w2f-c2-canonical-thesis-boundary.mjs');
 assert.equal(pkg.scripts['knowledge:apply-book-i-thesis'], 'node scripts/apply-pja-w2f-c2-canonical-thesis-boundary.mjs');

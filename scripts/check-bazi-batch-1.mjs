@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {projectBaziVisualReport} from '../functions/personal-reading/bazi-visual-report-projection.js';
@@ -26,7 +27,7 @@ const inconsistent=structuredClone(reading);inconsistent.professionalModules.fiv
 const changed=structuredClone(reading);changed.professionalModules.fiveElements.items[0].rawCount++;changed.professionalModules.fiveElements.rawInventory.total++;changed.professionalModules.fiveElements.items[0].breakdown.visibleStems++;
 assert.equal(project({reading:changed}).pages[3].visual.nodes[0].value,1);
 const css=fs.readFileSync('assets/customer-ui/surfaces/visual-report.css','utf8').split('/* BAZI-DYNAMIC-R1-BATCH-01')[1].split('/* END BAZI-DYNAMIC-R1-BATCH-01 */')[0];assert.deepEqual(reportCssErrors(css,registry),[]);
-const commands=JSON.parse(fs.readFileSync('package.json')).scripts.check.split('&&').map(s=>s.trim());
+const commands=effectivePackageScripts(JSON.parse(fs.readFileSync('package.json'))).scripts.check.split('&&').map(s=>s.trim());
 const w9='npm run check:ptrc:w9-testamentary-report',w10='npm run check:ptrc:w10-consolidation';
 assert.equal(commands.filter(s=>s===w9).length,1,'W9 must run exactly once');
 assert.equal(commands.filter(s=>s===w10).length,1,'W10 must run exactly once');

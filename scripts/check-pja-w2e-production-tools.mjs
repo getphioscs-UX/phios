@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -62,7 +63,7 @@ const protectedBaseline = new Map(await Promise.all(protectedFiles.map(async fil
 try {
   await fs.cp(fixtureSource, fixtures, { recursive: true });
   await normalizeTextTree(fixtures);
-  const packageJson = JSON.parse(await fs.readFile(path.join(root, 'package.json')));
+  const packageJson = effectivePackageScripts(JSON.parse(await fs.readFile(path.join(root, 'package.json'))));
   assert.equal(packageJson.scripts['knowledge:export-brief'], 'node scripts/export-knowledge-production-brief.mjs');
   assert.equal(packageJson.scripts['knowledge:validate-package'], 'node scripts/validate-canonical-article-package.mjs');
   assert.equal(packageJson.scripts['knowledge:import-package'], 'node scripts/import-canonical-article-package.mjs');

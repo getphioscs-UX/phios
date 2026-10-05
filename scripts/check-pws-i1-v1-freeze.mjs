@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -172,7 +173,7 @@ const requiredChecks = [
   'check-pws-i1-t08-directory-blueprint.mjs',
   'check-pws-i1-v1-freeze.mjs'
 ];
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 for (const check of requiredChecks) {
   assert(
     packageJson.scripts.precheck.includes(`node scripts/${check}`),

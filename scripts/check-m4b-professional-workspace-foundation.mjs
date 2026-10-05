@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -213,7 +214,7 @@ for (const [file, expected] of Object.entries(frozen)) {
   assert.equal(await sha256(file), expected, `Frozen boundary changed: ${file}`);
 }
 
-const packageJson = await json('package.json');
+const packageJson = await effectivePackageScripts(json('package.json'));
 assert.equal(
   packageJson.scripts['check:m4b-professional-workspace-foundation'],
   'node scripts/check-m4b-professional-workspace-foundation.mjs'

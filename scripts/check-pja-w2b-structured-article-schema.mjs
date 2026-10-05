@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -114,7 +115,7 @@ const [
   readJson('content/knowledge/registry/assets.json'),
   readJson('content/knowledge/registry/supporting-questions.json'),
   readJson('content/knowledge/registry/sources.json'),
-  readJson('package.json'),
+  effectivePackageScripts(readJson('package.json')),
   read('assets/js/pages/article.js'),
   read('assets/js/knowledge/article-blocks.js'),
   read('assets/js/knowledge/published-content.js'),
@@ -517,7 +518,7 @@ assert.equal(
 assert.equal(
   (await fs.readdir(path.join(root, 'db/migrations')))
     .filter(file => file.endsWith('.sql')).length,
-  10
+  12
 );
 
 const prefaceLocalized = localizedByNode.get('KN-PREFACE-001');

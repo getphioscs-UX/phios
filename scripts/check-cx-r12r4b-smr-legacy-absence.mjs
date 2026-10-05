@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -69,7 +70,7 @@ for(const file of scriptFiles){
 }
 for(const file of [...productionFiles,...scriptFiles])assert.doesNotMatch(path.basename(file),/smr-r2/i,`construction suffix remains in active filename: ${file}`);
 
-const pkg=read('package.json');
+const pkg=effectivePackageScripts(read('package.json'));
 for(const key of Object.keys(pkg.scripts||{}))assert.doesNotMatch(key,/smr-r2/i,`construction package script alias remains: ${key}`);
 assert.equal(pkg.scripts?.['check:cx-r12r4b:smr'],'node scripts/check-cx-r12r4b-smr.mjs');
 assert.ok(pkg.scripts?.check?.includes('npm run check:cx-r12r4b:smr'));

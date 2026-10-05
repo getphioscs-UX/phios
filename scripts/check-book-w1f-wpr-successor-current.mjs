@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -15,7 +16,7 @@ const materializationReconciliation = json('content/knowledge/migrations/book-w1
 const w30ReconciliationV1 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v1.json');
 const w30ReconciliationV2 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v2.json');
 const w30ReconciliationV3 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v3.json');
-const packageJson = json('package.json');
+const packageJson = effectivePackageScripts(json('package.json'));
 const currentSuccessorV2 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v2.json');
 const currentSuccessorV3 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v3.json');
 const currentSuccessorV4 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v4.json');

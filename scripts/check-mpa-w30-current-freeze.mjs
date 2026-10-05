@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -14,7 +15,7 @@ const mcd2 = json(`${base}/successors/mpa-w30-mcd2-adapter-successor-v1.json`);
 const mcd4 = json(`${base}/successors/mpa-w30-mcd4-execution-successor-v1.json`);
 const mcd5 = json(`${base}/successors/mpa-w30-mcd5-projection-successor-v1.json`);
 const mcdCurrent = json('content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json');
-const pkg = json('package.json');
+const pkg = effectivePackageScripts(json('package.json'));
 
 assert.equal(freeze.status, 'MPA-v1.0.0-FROZEN');
 assert.equal(manifest.status, 'FROZEN_CONTENT_PRESERVATION_MANIFEST');

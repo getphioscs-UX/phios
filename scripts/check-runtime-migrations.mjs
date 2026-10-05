@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -28,7 +29,7 @@ assert.equal(registry.status, 'active');
 assert.equal(registry.history_table, 'runtime_migration_history');
 assert.equal(registry.rules.immutable_after_deployment, true);
 assert.equal(registry.rules.schema_mismatch_forbidden, true);
-assert.equal(migrations.length, 10);
+assert.equal(migrations.length, 12);
 assert.equal(migrations[0].file, 'db/migrations/0001_platform_foundation.sql');
 assert.equal(migrations[1].file, 'db/migrations/0002_initial_runtime.sql');
 assert.equal(
@@ -96,7 +97,9 @@ assert.deepEqual(migrationFiles, [
   '0007_account_oidc_sessions.sql',
   '0008_financial_will_encrypted_drafts.sql',
   '0009_canonical_account_person.sql',
-  '0010_account_method_report_material.sql'
+  '0010_account_method_report_material.sql',
+  '0011_report_context_sequence_reservation.sql',
+  '0012_report_context_admission.sql'
 ]);
 
 const migratedDatabase = new DatabaseSync(':memory:');
@@ -109,11 +112,11 @@ const firstRun = await applyRuntimeMigrations({
   now: () => '2026-07-23T00:00:00.000Z'
 });
 assert.equal(firstRun.status, 'migrated');
-assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
 const history = await loadMigrationHistory(migratedAdapter);
-assert.equal(history.length, 10);
-assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+assert.equal(history.length, 12);
+assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 assert.deepEqual(history.map(row => row.checksum), migrations.map(item => item.checksum));
 assert.equal(planPendingMigrations(migrations, history).length, 0);
 
@@ -144,6 +147,22 @@ await assert.rejects(
   }),
   /Migration checksum mismatch/
 );
+
+// Verify an existing ten-migration database upgrades without rewriting its schema.
+const upgradeDatabase = new DatabaseSync(':memory:');
+enableSqliteNumberedParameterCompatibility(upgradeDatabase);
+const upgradeAdapter = createSqliteD1Adapter(upgradeDatabase);
+await applyRuntimeMigrations({db: upgradeAdapter, migrations: migrations.slice(0, 10)});
+const priorSchema = upgradeDatabase.prepare("SELECT name, sql FROM sqlite_schema WHERE type = 'table' ORDER BY name").all();
+const upgrade = await applyRuntimeMigrations({db: upgradeAdapter, migrations});
+assert.deepEqual(upgrade.applied.map(item => item.version), [11, 12]);
+for (const table of priorSchema) {
+  assert.equal(upgradeDatabase.prepare('SELECT sql FROM sqlite_schema WHERE name = ?').get(table.name).sql, table.sql);
+}
+assert.deepEqual(upgradeDatabase.prepare('PRAGMA table_info(report_context_records)').all().map(row => row.name),
+  ['record_id', 'owner_account_id', 'person_id', 'record_kind', 'object_key', 'payload_digest', 'created_at']);
+assert.equal((await applyRuntimeMigrations({db: upgradeAdapter, migrations})).applied.length, 0);
+upgradeDatabase.close();
 
 const canonicalDatabase = new DatabaseSync(':memory:');
 enableSqliteNumberedParameterCompatibility(canonicalDatabase);
@@ -217,7 +236,7 @@ const commerceManifest = JSON.parse(
 assert.equal(commerceManifest.migration, migrations[3].file);
 assert.equal(commerceManifest.schemaId, migrations[3].schema_id);
 
-const packageJson = JSON.parse(read('package.json'));
+const packageJson = effectivePackageScripts(JSON.parse(read('package.json')));
 assert(packageJson.scripts.check.includes('check-runtime-migrations.mjs'));
 assert.equal(
   packageJson.scripts['check:runtime-migrations'],

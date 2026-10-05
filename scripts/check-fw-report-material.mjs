@@ -36,7 +36,7 @@ for(const locale of ['en','zh-Hans']){
  // Independent consent subject for each locale test.
  database.exec("DELETE FROM runtime_artifacts WHERE artifact_type='RR_CONSENT_REFERENCE_V1' AND json_extract(payload,'$.client_id')='consent-owner'");
 }
-assert.equal(fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).length,10);
+assert.equal(fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).length,12);
 const qaContext=(body,overrides={})=>({...context(),env:{...env,FW_PREVIEW_ACCEPTANCE_FIXTURES:'enabled',ASSETS:{fetch:async()=>new Response(fontBytes)}},request:new Request('https://qa.phios-github.pages.dev/api/qa-fw-acceptance',{method:'POST',headers:{origin:'https://qa.phios-github.pages.dev'},body:JSON.stringify(body)}),...overrides});
 assert.equal((await previewAcceptance(qaContext({action:'materialize'},{env:{...env,PHIOS_ENVIRONMENT:'production'}}))).status,404);
 assert.equal((await previewAcceptance(qaContext({action:'materialize'},{data:{}}))).status,401);

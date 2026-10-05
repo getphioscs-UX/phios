@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -11,7 +12,7 @@ const bindings = read('content/knowledge/source-access/registries/manuscript-sec
 const corrections = read('content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json');
 const meta = read('content/knowledge/reconciliation/kau-r3/book-1-metadata-revision-candidates-v1.json');
 const blueprint = read('content/knowledge/blueprints/book-1-knowledge-blueprint.json');
-const pkg = read('package.json');
+const pkg = effectivePackageScripts(read('package.json'));
 const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
 const r5Active=fs.existsSync(r5Path);
 

@@ -1,7 +1,8 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {ROOT,readJson,sha256,assertEvidence} from './lib/knowledge-answer-projection/kap-foundation-v1.mjs';
-const pkg=readJson('package.json');
+const pkg=effectivePackageScripts(readJson('package.json'));
 const aliases=['check:kap-w0','check:kap-w1','check:kap-w2','check:kap-w3'];
 for(const a of aliases) assert.ok(pkg.scripts[a],`MISSING_SCRIPT:${a}`);
 const acceptance=readJson(`${ROOT}/acceptance/kap-w0-w3-authority-foundation-acceptance-v1.json`); const freeze=readJson(`${ROOT}/freeze/kap-w0-w3-authority-foundation-freeze-v1.json`);

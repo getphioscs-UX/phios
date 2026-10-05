@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -55,7 +56,7 @@ for (const code of ['KN-B1-P1-003', 'KN-B1-P4-003']) {
   assert.equal(entry.eligibilityStatus, 'WAVE1_SUPPORTING_OUTPUT_NOT_ARTICLE_ELIGIBLE');
 }
 
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(packageJson.scripts['build:vap-w4'], 'node scripts/build-vap-w4-node-production-eligibility.mjs');
 assert.equal(packageJson.scripts['check:vap-w4'], 'node scripts/check-vap-w4-node-production-eligibility.mjs');
 assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-w4'));

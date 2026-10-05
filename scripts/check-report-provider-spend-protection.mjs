@@ -1,10 +1,30 @@
+import {effectivePackageScripts,registeredCheckerCommandMatches} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
 const commands=JSON.parse(fs.readFileSync('config/reports/zero-cost-check-commands.json','utf8'));
 for(const key of ['precheck','check','postcheck','build:pages','check:pages-build'])assert(pkg.scripts[key].includes('run-zero-cost-regression.mjs'));
 assert.equal(process.env.REPORT_PROVIDER_LIVE_ALLOWED,'false');assert.equal(process.env.REPORT_ZERO_COST_REPLAY,'true');
+const effective = effectivePackageScripts(pkg);
+assert.equal(effective.scripts.check, commands.check);
+assert.equal(pkg.scripts.check, 'node scripts/run-zero-cost-regression.mjs check');
+assert.throws(() => effectivePackageScripts({scripts:{check:'node scripts/run-zero-cost-regression.mjs postcheck'}}), /ZERO_COST_ALIAS_MISMATCH/);
+assert.throws(() => effectivePackageScripts({scripts:{'check:missing-command':'node scripts/run-zero-cost-regression.mjs check:missing-command'}}), /ZERO_COST_COMMAND_MISSING/);
+assert(registeredCheckerCommandMatches('check:hdr-w0',effective.scripts['check:hdr-w0'],'node scripts/check-hdr-w0-human-design-runtime-foundation.mjs'));
+assert.equal(registeredCheckerCommandMatches('check:hdr-w0','node scripts/unregistered-checker.mjs','node scripts/check-hdr-w0-human-design-runtime-foundation.mjs'),false);
+const successors=JSON.parse(fs.readFileSync('config/reports/zero-cost-check-successors.json','utf8'));
+assert.equal(successors.historicalFreezesRewritten,false);
+assert.equal(successors.semanticAuthorityChanged,false);
+assert.equal(successors.productionAdmissionGranted,false);
+const textSha=p=>createHash('sha256').update(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n')).digest('hex');
+for(const record of successors.files){
+ assert.equal(textSha(record.historicalPath),record.historicalTextSha256,'FROZEN_CHECKER_DRIFT:'+record.historicalPath);
+ assert.equal(textSha(record.currentPath),record.currentTextSha256,'CHECK_SUCCESSOR_DRIFT:'+record.currentPath);
+ assert(record.commands.length);
+ for(const key of record.commands)assert(commands[key]?.includes(record.currentPath),'CHECK_SUCCESSOR_ROUTE_DRIFT:'+key);
+}
 const code=`import assert from 'node:assert/strict';import https from 'node:https';assert.equal(process.env.REPORT_PROVIDER_LIVE_ALLOWED,'false');assert.equal(process.env.REPORT_ZERO_COST_REPLAY,'true');await assert.rejects(()=>fetch('https://api.openai.com/v1/responses',{method:'POST'}),/ZERO_COST_REPLAY_NETWORK_BLOCKED/);await assert.rejects(()=>fetch('https://arbitrary-provider.invalid/compose',{method:'POST'}),/ZERO_COST_REPLAY_NETWORK_BLOCKED/);assert.throws(()=>https.request('https://api.openai.com/v1/responses',{method:'POST'}),/ZERO_COST_REPLAY_NETWORK_BLOCKED/);console.log('ZERO_COST_CHILD_PASS');`;
 const child=spawnSync(process.execPath,['--input-type=module','-e',code],{encoding:'utf8',env:{...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'true',OPENAI_API_KEY:'FAKE_NOT_A_CREDENTIAL'}});
 assert.equal(child.status,0,child.stderr);assert(child.stdout.includes('ZERO_COST_CHILD_PASS'));

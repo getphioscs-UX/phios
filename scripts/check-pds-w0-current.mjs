@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -51,7 +52,7 @@ const postFreezeRegistry = read(paths.postFreezeRegistry);
 const successor = read(paths.successor);
 const pxrResolverSuccessor = read(paths.pxrResolverSuccessor);
 const migrationRegistry = read(paths.migrationRegistry);
-const pkg = read(paths.package);
+const pkg = effectivePackageScripts(read(paths.package));
 
 assert.equal(contract.milestone, 'PDS-W0');
 assert.equal(contract.status, 'baseline-and-boundary-frozen');
@@ -222,8 +223,9 @@ assert.equal(successor.successorPolicy.baselineFileModificationOrDeletionForbidd
 assert.equal(pkg.scripts['check:pds-w0'], 'node scripts/check-pds-w0-baseline-boundary.mjs');
 assert.equal(pkg.scripts['check:pds-w0-current'], 'node scripts/check-pds-w0-current.mjs');
 assert.deepEqual(
-  pkg.scripts.precheck.split(' && ').slice(0, 2),
+  pkg.scripts.precheck.split(' && ').slice(0, 3),
   [
+    'npm run check:report-provider-spend-protection',
     'npm run check:cloudflare-function-import-compat',
     'node scripts/check-pds-w0-current.mjs'
   ],

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import {BASELINE,readJson,readText,exists} from './lib/web-production/wpr-integrity-v1.mjs';
 const c=readJson('content/web-production/contracts/wpr-hydration-runtime-v1.json');
@@ -15,6 +16,6 @@ for(const record of web.productionRecords){const matches=resolve(record);assert.
 const runtime=readText('assets/js/web-production/hydration-runtime.js');for(const marker of ['PUBLIC_CANONICAL_READ','WPR_HYDRATION_MUTATION_FORBIDDEN','WPR_HYDRATION_CROSS_ORIGIN_FORBIDDEN',"credentials:'same-origin'"])assert.ok(runtime.includes(marker),marker);for(const bad of ['localStorage','sessionStorage',"method:'POST'","method: 'POST'"])assert.equal(runtime.includes(bad),false,bad);
 const audit=readJson('content/web-production/audits/wpr-w24-hydration-integrity-audit-v1.json');assert.equal(audit.productionRecordCount,38);assert.equal(audit.authorityExpansionGranted,false);
 const a=readJson('content/web-production/acceptance/wpr-w24-hydration-runtime-acceptance-v1.json');assert.equal(a.baselineCommit,BASELINE);for(const v of Object.values(a.nonActivation))assert.equal(v,false);
-const pkg=readJson('package.json');assert.equal(pkg.scripts['check:wpr-w24'],'node scripts/check-wpr-w24-hydration-runtime.mjs');assert.equal(pkg.scripts['check:wpr-hydration'],'npm run check:wpr-w24');assert.ok(pkg.scripts['check:wpr'].includes('npm run check:wpr-hydration'));assert.equal(pkg.scripts.postcheck.includes('check:wpr'),false);
+const pkg=effectivePackageScripts(readJson('package.json'));assert.equal(pkg.scripts['check:wpr-w24'],'node scripts/check-wpr-w24-hydration-runtime.mjs');assert.equal(pkg.scripts['check:wpr-hydration'],'npm run check:wpr-w24');assert.ok(pkg.scripts['check:wpr'].includes('npm run check:wpr-hydration'));assert.equal(pkg.scripts.postcheck.includes('check:wpr'),false);
 for(const f of ['content/web-production/contracts/wpr-hydration-runtime-v1.json','content/web-production/registries/wpr-hydration-policy-registry-v1.json','assets/js/web-production/hydration-runtime.js'])assert.ok(exists(f),f);
 console.log('✓ WPR-W24 Hydration Runtime passed.');console.log('  Hydration is access-preserving, GET/same-origin bounded, private fail-closed and non-persistent.');

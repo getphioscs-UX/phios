@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -38,10 +39,10 @@ const W2E_R1_CHECK = 'check:pja-w2e-r1';
 const W2F_A_CHECK = 'check:pja-w2f-a';
 const W2F_B1_CHECK = 'check:pja-w2f-b1';
 const W2E_CHECKER = 'scripts/check-pja-w2e-production-tools.mjs';
-const W2E_R1_CHECKER = 'scripts/check-pja-w2e-r1-production-brief-hardening.mjs';
+const W2E_R1_CHECKER = 'scripts/check-pja-w2e-r1-production-brief-hardening-current.mjs';
 const W2F_A_CHECKER = 'scripts/check-pja-w2f-a-universal-production-readiness.mjs';
 
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['knowledge:init-readiness'],
   'node scripts/initialize-canonical-production-readiness.mjs'
@@ -436,7 +437,7 @@ function testCheckDependencyContract(scripts) {
       scripts: {
         ...validVariant,
         [W2E_R1_CHECK]:
-          `npm run ${W2F_A_CHECK} && node scripts/check-pja-w2e-r1-production-brief-hardening.mjs`
+          `npm run ${W2F_A_CHECK} && node scripts/check-pja-w2e-r1-production-brief-hardening-current.mjs`
       }
     },
     {
@@ -482,7 +483,7 @@ function testCheckDependencyContract(scripts) {
   const cyclicScripts = {
     ...validVariant,
     [W2E_R1_CHECK]:
-      `npm run ${W2F_A_CHECK} && node scripts/check-pja-w2e-r1-production-brief-hardening.mjs`
+      `npm run ${W2F_A_CHECK} && node scripts/check-pja-w2e-r1-production-brief-hardening-current.mjs`
   };
   assert.throws(
     () => assertAcyclicCheckGraph(buildCheckGraph(cyclicScripts)),

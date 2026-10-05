@@ -1,9 +1,10 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {BASELINE,ROOT,readJson,sha256,assertFile,assertEvidence,fakeAssetsEnv} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
 import {runKapGroundingPipeline} from '../functions/_lib/knowledge-answer-grounding.js';
 import {kapMaintenanceSuccessorSha} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
-const pkg=readJson('package.json');
+const pkg=effectivePackageScripts(readJson('package.json'));
 const aliases=['check:kap-w4','check:kap-w5','check:kap-w6','check:kap-w7','check:kap-w8','check:kap-w9','check:kap-w10'];
 for(const alias of aliases) assert.ok(pkg.scripts[alias],`MISSING_SCRIPT:${alias}`);
 const acceptance=readJson(`${ROOT}/acceptance/kap-w4-w10-knowledge-grounding-acceptance-v1.json`);

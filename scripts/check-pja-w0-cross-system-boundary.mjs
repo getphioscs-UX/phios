@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -82,7 +83,7 @@ const [
     ),
     readJson('docs/pws/architecture/pws-canonical-ownership-v1.json'),
     readJson('docs/pws/contracts/pws-directory-blueprint-v1.json'),
-    readJson('package.json')
+    effectivePackageScripts(readJson('package.json'))
   ]);
 
 assert.equal(freeze.freezeId, 'PJA-W0-v1.0.0-Frozen');
@@ -386,7 +387,9 @@ assert.deepEqual(migrationFiles, [
   '0007_account_oidc_sessions.sql',
   '0008_financial_will_encrypted_drafts.sql',
   '0009_canonical_account_person.sql',
-  '0010_account_method_report_material.sql'
+  '0010_account_method_report_material.sql',
+  '0011_report_context_sequence_reservation.sql',
+  '0012_report_context_admission.sql'
 ]);
 await assertRuntimePlaceholderBoundary();
 

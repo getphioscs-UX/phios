@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import {
@@ -112,7 +113,7 @@ assert.equal(comparison.status,'PASS_METHOD_SPECIFIC_REFERENCE_EVIDENCE');
 assert.equal(comparison.productionComparisonSatisfiedForMethodSpecificReadiness,true);
 
 // Execute every legacy BZR validation checker as regression evidence. Passing them does not promote legacy BZR to Production.
-const pkg=readJson('package.json');
+const pkg=effectivePackageScripts(readJson('package.json'));
 for(const alias of regression.checkerAliases){
   const command=pkg.scripts[alias]; assert.ok(command?.startsWith('node '),`BZR_CHECKER_ALIAS_MISSING:${alias}`);
   const run=spawnSync(process.execPath,[command.slice('node '.length)],{cwd:process.cwd(),encoding:'utf8'});

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -146,7 +147,7 @@ assert.equal(professional.decision,'BLOCKED_NO_PROFESSIONAL_HANDOFF_OR_RELEASE')
 assert.equal(professional.rules.sharedProfessionalRuntimeRequired,true); assert.equal(professional.rules.parallelHdrReleasePathAllowed,false);
 
 // Legacy HDR validation checkers are rerun as regression evidence; passing does not activate HDR.
-const pkg=readJson('package.json');
+const pkg=effectivePackageScripts(readJson('package.json'));
 for(const alias of regression.checkerAliases){
   const command=pkg.scripts[alias]; assert.ok(command?.startsWith('node '),`HDR_CHECKER_ALIAS_MISSING:${alias}`);
   const run=spawnSync(process.execPath,[command.slice('node '.length)],{cwd:process.cwd(),encoding:'utf8'});

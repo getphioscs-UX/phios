@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -281,7 +282,7 @@ for(const token of ['prepareExternalProfileIntake','collectExternalProfileEdits'
 for(const token of ['.cx-hd-intake-steps','.cx-hd-process-row','.cx-hd-canonical-chart','.cx-hd-confirm-field','.cx-hd-published-reading','.cx-hd-reading-section','.cx-hd-reality-prompts','.cx-hd-official-source','.cx-hd-recognition-status','.cx-hd-advanced-confirmation','.cx-hd-final-confirm'])assert(css.includes(token),`HD W3 style missing ${token}`);
 for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"','name="externalDefinedCenters"','name="externalOpenCenters"'])assert.equal(html.includes(forbidden),false,`Legacy normal structural field must remain absent: ${forbidden}`);
 
-const pkg=readJson('package.json');
+const pkg=effectivePackageScripts(readJson('package.json'));
 assert.equal(pkg.scripts['check:hd-pro-r2'],'node scripts/check-hd-pro-r2-w0-w10.mjs');
 assert(pkg.scripts.check.includes('npm run check:hd-pro-r2'));
 

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -23,7 +24,7 @@ const [
   readJson(W1D_SUCCESSOR_FREEZE_PATH), readJson(W1D_SUCCESSOR_AUTHORITY_PATH),
   readJson(W1D_ACCEPTANCE_PATH), readJson(W1D_ACTIVE_RECONCILIATION_PATH),
   readJson(W1D_ACTIVE_PUBLICATION_PATH), readJson(MIGRATION_CONTRACT_PATH),
-  readJson('package.json'), read('docs/audits/BOOK-W1D-canonical-registry-reconciliation.md'),
+  effectivePackageScripts(readJson('package.json')), read('docs/audits/BOOK-W1D-canonical-registry-reconciliation.md'),
   ...BOOK_SPECS.map(spec => readJson(`${W1D_SUCCESSOR_BLUEPRINT_ROOT}/${spec.successorFile}`))
 ]);
 

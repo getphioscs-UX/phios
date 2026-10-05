@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -10,7 +11,7 @@ const acceptance = j('content/professional/method-client-delivery/acceptance/mcd
 const prior = j('content/professional/method-production-activation/successors/mpa-w30-mcd5-projection-successor-v1.json');
 const current = j('content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json');
 const mcd7 = j('content/professional/method-client-delivery/contracts/mcd-7-personal-runtime-result-surface-contract-v1.json');
-const pkg = j('package.json');
+const pkg = effectivePackageScripts(j('package.json'));
 
 assert.equal(freeze.status, 'FROZEN_CORE_ISOLATED_CANONICAL_RESULT_INTERPRETATION_EXCLUDED_HDR_VALIDATION_ONLY');
 assert.equal(current.baselineCommit, 'a45d65851df55858fd9ea9c7f76a14d34ed915e6');

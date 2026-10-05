@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -110,7 +111,7 @@ const mixedApplied = await applyVapW10(root, mixed, { apply: true, targetRoot: t
 
 // AI/System cannot satisfy TL Human Approval authority.
 const invalid = makeApproveEnvelope(); invalid.entries[0].approverCode = 'ChatGPT'; invalid.entries[0].approverAuthority = 'AI'; assert.equal(validateApprovalDecisionEnvelope(invalid, queue, { requireAllDecided: true }).valid, false);
-const pkg = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8')); assert.equal(pkg.scripts['build:vap-w10'], 'node scripts/build-vap-w10-human-approval-production-article-package.mjs'); assert.equal(pkg.scripts['vap:w10:apply'], 'node scripts/apply-vap-w10-human-approval-production-article-package.mjs --apply'); assert.equal(pkg.scripts['check:vap-w10'], 'node scripts/check-vap-w10-human-approval-production-article-package.mjs'); const vapB = pkg.scripts['check:vap-b']; assert(vapB.includes('npm run check:vap-w10')); assert(vapB.includes('npm run check:vap-w11')); assert(vapB.indexOf('npm run check:vap-w10') < vapB.indexOf('npm run check:vap-w11')); if (vapB.includes('npm run check:vap-w12-w19')) assert(vapB.indexOf('npm run check:vap-w11') < vapB.indexOf('npm run check:vap-w12-w19'));
+const pkg = effectivePackageScripts(JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'))); assert.equal(pkg.scripts['build:vap-w10'], 'node scripts/build-vap-w10-human-approval-production-article-package.mjs'); assert.equal(pkg.scripts['vap:w10:apply'], 'node scripts/apply-vap-w10-human-approval-production-article-package.mjs --apply'); assert.equal(pkg.scripts['check:vap-w10'], 'node scripts/check-vap-w10-human-approval-production-article-package.mjs'); const vapB = pkg.scripts['check:vap-b']; assert(vapB.includes('npm run check:vap-w10')); assert(vapB.includes('npm run check:vap-w11')); assert(vapB.indexOf('npm run check:vap-w10') < vapB.indexOf('npm run check:vap-w11')); if (vapB.includes('npm run check:vap-w12-w19')) assert(vapB.indexOf('npm run check:vap-w11') < vapB.indexOf('npm run check:vap-w12-w19'));
 
 console.log('✓ VAP-W10 Human Approval & Production Article Package passed.');
 console.log(realHumanApprovalsApplied ? '✓ Real Batch 001 has 6/6 independent TL Human Approvals and 6/6 immutable Production Article Packages.' : '✓ Real Batch 001 has 6/6 accepted Human Reviews promoted to Approval Eligibility, with 0 Human Approvals and 0 Production Article Packages until explicit TL approval.');

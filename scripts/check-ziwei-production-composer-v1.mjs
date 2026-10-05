@@ -1,4 +1,4 @@
-import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import os from 'node:os';import path from 'node:path';import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 import {buildZiweiReportEvidence} from '../functions/personal-reading/narrative/ziwei-publication-adapter.js';
 import {buildZiweiFullReportSections} from '../functions/personal-reading/narrative/ziwei-full-report-sections.js';
 import {composeZiweiEditorialR2} from '../functions/personal-reading/narrative/ziwei-editorial-r2.js';
@@ -8,10 +8,22 @@ import {assertPublicationIrV2Preservation} from '../functions/personal-reading/n
 import {createReportSubjectPresentationFromAccountPerson} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
 import {validatePhysicalComposition} from '../functions/canonical-presentation-runtime/physical-composition-contract.js';
 import {ZIWEI_STAR_PROFILES as stars} from '../functions/personal-reading/narrative/ziwei-semantic-canon.js';
-const dir='docs/reports/ziwei/production-admission/zpa-v1',read=p=>JSON.parse(fs.readFileSync(p)),write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
-const baseline=read(dir+'/baseline.json');
+const dir='docs/reports/ziwei/production-admission/zpa-v1',outputDir=fs.mkdtempSync(path.join(os.tmpdir(),'phios-zpa-check-')),read=p=>JSON.parse(fs.readFileSync(p)),write=(p,v)=>fs.writeFileSync(p.replace(dir,outputDir),JSON.stringify(v,null,2)+'\n');
+const frozen=read('content/reports/ziwei/production-v1-acceptance.json');
+for(const [p,h] of Object.entries(frozen.files))assert.equal(createHash('sha256').update(fs.readFileSync(p)).digest('hex'),h,'Frozen V1 evidence changed: '+p);
+const baseline=read('config/reports/ziwei-production-v1-presentation-successor.json');
+const originalBaseline=read(dir+'/baseline.json');
+assert.deepEqual(Object.keys(baseline.files),Object.keys(originalBaseline.files));
 const presentationSuccessors=new Set(baseline.presentationSuccessors||[]);
+// Exact classification committed in dc298f52, moved out of accepted V1 evidence.
+assert.equal(createHash('sha256').update(fs.readFileSync('config/reports/ziwei-production-v1-presentation-successor.json','utf8').replace(/\r\n?/g,'\n')).digest('hex'),'9bfd070f2ac218273cf1f5917f8aadc09920340f66921cb4d279c500c0a6cd2f');
 const byteFrozenFiles=new Set(baseline.byteFrozenFiles||Object.keys(baseline.files).filter(p=>!presentationSuccessors.has(p)));
+for(const p of byteFrozenFiles)assert.equal(baseline.files[p],originalBaseline.files[p],'Frozen baseline hash replaced: '+p);
+for(const migration of baseline.migrations){
+ assert(presentationSuccessors.has(migration.file));
+ assert.equal(migration.fromSha256,originalBaseline.files[migration.file]);
+ assert.equal(migration.semanticAuthorityChanged,false);
+}
 for(const [p,d] of Object.entries(baseline.files)){
  if(presentationSuccessors.has(p)){
   assert(fs.existsSync(p),'Presentation successor missing: '+p);
@@ -51,17 +63,26 @@ assert(Object.values(variety).every(n=>n>1));
 // not claimed as additional real calculations or new semantic authority.
 const optional=[];
 for(const [name,mutate] of [['empty supporting palaces',e=>{e.placements=e.placements.filter(p=>!['TRAVEL','FRIENDS','SIBLINGS'].includes(p.palaceCode));}],['empty primary palace',e=>{e.placements=e.placements.filter(p=>p.palaceCode!=='HEALTH');}],['all optional placements absent',e=>{e.placements=[];}],['unknown dimension',e=>{e.placements=e.placements.map(p=>({...p,semanticDimensions:{coreFunction:'UNKNOWN',pressureMode:'UNKNOWN'}}));}],['unadmitted semantic records',e=>{e.placements=e.placements.map(p=>({...p,meaningAdmitted:false}));}],['unrecognized lookup key',e=>{e.placements[0].starCode='UNADMITTED_TEST_ONLY';}],['no transformations',e=>{e.transformations=[];}],['one transformation',e=>{e.transformations=e.transformations.slice(0,1);}],['unsupported modifier',e=>{e.transformations[0].transformationCode='UNADMITTED_TEST_ONLY';}],['Body absent',e=>{e.palaces=e.palaces.map(p=>({...p,isBodyPalace:false}));}],['timing absent',e=>{e.timing=[];}]]){
- const e=structuredClone(evidences[0]);mutate(e);for(const locale of ['en','zh-Hans']){const sections=await buildZiweiProductionSections({evidence:e,locale});assert(sections.every(s=>s.paragraphs.every(p=>!p.includes('undefined'))));const r=read(`${dir}/ZPA-CONTROLLED-01-${locale}.json`);const snapshot=buildZiweiProductionPublication({evidence:{structured:e},sections,locale,subjectPresentation:r.subject});assert.equal(snapshot.totalPages,33);if(name==='empty primary palace')assert.equal(sections.find(s=>s.sectionId==='S08').evidenceUtilisation.find(u=>u.palaceCode==='HEALTH').role,'CONTEXT');}optional.push({name,status:'PASS_BOTH_LOCALES'});
+ const e=structuredClone(evidences[0]);mutate(e);for(const locale of ['en','zh-Hans']){const sections=await buildZiweiProductionSections({evidence:e,locale});assert(sections.every(s=>s.paragraphs.every(p=>!p.includes('undefined'))));const r=read(`${outputDir}/ZPA-CONTROLLED-01-${locale}.json`);const snapshot=buildZiweiProductionPublication({evidence:{structured:e},sections,locale,subjectPresentation:r.subject});assert.equal(snapshot.totalPages,33);if(name==='empty primary palace')assert.equal(sections.find(s=>s.sectionId==='S08').evidenceUtilisation.find(u=>u.palaceCode==='HEALTH').role,'CONTEXT');}optional.push({name,status:'PASS_BOTH_LOCALES'});
 }
 assert.equal(resolveZiweiProductionStar(null,'coreFunction','en').state,'ABSENT');
 const regressions=[];
 for(const subject of ['A','B'])for(const locale of ['en','zh-Hans']){
  const old=read(`docs/reports/ziwei/full-report-r2/SUBJECT_${subject}-${locale}.json`),sections=await buildZiweiProductionSections({evidence:old.evidence,locale,sourceSections:old.sections});
  const snapshot=buildZiweiProductionPublication({evidence:{structured:old.evidence},sections,locale,subjectPresentation:old.subject});
- assert.deepEqual(sections.map(s=>s.claims),old.sections.map(s=>s.claims));assert.deepEqual(snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole,p.visualBinding]),old.snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole,p.visualBinding]));assert(sections.every(s=>JSON.stringify(s.unknowns)===JSON.stringify(old.evidence.unknowns)));
- regressions.push({subject,locale,sourceClaims:'UNCHANGED',sectionOwnership:'UNCHANGED',visualBindings:'UNCHANGED',physicalArchitecture:'UNCHANGED',unknowns:'UNCHANGED',timingBoundary:'NATAL_DA_XIAN_LIU_NIAN_ONLY',proseByteEqualityRequired:false});
+ assert.deepEqual(sections.map(s=>s.claims),old.sections.map(s=>s.claims));const visualIdentity=binding=>Object.fromEntries(Object.entries(binding).filter(([key])=>!['bodyUrl','motifUrl','intensityByFamily','opacityByLayer','backgroundMode'].includes(key)));
+ assert.deepEqual(snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole,visualIdentity(p.visualBinding)]),old.snapshot.pages.map(p=>[p.sectionId,p.physicalPageRole,visualIdentity(p.visualBinding)]));
+ for(const [index,page] of snapshot.pages.entries()){
+  const master=page.pageFamily==='SECTION_OPENER_PAGE',binding=page.visualBinding,previous=old.snapshot.pages[index].visualBinding;
+  assert.equal(binding.backgroundMode,master?'SECTION_MASTER_FULL_BLEED':'READING_PAGE_DECORATION');
+  assert.equal(binding.bodyUrl,master?null:previous.bodyUrl);assert.equal(binding.motifUrl,master?null:previous.motifUrl);
+  assert.deepEqual(binding.intensityByFamily,{SECTION_OPENER_PAGE:1,NARRATIVE_ANALYSIS_PAGE:.12,METHOD_APPENDIX_PAGE:.1});
+  assert.deepEqual(binding.opacityByLayer,{body:.12,motif:.09,hero:master?1:.12});
+ }assert(sections.every(s=>JSON.stringify(s.unknowns)===JSON.stringify(old.evidence.unknowns)));
+ regressions.push({subject,locale,sourceClaims:'UNCHANGED',sectionOwnership:'UNCHANGED',visualBindings:'ASSET_IDENTITY_UNCHANGED_FULL_BLEED_PRESENTATION_SUCCESSOR',physicalArchitecture:'UNCHANGED',unknowns:'UNCHANGED',timingBoundary:'NATAL_DA_XIAN_LIU_NIAN_ONLY',proseByteEqualityRequired:false});
 }
 const foreign=structuredClone(prior.sections);foreign[0].subjectId='FOREIGN-SUBJECT';
 await assert.rejects(buildZiweiProductionSections({evidence:prior.evidence,locale:'en',sourceSections:foreign}),/ZIWEI_SOURCE_IR_SUBJECT_MISMATCH/);
 write(dir+'/root-causes.json',roots);write(dir+'/generation-coverage.json',{ZIWEI_GENERAL_GENERATION_COVERAGE:'PASS',realControlledStructures:12,locales:['zh-Hans','en'],results,variety,optional,regressions,undefinedReferences:0,fabricatedSemanticRecords:0,unsupportedBrightnessInference:0,unsupportedLiuYue:0,editorialAcceptance:'NOT_REQUESTED_OR_GRANTED',qaAccountDelivery:'NOT_PROVEN',productionAdmission:'NOT_GRANTED'});
+fs.rmSync(outputDir,{recursive:true,force:true});
 console.log('PASS ZPA: 12/12 real calculations, 24/24 IR and composition; optional evidence and frozen R2 regressions.');

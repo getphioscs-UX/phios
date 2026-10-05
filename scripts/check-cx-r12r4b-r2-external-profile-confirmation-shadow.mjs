@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {parseHumanDesignProfileText} from '../functions/external-profile/hd-profile-parser.js';
@@ -140,7 +141,7 @@ assert(historicalConversionCopy||w11ConfirmationCopy||currentConfirmationCopy||i
 for(const token of ['/api/customer-external-profile-confirm','/api/customer-external-profile-shadow-check','renderExternalProfileConfirmation','confirmPreparedExternalProfile','runExternalProfileShadowCheck'])assert(client.includes(token),`R2 client binding missing ${token}`);
 for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"','name="externalDefinedCenters"','name="externalOpenCenters"'])assert.equal(html.includes(forbidden),false,`Structural detail must not become normal manual input: ${forbidden}`);
 
-const pkg=readJson('package.json');
+const pkg=effectivePackageScripts(readJson('package.json'));
 assert.equal(pkg.scripts['check:cx-r12r4b:r2'],'node scripts/check-cx-r12r4b-r2-external-profile-confirmation-shadow.mjs');
 assert(pkg.scripts['check:cx-r12r4b'].includes('npm run check:cx-r12r4b:r2'));
 assert(pkg.scripts['check:cx-r12r4b'].indexOf('npm run check:cx-r12r4b:r2') < pkg.scripts['check:cx-r12r4b'].indexOf('npm run check:cx-r12r4b:r3r1'));

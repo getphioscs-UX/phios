@@ -17,7 +17,9 @@ const bilingual=h=>{assert.match(h,/data-cx-en=/);assert.match(h,/data-cx-zh=/)}
 check('R11',()=>{
  const a=json('content/customer-experience-rebuild/authority/cx-r11-source-aware-perspectives-v1.json');assert.equal(a.status,'ENGINEERING_COMPLETE');
  const hub=cxPage('perspectives/index.html');const rel=cxPage('perspectives/relationship/index.html');const prof=cxPage('perspectives/profile/index.html');
- for(const s of ['PERSONAL','RELATIONSHIP','PROFILE & ASSESSMENT','CURRENT CONTEXT','SYMBOLIC / INTERPRETIVE','REFLECTIVE'])assert(hub.includes(s),`R11 hub missing ${s}`);
+ for(const s of ['PERSONAL','RELATIONSHIP','CURRENT CONTEXT','SYMBOLIC / INTERPRETIVE','REFLECTIVE'])assert(hub.includes(s),`R11 hub missing ${s}`);
+ assert(!hub.includes('href="/perspectives/profile/"'),'Personal Evidence stays outside the primary product grid');
+ assert(read('perspectives/personal/index.html').includes('href="/perspectives/profile/"'));
  for(const s of ['Measured / task-based','Self-reported','External profile','Symbolic / interpretive','Current Reality','Professional evidence'])assert(hub.includes(s)||rel.includes(s),`R11 source legend missing ${s}`);
  assert.match(rel,/Person A/);assert.match(rel,/Person B/);assert.doesNotMatch(rel,/compatibility\s*\d+%/i);assert.equal(a.boundaries.relationshipMeaningCreated,false);assert.equal(a.boundaries.profileScoringCreated,false);bilingual(hub);bilingual(rel);bilingual(prof);
 });

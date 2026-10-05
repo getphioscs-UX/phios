@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -74,7 +75,7 @@ if (r5Active) {
   assert.equal(ksarBindings.records.length, 0, 'KAU-R2 candidates must not become KSAR approved bindings before later human acceptance.');
 }
 
-const pkg = readJson('package.json');
+const pkg = effectivePackageScripts(readJson('package.json'));
 assert.equal(pkg.scripts['check:kau-r2'], 'node scripts/check-kau-r2-existing-canonical-node-match.mjs');
 
 console.log('✓ KAU-R2 Existing Canonical Node Match candidate phase passed.');

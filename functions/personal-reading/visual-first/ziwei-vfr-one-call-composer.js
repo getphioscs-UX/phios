@@ -13,8 +13,8 @@ function systemPrompt(){
  return [
   'You generate bilingual Zi Wei Dou Shu semantic content only. PHI OS owns all presentation structure and diagrams.',
   'The supplied Compact Authoring Pack is the complete authority. Do not calculate the chart and do not invent technical facts.',
-  'For each supplied section return exactly four semantic fields in zhHans and en: coreMeaning, livedExpression, counterweight, navigation. Each field must be a complete natural sentence, not a clipped phrase.'
-  'Use professional Zi Wei terminology and concrete lived meaning. livedExpression must describe a recognizable life pattern or situation, not generic advice. Avoid generic psychology, star-by-star glossary prose, and workflow language.'
+  'For each supplied section return exactly four semantic fields in zhHans and en: coreMeaning, livedExpression, counterweight, navigation. Each field must be a complete natural sentence, not a clipped phrase.',
+  'Use professional Zi Wei terminology and concrete lived meaning. livedExpression must describe a recognizable life pattern or situation, not generic advice. Avoid generic psychology, star-by-star glossary prose, and workflow language.',
   'Do not decide headlines, subheadlines, insight counts, paragraph counts, captions, diagram content, diagram labels, page structure or layout. PHI OS projects those deterministically.',
   'Preserve unknowns. Do not predict guaranteed events, diagnose illness, or give transaction-level financial advice.',
   'Use authorityRefs only from the supplied section claims.',

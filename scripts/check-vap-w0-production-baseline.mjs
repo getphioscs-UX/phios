@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -17,7 +18,7 @@ const normalizeTextBytes = value => Buffer.from(
 );
 
 const baseline = readJson(baselinePath);
-const pkg = readJson('package.json');
+const pkg = effectivePackageScripts(readJson('package.json'));
 
 assert.equal(baseline.schemaVersion, 'PHI-OS-VAP-W0-PRODUCTION-BASELINE-v1.0.0');
 assert.equal(baseline.baselineVersion, '1.0.1');

@@ -41,12 +41,16 @@ const publication=fs.readFileSync('functions/personal-reading/ziwei-production-p
 assert(publication.includes("sections.find(section=>section.sectionId===p.sectionId)?.editorialVersion||'ZIWEI-CONTENT-DEPTH-R3'"),'R4 publication pages must preserve successor editorial lineage');
 
 const privateRenderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
-assert(privateRenderer.includes("ALLOWED_ZIWEI_COMPOSITIONS=new Set(['ZIWEI-PRODUCTION-COMPOSER-V1','ZIWEI-NATURAL-COMPOSER-R4'])"));
+assert(privateRenderer.includes("'ZIWEI-PRODUCTION-COMPOSER-V1':33"));
+assert(privateRenderer.includes("'ZIWEI-NATURAL-COMPOSER-R4':33"));
+assert(privateRenderer.includes('ALLOWED_ZIWEI_COMPOSITIONS=new Set(Object.keys(ZIWEI_PAGE_COUNTS))'));
+assert(privateRenderer.includes('!ALLOWED_ZIWEI_COMPOSITIONS.has(compositionVersion)'));
 assert(privateRenderer.includes("compositionVersion!==candidate?.snapshot?.compositionVersion"));
 
 const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
-assert(binding.includes("ziwei-natural-composer-r4-generation.js"));
-assert(binding.includes('generateZiweiNaturalComposerR4Candidate'));
+assert(binding.includes("ziwei-professional-synthesis-r5-generation.js"));
+assert(binding.includes('generateZiweiProfessionalSynthesisR5Candidate'));
+assert(fs.existsSync('functions/report-delivery/ziwei-natural-composer-r4-generation.js'));
 const account=fs.readFileSync('functions/account/ziwei-account-delivery.js','utf8');
 assert(account.includes('compositionVersion:candidate.snapshot.compositionVersion'));
 assert(!account.includes("compositionVersion:'ZIWEI-PRODUCTION-COMPOSER-V1'"));
@@ -66,4 +70,4 @@ const bazi=fs.readFileSync('assets/customer-ui/surfaces/bazi-print-shell-v2.css'
 for(const selector of ['.pub-opener-heading','.pub-narrative','.pub-master-insights'])assert(bazi.includes(`[data-section="S07_HEALTH"][data-page-family="SECTION_OPENER_PAGE"] ${selector}`));
 assert(bazi.includes('left:auto!important;right:17mm!important;width:92mm!important'));
 
-console.log('PASS Zi Wei R4 uses governed T2/OpenAI + semantic verification in QA successor; Production V1 remains frozen; BaZi S07 safe-zone bound.');
+console.log('PASS historical Zi Wei R4 governed composition and 33-page renderer remain compatible; current account binding uses R5; Production V1 remains frozen; BaZi S07 safe-zone bound.');

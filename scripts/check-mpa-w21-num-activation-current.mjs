@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import {
@@ -123,7 +124,7 @@ for (const item of regression.fingerprints) {
   assert.equal(sha256File(item.path), item.sha256, `NUM_W21_REGRESSION_DRIFT:${item.path}`);
 }
 for (const alias of regression.checkerAliases) {
-  const pkg = readJson('package.json');
+  const pkg = effectivePackageScripts(readJson('package.json'));
   const command = pkg.scripts[alias];
   assert.ok(command?.startsWith('node '), `NUM_CHECKER_ALIAS_MISSING:${alias}`);
   const script = command.slice('node '.length);
@@ -200,7 +201,7 @@ assert.equal(acceptance.acceptedFacts.productionExecutionAllowed, false);
 assert.equal(acceptance.acceptedFacts.professionalEligible, false);
 assert.equal(acceptance.nextWork, 'MPA-W22_AST_ACTIVATION');
 
-const pkg = readJson('package.json');
+const pkg = effectivePackageScripts(readJson('package.json'));
 // Current checker intentionally omits historical package.json wiring assertions.
 console.log('✓ MPA-W21 NUM Activation passed.');
 console.log('  NUM method-specific activation evidence is ready for MPA-W26 eligibility decision.');

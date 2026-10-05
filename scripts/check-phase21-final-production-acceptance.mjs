@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -9,7 +10,7 @@ const contract = readJson('content/production-integration/phase21/contracts/phas
 const acceptance = readJson('content/production-integration/phase21/acceptance/phase21-final-production-acceptance-v1.json');
 const freeze = readJson('content/production-integration/phase21/freeze/phase21-final-production-acceptance-freeze-v1.json');
 const phase20 = readJson('content/production-integration/phase20/acceptance/phase20-unified-production-integration-acceptance-v1.json');
-const pkg = readJson('package.json');
+const pkg = effectivePackageScripts(readJson('package.json'));
 
 const requiredDomains = {
   Knowledge: 4,

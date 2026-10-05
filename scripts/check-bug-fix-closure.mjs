@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -53,6 +54,6 @@ for (const token of ['localizedDerivedUnknownReality','reconstruction.unknownFie
 
 const continuity = 'functions/runtime/continuity/reality-continuity-contract.js';
 if (!fs.existsSync(path.join(root, continuity))) throw new Error('Reality Continuity Contract is missing.');
-if (!read('package.json').includes('check-reality-continuity-contract.mjs')) throw new Error('Continuity check is not part of npm run check.');
+if (!effectivePackageScripts(read('package.json')).includes('check-reality-continuity-contract.mjs')) throw new Error('Continuity check is not part of npm run check.');
 
 console.log('✓ M1-W5 Entry, Reconstruction, Reading, Navigation, and Continuity bug closure checks passed.');

@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -189,7 +190,7 @@ for (const [rule, expected] of Object.entries({
   assert.equal(audit.w0Boundaries[rule], expected, `W0 boundary changed: ${rule}`);
 }
 
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['check:pws-i2-w0'],
   'node scripts/check-pws-i2-w0-registry-baseline-audit.mjs'

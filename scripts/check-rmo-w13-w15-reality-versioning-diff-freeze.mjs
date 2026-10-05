@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -687,7 +688,7 @@ const wiring = readText('docs/runtime/RMO-W13-W15-PACKAGE-WIRING.md');
 assert.match(wiring, /"check:rmo-w13-w15": "node scripts\/check-rmo-w13-w15-reality-versioning-diff-freeze\.mjs"/);
 assert.match(wiring, /"check:rmo-versioning-diff-freeze": "npm run check:rmo-w13-w15"/);
 assert.match(wiring, /"check:rmo": "npm run check:rmo-foundation && npm run check:rmo-structure && npm run check:rmo-evidence-reasoning && npm run check:rmo-lifecycle && npm run check:rmo-versioning-diff-freeze"/);
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['check:rmo-w13-w15'],
   'node scripts/check-rmo-w13-w15-reality-versioning-diff-freeze.mjs'

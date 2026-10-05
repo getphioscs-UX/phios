@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -131,7 +132,7 @@ assert.throws(
   error => /HASH|CONTENT/i.test(error.code || error.message)
 );
 
-const packageJson = read('package.json');
+const packageJson = effectivePackageScripts(read('package.json'));
 assert.ok(packageJson.scripts['build:vap-w6a']?.includes('build-vap-w6a-batch-article-decision-c2-c3-wave-freeze.mjs'));
 assert.ok(packageJson.scripts['vap:w6a:apply']?.includes('apply-vap-w6a-batch-article-decision-c2-c3-wave-freeze.mjs'));
 assert.ok(packageJson.scripts['check:vap-w6a']?.includes('check-vap-w6a-batch-article-decision-c2-c3-wave-freeze.mjs'));

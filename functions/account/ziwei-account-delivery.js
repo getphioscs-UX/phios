@@ -7,9 +7,9 @@ import {generateContextualAccountZiweiCandidate} from '../report-delivery/ziwei-
 const fail=(code,status=409)=>Object.assign(new Error(code),{code,status});
 const loader=env=>(owner,id)=>loadCanonicalPersonSubject(env,owner,id);
 async function bounded(response,max){const reader=response.body?.getReader();if(!reader)throw fail('REPORT_RENDER_FAILED');let bytes=0,text='';const decoder=new TextDecoder();for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>max){await reader.cancel();throw fail('REPORT_RENDER_TOO_LARGE');}text+=decoder.decode(value,{stream:true});}return text+decoder.decode();}
-export async function generateAndReleaseAccountZiwei(context,selection){
+export async function generateAndReleaseAccountZiwei(context,selection,{generateCandidate=generateAccountZiweiCandidate}={}){
  controlledZiweiIdentity(context);
- const candidate=selection?.reportMode!=null||selection?.realityBriefId!=null?await generateContextualAccountZiweiCandidate(context,selection):await generateAccountZiweiCandidate(context,selection);
+ const candidate=selection?.reportMode!=null||selection?.realityBriefId!=null?await generateContextualAccountZiweiCandidate(context,selection):await generateCandidate(context,selection);
  // An actual private server browser verifier must be configured. Customer claims
  // and local test receipts cannot cross this boundary.
  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);

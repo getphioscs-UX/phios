@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -30,7 +31,7 @@ const noPrevReq=j(`${base}/fixtures/readout-input.request.no-previous.valid.json
 const missingMethodReq=j(`${base}/fixtures/readout-input.request.missing-method-projection.valid.json`); const missingMethod=pipeline(missingMethodReq,{unknowns:[]},{confidenceCode:'RRE-CONFIDENCE-W15-METHOD',readoutCode:'RRE-READOUT-W15-METHOD'}); assert.ok(missingMethod.unk.inputGaps.some(x=>x.limitKind==='MISSING_METHOD_PROJECTION')); assert.notEqual(missingMethod.confidence.confidenceClass,'HIGH');
 const acceptance=j(`${base}/acceptance/rre-w15-acceptance-matrix-v1.json`); assert.deepEqual(acceptance.cases.map(x=>x.caseCode),['KNOWN','UNKNOWN','CONFLICTING_EVIDENCE','LOW_EVIDENCE','DRIFT','NO_PREVIOUS_REALITY','MISSING_METHOD_PROJECTION']);
 const freeze=j(`${base}/freeze/rre-freeze-v1.json`); assert.equal(freeze.status,'RRE_V1_FROZEN_CANONICAL_READOUT_RUNTIME'); assert.deepEqual(freeze.completedWork,Array.from({length:17},(_,i)=>`RRE-W${i}`)); assert.equal(freeze.authorityClosure.realityReadoutRecordSuccessorAuthorityActive,true); assert.equal(freeze.productionClosure.directStorageExecutionByRre,false); for(const p of freeze.frozenOutputs) assert.ok(exists(p),`missing frozen output ${p}`);
-const pkg=j('package.json'); assert.equal(pkg.scripts['check:rre-w11-w16'],'node scripts/check-rre-w11-w16-canonical-readout-freeze.mjs'); assert.equal(pkg.scripts['check:rre-canonical'],'npm run check:rre-w11-w16'); assert.equal(pkg.scripts['check:rre'],'npm run check:rre-foundation && npm run check:rre-reading && npm run check:rre-canonical'); assert.ok(pkg.scripts.postcheck.includes('npm run check:rre'));
+const pkg=effectivePackageScripts(j('package.json')); assert.equal(pkg.scripts['check:rre-w11-w16'],'node scripts/check-rre-w11-w16-canonical-readout-freeze.mjs'); assert.equal(pkg.scripts['check:rre-canonical'],'npm run check:rre-w11-w16'); assert.equal(pkg.scripts['check:rre'],'npm run check:rre-foundation && npm run check:rre-reading && npm run check:rre-canonical'); assert.ok(pkg.scripts.postcheck.includes('npm run check:rre'));
 console.log('✓ RRE-W11-W16 Canonical Runtime Readout and RRE v1 freeze passed.');
 console.log('✓ REALITY_READOUT_RECORD is governed by a versioned RDG successor extension; legacy RRE Evidence authority remains unchanged.');
 console.log('✓ Readout lineage, evidence-derived confidence and CPR handoff are canonical and fail closed.');

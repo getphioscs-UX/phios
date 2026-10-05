@@ -4,8 +4,8 @@ import {DatabaseSync} from 'node:sqlite';
 import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
 import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
 import {STRIPE_PRODUCT_REGISTRY,commerceSelection,standardBundleProducts,assertReportPriceParity} from '../functions/pws/commercial/stripe-product-registry.js';
-import {isLanguageReport,validateOrderReportPresentation} from '../functions/commerce/report-presentation.js';
-import {quoteReportPresentation} from '../functions/pws/commercial/report-successor-contract.js';
+import {isLanguageReport,validateOrderReportPresentation,reportContractId} from '../functions/commerce/report-presentation.js';
+import {quoteReportPresentation,resolveReportProduct} from '../functions/pws/commercial/report-successor-contract.js';
 import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
 import {createStripeTestSignature} from '../functions/commerce/stripe-client.js';
 import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
@@ -37,10 +37,10 @@ await test('25 approved QA prices and all existing report prices agree',()=>{
   for(const p of STRIPE_PRODUCT_REGISTRY){const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);assert.equal(q.unit_amount,p.amountMinor);assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(p.livePriceId,null);assert.equal(p.liveProductId,null);assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}
 });
 await test('bundle eligibility/count/uniqueness server policy',()=>{
-  const eligible=standardBundleProducts();assert.equal(eligible.length,6);
+  const eligible=standardBundleProducts();assert.equal(eligible.length,5);assert(!eligible.includes('COM-REPORT-PROFILE-FULL'));assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-2',[eligible[0],'COM-REPORT-PROFILE-FULL']));
   assert.equal(commerceSelection('COM-REPORT-BUNDLE-2',eligible.slice(0,2)).length,2);
   assert.equal(commerceSelection('COM-REPORT-BUNDLE-3',eligible.slice(0,3)).length,3);
-  assert.equal(commerceSelection('COM-REPORT-BUNDLE-5PLUS',eligible).length,6);
+  assert.equal(commerceSelection('COM-REPORT-BUNDLE-5PLUS',eligible).length,5);
   for(const bad of [[],eligible.slice(0,1),[eligible[0],eligible[0]],[eligible[0],'COM-REPORT-HD-FULL'],[eligible[0],'COM-REPORT-CROSS-FULL'],[eligible[0],'COM-REPORT-FINANCIAL-FULL']])assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-2',bad));
   assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-5PLUS',eligible.slice(0,4)));
 });
@@ -124,9 +124,16 @@ await test('invalid signature and live event do not mutate; RECEIVED replay reco
   assert.equal((await send(event.type,bundleSession,event.id)).status,200);
   assert.equal(sqlite.prepare("SELECT processing_status FROM commerce_webhook_events WHERE stripe_event_id='evt_received'").get().processing_status,'processed');
 });
-await test('all single products create QA checkouts and fulfill according to type',async()=>{
+await test('active single products fulfill; retired Profile denies before order or provider operations',async()=>{
   for(const product of STRIPE_PRODUCT_REGISTRY.filter(p=>!p.productId.includes('BUNDLE'))){
-    const response=await commerceApi(context({productId:product.productId}),'checkout');assert.equal(response.status,201,product.productId);
+    const beforeCalls=stripeCalls.length,beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
+    const response=await commerceApi(context({productId:product.productId}),'checkout');
+    if(isLanguageReport(product)&&resolveReportProduct(reportContractId(product.productId)).newPurchaseDefault===false){
+      assert.equal(response.status,422,product.productId);assert.equal((await response.json()).error,'PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED');
+      assert.equal(stripeCalls.length,beforeCalls);assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
+      continue;
+    }
+    assert.equal(response.status,201,product.productId);
     const session=[...sessions.values()].at(-1);session.payment_status='paid';assert.equal((await send('checkout.session.completed',session)).status,200);
   }
   assert.equal(stripeCalls.filter(x=>x.pathname==='/v1/customers').length,1);
@@ -203,7 +210,7 @@ await test('bundle language policy: six totals, order-level modifier, browser to
   const session=[...sessions.values()].find(s=>s.metadata.order_id===orderId);assert.equal(session.amount_total,quote.amountMinor);
   assert.equal(session.line_items.data.length,bilingual?2:1);if(bilingual)assert.equal(session.line_items.data[1].quantity,1);
  }
- const six=quoteReportPresentation('BUNDLE_5PLUS',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT','ASTROLOGY_FULL_REPORT','PROFILE_FULL_REPORT','NUMEROLOGY_FULL_REPORT','ECR_FULL_REPORT']);assert.equal(six.amountMinor,17900);assert.equal(six.surchargeAmountMinor,2000);
+ assert.throws(()=>quoteReportPresentation('BUNDLE_5PLUS',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT','ASTROLOGY_FULL_REPORT','PROFILE_FULL_REPORT','NUMEROLOGY_FULL_REPORT','ECR_FULL_REPORT']),/PWS_REPORT_SELECTION_COUNT|PWS_REPORT_SELECTION_INELIGIBLE/);
  const legacy=quoteReportPresentation('BUNDLE_2',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT'],'REPORT-LANGUAGE-R2-2026-09-20-CORRECTED');
  const product=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId==='COM-REPORT-BUNDLE-2');
  const legacyOrder={context_json:JSON.stringify({reportPresentation:legacy}),selected_products_json:JSON.stringify(['COM-REPORT-BAZI-FULL','COM-REPORT-ZIWEI-FULL']),amount_minor:6900};

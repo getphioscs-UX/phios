@@ -15,6 +15,11 @@ let prices=0;
 for(const p of REPORT_COMMERCE_CONTRACT.products)for(const reportLocale of ['en','zh-Hans','bilingual']){
  const input={reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'};
  const selected=p.kind==='BUNDLE'?eligibleReportIds(p.productId).slice(0,p.selection.min):[];
+ if(p.newPurchaseDefault===false){
+  assert.throws(()=>quoteReportPresentation(p.productId,input,selected),/PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED/);
+  assert.deepEqual(requirePurchasedReportPresentation({entitlement_status:'active',purchase_id:'historical-fixture',reportPresentation:input},input),input);
+  continue;
+ }
  const quote=quoteReportPresentation(p.productId,input,selected);
  assert.equal(quote.amountMinor,p.amountMinor+(reportLocale==='bilingual'?({BUNDLE_2:1000,BUNDLE_3:1000,BUNDLE_5PLUS:2000}[p.productId]??1000):0));
  const e={entitlement_status:'active',purchase_id:'verified-fixture',reportPresentation:quote};

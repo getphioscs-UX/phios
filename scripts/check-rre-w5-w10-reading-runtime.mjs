@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -40,7 +41,7 @@ const conflictingInputReq=readJson(`${base}/fixtures/readout-input.request.valid
 
 const acceptance=readJson(`${base}/contracts/rre-w5-w10-acceptance-contract-v1.json`); assert.equal(acceptance.status,'accept_validation_only_reading_runtime'); assert.ok(Object.values(acceptance.nonActivation).every(v=>v===false));
 const freeze=readJson(`${base}/freeze/rre-w5-w10-reading-runtime-freeze-v1.json`); assert.equal(freeze.status,'FROZEN_VALIDATION_ONLY_READING_RUNTIME'); assert.deepEqual(freeze.completedWork,['RRE-W5','RRE-W6','RRE-W7','RRE-W8','RRE-W9','RRE-W10']); assert.equal(freeze.blockingGate.persistentCanonicalReadoutAllowed,false); assert.equal(freeze.blockingGate.requiredFutureDataType,'REALITY_READOUT_RECORD'); assert.ok(Object.values(freeze.nonActivation).every(v=>v===false)); for(const file of freeze.frozenOutputs) assert.ok(exists(file),`missing frozen output ${file}`);
-const pkg=readJson('package.json'); assert.equal(pkg.scripts['check:rre-w0-w4'],'node scripts/check-rre-w0-w4-readout-foundation.mjs'); assert.equal(pkg.scripts['check:rre-w5-w10'],'node scripts/check-rre-w5-w10-reading-runtime.mjs'); assert.equal(pkg.scripts['check:rre-foundation'],'npm run check:rre-w0-w4'); assert.equal(pkg.scripts['check:rre-reading'],'npm run check:rre-w5-w10'); assert.ok([
+const pkg=effectivePackageScripts(readJson('package.json')); assert.equal(pkg.scripts['check:rre-w0-w4'],'node scripts/check-rre-w0-w4-readout-foundation.mjs'); assert.equal(pkg.scripts['check:rre-w5-w10'],'node scripts/check-rre-w5-w10-reading-runtime.mjs'); assert.equal(pkg.scripts['check:rre-foundation'],'npm run check:rre-w0-w4'); assert.equal(pkg.scripts['check:rre-reading'],'npm run check:rre-w5-w10'); assert.ok([
   'npm run check:rre-foundation && npm run check:rre-reading',
   'npm run check:rre-foundation && npm run check:rre-reading && npm run check:rre-canonical'
 ].includes(pkg.scripts['check:rre']), `Unexpected check:rre alias: ${pkg.scripts['check:rre']}`);

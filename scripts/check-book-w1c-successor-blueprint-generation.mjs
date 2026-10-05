@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -25,7 +26,7 @@ const [
 ] = await Promise.all([
   buildBookW1CCandidateSet(root), read('content/knowledge/blueprints/blueprint-registry.json'),
   readJson('content/knowledge/blueprints/knowledge-blueprint-freeze-v2.json'), readJson('content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'),
-  readJson('content/knowledge/migrations/five-volume-migration-contract-v1.json'), readJson('package.json'), read('docs/audits/BOOK-W1C-successor-blueprint-generation.md'),
+  readJson('content/knowledge/migrations/five-volume-migration-contract-v1.json'), effectivePackageScripts(readJson('package.json')), read('docs/audits/BOOK-W1C-successor-blueprint-generation.md'),
   readJson(ADMISSION_AUTHORIZATION_PATH), readJson(ADMISSION_HUMAN_ACCEPTANCE_PATH),
   readJson(ADMISSION_FINAL_HUMAN_ACCEPTANCE_PATH),
   readJson(ADMISSION_LEDGER_PATH),

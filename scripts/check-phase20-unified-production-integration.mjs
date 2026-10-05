@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -14,7 +15,7 @@ const contract = readJson(contractPath);
 const registry = readJson(registryPath);
 const acceptance = readJson(acceptancePath);
 const freeze = readJson(freezePath);
-const pkg = readJson('package.json');
+const pkg = effectivePackageScripts(readJson('package.json'));
 
 const requiredSystems = [
   'Knowledge Runtime', 'KAP', 'MR', 'MPA', 'MCD', 'Personal Runtime',

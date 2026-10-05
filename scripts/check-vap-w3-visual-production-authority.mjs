@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -81,7 +82,7 @@ for (const required of [
   'VAP-W3-CAR-MEANING-SELECTION-GAP'
 ]) assert.ok(findingCodes.has(required), required);
 
-const packageJson = readJson('package.json');
+const packageJson = effectivePackageScripts(readJson('package.json'));
 assert.equal(packageJson.scripts['build:vap-w3'], 'node scripts/build-vap-w3-visual-production-authority.mjs');
 assert.equal(packageJson.scripts['check:vap-w3'], 'node scripts/check-vap-w3-visual-production-authority.mjs');
 assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-w3'));

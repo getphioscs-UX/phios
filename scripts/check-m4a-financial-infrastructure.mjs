@@ -1,3 +1,4 @@
+import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -699,7 +700,7 @@ assert.doesNotMatch(
   'M4A-W8 must not contain a full account, policy or phone number'
 );
 
-const packageJson = await readJson('package.json');
+const packageJson = await effectivePackageScripts(readJson('package.json'));
 assert.equal(
   packageJson.scripts['check:m4a-financial-infrastructure'],
   'node --no-warnings scripts/check-m4a-financial-infrastructure.mjs'
