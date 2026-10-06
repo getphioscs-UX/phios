@@ -1,6 +1,6 @@
 import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
 
-export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v2';
+export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v3';
 
 const sanitizeDisplay=v=>String(v??'').replace(/[\uFDD0-\uFDEF\uFFFE\uFFFF]/gu,'-').replace(/\s+-\s+/g,' - ').trim();
 const esc=v=>sanitizeDisplay(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -54,38 +54,68 @@ function card(title,value,detail='',opts={}){
  return '<div class="zv-card"><small>'+t+'</small><b>'+v+'</b>'+(detail?'<p>'+d+'</p>':'')+'</div>';
 }
 function palaceGrid(data){
- return '<div class="zv-palace-grid">'+(data.palaces||[]).map((p,i)=>'<div class="zv-palace '+(p.isLifePalace?'is-life ':'')+(p.isBodyPalace?'is-body':'')+'" style="--pal:'+esc(PAL_TONE[p.palaceCode]||'#7a6b8d')+'"><span class="idx">'+String(i+1).padStart(2,'0')+'</span><b>'+bi(PAL,p.palaceCode)+'</b><em>'+branch(p.branch)+'</em><p>'+((p.stars||[]).slice(0,4).map(s=>plain(STAR,s.starCode)).join(' · ')||'—')+'</p></div>').join('')+'</div>';
+ const pos=[[1,1],[1,2],[1,3],[1,4],[2,4],[3,4],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1]];
+ const palaces=(data.palaces||[]).slice(0,12);
+ const cells=palaces.map((p,i)=>{
+  const [r,col]=pos[i]||[1,1];
+  const stars=(p.stars||[]).slice(0,4).map(s=>plain(STAR,s.starCode)).join(' · ')||'—';
+  return '<article class="zv-palace '+(p.isLifePalace?'is-life ':'')+(p.isBodyPalace?'is-body':'')+'" style="--pal:'+esc(PAL_TONE[p.palaceCode]||'#7a6b8d')+';grid-row:'+r+';grid-column:'+col+'"><span class="idx">'+String(i+1).padStart(2,'0')+'</span><b>'+bi(PAL,p.palaceCode)+'</b><em>'+branch(p.branch)+'</em><p>'+esc(stars)+'</p>'+(p.isLifePalace?'<i>命</i>':'')+(p.isBodyPalace?'<i>身</i>':'')+'</article>';
+ }).join('');
+ return '<div class="zv-ziwei-board">'+cells+'<div class="zv-chart-core"><span>紫微斗数</span><strong>十二宫本命盘</strong><small>12-Palace Natal Chart</small><div><b>命宫</b><i>×</i><b>身宫</b></div></div></div>';
 }
 function axis(data){
- const ls=(data.lifeStars||[]).map(s=>plain(STAR,s.starCode)).join(' · ');
- const bs=(data.bodyStars||[]).map(s=>plain(STAR,s.starCode)).join(' · ');
- return '<div class="zv-axis">'+card('命宫 / Life',bi(PAL,data.lifePalace),ls,{valueHtml:true})+'<div class="zv-arrow">↔</div>'+card('身宫 / Body',bi(PAL,data.bodyPalace),bs,{valueHtml:true})+'</div>';
+ const ls=(data.lifeStars||[]).map(s=>plain(STAR,s.starCode));
+ const bs=(data.bodyStars||[]).map(s=>plain(STAR,s.starCode));
+ const node=(kind,code,stars,side)=>'<article class="zv-axis-node '+side+'" style="--pal:'+esc(PAL_TONE[code]||'#6d668a')+'"><span>'+kind+'</span><strong>'+bi(PAL,code)+'</strong><div>'+stars.map(s=>'<b>'+esc(s)+'</b>').join('')+'</div></article>';
+ return '<div class="zv-axis-map">'+node('命宫 / Life',data.lifePalace,ls,'life')+'<div class="zv-axis-core"><span>命</span><i>⇄</i><span>身</span><small>内在判断 → 现实落地</small><em>Inner appraisal → lived implementation</em></div>'+node('身宫 / Body',data.bodyPalace,bs,'body')+'</div>';
 }
-function network(data){
+function network(data,ctx={}){
  const rel=data.relationships||[];
- const codes=[...new Set(rel.flatMap(r=>[r.from,...(r.to||[])]).filter(Boolean))].slice(0,12);
- const pts=codes.map((code,i)=>{const a=-Math.PI/2+i*Math.PI*2/Math.max(1,codes.length);return {code,x:380+250*Math.cos(a),y:205+145*Math.sin(a)};});
+ const preferred=ctx.sectionId==='S02'?['LIFE','TRAVEL','CAREER','WEALTH']:null;
+ const relCodes=[...new Set(rel.flatMap(r=>[r.from,...(r.to||[])]).filter(Boolean))];
+ const codes=(preferred||relCodes).filter(x=>relCodes.includes(x)||preferred).slice(0,6);
+ const coords=[[380,72],[620,210],[380,348],[140,210],[560,92],[200,328]];
+ const pts=codes.map((code,i)=>({code,x:coords[i]?.[0]||380,y:coords[i]?.[1]||210}));
  const by=new Map(pts.map(x=>[x.code,x]));
- const edges=rel.flatMap(r=>(r.to||[]).map(to=>[r.from,to])).filter(([a,b])=>by.has(a)&&by.has(b)).slice(0,18);
- return '<svg class="zv-svg" viewBox="0 0 760 420" role="img">'+edges.map(([a,b])=>{const A=by.get(a),B=by.get(b);return '<line x1="'+A.x+'" y1="'+A.y+'" x2="'+B.x+'" y2="'+B.y+'" class="zv-line"/>';}).join('')+pts.map(p=>'<g style="--pal:'+esc(PAL_TONE[p.code]||'#6c668d')+'"><circle cx="'+p.x+'" cy="'+p.y+'" r="45" class="zv-node"/><text x="'+p.x+'" y="'+(p.y-2)+'" text-anchor="middle">'+esc(pair(PAL,p.code)[0])+'</text><text x="'+p.x+'" y="'+(p.y+14)+'" text-anchor="middle" class="en">'+esc(pair(PAL,p.code)[1])+'</text></g>').join('')+'</svg>';
+ const edges=rel.flatMap(r=>(r.to||[]).map(to=>[r.from,to])).filter(([a,b])=>by.has(a)&&by.has(b));
+ const focus=codes[0];
+ return '<div class="zv-network-shell"><div class="zv-network-kicker">三方四正 / Palace Geometry</div><svg class="zv-svg zv-network-svg" viewBox="0 0 760 420" role="img">'+
+ edges.map(([a,b])=>{const A=by.get(a),B=by.get(b);const strong=a===focus||b===focus;return '<line x1="'+A.x+'" y1="'+A.y+'" x2="'+B.x+'" y2="'+B.y+'" class="zv-line '+(strong?'is-primary':'is-secondary')+'"/>';}).join('')+
+ pts.map(p=>'<g class="'+(p.code===focus?'is-focus':'')+'" style="--pal:'+esc(PAL_TONE[p.code]||'#6c668d')+'"><circle cx="'+p.x+'" cy="'+p.y+'" r="'+(p.code===focus?58:48)+'" class="zv-node"/><text x="'+p.x+'" y="'+(p.y-3)+'" text-anchor="middle">'+esc(pair(PAL,p.code)[0])+'</text><text x="'+p.x+'" y="'+(p.y+16)+'" text-anchor="middle" class="en">'+esc(pair(PAL,p.code)[1])+'</text></g>').join('')+
+ '</svg></div>';
 }
 function stars(data){
- return '<div class="zv-star-grid">'+(data.stars||[]).map(s=>card(bi(STAR,s.starCode),bi(PAL,s.palaceCode),s.stateKnown?state(s.state):'状态未定 / state unknown',{titleHtml:true,valueHtml:true})).join('')+'</div>';
+ const rows=(data.stars||[]).slice(0,16);
+ return '<div class="zv-star-atlas"><div class="zv-star-atlas-core"><span>主星结构</span><strong>Major Stars</strong><small>宫位 × 星曜 × 庙旺</small></div>'+rows.map((s,i)=>{
+  const a=(i/Math.max(1,rows.length))*Math.PI*2-Math.PI/2;
+  const x=50+40*Math.cos(a),y=50+40*Math.sin(a);
+  return '<article class="zv-star-orb" style="--pal:'+esc(PAL_TONE[s.palaceCode]||'#6c668d')+';left:'+x+'%;top:'+y+'%"><b>'+bi(STAR,s.starCode)+'</b><span>'+bi(PAL,s.palaceCode)+'</span><em>'+(s.stateKnown?esc(state(s.state)):'状态未定 · unknown')+'</em></article>';
+ }).join('')+'</div>';
 }
 function transformations(data){
- const xs=data.transformations||data.layers?.flatMap(x=>x.transformations||[])||[];
- const rows=xs.slice(0,16);
- if(rows.length<=3)return '<div class="zv-flow zv-flow-sparse">'+rows.map((t,i)=>'<article class="zv-tx-card" style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+';--layer:'+esc(LAYER_TONE[t.layer]||'#6f6f86')+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div></article>').join('')+'</div>';
- return '<div class="zv-flow">'+rows.map((t,i)=>'<div class="zv-flow-row" style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+';--layer:'+esc(LAYER_TONE[t.layer]||'#6f6f86')+'"><span>'+String(i+1).padStart(2,'0')+'</span><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></div>').join('')+'</div>';
+ const xs=(data.transformations||data.layers?.flatMap(x=>x.transformations||[])||[]).slice(0,16);
+ const layers=['NATAL','DA_XIAN','LIU_NIAN'];
+ return '<div class="zv-tx-orbits">'+layers.map((layer,li)=>{
+  const rows=xs.filter(t=>t.layer===layer);
+  return '<section class="zv-tx-track" style="--layer:'+esc(LAYER_TONE[layer]||'#6f6f86')+'"><header><b>'+bi(LAYER,layer)+'</b><span>'+String(li+1).padStart(2,'0')+'</span></header><div class="zv-tx-track-line">'+
+  (rows.length?rows.map(t=>'<article style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+'"><i></i><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></article>').join(''):'<p>—</p>')+
+  '</div></section>';
+ }).join('')+'</div>';
 }
 function focus(data){
  const ps=Array.isArray(data.palaces)?data.palaces:(data.palace?[data.palace]:[]);
  const stars=data.stars||[],rels=data.relationships||[],tx=data.transformations||[];
- const palaceCards=ps.map(p=>card(bi(PAL,p.palaceCode),branch(p.branch),(p.isLifePalace?'命宫 / Life ':'')+(p.isBodyPalace?'身宫 / Body':''),{titleHtml:true,valueHtml:true})).join('');
- const starCloud='<section class="zv-focus-band"><h4>星曜 / Stars</h4><div class="zv-star-cloud">'+stars.slice(0,14).map(s=>'<span style="--pal:'+esc(PAL_TONE[s.palaceCode]||'#6c668d')+'">'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div></section>';
- const relCloud=rels.length?'<section class="zv-focus-band"><h4>宫位联动 / Palace links</h4><div class="zv-rel-tags">'+rels.slice(0,10).flatMap(r=>(r.to||[]).map(to=>'<span>'+esc(pair(PAL,r.from)[0])+' ↔ '+esc(pair(PAL,to)[0])+'</span>')).join('')+'</div></section>':'';
- const txCloud=tx.length?'<section class="zv-focus-band"><h4>相关四化 / Relevant transformations</h4>'+transformations({transformations:tx})+'</section>':'';
- return '<div class="zv-focus">'+palaceCards+starCloud+relCloud+txCloud+'</div>';
+ const main=ps[0];
+ const others=ps.slice(1,5);
+ const related=[...new Set(rels.flatMap(r=>[r.from,...(r.to||[])])).values()].filter(x=>x&&x!==main?.palaceCode).slice(0,5);
+ const satellites=[...new Set([...others.map(p=>p.palaceCode),...related])].slice(0,5);
+ return '<div class="zv-palace-orbit">'+
+  '<div class="zv-orbit-ring outer"></div><div class="zv-orbit-ring inner"></div>'+
+  (main?'<article class="zv-orbit-core" style="--pal:'+esc(PAL_TONE[main.palaceCode]||'#6c668d')+'"><small>主宫 / Focus Palace</small><strong>'+bi(PAL,main.palaceCode)+'</strong><em>'+branch(main.branch)+'</em></article>':'')+
+  satellites.map((code,i)=>{const a=-Math.PI/2+i*Math.PI*2/Math.max(1,satellites.length);const x=50+38*Math.cos(a),y=48+35*Math.sin(a);return '<article class="zv-orbit-palace" style="--pal:'+esc(PAL_TONE[code]||'#6c668d')+';left:'+x+'%;top:'+y+'%"><b>'+bi(PAL,code)+'</b></article>';}).join('')+
+  '<div class="zv-orbit-stars">'+stars.slice(0,10).map(s=>'<span style="--pal:'+esc(PAL_TONE[s.palaceCode]||'#6c668d')+'">'+bi(STAR,s.starCode)+'<em>'+bi(PAL,s.palaceCode)+'</em></span>').join('')+'</div>'+
+  (tx.length?'<div class="zv-orbit-tx">'+tx.slice(0,4).map(t=>'<span style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+'">'+bi(TX,t.transformationCode)+' · '+bi(STAR,t.targetStarCode)+'</span>').join('')+'</div>':'')+
+ '</div>';
 }
 function timing(data,ctx={}){
  const rows=[];
@@ -104,7 +134,14 @@ function timing(data,ctx={}){
  return '<div class="zv-timing" data-focus-layer="'+esc(focus||'ALL')+'">'+cards+current+'</div>';
 }
 function domains(data){
- return '<div class="zv-domains">'+Object.entries(data.domains||{}).map(([k,v])=>card(k,(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[0]).join(' · '),(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[1]).join(' · '))).join('')+'</div>';
+ const labels={core:['核心','Core'],work:['事业','Work'],resources:['资源','Resources'],relationships:['关系','Relationships'],support:['支持','Support'],pressure:['压力','Pressure']};
+ const rows=Object.entries(data.domains||{});
+ return '<div class="zv-nav-wheel"><div class="zv-nav-core"><span>现实导航</span><strong>Reality Navigation</strong></div>'+rows.map(([k,v],i)=>{
+  const a=-Math.PI/2+i*Math.PI*2/Math.max(1,rows.length),x=50+39*Math.cos(a),y=50+38*Math.sin(a);
+  const zh=(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[0]).join(' · ');
+  const en=(Array.isArray(v)?v:[v]).map(x=>pair(PAL,x)[1]).join(' · ');
+  return '<article style="left:'+x+'%;top:'+y+'%"><small>'+esc(labels[k]?.[0]||k)+'<i>'+esc(labels[k]?.[1]||k)+'</i></small><b>'+esc(zh)+'</b><em>'+esc(en)+'</em></article>';
+ }).join('')+'</div>';
 }
 function projectDiagramData(type,data,ctx={}){
  const pageKey=ctx.pageKey||'',sectionId=ctx.sectionId||'';
@@ -113,7 +150,7 @@ function projectDiagramData(type,data,ctx={}){
   const allowed=scopes[sectionId];
   if(allowed){
    const set=new Set(allowed);
-   return {...data,relationships:(data.relationships||[]).filter(r=>set.has(r.from)||(r.to||[]).some(x=>set.has(x)))};
+   return {...data,relationships:(data.relationships||[]).filter(r=>set.has(r.from)&&(r.to||[]).some(x=>set.has(x))).map(r=>({...r,to:(r.to||[]).filter(x=>set.has(x))}))};
   }
  }
  if(type==='TRANSFORMATION_LAYER_COMPARISON'||type==='FOUR_TRANSFORMATION_ROUTE'){
@@ -145,7 +182,7 @@ export function renderZwrVfrDiagram(d,ctx={}){
  let body='';
  if(type==='TWELVE_PALACE_NATAL_MAP')body=palaceGrid(data);
  else if(type==='LIFE_BODY_AXIS')body=axis(data);
- else if(type==='PALACE_NETWORK')body=network(data);
+ else if(type==='PALACE_NETWORK')body=network(data,ctx);
  else if(type==='KEY_STAR_STRUCTURE')body=stars(data);
  else if(type==='FOUR_TRANSFORMATION_ROUTE'||type==='TRANSFORMATION_LAYER_COMPARISON')body=transformations(data);
  else if(['CAREER_PALACE_NETWORK','WEALTH_PALACE_NETWORK','RELATIONSHIP_PALACE_NETWORK','FAMILY_SUPPORT_PALACES','PRESSURE_COUNTERWEIGHT_MAP','LIFE_CAREER_WEALTH_TRAVEL_CROSS'].includes(type))body=focus(data);
