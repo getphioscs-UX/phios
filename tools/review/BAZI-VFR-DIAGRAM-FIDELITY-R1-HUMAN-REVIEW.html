@@ -1,0 +1,691 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>图示结构验收</title><style>body{margin:0;background:#182620;color:#ede7d7;font:17px/1.8 'Microsoft YaHei',sans-serif}main{max-width:1120px;margin:auto;padding:40px}h1,h2{color:#d1b375}table{width:100%;border-collapse:collapse}td,th{border:1px solid #566253;padding:12px;text-align:left}pre{white-space:pre-wrap;overflow-wrap:anywhere}a{color:#d1b375}.review-only{padding:28px;background:#182620;color:#ede7d7}.warning{border-left:3px solid #d1b375;padding:15px}article{margin:25px 0;border-top:1px solid #566253;padding-top:15px}</style><main><h1>批准版图示语法恢复 · 待人工视觉验收</h1><table><tr><th>图示</th><th>原先结构</th><th>恢复的语法</th><th>节点／连线／层级</th><th>机器检查</th></tr><tr><td>D01</td><td>四柱／柱状图</td><td>PILLAR_MATRIX</td><td>0 / 0 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D01&quot;,
+  &quot;visualGrammarId&quot;: &quot;PILLAR_MATRIX&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;hidden-stems&quot;,
+    &quot;ten-god-labels&quot;
+  ],
+  &quot;nodes&quot;: [],
+  &quot;edges&quot;: [],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D02</td><td>四柱／柱状图</td><td>ELEMENT_BARS</td><td>0 / 0 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D02&quot;,
+  &quot;visualGrammarId&quot;: &quot;ELEMENT_BARS&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;month-command&quot;
+  ],
+  &quot;nodes&quot;: [],
+  &quot;edges&quot;: [],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D03</td><td>柱状图，未分列透干与藏干</td><td>TEN_GOD_RING</td><td>0 / 0 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D03&quot;,
+  &quot;visualGrammarId&quot;: &quot;TEN_GOD_RING&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;ring&quot;,
+    &quot;visible-hidden&quot;,
+    &quot;legend&quot;
+  ],
+  &quot;nodes&quot;: [],
+  &quot;edges&quot;: [],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D04</td><td>通用卡片</td><td>SUPPORT_DIRECTION</td><td>6 / 5 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D04&quot;,
+  &quot;visualGrammarId&quot;: &quot;SUPPORT_DIRECTION&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;directed-edges&quot;,
+    &quot;support&quot;,
+    &quot;drain&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;month&quot;,
+    &quot;day&quot;,
+    &quot;peer&quot;,
+    &quot;resource&quot;,
+    &quot;support&quot;,
+    &quot;output&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;month&quot;,
+      &quot;to&quot;: &quot;day&quot;,
+      &quot;zh&quot;: &quot;泄气&quot;,
+      &quot;en&quot;: &quot;Drain&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;peer&quot;,
+      &quot;to&quot;: &quot;day&quot;,
+      &quot;zh&quot;: &quot;同类支持&quot;,
+      &quot;en&quot;: &quot;Peer support&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;resource&quot;,
+      &quot;to&quot;: &quot;day&quot;,
+      &quot;zh&quot;: &quot;承载&quot;,
+      &quot;en&quot;: &quot;Carrying&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;support&quot;,
+      &quot;to&quot;: &quot;day&quot;,
+      &quot;zh&quot;: &quot;扶身&quot;,
+      &quot;en&quot;: &quot;Support&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;output&quot;,
+      &quot;zh&quot;: &quot;表达&quot;,
+      &quot;en&quot;: &quot;Expression&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D05</td><td>通用卡片</td><td>NATAL_NETWORK</td><td>4 / 3 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D05&quot;,
+  &quot;visualGrammarId&quot;: &quot;NATAL_NETWORK&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;relation-edges&quot;,
+    &quot;legend&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;year&quot;,
+    &quot;month&quot;,
+    &quot;day&quot;,
+    &quot;hour&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;year&quot;,
+      &quot;to&quot;: &quot;month&quot;,
+      &quot;zh&quot;: &quot;三合&quot;,
+      &quot;en&quot;: &quot;Combination&quot;,
+      &quot;type&quot;: &quot;三合&quot;,
+      &quot;sourcePath&quot;: &quot;natal.relationships&quot;,
+      &quot;transformationEstablished&quot;: false
+    },
+    {
+      &quot;from&quot;: &quot;month&quot;,
+      &quot;to&quot;: &quot;day&quot;,
+      &quot;zh&quot;: &quot;三合&quot;,
+      &quot;en&quot;: &quot;Combination&quot;,
+      &quot;type&quot;: &quot;三合&quot;,
+      &quot;sourcePath&quot;: &quot;natal.relationships&quot;,
+      &quot;transformationEstablished&quot;: false
+    },
+    {
+      &quot;from&quot;: &quot;year&quot;,
+      &quot;to&quot;: &quot;hour&quot;,
+      &quot;zh&quot;: &quot;冲&quot;,
+      &quot;en&quot;: &quot;Clash&quot;,
+      &quot;type&quot;: &quot;冲&quot;,
+      &quot;sourcePath&quot;: &quot;natal.relationships&quot;,
+      &quot;transformationEstablished&quot;: false
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D06</td><td>通用卡片</td><td>CAPABILITY_CHAIN</td><td>4 / 3 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D06&quot;,
+  &quot;visualGrammarId&quot;: &quot;CAPABILITY_CHAIN&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;ordered-chain&quot;,
+    &quot;wealth&quot;,
+    &quot;resource&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;peer&quot;,
+    &quot;output&quot;,
+    &quot;wealth&quot;,
+    &quot;resource&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;peer&quot;,
+      &quot;to&quot;: &quot;output&quot;,
+      &quot;zh&quot;: &quot;判断转为表达&quot;,
+      &quot;en&quot;: &quot;Judgment into expression&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;output&quot;,
+      &quot;to&quot;: &quot;wealth&quot;,
+      &quot;zh&quot;: &quot;输出转为价值&quot;,
+      &quot;en&quot;: &quot;Output into value&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;wealth&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;保留承载条件&quot;,
+      &quot;en&quot;: &quot;Retain carrying conditions&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D07</td><td>通用卡片</td><td>OPERATING_LOOP</td><td>5 / 5 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D07&quot;,
+  &quot;visualGrammarId&quot;: &quot;OPERATING_LOOP&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;cycle&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;day&quot;,
+    &quot;output&quot;,
+    &quot;wealth&quot;,
+    &quot;resource&quot;,
+    &quot;peer&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;output&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;output&quot;,
+      &quot;to&quot;: &quot;wealth&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;wealth&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;resource&quot;,
+      &quot;to&quot;: &quot;peer&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;peer&quot;,
+      &quot;to&quot;: &quot;day&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D08</td><td>通用卡片</td><td>CAREER_CHAIN</td><td>5 / 4 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D08&quot;,
+  &quot;visualGrammarId&quot;: &quot;CAREER_CHAIN&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;ordered-chain&quot;,
+    &quot;pressure&quot;,
+    &quot;resource&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;output&quot;,
+    &quot;wealth&quot;,
+    &quot;adoption&quot;,
+    &quot;resource&quot;,
+    &quot;pressure&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;output&quot;,
+      &quot;to&quot;: &quot;wealth&quot;,
+      &quot;zh&quot;: &quot;运作路径&quot;,
+      &quot;en&quot;: &quot;Functional path&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;wealth&quot;,
+      &quot;to&quot;: &quot;adoption&quot;,
+      &quot;zh&quot;: &quot;运作路径&quot;,
+      &quot;en&quot;: &quot;Functional path&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;resource&quot;,
+      &quot;to&quot;: &quot;adoption&quot;,
+      &quot;zh&quot;: &quot;支持条件&quot;,
+      &quot;en&quot;: &quot;Support condition&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;pressure&quot;,
+      &quot;to&quot;: &quot;adoption&quot;,
+      &quot;zh&quot;: &quot;标准与责任&quot;,
+      &quot;en&quot;: &quot;Standards and responsibility&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D09</td><td>通用卡片</td><td>WEALTH_FUNNEL</td><td>5 / 4 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D09&quot;,
+  &quot;visualGrammarId&quot;: &quot;WEALTH_FUNNEL&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;staged-flow&quot;,
+    &quot;retention&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;output&quot;,
+    &quot;wealth&quot;,
+    &quot;cost&quot;,
+    &quot;resource&quot;,
+    &quot;retention&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;output&quot;,
+      &quot;to&quot;: &quot;wealth&quot;,
+      &quot;zh&quot;: &quot;运作路径&quot;,
+      &quot;en&quot;: &quot;Functional path&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;wealth&quot;,
+      &quot;to&quot;: &quot;cost&quot;,
+      &quot;zh&quot;: &quot;运作路径&quot;,
+      &quot;en&quot;: &quot;Functional path&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;cost&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;运作路径&quot;,
+      &quot;en&quot;: &quot;Functional path&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;resource&quot;,
+      &quot;to&quot;: &quot;retention&quot;,
+      &quot;zh&quot;: &quot;运作路径&quot;,
+      &quot;en&quot;: &quot;Functional path&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D10</td><td>通用卡片</td><td>DAY_BRANCH_INTERIOR</td><td>4 / 3 / 1<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D10&quot;,
+  &quot;visualGrammarId&quot;: &quot;DAY_BRANCH_INTERIOR&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;enclosure&quot;,
+    &quot;hidden-stems&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;day&quot;,
+    &quot;hidden0&quot;,
+    &quot;hidden1&quot;,
+    &quot;hidden2&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;hidden0&quot;,
+      &quot;zh&quot;: &quot;日支内藏&quot;,
+      &quot;en&quot;: &quot;Within day branch&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;hidden1&quot;,
+      &quot;zh&quot;: &quot;日支内藏&quot;,
+      &quot;en&quot;: &quot;Within day branch&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;hidden2&quot;,
+      &quot;zh&quot;: &quot;日支内藏&quot;,
+      &quot;en&quot;: &quot;Within day branch&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [
+    {
+      &quot;id&quot;: &quot;dayBranch&quot;,
+      &quot;zh&quot;: &quot;日支 辰&quot;,
+      &quot;en&quot;: &quot;Day branch 辰&quot;
+    }
+  ],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D11</td><td>通用卡片</td><td>FAMILY_NETWORK</td><td>5 / 4 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D11&quot;,
+  &quot;visualGrammarId&quot;: &quot;FAMILY_NETWORK&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;branches&quot;,
+    &quot;shared-support&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;year&quot;,
+    &quot;day&quot;,
+    &quot;hour&quot;,
+    &quot;resource&quot;,
+    &quot;shared&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;year&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;支持脉络&quot;,
+      &quot;en&quot;: &quot;Support structure&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;支持脉络&quot;,
+      &quot;en&quot;: &quot;Support structure&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;hour&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;支持脉络&quot;,
+      &quot;en&quot;: &quot;Support structure&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;resource&quot;,
+      &quot;to&quot;: &quot;shared&quot;,
+      &quot;zh&quot;: &quot;实际分担&quot;,
+      &quot;en&quot;: &quot;Actual sharing&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D12</td><td>通用卡片</td><td>RECOVERY_PATH</td><td>5 / 4 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D12&quot;,
+  &quot;visualGrammarId&quot;: &quot;RECOVERY_PATH&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;directed-edges&quot;,
+    &quot;recovery&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;output&quot;,
+    &quot;pressure&quot;,
+    &quot;day&quot;,
+    &quot;resource&quot;,
+    &quot;recovery&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;output&quot;,
+      &quot;to&quot;: &quot;pressure&quot;,
+      &quot;zh&quot;: &quot;外部要求&quot;,
+      &quot;en&quot;: &quot;External demand&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;pressure&quot;,
+      &quot;to&quot;: &quot;day&quot;,
+      &quot;zh&quot;: &quot;承载压力&quot;,
+      &quot;en&quot;: &quot;Carrying pressure&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;支持介入&quot;,
+      &quot;en&quot;: &quot;Support&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;resource&quot;,
+      &quot;to&quot;: &quot;recovery&quot;,
+      &quot;zh&quot;: &quot;恢复路径&quot;,
+      &quot;en&quot;: &quot;Recovery path&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D13</td><td>通用卡片</td><td>FUNCTION_CYCLE</td><td>5 / 5 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D13&quot;,
+  &quot;visualGrammarId&quot;: &quot;FUNCTION_CYCLE&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;cycle&quot;,
+    &quot;five-functions&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;peer&quot;,
+    &quot;output&quot;,
+    &quot;wealth&quot;,
+    &quot;pressure&quot;,
+    &quot;resource&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;peer&quot;,
+      &quot;to&quot;: &quot;output&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;output&quot;,
+      &quot;to&quot;: &quot;wealth&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;wealth&quot;,
+      &quot;to&quot;: &quot;pressure&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;pressure&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;resource&quot;,
+      &quot;to&quot;: &quot;peer&quot;,
+      &quot;zh&quot;: &quot;功能循环&quot;,
+      &quot;en&quot;: &quot;Function cycle&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D14</td><td>通用卡片</td><td>TIMING_LAYERS</td><td>3 / 2 / 3<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D14&quot;,
+  &quot;visualGrammarId&quot;: &quot;TIMING_LAYERS&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;natal&quot;,
+    &quot;dayun&quot;,
+    &quot;annual&quot;,
+    &quot;relation-connectors&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;natal&quot;,
+    &quot;dayun&quot;,
+    &quot;annual&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;natal&quot;,
+      &quot;to&quot;: &quot;dayun&quot;,
+      &quot;zh&quot;: &quot;叠加读取&quot;,
+      &quot;en&quot;: &quot;Layered reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;timing&quot;
+    },
+    {
+      &quot;from&quot;: &quot;dayun&quot;,
+      &quot;to&quot;: &quot;annual&quot;,
+      &quot;zh&quot;: &quot;当前激活&quot;,
+      &quot;en&quot;: &quot;Current activation&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;timing&quot;
+    }
+  ],
+  &quot;layers&quot;: [
+    {
+      &quot;id&quot;: &quot;natal&quot;,
+      &quot;zh&quot;: &quot;原局&quot;,
+      &quot;en&quot;: &quot;Natal&quot;,
+      &quot;value&quot;: &quot;庚申 · 甲子 · 庚辰 · 庚寅&quot;,
+      &quot;sourcePath&quot;: &quot;natal.pillars&quot;
+    },
+    {
+      &quot;id&quot;: &quot;dayun&quot;,
+      &quot;zh&quot;: &quot;当前大运&quot;,
+      &quot;en&quot;: &quot;Current Da Yun&quot;,
+      &quot;value&quot;: &quot;己巳&quot;,
+      &quot;sourcePath&quot;: &quot;timing.daYun&quot;
+    },
+    {
+      &quot;id&quot;: &quot;annual&quot;,
+      &quot;zh&quot;: &quot;年度层&quot;,
+      &quot;en&quot;: &quot;Annual layer&quot;,
+      &quot;value&quot;: &quot;丙寅&quot;,
+      &quot;sourcePath&quot;: &quot;timing.annual&quot;
+    }
+  ],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr><tr><td>D15</td><td>通用卡片</td><td>INTEGRATED_RADIAL</td><td>8 / 7 / 0<details><summary>结构要求与实际节点、连线、层级</summary><pre>{
+  &quot;diagramId&quot;: &quot;D15&quot;,
+  &quot;visualGrammarId&quot;: &quot;INTEGRATED_RADIAL&quot;,
+  &quot;requiredFeatures&quot;: [
+    &quot;center&quot;,
+    &quot;radial-connections&quot;
+  ],
+  &quot;nodes&quot;: [
+    &quot;day&quot;,
+    &quot;peer&quot;,
+    &quot;output&quot;,
+    &quot;wealth&quot;,
+    &quot;pressure&quot;,
+    &quot;resource&quot;,
+    &quot;timing&quot;,
+    &quot;relations&quot;
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;peer&quot;,
+      &quot;zh&quot;: &quot;整体关联&quot;,
+      &quot;en&quot;: &quot;Integrated reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;output&quot;,
+      &quot;zh&quot;: &quot;整体关联&quot;,
+      &quot;en&quot;: &quot;Integrated reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;wealth&quot;,
+      &quot;zh&quot;: &quot;整体关联&quot;,
+      &quot;en&quot;: &quot;Integrated reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;pressure&quot;,
+      &quot;zh&quot;: &quot;整体关联&quot;,
+      &quot;en&quot;: &quot;Integrated reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;resource&quot;,
+      &quot;zh&quot;: &quot;整体关联&quot;,
+      &quot;en&quot;: &quot;Integrated reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;timing&quot;,
+      &quot;zh&quot;: &quot;整体关联&quot;,
+      &quot;en&quot;: &quot;Integrated reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    },
+    {
+      &quot;from&quot;: &quot;day&quot;,
+      &quot;to&quot;: &quot;relations&quot;,
+      &quot;zh&quot;: &quot;整体关联&quot;,
+      &quot;en&quot;: &quot;Integrated reading&quot;,
+      &quot;type&quot;: &quot;FUNCTIONAL&quot;,
+      &quot;sourcePath&quot;: &quot;globalVerdict.primaryPattern&quot;
+    }
+  ],
+  &quot;layers&quot;: [],
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;errors&quot;: []
+}</pre></details></td><td>PASS</td></tr></table><p><a href="BAZI-DEEP-MANUSCRIPT-R2-PUBLICATION-REVIEW-R2.html">查看完整出版候选</a></p></main></html>

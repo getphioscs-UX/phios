@@ -1,37 +1,25 @@
+import {renderBaziDiagram} from './bazi-deep-diagrams.js';
+import {layoutProfile} from '../../../../functions/personal-reading/publication-fit/bazi-publication-layout-profiles.js';
 import {renderReportCoverOverlay} from '../../../../functions/canonical-presentation-runtime/report-cover-overlay.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function lines(value,width){const chars=[...String(value??'—')],out=[];for(let i=0;i<chars.length;i+=width)out.push(chars.slice(i,i+width).join(''));return out;}
-function visual(d){
- const nodes=d.nodes;
- let content;
- if(d.type==='bars'){
-  const max=Math.max(1,...nodes.map(n=>n.value||0));content=nodes.map((n,i)=>{const y=25+i*43;return `<g><text x="6" y="${y+13}" class="bdm-bar-label">${esc(n.label)}</text><rect x="300" y="${y}" width="330" height="19" class="bdm-track"/><rect x="300" y="${y}" width="${330*(n.value||0)/max}" height="19" class="bdm-bar"/><text x="655" y="${y+15}">${esc(n.value)}</text></g>`;}).join('');
- }else if(d.type==='pillars'){
-  content=nodes.map((n,i)=>{const x=18+i*174;return `<g><rect x="${x}" y="30" width="154" height="345" rx="16" class="bdm-node"/><text x="${x+77}" y="77" text-anchor="middle" class="bdm-diagram-label">${esc(n.label)}</text>${[...n.value].map((v,j)=>`<text x="${x+77}" y="${158+j*90}" text-anchor="middle" class="bdm-pillar">${esc(v)}</text>`).join('')}<text x="${x+77}" y="332" text-anchor="middle">${esc(n.hiddenStems.join(' · '))}</text></g>`;}).join('');
- }else{
-  // These panels preserve source structure. Edges are never inferred from layout.
-  const cols=nodes.length>7?3:2,cellWidth=690/cols,rows=Math.ceil(nodes.length/cols),cellHeight=Math.min(130,430/rows);
-  content=nodes.map((n,i)=>{const x=10+i%cols*cellWidth,y=10+Math.floor(i/cols)*cellHeight,w=cellWidth-12;const valueLines=lines(n.value,cols===3?13:20);const display=valueLines.length>3?valueLines.slice(0,3).concat('…'):valueLines;return `<g><rect x="${x}" y="${y}" width="${w}" height="${cellHeight-10}" rx="12" class="bdm-node"/><text x="${x+12}" y="${y+26}" class="bdm-diagram-label">${esc(n.label)}</text>${display.map((l,j)=>`<text x="${x+12}" y="${y+52+j*20}">${esc(l)}</text>`).join('')}</g>`;}).join('');
- }
- return `<figure data-diagram-id="${esc(d.id)}"><svg viewBox="0 0 720 470" role="img" aria-label="${esc(d.zh+' / '+d.en)}"><title>${esc(d.zh+' / '+d.en)}</title>${content}</svg><figcaption><p>${esc(d.caption.zh)}</p><p lang="en">${esc(d.caption.en)}</p></figcaption></figure>`;
-}
-function prose(content){return ['zh-Hans','en'].map(locale=>`<div lang="${locale}" class="bdm-locale">${(content?.[locale]||[]).map(s=>`<p>${esc(s.text)}${s.excerpted?'…':''}</p>`).join('')}</div>`).join('');}
+function prose(content,locales){return locales.map(locale=>`<div lang="${locale}" class="bdm-locale">${(content?.[locale]||[]).map(s=>`<p data-source-start="${s.start}" data-source-end="${s.end}" data-source-role="${s.role}">${esc(s.text)}</p>`).join('')}</div>`).join('');}
 export function renderBaziDeepManuscript(ir){
  if(ir.method!=='BAZI'||ir.publication?.pages?.length!==48||ir.technical?.diagrams?.length!==15)throw Error('BDM_RESOLVED_IR_REQUIRED');
+ const mode=ir.presentationMode,locales=layoutProfile(mode).locales;const title=t=>mode==='EN'?esc(t.en):mode==='ZH_HANS'?esc(t.zh):esc(t.zh)+'<small lang="en">'+esc(t.en)+'</small>';
  const identity={displayName:null,birthDate:null,birthTime:null,timeAccuracy:'UNKNOWN',...ir.identity};
  const pages=ir.publication.pages.map(p=>{
   let body;
-  if(p.staticAsset){body=`<div class="pub-decoration pub-decoration--single"><img class="pub-page-background" src="${esc(p.staticAsset)}" alt="${esc(p.title.zh)}"></div>`+(p.staticFolioMasks||[]).map(m=>`<span class="bdm-static-folio-mask" data-pagination-owner="BDM_GLOBAL_PAGINATION" style="left:${m.left}%;top:${m.top}%;width:${m.width}%;height:${m.height}%"><b>${String(p.pageNumber).padStart(2,'0')}</b>${m.mode==='PAGE_TOTAL'?'<small>/ '+ir.publication.pageCount+'</small>':''}</span>`).join('')+(p.pageNumber===1?renderReportCoverOverlay({methodId:'BZR',subject:identity}):'');}
+  if(p.staticAsset){body=`<div class="pub-decoration pub-decoration--single"><img class="pub-page-background" src="${esc(p.staticAsset)}" alt="${esc(p.title.zh)}"></div>`+(p.staticFolioMasks||[]).map(m=>`<span class="bdm-static-folio-mask" data-pagination-owner="BDM_GLOBAL_PAGINATION" style="left:${m.left}%;top:${m.top}%;width:${m.width}%;height:${m.height}%"><b>${String(p.pageNumber).padStart(2,'0')}</b>${m.mode==='PAGE_TOTAL'?'<small>/ '+ir.publication.pageCount+'</small>':''}</span>`).join('')+(p.pageNumber===1?renderReportCoverOverlay({methodId:'BZR',subject:identity,locale:mode==='EN'?'en':mode==='ZH_HANS'?'zh-Hans':'bilingual'}):'');}
   else{
-   const diagram=ir.technical.diagrams.find(d=>d.id===p.diagramId);
-   const heading=`<div class="pub-heading"><h2>${esc(p.title.zh)}</h2><p lang="en">${esc(p.title.en)}</p></div>`;
+   const diagrams=ir.technical.diagrams.filter(d=>d.id===p.diagramId||p.diagramIds?.includes(d.id));
+   const heading=`<div class="pub-heading"><h2>${title(p.title)}</h2></div>`;
    const decoration=`<div class="pub-decoration pub-decoration--single"><img class="pub-page-background" src="${esc(p.sectionMasterAsset||p.bodyAsset)}" alt=""></div>`;
-   const content=p.insightCards?`<div class="bdm-insights">${p.insightCards['zh-Hans'].map((s,i)=>`<div><b>0${i+1}</b><p>${esc(s.text)}${s.excerpted?'…':''}</p><p lang="en">${esc(p.insightCards.en[i].text)}${p.insightCards.en[i].excerpted?'…':''}</p></div>`).join('')}</div>`:diagram?visual(diagram):prose(p.content);
-   body=decoration+`<header class="pub-header"><span>P H I O S</span><span>八字 / BaZi</span></header>`+heading+`<div class="bdm-content">${content}</div>`;
+   const content=p.insightCards?`<div class="bdm-insights">${Array.from({length:3},(_,i)=>`<div><b>0${i+1}</b>${locales.map(l=>{const v=p.insightCards[l][i];return v?`<p lang="${l}" data-source-start="${v.start}" data-source-end="${v.end}" data-source-role="${v.role}">${esc(v.text)}</p>`:'<p data-missing-required="true">'+(mode==='EN'?'Editorial selection pending':'待补齐审阅选段')+'</p>';}).join('')}</div>`).join('')}</div>`:diagrams.length?diagrams.map(d=>renderBaziDiagram(d,mode,diagrams.length===2)).join(''):p.role==='OVERVIEW'?`<div class="bdm-overview"><p>${mode==='EN'?'Natal pillars':mode==='ZH_HANS'?'四柱':'四柱 / Natal pillars'}</p><h3>${ir.technical.diagrams[0].nodes.map(n=>esc(n.value)).join(' · ')}</h3><p>${mode==='EN'?'Day Master':mode==='ZH_HANS'?'日主':'日主 / Day Master'}：${esc(ir.technical.diagrams[3].nodes[0].value)}</p><p>${mode==='EN'?'The following foundation pages distinguish inventory, functional support and natal relations.':mode==='ZH_HANS'?'以下基础页分别呈现四柱藏干、五行十神、日主支持与原局关系。':'以下基础页分别呈现四柱藏干、五行十神、日主支持与原局关系。 / The following pages separate inventory, support and natal relations.'}</p></div>`:prose(p.content,locales);
+   body=decoration+`<header class="pub-header"><span>P H I O S</span><span>${mode==='EN'?'BaZi':mode==='ZH_HANS'?'八字':'八字 / BaZi'}</span></header>`+heading+`<div class="bdm-content">${content}</div>`;
   }
-  return `<section class="pub-page bdm-page${p.staticAsset?' bdm-static':''}" data-page-number="${p.pageNumber}" data-page-role="${p.role}" data-section-id="${p.sectionId||''}">${body}<footer class="pub-footer"><span>在情境中理解人生 / Your life, in context</span><span>${p.pageNumber} / 48</span></footer></section>`;
+  return `<section class="pub-page bdm-page${p.staticAsset?' bdm-static':''}" data-page-number="${p.pageNumber}" data-page-role="${p.role}" data-section-id="${p.sectionId||''}">${body}<footer class="pub-footer"><span>${mode==='EN'?'Your life, in context':mode==='ZH_HANS'?'在情境中理解人生':'在情境中理解人生 / Your life, in context'}</span><span>${p.pageNumber} / 48</span></footer></section>`;
  });
- return `<article class="pub-report bdm-report" data-method="BZR" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-manuscript-digest="${esc(ir.manuscript.digest)}">${pages.join('')}</article>`;
+ return `<article class="pub-report bdm-report" data-recompose-pass="${ir.publication.recomposePass||0}" data-presentation-mode="${mode}" data-method="BZR" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2" data-manuscript-digest="${esc(ir.manuscript.digest)}">${pages.join('')}</article>`;
 }
 // Browser/PDF/print readiness is technical. No provider or authoring dependency.
 export function inspectBaziDeepLayout(root){

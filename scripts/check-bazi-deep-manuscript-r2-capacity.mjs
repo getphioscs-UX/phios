@@ -5,7 +5,7 @@ import {planBaziDeepManuscriptOutputBudget,baziTokenCost,estimateBaziTokens} fro
 import {buildBaziManuscriptSchema} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-schema.js';
 import {projectBaziBatchAuthority,buildPriorSectionSummary} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-batch-authority.js';
 import {ROOT,read,write,loadBaziPlanningConfig,loadBaziReviewAuthority} from './lib/bazi-deep-manuscript-review.mjs';
-const {policy,model,history}=loadBaziPlanningConfig(),pack=await loadBaziReviewAuthority(),r=read('content/reports/bazi/deep-manuscript/bazi-deep-manuscript-r2-capacity-admission.json');
+const {policy,model,history}=loadBaziPlanningConfig(),pack=await loadBaziReviewAuthority(),r=read(fs.existsSync(ROOT+'POST-REPAIR-CAPACITY-ADMISSION.json')?ROOT+'POST-REPAIR-CAPACITY-ADMISSION.json':'content/reports/bazi/deep-manuscript/bazi-deep-manuscript-r2-capacity-admission.json');
 let tests=[];function check(name,f){f();tests.push({name,status:'PASS'});}
 const args=i=>({authority:projectBaziBatchAuthority(pack,BATCHES[i].batchId),priorSummary:buildPriorSectionSummary(pack,BATCHES[i].batchId),units:BATCHES[i].sectionIds.flatMap(sectionId=>LOCALES.map(locale=>({sectionId,locale}))),history,model,policy});
 const plans=BATCHES.map((_,i)=>planBaziDeepManuscriptOutputBudget(args(i)));
