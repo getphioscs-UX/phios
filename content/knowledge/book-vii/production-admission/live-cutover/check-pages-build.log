@@ -1,0 +1,27 @@
+
+> check:pages-build
+> node scripts/run-zero-cost-regression.mjs check:pages-build
+
+
+> check:visual-report-commerce-binding
+> node scripts/run-zero-cost-regression.mjs check:visual-report-commerce-binding
+
+PASS visual-report commerce binding: current primary products use projected prices; legacy-readable reports fall back to the canonical report commerce contract without top-level undefined price access.
+node:fs:1222
+  return binding.rmSync(getValidatedPath(path), opts.maxRetries, opts.recursive, opts.retryDelay);
+                 ^
+
+Error: EPERM, Permission denied: \\?\C:\phios\.pages-output '\\?\C:\phios\.pages-output'
+    at Object.rmSync (node:fs:1222:18)
+    at cleanDirectory (file:///C:/phios/scripts/build-cloudflare-pages.mjs:130:6)
+    at file:///C:/phios/scripts/build-cloudflare-pages.mjs:146:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: 1,
+  code: 'EPERM',
+  path: '\\\\?\\C:\\phios\\.pages-output',
+  syscall: 'rm'
+}
+
+Node.js v24.18.0

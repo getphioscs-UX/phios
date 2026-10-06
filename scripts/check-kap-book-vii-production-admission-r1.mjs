@@ -5,11 +5,14 @@ import {onRequestGet} from '../functions/api/ask-phios.js';
 import {handlePublicKnowledgeRequest} from '../functions/_lib/public-knowledge-api.js';
 import {runPackageB} from './lib/knowledge-runtime/knr-package-b-v1.mjs';
 import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
+import {assertKapEvidenceOrMaintenance} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
+import {reconcileEpistemicGuidedStop} from '../functions/_lib/knowledge-epistemic-reading.js';
 const root='content/knowledge/book-vii',dir=`${root}/production-admission/live-cutover`,kap='content/knowledge/answer-projection';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const human=read(`${kap}/acceptance/kap-book-vii-observation-science-successor-acceptance-v1.json`),freeze=read(`${kap}/freeze/kap-book-vii-observation-science-successor-freeze-v1.json`),baseline=read(`${dir}/baseline-v1.json`);
 assert.equal(human.status,'HUMAN_ACCEPTED_FOR_PRODUCTION_ADMISSION');
 for(const e of [...freeze.frozenOutputs,...freeze.historical])assert.equal(hash(e.path),e.sha256,e.path);
+for(const e of freeze.acceptedRuntime)assertKapEvidenceOrMaintenance(e);
 assert.equal(hash(freeze.acceptedSuccessor.path),freeze.acceptedSuccessor.sha256);
 const release=await loadBookViiPublishedAdmission(async p=>read(p));assert.ok(release);assert.equal(release.publishedNodeCount,100);assert.equal(release.publishedKnowledgeNodeCount,11);
 const registry=read(`${root}/registries/book-vii-observation-science-node-registry-v1.json`),figures=read(`${root}/registries/book-vii-observation-science-figure-registry-v1.json`),r2=read(`${root}/registries/book-vii-observation-science-r2-asset-registry-v1.json`);
@@ -50,6 +53,7 @@ try{
    for(const n of c.support||[])assert.ok(result.sources.some(s=>s.nodeCode===n),`${c.id}:support=${n}`);
    if(c.state)assert.equal(result.answer.epistemicReading?.knowledgeState,c.state,c.id);
    if(c.state==='CONTESTED'){assert.equal(result.answer.epistemicReading.primaryReading,'');assert.ok(result.answer.epistemicReading.alternativeReadings.length>=2);}
+   if(c.state==='UNKNOWN'){const stop=reconcileEpistemicGuidedStop({status:'CONTINUE_READING'},result.answer.epistemicReading);assert.equal(stop.status,'STOP_AT_UNKNOWN');assert.equal(stop.automaticEscalation,false);}
    if(c.state==='PROJECTED')assert.match(result.answer.epistemicReading.confidenceBoundary,/投影不是事实/);
    if(c.id==='FIGURE_14H'){assert.match(JSON.stringify(result.answer.content),/14\.96/);assert.match(JSON.stringify(result.answer.content),/14\.85–14\.95/);assert.equal(result.answer.epistemicReading,undefined);}
    const before=await handlePublicKnowledgeRequest(new Request(`http://localhost/api/knowledge/public?${new URLSearchParams({q:c.question,locale:'zh-Hans'})}`),{ASSETS:assets(false)});

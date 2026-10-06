@@ -48,6 +48,8 @@ for(const n of registry.nodes){
 }
 const pairs=[[57,71,'related'],[65,90,'supporting'],[90,65,'supporting'],[86,96,'boundary'],[92,71,'boundary'],[96,86,'related'],[99,100,'supporting'],[100,99,'boundary']];
 pub.relationships=pairs.map(([a,b,type])=>({relationshipCode:`B7-CUTOVER-REL-${a}-${b}`,sourceNodeCode:code(a),targetNodeCode:code(b),locale:'zh-Hans',type,targetPublished:true,includeInGrounding:type==='supporting'}));
+for(const f of read(dir+'/supplemental-governed-fragments-v1.json').fragments){const packet=release.packages.find(p=>p.nodeCode===f.nodeCode);packet.content+='\n'+f.text;packet.approvedFragments.push(f);pub.fragments.push(f);}
+for(const packet of release.packages){for(const f of packet.approvedFragments)if(f.epistemicEvidence?.conceptualState)f.epistemicEvidence.applicableQuestions=['如果两个高质量证据互相冲突怎么办？','两个高质量证据互相冲突怎么办？'];const d=digest(JSON.stringify(packet));pub.nodes.find(n=>n.nodeCode===packet.nodeCode).authorityDigest=d;const p=pub.publications.find(p=>p.nodeCode===packet.nodeCode);p.authorityDigest=d;p.publicationDigest=d;}
 release.publishedNodeCount=100;release.publishedKnowledgeNodeCount=pub.nodes.filter(n=>!n.identityOnly).length;
 release.governance.identityMetadataIsNotProseAuthority=true;
 const releasePath='content/knowledge/public/successors/book-vii-production-live-cutover-r1/published-projection.json';write(releasePath,release);
@@ -55,9 +57,9 @@ write(`${dir}/publication-census-v1.json`,{canonicalNodes:100,knowledgeNodes:rel
 write('content/knowledge/public/successors/book-vii-production-live-cutover-r1/relationships.json',{predecessor:{path:'content/knowledge/public/retrieval/relationships.json',sha256:hash('content/knowledge/public/retrieval/relationships.json')},records:pub.relationships,digest:digest(JSON.stringify(pub.relationships))});
 const change=(p,fn)=>fs.writeFileSync(p,fn(fs.readFileSync(p,'utf8')));
 change(runtimes[0],s=>s.replace('book-vii-production-admission-v1/published-projection.json','book-vii-production-live-cutover-r1/published-projection.json'));
-change(runtimes[1],s=>s.replace("  if(e.future===true) return 'PROJECTED';","  if(e.future===true) return 'PROJECTED';\n  if(e.conceptualState==='CONTESTED'&&e.evidenceScope==='CONCEPTUAL_BOUNDARY_NOT_ACTUAL_WORLD_EVIDENCE') return 'CONTESTED';").replace("export function deriveAlternativeReadings(e={}) { const primary=derivePrimaryReading(e);", "export function deriveAlternativeReadings(e={}) { if(e.conceptualState==='CONTESTED'&&e.evidenceScope==='CONCEPTUAL_BOUNDARY_NOT_ACTUAL_WORLD_EVIDENCE') return (e.conceptualReadings||[]).map(cleanText).filter(Boolean); const primary=derivePrimaryReading(e);"));
+change(runtimes[1],s=>s.includes('CONCEPTUAL_BOUNDARY_NOT_ACTUAL_WORLD_EVIDENCE')?s:s.replace("  if(e.future===true) return 'PROJECTED';","  if(e.future===true) return 'PROJECTED';\n  if(e.conceptualState==='CONTESTED'&&e.evidenceScope==='CONCEPTUAL_BOUNDARY_NOT_ACTUAL_WORLD_EVIDENCE') return 'CONTESTED';").replace("export function deriveAlternativeReadings(e={}) { const primary=derivePrimaryReading(e);", "export function deriveAlternativeReadings(e={}) { if(e.conceptualState==='CONTESTED'&&e.evidenceScope==='CONCEPTUAL_BOUNDARY_NOT_ACTUAL_WORLD_EVIDENCE') return (e.conceptualReadings||[]).map(cleanText).filter(Boolean); const primary=derivePrimaryReading(e);"));
 change(runtimes[2],s=>s.replace('source.match(/[^。！？.!?]+[。！？.!?]?/g)',"source.match(/(?:[^。！？.!?]|(?<=\\d)\\.(?=\\d))+[。！？.!?]?/g)"));
-change(runtimes[3],s=>s.replace("  const selected=selectFragments(mode,top.fragments,query);",`  const selected=selectFragments(mode,top.fragments,query);
+change(runtimes[3],s=>s.includes('const support=relationshipsP.records')?s:s.replace("  const selected=selectFragments(mode,top.fragments,query);",`  const selected=selectFragments(mode,top.fragments,query);
   if(top.node.bookCode==='BOOK-7'&&exact){
     const support=relationshipsP.records.filter(r=>r.sourceNodeCode===top.node.nodeCode&&r.locale===locale&&r.targetPublished&&r.includeInGrounding);
     for(const relationship of support)selected.push(...fragmentsP.records.filter(f=>f.nodeCode===relationship.targetNodeCode&&f.locale===locale));

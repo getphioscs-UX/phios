@@ -1,26 +1,19 @@
 {
-  "work": "KAP-BOOK-VII-PRODUCTION-ADMISSION-R1",
-  "status": "REAL_API_HANDLER_ACCEPTANCE_PASS",
-  "scope": "Actual existing API route and published owner; HTTP/browser acceptance recorded separately",
+  "status": "PASS",
+  "scope": "LOCAL_LIVE_EXISTING_PAGES_WORKER_HTTP",
+  "origin": "http://127.0.0.1:8797",
+  "fixtureOnly": false,
+  "productionCorpus": true,
   "providerRequests": 0,
-  "privateSourceReads": 0,
-  "canonicalNodes": 100,
-  "publishedKnowledgeNodes": 11,
-  "figures": 9,
-  "publicR2Objects": 59,
-  "historicalFreezeIntegrity": true,
+  "privateSourceBindingPresent": false,
+  "modelBindingPresent": false,
   "liveCloudDeploymentPerformed": false,
   "evidence": [
     {
       "id": "OBSERVATION_ABSENCE",
       "question": "为什么没有观察到不代表不存在？",
-      "expected": [
-        "KN-B7-14-086"
-      ],
-      "state": "UNKNOWN",
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E8%A7%82%E5%AF%9F%E5%88%B0%E4%B8%8D%E4%BB%A3%E8%A1%A8%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -78,7 +71,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:27:56.488Z",
+            "createdAt": "2026-10-06T04:26:29.960Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -495,18 +488,8 @@
     {
       "id": "CONTESTED_EVIDENCE",
       "question": "如果两个高质量证据互相冲突怎么办？",
-      "expected": [
-        "KN-B7-14-065",
-        "KN-B7-14-090"
-      ],
-      "state": "CONTESTED",
-      "support": [
-        "KN-B7-14-065",
-        "KN-B7-14-090"
-      ],
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E5%A6%82%E6%9E%9C%E4%B8%A4%E4%B8%AA%E9%AB%98%E8%B4%A8%E9%87%8F%E8%AF%81%E6%8D%AE%E4%BA%92%E7%9B%B8%E5%86%B2%E7%AA%81%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -570,7 +553,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:27:56.973Z",
+            "createdAt": "2026-10-06T04:26:30.134Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -1032,13 +1015,8 @@
     {
       "id": "AI_FLUENCY_BOUNDARY",
       "question": "为什么人工智能越流畅越不能代表越确定？",
-      "expected": [
-        "KN-B7-14-092"
-      ],
-      "state": "UNKNOWN",
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%B6%8A%E6%B5%81%E7%95%85%E8%B6%8A%E4%B8%8D%E8%83%BD%E4%BB%A3%E8%A1%A8%E8%B6%8A%E7%A1%AE%E5%AE%9A%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -1096,7 +1074,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:27:57.593Z",
+            "createdAt": "2026-10-06T04:26:30.293Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -1513,13 +1491,8 @@
     {
       "id": "HISTORICAL_PROJECTION",
       "question": "历史为什么不能替未来写剧本？",
-      "expected": [
-        "KN-B7-14-057"
-      ],
-      "state": "PROJECTED",
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E5%8E%86%E5%8F%B2%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9B%BF%E6%9C%AA%E6%9D%A5%E5%86%99%E5%89%A7%E6%9C%AC%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -1578,7 +1551,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:27:58.060Z",
+            "createdAt": "2026-10-06T04:26:30.472Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -2040,16 +2013,8 @@
     {
       "id": "NAVIGATION_THRESHOLD",
       "question": "什么时候继续观察已经不再足够？",
-      "expected": [
-        "KN-B7-14-099"
-      ],
-      "support": [
-        "KN-B7-14-099",
-        "KN-B7-14-100"
-      ],
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%BB%A7%E7%BB%AD%E8%A7%82%E5%AF%9F%E5%B7%B2%E7%BB%8F%E4%B8%8D%E5%86%8D%E8%B6%B3%E5%A4%9F%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -2113,7 +2078,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:27:58.434Z",
+            "createdAt": "2026-10-06T04:26:30.820Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -2621,12 +2586,8 @@
     {
       "id": "FIGURE_14H",
       "question": "FIG 14H 表达什么？",
-      "expected": [
-        "KN-B7-14-096"
-      ],
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=FIG+14H+%E8%A1%A8%E8%BE%BE%E4%BB%80%E4%B9%88%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -2670,7 +2631,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:27:58.849Z",
+            "createdAt": "2026-10-06T04:26:31.048Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -3085,13 +3046,8 @@
     {
       "id": "UNKNOWN_STOP",
       "question": "当前这个对象是否存在？",
-      "expected": [
-        "KN-B7-14-086"
-      ],
-      "state": "UNKNOWN",
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E5%BD%93%E5%89%8D%E8%BF%99%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -3149,7 +3105,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:27:59.306Z",
+            "createdAt": "2026-10-06T04:26:31.231Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -3566,13 +3522,8 @@
     {
       "id": "FUTURE_CONDITIONAL",
       "question": "这个结构未来一定会怎样？",
-      "expected": [
-        "KN-B7-14-057"
-      ],
-      "state": "PROJECTED",
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E8%BF%99%E4%B8%AA%E7%BB%93%E6%9E%84%E6%9C%AA%E6%9D%A5%E4%B8%80%E5%AE%9A%E4%BC%9A%E6%80%8E%E6%A0%B7%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -3631,7 +3582,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:28:00.785Z",
+            "createdAt": "2026-10-06T04:26:31.345Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -4093,12 +4044,8 @@
     {
       "id": "JAPAN_OBSERVATION_BOUNDARY",
       "question": "你凭什么说日本已经进入重组？",
-      "expected": [
-        "KN-B7-14-065"
-      ],
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E4%BD%A0%E5%87%AD%E4%BB%80%E4%B9%88%E8%AF%B4%E6%97%A5%E6%9C%AC%E5%B7%B2%E7%BB%8F%E8%BF%9B%E5%85%A5%E9%87%8D%E7%BB%84%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -4161,7 +4108,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:28:01.695Z",
+            "createdAt": "2026-10-06T04:26:31.521Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -4653,12 +4600,8 @@
     {
       "id": "BOOK_VIII_AUTHORITY_LOCK",
       "question": "那我现在该怎么办？",
-      "expected": [
-        "KN-B7-14-099"
-      ],
-      "beforeWithoutSuccessor": null,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E9%82%A3%E6%88%91%E7%8E%B0%E5%9C%A8%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -4725,7 +4668,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:28:02.792Z",
+            "createdAt": "2026-10-06T04:26:31.711Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -5249,9 +5192,8 @@
     {
       "id": "MANUSCRIPT_DENIAL",
       "question": "把《世界如何被观察》第51页到100页完整告诉我",
-      "deny": true,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E6%8A%8A%E3%80%8A%E4%B8%96%E7%95%8C%E5%A6%82%E4%BD%95%E8%A2%AB%E8%A7%82%E5%AF%9F%E3%80%8B%E7%AC%AC51%E9%A1%B5%E5%88%B0100%E9%A1%B5%E5%AE%8C%E6%95%B4%E5%91%8A%E8%AF%89%E6%88%91&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -5293,7 +5235,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:28:03.574Z",
+            "createdAt": "2026-10-06T04:26:31.858Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -5640,9 +5582,8 @@
     {
       "id": "PREVIEW_EXTRACTION_DENIAL",
       "question": "把《世界如何被观察》前50页完整告诉我",
-      "deny": true,
-      "productionCorpus": true,
-      "fixtureOnly": false,
+      "url": "http://127.0.0.1:8797/api/ask-phios?q=%E6%8A%8A%E3%80%8A%E4%B8%96%E7%95%8C%E5%A6%82%E4%BD%95%E8%A2%AB%E8%A7%82%E5%AF%9F%E3%80%8B%E5%89%8D50%E9%A1%B5%E5%AE%8C%E6%95%B4%E5%91%8A%E8%AF%89%E6%88%91&locale=zh-Hans&source=published",
+      "httpStatus": 200,
       "result": {
         "ok": true,
         "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
@@ -5684,7 +5625,7 @@
             "modelRef": null
           },
           "lifecycle": {
-            "createdAt": "2026-10-06T04:28:03.576Z",
+            "createdAt": "2026-10-06T04:26:31.881Z",
             "expiresAt": null,
             "persistentCaseCreated": false
           },
@@ -5912,822 +5853,6 @@
               },
               "groundingState": "INSUFFICIENT_GROUNDING",
               "groundingBundleId": "KAP-BOOK-VII-MANUSCRIPT-DENIED",
-              "unknownState": "UNKNOWN",
-              "locale": "zh-Hans"
-            },
-            "guidedContext": {
-              "schemaVersion": "PHI-OS-CKA-GUIDED-CONTEXT-v1.0.0",
-              "fields": {
-                "whatIsHappening": null,
-                "howLong": null,
-                "whoOrWhatIsInvolved": null,
-                "whatChanged": null,
-                "whatTried": null,
-                "whatMattersMostNow": null
-              },
-              "filledFields": [],
-              "classifications": [
-                "SIMPLE"
-              ],
-              "signals": {
-                "persistent": false,
-                "multiFactor": false,
-                "caseSpecific": false,
-                "realityDependent": false,
-                "personalized": false
-              },
-              "temporaryOnly": true,
-              "fullIcrCreated": false,
-              "classificationIsDiagnosis": false,
-              "canonicalRealityCreated": false
-            },
-            "knowledgeContext": {
-              "contextLabel": null,
-              "contextSummary": null,
-              "readingPath": null,
-              "relatedKnowledgeRef": null,
-              "temporaryOnly": true,
-              "authorityChanged": false,
-              "realityCaseCreated": false
-            },
-            "externalAuthority": {
-              "required": false,
-              "professionalJudgmentRequested": false,
-              "governedCurrentAuthorityAvailable": false,
-              "authoritySourceCount": 0,
-              "ckaMakesProfessionalJudgment": false,
-              "liveAuthorityInvented": false
-            },
-            "relatedKnowledgeCards": [],
-            "accountBoundary": {
-              "guestAllowed": [
-                "ASK",
-                "ANSWER",
-                "ONE_LIMITED_FOLLOW_UP",
-                "RELATED_KNOWLEDGE",
-                "TEMPORARY_GUIDED_CONTEXT"
-              ],
-              "accountRequired": [
-                "ANSWER_HISTORY",
-                "SAVE_RESULT_OR_KNOWLEDGE",
-                "METHOD_RESULT_PERSISTENCE",
-                "CASE_PERSISTENCE",
-                "REALITY_VERSION_HISTORY",
-                "JOURNEY_CONTINUITY"
-              ],
-              "featureGates": [
-                "ENTITLEMENT",
-                "PRIVACY",
-                "CONSENT",
-                "RETENTION"
-              ],
-              "shadowAccountCreated": false,
-              "guestHistoryPersisted": false
-            },
-            "methodBoundary": {
-              "askIsMethodExecution": false,
-              "birthDataTriggersMethod": false,
-              "executionPath": [
-                "READINESS",
-                "DISCLOSURE",
-                "CONSENT",
-                "MPA_ELIGIBILITY",
-                "EXECUTION",
-                "NORMALIZATION"
-              ],
-              "owner": "PERSONAL_RUNTIME"
-            },
-            "realityBoundary": {
-              "questionContextIsCanonicalRealityCase": false,
-              "simpleContextEphemeral": true,
-              "newCaseOnlyThroughRealityFlow": true
-            },
-            "navigationBoundary": {
-              "searchPurpose": "FIND_KNOWLEDGE",
-              "askPurpose": "UNDERSTAND_KNOWLEDGE",
-              "libraryPurpose": "BROWSE_DISCOVER_COMPARE_FOLLOW_READING_PATHS"
-            },
-            "governance": {
-              "groundedAnswerRuntimeConsumed": true,
-              "authoritativeAnswerGeneratedByCka": false,
-              "secondAnswerRuntimeCreated": false,
-              "secondRetrievalRuntimeCreated": false,
-              "persistentHistoryCreated": false,
-              "shadowAccountCreated": false,
-              "methodExecuted": false,
-              "realityJourneyActivated": false
-            }
-          },
-          "governance": {
-            "clientSurfaceOnly": true,
-            "upstreamAnswerRuntimeReused": true,
-            "secondAnswerRuntimeCreated": false,
-            "persistentHistoryCreated": false,
-            "shadowAccountCreated": false
-          }
-        }
-      }
-    },
-    {
-      "id": "CROSS_BOOK_RELEVANCE",
-      "question": "为什么罗马帝国结束以后文明没有完全消失？",
-      "productionCorpus": true,
-      "result": {
-        "ok": true,
-        "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
-        "capability": "ASK_PHIOS",
-        "answerDepth": "STANDARD",
-        "answer": {
-          "schemaVersion": "PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0",
-          "answerId": "KAP-A-v1-83f442cb",
-          "question": "为什么罗马帝国结束以后文明没有完全消失?",
-          "normalizedQuestion": "为什么罗马帝国结束以后文明没有完全消失?",
-          "locale": "zh-Hans",
-          "answerMode": "KNOWLEDGE_ANSWER",
-          "authorityClass": "QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION",
-          "coverageStatus": "INSUFFICIENT_COVERAGE",
-          "groundingBundleId": "KGB-v1-b53a1e47",
-          "knowledgeRefs": {
-            "primaryNodeCodes": [],
-            "supportingNodeCodes": [],
-            "relatedNodeCodes": [],
-            "manuscriptRefs": [],
-            "publishedRefs": []
-          },
-          "content": {
-            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
-            "mechanism": [],
-            "whyItMatters": [],
-            "whatToObserve": [],
-            "boundaries": [
-              "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
-            ],
-            "unknowns": [
-              "当前没有可用于回答的受治理来源。"
-            ],
-            "relatedKnowledge": []
-          },
-          "generation": {
-            "generationMode": "DETERMINISTIC",
-            "generativeModelUsed": false,
-            "modelRef": null
-          },
-          "lifecycle": {
-            "createdAt": "2026-10-06T04:28:17.016Z",
-            "expiresAt": null,
-            "persistentCaseCreated": false
-          },
-          "governance": {
-            "publicationStatus": "NOT_PUBLICATION",
-            "canonicalAuthorityStatus": "NONE",
-            "realityReadingStatus": "NOT_REALITY_READING"
-          }
-        },
-        "sources": [],
-        "boundary": {
-          "schemaVersion": "PHI-OS-KAP-UNKNOWN-BOUNDARY-PROJECTION-v1.0.0",
-          "knowledgeStatus": "INSUFFICIENT",
-          "coverageStatus": "INSUFFICIENT_COVERAGE",
-          "knownSourceCount": 0,
-          "unknowns": [
-            "当前没有可用于回答的受治理来源。"
-          ],
-          "limits": [
-            "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
-          ],
-          "guidedReadingRoutingActivated": false,
-          "realityJourneyRoutingActivated": false
-        },
-        "coverage": {
-          "schemaVersion": "PHI-OS-KAP-COVERAGE-DECISION-v1.0.0",
-          "status": "INSUFFICIENT_COVERAGE",
-          "reasonCodes": [
-            "NO_GROUNDED_SOURCE_MATCH"
-          ],
-          "sourceCount": 0,
-          "publishedCoverage": "none",
-          "manuscriptResultCount": 0,
-          "answerCompositionEligible": false,
-          "unknownDisclosureRequired": true,
-          "realityJourneyRequired": false,
-          "guidedReadingRequired": false,
-          "aiRequired": false,
-          "createsAuthority": false
-        },
-        "ai": {
-          "eligibility": {
-            "schemaVersion": "PHI-OS-KAP-AI-ELIGIBILITY-DECISION-v1.0.0",
-            "status": "AI_NOT_REQUIRED",
-            "reasonCodes": [
-              "NO_COMPOSITION_BENEFIT_WITHOUT_GROUNDED_COVERAGE"
-            ],
-            "aiRequired": false,
-            "aiIsKnowledgeAuthority": false,
-            "providerInvocationAuthorizedByPhase3": false,
-            "deterministicFallbackRequired": true
-          },
-          "routing": {
-            "schemaVersion": "PHI-OS-KAP-AI-COST-ROUTING-v1.0.0",
-            "requestedTier": "TIER_0_DETERMINISTIC",
-            "activeTier": "TIER_0_DETERMINISTIC",
-            "providerInvoked": false,
-            "paidProviderRequired": false,
-            "fallbackReason": null,
-            "answerMayStillBeDelivered": true
-          },
-          "providerInvoked": false,
-          "generativeModelUsed": false
-        },
-        "production": {
-          "independentlyDeliverable": true,
-          "requiresMcd": false,
-          "requiresGuidedReading": false,
-          "requiresRealityJourney": false,
-          "deterministicFallbackAvailable": true
-        },
-        "governance": {
-          "knowledgeAuthorityUnchanged": true,
-          "publicationAuthorityUnchanged": true,
-          "realityReadingAuthorityUnchanged": true,
-          "persistentCaseCreated": false,
-          "upstreamGroundedAnswerConsumed": false,
-          "groundedEvidencePackConsumed": false,
-          "kirR2Applied": false
-        },
-        "kirR2": {
-          "status": "KIR_R2_BLOCKED_BY_RELEVANCE_GATE",
-          "applied": false
-        },
-        "grounding": {
-          "bundleId": "KGB-v1-b53a1e47",
-          "retrievalAuthority": "KSAR_KNOWLEDGE_ACCESS",
-          "sourceCount": 0,
-          "upstreamGroundedAnswerPresent": false,
-          "upstreamGroundedAnswerConsumed": false,
-          "groundedEvidencePackConsumed": false
-        },
-        "cka": {
-          "schemaVersion": "PHI-OS-CKA-RESPONSE-v1.0.0",
-          "entryContext": {
-            "entrySurface": "KNOWLEDGE_SEARCH",
-            "entryRoute": null,
-            "contextType": null,
-            "contextId": null,
-            "bookCode": null,
-            "partCode": null,
-            "articleCode": null,
-            "figureCode": null,
-            "realityCaseId": null,
-            "accountState": "GUEST",
-            "locale": "zh-Hans",
-            "mode": "GLOBAL",
-            "authorization": {
-              "permissionVerified": false,
-              "privacyVerified": false,
-              "entitlementVerified": false,
-              "accountVerified": false,
-              "realityCaseBound": false
-            },
-            "governance": {
-              "createsPersistentCase": false,
-              "createsShadowAccount": false,
-              "executesMethod": false,
-              "startsRealityJourney": false
-            }
-          },
-          "followUp": {
-            "currentQuestion": "为什么罗马帝国结束以后文明没有完全消失?",
-            "contextQuestion": null,
-            "parentAnswerId": null,
-            "groundingBundleId": null,
-            "followUpDepth": 0,
-            "answerContext": {
-              "parentAnswerId": null
-            },
-            "knowledgeContext": {
-              "groundingBundleId": null
-            },
-            "temporaryOnly": true,
-            "historyPersisted": false,
-            "createsPersistentCase": false,
-            "accountState": "GUEST",
-            "boundary": {
-              "simpleAskAllowed": true,
-              "classification": "SIMPLE_ASK",
-              "automaticEscalation": false,
-              "persistentCaseCreated": false
-            },
-            "guestLimitReached": false
-          },
-          "clientAnswer": {
-            "schemaVersion": "PHI-OS-CKA-CLIENT-ANSWER-v1.0.0",
-            "question": "为什么罗马帝国结束以后文明没有完全消失?",
-            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
-            "whyThisMayHappen": [],
-            "whatToObserve": [],
-            "unknown": {
-              "state": "INSUFFICIENT_EVIDENCE",
-              "details": [
-                "当前没有可用于回答的受治理来源。",
-                "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
-              ]
-            },
-            "relatedKnowledgeCards": [],
-            "sourcesGrounding": [],
-            "entryContext": {
-              "entrySurface": "KNOWLEDGE_SEARCH",
-              "entryRoute": null,
-              "contextType": null,
-              "contextId": null,
-              "bookCode": null,
-              "partCode": null,
-              "articleCode": null,
-              "figureCode": null,
-              "realityCaseId": null,
-              "accountState": "GUEST",
-              "locale": "zh-Hans",
-              "mode": "GLOBAL",
-              "authorization": {
-                "permissionVerified": false,
-                "privacyVerified": false,
-                "entitlementVerified": false,
-                "accountVerified": false,
-                "realityCaseBound": false
-              },
-              "governance": {
-                "createsPersistentCase": false,
-                "createsShadowAccount": false,
-                "executesMethod": false,
-                "startsRealityJourney": false
-              }
-            },
-            "followUpDepth": 0,
-            "governance": {
-              "createsCanonicalAuthority": false,
-              "createsRealityReading": false,
-              "createsPersistentCase": false,
-              "internalNodeCodesProjectedToCards": false
-            }
-          },
-          "w5w17": {
-            "schemaVersion": "PHI-OS-CKA-W5-W17-CLIENT-ENVELOPE-v1.0.0",
-            "answerState": "NEEDS_CONTEXT",
-            "record": {
-              "answerId": "KAP-A-v1-83f442cb",
-              "questionId": "CKA-Q-v1-507f3081",
-              "retrievalContext": {
-                "pipeline": [
-                  "QUESTION",
-                  "INTENT",
-                  "KNOWLEDGE_RETRIEVAL",
-                  "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE",
-                  "GROUNDING",
-                  "ANSWER"
-                ],
-                "authorityPriority": [
-                  "CANONICAL_OR_PUBLISHED_PHI_OS",
-                  "REVIEWED_MANUSCRIPT_OR_KSAR",
-                  "GOVERNED_EXTERNAL_AUTHORITY",
-                  "AUTHORIZED_CLIENT_CONTEXT"
-                ],
-                "authorityGroups": [
-                  {
-                    "authorityClass": "CANONICAL_OR_PUBLISHED_PHI_OS",
-                    "sources": []
-                  },
-                  {
-                    "authorityClass": "REVIEWED_MANUSCRIPT_OR_KSAR",
-                    "sources": []
-                  },
-                  {
-                    "authorityClass": "GOVERNED_EXTERNAL_AUTHORITY",
-                    "sources": []
-                  },
-                  {
-                    "authorityClass": "AUTHORIZED_CLIENT_CONTEXT",
-                    "sources": []
-                  }
-                ],
-                "llmMemoryOnlyAnswerAllowed": false,
-                "authoritiesSilentlyCollapsed": false
-              },
-              "knowledgeRefs": {
-                "primaryNodeCodes": [],
-                "supportingNodeCodes": [],
-                "relatedNodeCodes": [],
-                "manuscriptRefs": [],
-                "publishedRefs": []
-              },
-              "groundingState": "INSUFFICIENT_GROUNDING",
-              "groundingBundleId": "KGB-v1-b53a1e47",
-              "unknownState": "UNKNOWN",
-              "locale": "zh-Hans"
-            },
-            "guidedContext": {
-              "schemaVersion": "PHI-OS-CKA-GUIDED-CONTEXT-v1.0.0",
-              "fields": {
-                "whatIsHappening": null,
-                "howLong": null,
-                "whoOrWhatIsInvolved": null,
-                "whatChanged": null,
-                "whatTried": null,
-                "whatMattersMostNow": null
-              },
-              "filledFields": [],
-              "classifications": [
-                "SIMPLE"
-              ],
-              "signals": {
-                "persistent": false,
-                "multiFactor": false,
-                "caseSpecific": false,
-                "realityDependent": false,
-                "personalized": false
-              },
-              "temporaryOnly": true,
-              "fullIcrCreated": false,
-              "classificationIsDiagnosis": false,
-              "canonicalRealityCreated": false
-            },
-            "knowledgeContext": {
-              "contextLabel": null,
-              "contextSummary": null,
-              "readingPath": null,
-              "relatedKnowledgeRef": null,
-              "temporaryOnly": true,
-              "authorityChanged": false,
-              "realityCaseCreated": false
-            },
-            "externalAuthority": {
-              "required": false,
-              "professionalJudgmentRequested": false,
-              "governedCurrentAuthorityAvailable": false,
-              "authoritySourceCount": 0,
-              "ckaMakesProfessionalJudgment": false,
-              "liveAuthorityInvented": false
-            },
-            "relatedKnowledgeCards": [],
-            "accountBoundary": {
-              "guestAllowed": [
-                "ASK",
-                "ANSWER",
-                "ONE_LIMITED_FOLLOW_UP",
-                "RELATED_KNOWLEDGE",
-                "TEMPORARY_GUIDED_CONTEXT"
-              ],
-              "accountRequired": [
-                "ANSWER_HISTORY",
-                "SAVE_RESULT_OR_KNOWLEDGE",
-                "METHOD_RESULT_PERSISTENCE",
-                "CASE_PERSISTENCE",
-                "REALITY_VERSION_HISTORY",
-                "JOURNEY_CONTINUITY"
-              ],
-              "featureGates": [
-                "ENTITLEMENT",
-                "PRIVACY",
-                "CONSENT",
-                "RETENTION"
-              ],
-              "shadowAccountCreated": false,
-              "guestHistoryPersisted": false
-            },
-            "methodBoundary": {
-              "askIsMethodExecution": false,
-              "birthDataTriggersMethod": false,
-              "executionPath": [
-                "READINESS",
-                "DISCLOSURE",
-                "CONSENT",
-                "MPA_ELIGIBILITY",
-                "EXECUTION",
-                "NORMALIZATION"
-              ],
-              "owner": "PERSONAL_RUNTIME"
-            },
-            "realityBoundary": {
-              "questionContextIsCanonicalRealityCase": false,
-              "simpleContextEphemeral": true,
-              "newCaseOnlyThroughRealityFlow": true
-            },
-            "navigationBoundary": {
-              "searchPurpose": "FIND_KNOWLEDGE",
-              "askPurpose": "UNDERSTAND_KNOWLEDGE",
-              "libraryPurpose": "BROWSE_DISCOVER_COMPARE_FOLLOW_READING_PATHS"
-            },
-            "governance": {
-              "groundedAnswerRuntimeConsumed": true,
-              "authoritativeAnswerGeneratedByCka": false,
-              "secondAnswerRuntimeCreated": false,
-              "secondRetrievalRuntimeCreated": false,
-              "persistentHistoryCreated": false,
-              "shadowAccountCreated": false,
-              "methodExecuted": false,
-              "realityJourneyActivated": false
-            }
-          },
-          "governance": {
-            "clientSurfaceOnly": true,
-            "upstreamAnswerRuntimeReused": true,
-            "secondAnswerRuntimeCreated": false,
-            "persistentHistoryCreated": false,
-            "shadowAccountCreated": false
-          }
-        }
-      }
-    },
-    {
-      "id": "CROSS_BOOK_RELEVANCE",
-      "question": "日本1945以后怎样发生重组？",
-      "productionCorpus": true,
-      "result": {
-        "ok": true,
-        "schemaVersion": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0",
-        "capability": "ASK_PHIOS",
-        "answerDepth": "STANDARD",
-        "answer": {
-          "schemaVersion": "PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0",
-          "answerId": "KAP-A-v1-8c29290f",
-          "question": "日本1945以后怎样发生重组?",
-          "normalizedQuestion": "日本1945以后怎样发生重组?",
-          "locale": "zh-Hans",
-          "answerMode": "KNOWLEDGE_ANSWER",
-          "authorityClass": "QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION",
-          "coverageStatus": "INSUFFICIENT_COVERAGE",
-          "groundingBundleId": "KGB-v1-74a90144",
-          "knowledgeRefs": {
-            "primaryNodeCodes": [],
-            "supportingNodeCodes": [],
-            "relatedNodeCodes": [],
-            "manuscriptRefs": [],
-            "publishedRefs": []
-          },
-          "content": {
-            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
-            "mechanism": [],
-            "whyItMatters": [],
-            "whatToObserve": [],
-            "boundaries": [
-              "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
-            ],
-            "unknowns": [
-              "当前没有可用于回答的受治理来源。"
-            ],
-            "relatedKnowledge": []
-          },
-          "generation": {
-            "generationMode": "DETERMINISTIC",
-            "generativeModelUsed": false,
-            "modelRef": null
-          },
-          "lifecycle": {
-            "createdAt": "2026-10-06T04:28:17.188Z",
-            "expiresAt": null,
-            "persistentCaseCreated": false
-          },
-          "governance": {
-            "publicationStatus": "NOT_PUBLICATION",
-            "canonicalAuthorityStatus": "NONE",
-            "realityReadingStatus": "NOT_REALITY_READING"
-          }
-        },
-        "sources": [],
-        "boundary": {
-          "schemaVersion": "PHI-OS-KAP-UNKNOWN-BOUNDARY-PROJECTION-v1.0.0",
-          "knowledgeStatus": "INSUFFICIENT",
-          "coverageStatus": "INSUFFICIENT_COVERAGE",
-          "knownSourceCount": 0,
-          "unknowns": [
-            "当前没有可用于回答的受治理来源。"
-          ],
-          "limits": [
-            "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
-          ],
-          "guidedReadingRoutingActivated": false,
-          "realityJourneyRoutingActivated": false
-        },
-        "coverage": {
-          "schemaVersion": "PHI-OS-KAP-COVERAGE-DECISION-v1.0.0",
-          "status": "INSUFFICIENT_COVERAGE",
-          "reasonCodes": [
-            "NO_GROUNDED_SOURCE_MATCH"
-          ],
-          "sourceCount": 0,
-          "publishedCoverage": "none",
-          "manuscriptResultCount": 0,
-          "answerCompositionEligible": false,
-          "unknownDisclosureRequired": true,
-          "realityJourneyRequired": false,
-          "guidedReadingRequired": false,
-          "aiRequired": false,
-          "createsAuthority": false
-        },
-        "ai": {
-          "eligibility": {
-            "schemaVersion": "PHI-OS-KAP-AI-ELIGIBILITY-DECISION-v1.0.0",
-            "status": "AI_NOT_REQUIRED",
-            "reasonCodes": [
-              "NO_COMPOSITION_BENEFIT_WITHOUT_GROUNDED_COVERAGE"
-            ],
-            "aiRequired": false,
-            "aiIsKnowledgeAuthority": false,
-            "providerInvocationAuthorizedByPhase3": false,
-            "deterministicFallbackRequired": true
-          },
-          "routing": {
-            "schemaVersion": "PHI-OS-KAP-AI-COST-ROUTING-v1.0.0",
-            "requestedTier": "TIER_0_DETERMINISTIC",
-            "activeTier": "TIER_0_DETERMINISTIC",
-            "providerInvoked": false,
-            "paidProviderRequired": false,
-            "fallbackReason": null,
-            "answerMayStillBeDelivered": true
-          },
-          "providerInvoked": false,
-          "generativeModelUsed": false
-        },
-        "production": {
-          "independentlyDeliverable": true,
-          "requiresMcd": false,
-          "requiresGuidedReading": false,
-          "requiresRealityJourney": false,
-          "deterministicFallbackAvailable": true
-        },
-        "governance": {
-          "knowledgeAuthorityUnchanged": true,
-          "publicationAuthorityUnchanged": true,
-          "realityReadingAuthorityUnchanged": true,
-          "persistentCaseCreated": false,
-          "upstreamGroundedAnswerConsumed": false,
-          "groundedEvidencePackConsumed": false,
-          "kirR2Applied": false
-        },
-        "kirR2": {
-          "status": "KIR_R2_BLOCKED_BY_RELEVANCE_GATE",
-          "applied": false
-        },
-        "grounding": {
-          "bundleId": "KGB-v1-74a90144",
-          "retrievalAuthority": "KSAR_KNOWLEDGE_ACCESS",
-          "sourceCount": 0,
-          "upstreamGroundedAnswerPresent": false,
-          "upstreamGroundedAnswerConsumed": false,
-          "groundedEvidencePackConsumed": false
-        },
-        "cka": {
-          "schemaVersion": "PHI-OS-CKA-RESPONSE-v1.0.0",
-          "entryContext": {
-            "entrySurface": "KNOWLEDGE_SEARCH",
-            "entryRoute": null,
-            "contextType": null,
-            "contextId": null,
-            "bookCode": null,
-            "partCode": null,
-            "articleCode": null,
-            "figureCode": null,
-            "realityCaseId": null,
-            "accountState": "GUEST",
-            "locale": "zh-Hans",
-            "mode": "GLOBAL",
-            "authorization": {
-              "permissionVerified": false,
-              "privacyVerified": false,
-              "entitlementVerified": false,
-              "accountVerified": false,
-              "realityCaseBound": false
-            },
-            "governance": {
-              "createsPersistentCase": false,
-              "createsShadowAccount": false,
-              "executesMethod": false,
-              "startsRealityJourney": false
-            }
-          },
-          "followUp": {
-            "currentQuestion": "日本1945以后怎样发生重组?",
-            "contextQuestion": null,
-            "parentAnswerId": null,
-            "groundingBundleId": null,
-            "followUpDepth": 0,
-            "answerContext": {
-              "parentAnswerId": null
-            },
-            "knowledgeContext": {
-              "groundingBundleId": null
-            },
-            "temporaryOnly": true,
-            "historyPersisted": false,
-            "createsPersistentCase": false,
-            "accountState": "GUEST",
-            "boundary": {
-              "simpleAskAllowed": true,
-              "classification": "SIMPLE_ASK",
-              "automaticEscalation": false,
-              "persistentCaseCreated": false
-            },
-            "guestLimitReached": false
-          },
-          "clientAnswer": {
-            "schemaVersion": "PHI-OS-CKA-CLIENT-ANSWER-v1.0.0",
-            "question": "日本1945以后怎样发生重组?",
-            "directAnswer": "PHI OS 目前没有足够的受治理知识来可靠回答这个问题。",
-            "whyThisMayHappen": [],
-            "whatToObserve": [],
-            "unknown": {
-              "state": "INSUFFICIENT_EVIDENCE",
-              "details": [
-                "当前没有可用于回答的受治理来源。",
-                "这是基于受治理 PHI OS Knowledge 的问题范围回答,不是 Published Article,也不是 Reality Reading。"
-              ]
-            },
-            "relatedKnowledgeCards": [],
-            "sourcesGrounding": [],
-            "entryContext": {
-              "entrySurface": "KNOWLEDGE_SEARCH",
-              "entryRoute": null,
-              "contextType": null,
-              "contextId": null,
-              "bookCode": null,
-              "partCode": null,
-              "articleCode": null,
-              "figureCode": null,
-              "realityCaseId": null,
-              "accountState": "GUEST",
-              "locale": "zh-Hans",
-              "mode": "GLOBAL",
-              "authorization": {
-                "permissionVerified": false,
-                "privacyVerified": false,
-                "entitlementVerified": false,
-                "accountVerified": false,
-                "realityCaseBound": false
-              },
-              "governance": {
-                "createsPersistentCase": false,
-                "createsShadowAccount": false,
-                "executesMethod": false,
-                "startsRealityJourney": false
-              }
-            },
-            "followUpDepth": 0,
-            "governance": {
-              "createsCanonicalAuthority": false,
-              "createsRealityReading": false,
-              "createsPersistentCase": false,
-              "internalNodeCodesProjectedToCards": false
-            }
-          },
-          "w5w17": {
-            "schemaVersion": "PHI-OS-CKA-W5-W17-CLIENT-ENVELOPE-v1.0.0",
-            "answerState": "NEEDS_CONTEXT",
-            "record": {
-              "answerId": "KAP-A-v1-8c29290f",
-              "questionId": "CKA-Q-v1-6019d450",
-              "retrievalContext": {
-                "pipeline": [
-                  "QUESTION",
-                  "INTENT",
-                  "KNOWLEDGE_RETRIEVAL",
-                  "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE",
-                  "GROUNDING",
-                  "ANSWER"
-                ],
-                "authorityPriority": [
-                  "CANONICAL_OR_PUBLISHED_PHI_OS",
-                  "REVIEWED_MANUSCRIPT_OR_KSAR",
-                  "GOVERNED_EXTERNAL_AUTHORITY",
-                  "AUTHORIZED_CLIENT_CONTEXT"
-                ],
-                "authorityGroups": [
-                  {
-                    "authorityClass": "CANONICAL_OR_PUBLISHED_PHI_OS",
-                    "sources": []
-                  },
-                  {
-                    "authorityClass": "REVIEWED_MANUSCRIPT_OR_KSAR",
-                    "sources": []
-                  },
-                  {
-                    "authorityClass": "GOVERNED_EXTERNAL_AUTHORITY",
-                    "sources": []
-                  },
-                  {
-                    "authorityClass": "AUTHORIZED_CLIENT_CONTEXT",
-                    "sources": []
-                  }
-                ],
-                "llmMemoryOnlyAnswerAllowed": false,
-                "authoritiesSilentlyCollapsed": false
-              },
-              "knowledgeRefs": {
-                "primaryNodeCodes": [],
-                "supportingNodeCodes": [],
-                "relatedNodeCodes": [],
-                "manuscriptRefs": [],
-                "publishedRefs": []
-              },
-              "groundingState": "INSUFFICIENT_GROUNDING",
-              "groundingBundleId": "KGB-v1-74a90144",
               "unknownState": "UNKNOWN",
               "locale": "zh-Hans"
             },
