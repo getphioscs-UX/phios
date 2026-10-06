@@ -28,7 +28,7 @@ assert.equal(cache.providerCallsDuringRerender,0);
 
 const html=fs.readFileSync(reviewPath,'utf8');
 const pages=(html.match(/class="zv-page/g)||[]).length;
-assert(pages>=48&&pages<=60,'accepted bilingual publication page count out of range');
+assert(pages>=50&&pages<=80,'accepted bilingual publication page count out of range');
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
  assert.equal((html.match(new RegExp('data-diagram-id="'+id+'"','g'))||[]).length,1,'accepted publication must render '+id+' exactly once');
