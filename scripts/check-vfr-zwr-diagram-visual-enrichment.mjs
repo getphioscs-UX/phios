@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {ZWR_VFR_PAGE_PLAN} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
 import {ZWR_VFR_RENDERER_VERSION} from '../assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js';
 
-assert.equal(ZWR_VFR_RENDERER_VERSION,'ZWR-VFR-R1-DEEP-RENDERER-v4');
+assert.equal(ZWR_VFR_RENDERER_VERSION,'ZWR-VFR-R1-DEEP-RENDERER-v5');
 assert(ZWR_VFR_PAGE_PLAN.length>=48&&ZWR_VFR_PAGE_PLAN.length<=60,'bilingual page plan must allow spacious 48-60 pages');
 assert.equal(ZWR_VFR_PAGE_PLAN.length,50,'current W9R3 review plan should be 50 pages');
 
@@ -47,7 +47,10 @@ for(const token of [
 ])assert(builder.includes(token),'W9R3 publication style missing: '+token);
 
 assert(!renderer.includes('<span>47</span>'),'closing page must not hardcode legacy page number');
-assert(builder.includes("pagePlan.length+' pages"),'review provenance must use dynamic page count');
+for(const id of ['S07','S08','S09','S10','S11'])assert(renderer.includes("'"+id+"'"),id+': stacked bilingual section registration missing');
+assert(renderer.includes("is-stacked"),'stacked bilingual reading renderer missing');
+assert(builder.includes('.zv-reading-grid.is-stacked'),'stacked bilingual reading styles missing');
+assert(builder.includes("String(pagePlan.length)"),'review provenance must use dynamic page count');
 assert(builder.includes("pagePlan.length+' rendered pages"),'build log must use dynamic page count');
 
 console.log('PASS VFR-ZWR-9R3 adaptive composition: 50-page bilingual plan; overflow-prone S02/S04/S05 receive three reading pages; four related diagram pairs share pages; weighted paragraph partitioning present; professional Zi Wei visual language preserved; print effects optimized.');
