@@ -62,6 +62,7 @@ write(`${pubdir}/published-projection.json`,release);write(`${dir}/method-accept
 const change=(p,fn)=>fs.writeFileSync(p,fn(fs.readFileSync(p,'utf8')));
 const loader='functions/_lib/book-vii-published-admission.js';
 change(loader,s=>{
+ if(s.includes('const refresh='))return s;
  s=s.replace("content/knowledge/public/successors/book-vii-production-live-cutover-r1/published-projection.json",`${pubdir}/published-projection.json`);
  s=s.replace("if(!release||release.status!=='ADMITTED_FOR_PRODUCTION'||release.humanAcceptance", "const refresh=release?.status==='CURRENT_SOURCE_REFRESH_PENDING_HUMAN_REVIEW'&&release.sourceRefreshAuthorization?.kind==='EXPLICIT_USER_REQUEST_CANONICAL_V2_CUTOVER'&&release.sourceRefreshAuthorization?.sourceVersion==='v2'&&/^[a-f0-9]{64}$/.test(release.sourceRefreshAuthorization?.sourceDigest||'')&&release.sourceRefreshAuthorization?.newHumanAcceptance===null;\n  if(!release||(!refresh&&release.status!=='ADMITTED_FOR_PRODUCTION')||release.humanAcceptance");
  s=s.replace("packet?.review?.decision!=='accept'||packet?.approval?.decision!=='approve'||packet?.publication?.decision!=='publish'", "(!(refresh&&release.sourceRefreshAuthorization.affectedNodeCodes.includes(node.nodeCode)&&packet?.review?.decision==='pending'&&packet?.approval?.decision==='authorized_source_refresh'&&packet?.publication?.decision==='current_source_refresh')&&(packet?.review?.decision!=='accept'||packet?.approval?.decision!=='approve'||packet?.publication?.decision!=='publish'))");return s;});
