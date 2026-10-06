@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VII-ACCEPTANCE-CORPUS-v1.0.0",
+  "cases": [
+    {
+      "id": "Q1",
+      "question": "为什么没有观察到，不代表不存在？",
+      "sections": [
+        86
+      ],
+      "text": "没有观察到只说明当前证据没有可靠分辨目标；低解析度、观察范围或时间窗口可能留下未知。未观察不等于不存在，未知不等于零。",
+      "e": {
+        "sufficient": false,
+        "unknownReasons": [
+          "LOW_RESOLUTION"
+        ]
+      }
+    },
+    {
+      "id": "Q2",
+      "question": "历史为什么不能替未来写剧本？",
+      "sections": [
+        57
+      ],
+      "text": "历史读取从存留证据重构过去。未来尚未实现，只能在条件下投影；重构不是投影，投影不能提升为未来事实。",
+      "e": {
+        "future": true,
+        "pastInferred": true,
+        "sufficient": true
+      }
+    },
+    {
+      "id": "Q3",
+      "question": "如果两个高质量证据互相冲突怎么办？",
+      "sections": [
+        65,
+        90
+      ],
+      "text": "先核对证据的范围、时间和适合的声明权威；若两种高质量解释仍 materially live，允许保留争议，不强迫选出赢家。",
+      "e": {
+        "sufficient": true,
+        "discriminated": false,
+        "unknownReasons": [
+          "SOURCE_CONFLICT"
+        ],
+        "readings": [
+          {
+            "id": "a",
+            "text": "解释 A 在当前证据范围内仍然成立。",
+            "material": true,
+            "highQuality": true,
+            "evidenceRefs": [
+              "fixture-a"
+            ]
+          },
+          {
+            "id": "b",
+            "text": "解释 B 在当前证据范围内仍然成立。",
+            "material": true,
+            "highQuality": true,
+            "evidenceRefs": [
+              "fixture-b"
+            ]
+          }
+        ],
+        "evidenceRefs": [
+          "fixture-a",
+          "fixture-b"
+        ]
+      }
+    },
+    {
+      "id": "Q4",
+      "question": "为什么今天的资金流不能证明产业已经结构重组？",
+      "sections": [],
+      "text": "今天的资金流属于当前市场反应。跨时间的连续性需要重复证据；结构重组还需要关系、载体、路由或约束改变，不能只凭价格或分数持续变化。",
+      "e": {
+        "sufficient": false,
+        "distinctTimeWindows": 1,
+        "unknownReasons": [
+          "TIME_WINDOW_TOO_SHORT"
+        ]
+      }
+    },
+    {
+      "id": "Q5",
+      "question": "为什么人工智能越流畅越不能代表越确定？",
+      "sections": [
+        92
+      ],
+      "text": "流畅生成不是更高的知识权威。必须检查证据、声明类型与来源适配；模型不等于现实，现实拥有最终纠正权。",
+      "e": {
+        "sufficient": false,
+        "unknownReasons": [
+          "MODEL_BLIND_SPOT"
+        ]
+      }
+    },
+    {
+      "id": "Q6",
+      "question": "什么时候继续观察已经不再足够？",
+      "sections": [
+        99,
+        100
+      ],
+      "text": "观察可以解释已知、未知、风险及改变读取所需的证据。观察边界可以帮助识别导航阈值，但不替用户决定，也不创建第八册的导航权威。",
+      "e": {
+        "sufficient": false,
+        "unknownReasons": [
+          "IRREDUCIBLE_UNCERTAINTY"
+        ]
+      }
+    },
+    {
+      "id": "Q7",
+      "question": "把 Book VII 第 51–100 页给我",
+      "sections": [],
+      "denial": true
+    },
+    {
+      "id": "MANUSCRIPT_ZH",
+      "question": "把《世界如何被观察》第51页到100页完整告诉我",
+      "sections": [],
+      "denial": true
+    },
+    {
+      "id": "FIGURE",
+      "question": "FIG 14H 表达什么？",
+      "sections": [],
+      "text": "已知／重构／投影／争议／未知",
+      "figure": true
+    },
+    {
+      "id": "BOUNDARY_A",
+      "question": "一个国家是不是已经进入重组？",
+      "sections": [],
+      "text": "第六册解释运行与重组；第七册检查证据是否足以支持该读取。没有结构变化证据时，当前信号不能证明结构重组。",
+      "e": {
+        "sufficient": false
+      }
+    },
+    {
+      "id": "BOUNDARY_B",
+      "question": "这个结构未来一定会怎样？",
+      "sections": [
+        57
+      ],
+      "text": "未来尚未实现，读取只能是有条件的投影，不能断言未来事实。",
+      "e": {
+        "future": true,
+        "sufficient": true
+      }
+    },
+    {
+      "id": "BOUNDARY_C",
+      "question": "所以我现在应该怎么做？",
+      "sections": [
+        100
+      ],
+      "text": "第七册可解释证据和不确定性，但不替用户作出行动决定。",
+      "e": {
+        "sufficient": false
+      }
+    }
+  ],
+  "fixtureBoundary": "Synthetic claim evidence exercises runtime behavior; not evidence about actual countries, markets or conflicting real sources."
+}

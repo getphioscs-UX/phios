@@ -94,6 +94,9 @@ function isPublishable(rel) {
     return false;
   }
 
+  // Book VII private lineage, fixtures and unapproved candidates are review-only.
+  if (file.startsWith('content/knowledge/book-vii/')) return false;
+
   if (excludedRuntimeAssets.has(file)) {
     return false;
   }

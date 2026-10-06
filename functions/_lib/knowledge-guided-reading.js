@@ -1,3 +1,4 @@
+import {reconcileEpistemicGuidedStop} from './knowledge-epistemic-reading.js';
 import { runKapGroundingPipeline } from './knowledge-answer-grounding.js';
 import { composeKapAnswerProjection, normalizeAnswerDepth, projectKapSources } from './knowledge-answer-composition.js';
 
@@ -133,7 +134,7 @@ function clientStatements(context){return context.clarifyingAnswers.filter(x=>x.
 function readingInferences(context,locale){const c=copy(locale);return context.confirmedRelevantMechanisms.map(code=>{const mechanism=context.candidateMechanisms.find(x=>x.mechanismCode===code);return Object.freeze({inferenceCode:`RI-${code}`,inferenceType:'READING_INFERENCE',text:`${c.inferencePrefix} ${mechanism?.text||code}`,basis:Object.freeze(['CLIENT_EXPLICIT_MECHANISM_SELECTION','GOVERNED_GENERIC_MECHANISM']),canonicalAuthority:false,realityFact:false,boundary:c.inferenceBoundary});});}
 
 export function composeGuidedReading({initialProjection,bundle,coverageDecision,context,validatedMethodProjections=[],questions=[]}={}){
-  const locale=context.locale||'zh-Hans';const c=copy(locale);const stop=evaluateGuidedStopCondition(context,{questionCount:questions.length});
+  const locale=context.locale||'zh-Hans';const c=copy(locale);const stop=reconcileEpistemicGuidedStop(evaluateGuidedStopCondition(context,{questionCount:questions.length}),initialProjection.answer.epistemicReading);
   const genericMechanisms=context.candidateMechanisms.map(x=>Object.freeze({...x,statementType:'GENERIC_MECHANISM'}));
   const methodResults=validatedMethodProjections.map(safeMethodResult);
   const inferences=readingInferences(context,locale);

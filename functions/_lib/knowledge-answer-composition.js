@@ -1,3 +1,4 @@
+import {deriveEpistemicReading,isBookViiManuscriptRequest,excludeProtectedBookViiSources} from './knowledge-epistemic-reading.js';
 import {runKirR2ProductionProjection} from './kir-r2-production.js';
 import {structuredAnswerShape} from './structured-ask-policy.js';
 import { runKapGroundingPipeline } from './knowledge-answer-grounding.js';
@@ -216,11 +217,14 @@ export function projectKapUnknownBoundary({ bundle, coverageDecision, locale }) 
 
 export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth = DEFAULT_DEPTH, now = new Date() }) {
   if (!bundle?.bundleId) throw new Error('KAP_GROUNDING_BUNDLE_REQUIRED');
+  bundle=excludeProtectedBookViiSources(bundle);
+  if(isBookViiManuscriptRequest(bundle.question?.text)) bundle={bundleId:bundle.bundleId,question:bundle.question,sources:[],unknowns:[{code:'PROTECTED_MANUSCRIPT_ACCESS_DENIED'}]};
   const normalizedDepth = normalizeAnswerDepth(depth);
   const profile = DEPTHS[normalizedDepth];
   const locale = bundle.question?.locale || 'zh-Hans';
   const copy = localeCopy(locale);
-  const all = groundedSentences(bundle);
+  const manuscriptDenied = isBookViiManuscriptRequest(bundle.question?.text);
+  const all = manuscriptDenied ? [] : groundedSentences(bundle);
   const direct = all.slice(0, profile.directSentences);
   const directTexts = new Set(direct.map(item => item.text));
   const mechanismPool = unique([
@@ -234,11 +238,11 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
   const unknowns = mapUnknowns(bundle, locale);
   const boundaries = [copy.questionScopedBoundary];
   if (bundle?.normalization?.hints?.containsPersonalContextHint) boundaries.push(copy.personalBoundary);
-  const eligible = coverageDecision?.answerCompositionEligible === true;
+  const eligible = !manuscriptDenied && (!bundle.bookViiProtectedSourceRejected || bundle.sources.length>0) && coverageDecision?.answerCompositionEligible === true;
   const ptrcOutcome = coverageDecision?.ptrcQuality?.outcome || null;
-  const partialSupported = ptrcOutcome === 'PARTIAL' && coverageDecision?.shortSupportedAnswerEligible === true && direct.length > 0;
+  const partialSupported = !manuscriptDenied && ptrcOutcome === 'PARTIAL' && coverageDecision?.shortSupportedAnswerEligible === true && direct.length > 0;
   const relevanceRejected = (coverageDecision?.reasonCodes || []).includes('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED');
-  const directAnswer = eligible
+  const directAnswer = manuscriptDenied ? (locale==='zh-Hans' ? '不能通过 Ask PHI OS 提取受保护的完整书页或手稿；知识访问不等于手稿访问。' : 'Ask PHI OS cannot extract protected book pages or manuscript; knowledge access is not manuscript access.') : eligible
     ? direct.map(item => item.text).join(locale === 'zh-Hans' ? '' : ' ')
     : partialSupported
       ? `${direct[0].text}${locale === 'zh-Hans' ? '' : ' '}${copy.partial}`
@@ -252,6 +256,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
   const manuscriptRefs = (bundle?.sources || []).filter(source => source.sourceType === 'COMPLETED_MANUSCRIPT').map(source => source.sectionCode).filter(Boolean);
   const publishedRefs = (bundle?.sources || []).filter(source => source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE').map(source => source.fragmentCode || source.nodeCode).filter(Boolean);
   const answerIdKey = `${bundle.bundleId}|${normalizedDepth}|${coverageDecision?.status || 'UNKNOWN'}`;
+  const epistemicReading = deriveEpistemicReading(bundle,coverageDecision);
   return {
     schemaVersion: 'PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0',
     answerId: `KAP-A-v1-${stableHash(answerIdKey)}`,
@@ -263,6 +268,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
     coverageStatus: coverageDecision?.status || 'INSUFFICIENT_COVERAGE',
     ...(ptrcOutcome ? {qualityOutcome: ptrcOutcome} : {}),
     groundingBundleId: bundle.bundleId,
+    ...(epistemicReading ? {epistemicReading} : {}),
     knowledgeRefs: {
       primaryNodeCodes,
       supportingNodeCodes,
@@ -299,12 +305,18 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
 }
 
 export function composeKapAnswerProjection({ bundle, coverageDecision, depth = DEFAULT_DEPTH, now = new Date() }) {
+  bundle=excludeProtectedBookViiSources(bundle);
+  if(bundle.bookViiProtectedSourceRejected && !bundle.sources.length) coverageDecision={...coverageDecision,status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false,shortSupportedAnswerEligible:false,reasonCodes:[...(coverageDecision?.reasonCodes||[]),'PROTECTED_BOOK_VII_SOURCE_REJECTED']};
+  if(isBookViiManuscriptRequest(bundle.question?.text)) {
+    bundle={bundleId:bundle.bundleId,question:bundle.question,sources:[],unknowns:[{code:'PROTECTED_MANUSCRIPT_ACCESS_DENIED'}]};
+    coverageDecision={status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false,reasonCodes:['PROTECTED_MANUSCRIPT_ACCESS_DENIED']};
+  }
   const normalizedDepth = normalizeAnswerDepth(depth);
   const aiEligibility = evaluateKapAiEligibility({ bundle, coverageDecision, depth: normalizedDepth });
   const aiRouting = routeKapAiCost({ eligibility: aiEligibility });
   const answer = composeDeterministicKapAnswer({ bundle, coverageDecision, depth: normalizedDepth, now });
   const relevanceRejected = (coverageDecision?.reasonCodes || []).includes('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED');
-  const sources = relevanceRejected ? [] : projectKapSources(bundle, normalizedDepth);
+  const sources = relevanceRejected || isBookViiManuscriptRequest(bundle.question?.text) ? [] : projectKapSources(bundle, normalizedDepth);
   const boundary = projectKapUnknownBoundary({ bundle, coverageDecision, locale: answer.locale });
   return {
     schemaVersion: 'PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0',
@@ -338,6 +350,10 @@ export function composeKapAnswerProjection({ bundle, coverageDecision, depth = D
 }
 
 export async function runAskPhiosPipeline({ input, request, env = {}, depth = DEFAULT_DEPTH, retrievalOptions = {}, scopeDisposition = 'KNOWLEDGE_QUERY', now = new Date() }) {
+  if(isBookViiManuscriptRequest(input?.question)) {
+    const bundle={bundleId:'KAP-BOOK-VII-MANUSCRIPT-DENIED',question:{text:input.question,locale:input.locale||'zh-Hans'},sources:[],unknowns:[{code:'PROTECTED_MANUSCRIPT_ACCESS_DENIED'}],retrieval:{}};
+    return {...composeKapAnswerProjection({bundle,coverageDecision:{status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false,reasonCodes:['PROTECTED_MANUSCRIPT_ACCESS_DENIED']},depth,now}),kirR2:{status:'KIR_R2_NOT_APPLIED',applied:false}};
+  }
   const grounding = await runKapGroundingPipeline({ input, request, env, retrievalOptions, scopeDisposition });
   const projection = composeKapAnswerProjection({
     bundle: grounding.groundingBundle,
@@ -345,7 +361,7 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     depth,
     now
   });
-  const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true && !grounding.groundingBundle?.sources?.some(s=>s.sourceType==='STRUCTURED_KNOWLEDGE_OBJECT');
+  const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true && !projection.answer?.epistemicReading && !grounding.groundingBundle?.sources?.some(s=>s.sourceType==='STRUCTURED_KNOWLEDGE_OBJECT'||s.bookId==='BOOK-7'||s.bookCode==='BOOK-7'||/^KN-B7-/.test(s.nodeCode||''));
   const kir = relevanceEstablished ? await runKirR2ProductionProjection({
     question: input?.question || grounding.groundingBundle?.question?.text || '',
     locale: input?.locale || grounding.groundingBundle?.question?.locale || 'zh-Hans',
