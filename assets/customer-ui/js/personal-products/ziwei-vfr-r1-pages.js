@@ -219,7 +219,8 @@ function sectionMaster(section,binding,diagrams='',compact=false,meta={}){
  if(deep){
   const opening=openingParagraphCount(section,meta.readingCount||1);
   const z=localeParagraphs(zh).slice(0,opening),e=localeParagraphs(en).slice(0,opening);
-  return art+'<div class="zv-master zv-master-deep"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p class="zv-purpose">'+esc(zh.subheadline)+'</p><p class="zv-purpose" lang="en">'+esc(enSub)+'</p><div class="zv-master-reading"><article lang="zh-Hans">'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en">'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>'+diagrams+'</div>';
+  const stacked=['S07','S08','S09','S10','S11'].includes(section?.sectionId);
+  return art+'<div class="zv-master zv-master-deep"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p class="zv-purpose">'+esc(zh.subheadline)+'</p><p class="zv-purpose" lang="en">'+esc(enSub)+'</p><div class="zv-master-reading'+(stacked?' is-stacked':'')+'"><article lang="zh-Hans">'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en">'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>'+diagrams+'</div>';
  }
  if(compact){
   const rows=(zh.keyInsights||[]).map((x,i)=>'<div><b>'+esc(x.label)+'</b><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.text||'')+'</small></div>').join('');
