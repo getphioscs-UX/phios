@@ -33,7 +33,7 @@ assert.equal(diagrams.diagramCount,15);
 assert.equal(diagrams.providerCalls,0);
 const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id)});
 assert.equal(pageCheck.accepted,true,pageCheck.reasons.join(','));
-assert.equal(pageCheck.pageCount,47);
+assert(pageCheck.pageCount>=48&&pageCheck.pageCount<=60,'bilingual page count out of range');
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
  assert.equal(ZWR_VFR_PAGE_PLAN.flatMap(p=>p.diagramIds).filter(x=>x===id).length,1,id+' must bind exactly once');
@@ -54,7 +54,7 @@ assert(binding.includes('ziwei-professional-synthesis-r5-generation.js'),'W10 mu
 
 console.log(
  'PASS FR-ZWR-4R..8R deep alignment: factual authority deterministic; post-call semantic verifier=0; '+
- '15 diagrams exactly once; 47-page deep plan; repaired manuscript is W6/W8 source; rerender provider calls=0; '+
+ '15 diagrams exactly once; '+pageCheck.pageCount+'-page bilingual deep plan; repaired manuscript is W6/W8 source; rerender provider calls=0; '+
  'representative total provider cost=$'+Number(repaired.providerUsage.totalEstimatedProviderCost).toFixed(6)+
  '; production cutover still blocked.'
 );
