@@ -66,8 +66,8 @@ function palaceGrid(data){
 function axis(data){
  const ls=(data.lifeStars||[]).map(s=>plain(STAR,s.starCode));
  const bs=(data.bodyStars||[]).map(s=>plain(STAR,s.starCode));
- const node=(kind,code,stars,side)=>'<article class="zv-axis-node '+side+'" style="--pal:'+esc(PAL_TONE[code]||'#6d668a')+'"><span>'+kind+'</span><strong>'+bi(PAL,code)+'</strong><div>'+stars.map(s=>'<b>'+esc(s)+'</b>').join('')+'</div></article>';
- return '<div class="zv-axis-map">'+node('命宫 / Life',data.lifePalace,ls,'life')+'<div class="zv-axis-core"><span>命</span><i>⇄</i><span>身</span><small>内在判断 → 现实落地</small><em>Inner appraisal → lived implementation</em></div>'+node('身宫 / Body',data.bodyPalace,bs,'body')+'</div>';
+ const node=(label,code,stars,side)=>'<article class="zv-axis-seal '+side+'" style="--pal:'+esc(PAL_TONE[code]||'#6d668a')+'"><span>'+label+'</span><strong>'+bi(PAL,code)+'</strong><div>'+stars.map(s=>'<b>'+esc(s)+'</b>').join('')+'</div></article>';
+ return '<div class="zv-axis-compact"><div class="zv-axis-line"></div>'+node('命宫 / Life',data.lifePalace,ls,'life')+'<div class="zv-axis-bridge"><span>命</span><i>⇄</i><span>身</span><small>内在判断 → 现实落地</small><em>Inner appraisal → lived implementation</em></div>'+node('身宫 / Body',data.bodyPalace,bs,'body')+'</div>';
 }
 function network(data,ctx={}){
  const rel=data.relationships||[];
@@ -92,14 +92,15 @@ function stars(data){
   return '<article class="zv-star-orb" style="--pal:'+esc(PAL_TONE[s.palaceCode]||'#6c668d')+';left:'+x+'%;top:'+y+'%"><b>'+bi(STAR,s.starCode)+'</b><span>'+bi(PAL,s.palaceCode)+'</span><em>'+(s.stateKnown?esc(state(s.state)):'状态未定 · unknown')+'</em></article>';
  }).join('')+'</div>';
 }
-function transformations(data){
+function transformations(data,ctx={}){
  const xs=(data.transformations||data.layers?.flatMap(x=>x.transformations||[])||[]).slice(0,16);
- const layers=['NATAL','DA_XIAN','LIU_NIAN'];
+ if(xs.length<=2){
+  return '<div class="zv-tx-focus">'+xs.map((t,i)=>'<article style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+';--layer:'+esc(LAYER_TONE[t.layer]||'#6f6f86')+'"><div class="zv-tx-focus-layer">'+bi(LAYER,t.layer)+'</div><div class="zv-tx-focus-orb"><span>'+bi(TX,t.transformationCode)+'</span></div><div class="zv-tx-focus-target"><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(PAL,t.palaceCode)+'</em></div></article>').join('')+'<p>只显示当前已成立的四化，不用空轨道填版。<small>Only admitted transformations are shown.</small></p></div>';
+ }
+ const layers=['NATAL','DA_XIAN','LIU_NIAN'].filter(layer=>xs.some(t=>t.layer===layer));
  return '<div class="zv-tx-orbits">'+layers.map((layer,li)=>{
   const rows=xs.filter(t=>t.layer===layer);
-  return '<section class="zv-tx-track" style="--layer:'+esc(LAYER_TONE[layer]||'#6f6f86')+'"><header><b>'+bi(LAYER,layer)+'</b><span>'+String(li+1).padStart(2,'0')+'</span></header><div class="zv-tx-track-line">'+
-  (rows.length?rows.map(t=>'<article style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+'"><i></i><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></article>').join(''):'<p>—</p>')+
-  '</div></section>';
+  return '<section class="zv-tx-track" style="--layer:'+esc(LAYER_TONE[layer]||'#6f6f86')+'"><header><b>'+bi(LAYER,layer)+'</b><span>'+String(li+1).padStart(2,'0')+'</span></header><div class="zv-tx-track-line">'+rows.map(t=>'<article style="--tx:'+esc(TX_TONE[t.transformationCode]||'#9d7b44')+'"><i></i><strong>'+bi(STAR,t.targetStarCode)+'</strong><em>'+bi(TX,t.transformationCode)+'</em><small>'+bi(PAL,t.palaceCode)+'</small></article>').join('')+'</div></section>';
  }).join('')+'</div>';
 }
 function focus(data){
@@ -130,7 +131,7 @@ function timing(data,ctx={}){
   const txHtml=tx.length?'<ul>'+tx.slice(0,4).map(x=>'<li>'+bi(STAR,x.targetStarCode)+' → '+bi(TX,x.transformationCode)+' · '+bi(PAL,x.palaceCode)+'</li>').join('')+'</ul>':'';
   return '<article class="zv-time-layer'+cls+'" style="--layer:'+esc(LAYER_TONE[t.layer]||'#6f6f86')+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><b>'+bi(LAYER,t.layer)+'</b><strong>'+bi(ROLE,t.role)+'</strong>'+txHtml+'</div></article>';
  }).join('');
- const current=data.currentTransformations?.length?'<section class="zv-current-tx"><h4>当前四化 / Current transformations</h4>'+transformations({transformations:data.currentTransformations})+'</section>':'';
+ const current=data.currentTransformations?.length?'<section class="zv-current-tx"><h4>当前四化 / Current transformations</h4>'+transformations({transformations:data.currentTransformations},ctx)+'</section>':'';
  return '<div class="zv-timing" data-focus-layer="'+esc(focus||'ALL')+'">'+cards+current+'</div>';
 }
 function domains(data){
@@ -184,7 +185,7 @@ export function renderZwrVfrDiagram(d,ctx={}){
  else if(type==='LIFE_BODY_AXIS')body=axis(data);
  else if(type==='PALACE_NETWORK')body=network(data,ctx);
  else if(type==='KEY_STAR_STRUCTURE')body=stars(data);
- else if(type==='FOUR_TRANSFORMATION_ROUTE'||type==='TRANSFORMATION_LAYER_COMPARISON')body=transformations(data);
+ else if(type==='FOUR_TRANSFORMATION_ROUTE'||type==='TRANSFORMATION_LAYER_COMPARISON')body=transformations(data,ctx);
  else if(['CAREER_PALACE_NETWORK','WEALTH_PALACE_NETWORK','RELATIONSHIP_PALACE_NETWORK','FAMILY_SUPPORT_PALACES','PRESSURE_COUNTERWEIGHT_MAP','LIFE_CAREER_WEALTH_TRAVEL_CROSS'].includes(type))body=focus(data);
  else if(['NATAL_DAXIAN_LIUNIAN_STACK','CURRENT_PALACE_ACTIVATION'].includes(type))body=timing(data,ctx);
  else if(type==='WHOLE_CHART_NAVIGATION')body=domains(data);
