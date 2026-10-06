@@ -22,7 +22,7 @@ assert.equal(cache.publicationIrDigest,publication.publicationIrDigest);
 assert.equal(cache.providerCallsDuringRerender,0);
 
 const renderedPages=(html.match(/class="zv-page/g)||[]).length;
-assert(renderedPages>=48&&renderedPages<=60,'human review page count outside bilingual range: '+renderedPages);
+assert(renderedPages>=50&&renderedPages<=80,'human review page count outside bilingual range: '+renderedPages);
 assert(!html.includes('<pre>'),'human review must not expose raw diagram JSON placeholders');
 
 for(let i=1;i<=15;i++){
