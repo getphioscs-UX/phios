@@ -59,7 +59,8 @@ for(const sf of sectionFit){
  assert.equal(enCount,Number(sf.enPages),sectionId+': English pages drift from fit plan');
 }
 assert(html.includes('中文解读'),'Chinese review copy missing');
-assert(html.includes('English Reading'),'English review copy missing');
+assert((html.match(/data-page-family="READING_EN"/g)||[]).length>0,'English reading pages missing');
+assert((html.match(/<article lang="en">/g)||[]).length>0,'English review copy missing');
 assert(!/class=["'][^"']*\bzv-empty\b[^"']*["']/.test(html),'missing deterministic diagram renderer remains');
 assert(html.includes('Deep Manuscript W8 PASS'),'Deep Manuscript W8 provenance banner missing');
 assert(html.includes('repaired completeness PASS'),'repaired completeness provenance missing');
