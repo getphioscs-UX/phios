@@ -1,42 +1,44 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {ZWR_VFR_ONE_CALL_COMPOSER_VERSION} from '../functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js';
+import {ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
 
 const root='docs/reports/ziwei/vfr-r1/';
+const deepRoot=root+'five-call-experiment/';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const required=['LIVE-RESULT.json','LIVE-EVIDENCE.json','COMPACT-AUTHORING-PACK.json','DIAGRAM-DATA.json','PAGE-PLAN.json','IMMUTABLE-CACHE.json'];
-for(const name of required)assert(fs.existsSync(root+name),'missing W8 artifact: '+name);
+for(const name of ['COMPACT-AUTHORING-PACK.json','DIAGRAM-DATA.json'])assert(fs.existsSync(root+name),'missing W8 artifact: '+name);
+for(const name of ['REPAIRED-RESULT.json'])assert(fs.existsSync(deepRoot+name),'missing deep W8 artifact: '+name);
 
-const result=read(root+'LIVE-RESULT.json');
-const evidence=read(root+'LIVE-EVIDENCE.json');
+const result=read(deepRoot+'REPAIRED-RESULT.json');
 const pack=read(root+'COMPACT-AUTHORING-PACK.json');
 const diagrams=read(root+'DIAGRAM-DATA.json');
-const pages=read(root+'PAGE-PLAN.json');
+const pages=ZWR_VFR_PAGE_PLAN;
+const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id)});
 
 assert.equal(result.status,'PASS');
-assert.equal(result.schemaVersion,ZWR_VFR_ONE_CALL_COMPOSER_VERSION,'W8 live result is stale relative to current composer contract');
-assert.equal(result.providerCalls,1,'representative live run must make exactly one provider call');
-assert.equal(result.semanticReviewCalls,0,'W8 forbids semantic AI review calls');
-assert.equal(result.cacheHit,false,'representative W8 evidence must come from the live call, not cache replay');
-assert.equal(evidence.providerCalls,1);
-assert.equal(evidence.semanticReviewCalls,0);
-assert.equal(evidence.cacheHit,false);
-assert.equal(evidence.authorityDigest,pack.authorityDigest);
-assert.equal(evidence.pageCount,47);
-assert.equal(evidence.diagramCount,15);
+assert.equal(result.schemaVersion,'ZWR-VFR-R1-TARGETED-REPAIRED-RESULT-v1');
+assert.equal(result.authorityDigest,pack.authorityDigest);
+assert.equal(result.providerUsage.semanticReviewCalls,0);
+assert.equal(result.providerUsage.originalProviderCalls,5,'deep manuscript representative generation must preserve five-call evidence');
+assert(Number(result.providerUsage.repairProviderCalls)>=0);
+assert(Number(result.providerUsage.totalEstimatedProviderCost)>0);
+assert(Number(result.providerUsage.totalEstimatedProviderCost)<=1,'deep manuscript total provider cost exceeds USD1');
+assert.equal(result.rawManuscriptSections.length,10);
+assert.equal(new Set(result.rawManuscriptSections.map(s=>s.sectionId)).size,10);
+assert(result.rawManuscriptSections.every(s=>String(s.zhHansManuscript||'').trim()&&String(s.enManuscript||'').trim()),'every W8 section must contain complete bilingual manuscript');
 assert.equal(diagrams.diagramCount,15);
+assert.equal(pageCheck.accepted,true,pageCheck.reasons.join(','));
 assert.equal(pages.length,47);
-assert.equal(result.reportIr?.providerUsage?.providerCalls,1);
-assert.equal(result.reportIr?.providerUsage?.semanticReviewCalls,0);
-assert(Number(result.reportIr?.providerUsage?.estimatedProviderCost)>=0);
-assert(Number(result.reportIr?.providerUsage?.estimatedProviderCost)<=1,'live provider cost exceeds USD1');
-assert(Number(evidence.estimatedProviderCost)<=1,'W8 evidence cost exceeds USD1');
-assert(Number(evidence.inputTokens)>0,'live input token usage required');
-assert(Number(evidence.outputTokens)>0,'live output token usage required');
-assert.equal(result.reportIr?.authorityDigest,pack.authorityDigest);
-assert.equal(result.reportIr?.sections?.length,10);
-assert.equal(new Set(result.reportIr.sections.map(s=>s.sectionId)).size,10);
-assert(result.reportIr.sections.every(s=>s.zhHans&&s.en),'every W8 section must contain both zhHans and en');
-const digest=createHash('sha256').update(fs.readFileSync(root+'LIVE-RESULT.json')).digest('hex');
-console.log('PASS ZWR-VFR W8 representative live Sol: providerCalls=1; semanticReviewCalls=0; cacheHit=false; cost=$'+Number(evidence.estimatedProviderCost).toFixed(6)+'; inputTokens='+evidence.inputTokens+'; outputTokens='+evidence.outputTokens+'; sections=10 bilingual; diagrams=15; pages=47; liveResultSha256='+digest+'.');
+for(let i=1;i<=15;i++){
+ const id='ZWD-'+String(i).padStart(2,'0');
+ assert.equal(pages.flatMap(p=>p.diagramIds||[]).filter(x=>x===id).length,1,id+' must bind exactly once in deep 47-page plan');
+}
+const digest=createHash('sha256').update(fs.readFileSync(deepRoot+'REPAIRED-RESULT.json')).digest('hex');
+console.log(
+ 'PASS ZWR-VFR W8 representative Deep Manuscript: initialCalls='+
+ result.providerUsage.originalProviderCalls+
+ '; repairCalls='+result.providerUsage.repairProviderCalls+
+ '; semanticReviewCalls=0; totalCost=$'+Number(result.providerUsage.totalEstimatedProviderCost).toFixed(6)+
+ '; sections=10 bilingual; diagrams=15 exactly once; pages=47; repairedResultSha256='+digest+
+ '; legacy one-call candidate superseded.'
+);

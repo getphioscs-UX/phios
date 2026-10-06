@@ -1,27 +1,40 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import {ZWR_VFR_ONE_CALL_COMPOSER_VERSION} from '../functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js';
+import {ZWR_VFR_DEEP_PUBLICATION_IR_VERSION} from '../functions/personal-reading/visual-first/ziwei-vfr-deep-publication.js';
 
+const root='docs/reports/ziwei/vfr-r1/';
 const htmlPath='tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html';
-const livePath='docs/reports/ziwei/vfr-r1/LIVE-RESULT.json';
-assert(fs.existsSync(htmlPath),'ZWR VFR human review HTML missing');
-assert(fs.existsSync(livePath),'ZWR VFR live result missing');
-const html=fs.readFileSync(htmlPath,'utf8');
-const live=JSON.parse(fs.readFileSync(livePath,'utf8'));
+const publicationPath=root+'DEEP-PUBLICATION-IR.json';
+const repairedPath=root+'five-call-experiment/REPAIRED-RESULT.json';
+const cachePath=root+'DEEP-RENDER-CACHE.json';
 
-assert.equal(live.schemaVersion,ZWR_VFR_ONE_CALL_COMPOSER_VERSION,'W9 review is using a stale Sol candidate; regenerate W8 with the current semantic contract');
+for(const p of [htmlPath,publicationPath,repairedPath,cachePath])assert(fs.existsSync(p),'ZWR VFR W9 artifact missing: '+p);
+const html=fs.readFileSync(htmlPath,'utf8');
+const publication=JSON.parse(fs.readFileSync(publicationPath,'utf8'));
+const repaired=JSON.parse(fs.readFileSync(repairedPath,'utf8'));
+const cache=JSON.parse(fs.readFileSync(cachePath,'utf8'));
+
+assert.equal(publication.schemaVersion,ZWR_VFR_DEEP_PUBLICATION_IR_VERSION);
+assert.equal(publication.sourceResultDigest,repaired.resultDigest);
+assert.equal(publication.authorityDigest,repaired.authorityDigest);
+assert.equal(cache.repairedResultDigest,repaired.resultDigest);
+assert.equal(cache.publicationIrDigest,publication.publicationIrDigest);
+assert.equal(cache.providerCallsDuringRerender,0);
+
 assert.equal((html.match(/class="zv-page/g)||[]).length,47,'human review must render 47 pages');
 assert(!html.includes('<pre>'),'human review must not expose raw diagram JSON placeholders');
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
- assert(html.includes('data-diagram-id="'+id+'"'),'missing rendered diagram '+id);
+ assert.equal((html.match(new RegExp('data-diagram-id="'+id+'"','g'))||[]).length,1,'diagram must render exactly once: '+id);
 }
 assert((html.match(/<svg class="zv-svg"/g)||[]).length>=1,'at least one real SVG diagram required');
 assert(html.includes('中文解读'),'Chinese review copy missing');
 assert(html.includes('English Reading'),'English review copy missing');
 assert(!/class=["'][^"']*\bzv-empty\b[^"']*["']/.test(html),'missing deterministic diagram renderer remains');
-assert(html.includes('W8 live PASS'),'W8 provenance banner missing');
-assert(html.includes('0 semantic review'),'semantic-review-free provenance missing');
+assert(html.includes('Deep Manuscript W8 PASS'),'Deep Manuscript W8 provenance banner missing');
+assert(html.includes('repaired completeness PASS'),'repaired completeness provenance missing');
+assert(html.includes('rerender provider calls 0'),'zero-cost rerender provenance missing');
+assert(!html.includes('1 Sol call'),'legacy one-call provenance must not remain');
 
 for(const asset of [
  'RPT-ZIWEI-P01-COVER-v1.webp',
@@ -49,34 +62,26 @@ assert(!html.includes('&lt;small&gt;'),'escaped HTML label leaked into customer 
 assert(!/[\uFDD0-\uFDEF\uFFFE\uFFFF]/u.test(html),'noncharacter Unicode leaked into customer review');
 for(const rawBranch of ['>MAO<','>YIN<','>CHOU<','>CHEN<','>SI<','>WU<','>WEI<','>SHEN<','>YOU<','>XU<','>HAI<'])assert(!html.includes(rawBranch),'raw branch code leaked into customer review: '+rawBranch);
 assert(!/>ZWD-\d\d</.test(html),'internal diagram id must not be customer-visible');
-assert(html.includes('十二宫本命结构'),'page 6 must use the current canonical natal palace overview');
+assert(html.includes('十二宫本命结构'),'page 6 must use the canonical natal palace overview');
 assert(html.includes('读取边界')&&html.includes('Reading Boundary'),'closing boundary page missing');
 assert(html.includes('data-focus-layer="DA_XIAN"'),'S09 must visually emphasize Da Xian');
-assert(html.includes('data-focus-layer="LIU_NIAN"'),'S10 must visually emphasize Liu Nian');
-for(const projection of ['S02_NETWORK','S06_RECIPROCITY_BOUNDARY','S07_RESPONSIBILITY','S04_TIMING','S09_NATAL_DAXIAN','S10_TRANSFORMATION_TIMING'])assert(html.includes('data-projection="'+projection+'"'),'section-scoped diagram projection missing: '+projection);
+assert(html.includes('data-focus-layer="LIU_NIAN"')||html.includes('Current Palace Activation'),'S10 must visibly preserve current-year activation');
 
-const sentenceEnd=/[。！？.!?][”’"'\)]?$/u;
-const fragment=/\b(?:andf|requiresf|responsivenessf|anotherf|distancef)\b|\brecipro$|\bhidden$|\bor$/iu;
-for(const section of live.reportIr?.sections||[]){
- for(const [locale,copy] of [['zhHans',section.zhHans],['en',section.en]]){
-  assert.equal(copy?.keyInsights?.length,3,section.sectionId+':'+locale+': expected 3 projected insights');
-  assert.equal(copy?.interpretation?.length,2,section.sectionId+':'+locale+': expected 2 projected interpretation paragraphs');
-  for(const insight of copy.keyInsights){
-   const t=String(insight?.text||'').trim();
-   assert(t.length>12,section.sectionId+':'+locale+': insight too short');
-   assert(sentenceEnd.test(t),section.sectionId+':'+locale+': clipped insight sentence: '+t.slice(-40));
-   assert(!fragment.test(t),section.sectionId+':'+locale+': fragment marker detected');
-  }
-  for(const p of copy.interpretation){
-   const t=String(p||'').trim();
-   assert(sentenceEnd.test(t),section.sectionId+':'+locale+': clipped interpretation: '+t.slice(-40));
-   assert(!fragment.test(t),section.sectionId+':'+locale+': fragment marker detected');
-  }
- }
+function completeZh(text){
+ const t=String(text||'').trim();
+ return ['。','！','？','》','）','」','』','】'].some(x=>t.endsWith(x));
 }
-const allZh=(live.reportIr?.sections||[]).flatMap(s=>s.zhHans?.interpretation||[]).join('\n');
-const allEn=(live.reportIr?.sections||[]).flatMap(s=>s.en?.interpretation||[]).join('\n');
-assert((allZh.match(/复盘/g)||[]).length<=3,'navigation language is too template-like: 复盘 repeated too often');
-assert((allEn.match(/review date/gi)||[]).length<=3,'navigation language is too template-like: review date repeated too often');
+function completeEn(text){
+ const t=String(text||'').trim();
+ return ['.','!','?'].includes(t.at(-1)) || ['."','!"','?"',".'","!'","?'"].some(x=>t.endsWith(x));
+}
+for(const section of publication.sections||[]){
+ assert(section.zhHans?.paragraphs?.length>=5,section.sectionId+': Chinese deep manuscript too thin');
+ assert(section.en?.paragraphs?.length>=5,section.sectionId+': English deep manuscript too thin');
+ assert(section.zhHans.paragraphs.every(completeZh),section.sectionId+': Chinese paragraph truncation');
+ assert(section.en.paragraphs.every(completeEn),section.sectionId+': English paragraph truncation');
+ assert(html.includes(section.zhHans.headline),section.sectionId+': Chinese headline not rendered');
+ assert(html.includes(section.en.headline),section.sectionId+': English headline not rendered');
+}
 
-console.log('PASS ZWR-VFR W9 human-review readiness: current Sol candidate; 47 pages; all 15 diagrams rendered with section projections; all five front-matter and ten section assets bound; no raw JSON/internal ids/escaped labels; S09/S10 timing differentiated; bilingual copy complete enough for human review.');
+console.log('PASS ZWR-VFR W9 human-review readiness: repaired Deep Manuscript bound; 47 pages; ZWD-01..15 rendered exactly once; all visual assets bound; zero provider calls during rerender; bilingual manuscripts complete; ready for browser/print HUMAN REVIEW.');

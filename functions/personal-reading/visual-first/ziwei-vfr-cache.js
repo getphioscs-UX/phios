@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 
-export const ZWR_VFR_CACHE_VERSION='ZWR-VFR-R1-IMMUTABLE-CACHE-v1';
+export const ZWR_VFR_CACHE_VERSION='ZWR-VFR-R1-IMMUTABLE-CACHE-v2';
 
 function stable(value){
  if(value===null||typeof value!=='object')return JSON.stringify(value);
@@ -10,6 +10,24 @@ function stable(value){
 export function zwrVfrCacheIdentity({authorityDigest,composerVersion,realityContext=null,localeMode='BILINGUAL_SINGLE_CALL'}={}){
  if(!authorityDigest||!composerVersion)throw Error('ZWR_VFR_CACHE_IDENTITY_REQUIRED');
  return createHash('sha256').update(stable({method:'ZWR',authorityDigest,composerVersion,realityContext,localeMode})).digest('hex');
+}
+export function zwrVfrDeepPublicationCacheIdentity({
+ authorityDigest,
+ repairedResultDigest,
+ pagePlanVersion,
+ diagramDataVersion,
+ diagramDataDigest,
+ visualBindingVersion,
+ rendererVersion,
+ publicationIrVersion
+}={}){
+ const required={authorityDigest,repairedResultDigest,pagePlanVersion,diagramDataVersion,diagramDataDigest,visualBindingVersion,rendererVersion,publicationIrVersion};
+ for(const [k,v] of Object.entries(required))if(!v)throw Error('ZWR_VFR_DEEP_CACHE_IDENTITY_REQUIRED:'+k);
+ return createHash('sha256').update(stable({
+  method:'ZWR',
+  lane:'DEEP_MANUSCRIPT_PUBLICATION',
+  ...required
+ })).digest('hex');
 }
 export function createMemoryZwrVfrCache(seed={}){
  const store=new Map(Object.entries(seed));
@@ -27,4 +45,4 @@ export function createMemoryZwrVfrCache(seed={}){
   snapshot(){return Object.fromEntries([...store.entries()].map(([k,v])=>[k,structuredClone(v)]));}
  });
 }
-export default Object.freeze({zwrVfrCacheIdentity,createMemoryZwrVfrCache,ZWR_VFR_CACHE_VERSION});
+export default Object.freeze({zwrVfrCacheIdentity,zwrVfrDeepPublicationCacheIdentity,createMemoryZwrVfrCache,ZWR_VFR_CACHE_VERSION});
