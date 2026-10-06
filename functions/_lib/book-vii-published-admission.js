@@ -1,5 +1,5 @@
 // Projection extension consumed by the existing public retrieval loaders.
-export const BOOK_VII_ADMISSION_PATH='content/knowledge/public/successors/book-vii-production-admission-v1/published-projection.json';
+export const BOOK_VII_ADMISSION_PATH='content/knowledge/public/successors/book-vii-production-live-cutover-r1/published-projection.json';
 const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))).map(b=>b.toString(16).padStart(2,'0')).join('');
 export async function loadBookViiPublishedAdmission(readJson) {
   let release;

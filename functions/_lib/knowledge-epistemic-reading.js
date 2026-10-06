@@ -22,6 +22,7 @@ const cleanText=t=>typeof t==='string' && !/https?:\/\/|r2ObjectKey|objectKey|pr
 function supportedReadings(e={}) { return (e.readings||[]).filter(r=>cleanText(r.text)&&r.material===true&&r.highQuality===true&&Array.isArray(r.evidenceRefs)&&r.evidenceRefs.length>0&&r.evidenceRefs.every(ref=>(e.evidenceRefs||[]).includes(ref))); }
 export function deriveKnowledgeState(e={}) {
   if(e.future===true) return 'PROJECTED';
+  if(e.conceptualState==='CONTESTED'&&e.evidenceScope==='CONCEPTUAL_BOUNDARY_NOT_ACTUAL_WORLD_EVIDENCE') return 'CONTESTED';
   const readings=supportedReadings(e);
   if(readings.length>1 && (e.discriminated!==true||!readings.some(r=>r.id===e.primaryReadingId))) return 'CONTESTED';
   if(e.claimType && !evaluateClaimAuthorityMatch(e).matched) return 'UNKNOWN';
@@ -38,7 +39,7 @@ export function derivePrimaryReading(e={}) {
   if(readings.length>1 && (e.discriminated!==true||!readings.some(r=>r.id===e.primaryReadingId))) return '';
   return cleanText(readings.find(r=>r.id===e.primaryReadingId)?.text || (readings.length===1?readings[0].text:''));
 }
-export function deriveAlternativeReadings(e={}) { const primary=derivePrimaryReading(e); return supportedReadings(e).map(r=>cleanText(r.text)).filter(t=>t!==primary); }
+export function deriveAlternativeReadings(e={}) { if(e.conceptualState==='CONTESTED'&&e.evidenceScope==='CONCEPTUAL_BOUNDARY_NOT_ACTUAL_WORLD_EVIDENCE') return (e.conceptualReadings||[]).map(cleanText).filter(Boolean); const primary=derivePrimaryReading(e); return supportedReadings(e).map(r=>cleanText(r.text)).filter(t=>t!==primary); }
 export function deriveUnknownBoundary(e={}) { return [...new Set([...(e.unknownReasons||[]).filter(r=>UNKNOWN_REASONS.includes(r)),...(deriveKnowledgeState(e)==='UNKNOWN'?['INSUFFICIENT_EVIDENCE']:[]),...(deriveKnowledgeState(e)==='CONTESTED'?['CONTESTED']:[])])]; }
 export function deriveConfidenceBoundary(e={},locale='zh-Hans') {
   const state=deriveKnowledgeState(e);
@@ -49,7 +50,8 @@ export function deriveEpistemicReading(bundle={},coverage={}) {
   const sources=(bundle.sources||[]).filter(validSource);
   if(!sources.length) return null;
   // Evidence describes the scoped claim, not the general epistemology article itself.
-  const records=sources.map(s=>s.epistemicEvidence);
+  const question=String(bundle.question?.text||'').normalize('NFKC').replace(/[\p{P}\p{S}\s]+/gu,'');
+  const records=sources.map(s=>{const e={...s.epistemicEvidence};if(e.applicableQuestions&&!e.applicableQuestions.some(q=>q.normalize('NFKC').replace(/[\p{P}\p{S}\s]+/gu,'')===question)){delete e.conceptualState;delete e.conceptualReadings;}return e;});
   const first=records[0];
   const readings=[...new Map(records.flatMap(e=>e.readings||[]).map(r=>[r.text,r])).values()];
   const e={...first,readings,evidenceRefs:[...new Set(records.flatMap(e=>e.evidenceRefs||[]))],unknownReasons:[...new Set(records.flatMap(e=>e.unknownReasons||[]))],counterEvidence:records.flatMap(e=>e.counterEvidence||[]),future:records.some(e=>e.future===true),sufficient:records.every(e=>e.sufficient===true),discriminated:records.every(e=>e.discriminated===true)};

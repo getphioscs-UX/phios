@@ -104,7 +104,7 @@ export async function handlePublicKnowledgeRequest(request, env = {}) {
   const ranked = nodes.map(node => {
     const aliases=aliasesP.records.filter(x=>x.locale===locale&&x.nodeCode===node.nodeCode);
     const questions=questionsP.records.filter(x=>x.locale===locale&&x.nodeCode===node.nodeCode);
-    const fragments=fragmentsP.records.filter(x=>x.locale===locale&&x.nodeCode===node.nodeCode);
+    const fragments=fragmentsP.records.filter(x=>x.locale===locale&&x.nodeCode===node.nodeCode&&(!x.questionScope||x.questionScope.some(q=>normalize(q)===normalize(query))));
     const scored=scoreNode({query,node,aliases,questions,fragments});
     return {node,aliases,questions,fragments,...scored};
   }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||a.node.nodeCode.localeCompare(b.node.nodeCode));
@@ -118,6 +118,10 @@ export async function handlePublicKnowledgeRequest(request, env = {}) {
   const coverage=coverageFor(top.score,exact);
   const mode=requestedMode==='auto' ? (coverage==='exact'||coverage==='strong'?'focused':'overview') : requestedMode;
   const selected=selectFragments(mode,top.fragments,query);
+  if(top.node.bookCode==='BOOK-7'&&exact){
+    const support=relationshipsP.records.filter(r=>r.sourceNodeCode===top.node.nodeCode&&r.locale===locale&&r.targetPublished&&r.includeInGrounding);
+    for(const relationship of support)selected.push(...fragmentsP.records.filter(f=>f.nodeCode===relationship.targetNodeCode&&f.locale===locale&&(!f.questionScope||f.questionScope.some(q=>normalize(q)===normalize(query)))));
+  }
   const localeAvailability=localeP.records.find(x=>x.nodeCode===top.node.nodeCode);
   const relationships=relationshipsP.records.filter(x=>x.locale===locale&&x.sourceNodeCode===top.node.nodeCode);
   const steps=[{type:'entry',nodeCode:top.node.nodeCode,locale,href:top.node.href,title:top.node.title}];

@@ -86,7 +86,7 @@ export async function buildAdaptiveProjection({ query, locale = 'zh-Hans', mode 
     return { ...empty, projectionDigest: sha(empty) };
   }
   const node = data.nodes.find(item => item.nodeCode === top.nodeCode && item.locale === locale);
-  const all = data.fragments.filter(item => item.nodeCode === top.nodeCode && item.locale === locale).sort((a, b) => a.ordinal - b.ordinal);
+  const all = data.fragments.filter(item => item.nodeCode === top.nodeCode && item.locale === locale && (!item.questionScope || item.questionScope.some(q=>normalizeQuery(q)===normalizeQuery(query)))).sort((a, b) => a.ordinal - b.ordinal);
   const fragments = selectFragments({ all, query, mode: intent.mode, policy: data.projectionPolicy });
   const base = {
     projectionCode: 'KNR-PROJECTION-PUBLISHED-FRAGMENTS',

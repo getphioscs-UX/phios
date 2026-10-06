@@ -28,7 +28,7 @@ function stableHash(value) {
 function splitSentences(text) {
   const source = canonicalText(text);
   if (!source) return [];
-  return unique(source.match(/[^。！？.!?]+[。！？.!?]?/g) || [source]);
+  return unique(source.match(/(?:[^。！？.!?]|(?<=\d)\.(?=\d))+[。！？.!?]?/g) || [source]);
 }
 
 function localeCopy(locale) {
