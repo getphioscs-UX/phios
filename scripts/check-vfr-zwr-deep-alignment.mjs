@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {buildZwrVfrDeepPublicationIr} from '../functions/personal-reading/visual-first/ziwei-vfr-deep-publication.js';
-import {ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
+import {buildZwrVfrPagePlan,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
 
 const root='docs/reports/ziwei/vfr-r1/';
 const repairedPath=root+'five-call-experiment/REPAIRED-RESULT.json';
@@ -31,12 +31,13 @@ for(const s of publication.sections){
 
 assert.equal(diagrams.diagramCount,15);
 assert.equal(diagrams.providerCalls,0);
-const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id)});
+const pages=buildZwrVfrPagePlan({sections:publication.sections});
+const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id),pages,sections:publication.sections});
 assert.equal(pageCheck.accepted,true,pageCheck.reasons.join(','));
-assert(pageCheck.pageCount>=48&&pageCheck.pageCount<=60,'bilingual page count out of range');
+assert(pageCheck.pageCount>=50&&pageCheck.pageCount<=80,'bilingual page count out of range');
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
- assert.equal(ZWR_VFR_PAGE_PLAN.flatMap(p=>p.diagramIds).filter(x=>x===id).length,1,id+' must bind exactly once');
+ assert.equal(pages.flatMap(p=>p.diagramIds).filter(x=>x===id).length,1,id+' must bind exactly once');
 }
 
 const fiveCall=fs.readFileSync('functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js','utf8');
