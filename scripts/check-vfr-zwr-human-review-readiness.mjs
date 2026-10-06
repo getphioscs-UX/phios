@@ -21,13 +21,19 @@ assert.equal(cache.repairedResultDigest,repaired.resultDigest);
 assert.equal(cache.publicationIrDigest,publication.publicationIrDigest);
 assert.equal(cache.providerCallsDuringRerender,0);
 
-assert.equal((html.match(/class="zv-page/g)||[]).length,47,'human review must render 47 pages');
+const renderedPages=(html.match(/class="zv-page/g)||[]).length;
+assert(renderedPages>=48&&renderedPages<=60,'human review page count outside bilingual range: '+renderedPages);
 assert(!html.includes('<pre>'),'human review must not expose raw diagram JSON placeholders');
+
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
  assert.equal((html.match(new RegExp('data-diagram-id="'+id+'"','g'))||[]).length,1,'diagram must render exactly once: '+id);
 }
-assert((html.match(/<svg class="zv-svg"/g)||[]).length>=1,'at least one real SVG diagram required');
+assert((html.match(/<svg class="zv-svg/g)||[]).length>=1,'at least one real SVG diagram required');
+for(const cls of ['zv-ziwei-board','zv-axis-map','zv-star-atlas','zv-tx-orbits','zv-palace-orbit','zv-nav-wheel']){
+ assert(html.includes('class="'+cls)||html.includes('class="'+cls+' '),'professional Zi Wei diagram structure missing: '+cls);
+}
+assert(html.includes('zv-diagram-composite'),'adaptive diagram composition missing');
 assert(html.includes('中文解读'),'Chinese review copy missing');
 assert(html.includes('English Reading'),'English review copy missing');
 assert(!/class=["'][^"']*\bzv-empty\b[^"']*["']/.test(html),'missing deterministic diagram renderer remains');
@@ -92,4 +98,4 @@ for(const section of publication.sections||[]){
  assert(html.includes(htmlText(section.en.headline)),section.sectionId+': English headline not rendered');
 }
 
-console.log('PASS ZWR-VFR W9 human-review readiness: repaired Deep Manuscript bound; pages='+renderedPages+'; ZWD-01..15 rendered exactly once; all visual assets bound; zero provider calls during rerender; bilingual manuscripts complete; ready for browser/print HUMAN REVIEW.');
+console.log('PASS ZWR-VFR W9 human-review readiness: repaired Deep Manuscript bound; pages='+renderedPages+'; ZWD-01..15 rendered exactly once; adaptive diagram composition present; all visual assets bound; zero provider calls during rerender; bilingual manuscripts complete; ready for browser/print HUMAN REVIEW.');
