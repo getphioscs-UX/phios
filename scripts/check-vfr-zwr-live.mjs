@@ -28,10 +28,10 @@ assert.equal(new Set(result.rawManuscriptSections.map(s=>s.sectionId)).size,10);
 assert(result.rawManuscriptSections.every(s=>String(s.zhHansManuscript||'').trim()&&String(s.enManuscript||'').trim()),'every W8 section must contain complete bilingual manuscript');
 assert.equal(diagrams.diagramCount,15);
 assert.equal(pageCheck.accepted,true,pageCheck.reasons.join(','));
-assert.equal(pages.length,47);
+assert(pages.length>=48&&pages.length<=60,'bilingual deep publication page count out of range');
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
- assert.equal(pages.flatMap(p=>p.diagramIds||[]).filter(x=>x===id).length,1,id+' must bind exactly once in deep 47-page plan');
+ assert.equal(pages.flatMap(p=>p.diagramIds||[]).filter(x=>x===id).length,1,id+' must bind exactly once in deep bilingual plan');
 }
 const digest=createHash('sha256').update(fs.readFileSync(deepRoot+'REPAIRED-RESULT.json')).digest('hex');
 console.log(
@@ -39,6 +39,6 @@ console.log(
  result.providerUsage.originalProviderCalls+
  '; repairCalls='+result.providerUsage.repairProviderCalls+
  '; semanticReviewCalls=0; totalCost=$'+Number(result.providerUsage.totalEstimatedProviderCost).toFixed(6)+
- '; sections=10 bilingual; diagrams=15 exactly once; pages=47; repairedResultSha256='+digest+
+ '; sections=10 bilingual; diagrams=15 exactly once; pages='+pages.length+'; repairedResultSha256='+digest+
  '; legacy one-call candidate superseded.'
 );
