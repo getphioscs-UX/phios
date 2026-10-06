@@ -104,7 +104,7 @@ html,body{margin:0;padding:0;background:#121715;color:#e8ddbd;font-family:Inter,
 `;
 
 const body=renderZwrVfrReview({reportIr,diagramData:diagrams,pagePlan});
-const html='<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev" crossorigin><link rel="dns-prefetch" href="//pub-1967bc5812ee4164b19a806fb1427021.r2.dev"><title>Zi Wei VFR R1 Human Review</title><style>'+styles+'</style></head><body><section class="review-shell"><h1>Zi Wei VFR R1 · Browser / Print Human Review</h1><p>Deep Manuscript W8 PASS · repaired completeness PASS · 0 semantic review · '+pagePlan.length+' pages · 15 deterministic diagrams · rerender provider calls 0.</p><p>请同时检查桌面浏览、打印预览、双语语义、紫微专业度、生活解释深度、diagram 信息密度与页面越界。</p><button onclick="window.prepareZwrPrint()">打印／保存 PDF</button><p>只有人工确认后才运行：<code>npm run accept:vfr:zwr-human-review -- ACCEPT</code></p><p id="fit">checking page fit…</p></section><main>'+body+'</main><script>
+const reviewScript=`
 window.prepareZwrPrint=async()=>{document.documentElement.classList.add("zv-print-preparing");await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));window.print();};
 window.addEventListener("afterprint",()=>document.documentElement.classList.remove("zv-print-preparing"));
 window.addEventListener("load",async()=>{
@@ -115,10 +115,26 @@ window.addEventListener("load",async()=>{
  const over=pages.filter(p=>{const footer=p.querySelector("footer"),main=p.querySelector("main");return p.scrollHeight>p.clientHeight+2||(footer&&main&&main.getBoundingClientRect().bottom>footer.getBoundingClientRect().top+1)});
  const empty=[...document.querySelectorAll(".zv-empty")];
  const broken=unique.filter(i=>!i.naturalWidth);
- const overflowLabels=over.map(p=>[p.dataset.pageNumber,p.dataset.sectionId||"-",p.dataset.pageKey||"-"].join(":"));window.zwrVfrReviewQuality={pages:pages.length,overflowPages:over.map(p=>Number(p.dataset.pageNumber)),overflowLabels,missingRenderer:empty.length,brokenImages:broken.map(i=>i.src)};
+ const overflowLabels=over.map(p=>[p.dataset.pageNumber,p.dataset.sectionId||"-",p.dataset.pageKey||"-"].join(":"));
+ window.zwrVfrReviewQuality={pages:pages.length,overflowPages:over.map(p=>Number(p.dataset.pageNumber)),overflowLabels,missingRenderer:empty.length,brokenImages:broken.map(i=>i.src)};
  document.querySelector("#fit").textContent="pages="+pages.length+" · overflow="+over.length+(over.length?" ["+overflowLabels.join(", ")+"]":"")+" · missing-renderer="+empty.length+" · broken-images="+broken.length;
 });
-</script></body></html>';
+`;
+const html=[
+ '<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8">',
+ '<meta name="viewport" content="width=device-width,initial-scale=1">',
+ '<link rel="preconnect" href="https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev" crossorigin>',
+ '<link rel="dns-prefetch" href="//pub-1967bc5812ee4164b19a806fb1427021.r2.dev">',
+ '<title>Zi Wei VFR R1 Human Review</title><style>',styles,'</style></head><body>',
+ '<section class="review-shell"><h1>Zi Wei VFR R1 · Browser / Print Human Review</h1>',
+ '<p>Deep Manuscript W8 PASS · repaired completeness PASS · 0 semantic review · ',String(pagePlan.length),' pages · 15 deterministic diagrams · rerender provider calls 0.</p>',
+ '<p>请同时检查桌面浏览、打印预览、双语语义、紫微专业度、生活解释深度、diagram 信息密度与页面越界。</p>',
+ '<button onclick="window.prepareZwrPrint()">打印／保存 PDF</button>',
+ '<p>只有人工确认后才运行：<code>npm run accept:vfr:zwr-human-review -- ACCEPT</code></p>',
+ '<p id="fit">checking page fit…</p></section><main>',
+ body,
+ '</main><script>',reviewScript,'</script></body></html>'
+].join('');
 fs.mkdirSync('tools/review',{recursive:true});
 fs.writeFileSync('tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html',html);
 console.log('PASS built ZWR-VFR-R1-HUMAN-REVIEW.html from REPAIRED-RESULT.json: '+pagePlan.length+' rendered pages; 15 deterministic diagrams exactly once; deep manuscript publication IR persisted; provider calls=0.');
