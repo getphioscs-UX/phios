@@ -67,6 +67,14 @@ assert(html.includes('读取边界')&&html.includes('Reading Boundary'),'closing
 assert(html.includes('data-focus-layer="DA_XIAN"'),'S09 must visually emphasize Da Xian');
 assert(html.includes('data-focus-layer="LIU_NIAN"')||html.includes('Current Palace Activation'),'S10 must visibly preserve current-year activation');
 
+function htmlText(text){
+ return String(text??'')
+  .replaceAll('&','&amp;')
+  .replaceAll('<','&lt;')
+  .replaceAll('>','&gt;')
+  .replaceAll('"','&quot;')
+  .replaceAll("'","&#39;");
+}
 function completeZh(text){
  const t=String(text||'').trim();
  return ['。','！','？','》','）','」','』','】'].some(x=>t.endsWith(x));
@@ -80,8 +88,8 @@ for(const section of publication.sections||[]){
  assert(section.en?.paragraphs?.length>=5,section.sectionId+': English deep manuscript too thin');
  assert(section.zhHans.paragraphs.every(completeZh),section.sectionId+': Chinese paragraph truncation');
  assert(section.en.paragraphs.every(completeEn),section.sectionId+': English paragraph truncation');
- assert(html.includes(section.zhHans.headline),section.sectionId+': Chinese headline not rendered');
- assert(html.includes(section.en.headline),section.sectionId+': English headline not rendered');
+ assert(html.includes(htmlText(section.zhHans.headline)),section.sectionId+': Chinese headline not rendered');
+ assert(html.includes(htmlText(section.en.headline)),section.sectionId+': English headline not rendered');
 }
 
 console.log('PASS ZWR-VFR W9 human-review readiness: repaired Deep Manuscript bound; 47 pages; ZWD-01..15 rendered exactly once; all visual assets bound; zero provider calls during rerender; bilingual manuscripts complete; ready for browser/print HUMAN REVIEW.');
