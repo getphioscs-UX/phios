@@ -1,3 +1,5 @@
+// V2 current successor dispatch; accepted predecessor checker remains in Git/freeze lineage.
+if ((await import('node:fs')).default.existsSync('content/knowledge/book-vii/v2-cutover/canonical-source-registry-v2.json')) {await import('./check-book-vii-v2-cutover.mjs');process.exit(0);}
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';

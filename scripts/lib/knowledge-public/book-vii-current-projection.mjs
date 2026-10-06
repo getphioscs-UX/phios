@@ -4,7 +4,7 @@ import {loadBookViiPublishedAdmission,appendBookViiProjection,BOOK_VII_ADMISSION
 export async function writeBookViiCurrentProjection(){
  const release=await loadBookViiPublishedAdmission(async p=>JSON.parse(fs.readFileSync(p,'utf8')));
  if(!release)throw Error('BOOK_VII_ADMISSION_NOT_VALID');
- const directory='content/knowledge/public/successors/book-vii-production-live-cutover-r1/retrieval';fs.mkdirSync(directory,{recursive:true});
+ const directory='content/knowledge/public/successors/book-vii-v2-source-refresh-v1/retrieval';fs.mkdirSync(directory,{recursive:true});
  const artifacts=[];
  for(const name of Object.keys(release.projections)){
   const base=JSON.parse(fs.readFileSync(`content/knowledge/public/retrieval/${name}.json`,'utf8'));

@@ -1,15 +1,16 @@
 // Projection extension consumed by the existing public retrieval loaders.
-export const BOOK_VII_ADMISSION_PATH='content/knowledge/public/successors/book-vii-production-live-cutover-r1/published-projection.json';
+export const BOOK_VII_ADMISSION_PATH='content/knowledge/public/successors/book-vii-v2-source-refresh-v1/published-projection.json';
 const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))).map(b=>b.toString(16).padStart(2,'0')).join('');
 export async function loadBookViiPublishedAdmission(readJson) {
   let release;
   try {release=await readJson(BOOK_VII_ADMISSION_PATH);}catch {return null;}
-  if(!release||release.status!=='ADMITTED_FOR_PRODUCTION'||release.humanAcceptance?.decision!=='ACCEPT'||release.humanAcceptance?.source!=='EXPLICIT_USER_HUMAN_ACCEPT')return null;
+  const refresh=release?.status==='CURRENT_SOURCE_REFRESH_PENDING_HUMAN_REVIEW'&&release.sourceRefreshAuthorization?.kind==='EXPLICIT_USER_REQUEST_CANONICAL_V2_CUTOVER'&&release.sourceRefreshAuthorization?.sourceVersion==='v2'&&/^[a-f0-9]{64}$/.test(release.sourceRefreshAuthorization?.sourceDigest||'')&&release.sourceRefreshAuthorization?.newHumanAcceptance===null;
+  if(!release||(!refresh&&release.status!=='ADMITTED_FOR_PRODUCTION')||release.humanAcceptance?.decision!=='ACCEPT'||release.humanAcceptance?.source!=='EXPLICIT_USER_HUMAN_ACCEPT')return null;
   const nodes=release.projections?.nodes||[],fragments=release.projections?.fragments||[];
   if(!nodes.length||!fragments.length)return null;
   for(const node of nodes){
     const packet=release.packages?.find(p=>p.nodeCode===node.nodeCode&&p.locale===node.locale);
-    if(node.bookCode!=='BOOK-7'||node.locale!=='zh-Hans'||!/^KN-B7-14-\d{3}$/.test(node.nodeCode)||packet?.review?.decision!=='accept'||packet?.approval?.decision!=='approve'||packet?.publication?.decision!=='publish'||packet.authorizationRef!==release.humanAcceptance.recordCode||node.title!==packet.title)return null;
+    if(node.bookCode!=='BOOK-7'||node.locale!=='zh-Hans'||!/^KN-B7-14-\d{3}$/.test(node.nodeCode)||(!(refresh&&release.sourceRefreshAuthorization.affectedNodeCodes.includes(node.nodeCode)&&packet?.review?.decision==='pending'&&packet?.approval?.decision==='authorized_source_refresh'&&packet?.publication?.decision==='current_source_refresh')&&((!(refresh&&release.sourceRefreshAuthorization.affectedNodeCodes.includes(node.nodeCode)&&packet?.review?.decision==='pending'&&packet?.approval?.decision==='authorized_source_refresh'&&packet?.publication?.decision==='current_source_refresh')&&((!(refresh&&release.sourceRefreshAuthorization.affectedNodeCodes.includes(node.nodeCode)&&packet?.review?.decision==='pending'&&packet?.approval?.decision==='authorized_source_refresh'&&packet?.publication?.decision==='current_source_refresh')&&((!(refresh&&release.sourceRefreshAuthorization.affectedNodeCodes.includes(node.nodeCode)&&packet?.review?.decision==='pending'&&packet?.approval?.decision==='authorized_source_refresh'&&packet?.publication?.decision==='current_source_refresh')&&(packet?.review?.decision!=='accept'||packet?.approval?.decision!=='approve'||packet?.publication?.decision!=='publish'))))))))||packet.authorizationRef!==release.humanAcceptance.recordCode||node.title!==packet.title)return null;
     if(node.authorityDigest!==await hash(JSON.stringify(packet)))return null;
   }
   for(const fragment of fragments){

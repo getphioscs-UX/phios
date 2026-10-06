@@ -168,7 +168,7 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
 if (admittedBookVii) {
   publicationFiles.add(BOOK_VII_ADMISSION_PATH);
-  const currentDirectory='content/knowledge/public/successors/book-vii-production-live-cutover-r1/retrieval';
+  const currentDirectory='content/knowledge/public/successors/book-vii-v2-source-refresh-v1/retrieval';
   if(fs.existsSync(path.join(root,currentDirectory)))for(const name of fs.readdirSync(path.join(root,currentDirectory)))if(name.endsWith('.json'))publicationFiles.add(currentDirectory+'/'+name);
 }
 
