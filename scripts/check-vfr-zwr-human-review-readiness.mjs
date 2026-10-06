@@ -25,6 +25,7 @@ assert.equal(cache.providerCallsDuringRerender,0);
 
 const renderedPages=(html.match(/class="zv-page/g)||[]).length;
 assert(renderedPages>=50&&renderedPages<=80,'human review page count outside bilingual range: '+renderedPages);
+assert.equal(renderedPages,Number(fitPlan.pageCount),'rendered page count must match deterministic fit plan');
 assert(!html.includes('<pre>'),'human review must not expose raw diagram JSON placeholders');
 
 for(let i=1;i<=15;i++){
@@ -38,8 +39,25 @@ for(const cls of ['zv-ziwei-board','zv-axis-compact','zv-star-atlas','zv-tx-orbi
 assert(html.includes('zv-diagram-composite'),'adaptive diagram composition missing');
 assert(html.includes('zv-tx-focus'),'sparse Four-Transformation focus composition missing');
 assert.equal((html.match(/data-page-family="SECTION_MASTER"/g)||[]).length,10,'exactly ten chapter master pages required');
-assert.equal((html.match(/data-page-family="READING_ZH"/g)||[]).length,20,'exactly twenty Chinese reading pages required');
-assert.equal((html.match(/data-page-family="READING_EN"/g)||[]).length,10,'exactly ten English reading pages required');
+
+const zhRendered=(html.match(/data-page-family="READING_ZH"/g)||[]).length;
+const enRendered=(html.match(/data-page-family="READING_EN"/g)||[]).length;
+const sectionFit=Array.isArray(fitPlan.sectionFit)?fitPlan.sectionFit:[];
+assert.equal(sectionFit.length,10,'fit plan must contain ten section allocations');
+
+const zhPlanned=sectionFit.reduce((n,x)=>n+Number(x.zhPages||0),0);
+const enPlanned=sectionFit.reduce((n,x)=>n+Number(x.enPages||0),0);
+assert.equal(zhRendered,zhPlanned,'Chinese reading-page count must match deterministic fit plan');
+assert.equal(enRendered,enPlanned,'English reading-page count must match deterministic fit plan');
+
+for(const sf of sectionFit){
+ const sectionId=String(sf.sectionId||'');
+ assert(sectionId,'fit plan sectionId required');
+ const zhCount=(html.match(new RegExp('data-page-family="READING_ZH"[^>]*data-section-id="'+sectionId+'"','g'))||[]).length;
+ const enCount=(html.match(new RegExp('data-page-family="READING_EN"[^>]*data-section-id="'+sectionId+'"','g'))||[]).length;
+ assert.equal(zhCount,Number(sf.zhPages),sectionId+': Chinese pages drift from fit plan');
+ assert.equal(enCount,Number(sf.enPages),sectionId+': English pages drift from fit plan');
+}
 assert(html.includes('中文解读'),'Chinese review copy missing');
 assert(html.includes('English Reading'),'English review copy missing');
 assert(!/class=["'][^"']*\bzv-empty\b[^"']*["']/.test(html),'missing deterministic diagram renderer remains');
