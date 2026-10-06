@@ -210,8 +210,7 @@ function localeParagraphs(copy){
  return String(copy?.manuscript||'').split(/\n\s*\n/u).map(x=>x.trim()).filter(Boolean);
 }
 function openingParagraphCount(section,readingCount=1){
- const n=Math.max(localeParagraphs(section?.zhHans).length,localeParagraphs(section?.en).length);
- return readingCount===1?Math.min(3,Math.max(2,Math.ceil(n/2))):2;
+ return readingCount>=2?1:2;
 }
 function sectionMaster(section,binding,diagrams='',compact=false,meta={}){
  const zh=section?.zhHans||{},en=section?.en||{},enSub=PURPOSE_EN[section?.sectionId]||en.subheadline;
@@ -242,9 +241,15 @@ function interpretation(section,page={}){
  const suffix=Number(page.readingCount||1)>1?' · '+String(Number(page.readingIndex||0)+1)+'/'+String(page.readingCount):'';
  return '<div class="zv-reading-head"><span>'+esc(section?.sectionId||'')+'</span><h2>'+esc(zh.headline||'')+'</h2><small>'+esc(en.headline||'')+suffix+'</small></div><div class="zv-copy-grid zv-reading-grid"><article lang="zh-Hans"><h3>中文解读</h3>'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en"><h3>English Reading</h3>'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
 }
-function closingPage(reportIr,binding){
- const zh=reportIr?.closingSummary?.zhHans||[],en=reportIr?.closingSummary?.en||[];
- return '<div class="zv-closing-art">'+(binding.hero?'<img src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-closing-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div><div class="zv-closing"><span>47</span><h1>读取边界</h1><h2>Reading Boundary</h2><p>命盘提供结构化观察，不替代现实证据、专业判断或你的实际选择。</p><p lang="en">The chart provides structured observation; it does not replace real-world evidence, professional judgment, or your own decisions.</p><div class="zv-closing-points">'+zh.slice(0,3).map((x,i)=>'<article><b>0'+(i+1)+'</b><p>'+esc(x)+'</p><small>'+esc(en[i]||'')+'</small></article>').join('')+'</div></div>';
+function firstSentence(text,locale){
+ const t=String(text||'').trim();
+ const re=locale==='zh'?/^.*?[。！？]/u:/^.*?[.!?](?:[”"'])?/u;
+ return t.match(re)?.[0]||t;
+}
+function closingPage(reportIr,binding,pageNumber){
+ const zh=(reportIr?.closingSummary?.zhHans||[]).map(x=>firstSentence(x,'zh'));
+ const en=(reportIr?.closingSummary?.en||[]).map(x=>firstSentence(x,'en'));
+ return '<div class="zv-closing-art">'+(binding.hero?'<img src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-closing-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div><div class="zv-closing"><span>'+esc(pageNumber||'')+'</span><h1>读取边界</h1><h2>Reading Boundary</h2><p>命盘提供结构化观察，不替代现实证据、专业判断或你的实际选择。</p><p lang="en">The chart provides structured observation; it does not replace real-world evidence, professional judgment, or your own decisions.</p><div class="zv-closing-points">'+zh.slice(0,3).map((x,i)=>'<article><b>0'+(i+1)+'</b><p>'+esc(x)+'</p><small>'+esc(en[i]||'')+'</small></article>').join('')+'</div></div>';
 }
 export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
  const sections=new Map((reportIr?.sections||[]).map(s=>[s.sectionId,s]));
@@ -255,7 +260,7 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   const s=sections.get(p.sectionId),ds=(p.diagramIds||[]).map(id=>diagrams.get(id)).filter(Boolean);
   const binding=getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
   if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
-  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'">'+closingPage(reportIr,binding)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'">'+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
   let body='';
   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily})).join('');
   if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml,p.pageFamily==='SECTION_MASTER_SUMMARY',{readingCount:readingCounts.get(p.sectionId)||1});
