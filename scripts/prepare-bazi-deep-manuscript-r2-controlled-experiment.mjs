@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import {BATCHES,LOCALES,VERSIONS,digest} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-contract.js';
+import {BAZI_DEEP_MANUSCRIPT_PROMPT} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-prompt.js';
+import {buildBaziManuscriptSchema} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-schema.js';
+import {projectBaziBatchAuthority,buildPriorSectionSummary} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-batch-authority.js';
+import {planBaziDeepManuscriptOutputBudget} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-budget.js';
+import {createBaziFileStore} from './lib/bazi-deep-manuscript-store.mjs';
+import {ROOT,read,write,sha,loadBaziReviewAuthority,loadBaziPlanningConfig} from './lib/bazi-deep-manuscript-review.mjs';
+const candidateId='BDM-R2-REFERENCE-20261006-01',pack=await loadBaziReviewAuthority(),{policy,model,history}=loadBaziPlanningConfig();
+const admitted=read('content/reports/bazi/deep-manuscript/bazi-deep-manuscript-r2-capacity-admission.json');
+if(admitted.THREE_CALL_CAPACITY_ADMISSION!=='PASS'||admitted.modelManifestSha256!==sha(policy.modelManifestPath)||Date.now()>Date.parse(model.reviewAfter))throw Error('BDM_CAPACITY_RECEIPT_DRIFT_OR_EXPIRED');
+const promptDigest=await digest(BAZI_DEEP_MANUSCRIPT_PROMPT),batches=[];
+for(const b of BATCHES){const units=b.sectionIds.flatMap(sectionId=>LOCALES.map(locale=>({sectionId,locale}))),authority=projectBaziBatchAuthority(pack,b.batchId),schema=buildBaziManuscriptSchema(units),plan=planBaziDeepManuscriptOutputBudget({authority,priorSummary:buildPriorSectionSummary(pack,b.batchId),units,history,model,policy}),prior=admitted.batches.find(p=>p.batchId===b.batchId);for(const key of ['estimatedInputTokens','plannedMaxOutputTokens','expectedOutputTokens'])if(plan[key]!==prior[key])throw Error('BDM_ADMITTED_PLAN_DRIFT:'+b.batchId+':'+key);batches.push({...b,plan,promptDigest,schemaDigest:await digest(schema),batchAuthorityDigest:await digest(authority)});}
+// Readiness probe is separate from the live candidate, never creates a call reservation.
+const store=createBaziFileStore('.runtime-evidence/bazi-deep-manuscript-r2/readiness');
+await store.withLock('STORAGE_READINESS',async()=>{await store.put('STORAGE_READINESS',{status:'READY',providerCalls:0});if((await store.get('STORAGE_READINESS')).status!=='READY')throw Error('BDM_STORE_NOT_READY');});
+const approval={statement:'APPROVE BAZI DEEP MANUSCRIPT R2 CONTROLLED 3-CALL EXPERIMENT',authorityDigest:pack.digest,candidateId,approvedAt:'2026-10-06',source:'User explicitly instructed continued execution of attached master work step containing OWNER APPROVAL',sourceAttachmentSha256:process.env.BDM_APPROVAL_ATTACHMENT_PATH?sha(process.env.BDM_APPROVAL_ATTACHMENT_PATH):null,scope:'ONE_REPRESENTATIVE_CONTROLLED_EXPERIMENT_ONLY',normalCalls:3,maxStandardTechnicalRecoveryCalls:2,deliveryRescueApproval:false,productionApproved:false,pushApproved:false,deployApproved:false,versions:VERSIONS,promptDigest,batches};
+const approvalPath=ROOT+'CONTROLLED-EXPERIMENT-APPROVAL.json';
+if(fs.existsSync(approvalPath)){const previous=read(approvalPath);if(previous.authorityDigest!==approval.authorityDigest||previous.candidateId!==candidateId)throw Error('BDM_APPROVAL_IDENTITY_DRIFT');}else write(approvalPath,approval);
+const keyPresent=Boolean(process.env.OPENAI_API_KEY),receipt={version:'BDM-CONTROLLED-EXPERIMENT-PREPARATION-1',candidateId,approvalPath,ownerApproval:'EXPLICIT_AUTHORIZED',modelManifestPath:policy.modelManifestPath,model:model.modelId,authorityDigest:pack.digest,timingDigest:pack.timingDigest,promptDigest,batches,checkpointStorage:'READY',usageLedger:'READY_BEFORE_REQUEST_RESERVATION',recoveryRouter:'READY_MAX2_UNRESOLVED_ONLY_BEFORE_NEXT_BATCH',provider:'OPENAI',keyPresent,REPORT_PROVIDER_LIVE_ALLOWED:false,providerCalls:0,providerCostUsd:0,productionActivated:false,scopeCorrection:'Controlled experiment explicitly repairs prior attempted batch before advancing; production/default engine behavior unchanged',currentDecision:keyPresent?'READY_FOR_AUTHORIZED_CONTROLLED_EXPERIMENT':'BLOCKED_OPENAI_API_KEY_NOT_CONFIGURED'};
+write(ROOT+'CONTROLLED-EXPERIMENT-PREPARATION.json',receipt);
+console.log(JSON.stringify({candidateId,ownerApproval:receipt.ownerApproval,keyPresent,providerCalls:0,currentDecision:receipt.currentDecision}));
