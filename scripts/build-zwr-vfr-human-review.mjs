@@ -13,6 +13,7 @@ const diagramPath=root+'/DIAGRAM-DATA.json';
 const pagePath=root+'/PAGE-PLAN.json';
 const publicationPath=root+'/DEEP-PUBLICATION-IR.json';
 const renderCachePath=root+'/DEEP-RENDER-CACHE.json';
+const fitPlanPath=root+'/PUBLICATION-FIT-PLAN.json';
 for(const p of [repairedPath,packPath,diagramPath])if(!fs.existsSync(p))throw Error('ZWR_VFR_W9_INPUT_REQUIRED:'+p);
 const repaired=JSON.parse(fs.readFileSync(repairedPath,'utf8'));
 const pack=JSON.parse(fs.readFileSync(packPath,'utf8'));
@@ -23,6 +24,7 @@ const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id
 if(!pageCheck.accepted)throw Error('ZWR_VFR_PAGE_PLAN_INVALID:'+pageCheck.reasons.join(','));
 fs.writeFileSync(pagePath,JSON.stringify(pagePlan,null,2)+'\n');
 fs.writeFileSync(publicationPath,JSON.stringify(reportIr,null,2)+'\n');
+fs.writeFileSync(fitPlanPath,JSON.stringify({schemaVersion:ZWR_VFR_FIT_PROFILE_VERSION,pageCount:pagePlan.length,...pageCheck.fitProfile},null,2)+'\n');
 const renderCacheKey=zwrVfrDeepPublicationCacheIdentity({
  authorityDigest:pack.authorityDigest,
  repairedResultDigest:repaired.resultDigest,
@@ -144,4 +146,4 @@ const html=[
 ].join('');
 fs.mkdirSync('tools/review',{recursive:true});
 fs.writeFileSync('tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html',html);
-console.log('PASS built ZWR-VFR-R1-HUMAN-REVIEW.html from REPAIRED-RESULT.json: '+pagePlan.length+' rendered pages; 15 deterministic diagrams exactly once; deep manuscript publication IR persisted; provider calls=0.');
+console.log('PASS built ZWR-VFR-R1-HUMAN-REVIEW.html from REPAIRED-RESULT.json: '+pagePlan.length+' rendered pages; 15 deterministic diagrams exactly once; adaptive fit plan persisted; provider calls=0.');
