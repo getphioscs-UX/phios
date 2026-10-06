@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
+import {buildZwrVfrPagePlan,validateZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
 
 const root='docs/reports/ziwei/vfr-r1/';
 const deepRoot=root+'five-call-experiment/';
@@ -12,8 +12,13 @@ for(const name of ['REPAIRED-RESULT.json'])assert(fs.existsSync(deepRoot+name),'
 const result=read(deepRoot+'REPAIRED-RESULT.json');
 const pack=read(root+'COMPACT-AUTHORING-PACK.json');
 const diagrams=read(root+'DIAGRAM-DATA.json');
-const pages=ZWR_VFR_PAGE_PLAN;
-const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id)});
+const publicationSections=result.rawManuscriptSections.map(s=>({
+ sectionId:s.sectionId,
+ zhHans:{paragraphs:String(s.zhHansManuscript||'').split(/\n\s*\n/u).filter(Boolean)},
+ en:{paragraphs:String(s.enManuscript||'').split(/\n\s*\n/u).filter(Boolean)}
+}));
+const pages=buildZwrVfrPagePlan({sections:publicationSections});
+const pageCheck=validateZwrVfrPagePlan({diagramIds:diagrams.diagrams.map(d=>d.id),pages,sections:publicationSections});
 
 assert.equal(result.status,'PASS');
 assert.equal(result.schemaVersion,'ZWR-VFR-R1-TARGETED-REPAIRED-RESULT-v1');
@@ -28,7 +33,7 @@ assert.equal(new Set(result.rawManuscriptSections.map(s=>s.sectionId)).size,10);
 assert(result.rawManuscriptSections.every(s=>String(s.zhHansManuscript||'').trim()&&String(s.enManuscript||'').trim()),'every W8 section must contain complete bilingual manuscript');
 assert.equal(diagrams.diagramCount,15);
 assert.equal(pageCheck.accepted,true,pageCheck.reasons.join(','));
-assert(pages.length>=48&&pages.length<=60,'bilingual deep publication page count out of range');
+assert(pages.length>=50&&pages.length<=80,'bilingual deep publication page count out of range');
 for(let i=1;i<=15;i++){
  const id='ZWD-'+String(i).padStart(2,'0');
  assert.equal(pages.flatMap(p=>p.diagramIds||[]).filter(x=>x===id).length,1,id+' must bind exactly once in deep bilingual plan');
