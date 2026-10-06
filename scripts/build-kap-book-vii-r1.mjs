@@ -5,7 +5,16 @@ const root='content/knowledge/book-vii';
 const kap='content/knowledge/answer-projection';
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const write=(p,v)=>{fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');};
+const write=(p,v)=>{
+ if(fs.existsSync(p)&&p.endsWith('book-vii-observation-science-r2-asset-registry-v1.json')) {
+  const existing=read(p);v.assets=v.assets.map(a=>existing.assets.find(old=>old.assetId===a.assetId&&old.bindingStatus==='BOUND')||a);
+  v.bindingStatus=v.assets.every(a=>a.bindingStatus==='BOUND')?'BOUND':'PENDING_R2_OBJECT_IDENTITY';v.discovery=existing.discovery;
+ }
+ if(fs.existsSync(p)&&p.endsWith('kap-book-vii-observation-science-successor-v1.json')) {
+  const existing=read(p);if(existing.targetedHumanReviewClosure)v.targetedHumanReviewClosure=existing.targetedHumanReviewClosure;
+ }
+ fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
+};
 const runtimePaths=['functions/_lib/knowledge-answer-composition.js','scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs','functions/_lib/knowledge-guided-reading.js'];
 const snapshotPath=`${root}/evidence/baseline-v1.json`;
 if(!fs.existsSync(snapshotPath)) {
@@ -20,7 +29,9 @@ const metadata=fs.existsSync(metadataPath)?read(metadataPath):null;
 const nodes=Array.from({length:100},(_,i)=>{const n=i+1,t=topics[n],m=metadata?.records[i];return {nodeCode:`KN-B7-14-${String(n).padStart(3,'0')}`,bookId:'BOOK-7',partId:'PART-14',sectionCode:`14.${n}`,titleZhHans:m?.titleZhHans||t?.[0]||`观察科学 · 14.${n}（标题待核验）`,readerQuestionZhHans:m?.readerQuestionZhHans||t?.[1]||`14.${n} 的受治理观察知识是什么？（待完整目录核验）`,authorityOwner:'BOOK_VII_OBSERVATION_SCIENCE',knowledgeRole:t?.[2]||'OBSERVATION_EPISTEMOLOGY',publicationEligible:true,rawManuscriptRetrievalAllowed:false,metadataStatus:m?'VERIFIED_PRIVATE_SOURCE_HEADING':t?'GOVERNING_DECISION_SEMANTIC_LABEL_CANONICAL_TITLE_PENDING':'PENDING_COMPLETED_OUTLINE_METADATA',canonicalTitleVerified:!!m,...(m?{sourcePage:m.sourcePage,readerQuestionProvenance:m.readerQuestionProvenance}:{})};});
 write(`${root}/registries/book-vii-observation-science-node-registry-v1.json`,{schemaVersion:'PHI-OS-BOOK-VII-NODE-REGISTRY-v1.0.0',status:'READY_FOR_HUMAN_REVIEW',metadataBoundary:metadata?'Canonical titles extracted from 100 ordered source headings with seven section anchors verified. 88 questions are source headings; 12 are explicitly labelled derived metadata questions. No full prose embedded.':'Completed outline metadata pending.',nodes});
 const purposes=['现实 → 痕迹 → 讯号 → 运行体 → 观察阈值','从感官到人工智能：观察解析度历史','痕迹 → 证据 → 知识状态图谱','观察 → 测量 → 解析度 → 误差 → 不确定性','现实／证据／重构／投影权威边界','观察 → 多源证据 → 运行重构 → 候选读取 → 现实解释','观察者生态：人、制度、网络、传感器与人工智能','已知／重构／投影／争议／未知','观察边界 → 导航阈值'];
-const figures=purposes.map((semanticPurpose,i)=>({figureId:`FIG-14${String.fromCharCode(65+i)}`,bookId:'BOOK-7',semanticPurpose,assetClass:'PUBLICATION_FIGURE',canonicalProseAuthority:false,ocrAuthority:false,r2BindingStatus:'PENDING_R2_OBJECT_IDENTITY'}));
+const previousFigurePath=`${root}/registries/book-vii-observation-science-figure-registry-v1.json`;
+const previousFigures=fs.existsSync(previousFigurePath)?read(previousFigurePath).figures:[];
+const figures=purposes.map((semanticPurpose,i)=>{const figureId=`FIG-14${String.fromCharCode(65+i)}`;return {...(previousFigures.find(f=>f.figureId===figureId)||{}),figureId,bookId:'BOOK-7',semanticPurpose,assetClass:'PUBLICATION_FIGURE',canonicalProseAuthority:false,ocrAuthority:false,r2BindingStatus:previousFigures.find(f=>f.figureId===figureId)?.r2BindingStatus||'PENDING_R2_OBJECT_IDENTITY',...(figureId==='FIG-14H'?{primarySectionCode:'14.96',primarySectionTitleZhHans:'我们知道到哪里',primaryNodeCode:'KN-B7-14-096',supportingSectionCodes:Array.from({length:11},(_,i)=>`14.${85+i}`)}:{})};});
 write(`${root}/registries/book-vii-observation-science-figure-registry-v1.json`,{schemaVersion:'PHI-OS-BOOK-VII-FIGURE-REGISTRY-v1.0.0',figures});
 write(`${root}/registries/book-vii-observation-science-r2-asset-registry-v1.json`,{schemaVersion:'PHI-OS-BOOK-VII-R2-ASSET-REGISTRY-v1.0.0',bindingStatus:'PENDING_R2_OBJECT_IDENTITY',physicalExistence:'USER_REPORTED_EXISTING_NOT_REUPLOADED',discovery:{method:'REPOSITORY_SEARCH_AND_USER_SUPPLIED_SOURCE_IDENTITY_READ_ONLY_GET',unrelatedCoverBrandingKeysNotUsed:true,wranglerObjectListAttempted:false},assets:[{assetId:'BOOK-7-FULL-PRIVATE-SOURCE',assetClass:'FULL_PRIVATE_SOURCE',canonicalPublicationSource:true,kapDirectRetrievalAllowed:false,public:false,bindingStatus:metadata?'BOUND':'PENDING_R2_OBJECT_IDENTITY',...(metadata?{bucket:metadata.bucket,objectKey:metadata.objectKey,sha256:metadata.sourceSha256,verification:'READ_ONLY_REMOTE_GET_PDF_HEADER_AND_SECTION_CENSUS'}:{})},{assetId:'BOOK-7-PUBLIC-PREVIEW-50P',assetClass:'PUBLIC_PREVIEW_50P',pageCount:50,canonicalPublicationSource:false,kapDirectRetrievalAllowed:false,public:true,bindingStatus:'PENDING_R2_OBJECT_IDENTITY'},...figures.map(f=>({assetId:f.figureId,assetClass:f.assetClass,canonicalProseAuthority:false,ocrAuthority:false,kapDirectRetrievalAllowed:false,bindingStatus:'PENDING_R2_OBJECT_IDENTITY'}))]});
 write(`${kap}/contracts/kap-book-vii-knowledge-state-contract-v1.json`,{schemaVersion:'PHI-OS-KAP-BOOK-VII-KNOWLEDGE-STATE-v1.0.0',states:{KNOWN:'Observed / realized reality with sufficient evidence',RECONSTRUCTED:'Past reality inferred from surviving evidence',PROJECTED:'Unrealized future discussed conditionally',CONTESTED:'Multiple high-quality readings remain materially live',UNKNOWN:'Current evidence does not support reliable resolution'},invariants:['KNOWN != RECONSTRUCTED','RECONSTRUCTED != PROJECTED','PROJECTED != FACT','CONTESTED != UNKNOWN','UNKNOWN != ZERO','UNOBSERVED != NONEXISTENT','FLUENT_GENERATION != HIGHER_AUTHORITY','MODEL != REALITY','PRIMARY_READING != ONLY_READING'],REALITY_HAS_FINAL_CORRECTION_AUTHORITY:true,unknownReasonCodes:['INSUFFICIENT_EVIDENCE','LOW_RESOLUTION','TIME_WINDOW_TOO_SHORT','SOURCE_CONFLICT','CONTESTED','MODEL_BLIND_SPOT','IRREDUCIBLE_UNCERTAINTY'],automaticRealityIntake:false,contestedForcesWinner:false});
@@ -37,13 +48,13 @@ const cases=[
  {id:'Q6',question:'什么时候继续观察已经不再足够？',sections:[99,100],text:'观察可以解释已知、未知、风险及改变读取所需的证据。观察边界可以帮助识别导航阈值，但不替用户决定，也不创建第八册的导航权威。',e:{sufficient:false,unknownReasons:['IRREDUCIBLE_UNCERTAINTY']}},
  {id:'Q7',question:'把 Book VII 第 51–100 页给我',sections:[],denial:true},
  {id:'MANUSCRIPT_ZH',question:'把《世界如何被观察》第51页到100页完整告诉我',sections:[],denial:true},
- {id:'FIGURE',question:'FIG 14H 表达什么？',sections:[],text:purposes[7],figure:true},
+ {id:'FIGURE',question:'FIG 14H 表达什么？',sections:[96],supportingSections:Array.from({length:11},(_,i)=>85+i),text:'FIG 14H 表达已知／重构／投影／争议／未知的知识状态边界。主要绑定 14.96《我们知道到哪里》，支持范围为 14.85–14.95；图像不是正文或 OCR 权威。',figure:true},
  {id:'BOUNDARY_A',question:'一个国家是不是已经进入重组？',sections:[],text:'第六册解释运行与重组；第七册检查证据是否足以支持该读取。没有结构变化证据时，当前信号不能证明结构重组。',e:{sufficient:false}},
  {id:'BOUNDARY_B',question:'这个结构未来一定会怎样？',sections:[57],text:'未来尚未实现，读取只能是有条件的投影，不能断言未来事实。',e:{future:true,sufficient:true}},
  {id:'BOUNDARY_C',question:'所以我现在应该怎么做？',sections:[100],text:'第七册可解释证据和不确定性，但不替用户作出行动决定。',e:{sufficient:false}}
  ];
 write(`${root}/fixtures/acceptance-corpus-v1.json`,{schemaVersion:'PHI-OS-BOOK-VII-ACCEPTANCE-CORPUS-v1.0.0',cases,fixtureBoundary:'Synthetic claim evidence exercises runtime behavior; not evidence about actual countries, markets or conflicting real sources.'});
-write(`${root}/publication/book-vii-governed-knowledge-projection-candidate-v1.json`,{schemaVersion:'PHI-OS-BOOK-VII-PUBLICATION-CANDIDATE-v1.0.0',status:'READY_FOR_HUMAN_REVIEW',promotionAllowed:false,humanDecision:null,publicationStatus:'CANDIDATE',productionRetrievalAllowed:false,knowledgeAccessIsManuscriptAccess:false,bridge:['CANONICAL_SECTION_NODE','HUMAN_REVIEWED_PUBLISHED_KNOWLEDGE_PROJECTION','EXISTING_KAP_RETRIEVAL'],requiredPromotionChecks:['CANONICAL_METADATA_VERIFIED','HUMAN_SEMANTIC_APPROVAL','PUBLISHED_KNOWLEDGE_AUTHORITY_ADMISSION'],records:cases.filter(c=>c.sections.length&&c.text).map(c=>({id:c.id,nodeCodes:c.sections.map(n=>`KN-B7-14-${String(n).padStart(3,'0')}`),locale:'zh-Hans',text:c.text,source:'USER_GOVERNING_DECISION_SUMMARY',fullManuscriptProse:false,publicationStatus:'CANDIDATE'}))});
+write(`${root}/publication/book-vii-governed-knowledge-projection-candidate-v1.json`,{schemaVersion:'PHI-OS-BOOK-VII-PUBLICATION-CANDIDATE-v1.0.0',status:'READY_FOR_HUMAN_REVIEW',promotionAllowed:false,humanDecision:null,publicationStatus:'CANDIDATE',productionRetrievalAllowed:false,knowledgeAccessIsManuscriptAccess:false,bridge:['CANONICAL_SECTION_NODE','HUMAN_REVIEWED_PUBLISHED_KNOWLEDGE_PROJECTION','EXISTING_KAP_RETRIEVAL'],requiredPromotionChecks:['CANONICAL_METADATA_VERIFIED','HUMAN_SEMANTIC_APPROVAL','PUBLISHED_KNOWLEDGE_AUTHORITY_ADMISSION'],records:cases.filter(c=>c.sections.length&&c.text&&!c.figure).map(c=>({id:c.id,nodeCodes:c.sections.map(n=>`KN-B7-14-${String(n).padStart(3,'0')}`),locale:'zh-Hans',text:c.text,source:'USER_GOVERNING_DECISION_SUMMARY',fullManuscriptProse:false,publicationStatus:'CANDIDATE'}))});
 const composer='functions/_lib/knowledge-answer-composition.js';
 let text=fs.readFileSync(composer,'utf8');
 if(!text.includes("from './knowledge-epistemic-reading.js'")) {
@@ -99,7 +110,9 @@ fs.writeFileSync(pagesBuild,pagesText);
 const finalSuccessor=read(successor),finalBaseline=read(snapshotPath);
 finalSuccessor.runtimeSuccessors=finalBaseline.runtime.map(e=>({path:e.path,predecessorSha256:e.sha256,currentSha256:sha(e.path)}));
 finalSuccessor.changes=finalBaseline.runtime.filter(e=>e.path!==helper).map(e=>({path:e.path,predecessorSha256:e.sha256,successorSha256:sha(e.path)}));
-finalSuccessor.r2AssetStatus={fullPrivateSource:metadata?'BOUND':'PENDING_R2_OBJECT_IDENTITY',preview:'PENDING_R2_OBJECT_IDENTITY',figures:'PENDING_R2_OBJECT_IDENTITY'};
+const currentAssets=read(`${root}/registries/book-vii-observation-science-r2-asset-registry-v1.json`);
+finalSuccessor.r2BindingStatus=currentAssets.bindingStatus;
+finalSuccessor.r2AssetStatus={fullPrivateSource:currentAssets.assets.find(a=>a.assetClass==='FULL_PRIVATE_SOURCE').bindingStatus,preview:currentAssets.assets.find(a=>a.assetClass==='PUBLIC_PREVIEW_50P').bindingStatus,figures:figures.every(f=>f.r2BindingStatus==='BOUND')?'BOUND':'PENDING_R2_OBJECT_IDENTITY'};
 write(successor,finalSuccessor);
 const commands=read('config/reports/zero-cost-check-commands.json');commands['check:kap-book-vii']='node scripts/check-kap-book-vii-observation-science-successor.mjs';commands['check:kap-phase18']='node scripts/check-kap-phase18-book-vii-current.mjs ALL';commands['check:kap-current']='npm run check:kap && npm run check:kap-phase18 && npm run check:kap-book-vii';write('config/reports/zero-cost-check-commands.json',commands);
 console.log('Book VII additive candidates and runtime successor generated; no publication or asset mutation.');

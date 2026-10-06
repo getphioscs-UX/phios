@@ -1,3 +1,4 @@
+import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
 ﻿import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -159,13 +160,19 @@ if (tracked.error || tracked.status !== 0) {
     new Error('Cannot enumerate tracked repository files');
 }
 
+// Include only the validated Human-accepted successor in uncommitted local builds.
+const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
+  const source = path.join(root, rel);
+  return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
+});
+const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+if (admittedBookVii) publicationFiles.add(BOOK_VII_ADMISSION_PATH);
+
 let copied = 0;
 let skipped = 0;
 
 for (
-  const raw of tracked.stdout
-    .split('\0')
-    .filter(Boolean)
+  const raw of publicationFiles
 ) {
   const rel = normalize(raw);
 

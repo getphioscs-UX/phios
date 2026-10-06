@@ -88,7 +88,9 @@ function groundingFrom(published, manuscript) {
       nodeCode: published.projection.nodeCode,
       fragmentCode: fragment.fragmentCode,
       digest: fragment.digest,
-      text: fragment.text
+      text: fragment.text,
+      // BOOK_VII_ADMISSION_METADATA: preserve governed projection metadata only.
+      ...(fragment.bookId==='BOOK-7'?{bookId:fragment.bookId,bookCode:fragment.bookCode,partCode:fragment.partCode,scopeMatch:fragment.scopeMatch,publicationStatus:fragment.publicationStatus,authorityOwner:fragment.authorityOwner,sourceType:fragment.sourceType,epistemicEvidence:fragment.epistemicEvidence,canonicalProseAuthority:fragment.canonicalProseAuthority,ocrAuthority:fragment.ocrAuthority}:{})
     });
   }
   for (const record of manuscript?.records || []) {

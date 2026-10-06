@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { runPublishedRetrieval, normalizeQuery, stable, sha } from './knr-package-a-v1.mjs';
+import { loadPublishedRetrieval, runPublishedRetrieval, normalizeQuery, stable, sha } from './knr-package-a-v1.mjs';
 
 const root = process.cwd();
 const readJson = async file => JSON.parse(await fs.readFile(path.join(root, file), 'utf8'));
@@ -15,7 +15,8 @@ async function loadPackageB() {
     readJson('content/knowledge/public/retrieval/relationships.json'),
     readJson('content/knowledge/public/retrieval/locale-availability.json')
   ]);
-  return { projectionPolicy, pathPolicy, nodes: nodes.records, fragments: fragments.records, relationships: relationships.records, availability: availability.records };
+  const {projections}=await loadPublishedRetrieval();
+  return {projectionPolicy,pathPolicy,nodes:projections.nodes,fragments:projections.fragments,relationships:projections.relationships,availability:projections['locale-availability']};
 }
 
 function tokens(value) {

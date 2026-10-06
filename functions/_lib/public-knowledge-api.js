@@ -1,3 +1,4 @@
+import {loadBookViiPublishedAdmission,appendBookViiProjection} from './book-vii-published-admission.js';
 const SUPPORTED_LOCALES = new Set(['zh-Hans', 'en']);
 const SUPPORTED_MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuity']);
 const MAX_QUERY_LENGTH = 500;
@@ -25,7 +26,10 @@ async function readProjection(env, name) {
   if (!env?.ASSETS?.fetch) throw new Error('PUBLIC_KNOWLEDGE_ASSETS_UNAVAILABLE');
   const response = await env.ASSETS.fetch(new Request(`https://assets.local/content/knowledge/public/retrieval/${name}.json`));
   if (!response.ok) throw new Error(`PUBLIC_KNOWLEDGE_PROJECTION_UNAVAILABLE:${name}`);
-  return response.json();
+  const original=await response.json();
+  if(name==='published-retrieval-index')return original;
+  const release=await loadBookViiPublishedAdmission(async path=>{const r=await env.ASSETS.fetch(new Request(`https://assets.local/${path}`));if(!r.ok)return null;return r.json();});
+  return appendBookViiProjection(original,name,release);
 }
 
 function scoreNode({ query, node, aliases, questions, fragments }) {
@@ -128,7 +132,7 @@ export async function handlePublicKnowledgeRequest(request, env = {}) {
     query:{text:query,locale,mode:requestedMode},
     coverage:{level:coverage,score:top.score,answerGenerationAllowed:false},
     results:ranked.slice(0,5).map(x=>({nodeCode:x.node.nodeCode,locale,title:x.node.title,summary:x.node.summary,href:x.node.href,score:x.score})),
-    projection:{nodeCode:top.node.nodeCode,locale,mode,fragments:selected.map(({fragmentCode,ordinal,kind,text,digest})=>({fragmentCode,ordinal,kind,text,digest}))},
+    projection:{nodeCode:top.node.nodeCode,locale,mode,fragments:selected.map(({fragmentCode,ordinal,kind,text,digest,...metadata})=>({fragmentCode,ordinal,kind,text,digest,...metadata,...(metadata.bookId==='BOOK-7'?{scopeMatch:exact,bookCode:'BOOK-7',partCode:'PART-14'}:{})}))},
     readingPath:{steps,localeSwitches,blockedContinuations},
     indexDigest:index.indexDigest
   },200,'public, max-age=60, stale-while-revalidate=300');

@@ -1,3 +1,4 @@
+import {loadBookViiPublishedAdmission,appendBookViiProjection} from '../../../functions/_lib/book-vii-published-admission.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -42,12 +43,14 @@ export async function loadPublishedRetrieval() {
     readJson('content/knowledge/runtime/knr/package-a/coverage-policy-v1.json'),
     ...names.map(name => readJson(`content/knowledge/public/retrieval/${name}.json`))
   ]);
+  const release=await loadBookViiPublishedAdmission(readJson);
+  const admitted=await Promise.all(projections.map((projection,i)=>appendBookViiProjection(projection,names[i],release)));
   return {
     manifest,
     routingPolicy,
     rankingPolicy,
     coveragePolicy,
-    projections: Object.fromEntries(names.map((name, index) => [name, projections[index].records]))
+    projections: Object.fromEntries(names.map((name, index) => [name, admitted[index].records]))
   };
 }
 
@@ -104,6 +107,7 @@ export async function routePublishedQuery({ query, locale = 'zh-Hans', limit = 2
   const publishedPairs = new Set(data.projections.publications.map(record => `${record.nodeCode}:${record.locale}`));
   const candidates = [...byNode.values()]
     .filter(candidate => publishedPairs.has(`${candidate.nodeCode}:${candidate.locale}`))
+    .sort((a,b)=>Number(b.evidence.some(e=>e.exact))-Number(a.evidence.some(e=>e.exact)))
     .slice(0, Math.min(Number(limit) || 20, data.routingPolicy.maximumCandidates));
   return {
     routeCode: candidates.length ? 'KNR-ROUTE-PUBLISHED-CANDIDATES' : 'KNR-ROUTE-NO-COVERAGE',

@@ -174,6 +174,8 @@ export function projectKapSources(bundle, depth = DEFAULT_DEPTH) {
     title: source.title || null,
     authorityLabel: source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE'
       ? 'PUBLISHED_CANONICAL_KNOWLEDGE'
+      : source.sourceType==='REGISTERED_FIGURE_SEMANTICS'
+        ? 'GOVERNED_PUBLICATION_FIGURE_SEMANTICS'
       : source.sourceType?.startsWith('CIVILIZATION_ATLAS_')
         ? 'STRUCTURED_ATLAS_KNOWLEDGE'
         : 'REVIEWED_MANUSCRIPT_KNOWLEDGE',

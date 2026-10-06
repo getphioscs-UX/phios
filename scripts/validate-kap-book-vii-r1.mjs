@@ -6,11 +6,11 @@ const env={...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_
 for(const key of Object.keys(env))if(/^(OPENAI|ANTHROPIC|DEEPSEEK|GEMINI|GOOGLE_AI|OPENROUTER).*(API_KEY|ACCESS_TOKEN|SECRET)$/.test(key))delete env[key];
 const directory='content/knowledge/book-vii/evidence';
 const records=[];
-for(const command of ['npm run check:kap-current','npm run check:pages-build']) {
+for(const command of ['npm run check:kap','npm run check:kap-phase18','npm run check:kap-book-vii','npm run check:kap-current','npm run check:pages-build']) {
  console.log(`RUN ${command}`);
  const result=spawnSync(command,{shell:true,encoding:'utf8',env,maxBuffer:16*1024*1024});
  if(result.error)throw result.error;
- const log=`${directory}/${command.endsWith('current')?'kap-current':'pages-build'}-final.log`;
+ const log=`${directory}/${command.split('check:')[1]}-final.log`;
  fs.writeFileSync(log,result.stdout+result.stderr);
  records.push({command,exitCode:result.status,log});
  console.log(`RESULT ${command}: ${result.status}`);
