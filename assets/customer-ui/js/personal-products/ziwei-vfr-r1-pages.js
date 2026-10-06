@@ -283,8 +283,8 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
  return pagePlan.map(p=>{
   const s=sections.get(p.sectionId),ds=(p.diagramIds||[]).map(id=>diagrams.get(id)).filter(Boolean);
   const binding=getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});
-  if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
-  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'">'+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+  if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
+  if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'">'+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
   let body='';
   const compact=p.pageFamily==='DIAGRAM_COMPOSITE';
   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily,compact})).join('');
@@ -293,6 +293,6 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   else if(p.pageFamily==='DIAGRAM_COMPOSITE')body='<div class="zv-diagram-composite">'+diagramHtml+'</div>';
   else if(ds.length)body=diagramHtml;
   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
-  return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
+  return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-page-key="'+esc(p.pageKey)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
  }).join('');
 }
