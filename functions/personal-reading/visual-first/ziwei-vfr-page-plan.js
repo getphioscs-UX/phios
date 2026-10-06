@@ -1,4 +1,4 @@
-export const ZWR_VFR_PAGE_PLAN_VERSION='ZWR-VFR-R1-51-PAGE-DEEP-MANUSCRIPT-v3';
+export const ZWR_VFR_PAGE_PLAN_VERSION='ZWR-VFR-R1-50-PAGE-ADAPTIVE-BILINGUAL-v4';
 
 const P=(pageNumber,pageKey,pageFamily,{sectionId=null,diagramIds=[],visual=true,textRole='SUPPORTING',readingIndex=null,readingCount=null}={})=>Object.freeze({
  pageNumber,pageKey,pageFamily,sectionId,diagramIds:Object.freeze(diagramIds),visual,textRole,readingIndex,readingCount
@@ -13,10 +13,10 @@ export const ZWR_VFR_PAGE_PLAN=Object.freeze([
  P(6,'TWELVE_PALACE_MAP','OVERVIEW',{diagramIds:['ZWD-01']}),
 
  P(7,'S02_MASTER','SECTION_MASTER',{sectionId:'S02'}),
- P(8,'S02_LIFE_BODY','DIAGRAM',{sectionId:'S02',diagramIds:['ZWD-02']}),
- P(9,'S02_NETWORK','DIAGRAM',{sectionId:'S02',diagramIds:['ZWD-03']}),
- P(10,'S02_READING_A','READING',{sectionId:'S02',visual:false,readingIndex:0,readingCount:2}),
- P(11,'S02_READING_B','READING',{sectionId:'S02',visual:false,readingIndex:1,readingCount:2}),
+ P(8,'S02_CORE_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S02',diagramIds:['ZWD-02','ZWD-03']}),
+ P(9,'S02_READING_A','READING',{sectionId:'S02',visual:false,readingIndex:0,readingCount:3}),
+ P(10,'S02_READING_B','READING',{sectionId:'S02',visual:false,readingIndex:1,readingCount:3}),
+ P(11,'S02_READING_C','READING',{sectionId:'S02',visual:false,readingIndex:2,readingCount:3}),
 
  P(12,'S03_MASTER','SECTION_MASTER',{sectionId:'S03'}),
  P(13,'S03_INNER_STRUCTURE','DIAGRAM',{sectionId:'S03',diagramIds:['ZWD-04']}),
@@ -24,16 +24,16 @@ export const ZWR_VFR_PAGE_PLAN=Object.freeze([
  P(15,'S03_READING_B','READING',{sectionId:'S03',visual:false,readingIndex:1,readingCount:2}),
 
  P(16,'S04_MASTER','SECTION_MASTER',{sectionId:'S04'}),
- P(17,'S04_CAREER_NETWORK','DIAGRAM',{sectionId:'S04',diagramIds:['ZWD-06']}),
- P(18,'S04_STRUCTURAL_CROSS','DIAGRAM',{sectionId:'S04',diagramIds:['ZWD-13']}),
- P(19,'S04_READING_A','READING',{sectionId:'S04',visual:false,readingIndex:0,readingCount:2}),
- P(20,'S04_READING_B','READING',{sectionId:'S04',visual:false,readingIndex:1,readingCount:2}),
+ P(17,'S04_CAREER_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S04',diagramIds:['ZWD-06','ZWD-13']}),
+ P(18,'S04_READING_A','READING',{sectionId:'S04',visual:false,readingIndex:0,readingCount:3}),
+ P(19,'S04_READING_B','READING',{sectionId:'S04',visual:false,readingIndex:1,readingCount:3}),
+ P(20,'S04_READING_C','READING',{sectionId:'S04',visual:false,readingIndex:2,readingCount:3}),
 
  P(21,'S05_MASTER','SECTION_MASTER',{sectionId:'S05'}),
- P(22,'S05_WEALTH_NETWORK','DIAGRAM',{sectionId:'S05',diagramIds:['ZWD-07']}),
- P(23,'S05_TRANSFORMATIONS','DIAGRAM',{sectionId:'S05',diagramIds:['ZWD-05']}),
- P(24,'S05_READING_A','READING',{sectionId:'S05',visual:false,readingIndex:0,readingCount:2}),
- P(25,'S05_READING_B','READING',{sectionId:'S05',visual:false,readingIndex:1,readingCount:2}),
+ P(22,'S05_RESOURCE_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S05',diagramIds:['ZWD-07','ZWD-05']}),
+ P(23,'S05_READING_A','READING',{sectionId:'S05',visual:false,readingIndex:0,readingCount:3}),
+ P(24,'S05_READING_B','READING',{sectionId:'S05',visual:false,readingIndex:1,readingCount:3}),
+ P(25,'S05_READING_C','READING',{sectionId:'S05',visual:false,readingIndex:2,readingCount:3}),
 
  P(26,'S06_MASTER','SECTION_MASTER',{sectionId:'S06'}),
  P(27,'S06_RELATIONSHIP_NETWORK','DIAGRAM',{sectionId:'S06',diagramIds:['ZWD-08']}),
@@ -51,22 +51,21 @@ export const ZWR_VFR_PAGE_PLAN=Object.freeze([
  P(37,'S08_READING_B','READING',{sectionId:'S08',visual:false,readingIndex:1,readingCount:2}),
 
  P(38,'S09_MASTER','SECTION_MASTER',{sectionId:'S09'}),
- P(39,'S09_DAXIAN','DIAGRAM',{sectionId:'S09',diagramIds:['ZWD-11']}),
- P(40,'S09_NATAL_DAXIAN','DIAGRAM',{sectionId:'S09',diagramIds:['ZWD-14']}),
- P(41,'S09_READING_A','READING',{sectionId:'S09',visual:false,readingIndex:0,readingCount:2}),
- P(42,'S09_READING_B','READING',{sectionId:'S09',visual:false,readingIndex:1,readingCount:2}),
+ P(39,'S09_TIMING_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S09',diagramIds:['ZWD-11','ZWD-14']}),
+ P(40,'S09_READING_A','READING',{sectionId:'S09',visual:false,readingIndex:0,readingCount:2}),
+ P(41,'S09_READING_B','READING',{sectionId:'S09',visual:false,readingIndex:1,readingCount:2}),
 
- P(43,'S10_MASTER','SECTION_MASTER',{sectionId:'S10'}),
- P(44,'S10_CURRENT_ACTIVATION','DIAGRAM',{sectionId:'S10',diagramIds:['ZWD-12']}),
- P(45,'S10_READING_A','READING',{sectionId:'S10',visual:false,readingIndex:0,readingCount:2}),
- P(46,'S10_READING_B','READING',{sectionId:'S10',visual:false,readingIndex:1,readingCount:2}),
+ P(42,'S10_MASTER','SECTION_MASTER',{sectionId:'S10'}),
+ P(43,'S10_CURRENT_ACTIVATION','DIAGRAM',{sectionId:'S10',diagramIds:['ZWD-12']}),
+ P(44,'S10_READING_A','READING',{sectionId:'S10',visual:false,readingIndex:0,readingCount:2}),
+ P(45,'S10_READING_B','READING',{sectionId:'S10',visual:false,readingIndex:1,readingCount:2}),
 
- P(47,'S11_MASTER','SECTION_MASTER',{sectionId:'S11'}),
- P(48,'S11_WHOLE_CHART_NAVIGATION','DIAGRAM',{sectionId:'S11',diagramIds:['ZWD-15']}),
- P(49,'S11_READING_A','READING',{sectionId:'S11',visual:false,readingIndex:0,readingCount:2}),
- P(50,'S11_READING_B','READING',{sectionId:'S11',visual:false,readingIndex:1,readingCount:2}),
+ P(46,'S11_MASTER','SECTION_MASTER',{sectionId:'S11'}),
+ P(47,'S11_WHOLE_CHART_NAVIGATION','DIAGRAM',{sectionId:'S11',diagramIds:['ZWD-15']}),
+ P(48,'S11_READING_A','READING',{sectionId:'S11',visual:false,readingIndex:0,readingCount:2}),
+ P(49,'S11_READING_B','READING',{sectionId:'S11',visual:false,readingIndex:1,readingCount:2}),
 
- P(51,'CLOSING_BOUNDARY','CLOSING',{visual:true})
+ P(50,'CLOSING_BOUNDARY','CLOSING',{visual:true})
 ]);
 
 export function validateZwrVfrPagePlan({diagramIds=[]}={}){
@@ -87,16 +86,19 @@ export function validateZwrVfrPagePlan({diagramIds=[]}={}){
   const readings=pages.filter(p=>p.sectionId===id&&p.pageFamily==='READING');
   if(readings.length<2)reasons.push('SECTION_READING_PAGES_TOO_FEW:'+id);
  }
+ const composites=pages.filter(p=>p.pageFamily==='DIAGRAM_COMPOSITE');
+ if(composites.some(p=>p.diagramIds.length!==2))reasons.push('DIAGRAM_COMPOSITE_REQUIRES_TWO_DIAGRAMS');
  const textOnly=pages.filter(p=>p.visual===false).length;
  let consecutive=0,maxConsecutive=0;
  for(const p of pages){consecutive=p.visual?0:consecutive+1;maxConsecutive=Math.max(maxConsecutive,consecutive);}
- if(maxConsecutive>2)reasons.push('TOO_MANY_CONSECUTIVE_PROSE_PAGES');
+ if(maxConsecutive>3)reasons.push('TOO_MANY_CONSECUTIVE_PROSE_PAGES');
  return Object.freeze({
   accepted:reasons.length===0,
   reasons:[...new Set(reasons)],
   pageCount:pages.length,
   visualPages:pages.length-textOnly,
   textOnlyPages:textOnly,
+  compositeDiagramPages:composites.length,
   maxConsecutiveProsePages:maxConsecutive
  });
 }
