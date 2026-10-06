@@ -92,4 +92,4 @@ for(const section of publication.sections||[]){
  assert(html.includes(htmlText(section.en.headline)),section.sectionId+': English headline not rendered');
 }
 
-console.log('PASS ZWR-VFR W9 human-review readiness: repaired Deep Manuscript bound; 47 pages; ZWD-01..15 rendered exactly once; all visual assets bound; zero provider calls during rerender; bilingual manuscripts complete; ready for browser/print HUMAN REVIEW.');
+console.log('PASS ZWR-VFR W9 human-review readiness: repaired Deep Manuscript bound; pages='+renderedPages+'; ZWD-01..15 rendered exactly once; all visual assets bound; zero provider calls during rerender; bilingual manuscripts complete; ready for browser/print HUMAN REVIEW.');
