@@ -30,10 +30,14 @@ for(let i=1;i<=15;i++){
  assert.equal((html.match(new RegExp('data-diagram-id="'+id+'"','g'))||[]).length,1,'diagram must render exactly once: '+id);
 }
 assert((html.match(/<svg class="zv-svg/g)||[]).length>=1,'at least one real SVG diagram required');
-for(const cls of ['zv-ziwei-board','zv-axis-map','zv-star-atlas','zv-tx-orbits','zv-palace-orbit','zv-nav-wheel']){
+for(const cls of ['zv-ziwei-board','zv-axis-compact','zv-star-atlas','zv-tx-orbits','zv-palace-orbit','zv-nav-wheel','zv-chapter-master','zv-language-reading']){
  assert(html.includes('class="'+cls)||html.includes('class="'+cls+' '),'professional Zi Wei diagram structure missing: '+cls);
 }
 assert(html.includes('zv-diagram-composite'),'adaptive diagram composition missing');
+assert(html.includes('zv-tx-focus'),'sparse Four-Transformation focus composition missing');
+assert.equal((html.match(/data-page-family="SECTION_MASTER"/g)||[]).length,10,'exactly ten chapter master pages required');
+assert.equal((html.match(/data-page-family="READING_ZH"/g)||[]).length,20,'exactly twenty Chinese reading pages required');
+assert.equal((html.match(/data-page-family="READING_EN"/g)||[]).length,10,'exactly ten English reading pages required');
 assert(html.includes('中文解读'),'Chinese review copy missing');
 assert(html.includes('English Reading'),'English review copy missing');
 assert(!/class=["'][^"']*\bzv-empty\b[^"']*["']/.test(html),'missing deterministic diagram renderer remains');
