@@ -1,6 +1,6 @@
 import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
 
-export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v4';
+export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v5';
 
 const sanitizeDisplay=v=>String(v??'').replace(/[\uFDD0-\uFDEF\uFFFE\uFFFF]/gu,'-').replace(/\s+-\s+/g,' - ').trim();
 const esc=v=>sanitizeDisplay(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -263,7 +263,8 @@ function interpretation(section,page={}){
  const zh=section?.zhHans||{},en=section?.en||{};
  const z=readingSlice(zh,page,section),e=readingSlice(en,page,section);
  const suffix=Number(page.readingCount||1)>1?' · '+String(Number(page.readingIndex||0)+1)+'/'+String(page.readingCount):'';
- return '<div class="zv-reading-head"><span>'+esc(section?.sectionId||'')+'</span><h2>'+esc(zh.headline||'')+'</h2><small>'+esc(en.headline||'')+suffix+'</small></div><div class="zv-copy-grid zv-reading-grid"><article lang="zh-Hans"><h3>中文解读</h3>'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en"><h3>English Reading</h3>'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
+ const stacked=['S07','S08','S09','S10','S11'].includes(section?.sectionId);
+ return '<div class="zv-reading-head"><span>'+esc(section?.sectionId||'')+'</span><h2>'+esc(zh.headline||'')+'</h2><small>'+esc(en.headline||'')+suffix+'</small></div><div class="zv-copy-grid zv-reading-grid'+(stacked?' is-stacked':'')+'"><article lang="zh-Hans"><h3>中文解读</h3>'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en"><h3>English Reading</h3>'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
 }
 function firstSentence(text,locale){
  const t=String(text||'').trim();
