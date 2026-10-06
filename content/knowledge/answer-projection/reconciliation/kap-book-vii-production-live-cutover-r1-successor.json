@@ -1,6 +1,6 @@
 {
   "work": "KAP-BOOK-VII-PRODUCTION-ADMISSION-R1",
-  "status": "LIVE_ACCEPTANCE_PENDING",
+  "status": "KAP_BOOK_VII_PRODUCTION_ADMITTED",
   "predecessor": {
     "path": "content/knowledge/answer-projection/reconciliation/kap-book-vii-production-admission-successor-v1.json",
     "sha256": "49d3eb9502c5444feb65cf8cf8429abbd7445d0c874697784a3cd0035e1f22fd"
@@ -64,5 +64,45 @@
   },
   "noAutomaticCommit": true,
   "noAutomaticPush": true,
-  "liveCloudDeploymentPerformed": false
+  "liveCloudDeploymentPerformed": false,
+  "validation": [
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/api-handler-acceptance-v1.json",
+      "sha256": "720ae86df48aa4b61e424764e15c5bc07779ba18a08f0a9d5ed50deb6ce3548e"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/live-http-acceptance-v1.json",
+      "sha256": "64a0f0601e96bffa220f24921aa0b604c40af5b9692a5a4997007977dfef5211"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/browser-acceptance-v1.json",
+      "sha256": "b9249f3416dd40ad2841c67307e833f31330faac7bc548428ed52e9db238a761"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/full-regression-v1.json",
+      "sha256": "1cde8404ac12f3566323181aad7e214e719cb9ead499c325c551e959ac6367bb"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/pages-build-final-v1.json",
+      "sha256": "0822b00633adaae00402969ed3c2c18d3c81d9db07c7e741617d9f92fd7426f2"
+    }
+  ],
+  "executionScope": "CURRENT_MAIN_REPOSITORY_AND_LOCAL_LIVE_EXISTING_PAGES_WORKER",
+  "knownGaps": [
+    {
+      "scope": "CLOUD_DEPLOYMENT",
+      "status": "NOT_PERFORMED",
+      "detail": "Admission verified against the real local Pages Worker and current client. Public internet deployment and remote endpoint verification remain separate."
+    },
+    {
+      "scope": "CROSS_BOOK_BASELINE",
+      "status": "NO_COVERAGE",
+      "detail": "Roman civilization continuity and Japan 1945 queries remain unanswered by the existing published baseline; Book VII does not hijack them."
+    },
+    {
+      "scope": "LOCALE",
+      "status": "ZH_HANS_ONLY",
+      "detail": "English identity/prose admission has not been authorized or created."
+    }
+  ]
 }
