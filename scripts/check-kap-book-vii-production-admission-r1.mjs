@@ -69,6 +69,14 @@ try{
 }finally{globalThis.fetch=originalFetch;}
 assert.equal(providerRequests,0);assert.equal(privateSourceReads,0);
 const report={work:'KAP-BOOK-VII-PRODUCTION-ADMISSION-R1',status:'REAL_API_HANDLER_ACCEPTANCE_PASS',scope:'Actual existing API route and published owner; HTTP/browser acceptance recorded separately',providerRequests,privateSourceReads,canonicalNodes:100,publishedKnowledgeNodes:11,figures:9,publicR2Objects:59,historicalFreezeIntegrity:true,liveCloudDeploymentPerformed:false,evidence};
-fs.writeFileSync(`${dir}/api-handler-acceptance-v1.json`,JSON.stringify(report,null,2)+'\n');
-fs.writeFileSync(`${dir}/production-acceptance-corpus-v1.json`,JSON.stringify({productionCorpus:true,fixtureOnly:false,cases:cases.map(({result,...c})=>c)},null,2)+'\n');
+const productionFreeze=`${kap}/freeze/kap-book-vii-production-admission-r1-freeze.json`;
+if(fs.existsSync(productionFreeze)){
+ const closed=read(productionFreeze);assert.equal(closed.status,'BOOK_VII_KAP_PRODUCTION_ADMITTED');
+ for(const e of closed.frozenOutputs)assert.equal(hash(e.path),e.sha256,e.path);
+ const receipt=read(`${kap}/acceptance/kap-book-vii-production-admission-r1-acceptance.json`);assert.equal(receipt.status,'ACCEPTED_BOOK_VII_KAP_PRODUCTION');assert.equal(hash(receipt.freeze.path),receipt.freeze.sha256);
+ for(const e of receipt.liveEvidence)assert.equal(hash(e.path),e.sha256,e.path);
+}else{
+ fs.writeFileSync(`${dir}/api-handler-acceptance-v1.json`,JSON.stringify(report,null,2)+'\n');
+ fs.writeFileSync(`${dir}/production-acceptance-corpus-v1.json`,JSON.stringify({productionCorpus:true,fixtureOnly:false,cases:cases.map(({result,...c})=>c)},null,2)+'\n');
+}
 console.log('PASS Book VII production: 100 retrievable identities, 11 scoped knowledge nodes, actual existing Ask route, UNKNOWN/CONTESTED/PROJECTED boundaries, protected extraction denial, section tokens, zero providers; local HTTP/browser gate remains separate.');

@@ -1,8 +1,14 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import {BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
 const dir='content/knowledge/book-vii/production-admission/live-cutover';
 const corpus=JSON.parse(fs.readFileSync(`${dir}/production-acceptance-corpus-v1.json`));
 const base='http://127.0.0.1:8797',evidence=[];
+const releaseResponse=await fetch(`${base}/${BOOK_VII_ADMISSION_PATH}`);
+assert.equal(releaseResponse.status,200);
+const liveReleaseSha256=crypto.createHash('sha256').update(new Uint8Array(await releaseResponse.arrayBuffer())).digest('hex');
+assert.equal(liveReleaseSha256,crypto.createHash('sha256').update(fs.readFileSync(BOOK_VII_ADMISSION_PATH)).digest('hex'),'LIVE_RELEASE_BYTES_MUST_MATCH_CURRENT');
 for(const c of corpus.cases){
  const response=await fetch(`${base}/api/ask-phios?${new URLSearchParams({q:c.question,locale:'zh-Hans',source:'published'})}`);
  const result=await response.json();assert.equal(response.status,200);assert.equal(result.ok,true);assert.equal(result.ai.providerInvoked,false);
@@ -11,5 +17,5 @@ for(const c of corpus.cases){
  assert.doesNotMatch(JSON.stringify(result),/phios-private-manuscripts|books\/book-7\/source|signedUrl/);
  evidence.push({id:c.id,question:c.question,url:response.url,httpStatus:response.status,result});
 }
-fs.writeFileSync(`${dir}/live-http-acceptance-v1.json`,JSON.stringify({status:'PASS',scope:'LOCAL_LIVE_EXISTING_PAGES_WORKER_HTTP',origin:base,fixtureOnly:false,productionCorpus:true,providerRequests:0,privateSourceBindingPresent:false,modelBindingPresent:false,liveCloudDeploymentPerformed:false,evidence},null,2)+'\n');
+fs.writeFileSync(`${dir}/live-http-acceptance-v1.json`,JSON.stringify({status:'PASS',scope:'LOCAL_LIVE_EXISTING_PAGES_WORKER_HTTP',origin:base,liveReleaseSha256,fixtureOnly:false,productionCorpus:true,providerRequests:0,privateSourceBindingPresent:false,modelBindingPresent:false,liveCloudDeploymentPerformed:false,evidence},null,2)+'\n');
 console.log(`PASS ${evidence.length} live HTTP Ask cases through existing Pages Worker; provider requests=0.`);
