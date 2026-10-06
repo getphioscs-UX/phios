@@ -1,6 +1,6 @@
 import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
 
-export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v5';
+export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v6';
 
 const sanitizeDisplay=v=>String(v??'').replace(/[\uFDD0-\uFDEF\uFFFE\uFFFF]/gu,'-').replace(/\s+-\s+/g,' - ').trim();
 const esc=v=>sanitizeDisplay(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -212,21 +212,10 @@ function localeParagraphs(copy){
 function openingParagraphCount(section,readingCount=1){
  return readingCount>=2?1:2;
 }
-function sectionMaster(section,binding,diagrams='',compact=false,meta={}){
+function sectionMaster(section,binding){
  const zh=section?.zhHans||{},en=section?.en||{},enSub=PURPOSE_EN[section?.sectionId]||en.subheadline;
- const art='<div class="zv-master-art">'+(binding.hero?'<img class="zv-hero" src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div>';
- const deep=Boolean(zh.manuscript||en.manuscript||zh.paragraphs||en.paragraphs);
- if(deep){
-  const opening=openingParagraphCount(section,meta.readingCount||1);
-  const z=localeParagraphs(zh).slice(0,opening),e=localeParagraphs(en).slice(0,opening);
-  const stacked=['S07','S08','S09','S10','S11'].includes(section?.sectionId);
-  return art+'<div class="zv-master zv-master-deep"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p class="zv-purpose">'+esc(zh.subheadline)+'</p><p class="zv-purpose" lang="en">'+esc(enSub)+'</p><div class="zv-master-reading'+(stacked?' is-stacked':'')+'"><article lang="zh-Hans">'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en">'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>'+diagrams+'</div>';
- }
- if(compact){
-  const rows=(zh.keyInsights||[]).map((x,i)=>'<div><b>'+esc(x.label)+'</b><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.text||'')+'</small></div>').join('');
-  return art+'<div class="zv-master zv-master-summary"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-summary-insights">'+rows+'</div>'+diagrams+'</div>';
- }
- return art+'<div class="zv-master"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-insights">'+(zh.keyInsights||[]).map((x,i)=>'<article><b>0'+(i+1)+'</b><h3>'+esc(x.label)+'</h3><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.label||'')+' · '+esc(en.keyInsights?.[i]?.text||'')+'</small></article>').join('')+'</div>'+diagrams+'</div>';
+ const art='<div class="zv-chapter-art">'+(binding.hero?'<img class="zv-chapter-hero" src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-chapter-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div>';
+ return art+'<div class="zv-chapter-master"><div class="zv-chapter-kicker">PHI OS · ZI WEI DOU SHU</div><div class="zv-chapter-number">'+esc(section?.sectionId||'')+'</div><div class="zv-chapter-rule"></div><h1>'+esc(zh.headline||'')+'</h1><h2>'+esc(en.headline||'')+'</h2><div class="zv-chapter-purpose"><p>'+esc(zh.subheadline||'')+'</p><p lang="en">'+esc(enSub||'')+'</p></div><div class="zv-chapter-cue"><span>章首</span><b>SECTION MASTER</b></div></div>';
 }
 function partitionParagraphs(items,count){
  const groups=Array.from({length:Math.max(1,count)},()=>[]);
@@ -253,19 +242,23 @@ function partitionParagraphs(items,count){
  while(cursor<items.length)groups[groups.length-1].push(items[cursor++]);
  return groups;
 }
-function readingSlice(copy,page,section){
+function readingSlice(copy,page){
  const count=Math.max(1,Number(page?.readingCount||1));
- const opening=openingParagraphCount(section,count);
- const all=localeParagraphs(copy).slice(opening);
+ const all=localeParagraphs(copy);
  const index=Math.max(0,Number(page?.readingIndex||0));
  return partitionParagraphs(all,count)[index]||[];
 }
 function interpretation(section,page={}){
  const zh=section?.zhHans||{},en=section?.en||{};
- const z=readingSlice(zh,page,section),e=readingSlice(en,page,section);
- const suffix=Number(page.readingCount||1)>1?' · '+String(Number(page.readingIndex||0)+1)+'/'+String(page.readingCount):'';
- const stacked=['S07','S08','S09','S10','S11'].includes(section?.sectionId);
- return '<div class="zv-reading-head"><span>'+esc(section?.sectionId||'')+'</span><h2>'+esc(zh.headline||'')+'</h2><small>'+esc(en.headline||'')+suffix+'</small></div><div class="zv-copy-grid zv-reading-grid'+(stacked?' is-stacked':'')+'"><article lang="zh-Hans"><h3>中文解读</h3>'+z.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article><article lang="en"><h3>English Reading</h3>'+e.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
+ const locale=page.locale==='en'?'en':'zhHans';
+ const copy=locale==='en'?en:zh;
+ const rows=readingSlice(copy,page);
+ const index=Number(page.readingIndex||0)+1;
+ const count=Number(page.readingCount||1);
+ const label=locale==='en'?'ENGLISH READING':'中文解读';
+ const title=locale==='en'?(en.headline||''):(zh.headline||'');
+ const secondary=locale==='en'?(zh.headline||''):(en.headline||'');
+ return '<div class="zv-language-reading '+(locale==='en'?'is-en':'is-zh')+'"><div class="zv-language-head"><span>'+esc(section?.sectionId||'')+'</span><div><small>'+label+'</small><h2>'+esc(title)+'</h2><p>'+esc(secondary)+'</p></div><b>'+index+' / '+count+'</b></div><article lang="'+(locale==='en'?'en':'zh-Hans')+'">'+rows.map(p=>'<p>'+esc(p)+'</p>').join('')+'</article></div>';
 }
 function firstSentence(text,locale){
  const t=String(text||'').trim();
@@ -279,8 +272,6 @@ function closingPage(reportIr,binding,pageNumber){
 }
 export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
  const sections=new Map((reportIr?.sections||[]).map(s=>[s.sectionId,s]));
- const readingCounts=new Map();
- for(const p of pagePlan||[])if(p.sectionId&&p.pageFamily==='READING')readingCounts.set(p.sectionId,Math.max(readingCounts.get(p.sectionId)||0,Number(p.readingCount||1)));
  const diagrams=new Map((diagramData?.diagrams||[]).map(d=>[d.id,d]));
  return pagePlan.map(p=>{
   const s=sections.get(p.sectionId),ds=(p.diagramIds||[]).map(id=>diagrams.get(id)).filter(Boolean);
@@ -290,8 +281,8 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   let body='';
   const compact=p.pageFamily==='DIAGRAM_COMPOSITE';
   const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily,compact})).join('');
-  if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml,p.pageFamily==='SECTION_MASTER_SUMMARY',{readingCount:readingCounts.get(p.sectionId)||1});
-  else if(p.pageFamily==='INTERPRETATION'||p.pageFamily==='READING')body=interpretation(s,p);
+  if(p.pageFamily==='SECTION_MASTER')body=sectionMaster(s,binding);
+  else if(p.pageFamily==='READING_ZH'||p.pageFamily==='READING_EN')body=interpretation(s,p);
   else if(p.pageFamily==='DIAGRAM_COMPOSITE')body='<div class="zv-diagram-composite">'+diagramHtml+'</div>';
   else if(ds.length)body=diagramHtml;
   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
