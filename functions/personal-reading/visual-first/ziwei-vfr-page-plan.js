@@ -1,105 +1,73 @@
-export const ZWR_VFR_PAGE_PLAN_VERSION='ZWR-VFR-R1-50-PAGE-ADAPTIVE-BILINGUAL-v4';
+export const ZWR_VFR_PAGE_PLAN_VERSION='ZWR-VFR-R1-57-PAGE-LANGUAGE-SEQUENTIAL-v5';
 
-const P=(pageNumber,pageKey,pageFamily,{sectionId=null,diagramIds=[],visual=true,textRole='SUPPORTING',readingIndex=null,readingCount=null}={})=>Object.freeze({
- pageNumber,pageKey,pageFamily,sectionId,diagramIds:Object.freeze(diagramIds),visual,textRole,readingIndex,readingCount
+const P=(pageNumber,pageKey,pageFamily,{sectionId=null,diagramIds=[],visual=true,locale=null,readingIndex=null,readingCount=null}={})=>Object.freeze({
+ pageNumber,pageKey,pageFamily,sectionId,diagramIds:Object.freeze(diagramIds),visual,locale,readingIndex,readingCount
 });
 
-export const ZWR_VFR_PAGE_PLAN=Object.freeze([
+const SECTION_SPECS=Object.freeze([
+ ['S02',['ZWD-02','ZWD-03']],
+ ['S03',['ZWD-04']],
+ ['S04',['ZWD-06','ZWD-13']],
+ ['S05',['ZWD-07','ZWD-05']],
+ ['S06',['ZWD-08']],
+ ['S07',['ZWD-09']],
+ ['S08',['ZWD-10']],
+ ['S09',['ZWD-11','ZWD-14']],
+ ['S10',['ZWD-12']],
+ ['S11',['ZWD-15']]
+]);
+
+const pages=[
  P(1,'COVER','COVER',{visual:true}),
  P(2,'METHOD_INTRO','FRONT_MATTER',{visual:true}),
  P(3,'ORIGIN','FRONT_MATTER',{visual:true}),
  P(4,'PHIOS_LENS','FRONT_MATTER',{visual:true}),
  P(5,'HOW_TO_READ','FRONT_MATTER',{visual:true}),
- P(6,'TWELVE_PALACE_MAP','OVERVIEW',{diagramIds:['ZWD-01']}),
+ P(6,'TWELVE_PALACE_MAP','OVERVIEW',{diagramIds:['ZWD-01']})
+];
 
- P(7,'S02_MASTER','SECTION_MASTER',{sectionId:'S02'}),
- P(8,'S02_CORE_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S02',diagramIds:['ZWD-02','ZWD-03']}),
- P(9,'S02_READING_A','READING',{sectionId:'S02',visual:false,readingIndex:0,readingCount:3}),
- P(10,'S02_READING_B','READING',{sectionId:'S02',visual:false,readingIndex:1,readingCount:3}),
- P(11,'S02_READING_C','READING',{sectionId:'S02',visual:false,readingIndex:2,readingCount:3}),
+let n=7;
+for(const [sectionId,diagramIds] of SECTION_SPECS){
+ pages.push(P(n++,sectionId+'_MASTER','SECTION_MASTER',{sectionId}));
+ pages.push(P(n++,sectionId+'_DIAGRAMS',diagramIds.length>1?'DIAGRAM_COMPOSITE':'DIAGRAM',{sectionId,diagramIds}));
+ pages.push(P(n++,sectionId+'_ZH_A','READING_ZH',{sectionId,visual:false,locale:'zhHans',readingIndex:0,readingCount:2}));
+ pages.push(P(n++,sectionId+'_ZH_B','READING_ZH',{sectionId,visual:false,locale:'zhHans',readingIndex:1,readingCount:2}));
+ pages.push(P(n++,sectionId+'_EN','READING_EN',{sectionId,visual:false,locale:'en',readingIndex:0,readingCount:1}));
+}
+pages.push(P(n++,'CLOSING_BOUNDARY','CLOSING',{visual:true}));
 
- P(12,'S03_MASTER','SECTION_MASTER',{sectionId:'S03'}),
- P(13,'S03_INNER_STRUCTURE','DIAGRAM',{sectionId:'S03',diagramIds:['ZWD-04']}),
- P(14,'S03_READING_A','READING',{sectionId:'S03',visual:false,readingIndex:0,readingCount:2}),
- P(15,'S03_READING_B','READING',{sectionId:'S03',visual:false,readingIndex:1,readingCount:2}),
-
- P(16,'S04_MASTER','SECTION_MASTER',{sectionId:'S04'}),
- P(17,'S04_CAREER_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S04',diagramIds:['ZWD-06','ZWD-13']}),
- P(18,'S04_READING_A','READING',{sectionId:'S04',visual:false,readingIndex:0,readingCount:3}),
- P(19,'S04_READING_B','READING',{sectionId:'S04',visual:false,readingIndex:1,readingCount:3}),
- P(20,'S04_READING_C','READING',{sectionId:'S04',visual:false,readingIndex:2,readingCount:3}),
-
- P(21,'S05_MASTER','SECTION_MASTER',{sectionId:'S05'}),
- P(22,'S05_RESOURCE_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S05',diagramIds:['ZWD-07','ZWD-05']}),
- P(23,'S05_READING_A','READING',{sectionId:'S05',visual:false,readingIndex:0,readingCount:3}),
- P(24,'S05_READING_B','READING',{sectionId:'S05',visual:false,readingIndex:1,readingCount:3}),
- P(25,'S05_READING_C','READING',{sectionId:'S05',visual:false,readingIndex:2,readingCount:3}),
-
- P(26,'S06_MASTER','SECTION_MASTER',{sectionId:'S06'}),
- P(27,'S06_RELATIONSHIP_NETWORK','DIAGRAM',{sectionId:'S06',diagramIds:['ZWD-08']}),
- P(28,'S06_READING_A','READING',{sectionId:'S06',visual:false,readingIndex:0,readingCount:2}),
- P(29,'S06_READING_B','READING',{sectionId:'S06',visual:false,readingIndex:1,readingCount:2}),
-
- P(30,'S07_MASTER','SECTION_MASTER',{sectionId:'S07'}),
- P(31,'S07_SUPPORT_NETWORK','DIAGRAM',{sectionId:'S07',diagramIds:['ZWD-09']}),
- P(32,'S07_READING_A','READING',{sectionId:'S07',visual:false,readingIndex:0,readingCount:2}),
- P(33,'S07_READING_B','READING',{sectionId:'S07',visual:false,readingIndex:1,readingCount:2}),
-
- P(34,'S08_MASTER','SECTION_MASTER',{sectionId:'S08'}),
- P(35,'S08_PRESSURE_CAPACITY','DIAGRAM',{sectionId:'S08',diagramIds:['ZWD-10']}),
- P(36,'S08_READING_A','READING',{sectionId:'S08',visual:false,readingIndex:0,readingCount:2}),
- P(37,'S08_READING_B','READING',{sectionId:'S08',visual:false,readingIndex:1,readingCount:2}),
-
- P(38,'S09_MASTER','SECTION_MASTER',{sectionId:'S09'}),
- P(39,'S09_TIMING_DIAGRAMS','DIAGRAM_COMPOSITE',{sectionId:'S09',diagramIds:['ZWD-11','ZWD-14']}),
- P(40,'S09_READING_A','READING',{sectionId:'S09',visual:false,readingIndex:0,readingCount:2}),
- P(41,'S09_READING_B','READING',{sectionId:'S09',visual:false,readingIndex:1,readingCount:2}),
-
- P(42,'S10_MASTER','SECTION_MASTER',{sectionId:'S10'}),
- P(43,'S10_CURRENT_ACTIVATION','DIAGRAM',{sectionId:'S10',diagramIds:['ZWD-12']}),
- P(44,'S10_READING_A','READING',{sectionId:'S10',visual:false,readingIndex:0,readingCount:2}),
- P(45,'S10_READING_B','READING',{sectionId:'S10',visual:false,readingIndex:1,readingCount:2}),
-
- P(46,'S11_MASTER','SECTION_MASTER',{sectionId:'S11'}),
- P(47,'S11_WHOLE_CHART_NAVIGATION','DIAGRAM',{sectionId:'S11',diagramIds:['ZWD-15']}),
- P(48,'S11_READING_A','READING',{sectionId:'S11',visual:false,readingIndex:0,readingCount:2}),
- P(49,'S11_READING_B','READING',{sectionId:'S11',visual:false,readingIndex:1,readingCount:2}),
-
- P(50,'CLOSING_BOUNDARY','CLOSING',{visual:true})
-]);
+export const ZWR_VFR_PAGE_PLAN=Object.freeze(pages);
 
 export function validateZwrVfrPagePlan({diagramIds=[]}={}){
- const reasons=[],pages=ZWR_VFR_PAGE_PLAN;
- if(pages.length<48||pages.length>60)reasons.push('PAGE_COUNT_OUTSIDE_BILINGUAL_RANGE');
- if(pages.some((p,i)=>p.pageNumber!==i+1))reasons.push('PAGE_SEQUENCE_INVALID');
+ const reasons=[],ps=ZWR_VFR_PAGE_PLAN;
+ if(ps.length<50||ps.length>70)reasons.push('PAGE_COUNT_OUTSIDE_BILINGUAL_RANGE');
+ if(ps.some((p,i)=>p.pageNumber!==i+1))reasons.push('PAGE_SEQUENCE_INVALID');
+
  const ids=new Set(diagramIds);
- for(const p of pages)for(const id of p.diagramIds)if(!ids.has(id))reasons.push('DIAGRAM_DATA_MISSING:'+id);
- const bound=pages.flatMap(p=>p.diagramIds);
+ for(const p of ps)for(const id of p.diagramIds)if(!ids.has(id))reasons.push('DIAGRAM_DATA_MISSING:'+id);
+ const bound=ps.flatMap(p=>p.diagramIds);
  for(let i=1;i<=15;i++){
   const id='ZWD-'+String(i).padStart(2,'0');
   if(bound.filter(x=>x===id).length!==1)reasons.push('DIAGRAM_BINDING_NOT_EXACTLY_ONCE:'+id);
  }
- const sections=new Set(pages.map(p=>p.sectionId).filter(Boolean));
- for(const id of ['S02','S03','S04','S05','S06','S07','S08','S09','S10','S11'])if(!sections.has(id))reasons.push('SECTION_PAGE_MISSING:'+id);
- for(const id of sections){
-  if(!pages.some(p=>p.sectionId===id&&p.pageFamily==='SECTION_MASTER'))reasons.push('SECTION_MASTER_MISSING:'+id);
-  const readings=pages.filter(p=>p.sectionId===id&&p.pageFamily==='READING');
-  if(readings.length<2)reasons.push('SECTION_READING_PAGES_TOO_FEW:'+id);
+
+ for(const [sectionId] of SECTION_SPECS){
+  if(ps.filter(p=>p.sectionId===sectionId&&p.pageFamily==='SECTION_MASTER').length!==1)reasons.push('SECTION_MASTER_INVALID:'+sectionId);
+  if(ps.filter(p=>p.sectionId===sectionId&&p.pageFamily==='READING_ZH').length!==2)reasons.push('SECTION_ZH_READING_INVALID:'+sectionId);
+  if(ps.filter(p=>p.sectionId===sectionId&&p.pageFamily==='READING_EN').length!==1)reasons.push('SECTION_EN_READING_INVALID:'+sectionId);
  }
- const composites=pages.filter(p=>p.pageFamily==='DIAGRAM_COMPOSITE');
+
+ const composites=ps.filter(p=>p.pageFamily==='DIAGRAM_COMPOSITE');
  if(composites.some(p=>p.diagramIds.length!==2))reasons.push('DIAGRAM_COMPOSITE_REQUIRES_TWO_DIAGRAMS');
- const textOnly=pages.filter(p=>p.visual===false).length;
- let consecutive=0,maxConsecutive=0;
- for(const p of pages){consecutive=p.visual?0:consecutive+1;maxConsecutive=Math.max(maxConsecutive,consecutive);}
- if(maxConsecutive>3)reasons.push('TOO_MANY_CONSECUTIVE_PROSE_PAGES');
+
  return Object.freeze({
   accepted:reasons.length===0,
   reasons:[...new Set(reasons)],
-  pageCount:pages.length,
-  visualPages:pages.length-textOnly,
-  textOnlyPages:textOnly,
-  compositeDiagramPages:composites.length,
-  maxConsecutiveProsePages:maxConsecutive
+  pageCount:ps.length,
+  chapterMasters:ps.filter(p=>p.pageFamily==='SECTION_MASTER').length,
+  chineseReadingPages:ps.filter(p=>p.pageFamily==='READING_ZH').length,
+  englishReadingPages:ps.filter(p=>p.pageFamily==='READING_EN').length,
+  compositeDiagramPages:composites.length
  });
 }
 export default Object.freeze({ZWR_VFR_PAGE_PLAN,validateZwrVfrPagePlan,ZWR_VFR_PAGE_PLAN_VERSION});
