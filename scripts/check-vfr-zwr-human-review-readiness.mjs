@@ -7,12 +7,14 @@ const htmlPath='tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html';
 const publicationPath=root+'DEEP-PUBLICATION-IR.json';
 const repairedPath=root+'five-call-experiment/REPAIRED-RESULT.json';
 const cachePath=root+'DEEP-RENDER-CACHE.json';
+const fitPlanPath=root+'PUBLICATION-FIT-PLAN.json';
 
-for(const p of [htmlPath,publicationPath,repairedPath,cachePath])assert(fs.existsSync(p),'ZWR VFR W9 artifact missing: '+p);
+for(const p of [htmlPath,publicationPath,repairedPath,cachePath,fitPlanPath])assert(fs.existsSync(p),'ZWR VFR W9 artifact missing: '+p);
 const html=fs.readFileSync(htmlPath,'utf8');
 const publication=JSON.parse(fs.readFileSync(publicationPath,'utf8'));
 const repaired=JSON.parse(fs.readFileSync(repairedPath,'utf8'));
 const cache=JSON.parse(fs.readFileSync(cachePath,'utf8'));
+const fitPlan=JSON.parse(fs.readFileSync(fitPlanPath,'utf8'));
 
 assert.equal(publication.schemaVersion,ZWR_VFR_DEEP_PUBLICATION_IR_VERSION);
 assert.equal(publication.sourceResultDigest,repaired.resultDigest);
