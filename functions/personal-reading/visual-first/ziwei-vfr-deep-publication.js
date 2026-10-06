@@ -54,7 +54,7 @@ export async function buildZwrVfrDeepPublicationIr({pack,repairedResult}={}){
    estimatedProviderCost:repairedResult.providerUsage.totalEstimatedProviderCost
   },
   visualFirst:true,
-  maxPhysicalPages:50
+  maxPhysicalPages:60
  };
  return deepFreeze({...seed,publicationIrDigest:await sha256Stable(seed)});
 }
