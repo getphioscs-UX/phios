@@ -33,7 +33,7 @@ function urlFor(code){
 export function getZwrVfrVisualBinding({pageNumber,sectionId,pageFamily}={}){
  if(frontMatter[pageNumber])return Object.freeze({kind:'STATIC_FRONT_MATTER',url:frontMatter[pageNumber]});
  const motifCode=sectionId&&['S03','S05','S07','S09','S11'].includes(sectionId)?'VIS-REPORT-ZIWEI-MOTIF-2':'VIS-REPORT-ZIWEI-MOTIF-1';
- if(pageNumber===47)return Object.freeze({
+ if(pageFamily==='CLOSING')return Object.freeze({
   kind:'CLOSING',
   hero:urlFor('VIS-REPORT-ZIWEI-SEC-10-EVIDENCE-BOUNDARY'),
   body:urlFor('VIS-REPORT-ZIWEI-BODY'),
