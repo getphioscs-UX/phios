@@ -1,6 +1,6 @@
 import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
 
-export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v3';
+export const ZWR_VFR_RENDERER_VERSION='ZWR-VFR-R1-DEEP-RENDERER-v4';
 
 const sanitizeDisplay=v=>String(v??'').replace(/[\uFDD0-\uFDEF\uFFFE\uFFFF]/gu,'-').replace(/\s+-\s+/g,' - ').trim();
 const esc=v=>sanitizeDisplay(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -189,7 +189,7 @@ export function renderZwrVfrDiagram(d,ctx={}){
  else if(['NATAL_DAXIAN_LIUNIAN_STACK','CURRENT_PALACE_ACTIVATION'].includes(type))body=timing(data,ctx);
  else if(type==='WHOLE_CHART_NAVIGATION')body=domains(data);
  else body='<div class="zv-empty">Missing deterministic renderer</div>';
- return '<figure class="zv-diagram" data-diagram-id="'+esc(d.id)+'" data-diagram-type="'+esc(type)+'" data-projection="'+esc(ctx.pageKey||'GLOBAL')+'"><figcaption><b>'+esc(title[0])+'</b><span>'+esc(title[1])+'</span></figcaption>'+body+'</figure>';
+ return '<figure class="zv-diagram'+(ctx.compact?' is-compact':'')+'" data-diagram-id="'+esc(d.id)+'" data-diagram-type="'+esc(type)+'" data-projection="'+esc(ctx.pageKey||'GLOBAL')+'"><figcaption><b>'+esc(title[0])+'</b><span>'+esc(title[1])+'</span></figcaption>'+body+'</figure>';
 }
 
 const PURPOSE_EN={
@@ -227,13 +227,37 @@ function sectionMaster(section,binding,diagrams='',compact=false,meta={}){
  }
  return art+'<div class="zv-master"><span class="zv-sec">'+esc(section?.sectionId||'')+'</span><h1>'+esc(zh.headline)+'</h1><h2>'+esc(en.headline)+'</h2><p>'+esc(zh.subheadline)+'</p><p lang="en">'+esc(enSub)+'</p><div class="zv-insights">'+(zh.keyInsights||[]).map((x,i)=>'<article><b>0'+(i+1)+'</b><h3>'+esc(x.label)+'</h3><p>'+esc(x.text)+'</p><small>'+esc(en.keyInsights?.[i]?.label||'')+' · '+esc(en.keyInsights?.[i]?.text||'')+'</small></article>').join('')+'</div>'+diagrams+'</div>';
 }
+function partitionParagraphs(items,count){
+ const groups=Array.from({length:Math.max(1,count)},()=>[]);
+ let cursor=0;
+ let remainingWeight=items.reduce((n,x)=>n+String(x||'').length,0);
+ for(let g=0;g<groups.length;g++){
+  const remainingGroups=groups.length-g;
+  if(cursor>=items.length)break;
+  const target=remainingWeight/remainingGroups;
+  let used=0;
+  while(cursor<items.length){
+   const item=items[cursor];
+   const weight=String(item||'').length;
+   const itemsAfter=items.length-(cursor+1);
+   const groupsAfter=remainingGroups-1;
+   if(groups[g].length&&used>=target&&itemsAfter>=groupsAfter)break;
+   groups[g].push(item);
+   used+=weight;
+   cursor++;
+   if(itemsAfter===groupsAfter)break;
+  }
+  remainingWeight-=used;
+ }
+ while(cursor<items.length)groups[groups.length-1].push(items[cursor++]);
+ return groups;
+}
 function readingSlice(copy,page,section){
  const count=Math.max(1,Number(page?.readingCount||1));
  const opening=openingParagraphCount(section,count);
  const all=localeParagraphs(copy).slice(opening);
  const index=Math.max(0,Number(page?.readingIndex||0));
- const size=Math.ceil(all.length/count);
- return all.slice(index*size,Math.min(all.length,(index+1)*size));
+ return partitionParagraphs(all,count)[index]||[];
 }
 function interpretation(section,page={}){
  const zh=section?.zhHans||{},en=section?.en||{};
@@ -262,9 +286,11 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan}){
   if(binding.kind==='STATIC_FRONT_MATTER')return '<section class="zv-page zv-static-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'"><img class="zv-static" src="'+esc(binding.url)+'" alt="'+esc(p.pageKey)+'"></section>';
   if(binding.kind==='CLOSING')return '<section class="zv-page zv-closing-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'">'+closingPage(reportIr,binding,p.pageNumber)+'<footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
   let body='';
-  const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily})).join('');
+  const compact=p.pageFamily==='DIAGRAM_COMPOSITE';
+  const diagramHtml=ds.map(d=>renderZwrVfrDiagram(d,{pageKey:p.pageKey,sectionId:p.sectionId,pageFamily:p.pageFamily,compact})).join('');
   if(p.pageFamily==='SECTION_MASTER'||p.pageFamily==='SECTION_MASTER_SUMMARY')body=sectionMaster(s,binding,diagramHtml,p.pageFamily==='SECTION_MASTER_SUMMARY',{readingCount:readingCounts.get(p.sectionId)||1});
   else if(p.pageFamily==='INTERPRETATION'||p.pageFamily==='READING')body=interpretation(s,p);
+  else if(p.pageFamily==='DIAGRAM_COMPOSITE')body='<div class="zv-diagram-composite">'+diagramHtml+'</div>';
   else if(ds.length)body=diagramHtml;
   else body='<div class="zv-front"><h1>'+esc(p.pageKey.replaceAll('_',' '))+'</h1><p>PHI OS · Zi Wei Dou Shu Visual First Report</p></div>';
   return '<section class="zv-page" data-page-number="'+p.pageNumber+'" data-page-family="'+esc(p.pageFamily)+'" data-section-id="'+esc(p.sectionId||'')+'" style="'+sectionVars(p.sectionId)+'">'+(binding.body?'<img class="zv-body-bg" src="'+esc(binding.body)+'" alt="">':'')+(binding.motif?'<img class="zv-body-motif" src="'+esc(binding.motif)+'" alt="">':'')+'<header><strong>PHI OS</strong><span>ZI WEI DOU SHU · 紫微斗数</span></header><main>'+body+'</main><footer><span>紫微斗数 · Visual First Reading</span><b>'+String(p.pageNumber).padStart(2,'0')+' / '+pagePlan.length+'</b></footer></section>';
