@@ -52,14 +52,3 @@
 
 .bdm-report[data-recompose-pass="4"] .bdm-locale p,.bdm-report[data-recompose-pass="5"] .bdm-locale p{margin-bottom:1.2mm;line-height:1.6}
 .bdm-report[data-recompose-pass="5"][data-presentation-mode=EN] .bdm-locale,.bdm-report[data-recompose-pass="5"][data-presentation-mode=ZH_HANS] .bdm-locale{column-count:2;column-gap:7mm}
-/* BDM_READABILITY_R4 START */
-.bdm-report .bdm-page:has(.bdm-locale) .pub-decoration::after{
- content:"";position:absolute;inset:0;pointer-events:none;
- background:linear-gradient(to bottom,rgba(255,255,255,0) 65%,rgba(255,255,255,.88) 78%,rgba(255,255,255,.97) 100%);
-}
-.bdm-report .bdm-locale .bdm-editorial-prose-group{margin:0 0 2.4mm;}
-.bdm-report .bdm-locale .bdm-editorial-prose-group>p{display:inline;margin:0;}
-@media print{
- .bdm-report .bdm-page:has(.bdm-locale) .pub-decoration::after{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-}
-/* BDM_READABILITY_R4 END */
