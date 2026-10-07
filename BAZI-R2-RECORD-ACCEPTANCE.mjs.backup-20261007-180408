@@ -333,7 +333,7 @@ const bound={...acceptance,repositoryImported:true,importedAt:new Date().toISOSt
 fs.writeFileSync(path.join(runDir,'HUMAN-VISUAL-ACCEPTANCE-R2.json'),JSON.stringify(bound,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({status:'VISUAL_ACCEPT_RECORDED',path:runDir,providerCalls:0,productionActivated:false}));
 if(args.includes('--global-check')) {
- for(const [p,h] of Object.entries(auditedRunnerHashes))if(p !== "package.json")verifyExact(p,h);
+ for(const [p,h] of Object.entries(auditedRunnerHashes))verifyExact(p,h);
  const p=j('package.json');
  for(const k of ['precheck','check','postcheck'])if(p.scripts[k]!==`node scripts/run-zero-cost-regression.mjs ${k}`)throw Error('ZERO_COST_LIFECYCLE_CHANGED '+k);
  const preload=pathToFileURL(path.join(repo,'scripts/lib/report-zero-cost-preload.mjs')).href;
