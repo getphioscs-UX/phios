@@ -5,6 +5,7 @@ import path from 'node:path';
 import {assertMasterAOwnerDigest} from './lib/master-a-current-owner-validation.mjs';
 import {onRequestGet} from '../functions/api/ask-phios.js';
 import {assertKapEvidenceOrMaintenance} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
+import {acceptancePath,freezePath,assertMasterAProductionAdmission} from './lib/master-a-production-admission-v1.mjs';
 const dir='content/knowledge/structured/successors/master-a-v2-batch6';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -18,7 +19,8 @@ const decision=read(dir+'/book-v-source-gap-reconciliation-v1.json');assert.equa
 const census=read(dir+'/object-census-v1.json');let counted=0;for(const f of census.atlasFamilies){const items=read(f.source.path)[f.collection];assert.ok(Array.isArray(items));assert.equal(items.length,f.count);assert.deepEqual(items.map(o=>o[f.idField]),f.existingObjectIds);counted+=items.length;}assert.equal(counted,census.atlasTotal);assert.equal(counted,348);assert.equal(census.bookVII.structuredObjects,17);assert.equal(census.bookVIII.structuredObjects,39);assert.equal(census.activeNewStructuredObjects,0);
 const b8=read('content/knowledge/structured/successors/master-a-v2-batch4/navigation-object-registry-v1.json');assert.equal(b8.objects.length,39);assert.ok(b8.objects.every(o=>o.projectionState==='WITHHELD'&&o.nodeCode===null&&o.sourceRefs===null&&o.canonicalNodeRefs.length===0));
 const authority=read(dir+'/structured-authority-successor-candidate-v1.json');assert.equal(authority.productionAdmission,'PENDING_EXPLICIT_MASTER_A_V2_FINAL_HUMAN_ACCEPT');assert.equal(authority.labStatus,'STANDALONE_OBSERVATION_LAB_NOT_ADMITTED');assert.equal(authority.bookVIII.canonicalTitle,'世界将如何继续');assert.equal(authority.bookVIII.bookIX,false);assert.equal(authority.publicActivation,false);
-assert.equal(fs.existsSync('content/knowledge/structured/freeze/master-a-v2-production-freeze.json'),false);assert.equal(fs.existsSync('content/knowledge/structured/acceptance/master-a-v2-production-acceptance.json'),false);
+if(fs.existsSync(acceptancePath)||fs.existsSync(freezePath))assertMasterAProductionAdmission();
+else {assert.equal(fs.existsSync(freezePath),false);assert.equal(fs.existsSync(acceptancePath),false);}
 let providerRequests=0,privateReads=0,writes=0;const originalFetch=globalThis.fetch;globalThis.fetch=async()=>{providerRequests++;throw Error('PROVIDER_FORBIDDEN');};
 const assetReads=[];const env={PHIOS_ENVIRONMENT:'qa',PHIOS_MANUSCRIPT_RETRIEVAL_ENABLED:'false',REPORT_PROVIDER_LIVE_ALLOWED:'false',ASSETS:{fetch:async req=>{const relative=decodeURIComponent(new URL(typeof req==='string'?req:req.url).pathname).replace(/^\/+/,''),absolute=path.resolve(relative);assetReads.push(relative);if(!absolute.startsWith(path.resolve('.')+path.sep)||relative.includes('_source-material')||relative.includes('/source-readings/'))return new Response('withheld',{status:404});return fs.existsSync(absolute)&&fs.statSync(absolute).isFile()?new Response(fs.readFileSync(absolute)):new Response('missing',{status:404});}},MANUSCRIPTS:{get:async()=>{privateReads++;throw Error('PRIVATE_SOURCE_DENIED');},put:async()=>{writes++;throw Error('WRITE_DENIED');}}};
 const cases=[];
