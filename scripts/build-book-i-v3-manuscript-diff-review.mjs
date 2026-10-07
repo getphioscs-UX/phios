@@ -15,15 +15,27 @@ const oldSections=v2.sections.filter(x=>x.segmentType!=='FRONT_MATTER');
 const newSections=v3.sections.filter(x=>x.segmentType!=='FRONT_MATTER');
 const max=Math.max(oldSections.length,newSections.length);
 const rows=[];
-const summary={sameHeadingSameHash:0,sameHeadingChangedHash:0,renamedSamePosition:0,added:0,removed:0};
+const HASH_COMPARABLE = v2.segmentationMethod === v3.segmentationMethod &&
+  v2.schemaVersion === v3.schemaVersion;
+const summary={headingStable:0,headingChanged:0,added:0,removed:0,possibleMajorLengthChange:0};
 for(let i=0;i<max;i++){
  const a=oldSections[i]||null,b=newSections[i]||null;
  let state;
+ const oldChars=a?.charCount??null,newChars=b?.charCount??null;
+ const lengthRatio=oldChars&&newChars?newChars/oldChars:null;
+ const majorLengthChange=lengthRatio!==null&&(lengthRatio<0.8||lengthRatio>1.2);
  if(!a){state='ADDED';summary.added++;}
  else if(!b){state='REMOVED';summary.removed++;}
- else if(a.heading===b.heading && a.textSha256===b.textSha256){state='UNCHANGED';summary.sameHeadingSameHash++;}
- else if(a.heading===b.heading){state='CONTENT_CHANGED';summary.sameHeadingChangedHash++;}
- else {state='HEADING_CHANGED';summary.renamedSamePosition++;}
+ else if(a.heading===b.heading){
+   state=HASH_COMPARABLE && a.textSha256===b.textSha256
+     ? 'UNCHANGED_COMPARABLE'
+     : 'HEADING_STABLE_CONTENT_COMPARISON_PENDING';
+   summary.headingStable++;
+ } else {
+   state='HEADING_CHANGED';
+   summary.headingChanged++;
+ }
+ if(majorLengthChange) summary.possibleMajorLengthChange++;
  rows.push({
    index:i+1,
    partCode:b?.partCode??a?.partCode??null,
@@ -33,19 +45,24 @@ for(let i=0;i<max;i++){
    newHeading:b?.heading??null,
    oldHash:a?.textSha256??null,
    newHash:b?.textSha256??null,
+   oldChars,
+   newChars,
+   lengthRatio:lengthRatio===null?null:Number(lengthRatio.toFixed(3)),
+   possibleMajorLengthChange:majorLengthChange,
    oldPages:a?[a.startPage,a.endPage]:null,
    newPages:b?[b.startPage,b.endPage]:null,
    state
  });
 }
-const changed=rows.filter(r=>r.state!=='UNCHANGED');
+const changed=rows.filter(r=>r.state==='HEADING_CHANGED'||r.state==='ADDED'||r.state==='REMOVED'||r.possibleMajorLengthChange);
 const report={
  schemaVersion:'PHI-OS-BOOK-I-V3-MANUSCRIPT-DIFF-REVIEW-v1.0.0',
  status:'READY_FOR_HUMAN_REVIEW',
  bookCode:'BOOK-1',
  sourceV2:{sha256:v2.sourceSha256,pageCount:402,sectionSegments:oldSections.length},
  sourceV3:{sha256:v3.sourceSha256,pageCount:v3.sourcePageCount,sectionSegments:newSections.length},
- counts:{...summary,totalCompared:rows.length,changed:changed.length,unchanged:rows.length-changed.length},
+ hashComparisonAuthority:HASH_COMPARABLE?'COMPARABLE':'NOT_COMPARABLE_DIFFERENT_EXTRACTION_PIPELINE',
+ counts:{...summary,totalCompared:rows.length,reviewPriority:changed.length},
  partCountsV2:v2.partCounts,
  partCountsV3:v3.partCounts,
  canonicalImpactCandidates:impacts.likelyNewCanonicalCandidates,
@@ -80,17 +97,17 @@ code{word-break:break-all} .cards{display:grid;grid-template-columns:repeat(auto
 <div class="meta">
 <p><b>v2:</b> 402 pages · 274 sections · <code>${esc(v2.sourceSha256)}</code></p>
 <p><b>v3:</b> ${v3.sourcePageCount} pages · ${newSections.length} sections · <code>${esc(v3.sourceSha256)}</code></p>
-<p class="warn">此页面只做 manuscript 差异与 canonical impact 人审；不会自动建立、改名或删除 canonical nodes，也不会自动 production cutover。</p>
+<p class="warn">此页面只做 manuscript 差异与 canonical impact 人审；不会自动建立、改名或删除 canonical nodes，也不会自动 production cutover。</p>\n<p class="warn">v2 与 v3 使用不同 extraction pipeline，因此旧/新 section SHA-256 不具直接可比性。相同标题不得仅因 hash 不同判定为正文变化；真正正文 diff 必须使用同一规范化 extraction baseline。</p>
 </div>
 <div class="grid">
-<div class="metric"><b>Changed</b><br>${changed.length}</div>
-<div class="metric"><b>Content changed</b><br>${summary.sameHeadingChangedHash}</div>
-<div class="metric"><b>Heading changed</b><br>${summary.renamedSamePosition}</div>
+<div class="metric"><b>Review priority</b><br>${changed.length}</div>
+<div class="metric"><b>Heading stable</b><br>${summary.headingStable}</div>
+<div class="metric"><b>Heading changed</b><br>${summary.headingChanged}</div>
+<div class="metric"><b>Major length shift</b><br>${summary.possibleMajorLengthChange}</div>
 <div class="metric"><b>Added</b><br>${summary.added}</div>
 <div class="metric"><b>Removed</b><br>${summary.removed}</div>
-<div class="metric"><b>Unchanged</b><br>${summary.sameHeadingSameHash}</div>
 </div>
-<h2>Changed manuscript sections</h2>
+<h2>Priority manuscript sections</h2>
 <table><thead><tr><th>#</th><th>Part</th><th>State</th><th>v2 heading</th><th>v3 heading</th><th>v2 pages</th><th>v3 pages</th></tr></thead>
 <tbody>${tableRows}</tbody></table>
 <h2>Canonical impact candidates</h2>
