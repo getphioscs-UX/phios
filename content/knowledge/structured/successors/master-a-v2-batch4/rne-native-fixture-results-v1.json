@@ -1,0 +1,1225 @@
+{
+  "status": "PASS",
+  "inputClass": "EXISTING_NATIVE_RNE_FIXTURES_NOT_USER_DATA",
+  "nativeOutputsValidated": 13,
+  "negativeAuthorityCases": 4,
+  "newRneLogic": false,
+  "providerRequests": 0,
+  "productionExecutionActivated": false,
+  "rawReadoutCopied": false,
+  "outputs": [
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/current-position-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-CURRENT-POSITION-v1.0.0",
+        "positionCode": "RNE-POSITION-VALIDATION-0001",
+        "positionVersion": "1.0.0",
+        "objectType": "CURRENT_POSITION",
+        "dataType": "NAVIGATION_RECORD",
+        "realityReference": {
+          "code": "RMO-REALITY-VALIDATION-0001",
+          "version": "1.1.0",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "readoutViewReference": {
+          "code": "RRE-READOUT-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "mode": "VALIDATION_VIEW_REFERENCE_ONLY"
+        },
+        "constraintReferences": [
+          "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+          "RMO-CONSTRAINT-SOFT-VALIDATION-0002",
+          "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+        ],
+        "unknownReferences": [
+          "RMO-UNKNOWN-VALIDATION-0001"
+        ],
+        "governanceReferences": [
+          "RDG-PURPOSE-SERVICE-DELIVERY",
+          "RDG-CONSENT-VALIDATION-0001"
+        ],
+        "authorityBoundary": {
+          "realityModelAuthority": "RMO",
+          "readoutAuthority": "RRE",
+          "navigationAuthority": "RNE",
+          "journeyWorkflowAuthority": "JR",
+          "professionalJudgmentAuthority": "PR",
+          "dataGovernanceAuthority": "RDG"
+        },
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "productionExecutionAllowed": false,
+        "positionDigest": "7b45b327f7f9c2c54a0b3f634927b44bf76c43c76dea21aeb33cfa26af74f7b0"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/target-state-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-TARGET-STATE-v1.0.0",
+        "targetCode": "RNE-TARGET-VALIDATION-0001",
+        "targetVersion": "1.0.0",
+        "objectType": "TARGET_STATE",
+        "dataType": "NAVIGATION_RECORD",
+        "currentPositionReference": {
+          "code": "RNE-POSITION-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "7b45b327f7f9c2c54a0b3f634927b44bf76c43c76dea21aeb33cfa26af74f7b0"
+        },
+        "source": {
+          "sourceType": "CUSTOMER",
+          "sourceReference": "CUSTOMER-DECLARATION-VALIDATION-0001",
+          "sourceAuthorityReference": "CUSTOMER_SELF_DECLARED"
+        },
+        "targetStatement": "Increase operational stability without silently bypassing the recorded constraints.",
+        "targetCriteria": [
+          "The desired state remains within the customer's declared scope.",
+          "Recorded dependencies and unresolved limits remain visible during navigation."
+        ],
+        "authorityBoundary": {
+          "targetSourceAuthority": "CUSTOMER",
+          "navigationAuthority": "RNE",
+          "professionalJudgmentAuthority": "PR"
+        },
+        "targetInventedByRne": false,
+        "predictionCreated": false,
+        "guaranteedOutcomeCreated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "targetDigest": "a9bf8e3108b7cbb4b51f9e91e14c3843773a3937ff3e9285c0bedf28d176c398"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/navigation-constraint-graph-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-NAVIGATION-CONSTRAINT-GRAPH-v1.0.0",
+        "graphCode": "RNE-CONSTRAINT-GRAPH-VALIDATION-0001",
+        "graphVersion": "1.0.0",
+        "objectType": "NAVIGATION_CONSTRAINT_GRAPH",
+        "dataType": "NAVIGATION_RECORD",
+        "currentPositionReference": {
+          "code": "RNE-POSITION-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "7b45b327f7f9c2c54a0b3f634927b44bf76c43c76dea21aeb33cfa26af74f7b0"
+        },
+        "targetReference": {
+          "code": "RNE-TARGET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "a9bf8e3108b7cbb4b51f9e91e14c3843773a3937ff3e9285c0bedf28d176c398"
+        },
+        "nodes": [
+          {
+            "nodeCode": "RNE-CNODE-DEPENDENCY-0001",
+            "authorityConstraintReference": "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+            "navigationRole": "DEPENDENCY",
+            "appliesTo": "TRANSITION",
+            "blockingClass": "UNKNOWN",
+            "dependsOnConstraintReferences": []
+          },
+          {
+            "nodeCode": "RNE-CNODE-SOFT-0002",
+            "authorityConstraintReference": "RMO-CONSTRAINT-SOFT-VALIDATION-0002",
+            "navigationRole": "SOFT_LIMIT",
+            "appliesTo": "TRANSITION",
+            "blockingClass": "NON_BLOCKING",
+            "dependsOnConstraintReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ]
+          },
+          {
+            "nodeCode": "RNE-CNODE-UNKNOWN-0003",
+            "authorityConstraintReference": "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003",
+            "navigationRole": "UNKNOWN_LIMIT",
+            "appliesTo": "TARGET",
+            "blockingClass": "UNKNOWN",
+            "dependsOnConstraintReferences": []
+          }
+        ],
+        "edgeCount": 1,
+        "unknownConstraintReferences": [
+          "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+          "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+        ],
+        "authorityBoundary": {
+          "constraintTruthAuthority": "RMO",
+          "constraintNavigationRoleAuthority": "RNE",
+          "professionalJudgmentAuthority": "PR"
+        },
+        "realityConstraintCreated": false,
+        "professionalJudgmentCreated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "graphDigest": "9a05ee5da561c5c28b28f4e1d0029e23617100d64eb6d71f199482fdce287caf"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/bounded-navigation-option-set-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-BOUNDED-OPTION-SET-v1.0.0",
+        "optionSetCode": "RNE-OPTION-SET-VALIDATION-0001",
+        "optionSetVersion": "1.0.0",
+        "objectType": "BOUNDED_OPTION_SET",
+        "dataType": "NAVIGATION_RECORD",
+        "currentPositionReference": {
+          "code": "RNE-POSITION-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "7b45b327f7f9c2c54a0b3f634927b44bf76c43c76dea21aeb33cfa26af74f7b0"
+        },
+        "targetReference": {
+          "code": "RNE-TARGET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "a9bf8e3108b7cbb4b51f9e91e14c3843773a3937ff3e9285c0bedf28d176c398"
+        },
+        "constraintGraphReference": {
+          "code": "RNE-CONSTRAINT-GRAPH-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "9a05ee5da561c5c28b28f4e1d0029e23617100d64eb6d71f199482fdce287caf"
+        },
+        "generationModel": "DETERMINISTIC_RULE_FIRST",
+        "options": [
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+            "optionClass": "OBSERVE",
+            "boundaryMode": "NO_STATE_CHANGE_REQUIRED",
+            "currentPositionReference": "RNE-POSITION-VALIDATION-0001",
+            "targetReference": "RNE-TARGET-VALIDATION-0001",
+            "constraintReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-SOFT-VALIDATION-0002",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "triggerReferences": [],
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "commandCreated": false,
+            "executionCreated": false,
+            "predictionCreated": false,
+            "professionalJudgmentCreated": false
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-CLARIFY",
+            "optionClass": "CLARIFY",
+            "boundaryMode": "CLARIFICATION_ONLY",
+            "currentPositionReference": "RNE-POSITION-VALIDATION-0001",
+            "targetReference": "RNE-TARGET-VALIDATION-0001",
+            "constraintReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "triggerReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "commandCreated": false,
+            "executionCreated": false,
+            "predictionCreated": false,
+            "professionalJudgmentCreated": false
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-VERIFY",
+            "optionClass": "VERIFY",
+            "boundaryMode": "DEPENDENCY_VERIFICATION_ONLY",
+            "currentPositionReference": "RNE-POSITION-VALIDATION-0001",
+            "targetReference": "RNE-TARGET-VALIDATION-0001",
+            "constraintReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "triggerReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "commandCreated": false,
+            "executionCreated": false,
+            "predictionCreated": false,
+            "professionalJudgmentCreated": false
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE",
+            "optionClass": "RECONFIGURE",
+            "boundaryMode": "SOFT_LIMIT_RECONFIGURATION",
+            "currentPositionReference": "RNE-POSITION-VALIDATION-0001",
+            "targetReference": "RNE-TARGET-VALIDATION-0001",
+            "constraintReferences": [
+              "RMO-CONSTRAINT-SOFT-VALIDATION-0002"
+            ],
+            "triggerReferences": [
+              "RMO-CONSTRAINT-SOFT-VALIDATION-0002"
+            ],
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "commandCreated": false,
+            "executionCreated": false,
+            "predictionCreated": false,
+            "professionalJudgmentCreated": false
+          }
+        ],
+        "selectionMade": false,
+        "rankingCreated": false,
+        "recommendedDirectionCreated": false,
+        "commandCreated": false,
+        "executionCreated": false,
+        "riskAssessmentCreated": false,
+        "recoverabilityAssessmentCreated": false,
+        "scenarioPredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "optionSetDigest": "718bd28ccc0c40cc53b61bb3f9d276c4a0eb1543458ee623a190bdbeafaadca3"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/navigation-risk-context-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-NAVIGATION-RISK-CONTEXT-v1.0.0",
+        "riskContextCode": "RNE-RISK-CONTEXT-VALIDATION-0001",
+        "riskContextVersion": "1.0.0",
+        "objectType": "NAVIGATION_RISK_CONTEXT",
+        "dataType": "NAVIGATION_RECORD",
+        "optionSetReference": {
+          "code": "RNE-OPTION-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "718bd28ccc0c40cc53b61bb3f9d276c4a0eb1543458ee623a190bdbeafaadca3"
+        },
+        "constraintGraphReference": {
+          "code": "RNE-CONSTRAINT-GRAPH-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "9a05ee5da561c5c28b28f4e1d0029e23617100d64eb6d71f199482fdce287caf"
+        },
+        "knownRisks": [
+          {
+            "riskReference": "GOVERNED-RISK-VALIDATION-0001",
+            "authorityReference": "AUTHORIZED-RISK-SOURCE-VALIDATION-0001",
+            "constraintReference": "RMO-CONSTRAINT-SOFT-VALIDATION-0002",
+            "appliesToOptionCodes": [
+              "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+              "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE"
+            ]
+          }
+        ],
+        "unknownReferences": [
+          "RMO-UNKNOWN-VALIDATION-0001",
+          "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+          "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+        ],
+        "dependencies": [
+          {
+            "constraintReference": "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+            "dependsOnConstraintReferences": []
+          }
+        ],
+        "optionRiskContexts": [
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "riskState": "DESCRIBED_NOT_SCORED"
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-CLARIFY",
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "riskState": "DESCRIBED_NOT_SCORED"
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-VERIFY",
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "riskState": "DESCRIBED_NOT_SCORED"
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE",
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "riskState": "DESCRIBED_NOT_SCORED"
+          }
+        ],
+        "authorityBoundary": {
+          "riskFactAuthority": "UPSTREAM_GOVERNED_SOURCE",
+          "unknownAuthority": "RMO",
+          "dependencyAuthority": "RMO_CONSTRAINT_REFERENCE",
+          "navigationRiskDescriptionAuthority": "RNE",
+          "professionalJudgmentAuthority": "PR"
+        },
+        "riskProbabilityCreated": false,
+        "riskSeverityScoreCreated": false,
+        "predictionCreated": false,
+        "recommendationCreated": false,
+        "commandCreated": false,
+        "selectionMade": false,
+        "professionalJudgmentCreated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "riskContextDigest": "91daf4649c84810eb77bdde3a3cea7f52c4419de236467ca1d51b9a40ec1fc92"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/option-recoverability-assessment-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-OPTION-RECOVERABILITY-ASSESSMENT-v1.0.0",
+        "recoverabilityAssessmentCode": "RNE-RECOVERABILITY-VALIDATION-0001",
+        "recoverabilityAssessmentVersion": "1.0.0",
+        "objectType": "OPTION_RECOVERABILITY_ASSESSMENT",
+        "dataType": "NAVIGATION_RECORD",
+        "optionSetReference": {
+          "code": "RNE-OPTION-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "718bd28ccc0c40cc53b61bb3f9d276c4a0eb1543458ee623a190bdbeafaadca3"
+        },
+        "riskContextReference": {
+          "code": "RNE-RISK-CONTEXT-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "91daf4649c84810eb77bdde3a3cea7f52c4419de236467ca1d51b9a40ec1fc92"
+        },
+        "recoveryViewReference": {
+          "code": "RRE-RECOVERY-READING-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "mode": "VALIDATION_VIEW_REFERENCE_ONLY"
+        },
+        "recoveryState": {
+          "capacityState": "CONSTRAINED",
+          "windowState": "CONDITIONAL",
+          "uncertaintyState": "ELEVATED"
+        },
+        "optionAssessments": [
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+            "optionClass": "OBSERVE",
+            "boundaryMode": "NO_STATE_CHANGE_REQUIRED",
+            "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED",
+            "recoveryWindowState": "CONDITIONAL",
+            "recoveryCapacityState": "CONSTRAINED",
+            "uncertaintyState": "ELEVATED",
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "guaranteedRecoveryCreated": false,
+            "treatmentAdviceCreated": false,
+            "medicalDiagnosisCreated": false
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-CLARIFY",
+            "optionClass": "CLARIFY",
+            "boundaryMode": "CLARIFICATION_ONLY",
+            "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED",
+            "recoveryWindowState": "CONDITIONAL",
+            "recoveryCapacityState": "CONSTRAINED",
+            "uncertaintyState": "ELEVATED",
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "guaranteedRecoveryCreated": false,
+            "treatmentAdviceCreated": false,
+            "medicalDiagnosisCreated": false
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-VERIFY",
+            "optionClass": "VERIFY",
+            "boundaryMode": "DEPENDENCY_VERIFICATION_ONLY",
+            "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED",
+            "recoveryWindowState": "CONDITIONAL",
+            "recoveryCapacityState": "CONSTRAINED",
+            "uncertaintyState": "ELEVATED",
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "guaranteedRecoveryCreated": false,
+            "treatmentAdviceCreated": false,
+            "medicalDiagnosisCreated": false
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE",
+            "optionClass": "RECONFIGURE",
+            "boundaryMode": "SOFT_LIMIT_RECONFIGURATION",
+            "recoverabilityClass": "RECOVERY_WINDOW_CONDITIONAL",
+            "recoveryWindowState": "CONDITIONAL",
+            "recoveryCapacityState": "CONSTRAINED",
+            "uncertaintyState": "ELEVATED",
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001"
+            ],
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "guaranteedRecoveryCreated": false,
+            "treatmentAdviceCreated": false,
+            "medicalDiagnosisCreated": false
+          }
+        ],
+        "authorityBoundary": {
+          "recoveryReadingAuthority": "RRE",
+          "optionRecoverabilityMappingAuthority": "RNE",
+          "professionalJudgmentAuthority": "PR"
+        },
+        "selectionMade": false,
+        "recommendationCreated": false,
+        "guaranteedRecoveryCreated": false,
+        "treatmentAdviceCreated": false,
+        "medicalDiagnosisCreated": false,
+        "professionalJudgmentCreated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "recoverabilityAssessmentDigest": "9779236e11c30390b901f6897e2e6e7837a9476197e993f1a75079dc8eb8b211"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/decision-support-set-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-DECISION-SUPPORT-SET-v1.0.0",
+        "decisionSupportCode": "RNE-DECISION-SUPPORT-VALIDATION-0001",
+        "decisionSupportVersion": "1.0.0",
+        "objectType": "DECISION_SUPPORT_SET",
+        "dataType": "NAVIGATION_RECORD",
+        "optionSetReference": {
+          "code": "RNE-OPTION-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "718bd28ccc0c40cc53b61bb3f9d276c4a0eb1543458ee623a190bdbeafaadca3"
+        },
+        "riskContextReference": {
+          "code": "RNE-RISK-CONTEXT-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "91daf4649c84810eb77bdde3a3cea7f52c4419de236467ca1d51b9a40ec1fc92"
+        },
+        "recoverabilityAssessmentReference": {
+          "code": "RNE-RECOVERABILITY-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "9779236e11c30390b901f6897e2e6e7837a9476197e993f1a75079dc8eb8b211"
+        },
+        "optionDecisionSupport": [
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+            "optionClass": "OBSERVE",
+            "tradeoff": "MORE_OBSERVATION_BEFORE_CHANGE",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "reversibility": {
+              "mode": "NO_STATE_CHANGE_REQUIRED",
+              "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED"
+            },
+            "observationPoint": "AFTER_NEW_OBSERVATION",
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "selectionState": "AVAILABLE_NOT_SELECTED"
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-CLARIFY",
+            "optionClass": "CLARIFY",
+            "tradeoff": "DEFER_COMMITMENT_UNTIL_UNKNOWN_REVIEW",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "reversibility": {
+              "mode": "NO_STATE_CHANGE_REQUIRED",
+              "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED"
+            },
+            "observationPoint": "AFTER_UNKNOWN_REVIEW",
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "selectionState": "AVAILABLE_NOT_SELECTED"
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-VERIFY",
+            "optionClass": "VERIFY",
+            "tradeoff": "ADD_VERIFICATION_BEFORE_TRANSITION",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "reversibility": {
+              "mode": "NO_STATE_CHANGE_REQUIRED",
+              "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED"
+            },
+            "observationPoint": "AFTER_DEPENDENCY_VERIFICATION",
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "selectionState": "AVAILABLE_NOT_SELECTED"
+          },
+          {
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE",
+            "optionClass": "RECONFIGURE",
+            "tradeoff": "CHANGE_CONFIGURATION_WITHIN_RECORDED_LIMITS",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "reversibility": {
+              "mode": "REVERSIBILITY_CONDITIONAL",
+              "recoverabilityClass": "RECOVERY_WINDOW_CONDITIONAL"
+            },
+            "observationPoint": "AFTER_RECONFIGURATION_CHECK",
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001"
+            ],
+            "selectionState": "AVAILABLE_NOT_SELECTED"
+          }
+        ],
+        "decisionAuthority": "HUMAN_OR_AUTHORIZED_PROFESSIONAL",
+        "rankingCreated": false,
+        "selectionMade": false,
+        "recommendedDirectionCreated": false,
+        "commandCreated": false,
+        "executionCreated": false,
+        "professionalJudgmentCreated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "decisionSupportDigest": "3cca456111a76588f5add771751541f97c739246d9ea39345b531e06f5c016d2"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/scenario-simulation-set-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-SCENARIO-SIMULATION-SET-v1.0.0",
+        "scenarioSetCode": "RNE-SCENARIO-SET-VALIDATION-0001",
+        "scenarioSetVersion": "1.0.0",
+        "objectType": "SCENARIO_SIMULATION_SET",
+        "dataType": "NAVIGATION_RECORD",
+        "optionSetReference": {
+          "code": "RNE-OPTION-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "718bd28ccc0c40cc53b61bb3f9d276c4a0eb1543458ee623a190bdbeafaadca3"
+        },
+        "decisionSupportReference": {
+          "code": "RNE-DECISION-SUPPORT-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "3cca456111a76588f5add771751541f97c739246d9ea39345b531e06f5c016d2"
+        },
+        "recoverabilityAssessmentReference": {
+          "code": "RNE-RECOVERABILITY-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "9779236e11c30390b901f6897e2e6e7837a9476197e993f1a75079dc8eb8b211"
+        },
+        "simulationMode": "CONDITIONAL_OPTION_SIMULATION",
+        "scenarios": [
+          {
+            "scenarioCode": "RNE-SCENARIO-SET-VALIDATION-0001-OBSERVE",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+            "optionClass": "OBSERVE",
+            "simulationMode": "CONDITIONAL_OPTION_SIMULATION",
+            "assumptionMode": "IF_OPTION_WERE_SELECTED_BY_AUTHORIZED_DECIDER",
+            "tradeoff": "MORE_OBSERVATION_BEFORE_CHANGE",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED",
+            "observationPoint": "AFTER_NEW_OBSERVATION",
+            "truthStatus": "SIMULATION_ONLY",
+            "probabilityCreated": false,
+            "forecastCreated": false,
+            "causalityClaimed": false,
+            "outcomeClaimed": false,
+            "guaranteedOutcomeCreated": false,
+            "selectionMade": false,
+            "executionCreated": false
+          },
+          {
+            "scenarioCode": "RNE-SCENARIO-SET-VALIDATION-0001-CLARIFY",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-CLARIFY",
+            "optionClass": "CLARIFY",
+            "simulationMode": "CONDITIONAL_OPTION_SIMULATION",
+            "assumptionMode": "IF_OPTION_WERE_SELECTED_BY_AUTHORIZED_DECIDER",
+            "tradeoff": "DEFER_COMMITMENT_UNTIL_UNKNOWN_REVIEW",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+              "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003"
+            ],
+            "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED",
+            "observationPoint": "AFTER_UNKNOWN_REVIEW",
+            "truthStatus": "SIMULATION_ONLY",
+            "probabilityCreated": false,
+            "forecastCreated": false,
+            "causalityClaimed": false,
+            "outcomeClaimed": false,
+            "guaranteedOutcomeCreated": false,
+            "selectionMade": false,
+            "executionCreated": false
+          },
+          {
+            "scenarioCode": "RNE-SCENARIO-SET-VALIDATION-0001-VERIFY",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-VERIFY",
+            "optionClass": "VERIFY",
+            "simulationMode": "CONDITIONAL_OPTION_SIMULATION",
+            "assumptionMode": "IF_OPTION_WERE_SELECTED_BY_AUTHORIZED_DECIDER",
+            "tradeoff": "ADD_VERIFICATION_BEFORE_TRANSITION",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "knownRiskReferences": [],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001",
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED",
+            "observationPoint": "AFTER_DEPENDENCY_VERIFICATION",
+            "truthStatus": "SIMULATION_ONLY",
+            "probabilityCreated": false,
+            "forecastCreated": false,
+            "causalityClaimed": false,
+            "outcomeClaimed": false,
+            "guaranteedOutcomeCreated": false,
+            "selectionMade": false,
+            "executionCreated": false
+          },
+          {
+            "scenarioCode": "RNE-SCENARIO-SET-VALIDATION-0001-RECONFIGURE",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE",
+            "optionClass": "RECONFIGURE",
+            "simulationMode": "CONDITIONAL_OPTION_SIMULATION",
+            "assumptionMode": "IF_OPTION_WERE_SELECTED_BY_AUTHORIZED_DECIDER",
+            "tradeoff": "CHANGE_CONFIGURATION_WITHIN_RECORDED_LIMITS",
+            "dependencyReferences": [
+              "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+            ],
+            "knownRiskReferences": [
+              "GOVERNED-RISK-VALIDATION-0001"
+            ],
+            "unknownReferences": [
+              "RMO-UNKNOWN-VALIDATION-0001"
+            ],
+            "recoverabilityClass": "RECOVERY_WINDOW_CONDITIONAL",
+            "observationPoint": "AFTER_RECONFIGURATION_CHECK",
+            "truthStatus": "SIMULATION_ONLY",
+            "probabilityCreated": false,
+            "forecastCreated": false,
+            "causalityClaimed": false,
+            "outcomeClaimed": false,
+            "guaranteedOutcomeCreated": false,
+            "selectionMade": false,
+            "executionCreated": false
+          }
+        ],
+        "simulationIsPrediction": false,
+        "simulationIsRealityTruth": false,
+        "probabilityCreated": false,
+        "forecastCreated": false,
+        "causalityClaimed": false,
+        "guaranteedOutcomeCreated": false,
+        "selectionMade": false,
+        "executionCreated": false,
+        "professionalJudgmentCreated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "scenarioSetDigest": "34a6f6d8aed2991ab6e897e503b722f14902983233aa3616fb35e0ca3a66a057"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/route-candidate-set-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-ROUTE-CANDIDATE-SET-v1.0.0",
+        "routeSetCode": "RNE-ROUTE-SET-VALIDATION-0001",
+        "routeSetVersion": "1.0.0",
+        "objectType": "ROUTE_CANDIDATE_SET",
+        "dataType": "NAVIGATION_RECORD",
+        "currentPositionReference": {
+          "code": "RNE-POSITION-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "7b45b327f7f9c2c54a0b3f634927b44bf76c43c76dea21aeb33cfa26af74f7b0"
+        },
+        "targetReference": {
+          "code": "RNE-TARGET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "a9bf8e3108b7cbb4b51f9e91e14c3843773a3937ff3e9285c0bedf28d176c398"
+        },
+        "optionSetReference": {
+          "code": "RNE-OPTION-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "718bd28ccc0c40cc53b61bb3f9d276c4a0eb1543458ee623a190bdbeafaadca3"
+        },
+        "decisionSupportReference": {
+          "code": "RNE-DECISION-SUPPORT-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "3cca456111a76588f5add771751541f97c739246d9ea39345b531e06f5c016d2"
+        },
+        "scenarioSetReference": {
+          "code": "RNE-SCENARIO-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "34a6f6d8aed2991ab6e897e503b722f14902983233aa3616fb35e0ca3a66a057"
+        },
+        "routeShape": [
+          "CURRENT",
+          "INTERMEDIATE",
+          "TARGET"
+        ],
+        "routeCandidates": [
+          {
+            "routeCode": "RNE-ROUTE-SET-VALIDATION-0001-OBSERVE",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+            "optionClass": "OBSERVE",
+            "scenarioReference": "RNE-SCENARIO-SET-VALIDATION-0001-OBSERVE",
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "stages": [
+              {
+                "stageType": "CURRENT",
+                "stateReference": "RNE-POSITION-VALIDATION-0001",
+                "authority": "RNE_CURRENT_POSITION_REFERENCE",
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "INTERMEDIATE",
+                "stateReference": "RNE-ROUTE-SET-VALIDATION-0001-OBSERVE-CHECKPOINT",
+                "authority": "RNE_NAVIGATION_CHECKPOINT",
+                "observationPoint": "AFTER_NEW_OBSERVATION",
+                "dependencyReferences": [
+                  "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+                ],
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "TARGET",
+                "stateReference": "RNE-TARGET-VALIDATION-0001",
+                "authority": "AUTHORIZED_TARGET_REFERENCE",
+                "targetSourceAuthority": "CUSTOMER",
+                "realityTruthClaimed": false
+              }
+            ],
+            "journeyStageMutationCreated": false,
+            "actionRecordCreated": false,
+            "executionCreated": false,
+            "outcomePredictionCreated": false
+          },
+          {
+            "routeCode": "RNE-ROUTE-SET-VALIDATION-0001-CLARIFY",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-CLARIFY",
+            "optionClass": "CLARIFY",
+            "scenarioReference": "RNE-SCENARIO-SET-VALIDATION-0001-CLARIFY",
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "stages": [
+              {
+                "stageType": "CURRENT",
+                "stateReference": "RNE-POSITION-VALIDATION-0001",
+                "authority": "RNE_CURRENT_POSITION_REFERENCE",
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "INTERMEDIATE",
+                "stateReference": "RNE-ROUTE-SET-VALIDATION-0001-CLARIFY-CHECKPOINT",
+                "authority": "RNE_NAVIGATION_CHECKPOINT",
+                "observationPoint": "AFTER_UNKNOWN_REVIEW",
+                "dependencyReferences": [
+                  "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+                ],
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "TARGET",
+                "stateReference": "RNE-TARGET-VALIDATION-0001",
+                "authority": "AUTHORIZED_TARGET_REFERENCE",
+                "targetSourceAuthority": "CUSTOMER",
+                "realityTruthClaimed": false
+              }
+            ],
+            "journeyStageMutationCreated": false,
+            "actionRecordCreated": false,
+            "executionCreated": false,
+            "outcomePredictionCreated": false
+          },
+          {
+            "routeCode": "RNE-ROUTE-SET-VALIDATION-0001-VERIFY",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-VERIFY",
+            "optionClass": "VERIFY",
+            "scenarioReference": "RNE-SCENARIO-SET-VALIDATION-0001-VERIFY",
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "stages": [
+              {
+                "stageType": "CURRENT",
+                "stateReference": "RNE-POSITION-VALIDATION-0001",
+                "authority": "RNE_CURRENT_POSITION_REFERENCE",
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "INTERMEDIATE",
+                "stateReference": "RNE-ROUTE-SET-VALIDATION-0001-VERIFY-CHECKPOINT",
+                "authority": "RNE_NAVIGATION_CHECKPOINT",
+                "observationPoint": "AFTER_DEPENDENCY_VERIFICATION",
+                "dependencyReferences": [
+                  "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+                ],
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "TARGET",
+                "stateReference": "RNE-TARGET-VALIDATION-0001",
+                "authority": "AUTHORIZED_TARGET_REFERENCE",
+                "targetSourceAuthority": "CUSTOMER",
+                "realityTruthClaimed": false
+              }
+            ],
+            "journeyStageMutationCreated": false,
+            "actionRecordCreated": false,
+            "executionCreated": false,
+            "outcomePredictionCreated": false
+          },
+          {
+            "routeCode": "RNE-ROUTE-SET-VALIDATION-0001-RECONFIGURE",
+            "optionCode": "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE",
+            "optionClass": "RECONFIGURE",
+            "scenarioReference": "RNE-SCENARIO-SET-VALIDATION-0001-RECONFIGURE",
+            "selectionState": "AVAILABLE_NOT_SELECTED",
+            "stages": [
+              {
+                "stageType": "CURRENT",
+                "stateReference": "RNE-POSITION-VALIDATION-0001",
+                "authority": "RNE_CURRENT_POSITION_REFERENCE",
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "INTERMEDIATE",
+                "stateReference": "RNE-ROUTE-SET-VALIDATION-0001-RECONFIGURE-CHECKPOINT",
+                "authority": "RNE_NAVIGATION_CHECKPOINT",
+                "observationPoint": "AFTER_RECONFIGURATION_CHECK",
+                "dependencyReferences": [
+                  "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+                ],
+                "realityTruthClaimed": false
+              },
+              {
+                "stageType": "TARGET",
+                "stateReference": "RNE-TARGET-VALIDATION-0001",
+                "authority": "AUTHORIZED_TARGET_REFERENCE",
+                "targetSourceAuthority": "CUSTOMER",
+                "realityTruthClaimed": false
+              }
+            ],
+            "journeyStageMutationCreated": false,
+            "actionRecordCreated": false,
+            "executionCreated": false,
+            "outcomePredictionCreated": false
+          }
+        ],
+        "routeSelectionMade": false,
+        "journeyStageMutationCreated": false,
+        "actionRecordCreated": false,
+        "executionCreated": false,
+        "outcomePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "jrIntegrationActivated": false,
+        "validationOnly": true,
+        "persistentStoreWriteAllowed": false,
+        "routeSetDigest": "9bc564c82525efdcaabcaa6e0a309364efaf2b5579182aa868a9cd5c57f5f7a4"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/jr-navigation-intelligence-handoff-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-JR-NAVIGATION-INTELLIGENCE-HANDOFF-v1.0.0",
+        "handoffCode": "RNE-JR-HANDOFF-VALIDATION-0001",
+        "handoffVersion": "1.0.0",
+        "objectType": "JR_NAVIGATION_INTELLIGENCE_HANDOFF",
+        "dataType": "NAVIGATION_RECORD",
+        "journeyReference": "JR-FIXTURE-0001",
+        "currentPositionReference": {
+          "code": "RNE-POSITION-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "7b45b327f7f9c2c54a0b3f634927b44bf76c43c76dea21aeb33cfa26af74f7b0"
+        },
+        "targetReference": {
+          "code": "RNE-TARGET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "a9bf8e3108b7cbb4b51f9e91e14c3843773a3937ff3e9285c0bedf28d176c398"
+        },
+        "canonicalReadoutReference": {
+          "code": "RRE-READOUT-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "dataType": "REALITY_READOUT_RECORD",
+          "authorityRuntime": "RRE"
+        },
+        "responseReferences": {
+          "navigationOptionReferences": [
+            "RNE-OPTION-SET-VALIDATION-0001-OBSERVE",
+            "RNE-OPTION-SET-VALIDATION-0001-CLARIFY",
+            "RNE-OPTION-SET-VALIDATION-0001-VERIFY",
+            "RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE"
+          ],
+          "tradeoffReferences": [
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-OBSERVE:TRADEOFF",
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-CLARIFY:TRADEOFF",
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-VERIFY:TRADEOFF",
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE:TRADEOFF"
+          ],
+          "riskReferences": [
+            "GOVERNED-RISK-VALIDATION-0001"
+          ],
+          "reversibilityReferences": [
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-OBSERVE:REVERSIBILITY",
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-CLARIFY:REVERSIBILITY",
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-VERIFY:REVERSIBILITY",
+            "RNE-DECISION-SUPPORT-VALIDATION-0001:RNE-OPTION-SET-VALIDATION-0001-RECONFIGURE:REVERSIBILITY"
+          ],
+          "scenarioReferences": [
+            "RNE-SCENARIO-SET-VALIDATION-0001-OBSERVE",
+            "RNE-SCENARIO-SET-VALIDATION-0001-CLARIFY",
+            "RNE-SCENARIO-SET-VALIDATION-0001-VERIFY",
+            "RNE-SCENARIO-SET-VALIDATION-0001-RECONFIGURE"
+          ],
+          "routeCandidateReferences": [
+            "RNE-ROUTE-SET-VALIDATION-0001-OBSERVE",
+            "RNE-ROUTE-SET-VALIDATION-0001-CLARIFY",
+            "RNE-ROUTE-SET-VALIDATION-0001-VERIFY",
+            "RNE-ROUTE-SET-VALIDATION-0001-RECONFIGURE"
+          ]
+        },
+        "dataPurpose": "SERVICE_DELIVERY",
+        "consentReferences": [
+          "RDG-CONSENT-VALIDATION-0001"
+        ],
+        "governanceReferences": [
+          "RDG-PURPOSE-SERVICE-DELIVERY",
+          "RDG-RNE-NAVIGATION-READ-EXTENSION-v1"
+        ],
+        "integrationState": "REFERENCE_ONLY_ACTIVE",
+        "authorityBoundary": {
+          "workflowAuthority": "JR",
+          "navigationIntelligenceAuthority": "RNE",
+          "readoutAuthority": "RRE",
+          "dataGovernanceAuthority": "RDG",
+          "professionalJudgmentAuthority": "PR"
+        },
+        "journeyStageMutationCreated": false,
+        "journeyWorkflowImplementedByRne": false,
+        "navigationReasoningImplementedByJr": false,
+        "professionalJudgmentCreated": false,
+        "executionCreated": false,
+        "rawReadoutCopied": false,
+        "productionExecutionActivated": false,
+        "handoffDigest": "a35f0799a2d107dfa9b5e1260558949e85f7c94825cb7d7d4e271676908c86ad"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/professional-review-gate-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-PROFESSIONAL-REVIEW-GATE-v1.0.0",
+        "gateCode": "RNE-PROFESSIONAL-GATE-VALIDATION-0001",
+        "gateVersion": "1.0.0",
+        "objectType": "PROFESSIONAL_REVIEW_GATE",
+        "dataType": "NAVIGATION_RECORD",
+        "riskContextReference": {
+          "code": "RNE-RISK-CONTEXT-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "91daf4649c84810eb77bdde3a3cea7f52c4419de236467ca1d51b9a40ec1fc92"
+        },
+        "routeSetReference": {
+          "code": "RNE-ROUTE-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "9bc564c82525efdcaabcaa6e0a309364efaf2b5579182aa868a9cd5c57f5f7a4"
+        },
+        "professionalReviewTriggers": [
+          {
+            "riskReference": "GOVERNED-RISK-VALIDATION-0001",
+            "authorityReference": "AUTHORIZED-RISK-SOURCE-VALIDATION-0001",
+            "triggerClass": "HIGH_RISK_NAVIGATION"
+          }
+        ],
+        "professionalReviewState": "REQUIRED_BY_GOVERNED_TRIGGER",
+        "professionalHandoffReference": "JR-HANDOFF-PROFESSIONAL-VALIDATION-0001",
+        "pwsRequiredGateCount": 8,
+        "authorityBoundary": {
+          "triggerFactAuthority": "UPSTREAM_GOVERNED_RISK_AUTHORITY",
+          "reviewRequirementMappingAuthority": "RNE",
+          "professionalJudgmentAuthority": "PR",
+          "assignmentAuthority": "PWS_ASSIGNMENT_RUNTIME"
+        },
+        "professionalSelectionCreated": false,
+        "professionalResponsibilityCreated": false,
+        "assignmentCreated": false,
+        "professionalJudgmentCreated": false,
+        "routeSelectionCreated": false,
+        "navigationExecutionCreated": false,
+        "continuationWithoutRequiredReviewAllowed": false,
+        "productionExecutionActivated": false,
+        "gateDigest": "2e2fad562fa2f127c9accdadc1cf98145773bdf13a73ddf1456e6633c0957d89"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/navigation-outcome-feedback-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-NAVIGATION-OUTCOME-FEEDBACK-v1.0.0",
+        "feedbackCode": "RNE-FEEDBACK-VALIDATION-0001",
+        "feedbackVersion": "1.0.0",
+        "objectType": "NAVIGATION_OUTCOME_FEEDBACK",
+        "dataType": "NAVIGATION_RECORD",
+        "routeSetReference": {
+          "code": "RNE-ROUTE-SET-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "9bc564c82525efdcaabcaa6e0a309364efaf2b5579182aa868a9cd5c57f5f7a4"
+        },
+        "actionReference": {
+          "code": "RMO-ACTION-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "1111111111111111111111111111111111111111111111111111111111111111",
+          "dataType": "RUNTIME_STATE_RECORD",
+          "authorityRuntime": "RMO"
+        },
+        "outcomeReference": {
+          "code": "RMO-OUTCOME-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "2222222222222222222222222222222222222222222222222222222222222222",
+          "dataType": "RUNTIME_STATE_RECORD",
+          "authorityRuntime": "RMO"
+        },
+        "realityDiffReference": {
+          "code": "RMO-DIFF-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "3333333333333333333333333333333333333333333333333333333333333333",
+          "dataType": "RUNTIME_STATE_RECORD",
+          "authorityRuntime": "RMO"
+        },
+        "unknownReferences": [
+          "RMO-UNKNOWN-VALIDATION-0001"
+        ],
+        "governanceReferences": [
+          "RDG-PURPOSE-SERVICE-DELIVERY"
+        ],
+        "feedbackState": "REFERENCES_BOUND_FOR_REPOSITIONING",
+        "nextNavigationCapability": "CURRENT_POSITION_REASSESSMENT_AVAILABLE",
+        "authorityBoundary": {
+          "actionOutcomeDiffAuthority": "RMO",
+          "evidenceEvaluationAuthority": "RRE",
+          "navigationFeedbackBindingAuthority": "RNE",
+          "effectivenessAuthority": "VAL",
+          "professionalJudgmentAuthority": "PR"
+        },
+        "causalityClaimed": false,
+        "effectivenessDetermined": false,
+        "targetChangedAutomatically": false,
+        "optionSelectedAutomatically": false,
+        "routeSelectedAutomatically": false,
+        "actionExecutedByRne": false,
+        "outcomeCreatedByRne": false,
+        "realityDiffCreatedByRne": false,
+        "productionExecutionActivated": false,
+        "feedbackDigest": "bf1300fae048e9cf555eb967bf5720c6bcce21e3e272955dd6e29419a01ab3b1"
+      }
+    },
+    {
+      "schema": "content/runtime/reality-navigation-engine/schemas/navigation-validation-request-v1.schema.json",
+      "record": {
+        "schemaVersion": "PHI-OS-RNE-NAVIGATION-VALIDATION-REQUEST-v1.0.0",
+        "validationRequestCode": "RNE-VAL-REQUEST-VALIDATION-0001",
+        "validationRequestVersion": "1.0.0",
+        "objectType": "NAVIGATION_EFFECTIVENESS_VALIDATION_REQUEST",
+        "dataType": "NAVIGATION_RECORD",
+        "validatorRuntime": "VAL",
+        "validationScope": "NAVIGATION_EFFECTIVENESS",
+        "jrHandoffReference": {
+          "code": "RNE-JR-HANDOFF-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "a35f0799a2d107dfa9b5e1260558949e85f7c94825cb7d7d4e271676908c86ad"
+        },
+        "professionalGateReference": {
+          "code": "RNE-PROFESSIONAL-GATE-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "2e2fad562fa2f127c9accdadc1cf98145773bdf13a73ddf1456e6633c0957d89"
+        },
+        "feedbackReference": {
+          "code": "RNE-FEEDBACK-VALIDATION-0001",
+          "version": "1.0.0",
+          "digest": "bf1300fae048e9cf555eb967bf5720c6bcce21e3e272955dd6e29419a01ab3b1"
+        },
+        "requestedChecks": [
+          "TARGET_ALIGNMENT_OBSERVATION",
+          "CONSTRAINT_RESPECT",
+          "RECOVERY_OBSERVATION",
+          "UNEXPECTED_CHANGE_REVIEW",
+          "NO_CHANGE_REVIEW"
+        ],
+        "governanceReferences": [
+          "RDG-PURPOSE-SERVICE-DELIVERY",
+          "RDG-VAL-NAVIGATION-READ-EXTENSION-v1"
+        ],
+        "validationStatus": "PENDING_VAL_EXECUTION",
+        "expectedResultDataType": "SYSTEM_OPERATION_RECORD",
+        "authorityBoundary": {
+          "validationAuthority": "VAL",
+          "navigationAuthority": "RNE",
+          "realityStateAuthority": "RMO",
+          "evidenceAuthority": "RRE",
+          "professionalJudgmentAuthority": "PR"
+        },
+        "rneSelfValidationPerformed": false,
+        "effectivenessDetermined": false,
+        "causalityClaimed": false,
+        "successDeclared": false,
+        "productionExecutionActivated": false,
+        "validationRequestDigest": "cefa099f82ac10e4756add812aa5951846a5f7c8361b887219a6fda746bd4564"
+      }
+    }
+  ]
+}
