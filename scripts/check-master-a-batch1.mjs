@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import Ajv from 'ajv';
 import {onRequestGet} from '../functions/api/ask-phios.js';
+import {assertKapEvidenceOrMaintenance} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
 const dir='content/knowledge/structured/successors/master-a-v2-batch1';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -11,6 +12,8 @@ for(const r of [...audit.owners,...audit.unrelatedFiles])assert.equal(sha(r.path
 const admission=read('content/knowledge/answer-projection/freeze/kap-book-vii-v2-publication-admitted-successor-v1.json');
 assert.equal(admission.status,'BOOK_VII_V2_CANONICAL_PUBLICATION_ADMITTED');
 for(const r of [...admission.acceptedOutputs,admission.predecessorReviewFreeze,admission.predecessorProductionFreeze,admission.humanAcceptance])assert.equal(sha(r.path),r.sha256,r.path);
+const predecessor=read(admission.predecessorProductionFreeze.path);
+for(const r of [...predecessor.frozenOutputs,...predecessor.historical])assertKapEvidenceOrMaintenance(r);
 const nodes=read(audit.owners.find(x=>x.capability==='bookVII').path).nodes;
 assert.equal(nodes.length,100);assert.equal(new Set(nodes.map(n=>n.nodeCode)).size,100);
 const figs=read(audit.owners.find(x=>x.capability==='figures').path).figures;

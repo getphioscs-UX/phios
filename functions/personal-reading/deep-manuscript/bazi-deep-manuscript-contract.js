@@ -1,6 +1,6 @@
 // Independent BaZi manuscript lane. No legacy composer or semantic judge imports.
 export const VERSION='BAZI-DEEP-MANUSCRIPT-R2-1';
-export const VERSIONS=Object.freeze({authority:'BDM-AUTHORITY-1',batch:'BDM-BATCH-2',prompt:'BDM-PROMPT-2',schema:'BDM-SCHEMA-1',checkpoint:'BDM-CHECKPOINT-1',compiler:'BDM-PUBLICATION-2',diagram:'BDM-DIAGRAM-2',pagePlan:'BDM-PAGES-2',renderer:'BDM-RENDERER-2',printShell:'PHI-OS-REPORT-PRINT-SHELL-V2'});
+export const VERSIONS=Object.freeze({authority:'BDM-AUTHORITY-1',batch:'BDM-BATCH-2',prompt:'BDM-PROMPT-2',schema:'BDM-SCHEMA-1',checkpoint:'BDM-CHECKPOINT-1',compiler:'BDM-PUBLICATION-3',diagram:'BDM-DIAGRAM-3',pagePlan:'BDM-PAGES-3',renderer:'BDM-RENDERER-3',printShell:'PHI-OS-REPORT-PRINT-SHELL-V2'});
 export const LOCALES=Object.freeze(['zh-Hans','en']);
 export const FIELD=Object.freeze({'zh-Hans':'zhHansManuscript',en:'enManuscript'});
 export const SECTIONS=Object.freeze([
