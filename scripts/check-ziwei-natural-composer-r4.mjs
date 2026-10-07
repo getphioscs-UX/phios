@@ -48,8 +48,16 @@ assert(privateRenderer.includes('!ALLOWED_ZIWEI_COMPOSITIONS.has(compositionVers
 assert(privateRenderer.includes("compositionVersion!==candidate?.snapshot?.compositionVersion"));
 
 const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
-assert(binding.includes("ziwei-professional-synthesis-r5-generation.js"));
-assert(binding.includes('generateZiweiProfessionalSynthesisR5Candidate'));
+const cutoverPath='docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json';
+if(fs.existsSync(cutoverPath)){
+ const cutover=JSON.parse(fs.readFileSync(cutoverPath,'utf8'));
+ assert.equal(cutover.schemaVersion,'ZWR-VFR-R1-DEEP-PRODUCTION-CUTOVER-v2');
+ assert(binding.includes("ziwei-vfr-r1-generation.js"),'post-cutover canonical binding must use Zi Wei VFR generator');
+ assert(binding.includes('generateZiweiVfrR1Candidate'),'post-cutover canonical binding generator drift');
+}else{
+ assert(binding.includes("ziwei-professional-synthesis-r5-generation.js"),'pre-cutover canonical binding must remain on R5');
+ assert(binding.includes('generateZiweiProfessionalSynthesisR5Candidate'),'pre-cutover R5 binding drift');
+}
 assert(fs.existsSync('functions/report-delivery/ziwei-natural-composer-r4-generation.js'));
 const account=fs.readFileSync('functions/account/ziwei-account-delivery.js','utf8');
 assert(account.includes('compositionVersion:candidate.snapshot.compositionVersion'));
@@ -70,4 +78,4 @@ const bazi=fs.readFileSync('assets/customer-ui/surfaces/bazi-print-shell-v2.css'
 for(const selector of ['.pub-opener-heading','.pub-narrative','.pub-master-insights'])assert(bazi.includes(`[data-section="S07_HEALTH"][data-page-family="SECTION_OPENER_PAGE"] ${selector}`));
 assert(bazi.includes('left:auto!important;right:17mm!important;width:92mm!important'));
 
-console.log('PASS historical Zi Wei R4 governed composition and 33-page renderer remain compatible; current account binding uses R5; Production V1 remains frozen; BaZi S07 safe-zone bound.');
+console.log('PASS historical Zi Wei R4 governed composition and 33-page renderer remain compatible; canonical account binding matches the current cutover state; Production V1 remains frozen; BaZi S07 safe-zone bound.');
