@@ -5,6 +5,7 @@ import process from 'node:process';
 import { createHash } from 'node:crypto';
 import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
+import { spawnSync } from 'node:child_process';
 import { S3Client, HeadObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { textItemsToLines, normalizeOverprintedHeading } from './lib/knowledge-manuscripts/searchable-pdf-extraction.mjs';
@@ -30,10 +31,10 @@ const writeJson=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n','utf8');
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const text=v=>String(v??'').trim();
 
-function creds(){
+function envCreds(){
  const names=['PHIOS_MANUSCRIPT_R2_ACCOUNT_ID','PHIOS_MANUSCRIPT_R2_ACCESS_KEY_ID','PHIOS_MANUSCRIPT_R2_SECRET_ACCESS_KEY'];
  const missing=names.filter(n=>!text(process.env[n]));
- if(missing.length) throw new Error('BOOK_I_V3_R2_CREDENTIALS_REQUIRED:'+missing.join(','));
+ if(missing.length) return null;
  const configured=text(process.env.PHIOS_MANUSCRIPT_R2_BUCKET)||BUCKET;
  if(configured!==BUCKET) throw new Error('BOOK_I_V3_R2_BUCKET_MISMATCH');
  return {
@@ -49,6 +50,27 @@ function clientFor(c){return new S3Client({
  forcePathStyle:true,
  credentials:{accessKeyId:c.accessKeyId,secretAccessKey:c.secretAccessKey}
 });}
+function wranglerExecutable(){
+ const local=path.join(ROOT,'node_modules','wrangler','bin','wrangler.js');
+ if(fs.existsSync(local)) return {cmd:process.execPath,args:[local]};
+ return {cmd:'npx',args:['wrangler']};
+}
+async function downloadViaWrangler(){
+ await fsp.mkdir(TMP,{recursive:true});
+ if(fs.existsSync(PDF)) await fsp.rm(PDF,{force:true});
+ const target=`${BUCKET}/${SOURCE_KEY}`;
+ const w=wranglerExecutable();
+ const result=spawnSync(w.cmd,[...w.args,'r2','object','get',target,'--file',PDF,'--remote'],{
+   cwd:ROOT,
+   stdio:'inherit',
+   shell:false,
+   env:process.env
+ });
+ if(result.error) throw result.error;
+ if(result.status!==0 || !fs.existsSync(PDF)) throw new Error('BOOK_I_V3_WRANGLER_DOWNLOAD_FAILED');
+ const bytes=await fsp.readFile(PDF);
+ return {sizeBytes:bytes.length,sha256:sha(bytes),authMode:'WRANGLER_LOGIN'};
+}
 
 async function download(client,bucket,key){
  await fsp.mkdir(TMP,{recursive:true});
@@ -145,10 +167,17 @@ function counts(sections){const out={};for(const s of sections)out[s.partCode]=(
 async function main(){
  const apply=process.argv.includes('--apply');
  if(!apply) throw new Error('BOOK_I_V3_APPLY_REQUIRED');
- const c=creds(),client=clientFor(c);
- const head=await client.send(new HeadObjectCommand({Bucket:c.bucket,Key:SOURCE_KEY,ChecksumMode:'ENABLED'}));
- const dl=await download(client,c.bucket,SOURCE_KEY);
- if(Number(head.ContentLength)!==dl.sizeBytes) throw new Error('BOOK_I_V3_HEAD_DOWNLOAD_SIZE_MISMATCH');
+ let dl;
+ const ec=envCreds();
+ if(ec){
+   const client=clientFor(ec);
+   const head=await client.send(new HeadObjectCommand({Bucket:ec.bucket,Key:SOURCE_KEY,ChecksumMode:'ENABLED'}));
+   dl=await download(client,ec.bucket,SOURCE_KEY);
+   if(Number(head.ContentLength)!==dl.sizeBytes) throw new Error('BOOK_I_V3_HEAD_DOWNLOAD_SIZE_MISMATCH');
+   dl.authMode='S3_ENV_CREDENTIALS';
+ }else{
+   dl=await downloadViaWrangler();
+ }
  const extracted=await extractPages();
  const built=buildCorpusAndSegments(extracted.pages);
  const corpusSha=sha(Buffer.from(built.corpus,'utf8'));
@@ -217,7 +246,7 @@ async function main(){
 
  console.log(JSON.stringify({
   status:'BOOK_I_V3_BINARY_VERIFIED_AND_SECTION_INVENTORY_READY_FOR_HUMAN_REVIEW',
-  source:{objectKey:SOURCE_KEY,sizeBytes:dl.sizeBytes,sha256:dl.sha256,pageCount:extracted.pageCount},
+  source:{objectKey:SOURCE_KEY,sizeBytes:dl.sizeBytes,sha256:dl.sha256,pageCount:extracted.pageCount,authMode:dl.authMode},
   extraction:{textItems:extracted.totalItems,corpusCharCount:built.corpus.length,corpusSha256:corpusSha,rawMarkerCount:built.rawMarkerCount,logicalMarkerCount:built.logicalMarkerCount,totalSegments:built.sections.length,partCounts:counts(built.sections)},
   repoWrites:[ADMISSION,INVENTORY,INTEGRITY],
   privateWrites:[path.relative(ROOT,PDF),path.relative(ROOT,path.join(TMP,'v3-full-corpus.txt')),path.relative(ROOT,path.join(TMP,'v3-extraction-report.json'))],
