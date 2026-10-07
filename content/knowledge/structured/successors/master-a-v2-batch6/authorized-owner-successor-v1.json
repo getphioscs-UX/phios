@@ -1,0 +1,25 @@
+{
+  "status": "EXPLICIT_USER_AUTHORIZED_CURRENT_OWNER_REPAIR",
+  "work": "A-BATCH-6 BOOK V SOURCE GAP RECONCILIATION",
+  "source": "EXPLICIT_USER_MESSAGE",
+  "classification": "INTENTIONALLY_WITHHELD",
+  "approvedChanges": [
+    {
+      "path": "functions/api/ask-phios.js",
+      "sha256": "114dcc0fcf88ca8e3f741caac43a95e84e391eb071316edc7f6a057f98a4e760",
+      "predecessorSha256": "114dcc0fcf88ca8e3f741caac43a95e84e391eb071316edc7f6a057f98a4e760",
+      "currentSha256": "9846af15c3fa01d32e5989cb22baabc5cf3cb1e667ccc0f1e4468b9c61b8a4fc",
+      "reason": "Bound BOOK_SOURCE_UNAVAILABLE to HTTP 409 with UNKNOWN availability, no fallback"
+    },
+    {
+      "path": "scripts/build-book-v-pka-r1-publication.mjs",
+      "sha256": "557d83823ced1caab33622a3a63c3ae7a88da5883f3ac0704d84be1cbe9250b8",
+      "predecessorSha256": "557d83823ced1caab33622a3a63c3ae7a88da5883f3ac0704d84be1cbe9250b8",
+      "currentSha256": "ed6726ece51fce9df2ed94bb6bb4e1e43b801154596450058a06f7f2785bc543",
+      "reason": "Prevent intentionally withheld public manuscript readings from being regenerated"
+    }
+  ],
+  "canonicalRouteUnchanged": "/api/ask-phios",
+  "newRuntimeOwner": false,
+  "productionAdmissionGranted": false
+}

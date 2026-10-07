@@ -135,13 +135,24 @@ export async function onRequestGet(context) {
     });
   } catch (error) {
     const code = String(error?.message || 'KAP_ASK_PHIOS_FAILED');
-    const status = code === 'CKA_REALITY_CONTEXT_NOT_AUTHORIZED' ? 403
+    const sourceUnavailable = code === 'BOOK_SOURCE_UNAVAILABLE';
+    const status = sourceUnavailable ? 409
+      : code === 'CKA_REALITY_CONTEXT_NOT_AUTHORIZED' ? 403
       : code === 'CKA_GUEST_FOLLOW_UP_LIMIT_REACHED' ? 429
         : code.startsWith('CKA_') || code === 'KAP_QUESTION_INVALID' || code === 'KAP_LOCALE_UNSUPPORTED' || code === 'KAP_ANSWER_DEPTH_UNSUPPORTED' ? 400
           : 500;
     return json({
       ok: false,
-      error: { code },
+      error: { code, ...(sourceUnavailable ? { message: '当前所需来源无法公开读取，因此暂不能依据该来源回答。' } : {}) },
+      ...(sourceUnavailable ? {
+        availability: {
+          state: 'SOURCE_UNAVAILABLE',
+          answerState: 'UNKNOWN',
+          reason: 'PUBLIC_SOURCE_NOT_AVAILABLE',
+          fallbackUsed: false,
+          authorityGranted: false
+        }
+      } : {}),
       governance: {
         canonicalAuthorityCreated: false,
         publicationCreated: false,

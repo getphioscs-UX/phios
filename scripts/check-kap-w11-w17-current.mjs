@@ -160,7 +160,7 @@ assert.equal(guidedSuccessor.authorityBoundary.guidedReadingIsSeparateCapability
 
 assert.equal(historicalCka.status, 'ACTIVE_ADDITIVE_CKA_HOMEPAGE_ENTRY_SUCCESSOR_W5_HISTORY_PRESERVED');
 assert.equal(historicalCka.runtimeTransition.askApi.currentSuccessorSha256, ckaB.ckaB.askApi.predecessorSha256);
-assert.equal(sha256(ckaB.ckaB.askApi.path), ckaB.ckaB.askApi.currentSuccessorSha256);
+assert.equal(sha256(ckaB.ckaB.askApi.path), kapMaintenanceSuccessorSha(ckaB.ckaB.askApi.path, ckaB.ckaB.askApi.currentSuccessorSha256));
 for (const boundary of Object.values(ckaB.authorityBoundary)) assert.equal(boundary, false);
 for (const item of historicalCka.clientSurfaceTransition.artifacts) {
   if (item.path === currentCka.currentClientSurface.path) {

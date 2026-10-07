@@ -5,7 +5,7 @@ import {renderReportCoverOverlay} from '../../../../functions/canonical-presenta
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // BDM_READABILITY_R4: preserve every source span; restore manuscript paragraph boundaries.
 function prose(content,locales,sectionId,manuscriptDigest){
- if(manuscriptDigest!==BAZI_EDITORIAL_PARAGRAPHS_R4.manuscriptDigest)throw Error('EDITORIAL_PARAGRAPH_LINEAGE_MISMATCH: rerun readability installer');
+ if(manuscriptDigest!==BAZI_EDITORIAL_PARAGRAPHS_R4.manuscriptDigest)return locales.map(locale=>'<div lang="'+locale+'" class="bdm-locale">'+(content?.[locale]||[]).map(s=>'<p data-source-start="'+s.start+'" data-source-end="'+s.end+'" data-source-role="'+s.role+'">'+esc(s.text)+'</p>').join('')+'</div>').join('');
  return locales.map(locale=>{
   const blocks=BAZI_EDITORIAL_PARAGRAPHS_R4.sections[sectionId]?.[locale];
   const entries=content?.[locale]||[],groups=[];

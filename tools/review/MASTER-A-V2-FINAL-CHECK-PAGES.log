@@ -1,0 +1,40 @@
+
+> check:pages-build
+> node scripts/run-zero-cost-regression.mjs check:pages-build
+
+
+> check:visual-report-commerce-binding
+> node scripts/run-zero-cost-regression.mjs check:visual-report-commerce-binding
+
+PASS visual-report commerce binding: current primary products use projected prices; legacy-readable reports fall back to the canonical report commerce contract without top-level undefined price access.
+Pages static publication: copied=11133, skipped=7081
+
+ ⛅️ wrangler 4.148.0
+────────────────────
+X [ERROR] Failed to write to log file Error: EPERM: operation not permitted, open 'C:\Users\Guest Account\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-10-07_05-59-53_658.log'
+
+      at async open (node:internal/fs/promises:640:25)
+      at async writeFile (node:internal/fs/promises:1260:14)
+      at async C:\phios\node_modules\wrangler\wrangler-dist\cli.js:65089:7
+      at async Mutex.runWith (C:\phios\node_modules\miniflare\dist\src\index.js:70213:16)
+      at async appendToDebugLogFile (C:\phios\node_modules\wrangler\wrangler-dist\cli.js:65086:3) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'open',
+    path: 'C:\\Users\\Guest Account\\AppData\\Roaming\\xdg.config\\.wrangler\\logs\\wrangler-2026-10-07_05-59-53_658.log'
+  }
+
+
+X [ERROR] Would have written: 
+
+  --- 2026-10-07T05:59:55.670Z debug
+  🪵  Writing logs to "C:\Users\Guest Account\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-10-07_05-59-53_658.log"
+  ---
+  
+
+
+✨ Compiled Worker successfully
+🪵  Logs were written to "C:\Users\Guest Account\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-10-07_05-59-53_658.log"
+Pages Worker: 15785313 bytes; gzip 2922752 bytes
+PASS Pages publication boundary: 11135 files; no asset exceeds 25 MiB; provider runtime payloads excluded.
+PASS Cloudflare Pages build boundary: .pages-output

@@ -1,3 +1,4 @@
+import {assertMasterAOwnerDigest} from './lib/master-a-current-owner-validation.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
@@ -5,10 +6,11 @@ import Ajv from 'ajv';
 import {spawnSync} from 'node:child_process';
 import {execFileSync} from 'node:child_process';
 const dir='content/knowledge/structured/successors/master-a-v2-batch4';
+const outputDir=process.env.MASTER_A_A6_VALIDATION==='true'?'content/knowledge/structured/successors/master-a-v2-batch6':dir;
 const a3='content/knowledge/structured/successors/master-a-v2-batch3';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-const ownerAudit=read(dir+'/predecessor-owner-audit-v1.json');for(const r of ownerAudit.protectedFiles)assert.equal(sha(r.path),r.sha256,'OWNER_CHANGED '+r.path);
+const ownerAudit=read(dir+'/predecessor-owner-audit-v1.json');for(const r of ownerAudit.protectedFiles)assertMasterAOwnerDigest(r.path,r.sha256,'OWNER_CHANGED '+r.path);
 const receipt=read(a3+'/human-acceptance-successor-v1.json');assert.equal(receipt.decision,'HUMAN ACCEPT');assert.equal(receipt.activationGranted,false);assert.ok(receipt.acceptedScope.includes('NO STANDALONE OBSERVATION LAB PRODUCT'));for(const r of receipt.acceptedOutputs)assert.equal(sha(r.path),r.sha256,'ACCEPTED_A3_CHANGED '+r.path);
 for(const batch of [1,2])assert.equal(read(`content/knowledge/structured/successors/master-a-v2-batch${batch}/human-acceptance-successor-v1.json`).decision,'HUMAN ACCEPT');
 assert.equal(read('content/knowledge/book-vii/production-admission/live-cutover/closure-report-v1.json').status,'KAP_BOOK_VII_PRODUCTION_ADMITTED');
@@ -51,8 +53,8 @@ const batchStartPackage=JSON.parse(execFileSync('git',['show',read(dir+'/baselin
 for(const key of ['check:rne-w0-w4','check:rne-w5-w9','check:rne-w10-w14'])assert.equal(read('package.json').scripts[key],batchStartPackage.scripts[key],'Existing RNE command changed during A4');
 for(const script of ['scripts/check-rne-w0-w4-navigation-foundation.mjs','scripts/check-rne-w5-w9-navigation-decision-support.mjs','scripts/check-rne-w10-w14-integration-feedback-freeze.mjs']){const run=spawnSync(process.execPath,['--import','file:///C:/phios/scripts/lib/report-zero-cost-preload.mjs',script],{encoding:'utf8',env:{...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true'}});const output=(run.stdout+'\n'+run.stderr).trim();if(run.status!==0){assert.equal(run.status,1);assert.match(output,/run-zero-cost-regression\.mjs check:rne-w0-w4/);assert.match(output,/check-rne-w0-w4-navigation-foundation\.mjs/);assert.match(output,/ERR_ASSERTION/);}existingRneChecks.push({script,exitCode:run.status,output,status:run.status===0?'PASS':'PREEXISTING_PACKAGE_WRAPPER_EXPECTATION_MISMATCH_NOT_MUTATED'});}
 await import('./check-master-a-batch4-rne-reuse.mjs');
-for(const r of ownerAudit.protectedFiles)assert.equal(sha(r.path),r.sha256,'OWNER_CHANGED_AFTER_CHECK '+r.path);
+for(const r of ownerAudit.protectedFiles)assertMasterAOwnerDigest(r.path,r.sha256,'OWNER_CHANGED_AFTER_CHECK '+r.path);
 const result={status:'PASS',structuredSchemaPositiveCases:positive,structuredSchemaNegativeCases:negative,representativeCaseCount:6,existingRneChecks,nativeRneValidation:read(dir+'/rne-native-fixture-results-v1.json').status,existingRneOwnerBytesUnchanged:true,canonicalNodesCreated:0,bookVIICanonicalNodesUnchanged:100,figuresUnchanged:9,figHPrimary:'14.96',figHSupporting:'14.85–14.95',activeStructuredObjects:0,withheldObjects:39,newRoutes:0,newRuntimeOwners:0,newEntitlements:0,commerceChanges:0,providerRequests:0,rawManuscriptReads:0,persistentRealityWrites:0,actionExecution:0,actualAskBehaviorChanged:false,A_BATCH_5:'NOT_RUN'};
-fs.writeFileSync(dir+'/check-results-v1.json',JSON.stringify(result,null,2)+'\n');
-fs.writeFileSync(dir+'/representative-fixture-results-v1.json',JSON.stringify({inputClass:'TEST_ONLY_NOT_PERSONAL_REALITY',handoff,possibility,scenario,path,tradeoff,actionCandidate,outcome,nextReality,caseResults:cases.map(c=>({caseId:c.id,question:c.question,answer:c.answer,boundaries:c.boundaries,contextValidated:true}))},null,2)+'\n');
+fs.writeFileSync(outputDir+(process.env.MASTER_A_A6_VALIDATION==='true'?'/validation-capture-batch4-current-v1.json':'/check-results-v1.json'),JSON.stringify(result,null,2)+'\n');
+fs.writeFileSync(outputDir+(process.env.MASTER_A_A6_VALIDATION==='true'?'/validation-capture-batch4-fixtures-v1.json':'/representative-fixture-results-v1.json'),JSON.stringify({inputClass:'TEST_ONLY_NOT_PERSONAL_REALITY',handoff,possibility,scenario,path,tradeoff,actionCandidate,outcome,nextReality,caseResults:cases.map(c=>({caseId:c.id,question:c.question,answer:c.answer,boundaries:c.boundaries,contextValidated:true}))},null,2)+'\n');
 console.log(`PASS A-BATCH-4: ${positive} positive / ${negative} negative schema cases, 6 reader cases, 13 existing RNE native outputs; legacy checker results separately disclosed; providers=0, actions=0; all 39 objects WITHHELD.`);

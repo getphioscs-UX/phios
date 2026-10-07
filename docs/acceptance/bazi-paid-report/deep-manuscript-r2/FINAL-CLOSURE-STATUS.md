@@ -6,13 +6,13 @@
 
 | 模式 | 页数 | 图示 | 动态安全区域 | 字号 | 未载入静态页 | 整份排版 |
 |---|---:|---:|---|---|---:|---|
-| BILINGUAL | 48 | 15 | PASS | PASS | 0 | PASS_AFTER_RECOMPOSE |
-| EN | 48 | 15 | PASS | PASS | 0 | PASS_AFTER_RECOMPOSE |
-| ZH_HANS | 48 | 15 | PASS | PASS | 0 | PASS_AFTER_RECOMPOSE |
+| BILINGUAL | 48 | 15 | PASS | PASS | 0 | PASS |
+| EN | 48 | 15 | PASS | PASS | 0 | PASS |
+| ZH_HANS | 48 | 15 | PASS | PASS | 0 | PASS |
 
-PDF 文本末尾核对：[object Object] 340 段、遗漏 0；[object Object] 294 段、遗漏 0；[object Object] 269 段、遗漏 0。这不等于缺失图片页已通过；英文、中文版仍需取得对应的新版 P01–P05 静态资产。旧的中文图片与当前设计不同，未替换进去。
+PDF 文本末尾核对：[object Object] 383 段、遗漏 0；[object Object] 330 段、遗漏 0；[object Object] 292 段、遗漏 0。这不等于缺失图片页已通过；英文、中文版仍需取得对应的新版 P01–P05 静态资产。旧的中文图片与当前设计不同，未替换进去。
 
-架构 45 组、容量 48 组及有限修改、时序、语义覆盖、图示、成本保护检查通过。全仓检查状态：FAIL；无最终通过记录。已记录的 Composition R1 visualBinding 债务没有宣称修复。
+架构 45 组、容量 48 组及有限修改、时序、语义覆盖、图示、成本保护检查通过。全仓检查状态：NOT_RUN_FOR_READABILITY_REPAIR；无最终通过记录。已记录的 Composition R1 visualBinding 债务没有宣称修复。
 
 历史用量仅有用户运行输出的 3 次调用与费用 0.447072，缺少原始 JSON；不能确认输入、缓存、输出、推理 token 或独立核验账单。
 

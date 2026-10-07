@@ -1,0 +1,25 @@
+
+> precheck
+> node scripts/run-zero-cost-regression.mjs precheck
+
+
+> check:report-provider-spend-protection
+> node scripts/run-zero-cost-regression.mjs check:report-provider-spend-protection
+
+node:fs:2422
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\phios\docs\acceptance\bazi-paid-report\visual-first-r1\ZERO-COST-GUARD-EVIDENCE.json'
+    at Object.writeFileSync (node:fs:2422:20)
+    at file:///C:/phios/scripts/check-report-provider-spend-protection.mjs:33:86
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\phios\\docs\\acceptance\\bazi-paid-report\\visual-first-r1\\ZERO-COST-GUARD-EVIDENCE.json'
+}
+
+Node.js v24.18.0
