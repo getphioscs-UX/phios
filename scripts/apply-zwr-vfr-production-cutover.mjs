@@ -10,13 +10,12 @@ const cachePath=root+'/DEEP-RENDER-CACHE.json';
 const decisionPath=root+'/HUMAN-DECISION.json';
 const reviewPath='tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html';
 const fitPath=root+'/PUBLICATION-FIT-PLAN.json';
-const registryPath='functions/personal-reading/visual-first/ziwei-vfr-accepted-deep-manuscript-registry.js';
 const generatorPath='functions/report-delivery/ziwei-vfr-r1-generation.js';
 
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const hash=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 
-for(const p of [repairedPath,publicationPath,cachePath,decisionPath,reviewPath,fitPath,registryPath,generatorPath,bindingPath]){
+for(const p of [repairedPath,publicationPath,cachePath,decisionPath,reviewPath,fitPath,generatorPath,bindingPath]){
  assert(fs.existsSync(p),'missing cutover evidence: '+p);
 }
 
@@ -47,11 +46,10 @@ assert(pages>=50&&pages<=80);
 assert.equal(decision.deterministicDiagramCount,15);
 
 const generator=fs.readFileSync(generatorPath,'utf8');
-for(const forbidden of ['composeZwrVfrOneCall','OPENAI_API_KEY','invokeOpenAIStructured','ZIWEI_R5_PAI_REGISTRY']){
- assert(!generator.includes(forbidden),'production generator must not depend on live provider path: '+forbidden);
-}
-assert(generator.includes('resolveAcceptedZwrVfrDeepManuscript'),'production generator must resolve accepted manuscript registry');
-assert(generator.includes('providerCalls:0'),'production generator must declare zero provider calls');
+assert(!generator.includes('composeZwrVfrOneCall'),'legacy one-call production path must remain retired');
+assert(generator.includes('composeZwrVfrProductionDeepManuscript'),'production generator must use approved automatic Deep Manuscript composer');
+assert(generator.includes("providerAuthority:'WRITING_ONLY_AUTOMATIC'"),'production provider authority must be automatic writing only');
+assert(generator.includes('semanticReviewCalls:0'),'production semantic AI reviewer must remain disabled');
 
 let src=fs.readFileSync(bindingPath,'utf8');
 if(src.includes("import {generateZiweiVfrR1Candidate} from './ziwei-vfr-r1-generation.js';")){
@@ -72,10 +70,11 @@ const receipt={
  schemaVersion:'ZWR-VFR-R1-DEEP-PRODUCTION-CUTOVER-v2',
  cutoverAt:new Date().toISOString(),
  from:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5-GENERATION-v1',
- to:'ZIWEI-VFR-R1-DEEP-REGISTRY-GENERATION-v2',
+ to:'ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3',
  oldHotPathRetiredFromCanonicalBinding:true,
- providerPolicy:'ACCEPTED_DEEP_MANUSCRIPT_REGISTRY_ZERO_PROVIDER',
+ providerPolicy:'AUTO_DEEP_MANUSCRIPT_WRITING_WITH_DETERMINISTIC_GATES',
  providerCallsDuringProductionPublication:0,
+ firstGenerationProviderPolicy:'BOUNDED_DEEP_WRITING_PLUS_TARGETED_REPAIR',
  semanticAiReviewCalls:0,
  acceptedAuthorityDigest:repaired.authorityDigest,
  acceptedManuscriptResultDigest:repaired.resultDigest,
@@ -85,8 +84,8 @@ const receipt={
  physicalPageCount:pages,
  adaptiveFitProfileVersion:fit.schemaVersion,
  deterministicDiagramCount:15,
- unmatchedAuthorityPolicy:'FAIL_CLOSED_AUTHORING_REQUIRED',
+ unseenAuthorityPolicy:'AUTO_GENERATE_FROM_CANONICAL_AUTHORITY',
  rollbackScript:'scripts/rollback-zwr-vfr-production-cutover.mjs'
 };
 fs.writeFileSync(root+'/PRODUCTION-CUTOVER.json',JSON.stringify(receipt,null,2)+'\n');
-console.log('PASS ZWR-VFR Deep Manuscript production cutover applied: accepted-registry zero-provider hot path active; unmatched authority fails closed; rollback retained.');
+console.log('PASS ZWR-VFR Deep Manuscript production cutover applied: automatic Deep Manuscript generation active for new canonical Authority; publication/rerender provider calls=0; rollback retained.');
