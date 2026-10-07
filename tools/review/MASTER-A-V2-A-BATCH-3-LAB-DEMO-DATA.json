@@ -1,0 +1,188 @@
+{
+  "cases": [
+    {
+      "id": "A",
+      "title": "市场价格今天上涨",
+      "objectType": "SIGNAL",
+      "window": "POINT",
+      "nodeRefs": [
+        "KN-B7-14-011",
+        "KN-B7-14-063"
+      ],
+      "observations": [
+        "价格记录显示今天上涨。"
+      ],
+      "signals": [
+        "价格差异"
+      ],
+      "evidence": [
+        "仍需核对市场、时间和原始来源。"
+      ],
+      "missing": [
+        "没有长期记录或结构关系资料。"
+      ],
+      "conflicts": [],
+      "changes": [
+        "相对于所选基线有价格差异。"
+      ],
+      "boundedStatement": "这是价格讯号，需要进一步核对它能支持哪项主张。",
+      "unknowns": [
+        "不能由一天价格变化判断结构已改变。"
+      ],
+      "boundaries": [
+        "SIGNAL != EVIDENCE",
+        "CURRENT != STRUCTURAL"
+      ],
+      "askQuestion": "为什么今天的市场资金流不能证明产业已经完成结构重组？"
+    },
+    {
+      "id": "B",
+      "title": "一周资金持续流入",
+      "objectType": "OBSERVATION_WINDOW",
+      "window": "SHORT_WINDOW",
+      "nodeRefs": [
+        "KN-B7-14-042",
+        "KN-B7-14-063"
+      ],
+      "observations": [
+        "教学示例：同一口径的一周流入记录。"
+      ],
+      "signals": [
+        "短期持续差异"
+      ],
+      "evidence": [
+        "需要原始日期、口径和来源。"
+      ],
+      "missing": [
+        "尚无关系、载体、路由和约束的结构证据。"
+      ],
+      "conflicts": [],
+      "changes": [
+        "一周内流向有所持续。"
+      ],
+      "boundedStatement": "短期记录有助于继续观察，不自动支持结构性主张。",
+      "unknowns": [
+        "长期持续性和结构重组仍未确定。"
+      ],
+      "boundaries": [
+        "CURRENT != STRUCTURAL"
+      ],
+      "askQuestion": "为什么今天的市场资金流不能证明产业已经完成结构重组？"
+    },
+    {
+      "id": "C",
+      "title": "八字和占星都说资源压力",
+      "objectType": "PERSPECTIVE",
+      "window": null,
+      "nodeRefs": [
+        "KN-B7-14-065",
+        "KN-B7-14-066",
+        "KN-B7-14-071"
+      ],
+      "observations": [
+        "两套方法的解释提到了相近主题。"
+      ],
+      "signals": [
+        "解释主题：资源压力"
+      ],
+      "evidence": [
+        "方法解释不作为现实证据；需要独立现实记录。"
+      ],
+      "missing": [
+        "输入独立性、实际负担与生活情境。"
+      ],
+      "conflicts": [],
+      "changes": [
+        "没有已验证的现实变化。"
+      ],
+      "boundedStatement": "这是模型解释的汇聚，可以提出候选主题。",
+      "unknowns": [
+        "主题是否对应个人现实，仍需核对。"
+      ],
+      "boundaries": [
+        "MODEL_CONVERGENCE != INDEPENDENT_EVIDENCE",
+        "INTERPRETATION != EVIDENCE"
+      ],
+      "askQuestion": "八字和占星都说同一件事，是不是就证明是真的？"
+    },
+    {
+      "id": "D",
+      "title": "员工感到组织压力高，财务报告显示收入增长",
+      "objectType": "PERSPECTIVE",
+      "window": null,
+      "nodeRefs": [
+        "KN-B7-14-074",
+        "KN-B7-14-090"
+      ],
+      "observations": [
+        "员工陈述工作压力高。",
+        "报告记载收入增长。"
+      ],
+      "signals": [
+        "不同范围的观察"
+      ],
+      "evidence": [
+        "分别保留本人陈述与报告来源。"
+      ],
+      "missing": [
+        "岗位范围、工作负担、会计口径与共同时间窗口。"
+      ],
+      "conflicts": [
+        "压力与收入不是同一主张，先核对范围，不强行判胜负。"
+      ],
+      "changes": [
+        "尚未建立可比变化。"
+      ],
+      "boundedStatement": "两项记录可能同时有效，并各有适用范围。",
+      "unknowns": [
+        "收入增长是否与压力变化有关尚未确定。"
+      ],
+      "boundaries": [
+        "PERSPECTIVE != TRUTH",
+        "DIFFERENCE != CAUSE"
+      ],
+      "askQuestion": "如果两个高质量证据互相冲突怎么办？"
+    },
+    {
+      "id": "E",
+      "title": "没有记录到某项变化",
+      "objectType": "UNKNOWN",
+      "window": null,
+      "nodeRefs": [
+        "KN-B7-14-085",
+        "KN-B7-14-086"
+      ],
+      "observations": [
+        "当前没有相应记录。"
+      ],
+      "signals": [],
+      "evidence": [
+        "无记录不作为不存在的证据。"
+      ],
+      "missing": [
+        "访问范围、采样解析度、记录保存状况。"
+      ],
+      "conflicts": [],
+      "changes": [
+        "不能判断变化是否发生。"
+      ],
+      "boundedStatement": "先保留观察缺口；知识状态交由既有 KAP 评估。",
+      "unknowns": [
+        "未观察不等于不存在，也不等于零。"
+      ],
+      "boundaries": [
+        "UNKNOWN != ZERO",
+        "UNOBSERVED != NONEXISTENT"
+      ],
+      "askQuestion": "为什么没有观察到不代表不存在？"
+    }
+  ],
+  "modes": [
+    "LEARN",
+    "DEMO",
+    "CURRENT_REALITY_REFERENCE",
+    "PROFESSIONAL_REFERENCE"
+  ],
+  "status": "WITHHELD_EXPERIMENTAL_NOT_ADMITTED",
+  "historicalOnly": true
+}

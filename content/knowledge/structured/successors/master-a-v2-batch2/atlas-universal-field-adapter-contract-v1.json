@@ -1,0 +1,69 @@
+{
+  "status": "PENDING_HUMAN_REVIEW",
+  "extends": {
+    "path": "content/knowledge/structured/successors/master-a-v2-batch1/universal-authority-contract-v1.json",
+    "sha256": "60aff8cfba82248bc292ffb6a10f996eac8f60e418cc84b3e50d02b25cfb4226"
+  },
+  "targetSchema": {
+    "path": "content/knowledge/structured/successors/master-a-v2-batch1/structured-knowledge-object-v2.schema.json",
+    "sha256": "85163acd03f95d37dd2e775db8d39e94f62d56b493639e0085c6e8f6ac881c0f"
+  },
+  "scope": "Declarative mapping of existing Atlas owners. Does not activate new public objects or change existing consumer behavior.",
+  "identity": {
+    "objectId": "Existing family-specific ID; do not allocate a second ID",
+    "bookCode": "Family owner BOOK-5 or BOOK-6",
+    "partCode": {
+      "BOOK-5": "PART-12",
+      "BOOK-6": "PART-13"
+    },
+    "nodeCode": "Resolve only an existing canonical node binding; absence => WITHHELD, never infer from topic."
+  },
+  "fields": {
+    "title": "Existing bilingual title/titleZh/titleEn",
+    "definition": "Existing reviewed definition/summary; absent => WITHHELD, never compose a canonical definition",
+    "sourceRefs": "Existing evidence/sources/relatedCanonicalNodes/relatedBookSections; retain provenance and version",
+    "relationships": "Existing relatedCases/windows/snapshots/dossiers only; links do not establish causation",
+    "asOfDate": "Existing asOfDate; null remains null",
+    "sourceFreshness": "Existing sourceFreshness/sourceDate/retrievedAt/staleState; missing => UNKNOWN",
+    "lastReviewedAt": "Existing lastReviewedAt; absent => null, no fabricated review date",
+    "version": "Existing version or owning registry version",
+    "supersedes": "Existing supersedes; absent => null",
+    "supersededBy": "Existing supersededBy; absent => null",
+    "unknownState": "Retain field-scoped unknowns; missing detailed evidence remains unresolved",
+    "authorityOwner": "Existing family owner; article and figure never replace it",
+    "authorityBoundary": "Historical knowledge and structured readout only, no live CIV state or operational fact",
+    "runtimeEligibility": "REFERENCE_ONLY until existing Runtime owner independently admits a candidate",
+    "runtimeHandoffType": "NONE",
+    "operationalAdmissionState": "NOT_ADMITTED",
+    "projectionState": "WITHHELD until canonical binding + definition + provenance + Human Review",
+    "status": "IN_REVIEW"
+  },
+  "bookVIIFields": {
+    "knowledgeState": null,
+    "observationTimeClass": null,
+    "claimAuthorityClass": null,
+    "rule": "Do not translate Book VI dataClass or signal into Book VII epistemic verdict. Existing KAP must evaluate it."
+  },
+  "nativeClassPolicy": {
+    "STRUCTURAL_KNOWLEDGE": "Existing Book VI native label; universal dataClass STRUCTURED_KNOWLEDGE only with native label retained",
+    "OBSERVED_SIGNAL": "Existing native signal label, never equated with evidence or assigned a Book VII state",
+    "otherDataClasses": "Reuse accepted universal class where exact identity holds; unsupported values withheld"
+  },
+  "admissionRequirements": [
+    "canonical node binding",
+    "reviewed definition",
+    "source provenance",
+    "unknown preservation",
+    "date/time/scope/entity/freshness checks for current readouts",
+    "Human Review",
+    "existing Runtime admission for operational eligibility"
+  ],
+  "forbidden": [
+    "article => object authority",
+    "visual/OCR => canonical text",
+    "dossier => live CIV state",
+    "current signal => KNOWN",
+    "projection => fact",
+    "score/grade/winner/loser ranking"
+  ]
+}

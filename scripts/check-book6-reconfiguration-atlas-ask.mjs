@@ -14,7 +14,7 @@ assert(contract.retrievalScope.partIds.includes('PART-13'));assert(contract.retr
 assert.equal(classifyAsk2Consumption({question:'第一次世界大战如何改变文明重组？',body:{entryContext:{bookCode:'BOOK-6',retrievalScope:scope}}}).mode,'CKA');
 const result=await retrieveAtlasScope({env,scope,locale:'zh-Hans',question:'第一次世界大战'});
 assert.equal(result.sources[0].bookCode,'BOOK-6');assert.equal(result.sources[0].partCode,'PART-13');assert.equal(result.sources[0].atlasEntityId,'RC-04');assert.match(result.sources[0].text,/第一次世界大战/);
-assert.deepEqual(result.chain.map(x=>x.stage),['ATLAS_ENTITY','RECONFIGURATION_CASE','RECONFIGURATION_WINDOW','WORLD_RECONFIGURATION_SNAPSHOT','CONTEMPORARY_RUNTIME_DOSSIER','LIVED_REALITY_LAYER','BOOK_VI_CANONICAL_SECTION','PART_13','BROADER_KNOWLEDGE']);
+assert.deepEqual(result.chain.map(x=>x.stage),['ATLAS_ENTITY','RECONFIGURATION_CASE','RECONFIGURATION_WINDOW','WORLD_RECONFIGURATION_SNAPSHOT','CONTEMPORARY_RUNTIME_DOSSIER','LIVED_REALITY_LAYER','RUNTIME_POSITION','BOOK_VI_CANONICAL_SECTION','PART_13','BROADER_KNOWLEDGE']);
 const snapshotScope=normalizeAtlasRetrievalScope({scopeType:'CIVILIZATION_RECONFIGURATION_ATLAS',bookCode:'BOOK-6',partCode:'PART-13',activeLayer:'snapshots',entityId:'WORLD_RECONFIGURATION_SNAPSHOT_2026'});
 const snapshot=await retrieveAtlasScope({env,scope:snapshotScope,locale:'en',question:'2026 world snapshot'});
 assert.equal(snapshot.sources[0].atlasEntityId,'WORLD_RECONFIGURATION_SNAPSHOT_2026');assert.match(snapshot.sources[0].text,/PRESENT/);

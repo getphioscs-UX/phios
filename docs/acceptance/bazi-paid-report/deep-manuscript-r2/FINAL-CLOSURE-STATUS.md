@@ -12,7 +12,7 @@
 
 PDF 文本末尾核对：[object Object] 272 段、遗漏 0；[object Object] 239 段、遗漏 0；[object Object] 221 段、遗漏 0。这不等于缺失图片页已通过；英文、中文版仍需取得对应的新版 P01–P05 静态资产。旧的中文图片与当前设计不同，未替换进去。
 
-架构 45 组、容量 48 组及有限修改、时序、语义覆盖、图示、成本保护检查通过。全仓检查状态：INCOMPLETE_TIMEOUT；> check:mcd-8。已记录的 Composition R1 visualBinding 债务没有宣称修复。
+架构 45 组、容量 48 组及有限修改、时序、语义覆盖、图示、成本保护检查通过。全仓检查状态：NOT_RUN_AFTER_SCOPED_FAILURE；无最终通过记录。已记录的 Composition R1 visualBinding 债务没有宣称修复。
 
 历史用量仅有用户运行输出的 3 次调用与费用 0.447072，缺少原始 JSON；不能确认输入、缓存、输出、推理 token 或独立核验账单。
 
