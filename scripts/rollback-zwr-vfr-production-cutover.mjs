@@ -25,7 +25,7 @@ fs.writeFileSync(bindingPath,src);
 fs.writeFileSync(root+'/PRODUCTION-ROLLBACK.json',JSON.stringify({
  schemaVersion:'ZWR-VFR-R1-DEEP-PRODUCTION-ROLLBACK-v1',
  rolledBackAt:new Date().toISOString(),
- from:'ZIWEI-VFR-R1-DEEP-REGISTRY-GENERATION-v2',
+ from:'ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3',
  to:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5-GENERATION-v1',
  reason:'EXPLICIT_OPERATOR_ROLLBACK',
  providerCalls:0
