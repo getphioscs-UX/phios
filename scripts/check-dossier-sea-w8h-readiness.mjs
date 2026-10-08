@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const c=read('content/civilization-atlas/reconfiguration/dossier-sea-w8c-current-authority-admission-v1.json');
+const d=read('content/civilization-atlas/reconfiguration/dossier-sea-w8d-rre-readout-v1.json');
+const e=read('content/civilization-atlas/reconfiguration/dossier-sea-w8e-semantic-basis-v1.json');
+const f=read('content/civilization-atlas/reconfiguration/dossier-sea-w8f-semantic-candidates-v1.json');
+const g=read('content/civilization-atlas/reconfiguration/dossier-sea-w8g-rp-candidates-v1.json');
+const h=read('content/civilization-atlas/reconfiguration/dossier-sea-w8h-position-human-review-v1.json');
+const i=read('content/civilization-atlas/reconfiguration/dossier-sea-w8i-closure-contract-v1.json');
+const canon=read('content/registry/runtime-position-48-v1.json');
+const cn=read('content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json');
+assert.equal(c.dossierId,'DOSSIER-SEA');
+assert.equal(c.counts.admittedClaims,7);
+assert.equal(c.admittedLaneIds.length,7);
+assert.equal(c.counts.scopeMismatch,1);
+assert.equal(d.status,'RRE_REQUIRED_LANES_CONSUMED');
+assert.equal(e.counts.evidenceReady,3);
+assert.equal(f.records.length,3);
+assert.equal(g.records.length,3);
+for(const r of g.records){
+  const p=canon.positions.find(x=>x.id===r.runtimePositionId);
+  assert.ok(p,'missing canonical RP '+r.runtimePositionId);
+  assert.equal(p.grammarId,r.grammarId);
+  assert.equal(p.realityDomainId,r.realityDomainId);
+  assert.equal(r.humanDecision,'PENDING');
+  assert.equal(r.boundaries.wholeDossierPositionImplied,false);
+  assert.equal(r.boundaries.cnPositionReuseUsed,false);
+}
+assert.equal(h.status,'READY_FOR_HUMAN_REVIEW');
+assert.equal(h.counts.pending,3);
+assert.equal(h.counts.accepted,0);
+assert.equal(i.status,'READY_BUT_NOT_ACTIVATED');
+assert.equal(i.activation.activated,false);
+assert.equal(i.goldenState,'NOT_CLOSED');
+assert.deepEqual(new Set(cn.records.filter(x=>x.decision==='ACCEPT').map(x=>x.candidateId)),new Set(['CN-RP-23-CN-W8F-SEM-ECONOMIC-LOGISTICS-RUNTIME','CN-RP-22-CN-W8F-SEM-BUSINESS-LOGISTICS-CARRIER']));
+console.log('PASS DOSSIER-SEA W8-H readiness: 7/7 required lanes admitted, 3 evidence-ready SEA semantic candidates mapped through current canonical registry, human decisions remain PENDING, CN acceptance unchanged, W8-I not activated.');
