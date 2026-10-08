@@ -48,6 +48,7 @@ const excludedTopLevel = new Set([
   'scripts',
   'workers',
   'docs',
+  'output',
   'tools',
   'review',
   'tests',

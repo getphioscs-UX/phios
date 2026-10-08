@@ -125,8 +125,8 @@ export function renderPersonalEvidenceFigure(figure,{locale='en',publicationRows
     }).join(''):'';
     // Raw IPIP means are not 0–100 indices. Preserve their native source
     // series as a separate table, without normalization or a master polygon.
-    const ipip=figure.pfig==='PFIG-002'?publicationSources.filter(c=>c.providerFamily==='IPIP_BIG_FIVE'&&Number.isFinite(c.value?.rawMean)):[];
-    const nativeSeries=ipip.length?`<div class="pe-native-series" data-source-series="IPIP_BIG_FIVE"><strong>大五人格原始均值 / Big Five native means</strong>${ipip.map(c=>`<div data-evidence-ref="${esc(c.signalRef)}">${esc(evidenceLabel(c.facetId||c.domainId,'zh-Hans'))} / ${esc(evidenceLabel(c.facetId||c.domainId,'en'))}: ${c.value.rawMean}</div>`).join('')}</div>`:'';
+    const ipip=figure.pfig==='PFIG-002'?publicationSources.filter(c=>c.providerFamily==='IPIP_BIG_FIVE'&&(Number.isFinite(c.value)||Number.isFinite(c.value?.rawMean))):[];
+    const nativeSeries=ipip.length?`<div class="pe-native-series" data-source-series="IPIP_BIG_FIVE"><strong>大五来源原值 / Big Five source-native values</strong>${ipip.map(c=>`<div data-evidence-ref="${esc(c.signalRef)}">${esc(evidenceLabel(c.facetId||c.domainId,'zh-Hans'))} / ${esc(evidenceLabel(c.facetId||c.domainId,'en'))}: ${typeof c.value==='number'?c.value:c.value.rawMean} · ${esc(evidenceLabel(c.sourceClass,'zh-Hans'))} / ${esc(evidenceLabel(c.sourceClass,'en'))}</div>`).join('')}</div>`:'';
     const map=['PFIG-007','PFIG-008'].includes(figure.pfig)&&publicationRows.length?`<div class="pe-state-map" data-state-map="${figure.pfig}">${publicationRows.map(r=>`<div class="pe-state-node" data-evidence-refs="${esc((r.sourceIds||[]).join(' '))}"><strong>${esc(r.zh)}<span lang="en">${esc(r.en)}</span></strong><p>${esc(r.stateZh)}<span lang="en">${esc(r.stateEn)}</span></p></div>`).join('')}</div>`:'';
     return `<figure class="pe-support-figure" data-pfig="${esc(figure.pfig)}" data-pfig-state="${figure.state}" aria-label="${title}"><figcaption>${title} · ${states[figure.state]}</figcaption>${radar}${map||body}${nativeSeries}</figure>`;
   }

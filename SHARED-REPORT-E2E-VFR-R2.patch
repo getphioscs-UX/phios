@@ -1,0 +1,629 @@
+diff --git a/content/reports/shared-report-delivery-e2e-contract-v2.json b/content/reports/shared-report-delivery-e2e-contract-v2.json
+new file mode 100644
+--- /dev/null
++++ b/content/reports/shared-report-delivery-e2e-contract-v2.json
+@@ -0,0 +1,45 @@
++{
++  "schemaVersion": "PHI-OS-SHARED-REPORT-DELIVERY-E2E-CONTRACT-v2.0.0",
++  "supersedes": "content/reports/shared-report-delivery-e2e-contract-v1.json",
++  "historicalContractPreserved": true,
++  "state": "BLOCKED_VFR_ADMISSION",
++  "profiles": {
++    "ZWR:ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3": {
++      "methodId": "ZWR",
++      "compositionVersion": "ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3",
++      "candidateSchemaVersion": "ZWR-VFR-R1-AUTO-DEEP-CANDIDATE-v3",
++      "publicationIrVersion": "ZWR-VFR-R1-DEEP-PUBLICATION-IR-v1",
++      "pagePlanVersion": "ZWR-VFR-R1-ADAPTIVE-LANGUAGE-SEQUENTIAL-v6",
++      "pagePolicy": "RECOMPUTE_FROM_ACCEPTED_PUBLICATION_IR",
++      "locales": [
++        "en",
++        "zh-Hans"
++      ],
++      "admission": {
++        "state": "BLOCKED",
++        "sourceAcceptanceDigest": null,
++        "rendererAcceptanceDigest": null,
++        "rendererWired": false,
++        "productionAdmissionGranted": false,
++        "sourceResultDigest": null,
++        "publicationIrDigest": null,
++        "pagePlanDigest": null
++      },
++      "blockers": [
++        "VFR currently inherits old production snapshot ID and 33-page report rather than a newly bound VFR delivery snapshot.",
++        "Private renderer has no VFR composition adapter.",
++        "No accepted VFR source/publication/render profile admission receipt is bound to this delivery version.",
++        "Live authenticated purchase/consent/release/private Library/two-session account evidence remains uncollected."
++      ]
++    }
++  },
++  "proofActions": [
++    "open-released",
++    "reopen"
++  ],
++  "generateInProof": false,
++  "providerRegenerationOnReopen": false,
++  "sharedDeliveryAuthorityEligible": false,
++  "productionActivated": false,
++  "auditedRepositoryHead": "2259cf66aa2a4c47bb99d775acb58cb95567d60f"
++}
+diff --git a/docs/reports/shared-report-e2e-r2/historical-r5-proof.js.txt b/docs/reports/shared-report-e2e-r2/historical-r5-proof.js.txt
+new file mode 100644
+--- /dev/null
++++ b/docs/reports/shared-report-e2e-r2/historical-r5-proof.js.txt
+@@ -0,0 +1,137 @@
++import {authenticate,digest,requireSameOrigin} from '../account/oidc-auth.js';
++import {generateAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../account/ziwei-account-delivery.js';
++
++const headers={'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow, noarchive'};
++const NATURAL=new Set(['S02','S03','S04','S05','S06','S07','S08','S09','S10','S11']);
++const fail=(code,status=409,details={})=>Object.assign(new Error(code),{code,status,details});
++function proofKey(reportId){return 'qa/shared-report-e2e/'+reportId+'.json';}
++function parseReceipt(row){try{return JSON.parse(row?.verifier_receipt||'null')}catch{return null}}
++function assertR5(candidate){
++ const s=candidate?.snapshot;
++ if(s?.compositionVersion!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5')throw fail('SHARED_E2E_R5_SNAPSHOT_REQUIRED');
++ const rows=(s.semanticContent?.sections||[]).filter(x=>NATURAL.has(x.sectionId));
++ if(rows.length!==10)throw fail('SHARED_E2E_R5_SECTION_SET_INCOMPLETE');
++ const bad=rows.filter(x=>x.professionalSynthesis?.status!=='PASS'
++  ||x.professionalSynthesis?.composerStatus!=='PASS'
++  ||x.professionalSynthesis?.referenceGoverned!==true
++  ||x.professionalSynthesis?.referenceId!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5'
++  ||x.professionalSynthesis?.composerOwner!=='REPORT-PRO-COMPOSER-R1'
++  ||x.professionalSynthesis?.providerCalled!==true
++  ||x.professionalSynthesis?.verificationAccepted!==true
++  ||x.professionalSynthesis?.editorialQuality?.accepted!==true
++  ||x.professionalSynthesis?.actualTier!=='T3_GOVERNED_DEEP_COMPOSITION'
++  ||x.professionalSynthesis?.model!=='gpt-5.6-sol'
++  ||!(x.professionalSynthesis?.semanticReviewCalls>0)
++  ||!(x.professionalSynthesis?.transportCalls>1)
++  ||!x.professionalSynthesis?.compositionDigest);
++ if(bad.length)throw fail('SHARED_E2E_REFERENCE_GOVERNED_COMPOSITION_NOT_PROVEN',409,{sections:bad.map(x=>x.sectionId)});
++ return rows;
++}
++async function phase1(context,body){
++ const identity=await authenticate(context);if(!identity)throw fail('ACCOUNT_REQUIRED',401);
++ if(context.env?.PHIOS_ENVIRONMENT!=='qa')throw fail('SHARED_E2E_QA_ONLY',403);
++ if(!context.env?.PRIVATE_REPORTS?.put||!context.env?.PRIVATE_REPORTS?.get)throw fail('SHARED_E2E_STORAGE_REQUIRED',503);
++ const sessionId=identity.sessionId;
++ const released=await generateAndReleaseAccountZiwei(context,{personId:body.personId,locale:body.locale,targetContext:body.targetContext});
++ const opened=await openAccountZiweiMaterial(context,released.reportId);
++ const candidate=opened.candidate,rows=assertR5(candidate),receipt=parseReceipt(opened.row);
++ if(!receipt?.passed||receipt.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||receipt.pageCount!==39||opened.row.snapshot_id!==candidate.snapshot.semanticSnapshotId)throw fail('SHARED_E2E_RENDER_OR_SNAPSHOT_PROOF_FAILED');
++ const library=await listAccountZiweiMaterials(context);
++ if(!library.some(x=>x.reportId===released.reportId&&x.status==='RELEASED'))throw fail('SHARED_E2E_ACCOUNT_LIBRARY_MISSING_RELEASE');
++ const seed={
++  schemaVersion:'PHI-OS-SHARED-REPORT-DELIVERY-E2E-PROOF-v1.0.0',
++  state:'PHASE1_RELEASED_AND_OPENED',
++  sourceMethod:'ZWR',
++  composerId:'REPORT-PRO-COMPOSER-R1',
++  referenceId:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
++  accountIdHash:await digest(identity.userId),
++  reportId:released.reportId,
++  purchaseId:candidate.purchaseId,
++  locale:candidate.locale,
++  personIdHash:await digest(candidate.personId),
++  semanticSnapshotId:candidate.snapshot.semanticSnapshotId,
++  outputDigest:opened.row.output_digest,
++  compositionVersion:candidate.snapshot.compositionVersion,
++  model:'gpt-5.6-sol',
++  sectionCount:rows.length,
++  verifierAccepted:rows.every(x=>x.professionalSynthesis.verificationAccepted===true),
++  referenceGoverned:rows.every(x=>x.professionalSynthesis.referenceGoverned===true),
++  rendererPassed:receipt.passed===true,
++  rendererPageCount:receipt.pageCount,
++  releasedMaterial:true,
++  accountLibraryVisible:true,
++  firstAuthenticatedSessionId:sessionId,
++  firstOpenedAt:new Date().toISOString(),
++  requiresDifferentAuthenticatedSessionForFinalProof:true
++ };
++ await context.env.PRIVATE_REPORTS.put(proofKey(released.reportId),JSON.stringify(seed),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
++ return {...seed,nextAction:'LOGOUT_LOGIN_THEN_POST_REOPEN',proofKey:proofKey(released.reportId)};
++}
++async function phase2(context,body){
++ const identity=await authenticate(context);if(!identity)throw fail('ACCOUNT_REQUIRED',401);
++ if(context.env?.PHIOS_ENVIRONMENT!=='qa')throw fail('SHARED_E2E_QA_ONLY',403);
++ const object=await context.env?.PRIVATE_REPORTS?.get?.(proofKey(body.reportId));if(!object)throw fail('SHARED_E2E_PHASE1_PROOF_REQUIRED',404);
++ const phase1=await object.json();
++ if(phase1.accountIdHash!==await digest(identity.userId))throw fail('SHARED_E2E_ACCOUNT_MISMATCH',403);
++ const secondSessionId=identity.sessionId;
++ if(!phase1.firstAuthenticatedSessionId||phase1.firstAuthenticatedSessionId===secondSessionId)throw fail('SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED',409);
++ const opened=await openAccountZiweiMaterial(context,body.reportId),candidate=opened.candidate,rows=assertR5(candidate),receipt=parseReceipt(opened.row);
++ const library=await listAccountZiweiMaterials(context);
++ if(!library.some(x=>x.reportId===body.reportId&&x.status==='RELEASED'))throw fail('SHARED_E2E_REOPEN_LIBRARY_MISSING');
++ if(candidate.snapshot.semanticSnapshotId!==phase1.semanticSnapshotId||opened.row.output_digest!==phase1.outputDigest||opened.row.snapshot_id!==phase1.semanticSnapshotId)throw fail('SHARED_E2E_IMMUTABILITY_MISMATCH');
++ const final={
++  ...phase1,
++  state:'PASS',
++  sharedDeliveryAuthorityEligible:true,
++  reopenedAfterDifferentAuthenticatedSession:true,
++  secondAuthenticatedSessionId:secondSessionId,
++  reopenedSemanticSnapshotId:candidate.snapshot.semanticSnapshotId,
++  reopenedOutputDigest:opened.row.output_digest,
++  reopenedAt:new Date().toISOString(),
++  sameImmutableSnapshot:true,
++  sameImmutableRenderedMaterial:true,
++  noProviderRegenerationOnReopen:true,
++  sectionCount:rows.length,
++  verifierAccepted:rows.every(x=>x.professionalSynthesis.verificationAccepted===true),
++  rendererPassed:receipt?.passed===true,
++  accountLibraryVisible:true
++ };
++ const privateProofDigest=await digest(JSON.stringify(final));
++ const admissionReceipt={
++  schemaVersion:'PHI-OS-SHARED-REPORT-DELIVERY-E2E-ADMISSION-RECEIPT-v1.0.0',
++  state:'PASS',
++  sourceMethod:'ZWR',
++  composerId:'REPORT-PRO-COMPOSER-R1',
++  referenceId:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
++  compositionVersion:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
++  model:'gpt-5.6-sol',
++  verifierAccepted:final.verifierAccepted===true,
++  rendererPassed:final.rendererPassed===true,
++  rendererPageCount:39,
++  releasedMaterial:true,
++  accountLibraryVisible:true,
++  reopenedAfterDifferentAuthenticatedSession:true,
++  sameImmutableSnapshot:true,
++  sameImmutableRenderedMaterial:true,
++  noProviderRegenerationOnReopen:true,
++  sharedDeliveryAuthorityEligible:true,
++  privateProofDigest,
++  admittedAt:final.reopenedAt
++ };
++ await context.env.PRIVATE_REPORTS.put(proofKey(body.reportId),JSON.stringify({...final,privateProofDigest,admissionReceipt}),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
++ return {state:'PASS',sharedDeliveryAuthorityEligible:true,admissionReceipt,proofKey:proofKey(body.reportId)};
++}
++export async function onRequest(context){
++ try{
++  if(context.request.method!=='POST')return Response.json({ok:false,code:'METHOD_NOT_ALLOWED'},{status:405,headers});
++  requireSameOrigin(context.request);
++  const body=await context.request.json();
++  if(!body||!['generate-release-open','reopen'].includes(body.action))throw fail('SHARED_E2E_ACTION_INVALID',400);
++  if(body.action==='generate-release-open'&&(typeof body.personId!=='string'||!['en','zh-Hans'].includes(body.locale)))throw fail('SHARED_E2E_SELECTION_INVALID',400);
++  if(body.action==='reopen'&&typeof body.reportId!=='string')throw fail('SHARED_E2E_REPORT_ID_REQUIRED',400);
++  const proof=body.action==='generate-release-open'?await phase1(context,body):await phase2(context,body);
++  return Response.json({ok:true,proof},{status:200,headers});
++ }catch(error){
++  return Response.json({ok:false,code:error.code||'SHARED_REPORT_E2E_PROOF_FAILED',details:error.details||null},{status:error.status||409,headers});
++ }
++}
+diff --git a/docs/reports/shared-report-e2e-r2/historical-r5-readiness.mjs.txt b/docs/reports/shared-report-e2e-r2/historical-r5-readiness.mjs.txt
+new file mode 100644
+--- /dev/null
++++ b/docs/reports/shared-report-e2e-r2/historical-r5-readiness.mjs.txt
+@@ -0,0 +1,51 @@
++import assert from 'node:assert/strict';
++import fs from 'node:fs';
++
++const read=p=>fs.readFileSync(p,'utf8');
++const json=p=>JSON.parse(read(p));
++
++const contract=json('content/reports/shared-report-delivery-e2e-contract-v1.json');
++assert.equal(contract.status,'READY_FOR_LIVE_QA_PROOF');
++assert.equal(contract.sourceRequirements.compositionVersion,'ZIWEI-PROFESSIONAL-SYNTHESIS-R5');
++assert.equal(contract.sourceRequirements.composerOwner,'REPORT-PRO-COMPOSER-R1');
++assert.equal(contract.sourceRequirements.model,'gpt-5.6-sol');
++assert.equal(contract.sourceRequirements.rendererPageCount,39);
++assert.equal(contract.reusePolicy.fullSharedInfrastructureProofRequiredOnce,true);
++assert.equal(contract.reusePolicy.repeatedPerMethodFullE2E,false);
++
++const binding=read('functions/report-delivery/ziwei-canonical-person-binding.js');
++assert.match(binding,/generateZiweiProfessionalSynthesisR5Candidate/);
++assert.doesNotMatch(binding,/generateZiweiNaturalComposerR4Candidate/);
++
++const r5=read('functions/personal-reading/narrative/ziwei-professional-synthesis-r5.js');
++assert.match(r5,/composeReferenceGovernedDraftR1/);
++assert.match(r5,/REPORT-PRO-COMPOSER-R1/);
++assert.match(r5,/referenceGoverned:true/);
++
++const gate=read('functions/report-delivery/ziwei-professional-synthesis-r5-generation.js');
++for(const token of ["referenceGoverned!==true","referenceId!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5'","composerOwner!=='REPORT-PRO-COMPOSER-R1'","model!=='gpt-5.6-sol'"])assert.ok(gate.includes(token),token);
++
++const renderer=read('workers/method-report-renderer/index.js');
++assert.match(renderer,/'ZIWEI-PROFESSIONAL-SYNTHESIS-R5':39/);
++assert.match(renderer,/expectedPageCount/);
++
++const material=read('functions/account/ziwei-controlled-report-material.js');
++assert.match(material,/semanticContent\?\.report\?\.totalPages/);
++assert.doesNotMatch(material,/pageCount!==33/);
++
++const proof=read('functions/api/shared-report-e2e-proof.js');
++for(const token of [
++ "generate-release-open","reopen","authenticate(context)","firstAuthenticatedSessionId",
++ "SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED","sameImmutableSnapshot:true",
++ "sameImmutableRenderedMaterial:true","noProviderRegenerationOnReopen:true",
++ "sharedDeliveryAuthorityEligible:true","accountLibraryVisible:true","admissionReceipt","privateProofDigest"
++])assert.ok(proof.includes(token),token);
++assert.match(proof,/compositionVersion!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5'/);
++assert.match(proof,/model!=='gpt-5\.6-sol'/);
++assert.match(proof,/rendererPageCount:receipt\.pageCount/);
++
++const state=json('docs/reports/SHARED-REPORT-E2E-REFERENCE-v1.json');
++assert.equal(state.finalSharedAuthorityState,'PENDING_LIVE_TWO_SESSION_PASS');
++assert.equal(state.liveProofEndpoint,'/api/shared-report-e2e-proof');
++
++console.log('PASS Shared Report Delivery E2E readiness: Zi Wei R5 is wired through REPORT-PRO-COMPOSER-R1, 39-page private rendering, release/account material, and a two-auth-session immutable reopen proof. Final shared authority remains pending the live QA two-session PASS.');
+diff --git a/functions/account/ziwei-account-delivery.js b/functions/account/ziwei-account-delivery.js
+--- a/functions/account/ziwei-account-delivery.js
++++ b/functions/account/ziwei-account-delivery.js
+@@ -1,3 +1,5 @@
++import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'};
++import {requireVfrAdmission} from '../report-delivery/shared-report-e2e-v2.js';
+ import {generateAccountZiweiCandidate} from '../report-delivery/ziwei-canonical-person-binding.js';
+ import {controlledZiweiIdentity} from '../report-delivery/ziwei-production-generation-v1.js';
+ import {loadCanonicalPersonSubject} from './canonical-person-store.js';
+@@ -10,6 +12,7 @@
+ export async function generateAndReleaseAccountZiwei(context,selection,{generateCandidate=generateAccountZiweiCandidate}={}){
+  controlledZiweiIdentity(context);
+  const candidate=selection?.reportMode!=null||selection?.realityBriefId!=null?await generateContextualAccountZiweiCandidate(context,selection):await generateCandidate(context,selection);
++ if(candidate.visualFirst===true)requireVfrAdmission(contract.profiles['ZWR:'+candidate.generationSuccessor]);
+  // An actual private server browser verifier must be configured. Customer claims
+  // and local test receipts cannot cross this boundary.
+  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);
+diff --git a/functions/api/shared-report-e2e-proof.js b/functions/api/shared-report-e2e-proof.js
+--- a/functions/api/shared-report-e2e-proof.js
++++ b/functions/api/shared-report-e2e-proof.js
+@@ -1,137 +1,7 @@
+ import {authenticate,digest,requireSameOrigin} from '../account/oidc-auth.js';
+-import {generateAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../account/ziwei-account-delivery.js';
+-
++import {openAccountZiweiMaterial,listAccountZiweiMaterials} from '../account/ziwei-account-delivery.js';
++import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'};
++import {createSharedReportE2eProofV2} from '../report-delivery/shared-report-e2e-v2.js';
++const handler=createSharedReportE2eProofV2({contract,authenticate,requireSameOrigin,digest,open:openAccountZiweiMaterial,list:listAccountZiweiMaterials});
+ const headers={'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow, noarchive'};
+-const NATURAL=new Set(['S02','S03','S04','S05','S06','S07','S08','S09','S10','S11']);
+-const fail=(code,status=409,details={})=>Object.assign(new Error(code),{code,status,details});
+-function proofKey(reportId){return 'qa/shared-report-e2e/'+reportId+'.json';}
+-function parseReceipt(row){try{return JSON.parse(row?.verifier_receipt||'null')}catch{return null}}
+-function assertR5(candidate){
+- const s=candidate?.snapshot;
+- if(s?.compositionVersion!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5')throw fail('SHARED_E2E_R5_SNAPSHOT_REQUIRED');
+- const rows=(s.semanticContent?.sections||[]).filter(x=>NATURAL.has(x.sectionId));
+- if(rows.length!==10)throw fail('SHARED_E2E_R5_SECTION_SET_INCOMPLETE');
+- const bad=rows.filter(x=>x.professionalSynthesis?.status!=='PASS'
+-  ||x.professionalSynthesis?.composerStatus!=='PASS'
+-  ||x.professionalSynthesis?.referenceGoverned!==true
+-  ||x.professionalSynthesis?.referenceId!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5'
+-  ||x.professionalSynthesis?.composerOwner!=='REPORT-PRO-COMPOSER-R1'
+-  ||x.professionalSynthesis?.providerCalled!==true
+-  ||x.professionalSynthesis?.verificationAccepted!==true
+-  ||x.professionalSynthesis?.editorialQuality?.accepted!==true
+-  ||x.professionalSynthesis?.actualTier!=='T3_GOVERNED_DEEP_COMPOSITION'
+-  ||x.professionalSynthesis?.model!=='gpt-5.6-sol'
+-  ||!(x.professionalSynthesis?.semanticReviewCalls>0)
+-  ||!(x.professionalSynthesis?.transportCalls>1)
+-  ||!x.professionalSynthesis?.compositionDigest);
+- if(bad.length)throw fail('SHARED_E2E_REFERENCE_GOVERNED_COMPOSITION_NOT_PROVEN',409,{sections:bad.map(x=>x.sectionId)});
+- return rows;
+-}
+-async function phase1(context,body){
+- const identity=await authenticate(context);if(!identity)throw fail('ACCOUNT_REQUIRED',401);
+- if(context.env?.PHIOS_ENVIRONMENT!=='qa')throw fail('SHARED_E2E_QA_ONLY',403);
+- if(!context.env?.PRIVATE_REPORTS?.put||!context.env?.PRIVATE_REPORTS?.get)throw fail('SHARED_E2E_STORAGE_REQUIRED',503);
+- const sessionId=identity.sessionId;
+- const released=await generateAndReleaseAccountZiwei(context,{personId:body.personId,locale:body.locale,targetContext:body.targetContext});
+- const opened=await openAccountZiweiMaterial(context,released.reportId);
+- const candidate=opened.candidate,rows=assertR5(candidate),receipt=parseReceipt(opened.row);
+- if(!receipt?.passed||receipt.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||receipt.pageCount!==39||opened.row.snapshot_id!==candidate.snapshot.semanticSnapshotId)throw fail('SHARED_E2E_RENDER_OR_SNAPSHOT_PROOF_FAILED');
+- const library=await listAccountZiweiMaterials(context);
+- if(!library.some(x=>x.reportId===released.reportId&&x.status==='RELEASED'))throw fail('SHARED_E2E_ACCOUNT_LIBRARY_MISSING_RELEASE');
+- const seed={
+-  schemaVersion:'PHI-OS-SHARED-REPORT-DELIVERY-E2E-PROOF-v1.0.0',
+-  state:'PHASE1_RELEASED_AND_OPENED',
+-  sourceMethod:'ZWR',
+-  composerId:'REPORT-PRO-COMPOSER-R1',
+-  referenceId:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
+-  accountIdHash:await digest(identity.userId),
+-  reportId:released.reportId,
+-  purchaseId:candidate.purchaseId,
+-  locale:candidate.locale,
+-  personIdHash:await digest(candidate.personId),
+-  semanticSnapshotId:candidate.snapshot.semanticSnapshotId,
+-  outputDigest:opened.row.output_digest,
+-  compositionVersion:candidate.snapshot.compositionVersion,
+-  model:'gpt-5.6-sol',
+-  sectionCount:rows.length,
+-  verifierAccepted:rows.every(x=>x.professionalSynthesis.verificationAccepted===true),
+-  referenceGoverned:rows.every(x=>x.professionalSynthesis.referenceGoverned===true),
+-  rendererPassed:receipt.passed===true,
+-  rendererPageCount:receipt.pageCount,
+-  releasedMaterial:true,
+-  accountLibraryVisible:true,
+-  firstAuthenticatedSessionId:sessionId,
+-  firstOpenedAt:new Date().toISOString(),
+-  requiresDifferentAuthenticatedSessionForFinalProof:true
+- };
+- await context.env.PRIVATE_REPORTS.put(proofKey(released.reportId),JSON.stringify(seed),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
+- return {...seed,nextAction:'LOGOUT_LOGIN_THEN_POST_REOPEN',proofKey:proofKey(released.reportId)};
+-}
+-async function phase2(context,body){
+- const identity=await authenticate(context);if(!identity)throw fail('ACCOUNT_REQUIRED',401);
+- if(context.env?.PHIOS_ENVIRONMENT!=='qa')throw fail('SHARED_E2E_QA_ONLY',403);
+- const object=await context.env?.PRIVATE_REPORTS?.get?.(proofKey(body.reportId));if(!object)throw fail('SHARED_E2E_PHASE1_PROOF_REQUIRED',404);
+- const phase1=await object.json();
+- if(phase1.accountIdHash!==await digest(identity.userId))throw fail('SHARED_E2E_ACCOUNT_MISMATCH',403);
+- const secondSessionId=identity.sessionId;
+- if(!phase1.firstAuthenticatedSessionId||phase1.firstAuthenticatedSessionId===secondSessionId)throw fail('SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED',409);
+- const opened=await openAccountZiweiMaterial(context,body.reportId),candidate=opened.candidate,rows=assertR5(candidate),receipt=parseReceipt(opened.row);
+- const library=await listAccountZiweiMaterials(context);
+- if(!library.some(x=>x.reportId===body.reportId&&x.status==='RELEASED'))throw fail('SHARED_E2E_REOPEN_LIBRARY_MISSING');
+- if(candidate.snapshot.semanticSnapshotId!==phase1.semanticSnapshotId||opened.row.output_digest!==phase1.outputDigest||opened.row.snapshot_id!==phase1.semanticSnapshotId)throw fail('SHARED_E2E_IMMUTABILITY_MISMATCH');
+- const final={
+-  ...phase1,
+-  state:'PASS',
+-  sharedDeliveryAuthorityEligible:true,
+-  reopenedAfterDifferentAuthenticatedSession:true,
+-  secondAuthenticatedSessionId:secondSessionId,
+-  reopenedSemanticSnapshotId:candidate.snapshot.semanticSnapshotId,
+-  reopenedOutputDigest:opened.row.output_digest,
+-  reopenedAt:new Date().toISOString(),
+-  sameImmutableSnapshot:true,
+-  sameImmutableRenderedMaterial:true,
+-  noProviderRegenerationOnReopen:true,
+-  sectionCount:rows.length,
+-  verifierAccepted:rows.every(x=>x.professionalSynthesis.verificationAccepted===true),
+-  rendererPassed:receipt?.passed===true,
+-  accountLibraryVisible:true
+- };
+- const privateProofDigest=await digest(JSON.stringify(final));
+- const admissionReceipt={
+-  schemaVersion:'PHI-OS-SHARED-REPORT-DELIVERY-E2E-ADMISSION-RECEIPT-v1.0.0',
+-  state:'PASS',
+-  sourceMethod:'ZWR',
+-  composerId:'REPORT-PRO-COMPOSER-R1',
+-  referenceId:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
+-  compositionVersion:'ZIWEI-PROFESSIONAL-SYNTHESIS-R5',
+-  model:'gpt-5.6-sol',
+-  verifierAccepted:final.verifierAccepted===true,
+-  rendererPassed:final.rendererPassed===true,
+-  rendererPageCount:39,
+-  releasedMaterial:true,
+-  accountLibraryVisible:true,
+-  reopenedAfterDifferentAuthenticatedSession:true,
+-  sameImmutableSnapshot:true,
+-  sameImmutableRenderedMaterial:true,
+-  noProviderRegenerationOnReopen:true,
+-  sharedDeliveryAuthorityEligible:true,
+-  privateProofDigest,
+-  admittedAt:final.reopenedAt
+- };
+- await context.env.PRIVATE_REPORTS.put(proofKey(body.reportId),JSON.stringify({...final,privateProofDigest,admissionReceipt}),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
+- return {state:'PASS',sharedDeliveryAuthorityEligible:true,admissionReceipt,proofKey:proofKey(body.reportId)};
+-}
+-export async function onRequest(context){
+- try{
+-  if(context.request.method!=='POST')return Response.json({ok:false,code:'METHOD_NOT_ALLOWED'},{status:405,headers});
+-  requireSameOrigin(context.request);
+-  const body=await context.request.json();
+-  if(!body||!['generate-release-open','reopen'].includes(body.action))throw fail('SHARED_E2E_ACTION_INVALID',400);
+-  if(body.action==='generate-release-open'&&(typeof body.personId!=='string'||!['en','zh-Hans'].includes(body.locale)))throw fail('SHARED_E2E_SELECTION_INVALID',400);
+-  if(body.action==='reopen'&&typeof body.reportId!=='string')throw fail('SHARED_E2E_REPORT_ID_REQUIRED',400);
+-  const proof=body.action==='generate-release-open'?await phase1(context,body):await phase2(context,body);
+-  return Response.json({ok:true,proof},{status:200,headers});
+- }catch(error){
+-  return Response.json({ok:false,code:error.code||'SHARED_REPORT_E2E_PROOF_FAILED',details:error.details||null},{status:error.status||409,headers});
+- }
+-}
++export async function onRequest(context){const response=await handler(context);for(const [k,v] of Object.entries(headers))response.headers.set(k,v);return response;}
+diff --git a/functions/report-delivery/shared-report-e2e-v2.js b/functions/report-delivery/shared-report-e2e-v2.js
+new file mode 100644
+--- /dev/null
++++ b/functions/report-delivery/shared-report-e2e-v2.js
+@@ -0,0 +1,65 @@
++import {sha256Stable,stableStringify} from '../interpretation-runtime/mir7-utils.js';
++import {createCustomerDeliverySnapshot} from '../personal-reading/narrative/report-section-snapshot.js';
++import {buildZwrVfrPagePlan,validateZwrVfrPagePlan,ZWR_VFR_PAGE_PLAN_VERSION} from '../personal-reading/visual-first/ziwei-vfr-page-plan.js';
++export const fail=(code,status=409)=>Object.assign(new Error(code),{code,status});
++const required=(value,code)=>{if(typeof value!=='string'||!value.trim())throw fail(code);return value;};
++const hash=value=>typeof value==='string'&&/^[a-f0-9]{64}$/i.test(value);
++export function requireVfrAdmission(profile){
++ const a=profile?.admission;
++ if(profile?.methodId!=='ZWR'||a?.state!=='ACCEPTED'||a.rendererWired!==true||!hash(a.sourceAcceptanceDigest)||!hash(a.rendererAcceptanceDigest)||!hash(a.sourceResultDigest)||!hash(a.publicationIrDigest)||!hash(a.pagePlanDigest))throw fail('SHARED_E2E_VFR_ADMISSION_BLOCKED',503);
++ // Shared delivery evidence never grants production activation.
++}
++export async function verifyVfrMaterial(opened,identity,profile,digest){
++ const {candidate:c,row:r,html}=opened||{},s=c?.snapshot,v=s?.semanticContent,ir=v?.visualReportIr;
++ if(c?.customerId!==identity.userId||r?.owner_account_id!==identity.userId)throw fail('SHARED_E2E_OWNER_MISMATCH',403);
++ required(c.personId,'SHARED_E2E_CANONICAL_PERSON_REQUIRED');required(c.purchaseId,'SHARED_E2E_PURCHASE_REQUIRED');required(c.birthSourceRef,'SHARED_E2E_CANONICAL_SOURCE_REQUIRED');
++ if(r.person_id!==c.personId||r.method_code!==profile.methodId||r.locale!==c.locale||!profile.locales.includes(c.locale)||c.scope!=='CONTROLLED_QA_ONLY')throw fail('SHARED_E2E_ACCOUNT_BINDING_MISMATCH');
++ required(r.report_id,'SHARED_E2E_RELEASE_REQUIRED');required(r.released_at,'SHARED_E2E_RELEASE_REQUIRED');required(r.object_key,'SHARED_E2E_PRIVATE_MATERIAL_REQUIRED');
++ if(c.schemaVersion!==profile.candidateSchemaVersion||c.generationSuccessor!==profile.compositionVersion||s?.methodId!==profile.methodId||s.locale!==c.locale||s.compositionVersion!==profile.compositionVersion||ir?.schemaVersion!==profile.publicationIrVersion||profile.pagePlanVersion!==ZWR_VFR_PAGE_PLAN_VERSION)throw fail('SHARED_E2E_VERSION_MISMATCH');
++ if(s.immutable!==true||s.providerRegenerationOnReopen!==false||(await createCustomerDeliverySnapshot(s)).semanticSnapshotId!==s.semanticSnapshotId||r.snapshot_id!==s.semanticSnapshotId)throw fail('SHARED_E2E_SNAPSHOT_DIGEST_MISMATCH');
++ const {publicationIrDigest,...seed}=ir;
++ if(!hash(publicationIrDigest)||await sha256Stable(seed)!==publicationIrDigest||!hash(v.vfrDeepManuscriptDigest)||v.vfrDeepManuscriptDigest!==ir.sourceResultDigest||!hash(v.vfrCompactAuthoringPackDigest)||v.vfrCompactAuthoringPackDigest!==ir.authorityDigest)throw fail('SHARED_E2E_SOURCE_DIGEST_MISMATCH');
++ if(ir.methodId!=='ZWR'||!Array.isArray(ir.sections)||ir.sections.length!==10||new Set(ir.sections.map(x=>x.sectionId)).size!==10||ir.sections.some((x,i)=>x.sectionId!==`S${String(i+2).padStart(2,'0')}`||!x.zhHans?.manuscript||!x.en?.manuscript||!Array.isArray(x.authorityRefs)||!x.authorityRefs.length))throw fail('SHARED_E2E_MANUSCRIPT_INCOMPLETE');
++ if(profile.admission.sourceResultDigest!==ir.sourceResultDigest||profile.admission.publicationIrDigest!==publicationIrDigest)throw fail('SHARED_E2E_ACCEPTED_SOURCE_BINDING_MISMATCH');
++ const pages=buildZwrVfrPagePlan({sections:ir.sections}),check=validateZwrVfrPagePlan({pages,sections:ir.sections,diagramIds:v.vfrDiagramData?.diagrams?.map(x=>x.id)||[]});
++ if(!check.accepted||stableStringify(pages)!==stableStringify(v.vfrPagePlan)||c.physicalPageCount!==pages.length)throw fail('SHARED_E2E_PAGE_PLAN_MISMATCH');
++ if(profile.admission.pagePlanDigest!==await sha256Stable(pages))throw fail('SHARED_E2E_ACCEPTED_PAGE_PLAN_MISMATCH');
++ let receipt;try{receipt=JSON.parse(r.verifier_receipt)}catch{throw fail('SHARED_E2E_RENDER_RECEIPT_REQUIRED');}
++ const outputDigest=await digest(html);
++ if(typeof html!=='string'||!html.length||!hash(r.output_digest)||r.output_digest!==outputDigest||receipt?.passed!==true||receipt.semanticSnapshotId!==s.semanticSnapshotId||receipt.compositionVersion!==profile.compositionVersion||receipt.publicationIrDigest!==publicationIrDigest||receipt.sourceResultDigest!==ir.sourceResultDigest||receipt.pagePlanDigest!==await sha256Stable(pages)||receipt.pageCount!==pages.length||receipt.outputDigest!==outputDigest||receipt.brokenImages!==0||receipt.overflowCount!==0||receipt.errorCount!==0)throw fail('SHARED_E2E_RENDER_OR_OUTPUT_MISMATCH');
++ return {reportId:r.report_id,methodId:s.methodId,compositionVersion:s.compositionVersion,semanticSnapshotId:s.semanticSnapshotId,publicationIrDigest,sourceResultDigest:ir.sourceResultDigest,pagePlanDigest:await sha256Stable(pages),pageCount:pages.length,outputDigest,personIdHash:await digest(c.personId),purchaseIdHash:await digest(c.purchaseId),canonicalSourceHash:await digest(c.birthSourceRef)};
++}
++// Dependencies are server-owned. No generator, renderer or provider dependency exists here.
++export function createSharedReportE2eProofV2({contract,authenticate,requireSameOrigin,digest,open,list}){
++ return async context=>{
++  try{
++   if(context.request.method!=='POST')throw fail('METHOD_NOT_ALLOWED',405);
++   requireSameOrigin(context.request);
++   const identity=await authenticate(context);if(!identity?.userId)throw fail('ACCOUNT_REQUIRED',401);
++   if(context.env?.PHIOS_ENVIRONMENT!=='qa')throw fail('SHARED_E2E_QA_ONLY',403);
++   required(identity.sessionId,'SHARED_E2E_AUTHENTICATED_SESSION_REQUIRED');
++   const b=await context.request.json();
++   if(!b||!['open-released','reopen'].includes(b.action)||typeof b.reportId!=='string'||!b.reportId||Object.keys(b).some(k=>!['action','reportId'].includes(k)))throw fail('SHARED_E2E_ACTION_INVALID',400);
++   const profile=contract.profiles['ZWR:ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3'];requireVfrAdmission(profile);
++   const storage=context.env.PRIVATE_REPORTS;if(!storage?.get||!storage?.put)throw fail('SHARED_E2E_PRIVATE_STORAGE_REQUIRED',503);
++   const owner=await digest(identity.userId),session=await digest(identity.sessionId),key=`qa/shared-report-e2e-v2/${owner}/${b.reportId}.json`;
++   let first;
++   if(b.action==='reopen'){
++    const object=await storage.get(key);if(!object)throw fail('SHARED_E2E_FIRST_OPEN_REQUIRED',404);
++    first=await object.json();const {proofDigest,...seed}=first;
++    if(first.schemaVersion!=='PHI-OS-SHARED-REPORT-E2E-PROOF-v2'||first.state!=='FIRST_OPEN'||first.accountIdHash!==owner||first.reportId!==b.reportId||first.profileDigest!==await sha256Stable(profile)||proofDigest!==await sha256Stable(seed))throw fail('SHARED_E2E_FIRST_PROOF_INVALID');
++    if(!hash(first.sessionHash)||first.sessionHash===session)throw fail('SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED');
++   }
++   // These existing account functions revalidate entitlement, canonical consent,
++   // active release, private candidate bytes and private HTML on every read.
++   const material=await verifyVfrMaterial(await open(context,b.reportId),identity,profile,digest);
++   if(material.reportId!==b.reportId)throw fail('SHARED_E2E_REPORT_ID_MISMATCH');
++   if(!(await list(context)).some(x=>x.reportId===b.reportId&&x.status==='RELEASED'))throw fail('SHARED_E2E_LIBRARY_RELEASE_REQUIRED');
++   if(first&&stableStringify(first.material)!==stableStringify(material))throw fail('SHARED_E2E_REOPEN_IMMUTABILITY_MISMATCH');
++   const proof={schemaVersion:'PHI-OS-SHARED-REPORT-E2E-PROOF-v2',state:first?'TWO_SESSION_READ_PASS':'FIRST_OPEN',reportId:b.reportId,accountIdHash:owner,sessionHash:session,profileDigest:await sha256Stable(profile),material,providerCalls:0,productionAdmissionGranted:false,sharedDeliveryAuthorityEligible:false};
++   proof.proofDigest=await sha256Stable(proof);
++   await storage.put(key,JSON.stringify(proof),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
++   return Response.json({ok:true,proof:{state:proof.state,proofDigest:proof.proofDigest,providerCalls:0,sharedDeliveryAuthorityEligible:false,productionActivated:false}});
++  }catch(e){return Response.json({ok:false,code:e.code||'SHARED_E2E_EVIDENCE_INVALID'},{status:e.status||409});}
++ };
++}
+diff --git a/functions/report-delivery/ziwei-vfr-r1-generation.js b/functions/report-delivery/ziwei-vfr-r1-generation.js
+--- a/functions/report-delivery/ziwei-vfr-r1-generation.js
++++ b/functions/report-delivery/ziwei-vfr-r1-generation.js
+@@ -1,3 +1,5 @@
++import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'};
++import {requireVfrAdmission} from './shared-report-e2e-v2.js';
+ import {generateZiweiProductionCandidate} from './ziwei-production-generation-v1.js';
+ import {buildZwrVfrCompactAuthoringPack} from '../personal-reading/visual-first/ziwei-vfr-authoring-pack.js';
+ import {composeZwrVfrProductionDeepManuscript} from '../personal-reading/visual-first/ziwei-vfr-production-deep-composer.js';
+@@ -16,6 +18,7 @@
+ }
+ 
+ export async function generateZiweiVfrR1Candidate(context,selection,deps={}){
++ requireVfrAdmission(contract.profiles['ZWR:'+ZIWEI_VFR_R1_GENERATION_VERSION]);
+  const base=await generateZiweiProductionCandidate(context,selection,deps);
+  const evidence=base.snapshot?.semanticContent?.evidence;
+  if(!evidence)unavailable('ZWR_VFR_CANONICAL_EVIDENCE_REQUIRED');
+@@ -70,7 +73,7 @@
+   visualFirst:true,
+   physicalPageCount:pages.length,
+   deterministicDiagramCount:15,
+-  productionAdmissionGranted:true
++  productionAdmissionGranted:false
+  };
+ }
+ export default Object.freeze({generateZiweiVfrR1Candidate,ZIWEI_VFR_R1_GENERATION_VERSION});
+diff --git a/scripts/check-shared-report-e2e-readiness.mjs b/scripts/check-shared-report-e2e-readiness.mjs
+--- a/scripts/check-shared-report-e2e-readiness.mjs
++++ b/scripts/check-shared-report-e2e-readiness.mjs
+@@ -1,51 +1,69 @@
+ import assert from 'node:assert/strict';
+ import fs from 'node:fs';
+-
+-const read=p=>fs.readFileSync(p,'utf8');
+-const json=p=>JSON.parse(read(p));
+-
+-const contract=json('content/reports/shared-report-delivery-e2e-contract-v1.json');
+-assert.equal(contract.status,'READY_FOR_LIVE_QA_PROOF');
+-assert.equal(contract.sourceRequirements.compositionVersion,'ZIWEI-PROFESSIONAL-SYNTHESIS-R5');
+-assert.equal(contract.sourceRequirements.composerOwner,'REPORT-PRO-COMPOSER-R1');
+-assert.equal(contract.sourceRequirements.model,'gpt-5.6-sol');
+-assert.equal(contract.sourceRequirements.rendererPageCount,39);
+-assert.equal(contract.reusePolicy.fullSharedInfrastructureProofRequiredOnce,true);
+-assert.equal(contract.reusePolicy.repeatedPerMethodFullE2E,false);
+-
+-const binding=read('functions/report-delivery/ziwei-canonical-person-binding.js');
+-assert.match(binding,/generateZiweiProfessionalSynthesisR5Candidate/);
+-assert.doesNotMatch(binding,/generateZiweiNaturalComposerR4Candidate/);
+-
+-const r5=read('functions/personal-reading/narrative/ziwei-professional-synthesis-r5.js');
+-assert.match(r5,/composeReferenceGovernedDraftR1/);
+-assert.match(r5,/REPORT-PRO-COMPOSER-R1/);
+-assert.match(r5,/referenceGoverned:true/);
+-
+-const gate=read('functions/report-delivery/ziwei-professional-synthesis-r5-generation.js');
+-for(const token of ["referenceGoverned!==true","referenceId!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5'","composerOwner!=='REPORT-PRO-COMPOSER-R1'","model!=='gpt-5.6-sol'"])assert.ok(gate.includes(token),token);
+-
+-const renderer=read('workers/method-report-renderer/index.js');
+-assert.match(renderer,/'ZIWEI-PROFESSIONAL-SYNTHESIS-R5':39/);
+-assert.match(renderer,/expectedPageCount/);
+-
+-const material=read('functions/account/ziwei-controlled-report-material.js');
+-assert.match(material,/semanticContent\?\.report\?\.totalPages/);
+-assert.doesNotMatch(material,/pageCount!==33/);
+-
+-const proof=read('functions/api/shared-report-e2e-proof.js');
+-for(const token of [
+- "generate-release-open","reopen","authenticate(context)","firstAuthenticatedSessionId",
+- "SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED","sameImmutableSnapshot:true",
+- "sameImmutableRenderedMaterial:true","noProviderRegenerationOnReopen:true",
+- "sharedDeliveryAuthorityEligible:true","accountLibraryVisible:true","admissionReceipt","privateProofDigest"
+-])assert.ok(proof.includes(token),token);
+-assert.match(proof,/compositionVersion!=='ZIWEI-PROFESSIONAL-SYNTHESIS-R5'/);
+-assert.match(proof,/model!=='gpt-5\.6-sol'/);
+-assert.match(proof,/rendererPageCount:receipt\.pageCount/);
+-
+-const state=json('docs/reports/SHARED-REPORT-E2E-REFERENCE-v1.json');
+-assert.equal(state.finalSharedAuthorityState,'PENDING_LIVE_TWO_SESSION_PASS');
+-assert.equal(state.liveProofEndpoint,'/api/shared-report-e2e-proof');
+-
+-console.log('PASS Shared Report Delivery E2E readiness: Zi Wei R5 is wired through REPORT-PRO-COMPOSER-R1, 39-page private rendering, release/account material, and a two-auth-session immutable reopen proof. Final shared authority remains pending the live QA two-session PASS.');
++import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
++import {createCustomerDeliverySnapshot} from '../functions/personal-reading/narrative/report-section-snapshot.js';
++import {buildZwrVfrPagePlan} from '../functions/personal-reading/visual-first/ziwei-vfr-page-plan.js';
++import {createSharedReportE2eProofV2,verifyVfrMaterial,requireVfrAdmission} from '../functions/report-delivery/shared-report-e2e-v2.js';
++const contract=JSON.parse(fs.readFileSync(new URL('../content/reports/shared-report-delivery-e2e-contract-v2.json',import.meta.url)));
++const shipped=contract.profiles['ZWR:ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3'];
++assert.equal(contract.state,'BLOCKED_VFR_ADMISSION');assert.equal(shipped.admission.productionAdmissionGranted,false);
++assert.throws(()=>requireVfrAdmission(shipped),/SHARED_E2E_VFR_ADMISSION_BLOCKED/);
++// This synthetic profile never enters the production registry or represents human acceptance.
++const profile=structuredClone(shipped);profile.admission={state:'ACCEPTED',rendererWired:true,sourceAcceptanceDigest:await sha256Stable('SYNTHETIC_SOURCE'),rendererAcceptanceDigest:await sha256Stable('SYNTHETIC_RENDER'),productionAdmissionGranted:false};
++const testContract={...contract,profiles:{['ZWR:'+profile.compositionVersion]:profile}};
++const sections=Array.from({length:10},(_,i)=>({sectionId:`S${String(i+2).padStart(2,'0')}`,authorityRefs:['synthetic-claim'],zhHans:{manuscript:'合成验证正文。'},en:{manuscript:'Synthetic fixture manuscript.'}}));
++const seed={schemaVersion:profile.publicationIrVersion,methodId:'ZWR',localeMode:'BILINGUAL',authorityDigest:await sha256Stable('synthetic-authority'),sourceResultDigest:await sha256Stable('synthetic-manuscript'),sections};
++const ir={...seed,publicationIrDigest:await sha256Stable(seed)},pages=buildZwrVfrPagePlan({sections});
++const snapshot=await createCustomerDeliverySnapshot({methodId:'ZWR',locale:'en',subjectFingerprint:'synthetic-person-fingerprint',inputFingerprint:'synthetic-birth-fingerprint',compositionVersion:profile.compositionVersion,authorityVersion:'SYNTHETIC',claimIrVersion:profile.publicationIrVersion,verifierVersion:'SYNTHETIC',semanticContent:{visualReportIr:ir,vfrCompactAuthoringPackDigest:ir.authorityDigest,vfrDeepManuscriptDigest:ir.sourceResultDigest,vfrPagePlan:pages,vfrDiagramData:{diagrams:Array.from({length:15},(_,i)=>({id:`ZWD-${String(i+1).padStart(2,'0')}`}))}}});
++// Correct diagram ID spelling follows the actual deterministic planner.
++const diagramIds=[...new Set(pages.flatMap(x=>x.diagramIds))];
++const bound=await createCustomerDeliverySnapshot({...snapshot,semanticContent:{...snapshot.semanticContent,vfrDiagramData:{diagrams:diagramIds.map(id=>({id}))}}});
++profile.admission.sourceResultDigest=ir.sourceResultDigest;profile.admission.publicationIrDigest=ir.publicationIrDigest;profile.admission.pagePlanDigest=await sha256Stable(pages);
++const html='<html><body>synthetic private released material</body></html>',outputDigest=await sha256Stable(html);
++const receipt={passed:true,semanticSnapshotId:bound.semanticSnapshotId,compositionVersion:profile.compositionVersion,publicationIrDigest:ir.publicationIrDigest,sourceResultDigest:ir.sourceResultDigest,pagePlanDigest:await sha256Stable(pages),pageCount:pages.length,outputDigest,brokenImages:0,overflowCount:0,errorCount:0};
++const fixture={candidate:{schemaVersion:profile.candidateSchemaVersion,customerId:'owner',personId:'person',purchaseId:'purchase',birthSourceRef:'canonical:synthetic',scope:'CONTROLLED_QA_ONLY',locale:'en',generationSuccessor:profile.compositionVersion,physicalPageCount:pages.length,snapshot:bound},row:{owner_account_id:'owner',person_id:'person',report_id:'report',method_code:'ZWR',locale:'en',released_at:'2026-01-01T00:00:00Z',object_key:'private/report.html',snapshot_id:bound.semanticSnapshotId,output_digest:outputDigest,verifier_receipt:JSON.stringify(receipt)},html};
++assert.notEqual(pages.length,39);
++let count=0;
++const wrongProfile=structuredClone(profile);wrongProfile.admission.sourceResultDigest='0'.repeat(64);await assert.rejects(()=>verifyVfrMaterial(fixture,{userId:'owner'},wrongProfile,sha256Stable),/ACCEPTED_SOURCE/);count++;
++const wrongPlanProfile=structuredClone(profile);wrongPlanProfile.admission.pagePlanDigest='0'.repeat(64);await assert.rejects(()=>verifyVfrMaterial(fixture,{userId:'owner'},wrongPlanProfile,sha256Stable),/ACCEPTED_PAGE_PLAN/);count++;
++await verifyVfrMaterial(fixture,{userId:'owner'},profile,sha256Stable);count++;
++async function rejected(change,code){const f=structuredClone(fixture);change(f);await assert.rejects(()=>verifyVfrMaterial(f,{userId:'owner'},profile,sha256Stable),new RegExp(code));count++;}
++await rejected(f=>f.candidate.customerId='other','OWNER');
++await rejected(f=>f.row.owner_account_id='other','OWNER');
++await rejected(f=>f.candidate.purchaseId=null,'PURCHASE');
++await rejected(f=>f.candidate.birthSourceRef=null,'CANONICAL_SOURCE');
++await rejected(f=>f.row.person_id='other','BINDING');
++await rejected(f=>f.row.released_at=null,'RELEASE');
++await rejected(f=>f.row.object_key=null,'PRIVATE_MATERIAL');
++await rejected(f=>f.candidate.generationSuccessor='ZIWEI-PROFESSIONAL-SYNTHESIS-R5','VERSION');
++await rejected(f=>f.candidate.snapshot.compositionVersion='ZIWEI-PRODUCTION-COMPOSER-V1','VERSION');
++await rejected(f=>f.candidate.snapshot.semanticContent.visualReportIr.sections[0].en.manuscript='tamper','SNAPSHOT');
++await rejected(f=>f.row.snapshot_id='other','SNAPSHOT');
++await rejected(f=>f.candidate.physicalPageCount=39,'PAGE_PLAN');
++await rejected(f=>f.html+='tamper','OUTPUT');
++await rejected(f=>{const x=JSON.parse(f.row.verifier_receipt);x.publicationIrDigest='0'.repeat(64);f.row.verifier_receipt=JSON.stringify(x)},'OUTPUT');
++await rejected(f=>{const x=JSON.parse(f.row.verifier_receipt);x.passed=false;f.row.verifier_receipt=JSON.stringify(x)},'OUTPUT');
++await rejected(f=>f.row.verifier_receipt='{}','OUTPUT');
++// Rebind tampered material to ensure the inner source check still rejects it.
++const bad=structuredClone(fixture);bad.candidate.snapshot.semanticContent.vfrDeepManuscriptDigest='0'.repeat(64);bad.candidate.snapshot=await createCustomerDeliverySnapshot(bad.candidate.snapshot);bad.row.snapshot_id=bad.candidate.snapshot.semanticSnapshotId;
++await assert.rejects(()=>verifyVfrMaterial(bad,{userId:'owner'},profile,sha256Stable),/SOURCE_DIGEST/);count++;
++const storage=new Map();let session='first',owner='owner',opens=0,listing=true,openError=null,current=fixture;
++const deps={contract:testContract,authenticate:async()=>({userId:owner,sessionId:session}),requireSameOrigin:request=>assert.equal(request.headers.get('origin'),'https://qa.invalid'),digest:sha256Stable,open:async()=>{opens++;if(openError)throw Object.assign(new Error(openError),{code:openError,status:409});return current;},list:async()=>listing?[{reportId:'report',status:'RELEASED'}]:[]};
++const env={PHIOS_ENVIRONMENT:'qa',PRIVATE_REPORTS:{get:async key=>storage.has(key)?{json:async()=>JSON.parse(storage.get(key))}:null,put:async(key,value)=>storage.set(key,value)}};
++const handler=createSharedReportE2eProofV2(deps);
++async function call(action,handlerOverride=handler){const response=await handlerOverride({env,request:new Request('https://qa.invalid/api/shared-report-e2e-proof',{method:'POST',headers:{'content-type':'application/json',origin:'https://qa.invalid'},body:JSON.stringify({action,reportId:'report'})})});count++;return {status:response.status,...await response.json()};}
++assert.equal((await call('reopen')).code,'SHARED_E2E_FIRST_OPEN_REQUIRED');
++assert.equal((await call('generate-release-open')).code,'SHARED_E2E_ACTION_INVALID');
++const blocked=createSharedReportE2eProofV2({...deps,contract});const before=opens;
++assert.equal((await call('open-released',blocked)).code,'SHARED_E2E_VFR_ADMISSION_BLOCKED');assert.equal(opens,before);
++assert.equal((await call('open-released')).proof.state,'FIRST_OPEN');
++assert.equal((await call('reopen')).code,'SHARED_E2E_NEW_LOGIN_SESSION_REQUIRED');
++session=null;assert.equal((await call('reopen')).code,'SHARED_E2E_AUTHENTICATED_SESSION_REQUIRED');session='second';
++owner='other';assert.equal((await call('reopen')).code,'SHARED_E2E_FIRST_OPEN_REQUIRED');owner='owner';
++for(const code of ['CONSENT_REVOKED','ENTITLEMENT_MISSING','RELEASE_INACTIVE','PRIVATE_CANDIDATE_DIGEST_MISMATCH']){openError=code;assert.equal((await call('reopen')).code,code);}openError=null;
++listing=false;assert.equal((await call('reopen')).code,'SHARED_E2E_LIBRARY_RELEASE_REQUIRED');listing=true;
++current=structuredClone(fixture);current.html+='tamper';assert.equal((await call('reopen')).code,'SHARED_E2E_RENDER_OR_OUTPUT_MISMATCH');current=fixture;
++const key=[...storage.keys()][0],first=storage.get(key);const forged=JSON.parse(first);forged.material.outputDigest='0'.repeat(64);storage.set(key,JSON.stringify(forged));assert.equal((await call('reopen')).code,'SHARED_E2E_FIRST_PROOF_INVALID');storage.set(key,first);
++const final=await call('reopen');assert.equal(final.proof.state,'TWO_SESSION_READ_PASS');assert.equal(final.proof.providerCalls,0);assert.equal(final.proof.sharedDeliveryAuthorityEligible,false);
++assert.equal((await call('reopen')).code,'SHARED_E2E_FIRST_PROOF_INVALID');
++console.log(JSON.stringify({status:'PASS',fixtureCases:count,fixturePageCount:pages.length,providerCalls:0,currentVfrAdmission:'BLOCKED',liveAccountProof:'NOT_RUN',productionActivated:false}));

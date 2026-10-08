@@ -1,0 +1,27 @@
+
+> check:fcr
+> node scripts/run-zero-cost-regression.mjs check:fcr
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Predecessor drift: LEGACY_FINANCIAL_CALCULATION_LAYER
++ actual - expected
+
++ 'cd58aaa1433fb404129808d70d4d830bf8f0a525a0842f001f8f075b15e07c53'
+- '6e4fc8da92c17c0b25feb24d9dbb09e1d6fab1cbe5c225b20da1b7acfd92536e'
+
+    at file:///C:/phios/scripts/check-fcr-authority.mjs:11:45
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'cd58aaa1433fb404129808d70d4d830bf8f0a525a0842f001f8f075b15e07c53',
+  expected: '6e4fc8da92c17c0b25feb24d9dbb09e1d6fab1cbe5c225b20da1b7acfd92536e',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

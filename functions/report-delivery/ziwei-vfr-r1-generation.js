@@ -1,3 +1,5 @@
+import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'};
+import {requireVfrAdmission} from './shared-report-e2e-v2.js';
 import {generateZiweiProductionCandidate} from './ziwei-production-generation-v1.js';
 import {buildZwrVfrCompactAuthoringPack} from '../personal-reading/visual-first/ziwei-vfr-authoring-pack.js';
 import {composeZwrVfrProductionDeepManuscript} from '../personal-reading/visual-first/ziwei-vfr-production-deep-composer.js';
@@ -16,6 +18,7 @@ function unavailable(code,details=null){
 }
 
 export async function generateZiweiVfrR1Candidate(context,selection,deps={}){
+ requireVfrAdmission(contract.profiles['ZWR:'+ZIWEI_VFR_R1_GENERATION_VERSION]);
  const base=await generateZiweiProductionCandidate(context,selection,deps);
  const evidence=base.snapshot?.semanticContent?.evidence;
  if(!evidence)unavailable('ZWR_VFR_CANONICAL_EVIDENCE_REQUIRED');
@@ -70,7 +73,7 @@ export async function generateZiweiVfrR1Candidate(context,selection,deps={}){
   visualFirst:true,
   physicalPageCount:pages.length,
   deterministicDiagramCount:15,
-  productionAdmissionGranted:true
+  productionAdmissionGranted:false
  };
 }
 export default Object.freeze({generateZiweiVfrR1Candidate,ZIWEI_VFR_R1_GENERATION_VERSION});

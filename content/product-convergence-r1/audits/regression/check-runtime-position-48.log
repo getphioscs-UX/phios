@@ -1,0 +1,27 @@
+
+> check:runtime-position-48:backbone
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:backbone
+
+PASS runtime-position-48 backbone: 48/48 positions, 16x3 domains, 6 locks, Book VI 13H/13I alignment, knowledge-state guards.
+
+> check:runtime-position-48:w5
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w5
+
+PASS runtime-position-48 W5: source windows preserved, Book V temporal crosswalk active, 10 representative historical semantic precedents human-accepted, RP-45 accepted only as forward boundary, Phase 45–48 excluded from history, 12 dossier correspondences governed UNKNOWN, UI/Search/Ask overlays wired.
+
+> check:runtime-position-48:w6
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w6
+
+file:///C:/phios/scripts/check-runtime-position-48-w6.mjs:8
+const fail=msg=>{throw new Error('RUNTIME_POSITION_48_W6:'+msg);};
+                       ^
+
+Error: RUNTIME_POSITION_48_W6:RENDERER_THRESHOLD_PIPELINE
+    at fail (file:///C:/phios/scripts/check-runtime-position-48-w6.mjs:8:24)
+    at assert (file:///C:/phios/scripts/check-runtime-position-48-w6.mjs:9:32)
+    at file:///C:/phios/scripts/check-runtime-position-48-w6.mjs:67:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.18.0

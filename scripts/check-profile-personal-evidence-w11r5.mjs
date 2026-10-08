@@ -21,9 +21,18 @@ for(const before of baseline.cases.filter(c=>!only||c.id===only)){
  const ir=await buildPersonalEvidencePublicationIr({profileView:view,report:{canonicalState:'APPROVED_UNRELEASED',customer:view.participantRef,reportVersion:'SYNTHETIC-REVIEW',locale:'en'},publicationProjection:projection});assert.equal(ir.visualBlocks.length,9);
  for(const b of ir.visualBlocks){assert.equal(b.sectionId,primary[b.figure.pfig]);assert.deepEqual(b.figure,visual.figures.find(f=>f.pfig===b.figure.pfig));}
  if(id==='CASE-01'){const p=doc.querySelector('[data-native-values]');assert(p);assert.equal(p.getAttribute('data-native-values'),'75,75,75,75,75,75');const radii=p.getAttribute('points').split(' ').map(x=>{const [a,b]=x.split(',').map(Number);return Math.hypot(a-160,b-150)});assert(radii.every(r=>Math.abs(r-75)<1e-8));}
+ if(id==='CASE-08'){const f=doc.querySelector('[data-pfig="PFIG-002"]');assert(f.querySelector('[data-source-series="IPIP_BIG_FIVE"]'));assert(f.querySelector('[data-native-values]'));assert.equal(f.querySelectorAll('svg').length,1,'No cross-instrument master polygon');}
+ if(id==='CASE-09'){assert(doc.querySelector('[data-pfig="PFIG-005"]').getAttribute('data-pfig-state')==='READY');assert(trace.chapters[8].tables[0].rows.some(r=>r.stateEn==='Contradicted'));}
+ if(id==='CASE-04')assert(doc.querySelector('[data-pfig="PFIG-006"]').textContent.includes('Career interest is not an ability or job-fit verdict'));
+ if(id==='CASE-11')assert(doc.querySelector('[data-pfig="PFIG-007"]').textContent.includes('Other-person view'));
  results.push({id,pages:doc.querySelectorAll('.pub-page,.pub-static').length,pfigs:visual.figures.map(f=>({id:f.pfig,state:f.state,fullRenderCount:1})),semanticDrift:false,duplicates:0,pass:true});
 }
 for(const state of ['READY','EMPTY','UNKNOWN'])assert(renderPersonalEvidenceFigure({pfig:'PFIG-003',state,data:{resources:[],costs:[]},customerLabel:{en:'Resources','zh-Hans':'资源'}},{locale:'bilingual'}).includes('data-pfig-state="'+state+'"'));
+// Explicit contextual input is needed; a linked summary alone never promotes
+// the existing CASE-09 UNKNOWN context state into an observed finding.
+const connected=read(root+'CASE-09-source-view.json');
+const withObservation=buildProfileCustomerVisualProjection({progressiveView:connected,confirmations:[{id:'SYNTHETIC-CONTEXT-ONLY',signalRef:connected.signalCards[0].signalRef,contextType:'WORK',confirmation:'HELPS_ME',label:'Explicit review-fixture observation'}]});
+for(const id of ['PFIG-004','PFIG-005','PFIG-009'])assert.equal(withObservation.figures.find(f=>f.pfig===id).state,'READY');
 if(!only){const m=read(root+'portable-evidence-manifest.json');assert.equal(m.customerReportCount,11);assert.equal(m.languageSelector,false);assert(!m.documents.some(x=>/-(en|zh-Hans)-dossier/.test(x)));}
 fs.writeFileSync(audit+(only?'case-01-gate.json':'machine-results.json'),JSON.stringify({work:'PRD-W11R5',results,printAndMobile:'SEPARATE_BROWSER_GATE_REQUIRED',w12:'BLOCKED'},null,2));
 console.log('PRD-W11R5 publication, binding, state, duplicate, radar, semantic preservation PASS: '+results.length+' cases');

@@ -1,3 +1,5 @@
+import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'};
+import {requireVfrAdmission} from '../report-delivery/shared-report-e2e-v2.js';
 import {generateAccountZiweiCandidate} from '../report-delivery/ziwei-canonical-person-binding.js';
 import {controlledZiweiIdentity} from '../report-delivery/ziwei-production-generation-v1.js';
 import {loadCanonicalPersonSubject} from './canonical-person-store.js';
@@ -10,6 +12,7 @@ async function bounded(response,max){const reader=response.body?.getReader();if(
 export async function generateAndReleaseAccountZiwei(context,selection,{generateCandidate=generateAccountZiweiCandidate}={}){
  controlledZiweiIdentity(context);
  const candidate=selection?.reportMode!=null||selection?.realityBriefId!=null?await generateContextualAccountZiweiCandidate(context,selection):await generateCandidate(context,selection);
+ if(candidate.visualFirst===true)requireVfrAdmission(contract.profiles['ZWR:'+candidate.generationSuccessor]);
  // An actual private server browser verifier must be configured. Customer claims
  // and local test receipts cannot cross this boundary.
  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);

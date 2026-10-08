@@ -67,6 +67,7 @@ for (const absolute of files) {
       `${rel}: governed runtime evidence leaked into Pages assets`
     );
   }
+  if(rel.startsWith('output/pdf/')) failures.push(`${rel}: local review PDF leaked into Pages assets`);
 }
 
 if (!fs.existsSync(path.join(output, 'index.html'))) {
