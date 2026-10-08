@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-CN-GOLDEN-CLOSURE-STATUS-v1.0.0",
+  "dossierId": "DOSSIER-CN",
+  "status": "GOLDEN_DOSSIER_IN_PROGRESS",
+  "stageModel": {
+    "W8-A": "Source Acquisition",
+    "W8-B": "Claim Extraction",
+    "W8-C": "CWA Admission",
+    "W8-D": "Observable Feature Extraction",
+    "W8-E": "RRE Derived Reading",
+    "W8-F": "Grammar + Domain Candidate Derivation",
+    "W8-G": "RP-01–48 Candidate",
+    "W8-H": "Position Human Review",
+    "W8-I": "Accepted Current Dossier Projection"
+  },
+  "states": {
+    "W8-A": "READY_TO_BUILD",
+    "W8-B": "READY_TO_BUILD",
+    "W8-C": "READY_TO_BUILD",
+    "W8-D": "READY_TO_BUILD",
+    "W8-E": "READY_TO_BUILD",
+    "W8-F": "SEMANTIC_BASIS_READY",
+    "W8-G": "BLOCKED_BY_W8F_HUMAN_ACCEPT",
+    "W8-H": "BLOCKED_BY_W8G",
+    "W8-I": "BLOCKED_BY_W8H_ACCEPT"
+  },
+  "completedStages": [],
+  "nextStage": "W8-A",
+  "boundaries": {
+    "canonicalPositionAutoAdmission": false,
+    "dossierAutoProjection": false,
+    "humanReviewRequiredAt": [
+      "W8-F",
+      "W8-H"
+    ],
+    "usPositionReuseAllowed": false,
+    "semanticBasisMustBeCNLineaged": true
+  }
+}
