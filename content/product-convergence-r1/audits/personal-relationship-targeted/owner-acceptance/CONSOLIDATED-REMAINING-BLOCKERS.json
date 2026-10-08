@@ -1,0 +1,89 @@
+{
+  "preexistingExternalDrift": [
+    {
+      "path": "content/registry/runtime-migrations.json",
+      "sha256": "a83f79400c2d799f5760704096cb222aeb8e76c8eb79ca44d7a4695b56107bf3",
+      "currentSha256": "c20836f29b45371f8c866bc02fc9a24b0b5df3fbeecd3bd53dd8e4a352342527",
+      "matchesReviewedBaseline": false
+    }
+  ],
+  "externalDriftNote": "Migration registry differs from reviewed baseline; current committed working state preserved, not amended or retrospectively admitted by this acceptance. Historical PDS failure remains unresolved.",
+  "schemaVersion": "PC-R1-CONSOLIDATED-REMAINING-BLOCKERS-v1",
+  "targetedAcceptance": {
+    "PCW92": "HUMAN_ACCEPT_TARGETED_EDITORIAL_ONLY",
+    "PCW93": "HUMAN_ACCEPT_TARGETED_NARRATIVE_ONLY"
+  },
+  "localCandidates": {
+    "PCW94": "LOCAL_TECHNICAL_ONLY_RETAINED",
+    "PCW95": "LOCAL_FUNCTIONAL_ONLY_RETAINED"
+  },
+  "productionAdmission": false,
+  "blockers": [
+    {
+      "id": "CPR-HISTORICAL-MISMATCH",
+      "status": "UNRESOLVED",
+      "classification": "BASELINE_EXTERNAL",
+      "owner": "CPR authority owner / separate legitimate reconciliation",
+      "evidence": "content/product-convergence-r1/audits/consolidated-closure/CPR-PDS-RECONCILIATION.json",
+      "frozenDigestsAmended": false
+    },
+    {
+      "id": "PDS-0013-MIGRATION",
+      "status": "UNRESOLVED_UNAUTHORIZED_MIGRATION",
+      "owner": "PDS schema/registry owner and environment authorization",
+      "evidence": "content/product-convergence-r1/audits/consolidated-closure/regression/npm-run-check.log",
+      "migrationRecordsAmended": false
+    },
+    {
+      "id": "REAL-HOUSEHOLD-PILOTS",
+      "status": "PENDING",
+      "owner": "Consented real households and pilot owner",
+      "evidence": "content/product-convergence-r1/audits/consolidated-closure/financial/results.json"
+    },
+    {
+      "id": "LICENSED-PROFESSIONAL-REVIEW",
+      "status": "PENDING",
+      "owner": "Licensed professional",
+      "professionalFinancialServiceAdmission": false
+    },
+    {
+      "id": "AUTHENTICATED-PRODUCTION-PERSISTENCE",
+      "status": "PENDING",
+      "owner": "Production storage/security admission and environment authorization",
+      "localFunctionalityDoesNotAdmitProduction": true
+    },
+    {
+      "id": "PC-W96-W99",
+      "status": "NOT_AUTHORIZED",
+      "owner": "Explicit future owner instruction"
+    },
+    {
+      "id": "PRD-W12",
+      "status": "NOT_AUTHORIZED",
+      "owner": "Explicit future owner instruction"
+    },
+    {
+      "id": "UNRESTRICTED-PC-W92-W93-PRODUCT-ADMISSION",
+      "status": "NOT_GRANTED",
+      "owner": "Separate owner and production admission decisions"
+    }
+  ],
+  "nonBlockingIssues": [
+    {
+      "id": "CONFLICTING-METHOD-FIXTURE-NAME",
+      "status": "FUTURE_FIXTURE_QUALITY",
+      "blocksTargetedAcceptance": false,
+      "evidence": "Fixture name suggests conflicting methods but contains one structural method claim; no contradiction invented",
+      "action": "Track naming or separately labelled future fixture quality work only if authorized"
+    }
+  ],
+  "prohibited": [
+    "Automatic commit",
+    "Push",
+    "Deploy",
+    "Production freeze",
+    "Commercial changes",
+    "Paid provider calls"
+  ],
+  "nextAction": "STOP_AWAIT_EXPLICIT_OWNER_INSTRUCTION"
+}

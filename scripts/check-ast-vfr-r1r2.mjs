@@ -14,5 +14,8 @@ for(const bodies of [data.bodies,Object.fromEntries(Object.entries(data.bodies).
  const labels=layoutAstPlanetLabels(bodies,108);for(let i=0;i<labels.length;i++)for(let j=i+1;j<labels.length;j++)assert(distance(labels[i].labelPosition,labels[j].labelPosition)>37.7,'NATAL_GLYPH_COLLISION');for(const l of labels)assert.equal(l.trueAngle,((180+bodies[l.code].longitude-108)%360+360)%360);
 }
 for(const id of ids){assert.equal(renderAstR1R2Diagram(id,data),renderAstR1R2Diagram(id,data));}
+let denseRun=0;for(const page of plan.pages){denseRun=page.density==='DENSE'?denseRun+1:0;assert(denseRun<=3);if(page.pageType==='DIAGRAM_TEXT_COMBO_PAGE')assert(page.parts.length||page.intentionalDiagramDominance,'EMPTY_COMBO_PAGE');}
+for(const asset of ir.visualBindings){assert.equal(hash(fs.readFileSync(asset.path)),asset.sourceDigest,'ARTWORK_CHANGED:'+asset.assetId);}
+for(const image of doc.querySelectorAll('[data-motif-purpose]'))assert(['section-marker','insight-divider'].includes(image.dataset.motifPurpose));
 const expanded=buildAstR1R2PagePlan({...ir,contentBlocks:ir.contentBlocks.map((b,i)=>i===0?{...b,text:b.text.repeat(10)}:b)});assert(expanded.pages.length>plan.pages.length);
 const receipt={status:'PASS',check:process.argv[2]||'all',compositions:[...used],acceptedCopyChanged:false,canonicalDigestChanged:false,r1Preserved:true,referencePageCount:plan.pages.length,fullPageDiagramCount:snapshot.fullPageDiagramCount,comboPageDiagramCount:snapshot.comboPageDiagramCount,providerCalls:0,browserReceipt:'SEPARATE',humanVisualApproval:'PENDING'};fs.writeFileSync(out+'zero-cost-check-receipt.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt));
