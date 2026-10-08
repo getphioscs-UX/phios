@@ -1,0 +1,606 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "namespace": "Production Closure independent of historical PC-R1",
+  "items": [
+    {
+      "id": "PC-W0",
+      "title": "Baseline",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "PASS",
+      "evidence": "content/production-closure/baseline.json",
+      "dependencies": [],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W1",
+      "title": "Authority inventory",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "PASS",
+      "evidence": "content/production-closure/production-authority-registry.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W2",
+      "title": "Full check stabilization",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "FAIL_FROZEN_DIGESTS",
+      "evidence": "content/production-closure/batch02/regression-results.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_EXTERNAL"
+    },
+    {
+      "id": "PC-W3",
+      "title": "Route census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W4",
+      "title": "Locale census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W5",
+      "title": "Visual / R2 census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W6",
+      "title": "Commerce inventory",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "PRICE_AUTHORITY_CONFLICT",
+      "evidence": "content/production-closure/batch02/book-vi-price-authority.json",
+      "dependencies": [
+        "PC-W1"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W7",
+      "title": "Stripe QA",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "17_LOCAL_GROUPS_PASS__REAL_QA_BLOCKED",
+      "evidence": "content/production-closure/batch02/stripe-qa-readiness.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W8",
+      "title": "Entitlement / account",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_ACCOUNT_ISOLATION_PASS__REAL_ACCOUNT_UNPROVEN",
+      "evidence": "content/production-closure/batch02/m1-results.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "IN_PROGRESS"
+    },
+    {
+      "id": "PC-W9",
+      "title": "Report architecture freeze",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W10",
+      "title": "BaZi admission",
+      "state": "IN_PROGRESS",
+      "checkResult": "PARTIAL_COMPLETE_WITH_BLOCKERS",
+      "evidence": "content/production-closure/batch02/m1-results.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W11",
+      "title": "ECR admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W12",
+      "title": "HD admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W13",
+      "title": "Cross admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W14",
+      "title": "Remaining reports",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W15",
+      "title": "Report delivery",
+      "state": "IN_PROGRESS",
+      "checkResult": "PARTIAL_COMPLETE_WITH_BLOCKERS",
+      "evidence": "content/production-closure/batch02/m1-results.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W16",
+      "title": "Book V Atlas",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W17",
+      "title": "Book VI Atlas",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W18",
+      "title": "Book VII manuscript",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W19",
+      "title": "Book VII publication",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W20",
+      "title": "Book VIII manuscript",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W21",
+      "title": "Book VIII publication",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W22",
+      "title": "Financial",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W23",
+      "title": "Will",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W24",
+      "title": "Ask",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W25",
+      "title": "My Reality / account",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W26",
+      "title": "Academy",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W27",
+      "title": "Enterprise",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W28",
+      "title": "Accessibility / mobile / performance",
+      "state": "IN_PROGRESS",
+      "checkResult": "PARTIAL_COMPLETE_WITH_BLOCKERS",
+      "evidence": "content/production-closure/batch02/m1-results.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W29",
+      "title": "Customer E2E",
+      "state": "IN_PROGRESS",
+      "checkResult": "PARTIAL_COMPLETE_WITH_BLOCKERS",
+      "evidence": "content/production-closure/batch02/m1-results.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W30",
+      "title": "Human browser acceptance",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W31",
+      "title": "Cutover",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    }
+  ],
+  "batch01Preserved": "content/production-closure/batch02/inherited/execution-ledger.json",
+  "batch02Commands": [
+    {
+      "command": "npm run check:bazi-deep-manuscript:r2-prelive",
+      "exitCode": 1,
+      "startedAt": "2026-10-08T09:56:29.847Z",
+      "finishedAt": "2026-10-08T09:56:33.391Z",
+      "log": "docs/production-closure/batch02/evidence/baziFreeze.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/baziFreeze-result.json"
+    },
+    {
+      "command": "node scripts/check-book-w1f-wpr-successor-current.mjs",
+      "exitCode": 1,
+      "startedAt": "2026-10-08T09:56:29.680Z",
+      "finishedAt": "2026-10-08T09:56:30.110Z",
+      "log": "docs/production-closure/batch02/evidence/booksFreeze.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/booksFreeze-result.json"
+    },
+    {
+      "command": "node scripts/check-production-closure-batch02-browser.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T09:59:31.466Z",
+      "finishedAt": "2026-10-08T10:01:22.145Z",
+      "log": "docs/production-closure/batch02/evidence/browser.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/browser-result.json"
+    },
+    {
+      "command": "npm run check:cloudflare-function-import-compat",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T09:53:34.891Z",
+      "finishedAt": "2026-10-08T09:53:38.571Z",
+      "log": "docs/production-closure/batch02/evidence/compat.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/compat-result.json"
+    },
+    {
+      "command": "node scripts/check-report-customer-delivery.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T09:53:34.726Z",
+      "finishedAt": "2026-10-08T09:53:34.990Z",
+      "log": "docs/production-closure/batch02/evidence/delivery.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/delivery-result.json"
+    },
+    {
+      "command": "node scripts/check-ecr-r4-authority-drift.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T10:16:33.191Z",
+      "finishedAt": "2026-10-08T10:16:38.434Z",
+      "log": "docs/production-closure/batch02/evidence/ecr.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/ecr-result.json"
+    },
+    {
+      "command": "node scripts/check-production-closure-batch02-library-checkout.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T10:10:17.486Z",
+      "finishedAt": "2026-10-08T10:10:47.871Z",
+      "log": "docs/production-closure/batch02/evidence/library.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/library-result.json"
+    },
+    {
+      "command": "node scripts/check-production-closure-batch02-m1.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T10:09:30.129Z",
+      "finishedAt": "2026-10-08T10:09:31.166Z",
+      "log": "docs/production-closure/batch02/evidence/m1.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/m1-result.json"
+    },
+    {
+      "command": "npm run check:pages-build",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T10:09:31.296Z",
+      "finishedAt": "2026-10-08T10:11:41.313Z",
+      "log": "docs/production-closure/batch02/evidence/pages.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/pages-result.json"
+    },
+    {
+      "command": "node scripts/check-fw-private-bindings.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T09:53:34.811Z",
+      "finishedAt": "2026-10-08T09:53:35.415Z",
+      "log": "docs/production-closure/batch02/evidence/private.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/private-result.json"
+    },
+    {
+      "command": "node scripts/check-pws-i2-w5-product-offer-registry.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T10:16:21.871Z",
+      "finishedAt": "2026-10-08T10:16:32.966Z",
+      "log": "docs/production-closure/batch02/evidence/pws.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/pws-result.json"
+    },
+    {
+      "command": "node scripts/check-production-closure-evidence-quarantine.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T10:16:38.605Z",
+      "finishedAt": "2026-10-08T10:16:38.827Z",
+      "log": "docs/production-closure/batch02/evidence/quarantine.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/quarantine-result.json"
+    },
+    {
+      "command": "node --no-warnings scripts/check-commerce-stripe-r1.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T09:54:18.404Z",
+      "finishedAt": "2026-10-08T09:54:18.908Z",
+      "log": "docs/production-closure/batch02/evidence/stripe.txt",
+      "scope": "Local fixtures / read-only browser; no external provider transaction",
+      "paidCallsAllowed": false,
+      "evidence": "docs/production-closure/batch02/evidence/stripe-result.json"
+    }
+  ],
+  "inheritedBroad": [
+    {
+      "command": "npm run check",
+      "exitCode": 1,
+      "startedAt": "2026-10-08T08:47:01.245Z",
+      "finishedAt": "2026-10-08T09:02:00.231Z",
+      "log": "docs/production-closure/evidence/npm-check.txt",
+      "paidProviderCallsAllowed": false,
+      "evidence": "docs/production-closure/evidence/npm-check-result.json",
+      "logSha256": "06c74fbb7fa29a1a342b76aec62077b7ede6024674f91ec2a600673fb6077cf8",
+      "batch02Execution": "NOT_RERUN_KNOWN_UNCHANGED_BLOCKER",
+      "currentFailingGateReproduced": "docs/production-closure/batch02/evidence/baziFreeze-result.json"
+    },
+    {
+      "command": "npm run postcheck",
+      "exitCode": 1,
+      "startedAt": "2026-10-08T09:03:44.246Z",
+      "finishedAt": "2026-10-08T09:15:13.884Z",
+      "log": "docs/production-closure/evidence/npm-postcheck.txt",
+      "paidProviderCallsAllowed": false,
+      "evidence": "docs/production-closure/evidence/npm-postcheck-result.json",
+      "logSha256": "b7daa15a01df54803353cc27410f4d019372b58fa2a909f314d39acf3ec443c0",
+      "batch02Execution": "NOT_RERUN_KNOWN_UNCHANGED_BLOCKER",
+      "currentFailingGateReproduced": "docs/production-closure/batch02/evidence/booksFreeze-result.json"
+    }
+  ],
+  "ownerAcceptanceInferred": false,
+  "productionAdmission": "NOT_GRANTED"
+}

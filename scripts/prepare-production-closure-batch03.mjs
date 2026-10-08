@@ -1,0 +1,13 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {execFileSync} from 'node:child_process';
+const d='content/production-closure/batch03/',docs='docs/production-closure/batch03/';
+if(fs.existsSync(d+'baseline.json'))throw Error('BATCH03_BASELINE_ALREADY_EXISTS');
+for(const p of [d,d+'inherited/',docs,docs+'evidence/',docs+'screenshots/'])fs.mkdirSync(p,{recursive:true});
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const old=JSON.parse(fs.readFileSync('content/production-closure/batch02/baseline.json'));
+const files=old.protectedFiles.map(r=>({...r,batch03StartSha256:sha(r.path)}));
+const baseline={workId:'PHI-OS-PRODUCTION-CLOSURE',batch:'03',startedAt:new Date().toISOString(),head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),status:execFileSync('git',['status','--porcelain=v1'],{encoding:'utf8'}),protectedFiles:files};
+fs.writeFileSync(d+'baseline.json',JSON.stringify(baseline,null,2)+'\n');
+for(const f of ['batch-result.json','remaining-blockers.json','bazi-freeze-investigation.json','books-postcheck-investigation.json','book-vi-price-authority.json','failure-reconciliation.json','asset-http-probe.json','preservation.json'])fs.copyFileSync('content/production-closure/batch02/'+f,d+'inherited/'+f);
+for(const f of ['work-status.json','execution-ledger.json'])fs.copyFileSync('content/production-closure/'+f,d+'inherited/'+f);
+fs.copyFileSync('C:/Users/Guest Account/.codex/attachments/0f62d061-aba1-49a5-a0bb-9b11f4e37b4f/Pasted text.txt',docs+'OWNER-INSTRUCTION.txt');
+console.log('Batch03 immutable baseline recorded; '+files.length+' protected files.');

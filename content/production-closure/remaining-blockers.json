@@ -1,23 +1,23 @@
 {
   "workId": "PHI-OS-PRODUCTION-CLOSURE",
-  "batch": "02",
+  "batch": "03",
   "blockers": [
     {
       "id": "BAZI_SHARED_WORKER_FREEZE",
       "status": "BLOCKED_BY_HUMAN_QA",
-      "evidence": "content/production-closure/batch02/bazi-freeze-investigation.json",
+      "evidence": "content/production-closure/batch03/worker-successor-owner-decision-candidate.json",
       "reason": "Frozen source located exactly; later shared private QA evolution has no verified BaZi freeze successor acceptance. Strict gate still FAIL."
     },
     {
       "id": "BOOKS_RESOURCE_SUCCESSOR",
       "status": "BLOCKED_BY_HUMAN_QA",
-      "evidence": "content/production-closure/batch02/books-postcheck-investigation.json",
-      "reason": "Only two Book I entries changed after Book VI successor. Verification remains owner-reported/pending; no frozen digest replacement authorized."
+      "evidence": "content/production-closure/batch03/books-successor-owner-decision-candidate.json",
+      "reason": "Book I preview and six figures return200; exact two registry deltas reconciled. Frozen successor digest stillFAIL; legitimate owner successor receipt pending."
     },
     {
       "id": "BOOK_VI_PRICE_CONFLICT",
       "status": "BLOCKED_BY_HUMAN_QA",
-      "evidence": "content/production-closure/batch02/book-vi-price-authority.json",
+      "evidence": "content/production-closure/batch03/book-vi-pricing-decision-sheet.json",
       "reason": "Native MYR109 versus original master MYR59; preserve existing contract pending explicit price authority decision."
     },
     {
@@ -29,7 +29,7 @@
     {
       "id": "BOOK_VIII_HERO",
       "status": "BLOCKED_BY_EXTERNAL",
-      "evidence": "content/production-closure/batch02/asset-http-probe.json",
+      "evidence": "content/production-closure/batch03/asset-investigation.json",
       "reason": "Exact registered public asset still HTTP404; no private asset published or unrelated image substituted."
     },
     {
@@ -41,14 +41,14 @@
     {
       "id": "M1_SUBJECT_BOUND_PUBLICATION_RELEASE",
       "status": "BLOCKED_BY_HUMAN_QA",
-      "evidence": "content/production-closure/batch02/m1-results.json",
-      "reason": "Native BZR renderer/release adapter and accepted per-customer narrative snapshot absent; old 38-page accepted report and 26-page controlled archive cannot become a new paid customer release."
+      "evidence": "content/production-closure/batch03/release-architecture.json",
+      "reason": "Real native account/subject calculation and blocked snapshots implemented. Complete accepted-copy coverage absent; no new full report or native release admitted."
     },
     {
       "id": "CONTROLLED_ARCHIVE_MOBILE",
-      "status": "FAIL",
-      "evidence": "content/production-closure/batch02/archive-mobile-findings.json",
-      "reason": "Existing 26-page controlled archive clips cover fields at390px; A4 passes. Historical archive unchanged; current customer renderer admission must address this."
+      "status": "HISTORICAL_FAIL__SUCCESSOR_LOCAL_PASS",
+      "evidence": "content/production-closure/batch03/visual-results.json",
+      "reason": "Original archive retains its390px failure. Successor shell shows full fields and passes14 checks; local compatibility is not customer release."
     },
     {
       "id": "STRIPE_REAL_QA",
@@ -77,6 +77,12 @@
       "id": "PRODUCTION_ACTIVATION",
       "status": "NOT_AUTHORIZED",
       "reason": "No payment, commit, push, deployment, freeze, production switch or product activation performed."
+    },
+    {
+      "id": "BAZI_ACCEPTED_COPY_COVERAGE",
+      "status": "BLOCKED_ACCEPTED_COPY_COVERAGE",
+      "evidence": "content/production-closure/batch03/accepted-copy-coverage-matrix.json",
+      "reason": "No approved reusable bilingual narrative for current bound subjects and timing context; no paid fallback or invented text."
     }
   ],
   "finalProductionReady": false,
