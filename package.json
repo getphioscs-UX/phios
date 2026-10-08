@@ -2825,7 +2825,11 @@
     "build:dossier-us:w8d": "node scripts/build-dossier-us-w8d-observable-features.mjs",
     "build:dossier-us:w8f": "npm run build:runtime-position-48:w8e",
     "build:dossier-us:status": "node scripts/build-dossier-us-golden-closure-status.mjs",
-    "check:dossier-us:golden": "node scripts/run-zero-cost-regression.mjs check:dossier-us:golden"
+    "check:dossier-us:golden": "node scripts/run-zero-cost-regression.mjs check:dossier-us:golden",
+    "build:dossier-us:w8g": "node scripts/build-dossier-us-w8g-rp-candidates.mjs",
+    "build:dossier-us:w8h": "node scripts/build-dossier-us-w8h-position-review.mjs",
+    "build:dossier-us:w8i": "node scripts/build-dossier-us-w8i-accepted-dossier.mjs",
+    "build:dossier-us:golden-pregate": "npm run build:dossier-us:w8d && npm run build:dossier-us:w8f && npm run build:dossier-us:status"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
