@@ -11,6 +11,8 @@ export function resolveAstFigures(data,manifest,profile){
 }
 export function resolveEditorialAssets(registry){return registry.assets.map(a=>{if(a.languageScope!=='bilingual'||a.fallbackAllowed||!fs.existsSync(a.path))throw Error('AST_EDITORIAL_BILINGUAL_ASSET_MISSING');if(hash(fs.readFileSync(a.path))!==a.digest)throw Error('AST_EDITORIAL_ASSET_DRIFT');return a;});}
 export function bindAstFrozenPublicationIR({template,customerDisplay,localeSections,editorialRegistry,masterRegistry,manifest,profile,data}){
+ if(hash(JSON.stringify(masterRegistry))!==profile.masterLayoutRegistryDigest)throw Error('AST_MASTER_LAYOUT_VISUAL_DRIFT');
+ if(hash(JSON.stringify(editorialRegistry))!==profile.editorialRegistryDigest)throw Error('AST_EDITORIAL_REGISTRY_VISUAL_DRIFT');
  const editorialPages=resolveEditorialAssets(editorialRegistry),figures=resolveAstFigures(data,manifest,profile);
  for(const m of masterRegistry.masters)if(!fs.existsSync(m.assetPath)||hash(fs.readFileSync(m.assetPath))!==m.assetDigest)throw Error('AST_SECTION_MASTER_ASSET_DRIFT');
  const sections=template.sections.map((s,i)=>({...s,title:masterRegistry.masters[i].text.zhTitle,englishTitle:masterRegistry.masters[i].text.enTitle,localeBlocks:localeSections?.[i]||s.localeBlocks,sharedDiagrams:s.sharedDiagrams.filter(id=>figures.some(f=>f.diagramId===id))}));
