@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+if(fs.existsSync('content/product-convergence-r1/audits/pc-w11-closure/OWNER-ACCEPTANCE-RECEIPT.json')){execFileSync(process.execPath,['scripts/record-pc-w11-owner-closure.mjs','close'],{stdio:'inherit'});process.exit(0);}
 const read=p=>JSON.parse(fs.readFileSync(p));
 const root='content/product-convergence-r1/audits/';
 const results=read(root+'regression/results.json');

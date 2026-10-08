@@ -1,7 +1,7 @@
 {
   "work": "PHI-OS-PRODUCT-CONVERGENCE-R1",
   "baselineCommit": "8888f647bd85f21a45397690fb3479de9b339c17",
-  "status": "READY_FOR_HUMAN_REVIEW",
+  "status": "HUMAN_ACCEPTED_PC_W11_CLOSURE_PENDING",
   "completedSteps": [
     "PC-W0",
     "PC-W1",
@@ -16,8 +16,8 @@
     "PC-W10"
   ],
   "humanReview": "tools/review/PHI-OS-PC-R1-PROFILE-DEMOTION-HUMAN-REVIEW.html",
-  "humanDecision": "PENDING",
-  "pcW11": "BLOCKED",
+  "humanDecision": "PC-R1 PROFILE DEMOTION ACCEPT",
+  "pcW11": "AUTHORIZED_CLOSURE_PENDING_GATES",
   "productionCutover": false,
   "finalRegressionGates": [
     {
@@ -55,6 +55,15 @@
       "status": "PASS",
       "exitCode": 0,
       "log": "content/product-convergence-r1/audits/regression/check-pages-build.log"
+    }
+  ],
+  "ownerAcceptanceDecisions": [
+    {
+      "decision": "PC-R1 PROFILE DEMOTION ACCEPT",
+      "receiptId": "PC-W11-OWNER-ACCEPT-BC92FACCA0AC693565591111",
+      "receiptRef": "content/product-convergence-r1/audits/pc-w11-closure/OWNER-ACCEPTANCE-RECEIPT.json",
+      "receiptSha256": "47a65f8e094df07471b1733372d4233b8992d0b669f12d787495615ac950e4a3",
+      "scope": "Accepted PC-R1 first-batch product positioning and architectural transition; PC-W11 closure only"
     }
   ]
 }
