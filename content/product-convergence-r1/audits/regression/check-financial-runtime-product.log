@@ -2,26 +2,38 @@
 > check:fcr
 > node scripts/run-zero-cost-regression.mjs check:fcr
 
-node:internal/modules/run_main:107
-    triggerUncaughtException(
-    ^
+✓ FCR-W0 authority reconciliation passed.
+  7 predecessor authorities frozen; FDR remains sole fact authority and M4A/MPA/NUM do not become FCR fact or advice owners.
+✓ FCR-W1–W19 contracts and registries passed.
+  14 deterministic engines + 4 scenarios + explicit versioned/source-labelled assumption authority are bound.
+✓ FCR-W3–W20 executable engine + edge fixture runtime passed.
+  11 fixtures executed across 14 engines; range, FX, missing-value, guarantee, retirement, education and estate boundaries verified.
+✓ FCR-W17 scenario engine passed.
+  BASE / CONSERVATIVE / STRESS / CUSTOM execute only with an explicitly matching assumption set; scenario labels contain no hidden numeric defaults.
+✓ FCR-W21 determinism/regression passed.
+  same FDR digest + same assumption digest + same FCR version/scenario/engine set => byte-stable result digest; governed input drift changes the digest.
+✓ FCR ↔ FDR authority boundary passed.
+  FCR consumes immutable FDR snapshots and assumptions only; no FDR fact mutation, professional override, or recommendation runtime is imported.
+✓ FCR-W22 acceptance + freeze passed.
+  37 FCR v1 artifacts are digest-frozen; final gate is check:fcr.
 
-AssertionError [ERR_ASSERTION]: Predecessor drift: LEGACY_FINANCIAL_CALCULATION_LAYER
-+ actual - expected
+> check:far
+> node scripts/run-zero-cost-regression.mjs check:far
 
-+ 'cd58aaa1433fb404129808d70d4d830bf8f0a525a0842f001f8f075b15e07c53'
-- '6e4fc8da92c17c0b25feb24d9dbb09e1d6fab1cbe5c225b20da1b7acfd92536e'
+✓ FAR-W0 authority reconciliation passed.
+✓ FAR-W1/W2/W18/W19 contracts and policy authority passed.
+✓ FAR-W3–W17 executable structural finding runtime passed.
+✓ FAR-W19 finding → FCR → FDR provenance passed.
+✓ FAR-W18 evidence-sensitive confidence passed.
+✓ FAR-W20 anti-advice boundary passed.
+✓ FAR-W21 fixtures passed: 14 governed fixtures.
+✓ FAR FCR/FDR boundary passed: no independent financial recalculation or FDR mutation authority.
+✓ FAR-W22 acceptance + freeze passed.
+  43 FAR v1 artifacts are digest-frozen; final gate is check:far.
 
-    at file:///C:/phios/scripts/check-fcr-authority.mjs:11:45
-    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
-    at async node:internal/modules/esm/loader:643:26
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
-  generatedMessage: false,
-  code: 'ERR_ASSERTION',
-  actual: 'cd58aaa1433fb404129808d70d4d830bf8f0a525a0842f001f8f075b15e07c53',
-  expected: '6e4fc8da92c17c0b25feb24d9dbb09e1d6fab1cbe5c225b20da1b7acfd92536e',
-  operator: 'strictEqual',
-  diff: 'simple'
-}
+> check:financial-product-stage14
+> node scripts/run-zero-cost-regression.mjs check:financial-product-stage14
 
-Node.js v24.18.0
+✓ STAGE 14 Financial Runtime Product Activation passed.
+  FDR-compatible ephemeral intake → real FCR → real FAR → bounded snapshot/findings → PFR handoff.
+  Scenario stays explicit-assumption-only; no hidden defaults, model calculation, automatic persistence or recommendation authority.

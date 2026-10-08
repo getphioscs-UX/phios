@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {finalizePersonalEvidenceReviewHub} from './lib/personal-evidence-w11r5-review.mjs';
 import {renderPersonalEvidenceDossier} from '../functions/canonical-presentation-runtime/personal-evidence-dossier-presentation.js';
 import {buildPersonalEvidenceBilingualReading} from '../functions/canonical-presentation-runtime/personal-evidence-bilingual-reading.js';
 import {buildProfileCustomerVisualProjection} from '../functions/profile/profile-customer-visual-projection.js';
@@ -63,3 +64,4 @@ fs.writeFileSync(root+'portable-evidence-manifest.json',JSON.stringify({work:'PR
 if(r5){let hub=fs.readFileSync(main,'utf8');const coverage='<h2>PFIG PUBLICATION COVERAGE</h2><p>BILINGUAL PUBLICATION STATUS · ONE BILINGUAL REPORT per case · W12 BLOCKED</p><table><thead><tr><th>Case</th>'+Array.from({length:9},(_,i)=>'<th>'+String(i+1).padStart(3,'0')+'</th>').join('')+'</tr></thead><tbody>'+cases.map(c=>'<tr><th>'+c.id+'</th>'+pfigs.filter(f=>f.caseId===c.id).map(f=>'<td>'+f.knowledgeState+'</td>').join('')+'</tr>').join('')+'</tbody></table>';hub=hub.replace('<nav>',coverage+'<nav>').replaceAll('PRD-W11R3','PRD-W11R5');fs.writeFileSync(main,hub);const manifestPath=root+'portable-evidence-manifest.json',manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));manifest.work='PRD-W11R5';manifest.sha256=crypto.createHash('sha256').update(hub).digest('hex');manifest.bytes=Buffer.byteLength(hub);fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));}
 }
 console.log((r5?'PRD-W11R5':'PRD-W11R3')+' bilingual artifacts rebuilt',cases.map(c=>({id:c.id,pages:c.pages})));
+if(r5&&!onlyCase)finalizePersonalEvidenceReviewHub();

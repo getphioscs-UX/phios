@@ -64,7 +64,7 @@ const loader=text('assets/js/pages/civilization-atlas/atlas-data.js');
 assert(loader.includes('runtime-position-w6-evidence-gate-v1.json'),'LOADER_W6_GATE');
 const renderer=text('assets/js/pages/civilization-atlas/reconfiguration-renderer.js');
 assert(renderer.includes('Current evidence → 48 runtime positions'),'RENDERER_EVIDENCE_POSITION');
-assert(renderer.includes('Transition signals → observation threshold → reachable positions'),'RENDERER_THRESHOLD_PIPELINE');
+assert(renderer.includes('Observation signals → observation threshold → reachable positions'),'RENDERER_THRESHOLD_PIPELINE');
 assert(renderer.includes('Observation target ≠ signal'),'RENDERER_BOUNDARY');
 assert(renderer.includes('data-runtime-readout'),'RRE_SLOT');
 assert(renderer.includes('hydrateDossierRuntimeReadout(host,d,l)'),'RRE_HYDRATION');

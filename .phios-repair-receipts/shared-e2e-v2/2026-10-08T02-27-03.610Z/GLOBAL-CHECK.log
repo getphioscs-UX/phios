@@ -1,0 +1,36 @@
+
+> precheck
+> node scripts/run-zero-cost-regression.mjs precheck
+
+
+> check:report-provider-spend-protection
+> node scripts/run-zero-cost-regression.mjs check:report-provider-spend-protection
+
+PASS ordinary npm checks/builds: inherited zero-cost guard denies paid network even when parent requests live mode.
+
+> check:cloudflare-function-import-compat
+> node scripts/run-zero-cost-regression.mjs check:cloudflare-function-import-compat
+
+
+✗ Cloudflare Pages Functions source deployability invariant failed.
+
+  UNSUPPORTED_JSON_IMPORT_WITH_ATTRIBUTE
+  functions/account/ziwei-account-delivery.js:1
+  Static JSON imports in Pages Functions must not use `with { type: "json" }`.
+  import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'}
+
+  UNSUPPORTED_JSON_IMPORT_WITH_ATTRIBUTE
+  functions/api/shared-report-e2e-proof.js:1
+  Static JSON imports in Pages Functions must not use `with { type: "json" }`.
+  import {authenticate,digest,requireSameOrigin} from '../account/oidc-auth.js'; import {openAccountZiweiMaterial,listAccountZiweiMaterials} from '../account/ziwei-account-delivery.js'; import contract from '../../content/
+
+  UNSUPPORTED_JSON_IMPORT_WITH_ATTRIBUTE
+  functions/report-delivery/ziwei-vfr-r1-generation.js:1
+  Static JSON imports in Pages Functions must not use `with { type: "json" }`.
+  import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'}
+
+Use a bundler-compatible JSON import in functions/**, for example:
+  import registry from './registry.json';
+Do not use:
+  import registry from './registry.json' with { type: 'json' };
+

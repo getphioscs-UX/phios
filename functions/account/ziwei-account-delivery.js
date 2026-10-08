@@ -1,4 +1,4 @@
-import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with {type:'json'};
+import contract from '../../content/reports/shared-report-delivery-e2e-contract-v2.json' with { type: 'json' };
 import {requireVfrAdmission} from '../report-delivery/shared-report-e2e-v2.js';
 import {generateAccountZiweiCandidate} from '../report-delivery/ziwei-canonical-person-binding.js';
 import {controlledZiweiIdentity} from '../report-delivery/ziwei-production-generation-v1.js';

@@ -115,6 +115,7 @@ export function renderPersonalEvidenceFigure(figure,{locale='en',publicationRows
     // Pair text nodes in the existing renderer, retaining a single figure tree.
     const english=[...render(figure,'en').matchAll(/>([^<>]+)</g)].map(m=>m[1]);let index=0;
     const body=render(figure,'zh-Hans').replace(/>([^<>]+)</g,(whole,text)=>{const en=english[index++];return '>'+text+(en&&en!==text?' <span lang="en">'+en+'</span>':'')+'<';}).replace(/ data-pfig="[^"]+"/g,'');
+    if(index!==english.length)throw new Error('PERSONAL_EVIDENCE_FIGURE_BILINGUAL_PARITY_REQUIRED');
     const radar=figure.pfig==='PFIG-002'&&figure.state==='READY'?list(figure.data?.series).map(row=>{
       // PHI self-report is a native 0–100 index. Other instruments retain
       // their native-value table unless their scale is explicitly admitted.

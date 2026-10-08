@@ -1,0 +1,60 @@
+{
+  "work": "PHI-OS-PRODUCT-CONVERGENCE-R1",
+  "baselineCommit": "8888f647bd85f21a45397690fb3479de9b339c17",
+  "status": "READY_FOR_HUMAN_REVIEW",
+  "completedSteps": [
+    "PC-W0",
+    "PC-W1",
+    "PC-W2",
+    "PC-W3",
+    "PC-W4",
+    "PC-W5",
+    "PC-W6",
+    "PC-W7",
+    "PC-W8",
+    "PC-W9",
+    "PC-W10"
+  ],
+  "humanReview": "tools/review/PHI-OS-PC-R1-PROFILE-DEMOTION-HUMAN-REVIEW.html",
+  "humanDecision": "PENDING",
+  "pcW11": "BLOCKED",
+  "productionCutover": false,
+  "finalRegressionGates": [
+    {
+      "key": "check:profile",
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "content/product-convergence-r1/audits/regression/check-profile.log"
+    },
+    {
+      "key": "check:cx-r12",
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "content/product-convergence-r1/audits/regression/check-cx-r12.log"
+    },
+    {
+      "key": "check:cx-r31",
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "content/product-convergence-r1/audits/regression/check-cx-r31.log"
+    },
+    {
+      "key": "check:ppr-current-shared-owner",
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "content/product-convergence-r1/audits/regression/check-ppr-current-shared-owner.log"
+    },
+    {
+      "key": "check:backend-frontend-full-production",
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "content/product-convergence-r1/audits/regression/check-backend-frontend-full-production.log"
+    },
+    {
+      "key": "check:pages-build",
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "content/product-convergence-r1/audits/regression/check-pages-build.log"
+    }
+  ]
+}

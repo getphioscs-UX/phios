@@ -6,4 +6,6 @@ for(const name of ['check:profile:prd-w11r5:print','check:profile:prd-w11r5:mobi
 p.scripts['check:profile:prd-w11r5']='node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5';c['check:profile:prd-w11r5']='node scripts/check-profile-personal-evidence-w11r5.mjs && node scripts/check-profile-personal-evidence-w11r5-browser.mjs --no-pdf';
 p.scripts['build:profile:prd-w11r5']='node scripts/build-profile-personal-evidence-w11r3.mjs --w11r5';
 p.scripts['check:pc-r1:w0']='node scripts/run-zero-cost-regression.mjs check:pc-r1:w0';c['check:pc-r1:w0']='node scripts/check-pc-r1-w0-current-main.mjs';
+p.scripts['check:pc-r1:w1-w10']='node scripts/run-zero-cost-regression.mjs check:pc-r1:w1-w10';c['check:pc-r1:w1-w10']='node scripts/check-pc-r1-profile-demotion.mjs';
+p.scripts['build:pc-r1:profile-demotion']='node scripts/build-pc-r1-profile-demotion.mjs';
 fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');fs.writeFileSync('config/reports/zero-cost-check-commands.json',JSON.stringify(c,null,2)+'\n');

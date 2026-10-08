@@ -1,0 +1,135 @@
+{
+  "work": "PHI-OS-PRODUCT-CONVERGENCE-R1",
+  "baselineCommit": "8888f647bd85f21a45397690fb3479de9b339c17",
+  "status": "CANDIDATE_FIRST_BATCH",
+  "domains": [
+    {
+      "domain": "MY_REALITY",
+      "authorityOwner": "RMO",
+      "inputOwners": [
+        "RMO"
+      ],
+      "projectionOwner": "CX_R20",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/reality/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+    },
+    {
+      "domain": "PERSONAL_REALITY",
+      "authorityOwner": "PPR_CURRENT_SHARED_RUNTIME",
+      "inputOwners": [
+        "METHOD_AUTHORITIES",
+        "PROFILE_PPR",
+        "CURRENT_REALITY_RUNTIME"
+      ],
+      "projectionOwner": "CX_R12",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/perspectives/personal/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+    },
+    {
+      "domain": "RELATIONSHIP_REALITY",
+      "authorityOwner": "REL_W0_W8",
+      "inputOwners": [
+        "REL_W0_W8"
+      ],
+      "projectionOwner": "RELATIONSHIP_WORKSPACE",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/perspectives/relationship/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+    },
+    {
+      "domain": "FINANCIAL_REALITY",
+      "authorityOwner": "FDR_FCR_FAR_HFP_PFR",
+      "inputOwners": [
+        "FDR_FCR_FAR_HFP_PFR"
+      ],
+      "projectionOwner": "FINANCIAL_RUNTIME_PRODUCT",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/professional/financial/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_SOURCE_TIME_FRESHNESS_PROVENANCE_ONLY"
+    },
+    {
+      "domain": "WORLD_REALITY",
+      "authorityOwner": "CURRENT_WEB_AUTHORITY",
+      "inputOwners": [
+        "CURRENT_WEB_AUTHORITY"
+      ],
+      "projectionOwner": "CIVILIZATION_ATLAS",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/knowledge/",
+      "routeRole": "EXISTING_KNOWLEDGE_ENTRY_WORLD_CUTOVER_PENDING",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_SOURCE_TIME_FRESHNESS_PROVENANCE_ONLY"
+    },
+    {
+      "domain": "KNOWLEDGE",
+      "authorityOwner": "CANONICAL_KNOWLEDGE",
+      "inputOwners": [
+        "CANONICAL_KNOWLEDGE"
+      ],
+      "projectionOwner": "KNOWLEDGE_CUSTOMER_PROJECTION",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/knowledge/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+    },
+    {
+      "domain": "SPECIALIST_PERSPECTIVE",
+      "authorityOwner": "EXISTING_METHOD_AUTHORITIES",
+      "inputOwners": [
+        "EXISTING_METHOD_AUTHORITIES"
+      ],
+      "projectionOwner": "SPECIALIST_READING",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/perspectives/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+    },
+    {
+      "domain": "PROFESSIONAL",
+      "authorityOwner": "PR_PFR",
+      "inputOwners": [
+        "PR_PFR"
+      ],
+      "projectionOwner": "PROFESSIONAL_WORKSPACE",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/professional/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+    },
+    {
+      "domain": "ASK",
+      "authorityOwner": "ASK_CONTEXT_BOUNDARY",
+      "inputOwners": [
+        "ASK_CONTEXT_BOUNDARY"
+      ],
+      "projectionOwner": "CX_R31",
+      "persistencePolicy": "EXPLICIT_SELECTION_AND_CONSENT_NO_AUTOMATIC_PERSISTENCE",
+      "customerRoute": "/knowledge/ask/",
+      "routeRole": "EXISTING_CANONICAL_CUSTOMER_ENTRY",
+      "reportCapability": "REUSE_EXISTING_RR_CPR_WHEN_ADMITTED",
+      "askCapability": "REUSE_EXISTING_CONTEXT_GOVERNED_ASK",
+      "currentDataCapability": "EXISTING_CONTEXT_WHEN_EXPLICIT"
+    }
+  ]
+}

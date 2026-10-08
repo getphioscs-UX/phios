@@ -1,4 +1,5 @@
 export const PERSONAL_EVIDENCE_REALITY_HANDOFF_SCHEMA='PHI-OS-PERSONAL-EVIDENCE-REALITY-HANDOFF-v1.0.0';
+import {projectProfilePersonEvidence} from './profile-person-evidence-adapter.js';
 export const PERSONAL_EVIDENCE_DOMAIN_HANDOFF_SCHEMA='PHI-OS-PERSONAL-EVIDENCE-DOMAIN-HANDOFF-BUNDLE-v1.0.0';
 
 const list=v=>Array.isArray(v)?v:[];
@@ -42,6 +43,8 @@ export function buildPersonalEvidenceRealityHandoff({
     automaticPersistence:false,
     selectedEvidenceRefs:selected.map(x=>x.signalRef),
     evidenceReferences:selected.map(preservePersonalEvidenceReference),
+    personEvidenceSignals:projectProfilePersonEvidence(profileView,selected.map(x=>x.signalRef)),
+    realityRelations:selected.map(x=>({signalId:x.signalRef,state:'open',realityFact:false})),
     observationNote:clean(observationNote),
     openQuestion:clean(openQuestion),
     governance:{
