@@ -2821,7 +2821,11 @@
     "book-i-v3:extract": "node scripts/extract-book-i-v3-final-manuscript.mjs --apply",
     "check:book-i-v3-extraction": "node scripts/run-zero-cost-regression.mjs check:book-i-v3-extraction",
     "build:book-i-v3-human-review": "node scripts/build-book-i-v3-manuscript-diff-review.mjs",
-    "check:m3b": "npm run check:m3b-knowledge-release"
+    "check:m3b": "npm run check:m3b-knowledge-release",
+    "build:dossier-us:w8d": "node scripts/build-dossier-us-w8d-observable-features.mjs",
+    "build:dossier-us:w8f": "npm run build:runtime-position-48:w8e",
+    "build:dossier-us:status": "node scripts/build-dossier-us-golden-closure-status.mjs",
+    "check:dossier-us:golden": "node scripts/run-zero-cost-regression.mjs check:dossier-us:golden"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
