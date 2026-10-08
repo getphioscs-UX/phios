@@ -1,0 +1,50 @@
+import fs from 'node:fs';import path from 'node:path';import http from 'node:http';import assert from 'node:assert/strict';import {pathToFileURL} from 'node:url';import {PDFDocument} from 'pdf-lib';
+import {STRIPE_PRODUCT_REGISTRY,standardBundleProducts} from '../functions/pws/commercial/stripe-product-registry.js';
+import {quoteReportPresentation} from '../functions/pws/commercial/report-successor-contract.js';
+import {reportCustomerState} from '../assets/customer-ui/js/report-customer-state.js';
+const {chromium}=await import('file:///C:/Users/Guest%20Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs');
+const dir='docs/production-closure/batch02/screenshots/',results=[],errors=[],blockedExternal=[],root=process.cwd();
+const server=http.createServer((req,res)=>{try{let p=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(p!==root&&!p.startsWith(root+path.sep))throw Error('PATH_DENIED');if(fs.existsSync(p)&&fs.statSync(p).isDirectory())p=path.join(p,'index.html');else if(!fs.existsSync(p)&&fs.existsSync(p+'.html'))p+='.html';res.setHeader('content-type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png','.ttf':'font/ttf','.woff2':'font/woff2'})[path.extname(p)]||'application/octet-stream');res.end(fs.readFileSync(p));}catch{res.writeHead(404);res.end();}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;let browser;
+try{
+ browser=await chromium.launch({channel:'msedge',headless:true});
+ for(const locale of ['en','zh-Hans'])for(const width of [1280,390]){
+  const context=await browser.newContext({viewport:{width,height:1000}}),page=await context.newPage();page.on('pageerror',e=>errors.push({locale,width,message:e.message}));
+  let scenario='NO_PURCHASE',checkoutBody=null;
+  const products=STRIPE_PRODUCT_REGISTRY.map(p=>({...p,reportPresentationOptions:p.productId==='COM-REPORT-BAZI-FULL'?['en','zh-Hans','bilingual'].map(reportLocale=>({...quoteReportPresentation('BAZI_FULL_REPORT',{reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'}),currency:'MYR'})):null}));
+  await context.route('**/*',async route=>{const url=new URL(route.request().url());if(url.origin!==origin&&!['file:','data:','blob:'].includes(url.protocol)){blockedExternal.push(url.href);return route.abort();}if(!url.pathname.startsWith('/api/'))return route.continue();
+   let body={ok:false},status=401;
+   if(url.pathname==='/api/commerce-catalog'){status=200;body={products,eligibleBundleProducts:standardBundleProducts(),environment:'QA',liveEnabled:false,checkoutAvailable:true};}
+   if(url.pathname==='/api/commerce-account'){status=200;body={ok:true,orders:scenario==='NO_PURCHASE'?[]:[{orderId:'isolated-local-fixture',productId:'COM-REPORT-BAZI-FULL',state:'CHECKOUT_CREATED'}],entitlements:[],subscriptions:[],services:[]};}
+   if(url.pathname==='/api/account-reports'){status=200;body={ok:true,progress:scenario==='NO_PURCHASE'?[]:[{state:scenario}],reports:['RELEASED','SUPERSEDED'].includes(scenario)?[{reportId:'11111111-1111-4111-8111-111111111111',reportVersion:'Local fixture v1',releaseStatus:scenario==='RELEASED'?'ACTIVE':'SUPERSEDED',releasedAt:'2026-10-08T00:00:00Z',acceptanceFixture:true}]:[]};}
+   if(url.pathname==='/api/account-financial-will-drafts'){status=200;body={ok:true,drafts:[]};}
+   if(url.pathname==='/api/commerce-checkout'){checkoutBody=route.request().postDataJSON();status=503;body={ok:false,error:'LOCAL_FIXTURE_NO_PROVIDER_TRANSACTION'};}
+   return route.fulfill({status,contentType:'application/json',body:JSON.stringify(body)});
+  });
+  const localize=async()=>{await page.evaluate(async l=>{const {applyCustomerLocale}=await import('/assets/customer-ui/js/locale.js');applyCustomerLocale(l);},locale);};
+  for(scenario of ['NO_PURCHASE','PENDING','INPUT_REQUIRED','GENERATING','RETRYABLE_FAILURE','SUPPORT_REQUIRED','RELEASED','SUPERSEDED']){
+   await page.goto(origin+'/account/',{waitUntil:'networkidle'});await page.waitForSelector('[data-commerce-form]',{state:'attached'});await localize();
+   const commerce=page.locator('[data-account-reports]'),text=await commerce.innerText();
+   if(scenario==='NO_PURCHASE')assert.equal(await page.locator('[data-report-purchase-progress]').count(),0);else assert(text.includes(reportCustomerState(scenario,locale)));
+   assert(!/\b(?:INPUT_REQUIRED|GENERATING|RETRYABLE_FAILURE|SUPPORT_REQUIRED|SUPERSEDED)\b/.test(text));
+   if(scenario==='SUPERSEDED')assert.equal(await page.locator('[data-account-reports] [data-download]').count(),0);
+   await commerce.scrollIntoViewIfNeeded();const screenshot=dir+`ACCOUNT-${scenario}-${locale}-${width}.png`;await page.screenshot({path:screenshot});
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);assert.equal(overflow,false);
+   results.push({surface:'Account Reports / purchases',scenario,locale,width,result:'PASS',screenshot,overflow,evidenceType:'ACTUAL_NATIVE_RENDERER_WITH_EXPLICIT_SYNTHETIC_API_FIXTURE',realPurchase:false,realReleasedBaZiReport:false});
+  }
+  // A local intercepted failure tests the actual checkout payload and retry UI.
+  await page.locator('[data-commerce-account] summary').click();await page.locator('[name=product]').selectOption('COM-REPORT-BAZI-FULL');await page.locator('[name=reportLocale]').selectOption('bilingual');await page.locator('[name=terms]').check();await page.locator('[data-commerce-form] [type=submit]').click();await page.waitForFunction(()=>!document.querySelector('[data-commerce-form] [type=submit]').disabled);assert.equal(checkoutBody.productId,'COM-REPORT-BAZI-FULL');assert.equal(checkoutBody.reportLanguageMode,'BILINGUAL');assert(!('amount'in checkoutBody));assert(!('priceId'in checkoutBody));results.push({surface:'Checkout failure/retry',locale,width,result:'PASS',payload:checkoutBody,transport:'INTERCEPTED_LOCAL_503_NO_PROVIDER_ACTION'});
+  await page.goto(origin+'/articles/',{waitUntil:'networkidle'});await localize();await page.waitForSelector('[name=topic] option:nth-child(2)',{state:'attached'});assert.equal(await page.locator('[name=topic] option').filter({hasText:/^TH-/}).count(),0);const labels=await page.locator('[name=topic] option').allTextContents();if(locale==='zh-Hans')assert(labels.some(t=>/[\u4e00-\u9fff]/.test(t)));const screenshot=dir+`ARTICLES-${locale}-${width}.png`;await page.screenshot({path:screenshot});results.push({surface:'Articles',locale,width,result:'PASS',screenshot,labels,evidenceType:'ACTUAL_LOCAL_SOURCE_WITH_NATIVE_PUBLISHED_KNOWLEDGE'});
+  for(const route of ['/about/','/research/','/terms.html','/privacy.html','/ai-disclosure.html']){
+   await page.goto(origin+route,{waitUntil:'networkidle'});if(route.endsWith('/'))await localize();else await page.evaluate(async l=>{const {setLocale}=await import('/assets/js/i18n.js');setLocale(l);},locale);const canonical=await page.locator('link[rel=canonical]').getAttribute('href');assert.equal(canonical,'https://getphios.com'+route);const image=dir+`${route.replaceAll('/','').replace('.html','')}-${locale}-${width}.png`;await page.screenshot({path:image});results.push({surface:route,locale,width,result:'PASS',canonical,screenshot:image,evidenceType:'LOCAL_CANONICAL_REPAIR_NOT_DEPLOYED'});
+  }
+  await context.close();
+ }
+ // Existing BaZi publication is only reopened and validated; not rebuilt or released.
+ const proof=JSON.parse(fs.readFileSync('docs/acceptance/bazi-paid-report/controlled-subject-r1/proof.json'));
+ const context=await browser.newContext();await context.route('**/*',r=>{const u=r.request().url();const parsed=new URL(u);return /^(file:|data:|blob:)/.test(u)||(parsed.hostname==='pub-1967bc5812ee4164b19a806fb1427021.r2.dev'&&r.request().method()==='GET')?r.continue():r.abort();});
+ for(const a of proof.artifacts){const page=await context.newPage();await page.goto(pathToFileURL(path.resolve(a.path)).href);await page.waitForFunction(()=>window.batchReady,null,{timeout:90000});for(const width of [1280,390]){await page.setViewportSize({width,height:1000});const screenshot=dir+`BAZI-EXISTING-${a.locale}-${width}.png`;await page.screenshot({path:screenshot});results.push({surface:'Existing source-bound BaZi candidate',locale:a.locale,width,screenshot,result:'PASS',evidenceType:'EXISTING_CONTROLLED_26_PAGE_ARCHIVE_NOT_A_CUSTOMER_RELEASE'});}
+  await page.emulateMedia({media:'print'});const fit=await page.evaluate(()=>window.reviewQuality);assert(fit.every(p=>p.fits));const pdf=await PDFDocument.load(await page.pdf({format:'A4',printBackground:true,preferCSSPageSize:true}));assert.equal(pdf.getPageCount(),26);results.push({surface:'Existing BaZi A4',locale:a.locale,result:'PASS',pages:26,source:a.path,frozenPublicationRegenerated:false,pdfBuffer:'Validation only; not persisted or released'});await page.close();}
+ await context.close();assert.equal(errors.length,0);
+}finally{fs.writeFileSync('content/production-closure/batch02/browser-partial.json',JSON.stringify({results,errors,scope:'Completed local checks from this attempt; final result separately recorded'},null,2)+'\n');await browser?.close();await new Promise(r=>server.close(r));}
+fs.writeFileSync('content/production-closure/batch02/browser-results.json',JSON.stringify({exitCode:0,results,errors,blockedExternal:[...new Set(blockedExternal)],network:'Customer page checks localhost-only; existing BaZi archive allows exact public R2 GET for its original static Masters; provider/API requests denied',providerCalls:0,paymentActions:0,productionDeployment:false,releaseEvidence:'No BZR native release created; synthetic lifecycle fixtures never count as real purchase'},null,2)+'\n');console.log('PASS Batch02 browser '+results.length+' local observations: native state copy, checkout failure/retry, Articles labels, canonical metadata, existing BaZi 26-page A4.');

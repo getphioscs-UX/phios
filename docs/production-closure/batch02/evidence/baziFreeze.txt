@@ -1,0 +1,26 @@
+
+> check:bazi-deep-manuscript:r2-prelive
+> node scripts/run-zero-cost-regression.mjs check:bazi-deep-manuscript:r2-prelive
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: workers/method-report-renderer/index.js
++ actual - expected
+
++ 'bbd95b389ea7797083d70232f8ed5b9d29e6e4f2697dc2071435788298b54b89'
+- '0e19c4cf3cf5b00f26de877161e73d1bc7a6fbf663a37f4f25fcd18de9f1fb1b'
+
+    at file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:70:225
+    at check (file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:19:51)
+    at file:///C:/phios/scripts/check-bazi-deep-manuscript-r2.mjs:70:7 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'bbd95b389ea7797083d70232f8ed5b9d29e6e4f2697dc2071435788298b54b89',
+  expected: '0e19c4cf3cf5b00f26de877161e73d1bc7a6fbf663a37f4f25fcd18de9f1fb1b',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

@@ -18,7 +18,7 @@ export async function prepareAccountBaziCandidate(context,selection){
  const projection=execution.canonicalProjection;
  if(!projection||projection.method?.publicMethodCode!=='BAZI_PROJECTION')fail('BAZI_CALCULATION_UNAVAILABLE',409);
  return Object.freeze({schemaVersion:'PHI-OS-BAZI-ACCOUNT-CANDIDATE-v1',scope:'LOCAL_QA_PREPARATION_ONLY',customerId:owner,personId:subject.person.personId,personVersion:subject.personVersion,birthSourceRef:subject.birthSourceRef,purchaseId:right.purchase_id,presentation:right.reportPresentation,canonicalBirthInputFingerprint:await reportBirthInputFingerprint(subject.canonicalBirthInput),calculationDigest:await sha256Stable(projection),execution,
-  state:projection.status==='BLOCKED_INPUT'?'INPUT_REQUIRED':'RELEASE_PENDING',
+  state:projection.calculation?.status==='COMPLETE'?'RELEASE_PENDING':'INPUT_REQUIRED',
   downstream:{composition:'SUBJECT_BOUND_ADMITTED_SNAPSHOT_REQUIRED',verification:'BAZI_METHOD_RENDER_ADAPTER_NOT_ADMITTED',release:'BLOCKED',accountVisibility:'NO_RELEASE_CREATED',download:'DENIED_WITHOUT_NATIVE_RELEASE',versionHistory:'NATIVE_IMMUTABLE_RELEASE_STORE_REQUIRED'},
   providerCalls:0,productionAdmitted:false,released:false});
 }
