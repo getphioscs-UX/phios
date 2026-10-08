@@ -1,3 +1,5 @@
+import {execFileSync as migrationGit} from 'node:child_process';
+import {assertCurrentMigrationBoundary,methodCacheSuccessor} from './lib/production-closure-migration-boundary.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
@@ -36,7 +38,21 @@ for(const locale of ['en','zh-Hans']){
  // Independent consent subject for each locale test.
  database.exec("DELETE FROM runtime_artifacts WHERE artifact_type='RR_CONSENT_REFERENCE_V1' AND json_extract(payload,'$.client_id')='consent-owner'");
 }
-assert.equal(fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).length,12);
+migrationGit('git',['merge-base','--is-ancestor',methodCacheSuccessor.sourceCommit,'HEAD']);
+await assertCurrentMigrationBoundary({files:fs.readdirSync('db/migrations').filter(x=>x.endsWith('.sql')).sort(),historicalFiles:[
+  '0001_platform_foundation.sql',
+  '0002_initial_runtime.sql',
+  '0003_financial_professional_infrastructure.sql',
+  '0004_book_commerce.sql',
+  '0005_pws_universal_registry.sql',
+  '0006_commerce_stripe_r1.sql',
+  '0007_account_oidc_sessions.sql',
+  '0008_financial_will_encrypted_drafts.sql',
+  '0009_canonical_account_person.sql',
+  '0010_account_method_report_material.sql',
+  '0011_report_context_sequence_reservation.sql',
+  '0012_report_context_admission.sql'
+],registry:JSON.parse(fs.readFileSync('content/registry/runtime-migrations.json','utf8')),sql:fs.readFileSync(methodCacheSuccessor.file,'utf8'),committedSql:migrationGit('git',['show',methodCacheSuccessor.sourceCommit+':'+methodCacheSuccessor.file],{encoding:'utf8'})});
 const qaContext=(body,overrides={})=>({...context(),env:{...env,FW_PREVIEW_ACCEPTANCE_FIXTURES:'enabled',ASSETS:{fetch:async()=>new Response(fontBytes)}},request:new Request('https://qa.phios-github.pages.dev/api/qa-fw-acceptance',{method:'POST',headers:{origin:'https://qa.phios-github.pages.dev'},body:JSON.stringify(body)}),...overrides});
 assert.equal((await previewAcceptance(qaContext({action:'materialize'},{env:{...env,PHIOS_ENVIRONMENT:'production'}}))).status,404);
 assert.equal((await previewAcceptance(qaContext({action:'materialize'},{data:{}}))).status,401);

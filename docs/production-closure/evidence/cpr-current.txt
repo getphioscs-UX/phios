@@ -1,0 +1,28 @@
+
+> check:cpr
+> node scripts/run-zero-cost-regression.mjs check:cpr
+
+
+> check:cpr-w0-w6
+> node scripts/run-zero-cost-regression.mjs check:cpr-w0-w6
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: content/registry/public-assets.json drifted after CPR-W0 audit
++ actual - expected
+
++ '52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742'
+- '49b4993a75c19cb3f4dab6baf392da81dbb2eb0e00aa6983681667a471b4a9b0'
+
+    at file:///C:/phios/scripts/check-cpr-w0-w6-presentation-foundation.mjs:21:86 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742',
+  expected: '49b4993a75c19cb3f4dab6baf392da81dbb2eb0e00aa6983681667a471b4a9b0',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

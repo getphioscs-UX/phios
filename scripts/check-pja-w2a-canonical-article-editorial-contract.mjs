@@ -1,3 +1,5 @@
+import {execFileSync} from 'node:child_process';
+import {assertCurrentMigrationBoundary,methodCacheSuccessor} from './lib/production-closure-migration-boundary.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
@@ -230,7 +232,21 @@ assert.deepEqual(
   [...frozenKnowledgeRegistryFiles].sort()
 );
 assert.equal(registrySchemas.length, 12);
-assert.equal(migrationFiles.length, 12); // Shared person/material successors; article authority is unchanged.
+execFileSync('git',['merge-base','--is-ancestor',methodCacheSuccessor.sourceCommit,'HEAD']);
+await assertCurrentMigrationBoundary({files:migrationFiles.sort(),historicalFiles:[
+  '0001_platform_foundation.sql',
+  '0002_initial_runtime.sql',
+  '0003_financial_professional_infrastructure.sql',
+  '0004_book_commerce.sql',
+  '0005_pws_universal_registry.sql',
+  '0006_commerce_stripe_r1.sql',
+  '0007_account_oidc_sessions.sql',
+  '0008_financial_will_encrypted_drafts.sql',
+  '0009_canonical_account_person.sql',
+  '0010_account_method_report_material.sql',
+  '0011_report_context_sequence_reservation.sql',
+  '0012_report_context_admission.sql'
+],registry:await readJson('content/registry/runtime-migrations.json'),sql:await read(methodCacheSuccessor.file),committedSql:execFileSync('git',['show',methodCacheSuccessor.sourceCommit+':'+methodCacheSuccessor.file],{encoding:'utf8'})});
 assert.equal(contract.preservation.canonicalNodeCount, blueprint.prefaceCanonicalNodes);
 assert.equal(
   contract.preservation.canonicalThemeCount,

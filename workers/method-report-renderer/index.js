@@ -22,7 +22,7 @@ export default {
    if(compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1')await assertZiweiContextSnapshot(candidate);
 
    stage='COMPOSE';
-   const body=contract.renderFunction().replaceAll('src="/assets/',`src="${origin}/assets/`);
+   const body=contract.renderFunction().replaceAll('src="/assets/',`src="${origin}/assets/`).replaceAll('src="../../assets/',`src="${origin}/assets/`);
 
    stage='BROWSER_LAUNCH';
    const launchStarted=Date.now();
@@ -133,7 +133,7 @@ export default {
     stage,
     errorName:error.name,
     timings:{...timings,totalRequestMs:Date.now()-startedAt},
-    ...(['VERIFY','BROWSER_LAUNCH'].includes(stage)?{reason:String(error.message).slice(0,240)}:{}),
+    ...(['VERIFY','BROWSER_LAUNCH','FIT','ASSET_LOAD'].includes(stage)?{reason:String(error.message).slice(0,240)}:{}),
     ...(stage==='BROWSER_LAUNCH'?{limits:await puppeteer.limits(env.BROWSER).catch(()=>null)}:{})
    },{status:422,headers:{'Cache-Control':'no-store'}});
   }finally{

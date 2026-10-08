@@ -1,0 +1,16 @@
+
+> check:commerce-canonical
+> node scripts/run-zero-cost-regression.mjs check:commerce-canonical
+
+file:///C:/phios/functions/pws/commercial/report-successor-contract.js:26
+ if(product.newPurchaseDefault===false)throw new Error('PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED');
+                                             ^
+
+Error: PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED
+    at quoteReportPresentation (file:///C:/phios/functions/pws/commercial/report-successor-contract.js:26:46)
+    at file:///C:/phios/scripts/check-commerce-canonical.mjs:4:234
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.18.0

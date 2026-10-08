@@ -1,3 +1,5 @@
+import {execFileSync as migrationGit} from 'node:child_process';
+import {assertCurrentMigrationBoundary,methodCacheSuccessor} from './lib/production-closure-migration-boundary.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -515,11 +517,21 @@ assert.equal(
     .filter(file => file.endsWith('.json')).length,
   12
 );
-assert.equal(
-  (await fs.readdir(path.join(root, 'db/migrations')))
-    .filter(file => file.endsWith('.sql')).length,
-  12
-);
+migrationGit('git',['merge-base','--is-ancestor',methodCacheSuccessor.sourceCommit,'HEAD']);
+await assertCurrentMigrationBoundary({files:(await fs.readdir(path.join(root,'db/migrations'))).filter(x=>x.endsWith('.sql')).sort(),historicalFiles:[
+  '0001_platform_foundation.sql',
+  '0002_initial_runtime.sql',
+  '0003_financial_professional_infrastructure.sql',
+  '0004_book_commerce.sql',
+  '0005_pws_universal_registry.sql',
+  '0006_commerce_stripe_r1.sql',
+  '0007_account_oidc_sessions.sql',
+  '0008_financial_will_encrypted_drafts.sql',
+  '0009_canonical_account_person.sql',
+  '0010_account_method_report_material.sql',
+  '0011_report_context_sequence_reservation.sql',
+  '0012_report_context_admission.sql'
+],registry:JSON.parse(await fs.readFile(path.join(root,'content/registry/runtime-migrations.json'),'utf8')),sql:await fs.readFile(path.join(root,methodCacheSuccessor.file),'utf8'),committedSql:migrationGit('git',['show',methodCacheSuccessor.sourceCommit+':'+methodCacheSuccessor.file],{encoding:'utf8'})});
 
 const prefaceLocalized = localizedByNode.get('KN-PREFACE-001');
 assert.equal(prefaceLocalized.locales['zh-Hans'].contentStatus, 'not_started');
