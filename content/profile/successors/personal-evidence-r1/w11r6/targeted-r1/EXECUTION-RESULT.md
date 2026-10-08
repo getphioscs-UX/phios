@@ -38,20 +38,20 @@
 - check:profile:pfig-provenance-preservation: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-pfig-provenance-preservation.log
 - check:profile:prd-w11r5: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-prd-w11r5.log
 - check:profile:pfig-publication-legibility: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-pfig-publication-legibility.log
-- check:profile:pfig-review-browser: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-pfig-review-browser.log
 - check:pages-build: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-pages-build.log
 - check:cpr-w0-w6: BASELINE_EXTERNAL · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-cpr-w0-w6.log
 - check:profile:pfig-semantic-grammar: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-pfig-semantic-grammar.log
 - check:profile:prd-w11r5:pfig-publication: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-prd-w11r5-pfig-publication.log
 - check:profile:prd-w11r6: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-prd-w11r6.log
+- check:profile:pfig-review-browser: PASS · content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/check-profile-pfig-review-browser.log
 
 CPR历史失败仍为 BASELINE_EXTERNAL：actual 52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742；expected 49b4993a75c19cb3f4dab6baf392da81dbb2eb0e00aa6983681667a471b4a9b0。与上轮相同，原 registry、audit 和 freeze 文件保持起始SHA256，未改冻结 digest 强制 PASS。此前 Book-W1F/WPR 历史失败未在本轮重跑或修复，本轮不声称全仓库 npm check PASS。首次本地 Playwright 缺失和审核懒加载等待已修正，原始尝试及处理记录见 EXECUTION-ATTEMPTS.json。Pages Worker 编译及发布边界检查通过（退出码0），另有沙箱不允许写 AppData Wrangler 调试日志的 EPERM 非阻断提示；完整原文保留在 check-pages-build.log / NONBLOCKING-DIAGNOSTICS.json。没有执行部署。
 
 ## 零费用与仓库状态
 
-Provider calls = 0；OpenAI API calls = 0。268 条进程计数；3 次外部尝试在网络前拦截；出版/审核浏览器实际外部请求 = 0。详见 ZERO-COST-EVIDENCE.json 与 zero-cost-processes.jsonl。
+Provider calls = 0；OpenAI API calls = 0。271 条进程计数；3 次外部尝试在网络前拦截；出版/审核浏览器实际外部请求 = 0。详见 ZERO-COST-EVIDENCE.json 与 zero-cost-processes.jsonl。
 
-起始 HEAD f3fecb1a0b558047b9c3dbbcfeddd6dcfe692e8d；结束 HEAD 0c6913c3297f3378d34fddee18c0a36392e53f0e。期间共享 main 发生外部提交/合并；本代理没有执行 commit、push、deploy、reset 或生产冻结。原始 W11R5/W11R6 审核包、备份和不相关共享修改均保留。REPAIR-MANIFEST.json 区分本轮精确文件变化与其他仓库变化；不以最终 git status 代替本轮清单。
+起始 HEAD f3fecb1a0b558047b9c3dbbcfeddd6dcfe692e8d；结束 HEAD a8a3f2f7776fa90d4743e984f39a80d168bb2352。期间共享 main 发生外部提交/合并；本代理没有执行 commit、push、deploy、reset 或生产冻结。原始 W11R5/W11R6 审核包、备份和不相关共享修改均保留。REPAIR-MANIFEST.json 区分本轮精确文件变化与其他仓库变化；不以最终 git status 代替本轮清单。
 
 ## 审核入口与证据
 
