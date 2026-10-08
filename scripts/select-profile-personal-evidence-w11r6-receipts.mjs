@@ -1,0 +1,5 @@
+import fs from 'node:fs';
+const dir='content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/',baseline=JSON.parse(fs.readFileSync(dir+'baseline.json'));
+const files=['scripts/check-profile-personal-evidence-w11r5.mjs','scripts/check-profile-personal-evidence-w11r5-browser.mjs','scripts/check-profile-personal-evidence-w11r6.mjs','scripts/check-profile-personal-evidence-w11r6-browser.mjs','scripts/check-profile-personal-evidence-w11r6-legibility.mjs','scripts/check-profile-personal-evidence-w11r6-review-browser.mjs','scripts/run-profile-personal-evidence-w11r6-regression.mjs'];
+for(const file of files){let s=fs.readFileSync(file,'utf8');if(s.includes("import {w11r6RepairAudit"))throw Error('Already selected');s="import {w11r6RepairAudit,w11r6ReviewUrl} from './lib/w11r6-review-paths.mjs';\n"+s;s=s.replaceAll('process.env.W11R6_REPAIR_AUDIT','w11r6RepairAudit').replace("process.env.W11R6_REPAIR_URL||'http://127.0.0.1:8806/w11r6/'","w11r6ReviewUrl");fs.writeFileSync(file,s);}
+console.log('Existing W11R5/W11R6 regression entry points select current targeted receipts without replacing historical baselines.');

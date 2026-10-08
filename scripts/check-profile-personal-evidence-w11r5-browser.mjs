@@ -1,7 +1,8 @@
+import {w11r6RepairAudit,w11r6ReviewUrl} from './lib/w11r6-review-paths.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-const root='tools/review/personal-evidence-r1/',out=(process.env.W11R6_REPAIR_AUDIT?process.env.W11R6_REPAIR_AUDIT+'legacy-w11r5/':null)||'content/profile/successors/personal-evidence-r1/'+(process.env.W11R6_AUDIT_REDIRECT==='true'?'w11r6/legacy-w11r5/':'w11r5/');
+const root='tools/review/personal-evidence-r1/',out=(w11r6RepairAudit?w11r6RepairAudit+'legacy-w11r5/':null)||'content/profile/successors/personal-evidence-r1/'+(process.env.W11R6_AUDIT_REDIRECT==='true'?'w11r6/legacy-w11r5/':'w11r5/');
 fs.mkdirSync(out,{recursive:true});
 const only=process.argv.includes('--case=CASE-01'),ids=only?['CASE-01']:Array.from({length:11},(_,i)=>'CASE-'+String(i+1).padStart(2,'0'));
 const hub=fs.readFileSync('tools/review/PROFILE-PERSONAL-EVIDENCE-R1-HUMAN-REVIEW.html','utf8'),assets=JSON.parse(hub.match(/embeddedAssets=(.*?);\s*const displayAssets/s)[1]);

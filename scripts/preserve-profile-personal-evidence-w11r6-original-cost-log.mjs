@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+const dir='content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/',b=JSON.parse(fs.readFileSync(dir+'baseline.json')),file='content/profile/successors/personal-evidence-r1/w11r6/zero-cost-processes.jsonl',original=execFileSync('git',['show',b.head+':'+file]),current=fs.readFileSync(file);
+assert(current.subarray(0,original.length).equals(original),'Original receipt prefix changed; do not replace');
+const extra=current.subarray(original.length).toString(),records=extra.trim().split('\n').filter(Boolean).map(JSON.parse);
+const ownPids=new Set([20596,42528,9032,29480,10856,9724,44728,7232,30628,21888,13352,48492,39772,35092,24320,41724,20812,43460,18820]);
+assert.equal(records.length,19);assert(records.every(r=>ownPids.has(r.pid)&&r.timestamp>='2026-10-08T04:41:46.660Z'&&r.timestamp<='2026-10-08T04:41:53.551Z'),'Only known current-round processes may be relocated');
+fs.appendFileSync(dir+'zero-cost-processes.jsonl',extra);fs.writeFileSync(file,original);
+fs.writeFileSync(dir+'cost-log-relocation.json',JSON.stringify({originalRestoredByteExactly:true,movedRecords:records,reason:'Default npm entry-point replay was initially appended to historical receipt; current-round records relocated without losing evidence'},null,2));
+console.log('Nineteen current-round process records relocated; original W11R6 cost receipt byte-exact.');

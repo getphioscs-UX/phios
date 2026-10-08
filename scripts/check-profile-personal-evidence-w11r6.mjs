@@ -1,3 +1,4 @@
+import {w11r6RepairAudit,w11r6ReviewUrl} from './lib/w11r6-review-paths.mjs';
 import {grammarOnlySnapshot,repairPersonalEvidenceEnglish} from '../assets/customer-ui/js/visuals/personal-evidence-grammar.js';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
@@ -8,7 +9,7 @@ import {buildProfileCustomerVisualProjection} from '../functions/profile/profile
 import {buildPersonalEvidencePublicationProjection} from '../functions/profile/personal-evidence-publication-projection.js';
 import {buildPersonalEvidencePublicationIr} from '../functions/profile/personal-evidence-publication-ir-adapter.js';
 import {renderPersonalEvidenceFigure} from '../assets/customer-ui/js/visuals/profile-visual-mvp.js';
-const dir=process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/w11r6/',root='tools/review/personal-evidence-r1/',read=p=>JSON.parse(fs.readFileSync(p)),hash=x=>crypto.createHash('sha256').update(x).digest('hex');
+const dir=w11r6RepairAudit||'content/profile/successors/personal-evidence-r1/w11r6/',root='tools/review/personal-evidence-r1/',read=p=>JSON.parse(fs.readFileSync(p)),hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 const baseline=read('content/profile/successors/personal-evidence-r1/w11r6/baseline.json'),mode=process.argv.find(a=>a.startsWith('--mode='))?.split('=')[1]||'all';
 const protectedCss='assets/customer-ui/surfaces/personal-evidence-dossier.css';
 assert(fs.readFileSync(protectedCss,'utf8').startsWith(fs.readFileSync(baseline.backup+protectedCss,'utf8')),'Protected body/background CSS must remain unchanged; only appended figure-local rules allowed');
@@ -16,10 +17,10 @@ const grammars=['source-domain-topology','source-native-pattern','confirmation-s
 const results=[],authority=[];
 for(const before of baseline.cases){
  const id=before.id,source=fs.readFileSync(root+id+'-source-view.json'),view=JSON.parse(source),visual=buildProfileCustomerVisualProjection({progressiveView:view}),html=fs.readFileSync(root+id+'-bilingual-dossier.html','utf8'),doc=parseHTML(html).document;
- assert.equal(hash(source),before.sourceHash,id+' source');if(process.env.W11R6_REPAIR_AUDIT){assert.deepEqual(read(root+id+'-bilingual-trace.json'),grammarOnlySnapshot(read(baseline.backup+root+id+'-bilingual-trace.json')),id+' grammar-only trace');}else assert.equal(hash(fs.readFileSync(root+id+'-bilingual-trace.json')),before.traceHash,id+' protected prose');
+ assert.equal(hash(source),before.sourceHash,id+' source');if(w11r6RepairAudit){assert.deepEqual(read(root+id+'-bilingual-trace.json'),grammarOnlySnapshot(read(baseline.backup+root+id+'-bilingual-trace.json')),id+' grammar-only trace');}else assert.equal(hash(fs.readFileSync(root+id+'-bilingual-trace.json')),before.traceHash,id+' protected prose');
  const original=parseHTML(fs.readFileSync(baseline.backup+root+id+'-bilingual-dossier.html','utf8')).document;
  const protectedSelectors=['.pe-paragraph-pair','.pe-reading-table','.pe-source-detail','.pe-evidence-note','.pe-cover-values'];
- for(const selector of protectedSelectors)assert.deepEqual([...doc.querySelectorAll(selector)].map(e=>e.outerHTML),[...original.querySelectorAll(selector)].map(e=>process.env.W11R6_REPAIR_AUDIT?repairPersonalEvidenceEnglish(e.outerHTML):e.outerHTML),id+' protected DOM '+selector);
+ for(const selector of protectedSelectors)assert.deepEqual([...doc.querySelectorAll(selector)].map(e=>e.outerHTML),[...original.querySelectorAll(selector)].map(e=>w11r6RepairAudit?repairPersonalEvidenceEnglish(e.outerHTML):e.outerHTML),id+' protected DOM '+selector);
  assert.deepEqual([...doc.querySelectorAll('.pub-static')].map(e=>e.outerHTML),[...original.querySelectorAll('.pub-static')].map(e=>e.outerHTML),id+' opening/master artwork');
  assert.equal(doc.querySelectorAll('figure[data-pfig]').length,9);
  const projection=buildPersonalEvidencePublicationProjection({profileView:view,visualProjection:visual});
@@ -57,9 +58,9 @@ const connected=read(root+'CASE-09-source-view.json'),synthetic=buildProfileCust
 for(const id of ['PFIG-004','PFIG-005','PFIG-009'])assert.equal(synthetic.figures.find(f=>f.pfig===id).state,'READY');
 const syntheticHtml='<html><head><meta charset="utf-8"></head><body><h1>SYNTHETIC FIXTURE ONLY / 仅合成测试资料</h1><p>Not customer evidence; never imported into CASE-01 / 不属于客户证据；不导入 CASE-01</p>'+synthetic.figures.filter(f=>['PFIG-004','PFIG-005','PFIG-009'].includes(f.pfig)).map(f=>renderPersonalEvidenceFigure(f,{locale:'bilingual',publicationSources:connected.signalCards})).join('')+'</body></html>';
 writeReviewFile(dir+'synthetic-explicit-observation.html',syntheticHtml);
-const human=process.env.W11R6_REPAIR_AUDIT?read(dir+'HUMAN-DECISION.json'):null;
+const human=w11r6RepairAudit?read(dir+'HUMAN-DECISION.json'):null;
 if(human)for(const figure of authority){figure.STRUCTURE_HUMAN_DECISION=human.pfigDecisions[figure.pfig];figure.STRUCTURE_HUMAN_APPROVED=figure.STRUCTURE_HUMAN_DECISION==='ACCEPT';figure.WHOLE_REPORT_HUMAN_ACCEPTED=false;}
 writeReviewFile(dir+'PRD-W11R6-FIGURE-AUTHORITY-MAP.json',JSON.stringify({timestamp:new Date().toISOString(),caseId:'CASE-01',canonicalNamesRetained:true,humanDecision:human,reviewLabelReconciliation:{'Evidence structure / Personality pattern':'PFIG-002','Decision':'PFIG-008','Relationship':'PFIG-007','Context':'PFIG-004','Cross-source':'PFIG-005'},figures:authority},null,2));
 writeReviewFile(dir+'machine-results.json',JSON.stringify({timestamp:new Date().toISOString(),mode,status:'PASS',results,synthetic:{scope:'TEST_FIXTURE_ONLY',readyIds:['PFIG-004','PFIG-005','PFIG-009'],customerSourceMutated:false}},null,2));
-writeReviewFile(dir+'PRD-W11R6-PROTECTED-ASSET-DIFF.json',JSON.stringify({timestamp:new Date().toISOString(),status:'PASS',artwork:baseline.protectedAssets.map(a=>({...a,changed:false})),protectedBodyDom:process.env.W11R6_REPAIR_AUDIT?'STRICT_DETERMINISTIC_ENGLISH_GRAMMAR_ONLY':'EXACT',sourceViewHashes:'EXACT',traceHashes:process.env.W11R6_REPAIR_AUDIT?'ORIGINAL_FROZEN; STRICT_GRAMMAR_ONLY_COMPARISON':'EXACT',baseline40PagePdf:'UNAVAILABLE_NO_PIXEL_EQUIVALENCE_CLAIM'},null,2));
+writeReviewFile(dir+'PRD-W11R6-PROTECTED-ASSET-DIFF.json',JSON.stringify({timestamp:new Date().toISOString(),status:'PASS',artwork:baseline.protectedAssets.map(a=>({...a,changed:false})),protectedBodyDom:w11r6RepairAudit?'STRICT_DETERMINISTIC_ENGLISH_GRAMMAR_ONLY':'EXACT',sourceViewHashes:'EXACT',traceHashes:w11r6RepairAudit?'ORIGINAL_FROZEN; STRICT_GRAMMAR_ONLY_COMPARISON':'EXACT',baseline40PagePdf:'UNAVAILABLE_NO_PIXEL_EQUIVALENCE_CLAIM'},null,2));
 console.log('W11R6 '+mode+' PASS: 11 cases, nine semantic grammars, exact provenance and protected DOM; synthetic fixture remains separate.');

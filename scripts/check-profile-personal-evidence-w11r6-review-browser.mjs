@@ -1,7 +1,8 @@
+import {w11r6RepairAudit,w11r6ReviewUrl} from './lib/w11r6-review-paths.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-const dir=process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/w11r6/',url=process.env.W11R6_REPAIR_URL||'http://127.0.0.1:8806/w11r6/';
+const dir=w11r6RepairAudit||'content/profile/successors/personal-evidence-r1/w11r6/',url=w11r6ReviewUrl;
 const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
 try{const page=await browser.newPage(),errors=[];let external=0;
 await page.route('**/*',r=>{const u=new URL(r.request().url());if(u.protocol.startsWith('http')&&!['127.0.0.1','localhost'].includes(u.hostname)){external++;return r.abort();}return r.continue();});
@@ -11,7 +12,7 @@ await page.setViewportSize({width:900,height:1100});await page.setContent(synthe
 await page.screenshot({path:dir+'after/synthetic-explicit-observation.png',fullPage:true});
 assert.equal(await page.locator('[data-pfig-state=READY]').count(),3);
 for(const width of [1280,390]){
- await page.setViewportSize({width,height:900});await page.goto(url);await page.evaluate(async()=>Promise.all([...document.images].map(i=>i.decode())));
+ await page.setViewportSize({width,height:900});await page.goto(url);await page.evaluate(async()=>{for(const i of document.images)i.loading='eager';await Promise.all([...document.images].map(i=>i.decode()));});
  assert.equal(await page.locator('section[id^=PFIG-]').count(),9);assert.equal(await page.locator('pre').count(),1);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1));
  assert(await page.evaluate(()=>[...document.images].every(i=>i.naturalWidth>0)));

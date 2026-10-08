@@ -1,7 +1,8 @@
+import {w11r6RepairAudit,w11r6ReviewUrl} from './lib/w11r6-review-paths.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-const dir=process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/w11r6/',root='tools/review/personal-evidence-r1/';
+const dir=w11r6RepairAudit||'content/profile/successors/personal-evidence-r1/w11r6/',root='tools/review/personal-evidence-r1/';
 const hub=fs.readFileSync('tools/review/PROFILE-PERSONAL-EVIDENCE-R1-HUMAN-REVIEW.html','utf8'),assets=JSON.parse(hub.match(/embeddedAssets=(.*?);\s*const displayAssets/s)[1]);
 const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
 const pdfDir=process.env.W11R6_REPAIR_PDF||'output/pdf/w11r6';const results=[];fs.mkdirSync(pdfDir,{recursive:true});fs.mkdirSync(dir+'after',{recursive:true});
