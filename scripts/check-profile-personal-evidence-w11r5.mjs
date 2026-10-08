@@ -7,7 +7,7 @@ import {buildPersonalEvidencePublicationProjection} from '../functions/profile/p
 import {buildPersonalEvidencePublicationIr} from '../functions/profile/personal-evidence-publication-ir-adapter.js';
 import {PERSONAL_EVIDENCE_PFIG_PRIMARY_SECTION as primary} from '../functions/profile/personal-evidence-dossier-projection.js';
 import {renderPersonalEvidenceFigure} from '../assets/customer-ui/js/visuals/profile-visual-mvp.js';
-const root='tools/review/personal-evidence-r1/',audit='content/profile/successors/personal-evidence-r1/w11r5/';
+const root='tools/review/personal-evidence-r1/',audit='content/profile/successors/personal-evidence-r1/'+(process.argv.includes('--w11r6')?'w11r6/':'w11r5/');
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 const baseline=read(audit+'baseline.json'),only=process.argv.find(x=>x.startsWith('--case='))?.split('=')[1],results=[];
 for(const before of baseline.cases.filter(c=>!only||c.id===only)){

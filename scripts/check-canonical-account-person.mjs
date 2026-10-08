@@ -9,6 +9,8 @@ import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiw
 import {generateAndReleaseAccountZiwei as generateProductionAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../functions/account/ziwei-account-delivery.js';
 import {digest} from '../functions/account/oidc-auth.js';
 import {generateZiweiProductionCandidate} from '../functions/report-delivery/ziwei-production-generation-v1.js';
+import {requireVfrAdmission} from '../functions/report-delivery/shared-report-e2e-v2.js';
+import {ZIWEI_VFR_R1_GENERATION_VERSION} from '../functions/report-delivery/ziwei-vfr-r1-generation.js';
 // Trusted server injection keeps this storage test offline; the production default is resolved separately from the current canonical cutover state.
 const generateAccountZiweiCandidate=(context,selection)=>generateProductionAccountZiweiCandidate(context,selection,{generateCandidate:generateZiweiProductionCandidate});
 const generateAndReleaseAccountZiwei=(context,selection)=>generateProductionAndReleaseAccountZiwei(context,selection,{generateCandidate:generateAccountZiweiCandidate});
@@ -48,7 +50,12 @@ sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,custo
 sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_id,checkout_attempt_id,stripe_checkout_session_id,currency,amount_minor,purchase_state,created_at,updated_at) VALUES('cpa-local-purchase',?,?,'cpa-local-order','LOCAL-NOT-STRIPE','MYR',3900,'purchased','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
 sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('cpa-local-entitlement','cpa-local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
 const zwrCutoverPath='docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json';
-if(fs.existsSync(zwrCutoverPath)){
+const deliveryContract=JSON.parse(fs.readFileSync('content/reports/shared-report-delivery-e2e-contract-v2.json','utf8'));
+let admissionBlocked=false;
+try{requireVfrAdmission(deliveryContract.profiles['ZWR:'+ZIWEI_VFR_R1_GENERATION_VERSION]);}catch(error){assert.equal(error.code,'SHARED_E2E_VFR_ADMISSION_BLOCKED');admissionBlocked=true;}
+if(admissionBlocked){
+ await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),{code:'SHARED_E2E_VFR_ADMISSION_BLOCKED',status:503});
+}else if(fs.existsSync(zwrCutoverPath)){
  const cutover=JSON.parse(fs.readFileSync(zwrCutoverPath,'utf8'));
  assert.equal(cutover.schemaVersion,'ZWR-VFR-R1-DEEP-PRODUCTION-CUTOVER-v2');
  await assert.rejects(
