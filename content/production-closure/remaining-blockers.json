@@ -1,6 +1,6 @@
 {
   "workId": "PHI-OS-PRODUCTION-CLOSURE",
-  "batch": "03",
+  "batch": "04",
   "blockers": [
     {
       "id": "BAZI_SHARED_WORKER_FREEZE",
@@ -16,9 +16,9 @@
     },
     {
       "id": "BOOK_VI_PRICE_CONFLICT",
-      "status": "BLOCKED_BY_HUMAN_QA",
-      "evidence": "content/production-closure/batch03/book-vi-pricing-decision-sheet.json",
-      "reason": "Native MYR109 versus original master MYR59; preserve existing contract pending explicit price authority decision."
+      "status": "RESOLVED_EXPLICIT_OWNER_PRICE_CONFIRMATION",
+      "evidence": "content/production-closure/batch04/BOOK-VI-OWNER-PRICE-CONFIRMATION.json",
+      "reason": "Owner confirms existing RM109 on2026-10-09; no price, Stripe identity or purchase contract changes."
     },
     {
       "id": "ONLINE_REPAIR_DEPLOYMENT",
@@ -81,10 +81,10 @@
     {
       "id": "BAZI_ACCEPTED_COPY_COVERAGE",
       "status": "BLOCKED_ACCEPTED_COPY_COVERAGE",
-      "evidence": "content/production-closure/batch03/accepted-copy-coverage-matrix.json",
-      "reason": "No approved reusable bilingual narrative for current bound subjects and timing context; no paid fallback or invented text."
+      "evidence": "content/production-closure/batch04/coverage-matrix.json",
+      "reason": "Reference text exists. Eight native fixtures have context-inapplicable, partial or authority-blocked coverage; no complete admitted new report."
     }
   ],
   "finalProductionReady": false,
-  "formalOwnerAcceptanceRecorded": false
+  "formalOwnerAcceptanceRecorded": "BOOK_VI_PRICE_ONLY"
 }

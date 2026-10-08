@@ -81,9 +81,9 @@
     {
       "id": "PC-W6",
       "title": "Commerce inventory",
-      "state": "BLOCKED_BY_HUMAN_QA",
-      "checkResult": "PRICE_AUTHORITY_CONFLICT",
-      "evidence": "content/production-closure/batch02/book-vi-price-authority.json",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "RM109_CONFIRMED_BY_OWNER__CURRENT_CONTRACT_PRESERVED",
+      "evidence": "content/production-closure/batch04/BOOK-VI-OWNER-PRICE-CONFIRMATION.json",
       "dependencies": [
         "PC-W1"
       ],
@@ -716,5 +716,59 @@
     }
   ],
   "batch03Evidence": "content/production-closure/batch03/batch-result.json",
-  "priorLedger": "content/production-closure/batch03/inherited/execution-ledger.json"
+  "priorLedger": "content/production-closure/batch03/inherited/execution-ledger.json",
+  "batch04Evidence": "content/production-closure/batch04/batch-result.json",
+  "batch04Commands": [
+    {
+      "command": "node scripts/check-production-closure-batch04-browser.mjs",
+      "startedAt": "2026-10-08T23:21:14.734Z",
+      "finishedAt": "2026-10-08T23:21:19.891Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/batch04/evidence/browser.txt",
+      "scope": "Local deterministic/no provider or payment operations",
+      "evidence": "docs/production-closure/batch04/evidence/browser-result.json"
+    },
+    {
+      "command": "npm run check:cloudflare-function-import-compat",
+      "startedAt": "2026-10-08T23:21:06.750Z",
+      "finishedAt": "2026-10-08T23:21:09.192Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/batch04/evidence/compat.txt",
+      "scope": "Local deterministic/no provider or payment operations",
+      "evidence": "docs/production-closure/batch04/evidence/compat-result.json"
+    },
+    {
+      "command": "node scripts/verify-production-closure-batch04-review.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T23:23:14.526Z",
+      "finishedAt": "2026-10-08T23:23:15.920Z",
+      "results": [
+        {
+          "width": 1280,
+          "overflow": false,
+          "images": 16,
+          "cases": 8,
+          "forms": 0,
+          "externalResources": 0,
+          "screenshot": "docs/production-closure/batch04/screenshots/REVIEW-HUB-1280.png",
+          "result": "PASS"
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "images": 16,
+          "cases": 8,
+          "forms": 0,
+          "externalResources": 0,
+          "screenshot": "docs/production-closure/batch04/screenshots/REVIEW-HUB-390.png",
+          "result": "PASS"
+        }
+      ],
+      "blocked": [],
+      "networkRequired": false,
+      "evidence": "docs/production-closure/batch04/evidence/review-result.json"
+    }
+  ],
+  "ownerPriceReceipt": "content/production-closure/batch04/BOOK-VI-OWNER-PRICE-CONFIRMATION.json",
+  "otherOwnerAcceptanceInferred": false
 }

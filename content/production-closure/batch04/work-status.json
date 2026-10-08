@@ -1,0 +1,451 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "namespaceIndependentFromPC_R1": true,
+  "state": "IN_PROGRESS",
+  "items": [
+    {
+      "id": "PC-W0",
+      "title": "Baseline",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "PASS",
+      "evidence": "content/production-closure/baseline.json",
+      "dependencies": [],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W1",
+      "title": "Authority inventory",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "PASS",
+      "evidence": "content/production-closure/production-authority-registry.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W2",
+      "title": "Full check stabilization",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "FAIL_FROZEN_DIGESTS",
+      "evidence": "content/production-closure/batch02/regression-results.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_EXTERNAL"
+    },
+    {
+      "id": "PC-W3",
+      "title": "Route census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W4",
+      "title": "Locale census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W5",
+      "title": "Visual / R2 census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "READY_FOR_HUMAN_REVIEW"
+    },
+    {
+      "id": "PC-W6",
+      "title": "Commerce inventory",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "RM109_CONFIRMED_BY_OWNER__CURRENT_CONTRACT_PRESERVED",
+      "evidence": "content/production-closure/batch04/BOOK-VI-OWNER-PRICE-CONFIRMATION.json",
+      "dependencies": [
+        "PC-W1"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W7",
+      "title": "Stripe QA",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "17_LOCAL_GROUPS_PASS__REAL_QA_BLOCKED",
+      "evidence": "content/production-closure/batch02/stripe-qa-readiness.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W8",
+      "title": "Entitlement / account",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "LOCAL_ACCOUNT_ISOLATION_PASS__REAL_ACCOUNT_UNPROVEN",
+      "evidence": "content/production-closure/batch02/m1-results.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "IN_PROGRESS"
+    },
+    {
+      "id": "PC-W9",
+      "title": "Report architecture freeze",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W10",
+      "title": "BaZi admission",
+      "state": "IN_PROGRESS",
+      "checkResult": "NATIVE_SUBJECT_AND_SUCCESSOR_RENDER_PASS__COPY_COVERAGE_BLOCKED",
+      "evidence": "content/production-closure/batch03/release-architecture.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W11",
+      "title": "ECR admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W12",
+      "title": "HD admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W13",
+      "title": "Cross admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W14",
+      "title": "Remaining reports",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W15",
+      "title": "Report delivery",
+      "state": "IN_PROGRESS",
+      "checkResult": "NATIVE_SUBJECT_AND_SUCCESSOR_RENDER_PASS__COPY_COVERAGE_BLOCKED",
+      "evidence": "content/production-closure/batch03/release-architecture.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W16",
+      "title": "Book V Atlas",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W17",
+      "title": "Book VI Atlas",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W18",
+      "title": "Book VII manuscript",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W19",
+      "title": "Book VII publication",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W20",
+      "title": "Book VIII manuscript",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W21",
+      "title": "Book VIII publication",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W22",
+      "title": "Financial",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W23",
+      "title": "Will",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W24",
+      "title": "Ask",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W25",
+      "title": "My Reality / account",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W26",
+      "title": "Academy",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W27",
+      "title": "Enterprise",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W28",
+      "title": "Accessibility / mobile / performance",
+      "state": "IN_PROGRESS",
+      "checkResult": "NATIVE_SUBJECT_AND_SUCCESSOR_RENDER_PASS__COPY_COVERAGE_BLOCKED",
+      "evidence": "content/production-closure/batch03/release-architecture.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W29",
+      "title": "Customer E2E",
+      "state": "IN_PROGRESS",
+      "checkResult": "NATIVE_SUBJECT_AND_SUCCESSOR_RENDER_PASS__COPY_COVERAGE_BLOCKED",
+      "evidence": "content/production-closure/batch03/release-architecture.json",
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "NOT_STARTED"
+    },
+    {
+      "id": "PC-W30",
+      "title": "Human browser acceptance",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    },
+    {
+      "id": "PC-W31",
+      "title": "Cutover",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED",
+      "inheritedState": "BLOCKED_BY_HUMAN_QA"
+    }
+  ],
+  "providerCalls": 0,
+  "openAiCalls": 0,
+  "customerProductionReady": false,
+  "accepted": false,
+  "batch": "04"
+}

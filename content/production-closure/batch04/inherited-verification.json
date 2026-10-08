@@ -1,0 +1,29 @@
+{
+  "subjectAccountIsolation": {
+    "groups": 15,
+    "actualExitCode": 0,
+    "evidence": "content/production-closure/batch03/subject-results.json"
+  },
+  "successor390AndA4": {
+    "observations": 16,
+    "evidence": "content/production-closure/batch03/visual-results.json",
+    "pdf": "content/production-closure/batch03/pdf-verification.json"
+  },
+  "sourcesUnchanged": [
+    {
+      "path": "functions/report-delivery/bazi-subject-release-candidate.js",
+      "sha256": "af39adcfef056c44c618deba547075f3b29a855790d1f4b21a174983b8198e90",
+      "matchesBatch03": true
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/bazi-successor-customer-shell.js",
+      "sha256": "ce85a1ba9e41f2536cdb5b4b88e5aca118bfe1ad0b853405262eeb7e51aba9ea",
+      "matchesBatch03": true
+    }
+  ],
+  "freezeGates": {
+    "status": "UNCHANGED_FAIL_NO_BROAD_RERUN",
+    "evidence": "content/production-closure/batch03/regression-results.json"
+  },
+  "noDuplicateRegressions": true
+}
