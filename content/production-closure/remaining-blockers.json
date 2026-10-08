@@ -1,81 +1,82 @@
 {
   "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "batch": "02",
   "blockers": [
     {
-      "id": "WPR_BOOK_ASSET_DIGEST",
-      "result": "FAIL",
-      "classification": "BASELINE_EXTERNAL_SUCCESSOR_RECORD_VERSUS_CURRENT_REGISTRY_MISMATCH",
-      "evidence": "docs/production-closure/evidence/wpr-digest-reconciliation.json",
-      "resolution": "Preserve successor and current registry digest evidence; legitimate owner reconciliation required; frozen records untouched"
+      "id": "BAZI_SHARED_WORKER_FREEZE",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/bazi-freeze-investigation.json",
+      "reason": "Frozen source located exactly; later shared private QA evolution has no verified BaZi freeze successor acceptance. Strict gate still FAIL."
     },
     {
-      "id": "BAZI_R2_FROZEN_WORKER",
-      "result": "FAIL",
-      "classification": "BASELINE_EXTERNAL_PREEXISTING_FROZEN_WORKER_MISMATCH_WITH_CONCURRENT_UNRELATED_WORKER_CHANGES",
-      "evidence": "docs/production-closure/evidence/bazi-frozen-worker-reconciliation.json",
-      "resolution": "Legitimate owner-authorized source/freeze successor reconciliation; no rollback of unrelated worker edits and no digest rewrite to manufacture PASS."
+      "id": "BOOKS_RESOURCE_SUCCESSOR",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/books-postcheck-investigation.json",
+      "reason": "Only two Book I entries changed after Book VI successor. Verification remains owner-reported/pending; no frozen digest replacement authorized."
     },
     {
-      "id": "PRODUCTION_CATALOG",
-      "result": "BLOCKED_BY_HUMAN_QA",
-      "observedEnvironment": "QA",
-      "liveEnabled": false,
-      "checkoutAvailable": false,
-      "evidence": "content/production-closure/public-runtime-http-evidence.json",
-      "resolution": "Public production host serves QA catalog with checkout unavailable. No production switching or real payment authorized."
+      "id": "BOOK_VI_PRICE_CONFLICT",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/book-vi-price-authority.json",
+      "reason": "Native MYR109 versus original master MYR59; preserve existing contract pending explicit price authority decision."
+    },
+    {
+      "id": "ONLINE_REPAIR_DEPLOYMENT",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "reason": "24 original observations repaired in local source; not deployed and original online FAIL records remain unchanged."
+    },
+    {
+      "id": "BOOK_VIII_HERO",
+      "status": "BLOCKED_BY_EXTERNAL",
+      "evidence": "content/production-closure/batch02/asset-http-probe.json",
+      "reason": "Exact registered public asset still HTTP404; no private asset published or unrelated image substituted."
+    },
+    {
+      "id": "UNREGISTERED_ROUTE_PROBES",
+      "status": "INTENTIONALLY_UNREGISTERED",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json",
+      "reason": "8 observations probe /will/ or /enterprise/, neither promised as dedicated customer route. Existing service/research boundaries retained."
+    },
+    {
+      "id": "M1_SUBJECT_BOUND_PUBLICATION_RELEASE",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/m1-results.json",
+      "reason": "Native BZR renderer/release adapter and accepted per-customer narrative snapshot absent; old 38-page accepted report and 26-page controlled archive cannot become a new paid customer release."
+    },
+    {
+      "id": "CONTROLLED_ARCHIVE_MOBILE",
+      "status": "FAIL",
+      "evidence": "content/production-closure/batch02/archive-mobile-findings.json",
+      "reason": "Existing 26-page controlled archive clips cover fields at390px; A4 passes. Historical archive unchanged; current customer renderer admission must address this."
+    },
+    {
+      "id": "STRIPE_REAL_QA",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/stripe-qa-readiness.json",
+      "reason": "17 local fixture groups pass. Real transaction, authentic second account and QA credential readiness unverified/not authorized."
     },
     {
       "id": "CPR",
-      "result": "FAIL",
-      "classification": "BASELINE_EXTERNAL",
+      "status": "FAIL_BASELINE_EXTERNAL",
       "evidence": "docs/production-closure/evidence/cpr-current.txt",
-      "resolution": "Owner-authorized legitimate successor reconciliation; never amend frozen digest to force PASS"
+      "reason": "Pre-existing recorded digest mismatch preserved; not silently repaired."
     },
     {
       "id": "PDS_0013",
-      "result": "PASS_LOCAL_CURRENT_REGISTRY",
-      "historicalFailure": "PRESERVED",
-      "productionApplication": "UNKNOWN",
+      "status": "LOCAL_REGISTRY_PASS_PRODUCTION_UNKNOWN",
       "evidence": "content/production-closure/migration-boundary-evidence.json",
-      "resolution": "Production D1 inspection/application requires separately authorized environment action"
+      "reason": "Current main has exact registered migration; historical unauthorized migration failure unchanged. Production application not verified."
     },
     {
-      "id": "COMMERCE_BOOK_VI",
-      "result": "FAIL",
-      "evidence": "content/production-closure/commerce-canonical-check.json",
-      "resolution": "Accepted RM109 versus master RM59; preserve current contract pending explicit owner price reconciliation"
+      "id": "REAL_CUSTOMER_PROFESSIONAL_STORAGE",
+      "status": "BLOCKED_BY_EXTERNAL",
+      "reason": "Real household pilots, licensed professional review and authenticated production persistence remain unproven."
     },
     {
-      "id": "STRIPE_QA",
-      "result": "BLOCKED_BY_HUMAN_QA",
-      "realQaPaymentPerformed": false,
-      "resolution": "Explicit real transaction authorization and real QA test-account evidence; no mock as proof"
-    },
-    {
-      "id": "REAL_CUSTOMER_ACCOUNT",
-      "result": "BLOCKED_BY_HUMAN_QA",
-      "resolution": "Owner-provided authentic account and consent/entitlement evidence required; fixture is not real customer proof"
-    },
-    {
-      "id": "PROFESSIONAL_REVIEW",
-      "result": "BLOCKED_BY_EXTERNAL",
-      "resolution": "Licensed financial / jurisdictional professional review and real household pilots"
-    },
-    {
-      "id": "PRODUCTION_STORAGE",
-      "result": "BLOCKED_BY_EXTERNAL",
-      "resolution": "Authenticated production persistence, ownership, access denial and encryption admission remain unproven"
-    },
-    {
-      "id": "DEPLOYMENT_FREEZE_CUTOVER",
-      "result": "BLOCKED_BY_HUMAN_QA",
-      "resolution": "Separately explicit authorization required; this task performs none"
-    },
-    {
-      "id": "ACCEPTED_ARTIFACTS",
-      "result": "PASS",
-      "evidence": "content/production-closure/preservation-evidence.json",
-      "resolution": "Current protected hashes preserved"
+      "id": "PRODUCTION_ACTIVATION",
+      "status": "NOT_AUTHORIZED",
+      "reason": "No payment, commit, push, deployment, freeze, production switch or product activation performed."
     }
   ],
   "finalProductionReady": false,

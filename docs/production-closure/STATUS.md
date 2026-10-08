@@ -1,65 +1,100 @@
 # PHI-OS-PRODUCTION-CLOSURE
 
-STATE = IN_PROGRESS
-OWNER_ACCEPTANCE = NOT_INFERRED
+MASTER = IN_PROGRESS
+BATCH02 = PARTIAL_COMPLETE_WITH_BLOCKERS
+REVIEW_PACKAGE = READY_FOR_BATCH_02_HUMAN_REVIEW
 PRODUCTION_ADMISSION = NOT_GRANTED
+OWNER_ACCEPTANCE = NOT_INFERRED
 
 {
-  "postcheck": {
-    "command": "npm run postcheck",
-    "exitCode": 1,
-    "startedAt": "2026-10-08T09:03:44.246Z",
-    "finishedAt": "2026-10-08T09:15:13.884Z",
-    "log": "docs/production-closure/evidence/npm-postcheck.txt",
-    "paidProviderCallsAllowed": false
-  },
   "workId": "PHI-OS-PRODUCTION-CLOSURE",
-  "batch": "PC-W0–W5 evidence + independent PC-W6 canonical check",
-  "timestamp": "2026-10-08T09:20:11.303Z",
-  "startHead": "89ca64a26935e7679a14f5072e86f3690188800b",
-  "observedHead": "dcf4f0f5007e5bc602c040328d3929d710e137ae",
-  "observations": 124,
-  "routeCount": 31,
-  "pass": 88,
-  "fail": 36,
-  "npm": {
-    "command": "npm run check",
-    "exitCode": 1,
-    "startedAt": "2026-10-08T08:47:01.245Z",
-    "finishedAt": "2026-10-08T09:02:00.231Z",
-    "log": "docs/production-closure/evidence/npm-check.txt",
-    "paidProviderCallsAllowed": false
+  "batch": "02",
+  "state": "PARTIAL_COMPLETE_WITH_BLOCKERS",
+  "reviewPackage": "READY_FOR_BATCH_02_HUMAN_REVIEW",
+  "masterState": "IN_PROGRESS",
+  "startHead": "dcf4f0f5007e5bc602c040328d3929d710e137ae",
+  "observedHead": "2fa38db275a5b912fe83027e8065d1c36d45648a",
+  "protectedFiles": 172,
+  "protectedDrift": 0,
+  "originalOnlineFailures": 36,
+  "reconciliationCounts": {
+    "BLOCKED_EXTERNAL_ASSET_404": 4,
+    "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED": 24,
+    "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE": 8
   },
-  "commerceExitCode": 1,
-  "protectedChanges": 0,
+  "m1FocusedGroups": 14,
+  "stripeFixtureGroups": 17,
+  "browserCurrentObservations": 74,
+  "browserCurrentPass": 72,
+  "browserCurrentFail": 2,
+  "realPaidLoopVerified": false,
   "cost": {
-    "scope": "This production-closure batch only; historical paid calls are not recounted or erased",
-    "guardedProcesses": 4121,
+    "scope": "Batch02 only; historical cost records preserved",
+    "guardedProcesses": 57,
     "providerCalls": 0,
     "openAiCalls": 0,
-    "blockedExternalAttempts": 36,
-    "liveBrowser": "Read-only GET/HEAD allowlist; other methods and hosts denied",
-    "paidGenerationInvoked": false,
-    "realPaymentPerformed": false,
-    "source": "content/production-closure/zero-cost-processes.jsonl"
+    "externalAttemptsBlocked": 11,
+    "payments": 0,
+    "readOnlyRemote": "Exact public R2 image GET for existing archive + one recorded HEAD; no API provider or payment transport",
+    "source": "content/production-closure/batch02/zero-cost-processes.jsonl"
   },
-  "notPerformed": [
-    "Commit",
-    "Push",
-    "Deploy",
-    "Production freeze",
-    "Production switching",
-    "Real payment",
-    "Paid API",
-    "Frozen report regeneration",
-    "Historical digest rewrite"
-  ],
-  "nextDependencies": [
-    "Books WPR postcheck blocked by existing successor record versus current asset registry digest mismatch; preserve frozen records",
-    "PC-W2 blocked by pre-existing BaZi R2 frozen Worker mismatch; preserve Worker and frozen audit pending legitimate owner successor reconciliation",
-    "Reconcile live route/locale/asset defects with existing renderer owners; production deployment remains unauthorized",
-    "Explicit Book VI pricing conflict resolution",
-    "Real Stripe QA / authentic account / household pilot / professional review / production storage admission"
+  "productionReady": false,
+  "accepted": false,
+  "requiredNextDependencies": [
+    {
+      "id": "BAZI_SHARED_WORKER_FREEZE",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/bazi-freeze-investigation.json"
+    },
+    {
+      "id": "BOOKS_RESOURCE_SUCCESSOR",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/books-postcheck-investigation.json"
+    },
+    {
+      "id": "BOOK_VI_PRICE_CONFLICT",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/book-vi-price-authority.json"
+    },
+    {
+      "id": "ONLINE_REPAIR_DEPLOYMENT",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/failure-reconciliation.json"
+    },
+    {
+      "id": "BOOK_VIII_HERO",
+      "status": "BLOCKED_BY_EXTERNAL",
+      "evidence": "content/production-closure/batch02/asset-http-probe.json"
+    },
+    {
+      "id": "M1_SUBJECT_BOUND_PUBLICATION_RELEASE",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/m1-results.json"
+    },
+    {
+      "id": "CONTROLLED_ARCHIVE_MOBILE",
+      "status": "FAIL",
+      "evidence": "content/production-closure/batch02/archive-mobile-findings.json"
+    },
+    {
+      "id": "STRIPE_REAL_QA",
+      "status": "BLOCKED_BY_HUMAN_QA",
+      "evidence": "content/production-closure/batch02/stripe-qa-readiness.json"
+    },
+    {
+      "id": "CPR",
+      "status": "FAIL_BASELINE_EXTERNAL",
+      "evidence": "docs/production-closure/evidence/cpr-current.txt"
+    },
+    {
+      "id": "PDS_0013",
+      "status": "LOCAL_REGISTRY_PASS_PRODUCTION_UNKNOWN",
+      "evidence": "content/production-closure/migration-boundary-evidence.json"
+    },
+    {
+      "id": "REAL_CUSTOMER_PROFESSIONAL_STORAGE",
+      "status": "BLOCKED_BY_EXTERNAL"
+    }
   ]
 }
 
@@ -67,20 +102,20 @@ PRODUCTION_ADMISSION = NOT_GRANTED
 |---|---|---|---|
 | PC-W0 | Baseline | READY_FOR_HUMAN_REVIEW | PASS |
 | PC-W1 | Authority inventory | READY_FOR_HUMAN_REVIEW | PASS |
-| PC-W2 | Full check stabilization | BLOCKED_BY_EXTERNAL | FAIL |
-| PC-W3 | Route census | READY_FOR_HUMAN_REVIEW | FAIL |
-| PC-W4 | Locale census | READY_FOR_HUMAN_REVIEW | FAIL |
-| PC-W5 | Visual / R2 census | READY_FOR_HUMAN_REVIEW | FAIL |
-| PC-W6 | Commerce inventory | BLOCKED_BY_HUMAN_QA | FAIL |
-| PC-W7 | Stripe QA | BLOCKED_BY_HUMAN_QA | NOT_RUN |
-| PC-W8 | Entitlement / account | IN_PROGRESS | LOCAL_FIXTURES_PASS_PRODUCTION_UNPROVEN |
+| PC-W2 | Full check stabilization | BLOCKED_BY_HUMAN_QA | FAIL_FROZEN_DIGESTS |
+| PC-W3 | Route census | READY_FOR_HUMAN_REVIEW | LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED |
+| PC-W4 | Locale census | READY_FOR_HUMAN_REVIEW | LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED |
+| PC-W5 | Visual / R2 census | READY_FOR_HUMAN_REVIEW | LOCAL_TARGETED_REPAIR_REVIEW__ONLINE_FAILURES_RETAINED |
+| PC-W6 | Commerce inventory | BLOCKED_BY_HUMAN_QA | PRICE_AUTHORITY_CONFLICT |
+| PC-W7 | Stripe QA | BLOCKED_BY_HUMAN_QA | 17_LOCAL_GROUPS_PASS__REAL_QA_BLOCKED |
+| PC-W8 | Entitlement / account | READY_FOR_HUMAN_REVIEW | LOCAL_ACCOUNT_ISOLATION_PASS__REAL_ACCOUNT_UNPROVEN |
 | PC-W9 | Report architecture freeze | BLOCKED_BY_HUMAN_QA | NOT_RUN |
-| PC-W10 | BaZi admission | NOT_STARTED | NOT_RUN |
+| PC-W10 | BaZi admission | IN_PROGRESS | PARTIAL_COMPLETE_WITH_BLOCKERS |
 | PC-W11 | ECR admission | NOT_STARTED | NOT_RUN |
 | PC-W12 | HD admission | NOT_STARTED | NOT_RUN |
 | PC-W13 | Cross admission | NOT_STARTED | NOT_RUN |
 | PC-W14 | Remaining reports | NOT_STARTED | NOT_RUN |
-| PC-W15 | Report delivery | NOT_STARTED | NOT_RUN |
+| PC-W15 | Report delivery | IN_PROGRESS | PARTIAL_COMPLETE_WITH_BLOCKERS |
 | PC-W16 | Book V Atlas | NOT_STARTED | NOT_RUN |
 | PC-W17 | Book VI Atlas | NOT_STARTED | NOT_RUN |
 | PC-W18 | Book VII manuscript | NOT_STARTED | NOT_RUN |
@@ -93,9 +128,7 @@ PRODUCTION_ADMISSION = NOT_GRANTED
 | PC-W25 | My Reality / account | NOT_STARTED | NOT_RUN |
 | PC-W26 | Academy | NOT_STARTED | NOT_RUN |
 | PC-W27 | Enterprise | NOT_STARTED | NOT_RUN |
-| PC-W28 | Accessibility / mobile / performance | NOT_STARTED | NOT_RUN |
-| PC-W29 | Customer E2E | NOT_STARTED | NOT_RUN |
+| PC-W28 | Accessibility / mobile / performance | IN_PROGRESS | PARTIAL_COMPLETE_WITH_BLOCKERS |
+| PC-W29 | Customer E2E | IN_PROGRESS | PARTIAL_COMPLETE_WITH_BLOCKERS |
 | PC-W30 | Human browser acceptance | BLOCKED_BY_HUMAN_QA | NOT_RUN |
 | PC-W31 | Cutover | BLOCKED_BY_HUMAN_QA | NOT_RUN |
-
-Existing accepted PC-R1 / W11R6 work is inherited; this separate master grants no new acceptance. Historical failures remain inspectable.

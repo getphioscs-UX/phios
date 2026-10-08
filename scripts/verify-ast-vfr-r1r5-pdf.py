@@ -1,5 +1,5 @@
 from pathlib import Path
-import json, re
+import json, re, hashlib
 from pypdf import PdfReader
 import pypdfium2 as pdfium
 from PIL import Image, ImageDraw
@@ -24,7 +24,7 @@ for start in range(0,len(doc),16):
         x=(idx-start)%4*260+5;y=(idx-start)//4*378+19
         sheet.paste(image,(x,y));draw.text((x,y-15),f'P{idx+1:02}',fill='white')
     sheet.save(f'tools/review/AST-VFR-R1R5-PRINT-CONTACT-{start//16+1}.png')
-receipt={'status':'PASS' if not missing and len(doc)==len(plan) else 'FAIL','actualPageCount':len(doc),'missingParagraphs':missing,'allPagesRendered':True,'a4':all(abs(float(p.mediabox.width)-595.28)<2 and abs(float(p.mediabox.height)-841.89)<2 for p in reader.pages),'providerCalls':0}
+receipt={'pdfDigest':hashlib.sha256(file.read_bytes()).hexdigest(),'status':'PASS' if not missing and len(doc)==len(plan) else 'FAIL','actualPageCount':len(doc),'missingParagraphs':missing,'allPagesRendered':True,'a4':all(abs(float(p.mediabox.width)-595.28)<2 and abs(float(p.mediabox.height)-841.89)<2 for p in reader.pages),'providerCalls':0}
 (base/'pdf-content-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 print(json.dumps(receipt));assert receipt['status']=='PASS' and receipt['a4']
 
