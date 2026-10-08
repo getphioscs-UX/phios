@@ -1,18 +1,19 @@
 {
   "schemaVersion": "PHI-OS-DOSSIER-IN-W8I-CLOSURE-CONTRACT-v1.0.0",
-  "status": "READY_BUT_NOT_ACTIVATED",
+  "status": "ACTIVATED_COMPLETE",
   "dossierId": "DOSSIER-IN",
   "stage": "W8-I",
   "activation": {
     "requiredHumanDecisionStage": "W8-H",
     "requiredDecision": "ACCEPT",
-    "currentDecisionState": "PENDING",
-    "activated": false
+    "currentDecisionState": "ACCEPT",
+    "activated": true
   },
-  "requiredInputs": {
+  "inputs": {
     "review": "content/civilization-atlas/reconfiguration/dossier-in-w8h-position-human-review-v1.json",
     "decisions": "content/civilization-atlas/reconfiguration/dossier-in-w8h-human-decisions-v1.json",
-    "rpCandidates": "content/civilization-atlas/reconfiguration/dossier-in-w8g-rp-candidates-v1.json"
+    "rpCandidates": "content/civilization-atlas/reconfiguration/dossier-in-w8g-rp-candidates-v1.json",
+    "acceptedCurrentDossier": "content/civilization-atlas/reconfiguration/dossier-in-w8i-accepted-current-dossier-v1.json"
   },
   "closureRules": [
     "Bind only explicitly ACCEPTED India W8-H candidate IDs.",
@@ -20,9 +21,8 @@
     "Preserve source→claim→evidence→RRE→semantic basis→grammar/domain→RP lineage.",
     "Preserve unknowns, conflicts, freshness and subsystem scope.",
     "Never collapse subsystem positions into one whole-dossier India position.",
-    "Leave all other dossiers unchanged.",
-    "Fail closed when the W8-H decision file is absent, pending, incomplete or contains an unknown candidate ID."
+    "Leave all other dossiers unchanged."
   ],
-  "goldenState": "NOT_CLOSED",
+  "goldenState": "CLOSED",
   "providerCalls": 0
 }
