@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-DOSSIER-JP-GOLDEN-CLOSURE-STATUS-v1.0.0",
   "dossierId": "DOSSIER-JP",
-  "status": "GOLDEN_DOSSIER_IN_PROGRESS",
+  "status": "GOLDEN_DOSSIER_CLOSED",
   "states": {
     "W8-A": "COMPLETE",
     "W8-B": "COMPLETE",
@@ -10,10 +10,21 @@
     "W8-E": "COMPLETE",
     "W8-F": "COMPLETE",
     "W8-G": "COMPLETE",
-    "W8-H": "HUMAN_REVIEW_REQUIRED",
-    "W8-I": "READY_BUT_NOT_ACTIVATED"
+    "W8-H": "COMPLETE",
+    "W8-I": "COMPLETE"
   },
-  "nextStage": "W8-H",
+  "completedStages": [
+    "W8-A",
+    "W8-B",
+    "W8-C",
+    "W8-D",
+    "W8-E",
+    "W8-F",
+    "W8-G",
+    "W8-H",
+    "W8-I"
+  ],
+  "nextStage": "GOLDEN_DOSSIER_CLOSED",
   "admittedAuthorityClaims": 7,
   "admittedUniqueSources": 7,
   "admittedLanes": 7,
@@ -22,19 +33,18 @@
     "version": "2026.1-contract",
     "digest": "49d9af5f5299315450262148980236301041f614b7000cfcc6a47ad873d8aca6"
   },
-  "semanticCandidateIds": [
-    "JP-W8F-SEM-PAYMENT-SETTLEMENT-CARRIER",
-    "JP-W8F-SEM-INDUSTRIAL-INFRASTRUCTURE-RUNTIME",
-    "JP-W8F-SEM-ENERGY-IMPORT-DEPENDENCY-CONSTRAINT"
-  ],
-  "rpCandidateIds": [
+  "acceptedRpCandidateIds": [
     "JP-RP-22-JP-W8F-SEM-PAYMENT-SETTLEMENT-CARRIER",
     "JP-RP-23-JP-W8F-SEM-INDUSTRIAL-INFRASTRUCTURE-RUNTIME",
     "JP-RP-18-JP-W8F-SEM-ENERGY-IMPORT-DEPENDENCY-CONSTRAINT"
   ],
-  "providerCalls": 0,
   "boundaries": {
     "wholeDossierCollapseAllowed": false,
-    "semanticBasisMustBeJPLineaged": true
-  }
+    "semanticBasisMustBeJPLineaged": true,
+    "regionalAndSectorHeterogeneityPreserved": true,
+    "demographicAdaptationContinuityRemainsReferenceOnly": true
+  },
+  "acceptedCurrentDossier": "content/civilization-atlas/reconfiguration/dossier-jp-w8i-accepted-current-dossier-v1.json",
+  "closureReceipt": "content/civilization-atlas/reconfiguration/dossier-jp-w8i-golden-closure-receipt-v1.json",
+  "providerCalls": 0
 }
