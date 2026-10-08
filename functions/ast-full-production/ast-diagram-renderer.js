@@ -11,6 +11,7 @@ const edgeText=e=>`${name(e.meta.fromCode)} · ${name(e.meta.toCode)}　${aspect
 export function renderAstDiagram(id,d){
  let body='';
  const list=(rows,start=110,gap=42)=>rows.map((s,i)=>label(45,start+i*gap,s)).join('');
+ const flow=(nodes,y)=>nodes.map((s,i)=>{const width=610/nodes.length,x=40+i*width;return `<rect x="${x}" y="${y}" width="${width-22}" height="48" rx="10" fill="#25475a" stroke="#d9c694"/>`+label(x+12,y+30,s,17)+(i<nodes.length-1?label(x+width-20,y+30,'→',21):'');}).join('');
  if(id==='AST-D01'){
   const asc=d.angles.find(a=>a.code==='ASC').value,angle=x=>180+x-asc;
   for(const r of [145,205,265])body+=`<circle cx="360" cy="350" r="${r}" fill="none" stroke="#a8c4cc" stroke-width="2"/>`;
@@ -18,7 +19,7 @@ export function renderAstDiagram(id,d){
   d.cusps.forEach((c,i)=>{body+=line(point(angle(c.value),145),point(angle(c.value),205));const n=d.cusps[(i+1)%12].value;const delta=(n-c.value+360)%360,p=point(angle(c.value+delta/2),178);body+=label(p.x-8,p.y,i+1,16);});
   const bp=Object.fromEntries(Object.entries(d.bodies).map(([k,b])=>[k,point(angle(b.longitude),140)]));
   d.aspects.forEach(e=>{if(bp[e.meta.fromCode]&&bp[e.meta.toCode])body+=line(bp[e.meta.fromCode],bp[e.meta.toCode],color(e.meta.type),1.1);});
-  Object.entries(d.bodies).forEach(([k,b],i)=>{const p=bp[k];body+=`<circle cx="${p.x}" cy="${p.y}" r="4" fill="#ebd49e"/>`;body+=label(35+(i>=5?365:0),665+(i%5)*27,`${name(k)}　${name(b.signCode)} ${(b.longitude%30).toFixed(2)}° · 第${b.houseNumber}宫`,16);});
+  Object.entries(d.bodies).forEach(([k,b],i)=>{const p=bp[k],callout=point(90-i*36,105);body+=line(p,callout,'#e6ce96',1)+`<circle cx="${p.x}" cy="${p.y}" r="4" fill="#ebd49e"/><circle cx="${callout.x}" cy="${callout.y}" r="13" fill="#17364a" stroke="#dbc58f"/>`+label(callout.x-6,callout.y+5,i+1,14);body+=label(35+(i>=5?365:0),665+(i%5)*27,`${i+1} ${name(k)}　${name(b.signCode)} ${(b.longitude%30).toFixed(2)}° · 第${b.houseNumber}宫`,16);});
   d.angles.forEach(a=>{const p=point(angle(a.value),285);body+=label(p.x-12,p.y,a.code,17);});
   body+=label(35,45,'本命盘 · Placidus',24)+label(35,82,'方位与宫界按计算位置；相位线连接实际星体位置。',16);
  }else if(id==='AST-D06'){
@@ -37,18 +38,21 @@ export function renderAstDiagram(id,d){
   body+=label(35,720,'分布数量是结构背景，不能单独定义人格或行动能力。',17);
  }else if(['AST-D04','AST-D08'].includes(id)){
   body+=label(35,60,id==='AST-D04'?'传统守护链与最终守护':'整盘入口与组织路径',24);
-  body+=list(d.rulership.dispositorChains.map(c=>c.path.map(name).join('  →  ')),130,48);
+  if(id==='AST-D04')d.rulership.dispositorChains.forEach((c,i)=>body+=flow(c.path.map(name),100+i*58));
+  else {const chain=d.rulership.dispositorChains.find(c=>c.bodyCode===d.rulership.chartRuler.bodyCode);body+=label(35,120,'上升点 → 命盘守护星',21)+flow(chain.path.map(name),165);body+=label(35,300,'各自路径的终点与实际领域',21);d.rulership.finalDispositors.forEach((k,i)=>body+=flow([name(k),name(d.bodies[k].signCode),'第'+d.bodies[k].houseNumber+'宫'],350+i*130));}
   body+=label(35,690,'整盘入口：'+name(d.rulership.chartRuler.bodyCode),21)+label(35,740,'最终守护：'+d.rulership.finalDispositors.map(name).join(' · '),21);
  }else if(['AST-D09','AST-D10','AST-D11'].includes(id)){
   const houses=id==='AST-D09'?[7]:id==='AST-D10'?[10]:[2,8];
   body+=label(35,60,id==='AST-D09'?'关系与互惠路径':id==='AST-D10'?'公共方向与行动路径':'个人资源与共享资源',24);
   const routes=d.routes.flatMap(r=>r.routes).filter(r=>houses.includes(r.houseNumber));
-  let y=140;for(const r of routes){body+=label(35,y,`第${r.houseNumber}宫 · ${name(r.cuspSign)}`,24)+label(35,y+45,`→ ${name(r.rulerBodyCode)} · ${name(r.rulerActualSign)} · 实际位于第${r.rulerActualHouse}宫`,20);const edges=d.aspects.filter(e=>r.aspectRefs.includes(e.code));body+=list(edges.map(edgeText),y+95,32);y+=330;}
+  let y=140;for(const r of routes){body+=label(35,y,`第${r.houseNumber}宫 · ${name(r.cuspSign)}`,24)+flow([name(r.rulerBodyCode),name(r.rulerActualSign),'实际第'+r.rulerActualHouse+'宫'],y+30);const edges=d.aspects.filter(e=>r.aspectRefs.includes(e.code));body+=list(edges.map(edgeText),y+125,32);y+=330;}
  }else if(['AST-D07','AST-D12','AST-D14'].includes(id)){
   body+=label(35,60,id==='AST-D07'?'支持与张力':id==='AST-D12'?'压力、边界与适应':'支持路径与机会导航',24);
   const tension=d.aspects.filter(e=>d.tension.some(s=>s.aspectCode===e.code)),support=d.aspects.filter(e=>d.support.some(s=>s.aspectCode===e.code));
-  if(id!=='AST-D14'){body+=label(35,115,'张力连接',21)+list(tension.map(edgeText),160,35);}
-  body+=label(35,id==='AST-D14'?115:440,'支持连接',21)+list(support.map(edgeText),id==='AST-D14'?165:485,35);
+  if(id==='AST-D12'){const domains=[...new Set(tension.flatMap(e=>[d.bodies[e.meta.fromCode].houseNumber,d.bodies[e.meta.toCode].houseNumber]))].sort((a,b)=>a-b);body+=flow(domains.map(h=>'第'+h+'宫'),85);}
+  if(id==='AST-D14'){const rr=d.routes.flatMap(r=>r.routes).filter(r=>[10,2,8].includes(r.houseNumber));rr.forEach((r,i)=>body+=flow(['第'+r.houseNumber+'宫',name(r.rulerBodyCode),'实际第'+r.rulerActualHouse+'宫'],100+i*90));}
+  if(id!=='AST-D14'){body+=label(35,id==='AST-D12'?190:115,'张力连接',21)+list(tension.map(edgeText),id==='AST-D12'?235:160,35);}
+  body+=label(35,id==='AST-D14'?420:440,'支持连接',21)+list(support.map(edgeText),id==='AST-D14'?475:485,35);
   body+=label(35,750,'连线描述结构关系，不保证现实结果。',18);
  }else if(id==='AST-D02'){
   body+=label(35,60,'四轴与宫位架构',24)+list(d.angles.map(a=>`${a.code}　黄经 ${a.value.toFixed(2)}°`),120,40);

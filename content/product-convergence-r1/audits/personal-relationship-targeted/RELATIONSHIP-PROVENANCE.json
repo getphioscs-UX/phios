@@ -1,0 +1,481 @@
+[
+  {
+    "scenario": "personal/minimal-data",
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/minimal-data.json",
+    "sha256": "2ca4d0eae7aadb4220f2bb6f599eb87db0cbb005fc4007ab9acfd9b992105bb4",
+    "evidence": []
+  },
+  {
+    "scenario": "personal/profile-rich",
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/profile-rich.json",
+    "sha256": "970d3dd4226adfe1efb075e06ce571d5886f16f587a3f7c5a8eefcc073348b3e",
+    "evidence": [
+      {
+        "id": "measure-1",
+        "evidenceClass": "MEASURED",
+        "sourceRef": "fixture:assessment",
+        "statement": "Source-native assessment record / 保留原量纲的评估记录",
+        "nativeValue": 42,
+        "nativeScale": "instrument-native",
+        "personId": "fixture-person",
+        "authority": "MEASURED",
+        "objectiveFact": false
+      }
+    ]
+  },
+  {
+    "scenario": "personal/current-reality-rich",
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/current-reality-rich.json",
+    "sha256": "dfaa452352db1b587444122a9085188dec7fae81eb2ea4af7e97bb896f481b66",
+    "evidence": [
+      {
+        "id": "current:CR-OBS-01",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-01",
+        "statement": "Working from a new location / 工作地点发生变化",
+        "domain": "ENVIRONMENT",
+        "contextTag": "location",
+        "sensitive": false,
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      },
+      {
+        "id": "current:CR-OBS-02",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-02",
+        "statement": "A heavier work week / 本周工作负荷增加",
+        "domain": "LOAD",
+        "contextTag": "work",
+        "sensitive": false,
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      }
+    ]
+  },
+  {
+    "scenario": "personal/multi-method",
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/multi-method.json",
+    "sha256": "aa9799ebd4b27d7d7cb4a1ebe60895c2e6c8a65b9d95057589fb4e4db6a1ff8e",
+    "evidence": []
+  },
+  {
+    "scenario": "personal/conflicting-perspectives",
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/conflicting-perspectives.json",
+    "sha256": "7c7691a5b5beef07622a0b83ea082a674fe607f1e78f4375472890683a9b92cb",
+    "evidence": [
+      {
+        "id": "source-1",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "fixture:customer",
+        "statement": "A current decision / 当前的一项决定",
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      },
+      {
+        "id": "source-2",
+        "evidenceClass": "METHOD_DERIVED",
+        "sourceRef": "fixture:method",
+        "statement": "A current decision / 当前的一项决定",
+        "methodId": "AST",
+        "claimId": "fixture-claim",
+        "personId": "fixture-person",
+        "authority": "METHOD_DERIVED",
+        "objectiveFact": false
+      }
+    ]
+  },
+  {
+    "scenario": "personal/unknown-heavy",
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/unknown-heavy.json",
+    "sha256": "2ca4d0eae7aadb4220f2bb6f599eb87db0cbb005fc4007ab9acfd9b992105bb4",
+    "evidence": []
+  },
+  {
+    "scenario": "relationship/couple",
+    "relationshipType": "PARTNER",
+    "sourcePayloadSha256": "2e369f536ad9c71da0c55795bb1ad4d1cd327384bd865501fb54810af982ec13",
+    "sourcePayloadUnchanged": true,
+    "eligibility": {
+      "eligible": true,
+      "reason": "SOURCE_REMAINS_DECLARED_UNCONFIRMED",
+      "sourceEntries": [
+        {
+          "entryId": "shared-1",
+          "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+          "sourceAuthority": "DECLARED",
+          "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+          "declaredBy": "a",
+          "confirmedByOtherParticipant": false
+        }
+      ]
+    },
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ],
+    "newSyntheticFacts": 0
+  },
+  {
+    "scenario": "relationship/family",
+    "relationshipType": "FAMILY",
+    "sourcePayloadSha256": "dc796d2d443338fd05b946a4589015242eeb1652b14b696aeac96907698e94bf",
+    "sourcePayloadUnchanged": true,
+    "eligibility": {
+      "eligible": true,
+      "reason": "SOURCE_REMAINS_DECLARED_UNCONFIRMED",
+      "sourceEntries": [
+        {
+          "entryId": "shared-1",
+          "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+          "sourceAuthority": "DECLARED",
+          "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+          "declaredBy": "a",
+          "confirmedByOtherParticipant": false
+        }
+      ]
+    },
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ],
+    "newSyntheticFacts": 0
+  },
+  {
+    "scenario": "relationship/parent-child",
+    "relationshipType": "PARENT_CHILD",
+    "sourcePayloadSha256": "804c5f57ebef50a957a52492fe284d3eec0ef12204c0eed79a1b82291d1116ce",
+    "sourcePayloadUnchanged": true,
+    "eligibility": {
+      "eligible": false,
+      "reason": "AGE_AND_AUTHORITY_UNVERIFIED",
+      "sourceEntries": [
+        {
+          "entryId": "shared-1",
+          "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+          "sourceAuthority": "DECLARED",
+          "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+          "declaredBy": "a",
+          "confirmedByOtherParticipant": false
+        }
+      ]
+    },
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ],
+    "newSyntheticFacts": 0
+  },
+  {
+    "scenario": "relationship/business-partner",
+    "relationshipType": "BUSINESS_PARTNERSHIP",
+    "sourcePayloadSha256": "349b877333b8f5e547414d957ea89b519e03427e04e49fa4d83eba2ef40f76de",
+    "sourcePayloadUnchanged": true,
+    "eligibility": {
+      "eligible": false,
+      "reason": "NO_APPLICABLE_BUSINESS_EVIDENCE",
+      "sourceEntries": [
+        {
+          "entryId": "shared-1",
+          "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+          "sourceAuthority": "DECLARED",
+          "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+          "declaredBy": "a",
+          "confirmedByOtherParticipant": false
+        }
+      ]
+    },
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ],
+    "newSyntheticFacts": 0
+  },
+  {
+    "scenario": "relationship/low-data",
+    "relationshipType": "WORKING_RELATIONSHIP",
+    "sourcePayloadSha256": "841e0c5bb0fd46c54a496143d6543da0139cce3e51fdbd6c32ae23f30e3d3534",
+    "sourcePayloadUnchanged": true,
+    "eligibility": {
+      "eligible": true,
+      "reason": "SOURCE_REMAINS_DECLARED_UNCONFIRMED",
+      "sourceEntries": []
+    },
+    "methodClaims": [],
+    "newSyntheticFacts": 0
+  },
+  {
+    "scenario": "relationship/conflicting-method",
+    "relationshipType": "MARRIAGE",
+    "sourcePayloadSha256": "3281e326f7cdf88de93c093b9ee97a26d1b437c38c7491702b143ae4f128da3c",
+    "sourcePayloadUnchanged": true,
+    "eligibility": {
+      "eligible": true,
+      "reason": "SOURCE_REMAINS_DECLARED_UNCONFIRMED",
+      "sourceEntries": [
+        {
+          "entryId": "shared-1",
+          "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+          "sourceAuthority": "DECLARED",
+          "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+          "declaredBy": "a",
+          "confirmedByOtherParticipant": false
+        }
+      ]
+    },
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ],
+    "newSyntheticFacts": 0
+  },
+  {
+    "scenario": "relationship/current-reality-heavy",
+    "relationshipType": "PARTNER",
+    "sourcePayloadSha256": "600ea232152972f614470f982e02d97545cd883440c6522051655791af6666dd",
+    "sourcePayloadUnchanged": true,
+    "eligibility": {
+      "eligible": true,
+      "reason": "SOURCE_REMAINS_DECLARED_UNCONFIRMED",
+      "sourceEntries": [
+        {
+          "entryId": "shared-1",
+          "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+          "sourceAuthority": "DECLARED",
+          "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+          "declaredBy": "a",
+          "confirmedByOtherParticipant": false
+        }
+      ]
+    },
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ],
+    "newSyntheticFacts": 0
+  }
+]

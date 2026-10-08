@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {executeAstThreeCallExperiment} from '../functions/ast-full-production/ast-three-call-manuscript.js';
+const root='content/professional/ast-full-production/';
+const args=Object.fromEntries(process.argv.slice(2).map(a=>{const i=a.indexOf('=');return [a.slice(0,i),a.slice(i+1)];}));
+if(args['--authorization']!=='RUN_ONE_CONTROLLED_AST_THREE_CALL')throw Error('EXPLICIT_PAID_EXPERIMENT_AUTHORIZATION_REQUIRED');
+const decisionPath=root+'acceptance/ast-vfr-r1-publication-human-decision.json';
+if(!fs.existsSync(decisionPath)||JSON.parse(fs.readFileSync(decisionPath)).decision!=='HUMAN ACCEPT AST-VFR-R1 PUBLICATION')throw Error('PUBLICATION_HUMAN_ACCEPT_REQUIRED');
+if(!args['--provider-adapter'])throw Error('ADMITTED_REPORT_PROVIDER_POLICY_ADAPTER_REQUIRED');
+const output=root+'provider-ledger/ast-vfr-r1-three-call-reference-result.json';if(fs.existsSync(output))throw Error('ONE_EXPERIMENT_ALREADY_RECORDED');
+const lock=root+'provider-ledger/ast-vfr-r1-three-call-experiment-started.json';if(fs.existsSync(lock))throw Error('EXPERIMENT_ALREADY_STARTED_NO_AUTOMATIC_REPLAY');
+const {provider,providerPolicy}=await import(pathToFileURL(path.resolve(args['--provider-adapter'])).href);
+const pack=JSON.parse(fs.readFileSync(root+'reference/ast-fp-r5-tl-customer-authoring-pack-v1.json'));
+fs.mkdirSync(path.dirname(lock),{recursive:true});fs.writeFileSync(lock,JSON.stringify({status:'STARTED',automaticRetry:false,authoringPackDigest:pack.authoringPackDigest})+'\n',{flag:'wx'});
+const result=await executeAstThreeCallExperiment({authorization:args['--authorization'],publicationAccepted:true,pack,provider,providerPolicy});
+fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');console.log(result.completeness);

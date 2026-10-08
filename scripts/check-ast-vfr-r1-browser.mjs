@@ -12,6 +12,7 @@ try{
  await page.evaluate(async()=>{await Promise.all([...document.querySelectorAll('.page')].map(p=>new Promise(resolve=>{const im=new Image();im.onload=()=>resolve();im.onerror=()=>resolve();im.src=p.style.backgroundImage.slice(5,-2);})))});
  for(const [width,media] of [[1280,'screen'],[390,'screen'],[794,'print']]){
   await page.setViewportSize({width,height:1000});await page.emulateMedia({media});
+  await page.evaluate(()=>{fit();scrollTo(0,0)});
   if(media==='print')await page.evaluate(()=>window.dispatchEvent(new Event('beforeprint')));
   const metrics=await page.evaluate(()=>{
    const problems=[];
