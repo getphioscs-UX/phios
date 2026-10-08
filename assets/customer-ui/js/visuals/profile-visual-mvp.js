@@ -104,10 +104,32 @@ export function mountProfileVisualMvp(root,projection,options={}){
 export const PROFILE_VISUAL_MVP_IDS=Object.freeze(['PFIG-001','PFIG-002','PFIG-003','PFIG-004','PFIG-005','PFIG-006','PFIG-007','PFIG-008','PFIG-009']);
 
 // Dossier composition reuses the same governed figure without the screen opener.
-export function renderPersonalEvidenceFigure(figure,{locale='en'}={}){
+export function renderPersonalEvidenceFigure(figure,{locale='en',publicationRows=[],publicationSources=[]}={}){
   const renderers={'PFIG-001':dimensionMap,'PFIG-002':patternRadar,'PFIG-003':strengthCost,'PFIG-004':contextVariation,'PFIG-005':convergence,'PFIG-006':workMap,'PFIG-007':relationshipMap,'PFIG-008':decisionMap,'PFIG-009':realityBridge};
   const render=renderers[figure?.pfig];
   if(!render)throw new Error('PERSONAL_EVIDENCE_FIGURE_NOT_ADMITTED');
+  if(locale==='bilingual'){
+    if(!['READY','EMPTY','UNKNOWN'].includes(figure.state))throw new Error('PERSONAL_EVIDENCE_FIGURE_STATE_INVALID');
+    const title=esc(evidenceLabel(figure.customerLabel?.['zh-Hans'],'zh-Hans'))+' / '+esc(evidenceLabel(figure.customerLabel?.en,'en'));
+    const states={READY:'已有来源 / Source available',EMPTY:'当前无资料 / Empty',UNKNOWN:'未知 / Unknown'};
+    // Pair text nodes in the existing renderer, retaining a single figure tree.
+    const english=[...render(figure,'en').matchAll(/>([^<>]+)</g)].map(m=>m[1]);let index=0;
+    const body=render(figure,'zh-Hans').replace(/>([^<>]+)</g,(whole,text)=>{const en=english[index++];return '>'+text+(en&&en!==text?' <span lang="en">'+en+'</span>':'')+'<';}).replace(/ data-pfig="[^"]+"/g,'');
+    const radar=figure.pfig==='PFIG-002'&&figure.state==='READY'?list(figure.data?.series).map(row=>{
+      // PHI self-report is a native 0–100 index. Other instruments retain
+      // their native-value table unless their scale is explicitly admitted.
+      if(row.sourceClass!=='CUSTOMER_SELF_REPORT'||!row.points.every(p=>Number.isFinite(p.value)&&p.value>=0&&p.value<=100))return '';
+      const points=row.points,n=points.length,xy=(i,r)=>[160+Math.sin(i*2*Math.PI/n)*r,150-Math.cos(i*2*Math.PI/n)*r];
+      const polygon=points.map((p,i)=>xy(i,p.value).join(',')).join(' ');
+      return `<svg class="pe-native-radar" viewBox="0 0 320 320" role="img" aria-label="来源内模式 / Within-source pattern" data-source-key="${esc(row.sourceKey)}"><title>来源内模式 / Within-source pattern</title>${[25,50,75,100].map(r=>`<polygon points="${points.map((_,i)=>xy(i,r).join(',')).join(' ')}" fill="none" stroke="#b9b2a4"/>`).join('')}${points.map((p,i)=>{const [x,y]=xy(i,100);return `<line x1="160" y1="150" x2="${x}" y2="${y}" stroke="#b9b2a4"/>`;}).join('')}<polygon data-native-values="${points.map(p=>p.value).join(',')}" points="${polygon}" fill="#5c8e7860" stroke="#315b49" stroke-width="2"/>${points.map((p,i)=>{const [x,y]=xy(i,120);return `<text x="${x}" y="${y}" text-anchor="middle" font-size="10">${i+1}: ${p.value}</text>`;}).join('')}</svg>`;
+    }).join(''):'';
+    // Raw IPIP means are not 0–100 indices. Preserve their native source
+    // series as a separate table, without normalization or a master polygon.
+    const ipip=figure.pfig==='PFIG-002'?publicationSources.filter(c=>c.providerFamily==='IPIP_BIG_FIVE'&&Number.isFinite(c.value?.rawMean)):[];
+    const nativeSeries=ipip.length?`<div class="pe-native-series" data-source-series="IPIP_BIG_FIVE"><strong>大五人格原始均值 / Big Five native means</strong>${ipip.map(c=>`<div data-evidence-ref="${esc(c.signalRef)}">${esc(evidenceLabel(c.facetId||c.domainId,'zh-Hans'))} / ${esc(evidenceLabel(c.facetId||c.domainId,'en'))}: ${c.value.rawMean}</div>`).join('')}</div>`:'';
+    const map=['PFIG-007','PFIG-008'].includes(figure.pfig)&&publicationRows.length?`<div class="pe-state-map" data-state-map="${figure.pfig}">${publicationRows.map(r=>`<div class="pe-state-node" data-evidence-refs="${esc((r.sourceIds||[]).join(' '))}"><strong>${esc(r.zh)}<span lang="en">${esc(r.en)}</span></strong><p>${esc(r.stateZh)}<span lang="en">${esc(r.stateEn)}</span></p></div>`).join('')}</div>`:'';
+    return `<figure class="pe-support-figure" data-pfig="${esc(figure.pfig)}" data-pfig-state="${figure.state}" aria-label="${title}"><figcaption>${title} · ${states[figure.state]}</figcaption>${radar}${map||body}${nativeSeries}</figure>`;
+  }
   return render(figure,locale);
 }
 

@@ -51,6 +51,7 @@ export function buildPersonalEvidencePublicationProjection({
     reportClass:'EVIDENCE_DOSSIER_NOT_METHOD_REPORT',
     participantRef:profileView.participantRef||null,
     locale:locale==='zh-Hans'?'zh-Hans':'en',
+    publicationLocaleMode:'BILINGUAL',
     sourceProfileViewRef:profileView.profileViewId||null,
     sourceSemanticDigest:profileView.semanticDigest||null,
     consentReferences:consentRefs,
@@ -81,6 +82,7 @@ export function buildPersonalEvidencePublicationProjection({
         body:section.body,
         sectionStyle:section.sectionStyle,
         pfigRefs:section.pfigs.map(x=>x.pfig),
+        visualBlocks:structuredClone(section.pfigs),
         sourceKeys:section.sourceKeys,
         repeatMasterEditorialCopy:false
       }))

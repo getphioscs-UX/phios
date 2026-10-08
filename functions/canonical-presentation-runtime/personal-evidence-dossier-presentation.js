@@ -1,6 +1,7 @@
 import {evidenceLabel,evidenceValueRows} from '../../assets/customer-ui/js/visuals/personal-evidence-copy.js';
 import {buildPersonalEvidenceBilingualReading} from './personal-evidence-bilingual-reading.js';
 import {resolvePersonalEvidenceSharedVisual} from '../profile/personal-evidence-visual-assets.js';
+import {renderPersonalEvidenceFigure} from '../../assets/customer-ui/js/visuals/profile-visual-mvp.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi=(zh,en)=>`${esc(zh)}<small lang="en">${esc(en)}</small>`;
 export function renderPersonalEvidenceDossier({dossier,profileView,customerName='',subject='',reviewPreview=false,report=null,cprHandoff=null}){
@@ -18,10 +19,10 @@ export function renderPersonalEvidenceDossier({dossier,profileView,customerName=
  const cost=u=>Math.ceil(u.zh.length/38)*28.8+Math.ceil(u.en.length/85)*24.6+40;
  const bodyPage=(c,content,part,n)=>`<article class="pub-page pe-body pub-composed-page" data-pe-section="${c.sectionId}" data-body-page="true" data-page-family="${c.family}" data-bilingual-report="true"><div class="pub-decoration pub-decoration--single"><img class="pub-page-background" data-body-visual="true" src="${esc(art.publicUrl)}" alt="个人证据正文底图 / Personal evidence body artwork" loading="eager" onerror="this.closest('.pe-dossier').dataset.publicationBlocked='true'"></div><header class="pub-header"><span>PHIOS · PERSONAL EVIDENCE</span><span>${c.sectionId.slice(-2)} · ${part}</span></header><div class="pe-reading-field"><h2>${bi(c.titleZh,c.titleEn)}</h2><div class="pe-reading-content">${content}</div></div><footer class="pub-footer"><span>PHIOS · ${esc(dossier.asOfDate)}</span><span>个人证据 / Personal Evidence · ${n}</span></footer></article>`;
  let html=dossier.staticPages.map((a,i)=>staticPage(a,i===0)).join('');
- if(!profileView.signalCards?.length)return '<div class="pub-report pe-dossier" data-profile-product="ONE_BILINGUAL_REPORT" data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2">'+html+dossier.sections.map(x=>staticPage(x.master)).join('')+'</div>';
  for(const section of dossier.sections){html+=staticPage(section.master);const c=reading.chapters.find(x=>x.sectionId===section.section),blocks=c.units.filter(u=>!u.secondary).map(u=>({html:pair(u),height:cost(u)}));
   for(const u of c.units.filter(u=>u.secondary)){const layer=u.secondary.kind==='evidence'?'<section class="pe-source-detail"><h3>'+bi(evidenceLabel(u.secondary.cards[0].providerFamily||u.secondary.cards[0].sourceClass,'zh-Hans'),evidenceLabel(u.secondary.cards[0].providerFamily||u.secondary.cards[0].sourceClass,'en'))+'</h3><p class="pe-source-date">'+esc(u.secondary.cards[0].assessmentDate||'日期未提供 / Date not supplied')+'</p>'+u.secondary.cards.map(evidenceRow).join('')+'</section>':tableRows(u.secondary.table,u.secondary.rows);blocks.push({html:pair(u)+layer,height:cost(u)+u.secondary.height});}
   const noteBlock=['SEC-08','SEC-09'].includes(c.sectionId)?blocks[0]:blocks.at(-1);noteBlock.html+=note(c.note);noteBlock.height+=220;
+  for(const figure of section.pfigs)blocks.push({html:renderPersonalEvidenceFigure(figure,{locale:'bilingual',publicationRows:c.tables?.[0]?.rows||[],publicationSources:profileView.signalCards||[]}),height:figure.pfig==='PFIG-002'?700:650});
   let chunk=[],height=0,part=1;const emit=()=>{if(chunk.length){html+=bodyPage(c,chunk.map(b=>b.html).join(''),part++,++number);chunk=[];height=0;}};
   for(const b of blocks){if(height+b.height>700)emit();chunk.push(b);height+=b.height;}emit();
  }

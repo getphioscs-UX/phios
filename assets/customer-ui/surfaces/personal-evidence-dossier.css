@@ -56,6 +56,24 @@ html[lang=zh-Hans] .pe-dossier .pe-body{font-size:12pt;line-height:1.8}
  html[lang=zh-Hans] .pe-dossier .pe-body{font-size:17px;line-height:1.8}
 }
 @media print{.pe-review-toolbar{display:none}}
+.pe-dossier .pe-support-figure{break-inside:avoid;page-break-inside:avoid;max-width:100%;margin:3mm 0;font:9pt/1.4 system-ui}
+.pe-dossier .pe-support-figure figcaption{font-weight:600;margin-bottom:3mm}
+.pe-dossier .pe-native-radar{display:block;width:75mm;max-width:100%;height:auto;margin:auto}
+.pe-dossier .pe-support-figure .prf-pfig{padding:0;background:transparent}
+.pe-dossier .pe-support-figure .prf-pfig__head p{font-size:9pt}
+.pe-dossier .pe-support-figure .prf-dimension-chip{min-width:0;overflow-wrap:anywhere}
+.pe-dossier .pe-state-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3mm}
+.pe-dossier .pe-state-node{border:1px solid #b9a272;padding:3mm;background:#fff9}
+.pe-dossier .pe-state-node span[lang=en]{display:block;margin-top:1mm}
+.pe-dossier .pe-state-node p{margin:2mm 0 0}
+.pe-dossier .pe-support-figure .prf-dimension-lane{padding:2mm;gap:2mm;grid-template-columns:30mm minmax(0,1fr)}
+.pe-dossier .pe-support-figure .prf-dimension-lane__items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2mm}
+.pe-dossier .pe-support-figure .prf-dimension-chip{padding:2mm;font-size:9pt}
+.pe-dossier .pe-support-figure .prf-dimension-chip span{font-size:9pt}
+.pe-dossier .pe-native-series{margin-top:3mm;padding:2mm;border:1px solid #b9a272;font:9pt/1.4 system-ui}
+@media screen and (max-width:800px){.pe-dossier .pe-support-figure .prf-dimension-lane{grid-template-columns:1fr}.pe-dossier .pe-support-figure .prf-dimension-lane__items{display:block}.pe-dossier .pe-support-figure .prf-dimension-chip span{font-size:14px}}
+@media screen and (max-width:800px){.pe-dossier .pe-state-map{grid-template-columns:1fr}}
+@media screen and (max-width:800px){.pe-dossier .pe-support-figure{font-size:14px}.pe-dossier .prf-convergence-grid,.pe-dossier .prf-sc-grid{grid-template-columns:1fr}.pe-dossier .pe-support-figure .prf-pfig__head p{font-size:14px}}
 /* W11R3: Chinese and English share a reading page and preserve readable A4 type. */
 .pe-dossier .pe-zh{font-size:12pt;line-height:1.8;margin:0 0 3mm}
 .pe-dossier .pe-en{font-size:11.4pt;line-height:1.62;margin:0 0 4mm}

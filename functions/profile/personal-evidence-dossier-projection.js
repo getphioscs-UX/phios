@@ -60,6 +60,7 @@ export function buildPersonalEvidenceDossierProjection({visualProjection=null,pa
     schemaVersion:PERSONAL_EVIDENCE_DOSSIER_PROJECTION_SCHEMA,
     dossierId:profileView?.profileViewId?`DOSSIER-${profileView.profileViewId}`:null,
     locale:locale==='zh-Hans'?'zh-Hans':'en',
+    publicationLocaleMode:'BILINGUAL',
     sourceEvidenceRefs:Object.freeze((profileView?.signalCards||[]).map(x=>x.signalRef)),
     visualProjectionRef:visualProjection?.schemaVersion||null,
     boundaryRefs:Object.freeze(profileView?.boundaries?.length?[profileView.profileViewId]:[]),

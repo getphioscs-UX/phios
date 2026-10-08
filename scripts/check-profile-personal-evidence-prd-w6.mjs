@@ -30,7 +30,7 @@ assert.equal(ir.blocks[0].snapshotLineage.reportReference,report.reportReference
 const dossier=buildPersonalEvidenceDossierProjection({visualProjection,participantRef:'PERSON-A'});
 const html=renderPersonalEvidenceDossier({dossier,profileView:view,reviewPreview:true});
 for(const id of ['P01','P02','P03','P04','P05',...Array.from({length:10},(_,i)=>`SEC-${String(i+1).padStart(2,'0')}`)])assert.equal(html.split(`data-pe-static="${id}"`).length-1,1,id);
-assert.ok(!html.includes('data-pfig="'), 'Unknown figures do not add empty dossier body pages');
+assert.equal((html.match(/data-pfig="/g)||[]).length,9,'UNKNOWN figures remain publication-visible');
 assert.ok(!html.includes('data-pe-sparse="true"'));
 assert.ok(html.includes('PHI-OS-REPORT-PRINT-SHELL-V2'));
 assert.ok(!html.includes('prf-visual-mvp__intro'));
