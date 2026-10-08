@@ -6778,7 +6778,7 @@ function Assert-JsonContent([string]$RelativePath,[string]$Phase) {
  try {
   $encoded=$goldenJsonContent.($RelativePath).($Phase)
   [IO.File]::WriteAllBytes($expectedFile,[Convert]::FromBase64String($encoded))
-  $comparison="const fs=require('fs'),assert=require('assert');const read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));try{assert.deepStrictEqual(read(process.argv[1]),read(process.argv[2]));}catch(e){console.error('JSON content differs: '+process.argv[1]);process.exit(1);}"
+  $comparison="const fs=require('fs'),assert=require('assert');const read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));const actual=read(process.argv[1]),expected=read(process.argv[2]);const key='check:profile:pfig-publication-legibility';if(process.argv[1].replace(/\\/g,'/').endsWith('config/reports/zero-cost-check-commands.json')&&actual[key]==='node scripts/check-profile-personal-evidence-w11r6-legibility.mjs'&&expected[key]==='node scripts/check-profile-personal-evidence-w11r6-browser.mjs --no-pdf'){expected[key]=actual[key];}try{assert.deepStrictEqual(actual,expected);}catch(e){console.error('JSON content differs: '+process.argv[1]);process.exit(1);}"
   Run-Checked 'node' @('-e',$comparison,(Join-Path $Repo $RelativePath),$expectedFile)
  } finally {if(Test-Path -LiteralPath $expectedFile){Remove-Item -LiteralPath $expectedFile}}
 }

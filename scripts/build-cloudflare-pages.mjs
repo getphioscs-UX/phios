@@ -39,6 +39,7 @@ const wrangler = path.join(
 const git = process.env.PHIOS_GIT_BIN || 'git';
 
 const excludedTopLevel = new Set([
+  '.phios-repair-receipts',
   '.git',
   '.github',
   '.wrangler',

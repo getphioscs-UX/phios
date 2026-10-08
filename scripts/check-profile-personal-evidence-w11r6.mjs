@@ -9,6 +9,8 @@ import {buildPersonalEvidencePublicationIr} from '../functions/profile/personal-
 import {renderPersonalEvidenceFigure} from '../assets/customer-ui/js/visuals/profile-visual-mvp.js';
 const dir='content/profile/successors/personal-evidence-r1/w11r6/',root='tools/review/personal-evidence-r1/',read=p=>JSON.parse(fs.readFileSync(p)),hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 const baseline=read(dir+'baseline.json'),mode=process.argv.find(a=>a.startsWith('--mode='))?.split('=')[1]||'all';
+const protectedCss='assets/customer-ui/surfaces/personal-evidence-dossier.css';
+assert(fs.readFileSync(protectedCss,'utf8').startsWith(fs.readFileSync(baseline.backup+protectedCss,'utf8')),'Protected body/background CSS must remain unchanged; only appended figure-local rules allowed');
 const grammars=['source-domain-topology','source-native-pattern','confirmation-slots','context-observation-lanes','separated-source-comparison','work-evidence-matrix','relationship-perspective-map','conceptual-decision-sequence','bounded-reality-prerequisites'];
 const results=[],authority=[];
 for(const before of baseline.cases){

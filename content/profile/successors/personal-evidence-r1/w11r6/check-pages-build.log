@@ -3,30 +3,11 @@
 > node scripts/run-zero-cost-regression.mjs check:visual-report-commerce-binding
 
 PASS visual-report commerce binding: current primary products use projected prices; legacy-readable reports fall back to the canonical report commerce contract without top-level undefined price access.
-Pages static publication: copied=11349, skipped=7178
+Pages static publication: copied=11234, skipped=7387
 
  ⛅️ wrangler 4.148.0
 ────────────────────
 ✨ Compiled Worker successfully
-Pages Worker: 15942446 bytes; gzip 2968163 bytes
-file:///C:/phios/scripts/check-pages-static-assets.mjs:86
-  throw new Error(
-        ^
-
-Error: Pages publication boundary failed:
-.phios-repair-backups/w11r6/2026-10-08T03-50-38.127Z/tools/review/PROFILE-PERSONAL-EVIDENCE-W11R3-SAMPLE-A4.html: 27.25 MiB
-    at file:///C:/phios/scripts/check-pages-static-assets.mjs:86:9
-    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
-    at async node:internal/modules/esm/loader:643:26
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
-
-Node.js v24.18.0
-file:///C:/phios/scripts/build-cloudflare-pages.mjs:124
-    throw new Error(
-          ^
-
-Error: C:\Program Files\nodejs\node.exe failed with exit code 1
-    at run (file:///C:/phios/scripts/build-cloudflare-pages.mjs:124:11)
-    at file:///C:/phios/scripts/build-cloudflare-pages.mjs:333:1
-
-Node.js v24.18.0
+Pages Worker: 15943428 bytes; gzip 2968234 bytes
+PASS Pages publication boundary: 11236 files; no asset exceeds 25 MiB; provider runtime payloads excluded.
+PASS Cloudflare Pages build boundary: .pages-output
