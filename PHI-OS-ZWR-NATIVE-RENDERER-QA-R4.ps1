@@ -14,7 +14,6 @@ function Get-Sha256([byte[]]$Bytes) {
 }
 $Repo=(Resolve-Path $Repo).Path
 if (!(Test-Path (Join-Path $Repo 'package.json'))) { throw 'Run from the phios repository.' }
-if ($Action -eq 'Deploy' -and !(Test-Path (Join-Path $Repo 'PHI-OS-SHARED-DELIVERY-R4-QA.ps1'))) { throw 'Existing reviewed R4 QA deployment runner is required.' }
 $utf8=New-Object Text.UTF8Encoding($false)
 $payload=@(
   @{ Path='functions/api/zwr-native-renderer-acceptance.js'; Sha256='be0d56092d6fc1b16f4d2bbba1fbca80c0d842dae1a786b5a4d97ce81bc46066'; Text=@'
@@ -169,8 +168,15 @@ try {
   Run-Checked 'node' @('scripts/prepare-zwr-native-renderer-qa.mjs',$output)
   Write-Host 'PATCH AND OFFLINE PREPARATION PASS. No generation admission exists from this preparation.'
   if ($Action -eq 'Deploy') {
-    & (Join-Path $Repo 'PHI-OS-SHARED-DELIVERY-R4-QA.ps1') -Action Deploy
-    if (!$?) { throw 'Existing QA deployment runner failed.' }
+    $configuration=Get-Content -LiteralPath 'wrangler.jsonc' -Raw | ConvertFrom-Json
+    $preview=$configuration.env.preview
+    if ($preview.vars.PHIOS_ENVIRONMENT -ne 'qa' -or $preview.d1_databases[0].database_id -ne 'c2c6e313-9bc8-4fd4-89b1-36f3d764dad8') { throw 'QA sandbox target mismatch' }
+    if (!($preview.services | Where-Object { $_.binding -eq 'METHOD_REPORT_RENDERER' -and $_.service -eq 'phios-method-report-renderer-qa' })) { throw 'Private QA renderer binding mismatch' }
+    if (!($preview.r2_buckets | Where-Object { $_.binding -eq 'PRIVATE_REPORTS' -and $_.bucket_name -eq 'phios-private-reports-sandbox' })) { throw 'Private QA reports bucket mismatch' }
+    Run-Checked 'npx.cmd' @('--no-install','wrangler','whoami')
+    Run-Checked 'npm.cmd' @('run','check:shared-report-e2e:readiness-v2')
+    Run-Checked 'npm.cmd' @('run','build:pages')
+    Run-Checked 'npx.cmd' @('--no-install','wrangler','pages','deploy','.pages-output','--project-name','phios-github','--branch','qa','--commit-dirty=true')
     Run-Checked 'npx.cmd' @('--no-install','wrangler','r2','object','put','phios-private-reports-sandbox/qa/method-delivery/ZWR/accepted-renderer-candidate.json','--remote','--file',(Join-Path $output 'candidate.json'),'--content-type','application/json')
     # Explicit private QA manifest is uploaded last. It allows rendering only.
     Run-Checked 'npx.cmd' @('--no-install','wrangler','r2','object','put','phios-private-reports-sandbox/qa/method-delivery/ZWR/renderer-manifest.json','--remote','--file',(Join-Path $output 'manifest.json'),'--content-type','application/json')

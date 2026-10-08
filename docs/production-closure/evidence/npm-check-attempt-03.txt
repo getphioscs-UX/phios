@@ -92,12 +92,12 @@ PASS ordinary npm checks/builds: inherited zero-cost guard denies paid network e
   Shared Journey, consent, assignment, data-layer and signing boundaries are explicit.
   Existing immutable migration 0004 is registered; no migration SQL changed.
 ✓ PWS-ENTRY-W0 payment-before-service boundary frozen.
-✓ PWS-ENTRY-HANDOFF-W3 Professional handoff boundary frozen.
-  Eight ordered gates precede accepted professional responsibility.
-  RM5 Journey entitlement cannot become Professional entitlement.
 ✓ PWS-ENTRY-ACTIVATION-W2 Paid Journey activation boundary frozen.
   All nine gates are required; missing or unknown gates remain visible.
   Payment alone creates no assignment, responsibility, confirmed reading or signed deliverable.
+✓ PWS-ENTRY-HANDOFF-W3 Professional handoff boundary frozen.
+  Eight ordered gates precede accepted professional responsibility.
+  RM5 Journey entitlement cannot become Professional entitlement.
 ✓ PWS-ENTRY-PUBLIC-W1 knowledge and free navigation boundary frozen.
   Nine public route families remain non-individual and non-coercive.
   Five prohibited behaviours are closed; service is not the only exit.
@@ -203,26 +203,57 @@ PASS ordinary npm checks/builds: inherited zero-cost guard denies paid network e
   71 Registry objects and 70 relationships reconcile from the frozen baseline.
   Core Runtime, PKR, price, payment, production and D1 boundaries remain closed.
   State: PWS-I2-v1.0.0-Frozen.
-✓ PJA-W0 Cross-System Boundary and Dependency Freeze passed.
-  PJA capabilities: read, render, route and link; write sources: 0.
-  10 dependency groups and every top-level public page are mapped.
-  No second Product, Entitlement or Provider Cost authority exists.
-  Core Runtime, PKR, PWS-I2 and future PWS-I4–I9 boundaries are preserved.
-  State: PJA-W0-v1.0.0-Frozen.
 node:internal/modules/run_main:107
     triggerUncaughtException(
     ^
 
-AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
 
-13 !== 12
+  [
+    '0001_platform_foundation.sql',
+    '0002_initial_runtime.sql',
+    '0003_financial_professional_infrastructure.sql',
+    '0004_book_commerce.sql',
+...
+    '0012_report_context_admission.sql',
++   '0013_method_delivery_cache.sql'
+  ]
 
-    at file:///C:/phios/scripts/check-pja-w1-blueprint-led-knowledge.mjs:411:8 {
+    at file:///C:/phios/scripts/check-pja-w0-cross-system-boundary.mjs:380:8 {
   generatedMessage: true,
   code: 'ERR_ASSERTION',
-  actual: 13,
-  expected: 12,
-  operator: 'strictEqual',
+  actual: [
+    '0001_platform_foundation.sql',
+    '0002_initial_runtime.sql',
+    '0003_financial_professional_infrastructure.sql',
+    '0004_book_commerce.sql',
+    '0005_pws_universal_registry.sql',
+    '0006_commerce_stripe_r1.sql',
+    '0007_account_oidc_sessions.sql',
+    '0008_financial_will_encrypted_drafts.sql',
+    '0009_canonical_account_person.sql',
+    '0010_account_method_report_material.sql',
+    '0011_report_context_sequence_reservation.sql',
+    '0012_report_context_admission.sql',
+    '0013_method_delivery_cache.sql'
+  ],
+  expected: [
+    '0001_platform_foundation.sql',
+    '0002_initial_runtime.sql',
+    '0003_financial_professional_infrastructure.sql',
+    '0004_book_commerce.sql',
+    '0005_pws_universal_registry.sql',
+    '0006_commerce_stripe_r1.sql',
+    '0007_account_oidc_sessions.sql',
+    '0008_financial_will_encrypted_drafts.sql',
+    '0009_canonical_account_person.sql',
+    '0010_account_method_report_material.sql',
+    '0011_report_context_sequence_reservation.sql',
+    '0012_report_context_admission.sql'
+  ],
+  operator: 'deepStrictEqual',
   diff: 'simple'
 }
 
