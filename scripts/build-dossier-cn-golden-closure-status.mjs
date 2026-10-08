@@ -7,7 +7,7 @@ const b=get('content/civilization-atlas/reconfiguration/runtime-position-w8b-sta
 const c=get('content/civilization-atlas/reconfiguration/runtime-position-w8c-status-v1.json');
 const d=get('content/civilization-atlas/reconfiguration/dossier-cn-w8d-observable-features-v1.json');
 const e=get('content/civilization-atlas/reconfiguration/runtime-position-w8d-rre-readouts-v1.json');
-const f=get('content/civilization-atlas/reconfiguration/dossier-cn-w8f-grammar-domain-candidates-v1.json');
+const f=get('content/civilization-atlas/reconfiguration/runtime-position-w8e-human-review-v1.json');
 const g=get('content/civilization-atlas/reconfiguration/dossier-cn-w8g-rp-candidates-v1.json');
 const h=get('content/civilization-atlas/reconfiguration/dossier-cn-w8h-position-human-review-v1.json');
 const i=get('content/civilization-atlas/reconfiguration/dossier-cn-w8i-accepted-current-dossier-v1.json');
@@ -18,7 +18,7 @@ const states={
  'W8-C':(c?.completed?.admittedEvidenceClaims??0)>=14&&(c?.completed?.rreEligibleEvidence??0)>=14?'COMPLETE':'READY_TO_BUILD',
  'W8-D':d?.status==='REQUIRED_LANES_COMPLETE'&&d?.featureCount===7?'COMPLETE':'READY_TO_BUILD',
  'W8-E':eRecord?.state==='RRE_REQUIRED_LANES_CONSUMED'?'COMPLETE':'READY_TO_BUILD',
- 'W8-F':f?.status==='GRAMMAR_DOMAIN_HUMAN_REVIEW_READY'?'HUMAN_REVIEW_REQUIRED':'SEMANTIC_BASIS_REQUIRED',
+ 'W8-F':(f?.records||[]).some(r=>r.dossierId==='DOSSIER-CN')?'HUMAN_REVIEW_REQUIRED':'SEMANTIC_BASIS_REQUIRED',
  'W8-G':g?.status==='RP_CANDIDATES_READY'?'COMPLETE':'BLOCKED_BY_W8F_HUMAN_ACCEPT',
  'W8-H':h?.status==='READY_FOR_HUMAN_REVIEW'?'HUMAN_REVIEW_REQUIRED':h?.status==='ACCEPTED'?'COMPLETE':'BLOCKED_BY_W8G',
  'W8-I':i?.status==='ACCEPTED_CURRENT_DOSSIER'?'COMPLETE':'BLOCKED_BY_W8H_ACCEPT'
