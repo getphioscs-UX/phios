@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const write=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');
+const h=read('content/civilization-atlas/reconfiguration/dossier-us-w8h-position-human-review-v1.json');
+const accepted=(h.records||[]).filter(r=>r.humanDecision==='ACCEPT');
+const pending=(h.records||[]).filter(r=>r.humanDecision==='PENDING');
+if(pending.length)throw Error('W8H_PENDING_HUMAN_DECISIONS');
+if(!accepted.length)throw Error('W8H_NO_ACCEPTED_POSITIONS');
+const out={schemaVersion:'PHI-OS-DOSSIER-US-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0',status:'ACCEPTED_CURRENT_DOSSIER',dossierId:'DOSSIER-US',stage:'W8-I',entity:{en:'United States','zh-Hans':'美国'},admittedPositions:accepted.map(r=>({runtimePositionId:r.runtimePositionId,scope:r.scope,subsystem:r.subsystem,grammarId:r.grammarId,realityDomainId:r.realityDomainId,evidenceRefs:r.evidenceRefs,readoutReference:r.readoutReference,candidateId:r.candidateId})),projectionBoundary:{subsystemPositionsDoNotImplySingleWholeDossierPosition:true,evidenceRefsPreserved:true,currentDossierOnly:true,prediction:false,historicalPositionShortcut:false},lineage:{source:'W8-A',claims:'W8-B',cwa:'W8-C',observableFeatures:'W8-D',rre:'W8-E',grammarDomain:'W8-F',rpCandidates:'W8-G',humanReview:'W8-H'}};
+write('content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json',out);
+console.log(JSON.stringify({status:out.status,acceptedPositions:out.admittedPositions.length,next:'GOLDEN_DOSSIER_CLOSED'},null,2));
