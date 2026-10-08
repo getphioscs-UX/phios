@@ -52,6 +52,9 @@ export function saveSelectedReality(store,{actorAccountId,entityId,sourceProduct
   const next=copy(store);
   for(const item of selectedItems){
     requireValue(item.id&&item.statement&&item.authority&&item.sourceRef,'ITEM_PROVENANCE_REQUIRED');
+    const entity=store.entities.find(x=>x.id===entityId);
+    requireValue((!item.entityId||item.entityId===entityId)&&(!item.accountId||item.accountId===store.accountId),'ITEM_SUBJECT_MISMATCH');
+    if(item.personId)requireValue(entity.kind==='PERSON'?item.personId===entityId:(entity.participantIds||[]).includes(item.personId),'ITEM_PERSON_MISMATCH');
     requireValue(SOURCE_AUTHORITIES[sourceKind].includes(item.authority),'SOURCE_AUTHORITY_PROMOTION_DENIED');
     requireValue(!next.records.some(x=>x.id===item.id),'RECORD_ALREADY_EXISTS');
     if(sourceProduct==='RELATIONSHIP')requireValue(item.permissions?.personA===true&&item.permissions?.personB===true&&item.permissions?.shared===true,'SEPARATE_PARTICIPANT_CONSENT_REQUIRED');
@@ -65,16 +68,17 @@ export function saveSelectedReality(store,{actorAccountId,entityId,sourceProduct
   return freeze(next);
 }
 
-export function reviewRealityRecord(store,{actorAccountId,recordId,action,statement,reason,at,consent}={}){
+export function reviewRealityRecord(store,{actorAccountId,entityId=null,recordId,action,statement,reason,at,consent}={}){
   requireValue(actorAccountId===store.accountId,'ACCOUNT_ACCESS_DENIED');
   requireValue(consent===true,'REVIEW_CONSENT_REQUIRED');
   requireValue(['CONFIRM','CORRECT','MARK_OUTDATED','REMOVE_ACTIVE','SUPERSEDE'].includes(action),'REVIEW_ACTION_INVALID');
   requireValue(reason,'REVIEW_REASON_REQUIRED');stamp(at);
   const index=store.records.findIndex(x=>x.id===recordId);requireValue(index>=0,'RECORD_NOT_FOUND');
+  if(entityId)requireValue(store.records[index].entityId===entityId,'REVIEW_PERSON_MISMATCH');
   if(['CORRECT','SUPERSEDE'].includes(action))requireValue(statement,'REPLACEMENT_REQUIRED');
   const next=copy(store),previous=copy(next.records[index]);
   const revised={...previous,revision:previous.revision+1,reviewedAt:at,reviewAction:action};
-  if(statement)revised.statement=statement;
+  if(action==='CORRECT')revised.statement=statement;
   if(['MARK_OUTDATED','REMOVE_ACTIVE','SUPERSEDE'].includes(action))revised.active=false;
   next.records[index]=revised;
   if(action==='SUPERSEDE')next.records.push({...previous,id:`${recordId}-revision-${revised.revision}`,statement,revision:1,createdAt:at,supersedes:recordId,active:true});
@@ -94,6 +98,7 @@ export function resolveAskRealityContext({surface,entityId,store,actorAccountId,
   requireValue(['PERSONAL','RELATIONSHIP','FINANCIAL','WORLD','MY_REALITY'].includes(surface),'ASK_SURFACE_INVALID');
   requireValue(actorAccountId===store.accountId,'ACCOUNT_ACCESS_DENIED');
   if(entityId)requireValue(store.entities.some(x=>x.id===entityId),'ENTITY_NOT_BOUND');
+  if(selectedRecordIds.length)requireValue(entityId&&selectedRecordIds.every(id=>store.records.some(x=>x.id===id&&x.active&&x.entityId===entityId)),'ASK_SELECTED_CONTEXT_OUTSIDE_ENTITY');
   const records=store.records.filter(x=>x.active&&selectedRecordIds.includes(x.id)&&(!entityId||x.entityId===entityId));
   const publicKinds=['PUBLISHED_KNOWLEDGE','CURRENT_EVIDENCE','MARKET_EVIDENCE'];
   const stack=['YOUR_DATA','YOUR_OBSERVATIONS','METHOD_PERSPECTIVE','PUBLISHED_KNOWLEDGE','CURRENT_EVIDENCE','MARKET_EVIDENCE','PROFESSIONAL_CONTRIBUTION'].map(kind=>({kind,items:copy((sources[kind]||[]).filter(row=>publicKinds.includes(kind)&&row.public===true&&row.sourceRef||row.accountId===store.accountId&&row.entityId===entityId&&row.consent===true))}));

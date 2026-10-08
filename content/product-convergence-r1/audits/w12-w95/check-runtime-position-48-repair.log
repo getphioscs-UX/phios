@@ -1,0 +1,71 @@
+INITIAL RESULT: FAIL (preserved original complete log: regression/check-runtime-position-48.log)
+Exact initial error: RUNTIME_POSITION_48_W8E:P1_SEMANTIC_BASIS_COUNT
+
+REPAIR: checker compatibility only. Owner commit 33f7b266e275347d9c61dda3b657e0c48b58814b added five DOSSIER-CN evidence-bounded semantic assessments and upgraded basis version/status to 1.1.0 MULTI_DOSSIER_SEMANTIC_BASIS_US_CN. It did not change the original five US records. The checker previously asserted a global total of five. The repaired checker preserves US=5, EVIDENCE_READY=2, INSUFFICIENT_EVIDENCE=3, adds independent CN=5/2/3 and requires every record to pass the canonical semantic validator with exact dossier evidence lineage, zero rejected records and unique basis IDs. Unknown versions/dossiers fail closed. No basis, current-evidence, registry or frozen artifact was changed. No build ran.
+
+TARGETED W8E: PASS, actual canonical validator executed.
+AFFECTED AGGREGATE COMMAND: node scripts/run-zero-cost-regression.mjs check:runtime-position-48
+FINAL AGGREGATE EXIT CODE: 0 (PASS)
+ZERO-COST: inherited network-denial and JSON compatibility preloads enabled; no provider/API calls.
+
+ACTUAL REPAIR AGGREGATE OUTPUT:
+
+> check:runtime-position-48:backbone
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:backbone
+
+PASS runtime-position-48 backbone: 48/48 positions, 16x3 domains, 6 locks, Book VI 13H/13I alignment, knowledge-state guards.
+
+> check:runtime-position-48:w5
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w5
+
+PASS runtime-position-48 W5: source windows preserved, Book V temporal crosswalk active, 10 representative historical semantic precedents human-accepted, RP-45 accepted only as forward boundary, Phase 45–48 excluded from history, 12 dossier correspondences governed UNKNOWN, UI/Search/Ask overlays wired.
+
+> check:runtime-position-48:w6
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w6
+
+PASS runtime-position-48 W6: representative dossier evidence gate human-accepted; 12 dossier gates still fail closed, observation targets preserved, no current positions/signals/thresholds/reachable positions fabricated, existing Current Web Authority and Reality Readout Engine reused.
+
+> check:runtime-position-48:w7
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w7
+
+PASS runtime-position-48 W7: human-accepted readiness is frozen; current evidence remains fail-closed and W8 is the production successor.
+
+> check:runtime-position-48:w8a
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w8a
+
+PASS runtime-position-48 W8A: 12 dossiers, 144 source work orders, 84 required + 60 optional, structural source validation active, zero claim/evidence/position authority leakage.
+
+> check:runtime-position-48:w8a:p2
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w8a:p2
+
+PASS W8A-P2 market-data provider expansion: Moomoo registered as MARKET_DATA_PROVIDER; auth/secrets remain runtime-only; snapshots are source candidates only; three W8E gaps are targeted without auto-promotion.
+
+> check:moomoo:first-package
+> node scripts/run-zero-cost-regression.mjs check:moomoo:first-package
+
+PASS first Moomoo data package: 3 governed request groups target all 3 W8E gaps; live data remains uncollected until authorized retrieval.
+
+> check:runtime-position-48:w8b
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w8b
+
+PASS runtime-position-48 W8B: source-bounded claim extraction active; locator + source lineage required; CWA-ready handoff remains NOT_EVALUATED, with zero evidence/position authority leakage.
+
+> check:runtime-position-48:w8c
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w8c
+
+PASS runtime-position-48 W8C: canonical CWA admission executes with explicit authority decisions, freshness and conflicts; only DIRECT non-conflicted evidence reaches RRE handoff; RRE/position authority remains closed.
+
+> check:runtime-position-48:w8d
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w8d
+
+PASS runtime-position-48 W8D: only W8C RRE-eligible evidence creates evidence-lineaged RRE readouts; partial vs complete required-lane coverage is explicit; zero evidence creates zero dossier records; positions remain closed.
+
+> check:runtime-position-48:w8e
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w8e
+
+PASS runtime-position-48 W8E: canonical G1-G16 + operational P1-P3 derivation gates are active; evidence-bounded grammar/domain candidates require semantic basis and human review; RP candidates remain closed.
+
+> check:runtime-position-48:w8
+> node scripts/run-zero-cost-regression.mjs check:runtime-position-48:w8
+
+PASS runtime-position-48 W8: executable Evidence Batch → CWA → RRE → canonical position candidate → human review pipeline is active; production remains empty/fail-closed until verifiable source batches are supplied.

@@ -43,6 +43,8 @@ export function composePersonStructure(person,{comparisons=[]}={}){
 const domainMap={CURRENT_STATE:'currentConditions',LOAD:'currentConditions',DRIFT:'variablePatterns',DECISION:'decisionContexts',EXECUTION:'currentConditions',RELATIONSHIP:'relationships',ENVIRONMENT:'environmentContexts',RESOURCES:'financialLinks',RECOVERY:'currentConditions',OPEN_LOOPS:'openQuestions',HEALTH:'currentConditions',FINANCIAL:'financialLinks',RELATIONSHIP_SENSITIVE:'relationships',BODY_CARRIER:'currentConditions',INPUT_SENSITIVITY:'currentConditions'};
 export function consumePersonalCurrentReality(person,{input,contextTags={}}={}){
  const normalized=normalizePersonalCurrentRealityInput(input||{}),ir=canonicalizeCurrentRealityObservations(normalized),next=copy(person);
+ const allowedTags=new Set(['work','location','family','relationship','finance','health','life-stage','current-pressure','current-goal']);
+ for(const [ref,tag] of Object.entries(contextTags))if(!ir.observations.some(x=>x.observationId===ref)||!allowedTags.has(tag))fail('CURRENT_CONTEXT_TAG_INVALID');
  for(const observation of ir.observations){
   const id='current:'+observation.observationId,tag=contextTags[observation.observationId]||null;
   if(tag==='health'&&!normalized.sensitiveConsent)fail('HEALTH_CONTEXT_EXPLICIT_CONSENT_REQUIRED');

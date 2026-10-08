@@ -217,7 +217,7 @@
     },
     {
       "id": "PC-W43",
-      "state": "IMPLEMENTED_PASS",
+      "state": "READY_FOR_HUMAN_REVIEW",
       "dependsOn": [
         "PC-W42"
       ]
@@ -553,7 +553,7 @@
     },
     {
       "id": "PC-W91",
-      "state": "NOT_RUN",
+      "state": "FAILED",
       "dependsOn": [
         "PC-W90"
       ]
@@ -562,32 +562,44 @@
       "id": "PC-W92",
       "state": "PENDING_HUMAN_DECISION",
       "dependsOn": [
-        "PC-W91"
+        "PC-W16",
+        "PC-W17"
       ]
     },
     {
       "id": "PC-W93",
       "state": "PENDING_HUMAN_DECISION",
       "dependsOn": [
-        "PC-W92"
+        "PC-W25",
+        "PC-W26"
       ]
     },
     {
       "id": "PC-W94",
       "state": "PENDING_HUMAN_DECISION",
       "dependsOn": [
-        "PC-W93"
+        "PC-W39",
+        "PC-W43"
       ]
     },
     {
       "id": "PC-W95",
       "state": "PENDING_HUMAN_DECISION",
       "dependsOn": [
-        "PC-W94"
+        "PC-W50",
+        "PC-W53",
+        "PC-W54",
+        "PC-W59"
       ]
     }
   ],
   "originalPersonDependency": "PC-R1-ORIGINAL-W11-CANONICAL-PERSON",
   "independentBatches": true,
+  "independentHumanGates": [
+    92,
+    93,
+    94,
+    95
+  ],
   "productionEdgesDisabled": true
 }

@@ -1,0 +1,10 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {execFileSync} from 'node:child_process';
+const dir='content/product-convergence-r1/audits/consolidated-closure/',previous='content/product-convergence-r1/audits/w12-w95/',read=p=>JSON.parse(fs.readFileSync(p)),hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+fs.mkdirSync(dir,{recursive:true});if(fs.existsSync(dir+'baseline.json'))throw Error('Closure baseline already exists; preserve it');
+const protectedPaths=[...read(previous+'baseline.json').protected.map(x=>x.path),'content/registry/runtime-migrations.json','db/migrations/0013_method_delivery_cache.sql','content/professional/canonical-presentation-runtime/freeze/cpr-w0-w6-foundation-freeze-v1.json'];
+const authority='C:/Users/Guest Account/.codex/attachments/409a7d30-1413-4fc9-a493-96c27471ea8f/Pasted text.txt';
+const files=execFileSync('rg',['--files','functions/customer-projection','functions/personal-reality-product','functions/personal-reading/relationship','functions/professional/financial','scripts','assets/customer-ui','tools/review']).toString().trim().split(/\r?\n/).map(x=>x.replaceAll('\\','/')).filter(x=>/pc-r1|consolidated-review|pc-r1-person|pc-r1-current|pc-r1-publication/i.test(x)&&/\.(js|mjs|css|html)$/.test(x));
+const baseline={head:execFileSync('git',['rev-parse','HEAD']).toString().trim(),worktree:execFileSync('git',['status','--porcelain=v1']).toString(),ownerInstruction:{path:authority,sha256:hash(authority)},protected:[...new Set(protectedPaths)].map(path=>({path,sha256:hash(path)})),implementationBefore:files.map(path=>({path,sha256:hash(path)}))};
+fs.writeFileSync(dir+'baseline.json',JSON.stringify(baseline,null,2)+'\n');fs.copyFileSync(authority,dir+'OWNER-INSTRUCTION.txt');
+for(const name of ['PC-R1-W12-W95-STEP-LEDGER.json','EXECUTION-MANIFEST.json','PC-R1-REGRESSION-RESULTS.json','PC-R1-CUSTOMER-JOURNEY-RESULTS.json','PC-R1-REMAINING-PRODUCTION-BLOCKERS.md'])fs.copyFileSync(previous+name,dir+'BEFORE-'+name);
+console.log('Closure baseline recorded; existing receipts, frozen evidence, migration registry and SQL protected.');

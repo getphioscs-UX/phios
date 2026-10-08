@@ -1,0 +1,37 @@
+
+> precheck
+> node scripts/run-zero-cost-regression.mjs precheck
+
+
+> check:report-provider-spend-protection
+> node scripts/run-zero-cost-regression.mjs check:report-provider-spend-protection
+
+PASS ordinary npm checks/builds: inherited zero-cost guard denies paid network even when parent requests live mode.
+
+> check:cloudflare-function-import-compat
+> node scripts/run-zero-cost-regression.mjs check:cloudflare-function-import-compat
+
+✓ Cloudflare Pages Functions source deployability invariant passed.
+  functions/**/*.{js,mjs,cjs} contains no prohibited JSON import attributes.
+  Repository validation remains distinct from DEPLOYED and LIVE_VERIFIED truth.
+✓ PHI OS Master Governance v1.1.0 frozen.
+  Source-of-truth priority and conflict rules are closed.
+  PDS mandatory principles and implementation gates are closed.
+  Six customer stages match PDS-W1 and the shared Journey shell.
+  Ten canonical domains have one traceable write-source owner.
+  Six post-freeze change classes are closed; silent behaviour is prohibited.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: PDS_W0_UNAUTHORIZED_MIGRATION_CHANGE
+    at file:///C:/phios/scripts/check-pds-w0-current.mjs:197:12 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

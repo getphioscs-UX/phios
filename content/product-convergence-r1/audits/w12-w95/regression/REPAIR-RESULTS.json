@@ -1,0 +1,35 @@
+[
+  {
+    "alias": "check:canonical-account-person",
+    "status": "PASS",
+    "exitCode": 0,
+    "log": "content/product-convergence-r1/audits/w12-w95/regression/check-canonical-account-person-repair.log",
+    "changedFiles": [
+      "scripts/check-canonical-account-person.mjs"
+    ],
+    "reason": "Checker imports current owner admission policy after historical cb66faae deletion; real SQL/calculation/isolation/consent checks retained",
+    "originalFailurePreserved": true
+  },
+  {
+    "alias": "check:runtime-position-48",
+    "status": "PASS",
+    "exitCode": 0,
+    "log": "content/product-convergence-r1/audits/w12-w95/check-runtime-position-48-repair.log",
+    "changedFiles": [
+      "scripts/check-runtime-position-48-w8e.mjs"
+    ],
+    "reason": "Explicit multi-dossier v1.1.0 checker compatibility; original US5/2/3 plus CN5/2/3 and all10 semantic/lineage validation preserved",
+    "originalFailurePreserved": true
+  },
+  {
+    "alias": "npm run check",
+    "status": "FAIL",
+    "exitCode": 1,
+    "log": "content/product-convergence-r1/audits/w12-w95/regression/npm-run-check-repair.log",
+    "changedFiles": [
+      "scripts/lib/pc-r1-zero-cost-preload.mjs"
+    ],
+    "reason": "New localhost-only fetch guard preserves Promise rejection semantics; spend-protection and Pages import compatibility now pass, subsequent historical PDS migration admission fails",
+    "originalFailurePreserved": true
+  }
+]

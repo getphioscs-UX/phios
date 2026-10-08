@@ -21,11 +21,28 @@ const positions=read('content/registry/runtime-position-48-v1.json');
 const crosswalk=read('content/registry/runtime-position-48-crosswalk-v1.json');
 const manifest=read('content/civilization-atlas/reconfiguration/atlas-manifest-v2.json');
 ok(contract.status==='ACTIVE_GRAMMAR_DOMAIN_DERIVATION','CONTRACT');
-ok((semanticBasis.records||[]).length===5,'P1_SEMANTIC_BASIS_COUNT');
-ok((semanticBasis.records||[]).filter(x=>x.supportState==='EVIDENCE_READY').length===2,'P1_EVIDENCE_READY_COUNT');
-ok((semanticBasis.records||[]).filter(x=>x.supportState==='INSUFFICIENT_EVIDENCE').length===3,'P1_INSUFFICIENT_COUNT');
+// The original P1 pilot admitted five US assessments. Owner commit 33f7b266
+// extends v1.1.0 with five independently evidence-bounded China assessments;
+// it does not replace or relax the original US pilot gates.
+const basisRecords=semanticBasis.records||[];
+const usBasis=basisRecords.filter(x=>x.dossierId==='DOSSIER-US');
+ok(usBasis.length===5,'P1_US_SEMANTIC_BASIS_COUNT');
+ok(usBasis.filter(x=>x.supportState==='EVIDENCE_READY').length===2,'P1_US_EVIDENCE_READY_COUNT');
+ok(usBasis.filter(x=>x.supportState==='INSUFFICIENT_EVIDENCE').length===3,'P1_US_INSUFFICIENT_COUNT');
+const multiDossier=semanticBasis.version==='1.1.0'&&semanticBasis.status==='MULTI_DOSSIER_SEMANTIC_BASIS_US_CN';
+ok(multiDossier||(semanticBasis.version==='1.0.0'&&semanticBasis.status==='FIRST_REAL_SEMANTIC_BASIS_PILOT_US'),'SEMANTIC_BASIS_VERSION_STATUS');
+ok(basisRecords.length===(multiDossier?10:5),'P1_SEMANTIC_BASIS_COUNT');
+ok(new Set(basisRecords.map(x=>x.basisId)).size===basisRecords.length,'SEMANTIC_BASIS_ID_UNIQUE');
+ok(basisRecords.every(x=>x.dossierId==='DOSSIER-US'||(multiDossier&&x.dossierId==='DOSSIER-CN')),'SEMANTIC_BASIS_DOSSIER_SCOPE');
+if(multiDossier){
+  const cnBasis=basisRecords.filter(x=>x.dossierId==='DOSSIER-CN');
+  ok(cnBasis.length===5,'CN_SEMANTIC_BASIS_COUNT');
+  ok(cnBasis.filter(x=>x.supportState==='EVIDENCE_READY').length===2,'CN_EVIDENCE_READY_COUNT');
+  ok(cnBasis.filter(x=>x.supportState==='INSUFFICIENT_EVIDENCE').length===3,'CN_INSUFFICIENT_COUNT');
+}
 const semanticValidation=validateW8eSemanticBasis({semanticBasis,currentEvidence,grammarCanon:grammar,domainCriteria:domains});
-ok(semanticValidation.records.length===5&&semanticValidation.rejected.length===0,'P1_SEMANTIC_BASIS_VALIDATION');
+ok(semanticValidation.records.length===basisRecords.length&&semanticValidation.rejected.length===0,'P1_SEMANTIC_BASIS_VALIDATION');
+ok(semanticValidation.records.every(x=>basisRecords.some(b=>b.basisId===x.basisId&&b.dossierId===x.dossierId)),'ALL_DOSSIER_VALIDATION_LINEAGE');
 ok((grammar.grammars||[]).length===16,'GRAMMAR_COUNT');
 ok(new Set((grammar.grammars||[]).map(x=>x.grammarId)).size===16,'GRAMMAR_UNIQUE');
 ok((domains.domains||[]).length===3,'DOMAIN_COUNT');

@@ -9,8 +9,7 @@ import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiw
 import {generateAndReleaseAccountZiwei as generateProductionAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../functions/account/ziwei-account-delivery.js';
 import {digest} from '../functions/account/oidc-auth.js';
 import {generateZiweiProductionCandidate} from '../functions/report-delivery/ziwei-production-generation-v1.js';
-import {requireVfrAdmission} from '../functions/report-delivery/shared-report-e2e-v2.js';
-import {ZIWEI_VFR_R1_GENERATION_VERSION} from '../functions/report-delivery/ziwei-vfr-r1-generation.js';
+import {requireZwrVfrGenerationAdmission} from '../functions/report-delivery/ziwei-vfr-profile-policy.js';
 // Trusted server injection keeps this storage test offline; the production default is resolved separately from the current canonical cutover state.
 const generateAccountZiweiCandidate=(context,selection)=>generateProductionAccountZiweiCandidate(context,selection,{generateCandidate:generateZiweiProductionCandidate});
 const generateAndReleaseAccountZiwei=(context,selection)=>generateProductionAndReleaseAccountZiwei(context,selection,{generateCandidate:generateAccountZiweiCandidate});
@@ -49,22 +48,14 @@ sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,l
 sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,context_json,created_at,updated_at) VALUES('cpa-local-order',?,?,'cpa-local-idempotency','paid','FULFILLED',?,'2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
 sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_id,checkout_attempt_id,stripe_checkout_session_id,currency,amount_minor,purchase_state,created_at,updated_at) VALUES('cpa-local-purchase',?,?,'cpa-local-order','LOCAL-NOT-STRIPE','MYR',3900,'purchased','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
 sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('cpa-local-entitlement','cpa-local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
-const zwrCutoverPath='docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json';
-const deliveryContract=JSON.parse(fs.readFileSync('content/reports/shared-report-delivery-e2e-contract-v2.json','utf8'));
-let admissionBlocked=false;
-try{requireVfrAdmission(deliveryContract.profiles['ZWR:'+ZIWEI_VFR_R1_GENERATION_VERSION]);}catch(error){assert.equal(error.code,'SHARED_E2E_VFR_ADMISSION_BLOCKED');admissionBlocked=true;}
-if(admissionBlocked){
- await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),{code:'SHARED_E2E_VFR_ADMISSION_BLOCKED',status:503});
-}else if(fs.existsSync(zwrCutoverPath)){
- const cutover=JSON.parse(fs.readFileSync(zwrCutoverPath,'utf8'));
- assert.equal(cutover.schemaVersion,'ZWR-VFR-R1-DEEP-PRODUCTION-CUTOVER-v2');
- await assert.rejects(
-  ()=>generateProductionAccountZiweiCandidate(a,selection),
-  error=>error?.message==='VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED'||error?.code==='VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED'
- );
-}else{
- await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),{code:'ZIWEI_R5_OPENAI_API_KEY_REQUIRED'});
-}
+// Current method-owner admission replaced the deleted shared E2E gate.
+// This local fixture has no deployed private-browser admission and must remain
+// unable to enter paid writing. The inherited zero-cost gate may reject first.
+await assert.rejects(()=>requireZwrVfrGenerationAdmission(env),{code:'METHOD_GENERATION_ADMISSION_REQUIRED',status:503});
+await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),error=>[
+ 'VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED','METHOD_GENERATION_ADMISSION_REQUIRED'
+].includes(error?.code||error?.message));
+tests.push({name:'current method admission absent; production writing blocked before paid provider',result:'DENIED'});
 const candidate=await generateAccountZiweiCandidate(a,selection),loader=(owner,id)=>loadCanonicalPersonSubject(env,owner,id);
 await denied('unconfigured server browser verifier cannot release',()=>generateAndReleaseAccountZiwei(a,selection));
 await denied('bad server browser receipt cannot release',()=>generateAndReleaseAccountZiwei({...a,env:{...env,METHOD_REPORT_RENDERER:{fetch:async()=>Response.json({html:'bad',verification:{passed:true,pageCount:33}})}}},selection));
