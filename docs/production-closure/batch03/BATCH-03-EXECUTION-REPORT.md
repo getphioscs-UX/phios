@@ -9,8 +9,8 @@
   "m1": "NOT_LIVE_VERIFIED",
   "fullLocalReportCandidate": "BLOCKED_ACCEPTED_COPY_COVERAGE",
   "subjectFocusedGroups": 15,
-  "visualChecks": 14,
-  "visualPass": 14,
+  "visualChecks": 16,
+  "visualPass": 16,
   "pdfProofs": [
     {
       "locale": "en",
@@ -30,10 +30,10 @@
   "protectedFiles": 172,
   "protectedDrift": 0,
   "cost": {
-    "guardedProcesses": 37,
+    "guardedProcesses": 52,
     "providerCalls": 0,
     "openAiCalls": 0,
-    "blockedExternalAttempts": 4,
+    "blockedExternalAttempts": 8,
     "realStripeTransactions": 0,
     "productionStorageWrites": 0,
     "readOnlyRemote": "Eight exact native registry object HEADs + existing public report Master GETs from isolated browser; no provider/payment API",
