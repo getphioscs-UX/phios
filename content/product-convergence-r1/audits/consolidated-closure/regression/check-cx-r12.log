@@ -1,0 +1,112 @@
+
+> check:cx-r10
+> node scripts/run-zero-cost-regression.mjs check:cx-r10
+
+
+> check:cx-r20
+> node scripts/run-zero-cost-regression.mjs check:cx-r20
+
+
+> check:cx-foundation
+> node scripts/run-zero-cost-regression.mjs check:cx-foundation
+
+
+> check:cx-r5
+> node scripts/run-zero-cost-regression.mjs check:cx-r5
+
+
+> check:cx-r4
+> node scripts/run-zero-cost-regression.mjs check:cx-r4
+
+
+> check:cx-r3
+> node scripts/run-zero-cost-regression.mjs check:cx-r3
+
+
+> check:cx-r2
+> node scripts/run-zero-cost-regression.mjs check:cx-r2
+
+
+> check:cx-r1a
+> node scripts/run-zero-cost-regression.mjs check:cx-r1a
+
+
+> check:cx-r1
+> node scripts/run-zero-cost-regression.mjs check:cx-r1
+
+
+> check:cx-r0
+> node scripts/run-zero-cost-regression.mjs check:cx-r0
+
+✓ CX-R0 historical freeze passed at f6d31da: 134 frozen customer HTML surfaces, 86 frozen stylesheet consumers, 77 frozen script consumers.
+✓ CX-R0 checker no longer regenerates the R0 census from a later R3/R4 working tree; live R1 guards remain separate.
+✓ CX-R0 ACCEPTED: CURRENT_SURFACE_INVENTORY_COMPLETE · LEGACY_DEPENDENCIES_MAPPED · NO_SECOND_AUTHORITY · READY_FOR_QUARANTINE
+
+> check:cx-r1-quarantine
+> node scripts/run-zero-cost-regression.mjs check:cx-r1-quarantine
+
+✓ CX-R1 current quarantine passed: 124 legacy/predecessor presentations frozen; 10 existing CX surfaces explicitly require successor reconciliation.
+✓ CX-R1 ACCEPTED: LEGACY_PRESENTATION_QUARANTINED · NEW_CUSTOMER_SURFACES_CLEAN_ROOM_READY
+
+> check:cx-no-legacy-css
+> node scripts/run-zero-cost-regression.mjs check:cx-no-legacy-css
+
+✓ CX-R1-W2 legacy CSS import guard passed: 777 CX HTML surfaces + customer-ui sources contain 0 frozen legacy stylesheet imports.
+
+> check:cx-no-legacy-selectors
+> node scripts/run-zero-cost-regression.mjs check:cx-no-legacy-selectors
+
+✓ CX-R1-W3 legacy namespace guard passed: 0 puxr-/public-/rs-/pr-/px2-/wpr-/phi-public- references in CX implementation.
+
+> check:cx-no-old-component-copy
+> node scripts/run-zero-cost-regression.mjs check:cx-no-old-component-copy
+
+✓ CX-R1-W4 old component signature guard passed: 10 frozen legacy composition signatures cannot enter CX implementation.
+✓ CX-R1A hard-cutover preparation passed: canonical Ask target is /knowledge/ask/; 3 current cutover blockers are explicitly recorded, not hidden.
+✓ CX-R1A ACCEPTED: preparation complete, no premature route cutover or physical legacy deletion performed.
+
+> check:cx-no-legacy-route-reference
+> node scripts/run-zero-cost-regression.mjs check:cx-no-legacy-route-reference
+
+✓ CX legacy-route guard passed across 192 clean-room customer source files.
+✓ CX-R2 Customer IA / Route Authority passed at f6d31da: 8-step internal spine, 3 primary intents, 5 primary navigation domains, 40 canonical route targets, 15 customer surface authorities.
+✓ CX-R2 ACCEPTED: CUSTOMER_MAIN_CHAIN_FROZEN · GLOBAL_IA_FROZEN · REALITY_JOURNEY_DEMOTED
+✓ No route cutover, legacy physical deletion, design-system creation, backend authority creation or hard-coded method availability was performed by CX-R2.
+✓ CX-R3 Customer Design System passed at 2cffbc9: 7 retained clean-room CSS layers, 13 semantic color roles, 10 type roles, 12 spacing steps, 6 button roles, 9 card roles, 7 statuses, 7 result primitives and 8 workspace primitives.
+✓ CX-R3 ACCEPTED: CUSTOMER_UI_SYSTEM_READY · NO_PAGE_SPECIFIC_DESIGN_AUTHORITY
+✓ R3 did not perform R4 visual-asset authority, R5 shell activation, production route cutover, legacy physical deletion or backend-authority creation.
+
+> check:cx-no-legacy-css
+> node scripts/run-zero-cost-regression.mjs check:cx-no-legacy-css
+
+✓ CX-R1-W2 legacy CSS import guard passed: 777 CX HTML surfaces + customer-ui sources contain 0 frozen legacy stylesheet imports.
+
+> check:cx-no-legacy-selectors
+> node scripts/run-zero-cost-regression.mjs check:cx-no-legacy-selectors
+
+✓ CX-R1-W3 legacy namespace guard passed: 0 puxr-/public-/rs-/pr-/px2-/wpr-/phi-public- references in CX implementation.
+
+> check:cx-no-old-component-copy
+> node scripts/run-zero-cost-regression.mjs check:cx-no-old-component-copy
+
+✓ CX-R1-W4 old component signature guard passed: 10 frozen legacy composition signatures cannot enter CX implementation.
+✓ CX-R4 Canonical Visual Assets passed at d35486b: 182 customer projections, 182 available, 7 hero roles, 5 book covers, 10 semantic illustration roles and 39 live CX visual bindings fail-closed.
+✓ Product/CX visual reconciliation passed: PPR-owned Personal asset identity stays frozen; new Financial CX uses semantic-role resolution.
+✓ CX-R0 freeze checker repair passed: historical R0 inventory is no longer regenerated from the R3/R4 working tree; live R1 guards remain active.
+✓ CX-R4 ACCEPTED: CANONICAL_VISUAL_ASSET_SYSTEM_READY · FIVE_BOOK_COVERS_BOUND · ILLUSTRATION_ROLES_RECONCILED · BROKEN_IMAGE_GATE_ACTIVE · READY_FOR_CX_R5
+✓ R4 did not perform R5 shell authority, production route cutover, legacy physical deletion or backend-authority creation.
+✓ CX-R5 Single Customer Shell passed at e7a0e05: 518 clean-room shell consumers share one header, primary navigation authority, mobile drawer, Search entry, Ask entry, account presentation, locale implementation and footer.
+✓ Search and Ask remain handoffs to governed surfaces; current Ask destination is /knowledge/ask/; account state is presentation-only and shell still creates no backend or answer authority.
+✓ CX-R5 ACCEPTED: ONE_GLOBAL_CUSTOMER_SHELL · READY_FOR_CX_R6_HOMEPAGE
+✓ CX-R20 Current-Main Reconciliation passed at 3eed6a2: 9 consume-only adapters preserve upstream authority, Unknown, provenance and conservative state across the priority customer tranche.
+✓ Historical R20 v1 and R0/R2 projection maps remain byte-identical; current v4 restores explicit Financial Reality coverage and future gates without creating a second authority.
+✓ Truth guards passed: missing readout state remains UNKNOWN, missing financial currency remains null, JR remains continuity/progress, and professional recommendations can only pass through PR/PFR authority.
+✓ CX-R20 ACCEPTED: CUSTOMER_RUNTIME_PROJECTION_BOUNDARY_FROZEN · PRIORITY_PRODUCT_TRANCHE_READY · NO_ROUTE_CUTOVER
+✓ CX-R10 My Reality successor passed at 9840757: one R20-projected workspace now covers overview, canonical Reality, perspectives, reading, directions, confirmed actions, session observation, review, history, reports and continuity.
+  Possible directions are never promoted to actions; unconfirmed actions are hidden; observation stays session-only; Journey remains progression; no backend, Reality, Navigation, Report or persistence authority is created.
+  Legacy Reality Dashboard UI authority is retired and the physical presentation has been deleted after P1 browser acceptance.
+✓ CX-R12 Personal Reality current-main successor passed at 74fba1c: five-stage customer input, customer-first overview, five method-hidden result tabs, returned-perspective disclosure and explicit My Reality handoff are active.
+  PPR/method meaning remains upstream; profile scoring is not recreated; method availability is not hard-coded; missing overview areas remain open rather than inferred.
+  Legacy Personal Runtime presentation files are physically deleted after browser acceptance; compatibility routes remain redirects to canonical Personal Reality.
+✓ CX-R12 shared-surface successor: Personal Reality now uses a 3-priority customer overview, one-method-at-a-time detail, nested technical provenance and explicit Reality return without changing method/commerce truth.
+✓ CX-R12 ACCEPTED: PERSONAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R13 · NO_NEW_P1_ROUTE_CUTOVER

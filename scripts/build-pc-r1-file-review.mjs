@@ -1,8 +1,9 @@
 import fs from 'node:fs';import path from 'node:path';import {build} from 'esbuild';
 const source=path.resolve('content/product-convergence-r1/audits/w12-w95'),destination=path.resolve('tools/review/pc-r1-w12-w95'),hub=path.resolve('tools/review/PC-R1-CONSOLIDATED-HUMAN-REVIEW.html');
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(path.join(dir,entry.name)):[path.join(dir,entry.name)]);
-const inputs=walk(source).filter(file=>file.endsWith('.html'));
-const target=file=>file===path.join(source,'PC-R1-CONSOLIDATED-HUMAN-REVIEW.html')?hub:path.join(destination,path.relative(source,file));
+const closure=path.resolve('content/product-convergence-r1/audits/consolidated-closure');
+const inputs=[...walk(source),...(fs.existsSync(closure)?walk(closure):[])].filter(file=>file.endsWith('.html'));
+const target=file=>file===path.join(source,'PC-R1-CONSOLIDATED-HUMAN-REVIEW.html')?hub:file.startsWith(closure+path.sep)?path.join(destination,'closure',path.relative(closure,file)):path.join(destination,path.relative(source,file));
 const records=[];
 for(const input of inputs){const output=target(input);let html=fs.readFileSync(input,'utf8');
  html=html.replace(/\b(href|src)="([^"]+)"/g,(whole,attribute,value)=>{
