@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-RU-W8E-SEMANTIC-BASIS-v1.0.0",
+  "status": "SEMANTIC_BASIS_DERIVED",
+  "dossierId": "DOSSIER-RU",
+  "stage": "W8-E",
+  "readoutReference": {
+    "code": "RRE-READOUT-B6-RU-2026-1-CONTRACT",
+    "version": "2026.1-contract",
+    "digest": "e54f03481e51ab8b69bc6624aecaa4f94c114c0b6be838496d1f5d6e6c9c24ab"
+  },
+  "records": [
+    {
+      "semanticBasisId": "RU-W8E-SEM-DOMESTIC-PAYMENT-CARRIER",
+      "subsystem": "DOMESTIC_PAYMENT_CARRIER",
+      "grammarCandidate": "G6",
+      "realityDomainCandidate": "P2",
+      "supportState": "EVIDENCE_READY",
+      "evidenceRefs": [
+        "RU-CARRIER-STRUCTURE-2026-001",
+        "RU-TECHNOLOGY-2026-001"
+      ]
+    },
+    {
+      "semanticBasisId": "RU-W8E-SEM-INDUSTRIAL-EXTERNAL-TRADE-RUNTIME",
+      "subsystem": "INDUSTRIAL_EXTERNAL_TRADE_RUNTIME",
+      "grammarCandidate": "G7",
+      "realityDomainCandidate": "P2",
+      "supportState": "EVIDENCE_READY",
+      "evidenceRefs": [
+        "RU-INDUSTRY-2026-001",
+        "RU-EXTERNAL-DEPENDENCY-2026-001",
+        "RU-INFRASTRUCTURE-2026-001"
+      ]
+    },
+    {
+      "semanticBasisId": "RU-W8E-SEM-INFLATION-FUEL-MONETARY-CONSTRAINT",
+      "subsystem": "INFLATION_FUEL_MONETARY_RUNTIME",
+      "grammarCandidate": "G2",
+      "realityDomainCandidate": "P2",
+      "supportState": "EVIDENCE_READY",
+      "evidenceRefs": [
+        "RU-PRESSURE-FIELD-2026-001"
+      ]
+    },
+    {
+      "semanticBasisId": "RU-W8E-SEM-EXTERNAL-ROUTING-RECONFIGURATION",
+      "subsystem": "EXTERNAL_ROUTING_RECONFIGURATION",
+      "grammarCandidate": "G14",
+      "realityDomainCandidate": "P3",
+      "supportState": "REFERENCE_ONLY",
+      "evidenceRefs": [
+        "RU-EXTERNAL-RECONFIGURATION-2026-001",
+        "RU-INFRASTRUCTURE-2026-001"
+      ],
+      "unknowns": [
+        "Evidence shows directional rerouting and sanctions constraint, but not a sufficiently complete cross-time adaptation mechanism for P3 admission."
+      ]
+    }
+  ],
+  "counts": {
+    "total": 4,
+    "evidenceReady": 3,
+    "referenceOnly": 1,
+    "insufficientEvidence": 0,
+    "conflicted": 0
+  },
+  "boundary": "External routing reconfiguration remains reference-only; sanctions are not themselves a runtime position."
+}
