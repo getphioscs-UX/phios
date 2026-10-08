@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-DOSSIER-US-GOLDEN-CLOSURE-STATUS-v1.0.0",
   "dossierId": "DOSSIER-US",
-  "status": "GOLDEN_DOSSIER_IN_PROGRESS",
+  "status": "GOLDEN_DOSSIER_CLOSED",
   "stageModel": {
     "W8-A": "Source Acquisition",
     "W8-B": "Claim Extraction",
@@ -29,8 +29,8 @@
     "W8-E": "COMPLETE",
     "W8-F": "COMPLETE",
     "W8-G": "COMPLETE",
-    "W8-H": "HUMAN_REVIEW_REQUIRED",
-    "W8-I": "BLOCKED_BY_W8H_ACCEPT"
+    "W8-H": "COMPLETE",
+    "W8-I": "COMPLETE"
   },
   "completedStages": [
     "W8-A",
@@ -39,9 +39,11 @@
     "W8-D",
     "W8-E",
     "W8-F",
-    "W8-G"
+    "W8-G",
+    "W8-H",
+    "W8-I"
   ],
-  "nextStage": "W8-H",
+  "nextStage": "GOLDEN_DOSSIER_CLOSED",
   "boundaries": {
     "canonicalPositionAutoAdmission": false,
     "dossierAutoProjection": false,
@@ -49,6 +51,7 @@
       "W8-F",
       "W8-H"
     ],
-    "otherDossiersMayStartGoldenExpansion": false
-  }
+    "otherDossiersMayStartGoldenExpansion": true
+  },
+  "acceptedCurrentDossier": "content/civilization-atlas/reconfiguration/dossier-us-w8i-accepted-current-dossier-v1.json"
 }
