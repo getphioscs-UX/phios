@@ -26,6 +26,11 @@ export default {
 
    stage='BROWSER_LAUNCH';
    const launchStarted=Date.now();
+   if(candidate.schemaVersion==='ZWR-VFR-R1-ACCEPTED-RENDERER-FIXTURE-v1'){
+    const pacingStarted=Date.now();
+    await new Promise(resolve=>setTimeout(resolve,21000));
+    timings.browserLaunchPacingMs=Date.now()-pacingStarted;
+   }
    browser=await puppeteer.launch(env.BROWSER);
    timings.browserLaunchMs=Date.now()-launchStarted;
    const page=await browser.newPage(),errors=[];

@@ -1,0 +1,411 @@
+
+> postcheck
+> node scripts/run-zero-cost-regression.mjs postcheck
+
+
+> check:governance-data-closure
+> node scripts/run-zero-cost-regression.mjs check:governance-data-closure
+
+
+> check:governance-access-closure
+> node scripts/run-zero-cost-regression.mjs check:governance-access-closure
+
+
+> check:operational-architecture-closure
+> node scripts/run-zero-cost-regression.mjs check:operational-architecture-closure
+
+
+> check:op
+> node scripts/run-zero-cost-regression.mjs check:op
+
+
+> check:op-w0-w6
+> node scripts/run-zero-cost-regression.mjs check:op-w0-w6
+
+✓ OP-W0～W6 Operational Architecture Closure passed.
+✓ Plane, authority uniqueness, acyclic dependency DAG and vertical-slice boundaries are frozen without production activation.
+
+> check:rg-foundation
+> node scripts/run-zero-cost-regression.mjs check:rg-foundation
+
+
+> check:rg-w0-w2
+> node scripts/run-zero-cost-regression.mjs check:rg-w0-w2
+
+✓ RG-W0-W2 checker governance foundation passed.
+
+> check:rg-registration
+> node scripts/run-zero-cost-regression.mjs check:rg-registration
+
+
+> check:rg-w3-w8
+> node scripts/run-zero-cost-regression.mjs check:rg-w3-w8
+
+✓ RG-W3～W8 Runtime Family Registration passed.
+✓ 66 Work Codes across HDR, AST, BZR, NUM, CAR and KAU resolve uniquely with verified package aliases and implementation digests.
+
+> check:rdg-foundation
+> node scripts/run-zero-cost-regression.mjs check:rdg-foundation
+
+
+> check:rdg-w0-w10
+> node scripts/run-zero-cost-regression.mjs check:rdg-w0-w10
+
+✓ RDG-W0-W10 data foundation / purpose / consent / persistence passed.
+
+> check:rdg-evidence
+> node scripts/run-zero-cost-regression.mjs check:rdg-evidence
+
+
+> check:rdg-w11-w15
+> node scripts/run-zero-cost-regression.mjs check:rdg-w11-w15
+
+✓ RDG-W11～W15 Evidence / Inference Foundation passed.
+✓ Evidence eligibility and promotion fail closed; sensitive inference is firewalled; Unknown and Disputed remain governed states.
+
+> check:rg-w9-w15
+> node scripts/run-zero-cost-regression.mjs check:rg-w9-w15
+
+✓ RG-W9～W15 Runtime Checker Governance passed.
+✓ Group execution deduplicates shared implementations; package resolution, successor, CI and no-mutation governance are closed.
+✓ RG-W14 No-Mutation Checker passed.
+
+> check:rdg-w16-w20
+> node scripts/run-zero-cost-regression.mjs check:rdg-w16-w20
+
+✓ RDG-W16～W20 Access / Privacy / Rights passed.
+✓ Visibility is separate from CPR Audience; permission fails closed; professional isolation, subject rights and tombstoned deletion are governed.
+
+> check:rdg-w21-w25
+> node scripts/run-zero-cost-regression.mjs check:rdg-w21-w25
+
+✓ RDG-W21～W25 Analytics / ALR / Research passed.
+✓ Telemetry, analytics, Runtime state and Evidence remain separate; ALR capability authority is reserved; research collection stays disabled.
+
+> check:rdg-w26-w30
+> node scripts/run-zero-cost-regression.mjs check:rdg-w26-w30
+
+✓ RDG-W26～W30 Governance / Acceptance / Freeze passed.
+✓ Cross-runtime writes and ten drift classes fail closed; stable RDG work-code routing is registered; Reality Data Governance Frozen v1.
+
+> check:alr-foundation
+> node scripts/run-zero-cost-regression.mjs check:alr-foundation
+
+
+> check:alr-w0-w4
+> node scripts/run-zero-cost-regression.mjs check:alr-w0-w4
+
+✓ ALR-W0～W4 Academy Learning & Capability Runtime Foundation passed.
+✓ ALR semantic authority, Learning Object types, four Academy Levels and Track classes are frozen without activating learner data, Capability State, Assessment, Credential or Academy presentation runtimes.
+
+> check:alr-capability
+> node scripts/run-zero-cost-regression.mjs check:alr-capability
+
+
+> check:alr-w5-w9
+> node scripts/run-zero-cost-regression.mjs check:alr-w5-w9
+
+✓ ALR-W5～W9 Capability Registry / Dependency / Evidence / State / Gap passed.
+✓ ALR owns Capability semantics; RDG retains data governance; PWS, Credential, Entitlement and Professional authority remain firewalled.
+✓ Capability evaluation is deterministic and fail closed without learner-data or persistent state mutation.
+
+> check:alr-learning-architecture
+> node scripts/run-zero-cost-regression.mjs check:alr-learning-architecture
+
+
+> check:alr-w10-w14
+> node scripts/run-zero-cost-regression.mjs check:alr-w10-w14
+
+✓ ALR-W10～W14 Program / Learning Path / Module / Lesson / Learning Objective passed.
+✓ 1 Program → 5 Paths → 5 Modules → 5 Lessons → 10 Objectives are reciprocal and Capability-aligned.
+✓ Learning Architecture is structure-only; Knowledge, Practice, Assessment, learner/case data, delivery, Credential, Entitlement and Professional authority remain inactive.
+
+> check:car-reconciliation
+> node scripts/run-zero-cost-regression.mjs check:car-reconciliation
+
+✓ CAR v2 Authority Reconciliation passed.
+✓ CAR remains Asset Production Authority; ALR remains Learning Runtime; CPR remains Presentation Runtime.
+✓ CAR-W7 Lesson/Slides/Quiz/Assignment Briefs cannot create ALR learning or capability state.
+✓ CAR-W15-W17 resolve only Published Asset Eligibility / Projection; CPR owns Canonical Presentation.
+✓ CAR-W7-W18 and the existing CAR-W18 Freeze remain byte-preserved; provider and production activation stay disabled.
+
+> check:icr-foundation
+> node scripts/run-zero-cost-regression.mjs check:icr-foundation
+
+
+> check:icr-w0-w4
+> node scripts/run-zero-cost-regression.mjs check:icr-w0-w4
+
+ICR-W0-W4 input foundation check passed.
+
+> check:icr-runtime
+> node scripts/run-zero-cost-regression.mjs check:icr-runtime
+
+
+> check:icr-w5-w9
+> node scripts/run-zero-cost-regression.mjs check:icr-w5-w9
+
+✓ ICR-W5-W9 Canonical Case Runtime passed.
+✓ ICR references RDG persistence, consent, retention and deletion without owning or copying policy.
+✓ Verified Inputs hand off to RMO through an immutable Case; ICR does not create Reality v1 or activate persistence.
+
+> check:rmo
+> node scripts/run-zero-cost-regression.mjs check:rmo
+
+
+> check:rmo-foundation
+> node scripts/run-zero-cost-regression.mjs check:rmo-foundation
+
+
+> check:rmo-w0-w4
+> node scripts/run-zero-cost-regression.mjs check:rmo-w0-w4
+
+✓ RMO-W0-W4 Canonical Reality Foundation passed.
+✓ Reality v1, Entity, Event and Signal are deterministic RMO records bound to ICR and governed by RDG.
+✓ Existing Runtime Timeline, persistence, Evidence promotion, Interpretation, Inference, Provider/AI and production execution remain inactive.
+
+> check:rmo-structure
+> node scripts/run-zero-cost-regression.mjs check:rmo-structure
+
+
+> check:rmo-w5-w7
+> node scripts/run-zero-cost-regression.mjs check:rmo-w5-w7
+
+✓ RMO-W5-W7 Relationship / Constraint / Reality State Runtime passed.
+✓ OBSERVED, DERIVED and PROJECTED remain distinct from RDG data nature, certainty, Evidence, Inference and Interpretation.
+✓ PWS relationships, Runtime lineage, Navigation, persistence, professional judgment, Provider/AI and production execution remain inactive.
+
+> check:rmo-evidence-reasoning
+> node scripts/run-zero-cost-regression.mjs check:rmo-evidence-reasoning
+
+
+> check:rmo-w8-w9
+> node scripts/run-zero-cost-regression.mjs check:rmo-w8-w9
+
+✓ RMO-W8 Evidence Binding passed with RRE / RDG authority, subject, digest, purpose and lineage enforcement.
+✓ RMO-W9 Interpretation / Inference Boundary passed with exact lineage, uncertainty and RDG firewall enforcement.
+✓ Evidence promotion, reasoning content, Professional Judgment, Unknown Runtime, persistence, Provider/AI, network and production execution remain inactive.
+
+> check:rmo-lifecycle
+> node scripts/run-zero-cost-regression.mjs check:rmo-lifecycle
+
+
+> check:rmo-w10-w12
+> node scripts/run-zero-cost-regression.mjs check:rmo-w10-w12
+
+✓ RMO-W10 Unknown Runtime passed; UNKNOWN, UNRESOLVED and DISPUTED remain formal, unresolved Reality components.
+✓ RMO-W11 Action Runtime passed; observed, reported, declared and unknown Actions remain representations without execution authority.
+✓ RMO-W12 Outcome Runtime passed; Action lineage and post-Action Evidence are enforced without causality, success, PR Outcome or Continuity authority.
+✓ RMO-W0-W9, RDG, Navigation, Review, Memory, Continuity, PR, Provider/AI, persistence and production boundaries remain preserved.
+
+> check:rmo-versioning-diff-freeze
+> node scripts/run-zero-cost-regression.mjs check:rmo-versioning-diff-freeze
+
+
+> check:rmo-w13-w15
+> node scripts/run-zero-cost-regression.mjs check:rmo-w13-w15
+
+✓ RMO-W13 Reality Versioning passed; immutable snapshots carry exact component version, digest, source Reality and ancestor lineage.
+✓ RMO-W14 Reality Diff passed; added, removed, replaced and unchanged references are deterministic without interpretation, diagnosis or causality.
+✓ RMO-W15 RMO Freeze passed; RMO-W0-W15 and all authority, non-activation and content-preservation gates are closed.
+
+> check:alr-knowledge-learning
+> node scripts/run-zero-cost-regression.mjs check:alr-knowledge-learning
+
+
+> check:alr-w15-w19
+> node scripts/run-zero-cost-regression.mjs check:alr-w15-w19
+
+✓ ALR-W15～W19 Knowledge → Learning passed.
+✓ 5 Published Knowledge Projections → 5 Teaching Explanations → 5 synthetic Examples → 5 synthetic Case Studies are reciprocal across all 5 Lessons.
+✓ Figure eligibility fails closed at 0 projections until CAR publishes an eligible FIGURE or DIAGRAM; delivery, Practice, Assessment, learner data and authority grants remain inactive.
+
+> check:alr-practice
+> node scripts/run-zero-cost-regression.mjs check:alr-practice
+
+
+> check:alr-w20-w23
+> node scripts/run-zero-cost-regression.mjs check:alr-w20-w23
+
+✓ ALR-W20～W23 Practice passed.
+✓ 5 unscored Practices → 5 static Guided Practices → 5 closed synthetic Simulations → 5 no-capture Reflection definitions are reciprocal across all 5 Lessons.
+✓ Simulation resolution is pure and non-persistent; Assessment, learner data, adaptive providers, real-world action and capability or professional authority promotion remain inactive.
+✓ postcheck governance accepts ordered parallel insertion: ICR Runtime → RMO Foundation → ALR Knowledge → ALR Practice.
+
+> check:alr-assessment
+> node scripts/run-zero-cost-regression.mjs check:alr-assessment
+
+
+> check:alr-w24-w28
+> node scripts/run-zero-cost-regression.mjs check:alr-w24-w28
+
+✓ ALR-W24～W28 Assessment passed.
+✓ 5 Assessment types → 5 synthetic Assessments → 10 Objective/Capability criteria → 8 controlled PHI OS Feedback states are reciprocal and deterministic.
+✓ Integrity fails closed before feedback; raw responses, answer keys, scores, Provider/AI scoring, learner persistence and Reality/RMO authority remain excluded.
+✓ Assessment Evidence produces only an unmaterialized candidate for RDG review; Capability Evidence, Capability State, Credential, Entitlement and Professional authority are not promoted.
+✓ postcheck governance accepts parallel order: ICR Runtime → RMO Foundation → ALR Knowledge → ALR Practice → ALR Assessment.
+
+> check:alr-progress
+> node scripts/run-zero-cost-regression.mjs check:alr-progress
+
+
+> check:alr-w29-w32
+> node scripts/run-zero-cost-regression.mjs check:alr-w29-w32
+
+✓ ALR-W29～W32 Learning Progress / Continuity / Review / Recommendation passed.
+✓ 5 reciprocal Progress scopes resolve through 7 Progress states, 7 Continuity decisions, 8 Review decisions and 11 explainable Recommendation actions.
+✓ Completion is not Capability; RDG retains retention authority; every Recommendation remains an option requiring choice.
+✓ Learner persistence, Provider/AI personalization, automatic assignment, Entitlement, Credential and Professional authority remain inactive.
+✓ postcheck preserves RMO and the Wave 1 production chain while adding ALR Progress immediately after ALR Assessment.
+✓ Parallel Wave 1 review state is presence-bound, not ALR content-hash-bound, so Human-governed C2/C3 advancement does not invalidate ALR.
+
+> check:alr-access
+> node scripts/run-zero-cost-regression.mjs check:alr-access
+
+
+> check:alr-w33-w35
+> node scripts/run-zero-cost-regression.mjs check:alr-w33-w35
+
+✓ ALR-W33～W35 Access passed.
+✓ Academy access eligibility consumes canonical Entitlement decisions without granting or mutating Entitlement, enrollment, unlock or delivery.
+✓ Professional Readiness handoff remains an unmaterialized candidate; Credential and every Professional authority stay external and fail closed.
+
+> check:alr-presentation
+> node scripts/run-zero-cost-regression.mjs check:alr-presentation
+
+
+> check:alr-w36-w41
+> node scripts/run-zero-cost-regression.mjs check:alr-w36-w41
+
+✓ ALR-W36～W41 Presentation passed.
+✓ CPR Academy request, Dashboard, Lesson, responsive, accessibility and en/zh-Hans learning projections are closed.
+✓ Academy remains a validation projection: no canonical presentation, published asset, learner state, delivery, credential or Professional authority was created.
+
+> check:alr-governance
+> node scripts/run-zero-cost-regression.mjs check:alr-governance
+
+
+> check:alr-w42-w46
+> node scripts/run-zero-cost-regression.mjs check:alr-w42-w46
+
+✓ ALR-W42～W46 governance, acceptance, vertical slice and ALR v2 freeze passed
+✓ EXP-W4 Reconstruction customer projection acceptance passed.
+✓ EXP-W4A Public Reality Demo retirement passed locally.
+  /reality-demo and /reality-demo.html → /reality-journey (308, single hop).
+  Old UI/controller/CSS/customer locale removed; EXP-W0 history and EXP-W4 hashes preserved.
+✓ M4C Account, My Reality, Membership, Subscription and Entitlements passed.
+
+> check:vap-b
+> node scripts/run-zero-cost-regression.mjs check:vap-b
+
+
+> check:vap-w4r
+> node scripts/run-zero-cost-regression.mjs check:vap-w4r
+
+✓ VAP-W4R Article Intent / Execution Eligibility Reconciliation passed.
+✓ Historical VAP-W4 remains immutable, but downstream execution semantics now use W4R.
+✓ Wave 1: 1 Article intent, 1 existing-Article reconciliation, 0 new-Article execution targets.
+✓ KN-B1-P4-004 MULTI_ASSET(FIGURE+DIAGRAM) is no longer misclassified as Article intent.
+✓ C2/C3/Human/frozen-plan/frozen-wave/dispatch/locale gates remain fail-closed.
+
+> check:vap-w5r
+> node scripts/run-zero-cost-regression.mjs check:vap-w5r
+
+✓ VAP-W5R Scalable Article Production Portfolio passed.
+✓ Existing PJA-W3R1 scalable portfolio runtime is reused; no second Canonical Registry or duplicate portfolio engine is created.
+✓ 716 Canonical Nodes are visible in one governed planning projection, but 716 Nodes are NOT auto-declared as 716 Articles.
+✓ Frozen VAP-W5R covers all 716 KAU-R5 predecessor identities; the 2 later P7 admissions require a separate governed VAP successor.
+✓ Current portfolio: 4 published Article nodes protected, 3 explicit non-Article Wave 1 outputs, 6 W6A-approved Article intents, 0 remaining high-signal decisions, and 703 further Article decisions pending.
+✓ Article planning backlog remains 709 because approved-but-unpublished Article intents remain in production; current new-Article execution targets = 6 through W6A successor authority.
+✓ Existing mature PJA wave maximum remains 24; W5R does not auto-create waves, invoke providers, create Candidates, or publish.
+
+> check:vap-w6
+> node scripts/run-zero-cost-regression.mjs check:vap-w6
+
+✓ VAP-W6 Batch Article Selection & Production Brief Export passed.
+✓ The same 6-node bounded Book 1 cohort remains selected; mature PJA batch maximum remains 24.
+✓ VAP-W6 does not invent Article/Human authority; it now consumes the already-frozen W6A successor authority for the selected cohort.
+✓ All 6 selected nodes are zh-Hans locale-ready and brief-export eligible through W6A; activation itself still generates 0 briefs because export remains an explicit command.
+✓ Existing PJA single-node production-brief exporter is reused byte-for-byte; VAP-W6 adds orchestration only.
+✓ Batch exporter is fail-closed: it accepts per-locale W6A successor execution eligibility or historical W4R eligibility and skips blocked nodes.
+
+> check:vap-w6a
+> node scripts/run-zero-cost-regression.mjs check:vap-w6a
+
+✓ VAP-W6A Batch Article Decision + C2/C3 Formation & Wave Freeze passed.
+✓ Batch 001 records six independent real-Human ARTICLE/C2/manuscript approvals; no bulk approval authority was created.
+✓ All six nodes are C2 frozen, C3 production-ready, plan/wave frozen, execution-authorized and new-Article execution eligible.
+✓ Review proposals remain proposals; system/AI actors and proposal-hash drift cannot satisfy Human Authority.
+✓ W6A itself still creates no Provider candidate and no publication.
+
+> check:vap-w7
+> node scripts/run-zero-cost-regression.mjs check:vap-w7
+
+✓ VAP-W7 Governed Provider Generation passed.
+✓ Real network Provider generation is implemented but requires per-node W6 readiness, an actual exported Brief, --apply, --network, explicit Provider/model resolution, and environment credentials.
+✓ Current Batch 001 has 6 Provider-eligible nodes after W6A/C2/C3/plan/wave formation; this checker performs no live network invocation.
+✓ Provider outputs are staged only under dist/knowledge-production-candidates and remain non-authoritative Candidate artifacts for VAP-W8 validation/import.
+✓ Dry-run and missing network authorization prevent network calls; isolated temp fixtures verify the positive network path and existing-Candidate protection.
+✓ Credentials are never persisted; Provider cannot mutate Canonical Knowledge, Human decisions, C2/C3 authority, PJA Candidate authority, or Publication.
+
+> check:vap-w7s
+> node scripts/run-zero-cost-regression.mjs check:vap-w7s
+
+✓ VAP-W7S Batch 001 governed session generation passed.
+✓ Six independent Human ARTICLE/C2/manuscript decisions are recorded.
+✓ Six zh-Hans Article candidates are staged and digest-bound to approved C2 proposals.
+✓ Session generation did not claim repository network execution or credential use.
+✓ Candidates remain non-authoritative, require Human review, and are not published/imported automatically.
+
+> check:vap-w8
+> node scripts/run-zero-cost-regression.mjs check:vap-w8
+
+✓ VAP-W8 Candidate Validation & PJA Import passed.
+✓ All 6 Batch 001 provider candidates pass integrity, public-body, title, minimum thesis/must-establish coverage, C2→PJA brief bridge, and PJA candidate-schema validation.
+✓ All 6 candidates are imported into the existing zh-Hans PJA Candidate layer as ready_for_human_review, preserving provider Markdown exactly.
+✓ W8 does not claim factual/source truth or complete semantic fidelity; all 6 still require Human editorial review.
+✓ W8 itself does not create Human Review/Approval/Publication authority; any successor Approval record must be independently bound to an explicit VAP-W10 TL Human Approval decision.
+✓ Existing PJA atomic importer is reused; overwrite remains forbidden and conflict fails closed.
+
+> check:vap-w9
+> node scripts/run-zero-cost-regression.mjs check:vap-w9
+
+✓ VAP-W9 Human Editorial Review & Candidate Promotion passed after explicit TL decisions.
+✓ 6/6 Candidates have independent TL Human Review = accept and 6/6 are promoted to PJA Approval Eligibility.
+✓ VAP-W9 itself does not create Approval; any successor Approval record must be independently bound to an explicit VAP-W10 TL Human Approval decision.
+✓ AI/System actors cannot satisfy Human Review authority; non-accept outcomes cannot promote.
+
+> check:vap-w10
+> node scripts/run-zero-cost-regression.mjs check:vap-w10
+
+✓ VAP-W10 Human Approval & Production Article Package passed.
+✓ Real Batch 001 has 6/6 independent TL Human Approvals and 6/6 immutable Production Article Packages.
+✓ Existing PJA Human Approval Runtime is reused; Human Editorial acceptance is not treated as Human Approval.
+✓ Positive fixture proves 6 explicit TL approve decisions create 6 valid PJA Approval packages and 6 immutable Production Article Packages.
+✓ Production Article Package body is byte-equivalent to the Human-reviewed Candidate and carries PJA-R4E Article Package v2 publication binding.
+✓ Approval and Production Article Package remain non-publication authority; Publication Registry and public projection are untouched.
+
+> check:vap-w11
+> node scripts/run-zero-cost-regression.mjs check:vap-w11
+
+✓ VAP-W11 Publication Handoff & Governed Publication Decision passed.
+✓ 6/6 Human-approved Production Article Packages are publication-eligible with exact Candidate/Review/Approval/Package lineage.
+✓ 6/6 Canonical Production Brief v2 snapshots deterministically reconstruct to the exact Candidate-bound frozen digests and are materialized for downstream PJA Publication Runtime execution.
+✓ 6/6 explicit TL Human Publication decisions are recorded as governed handoffs; W11 still creates 0 PJA Publication records and 0 Public Projections.
+✓ Positive fixture proves six explicit TL publish decisions create six publication-runtime handoffs while leaving Publication Registry and Published Knowledge Authority outside W11 authority.
+
+> check:vap-w12-w19
+> node scripts/run-zero-cost-regression.mjs check:vap-w12-w19
+
+
+> check:vap-w12-w14
+> node scripts/run-zero-cost-regression.mjs check:vap-w12-w14
+
+✓ VAP-W12 CAR Production Brief Builder passed with the existing Canonical Asset Brief schema.
+✓ VAP-W13 revalidates Meaning, Knowledge, Published Coverage, Locale, registered CAR asset type, PDS, source digests, unsupported-claim boundary and briefDigest freeze.
+✓ VAP-W14 exports a ChatGPT Production Brief + intake contract without transferring Meaning, Knowledge, Approval or Publication authority.
+✓ Pilot CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-002 is deterministic, validated_frozen and ready for external-manual ChatGPT candidate generation.
+
+> check:vap-w15-w19
+> node scripts/run-zero-cost-regression.mjs check:vap-w15-w19
+

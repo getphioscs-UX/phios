@@ -1,0 +1,22 @@
+{
+  "command": "npm run check",
+  "exitCode": 1,
+  "failedGate": "check:bazi-deep-manuscript:r2-prelive",
+  "classification": "BASELINE_EXTERNAL_PREEXISTING_FROZEN_WORKER_MISMATCH_WITH_CONCURRENT_UNRELATED_WORKER_CHANGES",
+  "path": "workers/method-report-renderer/index.js",
+  "audit": "docs/acceptance/bazi-paid-report/deep-manuscript-r2/REPOSITORY-AUDIT.json",
+  "auditSha256": "3138f0b2b2df6d5c036ab8042c02a1066a1a076399b678f65b6b997a9afa66a0",
+  "expected": "0e19c4cf3cf5b00f26de877161e73d1bc7a6fbf663a37f4f25fcd18de9f1fb1b",
+  "startCommittedBlobSha256": "63cf408776fcc47990b3352b28ce08c1a07433a89fae1fdd2a6ea9446cfb2b69",
+  "observedHeadCommittedBlobSha256": "4e144904790ac509d484ee139dee078accdb4143876aad785e1753835a737db6",
+  "currentWorktreeSha256": "bbd95b389ea7797083d70232f8ed5b9d29e6e4f2697dc2071435788298b54b89",
+  "startCommittedSourceAlreadyDifferent": true,
+  "workerDirtyAtBaseline": false,
+  "worktreeDiff": "diff --git a/workers/method-report-renderer/index.js b/workers/method-report-renderer/index.js\nindex 8e4e036c..391706f0 100644\n--- a/workers/method-report-renderer/index.js\n+++ b/workers/method-report-renderer/index.js\n@@ -26,6 +26,11 @@ export default {\n \n    stage='BROWSER_LAUNCH';\n    const launchStarted=Date.now();\n+   if(candidate.schemaVersion==='ZWR-VFR-R1-ACCEPTED-RENDERER-FIXTURE-v1'){\n+    const pacingStarted=Date.now();\n+    await new Promise(resolve=>setTimeout(resolve,21000));\n+    timings.browserLaunchPacingMs=Date.now()-pacingStarted;\n+   }\n    browser=await puppeteer.launch(env.BROWSER);\n    timings.browserLaunchMs=Date.now()-launchStarted;\n    const page=await browser.newPage(),errors=[];\n",
+  "thisTaskModifiedWorker": false,
+  "thisTaskModifiedFrozenAudit": false,
+  "requiredAction": "Legitimate owner-authorized source/freeze successor reconciliation; no rollback of unrelated worker edits and no digest rewrite to manufacture PASS.",
+  "startPossibleLfSha256": "63cf408776fcc47990b3352b28ce08c1a07433a89fae1fdd2a6ea9446cfb2b69",
+  "startPossibleCrlfSha256": "ce6b65c32b6f7d8f8492cd786f59d47a55b989f46c1bfc11b490f36ff9ceb67d",
+  "lineEndingAloneExplainsMismatch": false
+}
