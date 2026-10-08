@@ -16,7 +16,8 @@ export function updatePcR1ProfileDemotionReview(){
   html=html.replace('<h2>Human gate / 人工关卡</h2>','<!-- PC-W11 CLOSURE START --><h2>PC-W11 收口 / Owner-authorized closure</h2><p><a href="../../content/product-convergence-r1/audits/pc-w11-closure/EXECUTION-REPORT.md">完整执行报告</a> · <a href="../../content/product-convergence-r1/audits/pc-w11-closure/OWNER-ACCEPTANCE-RECEIPT.json">PC-W11 Owner ACCEPT 回执</a> · <a href="../../content/product-convergence-r1/audits/pc-w11-closure/PC-W11-CLOSURE-RECEIPT.json">收口回执</a></p><p>PC-W12–W99 与 PRD-W12 未授权；商业化合同、兼容路由与既有出版接受保持。</p><!-- PC-W11 CLOSURE END --><h2>Human gate / 人工关卡</h2>');
  }
  assert.equal((html.match(/W11R6 ACCEPTANCE START/g)||[]).length,1);assert(html.includes('PC-R1 PROFILE DEMOTION ACCEPT'));assert(!html.includes('iframe src="/"'));
+ if(pc.humanDecision==='PC-R1 PROFILE DEMOTION ACCEPT')html=html.replace(/PC-W11 (?:BLOCKED|AUTHORIZED|CLOSED)/g,pc.pcW11==='CLOSED'?'PC-W11 CLOSED':'PC-W11 AUTHORIZED');
  if(fs.readFileSync(file,'utf8')!==html)fs.writeFileSync(file,html);
- console.log('Updated PC-R1 review: W11R6 accepted artifacts linked; PC-R1 owner gate remains pending.');
+ console.log('Updated PC-R1 review: W11R6 accepted artifacts retained; PC-R1 '+pc.humanDecision+'; PC-W11 '+pc.pcW11+'.');
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)updatePcR1ProfileDemotionReview();

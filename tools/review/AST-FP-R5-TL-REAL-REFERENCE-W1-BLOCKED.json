@@ -3,7 +3,14 @@
   "status": "AST_R5_TL_REFERENCE_BLOCKED",
   "reasonCode": "AST_TL_CANONICAL_LOCATION_UNRESOLVED",
   "auditedHead": "f5b74b855b0ed7ea784b1c8cf6133d2b68bb4e11",
-  "subjectInputDeclaration": {"name":"TL","birthDate":"1989-11-15","birthTime":"22:50:00","birthPlace":"Taiping, Perak, Malaysia","timeAccuracy":"EXACT","locale":"zh-Hans"},
+  "subjectInputDeclaration": {
+    "name": "TL",
+    "birthDate": "1989-11-15",
+    "birthTime": "22:50:00",
+    "birthPlace": "Taiping, Perak, Malaysia",
+    "timeAccuracy": "EXACT",
+    "locale": "zh-Hans"
+  },
   "canonicalInput": null,
   "locationResolution": {
     "status": "UNRESOLVED",
@@ -13,7 +20,15 @@
     "provider": "OPENSTREETMAP_NOMINATIM",
     "reason": "Current governed resolver requires a remote lookup. No admitted real Taiping resolution snapshot was found in the inspected repository evidence. Fixture coordinates and mocked R130408 responses are not real reference authority. W1 requires providerCalls=0."
   },
-  "timezoneResolution": {"status":"UNRESOLVED","owner":"functions/location/timezone-resolver.js","iana":null,"utcOffsetAtBirth":null,"source":null,"confidence":null,"reason":"Governed coordinate-to-zone resolution requires a remote service and confirmed coordinates. Expected Asia/Kuala_Lumpur is not an admitted result."},
+  "timezoneResolution": {
+    "status": "UNRESOLVED",
+    "owner": "functions/location/timezone-resolver.js",
+    "iana": null,
+    "utcOffsetAtBirth": null,
+    "source": null,
+    "confidence": null,
+    "reason": "Governed coordinate-to-zone resolution requires a remote service and confirmed coordinates. Expected Asia/Kuala_Lumpur is not an admitted result."
+  },
   "calculationHouseSystem": "PLACIDUS_V1",
   "houseSystemAuthority": "functions/ast-production/ast-house-system-registry.js",
   "r3CertificationRef": "content/professional/ast-full-production/acceptance/ast-fp-r3-independent-calculation-certification-v1.json",
@@ -39,5 +54,8 @@
   "customerPublicationAllowed": false,
   "productionAllowed": false,
   "customerCutoverAllowed": false,
-  "nextHumanAction": "Provide an admitted real governed location/timezone resolution snapshot with provenance, or explicitly revise the zero-provider constraint to allow the existing governed location and timezone services. Then resume W1 from location resolution; authoring-pack acceptance is not available yet."
+  "nextHumanAction": "Provide an admitted real governed location/timezone resolution snapshot with provenance, or explicitly revise the zero-provider constraint to allow the existing governed location and timezone services. Then resume W1 from location resolution; authoring-pack acceptance is not available yet.",
+  "historicalRecord": true,
+  "supersededBy": "tools/review/AST-FP-R5-TL-REAL-REFERENCE-W1-RESULT.json",
+  "resolutionNote": "Owner clarified infrastructure network lookups are allowed. Real governed resolution succeeded; original block is resolved."
 }

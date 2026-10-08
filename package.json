@@ -2871,7 +2871,15 @@
     "build:dossier-cn:w8f": "npm run build:runtime-position-48:w8e",
     "build:dossier-cn:status": "node scripts/build-dossier-cn-golden-closure-status.mjs",
     "build:dossier-cn:golden-pregate": "npm run build:dossier-cn:w8a && npm run build:dossier-cn:w8b && npm run build:dossier-cn:w8c && npm run build:dossier-cn:w8d && npm run build:dossier-cn:w8e && npm run build:dossier-cn:w8f && npm run build:dossier-cn:status",
-    "check:dossier-cn:golden": "node scripts/run-zero-cost-regression.mjs check:dossier-cn:golden"
+    "check:dossier-cn:golden": "node scripts/run-zero-cost-regression.mjs check:dossier-cn:golden",
+    "check:ast-fp-r5:tl-canonical": "node scripts/run-zero-cost-regression.mjs check:ast-fp-r5:tl-canonical",
+    "check:ast-fp-r5:tl-r4-semantic": "node scripts/run-zero-cost-regression.mjs check:ast-fp-r5:tl-r4-semantic",
+    "check:ast-fp-r5:tl-synthesis": "node scripts/run-zero-cost-regression.mjs check:ast-fp-r5:tl-synthesis",
+    "check:ast-fp-r5:tl-authoring-pack": "node scripts/run-zero-cost-regression.mjs check:ast-fp-r5:tl-authoring-pack",
+    "check:ast-fp-r5:tl-authoring-source-coverage": "node scripts/run-zero-cost-regression.mjs check:ast-fp-r5:tl-authoring-source-coverage",
+    "build:ast-fp-r5:tl-reference": "node scripts/build-ast-fp-r5-tl-reference.mjs",
+    "build:ast-fp-r5:tl-authoring-pack": "node scripts/build-ast-fp-r5-tl-authoring-pack.mjs",
+    "build:ast-fp-r5:tl-authoring-review": "node scripts/build-ast-fp-r5-tl-authoring-review.mjs"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

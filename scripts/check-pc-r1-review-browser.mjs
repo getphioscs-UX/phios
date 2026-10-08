@@ -9,9 +9,9 @@ await page.setViewportSize({width,height:900});await page.setContent(fs.readFile
 const dimensions=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
 assert(dimensions.scroll<=dimensions.width+1,'review horizontal overflow');
 assert.equal(await page.locator('iframe').count(),1);
-assert((await page.textContent('body')).includes('PC-W11 BLOCKED'));
+const audit=JSON.parse(fs.readFileSync('content/product-convergence-r1/audits/pc-r1-profile-demotion-first-batch-v1.json'));assert((await page.textContent('body')).includes(audit.pcW11==='CLOSED'?'PC-W11 CLOSED':audit.humanDecision==='PC-R1 PROFILE DEMOTION ACCEPT'?'PC-W11 AUTHORIZED':'PC-W11 BLOCKED'));
 results.push({width,status:'PASS',dimensions});
 }
-fs.writeFileSync('content/product-convergence-r1/audits/profile-demotion-browser-results.json',JSON.stringify(results,null,2));
+fs.writeFileSync(process.env.PC_W11_REGRESSION_DIR?'content/product-convergence-r1/audits/pc-w11-closure/review-browser-results.json':'content/product-convergence-r1/audits/profile-demotion-browser-results.json',JSON.stringify(results,null,2));
 console.log('PC-R1 review desktop and mobile PASS');
 }finally{await browser.close();}
