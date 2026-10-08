@@ -1,0 +1,15 @@
+# PC-R1 Financial current-reality candidate
+
+The adapter consumes the existing immutable FDR snapshot, existing FCR calculation runtime and existing FAR analysis runtime. The optional context wrapper leaves the canonical FAR result byte-identical, as checked by a real FCR/FAR replay. No new holdings store, calculation engine, analysis engine, recommendation engine or financial product activation was created.
+
+Existing Moomoo CurrentEvidenceIR records are consumed by source reference and claim identifier. Their retrieval date is preserved separately from observation dates. The existing IR contains admitted claim text and provenance, but does not provide a structured price/value/instrument/currency observation envelope. Those missing fields stay UNKNOWN; text is never parsed into price or holdings. Six normalization kinds are covered by explicitly synthetic test inputs, which are not represented as real financial household pilots. Registered provider classes other than Moomoo are registry classes awaiting individual source admission, not newly admitted external providers.
+
+Portfolio exposure retains canonical asset references, ownership and native monetary units. Missing sector/issuer/duration/rate sensitivity stays UNKNOWN. Household salary, business, property, portfolio, cash, debt, guarantees, insurance and currency remain separate components; flow amounts are not summed with asset stocks. No economic diversification conclusion is inferred from asset count.
+
+Current-value refresh requires matching instrument, explicit quantity, price and currency. Cross-currency valuations require explicit FX observations. Source, price, FX and calculation timestamps are separate. Stale prices are disclosed. Current data provider failures return CURRENT_DATA_UNAVAILABLE or LAST_VERIFIED_DATA, never fabricated/live data. Source conflicts preserve both records without voting.
+
+The 16-section Financial Reality Report is a local bilingual composition candidate. Its HTML is a technical source-detail evidence view, not a production publication route. Canonical RR publication, active routes, paid Financial Full contracts, production activation and customer persistence remain under their existing owners. No accepted publication was regenerated. Professional recommendations require a source-linked signed PFR contribution; an AI author label is rejected.
+
+PC-W41 is BLOCKED_REAL_EVIDENCE: three real, consented, de-identified/reviewed households and real longitudinal evidence are not supplied. PC-W42 is BLOCKED_EXTERNAL_AUTHORITY: licensed professional review and authorship are pending. Neither blocker is bypassed by fixture tests. PC-W43 supplies the report composition candidate; production publication and owner admission remain pending.
+
+Actual check: `node scripts/check-pc-r1-financial-successor.mjs` passes 10 assertion groups, including canonical FCR/FAR replay. The run is protected by the inherited zero-cost preload and JSON import compatibility preload. Provider calls and OpenAI calls are zero. No live credentials or networks are needed. No commit, push, freeze or deployment was performed.

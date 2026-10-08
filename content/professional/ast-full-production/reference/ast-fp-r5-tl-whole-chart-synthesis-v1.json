@@ -5,9 +5,9 @@
   "R4AClaimBundleDigest": "c2a6b66709bc5f538c6c3b7a2991c1376aee8acf0f5d2f3e2c217288e0b7d3ef",
   "R4AAdmissionStatus": "HUMAN_ADMITTED_21_OF_21",
   "meaningOntologyDigest": "4fbfcf90583a185d5b256f48746aba965089223e4c28c696098e7526bbdefebf",
-  "compositionRuleDigest": "f7f4e0e8b34ac2f3dbec2e2a758aed03eb0412460ffd242ef6632c36a09a9307",
+  "compositionRuleDigest": "68d095a36df8c4d7d25b8747966b0b325f4a9c5d937f55f39d732ca3f04e4653",
   "meaningOntologyVersion": "PHI-OS-ASTA-W11-MEANING-ONTOLOGY-v1.0.0",
-  "compositionRuleVersion": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v1.0.0",
+  "compositionRuleVersion": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v2.0.0",
   "customerIntent": "OPEN",
   "syntheses": {
     "zh-Hans": {
@@ -20,7 +20,7 @@
         "intentId": "OPEN"
       },
       "semanticState": "R4A_HUMAN_ADMITTED_R5_ENGINEERING",
-      "wholeChartSummary": "这张盘应先从整盘路由首先经过 MOON；相位网络具有可测量的动态状态；四轴框定命盘如何进入现实与变得可见进入。这里的排序主题来自不同结构证据家族的整合，而不是逐星体目录。",
+      "wholeChartSummary": "这张盘应先从整盘路由首先经过 MOON；紧密主要相位网络：JUPITER、NEPTUNE、SATURN、VENUS；四轴框定命盘如何进入现实与变得可见进入。这里的排序主题来自不同结构证据家族的整合，而不是逐星体目录。",
       "coreThemes": [
         {
           "themeKey": "RULERSHIP:MOON:MARS|SATURN:",
@@ -68,39 +68,208 @@
           "tier": "CORE_THEME"
         },
         {
-          "themeKey": "DYNAMICS:10:9:0:0",
-          "familyCode": "ASPECT_DYNAMICS",
-          "headline": "相位网络具有可测量的动态状态",
-          "summary": "入相 10、出相 9、精确 0、未定 0。 入相表示按照两颗星体的黄经速度进行已登记的短时数值探测时，相位容许度正在缩小。它描述出生时刻的相位几何，不提供事件日期，也不保证现实强度一定增加。 出相表示在同一已登记短时数值探测下，相位容许度正在扩大。它只是几何状态分类，不代表某个生活情境正在减弱或已经发生。",
-          "basePriority": 78,
+          "clusterId": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+          "familyCode": "ASPECT_NETWORK_CLUSTER",
           "bodyCodes": [
-            "VENUS",
             "JUPITER",
             "NEPTUNE",
-            "SATURN"
+            "SATURN",
+            "VENUS"
           ],
-          "houseNumbers": [],
+          "houseNumbers": [
+            6,
+            12
+          ],
+          "evidenceAspectCodes": [
+            "ASPECT_05",
+            "ASPECT_06",
+            "ASPECT_08",
+            "ASPECT_13",
+            "ASPECT_15",
+            "ASPECT_18"
+          ],
+          "edges": [
+            {
+              "aspectCode": "ASPECT_05",
+              "fromCode": "VENUS",
+              "toCode": "JUPITER",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.266103546678,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "极性信号",
+              "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_06",
+              "fromCode": "VENUS",
+              "toCode": "SATURN",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.465399637308,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "同位信号",
+              "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_08",
+              "fromCode": "VENUS",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.329164407402,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "同位信号",
+              "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_13",
+              "fromCode": "JUPITER",
+              "toCode": "SATURN",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.19929609063,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "极性信号",
+              "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_15",
+              "fromCode": "JUPITER",
+              "toCode": "NEPTUNE",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.063060860724,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "极性信号",
+              "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_18",
+              "fromCode": "SATURN",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.136235229906,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "同位信号",
+              "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+              "dynamicState": "SEPARATING"
+            }
+          ],
+          "connected": true,
+          "density": 1,
+          "meanNormalizedOrb": 0.030401245263500003,
+          "score": 85.02716,
+          "namedTraditionalPattern": false,
+          "themeKey": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+          "headline": "紧密主要相位网络：JUPITER、NEPTUNE、SATURN、VENUS",
+          "summary": "JUPITER（扩展与综合、容纳方向、第 12 宫）、NEPTUNE（扩散与渗透、结构化方向、第 6 宫）、SATURN（约束与耐久、结构化方向、第 6 宫）、VENUS（价值与吸引、结构化方向、第 6 宫）",
+          "basePriority": 85.02716,
+          "intentBoost": 0,
+          "priority": 85.02716,
           "angleCodes": [],
           "evidenceRefs": [
             "ASPECT_05",
+            "ASPECT_06",
             "ASPECT_08",
+            "ASPECT_13",
             "ASPECT_15",
             "ASPECT_18",
             "AST-R4A-DYNAMICS-APPLYING",
-            "AST-R4A-DYNAMICS-SEPARATING",
-            "AST-R4A-DYNAMICS-EXACT",
-            "AST-R4A-DYNAMICS-UNDETERMINED"
+            "AST-R4A-DYNAMICS-SEPARATING"
           ],
           "evidenceFamilies": [
-            "ASPECT_DYNAMICS_SEMANTICS",
-            "AST_RELATION_SIGNAL"
+            "AST_RELATION_SIGNAL",
+            "AST_FUNCTIONAL_DRIVER",
+            "AST_DIRECTION_MODE",
+            "AST_REALITY_DOMAIN"
           ],
-          "dynamicCounts": {
-            "SEPARATING": 9,
-            "APPLYING": 10
-          },
-          "intentBoost": 0,
-          "priority": 78,
+          "aspectDynamics": [
+            {
+              "aspectCode": "ASPECT_05",
+              "fromCode": "VENUS",
+              "toCode": "JUPITER",
+              "type": "OPPOSITION",
+              "authorizedOrbDegrees": 8,
+              "state": "APPLYING",
+              "currentSeparationDegrees": 179.73389645332202,
+              "currentOrbDegrees": 0.2661035466779822,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.2654015685286595,
+              "relativeLongitudeSpeedDegreesPerDay": -1.010848535035
+            },
+            {
+              "aspectCode": "ASPECT_06",
+              "fromCode": "VENUS",
+              "toCode": "SATURN",
+              "type": "CONJUNCTION",
+              "authorizedOrbDegrees": 8,
+              "state": "APPLYING",
+              "currentSeparationDegrees": 0.4653996373079963,
+              "currentOrbDegrees": 0.4653996373079963,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.46480205576301614,
+              "relativeLongitudeSpeedDegreesPerDay": -0.860517424725
+            },
+            {
+              "aspectCode": "ASPECT_08",
+              "fromCode": "VENUS",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "authorizedOrbDegrees": 8,
+              "state": "APPLYING",
+              "currentSeparationDegrees": 0.32916440740200414,
+              "currentOrbDegrees": 0.32916440740200414,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.3285221538683345,
+              "relativeLongitudeSpeedDegreesPerDay": -0.924845088348
+            },
+            {
+              "aspectCode": "ASPECT_13",
+              "fromCode": "JUPITER",
+              "toCode": "SATURN",
+              "type": "OPPOSITION",
+              "authorizedOrbDegrees": 8,
+              "state": "SEPARATING",
+              "currentSeparationDegrees": 179.80070390937,
+              "currentOrbDegrees": 0.19929609063001408,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.19940048723435666,
+              "relativeLongitudeSpeedDegreesPerDay": 0.15033111031
+            },
+            {
+              "aspectCode": "ASPECT_15",
+              "fromCode": "JUPITER",
+              "toCode": "NEPTUNE",
+              "type": "OPPOSITION",
+              "authorizedOrbDegrees": 8,
+              "state": "SEPARATING",
+              "currentSeparationDegrees": 179.93693913927598,
+              "currentOrbDegrees": 0.06306086072402195,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.06312058533967502,
+              "relativeLongitudeSpeedDegreesPerDay": 0.086003446687
+            },
+            {
+              "aspectCode": "ASPECT_18",
+              "fromCode": "SATURN",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "authorizedOrbDegrees": 8,
+              "state": "SEPARATING",
+              "currentSeparationDegrees": 0.13623522990599213,
+              "currentOrbDegrees": 0.13623522990599213,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.13627990189468164,
+              "relativeLongitudeSpeedDegreesPerDay": -0.064327663623
+            }
+          ],
           "rank": 2,
           "tier": "CORE_THEME"
         },
@@ -190,6 +359,358 @@
           "priority": 70,
           "rank": 4,
           "tier": "SUPPORTING_THEME"
+        }
+      ],
+      "aspectNetworkClusters": [
+        {
+          "clusterId": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+          "familyCode": "ASPECT_NETWORK_CLUSTER",
+          "bodyCodes": [
+            "JUPITER",
+            "NEPTUNE",
+            "SATURN",
+            "VENUS"
+          ],
+          "houseNumbers": [
+            6,
+            12
+          ],
+          "evidenceAspectCodes": [
+            "ASPECT_05",
+            "ASPECT_06",
+            "ASPECT_08",
+            "ASPECT_13",
+            "ASPECT_15",
+            "ASPECT_18"
+          ],
+          "edges": [
+            {
+              "aspectCode": "ASPECT_05",
+              "fromCode": "VENUS",
+              "toCode": "JUPITER",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.266103546678,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "极性信号",
+              "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_06",
+              "fromCode": "VENUS",
+              "toCode": "SATURN",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.465399637308,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "同位信号",
+              "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_08",
+              "fromCode": "VENUS",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.329164407402,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "同位信号",
+              "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_13",
+              "fromCode": "JUPITER",
+              "toCode": "SATURN",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.19929609063,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "极性信号",
+              "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_15",
+              "fromCode": "JUPITER",
+              "toCode": "NEPTUNE",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.063060860724,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "极性信号",
+              "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_18",
+              "fromCode": "SATURN",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.136235229906,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "同位信号",
+              "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+              "dynamicState": "SEPARATING"
+            }
+          ],
+          "connected": true,
+          "density": 1,
+          "meanNormalizedOrb": 0.030401245263500003,
+          "score": 85.02716,
+          "namedTraditionalPattern": false
+        }
+      ],
+      "aspectDynamicsContext": [
+        {
+          "aspectCode": "ASPECT_01",
+          "fromCode": "SUN",
+          "toCode": "MERCURY",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 2.82309437036497,
+          "currentOrbDegrees": 2.82309437036497,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.8234911511277687,
+          "relativeLongitudeSpeedDegreesPerDay": 0.571364298349
+        },
+        {
+          "aspectCode": "ASPECT_02",
+          "fromCode": "SUN",
+          "toCode": "PLUTO",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 7.783648939131012,
+          "currentOrbDegrees": 7.783648939131012,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.784320477752885,
+          "relativeLongitudeSpeedDegreesPerDay": -0.967015615501
+        },
+        {
+          "aspectCode": "ASPECT_03",
+          "fromCode": "MOON",
+          "toCode": "URANUS",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 173.25796111911598,
+          "currentOrbDegrees": 6.742038880884024,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 6.731982224692331,
+          "relativeLongitudeSpeedDegreesPerDay": -14.481584915999
+        },
+        {
+          "aspectCode": "ASPECT_04",
+          "fromCode": "VENUS",
+          "toCode": "MARS",
+          "type": "SEXTILE",
+          "authorizedOrbDegrees": 4,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 62.433356237405974,
+          "currentOrbDegrees": 2.433356237405974,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.4335485891705275,
+          "relativeLongitudeSpeedDegreesPerDay": -0.276986540903
+        },
+        {
+          "aspectCode": "ASPECT_05",
+          "fromCode": "VENUS",
+          "toCode": "JUPITER",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 179.73389645332202,
+          "currentOrbDegrees": 0.2661035466779822,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.2654015685286595,
+          "relativeLongitudeSpeedDegreesPerDay": -1.010848535035
+        },
+        {
+          "aspectCode": "ASPECT_06",
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 0.4653996373079963,
+          "currentOrbDegrees": 0.4653996373079963,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.46480205576301614,
+          "relativeLongitudeSpeedDegreesPerDay": -0.860517424725
+        },
+        {
+          "aspectCode": "ASPECT_07",
+          "fromCode": "VENUS",
+          "toCode": "URANUS",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 6.979958734483944,
+          "currentOrbDegrees": 6.979958734483944,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 6.980586090597058,
+          "relativeLongitudeSpeedDegreesPerDay": -0.903392802745
+        },
+        {
+          "aspectCode": "ASPECT_08",
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 0.32916440740200414,
+          "currentOrbDegrees": 0.32916440740200414,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.3285221538683345,
+          "relativeLongitudeSpeedDegreesPerDay": -0.924845088348
+        },
+        {
+          "aspectCode": "ASPECT_09",
+          "fromCode": "MARS",
+          "toCode": "JUPITER",
+          "type": "TRINE",
+          "authorizedOrbDegrees": 6,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 117.30054021591604,
+          "currentOrbDegrees": 2.699459784083956,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.698950157699187,
+          "relativeLongitudeSpeedDegreesPerDay": -0.733861994132
+        },
+        {
+          "aspectCode": "ASPECT_10",
+          "fromCode": "MARS",
+          "toCode": "SATURN",
+          "type": "SEXTILE",
+          "authorizedOrbDegrees": 4,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 62.89875587471397,
+          "currentOrbDegrees": 2.89875587471397,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.8983506449335437,
+          "relativeLongitudeSpeedDegreesPerDay": -0.583530883822
+        },
+        {
+          "aspectCode": "ASPECT_11",
+          "fromCode": "MARS",
+          "toCode": "NEPTUNE",
+          "type": "SEXTILE",
+          "authorizedOrbDegrees": 4,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 62.76252064480798,
+          "currentOrbDegrees": 2.762520644807978,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.762070743038862,
+          "relativeLongitudeSpeedDegreesPerDay": -0.647858547445
+        },
+        {
+          "aspectCode": "ASPECT_12",
+          "fromCode": "MARS",
+          "toCode": "PLUTO",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 7.777814050767006,
+          "currentOrbDegrees": 7.777814050767006,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.777372638047154,
+          "relativeLongitudeSpeedDegreesPerDay": -0.635634316565
+        },
+        {
+          "aspectCode": "ASPECT_13",
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 179.80070390937,
+          "currentOrbDegrees": 0.19929609063001408,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.19940048723435666,
+          "relativeLongitudeSpeedDegreesPerDay": 0.15033111031
+        },
+        {
+          "aspectCode": "ASPECT_14",
+          "fromCode": "JUPITER",
+          "toCode": "URANUS",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 172.75393771883807,
+          "currentOrbDegrees": 7.246062281161926,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.245987659125717,
+          "relativeLongitudeSpeedDegreesPerDay": 0.10745573229
+        },
+        {
+          "aspectCode": "ASPECT_15",
+          "fromCode": "JUPITER",
+          "toCode": "NEPTUNE",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 179.93693913927598,
+          "currentOrbDegrees": 0.06306086072402195,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.06312058533967502,
+          "relativeLongitudeSpeedDegreesPerDay": 0.086003446687
+        },
+        {
+          "aspectCode": "ASPECT_16",
+          "fromCode": "JUPITER",
+          "toCode": "PLUTO",
+          "type": "TRINE",
+          "authorizedOrbDegrees": 6,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 125.07835426668305,
+          "currentOrbDegrees": 5.07835426668305,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 5.078422480347967,
+          "relativeLongitudeSpeedDegreesPerDay": 0.098227677567
+        },
+        {
+          "aspectCode": "ASPECT_17",
+          "fromCode": "SATURN",
+          "toCode": "URANUS",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 7.44535837179194,
+          "currentOrbDegrees": 7.44535837179194,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.445388146360074,
+          "relativeLongitudeSpeedDegreesPerDay": -0.04287537802
+        },
+        {
+          "aspectCode": "ASPECT_18",
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 0.13623522990599213,
+          "currentOrbDegrees": 0.13623522990599213,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.13627990189468164,
+          "relativeLongitudeSpeedDegreesPerDay": -0.064327663623
+        },
+        {
+          "aspectCode": "ASPECT_19",
+          "fromCode": "URANUS",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 7.309123141885948,
+          "currentOrbDegrees": 7.309123141885948,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.309108244465392,
+          "relativeLongitudeSpeedDegreesPerDay": -0.021452285603
         }
       ],
       "supportSignals": [
@@ -456,7 +977,7 @@
         "r4aClaimBundleDigest": "c2a6b66709bc5f538c6c3b7a2991c1376aee8acf0f5d2f3e2c217288e0b7d3ef",
         "r4aAdmissionStatus": "HUMAN_ADMITTED_21_OF_21",
         "meaningOntologyVersion": "PHI-OS-ASTA-W11-MEANING-ONTOLOGY-v1.0.0",
-        "compositionRuleVersion": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v1.0.0",
+        "compositionRuleVersion": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v2.0.0",
         "themeCandidateCount": 4,
         "selectedThemeCount": 4
       },
@@ -482,7 +1003,7 @@
         "intentId": "OPEN"
       },
       "semanticState": "R4A_HUMAN_ADMITTED_R5_ENGINEERING",
-      "wholeChartSummary": "Read this chart first through Chart routing centers on MOON; The aspect network has a measurable dynamic state; Angles frame how the chart enters and becomes visible. These are ranked synthesis themes built from distinct structural evidence families rather than a planet-by-planet directory.",
+      "wholeChartSummary": "Read this chart first through Chart routing centers on MOON; Connected major-aspect network: JUPITER / NEPTUNE / SATURN / VENUS; Angles frame how the chart enters and becomes visible. These are ranked synthesis themes built from distinct structural evidence families rather than a planet-by-planet directory.",
       "coreThemes": [
         {
           "themeKey": "RULERSHIP:MOON:MARS|SATURN:",
@@ -530,39 +1051,208 @@
           "tier": "CORE_THEME"
         },
         {
-          "themeKey": "DYNAMICS:10:9:0:0",
-          "familyCode": "ASPECT_DYNAMICS",
-          "headline": "The aspect network has a measurable dynamic state",
-          "summary": "Applying 10, separating 9, exact 0, undetermined 0. Applying means the measured orb is decreasing under the registered short numerical probe using the two bodies’ longitudinal speeds. It describes aspect geometry at the birth moment and does not provide an event date or guarantee increasing real-world intensity. Separating means the measured orb is increasing under the same registered short numerical probe. It is a geometric state classification, not evidence that a life situation is fading or has already happened.",
-          "basePriority": 78,
+          "clusterId": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+          "familyCode": "ASPECT_NETWORK_CLUSTER",
           "bodyCodes": [
-            "VENUS",
             "JUPITER",
             "NEPTUNE",
-            "SATURN"
+            "SATURN",
+            "VENUS"
           ],
-          "houseNumbers": [],
+          "houseNumbers": [
+            6,
+            12
+          ],
+          "evidenceAspectCodes": [
+            "ASPECT_05",
+            "ASPECT_06",
+            "ASPECT_08",
+            "ASPECT_13",
+            "ASPECT_15",
+            "ASPECT_18"
+          ],
+          "edges": [
+            {
+              "aspectCode": "ASPECT_05",
+              "fromCode": "VENUS",
+              "toCode": "JUPITER",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.266103546678,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "Polarity signal",
+              "relationDefinition": "Marks a counter-position that makes polarity, comparison and reciprocal tension structurally visible.",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_06",
+              "fromCode": "VENUS",
+              "toCode": "SATURN",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.465399637308,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "Co-location signal",
+              "relationDefinition": "Marks two functions operating in close angular co-location; it indicates concentration, not a guaranteed outcome.",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_08",
+              "fromCode": "VENUS",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.329164407402,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "Co-location signal",
+              "relationDefinition": "Marks two functions operating in close angular co-location; it indicates concentration, not a guaranteed outcome.",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_13",
+              "fromCode": "JUPITER",
+              "toCode": "SATURN",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.19929609063,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "Polarity signal",
+              "relationDefinition": "Marks a counter-position that makes polarity, comparison and reciprocal tension structurally visible.",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_15",
+              "fromCode": "JUPITER",
+              "toCode": "NEPTUNE",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.063060860724,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "Polarity signal",
+              "relationDefinition": "Marks a counter-position that makes polarity, comparison and reciprocal tension structurally visible.",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_18",
+              "fromCode": "SATURN",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.136235229906,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "Co-location signal",
+              "relationDefinition": "Marks two functions operating in close angular co-location; it indicates concentration, not a guaranteed outcome.",
+              "dynamicState": "SEPARATING"
+            }
+          ],
+          "connected": true,
+          "density": 1,
+          "meanNormalizedOrb": 0.030401245263500003,
+          "score": 85.02716,
+          "namedTraditionalPattern": false,
+          "themeKey": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+          "headline": "Connected major-aspect network: JUPITER / NEPTUNE / SATURN / VENUS",
+          "summary": "JUPITER (Expansion and synthesis, Containing direction, House 12), NEPTUNE (Diffusion and permeability, Structuring direction, House 6), SATURN (Constraint and durability, Structuring direction, House 6), VENUS (Valuation and attraction, Structuring direction, House 6)",
+          "basePriority": 85.02716,
+          "intentBoost": 0,
+          "priority": 85.02716,
           "angleCodes": [],
           "evidenceRefs": [
             "ASPECT_05",
+            "ASPECT_06",
             "ASPECT_08",
+            "ASPECT_13",
             "ASPECT_15",
             "ASPECT_18",
             "AST-R4A-DYNAMICS-APPLYING",
-            "AST-R4A-DYNAMICS-SEPARATING",
-            "AST-R4A-DYNAMICS-EXACT",
-            "AST-R4A-DYNAMICS-UNDETERMINED"
+            "AST-R4A-DYNAMICS-SEPARATING"
           ],
           "evidenceFamilies": [
-            "ASPECT_DYNAMICS_SEMANTICS",
-            "AST_RELATION_SIGNAL"
+            "AST_RELATION_SIGNAL",
+            "AST_FUNCTIONAL_DRIVER",
+            "AST_DIRECTION_MODE",
+            "AST_REALITY_DOMAIN"
           ],
-          "dynamicCounts": {
-            "SEPARATING": 9,
-            "APPLYING": 10
-          },
-          "intentBoost": 0,
-          "priority": 78,
+          "aspectDynamics": [
+            {
+              "aspectCode": "ASPECT_05",
+              "fromCode": "VENUS",
+              "toCode": "JUPITER",
+              "type": "OPPOSITION",
+              "authorizedOrbDegrees": 8,
+              "state": "APPLYING",
+              "currentSeparationDegrees": 179.73389645332202,
+              "currentOrbDegrees": 0.2661035466779822,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.2654015685286595,
+              "relativeLongitudeSpeedDegreesPerDay": -1.010848535035
+            },
+            {
+              "aspectCode": "ASPECT_06",
+              "fromCode": "VENUS",
+              "toCode": "SATURN",
+              "type": "CONJUNCTION",
+              "authorizedOrbDegrees": 8,
+              "state": "APPLYING",
+              "currentSeparationDegrees": 0.4653996373079963,
+              "currentOrbDegrees": 0.4653996373079963,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.46480205576301614,
+              "relativeLongitudeSpeedDegreesPerDay": -0.860517424725
+            },
+            {
+              "aspectCode": "ASPECT_08",
+              "fromCode": "VENUS",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "authorizedOrbDegrees": 8,
+              "state": "APPLYING",
+              "currentSeparationDegrees": 0.32916440740200414,
+              "currentOrbDegrees": 0.32916440740200414,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.3285221538683345,
+              "relativeLongitudeSpeedDegreesPerDay": -0.924845088348
+            },
+            {
+              "aspectCode": "ASPECT_13",
+              "fromCode": "JUPITER",
+              "toCode": "SATURN",
+              "type": "OPPOSITION",
+              "authorizedOrbDegrees": 8,
+              "state": "SEPARATING",
+              "currentSeparationDegrees": 179.80070390937,
+              "currentOrbDegrees": 0.19929609063001408,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.19940048723435666,
+              "relativeLongitudeSpeedDegreesPerDay": 0.15033111031
+            },
+            {
+              "aspectCode": "ASPECT_15",
+              "fromCode": "JUPITER",
+              "toCode": "NEPTUNE",
+              "type": "OPPOSITION",
+              "authorizedOrbDegrees": 8,
+              "state": "SEPARATING",
+              "currentSeparationDegrees": 179.93693913927598,
+              "currentOrbDegrees": 0.06306086072402195,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.06312058533967502,
+              "relativeLongitudeSpeedDegreesPerDay": 0.086003446687
+            },
+            {
+              "aspectCode": "ASPECT_18",
+              "fromCode": "SATURN",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "authorizedOrbDegrees": 8,
+              "state": "SEPARATING",
+              "currentSeparationDegrees": 0.13623522990599213,
+              "currentOrbDegrees": 0.13623522990599213,
+              "futureProbeDays": 0.0006944444444444445,
+              "futureProbeOrbDegrees": 0.13627990189468164,
+              "relativeLongitudeSpeedDegreesPerDay": -0.064327663623
+            }
+          ],
           "rank": 2,
           "tier": "CORE_THEME"
         },
@@ -652,6 +1342,358 @@
           "priority": 70,
           "rank": 4,
           "tier": "SUPPORTING_THEME"
+        }
+      ],
+      "aspectNetworkClusters": [
+        {
+          "clusterId": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+          "familyCode": "ASPECT_NETWORK_CLUSTER",
+          "bodyCodes": [
+            "JUPITER",
+            "NEPTUNE",
+            "SATURN",
+            "VENUS"
+          ],
+          "houseNumbers": [
+            6,
+            12
+          ],
+          "evidenceAspectCodes": [
+            "ASPECT_05",
+            "ASPECT_06",
+            "ASPECT_08",
+            "ASPECT_13",
+            "ASPECT_15",
+            "ASPECT_18"
+          ],
+          "edges": [
+            {
+              "aspectCode": "ASPECT_05",
+              "fromCode": "VENUS",
+              "toCode": "JUPITER",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.266103546678,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "Polarity signal",
+              "relationDefinition": "Marks a counter-position that makes polarity, comparison and reciprocal tension structurally visible.",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_06",
+              "fromCode": "VENUS",
+              "toCode": "SATURN",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.465399637308,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "Co-location signal",
+              "relationDefinition": "Marks two functions operating in close angular co-location; it indicates concentration, not a guaranteed outcome.",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_08",
+              "fromCode": "VENUS",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.329164407402,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "Co-location signal",
+              "relationDefinition": "Marks two functions operating in close angular co-location; it indicates concentration, not a guaranteed outcome.",
+              "dynamicState": "APPLYING"
+            },
+            {
+              "aspectCode": "ASPECT_13",
+              "fromCode": "JUPITER",
+              "toCode": "SATURN",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.19929609063,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "Polarity signal",
+              "relationDefinition": "Marks a counter-position that makes polarity, comparison and reciprocal tension structurally visible.",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_15",
+              "fromCode": "JUPITER",
+              "toCode": "NEPTUNE",
+              "type": "OPPOSITION",
+              "orbDegrees": 0.063060860724,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+              "relationLabel": "Polarity signal",
+              "relationDefinition": "Marks a counter-position that makes polarity, comparison and reciprocal tension structurally visible.",
+              "dynamicState": "SEPARATING"
+            },
+            {
+              "aspectCode": "ASPECT_18",
+              "fromCode": "SATURN",
+              "toCode": "NEPTUNE",
+              "type": "CONJUNCTION",
+              "orbDegrees": 0.136235229906,
+              "authorizedOrbDegrees": 8,
+              "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+              "relationLabel": "Co-location signal",
+              "relationDefinition": "Marks two functions operating in close angular co-location; it indicates concentration, not a guaranteed outcome.",
+              "dynamicState": "SEPARATING"
+            }
+          ],
+          "connected": true,
+          "density": 1,
+          "meanNormalizedOrb": 0.030401245263500003,
+          "score": 85.02716,
+          "namedTraditionalPattern": false
+        }
+      ],
+      "aspectDynamicsContext": [
+        {
+          "aspectCode": "ASPECT_01",
+          "fromCode": "SUN",
+          "toCode": "MERCURY",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 2.82309437036497,
+          "currentOrbDegrees": 2.82309437036497,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.8234911511277687,
+          "relativeLongitudeSpeedDegreesPerDay": 0.571364298349
+        },
+        {
+          "aspectCode": "ASPECT_02",
+          "fromCode": "SUN",
+          "toCode": "PLUTO",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 7.783648939131012,
+          "currentOrbDegrees": 7.783648939131012,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.784320477752885,
+          "relativeLongitudeSpeedDegreesPerDay": -0.967015615501
+        },
+        {
+          "aspectCode": "ASPECT_03",
+          "fromCode": "MOON",
+          "toCode": "URANUS",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 173.25796111911598,
+          "currentOrbDegrees": 6.742038880884024,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 6.731982224692331,
+          "relativeLongitudeSpeedDegreesPerDay": -14.481584915999
+        },
+        {
+          "aspectCode": "ASPECT_04",
+          "fromCode": "VENUS",
+          "toCode": "MARS",
+          "type": "SEXTILE",
+          "authorizedOrbDegrees": 4,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 62.433356237405974,
+          "currentOrbDegrees": 2.433356237405974,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.4335485891705275,
+          "relativeLongitudeSpeedDegreesPerDay": -0.276986540903
+        },
+        {
+          "aspectCode": "ASPECT_05",
+          "fromCode": "VENUS",
+          "toCode": "JUPITER",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 179.73389645332202,
+          "currentOrbDegrees": 0.2661035466779822,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.2654015685286595,
+          "relativeLongitudeSpeedDegreesPerDay": -1.010848535035
+        },
+        {
+          "aspectCode": "ASPECT_06",
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 0.4653996373079963,
+          "currentOrbDegrees": 0.4653996373079963,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.46480205576301614,
+          "relativeLongitudeSpeedDegreesPerDay": -0.860517424725
+        },
+        {
+          "aspectCode": "ASPECT_07",
+          "fromCode": "VENUS",
+          "toCode": "URANUS",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 6.979958734483944,
+          "currentOrbDegrees": 6.979958734483944,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 6.980586090597058,
+          "relativeLongitudeSpeedDegreesPerDay": -0.903392802745
+        },
+        {
+          "aspectCode": "ASPECT_08",
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 0.32916440740200414,
+          "currentOrbDegrees": 0.32916440740200414,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.3285221538683345,
+          "relativeLongitudeSpeedDegreesPerDay": -0.924845088348
+        },
+        {
+          "aspectCode": "ASPECT_09",
+          "fromCode": "MARS",
+          "toCode": "JUPITER",
+          "type": "TRINE",
+          "authorizedOrbDegrees": 6,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 117.30054021591604,
+          "currentOrbDegrees": 2.699459784083956,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.698950157699187,
+          "relativeLongitudeSpeedDegreesPerDay": -0.733861994132
+        },
+        {
+          "aspectCode": "ASPECT_10",
+          "fromCode": "MARS",
+          "toCode": "SATURN",
+          "type": "SEXTILE",
+          "authorizedOrbDegrees": 4,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 62.89875587471397,
+          "currentOrbDegrees": 2.89875587471397,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.8983506449335437,
+          "relativeLongitudeSpeedDegreesPerDay": -0.583530883822
+        },
+        {
+          "aspectCode": "ASPECT_11",
+          "fromCode": "MARS",
+          "toCode": "NEPTUNE",
+          "type": "SEXTILE",
+          "authorizedOrbDegrees": 4,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 62.76252064480798,
+          "currentOrbDegrees": 2.762520644807978,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 2.762070743038862,
+          "relativeLongitudeSpeedDegreesPerDay": -0.647858547445
+        },
+        {
+          "aspectCode": "ASPECT_12",
+          "fromCode": "MARS",
+          "toCode": "PLUTO",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 7.777814050767006,
+          "currentOrbDegrees": 7.777814050767006,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.777372638047154,
+          "relativeLongitudeSpeedDegreesPerDay": -0.635634316565
+        },
+        {
+          "aspectCode": "ASPECT_13",
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 179.80070390937,
+          "currentOrbDegrees": 0.19929609063001408,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.19940048723435666,
+          "relativeLongitudeSpeedDegreesPerDay": 0.15033111031
+        },
+        {
+          "aspectCode": "ASPECT_14",
+          "fromCode": "JUPITER",
+          "toCode": "URANUS",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 172.75393771883807,
+          "currentOrbDegrees": 7.246062281161926,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.245987659125717,
+          "relativeLongitudeSpeedDegreesPerDay": 0.10745573229
+        },
+        {
+          "aspectCode": "ASPECT_15",
+          "fromCode": "JUPITER",
+          "toCode": "NEPTUNE",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 179.93693913927598,
+          "currentOrbDegrees": 0.06306086072402195,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.06312058533967502,
+          "relativeLongitudeSpeedDegreesPerDay": 0.086003446687
+        },
+        {
+          "aspectCode": "ASPECT_16",
+          "fromCode": "JUPITER",
+          "toCode": "PLUTO",
+          "type": "TRINE",
+          "authorizedOrbDegrees": 6,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 125.07835426668305,
+          "currentOrbDegrees": 5.07835426668305,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 5.078422480347967,
+          "relativeLongitudeSpeedDegreesPerDay": 0.098227677567
+        },
+        {
+          "aspectCode": "ASPECT_17",
+          "fromCode": "SATURN",
+          "toCode": "URANUS",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 7.44535837179194,
+          "currentOrbDegrees": 7.44535837179194,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.445388146360074,
+          "relativeLongitudeSpeedDegreesPerDay": -0.04287537802
+        },
+        {
+          "aspectCode": "ASPECT_18",
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 0.13623522990599213,
+          "currentOrbDegrees": 0.13623522990599213,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.13627990189468164,
+          "relativeLongitudeSpeedDegreesPerDay": -0.064327663623
+        },
+        {
+          "aspectCode": "ASPECT_19",
+          "fromCode": "URANUS",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 7.309123141885948,
+          "currentOrbDegrees": 7.309123141885948,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 7.309108244465392,
+          "relativeLongitudeSpeedDegreesPerDay": -0.021452285603
         }
       ],
       "supportSignals": [
@@ -918,7 +1960,7 @@
         "r4aClaimBundleDigest": "c2a6b66709bc5f538c6c3b7a2991c1376aee8acf0f5d2f3e2c217288e0b7d3ef",
         "r4aAdmissionStatus": "HUMAN_ADMITTED_21_OF_21",
         "meaningOntologyVersion": "PHI-OS-ASTA-W11-MEANING-ONTOLOGY-v1.0.0",
-        "compositionRuleVersion": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v1.0.0",
+        "compositionRuleVersion": "PHI-OS-AST-R5-WHOLE-CHART-COMPOSITION-RULE-REGISTRY-v2.0.0",
         "themeCandidateCount": 4,
         "selectedThemeCount": 4
       },
@@ -936,7 +1978,8 @@
     }
   },
   "digests": {
-    "zh-Hans": "726ca7ba59e378435ae78fca4085904692da74b80e858025b115d5d9a6cc3f50",
-    "en": "f0853a3f4be5408094c49556b0b170d7a06725d2a542b916cfa30d0139b562c7"
-  }
+    "zh-Hans": "0cf7eacbcc63062845d662a4a742fa5011f5e4da8246f91c888f350090ab649d",
+    "en": "6fc2a33f0f39e2bcdba5afe6629e794b2c59741f2f4746a033397ca21257b9ad"
+  },
+  "compositionRuleRef": "content/professional/ast-full-production/registries/ast-r5-whole-chart-composition-rule-registry-v2.json"
 }

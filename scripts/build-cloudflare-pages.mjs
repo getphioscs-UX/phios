@@ -87,6 +87,7 @@ function isPublishable(rel) {
   const file = normalize(rel);
 
   if(file.startsWith('content/profile/successors/personal-evidence-r1/w11r6/')) return false;
+  if(file.startsWith('content/product-convergence-r1/audits/w12-w95/')) return false;
 
   if (!file) return false;
 

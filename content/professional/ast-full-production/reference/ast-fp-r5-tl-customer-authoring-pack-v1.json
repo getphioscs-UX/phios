@@ -10,7 +10,7 @@
       "aspectDynamics": "763969c649e058890f9406f9adb4ed4c95b004f60aecd5593b63d1199854d1fc"
     },
     "meaningOntology": "4fbfcf90583a185d5b256f48746aba965089223e4c28c696098e7526bbdefebf",
-    "compositionRules": "f7f4e0e8b34ac2f3dbec2e2a758aed03eb0412460ffd242ef6632c36a09a9307"
+    "compositionRules": "68d095a36df8c4d7d25b8747966b0b325f4a9c5d937f55f39d732ca3f04e4653"
   },
   "methodId": "AST",
   "referenceCaseId": "TL-REFERENCE-01",
@@ -20,7 +20,7 @@
   "canonicalProjectionId": "CMP2-3353E1115566DDE4F27C808E",
   "canonicalProjectionDigest": "02f96934070156352695f361c9f7e3c9c8f5ca39962b4c536c5eb5b3ebb9721c",
   "R4ProjectionDigest": "e5b89516602f0ba6371e88d0c145393cc036dc7bc7be3a085fd7c293545ac78c",
-  "R5SynthesisDigest": "726ca7ba59e378435ae78fca4085904692da74b80e858025b115d5d9a6cc3f50",
+  "R5SynthesisDigest": "0cf7eacbcc63062845d662a4a742fa5011f5e4da8246f91c888f350090ab649d",
   "R4AClaimBundleDigest": "c2a6b66709bc5f538c6c3b7a2991c1376aee8acf0f5d2f3e2c217288e0b7d3ef",
   "locationResolutionDigest": "58e9bafe86aaa0938579a4a72c10db9656d7bb1a79855c3865336b477ff897de",
   "chartIdentity": {
@@ -36,7 +36,7 @@
       "confidence": "HIGH"
     }
   },
-  "wholeChartSummary": "这张盘应先从整盘路由首先经过 MOON；相位网络具有可测量的动态状态；四轴框定命盘如何进入现实与变得可见进入。这里的排序主题来自不同结构证据家族的整合，而不是逐星体目录。",
+  "wholeChartSummary": "这张盘应先从整盘路由首先经过 MOON；紧密主要相位网络：JUPITER、NEPTUNE、SATURN、VENUS；四轴框定命盘如何进入现实与变得可见进入。这里的排序主题来自不同结构证据家族的整合，而不是逐星体目录。",
   "coreThemes": [
     {
       "themeKey": "RULERSHIP:MOON:MARS|SATURN:",
@@ -84,39 +84,208 @@
       "tier": "CORE_THEME"
     },
     {
-      "themeKey": "DYNAMICS:10:9:0:0",
-      "familyCode": "ASPECT_DYNAMICS",
-      "headline": "相位网络具有可测量的动态状态",
-      "summary": "入相 10、出相 9、精确 0、未定 0。 入相表示按照两颗星体的黄经速度进行已登记的短时数值探测时，相位容许度正在缩小。它描述出生时刻的相位几何，不提供事件日期，也不保证现实强度一定增加。 出相表示在同一已登记短时数值探测下，相位容许度正在扩大。它只是几何状态分类，不代表某个生活情境正在减弱或已经发生。",
-      "basePriority": 78,
+      "clusterId": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+      "familyCode": "ASPECT_NETWORK_CLUSTER",
       "bodyCodes": [
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
-        "SATURN"
+        "SATURN",
+        "VENUS"
       ],
-      "houseNumbers": [],
+      "houseNumbers": [
+        6,
+        12
+      ],
+      "evidenceAspectCodes": [
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_08",
+        "ASPECT_13",
+        "ASPECT_15",
+        "ASPECT_18"
+      ],
+      "edges": [
+        {
+          "aspectCode": "ASPECT_05",
+          "fromCode": "VENUS",
+          "toCode": "JUPITER",
+          "type": "OPPOSITION",
+          "orbDegrees": 0.266103546678,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+          "relationLabel": "极性信号",
+          "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+          "dynamicState": "APPLYING"
+        },
+        {
+          "aspectCode": "ASPECT_06",
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "type": "CONJUNCTION",
+          "orbDegrees": 0.465399637308,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+          "relationLabel": "同位信号",
+          "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+          "dynamicState": "APPLYING"
+        },
+        {
+          "aspectCode": "ASPECT_08",
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "orbDegrees": 0.329164407402,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+          "relationLabel": "同位信号",
+          "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+          "dynamicState": "APPLYING"
+        },
+        {
+          "aspectCode": "ASPECT_13",
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "type": "OPPOSITION",
+          "orbDegrees": 0.19929609063,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+          "relationLabel": "极性信号",
+          "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+          "dynamicState": "SEPARATING"
+        },
+        {
+          "aspectCode": "ASPECT_15",
+          "fromCode": "JUPITER",
+          "toCode": "NEPTUNE",
+          "type": "OPPOSITION",
+          "orbDegrees": 0.063060860724,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+          "relationLabel": "极性信号",
+          "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+          "dynamicState": "SEPARATING"
+        },
+        {
+          "aspectCode": "ASPECT_18",
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "orbDegrees": 0.136235229906,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+          "relationLabel": "同位信号",
+          "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+          "dynamicState": "SEPARATING"
+        }
+      ],
+      "connected": true,
+      "density": 1,
+      "meanNormalizedOrb": 0.030401245263500003,
+      "score": 85.02716,
+      "namedTraditionalPattern": false,
+      "themeKey": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+      "headline": "紧密主要相位网络：JUPITER、NEPTUNE、SATURN、VENUS",
+      "summary": "JUPITER（扩展与综合、容纳方向、第 12 宫）、NEPTUNE（扩散与渗透、结构化方向、第 6 宫）、SATURN（约束与耐久、结构化方向、第 6 宫）、VENUS（价值与吸引、结构化方向、第 6 宫）",
+      "basePriority": 85.02716,
+      "intentBoost": 0,
+      "priority": 85.02716,
       "angleCodes": [],
       "evidenceRefs": [
         "ASPECT_05",
+        "ASPECT_06",
         "ASPECT_08",
+        "ASPECT_13",
         "ASPECT_15",
         "ASPECT_18",
         "AST-R4A-DYNAMICS-APPLYING",
-        "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED"
+        "AST-R4A-DYNAMICS-SEPARATING"
       ],
       "evidenceFamilies": [
-        "ASPECT_DYNAMICS_SEMANTICS",
-        "AST_RELATION_SIGNAL"
+        "AST_RELATION_SIGNAL",
+        "AST_FUNCTIONAL_DRIVER",
+        "AST_DIRECTION_MODE",
+        "AST_REALITY_DOMAIN"
       ],
-      "dynamicCounts": {
-        "SEPARATING": 9,
-        "APPLYING": 10
-      },
-      "intentBoost": 0,
-      "priority": 78,
+      "aspectDynamics": [
+        {
+          "aspectCode": "ASPECT_05",
+          "fromCode": "VENUS",
+          "toCode": "JUPITER",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 179.73389645332202,
+          "currentOrbDegrees": 0.2661035466779822,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.2654015685286595,
+          "relativeLongitudeSpeedDegreesPerDay": -1.010848535035
+        },
+        {
+          "aspectCode": "ASPECT_06",
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 0.4653996373079963,
+          "currentOrbDegrees": 0.4653996373079963,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.46480205576301614,
+          "relativeLongitudeSpeedDegreesPerDay": -0.860517424725
+        },
+        {
+          "aspectCode": "ASPECT_08",
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "APPLYING",
+          "currentSeparationDegrees": 0.32916440740200414,
+          "currentOrbDegrees": 0.32916440740200414,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.3285221538683345,
+          "relativeLongitudeSpeedDegreesPerDay": -0.924845088348
+        },
+        {
+          "aspectCode": "ASPECT_13",
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 179.80070390937,
+          "currentOrbDegrees": 0.19929609063001408,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.19940048723435666,
+          "relativeLongitudeSpeedDegreesPerDay": 0.15033111031
+        },
+        {
+          "aspectCode": "ASPECT_15",
+          "fromCode": "JUPITER",
+          "toCode": "NEPTUNE",
+          "type": "OPPOSITION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 179.93693913927598,
+          "currentOrbDegrees": 0.06306086072402195,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.06312058533967502,
+          "relativeLongitudeSpeedDegreesPerDay": 0.086003446687
+        },
+        {
+          "aspectCode": "ASPECT_18",
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "authorizedOrbDegrees": 8,
+          "state": "SEPARATING",
+          "currentSeparationDegrees": 0.13623522990599213,
+          "currentOrbDegrees": 0.13623522990599213,
+          "futureProbeDays": 0.0006944444444444445,
+          "futureProbeOrbDegrees": 0.13627990189468164,
+          "relativeLongitudeSpeedDegreesPerDay": -0.064327663623
+        }
+      ],
       "rank": 2,
       "tier": "CORE_THEME"
     },
@@ -206,6 +375,451 @@
       "priority": 70,
       "rank": 4,
       "tier": "SUPPORTING_THEME"
+    }
+  ],
+  "aspectNetworkClusters": [
+    {
+      "clusterId": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+      "familyCode": "ASPECT_NETWORK_CLUSTER",
+      "bodyCodes": [
+        "JUPITER",
+        "NEPTUNE",
+        "SATURN",
+        "VENUS"
+      ],
+      "houseNumbers": [
+        6,
+        12
+      ],
+      "evidenceAspectCodes": [
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_08",
+        "ASPECT_13",
+        "ASPECT_15",
+        "ASPECT_18"
+      ],
+      "edges": [
+        {
+          "aspectCode": "ASPECT_05",
+          "fromCode": "VENUS",
+          "toCode": "JUPITER",
+          "type": "OPPOSITION",
+          "orbDegrees": 0.266103546678,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+          "relationLabel": "极性信号",
+          "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+          "dynamicState": "APPLYING"
+        },
+        {
+          "aspectCode": "ASPECT_06",
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "type": "CONJUNCTION",
+          "orbDegrees": 0.465399637308,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+          "relationLabel": "同位信号",
+          "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+          "dynamicState": "APPLYING"
+        },
+        {
+          "aspectCode": "ASPECT_08",
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "orbDegrees": 0.329164407402,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+          "relationLabel": "同位信号",
+          "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+          "dynamicState": "APPLYING"
+        },
+        {
+          "aspectCode": "ASPECT_13",
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "type": "OPPOSITION",
+          "orbDegrees": 0.19929609063,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+          "relationLabel": "极性信号",
+          "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+          "dynamicState": "SEPARATING"
+        },
+        {
+          "aspectCode": "ASPECT_15",
+          "fromCode": "JUPITER",
+          "toCode": "NEPTUNE",
+          "type": "OPPOSITION",
+          "orbDegrees": 0.063060860724,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-02@1.0.0",
+          "relationLabel": "极性信号",
+          "relationDefinition": "表示对置，使极性、比较与相互张力在结构上变得可见。",
+          "dynamicState": "SEPARATING"
+        },
+        {
+          "aspectCode": "ASPECT_18",
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "type": "CONJUNCTION",
+          "orbDegrees": 0.136235229906,
+          "authorizedOrbDegrees": 8,
+          "relationMeaningRef": "CM-AST-RELATION-01@1.0.0",
+          "relationLabel": "同位信号",
+          "relationDefinition": "表示两个功能在接近的角距中同位运行；它表示集中，不保证任何结果。",
+          "dynamicState": "SEPARATING"
+        }
+      ],
+      "connected": true,
+      "density": 1,
+      "meanNormalizedOrb": 0.030401245263500003,
+      "score": 85.02716,
+      "namedTraditionalPattern": false
+    }
+  ],
+  "houseRulerSectionRoutes": [
+    {
+      "sectionId": "RELATIONSHIPS_RECIPROCITY",
+      "routes": [
+        {
+          "houseNumber": 7,
+          "cuspLongitude": 288.368336792072,
+          "cuspSign": "CAPRICORN",
+          "rulerBodyCode": "SATURN",
+          "rulerActualSign": "CAPRICORN",
+          "rulerActualHouse": 6,
+          "dispositorChain": {
+            "bodyCode": "SATURN",
+            "path": [
+              "SATURN"
+            ],
+            "terminalType": "FINAL_DISPOSITOR",
+            "terminalBody": "SATURN"
+          },
+          "aspectRefs": [
+            "ASPECT_06",
+            "ASPECT_10",
+            "ASPECT_13",
+            "ASPECT_17",
+            "ASPECT_18"
+          ],
+          "status": "BOUND",
+          "sourceRefs": [
+            "HOUSE_7",
+            "SATURN",
+            "DISPOSITOR:SATURN",
+            "ASPECT_06",
+            "ASPECT_10",
+            "ASPECT_13",
+            "ASPECT_17",
+            "ASPECT_18"
+          ],
+          "ruledHouseIsNotRulerOccupancy": true
+        }
+      ],
+      "bodyRefs": [
+        "JUPITER",
+        "MARS",
+        "NEPTUNE",
+        "SATURN",
+        "URANUS",
+        "VENUS"
+      ],
+      "houseRefs": [
+        4,
+        6,
+        7,
+        12
+      ],
+      "aspectRefs": [
+        "ASPECT_04",
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_07",
+        "ASPECT_08",
+        "ASPECT_10",
+        "ASPECT_13",
+        "ASPECT_17",
+        "ASPECT_18"
+      ],
+      "angleRefs": [
+        "DSC"
+      ],
+      "claimRefs": [
+        "AST-R4A-RULERSHIP-HOUSE-RULER",
+        "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
+        "AST-R4A-ANGLE-DSC"
+      ],
+      "status": "BOUND",
+      "routingBoundary": "TOPOLOGY_NOT_HIERARCHY"
+    },
+    {
+      "sectionId": "WORK_RESPONSIBILITY_PUBLIC_DIRECTION",
+      "routes": [
+        {
+          "houseNumber": 10,
+          "cuspLongitude": 19.40638887519202,
+          "cuspSign": "ARIES",
+          "rulerBodyCode": "MARS",
+          "rulerActualSign": "SCORPIO",
+          "rulerActualHouse": 4,
+          "dispositorChain": {
+            "bodyCode": "MARS",
+            "path": [
+              "MARS"
+            ],
+            "terminalType": "FINAL_DISPOSITOR",
+            "terminalBody": "MARS"
+          },
+          "aspectRefs": [
+            "ASPECT_04",
+            "ASPECT_09",
+            "ASPECT_10",
+            "ASPECT_11",
+            "ASPECT_12"
+          ],
+          "status": "BOUND",
+          "sourceRefs": [
+            "HOUSE_10",
+            "MARS",
+            "DISPOSITOR:MARS",
+            "ASPECT_04",
+            "ASPECT_09",
+            "ASPECT_10",
+            "ASPECT_11",
+            "ASPECT_12"
+          ],
+          "ruledHouseIsNotRulerOccupancy": true
+        }
+      ],
+      "bodyRefs": [
+        "JUPITER",
+        "MARS",
+        "NEPTUNE",
+        "PLUTO",
+        "SATURN",
+        "VENUS"
+      ],
+      "houseRefs": [
+        4,
+        6,
+        10,
+        12
+      ],
+      "aspectRefs": [
+        "ASPECT_04",
+        "ASPECT_09",
+        "ASPECT_10",
+        "ASPECT_11",
+        "ASPECT_12"
+      ],
+      "angleRefs": [
+        "MC"
+      ],
+      "claimRefs": [
+        "AST-R4A-RULERSHIP-HOUSE-RULER",
+        "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
+        "AST-R4A-ANGLE-MC"
+      ],
+      "status": "BOUND",
+      "routingBoundary": "TOPOLOGY_NOT_HIERARCHY"
+    },
+    {
+      "sectionId": "RESOURCES_SECURITY_DEPENDENCY",
+      "routes": [
+        {
+          "houseNumber": 2,
+          "cuspLongitude": 136.38067862952403,
+          "cuspSign": "LEO",
+          "rulerBodyCode": "SUN",
+          "rulerActualSign": "SCORPIO",
+          "rulerActualHouse": 5,
+          "dispositorChain": {
+            "bodyCode": "SUN",
+            "path": [
+              "SUN",
+              "MARS"
+            ],
+            "terminalType": "FINAL_DISPOSITOR",
+            "terminalBody": "MARS"
+          },
+          "aspectRefs": [
+            "ASPECT_01",
+            "ASPECT_02"
+          ],
+          "status": "BOUND",
+          "sourceRefs": [
+            "HOUSE_2",
+            "SUN",
+            "DISPOSITOR:SUN",
+            "ASPECT_01",
+            "ASPECT_02"
+          ],
+          "ruledHouseIsNotRulerOccupancy": true
+        },
+        {
+          "houseNumber": 8,
+          "cuspLongitude": 316.380678629524,
+          "cuspSign": "AQUARIUS",
+          "rulerBodyCode": "SATURN",
+          "rulerActualSign": "CAPRICORN",
+          "rulerActualHouse": 6,
+          "dispositorChain": {
+            "bodyCode": "SATURN",
+            "path": [
+              "SATURN"
+            ],
+            "terminalType": "FINAL_DISPOSITOR",
+            "terminalBody": "SATURN"
+          },
+          "aspectRefs": [
+            "ASPECT_06",
+            "ASPECT_10",
+            "ASPECT_13",
+            "ASPECT_17",
+            "ASPECT_18"
+          ],
+          "status": "BOUND",
+          "sourceRefs": [
+            "HOUSE_8",
+            "SATURN",
+            "DISPOSITOR:SATURN",
+            "ASPECT_06",
+            "ASPECT_10",
+            "ASPECT_13",
+            "ASPECT_17",
+            "ASPECT_18"
+          ],
+          "ruledHouseIsNotRulerOccupancy": true
+        }
+      ],
+      "bodyRefs": [
+        "JUPITER",
+        "MARS",
+        "MERCURY",
+        "NEPTUNE",
+        "PLUTO",
+        "SATURN",
+        "SUN",
+        "URANUS",
+        "VENUS"
+      ],
+      "houseRefs": [
+        2,
+        4,
+        5,
+        6,
+        8,
+        12
+      ],
+      "aspectRefs": [
+        "ASPECT_01",
+        "ASPECT_02",
+        "ASPECT_04",
+        "ASPECT_06",
+        "ASPECT_09",
+        "ASPECT_10",
+        "ASPECT_11",
+        "ASPECT_12",
+        "ASPECT_13",
+        "ASPECT_17",
+        "ASPECT_18"
+      ],
+      "angleRefs": [],
+      "claimRefs": [
+        "AST-R4A-RULERSHIP-HOUSE-RULER",
+        "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN"
+      ],
+      "status": "BOUND",
+      "routingBoundary": "TOPOLOGY_NOT_HIERARCHY"
+    },
+    {
+      "sectionId": "SELF_EXPRESSION_INNER_REGULATION",
+      "routes": [
+        {
+          "houseNumber": 4,
+          "cuspLongitude": 199.40638887519196,
+          "cuspSign": "LIBRA",
+          "rulerBodyCode": "VENUS",
+          "rulerActualSign": "CAPRICORN",
+          "rulerActualHouse": 6,
+          "dispositorChain": {
+            "bodyCode": "VENUS",
+            "path": [
+              "VENUS",
+              "SATURN"
+            ],
+            "terminalType": "FINAL_DISPOSITOR",
+            "terminalBody": "SATURN"
+          },
+          "aspectRefs": [
+            "ASPECT_04",
+            "ASPECT_05",
+            "ASPECT_06",
+            "ASPECT_07",
+            "ASPECT_08"
+          ],
+          "status": "BOUND",
+          "sourceRefs": [
+            "HOUSE_4",
+            "VENUS",
+            "DISPOSITOR:VENUS",
+            "ASPECT_04",
+            "ASPECT_05",
+            "ASPECT_06",
+            "ASPECT_07",
+            "ASPECT_08"
+          ],
+          "ruledHouseIsNotRulerOccupancy": true
+        }
+      ],
+      "bodyRefs": [
+        "JUPITER",
+        "MARS",
+        "NEPTUNE",
+        "PLUTO",
+        "SATURN",
+        "SUN",
+        "URANUS",
+        "VENUS"
+      ],
+      "houseRefs": [
+        4,
+        5,
+        6,
+        12
+      ],
+      "aspectRefs": [
+        "ASPECT_02",
+        "ASPECT_04",
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_07",
+        "ASPECT_08",
+        "ASPECT_09",
+        "ASPECT_10",
+        "ASPECT_11",
+        "ASPECT_12",
+        "ASPECT_13",
+        "ASPECT_16",
+        "ASPECT_17",
+        "ASPECT_18"
+      ],
+      "angleRefs": [
+        "IC",
+        "ASC"
+      ],
+      "claimRefs": [
+        "AST-R4A-RULERSHIP-HOUSE-RULER",
+        "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
+        "AST-R4A-ANGLE-IC",
+        "AST-R4A-ANGLE-ASC"
+      ],
+      "status": "BOUND",
+      "routingBoundary": "TOPOLOGY_NOT_HIERARCHY"
     }
   ],
   "rulershipSummary": {
@@ -1175,6 +1789,23 @@
       ]
     },
     {
+      "claimCode": "AST-R4A-RULERSHIP-HOUSE-RULER",
+      "claimDigest": "97a2411aaf6eac151fb6e0ed77c174255e48175229a4edee16bcf63120e49252",
+      "label": {
+        "en": "House ruler routing",
+        "zh-Hans": "宫位守护路由"
+      },
+      "text": {
+        "en": "A house ruler links the sign on a calculated house cusp to that sign’s registered ruler. It is a structural route between a house domain and a planetary function, not a guarantee that events described by that house will occur.",
+        "zh-Hans": "宫位守护把实际计算宫头上的星座连接到该星座已登记的守护星，形成宫位领域与行星功能之间的结构路由；它不保证该宫位所涉及的事件一定发生。"
+      },
+      "boundaries": [
+        "ACTUAL_CUSP_REQUIRED",
+        "NO_EVENT_PREDICTION",
+        "NO_SILENT_SCHOOL_MIXING"
+      ]
+    },
+    {
       "claimCode": "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
       "claimDigest": "474c4a796871991fd2142480786c01d5d46e56f95717b705513515c69ee173ba",
       "label": {
@@ -1309,38 +1940,6 @@
         "NO_PAST_EVENT_INFERENCE",
         "NO_REALITY_FACT"
       ]
-    },
-    {
-      "claimCode": "AST-R4A-DYNAMICS-EXACT",
-      "claimDigest": "43f7d2e3069b34e177f943651ae1b6d6eb0f9094ba14800baf14100dd8cdd643",
-      "label": {
-        "en": "Exact aspect",
-        "zh-Hans": "精确相位"
-      },
-      "text": {
-        "en": "Exact means the current angular separation is within the registered exact-orb tolerance of the aspect angle. It is a precision classification and is not automatically a stronger life outcome or a certainty claim.",
-        "zh-Hans": "精确相位表示当前角距落在该相位角度已登记的精确容差内。它是精度分类，不会自动变成更强的人生结果或确定性断言。"
-      },
-      "boundaries": [
-        "PRECISION_CLASSIFICATION_ONLY",
-        "NO_OUTCOME_STRENGTH_INFERENCE"
-      ]
-    },
-    {
-      "claimCode": "AST-R4A-DYNAMICS-UNDETERMINED",
-      "claimDigest": "cd0e892414088e9c65ccf27fd25555c27610172ebc834aee2c9aadbaed465fa3",
-      "label": {
-        "en": "Aspect dynamic undetermined",
-        "zh-Hans": "相位动态未定"
-      },
-      "text": {
-        "en": "Undetermined is retained when speed evidence is missing or the numerical probe does not resolve a direction beyond the registered epsilon. The system must keep the dynamic state open rather than guess applying or separating.",
-        "zh-Hans": "当速度证据缺失，或数值探测无法超过已登记 epsilon 判定方向时，动态状态保持“未定”。系统必须保留开放状态，而不能猜测入相或出相。"
-      },
-      "boundaries": [
-        "MISSING_EVIDENCE_REMAINS_OPEN",
-        "NO_GUESSING"
-      ]
     }
   ],
   "sectionPlan": [
@@ -1356,6 +1955,8 @@
       "allowedAngleRefs": [],
       "forbiddenOverlapRefs": [],
       "ownershipState": "REFERENCE_ONLY",
+      "houseRulerRouteRefs": [],
+      "houseRulerRouteStatus": "NOT_APPLICABLE",
       "evidenceLimited": false
     },
     {
@@ -1366,7 +1967,7 @@
       ],
       "secondaryThemeRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES"
       ],
       "allowedClaimRefs": [
@@ -1375,8 +1976,6 @@
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
         "AST-R4A-DYNAMICS-APPLYING",
         "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED",
         "AST-R4A-ANGLE-ASC",
         "AST-R4A-ANGLE-MC",
         "AST-R4A-DISTRIBUTION-ELEMENT",
@@ -1388,9 +1987,9 @@
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
+        "VENUS",
         "SUN",
         "MERCURY",
         "URANUS",
@@ -1410,38 +2009,44 @@
         "ASPECT_15",
         "ASPECT_13",
         "ASPECT_05",
+        "ASPECT_06",
         "ASPECT_08",
         "ASPECT_18"
       ],
       "allowedAngleRefs": [],
       "forbiddenOverlapRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES"
       ],
       "ownershipState": "PRIMARY_EXPLANATION",
+      "houseRulerRouteRefs": [],
+      "houseRulerRouteStatus": "NOT_APPLICABLE",
       "evidenceLimited": false
     },
     {
       "sectionId": "CORE_OPERATING_STRUCTURE",
       "title": "核心运作结构",
       "primaryThemeRefs": [
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS"
       ],
       "secondaryThemeRefs": [],
       "allowedClaimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
-        "AST-R4A-RULERSHIP-FINAL-CYCLE"
+        "AST-R4A-RULERSHIP-FINAL-CYCLE",
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING"
       ],
       "allowedBodyRefs": [
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
-        "URANUS",
         "NEPTUNE",
+        "VENUS",
+        "URANUS",
         "PLUTO"
       ],
       "allowedHouseRefs": [
@@ -1455,11 +2060,16 @@
         "ASPECT_11",
         "ASPECT_15",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_08",
+        "ASPECT_18"
       ],
       "allowedAngleRefs": [],
       "forbiddenOverlapRefs": [],
       "ownershipState": "PRIMARY_EXPLANATION",
+      "houseRulerRouteRefs": [],
+      "houseRulerRouteStatus": "NOT_APPLICABLE",
       "evidenceLimited": false
     },
     {
@@ -1469,26 +2079,36 @@
         "ANGLES:CANCER:ARIES"
       ],
       "secondaryThemeRefs": [
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "allowedClaimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
         "AST-R4A-ANGLE-ASC",
-        "AST-R4A-ANGLE-MC"
+        "AST-R4A-ANGLE-MC",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-ANGLE-IC",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
       ],
       "allowedBodyRefs": [
-        "MOON",
+        "JUPITER",
         "MARS",
+        "NEPTUNE",
+        "PLUTO",
         "SATURN",
         "SUN",
-        "MERCURY",
-        "VENUS",
-        "JUPITER",
         "URANUS",
-        "NEPTUNE",
-        "PLUTO"
+        "VENUS",
+        "MOON",
+        "MERCURY"
       ],
       "allowedHouseRefs": [
         1,
@@ -1500,41 +2120,106 @@
         10
       ],
       "allowedAspectRefs": [
-        "ASPECT_09",
+        "ASPECT_02",
         "ASPECT_04",
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_07",
+        "ASPECT_08",
+        "ASPECT_09",
+        "ASPECT_10",
         "ASPECT_11",
-        "ASPECT_15",
+        "ASPECT_12",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_16",
+        "ASPECT_17",
+        "ASPECT_18",
+        "ASPECT_15"
       ],
       "allowedAngleRefs": [
-        "ASC"
+        "ASC",
+        "IC"
       ],
       "forbiddenOverlapRefs": [
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "ownershipState": "PRIMARY_EXPLANATION",
+      "houseRulerRouteRefs": [
+        "ROUTE:SELF_EXPRESSION_INNER_REGULATION:HOUSE_4"
+      ],
+      "houseRulerRouteStatus": "BOUND",
       "evidenceLimited": false
     },
     {
       "sectionId": "RELATIONSHIPS_RECIPROCITY",
       "title": "关系与互惠",
       "primaryThemeRefs": [],
-      "secondaryThemeRefs": [],
-      "allowedClaimRefs": [
-        "AST-R4A-ANGLE-DSC"
+      "secondaryThemeRefs": [
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
-      "allowedBodyRefs": [],
+      "allowedClaimRefs": [
+        "AST-R4A-RULERSHIP-CHART-RULER",
+        "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
+        "AST-R4A-RULERSHIP-FINAL-CYCLE",
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-ANGLE-DSC",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
+      ],
+      "allowedBodyRefs": [
+        "JUPITER",
+        "MARS",
+        "NEPTUNE",
+        "SATURN",
+        "URANUS",
+        "VENUS",
+        "MOON",
+        "SUN",
+        "MERCURY",
+        "PLUTO"
+      ],
       "allowedHouseRefs": [
         7,
-        11
+        11,
+        12,
+        4,
+        6
       ],
-      "allowedAspectRefs": [],
+      "allowedAspectRefs": [
+        "ASPECT_04",
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_07",
+        "ASPECT_08",
+        "ASPECT_10",
+        "ASPECT_13",
+        "ASPECT_17",
+        "ASPECT_18",
+        "ASPECT_09",
+        "ASPECT_11",
+        "ASPECT_15"
+      ],
       "allowedAngleRefs": [
         "DSC"
       ],
-      "forbiddenOverlapRefs": [],
-      "ownershipState": "REFERENCE_ONLY",
+      "forbiddenOverlapRefs": [
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
+      ],
+      "ownershipState": "SECONDARY_APPLICATION",
+      "houseRulerRouteRefs": [
+        "ROUTE:RELATIONSHIPS_RECIPROCITY:HOUSE_7"
+      ],
+      "houseRulerRouteStatus": "BOUND",
       "evidenceLimited": false
     },
     {
@@ -1543,24 +2228,35 @@
       "primaryThemeRefs": [],
       "secondaryThemeRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "ANGLES:CANCER:ARIES"
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "ANGLES:CANCER:ARIES",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "allowedClaimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
         "AST-R4A-ANGLE-ASC",
-        "AST-R4A-ANGLE-MC"
+        "AST-R4A-ANGLE-MC",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
       ],
       "allowedBodyRefs": [
-        "MOON",
+        "JUPITER",
         "MARS",
+        "NEPTUNE",
+        "PLUTO",
         "SATURN",
         "VENUS",
-        "JUPITER",
-        "URANUS",
-        "NEPTUNE",
-        "PLUTO"
+        "MOON",
+        "SUN",
+        "MERCURY",
+        "URANUS"
       ],
       "allowedHouseRefs": [
         6,
@@ -1570,21 +2266,32 @@
         1
       ],
       "allowedAspectRefs": [
-        "ASPECT_09",
         "ASPECT_04",
+        "ASPECT_09",
+        "ASPECT_10",
         "ASPECT_11",
+        "ASPECT_12",
         "ASPECT_15",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_08",
+        "ASPECT_18"
       ],
       "allowedAngleRefs": [
         "MC"
       ],
       "forbiddenOverlapRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "ANGLES:CANCER:ARIES"
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "ANGLES:CANCER:ARIES",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "ownershipState": "SECONDARY_APPLICATION",
+      "houseRulerRouteRefs": [
+        "ROUTE:WORK_RESPONSIBILITY_PUBLIC_DIRECTION:HOUSE_10"
+      ],
+      "houseRulerRouteStatus": "BOUND",
       "evidenceLimited": false
     },
     {
@@ -1592,78 +2299,98 @@
       "title": "资源、安全与依赖",
       "primaryThemeRefs": [],
       "secondaryThemeRefs": [
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "allowedClaimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
-        "AST-R4A-ANGLE-IC"
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-ANGLE-IC",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
       ],
       "allowedBodyRefs": [
-        "MOON",
-        "MARS",
-        "SATURN",
-        "VENUS",
         "JUPITER",
-        "URANUS",
+        "MARS",
+        "MERCURY",
         "NEPTUNE",
-        "PLUTO"
+        "PLUTO",
+        "SATURN",
+        "SUN",
+        "URANUS",
+        "VENUS",
+        "MOON"
       ],
       "allowedHouseRefs": [
         2,
         4,
         8,
         12,
-        6
+        6,
+        5
       ],
       "allowedAspectRefs": [
-        "ASPECT_09",
+        "ASPECT_01",
+        "ASPECT_02",
         "ASPECT_04",
+        "ASPECT_06",
+        "ASPECT_09",
+        "ASPECT_10",
         "ASPECT_11",
-        "ASPECT_15",
+        "ASPECT_12",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_17",
+        "ASPECT_18",
+        "ASPECT_15",
+        "ASPECT_05",
+        "ASPECT_08"
       ],
       "allowedAngleRefs": [
         "IC"
       ],
       "forbiddenOverlapRefs": [
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "ownershipState": "SECONDARY_APPLICATION",
+      "houseRulerRouteRefs": [
+        "ROUTE:RESOURCES_SECURITY_DEPENDENCY:HOUSE_2",
+        "ROUTE:RESOURCES_SECURITY_DEPENDENCY:HOUSE_8"
+      ],
+      "houseRulerRouteStatus": "BOUND",
       "evidenceLimited": false
     },
     {
       "sectionId": "PRESSURE_ADAPTATION",
       "title": "压力与适应",
-      "primaryThemeRefs": [
-        "DYNAMICS:10:9:0:0"
-      ],
+      "primaryThemeRefs": [],
       "secondaryThemeRefs": [],
-      "allowedClaimRefs": [
-        "AST-R4A-DYNAMICS-APPLYING",
-        "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED"
-      ],
+      "allowedClaimRefs": [],
       "allowedBodyRefs": [
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
-        "SATURN"
+        "SATURN",
+        "VENUS"
       ],
       "allowedHouseRefs": [],
       "allowedAspectRefs": [
         "ASPECT_15",
         "ASPECT_13",
-        "ASPECT_05",
-        "ASPECT_08",
-        "ASPECT_18"
+        "ASPECT_05"
       ],
       "allowedAngleRefs": [],
       "forbiddenOverlapRefs": [],
-      "ownershipState": "PRIMARY_EXPLANATION",
+      "ownershipState": "REFERENCE_ONLY",
+      "houseRulerRouteRefs": [],
+      "houseRulerRouteStatus": "NOT_APPLICABLE",
       "evidenceLimited": false
     },
     {
@@ -1687,6 +2414,8 @@
       "allowedAngleRefs": [],
       "forbiddenOverlapRefs": [],
       "ownershipState": "REFERENCE_ONLY",
+      "houseRulerRouteRefs": [],
+      "houseRulerRouteStatus": "NOT_APPLICABLE",
       "evidenceLimited": false
     },
     {
@@ -1695,7 +2424,7 @@
       "primaryThemeRefs": [],
       "secondaryThemeRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES",
         "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
@@ -1705,8 +2434,6 @@
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
         "AST-R4A-DYNAMICS-APPLYING",
         "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED",
         "AST-R4A-ANGLE-ASC",
         "AST-R4A-ANGLE-MC",
         "AST-R4A-DISTRIBUTION-ELEMENT",
@@ -1718,9 +2445,9 @@
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
+        "VENUS",
         "SUN",
         "MERCURY",
         "URANUS",
@@ -1741,17 +2468,20 @@
         "ASPECT_15",
         "ASPECT_13",
         "ASPECT_05",
+        "ASPECT_06",
         "ASPECT_08",
         "ASPECT_18"
       ],
       "allowedAngleRefs": [],
       "forbiddenOverlapRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES",
         "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "ownershipState": "SECONDARY_APPLICATION",
+      "houseRulerRouteRefs": [],
+      "houseRulerRouteStatus": "NOT_APPLICABLE",
       "evidenceLimited": false
     },
     {
@@ -1760,7 +2490,7 @@
       "primaryThemeRefs": [],
       "secondaryThemeRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES",
         "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
@@ -1770,8 +2500,6 @@
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
         "AST-R4A-DYNAMICS-APPLYING",
         "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED",
         "AST-R4A-ANGLE-ASC",
         "AST-R4A-ANGLE-MC",
         "AST-R4A-DISTRIBUTION-ELEMENT",
@@ -1783,9 +2511,9 @@
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
+        "VENUS",
         "SUN",
         "MERCURY",
         "URANUS",
@@ -1805,17 +2533,20 @@
         "ASPECT_15",
         "ASPECT_13",
         "ASPECT_05",
+        "ASPECT_06",
         "ASPECT_08",
         "ASPECT_18"
       ],
       "allowedAngleRefs": [],
       "forbiddenOverlapRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES",
         "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "ownershipState": "SECONDARY_APPLICATION",
+      "houseRulerRouteRefs": [],
+      "houseRulerRouteStatus": "NOT_APPLICABLE",
       "evidenceLimited": false
     }
   ],
@@ -1826,8 +2557,8 @@
       "state": "PRIMARY_EXPLANATION"
     },
     {
-      "themeRef": "DYNAMICS:10:9:0:0",
-      "primarySection": "PRESSURE_ADAPTATION",
+      "themeRef": "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+      "primarySection": "CORE_OPERATING_STRUCTURE",
       "state": "PRIMARY_EXPLANATION"
     },
     {
@@ -1849,14 +2580,16 @@
       "bodyRefs": [],
       "houseRefs": [],
       "aspectRefs": [],
-      "angleRefs": []
+      "angleRefs": [],
+      "houseRulerRouteRefs": [],
+      "evidenceLimited": false
     },
     {
       "sectionId": "CHART_OVERVIEW",
       "themeRefs": [
         "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}",
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES"
       ],
       "claimRefs": [
@@ -1865,8 +2598,6 @@
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
         "AST-R4A-DYNAMICS-APPLYING",
         "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED",
         "AST-R4A-ANGLE-ASC",
         "AST-R4A-ANGLE-MC",
         "AST-R4A-DISTRIBUTION-ELEMENT",
@@ -1878,9 +2609,9 @@
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
+        "VENUS",
         "SUN",
         "MERCURY",
         "URANUS",
@@ -1900,29 +2631,35 @@
         "ASPECT_15",
         "ASPECT_13",
         "ASPECT_05",
+        "ASPECT_06",
         "ASPECT_08",
         "ASPECT_18"
       ],
-      "angleRefs": []
+      "angleRefs": [],
+      "houseRulerRouteRefs": [],
+      "evidenceLimited": false
     },
     {
       "sectionId": "CORE_OPERATING_STRUCTURE",
       "themeRefs": [
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS"
       ],
       "claimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
-        "AST-R4A-RULERSHIP-FINAL-CYCLE"
+        "AST-R4A-RULERSHIP-FINAL-CYCLE",
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING"
       ],
       "bodyRefs": [
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
-        "URANUS",
         "NEPTUNE",
+        "VENUS",
+        "URANUS",
         "PLUTO"
       ],
       "houseRefs": [
@@ -1936,34 +2673,49 @@
         "ASPECT_11",
         "ASPECT_15",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_08",
+        "ASPECT_18"
       ],
-      "angleRefs": []
+      "angleRefs": [],
+      "houseRulerRouteRefs": [],
+      "evidenceLimited": false
     },
     {
       "sectionId": "SELF_EXPRESSION_INNER_REGULATION",
       "themeRefs": [
         "ANGLES:CANCER:ARIES",
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "claimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
         "AST-R4A-ANGLE-ASC",
-        "AST-R4A-ANGLE-MC"
+        "AST-R4A-ANGLE-MC",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-ANGLE-IC",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
       ],
       "bodyRefs": [
-        "MOON",
+        "JUPITER",
         "MARS",
+        "NEPTUNE",
+        "PLUTO",
         "SATURN",
         "SUN",
-        "MERCURY",
-        "VENUS",
-        "JUPITER",
         "URANUS",
-        "NEPTUNE",
-        "PLUTO"
+        "VENUS",
+        "MOON",
+        "MERCURY"
       ],
       "houseRefs": [
         1,
@@ -1975,55 +2727,125 @@
         10
       ],
       "aspectRefs": [
-        "ASPECT_09",
+        "ASPECT_02",
         "ASPECT_04",
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_07",
+        "ASPECT_08",
+        "ASPECT_09",
+        "ASPECT_10",
         "ASPECT_11",
-        "ASPECT_15",
+        "ASPECT_12",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_16",
+        "ASPECT_17",
+        "ASPECT_18",
+        "ASPECT_15"
       ],
       "angleRefs": [
-        "ASC"
-      ]
+        "ASC",
+        "IC"
+      ],
+      "houseRulerRouteRefs": [
+        "ROUTE:SELF_EXPRESSION_INNER_REGULATION:HOUSE_4"
+      ],
+      "evidenceLimited": false
     },
     {
       "sectionId": "RELATIONSHIPS_RECIPROCITY",
-      "themeRefs": [],
-      "claimRefs": [
-        "AST-R4A-ANGLE-DSC"
-      ],
-      "bodyRefs": [],
-      "houseRefs": [
-        7,
-        11
-      ],
-      "aspectRefs": [],
-      "angleRefs": [
-        "DSC"
-      ]
-    },
-    {
-      "sectionId": "WORK_RESPONSIBILITY_PUBLIC_DIRECTION",
       "themeRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "ANGLES:CANCER:ARIES"
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "claimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
-        "AST-R4A-ANGLE-ASC",
-        "AST-R4A-ANGLE-MC"
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-ANGLE-DSC",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
       ],
       "bodyRefs": [
-        "MOON",
+        "JUPITER",
         "MARS",
+        "NEPTUNE",
+        "SATURN",
+        "URANUS",
+        "VENUS",
+        "MOON",
+        "SUN",
+        "MERCURY",
+        "PLUTO"
+      ],
+      "houseRefs": [
+        7,
+        11,
+        12,
+        4,
+        6
+      ],
+      "aspectRefs": [
+        "ASPECT_04",
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_07",
+        "ASPECT_08",
+        "ASPECT_10",
+        "ASPECT_13",
+        "ASPECT_17",
+        "ASPECT_18",
+        "ASPECT_09",
+        "ASPECT_11",
+        "ASPECT_15"
+      ],
+      "angleRefs": [
+        "DSC"
+      ],
+      "houseRulerRouteRefs": [
+        "ROUTE:RELATIONSHIPS_RECIPROCITY:HOUSE_7"
+      ],
+      "evidenceLimited": false
+    },
+    {
+      "sectionId": "WORK_RESPONSIBILITY_PUBLIC_DIRECTION",
+      "themeRefs": [
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "ANGLES:CANCER:ARIES",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
+      ],
+      "claimRefs": [
+        "AST-R4A-RULERSHIP-CHART-RULER",
+        "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
+        "AST-R4A-RULERSHIP-FINAL-CYCLE",
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
+        "AST-R4A-ANGLE-ASC",
+        "AST-R4A-ANGLE-MC",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
+      ],
+      "bodyRefs": [
+        "JUPITER",
+        "MARS",
+        "NEPTUNE",
+        "PLUTO",
         "SATURN",
         "VENUS",
-        "JUPITER",
-        "URANUS",
-        "NEPTUNE",
-        "PLUTO"
+        "MOON",
+        "SUN",
+        "MERCURY",
+        "URANUS"
       ],
       "houseRefs": [
         6,
@@ -2033,83 +2855,110 @@
         1
       ],
       "aspectRefs": [
-        "ASPECT_09",
         "ASPECT_04",
+        "ASPECT_09",
+        "ASPECT_10",
         "ASPECT_11",
+        "ASPECT_12",
         "ASPECT_15",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_05",
+        "ASPECT_06",
+        "ASPECT_08",
+        "ASPECT_18"
       ],
       "angleRefs": [
         "MC"
-      ]
+      ],
+      "houseRulerRouteRefs": [
+        "ROUTE:WORK_RESPONSIBILITY_PUBLIC_DIRECTION:HOUSE_10"
+      ],
+      "evidenceLimited": false
     },
     {
       "sectionId": "RESOURCES_SECURITY_DEPENDENCY",
       "themeRefs": [
-        "RULERSHIP:MOON:MARS|SATURN:"
+        "RULERSHIP:MOON:MARS|SATURN:",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
+        "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
       "claimRefs": [
         "AST-R4A-RULERSHIP-CHART-RULER",
         "AST-R4A-RULERSHIP-DISPOSITOR-CHAIN",
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
-        "AST-R4A-ANGLE-IC"
+        "AST-R4A-DYNAMICS-APPLYING",
+        "AST-R4A-DYNAMICS-SEPARATING",
+        "AST-R4A-DISTRIBUTION-ELEMENT",
+        "AST-R4A-DISTRIBUTION-ELEMENT-LEADER",
+        "AST-R4A-DISTRIBUTION-MODALITY",
+        "AST-R4A-DISTRIBUTION-MODALITY-LEADER",
+        "AST-R4A-ANGLE-IC",
+        "AST-R4A-RULERSHIP-HOUSE-RULER"
       ],
       "bodyRefs": [
-        "MOON",
-        "MARS",
-        "SATURN",
-        "VENUS",
         "JUPITER",
-        "URANUS",
+        "MARS",
+        "MERCURY",
         "NEPTUNE",
-        "PLUTO"
+        "PLUTO",
+        "SATURN",
+        "SUN",
+        "URANUS",
+        "VENUS",
+        "MOON"
       ],
       "houseRefs": [
         2,
         4,
         8,
         12,
-        6
+        6,
+        5
       ],
       "aspectRefs": [
-        "ASPECT_09",
+        "ASPECT_01",
+        "ASPECT_02",
         "ASPECT_04",
+        "ASPECT_06",
+        "ASPECT_09",
+        "ASPECT_10",
         "ASPECT_11",
-        "ASPECT_15",
+        "ASPECT_12",
         "ASPECT_13",
-        "ASPECT_05"
+        "ASPECT_17",
+        "ASPECT_18",
+        "ASPECT_15",
+        "ASPECT_05",
+        "ASPECT_08"
       ],
       "angleRefs": [
         "IC"
-      ]
+      ],
+      "houseRulerRouteRefs": [
+        "ROUTE:RESOURCES_SECURITY_DEPENDENCY:HOUSE_2",
+        "ROUTE:RESOURCES_SECURITY_DEPENDENCY:HOUSE_8"
+      ],
+      "evidenceLimited": false
     },
     {
       "sectionId": "PRESSURE_ADAPTATION",
-      "themeRefs": [
-        "DYNAMICS:10:9:0:0"
-      ],
-      "claimRefs": [
-        "AST-R4A-DYNAMICS-APPLYING",
-        "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED"
-      ],
+      "themeRefs": [],
+      "claimRefs": [],
       "bodyRefs": [
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
-        "SATURN"
+        "SATURN",
+        "VENUS"
       ],
       "houseRefs": [],
       "aspectRefs": [
         "ASPECT_15",
         "ASPECT_13",
-        "ASPECT_05",
-        "ASPECT_08",
-        "ASPECT_18"
+        "ASPECT_05"
       ],
-      "angleRefs": []
+      "angleRefs": [],
+      "houseRulerRouteRefs": [],
+      "evidenceLimited": false
     },
     {
       "sectionId": "SUPPORTING_FLOW",
@@ -2127,13 +2976,15 @@
         "ASPECT_04",
         "ASPECT_11"
       ],
-      "angleRefs": []
+      "angleRefs": [],
+      "houseRulerRouteRefs": [],
+      "evidenceLimited": false
     },
     {
       "sectionId": "LONGER_RANGE_DEVELOPMENT",
       "themeRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES",
         "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
@@ -2143,8 +2994,6 @@
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
         "AST-R4A-DYNAMICS-APPLYING",
         "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED",
         "AST-R4A-ANGLE-ASC",
         "AST-R4A-ANGLE-MC",
         "AST-R4A-DISTRIBUTION-ELEMENT",
@@ -2156,9 +3005,9 @@
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
+        "VENUS",
         "SUN",
         "MERCURY",
         "URANUS",
@@ -2179,16 +3028,19 @@
         "ASPECT_15",
         "ASPECT_13",
         "ASPECT_05",
+        "ASPECT_06",
         "ASPECT_08",
         "ASPECT_18"
       ],
-      "angleRefs": []
+      "angleRefs": [],
+      "houseRulerRouteRefs": [],
+      "evidenceLimited": false
     },
     {
       "sectionId": "INTEGRATED_READING",
       "themeRefs": [
         "RULERSHIP:MOON:MARS|SATURN:",
-        "DYNAMICS:10:9:0:0",
+        "CLUSTER:JUPITER|NEPTUNE|SATURN|VENUS",
         "ANGLES:CANCER:ARIES",
         "DISTRIBUTION:{\"FIRE\":0,\"EARTH\":4,\"AIR\":1,\"WATER\":5}:{\"CARDINAL\":5,\"FIXED\":4,\"MUTABLE\":1}"
       ],
@@ -2198,8 +3050,6 @@
         "AST-R4A-RULERSHIP-FINAL-CYCLE",
         "AST-R4A-DYNAMICS-APPLYING",
         "AST-R4A-DYNAMICS-SEPARATING",
-        "AST-R4A-DYNAMICS-EXACT",
-        "AST-R4A-DYNAMICS-UNDETERMINED",
         "AST-R4A-ANGLE-ASC",
         "AST-R4A-ANGLE-MC",
         "AST-R4A-DISTRIBUTION-ELEMENT",
@@ -2211,9 +3061,9 @@
         "MOON",
         "MARS",
         "SATURN",
-        "VENUS",
         "JUPITER",
         "NEPTUNE",
+        "VENUS",
         "SUN",
         "MERCURY",
         "URANUS",
@@ -2233,10 +3083,13 @@
         "ASPECT_15",
         "ASPECT_13",
         "ASPECT_05",
+        "ASPECT_06",
         "ASPECT_08",
         "ASPECT_18"
       ],
-      "angleRefs": []
+      "angleRefs": [],
+      "houseRulerRouteRefs": [],
+      "evidenceLimited": false
     }
   ],
   "boundaries": [
@@ -2246,6 +3099,9 @@
     "TRADITIONAL_SEVEN_PRIMARY_ONLY",
     "MODERN_CO_RULER_ANNOTATION_ONLY",
     "NO_DOMINANT_PLANET_IDENTITY",
+    "ACTUAL_CUSP_REQUIRED",
+    "NO_EVENT_PREDICTION",
+    "NO_SILENT_SCHOOL_MIXING",
     "TOPOLOGY_NOT_HIERARCHY",
     "NO_STRENGTH_SCORE",
     "NO_OUTCOME_CLAIM",
@@ -2266,10 +3122,7 @@
     "NO_EVENT_INTENSITY_CLAIM",
     "NO_PAST_EVENT_INFERENCE",
     "NO_REALITY_FACT",
-    "PRECISION_CLASSIFICATION_ONLY",
-    "NO_OUTCOME_STRENGTH_INFERENCE",
-    "MISSING_EVIDENCE_REMAINS_OPEN",
-    "NO_GUESSING",
+    "NO_UNSUPPORTED_FAMILY_HISTORY",
     "NO_FATE",
     "NO_GUARANTEED_OUTCOME",
     "NO_MEDICAL_CONCLUSION",
@@ -2284,6 +3137,7 @@
     "Each theme has one primary explanation owner; secondary sections apply it without repeating the explanation.",
     "No process narration, PHI OS vocabulary, R4/R5 labels, claim codes, source refs, Authority Pack phrase, JSON-like prose, generic advice wrapper, should/should-not loop, or deterministic predictions.",
     "Evidence-limited sections must disclose limits rather than invent facts. Longer-range development is symbolic integration without dates or event timing.",
+    "House-ruler routes do not imply the ruler occupies the ruled house. Use actual placements and actual aspects. Describe network edges without inventing a named traditional pattern. Attach applying/separating states to discussed edges; counts are technical context.",
     "Omit current-question and reality-context chapter."
   ],
   "governance": {
@@ -2293,5 +3147,5 @@
     "customerCutoverAllowed": false,
     "r5HumanAcceptanceSatisfied": false
   },
-  "authoringPackDigest": "0ce92c69c6ba4b7f86228a52b3642606c0f4ce3161f9cc823e17856943ce4d74"
+  "authoringPackDigest": "4cd0aeab0feeb2b711d2aaa508d58db29eac036d18807a6f2f96cb7c9e9e4f19"
 }

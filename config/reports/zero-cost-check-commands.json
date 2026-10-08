@@ -2298,5 +2298,12 @@
   "check:ast-fp-r5:tl-synthesis": "node scripts/check-ast-fp-r5-tl-reference.mjs synthesis",
   "check:ast-fp-r5:tl-authoring-pack": "node scripts/check-ast-fp-r5-tl-reference.mjs authoring-pack",
   "check:ast-fp-r5:tl-authoring-source-coverage": "node scripts/check-ast-fp-r5-tl-reference.mjs authoring-source-coverage",
-  "check:dossier-cn:golden-closed": "node scripts/check-dossier-cn-golden-closed.mjs"
+  "check:dossier-cn:golden-closed": "node scripts/check-dossier-cn-golden-closed.mjs",
+  "check:pc-r1:personal": "node scripts/check-pc-r1-person-successor.mjs",
+  "check:pc-r1:relationship": "node scripts/check-pc-r1-relationship-successor.mjs",
+  "check:pc-r1:financial": "node scripts/check-pc-r1-financial-successor.mjs",
+  "check:pc-r1:reality": "node scripts/check-pc-r1-reality-successor.mjs",
+  "check:pc-r1:journeys": "node scripts/check-pc-r1-customer-journeys.mjs",
+  "check:pc-r1": "npm run check:pc-r1:personal && npm run check:pc-r1:relationship && npm run check:pc-r1:financial && npm run check:pc-r1:reality && npm run check:pc-r1:journeys",
+  "check:ast-fp-r5:tl-authoring-r1": "node scripts/check-ast-fp-r5-tl-authoring-r1.mjs"
 }

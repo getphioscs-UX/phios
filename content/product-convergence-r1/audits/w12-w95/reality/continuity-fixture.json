@@ -1,0 +1,579 @@
+{
+  "schemaVersion": "PC-R1-MY-REALITY-CANDIDATE-v2",
+  "title": {
+    "en": "Your Reality",
+    "zh": "你的现实"
+  },
+  "domains": [
+    "ME",
+    "RELATIONSHIPS",
+    "FINANCIAL",
+    "CURRENT_REALITY",
+    "WORLD_CONTEXT",
+    "QUESTIONS",
+    "OBSERVATIONS",
+    "NAVIGATION",
+    "REPORTS",
+    "HISTORY"
+  ],
+  "existingWorkspace": {
+    "schemaVersion": "PHI-OS-CX-R10-MY-REALITY-WORKSPACE-v2.0.0",
+    "surface": "MY_REALITY",
+    "locale": "en",
+    "state": "READY",
+    "header": {
+      "title": "My Reality",
+      "subtitle": "One workspace for what is happening, what you are considering, and what changes next."
+    },
+    "contextSummary": {
+      "whatIsHappeningNow": null,
+      "whatHasBeenEstablished": [
+        {
+          "id": "obs-1",
+          "statement": "I changed my schedule on Tuesdays.",
+          "authority": "DECLARED",
+          "sourceRef": "user-observation-1",
+          "entityId": "person-a",
+          "sourceProduct": "PERSONAL",
+          "sourceKind": "CUSTOMER_ENTERED",
+          "active": true,
+          "revision": 2,
+          "createdAt": "2026-10-08T04:00:00Z",
+          "confirmationState": "SOURCE_NATIVE",
+          "reviewedAt": "2026-10-08T04:00:00Z",
+          "reviewAction": "CORRECT"
+        },
+        {
+          "id": "joint",
+          "statement": "A declared shared liability.",
+          "authority": "DECLARED",
+          "sourceRef": "a-declaration",
+          "jointFinancial": true,
+          "confirmedByA": true,
+          "confirmedByB": false,
+          "permissions": {
+            "personA": true,
+            "personB": true,
+            "shared": true
+          },
+          "entityId": "rel",
+          "sourceProduct": "RELATIONSHIP",
+          "sourceKind": "CUSTOMER_ENTERED",
+          "active": true,
+          "revision": 1,
+          "createdAt": "2026-10-08T04:00:00Z",
+          "confirmationState": "DECLARED_BY_A_NOT_CONFIRMED_BY_B"
+        },
+        {
+          "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+          "claimId": "fixture-claim",
+          "claimText": "Offline policy fixture only",
+          "claimType": "POLICY_OR_REGULATION",
+          "sourceId": "offline-fixture-source",
+          "sourceUrl": "https://example.invalid/fixture-policy",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publisher": "Fixture official authority",
+          "title": "Offline regression policy fixture",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-08T04:00:00.000Z",
+          "sourceVersion": "offline-fixture-v1",
+          "freshnessState": "FRESH_UNTIL_SUPERSEDED",
+          "supportLevel": "DIRECT",
+          "jurisdiction": "FIXTURE",
+          "domain": "GENERAL_CURRENT",
+          "conflicts": [],
+          "boundaries": {
+            "searchRankUsedAsAuthority": false,
+            "sourceVotingUsed": false,
+            "lensMutationAllowed": false,
+            "proseGenerationAllowed": false
+          }
+        }
+      ],
+      "whatRemainsUnknown": [],
+      "currentStage": null,
+      "possibleNextDirections": [],
+      "nextStages": []
+    },
+    "currentReality": {
+      "currentSituation": [],
+      "importantFacts": [
+        {
+          "id": "obs-1",
+          "statement": "I changed my schedule on Tuesdays.",
+          "authority": "DECLARED",
+          "sourceRef": "user-observation-1",
+          "entityId": "person-a",
+          "sourceProduct": "PERSONAL",
+          "sourceKind": "CUSTOMER_ENTERED",
+          "active": true,
+          "revision": 2,
+          "createdAt": "2026-10-08T04:00:00Z",
+          "confirmationState": "SOURCE_NATIVE",
+          "reviewedAt": "2026-10-08T04:00:00Z",
+          "reviewAction": "CORRECT"
+        },
+        {
+          "id": "joint",
+          "statement": "A declared shared liability.",
+          "authority": "DECLARED",
+          "sourceRef": "a-declaration",
+          "jointFinancial": true,
+          "confirmedByA": true,
+          "confirmedByB": false,
+          "permissions": {
+            "personA": true,
+            "personB": true,
+            "shared": true
+          },
+          "entityId": "rel",
+          "sourceProduct": "RELATIONSHIP",
+          "sourceKind": "CUSTOMER_ENTERED",
+          "active": true,
+          "revision": 1,
+          "createdAt": "2026-10-08T04:00:00Z",
+          "confirmationState": "DECLARED_BY_A_NOT_CONFIRMED_BY_B"
+        }
+      ],
+      "constraints": [],
+      "openQuestions": [
+        "What remains uncertain?"
+      ],
+      "evidence": [
+        {
+          "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+          "claimId": "fixture-claim",
+          "claimText": "Offline policy fixture only",
+          "claimType": "POLICY_OR_REGULATION",
+          "sourceId": "offline-fixture-source",
+          "sourceUrl": "https://example.invalid/fixture-policy",
+          "authorityClass": "OFFICIAL_PRIMARY",
+          "publisher": "Fixture official authority",
+          "title": "Offline regression policy fixture",
+          "publishedAt": null,
+          "retrievedAt": "2026-10-08T04:00:00.000Z",
+          "sourceVersion": "offline-fixture-v1",
+          "freshnessState": "FRESH_UNTIL_SUPERSEDED",
+          "supportLevel": "DIRECT",
+          "jurisdiction": "FIXTURE",
+          "domain": "GENERAL_CURRENT",
+          "conflicts": [],
+          "boundaries": {
+            "searchRankUsedAsAuthority": false,
+            "sourceVotingUsed": false,
+            "lensMutationAllowed": false,
+            "proseGenerationAllowed": false
+          }
+        }
+      ],
+      "findings": [],
+      "calculations": [],
+      "unknowns": [],
+      "financialState": null
+    },
+    "perspectives": {
+      "items": [],
+      "empty": true
+    },
+    "reading": {
+      "state": "UNKNOWN",
+      "whatStandsOut": [],
+      "patterns": [],
+      "tensions": [],
+      "dependencies": [],
+      "other": [],
+      "unknowns": [],
+      "sources": []
+    },
+    "navigation": {
+      "state": "NOT_ESTABLISHED",
+      "currentPosition": null,
+      "possibleDirections": [],
+      "selectedId": null,
+      "systemSelected": false
+    },
+    "actions": {
+      "items": [],
+      "automaticActionCreated": false
+    },
+    "observe": {
+      "sessionOnly": true,
+      "persisted": false,
+      "fields": [
+        "WHAT_HAPPENED",
+        "NEW_EVIDENCE",
+        "CHANGE"
+      ]
+    },
+    "review": {
+      "state": "NOT_ESTABLISHED",
+      "summary": null,
+      "previous": null,
+      "current": null,
+      "whatChanged": null,
+      "whatRemains": null
+    },
+    "history": {
+      "items": [
+        {
+          "eventId": "event-1",
+          "recordId": "obs-1",
+          "type": "FACT_REVISION",
+          "at": "2026-10-08T04:00:00Z",
+          "source": "user-observation-1",
+          "previousState": null,
+          "newState": {
+            "id": "obs-1",
+            "statement": "I changed my working schedule.",
+            "authority": "DECLARED",
+            "sourceRef": "user-observation-1",
+            "entityId": "person-a",
+            "sourceProduct": "PERSONAL",
+            "sourceKind": "CUSTOMER_ENTERED",
+            "active": true,
+            "revision": 1,
+            "createdAt": "2026-10-08T04:00:00Z",
+            "confirmationState": "SOURCE_NATIVE"
+          },
+          "reason": "Explicitly selected and consented by owner"
+        },
+        {
+          "eventId": "event-2",
+          "recordId": "joint",
+          "type": "FACT_REVISION",
+          "at": "2026-10-08T04:00:00Z",
+          "source": "a-declaration",
+          "previousState": null,
+          "newState": {
+            "id": "joint",
+            "statement": "A declared shared liability.",
+            "authority": "DECLARED",
+            "sourceRef": "a-declaration",
+            "jointFinancial": true,
+            "confirmedByA": true,
+            "confirmedByB": false,
+            "permissions": {
+              "personA": true,
+              "personB": true,
+              "shared": true
+            },
+            "entityId": "rel",
+            "sourceProduct": "RELATIONSHIP",
+            "sourceKind": "CUSTOMER_ENTERED",
+            "active": true,
+            "revision": 1,
+            "createdAt": "2026-10-08T04:00:00Z",
+            "confirmationState": "DECLARED_BY_A_NOT_CONFIRMED_BY_B"
+          },
+          "reason": "Explicitly selected and consented by owner"
+        },
+        {
+          "eventId": "event-3",
+          "recordId": "obs-1",
+          "type": "CUSTOMER_CORRECTION",
+          "at": "2026-10-08T04:00:00Z",
+          "source": "user-observation-1",
+          "previousState": {
+            "id": "obs-1",
+            "statement": "I changed my working schedule.",
+            "authority": "DECLARED",
+            "sourceRef": "user-observation-1",
+            "entityId": "person-a",
+            "sourceProduct": "PERSONAL",
+            "sourceKind": "CUSTOMER_ENTERED",
+            "active": true,
+            "revision": 1,
+            "createdAt": "2026-10-08T04:00:00Z",
+            "confirmationState": "SOURCE_NATIVE"
+          },
+          "newState": {
+            "id": "obs-1",
+            "statement": "I changed my schedule on Tuesdays.",
+            "authority": "DECLARED",
+            "sourceRef": "user-observation-1",
+            "entityId": "person-a",
+            "sourceProduct": "PERSONAL",
+            "sourceKind": "CUSTOMER_ENTERED",
+            "active": true,
+            "revision": 2,
+            "createdAt": "2026-10-08T04:00:00Z",
+            "confirmationState": "SOURCE_NATIVE",
+            "reviewedAt": "2026-10-08T04:00:00Z",
+            "reviewAction": "CORRECT"
+          },
+          "reason": "Customer corrected original wording."
+        }
+      ]
+    },
+    "reports": {
+      "items": []
+    },
+    "sideContext": {
+      "knowledge": [],
+      "evidenceCount": 1,
+      "unknownCount": 0
+    },
+    "continuity": {
+      "state": "NOT_ESTABLISHED",
+      "stage": null,
+      "nextStages": [],
+      "available": false,
+      "href": null,
+      "nextReviewAt": null,
+      "requiresExplicitConsent": true
+    },
+    "governance": {
+      "workspaceCompositionOnly": true,
+      "runtimeAuthorityCreated": false,
+      "realityTruthCreated": false,
+      "navigationChoiceCreated": false,
+      "actionChoiceCreated": false,
+      "observationPersisted": false,
+      "journeyActivated": false,
+      "reportAuthorityCreated": false,
+      "unknownPreserved": true,
+      "createsAuthority": false,
+      "calculates": false,
+      "infersNewFinding": false,
+      "changesMeaning": false,
+      "recommends": false,
+      "createsTruth": false,
+      "createsAvailability": false,
+      "createsEntitlement": false,
+      "createsAuthentication": false,
+      "createsProfessionalJudgment": false
+    }
+  },
+  "accountProjection": {
+    "projection_version": "m4c-w2.v1",
+    "sections": {
+      "current_journeys": [],
+      "past_journeys": [],
+      "reports": [],
+      "book_access": [],
+      "reading_progress": [],
+      "appointments": [],
+      "shared_access": []
+    },
+    "source": "authorised_account_projection",
+    "reads_browser_runtime": false,
+    "writes_runtime_memory": false
+  },
+  "entities": [
+    {
+      "id": "person-a",
+      "kind": "PERSON",
+      "accountId": "fixture-account"
+    },
+    {
+      "id": "person-b",
+      "kind": "PERSON",
+      "accountId": "fixture-account"
+    },
+    {
+      "id": "rel",
+      "kind": "RELATIONSHIP",
+      "accountId": "fixture-account",
+      "participantIds": [
+        "person-a",
+        "person-b"
+      ]
+    },
+    {
+      "id": "household",
+      "kind": "HOUSEHOLD",
+      "accountId": "fixture-account"
+    },
+    {
+      "id": "financial",
+      "kind": "FINANCIAL_REALITY",
+      "accountId": "fixture-account"
+    },
+    {
+      "id": "case",
+      "kind": "REALITY_CASE",
+      "accountId": "fixture-account"
+    },
+    {
+      "id": "report",
+      "kind": "REPORT",
+      "accountId": "fixture-account"
+    }
+  ],
+  "today": [
+    {
+      "id": "obs-1",
+      "statement": "I changed my schedule on Tuesdays.",
+      "authority": "DECLARED",
+      "sourceRef": "user-observation-1",
+      "entityId": "person-a",
+      "sourceProduct": "PERSONAL",
+      "sourceKind": "CUSTOMER_ENTERED",
+      "active": true,
+      "revision": 2,
+      "createdAt": "2026-10-08T04:00:00Z",
+      "confirmationState": "SOURCE_NATIVE",
+      "reviewedAt": "2026-10-08T04:00:00Z",
+      "reviewAction": "CORRECT"
+    },
+    {
+      "id": "joint",
+      "statement": "A declared shared liability.",
+      "authority": "DECLARED",
+      "sourceRef": "a-declaration",
+      "jointFinancial": true,
+      "confirmedByA": true,
+      "confirmedByB": false,
+      "permissions": {
+        "personA": true,
+        "personB": true,
+        "shared": true
+      },
+      "entityId": "rel",
+      "sourceProduct": "RELATIONSHIP",
+      "sourceKind": "CUSTOMER_ENTERED",
+      "active": true,
+      "revision": 1,
+      "createdAt": "2026-10-08T04:00:00Z",
+      "confirmationState": "DECLARED_BY_A_NOT_CONFIRMED_BY_B"
+    }
+  ],
+  "previous": [
+    {
+      "id": "obs-1",
+      "statement": "I changed my working schedule.",
+      "authority": "DECLARED",
+      "sourceRef": "user-observation-1",
+      "entityId": "person-a",
+      "sourceProduct": "PERSONAL",
+      "sourceKind": "CUSTOMER_ENTERED",
+      "active": true,
+      "revision": 1,
+      "createdAt": "2026-10-08T04:00:00Z",
+      "confirmationState": "SOURCE_NATIVE"
+    }
+  ],
+  "whatChanged": [
+    {
+      "eventId": "event-1",
+      "recordId": "obs-1",
+      "type": "FACT_REVISION",
+      "at": "2026-10-08T04:00:00Z",
+      "source": "user-observation-1",
+      "previousState": null,
+      "newState": {
+        "id": "obs-1",
+        "statement": "I changed my working schedule.",
+        "authority": "DECLARED",
+        "sourceRef": "user-observation-1",
+        "entityId": "person-a",
+        "sourceProduct": "PERSONAL",
+        "sourceKind": "CUSTOMER_ENTERED",
+        "active": true,
+        "revision": 1,
+        "createdAt": "2026-10-08T04:00:00Z",
+        "confirmationState": "SOURCE_NATIVE"
+      },
+      "reason": "Explicitly selected and consented by owner"
+    },
+    {
+      "eventId": "event-2",
+      "recordId": "joint",
+      "type": "FACT_REVISION",
+      "at": "2026-10-08T04:00:00Z",
+      "source": "a-declaration",
+      "previousState": null,
+      "newState": {
+        "id": "joint",
+        "statement": "A declared shared liability.",
+        "authority": "DECLARED",
+        "sourceRef": "a-declaration",
+        "jointFinancial": true,
+        "confirmedByA": true,
+        "confirmedByB": false,
+        "permissions": {
+          "personA": true,
+          "personB": true,
+          "shared": true
+        },
+        "entityId": "rel",
+        "sourceProduct": "RELATIONSHIP",
+        "sourceKind": "CUSTOMER_ENTERED",
+        "active": true,
+        "revision": 1,
+        "createdAt": "2026-10-08T04:00:00Z",
+        "confirmationState": "DECLARED_BY_A_NOT_CONFIRMED_BY_B"
+      },
+      "reason": "Explicitly selected and consented by owner"
+    },
+    {
+      "eventId": "event-3",
+      "recordId": "obs-1",
+      "type": "CUSTOMER_CORRECTION",
+      "at": "2026-10-08T04:00:00Z",
+      "source": "user-observation-1",
+      "previousState": {
+        "id": "obs-1",
+        "statement": "I changed my working schedule.",
+        "authority": "DECLARED",
+        "sourceRef": "user-observation-1",
+        "entityId": "person-a",
+        "sourceProduct": "PERSONAL",
+        "sourceKind": "CUSTOMER_ENTERED",
+        "active": true,
+        "revision": 1,
+        "createdAt": "2026-10-08T04:00:00Z",
+        "confirmationState": "SOURCE_NATIVE"
+      },
+      "newState": {
+        "id": "obs-1",
+        "statement": "I changed my schedule on Tuesdays.",
+        "authority": "DECLARED",
+        "sourceRef": "user-observation-1",
+        "entityId": "person-a",
+        "sourceProduct": "PERSONAL",
+        "sourceKind": "CUSTOMER_ENTERED",
+        "active": true,
+        "revision": 2,
+        "createdAt": "2026-10-08T04:00:00Z",
+        "confirmationState": "SOURCE_NATIVE",
+        "reviewedAt": "2026-10-08T04:00:00Z",
+        "reviewAction": "CORRECT"
+      },
+      "reason": "Customer corrected original wording."
+    }
+  ],
+  "whatRemainsOpen": [
+    "What remains uncertain?"
+  ],
+  "whatToObserve": [],
+  "worldContext": [
+    {
+      "schemaVersion": "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0",
+      "claimId": "fixture-claim",
+      "claimText": "Offline policy fixture only",
+      "claimType": "POLICY_OR_REGULATION",
+      "sourceId": "offline-fixture-source",
+      "sourceUrl": "https://example.invalid/fixture-policy",
+      "authorityClass": "OFFICIAL_PRIMARY",
+      "publisher": "Fixture official authority",
+      "title": "Offline regression policy fixture",
+      "publishedAt": null,
+      "retrievedAt": "2026-10-08T04:00:00.000Z",
+      "sourceVersion": "offline-fixture-v1",
+      "freshnessState": "FRESH_UNTIL_SUPERSEDED",
+      "supportLevel": "DIRECT",
+      "jurisdiction": "FIXTURE",
+      "domain": "GENERAL_CURRENT",
+      "conflicts": [],
+      "boundaries": {
+        "searchRankUsedAsAuthority": false,
+        "sourceVotingUsed": false,
+        "lensMutationAllowed": false,
+        "proseGenerationAllowed": false
+      }
+    }
+  ],
+  "productionRouteActivated": false,
+  "productionPersistence": false
+}
