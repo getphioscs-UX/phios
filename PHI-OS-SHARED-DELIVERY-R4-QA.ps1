@@ -6697,7 +6697,32 @@ if(!(Test-Path -LiteralPath 'package.json')){throw 'Not a full repository'}
 if($Action -ne 'Deploy') {
  $temporaryPatch=Join-Path ([IO.Path]::GetTempPath()) ('phios-r4-'+[guid]::NewGuid().ToString()+'.patch')
  try {
-  [IO.File]::WriteAllText($temporaryPatch,$patchText+[Environment]::NewLine,[Text.UTF8Encoding]::new($false))
+  # Accept only the observed JSON-import compatibility edit; retain full patch preflight.
+  $effectivePatch=$patchText
+  $compatibilityFiles=@(
+   'functions/account/ziwei-account-delivery.js',
+   'functions/api/shared-report-e2e-proof.js',
+   'functions/report-delivery/ziwei-vfr-r1-generation.js'
+  )
+  foreach($relativePath in $compatibilityFiles) {
+   $currentText=[IO.File]::ReadAllText((Join-Path (Get-Location).Path $relativePath))
+   $sectionStart=$effectivePatch.IndexOf('diff --git a/'+$relativePath+' b/'+$relativePath)
+   if($sectionStart -lt 0){throw "Missing patch section: $relativePath"}
+   $sectionEnd=$effectivePatch.IndexOf('diff --git ', $sectionStart+1)
+   if($sectionEnd -lt 0){$sectionEnd=$effectivePatch.Length}
+   $section=$effectivePatch.Substring($sectionStart,$sectionEnd-$sectionStart)
+   foreach($line in ($section -split "`n")) {
+    if($line.StartsWith('-import contract from ') -and $line.Contains(" with { type: 'json' };")) {
+     $oldImport=$line.Substring(1).TrimEnd("`r")
+     $compatibleImport=$oldImport.Replace(" with { type: 'json' };",';')
+     if(($currentText -split "`r?`n") -contains $compatibleImport) {
+      $section=$section.Replace('-'+$oldImport,'-'+$compatibleImport)
+     }
+    }
+   }
+   $effectivePatch=$effectivePatch.Substring(0,$sectionStart)+$section+$effectivePatch.Substring($sectionEnd)
+  }
+  [IO.File]::WriteAllText($temporaryPatch,$effectivePatch+[Environment]::NewLine,[Text.UTF8Encoding]::new($false))
   Run-Checked 'git' @('apply','--check','--whitespace=nowarn',$temporaryPatch)
   if($Action -eq 'Apply') {
    Run-Checked 'git' @('apply','--whitespace=nowarn',$temporaryPatch)

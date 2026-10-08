@@ -87,3 +87,62 @@ html[lang=zh-Hans] .pe-dossier .pe-body{font-size:12pt;line-height:1.8}
 .pe-dossier .pe-reading-row p{margin:1mm 0}
 @media screen and (max-width:800px){.pe-dossier .pe-zh,.pe-dossier .pe-en{font-size:17px;line-height:1.8}.pe-dossier .pe-reading-table{font-size:15px}.pe-dossier .pe-reading-row{grid-template-columns:1fr 1.2fr;gap:12px}.pe-dossier h2 small[lang=en]{font-size:19px}.pe-dossier .pe-language-divider{font-size:11px}}
 .pe-dossier .pe-reading-table small[lang=en],.pe-dossier .pe-evidence-row small[lang=en]{font-size:1em}
+/* Diagram-local layout; protected artwork, scrim and narrative remain intact. */
+.pe-dossier .pe-semantic-diagram{font:10pt/1.4 system-ui;color:#293f4a}
+.pe-dossier .pe-support-figure span[lang=en]{display:block}
+.pe-dossier .pe-diagram-description,.pe-dossier .pe-diagram-alternative,.pe-dossier .pe-diagram-provenance{font:9.5pt/1.4 system-ui;margin:2mm 0}
+.pe-dossier .pe-diagram-node{border:1px solid #baa77e;border-radius:2mm;padding:2.5mm;min-width:0;overflow-wrap:anywhere;position:relative}
+.pe-dossier .pe-diagram-node[data-node-state=missing]{border-style:dashed}
+.pe-dossier .pe-diagram-node[data-node-state=source-linked]{border-left:3px solid #587f9b}
+.pe-dossier .pe-diagram-node[data-node-state=conceptual]{border-style:dotted}
+.pe-dossier .pe-diagram-node p{margin:1.5mm 0;font:9pt/1.35 system-ui}
+.pe-dossier .pe-diagram-node small{font:8.5pt/1.3 system-ui}
+.pe-dossier .pe-diagram-edge{text-align:center;color:#516d83;font:16pt/1.1 system-ui;position:relative;margin:1mm 0}
+.pe-dossier .pe-diagram-edge span{font:8pt/1.2 system-ui;margin-left:2mm}
+.pe-dossier .pe-diagram-edge[data-edge-state=recorded]{border-left:2px solid #587f9b}
+.pe-dossier .pe-source-root{margin:0 0 5mm}
+.pe-dossier .pe-topology-branches{display:grid;grid-template-columns:1fr 1fr;gap:3mm;border-left:1px solid #baa77e;padding-left:5mm;margin-left:4mm}
+.pe-dossier .pe-topology-branch{position:relative}
+.pe-dossier .pe-topology-branch::before{content:'';position:absolute;left:-5mm;top:7mm;width:5mm;border-top:1px solid #baa77e}
+.pe-dossier .pe-slot-branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3mm}
+.pe-dossier .pe-context-lanes,.pe-dossier .pe-comparison-states,.pe-dossier .pe-relationship-perspectives,.pe-dossier .pe-work-layers,.pe-dossier .pe-comparison-inputs{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.pe-dossier .pe-context-lanes{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pe-dossier .pe-work-matrix{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin:3mm 0}
+.pe-dossier .pe-relationship-links{display:flex;gap:3mm;justify-content:space-around;margin:3mm 0}
+.pe-dossier .pe-decision-sequence,.pe-dossier .pe-reality-prerequisites{max-width:100%;margin:3mm 0}
+.pe-dossier .pe-decision-sequence .pe-diagram-node,.pe-dossier .pe-reality-prerequisites .pe-diagram-node{display:grid;grid-template-columns:35mm minmax(0,1fr);gap:2mm;padding:2mm}
+.pe-dossier .pe-decision-sequence .pe-diagram-node small,.pe-dossier .pe-reality-prerequisites .pe-diagram-node small{grid-column:2}
+.pe-dossier .pe-native-radar{width:68mm;max-width:100%;margin:0 auto}
+.pe-dossier .pe-pattern-panel h3,.pe-dossier .pe-native-series h3{font:600 10pt/1.4 system-ui;margin:2mm 0}
+.pe-dossier .pe-axis-legend{display:grid;grid-template-columns:1fr 1fr;gap:2mm}
+.pe-dossier .pe-axis-legend>div{display:grid;grid-template-columns:5mm minmax(0,1fr) auto;gap:2mm;padding:1mm;border-bottom:1px solid #baa77e;font:9pt/1.3 system-ui}
+.pe-dossier .pe-native-series{display:grid;grid-template-columns:1fr 1fr;gap:2mm;font:9pt/1.3 system-ui}
+.pe-dossier .pe-native-series h3,.pe-dossier .pe-native-series>p{grid-column:1/-1;margin:0}
+.pe-dossier .pe-native-series>div{min-width:0}
+@media print{
+ .pe-dossier .pe-source-topology{display:grid;grid-template-columns:29mm minmax(0,1fr);gap:2mm;margin:2mm 0;align-items:center}
+ .pe-dossier .pe-source-root{margin:0}
+ .pe-dossier .pe-topology-branches{gap:2mm;padding-left:3mm;margin-left:1mm}
+ .pe-dossier .pe-topology-branch::before{left:-3mm;width:3mm}
+ .pe-dossier .pe-source-topology .pe-diagram-node{font-size:9pt;padding:1.5mm}
+ .pe-dossier .pe-source-topology .pe-diagram-node small{display:inline;font-size:8pt}
+ .pe-dossier .pe-source-topology .pe-diagram-node p{margin:.5mm 0}
+ .pe-dossier .pe-diagram-provenance span[lang=en]{display:inline}
+ .pe-dossier .pe-diagram-description,.pe-dossier .pe-diagram-alternative{margin:1.5mm 0}
+ .pe-dossier .pe-diagram-node{padding:2mm}
+ .pe-dossier .pe-diagram-edge{display:flex;justify-content:center;align-items:center;height:5mm;margin:.5mm 0;font-size:13pt}
+ .pe-dossier .pe-decision-sequence .pe-diagram-node,.pe-dossier .pe-reality-prerequisites .pe-diagram-node{grid-template-columns:28mm minmax(0,1fr) 23mm;gap:2mm}
+ .pe-dossier .pe-decision-sequence .pe-diagram-node small,.pe-dossier .pe-reality-prerequisites .pe-diagram-node small{grid-column:3;align-self:center}
+ .pe-dossier .pe-work-matrix{gap:2mm;margin:2mm 0}
+ .pe-dossier .pe-work-matrix .pe-diagram-node{padding:1.5mm}
+ .pe-dossier .pe-work-matrix .pe-diagram-node p{margin:1mm 0}
+ .pe-dossier .pe-work-layers{grid-template-columns:1fr 1fr;gap:2mm}
+}
+@media screen and (max-width:800px){
+ .pe-dossier .pe-semantic-diagram{font-size:15px}
+ .pe-dossier .pe-diagram-description,.pe-dossier .pe-diagram-alternative,.pe-dossier .pe-diagram-provenance,.pe-dossier .pe-diagram-node p,.pe-dossier .pe-diagram-node small,.pe-dossier .pe-pattern-panel h3,.pe-dossier .pe-native-series,.pe-dossier .pe-native-series h3,.pe-dossier .pe-axis-legend>div{font-size:14px}
+ .pe-dossier .pe-slot-branches,.pe-dossier .pe-context-lanes,.pe-dossier .pe-topology-branches,.pe-dossier .pe-axis-legend,.pe-dossier .pe-native-series,.pe-dossier .pe-comparison-inputs,.pe-dossier .pe-comparison-states,.pe-dossier .pe-relationship-perspectives,.pe-dossier .pe-work-layers{grid-template-columns:1fr}
+ .pe-dossier .pe-decision-sequence .pe-diagram-node,.pe-dossier .pe-reality-prerequisites .pe-diagram-node{grid-template-columns:1fr}
+ .pe-dossier .pe-decision-sequence .pe-diagram-node small,.pe-dossier .pe-reality-prerequisites .pe-diagram-node small{grid-column:1}
+ .pe-dossier .pe-relationship-links{display:block}
+}
