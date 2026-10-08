@@ -1,45 +1,125 @@
 {
   "schemaVersion": "PHI-OS-SHARED-REPORT-DELIVERY-E2E-CONTRACT-v2.0.0",
-  "supersedes": "content/reports/shared-report-delivery-e2e-contract-v1.json",
-  "historicalContractPreserved": true,
-  "state": "BLOCKED_VFR_ADMISSION",
-  "profiles": {
-    "ZWR:ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3": {
-      "methodId": "ZWR",
-      "compositionVersion": "ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3",
-      "candidateSchemaVersion": "ZWR-VFR-R1-AUTO-DEEP-CANDIDATE-v3",
-      "publicationIrVersion": "ZWR-VFR-R1-DEEP-PUBLICATION-IR-v1",
-      "pagePlanVersion": "ZWR-VFR-R1-ADAPTIVE-LANGUAGE-SEQUENTIAL-v6",
-      "pagePolicy": "RECOMPUTE_FROM_ACCEPTED_PUBLICATION_IR",
-      "locales": [
-        "en",
-        "zh-Hans"
-      ],
-      "admission": {
-        "state": "BLOCKED",
-        "sourceAcceptanceDigest": null,
-        "rendererAcceptanceDigest": null,
-        "rendererWired": false,
-        "productionAdmissionGranted": false,
-        "sourceResultDigest": null,
-        "publicationIrDigest": null,
-        "pagePlanDigest": null
-      },
-      "blockers": [
-        "VFR currently inherits old production snapshot ID and 33-page report rather than a newly bound VFR delivery snapshot.",
-        "Private renderer has no VFR composition adapter.",
-        "No accepted VFR source/publication/render profile admission receipt is bound to this delivery version.",
-        "Live authenticated purchase/consent/release/private Library/two-session account evidence remains uncollected."
-      ]
-    }
-  },
-  "proofActions": [
-    "open-released",
-    "reopen"
+  "status": "METHOD_MIGRATION_IN_PROGRESS",
+  "predecessor": "content/reports/shared-report-delivery-e2e-contract-v1.json",
+  "sharedInfrastructureRequirements": [
+    "AUTHENTICATED_ACCOUNT",
+    "REAL_ENTITLEMENT",
+    "CANONICAL_SUBJECT_BINDING",
+    "METHOD_GENERATION_PASS",
+    "IMMUTABLE_SEMANTIC_SNAPSHOT",
+    "PRIVATE_RENDERER_PASS",
+    "RELEASED_MATERIAL",
+    "ACCOUNT_LIBRARY_VISIBLE",
+    "NEW_AUTHENTICATED_SESSION",
+    "REOPEN_SAME_REPORT_ID",
+    "SAME_SEMANTIC_SNAPSHOT",
+    "SAME_RENDERED_MATERIAL_IDENTITY",
+    "NO_PROVIDER_REGENERATION_ON_REOPEN",
+    "NO_RENDERER_REGENERATION_ON_REOPEN",
+    "SECOND_ACCOUNT_DENIAL",
+    "RENDERER_STABILITY_PASS"
   ],
-  "generateInProof": false,
-  "providerRegenerationOnReopen": false,
-  "sharedDeliveryAuthorityEligible": false,
-  "productionActivated": false,
-  "auditedRepositoryHead": "2259cf66aa2a4c47bb99d775acb58cb95567d60f"
+  "methodDeltaRequirements": [
+    "METHOD_AUTHORITY",
+    "METHOD_GENERATION",
+    "METHOD_PUBLICATION_PROFILE",
+    "METHOD_RENDER_CONTRACT",
+    "METHOD_RELEASE_ADAPTER",
+    "METHOD_METADATA",
+    "METHOD_SPECIFIC_ACCESS_NEGATIVES"
+  ],
+  "rendererContract": {
+    "dispatchOwner": "functions/report-delivery/method-render-contract.js",
+    "expectedPages": "METHOD_PROFILE",
+    "historicalSnapshotsPreserved": true
+  },
+  "materialContract": {
+    "owner": "functions/account/method-report-material.js",
+    "storage": "PRIVATE_REPORTS",
+    "immutable": true,
+    "digestRequired": true
+  },
+  "libraryContract": {
+    "authorizationOnEveryRead": true,
+    "generationCalls": 0
+  },
+  "reopenContract": {
+    "providerCalls": 0,
+    "rendererCalls": 0,
+    "sameReportId": true,
+    "sameSnapshot": true,
+    "sameOutputDigest": true
+  },
+  "accessIsolationContract": {
+    "guest": "DENIED",
+    "wrongAccount": "DENIED",
+    "wrongSubject": "DENIED",
+    "missingEntitlement": "DENIED",
+    "tamperedSnapshot": "DENIED",
+    "tamperedMaterial": "DENIED"
+  },
+  "liveProofContract": {
+    "automaticExecution": false,
+    "finalReceiptOnlyAfterRealProof": true,
+    "stabilityRuns": [
+      3,
+      5
+    ],
+    "allTargetDeltasRequired": true,
+    "requiredProofFields": [
+      "generationReleaseProven",
+      "releasedMaterialProven",
+      "reopenProven",
+      "sameImmutableSnapshot",
+      "sameImmutableRenderedMaterial",
+      "noProviderRegenerationOnReopen",
+      "noRendererRegenerationOnReopen"
+    ],
+    "phases": [
+      "METHOD_GENERATE_RELEASE",
+      "OPEN_RELEASED",
+      "LOGOUT",
+      "NEW_LOGIN",
+      "REOPEN",
+      "SECOND_ACCOUNT_ISOLATION",
+      "FINALIZE"
+    ],
+    "openReleasedMayProveGenerationRelease": false
+  },
+  "reusePolicy": {
+    "fullSharedInfrastructureProofRequiredOnce": true,
+    "repeatedPerMethodFullE2E": false,
+    "methodCorrectnessInherited": false
+  },
+  "privacy": {
+    "rawAccountIdInRepo": false,
+    "rawSessionIdInRepo": false,
+    "liveProofRemainsPrivate": true,
+    "privateReportBytesPublic": false,
+    "privatePersonReferences": "HASH_ONLY"
+  },
+  "methodDeltaRegistryRef": "content/reports/method-report-delivery-delta-registry-v1.json",
+  "sessionContract": {
+    "owner": "functions/account/oidc-auth.js",
+    "differentVerifiedSessionRequired": true,
+    "previousSessionRevokedRequired": true,
+    "rawSessionIdsPersisted": false
+  },
+  "rendererReceiptContract": {
+    "expectedPageRule": "RESOLVED_METHOD_PROFILE",
+    "requiredFields": [
+      "pagePlanDigest",
+      "expectedPageCount",
+      "actualPageCount",
+      "pageSequenceValid",
+      "overflowCount",
+      "brokenImages",
+      "hiddenRequiredContentCount",
+      "errorCount",
+      "rendererVersion",
+      "snapshotId",
+      "outputDigest"
+    ]
+  }
 }

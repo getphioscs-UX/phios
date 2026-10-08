@@ -8,6 +8,8 @@ const hash=b=>createHash('sha256').update(b).digest('hex');
 const args=process.argv.slice(2),i=args.indexOf('--repo');if(i<0||!args[i+1])throw Error('Use --repo C:\\phios [--global-check]');
 const repo=path.resolve(args[i+1]);if(!fs.existsSync(path.join(repo,'package.json')))throw Error('NOT_A_FULL_REPOSITORY');
 const file=p=>path.join(repo,p);
+const baseline=spawnSync('git',['rev-parse','HEAD'],{cwd:repo,encoding:'utf8'});
+if(baseline.status!==0||baseline.stdout.trim()!==manifest.auditHead)throw Error('R2_BASELINE_MISMATCH_RECONCILE_REQUIRED');
 // Preflight every audited input before changing any file. No forced patch application.
 for(const [p,want] of Object.entries(manifest.unchangedAuditInputs)){if(!fs.existsSync(file(p))||hash(fs.readFileSync(file(p)))!==want)throw Error('AUDITED_INPUT_CHANGED '+p);}
 for(const f of manifest.files){const got=fs.existsSync(file(f.path))?hash(fs.readFileSync(file(f.path))):null;if(got!==f.before&&got!==f.after)throw Error('BASELINE_MISMATCH '+f.path);}

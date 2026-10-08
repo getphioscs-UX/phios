@@ -6,6 +6,7 @@ const hub=fs.readFileSync('tools/review/PROFILE-PERSONAL-EVIDENCE-R1-HUMAN-REVIE
 const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
 const results=[];fs.mkdirSync('output/pdf/w11r6',{recursive:true});fs.mkdirSync(dir+'after',{recursive:true});
 try{const page=await browser.newPage();
+let remoteRequestsBlocked=0;await page.route('**/*',route=>{const url=route.request().url();if(/^https?:/.test(url)){remoteRequestsBlocked++;return route.abort();}return route.continue();});
 for(let n=1;n<=11;n++){
  const id='CASE-'+String(n).padStart(2,'0');let html=fs.readFileSync(root+id+'-bilingual-dossier.html','utf8');for(const [url,data]of Object.entries(assets))html=html.replaceAll(url,data);
  if(process.argv.some(a=>a.startsWith('--case='))&&!process.argv.includes('--case='+id))continue;
@@ -18,7 +19,7 @@ for(let n=1;n<=11;n++){
  const errors=audit.filter(p=>p.blank||p.readingOverlap||p.figures.some(f=>f.footerOverlap||f.childOverflow));
  if(errors.length){console.log(id,JSON.stringify(errors));for(const fid of errors.flatMap(p=>p.figures.map(f=>f.id))){const f=page.locator('[data-pfig="'+fid+'"]');await f.screenshot({path:dir+'after/'+id+'-'+fid+'-diagnostic.png'});console.log(fid,await f.evaluate(e=>[...e.children].map(c=>({class:c.className,height:c.getBoundingClientRect().height}))));}}assert.equal(errors.length,0,id+' A4 figure/page overlap');
  assert(audit.every(p=>Math.abs(p.width-793.7)<2&&Math.abs(p.height-1122.5)<2),'Physical A4 dimensions');
- if(n===1){fs.writeFileSync(dir+'PRD-W11R6-CASE-01-PUBLICATION-REVIEW.html',html);for(const f of await page.locator('figure[data-pfig]').all()){const fid=await f.getAttribute('data-pfig');await f.screenshot({path:dir+'after/'+id+'-'+fid+'.png'});await f.locator('xpath=ancestor::article[1]').screenshot({path:dir+'after/'+id+'-'+fid+'-page.png'});}}
+ if(n===1){fs.writeFileSync(dir+'PRD-W11R6-CASE-01-PUBLICATION-REVIEW.html',fs.readFileSync(root+id+'-bilingual-dossier.html','utf8'));for(const f of await page.locator('figure[data-pfig]').all()){const fid=await f.getAttribute('data-pfig');await f.screenshot({path:dir+'after/'+id+'-'+fid+'.png'});await f.locator('xpath=ancestor::article[1]').screenshot({path:dir+'after/'+id+'-'+fid+'-page.png'});}}
  if([1,8,9].includes(n)&&!process.argv.includes('--no-pdf'))await page.pdf({path:'output/pdf/w11r6/'+(n===1?'PRD-W11R6-CASE-01-PUBLICATION-REVIEW.pdf':id+'-bilingual-dossier.pdf'),format:'A4',preferCSSPageSize:true,printBackground:true});
  if([8,9].includes(n))for(const fid of ['PFIG-002','PFIG-004','PFIG-005','PFIG-009'])await page.locator('[data-pfig="'+fid+'"]').screenshot({path:dir+'after/'+id+'-'+fid+'.png'});
  await page.emulateMedia({media:'screen'});await page.setViewportSize({width:390,height:844});
@@ -27,5 +28,6 @@ for(let n=1;n<=11;n++){
  if(n===1)for(const f of await page.locator('figure[data-pfig]').all())await f.screenshot({path:dir+'after/'+id+'-'+await f.getAttribute('data-pfig')+'-mobile.png'});
  results.push({id,status:'PASS',pages:audit.length,pageAudit:audit,mobile});console.log(id+' A4 + mobile PASS');
 }
-fs.writeFileSync(dir+'browser-results.json',JSON.stringify({timestamp:new Date().toISOString(),results,status:'PASS'},null,2));
+assert.equal(remoteRequestsBlocked,0,'Publication must use local/embedded assets only');
+fs.writeFileSync(dir+'browser-results.json',JSON.stringify({timestamp:new Date().toISOString(),results,status:'PASS',networkEvidence:{remoteRequestsBlocked,providerCalls:0,openAiCalls:0,assetsDecodedLocally:true}},null,2));
 }finally{await browser.close();}

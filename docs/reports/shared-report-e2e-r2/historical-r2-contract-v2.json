@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-REPORT-DELIVERY-E2E-CONTRACT-v2.0.0",
+  "supersedes": "content/reports/shared-report-delivery-e2e-contract-v1.json",
+  "historicalContractPreserved": true,
+  "state": "BLOCKED_VFR_ADMISSION",
+  "profiles": {
+    "ZWR:ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3": {
+      "methodId": "ZWR",
+      "compositionVersion": "ZIWEI-VFR-R1-AUTO-DEEP-GENERATION-v3",
+      "candidateSchemaVersion": "ZWR-VFR-R1-AUTO-DEEP-CANDIDATE-v3",
+      "publicationIrVersion": "ZWR-VFR-R1-DEEP-PUBLICATION-IR-v1",
+      "pagePlanVersion": "ZWR-VFR-R1-ADAPTIVE-LANGUAGE-SEQUENTIAL-v6",
+      "pagePolicy": "RECOMPUTE_FROM_ACCEPTED_PUBLICATION_IR",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "admission": {
+        "state": "BLOCKED",
+        "sourceAcceptanceDigest": null,
+        "rendererAcceptanceDigest": null,
+        "rendererWired": false,
+        "productionAdmissionGranted": false,
+        "sourceResultDigest": null,
+        "publicationIrDigest": null,
+        "pagePlanDigest": null
+      },
+      "blockers": [
+        "VFR currently inherits old production snapshot ID and 33-page report rather than a newly bound VFR delivery snapshot.",
+        "Private renderer has no VFR composition adapter.",
+        "No accepted VFR source/publication/render profile admission receipt is bound to this delivery version.",
+        "Live authenticated purchase/consent/release/private Library/two-session account evidence remains uncollected."
+      ]
+    }
+  },
+  "proofActions": [
+    "open-released",
+    "reopen"
+  ],
+  "generateInProof": false,
+  "providerRegenerationOnReopen": false,
+  "sharedDeliveryAuthorityEligible": false,
+  "productionActivated": false,
+  "auditedRepositoryHead": "2259cf66aa2a4c47bb99d775acb58cb95567d60f"
+}

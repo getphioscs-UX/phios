@@ -119,7 +119,13 @@ html[lang=zh-Hans] .pe-dossier .pe-body{font-size:12pt;line-height:1.8}
 .pe-dossier .pe-native-series{display:grid;grid-template-columns:1fr 1fr;gap:2mm;font:9pt/1.3 system-ui}
 .pe-dossier .pe-native-series h3,.pe-dossier .pe-native-series>p{grid-column:1/-1;margin:0}
 .pe-dossier .pe-native-series>div{min-width:0}
+.pe-dossier .pe-admitted-comparison{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm;border-top:1px solid #baa77e;padding:2mm 0;font:9pt/1.3 system-ui}
 @media print{
+ .pe-dossier .pe-support-figure figcaption span[lang=en]{display:inline}
+ .pe-dossier .pe-support-figure figcaption span[lang=en]::before{content:' / '}
+ .pe-dossier .pe-native-radar{width:60mm}
+ .pe-dossier .pe-native-series span[lang=en]{display:inline}
+ .pe-dossier .pe-native-series span[lang=en]::before,.pe-dossier .pe-diagram-provenance span[lang=en]::before{content:' / '}
  .pe-dossier .pe-source-topology{display:grid;grid-template-columns:29mm minmax(0,1fr);gap:2mm;margin:2mm 0;align-items:center}
  .pe-dossier .pe-source-root{margin:0}
  .pe-dossier .pe-topology-branches{gap:2mm;padding-left:3mm;margin-left:1mm}
@@ -145,4 +151,5 @@ html[lang=zh-Hans] .pe-dossier .pe-body{font-size:12pt;line-height:1.8}
  .pe-dossier .pe-decision-sequence .pe-diagram-node,.pe-dossier .pe-reality-prerequisites .pe-diagram-node{grid-template-columns:1fr}
  .pe-dossier .pe-decision-sequence .pe-diagram-node small,.pe-dossier .pe-reality-prerequisites .pe-diagram-node small{grid-column:1}
  .pe-dossier .pe-relationship-links{display:block}
+ .pe-dossier .pe-admitted-comparison{grid-template-columns:1fr;font-size:14px}
 }

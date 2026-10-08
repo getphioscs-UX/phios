@@ -49,6 +49,7 @@ function batchPack(pack,ids){
   authorityDigest:pack.authorityDigest
  });
 }
+export async function zwrVfrPromptIdentity(){return sha256Stable({composerVersion:ZWR_VFR_FIVE_CALL_COMPOSER_VERSION,manuscriptVersion:ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,prompts:ZWR_VFR_FIVE_CALL_BATCHES.map(batchPrompt),responseSchema:'sections:rawManuscriptSections'});}
 export function planZwrFiveCallExperiment({pack}={}){
  if(pack?.schemaVersion!=='ZWR-VFR-R1-COMPACT-AUTHORING-PACK-v1')throw Error('ZWR_FIVE_CALL_COMPACT_PACK_REQUIRED');
  const {route,model}=modelRecord();

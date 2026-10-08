@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import {writeReviewFile} from './lib/w11r6-review-io.mjs';
 import {parseHTML} from 'linkedom';
 import {buildProfileCustomerVisualProjection} from '../functions/profile/profile-customer-visual-projection.js';
 import {buildPersonalEvidencePublicationProjection} from '../functions/profile/personal-evidence-publication-projection.js';
@@ -52,8 +53,8 @@ for(const p of baseline.protectedAssets)assert.equal(hash(Buffer.from(assets[p.u
 const connected=read(root+'CASE-09-source-view.json'),synthetic=buildProfileCustomerVisualProjection({progressiveView:connected,confirmations:[{id:'W11R6-SYNTHETIC-ONLY',signalRef:connected.signalCards[0].signalRef,contextType:'WORK',confirmation:'HELPS_ME',label:'Synthetic review-fixture observation'}]});
 for(const id of ['PFIG-004','PFIG-005','PFIG-009'])assert.equal(synthetic.figures.find(f=>f.pfig===id).state,'READY');
 const syntheticHtml='<html><head><meta charset="utf-8"></head><body><h1>SYNTHETIC FIXTURE ONLY / 仅合成测试资料</h1><p>Not customer evidence; never imported into CASE-01 / 不属于客户证据；不导入 CASE-01</p>'+synthetic.figures.filter(f=>['PFIG-004','PFIG-005','PFIG-009'].includes(f.pfig)).map(f=>renderPersonalEvidenceFigure(f,{locale:'bilingual',publicationSources:connected.signalCards})).join('')+'</body></html>';
-fs.writeFileSync(dir+'synthetic-explicit-observation.html',syntheticHtml);
-fs.writeFileSync(dir+'PRD-W11R6-FIGURE-AUTHORITY-MAP.json',JSON.stringify({timestamp:new Date().toISOString(),caseId:'CASE-01',canonicalNamesRetained:true,reviewLabelReconciliation:{'Evidence structure / Personality pattern':'PFIG-002','Decision':'PFIG-008','Relationship':'PFIG-007','Context':'PFIG-004','Cross-source':'PFIG-005'},figures:authority},null,2));
-fs.writeFileSync(dir+'machine-results.json',JSON.stringify({timestamp:new Date().toISOString(),mode,status:'PASS',results,synthetic:{scope:'TEST_FIXTURE_ONLY',readyIds:['PFIG-004','PFIG-005','PFIG-009'],customerSourceMutated:false}},null,2));
-fs.writeFileSync(dir+'PRD-W11R6-PROTECTED-ASSET-DIFF.json',JSON.stringify({timestamp:new Date().toISOString(),status:'PASS',artwork:baseline.protectedAssets.map(a=>({...a,changed:false})),protectedBodyDom:'EXACT',sourceViewHashes:'EXACT',traceHashes:'EXACT',baseline40PagePdf:'UNAVAILABLE_NO_PIXEL_EQUIVALENCE_CLAIM'},null,2));
+writeReviewFile(dir+'synthetic-explicit-observation.html',syntheticHtml);
+writeReviewFile(dir+'PRD-W11R6-FIGURE-AUTHORITY-MAP.json',JSON.stringify({timestamp:new Date().toISOString(),caseId:'CASE-01',canonicalNamesRetained:true,reviewLabelReconciliation:{'Evidence structure / Personality pattern':'PFIG-002','Decision':'PFIG-008','Relationship':'PFIG-007','Context':'PFIG-004','Cross-source':'PFIG-005'},figures:authority},null,2));
+writeReviewFile(dir+'machine-results.json',JSON.stringify({timestamp:new Date().toISOString(),mode,status:'PASS',results,synthetic:{scope:'TEST_FIXTURE_ONLY',readyIds:['PFIG-004','PFIG-005','PFIG-009'],customerSourceMutated:false}},null,2));
+writeReviewFile(dir+'PRD-W11R6-PROTECTED-ASSET-DIFF.json',JSON.stringify({timestamp:new Date().toISOString(),status:'PASS',artwork:baseline.protectedAssets.map(a=>({...a,changed:false})),protectedBodyDom:'EXACT',sourceViewHashes:'EXACT',traceHashes:'EXACT',baseline40PagePdf:'UNAVAILABLE_NO_PIXEL_EQUIVALENCE_CLAIM'},null,2));
 console.log('W11R6 '+mode+' PASS: 11 cases, nine semantic grammars, exact provenance and protected DOM; synthetic fixture remains separate.');

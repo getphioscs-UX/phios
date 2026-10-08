@@ -11,7 +11,7 @@ assert.equal(ZWR_VFR_RENDERER_VERSION,'ZWR-VFR-R1-DEEP-RENDERER-v6');
 assert.equal(ZWR_VFR_FIT_PROFILE_VERSION,'ZWR-VFR-R1-PUBLICATION-FIT-v1');
 
 const renderer=fs.readFileSync('assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js','utf8');
-const builder=fs.readFileSync('scripts/build-zwr-vfr-human-review.mjs','utf8');
+const builder=fs.readFileSync('scripts/build-zwr-vfr-human-review.mjs','utf8')+'\n'+fs.readFileSync('assets/customer-ui/js/personal-products/ziwei-vfr-r1-styles.js','utf8');
 
 for(const token of [
  'zv-ziwei-board',

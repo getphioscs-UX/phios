@@ -59,10 +59,10 @@ assert(!rendererBuild.includes("'report-publication.css'"),'Private Zi Wei rende
 const sharedPrintShell=fs.readFileSync('assets/customer-ui/surfaces/report-print-shell-v2.css','utf8');
 assert(sharedPrintShell.includes('210mm!important')&&sharedPrintShell.includes('297mm!important'),'Shared Print Shell V2 must own the single A4 physical contract');
 assert(!sharedPrintShell.includes('data-method="ZWR"'),'Shared Print Shell V2 must not encode Zi Wei method identity');
-const renderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
+const renderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8')+'\n'+fs.readFileSync('functions/report-delivery/ziwei-vfr-method-profile.js','utf8');
 assert(!renderer.includes('Page.printToPDF'),'Customer release renderer must not regenerate PDF in the hot path');
 assert(!renderer.includes('countChromiumPdfPages'),'Customer release renderer must not reparse Chromium PDF page trees');
 assert(renderer.includes('DOM_PHYSICAL_PAGE_CONTRACT_V1'),'Deployed renderer must record the bounded DOM physical-page verification mode');
-assert(renderer.includes('pageSequenceValid'),'Deployed renderer must verify the exact 1..33 physical page sequence');
+assert(renderer.includes('pageSequenceValid'),'Deployed renderer must verify the governed physical page sequence');
 assert(renderer.includes('hiddenOrZeroGeometryCount'),'Deployed renderer must reject hidden or zero-geometry physical pages');
 sqlite.close();console.log('PASS ZPA local owner/consent negatives, immutable birth-input versioning, and lightweight deployed render hot-path contract.');

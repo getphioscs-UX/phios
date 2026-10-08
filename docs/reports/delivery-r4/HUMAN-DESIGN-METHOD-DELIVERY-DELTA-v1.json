@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "METHOD_REPORT_DELIVERY_DELTA_V1",
+  "methodCode": "HD",
+  "sourceHead": "67254e3d039c842fca0cbd8edc392691ccd2166b",
+  "nativeOwnerRef": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/production/HD-PRO-R3-W25-production-cutover-v1.json",
+  "nativeOwnerSha256": "bc9e32ba6388777098badaa5c02589b4eb8d259f980fb61455f781a0204f78d3",
+  "status": "BLOCKED",
+  "publicationProfileRef": "content/reports/method-publication-profiles-v1.json#HD",
+  "generationVersion": null,
+  "semanticVersion": null,
+  "publicationVersion": null,
+  "rendererMode": null,
+  "rendererVersion": null,
+  "pagePlanMode": null,
+  "expectedPageRule": null,
+  "diagramRule": {
+    "nativeOwnerOnly": true,
+    "count": null
+  },
+  "localeRule": "NATIVE_OWNER",
+  "generationProviderRule": "NATIVE_OWNER_UNRESOLVED",
+  "publicationProviderRule": 0,
+  "rerenderProviderRule": 0,
+  "reopenProviderRule": 0,
+  "semanticReviewRule": null,
+  "releaseEligibilityRule": "ALL_APPLICABLE_NATIVE_AND_SHARED_GATES_REQUIRED",
+  "subjectBindingRule": "NATIVE_OWNER_REQUIRED",
+  "methodSpecificNegativeAccessCases": [
+    "AUTHORIZATION_ON_CACHE_HIT",
+    "WRONG_ACCOUNT_DENIED"
+  ],
+  "fullSharedE2ERepeated": false,
+  "localDeltaProof": null,
+  "deployedProof": null,
+  "blockers": [
+    {
+      "owner": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/production/HD-PRO-R3-W25-production-cutover-v1.json",
+      "reason": "HD_PRO_R3 CUSTOMER_PUBLISHED preserved within existing scope; private delivery adapter and source-rights scope resolution remain open.",
+      "minimumNextAction": "Resolve native profile fields and method adapter; execute scoped method delta verification."
+    }
+  ],
+  "sharedDeliveryAuthorityEligible": false
+}

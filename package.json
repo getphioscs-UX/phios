@@ -2844,7 +2844,25 @@
     "check:pc-r1:w0": "node scripts/run-zero-cost-regression.mjs check:pc-r1:w0",
     "check:pc-r1:w1-w10": "node scripts/run-zero-cost-regression.mjs check:pc-r1:w1-w10",
     "build:pc-r1:profile-demotion": "node scripts/build-pc-r1-profile-demotion.mjs",
-    "check:dossier-us:golden-closed": "node scripts/run-zero-cost-regression.mjs check:dossier-us:golden-closed"
+    "check:delivery-delta:will": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:will",
+    "check:delivery-delta:financial": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:financial",
+    "check:delivery-delta:human-design": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:human-design",
+    "check:delivery-delta:ecr": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:ecr",
+    "check:shared-report-delivery:v2-contract": "node scripts/run-zero-cost-regression.mjs check:shared-report-delivery:v2-contract",
+    "check:shared-report-e2e:final": "node scripts/run-zero-cost-regression.mjs check:shared-report-e2e:final",
+    "check:shared-report-e2e:readiness-v2": "node scripts/run-zero-cost-regression.mjs check:shared-report-e2e:readiness-v2",
+    "check:delivery-delta:astrology": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:astrology",
+    "check:delivery-delta:cross": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:cross",
+    "check:delivery-delta:ziwei": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:ziwei",
+    "check:delivery-delta:numerology": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:numerology",
+    "check:shared-report-delivery:v2-runtime": "node scripts/run-zero-cost-regression.mjs check:shared-report-delivery:v2-runtime",
+    "check:delivery-delta:profile": "node scripts/run-zero-cost-regression.mjs check:delivery-delta:profile",
+    "check:dossier-us:golden-closed": "node scripts/run-zero-cost-regression.mjs check:dossier-us:golden-closed",
+    "check:profile:pfig-provenance-preservation": "node scripts/run-zero-cost-regression.mjs check:profile:pfig-provenance-preservation",
+    "check:profile:pfig-publication-legibility": "node scripts/run-zero-cost-regression.mjs check:profile:pfig-publication-legibility",
+    "check:profile:pfig-review-browser": "node scripts/run-zero-cost-regression.mjs check:profile:pfig-review-browser",
+    "check:profile:pfig-semantic-grammar": "node scripts/run-zero-cost-regression.mjs check:profile:pfig-semantic-grammar",
+    "check:profile:prd-w11r6": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r6"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
@@ -2858,6 +2876,7 @@
     "linkedom": "^0.18.13",
     "pdfjs-dist": "6.2.108",
     "sharp": "0.35.2",
-    "wrangler": "^4.0.0"
+    "wrangler": "^4.0.0",
+    "@cloudflare/puppeteer": "^1.4.0"
   }
 }

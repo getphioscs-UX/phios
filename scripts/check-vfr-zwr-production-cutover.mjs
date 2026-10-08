@@ -31,7 +31,7 @@ assert(!binding.includes("import {generateZiweiProfessionalSynthesisR5Candidate}
 
 assert(generator.includes('composeZwrVfrProductionDeepManuscript'),'automatic Deep Manuscript production composer missing');
 assert(generator.includes("providerAuthority:'WRITING_ONLY_AUTOMATIC'"),'automatic writing authority missing');
-assert(generator.includes('productionAdmissionGranted:true'));
+assert(generator.includes('productionAdmissionGranted:false'),'content acceptance does not grant shared production admission');
 assert(!generator.includes('composeZwrVfrOneCall'),'legacy one-call composer must not return');
 
 assert(composer.includes('composeZwrFiveCallExperiment'),'approved Deep Manuscript writer missing');
@@ -41,4 +41,4 @@ assert(composer.includes('semanticReviewCalls:0'),'semantic AI review must remai
 assert(completeness.includes('TOTAL_DEPTH_TOO_LOW'),'deterministic depth gate missing');
 
 assert(fs.existsSync('scripts/rollback-zwr-vfr-production-cutover.mjs'),'rollback script missing');
-console.log('PASS VFR-ZWR-10 production cutover: canonical binding uses automatic Deep Manuscript generation for unseen customer charts; deterministic completeness + targeted repair are active; semantic AI review=0; publication/rerender provider calls=0; 15-diagram adaptive publication retained; explicit rollback available.');
+console.log('PASS VFR-ZWR-10 generation binding (shared production admission remains blocked): canonical binding uses automatic Deep Manuscript generation for unseen customer charts; deterministic completeness + targeted repair are active; semantic AI review=0; publication/rerender provider calls=0; 15-diagram adaptive publication retained; explicit rollback available.');
