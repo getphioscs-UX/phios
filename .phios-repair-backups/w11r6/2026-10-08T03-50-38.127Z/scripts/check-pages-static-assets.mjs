@@ -68,7 +68,6 @@ for (const absolute of files) {
     );
   }
   if(rel.startsWith('output/pdf/')) failures.push(`${rel}: local review PDF leaked into Pages assets`);
-  if(rel.startsWith('.phios-repair-backups/')||rel.startsWith('content/profile/successors/personal-evidence-r1/w11r6/')) failures.push(`${rel}: local repair/review evidence leaked into Pages assets`);
 }
 
 if (!fs.existsSync(path.join(output, 'index.html'))) {

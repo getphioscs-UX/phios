@@ -43,7 +43,6 @@ const excludedTopLevel = new Set([
   '.github',
   '.wrangler',
   '.pages-output',
-  '.phios-repair-backups',
   'node_modules',
   'functions',
   'scripts',
@@ -84,8 +83,6 @@ function normalize(rel) {
 
 function isPublishable(rel) {
   const file = normalize(rel);
-
-  if(file.startsWith('content/profile/successors/personal-evidence-r1/w11r6/')) return false;
 
   if (!file) return false;
 
