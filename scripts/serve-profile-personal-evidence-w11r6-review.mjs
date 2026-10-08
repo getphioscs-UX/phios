@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
-const root=path.resolve('content/profile/successors/personal-evidence-r1/w11r6'),port=Number(process.argv[2]||8806);
+const root=path.resolve(process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/w11r6'),port=Number(process.argv[2]||8806);
 http.createServer((req,res)=>{
  if(!['GET','HEAD'].includes(req.method)){res.writeHead(405).end();return;}
  const route=decodeURIComponent(new URL(req.url,'http://localhost').pathname);let file;
  if(route==='/w11r6/'||route==='/')file=path.join(root,'PRD-W11R6-PFIG-HUMAN-REVIEW.html');
- else if(route==='/w11r6/report.pdf')file=path.resolve('output/pdf/w11r6/PRD-W11R6-CASE-01-PUBLICATION-REVIEW.pdf');
+ else if(route==='/w11r6/report.pdf')file=path.resolve(process.env.W11R6_REPAIR_PDF||'output/pdf/w11r6','PRD-W11R6-CASE-01-PUBLICATION-REVIEW.pdf');
  else if(route.startsWith('/w11r6/artwork/'))file=path.resolve('.tmp/w11r3',path.basename(route));
  else if(/^\/w11r6\/(?:PRD-W11R6-[A-Z0-9-]+\.(?:html|json|md)|synthetic-explicit-observation\.html|(?:before|after)\/[A-Za-z0-9-]+\.png)$/.test(route))file=path.resolve(root,route.slice('/w11r6/'.length));
  if(!file||!fs.existsSync(file)){res.writeHead(404).end();return;}

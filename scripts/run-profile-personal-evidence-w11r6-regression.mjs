@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
-const dir='content/profile/successors/personal-evidence-r1/w11r6/',file=dir+'PRD-W11R6-REGRESSION-RESULTS.json',keys=process.argv.slice(2),results=fs.existsSync(file)?JSON.parse(fs.readFileSync(file)).filter(r=>!keys.includes(r.command)):[];
+const dir=process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/w11r6/',file=dir+'PRD-W11R6-REGRESSION-RESULTS.json',keys=process.argv.slice(2),results=fs.existsSync(file)?JSON.parse(fs.readFileSync(file)).filter(r=>!keys.includes(r.command)):[];
 const guard=pathToFileURL(path.resolve('scripts/lib/w11r6-zero-cost-preload.mjs')).href;
 for(const key of keys){
  const timestamp=new Date().toISOString(),args=['scripts/run-zero-cost-regression.mjs',key];if(key==='check:profile:prd-w11r5')args.push('--w11r6');

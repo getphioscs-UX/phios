@@ -8,7 +8,7 @@ import {evidenceLabel,evidenceStatement,domainCta} from '../assets/customer-ui/j
 import {buildPersonalEvidenceDomainHandoffs} from '../functions/profile/personal-evidence-handoffs.js';
 import crypto from 'node:crypto';
 const r6=process.argv.includes('--w11r6'),r5=r6||process.argv.includes('--w11r5'),onlyCase=process.argv.find(x=>x.startsWith('--case='))?.split('=')[1];
-const root='tools/review/personal-evidence-r1/',audit='content/profile/successors/personal-evidence-r1/'+(r6?'w11r6/':r5?'w11r5/':'w11r3/');
+const root='tools/review/personal-evidence-r1/',audit=process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/'+(r6?'w11r6/':r5?'w11r5/':'w11r3/');
 fs.mkdirSync(audit,{recursive:true});
 const oldhtml=fs.readFileSync('tools/review/PROFILE-PERSONAL-EVIDENCE-R1-HUMAN-REVIEW.html','utf8');
 const assets=JSON.parse(oldhtml.match(/embeddedAssets=(.*?);\s*const displayAssets/s)[1]);

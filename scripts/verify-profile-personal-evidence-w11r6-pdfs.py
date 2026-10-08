@@ -1,12 +1,12 @@
-import json, hashlib
+import json, hashlib, os
 from pathlib import Path
 from pypdf import PdfReader
-root=Path('content/profile/successors/personal-evidence-r1/w11r6')
+root=Path(os.getenv('W11R6_REPAIR_AUDIT','content/profile/successors/personal-evidence-r1/w11r6'))
 browser=json.loads((root/'browser-results.json').read_text(encoding='utf8'))
 results=[]
 for case in ['CASE-01','CASE-08','CASE-09']:
     filename='PRD-W11R6-CASE-01-PUBLICATION-REVIEW.pdf' if case=='CASE-01' else case+'-bilingual-dossier.pdf'
-    path=Path('output/pdf/w11r6')/filename
+    path=Path(os.getenv('W11R6_REPAIR_PDF','output/pdf/w11r6'))/filename
     reader=PdfReader(path)
     dom=next(r for r in browser['results'] if r['id']==case)
     assert len(reader.pages)==dom['pages']

@@ -1,3 +1,4 @@
+import {grammarOnlySnapshot,repairPersonalEvidenceEnglish} from '../assets/customer-ui/js/visuals/personal-evidence-grammar.js';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -7,13 +8,13 @@ import {buildPersonalEvidencePublicationProjection} from '../functions/profile/p
 import {buildPersonalEvidencePublicationIr} from '../functions/profile/personal-evidence-publication-ir-adapter.js';
 import {PERSONAL_EVIDENCE_PFIG_PRIMARY_SECTION as primary} from '../functions/profile/personal-evidence-dossier-projection.js';
 import {renderPersonalEvidenceFigure} from '../assets/customer-ui/js/visuals/profile-visual-mvp.js';
-const root='tools/review/personal-evidence-r1/',audit='content/profile/successors/personal-evidence-r1/'+(process.env.W11R6_AUDIT_REDIRECT==='true'?'w11r6/legacy-w11r5/':process.argv.includes('--w11r6')?'w11r6/':'w11r5/');
+const root='tools/review/personal-evidence-r1/',audit=process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/'+(process.env.W11R6_AUDIT_REDIRECT==='true'?'w11r6/legacy-w11r5/':process.argv.includes('--w11r6')?'w11r6/':'w11r5/');
 fs.mkdirSync(audit,{recursive:true});
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 const baseline=read('content/profile/successors/personal-evidence-r1/'+(process.env.W11R6_AUDIT_REDIRECT==='true'||process.argv.includes('--w11r6')?'w11r6/':'w11r5/')+'baseline.json'),only=process.argv.find(x=>x.startsWith('--case='))?.split('=')[1],results=[];
 for(const before of baseline.cases.filter(c=>!only||c.id===only)){
  const id=before.id,source=fs.readFileSync(root+id+'-source-view.json'),view=JSON.parse(source),visual=buildProfileCustomerVisualProjection({progressiveView:view}),html=fs.readFileSync(root+id+'-bilingual-dossier.html','utf8'),doc=parseHTML(html).document;
- assert.equal(hash(source),before.sourceHash,id+' source drift');assert.equal(hash(fs.readFileSync(root+id+'-bilingual-trace.json')),before.traceHash,id+' prose / semantics drift');
+ assert.equal(hash(source),before.sourceHash,id+' source drift');if(process.env.W11R6_REPAIR_AUDIT){assert.deepEqual(read(root+id+'-bilingual-trace.json'),grammarOnlySnapshot(read(baseline.backup+root+id+'-bilingual-trace.json')),id+' grammar-only trace');}else assert.equal(hash(fs.readFileSync(root+id+'-bilingual-trace.json')),before.traceHash,id+' protected prose');
  assert.equal(doc.querySelectorAll('figure[data-pfig]').length,9);
  for(const f of visual.figures){const els=doc.querySelectorAll('[data-pfig="'+f.pfig+'"]');assert.equal(els.length,1,id+' '+f.pfig);assert.equal(els[0].closest('[data-pe-section]').getAttribute('data-pe-section'),primary[f.pfig]);assert.equal(els[0].getAttribute('data-pfig-state'),f.state);assert(els[0].querySelector('figcaption'));}
  assert.equal(doc.querySelectorAll('.pub-static').length,15);assert.equal(doc.querySelectorAll('.pe-evidence-note').length,10);

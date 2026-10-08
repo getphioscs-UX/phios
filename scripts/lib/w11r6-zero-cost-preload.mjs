@@ -10,4 +10,4 @@ const check=input=>{let url;try{url=new URL(typeof input==='string'||input insta
 const originalFetch=globalThis.fetch;globalThis.fetch=(input,...args)=>{check(input);return originalFetch(input,...args);};
 for(const module of [http,https])for(const name of ['request','get']){const original=module[name];module[name]=(input,...args)=>{check(input);return original.call(module,input,...args);};}
 syncBuiltinESMExports();
-process.on('exit',()=>{fs.appendFileSync('content/profile/successors/personal-evidence-r1/w11r6/zero-cost-processes.jsonl',JSON.stringify({timestamp:new Date().toISOString(),pid:process.pid,...counts})+'\n');});
+process.on('exit',()=>{fs.appendFileSync((process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/w11r6/')+'zero-cost-processes.jsonl',JSON.stringify({timestamp:new Date().toISOString(),pid:process.pid,...counts})+'\n');});

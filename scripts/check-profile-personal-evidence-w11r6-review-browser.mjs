@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-const dir='content/profile/successors/personal-evidence-r1/w11r6/',url='http://127.0.0.1:8806/w11r6/';
+const dir=process.env.W11R6_REPAIR_AUDIT||'content/profile/successors/personal-evidence-r1/w11r6/',url=process.env.W11R6_REPAIR_URL||'http://127.0.0.1:8806/w11r6/';
 const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
 try{const page=await browser.newPage(),errors=[];let external=0;
 await page.route('**/*',r=>{const u=new URL(r.request().url());if(u.protocol.startsWith('http')&&!['127.0.0.1','localhost'].includes(u.hostname)){external++;return r.abort();}return r.continue();});
