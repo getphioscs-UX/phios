@@ -13,11 +13,27 @@ if(integrity.status!=='INTEGRITY_VERIFIED_HUMAN_REVIEW_PENDING') throw new Error
 
 const oldSections=v2.sections.filter(x=>x.segmentType!=='FRONT_MATTER');
 const newSections=v3.sections.filter(x=>x.segmentType!=='FRONT_MATTER');
+const looseHeading=s=>String(s??'')
+  .replace(/^[◈❖◆◇]+/gu,'')
+  .toLocaleLowerCase('zh-Hans')
+  .replace(/[\s|｜:：·•—–\\-_.。，、！？!?；;“”‘’'"《》〈〉（）()【】\[\]☷☳☴☵☲☶☱]+/gu,'');
+const isSubsequence=(needle,haystack)=>{
+  let i=0;
+  for(const ch of haystack){if(ch===needle[i])i++;if(i===needle.length)return true;}
+  return needle.length===0;
+};
+function overlayArtifact(oldHeading,newHeading){
+  const a=looseHeading(oldHeading), b=looseHeading(newHeading);
+  if(!a||!b||a===b) return false;
+  const ratio=b.length/a.length;
+  if(ratio<1.65) return false;
+  return isSubsequence(a,b);
+}
 const max=Math.max(oldSections.length,newSections.length);
 const rows=[];
 const HASH_COMPARABLE = v2.segmentationMethod === v3.segmentationMethod &&
   v2.schemaVersion === v3.schemaVersion;
-const summary={headingStable:0,headingChanged:0,added:0,removed:0,possibleMajorLengthChange:0};
+const summary={headingStable:0,semanticHeadingChanged:0,overlayArtifacts:0,added:0,removed:0,possibleMajorLengthChange:0};
 for(let i=0;i<max;i++){
  const a=oldSections[i]||null,b=newSections[i]||null;
  let state;
@@ -31,9 +47,12 @@ for(let i=0;i<max;i++){
      ? 'UNCHANGED_COMPARABLE'
      : 'HEADING_STABLE_CONTENT_COMPARISON_PENDING';
    summary.headingStable++;
+ } else if(overlayArtifact(a.heading,b.heading)){
+   state='EXTRACTION_OVERLAY_ARTIFACT';
+   summary.overlayArtifacts++;
  } else {
-   state='HEADING_CHANGED';
-   summary.headingChanged++;
+   state='SEMANTIC_HEADING_CHANGED';
+   summary.semanticHeadingChanged++;
  }
  if(majorLengthChange) summary.possibleMajorLengthChange++;
  rows.push({
@@ -54,7 +73,7 @@ for(let i=0;i<max;i++){
    state
  });
 }
-const changed=rows.filter(r=>r.state==='HEADING_CHANGED'||r.state==='ADDED'||r.state==='REMOVED'||r.possibleMajorLengthChange);
+const changed=rows.filter(r=>r.state==='SEMANTIC_HEADING_CHANGED'||r.state==='ADDED'||r.state==='REMOVED'||r.possibleMajorLengthChange);
 const report={
  schemaVersion:'PHI-OS-BOOK-I-V3-MANUSCRIPT-DIFF-REVIEW-v1.0.0',
  status:'READY_FOR_HUMAN_REVIEW',
@@ -98,11 +117,13 @@ code{word-break:break-all} .cards{display:grid;grid-template-columns:repeat(auto
 <p><b>v2:</b> 402 pages · 274 sections · <code>${esc(v2.sourceSha256)}</code></p>
 <p><b>v3:</b> ${v3.sourcePageCount} pages · ${newSections.length} sections · <code>${esc(v3.sourceSha256)}</code></p>
 <p class="warn">此页面只做 manuscript 差异与 canonical impact 人审；不会自动建立、改名或删除 canonical nodes，也不会自动 production cutover。</p>\n<p class="warn">v2 与 v3 使用不同 extraction pipeline，因此旧/新 section SHA-256 不具直接可比性。相同标题不得仅因 hash 不同判定为正文变化；真正正文 diff 必须使用同一规范化 extraction baseline。</p>
+<p class="warn">v3 PDF 存在部分 heading text-layer overlay duplication。明显的重复叠字被标记为 EXTRACTION_OVERLAY_ARTIFACT 并排除出 canonical review priority；它们不是 manuscript semantic change。</p>
 </div>
 <div class="grid">
 <div class="metric"><b>Review priority</b><br>${changed.length}</div>
 <div class="metric"><b>Heading stable</b><br>${summary.headingStable}</div>
-<div class="metric"><b>Heading changed</b><br>${summary.headingChanged}</div>
+<div class="metric"><b>Semantic heading changed</b><br>${summary.semanticHeadingChanged}</div>
+<div class="metric"><b>Overlay artifacts excluded</b><br>${summary.overlayArtifacts}</div>
 <div class="metric"><b>Major length shift</b><br>${summary.possibleMajorLengthChange}</div>
 <div class="metric"><b>Added</b><br>${summary.added}</div>
 <div class="metric"><b>Removed</b><br>${summary.removed}</div>
