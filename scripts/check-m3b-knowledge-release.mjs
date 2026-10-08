@@ -140,7 +140,8 @@ const bookOneFiguresAsset = publicAssets.assets.find(asset => asset.asset_code =
 assert.ok(bookOneFiguresAsset, 'BOOK-1-FIGURES must be registered in public-assets.json');
 assert.equal(bookOneFiguresAsset.category, 'book-figures');
 assert.equal(bookOneFiguresAsset.book_id, 'book-1');
-assert.equal(bookOneFiguresAsset.object_key, 'images/figures/book-1/');
+assert.equal(bookOneFiguresAsset.object_key, 'images/figures/books/book-1/');
+assert.notEqual(bookOneFiguresAsset.object_key, 'images/figures/book-1/', 'Retired Book I figure prefix must not return');
 assert.equal(bookOneFiguresAsset.format, 'webp');
 assert.notEqual(bookOneFiguresAsset.status, 'missing');
 
