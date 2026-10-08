@@ -14,1111 +14,146 @@ code{word-break:break-all} .cards{display:grid;grid-template-columns:repeat(auto
 <p><b>v2:</b> 402 pages · 274 sections · <code>7f7ed51199302b83d5bb5e48224a5f5995123171645e820925508fb31d97174d</code></p>
 <p><b>v3:</b> 440 pages · 274 sections · <code>813481693e25bad9f35d6e13795eb51d0c35d80d9cbc62fe53a04d3cb622492e</code></p>
 <p class="warn">此页面只做 manuscript 差异与 canonical impact 人审；不会自动建立、改名或删除 canonical nodes，也不会自动 production cutover。</p>
+<p class="warn">v2 与 v3 使用不同 extraction pipeline，因此旧/新 section SHA-256 不具直接可比性。相同标题不得仅因 hash 不同判定为正文变化；真正正文 diff 必须使用同一规范化 extraction baseline。</p>
+<p class="warn">v3 PDF 存在部分 heading text-layer overlay duplication。明显的重复叠字被标记为 EXTRACTION_OVERLAY_ARTIFACT 并排除出 canonical review priority；它们不是 manuscript semantic change。</p>
 </div>
 <div class="grid">
-<div class="metric"><b>Changed</b><br>274</div>
-<div class="metric"><b>Content changed</b><br>217</div>
-<div class="metric"><b>Heading changed</b><br>57</div>
+<div class="metric"><b>Review priority</b><br>32</div>
+<div class="metric"><b>Heading stable</b><br>217</div>
+<div class="metric"><b>Semantic heading changed</b><br>8</div>
+<div class="metric"><b>Overlay artifacts excluded</b><br>49</div>
+<div class="metric"><b>Major length shift</b><br>30</div>
 <div class="metric"><b>Added</b><br>0</div>
 <div class="metric"><b>Removed</b><br>0</div>
-<div class="metric"><b>Unchanged</b><br>0</div>
 </div>
-<h2>Changed manuscript sections</h2>
+<h2>Priority manuscript sections</h2>
 <table><thead><tr><th>#</th><th>Part</th><th>State</th><th>v2 heading</th><th>v3 heading</th><th>v2 pages</th><th>v3 pages</th></tr></thead>
 <tbody><tr>
-<td>1</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>1</td><td>P0</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>为什么需要 PHI OS</td><td>为什么需要 PHI OS</td>
 <td>2–16</td><td>2–20</td>
 </tr><tr>
-<td>2</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>序章｜文明断裂 Reality Breakdown</td><td>序章｜文明断裂 Reality Breakdown</td>
-<td>16–17</td><td>21–22</td>
-</tr><tr>
-<td>3</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>文明不是在进化，而是在失去稳定能力</td><td>文明不是在进化，而是在失去稳定能力</td>
-<td>17–19</td><td>22–24</td>
-</tr><tr>
-<td>4</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>AI / Crypto / 网络不是创新，而是失稳显影器</td><td>AI / Crypto / 网络不是创新，而是失稳显影器</td>
-<td>19–21</td><td>24–26</td>
-</tr><tr>
-<td>5</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>不是世界变快，而是系统不再匹配</td><td>不是世界变快，而是系统不再匹配</td>
-<td>21–22</td><td>26–27</td>
-</tr><tr>
-<td>6</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>成本成为唯一稳定变量</td><td>成本成为唯一稳定变量</td>
-<td>22–24</td><td>27–29</td>
-</tr><tr>
-<td>7</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>不是你错了，而是系统层级错位</td><td>不是你错了，而是系统层级错位</td>
-<td>24–26</td><td>29–30</td>
-</tr><tr>
-<td>8</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>你以为自己在理解现实，其实只是在解释结果</td><td>你以为自己在理解现实，其实只是在解释结果</td>
-<td>26–28</td><td>31–32</td>
-</tr><tr>
-<td>9</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>9</td><td>P0</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>旧语言为什么无法描述新现实</td><td>旧语言为什么无法描述新现实</td>
 <td>28–29</td><td>33–37</td>
 </tr><tr>
-<td>10</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>人类不是活在世界，而是活在投影</td><td>人类不是活在世界，而是活在投影</td>
-<td>29–31</td><td>38–39</td>
-</tr><tr>
-<td>11</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>11</td><td>P0</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>为什么现实不是一个对象，而是一种持续形成自</td><td>为什么现实不是一个对象，而是一种持续形成自</td>
 <td>31–35</td><td>39–43</td>
 </tr><tr>
-<td>12</td><td>P0</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>为什么任何现实，都必须先知道自己位于哪里</td><td>为什么任何现实，都必须先知道自己位于哪里</td>
-<td>35–37</td><td>43–44</td>
-</tr><tr>
-<td>13</td><td>P1</td><td><strong>HEADING_CHANGED</strong></td>
-<td>第一部｜现实物理学 Reality Physics</td><td>第一部｜现实物理学 Reality Physics｜现实物理学 Reality Physics｜现实物理学 Reality Physics</td>
-<td>37–43</td><td>45–51</td>
-</tr><tr>
-<td>14</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>约束 Constraint | 可能性的裁剪机制</td><td>约束 Constraint | 可能性的裁剪机制</td>
-<td>43–46</td><td>51–54</td>
-</tr><tr>
-<td>15</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>结构 Structure | 可持续关系的形成</td><td>结构 Structure | 可持续关系的形成</td>
-<td>46–48</td><td>54–55</td>
-</tr><tr>
-<td>16</td><td>P1</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Structural Topology | 结构如何形成可导航路径</td><td>Structural Topology | 结构如何形成可导航路径| 结构如何形成可导航路径| 结构如何形成可导航路径</td>
-<td>48–49</td><td>56–57</td>
-</tr><tr>
-<td>17</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Structural Configuration |</td><td>Structural Configuration |</td>
-<td>49–51</td><td>57–58</td>
-</tr><tr>
-<td>18</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Structural Continuity | 结构如何持续存在</td><td>Structural Continuity | 结构如何持续存在</td>
-<td>51–52</td><td>59–60</td>
-</tr><tr>
-<td>19</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Structural Compression |</td><td>Structural Compression |</td>
-<td>52–53</td><td>60–61</td>
-</tr><tr>
-<td>20</td><td>P1</td><td><strong>HEADING_CHANGED</strong></td>
+<td>20</td><td>P1</td><td><strong>EXTRACTION_OVERLAY_ARTIFACT</strong></td>
 <td>SDU System | 现实如何形成结构差异</td><td>◈◈ SDU System |SDU System |SDU System |现实现实现实如何形成结构差异如何形成结构差异如何形成结构差异</td>
 <td>53–59</td><td>61–67</td>
 </tr><tr>
-<td>21</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>21</td><td>P1</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Structural Connectivity | 现实如何形成持续连接</td><td>Structural Connectivity | 现实如何形成持续连接</td>
 <td>59–64</td><td>67–71</td>
 </tr><tr>
-<td>22</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Structural Regions | 现实如何形成组织区域</td><td>Structural Regions | 现实如何形成组织区域</td>
-<td>64–65</td><td>72–73</td>
-</tr><tr>
-<td>23</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>23</td><td>P1</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Structural Network Architecture |</td><td>Structural Network Architecture |</td>
 <td>65–68</td><td>73–76</td>
 </tr><tr>
-<td>24</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Directional Architecture | 现实如何形成长期方向</td><td>Directional Architecture | 现实如何形成长期方向</td>
-<td>68–69</td><td>76–77</td>
-</tr><tr>
-<td>25</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>25</td><td>P1</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Structural Position | 现实如何获得位置</td><td>Structural Position | 现实如何获得位置</td>
 <td>69–72</td><td>77–79</td>
 </tr><tr>
-<td>26</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Structural Coordinate | 现实如何形成坐标</td><td>Structural Coordinate | 现实如何形成坐标</td>
-<td>72–73</td><td>80–81</td>
-</tr><tr>
-<td>27</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Navigation Mechanics | 现实如何开始导航</td><td>Navigation Mechanics | 现实如何开始导航</td>
-<td>73–74</td><td>81–82</td>
-</tr><tr>
-<td>28</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Navigation Resolution | 现实如何提高导航精度</td><td>Navigation Resolution | 现实如何提高导航精度</td>
-<td>74–75</td><td>82–83</td>
-</tr><tr>
-<td>29</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Field Emergence | 为什么持续结构会形成场</td><td>Field Emergence | 为什么持续结构会形成场</td>
-<td>75–77</td><td>83–84</td>
-</tr><tr>
-<td>30</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Field Propagation | 为什么场会不断传播</td><td>Field Propagation | 为什么场会不断传播</td>
-<td>77–78</td><td>85–86</td>
-</tr><tr>
-<td>31</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Field Gradient | 为什么不同位置具有不同影响力</td><td>Field Gradient | 为什么不同位置具有不同影响力</td>
-<td>78–79</td><td>86–87</td>
-</tr><tr>
-<td>32</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Field Boundary | 为什么场具有边界</td><td>Field Boundary | 为什么场具有边界</td>
-<td>79–80</td><td>87–88</td>
-</tr><tr>
-<td>33</td><td>P1</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Field Overlap | 为什么多个场能够共同存在</td><td>◈◈ Field Overlap |Field Overlap |Field Overlap |为什么多个场能够共同存在为什么多个场能够共同存在为什么多个场能够共同存在</td>
-<td>80–82</td><td>88–89</td>
-</tr><tr>
-<td>34</td><td>P1</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Artificial Structure | 人类如何主动建立结构</td><td>◈◈ Artificial Structure |Artificial Structure |Artificial Structure |人类人类人类如何主动建立结构如何主动建立结构如何主动建立结构</td>
-<td>82–83</td><td>90–91</td>
-</tr><tr>
-<td>35</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Institutional Structure | 制度如何成为现实</td><td>Institutional Structure | 制度如何成为现实</td>
-<td>83–84</td><td>91–92</td>
-</tr><tr>
-<td>36</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Synthetic Field | 人工如何形成场</td><td>Synthetic Field | 人工如何形成场</td>
-<td>84–86</td><td>92–93</td>
-</tr><tr>
-<td>37</td><td>P1</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Algorithmic Topology | 算法如何重新组织连接</td><td>◈◈ Algorithmic Topology |Algorithmic Topology |Algorithmic Topology |算法算法算法如何重新组织连接如何重新组织连接如何重新组织连接</td>
-<td>86–87</td><td>94–95</td>
-</tr><tr>
-<td>38</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Navigation Architecture |</td><td>Navigation Architecture |</td>
-<td>87–88</td><td>95–96</td>
-</tr><tr>
-<td>39</td><td>P1</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Surface Formation |</td><td>Runtime Surface Formation |</td>
-<td>88–89</td><td>96–97</td>
-</tr><tr>
-<td>40</td><td>P1</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Observation Interface | 现实如何形成观察入口</td><td>◈◈ Observation Interface |Observation Interface |Observation Interface |现实现实现实如何形成观察入口如何形成观察入口如何形成观察入口</td>
-<td>89–91</td><td>97–98</td>
-</tr><tr>
-<td>41</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>41</td><td>P2</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>第二部｜投影系统 Projection System</td><td>第二部｜投影系统 Projection System</td>
 <td>91–91</td><td>99–99</td>
 </tr><tr>
-<td>42</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Necessity | 为什么现实必然需要投影</td><td>Projection Necessity | 为什么现实必然需要投影</td>
-<td>91–92</td><td>99–100</td>
-</tr><tr>
-<td>43</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>投影表面 Projection Surface |</td><td>投影表面 Projection Surface |</td>
-<td>92–93</td><td>100–101</td>
-</tr><tr>
-<td>44</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>投影压缩 Projection Compression |</td><td>投影压缩 Projection Compression |</td>
-<td>93–95</td><td>101–102</td>
-</tr><tr>
-<td>45</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>投影分辨率 Projection Resolution |</td><td>投影分辨率 Projection Resolution |</td>
-<td>95–96</td><td>103–104</td>
-</tr><tr>
-<td>46</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>世界形成 World Formation |</td><td>世界形成 World Formation |</td>
-<td>96–98</td><td>104–106</td>
-</tr><tr>
-<td>47</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Meaning | 世界为何变得重要</td><td>Projection Meaning | 世界为何变得重要</td>
-<td>98–99</td><td>106–107</td>
-</tr><tr>
-<td>48</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Narrative Formation | 意义如何形成叙事</td><td>Narrative Formation | 意义如何形成叙事</td>
-<td>99–101</td><td>107–109</td>
-</tr><tr>
-<td>49</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Interpretation Layer | 叙事如何形成解释层</td><td>◈◈ Interpretation Layer |Interpretation Layer |Interpretation Layer |叙事叙事叙事如何形成解释层如何形成解释层如何形成解释层</td>
-<td>101–103</td><td>109–110</td>
-</tr><tr>
-<td>50</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>信念形成 Belief Formation |</td><td>信念形成 Belief Formation |</td>
-<td>103–104</td><td>111–112</td>
-</tr><tr>
-<td>51</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projected Identity | 信念如何变成身份</td><td>Projected Identity | 信念如何变成身份</td>
-<td>104–106</td><td>112–114</td>
-</tr><tr>
-<td>52</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Symbol Formation | 意义如何压缩成符号</td><td>◈◈ Symbol Formation |Symbol Formation |Symbol Formation |意义意义意义如何压缩成符号如何压缩成符号如何压缩成符号</td>
-<td>106–108</td><td>114–116</td>
-</tr><tr>
-<td>53</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Archetype Formation | 符号如何形成原型</td><td>◈◈ Archetype Formation |Archetype Formation |Archetype Formation |符号如何形成原型符号如何形成原型符号如何形成原型</td>
-<td>108–110</td><td>116–118</td>
-</tr><tr>
-<td>54</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Shared Meaning | 意义如何被多人共同接受</td><td>◈◈ Shared Meaning |Shared Meaning |Shared Meaning |意义如何被多人意义如何被多人意义如何被多人共同接受共同接受共同接受</td>
-<td>110–111</td><td>118–119</td>
-</tr><tr>
-<td>55</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Civilization Narrative |</td><td>◈◈ Civilization Narrative Civilization Narrative Civilization Narrative |||</td>
-<td>111–113</td><td>119–120</td>
-</tr><tr>
-<td>56</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>结构投影 Structural Projection |</td><td>结构投影 Structural Projection |</td>
-<td>113–115</td><td>121–123</td>
-</tr><tr>
-<td>57</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>功能投影 Functional Projection |</td><td>功能投影 Functional Projection |</td>
-<td>115–117</td><td>123–124</td>
-</tr><tr>
-<td>58</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>关系投影 Relational Projection |</td><td>关系投影 Relational Projection |</td>
-<td>117–118</td><td>125–126</td>
-</tr><tr>
-<td>59</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>网络投影 Network Projection |</td><td>网络投影 Network Projection |</td>
-<td>118–120</td><td>126–128</td>
-</tr><tr>
-<td>60</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Position Projection |</td><td>Position Projection |</td>
-<td>120–121</td><td>128–129</td>
-</tr><tr>
-<td>61</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>感知投影 Perceptual Projection |</td><td>感知投影 Perceptual Projection |</td>
-<td>121–123</td><td>129–130</td>
-</tr><tr>
-<td>62</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>行为投影 Behavioral Projection |</td><td>行为投影 Behavioral Projection |</td>
-<td>123–124</td><td>131–132</td>
-</tr><tr>
-<td>63</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>角色投影 Role Projection |</td><td>角色投影 Role Projection |</td>
-<td>124–126</td><td>132–134</td>
-</tr><tr>
-<td>64</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>方向投影 Directional Projection |</td><td>方向投影 Directional Projection |</td>
-<td>126–128</td><td>134–136</td>
-</tr><tr>
-<td>65</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Resolution |</td><td>Projection Resolution |</td>
-<td>128–129</td><td>136–137</td>
-</tr><tr>
-<td>66</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Bias | 为什么投影会产生偏向</td><td>Projection Bias | 为什么投影会产生偏向</td>
-<td>129–131</td><td>137–139</td>
-</tr><tr>
-<td>67</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Distortion | 为什么投影发生失真</td><td>Projection Distortion | 为什么投影发生失真</td>
-<td>131–133</td><td>139–140</td>
-</tr><tr>
-<td>68</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Stabilization | 为什么投影开始稳定</td><td>Projection Stabilization | 为什么投影开始稳定</td>
-<td>133–134</td><td>141–142</td>
-</tr><tr>
-<td>69</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Projection Updating | 为什么投影持续更新</td><td>Projection Updating | 为什么投影Projection Updating | 为什么投影Projection Updating | 为什么投影持续更新持续更新持续更新</td>
-<td>134–136</td><td>142–144</td>
-</tr><tr>
-<td>70</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Projection Multiplicity | 为什么多个投影同时存在</td><td>◈◈ Projection Multiplicity | 为什么多个投影Projection Multiplicity | 为什么多个投影Projection Multiplicity | 为什么多个投影同时存在同时存在同时存在</td>
-<td>136–137</td><td>144–145</td>
-</tr><tr>
-<td>71</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Shared Reality | 多个系统如何共同维持现实</td><td>◈◈ Shared Reality |Shared Reality |Shared Reality |多多多个系统如何共同维持现实个系统如何共同维持现实个系统如何共同维持现实</td>
-<td>137–139</td><td>145–147</td>
-</tr><tr>
-<td>72</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Collective Coordination | 多个现实如何形成协调</td><td>Collective Coordination | 多个现实如何形成协调</td>
-<td>139–140</td><td>147–148</td>
-</tr><tr>
-<td>73</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Collective Reinforcement |</td><td>Collective Reinforcement |</td>
-<td>140–142</td><td>148–150</td>
-</tr><tr>
-<td>74</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Social Projection | 社会如何形成共同现实</td><td>◈◈ Social Projection |Social Projection |Social Projection |社会社会社会如何形成共同现实如何形成共同现实如何形成共同现实</td>
-<td>142–143</td><td>150–151</td>
-</tr><tr>
-<td>75</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Institutional Projection | 制度如何稳定现实</td><td>Institutional Projection |Institutional Projection |Institutional Projection |制度如何稳定制度如何稳定制度如何稳定现实现实现实</td>
-<td>143–145</td><td>151–152</td>
-</tr><tr>
-<td>76</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Economic Projection | 经济如何维持现实</td><td>Economic Projection |Economic Projection |Economic Projection |经济如何维持经济如何维持经济如何维持现实现实现实</td>
-<td>145–146</td><td>153–154</td>
-</tr><tr>
-<td>77</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Historical Projection | 历史如何延续现实</td><td>Historical Projection |Historical Projection |Historical Projection |历史如何延续历史如何延续历史如何延续现实现实现实</td>
-<td>146–148</td><td>154–155</td>
-</tr><tr>
-<td>78</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Civilization Projection | 文明如何共同投影世界</td><td>◈◈ Civilization Projection |Civilization Projection |Civilization Projection |文明如何共同投影世界文明如何共同投影世界文明如何共同投影世界</td>
-<td>148–149</td><td>156–157</td>
-</tr><tr>
-<td>79</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Synthetic Reality |</td><td>Synthetic Reality |</td>
-<td>149–151</td><td>157–159</td>
-</tr><tr>
-<td>80</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>合成投影 Synthetic Projection |</td><td>合成投影 Synthetic Projection |</td>
-<td>151–153</td><td>159–160</td>
-</tr><tr>
-<td>81</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>合成意义 Synthetic Meaning |</td><td>合成意义 Synthetic Meaning |</td>
-<td>153–154</td><td>161–162</td>
-</tr><tr>
-<td>82</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>合成叙事 Synthetic Narrative |</td><td>合成叙事 Synthetic Narrative |</td>
-<td>154–156</td><td>162–164</td>
-</tr><tr>
-<td>83</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>投影加速 Projection Acceleration |</td><td>投影加速 Projection Acceleration |</td>
-<td>156–157</td><td>164–165</td>
-</tr><tr>
-<td>84</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>投影不稳定 Projection Instability |</td><td>投影不稳定 Projection Instability |</td>
-<td>157–159</td><td>165–167</td>
-</tr><tr>
-<td>85</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>人机共投影 Human–AI Co-Projection |</td><td>人机共投影 Human–AI Co-Projection |</td>
-<td>159–161</td><td>167–169</td>
-</tr><tr>
-<td>86</td><td>P2</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Projection Integration | 投影如何共同形成世界</td><td>◈◈ Projection Integration | 投影Projection Integration | 投影Projection Integration | 投影如如如何共同形成世界何共同形成世界何共同形成世界</td>
-<td>161–162</td><td>169–170</td>
-</tr><tr>
-<td>87</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Reading Models |</td><td>Projection Reading Models |</td>
-<td>162–164</td><td>170–172</td>
-</tr><tr>
-<td>88</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Projection Convergence |</td><td>Projection Convergence |</td>
-<td>164–165</td><td>172–173</td>
-</tr><tr>
-<td>89</td><td>P2</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>89</td><td>P2</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Projection Limits | 为什么投影不是现实</td><td>Projection Limits | 为什么投影不是现实</td>
 <td>165–168</td><td>173–175</td>
 </tr><tr>
-<td>90</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
+<td>90</td><td>P3</td><td><strong>EXTRACTION_OVERLAY_ARTIFACT</strong></td>
 <td>第三部｜运行动力学 Runtime Dynamics</td><td>◈◈第三部｜运行动力学第三部｜运行动力学第三部｜运行动力学Runtime Dynamics Runtime Dynamics Runtime Dynamics</td>
 <td>168–168</td><td>176–176</td>
 </tr><tr>
-<td>91</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Temporal Medium | 时间为什么能够承载运行</td><td>Temporal Medium | 时间为什么能够承载运行</td>
-<td>168–169</td><td>176–177</td>
-</tr><tr>
-<td>92</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Temporal Discretization |</td><td>Temporal Discretization |</td>
-<td>169–170</td><td>177–178</td>
-</tr><tr>
-<td>93</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Reality Entry Interface |</td><td>Reality Entry Interface |</td>
-<td>170–171</td><td>178–179</td>
-</tr><tr>
-<td>94</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Cosmological Orientation |</td><td>Cosmological Orientation |</td>
-<td>171–172</td><td>179–180</td>
-</tr><tr>
-<td>95</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Quarter Architecture |</td><td>Quarter Architecture |</td>
-<td>172–174</td><td>180–182</td>
-</tr><tr>
-<td>96</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Reality Grammar | 为什么现实形成共同语法</td><td>Reality Grammar | 为什么现实形成共同语法</td>
-<td>174–176</td><td>182–183</td>
-</tr><tr>
-<td>97</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Formation Arc |</td><td>Formation Arc |</td>
-<td>176–177</td><td>184–185</td>
-</tr><tr>
-<td>98</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Activation Arc |</td><td>Activation Arc |</td>
-<td>177–178</td><td>185–185</td>
-</tr><tr>
-<td>99</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Internalization Arc |</td><td>Internalization Arc |</td>
-<td>178–179</td><td>186–187</td>
-</tr><tr>
-<td>100</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Reorganization Arc |</td><td>Reorganization Arc |</td>
-<td>179–181</td><td>187–188</td>
-</tr><tr>
-<td>101</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Grammar Compression |</td><td>Grammar Compression |</td>
-<td>181–181</td><td>189–189</td>
-</tr><tr>
-<td>102</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Reality Question | 为什么现实必须先变成问题</td><td>Reality Question | 为什么现实必须先变成问题</td>
-<td>181–183</td><td>189–190</td>
-</tr><tr>
-<td>103</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Question Compression |</td><td>Question Compression |</td>
-<td>183–184</td><td>191–192</td>
-</tr><tr>
-<td>104</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Sixteen Fundamental Questions</td><td>◈◈ Sixteen Fundamental Questions Sixteen Fundamental Questions Sixteen Fundamental Questions</td>
-<td>184–185</td><td>192–193</td>
-</tr><tr>
-<td>105</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Domain I Recognition | 为什么现实必须不断辨认</td><td>Domain I Recognition | 为什么现实必须不断辨认</td>
-<td>185–186</td><td>193–194</td>
-</tr><tr>
-<td>106</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第一问题：究竟发生了什么？</td><td>第一问题：究竟发生了什么？</td>
-<td>186–186</td><td>194–194</td>
-</tr><tr>
-<td>107</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第二问题：什么值得相信？</td><td>第二问题：什么值得相信？</td>
-<td>186–186</td><td>194–194</td>
-</tr><tr>
-<td>108</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第三问题：什么是真实？</td><td>第三问题：什么是真实？</td>
-<td>186–186</td><td>194–194</td>
-</tr><tr>
-<td>109</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第四问题：是否进入新的阶段？</td><td>第四问题：是否进入新的阶段？</td>
-<td>186–187</td><td>194–194</td>
-</tr><tr>
-<td>110</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Domain II Establishment |</td><td>Domain II Establishment |</td>
-<td>187–187</td><td>195–195</td>
-</tr><tr>
-<td>111</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第五问题：现在是否应该开始？</td><td>第五问题：现在是否应该开始？</td>
-<td>187–187</td><td>195–195</td>
-</tr><tr>
-<td>112</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第六问题：资源是否足够？</td><td>第六问题：资源是否足够？</td>
-<td>187–187</td><td>195–195</td>
-</tr><tr>
-<td>113</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第七问题：如何持续运行？</td><td>第七问题：如何持续运行？</td>
-<td>187–187</td><td>195–195</td>
-</tr><tr>
-<td>114</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第八问题：当前秩序还能继续支持未来吗？</td><td>第八问题：当前秩序还能继续支持未来吗？</td>
-<td>187–188</td><td>195–196</td>
-</tr><tr>
-<td>115</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
+<td>115</td><td>P3</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Domain II Coexistence |</td><td>Domain III Coexistence |</td>
 <td>188–188</td><td>196–196</td>
 </tr><tr>
-<td>116</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第九问题：如何回应其他现实？</td><td>第九问题：如何回应其他现实？</td>
-<td>188–189</td><td>196–196</td>
-</tr><tr>
-<td>117</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第十问题：如何组织差异？</td><td>第十问题：如何组织差异？</td>
-<td>189–189</td><td>197–197</td>
-</tr><tr>
-<td>118</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第十一问题：什么值得共同承载？</td><td>第十一问题：什么值得共同承载？</td>
-<td>189–189</td><td>197–197</td>
-</tr><tr>
-<td>119</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第十二问题：如何维持共同稳定？</td><td>第十二问题：如何维持共同稳定？</td>
-<td>189–189</td><td>197–197</td>
-</tr><tr>
-<td>120</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Domain IV Continuation |</td><td>Domain IV Continuation |</td>
-<td>189–190</td><td>197–198</td>
-</tr><tr>
-<td>121</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第十三问题：旧有组织还能继续支持未来吗？</td><td>第十三问题：旧有组织还能继续支持未来吗？</td>
-<td>190–190</td><td>198–198</td>
-</tr><tr>
-<td>122</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第十四问题：谁承担改变？</td><td>第十四问题：谁承担改变？</td>
-<td>190–190</td><td>198–198</td>
-</tr><tr>
-<td>123</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第十五问题：新的组织如何稳定？</td><td>第十五问题：新的组织如何稳定？</td>
-<td>190–190</td><td>198–198</td>
-</tr><tr>
-<td>124</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>第十六问题：现实如何继续存在？</td><td>第十六问题：现实如何继续存在？</td>
-<td>190–190</td><td>198–198</td>
-</tr><tr>
-<td>125</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Need Formation |</td><td>Runtime Need Formation |</td>
-<td>190–192</td><td>198–200</td>
-</tr><tr>
-<td>126</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Runtime Capability Architecture</td><td>◈◈ Runtime Capability Architecture Runtime Capability Architecture Runtime Capability Architecture</td>
-<td>192–193</td><td>200–201</td>
-</tr><tr>
-<td>127</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Nine Runtime Capability |</td><td>Nine Runtime Capability |</td>
-<td>193–194</td><td>201–202</td>
-</tr><tr>
-<td>128</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Direction Capability | 为什么现实必须形成方向</td><td>Direction Capability | 为什么现实必须形成方向</td>
-<td>194–195</td><td>202–202</td>
-</tr><tr>
-<td>129</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Understanding Capability |</td><td>Understanding Capability |</td>
-<td>195–195</td><td>203–203</td>
-</tr><tr>
-<td>130</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Expression Capability | 为什么现实必须输出自身</td><td>Expression Capability | 为什么现实必须输出自身</td>
-<td>195–196</td><td>203–204</td>
-</tr><tr>
-<td>131</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Position Capability |</td><td>Position Capability |</td>
-<td>196–196</td><td>204–204</td>
-</tr><tr>
-<td>132</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Resource Capability |</td><td>Resource Capability |</td>
-<td>196–197</td><td>204–205</td>
-</tr><tr>
-<td>133</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Execution Capability |</td><td>Execution Capability |</td>
-<td>197–198</td><td>205–205</td>
-</tr><tr>
-<td>134</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Relational Capability |</td><td>Relational Capability |</td>
-<td>198–198</td><td>206–206</td>
-</tr><tr>
-<td>135</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Survival Capability | 为什么现实必须维持存在</td><td>Survival Capability | 为什么现实必须维持存在</td>
-<td>198–199</td><td>206–207</td>
-</tr><tr>
-<td>136</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Drive Capability | 为什么现实必须持续前进</td><td>Drive Capability | 为什么现实必须持续前进</td>
-<td>199–200</td><td>207–208</td>
-</tr><tr>
-<td>137</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Capability Selection |</td><td>Capability Selection |</td>
-<td>200–201</td><td>208–209</td>
-</tr><tr>
-<td>138</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Driver | 为什么现实需要驱动</td><td>Runtime Driver | 为什么现实需要驱动</td>
-<td>201–202</td><td>209–209</td>
-</tr><tr>
-<td>139</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Solar Driver | Initiation</td><td>◈◈ Solar Driver | Initiation Solar Driver | Initiation Solar Driver | Initiation</td>
-<td>202–203</td><td>210–211</td>
-</tr><tr>
-<td>140</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Lunar Driver｜Attraction</td><td>◈◈ Lunar Driver｜Attraction Lunar Driver｜Attraction Lunar Driver｜Attraction</td>
-<td>203–204</td><td>211–212</td>
-</tr><tr>
-<td>141</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Mercurial Driver｜Interpretation</td><td>◈◈ Mercurial Driver｜Interpretation Mercurial Driver｜Interpretation Mercurial Driver｜Interpretation</td>
-<td>204–205</td><td>212–213</td>
-</tr><tr>
-<td>142</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Venusian Driver｜Valuation</td><td>◈◈ Venusian Driver｜Valuation Venusian Driver｜Valuation Venusian Driver｜Valuation</td>
-<td>205–206</td><td>213–214</td>
-</tr><tr>
-<td>143</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Martial Driver｜Execution Bias</td><td>◈◈ Martial Driver｜Execution Bias Martial Driver｜Execution Bias Martial Driver｜Execution Bias</td>
-<td>206–207</td><td>214–215</td>
-</tr><tr>
-<td>144</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Jovian Driver｜Expansion</td><td>◈◈ Jovian Driver｜Expansion Jovian Driver｜Expansion Jovian Driver｜Expansion</td>
-<td>207–208</td><td>215–216</td>
-</tr><tr>
-<td>145</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Saturnian Driver｜Structuring</td><td>◈◈ Saturnian Driver｜Structuring Saturnian Driver｜Structuring Saturnian Driver｜Structuring</td>
-<td>208–209</td><td>216–217</td>
-</tr><tr>
-<td>146</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Uranian Driver｜Mutation</td><td>◈◈ Uranian Driver｜Mutation Uranian Driver｜Mutation Uranian Driver｜Mutation</td>
-<td>209–210</td><td>217–218</td>
-</tr><tr>
-<td>147</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Neptunian Driver｜Boundary Dissolution</td><td>◈◈ Neptunian Driver｜Boundary Dissolution Neptunian Driver｜Boundary Dissolution Neptunian Driver｜Boundary Dissolution</td>
-<td>210–211</td><td>218–219</td>
-</tr><tr>
-<td>148</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Plutonian Driver｜Transformation</td><td>◈◈ Plutonian Driver｜Transformation Plutonian Driver｜Transformation Plutonian Driver｜Transformation</td>
-<td>211–213</td><td>219–220</td>
-</tr><tr>
-<td>149</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
+<td>149</td><td>P3</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Chiron Driver｜Recovery</td><td>Earth Driver｜Embodiment Earth Driver｜Embodiment Earth Driver｜Embodiment</td>
 <td>213–214</td><td>221–222</td>
 </tr><tr>
-<td>150</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Nodal Driver｜Continuation</td><td>◈◈ Nodal Driver｜Continuation Nodal Driver｜Continuation Nodal Driver｜Continuation</td>
-<td>214–215</td><td>223–224</td>
-</tr><tr>
-<td>151</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>151</td><td>P3</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Driver Priority | 现实如何决定什么先被回应</td><td>Driver Priority | 现实如何决定什么先被回应</td>
 <td>215–217</td><td>224–226</td>
 </tr><tr>
-<td>152</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Emergence |</td><td>Motion Emergence |</td>
-<td>217–218</td><td>226–226</td>
-</tr><tr>
-<td>153</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Coordinate |</td><td>Runtime Coordinate |</td>
-<td>218–219</td><td>227–227</td>
-</tr><tr>
-<td>154</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Coordinate Architecture |</td><td>Coordinate Architecture |</td>
-<td>219–220</td><td>228–228</td>
-</tr><tr>
-<td>155</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Emergence |</td><td>Motion Emergence |</td>
-<td>220–220</td><td>229–229</td>
-</tr><tr>
-<td>156</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Grammar 为什么变化存在基础语法</td><td>Motion Grammar 为什么变化存在基础语法</td>
-<td>220–222</td><td>229–230</td>
-</tr><tr>
-<td>157</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Bagua Motion Grammar |</td><td>Bagua Motion Grammar |</td>
-<td>222–223</td><td>231–232</td>
-</tr><tr>
-<td>158</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Eight Motion Primitives | 八种基础运动原型</td><td>Eight Motion Primitives | 八种基础运动原型</td>
-<td>223–224</td><td>232–233</td>
-</tr><tr>
-<td>159</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>坤 ☷ 承载运动 | 现实为什么能够持续存在</td><td>◈◈坤坤坤☷☷☷承载运动 | 现实为什么能够持续存在承载运动 | 现实为什么能够持续存在承载运动 | 现实为什么能够持续存在</td>
-<td>224–225</td><td>233–233</td>
-</tr><tr>
-<td>160</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>震 ☳ 启动运动 | 现实为什么能够打破静止</td><td>◈◈震震震☳☳☳启动运动 | 现实为什么能够打破静止启动运动 | 现实为什么能够打破静止启动运动 | 现实为什么能够打破静止</td>
-<td>225–225</td><td>234–234</td>
-</tr><tr>
-<td>161</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>巽 ☴ 渗透运动 | 现实为什么能够持续影响现实</td><td>巽巽巽☴☴☴渗透运动 | 现实为什么能够持续影响现实渗透运动 | 现实为什么能够持续影响现实渗透运动 | 现实为什么能够持续影响现实</td>
-<td>225–226</td><td>234–235</td>
-</tr><tr>
-<td>162</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>坎 ☵ 流动运动| 现实为什么不断寻找新的路径</td><td>◈◈坎坎坎☵☵☵流动运动|流动运动|流动运动|现实现实现实为什么不断寻找新的路径为什么不断寻找新的路径为什么不断寻找新的路径</td>
-<td>226–226</td><td>235–235</td>
-</tr><tr>
-<td>163</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>离 ☲ 分化运动 | 现实为什么不断形成新的区别</td><td>◈◈离离离☲☲☲分化运动 | 现实为什么不断形成新的区别分化运动 | 现实为什么不断形成新的区别分化运动 | 现实为什么不断形成新的区别</td>
-<td>226–227</td><td>235–236</td>
-</tr><tr>
-<td>164</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>艮 ☶ 定界运动 | 现实为什么形成边界</td><td>◈◈艮艮艮☶☶☶定界运动 | 现实为什么形成边界定界运动 | 现实为什么形成边界定界运动 | 现实为什么形成边界</td>
-<td>227–227</td><td>236–236</td>
-</tr><tr>
-<td>165</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>兑 ☱ 交换运动 | 现实为什么能够形成共同世界</td><td>◈◈兑兑兑☱☱☱交换运动 | 现实为什么能够形成共同世界交换运动 | 现实为什么能够形成共同世界交换运动 | 现实为什么能够形成共同世界</td>
-<td>227–228</td><td>236–237</td>
-</tr><tr>
-<td>166</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Transformation 运动如何彼此转换</td><td>Motion Transformation 运动如何彼此转换</td>
-<td>228–229</td><td>237–238</td>
-</tr><tr>
-<td>167</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Motion Loop | 运动如何形成持续闭环</td><td>◈◈ Motion Loop |Motion Loop |Motion Loop |运动如何运动如何运动如何形成持续闭环形成持续闭环形成持续闭环</td>
-<td>229–230</td><td>238–239</td>
-</tr><tr>
-<td>168</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Stabilization | 运动为什么开始稳定</td><td>Motion Stabilization | 运动为什么开始稳定</td>
-<td>230–231</td><td>239–240</td>
-</tr><tr>
-<td>169</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Architecture |</td><td>Motion Architecture |</td>
-<td>231–233</td><td>240–241</td>
-</tr><tr>
-<td>170</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Motion Networks | 为什么运动开始形成网络</td><td>◈◈ Motion Networks |Motion Networks |Motion Networks |为什么运动开始为什么运动开始为什么运动开始形成网络形成网络形成网络</td>
-<td>233–234</td><td>242–242</td>
-</tr><tr>
-<td>171</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Motion Circuitry | 为什么形成长期回路</td><td>◈◈ Motion Circuitry |Motion Circuitry |Motion Circuitry |为什么为什么为什么形成长期回路形成长期回路形成长期回路</td>
-<td>234–235</td><td>243–243</td>
-</tr><tr>
-<td>172</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Individual Motion Circuit |</td><td>Individual Motion Circuit |</td>
-<td>235–236</td><td>244–244</td>
-</tr><tr>
-<td>173</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Tribal Motion Circuit |</td><td>◈◈ Tribal Motion Circuit Tribal Motion Circuit Tribal Motion Circuit |||</td>
-<td>236–237</td><td>245–245</td>
-</tr><tr>
-<td>174</td><td>P3</td><td><strong>HEADING_CHANGED</strong></td>
+<td>174</td><td>P3</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Collective Motion Circuit |</td><td>Collective Motion Circuit | 现实为什么持续</td>
 <td>237–238</td><td>246–247</td>
 </tr><tr>
-<td>175</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Scale | 现实如何在不同层级运动</td><td>Motion Scale | 现实如何在不同层级运动</td>
-<td>238–239</td><td>247–248</td>
-</tr><tr>
-<td>176</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Compression |</td><td>Motion Compression |</td>
-<td>239–240</td><td>248–249</td>
-</tr><tr>
-<td>177</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Activation Window | 为什么现实不是一直运行</td><td>Activation Window | 为什么现实不是一直运行</td>
-<td>240–241</td><td>249–250</td>
-</tr><tr>
-<td>178</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Transit Activation | 为什么时间不断重新激活现实</td><td>Transit Activation | 为什么时间不断重新激活现实</td>
-<td>241–243</td><td>250–251</td>
-</tr><tr>
-<td>179</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Motion Weight |</td><td>Motion Weight |</td>
-<td>243–244</td><td>252–253</td>
-</tr><tr>
-<td>180</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Field Amplification | 为什么场放大运动</td><td>Field Amplification | 为什么场放大运动</td>
-<td>244–245</td><td>253–254</td>
-</tr><tr>
-<td>181</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Alignment Window |</td><td>Alignment Window |</td>
-<td>245–247</td><td>254–256</td>
-</tr><tr>
-<td>182</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Activation Saturation | 为什么运动开始过度强化</td><td>Activation Saturation | 为什么运动开始过度强化</td>
-<td>247–248</td><td>256–257</td>
-</tr><tr>
-<td>183</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Activation Fade | 为什么运动开始衰退</td><td>Activation Fade | 为什么运动开始衰退</td>
-<td>248–249</td><td>257–258</td>
-</tr><tr>
-<td>184</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>184</td><td>P3</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Temporal Closure | 为什么运动结束</td><td>Temporal Closure | 为什么运动结束</td>
 <td>249–252</td><td>258–260</td>
 </tr><tr>
-<td>185</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Network Architecture |</td><td>Runtime Network Architecture |</td>
-<td>252–253</td><td>261–262</td>
-</tr><tr>
-<td>186</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Alignment Network | 现实如何维持整体一致</td><td>Alignment Network | 现实如何维持整体一致</td>
-<td>253–254</td><td>262–263</td>
-</tr><tr>
-<td>187</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime State Formation |</td><td>Runtime State Formation |</td>
-<td>254–255</td><td>263–264</td>
-</tr><tr>
-<td>188</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime State Model |</td><td>Runtime State Model |</td>
-<td>255–256</td><td>264–265</td>
-</tr><tr>
-<td>189</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Consequences |</td><td>Runtime Consequences |</td>
-<td>256–257</td><td>265–266</td>
-</tr><tr>
-<td>190</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Feedback Architecture | 现实如何重新读取自己</td><td>Feedback Architecture | 现实如何重新读取自己</td>
-<td>257–258</td><td>266–267</td>
-</tr><tr>
-<td>191</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Reality Recomposition |</td><td>Reality Recomposition |</td>
-<td>258–259</td><td>267–268</td>
-</tr><tr>
-<td>192</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>New Question Formation |</td><td>New Question Formation |</td>
-<td>259–260</td><td>268–269</td>
-</tr><tr>
-<td>193</td><td>P3</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>193</td><td>P3</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Runtime Continuity | 现实如何进入下一轮运行</td><td>Runtime Continuity | 现实如何进入下一轮运行</td>
 <td>260–263</td><td>269–271</td>
 </tr><tr>
-<td>194</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>194</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>第四部｜ 人类运行载体 Human Runtime Carrier</td><td>第四部｜ 人类运行载体 Human Runtime Carrier</td>
 <td>263–263</td><td>272–272</td>
 </tr><tr>
-<td>195</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Part A｜Carrier Foundations</td><td>◈◈ Part A｜Carrier Foundations Part A｜Carrier Foundations Part A｜Carrier Foundations</td>
-<td>263–266</td><td>272–275</td>
-</tr><tr>
-<td>196</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Archetypes |</td><td>Carrier Archetypes |</td>
-<td>266–267</td><td>275–276</td>
-</tr><tr>
-<td>197</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>静态载体 | 为什么稳定是最早的承载能力</td><td>静态载体 | 为什么稳定是最早的承载能力</td>
-<td>267–268</td><td>276–277</td>
-</tr><tr>
-<td>198</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>节律载体 | 为什么载体开始与时间同步</td><td>节律载体 | 为什么载体开始与时间同步</td>
-<td>268–268</td><td>277–277</td>
-</tr><tr>
-<td>199</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>反应载体 | 为什么载体开始即时回应现实</td><td>反应载体 | 为什么载体开始即时回应现实</td>
-<td>268–269</td><td>277–278</td>
-</tr><tr>
-<td>200</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>行为载体 | 为什么有效的运行开始被保存为模式</td><td>行为载体 | 为什么有效的运行开始被保存为模式</td>
-<td>269–269</td><td>278–278</td>
-</tr><tr>
-<td>201</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>目标载体 | 为什么尚未发生的未来开始组织现在</td><td>目标载体 | 为什么尚未发生的未来开始组织现在</td>
-<td>269–270</td><td>278–279</td>
-</tr><tr>
-<td>202</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>认知载体 | 为什么载体开始在内部建立现实模型</td><td>认知载体 | 为什么载体开始在内部建立现实模型</td>
-<td>270–270</td><td>279–279</td>
-</tr><tr>
-<td>203</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>共享载体 | 为什么多个生命能够共同承载同一个</td><td>共享载体 | 为什么多个生命能够共同承载同一个</td>
-<td>270–271</td><td>279–280</td>
-</tr><tr>
-<td>204</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>系统载体 | 为什么现实能够跨越个体生命周期继</td><td>系统载体 | 为什么现实能够跨越个体生命周期继</td>
-<td>271–271</td><td>280–280</td>
-</tr><tr>
-<td>205</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>人工载体 | 为什么非生物系统开始承载越来越多</td><td>人工载体 | 为什么非生物系统开始承载越来越多</td>
-<td>271–272</td><td>280–281</td>
-</tr><tr>
-<td>206</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>复合载体 | 为什么现实最终会同时运行于多个载</td><td>复合载体 | 为什么现实最终会同时运行于多个载</td>
-<td>272–273</td><td>281–282</td>
-</tr><tr>
-<td>207</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Capability Layers |</td><td>Carrier Capability Layers |</td>
-<td>273–276</td><td>282–285</td>
-</tr><tr>
-<td>208</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Scale |</td><td>Carrier Scale |</td>
-<td>276–279</td><td>285–288</td>
-</tr><tr>
-<td>209</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
-<td>Part B｜Human Initialization</td><td>◈◈ Part B｜Human Initialization Part B｜Human Initialization Part B｜Human Initialization</td>
-<td>279–282</td><td>288–291</td>
-</tr><tr>
-<td>210</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Compression |</td><td>Carrier Compression |</td>
-<td>282–283</td><td>291–292</td>
-</tr><tr>
-<td>211</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Biological Compression |</td><td>Biological Compression |</td>
-<td>283–284</td><td>292–293</td>
-</tr><tr>
-<td>212</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
+<td>212</td><td>P4</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Design Layer | 生物压缩如何形成运行配置</td><td>Design Layer | 生命为什么会形成不同的初始配置</td>
 <td>284–285</td><td>293–295</td>
 </tr><tr>
-<td>213</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>213</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Reality Initialization State（RIS）|</td><td>Reality Initialization State（RIS）|</td>
 <td>285–287</td><td>295–297</td>
 </tr><tr>
-<td>214</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>214</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Initialization Trigger |</td><td>Initialization Trigger |</td>
 <td>287–288</td><td>297–301</td>
 </tr><tr>
-<td>215</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>215</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>General Initialization Forms |</td><td>General Initialization Forms |</td>
 <td>288–289</td><td>302–305</td>
 </tr><tr>
-<td>216</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>216</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Human Initialization |</td><td>Human Initialization |</td>
 <td>289–290</td><td>306–309</td>
 </tr><tr>
-<td>217</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>217</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Organizational Initialization |</td><td>Organizational Initialization |</td>
 <td>290–290</td><td>309–313</td>
 </tr><tr>
-<td>218</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
+<td>218</td><td>P4</td><td><strong>EXTRACTION_OVERLAY_ARTIFACT</strong></td>
 <td>Synthetic Initialization |</td><td>◈◈ Synth Synth Synth etic Initialization |etic Initialization |etic Initialization |</td>
 <td>290–291</td><td>313–317</td>
 </tr><tr>
-<td>219</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
+<td>219</td><td>P4</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Civilizational Initialization | 为什么文明更可能拥</td><td>Civilizational Initialization｜文明如何在没有单一</td>
 <td>291–292</td><td>317–321</td>
 </tr><tr>
-<td>220</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
+<td>220</td><td>P4</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Coordinate Embedding |</td><td>Initialization Continuity｜初始条件如何持续进入</td>
 <td>292–294</td><td>321–325</td>
 </tr><tr>
-<td>221</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
+<td>221</td><td>P4</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Initialization Stabilization |</td><td>Path Dependence｜为什么起点会影响未来，却不</td>
 <td>294–296</td><td>325–330</td>
 </tr><tr>
-<td>222</td><td>P4</td><td><strong>HEADING_CHANGED</strong></td>
+<td>222</td><td>P4</td><td><strong>SEMANTIC_HEADING_CHANGED</strong></td>
 <td>Human Runtime Initialization |</td><td>Human Runtime Initialization｜初始化如何进入</td>
 <td>296–298</td><td>330–334</td>
 </tr><tr>
-<td>223</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Body as Carrier | 身体为什么存在于运行之中</td><td>Body as Carrier | 身体为什么存在于运行之中</td>
-<td>298–299</td><td>336–337</td>
-</tr><tr>
-<td>224</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Hierarchy | 载体为什么拥有不同层级</td><td>Carrier Hierarchy | 载体为什么拥有不同层级</td>
-<td>299–301</td><td>337–339</td>
-</tr><tr>
-<td>225</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Capacity｜载体承载能力从何而来</td><td>Carrier Capacity｜载体承载能力从何而来</td>
-<td>301–303</td><td>339–341</td>
-</tr><tr>
-<td>226</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Capability Boundary｜</td><td>Carrier Capability Boundary｜</td>
-<td>303–304</td><td>341–342</td>
-</tr><tr>
-<td>227</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Constraint｜载体为什么永远存在限制</td><td>Carrier Constraint｜载体为什么永远存在限制</td>
-<td>304–308</td><td>342–346</td>
-</tr><tr>
-<td>228</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Integrity | 载体为什么能够保持完整</td><td>Carrier Integrity | 载体为什么能够保持完整</td>
-<td>308–309</td><td>346–347</td>
-</tr><tr>
-<td>229</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Biological Adaptation｜身体如何适应现实</td><td>Biological Adaptation｜身体如何适应现实</td>
-<td>309–311</td><td>347–349</td>
-</tr><tr>
-<td>230</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Cost | 身体为何需要支付运行成本</td><td>Runtime Cost | 身体为何需要支付运行成本</td>
-<td>311–313</td><td>349–350</td>
-</tr><tr>
-<td>231</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Recovery Requirement｜恢复为什么存在</td><td>Recovery Requirement｜恢复为什么存在</td>
-<td>313–314</td><td>351–352</td>
-</tr><tr>
-<td>232</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>232</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Internal Connectivity |</td><td>Internal Connectivity |</td>
 <td>314–318</td><td>352–355</td>
 </tr><tr>
-<td>233</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Sensory Interface | 现实从哪里进入</td><td>Sensory Interface | 现实从哪里进入</td>
-<td>318–320</td><td>356–358</td>
-</tr><tr>
-<td>234</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Determination Runtime |</td><td>Determination Runtime |</td>
-<td>320–322</td><td>358–360</td>
-</tr><tr>
-<td>235</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Environment Runtime |</td><td>Environment Runtime |</td>
-<td>322–324</td><td>360–361</td>
-</tr><tr>
-<td>236</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Perceptual Filtering |</td><td>Perceptual Filtering |</td>
-<td>324–325</td><td>362–363</td>
-</tr><tr>
-<td>237</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Attention Architecture |</td><td>Attention Architecture |</td>
-<td>325–327</td><td>363–365</td>
-</tr><tr>
-<td>238</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Signal Prioritization |</td><td>Signal Prioritization |</td>
-<td>327–328</td><td>365–366</td>
-</tr><tr>
-<td>239</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Reality Resolution |</td><td>Reality Resolution |</td>
-<td>328–330</td><td>366–367</td>
-</tr><tr>
-<td>240</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Cognition Interface |</td><td>Cognition Interface |</td>
-<td>330–331</td><td>368–369</td>
-</tr><tr>
-<td>241</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Nervous Runtime |</td><td>Nervous Runtime |</td>
-<td>331–332</td><td>369–370</td>
-</tr><tr>
-<td>242</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Hormonal Runtime | 神经讯号如何变成身体状态</td><td>Hormonal Runtime | 神经讯号如何变成身体状态</td>
-<td>332–334</td><td>370–372</td>
-</tr><tr>
-<td>243</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>State Override Runtime | 现实如何改写身体状态</td><td>State Override Runtime | 现实如何改写身体状态</td>
-<td>334–337</td><td>372–375</td>
-</tr><tr>
-<td>244</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Circadian Runtime | 现实何时被允许运行</td><td>Circadian Runtime | 现实何时被允许运行</td>
-<td>337–339</td><td>375–377</td>
-</tr><tr>
-<td>245</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Metabolic Runtime |</td><td>Metabolic Runtime |</td>
-<td>339–340</td><td>377–378</td>
-</tr><tr>
-<td>246</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Biological Noise | 身体如何扭曲现实</td><td>Biological Noise | 身体如何扭曲现实</td>
-<td>340–342</td><td>378–380</td>
-</tr><tr>
-<td>247</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Adaptive Biology |</td><td>Adaptive Biology |</td>
-<td>342–345</td><td>380–383</td>
-</tr><tr>
-<td>248</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Circadian Parameters |</td><td>Circadian Parameters |</td>
-<td>345–346</td><td>383–384</td>
-</tr><tr>
-<td>249</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Input Modulation | 身体如何调制现实输入</td><td>Input Modulation | 身体如何调制现实输入</td>
-<td>346–348</td><td>384–386</td>
-</tr><tr>
-<td>250</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Buffer Capacity | 身体如何缓冲现实波动</td><td>Buffer Capacity | 身体如何缓冲现实波动</td>
-<td>348–350</td><td>386–388</td>
-</tr><tr>
-<td>251</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Parameters |</td><td>Carrier Parameters |</td>
-<td>350–352</td><td>388–390</td>
-</tr><tr>
-<td>252</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Mediums |</td><td>Runtime Mediums |</td>
-<td>352–355</td><td>390–393</td>
-</tr><tr>
-<td>253</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Light Medium | 光如何让时间进入生命</td><td>Light Medium | 光如何让时间进入生命</td>
-<td>355–358</td><td>393–396</td>
-</tr><tr>
-<td>254</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Air Medium | 空气如何让交换进入生命</td><td>Air Medium | 空气如何让交换进入生命</td>
-<td>358–360</td><td>396–398</td>
-</tr><tr>
-<td>255</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Water Medium | 水如何让流动进入生命</td><td>Water Medium | 水如何让流动进入生命</td>
-<td>360–362</td><td>398–400</td>
-</tr><tr>
-<td>256</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Food Medium | 食物如何让资源进入生命</td><td>Food Medium | 食物如何让资源进入生命</td>
-<td>362–364</td><td>400–402</td>
-</tr><tr>
-<td>257</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Sound Medium | 声音如何让环境信息进入生命</td><td>Sound Medium | 声音如何让环境信息进入生命</td>
-<td>364–366</td><td>402–404</td>
-</tr><tr>
-<td>258</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Temperature Medium |</td><td>Temperature Medium |</td>
-<td>366–368</td><td>404–406</td>
-</tr><tr>
-<td>259</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Space Medium | 空间如何让位置进入生命</td><td>Space Medium | 空间如何让位置进入生命</td>
-<td>368–370</td><td>406–407</td>
-</tr><tr>
-<td>260</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>External Runtime Systems |</td><td>External Runtime Systems |</td>
-<td>370–372</td><td>408–410</td>
-</tr><tr>
-<td>261</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>261</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Runtime Ecology |</td><td>Runtime Ecology |</td>
 <td>372–376</td><td>410–413</td>
 </tr><tr>
-<td>262</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Inertia |</td><td>Carrier Inertia |</td>
-<td>376–377</td><td>414–415</td>
-</tr><tr>
-<td>263</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Stability |</td><td>Carrier Stability |</td>
-<td>377–379</td><td>415–417</td>
-</tr><tr>
-<td>264</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Organization |</td><td>Carrier Organization |</td>
-<td>379–380</td><td>417–418</td>
-</tr><tr>
-<td>265</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Organization Layers |</td><td>Carrier Organization Layers |</td>
-<td>380–382</td><td>418–420</td>
-</tr><tr>
-<td>266</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Organization Coordination |</td><td>Organization Coordination |</td>
-<td>382–383</td><td>420–421</td>
-</tr><tr>
-<td>267</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Carrier Scale Integration |</td><td>Carrier Scale Integration |</td>
-<td>383–386</td><td>421–424</td>
-</tr><tr>
-<td>268</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Adaptation｜</td><td>Runtime Adaptation｜</td>
-<td>386–388</td><td>424–426</td>
-</tr><tr>
-<td>269</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Maintenance |</td><td>Runtime Maintenance |</td>
-<td>388–389</td><td>426–427</td>
-</tr><tr>
-<td>270</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Recovery |</td><td>Runtime Recovery |</td>
-<td>389–391</td><td>427–429</td>
-</tr><tr>
-<td>271</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Runtime Drift | 为什么人类运行会逐渐偏离</td><td>Runtime Drift | 为什么人类运行会逐渐偏离</td>
-<td>391–393</td><td>429–431</td>
-</tr><tr>
-<td>272</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>272</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Runtime Failure |</td><td>Runtime Failure |</td>
 <td>393–396</td><td>431–433</td>
 </tr><tr>
-<td>273</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
-<td>Human Runtime Architecture |</td><td>Human Runtime Architecture |</td>
-<td>396–397</td><td>434–435</td>
-</tr><tr>
-<td>274</td><td>P4</td><td><strong>CONTENT_CHANGED</strong></td>
+<td>274</td><td>P4</td><td><strong>HEADING_STABLE_CONTENT_COMPARISON_PENDING</strong></td>
 <td>Experience Threshold | 为什么能够持续运行的人</td><td>Experience Threshold | 为什么能够持续运行的人</td>
 <td>397–402</td><td>435–439</td>
 </tr></tbody></table>

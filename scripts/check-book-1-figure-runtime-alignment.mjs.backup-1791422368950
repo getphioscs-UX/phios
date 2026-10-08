@@ -44,7 +44,7 @@ assert.equal(registry.conceptualMappings.projection.observedEvidenceMutableByPro
 const bookOne = bookRegistry.books.find(item => item.book_id === 'book-1');
 assert.ok(bookOne, 'Book I must be registered');
 assert.equal(bookOne.asset.bucket, 'phios-public-assets');
-assert.equal(bookOne.asset.figure_root, 'images/figures/books/book-1/');
+assert.equal(bookOne.asset.figure_root, 'images/figures/book-1/');
 
 const bookOneFigureAssets = publicAssetRegistry.assets.find(
   item => item.asset_code === 'BOOK-1-FIGURES'
