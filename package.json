@@ -2829,7 +2829,18 @@
     "build:dossier-us:w8g": "node scripts/build-dossier-us-w8g-rp-candidates.mjs",
     "build:dossier-us:w8h": "node scripts/build-dossier-us-w8h-position-review.mjs",
     "build:dossier-us:w8i": "node scripts/build-dossier-us-w8i-accepted-dossier.mjs",
-    "build:dossier-us:golden-pregate": "npm run build:dossier-us:w8d && npm run build:dossier-us:w8f && npm run build:dossier-us:status"
+    "build:dossier-us:golden-pregate": "npm run build:dossier-us:w8d && npm run build:dossier-us:w8f && npm run build:dossier-us:status",
+    "check:profile:personal-evidence:bilingual-publication": "node scripts/run-zero-cost-regression.mjs check:profile:personal-evidence:bilingual-publication",
+    "check:profile:prd-w11r5:pfig-publication": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:pfig-publication",
+    "check:profile:prd-w11r5:pfig-primary-binding": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:pfig-primary-binding",
+    "check:profile:prd-w11r5:pfig-state": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:pfig-state",
+    "check:profile:prd-w11r5:no-duplicate-pfig": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:no-duplicate-pfig",
+    "check:profile:prd-w11r5:radar": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:radar",
+    "check:profile:prd-w11r5:semantic-drift": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:semantic-drift",
+    "check:profile:prd-w11r5:print": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:print",
+    "check:profile:prd-w11r5:mobile": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5:mobile",
+    "check:profile:prd-w11r5": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r5",
+    "build:profile:prd-w11r5": "node scripts/build-profile-personal-evidence-w11r3.mjs --w11r5"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
