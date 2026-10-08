@@ -614,7 +614,7 @@ function realityBridge(fig, locale) {
   return `<section class="prf-pfig prf-pfig--bridge" data-pfig="PFIG-009"><header class="prf-pfig__head"><div><p class="prf-pfig__eyebrow">${zh(locale) ? "\u73B0\u5B9E\u6865\u63A5" : "REALITY BRIDGE"}</p><h3>${zh(locale) ? "\u4ECE\u4E2A\u4EBA\u8BC1\u636E\u56DE\u5230\u73B0\u5B9E" : "Bring personal evidence back to reality"}</h3></div><p>${zh(locale) ? "\u4E2A\u4EBA\u8BC1\u636E\u63D0\u4F9B\u89C2\u5BDF\u89D2\u5EA6\uFF0C\u5F53\u4E0B\u73B0\u5B9E\u63D0\u4F9B\u5F53\u4E0B\u60C5\u5883\uFF1B\u4E8C\u8005\u4E0D\u4F1A\u4E92\u76F8\u8BC1\u660E\u3002" : "Personal evidence offers a lens; current reality supplies present context. Neither validates the other."}</p></header><div class="prf-bridge-flow">${stage("01", zh(locale) ? "\u4E2A\u4EBA\u8BC1\u636E" : "Personal evidence", zh(locale) ? "\u4FDD\u7559\u6765\u6E90\u4E0E\u65F6\u95F4" : "Source and date stay visible", true)}${stage("02", zh(locale) ? "\u5F53\u4E0B\u73B0\u5B9E" : "Current reality", hasContext ? zh(locale) ? "\u5DF2\u6709\u5F53\u524D\u60C5\u5883\u8BC1\u636E" : "Current context evidence is available" : zh(locale) ? "\u5C1A\u672A\u8FDE\u63A5\u5F53\u524D\u60C5\u5883" : "No current context linked yet", hasContext)}${stage("03", zh(locale) ? "\u9700\u8981\u89C2\u5BDF\u7684\u5DEE\u5F02" : "What to observe", contradictions.length ? zh(locale) ? `${contradictions.length} \u4E2A\u6765\u6E90\uFF0F\u60C5\u5883\u5DEE\u5F02\u4ECD\u53EF\u89C1` : `${contradictions.length} source/context difference(s) remain visible` : zh(locale) ? "\u76EE\u524D\u6CA1\u6709\u660E\u786E\u77DB\u76FE" : "No explicit contradiction in this result", contradictions.length > 0)}${stage("04", zh(locale) ? "\u73B0\u5B9E\u95EE\u9898" : "Reality question", evidenceStatement(questions[0]?.text, locale) || (zh(locale) ? "\u52A0\u5165\u5F53\u4E0B\u73B0\u5B9E \u540E\u518D\u7EE7\u7EED\u89C2\u5BDF\u3002" : "Add current reality to continue the observation."), questions.length > 0)}</div><div class="prf-bridge-actions"><a class="cx-button" href="/perspectives/personal/#cx-current-reality">${zh(locale) ? "\u4E0E\u5F53\u4E0B\u73B0\u5B9E \u5BF9\u7167" : "Compare with current reality"}</a></div></section>`;
 }
 var PROFILE_VISUAL_MVP_IDS = Object.freeze(["PFIG-001", "PFIG-002", "PFIG-003", "PFIG-004", "PFIG-005", "PFIG-006", "PFIG-007", "PFIG-008", "PFIG-009"]);
-function renderPersonalEvidenceFigure(figure, { locale = "en" } = {}) {
+function renderPersonalEvidenceFigure(figure, { locale = "en", publicationRows = [], publicationSources = [] } = {}) {
   const renderers = { "PFIG-001": dimensionMap, "PFIG-002": patternRadar, "PFIG-003": strengthCost, "PFIG-004": contextVariation, "PFIG-005": convergence, "PFIG-006": workMap, "PFIG-007": relationshipMap, "PFIG-008": decisionMap, "PFIG-009": realityBridge };
   const render = renderers[figure?.pfig];
   if (!render) throw new Error("PERSONAL_EVIDENCE_FIGURE_NOT_ADMITTED");
@@ -640,7 +640,10 @@ function renderPersonalEvidenceFigure(figure, { locale = "en" } = {}) {
         return `<text x="${x}" y="${y}" text-anchor="middle" font-size="10">${i + 1}: ${p.value}</text>`;
       }).join("")}</svg>`;
     }).join("") : "";
-    return `<figure class="pe-support-figure" data-pfig="${esc(figure.pfig)}" data-pfig-state="${figure.state}" aria-label="${title}"><figcaption>${title} \xB7 ${states[figure.state]}</figcaption>${radar}${body}</figure>`;
+    const ipip = figure.pfig === "PFIG-002" ? publicationSources.filter((c) => c.providerFamily === "IPIP_BIG_FIVE" && Number.isFinite(c.value?.rawMean)) : [];
+    const nativeSeries = ipip.length ? `<div class="pe-native-series" data-source-series="IPIP_BIG_FIVE"><strong>\u5927\u4E94\u4EBA\u683C\u539F\u59CB\u5747\u503C / Big Five native means</strong>${ipip.map((c) => `<div data-evidence-ref="${esc(c.signalRef)}">${esc(evidenceLabel(c.facetId || c.domainId, "zh-Hans"))} / ${esc(evidenceLabel(c.facetId || c.domainId, "en"))}: ${c.value.rawMean}</div>`).join("")}</div>` : "";
+    const map = ["PFIG-007", "PFIG-008"].includes(figure.pfig) && publicationRows.length ? `<div class="pe-state-map" data-state-map="${figure.pfig}">${publicationRows.map((r) => `<div class="pe-state-node" data-evidence-refs="${esc((r.sourceIds || []).join(" "))}"><strong>${esc(r.zh)}<span lang="en">${esc(r.en)}</span></strong><p>${esc(r.stateZh)}<span lang="en">${esc(r.stateEn)}</span></p></div>`).join("")}</div>` : "";
+    return `<figure class="pe-support-figure" data-pfig="${esc(figure.pfig)}" data-pfig-state="${figure.state}" aria-label="${title}"><figcaption>${title} \xB7 ${states[figure.state]}</figcaption>${radar}${map || body}${nativeSeries}</figure>`;
   }
   return render(figure, locale);
 }
@@ -686,7 +689,7 @@ function renderPersonalEvidenceDossier({ dossier, profileView, customerName = ""
     const noteBlock = ["SEC-08", "SEC-09"].includes(c.sectionId) ? blocks[0] : blocks.at(-1);
     noteBlock.html += note(c.note);
     noteBlock.height += 220;
-    for (const figure of section.pfigs) blocks.push({ html: renderPersonalEvidenceFigure(figure, { locale: "bilingual" }), height: figure.pfig === "PFIG-002" ? 650 : 480 });
+    for (const figure of section.pfigs) blocks.push({ html: renderPersonalEvidenceFigure(figure, { locale: "bilingual", publicationRows: c.tables?.[0]?.rows || [], publicationSources: profileView.signalCards || [] }), height: figure.pfig === "PFIG-002" ? 700 : 650 });
     let chunk = [], height = 0, part = 1;
     const emit = () => {
       if (chunk.length) {
