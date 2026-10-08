@@ -2862,7 +2862,16 @@
     "check:profile:pfig-publication-legibility": "node scripts/run-zero-cost-regression.mjs check:profile:pfig-publication-legibility",
     "check:profile:pfig-review-browser": "node scripts/run-zero-cost-regression.mjs check:profile:pfig-review-browser",
     "check:profile:pfig-semantic-grammar": "node scripts/run-zero-cost-regression.mjs check:profile:pfig-semantic-grammar",
-    "check:profile:prd-w11r6": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r6"
+    "check:profile:prd-w11r6": "node scripts/run-zero-cost-regression.mjs check:profile:prd-w11r6",
+    "build:dossier-cn:w8a": "npm run build:runtime-position-48:w8a",
+    "build:dossier-cn:w8b": "npm run build:runtime-position-48:w8b",
+    "build:dossier-cn:w8c": "npm run build:runtime-position-48:w8c",
+    "build:dossier-cn:w8d": "node scripts/build-dossier-cn-w8d-observable-features.mjs",
+    "build:dossier-cn:w8e": "npm run build:runtime-position-48:w8d",
+    "build:dossier-cn:w8f": "npm run build:runtime-position-48:w8e",
+    "build:dossier-cn:status": "node scripts/build-dossier-cn-golden-closure-status.mjs",
+    "build:dossier-cn:golden-pregate": "npm run build:dossier-cn:w8a && npm run build:dossier-cn:w8b && npm run build:dossier-cn:w8c && npm run build:dossier-cn:w8d && npm run build:dossier-cn:w8e && npm run build:dossier-cn:w8f && npm run build:dossier-cn:status",
+    "check:dossier-cn:golden": "node scripts/run-zero-cost-regression.mjs check:dossier-cn:golden"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
