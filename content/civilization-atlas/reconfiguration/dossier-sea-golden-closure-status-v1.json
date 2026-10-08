@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-DOSSIER-SEA-GOLDEN-CLOSURE-STATUS-v1.0.0",
   "dossierId": "DOSSIER-SEA",
-  "status": "GOLDEN_DOSSIER_IN_PROGRESS",
+  "status": "GOLDEN_DOSSIER_CLOSED",
   "states": {
     "W8-A": "COMPLETE",
     "W8-B": "COMPLETE",
@@ -10,10 +10,21 @@
     "W8-E": "COMPLETE",
     "W8-F": "COMPLETE",
     "W8-G": "COMPLETE",
-    "W8-H": "HUMAN_REVIEW_REQUIRED",
-    "W8-I": "READY_BUT_NOT_ACTIVATED"
+    "W8-H": "COMPLETE",
+    "W8-I": "COMPLETE"
   },
-  "nextStage": "W8-H",
+  "completedStages": [
+    "W8-A",
+    "W8-B",
+    "W8-C",
+    "W8-D",
+    "W8-E",
+    "W8-F",
+    "W8-G",
+    "W8-H",
+    "W8-I"
+  ],
+  "nextStage": "GOLDEN_DOSSIER_CLOSED",
   "admittedAuthorityClaims": 7,
   "admittedUniqueSources": 5,
   "admittedLanes": 7,
@@ -27,7 +38,7 @@
     "SEA-W8F-SEM-REGIONAL-ECONOMIC-CONNECTIVITY-RUNTIME",
     "SEA-W8F-SEM-ENERGY-EXTERNAL-CONSTRAINT"
   ],
-  "rpCandidateIds": [
+  "acceptedRpCandidateIds": [
     "SEA-RP-22-SEA-W8F-SEM-SUPPLY-CHAIN-INVESTMENT-CARRIER",
     "SEA-RP-23-SEA-W8F-SEM-REGIONAL-ECONOMIC-CONNECTIVITY-RUNTIME",
     "SEA-RP-18-SEA-W8F-SEM-ENERGY-EXTERNAL-CONSTRAINT"
@@ -41,7 +52,10 @@
     "cnPositionReuseAllowed": false,
     "usPositionReuseAllowed": false,
     "semanticBasisMustBeSEALineaged": true,
-    "wholeDossierCollapseAllowed": false
+    "wholeDossierCollapseAllowed": false,
+    "memberStateHeterogeneityPreserved": true
   },
+  "acceptedCurrentDossier": "content/civilization-atlas/reconfiguration/dossier-sea-w8i-accepted-current-dossier-v1.json",
+  "closureReceipt": "content/civilization-atlas/reconfiguration/dossier-sea-w8i-golden-closure-receipt-v1.json",
   "providerCalls": 0
 }
