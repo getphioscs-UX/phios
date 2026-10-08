@@ -1,0 +1,961 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "rows": [
+    {
+      "id": "B01-FAIL-01",
+      "route": "/books/reality-navigation/",
+      "url": "https://getphios.com/books/reality-navigation/?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "MISSING_VISUAL_ASSET",
+      "owner": "content/registry/public-assets.json / R2 asset owner",
+      "expected": "Registered HERO-023 decodes successfully",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "VISUAL_ASSET_RUNTIME_FAILURE"
+        ],
+        "canonical": "https://getphios.com/books/reality-navigation/",
+        "h1": [
+          "Reality Navigation"
+        ],
+        "visualFailures": [
+          {
+            "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+            "classification": "MISSING_ASSET",
+            "http": {
+              "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+              "status": 404,
+              "contentType": "text/plain;charset=UTF-8",
+              "method": "HEAD",
+              "timestamp": "2026-10-08T08:28:08.487Z"
+            }
+          }
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Book-8-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "BLOCKED_EXTERNAL_ASSET_404",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-02",
+      "route": "/books/reality-navigation/",
+      "url": "https://getphios.com/books/reality-navigation/?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "MISSING_VISUAL_ASSET",
+      "owner": "content/registry/public-assets.json / R2 asset owner",
+      "expected": "Registered HERO-023 decodes successfully",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "VISUAL_ASSET_RUNTIME_FAILURE"
+        ],
+        "canonical": "https://getphios.com/books/reality-navigation/",
+        "h1": [
+          "Reality Navigation"
+        ],
+        "visualFailures": [
+          {
+            "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+            "classification": "MISSING_ASSET",
+            "http": {
+              "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+              "status": 404,
+              "contentType": "text/plain;charset=UTF-8",
+              "method": "HEAD",
+              "timestamp": "2026-10-08T08:28:08.487Z"
+            }
+          }
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Book-8-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "BLOCKED_EXTERNAL_ASSET_404",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-03",
+      "route": "/articles/",
+      "url": "https://getphios.com/articles/?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "LOCALIZATION_DEFECT",
+      "owner": "assets/customer-ui/js/surfaces/knowledge.js",
+      "expected": "Native taxonomy titles instead of theme enums",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "RAW_CUSTOMER_ENUM_OR_NULL"
+        ],
+        "canonical": "https://getphios.com/articles/",
+        "h1": [
+          "Published explanations, organized for entry rather than endless scrolling."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Articles-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-04",
+      "route": "/articles/",
+      "url": "https://getphios.com/articles/?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "LOCALIZATION_DEFECT",
+      "owner": "assets/customer-ui/js/surfaces/knowledge.js",
+      "expected": "Native taxonomy titles instead of theme enums",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "RAW_CUSTOMER_ENUM_OR_NULL"
+        ],
+        "canonical": "https://getphios.com/articles/",
+        "h1": [
+          "Published explanations, organized for entry rather than endless scrolling."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Articles-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-05",
+      "route": "/enterprise/",
+      "url": "https://getphios.com/enterprise/?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Research positioning owner; no dedicated Enterprise route registered",
+      "expected": "No dedicated route promised; use existing /research/ positioning",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "More answers.\nThe harder question:\nWhat comes next?"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-06",
+      "route": "/enterprise/",
+      "url": "https://getphios.com/enterprise/?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Research positioning owner; no dedicated Enterprise route registered",
+      "expected": "No dedicated route promised; use existing /research/ positioning",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "More answers.\nThe harder question:\nWhat comes next?"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-07",
+      "route": "/about/",
+      "url": "https://getphios.com/about/?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "about/index.html",
+      "expected": "https://getphios.com/about/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/about/",
+        "h1": [
+          "Built to keep a changing reality understandable."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/About-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-08",
+      "route": "/about/",
+      "url": "https://getphios.com/about/?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "about/index.html",
+      "expected": "https://getphios.com/about/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/about/",
+        "h1": [
+          "Built to keep a changing reality understandable."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/About-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-09",
+      "route": "/terms.html",
+      "url": "https://getphios.com/terms.html?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "terms.html",
+      "expected": "https://getphios.com/terms.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "Terms of Use"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Legal-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-10",
+      "route": "/terms.html",
+      "url": "https://getphios.com/terms.html?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "terms.html",
+      "expected": "https://getphios.com/terms.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "Terms of Use"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Legal-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-11",
+      "route": "/privacy.html",
+      "url": "https://getphios.com/privacy.html?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "privacy.html",
+      "expected": "https://getphios.com/privacy.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "Privacy Policy"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Privacy-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-12",
+      "route": "/privacy.html",
+      "url": "https://getphios.com/privacy.html?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "privacy.html",
+      "expected": "https://getphios.com/privacy.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "Privacy Policy"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Privacy-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-13",
+      "route": "/ai-disclosure.html",
+      "url": "https://getphios.com/ai-disclosure.html?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "ai-disclosure.html",
+      "expected": "https://getphios.com/ai-disclosure.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "AI Disclosure"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/AI-disclosure-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-14",
+      "route": "/ai-disclosure.html",
+      "url": "https://getphios.com/ai-disclosure.html?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "ai-disclosure.html",
+      "expected": "https://getphios.com/ai-disclosure.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "AI Disclosure"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/AI-disclosure-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-15",
+      "route": "/will/",
+      "url": "https://getphios.com/will/?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Will service / Financial Will owner; no dedicated /will/ route registered",
+      "expected": "No independent route promised; retain existing consent/service boundary",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "More answers.\nThe harder question:\nWhat comes next?"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Will-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-16",
+      "route": "/will/",
+      "url": "https://getphios.com/will/?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Will service / Financial Will owner; no dedicated /will/ route registered",
+      "expected": "No independent route promised; retain existing consent/service boundary",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "More answers.\nThe harder question:\nWhat comes next?"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Will-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-17",
+      "route": "/books/reality-navigation/",
+      "url": "https://getphios.com/books/reality-navigation/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "MISSING_VISUAL_ASSET",
+      "owner": "content/registry/public-assets.json / R2 asset owner",
+      "expected": "Registered HERO-023 decodes successfully",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "VISUAL_ASSET_RUNTIME_FAILURE"
+        ],
+        "canonical": "https://getphios.com/books/reality-navigation/",
+        "h1": [
+          "世界将如何继续"
+        ],
+        "visualFailures": [
+          {
+            "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+            "classification": "MISSING_ASSET",
+            "http": {
+              "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+              "status": 404,
+              "contentType": "text/plain;charset=UTF-8",
+              "method": "HEAD",
+              "timestamp": "2026-10-08T08:28:08.487Z"
+            }
+          }
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Book-8-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "BLOCKED_EXTERNAL_ASSET_404",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-18",
+      "route": "/books/reality-navigation/",
+      "url": "https://getphios.com/books/reality-navigation/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "MISSING_VISUAL_ASSET",
+      "owner": "content/registry/public-assets.json / R2 asset owner",
+      "expected": "Registered HERO-023 decodes successfully",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "VISUAL_ASSET_RUNTIME_FAILURE"
+        ],
+        "canonical": "https://getphios.com/books/reality-navigation/",
+        "h1": [
+          "世界将如何继续"
+        ],
+        "visualFailures": [
+          {
+            "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+            "classification": "MISSING_ASSET",
+            "http": {
+              "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+              "status": 404,
+              "contentType": "text/plain;charset=UTF-8",
+              "method": "HEAD",
+              "timestamp": "2026-10-08T08:28:08.487Z"
+            }
+          }
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Book-8-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "BLOCKED_EXTERNAL_ASSET_404",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-19",
+      "route": "/articles/",
+      "url": "https://getphios.com/articles/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "LOCALIZATION_DEFECT",
+      "owner": "assets/customer-ui/js/surfaces/knowledge.js",
+      "expected": "Native taxonomy titles instead of theme enums",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "RAW_CUSTOMER_ENUM_OR_NULL"
+        ],
+        "canonical": "https://getphios.com/articles/",
+        "h1": [
+          "把已发布解释整理成清楚的入口，而不是无尽滚动。"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Articles-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-20",
+      "route": "/articles/",
+      "url": "https://getphios.com/articles/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "LOCALIZATION_DEFECT",
+      "owner": "assets/customer-ui/js/surfaces/knowledge.js",
+      "expected": "Native taxonomy titles instead of theme enums",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "RAW_CUSTOMER_ENUM_OR_NULL"
+        ],
+        "canonical": "https://getphios.com/articles/",
+        "h1": [
+          "把已发布解释整理成清楚的入口，而不是无尽滚动。"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Articles-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-21",
+      "route": "/enterprise/",
+      "url": "https://getphios.com/enterprise/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Research positioning owner; no dedicated Enterprise route registered",
+      "expected": "No dedicated route promised; use existing /research/ positioning",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "答案越来越多。\n真正困难的是：\n下一步怎么办？"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-22",
+      "route": "/enterprise/",
+      "url": "https://getphios.com/enterprise/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Research positioning owner; no dedicated Enterprise route registered",
+      "expected": "No dedicated route promised; use existing /research/ positioning",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "答案越来越多。\n真正困难的是：\n下一步怎么办？"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-23",
+      "route": "/about/",
+      "url": "https://getphios.com/about/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "about/index.html",
+      "expected": "https://getphios.com/about/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/about/",
+        "h1": [
+          "为持续变化的现实，保留可以理解的结构。"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/About-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-24",
+      "route": "/about/",
+      "url": "https://getphios.com/about/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "about/index.html",
+      "expected": "https://getphios.com/about/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/about/",
+        "h1": [
+          "为持续变化的现实，保留可以理解的结构。"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/About-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-25",
+      "route": "/terms.html",
+      "url": "https://getphios.com/terms.html?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "terms.html",
+      "expected": "https://getphios.com/terms.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "使用条款"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Legal-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-26",
+      "route": "/terms.html",
+      "url": "https://getphios.com/terms.html?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "terms.html",
+      "expected": "https://getphios.com/terms.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "使用条款"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Legal-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-27",
+      "route": "/privacy.html",
+      "url": "https://getphios.com/privacy.html?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "privacy.html",
+      "expected": "https://getphios.com/privacy.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "隐私政策"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Privacy-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-28",
+      "route": "/privacy.html",
+      "url": "https://getphios.com/privacy.html?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "privacy.html",
+      "expected": "https://getphios.com/privacy.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "隐私政策"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Privacy-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-29",
+      "route": "/ai-disclosure.html",
+      "url": "https://getphios.com/ai-disclosure.html?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "ai-disclosure.html",
+      "expected": "https://getphios.com/ai-disclosure.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "AI 披露"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/AI-disclosure-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-30",
+      "route": "/ai-disclosure.html",
+      "url": "https://getphios.com/ai-disclosure.html?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "ai-disclosure.html",
+      "expected": "https://getphios.com/ai-disclosure.html",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NO_CANONICAL_URL"
+        ],
+        "canonical": null,
+        "h1": [
+          "AI 披露"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/AI-disclosure-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-31",
+      "route": "/will/",
+      "url": "https://getphios.com/will/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Will service / Financial Will owner; no dedicated /will/ route registered",
+      "expected": "No independent route promised; retain existing consent/service boundary",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "答案越来越多。\n真正困难的是：\n下一步怎么办？"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Will-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-32",
+      "route": "/will/",
+      "url": "https://getphios.com/will/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "INTENTIONAL_UNPUBLISHED_OR_UNREGISTERED",
+      "owner": "Existing Will service / Financial Will owner; no dedicated /will/ route registered",
+      "expected": "No independent route promised; retain existing consent/service boundary",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "HOMEPAGE_FALLBACK_NOT_REQUESTED_PRODUCT"
+        ],
+        "canonical": "https://getphios.com/",
+        "h1": [
+          "答案越来越多。\n真正困难的是：\n下一步怎么办？"
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Will-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "UNREGISTERED_PROBE_NOT_CUSTOMER_LINK_FAILURE",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-33",
+      "route": "/research/",
+      "url": "https://getphios.com/research/?locale=en",
+      "locale": "en",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "research/index.html",
+      "expected": "https://getphios.com/research/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/research/",
+        "h1": [
+          "How different systems read reality — and where their responsibility stops."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-existing-research-entry-en-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-34",
+      "route": "/research/",
+      "url": "https://getphios.com/research/?locale=en",
+      "locale": "en",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "research/index.html",
+      "expected": "https://getphios.com/research/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/research/",
+        "h1": [
+          "How different systems read reality — and where their responsibility stops."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-existing-research-entry-en-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-35",
+      "route": "/research/",
+      "url": "https://getphios.com/research/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 1280,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "research/index.html",
+      "expected": "https://getphios.com/research/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/research/",
+        "h1": [
+          "How different systems read reality — and where their responsibility stops."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-existing-research-entry-zh-Hans-1280.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    },
+    {
+      "id": "B01-FAIL-36",
+      "route": "/research/",
+      "url": "https://getphios.com/research/?locale=zh-Hans",
+      "locale": "zh-Hans",
+      "width": 390,
+      "classification": "ACTUAL_CANONICAL_METADATA_DEFECT",
+      "owner": "research/index.html",
+      "expected": "https://getphios.com/research/",
+      "observed": {
+        "result": "FAIL",
+        "failures": [
+          "NON_ROOT_CANONICAL_HOST"
+        ],
+        "canonical": "https://www.getphios.com/research/",
+        "h1": [
+          "How different systems read reality — and where their responsibility stops."
+        ]
+      },
+      "evidence": "docs/production-closure/screenshots/Enterprise-existing-research-entry-zh-Hans-390.png",
+      "inheritedObservationUnchanged": true,
+      "resolution": "LOCAL_SOURCE_REPAIRED_NOT_DEPLOYED",
+      "onlineFixed": false,
+      "localValidation": "content/production-closure/batch02/browser-results.json"
+    }
+  ],
+  "scope": "Original observations retained; local repairs are not deployed production repairs",
+  "runtimeJavaScriptFailures": 0,
+  "authenticationFailuresInThese36": 0,
+  "unregisteredProbes": 8
+}

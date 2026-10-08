@@ -409,3 +409,558 @@ ICR-W0-W4 input foundation check passed.
 > check:vap-w15-w19
 > node scripts/run-zero-cost-regression.mjs check:vap-w15-w19
 
+✓ VAP-W15 external-manual Figure Candidate Intake preserves CAB/Knowledge/Meaning lineage and records OPENAI_CHATGPT provider lineage.
+✓ VAP-W16 independent Human Asset Review is successor-aware; accept requires all five review dimensions to pass and does not create Approval.
+✓ VAP-W17 independent Asset Approval requires an accepted review and remains distinct from generation/publication.
+✓ VAP-W18 Media Materialization is fail-closed on rights/accessibility and emits only safe /assets/... .svg/.webp/.avif paths with dimensions and alt text.
+✓ VAP-W19 Published Asset requires Candidate + accepted Review + approved Approval + Media + rights/accessibility gates.
+✓ Real CAR state: 2 Candidates across immutable 001 + successor 002 lineages, 2 Review, 1 Approval, 1 Media, 1 Published Asset.
+
+> check:wave1-production
+> node scripts/run-zero-cost-regression.mjs check:wave1-production
+
+
+> check:wave1-c2-mapping-reconciliation
+> node scripts/run-zero-cost-regression.mjs check:wave1-c2-mapping-reconciliation
+
+✓ Wave 1 C2 Manuscript Mapping Reconciliation passed.
+✓ 4/4 mappings are Human-verified for this C2 freeze and bind the authoritative Part-level section hash.
+✓ P4-003/P4-004 shared sectionHash is intentional Part-level lineage, not a range collision.
+✓ Global manuscript mapping authority and Production authority remain unchanged.
+
+> check:wave1-c2-freeze-resolution
+> node scripts/run-zero-cost-regression.mjs check:wave1-c2-freeze-resolution
+
+✓ Wave 1 C2 Human Editorial Freeze Resolution passed.
+✓ TL approved 4/4 exact-content proposals; all nine review dimensions and manuscript mapping verifications are Human-resolved.
+✓ The PJA C2 builder resolves exactly four Human-approved entries with matching content hashes.
+✓ Human Production Decision, Frozen Plan/Wave, KPE authority/activation, PJA/CAR Candidate and Publication remain absent.
+
+> check:pja-w2f-c2
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-c2
+
+
+> check:pja-w2f-c1
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-c1
+
+
+> check:pja-w2f-c0
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-c0
+
+
+> check:pja-w2f-b1
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-b1
+
+
+> check:pja-w2f-a
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-a
+
+
+> check:pja-w2e-r1
+> node scripts/run-zero-cost-regression.mjs check:pja-w2e-r1
+
+
+> check:pja-w2e
+> node scripts/run-zero-cost-regression.mjs check:pja-w2e
+
+
+> check:pja-w2d
+> node scripts/run-zero-cost-regression.mjs check:pja-w2d
+
+
+> check:pja-w2c
+> node scripts/run-zero-cost-regression.mjs check:pja-w2c
+
+
+> check:pja-w2b
+> node scripts/run-zero-cost-regression.mjs check:pja-w2b
+
+
+> check:pja-w2a
+> node scripts/run-zero-cost-regression.mjs check:pja-w2a
+
+
+> check:pja-w1
+> node scripts/run-zero-cost-regression.mjs check:pja-w1
+
+✓ PJA-W1 Blueprint-led Public Knowledge Ecosystem passed.
+  3 frozen Canonical Nodes publish 3 Chinese articles and 3 required English localizations.
+  5 Wave 1 Nodes remain publication-deferred; their Registry identities are supplied by PKR population, not PJA.
+  Home, Hub, Articles, Book I, Thesis, Atlas and shared navigation use published-only projections.
+  No case Provider, personal judgment, default service recommendation, Runtime write or Entitlement substitute exists.
+  State: PJA-W1-v1.1.0-Blueprint-led.
+✓ PJA-W2A Canonical Article Editorial Contract passed.
+  PJA-W1 content and Registry hashes remain frozen: 13 Preface Nodes, 6 Preface Themes, 13 Registry files and 12 Registry schemas.
+  Legacy paragraphs and 10 strict optional Block types remain compatible; text is escaped and visual/next-node references are published-only.
+  Claim, source, review, lifecycle and AI authority boundaries are enforced without Runtime, Provider, Payment, Entitlement or D1 dependencies.
+  KN-PREFACE-001 has no public Article asset, English asset, shell, Registry asset or publication state; governed production drafts remain isolated.
+✓ PJA-W2B Structured Article Block Schema passed.
+  Article v2.0.0 strictly allows 10 Block types; unknown, executable and external-image structures are rejected.
+  Six PJA-W1 Article JSON assets remain valid and unmigrated; Article JSON remains the only production body authority.
+  Section/Block sequencing, Canonical Node references, Asset references and next-node continuity pass schema plus semantic validation.
+  KN-PREFACE-001 remains a test-only draft skeleton with no production Article, English localization, Asset registration, shell or publication.
+✓ PJA-W2C Claim, Source and Editorial Review Governance passed.
+  Claim, Source and Review remain separate strict governance objects; Article JSON remains the only production body authority.
+  Source support, contrary evidence, version binding, human-only approval and blocking Finding rules pass valid and invalid fixtures.
+  KN-PREFACE-001 remains fixture-only with no production Article, English Article, Asset registration, shell or publication.
+  PJA-W1, PJA-W2A and PJA-W2B run before this validator and their frozen boundaries remain intact.
+✓ PJA-W2D Article Renderer Expansion passed.
+  Safe DOM rendering covers legacy Articles and all 10 allowlisted blocks.
+  Public Projection strips review/Claim data and resolves only public Assets, Sources and Nodes.
+  23 valid/invalid rendering fixtures pass semantic, security and accessibility checks.
+  Frozen predecessor Articles remain unchanged; governed Book IV/V/VI successor releases are validated separately.
+✓ PJA-W2E Canonical Article Production Tools passed.
+  KN-PREFACE-001 exports a governed brief; KN-PREFACE-002 is blocked with CANONICAL_THESIS_NOT_READY.
+  Directory/ZIP package security, Schema validation, cross-file checks and status authority boundaries are enforced.
+  Import defaults to dry-run; explicit temporary-root apply is atomic and never overwrites an existing package.
+  Registry, Blueprint, W2A–W2D contracts and Renderer remain byte-identical throughout this check.
+✓ PJA-W2E-R1 Production Brief Contract Hardening passed.
+  Sentinel values, boundary separation, source deduplication, figure sequencing, package states and Manifest contract are hardened.
+  The generated package remains draft-only; final approval and publication states remain human-authority targets.
+✓ PJA-W2F-A Universal Canonical Production Readiness passed.
+  931 Canonical Node identities are registered; Readiness remains limited to the 13-Node Preface pilot.
+  918 non-Preface identities have no Editorial Production Readiness record and remain production-deferred; universal fixtures cover P1–P14 and Books I–III.
+  12 Preface Skeletons remain blocked and the human-frozen pilot is preserved.
+  No Skeleton is production_ready; Thesis, boundary and human authority gates remain blocking.
+  Scope, hierarchy, continuity, Supporting Question, duplication, future-pattern and batch-export behavior passed.
+✓ PJA-W2F-B1｜Universal Contract and Preface Pilot conditionally passed.
+  Universal Contract applies to every registered Canonical Node; Preface is only the current pilot scope.
+  13 Preface Nodes audited; 1 human-frozen Node is production_ready and 12 Nodes remain production_blocked.
+  23 Supporting Questions retain one canonical owner; Human Editorial Freeze and production promotion remain explicit.
+  Pending human Canonical decisions prevent PJA-W2F-B1-v1.0.0-Frozen.
+✓ PJA-W2F-C0 Book I Canonical Registry Population passed.
+  13 existing Preface + 65 C0 identities = 78 Registry Nodes and 78 zh-Hans identities.
+  Default/explicit dry-run, apply, second-apply no-op, conflict blocking and unresolved mapping fixtures passed.
+  All 65 resolver calls are beyond NODE_NOT_FOUND; no Readiness, Article, Approval or Publication was created.
+✓ PJA-W2F-C1 Book I Readiness Skeleton Population passed.
+  78 Registry Nodes → 78 universal Skeleton records → 78 Index entries.
+  Resolver returns Skeleton/blocking/missing for all Nodes; NODE_NOT_FOUND and READINESS_FILE_NOT_FOUND are closed for registered Nodes.
+  Default dry-run, explicit dry-run, atomic apply, second-apply no-op, conflict and missing-file fixtures passed.
+  No Thesis, Boundary, Claim, Source plan, Question treatment, Figure plan, Article, approval, publication or export was created.
+✓ PJA-W2F-C2 Canonical Thesis and Boundary Freeze passed after Human reconciliation.
+✓ 78 assessed: 11 Human-frozen authorities; 67 Human-review-required candidates; no fabricated thesis/boundary records.
+✓ Wave 1 Human approvals (KN-PREFACE-004, KN-B1-P1-003, KN-B1-P4-003, KN-B1-P4-004) are exact-content-hash bound and byte-stable.
+✓ VAP-W6A Human approvals (KN-B1-P1-006, KN-B1-P2-001, KN-B1-P2-009, KN-B1-P3-005, KN-B1-P3-015, KN-B1-P4-006) are exact-content-hash bound and reconciled as successor C2 freezes.
+
+> check:pja-w2f-c3
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-c3
+
+
+> check:pja-w2f-c2
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-c2
+
+
+> check:pja-w2f-c1
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-c1
+
+
+> check:pja-w2f-c0
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-c0
+
+
+> check:pja-w2f-b1
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-b1
+
+
+> check:pja-w2f-a
+> node scripts/run-zero-cost-regression.mjs check:pja-w2f-a
+
+
+> check:pja-w2e-r1
+> node scripts/run-zero-cost-regression.mjs check:pja-w2e-r1
+
+
+> check:pja-w2e
+> node scripts/run-zero-cost-regression.mjs check:pja-w2e
+
+
+> check:pja-w2d
+> node scripts/run-zero-cost-regression.mjs check:pja-w2d
+
+
+> check:pja-w2c
+> node scripts/run-zero-cost-regression.mjs check:pja-w2c
+
+
+> check:pja-w2b
+> node scripts/run-zero-cost-regression.mjs check:pja-w2b
+
+
+> check:pja-w2a
+> node scripts/run-zero-cost-regression.mjs check:pja-w2a
+
+
+> check:pja-w1
+> node scripts/run-zero-cost-regression.mjs check:pja-w1
+
+✓ PJA-W1 Blueprint-led Public Knowledge Ecosystem passed.
+  3 frozen Canonical Nodes publish 3 Chinese articles and 3 required English localizations.
+  5 Wave 1 Nodes remain publication-deferred; their Registry identities are supplied by PKR population, not PJA.
+  Home, Hub, Articles, Book I, Thesis, Atlas and shared navigation use published-only projections.
+  No case Provider, personal judgment, default service recommendation, Runtime write or Entitlement substitute exists.
+  State: PJA-W1-v1.1.0-Blueprint-led.
+✓ PJA-W2A Canonical Article Editorial Contract passed.
+  PJA-W1 content and Registry hashes remain frozen: 13 Preface Nodes, 6 Preface Themes, 13 Registry files and 12 Registry schemas.
+  Legacy paragraphs and 10 strict optional Block types remain compatible; text is escaped and visual/next-node references are published-only.
+  Claim, source, review, lifecycle and AI authority boundaries are enforced without Runtime, Provider, Payment, Entitlement or D1 dependencies.
+  KN-PREFACE-001 has no public Article asset, English asset, shell, Registry asset or publication state; governed production drafts remain isolated.
+✓ PJA-W2B Structured Article Block Schema passed.
+  Article v2.0.0 strictly allows 10 Block types; unknown, executable and external-image structures are rejected.
+  Six PJA-W1 Article JSON assets remain valid and unmigrated; Article JSON remains the only production body authority.
+  Section/Block sequencing, Canonical Node references, Asset references and next-node continuity pass schema plus semantic validation.
+  KN-PREFACE-001 remains a test-only draft skeleton with no production Article, English localization, Asset registration, shell or publication.
+✓ PJA-W2C Claim, Source and Editorial Review Governance passed.
+  Claim, Source and Review remain separate strict governance objects; Article JSON remains the only production body authority.
+  Source support, contrary evidence, version binding, human-only approval and blocking Finding rules pass valid and invalid fixtures.
+  KN-PREFACE-001 remains fixture-only with no production Article, English Article, Asset registration, shell or publication.
+  PJA-W1, PJA-W2A and PJA-W2B run before this validator and their frozen boundaries remain intact.
+✓ PJA-W2D Article Renderer Expansion passed.
+  Safe DOM rendering covers legacy Articles and all 10 allowlisted blocks.
+  Public Projection strips review/Claim data and resolves only public Assets, Sources and Nodes.
+  23 valid/invalid rendering fixtures pass semantic, security and accessibility checks.
+  Frozen predecessor Articles remain unchanged; governed Book IV/V/VI successor releases are validated separately.
+✓ PJA-W2E Canonical Article Production Tools passed.
+  KN-PREFACE-001 exports a governed brief; KN-PREFACE-002 is blocked with CANONICAL_THESIS_NOT_READY.
+  Directory/ZIP package security, Schema validation, cross-file checks and status authority boundaries are enforced.
+  Import defaults to dry-run; explicit temporary-root apply is atomic and never overwrites an existing package.
+  Registry, Blueprint, W2A–W2D contracts and Renderer remain byte-identical throughout this check.
+✓ PJA-W2E-R1 Production Brief Contract Hardening passed.
+  Sentinel values, boundary separation, source deduplication, figure sequencing, package states and Manifest contract are hardened.
+  The generated package remains draft-only; final approval and publication states remain human-authority targets.
+✓ PJA-W2F-A Universal Canonical Production Readiness passed.
+  931 Canonical Node identities are registered; Readiness remains limited to the 13-Node Preface pilot.
+  918 non-Preface identities have no Editorial Production Readiness record and remain production-deferred; universal fixtures cover P1–P14 and Books I–III.
+  12 Preface Skeletons remain blocked and the human-frozen pilot is preserved.
+  No Skeleton is production_ready; Thesis, boundary and human authority gates remain blocking.
+  Scope, hierarchy, continuity, Supporting Question, duplication, future-pattern and batch-export behavior passed.
+✓ PJA-W2F-B1｜Universal Contract and Preface Pilot conditionally passed.
+  Universal Contract applies to every registered Canonical Node; Preface is only the current pilot scope.
+  13 Preface Nodes audited; 1 human-frozen Node is production_ready and 12 Nodes remain production_blocked.
+  23 Supporting Questions retain one canonical owner; Human Editorial Freeze and production promotion remain explicit.
+  Pending human Canonical decisions prevent PJA-W2F-B1-v1.0.0-Frozen.
+✓ PJA-W2F-C0 Book I Canonical Registry Population passed.
+  13 existing Preface + 65 C0 identities = 78 Registry Nodes and 78 zh-Hans identities.
+  Default/explicit dry-run, apply, second-apply no-op, conflict blocking and unresolved mapping fixtures passed.
+  All 65 resolver calls are beyond NODE_NOT_FOUND; no Readiness, Article, Approval or Publication was created.
+✓ PJA-W2F-C1 Book I Readiness Skeleton Population passed.
+  78 Registry Nodes → 78 universal Skeleton records → 78 Index entries.
+  Resolver returns Skeleton/blocking/missing for all Nodes; NODE_NOT_FOUND and READINESS_FILE_NOT_FOUND are closed for registered Nodes.
+  Default dry-run, explicit dry-run, atomic apply, second-apply no-op, conflict and missing-file fixtures passed.
+  No Thesis, Boundary, Claim, Source plan, Question treatment, Figure plan, Article, approval, publication or export was created.
+✓ PJA-W2F-C2 Canonical Thesis and Boundary Freeze passed after Human reconciliation.
+✓ 78 assessed: 11 Human-frozen authorities; 67 Human-review-required candidates; no fabricated thesis/boundary records.
+✓ Wave 1 Human approvals (KN-PREFACE-004, KN-B1-P1-003, KN-B1-P4-003, KN-B1-P4-004) are exact-content-hash bound and byte-stable.
+✓ VAP-W6A Human approvals (KN-B1-P1-006, KN-B1-P2-001, KN-B1-P2-009, KN-B1-P3-005, KN-B1-P3-015, KN-B1-P4-006) are exact-content-hash bound and reconciled as successor C2 freezes.
+✓ PJA-W2F-C3 Universal Production Readiness rebuilt after Wave 1 C2 Human Freeze.
+✓ 78 assessed; 11 C2 frozen; 67 blocked by C2; 11 production ready; 67 production blocked.
+✓ Wave 1 Human Production Decision is reconciled; 4/4 items are production_ready and exportable for governed production brief generation.
+✓ Existing KN-PREFACE-004 publication is explicitly reconciled without creating a new publication.
+
+> check:wave1-post-c2-c3
+> node scripts/run-zero-cost-regression.mjs check:wave1-post-c2-c3
+
+✓ Wave 1 Post-C2 C3 historical preflight is byte-preserved and superseded by C3-CL1～CL4 closure.
+✓ Former Figure/Source blockers remain closed; current assessments have advanced to production_ready after Human Production Decision.
+✓ The historical preflight itself remains byte-preserved and did not create downstream authority.
+
+> check:wave1-human-production-decision
+> node scripts/run-zero-cost-regression.mjs check:wave1-human-production-decision
+
+✓ Wave 1 KPP-W25 Human Production Decision passed.
+✓ TL approved 4/4 items for production; each decision is bound to C2 contentHash and the prior Human Decision eligibility authority.
+✓ C3 Human Production Approval and Exportability now pass for all four Wave 1 items; productionReady = true without creating candidates or publication.
+
+> check:wave1-production-authorized
+> node scripts/run-zero-cost-regression.mjs check:wave1-production-authorized
+
+✓ Wave 1 Production Plan / Wave Freeze and Execution Authority Reconciliation passed.
+✓ KPE is not required: KPP Wave 1 owns scoped dispatch authorization while ORC remains planned; PJA/CAR retain production authority.
+✓ 4/4 items are authorized for governed PJA/CAR production brief generation only; provider invocation, candidate materialization and publication remain closed.
+
+> check:vap-w0
+> node scripts/run-zero-cost-regression.mjs check:vap-w0
+
+✓ VAP-W0 Production Baseline Freeze R1 passed.
+  Baseline origin/main: c215d30b4b3639321fbb8f02aae5d5c8d2fd84fc
+  Source digests use Git-canonical LF bytes; Windows CRLF archive fallback is normalized before hashing.
+  PJA: 5 production-ready / 73 C2-blocked; Wave 1 4/4 ready for governed briefs.
+  KPP: plan/wave frozen; brief generation allowed; candidate/provider/publication remain closed.
+  CAR/CPR remain frozen with zero production records; PDS requires production revalidation.
+  Published Knowledge records the KN-PREFACE-001 zh-Hans summary integrity gap for VAP-W1.
+  Cloudflare deployment SHA alignment remains explicitly deferred to VAP-W2.
+
+> check:vap-w1
+> node scripts/run-zero-cost-regression.mjs check:vap-w1
+
+✓ VAP-W1 Published Knowledge Integrity Repair passed.
+  KN-PREFACE-001 zh-Hans summary artifact is removed from current Published Authority and Retrieval.
+  Replacement summary is an exact extract from the existing Human-approved Publication body; no new knowledge or claim was created.
+  Candidate / Review / Approval / Publication lineage is byte-stable and no republish occurred.
+  Historical STEP63 / STEP64 / KNR Package D freezes remain preserved as pre-repair snapshots.
+  English locale contamination remains out of scope and fail-closed for later governed repair.
+
+> check:vap-w2
+> node scripts/run-zero-cost-regression.mjs check:vap-w2
+
+✓ VAP-W2 Cloudflare Production SHA Verification R1 passed.
+  Production deployment full commit exactly matches dc3be86824ff7f8e5c99afe6c5058378204e1138.
+  Cloudflare Pages project phios-github / main / production is authenticated through Wrangler and verified from raw Pages REST deployment metadata.
+  Deployment is successful, commit_dirty=false, and https://phios-github.pages.dev/ is reachable.
+  Wrangler seven-character Source output is explicitly non-authoritative for exact SHA verification.
+  VAP-W0 remains an unchanged historical pre-verification snapshot; no deploy or rollback was performed by VAP-W2.
+  VAP-W3 is now allowed by the recorded deployment evidence; candidate/provider/publication authority remains unchanged.
+
+> check:vap-w3
+> node scripts/run-zero-cost-regression.mjs check:vap-w3
+
+✓ VAP-W3 Visual Production Authority Contract passed.
+✓ KPP Wave 1 dispatch is frozen: PJA owns ARTICLE/FRAGMENT; CAR owns governed FIGURE/MULTI_ASSET production.
+✓ Existing PJA/CAR runtimes are authorization-compatible but not directly execution-ready for all four Wave 1 items; VAP-W4 adapters are required.
+✓ Candidate/provider/network/binary asset/CPR production/publication gates remain closed.
+✓ KN-PREFACE-004 keeps PJA primary ARTICLE reconciliation; its required Figure may enter CAR only as a derived secondary asset need after PJA reconciliation.
+✓ English locale contamination remains out of scope and fail-closed.
+
+> check:vap-w4
+> node scripts/run-zero-cost-regression.mjs check:vap-w4
+
+✓ VAP-W4 Node Production Eligibility passed.
+✓ C2 frozen thesis/boundary, C3 production readiness, Human Production Decision, frozen plan/wave, execution authority and dispatch gates are preserved.
+✓ Wave 1 ARTICLE/MULTI_ASSET nodes eligible for Article Production: KN-PREFACE-004, KN-B1-P4-004.
+✓ FRAGMENT/FIGURE remain governed Wave 1 supporting outputs and are not misclassified as Article production roles.
+✓ Eligibility does not override VAP-W3 adapter requirements or open candidate/provider/publication authority.
+
+> check:vap-w5
+> node scripts/run-zero-cost-regression.mjs check:vap-w5
+
+✓ VAP-W5 PJA Production Brief Export acceptance passed.
+✓ Existing knowledge:export-brief remains the only accepted PJA Canonical Article Production Brief exporter; VAP-W5 does not reimplement it.
+✓ Default output remains dist/knowledge-production-briefs and the brief retains Identity, Thesis, Boundary, Editorial, Structure, Claims, Sources, Review and Package governance.
+✓ VAP-W4 eligibility is required, and VAP-W3 reconciliation/CAR adapter boundaries cannot be bypassed.
+✓ No Candidate, Provider invocation, network generation call or Publication is created by VAP-W5 acceptance.
+
+> check:rre
+> node scripts/run-zero-cost-regression.mjs check:rre
+
+
+> check:rre-foundation
+> node scripts/run-zero-cost-regression.mjs check:rre-foundation
+
+
+> check:rre-w0-w4
+> node scripts/run-zero-cost-regression.mjs check:rre-w0-w4
+
+✓ RRE-W0-W4 Reality Readout Engine foundation passed.
+✓ Existing RRE Evidence authority and RMO evidence binding remain preserved.
+✓ Readout input, observable extraction, runtime signature and governed pattern runtime are validation-only.
+✓ Historical W0-W4 persistence gate remains preserved; W11 successor authority is validated by check:rre-canonical.
+
+> check:rre-reading
+> node scripts/run-zero-cost-regression.mjs check:rre-reading
+
+
+> check:rre-w5-w10
+> node scripts/run-zero-cost-regression.mjs check:rre-w5-w10
+
+✓ RRE-W5-W10 descriptive reading runtime passed.
+✓ RMO Constraint, Reality Diff and Unknown authorities remain preserved.
+✓ Load, Stability, Drift, Recovery and Resolution Limits are validation-only and non-diagnostic.
+✓ Unknown, conflicting evidence, low data quality and missing Method Projection remain explicit.
+✓ Historical W5-W10 persistence gate remains preserved; W11 successor authority is validated by check:rre-canonical.
+
+> check:rre-canonical
+> node scripts/run-zero-cost-regression.mjs check:rre-canonical
+
+
+> check:rre-w11-w16
+> node scripts/run-zero-cost-regression.mjs check:rre-w11-w16
+
+✓ RRE-W11-W16 Canonical Runtime Readout and RRE v1 freeze passed.
+✓ REALITY_READOUT_RECORD is governed by a versioned RDG successor extension; legacy RRE Evidence authority remains unchanged.
+✓ Readout lineage, evidence-derived confidence and CPR handoff are canonical and fail closed.
+✓ RRE creates no diagnosis, professional judgment, navigation decision, metric, direct storage execution or CPR registry mutation.
+✓ RRE-W0-W16 is frozen and check:rre is integrated into default npm run check postcheck.
+
+> check:rr
+> node scripts/run-zero-cost-regression.mjs check:rr
+
+
+> check:rr-w0-w12
+> node scripts/run-zero-cost-regression.mjs check:rr-w0-w12
+
+✓ RR v2 W0-W12 Customer Report Runtime passed.
+✓ REPORT_RECORD assembly, Candidate → Review → Approval → Release → Revision, and CPR/LRM handoffs are governed and fail closed.
+✓ RR creates no Knowledge, Meaning, Professional Judgment, Readout, Metric, Professional Approval, CPR rendering or LRM persistence.
+✓ Customer-only, professional, revised, low-confidence and metric-unavailable acceptance cases passed.
+
+> check:pr
+> node scripts/run-zero-cost-regression.mjs check:pr
+
+
+> check:pr-w0-w13
+> node scripts/run-zero-cost-regression.mjs check:pr-w0-w13
+
+✓ PR v2 W0-W13 Professional Runtime passed.
+✓ Canonical PR Case Context binds active PWS Assignment without creating a new PWS Case object.
+✓ Raw Data, Reality, Readout, Metrics, Meaning, Knowledge, Journey and Unknown remain source-labelled and authority-separated.
+✓ Only human-attributable PR-W4 creates PROFESSIONAL_JUDGMENT_RECORD; Observation/Recommendation/Review/Approval/Signature/Audit/Release remain bounded OUTCOME_RECORD subtypes.
+✓ Draft → Reviewed → Approved → Signed → Released is non-skippable; independent review, RDG access and Capability/Credential boundaries fail closed.
+✓ PR v2 is frozen without granting authority to account roles, ALR learning capability, RR, RRE, JR or Metric creation.
+
+> check:pr-production-foundation
+> node scripts/run-zero-cost-regression.mjs check:pr-production-foundation
+
+
+> check:pr-e1-e3
+> node scripts/run-zero-cost-regression.mjs check:pr-e1-e3
+
+✓ PR-E1-E3 post-freeze production foundation passed.
+✓ PR v2 frozen authority remains unchanged; PWS Assignment/Workspace and RDG permission boundaries remain external.
+✓ Immutable PR Case Versions and persistence intents are materialized without claiming D1/storage execution.
+✓ All nine Professional source classes resolve by governed reference, authority, version, permission, purpose and scope without copying payload.
+✓ Raw Data remains non-Evidence; Readout and Metric remain non-Judgment; Unknown remains explicit.
+✓ Case storage execution stays fail-closed until an authorized PWS/storage executor exists.
+
+> check:pr-decision-integration
+> node scripts/run-zero-cost-regression.mjs check:pr-decision-integration
+
+
+> check:pr-e4-e6
+> node scripts/run-zero-cost-regression.mjs check:pr-e4-e6
+
+✓ PR-E4-E6 Professional decision, PWS workspace and RR approval handoff passed.
+✓ Human-attributable Observation → Judgment → Recommendation → Decision Package materialization is active and case/evidence/capability bound.
+✓ PWS receives canonical state/operation intents only; PR creates no Assignment/Deliverable, executes no PWS operation and performs no workspace persistence.
+✓ RR consumes PR approval/signature and Professional Observation/Judgment/Recommendation by reference; RR creates no Professional approval or judgment.
+✓ Frozen RR v2 section registry remains unchanged; PR OUTCOME_RECORD Recommendation is enabled only by a versioned consumer successor projection.
+
+> check:vap-d
+> node scripts/run-zero-cost-regression.mjs check:vap-d
+
+
+> check:vap-w20-w21
+> node scripts/run-zero-cost-regression.mjs check:vap-w20-w21
+
+✓ VAP-W20/W21 Article ↔ Figure Binding foundation passed.
+✓ Article references CAR Published Asset authority; Article never owns, approves or publishes the Figure.
+✓ Existing figure block, published visual resolver, <picture>/<img> factory and Article renderer are reused; no second image renderer exists.
+✓ Controlled acceptance fixture renders one governed Figure block after S04 with publicSrc, alt, caption, width and height.
+✓ Current main remains fail-closed at 0 live bindings because CAR has 0 Published Assets and the target legacy Published Article has no stable sectionCode identity.
+
+> check:vap-e
+> node scripts/run-zero-cost-regression.mjs check:vap-e
+
+
+> check:vap-w22-w24
+> node scripts/run-zero-cost-regression.mjs check:vap-w22-w24
+
+✓ VAP-W22 CPR Production Instance activated in a separate production registry; the frozen canonical registry remains unchanged and empty.
+✓ VAP-W23 ARTICLE_PAGE composition is canonical and all visual-system ownership remains with PDS; no Article-local CSS exists.
+✓ VAP-W24 360/768/1440 responsive acceptance passed for en and zh-Hans template projections with immutable semantic order and no horizontal overflow.
+✓ zh-Hans Published Figure is source-traceable, contained, uncropped, captioned, alt-backed, mobile-reflowable and not color-only.
+✓ en production remains truthfully fail-closed because upstream Article content is mixed-locale and no en Published Figure authority exists.
+
+> check:mpa
+> node scripts/run-zero-cost-regression.mjs check:mpa
+
+✓ MPA-W0 Method Production Reconciliation passed.
+  Frozen MR/IMR v1 remain untouched; NUM is reconciled only through a versioned successor path.
+  Existing method implementations are recognized without converting validation-only state into Production.
+✓ MPA-W1 Activation Authority Boundary passed.
+  MPA evaluates eligibility only; Method, algorithm, Meaning, Reality Truth and Professional Judgment authority remain upstream/downstream owned.
+✓ MPA-W2 Method Registry v2 Reconciliation passed.
+  NUM is now represented by a versioned successor while all Production and Professional grants remain false.
+✓ MPA-W3 Method Lifecycle v2 passed.
+  Defined → Registered → Implemented → Validation → Regression → Governance → Production → Professional remains non-skippable.
+✓ MPA-W4 Public Method Vocabulary Boundary passed.
+  Internal method identities cannot leak into customer/marketing copy; restricted terminology fails closed.
+✓ MPA-W5 Method Capability Matrix passed.
+  DATA / CALCULATION / PROJECTION / INTERPRETATION / PROFESSIONAL / PUBLIC are independently governed.
+✓ MPA-W6 Canonical Method Input Contract passed.
+  Method-specific required/optional fields are capability-scoped; fabricated defaults remain forbidden.
+✓ MPA-W7 Consent & Data Purpose passed.
+  Consent, purpose, retention, visibility and professional sharing remain RDG-governed and fail closed.
+✓ MPA-W8 Birth / Initialization Data Runtime passed.
+  Unknown time remains null; no 12:00, current timezone or coordinate fallback is fabricated.
+✓ MPA-W9 Temporal / Spatial Resolution passed.
+  Historical timezone/DST lineage is explicit; unknown time produces no fabricated UTC instant.
+✓ MPA-W10 Deterministic Calculation Contract passed.
+  Shared Calculation Runtime is mandatory; production, AI/prompt arithmetic, Projection and Reality Fact creation remain blocked.
+✓ MPA-W11 Calculation Data Authority passed.
+  Numeric/BaZi/HDR validation literals are authority-bound; unresolved ephemeris/TZDB digests remain Production blockers.
+✓ MPA-W12 Reference Fixture Corpus passed.
+  NUM/AST/BZR/HDR each contain valid, edge, invalid and regression fixtures with timezone/leap/DST/missing-time/location coverage.
+✓ MPA-W13 Method Validation Harness passed.
+  Determinism/schema/policy/boundary checks execute; unresolved authority/reference evidence blocks Production eligibility.
+✓ MPA-W14 Current Method-scoped Regression Runtime passed.
+  Repository-wide package/PXR/BFR/visual fingerprints are retired from current MPA; only method algorithms, registries, policies and pinned method dependencies can trigger regression.
+✓ MPA-W15 Cross-Implementation Comparison passed.
+  NUM has limited exact independent fixture evidence; AST/BZR/HDR retain explicit unresolved/blocked reference states rather than “looks correct”.
+✓ MPA-W16 Method Uncertainty / Error Contract passed.
+  Canonical errors fail closed; no pseudo result or fallback calculation is allowed.
+✓ MPA-W17 Projection Freeze passed.
+  Method/calculation/policy/projection lineage is frozen without promoting validation projection to Production.
+✓ MPA-W18 Interpretation Boundary passed.
+  Projection ≠ Interpretation ≠ Reality Fact/Diagnosis/Professional Judgment; AI remains candidate-only downstream of Projection.
+✓ MPA-W19 Meaning / Knowledge Integration passed.
+  Projection can resolve governed Meaning and Knowledge references only; Meaning/Knowledge authority remains external and validation-only.
+✓ MPA-W20 Professional Integration passed.
+  Customer calculation stays separate; Professional interpretation requires independent PR/PWS gates and MPA cannot sign or release.
+✓ MPA-W21 NUM Activation passed.
+  NUM method-specific activation evidence is ready for MPA-W26 eligibility decision.
+  Production eligibility remains false; W26 is required and Production execution remains blocked until W27.
+  W12 leap-year fixture discrepancy is reconciled through a versioned successor, not by rewriting history.
+✓ MPA-W22 AST Activation passed.
+  Ephemeris version/digest, JPL trusted-reference evidence, tolerance, and TZDB authority are resolved for AST technical activation evidence.
+  AST remains method-policy blocked and is not yet ready for MPA-W26; Production execution remains blocked until MPA-W27.
+✓ MPA-W23 BZR Activation passed.
+  Historical synthetic true-solar/solar-term fixtures are reconciled through a versioned successor; W12/W15 history remains unchanged.
+  BZR method-specific successor evidence is ready for MPA-W26; Production execution remains blocked until MPA-W27.
+✓ MPA-W24 HDR Boundary passed.
+  HDR remains BLOCKED: no rights/license, mapping, Production, Professional or raw public-method authority is created.
+  Frozen W24 vocabulary remains historical; current Human Design presentation is external-chart only and does not activate the blocked HDR birth-calculation path.
+✓ MPA-W25 Future Method Holding Registry passed.
+  I Ching, Tarot and Psychology remain REGISTERED/DRAFT holding entries with zero Production, Professional, Public or execution authority.
+  Additional future methods may enter DRAFT holding without entering Method Registry v2; independent versioned activation is required before any forward lifecycle.
+✓ MPA-W26/W27 Current → MCD-5 projection-gate successor passed.
+  MPA remains prior to input, Core execution and canonical projection; HDR cannot reach a Production projection.
+✓ MPA-W28 RMO / RRE / JR / PR / RNE / CPR / WPR Integration passed.
+  Method Projection is reference-bound through RMO to RRE and downstream consumers; MPA creates no Customer Readout, Reality Fact, Professional Judgment, Presentation or Web Projection.
+  Current W26 contains zero ELIGIBLE Projection capability decisions, so production downstream handoff remains zero and fail-closed.
+✓ MPA-W29 Full Acceptance passed.
+  NUM/BZR conditional state, AST/HDR blocked state, execution fail-closed, no fabricated input, Projection≠Fact, Professional boundary and public vocabulary boundary are all enforced.
+  MPA still creates no Customer Readout and current Production Method dispatch count remains zero.
+✓ MPA-W30 Current Freeze passed.
+  Historical MPA v1 freeze remains preserved; current MPA exposes one npm entry and no repository/package/PXR/BFR/visual fingerprint successor is consumed.
+✓ MPA Current Check Consolidation passed.
+  30 current method authority/validation/activation/freeze checks executed through one canonical npm entry: check:mpa.
+
+> check:web-production-runtime
+> node scripts/run-zero-cost-regression.mjs check:web-production-runtime
+
+
+> check:book-w1-web-production-runtime
+> node scripts/run-zero-cost-regression.mjs check:book-w1-web-production-runtime
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'a0065e8092d51781606f1ba4296f1773bfc97a9e3b4a314e55314817b0c366d4'
+- '52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742'
+
+    at file:///C:/phios/scripts/check-book-w1f-wpr-successor-current.mjs:33:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'a0065e8092d51781606f1ba4296f1773bfc97a9e3b4a314e55314817b0c366d4',
+  expected: '52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

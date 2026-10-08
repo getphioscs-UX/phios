@@ -6,6 +6,7 @@ import {BOOK_ROUTE_BY_ID,loadSevenVolumeBooks,loadSevenVolumeParts} from '../../
 import {hydrateSevenVolumeAssets} from '../seven-volume-assets.js';
 import {loadFigureRegistry} from '../../../js/web-production/public-surface-data.js';
 import {structuredDiscoveryRows} from '../../../js/knowledge/structured-discovery.js';
+import {knowledgeTopicLabel} from '../knowledge-topic-label.js';
 
 const $=(selector,scope=document)=>scope.querySelector(selector);
 const $$=(selector,scope=document)=>[...scope.querySelectorAll(selector)];
@@ -15,7 +16,7 @@ const locale=()=>String(document.documentElement.lang||'en').toLowerCase().start
 const tr=(en,zh)=>locale()==='zh-Hans'?zh:en;
 const label=(value)=>typeof value==='object'?(value?.[locale()]||value?.en||value?.['zh-Hans']||''):clean(value);
 const fetchJson=async path=>{const response=await fetch(path,{credentials:'same-origin',signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`CX_KNOWLEDGE_SOURCE_UNAVAILABLE:${path}`);return response.json()};
-const state={articles:new Map(),books:null,concepts:null,figures:null,parts:null,catalog:null,searchIndex:new Map()};
+const state={articles:new Map(),books:null,concepts:null,figures:null,parts:null,catalog:null,searchIndex:new Map(),themes:[]};
 
 const BOOK_ROLE={
  'BOOK-6':{en:'Reality Reconfiguration',zh:'世界如何重组'},
@@ -88,8 +89,8 @@ function articleVolume(article){const context=article?.publicationContext||{};if
 function articleTopics(article){const tags=article?.taxonomy?.tags||[];const theme=clean(article?.taxonomy?.themeCode);return [...new Set([theme,...tags].map(clean).filter(Boolean))]}
 async function renderArticles(){
  const grid=$('[data-cx-article-grid]'),filters=$('[data-cx-article-filters]'),summary=$('[data-cx-article-summary]');if(!grid||!filters)return;loading(grid);
- try{const list=await articlesForLocale();const volumeSelect=$('select[name="volume"]',filters),topicSelect=$('select[name="topic"]',filters);const volumes=[...new Set(list.map(articleVolume).filter(v=>/^\d+$/.test(v)))].sort((a,b)=>Number(a)-Number(b));const topics=[...new Set(list.flatMap(articleTopics))].sort((a,b)=>a.localeCompare(b));
-  volumeSelect.innerHTML=`<option value="all">${esc(tr('All volumes','全部册别'))}</option>`+volumes.map(v=>`<option value="${esc(v)}">${esc(tr(`Volume ${v}`,`第 ${v} 册`))}</option>`).join('');topicSelect.innerHTML=`<option value="all">${esc(tr('All topics','全部主题'))}</option>`+topics.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join('');
+ try{const [list,taxonomy]=await Promise.all([articlesForLocale(),fetchJson('/content/knowledge/registry/themes.json').catch(()=>({themes:[]}))]);state.themes=taxonomy.themes||[];const volumeSelect=$('select[name="volume"]',filters),topicSelect=$('select[name="topic"]',filters);const volumes=[...new Set(list.map(articleVolume).filter(v=>/^\d+$/.test(v)))].sort((a,b)=>Number(a)-Number(b));const topics=[...new Set(list.flatMap(articleTopics))].sort((a,b)=>a.localeCompare(b));
+  volumeSelect.innerHTML=`<option value="all">${esc(tr('All volumes','全部册别'))}</option>`+volumes.map(v=>`<option value="${esc(v)}">${esc(tr(`Volume ${v}`,`第 ${v} 册`))}</option>`).join('');topicSelect.innerHTML=`<option value="all">${esc(tr('All topics','全部主题'))}</option>`+topics.map(t=>`<option value="${esc(t)}">${esc(knowledgeTopicLabel(t,state.themes,locale()))}</option>`).join('');
   const draw=()=>{const order=filters.elements?.order?.value||$('select[name="order"]',filters)?.value||'latest',volume=volumeSelect.value,topic=topicSelect.value;let visible=list.filter(a=>(volume==='all'||articleVolume(a)===volume)&&(topic==='all'||articleTopics(a).includes(topic)));visible=[...visible].sort(order==='latest'?((a,b)=>clean(b.publishedAt).localeCompare(clean(a.publishedAt))||Number(a.publicationOrder)-Number(b.publicationOrder)):((a,b)=>Number(a.publicationOrder)-Number(b.publicationOrder)));grid.innerHTML=visible.length?visible.map(articleCard).join(''):`<div class="cx-knowledge-state">${esc(tr('No published articles match these filters.','没有已发布文章符合这些筛选条件。'))}</div>`;if(summary)summary.textContent=tr(`${visible.length} published articles`,`${visible.length} 篇已发布文章`)};
   filters.addEventListener('change',draw,{once:false});draw();
  }catch{unavailable(grid)}
