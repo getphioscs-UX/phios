@@ -1,3 +1,4 @@
+import {HISTORICAL_ZIWEI_PAGE_COUNTS,resolveMethodRenderContract} from '../functions/report-delivery/ziwei-vfr-method-profile.js';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {ZIWEI_R4_PAI_REGISTRY} from '../functions/personal-reading/narrative/ziwei-r4-provider-registry.js';
@@ -41,11 +42,21 @@ const publication=fs.readFileSync('functions/personal-reading/ziwei-production-p
 assert(publication.includes("sections.find(section=>section.sectionId===p.sectionId)?.editorialVersion||'ZIWEI-CONTENT-DEPTH-R3'"),'R4 publication pages must preserve successor editorial lineage');
 
 const privateRenderer=fs.readFileSync('workers/method-report-renderer/index.js','utf8');
-assert(privateRenderer.includes("'ZIWEI-PRODUCTION-COMPOSER-V1':33"));
-assert(privateRenderer.includes("'ZIWEI-NATURAL-COMPOSER-R4':33"));
-assert(privateRenderer.includes('ALLOWED_ZIWEI_COMPOSITIONS=new Set(Object.keys(ZIWEI_PAGE_COUNTS))'));
-assert(privateRenderer.includes('!ALLOWED_ZIWEI_COMPOSITIONS.has(compositionVersion)'));
-assert(privateRenderer.includes("compositionVersion!==candidate?.snapshot?.compositionVersion"));
+assert(Object.isFrozen(HISTORICAL_ZIWEI_PAGE_COUNTS));
+for(const version of ['ZIWEI-PRODUCTION-COMPOSER-V1','ZIWEI-NATURAL-COMPOSER-R4'])for(const locale of ['en','zh-Hans']){
+ assert.equal(HISTORICAL_ZIWEI_PAGE_COUNTS[version],33);
+ const candidate={locale,snapshot:{methodId:'ZWR',compositionVersion:version,semanticContent:{report:{totalPages:33}}}};
+ const contract=resolveMethodRenderContract(candidate);assert.equal(contract.expectedPageCount,33);assert.equal(contract.rendererId,'ZIWEI_HISTORICAL');
+ for(const pages of [32,34])assert.throws(()=>resolveMethodRenderContract({...candidate,snapshot:{...candidate.snapshot,semanticContent:{report:{totalPages:pages}}}}),/METHOD_RENDER_CONTRACT_UNADMITTED/);
+ assert.throws(()=>resolveMethodRenderContract({...candidate,snapshot:{...candidate.snapshot,compositionVersion:'UNAUTHORIZED_VERSION'}}),/METHOD_RENDER_CONTRACT_UNADMITTED/);
+ assert.throws(()=>resolveMethodRenderContract({...candidate,snapshot:{...candidate.snapshot,semanticContent:{...candidate.snapshot.semanticContent,visualReportIr:{}}}}),/ZIWEI_VFR_GENERATION_RENDERER_MISMATCH/);
+}
+assert(privateRenderer.includes("import {assertMethodGeneration} from '../../functions/report-delivery/method-render-contract.js'"));
+assert(privateRenderer.includes('await assertMethodGeneration(candidate)'));
+assert(privateRenderer.includes('method!==contract.methodCode'));
+assert(privateRenderer.includes('compositionVersion!==contract.compositionVersion'));
+assert(privateRenderer.includes('semanticSnapshotId!==candidate.snapshot.semanticSnapshotId'));
+
 
 const binding=fs.readFileSync('functions/report-delivery/ziwei-canonical-person-binding.js','utf8');
 const cutoverPath='docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json';

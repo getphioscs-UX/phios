@@ -1,134 +1,418 @@
 {
   "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "namespaceIndependentFromPC_R1": true,
   "state": "IN_PROGRESS",
   "items": [
     {
       "id": "PC-W0",
-      "state": "IN_PROGRESS"
+      "title": "Baseline",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "PASS",
+      "evidence": "content/production-closure/baseline.json",
+      "dependencies": [],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W1",
-      "state": "IN_PROGRESS"
+      "title": "Authority inventory",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "PASS",
+      "evidence": "content/production-closure/production-authority-registry.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W2",
-      "state": "IN_PROGRESS"
+      "title": "Full check stabilization",
+      "state": "IN_PROGRESS",
+      "checkResult": "IN_PROGRESS",
+      "evidence": "docs/production-closure/evidence/npm-check.txt",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W3",
-      "state": "IN_PROGRESS"
+      "title": "Route census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "FAIL",
+      "evidence": "content/production-closure/web-route-census.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W4",
-      "state": "IN_PROGRESS"
+      "title": "Locale census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "FAIL",
+      "evidence": "content/production-closure/locale-census.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W5",
-      "state": "IN_PROGRESS"
+      "title": "Visual / R2 census",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "checkResult": "FAIL",
+      "evidence": "content/production-closure/visual-runtime-census.json",
+      "dependencies": [
+        "PC-W0"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W6",
-      "state": "NOT_STARTED"
+      "title": "Commerce inventory",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "FAIL",
+      "evidence": "content/production-closure/commerce-canonical-check.json",
+      "dependencies": [
+        "PC-W1"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W7",
-      "state": "NOT_STARTED"
+      "title": "Stripe QA",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W8",
-      "state": "NOT_STARTED"
+      "title": "Entitlement / account",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W9",
-      "state": "NOT_STARTED"
+      "title": "Report architecture freeze",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W10",
-      "state": "NOT_STARTED"
+      "title": "BaZi admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W11",
-      "state": "NOT_STARTED"
+      "title": "ECR admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W12",
-      "state": "NOT_STARTED"
+      "title": "HD admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W13",
-      "state": "NOT_STARTED"
+      "title": "Cross admission",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W14",
-      "state": "NOT_STARTED"
+      "title": "Remaining reports",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W15",
-      "state": "NOT_STARTED"
+      "title": "Report delivery",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W16",
-      "state": "NOT_STARTED"
+      "title": "Book V Atlas",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W17",
-      "state": "NOT_STARTED"
+      "title": "Book VI Atlas",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W18",
-      "state": "NOT_STARTED"
+      "title": "Book VII manuscript",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W19",
-      "state": "NOT_STARTED"
+      "title": "Book VII publication",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W20",
-      "state": "NOT_STARTED"
+      "title": "Book VIII manuscript",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W21",
-      "state": "NOT_STARTED"
+      "title": "Book VIII publication",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W22",
-      "state": "NOT_STARTED"
+      "title": "Financial",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W23",
-      "state": "NOT_STARTED"
+      "title": "Will",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W24",
-      "state": "NOT_STARTED"
+      "title": "Ask",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W25",
-      "state": "NOT_STARTED"
+      "title": "My Reality / account",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W26",
-      "state": "NOT_STARTED"
+      "title": "Academy",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W27",
-      "state": "NOT_STARTED"
+      "title": "Enterprise",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W28",
-      "state": "NOT_STARTED"
+      "title": "Accessibility / mobile / performance",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": true,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W29",
-      "state": "NOT_STARTED"
+      "title": "Customer E2E",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W30",
-      "state": "NOT_STARTED"
+      "title": "Human browser acceptance",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     },
     {
       "id": "PC-W31",
-      "state": "NOT_STARTED"
+      "title": "Cutover",
+      "state": "NOT_STARTED",
+      "checkResult": "NOT_RUN",
+      "evidence": null,
+      "dependencies": [
+        "Existing accepted runtime retained",
+        "Step-specific admission evidence"
+      ],
+      "independentWorkAllowed": false,
+      "admission": "NOT_GRANTED"
     }
-  ]
+  ],
+  "providerCalls": 0,
+  "openAiCalls": 0,
+  "customerProductionReady": false,
+  "accepted": false
 }

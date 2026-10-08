@@ -1,0 +1,49 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "batch": "PC-W0–W5 evidence + independent PC-W6 canonical check",
+  "timestamp": "2026-10-08T08:34:56.936Z",
+  "startHead": "89ca64a26935e7679a14f5072e86f3690188800b",
+  "observedHead": "d38d5c8dbc05e311476ee17abe064059da1a5184",
+  "observations": 120,
+  "routeCount": 30,
+  "pass": 84,
+  "fail": 36,
+  "npm": {
+    "command": "npm run check",
+    "exitCode": null,
+    "state": "IN_PROGRESS",
+    "startedAt": "2026-10-08T08:31:50.304Z",
+    "log": "docs/production-closure/evidence/npm-check.txt",
+    "paidProviderCallsAllowed": false
+  },
+  "commerceExitCode": 1,
+  "protectedChanges": 0,
+  "cost": {
+    "scope": "This production-closure batch only; historical paid calls are not recounted or erased",
+    "guardedProcesses": 1458,
+    "providerCalls": 0,
+    "openAiCalls": 0,
+    "blockedExternalAttempts": 30,
+    "liveBrowser": "Read-only GET/HEAD allowlist; other methods and hosts denied",
+    "paidGenerationInvoked": false,
+    "realPaymentPerformed": false,
+    "source": "content/production-closure/zero-cost-processes.jsonl"
+  },
+  "notPerformed": [
+    "Commit",
+    "Push",
+    "Deploy",
+    "Production freeze",
+    "Production switching",
+    "Real payment",
+    "Paid API",
+    "Frozen report regeneration",
+    "Historical digest rewrite"
+  ],
+  "nextDependencies": [
+    "Continue PC-W2 at actual first failure without lowering checks",
+    "Reconcile live route/locale/asset defects with existing renderer owners; production deployment remains unauthorized",
+    "Explicit Book VI pricing conflict resolution",
+    "Real Stripe QA / authentic account / household pilot / professional review / production storage admission"
+  ]
+}

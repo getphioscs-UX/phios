@@ -36,8 +36,8 @@
       "capability": "ARTICLES",
       "canonicalOwner": "Published-only knowledge read model",
       "sourcePath": "content/knowledge/public/public-knowledge-catalog.json",
-      "runtimeOwner": "assets/js/pages/article.js",
-      "rendererOwner": "assets/js/pages/article.js",
+      "runtimeOwner": "assets/js/knowledge/published-content.js",
+      "rendererOwner": "assets/customer-ui/js/surfaces/knowledge.js",
       "customerRoute": "/articles/",
       "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
       "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
@@ -48,9 +48,14 @@
           "sha256": "2004366928003948ce37184b733c18319276f1cf63a87065c12c474ad2f227aa"
         },
         {
-          "path": "assets/js/pages/article.js",
+          "path": "assets/js/knowledge/published-content.js",
           "exists": true,
-          "sha256": "a8ec778ddd234bddfe3112b392607bc621ff1e58981ff5a1da48cdc04f81b106"
+          "sha256": "7c09737aa8cf9647c8c84d4049706576ae1782d419fd1a3024aa784e4841b9de"
+        },
+        {
+          "path": "assets/customer-ui/js/surfaces/knowledge.js",
+          "exists": true,
+          "sha256": "44d62adb38b4e09103e4c9266af9dfadc881e2da1315c794c2483f6395e728cd"
         },
         {
           "path": "assets/js/pages/article.js",
@@ -59,7 +64,8 @@
         }
       ],
       "productionStatus": "UNKNOWN_UNTIL_END_TO_END_AND_HUMAN_ADMISSION",
-      "missingDeclaredPaths": []
+      "missingDeclaredPaths": [],
+      "additionalArticleBodyRenderer": "assets/js/pages/article.js"
     },
     {
       "capability": "ATLAS",
@@ -438,7 +444,7 @@
       "sourcePath": "research/index.html",
       "runtimeOwner": "UNKNOWN_DEDICATED_ENTERPRISE_RUNTIME",
       "rendererOwner": "assets/js/pages/brand-research-commerce-legal.js",
-      "customerRoute": "/enterprise/",
+      "customerRoute": "/research/",
       "localeOwner": "assets/js/i18n.js + assets/customer-ui/js/locale.js (declared public/customer scopes)",
       "evidenceOwner": "Existing capability source plus content/production-closure census; no acceptance inferred",
       "sourceEvidence": [
@@ -456,7 +462,8 @@
       "productionStatus": "UNKNOWN_UNTIL_END_TO_END_AND_HUMAN_ADMISSION",
       "missingDeclaredPaths": [
         "UNKNOWN_DEDICATED_ENTERPRISE_RUNTIME"
-      ]
+      ],
+      "dedicatedRouteProbe": "/enterprise/ (unregistered; homepage fallback, not evidence of enterprise runtime)"
     }
   ],
   "declaredSubscopes": {
@@ -474,6 +481,11 @@
     "R2": {
       "public": "PHIOS_PUBLIC_ASSET_BASE_URL + public-assets registry",
       "private": "MANUSCRIPTS / PRIVATE_REPORTS production; QA BOOKS binding is not production proof"
+    },
+    "ARTICLES": {
+      "directory": "assets/customer-ui/js/surfaces/knowledge.js",
+      "body": "assets/js/pages/article.js",
+      "sourceReadModel": "assets/js/knowledge/published-content.js"
     }
   }
 }

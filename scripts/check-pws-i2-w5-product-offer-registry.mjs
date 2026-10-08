@@ -1,3 +1,4 @@
+import {isProductionClosureReviewEvidence,assertProductionClosureEvidenceQuarantine}from'./lib/production-closure-review-evidence.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -179,6 +180,7 @@ const collectHtml = async directory => {
 };
 await collectHtml(process.cwd());
 for (const file of htmlFiles) {
+  if(isProductionClosureReviewEvidence(file)){assertProductionClosureEvidenceQuarantine();continue;}
   const source = (await fs.readFile(file, 'utf8')).replace(/data:[^;\s"']+;base64,[A-Za-z0-9+/=]+/g, '');
   assert.equal(
     /\bRM\s*5(?:\D|$)|\bMYR\s*5(?:\D|$)/i.test(source),

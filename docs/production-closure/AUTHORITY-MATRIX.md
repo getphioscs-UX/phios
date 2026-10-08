@@ -5,7 +5,7 @@ Inventory only: existing owners retained. UNKNOWN is not evidence of admission. 
 | Capability | Canonical source | Runtime | Renderer | Customer route | Status |
 |---|---|---|---|---|---|
 | BOOKS | content/registry/current-book-architecture.json | assets/js/web-production/public-surface-data-seven.js | assets/js/pages/books.js | /books/ | Unverified production admission |
-| ARTICLES | content/knowledge/public/public-knowledge-catalog.json | assets/js/pages/article.js | assets/js/pages/article.js | /articles/ | Unverified production admission |
+| ARTICLES | content/knowledge/public/public-knowledge-catalog.json | assets/js/knowledge/published-content.js | assets/customer-ui/js/surfaces/knowledge.js; article body assets/js/pages/article.js | /articles/ | Unverified production admission |
 | ATLAS | content/civilization-atlas/cases/civilization-case-registry-v1.json | assets/js/pages/civilization-atlas.js | assets/js/pages/civilization-atlas/atlas-shell.js | /books/reality-differentiation/#atlas | Unverified production admission |
 | REPORTS | content/runtime/customer-report-runtime/registries/report-lifecycle-state-registry-v2.json | functions/account/ziwei-account-delivery.js | assets/js/pages/wpr-report-workspace-production.js | /professional/reports/ | Unverified production admission |
 | COMMERCE | functions/pws/commercial/stripe-product-registry.js | functions/commerce/commerce-stripe-api.js | functions/commerce/report-presentation.js | /professional/services/ | Unverified production admission |
@@ -19,4 +19,4 @@ Inventory only: existing owners retained. UNKNOWN is not evidence of admission. 
 | FINANCIAL | functions/financial/product-activation/financial-product-runtime.js | functions/financial/analysis-runtime/financial-analysis-runtime.js | assets/js/pages/financial-runtime-product.js | /professional/financial/ | Unverified production admission |
 | WILL | content/legal/will/registries/will-jurisdiction-registry-v1.json | functions/legal/will/escalation-gate.js | UNKNOWN_STANDALONE_PUBLIC_RENDERER_NOT_PROVEN | /will/ | GAP — inspect registry |
 | ACADEMY | content/academy/academy-learning-runtime/contracts/lesson-experience-contract-v1.json | assets/js/pages/academy.js | assets/js/pages/academy.js | /academy/ | Unverified production admission |
-| ENTERPRISE | research/index.html | UNKNOWN_DEDICATED_ENTERPRISE_RUNTIME | assets/js/pages/brand-research-commerce-legal.js | /enterprise/ | GAP — inspect registry |
+| ENTERPRISE | research/index.html | UNKNOWN_DEDICATED_ENTERPRISE_RUNTIME | assets/js/pages/brand-research-commerce-legal.js | /research/ | GAP — inspect registry |

@@ -4,7 +4,12 @@
     "file": "content/professional/ast-full-production/manuscripts/accepted/ast-r5-tl-reference-01-zh-hans-v1.json",
     "contentDigest": "ce713a64c4a5203c1ad05270b732e63bbb3253df28a064332425297ce214c9ef"
   },
-  "en": null,
+  "en": {
+    "file": "content/professional/ast-full-production/publication/r1r3/chat-authored-english-manuscript-v1.json",
+    "contentDigest": "0e51e2c93940736482a04779c5211a7fb4f4691b39c2ccffe14aca7ad807eccd",
+    "status": "CHAT_AUTHORED_CANDIDATE",
+    "humanAcceptStatus": "PENDING"
+  },
   "sourceDigests": {
     "zhContentDigest": "ce713a64c4a5203c1ad05270b732e63bbb3253df28a064332425297ce214c9ef",
     "authoringPackDigest": "4cd0aeab0feeb2b711d2aaa508d58db29eac036d18807a6f2f96cb7c9e9e4f19",
@@ -190,8 +195,26 @@
   ],
   "localeStatus": {
     "zh-Hans": "HUMAN_ACCEPTED",
-    "en": "GENERATION_PENDING"
+    "en": "CHAT_AUTHORED_CANDIDATE"
   },
-  "publicationStatus": "ENGLISH_GENERATION_READY",
-  "productionAllowed": false
+  "publicationStatus": "BILINGUAL_COMPOSITION_CANDIDATE",
+  "productionAllowed": false,
+  "englishAdmissionPolicy": {
+    "decisionId": "AST-VFR-R1R3-HUMAN-EXTERNAL-ENGLISH-AUTHORING",
+    "authority": "EXPLICIT_HUMAN_DECISION_IN_CURRENT_CHAT",
+    "customerRef": "TL-REFERENCE-01",
+    "decision": "DO_NOT_RUN_PREPARED_SOL_ENGLISH_GENERATION",
+    "englishSource": "Human/Chat authoring outside repo provider runtime",
+    "englishProviderCalls": 0,
+    "englishProviderCost": 0,
+    "openAiApiAllowed": false,
+    "consumeOpenAiApiKeyAllowed": false,
+    "retryPreparedRequestAllowed": false,
+    "admissionStatus": "CHAT_AUTHORED_CANDIDATE",
+    "humanReviewRequired": true,
+    "acceptedStatus": "HUMAN_ACCEPTED",
+    "acceptanceRequires": "Explicit Human ACCEPT of the exact supplied English manuscript digest",
+    "threeCallProductionArchitectureAccepted": false,
+    "threeCallUnseenCustomerExperiment": "SEPARATE_LATER_GATE"
+  }
 }

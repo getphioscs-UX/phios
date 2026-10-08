@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 const base='content/professional/ast-full-production/',out=base+'publication/r1r3/';
 fs.mkdirSync(out,{recursive:true});
+if(fs.existsSync(out+'human-english-authoring-decision.json'))throw Error('HUMAN_DECISION_EXTERNAL_CHAT_AUTHORING: prepared provider request is retired; do not regenerate or execute it.');
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 const write=(name,value)=>fs.writeFileSync(out+name,JSON.stringify(value,null,2)+'\n');

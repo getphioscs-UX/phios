@@ -83,13 +83,14 @@ export default {
      pageSequenceValid,
      hiddenOrZeroGeometryCount,
      overflowCount:fits.filter(p=>!p.fits).length+overflowPages.length,
+     overflowPages:overflowPages.map(p=>({pageNumber:Number(p.dataset.pageNumber),pageKey:p.dataset.pageKey,sectionId:p.dataset.sectionId})),
      brokenImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).length,
      undefinedText:/undefined|\[object Object\]/.test(document.querySelector('main').innerText)
     };
    },{expectedPageCount,pageSelector:contract.pageSelector,rendererId:contract.rendererId,requiredDiagramIds:contract.requiredDiagramIds});
 
    stage='VERIFY';
-   if(measured.pageCount!==expectedPageCount||!measured.pageSequenceValid||measured.hiddenOrZeroGeometryCount||measured.overflowCount||measured.brokenImages||measured.undefinedText||!measured.diagramRegistryValid||!measured.diagramCaptionsValid||measured.hiddenRequiredContentCount||measured.missingRenderer||errors.length)throw Error('RENDER_VERIFICATION_FAILED');
+   if(measured.pageCount!==expectedPageCount||!measured.pageSequenceValid||measured.hiddenOrZeroGeometryCount||measured.overflowCount||measured.brokenImages||measured.undefinedText||!measured.diagramRegistryValid||!measured.diagramCaptionsValid||measured.hiddenRequiredContentCount||measured.missingRenderer||errors.length)throw Object.assign(Error('RENDER_VERIFICATION_FAILED'),{diagnostics:{...measured,pageErrors:errors}});
 
    // Verify the method-owned physical DOM contract. PDF admission is a separate
    // receipt; reopening always reads the already stored material.
@@ -133,7 +134,7 @@ export default {
     stage,
     errorName:error.name,
     timings:{...timings,totalRequestMs:Date.now()-startedAt},
-    ...(['VERIFY','BROWSER_LAUNCH','FIT','ASSET_LOAD'].includes(stage)?{reason:String(error.message).slice(0,240)}:{}),
+    ...(['VERIFY','BROWSER_LAUNCH','FIT','ASSET_LOAD'].includes(stage)?{reason:error.diagnostics?JSON.stringify(error.diagnostics):String(error.message).slice(0,240)}:{}),
     ...(stage==='BROWSER_LAUNCH'?{limits:await puppeteer.limits(env.BROWSER).catch(()=>null)}:{})
    },{status:422,headers:{'Cache-Control':'no-store'}});
   }finally{

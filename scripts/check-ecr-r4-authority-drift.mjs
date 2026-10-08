@@ -1,3 +1,4 @@
+import {isProductionClosureReviewEvidence,assertProductionClosureEvidenceQuarantine}from'./lib/production-closure-review-evidence.mjs';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import assert from 'node:assert/strict';
@@ -66,12 +67,14 @@ try{
   // git grep exits 1 when there are no matches.
   if(error?.status!==1)throw error;
 }
-hits=hits.filter(p=>p!=='scripts/check-ecr-r4-authority-drift.mjs'&&!p.endsWith('.log'));
+const reviewEvidence=hits.filter(isProductionClosureReviewEvidence);
+if(reviewEvidence.length)assertProductionClosureEvidenceQuarantine();
+hits=hits.filter(p=>p!=='scripts/check-ecr-r4-authority-drift.mjs'&&!p.endsWith('.log')&&!reviewEvidence.includes(p));
 if(hits.length)throw Object.assign(new Error('ECR_STALE_POSITIONEMPHASIZES_FOUND:'+hits.join(',')),{hits});
 
 for(const code of ['ECR-H17','ECR-H18','ECR-H19']){
   const row=registry.entries.find(x=>x.coordinate===code);
   assert(row&&row.definition.includes('response position emphasizes '),`ECR_H64_DEFINITION_INVALID:${code}`);
 }
-console.log(JSON.stringify({pass:true,sourceEntries:source.entries.length,derivedH64:hEntries.length,registryEntries:registry.entries.length,runtimeEntries:runtime.entries.length,d11:registry.entries.find(x=>x.coordinate==='D11')?.label,h17:registry.entries.find(x=>x.coordinate==='ECR-H17')?.definition,staleTokenHits:hits.length},null,2));
+console.log(JSON.stringify({pass:true,sourceEntries:source.entries.length,derivedH64:hEntries.length,registryEntries:registry.entries.length,runtimeEntries:runtime.entries.length,d11:registry.entries.find(x=>x.coordinate==='D11')?.label,h17:registry.entries.find(x=>x.coordinate==='ECR-H17')?.definition,staleTokenHits:hits.length,nonPublishedDiagnosticReferences:reviewEvidence},null,2));
 console.log('PASS ECR R4 authority drift: source → registry → runtime aligned; no stale positionemphasizes artifact found.');
