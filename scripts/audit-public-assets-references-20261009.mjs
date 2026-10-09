@@ -15,7 +15,7 @@ function walk(v,p,inherited=false,pointer='$'){
  for(const [k,x]of Object.entries(v))if(x&&typeof x==='object')walk(x,p,accepted,pointer+'/'+k);
 }
 for(const p of names){if(!fs.existsSync(p)||!fs.statSync(p).isFile())continue;const b=fs.readFileSync(p);if(b.includes(0))continue;const text=b.toString('utf8');sources.push({p,text});if(b.length>2*1024*1024)largeFiles.push({path:p,bytes:b.length});
- const leaves=new Set([...text.matchAll(/[^\s"'`<>\/\\:=,{}\[\]()]+\.(?:webp|png|jpe?g|svg|gif|avif|pdf|woff2?|mp4|webm|json|zip)/g)].map(m=>{try{return decodeURIComponent(m[0])}catch{return m[0]}}));
+ const leaves=new Set((text.match(/[^\s"'`<>\/\\:=,{}\[\]()]+/g)||[]).filter(t=>/\.(?:webp|png|jpe?g|svg|gif|avif|pdf|woff2?|mp4|webm|json|zip)$/.test(t)).map(t=>{try{return decodeURIComponent(t)}catch{return t}}));
  for(const leaf of leaves)for(const r of byLeaf.get(leaf)||[]){const exact=text.includes(r.key)||text.includes(r.key.split('/').map(encodeURIComponent).join('/'));r.references.push({path:p,kind:exact?'EXACT_KEY':'BASENAME_ONLY_UNRESOLVED',runtime:runtime(p),historical:/history|historical|freeze|receipt|acceptance|material|archive|print|pdf|fallback/i.test(p)});}
  if(/resolver|objectKey|object_key|PUBLIC_R2|publicAsset|r2\.dev/.test(text)&&/\$\{|\.replace\(|\.join\(|\+.*(?:file|key)/.test(text))dynamicSites.push(p);
  if(p.endsWith('.json')&&!p.startsWith(dir))try{walk(JSON.parse(text.replace(/^\uFEFF/,'')),p)}catch{}
