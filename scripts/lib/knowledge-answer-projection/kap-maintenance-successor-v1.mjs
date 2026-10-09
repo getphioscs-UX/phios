@@ -16,7 +16,8 @@ const PATHS = Object.freeze([
   'content/knowledge/answer-projection/reconciliation/kap-book-vii-production-admission-successor-v1.json',
   'content/knowledge/answer-projection/reconciliation/kap-book-vii-production-live-cutover-r1-successor.json',
   'content/knowledge/answer-projection/reconciliation/kap-book-vii-v2-publication-source-successor-v1.json',
-  'content/knowledge/structured/successors/master-a-v2-batch6/kap-source-unavailable-maintenance-successor-v1.json'
+  'content/knowledge/structured/successors/master-a-v2-batch6/kap-source-unavailable-maintenance-successor-v1.json',
+  'content/knowledge/answer-projection/maintenance/kap-m10-atlas-selection-isolation-v1.json'
 ]);
 const digest = path => crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
 const maintenanceDocs = () => PATHS.filter(path => fs.existsSync(path)).map(path => JSON.parse(fs.readFileSync(path, 'utf8')));
