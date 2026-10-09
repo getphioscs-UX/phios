@@ -29,12 +29,12 @@
 
 - Personal PIS-034 → /reality/；Professional PIS-035 → /professional/。当前统一 resolver 正确编码真实 key 的反引号为 %60，无需重命名。接受凭证在当前 client registry v1.8（OWNER_ACCEPTED、NEUTRAL）及其历史登记中保留。SPECIAL-CONSUMERS.json 有四组合的实际显示与摘要；初次 lazy-load 验证器等待顺序错误保留为独立诊断，不算产品失败。
 - Profile SEC-05 → 现有 CASE-08 双语档案审阅消费者，dossier projection → 当前 renderer；resolver 已使用 RELATIONSHIPS..webp。四组合查看的是现有双语 synthetic review report，不宣称真实客户交付。当前 CASE-08 HTML 与 W11R6 HUMAN_ACCEPT manifest 摘要一致；同一已接受 53 页 PDF 摘要一致，第 29 页 SEC-05 经 Poppler 实际渲染核对完整原图，见 PROFILE-SEC-05-ACCEPTANCE-PROOF.json / PROFILE-SEC-05-ACCEPTED-PRINT.png；未改图或命名。
-- Thesis → /thesis 阅读与 /api/thesis-download 下载。用户本轮明确确认 3044299 字节 R2 文件为正确版本；SHA256 59452e4a00b853cee8260f500e3c758ca3b01ecec23589c586dbcb854c455c09，104 页 A4，Teresa Lee，标题 Reality Navigation Thesis。旧 15994918 字节源稿登记及 version=null 保留，新增 current_public_delivery，不编造稳定版本号。固定下载入口只读现有登记，验证大小和 SHA256，错版/非 PDF fail closed；四组合实际下载一致。R2 没有 CORS/attachment 头，同源入口解决跨域 download 属性不足。无头 Edge 与可用的 In-app Browser 未显示 PDF 原生阅读页面，不能把灰框当显示 PASS：阅读 href 已绑定，原生阅读/移动端分页仍 RUNTIME_UNVERIFIED；封面经 Poppler 实际渲染核对。网页打印不打印灰色 PDF 容器，完整研究稿使用原 PDF 打印。
+- Thesis → /thesis 阅读与 /api/thesis-download 下载。用户本轮明确确认 3044299 字节 R2 文件为正确版本；SHA256 59452e4a00b853cee8260f500e3c758ca3b01ecec23589c586dbcb854c455c09，104 页 A4，Teresa Lee，标题 Reality Navigation Thesis。旧 15994918 字节源稿登记及 version=null 保留，新增 current_public_delivery，不编造稳定版本号。固定下载入口只读现有登记，验证大小和 SHA256，错版/非 PDF fail closed；四组合实际下载一致。R2 没有 CORS/attachment 头，同源入口解决跨域 download 属性不足。全局 CSP 保持不变；同源 iframe 和固定 PDF 响应允许当前阅读消费者。Edge 在仓库实际 CSP 下已显示桌面 PDF 首页（双语截图）；手机使用既有打开 PDF 与下载入口。四组合下载均取得相同原始文件。完整 104 页的设备阅读、分页及原 PDF 打印仍 RUNTIME_UNVERIFIED；封面经 Poppler 实际渲染核对，网页打印隐藏内嵌阅读框。
 
 ## 具体缺口
 
 1. L5 预期 VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp 已 404 且不在完整清单。现存 IS-B5-ATLAS-L5-TEMPLATE-BASE.webp 为 436804 字节、1024×1536；交付预期为 349000 字节、1536×1024，摘要不同。接受方向不等同该对象的最终视觉接受（原 FR4 status 明确 NOT_YET_GRANTED）。关闭旧错误 VERIFIED_LIVE_R2 声明，使用既有结构化 reader 和 15 张接受图；待具体对象接受及布局规格核对，不猜替代、不改名。
-2. 原生 Thesis PDF 阅读器的实际显示尚未取得；可用浏览器限制已具体记录，下载已真实验证。
+2. Thesis 桌面原生阅读首页与四组合实际下载已验证；完整 104 页设备阅读、手机外部阅读器及逐页打印尚缺证据。
 3. 跨 HEAD 检查的版本范围保留；本轮不把未取得的部署/认证客户记录提升为完成。
 
 ## 回归

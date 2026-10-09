@@ -1,0 +1,88 @@
+{
+  "head": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+  "recordedAt": "2026-10-09T10:45:48.634Z",
+  "checks": [
+    {
+      "name": "navigation-customer",
+      "command": "node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-customer-accepted-navigation.mjs",
+      "head": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-navigation-customer.log",
+      "logSHA256": "ab0b664785468d579c7fcede7fb36ab7936d9534b52933af7346ce6c9f4958f6"
+    },
+    {
+      "name": "cx-r5-current",
+      "command": "node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-cx-r5-global-shell.mjs",
+      "head": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-cx-r5-current.log",
+      "logSHA256": "d0210b147e0d85b3fa196c98c39bdf34f51e361d3d8ec7d8de49d758262bb8a5"
+    },
+    {
+      "name": "client-visual-current",
+      "command": "node scripts/run-zero-cost-regression.mjs check:client-visual-consumption-current",
+      "head": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+      "result": "FAIL",
+      "exitCode": 1,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-client-visual-current.log",
+      "logSHA256": "6028f1f7edac5ffa39e57375ae46948c0402c98932c7540b865146991b884272"
+    },
+    {
+      "name": "client-visual-h5a",
+      "command": "node scripts/run-zero-cost-regression.mjs check:client-visual-consumption-h5a",
+      "head": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+      "result": "FAIL",
+      "exitCode": 1,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-client-visual-h5a.log",
+      "logSHA256": "ee8297cb740f22230a60b8f16d44f7dfb3a450f9d7ec20e54d8f2ec3814413a1"
+    },
+    {
+      "name": "mrm-s18-current",
+      "command": "node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-mrm-s18-master-freeze.mjs",
+      "head": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+      "result": "FAIL",
+      "exitCode": 1,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-mrm-s18-current.log",
+      "logSHA256": "4be34ebe9446458815d3fbf580fc1c8b8e5103df48c7357f70c6a951c0522567"
+    },
+    {
+      "name": "journey-a-connected",
+      "command": "node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-journey-a-connected-delivery.mjs",
+      "head": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-journey-a-connected.log",
+      "logSHA256": "808c578c404d861ce7bae257b5a41ab176205d3491c78b5f5a3f590773da7469"
+    },
+    {
+      "name": "navigation-customer-final",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-navigation-final.log",
+      "logSHA256": "3baa4a652862b6e5a2657462df2de8cb46e41412138f583954c9a8614e630046",
+      "scope": "FINAL_SOURCE_REPLAY_ZERO_PROVIDER"
+    },
+    {
+      "name": "journey-a-connected-final",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-journey-a-final.log",
+      "logSHA256": "1c4d51c8c65dffae3f540d412768db0aa8ec7e147f4bc951033907323adbe3ee",
+      "scope": "FINAL_SOURCE_REPLAY_ZERO_PROVIDER"
+    },
+    {
+      "name": "client-visual-current-final",
+      "command": "node scripts/run-zero-cost-regression.mjs check:client-visual-consumption-current",
+      "result": "FAIL",
+      "exitCode": 1,
+      "log": "content/production-closure/live-customer-commercial-convergence/CONTINUATION-client-visual-current-final.log",
+      "logSHA256": "9b683c532c7d2dab58545df59f1e05ae7b43e4645a3c0551841bbbc7bf6fef28",
+      "scope": "STRICT_H5_BOOTSTRAP_REQUIREMENT_RETAINED_NO_GENERIC_HYDRATOR_SUBSTITUTION"
+    }
+  ],
+  "providerCalls": 0,
+  "spendUSD": 0,
+  "productionOperations": 0
+}

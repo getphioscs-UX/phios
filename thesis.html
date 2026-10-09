@@ -119,7 +119,7 @@
       .thesis-route,.book-grid,.platform-grid{grid-template-columns:1fr}
       .runtime-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
       .layer{grid-template-columns:1fr;gap:8px}
-      .pdf-frame{height:65vh;min-height:470px}
+      .pdf-frame{display:none}
       .reader-panel{padding:20px}
     }
     @media(max-width:460px){
@@ -274,9 +274,7 @@
 <a class="btn gold" data-i18n="thesis.reader.download" download="reality-navigation-thesis.pdf" href="/api/thesis-download">Download PDF</a>
 </div>
 </div>
-<object class="pdf-frame" data="https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/downloads/thesis/reality-navigation-thesis.pdf#view=FitH" type="application/pdf" aria-label="Reality Navigation Thesis PDF">
-<a href="https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/downloads/thesis/reality-navigation-thesis.pdf" rel="noopener" target="_blank" data-pis-copy data-cx-en="Open the research PDF" data-cx-zh="打开研究 PDF">Open the research PDF</a>
-</object>
+<iframe class="pdf-frame" src="/api/thesis-download?view=inline#view=Fit" title="Reality Navigation Thesis PDF" loading="lazy"></iframe>
 <p class="small" data-i18n="thesis.reader.fallback">If the embedded reader does not appear, use “Open PDF” above.</p>
 </div>
 </div>

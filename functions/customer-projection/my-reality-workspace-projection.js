@@ -60,6 +60,7 @@ export function projectMyRealityWorkspace({reality={},readout={},navigation={},c
       possibleDirections:navigationOptions,
       selectedId:clean(navigation?.selectedId)||null,
       systemSelected:false
+      ,acceptedEvaluation:navigation?.acceptedEvaluation||null
     },
     actions:{items:confirmedActions,automaticActionCreated:false},
     observe:{sessionOnly:true,persisted:false,fields:['WHAT_HAPPENED','NEW_EVIDENCE','CHANGE']},
