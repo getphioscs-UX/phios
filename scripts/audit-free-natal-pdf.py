@@ -1,16 +1,16 @@
-import json, pathlib, subprocess
+import json, pathlib, subprocess, re
 from PIL import Image, ImageDraw
 from pypdf import PdfReader
 
 root = pathlib.Path('docs/commerce/economics-20261009/windows-integration/free-natal-diagram-audit')
-out = root / 'pdf-pages'
+out = root / 'pdf-pages-v2'
 out.mkdir(exist_ok=True)
 results = []
 for source in sorted(root.glob('*-print.pdf')):
     reader = PdfReader(source)
     prefix = out / source.stem
     subprocess.run(['pdftoppm', '-r', '45', '-png', str(source), str(prefix)], check=True, capture_output=True)
-    files = sorted(out.glob(source.stem + '-*.png'), key=lambda p: int(p.stem.rsplit('-', 1)[1]))
+    files = sorted((p for p in out.glob(source.stem + '-*.png') if re.fullmatch(re.escape(source.stem) + r'-\d+', p.stem)), key=lambda p: int(p.stem.rsplit('-', 1)[1]))
     pages = []
     for i, page in enumerate(reader.pages):
         text = page.extract_text() or ''
@@ -25,5 +25,5 @@ for source in sorted(root.glob('*-print.pdf')):
             sheet.paste(img, (x,y+25)); draw.text((x+5,y+5), f'{source.stem} p{start+j+1}', fill='black')
         sheet.save(out / f'{source.stem}-contact-{start//12+1}.png')
     results.append({'file': source.name, 'pageCount': len(reader.pages), 'pages': pages, 'scope': 'TEXT_AND_RENDERED_PAGES_NOT_HUMAN_ACCEPT'})
-(root / 'PDF-PAGE-RESULTS.json').write_text(json.dumps(results, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+(root / 'PDF-PAGE-RESULTS.json').write_text(json.dumps(results, ensure_ascii=False, indent=2)+'\n', encoding='utf-8', newline='\n')
 print(json.dumps([{'file': r['file'], 'pages': r['pageCount'], 'blankTextPages': [p['page'] for p in r['pages'] if p['blankText']]} for r in results]))

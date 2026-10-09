@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {verifyRitualMaintenanceDependency} from './lib/iching-ritual-maintenance-successor.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const text=p=>fs.readFileSync(p,'utf8');
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -19,7 +20,10 @@ assert.equal(ritual.status,'LOCAL_IMPLEMENTATION_SUCCESSOR');
 assert.equal(ritual.historicalManifestSha256,sha(current.releaseManifest));
 assert.equal(ritual.artifact.path,'assets/customer-ui/js/surfaces/iching-casting.js');
 assert.equal(ritual.calculationAuthorityChanged,false);assert.equal(ritual.corpusAuthorityChanged,false);assert.equal(ritual.guestPersistenceAuthorityChanged,false);
-for(const dep of ritual.dependencies)assert.equal(sha(dep.path),dep.sha256,'RITUAL_DEPENDENCY_DRIFT');
+for(const dep of ritual.dependencies){
+ const maintenance=read('content/production/symbolic-method/reconciliation/iching-ritual-dependency-maintenance-v2.json');
+ verifyRitualMaintenanceDependency(dep,maintenance);
+}
 const presentation=successor.presentationSuccessor;
 const historical=release.artifacts.find(item=>item.path===presentation.path);
 assert.ok(historical,'ICHING_PRESENTATION_NOT_IN_RELEASE_MANIFEST');

@@ -1,6 +1,6 @@
 {
   "authority": "MASTER-AUTHORITY.txt plus later explicit owner commercial decisions",
-  "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+  "head": "31d5709d71c2aa37806c78039499a62204d3a291",
   "updatedAt": "2026-10-09T06:33:22.097Z",
   "completeStages": [],
   "note": "阶段完整完成需满足全部契约；定向PASS、规范接受与文件存在均不等于阶段完成",
@@ -523,8 +523,8 @@
       "title": "Book VIII private doctrine",
       "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "SOURCE": "HUMAN_ACCEPTED_DOCTRINE_PUBLIC_BOUNDARY_QA_REMAINS",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
@@ -535,7 +535,7 @@
         "content/knowledge/structured/successors/master-a-v2-batch4/book-viii-identity-reuse-v1.json"
       ],
       "actualChecks": [],
-      "nextStep": "核对 VIII 公开不售页面、私有源码及受控图像边界；不公开全文",
+      "nextStep": "复用已接受私有规范；核对公开不售与投影边界，不重复要求 doctrine 接受",
       "liveCustomerDoesNotBlockIndependentSource": true,
       "sourceFiles": [
         {
@@ -548,16 +548,80 @@
         }
       ],
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
-      "remainingWork": "核对 VIII 公开不售页面、私有源码及受控图像边界；不公开全文",
-      "progress": "部分"
+      "remainingWork": "复用已接受私有规范；核对公开不售与投影边界，不重复要求 doctrine 接受",
+      "progress": "部分",
+      "layeredStates": {
+        "NAVIGATION_DOCTRINE": "HUMAN_ACCEPTED",
+        "NAVIGATION_TOPOLOGY": "HUMAN_ACCEPTED",
+        "RUNTIME_CONTRACT": "PARTIAL",
+        "CUSTOMER_NAVIGATION_API": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+        "MY_REALITY_NAVIGATION_CONSUMER": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+        "NAVIGATION_ACADEMY_CONSUMER": "WIRED_PUBLIC_TITLE_CATALOG_AND_TOPIC_FILTER_VIDEO_AWAITING_UPLOAD",
+        "notes": [
+          "Legacy RNE projections are imported by customer-my-reality and customer-reality-handoff; this does not execute accepted NAV evaluators.",
+          "Academy imports accepted titles/source lineage through its free public catalog. It does not expose doctrine or imply video playback."
+        ],
+        "evidence": [
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json",
+            "sha256": "ce4cfde1efb7b7833852157809d1f788e7e5b1a31a9baeb3489ad09599efbe88",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json",
+            "sha256": "12f83ab21cb9e1de1e654cf44a8ed1c05c96a7db9c8fd53d211ddb84d74d0332",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json",
+            "sha256": "09639ebd6f6564d0dc55e633a00858a0a43dc4a791adc3e957c90ad06b4ff6c5",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json",
+            "sha256": "63ddb437cbad793b4b908c44a0483132a860af2ec43ea1a6400cb150916b008a",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json",
+            "sha256": "7ebdca787472cd49e8cfb34571d3384f317e231fe1e4cbb5264e4b007f20c0bc",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+            "sha256": "3dc3965388239c4a275691a9e4489abad0d0e4c85147d50179fe26538975b105",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "docs/design-system/pds-w0-navigation-topology-human-accept-v1.json",
+            "sha256": "d684162afd5007dd98925f01618767c9e79b067a03bf9bb8699c7caf2e13badb",
+            "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "docs/design-system/pds-w0-navigation-batch06-human-accept-v2.json",
+            "sha256": "ea189ff8c177ab3323737425edf2be17170d049b84b8822e14e973df1d8487a0",
+            "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "functions/api/customer-my-reality.js",
+            "sha256": "fbc0c6c75fe5be21b6155a4cca63efaaa28eceff0014e74f76759c9a07650507",
+            "scope": "LEGACY_RNE_PROJECTION"
+          },
+          {
+            "path": "functions/academy/navigation-public-catalog.js",
+            "sha256": "18bcfd3c16f87917ea7d026960e98d6b24c4129d46cfa4e486f7cd7aeb0ac5b7",
+            "scope": "PUBLIC_VIDEO_CATALOG_ONLY"
+          }
+        ]
+      }
     },
     {
       "id": "W14",
       "title": "NAV runtime / Academy mapping",
       "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "SOURCE": "PARTIAL_IMPLEMENTATION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
@@ -584,7 +648,7 @@
         "functions/runtime/navigation/nav-accepted-batch-06-runtime.js"
       ],
       "actualChecks": [],
-      "nextStep": "读取可信 server reality 输入，接入 scoped customer API 与 Academy 受控消费；不能只导入 helper",
+      "nextStep": "接入可信 server Reality 输入、scoped NAV evaluator API 与 My Reality 消费；不得复制 RNE owner",
       "liveCustomerDoesNotBlockIndependentSource": true,
       "sourceFiles": [
         {
@@ -593,17 +657,81 @@
         }
       ],
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
-      "remainingWork": "读取可信 server reality 输入，接入 scoped customer API 与 Academy 受控消费；不能只导入 helper",
+      "remainingWork": "接入可信 server Reality 输入、scoped NAV evaluator API 与 My Reality 消费；不得复制 RNE owner",
       "progress": "部分",
-      "implementationScope": "NAV01–30私有规范、contract、projection及拓扑凭证；不是客户消费者接线"
+      "implementationScope": "NAV01–30私有规范、contract、projection及拓扑凭证；不是客户消费者接线",
+      "layeredStates": {
+        "NAVIGATION_DOCTRINE": "HUMAN_ACCEPTED",
+        "NAVIGATION_TOPOLOGY": "HUMAN_ACCEPTED",
+        "RUNTIME_CONTRACT": "PARTIAL",
+        "CUSTOMER_NAVIGATION_API": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+        "MY_REALITY_NAVIGATION_CONSUMER": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+        "NAVIGATION_ACADEMY_CONSUMER": "WIRED_PUBLIC_TITLE_CATALOG_AND_TOPIC_FILTER_VIDEO_AWAITING_UPLOAD",
+        "notes": [
+          "Legacy RNE projections are imported by customer-my-reality and customer-reality-handoff; this does not execute accepted NAV evaluators.",
+          "Academy imports accepted titles/source lineage through its free public catalog. It does not expose doctrine or imply video playback."
+        ],
+        "evidence": [
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json",
+            "sha256": "ce4cfde1efb7b7833852157809d1f788e7e5b1a31a9baeb3489ad09599efbe88",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json",
+            "sha256": "12f83ab21cb9e1de1e654cf44a8ed1c05c96a7db9c8fd53d211ddb84d74d0332",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json",
+            "sha256": "09639ebd6f6564d0dc55e633a00858a0a43dc4a791adc3e957c90ad06b4ff6c5",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json",
+            "sha256": "63ddb437cbad793b4b908c44a0483132a860af2ec43ea1a6400cb150916b008a",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json",
+            "sha256": "7ebdca787472cd49e8cfb34571d3384f317e231fe1e4cbb5264e4b007f20c0bc",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+            "sha256": "3dc3965388239c4a275691a9e4489abad0d0e4c85147d50179fe26538975b105",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "docs/design-system/pds-w0-navigation-topology-human-accept-v1.json",
+            "sha256": "d684162afd5007dd98925f01618767c9e79b067a03bf9bb8699c7caf2e13badb",
+            "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "docs/design-system/pds-w0-navigation-batch06-human-accept-v2.json",
+            "sha256": "ea189ff8c177ab3323737425edf2be17170d049b84b8822e14e973df1d8487a0",
+            "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "functions/api/customer-my-reality.js",
+            "sha256": "fbc0c6c75fe5be21b6155a4cca63efaaa28eceff0014e74f76759c9a07650507",
+            "scope": "LEGACY_RNE_PROJECTION"
+          },
+          {
+            "path": "functions/academy/navigation-public-catalog.js",
+            "sha256": "18bcfd3c16f87917ea7d026960e98d6b24c4129d46cfa4e486f7cd7aeb0ac5b7",
+            "scope": "PUBLIC_VIDEO_CATALOG_ONLY"
+          }
+        ]
+      }
     },
     {
       "id": "W15",
       "title": "Academy video model",
       "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "SOURCE": "PARTIAL_IMPLEMENTATION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [],
@@ -611,7 +739,7 @@
         "academy/index.html"
       ],
       "actualChecks": [],
-      "nextStep": "Supply actual accepted video assets before purchase eligibility",
+      "nextStep": "免费 canonical video registry/API/主题目录已接线；真实视频、transcript 与 publication metadata 待提供；Method 付费视频单独准入",
       "liveCustomerDoesNotBlockIndependentSource": true,
       "sourceFiles": [
         {
@@ -620,8 +748,72 @@
         }
       ],
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
-      "remainingWork": "Supply actual accepted video assets before purchase eligibility",
-      "progress": "阻断"
+      "remainingWork": "免费 canonical video registry/API/主题目录已接线；真实视频、transcript 与 publication metadata 待提供；Method 付费视频单独准入",
+      "progress": "部分",
+      "layeredStates": {
+        "NAVIGATION_DOCTRINE": "HUMAN_ACCEPTED",
+        "NAVIGATION_TOPOLOGY": "HUMAN_ACCEPTED",
+        "RUNTIME_CONTRACT": "PARTIAL",
+        "CUSTOMER_NAVIGATION_API": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+        "MY_REALITY_NAVIGATION_CONSUMER": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+        "NAVIGATION_ACADEMY_CONSUMER": "WIRED_PUBLIC_TITLE_CATALOG_AND_TOPIC_FILTER_VIDEO_AWAITING_UPLOAD",
+        "notes": [
+          "Legacy RNE projections are imported by customer-my-reality and customer-reality-handoff; this does not execute accepted NAV evaluators.",
+          "Academy imports accepted titles/source lineage through its free public catalog. It does not expose doctrine or imply video playback."
+        ],
+        "evidence": [
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json",
+            "sha256": "ce4cfde1efb7b7833852157809d1f788e7e5b1a31a9baeb3489ad09599efbe88",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json",
+            "sha256": "12f83ab21cb9e1de1e654cf44a8ed1c05c96a7db9c8fd53d211ddb84d74d0332",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json",
+            "sha256": "09639ebd6f6564d0dc55e633a00858a0a43dc4a791adc3e957c90ad06b4ff6c5",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json",
+            "sha256": "63ddb437cbad793b4b908c44a0483132a860af2ec43ea1a6400cb150916b008a",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json",
+            "sha256": "7ebdca787472cd49e8cfb34571d3384f317e231fe1e4cbb5264e4b007f20c0bc",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+            "sha256": "3dc3965388239c4a275691a9e4489abad0d0e4c85147d50179fe26538975b105",
+            "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "docs/design-system/pds-w0-navigation-topology-human-accept-v1.json",
+            "sha256": "d684162afd5007dd98925f01618767c9e79b067a03bf9bb8699c7caf2e13badb",
+            "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "docs/design-system/pds-w0-navigation-batch06-human-accept-v2.json",
+            "sha256": "ea189ff8c177ab3323737425edf2be17170d049b84b8822e14e973df1d8487a0",
+            "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+          },
+          {
+            "path": "functions/api/customer-my-reality.js",
+            "sha256": "fbc0c6c75fe5be21b6155a4cca63efaaa28eceff0014e74f76759c9a07650507",
+            "scope": "LEGACY_RNE_PROJECTION"
+          },
+          {
+            "path": "functions/academy/navigation-public-catalog.js",
+            "sha256": "18bcfd3c16f87917ea7d026960e98d6b24c4129d46cfa4e486f7cd7aeb0ac5b7",
+            "scope": "PUBLIC_VIDEO_CATALOG_ONLY"
+          }
+        ]
+      }
     },
     {
       "id": "W16",
@@ -1440,10 +1632,10 @@
     {
       "id": "W37",
       "title": "Pages build",
-      "status": "PARTIALLY_COMPLETE",
+      "status": "BUILD_EVIDENCE_STALE",
       "gates": {
         "SOURCE": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "DEPLOYED": "NOT_RUN",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
@@ -1466,10 +1658,21 @@
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
       "actualChecks": [],
       "remainingWork": "当前版本隔离构建及25MiB、imports、私有内容、runtime资产检查",
-      "nextStep": "当前版本隔离构建及25MiB、imports、私有内容、runtime资产检查",
+      "nextStep": "重新运行绑定 HEAD 和工作树摘要的本地构建",
       "progress": "部分",
       "liveCustomerDoesNotBlockIndependentSource": true,
-      "verificationVersion": "a30ebe67ab9571d45f36ec96b951e53e3b735b77"
+      "verificationVersion": "a30ebe67ab9571d45f36ec96b951e53e3b735b77",
+      "buildIdentity": {
+        "currentHead": "31d5709d71c2aa37806c78039499a62204d3a291",
+        "evidenceCommit": "a30ebe67ab9571d45f36ec96b951e53e3b735b77",
+        "buildReceipt": "content/production-closure/live-customer-commercial-convergence/BUILD-VERIFICATION.json",
+        "buildAt": null,
+        "stale": true,
+        "workingTreeDigest": null,
+        "source": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
+        "deployed": "NOT_RUN",
+        "liveCustomer": "NOT_RUN"
+      }
     },
     {
       "id": "W38",
@@ -1559,368 +1762,992 @@
   ],
   "journeys": [
     {
-      "id": "A",
-      "nodes": [
-        "Free BaZi",
-        "Paid Report",
-        "Delivery",
-        "Ask4",
-        "Membership",
-        "My Reality"
-      ],
-      "reached": "付款至持久交付/四问：分别有合成 SQL 与 handler 测试；尚无串联完整报告预览",
-      "missing": "当前完整中英报告接受绑定、producer/renderer、四问答案 UI、取消/再订阅同workspace串联",
-      "evidence": [
-        "CONTROLLED-PURCHASE-INTEGRATION-QA.json",
-        "RECOVERY-check-paid-method-lifecycle-integration.log",
-        "PC-W10-W11-CURRENT-ADMISSION-REVIEW.json"
-      ],
-      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
-      "DEPLOYED": "UNVERIFIED",
-      "LIVE_CUSTOMER": "NOT_RUN"
+      "Journey": "A · BaZi",
+      "Entry": {
+        "state": "PASS",
+        "actualEvidence": [
+          {
+            "path": "perspectives/personal/index.html",
+            "sha256": "089856773920bfcc6caf22e55fb5e401abffa69e24b4eb51d0965ef10947b244",
+            "scope": "LOCAL_BROWSER_ENTRY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/BAZI-FREE-NATIVE-PREVIEW.jpg",
+            "sha256": "0e32b8a5553ac7de42157425e6f40899cc0f97a24e49b8d2e7a03c6db21c3a7e",
+            "scope": "HISTORICAL_LOCAL_SYNTHETIC_BROWSER_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Entry only; free body and paid chain are separately assessed."
+      },
+      "Account / Entitlement": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/commerce/commerce-stripe-events.js",
+            "sha256": "c05b42f6d4a4354d1f7568e6b52ec75de9019ca80cbf684faa6c884cedea4524",
+            "scope": "SIGNED_PAYMENT_OWNER"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+            "sha256": "d39c0224cd3e5c0098808e483163691949ca8ed9632d8843b8a005721f75b9fa",
+            "scope": "SYNTHETIC_CHECKOUT_WEBHOOK_NOT_REAL_PAYMENT"
+          }
+        ],
+        "firstMissingRequirement": "Bind the purchased order to this same reading/person/version, then test the connected producer chain."
+      },
+      "Input": {
+        "state": "PASS",
+        "actualEvidence": [
+          {
+            "path": "functions/account/canonical-person-store.js",
+            "sha256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a",
+            "scope": "CANONICAL_INPUT_OWNER"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/MASTER-CUSTOMER-CURRENT-IMPLEMENTATION.json",
+            "sha256": "4eb4720324fd39242a85cd31aee0ece3ce4304135df2c3da998fdb5b758630e3",
+            "scope": "SYNTHETIC_BIRTH_FORM_AND_PLACE_CONFIRMATION"
+          }
+        ],
+        "firstMissingRequirement": "Synthetic local input only; formal owner identity is not configured."
+      },
+      "Generation / Retrieval": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/account/bazi-account-delivery.js",
+            "sha256": "d9bad9ab6c66b334347579de96582f5e97dc84dc4eabca89256e2642e038e766",
+            "scope": "ORCHESTRATION_FAILS_CLOSED"
+          },
+          {
+            "path": "workers/method-report-renderer/index.js",
+            "sha256": "bbd95b389ea7797083d70232f8ed5b9d29e6e4f2697dc2071435788298b54b89",
+            "scope": "CURRENT_ZIWEI_RENDERER_NOT_BZR"
+          }
+        ],
+        "firstMissingRequirement": "Customer-native governed input registration and BZR browser/PDF receipt are missing."
+      },
+      "Result": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/BAZI-FREE-NATIVE-PREVIEW.jpg",
+            "sha256": "0e32b8a5553ac7de42157425e6f40899cc0f97a24e49b8d2e7a03c6db21c3a7e",
+            "scope": "FOUR_PILLARS_VISIBLE_NOT_COMPLETE_REPORT"
+          }
+        ],
+        "firstMissingRequirement": "Free accepted publication copy for this subject and full paid bilingual delivery still need execution."
+      },
+      "Save to My Reality": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/account/my-reality-saved-sources.js",
+            "sha256": "7c357298a2d09db1e5d1acf3bd31c6a5166b036543ca29bb64b161c1a74d87e1",
+            "scope": "EXISTING_OWNER_SCOPED_SAVED_SOURCE_PROJECTION"
+          }
+        ],
+        "firstMissingRequirement": "Save and reopen this actual delivered report through the same journey."
+      },
+      "Follow-up": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/account/report-followup-store.js",
+            "sha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e",
+            "scope": "SERVER_FOUR_SLOT_AND_HISTORY_OWNER"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json",
+            "sha256": "8252ded1fb381b1110b389e1ba4d57e94024c566bf696978349f68a077e4b6e5",
+            "scope": "SQL_FIXTURE_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Exercise four completed answers, exhausted quota and cancel/resubscribe continuity in one chain."
+      },
+      "Navigation Handoff": {
+        "state": "NOT_IMPLEMENTED",
+        "actualEvidence": [
+          {
+            "path": "functions/customer-projection/navigation-customer-projection.js",
+            "sha256": "3504f04b6a94b7b0278aa17659bbbd19f69aaf8e49b2a2db5b79b3877af173aa",
+            "scope": "LEGACY_RNE_PROJECTION_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Accepted NAV-01–30 evaluators have no scoped customer execution handoff."
+      },
+      "Academy / Related Content Handoff": {
+        "state": "NOT_IMPLEMENTED",
+        "actualEvidence": [
+          {
+            "path": "functions/academy/navigation-public-catalog.js",
+            "sha256": "18bcfd3c16f87917ea7d026960e98d6b24c4129d46cfa4e486f7cd7aeb0ac5b7",
+            "scope": "CATALOG_NOT_PERSONAL_HANDOFF"
+          }
+        ],
+        "firstMissingRequirement": "Connect a bounded context-selected teaching handoff; do not infer from catalog import."
+      },
+      "Deployment Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No current deployment receipt; deployment remains unauthorized."
+      },
+      "Live Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No owner payment/customer execution for this revision; do not infer from fixtures."
+      },
+      "FIRST_STOP_NODE": "Account / Entitlement"
     },
     {
-      "id": "B",
-      "nodes": [
-        "Free Tarot",
-        "RM19 双语+4Ask",
-        "AI Synthesis",
-        "Save My Reality"
-      ],
-      "reached": "免费确定性 runtime/DOM；20次单次合成 QA。订单到双语保存四问未串联",
-      "missing": "真实移动交互、paid订单 synthesis、失败恢复、保存及四问客户端",
-      "evidence": [
-        "FREE-SYMBOLIC-ZERO-PROVIDER.json",
-        "TAROT-INTERACTION-QA.json",
-        "TAROT-COST-QUALITY-REVIEW.json"
-      ],
-      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
-      "DEPLOYED": "UNVERIFIED",
-      "LIVE_CUSTOMER": "NOT_RUN"
+      "Journey": "B · Tarot",
+      "Entry": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "assets/customer-ui/js/surfaces/tarot-shuffle.js",
+            "sha256": "c200d87c341ca8b1d0dfca1a7bbddd3aceed9d361df41e0ca1cc97a04cb42939",
+            "scope": "INTERACTIVE_SOURCE"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/TAROT-INTERACTION-QA.json",
+            "sha256": "6eb0663e3a72a8db7d63b99a303c06e6479e04e4bd8587612c997d33ac62455a",
+            "scope": "DOM_HARNESS_NOT_MOBILE_E2E"
+          }
+        ],
+        "firstMissingRequirement": "Complete actual shuffle/draw/select/orientation/spread browser/mobile sequence."
+      },
+      "Account / Entitlement": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/commerce/commerce-stripe-api.js",
+            "sha256": "c54dcfab482d94cb7bfb42caa9143122dbf374c3bb2074197e2a0601e6b4489c",
+            "scope": "EXISTING_CHECKOUT_OWNER"
+          }
+        ],
+        "firstMissingRequirement": "Connect one paid Tarot order to immutable validated draw and bilingual synthesis."
+      },
+      "Input": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/api/symbolic-method-execute-v4.js",
+            "sha256": "c123b691936deef605813914359869cae9d1d6da47662bbf14bcfdcdf1167c51",
+            "scope": "SERVER_VALIDATED_SYMBOLIC_INPUT"
+          }
+        ],
+        "firstMissingRequirement": "Prove the customer question and fixed draw binding in the connected paid flow."
+      },
+      "Generation / Retrieval": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/tarot-product-runtime/tarot-product-runtime-v3.js",
+            "sha256": "99a720f8ddba5aa4222b14060e30c8935ff95555489b9eae24efe6e21d83e572",
+            "scope": "DETERMINISTIC_RUNTIME"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json",
+            "sha256": "b12343412a724f738ccb6b27baf84f928d07f82b1e2a85058c06728632454983",
+            "scope": "ZERO_NETWORK_SYNTHETIC_CASES"
+          }
+        ],
+        "firstMissingRequirement": "Paid synthesis and failure recovery are not proven as one order-bound chain."
+      },
+      "Result": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "assets/customer-ui/js/surfaces/tarot.js",
+            "sha256": "b9d1bee3d596e9425ca3159b11ae7e4c72355e90a5849a5ba3eb4d95e4b8c078",
+            "scope": "PUBLIC_RESULT_UI"
+          }
+        ],
+        "firstMissingRequirement": "Validate the delivered bilingual result without changing cards/orientations."
+      },
+      "Save to My Reality": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/account/my-reality-saved-sources.js",
+            "sha256": "7c357298a2d09db1e5d1acf3bd31c6a5166b036543ca29bb64b161c1a74d87e1",
+            "scope": "READING_OWNER_PROJECTION"
+          }
+        ],
+        "firstMissingRequirement": "Prove order result persists and reopens without a model call."
+      },
+      "Navigation Handoff": {
+        "state": "NOT_IMPLEMENTED",
+        "actualEvidence": [
+          {
+            "path": "functions/customer-projection/navigation-customer-projection.js",
+            "sha256": "3504f04b6a94b7b0278aa17659bbbd19f69aaf8e49b2a2db5b79b3877af173aa",
+            "scope": "LEGACY_RNE_PROJECTION_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Accepted NAV-01–30 evaluators have no scoped customer execution handoff."
+      },
+      "Academy / Related Content Handoff": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No specific accepted Tarot lesson handoff is evidenced."
+      },
+      "Deployment Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No current deployment receipt; deployment remains unauthorized."
+      },
+      "Live Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No owner payment/customer execution for this revision; do not infer from fixtures."
+      },
+      "Follow-up": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/account/report-followup-store.js",
+            "sha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e",
+            "scope": "FOUR_QUESTIONS_GENERIC_OWNER"
+          }
+        ],
+        "firstMissingRequirement": "Latest RM19 bilingual + four questions rule must be tested on a Tarot delivery."
+      },
+      "FIRST_STOP_NODE": "Entry"
     },
     {
-      "id": "C",
-      "nodes": [
-        "Free Video",
-        "Paid Video",
-        "My Learning"
-      ],
-      "reached": "媒体登记与大纲；未验证可播放真实方法视频",
-      "missing": "真实资产、受保护媒体、永久购买权益与 Account My Learning",
-      "evidence": [
-        "ACADEMY-MEDIA-INVENTORY.json"
-      ],
-      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
-      "DEPLOYED": "UNVERIFIED",
-      "LIVE_CUSTOMER": "NOT_RUN"
+      "Journey": "C · Academy",
+      "Entry": {
+        "state": "BLOCKED",
+        "actualEvidence": [
+          {
+            "path": "functions/academy/navigation-public-catalog.js",
+            "sha256": "18bcfd3c16f87917ea7d026960e98d6b24c4129d46cfa4e486f7cd7aeb0ac5b7",
+            "scope": "FREE_NAV_CATALOG_WITHOUT_REAL_VIDEO"
+          }
+        ],
+        "firstMissingRequirement": "A real canonical public video is not available; the catalog itself is wired."
+      },
+      "Account / Entitlement": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/commerce/book-commerce-store.js",
+            "sha256": "a771f8b318fd32d1b2334d19b99cdafe73f8b5f4ac25320c539e70885b5c6c45",
+            "scope": "EXISTING_ENTITLEMENT_OWNER"
+          }
+        ],
+        "firstMissingRequirement": "Method paid-video asset/admission/perpetual access remain separate; Navigation requires no purchase."
+      },
+      "Input": {
+        "state": "PASS",
+        "actualEvidence": [
+          {
+            "path": "functions/academy/navigation-public-video-registry.js",
+            "sha256": "be13a9774dcdcbf1d79e19c588e8ac6a60bede54dc356c9e505270df58671122",
+            "scope": "TEN_TOPIC_CATALOG_INPUT_MODEL"
+          }
+        ],
+        "firstMissingRequirement": "No participant data needed for the free topic catalog."
+      },
+      "Generation / Retrieval": {
+        "state": "BLOCKED",
+        "actualEvidence": [
+          {
+            "path": "functions/api/academy-navigation.js",
+            "sha256": "c8be5f81fbedfd06f3d00d1875ea30aea7657fe71b84fa8abc615d15285786b4",
+            "scope": "SHARED_VIDEO_URL_PROJECTION"
+          }
+        ],
+        "firstMissingRequirement": "Real accepted canonical asset, YouTube ID, duration and publication metadata are missing."
+      },
+      "Result": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "assets/customer-ui/js/surfaces/navigation-academy.js",
+            "sha256": "eb6a20351fec9466ae5d74688beeeac6afe4ae5ed7917370cfe742f40782df07",
+            "scope": "CATALOG_TOPIC_FILTER_AND_PLAY_WIRING"
+          }
+        ],
+        "firstMissingRequirement": "No actual playback acceptance or paid Method lesson delivery."
+      },
+      "Save to My Reality": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "Learning-history integration has not been demonstrated."
+      },
+      "Navigation Handoff": {
+        "state": "NOT_IMPLEMENTED",
+        "actualEvidence": [
+          {
+            "path": "functions/customer-projection/navigation-customer-projection.js",
+            "sha256": "3504f04b6a94b7b0278aa17659bbbd19f69aaf8e49b2a2db5b79b3877af173aa",
+            "scope": "LEGACY_RNE_PROJECTION_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Accepted NAV-01–30 evaluators have no scoped customer execution handoff."
+      },
+      "Academy / Related Content Handoff": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/academy/navigation-public-video-registry.js",
+            "sha256": "be13a9774dcdcbf1d79e19c588e8ac6a60bede54dc356c9e505270df58671122",
+            "scope": "FOUNDATION_BOOK_REFS_AND_TOPIC_MAP"
+          }
+        ],
+        "firstMissingRequirement": "Verify lesson-specific related-content links with real video metadata."
+      },
+      "Deployment Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No current deployment receipt; deployment remains unauthorized."
+      },
+      "Live Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No owner payment/customer execution for this revision; do not infer from fixtures."
+      },
+      "Follow-up": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "Learning follow-up is not executed; free Navigation does not grant paid report quota."
+      },
+      "FIRST_STOP_NODE": "Entry"
     },
     {
-      "id": "D",
-      "nodes": [
-        "Financial",
-        "Human Service",
-        "Appointment Request"
-      ],
-      "reached": "Financial range/unknown 本地投影；服务/预约源码存在；未取得完整提交回读旅程",
-      "missing": "Financial对象到真人服务上下文传递、预约请求持久化与客户回读预览",
-      "evidence": [
-        "QA-RESULTS.json",
-        "BACKEND-CALL-GRAPH.json"
-      ],
-      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
-      "DEPLOYED": "UNVERIFIED",
-      "LIVE_CUSTOMER": "NOT_RUN"
+      "Journey": "D · Financial / Appointment",
+      "Entry": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "professional/financial/index.html",
+            "sha256": "30ccb3a2b4c7415b631167cd6c42768613647c8429bcc67b689e5659c2da4990",
+            "scope": "PUBLIC_FORM_SOURCE"
+          }
+        ],
+        "firstMissingRequirement": "No connected current browser submission/retrieval evidence."
+      },
+      "Account / Entitlement": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/commerce/commerce-stripe-api.js",
+            "sha256": "c54dcfab482d94cb7bfb42caa9143122dbf374c3bb2074197e2a0601e6b4489c",
+            "scope": "SERVICE_COMMERCE_OWNER"
+          }
+        ],
+        "firstMissingRequirement": "Prove authorized financial object/service ownership in one handler chain."
+      },
+      "Input": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/customer-projection/financial-customer-projection.js",
+            "sha256": "50aed805dce5ff84d1b35c578f38af6ec7f6868cd321966fb2594f78578b5204",
+            "scope": "RANGE_UNKNOWN_PROJECTION"
+          }
+        ],
+        "firstMissingRequirement": "Execute actual consent-bound financial input and appointment handoff."
+      },
+      "Generation / Retrieval": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/BACKEND-CALL-GRAPH.json",
+            "sha256": "1cf4ae1973cb59cc53ec0a620ceb199e91b0eb11ad87fadb01768e66c0b70aea",
+            "scope": "STATIC_CALL_GRAPH_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Persist appointment request and read back through the owner account."
+      },
+      "Result": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json",
+            "sha256": "ea65478a60cf09b93ee177d3742f232b207b156811d92852bfe80b9b826d02c2",
+            "scope": "TARGETED_FINANCIAL_RANGE_ASSERTION"
+          }
+        ],
+        "firstMissingRequirement": "No full Financial → human service → appointment preview."
+      },
+      "Save to My Reality": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/account/my-reality-saved-sources.js",
+            "sha256": "7c357298a2d09db1e5d1acf3bd31c6a5166b036543ca29bb64b161c1a74d87e1",
+            "scope": "FINANCIAL_DRAFT_METADATA_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Verify full selected source/version projection without fabricating history."
+      },
+      "Navigation Handoff": {
+        "state": "NOT_IMPLEMENTED",
+        "actualEvidence": [
+          {
+            "path": "functions/customer-projection/navigation-customer-projection.js",
+            "sha256": "3504f04b6a94b7b0278aa17659bbbd19f69aaf8e49b2a2db5b79b3877af173aa",
+            "scope": "LEGACY_RNE_PROJECTION_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Accepted NAV-01–30 evaluators have no scoped customer execution handoff."
+      },
+      "Academy / Related Content Handoff": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No bounded related lesson handoff demonstrated."
+      },
+      "Deployment Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No current deployment receipt; deployment remains unauthorized."
+      },
+      "Live Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No owner payment/customer execution for this revision; do not infer from fixtures."
+      },
+      "Follow-up": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "Appointment/service response history is not demonstrated."
+      },
+      "FIRST_STOP_NODE": "Entry"
     },
     {
-      "id": "E",
-      "nodes": [
-        "Book",
-        "Contextual Ask",
-        "Related Book"
-      ],
-      "reached": "Book问答截断/supporting源码修复；当前BookVII/Ask freeze successor不覆盖",
-      "missing": "Figures dedup合法successor、当前Ask接受凭证、逐册上下文回答和相关书导航预览",
-      "evidence": [
-        "NAVIGATION-MIGRATION-HUMAN-REVIEW.json",
-        "QA-RESULTS.json"
-      ],
-      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
-      "DEPLOYED": "UNVERIFIED",
-      "LIVE_CUSTOMER": "NOT_RUN"
+      "Journey": "E · Books / Contextual Ask",
+      "Entry": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "books/index.html",
+            "sha256": "a2f716f6541e704c8b910b77797a82d8b731c08a28c9e8d1627e3c1858d61fd7",
+            "scope": "PUBLIC_BOOK_ENTRY"
+          },
+          {
+            "path": "content/production-closure/live-customer-commercial-convergence/BOOK-COMMERCE-IDENTITY-MAP.json",
+            "sha256": "0a3fe4cbbd80ae4a361770e94d42a4abf4756b16891b3174c4e31398bdd9bb13",
+            "scope": "HISTORICAL_COMMERCE_MAP"
+          }
+        ],
+        "firstMissingRequirement": "Verify current book/context selection in a customer browser."
+      },
+      "Account / Entitlement": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/commerce/book-commerce-store.js",
+            "sha256": "a771f8b318fd32d1b2334d19b99cdafe73f8b5f4ac25320c539e70885b5c6c45",
+            "scope": "EXISTING_BOOK_RIGHTS_OWNER"
+          }
+        ],
+        "firstMissingRequirement": "Exercise owned and public context separately through actual handlers."
+      },
+      "Input": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/api/customer-contextual-ask.js",
+            "sha256": "89980b65cbc1702f3b9f9c74cf377d1234e1d4496a1b288bd5b9c2e96a6ab9d6",
+            "scope": "CONTEXTUAL_ASK_ROUTE"
+          }
+        ],
+        "firstMissingRequirement": "Bind the chosen published passage/version in a connected journey."
+      },
+      "Generation / Retrieval": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/api/ask-phios.js",
+            "sha256": "9846af15c3fa01d32e5989cb22baabc5cf3cb1e667ccc0f1e4468b9c61b8a4fc",
+            "scope": "EXISTING_KNOWLEDGE_OWNER"
+          }
+        ],
+        "firstMissingRequirement": "Current bounded Ask successor and cited source path require current handler evidence."
+      },
+      "Result": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/customer-projection/knowledge-customer-projection.js",
+            "sha256": "461c8a83a439bc1d6708a0b669a932a2479beb2f31d8a48efde38f3215448af5",
+            "scope": "GROUNDED_PARTIAL_ANSWER_PROJECTION"
+          }
+        ],
+        "firstMissingRequirement": "Execute current contextual result and source navigation, preserving abstention."
+      },
+      "Save to My Reality": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/account/my-reality-saved-sources.js",
+            "sha256": "7c357298a2d09db1e5d1acf3bd31c6a5166b036543ca29bb64b161c1a74d87e1",
+            "scope": "QUESTIONS_ANSWERS_SOURCE_PROJECTION"
+          }
+        ],
+        "firstMissingRequirement": "Persist and reopen this same book question without provider regeneration."
+      },
+      "Navigation Handoff": {
+        "state": "NOT_IMPLEMENTED",
+        "actualEvidence": [
+          {
+            "path": "functions/customer-projection/navigation-customer-projection.js",
+            "sha256": "3504f04b6a94b7b0278aa17659bbbd19f69aaf8e49b2a2db5b79b3877af173aa",
+            "scope": "LEGACY_RNE_PROJECTION_ONLY"
+          }
+        ],
+        "firstMissingRequirement": "Accepted NAV-01–30 evaluators have no scoped customer execution handoff."
+      },
+      "Academy / Related Content Handoff": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/academy/navigation-public-video-registry.js",
+            "sha256": "be13a9774dcdcbf1d79e19c588e8ac6a60bede54dc356c9e505270df58671122",
+            "scope": "BOOK_III_IV_VII_FOUNDATION_REFS"
+          }
+        ],
+        "firstMissingRequirement": "Demonstrate context-specific related book/lesson navigation."
+      },
+      "Deployment Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No current deployment receipt; deployment remains unauthorized."
+      },
+      "Live Evidence": {
+        "state": "NOT_RUN",
+        "actualEvidence": [],
+        "firstMissingRequirement": "No owner payment/customer execution for this revision; do not infer from fixtures."
+      },
+      "Follow-up": {
+        "state": "PARTIAL",
+        "actualEvidence": [
+          {
+            "path": "functions/api/customer-contextual-ask.js",
+            "sha256": "89980b65cbc1702f3b9f9c74cf377d1234e1d4496a1b288bd5b9c2e96a6ab9d6",
+            "scope": "CONTEXTUAL_FOLLOWUP_ENTRY"
+          }
+        ],
+        "firstMissingRequirement": "Demonstrate correct membership and selected context handling."
+      },
+      "FIRST_STOP_NODE": "Entry"
     }
   ],
   "reviewCoverage": [
     {
       "id": 1,
-      "label": "Homepage before / after",
-      "stage": "W05",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      "item": "Homepage before / after",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "index.html",
+          "sha256": "3d81fe3a697a549683b353a19bc793ae3520702de1e93d964135989b48fa4d82",
+          "scope": "TASK_ENTRY_SOURCE"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "sha256": "569577dbb0cbf667d7f4263e9c4c94e15c1179e23d8cd228adb7ba424e07f651",
+          "scope": "PROPOSED_BILINGUAL_CONTENT_DIFF"
+        }
       ],
-      "missing": "Bilingual diff review plus actual mobile preview of restored paragraphs"
+      "firstMissingRequirement": "Current desktop/mobile before/after review and acceptance of substantive copy changes.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 2,
-      "label": "Personal free report",
-      "stage": "W06",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Verify native accepted free reading and same-object paid unlock"
+      "item": "Personal free report",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/BAZI-FREE-NATIVE-PREVIEW.jpg",
+          "sha256": "0e32b8a5553ac7de42157425e6f40899cc0f97a24e49b8d2e7a03c6db21c3a7e",
+          "scope": "SYNTHETIC_NATIVE_CHART_PREVIEW"
+        }
+      ],
+      "firstMissingRequirement": "Subject-applicable free body and all-method page validation.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 3,
-      "label": "Paid report flow",
-      "stage": "W07",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      "item": "Paid report flow",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+          "sha256": "d39c0224cd3e5c0098808e483163691949ca8ed9632d8843b8a005721f75b9fa",
+          "scope": "SYNTHETIC_PAYMENT_ONLY"
+        },
+        {
+          "path": "functions/account/bazi-account-delivery.js",
+          "sha256": "d9bad9ab6c66b334347579de96582f5e97dc84dc4eabca89256e2642e038e766",
+          "scope": "INCOMPLETE_BZR_ORCHESTRATION"
+        }
       ],
-      "missing": "Finish eligible producer+renderer admission and exact Checkout/webhook-to-material flow"
+      "firstMissingRequirement": "Same-object producer/renderer and immutable release end-to-end.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 4,
-      "label": "Four follow-up questions",
-      "stage": "W08",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json"
+      "item": "Four follow-up questions",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json",
+          "sha256": "8252ded1fb381b1110b389e1ba4d57e94024c566bf696978349f68a077e4b6e5",
+          "scope": "QUOTA_HISTORY_SQL_QA"
+        }
       ],
-      "missing": "Wire verified immutable report to paid followup producer, retain four-slot SQL constraints"
+      "firstMissingRequirement": "Four generated answers from one actual delivered report.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 5,
-      "label": "Membership",
-      "stage": "W09",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Verify paid-through/cancel/resubscribe same-workspace continuity"
+      "item": "Membership",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "functions/account/report-followup-store.js",
+          "sha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e",
+          "scope": "MEMBERSHIP_ACCESS_CHECK"
+        }
+      ],
+      "firstMissingRequirement": "Cancel/resubscribe preserving the same saved workspace and cost owner.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 6,
-      "label": "My Reality",
-      "stage": "W10",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/MY-REALITY-SAVED-SOURCE-QA.json"
+      "item": "My Reality",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/MY-REALITY-SAVED-SOURCE-QA.json",
+          "sha256": "50be4f2170c08e3efb253702d8b2db205ddb563a3db776441db4a59a767d4e54",
+          "scope": "OWNER_SCOPED_SOURCE_FIXTURES"
+        }
       ],
-      "missing": "Integrate retained histories without backfill or invented history"
+      "firstMissingRequirement": "Current browser source/version history and retention demonstration.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 7,
-      "label": "Ask",
-      "stage": "W11",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Verify per-context reading ownership and accepted sources"
+      "item": "Ask",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "functions/api/customer-contextual-ask.js",
+          "sha256": "89980b65cbc1702f3b9f9c74cf377d1234e1d4496a1b288bd5b9c2e96a6ab9d6",
+          "scope": "CONTEXTUAL_HANDLER_SOURCE"
+        }
+      ],
+      "firstMissingRequirement": "Connected Report/Tarot/Book context, cited retrieval and abstention review.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 8,
-      "label": "Book VIII private",
-      "stage": "W13",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      "item": "Book VIII private",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json",
+          "sha256": "ce4cfde1efb7b7833852157809d1f788e7e5b1a31a9baeb3489ad09599efbe88",
+          "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json",
+          "sha256": "12f83ab21cb9e1de1e654cf44a8ed1c05c96a7db9c8fd53d211ddb84d74d0332",
+          "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json",
+          "sha256": "09639ebd6f6564d0dc55e633a00858a0a43dc4a791adc3e957c90ad06b4ff6c5",
+          "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json",
+          "sha256": "63ddb437cbad793b4b908c44a0483132a860af2ec43ea1a6400cb150916b008a",
+          "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json",
+          "sha256": "7ebdca787472cd49e8cfb34571d3384f317e231fe1e4cbb5264e4b007f20c0bc",
+          "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+        },
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+          "sha256": "3dc3965388239c4a275691a9e4489abad0d0e4c85147d50179fe26538975b105",
+          "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+        }
       ],
-      "missing": "核对 VIII 公开不售页面、私有源码及受控图像边界；不公开全文"
+      "firstMissingRequirement": "Public/private boundary and actual controlled consumers; doctrine acceptance itself is complete.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 9,
-      "label": "Academy",
-      "stage": "W15",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Supply actual accepted video assets before purchase eligibility"
+      "item": "Academy",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "functions/academy/navigation-public-video-registry.js",
+          "sha256": "be13a9774dcdcbf1d79e19c588e8ac6a60bede54dc356c9e505270df58671122",
+          "scope": "CANONICAL_VIDEO_MODEL_AND_TEN_TOPICS"
+        }
+      ],
+      "firstMissingRequirement": "Real accepted video, transcript and playback evidence.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 10,
-      "label": "Tarot paid/free structure",
-      "stage": "W19",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      "item": "Tarot paid/free structure",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json",
+          "sha256": "b12343412a724f738ccb6b27baf84f928d07f82b1e2a85058c06728632454983",
+          "scope": "ZERO_NETWORK_RUNTIME_FIXTURES"
+        }
       ],
-      "missing": "重跑确定性路径网络拦截；客户浏览器仍需验证"
+      "firstMissingRequirement": "Mobile interaction and connected paid bilingual + four-question path.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 11,
-      "label": "Tarot paid RM19",
-      "stage": "W20",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Bind paid Tarot single synthesis to verified order/reading/corpus"
+      "item": "Tarot paid RM19",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "functions/pws/commercial/report-successor-contract.js",
+          "sha256": "1ac5bdf5a48820f602a9b15527b871d897b7ea88e397e990962c9ed957cdcb54",
+          "scope": "CURRENT_COMMERCIAL_SUCCESSOR"
+        }
+      ],
+      "firstMissingRequirement": "Actual order-bound immutable paid delivery and recovery.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 12,
-      "label": "Tarot AI cost",
-      "stage": "W22",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json"
+      "item": "Tarot AI cost",
+      "state": "BLOCKED",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/TAROT-QA-PREFLIGHT.json",
+          "sha256": "f7c4ea368821d72de0f36cd59da1f4d310f62b35d46ec2b07ffde06cf4061fd9",
+          "scope": "HISTORICAL_PREFLIGHT_NOT_CURRENT_ADMISSION"
+        }
       ],
-      "missing": "20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用"
+      "firstMissingRequirement": "Current whitelist, independent QA endpoint, hard budget, metering and preflight; current batch remains 0 calls / USD0.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 13,
-      "label": "I Ching",
-      "stage": "W23",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      "item": "I Ching",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/OWNER-CORRECTION-ICHING-QA.log",
+          "sha256": "36a06c8f7012358f145e526d606c97e8dc60a3d18283432a99e5ad51b4e34e1c",
+          "scope": "CURRENT_ZERO_COST_RELEASE_CHAIN"
+        }
       ],
-      "missing": "Actual deterministic cast/mobile replay and corpus provenance"
+      "firstMissingRequirement": "Sensory/browser QA and paid RM39 bilingual synthesis + four-question integration.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 14,
-      "label": "Appointment",
-      "stage": "W26",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Verify intake→consent→appointment boundary without paid-live transaction"
+      "item": "Appointment",
+      "state": "PLACEHOLDER_ONLY",
+      "actualEvidence": [],
+      "firstMissingRequirement": "Current appointment request submission, persisted receipt and owner retrieval review.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 15,
-      "label": "Financial",
-      "stage": "W27",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      "item": "Financial",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json",
+          "sha256": "ea65478a60cf09b93ee177d3742f232b207b156811d92852bfe80b9b826d02c2",
+          "scope": "RANGE_AND_UNKNOWN_TARGETED_ASSERTIONS"
+        }
       ],
-      "missing": "Verify Financial/Will exact output semantics, retained ranges/unknowns"
+      "firstMissingRequirement": "Full financial object → human service handoff and review.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 16,
-      "label": "Will",
-      "stage": "W27",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
-      ],
-      "missing": "Verify Financial/Will exact output semantics, retained ranges/unknowns"
+      "item": "Will",
+      "state": "PLACEHOLDER_ONLY",
+      "actualEvidence": [],
+      "firstMissingRequirement": "Will source/output/consent, bilingual rendering and download material.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 17,
-      "label": "Profile",
-      "stage": "W29",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Current Profile/Academic evidence boundaries and product admission"
+      "item": "Profile",
+      "state": "PLACEHOLDER_ONLY",
+      "actualEvidence": [],
+      "firstMissingRequirement": "Current accepted Profile complete-page evidence and account/source integration review.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 18,
-      "label": "Relationship",
-      "stage": "W28",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Exact current relationship/cross bounded report admission and inputs"
+      "item": "Relationship",
+      "state": "PLACEHOLDER_ONLY",
+      "actualEvidence": [],
+      "firstMissingRequirement": "Consent-separated participant journey, accepted output and current preview.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 19,
-      "label": "Books",
-      "stage": "W30",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary"
+      "item": "Books",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/BOOK-COMMERCE-IDENTITY-MAP.json",
+          "sha256": "0a3fe4cbbd80ae4a361770e94d42a4abf4756b16891b3174c4e31398bdd9bb13",
+          "scope": "EXISTING_IDENTITIES_NOT_PURCHASE_DELIVERY"
+        }
+      ],
+      "firstMissingRequirement": "Per-volume public/owned reading/download/current publication evidence.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 20,
-      "label": "Figures",
-      "stage": "W30",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary"
+      "item": "Figures",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/BACKEND-CAPABILITY-REVIEW.json",
+          "sha256": "a5afcf08f5c9e149315d1d926f3f23d1fdbcff68613bd8289856b120aca7930e",
+          "scope": "HISTORICAL_STATIC_EVIDENCE"
+        }
+      ],
+      "firstMissingRequirement": "Current accepted figure identity, dedup lineage and actual consumer review.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 21,
-      "label": "World Snapshot",
-      "stage": "W31",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据"
+      "item": "World Snapshot",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/civilization-atlas/snapshots/world-snapshots-v1.json",
+          "sha256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+          "scope": "SOURCE_SNAPSHOT_REGISTRY"
+        }
+      ],
+      "firstMissingRequirement": "15 current source/version snapshots rendered and bridged to customer context.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 22,
-      "label": "Book VI current",
-      "stage": "W31",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据"
+      "item": "Book VI current",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/MASTER-CONSUMER-MAP.json",
+          "sha256": "d7284c09df36e63a7cae16211b5bf269132237488b80da54efd9e27c68024488",
+          "scope": "STATIC_CONSUMER_INVENTORY"
+        }
+      ],
+      "firstMissingRequirement": "Accepted current dossier/version rendered by actual consumer; Moomoo external evidence.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 23,
-      "label": "Account",
-      "stage": "W25",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Actual owned report list/reopen/download, pending generation progress"
+      "item": "Account",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "functions/api/account-method-reports.js",
+          "sha256": "b4ba6fe7821aaf43b4e0de5b7fd3618144363a9479f3c97df99768ceb8c80d46",
+          "scope": "METHOD_REPORT_READ_DOWNLOAD_HANDLER"
+        }
+      ],
+      "firstMissingRequirement": "Actual same-account delivery, reopen, language and cross-account denial preview.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 24,
-      "label": "Commerce",
-      "stage": "W33",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "MASTER-COMMERCE-MAP.json",
-        "MASTER-CURRENT-ZERO-COST-CHECKS.json",
-        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      "item": "Commerce",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+          "sha256": "d39c0224cd3e5c0098808e483163691949ca8ed9632d8843b8a005721f75b9fa",
+          "scope": "SIGNED_WEBHOOK_SYNTHETIC_DISCOUNT_REFUND_QA"
+        }
       ],
-      "missing": "完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭"
+      "firstMissingRequirement": "Formal owner restriction, bilingual net amount and product delivery candidate.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 25,
-      "label": "Mobile",
-      "stage": "W32",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "Actual preview mobile bilingual shell and branding, no SOURCE test substitute"
+      "item": "Mobile",
+      "state": "NOT_STARTED",
+      "actualEvidence": [],
+      "firstMissingRequirement": "Current five-journey mobile screenshots and actual touch tests; desktop fixture evidence is insufficient.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 26,
-      "label": "Security",
-      "stage": "W35",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "NAV-BATCH-02-QA.json",
-        "NAV-BATCH-03-QA.json",
-        "NAV-BATCH-04-QA.json",
-        "NAV-BATCH-05-ACCEPTANCE.json",
-        "NAV-BATCH-05-QA.json",
-        "NAV-BATCH-06-ACCEPTANCE.json",
-        "NAV-BATCH-06-QA.json",
-        "REPORT-FOLLOWUP-STORE-QA.json",
-        "PRODUCT-TOTAL-COST-QA.json",
-        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      "item": "Security",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json",
+          "sha256": "8252ded1fb381b1110b389e1ba4d57e94024c566bf696978349f68a077e4b6e5",
+          "scope": "OWNER_QUOTA_FIXTURES"
+        }
       ],
-      "missing": "补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试"
+      "firstMissingRequirement": "Current full handler matrix covering cross-account, consent, retention and tamper denial.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 27,
-      "label": "Provider spend",
-      "stage": "W34",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "TAROT-QA-BUDGET-TESTS.json",
-        "PRODUCT-TOTAL-COST-QA.json"
+      "item": "Provider spend",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/PRODUCT-TOTAL-COST-QA.json",
+          "sha256": "0a9215ceaa6b544a794f888bfafcd9b133565cd40329426d3eba80118ff5488b",
+          "scope": "COST_ENVELOPE_FIXTURES"
+        }
       ],
-      "missing": "逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本"
+      "firstMissingRequirement": "Every paid method primary/repair/bilingual/four-question runtime writer and fail-closed recovery.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 28,
-      "label": "SOURCE / DEPLOYED / LIVE",
-      "stage": "W38",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [],
-      "missing": "五条旅程逐节点执行本地受控预览；发布后再限定账户实付"
+      "item": "SOURCE / DEPLOYED / LIVE",
+      "state": "PARTIAL",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/MASTER-CUSTOMER-CURRENT-IMPLEMENTATION.json",
+          "sha256": "4eb4720324fd39242a85cd31aee0ece3ce4304135df2c3da998fdb5b758630e3",
+          "scope": "HISTORICAL_SCOPED_LOCAL_RECEIPT"
+        }
+      ],
+      "firstMissingRequirement": "Current per-capability source receipts; deployment/live remain NOT_RUN.",
+      "reviewScope": "CONTENT_REVIEW_NOT_PRODUCT_COMPLETION"
     },
     {
       "id": 29,
-      "label": "Remaining blockers",
-      "stage": "W39",
-      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
-      "evidence": [
-        "MASTER-HUMAN-REVIEW.html"
+      "item": "Remaining blockers",
+      "state": "COMPLETE",
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/MASTER-OWNER-TRUTH.json",
+          "scope": "CONCRETE_BLOCKERS_AND_NEXT_ACTIONS_BELOW",
+          "sha256Binding": "PARENT_RECEIPT_SELF_REFERENCE_NOT_HASHED"
+        }
       ],
-      "missing": "逐项填充29类实际材料与差异，不把目录标题视为审阅完成"
+      "firstMissingRequirement": "None for the blocker index itself; listed product gaps remain open.",
+      "reviewScope": "CURRENT_ACTIONABLE_BLOCKER_INDEX_ONLY"
     }
   ],
   "supplemental": [
@@ -1981,5 +2808,77 @@
       "remaining": "保留 shell/客户入口并补生活情境；旧三/五册与14Layers不直接恢复"
     }
   ],
-  "productionReady": false
+  "productionReady": false,
+  "W39ContentCompleteness": {
+    "totalItems": 29,
+    "completeItems": 1,
+    "partialItems": 22,
+    "placeholderOnlyItems": 4,
+    "notStartedItems": 1,
+    "blockedItems": 1
+  },
+  "layeredNavigation": {
+    "NAVIGATION_DOCTRINE": "HUMAN_ACCEPTED",
+    "NAVIGATION_TOPOLOGY": "HUMAN_ACCEPTED",
+    "RUNTIME_CONTRACT": "PARTIAL",
+    "CUSTOMER_NAVIGATION_API": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+    "MY_REALITY_NAVIGATION_CONSUMER": "NOT_WIRED_FOR_ACCEPTED_NAV_01_30",
+    "NAVIGATION_ACADEMY_CONSUMER": "WIRED_PUBLIC_TITLE_CATALOG_AND_TOPIC_FILTER_VIDEO_AWAITING_UPLOAD",
+    "notes": [
+      "Legacy RNE projections are imported by customer-my-reality and customer-reality-handoff; this does not execute accepted NAV evaluators.",
+      "Academy imports accepted titles/source lineage through its free public catalog. It does not expose doctrine or imply video playback."
+    ],
+    "evidence": [
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json",
+        "sha256": "ce4cfde1efb7b7833852157809d1f788e7e5b1a31a9baeb3489ad09599efbe88",
+        "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json",
+        "sha256": "12f83ab21cb9e1de1e654cf44a8ed1c05c96a7db9c8fd53d211ddb84d74d0332",
+        "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json",
+        "sha256": "09639ebd6f6564d0dc55e633a00858a0a43dc4a791adc3e957c90ad06b4ff6c5",
+        "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json",
+        "sha256": "63ddb437cbad793b4b908c44a0483132a860af2ec43ea1a6400cb150916b008a",
+        "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json",
+        "sha256": "7ebdca787472cd49e8cfb34571d3384f317e231fe1e4cbb5264e4b007f20c0bc",
+        "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+        "sha256": "3dc3965388239c4a275691a9e4489abad0d0e4c85147d50179fe26538975b105",
+        "scope": "HUMAN_DOCTRINE_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "docs/design-system/pds-w0-navigation-topology-human-accept-v1.json",
+        "sha256": "d684162afd5007dd98925f01618767c9e79b067a03bf9bb8699c7caf2e13badb",
+        "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "docs/design-system/pds-w0-navigation-batch06-human-accept-v2.json",
+        "sha256": "ea189ff8c177ab3323737425edf2be17170d049b84b8822e14e973df1d8487a0",
+        "scope": "HUMAN_TOPOLOGY_ACCEPTANCE_ONLY"
+      },
+      {
+        "path": "functions/api/customer-my-reality.js",
+        "sha256": "fbc0c6c75fe5be21b6155a4cca63efaaa28eceff0014e74f76759c9a07650507",
+        "scope": "LEGACY_RNE_PROJECTION"
+      },
+      {
+        "path": "functions/academy/navigation-public-catalog.js",
+        "sha256": "18bcfd3c16f87917ea7d026960e98d6b24c4129d46cfa4e486f7cd7aeb0ac5b7",
+        "scope": "PUBLIC_VIDEO_CATALOG_ONLY"
+      }
+    ]
+  }
 }

@@ -1,5 +1,7 @@
 # 免费命盘专项核对 — 2026-10-09
 
+后续核查见 [FOLLOWUP-ZERO-COST.md](FOLLOWUP-ZERO-COST.md)。其免费摘要修复、密集 AST 失败、手机滚动、真实 API 接线及 PDF 分页发现更新本报告对应结论；旧 pdf-pages contact sheets 作废，以 pdf-pages-v2 为准。
+
 基线 HEAD：f3d812d8fad4b389de76d4facde3d4bbfa656ad9。主工作区保留修改供 Changes 审阅；无 commit、push、部署、生产迁移、付款或 provider 调用。期间其他窗口修改了 Personal Reality、账户交付和构建文件，未覆盖其修改。本报告覆盖当前源码和本地组件；DEPLOYED、LIVE_CUSTOMER 均为 RUNTIME_UNVERIFIED。
 
 ## 状态分开记录

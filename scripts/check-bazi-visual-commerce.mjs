@@ -29,7 +29,7 @@ assert(!p.freeChartSource.readingSections&&!p.freeChartSource.professionalModule
 const freeChartHtml=renderBaziProduct({product:p}).visualHtml;
 assert.equal((freeChartHtml.match(/data-pillar=/g)||[]).length,4);
 assert(!freeChartHtml.includes('No additional natal relation was established in this run.'));
-assert(!freeChartHtml.includes('Pattern verdict remains open.')); 
+assert(!freeChartHtml.includes('Pattern verdict remains open.'));
 assert(!freeChartHtml.includes('cx-bazi-w12-workspace'));
 const changedChart=structuredClone(p);changedChart.freeChartSource.structuralModel.pillars[0].stem.zh='SYNTHETIC_CURRENT_SUBJECT';
 assert(renderBaziProduct({product:changedChart}).visualHtml.includes('SYNTHETIC_CURRENT_SUBJECT'));
