@@ -6,10 +6,10 @@ const timeTypes=new Set(['FIXED_DEADLINE','OPEN_WINDOW','CLOSING_WINDOW','PREPAR
 const consequenceTypes=new Set(['KNOWN_CONSEQUENCE','PROJECTED_CONSEQUENCE','POSSIBLE_CONSEQUENCE','UNKNOWN']);
 const present=v=>v!==undefined&&v!==null&&v!=='';
 // Internal normalized owner-scoped assessments only. No HTTP/client payload admission here.
-export function evaluateAcceptedNavigationBatch(snapshot, {ownerId,personId}={}) {
- const results=[];const decision=snapshot?.decision;
+export function evaluateNavigationContracts(snapshot, {ownerId,personId}={}, contracts=NAV_BATCH_01_CONTRACT, upstream=[], validate=()=>[]) {
+ const results=[...upstream];const decision=snapshot?.decision;
  const bindingOK=!!ownerId&&!!personId&&snapshot?.ownerId===ownerId&&snapshot?.personId===personId&&present(snapshot?.decisionVersion)&&present(snapshot?.positionVersion);
- for(const contract of NAV_BATCH_01_CONTRACT){const assessment=snapshot?.assessments?.[contract.moduleId];const reasons=[];
+ for(const contract of contracts){const assessment=snapshot?.assessments?.[contract.moduleId];const reasons=[];
   if(!bindingOK)reasons.push('OWNER_PERSON_OR_VERSION_NOT_BOUND');
   if(results.some(r=>!r.canContinue))reasons.push('UPSTREAM_NOT_READY');
   if(!assessment||assessment.decisionVersion!==snapshot.decisionVersion||assessment.positionVersion!==snapshot.positionVersion)reasons.push('ASSESSMENT_STALE_OR_MISSING');
@@ -18,6 +18,7 @@ export function evaluateAcceptedNavigationBatch(snapshot, {ownerId,personId}={})
   if(!decision||decision.confirmation!=='USER_CONFIRMED'||decision.confirmedBy!==ownerId||!present(decision.id)||!present(decision.text))reasons.push('DECISION_REQUIRES_EXPLICIT_HUMAN_CONFIRMATION');
   const items=assessment?.items||[];if(!Array.isArray(items)){reasons.push('INVALID_ITEMS');}
   for(const item of Array.isArray(items)?items:[]){
+   if(!item||typeof item!=='object'){reasons.push('INVALID_SOURCE_ITEM');continue;}
    if(item.ownerId!==ownerId||item.personId!==personId||item.decisionObjectId!==decision?.id||item.relevant!==true)reasons.push('SOURCE_SCOPE_MISMATCH');
    if(!present(item.sourceRef)||!present(item.sourceVersion)||!present(item.asOf)||!present(item.evidenceState)||item.currentness!=='CURRENT')reasons.push('SOURCE_TRACE_OR_CURRENTNESS_MISSING');
    if(!material.has(item.sourceClass)&&!interpretive.has(item.sourceClass))reasons.push('SOURCE_AUTHORITY_UNKNOWN');
@@ -35,9 +36,13 @@ export function evaluateAcceptedNavigationBatch(snapshot, {ownerId,personId}={})
    if(contract.moduleId==='NAV-04'&&item.role!=='INTERPRETIVE_CONTEXT'&&!timeTypes.has(item.type))reasons.push('TIME_RELEVANCE_UNKNOWN');
    if(contract.moduleId==='NAV-05'&&item.role!=='INTERPRETIVE_CONTEXT'&&!consequenceTypes.has(item.consequenceAuthority))reasons.push('CONSEQUENCE_AUTHORITY_UNKNOWN');
   }
-  const events=snapshot?.revisionEvents||[];if(events.some(e=>contract.revisionTriggers.includes(e)))reasons.push('REOPEN_REQUIRED');
-  results.push({moduleId:contract.moduleId,contractVersion:contract.version,sourceSHA256:contract.sourceSHA256,state:reasons.length?'NEEDS_REVIEW':'READY_FOR_NEXT_ACCEPTED_MODULE',canContinue:reasons.length===0,reasons:[...new Set(reasons)],items:structuredClone(Array.isArray(items)?items:[]),decisionEffects:contract.decisionEffects,thresholdValue:null});
+  reasons.push(...validate(contract.moduleId,assessment||{},snapshot||{}));
+  const events=Array.isArray(snapshot?.revisionEvents)?snapshot.revisionEvents:[];if(events.some(e=>contract.revisionTriggers.includes(e)))reasons.push('REOPEN_REQUIRED');
+  results.push({moduleId:contract.moduleId,contractVersion:contract.version,sourceSHA256:contract.sourceSHA256,state:reasons.length?'NEEDS_REVIEW':'READY_FOR_NEXT_ACCEPTED_MODULE',canContinue:reasons.length===0,reasons:[...new Set(reasons)],items:structuredClone(reasons.length?[]:(Array.isArray(items)?items:[])),decisionEffects:contract.decisionEffects,thresholdValue:null});
  }
+ return results;
+}
+export function evaluateAcceptedNavigationBatch(snapshot, options={}) {const results=evaluateNavigationContracts(snapshot,options);const decision=snapshot?.decision;
  return {schemaVersion:'NAV-ACCEPTED-BATCH-01-v1',decisionObjectId:decision?.id||null,decisionVersion:snapshot?.decisionVersion||null,positionVersion:snapshot?.positionVersion||null,modules:results,acceptedThrough:'NAV-05',nextModule:'NAV-06',nextModuleState:'WAITING_OWNER_AUTHORING',finalAction:null,decisionSufficiency:null,providerCalls:0,persisted:false};
 }
 export function projectAcceptedNavigationBatch(runtime,{locale='zh'}={}){
