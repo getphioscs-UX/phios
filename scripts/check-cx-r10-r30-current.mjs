@@ -17,7 +17,20 @@ const bilingual=h=>{assert.match(h,/data-cx-en=/);assert.match(h,/data-cx-zh=/)}
 check('R11',()=>{
  const a=json('content/customer-experience-rebuild/authority/cx-r11-source-aware-perspectives-v1.json');assert.equal(a.status,'ENGINEERING_COMPLETE');
  const hub=cxPage('perspectives/index.html');const rel=cxPage('perspectives/relationship/index.html');const prof=cxPage('perspectives/profile/index.html');
- for(const s of ['PERSONAL','RELATIONSHIP','CURRENT CONTEXT','SYMBOLIC / INTERPRETIVE','REFLECTIVE'])assert(hub.includes(s),`R11 hub missing ${s}`);
+ // The current editorial hub uses method routes and a reading loop rather
+ // than the historical uppercase group headings. Check usable entries.
+ for(const route of ['/perspectives/personal/','/perspectives/relationship/','/reality/'])assert(hub.includes(`href="${route}"`),`R11 hub missing route ${route}`);
+ const personal=read('perspectives/personal/index.html');
+ for(const method of ['astrology','bazi','ziwei','human-design','numerology']){
+  assert(hub.includes(`data-pv-method="${method}"`),`R11 hub missing method ${method}`);
+  assert(hub.includes(`href="/perspectives/personal/#perspective-${method}"`),`R11 hub missing method link ${method}`);
+  assert(personal.includes(`id="perspective-${method}"`),`R11 method target missing ${method}`);
+ }
+ for(const method of ['iching','tarot']){
+  assert(hub.includes(`data-pv-method="${method}"`),`R11 reflective method missing ${method}`);
+  assert(hub.includes(`href="/perspectives/${method}/"`),`R11 reflective route missing ${method}`);
+ }
+ for(const diagram of ['diagram-01','diagram-02','diagram-03'])assert(hub.includes(`data-pv-diagram="${diagram}"`),`R11 reading diagram missing ${diagram}`);
  assert(!hub.includes('href="/perspectives/profile/"'),'Personal Evidence stays outside the primary product grid');
  assert(read('perspectives/personal/index.html').includes('href="/perspectives/profile/"'));
  for(const s of ['Measured / task-based','Self-reported','External profile','Symbolic / interpretive','Current Reality','Professional evidence'])assert(hub.includes(s)||rel.includes(s),`R11 source legend missing ${s}`);
