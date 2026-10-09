@@ -24,7 +24,7 @@ await page.goForward();await page.waitForFunction(()=>new URL(location.href).sea
 assert.equal(await page.locator('[data-search-filter="type"]').inputValue(),'civilization');
 await query.fill('zxqvnonexistent12345');await query.press('Enter');await page.locator('[data-search-empty]').waitFor();assert.equal(await page.locator('[data-search-entity]').count(),0);
 await page.goto(origin+'/world?explore=visuals&locale='+locale);
-const expand=page.locator('[data-expand-asset]').first();await expand.waitFor();await expand.focus();await expand.press('Enter');await page.locator('dialog[open]').waitFor();await page.keyboard.press('Escape');await page.locator('dialog').waitFor({state:'detached'});
+const expand=page.locator('[data-expand-asset]').first();await expand.waitFor();await expand.focus();await expand.press('Enter');await page.locator('dialog[open]').waitFor();await page.keyboard.press('Escape');await page.locator('dialog[open]').waitFor({state:'detached'});
 rows.push({width,locale,keyboardSearch:true,urlFilter:true,backForward:true,emptyResult:true,keyboardImageDialog:true,state:'PASS'});
 await ctx.close();
 }

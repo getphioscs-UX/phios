@@ -14,6 +14,7 @@ export async function mountWorldExplorer(root){
  const render=()=>{const locale=getLocale(),zh=locale==='zh-Hans',pair=p=>p?.[zh?1:0]||'',local=v=>v?.[locale]||(zh?'来源内容尚待中文确认':'Source object'),typeLabel=t=>pair(TYPES[t])||(zh?'其他来源':'Other source');
  const selected=index.rows.filter(r=>(state.mode!=='visuals'||r.type==='visual')&&(!state.family||r.family===state.family)&&(!state.subject||r.subjectId===state.subject));
  const results=state.mode==='visuals'||state.query?searchWorld(selected,state.query,{...state,locale}):[],start=(state.page-1)*12,page=results.slice(start,start+12),pages=Math.max(1,Math.ceil(results.length/12));
+ page.sort((a,b)=>results.findIndex(x=>x.row.type===a.row.type)-results.findIndex(x=>x.row.type===b.row.type));
  const groupSeen=new Set();
  const options=(items,label)=>`<option value="">${esc(label)}</option>`+items.map(([value,text])=>`<option value="${esc(value)}">${esc(text)}</option>`).join('');
  const select=(key,label,items)=>`<label>${esc(label)}<select data-search-filter="${key}">${options(items,zh?'全部':'All')}</select></label>`;
