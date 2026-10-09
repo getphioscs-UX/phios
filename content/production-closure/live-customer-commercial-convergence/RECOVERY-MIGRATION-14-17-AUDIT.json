@@ -1,0 +1,55 @@
+{
+  "result": "LOCAL_SYNTHETIC_COMPATIBILITY_PASS",
+  "rows": [
+    {
+      "version": 14,
+      "file": "db/migrations/0014_report_followup_history.sql",
+      "purpose": "Server four-question grants and permanent owner-scoped question history",
+      "checksum": "c509866d11d205e22fe5db208b8d46f76ec81e9a247436d15df2a8d50b0ea29b",
+      "schemaId": "phi-os.report-followup-history.v1",
+      "registryStatus": "REGISTERED_IMMUTABLE_SOURCE",
+      "governanceAcceptance": "SOURCE_AUTHORED_UNDER_MASTER; NO_PRODUCTION_MIGRATION_ACCEPTANCE_OR_EXECUTION_EVIDENCE",
+      "productionExecuted": "NOT_VERIFIED_DO_NOT_INFER_FROM_REGISTRY",
+      "compatibility": "ADDITIVE_TABLES_NO_EXISTING_ROW_REWRITE; LOCAL_FULL_SEQUENCE_PASS"
+    },
+    {
+      "version": 15,
+      "file": "db/migrations/0015_product_cost_envelopes.sql",
+      "purpose": "Unified immutable product-cost pools and reservations",
+      "checksum": "622956a78c50de8951717377f84af08848f1082e534dbbf20469b1e97108e9ef",
+      "schemaId": "phi-os.product-cost-envelopes.v1",
+      "registryStatus": "REGISTERED_IMMUTABLE_SOURCE",
+      "governanceAcceptance": "SOURCE_AUTHORED_UNDER_MASTER; NO_PRODUCTION_MIGRATION_ACCEPTANCE_OR_EXECUTION_EVIDENCE",
+      "productionExecuted": "NOT_VERIFIED_DO_NOT_INFER_FROM_REGISTRY",
+      "compatibility": "ADDITIVE_TABLES_NO_EXISTING_ROW_REWRITE; LOCAL_FULL_SEQUENCE_PASS"
+    },
+    {
+      "version": 16,
+      "file": "db/migrations/0016_commerce_environment_bindings.sql",
+      "purpose": "Separate QA/LIVE Stripe bindings for same account, copying existing rows",
+      "checksum": "cfff84b02ae44479a44dcfe2f10b843c547f3763f45acd78e7cbc7a57a97f8ea",
+      "schemaId": "phi-os.commerce-stripe-r1",
+      "registryStatus": "REGISTERED_IMMUTABLE_SOURCE",
+      "governanceAcceptance": "SOURCE_AUTHORED_UNDER_MASTER; NO_PRODUCTION_MIGRATION_ACCEPTANCE_OR_EXECUTION_EVIDENCE",
+      "productionExecuted": "NOT_VERIFIED_DO_NOT_INFER_FROM_REGISTRY",
+      "compatibility": "LOCAL_PREEXISTING_QA_ROW_PRESERVED; QA/LIVE same owner supported; duplicate denied"
+    },
+    {
+      "version": 17,
+      "file": "db/migrations/0017_report_generation_state.sql",
+      "purpose": "Durable report-generation checkpoints and exclusive locks without automatic crash retry",
+      "checksum": "bfcf1e6610c0fac2ca354e7b908680118f9af7ec545ac967e2d035aa05aed123",
+      "schemaId": "phi-os.report-generation-state.v1",
+      "registryStatus": "REGISTERED_IMMUTABLE_SOURCE",
+      "governanceAcceptance": "SOURCE_AUTHORED_UNDER_MASTER; NO_PRODUCTION_MIGRATION_ACCEPTANCE_OR_EXECUTION_EVIDENCE",
+      "productionExecuted": "NOT_VERIFIED_DO_NOT_INFER_FROM_REGISTRY",
+      "compatibility": "ADDITIVE_TABLES_NO_EXISTING_ROW_REWRITE; LOCAL_FULL_SEQUENCE_PASS"
+    }
+  ],
+  "checksumVerification": "ALL_17_PASS",
+  "historical13Prefix": "PRESERVED",
+  "productionApplied": false,
+  "productionStatus": "UNVERIFIED_NO_PRODUCTION_DB_ACCESS",
+  "rollback": "Production 0016 requires backup and reviewed rebuild; do not run DROP as rollback. 0014/15/17 contain future customer histories and ledgers; never delete deployed data as source rollback.",
+  "providerCalls": 0
+}

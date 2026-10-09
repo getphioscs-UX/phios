@@ -271,11 +271,22 @@ assert.equal(Object.keys(registryIndex.registries).length, 51);
 assert.equal(registryIndex.registries.public_assets, './public-assets.json');
 assert.equal(registryIndex.registries.book_5_manifest, './book-5-manifest.json');
 assert.equal(runtimeContracts.contracts.length, 20);
-assert.equal(migrations.migrations.length, 13);
 assert.deepEqual(
-  migrations.migrations.map(item => item.version),
+  migrations.migrations.slice(0,13).map(item => item.version),
   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 );
+// Preserve the historical 1–13 prefix; additive source registrations are not
+// evidence that any production migration has run. Verify exact paths and SQL.
+assert.deepEqual(migrations.migrations.slice(13).map(item => [item.version,item.file]),[
+ [14,'db/migrations/0014_report_followup_history.sql'],
+ [15,'db/migrations/0015_product_cost_envelopes.sql'],
+ [16,'db/migrations/0016_commerce_environment_bindings.sql'],
+ [17,'db/migrations/0017_report_generation_state.sql']
+]);
+assert.ok(migrations.migrations.every(item=>item.immutable===true));
+const {hydrateRuntimeMigrations}=await import('./runtime-migration-loader.mjs');
+const {verifyMigrationChecksums}=await import('../functions/runtime/migrations/migration-runner.js');
+await verifyMigrationChecksums(hydrateRuntimeMigrations(root,migrations).migrations);
 
 for (const file of [
   'docs/pws/audit/pws-object-conflict-matrix.md',
