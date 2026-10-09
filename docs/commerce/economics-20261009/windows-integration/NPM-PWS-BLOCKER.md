@@ -19,3 +19,9 @@ Actual local results:
 Remaining full-chain failure: `scripts/check-kh-w3-5g-book-i-knowledge-blueprint.mjs:32`, expected four books / actual five from the current Blueprint directory. The following KH-W3.5H script also contains four-book assumptions, but was not reached in this command. No claim is made about its current result. Historical four-volume migration evidence, current five-volume ownership and inherited consumers require a separate compatibility review; neither frozen evidence nor current blueprints were changed to force PASS.
 
 No real provider call, production migration, deployment, commit or push performed. Other shared-window working changes retained.
+
+## Subsequent PJA migration boundary blocker
+
+`PJA_W0_UNREGISTERED_OR_HISTORICAL_MIGRATION_TOPOLOGY_DRIFT` was caused by the shared boundary helper requiring exactly 13 migrations even though 0014–0017 are registered. The helper now preserves the exact historical 0001–0013 prefix and pinned 0013 checksum/commit provenance, requires disk files to exactly match the current registry, validates canonical migration paths and sequential versions, and verifies every registered SQL checksum. Registered successors are not evidence of production application.
+
+Actual results: `npm run check:pja-w0`, `check:pja-w1`, `check:pja-w2a`, `check:pja-w2b`, `check:pja-w2c`, `node --no-warnings scripts/check-fw-report-material.mjs`, `node scripts/check-production-closure-migration-boundary.mjs`, `npm run check:runtime-migrations`, and `git diff --check` all exit 0. The boundary check's four unregistered-file/checksum/SQL/source-provenance negatives correctly reject tampering; its evidence JSON was regenerated. An attempted `npm run check:fw-report-material` exited 1 because no such alias exists; the actual script above passed directly. The entire npm precheck was not rerun, and these results do not supersede the earlier independent KH historical-blueprint baseline failure.

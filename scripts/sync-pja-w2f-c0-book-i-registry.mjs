@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { isDeepStrictEqual } from 'node:util';
+import {randomUUID} from 'node:crypto';
 
 const root = process.cwd();
 const apply = process.argv.includes('--apply');
@@ -233,8 +234,22 @@ function uniqueMap(items, key, conflictCode) {
 }
 function atomicWrite(relative, value) {
   const target = path.join(root, relative);
-  const temporary = `${target}.pja-w2f-c0.tmp`;
-  fs.writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
-  fs.renameSync(temporary, target);
+  // A process-specific exclusive file prevents two fixture synchronizers from
+  // sharing a temporary pathname. writeFileSync closes its handle before rename.
+  const temporary = `${target}.pja-w2f-c0.${process.pid}.${randomUUID()}.tmp`;
+  try {
+    fs.writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`, {encoding:'utf8',flag:'wx'});
+    for(let attempt=0;;attempt++){
+      try{fs.renameSync(temporary,target);break;}
+      catch(error){
+        if(!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt===4)throw error;
+        // Short, bounded Windows scanner/handle contention; never unlink the
+        // canonical destination or weaken a failed synchronizer assertion.
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,50*(attempt+1));
+      }
+    }
+  } finally {
+    if(fs.existsSync(temporary))fs.unlinkSync(temporary);
+  }
 }
 function fail(code, detail) { console.error(`${code}: ${detail}`); process.exit(2); }

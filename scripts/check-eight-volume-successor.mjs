@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
-import {STRIPE_PRODUCT_REGISTRY,commerceEntitlements} from '../functions/pws/commercial/stripe-product-registry.js';
+import {STRIPE_PRODUCT_REGISTRY,commerceProduct,commerceEntitlements} from '../functions/pws/commercial/stripe-product-registry.js';
 import {resolveCommerceBookSourceKey} from '../functions/commerce/book-product-registry.js';
 import {isPublicKnowledgeContextRef} from '../functions/contextual-ask/contextual-ask-runtime.js';
 const text=p=>fs.readFileSync(p,'utf8'),json=p=>JSON.parse(text(p));
@@ -23,7 +23,23 @@ const projection=json(root+'wpr-eight-volume-book-production-projection-v1.json'
 const context=json(root+'wpr-eight-volume-publication-context-registry-v1.json');
 const assets=json(root+'wpr-eight-volume-r2-public-assets-v1.json');
 assert.equal(projection.books.length,8);
-for(const b of projection.books){const html=text(b.route.slice(1)+'index.html');assert(html.includes(`data-book-id="${b.bookId}"`));assert(html.includes('/assets/js/pages/book-volume-seven.js'));assert(text('sitemap.xml').includes(b.route));}
+for(const b of projection.books){
+ const html=text(b.route.slice(1)+'index.html');
+ assert(html.includes(`data-book-id="${b.bookId}"`),b.route);
+ if(b.bookId==='book-8'){
+  // Current owner boundary: preserve the public identity page, not a public
+  // full-text/checkout projection of the internal operating volume.
+  assert.equal(b.route,'/books/reality-navigation/');
+  assert(!html.includes('/assets/js/pages/book-volume-seven.js'));
+  assert(!html.includes('data-wpr-book-volume'));
+  assert(html.includes('Not for public sale')&&html.includes('不对外出售'));
+  for(const route of ['reality-continuity','reality-expansion','reality-observation'])assert(html.includes(`/books/${route}/`));
+ }else{
+  assert(html.includes('/assets/js/pages/book-volume-seven.js'),b.route);
+  assert(html.includes('data-wpr-book-volume'),b.route);
+ }
+ assert(text('sitemap.xml').includes(b.route));
+}
 assert.equal(context.partOwnership.find(p=>p.partNumber===13).publicationBookCode,'BOOK-6');
 assert.equal(context.partOwnership.find(p=>p.partNumber===14).publicationBookCode,'BOOK-7');
 assert.equal(context.partOwnership.find(p=>p.partNumber===15).publicationBookCode,'BOOK-8');
@@ -43,7 +59,15 @@ assert(isPublicKnowledgeContextRef('BOOK:BOOK-8'));assert(!isPublicKnowledgeCont
 const products=STRIPE_PRODUCT_REGISTRY.filter(p=>p.category==='BOOK');
 assert.equal(products.length,8);assert.equal(new Set(products.map(p=>p.publicationBookCode)).size,8);
 const config=products.find(p=>p.publicationBookCode==='BOOK-6');assert.equal(config.productId,'COM-BOOK-CONFIGURATION');assert.equal(config.amountMinor,10900);
-for(const [id,volume,code] of [['COM-BOOK-06',7,'BOOK_06_FULL_ACCESS'],['COM-BOOK-07',8,'BOOK_07_FULL_ACCESS']]){const p=products.find(p=>p.productId===id);assert.equal(p.publicationVolume,volume);assert.equal(commerceEntitlements(id)[0].entitlementCode,code);assert.notEqual(code,config.entitlementPolicy);}
+for(const [id,volume,code] of [['COM-BOOK-06',7,'BOOK_06_FULL_ACCESS'],['COM-BOOK-07',8,'BOOK_07_FULL_ACCESS']]){
+ const p=products.find(p=>p.productId===id);assert.equal(p.publicationVolume,volume);
+ assert.equal(p.entitlementPolicy,code);assert.notEqual(code,config.entitlementPolicy);
+ if(volume===8){
+  assert.equal(p.active,false);
+  assert.throws(()=>commerceProduct(id),e=>e.code==='commerce_product_invalid');
+  assert.throws(()=>commerceEntitlements(id),e=>e.code==='commerce_product_invalid');
+ }else assert.equal(commerceEntitlements(id)[0].entitlementCode,code);
+}
 const env={COMMERCE_BOOK_SOURCE_KEYS_JSON:JSON.stringify({'COM-BOOK-06':'private/observation.pdf','COM-BOOK-07':'private/navigation.pdf','COM-BOOK-CONFIGURATION':'private/configuration.pdf'})};
 assert.equal(resolveCommerceBookSourceKey(env,'COM-BOOK-06'),'private/observation.pdf');assert.equal(resolveCommerceBookSourceKey(env,'COM-BOOK-07'),'private/navigation.pdf');assert.equal(resolveCommerceBookSourceKey(env,config.productId),'private/configuration.pdf');
 assert.throws(()=>resolveCommerceBookSourceKey({COMMERCE_BOOK_SOURCE_KEYS_JSON:JSON.stringify({'COM-BOOK-06':'private/observation.pdf'})},config.productId),/not configured/);

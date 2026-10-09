@@ -22,7 +22,8 @@ export function installReportQuestions(host){
     if(item.answer){paragraph(entry,item.answer.zhHans||item.answer.answer||'');if(item.answer.en)paragraph(entry,item.answer.en);}
     else paragraph(entry,tr('An answer has not been saved for this question.','这条问题尚未保存回答。'));
    }
-   if(data.governance?.answerGenerationAdmitted!==true||data.includedRemaining<1)return;
+   if(data.includedRemaining<1&&!data.governance?.membershipActive){paragraph(panel,tr('Your report and saved answers remain available. Membership lets you continue asking about this report.','报告及已保存问答会继续保留。启用会员后可继续针对这份报告提问。'));const membership=document.createElement('a');membership.href='/account/?product=COM-SUBSCRIPTION-MONTHLY';membership.textContent=tr('Continue with membership','启用会员继续');panel.append(membership);}
+   if(data.governance?.answerGenerationAdmitted!==true||data.governance?.canAsk===false||(data.includedRemaining<1&&!data.governance?.membershipActive))return;
    const form=document.createElement('form');form.className='cx-stack';panel.append(form);
    const label=document.createElement('label');label.className='cx-field';label.textContent=tr('What would you like to understand about this report?','关于这份报告，你希望进一步了解什么？');form.append(label);
    const input=document.createElement('textarea');input.className='cx-input';input.required=true;input.maxLength=2000;label.append(input);

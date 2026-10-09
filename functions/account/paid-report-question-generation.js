@@ -1,5 +1,5 @@
 import {personIdentity} from './canonical-person-store.js';
-import {openAccountZiweiMaterial} from './ziwei-account-delivery.js';
+import {openOwnedMethodReport} from './method-report-delivery.js';
 import {readReportQuestionHistory} from './report-followup-store.js';
 import {digest} from './oidc-auth.js';
 import {commerceEnvironment} from '../commerce/commerce-environment.js';
@@ -17,7 +17,7 @@ export async function accountReportQuestionGenerationAvailable(context,candidate
  const store=await createReportGenerationStore(env,{environment:commerceEnvironment(env),ownerAccountId:owner,orderId:purchase.order_id,reportId:grant.report_id,productId:grant.product_id});
  return store.withLock('lifecycle',async()=>{const state=await store.get('lifecycle');return state?.delivered===true&&state.authorityDigest===authorityDigest;});
 }
-export async function generateAccountReportQuestion(context,body,{openMaterial=openAccountZiweiMaterial,fetcher=globalThis.fetch}={}){
+export async function generateAccountReportQuestion(context,body,{openMaterial=openOwnedMethodReport,fetcher=globalThis.fetch}={}){
  const ownerAccountId=personIdentity(context).userId,env=context.env;
  if(!body||Object.keys(body).some(k=>!['reportId','requestId','question','consentVersion'].includes(k))||typeof body.reportId!=='string'||typeof body.question!=='string'||body.question.length>2000)fail('FOLLOWUP_REQUEST_INVALID',400);
  // Production is not activated by adding this handler.

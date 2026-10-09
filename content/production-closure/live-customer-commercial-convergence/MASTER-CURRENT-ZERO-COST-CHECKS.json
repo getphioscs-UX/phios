@@ -1,0 +1,44 @@
+{
+  "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+  "createdAt": "2026-10-09T06:33:03.314Z",
+  "providerCalls": 0,
+  "realPayments": 0,
+  "checks": [
+    {
+      "script": "scripts/check-controlled-purchase-integration.mjs",
+      "stages": [
+        "W07",
+        "W33",
+        "W35",
+        "W36"
+      ],
+      "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "sourceSHA256": "dfc7225381d0ca263cc46481f70813f5e5901b759bfcd2a65ccd968c04cdcf41",
+      "result": "PASS",
+      "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+      "log": "MASTER-check-controlled-purchase-integration.mjs.log"
+    },
+    {
+      "script": "scripts/check-commerce-stripe-r1.mjs",
+      "stages": [
+        "W33",
+        "W36"
+      ],
+      "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "sourceSHA256": "5007040c2f2345939ce155055d87ecf0a33b28c02c124291d24e3898a80fc202",
+      "result": "PASS",
+      "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+      "log": "MASTER-check-commerce-stripe-r1.mjs.log"
+    },
+    {
+      "script": "node scripts/run-zero-cost-regression.mjs precheck",
+      "stages": [
+        "W36"
+      ],
+      "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "result": "FAIL",
+      "scope": "BOOK_I_SYNCHRONIZER_FIXTURE_TEMP_RENAME_EPERM_NOT_PRODUCT_PASS",
+      "log": "MASTER-CURRENT-PRECHECK.log"
+    }
+  ]
+}

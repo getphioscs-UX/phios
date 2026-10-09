@@ -1,0 +1,46 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: scripts/check-iching-release-freeze-current.mjs
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: RITUAL_DEPENDENCY_DRIFT
++ actual - expected
+
++ 'ef1186985855818c07901abcd6b15bcd80d9cac1fbbafe9338419718de36507c'
+- 'edae75008b0139a0eda8b5833fc7c5dd90ba3961bb135be672de863bf7255159'
+
+    at file:///C:/phios/scripts/check-iching-release-freeze-current.mjs:22:45
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'ef1186985855818c07901abcd6b15bcd80d9cac1fbbafe9338419718de36507c',
+  expected: 'edae75008b0139a0eda8b5833fc7c5dd90ba3961bb135be672de863bf7255159',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
+
+
+1 !== 0
+
+    at file:///C:/phios/scripts/check-iching-release-current.mjs:16:123
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

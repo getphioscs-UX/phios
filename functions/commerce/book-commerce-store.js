@@ -151,7 +151,7 @@ export async function refundCommerceOrder(env,object){
   if(object.currency!=='myr'||!Number.isInteger(amount)||amount<0||amount>p.amount_minor) throw Object.assign(new Error('Refund mismatch.'),{status:422,code:'refund_mismatch'});
   await db.batch([
     db.prepare('UPDATE commerce_purchases SET refunded_amount_minor=MAX(refunded_amount_minor,?2),refunded_at=?3,updated_at=?3 WHERE purchase_id=?1').bind(p.purchase_id,amount,now),
-    db.prepare(`UPDATE commerce_checkout_attempts SET order_state=CASE WHEN ?2>=amount_minor THEN 'REFUNDED' ELSE 'PARTIALLY_REFUNDED' END,review_required=1,updated_at=?3 WHERE checkout_attempt_id=?1 AND order_state<>'REFUNDED'`).bind(p.checkout_attempt_id,Math.max(p.refunded_amount_minor,amount),now)
+    db.prepare(`UPDATE commerce_checkout_attempts SET order_state=CASE WHEN ?2>=?4 THEN 'REFUNDED' ELSE 'PARTIALLY_REFUNDED' END,review_required=1,updated_at=?3 WHERE checkout_attempt_id=?1 AND order_state<>'REFUNDED'`).bind(p.checkout_attempt_id,Math.max(p.refunded_amount_minor,amount),now,p.amount_minor)
   ]);
   // No blanket revocation policy for these successor products has been approved.
   return {orderId:p.checkout_attempt_id,reviewRequired:true};
@@ -159,12 +159,12 @@ export async function refundCommerceOrder(env,object){
 export async function commerceAccountProjection(env,customerId,clock=Date.now){
   const db=dbFrom(env), time=Math.floor(clock()/1000);
   const [orders,entitlements,subscriptions,services]=await Promise.all([
-    db.prepare(`SELECT checkout_attempt_id AS orderId,product_id AS productId,order_state AS state,amount_minor AS amountMinor,currency,review_required AS reviewRequired,context_json FROM commerce_checkout_attempts WHERE customer_id=?1 AND environment=?2 ORDER BY created_at DESC LIMIT 100`).bind(customerId,commerceEnvironment(env)).all(),
+    db.prepare(`SELECT o.checkout_attempt_id AS orderId,o.product_id AS productId,o.order_state AS state,o.amount_minor AS amountMinor,o.currency,o.review_required AS reviewRequired,o.context_json,p.amount_minor AS paidAmountMinor FROM commerce_checkout_attempts o LEFT JOIN commerce_purchases p ON p.checkout_attempt_id=o.checkout_attempt_id WHERE o.customer_id=?1 AND o.environment=?2 ORDER BY o.created_at DESC LIMIT 100`).bind(customerId,commerceEnvironment(env)).all(),
     db.prepare(`SELECT product_id AS productId,entitlement_code AS entitlementCode,entitlement_status AS status,watermark_status AS deliveryState FROM digital_entitlements e WHERE customer_id=?1 AND entitlement_status='active' AND (expires_at IS NULL OR expires_at>?2) AND EXISTS(SELECT 1 FROM commerce_purchases p JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE p.purchase_id=e.purchase_id AND o.environment=?3)`).bind(customerId,nowIso(clock),commerceEnvironment(env)).all(),
     db.prepare('SELECT subscription_status AS status,current_period_end AS currentPeriodEnd,paid_until AS paidUntil,cancel_at_period_end AS cancelAtPeriodEnd FROM commerce_subscriptions s WHERE customer_id=?1 AND EXISTS(SELECT 1 FROM commerce_checkout_attempts o WHERE o.checkout_attempt_id=s.order_id AND o.environment=?2)').bind(customerId,commerceEnvironment(env)).all(),
     db.prepare('SELECT product_id AS productId,fulfillment_state AS state,duration_minutes AS durationMinutes,modality FROM commerce_service_fulfillments s WHERE customer_id=?1 AND EXISTS(SELECT 1 FROM commerce_checkout_attempts o WHERE o.checkout_attempt_id=s.order_id AND o.environment=?2)').bind(customerId,commerceEnvironment(env)).all()
   ]);
-  return {orders:orders.results.map(({context_json,...row})=>({...row,reportPresentation:orderReportPresentation({context_json})})),entitlements:entitlements.results,subscriptions:subscriptions.results.map(s=>({...s,entitlementCode:'PHIOS_MEMBERSHIP',accessGranted:['ACTIVE','CANCEL_AT_PERIOD_END'].includes(s.status)&&s.paidUntil>time&&s.currentPeriodEnd>time})),services:services.results};
+  return {orders:orders.results.map(({context_json,...row})=>{const offer=controlledOrderOffer({context_json,customer_id:customerId,product_id:row.productId,amount_minor:row.amountMinor});return {...row,reportPresentation:orderReportPresentation({context_json}),...(offer?{controlledPayment:{originalAmountMinor:offer.originalAmountMinor,discountAmountMinor:offer.discountAmountMinor,payableAmountMinor:offer.paidAmountMinor,paidAmountMinor:row.paidAmountMinor??null,currency:'MYR'}}:{})};}),entitlements:entitlements.results,subscriptions:subscriptions.results.map(s=>({...s,entitlementCode:'PHIOS_MEMBERSHIP',accessGranted:['ACTIVE','CANCEL_AT_PERIOD_END'].includes(s.status)&&s.paidUntil>time&&s.currentPeriodEnd>time})),services:services.results};
 }
 
 function changes(result) {

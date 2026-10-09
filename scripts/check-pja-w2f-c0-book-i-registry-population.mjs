@@ -151,7 +151,12 @@ console.log('  Default/explicit dry-run, apply, second-apply no-op, conflict blo
 console.log('  All 65 resolver calls are beyond NODE_NOT_FOUND; no Readiness, Article, Approval or Publication was created.');
 
 async function exerciseSynchronizerFixtures() {
-  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'pja-w2f-c0-'));
+  // Windows sandbox temporary roots permit writes but can deny replacement
+  // renames. Keep this isolated fixture under the writable workspace, never
+  // run --apply against canonical content. Every original strict check remains.
+  const fixtureRoot=path.resolve(root,'.tmp','pja-w2f-c0-fixtures');
+  await fs.mkdir(fixtureRoot,{recursive:true});
+  const temp = await fs.mkdtemp(path.join(fixtureRoot, 'pja-w2f-c0-'));
   try {
     for (const relative of Object.values(paths).filter(file => !file.endsWith('.schema.json'))) await copy(relative, temp);
     await copy(historicalBlueprintPath, temp);
@@ -198,6 +203,7 @@ async function exerciseSynchronizerFixtures() {
     assert(parseReport(conflict.stdout).conflicts.some(item => item.code === 'THEME_NOT_FOUND'));
     assert.deepEqual(await Promise.all(tracked.map(fileDigest)), beforeConflict, 'conflict partially applied');
   } finally {
+    if(!path.resolve(temp).startsWith(fixtureRoot+path.sep))throw Error('FIXTURE_CLEANUP_PATH_INVALID');
     await fs.rm(temp, { recursive: true, force: true });
   }
 }

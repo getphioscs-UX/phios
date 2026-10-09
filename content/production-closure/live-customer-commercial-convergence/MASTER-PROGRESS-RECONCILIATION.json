@@ -1,0 +1,1985 @@
+{
+  "authority": "MASTER-AUTHORITY.txt plus later explicit owner commercial decisions",
+  "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+  "updatedAt": "2026-10-09T06:33:22.097Z",
+  "completeStages": [],
+  "note": "阶段完整完成需满足全部契约；定向PASS、规范接受与文件存在均不等于阶段完成",
+  "items": [
+    {
+      "id": "W00",
+      "title": "Environment and working tree",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/BASELINE.json"
+      ],
+      "sourceLocations": [
+        "scripts/build-live-customer-master.mjs"
+      ],
+      "actualChecks": [],
+      "nextStep": "Record concurrent HEAD/dirty tree without resetting others",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "scripts/build-live-customer-master.mjs",
+          "sha256": "19617e8b1e1231f605cc0d30f24a4e1d873a411df1ce12c8e0e4865d6cacccf0"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Record concurrent HEAD/dirty tree without resetting others",
+      "progress": "部分"
+    },
+    {
+      "id": "W01",
+      "title": "Single Master Ledger",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/MASTER-CONSUMER-MAP.json"
+      ],
+      "sourceLocations": [
+        "scripts/build-live-customer-master.mjs"
+      ],
+      "actualChecks": [],
+      "nextStep": "Maintain one evidence ledger and surface stale evidence",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "scripts/build-live-customer-master.mjs",
+          "sha256": "19617e8b1e1231f605cc0d30f24a4e1d873a411df1ce12c8e0e4865d6cacccf0"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Maintain one evidence ledger and surface stale evidence",
+      "progress": "部分"
+    },
+    {
+      "id": "W02",
+      "title": "Routes / APIs / Consumers",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/MASTER-CONSUMER-MAP.json"
+      ],
+      "sourceLocations": [
+        "scripts/audit-recovery-current-calls.mjs"
+      ],
+      "actualChecks": [],
+      "nextStep": "Resolve dynamic callers and activation flags individually",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "scripts/audit-recovery-current-calls.mjs",
+          "sha256": "559e7981ed2485e609920bbc114ee14d7fafb07a3f4b75d4d2a4c0e446836507"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Resolve dynamic callers and activation flags individually",
+      "progress": "部分",
+      "supplemental": [
+        {
+          "name": "thesis.html",
+          "stages": [
+            "W02",
+            "W03",
+            "W29"
+          ],
+          "files": [
+            "thesis.html",
+            "scripts/restore-recovery-founder-home-thesis.mjs"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "研究 PDF 缺失，禁用失效下载；补真实版本与可发布路径"
+        }
+      ]
+    },
+    {
+      "id": "W03",
+      "title": "Accepted content and assets",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "content/registry/public-assets.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "Bind accepted asset/content identities to exact current bytes",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "content/registry/public-assets.json",
+          "sha256": "52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Bind accepted asset/content identities to exact current bytes",
+      "progress": "部分",
+      "supplemental": [
+        {
+          "name": "thesis.html",
+          "stages": [
+            "W02",
+            "W03",
+            "W29"
+          ],
+          "files": [
+            "thesis.html",
+            "scripts/restore-recovery-founder-home-thesis.mjs"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "研究 PDF 缺失，禁用失效下载；补真实版本与可发布路径"
+        },
+        {
+          "name": "Founder",
+          "stages": [
+            "W03",
+            "W05"
+          ],
+          "files": [
+            "about/founder/index.html"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "V8段落分类与双语适配已写；实质改动待差异审阅和视觉 QA"
+        },
+        {
+          "name": "homepage v8",
+          "stages": [
+            "W03",
+            "W05",
+            "W32"
+          ],
+          "files": [
+            "index.html",
+            "content/web/homepage/hpc2/sources/PHIOS-market-positioning-founder-v8-no-pricing.html"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "保留 shell/客户入口并补生活情境；旧三/五册与14Layers不直接恢复"
+        }
+      ]
+    },
+    {
+      "id": "W04",
+      "title": "Pages publication boundary",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "scripts/lib/publication-boundary.mjs"
+      ],
+      "actualChecks": [],
+      "nextStep": "Run current build publication boundary and excluded private-content audit",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "scripts/lib/publication-boundary.mjs",
+          "sha256": "b999b15bdfd96158907f5be05cd8a51771e43f9050c1ffa45208ef90827a5197"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Run current build publication boundary and excluded private-content audit",
+      "progress": "部分"
+    },
+    {
+      "id": "W05",
+      "title": "Homepage / navigation",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "index.html",
+        "assets/customer-ui/js/surfaces/home.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Bilingual diff review plus actual mobile preview of restored paragraphs",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "index.html",
+          "sha256": "3d81fe3a697a549683b353a19bc793ae3520702de1e93d964135989b48fa4d82"
+        },
+        {
+          "path": "assets/customer-ui/js/surfaces/home.js",
+          "sha256": "6d7a07c5f97a9f5415b984cfd7f0de9290dd1e5e0c4385eca37e01d49c38a0fe"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Bilingual diff review plus actual mobile preview of restored paragraphs",
+      "progress": "部分",
+      "supplemental": [
+        {
+          "name": "Founder",
+          "stages": [
+            "W03",
+            "W05"
+          ],
+          "files": [
+            "about/founder/index.html"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "V8段落分类与双语适配已写；实质改动待差异审阅和视觉 QA"
+        },
+        {
+          "name": "homepage v8",
+          "stages": [
+            "W03",
+            "W05",
+            "W32"
+          ],
+          "files": [
+            "index.html",
+            "content/web/homepage/hpc2/sources/PHIOS-market-positioning-founder-v8-no-pricing.html"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "保留 shell/客户入口并补生活情境；旧三/五册与14Layers不直接恢复"
+        }
+      ]
+    },
+    {
+      "id": "W06",
+      "title": "Personal native free report",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "perspectives/personal/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify native accepted free reading and same-object paid unlock",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "perspectives/personal/index.html",
+          "sha256": "46fc473719d1122007a30e97a0aa42cee1abd6e9a9de3f41f4db44b4a834933a"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Verify native accepted free reading and same-object paid unlock",
+      "progress": "部分"
+    },
+    {
+      "id": "W07",
+      "title": "Report commerce and delivery",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      ],
+      "sourceLocations": [
+        "functions/commerce/commerce-stripe-api.js",
+        "functions/report-delivery/report-delivery-contract.js"
+      ],
+      "actualChecks": [
+        {
+          "script": "scripts/check-paid-method-lifecycle-integration.mjs",
+          "sourceSHA256": "845cd849ae418f6226ef25a3b7f5581bc4f41c92db653adeb060f85aab1f69b8",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-paid-method-lifecycle-integration.log"
+        },
+        {
+          "script": "scripts/check-paid-report-durable-integration.mjs",
+          "sourceSHA256": "44376c12f51ea07bf3ab2ecd90f063cac8d9e7f354c287761710caec619582f7",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-paid-report-durable-integration.log"
+        },
+        {
+          "script": "scripts/check-controlled-purchase-integration.mjs",
+          "stages": [
+            "W07",
+            "W33",
+            "W35",
+            "W36"
+          ],
+          "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+          "sourceSHA256": "dfc7225381d0ca263cc46481f70813f5e5901b759bfcd2a65ccd968c04cdcf41",
+          "result": "PASS",
+          "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+          "log": "MASTER-check-controlled-purchase-integration.mjs.log"
+        }
+      ],
+      "nextStep": "Finish eligible producer+renderer admission and exact Checkout/webhook-to-material flow",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/commerce/commerce-stripe-api.js",
+          "sha256": "c54dcfab482d94cb7bfb42caa9143122dbf374c3bb2074197e2a0601e6b4489c"
+        },
+        {
+          "path": "functions/report-delivery/report-delivery-contract.js",
+          "sha256": "0f54f02703fab0ca687c62f8fcd28f9de27d32520d872da73b7976593e083120"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Finish eligible producer+renderer admission and exact Checkout/webhook-to-material flow",
+      "progress": "部分",
+      "verificationVersion": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "supplemental": [
+        {
+          "name": "voucher",
+          "stages": [
+            "W07",
+            "W25",
+            "W33",
+            "W35"
+          ],
+          "files": [
+            "functions/commerce/controlled-purchase-candidate.js",
+            "functions/commerce/commerce-stripe-api.js",
+            "scripts/check-controlled-purchase-integration.mjs"
+          ],
+          "evidence": "CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+          "remaining": "合成 Checkout/webhook/退款13项通过；账户三金额展示与商品准入待补，默认不启用 LIVE"
+        }
+      ]
+    },
+    {
+      "id": "W08",
+      "title": "Report four follow-up questions",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json"
+      ],
+      "sourceLocations": [
+        "functions/account/report-followup-store.js",
+        "functions/account/paid-report-question-generation.js"
+      ],
+      "actualChecks": [
+        {
+          "script": "scripts/check-report-followup-store.mjs",
+          "sourceSHA256": "b96ffe7ba8633fa76093c48502a3e12d7788ea604b1879b31c9f893a8360e5cc",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-report-followup-store.log"
+        }
+      ],
+      "nextStep": "Wire verified immutable report to paid followup producer, retain four-slot SQL constraints",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/account/report-followup-store.js",
+          "sha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e"
+        },
+        {
+          "path": "functions/account/paid-report-question-generation.js",
+          "sha256": "2f81019212f727a3ac929dc2698f7239b768109124231c9292bf8e900efaa21d"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Wire verified immutable report to paid followup producer, retain four-slot SQL constraints",
+      "progress": "部分"
+    },
+    {
+      "id": "W09",
+      "title": "RM19 membership",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "functions/pws/commercial/stripe-product-registry.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify paid-through/cancel/resubscribe same-workspace continuity",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/pws/commercial/stripe-product-registry.js",
+          "sha256": "19c8013cee19699688e248c2f93387a1a883513ad50b63cd969988b6ea248a36"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Verify paid-through/cancel/resubscribe same-workspace continuity",
+      "progress": "部分"
+    },
+    {
+      "id": "W10",
+      "title": "My Reality persistence",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/MY-REALITY-SAVED-SOURCE-QA.json"
+      ],
+      "sourceLocations": [
+        "functions/account/my-reality-saved-sources.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Integrate retained histories without backfill or invented history",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/account/my-reality-saved-sources.js",
+          "sha256": "7c357298a2d09db1e5d1acf3bd31c6a5166b036543ca29bb64b161c1a74d87e1"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Integrate retained histories without backfill or invented history",
+      "progress": "部分"
+    },
+    {
+      "id": "W11",
+      "title": "Contextual Ask",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "functions/api/customer-contextual-ask.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify per-context reading ownership and accepted sources",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/api/customer-contextual-ask.js",
+          "sha256": "89980b65cbc1702f3b9f9c74cf377d1234e1d4496a1b288bd5b9c2e96a6ab9d6"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Verify per-context reading ownership and accepted sources",
+      "progress": "部分"
+    },
+    {
+      "id": "W12",
+      "title": "Public Knowledge Ask repair",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "functions/api/customer-contextual-ask.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Keep public Ask bounded; review current Answer/figure maintenance successor",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/api/customer-contextual-ask.js",
+          "sha256": "89980b65cbc1702f3b9f9c74cf377d1234e1d4496a1b288bd5b9c2e96a6ab9d6"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Keep public Ask bounded; review current Answer/figure maintenance successor",
+      "progress": "部分"
+    },
+    {
+      "id": "W13",
+      "title": "Book VIII private doctrine",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "books/reality-navigation/index.html",
+        "content/knowledge/structured/successors/master-a-v2-batch4/book-viii-identity-reuse-v1.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "核对 VIII 公开不售页面、私有源码及受控图像边界；不公开全文",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "books/reality-navigation/index.html",
+          "sha256": "447c8d4583e5a1047b00fcd0afce0d79226499dd15593a7826f10f8da700110e"
+        },
+        {
+          "path": "content/knowledge/structured/successors/master-a-v2-batch4/book-viii-identity-reuse-v1.json",
+          "sha256": "a0c0465f2b22511dd3dc4485efcf92a7b62ea42dee304d8cf325eb08c321bd77"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "核对 VIII 公开不售页面、私有源码及受控图像边界；不公开全文",
+      "progress": "部分"
+    },
+    {
+      "id": "W14",
+      "title": "NAV runtime / Academy mapping",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-ACCEPTED-PRIVATE-REGISTRY.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-SOURCE-INTEGRITY.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-IDENTITY-PLACEHOLDERS.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-SCHEMA-CANDIDATE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-CONSUMER-INVENTORY.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-DEPENDENCY-MAP.json"
+      ],
+      "sourceLocations": [
+        "functions/runtime/navigation/nav-accepted-batch-06-runtime.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "读取可信 server reality 输入，接入 scoped customer API 与 Academy 受控消费；不能只导入 helper",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/runtime/navigation/nav-accepted-batch-06-runtime.js",
+          "sha256": "a449c563b9a90de165194d9ed3b4a07118d42a90bfbe2cc12eae3be8b3c39b44"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "读取可信 server reality 输入，接入 scoped customer API 与 Academy 受控消费；不能只导入 helper",
+      "progress": "部分",
+      "implementationScope": "NAV01–30私有规范、contract、projection及拓扑凭证；不是客户消费者接线"
+    },
+    {
+      "id": "W15",
+      "title": "Academy video model",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "academy/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Supply actual accepted video assets before purchase eligibility",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "academy/index.html",
+          "sha256": "545b1e4b611be07dfcd3af3f5216d6de0138cc99a4a6a6b2a957c72f154f55f6"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Supply actual accepted video assets before purchase eligibility",
+      "progress": "阻断"
+    },
+    {
+      "id": "W16",
+      "title": "Protected media delivery",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "functions/api"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify owned permanent video delivery with revoked sharing denied",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Verify owned permanent video delivery with revoked sharing denied",
+      "progress": "阻断"
+    },
+    {
+      "id": "W17",
+      "title": "Academy commerce",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "functions/pws/commercial/stripe-product-registry.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Keep no-video products disabled; reuse Commerce for admitted asset only",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/pws/commercial/stripe-product-registry.js",
+          "sha256": "19c8013cee19699688e248c2f93387a1a883513ad50b63cd969988b6ea248a36"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Keep no-video products disabled; reuse Commerce for admitted asset only",
+      "progress": "阻断"
+    },
+    {
+      "id": "W18",
+      "title": "Tarot interaction",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/TAROT-INTERACTION-QA.json"
+      ],
+      "sourceLocations": [
+        "assets/customer-ui/js/surfaces/tarot-shuffle.js",
+        "assets/customer-ui/js/surfaces/tarot.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "真实移动端洗牌、触摸、防重复、后台恢复 E2E",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "assets/customer-ui/js/surfaces/tarot-shuffle.js",
+          "sha256": "c200d87c341ca8b1d0dfca1a7bbddd3aceed9d361df41e0ca1cc97a04cb42939"
+        },
+        {
+          "path": "assets/customer-ui/js/surfaces/tarot.js",
+          "sha256": "b9d1bee3d596e9425ca3159b11ae7e4c72355e90a5849a5ba3eb4d95e4b8c078"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "真实移动端洗牌、触摸、防重复、后台恢复 E2E",
+      "progress": "部分"
+    },
+    {
+      "id": "W19",
+      "title": "Free Tarot zero-provider",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      ],
+      "sourceLocations": [
+        "functions/api/symbolic-method-execute-v4.js",
+        "functions/tarot-product-runtime/tarot-product-runtime-v3.js"
+      ],
+      "actualChecks": [
+        {
+          "script": "scripts/check-free-symbolic-zero-provider.mjs",
+          "sourceSHA256": "071837c642b8989cb4e141fbe090bd78a75d3049801cce1980454292dfb8a668",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-free-symbolic-zero-provider.log"
+        }
+      ],
+      "nextStep": "重跑确定性路径网络拦截；客户浏览器仍需验证",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/api/symbolic-method-execute-v4.js",
+          "sha256": "c123b691936deef605813914359869cae9d1d6da47662bbf14bcfdcdf1167c51"
+        },
+        {
+          "path": "functions/tarot-product-runtime/tarot-product-runtime-v3.js",
+          "sha256": "99a720f8ddba5aa4222b14060e30c8935ff95555489b9eae24efe6e21d83e572"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "重跑确定性路径网络拦截；客户浏览器仍需验证",
+      "progress": "部分"
+    },
+    {
+      "id": "W20",
+      "title": "Paid Tarot commerce",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "functions/commerce/commerce-stripe-api.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Bind paid Tarot single synthesis to verified order/reading/corpus",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/commerce/commerce-stripe-api.js",
+          "sha256": "c54dcfab482d94cb7bfb42caa9143122dbf374c3bb2074197e2a0601e6b4489c"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Bind paid Tarot single synthesis to verified order/reading/corpus",
+      "progress": "部分"
+    },
+    {
+      "id": "W21",
+      "title": "Tarot single-call synthesis",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "scripts/check-tarot-qa-budget.mjs"
+      ],
+      "actualChecks": [],
+      "nextStep": "将单次 synthesis 接入真实订单、固定 reading、失败可恢复状态；不新增模型调用",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "scripts/check-tarot-qa-budget.mjs",
+          "sha256": "ff77ec54b7bae24cf5d06992cf878d5b1abdf0ef125f6dfbf7af1a86c604fa91"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "将单次 synthesis 接入真实订单、固定 reading、失败可恢复状态；不新增模型调用",
+      "progress": "部分"
+    },
+    {
+      "id": "W22",
+      "title": "20-case unit economics",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json"
+      ],
+      "sourceLocations": [
+        "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json",
+          "sha256": "92fc0ebf18d9a58f88e6b4e3332c6754b83cf5cd1ff8057e290c49736272b47e"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用",
+      "progress": "部分",
+      "verificationVersion": "2026-10-09T03:48:54.935Z"
+    },
+    {
+      "id": "W23",
+      "title": "I Ching experience",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      ],
+      "sourceLocations": [
+        "perspectives/iching/index.html"
+      ],
+      "actualChecks": [
+        {
+          "script": "scripts/check-free-symbolic-zero-provider.mjs",
+          "sourceSHA256": "071837c642b8989cb4e141fbe090bd78a75d3049801cce1980454292dfb8a668",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-free-symbolic-zero-provider.log"
+        }
+      ],
+      "nextStep": "Actual deterministic cast/mobile replay and corpus provenance",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "perspectives/iching/index.html",
+          "sha256": "c296a44b8fedfa37e1d0af2069eac9608f4740f53f0bb620018158fb826b2687"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Actual deterministic cast/mobile replay and corpus provenance",
+      "progress": "部分"
+    },
+    {
+      "id": "W24",
+      "title": "I Ching synthesis candidate",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "functions/commerce/commerce-stripe-api.js",
+        "functions/api/symbolic-method-execute-v4.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "完成受控订单与确定性卦象的 synthesis 技术接线，不改已决定 RM39",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "functions/commerce/commerce-stripe-api.js",
+          "sha256": "c54dcfab482d94cb7bfb42caa9143122dbf374c3bb2074197e2a0601e6b4489c"
+        },
+        {
+          "path": "functions/api/symbolic-method-execute-v4.js",
+          "sha256": "c123b691936deef605813914359869cae9d1d6da47662bbf14bcfdcdf1167c51"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "完成受控订单与确定性卦象的 synthesis 技术接线，不改已决定 RM39",
+      "progress": "部分"
+    },
+    {
+      "id": "W25",
+      "title": "Account",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "account/index.html",
+        "functions/account/account-reports-api.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Actual owned report list/reopen/download, pending generation progress",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "account/index.html",
+          "sha256": "0cb97b7c13b0914012aabd50f4174bfa94912c6042ef990857d1af81697cb20d"
+        },
+        {
+          "path": "functions/account/account-reports-api.js",
+          "sha256": "666f2122e5dd4eb0bb62bb76659d491d1b4d70747e8c1af26d66db3282c1cd08"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Actual owned report list/reopen/download, pending generation progress",
+      "progress": "部分",
+      "supplemental": [
+        {
+          "name": "voucher",
+          "stages": [
+            "W07",
+            "W25",
+            "W33",
+            "W35"
+          ],
+          "files": [
+            "functions/commerce/controlled-purchase-candidate.js",
+            "functions/commerce/commerce-stripe-api.js",
+            "scripts/check-controlled-purchase-integration.mjs"
+          ],
+          "evidence": "CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+          "remaining": "合成 Checkout/webhook/退款13项通过；账户三金额展示与商品准入待补，默认不启用 LIVE"
+        }
+      ]
+    },
+    {
+      "id": "W26",
+      "title": "Appointments",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "professional/services/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify intake→consent→appointment boundary without paid-live transaction",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "professional/services/index.html",
+          "sha256": "968a8d98cbbe93ab4f608292a057363c8ccdebe1e2b571f69003e0665ae7b940"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Verify intake→consent→appointment boundary without paid-live transaction",
+      "progress": "部分"
+    },
+    {
+      "id": "W27",
+      "title": "Financial / Will",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "professional/financial/index.html",
+        "functions/account/financial-will-draft-store.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify Financial/Will exact output semantics, retained ranges/unknowns",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "professional/financial/index.html",
+          "sha256": "30ccb3a2b4c7415b631167cd6c42768613647c8429bcc67b689e5659c2da4990"
+        },
+        {
+          "path": "functions/account/financial-will-draft-store.js",
+          "sha256": "17c8c7fcb82a4c1f17ddc56c7360488e6bdb625a7c97753bd68dbf452c305c94"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Verify Financial/Will exact output semantics, retained ranges/unknowns",
+      "progress": "部分"
+    },
+    {
+      "id": "W28",
+      "title": "Relationship / Cross",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "perspectives/relationship/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Exact current relationship/cross bounded report admission and inputs",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "perspectives/relationship/index.html",
+          "sha256": "2bf03c3528b52d9bd2ed5afb89a2d91b95500ad0ff7009a254e6ebd6eb7dfc53"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Exact current relationship/cross bounded report admission and inputs",
+      "progress": "部分"
+    },
+    {
+      "id": "W29",
+      "title": "Profile / Academic",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "perspectives/profile/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Current Profile/Academic evidence boundaries and product admission",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "perspectives/profile/index.html",
+          "sha256": "19b8168abce18180f3eb1fef7bee940df2f91d600563f26b2d885afa4865326f"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Current Profile/Academic evidence boundaries and product admission",
+      "progress": "部分",
+      "supplemental": [
+        {
+          "name": "thesis.html",
+          "stages": [
+            "W02",
+            "W03",
+            "W29"
+          ],
+          "files": [
+            "thesis.html",
+            "scripts/restore-recovery-founder-home-thesis.mjs"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "研究 PDF 缺失，禁用失效下载；补真实版本与可发布路径"
+        }
+      ]
+    },
+    {
+      "id": "W30",
+      "title": "Books / Figures",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "books/index.html",
+        "content/registry/figures.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "books/index.html",
+          "sha256": "a2f716f6541e704c8b910b77797a82d8b731c08a28c9e8d1627e3c1858d61fd7"
+        },
+        {
+          "path": "content/registry/figures.json",
+          "sha256": "498c6c456eb1d726340b6a0bae1cbceac5b37d2d35db5c01b99c79a361f821ed"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary",
+      "progress": "部分"
+    },
+    {
+      "id": "W31",
+      "title": "World / Book VI / Moomoo",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "content/civilization-atlas/snapshots/world-snapshots-v1.json",
+        "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-status-v1.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "content/civilization-atlas/snapshots/world-snapshots-v1.json",
+          "sha256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988"
+        },
+        {
+          "path": "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-status-v1.json",
+          "sha256": "cb4a78efb15a6a4e43f1c6a5013ff0a8418276c6c0ad50c5cd02125d7ae391eb"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据",
+      "progress": "部分"
+    },
+    {
+      "id": "W32",
+      "title": "Mobile / branding",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "assets/customer-ui/css",
+        "assets/css/tokens.css"
+      ],
+      "actualChecks": [],
+      "nextStep": "Actual preview mobile bilingual shell and branding, no SOURCE test substitute",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "sourceFiles": [
+        {
+          "path": "assets/css/tokens.css",
+          "sha256": "609e46ef3dfe5db16cb46092125f9494ca4925c23206a059ebf9199f5e0e3179"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "remainingWork": "Actual preview mobile bilingual shell and branding, no SOURCE test substitute",
+      "progress": "部分",
+      "supplemental": [
+        {
+          "name": "homepage v8",
+          "stages": [
+            "W03",
+            "W05",
+            "W32"
+          ],
+          "files": [
+            "index.html",
+            "content/web/homepage/hpc2/sources/PHIOS-market-positioning-founder-v8-no-pricing.html"
+          ],
+          "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+          "remaining": "保留 shell/客户入口并补生活情境；旧三/五册与14Layers不直接恢复"
+        }
+      ]
+    },
+    {
+      "id": "W33",
+      "title": "Commerce reconciliation",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "MASTER-COMMERCE-MAP.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      ],
+      "sourceLocations": [
+        "functions/commerce/commerce-stripe-api.js",
+        "functions/commerce/controlled-purchase-candidate.js",
+        "functions/commerce/commerce-stripe-events.js",
+        "functions/commerce/book-commerce-store.js"
+      ],
+      "sourceFiles": [
+        {
+          "path": "functions/commerce/commerce-stripe-api.js",
+          "sha256": "c54dcfab482d94cb7bfb42caa9143122dbf374c3bb2074197e2a0601e6b4489c"
+        },
+        {
+          "path": "functions/commerce/controlled-purchase-candidate.js",
+          "sha256": "238a9b11647bf0ae7712b16bc40b2ee8ef1f2e3bb466a9f4a956aea573cebf1c"
+        },
+        {
+          "path": "functions/commerce/commerce-stripe-events.js",
+          "sha256": "c05b42f6d4a4354d1f7568e6b52ec75de9019ca80cbf684faa6c884cedea4524"
+        },
+        {
+          "path": "functions/commerce/book-commerce-store.js",
+          "sha256": "fd60e7e4968e15da71f4d09af56f4b2ceda61e7fee009f3babd4ec716af324f0"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [
+        {
+          "script": "scripts/check-controlled-purchase-integration.mjs",
+          "stages": [
+            "W07",
+            "W33",
+            "W35",
+            "W36"
+          ],
+          "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+          "sourceSHA256": "dfc7225381d0ca263cc46481f70813f5e5901b759bfcd2a65ccd968c04cdcf41",
+          "result": "PASS",
+          "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+          "log": "MASTER-check-controlled-purchase-integration.mjs.log"
+        },
+        {
+          "script": "scripts/check-commerce-stripe-r1.mjs",
+          "stages": [
+            "W33",
+            "W36"
+          ],
+          "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+          "sourceSHA256": "5007040c2f2345939ce155055d87ecf0a33b28c02c124291d24e3898a80fc202",
+          "result": "PASS",
+          "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+          "log": "MASTER-check-commerce-stripe-r1.mjs.log"
+        }
+      ],
+      "remainingWork": "完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭",
+      "nextStep": "完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭",
+      "progress": "部分",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "verificationVersion": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "supplemental": [
+        {
+          "name": "voucher",
+          "stages": [
+            "W07",
+            "W25",
+            "W33",
+            "W35"
+          ],
+          "files": [
+            "functions/commerce/controlled-purchase-candidate.js",
+            "functions/commerce/commerce-stripe-api.js",
+            "scripts/check-controlled-purchase-integration.mjs"
+          ],
+          "evidence": "CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+          "remaining": "合成 Checkout/webhook/退款13项通过；账户三金额展示与商品准入待补，默认不启用 LIVE"
+        }
+      ]
+    },
+    {
+      "id": "W34",
+      "title": "Shared provider cost ledger",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "TAROT-QA-BUDGET-TESTS.json",
+        "PRODUCT-TOTAL-COST-QA.json"
+      ],
+      "sourceLocations": [
+        "functions/provider-cost/product-cost-envelope.js"
+      ],
+      "sourceFiles": [
+        {
+          "path": "functions/provider-cost/product-cost-envelope.js",
+          "sha256": "da7dfe6c95ca93b2e7a8a8a917a5f77b3df73a9b2c59eb9c4e017d535737fdf3"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [],
+      "remainingWork": "逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本",
+      "nextStep": "逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本",
+      "progress": "部分",
+      "liveCustomerDoesNotBlockIndependentSource": true
+    },
+    {
+      "id": "W35",
+      "title": "Security / permissions",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "NAV-BATCH-02-QA.json",
+        "NAV-BATCH-03-QA.json",
+        "NAV-BATCH-04-QA.json",
+        "NAV-BATCH-05-ACCEPTANCE.json",
+        "NAV-BATCH-05-QA.json",
+        "NAV-BATCH-06-ACCEPTANCE.json",
+        "NAV-BATCH-06-QA.json",
+        "REPORT-FOLLOWUP-STORE-QA.json",
+        "PRODUCT-TOTAL-COST-QA.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      ],
+      "sourceLocations": [
+        "functions/account/report-followup-store.js",
+        "functions/commerce/controlled-purchase-candidate.js"
+      ],
+      "sourceFiles": [
+        {
+          "path": "functions/account/report-followup-store.js",
+          "sha256": "67b6727dafed1cb7a2fe1f0549475b6f923b0a0038a74ed777406264161d040e"
+        },
+        {
+          "path": "functions/commerce/controlled-purchase-candidate.js",
+          "sha256": "238a9b11647bf0ae7712b16bc40b2ee8ef1f2e3bb466a9f4a956aea573cebf1c"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [
+        {
+          "script": "scripts/check-controlled-purchase-integration.mjs",
+          "stages": [
+            "W07",
+            "W33",
+            "W35",
+            "W36"
+          ],
+          "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+          "sourceSHA256": "dfc7225381d0ca263cc46481f70813f5e5901b759bfcd2a65ccd968c04cdcf41",
+          "result": "PASS",
+          "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+          "log": "MASTER-check-controlled-purchase-integration.mjs.log"
+        }
+      ],
+      "remainingWork": "补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试",
+      "nextStep": "补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试",
+      "progress": "部分",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "verificationVersion": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "supplemental": [
+        {
+          "name": "voucher",
+          "stages": [
+            "W07",
+            "W25",
+            "W33",
+            "W35"
+          ],
+          "files": [
+            "functions/commerce/controlled-purchase-candidate.js",
+            "functions/commerce/commerce-stripe-api.js",
+            "scripts/check-controlled-purchase-integration.mjs"
+          ],
+          "evidence": "CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+          "remaining": "合成 Checkout/webhook/退款13项通过；账户三金额展示与商品准入待补，默认不启用 LIVE"
+        }
+      ]
+    },
+    {
+      "id": "W36",
+      "title": "Targeted regression",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "CURRENT_CHECK_FAIL",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      ],
+      "sourceLocations": [
+        "scripts/run-zero-cost-regression.mjs"
+      ],
+      "sourceFiles": [
+        {
+          "path": "scripts/run-zero-cost-regression.mjs",
+          "sha256": "5ff22ae9f31c569893c0cdb41ae576003ff5bdd423d9c6d508ee3d7cbec5783e"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [
+        {
+          "script": "scripts/check-controlled-purchase-integration.mjs",
+          "stages": [
+            "W07",
+            "W33",
+            "W35",
+            "W36"
+          ],
+          "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+          "sourceSHA256": "dfc7225381d0ca263cc46481f70813f5e5901b759bfcd2a65ccd968c04cdcf41",
+          "result": "PASS",
+          "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+          "log": "MASTER-check-controlled-purchase-integration.mjs.log"
+        },
+        {
+          "script": "scripts/check-commerce-stripe-r1.mjs",
+          "stages": [
+            "W33",
+            "W36"
+          ],
+          "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+          "sourceSHA256": "5007040c2f2345939ce155055d87ecf0a33b28c02c124291d24e3898a80fc202",
+          "result": "PASS",
+          "scope": "LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY",
+          "log": "MASTER-check-commerce-stripe-r1.mjs.log"
+        },
+        {
+          "script": "node scripts/run-zero-cost-regression.mjs precheck",
+          "stages": [
+            "W36"
+          ],
+          "head": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+          "result": "FAIL",
+          "scope": "BOOK_I_SYNCHRONIZER_FIXTURE_TEMP_RENAME_EPERM_NOT_PRODUCT_PASS",
+          "log": "MASTER-CURRENT-PRECHECK.log"
+        }
+      ],
+      "remainingWork": "重跑当前受影响链；记录真实失败，禁止修改冻结哈希",
+      "nextStep": "重跑当前受影响链；记录真实失败，禁止修改冻结哈希",
+      "progress": "部分",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "verificationVersion": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35"
+    },
+    {
+      "id": "W37",
+      "title": "Pages build",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "BUILD-VERIFICATION.json"
+      ],
+      "sourceLocations": [
+        "scripts/build-cloudflare-pages.mjs",
+        "scripts/lib/publication-boundary.mjs"
+      ],
+      "sourceFiles": [
+        {
+          "path": "scripts/build-cloudflare-pages.mjs",
+          "sha256": "a39d447db6d2b29ff5abb1ace76f0cc02f53f13a92d094993dd4669adc253295"
+        },
+        {
+          "path": "scripts/lib/publication-boundary.mjs",
+          "sha256": "b999b15bdfd96158907f5be05cd8a51771e43f9050c1ffa45208ef90827a5197"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [],
+      "remainingWork": "当前版本隔离构建及25MiB、imports、私有内容、runtime资产检查",
+      "nextStep": "当前版本隔离构建及25MiB、imports、私有内容、runtime资产检查",
+      "progress": "部分",
+      "liveCustomerDoesNotBlockIndependentSource": true,
+      "verificationVersion": "a30ebe67ab9571d45f36ec96b951e53e3b735b77"
+    },
+    {
+      "id": "W38",
+      "title": "Customer journey preview",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "scripts/check-paid-method-lifecycle-integration.mjs",
+        "scripts/check-controlled-purchase-integration.mjs"
+      ],
+      "sourceFiles": [
+        {
+          "path": "scripts/check-paid-method-lifecycle-integration.mjs",
+          "sha256": "845cd849ae418f6226ef25a3b7f5581bc4f41c92db653adeb060f85aab1f69b8"
+        },
+        {
+          "path": "scripts/check-controlled-purchase-integration.mjs",
+          "sha256": "dfc7225381d0ca263cc46481f70813f5e5901b759bfcd2a65ccd968c04cdcf41"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [],
+      "remainingWork": "五条旅程逐节点执行本地受控预览；发布后再限定账户实付",
+      "nextStep": "五条旅程逐节点执行本地受控预览；发布后再限定账户实付",
+      "progress": "部分",
+      "liveCustomerDoesNotBlockIndependentSource": true
+    },
+    {
+      "id": "W39",
+      "title": "Human review",
+      "status": "PARTIALLY_COMPLETE",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [
+        "MASTER-HUMAN-REVIEW.html"
+      ],
+      "sourceLocations": [
+        "scripts/build-live-customer-master.mjs"
+      ],
+      "sourceFiles": [
+        {
+          "path": "scripts/build-live-customer-master.mjs",
+          "sha256": "19617e8b1e1231f605cc0d30f24a4e1d873a411df1ce12c8e0e4865d6cacccf0"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [],
+      "remainingWork": "逐项填充29类实际材料与差异，不把目录标题视为审阅完成",
+      "nextStep": "逐项填充29类实际材料与差异，不把目录标题视为审阅完成",
+      "progress": "部分",
+      "liveCustomerDoesNotBlockIndependentSource": true
+    },
+    {
+      "id": "W40",
+      "title": "Production release",
+      "status": "NOT_AUTHORIZED",
+      "gates": {
+        "SOURCE": "NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
+        "LIVE_CUSTOMER": "NOT_RUN"
+      },
+      "evidence": [],
+      "sourceLocations": [
+        "content/production-closure/live-customer-commercial-convergence/MASTER-AUTHORITY.txt"
+      ],
+      "sourceFiles": [
+        {
+          "path": "content/production-closure/live-customer-commercial-convergence/MASTER-AUTHORITY.txt",
+          "sha256": "67c321dd393970717377fb4076a9887a2ae2e84c69f42d1ece2b5a7d43c5779c"
+        }
+      ],
+      "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
+      "actualChecks": [],
+      "remainingWork": "仅在明确批准后执行具体部署、迁移及限定账户客户验收",
+      "nextStep": "仅在明确批准后执行具体部署、迁移及限定账户客户验收",
+      "progress": "阻断",
+      "liveCustomerDoesNotBlockIndependentSource": true
+    }
+  ],
+  "journeys": [
+    {
+      "id": "A",
+      "nodes": [
+        "Free BaZi",
+        "Paid Report",
+        "Delivery",
+        "Ask4",
+        "Membership",
+        "My Reality"
+      ],
+      "reached": "付款至持久交付/四问：分别有合成 SQL 与 handler 测试；尚无串联完整报告预览",
+      "missing": "当前完整中英报告接受绑定、producer/renderer、四问答案 UI、取消/再订阅同workspace串联",
+      "evidence": [
+        "CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+        "RECOVERY-check-paid-method-lifecycle-integration.log",
+        "PC-W10-W11-CURRENT-ADMISSION-REVIEW.json"
+      ],
+      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
+      "DEPLOYED": "UNVERIFIED",
+      "LIVE_CUSTOMER": "NOT_RUN"
+    },
+    {
+      "id": "B",
+      "nodes": [
+        "Free Tarot",
+        "RM19 双语+4Ask",
+        "AI Synthesis",
+        "Save My Reality"
+      ],
+      "reached": "免费确定性 runtime/DOM；20次单次合成 QA。订单到双语保存四问未串联",
+      "missing": "真实移动交互、paid订单 synthesis、失败恢复、保存及四问客户端",
+      "evidence": [
+        "FREE-SYMBOLIC-ZERO-PROVIDER.json",
+        "TAROT-INTERACTION-QA.json",
+        "TAROT-COST-QUALITY-REVIEW.json"
+      ],
+      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
+      "DEPLOYED": "UNVERIFIED",
+      "LIVE_CUSTOMER": "NOT_RUN"
+    },
+    {
+      "id": "C",
+      "nodes": [
+        "Free Video",
+        "Paid Video",
+        "My Learning"
+      ],
+      "reached": "媒体登记与大纲；未验证可播放真实方法视频",
+      "missing": "真实资产、受保护媒体、永久购买权益与 Account My Learning",
+      "evidence": [
+        "ACADEMY-MEDIA-INVENTORY.json"
+      ],
+      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
+      "DEPLOYED": "UNVERIFIED",
+      "LIVE_CUSTOMER": "NOT_RUN"
+    },
+    {
+      "id": "D",
+      "nodes": [
+        "Financial",
+        "Human Service",
+        "Appointment Request"
+      ],
+      "reached": "Financial range/unknown 本地投影；服务/预约源码存在；未取得完整提交回读旅程",
+      "missing": "Financial对象到真人服务上下文传递、预约请求持久化与客户回读预览",
+      "evidence": [
+        "QA-RESULTS.json",
+        "BACKEND-CALL-GRAPH.json"
+      ],
+      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
+      "DEPLOYED": "UNVERIFIED",
+      "LIVE_CUSTOMER": "NOT_RUN"
+    },
+    {
+      "id": "E",
+      "nodes": [
+        "Book",
+        "Contextual Ask",
+        "Related Book"
+      ],
+      "reached": "Book问答截断/supporting源码修复；当前BookVII/Ask freeze successor不覆盖",
+      "missing": "Figures dedup合法successor、当前Ask接受凭证、逐册上下文回答和相关书导航预览",
+      "evidence": [
+        "NAVIGATION-MIGRATION-HUMAN-REVIEW.json",
+        "QA-RESULTS.json"
+      ],
+      "SOURCE": "PARTIAL_DISCONNECTED_EVIDENCE",
+      "DEPLOYED": "UNVERIFIED",
+      "LIVE_CUSTOMER": "NOT_RUN"
+    }
+  ],
+  "reviewCoverage": [
+    {
+      "id": 1,
+      "label": "Homepage before / after",
+      "stage": "W05",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "missing": "Bilingual diff review plus actual mobile preview of restored paragraphs"
+    },
+    {
+      "id": 2,
+      "label": "Personal free report",
+      "stage": "W06",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Verify native accepted free reading and same-object paid unlock"
+    },
+    {
+      "id": 3,
+      "label": "Paid report flow",
+      "stage": "W07",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      ],
+      "missing": "Finish eligible producer+renderer admission and exact Checkout/webhook-to-material flow"
+    },
+    {
+      "id": 4,
+      "label": "Four follow-up questions",
+      "stage": "W08",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json"
+      ],
+      "missing": "Wire verified immutable report to paid followup producer, retain four-slot SQL constraints"
+    },
+    {
+      "id": 5,
+      "label": "Membership",
+      "stage": "W09",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Verify paid-through/cancel/resubscribe same-workspace continuity"
+    },
+    {
+      "id": 6,
+      "label": "My Reality",
+      "stage": "W10",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/MY-REALITY-SAVED-SOURCE-QA.json"
+      ],
+      "missing": "Integrate retained histories without backfill or invented history"
+    },
+    {
+      "id": 7,
+      "label": "Ask",
+      "stage": "W11",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Verify per-context reading ownership and accepted sources"
+    },
+    {
+      "id": 8,
+      "label": "Book VIII private",
+      "stage": "W13",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "missing": "核对 VIII 公开不售页面、私有源码及受控图像边界；不公开全文"
+    },
+    {
+      "id": 9,
+      "label": "Academy",
+      "stage": "W15",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Supply actual accepted video assets before purchase eligibility"
+    },
+    {
+      "id": 10,
+      "label": "Tarot paid/free structure",
+      "stage": "W19",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      ],
+      "missing": "重跑确定性路径网络拦截；客户浏览器仍需验证"
+    },
+    {
+      "id": 11,
+      "label": "Tarot paid RM19",
+      "stage": "W20",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Bind paid Tarot single synthesis to verified order/reading/corpus"
+    },
+    {
+      "id": 12,
+      "label": "Tarot AI cost",
+      "stage": "W22",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json"
+      ],
+      "missing": "20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用"
+    },
+    {
+      "id": 13,
+      "label": "I Ching",
+      "stage": "W23",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      ],
+      "missing": "Actual deterministic cast/mobile replay and corpus provenance"
+    },
+    {
+      "id": 14,
+      "label": "Appointment",
+      "stage": "W26",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Verify intake→consent→appointment boundary without paid-live transaction"
+    },
+    {
+      "id": 15,
+      "label": "Financial",
+      "stage": "W27",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "missing": "Verify Financial/Will exact output semantics, retained ranges/unknowns"
+    },
+    {
+      "id": 16,
+      "label": "Will",
+      "stage": "W27",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "missing": "Verify Financial/Will exact output semantics, retained ranges/unknowns"
+    },
+    {
+      "id": 17,
+      "label": "Profile",
+      "stage": "W29",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Current Profile/Academic evidence boundaries and product admission"
+    },
+    {
+      "id": 18,
+      "label": "Relationship",
+      "stage": "W28",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Exact current relationship/cross bounded report admission and inputs"
+    },
+    {
+      "id": 19,
+      "label": "Books",
+      "stage": "W30",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary"
+    },
+    {
+      "id": 20,
+      "label": "Figures",
+      "stage": "W30",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary"
+    },
+    {
+      "id": 21,
+      "label": "World Snapshot",
+      "stage": "W31",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据"
+    },
+    {
+      "id": 22,
+      "label": "Book VI current",
+      "stage": "W31",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据"
+    },
+    {
+      "id": 23,
+      "label": "Account",
+      "stage": "W25",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Actual owned report list/reopen/download, pending generation progress"
+    },
+    {
+      "id": 24,
+      "label": "Commerce",
+      "stage": "W33",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "MASTER-COMMERCE-MAP.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      ],
+      "missing": "完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭"
+    },
+    {
+      "id": 25,
+      "label": "Mobile",
+      "stage": "W32",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "Actual preview mobile bilingual shell and branding, no SOURCE test substitute"
+    },
+    {
+      "id": 26,
+      "label": "Security",
+      "stage": "W35",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "NAV-BATCH-02-QA.json",
+        "NAV-BATCH-03-QA.json",
+        "NAV-BATCH-04-QA.json",
+        "NAV-BATCH-05-ACCEPTANCE.json",
+        "NAV-BATCH-05-QA.json",
+        "NAV-BATCH-06-ACCEPTANCE.json",
+        "NAV-BATCH-06-QA.json",
+        "REPORT-FOLLOWUP-STORE-QA.json",
+        "PRODUCT-TOTAL-COST-QA.json",
+        "MASTER-CURRENT-ZERO-COST-CHECKS.json"
+      ],
+      "missing": "补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试"
+    },
+    {
+      "id": 27,
+      "label": "Provider spend",
+      "stage": "W34",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "TAROT-QA-BUDGET-TESTS.json",
+        "PRODUCT-TOTAL-COST-QA.json"
+      ],
+      "missing": "逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本"
+    },
+    {
+      "id": 28,
+      "label": "SOURCE / DEPLOYED / LIVE",
+      "stage": "W38",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [],
+      "missing": "五条旅程逐节点执行本地受控预览；发布后再限定账户实付"
+    },
+    {
+      "id": 29,
+      "label": "Remaining blockers",
+      "stage": "W39",
+      "status": "PARTIAL_NOT_COMPLETE_REVIEW",
+      "evidence": [
+        "MASTER-HUMAN-REVIEW.html"
+      ],
+      "missing": "逐项填充29类实际材料与差异，不把目录标题视为审阅完成"
+    }
+  ],
+  "supplemental": [
+    {
+      "name": "voucher",
+      "stages": [
+        "W07",
+        "W25",
+        "W33",
+        "W35"
+      ],
+      "files": [
+        "functions/commerce/controlled-purchase-candidate.js",
+        "functions/commerce/commerce-stripe-api.js",
+        "scripts/check-controlled-purchase-integration.mjs"
+      ],
+      "evidence": "CONTROLLED-PURCHASE-INTEGRATION-QA.json",
+      "remaining": "合成 Checkout/webhook/退款13项通过；账户三金额展示与商品准入待补，默认不启用 LIVE"
+    },
+    {
+      "name": "thesis.html",
+      "stages": [
+        "W02",
+        "W03",
+        "W29"
+      ],
+      "files": [
+        "thesis.html",
+        "scripts/restore-recovery-founder-home-thesis.mjs"
+      ],
+      "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+      "remaining": "研究 PDF 缺失，禁用失效下载；补真实版本与可发布路径"
+    },
+    {
+      "name": "Founder",
+      "stages": [
+        "W03",
+        "W05"
+      ],
+      "files": [
+        "about/founder/index.html"
+      ],
+      "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+      "remaining": "V8段落分类与双语适配已写；实质改动待差异审阅和视觉 QA"
+    },
+    {
+      "name": "homepage v8",
+      "stages": [
+        "W03",
+        "W05",
+        "W32"
+      ],
+      "files": [
+        "index.html",
+        "content/web/homepage/hpc2/sources/PHIOS-market-positioning-founder-v8-no-pricing.html"
+      ],
+      "evidence": "FOUNDER-HOME-THESIS-CONTENT-DIFF.json",
+      "remaining": "保留 shell/客户入口并补生活情境；旧三/五册与14Layers不直接恢复"
+    }
+  ],
+  "productionReady": false
+}
