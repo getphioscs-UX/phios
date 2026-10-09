@@ -206,7 +206,20 @@ for (const protectedPath of fixture.protectedPaths) {
       }
       // A candidate and doctrine acceptance are not topology authorization.
       // A reviewed versioned successor is required to admit this migration.
-      assert.fail('PDS_W0_RUNTIME_TOPOLOGY_ACCEPTANCE_PENDING: Navigation migration candidate is registered for review, not accepted');
+      const admission = read('docs/design-system/pds-w0-navigation-topology-successor-v1.json');
+      assert.equal(admission.status, 'EXPLICIT_OWNER_ACCEPTED_ADDITIVE_SOURCE_TOPOLOGY');
+      assert.equal(admission.productionActivation, false);
+      assert.equal(admission.baselineCommit, contract.baseline.commit);
+      assert.equal(admission.candidateSHA256, crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'docs/design-system/pds-w0-navigation-topology-migration-candidate-v1.json'))).digest('hex'));
+      assert.equal(admission.candidateSHA256, '95f119b1fc4987d24ba3d3d88d8c9fb9a5e3b67d8d35abfc50c5f616afccb69e');
+      const acceptedReceipt = read(admission.receiptPath);
+      assert.equal(canonicalTextSha256(admission.receiptPath), admission.receiptSHA256);
+      assert.equal(acceptedReceipt.authority, 'DIRECT_OWNER_MESSAGE');
+      assert.equal(acceptedReceipt.candidateID, candidate.registryCode);
+      assert.equal(acceptedReceipt.candidateSHA256, admission.candidateSHA256);
+      assert.equal(acceptedReceipt.productionActivation, false);
+      assert.deepEqual(acceptedReceipt.acceptedEntries, candidate.entries);
+      assert.deepEqual(admission.entries, candidate.entries);
     }
     continue;
   }
