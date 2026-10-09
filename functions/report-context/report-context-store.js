@@ -22,6 +22,21 @@ export async function loadContextRecord(context,id,kind){
  try{const cipher=JSON.parse(await obj.text());raw=dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(cipher.iv),additionalData:aad(owner,row.person_id,id)},await encryptionKey(context.env),unb64(cipher.ciphertext)));}catch(e){if(e.status===503)throw e;fail('REPORT_CONTEXT_INTEGRITY_FAILED',409);}
  const payload=JSON.parse(raw);if(await digest(raw)!==row.payload_digest||payload.ownerAccountId!==owner||payload.personId!==row.person_id)fail('REPORT_CONTEXT_INTEGRITY_FAILED',409);return payload;
 }
+export async function listOwnedConfirmedRealityBriefs(context){
+ const owner=personIdentity(context).userId;
+ const rows=(await context.env.RUNTIME_DB.prepare("SELECT record_id,person_id,created_at FROM report_context_records WHERE owner_account_id=? AND record_kind='BRIEF' ORDER BY created_at DESC LIMIT 20").bind(owner).all()).results;
+ const items=[];let inaccessible=0;
+ for(const row of rows){
+  try{
+   const subject=await loadCanonicalPersonSubject(context.env,owner,row.person_id);
+   admitPersonUse({userId:owner,person:subject.person,consent:subject.reportConsent,purpose:'REPORT'});
+   const brief=await loadContextRecord(context,row.record_id,'BRIEF');
+   await assertReportRealityBrief(brief,{ownerAccountId:owner,personId:row.person_id,reportProductId:ZIWEI_PRODUCT,methodId:'ZWR'});
+   items.push({recordId:row.record_id,createdAt:row.created_at,asOf:brief.asOf,sourceVersion:brief.schemaVersion,primaryQuestion:brief.primaryQuestion,observations:brief.observations.map(o=>({statement:o.statement,source:o.source,confidence:o.confidence,objectiveFact:false})),historyState:'CUSTOMER_CONFIRMED_REPORT_CONTEXT',sourceClass:'CUSTOMER_SELF_REPORTED_REALITY_BRIEF'});
+  }catch(e){if(e.status===503)throw e;inaccessible++;}
+ }
+ return {items,inaccessible};
+}
 async function access(context,personId,locale){const owner=personIdentity(context).userId;await requireZiweiEntitlement(context,locale);const record=await loadCanonicalPersonSubject(context.env,owner,personId);admitPersonUse({userId:owner,person:record.person,consent:record.reportConsent,purpose:'REPORT'});return owner;}
 export async function processAccountReportContext(context,body){
  requireSameOrigin(context.request);personIdentity(context);
