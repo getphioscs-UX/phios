@@ -8,9 +8,10 @@ export function monitorVisual(img,asset,locale='en'){
  const host=img.closest('figure')||img.parentElement;
  const set=(state,extra={})=>{img.dataset.visualState=state;host.dataset.visualState=state;recordVisual(asset,state,extra);};
  set('BOUND');
- const fail=state=>{set(state);img.hidden=true;let fallback=host.querySelector('[data-visual-fallback]');if(!fallback){fallback=img.ownerDocument.createElement('p');fallback.dataset.visualFallback='';fallback.setAttribute('role','status');host.append(fallback);}fallback.textContent=locale==='zh-Hans'?'插画暂时无法显示；年代、来源与结构化资料仍可阅读。':'Illustration unavailable. Dates, sources and structured information remain readable.';};
+ const fail=(state,extra={})=>{set(state,extra);img.hidden=true;let fallback=host.querySelector('[data-visual-fallback]');if(!fallback){fallback=img.ownerDocument.createElement('p');fallback.dataset.visualFallback='';fallback.setAttribute('role','status');host.append(fallback);}fallback.textContent=locale==='zh-Hans'?'插画暂时无法显示；年代、来源与结构化资料仍可阅读。':'Illustration unavailable. Dates, sources and structured information remain readable.';};
  img.addEventListener('error',()=>fail('R2_HTTP_ERROR'),{once:true});
- let processed=false;const loaded=async()=>{if(processed)return;processed=true;try{await img.decode();set('DECODED');requestAnimationFrame(()=>{const rect=img.getBoundingClientRect(),style=getComputedStyle(img);set(rect.width>0&&rect.height>0&&style.display!=='none'&&!img.closest('details:not([open])')?'VISIBLE':'HIDDEN_BY_LAYOUT',{width:rect.width,height:rect.height});});}catch{fail('DECODE_FAILED');}};
+ const transferTimer=setTimeout(()=>{if(!img.complete||!img.naturalWidth)fail('R2_HTTP_ERROR',{reason:'TRANSFER_TIMEOUT'});},25000);
+ let processed=false;const loaded=async()=>{if(processed)return;processed=true;clearTimeout(transferTimer);try{await img.decode();img.hidden=false;host.querySelector('[data-visual-fallback]')?.remove();set('DECODED');requestAnimationFrame(()=>{const rect=img.getBoundingClientRect(),style=getComputedStyle(img);set(rect.width>0&&rect.height>0&&style.display!=='none'&&!img.closest('details:not([open])')?'VISIBLE':'HIDDEN_BY_LAYOUT',{width:rect.width,height:rect.height});});}catch{fail('DECODE_FAILED');}};
  img.addEventListener('load',loaded,{once:true});
  if(img.complete&&img.naturalWidth)loaded();
  set('R2_REQUESTED');return {fail};
