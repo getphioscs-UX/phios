@@ -1,0 +1,6985 @@
+# NAV-21｜Non-Exchangeable Condition
+
+## 不可交换条件｜哪些条件不能被拿来交换
+
+**Canonical Question｜规范问题**
+
+> **当多个价值彼此冲突时，哪些条件可以权衡，哪些条件一旦被突破，就不应该再被当成普通交换项？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-21
+```
+
+## 2. `canonicalTitleZh`
+
+```
+不可交换条件
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Non-Exchangeable Condition
+```
+
+## 4. `canonicalQuestion`
+
+```
+当多个价值彼此冲突时，
+哪些条件可以权衡，
+哪些条件一旦被突破，
+就不应该再被当成普通交换项？
+```
+
+---
+
+# 5. `definition`
+
+**Non-Exchangeable Condition** 是 Navigation 对“哪些条件不能继续被放进普通 trade-off 计算”进行正式识别的机制。
+
+它不是宣称：
+
+> “这些东西永远不能改变。”
+
+也不是要求系统替用户制定一套绝对道德规则。
+
+它真正处理的是：
+
+> **在当前这个具体决定里，哪些条件一旦低于某个边界，就不能再用更多收入、更高效率、更快成长、更大机会或其他收益来普通补偿？**
+
+例如：
+
+```
+更高收入
+```
+
+通常可以与：
+
+```
+更长工时
+更多责任
+更少自由时间
+```
+
+进行某种程度的交换。
+
+但如果某个方案意味着：
+
+```
+基本住房无法维持
+必要医疗无法继续
+依赖者基本照护被中断
+用户明确拒绝的重大风险被强迫接受
+合法 consent 缺失
+```
+
+那么这些条件就不能继续作为：
+
+```
+“只要回报够高就可以接受”
+```
+
+的普通变量。
+
+因此：
+
+> **NAV-21 的核心，是在价值冲突中建立底线，防止系统把所有现实都压成可以互相换算的权重。**
+
+---
+
+# 6. `navigationMeaning`
+
+在 NAV-19 和 NAV-20 之后，我们已经知道：
+
+```
+什么值得保留
+目标与价值不是一回事
+一个目标可能同时保护和伤害不同价值
+```
+
+但如果没有 NAV-21，系统仍可能产生一种危险的“总分思维”：
+
+```
+收入 +30
+自由 -20
+家庭 -15
+职业成长 +25
+总分 = +20
+所以接受
+```
+
+这种结构默认：
+
+> 所有东西最终都可以互相抵消。
+
+Navigation 必须拒绝这一点。
+
+因为现实中有些条件属于：
+
+```
+TRADEABLE
+```
+
+有些属于：
+
+```
+THRESHOLD-BOUND
+```
+
+还有一些在当前决策里已经成为：
+
+```
+NON-EXCHANGEABLE
+```
+
+因此 NAV-21 建立：
+
+```
+Goal–Value Alignment
++
+Preservation Requirements
+↓
+Identify Tradeable Conditions
+↓
+Identify Threshold-Bound Conditions
+↓
+Confirm Non-Exchangeable Conditions
+↓
+Constrain Option Space
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-21 最低需要：
+
+```
+confirmedDecisionObject
+goalValueAlignmentMap
+preservationRequirements
+decisionOwner
+affectedParties
+materialRequirements
+responsibilityRequirements
+```
+
+如果系统没有合法依据确认某条件不可交换，则必须保留：
+
+```
+NON_EXCHANGEABILITY_UNCONFIRMED
+```
+
+不能擅自制造底线。
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+relationshipContext
+legalOrContractualContext
+professionalInput
+careContext
+estateContext
+timeHorizonMap
+reversibilityProfile
+priorNavigationState
+userExplicitNonNegotiables
+```
+
+这些用于判断：
+
+- 什么是 preference；
+- 什么是 material minimum；
+- 什么是责任；
+- 什么是 consent；
+- 什么是用户明确确认的不可交换条件。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_CONFIRMED_NON_NEGOTIABLE
+MATERIAL_REQUIREMENT
+LEGAL_REQUIREMENT
+RESPONSIBILITY_REQUIREMENT
+CONSENT_REQUIREMENT
+PROFESSIONAL_REQUIREMENT
+SHARED_DECISION_REQUIREMENT
+USER_STATED_VALUE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+```
+
+但只有前六类以及合法 shared-decision confirmation 可以直接支持：
+
+```
+NON_EXCHANGEABLE
+```
+
+Profile、BaZi、Zi Wei、Astrology、HD、Tarot、I Ching 等只能生成：
+
+```
+CHECK_CANDIDATE
+```
+
+不能建立底线。
+
+---
+
+# 10. Core Exchangeability States
+
+建议至少区分：
+
+```
+TRADEABLE
+TRADEABLE_WITH_LIMIT
+THRESHOLD_BOUND
+NON_EXCHANGEABLE
+NON_EXCHANGEABILITY_UNCONFIRMED
+CONDITION_NOT_APPLICABLE
+```
+
+---
+
+## A. `TRADEABLE`
+
+用户允许在合理范围内进行交换。
+
+例如：
+
+```
+通勤时间
+职位名称
+某些消费水平
+办公地点偏好
+```
+
+---
+
+## B. `TRADEABLE_WITH_LIMIT`
+
+可以交换，但不能无限交换。
+
+例如：
+
+```
+free time
+liquidity
+workload
+location distance
+```
+
+用户可能愿意牺牲一部分，但存在边界。
+
+---
+
+## C. `THRESHOLD_BOUND`
+
+一旦低于某个门槛，方案就必须重新判断。
+
+例如：
+
+```
+minimum cash buffer
+minimum sleep / recovery condition
+maximum debt service burden
+minimum caregiving availability
+```
+
+具体 threshold 必须有合法来源。
+
+---
+
+## D. `NON_EXCHANGEABLE`
+
+在当前 Decision Object 中，一旦违反，该方案不能仅靠其他收益重新取得资格。
+
+例如：
+
+```
+required consent
+basic dependant protection
+legal requirement
+explicit safety boundary
+user-confirmed non-negotiable
+```
+
+---
+
+## E. `NON_EXCHANGEABILITY_UNCONFIRMED`
+
+系统怀疑某项条件可能是底线，但没有足够 authority。
+
+必须让用户或专业人士确认。
+
+---
+
+# 11. `allowedInference`
+
+NAV-21 可以：
+
+## A. 从明确责任推导不可普通交换
+
+例如：
+
+```
+dependant requires essential care
+```
+
+则不能简单写成：
+
+```
+higher salary compensates for no care arrangement
+```
+
+---
+
+## B. 从合法 consent 要求建立 option gate
+
+例如：
+
+```
+joint property sale
+```
+
+另一产权人未同意：
+
+```
+CONSENT_REQUIRED
+```
+
+则该方案不能因为：
+
+```
+high financial gain
+```
+
+绕过 consent。
+
+---
+
+## C. 从 material minimum 建立 threshold-bound condition
+
+例如：
+
+```
+usable liquidity must remain above confirmed minimum
+```
+
+可以形成：
+
+```
+THRESHOLD_BOUND
+```
+
+---
+
+## D. 识别用户明确的 non-negotiable
+
+例如用户说：
+
+> 我可以接受少赚一点，但我不会接受长期离开孩子。
+
+系统可以将：
+
+```
+long-term separation from child
+```
+
+记为：
+
+```
+USER_CONFIRMED_NON_NEGOTIABLE
+```
+
+前提是范围足够清楚。
+
+---
+
+## E. 识别所谓“底线”其实只是当前偏好
+
+例如：
+
+> 我一定要留在这家公司。
+
+如果真正想保护的是：
+
+```
+income continuity
+```
+
+则“公司本身”未必具有 non-exchangeable 资格。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-21 严禁：
+
+## A. 用系统价值观替用户建立底线
+
+禁止：
+
+```
+family must always outrank career
+```
+
+---
+
+## B. 用 Profile 自动产生 non-negotiable
+
+禁止：
+
+```
+Profile shows autonomy
+→ autonomy is non-exchangeable
+```
+
+---
+
+## C. 用 Method Reading 建立命定底线
+
+禁止：
+
+```
+BaZi shows family axis
+→ family is non-exchangeable
+```
+
+---
+
+## D. 把强烈偏好自动升级成绝对条件
+
+```
+really important
+≠
+non-exchangeable
+```
+
+---
+
+## E. 把所有安全感诉求都变成无限保守
+
+例如：
+
+```
+financial security
+```
+
+不等于：
+
+```
+zero financial risk allowed
+```
+
+---
+
+## F. 把 non-exchangeable 变成永久跨场景规则
+
+某条件可能只对：
+
+```
+THIS DECISION
+THIS TIME HORIZON
+THIS RESPONSIBILITY STATE
+```
+
+不可交换。
+
+未来可以重新打开。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-21 主要影响：
+
+```
+OPTION_ELIGIBILITY
+OPTION_REJECTION_GATE
+PRESERVATION_FLOOR
+DECISION_THRESHOLD
+CONSENT_REQUIREMENT
+ESCALATION_REQUIREMENT
+```
+
+核心 effect：
+
+```
+HARD_CONSTRAINT_FORMATION
+```
+
+---
+
+# 14. `decisionThresholdEffect`
+
+一旦方案违反：
+
+```
+NON_EXCHANGEABLE
+```
+
+它不能通过：
+
+```
+higher score
+more upside
+more methods agreeing
+higher financial return
+```
+
+重新抵消。
+
+冻结规则：
+
+```
+NON_EXCHANGEABLE VIOLATION
+→ OPTION_NOT_CURRENTLY_ELIGIBLE
+```
+
+但要注意：
+
+```
+OPTION
+```
+
+可以被重新设计。
+
+例如：
+
+原方案：
+
+```
+take overseas role alone for 5 years
+```
+
+违反：
+
+```
+user-confirmed family-presence condition
+```
+
+不代表：
+
+```
+all overseas opportunities forbidden
+```
+
+可以设计：
+
+```
+family relocation
+short assignment
+hybrid rotation
+```
+
+新的候选。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-21 可以：
+
+- 建立 exchangeability class；
+- 建立硬性 option gate；
+- 保留 threshold；
+- 阻止总分抵消；
+- 触发方案重新设计；
+- 识别 consent / legal / responsibility boundary。
+
+NAV-21 不可以：
+
+- 替用户制定人生道德底线；
+- 把 preference 伪装成 hard constraint；
+- 用解释系统设底线；
+- 把当前 non-exchangeable 永久化；
+- 因一个方案失败而关闭整个方向。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+除：
+
+```
+legal
+professional
+consent
+dependant / responsibility
+```
+
+等有外部 authority 的条件外，
+
+个人性 non-exchangeable 必须由合法 decision owner 确认。
+
+用户至少应能够：
+
+```
+Confirm
+Downgrade to threshold-bound
+Downgrade to preference
+Clarify scope
+Remove
+```
+
+因此：
+
+```
+systemSuggestedNonNegotiable
+```
+
+不得直接变成：
+
+```
+confirmedNonNegotiable
+```
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.23｜价值什么时候彼此冲突
+15.26｜哪些损失可以交换，哪些不能
+```
+
+相关：
+
+```
+15.21｜改变以前，先确认什么不能被无意失去
+15.22｜目标不是价值本身
+15.24｜改变不是把旧世界全部清空
+15.25｜替代方案必须保护什么
+15.27｜今天得到的东西，会不会关闭明天
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+conflicting commitments
+choice
+responsibility
+```
+
+NAV-21 不重新解释价值冲突如何产生。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+minimum continuity conditions
+```
+
+帮助识别：
+
+```
+哪些条件一旦失去，系统无法继续承担
+```
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+authority boundary
+uncertainty
+evidence state
+```
+
+支持：
+
+> **“我怀疑这可能是底线”与“它已经被确认成底线”必须分开。**
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以产生：
+
+```
+NON_NEGOTIABLE_CHECK_CANDIDATE
+```
+
+例如：
+
+```
+autonomy
+stability
+connection
+meaning
+```
+
+但必须经过 Human Confirmation。
+
+---
+
+# 20. `financialConsumer`
+
+Financial 可以产生较强的：
+
+```
+MATERIAL_THRESHOLD
+```
+
+例如：
+
+```
+minimum liquidity
+minimum debt service capacity
+minimum dependant support
+minimum housing continuity
+```
+
+但具体数值不能由 Navigation 随意生成。
+
+必须来自：
+
+```
+financial record
+user confirmation
+professional input
+explicit planning rule
+```
+
+---
+
+# 21. `methodConsumer`
+
+所有 Method：
+
+```
+AST
+BAZI
+ZIWEI
+NUM
+HD
+ECR
+Tarot
+I Ching
+```
+
+最多只能：
+
+```
+surface possible value tension
+```
+
+绝不能建立：
+
+```
+NON_EXCHANGEABLE
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+whatWouldActuallyBeLost
+whoWouldBeAffected
+whatCanBeRestored
+whatCannotBeRestored
+whatRequirementCurrentlyExists
+```
+
+帮助区分：
+
+```
+real boundary
+vs
+anticipated fear
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-21 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Shared Decision Runtime
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **Not everything that matters belongs in a trade-off table.**
+
+中文：
+
+> **并不是所有重要的东西，都应该被放进一张可以彼此抵消的交换表。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-21：
+
+```
+userChangesNonNegotiable
+responsibilityChanges
+dependantChanges
+legalRequirementChanges
+consentChanges
+materialMinimumChanges
+professionalInputChanges
+optionRedesigned
+timeHorizonChanges
+currentRealityChanges
+```
+
+---
+
+# 26. Canonical Non-Exchangeable Model
+
+建议：
+
+```
+{
+  "nonExchangeableAssessmentId": "",
+  "decisionObjectId": "",
+  "conditions": [
+    {
+      "conditionId": "",
+      "description": "",
+      "state": "TRADEABLE | TRADEABLE_WITH_LIMIT | THRESHOLD_BOUND | NON_EXCHANGEABLE | NON_EXCHANGEABILITY_UNCONFIRMED | CONDITION_NOT_APPLICABLE",
+      "authority": "",
+      "scope": "",
+      "threshold": null,
+      "reason": "",
+      "sources": [],
+      "revisionTriggers": []
+    }
+  ],
+  "violations": [],
+  "optionEffects": [],
+  "unknowns": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Trade-Off Firewall
+
+冻结：
+
+> **A non-exchangeable condition must not be restored to eligibility merely by adding enough benefits elsewhere.**
+
+中文：
+
+> **一个已经确认的不可交换条件，不能因为其他地方累积了足够多的收益，就重新被总分抵消。**
+
+这是 PHI OS Navigation 必须明确拒绝的：
+
+```
+weighted-score domination
+```
+
+---
+
+# 28. Threshold-Bound Rule
+
+很多条件并不是完全不可交换，而是：
+
+```
+tradeable until threshold
+```
+
+例如：
+
+```
+liquidity
+workload
+commute
+travel
+```
+
+因此：
+
+```
+THRESHOLD_BOUND
+```
+
+与：
+
+```
+NON_EXCHANGEABLE
+```
+
+必须严格分开。
+
+---
+
+# 29. Scope Rule
+
+每个 non-exchangeable 都必须说明：
+
+```
+for whom?
+for which decision?
+for which time horizon?
+under what condition?
+```
+
+例如：
+
+```
+“不能搬家”
+```
+
+太宽。
+
+更合理的是：
+
+```
+“在孩子当前学年结束以前，不接受会中断现有照护和学校安排的长期搬迁。”
+```
+
+这才是可运行边界。
+
+---
+
+# 30. Responsibility Rule
+
+如果条件来自责任：
+
+例如：
+
+```
+child safety
+dependant support
+joint ownership
+```
+
+则不能只因为用户个人愿意牺牲就自动删除。
+
+必须读取：
+
+```
+NAV-08 Authority
+```
+
+以及受影响者的合法利益。
+
+---
+
+# 31. Consent Rule
+
+冻结：
+
+```
+CONSENT
+≠
+TRADEABLE BENEFIT
+```
+
+不能出现：
+
+```
+“虽然对方没有同意，但这方案对家庭整体更有利。”
+```
+
+来绕过真实 consent requirement。
+
+---
+
+# 32. Hard Constraint vs Preference Rule
+
+例如：
+
+```
+I don't like commuting
+```
+
+通常是：
+
+```
+PREFERENCE / TRADEABLE_WITH_LIMIT
+```
+
+而：
+
+```
+I cannot physically sustain a 3-hour daily commute under confirmed current constraints
+```
+
+可能进入：
+
+```
+THRESHOLD_BOUND
+```
+
+具体必须依证据处理。
+
+---
+
+# 33. Non-Exchangeability vs Fear Rule
+
+“我很怕失去 X”不自动建立：
+
+```
+NON_EXCHANGEABLE
+```
+
+Navigation 应继续拆：
+
+```
+What exactly must remain?
+What would actually happen if it changed?
+Is there another carrier?
+Can it be restored?
+```
+
+---
+
+# 34. Non-Exchangeability vs Identity Rule
+
+例如：
+
+```
+“I must remain a doctor.”
+```
+
+可能实际保护：
+
+```
+professional identity
+income
+meaning
+social status
+```
+
+系统不能自动把：
+
+```
+specific job form
+```
+
+变成 non-exchangeable。
+
+---
+
+# 35. Option Gate Rule
+
+如果某候选违反已确认：
+
+```
+NON_EXCHANGEABLE
+```
+
+应标记：
+
+```
+OPTION_BLOCKED_BY_NON_EXCHANGEABLE_CONDITION
+```
+
+而不是简单删除。
+
+这样系统保留：
+
+```
+why blocked
+which condition
+whether redesign is possible
+```
+
+---
+
+# 36. Option Redesign Rule
+
+当一个方案被 block 时，应允许问：
+
+> 能否修改方案，使其不再违反该条件？
+
+例如：
+
+```
+Option A:
+quit immediately
+```
+
+违反：
+
+```
+minimum income continuity
+```
+
+可生成：
+
+```
+Option A2:
+secure next income source first, then exit
+```
+
+不是降低底线，而是修改路径。
+
+---
+
+# 37. Multiple Non-Exchangeables
+
+多个底线之间也可能冲突。
+
+例如：
+
+```
+MUST maintain dependant care
+MUST avoid unsafe debt level
+```
+
+而当前资源不足以同时维持。
+
+此时不能假装有简单解。
+
+必须标记：
+
+```
+NON_EXCHANGEABLE_CONFLICT
+```
+
+并可能：
+
+```
+ESCALATION_REQUIRED
+```
+
+---
+
+# 38. No Fake Precision Rule
+
+如果用户说：
+
+> “我至少需要一定现金缓冲。”
+
+系统不能自行写成：
+
+```
+RM30,000
+```
+
+必须保留：
+
+```
+THRESHOLD_NOT_YET_QUANTIFIED
+```
+
+直到有合法来源。
+
+---
+
+# 39. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Take overseas role
+
+Confirmed Values:
+career growth
+financial security
+family continuity
+
+Conditions:
+higher income = TRADEABLE BENEFIT
+career growth = VALUE
+family continuity = THRESHOLD_BOUND
+childcare continuity = NON_EXCHANGEABLE
+partner consent = CONSENT_REQUIRED
+```
+
+客户可以看到：
+
+> **现在不是所有条件都应该被放进同一张得失表。**
+> 
+> 海外职位带来的收入和职业成长都是真实收益，但当前家庭安排里有两个条件不能只靠“收益更大”来抵消：孩子的基本照护必须持续存在，而伴侣是否共同接受这项家庭结构改变，也需要真实同意。
+> 
+> 这并不意味着海外机会被永久排除；它意味着“你一个人先过去、家庭安排以后再想”的这个版本目前没有资格。真正需要比较的是，能否重新设计一个同时满足照护连续性与共同决定边界的版本。
+
+---
+
+# 40. Customer Actions
+
+允许：
+
+```
+Confirm non-exchangeable
+Downgrade to threshold-bound
+Set threshold
+Clarify scope
+Remove condition
+Add condition
+Redesign option
+Request shared decision
+Request professional review
+Continue
+```
+
+---
+
+# 41. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+NON_EXCHANGEABLES_IDENTIFIED
+THRESHOLDS_PENDING
+NON_EXCHANGEABLE_CONFLICT
+OPTION_BLOCKED
+OPTION_REDESIGN_REQUIRED
+READY_FOR_MINIMUM_STATE
+REOPENED
+```
+
+---
+
+# 42. Fail-Closed Conditions
+
+以下情况不得进入 NAV-22：
+
+```
+nonExchangeableAssertedWithoutAuthority
+criticalConsentIgnored
+responsibilityBoundaryIgnored
+thresholdInvented
+preferenceMisclassifiedAsHardConstraint
+symbolicReadingUsedAsNonExchangeableAuthority
+affectedPartyIgnored
+hardConstraintHiddenInsideWeightedScore
+decisionObjectChanged
+```
+
+---
+
+# 43. Canonical Runtime Rule
+
+> **Navigation must distinguish what may be traded from what may only be traded within limits, and from what cannot be compensated for by unrelated gains.**
+
+中文：
+
+> **Navigation 必须区分哪些条件可以交换、哪些只能在边界内交换，以及哪些条件不能靠其他无关收益来补偿。**
+
+---
+
+# 44. Canonical Non-Compensation Rule
+
+> **A confirmed non-exchangeable condition cannot be outweighed by accumulating benefits elsewhere.**
+
+中文：
+
+> **一个已经确认的不可交换条件，不能因为其他地方累积了更多收益，就被总分覆盖。**
+
+---
+
+# 45. Canonical Scope Rule
+
+> **Non-exchangeability must be scoped to the decision, person, time horizon, and authority that make the condition binding.**
+
+中文：
+
+> **不可交换条件必须明确限定于使其成立的具体决定、相关主体、时间尺度与权威边界，而不能被无限扩大。**
+
+---
+
+# 46. Canonical Redesign Rule
+
+> **When an option violates a non-exchangeable condition, Navigation should first ask whether the option can be redesigned before treating the entire direction as unavailable.**
+
+中文：
+
+> **当一个选项违反不可交换条件时，Navigation 应先判断能否重新设计这个选项，而不是立刻把整个方向永久关闭。**
+
+---
+
+# 47. Canonical Human Authority Rule
+
+> **Personal non-negotiables require confirmation by the legitimate decision-maker; legal, consent, professional, and responsibility boundaries retain their own independent authority.**
+
+中文：
+
+> **个人不可交换条件必须由真正拥有决定权的人确认；法律、同意、专业与责任边界则保留各自独立的现实权威。**
+
+---
+
+# 48. Final Canonical Form
+
+```
+NAV-21
+NON-EXCHANGEABLE CONDITION
+```
+
+**Input**
+
+```
+Goal–Value Alignment
++
+Preservation Requirements
++
+Responsibilities
++
+Authority / Consent
++
+Material Minimums
+```
+
+**Process**
+
+```
+Classify:
+Tradeable
+Tradeable With Limit
+Threshold-Bound
+Non-Exchangeable
+Unconfirmed
+```
+
+**Output**
+
+```
+Exchangeability Map
++
+Hard Constraint Set
++
+Blocked / Redesignable Options
+```
+
+**Boundary**
+
+```
+Not everything can be reduced to trade-off.
+A blocked option does not necessarily mean a blocked direction.
+```
+
+# NAV-22｜Minimum Acceptable State
+
+## 最低可接受状态｜最差到什么程度以后，这个方案就不再值得接受
+
+**Canonical Question｜规范问题**
+
+> **当一个方案不是完美方案时，我们怎样确认它最差仍必须保持到什么程度，才有资格继续被接受？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-22
+```
+
+## 2. `canonicalTitleZh`
+
+```
+最低可接受状态
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Minimum Acceptable State
+```
+
+## 4. `canonicalQuestion`
+
+```
+当一个方案不是完美方案时，
+我们怎样确认它最差仍必须保持到什么程度，
+才有资格继续被接受？
+```
+
+---
+
+# 5. `definition`
+
+**Minimum Acceptable State** 是 Navigation 对“一个候选方案最差可以坏到哪里，仍然算在可承担范围内”进行正式定义的机制。
+
+它不是：
+
+```
+ideal outcome
+```
+
+也不是：
+
+```
+best case
+```
+
+更不是：
+
+```
+prediction of what will happen
+```
+
+它真正回答的是：
+
+> **如果这个方案最后没有按理想方式发展，它至少必须保住什么，才仍然值得被考虑？**
+
+例如，一个人准备转换工作结构。
+
+理想情况可能是：
+
+```
+更高收入
+更大自主性
+更少工时
+更好的成长
+```
+
+但 Navigation 不能只看理想情况。
+
+它还必须问：
+
+> 如果新工作没有带来更高收入，但至少能保持收入稳定、基本医疗保障、家庭责任和合理工作时间，这个结果是否仍然可以接受？
+
+如果答案是“可以”，那么这些条件就构成：
+
+```
+MINIMUM_ACCEPTABLE_STATE
+```
+
+如果一个方案最差可能跌破这些条件，却没有现实恢复路径，它的资格就会显著下降。
+
+因此：
+
+> **NAV-22 的核心，不是要求所有结果都很好，而是明确什么叫“即使没有如愿，现实仍然没有跌出可以承担的范围”。**
+
+---
+
+# 6. `navigationMeaning`
+
+现实中的重大决定几乎都存在不确定性。
+
+如果系统只允许：
+
+```
+perfect outcome
+```
+
+才进入行动，那么很多真实决定永远无法进行。
+
+但如果系统只问：
+
+```
+best case looks attractive?
+```
+
+又会低估坏结果。
+
+因此 NAV-22 建立的不是：
+
+```
+perfect certainty
+```
+
+而是：
+
+```
+acceptable downside boundary
+```
+
+Navigation 需要从：
+
+```
+What do we hope happens?
+```
+
+继续进入：
+
+```
+If reality is worse than hoped,
+what still needs to remain true?
+```
+
+于是形成：
+
+```
+Candidate Option
+↓
+Expected Upside
+↓
+Possible Downside
+↓
+Minimum Acceptable State
+↓
+Can the option remain above that floor?
+```
+
+这会成为后续 NAV-23–25 Scenario Space 与 Exit / Recovery Route 的核心基础。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-22 最低需要：
+
+```
+confirmedDecisionObject
+preservationRequirements
+nonExchangeableConditions
+materialRequirements
+responsibilityRequirements
+candidateOptionOrDirection
+currentPosition
+```
+
+如果尚未形成具体候选方案，可以先建立：
+
+```
+DECISION_LEVEL_MINIMUM_STATE
+```
+
+即：
+
+> 不论选择哪条路，哪些最低状态都必须被保护？
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+reversibilityProfile
+timeHorizonMap
+capacityQualificationState
+relationshipContext
+professionalInput
+legalOrContractualContext
+structuralAlternativeState
+priorNavigationState
+```
+
+这些用于判断：
+
+- 最低状态是否现实；
+- 哪些条件属于硬底线；
+- 哪些只是 preferred state；
+- 某个方案最坏情况下是否仍能维持底线；
+- 是否存在 recovery path。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_CONFIRMED_MINIMUM
+MATERIAL_REQUIREMENT
+LEGAL_REQUIREMENT
+RESPONSIBILITY_REQUIREMENT
+CONSENT_REQUIREMENT
+PROFESSIONAL_REQUIREMENT
+FINANCIAL_THRESHOLD
+CURRENT_REALITY
+USER_STATED_PREFERENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+```
+
+但只有前八类可以直接帮助建立：
+
+```
+MINIMUM_ACCEPTABLE_STATE
+```
+
+Profile / Method 只能提出：
+
+```
+MINIMUM_STATE_CHECK_CANDIDATE
+```
+
+---
+
+# 10. Core Minimum-State Classes
+
+建议至少区分：
+
+```
+HARD_MINIMUM
+FUNCTIONAL_MINIMUM
+TEMPORARY_MINIMUM
+RECOVERY_MINIMUM
+PREFERRED_MINIMUM
+MINIMUM_UNCONFIRMED
+```
+
+---
+
+## A. `HARD_MINIMUM`
+
+一旦跌破，就直接违反：
+
+```
+non-exchangeable
+legal
+consent
+safety
+dependant
+critical responsibility
+```
+
+等要求。
+
+例如：
+
+```
+basic housing continuity
+required dependant support
+required consent
+legal compliance
+```
+
+---
+
+## B. `FUNCTIONAL_MINIMUM`
+
+低于这个状态，方案虽然未必违法或危险，但现实已经不能正常运行。
+
+例如：
+
+```
+minimum viable monthly cash flow
+minimum operational staffing
+minimum care coverage
+minimum time available for essential responsibilities
+```
+
+---
+
+## C. `TEMPORARY_MINIMUM`
+
+在明确时间边界内可以暂时接受较低状态。
+
+例如：
+
+```
+3 months lower income
+6 weeks higher workload
+temporary reduced savings
+```
+
+但必须同时定义：
+
+```
+duration
+recovery condition
+review point
+```
+
+---
+
+## D. `RECOVERY_MINIMUM`
+
+如果事情发展不如预期，至少要保留足够条件让系统能够恢复。
+
+例如：
+
+```
+minimum liquidity after failure
+minimum employability
+minimum housing continuity
+minimum legal exit path
+minimum support network
+```
+
+这与 NAV-06 Reversibility 直接连接。
+
+---
+
+## E. `PREFERRED_MINIMUM`
+
+用户希望维持，但尚未确认其为真正 hard floor。
+
+必须与：
+
+```
+HARD_MINIMUM
+```
+
+严格分开。
+
+---
+
+## F. `MINIMUM_UNCONFIRMED`
+
+系统知道这里需要边界，但合法 threshold 尚未确认。
+
+---
+
+# 11. Minimum State Dimensions
+
+建议至少检查：
+
+```
+FINANCIAL
+HOUSING
+CARE
+HEALTH_ACCESS
+TIME
+RECOVERY
+RELATIONSHIP
+LEGAL
+CONSENT
+RESPONSIBILITY
+OPERATIONAL
+OPTIONALITY
+IDENTITY / ROLE CONTINUITY
+```
+
+这些不是每次全部强制。
+
+只选择与当前 Decision Object 有现实关系的部分。
+
+---
+
+# 12. `allowedInference`
+
+NAV-22 可以：
+
+## A. 从 NAV-21 的 non-exchangeable 推导 hard minimum
+
+例如：
+
+```
+Non-exchangeable:
+childcare continuity
+```
+
+则最低可接受状态必须包括：
+
+```
+childcare remains adequately covered
+```
+
+---
+
+## B. 从 financial reality 建立 material floor
+
+例如：
+
+用户确认：
+
+```
+monthly essential expenditure = RM8,000
+```
+
+并且：
+
+```
+no alternative support
+```
+
+那么候选方案不能假设：
+
+```
+RM3,000/month income
+```
+
+仍然属于现实可接受状态，除非存在其他已确认资源。
+
+---
+
+## C. 区分短期低状态与长期低状态
+
+例如：
+
+```
+income falls 20%
+```
+
+如果只是：
+
+```
+3-month transition
+```
+
+可能属于 TEMPORARY_MINIMUM 可接受范围。
+
+如果变成：
+
+```
+indefinite
+```
+
+则需要重新判断。
+
+---
+
+## D. 识别最低状态需要跨领域共同成立
+
+例如：
+
+```
+financial minimum met
+```
+
+但：
+
+```
+care responsibility completely uncovered
+```
+
+仍不能称方案满足最低状态。
+
+---
+
+## E. 识别某些最低状态可以通过替代 carrier 维持
+
+例如：
+
+```
+medical coverage
+```
+
+不一定必须通过当前 employer 提供。
+
+只要：
+
+```
+new employer
+private plan
+spouse coverage
+```
+
+合法建立，也可以满足 minimum state。
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-22 严禁：
+
+## A. 自动把理想目标设成最低状态
+
+例如：
+
+```
+ideal income = RM20k
+```
+
+不能自动变成：
+
+```
+minimum acceptable income = RM20k
+```
+
+---
+
+## B. 把当前生活方式自动冻结成最低状态
+
+```
+current lifestyle
+≠
+minimum viable reality
+```
+
+---
+
+## C. 用 Profile 建立数字 threshold
+
+禁止：
+
+```
+Profile says security important
+→ minimum savings = RM50k
+```
+
+---
+
+## D. 用 Method Reading 建立现实底线
+
+禁止：
+
+```
+BaZi says wealth pressure
+→ minimum liquidity increased
+```
+
+---
+
+## E. 把“我不喜欢”自动变成 minimum violation
+
+不喜欢与不能接受必须分开。
+
+---
+
+## F. 因为方案可能低于 minimum 就宣称一定会低于 minimum
+
+Scenario ≠ Outcome。
+
+---
+
+# 14. `decisionEffect`
+
+NAV-22 主要影响：
+
+```
+OPTION_ELIGIBILITY
+DOWNSIDE_ACCEPTABILITY
+SCENARIO_FILTER
+EXIT_REQUIREMENT
+RECOVERY_REQUIREMENT
+DECISION_THRESHOLD
+ACTION_SCALE
+```
+
+核心 effect：
+
+```
+MINIMUM_STATE_GATE
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+如果一个候选方案的合理 downside scenario 可能跌破：
+
+```
+HARD_MINIMUM
+```
+
+而又没有：
+
+```
+reliable prevention
+exit route
+recovery capacity
+```
+
+则需要：
+
+```
+higher decision sufficiency
+or
+option redesign
+or
+option block
+```
+
+冻结关系：
+
+> **The closer a plausible downside comes to the minimum acceptable state, the stronger the evidence, reversibility, and recovery requirements become.**
+
+中文：
+
+> **一个合理可能的坏结果越接近最低可接受状态，所需要的证据、可逆性与恢复条件就必须越强。**
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-22 可以：
+
+- 建立最低状态；
+- 建立 hard / functional / temporary minimum；
+- 检查方案 downside；
+- 建立 option gate；
+- 要求 exit / recovery；
+- 触发方案 redesign。
+
+NAV-22 不可以：
+
+- 替用户发明生活底线；
+- 把理想目标伪装成 minimum；
+- 用方法系统建立物质底线；
+- 把 scenario 当 outcome；
+- 因存在 downside 就自动拒绝方案。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+个人性的 minimum 必须由用户确认。
+
+例如系统可以说：
+
+> 如果离开当前工作以后，家庭可用现金缓冲降到两个月，你仍然认为这个状态可以接受吗？
+
+用户可能回答：
+
+```
+No.
+Minimum = 6 months.
+```
+
+这个时候才可以把：
+
+```
+6 months usable liquidity
+```
+
+写成用户确认的 threshold。
+
+但如果用户自己也不知道，则保持：
+
+```
+MINIMUM_UNCONFIRMED
+```
+
+不要替他填数字。
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.26｜哪些损失可以交换，哪些不能
+```
+
+并延伸到：
+
+```
+15.28–15.30｜最低保留状态与改变后的可接受边界
+```
+
+相关：
+
+```
+15.21｜改变以前，先确认什么不能被无意失去
+15.22｜目标不是价值本身
+15.23｜价值什么时候彼此冲突
+15.24｜改变不是把旧世界全部清空
+15.25｜替代方案必须保护什么
+15.27｜今天得到的东西，会不会关闭明天
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 提供：
+
+```
+minimum continuity
+recovery conditions
+operating viability
+```
+
+NAV-22 不重新解释这些机制。
+
+它只问：
+
+> **对这个具体决定而言，最低还能接受到哪里？**
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+measurement
+uncertainty
+evidence boundary
+```
+
+支持：
+
+```
+minimum not measured
+≠
+minimum does not exist
+```
+
+同时防止系统制造假精确数字。
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助提出：
+
+```
+minimum-state questions
+```
+
+例如：
+
+```
+autonomy
+stability
+relationship continuity
+```
+
+但不能直接建立：
+
+```
+hard minimum
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 是 NAV-22 最重要的 producer 之一。
+
+可提供：
+
+```
+essential monthly expenditure
+liquidity floor
+debt servicing
+dependant support
+housing continuity
+insurance continuity
+```
+
+例如：
+
+```
+usable cash
+```
+
+必须与：
+
+```
+illiquid assets
+restricted funds
+```
+
+分开。
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR / Tarot / I Ching：
+
+只能提供：
+
+```
+MINIMUM_STATE_QUESTION_CONTEXT
+```
+
+不得建立：
+
+```
+financial floor
+care floor
+legal floor
+action gate
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+whatMustKeepFunctioning
+whatCannotTemporarilyDrop
+whatCanTemporarilyDrop
+whatRecoveryResourcesExist
+whatFailureWouldActuallyAffect
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-22 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Shared Decision Runtime
+Scenario Runtime
+```
+
+消费。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **A good decision does not require the worst case to be pleasant; it requires the downside to remain within a reality you are actually willing and able to carry.**
+
+中文：
+
+> **一个成熟决定并不要求坏情况也令人满意，而是要求坏情况仍然没有跌出你真正愿意、也有能力承担的现实边界。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-22：
+
+```
+essentialCostChanged
+dependantChanged
+housingChanged
+liquidityChanged
+careResponsibilityChanged
+legalRequirementChanged
+consentChanged
+recoveryResourceChanged
+userToleranceChanged
+optionRedesigned
+timeHorizonChanged
+professionalInput
+```
+
+---
+
+# 27. Canonical Minimum State Model
+
+建议：
+
+```
+{
+  "minimumStateAssessmentId": "",
+  "decisionObjectId": "",
+  "conditions": [
+    {
+      "conditionId": "",
+      "dimension": "",
+      "state": "HARD_MINIMUM | FUNCTIONAL_MINIMUM | TEMPORARY_MINIMUM | RECOVERY_MINIMUM | PREFERRED_MINIMUM | MINIMUM_UNCONFIRMED",
+      "description": "",
+      "threshold": null,
+      "duration": null,
+      "authority": "",
+      "sourceRef": "",
+      "revisionTriggers": []
+    }
+  ],
+  "optionViolations": [],
+  "recoveryRequirements": [],
+  "unknowns": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Minimum ≠ Ideal Rule
+
+冻结：
+
+```
+MINIMUM ACCEPTABLE STATE
+≠
+DESIRED STATE
+```
+
+例如：
+
+```
+Desired:
+RM15k monthly income
+
+Acceptable transition minimum:
+RM9k for 4 months
+```
+
+可以同时成立。
+
+---
+
+# 29. Minimum ≠ Current State Rule
+
+同样：
+
+```
+CURRENT STATE
+≠
+MINIMUM STATE
+```
+
+今天拥有：
+
+```
+12 months liquidity
+```
+
+不代表：
+
+```
+12 months
+```
+
+就是不可下降的最低标准。
+
+---
+
+# 30. Minimum ≠ Catastrophe Rule
+
+最低状态不应该设到：
+
+```
+“只要还没彻底崩溃就算可以”
+```
+
+它是：
+
+```
+lowest state still consciously acceptable
+```
+
+而不是：
+
+```
+last state before collapse
+```
+
+---
+
+# 31. Temporary Minimum Rule
+
+如果用户接受短期降低：
+
+```
+TEMPORARY_MINIMUM
+```
+
+必须同时绑定：
+
+```
+duration
+recovery target
+review trigger
+```
+
+例如：
+
+```
+Income may drop to RM8k/month
+for no more than 4 months
+while cash buffer remains > X
+```
+
+不能无限续期。
+
+---
+
+# 32. Recovery Minimum Rule
+
+Navigation 必须问：
+
+> 如果方案失败，至少还需要保留什么，才能让你有能力恢复？
+
+例如：
+
+```
+some liquidity
+employable skill
+legal exit
+housing
+family support
+```
+
+这会直接进入 NAV-25。
+
+---
+
+# 33. Multi-Domain Minimum Rule
+
+最低状态不能只做单领域优化。
+
+例如：
+
+```
+financial minimum met
+```
+
+但：
+
+```
+childcare minimum violated
+```
+
+仍然意味着方案没有通过。
+
+因此禁止：
+
+```
+aggregate score compensation
+```
+
+---
+
+# 34. No Weighted Compensation Rule
+
+冻结：
+
+```
+HARD_MINIMUM VIOLATION
+```
+
+不能通过：
+
+```
+higher salary
+better title
+better symbolic reading
+higher total score
+```
+
+来抵消。
+
+这是 NAV-21 Non-Exchangeable 在 operational 层的延伸。
+
+---
+
+# 35. Option Violation States
+
+建议：
+
+```
+NO_MINIMUM_VIOLATION
+POSSIBLE_MINIMUM_VIOLATION
+LIKELY_MINIMUM_VIOLATION
+CURRENT_MINIMUM_VIOLATION
+VIOLATION_UNKNOWN
+```
+
+注意：
+
+```
+POSSIBLE
+≠
+LIKELY
+```
+
+Scenario layer必须保留不确定度。
+
+---
+
+# 36. Option Redesign Rule
+
+如果一个方案可能跌破 minimum：
+
+```
+Option A
+```
+
+可以通过：
+
+```
+smaller scale
+different timing
+additional buffer
+insurance
+consent
+staged transition
+exit clause
+```
+
+形成：
+
+```
+Option A2
+```
+
+因此：
+
+> **最低状态用于设计更可承担的路径，不只是淘汰路径。**
+
+---
+
+# 37. Minimum State and Reversibility
+
+如果：
+
+```
+low reversibility
++
+downside near minimum
+```
+
+则 Decision Sufficiency 必须明显提高。
+
+相反：
+
+```
+high reversibility
++
+strong recovery route
+```
+
+可以让一些 downside 更可承担。
+
+但不能突破 hard minimum。
+
+---
+
+# 38. Minimum State and Time Horizon
+
+同一个 minimum 在不同 horizon 可以不同。
+
+例如：
+
+```
+3-month transition income minimum
+```
+
+与：
+
+```
+3-year sustainable income minimum
+```
+
+不一定相同。
+
+因此每个 threshold 应尽量绑定：
+
+```
+timeHorizon
+```
+
+---
+
+# 39. Minimum State and Shared Decisions
+
+如果涉及：
+
+```
+partner
+child
+dependant
+co-owner
+```
+
+最低状态不能只由单一用户私下定义。
+
+必须读取 NAV-08：
+
+```
+decision owner
+consent
+responsibility
+```
+
+---
+
+# 40. Minimum State and Professional Boundaries
+
+有些 minimum 需要专业 authority。
+
+例如：
+
+```
+medical safety
+legal compliance
+regulated financial obligations
+```
+
+Navigation 不得自创 threshold。
+
+---
+
+# 41. Scenario Bridge Rule
+
+NAV-22 的输出必须可以直接进入 NAV-23：
+
+```
+Minimum Acceptable State
+↓
+Scenario Space
+```
+
+未来每个 scenario 都需要问：
+
+```
+Does this scenario remain above the floor?
+```
+
+而不是只问：
+
+```
+Is this scenario good or bad?
+```
+
+---
+
+# 42. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Leave current role for independent consulting
+
+Confirmed minimums:
+- essential household spending covered
+- childcare continuity maintained
+- health coverage maintained
+- at least 6 months usable liquidity
+- no new unsecured debt required
+
+Temporary tolerance:
+income may fall for up to 4 months
+```
+
+客户可以看到：
+
+> **这个决定不需要保证一开始就比现在更好，但需要先知道最差可以接受到哪里。**
+> 
+> 如果你转向独立顾问，收入在前几个月下降并不一定代表方案失败；你已经确认自己可以接受最长四个月的过渡期。但这段过渡不能以失去孩子照护、医疗保障或把可用现金缓冲压到六个月以下为代价，也不能依靠新增无抵押债务维持。
+> 
+> 这意味着接下来比较不同情景时，真正重要的不是“哪一种看起来最理想”，而是：即使现实比预期差，这个方案还能不能留在你明确愿意承担的边界之上。
+
+---
+
+# 43. Customer Actions
+
+允许：
+
+```
+Confirm minimum
+Set threshold
+Set duration
+Downgrade preferred minimum
+Add hard minimum
+Add recovery minimum
+Correct authority
+Redesign option
+Request professional confirmation
+Continue
+```
+
+---
+
+# 44. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+MINIMUMS_IDENTIFIED
+THRESHOLDS_PENDING
+MINIMUM_STATE_CONFIRMED
+OPTION_MINIMUM_VIOLATION
+OPTION_REDESIGN_REQUIRED
+PROFESSIONAL_CONFIRMATION_REQUIRED
+READY_FOR_SCENARIO_SPACE
+REOPENED
+```
+
+---
+
+# 45. Fail-Closed Conditions
+
+以下情况不得进入 NAV-23：
+
+```
+criticalMinimumUnknown
+hardMinimumAssertedWithoutAuthority
+thresholdInvented
+temporaryMinimumWithoutDuration
+recoveryMinimumIgnored
+sharedDecisionMinimumSetWithoutAuthority
+symbolicReadingUsedAsMinimumAuthority
+minimumAndIdealConflated
+currentRealityStale
+decisionObjectChanged
+```
+
+---
+
+# 46. Canonical Runtime Rule
+
+> **Navigation must establish the lowest state a decision can reasonably tolerate before comparing scenarios that may place the user below that state.**
+
+中文：
+
+> **Navigation 在比较可能让用户跌出可承担范围的情景以前，必须先建立这个决定最低能够接受到什么状态。**
+
+---
+
+# 47. Canonical Floor Rule
+
+> **The minimum acceptable state is a floor for decision design, not a prediction of where reality will land.**
+
+中文：
+
+> **最低可接受状态是决策设计的底线，而不是对现实最终会落在哪里的预测。**
+
+---
+
+# 48. Canonical Temporary-State Rule
+
+> **A temporary deterioration may remain acceptable only when its duration, recovery conditions, and review boundary are explicit.**
+
+中文：
+
+> **一个暂时较差的状态，只有在持续时间、恢复条件与复核边界都被明确以后，才可能继续属于可接受范围。**
+
+---
+
+# 49. Canonical Recovery Rule
+
+> **A decision is more bearable when failure still leaves enough reality intact to recover.**
+
+中文：
+
+> **如果一个决定失败以后，仍然留下足够现实条件让人恢复，它就比“失败即失去全部恢复能力”的决定更可承担。**
+
+---
+
+# 50. Canonical Non-Compensation Rule
+
+> **A hard minimum cannot be compensated for by unrelated upside elsewhere.**
+
+中文：
+
+> **硬性最低条件一旦被突破，不能靠其他领域更大的收益把它重新抵消。**
+
+---
+
+# 51. Final Canonical Form
+
+```
+NAV-22
+MINIMUM ACCEPTABLE STATE
+```
+
+**Input**
+
+```
+Goal–Value Alignment
++
+Preservation Requirements
++
+Non-Exchangeable Conditions
++
+Material / Responsibility Minimums
++
+Candidate Option
+```
+
+**Process**
+
+```
+Determine:
+What Must Never Be Crossed?
+What Can Temporarily Fall?
+For How Long?
+What Must Remain for Recovery?
+What Makes the Downside Still Bearable?
+```
+
+**Output**
+
+```
+Minimum Acceptable State
++
+Option Floor Violations
++
+Recovery Minimums
+```
+
+**Boundary**
+
+```
+Minimum is not ideal.
+Downside is not prediction.
+Acceptable does not mean desirable.
+```
+# NAV-23｜Scenario Space
+
+## 情景空间｜现实未来不是一个预测点，而是一组可能路径
+
+**Canonical Question｜规范问题**
+
+> **为什么面对未来时，Navigation 不应该问“到底会发生什么”，而应该问“哪些不同路径可能成立，以及每条路径会怎样改变下一步”？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-23
+```
+
+## 2. `canonicalTitleZh`
+
+```
+情景空间
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Scenario Space
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么面对未来时，Navigation 不应该问“到底会发生什么”，
+而应该问“哪些不同路径可能成立，以及每条路径会怎样改变下一步”？
+```
+
+---
+
+# 5. `definition`
+
+**Scenario Space** 是 Navigation 对未来进行正式表达的方式：不是把未来压成一个预测结果，而是在当前证据、现实约束、已知未知与最低可接受状态之上，建立一组彼此可区分、可比较、可修正的未来路径。
+
+它不回答：
+
+> “接下来一定会发生什么？”
+
+也不回答：
+
+> “哪一个未来概率最高？”
+
+除非存在独立、合法、足够可靠的统计或专业依据。
+
+它真正回答的是：
+
+> **如果不同关键条件朝不同方向发展，现实可能形成哪些具有决策意义的路径？**
+
+例如，一个人考虑离开现有工作。
+
+未来不能只被表达成：
+
+```
+“离职后会成功”
+```
+
+或：
+
+```
+“离职后会失败”
+```
+
+而应该至少看到：
+
+```
+Path A:
+收入恢复较快
+新工作适配良好
+
+Path B:
+收入恢复较慢
+但现金缓冲足够
+可以继续寻找
+
+Path C:
+短期收入下降
+新方向未成熟
+需要启动恢复路线
+
+Path D:
+现职条件改善
+继续留下重新取得资格
+```
+
+这些都不是预测。
+
+它们是：
+
+```
+DECISION-RELEVANT POSSIBLE FUTURES
+```
+
+因此：
+
+> **NAV-23 的核心不是告诉用户未来，而是让未来的不确定性变成可以被比较、承受和更新的结构。**
+
+---
+
+# 6. `navigationMeaning`
+
+没有 Scenario Space，Navigation 很容易落入两个极端。
+
+第一个极端：
+
+```
+POINT FORECAST
+```
+
+把未来写成一个确定答案：
+
+> “你三个月后会找到更好的工作。”
+
+第二个极端：
+
+```
+UNSTRUCTURED UNCERTAINTY
+```
+
+只说：
+
+> “未来无法预测，所以只能看情况。”
+
+两者都不足以支持决定。
+
+Navigation 需要的是第三种结构：
+
+```
+Current Reality
++
+Known Conditions
++
+Material Unknowns
++
+Minimum Acceptable State
+↓
+Multiple Plausible Paths
+↓
+Decision-Relevant Differences
+```
+
+也就是说：
+
+> **未来虽然不能被完整知道，却可以被组织成若干对当前决定真正有意义的可能路径。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-23 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+remainingChoiceSpace
+timeHorizonMap
+minimumAcceptableState
+candidateOptions
+materialUnknowns
+```
+
+并最好拥有：
+
+```
+reversibilityProfile
+capacityQualification
+waitingQualification
+valuePreservationRequirements
+```
+
+如果未来路径只能靠大量未经支持的假设才能形成，应保留：
+
+```
+SCENARIO_SPACE_INSUFFICIENT
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+externalCurrentEvidence
+professionalInput
+relationshipContext
+structuralAlternativeState
+historicalOutcomePatterns
+priorNavigationState
+```
+
+这些用于帮助构建 scenario，但必须保持：
+
+```
+fact
+assumption
+projection
+unknown
+```
+
+清楚分离。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+CURRENT_FACT
+KNOWN_FUTURE_COMMITMENT
+USER_REPORTED_EXPECTATION
+SUPPORTED_PROJECTION
+SCENARIO_ASSUMPTION
+PROFESSIONAL_SCENARIO_INPUT
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+其中：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+包括 Method / Tarot / I Ching 等，只能帮助提出：
+
+```
+what might deserve consideration
+```
+
+不能建立：
+
+```
+this scenario will happen
+```
+
+---
+
+# 10. Core Scenario Classes
+
+建议至少区分：
+
+```
+PLAUSIBLE_SCENARIO
+STRESS_SCENARIO
+OPPORTUNITY_SCENARIO
+RECOVERY_SCENARIO
+CONTINUATION_SCENARIO
+SCENARIO_REQUIRES_UNSUPPORTED_ASSUMPTION
+SCENARIO_INSUFFICIENT_EVIDENCE
+```
+
+---
+
+## A. `PLAUSIBLE_SCENARIO`
+
+由当前现实与有限假设构成，具有真实可能性，但不宣称概率。
+
+---
+
+## B. `STRESS_SCENARIO`
+
+用于测试：
+
+> 如果现实比预期差，会发生什么？
+
+不是灾难化。
+
+必须与当前 option 有真实关联。
+
+---
+
+## C. `OPPORTUNITY_SCENARIO`
+
+用于测试：
+
+> 如果关键条件发展得比基线更好，方案会获得什么额外空间？
+
+不是乐观预测。
+
+---
+
+## D. `RECOVERY_SCENARIO`
+
+处理：
+
+> 如果方案没有按预期发展，怎样进入恢复？
+
+与 NAV-25 直接连接。
+
+---
+
+## E. `CONTINUATION_SCENARIO`
+
+处理：
+
+> 如果不采取结构性改变，而让当前路径继续，现实可能怎样发展？
+
+不能只为“改变”建立 scenario，而忽略继续本身。
+
+---
+
+# 11. `allowedInference`
+
+NAV-23 可以：
+
+## A. 用关键变量构建有限情景
+
+例如：
+
+```
+Variable:
+time to new income
+
+Scenario 1:
+< 2 months
+
+Scenario 2:
+2–6 months
+
+Scenario 3:
+> 6 months
+```
+
+只要这些区间有合理现实依据。
+
+---
+
+## B. 识别哪一个变量真正改变决定
+
+例如：
+
+```
+job title
+```
+
+可能变化很大，却不改变最低状态。
+
+而：
+
+```
+liquidity duration
+```
+
+可能直接决定方案是否可承担。
+
+因此可以标记：
+
+```
+DECISION-SENSITIVE VARIABLE
+```
+
+---
+
+## C. 让多个 option 进入同一 scenario frame
+
+例如：
+
+```
+Stay
+Internal transfer
+New employer
+Independent work
+```
+
+都可以在：
+
+```
+weak market
+normal market
+strong market
+```
+
+下比较。
+
+前提是这些 scenario 有现实依据。
+
+---
+
+## D. 识别某方案只有在单一理想情景下才成立
+
+例如：
+
+```
+Option A works only if:
+income recovers immediately
+cost stays low
+no disruption occurs
+```
+
+可以标记：
+
+```
+FRAGILE_SCENARIO_DEPENDENCE
+```
+
+---
+
+## E. 识别某方案在多个情景下都保持最低状态
+
+可标记：
+
+```
+CROSS_SCENARIO_RESILIENCE
+```
+
+但不是“最佳方案”的自动证明。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-23 严禁：
+
+## A. 把 scenario 当 forecast
+
+禁止：
+
+```
+Scenario A
+→ likely future
+```
+
+除非有独立概率模型。
+
+---
+
+## B. 伪造概率
+
+禁止：
+
+```
+Scenario A 70%
+Scenario B 20%
+Scenario C 10%
+```
+
+除非有合法统计基础。
+
+---
+
+## C. 用 symbolic reading 给 scenario 概率
+
+禁止：
+
+```
+Tarot suggests success
+→ upside scenario probability increased
+```
+
+---
+
+## D. 构造无限数量的未来
+
+Scenario Space 必须服务决定。
+
+不是：
+
+```
+imagination engine
+```
+
+---
+
+## E. 只建立好情景
+
+也禁止只建立坏情景。
+
+---
+
+## F. 把最坏 imaginable future 当 stress scenario
+
+Stress Scenario 必须：
+
+```
+plausible
+decision-relevant
+bounded
+```
+
+不能灾难化。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-23 主要影响：
+
+```
+OPTION_ROBUSTNESS
+OPTION_WEIGHT
+DECISION_THRESHOLD
+RECOVERY_REQUIREMENT
+EXIT_ROUTE_REQUIREMENT
+INFORMATION_VALUE
+```
+
+核心 effect：
+
+```
+SCENARIO_ROBUSTNESS
+```
+
+即：
+
+> **一个方案是否只在非常狭窄的未来条件下成立。**
+
+---
+
+# 14. `decisionThresholdEffect`
+
+如果一个方案：
+
+```
+only works in upside scenario
+```
+
+且：
+
+```
+downside breaches minimum acceptable state
+```
+
+则执行 threshold 应提高。
+
+如果一个方案：
+
+```
+remains above minimum
+across multiple plausible scenarios
+```
+
+则其可承担性较强。
+
+但：
+
+```
+robust
+≠
+automatically preferred
+```
+
+因为用户价值、机会、长期方向仍可能不同。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-23 可以：
+
+- 建立 scenario；
+- 区分 assumptions；
+- 比较 options across scenarios；
+- 识别 fragile assumptions；
+- 识别 scenario robustness；
+- 识别需要补证据的变量。
+
+NAV-23 不可以：
+
+- 预测未来；
+- 伪造概率；
+- 用 Method Reading 提升 scenario likelihood；
+- 用情景代替现实；
+- 自动挑选“最稳”的人生。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户必须能够看到：
+
+```
+which assumptions create which scenario
+```
+
+并可以：
+
+```
+remove scenario
+add scenario
+reject assumption
+change boundary
+```
+
+例如系统建立：
+
+```
+Scenario:
+income takes 6 months to recover
+```
+
+用户可以说：
+
+> 我的行业平均求职周期不是这样，这个假设太悲观。
+
+系统必须重新调整，而不是把 scenario 当事实坚持。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.31–15.40｜Scenario Paths
+```
+
+尤其：
+
+```
+15.31｜未来不是一个点
+15.32｜情景不是预测
+15.33｜先建立基线情景
+15.34｜好情况与坏情况都必须有边界
+15.35｜坏情况必须能够被承担
+15.36｜哪些变量真正改变结果
+15.37｜延迟也是一条路径
+15.38｜退出路径必须在进入以前被看见
+15.39｜路径之间怎样比较
+15.40｜失败以后还能去哪里
+```
+
+并继承：
+
+```
+NAV-22 Minimum Acceptable State
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book VII｜Reality Observation
+
+Book VII 提供：
+
+```
+projection boundary
+uncertainty
+evidence state
+future ≠ observation
+```
+
+NAV-23 必须完整继承：
+
+> **Projection ≠ Future**
+
+---
+
+## Book VI｜Reality Reconfiguration
+
+提供：
+
+```
+multiple possible reconfiguration paths
+```
+
+但 NAV-23 不重新解释世界如何重构。
+
+这里只处理：
+
+> **对于当前具体决定，哪些未来路径值得比较？**
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可帮助识别：
+
+```
+which scenario differences may matter more to the user
+```
+
+例如：
+
+```
+autonomy
+stability
+environment fit
+```
+
+但不能决定：
+
+```
+scenario likelihood
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 是 NAV-23 的强 producer。
+
+可生成：
+
+```
+cash runway scenarios
+income recovery scenarios
+expense shock scenarios
+debt servicing scenarios
+```
+
+但所有假设必须清楚标记。
+
+例如：
+
+```
+Scenario:
+income -30% for 4 months
+```
+
+必须说明：
+
+```
+why this range exists
+```
+
+不能随便创造数字。
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR / Tarot / I Ching：
+
+只能：
+
+```
+suggest themes worth scenario-testing
+```
+
+例如：
+
+> 如果当前“责任上升”这个解释值得关注，我们可以检查一个责任增加的情景。
+
+但不能：
+
+```
+declare that responsibility will increase
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+current trajectory
+known upcoming events
+current constraints
+recent changes
+decision-sensitive unknowns
+```
+
+这些是 scenario 的现实锚点。
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-23 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Scenario Comparison Runtime
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **A scenario is not a claim about the future. It is a structured question about what the decision would mean if certain conditions became true.**
+
+中文：
+
+> **情景不是关于未来的断言，而是在问：如果某些条件真的成立，这个决定将意味着什么。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-23：
+
+```
+newEvidenceArrives
+assumptionInvalidated
+currentPositionChanges
+minimumStateChanges
+newOptionAppears
+optionRemoved
+timeWindowChanges
+externalConditionChanges
+professionalInput
+userRejectsScenario
+scenarioVariableChanges
+```
+
+---
+
+# 26. Canonical Scenario Model
+
+建议：
+
+```
+{
+  "scenarioSpaceId": "",
+  "decisionObjectId": "",
+  "scenarios": [
+    {
+      "scenarioId": "",
+      "type": "PLAUSIBLE_SCENARIO | STRESS_SCENARIO | OPPORTUNITY_SCENARIO | RECOVERY_SCENARIO | CONTINUATION_SCENARIO",
+      "assumptions": [],
+      "knownConditions": [],
+      "unknowns": [],
+      "optionEffects": [],
+      "minimumStateEffects": [],
+      "reversibilityEffects": [],
+      "capacityEffects": [],
+      "timeHorizon": "",
+      "status": ""
+    }
+  ],
+  "decisionSensitiveVariables": [],
+  "unsupportedAssumptions": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Scenario ≠ Forecast Rule
+
+冻结：
+
+```
+SCENARIO
+≠
+FORECAST
+```
+
+正式规则：
+
+> **A scenario states what would follow if defined conditions became true; it does not assert that those conditions will become true.**
+
+中文：
+
+> **情景描述的是：如果一组明确条件成立，现实可能怎样继续；它并不宣称这些条件一定会成立。**
+
+---
+
+# 28. Baseline Scenario Rule
+
+Scenario Space 通常应包含：
+
+```
+BASELINE SCENARIO
+```
+
+但 Baseline 不是：
+
+```
+most likely future
+```
+
+它只是：
+
+> **如果当前已知条件大致延续，没有重大额外变化，现实会怎样继续？**
+
+---
+
+# 29. Upside Scenario Rule
+
+Upside Scenario 必须有现实机制。
+
+不能写：
+
+```
+everything goes well
+```
+
+应写：
+
+```
+new role secured within X range
+income preserved
+transition cost limited
+```
+
+前提是这些条件有现实基础。
+
+---
+
+# 30. Downside / Stress Scenario Rule
+
+Stress Scenario 也必须 bounded。
+
+不是：
+
+```
+everything collapses
+```
+
+而是：
+
+```
+income recovery delayed
+cost rises
+one option closes
+capacity falls
+```
+
+并检查：
+
+```
+does minimum acceptable state survive?
+```
+
+---
+
+# 31. Scenario Variable Rule
+
+每个 scenario 应尽量由少数：
+
+```
+DECISION-SENSITIVE VARIABLES
+```
+
+驱动。
+
+例如：
+
+```
+time to new income
+monthly cash burn
+care availability
+offer availability
+```
+
+而不是几十个变量一起变。
+
+---
+
+# 32. Scenario Independence Rule
+
+不要把同一 scenario 偷偷绑定多个无关好事。
+
+例如禁止：
+
+```
+new job appears
++
+salary rises 40%
++
+workload drops
++
+commute disappears
++
+perfect manager
+```
+
+除非有现实依据。
+
+否则属于：
+
+```
+UPSIDE_STACKING
+```
+
+---
+
+# 33. Scenario Robustness Rule
+
+对于一个 option，可以标记：
+
+```
+ROBUST_ACROSS_SCENARIOS
+FRAGILE_ACROSS_SCENARIOS
+SCENARIO_DEPENDENT
+UNKNOWN_ROBUSTNESS
+```
+
+但不能转换成单一总分。
+
+---
+
+# 34. Minimum-State Test
+
+每个重要 scenario 都应检查：
+
+```
+ABOVE_MINIMUM
+NEAR_MINIMUM
+BELOW_MINIMUM
+MINIMUM_EFFECT_UNKNOWN
+```
+
+这样 NAV-22 的底线真正进入未来比较。
+
+---
+
+# 35. Continuation Scenario Rule
+
+当前路径必须有自己的 scenario。
+
+例如：
+
+```
+if current role continues for 12 months
+```
+
+应检查：
+
+```
+income
+maintenance cost
+capacity
+future options
+```
+
+不能只有“改变”的风险，而不模拟“继续”的风险。
+
+---
+
+# 36. Waiting Scenario Rule
+
+Waiting 也必须成为 scenario path。
+
+例如：
+
+```
+Wait 3 months
+```
+
+需要写清：
+
+```
+what arrives
+what accumulates
+what may close
+```
+
+直接读取 NAV-18。
+
+---
+
+# 37. Scenario Branching Rule
+
+如果某变量改变后，Decision Object 本身也改变：
+
+例如：
+
+```
+partner loses income
+```
+
+可能使：
+
+```
+career transition decision
+```
+
+变成：
+
+```
+household financial continuity decision
+```
+
+此时应允许：
+
+```
+RETURN_TO_NAV-01
+```
+
+而不是继续强行用旧问题跑完。
+
+---
+
+# 38. Scenario Count Rule
+
+默认 scenario 数量应保持有限。
+
+建议：
+
+```
+3–5 decision-relevant scenarios
+```
+
+而不是构建几十条可能未来。
+
+目的是：
+
+```
+decision clarity
+```
+
+不是 completeness fantasy。
+
+---
+
+# 39. Scenario Confidence Rule
+
+可以记录：
+
+```
+EVIDENCE_STRONG
+EVIDENCE_MODERATE
+ASSUMPTION_HEAVY
+UNKNOWN
+```
+
+但这不是 probability。
+
+---
+
+# 40. Scenario Update Rule
+
+一旦真实事件发生：
+
+```
+scenario assumption
+```
+
+应升级为：
+
+```
+observed reality
+```
+
+然后回流：
+
+```
+NAV-02 Current Position
+```
+
+而不是继续把它留在 scenario 层。
+
+---
+
+# 41. Scenario and Professional Input
+
+在：
+
+```
+financial
+legal
+medical
+regulated
+```
+
+领域，专业人士可以提供 scenario boundaries。
+
+例如：
+
+```
+legal advisor:
+termination outcomes A/B/C
+```
+
+Navigation 可以消费。
+
+但不得扩大成超出专业意见范围的生活预测。
+
+---
+
+# 42. Scenario and Method Interpretation
+
+Method 可以帮助提出：
+
+```
+what-if question
+```
+
+例如：
+
+> 如果未来一年责任明显增加，这个决定还成立吗？
+
+但不能写成：
+
+> 因为命盘显示责任增加，所以我们采用这个未来。
+
+这条必须严格冻结。
+
+---
+
+# 43. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Leave current role for independent consulting
+
+Scenario A:
+income returns within 2 months
+minimum state preserved
+
+Scenario B:
+income takes 4–6 months
+cash buffer drops but stays above confirmed floor
+
+Scenario C:
+income takes >6 months
+liquidity approaches minimum
+recovery route required
+
+Scenario D:
+current employer materially improves role
+continuation requalifies
+```
+
+客户可以看到：
+
+> **这里真正需要比较的不是“离职以后会不会成功”，而是几种不同现实出现时，你是否仍然承受得起这条路。**
+> 
+> 如果独立收入在两个月内形成，转换压力会相对有限；如果需要四到六个月，你仍然可能维持在已经确认的现金与家庭底线之上，但缓冲会明显下降；如果六个月以后收入仍未形成，那么重点就不再是继续等待，而是必须启动已经设计好的恢复路径。与此同时，也需要保留另一条现实：如果现公司真正改变职责、工时与权限结构，留下本身可能重新取得资格。
+> 
+> 这些都不是对未来的预测，它们只是把“如果现实这样发展，我们准备怎么办”提前变得清楚。
+
+---
+
+# 44. Customer Actions
+
+允许：
+
+```
+Confirm scenario
+Reject scenario
+Change assumption
+Add scenario
+Remove unsupported scenario
+Mark unknown
+Compare option across scenarios
+Set trigger
+Continue
+```
+
+---
+
+# 45. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SCENARIO_SPACE_BUILT
+SCENARIO_ASSUMPTION_HEAVY
+SCENARIO_SPACE_INSUFFICIENT
+SCENARIO_REVIEW_REQUIRED
+READY_FOR_BASE_UP_DOWN
+REOPENED
+```
+
+---
+
+# 46. Fail-Closed Conditions
+
+以下情况不得进入 NAV-24：
+
+```
+scenarioPresentedAsForecast
+probabilityInvented
+criticalScenarioAssumptionHidden
+minimumStateNotApplied
+continuationScenarioMissing
+waitingScenarioIgnoredWhenRelevant
+symbolicReadingUsedAsScenarioProbability
+unsupportedUpsideStacking
+catastrophicFantasyUsedAsStressScenario
+decisionObjectChanged
+```
+
+---
+
+# 47. Canonical Runtime Rule
+
+> **Navigation must represent uncertain futures as bounded scenarios rather than collapse them into a single predicted outcome.**
+
+中文：
+
+> **Navigation 必须把不确定未来表达为有边界的多个情景，而不能把它们压成一个被预测出来的结果。**
+
+---
+
+# 48. Canonical Scenario Rule
+
+> **A scenario is a conditional path, not a future claim.**
+
+中文：
+
+> **情景是一条条件路径，不是一项未来断言。**
+
+---
+
+# 49. Canonical Minimum-State Rule
+
+> **Every materially relevant downside scenario must be tested against the minimum acceptable state.**
+
+中文：
+
+> **每一个具有实质意义的下行情景，都必须与已经确认的最低可接受状态进行比较。**
+
+---
+
+# 50. Canonical Robustness Rule
+
+> **An option gains robustness when it remains acceptable across materially different plausible scenarios; robustness does not by itself make the option preferable.**
+
+中文：
+
+> **当一个选项在多个实质不同、又具有现实可能性的情景中都仍然可接受时，它取得更强的稳健性；但稳健本身并不会自动让它成为首选。**
+
+---
+
+# 51. Canonical Update Rule
+
+> **Once a scenario condition becomes real, it must leave the scenario layer and re-enter Navigation as current reality.**
+
+中文：
+
+> **一旦某个情景条件真正发生，它就必须离开情景层，重新作为当前现实进入 Navigation。**
+
+---
+
+# 52. Final Canonical Form
+
+```
+NAV-23
+SCENARIO SPACE
+```
+
+**Input**
+
+```
+Current Position
++
+Candidate Options
++
+Material Unknowns
++
+Minimum Acceptable State
++
+Time Horizon
+```
+
+**Process**
+
+```
+Build:
+Baseline
+Plausible Alternatives
+Stress
+Opportunity
+Continuation
+Recovery-relevant paths
+```
+
+**Output**
+
+```
+Bounded Scenario Space
++
+Decision-Sensitive Variables
++
+Minimum-State Effects
+```
+
+**Boundary**
+
+```
+Scenario is not forecast.
+Possibility is not probability.
+Projection is not future.
+```
+
+# NAV-24｜Baseline / Upside / Downside
+
+## 基线、上行与下行情景｜怎样把“可能发生什么”变成真正可比较的未来结构
+
+**Canonical Question｜规范问题**
+
+> **为什么情景空间还不够，Navigation 还需要把未来整理成基线、上行与下行这几类可比较结构？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-24
+```
+
+## 2. `canonicalTitleZh`
+
+```
+基线、上行与下行情景
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Baseline / Upside / Downside
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么情景空间还不够，
+Navigation 还需要把未来整理成基线、上行与下行这几类可比较结构？
+```
+
+---
+
+# 5. `definition`
+
+**Baseline / Upside / Downside** 是 Navigation 在 NAV-23 已经建立 Scenario Space 以后，对情景进行标准化比较的机制。
+
+它不负责重新生成所有可能未来。
+
+而是把已经有现实依据的情景整理成三个核心参照：
+
+```
+BASELINE
+UPSIDE
+DOWNSIDE
+```
+
+必要时再附加：
+
+```
+RECOVERY
+CONTINUATION
+```
+
+它真正回答的是：
+
+> **在没有假装知道未来概率的前提下，我们怎样用一套稳定结构比较“现实大致照现在继续”“关键条件变得更好”以及“关键条件发展得比预期更差”时，同一个选择分别会意味着什么？**
+
+例如，一个人考虑转向独立工作。
+
+不能只写：
+
+```
+Best case:
+成功
+
+Worst case:
+失败
+```
+
+而应该形成：
+
+```
+BASELINE
+收入建立需要 4–6 个月
+支出维持当前范围
+现金缓冲逐步下降但仍高于底线
+
+UPSIDE
+收入在 2–3 个月内形成
+转换成本较低
+现金缓冲保持较高
+
+DOWNSIDE
+收入形成超过 6 个月
+客户获取低于预期
+现金缓冲逼近最低状态
+需要提前启动恢复路线
+```
+
+这样比较的重点就从：
+
+```
+哪个未来更好？
+```
+
+转向：
+
+```
+同一个方案在不同现实条件下，
+是否仍然值得承担？
+```
+
+---
+
+# 6. `navigationMeaning`
+
+NAV-23 解决的是：
+
+```
+未来不应该被压成一个预测点
+```
+
+NAV-24 解决的是另一个问题：
+
+> **如果情景很多，怎样防止它们变成无法比较的一堆故事？**
+
+因此 NAV-24 的任务是建立一个共同参照结构。
+
+```
+Scenario Space
+↓
+Select Decision-Relevant Variables
+↓
+Construct Baseline
+↓
+Bound Upside
+↓
+Bound Downside
+↓
+Compare Same Option Across All Three
+```
+
+这使不同方案可以在同一个 frame 下被比较，而不是：
+
+```
+Option A 用乐观未来
+Option B 用悲观未来
+```
+
+产生不公平比较。
+
+---
+
+# 7. `requiredInputs`
+
+NAV-24 最低需要：
+
+```
+scenarioSpace
+candidateOptions
+decisionSensitiveVariables
+minimumAcceptableState
+currentPosition
+timeHorizonMap
+```
+
+并必须拥有足够依据形成：
+
+```
+BASELINE
+```
+
+如果连 baseline 都无法建立，应标记：
+
+```
+BASELINE_INSUFFICIENT
+```
+
+而不是直接构建“最好 / 最坏”。
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+professionalInput
+externalCurrentEvidence
+historicalOutcomePattern
+reversibilityProfile
+capacityQualificationState
+waitingQualificationState
+priorNavigationState
+```
+
+这些用于约束：
+
+- Baseline 不能脱离当前现实；
+- Upside 不能堆叠所有好事；
+- Downside 不能灾难化；
+- 每个情景必须使用相同核心变量。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+CURRENT_FACT
+KNOWN_FUTURE_COMMITMENT
+SUPPORTED_PROJECTION
+PROFESSIONAL_SCENARIO_INPUT
+USER_REPORTED_EXPECTATION
+SCENARIO_ASSUMPTION
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+其中：
+
+```
+BASELINE
+```
+
+应尽量建立在：
+
+```
+CURRENT_FACT
+KNOWN_FUTURE_COMMITMENT
+SUPPORTED_PROJECTION
+```
+
+上。
+
+而不是：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+---
+
+# 10. Core Scenario Roles
+
+建议正式区分：
+
+```
+BASELINE_SCENARIO
+UPSIDE_SCENARIO
+DOWNSIDE_SCENARIO
+RECOVERY_SCENARIO
+CONTINUATION_SCENARIO
+```
+
+NAV-24 的核心是前三者。
+
+---
+
+## A. `BASELINE_SCENARIO`
+
+Baseline 是：
+
+> **如果当前已知条件大致延续，没有重大额外改善，也没有重大额外恶化，现实会怎样继续？**
+
+它不是：
+
+```
+MOST_LIKELY
+```
+
+也不是：
+
+```
+AVERAGE_FUTURE
+```
+
+而是一个现实参照。
+
+---
+
+## B. `UPSIDE_SCENARIO`
+
+Upside 是：
+
+> **如果一两个对决定真正重要的变量发展得比 baseline 更有利，这个方案会怎样变化？**
+
+它不能写成：
+
+```
+everything goes right
+```
+
+---
+
+## C. `DOWNSIDE_SCENARIO`
+
+Downside 是：
+
+> **如果一两个关键变量发展得比 baseline 更差，这个方案是否仍然高于最低可接受状态？**
+
+它不是：
+
+```
+catastrophe fantasy
+```
+
+---
+
+# 11. `allowedInference`
+
+NAV-24 可以：
+
+## A. 从当前趋势建立 bounded baseline
+
+例如：
+
+```
+current monthly burn:
+RM8k
+
+current usable liquidity:
+RM48k
+```
+
+在没有收入变化时，可以形成一个：
+
+```
+~6 month runway
+```
+
+的 baseline projection。
+
+但必须明确假设。
+
+---
+
+## B. 选择真正 decision-sensitive 的变量
+
+例如：
+
+```
+time to new income
+monthly burn
+care availability
+contract exit cost
+```
+
+而不是把所有细节都放进 scenario。
+
+---
+
+## C. 让 Upside / Downside 围绕同一变量变化
+
+例如：
+
+```
+Variable:
+time to new income
+
+Upside:
+2 months
+
+Baseline:
+4 months
+
+Downside:
+7 months
+```
+
+前提是这些区间有现实依据。
+
+---
+
+## D. 识别一个 option 对 downside 特别脆弱
+
+例如：
+
+```
+Option A:
+downside → below minimum state
+
+Option B:
+downside → above minimum state
+```
+
+可以标记：
+
+```
+DOWNSIDE_FRAGILITY
+```
+
+---
+
+## E. 识别 Upside 其实并没有改变决定
+
+例如：
+
+```
+Upside:
+income +10%
+```
+
+但并未改变：
+
+```
+capacity
+reversibility
+minimum-state safety
+```
+
+则这个 upside 可能并不是 decision-sensitive。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-24 严禁：
+
+## A. 把 Baseline 写成预测
+
+禁止：
+
+> “最可能会这样发展。”
+
+除非另有合法概率依据。
+
+---
+
+## B. 把 Upside 变成愿望清单
+
+禁止：
+
+```
+higher income
+lower workload
+perfect manager
+better location
+better health
+zero transition cost
+```
+
+同时出现而没有依据。
+
+---
+
+## C. 把 Downside 变成恐吓
+
+禁止：
+
+```
+lose job
+lose house
+lose relationship
+lose health
+```
+
+全部堆叠。
+
+---
+
+## D. 对不同 options 使用不同程度的情景严厉度
+
+例如：
+
+```
+Option A:
+baseline only
+
+Option B:
+extreme downside
+```
+
+这种比较无效。
+
+---
+
+## E. 用 Tarot / BaZi / Zi Wei 等设定 Upside / Downside 概率
+
+禁止。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-24 主要影响：
+
+```
+OPTION_ROBUSTNESS
+DOWNSIDE_ACCEPTABILITY
+UPSIDE_DEPENDENCE
+DECISION_THRESHOLD
+EXIT_REQUIREMENT
+RECOVERY_REQUIREMENT
+INFORMATION_VALUE
+```
+
+核心 effect：
+
+```
+COMPARABLE_FUTURE_FRAME
+```
+
+---
+
+# 14. `decisionThresholdEffect`
+
+如果一个方案：
+
+```
+baseline acceptable
+upside attractive
+downside below hard minimum
+```
+
+则需要更高：
+
+```
+reversibility
+buffer
+exit readiness
+recovery readiness
+```
+
+如果另一个方案：
+
+```
+baseline acceptable
+downside remains above floor
+```
+
+则它拥有更强的 downside robustness。
+
+但：
+
+> **更稳健，不等于更值得。**
+
+用户可能仍然选择更大 upside、更高风险的方案，只要：
+
+```
+minimums
+authority
+capacity
+decision sufficiency
+```
+
+都成立。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-24 可以：
+
+- 标准化 scenario；
+- 形成 baseline / upside / downside；
+- 保持变量一致；
+- 检查 minimum-state；
+- 比较 robustness；
+- 暴露 fragile assumption。
+
+NAV-24 不可以：
+
+- 给情景偷偷加概率；
+- 把 baseline 变成未来事实；
+- 过度乐观或灾难化；
+- 因 downside 存在就拒绝风险；
+- 自动偏好最保守方案。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+用户必须能够质疑：
+
+```
+这个 baseline 是否合理？
+这个 upside 是否太理想？
+这个 downside 是否太悲观？
+```
+
+并修改：
+
+```
+variable range
+time boundary
+scenario assumption
+```
+
+例如系统设：
+
+```
+Downside:
+6 months without income
+```
+
+用户可以补充：
+
+> 我的合同有三个月 guaranteed retainer，这个 downside 不成立。
+
+系统必须修改。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.33｜先建立基线情景
+15.34｜好情况与坏情况都必须有边界
+15.35｜坏情况必须能够被承担
+```
+
+相关：
+
+```
+15.31｜未来不是一个点
+15.32｜情景不是预测
+15.36｜哪些变量真正改变结果
+15.37｜延迟也是一条路径
+15.38｜退出路径必须在进入以前被看见
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+uncertainty
+projection boundary
+evidence state
+```
+
+支持：
+
+```
+Baseline ≠ forecast
+Upside ≠ promise
+Downside ≠ warning prophecy
+```
+
+---
+
+## Book VI｜Reality Reconfiguration
+
+提供：
+
+```
+alternative future configurations
+```
+
+NAV-24 只将这些配置放入具体 decision comparison。
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以影响：
+
+```
+which consequences matter to compare
+```
+
+例如：
+
+```
+autonomy
+environment fit
+social load
+```
+
+但不能影响：
+
+```
+scenario likelihood
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 是 NAV-24 的核心 producer。
+
+可以生成：
+
+```
+BASELINE:
+current spending continues
+
+UPSIDE:
+income returns sooner
+
+DOWNSIDE:
+income delayed / cost rises
+```
+
+并检查：
+
+```
+liquidity
+debt service
+minimum household continuity
+```
+
+所有数字必须有来源和假设。
+
+---
+
+# 21. `methodConsumer`
+
+Method 只能：
+
+```
+suggest a variable worth testing
+```
+
+例如：
+
+> 如果责任增加，这个方案还成立吗？
+
+不能：
+
+```
+place responsibility increase into downside
+because the chart predicts it
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+baselineConditions
+knownTrend
+currentConstraints
+decisionSensitiveVariables
+knownUpcomingEvents
+```
+
+Baseline 必须从这里开始，而不是从故事开始。
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-24 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Scenario Comparison Runtime
+Professional Handoff
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **Baseline is not what will happen; it is the reference path against which better and worse conditions can be compared fairly.**
+
+中文：
+
+> **基线不是未来会发生什么，而是让较好与较差条件能够被公平比较的一条参照路径。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-24：
+
+```
+baselineConditionChanged
+decisionSensitiveVariableChanged
+newEvidenceArrived
+minimumStateChanged
+optionRedesigned
+timeWindowChanged
+professionalInputChanged
+externalConditionChanged
+scenarioAssumptionInvalidated
+```
+
+---
+
+# 26. Canonical Baseline / Upside / Downside Model
+
+```
+{
+  "scenarioComparisonId": "",
+  "decisionObjectId": "",
+  "decisionSensitiveVariables": [],
+  "baseline": {
+    "conditions": [],
+    "assumptions": [],
+    "optionEffects": [],
+    "minimumStateEffect": ""
+  },
+  "upside": {
+    "changedVariables": [],
+    "conditions": [],
+    "optionEffects": [],
+    "minimumStateEffect": ""
+  },
+  "downside": {
+    "changedVariables": [],
+    "conditions": [],
+    "optionEffects": [],
+    "minimumStateEffect": ""
+  },
+  "fragileAssumptions": [],
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Baseline Rule
+
+冻结：
+
+> **Baseline is the continuation of currently supported conditions, not the most likely future.**
+
+中文：
+
+> **基线是当前已有支持条件大致延续时形成的参照路径，而不是“最可能发生的未来”。**
+
+---
+
+# 28. Symmetry Rule
+
+Upside 与 Downside 必须尽量围绕：
+
+```
+same option
+same horizon
+same decision-sensitive variables
+```
+
+建立。
+
+不能：
+
+```
+Upside:
+one small improvement
+
+Downside:
+five simultaneous disasters
+```
+
+---
+
+# 29. Bounded Upside Rule
+
+Upside 必须回答：
+
+```
+Which specific condition improved?
+Why is that improvement plausible enough to test?
+What does it change?
+```
+
+否则只是 optimism。
+
+---
+
+# 30. Bounded Downside Rule
+
+Downside 必须回答：
+
+```
+Which specific condition worsened?
+What is the realistic range?
+What becomes harder?
+Does minimum state survive?
+```
+
+否则只是 fear generation。
+
+---
+
+# 31. No Probability Rule
+
+默认禁止：
+
+```
+Baseline 60%
+Upside 25%
+Downside 15%
+```
+
+除非：
+
+```
+statistical model
+professional estimate
+market data
+actuarial basis
+```
+
+明确支持。
+
+---
+
+# 32. Scenario Distance Rule
+
+Upside / Downside 不应该距离 baseline 远到失去现实意义。
+
+如果只有极端假设才能形成：
+
+```
+upside
+```
+
+或：
+
+```
+downside
+```
+
+应标记：
+
+```
+SCENARIO_TOO_REMOTE
+```
+
+---
+
+# 33. Minimum-State Rule
+
+三类 scenario 都必须读取 NAV-22：
+
+```
+ABOVE_MINIMUM
+NEAR_MINIMUM
+BELOW_MINIMUM
+UNKNOWN
+```
+
+尤其 Downside。
+
+---
+
+# 34. Fragility Rule
+
+如果 Option 只有在：
+
+```
+UPSIDE
+```
+
+时才高于 minimum，
+
+则标记：
+
+```
+UPSIDE_DEPENDENT
+```
+
+如果：
+
+```
+BASELINE
+```
+
+已经低于 minimum，
+
+则当前 option 通常需要 redesign 或更强支持。
+
+---
+
+# 35. Robustness Rule
+
+如果 Option 在：
+
+```
+BASELINE
+DOWNSIDE
+```
+
+都保持高于 minimum，
+
+可以标记：
+
+```
+DOWNSIDE_ROBUST
+```
+
+但仍不能自动优先于：
+
+```
+higher-value but less robust option
+```
+
+---
+
+# 36. Continuation Fairness Rule
+
+当前路径也必须使用同一套：
+
+```
+Baseline
+Upside
+Downside
+```
+
+不能只对新方案做 downside testing。
+
+例如：
+
+```
+Stay in current role
+```
+
+也必须问：
+
+```
+Baseline:
+current load continues
+
+Upside:
+role materially improves
+
+Downside:
+load increases / opportunity narrows
+```
+
+---
+
+# 37. Waiting Fairness Rule
+
+等待同样不能只呈现：
+
+```
+maybe more information
+```
+
+还必须有：
+
+```
+Baseline waiting
+Upside waiting
+Downside waiting
+```
+
+并读取 NAV-18。
+
+---
+
+# 38. Time-Horizon Rule
+
+同一个 option 可以分别拥有：
+
+```
+near-term B/U/D
+medium-term B/U/D
+```
+
+但不要无限展开。
+
+只建立真正影响决定的 horizon。
+
+---
+
+# 39. Baseline Drift Rule
+
+如果现实已经明显变化：
+
+```
+old baseline
+```
+
+不能继续使用。
+
+必须：
+
+```
+rebuild baseline from NAV-02
+```
+
+否则 scenario comparison 会建立在过期现实上。
+
+---
+
+# 40. Option-to-Option Comparability Rule
+
+不同 Option 必须尽量使用一致的：
+
+```
+variables
+time horizon
+minimum-state tests
+```
+
+否则不能宣称某方案“更稳健”。
+
+---
+
+# 41. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Leave current role for consulting
+
+Decision-sensitive variables:
+time to stable income
+monthly burn
+client concentration
+
+Baseline:
+stable income in 4–6 months
+minimum state preserved
+
+Upside:
+stable income in 2–3 months
+buffer remains strong
+
+Downside:
+>6 months
+liquidity approaches floor
+recovery path needed
+```
+
+客户可以看到：
+
+> **现在我们不需要猜哪一个未来“最可能”，而是需要确认这个决定在三种不同现实下分别会变成什么。**
+> 
+> 如果按照当前资料建立基线，独立收入可能需要一段明显的建立期，而现金缓冲仍足以覆盖过渡；如果收入比这个参照更快形成，你会保留更大的财务弹性；如果建立时间明显拉长，情况就会逐渐接近已经确认的最低现金边界，这时方案能否继续，就取决于退出和恢复路线是否已经准备好。
+> 
+> 同样的检查也必须用于“继续留下”：如果现职条件没有改善，继续本身也有自己的下行情景，而不能因为它是现状，就被默认为没有风险。
+
+---
+
+# 42. Customer Actions
+
+允许：
+
+```
+Confirm baseline
+Adjust upside
+Adjust downside
+Change variable range
+Mark assumption unsupported
+Compare option
+Review minimum-state effect
+Continue
+```
+
+---
+
+# 43. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+BASELINE_ESTABLISHED
+BUD_SET_ESTABLISHED
+BASELINE_INSUFFICIENT
+SCENARIO_TOO_REMOTE
+UPSIDE_DEPENDENT
+DOWNSIDE_FRAGILE
+DOWNSIDE_ROBUST
+READY_FOR_EXIT_RECOVERY
+REOPENED
+```
+
+---
+
+# 44. Fail-Closed Conditions
+
+以下情况不得进入 NAV-25：
+
+```
+baselinePresentedAsForecast
+baselineUnsupported
+upsideStackedWithoutEvidence
+downsideCatastrophized
+scenarioVariablesAsymmetric
+minimumStateNotApplied
+currentPathExcludedFromFairComparison
+waitingPathExcludedWhenRelevant
+probabilityInvented
+symbolicReadingUsedAsScenarioLikelihood
+decisionObjectChanged
+```
+
+---
+
+# 45. Canonical Runtime Rule
+
+> **Navigation must compare options against a common baseline, bounded upside, and bounded downside rather than allow each option to be judged against a different imagined future.**
+
+中文：
+
+> **Navigation 必须让不同选项在共同的基线、有边界的上行情景与有边界的下行情景中接受比较，而不能让每个选项分别面对不同的想象未来。**
+
+---
+
+# 46. Canonical Baseline Rule
+
+> **Baseline is a reference condition, not a forecast claim.**
+
+中文：
+
+> **基线是一条比较参照，而不是预测声明。**
+
+---
+
+# 47. Canonical Symmetry Rule
+
+> **Upside and downside must vary decision-relevant conditions symmetrically enough that the comparison does not privilege or punish an option by construction.**
+
+中文：
+
+> **上行与下行情景必须围绕真正影响决定的条件进行足够对称的变化，不能在构造情景时就偷偷偏袒或惩罚某个选项。**
+
+---
+
+# 48. Canonical Downside Rule
+
+> **A downside scenario matters because it tests whether an option remains above the minimum acceptable state, not because it predicts failure.**
+
+中文：
+
+> **下行情景的作用，是测试一个选项在现实变差时是否仍高于最低可接受状态，而不是预言失败。**
+
+---
+
+# 49. Canonical Fairness Rule
+
+> **The status quo, waiting, and change must all face comparable scenario testing.**
+
+中文：
+
+> **维持现状、继续等待与主动改变，都必须接受可比较的情景检验。**
+
+---
+
+# 50. Final Canonical Form
+
+```
+NAV-24
+BASELINE / UPSIDE / DOWNSIDE
+```
+
+**Input**
+
+```
+Scenario Space
++
+Decision-Sensitive Variables
++
+Candidate Options
++
+Minimum Acceptable State
+```
+
+**Process**
+
+```
+Construct:
+Baseline
+Bounded Upside
+Bounded Downside
+
+Then test:
+What changes?
+What remains?
+Does the floor survive?
+Which assumptions make the option fragile?
+```
+
+**Output**
+
+```
+Comparable Baseline / Upside / Downside Set
++
+Scenario Robustness State
+```
+
+**Boundary**
+
+```
+Baseline is not forecast.
+Upside is not promise.
+Downside is not prophecy.
+```
+
+# NAV-25｜Exit / Recovery Route
+
+## 退出与恢复路径｜失败以后，我们还能去哪里
+
+**Canonical Question｜规范问题**
+
+> **为什么一个方案在进入以前，就必须先知道：如果现实没有按预期发展，我们怎样退出、怎样恢复，以及恢复到什么状态？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-25
+```
+
+## 2. `canonicalTitleZh`
+
+```
+退出与恢复路径
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Exit / Recovery Route
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么一个方案在进入以前，就必须先知道：
+如果现实没有按预期发展，我们怎样退出、怎样恢复，以及恢复到什么状态？
+```
+
+---
+
+# 5. `definition`
+
+**Exit / Recovery Route** 是 Navigation 对“方案进入现实以后，如果结果低于预期、接近最低可接受状态，或关键假设失效，系统能够怎样停止、缩小、撤回、转向，并重新回到一个可承担状态”进行正式设计的机制。
+
+它不等于：
+
+```
+PLAN B
+```
+
+也不只是：
+
+```
+emergency backup
+```
+
+更不是悲观地假定：
+
+> “这个方案会失败。”
+
+它真正回答的是：
+
+> **如果这个决定后来被现实证明不再值得继续，我们是否提前知道怎样离开，而不是等到已经失去大部分选择以后才开始寻找出口？**
+
+例如，一个人准备：
+
+```
+离职后做独立顾问
+```
+
+真正成熟的 Navigation 不只应该知道：
+
+```
+什么时候开始
+需要多少资金
+可能获得什么
+```
+
+还应该提前知道：
+
+```
+什么情况下停止继续烧现金
+什么情况下开始重新求职
+最低还需要保留多少流动性
+哪些客户收入不足以继续支撑
+恢复就业需要准备什么
+家庭支出怎样维持
+```
+
+因此：
+
+> **NAV-25 的核心不是替失败做准备，而是确保一个决定即使失败，也不会因为没有出口而把失败放大成无法恢复的失控。**
+
+---
+
+# 6. `navigationMeaning`
+
+NAV-06 已经回答：
+
+```
+这个决定能不能回头？
+```
+
+NAV-22 已经回答：
+
+```
+最差还能接受到哪里？
+```
+
+NAV-24 已经回答：
+
+```
+在基线、上行、下行情景中，
+这个方案分别会怎样？
+```
+
+NAV-25 进一步把这些内容变成：
+
+```
+If X happens
+→ what do we do next?
+```
+
+因此它建立：
+
+```
+Downside Scenario
++
+Minimum Acceptable State
++
+Reversibility Profile
+↓
+Exit Trigger
+↓
+Exit Route
+↓
+Recovery Route
+↓
+Recovered State
+```
+
+这使 Navigation 从：
+
+```
+understanding risk
+```
+
+进入：
+
+```
+designing survivability
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-25 最低需要：
+
+```
+candidateOption
+baselineUpsideDownsideSet
+minimumAcceptableState
+reversibilityProfile
+currentPosition
+capacityQualificationState
+```
+
+并必须至少知道：
+
+```
+what would make the option no longer qualified
+what resources remain available if that happens
+```
+
+如果这些仍然未知，应保留：
+
+```
+EXIT_ROUTE_UNDEFINED
+RECOVERY_ROUTE_UNDEFINED
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+professionalInput
+legalOrContractualContext
+relationshipContext
+careContext
+structuralAlternativeState
+waitingQualificationState
+priorNavigationState
+```
+
+这些用于判断：
+
+- 哪些退出是现实可行；
+- 哪些退出存在合同或法律成本；
+- 恢复需要多少时间；
+- 哪些条件不能等到触发时才处理。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+CURRENT_FACT
+FINANCIAL_RECORD
+CONTRACTUAL_RECORD
+LEGAL_REQUIREMENT
+PROFESSIONAL_INPUT
+USER_CONFIRMED_TRIGGER
+SUPPORTED_PROJECTION
+SCENARIO_ASSUMPTION
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+但真正的：
+
+```
+EXIT_RIGHT
+EXIT_COST
+RECOVERY_REQUIREMENT
+```
+
+不能只依赖解释性来源。
+
+---
+
+# 10. Core Exit / Recovery States
+
+建议至少区分：
+
+```
+EXIT_ROUTE_READY
+EXIT_ROUTE_AVAILABLE_WITH_COST
+EXIT_ROUTE_CONDITIONALLY_AVAILABLE
+EXIT_ROUTE_UNKNOWN
+RECOVERY_ROUTE_READY
+RECOVERY_ROUTE_PARTIAL
+RECOVERY_ROUTE_UNDEFINED
+RECOVERY_CAPACITY_INSUFFICIENT
+```
+
+---
+
+## A. `EXIT_ROUTE_READY`
+
+已明确：
+
+```
+when to exit
+how to exit
+what it costs
+what remains afterward
+```
+
+---
+
+## B. `EXIT_ROUTE_AVAILABLE_WITH_COST`
+
+可以退出，但需要承担：
+
+```
+financial penalty
+notice period
+downtime
+relationship disruption
+legal process
+```
+
+---
+
+## C. `EXIT_ROUTE_CONDITIONALLY_AVAILABLE`
+
+退出只有在某些条件成立时可行。
+
+例如：
+
+```
+buyer exists
+replacement role secured
+consent obtained
+minimum liquidity maintained
+```
+
+---
+
+## D. `EXIT_ROUTE_UNKNOWN`
+
+系统不知道怎样退出。
+
+高影响、低可逆方案如果出现这一状态，需要提高执行门槛。
+
+---
+
+## E. `RECOVERY_ROUTE_READY`
+
+已经知道失败以后怎样回到：
+
+```
+minimum acceptable state
+```
+
+或更高状态。
+
+---
+
+## F. `RECOVERY_ROUTE_PARTIAL`
+
+知道部分恢复方式，但关键部分仍缺失。
+
+---
+
+## G. `RECOVERY_CAPACITY_INSUFFICIENT`
+
+即使退出，也没有足够资源支撑恢复。
+
+这对 Decision Sufficiency 非常重要。
+
+---
+
+# 11. Exit ≠ Recovery
+
+必须严格区分：
+
+```
+EXIT
+```
+
+与：
+
+```
+RECOVERY
+```
+
+例如：
+
+```
+关闭一家业务
+```
+
+是 Exit。
+
+但：
+
+```
+重新建立收入
+偿还剩余债务
+恢复现金缓冲
+重新进入就业
+```
+
+才是 Recovery。
+
+因此：
+
+> **能退出，并不等于退出以后能恢复。**
+
+---
+
+# 12. `allowedInference`
+
+NAV-25 可以：
+
+## A. 从 Downside Scenario 建立退出触发点
+
+例如：
+
+```
+usable liquidity falls below 8 months
+```
+
+如果用户确认这会使方案不再值得继续，则可以建立：
+
+```
+EXIT_TRIGGER
+```
+
+---
+
+## B. 从 NAV-22 建立 recovery floor
+
+例如：
+
+```
+minimum acceptable liquidity = 6 months
+```
+
+则 Recovery Route 至少需要避免跌破该状态。
+
+---
+
+## C. 识别“退出太晚”会损害恢复能力
+
+例如：
+
+```
+continue until liquidity nearly zero
+```
+
+可能意味着：
+
+```
+exit still possible
+recovery much harder
+```
+
+因此可以标记：
+
+```
+LATE_EXIT_RISK
+```
+
+---
+
+## D. 识别较早退出是否保留更多 future option
+
+例如：
+
+```
+leave pilot after 3 months
+```
+
+可能比：
+
+```
+continue for 18 months
+```
+
+保留更多：
+
+```
+capital
+time
+career mobility
+```
+
+---
+
+## E. 识别退出路线需要事先准备
+
+例如：
+
+```
+maintain CV
+keep licences active
+preserve professional network
+maintain emergency liquidity
+```
+
+这些可以属于：
+
+```
+RECOVERY_PREPARATION
+```
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-25 严禁：
+
+## A. 把任何 downside 自动变成 exit trigger
+
+不是每个坏结果都意味着退出。
+
+---
+
+## B. 把 exit plan 当失败预言
+
+```
+exit route exists
+≠
+failure expected
+```
+
+---
+
+## C. 用 Method Reading 决定什么时候退出
+
+禁止：
+
+```
+Tarot says stop
+→ EXIT_TRIGGER
+```
+
+---
+
+## D. 用未经确认的数字建立 trigger
+
+例如：
+
+```
+cash falls below RM30k
+```
+
+必须有合法来源。
+
+---
+
+## E. 假装退出以后一定可以恢复
+
+恢复仍可能失败。
+
+---
+
+## F. 把恢复定义成完全回到过去
+
+```
+recovery
+≠
+restoration to original state
+```
+
+---
+
+# 14. `decisionEffect`
+
+NAV-25 主要影响：
+
+```
+OPTION_ELIGIBILITY
+DECISION_THRESHOLD
+ACTION_SCALE
+CONTINGENCY_REQUIREMENT
+RECOVERY_READINESS
+EXIT_READINESS
+```
+
+核心 effect：
+
+```
+SURVIVABILITY
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+冻结：
+
+> **The weaker the exit route and recovery capacity, the stronger the decision sufficiency required before entering a high-impact option.**
+
+中文：
+
+> **一个高影响方案的退出路线越弱、恢复能力越低，真正进入行动以前所需要的决策充分程度就越高。**
+
+如果：
+
+```
+LOW REVERSIBILITY
++
+DOWN_SIDE_NEAR_MINIMUM
++
+RECOVERY_ROUTE_UNDEFINED
+```
+
+则通常应产生：
+
+```
+HIGH_THRESHOLD
+or
+OPTION_REDESIGN_REQUIRED
+```
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-25 可以：
+
+- 建立 exit trigger；
+- 设计 exit route；
+- 设计 recovery route；
+- 明确恢复所需资源；
+- 识别 late exit risk；
+- 建立 contingency preparation。
+
+NAV-25 不可以：
+
+- 自动替用户退出；
+- 自动卖资产；
+- 自动辞职；
+- 自动终止关系；
+- 绕过合同、法律、专业或 consent；
+- 把所有失败想象都变成 trigger。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+用户必须确认：
+
+```
+什么情况下我愿意停止？
+什么损失我愿意接受？
+什么恢复状态对我来说已经足够？
+```
+
+系统可以提出：
+
+> 如果独立业务连续六个月仍无法覆盖基本支出，你是否会启动退出？
+
+但不能自行记录：
+
+```
+6 months = exit
+```
+
+除非用户确认或存在其他合法 authority。
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.38｜退出路径必须在进入以前被看见
+15.40｜失败以后还能去哪里
+```
+
+相关：
+
+```
+15.35｜坏情况必须能够被承担
+15.36｜哪些变量真正改变结果
+15.37｜延迟也是一条路径
+15.39｜路径之间怎样比较
+```
+
+并直接消费：
+
+```
+NAV-06 Reversibility
+NAV-22 Minimum Acceptable State
+NAV-24 Baseline / Upside / Downside
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 拥有：
+
+```
+recovery
+continuity restoration
+post-disruption viability
+```
+
+NAV-25 不重新解释恢复机制。
+
+它只问：
+
+> **这个具体决定一旦出错，我们有没有现实路径重新回到可承担状态？**
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+uncertainty
+outcome observation
+revision authority
+```
+
+尤其支持：
+
+> **现实一旦证明原假设不成立，Navigation 必须允许方案失去继续资格。**
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+attachment to persistence
+difficulty exiting
+risk tolerance
+identity dependence
+```
+
+但只能作为：
+
+```
+EXIT_BEHAVIOR_CONTEXT
+```
+
+不能决定：
+
+```
+EXIT_TRIGGER
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 是 NAV-25 的核心 producer。
+
+可提供：
+
+```
+remaining liquidity
+exit cost
+debt obligations
+runway after exit
+income recovery requirement
+emergency reserve
+```
+
+例如：
+
+```
+Exit at 8 months liquidity
+vs
+Exit at 2 months liquidity
+```
+
+恢复能力完全不同。
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR / Tarot / I Ching：
+
+只能提出：
+
+```
+what condition may deserve monitoring
+```
+
+不得建立：
+
+```
+exit trigger
+recovery probability
+future rescue claim
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+whatHasChanged
+whichTriggerIsApproaching
+whatResourcesRemain
+whatExitRoutesRemainOpen
+whatRecoveryResourcesRemain
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-25 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Scenario Runtime
+Action Runtime
+```
+
+消费。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **Do not enter a high-impact path without knowing what would make you stop and what reality would still remain after you stop.**
+
+中文：
+
+> **不要进入一条高影响路径，却完全不知道什么情况会让你停止，也不知道停止以后还剩下什么现实可以恢复。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-25：
+
+```
+exitCostChanged
+contractChanged
+minimumStateChanged
+liquidityChanged
+recoveryResourceChanged
+newProfessionalInput
+newLegalConstraint
+newSupportAppeared
+optionScaleChanged
+downsideScenarioChanged
+triggerReached
+```
+
+---
+
+# 27. Canonical Exit / Recovery Model
+
+```
+{
+  "exitRecoveryAssessmentId": "",
+  "optionId": "",
+  "exitTriggers": [],
+  "exitRoutes": [
+    {
+      "routeId": "",
+      "conditions": [],
+      "costs": [],
+      "timeRequired": "",
+      "authorityRequirements": [],
+      "status": ""
+    }
+  ],
+  "recoveryRoutes": [
+    {
+      "routeId": "",
+      "targetState": "",
+      "requiredResources": [],
+      "requiredTime": "",
+      "dependencies": [],
+      "unknowns": []
+    }
+  ],
+  "recoveryMinimum": [],
+  "lateExitRisks": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Exit Trigger Rule
+
+Exit trigger 必须回答：
+
+```
+WHAT CHANGED?
+WHY DOES IT MATTER?
+WHICH CONDITION IS NOW VIOLATED?
+```
+
+不能只写：
+
+```
+if things feel bad
+```
+
+---
+
+# 29. Trigger Classes
+
+建议至少支持：
+
+```
+DATE_TRIGGER
+STATE_TRIGGER
+THRESHOLD_TRIGGER
+EVENT_TRIGGER
+AUTHORITY_TRIGGER
+MINIMUM_STATE_TRIGGER
+```
+
+例如：
+
+```
+DATE_TRIGGER:
+review after 6 months
+
+STATE_TRIGGER:
+no viable clients
+
+THRESHOLD_TRIGGER:
+liquidity falls below confirmed floor
+
+EVENT_TRIGGER:
+key contract terminates
+
+AUTHORITY_TRIGGER:
+professional review requires pause
+```
+
+---
+
+# 30. Early Exit Rule
+
+有时较早退出虽然：
+
+```
+realizes loss sooner
+```
+
+却保留更多：
+
+```
+recovery capacity
+optionality
+liquidity
+time
+```
+
+Navigation 应让这种结构可见。
+
+---
+
+# 31. Late Exit Rule
+
+如果继续等待会使：
+
+```
+recovery resource shrink
+```
+
+应标记：
+
+```
+LATE_EXIT_RISK
+```
+
+这直接连接 NAV-18 Waiting Cost。
+
+---
+
+# 32. Exit Cost Rule
+
+每个 exit route 必须尽量包括：
+
+```
+financial cost
+time cost
+legal cost
+relationship cost
+operational cost
+residual effect
+```
+
+不能只说：
+
+```
+you can always leave
+```
+
+---
+
+# 33. Recovery Target Rule
+
+恢复目标不必是：
+
+```
+original state
+```
+
+可以是：
+
+```
+MINIMUM_ACCEPTABLE_RECOVERED_STATE
+```
+
+例如：
+
+```
+stable housing
+basic income
+6 months liquidity
+employment re-entry
+family care continuity
+```
+
+---
+
+# 34. Recovery Time Rule
+
+恢复不仅需要资源，也需要时间。
+
+例如：
+
+```
+job re-entry
+```
+
+可能需要：
+
+```
+3–6 months
+```
+
+如果这个范围有现实依据，应纳入。
+
+若无依据：
+
+```
+RECOVERY_TIME_UNKNOWN
+```
+
+---
+
+# 35. Recovery Dependency Rule
+
+恢复可能依赖：
+
+```
+market conditions
+professional licence
+support network
+partner cooperation
+available employer
+cash buffer
+```
+
+这些依赖不能隐藏。
+
+---
+
+# 36. Recovery Capacity Rule
+
+执行方案前应尽量检查：
+
+```
+post-failure capacity
+```
+
+而不是只检查：
+
+```
+entry capacity
+```
+
+一个方案如果需要耗尽全部资源才能进入，可能根本没有 recovery capacity。
+
+---
+
+# 37. Recovery Preservation Rule
+
+为了保留恢复能力，有时应该在成功阶段也持续保留：
+
+```
+emergency reserve
+professional network
+credentials
+insurance
+backup supplier
+secondary income source
+```
+
+但是否需要这些，应与具体方案相关。
+
+---
+
+# 38. No Infinite Rescue Rule
+
+不能为了让方案看起来可恢复而无限添加假设：
+
+```
+family can lend
+bank can lend
+old employer will rehire
+market will improve
+```
+
+如果没有支持，应保留：
+
+```
+RECOVERY_DEPENDENCY_UNCONFIRMED
+```
+
+---
+
+# 39. Recovery vs Sunk Cost Rule
+
+一旦 exit trigger 达到，过去投入不能自动成为继续理由。
+
+冻结：
+
+> **The resources already spent do not revoke an exit route that was established precisely to prevent deeper loss.**
+
+中文：
+
+> **已经投入的资源，不能在退出条件真正触发以后，反过来取消原本就是为了防止更大损失而建立的退出路线。**
+
+---
+
+# 40. Exit Trigger Drift Rule
+
+用户可能在现实中不断把 trigger 往后移。
+
+例如：
+
+```
+original:
+exit at 6 months no traction
+
+later:
+wait 3 more months
+
+later:
+one more quarter
+```
+
+系统应标记：
+
+```
+EXIT_TRIGGER_DRIFT
+```
+
+但不能道德化。
+
+需要问：
+
+> 新证据是否真的使原 trigger 失效？
+
+---
+
+# 41. Partial Exit Rule
+
+退出不一定是：
+
+```
+ALL OR NOTHING
+```
+
+可能包括：
+
+```
+reduce exposure
+reduce hours
+sell part
+pause
+stop one product
+leave one market
+end one commitment
+```
+
+这使 Exit Route 与 NAV-10 Response Level、NAV-17 Structural Alternative 连接。
+
+---
+
+# 42. Recovery Route Hierarchy
+
+可以区分：
+
+```
+R1_STABILIZE
+R2_RESTORE_MINIMUM
+R3_REBUILD_CAPACITY
+R4_REOPEN_OPTION_SPACE
+```
+
+例如：
+
+```
+Stabilize:
+stop cash burn
+
+Restore minimum:
+secure essential income
+
+Rebuild:
+rebuild 6-month buffer
+
+Reopen:
+consider new career direction again
+```
+
+---
+
+# 43. Other-People Rule
+
+如果 Exit / Recovery 会影响：
+
+```
+partner
+children
+dependants
+employees
+co-owner
+```
+
+必须读取 NAV-08。
+
+用户不能单方面把：
+
+```
+others absorb recovery cost
+```
+
+当成默认 recovery plan。
+
+---
+
+# 44. Professional Boundary Rule
+
+在：
+
+```
+medical
+legal
+regulated financial
+estate
+```
+
+领域，Exit / Recovery Route 可能需要专业 authority。
+
+Navigation 只能组织，不得冒充专业程序。
+
+---
+
+# 45. Scenario-to-Trigger Rule
+
+NAV-24 的 Downside 不自动等于 Exit Trigger。
+
+正确关系：
+
+```
+Downside Scenario
+↓
+Observe actual condition
+↓
+Trigger threshold reached?
+↓
+Exit / Recovery action
+```
+
+Scenario 仍然只是条件路径。
+
+---
+
+# 46. Customer Projection Example
+
+内部：
+
+```
+Option:
+Independent consulting
+
+Exit Trigger:
+usable liquidity reaches 8 months
+AND
+qualified client pipeline remains below confirmed minimum
+
+Exit Route:
+stop expansion spend
+return to active employment search
+maintain current clients during transition
+
+Recovery Minimum:
+household essentials covered
+health coverage maintained
+6 months liquidity preserved
+
+Recovery Route:
+employment re-entry
++
+retain consulting as secondary income
+```
+
+客户可以看到：
+
+> **真正让这条路更可承担的，不是保证它一定成功，而是你已经知道如果它没有按预期发展，什么时候停止继续下注，以及停止以后怎样回来。**
+> 
+> 目前可以把一个关键复核点放在现金缓冲与客户进展之间：如果可用流动性下降到已经确认的边界，而稳定客户仍没有形成，就不再继续扩大投入，而是停止新增扩张成本，重新启动正式求职，同时保留已经能够产生收入的客户。这样做并不能消除失败的可能，却可以避免为了证明自己“再坚持一下”而把恢复所需的资源也一起耗尽。
+
+---
+
+# 47. Customer Actions
+
+允许：
+
+```
+Confirm exit trigger
+Change trigger
+Add exit route
+Add recovery route
+Set recovery minimum
+Add professional review
+Reduce option scale
+Mark dependency unknown
+Continue
+```
+
+---
+
+# 48. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+EXIT_ROUTE_READY
+EXIT_ROUTE_WITH_COST
+EXIT_ROUTE_UNKNOWN
+RECOVERY_ROUTE_READY
+RECOVERY_ROUTE_PARTIAL
+RECOVERY_CAPACITY_INSUFFICIENT
+TRIGGER_PENDING_CONFIRMATION
+READY_FOR_DECISION_SUFFICIENCY
+REOPENED
+```
+
+---
+
+# 49. Fail-Closed Conditions
+
+以下情况不得进入 NAV-26：
+
+```
+criticalExitTriggerUnknown
+exitRouteInvented
+recoveryCapacityFabricated
+minimumStateNotConnected
+contractOrLegalExitAssumed
+thirdPartySupportAssumedWithoutConsent
+symbolicReadingUsedAsExitAuthority
+scenarioTreatedAsActualTrigger
+recoveryDependencyHidden
+decisionObjectChanged
+```
+
+---
+
+# 50. Canonical Runtime Rule
+
+> **Navigation must define how a high-impact option can be exited and how a minimum acceptable state can be recovered before treating the option as ready for final sufficiency review.**
+
+中文：
+
+> **Navigation 在把一个高影响选项送入最终充分性判断以前，必须先明确它怎样退出，以及最低可接受状态怎样恢复。**
+
+---
+
+# 51. Canonical Exit Rule
+
+> **An exit route is not a prediction of failure; it is a boundary against allowing failure to consume the resources needed for recovery.**
+
+中文：
+
+> **退出路线不是对失败的预测，而是一条边界，用来防止失败继续吞噬本来应该留给恢复的资源。**
+
+---
+
+# 52. Canonical Recovery Rule
+
+> **Recovery does not require restoring the past; it requires returning to a state from which meaningful choice becomes possible again.**
+
+中文：
+
+> **恢复并不要求回到过去原样，而是回到一个重新拥有真实选择能力的状态。**
+
+---
+
+# 53. Canonical Trigger Rule
+
+> **An exit trigger must be tied to observable conditions, confirmed thresholds, or legitimate authority—not fear, symbolic interpretation, or retrospective regret alone.**
+
+中文：
+
+> **退出触发条件必须建立在可观察现实、已经确认的门槛或合法权威上，而不能只建立在恐惧、象征解释或事后后悔上。**
+
+---
+
+# 54. Canonical Preservation Rule
+
+> **A strong exit design preserves enough capacity, value, and option space that a failed path does not become an unrecoverable life structure.**
+
+中文：
+
+> **好的退出设计，是在一条路径失败时仍然保留足够的容量、价值与选择空间，使一次失败不会被放大成无法恢复的生活结构。**
+
+---
+
+# 55. Final Canonical Form
+
+```
+NAV-25
+EXIT / RECOVERY ROUTE
+```
+
+**Input**
+
+```
+Candidate Option
++
+Baseline / Upside / Downside
++
+Minimum Acceptable State
++
+Reversibility
++
+Available Recovery Capacity
+```
+
+**Process**
+
+```
+Determine:
+When Would We Stop?
+How Can We Exit?
+What Will Exit Cost?
+What Must Still Remain?
+How Do We Recover?
+What Reopens Choice?
+```
+
+**Output**
+
+```
+Exit Trigger Set
++
+Exit Route
++
+Recovery Route
++
+Recovery Readiness State
+```
+
+**Boundary**
+
+```
+Exit is not failure prediction.
+Recovery is not restoration.
+A route is only real if its conditions actually exist.
+```
