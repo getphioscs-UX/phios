@@ -1,0 +1,25 @@
+✓ Four archived desktop texts, per-page hashes, registered I/II corpus and III sections verified. Source archive excluded by Pages; AI review is not human approval.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: DEDUP_SOURCE_DRIFT:content/registry/figures.json
++ actual - expected
+
++ '498c6c456eb1d726340b6a0bae1cbceac5b37d2d35db5c01b99c79a361f821ed'
+- '2c664dc993f3b10243850dc765ef6e185aa3f14e59b92631ea66b1f2484ee023'
+
+    at currentDedupReport (file:///C:/phios/scripts/build-b14-sks-dedup.mjs:10:72)
+    at file:///C:/phios/scripts/check-b14-sks-schema.mjs:9:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '498c6c456eb1d726340b6a0bae1cbceac5b37d2d35db5c01b99c79a361f821ed',
+  expected: '2c664dc993f3b10243850dc765ef6e185aa3f14e59b92631ea66b1f2484ee023',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
