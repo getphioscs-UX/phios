@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import {resolveRegisteredZeroCostCheck} from '../registered-zero-cost-check-route.mjs';
+import {verifyCheckerMaintenanceReference} from './checker-maintenance-successor.mjs';
 
 export const ROOT=process.cwd();
 export const BASELINE_COMMIT='c42784848b3d9e5495d34e5a0d827460a7108a89';
@@ -16,7 +17,7 @@ export const json=p=>JSON.parse(fs.readFileSync(abs(p),'utf8'));
 export const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(abs(p))).digest('hex');
 export const stable=v=>Array.isArray(v)?`[${v.map(stable).join(',')}]`:(v&&typeof v==='object'?`{${Object.keys(v).sort().map(k=>`${JSON.stringify(k)}:${stable(v[k])}`).join(',')}}`:JSON.stringify(v));
 export const digest=v=>crypto.createHash('sha256').update(stable(v),'utf8').digest('hex');
-export function assertRef(ref,label='REF'){assert.ok(ref&&typeof ref.path==='string',`${label}_MISSING`);assert.ok(exists(ref.path),`${label}_PATH_MISSING:${ref.path}`);assert.equal(sha(ref.path),ref.sha256,`${label}_DIGEST_DRIFT:${ref.path}`);}
+export function assertRef(ref,label='REF'){assert.ok(ref&&typeof ref.path==='string',`${label}_MISSING`);assert.ok(exists(ref.path),`${label}_PATH_MISSING:${ref.path}`);if(sha(ref.path)!==ref.sha256&&verifyCheckerMaintenanceReference(ref,label))return;assert.equal(sha(ref.path),ref.sha256,`${label}_DIGEST_DRIFT:${ref.path}`);}
 export function assertCurrent(doc,label){assert.equal(doc.phase,'MRM-S',`${label}_PHASE`);assert.equal(doc.baselineCommit,BASELINE_COMMIT,`${label}_BASELINE`);}
 export function runNode(script){const current=resolveRegisteredZeroCostCheck(script);const r=spawnSync(process.execPath,[current],{cwd:ROOT,encoding:'utf8'});assert.equal(r.status,0,`${script} → ${current}\n${r.stdout}\n${r.stderr}`);return r.stdout.trim();}
 export function capabilityKey(x){return `${x.runtimeCode}::${x.capabilityCode}`;}

@@ -549,10 +549,11 @@
       }
     },
     "assets/customer-ui/js/specialists/bazi/product-renderer.js": {
-      "currentSha256": "78478bc88d143e410a8288a52cf98008276125a19cf745dd76339a4bfb7048b5",
+      "currentSha256": "93b42e7bb26c5627b68027c6df4ad089a31e872b0fa29684c1263f2723a46d52",
       "recognizedPredecessors": [
         "4fbd732ee2aedeb11c673a138a457f7bd131e194dfabc702d7103fd2ee30d5e5",
-        "4bb399bb5c0a85213811548d96702d7f5f9504139f09dd958c3cc94376910be2"
+        "4bb399bb5c0a85213811548d96702d7f5f9504139f09dd958c3cc94376910be2",
+        "78478bc88d143e410a8288a52cf98008276125a19cf745dd76339a4bfb7048b5"
       ],
       "requiredTokens": [
         "renderBaziSpecialistWorkspace",
@@ -564,12 +565,22 @@
         "renderBaziRelationshipInteractionSurface",
         "renderBaziTimingSurface",
         "renderBaziProfessionalTopicSurface",
-        "renderCustomerPublication"
+        "renderCustomerPublication",
+        "product?.reportAccess?.state!=='FREE_REPORT_PREVIEW'",
+        "isBaziNativeProduct(product?.freeChartSource)",
+        "renderBaziProfessionalStructure(product.freeChartSource,{embedded:true,chartOnly:true})"
       ],
       "forbiddenTokens": [],
       "authorizedSuccessor": {
         "workOrder": "docs/guided-report-successor-r2/report-delivery/work-order.md",
         "scope": "Shared delivery shell owns access presentation; retained BaZi specialist remains optional detail; no semantic change"
+      },
+      "committedSuccessor": {
+        "commit": "34c8726cf00991ba42843e995f0615d530c50756",
+        "scope": "Free preview only: prepend current admitted native four pillars using existing renderer chartOnly; all other publication paths retain original plan",
+        "historicalAcceptanceChanged": false,
+        "reconciliationRef": "content/professional/personal-reality/current/ppr-current-bazi-free-chart-successor-20261009-v1.json",
+        "humanVisualReview": "PENDING"
       }
     },
     "assets/customer-ui/js/personal-products/final-personal-reading-experience.js": {
