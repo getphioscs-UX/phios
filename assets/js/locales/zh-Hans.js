@@ -1,3 +1,4 @@
+import worldRecovery from './zh-Hans/world-recovery.js';
 /* PHI OS zh-Hans dictionary composition entry. Translation content belongs in ./locales/zh-Hans/*.js. */
 import shared from './zh-Hans/shared.js';
 import home from './zh-Hans/home.js';
@@ -21,6 +22,7 @@ import academyLearning from './zh-Hans/academy.js';
 import personalRuntime from './zh-Hans/personal-runtime.js';
 
 const dictionary = Object.freeze({
+  ...worldRecovery,
   ...shared,
   ...home,
   ...atlas,

@@ -1,13 +1,13 @@
-import {t} from '../../i18n.js';
+import {t,getLocale} from '../../i18n.js';
 import {resolveAtlasVisualById} from './atlas-static-visual.js';
 
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
-const loc=(v,l)=>v?.[l]||v?.en||v?.['zh-Hans']||v||'';
+const loc=(v,l)=>v&&typeof v==='object'?(v[l]||(l==='zh-Hans'?'来源内容尚待中文确认':v.en)||''):(v||'');
 const clean=v=>String(v??'').normalize('NFKC').trim();
 const searchText=v=>clean(v).toLocaleLowerCase();
 const PAGE=12,SEARCH_PAGE=24;
 const tr=(key,fallback='')=>t(`book6Atlas.${key}`,{},fallback);
-const humanize=v=>String(v??'').replaceAll('_',' ').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase());
+const humanize=v=>getLocale()==='zh-Hans'?'尚待来源确认':String(v??'').replaceAll('_',' ').replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase());
 const UI_KEYS=['eyebrow','title','lead','overview','search','cases','timeline','windows','snapshots','dossiers','lived','visuals','compare','compareRuntime','unknown','missing','unverified','ask','noRank','open','previous','next','filters','clear','results','version','previousVersion','dataState','freshness','layer','textAlternative','selectDossier','selectSnapshot','selectDimension','pagination','imageBaseNote','resolverMissing','relatedCases','state','all','allTime','allRegions','allTypes','timeWindow','region','caseType','trigger','pressureField','structuralChange','reconfigurationWindow','linkedCases','dimension','evidenceDate','historicalVersionNote','selectCasesFirst','selectDossiersFirst','noUniversalScore','livedProfile','visualLibrary','visualLibraryLead','visualFamily','visualSubject','visualCount','contextFigures','currentDataNotAdmitted','currentDataBoundary','runtimeReadout','runtimeReadoutLead','runtimeEvidenceGateOpen','runtimeConfidence','runtimeConfidenceUnknown','runtimeNeeds','runtimeNeedEvidence','runtimeNeedObservation','runtimeNeedMethod','runtimeHistoricalContext','runtimeEngineBoundary','runtimeLoading','runtimeUnavailable','historicalEvidence','searchPlaceholder'];
 const copy=()=>Object.fromEntries(UI_KEYS.map(k=>[k,tr('ui.'+k,humanize(k))]));
 const COPY={get en(){return copy();},get 'zh-Hans'(){return copy();}};
@@ -133,7 +133,7 @@ const valueLabel=(v,l='en')=>{
    if(duration)return `${duration[1]} 年（登记窗口；不代表因果持续时长）`;
   }
  }
- return String(v);
+ return l==='zh-Hans'&&/[A-Za-z]{3}/.test(String(v))&&!/[\u4e00-\u9fff]/.test(String(v))?'来源说明尚待中文确认':String(v);
 };
 const status=(v,l)=>valueLabel(v,l);
 const listText=(v,l)=>Array.isArray(v)&&v.length?v.map(x=>valueLabel(x,l)).join(' · '):tr('ui.unknown','Unknown');

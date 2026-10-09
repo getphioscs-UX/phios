@@ -51,10 +51,10 @@ if(root){
     const target=root.querySelector('[data-atlas-layer-content]');
     if(target) target.innerHTML=`<p role="alert">${getLocale()==='zh-Hans'?'文明图谱资料暂时无法载入。':'Civilization Atlas data could not be loaded.'}</p>`;
   });
-  fetch(ATLAS_VISUAL_BINDINGS_PATH).then(r=>{if(!r.ok)throw new Error('STATIC_VISUAL_BINDINGS_UNAVAILABLE');return r.json();}).then(bindings=>{data.staticVisuals=bindings;applyVisualDeepLink();render();}).catch(()=>{/* Optional imagery: structured Atlas remains available. */});
+  fetch(ATLAS_VISUAL_BINDINGS_PATH).then(r=>{if(!r.ok)throw new Error('STATIC_VISUAL_BINDINGS_UNAVAILABLE');return r.json();}).then(bindings=>{data.staticVisuals=bindings;applyVisualDeepLink();render();}).catch(error=>{root.dataset.visualBindingState='MISSING_BINDING';console.error(error);globalThis.dispatchEvent(new CustomEvent('phios:atlas-visual-state',{detail:{state:'MISSING_BINDING',error:error.message}}));});
   Promise.all([
     fetch('/content/civilization-atlas/visuals/atlas-visual-projection-v1.json').then(r=>{if(!r.ok)throw new Error('ATLAS_VISUAL_PROJECTION_UNAVAILABLE');return r.json();}),
     fetch('/content/civilization-atlas/visuals/atlas-layer-template-slots-v1.json').then(r=>{if(!r.ok)throw new Error('ATLAS_TEMPLATE_SLOTS_UNAVAILABLE');return r.json();})
-  ]).then(([visualProjection,templateSlots])=>{data.visualProjection=visualProjection;data.templateSlots=templateSlots;root.dataset.atlasProjection='CIV_ATLAS_TEMPLATE_COMPOSITOR';render();}).catch(()=>{root.dataset.atlasProjection='STRUCTURED_FALLBACK';});
+  ]).then(([visualProjection,templateSlots])=>{data.visualProjection=visualProjection;data.templateSlots=templateSlots;root.dataset.atlasProjection='CIV_ATLAS_TEMPLATE_COMPOSITOR';render();}).catch(error=>{root.dataset.atlasProjection='STRUCTURED_FALLBACK';console.error(error);globalThis.dispatchEvent(new CustomEvent('phios:atlas-visual-state',{detail:{state:'PROJECTION_UNAVAILABLE',error:error.message}}));});
   window.addEventListener('pagehide',()=>{unsubscribe();unbindUrl();unbindLocale();},{once:true});
 }

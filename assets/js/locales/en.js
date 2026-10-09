@@ -1,3 +1,4 @@
+import worldRecovery from './en/world-recovery.js';
 /* PHI OS en dictionary composition entry. Translation content belongs in ./locales/en/*.js. */
 import shared from './en/shared.js';
 import home from './en/home.js';
@@ -21,6 +22,7 @@ import academyLearning from './en/academy.js';
 import personalRuntime from './en/personal-runtime.js';
 
 const dictionary = Object.freeze({
+  ...worldRecovery,
   ...shared,
   ...home,
   ...atlas,

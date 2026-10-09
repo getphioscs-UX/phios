@@ -1,3 +1,4 @@
+import {monitorVisual} from './visual-runtime.js';
 export const ATLAS_VISUAL_BINDINGS_PATH='/content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json';
 const PUBLIC_BASE='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/';
 const FAMILIES={
@@ -52,7 +53,7 @@ export function resolveAtlasVisualDeepLink(bindings,assetId,{data={},allowPendin
  else if(asset.family==='GEOGRAPHIC_BASE')patch={activeLayer:'world'};
  else if(asset.family==='HISTORICAL_FIGURE')patch={activeLayer:'timeline',timeWindowId:FIGURE_PERIOD[asset.subjectId]||null};
  else if(asset.family==='MODERN_FLAG')patch={activeLayer:'world',snapshotId:'WS-2026',time:2026};
- else if(asset.family==='WORLD_RECONFIGURATION_SNAPSHOT')externalHref='/books/reality-configuration/?visual='+encodeURIComponent(asset.assetId)+'#atlas';
+ else if(asset.family==='WORLD_RECONFIGURATION_SNAPSHOT')externalHref='/world?view=reconfiguration&atlas=snapshots&snapshot='+encodeURIComponent(asset.subjectId)+'&visual='+encodeURIComponent(asset.assetId)+'#atlas';
  return {asset,patch,externalHref};
 }
 
@@ -112,7 +113,7 @@ function visualFigure(doc,a,locale){
  const note=doc.createElement('p');note.textContent=a.family==='MODERN_FLAG'?(zh?'现代国家旗帜，仅用于现代国家识别，不代表古代文明或历史疆界。':'A modern national flag, for modern country identification, not ancient civilizations or historical borders.'):a.family==='HISTORICAL_FIGURE'?(zh?'人物形象为创作性复原，不作为真实容貌或历史事实的证据。':'An artistic reconstruction, not evidence of exact appearance or historical facts.'):(zh?'情境插画；图中文字、位置与边界不作为历史依据，年代与资料请以图谱正文为准。':'Contextual illustration. Embedded text, positions and borders are not historical evidence; consult the structured Atlas for dates and information.');caption.append(note);
  const expand=doc.createElement('button');expand.type='button';expand.textContent=zh?'展开图片':'Expand image';expand.disabled=true;caption.append(expand);
  img.addEventListener('load',()=>{figure.dataset.imageState='ready';expand.disabled=false;},{once:true});
- img.addEventListener('error',()=>{figure.remove();},{once:true});
+ monitorVisual(img,a,locale);
  expand.addEventListener('click',()=>{const dialog=doc.createElement('dialog');dialog.className='civ-visual-dialog';dialog.setAttribute('aria-label',title);const close=doc.createElement('button');close.type='button';close.textContent=zh?'关闭图片':'Close image';const large=img.cloneNode();large.loading='eager';dialog.append(close,large);const label=doc.createElement('p');label.textContent=title+' · '+note.textContent;dialog.append(label);doc.body.append(dialog);close.addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{dialog.remove();expand.focus();},{once:true});dialog.showModal();close.focus();});
  img.src=a.publicUrl;figure.append(img,caption);return figure;
 }
