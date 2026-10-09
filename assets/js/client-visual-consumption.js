@@ -263,7 +263,7 @@ async function replaceTextBrandWithVerifiedLogo(selector, assetCode, context, cl
 async function hydrateAdditionalBranding(context) {
   const footerCount = await replaceTextBrandWithVerifiedLogo(
     '.public-footer .public-brand',
-    'LOGO-010',
+    'LOGO-006',
     context,
     'client-brand-logo client-brand-logo--footer'
   );

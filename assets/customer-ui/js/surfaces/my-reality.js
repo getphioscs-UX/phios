@@ -156,3 +156,7 @@ function boot(){
   loadCurrent();reRenderOnLocale(()=>{if(currentView)render(currentView)})
 }
 boot();
+
+// Presentation navigation only: reuse the existing intake and workspace tabs.
+document.querySelector('[data-reality-structure-start]')?.addEventListener('click',()=>document.getElementById('cx-reality-intake')?.showModal());
+for(const button of document.querySelectorAll('[data-reality-structure-tab]'))button.addEventListener('click',()=>{const tab=document.querySelector('[data-cx-tab="'+button.dataset.realityStructureTab+'"]');tab?.click();document.querySelector('[data-cx-workspace]')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});tab?.focus({preventScroll:true});});

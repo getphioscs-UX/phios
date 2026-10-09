@@ -194,7 +194,7 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
 // Include this new local customer consumer before commit; it remains subject
 // to the same public boundary, size checks and source-identity receipt.
-for(const file of ['world/index.html','assets/js/pages/world.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
+for(const file of ['world/index.html','assets/js/pages/world.js','assets/customer-ui/surfaces/reality-structure.css'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 const atlasReadingBridge='assets/js/pages/civilization-atlas/atlas-reading-bridge.js';
 if(fs.existsSync(path.join(root,atlasReadingBridge)))publicationFiles.add(atlasReadingBridge);
 if (admittedBookVii) {

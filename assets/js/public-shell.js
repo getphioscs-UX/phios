@@ -136,7 +136,7 @@ function footerMarkup() {
             <span class="public-brand__fallback">
               <span>PHI OS</span>
             </span>
-            <img class="public-brand__logo" data-public-brand-asset="LOGO-010" alt="" hidden />
+            <img class="public-brand__logo" data-public-brand-asset="LOGO-006" alt="" hidden />
           </a>
           <p class="public-footer__statement" data-i18n="publicShell.footer.statement"></p>
         </div>

@@ -1,3 +1,5 @@
+import {currentFooterLogo} from './lib/branding-footer-successor.mjs';
+const footerLogo=currentFooterLogo();
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -193,7 +195,7 @@ assert.match(runtime, /AUTO_MASTHEAD/);
 assert.match(runtime, /EXISTING_MANAGED/);
 assert.match(runtime, /destinationVisualUpgrade/);
 assert.match(runtime, /LOGO-003/);
-assert.match(runtime, /LOGO-010/);
+assert.match(runtime, new RegExp(footerLogo));
 assert.doesNotMatch(runtime, /\.r2\.dev|pub-[a-z0-9]+/i);
 assert.match(resolver, /UPSTREAM_VERIFICATION_REQUIRED/);
 assert.match(i18n, /import\('\.\/client-visual-consumption\.js'\)/);
@@ -206,7 +208,7 @@ assert.match(css, /prefers-contrast/);
 // Branding keeps existing canonical bindings. Current checker permits only explicit fail-closed pending states;
 // live acceptance is a separate external-evidence gate.
 assert.match(shell, /data-public-brand-asset="LOGO-003"/);
-assert.match(shell, /data-public-brand-asset="LOGO-010"/);
+assert.match(shell, new RegExp('data-public-brand-asset="'+footerLogo+'"'));
 assert.match(shell, /resolvePublicAssetForWeb\('LOGO-011'/);
 for (const code of contract.branding.requiredProductionBranding) {
   const pub = publicByCode.get(code);

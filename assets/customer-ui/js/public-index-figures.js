@@ -1,6 +1,7 @@
 import {hydrateUnifiedPublicVisuals} from '../../js/public-v2/unified-public-visual-resolver.js';
 // Existing visual authority resolves the source. Opening an image is read-only.
 for(const root of document.querySelectorAll('[data-pis-context-figures]')){
+ if(location.pathname.replace(/\/$/,'')==='/reality'){root.remove();continue;} // Never hydrate the retired Reality gallery.
  hydrateUnifiedPublicVisuals(root).then(()=>{
   for(const link of root.querySelectorAll('[data-pis-figure-link]')){
    const image=link.querySelector('img');if(image.dataset.assetStatus!=='ready'||!image.src)continue;

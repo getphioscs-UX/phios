@@ -1,3 +1,5 @@
+import {currentFooterLogo} from './lib/branding-footer-successor.mjs';
+const footerLogo=currentFooterLogo();
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -72,14 +74,14 @@ assert.equal(reconciliation.consumerActivation.favicon, 'LOGO-011');
 assert.equal(reconciliation.consumerActivation.appIcon, 'LOGO-012');
 assert.match(shell, /data-public-brand-asset="LOGO-003"/);
 assert.match(shell, /public-brand--footer/);
-assert.match(shell, /data-public-brand-asset="LOGO-010"/);
+assert.match(shell, new RegExp('data-public-brand-asset="'+footerLogo+'"'));
 assert.match(shell, /resolvePublicAssetForWeb\('LOGO-011'/);
 assert.match(shell, /resolvePublicAssetForWeb\('LOGO-012'/);
 assert.match(shell, /apple-touch-icon/);
 assert.equal((shell.match(/data-public-brand-asset="LOGO-003"/g) || []).length, 1, 'Header logo binding must be unique');
-assert.equal((shell.match(/data-public-brand-asset="LOGO-010"/g) || []).length, 1, 'Footer logo binding must be unique');
+assert.equal((shell.match(new RegExp('data-public-brand-asset="'+footerLogo+'"','g')) || []).length, 1, 'Footer logo binding must be unique');
 assert.equal((shell.match(/class="public-brand__fallback"/g) || []).length, 2, 'Header/footer each retain exactly one fail-closed textual fallback');
 
 console.log('✓ PART H.5A Branding R2 Evidence Reconciliation passed.');
 console.log('  LOGO-001..012: 12/12 HTTP 200 image/svg+xml evidence materialized without inventing ETag/content-length.');
-console.log('  Client bindings: header LOGO-003, footer LOGO-010, favicon LOGO-011, app icon LOGO-012.');
+console.log('  Client bindings: header LOGO-003, owner-authorized footer LOGO-006, favicon LOGO-011, app icon LOGO-012.');

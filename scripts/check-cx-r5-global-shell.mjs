@@ -1,3 +1,5 @@
+import {currentFooterLogo} from './lib/branding-footer-successor.mjs';
+const footerLogo=currentFooterLogo();
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -59,7 +61,7 @@ for (const forbidden of ['REALITY_JOURNEY', 'READINGS', 'SERVICES', 'ACADEMY', '
 // Historical R4/R5 evidence keeps LOGO-003; the current light CX header may consume the surface-appropriate canonical mono-dark successor.
 for (const assetId of ['LOGO-003', currentHeaderLogo, 'LOGO-010']) assert.ok(visual.entries.some(entry => entry.assetId === assetId && entry.available === true), `R4 visual registry missing ${assetId}`);
 assert.ok(shell.includes(`data-cx-asset=\"${currentHeaderLogo}\"`), `shell missing current canonical header ${currentHeaderLogo}`);
-assert.ok(shell.includes('data-cx-asset=\"LOGO-010\"'), 'shell missing canonical footer LOGO-010');
+assert.ok(shell.includes('data-cx-asset="'+footerLogo+'"'), 'shell missing owner-authorized footer lockup');
 if(currentBrand){assert.equal(currentBrand.predecessor,`${BASE}/authority/customer-brand-asset-authority-v3.json`);assert.equal(currentBrand.authorityBoundary.newLogoIdentityCreated,false);assert.equal(currentBrand.authorityBoundary.upstreamLogoRegistryMutated,false);}
 assert.equal(allShellSources.includes('public-shell-v2'), false, 'R5 shell references public-shell-v2');
 assert.equal(allShellSources.includes('data-puxr-header'), false, 'R5 shell references legacy header injection');
