@@ -1,62 +1,48 @@
-# 唯一 Master W00–W40 进度对账
-当前工作树 HEAD：920a8eb130afa4c27b55b4ba1cd2fab86de75a35。所有阶段 DEPLOYED 未验证当前版本，LIVE_CUSTOMER 未执行。没有足够证据认定任何阶段全范围完成；各阶段的已完成子项保留独立证据。
+# 唯一 Master W00–W40 当前进度
+HEAD: 712c47ba033b7963d4484d9bcdc9dcf3f0d094dc
 
-|阶段|进度|实际实现文件|验证及版本|剩余工作／下一步|
+|阶段|SOURCE|DEPLOYED|LIVE CUSTOMER|下一步|
 |---|---|---|---|---|
-|W00 Environment and working tree|部分|scripts/build-live-customer-master.mjs|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/BASELINE.json|Record concurrent HEAD/dirty tree without resetting others|
-|W01 Single Master Ledger|部分|scripts/build-live-customer-master.mjs|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/MASTER-CONSUMER-MAP.json|Maintain one evidence ledger and surface stale evidence|
-|W02 Routes / APIs / Consumers|部分|scripts/audit-recovery-current-calls.mjs|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/MASTER-CONSUMER-MAP.json|Resolve dynamic callers and activation flags individually|
-|W03 Accepted content and assets|部分|content/registry/public-assets.json|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Bind accepted asset/content identities to exact current bytes|
-|W04 Pages publication boundary|部分|scripts/lib/publication-boundary.mjs|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json|Run current build publication boundary and excluded private-content audit|
-|W05 Homepage / navigation|部分|index.html<br>assets/customer-ui/js/surfaces/home.js|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json|Bilingual diff review plus actual mobile preview of restored paragraphs|
-|W06 Personal native free report|部分|perspectives/personal/index.html|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Verify native accepted free reading and same-object paid unlock|
-|W07 Report commerce and delivery|部分|functions/commerce/commerce-stripe-api.js<br>functions/report-delivery/report-delivery-contract.js|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP; 920a8eb130afa4c27b55b4ba1cd2fab86de75a35; scripts/check-paid-method-lifecycle-integration.mjs: PASS（SYNTHETIC_ZERO_PROVIDER_NOT_LIVE）; scripts/check-paid-report-durable-integration.mjs: PASS（SYNTHETIC_ZERO_PROVIDER_NOT_LIVE）; scripts/check-controlled-purchase-integration.mjs: PASS（LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY）|Finish eligible producer+renderer admission and exact Checkout/webhook-to-material flow|
-|W08 Report four follow-up questions|部分|functions/account/report-followup-store.js<br>functions/account/paid-report-question-generation.js|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP; 当前文件SHA256见JSON；历史检查未等同当前版本; scripts/check-report-followup-store.mjs: PASS（SYNTHETIC_ZERO_PROVIDER_NOT_LIVE）|Wire verified immutable report to paid followup producer, retain four-slot SQL constraints|
-|W09 RM19 membership|部分|functions/pws/commercial/stripe-product-registry.js|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Verify paid-through/cancel/resubscribe same-workspace continuity|
-|W10 My Reality persistence|部分|functions/account/my-reality-saved-sources.js|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/MY-REALITY-SAVED-SOURCE-QA.json|Integrate retained histories without backfill or invented history|
-|W11 Contextual Ask|部分|functions/api/customer-contextual-ask.js|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Verify per-context reading ownership and accepted sources|
-|W12 Public Knowledge Ask repair|部分|functions/api/customer-contextual-ask.js|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json|Keep public Ask bounded; review current Answer/figure maintenance successor|
-|W13 Book VIII private doctrine|部分|books/reality-navigation/index.html<br>content/knowledge/structured/successors/master-a-v2-batch4/book-viii-identity-reuse-v1.json|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json|核对 VIII 公开不售页面、私有源码及受控图像边界；不公开全文|
-|W14 NAV runtime / Academy mapping|部分|functions/runtime/navigation/nav-accepted-batch-06-runtime.js|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json; content/production-closure/live-customer-commercial-convergence/NAV-ACCEPTED-PRIVATE-REGISTRY.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-QA.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-QA.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-QA.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-SOURCE-INTEGRITY.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-QA.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-QA.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json; content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-QA.json; content/production-closure/live-customer-commercial-convergence/NAV-IDENTITY-PLACEHOLDERS.json; content/production-closure/live-customer-commercial-convergence/NAV-SCHEMA-CANDIDATE.json; content/production-closure/live-customer-commercial-convergence/NAV-CONSUMER-INVENTORY.json; content/production-closure/live-customer-commercial-convergence/NAV-DEPENDENCY-MAP.json|读取可信 server reality 输入，接入 scoped customer API 与 Academy 受控消费；不能只导入 helper|
-|W15 Academy video model|阻断|academy/index.html|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Supply actual accepted video assets before purchase eligibility|
-|W16 Protected media delivery|阻断|functions/api|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Verify owned permanent video delivery with revoked sharing denied|
-|W17 Academy commerce|阻断|functions/pws/commercial/stripe-product-registry.js|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Keep no-video products disabled; reuse Commerce for admitted asset only|
-|W18 Tarot interaction|部分|assets/customer-ui/js/surfaces/tarot-shuffle.js<br>assets/customer-ui/js/surfaces/tarot.js|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/TAROT-INTERACTION-QA.json|真实移动端洗牌、触摸、防重复、后台恢复 E2E|
-|W19 Free Tarot zero-provider|部分|functions/api/symbolic-method-execute-v4.js<br>functions/tarot-product-runtime/tarot-product-runtime-v3.js|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP; 当前文件SHA256见JSON；历史检查未等同当前版本; scripts/check-free-symbolic-zero-provider.mjs: PASS（SYNTHETIC_ZERO_PROVIDER_NOT_LIVE）|重跑确定性路径网络拦截；客户浏览器仍需验证|
-|W20 Paid Tarot commerce|部分|functions/commerce/commerce-stripe-api.js|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Bind paid Tarot single synthesis to verified order/reading/corpus|
-|W21 Tarot single-call synthesis|部分|scripts/check-tarot-qa-budget.mjs|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|将单次 synthesis 接入真实订单、固定 reading、失败可恢复状态；不新增模型调用|
-|W22 20-case unit economics|部分|content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 2026-10-09T03:48:54.935Z; content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json|20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用|
-|W23 I Ching experience|部分|perspectives/iching/index.html|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP; 当前文件SHA256见JSON；历史检查未等同当前版本; scripts/check-free-symbolic-zero-provider.mjs: PASS（SYNTHETIC_ZERO_PROVIDER_NOT_LIVE）|Actual deterministic cast/mobile replay and corpus provenance|
-|W24 I Ching synthesis candidate|部分|functions/commerce/commerce-stripe-api.js<br>functions/api/symbolic-method-execute-v4.js|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|完成受控订单与确定性卦象的 synthesis 技术接线，不改已决定 RM39|
-|W25 Account|部分|account/index.html<br>functions/account/account-reports-api.js|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Actual owned report list/reopen/download, pending generation progress|
-|W26 Appointments|部分|professional/services/index.html|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Verify intake→consent→appointment boundary without paid-live transaction|
-|W27 Financial / Will|部分|professional/financial/index.html<br>functions/account/financial-will-draft-store.js|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json|Verify Financial/Will exact output semantics, retained ranges/unknowns|
-|W28 Relationship / Cross|部分|perspectives/relationship/index.html|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Exact current relationship/cross bounded report admission and inputs|
-|W29 Profile / Academic|部分|perspectives/profile/index.html|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Current Profile/Academic evidence boundaries and product admission|
-|W30 Books / Figures|部分|books/index.html<br>content/registry/figures.json|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary|
-|W31 World / Book VI / Moomoo|部分|content/civilization-atlas/snapshots/world-snapshots-v1.json<br>content/civilization-atlas/reconfiguration/moomoo-provider-w8c-status-v1.json|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据|
-|W32 Mobile / branding|部分|assets/customer-ui/css<br>assets/css/tokens.css|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|Actual preview mobile bilingual shell and branding, no SOURCE test substitute|
-|W33 Commerce reconciliation|部分|functions/commerce/commerce-stripe-api.js<br>functions/commerce/controlled-purchase-candidate.js<br>functions/commerce/commerce-stripe-events.js<br>functions/commerce/book-commerce-store.js|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP; 920a8eb130afa4c27b55b4ba1cd2fab86de75a35; scripts/check-controlled-purchase-integration.mjs: PASS（LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY）; scripts/check-commerce-stripe-r1.mjs: PASS（LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY）|完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭|
-|W34 Shared provider cost ledger|部分|functions/provider-cost/product-cost-envelope.js|TARGETED_PASS_NOT_FULL_STEP; 当前文件SHA256见JSON；历史检查未等同当前版本; TAROT-QA-BUDGET-TESTS.json; PRODUCT-TOTAL-COST-QA.json|逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本|
-|W35 Security / permissions|部分|functions/account/report-followup-store.js<br>functions/commerce/controlled-purchase-candidate.js|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP; 920a8eb130afa4c27b55b4ba1cd2fab86de75a35; scripts/check-controlled-purchase-integration.mjs: PASS（LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY）|补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试|
-|W36 Targeted regression|部分|scripts/run-zero-cost-regression.mjs|CURRENT_CHECK_FAIL; 920a8eb130afa4c27b55b4ba1cd2fab86de75a35; scripts/check-controlled-purchase-integration.mjs: PASS（LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY）; scripts/check-commerce-stripe-r1.mjs: PASS（LOCAL_SQL_AND_INJECTED_STRIPE_NOT_CUSTOMER_DELIVERY）; node scripts/run-zero-cost-regression.mjs precheck: FAIL（BOOK_I_SYNCHRONIZER_FIXTURE_TEMP_RENAME_EPERM_NOT_PRODUCT_PASS）|重跑当前受影响链；记录真实失败，禁止修改冻结哈希|
-|W37 Pages build|部分|scripts/build-cloudflare-pages.mjs<br>scripts/lib/publication-boundary.mjs|STALE_BUILD_EVIDENCE_REBUILD_REQUIRED; a30ebe67ab9571d45f36ec96b951e53e3b735b77; BUILD-VERIFICATION.json|当前版本隔离构建及25MiB、imports、私有内容、runtime资产检查|
-|W38 Customer journey preview|部分|scripts/check-paid-method-lifecycle-integration.mjs<br>scripts/check-controlled-purchase-integration.mjs|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|五条旅程逐节点执行本地受控预览；发布后再限定账户实付|
-|W39 Human review|部分|scripts/build-live-customer-master.mjs|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; MASTER-HUMAN-REVIEW.html|逐项填充29类实际材料与差异，不把目录标题视为审阅完成|
-|W40 Production release|阻断|content/production-closure/live-customer-commercial-convergence/MASTER-AUTHORITY.txt|NOT_VERIFIED; 当前文件SHA256见JSON；历史检查未等同当前版本; 无实测凭证|仅在明确批准后执行具体部署、迁移及限定账户客户验收|
+|W00 Environment and working tree|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Record concurrent HEAD/dirty tree without resetting others|
+|W01 Single Master Ledger|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Maintain one evidence ledger and surface stale evidence|
+|W02 Routes / APIs / Consumers|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Resolve dynamic callers and activation flags individually|
+|W03 Accepted content and assets|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Bind accepted asset/content identities to exact current bytes|
+|W04 Pages publication boundary|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Run current build publication boundary and excluded private-content audit|
+|W05 Homepage / navigation|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Bilingual diff review plus actual mobile preview of restored paragraphs|
+|W06 Personal native free report|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify native accepted free reading and same-object paid unlock|
+|W07 Report commerce and delivery|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Finish eligible producer+renderer admission and exact Checkout/webhook-to-material flow|
+|W08 Report four follow-up questions|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Wire verified immutable report to paid followup producer, retain four-slot SQL constraints|
+|W09 RM19 membership|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify paid-through/cancel/resubscribe same-workspace continuity|
+|W10 My Reality persistence|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Integrate retained histories without backfill or invented history|
+|W11 Contextual Ask|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify per-context reading ownership and accepted sources|
+|W12 Public Knowledge Ask repair|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Keep public Ask bounded; review current Answer/figure maintenance successor|
+|W13 Book VIII private doctrine|HUMAN_ACCEPTED_DOCTRINE_PUBLIC_BOUNDARY_QA_REMAINS|NOT_VERIFIED_CURRENT_REVISION|NOT_RUN|复用已接受私有规范；核对公开不售与投影边界，不重复要求 doctrine 接受|
+|W14 NAV runtime / Academy mapping|PARTIAL_IMPLEMENTATION|NOT_VERIFIED_CURRENT_REVISION|NOT_RUN|接入可信 server Reality 输入、scoped NAV evaluator API 与 My Reality 消费；不得复制 RNE owner|
+|W15 Academy video model|PARTIAL_IMPLEMENTATION|NOT_VERIFIED_CURRENT_REVISION|NOT_RUN|免费 canonical video registry/API/主题目录已接线；真实视频、transcript 与 publication metadata 待提供；Method 付费视频单独准入|
+|W16 Protected media delivery|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify owned permanent video delivery with revoked sharing denied|
+|W17 Academy commerce|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Keep no-video products disabled; reuse Commerce for admitted asset only|
+|W18 Tarot interaction|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|真实移动端洗牌、触摸、防重复、后台恢复 E2E|
+|W19 Free Tarot zero-provider|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|重跑确定性路径网络拦截；客户浏览器仍需验证|
+|W20 Paid Tarot commerce|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Bind paid Tarot single synthesis to verified order/reading/corpus|
+|W21 Tarot single-call synthesis|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|将单次 synthesis 接入真实订单、固定 reading、失败可恢复状态；不新增模型调用|
+|W22 20-case unit economics|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用|
+|W23 I Ching experience|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Actual deterministic cast/mobile replay and corpus provenance|
+|W24 I Ching synthesis candidate|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|完成受控订单与确定性卦象的 synthesis 技术接线，不改已决定 RM39|
+|W25 Account|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Actual owned report list/reopen/download, pending generation progress|
+|W26 Appointments|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify intake→consent→appointment boundary without paid-live transaction|
+|W27 Financial / Will|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify Financial/Will exact output semantics, retained ranges/unknowns|
+|W28 Relationship / Cross|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Exact current relationship/cross bounded report admission and inputs|
+|W29 Profile / Academic|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Current Profile/Academic evidence boundaries and product admission|
+|W30 Books / Figures|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary|
+|W31 World / Book VI / Moomoo|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据|
+|W32 Mobile / branding|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Actual preview mobile bilingual shell and branding, no SOURCE test substitute|
+|W33 Commerce reconciliation|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭|
+|W34 Shared provider cost ledger|TARGETED_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本|
+|W35 Security / permissions|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试|
+|W36 Targeted regression|CURRENT_CHECK_FAIL|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|重跑当前受影响链；记录真实失败，禁止修改冻结哈希|
+|W37 Pages build|PASS|NOT_RUN|NOT_RUN|保留当前构建凭证；只有生产批准后才部署|
+|W38 Customer journey preview|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|五条旅程逐节点执行本地受控预览；发布后再限定账户实付|
+|W39 Human review|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐项填充29类实际材料与差异，不把目录标题视为审阅完成|
+|W40 Production release|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|仅在明确批准后执行具体部署、迁移及限定账户客户验收|
 
-## W38
-A：付款至持久交付/四问：分别有合成 SQL 与 handler 测试；尚无串联完整报告预览。缺：当前完整中英报告接受绑定、producer/renderer、四问答案 UI、取消/再订阅同workspace串联。
-B：免费确定性 runtime/DOM；20次单次合成 QA。订单到双语保存四问未串联。缺：真实移动交互、paid订单 synthesis、失败恢复、保存及四问客户端。
-C：媒体登记与大纲；未验证可播放真实方法视频。缺：真实资产、受保护媒体、永久购买权益与 Account My Learning。
-D：Financial range/unknown 本地投影；服务/预约源码存在；未取得完整提交回读旅程。缺：Financial对象到真人服务上下文传递、预约请求持久化与客户回读预览。
-E：Book问答截断/supporting源码修复；当前BookVII/Ask freeze successor不覆盖。缺：Figures dedup合法successor、当前Ask接受凭证、逐册上下文回答和相关书导航预览。
-
-## W39
-29类均已建索引与具体缺口，但审阅材料不完整；标题存在不等于完成。
-
-## 同一 Master 的补充项
-voucher → W07/W25/W33/W35：合成 Checkout/webhook/退款13项通过；账户三金额展示与商品准入待补，默认不启用 LIVE
-thesis.html → W02/W03/W29：研究 PDF 缺失，禁用失效下载；补真实版本与可发布路径
-Founder → W03/W05：V8段落分类与双语适配已写；实质改动待差异审阅和视觉 QA
-homepage v8 → W03/W05/W32：保留 shell/客户入口并补生活情境；旧三/五册与14Layers不直接恢复
+W13/W14/W15 layered states, W38 nodes and W39 counts: MASTER-OWNER-TRUTH.json.

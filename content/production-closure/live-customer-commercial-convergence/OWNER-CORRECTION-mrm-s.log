@@ -1,0 +1,40 @@
+✓ MRM-S9 EM-2 Fixture Validation Campaign passed.
+  FCR 16 + DAR 5 deterministic capabilities are EM-2 fixture-validated; RRP Report Composition preserves EM-2. FAR/PFR fixture evidence is governed without skipping EM-1 or converting human judgment into determinism.
+✓ MRM-S10 Pilot Evidence Framework + S10A vertical slices passed.
+  Pilot registry is intentionally empty: fixtures are not real cases, and API 200/PDF generation/manual repair cannot manufacture EM-3.
+✓ MRM-S11 EM-3 Pilot Promotion Gate passed.
+  0 capability is promoted to EM-3 because 0 qualifying real governed pilot case exists.
+✓ MRM-S12 EM-4 Multi-Case Operational framework passed.
+  No synthetic repeated fixture is counted as an operational case; current operational corpus is empty by design.
+✓ MRM-S13 EM-5 Longitudinal Evidence framework passed.
+✓ MRM-S14 EM-6 Validation Framework passed.
+  Validation schema/metrics are active, but no formal validation corpus exists and no EM-6 claim is made.
+✓ MRM-S15 EM-7 RME Metric Eligibility framework passed.
+✓ MRM-S16 EM-8 Research Corpus governance passed.
+✓ MRM-S17 EM-9 Production Maturity framework passed.
+  Framework is active; 0 capabilities are falsely promoted to EM-9.
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: RT_CHECK_RMO_DIGEST_DRIFT:scripts/check-rmo-w13-w15-reality-versioning-diff-freeze.mjs
++ actual - expected
+
++ '5345d9ac97e570a8dc87a058b65b2d3d33ca007e8ad9d30713ae8e9bbb3eb0b9'
+- 'beee5bcc4601ac71a24955d88713e740e57621b1625c3c152c28774c46e9c73c'
+
+    at assertRef (file:///C:/phios/scripts/lib/runtime-maturity/mrm-s-current-lib.mjs:19:177)
+    at file:///C:/phios/scripts/check-mrm-s18-master-freeze.mjs:6:249
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '5345d9ac97e570a8dc87a058b65b2d3d33ca007e8ad9d30713ae8e9bbb3eb0b9',
+  expected: 'beee5bcc4601ac71a24955d88713e740e57621b1625c3c152c28774c46e9c73c',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0
