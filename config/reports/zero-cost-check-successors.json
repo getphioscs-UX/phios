@@ -229,6 +229,22 @@
       ],
       "changeClass": "ACCEPTANCE_FIX",
       "scope": "Effective zero-cost command routing only; all DAR business assertions retained; no runtime/production admission."
+    },
+    {
+      "historicalPath": "scripts/check-ecr-full-r1.mjs",
+      "historicalTextSha256": "c7588213b35bbc1e22445995b2087d8b5458b7b7b13968c1c63fc022b77aac6f",
+      "currentPath": "scripts/check-ecr-full-r1-current.mjs",
+      "currentTextSha256": "1ded9a79ce0e013a4cba9fd106634f07a899d69d28b9c4bc58ec7e4fe6dd7e91",
+      "commands": [
+        "check:ecr-full-r1"
+      ],
+      "changeClass": "AUTHORIZED_PRICE_SUCCESSOR_RECONCILIATION",
+      "scope": "Preserve historical RM39; verify explicit 2026-10-09 RM129 authority and runtime/catalog agreement; retain every ECR semantic, draft, paid-access and publication assertion",
+      "authorityRefs": [
+        "functions/pws/commercial/report-successor-contract.js",
+        "functions/pws/commercial/report-successor-contract-history.js",
+        "functions/pws/commercial/commerce-economics-policy.js"
+      ]
     }
   ]
 }

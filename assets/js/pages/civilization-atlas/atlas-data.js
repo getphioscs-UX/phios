@@ -34,21 +34,10 @@ export async function loadReconfigurationCases(){return getJson('/content/civili
 export async function loadReconfigurationWindows(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-windows-v1.json');}
 export async function loadReconfigurationSnapshots(){return getJson('/content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json');}
 export async function loadContemporaryRuntimeDossiers(){
-  const [base,depth,positions,w6,w7,candidates]=await Promise.all([
-    getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json'),
-    getJson('/content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json'),
-    getJson('/content/civilization-atlas/reconfiguration/runtime-position-correspondence-v1.json'),
-    getJson('/content/civilization-atlas/reconfiguration/runtime-position-w6-evidence-gate-v1.json'),
-    getJson('/content/civilization-atlas/reconfiguration/runtime-position-w7-readiness-v1.json'),
-    getJson('/content/civilization-atlas/reconfiguration/runtime-position-w7-position-candidates-v1.json')
-  ]);
-  const overlay=new Map((depth.dossiers||[]).map(x=>[x.id,x]));
-  const positionOverlay=new Map((positions.correspondences||[]).map(x=>[x.dossierId,x]));
-  const w6Overlay=new Map((w6.records||[]).map(x=>[x.dossierId,x]));
-  const w7Overlay=new Map((w7.dossiers||[]).map(x=>[x.dossierId,x]));
-  const candidateByDossier=new Map();
-  for(const row of candidates.candidates||[]){if(!candidateByDossier.has(row.dossierId))candidateByDossier.set(row.dossierId,[]);candidateByDossier.get(row.dossierId).push(row);}
-  return {...base,knowledgeDepthContract:depth.contract,knowledgeDepthVersion:depth.version,runtimePositionCorrespondenceContract:positions.contract,runtimePositionW6Contract:w6.contract,runtimePositionW7Contract:w7.contract,dossiers:(base.dossiers||[]).map(d=>({...d,knowledgeDepth:overlay.get(d.id)||null,runtimePositionCorrespondence:positionOverlay.get(d.id)||null,runtimePositionEvidenceGate:w6Overlay.get(d.id)||null,runtimePositionAdmissionReadiness:w7Overlay.get(d.id)||null,runtimePositionCandidates:candidateByDossier.get(d.id)||[]}))};
+ const [base,depth]=await Promise.all([getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json'),getJson('/content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json')]);
+ const overlay=new Map((depth.dossiers||[]).map(d=>[d.id,d]));
+ const rows=await Promise.all((base.dossiers||[]).map(async d=>{let acceptedCurrent=null;try{const response=await fetch('/api/book6-runtime-readout?dossier='+encodeURIComponent(d.id),JSON_HEADERS),body=await response.json();if(response.ok&&body.ok)acceptedCurrent=body.projection;}catch{}return {...d,knowledgeDepth:overlay.get(d.id)||null,acceptedCurrent,runtimePositionCorrespondence:null,runtimePositionEvidenceGate:null,runtimePositionAdmissionReadiness:null,runtimePositionCandidates:[],currentPositionState:acceptedCurrent?'HUMAN_ACCEPTED_SUBSYSTEMS_ONLY':'UNKNOWN'};}));
+ return {...base,knowledgeDepthContract:depth.contract,knowledgeDepthVersion:depth.version,currentAdmissionOwner:'W8-I_ACCEPTED_CURRENT_DOSSIER',dossiers:rows};
 }
 export async function loadLivedRealityDimensions(){return getJson('/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json');}
 

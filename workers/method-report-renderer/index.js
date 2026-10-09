@@ -4,6 +4,7 @@ import {createCustomerDeliverySnapshot} from '../../functions/personal-reading/n
 import {css,fitCode} from './render-assets.generated.js';
 import {assertZiweiContextSnapshot} from '../../functions/report-context/ziwei-contextual-snapshot-contract.js';
 import {CONTEXTUAL_REPORT_CSS} from '../../functions/report-context/contextual-report-presentation.js';
+import {verifyBaziPublication} from './bazi-verification.js';
 
 const origin='https://qa.phios-github.pages.dev';
 const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),b=>b.toString(16).padStart(2,'0')).join('');
@@ -16,7 +17,8 @@ export default {
   try{
    const reader=request.body?.getReader();if(!reader)throw Error('BODY_REQUIRED');let size=0,raw='';const decoder=new TextDecoder();
    for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();throw Error('TOO_LARGE');}raw+=decoder.decode(value,{stream:true});}
-   const {candidate,method,compositionVersion}=JSON.parse(raw+decoder.decode());
+   const parsed=JSON.parse(raw+decoder.decode()),{candidate,method,compositionVersion}=parsed;
+   if(method==='BZR')return await verifyBaziPublication(parsed.publication,env,puppeteer);
    const contract=await assertMethodGeneration(candidate),expectedPageCount=contract.expectedPageCount;
    if(method!==contract.methodCode||compositionVersion!==contract.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||candidate.snapshot?.locale!==candidate.locale||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
    if(compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1')await assertZiweiContextSnapshot(candidate);

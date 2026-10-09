@@ -380,6 +380,10 @@ async function hydrateDossierRuntimeReadout(host,dossier,l){
   if(!response.ok)throw new Error('HTTP_'+response.status);
   const payload=await response.json(),projection=payload?.projection;
   if(!payload?.ok||!projection)throw new Error('INVALID_RRE_PROJECTION');
+  if(projection.schemaVersion==='BOOK6_ACCEPTED_CURRENT_CUSTOMER_PROJECTION_V1'){
+   const zh=l==='zh-Hans';slot.dataset.rreReadout='ready';slot.dataset.acceptedCurrent='W8-I';
+   slot.innerHTML='<section class="civ-reconfig-runtime-readout"><h4>'+esc(zh?'已接受的当前子系统位置':'Accepted current subsystem positions')+'</h4><p>'+esc(zh?'下列位置仅适用于列明的子系统；整个地区的位置仍为未知。':'Positions apply only to the named subsystems; the whole-region position remains unknown.')+'</p><ul>'+projection.acceptedPositions.map(p=>'<li>'+esc(p.shortLabel?.[l]||p.runtimePositionId)+' · '+esc(p.subsystem)+' · '+esc(p.grammarId)+' / '+esc(p.realityDomainId)+'<small>'+esc(p.evidenceRefs.join(' · '))+'</small></li>').join('')+'</ul><p>'+esc(zh?'接受日期：':'Accepted: ')+esc(projection.acceptedAt)+'</p><p>'+esc(zh?'证据来源时间：':'Source evidence time: ')+esc(projection.sourceTimestamp)+'</p><p>'+esc(zh?'证据版本：':'Evidence digest: ')+esc(projection.readoutReference?.digest)+'</p><p>'+esc(zh?'未接受的解释与位置继续保持未知。':'Unaccepted interpretations and positions remain unknown.')+'</p>'+(projection.externalEvidence.length?'<details><summary>'+esc(zh?'外部市场证据（不决定位置）':'External market evidence (not position authority)')+'</summary><ul>'+projection.externalEvidence.map(e=>'<li>'+esc(e.claimText)+' · '+esc(e.currentFreshness)+' · '+esc(e.retrievedAt)+'</li>').join('')+'</ul></details>':'')+'</section>';return;
+  }
   const needs=uniq((projection.missingLineageDimensions||[]).map(x=>runtimeNeedLabel(x,c)).filter(Boolean));
   const confidence=projection.confidenceClass==='UNKNOWN'?c.runtimeConfidenceUnknown:valueLabel(projection.confidenceClass,l);
   slot.dataset.rreReadout='ready';
