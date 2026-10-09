@@ -199,7 +199,9 @@ for (const protectedPath of fixture.protectedPaths) {
       const candidate = read('docs/design-system/pds-w0-navigation-topology-migration-candidate-v1.json');
       assert.equal(candidate.pdsBaselineCommit, contract.baseline.commit);
       assert.equal(candidate.changeClass, 'explicit-contract-version-upgrade');
-      assert.deepEqual(otherChanges.sort(), candidate.entries.map(entry => entry.path).sort(), 'PDS_W0_UNREGISTERED_RUNTIME_ADDITION');
+      const admittedPaths = candidate.entries.map(entry => entry.path);
+      assert.deepEqual(otherChanges.filter(file => admittedPaths.includes(file)).sort(), [...admittedPaths].sort(), 'PDS_W0_ACCEPTED_RUNTIME_ADDITION_MISSING');
+      const pendingPaths = otherChanges.filter(file => !admittedPaths.includes(file));
       for (const entry of candidate.entries) {
         assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_NAV_CANDIDATE_SOURCE_DRIFT:${entry.path}`);
         assert.equal(canonicalTextGitBlobSha(entry.path), entry.gitBlobSha, `PDS_W0_NAV_CANDIDATE_BLOB_DRIFT:${entry.path}`);
@@ -220,6 +222,17 @@ for (const protectedPath of fixture.protectedPaths) {
       assert.equal(acceptedReceipt.productionActivation, false);
       assert.deepEqual(acceptedReceipt.acceptedEntries, candidate.entries);
       assert.deepEqual(admission.entries, candidate.entries);
+      if (pendingPaths.length) {
+        const pending = read('docs/design-system/pds-w0-navigation-batch06-topology-candidate-v2.json');
+        assert.equal(pending.status, 'PENDING_EXPLICIT_TOPOLOGY_ACCEPTANCE');
+        assert.equal(pending.productionActivation, false);
+        assert.deepEqual(pendingPaths.sort(), pending.entries.map(entry => entry.path).sort(), 'PDS_W0_UNREGISTERED_RUNTIME_ADDITION');
+        for (const entry of pending.entries) {
+          assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_PENDING_RUNTIME_SOURCE_DRIFT:${entry.path}`);
+          assert.equal(canonicalTextGitBlobSha(entry.path), entry.gitBlobSha, `PDS_W0_PENDING_RUNTIME_BLOB_DRIFT:${entry.path}`);
+        }
+        assert.fail('PDS_W0_RUNTIME_TOPOLOGY_ACCEPTANCE_PENDING: batch06 v2 candidate requires separate explicit Human ACCEPT; v1 remains accepted');
+      }
     }
     continue;
   }

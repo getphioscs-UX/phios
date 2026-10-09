@@ -1,0 +1,8010 @@
+# NAV-26｜Decision Sufficiency
+
+## 决策充分｜什么时候已经知道得足够多，可以负责任地承担下一步
+
+**Canonical Question｜规范问题**
+
+> **当我们永远不可能知道一切时，什么时候已经知道得足够多，可以不再把“还不确定”当成无限等待的理由？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-26
+```
+
+## 2. `canonicalTitleZh`
+
+```
+决策充分
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Decision Sufficiency
+```
+
+## 4. `canonicalQuestion`
+
+```
+当我们永远不可能知道一切时，
+什么时候已经知道得足够多，
+可以不再把“还不确定”当成无限等待的理由？
+```
+
+---
+
+# 5. `definition`
+
+**Decision Sufficiency** 是 Navigation 对“当前已经掌握的现实、证据、未知、责任、可逆性、情景与恢复条件，是否已经足够支持下一步被负责任地承担”进行正式判断的机制。
+
+它不是：
+
+```
+CERTAINTY
+```
+
+也不是：
+
+```
+COMPLETE INFORMATION
+```
+
+更不是：
+
+```
+CONFIDENCE FEELING
+```
+
+它真正回答的是：
+
+> **在我们仍然不知道一切的情况下，当前已知是否已经足够，让这个决定进入下一步而不需要假装未知已经消失？**
+
+因此必须冻结：
+
+> **决策充分，不等于完全确定。它意味着已经知道得足够多，可以负责任地承担下一步。**
+
+例如，一个人准备离开现职。
+
+Navigation 并不需要知道：
+
+```
+未来收入一定是多少
+下一份工作一定什么时候出现
+市场一定怎样发展
+```
+
+这些事情可能永远无法完全知道。
+
+但它应该至少知道：
+
+```
+为什么考虑改变
+当前位置是什么
+什么条件已经关闭 / 仍开放
+等待和行动各自会发生什么
+当前最低可接受状态
+主要下行情景
+退出条件
+恢复路径
+谁拥有决定权
+哪些未知仍然存在
+```
+
+如果这些已经足够清楚，那么：
+
+```
+UNKNOWN REMAINS
+```
+
+并不自动意味着：
+
+```
+DECISION MUST WAIT
+```
+
+---
+
+# 6. `navigationMeaning`
+
+现实决定之所以困难，往往不是因为：
+
+```
+nothing is known
+```
+
+而是因为：
+
+```
+not everything is known
+```
+
+如果 Navigation 把：
+
+```
+complete knowledge
+```
+
+设为行动前提，那么重大人生决定几乎永远无法开始。
+
+但如果系统反过来，只要“感觉差不多”就允许行动，又会失去责任边界。
+
+因此 NAV-26 建立的是第三种状态：
+
+```
+NOT CERTAIN
++
+SUFFICIENTLY GROUNDED
+=
+DECISION MAY PROCEED
+```
+
+它的核心结构是：
+
+```
+Known Reality
++
+Relevant Evidence
++
+Material Unknowns
++
+Minimum State
++
+Reversibility
++
+Scenario Robustness
++
+Exit / Recovery
++
+Authority / Consent
+↓
+Is This Enough to Bear the Next Step?
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-26 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+remainingChoiceSpace
+timeAssessment
+inactionAssessment
+reversibilityProfile
+timeHorizonMap
+authorityMap
+changeThresholdState
+responseLevel
+continuationQualification
+maintenanceCostState
+capacityQualification
+marginalReturnState
+structuralAlternativeState
+waitingQualification
+preservationRequirements
+goalValueAlignment
+nonExchangeableConditions
+minimumAcceptableState
+scenarioSpace
+baselineUpsideDownsideSet
+exitRecoveryState
+```
+
+这意味着 NAV-26 是前 25 个模块第一次真正的：
+
+```
+CONVERGENCE POINT
+```
+
+它不重新产生这些判断。
+
+它负责问：
+
+> **这些判断放在一起以后，是否已经足够支持下一步？**
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+profileNavigationProjection
+currentRealityProjection
+professionalInput
+relationshipContext
+legalOrContractualContext
+sharedDecisionContext
+externalCurrentEvidence
+priorNavigationState
+recentOutcomeHistory
+```
+
+这些只有在与 Decision Object 相关时进入。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+NAV-26 必须保留前面所有 authority distinctions。
+
+至少包括：
+
+```
+CURRENT_FACT
+USER_REPORTED_CURRENT
+VERIFIED_RECORD
+PROFESSIONAL_INPUT
+SUPPORTED_INFERENCE
+SCENARIO_ASSUMPTION
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+Decision Sufficiency 不能通过：
+
+```
+more interpretive material
+```
+
+来假装补齐：
+
+```
+missing material reality
+```
+
+例如：
+
+```
+financial runway unknown
+```
+
+不能靠：
+
+```
+BaZi + Tarot + Zi Wei agreement
+```
+
+变成：
+
+```
+sufficient financial basis
+```
+
+---
+
+# 10. Core Sufficiency States
+
+建议至少区分：
+
+```
+INSUFFICIENT
+PARTIALLY_SUFFICIENT
+SUFFICIENT_FOR_INFORMATION_GATHERING
+SUFFICIENT_FOR_REVERSIBLE_ACTION
+SUFFICIENT_FOR_BOUNDED_ACTION
+SUFFICIENT_FOR_HIGH_IMPACT_REVIEW
+DECISION_SUFFICIENT
+SUFFICIENCY_BLOCKED_BY_AUTHORITY
+SUFFICIENCY_BLOCKED_BY_CRITICAL_UNKNOWN
+```
+
+---
+
+## A. `INSUFFICIENT`
+
+关键问题仍然不清楚。
+
+例如：
+
+```
+Decision Object unclear
+Current Position stale
+Critical minimum unknown
+Exit route absent
+```
+
+不应继续进入重大行动。
+
+---
+
+## B. `PARTIALLY_SUFFICIENT`
+
+可以继续分析，但不足以行动。
+
+---
+
+## C. `SUFFICIENT_FOR_INFORMATION_GATHERING`
+
+已经足够知道：
+
+```
+what we still need to learn
+```
+
+但不是足够决定。
+
+例如：
+
+```
+need contract clarification
+need professional review
+need partner consent
+```
+
+---
+
+## D. `SUFFICIENT_FOR_REVERSIBLE_ACTION`
+
+信息仍不完整，但当前行动：
+
+```
+small
+bounded
+reversible
+low impact
+```
+
+可以通过现实反馈继续学习。
+
+---
+
+## E. `SUFFICIENT_FOR_BOUNDED_ACTION`
+
+可以执行一个明确范围、明确时间、明确退出条件的行动。
+
+---
+
+## F. `SUFFICIENT_FOR_HIGH_IMPACT_REVIEW`
+
+重大行动已经接近充分，但还需要：
+
+```
+professional
+shared-decision
+consent
+formal review
+```
+
+中的一个或多个完成。
+
+---
+
+## G. `DECISION_SUFFICIENT`
+
+当前已知、未知与边界已经足够清楚，可以负责任地承担下一步。
+
+注意：
+
+```
+DECISION_SUFFICIENT
+≠
+OUTCOME GUARANTEED
+```
+
+---
+
+# 11. What Sufficiency Is Made Of
+
+Decision Sufficiency 不应该压成一个神秘分数。
+
+建议至少由以下维度共同构成：
+
+```
+OBJECT_CLARITY
+POSITION_SUFFICIENCY
+OPTION_SPACE_SUFFICIENCY
+TIME_SUFFICIENCY
+REVERSIBILITY_SUFFICIENCY
+AUTHORITY_SUFFICIENCY
+VALUE_SUFFICIENCY
+MINIMUM_STATE_SUFFICIENCY
+SCENARIO_SUFFICIENCY
+RECOVERY_SUFFICIENCY
+CRITICAL_UNKNOWN_STATE
+```
+
+但这些不应被简单平均。
+
+---
+
+# 12. `allowedInference`
+
+NAV-26 可以：
+
+## A. 判断仍有未知，但未知不再改变当前下一步
+
+例如：
+
+```
+exact future salary unknown
+```
+
+但如果当前动作只是：
+
+```
+apply for three roles
+```
+
+那么这个未知可能不阻止行动。
+
+可以标记：
+
+```
+UNKNOWN_NOT_ACTION_BLOCKING
+```
+
+---
+
+## B. 判断某个未知仍然会改变整个决定
+
+例如：
+
+```
+contract may contain RM200k termination liability
+```
+
+在尚未确认前可能属于：
+
+```
+CRITICAL_UNKNOWN
+```
+
+阻止重大执行。
+
+---
+
+## C. 判断当前信息只够做小动作
+
+例如：
+
+```
+full relocation decision not sufficient
+```
+
+但：
+
+```
+visit location
+speak to school
+verify visa
+```
+
+已经足够。
+
+可以输出：
+
+```
+SUFFICIENT_FOR_REVERSIBLE_ACTION
+```
+
+---
+
+## D. 判断继续等待已经不会显著提高充分性
+
+如果：
+
+```
+remaining unknowns
+cannot reasonably be resolved before action
+```
+
+而：
+
+```
+minimum state protected
+exit route ready
+action reversible enough
+```
+
+则可以判断：
+
+```
+FURTHER_INFORMATION_HAS_LOW_DECISION_VALUE
+```
+
+---
+
+## E. 判断“资料很多”仍然不足
+
+例如：
+
+```
+10 reports
+5 readings
+long analysis
+```
+
+但：
+
+```
+cash flow unknown
+decision owner unclear
+partner consent missing
+```
+
+则仍然：
+
+```
+INSUFFICIENT
+```
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-26 严禁：
+
+## A. 把确定感当充分性
+
+```
+“I feel sure”
+≠
+DECISION_SUFFICIENT
+```
+
+---
+
+## B. 把资料量当充分性
+
+```
+MORE DATA
+≠
+MORE SUFFICIENCY
+```
+
+---
+
+## C. 把多方法一致当充分性
+
+禁止：
+
+```
+BaZi + Zi Wei + Tarot + Astrology agree
+→ decision sufficient
+```
+
+---
+
+## D. 把专业意见当整个人生决定的充分性
+
+专业人士只能提供其领域内的 authority。
+
+---
+
+## E. 因为时间紧就自动降低标准
+
+```
+urgent
+≠
+sufficient
+```
+
+---
+
+## F. 因为不可能知道全部就放弃任何门槛
+
+```
+uncertainty unavoidable
+≠
+anything goes
+```
+
+---
+
+# 14. `decisionEffect`
+
+NAV-26 主要影响：
+
+```
+ACTION_ADMISSION
+ACTION_SCALE
+WAIT_ACT_BALANCE
+ESCALATION_REQUIREMENT
+INFORMATION_GATHERING_PRIORITY
+FINAL_DECISION_READINESS
+```
+
+核心 effect：
+
+```
+DECISION_READINESS
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+NAV-26 不建立最终统一 threshold 公式。
+
+完整 threshold mechanics 由：
+
+```
+NAV-27
+Impact / Reversibility Threshold
+```
+
+进一步处理。
+
+NAV-26 负责回答：
+
+> **目前的信息与现实理解，是否已经达到“可以进入某种等级行动”的充分状态？**
+
+而 NAV-27 负责：
+
+> **这类行动究竟需要多高程度的充分性？**
+
+两者必须分开。
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-26 可以：
+
+- 判断信息是否足够；
+- 判断未知是否阻断；
+- 判断下一步允许到什么规模；
+- 判断是否需要继续补资料；
+- 判断是否应进入专业 / shared review；
+- 判断是否已经可以行动。
+
+NAV-26 不可以：
+
+- 宣称未来确定；
+- 替用户作最终选择；
+- 用解释性证据填补现实关键未知；
+- 自动批准受监管行动；
+- 自动越过 consent；
+- 将“充分”解释成“正确”。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+Decision Sufficiency 与 Decision Choice 必须严格分开。
+
+系统可以判断：
+
+```
+Option A is decision-sufficient for bounded action.
+```
+
+但不能因此输出：
+
+```
+Therefore choose A.
+```
+
+用户仍然可以：
+
+```
+choose A
+choose B
+wait
+reject both
+seek more information
+```
+
+只要不违反合法 authority / hard constraint。
+
+因此冻结：
+
+> **Sufficiency determines whether a decision can responsibly proceed; it does not determine which decision a person must choose.**
+
+中文：
+
+> **充分性决定的是一个决定是否已经可以负责任地向前推进，而不是一个人必须选择哪一个决定。**
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.41–15.50｜Deciding Under Unknown
+```
+
+尤其：
+
+```
+15.41｜我们永远不会知道全部
+15.42｜未知不等于不能决定
+15.43｜什么时候还需要更多资料
+15.44｜什么时候更多资料已经不会改变决定
+15.45｜可逆性会改变所需确定程度
+15.46｜影响越大，所需充分程度越高
+15.47｜影响别人，会改变你的决定权
+15.48｜证据充分与决策充分不是同一件事
+15.49｜什么时候必须把决定升级给别人
+15.50｜已经知道得足够多，是什么意思
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book VII｜Reality Observation
+
+Book VII 拥有：
+
+```
+Evidence Sufficiency
+Observation Boundary
+Uncertainty
+Knowledge State
+```
+
+NAV-26 必须严格区分：
+
+```
+EVIDENCE SUFFICIENCY
+≠
+DECISION SUFFICIENCY
+```
+
+一个 claim 可以：
+
+```
+evidence insufficient
+```
+
+但某个低风险 reversible action 仍然可能：
+
+```
+decision sufficient
+```
+
+反过来：
+
+某个事实可能证据充分，但整个决定仍然不充分。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+capacity
+recovery
+continuity condition
+```
+
+作为是否可承担下一步的重要现实基础。
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可帮助理解：
+
+```
+uncertainty tolerance
+decision style
+over-analysis tendency
+impulsivity tendency
+```
+
+但这些只能作为：
+
+```
+DECISION_BEHAVIOR_CONTEXT
+```
+
+不能决定：
+
+```
+SUFFICIENT
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 对重大 Decision Sufficiency 非常重要。
+
+尤其：
+
+```
+usable liquidity
+debt obligations
+fixed commitments
+dependants
+runway
+downside affordability
+```
+
+如果 Financial 是当前决定的关键现实面，而资料缺失，则：
+
+```
+critical financial unknown
+```
+
+可能直接阻断高影响行动。
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR / Tarot / I Ching：
+
+可以：
+
+```
+add interpretive context
+surface a question
+highlight a possible tension
+```
+
+但不得：
+
+```
+close critical unknown
+create factual sufficiency
+raise decision authority
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 是 NAV-26 的主要 factual anchor。
+
+至少应提供：
+
+```
+whatIsKnownNow
+whatChanged
+whatIsVerified
+whatIsReported
+whatRemainsUnknown
+whatWouldActuallyChangeDecision
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-26 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Scenario Runtime
+Action Runtime
+```
+
+消费。
+
+这是第一个应该明确输出：
+
+```
+CAN PROCEED?
+AT WHAT SCALE?
+WHAT STILL BLOCKS?
+```
+
+的核心 module。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **Decision sufficiency is not knowing everything. It is knowing enough to responsibly bear the next step.**
+
+中文：
+
+> **决策充分不是知道一切，而是已经知道得足够多，可以负责任地承担下一步。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-26：
+
+```
+decisionObjectChanged
+currentPositionChanged
+criticalUnknownResolved
+newCriticalUnknownAppeared
+minimumStateChanged
+reversibilityChanged
+scenarioChanged
+exitRouteChanged
+recoveryCapacityChanged
+authorityChanged
+consentChanged
+professionalInputArrived
+optionScaleChanged
+```
+
+---
+
+# 27. Canonical Decision Sufficiency Model
+
+建议：
+
+```
+{
+  "decisionSufficiencyId": "",
+  "decisionObjectId": "",
+  "optionId": "",
+  "state": "INSUFFICIENT | PARTIALLY_SUFFICIENT | SUFFICIENT_FOR_INFORMATION_GATHERING | SUFFICIENT_FOR_REVERSIBLE_ACTION | SUFFICIENT_FOR_BOUNDED_ACTION | SUFFICIENT_FOR_HIGH_IMPACT_REVIEW | DECISION_SUFFICIENT | SUFFICIENCY_BLOCKED_BY_AUTHORITY | SUFFICIENCY_BLOCKED_BY_CRITICAL_UNKNOWN",
+  "knowns": [],
+  "materialUnknowns": [],
+  "criticalUnknowns": [],
+  "nonBlockingUnknowns": [],
+  "minimumStateStatus": "",
+  "reversibilityStatus": "",
+  "scenarioStatus": "",
+  "exitRecoveryStatus": "",
+  "authorityStatus": "",
+  "permittedActionScale": "",
+  "remainingRequirements": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Evidence Sufficiency vs Decision Sufficiency Rule
+
+冻结：
+
+```
+EVIDENCE SUFFICIENCY
+≠
+DECISION SUFFICIENCY
+```
+
+正式规则：
+
+> **Evidence sufficiency asks whether a claim is adequately supported. Decision sufficiency asks whether the decision-maker knows enough, despite remaining uncertainty, to responsibly bear the next step.**
+
+中文：
+
+> **证据充分问的是一个判断有没有得到足够支持；决策充分问的是，即使仍有未知，决定者是否已经知道得足够多，可以负责任地承担下一步。**
+
+---
+
+# 29. Unknown Classification Rule
+
+所有 material unknown 应至少分类：
+
+```
+CRITICAL_UNKNOWN
+ACTION_RELEVANT_UNKNOWN
+NON_BLOCKING_UNKNOWN
+UNRESOLVABLE_BEFORE_ACTION
+```
+
+---
+
+## `CRITICAL_UNKNOWN`
+
+如果未知答案不同，会改变：
+
+```
+option eligibility
+hard minimum
+authority
+major cost
+reversibility
+```
+
+则属于 critical。
+
+---
+
+## `ACTION_RELEVANT_UNKNOWN`
+
+会改变 action scale 或 timing，但未必阻止所有行动。
+
+---
+
+## `NON_BLOCKING_UNKNOWN`
+
+即使未知，当前下一步仍然合理。
+
+---
+
+## `UNRESOLVABLE_BEFORE_ACTION`
+
+现实只能通过行动反馈知道。
+
+这种未知特别适合与：
+
+```
+small reversible action
+```
+
+结合。
+
+---
+
+# 30. More Information Rule
+
+继续搜集资料只有在：
+
+```
+new information
+could materially change
+decision / option / threshold / action scale
+```
+
+时才具有明显 Navigation 价值。
+
+否则：
+
+```
+MORE INFORMATION
+```
+
+可能只是：
+
+```
+MORE DELAY
+```
+
+---
+
+# 31. Information Value Rule
+
+建议引入：
+
+```
+INFORMATION_VALUE
+```
+
+状态：
+
+```
+HIGH
+MATERIAL
+LOW
+EXHAUSTED
+UNKNOWN
+```
+
+但不需要将其量化成统一分数。
+
+---
+
+# 32. Information Saturation Rule
+
+如果：
+
+```
+new reports
+new searches
+new readings
+new analysis
+```
+
+反复没有改变：
+
+```
+option space
+minimum state
+critical unknowns
+action scale
+```
+
+可以标记：
+
+```
+INFORMATION_SATURATION
+```
+
+这不代表：
+
+```
+all knowledge complete
+```
+
+只代表：
+
+```
+additional information currently has low marginal decision value
+```
+
+---
+
+# 33. Analysis Paralysis Boundary
+
+系统不能诊断：
+
+```
+analysis paralysis
+```
+
+但可以识别：
+
+```
+REPEATED_INFORMATION_GATHERING_WITHOUT_DECISION_RELEVANT_CHANGE
+```
+
+然后问：
+
+> 新增资料现在究竟还准备改变哪个判断？
+
+---
+
+# 34. Action-as-Learning Rule
+
+如果：
+
+```
+remaining unknown
+cannot be resolved by more passive analysis
+```
+
+而存在：
+
+```
+bounded
+reversible
+low-impact
+observable
+```
+
+行动，
+
+Navigation 可以允许：
+
+```
+ACTION_FOR_INFORMATION
+```
+
+例如：
+
+```
+pilot
+trial
+conversation
+application
+short stay
+small allocation
+```
+
+但仍须符合 domain safety。
+
+---
+
+# 35. Sufficiency Is Action-Scale Specific
+
+冻结：
+
+```
+SUFFICIENT FOR X
+```
+
+而不是只有：
+
+```
+SUFFICIENT / NOT SUFFICIENT
+```
+
+例如：
+
+```
+sufficient to research
+sufficient to apply
+sufficient to test
+not sufficient to resign
+```
+
+这是 NAV-26 最重要的 runtime 原则之一。
+
+---
+
+# 36. Small-Step Sufficiency Rule
+
+如果重大行动不充分，不代表：
+
+```
+nothing can be done
+```
+
+Navigation 应检查：
+
+```
+what smaller action is already sufficient?
+```
+
+这与：
+
+```
+NAV-06 Reversibility
+NAV-10 Response Level
+```
+
+直接连接。
+
+---
+
+# 37. High-Impact Sufficiency Rule
+
+高影响方案必须特别检查：
+
+```
+hard minimum protected
+authority clear
+consent clear
+critical unknowns bounded
+downside tested
+exit route ready
+recovery capacity real
+```
+
+否则不能标记：
+
+```
+DECISION_SUFFICIENT
+```
+
+---
+
+# 38. Sufficiency and Urgency Rule
+
+当 deadline 临近时，可能出现：
+
+```
+time insufficient
++
+decision still insufficient
+```
+
+系统不得假装充分。
+
+可以选择：
+
+```
+decline
+pause
+escalate
+take smaller reversible step
+accept explicit residual uncertainty
+```
+
+具体取决于现实。
+
+---
+
+# 39. Sufficiency and Inaction Rule
+
+不行动也需要充分性。
+
+例如：
+
+```
+stay in current role for another year
+```
+
+如果 NAV-18 已显示高 Waiting Cost，继续等待本身不能逃避 NAV-26。
+
+因此：
+
+```
+INACTION SUFFICIENCY
+```
+
+也应存在。
+
+---
+
+# 40. Sufficiency and Status Quo Rule
+
+当前路径不能因为：
+
+```
+already operating
+```
+
+就被默认视为：
+
+```
+decision sufficient forever
+```
+
+一旦 NAV-09 / NAV-13 重开，继续路径也要重新通过 NAV-26。
+
+---
+
+# 41. Sufficiency and Shared Decision Rule
+
+如果：
+
+```
+SHARED_DECISION
+```
+
+则：
+
+```
+one person feels ready
+```
+
+不等于：
+
+```
+decision sufficient
+```
+
+必须满足 NAV-08 的 shared authority / consent。
+
+---
+
+# 42. Sufficiency and Professional Review Rule
+
+如果：
+
+```
+PROFESSIONAL_REQUIRED
+```
+
+则即使其他条件全部充分：
+
+```
+professional requirement unresolved
+```
+
+仍应：
+
+```
+SUFFICIENCY_BLOCKED_BY_AUTHORITY
+```
+
+---
+
+# 43. Sufficiency and Scenario Rule
+
+Scenario Space 的作用不是消灭未知。
+
+它让系统知道：
+
+```
+what kinds of unknowns we can still carry
+```
+
+如果 Downside：
+
+```
+remains above minimum
+```
+
+未知可承担度提高。
+
+如果 Downside：
+
+```
+breaches hard minimum
+```
+
+则需要更强 protection。
+
+---
+
+# 44. Sufficiency and Exit Rule
+
+一个 option 如果：
+
+```
+uncertain
+```
+
+但：
+
+```
+strong exit
+strong recovery
+high reversibility
+```
+
+可能较早达到 bounded-action sufficiency。
+
+相反：
+
+```
+uncertain
++
+no exit
++
+low reversibility
+```
+
+则需要更高门槛。
+
+---
+
+# 45. Sufficiency State Must Explain Why
+
+系统不得只显示：
+
+```
+DECISION SUFFICIENT
+```
+
+必须至少给出：
+
+```
+what is known
+what remains unknown
+why the unknown is still bearable
+what action scale is allowed
+what would reopen the decision
+```
+
+---
+
+# 46. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Leave current role for independent consulting
+
+Known:
+current workload unsustainable at preferred level
+12 months usable liquidity
+minimum household floor confirmed
+client pilot validated
+exit / recovery route ready
+
+Unknown:
+exact time to stable consulting income
+future market demand
+
+State:
+SUFFICIENT_FOR_BOUNDED_ACTION
+
+Allowed scale:
+begin staged transition
+
+Not yet sufficient:
+immediate full irreversible expansion
+```
+
+客户可以看到：
+
+> **现在已经不是“资料够不够多”的问题，而是剩下的未知会不会改变你下一步能够承担什么。**
+> 
+> 目前你已经知道当前工作结构的问题在哪里，也确认了家庭最低财务边界、可用现金缓冲、一个可以测试的客户来源，以及如果独立收入没有按预期形成时怎样停止扩张并恢复就业。真正仍然不知道的，是收入什么时候能够稳定，以及未来市场会怎样变化；这两项未知很重要，却不一定必须在行动以前完全消失。
+> 
+> 因此目前的信息已经足够支持一个有边界、可复核的转换步骤，却还不足以把所有现有收入结构一次性撤掉并进行不可逆扩张。这里的“充分”不是说未来已经确定，而是下一步已经有能力被承担。
+
+---
+
+# 47. Customer Actions
+
+允许：
+
+```
+Proceed with bounded action
+Gather one more critical input
+Reduce action scale
+Request professional review
+Confirm remaining unknown
+Accept residual uncertainty
+Wait with reason
+Reopen decision
+Continue
+```
+
+---
+
+# 48. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+INSUFFICIENT
+INFORMATION_GATHERING_SUFFICIENT
+REVERSIBLE_ACTION_SUFFICIENT
+BOUNDED_ACTION_SUFFICIENT
+HIGH_IMPACT_REVIEW_READY
+DECISION_SUFFICIENT
+BLOCKED_BY_CRITICAL_UNKNOWN
+BLOCKED_BY_AUTHORITY
+REOPENED
+```
+
+---
+
+# 49. Fail-Closed Conditions
+
+以下情况不得进入 NAV-27：
+
+```
+decisionObjectNotConfirmed
+criticalUnknownHidden
+hardMinimumUnresolved
+authorityUnclear
+consentMissing
+professionalRequirementIgnored
+scenarioDownsideNotTested
+exitRecoveryMissingForHighImpactAction
+symbolicInterpretationUsedToCloseMaterialUnknown
+currentPositionStale
+decisionSufficiencyDeclaredFromConfidenceAlone
+```
+
+---
+
+# 50. Canonical Runtime Rule
+
+> **Navigation must determine whether enough is known to responsibly bear the next step without pretending that all uncertainty has disappeared.**
+
+中文：
+
+> **Navigation 必须判断当前是否已经知道得足够多，可以负责任地承担下一步，同时不能假装所有未知都已经消失。**
+
+---
+
+# 51. Canonical Sufficiency Rule
+
+> **Decision sufficiency means enough knowledge, reality grounding, authority clarity, downside awareness, and recovery capacity for the scale of action being considered.**
+
+中文：
+
+> **决策充分意味着：针对正在考虑的行动规模，已经拥有足够的现实依据、权威清晰度、下行情景理解与恢复能力。**
+
+---
+
+# 52. Canonical Uncertainty Rule
+
+> **Remaining uncertainty does not block a decision unless it can materially change eligibility, responsibility, minimum-state protection, or the scale of action that can be safely borne.**
+
+中文：
+
+> **剩余未知只有在可能实质改变选项资格、责任边界、最低状态保护或可承担行动规模时，才应该阻断决定。**
+
+---
+
+# 53. Canonical Information Rule
+
+> **More information is valuable only while it can still materially change the decision.**
+
+中文：
+
+> **只有当新增信息仍可能实质改变决定时，继续获取更多信息才继续具有明显价值。**
+
+---
+
+# 54. Canonical Action-Scale Rule
+
+> **A decision may be sufficient for a small reversible step while remaining insufficient for a large irreversible commitment.**
+
+中文：
+
+> **一个决定可以已经充分到足以支持一个小而可逆的步骤，同时仍然不足以支持一个巨大且难以撤回的承诺。**
+
+---
+
+# 55. Canonical Human Authority Rule
+
+> **Navigation can judge whether a decision is sufficiently grounded to proceed; it does not acquire the right to make the decision because sufficiency has been reached.**
+
+中文：
+
+> **Navigation 可以判断一个决定是否已经获得足够现实基础继续推进，却不会因为“已经充分”就取得替人作决定的权利。**
+
+---
+
+# 56. Final Canonical Form
+
+```
+NAV-26
+DECISION SUFFICIENCY
+```
+
+**Input**
+
+```
+Current Reality
++
+Evidence
++
+Material Unknowns
++
+Values / Minimums
++
+Scenarios
++
+Reversibility
++
+Exit / Recovery
++
+Authority
+```
+
+**Process**
+
+```
+Ask:
+What do we know?
+What remains unknown?
+Which unknowns can still change the decision?
+What scale of action can current knowledge support?
+What would still require more evidence, consent, or authority?
+```
+
+**Output**
+
+```
+Decision Sufficiency State
++
+Permitted Action Scale
++
+Remaining Blocking Conditions
+```
+
+**Boundary**
+
+```
+Enough is not everything.
+Unknown is not automatically a reason to wait.
+Sufficient does not mean certain.
+Sufficient does not mean the system chooses.
+```
+
+# NAV-27｜Impact / Reversibility Threshold
+
+## 影响 / 可逆性门槛｜影响越大、越难回头，需要知道到什么程度
+
+**Canonical Question｜规范问题**
+
+> **为什么一个小而可逆的行动，可以在仍有较多未知时开始，而一个高影响、低可逆的行动，却必须在进入现实以前知道得更多？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-27
+```
+
+## 2. `canonicalTitleZh`
+
+```
+影响 / 可逆性门槛
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Impact / Reversibility Threshold
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么一个小而可逆的行动，
+可以在仍有较多未知时开始，
+而一个高影响、低可逆的行动，
+却必须在进入现实以前知道得更多？
+```
+
+---
+
+# 5. `definition`
+
+**Impact / Reversibility Threshold** 是 Navigation 对“不同规模、不同后果、不同可逆性的行动，究竟需要多高程度的 Decision Sufficiency 才能进入现实”进行正式分层的机制。
+
+NAV-26 已经回答：
+
+> **现在知道得够不够？**
+
+NAV-27 进一步回答：
+
+> **对于这个具体行动，‘够’究竟应该到什么程度？**
+
+因为：
+
+```
+申请一个职位
+```
+
+与：
+
+```
+辞去唯一收入来源
+```
+
+不能使用同一个门槛；
+
+```
+试住一个城市两周
+```
+
+与：
+
+```
+卖掉住房并永久迁移
+```
+
+不能使用同一个门槛；
+
+```
+投入 RM1,000 做一个可停止测试
+```
+
+与：
+
+```
+承担长期高额债务
+```
+
+也不能因为它们都属于“同一个方向”就使用同样的充分性要求。
+
+因此：
+
+> **NAV-27 的核心不是让系统变得更保守，而是让决策门槛与行动真正可能造成的影响、可逆性、责任与恢复难度相匹配。**
+
+---
+
+# 6. `navigationMeaning`
+
+如果所有行动都使用同一门槛，系统会出现两种相反错误。
+
+第一种：
+
+```
+OVER-CAUTION
+```
+
+小而可逆的行动也要求接近完全确定，于是用户永远无法通过现实行动获得新信息。
+
+第二种：
+
+```
+UNDER-CAUTION
+```
+
+高影响、不可逆行动也只需要和普通试验一样的证据，就可能让尚未解决的未知直接进入现实。
+
+因此 NAV-27 建立：
+
+```
+Action
+↓
+Impact
++
+Reversibility
++
+Affected Parties
++
+Minimum-State Exposure
++
+Recovery Capacity
+↓
+Required Decision Threshold
+```
+
+换句话说：
+
+> **不是所有未知都必须消失，但行动越可能留下无法撤回的后果，未知就越不能被轻易带入现实。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-27 最低需要：
+
+```
+decisionSufficiencyState
+candidateAction
+actionScale
+reversibilityProfile
+minimumAcceptableState
+authorityMap
+affectedParties
+exitRecoveryState
+```
+
+最好同时读取：
+
+```
+scenarioRobustness
+capacityQualification
+timeHorizonMap
+waitingQualification
+crossDomainPropagation
+```
+
+如果连行动规模或影响范围都没有定义，则：
+
+```
+THRESHOLD_UNFORMED
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+professionalInput
+legalOrContractualContext
+relationshipContext
+sharedDecisionContext
+careContext
+institutionalContext
+priorNavigationState
+```
+
+这些用于判断：
+
+- 后果影响谁；
+- 可否撤回；
+- 是否会触及 hard minimum；
+- 是否必须由专业人士确认；
+- 是否需要共同决策。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+CURRENT_FACT
+VERIFIED_RECORD
+USER_REPORTED_CURRENT
+PROFESSIONAL_INPUT
+LEGAL_OR_CONTRACTUAL_RECORD
+CONSENT_RECORD
+SUPPORTED_INFERENCE
+SCENARIO_ASSUMPTION
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+其中：
+
+```
+IMPACT
+REVERSIBILITY
+AUTHORITY
+MINIMUM_STATE
+```
+
+不能由 Symbolic Reading 单独建立。
+
+---
+
+# 10. Core Threshold Levels
+
+建议不要直接建立一个 0–100 总分。
+
+至少区分：
+
+```
+T1_LOW
+T2_MODERATE
+T3_HIGH
+T4_VERY_HIGH
+T5_FORMAL_OR_PROFESSIONAL_GATE
+```
+
+这些不是风险等级标签，而是：
+
+> **进入行动以前，需要达到的充分性强度。**
+
+---
+
+## A. `T1_LOW`
+
+适用于：
+
+```
+low impact
+highly reversible
+low cost
+few affected parties
+strong ability to stop
+```
+
+例如：
+
+```
+submit application
+try one class
+conduct small pilot
+have exploratory conversation
+```
+
+仍然需要现实边界，但允许通过行动学习。
+
+---
+
+## B. `T2_MODERATE`
+
+行动有一定：
+
+```
+cost
+time
+commitment
+other-party effect
+```
+
+但仍可较容易调整。
+
+例如：
+
+```
+short-term training
+limited paid pilot
+temporary schedule change
+small allocation
+```
+
+---
+
+## C. `T3_HIGH`
+
+行动会明显改变：
+
+```
+income
+housing
+career structure
+family arrangement
+significant capital
+```
+
+而退出需要真实成本。
+
+要求更清楚的：
+
+```
+minimum state
+downside
+exit route
+recovery capacity
+```
+
+---
+
+## D. `T4_VERY_HIGH`
+
+适用于：
+
+```
+major irreversible or hard-to-reverse change
+high financial exposure
+deep cross-domain consequence
+significant dependant impact
+long-term lock-in
+```
+
+需要：
+
+```
+strong current reality basis
+critical unknowns bounded
+minimum state protected
+authority clear
+recovery route credible
+```
+
+---
+
+## E. `T5_FORMAL_OR_PROFESSIONAL_GATE`
+
+当行动进入：
+
+```
+medical
+legal
+regulated financial
+formal consent
+institutional authorization
+```
+
+等领域时，
+
+门槛不只是“更高”，而是：
+
+```
+different authority path
+```
+
+即必须经过：
+
+```
+PROFESSIONAL_REQUIRED
+CONSENT_REQUIRED
+FORMAL_AUTHORITY_REQUIRED
+```
+
+---
+
+# 11. Core Threshold Drivers
+
+至少应检查：
+
+```
+IMPACT_MAGNITUDE
+REVERSIBILITY
+AFFECTED_PARTIES
+MINIMUM_STATE_EXPOSURE
+RECOVERY_DIFFICULTY
+TIME_HORIZON
+CAPACITY_CONSUMPTION
+LEGAL_OR_PROFESSIONAL_REQUIREMENT
+```
+
+---
+
+# 12. `allowedInference`
+
+NAV-27 可以：
+
+## A. 因可逆性高而允许较低门槛
+
+例如：
+
+```
+short pilot
+```
+
+即使未来需求尚未知，也可能：
+
+```
+T1 / T2
+```
+
+因为可以快速停止。
+
+---
+
+## B. 因跨领域影响提高门槛
+
+例如：
+
+```
+relocation
+```
+
+同时影响：
+
+```
+career
+housing
+children
+partner
+financial
+```
+
+则不能只按“换地点”处理。
+
+---
+
+## C. 因 hard minimum 接近提高门槛
+
+如果 Downside：
+
+```
+approaches minimum liquidity
+```
+
+则即使 Option 本身不是完全不可逆，也需要更强准备。
+
+---
+
+## D. 因恢复能力强而降低部分执行风险
+
+例如：
+
+```
+high liquidity
+clear re-employment route
+strong exit
+```
+
+可以使某个中等影响行动更可承担。
+
+但不能突破：
+
+```
+legal
+consent
+hard minimum
+```
+
+---
+
+## E. 因行动规模缩小而降低 required threshold
+
+例如：
+
+```
+full launch
+→ pilot
+```
+
+可能从：
+
+```
+T4
+```
+
+降至：
+
+```
+T2
+```
+
+前提是现实影响真的缩小。
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-27 严禁：
+
+## A. 把风险偏好当 threshold 本身
+
+```
+“I am willing to take risk”
+≠
+lower professional / consent requirement
+```
+
+---
+
+## B. 因用户非常有信心降低高影响门槛
+
+```
+confidence
+≠
+sufficiency
+```
+
+---
+
+## C. 因方法一致降低门槛
+
+禁止：
+
+```
+BaZi + Tarot + Astrology agree
+→ threshold lower
+```
+
+---
+
+## D. 把金钱损失视为唯一 impact
+
+影响还可能包括：
+
+```
+dependants
+time
+identity
+housing
+relationship
+legal
+health access
+future options
+```
+
+---
+
+## E. 把“可逆”自动当低影响
+
+例如：
+
+```
+public disclosure
+```
+
+可能 technically retractable，但 reputation residue 很高。
+
+---
+
+## F. 用单一总分自动决定 threshold
+
+NAV-27 不应成为：
+
+```
+Impact 80
+Reversibility 20
+Total = 62
+```
+
+这种黑箱评分器。
+
+---
+
+# 14. `decisionEffect`
+
+NAV-27 主要影响：
+
+```
+REQUIRED_SUFFICIENCY_LEVEL
+ACTION_ADMISSION
+ACTION_SCALE
+ESCALATION_REQUIREMENT
+PROFESSIONAL_REQUIREMENT
+CONSENT_REQUIREMENT
+```
+
+核心 effect：
+
+```
+THRESHOLD_MATCHING
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+这是 NAV-27 本身的核心。
+
+冻结基本关系：
+
+```
+Higher Impact
++
+Lower Reversibility
++
+More Affected Parties
++
+Closer Minimum-State Exposure
++
+Weaker Recovery
+→ Higher Required Decision Sufficiency
+```
+
+但不是机械加总。
+
+应保留：
+
+```
+RULE-BASED THRESHOLDING
+```
+
+而不是：
+
+```
+SCORE-BASED LIFE DECISION
+```
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-27 可以：
+
+- 判断需要多高充分性；
+- 调整 action scale；
+- 要求更多现实依据；
+- 要求更强 exit/recovery；
+- 要求专业确认；
+- 要求 shared consent。
+
+NAV-27 不可以：
+
+- 替用户选方案；
+- 把 threshold 变成概率；
+- 伪造安全；
+- 因用户愿意承担就绕过合法 authority；
+- 用方法解释降低现实门槛。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+用户可以选择承担一个：
+
+```
+high-impact option
+```
+
+但只有在：
+
+```
+authority valid
+hard constraints respected
+critical unknowns appropriately bounded
+```
+
+的前提下。
+
+系统应该表达：
+
+> 这个决定仍然属于你，但因为它影响范围大、恢复成本高，所以我们需要比一个普通试验更完整地确认现实。
+
+而不是：
+
+> 系统不允许你做。
+
+除非存在：
+
+```
+legal
+safety
+consent
+professional
+```
+
+方面的真正阻断条件。
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.45｜可逆性会改变所需确定程度
+15.46｜影响越大，所需充分程度越高
+15.47｜影响别人，会改变你的决定权
+15.49｜什么时候必须把决定升级给别人
+```
+
+同时直接消费：
+
+```
+NAV-06 Reversibility
+NAV-08 Navigation Authority
+NAV-22 Minimum Acceptable State
+NAV-25 Exit / Recovery Route
+NAV-26 Decision Sufficiency
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+evidence boundary
+uncertainty
+knowledge state
+```
+
+但 NAV-27 不问：
+
+> 证据够不够支持某个 claim？
+
+它问：
+
+> **对于这一级行动，我们究竟需要多高程度的充分性？**
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+capacity
+recovery
+continuity consequence
+```
+
+用于判断高影响行动失败以后是否仍可恢复。
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以提供：
+
+```
+risk tolerance
+uncertainty tolerance
+change preference
+```
+
+但只能作为：
+
+```
+PERSONAL_TOLERANCE_CONTEXT
+```
+
+不能改变：
+
+```
+legal threshold
+consent threshold
+material hard minimum
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 对：
+
+```
+IMPACT_MAGNITUDE
+MINIMUM_STATE_EXPOSURE
+RECOVERY_CAPACITY
+```
+
+尤其重要。
+
+例如：
+
+```
+RM5k reversible pilot
+```
+
+与：
+
+```
+RM500k illiquid commitment
+```
+
+不能用同一门槛。
+
+---
+
+# 22. `methodConsumer`
+
+所有 Methods：
+
+```
+AST
+BAZI
+ZIWEI
+NUM
+HD
+ECR
+Tarot
+I Ching
+```
+
+都不得影响：
+
+```
+REQUIRED_SUFFICIENCY_LEVEL
+```
+
+最多只能：
+
+```
+surface questions
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+actual impact scope
+affected domains
+current responsibilities
+current buffers
+current recovery capacity
+actual affected parties
+```
+
+这些才是 threshold 的现实基础。
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-27 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Action Runtime
+```
+
+消费。
+
+它应成为所有 action proposal 的：
+
+```
+THRESHOLD GATE
+```
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **The larger the consequence and the harder the reversal, the more you need to know before acting.**
+
+中文：
+
+> **后果越大、越难回头，行动以前就越需要知道得更多。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-27：
+
+```
+actionScaleChanged
+reversibilityChanged
+affectedPartyChanged
+minimumStateChanged
+recoveryCapacityChanged
+financialExposureChanged
+authorityChanged
+consentChanged
+professionalRequirementChanged
+scenarioChanged
+```
+
+---
+
+# 27. Canonical Threshold Model
+
+建议：
+
+```
+{
+  "thresholdAssessmentId": "",
+  "decisionObjectId": "",
+  "actionId": "",
+  "drivers": {
+    "impactMagnitude": "",
+    "reversibility": "",
+    "affectedParties": [],
+    "minimumStateExposure": "",
+    "recoveryDifficulty": "",
+    "timeHorizon": "",
+    "capacityConsumption": "",
+    "authorityRequirement": ""
+  },
+  "requiredThreshold": "T1_LOW | T2_MODERATE | T3_HIGH | T4_VERY_HIGH | T5_FORMAL_OR_PROFESSIONAL_GATE",
+  "currentSufficiencyState": "",
+  "thresholdMet": false,
+  "remainingRequirements": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Threshold Is Action-Specific
+
+冻结：
+
+```
+THRESHOLD belongs to ACTION
+not to PERSON
+```
+
+同一个人可以对：
+
+```
+apply for role
+```
+
+达到充分，
+
+却对：
+
+```
+quit current role immediately
+```
+
+仍不充分。
+
+因此不能给用户贴：
+
+```
+ready / not ready
+```
+
+这种全局标签。
+
+---
+
+# 29. Threshold Is Not Courage
+
+高 threshold 不意味着：
+
+```
+fearful
+conservative
+weak
+```
+
+低 threshold 也不意味着：
+
+```
+brave
+decisive
+```
+
+它只是行动结构。
+
+---
+
+# 30. Impact Rule
+
+Impact 应至少考虑：
+
+```
+magnitude
+duration
+number of affected domains
+number of affected people
+difficulty of repair
+```
+
+不是只看 immediate size。
+
+---
+
+# 31. Reversibility Rule
+
+必须读取 NAV-06：
+
+```
+HIGHLY_REVERSIBLE
+REVERSIBLE_WITH_COST
+PARTIALLY_REVERSIBLE
+LOW_REVERSIBILITY
+EFFECTIVELY_IRREVERSIBLE
+```
+
+并加入：
+
+```
+residual effects
+```
+
+而不是只问：
+
+> 能不能撤销？
+
+---
+
+# 32. Affected-Party Rule
+
+如果行动主要影响用户本人：
+
+```
+threshold may remain individual
+```
+
+如果明显影响：
+
+```
+partner
+children
+dependants
+employees
+co-owner
+```
+
+则 threshold 还必须包含：
+
+```
+authority
+consent
+shared responsibility
+```
+
+---
+
+# 33. Minimum-State Exposure Rule
+
+建议状态：
+
+```
+FAR_ABOVE_MINIMUM
+ABOVE_MINIMUM
+NEAR_MINIMUM
+POSSIBLE_BREACH
+LIKELY_BREACH
+UNKNOWN
+```
+
+越接近 minimum，所需准备越强。
+
+---
+
+# 34. Recovery Difficulty Rule
+
+建议：
+
+```
+EASY_RECOVERY
+MODERATE_RECOVERY
+DIFFICULT_RECOVERY
+RECOVERY_UNCERTAIN
+RECOVERY_NOT_ESTABLISHED
+```
+
+但不能用简单 numerical score 合并。
+
+---
+
+# 35. Threshold and Small Experiment
+
+如果：
+
+```
+full action = T4
+```
+
+而：
+
+```
+small pilot = T1/T2
+```
+
+Navigation 应允许：
+
+```
+SMALLER_ACTION_ADMISSION
+```
+
+从现实中学习。
+
+这不是逃避大决定，而是：
+
+```
+reduce consequence while learning
+```
+
+---
+
+# 36. Threshold and Delay
+
+如果 Action 尚未达到 required threshold：
+
+```
+WAIT
+```
+
+也不一定是答案。
+
+可以：
+
+```
+gather critical information
+reduce scale
+increase buffer
+obtain consent
+seek professional review
+build exit route
+```
+
+---
+
+# 37. Threshold and Urgency
+
+可能出现：
+
+```
+Urgent
++
+High Threshold
++
+Incomplete Information
+```
+
+系统不能偷偷把 threshold 降低。
+
+应考虑：
+
+```
+professional escalation
+minimal reversible action
+decline option
+temporary safeguard
+```
+
+---
+
+# 38. Threshold and Optionality
+
+如果方案保留：
+
+```
+future options
+exit routes
+recovery capacity
+```
+
+即使影响不小，也可能更可承担。
+
+但 optionality 不能补偿：
+
+```
+hard minimum violation
+consent violation
+legal requirement
+```
+
+---
+
+# 39. Threshold and Interpretation
+
+冻结：
+
+> **Interpretive confidence does not reduce the threshold required by material impact and irreversibility.**
+
+中文：
+
+> **解释上的确信，不能降低现实影响与不可逆性所要求的决策门槛。**
+
+---
+
+# 40. Threshold and Professional Input
+
+专业意见可以：
+
+```
+reduce domain uncertainty
+clarify formal requirements
+improve recovery design
+```
+
+但仍不自动选择人生方向。
+
+---
+
+# 41. Threshold Met Rule
+
+只有当：
+
+```
+currentDecisionSufficiency
+```
+
+达到或超过：
+
+```
+requiredThreshold
+```
+
+并且：
+
+```
+authority requirements satisfied
+hard minimum not violated
+```
+
+才可：
+
+```
+THRESHOLD_MET
+```
+
+---
+
+# 42. Threshold Not Met Rule
+
+如果：
+
+```
+THRESHOLD_NOT_MET
+```
+
+必须输出：
+
+```
+what is missing
+why it matters
+what smaller action may still qualify
+```
+
+不能只说：
+
+> 信息不足。
+
+---
+
+# 43. Customer Projection Example
+
+内部：
+
+```
+Action A:
+Apply for consulting roles
+
+Impact:
+low
+
+Reversibility:
+high
+
+Required threshold:
+T1
+
+Current sufficiency:
+met
+
+Action B:
+Resign immediately
+
+Impact:
+high
+
+Reversibility:
+partial
+
+Affected:
+household
+
+Minimum-state exposure:
+near financial floor
+
+Recovery:
+available but uncertain
+
+Required threshold:
+T4
+
+Current sufficiency:
+not yet met
+```
+
+客户可以看到：
+
+> **现在不是“这个方向能不能开始”的单一问题，而是不同动作需要不同程度的确定。**
+> 
+> 你已经知道得足够多，可以开始申请、测试客户需求、建立第二收入来源，这些步骤的成本有限，而且容易停止；但“立刻辞去唯一收入来源”是另一种等级的决定，它会直接影响家庭现金流，也会明显缩小恢复空间，因此需要更高程度的充分性。
+> 
+> 换句话说，目前不是“不能前进”，而是已经可以前进到较小、可逆的那一步，却还没有足够现实基础跨过最大的承诺。
+
+---
+
+# 44. Customer Actions
+
+允许：
+
+```
+Proceed at current scale
+Reduce action scale
+Increase buffer
+Resolve critical unknown
+Request consent
+Request professional review
+Strengthen exit route
+Wait with explicit reason
+Reassess threshold
+Continue
+```
+
+---
+
+# 45. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+THRESHOLD_T1
+THRESHOLD_T2
+THRESHOLD_T3
+THRESHOLD_T4
+FORMAL_GATE_REQUIRED
+THRESHOLD_MET
+THRESHOLD_NOT_MET
+REDUCED_ACTION_AVAILABLE
+ESCALATION_REQUIRED
+REOPENED
+```
+
+---
+
+# 46. Fail-Closed Conditions
+
+以下情况不得进入 NAV-28：
+
+```
+actionScaleUndefined
+impactUnderstated
+reversibilityMissing
+affectedPartyIgnored
+minimumStateExposureUnknownForHighImpactAction
+recoveryRouteMissing
+authorityRequirementIgnored
+consentRequirementIgnored
+symbolicReadingUsedToLowerThreshold
+thresholdMetDeclaredFromConfidenceAlone
+decisionObjectChanged
+```
+
+---
+
+# 47. Canonical Runtime Rule
+
+> **Navigation must match the required level of decision sufficiency to the impact, reversibility, responsibility, and recovery burden of the specific action being considered.**
+
+中文：
+
+> **Navigation 必须让所需决策充分程度，与正在考虑的具体行动之影响、可逆性、责任范围与恢复负担相匹配。**
+
+---
+
+# 48. Canonical Scale Rule
+
+> **A decision may fail the threshold for a large action while passing the threshold for a smaller reversible action.**
+
+中文：
+
+> **一个决定可以尚未达到重大行动的门槛，却已经达到较小、可逆行动的门槛。**
+
+---
+
+# 49. Canonical Impact Rule
+
+> **Higher consequence requires stronger grounding; urgency does not erase that requirement.**
+
+中文：
+
+> **后果越大，需要的现实基础越强；紧迫性不会自动取消这项要求。**
+
+---
+
+# 50. Canonical Reversibility Rule
+
+> **Reversibility lowers the cost of being wrong; it does not make evidence, responsibility, or minimum-state protection irrelevant.**
+
+中文：
+
+> **可逆性降低的是判断错误以后付出的代价，却不会让证据、责任与最低状态保护变得不重要。**
+
+---
+
+# 51. Canonical Non-Scoring Rule
+
+> **Impact and reversibility must shape the threshold without collapsing human decisions into a single weighted score.**
+
+中文：
+
+> **影响与可逆性必须真正改变决策门槛，却不能因此把人的决定压成一个加权总分。**
+
+---
+
+# 52. Canonical Authority Rule
+
+> **Where law, consent, professional responsibility, or legitimate shared authority governs the action, higher confidence cannot substitute for the required authority.**
+
+中文：
+
+> **当法律、同意、专业责任或合法共同权威对行动具有正式约束时，再高的确信程度都不能取代真正需要的权威。**
+
+---
+
+# 53. Final Canonical Form
+
+```
+NAV-27
+IMPACT / REVERSIBILITY THRESHOLD
+```
+
+**Input**
+
+```
+Decision Sufficiency State
++
+Specific Action
++
+Impact
++
+Reversibility
++
+Affected Parties
++
+Minimum-State Exposure
++
+Recovery Capacity
+```
+
+**Process**
+
+```
+Determine:
+How big is the consequence?
+How difficult is reversal?
+Who else is affected?
+How close is downside to the floor?
+How recoverable is failure?
+What authority is required?
+What sufficiency level does this action require?
+```
+
+**Output**
+
+```
+Required Decision Threshold
++
+Threshold-Met State
++
+Allowed Action Scale
++
+Remaining Requirements
+```
+
+**Boundary**
+
+```
+The threshold belongs to the action, not the person.
+Smaller action may qualify before larger commitment.
+Confidence cannot substitute for reality.
+```
+
+# NAV-28｜Shared Authority
+
+## 共同决定权｜当一个决定不只属于一个人，谁有权一起决定
+
+**Canonical Question｜规范问题**
+
+> **当一个决定的后果会由多个人共同承担时，为什么“我有意见”与“我有决定权”不能被当成同一件事？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-28
+```
+
+## 2. `canonicalTitleZh`
+
+```
+共同决定权
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Shared Authority
+```
+
+## 4. `canonicalQuestion`
+
+```
+当一个决定的后果会由多个人共同承担时，
+为什么“我有意见”与“我有决定权”不能被当成同一件事？
+```
+
+---
+
+# 5. `definition`
+
+**Shared Authority** 是 Navigation 对“当一个决定同时影响多个合法主体时，谁拥有决定权、谁必须被纳入、谁需要同意、谁可以提供意见，以及谁不能替别人决定”进行正式分层的机制。
+
+它不是：
+
+```
+everyone gets an equal vote
+```
+
+也不是：
+
+```
+the person who asked PHI OS decides everything
+```
+
+更不是：
+
+```
+who is affected most
+=
+who automatically has total authority
+```
+
+它真正回答的是：
+
+> **这个决定究竟属于谁，哪些部分需要共同决定，哪些部分仍属于个人自主，以及什么条件必须经过合法同意以后才能进入行动？**
+
+例如：
+
+```
+User wants:
+move overseas for a new role
+```
+
+这个决定可能同时包含：
+
+```
+Personal career choice
+Household relocation
+Child schooling
+Shared housing
+Partner employment
+Family financial structure
+```
+
+这里不能简单写成：
+
+```
+用户想搬
+→ 用户决定搬
+```
+
+也不能反过来写成：
+
+```
+家庭受影响
+→ 用户完全失去个人职业决定权
+```
+
+而应该拆成：
+
+```
+PERSONAL AUTHORITY
+SHARED AUTHORITY
+CONSENT-BOUND COMPONENT
+RESPONSIBILITY-BOUND COMPONENT
+```
+
+因此：
+
+> **NAV-28 的核心，是把一个看似单一的决定拆开，确认其中哪些部分属于个人，哪些部分属于共同现实，避免“共同影响”被误写成“单方决定”，也避免“需要共同决定”被扩大成“任何人都可以控制全部决定”。**
+
+---
+
+# 6. `navigationMeaning`
+
+NAV-08 已经建立：
+
+```
+Navigation supports.
+Humans decide.
+```
+
+并区分：
+
+```
+USER_DECISION_OWNER
+SHARED_DECISION
+CONSENT_REQUIRED
+PROFESSIONAL_REQUIRED
+```
+
+NAV-28 在此基础上进一步处理一个更困难的问题：
+
+> **当决定确实属于多个人时，决定权怎样在不同部分之间分布？**
+
+现实中的 shared decision 很少是真正简单的：
+
+```
+50 / 50
+```
+
+例如：
+
+```
+夫妻是否搬家
+```
+
+可能同时涉及：
+
+```
+A 的职业选择
+B 的职业选择
+孩子的照护与学校
+共同房产
+共同财务
+家庭支持网络
+```
+
+所以 NAV-28 建立：
+
+```
+Decision Object
+↓
+Affected Parties
+↓
+Authority by Component
+↓
+Consent Requirements
+↓
+Shared Constraints
+↓
+Jointly Actionable Decision Space
+```
+
+也就是说：
+
+> **共同决定不是把所有人的人生压成一个共同按钮，而是确认哪些现实必须共同成立，行动才真正具有资格。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-28 最低需要：
+
+```
+confirmedDecisionObject
+decisionOwner
+affectedParties
+authorityMap
+nonExchangeableConditions
+minimumAcceptableState
+candidateAction
+```
+
+并且至少需要知道：
+
+```
+who is directly affected
+who carries consequence
+who owns relevant asset / right / responsibility
+who must consent
+```
+
+如果这些不清楚，应保持：
+
+```
+SHARED_AUTHORITY_UNRESOLVED
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+relationshipContext
+financialNavigationProjection
+currentRealityProjection
+legalOrContractualContext
+careContext
+estateContext
+organizationalContext
+professionalInput
+guardianContext
+priorNavigationState
+```
+
+这些用于判断：
+
+- 谁拥有正式 authority；
+- 哪些是法律要求；
+- 哪些属于个人自主；
+- 哪些是真正共同承担的后果。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+VERIFIED_IDENTITY
+VERIFIED_ROLE
+OWNERSHIP_RECORD
+CONSENT_RECORD
+LEGAL_OR_CONTRACTUAL_RECORD
+RESPONSIBILITY_RECORD
+USER_REPORTED_RELATIONSHIP
+PROFESSIONAL_INPUT
+CURRENT_REALITY
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+其中：
+
+```
+FORMAL_SHARED_AUTHORITY
+```
+
+不能由：
+
+```
+Profile
+BaZi
+Zi Wei
+Tarot
+I Ching
+Astrology
+```
+
+建立。
+
+---
+
+# 10. Core Shared-Authority Classes
+
+建议至少区分：
+
+```
+SOLE_AUTHORITY
+SHARED_AUTHORITY
+CONSENT_REQUIRED
+CONSULTATION_REQUIRED
+AFFECTED_BUT_NOT_DECISION_OWNER
+REPRESENTATIVE_AUTHORITY
+PROFESSIONAL_AUTHORITY
+INSTITUTIONAL_AUTHORITY
+AUTHORITY_UNRESOLVED
+```
+
+---
+
+## A. `SOLE_AUTHORITY`
+
+该决定部分主要属于一个人本人。
+
+例如：
+
+```
+是否申请某职位
+是否学习某项技能
+是否表达自己的边界
+```
+
+只要不越过其他人的权利。
+
+---
+
+## B. `SHARED_AUTHORITY`
+
+行动本身需要多个合法主体共同成立。
+
+例如：
+
+```
+出售共同产权房产
+家庭整体搬迁
+共同承担重大债务
+共同商业资产处理
+```
+
+---
+
+## C. `CONSENT_REQUIRED`
+
+某行动不能只靠 consultation。
+
+必须有真实同意。
+
+例如：
+
+```
+sharing another person's private data
+changing jointly owned asset
+certain relationship arrangements
+specific medical / legal contexts
+```
+
+---
+
+## D. `CONSULTATION_REQUIRED`
+
+决定权可能仍主要属于一人，但因为后果明显影响他人，必须把他人的现实纳入。
+
+例如：
+
+```
+用户个人换工作
+```
+
+决定权主要属于用户，
+
+但如果会改变：
+
+```
+family income
+childcare
+household schedule
+```
+
+则 consultation 具有现实意义。
+
+---
+
+## E. `AFFECTED_BUT_NOT_DECISION_OWNER`
+
+一个人可能受到影响，却不因此自动取得完整决定权。
+
+例如：
+
+```
+colleague affected by user's resignation
+```
+
+并不自动拥有否决权。
+
+---
+
+## F. `REPRESENTATIVE_AUTHORITY`
+
+某些情况下决定由合法代表承担。
+
+例如：
+
+```
+minor
+dependent
+incapacitated person
+```
+
+但代表者必须：
+
+```
+represent legitimate interests
+```
+
+而不是：
+
+```
+invent hidden preferences
+```
+
+---
+
+# 11. `allowedInference`
+
+NAV-28 可以：
+
+## A. 将一个大 Decision Object 拆成不同 authority components
+
+例如：
+
+```
+Move overseas
+```
+
+可拆成：
+
+```
+User accepts overseas job
+→ personal authority
+
+Sell jointly owned house
+→ shared authority
+
+Move child
+→ responsibility / guardian authority
+
+Partner leaves own job
+→ partner's personal authority
+```
+
+这是非常重要的 capability。
+
+---
+
+## B. 识别某一部分可以先独立推进
+
+例如：
+
+```
+apply for overseas role
+```
+
+可能属于：
+
+```
+SOLE_AUTHORITY
+```
+
+即使：
+
+```
+final family relocation
+```
+
+仍需要 Shared Authority。
+
+因此 shared decision 不必过早阻塞所有探索。
+
+---
+
+## C. 识别行动需要共同同意，但资料搜集不需要
+
+例如：
+
+```
+research schools
+compare housing
+estimate costs
+```
+
+可以进行，
+
+但：
+
+```
+sign lease
+sell house
+move child
+```
+
+可能需要额外 authority。
+
+---
+
+## D. 识别不同人的最低状态
+
+例如：
+
+```
+User minimum:
+career flexibility
+
+Partner minimum:
+income continuity
+
+Child minimum:
+care continuity
+```
+
+不能只用用户的 minimum state 代表全部。
+
+---
+
+## E. 识别 authority conflict
+
+例如：
+
+```
+user wants change
+partner does not consent
+```
+
+如果该行动属于 shared-authority component，应标记：
+
+```
+AUTHORITY_CONFLICT
+```
+
+而不是让系统替双方投票。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-28 严禁：
+
+## A. 把“受影响”自动等于“拥有否决权”
+
+禁止：
+
+```
+affected
+→ full authority
+```
+
+---
+
+## B. 把“关系更亲近”自动等于“权力更大”
+
+例如：
+
+```
+parent
+partner
+employer
+```
+
+都不能自动取得超出实际范围的 authority。
+
+---
+
+## C. 把用户的陈述当成第三方同意
+
+禁止：
+
+```
+user says partner is okay
+→ consent confirmed
+```
+
+除非产品与数据规则确实允许相应方式确认。
+
+---
+
+## D. 推断第三方隐藏意图
+
+禁止：
+
+```
+your partner actually wants...
+your child secretly prefers...
+```
+
+---
+
+## E. 让多数意见自动压过合法个人权利
+
+```
+3 people agree
+1 person owns the right
+```
+
+不能自动按票数决定。
+
+---
+
+## F. 让 AI 调解成最终裁决者
+
+Navigation 可以整理冲突，
+
+不能成为：
+
+```
+final arbiter
+```
+
+---
+
+# 13. `decisionEffect`
+
+NAV-28 主要影响：
+
+```
+ACTION_PERMISSION
+CONSENT_REQUIREMENT
+SHARED_DECISION_SCOPE
+OPTION_ELIGIBILITY
+ACTION_SEQUENCE
+ESCALATION_REQUIREMENT
+```
+
+核心 effect：
+
+```
+AUTHORITY_COMPLETENESS
+```
+
+即：
+
+> **一个行动需要哪些人的合法权威真正到位，才可以进入现实。**
+
+---
+
+# 14. `decisionThresholdEffect`
+
+即使 NAV-27 已判断：
+
+```
+threshold met
+```
+
+只要：
+
+```
+required shared authority
+or
+required consent
+```
+
+尚未完成，
+
+就不能自动：
+
+```
+ACTION_ADMITTED
+```
+
+冻结：
+
+```
+SUFFICIENCY
++
+AUTHORITY
+=
+ACTION READINESS
+```
+
+而不是：
+
+```
+SUFFICIENCY
+=
+AUTHORITY
+```
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-28 可以：
+
+- 拆 authority components；
+- 明确谁决定什么；
+- 明确谁必须同意；
+- 识别 consultation；
+- 识别 representation；
+- 识别 conflict；
+- 允许不需要共同授权的探索先进行。
+
+NAV-28 不可以：
+
+- 替第三方同意；
+- 替关系双方裁决；
+- 赋予自己 formal authority；
+- 把多数票变成普遍规则；
+- 因为用户付费就偏向用户；
+- 把“建议”升级为共同决定。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+Shared Authority 并不取消个人 agency。
+
+例如：
+
+```
+User:
+I want to leave this job.
+```
+
+系统不能说：
+
+> 你伴侣不同意，所以你不能离职。
+
+因为：
+
+```
+employment choice
+```
+
+可能主要属于用户。
+
+但可以指出：
+
+> 如果离职会改变共同家庭收入、照护安排或住房计划，这些共同后果需要被共同处理。
+
+因此必须冻结：
+
+> **A person may retain authority over their own action while still carrying responsibility for shared consequences.**
+
+中文：
+
+> **一个人可以保有对自己行动的决定权，同时仍然必须对这个行动产生的共同后果承担现实责任。**
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.61–15.70｜Shared Authority
+```
+
+尤其：
+
+```
+15.61｜什么时候一个决定不再只属于一个人
+15.62｜受到影响，不等于拥有全部决定权
+15.63｜个人自主与共同后果怎样同时成立
+15.64｜谁必须被纳入
+15.65｜意见、协商与同意不是同一件事
+15.66｜共同资产怎样改变权威
+15.67｜照护责任怎样改变决定边界
+15.68｜代表别人决定有什么限制
+15.69｜共同决定发生冲突怎么办
+15.70｜Navigation 为什么不能成为最终裁决者
+```
+
+同时直接消费：
+
+```
+NAV-08 Navigation Authority
+NAV-21 Non-Exchangeable Condition
+NAV-22 Minimum Acceptable State
+NAV-27 Impact / Reversibility Threshold
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+agency
+shared reality
+responsibility
+coordination
+```
+
+NAV-28 不重新解释共同运行如何形成。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+shared maintenance
+care
+coordination burden
+```
+
+用于理解谁真正承担结果。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+authority boundary
+observer limitation
+third-party evidence limits
+```
+
+尤其支持：
+
+> **不能因为知道一个人的资料，就取得替这个人同意的权力。**
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+communication preference
+decision style
+relationship friction
+coordination tendency
+```
+
+但不得建立：
+
+```
+consent
+formal authority
+third-party preference
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 对 shared authority 尤其重要。
+
+例如：
+
+```
+joint debt
+joint property
+shared household obligations
+dependants
+beneficiaries
+```
+
+必须区分：
+
+```
+personal financial decision
+```
+
+与：
+
+```
+shared financial consequence
+```
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR / Tarot / I Ching：
+
+只能帮助提出：
+
+```
+relationship or responsibility question
+```
+
+不得：
+
+```
+infer consent
+infer partner intention
+assign decision authority
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 至少应提供：
+
+```
+whoIsAffected
+whoCarriesCost
+whoOwnsRelevantAsset
+whoHasRelevantResponsibility
+whatConsentExists
+whatConsentIsMissing
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-28 可被：
+
+```
+My Reality Navigation
+Relationship Navigation
+Career Navigation
+Financial Navigation
+Estate Navigation
+Family Navigation
+Structural Transition Planning
+Professional Handoff
+Action Runtime
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **Being affected by a decision does not automatically give someone control over the whole decision; but owning a personal choice does not erase responsibility for shared consequences.**
+
+中文：
+
+> **受到一个决定影响，并不会自动让一个人取得整个决定的控制权；但拥有个人选择，也不会因此取消对共同后果的责任。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-28：
+
+```
+affectedPartyChanged
+ownershipChanged
+consentChanged
+relationshipStatusChanged
+dependantChanged
+guardianStatusChanged
+decisionComponentChanged
+financialResponsibilityChanged
+legalAuthorityChanged
+professionalRequirementChanged
+```
+
+---
+
+# 26. Canonical Shared Authority Model
+
+建议：
+
+```
+{
+  "sharedAuthorityAssessmentId": "",
+  "decisionObjectId": "",
+  "components": [
+    {
+      "componentId": "",
+      "description": "",
+      "authorityState": "SOLE_AUTHORITY | SHARED_AUTHORITY | CONSENT_REQUIRED | CONSULTATION_REQUIRED | AFFECTED_BUT_NOT_DECISION_OWNER | REPRESENTATIVE_AUTHORITY | PROFESSIONAL_AUTHORITY | INSTITUTIONAL_AUTHORITY | AUTHORITY_UNRESOLVED",
+      "decisionOwners": [],
+      "affectedParties": [],
+      "consentRequiredFrom": [],
+      "consultationRequiredWith": [],
+      "authoritySources": [],
+      "status": ""
+    }
+  ],
+  "authorityConflicts": [],
+  "unresolvedConsent": [],
+  "actionEffects": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Decision-Component Rule
+
+冻结：
+
+> **Shared authority should be assigned to decision components, not automatically to the entire life decision.**
+
+中文：
+
+> **共同决定权应当落实到具体决策组成部分，而不能因为某一部分需要共同决定，就把整个人生决定全部变成共同所有。**
+
+这是 NAV-28 最重要的规则之一。
+
+---
+
+# 28. Affected ≠ Owner Rule
+
+冻结：
+
+```
+AFFECTED
+≠
+DECISION OWNER
+```
+
+一个人受到后果影响，需要被考虑；
+
+但是否拥有：
+
+```
+consultation
+consent
+shared authority
+```
+
+必须另外判断。
+
+---
+
+# 29. Consultation ≠ Consent Rule
+
+必须区分：
+
+```
+CONSULTATION
+```
+
+与：
+
+```
+CONSENT
+```
+
+例如：
+
+```
+informing partner
+discussing with partner
+partner consenting
+```
+
+是三个不同状态。
+
+---
+
+# 30. Consent Rule
+
+Consent 应尽量满足：
+
+```
+specific
+informed
+scope-bound
+current
+```
+
+不能把：
+
+```
+过去同意过类似事情
+```
+
+自动延伸成：
+
+```
+现在同意这一次
+```
+
+---
+
+# 31. Personal Agency Rule
+
+Shared Authority 不能被用来合法化：
+
+```
+control of another adult's entire life
+```
+
+例如：
+
+```
+partner affected by job choice
+```
+
+不意味着：
+
+```
+partner owns user's career
+```
+
+必须拆解共同影响。
+
+---
+
+# 32. Shared Consequence Rule
+
+反过来：
+
+```
+“这是我的选择”
+```
+
+也不能被用来忽略：
+
+```
+joint debt
+childcare
+shared housing
+dependant support
+```
+
+等真实共同后果。
+
+---
+
+# 33. Ownership Rule
+
+共同资产：
+
+```
+joint property
+shared business
+joint account
+```
+
+必须读取真实 ownership / authority。
+
+不能由关系身份猜测。
+
+---
+
+# 34. Responsibility Rule
+
+照护责任可能产生：
+
+```
+RESPONSIBILITY_BOUND_AUTHORITY
+```
+
+例如涉及孩子的决定，不能只按：
+
+```
+who wants it more
+```
+
+来处理。
+
+---
+
+# 35. Representative Authority Rule
+
+合法代表在为他人决定时：
+
+```
+representative authority
+```
+
+不等于：
+
+```
+personal preference authority
+```
+
+Navigation 必须尽量围绕：
+
+```
+represented person's welfare
+legal scope
+known preference where available
+```
+
+处理。
+
+---
+
+# 36. Authority Conflict Rule
+
+如果出现：
+
+```
+AUTHORITY_CONFLICT
+```
+
+例如：
+
+```
+co-owners disagree
+```
+
+系统不能生成：
+
+```
+majority recommendation
+```
+
+来代替真实解决机制。
+
+应输出：
+
+```
+UNRESOLVED_SHARED_AUTHORITY
+```
+
+并可能进入：
+
+```
+professional
+legal
+mediation
+shared discussion
+```
+
+路径。
+
+---
+
+# 37. No Proxy Consent Rule
+
+冻结：
+
+> **One person's account, interpretation, or report cannot silently provide consent on behalf of another person.**
+
+中文：
+
+> **一个人的账户、叙述、报告或解读，不能悄悄替另一个人提供同意。**
+
+---
+
+# 38. Exploration Before Consent Rule
+
+某些情况下，可以在 consent 完成前继续：
+
+```
+research
+scenario comparison
+cost estimation
+question clarification
+```
+
+但不能进入：
+
+```
+binding action
+data use beyond scope
+formal commitment
+```
+
+这使系统不必因为 shared decision 尚未完成就完全停止所有 Navigation。
+
+---
+
+# 39. Separate-Path Rule
+
+如果双方不能达成共同决定，Navigation 应检查：
+
+```
+which parts can remain separate?
+```
+
+例如：
+
+```
+User may apply for role
+Partner may independently evaluate own career
+Family move decision remains unresolved
+```
+
+而不是把所有东西都绑定成一个 Yes / No。
+
+---
+
+# 40. Shared Minimum State Rule
+
+当多人共同承担后果时，不能只使用一个人的：
+
+```
+Minimum Acceptable State
+```
+
+需要至少检查：
+
+```
+shared material minimum
+responsibility minimum
+affected-party minimum
+```
+
+但不能凭空推断他人 preference。
+
+---
+
+# 41. Shared Value Conflict Rule
+
+例如：
+
+```
+User values:
+career growth
+
+Partner values:
+location stability
+```
+
+Navigation 可以显示冲突，
+
+但不能：
+
+```
+rank person A's value against person B's value
+```
+
+然后得出总分。
+
+应交给：
+
+```
+shared decision process
+```
+
+---
+
+# 42. Shared Authority and Threshold
+
+高影响 shared decision 需要同时满足：
+
+```
+Decision Sufficiency
++
+Impact / Reversibility Threshold
++
+Authority Completeness
+```
+
+缺一不可。
+
+---
+
+# 43. Shared Authority and Action Scale
+
+如果共同 authority 尚未完整，
+
+有时仍可以：
+
+```
+reduce action scale
+```
+
+进入个人权限内的下一步。
+
+例如：
+
+```
+apply
+research
+interview
+visit
+estimate
+```
+
+而不进入：
+
+```
+sign
+sell
+move
+terminate
+```
+
+---
+
+# 44. Shared Authority and Professional Input
+
+专业人士可以：
+
+```
+clarify rights
+clarify obligations
+clarify consequences
+```
+
+但：
+
+```
+professional opinion
+```
+
+不一定解决：
+
+```
+relationship value conflict
+```
+
+必须保持范围。
+
+---
+
+# 45. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Move overseas for new role
+
+Components:
+
+Accept job offer
+→ USER SOLE AUTHORITY
+
+Sell jointly owned home
+→ SHARED AUTHORITY
+
+Relocate child
+→ SHARED / RESPONSIBILITY-BOUND
+
+Partner leaves own job
+→ PARTNER SOLE AUTHORITY
+
+Use partner's private financial data
+→ CONSENT REQUIRED
+```
+
+客户可以看到：
+
+> **这个决定并不是一个单一的“我们搬不搬”。**
+> 
+> 接受一份工作首先属于你的职业选择，你可以决定自己是否申请、面试，甚至在一定阶段接受条件谈判；但真正让全家搬迁，会同时进入共同住房、孩子照护与教育、伴侣自己的职业，以及家庭财务结构，因此这些部分不能由任何一个人单方面代表全部人完成。
+> 
+> 这也意味着，目前即使家庭还没有达成搬迁共识，你仍然可以继续做属于你个人权限范围内的探索，例如完成面试、确认薪资、了解地点与学校；真正需要共同决定的是那些会把共同现实正式改变的部分。
+
+---
+
+# 46. Customer Actions
+
+允许：
+
+```
+Confirm decision owner
+Split decision components
+Add affected party
+Mark consultation required
+Request consent
+Resolve ownership
+Proceed with personal-authority step
+Pause shared action
+Request professional review
+Continue
+```
+
+---
+
+# 47. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+SOLE_AUTHORITY_CLEAR
+SHARED_AUTHORITY_CLEAR
+CONSENT_REQUIRED
+CONSULTATION_REQUIRED
+AUTHORITY_CONFLICT
+AUTHORITY_UNRESOLVED
+READY_FOR_ACTION_RUNTIME
+REOPENED
+```
+
+---
+
+# 48. Fail-Closed Conditions
+
+以下情况不得进入 NAV-29：
+
+```
+decisionOwnerUnknown
+sharedDecisionComponentNotSeparated
+requiredConsentMissing
+ownershipAssumed
+thirdPartyPreferenceInvented
+representativeAuthorityUnverified
+affectedPartyIgnored
+sharedMinimumIgnored
+professionalAuthorityRequirementIgnored
+symbolicReadingUsedAsAuthorityEvidence
+```
+
+---
+
+# 49. Canonical Runtime Rule
+
+> **Navigation must assign authority to the specific components of a shared decision rather than assume that one person either owns everything or owns nothing.**
+
+中文：
+
+> **Navigation 必须把决定权落实到共同决定中的具体组成部分，而不能假设一个人要么拥有全部决定权，要么完全没有决定权。**
+
+---
+
+# 50. Canonical Affected-Party Rule
+
+> **Being affected creates relevance; it does not automatically create total decision authority.**
+
+中文：
+
+> **受到影响，会产生被纳入决定的现实相关性，却不会自动产生对整个决定的完全控制权。**
+
+---
+
+# 51. Canonical Agency Rule
+
+> **Personal autonomy and shared responsibility can both be true at the same time.**
+
+中文：
+
+> **个人自主与共同责任可以同时成立，并不需要其中一方消灭另一方。**
+
+---
+
+# 52. Canonical Consent Rule
+
+> **Consultation is not consent, and one person's account cannot provide consent for another.**
+
+中文：
+
+> **协商不是同意，一个人的叙述也不能替另一个人提供同意。**
+
+---
+
+# 53. Canonical Shared-Action Rule
+
+> **When a shared action requires multiple legitimate authorities, decision sufficiency alone is not enough; the authority conditions must also be complete.**
+
+中文：
+
+> **当一个共同动作需要多个合法决定主体共同成立时，仅仅达到决策充分仍然不够，相关权威与同意条件也必须完整。**
+
+---
+
+# 54. Canonical No-Arbitration Rule
+
+> **Navigation may clarify conflict, map rights and responsibilities, and structure the decision; it must not silently become the final arbiter between legitimate decision-makers.**
+
+中文：
+
+> **Navigation 可以澄清冲突、整理权利与责任并组织共同决定，却不能悄悄成为合法决定主体之间的最终裁判者。**
+
+---
+
+# 55. Final Canonical Form
+
+```
+NAV-28
+SHARED AUTHORITY
+```
+
+**Input**
+
+```
+Decision Object
++
+Specific Action
++
+Decision Owners
++
+Affected Parties
++
+Ownership / Responsibility / Consent
+```
+
+**Process**
+
+```
+Split:
+What belongs to one person?
+What belongs to multiple people?
+Who must be consulted?
+Who must consent?
+Who has formal authority?
+Which parts may proceed independently?
+```
+
+**Output**
+
+```
+Shared Authority Map
++
+Consent / Consultation State
++
+Action Permission Boundary
+```
+
+**Boundary**
+
+```
+Affected does not equal owner.
+Personal authority does not erase shared consequences.
+Consultation does not equal consent.
+Navigation does not arbitrate human lives.
+```
+
+# NAV-29｜Action Runtime
+
+## 行动运行｜决定怎样真正进入现实，而不是停留在分析里
+
+**Canonical Question｜规范问题**
+
+> **当一个决定已经达到足够充分、权威边界也已经清楚以后，怎样让它真正进入现实，同时保留边界、观察、停止与修正能力？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-29
+```
+
+## 2. `canonicalTitleZh`
+
+```
+行动运行
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Action Runtime
+```
+
+## 4. `canonicalQuestion`
+
+```
+当一个决定已经达到足够充分、权威边界也已经清楚以后，
+怎样让它真正进入现实，同时保留边界、观察、停止与修正能力？
+```
+
+---
+
+# 5. `definition`
+
+**Action Runtime** 是 Navigation 把已经通过 Decision Sufficiency、Impact / Reversibility Threshold 与 Shared Authority 的决定，转换成一个可以实际执行、被观察、被停止、被修正、并能够产生下一轮现实证据的行动结构。
+
+它不是：
+
+```
+MAKE THE DECISION
+```
+
+也不是：
+
+```
+EXECUTE EVERYTHING AT ONCE
+```
+
+更不是：
+
+```
+recommendation → automatic action
+```
+
+它真正回答的是：
+
+> **既然已经决定要向前，具体哪一步现在真正有资格进入现实；它以什么规模开始，持续多久，观察什么，什么条件会让它继续、暂停、缩小或退出？**
+
+例如：
+
+```
+Decision:
+逐步转向独立顾问工作
+```
+
+Action Runtime 不应该只输出：
+
+```
+Start consulting.
+```
+
+而应该形成：
+
+```
+Action:
+启动 8 周有限客户试点
+
+Scope:
+最多 2 个客户
+
+Resource:
+每周不超过 8 小时
+
+Financial exposure:
+不增加固定债务
+
+Observe:
+客户获取
+实际收入
+时间负荷
+家庭影响
+
+Review:
+第 4 周 / 第 8 周
+
+Stop or redesign if:
+违反既定现金底线
+工作负荷超过确认边界
+关键客户验证失败
+```
+
+因此：
+
+> **NAV-29 的核心不是把分析变成命令，而是把一个已经取得资格的决定转化成有边界、可观察、可修正的现实行动。**
+
+---
+
+# 6. `navigationMeaning`
+
+前 28 个模块主要回答：
+
+```
+What are we deciding?
+Where are we?
+What remains open?
+What changes?
+What matters?
+What can we carry?
+What can go wrong?
+Who decides?
+Do we know enough?
+```
+
+NAV-29 第一次正式回答：
+
+```
+What exactly happens next?
+```
+
+这一步非常重要。
+
+因为一个决定如果没有转化成明确 Action Runtime，很容易出现三种漂移：
+
+```
+DECISION WITHOUT ACTION
+ACTION WITHOUT BOUNDARY
+ACTION WITHOUT OBSERVATION
+```
+
+第一种是：
+
+> 想清楚了，但什么都没有发生。
+
+第二种是：
+
+> 决定只是先做一步，进入现实后却无限扩大。
+
+第三种是：
+
+> 行动发生了，却没有预先定义什么现实结果会让判断更新。
+
+因此 NAV-29 建立：
+
+```
+Qualified Decision
++
+Permitted Action Scale
++
+Authority Boundary
+↓
+Concrete Action
+↓
+Scope / Time / Resources
+↓
+Observation
+↓
+Review / Trigger
+↓
+Continue / Adjust / Pause / Exit
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-29 最低需要：
+
+```
+confirmedDecisionObject
+selectedOrConfirmedDirection
+decisionSufficiencyState
+requiredDecisionThreshold
+thresholdMetState
+sharedAuthorityState
+permittedActionScale
+minimumAcceptableState
+exitRecoveryState
+```
+
+如果没有明确：
+
+```
+what action is actually being taken
+```
+
+则不能进入 Action Runtime。
+
+应标记：
+
+```
+ACTION_UNDEFINED
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+currentPosition
+timeAssessment
+capacityQualificationState
+waitingQualification
+financialNavigationProjection
+currentRealityProjection
+professionalInput
+legalOrContractualContext
+relationshipContext
+priorNavigationState
+scenarioTriggers
+```
+
+这些用于决定：
+
+- 行动什么时候开始；
+- 行动规模；
+- 资源上限；
+- 观察指标；
+- review point；
+- 是否需要专业 handoff。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_CONFIRMED_ACTION
+SHARED_CONFIRMED_ACTION
+FORMAL_AUTHORITY
+PROFESSIONAL_REQUIREMENT
+CURRENT_FACT
+VERIFIED_RECORD
+SUPPORTED_INFERENCE
+SCENARIO_TRIGGER
+INTERPRETIVE_CONTEXT
+UNKNOWN
+```
+
+真正进入执行层的：
+
+```
+action
+scope
+consent
+formal requirement
+```
+
+不能由：
+
+```
+Profile
+BaZi
+Zi Wei
+Astrology
+Tarot
+I Ching
+```
+
+直接生成执行权。
+
+---
+
+# 10. Core Action Runtime States
+
+建议至少区分：
+
+```
+ACTION_NOT_READY
+ACTION_READY
+ACTION_ACTIVE
+ACTION_ACTIVE_WITH_MONITORING
+ACTION_PAUSED
+ACTION_ADJUSTMENT_REQUIRED
+ACTION_SCALE_REDUCTION_REQUIRED
+EXIT_TRIGGER_REACHED
+ACTION_COMPLETED
+ACTION_OUTCOME_PENDING_REVIEW
+```
+
+---
+
+## A. `ACTION_NOT_READY`
+
+虽然方向可能已确认，但：
+
+```
+threshold
+authority
+consent
+scope
+```
+
+仍有缺口。
+
+---
+
+## B. `ACTION_READY`
+
+行动已经满足当前规模所需条件，可以进入现实。
+
+---
+
+## C. `ACTION_ACTIVE`
+
+行动已经开始，正在现实中运行。
+
+---
+
+## D. `ACTION_ACTIVE_WITH_MONITORING`
+
+行动继续，但某些边界已经接近 review threshold。
+
+---
+
+## E. `ACTION_PAUSED`
+
+暂时停止继续扩展，不等于整个方向被放弃。
+
+---
+
+## F. `ACTION_ADJUSTMENT_REQUIRED`
+
+现实反馈显示行动方式需要修改。
+
+---
+
+## G. `ACTION_SCALE_REDUCTION_REQUIRED`
+
+当前方向未必失效，但原规模超过现实承载能力。
+
+---
+
+## H. `EXIT_TRIGGER_REACHED`
+
+NAV-25 已定义的退出条件真实发生。
+
+这时必须重新进入：
+
+```
+Exit / Recovery Runtime
+```
+
+而不是继续解释为什么“也许再坚持一下”。
+
+---
+
+# 11. Core Action Components
+
+每个 Action Runtime 至少应该定义：
+
+```
+ACTION
+SCOPE
+START
+DURATION_OR_REVIEW_POINT
+RESOURCE_BOUNDARY
+AUTHORITY_BOUNDARY
+OBSERVATION_SET
+CONTINUE_TRIGGER
+ADJUST_TRIGGER
+PAUSE_TRIGGER
+EXIT_TRIGGER
+OUTCOME_CAPTURE
+```
+
+---
+
+# 12. `allowedInference`
+
+NAV-29 可以：
+
+## A. 把大决定转换成当前有资格的最小行动
+
+例如：
+
+```
+Direction:
+change career
+```
+
+而 NAV-27 只允许：
+
+```
+T1 / T2 action
+```
+
+则 NAV-29 可以形成：
+
+```
+apply
+interview
+pilot
+course
+short-term test
+```
+
+而不是直接：
+
+```
+resign
+```
+
+---
+
+## B. 把 Action Scale 固定下来
+
+例如：
+
+```
+pilot
+```
+
+必须进一步定义：
+
+```
+2 clients
+8 weeks
+max RM5k spend
+max 8h/week
+```
+
+前提是这些边界有现实依据或由用户确认。
+
+---
+
+## C. 把已定义的 threshold 转成 runtime trigger
+
+例如：
+
+```
+minimum liquidity floor
+```
+
+可以进入：
+
+```
+PAUSE / EXIT TRIGGER
+```
+
+但不能改变原 threshold。
+
+---
+
+## D. 建立 review point
+
+例如：
+
+```
+review after 6 weeks
+```
+
+用于检查：
+
+```
+what changed
+what did not
+what new evidence appeared
+```
+
+---
+
+## E. 识别行动已经扩大到超出原授权范围
+
+例如：
+
+原授权：
+
+```
+small pilot
+```
+
+实际运行变成：
+
+```
+full launch
+```
+
+系统可以标记：
+
+```
+ACTION_SCOPE_DRIFT
+```
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-29 严禁：
+
+## A. 把 recommendation 自动变成 execution
+
+禁止：
+
+```
+PHI OS suggests X
+→ automatically execute X
+```
+
+---
+
+## B. 在用户未确认时扩大 Action Scale
+
+禁止：
+
+```
+pilot succeeded
+→ full rollout automatically
+```
+
+---
+
+## C. 忽略原 authority boundary
+
+例如：
+
+```
+research approved
+```
+
+不代表：
+
+```
+sign contract approved
+```
+
+---
+
+## D. 用 symbolic input 触发执行动作
+
+禁止：
+
+```
+Tarot says go
+→ begin action
+```
+
+---
+
+## E. 因为早期结果好就取消停止条件
+
+```
+good early result
+≠
+exit rules no longer matter
+```
+
+---
+
+## F. 把 Action Runtime 变成无期限习惯
+
+每个重大 action 应有：
+
+```
+review point
+trigger
+or completion condition
+```
+
+---
+
+# 14. `decisionEffect`
+
+NAV-29 主要影响：
+
+```
+ACTION_START
+ACTION_SCALE
+ACTION_SEQUENCE
+ACTION_BOUNDARY
+MONITORING_REQUIREMENT
+PAUSE_STATE
+EXIT_STATE
+OUTCOME_CAPTURE
+```
+
+核心 effect：
+
+```
+DECISION → REALITY
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+NAV-29 不重新计算 NAV-27 的 threshold。
+
+它负责确保：
+
+```
+actual action scale
+<=
+approved action scale
+```
+
+如果运行过程中：
+
+```
+scope
+cost
+affected parties
+reversibility
+```
+
+发生实质扩大，
+
+则必须：
+
+```
+PAUSE
+→ RETURN TO NAV-27
+```
+
+重新判断。
+
+冻结：
+
+> **Action authorization does not automatically expand with the action.**
+
+中文：
+
+> **一个行动取得了执行资格，并不代表它在规模扩大以后仍然自动拥有相同资格。**
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-29 可以：
+
+- 把决定转成具体行动；
+- 设定 action scope；
+- 建立观察与复核；
+- 根据已确认 trigger 暂停或提示退出；
+- 把结果写回 My Reality / Navigation state；
+- 触发下一轮 review。
+
+NAV-29 不可以：
+
+- 擅自扩大动作；
+- 自动产生 consent；
+- 自动代表用户完成高影响现实动作；
+- 绕过正式专业程序；
+- 把分析建议直接变成现实执行。
+
+如果产品未来允许自动化动作，也必须：
+
+```
+explicit permission
+action-specific consent
+reconfirm high-impact execution
+```
+
+而不能靠一次 Navigation consent 永久授权。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+用户必须明确确认：
+
+```
+what action begins
+at what scale
+under what boundary
+```
+
+尤其是：
+
+```
+financial commitment
+contract signing
+data sharing
+appointment booking
+asset movement
+employment termination
+relationship communication
+```
+
+等行动。
+
+Navigation 可以准备：
+
+```
+draft
+plan
+checklist
+sequence
+```
+
+但：
+
+> **准备行动 ≠ 执行行动。**
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.51–15.60｜Action
+```
+
+尤其：
+
+```
+15.51｜决定什么时候才真正变成行动
+15.52｜行动必须有边界
+15.53｜行动规模怎样与确定程度匹配
+15.54｜小行动怎样产生新证据
+15.55｜行动以后观察什么
+15.56｜什么时候继续
+15.57｜什么时候修正
+15.58｜什么时候暂停
+15.59｜什么时候退出
+15.60｜行动怎样重新进入现实读取
+```
+
+同时直接消费：
+
+```
+NAV-26 Decision Sufficiency
+NAV-27 Impact / Reversibility Threshold
+NAV-28 Shared Authority
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+action
+agency
+runtime
+```
+
+但 NAV-29 不重新解释人为什么行动。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+maintenance
+response
+recovery
+```
+
+让 Action Runtime 能够处理行动后的持续条件。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+observation
+evidence
+revision
+```
+
+这对 NAV-29 至关重要，因为：
+
+> **行动不仅改变现实，也产生新的现实证据。**
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助设计：
+
+```
+action format
+communication style
+workload fit
+review cadence
+```
+
+但不能：
+
+```
+authorize action
+override current reality
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 可以建立：
+
+```
+spend ceiling
+cash-floor trigger
+debt boundary
+runway review
+```
+
+这些可以直接成为 Action Runtime boundary。
+
+例如：
+
+```
+Pilot budget:
+max RM5,000
+
+Pause if:
+usable liquidity falls below confirmed floor
+```
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR / Tarot / I Ching：
+
+可以贡献：
+
+```
+interpretive context
+reflection prompt
+what to observe
+```
+
+但不得：
+
+```
+authorize action
+set material threshold
+trigger execution
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 在 NAV-29 中不再只是输入。
+
+它同时成为：
+
+```
+OUTCOME FEEDBACK CHANNEL
+```
+
+需要捕捉：
+
+```
+what happened
+what changed
+what did not
+what cost more
+what improved
+what new unknown appeared
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-29 是以下系统的直接 Action Layer：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Structural Transition Planning
+Professional Handoff
+Scenario Runtime
+```
+
+它必须能够把：
+
+```
+analysis state
+```
+
+转成：
+
+```
+bounded executable next step
+```
+
+但保持 Human Confirmation。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **A decision becomes real only when it is translated into a bounded action that reality can answer.**
+
+中文：
+
+> **一个决定只有在被转化成有边界、并且现实能够回应的行动以后，才真正进入现实。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-29：
+
+```
+actionStarted
+actionCompleted
+reviewPointReached
+scopeChanged
+costChanged
+capacityChanged
+affectedPartyChanged
+newEvidenceAppeared
+minimumStateApproached
+exitTriggerReached
+authorityChanged
+consentChanged
+unexpectedOutcome
+```
+
+---
+
+# 27. Canonical Action Runtime Model
+
+建议：
+
+```
+{
+  "actionRuntimeId": "",
+  "decisionObjectId": "",
+  "actionId": "",
+  "actionDescription": "",
+  "actionScale": "",
+  "startState": "",
+  "scope": [],
+  "resourceLimits": [],
+  "authorityRequirements": [],
+  "observationSet": [],
+  "reviewPoints": [],
+  "continueTriggers": [],
+  "adjustTriggers": [],
+  "pauseTriggers": [],
+  "exitTriggers": [],
+  "outcomes": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Action Must Be Observable Rule
+
+冻结：
+
+> **An action should be defined clearly enough that reality can answer whether it changed anything.**
+
+中文：
+
+> **一个行动必须被定义得足够清楚，使现实能够回答：它到底改变了什么。**
+
+因此：
+
+```
+“努力改善工作”
+```
+
+不是好的 Action Runtime。
+
+而：
+
+```
+“未来 6 周将会议减少到每周不超过 8 小时，并记录实际总工时与交付变化”
+```
+
+才是可观察 action。
+
+---
+
+# 29. Smallest Qualified Action Rule
+
+Navigation 应优先问：
+
+```
+What is the smallest action
+that is already sufficiently qualified
+and can materially test reality?
+```
+
+这不是永远偏好小动作。
+
+而是避免：
+
+```
+direction confirmed
+→ largest commitment immediately
+```
+
+---
+
+# 30. Action Sequence Rule
+
+重大行动可以拆成：
+
+```
+A1
+A2
+A3
+A4
+```
+
+例如：
+
+```
+A1 Research
+A2 Pilot
+A3 Prepare transition
+A4 Full commitment
+```
+
+每一步可以有自己的：
+
+```
+threshold
+authority
+review
+```
+
+而不是一次性授权整条路线。
+
+---
+
+# 31. Action Scale Rule
+
+Action Scale 至少应描述：
+
+```
+money
+time
+duration
+people affected
+commitment level
+reversibility
+```
+
+如果其中任何一个显著扩大，应检查：
+
+```
+SCOPE_DRIFT
+```
+
+---
+
+# 32. Scope Drift Rule
+
+例如：
+
+```
+Approved:
+RM5k pilot
+```
+
+后来：
+
+```
+Actual:
+RM40k commitment
+```
+
+即使方向相同，也必须：
+
+```
+RETURN TO NAV-27
+```
+
+重新 threshold。
+
+---
+
+# 33. Continue Trigger Rule
+
+行动不能因为已经开始就自动继续。
+
+应尽量定义：
+
+```
+what would justify continuation?
+```
+
+例如：
+
+```
+minimum customer response achieved
+workload remains under limit
+financial floor preserved
+```
+
+---
+
+# 34. Adjustment Trigger Rule
+
+如果：
+
+```
+direction still valid
+but runtime conditions changed
+```
+
+可以：
+
+```
+ADJUST
+```
+
+而不是：
+
+```
+continue unchanged
+```
+
+或：
+
+```
+abandon entirely
+```
+
+---
+
+# 35. Pause Rule
+
+Pause 是正式 action state。
+
+它适用于：
+
+```
+critical information pending
+authority changed
+scope drift
+temporary capacity shortage
+minimum-state approach
+```
+
+Pause 不等于失败。
+
+---
+
+# 36. Exit Rule
+
+如果 NAV-25 已确认的：
+
+```
+EXIT_TRIGGER
+```
+
+真正成立，
+
+NAV-29 必须尊重它。
+
+不能因为：
+
+```
+sunk cost
+hope
+identity
+early promise
+```
+
+自动继续。
+
+---
+
+# 37. Action-as-Evidence Rule
+
+行动本身会产生：
+
+```
+NEW REALITY EVIDENCE
+```
+
+例如：
+
+```
+pilot shows actual demand
+conversation reveals consent state
+trial reveals workload
+visit reveals location fit
+```
+
+这些结果必须回流到：
+
+```
+Current Reality
+```
+
+而不是只保留在 Action history。
+
+---
+
+# 38. Observation Set Rule
+
+每个重大 Action 至少应明确：
+
+```
+what would count as improvement?
+what would count as deterioration?
+what remains unknown?
+```
+
+否则行动结束以后容易形成：
+
+```
+retrospective storytelling
+```
+
+---
+
+# 39. Outcome Capture Rule
+
+Action outcome 至少区分：
+
+```
+EXPECTED_OUTCOME
+UNEXPECTED_OUTCOME
+NO_MATERIAL_CHANGE
+MIXED_OUTCOME
+OUTCOME_UNKNOWN
+```
+
+并保留：
+
+```
+source
+time
+context
+```
+
+---
+
+# 40. No Outcome Cherry-Picking Rule
+
+不能只记录支持原决定的结果。
+
+例如：
+
+```
+sales improved
+```
+
+但：
+
+```
+cash burn doubled
+```
+
+也必须进入 outcome。
+
+---
+
+# 41. Action Completion Rule
+
+完成：
+
+```
+task
+```
+
+不等于：
+
+```
+decision validated
+```
+
+例如：
+
+```
+moved city successfully
+```
+
+只证明行动完成。
+
+是否值得仍需要：
+
+```
+outcome review
+```
+
+---
+
+# 42. Action Failure Rule
+
+行动没有产生预期结果，也不自动意味着：
+
+```
+decision was wrong
+```
+
+可能是：
+
+```
+execution issue
+wrong scale
+wrong timing
+incorrect assumption
+structure mismatch
+external change
+```
+
+必须回到 Reality。
+
+---
+
+# 43. No Automatic Escalation Rule
+
+如果小 action 成功：
+
+```
+pilot success
+```
+
+不能自动：
+
+```
+full rollout
+```
+
+必须重新检查：
+
+```
+scale
+capacity
+reversibility
+authority
+minimum state
+```
+
+---
+
+# 44. Human Confirmation Before Binding Action
+
+以下至少应要求显式 human confirmation：
+
+```
+financial commitment
+contract execution
+asset movement
+employment termination
+relationship disclosure
+private-data sharing
+shared property action
+formal appointment where consequential
+```
+
+具体执行能力仍取决于产品/专业边界。
+
+---
+
+# 45. Professional Handoff Rule
+
+如果 Action Runtime 到达：
+
+```
+PROFESSIONAL_REQUIRED
+```
+
+则动作应变成：
+
+```
+HANDOFF
+```
+
+而不是系统自己继续执行专业步骤。
+
+例如：
+
+```
+estate draft
+→ lawyer review
+
+regulated financial action
+→ licensed professional
+
+medical action
+→ clinician
+```
+
+---
+
+# 46. Action State Should Be Visible
+
+客户应能看到：
+
+```
+What am I doing?
+Why this scale?
+For how long?
+What am I watching?
+What would make me stop?
+What happens next?
+```
+
+而不是只有：
+
+```
+PHI OS recommendation
+```
+
+---
+
+# 47. Customer Projection Example
+
+内部：
+
+```
+Decision:
+Explore transition to independent consulting
+
+Approved scale:
+bounded pilot
+
+Action:
+8-week pilot
+
+Scope:
+max 2 clients
+max 8h/week
+max RM5k total spend
+
+Observe:
+qualified leads
+actual revenue
+hours used
+family impact
+recovery
+
+Review:
+week 4
+week 8
+
+Pause:
+workload exceeds agreed limit
+
+Exit:
+financial floor breached
+
+Success does not auto-authorize:
+full resignation
+```
+
+客户可以看到：
+
+> **现在已经可以开始，但开始的并不是“把整个人生一次性切换过去”。**
+> 
+> 目前已经达到充分程度的是一个八周、有明确边界的独立顾问试点：最多服务两个客户，每周投入不超过既定时间，也不超过已经确认的预算上限；这段时间真正需要观察的，不只是有没有收入，还包括获取客户到底有多难、实际占用多少时间，以及它怎样影响现有工作、恢复与家庭安排。
+> 
+> 第四周与第八周都需要重新复核。如果现实证明这个方向有效，它会获得新的证据，但不会因此自动取得“立即辞职全面投入”的资格；如果成本开始突破已经确认的边界，就应先暂停或缩小，而不是因为已经开始就继续扩大。
+
+---
+
+# 48. Customer Actions
+
+允许：
+
+```
+Confirm action
+Reduce scale
+Change sequence
+Set review point
+Add observation
+Add pause trigger
+Add exit trigger
+Start bounded action
+Pause
+Request professional handoff
+Record outcome
+Reopen navigation
+```
+
+---
+
+# 49. `status`
+
+建议：
+
+```
+UNFORMED
+ACTION_NOT_READY
+ACTION_READY
+ACTION_ACTIVE
+ACTION_ACTIVE_WITH_MONITORING
+ACTION_PAUSED
+ACTION_ADJUSTMENT_REQUIRED
+ACTION_SCALE_REDUCTION_REQUIRED
+EXIT_TRIGGER_REACHED
+ACTION_COMPLETED
+OUTCOME_REVIEW_REQUIRED
+REOPENED
+```
+
+---
+
+# 50. Fail-Closed Conditions
+
+以下情况不得进入 NAV-30：
+
+```
+actionUndefined
+actionScaleUndefined
+thresholdNotMet
+requiredConsentMissing
+professionalRequirementUnresolved
+scopeExceedsApprovedScale
+minimumStateProtectionMissing
+exitTriggerIgnored
+bindingActionWithoutHumanConfirmation
+symbolicReadingUsedAsExecutionAuthority
+outcomeCaptureMissing
+```
+
+---
+
+# 51. Canonical Runtime Rule
+
+> **Navigation must translate a qualified decision into an action whose scope, duration, resources, authority, observation, and stopping conditions are explicit.**
+
+中文：
+
+> **Navigation 必须把已经取得资格的决定，转化成一个在范围、时间、资源、权威、观察与停止条件上都明确的现实行动。**
+
+---
+
+# 52. Canonical Smallest-Action Rule
+
+> **When a smaller reversible action can produce material reality evidence, it may proceed before a larger commitment whose threshold has not yet been met.**
+
+中文：
+
+> **当一个更小、更可逆的行动已经能够产生实质现实证据时，它可以先于尚未达到门槛的重大承诺进入现实。**
+
+---
+
+# 53. Canonical Scope Rule
+
+> **Action authority applies only to the scale that was actually reviewed; expansion requires renewed threshold and authority review.**
+
+中文：
+
+> **行动资格只适用于真正接受过审查的规模；一旦行动扩大，就必须重新检查门槛与权威。**
+
+---
+
+# 54. Canonical Reality Rule
+
+> **Action is not the end of Navigation; action creates new reality that must be observed before the next decision is made.**
+
+中文：
+
+> **行动不是 Navigation 的终点；行动会创造新的现实，而新的现实必须再次被观察，才能形成下一轮决定。**
+
+---
+
+# 55. Canonical Stop Rule
+
+> **A decision that was once qualified does not earn permanent permission to continue when reality crosses its pause, minimum-state, authority, or exit boundaries.**
+
+中文：
+
+> **一个曾经取得资格的决定，并不会因此永久拥有继续权；一旦现实越过暂停、最低状态、权威或退出边界，它就必须重新接受判断。**
+
+---
+
+# 56. Canonical Human Authority Rule
+
+> **Navigation may prepare and structure action; binding high-impact action remains subject to explicit human confirmation and any required legitimate authority.**
+
+中文：
+
+> **Navigation 可以准备并组织行动，但具有现实约束力的高影响行动，仍必须经过明确的人类确认以及任何必要的合法权威。**
+
+---
+
+# 57. Final Canonical Form
+
+```
+NAV-29
+ACTION RUNTIME
+```
+
+**Input**
+
+```
+Decision-Sufficient Direction
++
+Threshold-Met Action Scale
++
+Authority / Consent
++
+Minimum State
++
+Exit / Recovery Boundary
+```
+
+**Process**
+
+```
+Define:
+What happens next?
+At what scale?
+Using what resources?
+For how long?
+What will be observed?
+What allows continuation?
+What requires adjustment?
+What requires pause?
+What triggers exit?
+```
+
+**Output**
+
+```
+Bounded Action Runtime
++
+Observation Set
++
+Review / Pause / Exit Triggers
+```
+
+**Boundary**
+
+```
+Decision is not execution.
+Starting does not authorize expansion.
+Action produces evidence.
+Reality retains revision authority.
+```
+
+# NAV-30｜Outcome → Continuation
+
+## 结果进入延续｜结果怎样成为下一轮现实的条件
+
+**Canonical Question｜规范问题**
+
+> **为什么一次行动的结果，不应该只被记录成“成功或失败”，而必须重新进入现实，成为下一轮决定的条件？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-30
+```
+
+## 2. `canonicalTitleZh`
+
+```
+结果进入延续
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Outcome → Continuation
+```
+
+## 4. `canonicalQuestion`
+
+```
+为什么一次行动的结果，
+不应该只被记录成“成功或失败”，
+而必须重新进入现实，
+成为下一轮决定的条件？
+```
+
+---
+
+# 5. `definition`
+
+**Outcome → Continuation** 是 Navigation 的闭环模块。它把行动以后真正发生的结果，从“这次决定的结束记录”转化成“下一轮现实读取的起始条件”。
+
+它不只问：
+
+> 做成了吗？
+
+也不只问：
+
+> 结果好不好？
+
+它真正回答的是：
+
+> **这个行动进入现实以后，究竟改变了什么；这些改变现在已经成为哪些新的资源、约束、责任、能力、成本、关系、选择空间与未知；下一轮 Navigation 应该从什么现实位置重新开始？**
+
+例如：
+
+```
+Action:
+进行 8 周独立顾问试点
+```
+
+八周以后，不能只得到：
+
+```
+SUCCESS
+```
+
+或：
+
+```
+FAILURE
+```
+
+因为现实可能同时是：
+
+```
+获得 2 个付费客户
+收入低于原目标
+实际客户获取成本高于预期
+每周投入时间低于原估计
+用户发现自己喜欢这类工作
+家庭影响可接受
+一个客户来源具有重复性
+另一个客户完全偶发
+```
+
+这组结果真正做的，不是替旧决定盖章。
+
+它们是在形成：
+
+```
+NEW REALITY
+```
+
+因此：
+
+> **NAV-30 的核心，是让行动结果离开“评价层”，重新进入“现实层”。**
+
+---
+
+# 6. `navigationMeaning`
+
+NAV-29 已经建立：
+
+```
+Decision
+→ Bounded Action
+→ Observation
+```
+
+NAV-30 继续完成：
+
+```
+Observation
+→ Outcome
+→ Reality Update
+→ Continuation
+→ New Navigation Cycle
+```
+
+这也正式实现 Book VIII 的核心句：
+
+> **延续，就是结果成为条件。**
+
+行动以前：
+
+```
+Current Reality
+→ Decision
+```
+
+行动以后：
+
+```
+Decision
+→ Action
+→ Outcome
+→ New Current Reality
+```
+
+于是新的现实又成为：
+
+```
+next Decision Object
+next Current Position
+next constraints
+next option space
+```
+
+的来源。
+
+因此：
+
+> **Navigation 不是一条从问题走向答案的直线，而是一种让现实不断重新取得修正权的循环。**
+
+---
+
+# 7. `requiredInputs`
+
+NAV-30 最低需要：
+
+```
+actionRuntime
+actualOutcome
+outcomeTime
+observationSet
+originalDecisionBasis
+originalExpectedEffects
+originalMinimumState
+originalTriggers
+```
+
+如果行动已经发生，但 outcome 没有被记录，应保持：
+
+```
+OUTCOME_NOT_YET_CAPTURED
+```
+
+不能仅凭用户最初期待推断结果。
+
+---
+
+# 8. `optionalInputs`
+
+```
+currentRealityProjection
+financialNavigationProjection
+relationshipContext
+professionalInput
+externalCurrentEvidence
+priorNavigationState
+actionHistory
+scenarioComparison
+exitRecoveryState
+```
+
+这些用于判断：
+
+- 结果是否真实改变了现实；
+- 哪些变化来自行动；
+- 哪些可能来自外部条件；
+- 哪些原判断需要修正。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+DIRECTLY_OBSERVED_OUTCOME
+USER_REPORTED_OUTCOME
+VERIFIED_ACCOUNT_OUTCOME
+FINANCIAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+SUPPORTED_ATTRIBUTION
+ATTRIBUTION_UNKNOWN
+INTERPRETIVE_CONTEXT
+```
+
+必须严格区分：
+
+```
+OUTCOME
+```
+
+与：
+
+```
+OUTCOME_INTERPRETATION
+```
+
+例如：
+
+```
+2 clients signed
+```
+
+属于 outcome。
+
+而：
+
+```
+the market likes my offer
+```
+
+属于 interpretation，需要另外验证。
+
+---
+
+# 10. Core Outcome States
+
+建议至少区分：
+
+```
+EXPECTED_OUTCOME
+BETTER_THAN_EXPECTED
+WORSE_THAN_EXPECTED
+MIXED_OUTCOME
+NO_MATERIAL_CHANGE
+UNEXPECTED_OUTCOME
+OUTCOME_INCOMPLETE
+OUTCOME_UNKNOWN
+```
+
+---
+
+## A. `EXPECTED_OUTCOME`
+
+行动产生与原预期大致一致的现实变化。
+
+这不代表整个方向已经永久正确。
+
+---
+
+## B. `BETTER_THAN_EXPECTED`
+
+现实比 baseline 更有利。
+
+仍然需要问：
+
+```
+为什么更好？
+是否可持续？
+是否因为偶发条件？
+```
+
+---
+
+## C. `WORSE_THAN_EXPECTED`
+
+结果低于预期。
+
+但：
+
+```
+worse than expected
+≠
+decision was wrong
+```
+
+---
+
+## D. `MIXED_OUTCOME`
+
+非常常见。
+
+例如：
+
+```
+income improved
+time autonomy worsened
+```
+
+不能压成单一 Success / Failure。
+
+---
+
+## E. `NO_MATERIAL_CHANGE`
+
+行动已经执行，但没有明显改变决定相关现实。
+
+这本身也是重要 evidence。
+
+---
+
+## F. `UNEXPECTED_OUTCOME`
+
+出现行动前没有进入 scenario 的新结果。
+
+必须允许它改变模型。
+
+---
+
+# 11. Outcome Dimensions
+
+建议至少检查：
+
+```
+VALUE_EFFECT
+FINANCIAL_EFFECT
+CAPACITY_EFFECT
+TIME_EFFECT
+RELATIONSHIP_EFFECT
+RESPONSIBILITY_EFFECT
+OPTION_SPACE_EFFECT
+REVERSIBILITY_EFFECT
+STRUCTURE_EFFECT
+UNKNOWN_EFFECT
+```
+
+这样可以防止：
+
+```
+单一指标成功
+=
+整个决定成功
+```
+
+---
+
+# 12. `allowedInference`
+
+NAV-30 可以：
+
+## A. 比较预期与实际
+
+例如：
+
+```
+Expected:
+10h/week
+
+Actual:
+18h/week
+```
+
+可以建立：
+
+```
+TIME_REQUIREMENT_UNDERESTIMATED
+```
+
+---
+
+## B. 识别原假设失效
+
+例如：
+
+```
+Assumption:
+clients can be acquired through existing network
+
+Reality:
+most leads came from paid acquisition
+```
+
+可以标记：
+
+```
+ASSUMPTION_INVALIDATED
+```
+
+---
+
+## C. 识别新的现实资源
+
+例如：
+
+```
+pilot created 3 repeat customers
+```
+
+可以成为下一轮：
+
+```
+CURRENT_RESOURCE
+```
+
+---
+
+## D. 识别新的现实约束
+
+例如：
+
+```
+actual delivery takes twice expected time
+```
+
+可以成为：
+
+```
+NEW_CAPACITY_CONSTRAINT
+```
+
+---
+
+## E. 识别 option space 扩大或缩小
+
+例如：
+
+行动产生：
+
+```
+new employer offer
+```
+
+则：
+
+```
+OPTION_SPACE_EXPANDED
+```
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-30 严禁：
+
+## A. 把结果贴成简单 Success / Failure 后停止分析
+
+---
+
+## B. 把好结果全部归功于原决定
+
+禁止：
+
+```
+good outcome
+→ decision quality proven
+```
+
+---
+
+## C. 把坏结果全部归咎于原决定
+
+禁止：
+
+```
+bad outcome
+→ original reasoning invalid
+```
+
+---
+
+## D. 进行 outcome hindsight bias
+
+禁止把：
+
+```
+现在已经知道的结果
+```
+
+伪装成：
+
+```
+行动以前本来就应该知道
+```
+
+---
+
+## E. 忽略未预期结果
+
+现实与模型不一致时，应修正模型。
+
+不能删掉现实。
+
+---
+
+## F. 用 Method Reading 重写实际结果
+
+例如：
+
+```
+financial result weak
+but Tarot said positive
+```
+
+不能因此弱化现实 outcome。
+
+---
+
+# 14. `decisionEffect`
+
+NAV-30 主要影响：
+
+```
+CURRENT_POSITION_UPDATE
+DECISION_BASIS_UPDATE
+OPTION_SPACE_UPDATE
+THRESHOLD_UPDATE
+MODEL_REVISION
+CONTINUATION_STATE
+NEXT_NAVIGATION_CYCLE
+```
+
+核心 effect：
+
+```
+OUTCOME → CONDITION
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+Outcome 可能改变未来 threshold。
+
+例如：
+
+```
+pilot shows stable demand
++
+low actual cost
++
+high reversibility
+```
+
+可能使下一阶段行动的现实基础增强。
+
+但不能直接：
+
+```
+pilot success
+→ full scale threshold automatically met
+```
+
+仍需重新跑：
+
+```
+NAV-15 Capacity
+NAV-26 Sufficiency
+NAV-27 Threshold
+NAV-28 Authority
+```
+
+相反，如果 outcome 显示：
+
+```
+higher cost
+lower recovery
+more affected parties
+```
+
+则未来 threshold 可能提高。
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-30 可以：
+
+- 记录结果；
+- 比较预期与现实；
+- 更新 Current Position；
+- 修正 assumptions；
+- 重新打开 Navigation；
+- 更新 option space；
+- 触发下一轮判断。
+
+NAV-30 不可以：
+
+- 因好结果永久批准方向；
+- 因坏结果自动否定方向；
+- 隐藏现实与模型冲突；
+- 用解释系统覆盖实际结果；
+- 自动扩大下一阶段行动。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+用户必须能够说：
+
+```
+这个结果对我来说意味着不同的事情
+```
+
+例如：
+
+系统观察到：
+
+```
+income +20%
+working time +40%
+```
+
+客户可能确认：
+
+> 这不是我想要的改善。
+
+因此 outcome evaluation 不只是系统测量，还必须重新读取：
+
+```
+VALUE
+MINIMUM STATE
+GOAL
+```
+
+但系统不能因此改变 factual outcome。
+
+应分开：
+
+```
+FACT:
+income +20%
+
+VALUE INTERPRETATION:
+not worth the added time
+```
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.71–15.80｜Outcome → Continuation
+```
+
+尤其：
+
+```
+15.71｜行动以后，现实已经不是原来的现实
+15.72｜结果不能只分成功与失败
+15.73｜结果必须重新成为证据
+15.74｜什么改变了，什么没有改变
+15.75｜现实怎样修正原判断
+15.76｜新的资源怎样形成
+15.77｜新的约束怎样形成
+15.78｜新的选择空间怎样出现
+15.79｜什么时候重新打开决定
+15.80｜延续，就是结果成为条件
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book I｜Reality Formation
+
+提供：
+
+```
+new difference
++
+existing conditions
+→ new configuration
+```
+
+NAV-30 不重新讲 reality formation。
+
+它只处理：
+
+> 行动产生的新结果怎样成为下一轮现实条件。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+continuity
+recovery
+post-action persistence
+```
+
+帮助判断 outcome 是否能够持续。
+
+---
+
+## Book VII｜Reality Observation
+
+Book VII 在 NAV-30 中重新成为核心：
+
+```
+observe
+measure
+evidence
+uncertainty
+revision
+```
+
+尤其冻结：
+
+> **现实拥有最终修正权。**
+
+---
+
+# 20. `profileConsumer`
+
+Outcome 可以反馈：
+
+```
+profile hypothesis supported?
+profile hypothesis contradicted?
+```
+
+但不能让一次事件直接重写长期 Profile。
+
+应标记：
+
+```
+PROFILE_EVIDENCE_CANDIDATE
+```
+
+而不是：
+
+```
+PROFILE_FACT_CHANGED
+```
+
+除非有累积证据。
+
+---
+
+# 21. `financialConsumer`
+
+Financial 应更新：
+
+```
+actual income
+actual spend
+actual cash burn
+actual debt
+actual liquidity
+actual runway
+```
+
+这些数据进入下一轮 Current Position。
+
+不能继续使用 action 前旧 projection。
+
+---
+
+# 22. `methodConsumer`
+
+Methods 可以在 outcome 后重新解释：
+
+```
+what the reading did or did not illuminate
+```
+
+但现实结果拥有更高修正权。
+
+例如：
+
+```
+Method interpretation predicted friction
+Reality showed none
+```
+
+应保留：
+
+```
+INTERPRETATION_NOT_CONFIRMED_BY_REALITY
+```
+
+而不是强行重解释现实来维护方法。
+
+---
+
+# 23. `currentRealityConsumer`
+
+NAV-30 最终必须把结果写回：
+
+```
+CURRENT REALITY
+```
+
+至少包括：
+
+```
+newFacts
+newResources
+newConstraints
+newResponsibilities
+newCosts
+newRelationships
+newOptions
+newUnknowns
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-30 是以下系统的闭环入口：
+
+```
+My Reality
+Timeline
+Navigation History
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Structural Transition Planning
+Action Runtime
+Ask PHI OS
+```
+
+它应该真正完成：
+
+```
+Action
+→ My Reality
+→ Next Navigation
+```
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **The purpose of action is not only to produce an outcome; it is also to let reality answer the model.**
+
+中文：
+
+> **行动不只是为了得到结果，也是为了让现实回答我们的判断。**
+
+---
+
+# 26. `revisionTriggers`
+
+NAV-30 本身在以下情况重新运行：
+
+```
+newOutcomeCaptured
+outcomeCorrected
+newExternalEvidence
+delayedOutcomeAppeared
+secondaryEffectAppeared
+professionalReviewArrived
+minimumStateChanged
+followUpPeriodCompleted
+```
+
+---
+
+# 27. Canonical Outcome Model
+
+建议：
+
+```
+{
+  "outcomeAssessmentId": "",
+  "actionRuntimeId": "",
+  "decisionObjectId": "",
+  "observedOutcomes": [],
+  "expectedVsActual": [],
+  "newResources": [],
+  "newConstraints": [],
+  "newResponsibilities": [],
+  "newCosts": [],
+  "newOptionSpace": [],
+  "newUnknowns": [],
+  "invalidatedAssumptions": [],
+  "supportedAssumptions": [],
+  "minimumStateEffects": [],
+  "nextCurrentPositionChanges": [],
+  "reopenTriggers": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Outcome ≠ Judgment Rule
+
+冻结：
+
+```
+OUTCOME
+≠
+JUDGMENT
+```
+
+例如：
+
+```
+Revenue = RM8,000
+```
+
+是 outcome。
+
+```
+This was a good decision
+```
+
+是 judgment。
+
+两者必须分开。
+
+---
+
+# 29. Success / Failure Decomposition Rule
+
+不要只记录：
+
+```
+SUCCESS
+FAILURE
+```
+
+应拆成：
+
+```
+what improved
+what worsened
+what remained unchanged
+what surprised us
+```
+
+因为现实结果通常是混合的。
+
+---
+
+# 30. Expected vs Actual Rule
+
+每个重要行动最好保留：
+
+```
+EXPECTED
+ACTUAL
+DELTA
+```
+
+但：
+
+```
+DELTA
+```
+
+不自动等于错误。
+
+它只是现实修正信号。
+
+---
+
+# 31. Attribution Rule
+
+如果行动以后出现变化：
+
+```
+after action
+≠
+because of action
+```
+
+建议状态：
+
+```
+ATTRIBUTION_SUPPORTED
+ATTRIBUTION_PARTIAL
+ATTRIBUTION_UNKNOWN
+```
+
+必须继承 Book VII 因果谨慎。
+
+---
+
+# 32. New Resource Rule
+
+Outcome 可能创造：
+
+```
+skill
+network
+income
+knowledge
+trust
+data
+option
+capacity
+```
+
+这些应正式进入：
+
+```
+CURRENT_POSITION_RESOURCES
+```
+
+---
+
+# 33. New Constraint Rule
+
+Outcome 也可能产生：
+
+```
+new debt
+contract
+responsibility
+location lock-in
+workload
+dependency
+```
+
+这些应进入：
+
+```
+CURRENT_POSITION_CONSTRAINTS
+```
+
+不能只记录收益。
+
+---
+
+# 34. New Responsibility Rule
+
+行动可能使：
+
+```
+employee hired
+childcare commitment created
+client obligation created
+debt obligation created
+```
+
+这些都改变后续 Navigation。
+
+---
+
+# 35. Option-Space Update Rule
+
+行动会：
+
+```
+OPEN options
+CLOSE options
+CHANGE option cost
+CHANGE option timing
+```
+
+这些必须重新写入 NAV-03。
+
+---
+
+# 36. Minimum-State Update Rule
+
+如果现实结果改变：
+
+```
+financial floor
+care requirement
+housing condition
+```
+
+NAV-22 必须重新打开。
+
+---
+
+# 37. Threshold Update Rule
+
+如果新结果改变：
+
+```
+impact
+reversibility
+recovery
+affected parties
+```
+
+NAV-27 必须重新运行。
+
+---
+
+# 38. Authority Update Rule
+
+如果行动结果引入新主体：
+
+例如：
+
+```
+business partner
+new employee
+new co-owner
+```
+
+NAV-28 必须重新打开。
+
+---
+
+# 39. Outcome Reopens Decision Rule
+
+以下任一成立时，应允许：
+
+```
+REOPEN DECISION
+```
+
+例如：
+
+```
+critical assumption invalidated
+minimum state approached
+new option appeared
+new responsibility appeared
+structural constraint changed
+goal-value alignment changed
+authority changed
+```
+
+---
+
+# 40. Outcome Can Confirm Continuation
+
+如果结果显示：
+
+```
+current path improved
+cost acceptable
+capacity restored
+value preserved
+```
+
+可以：
+
+```
+CONTINUATION_REQUALIFIED
+```
+
+这与 NAV-13 呼应。
+
+---
+
+# 41. Outcome Can Confirm Change
+
+同样，如果结构改变后：
+
+```
+cost lower
+capacity better
+value preserved
+minimum state safe
+```
+
+新结构可以获得更强 current qualification。
+
+但仍不是永久锁定。
+
+---
+
+# 42. No Permanent Validation Rule
+
+冻结：
+
+> **No successful outcome grants permanent validity to a direction.**
+
+中文：
+
+> **没有任何一次成功结果，可以永久证明一条方向以后都正确。**
+
+现实会继续变化。
+
+---
+
+# 43. No Permanent Failure Rule
+
+同样：
+
+> **No failed outcome permanently disqualifies an entire direction unless the underlying constraints genuinely make it unavailable.**
+
+中文：
+
+> **一次失败结果不会永久取消整个方向的资格，除非真正的现实约束已经使这个方向失去可行性。**
+
+---
+
+# 44. Model Revision Rule
+
+如果现实持续违背模型：
+
+```
+model
+```
+
+必须改。
+
+不能：
+
+```
+reinterpret reality
+until model survives
+```
+
+这是整个 PHI OS epistemic integrity 的核心。
+
+---
+
+# 45. Method Revision Rule
+
+如果：
+
+```
+Method interpretation
+```
+
+与实际结果长期不一致，
+
+系统应记录：
+
+```
+INTERPRETIVE_LIMIT
+```
+
+而不是提升象征解释权威。
+
+---
+
+# 46. Outcome History Rule
+
+My Reality / Timeline 不应该只保存：
+
+```
+what user asked
+what system answered
+```
+
+还应该保存：
+
+```
+what was decided
+what was done
+what happened
+what changed afterward
+```
+
+这样 Navigation 才形成真实 longitudinal reality。
+
+---
+
+# 47. Continuation State
+
+建议至少区分：
+
+```
+CONTINUE_CURRENT_ACTION
+ADJUST_CURRENT_ACTION
+PAUSE_AND_REVIEW
+EXIT_AND_RECOVER
+REQUALIFY_CURRENT_DIRECTION
+REOPEN_DECISION
+NEW_DECISION_OBJECT_REQUIRED
+```
+
+---
+
+# 48. Next-Cycle Routing Rule
+
+Outcome 以后，不一定永远回 NAV-01。
+
+根据变化：
+
+```
+small runtime adjustment
+→ NAV-29
+
+new current position
+→ NAV-02
+
+open/closed condition changed
+→ NAV-03
+
+material reality changed
+→ NAV-09
+
+new structural issue
+→ NAV-17
+
+value changed
+→ NAV-19/20
+
+new shared authority
+→ NAV-28
+
+entire question changed
+→ NAV-01
+```
+
+这对 runtime 很重要。
+
+---
+
+# 49. Continuation as New Initialization
+
+冻结：
+
+```
+Inherited Conditions
++
+Outcome Difference
+→
+New Reality Initialization State
+```
+
+这是 NAV-30 与整套 PHI OS ontology 最深的连接。
+
+决定并不是脱离 reality formation 的外部命令。
+
+行动进入现实以后，它本身就参与下一轮条件形成。
+
+---
+
+# 50. Customer Projection Example
+
+内部：
+
+```
+Action:
+8-week consulting pilot
+
+Expected:
+2 paying clients
+<= 8h/week
+RM5k max spend
+
+Actual:
+3 paying clients
+11h/week
+RM3.2k spend
+1 client repeatable
+2 one-off
+
+Effects:
+demand signal positive
+time requirement underestimated
+financial cost lower than expected
+repeatability still uncertain
+
+Continuation:
+ADJUST_CURRENT_ACTION
+```
+
+客户可以看到：
+
+> **这个试点没有简单地证明“你适合”或“不适合”独立顾问工作，它真正做的是改变了你现在所知道的现实。**
+> 
+> 八周以后，你得到的客户数量比原先目标更高，实际现金投入也低于预算，这说明需求并不是完全不存在；但真实时间投入明显高于原估计，而且三个客户里只有一个显示出重复合作可能，因此“市场已经验证”仍然说得太早。现在新的现实不是“试点成功”，而是：需求信号变强了，时间容量判断需要修正，客户重复性仍然未知。
+> 
+> 这意味着下一步不应该自动扩大规模，而是重新调整服务方式与时间边界，再测试重复客户是否能够形成。行动已经完成了一件更重要的事：它让现实替原来的假设回答了一部分问题。
+
+---
+
+# 51. Customer Actions
+
+允许：
+
+```
+Confirm outcome
+Correct outcome
+Add missing effect
+Mark attribution unknown
+Continue current action
+Adjust action
+Pause
+Exit and recover
+Reopen navigation
+Create new decision object
+```
+
+---
+
+# 52. `status`
+
+建议：
+
+```
+UNFORMED
+OUTCOME_NOT_YET_CAPTURED
+OUTCOME_CAPTURED
+MIXED_OUTCOME
+ASSUMPTION_INVALIDATED
+CURRENT_POSITION_UPDATED
+CONTINUATION_REQUALIFIED
+ACTION_ADJUSTMENT_REQUIRED
+EXIT_RECOVERY_REQUIRED
+DECISION_REOPEN_REQUIRED
+NEW_DECISION_OBJECT_REQUIRED
+CYCLE_READY
+```
+
+---
+
+# 53. Fail-Closed Conditions
+
+以下情况不得完成 NAV-30 cycle closure：
+
+```
+outcomeNotCaptured
+outcomeFabricated
+expectedAndActualConflated
+successFailureOversimplified
+criticalNegativeOutcomeOmitted
+attributionAssertedWithoutEvidence
+symbolicReadingUsedToOverrideActualOutcome
+newConstraintIgnored
+newResponsibilityIgnored
+minimumStateEffectIgnored
+actionExpansionAutoAuthorized
+```
+
+---
+
+# 54. Canonical Runtime Rule
+
+> **Navigation must convert action outcomes into updated reality conditions before any next decision inherits the previous decision’s assumptions.**
+
+中文：
+
+> **Navigation 必须先把行动结果转换成新的现实条件，下一轮决定才可以继续；旧决定的假设不能未经现实复核就自动被继承。**
+
+---
+
+# 55. Canonical Outcome Rule
+
+> **An outcome is evidence about reality, not a verdict on the worth of the person or the permanent correctness of the decision.**
+
+中文：
+
+> **结果是关于现实的新证据，不是对一个人的价值判断，也不是对某个决定永久正确与否的终审。**
+
+---
+
+# 56. Canonical Revision Rule
+
+> **When reality contradicts the model, the model must be revised before reality is reinterpreted to protect the model.**
+
+中文：
+
+> **当现实与模型冲突时，必须先修正模型，而不能先重新解释现实去保护模型。**
+
+---
+
+# 57. Canonical Continuation Rule
+
+> **Continuation means that the result of one action becomes part of the conditions from which the next reality develops.**
+
+中文：
+
+> **延续，就是一次行动的结果成为下一轮现实发展的条件。**
+
+---
+
+# 58. Canonical Learning Rule
+
+> **Action is valuable not only because it changes the world, but because it allows the world to answer the decision.**
+
+中文：
+
+> **行动的价值不只在于改变世界，也在于让世界回答这个决定。**
+
+---
+
+# 59. Canonical No-Permanent-Authority Rule
+
+> **Neither success nor failure grants permanent authority to the previous decision; current reality must requalify the next step.**
+
+中文：
+
+> **无论成功还是失败，都不会让上一次决定取得永久权威；下一步必须重新由当前现实取得资格。**
+
+---
+
+# 60. Final Canonical Form
+
+```
+NAV-30
+OUTCOME → CONTINUATION
+```
+
+**Input**
+
+```
+Bounded Action Runtime
++
+Observed Outcome
++
+Expected Outcome
++
+Current Reality
++
+Minimum / Threshold / Authority Boundaries
+```
+
+**Process**
+
+```
+Ask:
+What actually happened?
+What changed?
+What did not change?
+Which assumptions survived?
+Which assumptions failed?
+What new resources appeared?
+What new constraints appeared?
+What new choices became possible?
+What must now be reopened?
+```
+
+**Output**
+
+```
+Updated Reality State
++
+Continuation State
++
+Next-Cycle Routing
+```
+
+**Boundary**
+
+```
+Outcome is not verdict.
+Success is not permanent validation.
+Failure is not permanent disqualification.
+Reality retains revision authority.
+```
+
+**Cycle Closure**
+
+```
+NAV-01 Decision Object
+→
+...
+→
+NAV-29 Action Runtime
+→
+NAV-30 Outcome → Continuation
+→
+Updated Reality
+→
+Next Navigation Cycle
+```
+
+---
+
+## Canonical Cycle Sentence
+
+> **决定进入行动，行动产生结果，结果成为条件，条件重新形成现实；现实再次被读取，下一步因此重新取得资格。**
+
+英文：
+
+> **Decision enters action; action produces outcome; outcome becomes condition; condition reshapes reality; reality is read again, and the next step must qualify anew.**
