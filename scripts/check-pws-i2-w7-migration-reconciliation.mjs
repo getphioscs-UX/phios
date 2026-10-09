@@ -1,3 +1,4 @@
+import { assertPwsMigrationBaseline } from './lib/pws-migration-baseline.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { DatabaseSync } from 'node:sqlite';
@@ -198,7 +199,7 @@ const [nodesAfter, questionsAfter] = await Promise.all([
 ]);
 assert.deepEqual(nodesAfter, nodesBefore);
 assert.deepEqual(questionsAfter, questionsBefore);
-assert.equal(migrations.length, 13);
+assertPwsMigrationBaseline(migrations);
 
 database.close();
 console.log('✓ PWS-I2-W7 Migration and Reconciliation passed.');

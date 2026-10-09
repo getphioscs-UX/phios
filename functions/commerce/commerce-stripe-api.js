@@ -8,6 +8,7 @@ import { sha256Hex } from './commerce-crypto.js';
 import { json,commerceError,readJsonBody,localeFrom } from './commerce-http.js';
 import {commerceLog} from './commerce-observability.js';
 import {resolveCommerceBookSourceKey} from './book-product-registry.js';
+import {controlledPurchaseOffer} from './controlled-purchase-candidate.js';
 
 function requireIdentity(context){
   const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
@@ -82,8 +83,14 @@ export async function commerceApi(context,action){
     const contextSnapshot=reference?{readingId:reference}:{};
     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
+    const controlled=controlledPurchaseOffer(env,{ownerId:customerId,productId:product.productId,originalAmountMinor:contextSnapshot.reportPresentation?.amountMinor??product.amountMinor});
+    if(controlled){
+      if(product.billingType==='RECURRING'||!isLanguageReport(product))throw Object.assign(Error('Controlled report purchase only.'),{status:403,code:'controlled_product_denied'});
+      contextSnapshot.controlledPurchase=controlled;
+    }
     const requestHash=await sha256Hex(JSON.stringify({productId:product.productId,selected,context:contextSnapshot}));
-    const key=await sha256Hex(`COM-STRIPE-R1/${commerceEnvironment(env)}/${customerId}/${supplied}`);
+    // One persisted attempt across all products for this campaign/account.
+    const key=await sha256Hex(controlled?`COM-STRIPE-R1/${commerceEnvironment(env)}/${controlled.reservationKey}`:`COM-STRIPE-R1/${commerceEnvironment(env)}/${customerId}/${supplied}`);
     const order=await createCommerceOrder({env,customerId,productId:product.productId,selectedProducts:selected,idempotencyKeyHash:key,requestHash,locale:localeFrom(body.locale),context:contextSnapshot});
     if(order.stripe_checkout_url&&order.order_state==='CHECKOUT_CREATED'&&Date.parse(order.expires_at)>Date.now()) return json({success:true,orderId:order.checkout_attempt_id,checkoutUrl:order.stripe_checkout_url,replay:true});
     if(order.order_state!=='PENDING') throw Object.assign(new Error('This checkout attempt is no longer open. Start a new purchase.'),{status:409,code:'checkout_attempt_closed'});

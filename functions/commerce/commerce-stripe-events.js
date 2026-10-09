@@ -6,6 +6,7 @@ import {commerceOrder,commerceCustomerBinding,fulfillCommerceOrder,setCommercePa
 import {dispatchWatermark} from './book-delivery.js';
 import {commerceLog} from './commerce-observability.js';
 import {retrieveCommerceSession,retrieveCommerceSubscription,requireStripeQa} from './stripe-client.js';
+import {controlledOrderOffer,verifyControlledPayment} from './controlled-purchase-candidate.js';
 const id=value=>typeof value==='string'?value:value?.id;
 const mismatch=()=>Object.assign(new Error('Provider object does not match the canonical order.'),{status:422,code:'commerce_provider_mismatch'});
 function assert(condition){if(!condition)throw mismatch();}
@@ -43,7 +44,12 @@ export async function processCommerceStripeEvent({env,event,fetcher,origin,clock
       const {order,product}=await boundOrder(env,session);orderId=order.checkout_attempt_id;
       assert(order.stripe_checkout_session_id===session.id&&session.livemode===(commerceEnvironment(env)==='LIVE'));
       validateLineItems(session.line_items,product,order);
-      assert(session.currency==='myr'&&session.amount_total===order.amount_minor&&session.mode===(product.billingType==='RECURRING'?'subscription':'payment'));
+      const controlled=controlledOrderOffer(order);
+      assert(session.currency==='myr'&&session.amount_total===(controlled?.paidAmountMinor??order.amount_minor)&&session.mode===(product.billingType==='RECURRING'?'subscription':'payment'));
+      if(controlled){
+        assert(session.metadata?.controlled_campaign_id===controlled.campaignId);
+        verifyControlledPayment({offer:controlled,ownerId:order.customer_id,productId:order.product_id,session,requirePaid:false});
+      }
       if(['checkout.session.completed','checkout.session.async_payment_succeeded'].includes(event.type)){
         if(session.payment_status!=='paid') await setCommercePaymentState(env,orderId,'PAYMENT_PROCESSING');
         else{

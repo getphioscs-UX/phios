@@ -5,7 +5,7 @@
       "id": "W14_CANONICAL_DOCTRINE",
       "status": "ALL_30_CANONICAL_ACCEPTED_SOURCE_QA_CUSTOMER_INTEGRATION_PENDING",
       "scope": "W14_UNACCEPTED_MODULES_ONLY",
-      "reason": "Owner + Chat canonical authoring and Human ACCEPT required; independent work continues"
+      "reason": "All30 canonical contents accepted; customer source integration and current QA remain independent work"
     },
     {
       "id": "MAIN_SYNCHRONIZATION",
@@ -30,373 +30,589 @@
     {
       "id": "W03",
       "title": "Accepted content and assets",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "content/registry/public-assets.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "Bind accepted asset/content identities to exact current bytes",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W04",
       "title": "Pages publication boundary",
-      "status": "SOURCE_PATCH_PENDING_QA",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "QA-RESULTS.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "scripts/lib/publication-boundary.mjs"
+      ],
+      "actualChecks": [],
+      "nextStep": "Run current build publication boundary and excluded private-content audit",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W05",
       "title": "Homepage / navigation",
-      "status": "SOURCE_PATCH_PENDING_QA",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "QA-RESULTS.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "index.html",
+        "assets/customer-ui/js/surfaces/home.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Bilingual diff review plus actual mobile preview of restored paragraphs",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W06",
       "title": "Personal native free report",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "perspectives/personal/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify native accepted free reading and same-object paid unlock",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W07",
       "title": "Report commerce and delivery",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "functions/commerce/commerce-stripe-api.js",
+        "functions/report-delivery/report-delivery-contract.js"
+      ],
+      "actualChecks": [
+        {
+          "script": "scripts/check-paid-method-lifecycle-integration.mjs",
+          "sourceSHA256": "845cd849ae418f6226ef25a3b7f5581bc4f41c92db653adeb060f85aab1f69b8",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-paid-method-lifecycle-integration.log"
+        },
+        {
+          "script": "scripts/check-paid-report-durable-integration.mjs",
+          "sourceSHA256": "44376c12f51ea07bf3ab2ecd90f063cac8d9e7f354c287761710caec619582f7",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-paid-report-durable-integration.log"
+        }
+      ],
+      "nextStep": "Finish eligible producer+renderer admission and exact Checkout/webhook-to-material flow",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W08",
       "title": "Report four follow-up questions",
-      "status": "TARGETED_QA_HUMAN_REVIEW_PENDING",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "REPORT-FOLLOWUP-STORE-QA.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json"
+      ],
+      "sourceLocations": [
+        "functions/account/report-followup-store.js",
+        "functions/account/paid-report-question-generation.js"
+      ],
+      "actualChecks": [
+        {
+          "script": "scripts/check-report-followup-store.mjs",
+          "sourceSHA256": "b96ffe7ba8633fa76093c48502a3e12d7788ea604b1879b31c9f893a8360e5cc",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-report-followup-store.log"
+        }
+      ],
+      "nextStep": "Wire verified immutable report to paid followup producer, retain four-slot SQL constraints",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W09",
       "title": "RM19 membership",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "functions/pws/commercial/stripe-product-registry.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify paid-through/cancel/resubscribe same-workspace continuity",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W10",
       "title": "My Reality persistence",
-      "status": "TARGETED_QA_HUMAN_REVIEW_PENDING",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "MY-REALITY-SAVED-SOURCE-QA.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/MY-REALITY-SAVED-SOURCE-QA.json"
+      ],
+      "sourceLocations": [
+        "functions/account/my-reality-saved-sources.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Integrate retained histories without backfill or invented history",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W11",
       "title": "Contextual Ask",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "functions/api/customer-contextual-ask.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify per-context reading ownership and accepted sources",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W12",
       "title": "Public Knowledge Ask repair",
-      "status": "SOURCE_PATCH_PENDING_QA",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "QA-RESULTS.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "functions/api/customer-contextual-ask.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Keep public Ask bounded; review current Answer/figure maintenance successor",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W13",
       "title": "Book VIII private doctrine",
-      "status": "SOURCE_PATCH_PENDING_QA",
+      "status": "NOT_EXECUTED_OR_SOURCE_NOT_LOCATED",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "QA-RESULTS.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [],
+      "actualChecks": [],
+      "nextStep": "Preserve private source and confirm public non-sale page state",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W14",
       "title": "NAV runtime / Academy mapping",
-      "status": "ALL_30_CANONICAL_ACCEPTED_SOURCE_QA_CUSTOMER_INTEGRATION_PENDING",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "NAV_01_30_TARGETED_SOURCE_QA_PASS_NOT_CUSTOMER_INTEGRATED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "NAV-BATCH-01-ACCEPTANCE.json",
-        "NAV-ACCEPTED-PRIVATE-REGISTRY.json",
-        "NAV-BATCH-01-QA.json",
-        "NAV-BATCH-02-ACCEPTANCE.json",
-        "NAV-BATCH-02-QA.json",
-        "NAV-BATCH-03-ACCEPTANCE.json",
-        "NAV-BATCH-03-QA.json",
-        "NAV-BATCH-03-SOURCE-INTEGRITY.json",
-        "NAV-BATCH-04-ACCEPTANCE.json",
-        "NAV-BATCH-04-QA.json",
-        "NAV-BATCH-05-ACCEPTANCE.json",
-        "NAV-BATCH-05-QA.json",
-        "NAV-BATCH-06-ACCEPTANCE.json",
-        "NAV-BATCH-06-QA.json",
-        "NAV-IDENTITY-PLACEHOLDERS.json",
-        "NAV-SCHEMA-CANDIDATE.json",
-        "NAV-CONSUMER-INVENTORY.json",
-        "NAV-DEPENDENCY-MAP.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-ACCEPTED-PRIVATE-REGISTRY.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-01-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-02-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-03-SOURCE-INTEGRITY.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-04-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-05-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-ACCEPTANCE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-BATCH-06-QA.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-IDENTITY-PLACEHOLDERS.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-SCHEMA-CANDIDATE.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-CONSUMER-INVENTORY.json",
+        "content/production-closure/live-customer-commercial-convergence/NAV-DEPENDENCY-MAP.json"
+      ],
+      "sourceLocations": [
+        "functions/runtime/navigation/nav-accepted-batch-06-runtime.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Connect accepted 30 modules to validated server reality inputs and scoped customer API",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W15",
       "title": "Academy video model",
-      "status": "PENDING_EXECUTION",
+      "status": "BLOCKED_MISSING_VIDEO_ASSET",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "academy/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Supply actual accepted video assets before purchase eligibility",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W16",
       "title": "Protected media delivery",
-      "status": "PENDING_EXECUTION",
+      "status": "BLOCKED_MISSING_VIDEO_ASSET",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "functions/api"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify owned permanent video delivery with revoked sharing denied",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W17",
       "title": "Academy commerce",
-      "status": "PENDING_EXECUTION",
+      "status": "BLOCKED_MISSING_VIDEO_ASSET",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "functions/pws/commercial/stripe-product-registry.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Keep no-video products disabled; reuse Commerce for admitted asset only",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W18",
       "title": "Tarot interaction",
-      "status": "TARGETED_SOURCE_QA_ONLY",
+      "status": "NOT_EXECUTED_OR_SOURCE_NOT_LOCATED",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "TAROT-INTERACTION-QA.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/TAROT-INTERACTION-QA.json"
+      ],
+      "sourceLocations": [],
+      "actualChecks": [],
+      "nextStep": "Real mobile shuffle/draw/select/orientation/spread E2E",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W19",
       "title": "Free Tarot zero-provider",
-      "status": "TARGETED_SOURCE_QA_ONLY",
+      "status": "NOT_EXECUTED_OR_SOURCE_NOT_LOCATED",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "FREE-SYMBOLIC-ZERO-PROVIDER.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      ],
+      "sourceLocations": [],
+      "actualChecks": [
+        {
+          "script": "scripts/check-free-symbolic-zero-provider.mjs",
+          "sourceSHA256": "071837c642b8989cb4e141fbe090bd78a75d3049801cce1980454292dfb8a668",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-free-symbolic-zero-provider.log"
+        }
+      ],
+      "nextStep": "Retain deterministic free path and network-trapped regression",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W20",
       "title": "Paid Tarot commerce",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "functions/commerce/commerce-stripe-api.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Bind paid Tarot single synthesis to verified order/reading/corpus",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W21",
       "title": "Tarot single-call synthesis",
-      "status": "PENDING_EXECUTION",
+      "status": "NOT_EXECUTED_OR_SOURCE_NOT_LOCATED",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [],
+      "actualChecks": [],
+      "nextStep": "Confirm provider max1 retry0 and failed-delivery payment recovery",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W22",
       "title": "20-case unit economics",
-      "status": "TARGETED_QA_HUMAN_REVIEW_PENDING",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "TAROT-COST-QUALITY-REVIEW.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json"
+      ],
+      "sourceLocations": [
+        "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "Human quality/unit-economics review of already-used20 calls; no new batch",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W23",
       "title": "I Ching experience",
-      "status": "TARGETED_SOURCE_QA_ONLY",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "FREE-SYMBOLIC-ZERO-PROVIDER.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/FREE-SYMBOLIC-ZERO-PROVIDER.json"
+      ],
+      "sourceLocations": [
+        "perspectives/iching/index.html"
+      ],
+      "actualChecks": [
+        {
+          "script": "scripts/check-free-symbolic-zero-provider.mjs",
+          "sourceSHA256": "071837c642b8989cb4e141fbe090bd78a75d3049801cce1980454292dfb8a668",
+          "result": "PASS",
+          "scope": "SYNTHETIC_ZERO_PROVIDER_NOT_LIVE",
+          "log": "RECOVERY-check-free-symbolic-zero-provider.log"
+        }
+      ],
+      "nextStep": "Actual deterministic cast/mobile replay and corpus provenance",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W24",
       "title": "I Ching synthesis candidate",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "functions/commerce/commerce-stripe-api.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Bound existing owner price/cost to optional paid synthesis, no new calls",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W25",
       "title": "Account",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "account/index.html",
+        "functions/account/account-reports-api.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Actual owned report list/reopen/download, pending generation progress",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W26",
       "title": "Appointments",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "professional/services/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify intake→consent→appointment boundary without paid-live transaction",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W27",
       "title": "Financial / Will",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
-        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
       "evidence": [
-        "QA-RESULTS.json"
-      ]
+        "content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json"
+      ],
+      "sourceLocations": [
+        "professional/financial/index.html",
+        "functions/account/financial-will-draft-store.js"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify Financial/Will exact output semantics, retained ranges/unknowns",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W28",
       "title": "Relationship / Cross",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "perspectives/relationship/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Exact current relationship/cross bounded report admission and inputs",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W29",
       "title": "Profile / Academic",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "perspectives/profile/index.html"
+      ],
+      "actualChecks": [],
+      "nextStep": "Current Profile/Academic evidence boundaries and product admission",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W30",
       "title": "Books / Figures",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "books/index.html",
+        "content/registry/figures.json"
+      ],
+      "actualChecks": [],
+      "nextStep": "Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W31",
       "title": "World / Book VI / Moomoo",
-      "status": "PENDING_EXECUTION",
+      "status": "NOT_EXECUTED_OR_SOURCE_NOT_LOCATED",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [],
+      "actualChecks": [],
+      "nextStep": "Locate current Book VI dossier/15 snapshots/Moomoo owner and current source versions",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W32",
       "title": "Mobile / branding",
-      "status": "PENDING_EXECUTION",
+      "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "NOT_VERIFIED",
-        "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
+        "DEPLOYED": "NOT_VERIFIED_CURRENT_HEAD",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [],
+      "sourceLocations": [
+        "assets/customer-ui/css",
+        "assets/css/tokens.css"
+      ],
+      "actualChecks": [],
+      "nextStep": "Actual preview mobile bilingual shell and branding, no SOURCE test substitute",
+      "liveCustomerDoesNotBlockIndependentSource": true
     },
     {
       "id": "W34",

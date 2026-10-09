@@ -1,3 +1,4 @@
+import { assertPwsMigrationBaseline } from './lib/pws-migration-baseline.mjs';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import {
@@ -121,7 +122,7 @@ const outbox = database.prepare(`
 `).get();
 assert.equal(Number(audits.value), 13);
 assert.equal(Number(outbox.value), 13);
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 13);
+assertPwsMigrationBaseline(loadRuntimeMigrations(process.cwd()).migrations);
 
 database.close();
 console.log('✓ PWS-I2-W2 Professional Registry passed.');

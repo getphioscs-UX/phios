@@ -1,3 +1,4 @@
+import { assertPwsMigrationBaseline } from './lib/pws-migration-baseline.mjs';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import {
@@ -135,7 +136,7 @@ await assert.rejects(
   RegistryValidationError
 );
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 13);
+assertPwsMigrationBaseline(loadRuntimeMigrations(process.cwd()).migrations);
 database.close();
 console.log('✓ PWS-I2-W3 Capability and Credential Registry passed.');
 console.log('  Seven Capability Definitions and seven Credential Requirements registered.');

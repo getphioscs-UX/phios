@@ -1,3 +1,4 @@
+import { assertPwsMigrationBaseline } from './lib/pws-migration-baseline.mjs';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import {
@@ -151,7 +152,7 @@ await assert.rejects(
   RegistryValidationError
 );
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 13);
+assertPwsMigrationBaseline(loadRuntimeMigrations(process.cwd()).migrations);
 database.close();
 console.log('✓ PWS-I2-W4 Method and Service Registry passed.');
 console.log('  Six Method Definitions registered; professional methods require W3 Capability.');

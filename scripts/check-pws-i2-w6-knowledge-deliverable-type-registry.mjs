@@ -1,3 +1,4 @@
+import { assertPwsMigrationBaseline } from './lib/pws-migration-baseline.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { loadKnowledgeBlueprintRegistry } from './lib/knowledge-blueprint/blueprint-registry-loader.mjs';
@@ -139,7 +140,7 @@ assert.equal(book1Blueprint.nodes.length, book1Blueprint.plannedCanonicalNodes);
 assert.equal(book1Blueprint.activeProductionLimit, 8);
 assert.equal(knowledgeAfter.totals.books, 5);
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 13);
+assertPwsMigrationBaseline(loadRuntimeMigrations(process.cwd()).migrations);
 database.close();
 console.log('✓ PWS-I2-W6 Knowledge and Deliverable Type Registry passed.');
 console.log('  Seven Published Asset Types and five Deliverable Types registered.');

@@ -1,4 +1,5 @@
 import {commerceEnvironment,commerceStripeProduct} from './commerce-environment.js';
+import {controlledOrderOffer,verifyControlledPayment} from './controlled-purchase-candidate.js';
 import {orderReportPresentation,validateOrderReportPresentation} from './report-presentation.js';
 import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey, resolveCommerceBookSourceKey } from './book-product-registry.js';
 import { STRIPE_PRODUCT_REGISTRY, commerceProduct, commerceEntitlements, commerceOrderProduct, commerceOrderEntitlements } from '../pws/commercial/stripe-product-registry.js';
@@ -97,16 +98,19 @@ export async function ownedCommerceBook(env,customerId,productId){
 export async function fulfillCommerceOrder({env,order,session,eventId,clock=Date.now}){
   const db=dbFrom(env), now=nowIso(clock), p=commerceOrderProduct(order), purchaseId=`pur_${order.checkout_attempt_id}`;
   validateOrderReportPresentation(p,order);
+  const controlled=controlledOrderOffer(order);
+  const paidAmounts=controlled?verifyControlledPayment({offer:controlled,ownerId:order.customer_id,productId:order.product_id,session}):null;
+  const actualPaid=paidAmounts?.paidAmountMinor??order.amount_minor;
   const human=p.fulfillmentType==='HUMAN_SERVICE'||p.professionalReviewRequired;
   const subscription=p.billingType==='RECURRING';
   const paidState=human||p.category==='BOOK'||subscription?'FULFILLMENT_PENDING':'FULFILLED';
   const statements=[db.prepare(`INSERT OR IGNORE INTO commerce_purchases
     (purchase_id,product_id,checkout_attempt_id,stripe_checkout_session_id,stripe_payment_intent_id,stripe_customer_id,currency,amount_minor,purchase_state,paid_at,created_at,updated_at,customer_id)
     VALUES (?1,?2,?3,?4,?5,?6,'MYR',?7,'purchased',?8,?8,?8,?9)`)
-    .bind(purchaseId,p.productId,order.checkout_attempt_id,session.id,typeof session.payment_intent==='string'?session.payment_intent:session.payment_intent?.id||null,typeof session.customer==='string'?session.customer:session.customer.id,order.amount_minor,now,order.customer_id),
+    .bind(purchaseId,p.productId,order.checkout_attempt_id,session.id,typeof session.payment_intent==='string'?session.payment_intent:session.payment_intent?.id||null,typeof session.customer==='string'?session.customer:session.customer.id,actualPaid,now,order.customer_id),
     db.prepare(`UPDATE commerce_checkout_attempts SET status='paid',order_state=?2,updated_at=?3 WHERE checkout_attempt_id=?1 AND order_state NOT IN ('REFUNDED','PARTIALLY_REFUNDED','FULFILLED')`).bind(order.checkout_attempt_id,paidState,now),
     db.prepare(`INSERT OR IGNORE INTO commerce_receipts (receipt_id,receipt_number,purchase_id,receipt_json,issued_at) VALUES (?1,?2,?3,?4,?5)`)
-      .bind(`rcp_${order.checkout_attempt_id}`,`PHI-${order.environment||'QA'}-${order.checkout_attempt_id}`,purchaseId,JSON.stringify({purchaseId,productId:p.productId,productTitle:p.title,currency:'MYR',amountMinor:order.amount_minor,displayAmount:order.amount_minor/100,reportPresentation:orderReportPresentation(order),issuedAt:now,paymentStatus:'paid',environment:order.environment||'QA'}),now)];
+      .bind(`rcp_${order.checkout_attempt_id}`,`PHI-${order.environment||'QA'}-${order.checkout_attempt_id}`,purchaseId,JSON.stringify({purchaseId,productId:p.productId,productTitle:p.title,currency:'MYR',amountMinor:actualPaid,displayAmount:actualPaid/100,...(paidAmounts?{controlledPayment:paidAmounts}:{}),reportPresentation:orderReportPresentation(order),issuedAt:now,paymentStatus:'paid',environment:order.environment||'QA'}),now)];
   if(!human&&!subscription){
     const selected=p.productId.includes('BUNDLE')?JSON.parse(order.selected_products_json):[];
     for(const e of commerceOrderEntitlements(order)) statements.push(db.prepare(`INSERT OR IGNORE INTO digital_entitlements

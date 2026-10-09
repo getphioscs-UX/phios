@@ -1,3 +1,4 @@
+import { assertPwsMigrationBaseline } from './lib/pws-migration-baseline.mjs';
 import {isProductionClosureReviewEvidence,assertProductionClosureEvidenceQuarantine}from'./lib/production-closure-review-evidence.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -189,7 +190,7 @@ for (const file of htmlFiles) {
   );
 }
 
-assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 13);
+assertPwsMigrationBaseline(loadRuntimeMigrations(process.cwd()).migrations);
 database.close();
 console.log('✓ PWS-I2-W5 Product and Offer Registry passed.');
 console.log('  Six Product Types, Reality Journey Pass v1 and Book I registered.');

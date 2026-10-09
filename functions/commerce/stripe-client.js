@@ -134,6 +134,12 @@ export function createCommerceCheckoutSession({env,product,order,customerId,orig
   const metadata={order_id:order.checkout_attempt_id,commerce_product_id:product.productId,customer_id:order.customer_id,environment:commerceEnvironment(env),schema_version:'COM-STRIPE-R1',selected_reports:order.selected_products_json};
   const body=new URLSearchParams({mode,customer:customerId,'line_items[0][price]':product.qaPriceId,'line_items[0][quantity]':'1',success_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}`,cancel_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}&checkout=cancelled`,locale:locale==='zh-Hans'?'zh':'en'});
   const presentation=validateOrderReportPresentation(product,order);
+  const controlled=JSON.parse(order.context_json||'{}').controlledPurchase;
+  if(controlled){
+    body.set('discounts[0][coupon]',controlled.couponId);
+    metadata.controlled_campaign_id=controlled.campaignId;
+    body.set('expires_at',String(Math.min(Math.floor(Date.parse(controlled.expiresAt)/1000),Math.floor(Date.now()/1000)+86400)));
+  }
   if(presentation){
     for(const key of ['reportLanguageMode','reportLocale','pricingVersion','modifierRule','surchargeAmountMinor'])metadata[key]=String(presentation[key]);
     if(presentation.surchargeAmountMinor){
