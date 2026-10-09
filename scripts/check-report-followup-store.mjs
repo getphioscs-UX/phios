@@ -24,6 +24,15 @@ assert.equal(sql.prepare('SELECT COUNT(*) AS n FROM account_report_followup_gran
 sql.prepare("INSERT INTO account_method_report_materials VALUES('second-report','owner','person','ZWR','en','snapshot','material','digest',?,'{}')").run(now);
 await assert.rejects(grantDeliveredReportFollowups(env,{...grantArgs,reportId:'second-report'},clock),/REJECTED/);
 const args=n=>({ownerAccountId:'owner',reportId:'report',requestId:`qa-question-request-${n}`,question:`Synthetic question ${n}`,consentVersion:'qa-consent-v1'});
+const beforeRejected=objects.size;
+sql.exec("UPDATE commerce_purchases SET purchase_state='refunded'");
+await assert.rejects(reserveReportQuestion(env,args('refund'),clock),/NOT_CURRENTLY_ADMITTED/);
+sql.exec("UPDATE commerce_purchases SET purchase_state='purchased'; UPDATE commerce_checkout_attempts SET review_required=1");
+await assert.rejects(reserveReportQuestion(env,args('review'),clock),/NOT_CURRENTLY_ADMITTED/);
+sql.exec("UPDATE commerce_checkout_attempts SET review_required=0; UPDATE digital_entitlements SET entitlement_status='revoked'");
+await assert.rejects(reserveReportQuestion(env,args('revoked'),clock),/NOT_CURRENTLY_ADMITTED/);
+sql.exec("UPDATE digital_entitlements SET entitlement_status='active'");
+assert.equal(objects.size,beforeRejected,'purchase revalidation occurs before question storage');
 const racing=await Promise.all(Array.from({length:4},(_,i)=>reserveReportQuestion(env,args(i),clock)));
 assert.deepEqual(racing.map(r=>r.row.included_slot).sort(),[1,2,3,4]);
 assert.equal((await reserveReportQuestion(env,args(0),clock)).newReservation,false);
@@ -46,5 +55,5 @@ await assert.rejects(reserveReportQuestion(env,args(7),clock),/MEMBERSHIP_REQUIR
 const history=await readReportQuestionHistory(env,{ownerAccountId:'owner',reportId:'report'});
 assert.equal(history.rows.length,6);assert.equal(history.rows[0].history_state,'COMPLETE');assert.equal(history.includedRemaining,0);
 await assert.rejects(readReportQuestionHistory(env,{ownerAccountId:'intruder',reportId:'report'}),/UNAVAILABLE/);
-const result={result:'PASS',scope:'IN_MEMORY_REAL_SQL_SYNTHETIC_QA_NOT_LIVE',checks:['paid-and-delivered grant','owner isolation','idempotent grant','one grant per paid product purchase','four concurrent reservations','duplicate request','question conflict','fifth denial without extra storage','immutable answer','failed slot recovery','membership paid-through admission','unrelated subscription does not grant membership','cancellation blocks new questions','saved history survives cancellation'],productionMigrationApplied:false,answerRuntimeIntegration:'PENDING'};
+const result={result:'PASS',scope:'IN_MEMORY_REAL_SQL_SYNTHETIC_QA_NOT_LIVE',checks:['paid-and-delivered grant','owner isolation','idempotent grant','one grant per paid product purchase','four concurrent reservations','duplicate request','question conflict','fifth denial without extra storage','immutable answer','failed slot recovery','membership paid-through admission','unrelated subscription does not grant membership','cancellation blocks new questions','saved history survives cancellation','refund after grant blocks new questions','review hold after grant blocks new questions','revoked entitlement after grant blocks new questions before storage'],productionMigrationApplied:false,answerRuntimeIntegration:'PENDING'};
 fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/REPORT-FOLLOWUP-STORE-QA.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

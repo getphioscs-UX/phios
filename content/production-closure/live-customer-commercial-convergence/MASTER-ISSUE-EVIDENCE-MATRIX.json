@@ -175,9 +175,9 @@
     {
       "id": "W14",
       "title": "NAV runtime / Academy mapping",
-      "status": "PARTIAL_ACCEPTED_BATCH_01_SOURCE_QA_REMAINING_CANONICAL_AUTHORING",
+      "status": "PARTIAL_ACCEPTED_THROUGH_NAV_15_SOURCE_QA_REMAINING_CANONICAL_AUTHORING",
       "gates": {
-        "SOURCE": "NAV_01_05_TARGETED_SOURCE_QA_PASS_NOT_CUSTOMER_INTEGRATED",
+        "SOURCE": "NAV_01_15_TARGETED_SOURCE_QA_PASS_NOT_CUSTOMER_INTEGRATED",
         "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
@@ -185,6 +185,11 @@
         "NAV-BATCH-01-ACCEPTANCE.json",
         "NAV-ACCEPTED-PRIVATE-REGISTRY.json",
         "NAV-BATCH-01-QA.json",
+        "NAV-BATCH-02-ACCEPTANCE.json",
+        "NAV-BATCH-02-QA.json",
+        "NAV-BATCH-03-ACCEPTANCE.json",
+        "NAV-BATCH-03-QA.json",
+        "NAV-BATCH-03-SOURCE-INTEGRITY.json",
         "NAV-IDENTITY-PLACEHOLDERS.json",
         "NAV-SCHEMA-CANDIDATE.json",
         "NAV-CONSUMER-INVENTORY.json",
@@ -429,13 +434,18 @@
     {
       "id": "W35",
       "title": "Security / permissions",
-      "status": "PENDING_EXECUTION",
+      "status": "TARGETED_SOURCE_QA_ONLY",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
+        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
         "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [
+        "NAV-BATCH-02-QA.json",
+        "NAV-BATCH-03-QA.json",
+        "REPORT-FOLLOWUP-STORE-QA.json",
+        "PRODUCT-TOTAL-COST-QA.json"
+      ]
     },
     {
       "id": "W36",

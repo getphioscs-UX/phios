@@ -25,11 +25,16 @@ await settleProductCost(env,{ownerAccountId:'owner',requestId:'synthesis',measur
 sql.exec("UPDATE commerce_purchases SET purchase_state='refunded'");
 await assert.rejects(reserve('refunded-call','MODEL',.01),/LIMIT_OR_UNKNOWN/);
 sql.exec("UPDATE commerce_purchases SET purchase_state='purchased'");
+sql.exec("UPDATE commerce_checkout_attempts SET review_required=1");
+await assert.rejects(reserve('review-held-call','MODEL',.01),/LIMIT_OR_UNKNOWN/);
+sql.exec("UPDATE commerce_checkout_attempts SET review_required=0, order_state='CANCELED'");
+await assert.rejects(reserve('cancelled-order-call','MODEL',.01),/LIMIT_OR_UNKNOWN/);
+sql.exec("UPDATE commerce_checkout_attempts SET order_state='PAID'");
 await assert.rejects(reserveProductCost(env,{ownerAccountId:'owner',envelopeId:envelope.envelope_id,requestId:'prompt-leak',contextId:'reading',costClass:'MODEL',conservativeMaximumUSD:.01,payload:{prompt:'Sensitive data must not enter cost ledger'}}),/METADATA_INVALID/);
 await reserve('ask-reserve','MODEL',.2);
 await assert.rejects(reserve('new-language-budget','MODEL',.001),/LIMIT_OR_UNKNOWN/);
 await assert.rejects(settleProductCost(env,{ownerAccountId:'owner',requestId:'ask-reserve',measuredUSD:NaN,costBasis:'UNKNOWN'}),/USAGE_UNKNOWN/);
 await assert.rejects(reserve('after-unknown','MODEL',.001),/LIMIT_OR_UNKNOWN/);
 assert.equal(sql.prepare("SELECT state FROM provider_product_cost_entries WHERE request_id='ask-reserve'").get().state,'USAGE_UNKNOWN');
-const evidence={result:'PASS',scope:'IN_MEMORY_REAL_SQL_SYNTHETIC_COST_ONLY',checks:['paid entitlement owner required','bundle cap not invented','one immutable product pool','concurrent combined reservations capped','duplicate does not debit','cross-owner replay denied','known usage frees conservative remainder','language cannot reset pool','unknown usage freezes pool','refunded purchase denies new provider spend','sensitive prompts rejected from cost ledger'],providerCalls:0,productionMigrationApplied:false,runtimeProductIntegration:'PENDING'};
+const evidence={result:'PASS',scope:'IN_MEMORY_REAL_SQL_SYNTHETIC_COST_ONLY',checks:['paid entitlement owner required','bundle cap not invented','one immutable product pool','concurrent combined reservations capped','duplicate does not debit','cross-owner replay denied','known usage frees conservative remainder','language cannot reset pool','unknown usage freezes pool','refunded purchase denies new provider spend','sensitive prompts rejected from cost ledger','review-held checkout denies new spend after pool creation','cancelled checkout denies new spend after pool creation'],providerCalls:0,productionMigrationApplied:false,runtimeProductIntegration:'PENDING'};
 fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/PRODUCT-TOTAL-COST-QA.json',JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence));

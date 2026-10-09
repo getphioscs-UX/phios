@@ -1,0 +1,6419 @@
+# NAV-11｜Continuation Qualification
+
+## 继续资格｜还在运行，究竟能证明什么
+
+**Canonical Question｜规范问题**
+
+> **一个系统仍然运作，能为“继续保持原方向”提供多少证据？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-11
+```
+
+## 2. `canonicalTitleZh`
+
+```
+继续资格
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Continuation Qualification
+```
+
+## 4. `canonicalQuestion`
+
+```
+一个系统仍然运作，能为“继续保持原方向”提供多少证据？
+```
+
+---
+
+# 5. `definition`
+
+**Continuation Qualification** 是 Navigation 对“当前路径是否仍然有资格继续占据默认位置”进行正式判断的机制。
+
+它不问：
+
+> “系统是不是还没有崩溃？”
+
+而是问：
+
+> **“当前路径虽然仍然能够运行，但它是否仍然足够适配现实，以至于继续保持原方向仍然合理？”**
+
+因此，必须区分：
+
+```
+STILL_RUNNING
+```
+
+与：
+
+```
+STILL_QUALIFIED_TO_CONTINUE
+```
+
+两者不是同一件事。
+
+一个人可以继续完成工作；
+
+一家企业可以继续交付；
+
+一段关系可以继续维持；
+
+一个家庭可以继续按照旧方式运转；
+
+但这些事实只能证明：
+
+```
+FUNCTION_PERSISTS
+```
+
+不能自动证明：
+
+```
+DIRECTION_REMAINS_QUALIFIED
+```
+
+因此：
+
+> **NAV-11 的核心不是判断系统有没有停止，而是判断“继续”是否仍然值得拥有默认资格。**
+
+---
+
+# 6. `navigationMeaning`
+
+现实中的惯性会给当前路径一种特殊优势：
+
+```
+已经这样做
+→ 不需要解释
+
+想改变
+→ 必须解释
+```
+
+Navigation 必须取消这种不对称。
+
+正确结构应是：
+
+```
+CONTINUE
+```
+
+与：
+
+```
+ADJUST
+PREPARE
+PAUSE
+CHANGE
+EXIT
+```
+
+一样，都必须拥有现实依据。
+
+这并不意味着每一次都重新审判现状，而是：
+
+> **当 NAV-09 已经识别出具有决策意义的变化以后，原方向必须重新取得继续资格。**
+
+因此 NAV-11 是：
+
+```
+Decision-Relevant Change
+↓
+Current Path Still Running
+↓
+Does Running Still Justify Continuing?
+↓
+Continuation Qualification
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-11 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+decisionRelevantChangeState
+currentDefaultPath
+currentOutcomeState
+currentResponseLevel
+```
+
+并必须尽量知道：
+
+```
+whyCurrentPathWasOriginallyChosen
+whatValueItWasSupposedToProduce
+whatConditionsOriginallySupportedIt
+```
+
+如果这些完全未知，应标记：
+
+```
+CONTINUATION_BASIS_UNKNOWN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+profileNavigationProjection
+relationshipContext
+professionalInput
+externalCurrentEvidence
+priorNavigationState
+priorOutcomeHistory
+maintenanceCostContext
+capacityContext
+futureOptionContext
+```
+
+这些用于判断：
+
+- 当前路径还在产生什么；
+- 为了继续正在支付什么；
+- 它是否仍然服务原目标；
+- 它是否正在关闭未来选项。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+PROFESSIONAL_INPUT
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但“当前路径仍然运作”必须优先来自：
+
+```
+OBSERVED_FUNCTION
+VERIFIED_OUTPUT
+MATERIAL_CONTINUATION
+```
+
+而不是：
+
+```
+INTERPRETIVE_ASSURANCE
+```
+
+---
+
+# 10. Core Continuation States
+
+建议 runtime 至少区分：
+
+```
+CONTINUATION_QUALIFIED
+CONTINUATION_QUALIFIED_WITH_MONITORING
+CONTINUATION_QUESTIONED
+CONTINUATION_REQUIRES_REASSESSMENT
+CONTINUATION_NOT_QUALIFIED_BY_CURRENT_EVIDENCE
+CONTINUATION_BASIS_UNKNOWN
+```
+
+---
+
+## A. `CONTINUATION_QUALIFIED`
+
+当前路径仍然：
+
+```
+produces intended value
+cost remains acceptable
+capacity remains adequate
+future options remain sufficiently preserved
+```
+
+因此继续仍有现实依据。
+
+---
+
+## B. `CONTINUATION_QUALIFIED_WITH_MONITORING`
+
+当前仍可继续，但某些条件已经接近边界。
+
+例如：
+
+```
+cost rising
+capacity narrowing
+external condition changing
+```
+
+因此：
+
+```
+continue
++
+monitor
+```
+
+更合理。
+
+---
+
+## C. `CONTINUATION_QUESTIONED`
+
+当前路径仍在运行，但继续资格已经不能仅靠惯性维持。
+
+例如：
+
+```
+result stable
+but cost materially rising
+```
+
+---
+
+## D. `CONTINUATION_REQUIRES_REASSESSMENT`
+
+变化已经触及：
+
+```
+core decision basis
+```
+
+当前路径必须与其他方案重新比较。
+
+---
+
+## E. `CONTINUATION_NOT_QUALIFIED_BY_CURRENT_EVIDENCE`
+
+现有证据无法继续支持：
+
+```
+keep current direction as default
+```
+
+注意：
+
+这不等于：
+
+```
+must stop immediately
+```
+
+而是：
+
+```
+current path loses automatic priority
+```
+
+---
+
+# 11. Continuation Qualification Dimensions
+
+至少检查：
+
+```
+VALUE_CONTINUITY
+COST_CONTINUITY
+CAPACITY_CONTINUITY
+RESPONSIBILITY_CONTINUITY
+OPTION_SPACE_CONTINUITY
+TIME_FIT
+REALITY_FIT
+```
+
+---
+
+# 12. `allowedInference`
+
+NAV-11 可以：
+
+## A. 识别“还能做”与“仍值得这样做”不同
+
+例如：
+
+```
+employee still delivers
+```
+
+只能证明：
+
+```
+delivery remains possible
+```
+
+不能自动证明：
+
+```
+current workload is still appropriate
+```
+
+---
+
+## B. 识别结果没变但交换关系已变
+
+例如：
+
+```
+salary unchanged
+```
+
+但：
+
+```
+hours increased
+recovery decreased
+family cost increased
+```
+
+则继续资格需要重审。
+
+---
+
+## C. 识别一个路径正在缩小自己的评价标准
+
+例如：
+
+过去评价：
+
+```
+income
+growth
+health
+family
+```
+
+后来只剩：
+
+```
+income
+```
+
+系统可以提示：
+
+```
+EVALUATION_SCOPE_NARROWING
+```
+
+---
+
+## D. 识别过去成功不等于当前资格
+
+例如：
+
+```
+this business model worked for 10 years
+```
+
+只能证明历史适配。
+
+---
+
+## E. 识别继续路径是否仍保留未来选项
+
+如果继续当前方向会：
+
+```
+lock location
+increase debt
+reduce skill mobility
+```
+
+则必须进入 continuation qualification。
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-11 严禁：
+
+## A. 把“没有失败”当成继续充分证据
+
+禁止：
+
+```
+not collapsed
+→ continue qualified
+```
+
+---
+
+## B. 把长期存在当成正确证明
+
+禁止：
+
+```
+we have always done this
+→ still best
+```
+
+---
+
+## C. 把过去投入变成未来义务
+
+禁止：
+
+```
+already spent years
+→ must continue
+```
+
+---
+
+## D. 用 symbolic method 证明现方向应该继续
+
+禁止：
+
+```
+BaZi says stable
+→ continuation qualified
+```
+
+---
+
+## E. 因为当前结果还在，就忽略代价转移
+
+例如：
+
+```
+family still functioning
+```
+
+不能忽略：
+
+```
+one person carrying most hidden burden
+```
+
+---
+
+## F. 把“继续资格不足”直接写成“立即停止”
+
+资格不足只触发：
+
+```
+REASSESSMENT
+```
+
+不是自动 exit。
+
+---
+
+# 14. `decisionEffect`
+
+NAV-11 主要影响：
+
+```
+OPTION_WEIGHT
+DEFAULT_PATH_PRIORITY
+WAIT_ACT_BALANCE
+REASSESSMENT_REQUIREMENT
+STRUCTURAL_CHANGE_ADMISSION
+```
+
+其核心 effect 是：
+
+```
+DEFAULT_PATH_PRIORITY
+```
+
+也就是：
+
+> **当前路径还能不能继续享有“默认先保持”的特权。**
+
+---
+
+# 15. `decisionThresholdEffect`
+
+如果当前路径：
+
+```
+CONTINUATION_QUALIFIED
+```
+
+则不需要因为存在变化就提高行动强度。
+
+如果：
+
+```
+CONTINUATION_REQUIRES_REASSESSMENT
+```
+
+则后续 options 应重新比较。
+
+如果：
+
+```
+CONTINUATION_NOT_QUALIFIED_BY_CURRENT_EVIDENCE
+```
+
+则继续本身也需要被当成一个普通候选路径重新评估。
+
+但这不意味着：
+
+```
+change threshold automatically lowered
+```
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-11 可以：
+
+- 判断继续资格；
+- 取消默认优先权；
+- 标记需要重审；
+- 暴露当前路径的真实交换关系；
+- 比较继续所保存与失去的东西。
+
+NAV-11 不可以：
+
+- 因继续资格下降而自动改变方向；
+- 因系统仍运行而宣称健康；
+- 把过去成功外推到未来；
+- 用 symbolic interpretation 保证延续；
+- 替用户决定何时结束。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+即使系统判断：
+
+```
+CONTINUATION_NOT_QUALIFIED_BY_CURRENT_EVIDENCE
+```
+
+用户仍然可以选择：
+
+```
+continue temporarily
+```
+
+但 Navigation 应明确显示：
+
+```
+why continuation no longer has default support
+what cost is being accepted
+what should be monitored
+when to reopen
+```
+
+不能把用户继续选择标记成：
+
+```
+incorrect
+```
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.13｜还在运行，究竟能证明什么
+```
+
+相关：
+
+```
+15.14｜维持成本什么时候改变决定
+15.15｜原方向什么时候失去默认资格
+15.17｜容量什么时候成为硬约束
+15.18｜什么时候更多投入已经不再合理
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 拥有：
+
+```
+maintenance
+runtime persistence
+degradation
+recovery
+sustainability
+```
+
+NAV-11 不重新判断系统为什么还能运行。
+
+它只问：
+
+> **既然它仍然在运行，这能不能证明下一步还应该继续保持原方向？**
+
+这是 NAV-11 与 Book III 的关键边界。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+observed function
+evidence limitation
+interpretation boundary
+```
+
+尤其支持：
+
+> **看到功能仍然存在，不足以证明所有相关条件仍然健康。**
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+what value current path serves
+what friction it repeatedly produces
+```
+
+但不能决定：
+
+```
+continuation qualified / not qualified
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 是 NAV-11 的重要 producer。
+
+可以比较：
+
+```
+same income
+different cost
+same asset
+different liquidity
+same lifestyle
+different debt burden
+```
+
+帮助判断：
+
+```
+current financial path still qualified?
+```
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能提供：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+不得建立：
+
+```
+CONTINUATION_QUALIFIED
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 至少应提供：
+
+```
+whatStillWorks
+whatIsChanging
+whatCostsMore
+whatIsBeingLost
+whatRemainsStable
+```
+
+这是 NAV-11 的主要现实输入。
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-11 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可以投影为：
+
+> **Still working is evidence of function, not proof of direction.**
+
+中文：
+
+> **还在运行，只能证明功能仍存在，并不能自动证明方向仍然正确。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-11：
+
+```
+costChanged
+capacityChanged
+valueProducedChanged
+responsibilityChanged
+futureOptionsChanged
+newOutcome
+newProfessionalInput
+newExternalCondition
+userChangesGoal
+responseLevelChanged
+```
+
+---
+
+# 27. Canonical Continuation Model
+
+建议：
+
+```
+{
+  "continuationId": "",
+  "pathId": "",
+  "state": "CONTINUATION_QUALIFIED | CONTINUATION_QUALIFIED_WITH_MONITORING | CONTINUATION_QUESTIONED | CONTINUATION_REQUIRES_REASSESSMENT | CONTINUATION_NOT_QUALIFIED_BY_CURRENT_EVIDENCE | CONTINUATION_BASIS_UNKNOWN",
+  "intendedValue": [],
+  "currentValueProduced": [],
+  "currentCosts": [],
+  "capacityEffects": [],
+  "futureOptionEffects": [],
+  "changedConditions": [],
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Function vs Qualification Rule
+
+冻结：
+
+```
+FUNCTION
+≠
+QUALIFICATION
+```
+
+例如：
+
+```
+system delivers
+```
+
+证明：
+
+```
+system can still deliver
+```
+
+不证明：
+
+```
+system should continue unchanged
+```
+
+---
+
+# 29. Historical Success Rule
+
+冻结：
+
+> **Past success can support confidence in a path, but it cannot renew that path’s qualification without current reality support.**
+
+中文：
+
+> **过去的成功可以增加对一条路径的理解与信任，却不能在缺少当前现实支持时自动续期它的继续资格。**
+
+---
+
+# 30. Default Privilege Rule
+
+当前路径不得仅因为：
+
+```
+already exists
+```
+
+就拥有：
+
+```
+automatic priority
+```
+
+一旦 NAV-09 检测到 decision-relevant change：
+
+```
+continuation privilege expires
+```
+
+直到 NAV-11 重新判断。
+
+---
+
+# 31. Evaluation Scope Rule
+
+如果当前路径只有在不断删除原有评价标准后才能被称为“成功”，必须标记：
+
+```
+EVALUATION_SCOPE_NARROWING
+```
+
+例如从：
+
+```
+income + health + family + growth
+```
+
+逐渐缩成：
+
+```
+income only
+```
+
+这必须进入 continuation review。
+
+---
+
+# 32. Hidden Subsidy Rule
+
+如果系统表面结果不变，是因为有人或某部分不断补贴：
+
+```
+extra unpaid time
+health cost
+family sacrifice
+cash reserves
+employee overwork
+```
+
+应标记：
+
+```
+HIDDEN_CONTINUATION_SUBSIDY
+```
+
+这会交给 NAV-12 进一步处理。
+
+---
+
+# 33. Future Option Rule
+
+继续资格还必须考虑：
+
+```
+what continuation closes
+```
+
+例如：
+
+```
+current path preserves income
+but closes retraining window
+```
+
+不能只评价收入。
+
+---
+
+# 34. Customer Projection Example
+
+内部：
+
+```
+Current path:
+Remain in role
+
+Still works:
+salary stable
+delivery successful
+
+Changed:
+hours +35%
+recovery lower
+family schedule strained
+
+State:
+CONTINUATION_REQUIRES_REASSESSMENT
+```
+
+客户可看到：
+
+> **这份工作仍然能够继续，不代表它仍然可以不经重新比较就继续。**
+> 
+> 目前最稳定的部分仍然是收入和工作交付，但为了维持相同结果，你投入的时间已经明显增加，恢复和家庭安排也开始受到影响。换句话说，当前路径还没有“失效”，却已经失去过去那种不需要说明理由就可以继续的资格。下一步真正需要判断的，不是你还能不能撑，而是这种交换是否仍然值得。
+
+---
+
+# 35. Customer Actions
+
+允许：
+
+```
+Continue with monitoring
+Reassess current path
+Add missing cost
+Correct value produced
+Compare alternatives
+Continue
+```
+
+---
+
+# 36. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+CONTINUATION_QUALIFIED
+CONTINUATION_MONITOR
+CONTINUATION_QUESTIONED
+CONTINUATION_REASSESSMENT_REQUIRED
+CONTINUATION_NOT_QUALIFIED
+REOPENED
+```
+
+---
+
+# 37. Fail-Closed Conditions
+
+以下情况不得进入 NAV-12：
+
+```
+currentPathUnknown
+intendedValueUnknown
+currentFunctionAssumedWithoutEvidence
+hiddenCostIgnored
+symbolicReadingUsedAsContinuationAuthority
+decisionRelevantChangeMissing
+currentPositionStale
+decisionObjectChanged
+```
+
+---
+
+# 38. Canonical Runtime Rule
+
+> **Navigation must not treat continued operation as sufficient evidence that the current direction remains qualified.**
+
+中文：
+
+> **Navigation 不得把“仍然能够运行”当作当前方向继续保持资格的充分证据。**
+
+---
+
+# 39. Canonical Qualification Rule
+
+> **A path remains qualified only when its current value, cost, capacity demands, responsibility structure, and future-option effects remain sufficiently acceptable under current reality.**
+
+中文：
+
+> **一条路径只有在当前现实中，其价值、成本、容量要求、责任结构与未来选择影响仍然足够可接受时，才继续拥有现实资格。**
+
+---
+
+# 40. Canonical Default Rule
+
+> **Continuation is a decision, not a neutral default, once material reality has changed.**
+
+中文：
+
+> **一旦现实发生了具有决策意义的变化，继续本身就是一个决定，而不再是中立默认。**
+
+---
+
+# 41. Canonical Review Rule
+
+> **Loss of default qualification requires reassessment, not automatic abandonment.**
+
+中文：
+
+> **失去默认继续资格意味着必须重新比较，而不是自动放弃。**
+
+---
+
+# 42. Final Canonical Form
+
+```
+NAV-11
+CONTINUATION QUALIFICATION
+```
+
+**Input**
+
+```
+Current Path
++
+Decision-Relevant Change
++
+Current Value / Cost / Capacity / Future Effects
+```
+
+**Process**
+
+```
+Ask:
+Still functioning?
+Still valuable?
+Still affordable?
+Still sustainable?
+Still preserving enough future choice?
+```
+
+**Output**
+
+```
+Continuation Qualification State
+```
+
+**Boundary**
+
+```
+Still running does not equal still qualified.
+Loss of qualification does not equal automatic exit.
+```
+# NAV-12｜Maintenance Cost
+
+## 维持成本｜如果结果没有改变，但维持它越来越昂贵，原来的选择还成立吗
+
+**Canonical Question｜规范问题**
+
+> **如果结果没有改变，但维持它越来越昂贵，原来的选择还成立吗？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-12
+```
+
+## 2. `canonicalTitleZh`
+
+```
+维持成本
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Maintenance Cost
+```
+
+## 4. `canonicalQuestion`
+
+```
+如果结果没有改变，但维持它越来越昂贵，原来的选择还成立吗？
+```
+
+---
+
+# 5. `definition`
+
+**Maintenance Cost** 是 Navigation 对“为了让当前结果继续存在，系统实际正在支付什么”进行正式识别与比较的机制。
+
+它不只是金钱成本，也不等同 Book III 中对 maintenance、runtime accumulation 或 degradation 的解释。
+
+NAV-12 不重新回答：
+
+> 为什么系统需要维护？  
+> 为什么负荷会累积？  
+> 为什么恢复会失败？
+
+这些属于前册已经建立的运行机制。
+
+NAV-12 只问：
+
+> **既然当前路径仍然能够维持，它现在需要支付的真实代价，是否已经改变了继续这个选择的资格？**
+
+例如：
+
+```
+结果：
+收入仍然 RM10,000 / month
+```
+
+但为了维持同一收入，现在需要：
+
+```
+过去：45 hours / week
+现在：65 hours / week
+```
+
+那么不能简单写成：
+
+```
+result unchanged
+→ decision unchanged
+```
+
+因为真正变化的是：
+
+```
+exchange structure
+```
+
+同样：
+
+```
+company revenue unchanged
+```
+
+但如果维持它已经依赖：
+
+```
+discounting
+staff overtime
+deferred maintenance
+cash reserve drawdown
+```
+
+那么当前路线的现实含义已经改变。
+
+因此：
+
+> **NAV-12 把“结果是多少”与“为了让这个结果继续存在，系统正在付出什么”重新放回同一个决定。**
+
+---
+
+# 6. `navigationMeaning`
+
+很多系统不是先失去结果，而是先让结果变得越来越昂贵。
+
+这正是 Navigation 最容易迟到的地方。
+
+如果系统只观察：
+
+```
+output
+income
+delivery
+relationship status
+business survival
+```
+
+就可能忽略：
+
+```
+time cost
+financial subsidy
+capacity depletion
+relationship burden
+recovery loss
+future-option loss
+responsibility concentration
+```
+
+于是表面上：
+
+```
+nothing changed
+```
+
+实际上：
+
+```
+everything required to keep it unchanged has changed
+```
+
+NAV-12 的作用因此是：
+
+```
+Continuation Qualification
+↓
+Identify Maintenance Inputs
+↓
+Compare Present Cost with Prior Cost
+↓
+Assess Whether Exchange Still Qualifies
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-12 最低需要：
+
+```
+currentPath
+currentOutcomeState
+continuationQualificationState
+currentMaintenanceInputs
+knownMaintenanceCosts
+knownCostBearer
+knownTimeBoundary
+```
+
+最好同时拥有：
+
+```
+priorMaintenanceBaseline
+```
+
+否则只能判断：
+
+```
+CURRENT_COST_STATE
+```
+
+不能可靠判断：
+
+```
+COST_INCREASE
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+capacityContext
+relationshipContext
+professionalInput
+priorNavigationState
+historicalOutcomeData
+currentExternalEvidence
+futureOptionContext
+```
+
+这些用于识别：
+
+- 成本是否上升；
+- 成本是否只是短期；
+- 谁承担成本；
+- 成本是否正在形成新能力；
+- 成本是否只是在延长旧状态。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但真实 Maintenance Cost 应优先来自：
+
+```
+MATERIAL_COST
+OBSERVED_TIME_COST
+OBSERVED_CAPACITY_COST
+VERIFIED_RESOURCE_USE
+```
+
+而不是：
+
+```
+INTERPRETIVE_COST
+```
+
+---
+
+# 10. Core Maintenance Cost Classes
+
+建议至少区分：
+
+```
+FINANCIAL_COST
+TIME_COST
+CAPACITY_COST
+RECOVERY_COST
+RELATIONSHIP_COST
+OPPORTUNITY_COST
+FUTURE_OPTION_COST
+RESPONSIBILITY_COST
+HIDDEN_SUBSIDY
+MAINTENANCE_COST_UNKNOWN
+```
+
+---
+
+## A. `FINANCIAL_COST`
+
+包括：
+
+```
+cash outflow
+debt servicing
+reserve drawdown
+discounting
+maintenance spending
+```
+
+---
+
+## B. `TIME_COST`
+
+例如：
+
+```
+extra work hours
+commuting
+coordination time
+administrative time
+```
+
+时间成本不能全部自动换算成金钱。
+
+---
+
+## C. `CAPACITY_COST`
+
+当前路径占用：
+
+```
+attention
+energy
+operational bandwidth
+decision bandwidth
+```
+
+但不能把一般疲惫自动写成医学问题。
+
+---
+
+## D. `RECOVERY_COST`
+
+如果已有合法证据显示当前安排压缩恢复：
+
+```
+sleep
+rest
+recovery window
+```
+
+可以进入。
+
+这里消费 Book III 已建立的 recovery context，不重新创造健康诊断。
+
+---
+
+## E. `RELATIONSHIP_COST`
+
+例如：
+
+```
+family coordination burden
+care burden
+conflict frequency
+shared-time loss
+```
+
+必须基于现实 observation / report。
+
+---
+
+## F. `OPPORTUNITY_COST`
+
+为了维持当前路径，什么现实机会无法被投入。
+
+例如：
+
+```
+no time for retraining
+no capital for alternative project
+```
+
+必须保持为：
+
+```
+opportunity foregone
+```
+
+而不是虚构确定收益。
+
+---
+
+## G. `FUTURE_OPTION_COST`
+
+继续当前路径会不会减少：
+
+```
+future mobility
+liquidity
+career flexibility
+location flexibility
+exit options
+```
+
+---
+
+## H. `RESPONSIBILITY_COST`
+
+某一个人是否承担了越来越多系统成本。
+
+例如：
+
+```
+one family member absorbs all care work
+one employee continuously compensates for process failure
+```
+
+---
+
+## I. `HIDDEN_SUBSIDY`
+
+当前结果看起来没有变化，但其实由某种未显式计价的资源持续补贴。
+
+例如：
+
+```
+unpaid overtime
+family labor
+cash reserve use
+founder personal funding
+deferred maintenance
+```
+
+---
+
+# 11. `allowedInference`
+
+NAV-12 可以：
+
+## A. 识别结果相同但单位维持成本上升
+
+例如：
+
+```
+same monthly income
++
+35% more working hours
+```
+
+可以标记：
+
+```
+MAINTENANCE_COST_INCREASE
+```
+
+---
+
+## B. 识别“短期高成本”与“长期失配”不是同一件事
+
+例如：
+
+```
+3-month training period
+```
+
+成本高，但如果：
+
+```
+future capability materially increases
+```
+
+不应自动判断为无效维持。
+
+---
+
+## C. 识别持续投入是否只在抵消问题
+
+例如：
+
+```
+more staff
+more meetings
+more overtime
+```
+
+只维持：
+
+```
+same output
+```
+
+而没有改善底层能力，可以标记：
+
+```
+COMPENSATORY_MAINTENANCE
+```
+
+---
+
+## D. 识别成本由谁承担
+
+例如：
+
+```
+household stable
+```
+
+但主要因为：
+
+```
+one person gives up career hours
+```
+
+则必须保留：
+
+```
+COST_BEARER
+```
+
+---
+
+## E. 识别未来资源正在被当前状态消耗
+
+例如：
+
+```
+monthly deficit funded by savings
+```
+
+可以判断：
+
+```
+current stability is being subsidized by future liquidity
+```
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-12 严禁：
+
+## A. 把任何成本上升自动写成路径错误
+
+```
+higher cost
+≠
+wrong path
+```
+
+---
+
+## B. 把所有短期牺牲都视为不合理
+
+照护、学习、转型、危机处理都可能合法地要求阶段性高成本。
+
+---
+
+## C. 把隐性成本随意货币化
+
+例如：
+
+```
+family time = RM x
+```
+
+除非用户或专业模型明确提供合法估值。
+
+---
+
+## D. 用 Method Reading 建立 Maintenance Cost
+
+禁止：
+
+```
+BaZi shows pressure
+→ capacity cost high
+```
+
+---
+
+## E. 用 Tarot / I Ching 证明未来会付出代价
+
+禁止：
+
+```
+symbolic difficulty
+→ real maintenance cost
+```
+
+---
+
+## F. 把已经支付的成本自动变成继续理由
+
+```
+past cost
+≠
+future obligation
+```
+
+---
+
+# 13. `decisionEffect`
+
+NAV-12 主要影响：
+
+```
+OPTION_WEIGHT
+DEFAULT_PATH_PRIORITY
+WAIT_ACT_BALANCE
+ACTION_SCALE
+STRUCTURAL_CHANGE_ADMISSION
+```
+
+其核心作用：
+
+```
+EXCHANGE_REASSESSMENT
+```
+
+即：
+
+> **原来这项交换仍然值得吗？**
+
+---
+
+# 14. `decisionThresholdEffect`
+
+如果当前结果需要越来越大的成本才能维持，则：
+
+```
+continuation threshold rises
+```
+
+但不是：
+
+```
+change threshold automatically falls to zero
+```
+
+Navigation 仍需判断：
+
+- 成本是否暂时；
+- 是否产生未来能力；
+- 是否可承受；
+- 是否公平分布；
+- 是否存在更好替代。
+
+冻结关系：
+
+> **Maintenance cost changes the decision when it materially changes the exchange the original decision was built upon.**
+
+中文：
+
+> **当维持成本已经实质改变原决定赖以成立的交换关系时，它才真正改变这个决定。**
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-12 可以：
+
+- 识别维持成本；
+- 比较成本变化；
+- 识别 hidden subsidy；
+- 识别成本承担者；
+- 识别未来资源被当前占用；
+- 触发 continuation reassessment。
+
+NAV-12 不可以：
+
+- 自动判断某项牺牲不值得；
+- 自动给出退出结论；
+- 把隐性成本全部金融化；
+- 用 symbolic input 建立现实成本；
+- 替客户决定哪些成本值得承担。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+系统可以显示：
+
+```
+current path costs more
+```
+
+但：
+
+```
+whether the cost remains worth paying
+```
+
+最终涉及价值与责任，需要用户确认。
+
+例如：
+
+一个家庭为了短期照护：
+
+```
+income temporarily lower
+time cost higher
+```
+
+用户可能仍然认为：
+
+```
+worth it
+```
+
+Navigation 不得把这种选择标成错误。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.14｜维持成本什么时候改变决定
+```
+
+相关：
+
+```
+15.13｜还在运行，究竟能证明什么
+15.15｜原方向什么时候失去默认资格
+15.17｜容量什么时候成为硬约束
+15.18｜什么时候更多投入已经不再合理
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 已经拥有：
+
+```
+runtime cost
+accumulation
+maintenance
+recovery debt
+structural cost transfer
+```
+
+NAV-12 不重新解释这些机制。
+
+它只消费已经建立的现实状态，回答：
+
+> **这些成本现在是否足以改变下一步的资格比较？**
+
+这是与 Book III 的核心边界。
+
+---
+
+## Book IV｜Reality Expansion
+
+提供：
+
+```
+capacity
+resource expansion
+scale cost
+```
+
+帮助判断：
+
+```
+cost is investment in capacity
+vs
+cost is compensatory maintenance
+```
+
+但不自动给答案。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+measurement
+uncertainty
+source boundary
+```
+
+支持 Maintenance Cost 必须有来源，而不是由解释想象出来。
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以帮助指出：
+
+```
+which costs are repeatedly experienced as friction
+```
+
+例如：
+
+```
+high social-load friction
+```
+
+但不能直接证明：
+
+```
+current social cost materially high
+```
+
+必须由现实数据核实。
+
+---
+
+# 20. `financialConsumer`
+
+Financial 是 NAV-12 最强现实来源之一。
+
+允许进入：
+
+```
+cash burn
+reserve drawdown
+debt service
+insurance cost
+fixed expense
+income concentration
+liquidity cost
+```
+
+并可计算：
+
+```
+maintenance cost trajectory
+```
+
+前提：
+
+```
+assumptions explicit
+```
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只允许：
+
+```
+INTERPRETIVE_COST_CONTEXT
+```
+
+不得建立实际成本数字或真实 capacity loss。
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+whatRequiresMoreEffort
+whatRequiresMoreTime
+whatRequiresMoreMoney
+whatIsBeingSacrificed
+whoIsBearingTheCost
+whatIsNoLongerRecovering
+```
+
+并区分：
+
+```
+reported
+observed
+verified
+unknown
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-12 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **The same result can become a different decision when the cost of maintaining it changes.**
+
+中文：
+
+> **结果即使没有改变，只要维持它的代价已经改变，原来的决定就可能不再是同一个决定。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-12：
+
+```
+costChanged
+resourceUseChanged
+timeUseChanged
+capacityChanged
+hiddenSubsidyAppeared
+hiddenSubsidyEnded
+newCostBearer
+futureOptionLossChanged
+financialProjectionUpdated
+professionalInput
+userChangesValuePriority
+```
+
+---
+
+# 26. Canonical Maintenance Cost Model
+
+建议：
+
+```
+{
+  "maintenanceCostId": "",
+  "pathId": "",
+  "currentOutcome": "",
+  "costs": {
+    "financial": [],
+    "time": [],
+    "capacity": [],
+    "recovery": [],
+    "relationship": [],
+    "opportunity": [],
+    "futureOption": [],
+    "responsibility": []
+  },
+  "hiddenSubsidies": [],
+  "costBearers": [],
+  "priorBaseline": [],
+  "changedCosts": [],
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Cost Baseline Rule
+
+若要判断：
+
+```
+cost increased
+```
+
+必须有：
+
+```
+prior baseline
+```
+
+否则只能说：
+
+```
+current cost high / low / unknown
+```
+
+不能伪造增长趋势。
+
+---
+
+# 28. Cost Bearer Rule
+
+每个重要成本应尽量回答：
+
+```
+WHO PAYS?
+```
+
+例如：
+
+```
+organization remains profitable
+```
+
+但：
+
+```
+employees absorb overtime
+```
+
+不能只从组织层判断“成本可接受”。
+
+---
+
+# 29. Hidden Subsidy Rule
+
+如果：
+
+```
+result stable
+```
+
+依靠：
+
+```
+reserve depletion
+unpaid labor
+deferred repair
+relationship sacrifice
+personal overextension
+```
+
+则必须标记：
+
+```
+HIDDEN_SUBSIDY_ACTIVE
+```
+
+Hidden subsidy 不是自动坏事，但必须可见。
+
+---
+
+# 30. Temporary Investment Rule
+
+高成本如果明确：
+
+```
+time-bound
+capacity-building
+reviewable
+```
+
+则可以标记：
+
+```
+TEMPORARY_CAPACITY_INVESTMENT
+```
+
+而不是：
+
+```
+MAINTENANCE_FAILURE
+```
+
+例如：
+
+```
+6-month professional training
+```
+
+只要未来能力提升有合理路径。
+
+---
+
+# 31. Compensatory Maintenance Rule
+
+如果新增投入只用于：
+
+```
+offset deterioration
+```
+
+而没有：
+
+```
+improved capability
+improved option space
+improved sustainability
+```
+
+则标记：
+
+```
+COMPENSATORY_MAINTENANCE
+```
+
+这会成为 NAV-16 Diminishing Return 的重要输入。
+
+---
+
+# 32. Future Subsidy Rule
+
+如果今天的稳定依赖：
+
+```
+using future resources now
+```
+
+例如：
+
+```
+savings
+debt
+future time
+deferred maintenance
+```
+
+必须标记：
+
+```
+FUTURE_SUBSIDY
+```
+
+---
+
+# 33. Sunk Cost Boundary
+
+冻结：
+
+> **Cost already paid may explain attachment to the current path; it does not independently justify another unit of future cost.**
+
+中文：
+
+> **已经支付的成本可以解释为什么人难以离开当前路径，却不能单独证明下一单位未来成本仍然值得支付。**
+
+---
+
+# 34. Customer Projection Example
+
+内部：
+
+```
+Path:
+Remain in current role
+
+Outcome:
+Income stable
+
+Prior:
+45h/week
+
+Current:
+62h/week
+
+Other cost:
+recovery reduced
+family coordination burden increased
+
+State:
+MAINTENANCE_COST_MATERIALLY_CHANGED
+```
+
+客户可以看到：
+
+> **收入没有下降，但维持这份收入的交换已经改变。**
+> 
+> 过去你大约用每周四十五小时换取现在的收入与职业稳定，现在这个结果需要接近六十小时以上的工作时间，同时恢复空间和家庭协调成本也在增加。真正需要重新判断的不是“这份工作还赚不赚钱”，而是你是否仍愿意用现在这组代价交换同样的结果；如果答案开始变化，原路线就需要重新和其他候选一起比较。
+
+---
+
+# 35. Customer Actions
+
+允许：
+
+```
+Confirm current costs
+Correct cost
+Add hidden cost
+Identify cost bearer
+Mark temporary investment
+Reassess continuation
+Continue
+```
+
+---
+
+# 36. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+MAINTENANCE_COST_STABLE
+MAINTENANCE_COST_INCREASED
+HIDDEN_SUBSIDY_ACTIVE
+TEMPORARY_CAPACITY_INVESTMENT
+COMPENSATORY_MAINTENANCE
+REASSESSMENT_REQUIRED
+REOPENED
+```
+
+---
+
+# 37. Fail-Closed Conditions
+
+以下情况不得进入 NAV-13：
+
+```
+maintenanceCostFabricated
+costIncreaseClaimWithoutBaseline
+costBearerIgnored
+hiddenSubsidyKnownButOmitted
+symbolicReadingUsedAsMaterialCost
+financialDataStale
+currentPathUnknown
+decisionObjectChanged
+```
+
+---
+
+# 38. Canonical Runtime Rule
+
+> **Navigation must evaluate not only whether the current outcome persists, but what must now be spent to keep that outcome in place.**
+
+中文：
+
+> **Navigation 不只要看当前结果是否仍然存在，也必须看为了让这个结果继续存在，现在究竟需要支付什么。**
+
+---
+
+# 39. Canonical Exchange Rule
+
+> **When the cost of maintaining an outcome materially changes, the original exchange underlying the decision must be reassessed even if the visible outcome remains unchanged.**
+
+中文：
+
+> **当维持一个结果的成本发生实质变化时，即使表面结果没有改变，原决定赖以成立的交换关系也必须重新评估。**
+
+---
+
+# 40. Canonical Cost Boundary
+
+> **Higher cost does not automatically disqualify a path; the question is whether the added cost builds future capacity, preserves necessary value, or merely subsidizes an unchanged structure.**
+
+中文：
+
+> **成本增加不会自动取消一条路径的资格；真正需要判断的是，这些新增成本是在建立未来能力、保护必要价值，还是仅仅补贴一个没有改善的旧结构。**
+
+---
+
+# 41. Canonical Cost-Bearer Rule
+
+> **A path cannot be judged affordable only from the perspective of the person or system receiving the visible outcome; the burden carried by others must remain visible.**
+
+中文：
+
+> **一条路径不能只从获得表面结果的一方判断是否“负担得起”；真正承担成本的人与部分必须保持可见。**
+
+---
+
+# 42. Final Canonical Form
+
+```
+NAV-12
+MAINTENANCE COST
+```
+
+**Input**
+
+```
+Continuation Path
++
+Current Outcome
++
+Maintenance Inputs
++
+Prior Baseline
+```
+
+**Process**
+
+```
+Identify:
+What Costs More
+Who Pays
+What Is Being Subsidized
+What Future Resource Is Being Used
+Whether Cost Builds Capacity or Only Preserves the Old State
+```
+
+**Output**
+
+```
+Maintenance Cost Qualification State
+```
+
+**Boundary**
+
+```
+Same result does not mean same decision.
+Higher cost does not automatically mean wrong direction.
+```
+
+# NAV-13｜Default Direction Loss
+
+## 默认方向失效｜过去一直这样走，为什么不能自动成为继续这样走的理由
+
+**Canonical Question｜规范问题**
+
+> **原方向什么时候会失去“不需要重新证明就可以继续”的资格？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-13
+```
+
+## 2. `canonicalTitleZh`
+
+```
+默认方向失效
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Default Direction Loss
+```
+
+## 4. `canonicalQuestion`
+
+```
+原方向什么时候会失去“不需要重新证明就可以继续”的资格？
+```
+
+---
+
+# 5. `definition`
+
+**Default Direction Loss** 是 Navigation 对“原本持续中的方向何时不应再被当成默认答案”进行正式判断的机制。
+
+它不是：
+
+```
+CURRENT PATH FAILED
+```
+
+也不是：
+
+```
+CHANGE NOW
+```
+
+更不是：
+
+```
+PAST DECISION WAS WRONG
+```
+
+它真正判断的是：
+
+> **当前方向是否仍然可以只因为“已经这样走了一段时间”，就继续享有不需要重新比较的优先权。**
+
+现实中的很多路径一开始都有充分理由。
+
+例如：
+
+```
+选择某份工作
+进入某个行业
+维持某种家庭安排
+采用某种商业模式
+居住在某个地方
+持续一项长期投资
+```
+
+当初可能完全合理。
+
+问题在于，随着现实变化，人很容易把：
+
+```
+当时有理由选择
+```
+
+悄悄转换成：
+
+```
+现在仍有理由继续
+```
+
+这两个命题并不等价。
+
+因此：
+
+> **NAV-13 不负责证明新方向更好，而是判断旧方向是否已经失去“默认延续”的特权。**
+
+---
+
+# 6. `navigationMeaning`
+
+在没有 Navigation 的情况下，现实通常存在一种强烈的不对称：
+
+```
+继续现状
+→ 不需要解释
+
+改变现状
+→ 必须证明
+```
+
+这种结构会让惯性本身变成隐藏权威。
+
+NAV-13 要做的是重新建立对称：
+
+```
+CONTINUE
+ADJUST
+WAIT
+PREPARE
+CHANGE
+EXIT
+```
+
+都只是候选路径。
+
+当旧方向赖以成立的条件已经改变以后：
+
+```
+CONTINUE
+```
+
+也必须重新回答：
+
+> 为什么现在还值得继续？
+
+因此 NAV-13 建立：
+
+```
+Continuation Qualification
++
+Maintenance Cost
++
+Decision-Relevant Change
+↓
+Does Current Direction Still Deserve Default Priority?
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-13 最低需要：
+
+```
+currentDefaultDirection
+originalDirectionBasis
+currentPosition
+decisionRelevantChangeState
+continuationQualificationState
+maintenanceCostState
+```
+
+最好还包括：
+
+```
+currentValueProduced
+currentConstraints
+currentCapacity
+futureOptionEffects
+```
+
+如果系统不知道原方向最初为什么成立，则必须保留：
+
+```
+ORIGINAL_DIRECTION_BASIS_UNKNOWN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+profileNavigationProjection
+relationshipContext
+professionalInput
+priorNavigationState
+historicalDecisionRecord
+externalCurrentEvidence
+timeHorizonMap
+reversibilityProfile
+```
+
+这些用于判断：
+
+- 原方向是否仍然适配；
+- 当前继续是因为现实支持，还是仅因为惯性；
+- 方向改变是否只是理论可能；
+- 当前结构有没有替代资格。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+CURRENT_EXTERNAL_EVIDENCE
+PROFESSIONAL_INPUT
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但“原方向是否失去默认资格”必须主要依赖：
+
+```
+CURRENT_REALITY
+OBSERVED_CHANGE
+MATERIAL_COST
+CAPACITY_STATE
+OPTION_SPACE_EFFECT
+```
+
+而不是：
+
+```
+INTERPRETIVE_PREFERENCE
+```
+
+---
+
+# 10. Core Default-Direction States
+
+建议至少区分：
+
+```
+DEFAULT_DIRECTION_RETAINED
+DEFAULT_DIRECTION_RETAINED_WITH_REVIEW
+DEFAULT_DIRECTION_QUESTIONED
+DEFAULT_DIRECTION_LOST
+DEFAULT_DIRECTION_BASIS_UNKNOWN
+```
+
+---
+
+## A. `DEFAULT_DIRECTION_RETAINED`
+
+虽然现实发生变化，但当前方向仍然：
+
+```
+produces intended value
+cost remains acceptable
+capacity remains sufficient
+future options remain acceptable
+```
+
+因此继续拥有默认资格。
+
+---
+
+## B. `DEFAULT_DIRECTION_RETAINED_WITH_REVIEW`
+
+当前方向仍可继续作为默认路径，但某些条件接近边界。
+
+需要：
+
+```
+monitor
+review
+trigger
+```
+
+---
+
+## C. `DEFAULT_DIRECTION_QUESTIONED`
+
+原方向仍可能合理，但已经不能只凭历史延续。
+
+它必须与其他候选重新比较。
+
+---
+
+## D. `DEFAULT_DIRECTION_LOST`
+
+现有证据已经不足以让原方向继续享有默认优先级。
+
+这不代表：
+
+```
+CURRENT_DIRECTION_INVALID
+```
+
+只代表：
+
+```
+CURRENT_DIRECTION_BECOMES_ONE_OPTION_AMONG_OTHERS
+```
+
+---
+
+## E. `DEFAULT_DIRECTION_BASIS_UNKNOWN`
+
+系统无法判断原方向为什么成立，因此不能确认它现在是否仍然应该被默认延续。
+
+---
+
+# 11. `allowedInference`
+
+NAV-13 可以：
+
+## A. 判断原始理由是否已经失效
+
+例如：
+
+```
+Original reason:
+high job stability
+```
+
+但现在：
+
+```
+contract instability increased
+```
+
+则原方向必须重新取得资格。
+
+---
+
+## B. 判断支持原方向的收益是否已经下降
+
+例如：
+
+```
+career path originally chosen for learning + promotion
+```
+
+现在：
+
+```
+learning plateaued
+promotion path closed
+```
+
+可以标记：
+
+```
+DEFAULT_DIRECTION_QUESTIONED
+```
+
+---
+
+## C. 判断维持成本是否已经改变原交换关系
+
+直接消费 NAV-12。
+
+例如：
+
+```
+same income
++
+much higher time cost
++
+lower recovery
+```
+
+可以削弱默认资格。
+
+---
+
+## D. 判断未来选项是否被当前方向逐步关闭
+
+例如：
+
+```
+continue current role
+→ retraining window narrows
+→ location flexibility falls
+```
+
+这可以影响 Default Direction。
+
+---
+
+## E. 判断原方向是否仍有现实支持，而不只是历史惯性
+
+例如：
+
+```
+“我一直都这样做。”
+```
+
+本身不构成：
+
+```
+CURRENT QUALIFICATION
+```
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-13 严禁：
+
+## A. 把失去默认资格等同失败
+
+禁止：
+
+```
+DEFAULT_DIRECTION_LOST
+=
+PATH FAILED
+```
+
+---
+
+## B. 把“存在其他选项”当成原方向失效
+
+新选项出现，只意味着：
+
+```
+option space expanded
+```
+
+不代表当前路径失去资格。
+
+---
+
+## C. 把厌倦自动当成方向失效
+
+```
+I am bored
+```
+
+可以进入现实输入，但不足以自动取消当前方向。
+
+---
+
+## D. 使用 symbolic method 取消现实路径资格
+
+禁止：
+
+```
+BaZi says cycle changed
+→ current career loses default qualification
+```
+
+---
+
+## E. 使用“成长”“勇敢”“突破”等价值词替结构性证据
+
+禁止：
+
+```
+change is growth
+therefore current direction should lose priority
+```
+
+---
+
+## F. 把历史错误判断成必须修正
+
+即使过去选择有问题，现在的最佳下一步仍然要根据当前现实决定。
+
+---
+
+# 13. `decisionEffect`
+
+NAV-13 主要影响：
+
+```
+DEFAULT_PATH_PRIORITY
+OPTION_COMPARISON_REQUIREMENT
+STRUCTURAL_ALTERNATIVE_ADMISSION
+WAIT_ACT_BALANCE
+```
+
+其核心 effect：
+
+```
+REMOVE_AUTOMATIC_CONTINUATION_PRIVILEGE
+```
+
+---
+
+# 14. `decisionThresholdEffect`
+
+当：
+
+```
+DEFAULT_DIRECTION_RETAINED
+```
+
+时，继续路径可以保持现有资格。
+
+当：
+
+```
+DEFAULT_DIRECTION_QUESTIONED
+```
+
+时，应触发：
+
+```
+OPTION_RECOMPARISON
+```
+
+当：
+
+```
+DEFAULT_DIRECTION_LOST
+```
+
+时，当前路径不能继续因为“已经存在”而获得较低 threshold。
+
+它必须与其他候选一样接受：
+
+```
+feasibility
+cost
+reversibility
+time
+value
+capacity
+```
+
+检查。
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-13 可以：
+
+- 判断默认资格；
+- 移除现状的自动优先权；
+- 要求重新比较；
+- 暴露 inertia；
+- 暴露原始理由已经变化；
+- 把 alternative structure 正式纳入考虑。
+
+NAV-13 不可以：
+
+- 宣布必须改变；
+- 宣布当前方向错误；
+- 自动选择替代方向；
+- 把情绪变化升级成结构判断；
+- 使用 Method Reading 取消现实路径。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+即使：
+
+```
+DEFAULT_DIRECTION_LOST
+```
+
+用户仍然可以选择继续。
+
+但此时 Navigation 应要求这个继续成为：
+
+```
+CONSCIOUSLY_RECHOSEN
+```
+
+而不是：
+
+```
+AUTOMATICALLY_CONTINUED
+```
+
+例如：
+
+> 你可以继续留在当前岗位，但现在这条路已经不再只是“什么都不改变”。你是在知道成本已经提高、成长空间下降以后，仍然选择继续一段时间。
+
+这两种继续有本质差异。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.15｜原方向什么时候失去默认资格
+```
+
+相关：
+
+```
+15.13｜还在运行，究竟能证明什么
+15.14｜维持成本什么时候改变决定
+15.16｜问题扩散以后，优先级为什么会改变
+15.18｜什么时候更多投入已经不再合理
+15.19｜修正参数，还是把重构放进候选
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 解释：
+
+```
+为什么结构可以继续维持
+```
+
+NAV-13 不重新回答这个问题。
+
+它只问：
+
+> **即使结构还能维持，它是否仍然应该继续拥有下一步的默认资格？**
+
+---
+
+## Book VI｜Reality Reconfiguration
+
+Book VI 提供：
+
+```
+structural reconfiguration
+alternative configuration
+```
+
+NAV-13 只是决定：
+
+```
+whether alternative structure deserves admission into navigation
+```
+
+不负责实际重构。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+current evidence
+change detection
+uncertainty
+```
+
+支持：
+
+```
+past truth
+≠
+current qualification
+```
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以帮助理解：
+
+```
+why user may remain attached to current path
+stability preference
+identity attachment
+risk preference
+```
+
+但不能证明：
+
+```
+default direction retained
+```
+
+或：
+
+```
+default direction lost
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 可以提供强现实依据：
+
+```
+income dependency
+liquidity effect
+debt lock-in
+future financial flexibility
+```
+
+例如当前方向虽然收入高，但：
+
+```
+debt
+fixed commitments
+income concentration
+```
+
+持续增加，可能影响默认资格。
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能作为：
+
+```
+INTERPRETIVE_CONTEXT
+```
+
+不得直接影响：
+
+```
+DEFAULT_DIRECTION_STATE
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+whatHasChanged
+whatStillWorks
+whatNoLongerFits
+whatCostsMore
+whatFutureSpaceIsChanging
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-13 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **The fact that a path has been followed does not renew its right to remain the default.**
+
+中文：
+
+> **一条路过去一直被走，并不会自动续期它继续成为默认方向的资格。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-13：
+
+```
+originalBasisChanged
+currentValueChanged
+maintenanceCostChanged
+capacityChanged
+newAlternativeAppeared
+futureOptionSpaceChanged
+responsibilityChanged
+timeHorizonChanged
+newProfessionalInput
+userRechoosesCurrentDirection
+```
+
+---
+
+# 26. Canonical Default Direction Model
+
+建议：
+
+```
+{
+  "directionId": "",
+  "originalBasis": [],
+  "currentBasis": [],
+  "state": "DEFAULT_DIRECTION_RETAINED | DEFAULT_DIRECTION_RETAINED_WITH_REVIEW | DEFAULT_DIRECTION_QUESTIONED | DEFAULT_DIRECTION_LOST | DEFAULT_DIRECTION_BASIS_UNKNOWN",
+  "supportingConditions": [],
+  "lostConditions": [],
+  "maintenanceCosts": [],
+  "futureOptionEffects": [],
+  "alternativesAdmitted": [],
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Historical Reason Rule
+
+冻结：
+
+> **A reason that once justified a direction does not remain valid merely because time has passed without a formal change.**
+
+中文：
+
+> **一个理由曾经足以支持某个方向，并不会因为期间没有正式改变，就自动一直保持有效。**
+
+---
+
+# 28. Inertia Rule
+
+必须显式区分：
+
+```
+CURRENT SUPPORT
+```
+
+与：
+
+```
+INERTIA
+```
+
+例如：
+
+```
+继续住在这里，因为工作仍在这里
+```
+
+可能属于：
+
+```
+CURRENT SUPPORT
+```
+
+而：
+
+```
+继续住在这里，因为已经住了20年
+```
+
+本身只属于：
+
+```
+HISTORICAL CONTINUITY
+```
+
+不自动形成 current qualification。
+
+---
+
+# 29. Requalification Rule
+
+原方向一旦被重开，不代表它失去永久资格。
+
+它可以通过新的现实重新取得：
+
+```
+REQUALIFIED_CONTINUATION
+```
+
+例如：
+
+```
+workload reduced
+pay adjusted
+new flexibility granted
+```
+
+于是原方向可能再次成为合理路径。
+
+因此：
+
+```
+DEFAULT_DIRECTION_LOST
+```
+
+不是永久状态。
+
+---
+
+# 30. Conscious Rechoice Rule
+
+如果用户在重新比较以后仍选择当前方向，应记录：
+
+```
+CONSCIOUS_RECHOICE
+```
+
+而不是：
+
+```
+NO_CHANGE
+```
+
+这是非常重要的 Navigation distinction。
+
+因为：
+
+> **经过重新比较以后继续，与从未重新比较地继续，是两个不同的决定。**
+
+---
+
+# 31. Automatic Continuation Rule
+
+以下理由不能单独维持默认资格：
+
+```
+we already started
+we already paid
+we have always done this
+people expect this
+changing is uncomfortable
+no crisis has happened yet
+```
+
+这些可以是 context，但不能独立成为：
+
+```
+DEFAULT_DIRECTION_SUPPORT
+```
+
+---
+
+# 32. Alternative Admission Rule
+
+当：
+
+```
+DEFAULT_DIRECTION_QUESTIONED
+```
+
+或：
+
+```
+DEFAULT_DIRECTION_LOST
+```
+
+时，应至少允许：
+
+```
+ALTERNATIVE_DIRECTION_ADMISSION
+```
+
+这并不要求立即产生最终替代方案。
+
+它只是移除：
+
+```
+current path monopoly
+```
+
+---
+
+# 33. Default Loss vs Exit Rule
+
+冻结：
+
+```
+DEFAULT_DIRECTION_LOSS
+≠
+EXIT
+```
+
+正确关系：
+
+```
+Default Direction Loss
+↓
+Alternative Admission
+↓
+Comparison
+↓
+Decision Sufficiency
+↓
+Possible Action
+```
+
+---
+
+# 34. Customer Projection Example
+
+内部：
+
+```
+Original Direction:
+Stay in current role
+
+Original Basis:
+stable pay
+reasonable hours
+career growth
+family compatibility
+
+Current:
+pay stable
+hours materially higher
+growth plateaued
+family compatibility lower
+
+State:
+DEFAULT_DIRECTION_LOST
+```
+
+客户可以看到：
+
+> **继续留下仍然是一个真实选项，但它已经不再是“不需要解释”的那个选项。**
+> 
+> 你当初选择这份工作时，收入、合理工时、职业发展和家庭安排同时支持这个方向；现在收入仍然存在，但工作时间明显增加，成长空间变窄，家庭协调也变得更困难。这个变化并不自动意味着应该离职，却意味着“继续留下”必须和其他可能重新比较，而不能只因为过去一直这样走就继续保持优先权。
+
+---
+
+# 35. Customer Actions
+
+允许：
+
+```
+Keep current direction
+Rechoose consciously
+Compare alternatives
+Add missing support
+Correct original basis
+Reassess later
+Continue
+```
+
+---
+
+# 36. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+DEFAULT_RETAINED
+DEFAULT_RETAINED_WITH_REVIEW
+DEFAULT_QUESTIONED
+DEFAULT_LOST
+CONSCIOUSLY_RECHOSEN
+REOPENED
+```
+
+---
+
+# 37. Fail-Closed Conditions
+
+以下情况不得进入 NAV-14：
+
+```
+currentDirectionUnknown
+originalBasisFabricated
+maintenanceCostStateMissing
+continuationQualificationMissing
+symbolicReadingUsedAsDefaultAuthority
+alternativeExistenceInvented
+currentRealityStale
+decisionObjectChanged
+```
+
+---
+
+# 38. Canonical Runtime Rule
+
+> **Navigation must require a current direction to retain its qualification from present reality rather than inherit permanent priority from history.**
+
+中文：
+
+> **Navigation 必须让一个当前方向从现在的现实重新取得继续资格，而不能让它从历史中永久继承优先权。**
+
+---
+
+# 39. Canonical Default Rule
+
+> **The current path is a default only while the conditions that qualified it remain materially intact.**
+
+中文：
+
+> **当前路径只有在使它取得资格的关键条件仍然实质成立时，才继续拥有默认地位。**
+
+---
+
+# 40. Canonical Loss Rule
+
+> **When those conditions materially change, the current direction loses automatic priority but does not become automatically wrong.**
+
+中文：
+
+> **当这些关键条件发生实质变化时，当前方向会失去自动优先权，却不会因此自动变成错误方向。**
+
+---
+
+# 41. Canonical Rechoice Rule
+
+> **Continuation after reassessment is a new decision, not the absence of a decision.**
+
+中文：
+
+> **经过重新评估以后继续，是一个新的决定，而不是没有作决定。**
+
+---
+
+# 42. Final Canonical Form
+
+```
+NAV-13
+DEFAULT DIRECTION LOSS
+```
+
+**Input**
+
+```
+Current Direction
++
+Original Basis
++
+Current Reality
++
+Continuation Qualification
++
+Maintenance Cost
+```
+
+**Process**
+
+```
+Ask:
+Why was this direction once qualified?
+Which supporting conditions remain?
+Which have changed?
+Does history still have too much weight?
+Does the current path still deserve default priority?
+```
+
+**Output**
+
+```
+Default Direction Qualification State
+```
+
+**Boundary**
+
+```
+Losing default status does not mean losing all value.
+Continuing after review is still a valid decision.
+```
+
+# NAV-14｜Cross-Domain Propagation
+
+## 跨领域扩散｜问题扩散以后，优先级为什么会改变
+
+**Canonical Question｜规范问题**
+
+> **当一个问题开始跨越多个生活领域以后，为什么它不能再只被当成原来的局部问题处理？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-14
+```
+
+## 2. `canonicalTitleZh`
+
+```
+跨领域扩散
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Cross-Domain Propagation
+```
+
+## 4. `canonicalQuestion`
+
+```
+当一个问题开始跨越多个生活领域以后，
+为什么它不能再只被当成原来的局部问题处理？
+```
+
+---
+
+# 5. `definition`
+
+**Cross-Domain Propagation** 是 Navigation 对“原本发生在一个领域中的变化，是否已经开始影响其他现实领域”进行正式识别与判断的机制。
+
+它不是简单计算：
+
+```
+affectedDomains = 3
+```
+
+也不是：
+
+```
+领域越多
+→ 问题一定越严重
+```
+
+它真正要回答的是：
+
+> **一个原本局部的问题，是否已经开始改变其他领域的运行条件，以至于原来的局部处理方式已经不足以覆盖它真正产生的现实影响？**
+
+例如，一个问题最初可能只是：
+
+```
+WORK
+```
+
+表现为：
+
+```
+工时增加
+```
+
+如果随后开始出现：
+
+```
+工作时间增加
+→ 恢复时间减少
+
+恢复时间减少
+→ 家庭互动质量下降
+
+家庭安排恶化
+→ 外包照护支出增加
+
+支出增加
+→ 财务缓冲下降
+```
+
+那么当前问题已经不能只写成：
+
+```
+workload issue
+```
+
+因为它已经形成：
+
+```
+WORK
+→ CAPACITY
+→ RELATIONSHIP / FAMILY
+→ FINANCIAL
+```
+
+的现实传播。
+
+因此：
+
+> **NAV-14 的核心不是统计受影响领域，而是判断一个变化是否已经从局部条件转变成跨领域现实约束。**
+
+---
+
+# 6. `navigationMeaning`
+
+一个问题尚未扩散时，局部回应通常拥有较高资格。
+
+例如：
+
+```
+工作安排不合理
+```
+
+可能通过：
+
+```
+重新排程
+减少会议
+重新分工
+```
+
+得到改善。
+
+但如果同一问题已经持续影响：
+
+```
+income
+health capacity
+family coordination
+location
+future career options
+```
+
+那么 Navigation 需要重新判断：
+
+> 我们现在究竟还在修一个局部参数，还是一个原本局部的问题已经开始改变整个 Decision Space？
+
+这就是 NAV-14 的作用：
+
+```
+Local Change
+↓
+Propagation Mapping
+↓
+Cross-Domain Consequence
+↓
+Priority Reassessment
+```
+
+因此，跨领域扩散的真正意义不是：
+
+```
+more domains = more urgency
+```
+
+而是：
+
+```
+more domains
+may change
+what must be protected first
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-14 最低需要：
+
+```
+confirmedDecisionObject
+currentPosition
+decisionRelevantChangeState
+currentResponseLevel
+affectedDomain
+observedSecondaryEffects
+timeBoundary
+```
+
+如果 secondary effect 只是怀疑，应保留：
+
+```
+PROPAGATION_UNCONFIRMED
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+relationshipContext
+careerContext
+capacityContext
+locationContext
+professionalInput
+priorNavigationState
+priorOutcomeHistory
+externalCurrentEvidence
+```
+
+这些用于判断：
+
+- secondary effects 是否真实；
+- 是否持续；
+- 是否存在方向性依赖；
+- 是否只是同时发生，而不是传播关系。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但 propagation link 必须区分：
+
+```
+OBSERVED_PROPAGATION
+SUPPORTED_PROPAGATION
+POSSIBLE_PROPAGATION
+UNKNOWN_RELATION
+```
+
+不能因为两个问题同时存在，就自动建立因果链。
+
+---
+
+# 10. Core Propagation States
+
+建议 runtime 至少区分：
+
+```
+NO_PROPAGATION_ESTABLISHED
+LOCAL_SPILLOVER
+MULTI_DOMAIN_PROPAGATION
+SYSTEMIC_PROPAGATION
+PROPAGATION_UNCONFIRMED
+PROPAGATION_RELATION_UNKNOWN
+```
+
+---
+
+## A. `NO_PROPAGATION_ESTABLISHED`
+
+问题目前仍然：
+
+```
+contained
+local
+```
+
+没有足够证据说明它已经改变其他领域。
+
+---
+
+## B. `LOCAL_SPILLOVER`
+
+一个局部问题开始轻度影响邻近领域。
+
+例如：
+
+```
+workload
+→ less family time
+```
+
+但其他系统条件仍稳定。
+
+---
+
+## C. `MULTI_DOMAIN_PROPAGATION`
+
+一个问题已经实质影响两个或以上重要领域。
+
+例如：
+
+```
+work
+→ recovery
+→ family
+→ finance
+```
+
+此时需要重新评估回应层级。
+
+---
+
+## D. `SYSTEMIC_PROPAGATION`
+
+问题不再只是跨几个领域，而开始改变整体生活结构。
+
+例如：
+
+```
+job instability
+→ income instability
+→ housing viability
+→ child schooling
+→ location choice
+```
+
+此时原 Decision Object 甚至可能需要重新打开。
+
+---
+
+## E. `PROPAGATION_UNCONFIRMED`
+
+系统怀疑存在扩散，但证据不足。
+
+---
+
+## F. `PROPAGATION_RELATION_UNKNOWN`
+
+多个领域同时出问题，但：
+
+```
+whether A causes B
+```
+
+尚无法确定。
+
+---
+
+# 11. `allowedInference`
+
+NAV-14 可以：
+
+## A. 识别一个条件已经产生 secondary effects
+
+例如：
+
+```
+work hours increased
+```
+
+用户明确报告：
+
+```
+less sleep
+less family time
+```
+
+可以建立：
+
+```
+SUPPORTED_PROPAGATION
+```
+
+---
+
+## B. 识别问题正在进入更多领域
+
+例如：
+
+```
+financial pressure
+→ postponing medical care
+→ relationship conflict
+```
+
+可以标记：
+
+```
+MULTI_DOMAIN_PROPAGATION
+```
+
+前提是各 link 有现实支持。
+
+---
+
+## C. 识别扩散使优先级发生变化
+
+例如：
+
+原本 Decision Object：
+
+```
+怎样提升职业成长
+```
+
+但后来：
+
+```
+job demands
+→ severe financial / family / capacity constraints
+```
+
+那么当前重点可能从：
+
+```
+growth optimization
+```
+
+转为：
+
+```
+stability preservation
+```
+
+系统可以提出：
+
+```
+PRIORITY_REASSESSMENT_REQUIRED
+```
+
+但不能自行设定最终价值优先级。
+
+---
+
+## D. 识别 secondary effect 反过来强化原问题
+
+例如：
+
+```
+workload
+→ poor recovery
+→ lower work capacity
+→ more overtime
+```
+
+可以标记：
+
+```
+PROPAGATION_LOOP
+```
+
+---
+
+## E. 识别扩散仍可被局部阻断
+
+例如：
+
+```
+workload
+→ childcare disruption
+```
+
+如果 childcare support 可以恢复，则：
+
+```
+PROPAGATION_INTERRUPTIBLE
+```
+
+可以成为后续行动候选。
+
+---
+
+# 12. `forbiddenInference`
+
+NAV-14 严禁：
+
+## A. 把相关性自动写成因果传播
+
+禁止：
+
+```
+睡眠变差
++
+财务压力增加
+→ 财务压力导致睡眠变差
+```
+
+除非来源支持。
+
+---
+
+## B. 把领域数量当严重度分数
+
+禁止：
+
+```
+4 domains affected
+→ severity 4
+```
+
+不同领域的重要性与后果不同。
+
+---
+
+## C. 用 symbolic reading 建立现实传播链
+
+禁止：
+
+```
+BaZi shows pressure in career and wealth
+→ career problem spreading to finance
+```
+
+---
+
+## D. 把一个人的问题自动投射到其他人
+
+例如：
+
+```
+user stressed
+→ partner relationship damaged
+```
+
+必须有现实 evidence。
+
+---
+
+## E. 把任何 secondary effect 都升级成 SYSTEMIC
+
+局部外溢不等于结构性扩散。
+
+---
+
+## F. 因为扩散存在就直接建议最大改变
+
+```
+MULTI_DOMAIN_PROPAGATION
+≠
+STRUCTURAL_EXIT_REQUIRED
+```
+
+---
+
+# 13. `decisionEffect`
+
+NAV-14 主要影响：
+
+```
+PRIORITY_REASSESSMENT
+RESPONSE_LEVEL
+OPTION_WEIGHT
+ACTION_SCALE
+ESCALATION_REQUIREMENT
+STRUCTURAL_CHANGE_ADMISSION
+```
+
+其核心 effect：
+
+```
+PRIORITY_REORDERING
+```
+
+但不是系统替用户决定价值排序。
+
+---
+
+# 14. `decisionThresholdEffect`
+
+当影响从：
+
+```
+LOCAL
+```
+
+扩展到：
+
+```
+MULTI_DOMAIN
+```
+
+或：
+
+```
+SYSTEMIC
+```
+
+时，通常需要提高：
+
+```
+evidence attention
+coordination requirement
+affected-party review
+professional review where relevant
+```
+
+同时，继续维持当前路径也可能需要更高的重新证明。
+
+原则：
+
+> **跨领域影响越广，越不能只从原问题所在领域判断下一步。**
+
+---
+
+# 15. `authorityBoundary`
+
+NAV-14 可以：
+
+- 建立传播图；
+- 标记 secondary effects；
+- 标记 propagation loops；
+- 标记跨领域影响；
+- 触发 priority reassessment；
+- 触发更高 response level；
+- 建议其他领域需要进入 Navigation。
+
+NAV-14 不可以：
+
+- 在没有证据时建立因果链；
+- 自动决定哪个生活领域最重要；
+- 自动覆盖用户价值；
+- 自动将扩散解释为失败；
+- 自动升级至结构退出。
+
+---
+
+# 16. `humanDecisionBoundary`
+
+当一个问题开始跨领域扩散时，Navigation 可以说：
+
+> 这个问题现在已经同时影响工作、家庭与财务，因此不再适合只从工作效率来判断。
+
+但不能直接说：
+
+> 家庭一定应该优先于职业。
+
+用户必须参与确认：
+
+```
+which domain cannot be sacrificed
+which cost remains acceptable
+which consequence matters most
+```
+
+这会为 NAV-19 Value Preservation 建立基础。
+
+---
+
+# 17. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.16｜问题扩散以后，优先级为什么会改变
+```
+
+相关：
+
+```
+15.11｜变化什么时候取得决策意义
+15.12｜回应可以有不同等级
+15.13｜还在运行，究竟能证明什么
+15.14｜维持成本什么时候改变决定
+15.17｜容量什么时候成为硬约束
+```
+
+---
+
+# 18. `relatedBookFoundations`
+
+## Book II｜Reality Runtime
+
+提供：
+
+```
+multi-domain human runtime
+interaction between roles and responsibilities
+```
+
+NAV-14 不重新解释这些运行机制。
+
+---
+
+## Book III｜Reality Continuity
+
+提供：
+
+```
+propagation
+load transfer
+maintenance burden
+cross-system strain
+```
+
+NAV-14 只问：
+
+> **当这些传播已经发生时，它们是否足以改变下一步的优先级与回应范围？**
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+evidence boundary
+causal caution
+uncertainty
+```
+
+支持：
+
+```
+co-occurrence
+≠
+causation
+```
+
+---
+
+# 19. `profileConsumer`
+
+Profile 可以帮助说明：
+
+```
+which domains are usually more sensitive
+where repeated friction appears
+```
+
+但不能证明：
+
+```
+actual propagation occurred
+```
+
+例如：
+
+```
+Profile:
+high relationship sensitivity
+```
+
+不等于：
+
+```
+career pressure has harmed relationship
+```
+
+---
+
+# 20. `financialConsumer`
+
+Financial 可以非常清楚地显示传播。
+
+例如：
+
+```
+job loss
+→ income reduction
+→ liquidity decline
+→ housing viability
+```
+
+或者：
+
+```
+care responsibility
+→ reduced work hours
+→ income reduction
+```
+
+这些可以成为：
+
+```
+SUPPORTED_PROPAGATION
+```
+
+---
+
+# 21. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能：
+
+```
+highlight domains worth checking
+```
+
+不得：
+
+```
+establish real propagation
+establish causality
+assign priority
+```
+
+---
+
+# 22. `currentRealityConsumer`
+
+Current Reality 是 NAV-14 的主要 producer。
+
+建议至少提供：
+
+```
+primaryChange
+secondaryEffects
+affectedDomains
+observedSequence
+persistence
+feedbackLoops
+uncertainties
+```
+
+---
+
+# 23. `runtimeConsumer`
+
+NAV-14 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+尤其重要：
+
+一个入口的 Navigation 不能只停留在自己的产品 silo。
+
+例如：
+
+```
+Career Navigation
+```
+
+如果发现：
+
+```
+financial impact
+family impact
+```
+
+必须允许：
+
+```
+cross-domain context admission
+```
+
+但不能偷偷替另一个领域做决定。
+
+---
+
+# 24. `academyConsumer`
+
+Academy 可投影为：
+
+> **A local problem changes character when its consequences stop being local.**
+
+中文：
+
+> **当一个问题的后果不再停留在原来的领域，它本身也已经不再只是原来的局部问题。**
+
+---
+
+# 25. `revisionTriggers`
+
+以下情况必须重开 NAV-14：
+
+```
+newDomainAffected
+secondaryEffectAppears
+secondaryEffectResolves
+propagationLoopAppears
+propagationInterrupted
+newEvidence
+userCorrectsRelationship
+professionalInput
+currentRealityUpdated
+decisionObjectChanged
+```
+
+---
+
+# 26. Canonical Propagation Model
+
+建议：
+
+```
+{
+  "propagationId": "",
+  "primaryCondition": "",
+  "state": "NO_PROPAGATION_ESTABLISHED | LOCAL_SPILLOVER | MULTI_DOMAIN_PROPAGATION | SYSTEMIC_PROPAGATION | PROPAGATION_UNCONFIRMED | PROPAGATION_RELATION_UNKNOWN",
+  "originDomain": "",
+  "affectedDomains": [],
+  "links": [],
+  "feedbackLoops": [],
+  "interruptiblePoints": [],
+  "priorityEffects": [],
+  "unknowns": [],
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 27. Propagation Link Model
+
+每一条传播关系建议单独保存：
+
+```
+{
+  "from": "",
+  "to": "",
+  "relationState": "OBSERVED_PROPAGATION | SUPPORTED_PROPAGATION | POSSIBLE_PROPAGATION | UNKNOWN_RELATION",
+  "evidence": [],
+  "asOf": ""
+}
+```
+
+这可以防止系统画出漂亮的箭头以后，把箭头本身误当成事实。
+
+---
+
+# 28. Co-Occurrence Rule
+
+冻结：
+
+> **Two conditions appearing together do not establish that one propagated into the other.**
+
+中文：
+
+> **两个条件同时出现，并不能证明其中一个传播成了另一个。**
+
+如果因果关系未知：
+
+```
+PROPAGATION_RELATION_UNKNOWN
+```
+
+必须合法保留。
+
+---
+
+# 29. Scope Expansion Rule
+
+如果原 Decision Object 是：
+
+```
+career
+```
+
+但现实影响已经扩展到：
+
+```
+family
+financial
+capacity
+```
+
+并不一定立刻创建三个新的 Decision Object。
+
+系统首先应判断：
+
+```
+same decision with wider consequence scope?
+```
+
+还是：
+
+```
+multiple separate decisions now exist?
+```
+
+如果后者成立，应返回：
+
+```
+NAV-01
+SPLIT_REQUIRED
+```
+
+---
+
+# 30. Priority Reassessment Rule
+
+传播会改变 priority，当且仅当：
+
+```
+secondary effects
+materially change
+what must be protected or resolved first
+```
+
+例如：
+
+原问题：
+
+```
+career growth
+```
+
+后来发现：
+
+```
+cash runway = 1 month
+```
+
+那么短期：
+
+```
+financial continuity
+```
+
+可能需要先获得决策关注。
+
+但这不是永久价值排序。
+
+而是：
+
+```
+CURRENT NAVIGATION PRIORITY
+```
+
+---
+
+# 31. Propagation Loop Rule
+
+如果出现：
+
+```
+A → B → C → A
+```
+
+例如：
+
+```
+work overload
+→ low recovery
+→ lower work capacity
+→ more overtime
+```
+
+应标记：
+
+```
+PROPAGATION_LOOP
+```
+
+因为此时单点调整可能不足。
+
+但仍不自动推出 structural change。
+
+---
+
+# 32. Propagation Interruptibility Rule
+
+Navigation 应识别：
+
+```
+where the chain can be interrupted
+```
+
+例如：
+
+```
+workload
+→ childcare disruption
+→ family conflict
+```
+
+如果增加照护支持可以阻断传播，则应保留：
+
+```
+INTERRUPTION_POINT
+```
+
+作为后续候选。
+
+这使 Navigation 不会把：
+
+```
+origin problem
+```
+
+直接等同于：
+
+```
+must remove origin entirely
+```
+
+---
+
+# 33. Cross-Domain Cost Rule
+
+同一个后果不能重复计算。
+
+例如：
+
+```
+reduced work hours
+→ lower income
+```
+
+在 Financial 与 Career 两处都出现时，系统应保持同一 source lineage。
+
+不得把它统计成两个独立损失来夸大影响。
+
+---
+
+# 34. Domain Priority Is Not Domain Value
+
+冻结：
+
+> **A domain can become the current navigation priority without becoming the most important domain in a person’s life.**
+
+中文：
+
+> **一个领域可以暂时成为当前 Navigation 的优先处理对象，却不代表它因此成为这个人生命中最重要的领域。**
+
+例如：
+
+```
+urgent housing problem
+```
+
+可以暂时取得 priority，
+
+但不代表：
+
+```
+housing > family > career
+```
+
+成为永久价值排序。
+
+---
+
+# 35. Customer Projection Example
+
+内部：
+
+```
+Origin:
+Work
+
+Primary change:
+workload +40%
+
+Propagation:
+Work → Recovery
+SUPPORTED
+
+Recovery → Family Coordination
+USER_REPORTED / SUPPORTED
+
+Family Coordination → Additional Care Cost
+VERIFIED FINANCIAL
+
+State:
+MULTI_DOMAIN_PROPAGATION
+```
+
+客户可以看到：
+
+> **这个问题现在已经不只是工作量的问题。**
+> 
+> 最初发生变化的是工作：工时持续上升；随后受到影响的是恢复时间，而恢复不足又开始改变家庭安排，现在额外的照护安排已经进入实际支出。也就是说，工作问题的后果已经进入家庭与财务两个领域。
+> 
+> 这并不自动说明你必须离开工作，但它意味着接下来不能再只问“工作还能不能撑”，而需要同时判断：当前收入值得用多少恢复、家庭协调和财务弹性去交换，以及这条传播链能不能在较小的位置被截断。
+
+---
+
+# 36. Customer Actions
+
+允许：
+
+```
+Confirm propagation
+Correct relationship
+Add affected domain
+Mark relation unknown
+Identify interruption point
+Reassess priority
+Split decision
+Continue
+```
+
+---
+
+# 37. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+NO_PROPAGATION
+LOCAL_SPILLOVER
+MULTI_DOMAIN_PROPAGATION
+SYSTEMIC_PROPAGATION
+PROPAGATION_UNCONFIRMED
+PRIORITY_REASSESSMENT_REQUIRED
+REOPENED
+```
+
+---
+
+# 38. Fail-Closed Conditions
+
+以下情况不得进入 NAV-15：
+
+```
+propagationFabricated
+correlationPresentedAsCausation
+criticalAffectedDomainIgnored
+symbolicReadingUsedAsPropagationEvidence
+thirdPartyImpactAssumedWithoutEvidence
+doubleCountedCrossDomainCost
+currentRealityStale
+decisionObjectScopeAmbiguous
+```
+
+---
+
+# 39. Canonical Runtime Rule
+
+> **Navigation must reassess the scope of a problem when its consequences materially propagate beyond the domain in which the problem first appeared.**
+
+中文：
+
+> **当一个问题的后果已经实质传播到它最初所在领域之外时，Navigation 必须重新评估这个问题真正的处理范围。**
+
+---
+
+# 40. Canonical Causality Rule
+
+> **Cross-domain co-occurrence must not be presented as propagation unless the relationship is observed, supported, or explicitly retained as uncertain.**
+
+中文：
+
+> **多个领域同时出现变化，并不能自动被写成传播；只有在关系已经被观察、获得支持，或被明确保留为未知时，Navigation 才能建立相应关联。**
+
+---
+
+# 41. Canonical Priority Rule
+
+> **Propagation can change what requires attention first without determining what matters most in a person’s life.**
+
+中文：
+
+> **跨领域扩散可以改变当前最需要先处理什么，却不能替一个人决定生命中什么最重要。**
+
+---
+
+# 42. Canonical Containment Rule
+
+> **When propagation can be interrupted at a smaller and more reversible point, that interruption must remain visible before the origin path is treated as requiring complete removal.**
+
+中文：
+
+> **当传播能够在更小、更可逆的位置被阻断时，这个阻断点必须保持可见，而不能直接把移除最初路径当成唯一答案。**
+
+---
+
+# 43. Final Canonical Form
+
+```
+NAV-14
+CROSS-DOMAIN PROPAGATION
+```
+
+**Input**
+
+```
+Decision-Relevant Change
++
+Observed Secondary Effects
++
+Affected Domains
+```
+
+**Process**
+
+```
+Determine:
+Where Did It Start?
+Where Has It Spread?
+Which Links Are Supported?
+Has Priority Changed?
+Can Propagation Be Interrupted?
+Has the Decision Scope Expanded?
+```
+
+**Output**
+
+```
+Cross-Domain Propagation Map
++
+Priority Reassessment State
+```
+
+**Boundary**
+
+```
+More affected domains do not automatically mean a bigger action.
+Propagation changes scope before it changes the answer.
+```
+# NAV-15｜Capacity Constraint
+
+## 容量约束｜一个方案即使很好，什么时候也已经不具备现实资格
+
+**Canonical Question｜规范问题**
+
+> **当一个人、家庭、组织或系统已经没有足够容量承受下一步时，为什么“理论上正确”仍然不等于“现实上可行”？**
+
+---
+
+## 1. `moduleId`
+
+```
+NAV-15
+```
+
+## 2. `canonicalTitleZh`
+
+```
+容量约束
+```
+
+## 3. `canonicalTitleEn`
+
+```
+Capacity Constraint
+```
+
+## 4. `canonicalQuestion`
+
+```
+当一个人、家庭、组织或系统已经没有足够容量承受下一步时，
+为什么“理论上正确”仍然不等于“现实上可行”？
+```
+
+---
+
+# 5. `definition`
+
+**Capacity Constraint** 是 Navigation 对“当前现实究竟还有多少能力承受、执行、维持并恢复某项行动”进行正式判断的机制。
+
+它不是简单问：
+
+> “这个方案好不好？”
+
+也不是：
+
+> “这个人够不够努力？”
+
+更不是：
+
+```
+motivation
+=
+capacity
+```
+
+它真正回答的是：
+
+> **当前系统是否拥有足够的现实容量，把一个候选方案从想法推进成可以承担、可以维持、可以恢复的行动？**
+
+一个方案可能：
+
+```
+strategically sound
+financially attractive
+personally meaningful
+long-term valuable
+```
+
+却仍然因为：
+
+```
+time unavailable
+cash unavailable
+attention saturated
+care responsibilities high
+operational bandwidth exhausted
+recovery insufficient
+```
+
+而暂时不具备现实资格。
+
+因此：
+
+> **NAV-15 的核心不是评价方案价值，而是判断现实是否还有能力承载它。**
+
+---
+
+# 6. `navigationMeaning`
+
+Navigation 如果忽略 Capacity，会形成一种危险错觉：
+
+```
+Good Option
+→ Should Execute
+```
+
+但现实真正需要的是：
+
+```
+Good Option
++
+Enough Capacity
+→ May Become Executable
+```
+
+例如：
+
+```
+创业
+```
+
+可能长期方向正确；
+
+但如果当前：
+
+```
+现金缓冲不足
+家庭照护责任高
+现职每周60小时
+没有执行时间
+```
+
+那么真正的问题并不是：
+
+> 创业值不值得。
+
+而是：
+
+> **当前现实有没有容量让创业成为一个可承担的选项？**
+
+因此 NAV-15 建立：
+
+```
+Candidate Option
+↓
+Required Capacity
+↓
+Available Capacity
+↓
+Capacity Gap
+↓
+Current Eligibility
+```
+
+---
+
+# 7. `requiredInputs`
+
+NAV-15 最低需要：
+
+```
+candidateOptionOrResponse
+currentPosition
+maintenanceCostState
+crossDomainPropagationState
+timeAssessment
+reversibilityProfile
+knownResponsibilities
+knownAvailableResources
+```
+
+以及：
+
+```
+requiredCapacity
+availableCapacity
+```
+
+如果其中任一关键项未知，应保留：
+
+```
+CAPACITY_UNKNOWN
+```
+
+---
+
+# 8. `optionalInputs`
+
+```
+financialNavigationProjection
+currentRealityProjection
+relationshipContext
+workloadContext
+professionalInput
+careResponsibilityContext
+priorNavigationState
+recoveryContext
+locationContext
+organizationalContext
+```
+
+这些用于判断：
+
+- 有多少容量；
+- 哪一类容量成为瓶颈；
+- 容量能否恢复；
+- 是否只是暂时不足；
+- 是否能通过重新分配取得容量。
+
+---
+
+# 9. `inputAuthorityClasses`
+
+允许：
+
+```
+USER_REPORTED
+DIRECTLY_OBSERVED
+VERIFIED_ACCOUNT_DATA
+FINANCIAL_RECORD
+PROFESSIONAL_INPUT
+CURRENT_EXTERNAL_EVIDENCE
+PROFILE_EVIDENCE
+REPORT_INTERPRETATION
+SYMBOLIC_READING
+PRIOR_NAVIGATION_STATE
+```
+
+但现实 Capacity 必须主要来自：
+
+```
+CURRENT_RESOURCE
+OBSERVED_LOAD
+VERIFIED_COMMITMENT
+MATERIAL_CONDITION
+PROFESSIONAL_INPUT
+```
+
+不能因为：
+
+```
+Profile says resilient
+```
+
+就推断：
+
+```
+capacity sufficient
+```
+
+---
+
+# 10. Core Capacity Dimensions
+
+建议至少区分：
+
+```
+FINANCIAL_CAPACITY
+TIME_CAPACITY
+ATTENTION_CAPACITY
+OPERATIONAL_CAPACITY
+RECOVERY_CAPACITY
+RELATIONAL_CAPACITY
+RESPONSIBILITY_CAPACITY
+SKILL_CAPACITY
+INSTITUTIONAL_CAPACITY
+```
+
+---
+
+## A. `FINANCIAL_CAPACITY`
+
+包括：
+
+```
+liquidity
+cash flow
+debt headroom
+available capital
+financial buffer
+```
+
+不是：
+
+```
+total asset value
+```
+
+自动等于：
+
+```
+usable capacity
+```
+
+---
+
+## B. `TIME_CAPACITY`
+
+回答：
+
+> 现实中真的还有多少可以投入的新时间？
+
+例如：
+
+```
+24 hours available
+```
+
+显然不能因为日历上存在空白，就视为可投入容量。
+
+---
+
+## C. `ATTENTION_CAPACITY`
+
+某个人即使还有时间，也未必还有足够：
+
+```
+cognitive bandwidth
+decision bandwidth
+coordination bandwidth
+```
+
+来承担新的复杂任务。
+
+---
+
+## D. `OPERATIONAL_CAPACITY`
+
+对企业、家庭或项目而言：
+
+```
+people
+systems
+processes
+execution bandwidth
+```
+
+是否还能承担新的结构。
+
+---
+
+## E. `RECOVERY_CAPACITY`
+
+当前系统是否还有足够恢复空间，使投入可以持续。
+
+NAV-15 只消费 Book III / Current Reality 已建立的 recovery 状态，不自行诊断。
+
+---
+
+## F. `RELATIONAL_CAPACITY`
+
+涉及共同生活或协作时：
+
+```
+coordination
+communication
+care
+conflict load
+```
+
+也会成为真实 Capacity。
+
+---
+
+## G. `RESPONSIBILITY_CAPACITY`
+
+当前承担的：
+
+```
+children
+parents
+employees
+debts
+clients
+care obligations
+```
+
+会限制新增责任。
+
+---
+
+## H. `SKILL_CAPACITY`
+
+拥有兴趣不等于拥有执行能力。
+
+必须区分：
+
+```
+willingness
+potential
+current executable skill
+```
+
+---
+
+## I. `INSTITUTIONAL_CAPACITY`
+
+组织可能有：
+
+```
+budget
+approval
+headcount
+legal authority
+system readiness
+```
+
+等容量边界。
+
+---
+
+# 11. Core Capacity States
+
+建议 runtime 至少区分：
+
+```
+CAPACITY_SUFFICIENT
+CAPACITY_SUFFICIENT_WITH_BUFFER
+CAPACITY_TIGHT
+CAPACITY_CONSTRAINED
+CAPACITY_DEFICIT
+CAPACITY_UNKNOWN
+```
+
+---
+
+## A. `CAPACITY_SUFFICIENT_WITH_BUFFER`
+
+当前资源不仅够执行，还保留：
+
+```
+error margin
+recovery margin
+unexpected demand margin
+```
+
+---
+
+## B. `CAPACITY_SUFFICIENT`
+
+足够执行，但缓冲有限。
+
+---
+
+## C. `CAPACITY_TIGHT`
+
+理论可执行，但：
+
+```
+small disruption
+```
+
+可能使方案失去稳定性。
+
+---
+
+## D. `CAPACITY_CONSTRAINED`
+
+某个关键维度已经限制方案规模、速度或时点。
+
+---
+
+## E. `CAPACITY_DEFICIT`
+
+当前缺少执行该方案所需的最低容量。
+
+这意味着：
+
+```
+OPTION_NOT_CURRENTLY_ELIGIBLE
+```
+
+而不是：
+
+```
+OPTION_BAD
+```
+
+---
+
+# 12. `allowedInference`
+
+NAV-15 可以：
+
+## A. 判断当前资源是否覆盖最低执行要求
+
+例如：
+
+```
+required runway = 6 months
+available runway = 2 months
+```
+
+则：
+
+```
+FINANCIAL_CAPACITY_DEFICIT
+```
+
+---
+
+## B. 判断方案是否需要缩小规模
+
+例如：
+
+```
+full launch
+```
+
+需要：
+
+```
+20h/week
+```
+
+但当前只有：
+
+```
+5h/week realistically available
+```
+
+可以标记：
+
+```
+ACTION_SCALE_CONSTRAINED
+```
+
+---
+
+## C. 识别单一 Capacity 瓶颈
+
+例如：
+
+```
+money sufficient
+skill sufficient
+time insufficient
+```
+
+则真正约束为：
+
+```
+TIME_CAPACITY
+```
+
+而不是泛泛说：
+
+> 你还没准备好。
+
+---
+
+## D. 识别多重容量同时不足
+
+例如：
+
+```
+financial tight
+time tight
+recovery tight
+```
+
+可以标记：
+
+```
+MULTI_CAPACITY_CONSTRAINT
+```
+
+---
+
+## E. 识别容量可以被重新建立
+
+例如：
+
+```
+reduce workload
+increase savings
+delegate care
+finish training
+```
+
+可能提高 Capacity。
+
+因此：
+
+```
+capacity deficit
+```
+
+不等于永久关闭。
+
+---
+
+# 13. `forbiddenInference`
+
+NAV-15 严禁：
+
+## A. 把意愿当容量
+
+禁止：
+
+```
+“我非常想做”
+→ capacity sufficient
+```
+
+---
+
+## B. 把努力程度当容量
+
+禁止：
+
+```
+“再努力一点”
+→ capacity restored
+```
+
+---
+
+## C. 把人格特质当执行资源
+
+禁止：
+
+```
+resilient
+disciplined
+strong
+→ can carry more
+```
+
+---
+
+## D. 把理论资源当可用资源
+
+例如：
+
+```
+family might lend money
+```
+
+不能直接进入：
+
+```
+AVAILABLE_FINANCIAL_CAPACITY
+```
+
+---
+
+## E. 把所有时间都视为可投入容量
+
+工作、睡眠、照护、恢复已经占用的时间不是自由资源。
+
+---
+
+## F. 用 Method Reading 建立现实 Capacity
+
+禁止：
+
+```
+BaZi says strong resource
+→ financial capacity sufficient
+```
+
+---
+
+## G. 把 Capacity Deficit 解释成人的能力不足
+
+```
+SYSTEM CAPACITY
+≠
+PERSONAL WORTH
+```
+
+---
+
+# 14. `decisionEffect`
+
+NAV-15 主要影响：
+
+```
+OPTION_ELIGIBILITY
+ACTION_SCALE
+WAIT_ACT_BALANCE
+PREPARATION_REQUIREMENT
+DECISION_THRESHOLD
+ESCALATION_REQUIREMENT
+```
+
+核心 effect：
+
+```
+REALITY_ELIGIBILITY
+```
+
+---
+
+# 15. `decisionThresholdEffect`
+
+Capacity 不足不会让 Decision Sufficiency 自动降低。
+
+恰恰相反：
+
+如果方案需要：
+
+```
+near-total available capacity
+```
+
+那么现实容错率下降。
+
+因此可能需要：
+
+```
+higher evidence
+smaller action
+more buffer
+more contingency
+```
+
+冻结原则：
+
+> **A plan that requires nearly all available capacity carries a different decision burden from a plan that leaves meaningful reserve.**
+
+中文：
+
+> **一个需要耗尽几乎全部可用容量的方案，与一个仍然保留实质缓冲的方案，承担的是不同等级的决策责任。**
+
+---
+
+# 16. `authorityBoundary`
+
+NAV-15 可以：
+
+- 识别容量；
+- 识别瓶颈；
+- 判断容量缺口；
+- 限制 action scale；
+- 标记准备需求；
+- 标记需要 buffer；
+- 触发 option eligibility review。
+
+NAV-15 不可以：
+
+- 把 Capacity Deficit 变成永久拒绝；
+- 把人贴成“不够强”；
+- 自动要求牺牲恢复或家庭；
+- 把所有资源换算成单一分数；
+- 用解释系统建立现实容量。
+
+---
+
+# 17. `humanDecisionBoundary`
+
+用户可以决定：
+
+```
+愿意投入多少容量
+愿意保留多少缓冲
+哪些责任不能被挤压
+```
+
+但 Navigation 必须让这些交换可见。
+
+例如：
+
+> 这个方案目前不是绝对做不到，而是需要占用你几乎全部可支配时间，并把财务缓冲压到很低；如果你仍然选择推进，就意味着你正在接受很小的恢复与错误空间。
+
+这是：
+
+```
+visible tradeoff
+```
+
+不是：
+
+```
+system prohibition
+```
+
+---
+
+# 18. `sourceSections`
+
+主要来源：
+
+```
+Book VIII
+15.17｜容量什么时候成为硬约束
+```
+
+相关：
+
+```
+15.14｜维持成本什么时候改变决定
+15.16｜问题扩散以后，优先级为什么会改变
+15.18｜什么时候更多投入已经不再合理
+15.19｜修正参数，还是把重构放进候选
+15.21｜改变以前，先确认什么不能被无意失去
+```
+
+---
+
+# 19. `relatedBookFoundations`
+
+## Book III｜Reality Continuity
+
+Book III 拥有：
+
+```
+capacity
+maintenance load
+recovery
+saturation
+continuity
+```
+
+NAV-15 不重新解释 Capacity 如何形成。
+
+它只问：
+
+> **当前已经存在的容量，对下一步而言够不够？**
+
+---
+
+## Book IV｜Reality Expansion
+
+Book IV 提供：
+
+```
+capacity expansion
+scale
+resource requirement
+```
+
+支持判断：
+
+```
+what capacity must exist before expansion
+```
+
+但 NAV-15 不重新讲扩展机制。
+
+---
+
+## Book VII｜Reality Observation
+
+提供：
+
+```
+measurement
+unknown
+evidence state
+```
+
+支持：
+
+```
+capacity not measured
+≠
+capacity unlimited
+```
+
+---
+
+# 20. `profileConsumer`
+
+Profile 可以提示：
+
+```
+preferred workload
+friction patterns
+adaptation style
+decision style
+```
+
+但只能作为：
+
+```
+CAPACITY_CONTEXT
+```
+
+不能直接建立：
+
+```
+CAPACITY_SUFFICIENT
+```
+
+---
+
+# 21. `financialConsumer`
+
+Financial 是 NAV-15 的核心 producer。
+
+可提供：
+
+```
+cash buffer
+liquidity
+debt headroom
+monthly surplus
+fixed commitments
+income concentration
+```
+
+例如：
+
+```
+RM100k assets
+```
+
+不等于：
+
+```
+RM100k available capacity
+```
+
+必须区分：
+
+```
+liquid
+restricted
+committed
+illiquid
+```
+
+---
+
+# 22. `methodConsumer`
+
+AST / BAZI / ZIWEI / NUM / HD / ECR：
+
+只能提供：
+
+```
+INTERPRETIVE_CAPACITY_CONTEXT
+```
+
+不得建立：
+
+```
+real financial
+real time
+real recovery
+real operational capacity
+```
+
+---
+
+# 23. `currentRealityConsumer`
+
+Current Reality 应至少提供：
+
+```
+currentLoad
+currentCommitments
+currentAvailableTime
+currentRecoveryState
+currentResponsibilities
+currentOperationalPressure
+knownBuffers
+unknownBuffers
+```
+
+---
+
+# 24. `runtimeConsumer`
+
+NAV-15 可被：
+
+```
+My Reality Navigation
+Career Navigation
+Financial Navigation
+Relationship Navigation
+Estate Navigation
+Professional Handoff
+Report Follow-up
+```
+
+消费。
+
+尤其用于避免：
+
+```
+good idea
+→ immediate recommendation
+```
+
+这种错误。
+
+---
+
+# 25. `academyConsumer`
+
+Academy 可投影为：
+
+> **A good option is not yet a real option if the system cannot carry it.**
+
+中文：
+
+> **一个方案即使很好，如果现实没有能力承载它，它还不是一个真正可执行的选项。**
+
+---
+
+# 26. `revisionTriggers`
+
+以下情况必须重开 NAV-15：
+
+```
+incomeChanged
+liquidityChanged
+workloadChanged
+careResponsibilityChanged
+newSkillAcquired
+newSupportAppeared
+recoveryStateChanged
+delegationAvailable
+institutionalResourceChanged
+actionScaleChanged
+newProfessionalInput
+timeWindowChanged
+```
+
+---
+
+# 27. Canonical Capacity Model
+
+建议：
+
+```
+{
+  "capacityAssessmentId": "",
+  "optionId": "",
+  "requiredCapacity": {
+    "financial": [],
+    "time": [],
+    "attention": [],
+    "operational": [],
+    "recovery": [],
+    "relational": [],
+    "responsibility": [],
+    "skill": [],
+    "institutional": []
+  },
+  "availableCapacity": {},
+  "constraints": [],
+  "buffers": [],
+  "unknowns": [],
+  "state": "CAPACITY_SUFFICIENT_WITH_BUFFER | CAPACITY_SUFFICIENT | CAPACITY_TIGHT | CAPACITY_CONSTRAINED | CAPACITY_DEFICIT | CAPACITY_UNKNOWN",
+  "sources": [],
+  "status": ""
+}
+```
+
+---
+
+# 28. Required vs Available Rule
+
+冻结：
+
+```
+REQUIRED CAPACITY
+≠
+AVAILABLE CAPACITY
+```
+
+Navigation 必须显式比较两者。
+
+不能只知道：
+
+```
+user has RM50k
+```
+
+还必须问：
+
+```
+how much is actually available for this decision?
+```
+
+---
+
+# 29. Buffer Rule
+
+容量判断不能只看：
+
+```
+can just barely execute
+```
+
+还要看：
+
+```
+what happens if reality deviates?
+```
+
+因此建议保留：
+
+```
+CAPACITY_BUFFER
+```
+
+包括：
+
+```
+financial buffer
+time buffer
+recovery buffer
+operational buffer
+```
+
+---
+
+# 30. Saturation Rule
+
+当：
+
+```
+available capacity ≈ current commitments
+```
+
+新增方案可能进入：
+
+```
+SATURATION_RISK
+```
+
+但 NAV-15 不重新解释 saturation mechanism。
+
+它只将其作为：
+
+```
+ACTION_SCALE_CONSTRAINT
+```
+
+---
+
+# 31. Capacity Transfer Rule
+
+系统不能假设一种容量可以自由替代另一种。
+
+例如：
+
+```
+more money
+```
+
+未必能替代：
+
+```
+parental presence
+sleep
+legal authority
+specialized skill
+```
+
+因此禁止建立一个粗糙：
+
+```
+TOTAL_CAPACITY_SCORE
+```
+
+把所有维度混成单一数字。
+
+---
+
+# 32. Borrowed Capacity Rule
+
+有些方案可以依靠：
+
+```
+outsourcing
+family support
+professional support
+credit
+staff
+technology
+```
+
+取得额外容量。
+
+但必须区分：
+
+```
+OWN_CAPACITY
+BORROWED_CAPACITY
+DEPENDENT_CAPACITY
+```
+
+并记录：
+
+```
+cost
+reliability
+duration
+consent
+```
+
+---
+
+# 33. Capacity Dependency Rule
+
+如果方案只有在某个未确认资源成立时才可执行：
+
+例如：
+
+```
+“如果父母能帮忙照顾孩子，我就能做。”
+```
+
+则状态应是：
+
+```
+CONDITIONALLY_CAPACITY_SUFFICIENT
+```
+
+而不是：
+
+```
+CAPACITY_SUFFICIENT
+```
+
+建议可作为扩展 state 或 constraint flag。
+
+---
+
+# 34. Capacity Deficit Rule
+
+冻结：
+
+> **Capacity deficit means “not currently carryable,” not “never possible.”**
+
+中文：
+
+> **容量不足意味着“当前现实还承载不了”，而不是“永远不可能”。**
+
+这与 NAV-03 的：
+
+```
+NOT_YET_OPEN
+```
+
+直接连接。
+
+---
+
+# 35. Action Scale Rule
+
+当：
+
+```
+full option exceeds capacity
+```
+
+但：
+
+```
+smaller version fits
+```
+
+Navigation 可以暴露：
+
+```
+LOWER_SCALE_VARIANT
+```
+
+例如：
+
+```
+full business launch
+→ weekend pilot
+
+full degree
+→ one course
+
+full relocation
+→ temporary stay
+```
+
+但不能自动把小方案设成最终选择。
+
+---
+
+# 36. Capacity Preservation Rule
+
+Navigation 不只需要问：
+
+```
+Can we do this?
+```
+
+还必须问：
+
+```
+What capacity remains after doing it?
+```
+
+因此：
+
+```
+postActionCapacity
+```
+
+必须可进入后续判断。
+
+一个行动如果执行后留下：
+
+```
+near-zero recovery margin
+near-zero liquidity
+no operational buffer
+```
+
+即使 technically feasible，也不等于现实上稳健。
+
+---
+
+# 37. Capacity and Other People Rule
+
+如果一个方案依赖其他人：
+
+```
+partner
+parent
+employee
+childcare provider
+team
+```
+
+必须区分：
+
+```
+their capacity
+their consent
+their obligation
+```
+
+不能把：
+
+```
+“他们应该可以帮忙”
+```
+
+直接写成 available capacity。
+
+---
+
+# 38. Capacity vs Willingness Rule
+
+冻结：
+
+> **Willingness can justify bearing a cost; it cannot manufacture capacity that does not exist.**
+
+中文：
+
+> **意愿可以解释为什么一个人愿意承担某项成本，却不能凭空制造原本不存在的容量。**
+
+---
+
+# 39. Capacity vs Potential Rule
+
+冻结：
+
+> **Potential describes what may become possible; capacity describes what reality can carry now.**
+
+中文：
+
+> **潜力描述未来可能变得可行的东西；容量描述此刻现实真正承载得了什么。**
+
+---
+
+# 40. Customer Projection Example
+
+内部：
+
+```
+Option:
+Start business immediately
+
+Required:
+6 months runway
+20 hours/week
+operational attention
+basic sales capability
+
+Available:
+2.5 months runway
+5–7 hours/week
+high existing care responsibility
+
+State:
+CAPACITY_DEFICIT
+```
+
+客户可以看到：
+
+> **现在真正限制这个方向的，并不是它有没有价值，而是现实暂时还承载不了完整版本。**
+> 
+> 你已经拥有部分技能和明确兴趣，但目前可用于新事业的时间只有每周大约五至七小时，现金缓冲也明显低于完整启动所需要的范围，同时现有家庭责任并没有减少。这意味着“创业”并没有被关闭，只是“现在直接完整启动”暂时还没有取得现实资格；下一步如果仍想保留这个方向，更有意义的问题会变成：需要先建立哪些容量，或者是否存在一个规模更小、可逆性更高的版本。
+
+---
+
+# 41. Customer Actions
+
+允许：
+
+```
+Confirm capacity
+Correct capacity
+Add resource
+Add responsibility
+Identify bottleneck
+Build capacity first
+Compare smaller option
+Continue
+```
+
+---
+
+# 42. `status`
+
+建议：
+
+```
+UNFORMED
+PARTIAL
+CAPACITY_SUFFICIENT_WITH_BUFFER
+CAPACITY_SUFFICIENT
+CAPACITY_TIGHT
+CAPACITY_CONSTRAINED
+CAPACITY_DEFICIT
+CAPACITY_UNKNOWN
+REOPENED
+```
+
+---
+
+# 43. Fail-Closed Conditions
+
+以下情况不得进入 NAV-16：
+
+```
+requiredCapacityUnknown
+availableCapacityFabricated
+criticalResponsibilityIgnored
+borrowedCapacityAssumedWithoutConsent
+profileUsedAsCapacityEvidence
+symbolicReadingUsedAsCapacityAuthority
+financialCapacityStale
+recoveryCapacityInvented
+decisionObjectChanged
+```
+
+---
+
+# 44. Canonical Runtime Rule
+
+> **Navigation must test whether reality can carry an option before treating that option as currently executable.**
+
+中文：
+
+> **Navigation 在把一个选项视为当前可执行以前，必须先确认现实是否真的有能力承载它。**
+
+---
+
+# 45. Canonical Eligibility Rule
+
+> **An option can remain valuable while temporarily losing execution eligibility because the required capacity is not yet available.**
+
+中文：
+
+> **一个选项可以继续具有价值，却因为所需容量尚未形成，而暂时失去执行资格。**
+
+---
+
+# 46. Canonical Buffer Rule
+
+> **Bare feasibility is not the same as usable capacity; meaningful reserve must remain visible when error, delay, or recovery would matter.**
+
+中文：
+
+> **勉强做得到，并不等于拥有可使用的容量；只要错误、延迟或恢复具有重要后果，必要缓冲就必须保持可见。**
+
+---
+
+# 47. Canonical Non-Substitution Rule
+
+> **Money, time, recovery, skill, authority, and human support are distinct capacities and must not be silently collapsed into one interchangeable score.**
+
+中文：
+
+> **金钱、时间、恢复、技能、权威与他人支持属于不同容量，不能被悄悄压成一个可以互相替代的总分。**
+
+---
+
+# 48. Canonical Human Boundary Rule
+
+> **A person may choose to operate close to their limits, but Navigation must not hide how little capacity remains after the choice.**
+
+中文：
+
+> **人可以选择靠近自己的现实极限行动，但 Navigation 不能隐藏这个选择以后究竟还剩下多少容量。**
+
+---
+
+# 49. Final Canonical Form
+
+```
+NAV-15
+CAPACITY CONSTRAINT
+```
+
+**Input**
+
+```
+Candidate Option
++
+Current Position
++
+Required Capacity
++
+Available Capacity
++
+Existing Responsibilities
+```
+
+**Process**
+
+```
+Assess:
+What Must Be Carried?
+What Capacity Exists?
+Where Is the Bottleneck?
+What Buffer Remains?
+Can Scale Be Reduced?
+Can Capacity Be Built?
+```
+
+**Output**
+
+```
+Capacity Qualification State
+```
+
+**Boundary**
+
+```
+Good does not mean executable.
+Capacity deficit does not mean permanent impossibility.
+```

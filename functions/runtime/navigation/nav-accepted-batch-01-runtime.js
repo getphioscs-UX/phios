@@ -36,7 +36,7 @@ export function evaluateNavigationContracts(snapshot, {ownerId,personId}={}, con
    if(contract.moduleId==='NAV-04'&&item.role!=='INTERPRETIVE_CONTEXT'&&!timeTypes.has(item.type))reasons.push('TIME_RELEVANCE_UNKNOWN');
    if(contract.moduleId==='NAV-05'&&item.role!=='INTERPRETIVE_CONTEXT'&&!consequenceTypes.has(item.consequenceAuthority))reasons.push('CONSEQUENCE_AUTHORITY_UNKNOWN');
   }
-  reasons.push(...validate(contract.moduleId,assessment||{},snapshot||{}));
+  try{reasons.push(...validate(contract.moduleId,assessment||{},snapshot||{}));}catch{reasons.push('MALFORMED_MODULE_MODEL');}
   const events=Array.isArray(snapshot?.revisionEvents)?snapshot.revisionEvents:[];if(events.some(e=>contract.revisionTriggers.includes(e)))reasons.push('REOPEN_REQUIRED');
   results.push({moduleId:contract.moduleId,contractVersion:contract.version,sourceSHA256:contract.sourceSHA256,state:reasons.length?'NEEDS_REVIEW':'READY_FOR_NEXT_ACCEPTED_MODULE',canContinue:reasons.length===0,reasons:[...new Set(reasons)],items:structuredClone(reasons.length?[]:(Array.isArray(items)?items:[])),decisionEffects:contract.decisionEffects,thresholdValue:null});
  }

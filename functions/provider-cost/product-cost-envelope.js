@@ -38,7 +38,7 @@ export async function reserveProductCost(env,{ownerAccountId,envelopeId,requestI
  (request_id,envelope_id,cost_class,context_id,reserved_micro_usd,state,cost_basis,payload_json,created_at)
  SELECT ?1,a.envelope_id,?4,?5,?6,'RESERVED','CONSERVATIVE_PRECALL_BOUND',?7,?8
  FROM provider_product_cost_envelopes a WHERE a.envelope_id=?2 AND a.owner_account_id=?3
- AND EXISTS(SELECT 1 FROM commerce_purchases p JOIN digital_entitlements e ON e.purchase_id=p.purchase_id WHERE p.purchase_id=a.purchase_id AND p.purchase_state='purchased' AND e.customer_id=a.owner_account_id AND e.product_id=a.product_id AND e.entitlement_status='active' AND (e.expires_at IS NULL OR e.expires_at>?8))
+ AND EXISTS(SELECT 1 FROM commerce_purchases p JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id JOIN digital_entitlements e ON e.purchase_id=p.purchase_id WHERE p.purchase_id=a.purchase_id AND p.purchase_state='purchased' AND o.customer_id=a.owner_account_id AND o.review_required=0 AND o.order_state IN ('PAID','FULFILLMENT_PENDING','FULFILLED') AND e.customer_id=a.owner_account_id AND e.product_id=a.product_id AND e.entitlement_status='active' AND (e.expires_at IS NULL OR e.expires_at>?8))
  AND NOT EXISTS(SELECT 1 FROM provider_product_cost_entries WHERE envelope_id=?2 AND state='USAGE_UNKNOWN')
  AND COALESCE((SELECT SUM(COALESCE(measured_micro_usd,reserved_micro_usd)) FROM provider_product_cost_entries WHERE envelope_id=?2),0)+?6<=a.maximum_cost_micro_usd`)
  .bind(requestId,envelopeId,ownerAccountId,costClass,contextId,bound,json,new Date(clock()).toISOString()).run();
