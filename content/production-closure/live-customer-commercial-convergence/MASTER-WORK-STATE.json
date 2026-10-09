@@ -1,8 +1,8 @@
 {
   "authority": "MASTER-AUTHORITY.txt",
   "authorityDigest": "67c321dd393970717377fb4076a9887a2ae2e84c69f42d1ece2b5a7d43c5779c",
-  "head": "941d34f09abc970e465685f34c28a78592d45b8e",
-  "updatedAt": "2026-10-09T08:29:26.802Z",
+  "head": "419db96d465023a47930cb2dc19f11b46208a4d9",
+  "updatedAt": "2026-10-09T08:58:19.912Z",
   "status": "IN_PROGRESS_SOURCE_WORK_REMAINS",
   "productionReady": false,
   "priorWorkbooks": "HISTORICAL_EVIDENCE_ONLY",
@@ -1371,8 +1371,11 @@
         "content/civilization-atlas/snapshots/world-snapshots-v1.json",
         "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-status-v1.json"
       ],
-      "actualChecks": [],
-      "nextStep": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据",
+      "actualChecks": [
+        "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "W31-CONTEXT-BRIDGE-QA.json"
+      ],
+      "nextStep": "Book V current cases/snapshot registries match registered engineering successor but Human decision is PENDING; historical acceptance is retained; Book V external visual access and full contextual Ask answer not verified; Nine accepted dossiers lack source evidence timestamps; acceptance time is not substituted; Some catalog dossiers are not W8-I accepted and remain UNKNOWN; Moomoo current evidence binding is US-only; eight stale claims excluded from current Ask; Legacy cutover checker expects old Book VI route; Book V W15 checker expects old tablist; no frozen assertion changed",
       "liveCustomerDoesNotBlockIndependentSource": true,
       "sourceFiles": [
         {
@@ -1386,7 +1389,24 @@
       ],
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
       "remainingWork": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据",
-      "progress": "部分"
+      "progress": "部分",
+      "atlasStates": {
+        "BOOK_V_SOURCE": "PARTIAL",
+        "BOOK_V_CONSUMER": "PASS",
+        "BOOK_V_CUSTOMER_RENDER": "PARTIAL",
+        "BOOK_V_CONTEXTUAL_ASK": "PARTIAL",
+        "BOOK_VI_DOSSIER_ACCEPTANCE": "PARTIAL",
+        "BOOK_VI_RUNTIME_CONSUMER": "PASS",
+        "BOOK_VI_CUSTOMER_RENDER": "PASS",
+        "BOOK_VI_CURRENTNESS": "PARTIAL",
+        "MOOMOO_EVIDENCE_BINDING": "PARTIAL"
+      },
+      "BOOK_V_CLOSED_LOOP": false,
+      "BOOK_VI_CLOSED_LOOP": false,
+      "FIRST_STOP_NODE": {
+        "BOOK_V": "CURRENT_REGISTRY_SUCCESSOR_HUMAN_ACCEPTANCE",
+        "BOOK_VI": "CURRENTNESS_MISSING_EVIDENCE_TIMESTAMP_FOR_NINE_ACCEPTED_DOSSIERS"
+      }
     },
     {
       "id": "W32",
@@ -1729,12 +1749,12 @@
       "liveCustomerDoesNotBlockIndependentSource": true,
       "verificationVersion": "a30ebe67ab9571d45f36ec96b951e53e3b735b77",
       "buildIdentity": {
-        "currentHead": "941d34f09abc970e465685f34c28a78592d45b8e",
-        "evidenceCommit": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
+        "currentHead": "419db96d465023a47930cb2dc19f11b46208a4d9",
+        "evidenceCommit": "419db96d465023a47930cb2dc19f11b46208a4d9",
         "buildReceipt": "content/production-closure/live-customer-commercial-convergence/MASTER-PAGES-CURRENT-RECEIPT.json",
-        "buildAt": "2026-10-09T08:09:46.654Z",
+        "buildAt": "2026-10-09T08:56:03.343Z",
         "stale": true,
-        "workingTreeDigest": "2be4b15f14c8f6066e7284c5211a706bd8fb6e419292134325093153bb21bfa3",
+        "workingTreeDigest": "6208681ae9f942ded75336ee1878fcf0d8d84224a0822193892a8d464163ae2c",
         "source": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
         "deployed": "NOT_RUN",
         "liveCustomer": "NOT_RUN"
@@ -1940,12 +1960,12 @@
         "actualEvidence": [
           {
             "path": "functions/account/bazi-account-delivery.js",
-            "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
+            "sha256": "2cb7859f942ba21c2dbe4b47ad9ceb21b574480b8b81d7913d2996a219cb8135",
             "scope": "ORCHESTRATION_FAILS_CLOSED"
           },
           {
             "path": "workers/method-report-renderer/index.js",
-            "sha256": "bbd95b389ea7797083d70232f8ed5b9d29e6e4f2697dc2071435788298b54b89",
+            "sha256": "3f88a1434189b9d22eea36405d6515d8d7208b9d1c4ccfe828c096096e663e8a",
             "scope": "CURRENT_ZIWEI_RENDERER_NOT_BZR"
           }
         ],
@@ -2507,7 +2527,7 @@
         },
         {
           "path": "functions/account/bazi-account-delivery.js",
-          "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
+          "sha256": "2cb7859f942ba21c2dbe4b47ad9ceb21b574480b8b81d7913d2996a219cb8135",
           "scope": "INCOMPLETE_BZR_ORCHESTRATION"
         }
       ],
@@ -3924,5 +3944,1349 @@
       "castIdentityMayChange": false,
       "paidProviderAdmission": "NOT_AUTHORIZED"
     }
+  },
+  "atlasTruth": {
+    "currentHead": "419db96d465023a47930cb2dc19f11b46208a4d9",
+    "recordedAt": "2026-10-09T08:54:56.501Z",
+    "scope": "SOURCE_AND_LOCAL_BROWSER_NOT_DEPLOYED_OR_LIVE_CUSTOMER",
+    "states": {
+      "BOOK_V_SOURCE": "PARTIAL",
+      "BOOK_V_CONSUMER": "PASS",
+      "BOOK_V_CUSTOMER_RENDER": "PARTIAL",
+      "BOOK_V_CONTEXTUAL_ASK": "PARTIAL",
+      "BOOK_VI_DOSSIER_ACCEPTANCE": "PARTIAL",
+      "BOOK_VI_RUNTIME_CONSUMER": "PASS",
+      "BOOK_VI_CUSTOMER_RENDER": "PASS",
+      "BOOK_VI_CURRENTNESS": "PARTIAL",
+      "MOOMOO_EVIDENCE_BINDING": "PARTIAL"
+    },
+    "bookVRegistries": [
+      {
+        "item": "120 cases",
+        "path": "content/civilization-atlas/cases/civilization-case-registry-v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "sha256": "6291f76099bfa3f0747c2c29ced4f491045d221e64730ae710031d7f821c3d1a",
+        "array": "cases",
+        "actualCount": 120,
+        "expectedCount": 120,
+        "state": "PASS",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+        "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "acceptanceBinding": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "successorEvidence": {
+          "path": "content/civilization-atlas/maintenance/book-v-civ-atlas-current-engineering-successor-v1.json",
+          "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+          "humanDecision": "PENDING",
+          "hashMatches": true,
+          "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+        }
+      },
+      {
+        "item": "20 periods",
+        "path": "content/civilization-atlas/timeline/timeline-periods-v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "sha256": "ebbb012a998257b011fa6a13afa7a5872e52e8c52c186f58c2efe699c8c00840",
+        "array": "periods",
+        "actualCount": 20,
+        "expectedCount": 20,
+        "state": "PASS",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+        "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+      },
+      {
+        "item": "comparison",
+        "path": "content/civilization-atlas/comparison/comparison-families-v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "sha256": "eecb224ed9edfa07f6922be3ed8e630644ced28157f297c58e777e08590ab214",
+        "array": "families",
+        "actualCount": 6,
+        "expectedCount": 6,
+        "state": "PASS",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+        "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+      },
+      {
+        "item": "world snapshots",
+        "path": "content/civilization-atlas/snapshots/world-snapshots-v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "sha256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "array": "snapshots",
+        "actualCount": 15,
+        "expectedCount": 15,
+        "state": "PASS",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+        "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "acceptanceBinding": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "successorEvidence": {
+          "path": "content/civilization-atlas/maintenance/book-v-civ-atlas-current-engineering-successor-v1.json",
+          "status": "ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW",
+          "humanDecision": "PENDING",
+          "hashMatches": true,
+          "changeClass": "NEW_ATLAS_RELEASE_SUCCESSOR"
+        }
+      },
+      {
+        "item": "trajectories",
+        "path": "content/civilization-atlas/trajectories/long-duration-trajectories-v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "sha256": "0d8516de73256ce10c0711a216cd9312e2b613e5debde247e2dbcf3aaaeac9c8",
+        "array": "trajectories",
+        "actualCount": 16,
+        "expectedCount": 16,
+        "state": "PASS",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+        "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+      },
+      {
+        "item": "transitions",
+        "path": "content/civilization-atlas/transitions/transition-windows-v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "sha256": "48ac7cebbddffc593893337a5a0c44ce50521444e72618a0908d7ba5c5945cd9",
+        "array": "transitionWindows",
+        "actualCount": 32,
+        "expectedCount": 32,
+        "state": "PASS",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+        "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+      },
+      {
+        "item": "loss",
+        "path": "content/civilization-atlas/loss/reversal-loss-atlas-v1.json",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "sha256": "08e76a4c7a2ef2bda82ce61c2b76ba007988f6fcb8d02311cf4afb7696edb526",
+        "array": "caseProfiles",
+        "actualCount": 24,
+        "expectedCount": 24,
+        "state": "PASS",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js",
+        "browserEvidence": "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "acceptanceBinding": "EXACT_HUMAN_ACCEPTED_FREEZE_HASH"
+      }
+    ],
+    "bookVLayers": [
+      {
+        "layer": "timeline",
+        "state": "PASS",
+        "scope": "MOBILE_TEXT_CONTROL_RENDER",
+        "textLength": 1387
+      },
+      {
+        "layer": "cases",
+        "state": "PASS",
+        "scope": "MOBILE_TEXT_CONTROL_RENDER",
+        "textLength": 3723
+      },
+      {
+        "layer": "comparison",
+        "state": "PASS",
+        "scope": "MOBILE_TEXT_CONTROL_RENDER",
+        "textLength": 3509
+      },
+      {
+        "layer": "trajectories",
+        "state": "PASS",
+        "scope": "MOBILE_TEXT_CONTROL_RENDER",
+        "textLength": 3367
+      },
+      {
+        "layer": "transitions",
+        "state": "PASS",
+        "scope": "MOBILE_TEXT_CONTROL_RENDER",
+        "textLength": 1123
+      },
+      {
+        "layer": "loss",
+        "state": "PASS",
+        "scope": "MOBILE_TEXT_CONTROL_RENDER",
+        "textLength": 1179
+      }
+    ],
+    "snapshots": [
+      {
+        "snapshotId": "WS-M3000",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1422,
+            "brokenImages": 24,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-M3000%23atlas&contextSummary=World+%C2%B7+World+c.+3000+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M3000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1422,
+            "brokenImages": 24,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-M3000%23atlas&contextSummary=World+%C2%B7+World+c.+3000+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M3000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-M1500",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 999,
+            "brokenImages": 1,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-M1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 998,
+            "brokenImages": 15,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-M1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-M0500",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1363,
+            "brokenImages": 21,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-M0500%23atlas&contextSummary=World+%C2%B7+World+c.+500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1364,
+            "brokenImages": 1,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-M0500%23atlas&contextSummary=World+%C2%B7+World+c.+500+BCE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-M0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-0001",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1011,
+            "brokenImages": 15,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-0001%23atlas&contextSummary=World+%C2%B7+World+c.+1+CE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0001%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1011,
+            "brokenImages": 15,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-0001%23atlas&contextSummary=World+%C2%B7+World+c.+1+CE&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0001%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-0500",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1326,
+            "brokenImages": 23,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-0500%23atlas&contextSummary=World+%C2%B7+World+c.+500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1326,
+            "brokenImages": 23,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-0500%23atlas&contextSummary=World+%C2%B7+World+c.+500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-0500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1000",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1479,
+            "brokenImages": 24,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1000%23atlas&contextSummary=World+%C2%B7+World+c.+1000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1479,
+            "brokenImages": 24,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1000%23atlas&contextSummary=World+%C2%B7+World+c.+1000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1250",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1363,
+            "brokenImages": 24,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1250%23atlas&contextSummary=World+%C2%B7+World+c.+1250&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1250%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1363,
+            "brokenImages": 24,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1250%23atlas&contextSummary=World+%C2%B7+World+c.+1250&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1250%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1500",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1336,
+            "brokenImages": 24,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1337,
+            "brokenImages": 1,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1500%23atlas&contextSummary=World+%C2%B7+World+c.+1500&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1500%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1750",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1249,
+            "brokenImages": 21,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1750%23atlas&contextSummary=World+%C2%B7+World+c.+1750&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1750%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1249,
+            "brokenImages": 21,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1750%23atlas&contextSummary=World+%C2%B7+World+c.+1750&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1750%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1850",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1246,
+            "brokenImages": 21,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1850%23atlas&contextSummary=World+%C2%B7+World+c.+1850&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1850%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1246,
+            "brokenImages": 21,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1850%23atlas&contextSummary=World+%C2%B7+World+c.+1850&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1850%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1914",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1454,
+            "brokenImages": 1,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1914%23atlas&contextSummary=World+%C2%B7+World+in+1914&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1914%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1453,
+            "brokenImages": 24,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1914%23atlas&contextSummary=World+%C2%B7+World+in+1914&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1914%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1945",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1468,
+            "brokenImages": 24,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1945%23atlas&contextSummary=World+%C2%B7+World+in+1945&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1945%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1468,
+            "brokenImages": 24,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1945%23atlas&contextSummary=World+%C2%B7+World+in+1945&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1945%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-1980",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1419,
+            "brokenImages": 24,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1980%23atlas&contextSummary=World+%C2%B7+World+in+1980&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1980%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1419,
+            "brokenImages": 24,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-1980%23atlas&contextSummary=World+%C2%B7+World+in+1980&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-1980%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-2000",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1488,
+            "brokenImages": 24,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-2000%23atlas&contextSummary=World+%C2%B7+World+in+2000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1488,
+            "brokenImages": 24,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-2000%23atlas&contextSummary=World+%C2%B7+World+in+2000&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2000%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      },
+      {
+        "snapshotId": "WS-2026",
+        "sourceVersion": "1.0.0",
+        "sourceSHA256": "6d44f87a3fb417897f8c6ebb5c8be667ab8f480117f633758a02e9904a07f988",
+        "acceptedState": "REGISTERED_SUCCESSOR_PENDING_HUMAN_REVIEW",
+        "consumer": "assets/js/pages/civilization-atlas/atlas-data.js → atlas-shell.js → world-slice-renderer.js",
+        "staleCurrent": "CURRENT_SOURCE_V1",
+        "renderState": "PARTIAL",
+        "mobileState": "PARTIAL",
+        "askContextState": "PASS",
+        "evidence": [
+          {
+            "viewport": 1280,
+            "selected": true,
+            "text": 1466,
+            "brokenImages": 21,
+            "scrollWidth": 1280,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-2026%23atlas&contextSummary=World+%C2%B7+World+in+2026&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2026%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          },
+          {
+            "viewport": 390,
+            "selected": true,
+            "text": 1466,
+            "brokenImages": 21,
+            "scrollWidth": 390,
+            "ask": "http://127.0.0.1:50016/knowledge/ask/?contextType=KNOWLEDGE&contextRef=BOOK%3ABOOK-5&contextLabel=Worlds+of+Difference+%C2%B7+Civilization+Atlas&contextRoute=%2Fbooks%2Freality-differentiation%2F%3Fatlas%3Dworld%26snapshot%3DWS-2026%23atlas&contextSummary=World+%C2%B7+World+in+2026&readingPath=BOOK-5+%3E+PART-12+%3E+ATLAS+%3E+world&relatedKnowledgeRef=BOOK%3ABOOK-5&retrievalScope=%7B%22schemaVersion%22%3A%22PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0%22%2C%22scopeType%22%3A%22CIVILIZATION_ATLAS%22%2C%22bookCode%22%3A%22BOOK-5%22%2C%22partCode%22%3A%22PART-12%22%2C%22activeLayer%22%3A%22world%22%2C%22time%22%3Anull%2C%22timeWindowId%22%3Anull%2C%22snapshotId%22%3A%22WS-2026%22%2C%22regionIds%22%3A%5B%5D%2C%22caseIds%22%3A%5B%5D%2C%22primaryCaseId%22%3Anull%2C%22comparisonFamilyId%22%3Anull%2C%22trajectoryIds%22%3A%5B%5D%2C%22transitionWindowId%22%3Anull%2C%22lossFamilyId%22%3Anull%2C%22lossTypeId%22%3Anull%2C%22evidenceClasses%22%3A%5B%5D%7D"
+          }
+        ]
+      }
+    ],
+    "dossiers": [
+      {
+        "dossierId": "DOSSIER-US",
+        "sourceVersion": "PHI-OS-DOSSIER-US-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 2,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-US-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "bdcd2690aba53b0dee677c7458174a575a9475b947e7e3b50aca67d54b74ffc7"
+        },
+        "sourceTimestamp": "2026-10-02T02:47:00.000Z",
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [
+          {
+            "claimId": "MOOMOO-HISTORY-US-SPY-f159349bd998",
+            "freshness": "STALE",
+            "sourceVersion": "f159349bd998fa4edbdf89447d6ce6faa04bafb994a77acff2c2b60e929c53d3"
+          },
+          {
+            "claimId": "MOOMOO-HISTORY-US-QQQ-7ed38bb436d6",
+            "freshness": "STALE",
+            "sourceVersion": "7ed38bb436d6fa2180869a5feda125b2c611f806a70beac0683da428be3086d8"
+          },
+          {
+            "claimId": "MOOMOO-HISTORY-US-XLK-38b43e0def10",
+            "freshness": "STALE",
+            "sourceVersion": "38b43e0def100c2f3679ffc5a11981d1acb9dd3c41586020f4f1e07f6bc7b0b3"
+          },
+          {
+            "claimId": "MOOMOO-HISTORY-US-XLF-4ffdd091ef10",
+            "freshness": "STALE",
+            "sourceVersion": "4ffdd091ef1064b2add3526eacba101dd6891a5deb8ce807e4b302130de1fc06"
+          },
+          {
+            "claimId": "MOOMOO-HISTORY-US-XLI-a06d1db8fb7e",
+            "freshness": "STALE",
+            "sourceVersion": "a06d1db8fb7ee8596dc12636fc04aa0bb90cb6bebeaa25759a5265a95e77e07d"
+          },
+          {
+            "claimId": "MOOMOO-HISTORY-US-XLY-9731ca840f2a",
+            "freshness": "STALE",
+            "sourceVersion": "9731ca840f2a4047e8936197e3d696ce0b54af2752291dcb457d0546b51a9df5"
+          },
+          {
+            "claimId": "MOOMOO-HISTORY-US-XLE-e2653235fef6",
+            "freshness": "STALE",
+            "sourceVersion": "e2653235fef62ac7218caa51b1da78e95581eca64c477b4dd6016f03a6996631"
+          },
+          {
+            "claimId": "MOOMOO-HISTORY-US-XLV-eb3652f6f62f",
+            "freshness": "STALE",
+            "sourceVersion": "eb3652f6f62f0a26e27211ebe9e28b9b615fe5c05b1a141ed756ba32b6d215ff"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-SPY-af2addfaea49",
+            "freshness": "CURRENT",
+            "sourceVersion": "af2addfaea49da24984b411e3497b680eb379bef624648323bd1ce00e2a18f83"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-QQQ-c736b3c5b706",
+            "freshness": "CURRENT",
+            "sourceVersion": "c736b3c5b7066cd269dac69ea8af99915b29b8d31b8dea383f6838a06f9931d4"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-XLK-303fde7c04a7",
+            "freshness": "CURRENT",
+            "sourceVersion": "303fde7c04a758c25539c557920e5b3a6492a2997013c520c6a185bda1194ae2"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-XLF-ef5988702834",
+            "freshness": "CURRENT",
+            "sourceVersion": "ef59887028344ce6a30fdf458dedfb98f4c51b070a8947e6169686e22c4f3f9f"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-XLI-3d5b79033370",
+            "freshness": "CURRENT",
+            "sourceVersion": "3d5b790333700732b5dff29967565828571cba8ea91bddfbf975c699511cf046"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-XLY-214848ca8020",
+            "freshness": "CURRENT",
+            "sourceVersion": "214848ca8020c32151435e041d6826366c964483f45b322dbadf3df717f877c7"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-XLE-b3a889fce7db",
+            "freshness": "CURRENT",
+            "sourceVersion": "b3a889fce7db5ab7d00849b7747a22f3eff6d1ca04e29fe5c289927759c2231d"
+          },
+          {
+            "claimId": "MOOMOO-CAPITAL-FLOW-US-XLV-1d33a605f2db",
+            "freshness": "CURRENT",
+            "sourceVersion": "1d33a605f2dbeca301be4907d811005e7fc629fcf683acc2b4aabf5b07f42bc9"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-AAPL-PE-3c29c842432f",
+            "freshness": "CURRENT",
+            "sourceVersion": "3c29c842432f5786b94d892b863b459d85902f11676148144782b20937741bb7"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-AAPL-PB-f4706caecf82",
+            "freshness": "CURRENT",
+            "sourceVersion": "f4706caecf825971bd267f1af9be901249f222397a9e74f03ac271dc2261b2dc"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-AAPL-PS-9f9dc4dd8a19",
+            "freshness": "CURRENT",
+            "sourceVersion": "9f9dc4dd8a190388564e461afac95a6184bc9cda1a689abd4a57a8f0e1a1e729"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-MSFT-PE-1c269a237a05",
+            "freshness": "CURRENT",
+            "sourceVersion": "1c269a237a05f94d9551e1f2bc85239a1243964b502aa6bcd083e3932c4f22c3"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-MSFT-PB-d97df01f3fb6",
+            "freshness": "CURRENT",
+            "sourceVersion": "d97df01f3fb601dbee36027d7a62b4068a0e7c348d7c21f5f9991fdd24aff273"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-MSFT-PS-05b72a5eafa4",
+            "freshness": "CURRENT",
+            "sourceVersion": "05b72a5eafa4cec42ff6a43c580151049d09fc4b0ef4211c1cbd87da3e7d5c52"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-AMZN-PE-e6c727c266ae",
+            "freshness": "CURRENT",
+            "sourceVersion": "e6c727c266ae740a9ccc9033b92193af58753be5d854d3702acce78a87956d6b"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-AMZN-PB-b4bd35f5f4b2",
+            "freshness": "CURRENT",
+            "sourceVersion": "b4bd35f5f4b28fdd4286ae8a74bb0ce0b35d2ca5ee25c2de639d5bb7607451d1"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-AMZN-PS-cbf4e81dcb13",
+            "freshness": "CURRENT",
+            "sourceVersion": "cbf4e81dcb131b1493e6e11775bd7486fea11d07e98ea9659e24bfdd7ddf565c"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-NVDA-PE-d9c7cc989693",
+            "freshness": "CURRENT",
+            "sourceVersion": "d9c7cc98969363a0b0de1bebd13b2004ad2606ab600240030e910082ea9d1b49"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-NVDA-PB-d808f14aa5be",
+            "freshness": "CURRENT",
+            "sourceVersion": "d808f14aa5be25c6f3ef48ad09aa9882ec3798f40fd3995a8d8699533a0e621a"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-NVDA-PS-2c3b0489ae98",
+            "freshness": "CURRENT",
+            "sourceVersion": "2c3b0489ae9814781c4e1c5652220ac142de40c3d75a0c428e70790c89791223"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-JPM-PE-00b1b7654c0a",
+            "freshness": "CURRENT",
+            "sourceVersion": "00b1b7654c0aa8340ece078e254355462d9812f5c42158f4f03c8782cfe4b35e"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-JPM-PB-9351604c22ff",
+            "freshness": "CURRENT",
+            "sourceVersion": "9351604c22ff142c67197c1d7926dfebb4f4f4de8de3dd5e2d746800460a24bd"
+          },
+          {
+            "claimId": "MOOMOO-VALUATION-US-JPM-PS-dc08bcbc4299",
+            "freshness": "CURRENT",
+            "sourceVersion": "dc08bcbc4299b932f6988c604127cf5d73bb3b2001812867f444d3ee15de4cc7"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AAPL-S1-3c8df0dee6b3",
+            "freshness": "CURRENT",
+            "sourceVersion": "3c8df0dee6b37169d56d96affa0d2b16d3e662fe46312bd3b6efa587c57478fe"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AAPL-S2-8ef3f09a181e",
+            "freshness": "CURRENT",
+            "sourceVersion": "8ef3f09a181eadbaeff85099bbcb56ab00b629c59917f48a5de597513a7e3c4e"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AAPL-S3-3f28163636d0",
+            "freshness": "CURRENT",
+            "sourceVersion": "3f28163636d0b75f53b91c69b26728aadd4dd2277a5793746f1e55852038809c"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AAPL-S4-3b758143ba4c",
+            "freshness": "CURRENT",
+            "sourceVersion": "3b758143ba4c6d2b614d9225ba1fd5aea14ecad6520d401a1a17fb290e65d80b"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-MSFT-S1-a54658d106ce",
+            "freshness": "CURRENT",
+            "sourceVersion": "a54658d106ceb28930e983e67186e4b4125ecd64e865f178483698dcfa532f6b"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-MSFT-S2-53ecfdf6b3bf",
+            "freshness": "CURRENT",
+            "sourceVersion": "53ecfdf6b3bff22ba91911517b402d7ef5e20058a063d46e977344b30281517d"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-MSFT-S3-cc7be48456b3",
+            "freshness": "CURRENT",
+            "sourceVersion": "cc7be48456b36eb996632e1256ab4aedd4a9550cb45db1673d0df6d7c5e96309"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-MSFT-S4-701db431959c",
+            "freshness": "CURRENT",
+            "sourceVersion": "701db431959c5a0371a570cd3fb0ede01a2ae8dec4a6ad20d9f77f1f925f5f8d"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AMZN-S1-7e7caab530d4",
+            "freshness": "CURRENT",
+            "sourceVersion": "7e7caab530d49afa469648f834a19d0a1393589bf57b0819df8e463c63e745d6"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AMZN-S2-c52c3ba75470",
+            "freshness": "CURRENT",
+            "sourceVersion": "c52c3ba7547029e485c78282ebec8858597490d3a569629dbff97cc8ea70ee5a"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AMZN-S3-53cb070505ce",
+            "freshness": "CURRENT",
+            "sourceVersion": "53cb070505ce2ffea719de21fd64b332a21eeeb11d9d86c7b0a47100ffcaf0d0"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-AMZN-S4-bff326051ec7",
+            "freshness": "CURRENT",
+            "sourceVersion": "bff326051ec73fcb81576875b84ecedfb59b68f76e8dfb8f1694576092750126"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-NVDA-S1-af8404f86a79",
+            "freshness": "CURRENT",
+            "sourceVersion": "af8404f86a79b9dd9520bbb4ee07cc40f5e0e5eed1253fae15b7bd5fc5052106"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-NVDA-S2-1a23b9f36576",
+            "freshness": "CURRENT",
+            "sourceVersion": "1a23b9f36576a5927f01c9729e151f6511832ea8b7bddd02346bfd7d691a749d"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-NVDA-S3-56fb80c85a76",
+            "freshness": "CURRENT",
+            "sourceVersion": "56fb80c85a76ec3d40372e87036a35c435f1456f99dc8541b26dfa399e1a6b49"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-NVDA-S4-33463c5ceec7",
+            "freshness": "CURRENT",
+            "sourceVersion": "33463c5ceec7e7b7b6bc91ac94f32dd56eea4ef17d4fd13e5b74d15558e4fad7"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-JPM-S1-d19774bcd7dc",
+            "freshness": "CURRENT",
+            "sourceVersion": "d19774bcd7dc4622b1d2aea0d9204856bc92af54f9a0c1344b8b4827bce83448"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-JPM-S2-9d0af479d394",
+            "freshness": "CURRENT",
+            "sourceVersion": "9d0af479d3946dd243dc0ef9336f506ac3a69eaecc7c80581be5d4a9875f15a0"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-JPM-S3-4d0fb94c1ddf",
+            "freshness": "CURRENT",
+            "sourceVersion": "4d0fb94c1ddf6a8635b2ff86d1ed02e785dc5ef84b3205cd6cea62e81193ce2c"
+          },
+          {
+            "claimId": "MOOMOO-FINANCIALS-US-JPM-S4-0c6cf1014aa8",
+            "freshness": "CURRENT",
+            "sourceVersion": "0c6cf1014aa820923a6712d98f69e9d07e9cf82c4779bb88521a96955e3b6cba"
+          },
+          {
+            "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-AAPL-685aae881d35",
+            "freshness": "CURRENT",
+            "sourceVersion": "685aae881d3542e3b7716c48f2cd93bc1849da6394c14aa015d4e91529324a26"
+          },
+          {
+            "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-MSFT-ed4dfc0eaf45",
+            "freshness": "CURRENT",
+            "sourceVersion": "ed4dfc0eaf452602cec127d342120cb403ea709a7ebb297b3ead619f425926a3"
+          },
+          {
+            "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-AMZN-d04cbc0a3af5",
+            "freshness": "CURRENT",
+            "sourceVersion": "d04cbc0a3af5759411b384e455165a40216ccab3ffec1fb498ffe307f569659c"
+          },
+          {
+            "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-NVDA-94da861559a8",
+            "freshness": "CURRENT",
+            "sourceVersion": "94da861559a8e3d28c31f85f16a45343303a34211ea1bdf05c404e3257640687"
+          },
+          {
+            "claimId": "MOOMOO-REVENUE-BREAKDOWN-US-JPM-7f1bc205f22f",
+            "freshness": "CURRENT",
+            "sourceVersion": "7f1bc205f22ffa90dc7b1a79978ceb16e0aee7df2bdd9c060c00e01922c3d62a"
+          }
+        ],
+        "renderStateEvidence": {
+          "textLength": 694,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 694,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-CN",
+        "sourceVersion": "PHI-OS-DOSSIER-CN-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 2,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-CN-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "dd903415622cf8390634eeaf758b432489868352eb6a79a5f3e024e67c7fe871"
+        },
+        "sourceTimestamp": "2026-10-08T04:20:00.000Z",
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 648,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 648,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-IN",
+        "sourceVersion": "PHI-OS-DOSSIER-IN-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-IN-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "c8ca419d414b51ca8aaf08491566e0fd5212db790690989243a1c5d74df848f8"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 624,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 624,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-EU",
+        "sourceVersion": "PHI-OS-DOSSIER-EU-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-EU-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "6fe8d9d2b675f8b1548b1a0b43f8ce80f8fa41af1d968425de6fb0d6ee2040c2"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 612,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 612,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-JP",
+        "sourceVersion": "PHI-OS-DOSSIER-JP-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-JP-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "49d9af5f5299315450262148980236301041f614b7000cfcc6a47ad873d8aca6"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 624,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 624,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-KR",
+        "sourceVersion": "PHI-OS-DOSSIER-KR-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-KR-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "a0b6ef2eb56d53ca2f5fc1d48c1b8d83c72edc984ce447f45ba16ea14dbb13ea"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 633,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 633,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-RU",
+        "sourceVersion": "PHI-OS-DOSSIER-RU-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-RU-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "e54f03481e51ab8b69bc6624aecaa4f94c114c0b6be838496d1f5d6e6c9c24ab"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 621,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 621,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-SEA",
+        "sourceVersion": "PHI-OS-DOSSIER-SEA-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-SEA-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "61adf35a8205ca5ab493c9136466a9cdc0a457df6ed9fd55832875b127bdb88b"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 708,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 708,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-ME",
+        "sourceVersion": "PHI-OS-DOSSIER-ME-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-ME-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "me2026b6b9c6c11c2b384de54bf6e9f17a81f4f1ce7ca2d3ce49d19cb8d75e1"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 620,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 620,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-AF",
+        "sourceVersion": "PHI-OS-DOSSIER-AF-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-AF-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "af2026b6a1eac3c887d1da7e53af6eb848fa6fd96f87d07c3db7ab1fe823251"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 642,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 642,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-LATAM",
+        "sourceVersion": "PHI-OS-DOSSIER-LATAM-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+        "acceptedState": "ACCEPTED_CURRENT_DOSSIER",
+        "acceptedPositionCount": 3,
+        "consumer": "functions/api/book6-runtime-readout.js → book6-accepted-current.js",
+        "runtimeState": "PASS",
+        "renderState": "PASS",
+        "mobileState": "PASS",
+        "wholeDossierPosition": "UNKNOWN",
+        "readoutReference": {
+          "code": "RRE-READOUT-B6-LATAM-2026-1-CONTRACT",
+          "version": "2026.1-contract",
+          "digest": "latam2026b6f7f4b87f6e9d4497b1fb55916c4a4e62937d72742dfb9cfced3f2d1"
+        },
+        "sourceTimestamp": null,
+        "currentness": "SOURCE_TIMESTAMP_RETAINED_NO_REFRESH_INFERRED",
+        "moomoo": [],
+        "renderStateEvidence": {
+          "textLength": 642,
+          "viewport": 1280
+        },
+        "mobileStateEvidence": {
+          "textLength": 642,
+          "viewport": 390
+        }
+      },
+      {
+        "dossierId": "DOSSIER-GLOBAL_PLATFORM",
+        "acceptedState": "NOT_ACCEPTED",
+        "wholeDossierPosition": "UNKNOWN",
+        "runtimeState": "NOT_RUN",
+        "renderState": "NOT_RUN",
+        "mobileState": "NOT_RUN",
+        "firstMissingRequirement": "No applicable W8-I acceptance; no automatic promotion"
+      }
+    ],
+    "contextBridge": {
+      "scope": "ACTUAL_RETRIEVER_LOCAL_REGISTRIES_NOT_PROVIDER_ANSWER",
+      "providerCalls": 0,
+      "bookVSnapshotCount": 15,
+      "dossiers": [
+        {
+          "dossierId": "DOSSIER-AF",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-CN",
+          "state": "PASS",
+          "acceptedPositions": 2,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-EU",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-IN",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-JP",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-KR",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-LATAM",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-ME",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-RU",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-SEA",
+          "state": "PASS",
+          "acceptedPositions": 3,
+          "currentProviderEvidence": 0
+        },
+        {
+          "dossierId": "DOSSIER-US",
+          "state": "PASS",
+          "acceptedPositions": 2,
+          "currentProviderEvidence": 48
+        }
+      ]
+    },
+    "bookVIConsumerScope": "11 W8-I accepted dossiers; unaccepted regions remain UNKNOWN",
+    "moomoo": {
+      "scope": "US only; 56 historically validated/admitted claims, freshness evaluated by existing TTL",
+      "currentClaims": 48,
+      "staleClaims": 8,
+      "otherRegions": "NO_MOOMOO_BINDING_EVIDENCE"
+    },
+    "BOOK_V_CLOSED_LOOP": false,
+    "BOOK_VI_CLOSED_LOOP": false,
+    "FIRST_STOP_NODE": {
+      "BOOK_V": "CURRENT_REGISTRY_SUCCESSOR_HUMAN_ACCEPTANCE",
+      "BOOK_VI": "CURRENTNESS_MISSING_EVIDENCE_TIMESTAMP_FOR_NINE_ACCEPTED_DOSSIERS"
+    },
+    "remaining": [
+      "Book V current cases/snapshot registries match registered engineering successor but Human decision is PENDING; historical acceptance is retained",
+      "Book V external visual access and full contextual Ask answer not verified",
+      "Nine accepted dossiers lack source evidence timestamps; acceptance time is not substituted",
+      "Some catalog dossiers are not W8-I accepted and remain UNKNOWN",
+      "Moomoo current evidence binding is US-only; eight stale claims excluded from current Ask",
+      "Legacy cutover checker expects old Book VI route; Book V W15 checker expects old tablist; no frozen assertion changed"
+    ],
+    "rollback": "Restore only changed consumer modules from pre-change versions; accepted dossier/positions and source registries untouched. No storage writes/migration performed.",
+    "providerCalls": 0,
+    "providerSpendUSD": 0,
+    "DEPLOYED": "NOT_RUN",
+    "LIVE_CUSTOMER": "NOT_RUN",
+    "bookVAcceptance": {
+      "freeze": "content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json",
+      "humanDecision": "tools/review/BOOK-V-CIV-ATLAS-R1-W15-HUMAN-DECISION.json",
+      "status": "HUMAN_ACCEPTED",
+      "historicalOpenBoundaries": {
+        "worldSnapshot2026": "PARTIAL",
+        "transitionWindow32": "PARTIAL_CONCEPTUAL_OPEN",
+        "computationalCivilizationScaleShift": "OPEN"
+      }
+    }
+  },
+  "sharedBackbone": {
+    "currentHead": "419db96d465023a47930cb2dc19f11b46208a4d9",
+    "scope": "REAL_SQL_NATIVE_BAZI_INPUT_AND_SYNTHETIC_SHARED_STORAGE_NOT_BROWSER_OR_LIVE_CUSTOMER",
+    "nativeBaziInput": "PASS",
+    "immutableArtifactStorage": [
+      {
+        "methodCode": "AST",
+        "fixtureOnly": true,
+        "reopens": 10,
+        "result": "PASS_STORAGE_ONLY_NOT_NATIVE_FULL_REPORT_E2E",
+        "contentDigest": "3ac4e4d3c560cd12e5c44543a81c4c23cba9dd48f62bed01c9854762dee76c37",
+        "jsonBytes": 7082,
+        "pdfPersisted": false
+      },
+      {
+        "methodCode": "BZR",
+        "fixtureOnly": true,
+        "reopens": 10,
+        "result": "PASS_STORAGE_ONLY_NOT_NATIVE_FULL_REPORT_E2E",
+        "contentDigest": "3ac4e4d3c560cd12e5c44543a81c4c23cba9dd48f62bed01c9854762dee76c37",
+        "jsonBytes": 7082,
+        "pdfPersisted": false
+      },
+      {
+        "methodCode": "ZWR",
+        "fixtureOnly": true,
+        "reopens": 10,
+        "result": "PASS_STORAGE_ONLY_NOT_NATIVE_FULL_REPORT_E2E",
+        "contentDigest": "3ac4e4d3c560cd12e5c44543a81c4c23cba9dd48f62bed01c9854762dee76c37",
+        "jsonBytes": 7082,
+        "pdfPersisted": false
+      }
+    ],
+    "fourQuestionsConcurrentLastSlot": "PASS",
+    "rmoBoundedMaintenance": "PASS",
+    "providerCalls": 0,
+    "providerSpendUSD": 0,
+    "externalNetwork": 0,
+    "productionOperations": false,
+    "accountFullReportE2E": "NOT_RUN"
   }
 }

@@ -1,5 +1,5 @@
 # 唯一 Master W00–W40 当前进度
-HEAD: 941d34f09abc970e465685f34c28a78592d45b8e
+HEAD: 419db96d465023a47930cb2dc19f11b46208a4d9
 
 |阶段|SOURCE|DEPLOYED|LIVE CUSTOMER|下一步|
 |---|---|---|---|---|
@@ -34,7 +34,7 @@ HEAD: 941d34f09abc970e465685f34c28a78592d45b8e
 |W28 Relationship / Cross|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Exact current relationship/cross bounded report admission and inputs|
 |W29 Profile / Academic|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Current Profile/Academic evidence boundaries and product admission|
 |W30 Books / Figures|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary|
-|W31 World / Book VI / Moomoo|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据|
+|W31 World / Book VI / Moomoo|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Book V current cases/snapshot registries match registered engineering successor but Human decision is PENDING; historical acceptance is retained; Book V external visual access and full contextual Ask answer not verified; Nine accepted dossiers lack source evidence timestamps; acceptance time is not substituted; Some catalog dossiers are not W8-I accepted and remain UNKNOWN; Moomoo current evidence binding is US-only; eight stale claims excluded from current Ask; Legacy cutover checker expects old Book VI route; Book V W15 checker expects old tablist; no frozen assertion changed|
 |W32 Mobile / branding|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Actual preview mobile bilingual shell and branding, no SOURCE test substitute|
 |W33 Commerce reconciliation|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭|
 |W34 Shared provider cost ledger|TARGETED_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本|

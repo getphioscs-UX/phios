@@ -1,6 +1,6 @@
 {
   "authority": "MASTER-AUTHORITY.txt plus later explicit owner commercial decisions",
-  "head": "941d34f09abc970e465685f34c28a78592d45b8e",
+  "head": "419db96d465023a47930cb2dc19f11b46208a4d9",
   "updatedAt": "2026-10-09T06:33:22.097Z",
   "completeStages": [],
   "note": "阶段完整完成需满足全部契约；定向PASS、规范接受与文件存在均不等于阶段完成",
@@ -1369,8 +1369,11 @@
         "content/civilization-atlas/snapshots/world-snapshots-v1.json",
         "content/civilization-atlas/reconfiguration/moomoo-provider-w8c-status-v1.json"
       ],
-      "actualChecks": [],
-      "nextStep": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据",
+      "actualChecks": [
+        "W31-ATLAS-CLOSED-LOOP-QA.json",
+        "W31-CONTEXT-BRIDGE-QA.json"
+      ],
+      "nextStep": "Book V current cases/snapshot registries match registered engineering successor but Human decision is PENDING; historical acceptance is retained; Book V external visual access and full contextual Ask answer not verified; Nine accepted dossiers lack source evidence timestamps; acceptance time is not substituted; Some catalog dossiers are not W8-I accepted and remain UNKNOWN; Moomoo current evidence binding is US-only; eight stale claims excluded from current Ask; Legacy cutover checker expects old Book VI route; Book V W15 checker expects old tablist; no frozen assertion changed",
       "liveCustomerDoesNotBlockIndependentSource": true,
       "sourceFiles": [
         {
@@ -1384,7 +1387,24 @@
       ],
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
       "remainingWork": "逐一核对15快照、Book VI accepted dossier与消费者版本、Moomoo外部证据",
-      "progress": "部分"
+      "progress": "部分",
+      "atlasStates": {
+        "BOOK_V_SOURCE": "PARTIAL",
+        "BOOK_V_CONSUMER": "PASS",
+        "BOOK_V_CUSTOMER_RENDER": "PARTIAL",
+        "BOOK_V_CONTEXTUAL_ASK": "PARTIAL",
+        "BOOK_VI_DOSSIER_ACCEPTANCE": "PARTIAL",
+        "BOOK_VI_RUNTIME_CONSUMER": "PASS",
+        "BOOK_VI_CUSTOMER_RENDER": "PASS",
+        "BOOK_VI_CURRENTNESS": "PARTIAL",
+        "MOOMOO_EVIDENCE_BINDING": "PARTIAL"
+      },
+      "BOOK_V_CLOSED_LOOP": false,
+      "BOOK_VI_CLOSED_LOOP": false,
+      "FIRST_STOP_NODE": {
+        "BOOK_V": "CURRENT_REGISTRY_SUCCESSOR_HUMAN_ACCEPTANCE",
+        "BOOK_VI": "CURRENTNESS_MISSING_EVIDENCE_TIMESTAMP_FOR_NINE_ACCEPTED_DOSSIERS"
+      }
     },
     {
       "id": "W32",
@@ -1727,12 +1747,12 @@
       "liveCustomerDoesNotBlockIndependentSource": true,
       "verificationVersion": "a30ebe67ab9571d45f36ec96b951e53e3b735b77",
       "buildIdentity": {
-        "currentHead": "941d34f09abc970e465685f34c28a78592d45b8e",
-        "evidenceCommit": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
+        "currentHead": "419db96d465023a47930cb2dc19f11b46208a4d9",
+        "evidenceCommit": "419db96d465023a47930cb2dc19f11b46208a4d9",
         "buildReceipt": "content/production-closure/live-customer-commercial-convergence/MASTER-PAGES-CURRENT-RECEIPT.json",
-        "buildAt": "2026-10-09T08:09:46.654Z",
+        "buildAt": "2026-10-09T08:56:03.343Z",
         "stale": true,
-        "workingTreeDigest": "2be4b15f14c8f6066e7284c5211a706bd8fb6e419292134325093153bb21bfa3",
+        "workingTreeDigest": "6208681ae9f942ded75336ee1878fcf0d8d84224a0822193892a8d464163ae2c",
         "source": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
         "deployed": "NOT_RUN",
         "liveCustomer": "NOT_RUN"
@@ -1880,12 +1900,12 @@
         "actualEvidence": [
           {
             "path": "functions/account/bazi-account-delivery.js",
-            "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
+            "sha256": "2cb7859f942ba21c2dbe4b47ad9ceb21b574480b8b81d7913d2996a219cb8135",
             "scope": "ORCHESTRATION_FAILS_CLOSED"
           },
           {
             "path": "workers/method-report-renderer/index.js",
-            "sha256": "bbd95b389ea7797083d70232f8ed5b9d29e6e4f2697dc2071435788298b54b89",
+            "sha256": "3f88a1434189b9d22eea36405d6515d8d7208b9d1c4ccfe828c096096e663e8a",
             "scope": "CURRENT_ZIWEI_RENDERER_NOT_BZR"
           }
         ],
@@ -2447,7 +2467,7 @@
         },
         {
           "path": "functions/account/bazi-account-delivery.js",
-          "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
+          "sha256": "2cb7859f942ba21c2dbe4b47ad9ceb21b574480b8b81d7913d2996a219cb8135",
           "scope": "INCOMPLETE_BZR_ORCHESTRATION"
         }
       ],

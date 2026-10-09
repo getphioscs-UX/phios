@@ -3,7 +3,7 @@ import {verifyCustomerReportArtifact} from './customer-report-artifact.js';
 export async function persistCustomerArtifactInHeldStore(env,binding,state,artifact){
  await verifyCustomerReportArtifact(artifact,{customerId:binding.ownerAccountId,reportArtifactId:binding.reportId});
  const prior=await state.get('customer-artifact');
- if(prior){if(prior.artifactDigest!==artifact.artifactDigest)throw Error('IMMUTABLE_CUSTOMER_REPORT_REPLACEMENT_FORBIDDEN');const object=await env.PRIVATE_REPORTS.get(prior.objectKey);if(!object)throw Error('ARTIFACT_OBJECT_MISSING_REPAIR_REQUIRED');await verifyCustomerReportArtifact(JSON.parse(await object.text()),{customerId:binding.ownerAccountId,reportArtifactId:binding.reportId});return prior;}
+ if(prior){if(prior.artifactDigest!==artifact.artifactDigest)throw Error('IMMUTABLE_CUSTOMER_REPORT_REPLACEMENT_FORBIDDEN');const object=await env.PRIVATE_REPORTS.get(prior.objectKey);if(!object)throw Error('ARTIFACT_OBJECT_MISSING_REPAIR_REQUIRED');const loaded=await verifyCustomerReportArtifact(JSON.parse(await object.text()),{customerId:binding.ownerAccountId,reportArtifactId:binding.reportId});if(loaded.artifactDigest!==prior.artifactDigest)throw Error('ARTIFACT_REFERENCE_DIGEST_MISMATCH');return prior;}
  const ref={objectKey:`customer-artifacts/${binding.reportId}/${artifact.artifactDigest}.json`,artifactDigest:artifact.artifactDigest};
  await env.PRIVATE_REPORTS.put(ref.objectKey,JSON.stringify(artifact),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});await state.putIfAbsent('customer-artifact',ref);return ref;
 }
