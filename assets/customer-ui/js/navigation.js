@@ -1,5 +1,6 @@
 export const CX_NAVIGATION = Object.freeze({
   primary: Object.freeze([
+    Object.freeze({ id: 'WORLD', href: '/world', en: 'World', zh: '世界' }),
     Object.freeze({ id: 'EXPLORE', href: '/explore/', en: 'Explore', zh: '探索' }),
     Object.freeze({ id: 'MY_REALITY', href: '/reality/', en: 'My Reality', zh: '我的现实' }),
     Object.freeze({ id: 'PERSPECTIVES', href: '/perspectives/', en: 'Perspectives', zh: '视角' }),

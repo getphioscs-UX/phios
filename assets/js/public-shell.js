@@ -9,6 +9,7 @@ import {
 } from './i18n.js';
 
 const NAVIGATION = Object.freeze([
+  { id: 'world', href: '/world', key: 'publicShell.nav.world' },
   { id: 'discover', href: '/explore/', key: 'publicShell.nav.explore' },
   { id: 'reality', href: '/reality/', key: 'publicShell.nav.myReality' },
   { id: 'perspectives', href: '/perspectives/', key: 'publicShell.nav.perspectives' },
@@ -38,7 +39,7 @@ function navigationMarkup(activeSection) {
 
     return `
       <a class="public-nav__link" href="${item.href}"${current}>
-        <span data-i18n="${item.key}"></span>
+        ${item.id === 'world' ? '<span data-cx-en="World" data-cx-zh="世界">World</span>' : `<span data-i18n="${item.key}"></span>`}
       </a>
     `;
   }).join('');
