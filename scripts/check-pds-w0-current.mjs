@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { resolveGitExecutable } from './lib/git-executable.mjs';
+import {partitionRuntimeTopology} from './lib/pds-runtime-topology.mjs';
 
 import './check-master-governance.mjs';
 
@@ -160,13 +161,15 @@ for (const protectedPath of fixture.protectedPaths) {
   ]).split('\n').filter(Boolean);
   assert.ok(baselineFiles.length > 0, `PDS_W0_PROTECTED_PATH_MISSING_FROM_BASELINE:${protectedPath}`);
 
-  const changedFiles = git([
+  const changedFiles = [...new Set([...git([
     'diff',
     '--name-only',
     contract.baseline.commit,
     '--',
     protectedPath
-  ]).split('\n').filter(Boolean);
+  ]).split('\n').filter(Boolean), ...git([
+    'ls-files', '--others', '--exclude-standard', '--', protectedPath
+  ]).split('\n').filter(Boolean)])];
   if (!changedFiles.length) continue;
 
   // COM-STRIPE-R1 schema was already committed in the user-approved 16a0ca9
@@ -183,12 +186,27 @@ for (const protectedPath of fixture.protectedPaths) {
     const ecrLocales = read('content/web-production/reconciliation/pds-w0-ecr-full-r1-locale-successor-v1.json');
     assert.equal(ecrLocales.baselineFilesMayChange, false);
     assert.equal(ecrLocales.newUnregisteredFilesAllowed, false);
-    assert.deepEqual([...changedFiles].sort(), ecrLocales.files.map(x => x.path).sort(), 'PDS_W0_ECR_LOCALE_TOPOLOGY_DRIFT');
+    // ECR has a three-file successor, but W0 protects the entire runtime tree.
+    // Keep locale topology exact and review every non-locale addition separately.
+    const otherChanges = partitionRuntimeTopology(changedFiles, baselineFiles, ecrLocales.files.map(x => x.path));
     for (const entry of ecrLocales.files) {
       assert.equal(baselineFiles.includes(entry.path), false, 'PDS_W0_ECR_BASELINE_FILE_CHANGED');
       assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_ECR_LOCALE_DRIFT:${entry.path}`);
       const committed = git(['show', `${ecrLocales.sourceCommit}:${entry.path}`]).replace(/\r\n?/g, '\n');
       assert.equal(committed, text(entry.path).trim(), `PDS_W0_ECR_LOCALE_BASELINE_MISMATCH:${entry.path}`);
+    }
+    if (otherChanges.length) {
+      const candidate = read('docs/design-system/pds-w0-navigation-topology-migration-candidate-v1.json');
+      assert.equal(candidate.pdsBaselineCommit, contract.baseline.commit);
+      assert.equal(candidate.changeClass, 'explicit-contract-version-upgrade');
+      assert.deepEqual(otherChanges.sort(), candidate.entries.map(entry => entry.path).sort(), 'PDS_W0_UNREGISTERED_RUNTIME_ADDITION');
+      for (const entry of candidate.entries) {
+        assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_NAV_CANDIDATE_SOURCE_DRIFT:${entry.path}`);
+        assert.equal(canonicalTextGitBlobSha(entry.path), entry.gitBlobSha, `PDS_W0_NAV_CANDIDATE_BLOB_DRIFT:${entry.path}`);
+      }
+      // A candidate and doctrine acceptance are not topology authorization.
+      // A reviewed versioned successor is required to admit this migration.
+      assert.fail('PDS_W0_RUNTIME_TOPOLOGY_ACCEPTANCE_PENDING: Navigation migration candidate is registered for review, not accepted');
     }
     continue;
   }

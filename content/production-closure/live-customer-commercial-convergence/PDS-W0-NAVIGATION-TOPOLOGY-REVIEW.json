@@ -1,0 +1,38 @@
+{
+  "issue": "PDS_W0_ECR_LOCALE_TOPOLOGY_DRIFT",
+  "rootCause": "Entire protected functions/runtime changed-file set was compared against ECR-only successor. Frozen W0 protects the entire runtime; Navigation additions lack topology successor acceptance.",
+  "classification": "acceptance-fix",
+  "affectedContracts": [
+    "phi-os.pds-baseline-boundary.v1",
+    "phi-os.master-governance.v1"
+  ],
+  "versionImpact": "Checker collection correction; existing freezes unchanged; Navigation candidate explicit-contract-version-upgrade pending review",
+  "changes": [
+    "Separate exact ECR locale topology validation from other protected runtime additions",
+    "Include untracked files in protected-path collection",
+    "Preserve baseline modification prohibition and all original ECR hashes/commit comparisons",
+    "Record additive Navigation topology migration candidate with exact current text SHA256 and Git blobs; candidate grants no acceptance"
+  ],
+  "topologyCandidate": "docs/design-system/pds-w0-navigation-topology-migration-candidate-v1.json",
+  "referenceAudit": "Standalone Navigation modules reference prior accepted batches and freeze helper; QA fixtures and ingestion scripts consume them. No customer API integration was established.",
+  "humanAcceptance": "NAV01–25 canonical receipts verified by existing QA; frozen topology acceptance remains distinct and pending",
+  "migration": "Source-only additive migration candidate; no database change required by these standalone modules; no production migration run",
+  "verification": {
+    "scopeTests": "7 PASS",
+    "navigation": "12+15+18+20+20 checks PASS",
+    "zeroCostPdsCurrent": "FAIL_CLOSED_TOPOLOGY_ACCEPTANCE_PENDING",
+    "originalPrecheck": {
+      "providerSpendProtection": "PASS",
+      "cloudflareFunctionImportCompat": "PASS",
+      "pdsCurrent": "FAIL_CLOSED_TOPOLOGY_ACCEPTANCE_PENDING",
+      "laterChecks": "NOT_REACHED"
+    },
+    "diffCheck": "PASS"
+  },
+  "SOURCE": "CHECKER_FIX_QA_PASS_TOPOLOGY_ADMISSION_PENDING",
+  "DEPLOYED": "NOT_RUN",
+  "LIVE_CUSTOMER": "NOT_RUN",
+  "providerCalls": 0,
+  "governanceGap": "Explicit reviewed versioned protected-path successor required. Neither candidate registration nor doctrine acceptance automatically authorizes topology.",
+  "commitOrPush": false
+}
