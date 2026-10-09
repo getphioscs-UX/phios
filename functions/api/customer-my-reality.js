@@ -5,6 +5,7 @@ import {projectNavigationForCustomer} from '../customer-projection/navigation-cu
 import {projectContinuityForCustomer} from '../customer-projection/continuity-customer-projection.js';
 import {projectReportForCustomer} from '../customer-projection/report-customer-projection.js';
 import {projectMyRealityWorkspace} from '../customer-projection/my-reality-workspace-projection.js';
+import {collectMyRealitySavedSources} from '../account/my-reality-saved-sources.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -18,13 +19,18 @@ function workspaceFromProjectedSources({reality,reading,navigation,journey,repor
   const reportViews=list(reports?.items||reports).map(report=>projectReportForCustomer(report,{locale}));
   return projectMyRealityWorkspace({reality,readout,navigation:navigationView,continuity,reports:reportViews,locale});
 }
+async function attachSavedSources(context,base){
+ const saved=await collectMyRealitySavedSources(context);
+ return {...base,savedSources:{state:saved.state,lanes:saved.lanes},reports:{items:[...base.reports.items,...saved.reports]},history:{items:[...base.history.items,...saved.history]}};
+}
 
 export async function onRequestGet(context){
   const locale=new URL(context.request.url).searchParams.get('locale')==='zh-Hans'?'zh-Hans':'en';
   const sources=context?.data?.cxRealitySources||{};
   const reality=projectRealityForCustomer({...sources,locale});
-  const workspace=workspaceFromProjectedSources({reality,reading:sources.reading,navigation:sources.navigation,journey:sources.journey,reports:sources.reports,locale});
-  return json({ok:true,view:reality,workspace,governance:{persisted:false,rawRuntimeExposed:false,workspaceConsumesCustomerProjections:true}});
+  const base=workspaceFromProjectedSources({reality,reading:sources.reading,navigation:sources.navigation,journey:sources.journey,reports:sources.reports,locale});
+  const workspace=await attachSavedSources(context,base);
+  return json({ok:true,view:reality,workspace,governance:{persisted:false,readsPersistedSources:workspace.savedSources.state==='OWNER_SCOPED_SOURCE_PROJECTION',rawRuntimeExposed:false,workspaceConsumesCustomerProjections:true,missingHistoryReconstructed:false}});
 }
 
 export async function onRequestPost(context){
@@ -36,7 +42,7 @@ export async function onRequestPost(context){
   try{
     const bundle=await buildCurrentRealityBundle({sourceType:'ASK',locale,source:{question,reportedContext,unknown:[]}});
     const reality=projectRealityForCustomer({bundle,locale});
-    const workspace=workspaceFromProjectedSources({reality,reading:null,navigation:null,journey:null,reports:[],locale});
+    const workspace=await attachSavedSources(context,workspaceFromProjectedSources({reality,reading:null,navigation:null,journey:null,reports:[],locale}));
     return json({ok:true,view:reality,workspace,governance:{persisted:false,canonicalRealityCreated:false,rawRuntimeExposed:false,workspaceConsumesCustomerProjections:true}});
   }catch(error){return json({ok:false,error:error?.code||error?.message||'CUSTOMER_REALITY_PROJECTION_FAILED'},error?.status||422)}
 }

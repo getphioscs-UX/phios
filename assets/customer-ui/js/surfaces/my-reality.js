@@ -113,7 +113,10 @@ function renderReview(view){
 
 function renderHistory(view){
   const items=arr(view.history?.items);
-  document.querySelector('[data-cx-reality-history]').innerHTML=items.length?items.map(item=>`<article class="cx-p1-source"><strong>${esc(item.label||item.id||'')}</strong>${item.occurredAt?`<div class="cx-meta">${esc(item.occurredAt)}</div>`:''}${item.state?`<div class="cx-meta">${esc(item.state)}</div>`:''}</article>`).join(''):empty(tr('No retained Journey history is available here yet.','这里尚无已保留的 Journey 历史。'));
+  const status=view.savedSources?.lanes||{};
+  const unavailable=Object.values(status).some(x=>!['AVAILABLE','EMPTY'].includes(x.state));
+  const note=unavailable?`<p class="cx-p1-note">${esc(tr('Some saved sources need consent or are unavailable. Missing history has not been reconstructed.','部分已保存来源需要授权或暂不可用；没有重建缺失历史。'))}</p>`:'';
+  document.querySelector('[data-cx-reality-history]').innerHTML=note+(items.length?items.map(item=>`<article class="cx-p1-source"><strong>${esc(item.label||item.id||'')}</strong>${item.occurredAt?`<div class="cx-meta">${esc(item.occurredAt)}</div>`:''}${item.state?`<div class="cx-meta">${esc(item.state)}</div>`:''}${item.sourceClass?`<div class="cx-meta">${esc(item.sourceClass)} · ${esc(item.sourceVersion??tr('Version unavailable','版本未提供'))}</div>`:''}${item.answer?`<details><summary>${esc(tr('Saved answer','已保存答案'))}</summary><p>${esc(typeof item.answer==='string'?item.answer:item.answer.text||item.answer.directAnswer||JSON.stringify(item.answer))}</p></details>`:''}</article>`).join(''):empty(tr('No retained history is available here yet.','这里尚无已保留的历史。')));
 }
 function renderReports(view){
   const items=arr(view.reports?.items);

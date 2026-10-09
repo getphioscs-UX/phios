@@ -1,6 +1,6 @@
 // One accounting shape for Reports, symbolic synthesis and contextual Ask.
 // The caller persists reservations before sending any paid request.
-export function reserveProviderBudget({entries=[],requestId,productClass,productId,contextId,model,inputTokenBound,outputTokenLimit,rates,perRequestMaximumUSD,batchMaximumUSD,maximumCalls}) {
+export function reserveProviderBudget({entries=[],requestId,productClass,productId,contextId,model,inputTokenBound,outputTokenLimit,rates,perRequestMaximumUSD,batchMaximumUSD,maximumCalls,retailPriceMYR=null}) {
   if(entries.some(e=>e.requestId===requestId))throw Error('PROVIDER_REQUEST_ALREADY_RESERVED');
   if(!Number.isSafeInteger(maximumCalls)||maximumCalls<=0)throw Error('PROVIDER_CALL_LIMIT_REQUIRED');
   if(entries.length>=maximumCalls)throw Error('PROVIDER_CALL_LIMIT');
@@ -10,7 +10,7 @@ export function reserveProviderBudget({entries=[],requestId,productClass,product
   const estimatedMaximumCostUSD=(inputTokenBound*rates.inputBoundPerMillion+outputTokenLimit*rates.outputPerMillion)/1e6;
   const spent=entries.reduce((n,e)=>n+(e.providerCostUSD??e.estimatedMaximumCostUSD),0);
   if(estimatedMaximumCostUSD>perRequestMaximumUSD||spent+estimatedMaximumCostUSD>batchMaximumUSD)throw Error('PROVIDER_BUDGET_EXCEEDED');
-  return {requestId,productClass,productId,contextId,model,state:'RESERVED',inputTokenBound,outputTokenLimit,estimatedMaximumCostUSD,inputTokens:null,cachedTokens:null,outputTokens:null,providerRequests:1,retryCount:0,providerCostUSD:null,providerCostMYR:null,retailPriceMYR:productClass==='TAROT'?9:null,paymentCostEstimate:null,grossMarginEstimate:null,createdAt:new Date().toISOString()};
+  return {requestId,productClass,productId,contextId,model,state:'RESERVED',inputTokenBound,outputTokenLimit,estimatedMaximumCostUSD,inputTokens:null,cachedTokens:null,outputTokens:null,providerRequests:1,retryCount:0,providerCostUSD:null,providerCostMYR:null,retailPriceMYR,paymentCostEstimate:null,grossMarginEstimate:null,createdAt:new Date().toISOString()};
 }
 export function settleProviderUsage(reservation,{usage,model,providerRequestId,latencyMs,rates}) {
   if(model!==reservation.model)throw Error('PROVIDER_MODEL_MISMATCH');

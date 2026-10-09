@@ -1,6 +1,6 @@
 # Interim change summary — execution incomplete
 
-Authority: MASTER-AUTHORITY.txt. Current HEAD: 538442cae861566956d203eae8cb053f02abf377. Initial BASELINE is preserved; CURRENT-BASELINE records concurrent external commits.
+Authority: MASTER-AUTHORITY.txt. Current HEAD: 4e43c6c5c4f29b95efcf3e8fd81024f20c07aa7d. Initial BASELINE is preserved; CURRENT-BASELINE records concurrent external commits.
 
 Preserved existing BaZi and closure working-tree changes. Added current route/API and commerce inventory; historical evidence remains historical. Fixed selected-article truncation and supporting removal, prevented generic guided clarification with selected context, excluded internal content HTML from Pages, disabled existing Book VIII commerce identity, and changed its public page to private operating volume. Homepage uses task entries. Financial range remains visible and unknown remains null. Tarot ritual is bounded to 1.8 seconds, offers immediate continuation, preserves shuffle on backgrounding, and guards duplicate gestures.
 
