@@ -36,3 +36,7 @@ CUSTOMER_PRODUCTION_READY=FALSE
   "productionReady": false,
   "batchAccepted": false
 }
+
+
+BATCH05=READY_FOR_BATCH_05_COMPOSITION_ARCHITECTURE_HUMAN_REVIEW
+Architecture proposal only; no new report / paid call / production admission.

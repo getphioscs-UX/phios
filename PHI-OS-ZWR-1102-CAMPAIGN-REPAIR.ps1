@@ -209,7 +209,7 @@ Checked 'npm.cmd' @('run','check:cloudflare-function-import-compat')
 Write-Host "PATCH PASS. Original files backed up outside repository: $backup"
 if ($Action -eq 'Apply') { return }
 @'
-const fs=require('fs');const c=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8').replace(/^﻿/,''));const p=c.env?.preview;if(p?.vars?.PHIOS_ENVIRONMENT!=='qa'||!p?.r2_buckets?.some(x=>x.binding==='PRIVATE_REPORTS'&&x.bucket_name==='phios-private-reports-sandbox')||!p?.services?.some(x=>x.binding==='METHOD_REPORT_RENDERER'&&x.service==='phios-method-report-renderer-qa'))throw Error('QA binding configuration mismatch');console.log('QA bindings PASS');
+const fs=require('fs');const c=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8').trim());const p=c.env?.preview;if(p?.vars?.PHIOS_ENVIRONMENT!=='qa'||!p?.r2_buckets?.some(x=>x.binding==='PRIVATE_REPORTS'&&x.bucket_name==='phios-private-reports-sandbox')||!p?.services?.some(x=>x.binding==='METHOD_REPORT_RENDERER'&&x.service==='phios-method-report-renderer-qa'))throw Error('QA binding configuration mismatch');console.log('QA bindings PASS');
 '@ | node -
 if ($LASTEXITCODE -ne 0) { throw 'QA binding guard failed' }
 Checked 'npm.cmd' @('run','build:pages')

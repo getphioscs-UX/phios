@@ -3,6 +3,7 @@ import {inspectBaziAcceptedCopyCoverage,baziProjectionPillars} from './bazi-acce
 import {loadCanonicalPersonSubject,personIdentity} from '../account/canonical-person-store.js';
 import {createReportSubjectPresentationFromAccountPerson,assertReportSubjectBinding,reportBirthInputFingerprint} from '../canonical-presentation-runtime/report-cover-subject.js';
 import {sha256Stable,deepFreeze} from '../interpretation-runtime/mir7-utils.js';
+import {buildBaziSubjectVerificationPlan} from './bazi-chapter-verification.js';
 const issuedCandidates=new WeakMap();
 export const BAZI_RELEASE_STATES=Object.freeze(['INPUT_INVALID','INPUT_REQUIRED','CALCULATION_FAILED','BLOCKED_ACCEPTED_COPY_COVERAGE','VERIFICATION_REJECTED','RENDERING_FAILED','ENTITLEMENT_MISSING','ACCOUNT_OR_SUBJECT_MISMATCH','RELEASE_CANDIDATE_READY','RELEASED_ACCOUNT_AUTHORIZED','SUPERSEDED']);
 const stateFor=e=>/ENTITLEMENT/.test(e.code||e.message)?'ENTITLEMENT_MISSING':/ACCOUNT|PERSON_NOT_FOUND|SUBJECT_SELECTION|PRODUCTION_NOT_ADMITTED|PERSON_USE_DENIED/.test(e.code||e.message)?'ACCOUNT_OR_SUBJECT_MISMATCH':/INVALID|REQUIRED/.test(e.code||e.message)?'INPUT_INVALID':'CALCULATION_FAILED';
@@ -18,7 +19,8 @@ export async function buildBaziSubjectReleaseCandidate(context,selection){
  await assertReportSubjectBinding({presentation,expectedBinding});
  const authority={schemaVersion:'BAZI-SUBJECT-CALCULATED-AUTHORITY-v1',customerId:owner,personId:prepared.personId,personVersion:prepared.personVersion,birthSourceRef:prepared.birthSourceRef,canonicalBirthInputFingerprint:prepared.canonicalBirthInputFingerprint,calculationDigest:prepared.calculationDigest,projection:prepared.execution.canonicalProjection,unknown:prepared.execution.canonicalProjection.unknown,interpretationAdmission:'NONE_ADDED',timingContext:'NOT_SELECTED'};
  const coverage=inspectBaziAcceptedCopyCoverage({pillars:baziProjectionPillars(authority.projection)});
- const snapshot={schemaVersion:'BAZI-LOCAL-BLOCKED-CANDIDATE-SNAPSHOT-v1',customerId:owner,personId:prepared.personId,personVersion:prepared.personVersion,purchaseId:prepared.purchaseId,presentation,authority,coverage,publicationIR:null,report:null,releaseState:coverage.state,downloadAllowed:false};
+ const verificationPlan=buildBaziSubjectVerificationPlan(authority);
+ const snapshot={schemaVersion:'BAZI-LOCAL-BLOCKED-CANDIDATE-SNAPSHOT-v1',customerId:owner,personId:prepared.personId,personVersion:prepared.personVersion,purchaseId:prepared.purchaseId,presentation,authority,coverage,verificationPlan,publicationIR:null,report:null,releaseState:coverage.state,downloadAllowed:false};
  const candidate=deepFreeze({...prepared,state:coverage.state,presentation,authority,coverage,snapshot,snapshotDigest:await sha256Stable(snapshot),downstream:{...prepared.downstream,composition:coverage.state,verification:'NOT_RUN_NO_ADMITTED_COPY',rendering:'FACTUAL_REVIEW_ONLY',release:'BLOCKED'},released:false});issuedCandidates.set(candidate,candidate.snapshotDigest);return candidate;
 }
 
