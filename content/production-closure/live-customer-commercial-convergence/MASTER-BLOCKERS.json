@@ -2,6 +2,12 @@
   "productionReady": false,
   "external": [
     {
+      "id": "W14_CANONICAL_DOCTRINE",
+      "status": "BLOCKED_BY_CANONICAL_DOCTRINE_AUTHORING",
+      "scope": "W14_ONLY",
+      "reason": "Owner + Chat canonical authoring and Human ACCEPT required; independent work continues"
+    },
+    {
       "id": "MAIN_SYNCHRONIZATION",
       "status": "RECHECK_CURRENT_BASELINE",
       "reason": "Current local main is recorded in CURRENT-BASELINE; remote must be rechecked before final release"
@@ -157,13 +163,18 @@
     {
       "id": "W14",
       "title": "NAV runtime / Academy mapping",
-      "status": "PENDING_EXECUTION",
+      "status": "BLOCKED_BY_CANONICAL_DOCTRINE_AUTHORING",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
+        "SOURCE": "IDENTITIES_SCHEMA_INVENTORY_DEPENDENCIES_READY_NOT_CANONICAL",
         "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [
+        "NAV-IDENTITY-PLACEHOLDERS.json",
+        "NAV-SCHEMA-CANDIDATE.json",
+        "NAV-CONSUMER-INVENTORY.json",
+        "NAV-DEPENDENCY-MAP.json"
+      ]
     },
     {
       "id": "W15",

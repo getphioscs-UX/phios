@@ -1,8 +1,8 @@
 {
   "authority": "MASTER-AUTHORITY.txt",
   "authorityDigest": "67c321dd393970717377fb4076a9887a2ae2e84c69f42d1ece2b5a7d43c5779c",
-  "head": "12ef73e8d913430e41530e96e1bc499afc0d969b",
-  "updatedAt": "2026-10-09T03:36:21.845Z",
+  "head": "77fab8018457ae73b484a6a5de50f3dabfec1520",
+  "updatedAt": "2026-10-09T03:49:29.183Z",
   "status": "IN_PROGRESS_SOURCE_WORK_REMAINS",
   "productionReady": false,
   "priorWorkbooks": "HISTORICAL_EVIDENCE_ONLY",
@@ -182,13 +182,18 @@
     {
       "id": "W14",
       "title": "NAV runtime / Academy mapping",
-      "status": "PENDING_EXECUTION",
+      "status": "BLOCKED_BY_CANONICAL_DOCTRINE_AUTHORING",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
+        "SOURCE": "IDENTITIES_SCHEMA_INVENTORY_DEPENDENCIES_READY_NOT_CANONICAL",
         "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [
+        "NAV-IDENTITY-PLACEHOLDERS.json",
+        "NAV-SCHEMA-CANDIDATE.json",
+        "NAV-CONSUMER-INVENTORY.json",
+        "NAV-DEPENDENCY-MAP.json"
+      ]
     },
     {
       "id": "W15",
