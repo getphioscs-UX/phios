@@ -1,0 +1,25 @@
+[data-cx-surface="PROFILE_ASSESSMENT"] main,
+[data-appointment-request-form],
+[data-appointment-request-list] { overflow-wrap: anywhere; }
+[data-relationship-intake] { overflow-wrap: anywhere; }
+[data-relationship-intake] label { display: grid; gap: .5rem; min-width: 0; }
+[data-relationship-intake] fieldset { min-width: 0; }
+[data-relationship-intake] input:not([type="checkbox"]),
+[data-relationship-intake] select,
+[data-relationship-intake] textarea { box-sizing: border-box; width: 100%; max-width: 100%; min-width: 0; font: inherit; padding: .6rem; }
+[data-relationship-intake] label:has([type="checkbox"]) { display: flex; align-items: flex-start; }
+[data-appointment-request-form] label { display: grid; gap: .5rem; min-width: 0; }
+[data-appointment-request-form] label:has([type="checkbox"]) { display: flex; align-items: flex-start; }
+[data-appointment-request-form] input:not([type="checkbox"]),
+[data-appointment-request-form] select,
+[data-appointment-request-form] textarea { box-sizing: border-box; width: 100%; max-width: 100%; min-width: 0; padding: .65rem; font: inherit; }
+[data-appointment-request-list] article,
+[data-prf-account-list],
+[data-prf-account-list] button { min-width: 0; max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+[data-cx-surface="PROFILE_ASSESSMENT"] fieldset { min-width: 0; }
+[data-cx-surface="PROFILE_ASSESSMENT"] .prf-meta-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+[data-cx-surface="PROFILE_ASSESSMENT"] .prf-meta-grid input { min-width: 0; }
+[data-cx-surface="PROFILE_ASSESSMENT"] main select,
+[data-cx-surface="PROFILE_ASSESSMENT"] main textarea,
+[data-cx-surface="PROFILE_ASSESSMENT"] main input:not([type="checkbox"]):not([type="radio"]) { min-width: 0; max-width: 100%; box-sizing: border-box; }
+@media (max-width: 420px) { [data-cx-surface="PROFILE_ASSESSMENT"] .prf-meta-grid { grid-template-columns: minmax(0,1fr); } }

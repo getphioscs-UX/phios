@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/assets/customer-ui/visuals/profile-visual-mvp.css">
   <link rel="stylesheet" href="/assets/customer-ui/visuals/pvp-components.css">
   <link rel="stylesheet" href="/assets/customer-ui/visuals/profile-free-paid.css">
-</head>
+<link rel="stylesheet" href="/assets/customer-ui/surfaces/account-capability-delivery.css"></head>
 <body data-cx-surface="PROFILE_ASSESSMENT" data-cx-nav="PERSPECTIVES" data-prf-w11="true">
   <a class="cx-skip" href="#main">Skip to content</a>
   <div data-cx-header></div>
@@ -62,7 +62,7 @@
       </div>
     </section>
 
-    <section class="cx-section--tight prf-workbench" data-prf-workbench hidden>
+    <section class="cx-section--tight"><div class="cx-container"><button class="cx-button" type="button" data-prf-account-load>Read saved evidence / 读取已保存证据</button><div data-prf-account-list></div></div></section><section class="cx-section--tight prf-workbench" data-prf-workbench hidden>
       <div class="cx-container prf-workbench-grid">
         <form class="cx-card prf-form" data-prf-form>
           <div class="prf-form-head"><div><p class="cx-eyebrow" data-prf-mode-label>PERSONAL EVIDENCE</p><h2 class="cx-heading" data-prf-form-title>Personal Evidence</h2></div><button type="button" class="prf-close" data-prf-close aria-label="Close">×</button></div>
@@ -70,7 +70,7 @@
           <div data-prf-fields class="prf-fields"><p class="cx-body cx-muted">Loading…</p></div>
           <label class="prf-consent"><input type="checkbox" name="consent" required><span data-cx-en="Use these answers for this evidence result. Do not save them automatically." data-cx-zh="使用这些回答生成本次证据结果；不要自动保存。">Use these answers for this evidence result. Do not save them automatically.</span></label>
           <label class="prf-consent" data-prf-sensitive-consent hidden><input type="checkbox" name="sensitiveConsent"><span data-cx-en="I also consent to process the optional body/lifestyle or financial self-report items I answered." data-cx-zh="我也同意处理我所回答的身体／生活或财务自陈项目。">I also consent to process the optional body/lifestyle or financial self-report items I answered.</span></label>
-          <div class="prf-actions"><button class="cx-button cx-button--primary" type="submit" data-cx-en="See this evidence" data-cx-zh="查看这份证据">See this evidence</button><a class="cx-button" href="/perspectives/personal/" data-cx-en="Skip Personal Evidence" data-cx-zh="跳过个人证据">Skip Personal Evidence</a></div><p class="cx-p1-status" data-prf-status role="status" aria-live="polite"></p>
+          <label class="prf-consent"><input type="checkbox" data-prf-account-save><span data-cx-en="Save this evidence object to my signed-in account for 30 days. This does not purchase or release a full report." data-cx-zh="将此证据对象在已登录账户保存 30 天；此操作不会购买或发布完整报告。">Save this evidence object to my signed-in account for 30 days. This does not purchase or release a full report.</span></label><div class="prf-actions"><button class="cx-button cx-button--primary" type="submit" data-cx-en="See this evidence" data-cx-zh="查看这份证据">See this evidence</button><a class="cx-button" href="/perspectives/personal/" data-cx-en="Skip Personal Evidence" data-cx-zh="跳过个人证据">Skip Personal Evidence</a></div><p class="cx-p1-status" data-prf-status role="status" aria-live="polite"></p>
         </form>
         <aside class="prf-guide"><article class="cx-card"><p class="cx-eyebrow">WHY SOURCES STAY SEPARATE</p><h3 class="cx-heading" data-cx-en="Unified language does not mean equal evidence." data-cx-zh="统一语言，不代表所有证据等级相同。">Unified language does not mean equal evidence.</h3><p class="cx-body" data-cx-en="PHI OS can place different sources on the same screen while keeping their origin visible. Agreement opens an observation; it never converts one source into another." data-cx-zh="PHI OS 可以把不同来源放在同一个画面里，但会保留它们的出处。相似可以开启观察，却不会把一种来源变成另一种来源。">PHI OS can place different sources on the same screen while keeping their origin visible. Agreement opens an observation; it never converts one source into another.</p></article></aside>
       </div>

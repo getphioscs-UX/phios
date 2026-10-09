@@ -1,13 +1,14 @@
+import {loadWorldPlaywright,worldBrowserLaunchOptions} from './lib/world-browser-runtime.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {build} from 'esbuild';
-const pw=createRequire(import.meta.url)('C:/Users/Guest Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const pw=loadWorldPlaywright();
 const bundled=await build({entryPoints:['scripts/lib/book-publication-review-server.mjs'],bundle:true,write:false,format:'esm',platform:'node'});
 const {createPublicationReviewServer}=await import('data:text/javascript;base64,'+Buffer.from(bundled.outputFiles[0].text).toString('base64'));
 const server=createPublicationReviewServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const origin='http://127.0.0.1:'+server.address().port,rows=[];
-const browser=await pw.chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+const browser=await pw.chromium.launch(worldBrowserLaunchOptions());
 try{
 for(const width of [1280,390])for(const locale of ['en','zh-Hans']){
 const ctx=await browser.newContext({viewport:{width,height:900}});

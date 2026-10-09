@@ -1,9 +1,10 @@
+import {loadWorldPlaywright,worldBrowserLaunchOptions} from './lib/world-browser-runtime.mjs';
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {build} from 'esbuild';
-const pw=createRequire(import.meta.url)('C:/Users/Guest Account/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const pw=loadWorldPlaywright();
 const dir=process.env.WORLD_RECEIPT_DIR||'docs/acceptance/world-recovery',read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,'')),bindings=read('content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json');
 fs.mkdirSync(dir,{recursive:true});let server,origin=process.env.WORLD_ACCEPTANCE_URL;
 if(!origin){const b=await build({entryPoints:['scripts/lib/book-publication-review-server.mjs'],bundle:true,write:false,format:'esm',platform:'node'}),m=await import('data:text/javascript;base64,'+Buffer.from(b.outputFiles[0].text).toString('base64'));server=m.createPublicationReviewServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));origin='http://127.0.0.1:'+server.address().port;}
-const browser=await pw.chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'}),context=await browser.newContext(),rows=[],network=[],errors=[],allowed=['PHI OS'];
+const browser=await pw.chromium.launch(worldBrowserLaunchOptions()),context=await browser.newContext(),rows=[],network=[],errors=[],allowed=['PHI OS'];
 const routes=[['landing','/world'],['timeline','/world?atlas=timeline'],['ancient','/world?atlas=world&snapshot=WS-M3000'],['modern','/world?atlas=world&snapshot=WS-2026'],['case','/world?atlas=cases&case=CA-T14-01'],['comparison','/world?atlas=comparison'],['trajectory','/world?atlas=trajectories'],['transition','/world?atlas=transitions'],['loss','/world?atlas=loss'],['visuals','/world?explore=visuals'],['search','/world?q=Meiji'],['empty','/world?q=zxqvnonexistent12345'],['reconfiguration','/world?view=reconfiguration&atlas=snapshots']];
 const visibleText=async page=>page.evaluate(()=>{const out=[];const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walk.nextNode()){const n=walk.currentNode,p=n.parentElement;if(!p||p.closest('script,style,code,details:not([open])'))continue;const r=document.createRange();r.selectNodeContents(n);if(!r.getBoundingClientRect().width)continue;const s=n.textContent.trim();if(s)out.push(s);}return out;});
 try{

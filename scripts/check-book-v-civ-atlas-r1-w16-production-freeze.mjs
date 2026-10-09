@@ -90,7 +90,15 @@ assert.equal(fr4.historicalRegistriesChanged,false);
 assert.equal(fr4.change.path,'assets/js/pages/civilization-atlas/atlas-static-visual.js');
 assert.equal(fr4.change.previousSha256,ownerSuccessor.changes.find(c=>c.path===fr4.change.path).successorSha256);
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(fr4.change.changeClass));
-const currentVisualDigest=c=>c.path===fr4.change.path?fr4.change.successorSha256:c.successorSha256;
+const recovery=json('content/civilization-atlas/maintenance/book-v-world-public-recovery-successor-v1.json');
+assert.equal(recovery.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');
+for(const field of ['productionAdmissionChanged','historicalRegistriesChanged','acceptedBindingsChanged','canonicalTheoryChanged'])assert.equal(recovery[field],false);
+assert.equal(recovery.humanDecision,'PENDING');
+assert.equal(recovery.predecessorSha256,digest(recovery.predecessor));
+for(const entry of recovery.additionalPredecessors)assert.equal(digest(entry.path),entry.sha256);
+for(const entry of recovery.sourceEvidence)assert.equal(digest(entry.path),entry.sha256,'World recovery source evidence drift: '+entry.path);
+const recoveryDigest=(p,prior)=>{const c=recovery.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior,'World recovery predecessor drift: '+p);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));return c.successorSha256;};
+const currentVisualDigest=c=>recoveryDigest(c.path,c.path===fr4.change.path?fr4.change.successorSha256:c.successorSha256);
 for(const change of ownerSuccessor.changes){
  const previous=change.path===activation.bindingSuccessor?activation.bindingSuccessorSha256:activation.changes.find(c=>c.path===change.path)?.successorSha256;
  assert.equal(change.previousSha256,previous);
@@ -224,7 +232,7 @@ assert.equal(bookViDataSuccessorV7.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_R
 assert.equal(bookViDataSuccessorV7.scope.productionAdmissionChanged,false);
 assert.equal(bookViDataSuccessorV7.scope.bookVHistoricalRegistriesChanged,false);
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(bookViDataSuccessorV7.change.changeClass));
-assert.equal(digest(bookViDataSuccessorV7.change.path),bookViDataSuccessorV7.change.successorSha256,'Atlas data successor v7 digest drift');
+assert.equal(digest(bookViDataSuccessorV7.change.path),recoveryDigest(bookViDataSuccessorV7.change.path,bookViDataSuccessorV7.change.successorSha256),'Atlas data successor v7 digest drift');
 assert.equal(bookViDataSuccessorV3.scope.bookVCanonicalTheoryChanged,false);
 assert.equal(bookViDataSuccessorV3.scope.bookVHistoricalRegistriesChanged,false);
 assert.equal(bookViDataSuccessorV3.scope.parallelAtlasRuntimeCreated,false);
@@ -234,7 +242,7 @@ assert.match(atlasDataV3Source,/loadReconfigurationVisualStatus/);
 assert.match(atlasDataV3Source,/loadCivilizationVisualBindings/);
 assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/reconfiguration/book-vi-visual-asset-status-v1.json')));
 assert.ok(fs.existsSync(path.join(root,'content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json')));
-authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:bookViDataSuccessorV7.change.successorSha256,changeClass:bookViDataSuccessorV7.change.changeClass});
+authorizedMaintenance.set(priorAtlasData.path,{...priorAtlasData,successorSha256:recoveryDigest(bookViDataSuccessorV7.change.path,bookViDataSuccessorV7.change.successorSha256),changeClass:bookViDataSuccessorV7.change.changeClass});
 
 // Book VI shares the existing Atlas state and URL-state owners with Book V.
 // Verify the frozen Book V predecessor bytes first, then authorize only the
@@ -272,12 +280,12 @@ for(const change of bookViStateUrlSuccessor.changes){
   assert.equal(stateV3.urlChange.path,bookViStateUrlSuccessor.changes[1].path);
   assert.equal(stateV3.urlChange.previousSha256,bookViStateUrlSuccessor.changes[1].successorSha256);
   const currentDigest=change.path===stateV3.change.path?stateV3.change.successorSha256:stateV3.urlChange.successorSha256;
-  assert.equal(digest(change.path),currentDigest,`Book VI state successor digest drift: ${change.path}`);
+  assert.equal(digest(change.path),recoveryDigest(change.path,currentDigest),`Book VI state successor digest drift: ${change.path}`);
   assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(change.changeClass),`Book VI state change class not allowed: ${change.path}`);
   authorizedMaintenance.set(change.path,{
     path:change.path,
     previousSha256:change.previousSha256,
-    successorSha256:currentDigest,
+    successorSha256:recoveryDigest(change.path,currentDigest),
     changeClass:change.changeClass
   });
 }
@@ -301,8 +309,8 @@ for(const change of currentEngineering.changes){
   assert.equal(change.frozenSha256,original.sha256);
   assert.equal(change.previousSha256,authorizedMaintenance.get(change.path)?.successorSha256||original.sha256);
   assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(change.changeClass));
-  assert.equal(digest(change.path),change.successorSha256,`Current Atlas engineering drift: ${change.path}`);
-  authorizedMaintenance.set(change.path,{...change,previousSha256:original.sha256});
+  assert.equal(digest(change.path),recoveryDigest(change.path,change.successorSha256),`Current Atlas engineering drift: ${change.path}`);
+  authorizedMaintenance.set(change.path,{...change,previousSha256:original.sha256,successorSha256:recoveryDigest(change.path,change.successorSha256)});
 }
 await import('./check-civilization-atlas-fr4-visual-utilization.mjs');
 await import('./check-civilization-atlas-fr5-core-case-semantics.mjs');
