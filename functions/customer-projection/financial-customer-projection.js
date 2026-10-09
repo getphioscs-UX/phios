@@ -1,6 +1,6 @@
 import {projectFinancialNavigation} from './financial-navigation-projection.js';
 import {CX_PROJECTION_VERSION,boundary,clean,deepFreeze,finite,list,localeOf,object,safeUrl,sourceLineage,text} from './projection-common.js';
-const metric=(metrics,code)=>finite(metrics?.[code]);
+const metric=(metrics,code)=>{const v=metrics?.[code];if(v&&typeof v==='object'&&Number.isFinite(v.min)&&Number.isFinite(v.max)&&v.min<=v.max)return {min:v.min,max:v.max};return finite(v)};
 const evidenceLabel=state=>{const s=clean(state).toUpperCase();if(s.includes('VERIFIED'))return 'VERIFIED';if(s.includes('ASSUM'))return 'ASSUMED';if(s.includes('OUTDATED'))return 'OUTDATED';if(s.includes('MISSING'))return 'MISSING';if(s)return 'REPORTED';return 'MISSING'};
 const findingType=value=>clean(value).toUpperCase()||'UNKNOWN';
 const customerText=value=>typeof value==='string'?clean(value):clean(value?.summary||value?.label||value?.title||value?.text);

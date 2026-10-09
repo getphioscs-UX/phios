@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import {internalPublicationFile} from './lib/publication-boundary.mjs';
 import {STRIPE_PRODUCT_REGISTRY,commerceProduct} from '../functions/pws/commercial/stripe-product-registry.js';
 import {projectKnowledgeAnswerForCustomer} from '../functions/customer-projection/knowledge-customer-projection.js';
+import {projectFinancialForCustomer} from '../functions/customer-projection/financial-customer-projection.js';
 const results=[];
 function test(workId,name,fn){try{fn();results.push({workId,name,result:'PASS',scope:'SOURCE_LOCAL_ONLY'});}catch(e){results.push({workId,name,result:'FAIL',error:e.message});}}
 test('W04','Internal HTML exclusion preserves runtime JSON',()=>{
@@ -31,6 +32,14 @@ test('W05','Homepage task links resolve to existing sources',()=>{
  for(const route of ['perspectives/personal','perspectives/relationship','professional/financial','perspectives/tarot','perspectives/iching','academy','books']){
   assert.ok(html.includes('/'+route+'/'));assert.ok(fs.existsSync(route+'/index.html'));
  }
+});
+test('W27','Financial range remains a range and unknown stays null',()=>{
+ const result=projectFinancialForCustomer({snapshot:{evidenceState:'SELF_REPORTED_PARTIAL'},calculation:{metrics:{netWorth:{min:100,max:500},grossAssets:null,totalLiabilities:0}}});
+ assert.deepEqual(result.currentPosition[0].value,{min:100,max:500});
+ assert.equal(result.currentPosition[0].evidenceState,'REPORTED');
+ assert.equal(result.currentPosition[1].value,null);
+ assert.equal(result.currentPosition[2].value,0);
+ assert.deepEqual(result.overview.whereYouAre.netWorth,{min:100,max:500});
 });
 fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/QA-RESULTS.json',JSON.stringify(results,null,2)+'\n');
 console.log(JSON.stringify(results,null,2));if(results.some(r=>r.result==='FAIL'))process.exitCode=1;
