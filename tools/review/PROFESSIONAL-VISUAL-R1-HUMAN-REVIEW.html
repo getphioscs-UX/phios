@@ -1,0 +1,497 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Professional Visual R1 · Master scoped design review</title><style>body{font:16px/1.65 system-ui;background:#f5f1e7;color:#153c39;margin:0}main{max-width:1240px;margin:auto;padding:24px}section{background:#fffdf8;border:1px solid #c6cbbd;padding:24px;margin:24px 0;border-radius:12px}img{max-width:100%;max-height:1100px;object-fit:contain}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf0e8;padding:16px}figure{margin:20px 0}a{color:#145d57}</style><main><h1>Professional Visual Recomposition R1</h1><p>MACHINE_QA_PASS_HUMAN_REVIEW_REQUIRED · HUMAN REVIEW REQUIRED · 当前未部署</p><p><a href="/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#professional-visual-r1">返回唯一 Master</a> · <a href="/professional/">实际页面</a></p><section><h2>1 · Hero 前后对比</h2><figure><a href="professional-visual-r1/before-1280-en.png"><img src="professional-visual-r1/before-1280-en.png" alt="Before · old background and gallery"></a><figcaption>Before · old background and gallery</figcaption></figure><figure><a href="professional-visual-r1/hero-1440-en.png"><img src="professional-visual-r1/hero-1440-en.png" alt="After · PIS-035 canonical accepted image; new layout requires review"></a><figcaption>After · PIS-035 canonical accepted image; new layout requires review</figcaption></figure></section><section><h2>2 · 完整 Professional 页面</h2><p><a href="/professional/">打开本地页面</a></p><figure><a href="professional-visual-r1/after-1280-en.png"><img src="professional-visual-r1/after-1280-en.png" alt="Complete page · 1280 English"></a><figcaption>Complete page · 1280 English</figcaption></figure></section><section><h2>3 · 三个生活情境视觉</h2><p>财务资料、复杂处境、重要报告：本轮原生 SVG 构图，说明关系，不呈现虚构客户数据。</p><figure><a href="professional-visual-r1/after-390-en.png"><img src="professional-visual-r1/after-390-en.png" alt="Three situation modules · mobile"></a><figcaption>Three situation modules · mobile</figcaption></figure></section><section><h2>4 · 新专业服务边界图</h2><figure><a href="professional-visual-r1/diagram-1280-en.png"><img src="professional-visual-r1/diagram-1280-en.png" alt="Digital Report / Human Review / conditional Professional Advice"></a><figcaption>Digital Report / Human Review / conditional Professional Advice</figcaption></figure><figure><a href="professional-visual-r1/diagram-375-zh-Hans.png"><img src="professional-visual-r1/diagram-375-zh-Hans.png" alt="中文边界图 · 375px"></a><figcaption>中文边界图 · 375px</figcaption></figure></section><section><h2>5 · 四类服务入口 · 实际点击</h2><pre>[
+  {
+    "target": "/professional/financial/",
+    "actual": "/professional/financial/",
+    "visible": true,
+    "title": "See where you are before deciding what to do."
+  },
+  {
+    "target": "/professional/authority/",
+    "actual": "/professional/authority/",
+    "visible": true,
+    "title": "A professional conclusion should show who made it, within what scope, and when."
+  },
+  {
+    "target": "/professional/reports/",
+    "actual": "/professional/reports/",
+    "visible": true,
+    "title": "Released reports only."
+  },
+  {
+    "target": "/professional/services/",
+    "actual": "/professional/services/",
+    "visible": true,
+    "title": "Know the help, scope and deliverable before you commit."
+  },
+  {
+    "target": "/professional/appointments/",
+    "actual": "/professional/appointments/",
+    "visible": true,
+    "title": "Book only after the scope is clear."
+  }
+]</pre><p>仅页面导航验证；账户报告、分配专业人士、费用、即时预约、确认与持久化未由本轮验收。</p></section><section><h2>6 · 中文桌面 / 手机</h2><figure><a href="professional-visual-r1/hero-1440-zh-Hans.png"><img src="professional-visual-r1/hero-1440-zh-Hans.png" alt="中文 desktop hero"></a><figcaption>中文 desktop hero</figcaption></figure><figure><a href="professional-visual-r1/after-390-zh-Hans.png"><img src="professional-visual-r1/after-390-zh-Hans.png" alt="中文 full mobile"></a><figcaption>中文 full mobile</figcaption></figure></section><section><h2>7 · 英文桌面 / 手机</h2><figure><a href="professional-visual-r1/hero-1280-en.png"><img src="professional-visual-r1/hero-1280-en.png" alt="English desktop hero"></a><figcaption>English desktop hero</figcaption></figure><figure><a href="professional-visual-r1/after-375-en.png"><img src="professional-visual-r1/after-375-en.png" alt="English full mobile"></a><figcaption>English full mobile</figcaption></figure></section><section><h2>8 · 旧五图下架记录</h2><p>Professional 页面旧 gallery、details、Show 5 和五个 FIG 引用已从源码移除。生成器跳过该页，防止重建时恢复。未删除 R2 / shared registry / other pages。</p><pre>[
+  {
+    "name": "PHIOS-FIGURE-APPROVAL-FLOW-v1.svg",
+    "assetCode": "FIG-048",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js",
+      "professional-appointments.html"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-CONSENT-SHARING-v1.svg",
+    "assetCode": "FIG-047",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js",
+      "professional-consent-sharing.html"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-EVIDENCE-INTERPRETATION-v1.svg",
+    "assetCode": "FIG-043",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "external-reader-intake.html",
+      "functions/interpretation-runtime/cross-method-interpretation-v1.js",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js",
+      "professional-reports.html",
+      "professional-workspace.html",
+      "professional/external-readers/index.html"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-OUTCOME-REVIEW-v1.svg",
+    "assetCode": "FIG-050",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js",
+      "professional-reports.html"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-PRIVACY-DATA-BOUNDARY-v1.svg",
+    "assetCode": "FIG-052",
+    "registryRetained": true,
+    "consumers": [
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/commerce/economics-20261009/windows-integration/free-natal-diagram-audit/ZIWEI-BILINGUAL.html",
+      "docs/commerce/economics-20261009/windows-integration/free-natal-diagram-audit/ZIWEI-en.html",
+      "docs/commerce/economics-20261009/windows-integration/free-natal-diagram-audit/ZIWEI-zh-Hans.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/personal-reality-product/adapters/ziwei-phase9-visual-projection.js",
+      "privacy.html",
+      "professional-data-privacy.html"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-PROFESSIONAL-ACTION-v1.svg",
+    "assetCode": "FIG-049",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/interpretation-runtime/cross-method-interpretation-v1.js",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-PROFESSIONAL-GUIDANCE-FULL-FLOW-v1.svg",
+    "assetCode": "FIG-051",
+    "registryRetained": true,
+    "consumers": [
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/commerce/economics-20261009/windows-integration/free-natal-diagram-audit/ZIWEI-BILINGUAL.html",
+      "docs/commerce/economics-20261009/windows-integration/free-natal-diagram-audit/ZIWEI-en.html",
+      "docs/commerce/economics-20261009/windows-integration/free-natal-diagram-audit/ZIWEI-zh-Hans.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/personal-reality-product/adapters/ziwei-phase9-visual-projection.js",
+      "professional-workspace.html"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-PROFESSIONAL-JUDGMENT-BOUNDARY-v1.svg",
+    "assetCode": "FIG-046",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-PROVENANCE-LINEAGE-v1.svg",
+    "assetCode": "FIG-045",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/interpretation-runtime/cross-method-interpretation-v1.js",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  },
+  {
+    "name": "PHIOS-FIGURE-UNCERTAINTY-BOUNDARY-v1.svg",
+    "assetCode": "FIG-044",
+    "registryRetained": true,
+    "consumers": [
+      "assets/js/method-client-delivery/renderers/cross-method-renderer.js",
+      "docs/assets/r2-public/R2-260-DISPLAY-CHECKLIST.html",
+      "docs/assets/r2-public/R2-ALL-VISUAL-ASSETS-REVIEW.html",
+      "docs/assets/r2-public/R2-PUBLIC-IMAGE-REVIEW.html",
+      "docs/public-index-successor/PIS-R1-VISUAL-AUDIT.html",
+      "functions/interpretation-runtime/cross-method-interpretation-v1.js",
+      "functions/interpretation-runtime/mir7-registry-bundle.generated.js"
+    ],
+    "disposition": "R2_NOT_TOUCHED_REGISTRY_RETAINED; Professional landing no longer consumes the old gallery"
+  }
+]</pre></section><section><h2>9 · 两张真实远端资产校验</h2><pre>{
+  "at": "2026-10-09T13:43:42.626Z",
+  "rows": [
+    {
+      "id": "PIS-035",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 301678,
+      "sha256": "eb8264eb7c769733792040f1989f22c1360c49a9f05266c6294749f9f9eec5d9",
+      "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/illustrations/%60PHIOS-ILLUSTRATION-PROFESSIONAL-WORKSPACE-SCENE-v1.webp",
+      "humanReview": {
+        "required": false,
+        "status": "OWNER_ACCEPTED"
+      }
+    },
+    {
+      "id": "HERO-014",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 689606,
+      "sha256": "6b7cb43e1939d2e9da263233af9681db7decc840badade4ea43e9474b6ead18f",
+      "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/PHIOS-HERO-PROFESSIONAL-v1.webp",
+      "humanReview": {
+        "required": true,
+        "status": "PENDING_HPC2_PRE_VISUAL_REVIEW"
+      }
+    }
+  ]
+}</pre><figure><a href="professional-visual-r1/PIS-035.webp"><img src="professional-visual-r1/PIS-035.webp" alt="PIS-035 · OWNER_ACCEPTED · verified unchanged bytes"></a><figcaption>PIS-035 · OWNER_ACCEPTED · verified unchanged bytes</figcaption></figure><figure><a href="professional-visual-r1/HERO-014.webp"><img src="professional-visual-r1/HERO-014.webp" alt="HERO-014 · pending acceptance · not selected"></a><figcaption>HERO-014 · pending acceptance · not selected</figcaption></figure></section><section><h2>10 · OG / 真实对象 key</h2><p>OG 原名保留：%60 是现存反引号 key 的正确编码。真实 GET 200、WEBP decode 1672×941；不是路径修正失败，也没有未经授权重命名。前端经现有 unified resolver，以 PIS-035 身份读取。</p><figure><a href="professional-visual-r1/hero-fallback.png"><img src="professional-visual-r1/hero-fallback.png" alt="Designed image-failure fallback; no empty image box"></a><figcaption>Designed image-failure fallback; no empty image box</figcaption></figure></section><section><h2>11 · 版本及实际修改</h2><pre>{
+  "head": "7bad499dbedcaaa19376977cec32390babe3db19",
+  "files": [
+    {
+      "path": "professional/index.html",
+      "sha256": "1edec34527c8807d376b6bcf6642a0ca4ef4c2d5f49369ee61db0ad2582c2afe"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/professional-visual-r1.css",
+      "sha256": "7c366e3f5f9c3b1c0d497647a67ee40c8fffe68988da9a7f3b0d9b1067efc8d2"
+    },
+    {
+      "path": "assets/customer-ui/js/professional-visual-r1.js",
+      "sha256": "ff8fdd684adaeb90c3a12a7db0a3d5264604f47f13156503e3565ab76e05ca35"
+    },
+    {
+      "path": "scripts/build-pis-r1-context-figures.mjs",
+      "sha256": "74bf87fc1ef37361d5c191bafe6368e8d906a59341425244807acb30c22ccc4e"
+    },
+    {
+      "path": "scripts/build-cloudflare-pages.mjs",
+      "sha256": "c23d33fd4df67fb3094a831ba70d7e37b61d4ffe5116319dd6b02e1862fcca17"
+    },
+    {
+      "path": "scripts/verify-professional-visual-r1.mjs",
+      "sha256": "775cbea9f781f75b306cbcc355238dfcfe4ddef5fe9ba04a54bc91d085c20dad"
+    }
+  ],
+  "ownerDocument": {
+    "path": "C:/Users/Guest Account/.codex/attachments/78e388b0-c31d-4cb1-ad04-4f0615c8b790/Pasted text.txt",
+    "sha256": "995722cce5de65cc1d37433fed92936c5f79ccdd8e479736ffd5945d59fb9060"
+  }
+}</pre></section><section><h2>12 · 本轮验证 / 构建</h2><pre>{
+  "browser": "MACHINE_QA_PASS_HUMAN_REVIEW_REQUIRED",
+  "rows": [
+    {
+      "width": 1440,
+      "lang": "en",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "lang": "zh-Hans",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "lang": "en",
+      "version": "before",
+      "state": "BEFORE_OBSERVATION",
+      "brokenImages": [
+        {
+          "asset": "FIG-044",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-UNCERTAINTY-BOUNDARY-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-045",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROVENANCE-LINEAGE-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-049",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROFESSIONAL-ACTION-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "lang": "en",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "lang": "zh-Hans",
+      "version": "before",
+      "state": "BEFORE_OBSERVATION",
+      "brokenImages": [
+        {
+          "asset": "FIG-044",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-UNCERTAINTY-BOUNDARY-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-045",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROVENANCE-LINEAGE-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-046",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROFESSIONAL-JUDGMENT-BOUNDARY-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-049",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROFESSIONAL-ACTION-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "lang": "zh-Hans",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "version": "before",
+      "state": "BEFORE_OBSERVATION",
+      "brokenImages": [
+        {
+          "asset": "FIG-044",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-UNCERTAINTY-BOUNDARY-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-045",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROVENANCE-LINEAGE-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-046",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROFESSIONAL-JUDGMENT-BOUNDARY-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-049",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROFESSIONAL-ACTION-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "lang": "zh-Hans",
+      "version": "before",
+      "state": "BEFORE_OBSERVATION",
+      "brokenImages": [
+        {
+          "asset": "FIG-044",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-UNCERTAINTY-BOUNDARY-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-045",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROVENANCE-LINEAGE-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-046",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROFESSIONAL-JUDGMENT-BOUNDARY-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        },
+        {
+          "asset": "FIG-049",
+          "src": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/professional/PHIOS-FIGURE-PROFESSIONAL-ACTION-v1.svg",
+          "width": 0,
+          "height": 0,
+          "complete": true
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "lang": "zh-Hans",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "lang": "en",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "lang": "zh-Hans",
+      "version": "after",
+      "state": "PASS",
+      "brokenImages": [],
+      "overflow": false
+    }
+  ],
+  "fallback": {
+    "state": "failed",
+    "visible": true,
+    "overflow": false
+  },
+  "zeroCostChecks": [
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:cx-r5",
+      "result": "PASS",
+      "scope": "current shell and inherited frozen CSS/route/asset authority checks"
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:m4b-professional-public-pages",
+      "result": "PASS",
+      "scope": "professional owner/route/service boundaries"
+    }
+  ],
+  "build": {
+    "result": "PASS",
+    "command": "node scripts/run-zero-cost-regression.mjs build:pages",
+    "currentHead": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+    "evidenceCommit": "ff839da7e4dcbe0a8b2bbd847ee84d687d7f7ce2",
+    "buildAt": "2026-10-09T11:04:12.528Z",
+    "startedAt": "2026-10-09T11:01:45.387Z",
+    "exitCode": 0,
+    "stale": false,
+    "inputBefore": "74c4668dc1d7f717a577cd3db4921a4549954fdd1d55d113b435e0cce52a1407",
+    "inputAfter": "74c4668dc1d7f717a577cd3db4921a4549954fdd1d55d113b435e0cce52a1407",
+    "inputScope": "BUILD_INPUT_SOURCE_AND_PUBLIC_FILES_EXCLUDING_INTERNAL_REVIEW_AND_GENERATED_GUARD_RECEIPTS",
+    "buildReceipt": "content/production-closure/live-customer-commercial-convergence/OWNER-CORRECTION-PAGES-BUILD.log",
+    "logSHA256": "e7227e713c59efb697c5ed9957802ea8cef4893b838953fa2a4b98c7bbe49129",
+    "workerBytes": 16586202,
+    "gzipBytes": 3086504,
+    "providerCalls": 0,
+    "deployed": false,
+    "liveCustomer": false
+  }
+}</pre></section><section><h2>13 · 未解决事项 / 人工接受范围</h2><p>新版布局、原生场景图文与新服务边界图尚待 Human ACCEPT。Professional 产品费用、专业人士指派、真实预约持久化、报告交付及全站 H.5 / RDG 治理缺口不因这次视觉实现而通过。SOURCE 范围通过不等于 DEPLOYED 或 LIVE_CUSTOMER。</p><p>无新增图像 provider 调用、无付费模型、无 R2 删除、无付款、无部署、无生产迁移、无提交或推送。</p></section></main></html>
