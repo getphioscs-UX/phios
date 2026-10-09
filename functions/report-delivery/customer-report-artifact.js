@@ -5,7 +5,8 @@ export async function createCustomerReportArtifact(value){
  for(const k of ['reportArtifactId','customerId','personId','methodCode','productCode','entitlementId','inputDigest','authorityPackVersion','reportContentVersion','rendererVersion'])if(typeof value[k]!=='string'||!value[k])fail('CUSTOMER_ARTIFACT_IDENTITY_REQUIRED');
  if(!value.inputSnapshot||!value.calculationSnapshot||!value.publicationIR||!Array.isArray(value.generatedSections)||!value.generatedSections.length||!value.htmlSnapshotOrRenderState?.objectKey)fail('CUSTOMER_ARTIFACT_CONTENT_REQUIRED');
  const generatedCopy=structuredClone(value.generatedSections),contentDigest=await digest(generatedCopy);
- const body={...structuredClone(value),schemaVersion:CUSTOMER_ARTIFACT_VERSION,generatedCopy,contentDigest,status:'FROZEN_CUSTOMER_COPY',pdfPolicy:'ON_DEMAND_DERIVATIVE',sharedAssetsEmbedded:false};
+ const {artifactDigest:priorDigest,...input}=structuredClone(value);
+ const body={...input,schemaVersion:CUSTOMER_ARTIFACT_VERSION,generatedCopy,contentDigest,status:'FROZEN_CUSTOMER_COPY',pdfPolicy:'ON_DEMAND_DERIVATIVE',sharedAssetsEmbedded:false};
  if(JSON.stringify(body).includes('data:image/'))fail('CUSTOMER_ARTIFACT_EMBEDDED_ASSET_FORBIDDEN');
  body.sourceDigest=await digest({input:value.inputSnapshot,calculation:value.calculationSnapshot,authority:value.authorityPackVersion});
  return deepFreeze({...body,artifactDigest:await digest(body)});

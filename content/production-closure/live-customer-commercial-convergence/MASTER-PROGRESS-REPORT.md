@@ -1,5 +1,5 @@
 # 唯一 Master W00–W40 当前进度
-HEAD: 712c47ba033b7963d4484d9bcdc9dcf3f0d094dc
+HEAD: 941d34f09abc970e465685f34c28a78592d45b8e
 
 |阶段|SOURCE|DEPLOYED|LIVE CUSTOMER|下一步|
 |---|---|---|---|---|
@@ -25,7 +25,7 @@ HEAD: 712c47ba033b7963d4484d9bcdc9dcf3f0d094dc
 |W19 Free Tarot zero-provider|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|重跑确定性路径网络拦截；客户浏览器仍需验证|
 |W20 Paid Tarot commerce|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Bind paid Tarot single synthesis to verified order/reading/corpus|
 |W21 Tarot single-call synthesis|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|将单次 synthesis 接入真实订单、固定 reading、失败可恢复状态；不新增模型调用|
-|W22 20-case unit economics|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用|
+|W22 Tarot 20-case unit economics|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|零费用验证当前 RM19 bilingual + 四问整单 preflight；历史初次合成数据不证明当前整单成本，不因有授权而重复付费测试|
 |W23 I Ching experience|TARGETED_SYNTHETIC_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Actual deterministic cast/mobile replay and corpus provenance|
 |W24 I Ching synthesis candidate|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|完成受控订单与确定性卦象的 synthesis 技术接线，不改已决定 RM39|
 |W25 Account|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Actual owned report list/reopen/download, pending generation progress|
@@ -40,7 +40,7 @@ HEAD: 712c47ba033b7963d4484d9bcdc9dcf3f0d094dc
 |W34 Shared provider cost ledger|TARGETED_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本|
 |W35 Security / permissions|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|补充报告/视频跨账户、会员到期和客户端伪造的实际 handler 测试|
 |W36 Targeted regression|CURRENT_CHECK_FAIL|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|重跑当前受影响链；记录真实失败，禁止修改冻结哈希|
-|W37 Pages build|PASS|NOT_RUN|NOT_RUN|保留当前构建凭证；只有生产批准后才部署|
+|W37 Pages build|STALE_BUILD_EVIDENCE_REBUILD_REQUIRED|NOT_RUN|NOT_RUN|重新运行绑定 HEAD 和工作树摘要的本地构建|
 |W38 Customer journey preview|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|五条旅程逐节点执行本地受控预览；发布后再限定账户实付|
 |W39 Human review|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐项填充29类实际材料与差异，不把目录标题视为审阅完成|
 |W40 Production release|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|仅在明确批准后执行具体部署、迁移及限定账户客户验收|

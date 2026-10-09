@@ -1,8 +1,8 @@
 {
   "authority": "MASTER-AUTHORITY.txt",
   "authorityDigest": "67c321dd393970717377fb4076a9887a2ae2e84c69f42d1ece2b5a7d43c5779c",
-  "head": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
-  "updatedAt": "2026-10-09T08:10:51.827Z",
+  "head": "941d34f09abc970e465685f34c28a78592d45b8e",
+  "updatedAt": "2026-10-09T08:29:26.802Z",
   "status": "IN_PROGRESS_SOURCE_WORK_REMAINS",
   "productionReady": false,
   "priorWorkbooks": "HISTORICAL_EVIDENCE_ONLY",
@@ -992,7 +992,7 @@
     },
     {
       "id": "W22",
-      "title": "20-case unit economics",
+      "title": "Tarot 20-case unit economics",
       "status": "PARTIALLY_COMPLETE",
       "gates": {
         "SOURCE": "INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED",
@@ -1006,7 +1006,7 @@
         "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json"
       ],
       "actualChecks": [],
-      "nextStep": "20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用",
+      "nextStep": "零费用验证当前 RM19 bilingual + 四问整单 preflight；历史初次合成数据不证明当前整单成本，不因有授权而重复付费测试",
       "liveCustomerDoesNotBlockIndependentSource": true,
       "sourceFiles": [
         {
@@ -1017,7 +1017,71 @@
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
       "remainingWork": "20次真实合成调用已完成；人工质量审阅及当前双语+四问整单成本仍缺，不新增调用",
       "progress": "部分",
-      "verificationVersion": "2026-10-09T03:48:54.935Z"
+      "verificationVersion": "2026-10-09T03:48:54.935Z",
+      "historicalEvidence": "AVAILABLE",
+      "currentAuthorizedBatch": "AUTHORIZED_NOT_STARTED",
+      "currentPreflight": "PENDING",
+      "currentCalls": 0,
+      "currentSpendUSD": 0,
+      "paidRetry": 0,
+      "commercialTruth": {
+        "productCode": "COM-READING-TAROT-FULL",
+        "currentPriceMYR": 19,
+        "localeMode": "BILINGUAL",
+        "free": {
+          "generation": "DETERMINISTIC",
+          "providerCalls": 0,
+          "drawBinding": "SHUFFLE_DRAW_ORIENTATION_SPREAD_FIXED"
+        },
+        "paid": {
+          "primarySynthesisCalls": 1,
+          "paidRetry": 0,
+          "includedFollowupQuestions": 4,
+          "drawIdentityMayChange": false,
+          "failureState": "RECOVERABLE_DELIVERY_STATE"
+        },
+        "historicalEvidence": {
+          "state": "AVAILABLE",
+          "receipt": {
+            "path": "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json",
+            "sha256": "92fc0ebf18d9a58f88e6b4e3332c6754b83cf5cd1ff8057e290c49736272b47e",
+            "scope": "HISTORICAL_COST_QUALITY_EVIDENCE_NOT_CURRENT_BATCH_ADMISSION"
+          },
+          "scope": "INITIAL_SYNTHESIS_COST_QUALITY_REFERENCE_ONLY"
+        },
+        "currentAuthorizedBatch": {
+          "state": "AUTHORIZED_NOT_STARTED",
+          "maxCases": 20,
+          "maxPerCaseUSD": 0.1,
+          "maxTotalUSD": 2,
+          "paidRetry": 0,
+          "currentCalls": 0,
+          "currentSpendUSD": 0
+        },
+        "currentPreflight": "PENDING",
+        "wholeProductCost": {
+          "state": "NOT_VERIFIED",
+          "maximumUSD": 1,
+          "includes": [
+            "INITIAL_SYNTHESIS",
+            "UP_TO_FOUR_FOLLOWUP_ANSWERS",
+            "BILINGUAL_OUTPUT",
+            "PERMITTED_EXCEPTIONAL_REPAIR"
+          ],
+          "historicalInitialSynthesisProvesFullOrder": false
+        },
+        "preflightBlockers": [
+          "MODEL_ALLOWLIST_CURRENT_REGISTRY",
+          "DEDICATED_QA_ENDPOINT",
+          "HARD_CASE_AND_TOTAL_BUDGET_GUARDS",
+          "TOKEN_COST_LEDGER_ABORT_NO_RETRY",
+          "FIXED_DRAW_IDENTITY_BILINGUAL_SCHEMA",
+          "FOUR_FOLLOWUP_WHOLE_ORDER_COST_OWNERSHIP",
+          "RECOVERABLE_DELIVERY_PROOF"
+        ],
+        "providerCallsThisRun": 0,
+        "providerSpendThisRunUSD": 0
+      }
     },
     {
       "id": "W23",
@@ -1634,9 +1698,9 @@
     {
       "id": "W37",
       "title": "Pages build",
-      "status": "LOCAL_BUILD_VERIFIED",
+      "status": "BUILD_EVIDENCE_STALE",
       "gates": {
-        "SOURCE": "PASS",
+        "SOURCE": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
         "DEPLOYED": "NOT_RUN",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
@@ -1660,18 +1724,18 @@
       "reconciledHead": "920a8eb130afa4c27b55b4ba1cd2fab86de75a35",
       "actualChecks": [],
       "remainingWork": "当前版本隔离构建及25MiB、imports、私有内容、runtime资产检查",
-      "nextStep": "保留当前构建凭证；只有生产批准后才部署",
-      "progress": "已完成（源码构建范围）",
+      "nextStep": "重新运行绑定 HEAD 和工作树摘要的本地构建",
+      "progress": "部分",
       "liveCustomerDoesNotBlockIndependentSource": true,
       "verificationVersion": "a30ebe67ab9571d45f36ec96b951e53e3b735b77",
       "buildIdentity": {
-        "currentHead": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
+        "currentHead": "941d34f09abc970e465685f34c28a78592d45b8e",
         "evidenceCommit": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
         "buildReceipt": "content/production-closure/live-customer-commercial-convergence/MASTER-PAGES-CURRENT-RECEIPT.json",
         "buildAt": "2026-10-09T08:09:46.654Z",
-        "stale": false,
+        "stale": true,
         "workingTreeDigest": "2be4b15f14c8f6066e7284c5211a706bd8fb6e419292134325093153bb21bfa3",
-        "source": "PASS",
+        "source": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
         "deployed": "NOT_RUN",
         "liveCustomer": "NOT_RUN"
       }
@@ -1876,7 +1940,7 @@
         "actualEvidence": [
           {
             "path": "functions/account/bazi-account-delivery.js",
-            "sha256": "d9bad9ab6c66b334347579de96582f5e97dc84dc4eabca89256e2642e038e766",
+            "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
             "scope": "ORCHESTRATION_FAILS_CLOSED"
           },
           {
@@ -2443,7 +2507,7 @@
         },
         {
           "path": "functions/account/bazi-account-delivery.js",
-          "sha256": "d9bad9ab6c66b334347579de96582f5e97dc84dc4eabca89256e2642e038e766",
+          "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
           "scope": "INCOMPLETE_BZR_ORCHESTRATION"
         }
       ],
@@ -3775,5 +3839,90 @@
     "preflightRequired": true,
     "currentBatchState": "NOT_STARTED",
     "historicalRecords": "Retained as history only, not authorization or evidence for current batch admission."
+  },
+  "tarotCommercialTruth": {
+    "productCode": "COM-READING-TAROT-FULL",
+    "currentPriceMYR": 19,
+    "localeMode": "BILINGUAL",
+    "free": {
+      "generation": "DETERMINISTIC",
+      "providerCalls": 0,
+      "drawBinding": "SHUFFLE_DRAW_ORIENTATION_SPREAD_FIXED"
+    },
+    "paid": {
+      "primarySynthesisCalls": 1,
+      "paidRetry": 0,
+      "includedFollowupQuestions": 4,
+      "drawIdentityMayChange": false,
+      "failureState": "RECOVERABLE_DELIVERY_STATE"
+    },
+    "historicalEvidence": {
+      "state": "AVAILABLE",
+      "receipt": {
+        "path": "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json",
+        "sha256": "92fc0ebf18d9a58f88e6b4e3332c6754b83cf5cd1ff8057e290c49736272b47e",
+        "scope": "HISTORICAL_COST_QUALITY_EVIDENCE_NOT_CURRENT_BATCH_ADMISSION"
+      },
+      "scope": "INITIAL_SYNTHESIS_COST_QUALITY_REFERENCE_ONLY"
+    },
+    "currentAuthorizedBatch": {
+      "state": "AUTHORIZED_NOT_STARTED",
+      "maxCases": 20,
+      "maxPerCaseUSD": 0.1,
+      "maxTotalUSD": 2,
+      "paidRetry": 0,
+      "currentCalls": 0,
+      "currentSpendUSD": 0
+    },
+    "currentPreflight": "PENDING",
+    "wholeProductCost": {
+      "state": "NOT_VERIFIED",
+      "maximumUSD": 1,
+      "includes": [
+        "INITIAL_SYNTHESIS",
+        "UP_TO_FOUR_FOLLOWUP_ANSWERS",
+        "BILINGUAL_OUTPUT",
+        "PERMITTED_EXCEPTIONAL_REPAIR"
+      ],
+      "historicalInitialSynthesisProvesFullOrder": false
+    },
+    "preflightBlockers": [
+      "MODEL_ALLOWLIST_CURRENT_REGISTRY",
+      "DEDICATED_QA_ENDPOINT",
+      "HARD_CASE_AND_TOTAL_BUDGET_GUARDS",
+      "TOKEN_COST_LEDGER_ABORT_NO_RETRY",
+      "FIXED_DRAW_IDENTITY_BILINGUAL_SCHEMA",
+      "FOUR_FOLLOWUP_WHOLE_ORDER_COST_OWNERSHIP",
+      "RECOVERABLE_DELIVERY_PROOF"
+    ],
+    "providerCallsThisRun": 0,
+    "providerSpendThisRunUSD": 0
+  },
+  "methodProviderTruth": {
+    "longReports": {
+      "methods": [
+        "AST",
+        "BAZI",
+        "ZIWEI"
+      ],
+      "primaryMaxCalls": 3,
+      "completeBilingualRequired": true,
+      "maxPrimaryReportProviderCostUSD": 1,
+      "repair": "EXCEPTIONAL_METERED_SOFT_LIMIT_GOVERNED_NOT_AUTOMATIC_RETRY",
+      "implementation": "EXISTING_METHOD_POLICIES_REQUIRE_RECONCILIATION_NO_CALLS"
+    },
+    "tarot": {
+      "primarySynthesisCalls": 1,
+      "paidRetry": 0,
+      "includedFollowupQuestions": 4,
+      "drawIdentityMayChange": false,
+      "failureState": "RECOVERABLE_DELIVERY_STATE"
+    },
+    "iching": {
+      "currentPriceMYR": 39,
+      "freeProviderCalls": 0,
+      "castIdentityMayChange": false,
+      "paidProviderAdmission": "NOT_AUTHORIZED"
+    }
   }
 }

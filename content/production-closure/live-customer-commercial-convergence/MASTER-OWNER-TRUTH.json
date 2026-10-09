@@ -1,4 +1,89 @@
 {
+  "tarotCommercialTruth": {
+    "productCode": "COM-READING-TAROT-FULL",
+    "currentPriceMYR": 19,
+    "localeMode": "BILINGUAL",
+    "free": {
+      "generation": "DETERMINISTIC",
+      "providerCalls": 0,
+      "drawBinding": "SHUFFLE_DRAW_ORIENTATION_SPREAD_FIXED"
+    },
+    "paid": {
+      "primarySynthesisCalls": 1,
+      "paidRetry": 0,
+      "includedFollowupQuestions": 4,
+      "drawIdentityMayChange": false,
+      "failureState": "RECOVERABLE_DELIVERY_STATE"
+    },
+    "historicalEvidence": {
+      "state": "AVAILABLE",
+      "receipt": {
+        "path": "content/production-closure/live-customer-commercial-convergence/TAROT-COST-QUALITY-REVIEW.json",
+        "sha256": "92fc0ebf18d9a58f88e6b4e3332c6754b83cf5cd1ff8057e290c49736272b47e",
+        "scope": "HISTORICAL_COST_QUALITY_EVIDENCE_NOT_CURRENT_BATCH_ADMISSION"
+      },
+      "scope": "INITIAL_SYNTHESIS_COST_QUALITY_REFERENCE_ONLY"
+    },
+    "currentAuthorizedBatch": {
+      "state": "AUTHORIZED_NOT_STARTED",
+      "maxCases": 20,
+      "maxPerCaseUSD": 0.1,
+      "maxTotalUSD": 2,
+      "paidRetry": 0,
+      "currentCalls": 0,
+      "currentSpendUSD": 0
+    },
+    "currentPreflight": "PENDING",
+    "wholeProductCost": {
+      "state": "NOT_VERIFIED",
+      "maximumUSD": 1,
+      "includes": [
+        "INITIAL_SYNTHESIS",
+        "UP_TO_FOUR_FOLLOWUP_ANSWERS",
+        "BILINGUAL_OUTPUT",
+        "PERMITTED_EXCEPTIONAL_REPAIR"
+      ],
+      "historicalInitialSynthesisProvesFullOrder": false
+    },
+    "preflightBlockers": [
+      "MODEL_ALLOWLIST_CURRENT_REGISTRY",
+      "DEDICATED_QA_ENDPOINT",
+      "HARD_CASE_AND_TOTAL_BUDGET_GUARDS",
+      "TOKEN_COST_LEDGER_ABORT_NO_RETRY",
+      "FIXED_DRAW_IDENTITY_BILINGUAL_SCHEMA",
+      "FOUR_FOLLOWUP_WHOLE_ORDER_COST_OWNERSHIP",
+      "RECOVERABLE_DELIVERY_PROOF"
+    ],
+    "providerCallsThisRun": 0,
+    "providerSpendThisRunUSD": 0
+  },
+  "methodProviderTruth": {
+    "longReports": {
+      "methods": [
+        "AST",
+        "BAZI",
+        "ZIWEI"
+      ],
+      "primaryMaxCalls": 3,
+      "completeBilingualRequired": true,
+      "maxPrimaryReportProviderCostUSD": 1,
+      "repair": "EXCEPTIONAL_METERED_SOFT_LIMIT_GOVERNED_NOT_AUTOMATIC_RETRY",
+      "implementation": "EXISTING_METHOD_POLICIES_REQUIRE_RECONCILIATION_NO_CALLS"
+    },
+    "tarot": {
+      "primarySynthesisCalls": 1,
+      "paidRetry": 0,
+      "includedFollowupQuestions": 4,
+      "drawIdentityMayChange": false,
+      "failureState": "RECOVERABLE_DELIVERY_STATE"
+    },
+    "iching": {
+      "currentPriceMYR": 39,
+      "freeProviderCalls": 0,
+      "castIdentityMayChange": false,
+      "paidProviderAdmission": "NOT_AUTHORIZED"
+    }
+  },
   "zeroCostChecks": {
     "checks": [
       {
@@ -176,8 +261,8 @@
     "productionOperations": false
   },
   "requestedBaseline": "b27c9db2e49216a459957f8f39340092649c4a81",
-  "currentHead": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
-  "recordedAt": "2026-10-09T08:10:51.827Z",
+  "currentHead": "941d34f09abc970e465685f34c28a78592d45b8e",
+  "recordedAt": "2026-10-09T08:29:26.802Z",
   "layers": {
     "NAVIGATION_DOCTRINE": "HUMAN_ACCEPTED",
     "NAVIGATION_TOPOLOGY": "HUMAN_ACCEPTED",
@@ -243,13 +328,13 @@
     ]
   },
   "buildIdentity": {
-    "currentHead": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
+    "currentHead": "941d34f09abc970e465685f34c28a78592d45b8e",
     "evidenceCommit": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
     "buildReceipt": "content/production-closure/live-customer-commercial-convergence/MASTER-PAGES-CURRENT-RECEIPT.json",
     "buildAt": "2026-10-09T08:09:46.654Z",
-    "stale": false,
+    "stale": true,
     "workingTreeDigest": "2be4b15f14c8f6066e7284c5211a706bd8fb6e419292134325093153bb21bfa3",
-    "source": "PASS",
+    "source": "STALE_BUILD_EVIDENCE_REBUILD_REQUIRED",
     "deployed": "NOT_RUN",
     "liveCustomer": "NOT_RUN"
   },
@@ -306,7 +391,7 @@
           },
           {
             "path": "functions/account/bazi-account-delivery.js",
-            "sha256": "d9bad9ab6c66b334347579de96582f5e97dc84dc4eabca89256e2642e038e766",
+            "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
             "scope": "INCOMPLETE_BZR_ORCHESTRATION"
           }
         ],
@@ -730,7 +815,7 @@
         "actualEvidence": [
           {
             "path": "functions/account/bazi-account-delivery.js",
-            "sha256": "d9bad9ab6c66b334347579de96582f5e97dc84dc4eabca89256e2642e038e766",
+            "sha256": "df1ee2b18978a7acba5c44c3992894dbe32fef0c420d411ac399d0150e968f80",
             "scope": "ORCHESTRATION_FAILS_CLOSED"
           },
           {
