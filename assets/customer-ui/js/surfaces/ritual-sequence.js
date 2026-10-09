@@ -1,5 +1,5 @@
 // One timeline owns motion and sound. Random visual noise never determines a reading.
-export const RITUAL_DURATION_MS=120000;
+export const RITUAL_DURATION_MS=1800;
 export function startRitual(host,{kind='tarot',zh=false}={}){
  const panel=document.createElement('section');panel.className='cx-ritual';
  panel.style.cssText='width:100%;box-sizing:border-box;padding:24px;background:#171d22;color:#f5e6b8;border-radius:16px;margin:20px 0';
@@ -7,7 +7,8 @@ export function startRitual(host,{kind='tarot',zh=false}={}){
  const label=document.createElement('p');label.setAttribute('role','status');
  const progress=document.createElement('progress');progress.max=RITUAL_DURATION_MS;progress.style.width='100%';progress.setAttribute('aria-label',zh?'仪式进度':'Sequence progress');
  const cancel=document.createElement('button');cancel.type='button';cancel.textContent=zh?'取消本次过程':'Cancel this sequence';
- panel.append(label,canvas,progress,cancel);host.before(panel);
+ const proceed=document.createElement('button');proceed.type='button';proceed.textContent=zh?'立即继续':'Continue now';
+ panel.append(label,canvas,progress,proceed,cancel);host.before(panel);
  const ctx=canvas.getContext('2d'),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  let audio,frame,ended=false,lastCue=-1,lastLabel='',resolveDone;
  const done=new Promise(resolve=>resolveDone=resolve);
@@ -19,16 +20,17 @@ export function startRitual(host,{kind='tarot',zh=false}={}){
   else{const b=audio.createBuffer(1,Math.ceil(audio.sampleRate*.17),audio.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=Math.random()*2-1;const s=audio.createBufferSource(),f=audio.createBiquadFilter();s.buffer=b;f.type='bandpass';f.frequency.value=1800;s.connect(f).connect(gain);s.start(now);s.stop(now+.17);}
  }
  function stop(completed=false){if(ended)return;ended=true;cancelAnimationFrame(frame);if(audio&&audio.state!=='closed')audio.close().catch(()=>{});document.removeEventListener('visibilitychange',hidden);window.removeEventListener('pagehide',pagehide);panel.remove();resolveDone(completed);}
- function hidden(){if(document.hidden)stop(false);}
+ function hidden(){if(document.hidden)stop(kind==='tarot');}
  // Explicit handlers avoid background audio and stale submissions after leaving a page.
  const pagehide=()=>stop(false);
  window.addEventListener('pagehide',pagehide,{once:true});document.addEventListener('visibilitychange',hidden);
  cancel.onclick=()=>stop(false);
+ proceed.onclick=()=>stop(true);
  const start=performance.now();
  function tick(now){
   if(ended)return;const elapsed=Math.min(now-start,RITUAL_DURATION_MS),p=elapsed/RITUAL_DURATION_MS;progress.value=elapsed;
   ctx.clearRect(0,0,1000,500);ctx.fillStyle='#25302f';ctx.beginPath();ctx.ellipse(500,285,460,195,0,0,Math.PI*2);ctx.fill();
-  const cycle=kind==='tarot'?8000:20000,phase=(elapsed%cycle)/cycle,round=Math.min(kind==='tarot'?14:5,Math.floor(elapsed/cycle));
+  const cycle=kind==='tarot'?RITUAL_DURATION_MS:RITUAL_DURATION_MS/6,phase=(elapsed%cycle)/cycle,round=Math.min(kind==='tarot'?0:5,Math.floor(elapsed/cycle));
   const phaseName=kind==='tarot'?(phase<.25?(zh?'分牌':'Cut'):phase<.65?(zh?'交错洗牌':'Interleave'):(zh?'收拢牌堆':'Gather')):(phase<.25?(zh?'聚拢铜钱':'Gather coins'):phase<.7?(zh?'抛掷铜钱':'Toss coins'):(zh?'落定':'Settle'));
   const text=(kind==='tarot'?(zh?'洗牌':'Shuffling'):(zh?'起卦 · 第 '+(round+1)+' 轮':'Casting · round '+(round+1)))+' · '+phaseName+' · '+Math.ceil((RITUAL_DURATION_MS-elapsed)/1000)+'s';
   if(text!==lastLabel){label.textContent=text;lastLabel=text;}

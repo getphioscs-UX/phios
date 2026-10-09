@@ -301,8 +301,13 @@ function installation(scope = document) {
     updateButton();
   }
 
+  let lastCardGesture={id:null,at:-Infinity};
   function toggleCard(id) {
     if (!id || shuffling) return;
+    if (!state.shuffledCardIds.includes(id)) return;
+    const now=performance.now();
+    if(lastCardGesture.id===id&&now-lastCardGesture.at<350)return;
+    lastCardGesture={id,at:now};
     if (state.selectedCardIds.includes(id)) {
       removeCard(id);
       return;
