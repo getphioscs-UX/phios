@@ -1,6 +1,6 @@
 # Interim change summary — execution incomplete
 
-Authority: MASTER-AUTHORITY.txt plus OWNER-NAVIGATION-INTEGRATION-AUTHORITY.txt. W14 alone awaits canonical authoring; identity/schema/inventory/dependency readiness is prepared without canonical semantics. Latest Tarot decision is RM9, with Commerce implementation owned by the other window. Current HEAD: 77fab8018457ae73b484a6a5de50f3dabfec1520. Initial BASELINE is preserved; CURRENT-BASELINE records concurrent external commits.
+Authority: MASTER-AUTHORITY.txt plus OWNER-NAVIGATION-INTEGRATION-AUTHORITY.txt. W14 alone awaits canonical authoring; identity/schema/inventory/dependency readiness is prepared without canonical semantics. Latest Tarot decision is RM9, with Commerce implementation owned by the other window. Current HEAD: 951de416fb7cad11b82edc2d63d2e7c90f6a5e6b. Initial BASELINE is preserved; CURRENT-BASELINE records concurrent external commits.
 
 Preserved existing BaZi and closure working-tree changes. Added current route/API and commerce inventory; historical evidence remains historical. Fixed selected-article truncation and supporting removal, prevented generic guided clarification with selected context, excluded internal content HTML from Pages, disabled existing Book VIII commerce identity, and changed its public page to private operating volume. Homepage uses task entries. Financial range remains visible and unknown remains null. Tarot ritual is bounded to 1.8 seconds, offers immediate continuation, preserves shuffle on backgrounding, and guards duplicate gestures.
 
