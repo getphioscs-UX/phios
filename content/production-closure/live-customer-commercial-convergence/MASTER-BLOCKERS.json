@@ -3,7 +3,8 @@
   "external": [
     {
       "id": "MAIN_SYNCHRONIZATION",
-      "reason": "Owner requested waiting for external commits to finish, then syncing latest main; completion signal pending"
+      "status": "RESOLVED_AT_CURRENT_BASELINE",
+      "reason": "Local main and origin/main matched at 538442cae861566956d203eae8cb053f02abf377 before current edits; recheck before final release"
     },
     {
       "id": "PRODUCTION_APPROVAL",
@@ -11,7 +12,8 @@
     },
     {
       "id": "PROVIDER_BATCH",
-      "reason": "20 QA calls authorized at USD0.10 each / USD2 total; Tarot model allowlist, isolated server endpoint and budget metering preflight remain incomplete"
+      "status": "QA_COMPLETE_HUMAN_REVIEW_PENDING",
+      "reason": "Authorized 20 calls completed; see Tarot Cost & Quality review. Human acceptance, reversed-orientation coverage and production writer integration remain pending; no extra calls authorized"
     },
     {
       "id": "ACADEMY_ASSETS",
@@ -81,13 +83,15 @@
     {
       "id": "W08",
       "title": "Report four follow-up questions",
-      "status": "PENDING_EXECUTION",
+      "status": "TARGETED_QA_HUMAN_REVIEW_PENDING",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
+        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
         "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [
+        "REPORT-FOLLOWUP-STORE-QA.json"
+      ]
     },
     {
       "id": "W09",
@@ -243,13 +247,15 @@
     {
       "id": "W22",
       "title": "20-case unit economics",
-      "status": "PENDING_EXECUTION",
+      "status": "TARGETED_QA_HUMAN_REVIEW_PENDING",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
+        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
         "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [
+        "TAROT-COST-QUALITY-REVIEW.json"
+      ]
     },
     {
       "id": "W23",
@@ -368,13 +374,15 @@
     {
       "id": "W34",
       "title": "Shared provider cost ledger",
-      "status": "PENDING_EXECUTION",
+      "status": "TARGETED_QA_HUMAN_REVIEW_PENDING",
       "gates": {
-        "SOURCE": "NOT_VERIFIED",
+        "SOURCE": "TARGETED_PASS_NOT_FULL_STEP",
         "DEPLOYED": "NOT_VERIFIED_CURRENT_REVISION",
         "LIVE_CUSTOMER": "NOT_RUN"
       },
-      "evidence": []
+      "evidence": [
+        "TAROT-QA-BUDGET-TESTS.json"
+      ]
     },
     {
       "id": "W35",

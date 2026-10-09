@@ -1,5 +1,6 @@
 import {assertMethodGeneration,methodMaterialIdentity} from '../report-delivery/method-render-contract.js';
 import {digest} from './oidc-auth.js';
+import {grantDeliveredReportFollowups} from './report-followup-store.js';
 const fail=()=>{throw Object.assign(new Error('REPORT_UNAVAILABLE'),{code:'REPORT_UNAVAILABLE',status:404});};
 // Existing SQL and private object owners remain canonical. Adapters must perform
 // method entitlement, subject consent and release admission on every read.
@@ -27,8 +28,11 @@ export async function persistMethodReportMaterial(context,{release,candidate,htm
  const enriched={...receipt,materialIdentity:identity};
  // Content addressed object; never replace the first report material identity.
  const prior=await context.env.RUNTIME_DB.prepare('SELECT * FROM account_method_report_materials WHERE owner_account_id=? AND report_id=?').bind(candidate.customerId,release.reportId).first();
- if(prior){if(prior.snapshot_id!==candidate.snapshot.semanticSnapshotId)fail();return {reportId:release.reportId};}
+ const grantFollowups=async()=>{
+  if(context.env.PHIOS_REPORT_FOLLOWUP_QA_ENABLED==='true'&&['local','qa','preview'].includes(context.env.PHIOS_ENVIRONMENT))await grantDeliveredReportFollowups(context.env,{reportId:release.reportId,ownerAccountId:candidate.customerId,purchaseId:candidate.purchaseId,methodCode:candidate.snapshot.methodId});
+ };
+ if(prior){if(prior.snapshot_id!==candidate.snapshot.semanticSnapshotId)fail();await grantFollowups();return {reportId:release.reportId};}
  await context.env.PRIVATE_REPORTS.put(objectKey,html,{httpMetadata:{contentType:'text/html; charset=utf-8',cacheControl:'private, no-store'}});
  await context.env.RUNTIME_DB.prepare('INSERT INTO account_method_report_materials(report_id,owner_account_id,person_id,method_code,locale,snapshot_id,object_key,output_digest,released_at,verifier_receipt) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(report_id) DO NOTHING').bind(release.reportId,candidate.customerId,candidate.personId,candidate.snapshot.methodId,candidate.locale,candidate.snapshot.semanticSnapshotId,objectKey,receipt.outputDigest,now,JSON.stringify(enriched)).run();
- return {reportId:release.reportId};
+ await grantFollowups();return {reportId:release.reportId};
 }

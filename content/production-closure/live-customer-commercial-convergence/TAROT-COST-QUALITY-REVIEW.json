@@ -1,6 +1,86 @@
 {
-  "status": "QA_RUNTIME_WRITER_ONLY_PRODUCTION_WRITER_PENDING",
-  "entries": [
+  "updatedAt": "2026-10-09T03:05:40.354Z",
+  "scope": "INDEPENDENT_LOOPBACK_SERVER_SYNTHETIC_QA_ONLY",
+  "model": "gpt-5.6-luna",
+  "calls": 20,
+  "successfulCases": 20,
+  "automaticRetries": 0,
+  "failureRate": 0,
+  "percentileMethod": "NEAREST_RANK_N20_NOT_POPULATION_ESTIMATE",
+  "inputTokens": {
+    "count": 20,
+    "total": 54528,
+    "mean": 2726.4,
+    "p50": 2767,
+    "p90": 3424,
+    "p95": 4687,
+    "max": 4809
+  },
+  "outputTokens": {
+    "count": 20,
+    "total": 19497,
+    "mean": 974.85,
+    "p50": 944,
+    "p90": 1337,
+    "p95": 1379,
+    "max": 1384
+  },
+  "costUSD": {
+    "count": 20,
+    "total": 0.034302,
+    "mean": 0.0017151,
+    "p50": 0.0017468000000000002,
+    "p90": 0.002261,
+    "p95": 0.0025981999999999997,
+    "max": 0.0026165999999999997
+  },
+  "latencyMs": {
+    "count": 20,
+    "total": 230255,
+    "mean": 11512.75,
+    "p50": 10749,
+    "p90": 14557,
+    "p95": 15740,
+    "max": 16252
+  },
+  "costBasis": "PROVIDER_REPORTED_TOKENS_X_PUBLISHED_RATES_NOT_INVOICE_RECONCILED",
+  "economics": {
+    "retailMYR": 9,
+    "referenceUSDToMYR": 4.0905,
+    "fxDate": "2026-10-09",
+    "fxSource": "https://www.bnm.gov.my/exchange-rates",
+    "fxCaveat": "Displayed BNM USD reference; selected session/rate type unavailable in text. Not actual billing FX.",
+    "paymentCostDomesticEstimateMYR": 1.27,
+    "paymentSource": "https://stripe.com/en-my/pricing",
+    "paymentBasis": "STANDARD_DOMESTIC_CARD_OR_FPX_3_PERCENT_PLUS_RM1_NOT_MERCHANT_CONTRACT",
+    "meanProviderCostReferenceMYR": 0.007015616549999999,
+    "maxProviderCostReferenceMYR": 0.010703202299999997,
+    "meanContributionBeforeOtherCostsMYR": 7.72298438345,
+    "excludedCosts": [
+      "tax",
+      "refunds",
+      "disputes",
+      "hosting",
+      "support",
+      "merchant-specific fees",
+      "actual billing FX"
+    ],
+    "grossMarginAccepted": false
+  },
+  "quality": {
+    "agentReadAllDirectAnswersAndCardInterpretations": true,
+    "observed": "Direct question responses, observable checks and unknowns present; no changed cards or hidden-feeling certainty observed.",
+    "limitations": [
+      "All 20 recorded cases are UPRIGHT; reversed orientation synthesis coverage absent.",
+      "Chinese answers sometimes retain English card titles.",
+      "Some answers exceed desired compact length; long spreads need mobile readability review.",
+      "Presence/structure checks do not certify accepted-corpus fidelity; owner editorial review remains required.",
+      "No real checkout, payment or customer workspace delivery tested."
+    ],
+    "humanAcceptance": "PENDING",
+    "productionAdmission": false
+  },
+  "cases": [
     {
       "requestId": "TAROT-COST-QA-01",
       "productClass": "TAROT",
@@ -40,7 +120,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "06f717c84d6421955785f7af2bb93683895bb2decb83334340f180516355f31b"
+      "outputDigest": "06f717c84d6421955785f7af2bb93683895bb2decb83334340f180516355f31b",
+      "outputFile": "TAROT-COST-QA-01-OUTPUT.json",
+      "outputFileSHA256": "327517e030dc1df358a71bdb8d132c0ed781c4dfe42e4f3b3cd6f0b4e301df65",
+      "drawCardCount": 1,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-02",
@@ -81,7 +167,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "8b9e848cc4e6c5a117962b0fce6bd0590112db1f37e27886c2b9c36635619798"
+      "outputDigest": "8b9e848cc4e6c5a117962b0fce6bd0590112db1f37e27886c2b9c36635619798",
+      "outputFile": "TAROT-COST-QA-02-OUTPUT.json",
+      "outputFileSHA256": "8afdc81f4aea6ddcc3ddcfcea5365cc2820044f39a0911f60f59596c8138f244",
+      "drawCardCount": 3,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-03",
@@ -122,7 +214,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "a3236e6b9c5dd034713f4b1edca7d5a3b7cb1eff94db77e9848cdf6b49671d4f"
+      "outputDigest": "a3236e6b9c5dd034713f4b1edca7d5a3b7cb1eff94db77e9848cdf6b49671d4f",
+      "outputFile": "TAROT-COST-QA-03-OUTPUT.json",
+      "outputFileSHA256": "ced8b9d3bd6a85cd1d21eade86ac00c2ba022e6dbca2e20b2ecdbf2f247b2ac1",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-04",
@@ -163,7 +261,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "1e6c7d7e22410a98ab4141bbe937e82f6638735d329972d16677b4ba3b5f5341"
+      "outputDigest": "1e6c7d7e22410a98ab4141bbe937e82f6638735d329972d16677b4ba3b5f5341",
+      "outputFile": "TAROT-COST-QA-04-OUTPUT.json",
+      "outputFileSHA256": "78e1e70683023749bd7efd661d8b78d07ff80b84c802947a4fe358ae2b543d8d",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-05",
@@ -204,7 +308,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "4775ee00a6a8f55ad716a27c62d6e38517c5f8616a97fb8ffc199a3cb2292968"
+      "outputDigest": "4775ee00a6a8f55ad716a27c62d6e38517c5f8616a97fb8ffc199a3cb2292968",
+      "outputFile": "TAROT-COST-QA-05-OUTPUT.json",
+      "outputFileSHA256": "4ed09805dfe0e1b0180f4013dbb4cf4dd243b59b7db35b594d628b1f367cd44d",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-06",
@@ -245,7 +355,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "73c6e61b19b832e909389eb64c1c4f337a3951b32d023b83ad02e39bb33988b8"
+      "outputDigest": "73c6e61b19b832e909389eb64c1c4f337a3951b32d023b83ad02e39bb33988b8",
+      "outputFile": "TAROT-COST-QA-06-OUTPUT.json",
+      "outputFileSHA256": "e1762e38f4e1edb03aee95aed9e2d049d15d7504dc84e36b8b10563ba338e018",
+      "drawCardCount": 6,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-07",
@@ -286,7 +402,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "db7ad453633a7a8b3b9a76b6a53ee890d0ec2a7e16a1650f575d9d88ddad1537"
+      "outputDigest": "db7ad453633a7a8b3b9a76b6a53ee890d0ec2a7e16a1650f575d9d88ddad1537",
+      "outputFile": "TAROT-COST-QA-07-OUTPUT.json",
+      "outputFileSHA256": "8a2db3144a22f866957d54ccb39937f1099d1589832107381f15b33ea9c76cec",
+      "drawCardCount": 7,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-08",
@@ -327,7 +449,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "2bff54d6b75d312fdc2c53891550a94ea7e408be6602158605f639eade0c6ae4"
+      "outputDigest": "2bff54d6b75d312fdc2c53891550a94ea7e408be6602158605f639eade0c6ae4",
+      "outputFile": "TAROT-COST-QA-08-OUTPUT.json",
+      "outputFileSHA256": "e0d625cd83ac058d580a270743d9676414f1c23556fb08979e29d08e09c32598",
+      "drawCardCount": 10,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-09",
@@ -368,7 +496,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "f23ae5c2277b6d9d46d5fca5e45683d3b63d749f4c659161af96a8bf0fad0c38"
+      "outputDigest": "f23ae5c2277b6d9d46d5fca5e45683d3b63d749f4c659161af96a8bf0fad0c38",
+      "outputFile": "TAROT-COST-QA-09-OUTPUT.json",
+      "outputFileSHA256": "9706e2d649b52e898faf2505865dc6844e15fa717b8e0d36b78449555f03c157",
+      "drawCardCount": 1,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-10",
@@ -409,7 +543,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "ba2e1c7bd59ba10c5b5e3f27e76fbba54c18fb5ed83cb9fdae33903b6d088855"
+      "outputDigest": "ba2e1c7bd59ba10c5b5e3f27e76fbba54c18fb5ed83cb9fdae33903b6d088855",
+      "outputFile": "TAROT-COST-QA-10-OUTPUT.json",
+      "outputFileSHA256": "d54c57c79a95e6e3440d4187342fc8b7ef250e16dce52266af2b4b3dfe3e679a",
+      "drawCardCount": 3,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-11",
@@ -450,7 +590,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "199574ff66dbb854f414e02ebea1494e6c2734246fc5f1c01daa594fbe80651a"
+      "outputDigest": "199574ff66dbb854f414e02ebea1494e6c2734246fc5f1c01daa594fbe80651a",
+      "outputFile": "TAROT-COST-QA-11-OUTPUT.json",
+      "outputFileSHA256": "7d7d04f8b34cb0cc34a8d32320e712b059aa6f67bf60bd199f22376e362ec5c3",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-12",
@@ -491,7 +637,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "571becec6466133a5865f56b6d325931d1d96a87fb18b40a4214f60c3c2c784c"
+      "outputDigest": "571becec6466133a5865f56b6d325931d1d96a87fb18b40a4214f60c3c2c784c",
+      "outputFile": "TAROT-COST-QA-12-OUTPUT.json",
+      "outputFileSHA256": "b3cac11eff0013d2adc41e50fddd2d69bfc28f3672c2d3bf8c7a1f6d1d5fb303",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-13",
@@ -532,7 +684,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "bcf166b33dbe079239b3428597240b3ea2bb0a878899fcac464d8251bbfcead0"
+      "outputDigest": "bcf166b33dbe079239b3428597240b3ea2bb0a878899fcac464d8251bbfcead0",
+      "outputFile": "TAROT-COST-QA-13-OUTPUT.json",
+      "outputFileSHA256": "e5c1373c62fbcdd840f40a120c9917b7b348db6e00017df5b3bc1e44846be205",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-14",
@@ -573,7 +731,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "9f7d4bfd5eacf1e5f8d5717319ff19f28c22d5be55bcd98dc1ef170f4f6b2e0f"
+      "outputDigest": "9f7d4bfd5eacf1e5f8d5717319ff19f28c22d5be55bcd98dc1ef170f4f6b2e0f",
+      "outputFile": "TAROT-COST-QA-14-OUTPUT.json",
+      "outputFileSHA256": "c2b9215780320d5978d6ead3ffc133f17455ff7b47458ada09c23ef21bdee836",
+      "drawCardCount": 6,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-15",
@@ -614,7 +778,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "a66261c342880e657ac2d95e4f4f87ed697357e37d36ff9b7fefe6ce0cb044f2"
+      "outputDigest": "a66261c342880e657ac2d95e4f4f87ed697357e37d36ff9b7fefe6ce0cb044f2",
+      "outputFile": "TAROT-COST-QA-15-OUTPUT.json",
+      "outputFileSHA256": "4f8470eedce7a01af0c604a52512125d5f53159a629ac4975e06bf729cd14e8a",
+      "drawCardCount": 7,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-16",
@@ -655,7 +825,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "d1623c738f58f9bc0721abd189695c580cac9dcb4ffbcb82c481e6ef255d1702"
+      "outputDigest": "d1623c738f58f9bc0721abd189695c580cac9dcb4ffbcb82c481e6ef255d1702",
+      "outputFile": "TAROT-COST-QA-16-OUTPUT.json",
+      "outputFileSHA256": "d5d7385e49c4d68c9b4b03b9026783e63d8a8d6eb339f10519208e113c2a9896",
+      "drawCardCount": 10,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-17",
@@ -696,7 +872,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "a3a32cdf1cbd43cef84f21cfe902413be0401664b3e73e99402e4d660e0cc102"
+      "outputDigest": "a3a32cdf1cbd43cef84f21cfe902413be0401664b3e73e99402e4d660e0cc102",
+      "outputFile": "TAROT-COST-QA-17-OUTPUT.json",
+      "outputFileSHA256": "69489060e2526cd556933b95689c121d9041e46ef38d4714f14ef91c193b5172",
+      "drawCardCount": 1,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-18",
@@ -737,7 +919,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "dfb4c99d46abdf191d41f5b701bde063c39f181a7b03363b7f37fbd9b9d99127"
+      "outputDigest": "dfb4c99d46abdf191d41f5b701bde063c39f181a7b03363b7f37fbd9b9d99127",
+      "outputFile": "TAROT-COST-QA-18-OUTPUT.json",
+      "outputFileSHA256": "a0f1219fedf38ba7024eabf0926b188363771948c3ac0bfc69724c8cfc7add70",
+      "drawCardCount": 3,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-19",
@@ -778,7 +966,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "988d30026a8f151176862f8f5b11136bfbdbdd5a028e8640569720fe861e3784"
+      "outputDigest": "988d30026a8f151176862f8f5b11136bfbdbdd5a028e8640569720fe861e3784",
+      "outputFile": "TAROT-COST-QA-19-OUTPUT.json",
+      "outputFileSHA256": "aa8ffce1c948f52eedb0f2e249735f5cfb6f6fb0f7137d92146c11234c05ed4d",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     },
     {
       "requestId": "TAROT-COST-QA-20",
@@ -819,33 +1013,13 @@
       "costBasis": "PROVIDER_REPORTED_TOKENS_X_OFFICIAL_STANDARD_RATES_NOT_INVOICE_RECONCILED",
       "currencyConversionState": "NOT_ESTABLISHED",
       "paymentCostEstimateState": "NOT_ESTABLISHED",
-      "outputDigest": "00d3867a4a7eee5639ed7511c201374a30a2e2efcf4b43c737685c9c1a3b6e92"
+      "outputDigest": "00d3867a4a7eee5639ed7511c201374a30a2e2efcf4b43c737685c9c1a3b6e92",
+      "outputFile": "TAROT-COST-QA-20-OUTPUT.json",
+      "outputFileSHA256": "8b863211abae40f8ec950fd359845d24b20c1de1f5438196732f30757fcbd6ae",
+      "drawCardCount": 5,
+      "outputOrientationCoverage": [
+        "UPRIGHT"
+      ]
     }
-  ],
-  "requiredFields": [
-    "requestId",
-    "productClass",
-    "productId",
-    "contextId",
-    "model",
-    "inputTokens",
-    "cachedTokens",
-    "outputTokens",
-    "providerRequests",
-    "retryCount",
-    "providerCostUSD",
-    "providerCostMYR",
-    "retailPriceMYR",
-    "paymentCostEstimate",
-    "grossMarginEstimate",
-    "createdAt"
-  ],
-  "controlledTarotCases": 20,
-  "tarotProductionGate": "BLOCKED_PENDING_HUMAN_REVIEW_AND_SOURCE_CUSTOMER_DELIVERY",
-  "sensitivePromptStored": false,
-  "qaAuthorization": "TAROT-QA-OWNER-AUTHORIZATION.json",
-  "qaPreflight": "TAROT-QA-PREFLIGHT.json",
-  "actualQACalls": 20,
-  "actualQASpendUSD": 0.034302,
-  "unknownUsage": false
+  ]
 }
