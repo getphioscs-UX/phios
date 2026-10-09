@@ -2,7 +2,7 @@
   "candidateId": "PHI-OS-WORLD-PUBLIC-SOURCE-BOOKMARK-MIGRATION-v1",
   "status": "SOURCE_CANDIDATE_PENDING_PRODUCTION_AUTHORIZATION",
   "humanAccepted": false,
-  "migration": "db/migrations/0018_account_world_contexts.sql",
+  "migration": "db/migration-candidates/0018_account_world_contexts.sql",
   "classification": "ADDITIVE_ACCOUNT_OWNED_PUBLIC_SOURCE_CONTEXT_STORAGE",
   "existingOwner": "Server verified symbolicAccountIdentity / RUNTIME_DB; same-origin writes",
   "semantics": "References and content digests only; public Atlas context is never a personal fact",
@@ -12,5 +12,8 @@
   "rollback": "Disable new flag and consumer; retain rows until owner-approved retention handling",
   "productionExecuted": false,
   "providerCalls": 0,
-  "versionHistory": "Owner/object/content-digest version rows retained; repeated identical save is idempotent"
+  "versionHistory": "Owner/object/content-digest version rows retained; repeated identical save is idempotent",
+  "migrationSHA256": "9a86b5c86c2b8630d59124b8ea73af07685d56b86f4d0c80fe9bddd4df2f6c4c",
+  "precheckBoundary": "Kept outside db/migrations as an unaccepted source candidate; existing production migration set and count assertions are unchanged.",
+  "remainingRightsWork": "Owner export/withdrawal and expiry purge workflow must be reviewed before production save admission; no data deletion performed by this agent"
 }

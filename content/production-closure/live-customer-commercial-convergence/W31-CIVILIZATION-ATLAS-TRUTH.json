@@ -1,11 +1,11 @@
 {
-  "currentHead": "64aab9ca0bc6577503cca2bb4da6c7f86f00941d",
-  "recordedAt": "2026-10-09T09:50:10.756Z",
+  "currentHead": "6786cfa10068f3b85f90f56fd6c6314c0c240e47",
+  "recordedAt": "2026-10-09T10:09:45.650Z",
   "scope": "SOURCE_AND_LOCAL_BROWSER_NOT_DEPLOYED_OR_LIVE_CUSTOMER",
   "states": {
     "BOOK_V_SOURCE": "PARTIAL",
     "BOOK_V_CONSUMER": "PASS",
-    "BOOK_V_CUSTOMER_RENDER": "PARTIAL",
+    "BOOK_V_CUSTOMER_RENDER": "PASS",
     "BOOK_V_CONTEXTUAL_ASK": "PASS",
     "BOOK_VI_DOSSIER_ACCEPTANCE": "PARTIAL",
     "BOOK_VI_RUNTIME_CONSUMER": "PASS",
@@ -3699,7 +3699,8 @@
     "BOOK_V_CONTEXTUAL_ASK": "Actual local API: seven selected layers + absent source, en/zh; bounded partial answers preserve evidence limits",
     "BOOK_V_ASSET_RESOLUTION": "15 accepted world objects only; 30 desktop/mobile actual response/decode/identity checks",
     "BOOK_VI_CONTEXTUAL_ASK": "Actual local API US/CN/EU/SEA/unaccepted en/zh and customer browser JP",
-    "MOOMOO_EVIDENCE_BINDING": "US-only validated/admitted consumer wired; current TTL excludes all 56 historical records as STALE, current evidence refresh remains missing"
+    "MOOMOO_EVIDENCE_BINDING": "US-only validated/admitted consumer wired; current TTL excludes all 56 historical records as STALE, current evidence refresh remains missing",
+    "BOOK_V_CUSTOMER_RENDER": "Registered public Atlas consumer text plus separate asset owner receipt: 223 assets / 892 en-zh desktop-mobile combinations, all decoded and accepted digest matched; not full-book prose, deployment or live customer certification"
   },
   "BOOK_V_LOCAL_SOURCE_CLOSED_LOOP": false,
   "BOOK_V_DEPLOYED_CLOSED_LOOP": "NOT_RUN",
@@ -3738,7 +3739,7 @@
       "main navigation",
       "homepage task",
       "My PHI",
-      "Ask context discovery",
+      "Actual Ask Add-context selector → World object chooser → original Book context",
       "Book V/VI",
       "Financial",
       "My Reality",
@@ -3754,6 +3755,172 @@
     "deployed": "NOT_RUN",
     "liveCustomer": "NOT_RUN",
     "providerCalls": 0,
-    "spendUSD": 0
-  }
+    "spendUSD": 0,
+    "preview": "http://127.0.0.1:55266/world?atlas=world&snapshot=WS-2026",
+    "previewIdentity": "CONTROLLED_LOCAL_QA_SYNTHETIC_ACCOUNT_IN_MEMORY_NOT_CUSTOMER_ACCOUNT"
+  },
+  "reusedEvidenceInheritance": [
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-reading-bridge.js",
+      "sha256": "192fbf03a5801ac8deccda2b3a1598c27bfc9804f9fac1498ee3b906786b8124",
+      "currentSHA256": "192fbf03a5801ac8deccda2b3a1598c27bfc9804f9fac1498ee3b906786b8124",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/book6-current-source.js",
+      "sha256": "ac712364838cad2ac3e7cf7e019edd235bd35396e60490f1ce8a4494b55d89e7",
+      "currentSHA256": "ac712364838cad2ac3e7cf7e019edd235bd35396e60490f1ce8a4494b55d89e7",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/book6-accepted-current.js",
+      "sha256": "d9b4f7e2974a11bfe8dd05b51c670a9c7f644b741272d995f618a0458cbe655d",
+      "currentSHA256": "d9b4f7e2974a11bfe8dd05b51c670a9c7f644b741272d995f618a0458cbe655d",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/atlas-retrieval-scope.js",
+      "sha256": "23479358067b6cc6a2f99fbec20aff0b3416c0950d542bf589e380dd8a3ee204",
+      "currentSHA256": "23479358067b6cc6a2f99fbec20aff0b3416c0950d542bf589e380dd8a3ee204",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "68e3d86be6eb09656b37f83faef4c3aa1c3c198eb569cfea63ce31a399832ccd",
+      "currentSHA256": "68e3d86be6eb09656b37f83faef4c3aa1c3c198eb569cfea63ce31a399832ccd",
+      "unchanged": true
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "sha256": "d42e53c230fccadb4d9c1d03bf3acdd54ce9e45f38b62fd3c66660c098c2f410",
+      "currentSHA256": "d42e53c230fccadb4d9c1d03bf3acdd54ce9e45f38b62fd3c66660c098c2f410",
+      "unchanged": true
+    },
+    {
+      "path": "functions/api/customer-contextual-ask.js",
+      "sha256": "6089914f17f940a9757f75e629e62b6fc3a6c1aa6431bd9f5e2e4be6029783e7",
+      "currentSHA256": "6089914f17f940a9757f75e629e62b6fc3a6c1aa6431bd9f5e2e4be6029783e7",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/check-w31-reading-bridge-browser.mjs",
+      "sha256": "3fd056f64ff99098b10818955ad3450fc679a4db86352a52dc49bd34fa470f2e",
+      "currentSHA256": "3fd056f64ff99098b10818955ad3450fc679a4db86352a52dc49bd34fa470f2e",
+      "unchanged": true
+    }
+  ],
+  "currentWorldEvidenceHead": "9a3473a114e643ae0742df35202f5413f7bee49a",
+  "latestAssetHandoffsConsumed": [
+    {
+      "path": "docs/assets/r2-public/wiring-20261009/BOOK-V-FIRST-COMPLETE.json",
+      "sha256": "358ba5bc7efaaad49cdb0eaa4033acf756d97a77d1cf2feb739dee36d7faf84a",
+      "scope": "LOCAL_SOURCE_WITH_PUBLIC_R2_GET_ONLY",
+      "status": null,
+      "head": "64aab9ca0bc6577503cca2bb4da6c7f86f00941d",
+      "endHead": "6e356807127de02a17f3246c67c743f6817b0894",
+      "targetCount": null,
+      "verifiedCount": null,
+      "rowCount": 892,
+      "states": {
+        "LOADED_DECODED_VISIBLE": 886,
+        "FAIL": 6
+      },
+      "deployed": "NOT_RUN",
+      "liveCustomer": "NOT_RUN"
+    },
+    {
+      "path": "docs/assets/r2-public/wiring-20261009/BOOK-V-CONSUMERS.json",
+      "sha256": "694258a8e6a80eddcf659f7b74fb3b4f6b746dc8f5aae1585ff9eaafa2c858e7",
+      "head": "9a3473a114e643ae0742df35202f5413f7bee49a",
+      "endHead": "9a3473a114e643ae0742df35202f5413f7bee49a",
+      "rowCount": 892,
+      "passed": 892,
+      "firstFailureResolution": [
+        {
+          "assetId": "VIS-CIV-CA-T11-02-SECONDARY",
+          "locale": "en",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-CA-T11-02-SECONDARY",
+          "locale": "en",
+          "width": 390,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-CA-T13-03-HERO",
+          "locale": "zh-Hans",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-CA-T13-03-HERO",
+          "locale": "zh-Hans",
+          "width": 390,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-TW-10",
+          "locale": "en",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        },
+        {
+          "assetId": "VIS-CIV-SS-05",
+          "locale": "en",
+          "width": 1280,
+          "firstState": "FAIL",
+          "currentState": "LOADED_DECODED_VISIBLE"
+        }
+      ],
+      "scope": "OTHER_OWNER_RECEIPT_CONSUMED_NOT_REPEATED_SCAN"
+    }
+  ],
+  "bookVVisualHandoff": {
+    "path": "docs/assets/r2-public/wiring-20261009/BOOK-V-CONSUMERS.json",
+    "assets": 223,
+    "combinations": 892,
+    "passed": 892,
+    "acceptedDigestMatched": 892,
+    "initialSixFailuresResolved": true
+  },
+  "finalBuild": {
+    "result": "PASS",
+    "command": "node scripts/run-zero-cost-regression.mjs build:pages",
+    "currentHead": "6786cfa10068f3b85f90f56fd6c6314c0c240e47",
+    "evidenceCommit": "6786cfa10068f3b85f90f56fd6c6314c0c240e47",
+    "buildAt": "2026-10-09T10:15:33.207Z",
+    "startedAt": "2026-10-09T10:13:40.874Z",
+    "exitCode": 0,
+    "stale": false,
+    "inputBefore": "dfbc76b2e49848f01ffe4149ad42303cbd20d3ecc40fe3c6d52f349c2f5cb847",
+    "inputAfter": "dfbc76b2e49848f01ffe4149ad42303cbd20d3ecc40fe3c6d52f349c2f5cb847",
+    "inputScope": "BUILD_INPUT_SOURCE_AND_PUBLIC_FILES_EXCLUDING_INTERNAL_REVIEW_AND_GENERATED_GUARD_RECEIPTS",
+    "buildReceipt": "content/production-closure/live-customer-commercial-convergence/OWNER-CORRECTION-PAGES-BUILD.log",
+    "logSHA256": "e2fe28cdc7d2fd85ec536b1c68d57fce751a60f3bceeafed72565abd58cd8faf",
+    "workerBytes": 16525596,
+    "gzipBytes": 3071336,
+    "providerCalls": 0,
+    "deployed": false,
+    "liveCustomer": false
+  },
+  "zeroCostChecksExecuted": [
+    "check-w31-dossier-timestamps.mjs: PASS (5 bound / 6 unknown)",
+    "check-w31-actual-contextual-ask.mjs: PASS (26 actual handler cases)",
+    "check-w31-reading-bridge-browser.mjs: PASS (4 actual browser journeys)",
+    "check-w31-visual-handoff.mjs: PASS (30 selected image requests/decode/identity)",
+    "check-world-save-zero-cost.mjs: PASS (native SQLite / owner / consent / expiry)",
+    "check-world-discovery-browser.mjs: PASS (8 actual browser journeys, World visible in actual Ask selector)",
+    "check:book-v-atlas:r1:m1:w5-w6: PASS",
+    "check:book6-reconfiguration-atlas:ask: PASS",
+    "check-pages-output-concurrency.mjs: PASS after completed build; premature invocation retained as invalid prerequisite",
+    "check:book-w1-public-projection: machine PASS, human/payment NOT_RUN",
+    "build:pages: PASS current HEAD+working-tree digest, stale=false"
+  ]
 }
