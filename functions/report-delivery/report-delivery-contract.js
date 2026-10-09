@@ -15,7 +15,7 @@ export const REPORT_ACCESS_STATES=Object.freeze(['FREE','LOCKED','ENTITLED','UNA
 // Product and entitlement literals are projections of the existing Commerce owner.
 export const REPORT_DELIVERY_METHODS=Object.freeze(REPORT_COMMERCE_CONTRACT.products.filter(p=>p.methodId).map(p=>Object.freeze({
  methodId:p.methodId,reportProductId:p.productId,entitlementKey:p.entitlementKey,
- commerceProductId:STRIPE_PRODUCT_REGISTRY.find(c=>c.category==='REPORT'&&reportContractId(c.productId)===p.productId)?.productId,
+ commerceProductId:STRIPE_PRODUCT_REGISTRY.find(c=>(c.category==='REPORT'||c.productId==='COM-WILL-WRITING')&&reportContractId(c.productId)===p.productId)?.productId,
  pilot:p.methodId==='BZR',productionActive:false,humanAccepted:false,referenceGovernedComposerRequired:REPORT_PRO_COMPOSER_R1_REQUIRED
 })));
 export function reportDeliveryMethod(methodId){return REPORT_DELIVERY_METHODS.find(p=>p.methodId===methodId)||null;}

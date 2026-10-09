@@ -1,0 +1,52 @@
+{
+  "method": "READ_ONLY_VIRTUAL_FILESYSTEM_ABSENCE_NO_PHYSICAL_DELETE",
+  "scope": "Two generated directories; selected static/authority regressions, not build reproduction or packaging E2E",
+  "rows": [
+    {
+      "candidate": ".pages-output",
+      "key": "check:cloudflare-function-import-compat",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": "✓ Cloudflare Pages Functions source deployability invariant passed.\n  functions/**/*.{js,mjs,cjs} contains no prohibited JSON import attributes.\n  Repository validation remains distinct from DEPLOYED and LIVE_VERIFIED truth.\n"
+    },
+    {
+      "candidate": ".pages-output",
+      "key": "check:health-k1-current",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": "✓ HEALTH-K1 current successor passed: 72 concepts and 14 governed packets remain unchanged while explicit HRP successor authority is present.\n  Historical HEALTH-K1 stage gate forbidding silent HRP creation remains preserved; current authority permits only explicit, firewalled HRP successor admission.\n"
+    },
+    {
+      "candidate": ".pages-output",
+      "key": "check:book-i-v3-extraction",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": "PASS Book I v3 extraction integrity: binary metadata verified, P0-P4 section inventory is contiguous, OCR-free, private-body only, and canonical/production cutover remains closed.\n"
+    },
+    {
+      "candidate": ".wrangler/pages-production-build",
+      "key": "check:cloudflare-function-import-compat",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": "✓ Cloudflare Pages Functions source deployability invariant passed.\n  functions/**/*.{js,mjs,cjs} contains no prohibited JSON import attributes.\n  Repository validation remains distinct from DEPLOYED and LIVE_VERIFIED truth.\n"
+    },
+    {
+      "candidate": ".wrangler/pages-production-build",
+      "key": "check:health-k1-current",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": "✓ HEALTH-K1 current successor passed: 72 concepts and 14 governed packets remain unchanged while explicit HRP successor authority is present.\n  Historical HEALTH-K1 stage gate forbidding silent HRP creation remains preserved; current authority permits only explicit, firewalled HRP successor admission.\n"
+    },
+    {
+      "candidate": ".wrangler/pages-production-build",
+      "key": "check:book-i-v3-extraction",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": "PASS Book I v3 extraction integrity: binary metadata verified, P0-P4 section inventory is contiguous, OCR-free, private-body only, and canonical/production cutover remains closed.\n"
+    }
+  ],
+  "deletedFiles": 0,
+  "providerCalls": 0,
+  "readyForDeletion": false,
+  "remaining": "Current exact isolated rebuild and packaging consumers still pending; passing source checks do not prove build reproducibility"
+}
