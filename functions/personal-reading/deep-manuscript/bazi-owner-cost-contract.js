@@ -1,5 +1,7 @@
+import {reportEconomics,reportGenerationCeiling,reportFollowupReserve} from '../../pws/commercial/commerce-economics-policy.js';
+const generationLimit=reportGenerationCeiling('BZR');
 // Projection and admission over the existing BDM checkpoint ledger, not a provider engine.
-export const BAZI_OWNER_NORMAL_COST_CONTRACT=Object.freeze({NORMAL_GENERATION_CALLS_MAX:3,NORMAL_GENERATION_COST_USD_MAX:1,BILINGUAL_ZH_EN_INCLUDED_IN_SAME_3_CALLS:true,REPAIR:'CONDITIONAL_ONLY',REPAIR_BUDGET:'EXISTING_AUTHORIZED_POLICY'});
+export const BAZI_OWNER_NORMAL_COST_CONTRACT=Object.freeze({NORMAL_GENERATION_CALLS_MAX:3,NORMAL_GENERATION_COST_USD_MAX:generationLimit,TOTAL_REPORT_COST_USD_MAX:reportEconomics('BZR').providerCapUsd,FOLLOWUP_RESERVE_USD:reportFollowupReserve('BZR'),BILINGUAL_ZH_EN_INCLUDED_IN_SAME_3_CALLS:true,REPAIR:'CONDITIONAL_ONLY',REPAIR_BUDGET:'EXISTING_AUTHORIZED_POLICY'});
 const sum=rows=>rows.reduce((n,r)=>n+(Number.isFinite(r.cost)?r.cost:0),0);
 export function projectBaziReportCostLedger(cp={}){
  const rows=cp.ledger||[],normal=rows.filter(r=>r.callType==='NORMAL'),repair=rows.filter(r=>r.callType!=='NORMAL'),pending=cp.inFlight;
@@ -9,7 +11,7 @@ export function projectBaziReportCostLedger(cp={}){
  return {normalGenerationCalls,normalGenerationCostUSD:normalUnknown?null:sum(normal),repairCalls,repairCostUSD:repairUnknown?null:sum(repair),totalProviderCalls:normalGenerationCalls+repairCalls,totalProviderCostUSD:usageUnknown?null:sum(rows),
   actualRecordedCostUSD:sum(rows),estimatedReservedCostUSD:pending?.estimatedMaximumCostUSD??0,usageUnknown,
   repairEligibility:'EXPLICIT_VERIFIER_FAILURE_AND_EXISTING_POLICY_AUTHORIZATION_REQUIRED',softLimitState:Object.keys(cp.costTelemetry||{}).length?cp.costTelemetry:'EXISTING_POLICY_THRESHOLDS_UNSET',
-  hardLimitState:usageUnknown?'BLOCKED_UNKNOWN_INCURRED_COST':normalGenerationCalls>3||sum(normal)>1?'NORMAL_HARD_LIMIT_EXCEEDED':'WITHIN_NORMAL_LIMIT'};
+  hardLimitState:usageUnknown?'BLOCKED_UNKNOWN_INCURRED_COST':normalGenerationCalls>3||sum(rows)>generationLimit?'NORMAL_HARD_LIMIT_EXCEEDED':'WITHIN_NORMAL_LIMIT'};
 }
 export function inspectBaziRepairEligibility(failure){
  if(!failure||failure.verificationRejected!==true||!failure.failureId||!failure.sectionId||!['zh-Hans','en'].includes(failure.locale)||!failure.reason||failure.reason==='BLOCKED_ACCEPTED_COPY_COVERAGE'||failure.successfulVerification===true)return {eligible:false,reason:'NO_REPAIR_ELIGIBLE_VERIFIER_FAILURE'};
@@ -22,9 +24,10 @@ export function assertBaziOwnerCallBudget({checkpoint,callType,projectedMaximumC
  if(checkpoint?.inFlight||ledger.usageUnknown)deny('BAZI_USAGE_RECONCILIATION_REQUIRED');
  if(callType==='NORMAL'){
   if(ledger.normalGenerationCalls>=3)deny('BAZI_FOURTH_NORMAL_CALL_DENIED');
-  if(ledger.normalGenerationCostUSD+projectedMaximumCostUSD>1+1e-10)deny('BAZI_NORMAL_USD1_HARD_STOP');
+  if(ledger.totalProviderCostUSD+projectedMaximumCostUSD>generationLimit+1e-10)deny('BAZI_REPORT_GENERATION_COST_HARD_STOP');
   return ledger;
  }
+ if(ledger.totalProviderCostUSD+projectedMaximumCostUSD>generationLimit+1e-10)deny('BAZI_REPORT_GENERATION_COST_HARD_STOP');
  const eligibility=inspectBaziRepairEligibility(repairAuthorization?.failure);
  if(!eligibility.eligible||repairAuthorization?.explicitlyAuthorized!==true||!repairAuthorization.policyReceipt||!Number.isFinite(repairAuthorization.authorizedMaximumCostUSD))deny('BAZI_EXISTING_REPAIR_AUTHORIZATION_REQUIRED');
  if(!units.length||units.some(u=>u.sectionId!==eligibility.scope.sectionId||u.locale!==eligibility.scope.locale))deny('BAZI_TARGETED_REPAIR_SCOPE_REQUIRED');

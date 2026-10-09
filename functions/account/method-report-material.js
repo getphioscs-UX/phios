@@ -1,6 +1,7 @@
 import {assertMethodGeneration,methodMaterialIdentity} from '../report-delivery/method-render-contract.js';
 import {digest} from './oidc-auth.js';
 import {grantDeliveredReportFollowups} from './report-followup-store.js';
+import {closeReleasedReportBudget} from '../personal-reading/report-delivery-budget.js';
 const fail=()=>{throw Object.assign(new Error('REPORT_UNAVAILABLE'),{code:'REPORT_UNAVAILABLE',status:404});};
 // Existing SQL and private object owners remain canonical. Adapters must perform
 // method entitlement, subject consent and release admission on every read.
@@ -29,6 +30,7 @@ export async function persistMethodReportMaterial(context,{release,candidate,htm
  // Content addressed object; never replace the first report material identity.
  const prior=await context.env.RUNTIME_DB.prepare('SELECT * FROM account_method_report_materials WHERE owner_account_id=? AND report_id=?').bind(candidate.customerId,release.reportId).first();
  const grantFollowups=async()=>{
+  await closeReleasedReportBudget(context,{candidate,release,receipt});
   if(context.env.PHIOS_REPORT_FOLLOWUP_QA_ENABLED==='true'&&['local','qa','preview'].includes(context.env.PHIOS_ENVIRONMENT))await grantDeliveredReportFollowups(context.env,{reportId:release.reportId,ownerAccountId:candidate.customerId,purchaseId:candidate.purchaseId,methodCode:candidate.snapshot.methodId});
  };
  if(prior){if(prior.snapshot_id!==candidate.snapshot.semanticSnapshotId)fail();await grantFollowups();return {reportId:release.reportId};}

@@ -20,8 +20,9 @@ for(const p of REPORT_COMMERCE_CONTRACT.products)for(const reportLocale of ['en'
   assert.deepEqual(requirePurchasedReportPresentation({entitlement_status:'active',purchase_id:'historical-fixture',reportPresentation:input},input),input);
   continue;
  }
+ if(p.bilingualOnly&&reportLocale!=='bilingual'){assert.throws(()=>quoteReportPresentation(p.productId,input,selected),/BILINGUAL/);continue;}
  const quote=quoteReportPresentation(p.productId,input,selected);
- assert.equal(quote.amountMinor,p.amountMinor+(reportLocale==='bilingual'?({BUNDLE_2:1000,BUNDLE_3:1000,BUNDLE_5PLUS:2000}[p.productId]??1000):0));
+ assert.equal(quote.amountMinor,p.amountMinor+(reportLocale==='bilingual'&&!p.bilingualOnly?1000:0));
  const e={entitlement_status:'active',purchase_id:'verified-fixture',reportPresentation:quote};
  assert.deepEqual(requirePurchasedReportPresentation(e,input),input);
  assert.throws(()=>requirePurchasedReportPresentation(e,{reportLanguageMode:'SINGLE',reportLocale:reportLocale==='en'?'zh-Hans':'en'}));prices++;

@@ -29,18 +29,18 @@ await test('migration preserves existing book purchases, rights and download tok
   assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM digital_entitlements').get().n,1);
   assert.deepEqual(sqlite.prepare('PRAGMA foreign_key_check').all(),[]);
 });
-await test('25 approved QA prices and all existing report prices agree',()=>{
-  assert.equal(STRIPE_PRODUCT_REGISTRY.length,25);assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId)).size,25);assertReportPriceParity();
+await test('current QA prices, retained history and explicit LIVE bindings agree',()=>{
+  assert.equal(STRIPE_PRODUCT_REGISTRY.length,27);assert.equal(new Set(STRIPE_PRODUCT_REGISTRY.map(p=>p.qaPriceId)).size,27);assertReportPriceParity();
   const approved={'COM-REPORT-FINANCIAL-FULL':15900,'COM-BOOK-01':8900,'COM-BOOK-02':8900,'COM-BOOK-03':8900,'COM-BOOK-04':8900,'COM-BOOK-05':10900,'COM-BOOK-CONFIGURATION':10900,'COM-BOOK-06':5900,'COM-BOOK-07':5900,'COM-SUBSCRIPTION-MONTHLY':1900,'COM-WILL-WRITING':2900,'COM-SERVICE-FINANCIAL-CONSULTATION':10000,'COM-SERVICE-CASH-FLOW-GAME':10000,'COM-SERVICE-NATURAL-HEALER':10000};
   for(const [id,amount] of Object.entries(approved))assert.equal(STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===id).amountMinor,amount);
-  const provider=JSON.parse(fs.readFileSync('docs/qa/commerce-stripe-r1/stripe-provider-readback.json','utf8'));
-  for(const p of STRIPE_PRODUCT_REGISTRY){const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);assert.equal(q.unit_amount,p.amountMinor);assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(p.livePriceId,null);assert.equal(p.liveProductId,null);assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}
+  const provider=JSON.parse(fs.readFileSync('docs/commerce/economics-20261009/stripe-qa-price-readback.json','utf8'));
+  for(const p of STRIPE_PRODUCT_REGISTRY){const q=provider.prices.find(q=>q.id===p.qaPriceId);assert(q);assert.equal(q.product,p.qaProductId);assert.equal(q.unit_amount,p.amountMinor);assert.equal(q.currency,'myr');assert.equal(q.livemode,false);assert.equal(Boolean(p.livePriceId),Boolean(p.liveProductId));assert.equal(Boolean(q.recurring),p.billingType==='RECURRING');if(q.recurring){assert.equal(q.recurring.interval,'month');assert.equal(q.recurring.interval_count,1);}}
 });
 await test('bundle eligibility/count/uniqueness server policy',()=>{
-  const eligible=standardBundleProducts();assert.equal(eligible.length,5);assert(!eligible.includes('COM-REPORT-PROFILE-FULL'));assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-2',[eligible[0],'COM-REPORT-PROFILE-FULL']));
+  const eligible=standardBundleProducts();assert.equal(eligible.length,3);assert(!eligible.includes('COM-REPORT-PROFILE-FULL'));assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-2',[eligible[0],'COM-REPORT-PROFILE-FULL']));
   assert.equal(commerceSelection('COM-REPORT-BUNDLE-2',eligible.slice(0,2)).length,2);
   assert.equal(commerceSelection('COM-REPORT-BUNDLE-3',eligible.slice(0,3)).length,3);
-  assert.equal(commerceSelection('COM-REPORT-BUNDLE-5PLUS',eligible).length,5);
+  assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-5PLUS',eligible));
   for(const bad of [[],eligible.slice(0,1),[eligible[0],eligible[0]],[eligible[0],'COM-REPORT-HD-FULL'],[eligible[0],'COM-REPORT-CROSS-FULL'],[eligible[0],'COM-REPORT-FINANCIAL-FULL']])assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-2',bad));
   assert.throws(()=>commerceSelection('COM-REPORT-BUNDLE-5PLUS',eligible.slice(0,4)));
 });
@@ -68,10 +68,10 @@ const fetcher=async(url,options={})=>{
   throw new Error('Unexpected fixture request '+pathname);
 };
 const identity={userId:'user_owner',providerId:'QA_TEST_FIXTURE',authenticated:true,verified:true};
-const context=(body={},overrides={})=>({env,data:{symbolicAccountIdentity:identity},fetch:fetcher,request:new Request('https://phios.test/api/commerce-checkout',{method:'POST',headers:{origin:'https://phios.test','content-type':'application/json','idempotency-key':'test-key-'+String(++sequence).padStart(16,'0')},body:JSON.stringify({acceptDigitalPolicy:true,...(STRIPE_PRODUCT_REGISTRY.some(p=>p.productId===body.productId&&isLanguageReport(p))?{reportLanguageMode:'SINGLE',reportLocale:'en'}:{}),...body})}),...overrides});
+const context=(body={},overrides={})=>({env,data:{symbolicAccountIdentity:identity},fetch:fetcher,request:new Request('https://phios.test/api/commerce-checkout',{method:'POST',headers:{origin:'https://phios.test','content-type':'application/json','idempotency-key':'test-key-'+String(++sequence).padStart(16,'0')},body:JSON.stringify({acceptDigitalPolicy:true,...(STRIPE_PRODUCT_REGISTRY.some(p=>p.productId===body.productId&&isLanguageReport(p))?(STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===body.productId)?.bilingualOnly?{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}:{reportLanguageMode:'SINGLE',reportLocale:'en'}):{}),...body})}),...overrides});
 let eventSeq=0;
 async function send(type,object,eventId=`evt_fixture${++eventSeq}`,override={}){
-  const event={id:eventId,type,livemode:false,data:{object},...override},raw=JSON.stringify(event);
+  const event={id:eventId,type,livemode:false,data:{object:object.livemode===undefined?{...object,livemode:false}:object},...override},raw=JSON.stringify(event);
   const signature=await createStripeTestSignature(raw,env.STRIPE_WEBHOOK_SECRET,Math.floor(Date.now()/1000));
   return webhook({env,fetch:fetcher,request:new Request('https://phios.test/api/stripe-webhook',{method:'POST',headers:{'stripe-signature':signature},body:raw})});
 }
@@ -110,7 +110,9 @@ await test('unpaid completed does not grant; paid replay and concurrent deliveri
   assert.equal((await send('checkout.session.async_payment_succeeded',bundleSession,'evt_duplicate')).status,200);
   assert.equal((await send('checkout.session.async_payment_succeeded',bundleSession,'evt_duplicate')).status,200);
   await Promise.all([send('checkout.session.completed',bundleSession),send('checkout.session.completed',bundleSession)]);
-  const rights=(await commerceAccountProjection(env,identity.userId)).entitlements;assert.equal(rights.length,2);assert(!rights.some(x=>/CROSS|BUNDLE/.test(x.entitlementCode)));
+  const paidAccount=await commerceAccountProjection(env,identity.userId);
+  assert.equal(paidAccount.orders.find(o=>o.orderId===bundleOrder).state,'FULFILLED','Existing Commerce fulfillment means access granted; actual report material is a separate authority');
+  const rights=paidAccount.entitlements;assert.equal(rights.length,2);assert(!rights.some(x=>/CROSS|BUNDLE/.test(x.entitlementCode)));
   await send('payment_intent.succeeded',{id:bundleSession.payment_intent,customer:bundleSession.customer,metadata:bundleSession.metadata});assert.equal((await commerceAccountProjection(env,identity.userId)).entitlements.length,2);
 });
 await test('invalid signature and live event do not mutate; RECEIVED replay recovers',async()=>{
@@ -124,8 +126,8 @@ await test('invalid signature and live event do not mutate; RECEIVED replay reco
   assert.equal((await send(event.type,bundleSession,event.id)).status,200);
   assert.equal(sqlite.prepare("SELECT processing_status FROM commerce_webhook_events WHERE stripe_event_id='evt_received'").get().processing_status,'processed');
 });
-await test('active single products fulfill; retired Profile denies before order or provider operations',async()=>{
-  for(const product of STRIPE_PRODUCT_REGISTRY.filter(p=>!p.productId.includes('BUNDLE'))){
+await test('active single products fulfill after verified payment',async()=>{
+  for(const product of STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&!p.productId.includes('BUNDLE'))){
     const beforeCalls=stripeCalls.length,beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
     const response=await commerceApi(context({productId:product.productId}),'checkout');
     if(isLanguageReport(product)&&resolveReportProduct(reportContractId(product.productId)).newPurchaseDefault===false){
@@ -154,7 +156,7 @@ await test('subscription created is not entitlement; invoice activates; cancella
   for(const status of ['past_due','unpaid','canceled']){sub.status=status;await send('customer.subscription.updated',sub);assert.equal((await commerceAccountProjection(env,identity.userId)).subscriptions[0].accessGranted,false);}
 });
 await test('partial/full refunds recorded with review; permanent rights not silently revoked',async()=>{
-  for(const amount of [1000,6900])assert.equal((await send('charge.refunded',{payment_intent:bundleSession.payment_intent,amount_refunded:amount,currency:'myr'})).status,200);
+  for(const amount of [1000,9900])assert.equal((await send('charge.refunded',{payment_intent:bundleSession.payment_intent,amount_refunded:amount,currency:'myr'})).status,200);
   const account=await commerceAccountProjection(env,identity.userId);assert.equal(account.orders.find(o=>o.orderId===bundleOrder).state,'REFUNDED');assert(account.entitlements.some(x=>x.entitlementCode==='REPORT_BAZI_FULL'));
 });
 await test('provider price mismatch is review-required without grants; portal cannot select another customer',async()=>{
@@ -186,7 +188,7 @@ await test('unknown order or absent metadata records terminal review without gra
   assert.equal((await commerceAccountProjection(env,identity.userId)).entitlements.length,before);
 });
 await test('bilingual bundle settlement persists one language across every child and blocks tampered provider price',async()=>{
- for(const [productId,count,total] of [['COM-REPORT-BUNDLE-2',2,7900],['COM-REPORT-BUNDLE-3',3,10900],['COM-REPORT-BUNDLE-5PLUS',5,17900]]){
+ for(const [productId,count,total] of [['COM-REPORT-BUNDLE-2',2,10900],['COM-REPORT-BUNDLE-3',3,15900]]){
   const selectedProducts=standardBundleProducts().slice(0,count);
   const r=await commerceApi(context({productId,selectedProducts,reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');assert.equal(r.status,201);const result=await r.json();
   const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);assert.equal(session.amount_total,total);session.payment_status='paid';
@@ -199,7 +201,7 @@ await test('bilingual bundle settlement persists one language across every child
  assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).n,0);
 });
 await test('bundle language policy: six totals, order-level modifier, browser totals ignored',async()=>{
- for(const [suffix,count,base,total] of [['2',2,6900,7900],['3',3,9900,10900],['5PLUS',5,15900,17900]])for(const bilingual of [false,true]){
+ for(const [suffix,count,base,total] of [['2',2,9900,10900],['3',3,14900,15900]])for(const bilingual of [false,true]){
   const productId=`COM-REPORT-BUNDLE-${suffix}`,selectedProducts=standardBundleProducts().slice(0,count);
   const response=await commerceApi(context({productId,selectedProducts,reportLanguageMode:bilingual?'BILINGUAL':'SINGLE',reportLocale:bilingual?'bilingual':'en',amount:1,surcharge:1,total:16900}),'checkout');
   assert.equal(response.status,201);const {orderId}=await response.json();
@@ -210,7 +212,7 @@ await test('bundle language policy: six totals, order-level modifier, browser to
   const session=[...sessions.values()].find(s=>s.metadata.order_id===orderId);assert.equal(session.amount_total,quote.amountMinor);
   assert.equal(session.line_items.data.length,bilingual?2:1);if(bilingual)assert.equal(session.line_items.data[1].quantity,1);
  }
- assert.throws(()=>quoteReportPresentation('BUNDLE_5PLUS',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT','ASTROLOGY_FULL_REPORT','PROFILE_FULL_REPORT','NUMEROLOGY_FULL_REPORT','ECR_FULL_REPORT']),/PWS_REPORT_SELECTION_COUNT|PWS_REPORT_SELECTION_INELIGIBLE/);
+ assert.throws(()=>quoteReportPresentation('BUNDLE_5PLUS',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT','ASTROLOGY_FULL_REPORT','PROFILE_FULL_REPORT','NUMEROLOGY_FULL_REPORT','ECR_FULL_REPORT']),/PWS_REPORT_SELECTION_COUNT|PWS_REPORT_SELECTION_INELIGIBLE|PWS_REPORT_PRODUCT_NOT_FOUND/);
  const legacy=quoteReportPresentation('BUNDLE_2',{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'},['BAZI_FULL_REPORT','ZIWEI_FULL_REPORT'],'REPORT-LANGUAGE-R2-2026-09-20-CORRECTED');
  const product=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId==='COM-REPORT-BUNDLE-2');
  const legacyOrder={context_json:JSON.stringify({reportPresentation:legacy}),selected_products_json:JSON.stringify(['COM-REPORT-BAZI-FULL','COM-REPORT-ZIWEI-FULL']),amount_minor:6900};

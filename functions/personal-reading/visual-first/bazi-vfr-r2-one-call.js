@@ -1,3 +1,4 @@
+import {reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
 import {composeVisualReportAttempt,planReportProviderRequest} from '../narrative/visual-report-provider-budget.js';
 import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
 import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
@@ -17,7 +18,7 @@ export function guardBaziVfrR2(ir,expected){
  if(ir.pages.length>50)throw Error('PAGE_LIMIT_EXCEEDED');
  const text=JSON.stringify(ir.sections);
  if(/\d{4}年|\d+岁|甲己化土|甲戌|丙午|癸丑|戊午|必然升职|一定发财|guaranteed (?:promotion|wealth|illness)|will definitely|diagnosed with|transforms into Earth|strong Day Master/i.test(text))throw Error('FORBIDDEN_FACT_OR_PREDICTION');
- if(ir.providerUsage.providerCalls>2||ir.providerUsage.semanticReviewCalls!==0||ir.providerUsage.estimatedProviderCost>1)throw Error('PROVIDER_BUDGET_EXCEEDED');
+ if(ir.providerUsage.semanticReviewCalls!==0||ir.providerUsage.estimatedProviderCost>reportGenerationCeiling('BZR'))throw Error('PROVIDER_BUDGET_EXCEEDED');
  return ir;
 }
 // Deliberately unused in fixture builds. Explicit live + verified pricing gates precede transport.

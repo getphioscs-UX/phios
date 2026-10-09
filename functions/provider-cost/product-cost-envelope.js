@@ -1,11 +1,6 @@
 // Latest direct owner limits. Price implementation stays with Commerce's owner.
-export const PRODUCT_TOTAL_COST_USD=Object.freeze({
- 'COM-REPORT-BAZI-FULL':4,'COM-REPORT-ZIWEI-FULL':3,'COM-REPORT-ASTROLOGY-FULL':3,
- 'COM-REPORT-PROFILE-FULL':6,'COM-REPORT-HD-FULL':5,'COM-REPORT-ECR-FULL':6,
- 'COM-REPORT-NUMEROLOGY-FULL':2,'COM-REPORT-CROSS-FULL':10,
- 'COM-READING-TAROT-FULL':1,'COM-READING-ICHING-FULL':2,
- 'COM-REPORT-FINANCIAL-FULL':7,'COM-WILL-WRITING':2
-});
+import {COMMERCE_ECONOMICS} from '../pws/commercial/commerce-economics-policy.js';
+export const PRODUCT_TOTAL_COST_USD=Object.freeze(Object.fromEntries(Object.values(COMMERCE_ECONOMICS).filter(p=>p.providerCapUsd!==null).map(p=>[p.productId,p.providerCapUsd])));
 const authority='DIRECT_OWNER_COMMERCIAL_AMENDMENT_2026-10-09_INCLUDING_FOUR_ASK';
 const fail=code=>{throw Object.assign(new Error(code),{code,status:409});};
 const micro=v=>{if(!Number.isFinite(v)||v<=0||v>100)fail('COST_ESTIMATE_INVALID');return Math.ceil(v*1e6);};

@@ -1,3 +1,4 @@
+import {installReportQuestions} from './report-questions.js';
 import {installReportModeChoice,prepareReportContext,reportContextErrorLabel} from '../report-context-ui.js';
 import {esc,tr} from './runtime-ui.js';
 import {accountRequest} from './secure-drafts.js';
@@ -31,6 +32,7 @@ function render(){
  ${field('targetDate','Reading reference date','读取参考日期','date',new Date().toISOString().slice(0,10),'required')}
  <p class="cx-field-helper">${esc(tr('PHI OS uses your saved profile and purchased report access. You do not need to re-enter technical birth data.','PHI OS 会直接使用已保存的出生资料与已购买的报告权益，不需要重复填写技术资料。'))}</p><button class="cx-button cx-button--primary" type="submit">${esc(tr('Generate report','生成报告'))}</button></form></details>
  <section data-released-reports class="cx-account-reports"><div class="cx-account-reports__heading"><h3>${esc(tr('Your released reports','你的已发布报告'))}</h3><button class="cx-button cx-button--secondary" type="button" data-refresh-reports>${esc(tr('Refresh','刷新'))}</button></div>${reportsState==='error'?`<p role="status">${esc(tr('Reports could not be loaded. Refresh to try again.','报告列表加载失败，请刷新重试。'))}</p>`:reportsState==='loading'?`<p role="status">${esc(tr('Loading your reports…','正在加载你的报告…'))}</p>`:''}<div class="cx-account-report-grid">${reports.map(r=>`<article class="cx-account-report-card"><img src="/assets/icons/methods/PHIOS-ICON-METHOD-ZIWEI-v1.svg" alt="" aria-hidden="true"><h4>${esc(tr('Zi Wei report','紫微报告'))} · ${esc(r.subjectName)}</h4><p>${r.presentationMode==='BILINGUAL'?'中文 · English':r.locale==='zh-Hans'?'中文':'English'} · ${esc(tr('Version','版本'))} ${r.version} · ${esc(new Date(r.releasedAt).toLocaleString())} · ${esc(tr('Released','已发布'))}</p><a class="cx-button" target="_blank" rel="noopener" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr('Open report','打开报告'))}</a></article>`).join('')||(reportsState==='ready'?`<p>${esc(tr('No released method reports yet.','目前没有已发布的方法报告。'))}</p>`:'')}</div></section>`:''}`;
+ installReportQuestions(host);
  const reportSection=host.querySelector('[data-released-reports]');
  const editor=host.querySelector('.cx-account-editor');
  if(reportSection&&editor)host.insertBefore(reportSection,editor);
@@ -71,7 +73,7 @@ async function refresh(){
  if(!available&&reportsState!=='error'){
   // Reports remain reachable when profile management is temporarily unavailable.
   const section=document.createElement('section');section.className='cx-account-reports';
-  section.innerHTML=reports.map(r=>`<article class="cx-account-report-card"><h3>${esc(tr('Zi Wei report','紫微报告'))} · ${esc(r.subjectName)}</h3><a class="cx-button" target="_blank" rel="noopener" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr('Open report','打开报告'))}</a></article>`).join('');host.append(section);
+  section.innerHTML=reports.map(r=>`<article class="cx-account-report-card"><h3>${esc(tr('Zi Wei report','紫微报告'))} · ${esc(r.subjectName)}</h3><a class="cx-button" target="_blank" rel="noopener" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr('Open report','打开报告'))}</a></article>`).join('');host.append(section);installReportQuestions(host);
  }
 }
 refresh();window.addEventListener('phios:localechange',()=>{selectedLocation=null;locationCandidates=[];render();});window.addEventListener('pageshow',e=>{if(e.persisted)refresh();});window.addEventListener('pagehide',()=>{persons=[];reports=[];editing=null;available=false;selectedLocation=null;locationCandidates=[];render();});

@@ -29,7 +29,7 @@ assert.equal(registry.status, 'active');
 assert.equal(registry.history_table, 'runtime_migration_history');
 assert.equal(registry.rules.immutable_after_deployment, true);
 assert.equal(registry.rules.schema_mismatch_forbidden, true);
-assert.equal(migrations.length, 15);
+assert.equal(migrations.length, 17);
 assert.equal(migrations[0].file, 'db/migrations/0001_platform_foundation.sql');
 assert.equal(migrations[1].file, 'db/migrations/0002_initial_runtime.sql');
 assert.equal(
@@ -102,7 +102,9 @@ assert.deepEqual(migrationFiles, [
   '0012_report_context_admission.sql',
   '0013_method_delivery_cache.sql',
   '0014_report_followup_history.sql',
-  '0015_product_cost_envelopes.sql'
+  '0015_product_cost_envelopes.sql',
+  '0016_commerce_environment_bindings.sql',
+  '0017_report_generation_state.sql'
 ]);
 
 const migratedDatabase = new DatabaseSync(':memory:');
@@ -115,11 +117,11 @@ const firstRun = await applyRuntimeMigrations({
   now: () => '2026-07-23T00:00:00.000Z'
 });
 assert.equal(firstRun.status, 'migrated');
-assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
 
 const history = await loadMigrationHistory(migratedAdapter);
-assert.equal(history.length, 15);
-assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+assert.equal(history.length, 17);
+assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
 assert.deepEqual(history.map(row => row.checksum), migrations.map(item => item.checksum));
 assert.equal(planPendingMigrations(migrations, history).length, 0);
 
@@ -156,10 +158,15 @@ const upgradeDatabase = new DatabaseSync(':memory:');
 enableSqliteNumberedParameterCompatibility(upgradeDatabase);
 const upgradeAdapter = createSqliteD1Adapter(upgradeDatabase);
 await applyRuntimeMigrations({db: upgradeAdapter, migrations: migrations.slice(0, 10)});
+upgradeDatabase.prepare("INSERT INTO commerce_customer_bindings(customer_id,stripe_customer_id,environment,created_at) VALUES('historical-owner','cus_historical','QA','2026')").run();
 const priorSchema = upgradeDatabase.prepare("SELECT name, sql FROM sqlite_schema WHERE type = 'table' ORDER BY name").all();
 const upgrade = await applyRuntimeMigrations({db: upgradeAdapter, migrations});
-assert.deepEqual(upgrade.applied.map(item => item.version), [11, 12, 13, 14, 15]);
+assert.deepEqual(upgrade.applied.map(item => item.version), [11, 12, 13, 14, 15, 16, 17]);
+assert.equal(upgradeDatabase.prepare("SELECT stripe_customer_id FROM commerce_customer_bindings WHERE customer_id='historical-owner' AND environment='QA'").get().stripe_customer_id,'cus_historical');
+upgradeDatabase.prepare("INSERT INTO commerce_customer_bindings(customer_id,stripe_customer_id,environment,created_at) VALUES('historical-owner','cus_live_isolated','LIVE','2026')").run();
+assert.equal(upgradeDatabase.prepare("SELECT COUNT(*) n FROM commerce_customer_bindings WHERE customer_id='historical-owner'").get().n,2);
 for (const table of priorSchema) {
+  if(table.name==='commerce_customer_bindings')continue; // v16 changes only this table's key, preserving its rows.
   assert.equal(upgradeDatabase.prepare('SELECT sql FROM sqlite_schema WHERE name = ?').get(table.name).sql, table.sql);
 }
 assert.deepEqual(upgradeDatabase.prepare('PRAGMA table_info(report_context_records)').all().map(row => row.name),

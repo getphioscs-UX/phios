@@ -1,3 +1,4 @@
+import {commerceEnvironment,commerceCheckoutAvailable,requireStripeCommerce} from './commerce-environment.js';
 import {isLanguageReport,commerceReportQuote,orderReportPresentation} from './report-presentation.js';
 import { normalizeVerifiedSymbolicAccountIdentity } from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
 import { commerceProduct, commerceSelection, STRIPE_PRODUCT_REGISTRY, standardBundleProducts } from '../pws/commercial/stripe-product-registry.js';
@@ -21,11 +22,11 @@ function sameOrigin(request){
 export async function commerceApi(context,action){
   const {request,env={},fetch:fetcher}=context;
   try{
-    if(action==='catalog') return json({success:true,environment:'QA',liveEnabled:false,checkoutAvailable:env.STRIPE_ENVIRONMENT==='QA'&&env.PHIOS_COMMERCE_QA_ENABLED==='true'&&/^(sk|rk)_test_/.test(env.STRIPE_SECRET_KEY||''),products:STRIPE_PRODUCT_REGISTRY.map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
+    if(action==='catalog') return json({success:true,environment:commerceEnvironment(env),liveEnabled:commerceEnvironment(env)==='LIVE'&&commerceCheckoutAvailable(env),checkoutAvailable:commerceCheckoutAvailable(env),products:STRIPE_PRODUCT_REGISTRY.filter(p=>p.active).map(({qaPriceId,qaProductId,livePriceId,liveProductId,...p})=>{
       let reportPresentationOptions=null,reportPurchaseState=null;
       if(isLanguageReport(p)){
         try{
-          reportPresentationOptions=['zh-Hans','en','bilingual'].map(reportLocale=>commerceReportQuote(p,{reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'},p.productId.includes('BUNDLE')?standardBundleProducts().slice(0,p.productId.endsWith('-2')?2:p.productId.endsWith('-3')?3:5):[]));
+          reportPresentationOptions=(p.bilingualOnly?['bilingual']:['zh-Hans','en','bilingual']).map(reportLocale=>commerceReportQuote(p,{reportLocale,reportLanguageMode:reportLocale==='bilingual'?'BILINGUAL':'SINGLE'},p.productId.includes('BUNDLE')?standardBundleProducts().slice(0,p.productId.endsWith('-2')?2:p.productId.endsWith('-3')?3:5):[]));
           reportPurchaseState='AVAILABLE';
         }catch(error){
           if(error?.message==='PWS_REPORT_LEGACY_NEW_PURCHASE_DISABLED'){
@@ -34,7 +35,7 @@ export async function commerceApi(context,action){
           }else throw error;
         }
       }
-      return {...p,reportPresentationOptions,reportPurchaseState};
+      return {...p,checkoutAvailable:commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),reportPresentationOptions,reportPurchaseState};
     }),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
@@ -54,8 +55,8 @@ export async function commerceApi(context,action){
       const token=await issueDownloadToken({env,entitlementId:record.entitlement_id});
       return json({success:true,downloadUrl:`/api/book-one-download?token=${encodeURIComponent(token.rawToken)}`,expiresAt:token.expiresAt});
     }
-    requireStripeQa(env);
-    if(env.PHIOS_COMMERCE_QA_ENABLED!=='true') throw Object.assign(new Error('QA checkout is not enabled.'),{status:503,code:'commerce_qa_gate_closed'});
+    requireStripeCommerce(env);
+    if(!commerceCheckoutAvailable(env)) throw Object.assign(new Error('QA checkout is not enabled.'),{status:503,code:'commerce_qa_gate_closed'});
     const body=await readJsonBody(request);
     if(action==='portal'){
       if(Object.keys(body).some(k=>k!=='locale')) throw Object.assign(new Error('Portal customer is server owned.'),{status:422,code:'portal_input_invalid'});
@@ -82,7 +83,7 @@ export async function commerceApi(context,action){
     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
     const requestHash=await sha256Hex(JSON.stringify({productId:product.productId,selected,context:contextSnapshot}));
-    const key=await sha256Hex(`COM-STRIPE-R1/QA/${customerId}/${supplied}`);
+    const key=await sha256Hex(`COM-STRIPE-R1/${commerceEnvironment(env)}/${customerId}/${supplied}`);
     const order=await createCommerceOrder({env,customerId,productId:product.productId,selectedProducts:selected,idempotencyKeyHash:key,requestHash,locale:localeFrom(body.locale),context:contextSnapshot});
     if(order.stripe_checkout_url&&order.order_state==='CHECKOUT_CREATED'&&Date.parse(order.expires_at)>Date.now()) return json({success:true,orderId:order.checkout_attempt_id,checkoutUrl:order.stripe_checkout_url,replay:true});
     if(order.order_state!=='PENDING') throw Object.assign(new Error('This checkout attempt is no longer open. Start a new purchase.'),{status:409,code:'checkout_attempt_closed'});
@@ -93,7 +94,7 @@ export async function commerceApi(context,action){
       binding=await bindCommerceCustomer(env,customerId,customer.id);
     }
     const session=await createCommerceCheckoutSession({env,product,order,customerId:binding.stripe_customer_id,origin,locale:order.locale,idempotencyKey:`checkout-${key}`,fetcher});
-    if(!/^cs_test_/.test(session.id)||!/^https:\/\/checkout\.stripe\.com\//.test(session.url||'')||!Number.isFinite(session.expires_at)) throw Object.assign(new Error('Invalid QA checkout response.'),{status:502,code:'checkout_response_invalid'});
+    if(!(commerceEnvironment(env)==='LIVE'?/^cs_(?!test_)/:/^cs_test_/).test(session.id)||!/^https:\/\/checkout\.stripe\.com\//.test(session.url||'')||!Number.isFinite(session.expires_at)) throw Object.assign(new Error('Invalid QA checkout response.'),{status:502,code:'checkout_response_invalid'});
     await attachCommerceCheckout(env,order,session);
     commerceLog('CHECKOUT_CREATED',{order_id:order.checkout_attempt_id,checkout_session_id:session.id,product_id:product.productId,amount_minor:order.amount_minor,currency:'MYR'});
     return json({success:true,orderId:order.checkout_attempt_id,checkoutUrl:session.url},201);

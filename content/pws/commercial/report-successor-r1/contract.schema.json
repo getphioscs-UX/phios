@@ -17,7 +17,10 @@
       "const": "phi-os.pws.report-commerce-successor.v1"
     },
     "version": {
-      "const": "1.0.0"
+      "enum": [
+        "1.0.0",
+        "1.1.0"
+      ]
     },
     "effectiveAt": {
       "type": "string"
@@ -30,14 +33,13 @@
       "required": [
         "source",
         "baseline",
-        "successor",
         "date"
       ]
     },
     "products": {
       "type": "array",
       "minItems": 11,
-      "maxItems": 11,
+      "maxItems": 14,
       "items": {
         "type": "object",
         "required": [
@@ -113,13 +115,25 @@
                 "minimum": 1
               },
               "eligibilityRegistry": {
-                "const": "standard-myr39-v1"
+                "enum": [
+                  "standard-myr39-v1",
+                  "standard-myr59-20261009"
+                ]
               },
               "distinct": {
                 "const": true
               }
             },
             "additionalProperties": false
+          },
+          "newPrimaryPromotion": {
+            "type": "boolean"
+          },
+          "newPurchaseDefault": {
+            "type": "boolean"
+          },
+          "bilingualOnly": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -144,6 +158,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "status": {
+            "enum": [
+              "HISTORICAL_ORDER_COMPATIBILITY",
+              "FUTURE_SELECTION"
+            ]
           }
         },
         "additionalProperties": false
@@ -179,5 +199,43 @@
       }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": "1.0.0"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "products": {
+            "minItems": 11,
+            "maxItems": 11
+          },
+          "approval": {
+            "required": [
+              "successor"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "products": {
+            "minItems": 14,
+            "maxItems": 14
+          },
+          "approval": {
+            "required": [
+              "policyVersion",
+              "scope"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }

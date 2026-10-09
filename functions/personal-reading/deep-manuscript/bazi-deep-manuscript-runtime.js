@@ -1,3 +1,4 @@
+import {reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
 import {BATCHES,LOCALES,POLICY,VERSIONS,FIELD,unitKey,digest} from './bazi-deep-manuscript-contract.js';
 import {projectBaziBatchAuthority,buildPriorSectionSummary} from './bazi-deep-manuscript-batch-authority.js';
 import {buildBaziManuscriptSchema} from './bazi-deep-manuscript-schema.js';
@@ -24,6 +25,7 @@ function awaitlessVersions(v){return JSON.stringify(Object.entries(v||{}).sort()
 // Store contract: durable get/put + exclusive withLock + atomic putIfAbsent.
 // Keep the whole generation inside a subject/candidate lease, including provider I/O.
 export async function generateBaziDeepManuscript({mode='EXPERIMENT',env={},approval=null,order=null,pack,model,policy,history={},candidateId,experimentId=null,subjectId,store,invoke=invokeBaziDeepManuscript,fixture=false,controlledSequentialExperiment=false,ownerCostContract=false,repairAuthorization=null,now=()=>new Date().toISOString()}){
+ if(mode==='PRODUCTION'&&!fixture)ownerCostContract=true; // Every paid production attempt uses the total method budget.
  if(controlledSequentialExperiment&&mode!=='EXPERIMENT')throw Error('BDM_CONTROLLED_SEQUENCE_EXPERIMENT_ONLY');
  if(fixture&&invoke===invokeBaziDeepManuscript)throw Error('BDM_FIXTURE_TRANSPORT_REQUIRED');
  assertBaziGenerationAdmission({mode,env,approval,order,pack,model,fixture});
@@ -46,6 +48,7 @@ export async function generateBaziDeepManuscript({mode='EXPERIMENT',env={},appro
    const request={model:model.modelId,systemPrompt:BAZI_DEEP_MANUSCRIPT_PROMPT,payload,schema:buildBaziManuscriptSchema(units),plan};
    const schemaDigest=await digest(request.schema),promptDigest=await digest(request.systemPrompt);
    const requestKey=await digest({candidateId,sequence:cp.ledger.length,units,callType});
+   request.reportBudget={requestId:requestKey,phase:callType==='NORMAL'?'PRIMARY':'REPAIR',projectedMaximumUsd:plan.configuredWorstCaseCost,repairUnit:callType==='NORMAL'?null:units.map(u=>unitKey(u.sectionId,u.locale)).sort().join(',')};
    cp.inFlight={requestKey,units,callType,batchId,startedAt:now(),...(ownerCostContract?{estimatedMaximumCostUSD:plan.configuredWorstCaseCost}:{})};
    if(callType==='NORMAL')cp.batchesAttempted.push(batchId);
    if(callType==='STANDARD_RECOVERY')cp.standardRecoveryCallsUsed++;
@@ -62,7 +65,7 @@ export async function generateBaziDeepManuscript({mode='EXPERIMENT',env={},appro
    if(ownerCostContract){receipt.estimatedMaximumCostUSD=plan.configuredWorstCaseCost;if(callType!=='NORMAL')receipt.repairFailureId=repairAuthorization?.failure?.failureId;}
    if(error?.usageUnknown){cp.state='TRANSPORT_RECONCILIATION_PENDING';await persist();return {pause:true,error};}
    delete cp.inFlight;
-   if(ownerCostContract){cp.ownerCostLedger=projectBaziReportCostLedger(cp);if(cp.ownerCostLedger.hardLimitState==='NORMAL_HARD_LIMIT_EXCEEDED'){cp.state='BUDGET_BLOCKED';await persist();throw Object.assign(Error('BAZI_NORMAL_USD1_HARD_STOP'),{state:cp.state,ledger:cp.ownerCostLedger});}}
+   if(ownerCostContract){cp.ownerCostLedger=projectBaziReportCostLedger(cp);if(cp.ownerCostLedger.hardLimitState==='NORMAL_HARD_LIMIT_EXCEEDED'){cp.state='BUDGET_BLOCKED';await persist();throw Object.assign(Error('BAZI_REPORT_GENERATION_COST_HARD_STOP'),{state:cp.state,ledger:cp.ownerCostLedger});}}
    if(error&&retryableBaziTransport(error)&&controlledSequentialExperiment){cp.state='TECHNICAL_RECOVERY_PENDING';}
    if(error&&retryableBaziTransport(error)&&!controlledSequentialExperiment){cp.pendingTransport={batchId,units,authority,semanticAnchor};cp.notBefore=Date.parse(now())+POLICY.backoffMs[Math.min(cp.transportRetries,POLICY.backoffMs.length-1)];cp.state='TRANSPORT_RETRY_PENDING';}
    if(error&&!retryableBaziTransport(error))cp.state='PROVIDER_CONFIGURATION_PENDING';
@@ -77,7 +80,7 @@ export async function generateBaziDeepManuscript({mode='EXPERIMENT',env={},appro
   // Preflight all 3 BEFORE the first paid request, never change normal topology.
   let unattemptedNormalMaximumCost=0;
   for(const b of BATCHES){const units=b.sectionIds.flatMap(sectionId=>LOCALES.map(locale=>({sectionId,locale})));const p=planBaziDeepManuscriptOutputBudget({authority:projectBaziBatchAuthority(pack,b.batchId),priorSummary:buildPriorSectionSummary(pack,b.batchId),units,history,model,policy});if(!p.allowed)throw Error(p.reason);if(!cp.batchesAttempted.includes(b.batchId))unattemptedNormalMaximumCost+=p.configuredWorstCaseCost;}
-  if(ownerCostContract){const ledger=projectBaziReportCostLedger(cp);if(ledger.usageUnknown)throw Object.assign(Error('BAZI_USAGE_RECONCILIATION_REQUIRED'),{state:'BUDGET_BLOCKED'});if(ledger.normalGenerationCostUSD+unattemptedNormalMaximumCost>1+1e-10)throw Object.assign(Error('BAZI_NORMAL_USD1_HARD_STOP'),{state:'BUDGET_BLOCKED',projectedMaximumCostUSD:unattemptedNormalMaximumCost,ledger});}
+  if(ownerCostContract){const ledger=projectBaziReportCostLedger(cp);if(ledger.usageUnknown)throw Object.assign(Error('BAZI_USAGE_RECONCILIATION_REQUIRED'),{state:'BUDGET_BLOCKED'});if(ledger.totalProviderCostUSD+unattemptedNormalMaximumCost>reportGenerationCeiling('BZR')+1e-10)throw Object.assign(Error('BAZI_REPORT_GENERATION_COST_HARD_STOP'),{state:'BUDGET_BLOCKED',projectedMaximumCostUSD:unattemptedNormalMaximumCost,ledger});}
   // This experiment's authorization requires technical repair before advancing.
   // The production scheduler and default engine policy retain their existing path.
   async function recoverControlledBatches(){

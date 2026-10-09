@@ -1,3 +1,4 @@
+import {assertReportProviderAccess} from '../report-provider-access.js';
 const RESPONSES_URL='https://api.openai.com/v1/responses';
 function fail(code,details={}){const e=new Error(code);e.code=code;e.details=details;throw e;}
 function clean(v){return typeof v==='string'?v.trim():'';}
@@ -21,18 +22,19 @@ function outputText(data){
   if(chunks.length)return chunks.join('');
   fail('NARRATIVE_PROVIDER_EMPTY_OUTPUT');
 }
-export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,systemPrompt,userPayload,schema,schemaName,maxOutputTokens=5200}){
+export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,systemPrompt,userPayload,schema,schemaName,maxOutputTokens=5200,accessTier}){
   const replay=typeof process!=='undefined'&&process.env?.REPORT_ZERO_COST_REPLAY==='true';
   const optedIn=env.REPORT_PROVIDER_LIVE_ALLOWED??(typeof process!=='undefined'?process.env?.REPORT_PROVIDER_LIVE_ALLOWED:false);
   const allowed=optedIn===true||optedIn==='true';
   // Replay allows injected fixture transport; the preload blocks real network underneath.
   if((!replay&&!allowed)||(replay&&fetcher===globalThis.fetch))fail('REPORT_PROVIDER_LIVE_OPT_IN_REQUIRED');
+  const paidContext=assertReportProviderAccess({env:{...env,REPORT_ZERO_COST_REPLAY:replay?'true':env.REPORT_ZERO_COST_REPLAY},accessTier,fixtureTransport:fetcher!==globalThis.fetch});
   if(!clean(env.OPENAI_API_KEY))fail('OPENAI_API_KEY_NOT_CONFIGURED');
   const model=clean(env.OPENAI_NARRATIVE_MODEL)||clean(env.OPENAI_MODEL);
   if(!model)fail('OPENAI_NARRATIVE_MODEL_NOT_CONFIGURED');
   if(typeof fetcher!=='function')fail('NARRATIVE_PROVIDER_FETCH_UNAVAILABLE');
   let response;
-  try{response=await fetcher(RESPONSES_URL,{method:'POST',headers:{'content-type':'application/json',authorization:`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify({
+  try{const transport=paidContext.fixture?fetcher:(url,options)=>paidContext.invokeBudgeted(()=>fetcher(url,options));response=await transport(RESPONSES_URL,{method:'POST',headers:{'content-type':'application/json',authorization:`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify({
     model,store:false,input:[{role:'system',content:String(systemPrompt||'')},{role:'user',content:typeof userPayload==='string'?userPayload:JSON.stringify(userPayload)}],
     text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens
   })});}

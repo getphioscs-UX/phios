@@ -1,3 +1,4 @@
+import {reportEconomics,reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
 import {VFR_BILINGUAL_SINGLE_CALL_V1} from '../../canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js';
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
 import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
@@ -32,7 +33,7 @@ export async function planZwrVfrOneCall({pack}={}){
  const {route,model}=modelRecord();
  const payload={compactAuthoringPack:pack};
  const planningInput={systemPrompt:systemPrompt(),payload};
- const budget=planVfrProviderBudget({model,input:planningInput,maxOutputTokens:MAX_OUTPUT_TOKENS,nextCallKind:'PRIMARY'});
+ const budget=planVfrProviderBudget({methodId:'ZWR',model,input:planningInput,maxOutputTokens:MAX_OUTPUT_TOKENS,nextCallKind:'PRIMARY'});
  return deepFreeze({
   schemaVersion:'ZWR-VFR-R1-ONE-CALL-PLAN-v1',
   provider:route.selectedProvider,
@@ -84,14 +85,14 @@ export async function composeZwrVfrOneCall({pack,env={},fetcher=globalThis.fetch
   fallbackUsed:false
  });
  assertVfrCallCount({providerCalls:1,semanticReviewCalls:0});
- if(estimatedProviderCost>1)throw Error('ZWR_VFR_PROVIDER_BUDGET_EXCEEDED_AFTER_CALL');
+ if(estimatedProviderCost>reportGenerationCeiling('ZWR'))throw Error('ZWR_VFR_PROVIDER_BUDGET_EXCEEDED_AFTER_CALL');
  const reportIr=await createZwrVfrReportIr({pack,providerOutput:result.output,usage:{
   providerCalls:1,
   semanticReviewCalls:0,
   inputTokens,cachedInputTokens,outputTokens,
   estimatedProviderCost,
-  budgetLimit:1,
-  budgetRemaining:Number((1-estimatedProviderCost).toFixed(8)),
+  budgetLimit:reportEconomics('ZWR').providerCapUsd,
+  budgetRemaining:Number((reportEconomics('ZWR').providerCapUsd-estimatedProviderCost).toFixed(8)),
   cacheHit:false,
   usageRecord
  }});

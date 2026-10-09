@@ -7,17 +7,18 @@ import {createProductRuntime,productRuntime} from '../functions/pws/product/prod
 const root='content/pws/commercial/report-successor-r1';
 const validate=new Ajv({strict:false}).compile(JSON.parse(fs.readFileSync(`${root}/contract.schema.json`)));
 assert(validate(contract),JSON.stringify(validate.errors));
-const expected={BAZI_FULL_REPORT:3900,ZIWEI_FULL_REPORT:3900,ASTROLOGY_FULL_REPORT:3900,PROFILE_FULL_REPORT:3900,NUMEROLOGY_FULL_REPORT:3900,ECR_FULL_REPORT:3900,HD_FULL_REPORT:12900,CROSS_FULL_REPORT:29900,BUNDLE_2:6900,BUNDLE_3:9900,BUNDLE_5PLUS:15900};
+const expected={BAZI_FULL_REPORT:5900,ZIWEI_FULL_REPORT:5900,ASTROLOGY_FULL_REPORT:5900,PROFILE_FULL_REPORT:12900,NUMEROLOGY_FULL_REPORT:3900,ECR_FULL_REPORT:12900,HD_FULL_REPORT:12900,CROSS_FULL_REPORT:29900,FINANCIAL_FULL_REPORT:15900,WILL_FULL_REPORT:2900,TAROT_FULL_REPORT:1900,ICHING_FULL_REPORT:3900,BUNDLE_2:9900,BUNDLE_3:14900};
 assert.deepEqual(Object.fromEntries(contract.products.map(p=>[p.productId,p.amountMinor])),expected);
-const catalog=commercialRuntime.projectReportCatalog();assert.equal(catalog.products.length,11);
+const catalog=commercialRuntime.projectReportCatalog();assert.equal(catalog.products.length,14);
 for(const p of catalog.products){assert.equal(p.price.amountMinor,expected[p.productId]);assert.equal(p.price.currency,'MYR');assert.equal(p.checkoutEnabled,false);assert.equal(productRuntime.resolveProduct(p.productCode).state,'draft');assert.throws(()=>commercialRuntime.createOrder({offer_code:p.offerCode,customer_id:'synthetic'}));}
 let validSelections=0,rejectedSelections=0;
-const eligible=eligibleReportIds('BUNDLE_2');assert.equal(eligible.length,6);assert(!eligible.includes('HD_FULL_REPORT'));assert(!eligible.includes('CROSS_FULL_REPORT'));
-for(const bundle of ['BUNDLE_2','BUNDLE_3','BUNDLE_5PLUS'])for(let mask=0;mask<64;mask++){
- const ids=eligible.filter((_,i)=>mask&(1<<i));const valid=bundle==='BUNDLE_2'?ids.length===2:bundle==='BUNDLE_3'?ids.length===3:ids.length>=5;
+const eligible=eligibleReportIds('BUNDLE_2');assert.equal(eligible.length,3);assert(!eligible.includes('HD_FULL_REPORT'));assert(!eligible.includes('CROSS_FULL_REPORT'));
+for(const bundle of ['BUNDLE_2','BUNDLE_3'])for(let mask=0;mask<8;mask++){
+ const ids=eligible.filter((_,i)=>mask&(1<<i));const valid=bundle==='BUNDLE_2'?ids.length===2:bundle==='BUNDLE_3'?ids.length===3:false;
  if(valid){const q=commercialRuntime.previewReportSelection(bundle,ids),plan=q.entitlementPlan;assert.deepEqual(plan.entitlements.map(e=>e.productId),ids);assert(plan.entitlements.every(e=>e.scope==='INDEPENDENT_SINGLE_METHOD_REPORT'));assert(!plan.grantsEntitlement&&!plan.createsCrossReading&&!q.createsOrder);validSelections++;}
  else{assert.throws(()=>mapReportEntitlements(bundle,ids),/SELECTION_COUNT/);rejectedSelections++;}
 }
+assert.throws(()=>mapReportEntitlements('BUNDLE_5PLUS',eligible),/PWS_REPORT_PRODUCT_NOT_FOUND/);
 for(const bad of [[eligible[0],eligible[0]],[eligible[0],'HD_FULL_REPORT'],[eligible[0],'CROSS_FULL_REPORT'],[eligible[0],'UNKNOWN']])assert.throws(()=>mapReportEntitlements('BUNDLE_2',bad));
 assert.throws(()=>mapReportEntitlements('BUNDLE_2',{}));assert.throws(()=>mapReportEntitlements('UNKNOWN'));
 for(const p of contract.products.filter(p=>p.kind!=='BUNDLE')){const plan=mapReportEntitlements(p.productId);assert.deepEqual(plan.entitlements.map(e=>e.productId),[p.productId]);assert.equal(plan.entitlements[0].scope,p.kind==='SYNTHESIS'?'CROSS_SYNTHESIS':'INDEPENDENT_SINGLE_METHOD_REPORT');assert.throws(()=>mapReportEntitlements(p.productId,[eligible[0]]));}
@@ -25,5 +26,5 @@ for(const p of contract.products.filter(p=>p.kind!=='BUNDLE')){const plan=mapRep
 const activatedProducts=createProductRuntime({products:REPORT_PRODUCT_DEFINITIONS.map(p=>({...structuredClone(p),state:'active'}))});
 const definitions={...structuredClone(DEFAULT_COMMERCIAL_DEFINITIONS),offers:DEFAULT_COMMERCIAL_DEFINITIONS.offers.filter(o=>contract.products.some(p=>p.productCode===o.product_code)).map(o=>({...o,status:'active'})),prices:DEFAULT_COMMERCIAL_DEFINITIONS.prices.map(p=>({...p,status:'active'}))};
 const forced=createCommercialRuntime({productRuntime:activatedProducts,definitions});assert.throws(()=>forced.createOrder({offer_code:'bundle-2-myr',customer_id:'synthetic',selected_product_ids:eligible.slice(0,2)}),e=>e.code==='PWS_REPORT_PRODUCTION_GATE_CLOSED');
-const result={status:'PASS',owner:'EXISTING_PWS_PRODUCT_AND_COMMERCIAL_RUNTIME',products:11,validBundleSelections:validSelections,rejectedBundleCounts:rejectedSelections,premiumAndDuplicateRejection:true,crossEntitlementIndependent:true,productionPaymentEnabled:false,schemaGap:'NONE: existing knowledge_access configuration supports selection-policy references',entitlementGrantTested:false};
+const result={status:'PASS',owner:'EXISTING_PWS_PRODUCT_AND_COMMERCIAL_RUNTIME',products:14,validBundleSelections:validSelections,rejectedBundleCounts:rejectedSelections,premiumAndDuplicateRejection:true,crossEntitlementIndependent:true,productionPaymentEnabled:false,schemaGap:'NONE: existing knowledge_access configuration supports selection-policy references',entitlementGrantTested:false};
 fs.writeFileSync(`${root}/registry.json`,JSON.stringify(contract,null,2)+'\n');fs.writeFileSync(`${root}/machine-results.json`,JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

@@ -56,6 +56,7 @@ export async function onRequestPost({
     if (env.STRIPE_ENVIRONMENT === 'QA' && (event.livemode !== false || event.data?.object?.livemode === true)) {
       return json({success:false,code:'stripe_live_event_rejected'},400);
     }
+    if (env.STRIPE_ENVIRONMENT === 'LIVE' && (event.livemode !== true || event.data?.object?.livemode !== true)) return json({success:false,code:'stripe_test_event_rejected'},400);
     const firstDelivery = await registerWebhookEvent({
       env,
       event,

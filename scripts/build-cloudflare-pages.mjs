@@ -39,6 +39,23 @@ const wrangler = path.join(
 
 const git = process.env.PHIOS_GIT_BIN || 'git';
 
+// Exclude concurrent writers before either generated directory is cleaned.
+// A stale lock is retained after a killed process for explicit reconciliation.
+const buildLock = path.join(root, '.wrangler', 'pages-production-build.lock');
+fs.mkdirSync(path.dirname(buildLock), {recursive:true});
+let buildLockFd;
+try {
+  buildLockFd = fs.openSync(buildLock, 'wx');
+  fs.writeFileSync(buildLockFd, JSON.stringify({pid:process.pid,startedAt:new Date().toISOString()}));
+} catch (error) {
+  if (error.code === 'EEXIST') throw new Error('PAGES_BUILD_LOCKED: another build or unreconciled interrupted build owns ' + buildLock);
+  throw error;
+}
+process.once('exit', () => {
+  fs.closeSync(buildLockFd);
+  fs.rmSync(buildLock, {force:true});
+});
+
 const excludedTopLevel = new Set([
   '.phios-repair-receipts',
   '.git',
@@ -141,7 +158,9 @@ function cleanDirectory(dir) {
     dir,
     {
       recursive: true,
-      force: true
+      force: true,
+      maxRetries: 5,
+      retryDelay: 200
     }
   );
 

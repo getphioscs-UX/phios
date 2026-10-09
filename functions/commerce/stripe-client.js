@@ -1,3 +1,4 @@
+import {requireStripeCommerce,commerceEnvironment,commerceStripeProduct,STRIPE_LIVE_ACCOUNT} from './commerce-environment.js';
 import {validateOrderReportPresentation} from './report-presentation.js';
 import {
   rawHmacHex,
@@ -115,21 +116,22 @@ export function requireStripeQa(env) {
   }
 }
 export async function stripeQaRequest(env, path, options = {}) {
-  requireStripeQa(env);
+  const environment=requireStripeCommerce(env);
   const payload=await stripeRequest(env,path,{...options,apiVersion:'2026-07-29.dahlia'});
-  if (payload.livemode === true || payload.data?.some(item=>item.livemode===true)) throw Object.assign(new Error('Live object rejected.'),{status:502,code:'stripe_live_object_rejected'});
+  if ((payload.livemode!==undefined&&payload.livemode!==(environment==='LIVE')) || payload.data?.some(item=>item.livemode!==undefined&&item.livemode!==(environment==='LIVE'))) throw Object.assign(new Error('Live object rejected.'),{status:502,code:'stripe_live_object_rejected'});
   return payload;
 }
 export async function verifyStripeQaAccount(env, fetcher) {
   const account=await stripeQaRequest(env,'/account',{fetcher});
-  if(account.id!=='acct_1UFr0TBEKXJyHMkK') throw Object.assign(new Error('Wrong Stripe account.'),{status:503,code:'stripe_qa_account_mismatch'});
+  if(account.id!==(commerceEnvironment(env)==='LIVE'?STRIPE_LIVE_ACCOUNT:'acct_1UFr0TBEKXJyHMkK')) throw Object.assign(new Error('Wrong Stripe account.'),{status:503,code:'stripe_qa_account_mismatch'});
 }
 export function createCanonicalStripeCustomer(env, customerId, idempotencyKey, fetcher) {
-  return stripeQaRequest(env,'/customers',{method:'POST',body:new URLSearchParams({'metadata[customer_id]':customerId,'metadata[environment]':'QA'}),idempotencyKey,fetcher});
+  return stripeQaRequest(env,'/customers',{method:'POST',body:new URLSearchParams({'metadata[customer_id]':customerId,'metadata[environment]':commerceEnvironment(env)}),idempotencyKey,fetcher});
 }
 export function createCommerceCheckoutSession({env,product,order,customerId,origin,locale,idempotencyKey,fetcher}) {
+  product=commerceStripeProduct(product,commerceEnvironment(env));
   const mode=product.billingType==='RECURRING'?'subscription':'payment';
-  const metadata={order_id:order.checkout_attempt_id,commerce_product_id:product.productId,customer_id:order.customer_id,environment:'QA',schema_version:'COM-STRIPE-R1',selected_reports:order.selected_products_json};
+  const metadata={order_id:order.checkout_attempt_id,commerce_product_id:product.productId,customer_id:order.customer_id,environment:commerceEnvironment(env),schema_version:'COM-STRIPE-R1',selected_reports:order.selected_products_json};
   const body=new URLSearchParams({mode,customer:customerId,'line_items[0][price]':product.qaPriceId,'line_items[0][quantity]':'1',success_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}`,cancel_url:`${origin}/account?commerce_order=${encodeURIComponent(order.checkout_attempt_id)}&checkout=cancelled`,locale:locale==='zh-Hans'?'zh':'en'});
   const presentation=validateOrderReportPresentation(product,order);
   if(presentation){
@@ -142,7 +144,7 @@ export function createCommerceCheckoutSession({env,product,order,customerId,orig
     }
   }
   const suffix=order.checkout_attempt_id.replace('ord_','').slice(0,8).split('').map(c=>String.fromCharCode(97+parseInt(c,16))).join('');
-  body.set('integration_identifier',`phios_commerce_qa_${suffix}`);
+  body.set('integration_identifier',`phios_commerce_${commerceEnvironment(env).toLowerCase()}_${suffix}`);
   for(const [key,value] of Object.entries(metadata)){
     body.set(`metadata[${key}]`,value);
     body.set(`${mode==='subscription'?'subscription_data':'payment_intent_data'}[metadata][${key}]`,value);
@@ -151,7 +153,7 @@ export function createCommerceCheckoutSession({env,product,order,customerId,orig
   return stripeQaRequest(env,'/checkout/sessions',{method:'POST',body,idempotencyKey,fetcher});
 }
 export function retrieveCommerceSession(env,id,fetcher){
-  if(!/^cs_test_[A-Za-z0-9]+$/.test(id)) throw Object.assign(new Error('Invalid QA session.'),{status:400,code:'qa_session_invalid'});
+  if(!(commerceEnvironment(env)==='LIVE'?/^cs_(?:live_)?[A-Za-z0-9]+$/:/^cs_test_[A-Za-z0-9]+$/).test(id)) throw Object.assign(new Error('Invalid QA session.'),{status:400,code:'qa_session_invalid'});
   return stripeQaRequest(env,`/checkout/sessions/${encodeURIComponent(id)}?expand[]=line_items&expand[]=subscription`,{fetcher});
 }
 export function retrieveCommerceSubscription(env,id,fetcher){

@@ -1,3 +1,4 @@
+import {reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
 import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
@@ -5,7 +6,7 @@ import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../..
 import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.js';
 
 export const ZWR_VFR_TARGETED_REPAIR_VERSION='ZWR-VFR-R1-TARGETED-COMPLETENESS-REPAIR-v1';
-const TOTAL_EXPERIMENT_BUDGET_USD=1.00;
+const TOTAL_EXPERIMENT_BUDGET_USD=reportGenerationCeiling('ZWR');
 const MAX_OUTPUT_TOKENS_BILINGUAL=3500;
 const MAX_OUTPUT_TOKENS_EN_ONLY=2200;
 function maxOutputFor(locales){return locales.length===2?MAX_OUTPUT_TOKENS_BILINGUAL:MAX_OUTPUT_TOKENS_EN_ONLY;}
