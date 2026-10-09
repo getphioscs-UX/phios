@@ -21,7 +21,7 @@ export function evaluateNavigationContracts(snapshot, {ownerId,personId}={}, con
    if(!item||typeof item!=='object'){reasons.push('INVALID_SOURCE_ITEM');continue;}
    if(item.ownerId!==ownerId||item.personId!==personId||item.decisionObjectId!==decision?.id||item.relevant!==true)reasons.push('SOURCE_SCOPE_MISMATCH');
    if(!present(item.sourceRef)||!present(item.sourceVersion)||!present(item.asOf)||!present(item.evidenceState)||item.currentness!=='CURRENT')reasons.push('SOURCE_TRACE_OR_CURRENTNESS_MISSING');
-   if(!material.has(item.sourceClass)&&!interpretive.has(item.sourceClass))reasons.push('SOURCE_AUTHORITY_UNKNOWN');
+   if(!material.has(item.sourceClass)&&!interpretive.has(item.sourceClass)&&!(contract.moduleId==='NAV-16'&&item.sourceClass==='OPERATIONAL_RECORD')&&!(['NAV-19','NAV-20'].includes(contract.moduleId)&&['USER_STATED_GOAL','USER_STATED_VALUE','MATERIAL_DEPENDENCY','RESPONSIBILITY','OBSERVED_BEHAVIOR'].includes(item.sourceClass)))reasons.push('SOURCE_AUTHORITY_UNKNOWN');
    if(item.sourceClass==='PROFESSIONAL_INPUT'&&item.explicitConsent!==true)reasons.push('PROFESSIONAL_CONSENT_REQUIRED');
    if(interpretive.has(item.sourceClass)&&item.role!=='INTERPRETIVE_CONTEXT')reasons.push('INTERPRETATION_CANNOT_ESTABLISH_REALITY');
    if(item.futureAssumption===true&&item.role!=='FUTURE_ASSUMPTION')reasons.push('FUTURE_ASSUMPTION_NOT_CURRENT_RESOURCE');

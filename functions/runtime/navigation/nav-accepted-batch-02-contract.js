@@ -1,5 +1,6 @@
+import {freezeNavContract} from './nav-contract-freeze.js';
 // Bounded server contract derived only from Owner Human ACCEPT; private full text remains excluded from Pages.
-export const NAV_BATCH_02_CONTRACT = Object.freeze([
+export const NAV_BATCH_02_CONTRACT = freezeNavContract([
   {
     "moduleId": "NAV-06",
     "sourceSHA256": "73c5635207857027ff8bdb1166cf8cb8591fc3808f13dc92216bc9c413a0fa54",
