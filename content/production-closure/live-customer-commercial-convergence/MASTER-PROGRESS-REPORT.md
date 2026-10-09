@@ -1,5 +1,5 @@
 # 唯一 Master W00–W40 当前进度
-HEAD: af5a8d4fb42c0799eaf8e4759908ef2e010a6d31
+HEAD: 64aab9ca0bc6577503cca2bb4da6c7f86f00941d
 
 |阶段|SOURCE|DEPLOYED|LIVE CUSTOMER|下一步|
 |---|---|---|---|---|
@@ -34,7 +34,7 @@ HEAD: af5a8d4fb42c0799eaf8e4759908ef2e010a6d31
 |W28 Relationship / Cross|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Exact current relationship/cross bounded report admission and inputs|
 |W29 Profile / Academic|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Current Profile/Academic evidence boundaries and product admission|
 |W30 Books / Figures|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify Book I reconciliation, Book VII Figures maintenance successor, private VIII boundary|
-|W31 World / Book VI / Moomoo|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Book V current cases/snapshot registries match registered engineering successor but Human decision is PENDING; historical acceptance is retained; Book V external visual access and full contextual Ask answer not verified; Nine accepted dossiers lack source evidence timestamps; acceptance time is not substituted; Some catalog dossiers are not W8-I accepted and remain UNKNOWN; Moomoo current evidence binding is US-only; eight stale claims excluded from current Ask; Legacy cutover checker expects old Book VI route; Book V W15 checker expects old tablist; no frozen assertion changed|
+|W31 World / Book VI / Moomoo|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Scoped review of changed Chinese snapshot labels and current engineering consumer; accepted 120 cases/overlays do not require whole-content reacceptance; AF/JP/KR/LATAM/ME/RU lack admitted source retrieval timestamps; acquire legitimate source evidence, never substitute acceptance or filesystem time; Current freshness policy is not inferred from timestamps for any region; Other asset families remain under separate asset owner; this window verified 15 world images only; Persisted account Ask history / My Reality and full Navigation handoff are not proved by this public reading bridge; Deployment and live customer verification NOT_RUN; Moomoo US evidence now STALE=56/CURRENT=0 by actual existing TTL; fresh validated/admitted evidence is required before claiming current external-evidence closure|
 |W32 Mobile / branding|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Actual preview mobile bilingual shell and branding, no SOURCE test substitute|
 |W33 Commerce reconciliation|CURRENT_TARGETED_CHECK_ONLY_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|完成受控 voucher 退款、账户三金额展示与逐商品发布准入；保持默认关闭|
 |W34 Shared provider cost ledger|TARGETED_PASS_NOT_FULL_STEP|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|逐产品接入统一成本池；四问与双语共同计费，不用单次 QA 推断整单成本|

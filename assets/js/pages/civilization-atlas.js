@@ -4,6 +4,8 @@ import {getLocale,onLocaleChange} from '../i18n.js';
 import {createCivilizationAtlasState} from './civilization-atlas/atlas-state.js';
 import {bindAtlasUrlState} from './civilization-atlas/atlas-url-state.js';
 import {renderAtlasShell} from './civilization-atlas/atlas-shell.js';
+import {renderAtlasReadingBridge} from './civilization-atlas/atlas-reading-bridge.js';
+import {loadReconfigurationCases} from './civilization-atlas/atlas-data.js';
 import {reconcileAtlasContextForLayer} from './civilization-atlas/cross-layer-context.js';
 import {loadTimelineRegistry,loadTimelineMacroRegistry,loadCaseRegistry,loadComparisonRegistry,loadWorldSnapshotRegistry,loadTrajectoryRegistry,loadTransitionRegistry,loadLossRegistry} from './civilization-atlas/atlas-data.js';
 const root=document.querySelector('[data-civilization-atlas-root]');
@@ -28,10 +30,12 @@ if(root){
     onStateChange:(patch,meta)=>store.set(patch,meta)
   });
   renderAtlasVisualProjection(root.querySelector('[data-atlas-template-projection]'),{projection:data.visualProjection,slots:data.templateSlots,data,state:store.get(),locale:getLocale(),onStateChange:(patch,meta)=>store.set(patch,meta)});
-  renderAtlasStaticVisuals(root,{bindings:data.staticVisuals,state:store.get(),locale:getLocale(),data});};
+  renderAtlasStaticVisuals(root,{bindings:data.staticVisuals,state:store.get(),locale:getLocale(),data});
+  renderAtlasReadingBridge(root,{state:store.get(),cases:data.cases,reconfigurationCases:data.reconfigurationCases,locale:getLocale()});};
   const unsubscribe=store.subscribe(render);
   const unbindLocale=onLocaleChange(()=>store.set({locale:getLocale()},{source:'locale'}));
   render();
+  loadReconfigurationCases().then(registry=>{data.reconfigurationCases=registry;render();}).catch(()=>{/* No bridge is asserted without the existing relation. */});
   Promise.all([
     loadTimelineRegistry(),loadTimelineMacroRegistry(),loadCaseRegistry(),loadComparisonRegistry(),loadWorldSnapshotRegistry(),
     loadTrajectoryRegistry(),loadTransitionRegistry(),loadLossRegistry()

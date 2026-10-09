@@ -20,7 +20,7 @@ for(const p of names){if(!fs.existsSync(p)||!fs.statSync(p).isFile())continue;co
  if(/resolver|objectKey|object_key|PUBLIC_R2|publicAsset|r2\.dev/.test(text)&&/\$\{|\.replace\(|\.join\(|\+.*(?:file|key)/.test(text))dynamicSites.push(p);
  if(p.endsWith('.json')&&!p.startsWith(dir))try{walk(JSON.parse(text.replace(/^\uFEFF/,'')),p)}catch{}
 }
-for(const {p,text}of sources.filter(s=>runtime(s.p)))for(const[id,keys]of codes)if(text.includes(id))for(const k of keys)byKey.get(k).dynamicReferences.push({path:p,kind:'ASSET_CODE_INDIRECTION',assetCode:id});
+for(const {p,text}of sources.filter(s=>runtime(s.p)))for(const id of new Set(text.match(/[A-Za-z0-9_][A-Za-z0-9_.:-]*/g)||[]))if(codes.has(id))for(const k of codes.get(id))byKey.get(k).dynamicReferences.push({path:p,kind:'ASSET_CODE_INDIRECTION',assetCode:id});
 // Execute the existing pure Profile resolver, including its deliberate double-dot stored key.
 const profile=await import('../functions/profile/personal-evidence-visual-assets.js');
 for(const [fn,ids]of [['resolvePersonalEvidenceStaticPage',Object.keys(profile.PERSONAL_EVIDENCE_STATIC_VISUALS)],['resolvePersonalEvidenceSectionMaster',Object.keys(profile.PERSONAL_EVIDENCE_SECTION_MASTERS)],['resolvePersonalEvidenceSharedVisual',Object.keys(profile.PERSONAL_EVIDENCE_SHARED_VISUALS)]])for(const id of ids){const asset=profile[fn](id);const r=byKey.get(asset.objectKey);if(r)r.dynamicReferences.push({path:'functions/profile/personal-evidence-visual-assets.js',kind:'EXECUTED_PURE_RESOLVER',resolver:fn,id});}

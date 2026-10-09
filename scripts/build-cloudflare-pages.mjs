@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { gzipSync } from 'node:zlib';
+import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -41,20 +42,12 @@ const git = process.env.PHIOS_GIT_BIN || 'git';
 
 // Exclude concurrent writers before either generated directory is cleaned.
 // A stale lock is retained after a killed process for explicit reconciliation.
-const buildLock = path.join(root, '.wrangler', 'pages-production-build.lock');
-fs.mkdirSync(path.dirname(buildLock), {recursive:true});
-let buildLockFd;
-try {
-  buildLockFd = fs.openSync(buildLock, 'wx');
-  fs.writeFileSync(buildLockFd, JSON.stringify({pid:process.pid,startedAt:new Date().toISOString()}));
-} catch (error) {
-  if (error.code === 'EEXIST') throw new Error('PAGES_BUILD_LOCKED: another build or unreconciled interrupted build owns ' + buildLock);
-  throw error;
-}
-process.once('exit', () => {
-  fs.closeSync(buildLockFd);
-  fs.rmSync(buildLock, {force:true});
-});
+const buildLease=acquirePagesOutputLock(root,'BUILD');
+const statePath=path.join(root,'.wrangler','pages-publication-build-state.json');
+let stage='STARTED',complete=false;
+function recordStage(value){stage=value;fs.writeFileSync(statePath,JSON.stringify({pid:process.pid,stage,output,workerBuild,recordedAt:new Date().toISOString(),complete}));}
+process.prependOnceListener('exit',code=>{if(!complete)fs.writeFileSync(statePath,JSON.stringify({pid:process.pid,stage,output,workerBuild,complete:false,status:'FAILED_OR_INTERRUPTED',exitCode:code,recordedAt:new Date().toISOString()}));});
+recordStage('STARTED');
 
 const excludedTopLevel = new Set([
   '.phios-repair-receipts',
@@ -138,7 +131,8 @@ function run(command, args) {
     args,
     {
       cwd: root,
-      stdio: 'inherit'
+      stdio: 'inherit',
+      env:{...process.env,PHIOS_PAGES_BUILD_TOKEN:buildLease.token}
     }
   );
 
@@ -174,6 +168,7 @@ function cleanDirectory(dir) {
   );
 }
 
+recordStage('STATIC_COPY');
 cleanDirectory(output);
 
 const tracked = spawnSync(
@@ -197,6 +192,10 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+// Include this new local customer consumer before commit; it remains subject
+// to the same public boundary, size checks and source-identity receipt.
+const atlasReadingBridge='assets/js/pages/civilization-atlas/atlas-reading-bridge.js';
+if(fs.existsSync(path.join(root,atlasReadingBridge)))publicationFiles.add(atlasReadingBridge);
 if (admittedBookVii) {
   publicationFiles.add(BOOK_VII_ADMISSION_PATH);
   const currentDirectory='content/knowledge/public/successors/book-vii-v2-source-refresh-v1/retrieval';
@@ -256,6 +255,7 @@ console.log(
   `Pages static publication: copied=${copied}, skipped=${skipped}`
 );
 
+recordStage('WORKER_COMPILE');
 cleanDirectory(workerBuild);
 
 const emptyAssets = path.join(
@@ -350,6 +350,7 @@ if (compressedBytes > 3 * 1024 * 1024) {
   );
 }
 
+recordStage('PUBLISH_GENERATED_WORKER_AND_ROUTES');
 fs.copyFileSync(
   workerSource,
   path.join(output, '_worker.js')
@@ -360,6 +361,7 @@ fs.copyFileSync(
   path.join(output, '_routes.json')
 );
 
+recordStage('PUBLICATION_BOUNDARY_CHECK');
 run(
   process.execPath,
   [
@@ -374,3 +376,5 @@ run(
 console.log(
   'PASS Cloudflare Pages build boundary: .pages-output'
 );
+complete=true;
+recordStage('COMPLETE');

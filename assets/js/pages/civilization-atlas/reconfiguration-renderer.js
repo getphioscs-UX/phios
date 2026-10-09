@@ -144,7 +144,7 @@ function scopeFor(layer,o={}){
  if(o.caseIds?.length)base.caseIds=o.caseIds.slice(0,4);if(o.comparisonIds?.length)base.comparisonIds=o.comparisonIds.slice(0,4);return base;
 }
 function askHref(locale,layer,o={}){
- const p=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'BOOK:BOOK-6',contextLabel:locale==='zh-Hans'?'《世界如何重组》· 文明重组图谱':'Reality Reconfiguration · Civilization Reconfiguration Atlas',contextRoute:'/books/reality-configuration/#atlas',readingPath:`BOOK-6 > PART-13 > RECONFIGURATION > ${layer}`,relatedKnowledgeRef:'BOOK:BOOK-6',retrievalScope:JSON.stringify(scopeFor(layer,o))});
+ const p=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'BOOK:BOOK-6',contextLabel:locale==='zh-Hans'?'《世界如何重组》· 文明重组图谱':'Reality Reconfiguration · Civilization Reconfiguration Atlas',contextRoute:'/books/reality-reconfiguration/#atlas',readingPath:`BOOK-6 > PART-13 > RECONFIGURATION > ${layer}`,relatedKnowledgeRef:'BOOK:BOOK-6',retrievalScope:JSON.stringify(scopeFor(layer,o))});
  return '/knowledge/ask/?'+p.toString();
 }
 const badge=(value,l)=>`<span class="civ-reconfig-badge" data-state="${esc(value||'UNKNOWN')}">${esc(stateLabel(value,l))}</span>`;

@@ -1,3 +1,5 @@
+import runtimePositions from '../../content/registry/runtime-position-48-v1.json';
+import {atlasUrlFromState} from '../../assets/js/pages/civilization-atlas/atlas-url-state.js';
 import {getAcceptedBook6Projection} from './book6-current-source.js';
 const clean=value=>String(value??'').normalize('NFKC').trim();
 const scalar=(value,max=120)=>clean(value).slice(0,max)||null;
@@ -29,7 +31,7 @@ export function normalizeAtlasRetrievalScope(input={}){
   return Object.freeze({
     schemaVersion:'PHI-OS-ATLAS-RETRIEVAL-SCOPE-v1.0.0',
     scopeType:'CIVILIZATION_ATLAS',bookCode,partCode,activeLayer,
-    time:Number.isFinite(Number(input.time))?Math.trunc(Number(input.time)):null,
+    time:input.time==null||input.time===''?null:Number.isFinite(Number(input.time))?Math.trunc(Number(input.time)):null,
     timeWindowId:scalar(input.timeWindowId),snapshotId:scalar(input.snapshotId),
     regionIds:Object.freeze(list(input.regionIds)),caseIds:Object.freeze(list(input.caseIds)),
     primaryCaseId:scalar(input.primaryCaseId),comparisonFamilyId:scalar(input.comparisonFamilyId),
@@ -53,6 +55,9 @@ const questionTerms=value=>{
   const cjk=(text.match(/[\u3400-\u9fff]+/g)||[]).flatMap(run=>run.length<=4?[run]:Array.from({length:run.length-1},(_,i)=>run.slice(i,i+2)));
   return [...new Set([...latin,...cjk])];
 };
+// Public extractive text omits machine identifiers; provenance stays in sourceId.
+const FIELD_LABELS={pressure:['压力','Pressure'],threshold:['阈值','Threshold'],beforeState:['之前状态','Before state'],transition:['转型','Transition'],newCapacity:['新承载能力','New capacity'],newLoad:['新增负载','New load'],irreversibility:['不可逆性','Irreversibility'],successorReality:['后继现实','Successor reality'],definition:['定义','Definition'],coreRuntimeProblem:['核心运行问题','Core runtime problem'],runtimeSummary:['运行概况','Runtime summary']};
+const readableAtlasRecord=value=>{if(Array.isArray(value))return value.map(readableAtlasRecord).filter(v=>v!=null);if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).filter(([k])=>!/(?:Ids?|Refs?|Codes?|Version)$/i.test(k)&&!['assetRef','runtimeFamily','authorityClass','unitMode','status','version'].includes(k)).map(([k,v])=>[k,FIELD_LABELS[k]&&v?.en?{'zh-Hans':FIELD_LABELS[k][0]+'：'+(v['zh-Hans']||v.en),en:FIELD_LABELS[k][1]+': '+v.en}:readableAtlasRecord(v)]));return typeof value==='string'&&/^(?:CA-T|WS-|TW-|VIS-|RP-|LOSS-|T[0-9])/.test(value)?null:value;};
 const flattenLocalized=(record,locale,question='')=>{
   const selected=[];
   const visit=value=>{
@@ -100,7 +105,7 @@ const sourceFor=(record,idKey,stage,locale,question)=>({
   bookCode:'BOOK-6',partCode:'PART-13',atlasLayer:stage.toLowerCase(),atlasEntityId:record[idKey],
   authorityClass:record.knowledgeState||record.evidenceQuality||record.dataClass||'HISTORICAL_RECONSTRUCTION',
   scopeMatch:true,href:'/books/reality-reconfiguration/#atlas',
-  text:flattenLocalized(record,locale,question)
+  text:flattenLocalized(readableAtlasRecord(record),locale,question)
 });
 
 async function retrieveReconfigurationScope({env,scope,locale,question}){
@@ -159,10 +164,11 @@ async function retrieveReconfigurationScope({env,scope,locale,question}){
   if(scope.dossierId){
     const accepted=getAcceptedBook6Projection(scope.dossierId);
     if(accepted){
-      sources.push({sourceType:'BOOK6_ACCEPTED_CURRENT_DOSSIER',sourceId:'ATLAS:BOOK-6:W8-I:'+scope.dossierId,bookCode:'BOOK-6',partCode:'PART-13',atlasEntityId:scope.dossierId,authorityClass:'HUMAN_ACCEPTED_SUBSYSTEM_POSITIONS_ONLY',scopeMatch:true,href:'/books/reality-reconfiguration/?atlas=dossiers&dossier='+scope.dossierId,text:JSON.stringify({acceptedPositions:accepted.acceptedPositions,wholeDossierPosition:'UNKNOWN',unknowns:accepted.unknowns,readoutReference:accepted.readoutReference,sourceTimestamp:accepted.sourceTimestamp,currentTimestamp:accepted.currentTimestamp,currentness:accepted.currentness})});
+      sources.push({sourceType:'BOOK6_ACCEPTED_CURRENT_DOSSIER',sourceId:'ATLAS:BOOK-6:W8-I:'+scope.dossierId,bookCode:'BOOK-6',partCode:'PART-13',atlasEntityId:scope.dossierId,authorityClass:'HUMAN_ACCEPTED_SUBSYSTEM_POSITIONS_ONLY',scopeMatch:true,href:'/books/reality-reconfiguration/?atlas=dossiers&dossier='+scope.dossierId,acceptedPositions:accepted.acceptedPositions,wholeDossierPosition:'UNKNOWN',readoutReference:accepted.readoutReference,sourceEvidence:accepted.sourceEvidence,text:(()=>{const labels=accepted.acceptedPositions.map(p=>localized(p.shortLabel||runtimePositions.positions.find(r=>r.id===p.runtimePositionId)?.shortLabel,locale)||p.runtimePositionId).join(locale==='zh-Hans'?'、':', ');return locale==='zh-Hans'?'子系统已接受位置：'+labels+'。整地区位置：未知（UNKNOWN）。这些接受只覆盖所列子系统，不将整地区自动升级。来源证据时间：'+(accepted.sourceTimestamp||'未知')+'。记录时间不自动证明当前时效性。':'Accepted subsystem positions: '+labels+'. Whole dossier position: UNKNOWN. These accepted positions cover only the listed subsystems; no whole-dossier promotion is allowed. Source evidence timestamp: '+(accepted.sourceTimestamp||'UNKNOWN')+'. A recorded timestamp does not automatically establish current freshness.';})()});
       for(const e of accepted.externalEvidence.filter(e=>e.currentFreshness==='CURRENT'))sources.push({sourceType:'BOOK6_VALIDATED_ADMITTED_PROVIDER_EVIDENCE',sourceId:e.claimId,bookCode:'BOOK-6',partCode:'PART-13',atlasEntityId:scope.dossierId,authorityClass:'EXTERNAL_EVIDENCE_NOT_POSITION_AUTHORITY',scopeMatch:true,href:e.sourceUrl,text:JSON.stringify(e)});
     }
   }
+  if(scope.dossierId){const accepted=getAcceptedBook6Projection(scope.dossierId);const bound=sources.filter(s=>['BOOK6_ACCEPTED_CURRENT_DOSSIER','BOOK6_VALIDATED_ADMITTED_PROVIDER_EVIDENCE'].includes(s.sourceType));if(!accepted)bound.push({sourceType:'BOOK6_UNACCEPTED_DOSSIER_UNKNOWN',sourceId:'ATLAS:BOOK-6:UNKNOWN:'+scope.dossierId,bookCode:'BOOK-6',partCode:'PART-13',atlasEntityId:scope.dossierId,authorityClass:'UNKNOWN',scopeMatch:true,href:'/books/reality-reconfiguration/?atlas=dossiers&dossier='+scope.dossierId,text:locale==='zh-Hans'?'该地区没有适用的 W8-I 接受记录。已接受位置未知，整地区位置保持 UNKNOWN，不以历史案例或其他地区补全。':'No applicable W8-I acceptance exists for this region. Accepted positions are UNKNOWN; the whole dossier remains UNKNOWN. Historical cases and other regions cannot fill this gap.'});sources.splice(0,sources.length,...bound);}
   const entityCount=directSources.length;
   return {scope,sources,chain:[{stage:'ATLAS_ENTITY',status:entityCount?'MATCHED':'NO_EXPLICIT_ENTITY_SELECTED',count:entityCount},...stageRows,{stage:'PART_13',status:'AUTHORIZED_FALLBACK'},{stage:'BROADER_KNOWLEDGE',status:'AUTHORIZED_FALLBACK'}]};
 }
@@ -184,10 +190,10 @@ export async function retrieveAtlasScope({env={},scope,locale='zh-Hans',question
   else records=[];
   const entitySources=records.slice(0,8).map(({record,idKey})=>{
     const entityId=record[idKey];
-    return {sourceType:'CIVILIZATION_ATLAS_ENTITY',sourceId:`ATLAS:${normalized.activeLayer}:${entityId}`,bookCode:'BOOK-5',partCode:'PART-12',atlasLayer:normalized.activeLayer,atlasEntityId:entityId,authorityClass:record.authorityClass||config.defaultAuthority||'HISTORICAL_RECONSTRUCTION',scopeMatch:true,href:'/books/reality-differentiation/',text:flattenLocalized(record,locale,question)};
+    return {sourceType:'CIVILIZATION_ATLAS_ENTITY',sourceId:`ATLAS:${normalized.activeLayer}:${entityId}`,bookCode:'BOOK-5',partCode:'PART-12',atlasLayer:normalized.activeLayer,atlasEntityId:entityId,authorityClass:record.authorityClass||config.defaultAuthority||'HISTORICAL_RECONSTRUCTION',scopeMatch:true,href:(()=>{const u=atlasUrlFromState('/books/reality-differentiation/',normalized);return u.pathname+u.search+u.hash;})(),text:flattenLocalized(readableAtlasRecord(record),locale,question)};
   }).filter(source=>source.text);
   const evidenceIds=[...new Set(records.flatMap(({record})=>(record.evidence||record.evidenceIds||[]).map(item=>typeof item==='string'?item:item?.evidenceId)).filter(Boolean))];
-  const evidenceSources=(evidence?.records||[]).filter(record=>evidenceIds.includes(record.evidenceId)).slice(0,12).map(record=>({sourceType:'CIVILIZATION_ATLAS_EVIDENCE',sourceId:`ATLAS:EVIDENCE:${record.evidenceId}`,bookCode:'BOOK-5',partCode:'PART-12',atlasLayer:normalized.activeLayer,atlasEntityId:record.evidenceId,authorityClass:record.authorityClass||'EVIDENCE_SERIES',scopeMatch:true,href:'/books/reality-differentiation/',text:flattenLocalized(record,locale,question)})).filter(source=>source.text);
+  const evidenceSources=(evidence?.records||[]).filter(record=>evidenceIds.includes(record.evidenceId)).slice(0,12).map(record=>({sourceType:'CIVILIZATION_ATLAS_EVIDENCE',sourceId:`ATLAS:EVIDENCE:${record.evidenceId}`,bookCode:'BOOK-5',partCode:'PART-12',atlasLayer:normalized.activeLayer,atlasEntityId:record.evidenceId,authorityClass:record.authorityClass||'EVIDENCE_SERIES',scopeMatch:true,href:'/books/reality-differentiation/',text:flattenLocalized(readableAtlasRecord(record),locale,question)})).filter(source=>source.text);
   return {
     scope:normalized,
     sources:[...entitySources,...evidenceSources],

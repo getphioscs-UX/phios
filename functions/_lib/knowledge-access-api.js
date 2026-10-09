@@ -193,7 +193,10 @@ export async function handleKnowledgeAccessRequest(request, env = {}, options = 
 
   const atlas = await retrieveAtlasScope({env, scope:options.retrievalScope, locale, question:query});
   const answerGrounding = groundingFrom(published, manuscript);
-  answerGrounding.sources = [...atlas.sources, ...answerGrounding.sources];
+  answerGrounding.sources = atlas.scope ? atlas.sources : [...atlas.sources, ...answerGrounding.sources];
+  // Explicit Atlas selection cannot obtain its answer from unrelated canonical
+  // nodes or relationship expansion when the selected object has no evidence.
+  if(atlas.scope){published={...published,results:[]};manuscript={...manuscript,records:[]};}
   answerGrounding.allowed = answerGrounding.sources.length > 0;
   const groundedAnswer = deterministicGroundedAnswer(query, answerGrounding, locale);
   answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);

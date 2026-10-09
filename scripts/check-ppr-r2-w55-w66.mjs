@@ -68,7 +68,17 @@ const low=buildInputPrecisionBoundary({birthTime:'LOW',timezone:'HIGH',location:
 const html=txt('perspectives/personal/index.html'),client=txt('assets/customer-ui/js/surfaces/personal-reality.js'),finalClient=txt('assets/customer-ui/js/personal-products/final-personal-reading-experience.js'),css=txt('assets/customer-ui/surfaces/final-personal-reading-experience.css'),handoffApi=txt('functions/api/customer-reality-handoff.js'),writer=txt('functions/personal-reading/narrative/narrative-writer.js'),verifier=txt('functions/personal-reading/narrative/narrative-claim-verifier.js');
 assert.match(html,/data-cx-final-reading-experience/);assert.match(html,/data-cx-personal-handoff-options/);assert.match(html,/href="\/assets\/customer-ui\/surfaces\/final-personal-reading-experience\.css"/);
 for(const internal of ['CUSTOMER_PUBLISHABLE','SOURCE_ADMITTED','MACHINE_VERIFIED','HUMAN_ADMITTED'])assert.equal(html.includes(internal),false,`${internal} must not be customer-default HTML text`);
-assert.match(client,/mountFinalPersonalReadingExperience\(view\)/);assert.match(client,/buildClientInputPrecision/);assert.doesNotMatch(client,/viewModel:\{\.\.\.view/);assert.match(client,/PHI-OS-MY-REALITY-HANDOFF-SELECTION-v1\.0\.0/);
+// The current method-first surface renders governed products directly and retires
+// the legacy overview; importing the old mount alone is not a rendering contract.
+const renderClient=client.match(/function render\(\)\{[^\n]+/)?.[0];
+assert.ok(renderClient,'Personal reading render entry point is required');
+assert.match(renderClient,/renderProductRoute\(view\.productRoute,productsRoot\)/);
+assert.match(renderClient,/renderCrossPerspective\(combined,/);
+assert.match(renderClient,/installCurrentRealityExperience\(\)/);
+assert.match(renderClient,/if\(productsRoot\)productsRoot\.hidden=false/);
+assert.match(renderClient,/legacyOverview\.hidden=true;legacyOverview\.replaceChildren\(\)/);
+assert.doesNotMatch(renderClient,/mountFinalPersonalReadingExperience\(/);
+assert.match(client,/buildClientInputPrecision/);assert.doesNotMatch(client,/viewModel:\{\.\.\.view/);assert.match(client,/PHI-OS-MY-REALITY-HANDOFF-SELECTION-v1\.0\.0/);
 assert.match(finalClient,/function methodGuide\(product\)/);assert.match(finalClient,/methodGuide\(product\)/);assert.match(finalClient,/Open full method reading/);assert.match(finalClient,/cx-method-disclosure__body/);assert.match(finalClient,/Profile & Assessment/);assert.match(finalClient,/Relationship/);assert.match(finalClient,/NON_CONVERGENCE/);assert.match(finalClient,/window\.print\(\)/);assert.match(css,/@media print/);assert.match(css,/cx-final-reading-nav/);
 assert.match(handoffApi,/PHI-OS-MY-REALITY-HANDOFF-SELECTION-v1\.0\.0/);assert.match(handoffApi,/projectionReferences:\[\]/);assert.match(writer,/financial recommendations or legal conclusions/);assert.match(writer,/never certainty/);assert.match(verifier,/FINANCIAL_RECOMMENDATION/);assert.match(verifier,/LEGAL_CONCLUSION/);assert.match(verifier,/INPUT_PRECISION_OVERCLAIM/);
 
@@ -77,4 +87,3 @@ assert.equal(campaign.passedCases,24);assert.ok(campaign.profilePresent>0&&campa
 console.log(`✓ W55–W66 Customer Experience / Boundary / Precision passed ${campaign.passedCases}/${campaign.requiredCases}.`);
 console.log(`  Profile ${campaign.profilePresent}; Relationship ${campaign.relationshipPresent}; Cross ${campaign.crossPresent}; HD ${campaign.humanDesignPresent}; low-precision cases ${campaign.lowPrecision}.`);
 console.log('  One semantic IR across Web/Print/PDF, explicit My Reality handoff, sensitive consent and narrative precision boundaries are fail-closed.');
-
