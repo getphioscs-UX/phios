@@ -21,7 +21,10 @@ export function createPaidReportTransport({store,key,binding,request,model,valid
     let result;try{const response=await invoke();const copy=response.clone();const body=await copy.json();result={body,status:response.status,budgetUsage:body?.usage};}catch(error){try{await productCostAuthority.settle(request,null);}catch{}throw error;}
     await productCostAuthority.settle(request,usageCost(result));return result;},
    validateOutput:async response=>{if(response.status<200||response.status>=300)throw Error('PAID_REPORT_PROVIDER_ERROR');await validateProviderOutput(response.body);return {body:response.body,status:response.status};}});
-  return Response.json(result.output.body,{status:result.output.status});
+  const response=Response.json(result.output.body,{status:result.output.status});
+  // Server-only telemetry; this property is not serialized as report content.
+  Object.defineProperty(response,'reportBudget',{value:Object.freeze({cacheHit:result.cacheHit,providerCalls:result.providerCalls})});
+  return response;
  }});
 }
 export async function completePaidReportBudget({store,key,generationComplete,publicationComplete}){

@@ -23,7 +23,11 @@ export function inspectReportBudget(ledger) {
 }
 export function reserveReportCall(ledger,{requestId,phase,projectedMaximumUsd,repairUnit=null}) {
  if(!['PRIMARY','REPAIR','FOLLOWUP'].includes(phase)||typeof requestId!=='string'||!requestId||!validAmount(projectedMaximumUsd))fail('REPORT_BUDGET_REQUEST_INVALID');
- if(ledger.requests?.[requestId])return {replay:true,request:ledger.requests[requestId]};
+ if(ledger.requests?.[requestId]){
+  const prior=ledger.requests[requestId];
+  if(prior.phase!==phase||prior.reservedUsd!==projectedMaximumUsd||prior.repairUnit!==repairUnit)fail('REPORT_BUDGET_REQUEST_CONFLICT');
+  return {replay:true,request:prior};
+ }
  const state=inspectReportBudget(ledger);
  if(state.unknownUsage||state.inFlight)fail('REPORT_USAGE_RECONCILIATION_REQUIRED');
  if(phase==='FOLLOWUP'){

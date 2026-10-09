@@ -27,6 +27,6 @@ export async function generatePaidReportFollowup({env,binding,request,question,c
   // On a reconciled replay the transport uses its cached provider result.
   if(!answer)answer=await validateAnswer(await response.json(),{question,grant:history.grant});
   await completeReportQuestion(env,{ownerAccountId:binding.ownerAccountId,requestId:request.requestId,answer});
-  return {answer,cacheHit:false,providerCalls:1};
+  return {answer,cacheHit:response.reportBudget?.cacheHit===true,providerCalls:response.reportBudget?.providerCalls??1};
  }catch(error){await failReportQuestion(env,{ownerAccountId:binding.ownerAccountId,requestId:request.requestId});throw error;}
 }
