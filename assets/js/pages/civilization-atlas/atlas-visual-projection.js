@@ -165,6 +165,7 @@ function trajectoryOverlay(data,state,locale,slot){
   </div>`;
 }
 export function renderAtlasVisualProjection(container,{projection,slots,data={},state,locale='en',onStateChange=()=>{}}={}){
+  if(state?.activeLayer==='world'){container?.replaceChildren();return;} // The selected accepted atmosphere belongs to the visible structured snapshot header.
   if(!container) return;
   const l=locale==='zh-Hans'?'zh-Hans':'en';
   const config=(projection?.layers||[]).find(x=>x.layerId===state.activeLayer);

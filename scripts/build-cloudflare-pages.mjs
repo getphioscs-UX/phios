@@ -192,6 +192,8 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
   return fs.existsSync(source) ? JSON.parse(fs.readFileSync(source, 'utf8')) : null;
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
+// Explicit World recovery source additions; standard publication boundary still applies.
+for(const file of ["assets/js/pages/civilization-atlas/world-copy.js","assets/js/pages/civilization-atlas/visual-runtime.js","assets/js/pages/civilization-atlas/world-search.js","assets/js/pages/civilization-atlas/world-explorer.js","assets/js/locales/en/world-recovery.js","assets/js/locales/zh-Hans/world-recovery.js","content/civilization-atlas/search/world-search-index-v1.json"])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 // Include this new local customer consumer before commit; it remains subject
 // to the same public boundary, size checks and source-identity receipt.
 for(const file of ['world/index.html','assets/js/pages/world.js','assets/customer-ui/surfaces/reality-structure.css','assets/customer-ui/surfaces/professional-visual-r1.css','assets/customer-ui/js/professional-visual-r1.js','assets/customer-ui/surfaces/personal-method-visual-r1.css','assets/customer-ui/js/personal-method-visual-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);

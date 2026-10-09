@@ -24,6 +24,7 @@ export function atlasStateFromUrl(urlLike,locale='en'){
 export function atlasUrlFromState(urlLike,state,{includeHash=true}={}){
   const url=urlLike instanceof URL?new URL(urlLike.href):new URL(String(urlLike),'https://example.invalid');
   const normalized=normalizeAtlasState(state);
+  const explorerQuery=url.searchParams.has('explore')?url.searchParams.get('q'):null;
   for(const param of Object.values(PARAMS)) url.searchParams.delete(param);
   const set=(param,value)=>{if(value!==null&&value!==undefined&&value!==''&&(!Array.isArray(value)||value.length)) url.searchParams.set(param,Array.isArray(value)?value.join(','):String(value));};
   set(PARAMS.activeLayer,normalized.activeLayer);
@@ -40,7 +41,7 @@ export function atlasUrlFromState(urlLike,state,{includeHash=true}={}){
   set(PARAMS.lossTypeId,normalized.lossTypeId);
   set(PARAMS.evidenceClasses,normalized.evidenceClasses);
   set(PARAMS.compareBasket,normalized.compareBasket);
-  set(PARAMS.caseSearch,normalized.caseSearch);
+  set(PARAMS.caseSearch,explorerQuery??normalized.caseSearch);
   if(includeHash) url.hash='atlas';
   return url;
 }

@@ -75,7 +75,7 @@ function auxiliaryMarkup() {
   return `
     <div class="public-nav__actions">
       <a class="public-nav__auxiliary" href="/search/" data-i18n="publicShell.nav.search"></a>
-      <a class="public-nav__auxiliary" href="/knowledge/ask/">Ask PHI OS</a>
+      <a class="public-nav__auxiliary" href="/knowledge/ask/" data-i18n="worldRecovery.terms.ask">Ask PHI OS</a>
       <a class="public-nav__auxiliary" href="/account" data-i18n="publicShell.nav.signIn"></a>
     </div>
   `;

@@ -14,6 +14,13 @@ export default {
     "book6": "Book VI · Reality Reconfiguration",
     "nav": "World",
     "title": "World — PHI OS",
-    "navigation": "World exploration"
+    "navigation": "World exploration",
+    "terms": {
+      "Atlas": "Atlas",
+      "Runtime": "Runtime",
+      "Reality": "Reality",
+      "World": "World",
+      "ask": "Ask PHI OS"
+    }
   }
 };

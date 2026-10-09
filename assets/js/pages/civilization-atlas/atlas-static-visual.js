@@ -123,6 +123,7 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en',data={
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&root.dataset.atlasReady!=='true')return;
  const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},assets=resolveAtlasStaticVisuals(bindings,state,options,data);
  const [primary]=assets;
+ let related=root.querySelector('[data-atlas-related-visuals]');if(!related){related=root.ownerDocument.createElement('section');related.dataset.atlasRelatedVisuals='';root.querySelector('.civ-atlas-canvas')?.append(related);}related.replaceChildren();if(assets.length){ensureStyle(root.ownerDocument);const h=root.ownerDocument.createElement('h3');h.textContent=locale==='zh-Hans'?'登记关联的视觉情境':'Registered related visual context';related.append(h);for(const a of assets.filter(a=>state.activeLayer!=='world'||a.family!=='WORLD_SNAPSHOT_ATMOSPHERE'))related.append(visualFigure(root.ownerDocument,a,locale));}
  const requestedId=new URLSearchParams(doc.defaultView?.location?.search||'').get('visual');
  const requested=requestedId?resolveAtlasVisualById(bindings,requestedId,options):null;
  const componentOwned=new Set(['timeline','world','cases','comparison','trajectories','transitions','loss']);
