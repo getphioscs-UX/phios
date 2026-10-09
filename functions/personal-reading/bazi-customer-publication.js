@@ -48,7 +48,15 @@ export async function attachBaziPublicationAccess(view,context,dependencies={}){
   catch{full=false;accessReason='PUBLICATION_UNAVAILABLE';}
  }else{full=false;accessReason='PUBLICATION_UNAVAILABLE';}
  const delivery=buildReportDeliveryEnvelope({methodId:'BZR',access:{...deliveryAccess,reason:accessReason},admitted:native.publicationDecision?.customerPublishable===true,reportAvailable:Boolean(report)});
- const replace=p=>{if(p?.methodId!=='BZR')return p;return {schemaVersion:p.schemaVersion,methodId:p.methodId,productType:p.productType,locale:p.locale,state:p.state,publication:p.publication,specialistRenderer:p.specialistRenderer,hero:{eyebrow:'BaZi',title:locale==='en'?'Your BaZi Report':'你的八字报告',highlights:[]},navigation:[],sections:[],visuals:[],publicationReport:report,reportDelivery:delivery,lockedOutline:full?[]:BAZI_SECTION_REGISTRY.sections.map(s=>({title:s.title[locale]})),reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',entitlementKey:deliveryAccess.entitlementKey,verifiedPurchase:full,reason:accessReason,offer:deliveryAccess.offer},...(full?{sourceProduct:native}:{}),boundaries:{publicationCreatesMeaning:false,paymentSuccessIsAuthority:false}};};
+ // The existing method-admitted chart can be displayed independently of paid
+ // prose admission. Pass only calculated pillar fields, never the reference
+ // manuscript, professional modules or full native reading.
+ const freeChartSource=native.publicationDecision?.customerPublishable===true?{
+  schemaVersion:native.schemaVersion,methodId:native.methodId,
+  publicationDecision:{customerPublishable:true},
+  structuralModel:{pillars:(native.structuralModel?.pillars||[]).map(({position,stem,branch,stemRole,hiddenStems})=>({position,stem,branch,stemRole,hiddenStems}))}
+ }:null;
+ const replace=p=>{if(p?.methodId!=='BZR')return p;return {schemaVersion:p.schemaVersion,methodId:p.methodId,productType:p.productType,locale:p.locale,state:p.state,publication:p.publication,specialistRenderer:p.specialistRenderer,hero:{eyebrow:'BaZi',title:locale==='en'?'Your BaZi Report':'你的八字报告',highlights:[]},navigation:[],sections:[],visuals:[],publicationReport:report,reportDelivery:delivery,lockedOutline:full?[]:BAZI_SECTION_REGISTRY.sections.map(s=>({title:s.title[locale]})),reportAccess:{state:full?'FULL_REPORT':'FREE_REPORT_PREVIEW',fullState:full?'OPEN':'PAID_LOCKED',entitlementKey:deliveryAccess.entitlementKey,verifiedPurchase:full,reason:accessReason,offer:deliveryAccess.offer},...(full?{sourceProduct:native}:{freeChartSource}),boundaries:{publicationCreatesMeaning:false,paymentSuccessIsAuthority:false}};};
  const products=(view.productRoute.products||[]).map(replace),productRoute={...view.productRoute,products,...(view.productRoute.primaryProduct?{primaryProduct:replace(view.productRoute.primaryProduct)}:{})};
  // Exclude alternate copies of the full BaZi workspace from the free response.
  // Other methods and the separately governed Cross owner retain their payloads.

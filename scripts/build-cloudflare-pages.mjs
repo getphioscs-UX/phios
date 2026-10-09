@@ -154,6 +154,8 @@ function run(command, args) {
 }
 
 function cleanDirectory(dir) {
+  const checked=path.resolve(dir);
+  if(![path.resolve(output),path.resolve(workerBuild)].includes(checked))throw Error('PAGES_GENERATED_CLEANUP_PATH_INVALID');
   fs.rmSync(
     dir,
     {

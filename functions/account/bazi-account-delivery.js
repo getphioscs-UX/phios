@@ -8,6 +8,7 @@ import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
 import {digest} from './oidc-auth.js';
 import {grantDeliveredReportFollowups} from './report-followup-store.js';
 import {closeReleasedReportBudget} from '../personal-reading/report-delivery-budget.js';
+import {requirePurchasedReportPresentation} from '../pws/commercial/report-successor-contract.js';
 const fail=(code,status=409)=>{throw Object.assign(Error(code),{code,status});};
 function gate(context){personIdentity(context);if(!['local','qa','preview'].includes(context.env?.PHIOS_ENVIRONMENT))fail('BAZI_ACCOUNT_DELIVERY_NOT_ADMITTED',403);}
 async function seal(env,value){if(!env.AUTH_SESSION_SECRET)fail('BAZI_MATERIAL_SEAL_REQUIRED',503);const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(env.AUTH_SESSION_SECRET),{name:'HMAC',hash:'SHA-256'},false,['sign']);return [...new Uint8Array(await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(JSON.stringify(value))))].map(x=>x.toString(16).padStart(2,'0')).join('');}
@@ -24,6 +25,8 @@ async function loadInputs(context,prepared){
 export async function generateAndReleaseAccountBazi(context,selection,{resolveInputs=loadInputs,produce=generatePaidBaziManuscript}={}){
  gate(context);if(!selection||Object.keys(selection).some(k=>!['personId','locale'].includes(k))||!['en','zh-Hans','bilingual'].includes(selection.locale))fail('BAZI_SELECTION_INVALID',400);
  const prepared=await prepareAccountBaziCandidate(context,{personId:selection.personId});if(prepared.state!=='RELEASE_PENDING')fail('BAZI_CALCULATION_INCOMPLETE');
+ const right=await ownedReportPresentation(context.env,prepared.customerId,'COM-REPORT-BAZI-FULL');
+ requirePurchasedReportPresentation(right,{reportLocale:selection.locale,reportLanguageMode:selection.locale==='bilingual'?'BILINGUAL':'SINGLE'});
  const inputs=await resolveInputs(context,prepared),owner=prepared.customerId;
  if(inputs.pack?.subject?.subjectId!==prepared.personId||inputs.calculationDigest!==prepared.calculationDigest||inputs.canonicalBirthInputFingerprint!==prepared.canonicalBirthInputFingerprint)fail('BAZI_SUBJECT_AUTHORITY_MISMATCH');
  if(inputs.approval?.statement!=='HUMAN ACCEPT BAZI DEEP MANUSCRIPT R2'||inputs.approval.productionFrozen!==true)fail('BAZI_GOVERNED_PRODUCER_ADMISSION_REQUIRED');

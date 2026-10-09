@@ -82,6 +82,8 @@ export function renderBaziSpecialistWorkspace({product,mount}={}){
  return Object.freeze({status:'RENDERED',navigationHtml:navigationHtml(),visualHtml:phase10Snapshot,readingHtml:html,technicalHtml:renderTechnical(native,product),customerDefaultSurface:'BAZI_PROFESSIONAL_READING',governanceSurfaceDefault:false,technicalSurfaceMode:'ON_DEMAND',marketGradeCutoverState:native.governance?.marketGradeCustomerCutoverActive===true?(native.governance?.marketGradeCustomerCutoverFrozen===true?'ACTIVE_FROZEN':'ACTIVE'):'CANDIDATE_PENDING_W13_HUMAN_ACCEPTANCE',marketGradeCutoverFrozen:native.governance?.marketGradeCustomerCutoverFrozen===true});
 }
 export function renderBaziProduct({product,mount}={}){
- return renderCustomerPublication({product,mount,renderDetail:renderBaziSpecialistWorkspace,labels:{unlock:tr('Unlock Full BaZi Report','解锁完整八字报告'),includes:tr('Pattern paths, carrying conditions, sources, career, wealth, relationships and timing.','格局路径、承载条件、来源、事业、财富、关系与时间层。'),generate:tr('Generate your free BaZi report from the Personal Reality form.','请从 Personal Reality 表单生成你的免费八字报告。')}});
+ const plan=renderCustomerPublication({product,mount,renderDetail:renderBaziSpecialistWorkspace,labels:{unlock:tr('Unlock Full BaZi Report','解锁完整八字报告'),includes:tr('Pattern paths, carrying conditions, sources, career, wealth, relationships and timing.','格局路径、承载条件、来源、事业、财富、关系与时间层。'),generate:tr('Generate your free BaZi report from the Personal Reality form.','请从 Personal Reality 表单生成你的免费八字报告。')}});
+ if(product?.reportAccess?.state!=='FREE_REPORT_PREVIEW'||!isBaziNativeProduct(product?.freeChartSource))return plan;
+ return Object.freeze({...plan,visualHtml:renderBaziProfessionalStructure(product.freeChartSource,{embedded:true,chartOnly:true})+(plan.visualHtml||'')});
 }
 export default Object.freeze({renderBaziProduct});

@@ -5,7 +5,7 @@ const fail=code=>{throw Object.assign(Error(code),{code,status:409});};
 export async function createReportGenerationStore(env,binding,{scope='budget'}={}){
  const db=env?.RUNTIME_DB;
  if(!db?.prepare)fail('REPORT_GENERATION_DATABASE_REQUIRED');
- if(!['QA','LIVE'].includes(binding?.environment)||!['budget','manuscript'].includes(scope)||
+ if(!['QA','LIVE'].includes(binding?.environment)||!['budget','manuscript','delivery'].includes(scope)||
   ['ownerAccountId','orderId','reportId','productId'].some(k=>typeof binding[k]!=='string'||!binding[k]))fail('REPORT_GENERATION_STORE_BINDING_REQUIRED');
  const namespace=await digest(JSON.stringify({environment:binding.environment,owner:binding.ownerAccountId,order:binding.orderId,report:binding.reportId,product:binding.productId,scope}));
  let held=null;

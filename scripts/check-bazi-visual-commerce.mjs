@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {attachBaziPublicationAccess,buildBaziCustomerPublication,readingPublicationTime} from '../functions/personal-reading/bazi-customer-publication.js';
-import {buildBzrPhase10Case} from './lib/pvp-phase10-method-fixture.mjs';
+import {buildBzrPhase10Case,installPhase10DomStub} from './lib/pvp-phase10-method-fixture.mjs';
 import {projectBaziPublicationPages} from '../functions/personal-reading/bazi-visual-report-projection.js';
 import {defaultPersonalReadingTab} from '../assets/customer-ui/js/personal-products/final-personal-reading-experience.js';
 import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
@@ -13,7 +13,7 @@ import {visualModules,visualAssets} from '../functions/canonical-presentation-ru
 import {createReportSubjectPresentation} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
 import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
 import {commerceProduct} from '../functions/pws/commercial/stripe-product-registry.js';
-globalThis.document={documentElement:{lang:'en'}};
+installPhase10DomStub('en');
 const read=p=>JSON.parse(fs.readFileSync(p)),{reading}=read('docs/guided-report-successor-r2/bazi-source.json');
 for(const [file,expected] of Object.entries(read('docs/guided-report-successor-r2/visual-commerce/semantic-freeze.json').files))assert.equal(createHash('sha256').update(fs.readFileSync(file,'utf8').replace(/\r\n?/g,'\n')).digest('hex'),expected,`Frozen BaZi source: ${file}`);
 const original=JSON.stringify(reading),product=adaptBaziPersonalRealityProduct({report:reading,locale:'en'}),other={methodId:'AST',preserved:true};
@@ -23,6 +23,17 @@ let queries=0;const free=await attachBaziPublicationAccess(view,ctx,{loadEntitle
 const p=free.productRoute.primaryProduct;assert.equal(p.reportAccess.state,'FREE_REPORT_PREVIEW');assert(!p.sourceProduct);assert(!free.methodNativeReading.BZR);assert.equal(free.singleMethodReading,null);assert.deepEqual(free.methodNativeReading.AST,other);assert.deepEqual(free.reading.methods,[other]);assert.equal(free.structure.methods.length,1);assert.equal(free.patterns.items.length,1);
 assert.equal(p.publicationReport,null,'Reference-copy acceptance must not admit a new customer subject');
 assert.equal(p.reportAccess.reason,'PUBLICATION_UNAVAILABLE');
+assert.deepEqual(p.freeChartSource.structuralModel.pillars,reading.structuralModel.pillars.map(({position,stem,branch,stemRole,hiddenStems})=>({position,stem,branch,stemRole,hiddenStems})));
+assert.deepEqual(Object.keys(p.freeChartSource).sort(),['methodId','publicationDecision','schemaVersion','structuralModel']);
+assert(!p.freeChartSource.readingSections&&!p.freeChartSource.professionalModules);
+const freeChartHtml=renderBaziProduct({product:p}).visualHtml;
+assert.equal((freeChartHtml.match(/data-pillar=/g)||[]).length,4);
+assert(!freeChartHtml.includes('No additional natal relation was established in this run.'));
+assert(!freeChartHtml.includes('Pattern verdict remains open.')); 
+assert(!freeChartHtml.includes('cx-bazi-w12-workspace'));
+const changedChart=structuredClone(p);changedChart.freeChartSource.structuralModel.pillars[0].stem.zh='SYNTHETIC_CURRENT_SUBJECT';
+assert(renderBaziProduct({product:changedChart}).visualHtml.includes('SYNTHETIC_CURRENT_SUBJECT'));
+assert(!freeChartHtml.includes('SYNTHETIC_CURRENT_SUBJECT'));
 assert.equal(defaultPersonalReadingTab(free),'overview');assert.equal(defaultPersonalReadingTab({productRoute:{products:[p,other]}}),'overview');
 // Preserve the historical publication renderer regression separately from
 // current account admission. This review fixture grants no customer access.

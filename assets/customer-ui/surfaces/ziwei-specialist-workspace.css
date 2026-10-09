@@ -184,3 +184,9 @@
 @media(max-width:560px){.cx-zv-r3-priority__grid,.cx-zv-r3-state,.cx-zv-r3-topic-grid{grid-template-columns:1fr}.cx-zv-r3-priority__grid article:first-child{grid-column:auto}.cx-zv-r3-flow__layers{grid-template-columns:1fr}.cx-zv-r3-card{padding:.8rem}.cx-zv-r3-priority__grid p{display:none}}
 @media print{.cx-zv-r3-state{display:none}.cx-zv-r3-secondary{grid-template-columns:1fr}.cx-zv-r3-priority__grid{grid-template-columns:repeat(2,1fr)}.cx-zv-r3-topic-grid{grid-template-columns:repeat(2,1fr)}}
 .cx-zv-r3-lock-note{margin:.7rem 0 0;color:var(--cx-muted,#6f685f);font-size:.86rem;line-height:1.55}.cx-zv-r3-current-timing{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.cx-zv-r3-current-timing article{display:grid;gap:.2rem;padding:.7rem .8rem;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:.75rem}.cx-zv-r3-current-timing small{opacity:.65}.cx-zv-r3-current-timing strong{font-size:.98rem}@media(max-width:560px){.cx-zv-r3-current-timing{grid-template-columns:1fr}}
+/* Keep unselected palace details hidden on screen. The base [hidden] rule
+   lives in a cascade layer and must not lose to this component's display:grid.
+   Printing deliberately expands these panels in the existing print rules. */
+@media screen {
+ .cx-ziwei-specialist-chart__inspectors [data-ziwei-inspector-index][hidden]{display:none!important}
+}

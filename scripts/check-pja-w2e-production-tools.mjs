@@ -21,6 +21,11 @@ const root = process.cwd();
 const temporaryParent = path.join(root, '.tmp');
 await fs.mkdir(temporaryParent, { recursive: true });
 const temporary = await fs.mkdtemp(path.join(temporaryParent, 'pja-w2e-check-'));
+async function removeOwnedTemporary(target) {
+  const resolved=path.resolve(target);
+  assert(resolved===temporary || resolved.startsWith(temporary+path.sep),'Cleanup must remain within this invocation\'s fixture directory');
+  await fs.rm(resolved,{recursive:true,force:true,maxRetries:5,retryDelay:100});
+}
 const temporaryRelative = path.relative(root, temporary).split(path.sep).join('/');
 const fixtureSource = path.join(root, 'tests/fixtures/knowledge/production-tools');
 const fixtures = path.join(temporary, 'fixtures');
@@ -164,7 +169,7 @@ try {
   let result = await validatePackage(root, 'KN-PREFACE-001', securityRoot);
   assert.equal(result.valid, false);
   assert(result.errors.some(error => error.code === 'PACKAGE_UNKNOWN_FILE'));
-  await fs.rm(securityRoot, { recursive: true, force: true });
+  await removeOwnedTemporary(securityRoot);
   await fs.mkdir(securityRoot, { recursive: true });
   try {
     await fs.symlink(path.join(fixtures, 'valid-complete-package/article.zh-Hans.json'), path.join(securityRoot, 'article.zh-Hans.json'));
@@ -238,12 +243,7 @@ try {
   console.log('  Import defaults to dry-run; explicit temporary-root apply is atomic and never overwrites an existing package.');
   console.log('  Registry, Blueprint, W2A–W2D contracts and Renderer remain byte-identical throughout this check.');
 } finally {
-  await fs.rm(temporary, {
-    recursive: true,
-    force: true,
-    maxRetries: 5,
-    retryDelay: 100
-  });
+  await removeOwnedTemporary(temporary);
 }
 
 async function normalizeTextTree(directory) {

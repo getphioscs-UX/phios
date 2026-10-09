@@ -1,0 +1,35 @@
+
+> build:pages
+> node scripts/run-zero-cost-regression.mjs build:pages
+
+Pages static publication: copied=11498, skipped=9383
+X [ERROR] Failed to write to log file Error: EPERM: operation not permitted, open 'C:\Users\Guest Account\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-10-09_07-07-02_251.log'
+
+      at async open (node:internal/fs/promises:640:25)
+      at async writeFile (node:internal/fs/promises:1260:14)
+      at async C:\phios\node_modules\wrangler\wrangler-dist\cli.js:60963:7
+      at async Mutex.runWith (C:\phios\node_modules\miniflare\dist\src\index.js:82825:48)
+      at async appendToDebugLogFile (C:\phios\node_modules\wrangler\wrangler-dist\cli.js:60960:3) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'open',
+    path: 'C:\\Users\\Guest Account\\AppData\\Roaming\\xdg.config\\.wrangler\\logs\\wrangler-2026-10-09_07-07-02_251.log'
+  }
+
+
+X [ERROR] Would have written: 
+
+  --- 2026-10-09T07:07:02.638Z debug
+  🪵  Writing logs to "C:\Users\Guest Account\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-10-09_07-07-02_251.log"
+  ---
+  
+
+
+
+ ⛅️ wrangler 4.120.0
+────────────────────
+✨ Compiled Worker successfully
+🪵  Logs were written to "C:\Users\Guest Account\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-10-09_07-07-02_251.log"
+Pages Worker: 16281603 bytes; gzip 3032330 bytes
+PASS Pages publication boundary: 11500 files; no asset exceeds 25 MiB; provider runtime payloads excluded.
+PASS Cloudflare Pages build boundary: .pages-output
