@@ -231,7 +231,24 @@ for (const protectedPath of fixture.protectedPaths) {
           assert.equal(canonicalTextSha256(entry.path), entry.sha256, `PDS_W0_PENDING_RUNTIME_SOURCE_DRIFT:${entry.path}`);
           assert.equal(canonicalTextGitBlobSha(entry.path), entry.gitBlobSha, `PDS_W0_PENDING_RUNTIME_BLOB_DRIFT:${entry.path}`);
         }
-        assert.fail('PDS_W0_RUNTIME_TOPOLOGY_ACCEPTANCE_PENDING: batch06 v2 candidate requires separate explicit Human ACCEPT; v1 remains accepted');
+        const batch06Admission = read('docs/design-system/pds-w0-navigation-batch06-successor-v2.json');
+        assert.equal(batch06Admission.status, 'EXPLICIT_OWNER_ACCEPTED_ADDITIVE_SOURCE_TOPOLOGY');
+        assert.equal(batch06Admission.productionActivation, false);
+        assert.equal(batch06Admission.predecessorSuccessor, 'docs/design-system/pds-w0-navigation-topology-successor-v1.json');
+        assert.equal(batch06Admission.candidatePath, 'docs/design-system/pds-w0-navigation-batch06-topology-candidate-v2.json');
+        const batch06Hash = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, batch06Admission.candidatePath))).digest('hex');
+        assert.equal(batch06Hash, '7a716027c9f36a83e765c84e4889fe4e7bf7cf72e1981a6b56e8ab5dff744beb');
+        assert.equal(batch06Admission.candidateSHA256, batch06Hash);
+        assert.equal(canonicalTextSha256(batch06Admission.receiptPath), batch06Admission.receiptSHA256);
+        const batch06Receipt = read(batch06Admission.receiptPath);
+        assert.equal(batch06Receipt.authority, 'DIRECT_OWNER_MESSAGE');
+        assert.equal(batch06Receipt.candidateID, pending.candidateID);
+        assert.equal(batch06Receipt.candidateSHA256, batch06Hash);
+        assert.equal(batch06Receipt.productionActivation, false);
+        assert.equal(batch06Receipt.deletionAuthorized, false);
+        assert.equal(batch06Receipt.commitOrPushAuthorized, false);
+        assert.deepEqual(batch06Receipt.acceptedEntries, pending.entries);
+        assert.deepEqual(batch06Admission.entries, pending.entries);
       }
     }
     continue;
