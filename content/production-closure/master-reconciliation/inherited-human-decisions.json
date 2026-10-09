@@ -1,0 +1,366 @@
+{
+  "receipts": [
+    {
+      "scope": "price",
+      "path": "content/production-closure/batch04/BOOK-VI-OWNER-PRICE-CONFIRMATION.json",
+      "exists": true,
+      "sha256": "bce5850b178b2fa14dd70dbfc2ade545bc960ceb63a5afd7cb7e001592c88c0e",
+      "record": {
+        "workId": "PHI-OS-PRODUCTION-CLOSURE",
+        "decision": "BOOK_VI_PRICE_AUTHORITY_CONFIRMED",
+        "authority": "EXPLICIT_HUMAN_USER_MESSAGE",
+        "ownerStatement": "Book VI 价钱应该是RM 109",
+        "decisionDate": "2026-10-09",
+        "productId": "COM-BOOK-CONFIGURATION",
+        "currency": "MYR",
+        "amountMinor": 10900,
+        "scope": "Confirm existing Book VI RM109 price; supersede master RM59 comparison only",
+        "excludes": [
+          "Price modification",
+          "Stripe price creation or update",
+          "Entitlement change",
+          "Payment",
+          "Deployment",
+          "Other owner decisions",
+          "Production admission"
+        ],
+        "receiptId": "PRODUCTION-CLOSURE-BOOK-VI-PRICE-E26A1527AB20E284EA5CFB18"
+      },
+      "productionClosureAcceptanceInferred": false
+    },
+    {
+      "scope": "profile",
+      "path": "content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/owner-acceptance/ACCEPTANCE-RECEIPT.json",
+      "exists": true,
+      "sha256": "cb9b301cd164c4deeb053dcb9b8ca4886824b713ec24bd3e4a4e46de3b80bcd5",
+      "record": {
+        "schemaVersion": "W11R6-DETERMINISTIC-OWNER-ACCEPTANCE-RECEIPT-v1",
+        "receiptId": "W11R6-TARGETED-R1-HUMAN-ACCEPT-CEA9EB04A5A821607EC1FC2B",
+        "work": "W11R6_TARGETED_R1",
+        "decision": "HUMAN_ACCEPT",
+        "authority": "EXPLICIT_HUMAN_USER_MESSAGE",
+        "decisionRef": "content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/owner-acceptance/OWNER-DECISION.json",
+        "decisionSha256": "28a474e9a13822a442b2fb57cfbf67f053cada4d5f10eaa15bdffe61977f2618",
+        "acceptedArtifactManifestRef": "content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/owner-acceptance/ACCEPTED-ARTIFACT-MANIFEST.json",
+        "acceptedArtifactManifestSha256": "62b64794ed4d2e13d9569f78db2a99b8f6c02a84e2ebaa3836248a4d48bd559d",
+        "pfigDecisions": {
+          "PFIG-001": "ACCEPT",
+          "PFIG-002": "ACCEPT",
+          "PFIG-003": "ACCEPT",
+          "PFIG-004": "ACCEPT",
+          "PFIG-005": "ACCEPT",
+          "PFIG-006": "ACCEPT",
+          "PFIG-007": "ACCEPT",
+          "PFIG-008": "ACCEPT",
+          "PFIG-009": "ACCEPT"
+        },
+        "scope": "Targeted bilingual grammar repairs and regenerated CASE-01/08/09 publication artifacts within W11R6 review scope; previous accepted PFIG structures retained.",
+        "productionReadinessInferred": false,
+        "boundaries": {
+          "cpr": "BASELINE_EXTERNAL_UNRESOLVED",
+          "fullProductionAdmission": "NOT_GRANTED",
+          "prdW12": "NOT_AUTHORIZED",
+          "productionFreeze": "NOT_AUTHORIZED",
+          "deployment": "NOT_AUTHORIZED",
+          "automaticCommit": false,
+          "push": false
+        },
+        "supersedesWithinScope": "content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/HUMAN-DECISION.json",
+        "historicalDecisionsPreserved": true,
+        "remainingProductionAdmissionBlockers": [
+          "check:cpr BASELINE_EXTERNAL unresolved; historical frozen digests unchanged",
+          "Full production admission not granted",
+          "PRD-W12 not authorized",
+          "Production freeze not authorized",
+          "Deployment not authorized"
+        ],
+        "frozenFilesUnchanged": [
+          {
+            "path": "content/registry/public-assets.json",
+            "sha256": "52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742"
+          },
+          {
+            "path": "content/professional/canonical-presentation-runtime/audits/cpr-baseline-audit-v1.json",
+            "sha256": "8e396914a9a7402c095f51ef09c5b1eff8d3ce338882e5ae8bd9d4a05693f5ba"
+          },
+          {
+            "path": "content/professional/canonical-presentation-runtime/freeze/cpr-w0-w6-foundation-freeze-v1.json",
+            "sha256": "3cb3c82b18c54ec6f362ba574973c915ee27e8e3eeeb85393a449d59e08ac683"
+          },
+          {
+            "path": "content/profile/freeze/profile-human-acceptance-v1.json",
+            "sha256": "39c37ff8b917e65f3aabd86acc4a040b37d950ebaad0dbedaa258fffcc859d6a"
+          }
+        ],
+        "providerCalls": 0,
+        "openAiCalls": 0,
+        "nextAction": "AWAIT_EXPLICIT_OWNER_INSTRUCTION"
+      },
+      "productionClosureAcceptanceInferred": false
+    },
+    {
+      "scope": "demotion",
+      "path": "content/product-convergence-r1/audits/pc-w11-closure/OWNER-ACCEPTANCE-RECEIPT.json",
+      "exists": true,
+      "sha256": "47a65f8e094df07471b1733372d4233b8992d0b669f12d787495615ac950e4a3",
+      "record": {
+        "work": "PC-W11",
+        "decision": "PC-R1 PROFILE DEMOTION ACCEPT",
+        "authority": "EXPLICIT_HUMAN_USER_MESSAGE",
+        "scope": "Accepted PC-R1 first-batch product positioning and architectural transition; PC-W11 closure only",
+        "ownerDecisionSha256": "cc46d5d04e54df79fcb741b7f0b837edf2521b4ae65f414e41af6dfc7fc7901f",
+        "baselineSha256": "df98ed2f6d7a484f9b45928505b934813d13c7a061db1ac8bb0cc870b4cdc547",
+        "acceptedProductPosition": {
+          "profileRole": "SUPPLEMENTARY_PERSON_EVIDENCE",
+          "topLevelMethod": false,
+          "canonicalParent": "PERSONAL_REALITY",
+          "customerProduct": "Personal Evidence Dossier / 个人证据档案",
+          "assessmentsOptional": true,
+          "prerequisiteForPersonalReality": false,
+          "prerequisiteForAskPhi": false,
+          "sourceNativeAuthorityPreserved": true,
+          "unknownEmptyVisible": true,
+          "selectionAndConsentRequired": true
+        },
+        "mandatoryPreservation": [
+          "Bilingual dossier identity and delivery",
+          "Current Profile Commerce SKUs, prices, entitlements and bundle contracts",
+          "W11R6_TARGETED_R1 HUMAN_ACCEPT and accepted publications",
+          "P01–P05 and SEC01–SEC10 Masters",
+          "PFIG-001–009 source-specific semantics",
+          "REL-W0–W8 owner",
+          "Financial Full and Cross Full boundaries",
+          "Compatible direct URLs and customer Library access"
+        ],
+        "authorization": {
+          "pcW11": true,
+          "pcW12ToW99": false,
+          "prdW12": false,
+          "productionFreeze": false,
+          "productionDeployment": false,
+          "commercializationChanges": false,
+          "commit": false,
+          "push": false
+        },
+        "w11r6AcceptancePreserved": "W11R6-TARGETED-R1-HUMAN-ACCEPT-CEA9EB04A5A821607EC1FC2B",
+        "productionReadinessInferred": false,
+        "remainingBlockers": [
+          "PC-W12–W99 blocked pending separate owner instruction",
+          "PRD-W12 not authorized",
+          "Historical CPR mismatch BASELINE_EXTERNAL unresolved"
+        ],
+        "receiptId": "PC-W11-OWNER-ACCEPT-BC92FACCA0AC693565591111"
+      },
+      "productionClosureAcceptanceInferred": false
+    },
+    {
+      "scope": "narratives",
+      "path": "content/product-convergence-r1/acceptance/pc-r1-targeted-owner-decision-registry-v1.json",
+      "exists": true,
+      "sha256": "0b2cf5f6a14b2c2d73d626711f411086eb7699429183aee43cba58299d3836f4",
+      "record": {
+        "schemaVersion": "PC-R1-SCOPED-OWNER-DECISION-REGISTRY-v1",
+        "mechanism": "Existing deterministic JSON decision / SHA256-bound artifact manifest / immutable receipt / ownerAcceptanceDecisions mechanism",
+        "preservedHistoricalRegistry": "content/product-convergence-r1/audits/pc-r1-profile-demotion-first-batch-v1.json",
+        "ownerAcceptanceDecisions": [
+          {
+            "work": "PC-W92",
+            "scope": "Bilingual grammatical correction and six-case evidence-preserving customer narrative within the reviewed targeted editorial scope only.",
+            "decision": "HUMAN_ACCEPT",
+            "authority": "EXPLICIT_HUMAN_USER_MESSAGE",
+            "receiptId": "PC-W92-TARGETED-HUMAN-ACCEPT-719CCA9A3117B2C344D389F1",
+            "receiptRef": "content/product-convergence-r1/audits/personal-relationship-targeted/owner-acceptance/PC-W92-ACCEPTANCE-RECEIPT.json",
+            "receiptSha256": "5d3a5573b2bad308e66dee6a25b98645b26a80832e3ac070c2ebed62d1ee3761",
+            "acceptedArtifactManifestRef": "content/product-convergence-r1/audits/personal-relationship-targeted/owner-acceptance/PC-W92-ACCEPTED-ARTIFACT-MANIFEST.json",
+            "acceptedArtifactManifestSha256": "3e30a5b9a6b6077e9d1a8dc94db4bdbd238da69ae1e7805b7e131ffdd7cc70da",
+            "productionAdmissionGranted": false,
+            "unrestrictedProductAcceptance": false
+          },
+          {
+            "work": "PC-W93",
+            "scope": "Differentiated relationship-context composition within the reviewed targeted narrative scope only; Business and Parent–Child retain UNKNOWN when applicable evidence or participant authority is missing.",
+            "decision": "HUMAN_ACCEPT",
+            "authority": "EXPLICIT_HUMAN_USER_MESSAGE",
+            "receiptId": "PC-W93-TARGETED-HUMAN-ACCEPT-5C995CFACDED92C1DB70F278",
+            "receiptRef": "content/product-convergence-r1/audits/personal-relationship-targeted/owner-acceptance/PC-W93-ACCEPTANCE-RECEIPT.json",
+            "receiptSha256": "6980972837a7259a344a96a780563ae157969061a25fe966bb7348869a6819c4",
+            "acceptedArtifactManifestRef": "content/product-convergence-r1/audits/personal-relationship-targeted/owner-acceptance/PC-W93-ACCEPTED-ARTIFACT-MANIFEST.json",
+            "acceptedArtifactManifestSha256": "bf6464cca93ea598fc4040d242338f69748944266d4a0549409af6ec0a47af02",
+            "productionAdmissionGranted": false,
+            "unrestrictedProductAcceptance": false
+          }
+        ]
+      },
+      "productionClosureAcceptanceInferred": false
+    },
+    {
+      "scope": "hd",
+      "path": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/review/HD-PRO-R3-W22-human-admission-v1.json",
+      "exists": true,
+      "sha256": "584927d4240b222ff3350a1e2016f0e43b60d75d8ef578e7f75f1590295a37b9",
+      "record": {
+        "schemaVersion": "PHI-OS-HD-PRO-R3-W22-HUMAN-ADMISSION-v1.0.0",
+        "work": "HD-PRO-R3-W22-HUMAN-ADMISSION",
+        "baselineCommit": "896a01a24f904bee337cfa89a5aa5069cb143a58",
+        "status": "HUMAN_ACCEPTED_24_OF_24",
+        "declarationSource": "USER_CONFIRMED_ALL_24_ACCEPTED",
+        "r2AcceptanceInherited": false,
+        "summary": {
+          "accepted": 24,
+          "rejected": 0,
+          "pending": 0
+        },
+        "publicationEffect": {
+          "machineVerified": true,
+          "benchmarkPassed": true,
+          "humanAccepted": true,
+          "customerPublishedImmediately": false,
+          "nextRequiredGate": "W23_W24_W25_W26_RENDERER_VISUAL_CUTOVER_REGRESSION"
+        },
+        "boundaries": {
+          "phiosHumanDesignCalculationAuthorityCreated": false,
+          "hdrPublicExecutionAuthorityCreated": false,
+          "automaticVariableCalculationAuthorityCreated": false,
+          "dualChartRelationshipAuthorityCreated": false
+        }
+      },
+      "productionClosureAcceptanceInferred": false
+    },
+    {
+      "scope": "cross",
+      "path": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w25-human-admission-v1.json",
+      "exists": true,
+      "sha256": "3c73f6a1a394ee57bd1b63e81dd233bbc4b07d3d8bff37fbeaa527c640974010",
+      "record": {
+        "schemaVersion": "PHI-OS-CROSS-R2-W25-HUMAN-ADMISSION-v1.0.0",
+        "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+        "sourceCampaignBaselineCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+        "work": "R2-W25",
+        "status": "HUMAN_ACCEPTED_36_OF_36",
+        "reviewResultsRef": "content/customer-experience-rebuild/r12r4b/cross/review/cross-w25-human-review-results-v1.json",
+        "machineCampaignRef": "content/customer-experience-rebuild/r12r4b/cross/campaign/cross-w24-64-machine-campaign-v1.json",
+        "humanDecisionEvidence": {
+          "type": "EXPLICIT_FOUNDER_DECLARATION_IN_CHAT",
+          "declaration": "36 cases 全部 human accepted",
+          "machineMaySetHumanAcceptance": false,
+          "exportedReviewJsonRequired": false
+        },
+        "actual": {
+          "accepted": 36,
+          "rejected": 0,
+          "pending": 0,
+          "total": 36
+        },
+        "required": {
+          "accepted": 36,
+          "rejected": 0,
+          "pending": 0
+        },
+        "productionAdmissionAllowed": true,
+        "customerCrossCutoverAllowed": false,
+        "next": "R2-W26 Final Production Admission"
+      },
+      "productionClosureAcceptanceInferred": false
+    },
+    {
+      "scope": "bookVII",
+      "path": "content/knowledge/book-vii/v2-cutover/human-acceptance-v1.json",
+      "exists": true,
+      "sha256": "3e79bc9e0b787fc75146b9936dd04d0f1356450a3c2324938ebeaf2ffa6d967f",
+      "record": {
+        "work": "BOOK-VII-V2-CANONICAL-PUBLICATION-CUTOVER",
+        "decision": "HUMAN ACCEPT",
+        "source": "EXPLICIT_USER_MESSAGE",
+        "decisionDate": "2026-10-07",
+        "baselineHead": "3895108c6899457afaa38d40ee8932b02c53435f",
+        "status": "BOOK_VII_V2_CANONICAL_PUBLICATION_ADMITTED",
+        "canonicalSource": {
+          "version": "v2",
+          "filename": "PHI-OS-Book-7-v2.pdf",
+          "objectKey": "books/book-7/source/PHI-OS-Book-7-v2.pdf",
+          "sha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d"
+        },
+        "reviewFreeze": {
+          "path": "content/knowledge/answer-projection/freeze/kap-book-vii-v2-publication-source-review-freeze-v1.json",
+          "sha256": "25585d26263c03169554b5f35f6af7adcc28ee8ee4af9109f0496b2b76366f07"
+        },
+        "acceptedOutputs": [
+          {
+            "path": "content/knowledge/answer-projection/reconciliation/kap-book-vii-v2-publication-source-successor-v1.json",
+            "sha256": "b20869d8139bbac4e33d96175dd4170285a169d8f9cb96cd7d2569d2e908f60e"
+          },
+          {
+            "path": "content/knowledge/public/successors/book-vii-v2-source-refresh-v1/published-projection.json",
+            "sha256": "26f74ddf738af280e8a0a3a767f0e77fff30e4dd7c8b835b07c93557dff82b72"
+          },
+          {
+            "path": "content/knowledge/book-vii/v2-cutover/canonical-source-registry-v2.json",
+            "sha256": "e553ba512c5c4a2b270dd0806e6f25d01f04c150d851e244b30ea20d79b26c9d"
+          },
+          {
+            "path": "content/knowledge/book-vii/v2-cutover/canonical-node-registry-v2.json",
+            "sha256": "3f94d4f10b0162cd3a5fb8337d68613a44a485036e3ea18859b9f7e4b8c517e9"
+          },
+          {
+            "path": "content/knowledge/book-vii/v2-cutover/verified-source-v2.json",
+            "sha256": "ed0b051780e4752e23bb2b78c8b0adf655347fde43269c3d2f7231059728b8b2"
+          },
+          {
+            "path": "content/knowledge/book-vii/v2-cutover/editorial-predecessor-reconciliation-v1.json",
+            "sha256": "25aabf211c4b61972b585a4db972bf4de84309eb382d467ca9bed682d4353bbf"
+          },
+          {
+            "path": "functions/_lib/book-vii-published-admission.js",
+            "sha256": "bd3f84cb3fdbe21c9949802adefe3e374e05687547d67922c7492e86029ca738"
+          },
+          {
+            "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+            "sha256": "46d970c593a5fcbb3383f00bbf1fdd55f679476fb2d5ccf3984bc32d22496a4d"
+          },
+          {
+            "path": "scripts/check-kap-book-vii-production-admission-r1.mjs",
+            "sha256": "4f03ef4e8ff1f048c5ab91f1be8c37b6c4829b41095e1b137f2f2e72b38faeb6"
+          },
+          {
+            "path": "scripts/lib/knowledge-public/book-vii-current-projection.mjs",
+            "sha256": "8378d29141a95f1c2a871a4d47a6e89dff836b6cd29251e412d741f1652b4c98"
+          },
+          {
+            "path": "scripts/build-cloudflare-pages.mjs",
+            "sha256": "bf94c4ef3aeb47f7047b90174021bed4485f2661aaf8c4dd3f2ea21602d22fc3"
+          },
+          {
+            "path": "scripts/check-book-vii-v2-cutover.mjs",
+            "sha256": "1f80cb02136baf511f7719befe09281923eb84b3cebff56a2a2d61723acd91da"
+          },
+          {
+            "path": "content/knowledge/public/successors/book-vii-v2-source-refresh-v1/retrieval/published-retrieval-index.json",
+            "sha256": "480d70a70ac07d6bb5581f07b108f32c19aa6b1074767bec1ab3cf27df294d6b"
+          }
+        ],
+        "acceptedSections": [
+          "14.65",
+          "14.66",
+          "14.71",
+          "14.72"
+        ],
+        "referenceOnlyPreserved": [
+          "14.66",
+          "14.72"
+        ],
+        "v1Role": "HISTORICAL_PREDECESSOR_ONLY",
+        "editorialOverlayRequired": false,
+        "authorizedMasterABatches": [
+          "PRE-BATCH-0",
+          "A-BATCH-1"
+        ],
+        "stopAfter": "A-BATCH-1",
+        "providerRequests": 0,
+        "cloudDeploymentPerformed": false
+      },
+      "productionClosureAcceptanceInferred": false
+    }
+  ],
+  "priceNotReopened": true,
+  "batch05OverallHumanAcceptance": "NOT_GRANTED"
+}

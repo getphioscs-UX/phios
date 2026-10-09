@@ -777,6 +777,112 @@
     "evidence": "content/production-closure/batch05/batch-result.json",
     "review": "tools/review/PHI-OS-PRODUCTION-CLOSURE-BATCH-05-HUMAN-REVIEW.html",
     "acceptance": "PENDING",
-    "productionAdmission": "NOT_GRANTED"
+    "productionAdmission": "NOT_GRANTED",
+    "providerPolicy": {
+      "priorSixCallUSD7": "REJECTED_EXPLICIT_OWNER_SUPPLEMENT",
+      "currentContract": "content/production-closure/master-reconciliation/BAZI-THREE-CALL-BILINGUAL-USD1-CONTRACT-RECONCILIATION.json",
+      "normalCallsMax": 3,
+      "normalCostUSDMax": 1,
+      "paidExecutionAuthorized": false
+    }
+  },
+  "masterReconciliation": {
+    "state": "READY_FOR_PRODUCTION_CLOSURE_MASTER_RECONCILIATION_REVIEW",
+    "providerCorrectionState": "READY_FOR_THREE_CALL_COST_CONTRACT_HUMAN_REVIEW",
+    "master": "IN_PROGRESS",
+    "m1": "NOT_LIVE_VERIFIED",
+    "evidence": "content/production-closure/master-reconciliation/execution-result.json",
+    "ledger": "content/production-closure/master-reconciliation/pc-w0-w31-evidence-ledger.json",
+    "decisions": "content/production-closure/master-reconciliation/owner-decision-register.json",
+    "accepted": false,
+    "productionAdmission": "NOT_GRANTED",
+    "commands": [
+      {
+        "command": "node scripts/check-production-closure-master-bazi.mjs",
+        "startedAt": "2026-10-09T01:35:57.362Z",
+        "finishedAt": "2026-10-09T01:35:57.696Z",
+        "exitCode": 0,
+        "log": "docs/production-closure/master-reconciliation/evidence/bazi.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-book-w1f-wpr-successor-current.mjs",
+        "startedAt": "2026-10-09T01:21:27.902Z",
+        "finishedAt": "2026-10-09T01:21:28.015Z",
+        "exitCode": 1,
+        "log": "docs/production-closure/master-reconciliation/evidence/books.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-cloudflare-function-import-compat.mjs",
+        "startedAt": "2026-10-09T01:34:54.967Z",
+        "finishedAt": "2026-10-09T01:34:55.343Z",
+        "exitCode": 0,
+        "log": "docs/production-closure/master-reconciliation/evidence/compat.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-report-pro-composer-r1.mjs",
+        "startedAt": "2026-10-09T01:21:27.627Z",
+        "finishedAt": "2026-10-09T01:21:27.789Z",
+        "exitCode": 0,
+        "log": "docs/production-closure/master-reconciliation/evidence/composer.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-bazi-three-call-bilingual-usd1-contract.mjs",
+        "startedAt": "2026-10-09T01:36:44.514Z",
+        "finishedAt": "2026-10-09T01:36:44.881Z",
+        "exitCode": 0,
+        "log": "docs/production-closure/master-reconciliation/evidence/cost.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+        "startedAt": "2026-10-09T01:21:27.790Z",
+        "finishedAt": "2026-10-09T01:21:27.902Z",
+        "exitCode": 1,
+        "log": "docs/production-closure/master-reconciliation/evidence/cpr.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-report-customer-delivery.mjs",
+        "startedAt": "2026-10-09T01:35:57.698Z",
+        "finishedAt": "2026-10-09T01:35:57.867Z",
+        "exitCode": 0,
+        "log": "docs/production-closure/master-reconciliation/evidence/delivery.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-production-closure-master-native-subject.mjs",
+        "startedAt": "2026-10-09T01:26:43.650Z",
+        "finishedAt": "2026-10-09T01:26:44.418Z",
+        "exitCode": 0,
+        "log": "docs/production-closure/master-reconciliation/evidence/subject.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      },
+      {
+        "command": "node scripts/check-production-closure-master-worker-freeze.mjs",
+        "startedAt": "2026-10-09T01:21:28.016Z",
+        "finishedAt": "2026-10-09T01:21:28.147Z",
+        "exitCode": 1,
+        "log": "docs/production-closure/master-reconciliation/evidence/worker.txt",
+        "scope": "Local guarded test only; expected frozen failures retained",
+        "paidProviderCallsAllowed": false
+      }
+    ],
+    "batch05TechnicalEvidence": {
+      "checks": 24,
+      "deliverables": 10,
+      "humanAcceptance": "NOT_GRANTED"
+    }
   }
 }

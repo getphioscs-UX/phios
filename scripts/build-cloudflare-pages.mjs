@@ -1,4 +1,5 @@
 import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
+import {internalPublicationFile} from './lib/publication-boundary.mjs';
 ﻿import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -85,6 +86,7 @@ function normalize(rel) {
 
 function isPublishable(rel) {
   const file = normalize(rel);
+  if (internalPublicationFile(file)) return false;
 
   if(file.startsWith('content/production-closure/')) return false;
   if(file.startsWith('content/profile/successors/personal-evidence-r1/w11r6/')) return false;

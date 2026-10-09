@@ -1,0 +1,582 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "state": "READY_FOR_THREE_CALL_COST_CONTRACT_HUMAN_REVIEW",
+  "ownerInstruction": {
+    "path": "docs/production-closure/master-reconciliation/OWNER-PROVIDER-CORRECTION.txt",
+    "exists": true,
+    "sha256": "6be9aac93c0fb484a4788200d501745e165ccf8256383a342c64e5fef006e9a7"
+  },
+  "priorProposal": {
+    "source": {
+      "path": "content/production-closure/batch05/provider-execution-proposal.json",
+      "exists": true,
+      "sha256": "d873adc0d831a09a22bea3c3ad7dd54f76197107eb2c615bf36918e494740ff1"
+    },
+    "generator": {
+      "path": "scripts/build-production-closure-batch05.mjs",
+      "sha256": "6d9ef3173026713b0842d25f83d8ee004221a0494b7a5f5f62d563d67deb1250",
+      "references": [
+        {
+          "line": 41,
+          "text": "write('provider-execution-proposal',{...providerExecutionDisposition(),repositoryModel:{path:modelPath,sha256:sha(modelPath),modelId:model.modelId,recordedVerificationDate:model.verifiedAt,liveReverifiedThisBatch:false,pricing:model.pricing,maxOutputTokens:model.maxOutputTokens,contextTokens:model.contextTokens},proposedPerReportLimits:{authoringCalls:3,semanticReviewCalls:3,totalCalls:6,automaticPaidRetries:0,totalInputTokens:150000,totalGeneratedTokensIncludingReasoning:300000,maxInputPerCall:25000,maxGeneratedPerAuthoringCall:90000,maxGeneratedPerReviewCall:10000,hardUsdCap:7,allLimitsMustPass:true},costCalculation:'Stored short-tier noncached upper bound: 150000/1e6*4 + 300000/1e6*20 = USD6.60; proposed USD7 hard cap. Not a quote, measured cost, depth guarantee or authorization. Reject if actual existing capacity planner requires more tokens; never truncate to fit. Fresh model/pricing verification required before any separately authorized live experiment.',telemetry:['request ID and pseudonymous candidate ID','versioned source/prompt/schema/model digests','planned vs actual input/cached/output/reasoning tokens','actual cost and uncertain-usage status','no raw birth data in routine logs'],failure:'Checkpoint valid units; unknown usage blocks further spending; no automatic paid retry/recovery/delivery rescue. Any further call requires explicit owner authorization within revised cap.',fallback:'Retain blocked candidate and factual native evidence only, no generic substitute professional report.',reuse:'Existing budget planner, provider spend guard and checkpoint ledger; successor overrides/admission needed. Historical BDM retry defaults unchanged and not invoked.'});"
+        }
+      ]
+    },
+    "status": "REJECTED_EXPLICIT_OWNER_DIRECTIVE",
+    "classification": {
+      "doubleCountedChineseEnglish": false,
+      "obsoleteConfiguration": false,
+      "unrelatedHypotheticalCeiling": true,
+      "introducedThreeAdditionalSemanticReviewCalls": true,
+      "misclassifiedExtraReviewAsNormalDefaultBudget": true,
+      "conflictedWithOwnerNormalThreeCallUSD1": true
+    },
+    "reason": "Batch05 invented a default 3-authoring + 3-semantic-review call envelope and USD7 ceiling. It was not inherited from an authorized BaZi policy and did not double-count ZH/EN. Stored BDM capacity rates were used, but existing lane limits/repair scope were not adequately reconciled."
+  },
+  "canonicalNormalPolicy": {
+    "maxCalls": 3,
+    "maxCostUSD": 1,
+    "bilingualBothLocalesInSameCalls": true,
+    "chapterOrLanguageCannotResetBudget": true,
+    "liveAuthorized": false
+  },
+  "existingEvidence": [
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-contract.js",
+      "sha256": "2c205e7e9c332e933ecadb4e84c3d25c3e94f36f0774da5a26d2bfbddcc66be9",
+      "references": [
+        {
+          "line": 4,
+          "text": "export const LOCALES=Object.freeze(['zh-Hans','en']);"
+        },
+        {
+          "line": 9,
+          "text": "export const BATCHES=Object.freeze([['B01',['S02','S03','S04']],['B02',['S05','S06','S07']],['B03',['S08','S09','S10']]].map(([batchId,sectionIds])=>Object.freeze({batchId,sectionIds:Object.freeze(sectionIds)})));"
+        },
+        {
+          "line": 10,
+          "text": "export const POLICY=Object.freeze({normalCalls:3,maxStandardRecoveryCalls:2,deliveryRescue:true,paidDeliveryGuarantee:true,productionHumanReview:false,semanticVerifierCalls:0,semanticReviewCalls:0,editorialRewriteCalls:0,transportRetryLimit:2,backoffMs:[2000,10000,30000],normalCostTarget:null,standardRecoveryWarning:null,highCostDeliveryThreshold:null});"
+        },
+        {
+          "line": 12,
+          "text": "export const ALL_UNITS=Object.freeze(SECTIONS.flatMap(s=>LOCALES.map(locale=>({sectionId:s.sectionId,locale}))));"
+        },
+        {
+          "line": 14,
+          "text": " if(!Array.isArray(units)||!units.length||new Set(units.map(u=>unitKey(u.sectionId,u.locale))).size!==units.length||units.some(u=>!SECTIONS.some(s=>s.sectionId===u.sectionId)||!LOCALES.includes(u.locale)))throw Error('BDM_INVALID_UNIT_SCOPE');"
+        }
+      ]
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-runtime.js",
+      "sha256": "15c69b85bc30676483d00b54b8b93ef49ac7a6f7e761f06dc66083c2f0977a98",
+      "references": [
+        {
+          "line": 26,
+          "text": "export async function generateBaziDeepManuscript({mode='EXPERIMENT',env={},approval=null,order=null,pack,model,policy,history={},candidateId,experimentId=null,subjectId,store,invoke=invokeBaziDeepManuscript,fixture=false,controlledSequentialExperiment=false,ownerCostContract=false,repairAuthorization=null,now=()=>new Date().toISOString()}){"
+        },
+        {
+          "line": 39,
+          "text": "  async function attempt({batchId,units,callType,authority,semanticAnchor=null}){"
+        },
+        {
+          "line": 40,
+          "text": "   guardBaziPaidUnitRequest(cp,units,callType!=='NORMAL');"
+        },
+        {
+          "line": 41,
+          "text": "   const priorSummary=callType==='NORMAL'?buildPriorSectionSummary(pack,batchId):'';"
+        },
+        {
+          "line": 44,
+          "text": "   if(ownerCostContract)assertBaziOwnerCallBudget({checkpoint:cp,callType,projectedMaximumCostUSD:plan.configuredWorstCaseCost,units,repairAuthorization});"
+        },
+        {
+          "line": 48,
+          "text": "   const requestKey=await digest({candidateId,sequence:cp.ledger.length,units,callType});"
+        },
+        {
+          "line": 49,
+          "text": "   cp.inFlight={requestKey,units,callType,batchId,startedAt:now(),...(ownerCostContract?{estimatedMaximumCostUSD:plan.configuredWorstCaseCost}:{})};"
+        },
+        {
+          "line": 50,
+          "text": "   if(callType==='NORMAL')cp.batchesAttempted.push(batchId);"
+        },
+        {
+          "line": 51,
+          "text": "   if(callType==='STANDARD_RECOVERY')cp.standardRecoveryCallsUsed++;"
+        },
+        {
+          "line": 52,
+          "text": "   if(callType==='DELIVERY_RESCUE')cp.deliveryRescueCalls++;"
+        },
+        {
+          "line": 53,
+          "text": "   if(callType==='TRANSPORT_RETRY')cp.transportRetries++;"
+        },
+        {
+          "line": 56,
+          "text": "   const usage=response?.usage||error?.usage;const known=Number.isFinite(usage?.input_tokens)&&Number.isFinite(usage?.output_tokens);"
+        },
+        {
+          "line": 58,
+          "text": "   const cost=known?baziTokenCost(model,{inputTokens,cachedInputTokens,outputTokens}):null;"
+        },
+        {
+          "line": 59,
+          "text": "   const receipt={orderId:cp.orderId,experimentId:cp.experimentId,batchId,sectionIds:[...new Set(units.map(u=>u.sectionId))],units,callType,model:model.modelId,requestId:response?.requestId||error?.requestId||null,requestKey,promptDigest,schemaDigest,batchAuthorityDigest:await digest(authority),inputTokens,cachedInputTokens,outputTokens,reasoningTokens:usage?.output_tokens_details?.reasoning_tokens??null,completionStatus:response?.completionStatus||null,incompleteReason:response?.incompleteReason||null,technicalClassification:response?.finishReason==='max_output_tokens'?'TECHNICAL_TRUNCATION':null,visibleManuscriptTokenEstimate:response?.output?.sections?response.output.sections.reduce((n,s)=>n+estimateBaziTokens((s.zhHansManuscript||'')+(s.enManuscript||'')),0):null,visibleTokenEstimationMethod:'UTF8_BYTE_UPPER_BOUND',cost,usageStatus:known?'RECORDED':'UNKNOWN',finishReason:response?.finishReason||error?.code||error?.message||'TRANSPORT_FAILED',plannedCost:plan.estimatedCost,plannedOutputTokens:plan.plannedMaxOutputTokens,actualOutputTokens:outputTokens,outputUtilizationRatio:known?outputTokens/plan.plannedMaxOutputTokens:null,truncated:response?.finishReason==='max_output_tokens',checkpointedUnits:[],createdAt:now(),fixture};"
+        },
+        {
+          "line": 62,
+          "text": "   if(ownerCostContract){receipt.estimatedMaximumCostUSD=plan.configuredWorstCaseCost;if(callType!=='NORMAL')receipt.repairFailureId=repairAuthorization?.failure?.failureId;}"
+        },
+        {
+          "line": 65,
+          "text": "   if(ownerCostContract){cp.ownerCostLedger=projectBaziReportCostLedger(cp);if(cp.ownerCostLedger.hardLimitState==='NORMAL_HARD_LIMIT_EXCEEDED'){cp.state='BUDGET_BLOCKED';await persist();throw Object.assign(Error('BAZI_NORMAL_USD1_HARD_STOP'),{state:cp.state,ledger:cp.ownerCostLedger});}}"
+        },
+        {
+          "line": 75,
+          "text": "   else {const descriptor=cp.pendingTransport;delete cp.pendingTransport;const retried=await attempt({...descriptor,callType:'TRANSPORT_RETRY'});if(retried.pause)return {checkpoint:cp,state:cp.state,providerCalls:sessionCalls};}"
+        },
+        {
+          "line": 80,
+          "text": "  if(ownerCostContract){const ledger=projectBaziReportCostLedger(cp);if(ledger.usageUnknown)throw Object.assign(Error('BAZI_USAGE_RECONCILIATION_REQUIRED'),{state:'BUDGET_BLOCKED'});if(ledger.normalGenerationCostUSD+unattemptedNormalMaximumCost>1+1e-10)throw Object.assign(Error('BAZI_NORMAL_USD1_HARD_STOP'),{state:'BUDGET_BLOCKED',projectedMaximumCostUSD:unattemptedNormalMaximumCost,ledger});}"
+        },
+        {
+          "line": 102,
+          "text": "   cp.state='GENERATING_NORMAL';const result=await attempt({batchId:b.batchId,units,callType:'NORMAL',authority:projectBaziBatchAuthority(pack,b.batchId)});"
+        },
+        {
+          "line": 111,
+          "text": "   cp.state=recovery.callType==='DELIVERY_RESCUE'?'DELIVERY_RESCUE':'TARGETED_RECOVERY';const result=await attempt(recovery);"
+        },
+        {
+          "line": 114,
+          "text": "   if(recovery.callType==='DELIVERY_RESCUE')break;"
+        },
+        {
+          "line": 122,
+          "text": "export function generateBaziWithinOwnerThreeCallCostContract(args){return generateBaziDeepManuscript({...args,ownerCostContract:true});}"
+        }
+      ]
+    },
+    {
+      "path": "functions/personal-reading/visual-first/report-provider-budget.js",
+      "sha256": "fd0aa5160af9f46549813c9561974963135e7a4572e9fee81495099c51f1c054",
+      "references": [
+        {
+          "line": 4,
+          "text": "export const VFR_REPORT_PROVIDER_BUDGET_USD=1.00;"
+        },
+        {
+          "line": 5,
+          "text": "export const VFR_FIRST_CALL_PRECHECK_USD=.80;"
+        },
+        {
+          "line": 6,
+          "text": "export const VFR_REPAIR_FORBIDDEN_AT_USD=.90;"
+        },
+        {
+          "line": 11,
+          "text": " if(calls>=2)return {allowed:false,code:'PROVIDER_CALL_LIMIT_EXCEEDED',projected:projectedCost};"
+        },
+        {
+          "line": 12,
+          "text": " if(calls===0&&projectedCost>VFR_FIRST_CALL_PRECHECK_USD)return {allowed:false,code:'PROVIDER_BUDGET_PRECHECK_BLOCKED',projected:projectedCost};"
+        },
+        {
+          "line": 14,
+          "text": " if(calls===1&&(spent>=.88||!['MALFORMED_JSON','ONE_MISSING_SECTION','BOUNDED_FACT_REPAIR','TRUNCATION','TRANSPORT_FAILURE'].includes(reason)))return {allowed:false,code:'PROVIDER_REPAIR_DENIED',projected:projectedCost};"
+        },
+        {
+          "line": 15,
+          "text": " if(spent+projectedCost>VFR_REPORT_PROVIDER_BUDGET_USD)return {allowed:false,code:'PROVIDER_BUDGET_EXCEEDED',projected:projectedCost};"
+        },
+        {
+          "line": 16,
+          "text": " return {allowed:true,projected:projectedCost,budgetRemaining:VFR_REPORT_PROVIDER_BUDGET_USD-spent-projectedCost};"
+        },
+        {
+          "line": 30,
+          "text": " const allowed=admitVfrReportRequest({projectedCost:Number(maxCost),spent,calls:primary?0:1,reason:primary?null:'BOUNDED_FACT_REPAIR'}).allowed;"
+        },
+        {
+          "line": 39,
+          "text": "  budgetLimitUsd:VFR_REPORT_PROVIDER_BUDGET_USD,"
+        },
+        {
+          "line": 40,
+          "text": "  firstCallPrecheckCeilingUsd:VFR_FIRST_CALL_PRECHECK_USD,"
+        },
+        {
+          "line": 41,
+          "text": "  repairForbiddenAtOrAboveUsd:VFR_REPAIR_FORBIDDEN_AT_USD,"
+        },
+        {
+          "line": 43,
+          "text": "  status:allowed?'WITHIN_BUDGET':primary?'PROVIDER_BUDGET_PRECHECK_BLOCKED':'PROVIDER_REPAIR_BUDGET_BLOCKED'"
+        }
+      ]
+    },
+    {
+      "path": "config/reports/bazi-deep-manuscript-r2/policy.json",
+      "sha256": "54dcec66bd64172ffe36dd489710879f773bec31e0813d9b6f1efe590226c8c3",
+      "references": [
+        {
+          "line": 4,
+          "text": "  \"REPORT_PROVIDER_LIVE_ALLOWED\": false,"
+        },
+        {
+          "line": 7,
+          "text": "    \"normalCostTarget\": null,"
+        },
+        {
+          "line": 13,
+          "text": "  \"modelManifestPath\": \"content/reports/bazi/deep-manuscript/gpt-5.6-sol-capacity-admission-v1.json\","
+        }
+      ]
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-recovery.js",
+      "sha256": "219e7866e43332021df208fa600d3dbd9aead4099e66c13ca2fd888e348f4b36",
+      "references": [
+        {
+          "line": 8,
+          "text": " const callType=cp.standardRecoveryCallsUsed<POLICY.maxStandardRecoveryCalls?'STANDARD_RECOVERY':'DELIVERY_RESCUE';"
+        },
+        {
+          "line": 9,
+          "text": " if(mode==='EXPERIMENT'&&callType==='DELIVERY_RESCUE')return {approvalRequired:true,units,callType};"
+        },
+        {
+          "line": 14,
+          "text": "export function retryableBaziTransport(error){return [429,500,502,503,504].includes(error?.httpStatus)||['BDM_TRANSPORT_TIMEOUT','BDM_TRANSPORT_NETWORK'].includes(error?.code);}"
+        },
+        {
+          "line": 15,
+          "text": "export function costTelemetry(cost,tiers){return Object.fromEntries(Object.entries(tiers||{}).filter(([,v])=>Number.isFinite(v)&&v!==null).map(([k,v])=>[k,{threshold:v,exceeded:cost>v}]));}"
+        }
+      ]
+    },
+    {
+      "path": "scripts/run-zero-cost-regression.mjs",
+      "sha256": "5ff22ae9f31c569893c0cdb41ae576003ff5bdd423d9c6d508ee3d7cbec5783e",
+      "references": [
+        {
+          "line": 12,
+          "text": "const env={...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true',NODE_OPTIONS:nodeOptions};"
+        },
+        {
+          "line": 14,
+          "text": "for(const key of Object.keys(env))if(/^(OPENAI|ANTHROPIC|DEEPSEEK|GEMINI|GOOGLE_AI|OPENROUTER).*(API_KEY|ACCESS_TOKEN|SECRET)$/.test(key))delete env[key];"
+        }
+      ]
+    },
+    {
+      "path": "functions/report-delivery/bazi-accepted-copy-applicability.js",
+      "sha256": "d6818adf95755cf6a2f23e2d377188a6bf526f0ff28b4e9599bc5356eb66e7ac",
+      "references": [
+        {
+          "line": 30,
+          "text": " return {section,locale,status,candidates:rows,selected:null,completeCustomerCoverage:false,releaseState:'BLOCKED_ACCEPTED_COPY_COVERAGE',distinction:'INAPPLICABLE/PARTIAL refer to existing reference text; they do not mean the repository has no paragraphs.'};"
+        },
+        {
+          "line": 32,
+          "text": "export function selectBaziAcceptedCustomerSection(context){const result=resolveBaziAcceptedApplicability(context);throw Object.assign(Error('BLOCKED_ACCEPTED_COPY_COVERAGE'),{code:'BLOCKED_ACCEPTED_COPY_COVERAGE',coverage:result});}"
+        }
+      ]
+    },
+    {
+      "path": "functions/personal-reading/deep-manuscript/bazi-owner-cost-contract.js",
+      "sha256": "427ad99266109bcf84215c7b0e61e669b4a41ec13fa03a2c7e582a7cefed66ff",
+      "references": [
+        {
+          "line": 8,
+          "text": " const normalGenerationCalls=normal.length+(pending?.callType==='NORMAL'?1:0),repairCalls=repair.length+(pending&&pending.callType!=='NORMAL'?1:0);"
+        },
+        {
+          "line": 9,
+          "text": " return {normalGenerationCalls,normalGenerationCostUSD:normalUnknown?null:sum(normal),repairCalls,repairCostUSD:repairUnknown?null:sum(repair),totalProviderCalls:normalGenerationCalls+repairCalls,totalProviderCostUSD:usageUnknown?null:sum(rows),"
+        },
+        {
+          "line": 11,
+          "text": "  repairEligibility:'EXPLICIT_VERIFIER_FAILURE_AND_EXISTING_POLICY_AUTHORIZATION_REQUIRED',softLimitState:Object.keys(cp.costTelemetry||{}).length?cp.costTelemetry:'EXISTING_POLICY_THRESHOLDS_UNSET',"
+        },
+        {
+          "line": 12,
+          "text": "  hardLimitState:usageUnknown?'BLOCKED_UNKNOWN_INCURRED_COST':normalGenerationCalls>3||sum(normal)>1?'NORMAL_HARD_LIMIT_EXCEEDED':'WITHIN_NORMAL_LIMIT'};"
+        },
+        {
+          "line": 24,
+          "text": "  if(ledger.normalGenerationCalls>=3)deny('BAZI_FOURTH_NORMAL_CALL_DENIED');"
+        },
+        {
+          "line": 25,
+          "text": "  if(ledger.normalGenerationCostUSD+projectedMaximumCostUSD>1+1e-10)deny('BAZI_NORMAL_USD1_HARD_STOP');"
+        },
+        {
+          "line": 29,
+          "text": " if(!eligibility.eligible||repairAuthorization?.explicitlyAuthorized!==true||!repairAuthorization.policyReceipt||!Number.isFinite(repairAuthorization.authorizedMaximumCostUSD))deny('BAZI_EXISTING_REPAIR_AUTHORIZATION_REQUIRED');"
+        }
+      ]
+    }
+  ],
+  "actualModelConfiguration": {
+    "capacityManifest": {
+      "path": "content/reports/bazi/deep-manuscript/gpt-5.6-sol-capacity-admission-v1.json",
+      "exists": true,
+      "sha256": "50aa668ef7627a053d5a8478386d728169eae6b48c16c1dd7e84af9d7f6b6ef3"
+    },
+    "model": {
+      "version": "GPT-5.6-SOL-CAPACITY-ADMISSION-V1",
+      "modelId": "gpt-5.6-sol",
+      "contextTokens": 1050000,
+      "maxOutputTokens": 128000,
+      "responsesApiSupported": true,
+      "structuredOutputSupported": true,
+      "reasoningSupported": true,
+      "constraintsVerified": true,
+      "pricingVerified": true,
+      "verifiedAt": "2026-10-06",
+      "reviewAfter": "2026-11-06",
+      "verificationSource": "CURRENT_OFFICIAL_OPENAI_DOCUMENTATION",
+      "sources": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+          "retrievedAt": "2026-10-06",
+          "claims": [
+            "context/output limits",
+            "Responses",
+            "Structured Outputs",
+            "reasoning effort"
+          ]
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "retrievedAt": "2026-10-06",
+          "claims": [
+            "short and long-context pricing"
+          ]
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/reasoning",
+          "retrievedAt": "2026-10-06",
+          "claims": [
+            "generated output includes reasoning and formatting",
+            "reasoning billed as output",
+            "incomplete max_output_tokens"
+          ]
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/token-counting",
+          "retrievedAt": "2026-10-06",
+          "claims": [
+            "local tokenizer cannot count all envelope overhead"
+          ]
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+          "retrievedAt": "2026-10-06",
+          "claims": [
+            "simple JSON schema transport"
+          ]
+        }
+      ],
+      "pricing": {
+        "currency": "USD",
+        "perTokens": 1000000,
+        "longContextInputThresholdTokens": 272000,
+        "short": {
+          "input": 4,
+          "cachedInput": 0.4,
+          "output": 20
+        },
+        "long": {
+          "input": 8,
+          "cachedInput": 0.8,
+          "output": 30
+        },
+        "cacheWriteMultiplier": 1.25,
+        "scope": "Standard processing, no residency/FedRAMP uplift, no tools. Cached tokens assumed zero before telemetry.",
+        "promotionalPricingAvailableAtLeastThrough": "2026-11-21"
+      },
+      "outputAccounting": "Visible + reasoning + non-visible formatting share max_output_tokens; reasoning billed as output."
+    },
+    "legacyPAIPlanningDifferentRates": "gpt-5.6-sol PAI planning 2.5/0.25/15 versus BDM stored capacity 4/0.4/20 short tier; not silently unified and not live reverified."
+  },
+  "implementation": "Prospective Closure entrypoint uses same BDM engine/store/checkpoint/provider and projects existing ledger; legacy entrypoint behavior and recovery policy unchanged. No route/model activated. New-subject plan requires bounded entrypoint.",
+  "repairBoundary": "Genuine bound section/language/verifier failure plus explicit existing policy receipt/spend limit required; otherwise denied. No new repair budget invented; BDM null repair thresholds remain unresolved, VFR .88 reserve belongs to its existing lane and is not transplanted.",
+  "tests": {
+    "work": "BAZI-THREE-CALL-BILINGUAL-USD1-CONTRACT-RECONCILIATION",
+    "policy": {
+      "NORMAL_GENERATION_CALLS_MAX": 3,
+      "NORMAL_GENERATION_COST_USD_MAX": 1,
+      "BILINGUAL_ZH_EN_INCLUDED_IN_SAME_3_CALLS": true,
+      "REPAIR": "CONDITIONAL_ONLY",
+      "REPAIR_BUDGET": "EXISTING_AUTHORIZED_POLICY"
+    },
+    "groups": 14,
+    "results": [
+      {
+        "name": "Selected zh-Hans complete output shares three normal calls / USD1 ledger",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Selected en complete output shares three normal calls / USD1 ledger",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Selected zh-Hans+en complete output shares three normal calls / USD1 ledger",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Successful verification/complete healthy units produce zero repair calls",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Genuine verifier rejection is targeted eligibility only, no automatic invocation",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Missing Accepted Copy coverage is not repair eligible",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Fourth normal call denied",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Next normal request above USD1 denied despite soft limit settings",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Language switch reuses same immutable report/checkpoint; no reset",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Unknown billed timeout blocks retry before transport",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Duplicate rejected condition / unaffected section cannot repair",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Actual recorded cost and pending maximum reservation stay separate",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Actual runtime timeout cannot automatically issue a second attempt",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      },
+      {
+        "name": "Current full-depth repository pricing exceeds cap => zero-call budget block, no depth reduction",
+        "status": "PASS",
+        "providerCalls": 0,
+        "scope": "Controlled in-memory checkpoint and mock invoke only; not a customer report or paid execution."
+      }
+    ],
+    "bilingualProof": [
+      {
+        "selectedOutput": [
+          "zh-Hans"
+        ],
+        "mockTransportCalls": 3,
+        "bothLocalesIncludedInEachBatch": true,
+        "normalCostUSD": 0.00018,
+        "priceRecord": "EXPLICIT_SYNTHETIC_FIXTURE_ONLY_NOT_REPOSITORY_RATES",
+        "realProviderCalls": 0
+      },
+      {
+        "selectedOutput": [
+          "en"
+        ],
+        "mockTransportCalls": 3,
+        "bothLocalesIncludedInEachBatch": true,
+        "normalCostUSD": 0.00018,
+        "priceRecord": "EXPLICIT_SYNTHETIC_FIXTURE_ONLY_NOT_REPOSITORY_RATES",
+        "realProviderCalls": 0
+      },
+      {
+        "selectedOutput": [
+          "zh-Hans",
+          "en"
+        ],
+        "mockTransportCalls": 3,
+        "bothLocalesIncludedInEachBatch": true,
+        "normalCostUSD": 0.00018,
+        "priceRecord": "EXPLICIT_SYNTHETIC_FIXTURE_ONLY_NOT_REPOSITORY_RATES",
+        "realProviderCalls": 0
+      }
+    ],
+    "currentRepositoryBudgetPlan": [
+      {
+        "batch": "B01",
+        "plannedInputTokens": 12510,
+        "plannedMaxOutputTokens": 62585,
+        "expectedCostUSD": 1.09312,
+        "maximumConfiguredCostUSD": 1.30174
+      },
+      {
+        "batch": "B02",
+        "plannedInputTokens": 12762,
+        "plannedMaxOutputTokens": 60437,
+        "expectedCostUSD": 1.058328,
+        "maximumConfiguredCostUSD": 1.259788
+      },
+      {
+        "batch": "B03",
+        "plannedInputTokens": 13835,
+        "plannedMaxOutputTokens": 66405,
+        "expectedCostUSD": 1.11782,
+        "maximumConfiguredCostUSD": 1.38344
+      }
+    ],
+    "unresolvedCostConflict": {
+      "currentThreeBatchExpectedCostUSD": 3.2692680000000003,
+      "currentThreeBatchMaximumCostUSD": 3.9449680000000003,
+      "state": "BUDGET_BLOCKED_CURRENT_CONFIG_OVER_USD1",
+      "modelActivated": false,
+      "depthReduced": false
+    },
+    "actualProviderCalls": 0,
+    "actualIncurredCostUSD": 0,
+    "fixturePricesNotRealCosts": true,
+    "existingLegacyRepairPolicyUnmodified": true
+  },
+  "unresolved": [
+    "Current full-depth real-config normal cost preflight exceeds USD1; safe state BUDGET_BLOCKED, not a quality/budget feasibility PASS.",
+    "BDM legacy normalCostTarget/repair spending tiers null. Existing generic engine is not universally retrofitted; prospective Closure entrypoint required, any broader runtime cutover requires separate owner admission.",
+    "Independent BaZi semantic review not activated; needs professional human/admitted review mechanism without unauthorized extra provider calls."
+  ],
+  "actualProviderCalls": 0,
+  "master": "IN_PROGRESS",
+  "m1": "NOT_LIVE_VERIFIED"
+}

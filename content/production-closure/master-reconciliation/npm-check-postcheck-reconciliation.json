@@ -1,0 +1,107 @@
+{
+  "fullCheck": {
+    "command": "npm run check",
+    "exitCode": 1,
+    "startedAt": "2026-10-08T08:47:01.245Z",
+    "finishedAt": "2026-10-08T09:02:00.231Z",
+    "log": "docs/production-closure/evidence/npm-check.txt",
+    "paidProviderCallsAllowed": false
+  },
+  "postcheck": {
+    "command": "npm run postcheck",
+    "exitCode": 1,
+    "startedAt": "2026-10-08T09:03:44.246Z",
+    "finishedAt": "2026-10-08T09:15:13.884Z",
+    "log": "docs/production-closure/evidence/npm-postcheck.txt",
+    "paidProviderCallsAllowed": false
+  },
+  "currentFocusedCommands": [
+    {
+      "command": "node scripts/check-production-closure-master-bazi.mjs",
+      "startedAt": "2026-10-09T01:35:57.362Z",
+      "finishedAt": "2026-10-09T01:35:57.696Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/master-reconciliation/evidence/bazi.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-book-w1f-wpr-successor-current.mjs",
+      "startedAt": "2026-10-09T01:21:27.902Z",
+      "finishedAt": "2026-10-09T01:21:28.015Z",
+      "exitCode": 1,
+      "log": "docs/production-closure/master-reconciliation/evidence/books.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-cloudflare-function-import-compat.mjs",
+      "startedAt": "2026-10-09T01:34:54.967Z",
+      "finishedAt": "2026-10-09T01:34:55.343Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/master-reconciliation/evidence/compat.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-report-pro-composer-r1.mjs",
+      "startedAt": "2026-10-09T01:21:27.627Z",
+      "finishedAt": "2026-10-09T01:21:27.789Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/master-reconciliation/evidence/composer.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-bazi-three-call-bilingual-usd1-contract.mjs",
+      "startedAt": "2026-10-09T01:36:44.514Z",
+      "finishedAt": "2026-10-09T01:36:44.881Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/master-reconciliation/evidence/cost.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+      "startedAt": "2026-10-09T01:21:27.790Z",
+      "finishedAt": "2026-10-09T01:21:27.902Z",
+      "exitCode": 1,
+      "log": "docs/production-closure/master-reconciliation/evidence/cpr.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-report-customer-delivery.mjs",
+      "startedAt": "2026-10-09T01:35:57.698Z",
+      "finishedAt": "2026-10-09T01:35:57.867Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/master-reconciliation/evidence/delivery.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-production-closure-master-native-subject.mjs",
+      "startedAt": "2026-10-09T01:26:43.650Z",
+      "finishedAt": "2026-10-09T01:26:44.418Z",
+      "exitCode": 0,
+      "log": "docs/production-closure/master-reconciliation/evidence/subject.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    },
+    {
+      "command": "node scripts/check-production-closure-master-worker-freeze.mjs",
+      "startedAt": "2026-10-09T01:21:28.016Z",
+      "finishedAt": "2026-10-09T01:21:28.147Z",
+      "exitCode": 1,
+      "log": "docs/production-closure/master-reconciliation/evidence/worker.txt",
+      "scope": "Local guarded test only; expected frozen failures retained",
+      "paidProviderCallsAllowed": false
+    }
+  ],
+  "reuseScope": "Historical full runs remain FAIL exit1; original logs unmodified. Current strict Worker/Books/CPR failures freshly reproduced. No current full-suite PASS or unaffected-suite freshness claimed.",
+  "fullSuiteRerun": false,
+  "whyNoBroadRerun": "Mandatory unchanged frozen gates still fail; narrow failures and affected regressions tested now without duplicate report generation.",
+  "next": "After legitimate frozen-source resolution and new cost integration admission, run full npm check/postcheck and preserve actual new exits.",
+  "completeCurrentCheck": "BLOCKED_NOT_FULL_PASS",
+  "completeCurrentPostcheck": "BLOCKED_NOT_FULL_PASS"
+}

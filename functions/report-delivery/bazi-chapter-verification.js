@@ -34,6 +34,7 @@ export function buildBaziSubjectVerificationPlan(authority){
   chapters:BAZI_SECTION_REGISTRY.sections.map(s=>({sectionId:s.key,briefSectionKey:s.key,state:'BLOCKED_NO_ADMITTED_SUBJECT_CLAIM_IR_AND_PROSE'})),
   alternateSchema:BAZI_CHAPTER_SCHEMAS.deep,crosswalk:BAZI_CHAPTER_CROSSWALK,
   verifier:REPORT_SECTION_SEMANTIC_VERIFIER_VERSION,semanticReviewRequired:true,semanticReviewActivated:false,
+  providerExecutionContract:{entrypoint:'generateBaziWithinOwnerThreeCallCostContract',normalGenerationCallsMax:3,normalGenerationCostUSDMax:1,bilingualIncludedInSameCalls:true,repair:'CONDITIONAL_EXISTING_AUTHORIZED_POLICY_ONLY',activated:false},
   existingAcceptedManuscriptsUnmodified:true,providerCalls:0,releaseAllowed:false});
 }
 const SUBJECT_KEYS=['customerId','personId','personVersion','canonicalBirthInputFingerprint','calculationDigest','timingDigest','evidenceDigest','compositionRevision'];

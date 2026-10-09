@@ -390,6 +390,7 @@ for(const row of rows){const b=bookPublication[row.productId];if(!b)continue;
     title:`PHI OS Book ${roman[b[0]-1]} · ${b[1]}`,titleZh:`PHI OS 第${b[0]}册 · ${b[2]}`});
   if(row.productId==='COM-BOOK-CONFIGURATION')row.workId='reality-configuration';
   if(row.entitlementPolicy!==b[3])throw new Error('BOOK_ENTITLEMENT_IDENTITY_DRIFT');
+  if (b[0] === 8) Object.assign(row, {active:false, productionSaleAllowed:false, publicationStatus:'PUBLICATION_NOT_OFFERED', contentStatus:'PRIVATE_DOCTRINE_IN_DEVELOPMENT'});
 }
 export const STRIPE_PRODUCT_REGISTRY = Object.freeze(rows.map(row => Object.freeze(row)));
 export function commerceProduct(id) {

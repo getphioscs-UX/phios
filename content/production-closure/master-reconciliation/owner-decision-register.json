@@ -1,0 +1,233 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "register": [
+    {
+      "id": "BAZI_SHARED_WORKER_FROZEN_SUCCESSOR",
+      "status": "FAIL_OWNER_DECISION_PENDING",
+      "scope": "Exact Worker successor difference; preserve frozen baseline and require legitimate new scope receipt.",
+      "owner": "Worker/BaZi/ZWR shared owner",
+      "evidence": [
+        {
+          "path": "content/production-closure/batch04/worker-decision-sheet.json",
+          "exists": true,
+          "sha256": "330812a2e57c093b4ca749df245352270629088595455d9b8baa508100114d5d"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/check-worker.json",
+          "exists": true,
+          "sha256": "712c21813de648c2aa4f43094c1acc788caa372895bf155da018b7035ce0e265"
+        }
+      ],
+      "nextAction": "Review native renderer changes and approve legitimate successor scope or repair actual incompatibility; no digest rewrite.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "BOOKS_RESOURCE_FROZEN_SUCCESSOR",
+      "status": "FAIL_OWNER_DECISION_PENDING",
+      "scope": "BookI preview/six figures successor compatibility; HEAD200 is not acceptance.",
+      "owner": "Books/public-assets/WPR owners",
+      "evidence": [
+        {
+          "path": "content/production-closure/batch04/books-decision-sheet.json",
+          "exists": true,
+          "sha256": "5813b55ebd40a7f70ca3760c0cb82730a4f3f228927fbdc24295f23a81951bf6"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/check-books.json",
+          "exists": true,
+          "sha256": "c77628daf807100cfea5754fbaba68c8bd454592384135af78d18264ef1f6ad1"
+        }
+      ],
+      "nextAction": "Resolve exact resource-successor ownership and record new legitimate receipt, retain old digest.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "CPR_HISTORICAL_MISMATCH",
+      "status": "BASELINE_EXTERNAL_UNRESOLVED",
+      "scope": "public-assets hash differs from CPR baseline.",
+      "owner": "CPR/CAR/public-assets owners",
+      "evidence": [
+        {
+          "path": "content/production-closure/master-reconciliation/check-cpr.json",
+          "exists": true,
+          "sha256": "073de2f677c2e3311f2239ebb8b5ede0435073f591809b22ec809ab8763aed3c"
+        },
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/CPR-PDS-RECONCILIATION.json",
+          "exists": true,
+          "sha256": "fd022238a2d1413550788e89bbb1ba7f565136febf1eb833fdd90f56377af5f6"
+        }
+      ],
+      "nextAction": "Reconcile actual approved source successors; neither waive checker nor edit frozen hash.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "PDS_PRODUCTION_MIGRATION",
+      "status": "PRODUCTION_UNKNOWN",
+      "scope": "Local 0013 registered/applied in synthetic DB; historical unauthorized failure remains.",
+      "owner": "Production D1 operator",
+      "evidence": [
+        {
+          "path": "content/production-closure/migration-boundary-evidence.json",
+          "exists": true,
+          "sha256": "71886a9e6ef40e82e53f8ce906c6398a13ecf63d3d32f54b5cbb490a64779943"
+        }
+      ],
+      "nextAction": "Authorized read-only production registry/application/version query, no migration execution without separate approval.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "BOOK_VIII_HERO",
+      "status": "EXTERNAL_ASSET_404",
+      "scope": "Exact registered HERO-023 public object missing.",
+      "owner": "BookVIII asset owner",
+      "evidence": [
+        {
+          "path": "content/production-closure/batch03/asset-investigation.json",
+          "exists": true,
+          "sha256": "86d8e03fa8920dc164bfb04f6806661c69b4dc349cd75ead86e0818b4233b6a9"
+        }
+      ],
+      "nextAction": "Supply approved exact object/path and separate upload authorization; then actual decode/browser proof.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "STRIPE_REAL_QA",
+      "status": "NOT_RUN_NOT_AUTHORIZED",
+      "scope": "Real QA transaction/webhook/idempotency/entitlement evidence missing.",
+      "owner": "Owner and Stripe QA operator",
+      "evidence": [
+        {
+          "path": "content/production-closure/batch02/stripe-qa-readiness.json",
+          "exists": true,
+          "sha256": "e48f10e4d3d1cc51b83848c068dc0f037f6fe70128eb1bdec51115872ff6fca4"
+        }
+      ],
+      "nextAction": "Explicit QA transaction permission plus controlled bindings/webhook and approved accounts before actual payment.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "CONTROLLED_SECOND_ACCOUNT",
+      "status": "AUTHENTIC_ACCOUNTS_NOT_VERIFIED",
+      "scope": "Synthetic account isolation PASS cannot substitute authentic accounts.",
+      "owner": "Owner/account participants",
+      "evidence": [
+        {
+          "path": "content/production-closure/master-reconciliation/subject-results.json",
+          "exists": true,
+          "sha256": "8e05af66ee019836160f47b26eaaf45a91fefb163670edcfb043fdd77125f55d"
+        }
+      ],
+      "nextAction": "Two real consented controlled identities; authenticated access denial and cross-session material proof.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "BAZI_COMPLETE_SUBJECT_NARRATIVE",
+      "status": "AUTHORING_AND_COST_GATES_BLOCKED",
+      "scope": "No new complete subject-specific accepted copy; actual depth budget exceeds USD1.",
+      "owner": "BaZi source/editorial owner and explicit provider consent",
+      "evidence": [
+        {
+          "path": "content/production-closure/batch04/coverage-matrix.json",
+          "exists": true,
+          "sha256": "52c65cfb99298af52bd7f07a41a70701ca21f47b8f7c634bea30ecee2acbb98c"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/three-call-cost-results.json",
+          "exists": true,
+          "sha256": "f8430314c65996b8d7bf6cbaa886d79bccc6610d8d5ec1806af41ff75e95ad18"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/bazi-focused-results.json",
+          "exists": true,
+          "sha256": "3ce6fdd3fd0f44808658872efbffddaa613187e2e4750c6903a2ac415aa614aa"
+        }
+      ],
+      "nextAction": "Resolve admitted Claim IR and USD1 feasibility; separately authorize bounded authoring, then professional semantic/bilingual human acceptance and BZR renderer admission.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "LICENSED_FINANCIAL_REVIEW",
+      "status": "PROFESSIONAL_REVIEW_PENDING",
+      "scope": "16-section local financial candidate not professional service admission.",
+      "owner": "Licensed financial reviewer",
+      "evidence": [
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/BLOCKER-OWNERSHIP-REGISTER.json",
+          "exists": true,
+          "sha256": "92656892f63b95e46131834fc279a00838b01744aa59d2a100e92454d9139b8e"
+        }
+      ],
+      "nextAction": "Independent licensed review with scope/jurisdiction and native facts preserved.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "REAL_HOUSEHOLD_PILOTS",
+      "status": "REAL_EVIDENCE_PENDING",
+      "scope": "No real household validation substituted by fixture counts.",
+      "owner": "Consenting pilot participants",
+      "evidence": [
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/BLOCKER-OWNERSHIP-REGISTER.json",
+          "exists": true,
+          "sha256": "92656892f63b95e46131834fc279a00838b01744aa59d2a100e92454d9139b8e"
+        }
+      ],
+      "nextAction": "Conduct three authorized real household validations; protect data and retain contradictory observations.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "AUTHENTICATED_PRODUCTION_STORAGE",
+      "status": "NOT_ADMITTED",
+      "scope": "Local memory/private fixtures do not prove durable authenticated production ownership.",
+      "owner": "Production storage operator/owner",
+      "evidence": [
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/BLOCKER-OWNERSHIP-REGISTER.json",
+          "exists": true,
+          "sha256": "92656892f63b95e46131834fc279a00838b01744aa59d2a100e92454d9139b8e"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/subject-results.json",
+          "exists": true,
+          "sha256": "8e05af66ee019836160f47b26eaaf45a91fefb163670edcfb043fdd77125f55d"
+        }
+      ],
+      "nextAction": "Admit bindings/migrations/access policy and perform authorized owner/other-owner/version/consent lifecycle checks.",
+      "formalDecisionReceiptIssued": false
+    },
+    {
+      "id": "FINAL_DEPLOYMENT_CUTOVER",
+      "status": "NOT_AUTHORIZED",
+      "scope": "All original Master production conditions and final human decision required.",
+      "owner": "Owner",
+      "evidence": [
+        {
+          "path": "content/production-closure/remaining-blockers.json",
+          "exists": true,
+          "sha256": "b4d21f757616f5f1ec9d031fae4929cae7dd9b346b032cd525c2dea9dd640bad"
+        }
+      ],
+      "nextAction": "Complete mandatory gates, then obtain separate deployment/freeze/cutover authorization.",
+      "formalDecisionReceiptIssued": false
+    }
+  ],
+  "bookVI": {
+    "status": "ALREADY_OWNER_CONFIRMED_RM109",
+    "receipt": {
+      "path": "content/production-closure/batch04/BOOK-VI-OWNER-PRICE-CONFIRMATION.json",
+      "exists": true,
+      "sha256": "bce5850b178b2fa14dd70dbfc2ade545bc960ceb63a5afd7cb7e001592c88c0e"
+    },
+    "reopened": false
+  },
+  "batch05": {
+    "overallHumanAcceptance": "NOT_GRANTED",
+    "technicalEvidence": {
+      "checks": 24,
+      "deliverables": 10,
+      "status": "RECORDED_TECHNICAL_ONLY"
+    },
+    "sixCallUSD7Proposal": "REJECTED_BY_EXPLICIT_OWNER_SUPPLEMENT"
+  }
+}

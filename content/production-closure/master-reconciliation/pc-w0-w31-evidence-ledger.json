@@ -1,0 +1,1588 @@
+{
+  "workId": "PHI-OS-PRODUCTION-CLOSURE",
+  "identifiersIndependentFromPC_R1": true,
+  "stepCount": 32,
+  "originalMasterHash": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e",
+  "steps": [
+    {
+      "id": "PC-W0",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Baseline",
+      "originalCompletionRequirement": {
+        "title": "PRODUCTION BASELINE FREEZE",
+        "text": "# PC-W0｜PRODUCTION BASELINE FREEZE\n\n## Objective\n\n登记 Production Closure 起点，防止后续工作再次覆盖已完成系统。\n\n### Record\n\n```\nSTART_HEAD\nbranch\ntimestamp\nnode version\nnpm version\nCloudflare production URL\ncanonical domain\nR2 bindings\nD1 bindings\nStripe environment\nAuth environment\n```\n\n生成：\n\n```\ndocs/production-closure/BASELINE.md\ndocs/production-closure/STATUS.md\n```\n\nSTATUS 初始：\n\n```\nPHI OS PRODUCTION CLOSURE\nSTATE: IN_PROGRESS\n```\n\n同时记录当前所有 pre-existing dirty files。\n\n禁止 reset 用户现有修改。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Local baseline/environment and dirty-file preservation recorded; this is a source baseline, not production freeze.",
+      "implementationFiles": [
+        {
+          "path": "content/production-closure/baseline.json",
+          "exists": true,
+          "sha256": "165682351ba0a9576f1be9390218a75a4e9e6f683f2f6af4b633080d3651cea2"
+        },
+        {
+          "path": "docs/production-closure/BASELINE.md",
+          "exists": true,
+          "sha256": "2c44704cdd58dacc5e749a24aa42e2a4e7d087abcff3bbfe49824833a51d66a0"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/preservation-evidence.json",
+          "exists": true,
+          "sha256": "a0bd3330843f7e65f4cf48c607dc4e6892ac558b62a77d7cce6a882a0b683269"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Local records complete; remote Stripe/Auth/bindings partly UNKNOWN.",
+      "remainingTechnicalWork": "None for source inventory; remote environment verification remains separate.",
+      "externalOrOwnerDependency": "Owner-approved authenticated environment access.",
+      "exactNextAction": "Retain baseline and resolve only environment UNKNOWN entries before cutover.",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "priorState": "READY_FOR_HUMAN_REVIEW",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W1",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Authority inventory",
+      "originalCompletionRequirement": {
+        "title": "PRODUCTION AUTHORITY INVENTORY",
+        "text": "# PC-W1｜PRODUCTION AUTHORITY INVENTORY\n\n建立唯一 authority matrix。\n\n必须覆盖：\n\n```\nBOOKS\nARTICLES\nATLAS\nREPORTS\nCOMMERCE\nACCOUNT\nASK\nPERSON\nAUTH\nR2\nD1\nLOCALE\nFINANCIAL\nWILL\nACADEMY\nENTERPRISE\n```\n\n每一项必须明确：\n\n```\ncanonical owner\nsource path\nruntime owner\nrenderer owner\ncustomer route\nlocale owner\nevidence owner\nproduction status\n```\n\n输出：\n\n```\ncontent/production-closure/production-authority-registry.json\ndocs/production-closure/AUTHORITY-MATRIX.md\n```\n\n禁止一个 capability 同时存在多个未声明 owner。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "16 capability owners and declared public/private subscopes inventoried.",
+      "implementationFiles": [
+        {
+          "path": "content/production-closure/production-authority-registry.json",
+          "exists": true,
+          "sha256": "3d8e10af32aa981dfc1effde61dbd83079325fc7a0ba420784e6d968b9d344a8"
+        },
+        {
+          "path": "docs/production-closure/AUTHORITY-MATRIX.md",
+          "exists": true,
+          "sha256": "3d5db5e6469624abb5f3b4cfa362048b25610879ece35df9d367106d059bf117"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/production-authority-registry.json",
+          "exists": true,
+          "sha256": "3d8e10af32aa981dfc1effde61dbd83079325fc7a0ba420784e6d968b9d344a8"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Owner map exists; public HTTP is not product admission.",
+      "remainingTechnicalWork": "Resolve evidenced owner gaps, not create duplicate engines.",
+      "externalOrOwnerDependency": "Per-capability admission owners.",
+      "exactNextAction": "Use this ledger to close exact unresolved contracts per capability.",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "priorState": "READY_FOR_HUMAN_REVIEW",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W2",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Full check stabilization",
+      "originalCompletionRequirement": {
+        "title": "FULL CHECK STABILIZATION",
+        "text": "# PC-W2｜FULL CHECK STABILIZATION\n\n运行：\n\n```\nnpm install\nnpm run check\n```\n\n若失败：\n\n```\nFIX ROOT CAUSE\n```\n\n禁止：\n\n```\nskip\ndisable\ncomment out\nlower assertion\nconvert failure into warning\nhardcode PASS\n```\n\n所有修改必须保留原检查语义。\n\n完成标准：\n\n```\nnpm run check\nEXIT 0\n```\n\n生成：\n\n```\ndocs/production-closure/evidence/npm-check.txt\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Zero-cost npm wrappers and JSON-loader/import compatibility already implemented.",
+      "implementationFiles": [
+        {
+          "path": "scripts/run-zero-cost-regression.mjs",
+          "exists": true,
+          "sha256": "5ff22ae9f31c569893c0cdb41ae576003ff5bdd423d9c6d508ee3d7cbec5783e"
+        },
+        {
+          "path": "scripts/lib/pages-json-import-preload.mjs",
+          "exists": true,
+          "sha256": "91a7dc2964616dc2b4e7c96072f4fe004cb4064508e64911a411388adf4dc4aa"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "docs/production-closure/evidence/npm-check-result.json",
+          "exists": true,
+          "sha256": "ab54fe75ed97c0b443e8a5e2c05ffa18daaf460abd11ed65c3ea71d2669bfb14"
+        },
+        {
+          "path": "docs/production-closure/evidence/npm-postcheck-result.json",
+          "exists": true,
+          "sha256": "d812ee42e62b9a6cc247aa07896fb77791ba22cf8e07937e7a67ca7d8050e64f"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/check-worker.json",
+          "exists": true,
+          "sha256": "712c21813de648c2aa4f43094c1acc788caa372895bf155da018b7035ce0e265"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/check-books.json",
+          "exists": true,
+          "sha256": "c77628daf807100cfea5754fbaba68c8bd454592384135af78d18264ef1f6ad1"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/check-cpr.json",
+          "exists": true,
+          "sha256": "073de2f677c2e3311f2239ebb8b5ede0435073f591809b22ec809ab8763aed3c"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Current mandatory frozen assertions still FAIL; no complete current full-suite PASS.",
+      "remainingTechnicalWork": "Legitimate Worker/Books/CPR successor reconciliation; rerun full check after root causes legitimately resolved.",
+      "externalOrOwnerDependency": "Owner frozen-successor decisions.",
+      "exactNextAction": "Review exact frozen/current deltas without editing historical digests; then full check and postcheck.",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "priorState": "BLOCKED_BY_HUMAN_QA",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W3",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Route census",
+      "originalCompletionRequirement": {
+        "title": "PUBLIC WEB ROUTE CENSUS",
+        "text": "# PC-W3｜PUBLIC WEB ROUTE CENSUS\n\n建立 customer-visible route census。\n\n至少扫描：\n\n```\n/\nbooks\nBook I\nBook II\nBook III\nBook IV\nBook V\nBook VI\nBook VII\nBook VIII\narticles\natlas\nask\nmy reality\naccount\nprofessional\nreports\ncommerce\nfinancial\nacademy\nenterprise\nabout\nlegal\nprivacy\nAI disclosure\n```\n\n每个 route 检查：\n\n```\nHTTP\ncanonical URL\ntitle\nH1\nlocale\nnavigation\nfooter\nvisual\nCTA\nbroken links\nJS errors\nempty states\nmobile state\n```\n\n输出：\n\n```\ncontent/production-closure/web-route-census.json\ndocs/production-closure/WEB-ROUTE-CENSUS.html\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "124 anonymous production route observations recorded; Batch02 repaired 24 local failures.",
+      "implementationFiles": [
+        {
+          "path": "content/production-closure/route-plan.json",
+          "exists": true,
+          "sha256": "70267be8067243b06e7a511286464a5d25b1e00fd565078b9f9c87f10f502988"
+        },
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch02/failure-reconciliation.json",
+          "exists": true,
+          "sha256": "9ab14d093347e28a79dec1ab86a1e6f0419a7ca1d7b2d0e0100000fd74b47d1e"
+        },
+        {
+          "path": "content/production-closure/batch02/browser-results.json",
+          "exists": true,
+          "sha256": "8a1e3f6e00eff1f55e9e42bd7afb3f59fcc660ef800b8e71ca8b7e7a9261d6a9"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "88 PASS / 36 FAIL original observations retained; 8 unregistered probes are not promised routes.",
+      "remainingTechnicalWork": "No unresolved independently repairable code defect is established among the classified 36 after Batch02; repair deployment and BookVIII asset are pending.",
+      "externalOrOwnerDependency": "Deployment authorization / asset owner.",
+      "exactNextAction": "After authorized asset restoration and deployment, repeat only affected online route checks before final census.",
+      "state": "IN_PROGRESS",
+      "priorState": "READY_FOR_HUMAN_REVIEW",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W4",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Locale census",
+      "originalCompletionRequirement": {
+        "title": "LOCALE + CANONICAL IDENTITY CENSUS",
+        "text": "# PC-W4｜LOCALE + CANONICAL IDENTITY CENSUS\n\n重点验证：\n\n```\nen\nzh-Hans\n```\n\n禁止出现：\n\n```\nBook identity mismatch\nBook VI / VII swap\nEnglish text inside Chinese customer UI\nraw localization key\nundefined\nnull\nUNKNOWN\nMISSING\ntechnical enum\n```\n\n允许 Unknown 仅在 epistemic unknown component 内，由客户可理解的自然语言呈现。\n\n生成：\n\n```\ncontent/production-closure/locale-census.json\n```\n\n并建立：\n\n```\nnpm run check:production-locale\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Native taxonomy labels, language-specific output and Book identity checks exist.",
+      "implementationFiles": [
+        {
+          "path": "scripts/check-production-locale.mjs",
+          "exists": true,
+          "sha256": "fb9d3bb1d4c0dc319859605b12303a4970ef7eba4ab4b8dfd91d6b329c6af364"
+        },
+        {
+          "path": "assets/customer-ui/js/surfaces/knowledge.js",
+          "exists": true,
+          "sha256": "f57cc1a125c8054522733e8b91cd37cd465274798325477e530261b824006caf"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/locale-census.json",
+          "exists": true,
+          "sha256": "74ef9d010d4217f322af5b820222d99f08b8cedacb4ed2c774a1200651cfc7aa"
+        },
+        {
+          "path": "content/production-closure/book-locale-identity-evidence.json",
+          "exists": true,
+          "sha256": "63005028814b1140489a6144d514235d8a3d881d2142444e1cf0a6d337bffe75"
+        },
+        {
+          "path": "content/production-closure/batch02/failure-reconciliation.json",
+          "exists": true,
+          "sha256": "9ab14d093347e28a79dec1ab86a1e6f0419a7ca1d7b2d0e0100000fd74b47d1e"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Local targeted repairs PASS; corresponding online failures unchanged.",
+      "remainingTechnicalWork": "Do not repeat accepted bilingual report work; verify repaired online strings after authorized deployment.",
+      "externalOrOwnerDependency": "Deployment and final browser review.",
+      "exactNextAction": "Run affected locale routes and raw-enum scans on the admitted release.",
+      "state": "IN_PROGRESS",
+      "priorState": "READY_FOR_HUMAN_REVIEW",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W5",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Visual / R2 census",
+      "originalCompletionRequirement": {
+        "title": "VISUAL / R2 RUNTIME CENSUS",
+        "text": "# PC-W5｜VISUAL / R2 RUNTIME CENSUS\n\n不能再以：\n\n```\nregistry entry exists\n```\n\n作为图片存在证明。\n\n必须验证：\n\n```\nregistry\n→ resolver\n→ actual object\n→ HTTP response\n→ decode\n→ browser rendering\n```\n\n覆盖：\n\n```\nhomepage\nBooks I–VIII\nBook V Atlas\nBook VI Atlas\nreports\ncommerce\naccount\nfinancial\nacademy\n```\n\n必须寻找：\n\n```\nvisual temporarily unavailable\nbroken background\nmissing hero\ndouble hero\nincorrect crop\nlow contrast\nwrong locale visual\n```\n\n输出：\n\n```\ncontent/production-closure/visual-runtime-census.json\ndocs/production-closure/VISUAL-RUNTIME-REVIEW.html\n```\n\n所有实际缺失资源分为：\n\n```\nMISSING_ASSET\nBROKEN_BINDING\nBROKEN_RESOLVER\nBROKEN_RENDERER\nINTENTIONAL_NO_VISUAL\n```\n\n禁止全部统一写成 MISSING。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Visual registry/resolver/object/decode/browser census recorded.",
+      "implementationFiles": [
+        {
+          "path": "content/production-closure/visual-runtime-census.json",
+          "exists": true,
+          "sha256": "32e915535b993a02560385b2f7bc8bf25071ec9d03584cbead49a7ed69f3c883"
+        },
+        {
+          "path": "content/registry/public-assets.json",
+          "exists": true,
+          "sha256": "52f013d7f6f2b81c9204611df1b20937335133d2b17ddc10830d5e91dc062742"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch03/asset-investigation.json",
+          "exists": true,
+          "sha256": "86d8e03fa8920dc164bfb04f6806661c69b4dc349cd75ead86e0818b4233b6a9"
+        },
+        {
+          "path": "content/production-closure/batch03/asset-head-results.json",
+          "exists": true,
+          "sha256": "227a18b6dc5aa4b8a93211a54441097d2fffd47179705b8e4358e43dbc7347b3"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Exact BookVIII Hero remains historically HTTP404; seven BookI resource HEAD200 do not imply full resource acceptance.",
+      "remainingTechnicalWork": "Authoritative missing object/path restoration; legitimate resource successor.",
+      "externalOrOwnerDependency": "Asset owner / upload authorization / owner receipt.",
+      "exactNextAction": "Restore only authoritative BookVIII object, then decode/browser-check it; accept resource successor separately.",
+      "state": "BLOCKED_BY_EXTERNAL",
+      "priorState": "READY_FOR_HUMAN_REVIEW",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W6",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Commerce inventory",
+      "originalCompletionRequirement": {
+        "title": "COMMERCE CANONICAL INVENTORY",
+        "text": "# PC-W6｜COMMERCE CANONICAL INVENTORY\n\n冻结当前商品目录。\n\n必须核对：\n\n```\nCOM-REPORT-BAZI-FULL\nCOM-REPORT-ZIWEI-FULL\nCOM-REPORT-ASTROLOGY-FULL\nCOM-REPORT-NUMEROLOGY-FULL\nCOM-REPORT-PROFILE-FULL\nCOM-REPORT-ECR-FULL\nCOM-REPORT-HD-FULL\nCOM-REPORT-CROSS-FULL\n\nCOM-REPORT-BUNDLE-2\nCOM-REPORT-BUNDLE-3\nCOM-REPORT-BUNDLE-5PLUS\n\nCOM-REPORT-FINANCIAL-FULL\n\nWILL\n\nBOOK-1\nBOOK-2\nBOOK-3\nBOOK-4\nBOOK-5\nBOOK-6\nBOOK-7\nBOOK-8\n\nSUBSCRIPTION\n\nFINANCIAL-CONSULTATION\n```\n\nCanonical pricing：\n\n```\nsingle method reports     RM39\nHD                        RM129\nCross                     RM299\nBundle 2                  RM69\nBundle 3                  RM99\nBundle 5+                 RM159\nFinancial Report          RM159\nWill                      RM29\nSubscription              RM19/month\nBook 1                    RM89\nBook 2                    RM89\nBook 3                    RM89\nBook 4                    RM89\nBook 5                    RM109\nBook 6                    RM59\nBook 7                    RM59\nBook 8                    use canonical registered value\nConsultation              RM100/hour\n```\n\nLanguage surcharge：\n\n```\ndefault bilingual         +RM10\nBUNDLE-2                  +RM10\nBUNDLE-3                  +RM10\nBUNDLE-5PLUS              +RM20\n```\n\n建立：\n\n```\nnpm run check:commerce-canonical\n```\n\n必须比较：\n\n```\ncatalog\nUI\ncheckout payload\nStripe price reference\nentitlement mapping\nreceipt state\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Existing catalog, quote/surcharge, SKU/entitlement contracts retained. BookVI existing RM109 explicitly confirmed.",
+      "implementationFiles": [
+        {
+          "path": "functions/pws/commercial/stripe-product-registry.js",
+          "exists": true,
+          "sha256": "bbd03b052ddeb8271f6b035601ec20c753c6cdd79a8f77685306e8de6ec9c223"
+        },
+        {
+          "path": "functions/commerce/commerce-stripe-api.js",
+          "exists": true,
+          "sha256": "f91e149b4dec2630420d336fa52efefa8d2530c8b480fa9d992430b2477a152b"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/commerce-canonical-check.json",
+          "exists": true,
+          "sha256": "31e98da60b97b9cce521ee924cd02a52ec554860d57b1b4024ca22e482bccdf6"
+        },
+        {
+          "path": "content/production-closure/batch02/stripe-qa-readiness.json",
+          "exists": true,
+          "sha256": "e48f10e4d3d1cc51b83848c068dc0f037f6fe70128eb1bdec51115872ff6fca4"
+        },
+        {
+          "path": "content/production-closure/batch04/BOOK-VI-OWNER-PRICE-CONFIRMATION.json",
+          "exists": true,
+          "sha256": "bce5850b178b2fa14dd70dbfc2ade545bc960ceb63a5afd7cb7e001592c88c0e"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step.",
+        "inheritedScopedAcceptance": "BookVI existing RM109 only"
+      },
+      "productionVerificationState": "Local price/entitlement fixture checks; real checkout price verification not independently current.",
+      "remainingTechnicalWork": "No BookVI repricing; preserve archived Stripe references.",
+      "externalOrOwnerDependency": "Real QA permission/configuration.",
+      "exactNextAction": "Keep RM109; validate checkout payload/Stripe price in separately authorized QA.",
+      "state": "READY_FOR_HUMAN_REVIEW",
+      "priorState": "READY_FOR_HUMAN_REVIEW",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W7",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Stripe QA",
+      "originalCompletionRequirement": {
+        "title": "STRIPE QA E2E",
+        "text": "# PC-W7｜STRIPE QA E2E\n\n这一步不能用 mock 替代。\n\n必须跑真实 QA：\n\n```\ncustomer\n→ QA checkout\n→ Stripe\n→ webhook\n→ transaction\n→ entitlement\n→ account\n```\n\n验证：\n\n```\nsingle language price\nbilingual surcharge\nbundle surcharge\nproduct identity\npayment success\npayment cancel\nduplicate webhook\nidempotency\nentitlement creation\n```\n\n输出：\n\n```\ndocs/production-closure/stripe/QA-E2E.md\ncontent/production-closure/stripe-e2e-evidence.json\n```\n\n若需要 human purchase：\n\n```\nSTATE = BLOCKED_BY_HUMAN_QA\n```\n\n不能标为 PASS。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "17 local Stripe transaction/idempotency/refund/subscription groups exist.",
+      "implementationFiles": [
+        {
+          "path": "functions/pws/commercial/stripe-product-registry.js",
+          "exists": true,
+          "sha256": "bbd03b052ddeb8271f6b035601ec20c753c6cdd79a8f77685306e8de6ec9c223"
+        },
+        {
+          "path": "functions/commerce/commerce-stripe-api.js",
+          "exists": true,
+          "sha256": "f91e149b4dec2630420d336fa52efefa8d2530c8b480fa9d992430b2477a152b"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch02/stripe-qa-readiness.json",
+          "exists": true,
+          "sha256": "e48f10e4d3d1cc51b83848c068dc0f037f6fe70128eb1bdec51115872ff6fca4"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Actual Stripe purchase/webhook/provider E2E NOT_RUN.",
+      "remainingTechnicalWork": "No additional synthetic payment work needed as substitute for real QA.",
+      "externalOrOwnerDependency": "Explicit transaction permission, controlled QA bindings, two authentic accounts and active webhook.",
+      "exactNextAction": "Perform owner-authorized QA payment/cancel/webhook/replay and record provider IDs with safe redaction.",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "priorState": "BLOCKED_BY_HUMAN_QA",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W8",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Entitlement / account",
+      "originalCompletionRequirement": {
+        "title": "ENTITLEMENT / ACCOUNT CLOSURE",
+        "text": "# PC-W8｜ENTITLEMENT / ACCOUNT CLOSURE\n\n验证：\n\n```\nanonymous\nlogged in\npaid\nunpaid\nsubscription\nbook owner\nreport owner\nbundle owner\n```\n\n必须证明：\n\n```\nwrong customer cannot access report\nright customer can access report\npurchase survives refresh\npurchase survives new session\nreport is private\nversion history belongs to correct subject/customer\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Native encrypted person, entitlement checks, private reports, consent revocation and immutable blocked local history implemented.",
+      "implementationFiles": [
+        {
+          "path": "functions/account/canonical-person-store.js",
+          "exists": true,
+          "sha256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a"
+        },
+        {
+          "path": "functions/account/account-reports-api.js",
+          "exists": true,
+          "sha256": "666f2122e5dd4eb0bb62bb76659d491d1b4d70747e8c1af26d66db3282c1cd08"
+        },
+        {
+          "path": "functions/account/report-purchase-progress.js",
+          "exists": true,
+          "sha256": "7e9876a33710ca91c10ef3185b21deba660a9df585624853e0a9ac95c4e9f2a6"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch02/m1-results.json",
+          "exists": true,
+          "sha256": "450bdc4e689a77d57fd6e84e9e76ff27e28b620e0387f00a15f70b5a830c0fa0"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/subject-results.json",
+          "exists": true,
+          "sha256": "8e05af66ee019836160f47b26eaaf45a91fefb163670edcfb043fdd77125f55d"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "15 current native subject groups PASS; real cross-account released material and new-session proof missing.",
+      "remainingTechnicalWork": "Admit complete report/storage; history here is local memory only.",
+      "externalOrOwnerDependency": "Authenticated accounts / production persistence.",
+      "exactNextAction": "Use two consented real QA accounts to prove right-owner released access and wrong-owner denial after M1 prerequisites.",
+      "state": "IN_PROGRESS",
+      "priorState": "READY_FOR_HUMAN_REVIEW",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W9",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Report architecture freeze",
+      "originalCompletionRequirement": {
+        "title": "REPORT PRODUCTION ARCHITECTURE FREEZE",
+        "text": "# PC-W9｜REPORT PRODUCTION ARCHITECTURE FREEZE\n\n冻结完整报告 pipeline：\n\n```\nSubject\n→ Input\n→ Calculator\n→ Method Evidence\n→ Claim IR\n→ Publication IR\n→ Narrative Composer\n→ Semantic Verifier\n→ Editorial Verifier\n→ Visual Composer\n→ Snapshot\n→ Release\n→ Customer Renderer\n```\n\n必须明确：\n\n```\nT1\nT2\nT3\n```\n\n### Required semantics\n\n```\nT1 = deterministic raw/canonical computation\nT2 = rich deterministic governed narrative\nT3 = governed model-assisted natural composition\n```\n\n禁止：\n\n```\nT3 inventing missing evidence\nT3 overriding calculator\nT3 overriding canonical semantics\nT3 converting unknown into certainty\n```\n\n建立统一 Runtime Tier Contract。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Existing source/Claim IR/composer/verifier/publication/snapshot tiers reused; explicit schema and cost guard integrated.",
+      "implementationFiles": [
+        {
+          "path": "content/personal-reading/narrative/successors/report-narrative-t2-r1/runtime-tier-contract-v1.json",
+          "exists": true,
+          "sha256": "431a9b6a60a225c4fa278c1fcdbf768124efae3ef9b5c61f09d190b55059e161"
+        },
+        {
+          "path": "functions/personal-reading/narrative/report-pro-composer-r1.js",
+          "exists": true,
+          "sha256": "6e44bc4c1a456e7e2ab64a93a89935d278e7a5d830e9f02e0f3f3da55d426178"
+        },
+        {
+          "path": "functions/report-delivery/bazi-chapter-verification.js",
+          "exists": true,
+          "sha256": "8d84deba7d2ef89b1a0a7b55d1308dcbe04da1de189115f13b32dc8aefb98ec0"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/master-reconciliation/bazi-focused-results.json",
+          "exists": true,
+          "sha256": "3ce6fdd3fd0f44808658872efbffddaa613187e2e4750c6903a2ac415aa614aa"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/three-call-cost-results.json",
+          "exists": true,
+          "sha256": "f8430314c65996b8d7bf6cbaa886d79bccc6610d8d5ec1806af41ff75e95ad18"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "No production freeze; legacy T2 providerRequired=true differs from original Master deterministic-T2 wording.",
+      "remainingTechnicalWork": "Declare tier compatibility and BDM/legacy schema boundaries; do not rewrite accepted tier receipts.",
+      "externalOrOwnerDependency": "Architecture owner confirmation and production freeze authorization.",
+      "exactNextAction": "Review semantic crosswalk/tier discrepancy; prospective Closure authoring must use enforced three-call/USD1 entrypoint.",
+      "state": "IN_PROGRESS",
+      "priorState": "BLOCKED_BY_HUMAN_QA",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W10",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "BaZi admission",
+      "originalCompletionRequirement": {
+        "title": "BAZI PRODUCTION ADMISSION",
+        "text": "# PC-W10｜BAZI PRODUCTION ADMISSION\n\nBaZi 作为第一个 production reference method。\n\n必须完成：\n\n```\nS01 Overview\nS02 Personality\nS03 Life Structure\nS04 Career\nS05 Wealth\nS06 Relationship\nS07 Health\nS08 Timing\nS09 Guidance\nS10 Appendix\n```\n\n每 section 强制 narrative structure：\n\n```\nSTRUCTURE\n→ MEANING\n→ CONDITIONS\n→ COUNTERWEIGHTS\n→ OBSERVABLE EXPRESSION\n→ TIMING RELEVANCE\n→ NAVIGATION\n```\n\n必须解决：\n\n```\ntemplate repetition\ngeneric advice\nabstract rule language\ninsufficient lived scenarios\ncareer/wealth shallowness\nsame Ten-God phrasing across subjects\n```\n\n保留现有：\n\n```\n10 Section Master visuals\ncover structure\nfirst six fixed/static pages where canonical\ndynamic later pages\n```\n\n不得恢复失败的 T3 evidence architecture。\n\n完成以下 gate：\n\n```\nnpm run check:bazi-t3\nnpm run check:bazi-visual-commerce\nnpm run check:bazi-section-publication\nnpm run build:bazi-full-report-review\nnpm run build:bazi-full-report-visual-review\n```\n\n最终要求：\n\n```\nZH HUMAN REVIEW = ACCEPT\nEN HUMAN REVIEW = ACCEPT\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Native BaZi subject calculation/blocked snapshot, original ten Master chapters, successor cover/mobile and native semantic verifier adapter implemented. New Personal Reality customer publication requests cannot inherit fixed legacy reference prose.",
+      "implementationFiles": [
+        {
+          "path": "functions/report-delivery/bazi-subject-release-candidate.js",
+          "exists": true,
+          "sha256": "2efde69436664cae979dcd01392291ea23b60de321deb32ed31da9ebe9c18406"
+        },
+        {
+          "path": "functions/report-delivery/bazi-chapter-verification.js",
+          "exists": true,
+          "sha256": "8d84deba7d2ef89b1a0a7b55d1308dcbe04da1de189115f13b32dc8aefb98ec0"
+        },
+        {
+          "path": "functions/personal-reading/bazi-customer-publication.js",
+          "exists": true,
+          "sha256": "f0ad47cabb55caa5fb7523672686f5b5e3741462a7e4e00200f6b452b7511f82"
+        },
+        {
+          "path": "functions/personal-reading/deep-manuscript/bazi-deep-manuscript-runtime.js",
+          "exists": true,
+          "sha256": "15c69b85bc30676483d00b54b8b93ef49ac7a6f7e761f06dc66083c2f0977a98"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/master-reconciliation/bazi-focused-results.json",
+          "exists": true,
+          "sha256": "3ce6fdd3fd0f44808658872efbffddaa613187e2e4750c6903a2ac415aa614aa"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/subject-results.json",
+          "exists": true,
+          "sha256": "8e05af66ee019836160f47b26eaaf45a91fefb163670edcfb043fdd77125f55d"
+        },
+        {
+          "path": "content/production-closure/batch04/coverage-matrix.json",
+          "exists": true,
+          "sha256": "52c65cfb99298af52bd7f07a41a70701ca21f47b8f7c634bea30ecee2acbb98c"
+        },
+        {
+          "path": "content/production-closure/batch03/pdf-verification.json",
+          "exists": true,
+          "sha256": "28876712571e025a596bcfb5cd1211d1a9de1246264905b9a3f002dd8f00b441"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "No complete admitted new subject narrative; no BZR renderer admission; current full-depth cost >USD1 and is blocked.",
+      "remainingTechnicalWork": "Admitted subject-specific Claim IR and full prose; independent semantic review; bilingual editorial owner review; BZR adapter.",
+      "externalOrOwnerDependency": "Separate authoring/provider/privacy authorization and budget feasibility; Worker decision.",
+      "exactNextAction": "Resolve authority/cost feasibility without lowering depth; only then authorize bounded writing and exact-subject ZH/EN review.",
+      "state": "IN_PROGRESS",
+      "priorState": "IN_PROGRESS",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W11",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "ECR admission",
+      "originalCompletionRequirement": {
+        "title": "ECR SEMANTIC PRODUCTION ADMISSION",
+        "text": "# PC-W11｜ECR SEMANTIC PRODUCTION ADMISSION\n\n继续完成：\n\n```\nECR-V4.1A-R7\n```\n\n要求：\n\n```\n12 Driver canonical semantic records\n2 Layer semantic roles\nSemantic Tag Canon\nTag Composition Rules\nRuntime Owner Rules\nPersonality semantic authority\nDesign semantic authority\n```\n\n固定：\n\n```\nD11 = Earth Driver\nChiron Driver = REMOVED\nRecovery Driver = REMOVED\n```\n\nRecovery authority：\n\n```\nBook IV Part 8 Maintenance Runtime\n```\n\nHD / GK integration contract：\n\n```\nouter = ECR H64\ninner = HD Gate Wheel\nreal ecliptic longitude\naligned sector boundaries\nHD 88° design retained\nupper motion\nlower motion\nlower trigram uses HD arrangement\n```\n\nGene Keys 只作为解释层来源。\n\n禁止：\n\n```\nGene Keys branding-driven customer layout\nGene Keys external profile schema\nunlicensed copied prose\n```\n\nECR 最终必须生成真实客户报告并完成 bilingual human review。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "ECR native Driver/Layer/Tag authority and report runtimes exist; current full-report admission explicitly customerPublishable=false.",
+      "implementationFiles": [
+        {
+          "path": "functions/ecr-full-report/ecr-full-report-admission.js",
+          "exists": true,
+          "sha256": "40bebd7d64cff43ca7431a6b03318ee32e0e7b5a7f3bc12b29d28ec14239ec05"
+        },
+        {
+          "path": "functions/ecr-full-report/ecr-human-runtime-report-v4-1.js",
+          "exists": true,
+          "sha256": "be7b855d98c32348819a97206204d409e9d9e801deeebea006c238a6aa60b6a2"
+        },
+        {
+          "path": "functions/ecr-full-report/ecr-customer-full-report.js",
+          "exists": true,
+          "sha256": "411f89c5afee4f12860aeec10573f3c790eea7eeabb8830fec9994f1b7553791"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "docs/production-closure/batch02/evidence/ecr-result.json",
+          "exists": true,
+          "sha256": "dd2832da7500c811b65708ab361ba2f616cee5dde66c04b9a0d5a2d62b6ae1ca"
+        },
+        {
+          "path": "functions/ecr-full-report/ecr-full-report-admission.js",
+          "exists": true,
+          "sha256": "40bebd7d64cff43ca7431a6b03318ee32e0e7b5a7f3bc12b29d28ec14239ec05"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Historical ECR full-report predecessor is REJECTED; newer complete subject publication not admitted by these records.",
+      "remainingTechnicalWork": "Identify exact latest ECR-V4.1A-R7 semantic ownership and governed report coverage; do not duplicate Gate/Driver work.",
+      "externalOrOwnerDependency": "Separate bilingual ECR customer report owner admission.",
+      "exactNextAction": "Audit existing semantic successor against Master Driver/Layer requirements, then scoped missing coverage only.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W12",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "HD admission",
+      "originalCompletionRequirement": {
+        "title": "HUMAN DESIGN PRODUCTION ADMISSION",
+        "text": "# PC-W12｜HUMAN DESIGN PRODUCTION ADMISSION\n\n验证：\n\n```\nbirth input\nname\nbirth date\nbirth time\nlocation\ncover binding\nbodygraph calculation\nPersonality\nDesign\nType\nAuthority\nProfile\nDefinition\nChannels\nGates\nvariables where supported\n```\n\nCustomer report cover 必须保留：\n\n```\nCustomer Name\nBirth Date\nBirth Time\n```\n\n完成：\n\n```\ncalculator → claim IR → narrative → visual → report\n```\n\n不能只有静态 cover。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "HD-R3 professional runtime and customer renderer already admitted for customer-supplied external context.",
+      "implementationFiles": [
+        {
+          "path": "functions/external-profile/human-design-r3-professional-runtime.js",
+          "exists": true,
+          "sha256": "f6260aadb6f842b478f73c6e729945a1b7268ea25a6eb7416caaefa4fb9ebb7c"
+        },
+        {
+          "path": "functions/external-profile/human-design-r3-production-authority.js",
+          "exists": true,
+          "sha256": "ebba903d2446b888c05090712eff4d3695ef701be7c7a13d56f665c8a33c6980"
+        },
+        {
+          "path": "functions/personal-reading/hd-visual-report-projection.js",
+          "exists": true,
+          "sha256": "be5c114c93eb1c8682e0ccb5da6313e0e9f98eb05e2f92933e63c40caa6ba9be"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/review/HD-PRO-R3-W22-human-admission-v1.json",
+          "exists": true,
+          "sha256": "584927d4240b222ff3350a1e2016f0e43b60d75d8ef578e7f75f1590295a37b9"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step.",
+        "inheritedScopedAcceptance": "HD-R3 24/24 external-context customer reading only"
+      },
+      "productionVerificationState": "Historical 24/24 human acceptance; PHI-owned HD calculation/public HDR/automatic variables are explicitly NOT authorized.",
+      "remainingTechnicalWork": "Reconcile Master calculator demand with existing external-source authority; cover/account delivery not proven in current paid loop.",
+      "externalOrOwnerDependency": "Authority owner / authentic customer source and account QA.",
+      "exactNextAction": "Reuse HD-R3; verify subject-bound cover/delivery under its admitted external-source scope; do not invent native calculation authority.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W13",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Cross admission",
+      "originalCompletionRequirement": {
+        "title": "CROSS PRODUCTION ADMISSION",
+        "text": "# PC-W13｜CROSS PRODUCTION ADMISSION\n\nCross 必须证明真正组合多个 method，而不是 section 拼贴。\n\n建立：\n\n```\nsource method\nshared subject\nagreement\ntension\ncounterweight\nreinforcement\nuncertainty\nnavigation implication\n```\n\n必须检测跨方法 contradiction。\n\n禁止：\n\n```\nmethod A says X\nmethod B says Y\n```\n\n然后不解释关系。\n\nCover 同样绑定：\n\n```\nname\nbirth date\nbirth time\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Cross already combines admitted sources with semantic matrix, agreement/tension/counterweight and scoped R2 production admission.",
+      "implementationFiles": [
+        {
+          "path": "functions/runtime-reading/cross-reading-production.js",
+          "exists": true,
+          "sha256": "9b310aeb0338c01130b8187caabe8e900b6e3d74242e32799d1dd9b88f9cee57"
+        },
+        {
+          "path": "functions/runtime-reading/semantic-evidence-matrix.js",
+          "exists": true,
+          "sha256": "75aa7c752d5dd14b2f92acae52f000c4b5a9d8c87fe1fc0a8ca523f269f9b683"
+        },
+        {
+          "path": "functions/personal-reading/cross-visual-report-projection.js",
+          "exists": true,
+          "sha256": "4eecbb369e02fea4120a7046ef46e876d946e4a0c855c92a635fe6dbdc954ec4"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w25-human-admission-v1.json",
+          "exists": true,
+          "sha256": "3c73f6a1a394ee57bd1b63e81dd233bbc4b07d3d8bff37fbeaa527c640974010"
+        },
+        {
+          "path": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w26-final-production-admission-v1.json",
+          "exists": true,
+          "sha256": "7be66a77d1b7080e61330ccad9f1945ab9f77c81dae83ffcdc8aae3834d276d7"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step.",
+        "inheritedScopedAcceptance": "Cross R2 36/36, stated source and integration limits"
+      },
+      "productionVerificationState": "64/64 machine and 36/36 historical human admission recorded; current-reality integration remains false and paid-loop QA unverified.",
+      "remainingTechnicalWork": "No reconstruction; prove current subject/cover/private paid delivery boundaries.",
+      "externalOrOwnerDependency": "Controlled account/entitlement QA.",
+      "exactNextAction": "Verify exact admitted Cross sources and contradiction handling in owner-bound delivery; retain current reality boundary.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W14",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Remaining reports",
+      "originalCompletionRequirement": {
+        "title": "REMAINING METHOD REPORTS",
+        "text": "# PC-W14｜REMAINING METHOD REPORTS\n\n按统一 Production Admission Contract 完成：\n\n```\nZi Wei\nAstrology\nNumerology\nProfile\n```\n\n每一个 method 只有同时满足以下条件才可 `PRODUCTION_ADMITTED`：\n\n```\ncalculator verified\ncanonical semantic source\nbilingual narrative\nvisual system\ncustomer renderer\nsnapshot\nrelease\nentitlement\nhuman review\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "ZiWei native accepted production owners; Astrology/Numerology pipelines; W11R6 and PC-R1 supplementary Profile dossier retained.",
+      "implementationFiles": [
+        {
+          "path": "functions/report-delivery/ziwei-professional-synthesis-r5-generation.js",
+          "exists": true,
+          "sha256": "52535cf6d0540809d8fd090f9f3ba4c4ec64f9db2319706c215949fdf8803f8c"
+        },
+        {
+          "path": "functions/ast-full-production/ast-method-scoped-production-admission-runtime.js",
+          "exists": true,
+          "sha256": "ce5b9065f20b9e07dbf8ac8e8802bc83ab857ca8d4baa31d25d89532fb487d71"
+        },
+        {
+          "path": "functions/customer-projection/numerology-customer-reading-envelope-v1.js",
+          "exists": true,
+          "sha256": "48e0b9e7d9505bdd402e55a8f65dd8d950f1fc09fdb1a82186de682709c67029"
+        },
+        {
+          "path": "functions/profile/profile-person-evidence-adapter.js",
+          "exists": true,
+          "sha256": "c47f98a2055106986dc9475aad2b11dcf56211f677c664b5224c1509e4cd6be6"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/profile/successors/personal-evidence-r1/w11r6/targeted-r1/owner-acceptance/ACCEPTANCE-RECEIPT.json",
+          "exists": true,
+          "sha256": "cb9b301cd164c4deeb053dcb9b8ca4886824b713ec24bd3e4a4e46de3b80bcd5"
+        },
+        {
+          "path": "content/product-convergence-r1/audits/pc-w11-closure/OWNER-ACCEPTANCE-RECEIPT.json",
+          "exists": true,
+          "sha256": "47a65f8e094df07471b1733372d4233b8992d0b669f12d787495615ac950e4a3"
+        },
+        {
+          "path": "content/product-convergence-r1/acceptance/pc-r1-targeted-owner-decision-registry-v1.json",
+          "exists": true,
+          "sha256": "0b2cf5f6a14b2c2d73d626711f411086eb7699429183aee43cba58299d3836f4"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step.",
+        "inheritedScopedAcceptance": "W11R6 publication / Profile demotion / Personal-Relationship targeted narrative repair only"
+      },
+      "productionVerificationState": "Scope-specific historical admissions exist; not all four current paid customer flows independently verified. Profile is supplementary optional evidence, not top-level Method.",
+      "remainingTechnicalWork": "Per-method production admission matrix/subject delivery proof; do not reopen accepted PFIG/publication.",
+      "externalOrOwnerDependency": "Per-method owner receipts and real account access.",
+      "exactNextAction": "Verify each existing renderer/release/entitlement pipeline under its exact authority; keep Profile demotion.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W15",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Report delivery",
+      "originalCompletionRequirement": {
+        "title": "REPORT CUSTOMER DELIVERY",
+        "text": "# PC-W15｜REPORT CUSTOMER DELIVERY\n\n`/professional/reports/` 不得再长期停留：\n\n```\nNo released report is loaded.\n```\n\n必须实现 customer 状态：\n\n```\nNO_PURCHASE\nPURCHASE_PENDING\nINPUT_REQUIRED\nGENERATING\nREADY\nFAILED_RETRYABLE\nFAILED_REQUIRES_SUPPORT\nRELEASED\nSUPERSEDED\n```\n\nReleased report 必须显示：\n\n```\ntitle\nsubject\nmethod\nlanguage\ngeneration date\nversion\nsources\ninterpretation boundary\nconfidentiality\ndownload/view\nversion history\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Native account reports API, delivery states, readonly purchase progress and local blocked BaZi snapshots implemented.",
+      "implementationFiles": [
+        {
+          "path": "functions/account/canonical-person-store.js",
+          "exists": true,
+          "sha256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a"
+        },
+        {
+          "path": "functions/account/account-reports-api.js",
+          "exists": true,
+          "sha256": "666f2122e5dd4eb0bb62bb76659d491d1b4d70747e8c1af26d66db3282c1cd08"
+        },
+        {
+          "path": "functions/account/report-purchase-progress.js",
+          "exists": true,
+          "sha256": "7e9876a33710ca91c10ef3185b21deba660a9df585624853e0a9ac95c4e9f2a6"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch02/m1-results.json",
+          "exists": true,
+          "sha256": "450bdc4e689a77d57fd6e84e9e76ff27e28b620e0387f00a15f70b5a830c0fa0"
+        },
+        {
+          "path": "content/production-closure/master-reconciliation/subject-results.json",
+          "exists": true,
+          "sha256": "8e05af66ee019836160f47b26eaaf45a91fefb163670edcfb043fdd77125f55d"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Payment != released report; BaZi snapshot.report/publicationIR null and downloads denied.",
+      "remainingTechnicalWork": "Complete verified report and admitted BZR renderer/storage required; do not mask no-release state.",
+      "externalOrOwnerDependency": "Authoring/admission/storage and QA purchase.",
+      "exactNextAction": "Integrate accepted immutable candidate into existing account material owner only after required gates.",
+      "state": "IN_PROGRESS",
+      "priorState": "IN_PROGRESS",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W16",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Book V Atlas",
+      "originalCompletionRequirement": {
+        "title": "BOOK V ATLAS FINAL PRODUCTIZATION",
+        "text": "# PC-W16｜BOOK V ATLAS FINAL PRODUCTIZATION\n\n不要新增大量新资料。\n\n将现有 Book V 内容真正连起来：\n\n```\nCase\n→ Civilization\n→ Period\n→ Conditions\n→ Runtime\n→ Comparison\n→ Timeline\n→ Trajectory\n→ Visual\n→ Article\n→ Ask\n```\n\n### Required layers\n\n```\nL1\nL2\nL3\nL4\nL5\nL6\n```\n\n重点修复：\n\n```\ngeneric runtime text\nduplicated statements\nmissing case-specific semantics\nL2 weak information design\nL6 weak trajectory expression\nunused visual assets\nvisual-template dependency\n```\n\n如果某 template base 妨碍动态内容：\n\n```\nREMOVE TEMPLATE BASE\n```\n\n不要为了保留背景图片牺牲信息表达。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "BookV Atlas case/runtime/timeline/trajectory renderer and accepted articles already exist.",
+      "implementationFiles": [
+        {
+          "path": "assets/js/pages/civilization-atlas.js",
+          "exists": true,
+          "sha256": "33165c38f6af9be511e3dab543cb1bb933728a1926f3dd7380b60e75bd025764"
+        },
+        {
+          "path": "content/civilization-atlas/cases/civilization-case-registry-v1.json",
+          "exists": true,
+          "sha256": "6291f76099bfa3f0747c2c29ced4f491045d221e64730ae710031d7f821c3d1a"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        },
+        {
+          "path": "docs/production-closure/evidence/npm-check.txt",
+          "exists": true,
+          "sha256": "06c74fbb7fa29a1a342b76aec62077b7ede6024674f91ec2a600673fb6077cf8"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Anonymous route PASS is narrower than case-specific L1–L6/Ask journey and final acceptance.",
+      "remainingTechnicalWork": "Inventory actual L1–L6 case specificity and unused visual placement; avoid broad rewrite.",
+      "externalOrOwnerDependency": "Scoped Atlas owner browser review.",
+      "exactNextAction": "Review representative admitted cases through Case→Article→Ask with existing provenance; fix only demonstrated gaps.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W17",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Book VI Atlas",
+      "originalCompletionRequirement": {
+        "title": "BOOK VI ATLAS FINAL PRODUCTIZATION",
+        "text": "# PC-W17｜BOOK VI ATLAS FINAL PRODUCTIZATION\n\n继承现有：\n\n```\n≈60 Cases\n≈24 Windows\n12 Snapshots\n12+ Dossiers\nLived Reality\nversion chain\nCurrent/Historical/Projection/Unknown contract\n```\n\n完成：\n\n```\nDossier semantic model\nHistorical → structural derivation\nStructural pressure\nObserved reconfiguration\nSignal\nUnknown containment\nLived Reality transmission\n5 lived dimensions\ncurrent-value overlays\n```\n\n修复：\n\n```\ndouble hero\nempty dossier\nweak contrast\ngeneric fields\ninconsistent card heights\ndead visual space\nL2/L6 template restrictions\n```\n\n最终客户层 5 大入口：\n\n```\n重组窗口\n世界变化\n重组案例\n当前档案\n日常现实\n```\n\n不得有明显知识深度不对称。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "BookVI five-entry Atlas and dossier/lived-reality/version owners exist; EU golden receipt retained.",
+      "implementationFiles": [
+        {
+          "path": "assets/js/pages/book6-reconfiguration-atlas.js",
+          "exists": true,
+          "sha256": "a723909b1242e5255dc18fd7c24f02fa7585c96351a793f2a376a4cf373f6903"
+        },
+        {
+          "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8i-golden-closure-receipt-v1.json",
+          "exists": true,
+          "sha256": "441d3cecdc3208a224d6535bd24f2c5af2b61b64e43cff69e2e676306b2d7b04"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        },
+        {
+          "path": "content/civilization-atlas/reconfiguration/dossier-eu-w8i-golden-closure-receipt-v1.json",
+          "exists": true,
+          "sha256": "441d3cecdc3208a224d6535bd24f2c5af2b61b64e43cff69e2e676306b2d7b04"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Existing specific dossier acceptance is not acceptance of every five-dimension/dossier/current overlay.",
+      "remainingTechnicalWork": "Inventory all required dossier dimensions/version states and targeted actual visual gaps.",
+      "externalOrOwnerDependency": "Dossier owners and current observational evidence.",
+      "exactNextAction": "Reuse accepted dossiers; verify representative five-entry historical/current/projection/unknown journeys.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W18",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Book VII manuscript",
+      "originalCompletionRequirement": {
+        "title": "BOOK VII MANUSCRIPT CLOSURE",
+        "text": "# PC-W18｜BOOK VII MANUSCRIPT CLOSURE\n\n目标：\n\n```\n≈100 canonical subsections\n```\n\n不是 168。\n\n完成：\n\n```\nPart-level deduplication\nchapter order\ncanonical terminology\nobservation authority model\nprojection authority\nthreshold semantics\n48-cell semantics\n```\n\n现有 FIG canonical alignment 一并完成。\n\n禁止：\n\n```\nconcept duplication\nsame distinction repeated in 3+ chapters\nfigures introducing concepts absent from manuscript\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "BookVII current v2 canonical private source + 100-node registry and explicit v2 human acceptance already present.",
+      "implementationFiles": [
+        {
+          "path": "content/knowledge/book-vii/v2-cutover/canonical-source-registry-v2.json",
+          "exists": true,
+          "sha256": "e553ba512c5c4a2b270dd0806e6f25d01f04c150d851e244b30ea20d79b26c9d"
+        },
+        {
+          "path": "content/knowledge/book-vii/v2-cutover/canonical-node-registry-v2.json",
+          "exists": true,
+          "sha256": "3f94d4f10b0162cd3a5fb8337d68613a44a485036e3ea18859b9f7e4b8c517e9"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/knowledge/book-vii/v2-cutover/human-acceptance-v1.json",
+          "exists": true,
+          "sha256": "3e79bc9e0b787fc75146b9936dd04d0f1356450a3c2324938ebeaf2ffa6d967f"
+        },
+        {
+          "path": "content/knowledge/book-vii/production-admission/live-cutover/closure-report-v1.json",
+          "exists": true,
+          "sha256": "59a524227e4e2ad65347a7a9012f0d88a8c31ed0c00563781126f19013911734"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step.",
+        "inheritedScopedAcceptance": "BookVII v2 private source and specified canonical/public projections"
+      },
+      "productionVerificationState": "Older generic eight-volume manifest draft/architecture-only is not sole authority; v2 specific successor controls source.",
+      "remainingTechnicalWork": "Reconcile generic manifest display versus specific canonical v2 ownership, without editing manuscript.",
+      "externalOrOwnerDependency": "BookVII canonical owner if customer display changes required.",
+      "exactNextAction": "Use accepted v2 source; audit only current manifest/public display mismatch and manuscript/public separation.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W19",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Book VII publication",
+      "originalCompletionRequirement": {
+        "title": "BOOK VII PUBLICATION",
+        "text": "# PC-W19｜BOOK VII PUBLICATION\n\n建立 Book VII：\n\n```\npublished articles\narticle registry\nAsk scope\nfigures\nbook preview\ncommerce identity\ncustomer route\nEN\nzh-Hans\n```\n\n严格区分：\n\n```\npublic article\npublic preview\nmanuscript structure\npaid manuscript\n```\n\n不得公开完整 manuscript。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "BookVII governed public fragments, retrieval, figures, preview, accepted source-refresh pipeline exist.",
+      "implementationFiles": [
+        {
+          "path": "content/knowledge/book-vii/production-admission/live-cutover/closure-report-v1.json",
+          "exists": true,
+          "sha256": "59a524227e4e2ad65347a7a9012f0d88a8c31ed0c00563781126f19013911734"
+        },
+        {
+          "path": "scripts/lib/knowledge-public/book-vii-current-projection.mjs",
+          "exists": true,
+          "sha256": "8378d29141a95f1c2a871a4d47a6e89dff836b6cd29251e412d741f1652b4c98"
+        },
+        {
+          "path": "content/knowledge/public/successors/book-vii-v2-source-refresh-v1/retrieval/published-retrieval-index.json",
+          "exists": true,
+          "sha256": "480d70a70ac07d6bb5581f07b108f32c19aa6b1074767bec1ab3cf27df294d6b"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/knowledge/book-vii/v2-cutover/human-acceptance-v1.json",
+          "exists": true,
+          "sha256": "3e79bc9e0b787fc75146b9936dd04d0f1356450a3c2324938ebeaf2ffa6d967f"
+        },
+        {
+          "path": "content/knowledge/book-vii/production-admission/live-cutover/live-http-acceptance-v1.json",
+          "exists": true,
+          "sha256": "64a0f0601e96bffa220f24921aa0b604c40af5b9692a5a4997007977dfef5211"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step.",
+        "inheritedScopedAcceptance": "BookVII specific publication successor scope, no new cloud deployment"
+      },
+      "productionVerificationState": "Specific prior source/publication acceptance retained; closure report explicitly liveCloudDeploymentPerformed=false.",
+      "remainingTechnicalWork": "Current-cloud successor deployment and route/publication-boundary verification remain unproven.",
+      "externalOrOwnerDependency": "Deployment authorization / final browser review.",
+      "exactNextAction": "Validate governed fragments/preview and private-denial on admitted release; do not regenerate approved articles.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W20",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Book VIII manuscript",
+      "originalCompletionRequirement": {
+        "title": "BOOK VIII CANONICAL MANUSCRIPT",
+        "text": "# PC-W20｜BOOK VIII CANONICAL MANUSCRIPT\n\nBook VIII 定义：\n\n```\nReality Navigation\n```\n\n核心链：\n\n```\nReading\n→ Diagnosis\n→ Direction\n→ Action\n→ Outcome\n→ Continuation\n```\n\n必须建立独立 manuscript authority，不允许只是 Book I–VII summary。\n\n重点说明：\n\n```\nwhen to act\nwhen not to act\nhow to choose\nhow to update direction\nhow to observe outcome\nhow to continue / stop / reverse\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "BookVIII canonical Reality Navigation identity exists; current manifest has no completed private manuscript.",
+      "implementationFiles": [
+        {
+          "path": "content/registry/successors/eight-volume-v1/book-8-manifest.json",
+          "exists": true,
+          "sha256": "1971046bb59860126e02958fc43c539c537bc73d9b18a911201e764a48bf82b8"
+        },
+        {
+          "path": "books/reality-navigation/index.html",
+          "exists": true,
+          "sha256": "6cea0e6cee8b2149746bd170db51933053835281965f5bcfa1dc8edf483f557c"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/book-locale-identity-evidence.json",
+          "exists": true,
+          "sha256": "63005028814b1140489a6144d514235d8a3d881d2142444e1cf0a6d337bffe75"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Architecture-only/draft is accurately recorded; no full independent manuscript acceptance found.",
+      "remainingTechnicalWork": "Canonical manuscript for reading→diagnosis→direction→action→outcome→continuation genuinely remains work, outside targeted consolidation.",
+      "externalOrOwnerDependency": "Authoring owner instruction and editorial acceptance.",
+      "exactNextAction": "Scope missing BookVIII manuscript explicitly under existing authority; do not pretend summaries or existing articles complete it.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W21",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Book VIII publication",
+      "originalCompletionRequirement": {
+        "title": "BOOK VIII PUBLICATION",
+        "text": "# PC-W21｜BOOK VIII PUBLICATION\n\n完成与 Book V–VII 相同的：\n\n```\ncanonical identity\narticles\npreview\nfigures\ncommerce\nAsk\nlocale\npublication boundary\n```\n\n八册 Books 页面才能真正写：\n\n```\nEight Books\n```\n\n且每本有正确 publication state。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "BookVIII public customer route and canonical commerce/locale identity exist.",
+      "implementationFiles": [
+        {
+          "path": "content/registry/current-book-architecture.json",
+          "exists": true,
+          "sha256": "b866a9f3d8ad8f094453d64586d0d67e3e50d89214a577273ae338cf99727ea5"
+        },
+        {
+          "path": "assets/js/web-production/public-surface-data-seven.js",
+          "exists": true,
+          "sha256": "62daaf63dfcc7544d2425b15202b9e339de5f1fa9f73502f50f2f6dd07b5a902"
+        },
+        {
+          "path": "books/reality-navigation/index.html",
+          "exists": true,
+          "sha256": "6cea0e6cee8b2149746bd170db51933053835281965f5bcfa1dc8edf483f557c"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch03/asset-investigation.json",
+          "exists": true,
+          "sha256": "86d8e03fa8920dc164bfb04f6806661c69b4dc349cd75ead86e0818b4233b6a9"
+        },
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Publication manuscript/preview/figures scope not complete; exact Hero404 unresolved.",
+      "remainingTechnicalWork": "Authoritative Hero restoration and publication-state reconciliation; full manuscript gate remains.",
+      "externalOrOwnerDependency": "Asset/publication owners.",
+      "exactNextAction": "Restore exact approved asset then verify current draft/preview/public boundary; publish full only after canonical source acceptance.",
+      "state": "BLOCKED_BY_EXTERNAL",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W22",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Financial",
+      "originalCompletionRequirement": {
+        "title": "FINANCIAL REALITY PRODUCTION",
+        "text": "# PC-W22｜FINANCIAL REALITY PRODUCTION\n\n将现有 Financial Reality 从品牌入口接成产品。\n\nCustomer flow：\n\n```\nfinancial intake\n→ assets\n→ liabilities\n→ income\n→ expenses\n→ cash flow\n→ protection\n→ goals\n→ constraints\n→ scenarios\n→ interpretation\n→ report\n```\n\n必须区分：\n\n```\ncalculated fact\ncustomer input\nassumption\nprojection\nadvisor interpretation\nunknown\n```\n\n必须保留：\n\n```\nfinancial planning boundary\nnot automatic execution\nhuman advisor escalation\n```\n\n生成：\n\n```\nCOM-REPORT-FINANCIAL-FULL\n```\n\n真实 released report。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Existing FDR/FCR/FAR/HFP/PFR facts/intake/16-section bilingual local candidate and interpreted cashflow boundaries retained.",
+      "implementationFiles": [
+        {
+          "path": "functions/financial/product-activation/financial-product-runtime.js",
+          "exists": true,
+          "sha256": "c3117904e8077f7efb5048e8203dbf230aa53ec5d1e8f177e9a13ee9f65ee7f0"
+        },
+        {
+          "path": "functions/financial/analysis-runtime/financial-analysis-runtime.js",
+          "exists": true,
+          "sha256": "8440a8cfd2eaac90cb8140a66c8ba337ffaf5bd1b8dcacf03bf3b98e67e2f487"
+        },
+        {
+          "path": "assets/js/pages/financial-runtime-product.js",
+          "exists": true,
+          "sha256": "19d7f5fd2e8ccf9a3c27c145c65b78ac099837ec7ad1e227bdbf73b9ecde9055"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/financial/results.json",
+          "exists": true,
+          "sha256": "9779b4fee086e8834a3c0b1178e22d06c3fedb246da4ebfb9fab282033a42554"
+        },
+        {
+          "path": "content/product-convergence-r1/audits/customer-value-repair/OWNER-FEEDBACK-SCOPE.json",
+          "exists": true,
+          "sha256": "6dca875c8105fb06cdea39323d9ae52a092862c604973a66f4e9314ee89792b6"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Local technical candidate only; no licensed financial professional review or real household pilots/production released report.",
+      "remainingTechnicalWork": "Reuse native facts/report; authentic intake/storage/released material integration still unverified.",
+      "externalOrOwnerDependency": "Licensed reviewer, real pilots, storage/admission.",
+      "exactNextAction": "Review retained financial candidate professionally; validate consented household inputs and owner-bound released access.",
+      "state": "BLOCKED_BY_EXTERNAL",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W23",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Will",
+      "originalCompletionRequirement": {
+        "title": "WILL PRODUCTION",
+        "text": "# PC-W23｜WILL PRODUCTION\n\nWill 不得只是 RM29 SKU。\n\n建立：\n\n```\njurisdiction scope\npersonal details\nfamily\nexecutor\nguardian where relevant\nassets\nbeneficiaries\nspecific gifts\nresidual estate\nspecial instructions\nreview\n```\n\n必须明确：\n\n```\ninformation collection\ndocument assistance\nprofessional/legal review boundary\n```\n\n不要冒充 law firm 或自动保证法律有效性。\n\n如果 Rockwills 等外部结构仅作为参考：\n\n```\nDO NOT COPY proprietary forms/content\n```\n\n只参考 workflow category。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Existing jurisdiction/intake schema, account Will drafts and professional-escalation gate cover estate data groups.",
+      "implementationFiles": [
+        {
+          "path": "functions/account/financial-will-draft-schema.js",
+          "exists": true,
+          "sha256": "79c81a1275fadcfb5f8d85c042f8007e11b9c0e742f2c85187a512d1d15bf04d"
+        },
+        {
+          "path": "functions/account/financial-will-draft-store.js",
+          "exists": true,
+          "sha256": "17c8c7fcb82a4c1f17ddc56c7360488e6bdb625a7c97753bd68dbf452c305c94"
+        },
+        {
+          "path": "functions/legal/will/escalation-gate.js",
+          "exists": true,
+          "sha256": "f3b571b10a528cf81f59858749ff3cc7ab7a5de7d5fb2b6ff21df5fe2b6ddde9"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/legal/will/schemas/will-intake-v1.schema.json",
+          "exists": true,
+          "sha256": "27a832f36526dea3d4aa445286f1fb563cec589213ce857394edce3bd56dfc56"
+        },
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "/will is intentionally unregistered, existing Account intake is not proof of full purchased Will completion.",
+      "remainingTechnicalWork": "Demonstrate review/download/support flow under jurisdiction scope; no law-firm claims.",
+      "externalOrOwnerDependency": "Legal/professional review and controlled account access.",
+      "exactNextAction": "Connect and test existing approved account draft workflow to selected Will entitlement, then professional review; no copied forms.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W24",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Ask",
+      "originalCompletionRequirement": {
+        "title": "ASK PHI OS AUTHORITY CLOSURE",
+        "text": "# PC-W24｜ASK PHI OS AUTHORITY CLOSURE\n\nAsk 必须真正认识 scope：\n\n```\nBook\nArticle\nAtlas\nCase\nWindow\nSnapshot\nDossier\nFigure\nReport\nMy Reality\n```\n\n每个回答必须能够区分：\n\n```\ncanonical knowledge\ncustomer-specific report\nhistorical fact\ncurrent observation\nprojection\nunknown\n```\n\n建立 Ask source contract：\n\n```\nSOURCE\nAUTHORITY\nTIME\nSCOPE\nACCESS\nLOCALE\n```\n\n禁止：\n\n```\npaid manuscript leakage\ncross-customer report leakage\nfake citation\nunknown converted to fact\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Existing contextual Ask source/access/locale runtime; offline examples explicitly separated from actual Ask answers.",
+      "implementationFiles": [
+        {
+          "path": "functions/contextual-ask/context-source-registry.js",
+          "exists": true,
+          "sha256": "978dfbcf853f84564d99808372a76c403b6143a45f18cd214f661cd03cc4444f"
+        },
+        {
+          "path": "functions/contextual-ask/contextual-ask-runtime.js",
+          "exists": true,
+          "sha256": "6c092db735408ab69bf7fa8a001328c01a2dd4ccb8963912a2deee533fbddc05"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/LOCAL-ACTION-RESULTS.json",
+          "exists": true,
+          "sha256": "89909bbd27f7c8ea42da68644f31df04335e3aea4a7260370dc8f51395f051a1"
+        },
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Anonymous route/local scope tests do not prove authorized live customer response. No paid calls here.",
+      "remainingTechnicalWork": "Complete scope/access matrix for report/MyReality and admitted current public sources; no new Ask architecture.",
+      "externalOrOwnerDependency": "Runtime authorization and authenticated account/environment evidence.",
+      "exactNextAction": "Prove source/time/authority/access/locale exclusions locally then verify only authorized live Ask later.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W25",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "My Reality / account",
+      "originalCompletionRequirement": {
+        "title": "MY REALITY + ACCOUNT CLOSURE",
+        "text": "# PC-W25｜MY REALITY + ACCOUNT CLOSURE\n\n统一：\n\n```\nidentity\nbirth profile\npurchases\nreports\nbooks\nsubscription\nfinancial\nsaved state\n```\n\n禁止出现多个互相冲突的 Person records。\n\n必须以 canonical report subject 为唯一身份输入 owner。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Canonical Person, existing local consent/save/correction/supersession/history/Ask-context demonstration retained.",
+      "implementationFiles": [
+        {
+          "path": "functions/account/canonical-person-store.js",
+          "exists": true,
+          "sha256": "87f94ba6c79c6c349fe85b68bc634365c49004fec3cf54bf3723db0f45ef067a"
+        },
+        {
+          "path": "functions/account/account-reports-api.js",
+          "exists": true,
+          "sha256": "666f2122e5dd4eb0bb62bb76659d491d1b4d70747e8c1af26d66db3282c1cd08"
+        },
+        {
+          "path": "functions/account/report-purchase-progress.js",
+          "exists": true,
+          "sha256": "7e9876a33710ca91c10ef3185b21deba660a9df585624853e0a9ac95c4e9f2a6"
+        },
+        {
+          "path": "functions/account/financial-will-draft-store.js",
+          "exists": true,
+          "sha256": "17c8c7fcb82a4c1f17ddc56c7360488e6bdb625a7c97753bd68dbf452c305c94"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/LOCAL-ACTION-RESULTS.json",
+          "exists": true,
+          "sha256": "89909bbd27f7c8ea42da68644f31df04335e3aea4a7260370dc8f51395f051a1"
+        },
+        {
+          "path": "content/product-convergence-r1/audits/consolidated-closure/BLOCKER-OWNERSHIP-REGISTER.json",
+          "exists": true,
+          "sha256": "92656892f63b95e46131834fc279a00838b01744aa59d2a100e92454d9139b8e"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Local functional candidate only; authenticated production persistence not admitted.",
+      "remainingTechnicalWork": "Production storage/bindings and authenticated owner/person lifecycle proof.",
+      "externalOrOwnerDependency": "Real account consent / storage operator admission.",
+      "exactNextAction": "Validate existing storage migrations and bindings read-only, then consented authenticated lifecycle QA; no automatic Ask save.",
+      "state": "BLOCKED_BY_EXTERNAL",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W26",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Academy",
+      "originalCompletionRequirement": {
+        "title": "ACADEMY STABILIZATION",
+        "text": "# PC-W26｜ACADEMY STABILIZATION\n\n不进行 Academy 大扩张。\n\n只完成 minimum viable production：\n\n```\nlanding\nlesson routing\ncontent ownership\nlocale\naccess\npurchase/subscription rule\nAsk linkage\n```\n\n无真实课程内容时，不伪装为完整 academy。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Academy minimum landing/lesson routing and learning/access owner exist.",
+      "implementationFiles": [
+        {
+          "path": "assets/js/pages/academy.js",
+          "exists": true,
+          "sha256": "dd2026130211743a4e6da35f8949336628d38873601c8a82c316c7da4b4ff499"
+        },
+        {
+          "path": "content/academy/academy-learning-runtime/contracts/lesson-experience-contract-v1.json",
+          "exists": true,
+          "sha256": "efdb26ed53f3d195769e3129827c5e3796432356cdb72e1a38d46187414aec08"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Public route PASS; course completeness and subscription access not verified by anonymous census.",
+      "remainingTechnicalWork": "Inventory actual owned lessons and minimum purchase/subscription/Ask flow.",
+      "externalOrOwnerDependency": "Content owner and controlled QA subscription.",
+      "exactNextAction": "Verify existing lesson route/access/locale; label unavailable curriculum naturally rather than invent lessons.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W27",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Enterprise",
+      "originalCompletionRequirement": {
+        "title": "ENTERPRISE STABILIZATION",
+        "text": "# PC-W27｜ENTERPRISE STABILIZATION\n\nEnterprise 当前只做：\n\n```\npositioning\ncontact/intake\ncapability explanation\nprivacy/security boundary\ncustom engagement path\n```\n\n不构造不存在的 enterprise runtime。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Research/Enterprise positioning, engagement/privacy intake boundary exists. Dedicated Enterprise runtime is not promised.",
+      "implementationFiles": [
+        {
+          "path": "research/index.html",
+          "exists": true,
+          "sha256": "1484beeb14a827d09ccce3245f3be5995997447aea1a4565ecea3f86c7132706"
+        },
+        {
+          "path": "assets/js/pages/brand-research-commerce-legal.js",
+          "exists": true,
+          "sha256": "3ab961f31b9be628ff42377ff84d5ec16d8f901c0d69d63bfa1a8e99219c41f7"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch02/failure-reconciliation.json",
+          "exists": true,
+          "sha256": "9ab14d093347e28a79dec1ab86a1e6f0419a7ca1d7b2d0e0100000fd74b47d1e"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "/enterprise probe is unregistered; accepted scope is positioning/intake, not a full enterprise engine.",
+      "remainingTechnicalWork": "Verify canonical contact/intake/security explanation on existing route.",
+      "externalOrOwnerDependency": "Intake owner confirmation if delivery channel requires external action.",
+      "exactNextAction": "Review /research canonical engagement route only; do not create nonexistent enterprise service runtime.",
+      "state": "IN_PROGRESS",
+      "priorState": "NOT_STARTED",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W28",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Accessibility / mobile / performance",
+      "originalCompletionRequirement": {
+        "title": "ACCESSIBILITY / MOBILE / PERFORMANCE",
+        "text": "# PC-W28｜ACCESSIBILITY / MOBILE / PERFORMANCE\n\n必须测试：\n\n```\nmobile\ntablet\ndesktop\nkeyboard\nscreen-reader semantics\nfocus state\ncontrast\nlazy loading\nimage dimensions\nCLS\nscript failure\nlow bandwidth\n```\n\n特别处理：\n\n```\nAtlas\nlarge visuals\nreport pages\nsticky navigation\nmobile modal\ncomparison UI\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Actual 1280/390 local repairs; BaZi A4/mobile/long-name successor proofs; current review checks retained.",
+      "implementationFiles": [
+        {
+          "path": "assets/customer-ui/js/personal-products/bazi-successor-customer-shell.js",
+          "exists": true,
+          "sha256": "ce85a1ba9e41f2536cdb5b4b88e5aca118bfe1ad0b853405262eeb7e51aba9ea"
+        },
+        {
+          "path": "content/production-closure/batch03/visual-results.json",
+          "exists": true,
+          "sha256": "f09e9c9416cf75eca1881a44b2dd26bbbf7d2c6fe8047b6ef76465f5e264f82c"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/batch03/pdf-verification.json",
+          "exists": true,
+          "sha256": "28876712571e025a596bcfb5cd1211d1a9de1246264905b9a3f002dd8f00b441"
+        },
+        {
+          "path": "content/production-closure/batch05/browser-results.json",
+          "exists": true,
+          "sha256": "808ffbe5ce1c9f191259147dfc990c0c85fd4f3ebdc037c5e759741a12674eb4"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Limited layouts PASS; full tablet/keyboard/reader/focus/contrast/CLS/low-bandwidth across customer journeys NOT_PROVEN.",
+      "remainingTechnicalWork": "Targeted accessibility/performance coverage gaps genuinely remain.",
+      "externalOrOwnerDependency": "Deployed version and final accessibility browser QA.",
+      "exactNextAction": "Measure missing dimensions on existing surfaces and record real values; no inferred performance PASS.",
+      "state": "IN_PROGRESS",
+      "priorState": "IN_PROGRESS",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W29",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Customer E2E",
+      "originalCompletionRequirement": {
+        "title": "FULL CUSTOMER JOURNEY E2E",
+        "text": "# PC-W29｜FULL CUSTOMER JOURNEY E2E\n\n至少建立以下 journeys：\n\n```\nJ01 visitor → Book V article → Atlas → Ask\n\nJ02 visitor → Book VI → Dossier → Lived Reality → Ask\n\nJ03 visitor → BaZi → checkout → report\n\nJ04 returning customer → account → released report\n\nJ05 bilingual purchase\n\nJ06 bundle purchase\n\nJ07 Book purchase\n\nJ08 Financial Reality intake → report\n\nJ09 subscription\n\nJ10 Chinese mobile customer\n```\n\n每个 journey 记录：\n\n```\nstart\nactions\nexpected\nactual\nscreenshots/evidence\nresult\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Public census and synthetic/local paid-loop mechanisms recorded.",
+      "implementationFiles": [
+        {
+          "path": "content/production-closure/web-route-census.json",
+          "exists": true,
+          "sha256": "2b36dc1a70dc7d366de27d085233cc5acf2e08c94b1e8b0ad8964289c9ba6328"
+        },
+        {
+          "path": "content/production-closure/batch02/m1-results.json",
+          "exists": true,
+          "sha256": "450bdc4e689a77d57fd6e84e9e76ff27e28b620e0387f00a15f70b5a830c0fa0"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/master-reconciliation/subject-results.json",
+          "exists": true,
+          "sha256": "8e05af66ee019836160f47b26eaaf45a91fefb163670edcfb043fdd77125f55d"
+        },
+        {
+          "path": "content/production-closure/batch02/stripe-qa-readiness.json",
+          "exists": true,
+          "sha256": "e48f10e4d3d1cc51b83848c068dc0f037f6fe70128eb1bdec51115872ff6fca4"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "J03–J09 payment/release/account/financial/subscription real journeys incomplete; M1 NOT_LIVE_VERIFIED.",
+      "remainingTechnicalWork": "Record all ten original J01–J10 with start/actions/expected/actual/evidence.",
+      "externalOrOwnerDependency": "QA permission/account, accepted report and production environment.",
+      "exactNextAction": "Close M1 prerequisites first; run exact ten customer journeys on authorized candidate environment.",
+      "state": "IN_PROGRESS",
+      "priorState": "IN_PROGRESS",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W30",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Human browser acceptance",
+      "originalCompletionRequirement": {
+        "title": "FINAL BROWSER HUMAN ACCEPTANCE",
+        "text": "# PC-W30｜FINAL BROWSER HUMAN ACCEPTANCE\n\n生成一个统一 review hub：\n\n```\ntools/review/PHI-OS-PRODUCTION-CLOSURE-REVIEW.html\n```\n\n必须有入口：\n\n```\nHomepage\nBooks\nBook V Atlas\nBook VI Atlas\nBook VII\nBook VIII\nReports\nBaZi\nECR\nHD\nCross\nCommerce\nFinancial\nWill\nAsk\nAccount\nAcademy\nEnterprise\nMobile\nLocale\n```\n\n每个模块提供：\n\n```\nOPEN LIVE\nOPEN REVIEW\nPASS\nREJECT\nNOT APPLICABLE\n```\n\nHuman review 必须明确：\n\n```\nACCEPT\nor\nREJECT\n```\n\nAgent 不允许自行假设 human acceptance。\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Unified portable owner review hubs exist; no overall Production Closure human receipt.",
+      "implementationFiles": [
+        {
+          "path": "tools/review/PHI-OS-PRODUCTION-CLOSURE-REVIEW.html",
+          "exists": true,
+          "sha256": "ef2d7c18352cb292b6898d70cb917f22c8fb41423bad7348a4236685f1ac2d3b"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/owner-decisions.json",
+          "exists": true,
+          "sha256": "15b846325f130aacce4b7361bf12e4dd0a183372b4502849c2b570f121d70b1b"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "Review artifacts ≠ final owner acceptance; only BookVI price accepted in Closure registry.",
+      "remainingTechnicalWork": "Prepare final browser evidence only when mandatory gates satisfied.",
+      "externalOrOwnerDependency": "Explicit owner ACCEPT/REJECT of exact production scope.",
+      "exactNextAction": "Use consolidated hub now for reconciliation; reserve final customer-production decision until genuine full proof.",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "priorState": "BLOCKED_BY_HUMAN_QA",
+      "localFixturePassDoesNotGrantAcceptance": true
+    },
+    {
+      "id": "PC-W31",
+      "namespace": "PHI-OS-PRODUCTION-CLOSURE",
+      "title": "Cutover",
+      "originalCompletionRequirement": {
+        "title": "CUTOVER + RELEASE EVIDENCE",
+        "text": "# PC-W31｜CUTOVER + RELEASE EVIDENCE\n\n全部通过后生成：\n\n```\ndocs/production-closure/FINAL-RELEASE.md\ncontent/production-closure/final-production-evidence.json\n```\n\n最终状态：\n\n```\nPHI OS PRODUCTION CLOSURE\nSTATE: ACCEPTED\n```\n\n记录：\n\n```\nSTART_HEAD\nEND_HEAD\nnpm run check result\nproduction URL\nCloudflare deployment\nStripe QA\nreport E2E\nBooks\nAtlas\nlocale\nvisual\nAsk\ncommerce\nhuman acceptance\nknown limitations\n```\n\n---",
+        "source": "docs/production-closure/OWNER-INSTRUCTION.txt",
+        "sourceSha256": "49e3993fb65e5e5ca38efb036eed5d8f7c335f2dcf3516745ca0308eea51d93e"
+      },
+      "existingImplementation": "Cutover remains intentionally unexecuted. Existing baseline and scoped receipts preserved.",
+      "implementationFiles": [
+        {
+          "path": "docs/production-closure/BASELINE.md",
+          "exists": true,
+          "sha256": "2c44704cdd58dacc5e749a24aa42e2a4e7d087abcff3bbfe49824833a51d66a0"
+        },
+        {
+          "path": "content/production-closure/work-status.json",
+          "exists": true,
+          "sha256": "7fc48a096fb953702f1083fc0731af142c7ffe8c50475390ba6695236c68779a"
+        }
+      ],
+      "actualEvidence": [
+        {
+          "path": "content/production-closure/remaining-blockers.json",
+          "exists": true,
+          "sha256": "b4d21f757616f5f1ec9d031fae4929cae7dd9b346b032cd525c2dea9dd640bad"
+        }
+      ],
+      "humanAcceptanceState": {
+        "productionClosureStep": "NOT_GRANTED",
+        "scopeNote": "Historical method/publication/topic decisions do not accept this Production Closure step."
+      },
+      "productionVerificationState": "No deployment, production freeze, real payment, commit/push or overall acceptance authorized.",
+      "remainingTechnicalWork": "All original A–R success conditions and final evidence file remain unsatisfied in aggregate.",
+      "externalOrOwnerDependency": "Separate explicit deployment/cutover/freeze authorization after all gates.",
+      "exactNextAction": "Do not create accepted final-release evidence prematurely; cut over only after complete owner-authorized production QA.",
+      "state": "BLOCKED_BY_HUMAN_QA",
+      "priorState": "BLOCKED_BY_HUMAN_QA",
+      "localFixturePassDoesNotGrantAcceptance": true
+    }
+  ]
+}

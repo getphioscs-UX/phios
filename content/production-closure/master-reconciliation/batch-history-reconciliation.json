@@ -1,0 +1,652 @@
+{
+  "batch01": {
+    "postcheck": {
+      "command": "npm run postcheck",
+      "exitCode": 1,
+      "startedAt": "2026-10-08T09:03:44.246Z",
+      "finishedAt": "2026-10-08T09:15:13.884Z",
+      "log": "docs/production-closure/evidence/npm-postcheck.txt",
+      "paidProviderCallsAllowed": false
+    },
+    "workId": "PHI-OS-PRODUCTION-CLOSURE",
+    "batch": "PC-W0–W5 evidence + independent PC-W6 canonical check",
+    "timestamp": "2026-10-08T09:20:11.303Z",
+    "startHead": "89ca64a26935e7679a14f5072e86f3690188800b",
+    "observedHead": "dcf4f0f5007e5bc602c040328d3929d710e137ae",
+    "observations": 124,
+    "routeCount": 31,
+    "pass": 88,
+    "fail": 36,
+    "npm": {
+      "command": "npm run check",
+      "exitCode": 1,
+      "startedAt": "2026-10-08T08:47:01.245Z",
+      "finishedAt": "2026-10-08T09:02:00.231Z",
+      "log": "docs/production-closure/evidence/npm-check.txt",
+      "paidProviderCallsAllowed": false
+    },
+    "commerceExitCode": 1,
+    "protectedChanges": 0,
+    "cost": {
+      "scope": "This production-closure batch only; historical paid calls are not recounted or erased",
+      "guardedProcesses": 4121,
+      "providerCalls": 0,
+      "openAiCalls": 0,
+      "blockedExternalAttempts": 36,
+      "liveBrowser": "Read-only GET/HEAD allowlist; other methods and hosts denied",
+      "paidGenerationInvoked": false,
+      "realPaymentPerformed": false,
+      "source": "content/production-closure/zero-cost-processes.jsonl"
+    },
+    "notPerformed": [
+      "Commit",
+      "Push",
+      "Deploy",
+      "Production freeze",
+      "Production switching",
+      "Real payment",
+      "Paid API",
+      "Frozen report regeneration",
+      "Historical digest rewrite"
+    ],
+    "nextDependencies": [
+      "Books WPR postcheck blocked by existing successor record versus current asset registry digest mismatch; preserve frozen records",
+      "PC-W2 blocked by pre-existing BaZi R2 frozen Worker mismatch; preserve Worker and frozen audit pending legitimate owner successor reconciliation",
+      "Reconcile live route/locale/asset defects with existing renderer owners; production deployment remains unauthorized",
+      "Explicit Book VI pricing conflict resolution",
+      "Real Stripe QA / authentic account / household pilot / professional review / production storage admission"
+    ]
+  },
+  "batch02": {
+    "commands": [
+      {
+        "command": "npm run check:bazi-deep-manuscript:r2-prelive",
+        "exitCode": 1,
+        "startedAt": "2026-10-08T09:56:29.847Z",
+        "finishedAt": "2026-10-08T09:56:33.391Z",
+        "log": "docs/production-closure/batch02/evidence/baziFreeze.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/baziFreeze-result.json"
+      },
+      {
+        "command": "node scripts/check-book-w1f-wpr-successor-current.mjs",
+        "exitCode": 1,
+        "startedAt": "2026-10-08T09:56:29.680Z",
+        "finishedAt": "2026-10-08T09:56:30.110Z",
+        "log": "docs/production-closure/batch02/evidence/booksFreeze.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/booksFreeze-result.json"
+      },
+      {
+        "command": "node scripts/check-production-closure-batch02-browser.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T09:59:31.466Z",
+        "finishedAt": "2026-10-08T10:01:22.145Z",
+        "log": "docs/production-closure/batch02/evidence/browser.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/browser-result.json"
+      },
+      {
+        "command": "npm run check:cloudflare-function-import-compat",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T09:53:34.891Z",
+        "finishedAt": "2026-10-08T09:53:38.571Z",
+        "log": "docs/production-closure/batch02/evidence/compat.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/compat-result.json"
+      },
+      {
+        "command": "node scripts/check-report-customer-delivery.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T09:53:34.726Z",
+        "finishedAt": "2026-10-08T09:53:34.990Z",
+        "log": "docs/production-closure/batch02/evidence/delivery.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/delivery-result.json"
+      },
+      {
+        "command": "node scripts/check-ecr-r4-authority-drift.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:16:33.191Z",
+        "finishedAt": "2026-10-08T10:16:38.434Z",
+        "log": "docs/production-closure/batch02/evidence/ecr.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/ecr-result.json"
+      },
+      {
+        "command": "node scripts/check-production-closure-batch02-library-checkout.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:10:17.486Z",
+        "finishedAt": "2026-10-08T10:10:47.871Z",
+        "log": "docs/production-closure/batch02/evidence/library.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/library-result.json"
+      },
+      {
+        "command": "node scripts/check-production-closure-batch02-m1.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:09:30.129Z",
+        "finishedAt": "2026-10-08T10:09:31.166Z",
+        "log": "docs/production-closure/batch02/evidence/m1.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/m1-result.json"
+      },
+      {
+        "command": "npm run check:pages-build",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:09:31.296Z",
+        "finishedAt": "2026-10-08T10:11:41.313Z",
+        "log": "docs/production-closure/batch02/evidence/pages.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/pages-result.json"
+      },
+      {
+        "command": "node scripts/check-fw-private-bindings.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T09:53:34.811Z",
+        "finishedAt": "2026-10-08T09:53:35.415Z",
+        "log": "docs/production-closure/batch02/evidence/private.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/private-result.json"
+      },
+      {
+        "command": "node scripts/check-pws-i2-w5-product-offer-registry.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:16:21.871Z",
+        "finishedAt": "2026-10-08T10:16:32.966Z",
+        "log": "docs/production-closure/batch02/evidence/pws.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/pws-result.json"
+      },
+      {
+        "command": "node scripts/check-production-closure-evidence-quarantine.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:16:38.605Z",
+        "finishedAt": "2026-10-08T10:16:38.827Z",
+        "log": "docs/production-closure/batch02/evidence/quarantine.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/quarantine-result.json"
+      },
+      {
+        "command": "node --no-warnings scripts/check-commerce-stripe-r1.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T09:54:18.404Z",
+        "finishedAt": "2026-10-08T09:54:18.908Z",
+        "log": "docs/production-closure/batch02/evidence/stripe.txt",
+        "scope": "Local fixtures / read-only browser; no external provider transaction",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch02/evidence/stripe-result.json"
+      }
+    ],
+    "inheritedBroad": [
+      {
+        "command": "npm run check",
+        "exitCode": 1,
+        "startedAt": "2026-10-08T08:47:01.245Z",
+        "finishedAt": "2026-10-08T09:02:00.231Z",
+        "log": "docs/production-closure/evidence/npm-check.txt",
+        "paidProviderCallsAllowed": false,
+        "evidence": "docs/production-closure/evidence/npm-check-result.json",
+        "logSha256": "06c74fbb7fa29a1a342b76aec62077b7ede6024674f91ec2a600673fb6077cf8",
+        "batch02Execution": "NOT_RERUN_KNOWN_UNCHANGED_BLOCKER",
+        "currentFailingGateReproduced": "docs/production-closure/batch02/evidence/baziFreeze-result.json"
+      },
+      {
+        "command": "npm run postcheck",
+        "exitCode": 1,
+        "startedAt": "2026-10-08T09:03:44.246Z",
+        "finishedAt": "2026-10-08T09:15:13.884Z",
+        "log": "docs/production-closure/evidence/npm-postcheck.txt",
+        "paidProviderCallsAllowed": false,
+        "evidence": "docs/production-closure/evidence/npm-postcheck-result.json",
+        "logSha256": "b7daa15a01df54803353cc27410f4d019372b58fa2a909f314d39acf3ec443c0",
+        "batch02Execution": "NOT_RERUN_KNOWN_UNCHANGED_BLOCKER",
+        "currentFailingGateReproduced": "docs/production-closure/batch02/evidence/booksFreeze-result.json"
+      }
+    ],
+    "reasonNoBroadRepeat": "Both unchanged frozen-digest failures were reproduced once with exact current source. Required affected local regressions/builds recorded separately. No broad lifecycle PASS is inferred.",
+    "browserMatcherCorrection": {
+      "invalidated": "Earlier four Articles observations checked TH prefix but missed five underscore enums",
+      "retainedEvidence": "docs/production-closure/batch02/evidence/browser.txt",
+      "strictReplacement": "content/production-closure/batch02/library-checkout-results.json",
+      "allFiveOriginalEnumsRequired": true
+    }
+  },
+  "batch03": {
+    "commands": [
+      {
+        "command": "npm run check:bazi-deep-manuscript:r2-prelive",
+        "exitCode": 1,
+        "startedAt": "2026-10-08T10:30:27.683Z",
+        "finishedAt": "2026-10-08T10:30:30.549Z",
+        "log": "docs/production-closure/batch03/evidence/baziFreeze.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/baziFreeze-result.json"
+      },
+      {
+        "command": "node scripts/check-book-w1f-wpr-successor-current.mjs",
+        "exitCode": 1,
+        "startedAt": "2026-10-08T10:30:30.674Z",
+        "finishedAt": "2026-10-08T10:30:30.925Z",
+        "log": "docs/production-closure/batch03/evidence/booksFreeze.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/booksFreeze-result.json"
+      },
+      {
+        "command": "npm run check:cloudflare-function-import-compat",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:37:28.895Z",
+        "finishedAt": "2026-10-08T10:37:31.374Z",
+        "log": "docs/production-closure/batch03/evidence/compat.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/compat-result.json"
+      },
+      {
+        "command": "node scripts/check-report-customer-delivery.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:29:40.799Z",
+        "finishedAt": "2026-10-08T10:29:41.079Z",
+        "log": "docs/production-closure/batch03/evidence/delivery.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/delivery-result.json"
+      },
+      {
+        "command": "node scripts/check-ecr-r4-authority-drift.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:42:59.925Z",
+        "finishedAt": "2026-10-08T10:43:05.689Z",
+        "log": "docs/production-closure/batch03/evidence/ecr.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/ecr-result.json"
+      },
+      {
+        "command": "npm run check:pages-build",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:40:03.514Z",
+        "finishedAt": "2026-10-08T10:42:29.935Z",
+        "log": "docs/production-closure/batch03/evidence/pages.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/pages-result.json"
+      },
+      {
+        "command": "node scripts/check-fw-private-bindings.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:29:41.218Z",
+        "finishedAt": "2026-10-08T10:29:41.997Z",
+        "log": "docs/production-closure/batch03/evidence/private.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/private-result.json"
+      },
+      {
+        "command": "node scripts/check-production-closure-batch03-quarantine.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:43:05.896Z",
+        "finishedAt": "2026-10-08T10:43:06.270Z",
+        "log": "docs/production-closure/batch03/evidence/quarantine.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/quarantine-result.json"
+      },
+      {
+        "command": "node --no-warnings scripts/check-production-closure-batch03-subject.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:34:43.733Z",
+        "finishedAt": "2026-10-08T10:34:44.411Z",
+        "log": "docs/production-closure/batch03/evidence/subject.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/subject-result.json"
+      },
+      {
+        "command": "node scripts/check-production-closure-batch03-visual.mjs",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:41:26.844Z",
+        "finishedAt": "2026-10-08T10:42:02.549Z",
+        "log": "docs/production-closure/batch03/evidence/visual.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/visual-result.json"
+      },
+      {
+        "command": "node scripts/check-production-closure-batch03-visual.mjs --factual-only",
+        "exitCode": 0,
+        "startedAt": "2026-10-08T10:35:16.520Z",
+        "finishedAt": "2026-10-08T10:35:23.357Z",
+        "log": "docs/production-closure/batch03/evidence/visualFacts.txt",
+        "scope": "Local fixtures and read-only captures; not live QA",
+        "paidCallsAllowed": false,
+        "evidence": "docs/production-closure/batch03/evidence/visualFacts-result.json"
+      }
+    ],
+    "readOnlyAssetProbe": {
+      "command": "node scripts/probe-production-closure-batch03-assets.mjs",
+      "startedAt": "2026-10-08T10:30:06.294Z",
+      "finishedAt": "2026-10-08T10:30:06.788Z",
+      "exitCode": 0,
+      "results": [
+        {
+          "assetCode": "HERO-023",
+          "key": "images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/hero/books/PHIOS-HERO-BOOK-5-REALITY-NAVIGATION-v1.webp",
+          "status": 404,
+          "contentType": "text/plain;charset=UTF-8",
+          "contentLength": null,
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.584Z",
+          "result": "PUBLIC_OBJECT_NOT_VERIFIED"
+        },
+        {
+          "assetCode": "BOOK-1-PREVIEW",
+          "key": "books/previews/book-1/page-001.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/books/previews/book-1/page-001.webp",
+          "status": 200,
+          "contentType": "image/webp",
+          "contentLength": "494620",
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.589Z",
+          "result": "PUBLIC_OBJECT_PRESENT"
+        },
+        {
+          "assetCode": "BOOK-1-FIGURES",
+          "key": "images/figures/books/book-1/4A.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-1/4A.webp",
+          "status": 200,
+          "contentType": "image/webp",
+          "contentLength": "557986",
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.572Z",
+          "result": "PUBLIC_OBJECT_PRESENT"
+        },
+        {
+          "assetCode": "BOOK-1-FIGURES",
+          "key": "images/figures/books/book-1/4B.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-1/4B.webp",
+          "status": 200,
+          "contentType": "image/webp",
+          "contentLength": "522566",
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.772Z",
+          "result": "PUBLIC_OBJECT_PRESENT"
+        },
+        {
+          "assetCode": "BOOK-1-FIGURES",
+          "key": "images/figures/books/book-1/4C.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-1/4C.webp",
+          "status": 200,
+          "contentType": "image/webp",
+          "contentLength": "466062",
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.555Z",
+          "result": "PUBLIC_OBJECT_PRESENT"
+        },
+        {
+          "assetCode": "BOOK-1-FIGURES",
+          "key": "images/figures/books/book-1/4D.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-1/4D.webp",
+          "status": 200,
+          "contentType": "image/webp",
+          "contentLength": "495850",
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.567Z",
+          "result": "PUBLIC_OBJECT_PRESENT"
+        },
+        {
+          "assetCode": "BOOK-1-FIGURES",
+          "key": "images/figures/books/book-1/4E.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-1/4E.webp",
+          "status": 200,
+          "contentType": "image/webp",
+          "contentLength": "371982",
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.788Z",
+          "result": "PUBLIC_OBJECT_PRESENT"
+        },
+        {
+          "assetCode": "BOOK-1-FIGURES",
+          "key": "images/figures/books/book-1/4F.webp",
+          "url": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/figures/books/book-1/4F.webp",
+          "status": 200,
+          "contentType": "image/webp",
+          "contentLength": "411206",
+          "location": null,
+          "timestamp": "2026-10-08T10:30:06.568Z",
+          "result": "PUBLIC_OBJECT_PRESENT"
+        }
+      ],
+      "methods": [
+        "HEAD"
+      ],
+      "externalWrites": 0,
+      "providerCalls": 0,
+      "openAiCalls": 0,
+      "priceActions": 0,
+      "scope": "Exact registered owner object names; no directory enumeration or uploads"
+    },
+    "pdfVerification": {
+      "command": "node scripts/verify-production-closure-batch03-pdf.mjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-08T10:42:07.813Z",
+      "finishedAt": "2026-10-08T10:42:28.440Z",
+      "results": [
+        {
+          "locale": "en",
+          "pdf": "docs/production-closure/batch03/successor-en-A4.pdf",
+          "pages": 26,
+          "allA4": true,
+          "coverText": "Controlled BaZi Subject 1991 / 08 / 17 09 : 20",
+          "fieldsExtractable": true,
+          "result": "PASS",
+          "renders": [
+            "docs/production-closure/batch03/screenshots/PDF-en-P1.png",
+            "docs/production-closure/batch03/screenshots/PDF-en-P16.png",
+            "docs/production-closure/batch03/screenshots/PDF-en-P26.png"
+          ]
+        },
+        {
+          "locale": "zh-Hans",
+          "pdf": "docs/production-closure/batch03/successor-zh-Hans-A4.pdf",
+          "pages": 26,
+          "allA4": true,
+          "coverText": "Controlled BaZi Subject 1991 / 08 / 17 09 : 20",
+          "fieldsExtractable": true,
+          "result": "PASS",
+          "renders": [
+            "docs/production-closure/batch03/screenshots/PDF-zh-Hans-P1.png",
+            "docs/production-closure/batch03/screenshots/PDF-zh-Hans-P16.png",
+            "docs/production-closure/batch03/screenshots/PDF-zh-Hans-P26.png"
+          ]
+        }
+      ],
+      "tools": "Bundled pypdf + Poppler; actual new successor PDF bytes",
+      "acceptedArchiveRewritten": false
+    },
+    "fullCheck": {
+      "state": "NOT_RERUN_UNCHANGED_STRICT_GATES",
+      "inherited": "content/production-closure/batch02/regression-results.json",
+      "gateReproductions": [
+        {
+          "command": "npm run check:bazi-deep-manuscript:r2-prelive",
+          "exitCode": 1,
+          "startedAt": "2026-10-08T10:30:27.683Z",
+          "finishedAt": "2026-10-08T10:30:30.549Z",
+          "log": "docs/production-closure/batch03/evidence/baziFreeze.txt",
+          "scope": "Local fixtures and read-only captures; not live QA",
+          "paidCallsAllowed": false,
+          "evidence": "docs/production-closure/batch03/evidence/baziFreeze-result.json"
+        },
+        {
+          "command": "node scripts/check-book-w1f-wpr-successor-current.mjs",
+          "exitCode": 1,
+          "startedAt": "2026-10-08T10:30:30.674Z",
+          "finishedAt": "2026-10-08T10:30:30.925Z",
+          "log": "docs/production-closure/batch03/evidence/booksFreeze.txt",
+          "scope": "Local fixtures and read-only captures; not live QA",
+          "paidCallsAllowed": false,
+          "evidence": "docs/production-closure/batch03/evidence/booksFreeze-result.json"
+        }
+      ],
+      "result": "NO_FULL_PASS_CLAIM"
+    },
+    "initialBrowserFailure": "Sandbox Edge launch exit1 retained; subsequent authorized local browser verification exit0",
+    "sourceTestsAndRenderTestsDistinct": true,
+    "visualQaCorrection": {
+      "supersededLongNameCheck": "docs/production-closure/batch03/evidence/visual-attempt-3.txt",
+      "defect": "Earlier long-name print test measured DOM clipping but missed baked artwork label collision",
+      "repair": "Successor-only long-name slot below label; opaque local mask and explicit safe-area assertion",
+      "currentEvidence": "content/production-closure/batch03/visual-results.json",
+      "historicalArchiveChanged": false
+    }
+  },
+  "batch04": {
+    "workId": "PHI-OS-PRODUCTION-CLOSURE",
+    "batch": "04",
+    "reviewPackage": "READY_FOR_BATCH_04_HUMAN_REVIEW",
+    "master": "IN_PROGRESS",
+    "m1": "NOT_LIVE_VERIFIED",
+    "fixtures": 8,
+    "sectionLanguageRows": 144,
+    "coverageCounts": {
+      "COVERED": 0,
+      "PARTIAL": 0,
+      "MISSING": 0,
+      "INAPPLICABLE": 108,
+      "AUTHORITY_BLOCKED": 36
+    },
+    "completeNewReports": 0,
+    "price": "RM109_CONFIRMED_BY_EXPLICIT_OWNER",
+    "priceReceipt": "PRODUCTION-CLOSURE-BOOK-VI-PRICE-E26A1527AB20E284EA5CFB18",
+    "protectedFiles": 172,
+    "protectedDrift": 0,
+    "cost": {
+      "providerCalls": 0,
+      "openAiCalls": 0,
+      "guardedProcesses": 6,
+      "realPayments": 0,
+      "productionStorageWrites": 0
+    },
+    "productionReady": false,
+    "batchAccepted": false
+  },
+  "batch05": {
+    "workId": "PHI-OS-PRODUCTION-CLOSURE",
+    "batch": "05",
+    "state": "READY_FOR_BATCH_05_COMPOSITION_ARCHITECTURE_HUMAN_REVIEW",
+    "master": "IN_PROGRESS",
+    "accepted": false,
+    "customerProductionReady": false,
+    "newReports": 0,
+    "focusedGroups": 24,
+    "visualReview": {
+      "results": [
+        {
+          "width": 1280,
+          "horizontalOverflow": false,
+          "sections": 17,
+          "forms": 0,
+          "screenshot": "docs/production-closure/batch05/screenshots/REVIEW-1280.png",
+          "status": "PASS"
+        },
+        {
+          "width": 390,
+          "horizontalOverflow": false,
+          "sections": 17,
+          "forms": 0,
+          "screenshot": "docs/production-closure/batch05/screenshots/REVIEW-390.png",
+          "status": "PASS"
+        }
+      ],
+      "errors": [],
+      "blocked": [],
+      "externalResources": 0,
+      "scope": "Actual architecture review rendering; no new customer report visual validation claimed."
+    },
+    "cost": {
+      "providerCalls": 0,
+      "openAiCalls": 0,
+      "guardedProcesses": 4,
+      "externalAttemptsBlocked": 3,
+      "realPayments": 0,
+      "productionStorageWrites": 0,
+      "providerProposalEnabled": false
+    },
+    "inheritedCoverage": {
+      "COVERED": 0,
+      "PARTIAL": 0,
+      "MISSING": 0,
+      "INAPPLICABLE": 108,
+      "AUTHORITY_BLOCKED": 36
+    },
+    "protectedDrift": 0,
+    "priceReceipt": "PRODUCTION-CLOSURE-BOOK-VI-PRICE-E26A1527AB20E284EA5CFB18",
+    "finalReviewCommand": {
+      "reason": "Verify finalized standalone HTML with embedded execution evidence",
+      "startedAt": "2026-10-09T00:03:07.5537504Z",
+      "output": "PASS 24 recorded focused groups, protected/inherited SHA preservation, external provider transport denied, 1280px and 390px portable review: no overflow, no external resources, no acceptance forms.",
+      "exitCode": 0,
+      "command": "node --import ./scripts/lib/pc-r1-zero-cost-preload.mjs scripts/check-production-closure-batch05.mjs"
+    }
+  },
+  "batch05TenDeliverables": [
+    {
+      "path": "content/production-closure/batch05/architecture-reconciliation.json",
+      "sha256": "fd5206d5db3ae562dfeb83aca4b1572c704ca18530a1bd575ca3e1855666e87f"
+    },
+    {
+      "path": "content/production-closure/batch05/bilingual-quality-rubric.json",
+      "sha256": "d5a7a2fbbc1ebb114c38310d1bc6dddfe9c0f1237701e6035b56d607c137b1cb"
+    },
+    {
+      "path": "content/production-closure/batch05/chapter-semantic-matrix.json",
+      "sha256": "e57dbcf0091baefa8150f5539b0cbc1d94ea7512a1bb1e08f41ec963d2c9146d"
+    },
+    {
+      "path": "content/production-closure/batch05/eight-chart-evaluation-plan.json",
+      "sha256": "8c0999f380b16cebaa88f82cbd9db7b1bb6b46184b550d78c7262600977e0f75"
+    },
+    {
+      "path": "content/production-closure/batch05/privacy-consent-contract.json",
+      "sha256": "d126dbf41f27aa1234d41e67a0d1acc7d95ed6a964fc393396c15a02044ffd09"
+    },
+    {
+      "path": "content/production-closure/batch05/professional-composition-spec.json",
+      "sha256": "81dd592a7e5164ed74f78999d180764ebd46c85ff0ad2df2d45b2f7cd54cb32c"
+    },
+    {
+      "path": "content/production-closure/batch05/provider-execution-proposal.json",
+      "sha256": "d873adc0d831a09a22bea3c3ad7dd54f76197107eb2c615bf36918e494740ff1"
+    },
+    {
+      "path": "content/production-closure/batch05/publication-integration-contract.json",
+      "sha256": "fbdba7870990ea4f9a43fcfc6dccf17016acdecb40efc77883bede1185946e61"
+    },
+    {
+      "path": "content/production-closure/batch05/remaining-decisions.json",
+      "sha256": "564fa52532a89c0e62cd7f09926ad4ce4fc8c7669edc0955d2e1d15e4eef76e2"
+    },
+    {
+      "path": "content/production-closure/batch05/two-lane-contract.json",
+      "sha256": "d42b93c2b9008b48469020022de9958b042139d03251c755d8610638cf9ac58d"
+    }
+  ],
+  "batch05OverallHumanAcceptance": "NOT_GRANTED",
+  "providerProposalSupersededByOwnerCorrection": true
+}

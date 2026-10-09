@@ -14,7 +14,7 @@ export function projectKnowledgeAnswerForCustomer(payload={}, {locale='en',curre
  const unknown=list(answer?.unknown?.details).map(clean).filter(Boolean);
  const needsReality=['NEEDS_CONTEXT','CURRENT_CONTEXT_REQUIRED'].includes(answerState)||payload?.ask2?.plan?.orchestrationState==='CURRENT_CONTEXT_REQUIRED';
  const runtimeDirect=clean(answer?.directAnswer)||text(lang,'A bounded answer is not available yet.','目前还没有可用的边界化回答。');
- const needsClarification=qualityOutcome==='INSUFFICIENT'||/没有足够的受治理|not enough governed|insufficient governed/i.test(runtimeDirect);
+ const needsClarification=sources.length===0&&(qualityOutcome==='INSUFFICIENT'||/没有足够的受治理|not enough governed|insufficient governed/i.test(runtimeDirect));
  const direct=needsClarification?text(lang,'Which topic would you like to explore? Add a little detail, or browse the articles below.','你想了解哪个主题？可以补充一点具体信息，或先浏览下方文章。'):atlas?.directFraming?`${clean(atlas.directFraming)}${runtimeDirect&&runtimeDirect!==clean(atlas.directFraming)?(lang==='zh-Hans'?'\n\n':' ')+runtimeDirect:''}`:runtimeDirect;
  const supporting=[...atlasSupporting(atlas,lang),...list(answer?.whyThisMayHappen).map(clean).filter(Boolean)];
  const atlasLimits=list(atlas?.sections?.evidenceUnknown).map(clean).filter(Boolean);
