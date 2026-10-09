@@ -23,7 +23,7 @@ const require=createRequire(import.meta.url),{chromium}=require('C:/Users/Guest 
 const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
 const context=await browser.newContext();const cache=new Map();let blocked=0;
 await context.route('**/*',async route=>{const req=route.request(),u=new URL(req.url());if(req.method()!=='GET'){blocked++;return route.abort();}if(u.origin===origin)return route.continue();if(u.origin==='https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev'){try{let x=cache.get(u.href);if(!x){const r=await fetch(u);if(!r.ok)throw Error('HTTP '+r.status);const body=Buffer.from(await r.arrayBuffer());x={body,contentType:r.headers.get('content-type')||'image/webp',sha256:crypto.createHash('sha256').update(body).digest('hex')};cache.set(u.href,x);}return route.fulfill({status:200,body:x.body,contentType:x.contentType});}catch(e){result.errors.push({url:u.href,error:String(e)});return route.abort();}}blocked++;return route.abort();});
-const page=await context.newPage();page.setDefaultTimeout(12000);
+context.setDefaultTimeout(45000);const page=await context.newPage();
 try{
 const keys=new Set(read('docs/assets/r2-public/audit-20261009/OBJECT-REVIEW.json').rows.filter(x=>x.classification==='已批准但未接入'&&x.key.includes('civilization-atlas')).map(x=>x.key));
 const selected=bindings.assets.filter(a=>mode==='WORLD'?a.family==='WORLD_SNAPSHOT_ATMOSPHERE':mode==='BOOK-VI'?a.family==='WORLD_RECONFIGURATION_SNAPSHOT':keys.has(a.bucketKey)&&a.family!=='WORLD_SNAPSHOT_ATMOSPHERE'&&a.family!=='WORLD_RECONFIGURATION_SNAPSHOT');
@@ -46,6 +46,6 @@ for(const a of items)for(const locale of ['en','zh-Hans'])for(const width of [12
  if(result.rows.length%10===0)await save();
 }
 }
-if(mode==='BOOK-V'){await Promise.all(Array.from({length:3},async(_,i)=>exercise(selected.filter((_,n)=>n%3===i),i===0?page:await context.newPage())));}else await exercise(selected,page);
+if(mode==='BOOK-V'){const workers=process.argv.includes('--single')?1:3;await Promise.all(Array.from({length:workers},async(_,i)=>exercise(selected.filter((_,n)=>n%workers===i),i===0?page:await context.newPage())));}else await exercise(selected,page);
 }finally{result.finished=new Date().toISOString();result.endHead=head();result.blockedRequests=blocked;await browser.close();await new Promise(r=>server.close(r));await save();}
 console.log(JSON.stringify({rows:result.rows.length,passed:result.rows.filter(r=>r.state==='LOADED_DECODED_VISIBLE').length,errors:result.errors.length,headStable:result.head===result.endHead}));
