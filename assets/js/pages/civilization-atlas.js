@@ -1,3 +1,4 @@
+import {recordVisual} from './civilization-atlas/visual-runtime.js';
 import {renderAtlasStaticVisuals,resolveAtlasVisualDeepLink,ATLAS_VISUAL_BINDINGS_PATH} from './civilization-atlas/atlas-static-visual.js';
 import {renderAtlasVisualProjection} from './civilization-atlas/atlas-visual-projection.js';
 import {getLocale,onLocaleChange} from '../i18n.js';
@@ -10,6 +11,7 @@ import {reconcileAtlasContextForLayer} from './civilization-atlas/cross-layer-co
 import {loadTimelineRegistry,loadTimelineMacroRegistry,loadCaseRegistry,loadComparisonRegistry,loadWorldSnapshotRegistry,loadTrajectoryRegistry,loadTransitionRegistry,loadLossRegistry} from './civilization-atlas/atlas-data.js';
 const root=document.querySelector('[data-civilization-atlas-root]');
 if(root){
+  recordVisual(null,'BINDING_LOADING');
   const store=createCivilizationAtlasState({locale:getLocale()});
   const unbindUrl=bindAtlasUrlState(store,{locale:getLocale()});
   const data={timeline:null,timelineMacro:null,cases:null,comparison:null,world:null,trajectories:null,transitions:null,loss:null,visualProjection:null,templateSlots:null};

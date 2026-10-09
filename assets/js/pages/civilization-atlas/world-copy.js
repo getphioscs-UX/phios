@@ -7,7 +7,8 @@ export function localizeWorldCopy(root){
  while(walk.nextNode())nodes.push(walk.currentNode);
  for(const node of nodes){if(node.parentElement?.closest('script,style,code,[data-source-original],input,textarea'))continue;let text=node.textContent;
  text=text.replace(/\bAsk PHI OS\b/g,t('worldRecovery.terms.ask'));
- for(const term of ['Atlas','Runtime','Reality','World'])text=text.replace(new RegExp('\\b'+term+'\\b','g'),t('worldRecovery.terms.'+term));
+ const terms={Atlas:t('worldRecovery.terms.Atlas'),Runtime:t('worldRecovery.terms.Runtime'),Reality:t('worldRecovery.terms.Reality'),World:t('worldRecovery.terms.World')};
+ for(const [term,translation] of Object.entries(terms))text=text.replace(new RegExp('\\b'+term+'\\b','g'),translation);
  if(text!==node.textContent)node.textContent=text;
  }
 }

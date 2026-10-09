@@ -168,6 +168,7 @@ function cleanDirectory(dir) {
   );
 }
 
+run(process.execPath,['scripts/build-world-recovery-index.mjs']);
 recordStage('STATIC_COPY');
 cleanDirectory(output);
 
