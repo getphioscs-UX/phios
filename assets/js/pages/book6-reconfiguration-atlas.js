@@ -11,7 +11,7 @@ async function render(){
   const locale=getLocale();
   const [sections,cases,windows,snapshots,dossiers,lived,relationships,knowledgeStates,visualStatus,positions,visualBindings]=await Promise.all([
    loadReconfigurationSections(),loadReconfigurationCases(),loadReconfigurationWindows(),loadReconfigurationSnapshots(),
-   loadContemporaryRuntimeDossiers(),loadLivedRealityDimensions(),loadReconfigurationRelationships(),loadReconfigurationKnowledgeStates(),
+   loadContemporaryRuntimeDossiers({dossierId:new URLSearchParams(location.search).get('dossier')}),loadLivedRealityDimensions(),loadReconfigurationRelationships(),loadReconfigurationKnowledgeStates(),
    loadReconfigurationVisualStatus(),loadRuntimePositionRegistry(),loadCivilizationVisualBindings()
   ]);
   if(g!==generation)return;

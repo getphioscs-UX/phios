@@ -153,7 +153,7 @@ function hydrateManagedHero(record, context) {
     target.append(image);
   }
   image.className = `${image.className || ''} client-visual-managed-hero-image`.trim();
-  image.alt = '';
+  if (!record.hero.preserveSemanticAlt) image.alt = '';
   image.decoding = 'async';
   image.loading = 'eager';
   image.fetchPriority = 'high';

@@ -1,3 +1,4 @@
+import {historicalFounderRuntimeBytes} from './founder-human-presence-successor-r2.mjs';
 import {historicalPisBytes,assertCurrentConsolidatedSurface} from './page-consolidation-successor-r1.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -37,7 +38,7 @@ export function pisCurrentSurfaceSuccessor(){
  assert.equal(cache.status,'ENGINEERING_RECONCILIATION');assert.equal(cache.file,founder.file);
  assert.equal(cache.predecessor.path,'content/web/index-surfaces/pis-r1-explore-gallery-successor-v8.json');assert.equal(cache.predecessor.sha256,sha(fs.readFileSync(cache.predecessor.path)));
  assert.equal(cache.previousSha256,founder.sha256);assert.equal(cache.historicalRecordsRewritten,false);assert.equal(cache.humanAcceptanceGranted,false);
- assert.equal(cache.runtime.path,'assets/js/pages/founder-publication-r1.js');assert.equal(cache.runtime.sha256,sha(fs.readFileSync(cache.runtime.path)));
+ assert.equal(cache.runtime.path,'assets/js/pages/founder-publication-r1.js');assert.equal(cache.runtime.sha256,sha(historicalFounderRuntimeBytes(cache.runtime.path)));
  for(const s of r.surfaces){
   const current=s.file===founder.file?founder:guides.surfaces.find(x=>x.file===s.file)||next.surfaces.find(x=>x.file===s.file);
   if(current){assert.equal(current.predecessorSha256,s.sha256);if(current!==founder){const source=historicalPisBytes(s.file).toString('utf8');for(const ref of ['/assets/customer-ui/surfaces/visual-binding-r5.css','/assets/customer-ui/js/surfaces/visual-binding-r5-guides.js'])assert(source.includes(ref),s.file+': missing R5 consumer');}}

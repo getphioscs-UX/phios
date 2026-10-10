@@ -1,3 +1,4 @@
+import {requestWorldDirection} from './civilization-atlas/world-direction-guard.js';
 import {recordVisual} from './civilization-atlas/visual-runtime.js';
 import {renderAtlasStaticVisuals,resolveAtlasVisualDeepLink,ATLAS_VISUAL_BINDINGS_PATH} from './civilization-atlas/atlas-static-visual.js';
 import {renderAtlasVisualProjection} from './civilization-atlas/atlas-visual-projection.js';
@@ -28,12 +29,13 @@ if(root){
   };
   const render=()=>{renderAtlasShell(root,store.get(),{
     locale:getLocale(),data,
-    onLayerChange:activeLayer=>store.set(reconcileAtlasContextForLayer(activeLayer,store.get(),data),{source:'layer-nav'}),
+    onLayerChange:activeLayer=>requestWorldDirection(root,activeLayer,store.get(),data,()=>store.set(reconcileAtlasContextForLayer(activeLayer,store.get(),data),{source:'layer-nav'})),
     onStateChange:(patch,meta)=>store.set(patch,meta)
   });
   renderAtlasVisualProjection(root.querySelector('[data-atlas-template-projection]'),{projection:data.visualProjection,slots:data.templateSlots,data,state:store.get(),locale:getLocale(),onStateChange:(patch,meta)=>store.set(patch,meta)});
   renderAtlasStaticVisuals(root,{bindings:data.staticVisuals,state:store.get(),locale:getLocale(),data});
-  renderAtlasReadingBridge(root,{state:store.get(),cases:data.cases,reconfigurationCases:data.reconfigurationCases,locale:getLocale()});};
+  renderAtlasReadingBridge(root,{state:store.get(),cases:data.cases,reconfigurationCases:data.reconfigurationCases,locale:getLocale()});
+  globalThis.dispatchEvent(new CustomEvent('phios:world-reading-context',{detail:{book:'BOOK-5',state:store.get(),data,store}}));};
   const unsubscribe=store.subscribe(render);
   const unbindLocale=onLocaleChange(()=>store.set({locale:getLocale()},{source:'locale'}));
   render();

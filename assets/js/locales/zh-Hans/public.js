@@ -527,6 +527,10 @@ const publicExperience = Object.freeze({
     },
     "founder": {
       "humanPresenceR2": {
+        "eyebrow": "创办人 · PHI OS · 现实导航",
+        "role": "PHI OS 创办人兼首席架构师",
+        "why": "为什么是 PHI OS",
+        "navLabel": "创办人介绍",
         "intro": "PHI OS 起于真实决策中反复出现的问题：不同来源，如何帮助我们看清同一个现实？",
         "origin": "创办人与研究起点",
         "portraitAlt": "Teresa Lee，PHI OS 创办人兼首席架构师。",

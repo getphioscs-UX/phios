@@ -2,7 +2,7 @@ const JSON_HEADERS={headers:{Accept:'application/json'}};
 const CACHE=new Map();
 async function getJson(path){
   if(!CACHE.has(path)) CACHE.set(path,fetch(path,JSON_HEADERS).then(r=>{if(!r.ok) throw new Error(`ATLAS_DATA_HTTP_${r.status}:${path}`); return r.json();}));
-  return CACHE.get(path);
+  return CACHE.get(path).catch(error=>{CACHE.delete(path);throw error;});
 }
 export async function loadTimelineRegistry(){return getJson('/content/civilization-atlas/timeline/timeline-periods-v1.json');}
 export async function loadTimelineMacroRegistry(){return getJson('/content/civilization-atlas/timeline/timeline-macro-eras-v1.json');}
@@ -33,10 +33,14 @@ export async function loadReconfigurationSections(){return getJson('/content/civ
 export async function loadReconfigurationCases(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-case-registry-v1.json');}
 export async function loadReconfigurationWindows(){return getJson('/content/civilization-atlas/reconfiguration/reconfiguration-windows-v1.json');}
 export async function loadReconfigurationSnapshots(){return getJson('/content/civilization-atlas/reconfiguration/world-reconfiguration-snapshots-v1.json');}
-export async function loadContemporaryRuntimeDossiers(){
+export async function loadAcceptedDossier(id){
+ const path='/api/book6-runtime-readout?dossier='+encodeURIComponent(id);
+ try{const body=await getJson(path);return {acceptedCurrent:body.ok?body.projection:null,currentLoadState:body.ok?'ACCEPTED_SCOPE':'NO_EVIDENCE'};}catch(error){return {acceptedCurrent:null,currentLoadState:error.message.includes('HTTP_404')?'NOT_ACTIVATED':'SERVICE_ERROR',currentLoadError:error.message};}
+}
+export async function loadContemporaryRuntimeDossiers({dossierId=null}={}){
  const [base,depth]=await Promise.all([getJson('/content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json'),getJson('/content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json')]);
  const overlay=new Map((depth.dossiers||[]).map(d=>[d.id,d]));
- const rows=await Promise.all((base.dossiers||[]).map(async d=>{let acceptedCurrent=null;try{const response=await fetch('/api/book6-runtime-readout?dossier='+encodeURIComponent(d.id),JSON_HEADERS),body=await response.json();if(response.ok&&body.ok)acceptedCurrent=body.projection;}catch{}return {...d,knowledgeDepth:overlay.get(d.id)||null,acceptedCurrent,runtimePositionCorrespondence:null,runtimePositionEvidenceGate:null,runtimePositionAdmissionReadiness:null,runtimePositionCandidates:[],currentPositionState:acceptedCurrent?'HUMAN_ACCEPTED_SUBSYSTEMS_ONLY':'UNKNOWN'};}));
+ const rows=await Promise.all((base.dossiers||[]).map(async d=>({...d,knowledgeDepth:overlay.get(d.id)||null,...(d.id===dossierId?await loadAcceptedDossier(d.id):{acceptedCurrent:null,currentLoadState:'NOT_REQUESTED'}),runtimePositionCorrespondence:null,runtimePositionEvidenceGate:null,runtimePositionAdmissionReadiness:null,runtimePositionCandidates:[],currentPositionState:'UNKNOWN'})));
  return {...base,knowledgeDepthContract:depth.contract,knowledgeDepthVersion:depth.version,currentAdmissionOwner:'W8-I_ACCEPTED_CURRENT_DOSSIER',dossiers:rows};
 }
 export async function loadLivedRealityDimensions(){return getJson('/content/civilization-atlas/reconfiguration/lived-reality-dimensions-v1.json');}

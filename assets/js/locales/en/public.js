@@ -527,6 +527,10 @@ const publicExperience = Object.freeze({
     },
     "founder": {
       "humanPresenceR2": {
+        "eyebrow": "Founder · PHI OS · Reality Navigation",
+        "role": "Founder & Principal Architect, PHI OS",
+        "why": "Why PHI OS",
+        "navLabel": "Founder introduction",
         "intro": "PHI OS began with a recurring question in real decisions: how can different sources help us see the same reality clearly?",
         "origin": "Founder & Research Origin",
         "portraitAlt": "Teresa Lee, Founder and Principal Architect of PHI OS.",

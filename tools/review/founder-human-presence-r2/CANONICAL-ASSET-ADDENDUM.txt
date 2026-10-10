@@ -1,0 +1,738 @@
+================================================================
+FOUNDER R2 · CANONICAL HUMAN VISUAL ASSET ADDENDUM
+USER-SELECTED SOURCE · 2026-10-10
+================================================================
+
+THIS ADDENDUM IS PART OF:
+
+PHI OS · FOUNDER PAGE
+HUMAN PRESENCE + ORIGIN NARRATIVE VISUAL RECOMPOSITION R2
+
+It supersedes any earlier assumption that no founder visual source
+has yet been selected.
+
+Do not replace, regenerate, restyle, reinterpret, or substitute
+the selected Teresa Lee founder imagery.
+
+---------------------------------------------------------------
+1. USER VISUAL DECISION
+---------------------------------------------------------------
+
+The user has selected the newly generated Founder visual direction
+for the PHI OS Founder page and will upload two derived assets to:
+
+R2 bucket:
+phios-public-assets
+
+Prefix:
+images/founder/
+
+Canonical asset pair:
+
+A.
+images/founder/
+PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp
+
+Purpose:
+Primary /about/founder/ hero visual.
+
+B.
+images/founder/
+PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp
+
+Purpose:
+Founder & Research Origin portrait crop.
+Also preferred Person structured-data portrait source.
+
+These two objects form ONE canonical Founder R2 visual family.
+
+Do not introduce:
+- HERO-v2
+- FOUNDER-ALT
+- FOUNDER-FINAL
+- FOUNDER-NEW
+- founder-test
+- duplicate local copies
+- alternate AI-generated Teresa portraits
+
+unless the user later explicitly requests a new version.
+
+---------------------------------------------------------------
+2. HUMAN ACCEPTANCE BOUNDARY
+---------------------------------------------------------------
+
+The visual source has been USER SELECTED for Founder R2.
+
+Treat:
+
+SOURCE_SELECTION =
+USER_SELECTED
+
+Do not claim that the final WEB COMPOSITION has been Human ACCEPTed
+until the user reviews the finished Founder page.
+
+Therefore distinguish:
+
+IMAGE_SOURCE_SELECTED = TRUE
+
+from:
+
+FOUNDER_PAGE_R2_HUMAN_ACCEPT = FALSE
+until explicit final review.
+
+The selected image itself must not be silently altered by Codex.
+
+No:
+- facial regeneration
+- beauty filtering
+- skin retouching
+- cropping that materially changes identity
+- background replacement
+- AI image repair
+- new founder likeness generation
+
+CSS layout cropping is allowed only where necessary.
+
+---------------------------------------------------------------
+3. PUBLIC SOURCE VERIFICATION
+---------------------------------------------------------------
+
+Do NOT assume upload success merely from this instruction.
+
+Before wiring production HTML, verify both public objects.
+
+Expected candidate public URLs:
+
+https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp
+
+https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp
+
+Verification must confirm:
+
+- HTTP success
+- image content returned
+- non-zero byte length
+- correct media type or browser-renderable image response
+- no redirect into an error document
+- dimensions are usable
+- object key case matches exactly
+
+If either object is not yet available:
+
+DO NOT:
+- create a fake equivalent
+- copy another PHI OS image into the path
+- claim ASSET_VERIFIED
+- publish a broken img src
+
+Instead report:
+
+PORTRAIT_ASSET_STATE =
+WAITING_FOR_R2_OBJECT
+
+and preserve the intentional Founder R2 fallback.
+
+---------------------------------------------------------------
+4. HERO ASSET OWNERSHIP
+---------------------------------------------------------------
+
+Once verified:
+
+PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp
+
+becomes the canonical first-viewport Founder visual.
+
+Use it for:
+
+/about/founder/ primary hero
++
+Open Graph social preview
+
+It replaces the current generic Founder-page og:image:
+
+PHIOS-HERO-REALITY-NAVIGATION-v1.webp
+
+The generic Reality Navigation hero must no longer represent
+Teresa Lee or the Founder page after cutover.
+
+Do not delete the Reality Navigation asset itself.
+
+It may remain in use elsewhere.
+
+---------------------------------------------------------------
+5. HERO COMPOSITION
+---------------------------------------------------------------
+
+The selected hero already contains:
+
+- Teresa Lee positioned primarily on the right
+- deep navy visual field
+- restrained warm-gold cues
+- usable negative space on the left
+
+Therefore DO NOT recreate the desktop layout as:
+
+[white text card] [image card]
+
+and DO NOT place the image inside only half of a white container.
+
+Instead use the hero as ONE full visual field.
+
+Required desktop composition:
+
+FULL HERO IMAGE
++
+HTML text layered over left negative space
+
+Approximate visual zones:
+
+0–52% width:
+HTML founder copy
+
+55–100% width:
+Teresa Lee / portrait visual
+
+Hero text remains real DOM text.
+
+No text may be burned into the image.
+
+Recommended implementation:
+
+<section class="founder-r2-hero">
+  <img class="founder-r2-hero-media" ...>
+  <div class="founder-r2-hero-overlay"></div>
+  <div class="founder-r2-hero-content">
+    ...
+  </div>
+</section>
+
+Do not use the old empty white right region.
+
+---------------------------------------------------------------
+6. HERO COPY
+---------------------------------------------------------------
+
+Eyebrow:
+
+EN:
+Founder · PHI OS · Reality Navigation
+
+ZH:
+创办人 · PHI OS · 现实导航
+
+Main thesis:
+
+EN:
+Answers are becoming easier to get.
+The harder question is which answer actually belongs to your reality.
+
+ZH:
+答案正在变得越来越容易获得。
+真正困难的是：哪一个答案，真正属于你此刻的现实。
+
+Founder identity:
+
+Teresa Lee
+
+EN:
+Founder & Principal Architect, PHI OS
+
+ZH:
+PHI OS 创办人兼首席架构师
+
+Do not place all existing S01 paragraphs over the image.
+
+Only one concise supporting paragraph is permitted in the Hero.
+
+Move the detailed S01 material into the narrative body.
+
+---------------------------------------------------------------
+7. HERO IMAGE DELIVERY
+---------------------------------------------------------------
+
+Because the Hero is above the fold:
+
+Use:
+
+loading="eager"
+
+and preferably:
+
+fetchpriority="high"
+
+Use:
+decoding="async"
+
+Set:
+explicit aspect-ratio and/or width/height
+
+Prevent:
+CLS
+
+Do not lazy-load the primary Founder Hero.
+
+Use CSS object-fit/object-position carefully.
+
+Do not crop Teresa's:
+- face
+- hairline
+- hands unnecessarily
+- upper body at awkward joints
+
+Desktop should preserve the intentional left negative space.
+
+---------------------------------------------------------------
+8. MOBILE HERO
+---------------------------------------------------------------
+
+Do not force the desktop 16:9 composition into a tiny mobile viewport
+with Teresa reduced to an unreadable full-body figure.
+
+At mobile widths, select one of these based on actual visual QA:
+
+Preferred:
+use the PORTRAIT-CROP visual above the Hero copy.
+
+Structure:
+
+PORTRAIT
+↓
+EYEBROW
+↓
+HEADLINE
+↓
+TERESA LEE
+↓
+ROLE
+↓
+SHORT INTRO
+↓
+CTA
+
+Alternative:
+use HERO visual with carefully verified background crop only if
+Teresa remains clearly readable.
+
+Do not use CSS background-position guesses without screenshots.
+
+The portrait crop exists specifically to make the human presence
+work at smaller sizes.
+
+---------------------------------------------------------------
+9. FOUNDER ORIGIN / S08
+---------------------------------------------------------------
+
+Use:
+
+PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp
+
+inside S08:
+
+Founder & Research Origin
+
+This visual must accompany, not dominate, the existing origin narrative.
+
+Recommended desktop layout:
+
+LEFT:
+portrait crop
+
+RIGHT:
+Founder & Research Origin
+heading
+identity
+selected opening paragraphs
+
+Then continue the longer origin prose at readable measure.
+
+Preserve the existing founder quote:
+
+“The problem I wanted to solve was not how to give people more answers.
+It was how to help them still see their reality clearly after they
+already have so many.”
+
+Use this as the visual conclusion of the Founder Origin area.
+
+Do not generate a second image for S08.
+
+---------------------------------------------------------------
+10. CURRENT SOURCE_NOT_ATTACHED STATE
+---------------------------------------------------------------
+
+Current source contains:
+
+data-founder-portrait-state="SOURCE_NOT_ATTACHED"
+
+Once BOTH selected objects are actually verified and wired,
+replace this state.
+
+Recommended new state:
+
+data-founder-portrait-state="ASSET_VERIFIED"
+
+Do not leave:
+
+SOURCE_NOT_ATTACHED
+
+in the final accepted implementation.
+
+If upload is incomplete:
+
+keep a truthful pending state.
+
+Do not lie in HTML metadata.
+
+---------------------------------------------------------------
+11. ACCESSIBILITY
+---------------------------------------------------------------
+
+Hero alt:
+
+EN:
+Teresa Lee, Founder and Principal Architect of PHI OS.
+
+ZH:
+Teresa Lee，PHI OS 创办人兼首席架构师。
+
+Founder Origin portrait may use the same factual semantic description.
+
+Avoid alt descriptions about:
+- attractiveness
+- age
+- outfit style
+- mystical atmosphere
+
+If the same portrait becomes visually redundant immediately next
+to an identity heading, assess whether alt="" is preferable for the
+secondary crop.
+
+The primary Founder Hero must retain meaningful accessible identity.
+
+---------------------------------------------------------------
+12. OPEN GRAPH
+---------------------------------------------------------------
+
+After HERO asset verification:
+
+Update:
+
+<meta property="og:image">
+
+to:
+
+https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp
+
+Do not update before object verification.
+
+If og:image width/height meta already exists elsewhere in the public
+shell convention, populate accurately.
+
+Do not invent dimensions.
+
+---------------------------------------------------------------
+13. PERSON JSON-LD
+---------------------------------------------------------------
+
+After PORTRAIT-CROP asset verification:
+
+Update the existing Person structured data.
+
+Current Person owner must remain:
+
+{
+  "@type": "Person",
+  "name": "Teresa Lee",
+  "jobTitle": "Founder and Principal Architect"
+}
+
+Add:
+
+"image":
+"https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/images/founder/PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp"
+
+Do not use the wide hero as the preferred Person identity image
+when a dedicated portrait crop exists.
+
+Do not add invented:
+sameAs
+education
+credential
+award
+affiliation
+nationality
+birth data
+
+---------------------------------------------------------------
+14. NO VISUAL REGENERATION
+---------------------------------------------------------------
+
+This Founder R2 execution is now a WEB COMPOSITION task.
+
+It is NOT an image-generation task.
+
+PROVIDER CALLS:
+0
+
+OPENAI IMAGE CALLS:
+0
+
+OPENAI TEXT CALLS:
+0
+
+PROVIDER COST:
+USD 0
+
+Do not spend provider budget to “improve” the accepted source.
+
+---------------------------------------------------------------
+15. VISUAL DESIGN RELATIONSHIP
+---------------------------------------------------------------
+
+Founder Hero establishes:
+
+HUMAN PRESENCE
+
+S02–S07 establish:
+
+PROBLEM
+→ FRAGMENTATION
+→ NAVIGATION
+→ AUTHORITY
+
+S08 returns to:
+
+HUMAN ORIGIN
+
+S09 returns to:
+
+USER QUESTION
+
+Therefore the page visual rhythm should become:
+
+TERESA
+↓
+THE QUESTION
+↓
+WHY EXISTING INFORMATION FRAGMENTS
+↓
+WHY PHI OS
+↓
+HOW REALITY NAVIGATION FORMS
+↓
+WHAT THE SYSTEM MUST NOT CLAIM
+↓
+TERESA / RESEARCH ORIGIN
+↓
+BEGIN WITH YOUR REAL QUESTION
+
+Do not turn S08 into a biography/CV page.
+
+Do not turn the Hero into personality branding.
+
+The founder should explain why the system exists.
+
+The system should remain larger than personality.
+
+---------------------------------------------------------------
+16. CSS REQUIREMENT
+---------------------------------------------------------------
+
+Hero desktop must not inherit the current narrow Founder prose width.
+
+The current:
+
+.founder-r1-prose { max-width:760px; }
+
+may remain appropriate for reading sections.
+
+It must NOT govern the Hero media composition.
+
+Create scoped R2 rules for:
+
+.founder-r2-hero
+.founder-r2-hero-media
+.founder-r2-hero-overlay
+.founder-r2-hero-content
+.founder-r2-identity
+.founder-r2-role
+.founder-r2-hero-actions
+.founder-r2-origin
+.founder-r2-origin-media
+.founder-r2-origin-copy
+.founder-r2-founder-quote
+
+Avoid inline style proliferation.
+
+---------------------------------------------------------------
+17. COLOR / CONTRAST
+---------------------------------------------------------------
+
+Because the Hero image is dark navy:
+
+Use warm ivory / near-white Hero typography.
+
+Use warm gold only as:
+accent
+small rule
+eyebrow
+focus detail
+
+Do NOT render long gold paragraphs.
+
+Ensure heading remains readable over the actual final image.
+
+If an overlay is needed, prefer a restrained left-side gradient:
+
+navy / transparent
+
+Do not darken Teresa's face.
+
+Do not place a global black opacity veil over the full Hero.
+
+---------------------------------------------------------------
+18. SOCIAL / BRAND RESULT
+---------------------------------------------------------------
+
+After R2 completion, /about/founder/ should communicate immediately:
+
+This is a real founder.
+
+This is the question that led to PHI OS.
+
+This system is concerned with how people judge reality when many
+sources and methods coexist.
+
+The experience must not resemble:
+
+- anonymous AI software
+- fortune-telling landing page
+- wealth consultant advertising
+- stock founder template
+- luxury CEO photography site
+
+---------------------------------------------------------------
+19. REVIEW RECEIPT
+---------------------------------------------------------------
+
+Update/create:
+
+tools/review/
+PHIOS-FOUNDER-HUMAN-PRESENCE-ORIGIN-R2-HUMAN-REVIEW.html
+
+Include exact asset ledger:
+
+FOUNDER_HERO
+key:
+images/founder/PHIOS-FOUNDER-TERESA-LEE-HERO-v1.webp
+
+public URL:
+<verified actual URL>
+
+state:
+VERIFIED / NOT_VERIFIED
+
+FOUNDER_PORTRAIT_CROP
+key:
+images/founder/PHIOS-FOUNDER-TERESA-LEE-PORTRAIT-CROP-v1.webp
+
+public URL:
+<verified actual URL>
+
+state:
+VERIFIED / NOT_VERIFIED
+
+Also show:
+
+desktop EN
+desktop ZH
+mobile EN
+mobile ZH
+Founder Origin
+og:image
+Person schema image
+
+---------------------------------------------------------------
+20. FINAL ACCEPTANCE BOUNDARY
+---------------------------------------------------------------
+
+The selected founder images are approved as the sources to wire
+for this R2 implementation.
+
+However:
+
+DO NOT automatically set the entire Founder Page R2 to HUMAN_ACCEPT.
+
+After implementation:
+
+FINAL_STATE =
+READY_FOR_HUMAN_REVIEW
+
+User will review:
+
+- actual crop
+- headline placement
+- portrait scale
+- mobile composition
+- S08 portrait composition
+- Chinese appearance
+- full-page reading rhythm
+
+Only explicit subsequent user approval may close the page.
+
+---------------------------------------------------------------
+21. FINAL RESPONSE FIELDS
+---------------------------------------------------------------
+
+Return:
+
+CURRENT_MAIN_SHA
+FILES_CHANGED
+
+FOUNDER_HERO_KEY
+FOUNDER_HERO_PUBLIC_URL
+FOUNDER_HERO_HTTP_STATE
+FOUNDER_HERO_DIMENSIONS
+
+FOUNDER_PORTRAIT_KEY
+FOUNDER_PORTRAIT_PUBLIC_URL
+FOUNDER_PORTRAIT_HTTP_STATE
+FOUNDER_PORTRAIT_DIMENSIONS
+
+FOUNDER_HERO_STATE
+FOUNDER_ORIGIN_STATE
+PORTRAIT_STATE
+
+OG_IMAGE_OLD
+OG_IMAGE_NEW
+OG_IMAGE_STATE
+
+PERSON_SCHEMA_IMAGE
+PERSON_SCHEMA_STATE
+
+DESKTOP_EN
+DESKTOP_ZH
+MOBILE_EN
+MOBILE_ZH
+
+SOURCE_NOT_ATTACHED_REMOVED
+
+ACCESSIBILITY_QA
+I18N_QA
+PUBLIC_SHELL_QA
+ASSET_QA
+ZERO_COST_REGRESSION
+
+PROVIDER_CALLS
+0
+
+PROVIDER_COST_USD
+0
+
+REVIEW_ARTIFACT
+
+UNRESOLVED
+
+FINAL_STATE =
+READY_FOR_HUMAN_REVIEW
+or
+BLOCKED_WITH_EVIDENCE

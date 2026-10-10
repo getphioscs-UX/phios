@@ -50,9 +50,9 @@ export function resolveAtlasVisualDeepLink(bindings,assetId,{data={},allowPendin
  else if(asset.family==='LOSS_FAMILY')patch={activeLayer:'loss',lossFamilyId:asset.subjectId,lossTypeId:null};
  else if(asset.family==='LOSS_TYPE_VIGNETTE')patch={activeLayer:'loss',lossTypeId:asset.subjectId};
  else if(asset.family==='CIVILIZATION_INFRASTRUCTURE')patch={activeLayer:'trajectories',trajectoryIds:[INFRA_TRAJECTORY[asset.subjectId]||'INFRASTRUCTURE_DEPENDENCY']};
- else if(asset.family==='GEOGRAPHIC_BASE')patch={activeLayer:'world'};
+ else if(asset.family==='GEOGRAPHIC_BASE')externalHref='/world?explore=visuals&familyFilter='+asset.family+'&subjectFilter='+encodeURIComponent(asset.subjectId);
  else if(asset.family==='HISTORICAL_FIGURE')patch={activeLayer:'timeline',timeWindowId:FIGURE_PERIOD[asset.subjectId]||null};
- else if(asset.family==='MODERN_FLAG')patch={activeLayer:'world',snapshotId:'WS-2026',time:2026};
+ else if(asset.family==='MODERN_FLAG')externalHref='/world?explore=visuals&familyFilter='+asset.family+'&subjectFilter='+encodeURIComponent(asset.subjectId);
  else if(asset.family==='WORLD_RECONFIGURATION_SNAPSHOT')externalHref='/world?view=reconfiguration&atlas=snapshots&snapshot='+encodeURIComponent(asset.subjectId)+'&visual='+encodeURIComponent(asset.assetId)+'#atlas';
  return {asset,patch,externalHref};
 }
@@ -111,8 +111,8 @@ function visualFigure(doc,a,locale){
  img.alt=title;img.setAttribute('loading','lazy');img.setAttribute('decoding','async');img.dataset.assetId=a.assetId;const ratio=(a.aspectRatio||'16:9').split(':').map(Number);img.width=1600;img.height=Math.round(1600*(ratio[1]||9)/(ratio[0]||16));
  const heading=doc.createElement('h4');heading.textContent=title;caption.append(heading);
  const note=doc.createElement('p');note.textContent=a.family==='MODERN_FLAG'?(zh?'现代国家旗帜，仅用于现代国家识别，不代表古代文明或历史疆界。':'A modern national flag, for modern country identification, not ancient civilizations or historical borders.'):a.family==='HISTORICAL_FIGURE'?(zh?'人物形象为创作性复原，不作为真实容貌或历史事实的证据。':'An artistic reconstruction, not evidence of exact appearance or historical facts.'):(zh?'情境插画；图中文字、位置与边界不作为历史依据，年代与资料请以图谱正文为准。':'Contextual illustration. Embedded text, positions and borders are not historical evidence; consult the structured Atlas for dates and information.');caption.append(note);
- const expand=doc.createElement('button');expand.type='button';expand.textContent=zh?'展开图片':'Expand image';expand.disabled=true;caption.append(expand);
- img.addEventListener('load',()=>{figure.dataset.imageState='ready';expand.disabled=false;},{once:true});
+ const expand=doc.createElement('button');expand.type='button';expand.textContent=zh?'展开图片':'Expand image';expand.disabled=true;expand.title=zh?'正在加载图片':'Loading image';caption.append(expand);img.addEventListener('error',()=>{expand.remove();},{once:true});
+ img.addEventListener('load',()=>{figure.dataset.imageState='ready';expand.disabled=false;expand.title='';},{once:true});
  figure.append(img,caption);monitorVisual(img,a,locale);
  expand.addEventListener('click',()=>{const dialog=doc.createElement('dialog');dialog.className='civ-visual-dialog';dialog.setAttribute('aria-label',title);const close=doc.createElement('button');close.type='button';close.textContent=zh?'关闭图片':'Close image';const large=img.cloneNode();large.loading='eager';dialog.append(close,large);const label=doc.createElement('p');label.textContent=title+' · '+note.textContent;dialog.append(label);doc.body.append(dialog);close.addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{dialog.remove();expand.focus();},{once:true});dialog.showModal();close.focus();});
  img.src=a.publicUrl;return figure;
@@ -122,12 +122,13 @@ export function renderAtlasStaticVisuals(root,{bindings,state,locale='en',data={
  primaryHost?.replaceChildren();
  if(bindings?.schemaVersion==='PHI-OS-CIVILIZATION-VISUAL-APPROVED-BINDINGS-v2'&&root.dataset.atlasReady!=='true')return;
  const doc=root.ownerDocument,options={allowPendingReview:isLocalAtlasReview(doc.defaultView?.location)},assets=resolveAtlasStaticVisuals(bindings,state,options,data);
+ const existingURLs=new Set([...root.querySelectorAll('[data-atlas-layer-content] img,[data-atlas-template-projection] img')].map(i=>i.src));const uniqueAssets=assets.filter(a=>!existingURLs.has(a.publicUrl));
  const [primary]=assets;
- let related=root.querySelector('[data-atlas-related-visuals]');if(!related){related=root.ownerDocument.createElement('section');related.dataset.atlasRelatedVisuals='';root.querySelector('.civ-atlas-canvas')?.append(related);}related.replaceChildren();if(assets.length){ensureStyle(root.ownerDocument);const h=root.ownerDocument.createElement('h3');h.textContent=locale==='zh-Hans'?'登记关联的视觉情境':'Registered related visual context';related.append(h);for(const a of assets.filter(a=>state.activeLayer!=='world'||a.family!=='WORLD_SNAPSHOT_ATMOSPHERE'))related.append(visualFigure(root.ownerDocument,a,locale));}
+ let related=root.querySelector('[data-atlas-related-visuals]');if(!related){related=root.ownerDocument.createElement('section');related.dataset.atlasRelatedVisuals='';root.querySelector('.civ-atlas-canvas')?.append(related);}related.replaceChildren();if(assets.length){ensureStyle(root.ownerDocument);const h=root.ownerDocument.createElement('h3');h.textContent=locale==='zh-Hans'?'登记关联的视觉情境':'Registered related visual context';related.append(h);for(const a of uniqueAssets.filter(a=>state.activeLayer!=='world'||a.family!=='WORLD_SNAPSHOT_ATMOSPHERE'))related.append(visualFigure(root.ownerDocument,a,locale));}
  const requestedId=new URLSearchParams(doc.defaultView?.location?.search||'').get('visual');
  const requested=requestedId?resolveAtlasVisualById(bindings,requestedId,options):null;
  const componentOwned=new Set(['timeline','world','cases','comparison','trajectories','transitions','loss']);
- const display=requested||(!componentOwned.has(state.activeLayer)?primary:null);
+ const display=(requested&&!existingURLs.has(requested.publicUrl)?requested:null)||(!componentOwned.has(state.activeLayer)?primary:null);
  if(display&&primaryHost){
   ensureStyle(doc);
   primaryHost.className=requested?'civ-atlas-primary-visual civ-atlas-deep-linked-visual':'civ-atlas-primary-visual';

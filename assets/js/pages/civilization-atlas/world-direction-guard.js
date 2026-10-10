@@ -1,0 +1,10 @@
+// Uses the original case context fields; no guessed region or default case.
+export function requestWorldDirection(root,target,state,data,apply){
+ if(!globalThis.location?.pathname.startsWith('/world')||!state.primaryCaseId){apply();return;}
+ const c=data.cases?.cases?.find(x=>x.caseId===state.primaryCaseId);if(!c){apply();return;}
+ const maps={timeline:[data.timeline?.periods,'periodId',r=>r.caseIds?.includes(c.caseId),'period'],world:[data.world?.snapshots,'snapshotId',r=>r.majorCaseIds?.includes(c.caseId),'snapshot'],comparison:[data.comparison?.families,'familyId',r=>r.caseIds?.includes(c.caseId),'family'],trajectories:[data.trajectories?.trajectories,'trajectoryId',r=>r.relatedCases?.includes(c.caseId),'trajectories'],transitions:[data.transitions?.transitionWindows,'transitionWindowId',r=>r.relatedCases?.includes(c.caseId)||c.transitionWindows?.includes(r.transitionWindowId),'tw'],loss:[data.loss?.caseProfiles,'lossTypeId',r=>r.caseId===c.caseId,'lossType']};
+ const m=maps[target];if(!m){apply();return;}
+ const candidates=(m[0]||[]).filter(m[2]);if(candidates.length===1){apply();return;}
+ root.querySelector('[data-direction-gap]')?.remove();const node=root.ownerDocument.createElement('section');node.dataset.directionGap='';node.setAttribute('role','status');node.className='knowledge-shell';const zh=state.locale==='zh-Hans';const p=root.ownerDocument.createElement('p');p.textContent=candidates.length?(zh?'有多个登记对象，请选择。当前对象没有被自动替换。':'Several registered objects match. Choose one; your object has not been replaced.'):(zh?'此对象在该方向暂无登记资料，已保留当前阅读。':'No registered object exists in this direction; the current reading is preserved.');node.append(p);
+ for(const r of candidates){const a=root.ownerDocument.createElement('a'),u=new URL(location.href);u.searchParams.set('atlas',target);u.searchParams.set(m[3],r[m[1]]);a.href=u.pathname+u.search+'#atlas';a.textContent=r.title?.[state.locale]||r.title?.en||r[m[1]];a.className='knowledge-action';node.append(a);}root.prepend(node);
+}

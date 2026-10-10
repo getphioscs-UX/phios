@@ -13,6 +13,7 @@ function update(){
  for(const node of document.querySelectorAll('main [data-i18n],.public-skip-link[data-i18n]'))node.textContent=copy(node.dataset.i18n);
  for(const node of document.querySelectorAll('main [data-i18n]'))node.hidden=node.textContent.trim()==='';
  for(const image of document.querySelectorAll('[data-i18n-alt]'))image.alt=copy(image.dataset.i18nAlt);
+ for(const node of document.querySelectorAll('[data-i18n-aria-label]'))node.setAttribute('aria-label',copy(node.getAttribute('data-i18n-aria-label')));
  const title=copy('hpc2Destinations.founder.metaTitle');
  const description=copy('hpc2Destinations.founder.publication.metaDescription');
  document.title=title;
@@ -24,4 +25,4 @@ function update(){
 onLocaleChange(update);update();
 
 // A failed selected source hides its media; no alternate founder image is substituted.
-for(const media of document.querySelectorAll('[data-founder-image-state]')){const image=media.querySelector('img');image?.addEventListener('error',()=>{media.dataset.founderImageState='ASSET_UNAVAILABLE';media.closest('[data-founder-portrait-state]')?.setAttribute('data-founder-portrait-state','WAITING_FOR_R2_OBJECT');});}
+for(const media of document.querySelectorAll('[data-founder-image-state]')){const image=media.querySelector('img');const fail=()=>{media.dataset.founderImageState='ASSET_UNAVAILABLE';media.closest('[data-founder-portrait-state]')?.setAttribute('data-founder-portrait-state','WAITING_FOR_R2_OBJECT');};image?.addEventListener('error',fail);if(image?.complete&&!image.naturalWidth)fail();}

@@ -1,0 +1,33 @@
+[
+  {
+    "command": "node scripts/run-zero-cost-regression.mjs check:founder-human-presence:r2",
+    "exitCode": 0,
+    "state": "PASS",
+    "log": "tools/review/founder-human-presence-r2/check-founder-human-presence-r2.log"
+  },
+  {
+    "command": "node scripts/run-zero-cost-regression.mjs check:i18n",
+    "exitCode": 0,
+    "state": "PASS",
+    "log": "tools/review/founder-human-presence-r2/check-i18n.log"
+  },
+  {
+    "command": "node scripts/run-zero-cost-regression.mjs check:pis-r1",
+    "exitCode": 1,
+    "state": "FAIL_REQUIRES_CLASSIFICATION",
+    "log": "tools/review/founder-human-presence-r2/check-pis-r1.log"
+  },
+  {
+    "command": "node scripts/run-zero-cost-regression.mjs check:m3a-public-experience",
+    "exitCode": 0,
+    "state": "PASS",
+    "log": "tools/review/founder-human-presence-r2/check-m3a-public-experience.log"
+  },
+  {
+    "command": "node scripts/check-founder-publication-r1.mjs",
+    "exitCode": 1,
+    "state": "HISTORICAL_LAYOUT_CONTRACT_SUPERSEDED_REVIEW_REQUIRED",
+    "log": "tools/review/founder-human-presence-r2/historical-founder-r1-check.log",
+    "reason": "Original R1 checker requires all prior ASSET-BINDINGS including PLAN-HOME-07. R2 instructions expressly review/remove irrelevant platform-summary figure. Checker remains unchanged; new R2 check preserves original accepted copy and required retained diagrams."
+  }
+]

@@ -2,6 +2,8 @@ import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
+import {parseHTML} from 'linkedom';
+import {historicalPisBytes,consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
 import { spawnSync } from 'node:child_process';
 import { onRequestGet } from '../functions/api/ask-phios.js';
 import {kapMaintenanceSuccessorSha} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
@@ -68,7 +70,15 @@ const kirSuccessor = read('content/knowledge/answer-projection/reconciliation/ka
 const kirContentSuccessor = read('content/knowledge/answer-projection/reconciliation/kap-kir-r2-content-grounding-successor-v2.json');
 const relevanceRuntime = new Map(relevanceSuccessor.runtimeSuccessors.map(item => [item.path, item]));
 const currentRuntimeSha = item => kapMaintenanceSuccessorSha(item.path,item.path === kirContentSuccessor.runtimeSuccessor.path ? kirContentSuccessor.runtimeSuccessor.currentSha256 : (item.path === kirSuccessor.runtimeSuccessor.path ? kirSuccessor.runtimeSuccessor.currentSha256 : item.currentSha256));
-const homepage = text(paths.homepage);
+const currentHomepage = text(paths.homepage);
+const homepage = historicalPisBytes(paths.homepage).toString('utf8');
+if(consolidationSuccessor()?.surfaces.some(s=>s.file===paths.homepage)){
+ assertCurrentConsolidatedSurface(parseHTML(currentHomepage).document,paths.homepage);
+ for(const href of ['/knowledge/ask/','/reality/','/books/','/perspectives/personal/','/professional/financial/'])assert(currentHomepage.includes(`href="${href}"`),'KAP_CURRENT_CONSOLIDATED_HOME_ROUTE_MISSING:'+href);
+ assert(currentHomepage.includes('/assets/customer-ui/js/shell.js'));
+ const routerCheck=spawnSync(process.execPath,['scripts/check-stage16-client-intent-router.mjs'],{stdio:'inherit'});
+ assert.equal(routerCheck.status,0,'KAP consolidated home intent routing must preserve answer boundaries');
+}
 const homepageRuntime = text(paths.homepageRuntime);
 const ckaCurrent = new Map(historicalCka.clientSurfaceTransition.artifacts.map(item => [item.path, item]));
 const ckaBCurrent = new Map(ckaBDelta.files.map(item => [item.path, item]));
