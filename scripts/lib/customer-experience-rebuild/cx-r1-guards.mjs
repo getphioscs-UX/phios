@@ -3,6 +3,7 @@ import path from 'node:path';
 
 export const root = process.cwd();
 export const base = 'content/customer-experience-rebuild';
+const excludedDirectories = new Set(['node_modules', '.git', '.wrangler', '.tmp', '.cache']);
 
 export function readJson(rel) {
   return JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
@@ -17,7 +18,11 @@ export function walk(dir, accept = () => true) {
     const current = stack.pop();
     for (const ent of fs.readdirSync(current, { withFileTypes: true })) {
       const p = path.join(current, ent.name);
-      if (ent.isDirectory()) stack.push(p);
+      // Source guards must not traverse dependency caches or mutable build output.
+      // Pages publication output has its own locked validation entry point.
+      if (ent.isDirectory()) {
+        if (!excludedDirectories.has(ent.name) && !ent.name.startsWith('.pages-output')) stack.push(p);
+      }
       else {
         const rel = path.relative(root, p).replaceAll(path.sep, '/');
         if (accept(rel)) out.push(rel);
