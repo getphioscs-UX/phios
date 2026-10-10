@@ -4,6 +4,7 @@ document.querySelector('#main .cx-container')?.prepend(host);
 let session=null;
 const zh=()=>document.documentElement.lang==='zh-Hans';
 function render(){
+ queueMicrotask(()=>document.dispatchEvent(new Event("phios:account-rendered")));
   const z=zh(),login=`/api/auth/login?locale=${z?'zh-Hans':'en'}`;
   if(!session){host.textContent=z?'暂时无法读取登录状态，请稍后重试。':'Sign-in status is temporarily unavailable. Please try again.';return;}
   const state=session.authenticated?'AUTHENTICATED':'GUEST';

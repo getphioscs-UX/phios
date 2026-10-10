@@ -22,12 +22,23 @@ const targets={
  ,'/external-reader-intake':[[58,'#externalReaderIntakeForm']]
  ,'/privacy.html':[[83,'#privacy-storage']]
  ,'/privacy':[[83,'#privacy-storage']]
+ ,'/books/':[[64,'.cx-knowledge-heading'],[65,'.pis-editorial']]
+ ,'/knowledge/concepts/':[[67,'.pis-editorial']]
+ ,'/perspectives/':[[72,'#perspectives-module-1'],[73,'#perspectives-module-2']]
+ ,'/professional/':[[52,'#review-boundary']]
+ ,'/membership.html':[[80,'main .public-section .public-container']]
+ ,'/membership':[[80,'main .public-section .public-container']]
+ ,'/contact.html':[[82,'main .public-section .public-container']]
+ ,'/contact':[[82,'main .public-section .public-container']]
+ ,'/digital-product-policy.html':[[84,'.knowledge-section']]
+ ,'/digital-product-policy':[[84,'.knowledge-section']]
 }[path]||[];
 const english={1:'Start with a question',2:'Start with reading',3:'Start with your current reality',4:'Choose a perspective',5:'Continue over time',6:'Find professional help',7:'How the platform connects',8:'Choose your starting point',10:'Directions and positions',11:'Versions and changes',12:'Evidence and interpretation',13:'How a navigation network forms',15:'Choices and constraints',16:'Keep unknowns visible',17:'Observe, review and continue',18:'Your PHI OS workspace',19:'Consent and access scope',20:'Report delivery and reopening',21:'People and permissions',22:'Timeline and versions',23:'Temporary and saved work',24:'Recovering access',33:'Sources for Personal Evidence'};
 if(targets.length){
  Object.assign(english,{34:'Seven ways to add Personal Evidence',35:'Reading your evidence result',36:'Confirm the source of an external result',37:'One bilingual evidence dossier',38:'Choose evidence to carry into Reality',39:'Differences and unknowns between sources',40:'Focus your Tarot question',41:'Choose the spread positions',42:'Shuffle and select your own cards',43:'Read the symbols in their positions',44:'Compare the reading with lived experience',45:'Continue from the same reading'});
  Object.assign(english,{46:'One question and a choice of casting method',53:'Service scope and actual deliverables',54:'An appointment request requires confirmation',55:'Choose the information you authorize for professional handoff',58:'Provide the source of an external reading',62:'Keep the question and its selected sources visible',63:'Explore connected knowledge',74:'Two people and their real circumstances',75:'Shared decisions and individual permissions',83:'Data storage, retention and withdrawal'});
  Object.assign(english,{9:'Your current reality remains a sourced view',14:'Connect evidence without turning it into certainty',61:'Natural Healer service scope',68:'Search results retain their source relationships',69:'Find a learning path through connected topics',70:'Compare learning with lived experience'});
+ Object.assign(english,{52:'Keep report review and professional advice distinct',64:'The eight volumes form a connected foundation',65:'Follow a question across volumes',67:'Concepts connect to articles and figures',72:'Different perspectives on the same situation',73:'Sources retain their own boundaries',80:'Membership and individual purchase rights remain distinct',82:'Choose the appropriate support route',84:'Digital content and service deliverables differ'});
  const registry=await customerAssetRegistry();
  const zh=()=>document.documentElement.lang.toLowerCase().startsWith('zh');
  function localized(node,en,cn){node.dataset.cxEn=en;node.dataset.cxZh=cn;node.textContent=zh()?cn:en;}

@@ -15,6 +15,7 @@ function placeResults(){
  return `<div class="cx-place-results" role="listbox">${locationCandidates.map(c=>`<button type="button" class="cx-place-option" data-place-ref="${esc(c.providerRef)}"><strong>${esc(c.primaryLabel||c.label)}</strong>${c.secondaryLabel?`<small>${esc(c.secondaryLabel)}</small>`:''}</button>`).join('')}</div>`;
 }
 function render(){
+ queueMicrotask(()=>document.dispatchEvent(new Event("phios:account-rendered")));
  const p=persons.find(p=>p.personId===editing),birth=p?.canonicalBirthInput;
  host.innerHTML=`<div class="cx-person-hub__header"><div><p class="cx-eyebrow">${esc(tr('PERSONAL PROFILE','个人资料'))}</p><h2>${esc(tr('Your birth profile','你的出生资料'))}</h2><p>${esc(tr('Enter the details you know. PHI OS resolves coordinates, country, timezone and the historical UTC offset from the birth place you confirm.','只填写你知道的资料。确认出生地点后，PHI OS 会自动解析坐标、国家、时区及出生当时的 UTC 偏移。'))}</p></div></div>${message?`<p class="cx-person-message" role="status">${esc(message)}</p>`:''}${available?`
  <div class="cx-stack">${persons.map(p=>`<article><h3>${esc(p.name)}</h3><p>${esc(p.consentState==='ACTIVE'?tr('Consent active','同意有效'):tr('Consent withdrawn','已撤回同意'))} · ${esc(tr('Version','版本'))} ${p.version}</p><button class="cx-button" data-edit="${esc(p.personId)}">${esc(tr('Edit','修改'))}</button> <button class="cx-button cx-button--secondary" data-revoke="${esc(p.personId)}">${esc(tr('Withdraw consent','撤回同意'))}</button></article>`).join('')}</div>
