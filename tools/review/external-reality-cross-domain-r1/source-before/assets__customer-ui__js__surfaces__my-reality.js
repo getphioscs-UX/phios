@@ -1,4 +1,3 @@
-import {externalConditionsHtml} from './external-reality.js';
 import {arr,esc,installTabs,locale,postJson,reRenderOnLocale,setStatus,tr,valueText} from './runtime-ui.js';
 import {renderRealityNavigationNetwork,renderNavigationFormationConcept} from '../reality-navigation-network.js';
 let currentView=null;
@@ -60,9 +59,7 @@ function renderCurrent(view){
     block(tr('Constraints','限制条件'),r.constraints,tr('No explicit constraints have been established.','尚未建立明确限制条件。')),
     block(tr('Open questions','开放问题'),r.openQuestions,tr('No explicit open questions have been added.','尚未加入明确的开放问题。'))
   ];
-  if(view.publicExternalReference)parts.push('<section class="cx-my-reality__block" data-world-reference><h3>'+esc(tr('Selected World reference','已选择的 World 引用'))+'</h3><p>'+esc(tr('Public context only. Current source evidence, jurisdiction and case applicability are not established; no private history was written.','仅公共背景。当前来源证据、辖区及个案适用性尚未建立；未写入私人历史。'))+'</p><a href="/world/">'+esc(tr('Open original context','打开原始背景'))+'</a></section>');
-  parts.push(externalConditionsHtml(view.externalReality));
-  if(arr(r.evidence).filter(e=>!e.eventId).length)parts.push(`<section class="cx-my-reality__block"><h3 class="cx-heading">${esc(tr('Evidence','证据'))}</h3>${r.evidence.filter(e=>!e.eventId).map(e=>`<article class="cx-p1-source"><strong>${esc(e.statement||'')}</strong>${e.authorityClass?`<div class="cx-meta">${esc(e.authorityClass)}</div>`:''}${e.sourceUrl?`<a href="${esc(e.sourceUrl)}" target="_blank" rel="noopener">${esc(tr('Open source','打开来源'))}</a>`:''}</article>`).join('')}</section>`);
+  if(arr(r.evidence).length)parts.push(`<section class="cx-my-reality__block"><h3 class="cx-heading">${esc(tr('Evidence','证据'))}</h3>${r.evidence.map(e=>`<article class="cx-p1-source"><strong>${esc(e.statement||'')}</strong>${e.authorityClass?`<div class="cx-meta">${esc(e.authorityClass)}</div>`:''}${e.sourceUrl?`<a href="${esc(e.sourceUrl)}" target="_blank" rel="noopener">${esc(tr('Open source','打开来源'))}</a>`:''}</article>`).join('')}</section>`);
   if(arr(r.findings).length)parts.push(block(tr('Established findings','已建立发现'),r.findings,tr('No findings have been established.','尚未建立发现。')));
   if(arr(r.calculations).length)parts.push(block(tr('Calculations','计算'),r.calculations.map(x=>`${x.code}: ${valueText(x.value)}${x.unit?` ${x.unit}`:''}`),tr('No calculations are present.','当前没有计算。')));
   parts.push(block(tr('Unknowns','未知'),r.unknowns,tr('No explicit unknown has been recorded.','尚未记录明确未知。')));
@@ -153,7 +150,7 @@ function render(input){
   renderNavigationFormationConcept(document.querySelector('[data-network-formation]'),{locale:locale()});
   const view=normalizeWorkspace(input);currentView=view;renderContextSummary(view);renderOverview(view);renderCurrent(view);renderPerspectives(view);renderReading(view);renderNavigation(view);renderActions(view);renderObservations();renderReview(view);renderHistory(view);renderReports(view);renderContinuity(view);renderSide(view);
 }
-async function loadCurrent(){try{const response=await fetch(`/api/customer-my-reality?locale=${encodeURIComponent(locale())}${new URLSearchParams(location.search).get('externalContextRef')==='WORLD_PUBLIC_CONTEXT'?'&externalContextRef=WORLD_PUBLIC_CONTEXT':''}`,{cache:'no-store',credentials:'same-origin'});const payload=await response.json();if(response.ok&&payload?.ok)render(payload.workspace||payload.view)}catch{render({state:'EMPTY',overview:{},currentReality:{},perspectives:{items:[]}})}}
+async function loadCurrent(){try{const response=await fetch(`/api/customer-my-reality?locale=${encodeURIComponent(locale())}`,{cache:'no-store',credentials:'same-origin'});const payload=await response.json();if(response.ok&&payload?.ok)render(payload.workspace||payload.view)}catch{render({state:'EMPTY',overview:{},currentReality:{},perspectives:{items:[]}})}}
 function boot(){
   installTabs();const dialog=document.getElementById('cx-reality-intake');
   document.querySelector('[data-cx-start-reality]')?.addEventListener('click',()=>dialog?.showModal());
@@ -168,5 +165,3 @@ boot();
 // Presentation navigation only: reuse the existing intake and workspace tabs.
 document.querySelector('[data-reality-structure-start]')?.addEventListener('click',()=>document.getElementById('cx-reality-intake')?.showModal());
 for(const button of document.querySelectorAll('[data-reality-structure-tab]'))button.addEventListener('click',()=>{const tab=document.querySelector('[data-cx-tab="'+button.dataset.realityStructureTab+'"]');tab?.click();document.querySelector('[data-cx-workspace]')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});tab?.focus({preventScroll:true});});
-
-document.addEventListener('click',event=>{const button=event.target.closest('[data-external-ignore]');if(!button||!currentView?.externalReality)return;const id=button.dataset.externalIgnore;currentView={...currentView,externalReality:{...currentView.externalReality,items:currentView.externalReality.items.filter(i=>i.eventId!==id)}};renderCurrent(currentView);});

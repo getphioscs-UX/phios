@@ -5,9 +5,11 @@ let session=null;
 const zh=()=>document.documentElement.lang==='zh-Hans';
 function render(){
  queueMicrotask(()=>document.dispatchEvent(new Event("phios:account-rendered")));
+  delete host.dataset.r6AccountPermissionGate;
   const z=zh(),login=`/api/auth/login?locale=${z?'zh-Hans':'en'}`;
   if(!session){host.textContent=z?'暂时无法读取登录状态，请稍后重试。':'Sign-in status is temporarily unavailable. Please try again.';return;}
   const state=session.authenticated?'AUTHENTICATED':'GUEST';
+  if(session.authenticated===false)host.dataset.r6AccountPermissionGate='true';
   document.body.dataset.cxAccountState=state;
   for(const badge of document.querySelectorAll('.cx-account-state')){
     badge.dataset.cxAccountState=state;

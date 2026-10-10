@@ -203,8 +203,6 @@ for(const file of ["assets/js/pages/civilization-atlas/world-copy.js","assets/js
 // Include this new local customer consumer before commit; it remains subject
 // to the same public boundary, size checks and source-identity receipt.
 for(const file of ['world/index.html','assets/js/pages/world.js','assets/customer-ui/surfaces/reality-structure.css','assets/customer-ui/surfaces/professional-visual-r1.css','assets/customer-ui/js/professional-visual-r1.js','assets/customer-ui/surfaces/personal-method-visual-r1.css','assets/customer-ui/js/personal-method-visual-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
-// Bounded External Reality customer renderer; no review fixtures are published.
-for(const file of ['assets/customer-ui/js/surfaces/external-reality.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 const atlasReadingBridge='assets/js/pages/civilization-atlas/atlas-reading-bridge.js';
 if(fs.existsSync(path.join(root,atlasReadingBridge)))publicationFiles.add(atlasReadingBridge);
 if (admittedBookVii) {

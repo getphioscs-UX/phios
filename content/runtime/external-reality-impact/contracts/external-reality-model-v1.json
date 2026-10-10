@@ -1,0 +1,88 @@
+{
+  "jurisdictionContext": {
+    "schemaVersion": "PHI-OS-JURISDICTION-CONTEXT-v1",
+    "fields": [
+      "interfaceLocale",
+      "currentPhysicalJurisdiction",
+      "residenceJurisdictions",
+      "taxJurisdictions",
+      "businessJurisdictions",
+      "professionalServiceJurisdictions",
+      "financialMarketExposures",
+      "propertyJurisdictions",
+      "travelJurisdictions",
+      "selectedExternalContext",
+      "sourceReferences",
+      "asOf",
+      "confirmationState"
+    ],
+    "itemFields": [
+      "jurisdictionCode",
+      "jurisdictionType",
+      "source",
+      "confirmationState",
+      "asOf",
+      "purpose",
+      "persistenceState"
+    ],
+    "ttlSeconds": 86400,
+    "unknownFailsClosed": true,
+    "supranationalNotNationalTaxAuthority": true
+  },
+  "event": {
+    "schemaVersion": "EXTERNAL_REALITY_EVENT_V1",
+    "sourceOwner": "functions/current-web-authority/current-web-authority-runtime.js",
+    "requiresMappedSourceIdentity": true,
+    "policyAnnouncementNotEffectiveLaw": true,
+    "domainSpecificFreshness": true
+  },
+  "impact": {
+    "schemaVersion": "EXTERNAL_REALITY_IMPACT_CANDIDATE_V1",
+    "readsPrivateHealth": false,
+    "allowsDiagnosis": false,
+    "allowsTaxCalculation": false,
+    "allowsRecommendation": false,
+    "relevanceRefsRequireOwnerConsentPurposeVisibilityCurrentVersion": true
+  },
+  "edges": {
+    "allowed": [
+      "SOURCE_SUPPORTS_CLAIM",
+      "EVENT_APPLIES_TO_JURISDICTION",
+      "EVENT_RELEVANT_TO_CONTEXT",
+      "CONSTRAINT_RELATIONSHIP",
+      "USER_CONFIRMED_RELATIONSHIP",
+      "TEMPORAL_RELATIONSHIP",
+      "PROFESSIONAL_REVIEW_LINK",
+      "OBSERVED_OUTCOME_LINK",
+      "POSSIBLE_RELATIONSHIP"
+    ],
+    "implemented": "POSSIBLE_RELATIONSHIP only for source-bound candidate links; no causal edges"
+  },
+  "navigation": {
+    "schemaVersion": "NAVIGATION_REVIEW_TRIGGER_V1",
+    "states": [
+      "CANDIDATE",
+      "RELEVANCE_CONFIRMED",
+      "BLOCKED_UNKNOWN",
+      "BLOCKED_CONSENT",
+      "PROFESSIONAL_REVIEW_REQUIRED",
+      "READY_FOR_REASSESSMENT",
+      "SUPERSEDED"
+    ],
+    "implementedStates": [
+      "CANDIDATE",
+      "PROFESSIONAL_REVIEW_REQUIRED"
+    ],
+    "otherStatesRequireExistingOwnerAdmission": true,
+    "authority": "functions/runtime/navigation/nav-accepted-batch-06-runtime.js",
+    "noAutomaticAction": true
+  },
+  "world": {
+    "referenceOnly": true,
+    "currentEvidenceRequiresSeparateCwaAdmission": true,
+    "automaticPrivateWrite": false
+  },
+  "changeDetection": {
+    "withoutPreviousVerifiedEvidence": "UNKNOWN"
+  }
+}

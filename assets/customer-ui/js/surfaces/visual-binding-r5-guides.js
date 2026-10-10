@@ -3,16 +3,16 @@ const path=location.pathname.replace(/index\.html$/,'');
 const targets={
  '/':[[1,'.cx-home-beginning:nth-child(1)',true],[2,'.cx-home-beginning:nth-child(2)',true],[3,'.cx-home-beginning:nth-child(3)',true],[4,'.cx-home-beginning:nth-child(4)',true],[5,'.cx-home-beginning:nth-child(5)',true],[6,'.cx-home-beginning:nth-child(6)',true]],
  '/reality/':[[9,'[data-cx-panel="overview"]'],[10,'[data-cx-panel="navigation"]'],[11,'[data-cx-panel="history"]'],[14,'[data-cx-panel="reading"]'],[15,'[data-cx-panel="navigation"]'],[16,'[data-cx-panel="current"]']],
- '/account/':[[18,'.cx-account-hero'],[19,'.cx-account-shortcuts .cx-card:last-child'],[20,'#account-reports'],[21,'#account-persons'],[23,'[data-cx-account-continuity]'],[24,'[data-r5-account-auth]']],
+ '/account/':[[18,'.cx-account-hero'],[19,'.cx-account-shortcuts .cx-card:last-child'],[20,'#account-reports'],[21,'#account-persons'],[23,'[data-cx-account-continuity]'],[24,'[data-r5-account-auth]'],[88,'[data-r6-account-permission-gate="true"]']],
  '/perspectives/profile/':[[33,'#profile-modes .cx-container'],[34,'#profile-modes .cx-container'],[35,'[data-prf-results] .cx-container'],[36,'[data-prf-workbench] .prf-guide'],[37,'[data-prf-dossier-dialog]'],[38,'[data-prf-handoff-panel]'],[39,'[data-prf-boundaries]']],
  '/perspectives/tarot/':[[40,'[data-reading-step="question"]'],[41,'[data-reading-step="spread"]'],[42,'[data-reading-step="draw"]'],[43,'[data-customer-layer="INTERPRETATION"]'],[44,'[data-customer-layer="REALITY"]'],[45,'[data-customer-layer="NEXT"]']]
  ,'/perspectives/iching/':[[46,'.icx-entry-paths']]
- ,'/perspectives/iching/run/':[[47,'[data-result-layer="PROJECTION"] > div'],[48,'[data-result-layer="PROJECTION"] > div'],[49,'[data-result-layer="SYMBOLIC_INTERPRETATION"] > div'],[50,'[data-result-layer="REALITY_COMPARISON"] > div'],[51,'[data-result-layer="POSSIBLE_NEXT_QUESTIONS_ACTIONS"] > div']]
+ ,'/perspectives/iching/consult/':[[47,'.icx-hexagram-pair'],[48,'.icx-hexagram-pair'],[49,'.icx-direct-reading'],[50,'.icx-reality-reading'],[51,'[data-r6-iching-continuity]']]
  ,'/knowledge/':[[63,'.cx-knowledge-heading']]
- ,'/knowledge/ask/':[[62,'[data-cx-contextual-ask-form]']]
+ ,'/knowledge/ask/':[[62,'[data-cx-contextual-ask-form]'],[71,'.cx-ask-poster',true],[89,'[data-r6-source-load-failure="true"]']]
  ,'/perspectives/relationship/':[[74,'[data-cx-relationship-state]'],[75,'[data-relationship-intake]']]
- ,'/professional/services/':[[53,'.cx-system-state'],[61,'[data-r6-natural-healer-scope]']]
- ,'/search/':[[68,'[data-cx-knowledge-search-form]']]
+ ,'/professional/services/':[[53,'.cx-system-state'],[60,'[data-r6-cash-flow-game-scope]'],[61,'[data-r6-natural-healer-scope]']]
+ ,'/search/':[[68,'[data-cx-knowledge-search-form]'],[87,'[data-r6-no-matching-results="true"]']]
  ,'/academy/':[[69,'[data-navigation-academy]']]
  ,'/academy/lesson/':[[70,'[data-r6-learning-application]']]
  ,'/professional/appointments/':[[54,'[data-appointment-request-form]']]
@@ -28,7 +28,7 @@ const targets={
  ,'/checkout.html':[[81,'[data-r6-checkout-guide]']]
  ,'/checkout':[[81,'[data-r6-checkout-guide]']]
  ,'/knowledge/concepts/':[[67,'.pis-editorial']]
- ,'/perspectives/':[[72,'#perspectives-module-1'],[73,'#perspectives-module-2']]
+ ,'/perspectives/':[[72,'#perspectives-module-1'],[73,'#perspectives-module-2'],[78,'[data-r6-perspectives-hero]',true]]
  ,'/professional/':[[52,'#review-boundary']]
  ,'/membership.html':[[80,'main .public-section .public-container']]
  ,'/membership':[[80,'main .public-section .public-container']]
@@ -45,6 +45,8 @@ if(targets.length){
  Object.assign(english,{52:'Keep report review and professional advice distinct',64:'The eight volumes form a connected foundation',65:'Follow a question across volumes',67:'Concepts connect to articles and figures',72:'Different perspectives on the same situation',73:'Sources retain their own boundaries',80:'Membership and individual purchase rights remain distinct',82:'Choose the appropriate support route',84:'Digital content and service deliverables differ'});
  Object.assign(english,{47:'Read six lines from bottom to top',49:'Read the different layers without merging their authority',50:'Compare the symbolic reading with real observations',51:'Continue from the recorded cast',66:'Follow a question through reading',81:'Payment confirmation precedes entitlement and delivery',85:'The eight-volume system'});
  english[48]='Example without changing lines: the primary and relating hexagrams are identical';
+ Object.assign(english,{87:'No matching published source for this search',88:'Account permission is required',89:'The selected source could not be loaded'});
+ Object.assign(english,{60:'Cash Flow Game learning context',71:'A question connected to explicitly selected sources',78:'Explore multiple lenses without merging their authority'});
  const registry=await customerAssetRegistry();
  const zh=()=>document.documentElement.lang.toLowerCase().startsWith('zh');
  function localized(node,en,cn){node.dataset.cxEn=en;node.dataset.cxZh=cn;node.textContent=zh()?cn:en;}
@@ -63,9 +65,9 @@ if(targets.length){
  bind();let queued=false;
  const schedule=()=>{if(queued)return;queued=true;queueMicrotask(()=>{queued=false;bind();});};
  // Observe existing method result owners only, never rescan the entire main tree.
- for(const selector of ['[data-prf-results]','[data-prf-workbench]','[data-prf-dossier-dialog]','[data-prf-handoff-panel]','[data-customer-layer]','[data-navigation-academy]'])for(const host of document.querySelectorAll(selector)){
+ for(const selector of ['[data-prf-results]','[data-prf-workbench]','[data-prf-dossier-dialog]','[data-prf-handoff-panel]','[data-customer-layer]','[data-navigation-academy]','[data-reading-content]'])for(const host of document.querySelectorAll(selector)){
   new MutationObserver(records=>{if(records.some(record=>[...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&!node.matches('[data-r5-guide], [data-cx-asset-fallback]')&&!node.closest('[data-r5-guide]'))))schedule();}).observe(host,{childList:true,subtree:true});
  }
- for(const event of ['change','phios:reading-rendered','phios:profile-rendered','phios:account-rendered'])document.addEventListener(event,schedule);
+ for(const event of ['change','phios:reading-rendered','phios:profile-rendered','phios:account-rendered','phios:search-rendered','phios:ask-source-rendered'])document.addEventListener(event,schedule);
  window.addEventListener('phios:localechange',()=>{document.querySelectorAll('[data-r5-guide] [data-cx-en]').forEach(node=>node.textContent=zh()?node.dataset.cxZh:node.dataset.cxEn);document.querySelectorAll('[data-r5-guide] img').forEach(node=>node.alt=zh()?node.dataset.cxZhAlt:node.dataset.cxEnAlt);schedule();});
 }

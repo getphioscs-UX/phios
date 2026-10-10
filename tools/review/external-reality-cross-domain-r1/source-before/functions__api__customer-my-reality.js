@@ -1,4 +1,3 @@
-import {projectExternalRealityContext} from '../customer-projection/external-reality-customer-projection.js';
 import {buildCurrentRealityBundle} from '../reality-orchestration/reality-orchestrator.js';
 import {projectRealityForCustomer} from '../customer-projection/reality-customer-projection.js';
 import {projectReadoutForCustomer} from '../customer-projection/readout-customer-projection.js';
@@ -34,10 +33,7 @@ export async function onRequestGet(context){
   const reality=projectRealityForCustomer({...sources,locale});
   const navigation=acceptedNavigationForCustomer(context,{reality,locale});
   const base=workspaceFromProjectedSources({reality,reading:sources.reading,navigation,journey:sources.journey,reports:sources.reports,locale});
-  let workspace=await attachSavedSources(context,base);
-  const externalReality=projectExternalRealityContext(context,{locale});
-  workspace={...workspace,externalReality,currentReality:{...workspace.currentReality,evidence:[...workspace.currentReality.evidence,...externalReality.items]}};
-  if(new URL(context.request.url).searchParams.get('externalContextRef')==='WORLD_PUBLIC_CONTEXT')workspace={...workspace,publicExternalReference:{sourceRef:'WORLD_PUBLIC_CONTEXT',href:'/world/',sourceAuthority:'WORLD',state:'SELECTED_PUBLIC_REFERENCE_NOT_CURRENT_EVIDENCE',selectedAt:new Date().toISOString(),publishedAt:null,jurisdiction:null,persisted:false}};
+  const workspace=await attachSavedSources(context,base);
   return json({ok:true,view:reality,workspace,governance:{persisted:false,readsPersistedSources:workspace.savedSources.state==='OWNER_SCOPED_SOURCE_PROJECTION',rawRuntimeExposed:false,workspaceConsumesCustomerProjections:true,missingHistoryReconstructed:false}});
 }
 
@@ -51,9 +47,7 @@ export async function onRequestPost(context){
     const bundle=await buildCurrentRealityBundle({sourceType:'ASK',locale,source:{question,reportedContext,unknown:[]}});
     const reality=projectRealityForCustomer({bundle,locale});
     const navigation=acceptedNavigationForCustomer(context,{reality,locale,sessionInput:true});
-    let workspace=await attachSavedSources(context,workspaceFromProjectedSources({reality,reading:null,navigation,journey:null,reports:[],locale}));
-    const externalReality=projectExternalRealityContext(context,{locale});
-    workspace={...workspace,externalReality,currentReality:{...workspace.currentReality,evidence:[...workspace.currentReality.evidence,...externalReality.items]}};
+    const workspace=await attachSavedSources(context,workspaceFromProjectedSources({reality,reading:null,navigation,journey:null,reports:[],locale}));
     return json({ok:true,view:reality,workspace,governance:{persisted:false,canonicalRealityCreated:false,rawRuntimeExposed:false,workspaceConsumesCustomerProjections:true}});
   }catch(error){return json({ok:false,error:error?.code||error?.message||'CUSTOMER_REALITY_PROJECTION_FAILED'},error?.status||422)}
 }

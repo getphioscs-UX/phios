@@ -221,10 +221,13 @@ async function loadSeededContexts(){
   const {contextType,contextRef,contextLabel,contextRoute,contextSummary,readingPath,relatedKnowledgeRef,retrievalScope}=normalizeAskContext(new URLSearchParams(location.search));
   const node=document.querySelector('[data-cx-seeded-contexts]');
   if(!node)return;
+  delete node.dataset.r6SourceLoadFailure;
   if(!contextType){node.innerHTML='';return;}
   seedLoading=true;seedFailed=false;
+  let visualSourceLoadFailure=false;
   try{
     const response=await fetch(`/api/customer-contextual-ask?locale=${encodeURIComponent(locale())}&contextType=${encodeURIComponent(contextType)}&contextRef=${encodeURIComponent(contextRef||'')}`,{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(12000)});
+    visualSourceLoadFailure=response.status>=500||response.status===429;
     if(!response.ok)throw Error('SELECTED_SOURCE_UNAVAILABLE');
     const payload=await response.json();
     const seeded=arr(payload?.availability).filter(x=>x.requestedContextRef||x.contextType===contextType).filter(x=>x.contextType!=='CURRENT_REALITY');
@@ -236,10 +239,11 @@ async function loadSeededContexts(){
       return `<label class="cx-context-choice" data-availability="${esc(x.availability)}"><input type="checkbox" data-cx-seeded-context data-context-type="${esc(x.contextType)}" data-context-ref="${esc(x.requestedContextRef||'')}" data-context-label="${esc(label)}" data-context-route="${esc(contextRoute||'/knowledge/')}" data-context-summary="${esc(contextSummary||'')}" data-reading-path="${esc(readingPath||'')}" data-related-knowledge-ref="${esc(relatedKnowledgeRef||'')}" data-retrieval-scope="${esc(retrievalScope||'')}" ${checked?'checked':''} ${available?'':'disabled'}><span><strong>${esc(label)}</strong><small>${esc(availabilityHelp(x,specificKnowledge))}</small></span></label>`;
     }).join('');
     if(node.querySelector('[data-context-type="KNOWLEDGE"]:checked')&&document.querySelector('[name="contextKnowledge"]'))document.querySelector('[name="contextKnowledge"]').checked=false;
-  }catch{
+  }catch(error){
     seedFailed=true;
+    if(visualSourceLoadFailure||error instanceof TypeError||['AbortError','TimeoutError'].includes(error?.name))node.dataset.r6SourceLoadFailure='true';
     node.innerHTML=`<div class="cx-p1-callout">${esc(tr('The selected source could not be loaded. Retry, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试，或明确选择只使用知识提问。'))}</div>`;
-  }finally{seedLoading=false;}
+  }finally{seedLoading=false;queueMicrotask(()=>document.dispatchEvent(new Event('phios:ask-source-rendered')));}
 }
 
 function errorMessage(code){
