@@ -14,8 +14,12 @@
   {
     "command": "node scripts/run-zero-cost-regression.mjs check:pis-r1",
     "exitCode": 1,
-    "state": "FAIL_REQUIRES_CLASSIFICATION",
-    "log": "tools/review/founder-human-presence-r2/check-pis-r1.log"
+    "state": "SUPERSEDED_R1_LAYOUT_ASSERTION_FAILURE",
+    "log": "tools/review/founder-human-presence-r2/check-pis-r1.log",
+    "failedObject": "PLAN-HOME-07",
+    "assertion": "All Founder R1 ASSET-BINDINGS must remain in current HTML; scripts/check-founder-publication-r1.mjs:12",
+    "relatedChange": "Removed generic platform relationship summary from Founder per R2 narrative review; retained canonical object/registry and six other figures",
+    "baselineClassification": "INTENTIONAL_SUCCESSOR_LAYOUT_CHANGE, NOT A PRE_EXISTING_FAILURE"
   },
   {
     "command": "node scripts/run-zero-cost-regression.mjs check:m3a-public-experience",

@@ -36,7 +36,14 @@ for(const asset of visuals.assets){assert.equal(fs.existsSync(asset.repoPath),tr
 for(const file of ['PHIOS-HERO-PERSONAL-REALITY-v2.webp','PHIOS-HERO-PERSONAL-REALITY-v2-mobile.webp','PHIOS-FIGURE-READING-AUTHORITY-STACK-v1.svg','PHIOS-FIGURE-PERSONAL-PERSPECTIVE-CONSTELLATION-v1.svg','PHIOS-FIGURE-PERSONAL-READING-FLOW-v1.svg','PHIOS-FIGURE-PERSONAL-READING-MAP-v1.svg'])assert(visuals.assets.some(x=>x.filename===file),`missing visual manifest asset ${file}`);
 const pprR2ProductFirst=html.includes('data-cx-specialist-products')&&html.includes('value="ecr"');
 const pprR5Editorial=fs.existsSync('content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json')&&html.includes('data-ppr-r5-editorial="true"');
-if(pprR5Editorial){assert.match(html,/One reality\. Several ways to make it readable\./);assert.match(html,/同一个现实，需要不止一种读取方式。/);assert.match(html,/REALITY COMPRESSION/);assert.match(html,/ONE REALITY · MANY INTERFACES/);assert.match(html,/PHI Configuration/);}else if(pprR2ProductFirst){assert.match(html,/Professional personal readings, kept distinct\./);assert.match(html,/专业个人读取，各自保持完整。/);assert.match(html,/PHI Configuration/);}else{assert.match(html,/One person\. More than one perspective\./);assert.match(html,/同一个人，可以从不同视角被理解。/);}assert.match(html,/PHIOS-HERO-PERSONAL-REALITY-v2-mobile\.webp/);assert.match(html,/PHIOS-HERO-PERSONAL-REALITY-v2\.webp/);
+if(pprR5Editorial){assert.match(html,/One reality\. Several ways to make it readable\./);assert.match(html,/同一个现实，需要不止一种读取方式。/);assert.match(html,/REALITY COMPRESSION/);assert.match(html,/ONE REALITY · MANY INTERFACES/);assert.match(html,/PHI Configuration/);}else if(pprR2ProductFirst){assert.match(html,/Professional personal readings, kept distinct\./);assert.match(html,/专业个人读取，各自保持完整。/);assert.match(html,/PHI Configuration/);}else{assert.match(html,/One person\. More than one perspective\./);assert.match(html,/同一个人，可以从不同视角被理解。/);}if(html.includes('data-approved-visual="PHIOS-HERO-PERSONAL-REALITY-v1.webp"')){
+ const inventory=json('data/visual/approved-r2-visual-assets.json');
+ const hero=inventory.assets.find(a=>a.canonicalFilename==='PHIOS-HERO-PERSONAL-REALITY-v1.webp');
+ assert.equal(hero?.role,'HERO');assert.equal(hero.r2Path,'images/hero/PHIOS-HERO-PERSONAL-REALITY-v1.webp');
+ assert(html.includes('/assets/js/global-visual-r2.js'));
+ assert.match(read('assets/js/global-visual-r2.js'),/resolveApprovedVisual/);
+ assert.match(read('assets/js/global-visual-r2.js'),/image\.src=a\.src/);
+}else{assert.match(html,/PHIOS-HERO-PERSONAL-REALITY-v2-mobile\.webp/);assert.match(html,/PHIOS-HERO-PERSONAL-REALITY-v2\.webp/);}
 assert.match(html,/PHIOS-FIGURE-READING-AUTHORITY-STACK-v1\.svg/);assert.match(html,/PHIOS-FIGURE-PERSONAL-PERSPECTIVE-CONSTELLATION-v1\.svg/);assert.match(html,/PHIOS-FIGURE-PERSONAL-READING-FLOW-v1\.svg/);
 assert(html.indexOf('data-cx-method-selection')<html.indexOf('name="birthDate"'),'method selection must appear before birth inputs');
 assert.equal((html.match(/name="methods"/g)||[]).length,pprR2ProductFirst?5:4,pprR2ProductFirst?'PPR-R2 product selector must expose ECR plus four established birth-based methods':'only four birth-based methods may be selectable here');
@@ -73,7 +80,17 @@ for(const id of ['CXICON-METHOD-ECR','CXICON-METHOD-PROFILE'])assert(iconRecon.m
 assert.match(html,/data-ppr-r5-method="ecr"[^\n]*data-cx-asset="CXICON-METHOD-ECR"/);
 assert.match(html,/data-method="ecr"[^\n]*data-cx-asset="CXICON-METHOD-ECR"/);
 assert.match(html,/data-cx-asset="CXICON-METHOD-PROFILE"/);
-assert.match(read('perspectives/profile/index.html'),/data-cx-asset="CXICON-METHOD-PROFILE"/);
+const profilePage=read('perspectives/profile/index.html');
+const profileRolePath='content/profile/successors/personal-evidence-r1/profile-role-successor-v1.json';
+if(fs.existsSync(profileRolePath)){
+ const role=json(profileRolePath);
+ assert.equal(role.decision.profileIsMethod,false);
+ assert.equal(role.decision.profileBackendRole,'OPTIONAL_PERSON_EVIDENCE_SYSTEM');
+ assert.equal(json('content/profile/successors/personal-evidence-r1/profile-navigation-successor-v1.json').methodIdentity.profileMethodRegistrationActive,false);
+ assert.match(profilePage,/PERSONAL EVIDENCE/);
+ assert.doesNotMatch(profilePage,/CXICON-METHOD-PROFILE/);
+ for(const marker of ['id="profile-modes"','data-prf-mode="QUICK_PROFILE"','data-prf-mode="BIG_FIVE"','data-prf-mode="CAREER_INTERESTS"','/assets/customer-ui/js/shell.js'])assert(profilePage.includes(marker),'Personal evidence consumer missing '+marker);
+}else assert.match(profilePage,/data-cx-asset="CXICON-METHOD-PROFILE"/);
 assert.equal(fs.readdirSync('assets/icons/status').filter(x=>x.endsWith('.svg')).length,5);
 const cxIconIds=new Set(customerVisuals.entries.map(x=>x.assetId));for(const id of ['ICON-007','ICON-010','ICON-011','ICON-020','ICON-027','CXICON-GLOBAL-PROJECTION','CXICON-GLOBAL-INTERPRETATION','CXICON-GLOBAL-GOVERNANCE','CXICON-GLOBAL-NAVIGATION-THRESHOLD','CXICON-METHOD-ASTROLOGY','CXICON-METHOD-BAZI','CXICON-METHOD-ZIWEI','CXICON-METHOD-NUMEROLOGY','CXICON-METHOD-HUMAN-DESIGN','CXICON-METHOD-I-CHING','CXICON-METHOD-TAROT','CXICON-STATUS-AVAILABLE','CXICON-STATUS-PARTIAL','CXICON-STATUS-SEPARATE','CXICON-STATUS-UNAVAILABLE','CXICON-STATUS-TEMPORARY'])assert(cxIconIds.has(id),`canonical CX icon binding missing ${id}`);
 assert(!html.includes('PHIOS-ICON-PERSPECTIVE-NOT-FACT'));assert(!html.includes('/assets/customer-ui/media/personal/icons/'));assert(!js.includes('/assets/customer-ui/media/personal/icons/'));

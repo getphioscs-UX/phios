@@ -1,0 +1,2296 @@
+# PHI OS · POST-CONSOLIDATION GLOBAL VISUAL RECOMPOSITION R2
+
+## PAGE CONSOLIDATION RETAINED · VISUAL HIERARCHY RESTORED · PHI CONFIGURATION + PROFILE MARKETED AS FLAGSHIP ORIGINAL PRODUCTS
+
+### MASTER WORK FOR CODEX
+
+---
+
+# 0. MASTER OBJECTIVE
+
+The previous:
+
+`PHI OS · PAGE CONSOLIDATION + PHI CONFIGURATION + PROFILE VISUAL MARKETING R1`
+
+must **not be reverted at the information-architecture level**.
+
+The reduced page architecture remains the preferred direction.
+
+However, the current implementation has produced a visual regression:
+
+- consolidated pages became excessively text-heavy;
+    
+- important visual assets disappeared from the visible reading flow;
+    
+- approved R2 assets exist but are not consumed meaningfully;
+    
+- several hero / feature positions resolve to empty or temporary-unavailable states;
+    
+- diagrams are frequently hidden behind generic “show related diagrams” interfaces;
+    
+- multiple sections use nearly identical card composition;
+    
+- PHI Configuration and Profile do not visually communicate that they are distinctive PHI OS products;
+    
+- flagship pages no longer have sufficient visual hierarchy to support marketing;
+    
+- pages often explain PHI OS rather than letting the visitor visually experience PHI OS;
+    
+- consolidation reduced duplication but also removed useful visual pacing.
+    
+
+This work must therefore perform:
+
+> **PAGE CONSOLIDATION RETAINED
+> 
+> - GLOBAL VISUAL RECOMPOSITION
+>     
+> - APPROVED R2 ASSET CONSUMPTION
+>     
+> - FLAGSHIP PRODUCT VISUAL MARKETING
+>     
+> - RESPONSIVE / BILINGUAL / ACCESSIBLE PRESENTATION**
+>     
+
+Do **not** solve this by recreating dozens of explanatory routes.
+
+Solve it by improving the composition of the routes that remain.
+
+---
+
+# 1. NON-NEGOTIABLE SOURCE OF TRUTH
+
+Use the supplied approved asset list as the canonical approved visual inventory.
+
+Do not regenerate replacement artwork simply because an existing component is inconvenient to bind.
+
+Do not silently substitute generic cards, CSS gradients or placeholder SVGs for approved artwork.
+
+Do not downgrade an approved figure into a tiny thumbnail.
+
+Do not convert major diagrams into decorative background textures.
+
+Do not hide all approved figures behind a generic:
+
+`Show N related diagrams`
+
+control.
+
+That interaction may remain for secondary material, but primary figures must appear directly inside the actual page narrative.
+
+The approved asset families include:
+
+1. Founder assets
+    
+2. Branding / logo assets
+    
+3. Global / surface heroes
+    
+4. Eight book heroes
+    
+5. Global icons
+    
+6. Journey icons
+    
+7. Method icons
+    
+8. Status icons
+    
+9. Financial figures
+    
+10. Account figures
+    
+11. Entrance figures and illustrations
+    
+12. Profile figures
+    
+13. Tarot figures
+    
+14. I Ching figures
+    
+15. Professional figures
+    
+16. Estate / will figures
+    
+17. Knowledge / Search / Academy figures
+    
+18. Perspectives figures
+    
+19. Relationship figures
+    
+20. Commerce / membership / privacy figures
+    
+21. Empty / error / permission state illustrations
+    
+22. Book branding identity assets
+    
+23. Supporting illustrations
+    
+24. Background texture / decorative motif system
+    
+
+Before editing layout, build a machine-readable inventory from the supplied canonical list.
+
+Recommended artifact:
+
+`data/visual/approved-r2-visual-assets.json`
+
+Each entry should include at minimum:
+
+- canonical filename
+    
+- R2 object path
+    
+- semantic name
+    
+- asset family
+    
+- role:
+    
+    - HERO
+        
+    - PRIMARY_FIGURE
+        
+    - SUPPORTING_FIGURE
+        
+    - ILLUSTRATION
+        
+    - BRAND_IDENTITY
+        
+    - ICON
+        
+    - STATE
+        
+    - TEXTURE
+        
+- intended consumer route(s)
+    
+- desktop presentation
+    
+- mobile presentation
+    
+- status
+    
+- currently bound route/component
+    
+- visible / hidden / unused
+    
+- reason if intentionally unused
+    
+
+No approved asset may disappear without an explicit ledger entry.
+
+---
+
+# 2. FIRST: AUDIT THE CURRENT MAIN SNAPSHOT
+
+Before modifications, inspect current `main`.
+
+Do not rely on prior review files.
+
+Build the route inventory from actual production source.
+
+Identify:
+
+- public HTML/static pages;
+    
+- routed pages;
+    
+- generated pages;
+    
+- shared shell/layout;
+    
+- visual resolver;
+    
+- R2 asset base URL;
+    
+- hero component;
+    
+- figure component;
+    
+- image gallery/lightbox;
+    
+- mobile CSS;
+    
+- bilingual rendering;
+    
+- lazy loading;
+    
+- failed-image fallbacks;
+    
+- loading states.
+    
+
+Produce:
+
+`artifacts/visual-r2/CURRENT-ROUTE-VISUAL-AUDIT.json`
+
+For every route record:
+
+- route
+    
+- purpose
+    
+- current hero
+    
+- hero resolution status
+    
+- current visible figures
+    
+- hidden figures
+    
+- approved assets available for route
+    
+- text-section count
+    
+- consecutive text-only section count
+    
+- CTA count
+    
+- repeated-card patterns
+    
+- broken/empty visual states
+    
+- mobile risk
+    
+- current marketing strength:
+    
+    - STRONG
+        
+    - ACCEPTABLE
+        
+    - WEAK
+        
+    - BROKEN
+        
+
+Do not declare PASS merely because the asset filename appears in source.
+
+The asset must render in the intended composition.
+
+---
+
+# 3. FIX THE GLOBAL ASSET RESOLUTION FAILURE FIRST
+
+Current production must never expose:
+
+`The visual is temporarily unavailable.`
+
+when the approved R2 object exists.
+
+Audit:
+
+- R2 base path;
+    
+- case sensitivity;
+    
+- filename mismatch;
+    
+- extension mismatch;
+    
+- resolver mapping;
+    
+- URL escaping;
+    
+- CDN/public host;
+    
+- preload logic;
+    
+- lazy-load observer;
+    
+- CSP;
+    
+- fallback behavior.
+    
+
+Establish one canonical visual resolver.
+
+Example conceptual API:
+
+`resolveApprovedVisual(assetCode | canonicalFilename)`
+
+It must return:
+
+- canonical R2 URL;
+    
+- semantic role;
+    
+- width/height or aspect ratio;
+    
+- alt metadata;
+    
+- fallback policy.
+    
+
+Do not create page-specific ad-hoc R2 URLs once a shared resolver exists.
+
+Add a zero-provider regression check that verifies every approved visual object required by public pages resolves successfully.
+
+No screenshots are required for this object-existence check.
+
+---
+
+# 4. CREATE A GLOBAL VISUAL COMPOSITION SYSTEM
+
+The problem must not be fixed page-by-page with unrelated CSS.
+
+Create a shared composition grammar.
+
+Required roles:
+
+## A. HERO
+
+Purpose:
+
+- immediate identity;
+    
+- emotional entry;
+    
+- major product positioning.
+    
+
+Presentation:
+
+- large;
+    
+- integrated with headline;
+    
+- meaningful crop;
+    
+- never tiny;
+    
+- never inside a generic card;
+    
+- no competing visual immediately beside it unless intentionally designed.
+    
+
+Suggested desktop:
+
+`min(46–58vw, 920px)` visual field.
+
+Suggested hero height:
+
+approximately `560–760px`, responsive to viewport.
+
+Mobile:
+
+image first or carefully layered under headline.
+
+Do not crop away the semantic center.
+
+---
+
+## B. PRIMARY FIGURE
+
+Purpose:
+
+- explain the core structure of the section.
+    
+
+Presentation:
+
+- direct inline appearance;
+    
+- generous width;
+    
+- figure title supplied by HTML;
+    
+- readable at normal desktop width;
+    
+- tap/click for full resolution.
+    
+
+Suggested desktop:
+
+`900–1280px` content width when diagram density requires it.
+
+Never constrain a complex network figure to a 300px card.
+
+---
+
+## C. SUPPORTING FIGURE
+
+Purpose:
+
+- break long reading sections;
+    
+- clarify one bounded relationship.
+    
+
+Can use:
+
+- 50/50 split;
+    
+- 40/60 split;
+    
+- alternating editorial layout.
+    
+
+---
+
+## D. ILLUSTRATION
+
+Purpose:
+
+- experience;
+    
+- atmosphere;
+    
+- emotional rhythm;
+    
+- market communication.
+    
+
+It must not be treated as evidence or structural diagram.
+
+---
+
+## E. BRAND IDENTITY
+
+Purpose:
+
+- give each Book / flagship system its own visual identity.
+    
+
+Do not use branding assets as diagrams.
+
+---
+
+## F. STATE ILLUSTRATION
+
+Use only for actual states:
+
+- no saved content;
+    
+- no matching result;
+    
+- permission required;
+    
+- temporary loading failure.
+    
+
+Do not show scary warning UI for an ordinary empty state.
+
+---
+
+# 5. GLOBAL PAGE RHYTHM RULE
+
+No major marketing/public page should contain more than:
+
+> **two substantial text-only sections consecutively**
+
+without one of:
+
+- meaningful figure;
+    
+- illustration;
+    
+- interactive product surface;
+    
+- preview;
+    
+- data/result object;
+    
+- contextual CTA composition.
+    
+
+Exception:
+
+long-form editorial content such as Founder essays or books may deliberately use longer reading sections, but still require editorial visual pacing.
+
+Avoid:
+
+`heading → paragraph → cards → heading → paragraph → cards → heading → paragraph`
+
+throughout an entire page.
+
+Instead use:
+
+`Hero`  
+→ `clear value`  
+→ `visual proof`  
+→ `interactive/product experience`  
+→ `deeper explanation`  
+→ `figure`  
+→ `decision/CTA`  
+→ `continuity`
+
+---
+
+# 6. HOME PAGE — REBUILD AS A VISUAL NAVIGATION ENTRY
+
+Current homepage must become the strongest visual explanation of PHI OS.
+
+Do not turn it into a giant explanatory manifesto.
+
+## 6.1 Hero
+
+Use:
+
+`PHIOS-HERO-REALITY-NAVIGATION-v1.webp`
+
+The Ask box remains a functional element.
+
+Composition:
+
+LEFT:
+
+- Reality Navigation positioning;
+    
+- headline;
+    
+- concise explanation;
+    
+- Ask field.
+    
+
+RIGHT / integrated background:
+
+- approved hero.
+    
+
+The hero must show immediately:
+
+**question → reality → sources → direction**
+
+without needing a visitor to read several paragraphs.
+
+---
+
+## 6.2 Six Ways to Begin
+
+Bind the six approved entrance illustrations directly:
+
+- HOME-QUESTION-ENTRY
+    
+- HOME-READING-ENTRY
+    
+- HOME-REALITY-ENTRY
+    
+- HOME-PERSPECTIVE-ENTRY
+    
+- HOME-CONTINUITY-ENTRY
+    
+- HOME-PROFESSIONAL-ENTRY
+    
+
+Do not present six identical text cards.
+
+Use a visual navigation grid with differentiated imagery.
+
+Mobile may become 2-column or horizontal carousel.
+
+All six remain genuine navigation entries.
+
+---
+
+## 6.3 Platform Relationship
+
+Immediately after entry choices, bind:
+
+`PHIOS-FIGURE-PLATFORM-RELATIONSHIP-NETWORK-v1.webp`
+
+This is the visual explanation of how the platform fits together.
+
+Do not write another 8-paragraph explanation of platform structure.
+
+---
+
+## 6.4 Personal Reality + Financial Reality
+
+Current blank/unavailable visual states must be replaced.
+
+Personal:
+
+- `PHIOS-HERO-PERSONAL-REALITY-v1.webp`  
+    or appropriate flagship composition.
+    
+
+Financial:
+
+- `PHIOS-HERO-FINANCIAL-REALITY-v1.webp`
+    
+
+Use two strong editorial panels, not generic cards.
+
+---
+
+## 6.5 Eight Books
+
+Use:
+
+`PHIOS-HERO-EIGHT-VOLUME-SYSTEM-v1.webp`
+
+plus visible Book I–VIII branding strips / identity pieces.
+
+Do not display eight repetitive text cards without identity.
+
+---
+
+## 6.6 Knowledge
+
+Use:
+
+`PHIOS-FIGURE-KNOWLEDGE-DISCOVERY-NETWORK-v1.webp`  
+or  
+`PHIOS-FIGURE-EIGHT-VOLUME-KNOWLEDGE-NETWORK-v1.webp`
+
+Show visually:
+
+Books ↔ Articles ↔ Figures ↔ Concepts ↔ Ask.
+
+---
+
+## 6.7 Navigation Formation
+
+Use the approved:
+
+`PHIOS-FIGURE-NAVIGATION-FORMATION-1B-v1.webp`
+
+as one of the homepage’s primary intellectual differentiators.
+
+It must not be hidden in Founder only.
+
+Keep its actual meaning:
+
+Structure  
+→ Connectivity  
+→ Network  
+→ Structural Reinforcement  
+→ Direction  
+→ Position  
+→ Navigation Potential
+
+Do not turn these into seven required website onboarding steps.
+
+---
+
+# 7. PERSPECTIVES INDEX — TURN IT INTO A LENS EXPLORATION PAGE
+
+Current page is structurally correct but visually weak.
+
+Use:
+
+`PHIOS-HERO-PERSPECTIVES-MULTIPLE-LENSES-v1.webp`
+
+as hero.
+
+Then bind:
+
+`PHIOS-FIGURE-PERSPECTIVES-SAME-SITUATION-v1.webp`
+
+directly.
+
+This should visually answer:
+
+> How can the same reality be viewed differently?
+
+Next bind:
+
+`PHIOS-FIGURE-PERSPECTIVES-SOURCE-BOUNDARIES-v1.webp`
+
+for:
+
+- measured;
+    
+- self-reported;
+    
+- external;
+    
+- symbolic;
+    
+- current reality;
+    
+- professional.
+    
+
+Avoid six long text definitions before visitors understand the concept.
+
+Keep method navigation visible:
+
+- PHI Configuration
+    
+- Astrology
+    
+- BaZi
+    
+- Zi Wei
+    
+- Numerology
+    
+- Human Design
+    
+- I Ching
+    
+- Tarot
+    
+
+But make these visually identifiable using method icons and compact summaries.
+
+---
+
+# 8. PERSONAL REALITY — STOP MAKING ONE PAGE CARRY EVERYTHING AT ONCE
+
+Keep the single consolidated route.
+
+Do **not** restore separate Overview / Structure / Current Situation / Pattern / Detail pages.
+
+Instead compose the long page into clear visual chapters.
+
+Required chapters:
+
+### CHAPTER A — Hero
+
+Use Personal Reality hero.
+
+### CHAPTER B — One Reality / Many Interfaces
+
+Use the existing perspective constellation visual.
+
+### CHAPTER C — PHI Configuration
+
+This must become a major flagship marketing section.
+
+### CHAPTER D — Other Personal Methods
+
+Compact visual method switcher.
+
+### CHAPTER E — Enter My Information
+
+Only here begin the detailed form.
+
+### CHAPTER F — My Free Reading
+
+Diagram/result area.
+
+### CHAPTER G — Bring It Back to Reality
+
+Observation / comparison.
+
+### CHAPTER H — Advanced boundaries
+
+Governance material belongs lower on the page.
+
+The user must not have to read governance theory before experiencing the product.
+
+---
+
+# 9. PHI CONFIGURATION — FLAGSHIP ORIGINAL PRODUCT VISUAL MARKETING
+
+This is one of the most important changes.
+
+PHI Configuration is PHI OS-owned intellectual/product identity.
+
+It must **not look like one extra card beside Astrology/BaZi/Zi Wei**.
+
+Create a visually distinctive section within Personal Reality and, if an existing canonical detail route already exists, strengthen that route without creating another redundant route.
+
+Visual hierarchy:
+
+### 9.1 Identity
+
+Large label:
+
+`PHI OS ORIGINAL`
+
+Large title:
+
+`PHI Configuration · PHI 构型`
+
+Short positioning:
+
+> A PHI OS-native configuration model for examining structure, drivers, usable capacities, tensions, field and phase.
+
+Avoid leading with long disclaimers.
+
+Boundaries remain visible but secondary.
+
+---
+
+### 9.2 Visual centerpiece
+
+Show the actual deterministic PHI Configuration diagram prominently.
+
+This is the free product experience.
+
+Free user sees:
+
+- calculated configuration;
+    
+- core diagram;
+    
+- concise source-bound interpretation.
+    
+
+Paid layer unlocks deeper interpretation where commerce currently permits it.
+
+Do not make the user read six text cards instead of seeing the configuration.
+
+---
+
+### 9.3 Six structural lenses
+
+Structure  
+Drivers  
+Usable Capacities  
+Tensions  
+Field  
+Phase
+
+These should become visual anchors around / beneath the configuration.
+
+Avoid:
+
+six equal plain cards with several paragraphs each.
+
+Prefer:
+
+- central configuration;
+    
+- six peripheral markers;
+    
+- on interaction, explanation opens.
+    
+
+Desktop should feel like an original system.
+
+Mobile may vertically unfold.
+
+---
+
+### 9.4 Market differentiation
+
+Adjacent comparison should visually distinguish:
+
+PHI Configuration  
+vs  
+Astrology  
+vs  
+BaZi  
+vs  
+Zi Wei  
+vs  
+Numerology  
+vs  
+Human Design
+
+Do not claim scientific superiority.
+
+Difference is based on structure and source.
+
+---
+
+# 10. PROFILE / PERSONAL EVIDENCE — SECOND FLAGSHIP ORIGINAL EXPERIENCE
+
+Use:
+
+`PHIOS-HERO-PERSONAL-EVIDENCE-v2.webp`
+
+at the top.
+
+Profile must not look like “another questionnaire”.
+
+Its value proposition is:
+
+> several distinct sources of personal evidence → visible provenance → comparison → selective Reality handoff.
+
+Bind the following directly through the narrative:
+
+1. `PHIOS-FIGURE-PROFILE-EVIDENCE-SOURCES-v1.webp`
+    
+2. `PHIOS-FIGURE-PROFILE-SEVEN-ENTRY-MODES-v1.webp`
+    
+3. `PHIOS-FIGURE-PROFILE-RESULT-READING-KEY-v1.webp`
+    
+4. `PHIOS-FIGURE-PROFILE-EXTERNAL-CONFIRMATION-v1.webp`
+    
+5. `PHIOS-FIGURE-PROFILE-BILINGUAL-DOSSIER-ACCESS-v1.webp`
+    
+6. `PHIOS-FIGURE-PROFILE-SELECTIVE-REALITY-HANDOFF-v1.webp`
+    
+7. `PHIOS-FIGURE-PROFILE-SOURCE-DIFFERENCES-v1.webp`
+    
+
+Do not place all seven inside one closed “related diagrams” gallery.
+
+Recommended product narrative:
+
+`Sources`  
+→ `Choose evidence`  
+→ `Complete/import`  
+→ `Read`  
+→ `Compare`  
+→ `Receive bilingual dossier`  
+→ `Select what enters Reality`
+
+The profile product remains:
+
+**one bilingual Profile product**
+
+not separate EN/ZH products.
+
+Do not recreate separate English and Chinese profile product identities.
+
+---
+
+# 11. RELATIONSHIP
+
+Hero:
+
+`PHIOS-HERO-RELATIONSHIP-v2.webp`
+
+Primary figures:
+
+- `PHIOS-FIGURE-RELATIONSHIP-PARTICIPANT-NETWORK-v1.webp`
+    
+- `PHIOS-FIGURE-RELATIONSHIP-SHARED-AUTHORITY-v1.webp`
+    
+
+Show visibly:
+
+Person A  
+Person B  
+Shared relationship context  
+What each person controls  
+What is jointly decided  
+What remains unknown
+
+Avoid reducing Relationship to a compatibility product.
+
+---
+
+# 12. TAROT
+
+Hero:
+
+`PHIOS-HERO-TAROT-READING-v2.webp`
+
+Actual product interaction must dominate:
+
+Question  
+→ Shuffle  
+→ User draw  
+→ Spread  
+→ Interpretation  
+→ Reality reflection  
+→ Save / continue
+
+Bind:
+
+- TAROT-QUESTION-FOCUS
+    
+- TAROT-SPREAD-POSITIONS
+    
+- TAROT-SHUFFLE-SELECT
+    
+- TAROT-CONNECTED-READING
+    
+- TAROT-REALITY-REFLECTION
+    
+- TAROT-READING-CONTINUITY
+    
+
+Do not put all six before the draw interface.
+
+Use them contextually around the actual Tarot flow.
+
+The visual priority is the real interactive deck, not educational prose.
+
+---
+
+# 13. I CHING
+
+Hero:
+
+`PHIOS-HERO-ICHING-READING-v2.webp`
+
+Flow:
+
+Question  
+→ Cast  
+→ Six lines  
+→ Primary hexagram  
+→ Changing line(s)  
+→ Relating hexagram  
+→ Interpretation  
+→ Reality comparison  
+→ Continuity
+
+Bind the six approved I Ching figures at their corresponding points.
+
+Customer-facing interpretation must not read like internal Authority Pack language.
+
+---
+
+# 14. REALITY / MY REALITY
+
+Use:
+
+`PHIOS-HERO-PERSONAL-REALITY-v1.webp`
+
+and/or existing Reality Journey assets according to canonical route role.
+
+Primary supporting network:
+
+`PHIOS-FIGURE-CURRENT-REALITY-NETWORK-v1.webp`
+
+Then:
+
+- direction/position network;
+    
+- reality evolution;
+    
+- evidence/interpretation;
+    
+- choice-space constraints;
+    
+- unknown focus;
+    
+- observation return loop.
+    
+
+Important:
+
+Do **not** restore the old 13-summary-diagram gallery on `/reality/`.
+
+The previously rejected generic “expand related summary figures” approach must stay removed.
+
+Only contextual figures should appear where they directly explain the page’s actual current function.
+
+---
+
+# 15. WORLD + CIVILIZATION ATLAS
+
+skip this as another window is working on improving
+
+---
+
+# 16. KNOWLEDGE / LIBRARY
+
+Hero:
+
+`PHIOS-HERO-KNOWLEDGE-LIBRARY-v1.webp`
+
+Supporting scene:
+
+`PHIOS-ILLUSTRATION-LIBRARY-KNOWLEDGE-LANDSCAPE-v1.webp`
+
+Primary visual:
+
+`PHIOS-FIGURE-KNOWLEDGE-DISCOVERY-NETWORK-v1.webp`
+
+Visitors should immediately understand:
+
+Books  
+Articles  
+Figures  
+Concepts  
+Ask  
+World/Public Context
+
+are connected but retain source identity.
+
+---
+
+# 17. ASK PHI OS
+
+Use:
+
+`PHIOS-HERO-ASK-KNOWLEDGE-SOURCES-v1.webp`
+
+near the question entry, not buried later.
+
+Primary figure:
+
+`PHIOS-FIGURE-ASK-SOURCE-NETWORK-v1.webp`
+
+The page should visually explain:
+
+`Question`  
+→ `selected sources`  
+→ `answer`  
+→ `open unknowns`  
+→ `related material`  
+→ `next step`
+
+Do not make Ask look like a generic chatbot.
+
+The source-selection model is one of its main market differentiators.
+
+The answer layout should visibly separate:
+
+- Answer
+    
+- What I used
+    
+- What may change
+    
+- What remains open
+    
+- Related
+    
+- Next step
+    
+
+without overwhelming the user before they have asked a question.
+
+---
+
+# 18. SEARCH
+
+Use:
+
+`PHIOS-FIGURE-SEARCH-RESULT-RELATIONSHIPS-v1.webp`
+
+in the search explanation / empty discovery context.
+
+Actual results should preserve:
+
+- Books
+    
+- Articles
+    
+- Figures
+    
+- Concepts
+    
+- World/Public Context
+    
+
+source grouping.
+
+Do not flatten all results into one Google-like vertical list.
+
+For no matching result use:
+
+`PHIOS-ILLUSTRATION-NO-MATCHING-RESULTS-v1.webp`
+
+not generic failure icons.
+
+---
+
+# 19. BOOKS
+
+Books index hero:
+
+`PHIOS-HERO-EIGHT-VOLUME-SYSTEM-v1.webp`
+
+Visible system figure:
+
+`PHIOS-FIGURE-EIGHT-VOLUME-KNOWLEDGE-NETWORK-v1.webp`
+
+or cross-volume reading figure where semantically stronger.
+
+Book index must display eight distinct book identities.
+
+For Book I–VIII use:
+
+the eight approved Book Hero assets
+
+plus corresponding:
+
+`PHIOS-BRANDING-BOOK-[1–8]-...`
+
+Branding identity and hero have different roles.
+
+Do not collapse them into one image.
+
+Book VII must no longer appear visually as incomplete where the source state says it is completed.
+
+---
+
+# 20. ARTICLES / FIGURES / CONCEPTS
+
+Articles:
+
+use `KNOWLEDGE-READING` hero.
+
+Figures:
+
+use `VISUAL-KNOWLEDGE` hero.
+
+Concept relationships:
+
+bind:
+
+`PHIOS-FIGURE-CONCEPT-ARTICLE-FIGURE-MAP-v1.webp`
+
+Reading navigation:
+
+bind:
+
+`PHIOS-FIGURE-QUESTION-TO-READING-PATH-v1.webp`  
+and/or  
+`PHIOS-FIGURE-CROSS-VOLUME-READING-PATH-v1.webp`
+
+Do not make Articles / Figures / Concepts visually identical archives.
+
+---
+
+# 21. ACADEMY
+
+Hero:
+
+`PHIOS-HERO-ACADEMY-v1.webp`
+
+Supporting illustration:
+
+`PHIOS-ILLUSTRATION-ACADEMY-LEARNING-SCENE-v1.webp`
+
+Primary figure:
+
+`PHIOS-FIGURE-ACADEMY-LEARNING-NETWORK-v1.webp`
+
+Second key figure:
+
+`PHIOS-FIGURE-LEARNING-TO-REALITY-APPLICATION-v1.webp`
+
+The Academy must communicate:
+
+`Concept ↔ Reading ↔ Lesson ↔ Practice`
+
+with multiple learning routes.
+
+Do not imply a mandatory LMS pipeline.
+
+Do not leave production with visually exposed:
+
+`Loading learning paths…`
+
+or:
+
+`Loading the free public lessons…`
+
+without a designed skeleton/fallback state.
+
+---
+
+# 22. PROFESSIONAL
+
+Hero:
+
+`PHIOS-HERO-PROFESSIONAL-v1.webp`
+
+or existing Professional Workspace canonical hero where route role requires it.
+
+Supporting scene:
+
+`PHIOS-ILLUSTRATION-PROFESSIONAL-WORKSPACE-SCENE-v1.webp`
+
+Primary figure:
+
+`PHIOS-FIGURE-PROFESSIONAL-REPORT-REVIEW-ADVICE-v1.webp`
+
+The index should visually distinguish:
+
+- Financial Reality
+    
+- Professional report review
+    
+- appointments
+    
+- Cash Flow experience
+    
+- Natural Healer
+    
+- other currently active support
+    
+
+Do not use plain headings as the entire experience.
+
+---
+
+# 23. PROFESSIONAL SERVICES
+
+Use:
+
+`PHIOS-HERO-SERVICES-v1.webp`
+
+Primary figures:
+
+- SERVICE-SCOPE-DELIVERABLES
+    
+- APPOINTMENT-REQUEST-LIFECYCLE
+    
+- PROFESSIONAL-CONSENT-HANDOFF
+    
+
+Show for every active service:
+
+Purpose  
+Who it is for  
+Inputs  
+Process  
+Deliverable  
+Price / availability  
+Human role  
+Boundary
+
+Keep Cash Flow / Natural Healer approved illustrations visible in their corresponding service section.
+
+---
+
+# 24. FINANCIAL REALITY
+
+Hero:
+
+`PHIOS-HERO-FINANCIAL-REALITY-v1.webp`
+
+Supporting illustration:
+
+`PHIOS-ILLUSTRATION-FINANCIAL-REALITY-SCENE-v1.webp`
+
+Use the approved 8-figure Financial sequence contextually:
+
+1. Financial Reality System Map
+    
+2. Income Expense Flow
+    
+3. Assets Liabilities Structure
+    
+4. Cashflow Runtime
+    
+5. Risk Constraint Map
+    
+6. Financial Decision Flow
+    
+7. Financial Continuity
+    
+8. Evidence Decision Boundary
+    
+
+Do not put eight full-size diagrams consecutively.
+
+Compose them into the actual financial workflow.
+
+---
+
+# 25. REPORTS
+
+The reports landing page should not appear empty and broken simply because the current user has no released report.
+
+If zero reports:
+
+use:
+
+`PHIOS-ILLUSTRATION-EMPTY-NO-SAVED-CONTENT-v1.webp`
+
+Then explain concisely:
+
+- what a report is;
+    
+- where purchased/generated reports appear;
+    
+- how versioning works;
+    
+- where to discover available report products.
+    
+
+The empty state must still feel intentional.
+
+---
+
+# 26. ACCOUNT / MY PHI
+
+Hero:
+
+`PHIOS-HERO-ACCOUNT-CONTINUITY-v1.webp`
+
+Primary overview:
+
+`PHIOS-FIGURE-MY-PHI-ACCOUNT-NETWORK-v2.webp`
+
+Bind contextually:
+
+- ACCOUNT-CONSENT-SCOPE
+    
+- REPORT-DELIVERY-CONTINUITY
+    
+- ACCOUNT-PEOPLE-PERMISSIONS
+    
+- ACCOUNT-TIMELINE-VERSIONS
+    
+- ACCOUNT-SAVED-VS-SESSION
+    
+- ACCOUNT-ACCESS-RECOVERY
+    
+
+Do not show these as an unrelated figure gallery.
+
+Use them to explain actual account actions.
+
+---
+
+# 27. MEMBERSHIP
+
+Hero:
+
+`PHIOS-HERO-MEMBERSHIP-CONTINUITY-v2.webp`
+
+Supporting scene:
+
+`PHIOS-ILLUSTRATION-MEMBERSHIP-EXPERIENCE-LANDSCAPE-v1.webp`
+
+Primary figure:
+
+`PHIOS-FIGURE-MEMBERSHIP-ACCESS-BOUNDARIES-v1.webp`
+
+Commerce relationship:
+
+`PHIOS-FIGURE-PAYMENT-ENTITLEMENT-DELIVERY-v1.webp`
+
+Membership should visually communicate continuing access.
+
+It must not become four plain pricing text columns unless those plans are actually sellable.
+
+Differentiate:
+
+membership entitlement
+
+from:
+
+one-time book/report purchase.
+
+---
+
+# 28. CHECKOUT / DIGITAL CONTENT
+
+Use:
+
+`PHIOS-HERO-DIGITAL-BOOK-ACCESS-v1.webp`
+
+Supporting:
+
+`PHIOS-ILLUSTRATION-DIGITAL-READING-EXPERIENCE-v1.webp`
+
+Use:
+
+`PHIOS-FIGURE-DIGITAL-PRODUCT-EXPECTATIONS-v1.webp`
+
+where delivery expectations need explanation.
+
+Do not overload checkout itself with educational content.
+
+Keep conversion path clean.
+
+---
+
+# 29. CONTACT / PRIVACY / SUPPORT
+
+Use approved figures contextually:
+
+- CONTACT-SUPPORT-ROUTING
+    
+- PRIVACY-DATA-LIFECYCLE
+    
+
+Do not turn legal/privacy pages into decorative visual galleries.
+
+One strong explanatory figure is enough.
+
+---
+
+# 30. FOUNDER
+
+skip this as another window is working on improving
+    
+
+---
+
+# 31. LOGO / BRAND CONTRAST
+
+Use canonical logo assets only.
+
+Audit every header/footer usage against background luminance.
+
+Never place the standard lockup over a background with insufficient contrast.
+
+Support:
+
+- primary
+    
+- mono dark
+    
+- mono light
+    
+
+variants according to surface.
+
+No white/near-white logo background patch should be introduced behind the mark merely to make it visible.
+
+Choose the correct logo variant instead.
+
+---
+
+# 32. BACKGROUND SYSTEM
+
+Approved background assets:
+
+- PHI-OS-IVORY-GRAIN
+    
+- PHI-OS-CHAMPAGNE-GLOW
+    
+- PHI-OS-SOFT-MIST
+    
+- PHI-OS-PREMIUM-HALO
+    
+- PHI-OS-MOUNTAIN-MIST
+    
+- PHI-OS-CELESTIAL-MOTIF
+    
+- PHI-OS-GEOMETRIC-MOTIF
+    
+- PHI-OS-METHOD-TRANSITION-MOTIF
+    
+
+Use them as a controlled visual system.
+
+Do not randomize them page-by-page.
+
+Recommended semantic roles:
+
+IVORY-GRAIN:  
+long-form reading surfaces.
+
+CHAMPAGNE-GLOW:  
+premium/product CTA transition.
+
+SOFT-MIST:  
+quiet section transition.
+
+PREMIUM-HALO:  
+flagship product / purchase spotlight.
+
+MOUNTAIN-MIST:  
+reflective/editorial transitional areas.
+
+CELESTIAL-MOTIF:  
+symbolic method families only.
+
+GEOMETRIC-MOTIF:  
+structural / configuration / knowledge networks.
+
+METHOD-TRANSITION-MOTIF:  
+movement between distinct interpretive systems.
+
+Avoid plain white expanses.
+
+Also avoid turning every section dark blue.
+
+PHI OS should feel:
+
+deep blue / deep teal
+
+- warm gold
+    
+- ivory / champagne reading surfaces
+    
+- richer controlled color.
+    
+
+---
+
+# 33. VISUAL SCALE RULES
+
+Complex PHI OS diagrams contain real structure.
+
+Therefore enforce minimum presentation sizes.
+
+Desktop:
+
+Primary diagram:  
+`min-width effective reading area ≈ 820px`
+
+Dense atlas/network:  
+prefer `960–1280px`.
+
+Supporting illustration:  
+`440–720px`.
+
+Hero:  
+large viewport-level composition.
+
+Mobile:
+
+Never shrink a complex diagram until labels overlap.
+
+Instead allow:
+
+- full-width scaling;
+    
+- horizontal inspected viewport when absolutely necessary;
+    
+- tap-to-fullscreen;
+    
+- full-resolution lightbox.
+    
+
+No clipped labels.
+
+No overlapping diagram typography.
+
+---
+
+# 34. IMAGE TITLE / TEXT POLICY
+
+Do not duplicate long figure titles inside both image and HTML.
+
+For assets designed without embedded text:
+
+HTML supplies:
+
+- title;
+    
+- short caption;
+    
+- source/boundary where necessary.
+    
+
+Do not add floating badges all over diagrams.
+
+Preserve breathing room.
+
+---
+
+# 35. DO NOT TURN EVERY ASSET INTO CONTENT
+
+“All approved assets must be bound” means:
+
+every approved asset must have an intentional valid consumer,
+
+not:
+
+every image must appear on every related page.
+
+For each asset, select one of:
+
+`PRIMARY_VISIBLE`  
+`SECONDARY_VISIBLE`  
+`CONTEXTUAL`  
+`STATE_ONLY`  
+`LIGHTBOX_SUPPORT`  
+`INTENTIONALLY_NOT_PUBLIC`
+
+If intentionally not used publicly:
+
+record exact reason.
+
+No:
+
+`UNUSED_WITHOUT_REASON`.
+
+---
+
+# 36. REMOVE REPETITIVE GENERIC UI
+
+Audit repeated components such as:
+
+- identical bordered cards;
+    
+- identical pills;
+    
+- identical “related visual summaries” sections;
+    
+- generic numbered blocks;
+    
+- repeated explanatory notice boxes.
+    
+
+Do not remove component reuse.
+
+Instead create semantic component classes:
+
+- visual-entry-card
+    
+- method-lens-card
+    
+- evidence-source-card
+    
+- report-product-card
+    
+- service-scope-card
+    
+- book-identity-card
+    
+- figure-editorial
+    
+- flagship-feature
+    
+- continuity-panel
+    
+
+The site should not look like one component copied 60 times.
+
+---
+
+# 37. PAGE DENSITY SYSTEM
+
+Classify every route as one of:
+
+## A. MARKET ENTRY
+
+Examples:  
+Home  
+Perspectives  
+Profile  
+Membership  
+Professional
+
+Need:  
+strong hero + visual story + CTA.
+
+## B. PRODUCT EXPERIENCE
+
+Examples:  
+Personal Reality  
+PHI Configuration  
+Tarot  
+I Ching  
+Financial Reality  
+Ask
+
+Need:  
+interaction/result first;  
+explanation supports it.
+
+## C. KNOWLEDGE READING
+
+Examples:  
+Book  
+Article  
+Founder  
+Concept
+
+Need:  
+editorial typography + deliberate figures.
+
+## D. WORKSPACE
+
+Examples:  
+Account  
+My Reality  
+Reports
+
+Need:  
+functional hierarchy + state visualization.
+
+## E. ATLAS
+
+World / Civilization
+
+Need:  
+scale navigation + evidence + spatial/structural visuals.
+
+Apply different density rules to each.
+
+Do not use one universal page template.
+
+---
+
+# 38. BILINGUAL QUALITY
+
+ZH and EN must share semantic structure but do not force identical line breaks.
+
+Check:
+
+- heading wrapping;
+    
+- button width;
+    
+- figure caption;
+    
+- nav;
+    
+- card height;
+    
+- forms;
+    
+- tooltips;
+    
+- mobile.
+    
+
+Do not reduce Chinese typography size simply to force parity with English.
+
+---
+
+# 39. RESPONSIVE VALIDATION
+
+Required viewport classes:
+
+- 360
+    
+- 390
+    
+- 430
+    
+- 768
+    
+- 1024
+    
+- 1280
+    
+- 1440
+    
+- 1920
+    
+
+Validate at minimum:
+
+Home  
+Perspectives  
+Personal Reality  
+Profile  
+Tarot  
+I Ching  
+World  
+Books  
+Book detail  
+Knowledge  
+Ask  
+Academy  
+Professional  
+Financial  
+Membership  
+Account  
+Founder
+
+For every route verify:
+
+- no horizontal page overflow;
+    
+- diagrams do not overlap;
+    
+- no clipped labels;
+    
+- hero focal point survives;
+    
+- CTA remains visible;
+    
+- bilingual heading wraps intentionally;
+    
+- touch targets usable;
+    
+- no duplicate asset loads.
+    
+
+---
+
+# 40. PERFORMANCE
+
+Do not solve the visual regression by loading the entire R2 inventory on every route.
+
+Use:
+
+- responsive `srcset` where available;
+    
+- loading=lazy below fold;
+    
+- eager/preload only true LCP hero;
+    
+- explicit aspect-ratio;
+    
+- width/height metadata;
+    
+- avoid layout shift.
+    
+
+A page should consume only its own assets.
+
+---
+
+# 41. ACCESSIBILITY
+
+Every meaningful image must have semantic alt text.
+
+Decorative texture:
+
+`alt=""`
+
+Figures:
+
+describe what the visual represents, not filenames.
+
+Interactive figure lightbox:
+
+keyboard accessible.
+
+Respect:
+
+`prefers-reduced-motion`.
+
+Do not place required meaning only in color.
+
+---
+
+# 42. NO NEW SCREENSHOT EXPLOSION
+
+Do not generate hundreds or thousands of permanent website screenshots.
+
+Screenshots are QA artifacts, not production assets.
+
+For visual regression:
+
+retain only representative review captures.
+
+Recommended matrix:
+
+desktop + mobile
+
+for major route families.
+
+Screenshots must be stored outside production public assets where possible.
+
+Temporary review captures may be removed after final acceptance unless required as a formal acceptance receipt.
+
+---
+
+# 43. REQUIRED VISUAL QA
+
+Automated checks alone are insufficient.
+
+Create:
+
+`tools/review/PHIOS-GLOBAL-VISUAL-R2-HUMAN-REVIEW.html`
+
+The review must show representative production-equivalent renders grouped by:
+
+1. Home
+    
+2. PHI Configuration
+    
+3. Profile
+    
+4. Personal Reality
+    
+5. Perspectives
+    
+6. Relationship
+    
+7. Tarot
+    
+8. I Ching
+    
+9. Reality
+    
+10. World
+    
+11. Knowledge
+    
+12. Books
+    
+13. Academy
+    
+14. Professional
+    
+15. Financial
+    
+16. Account
+    
+17. Membership
+    
+18. Founder
+    
+19. Shared state UI
+    
+
+For each group include:
+
+- Desktop EN
+    
+- Desktop ZH
+    
+- Mobile EN
+    
+- Mobile ZH
+    
+
+Do not make the review file itself an enormous screenshot archive.
+
+Use selected proof captures.
+
+---
+
+# 44. ASSET CONSUMPTION LEDGER
+
+Produce:
+
+`artifacts/visual-r2/APPROVED-ASSET-CONSUMPTION-LEDGER.json`
+
+Required fields:
+
+```
+asset
+r2Path
+role
+approved
+routeConsumers
+componentConsumers
+renderStatus
+desktopVerified
+mobileVerified
+zhVerified
+enVerified
+fallbackVerified
+status
+notes
+```
+
+Allowed final status:
+
+`BOUND_AND_VERIFIED`
+
+`BOUND_STATE_ONLY`
+
+`INTENTIONALLY_WITHHELD_WITH_REASON`
+
+Not allowed:
+
+`UNKNOWN`
+
+`TODO`
+
+`MAYBE`
+
+for final closure.
+
+---
+
+# 45. AUTOMATED CHECKS
+
+Add zero-provider checks covering at least:
+
+```
+check:approved-r2-visual-inventory
+check:approved-r2-visual-resolution
+check:visual-route-consumption
+check:no-orphan-approved-visuals
+check:no-production-visual-placeholders
+check:hero-binding
+check:figure-binding
+check:state-illustrations
+check:visual-responsive-contract
+check:visual-alt-contract
+check:visual-lazy-loading
+check:visual-route-role-contract
+```
+
+These checks must not call OpenAI.
+
+Provider calls = 0.
+
+No commerce transactions.
+
+No production account mutation.
+
+---
+
+# 46. FAILURE CONDITIONS
+
+This work is **not PASS** if any of the following remains:
+
+- “The visual is temporarily unavailable” on a page whose approved asset exists;
+    
+- a major approved hero is unresolved;
+    
+- PHI Configuration still appears as a minor text card;
+    
+- Profile still looks mainly like questionnaire/forms;
+    
+- complex figures are constrained into unreadable thumbnails;
+    
+- major pages contain long repeated text/card sequences without visual rhythm;
+    
+- approved R2 assets remain orphaned without a documented reason;
+    
+- mobile figure labels overlap;
+    
+- Book system still lacks visual identities;
+    
+- Professional remains primarily plain headings and paragraphs;
+    
+- Membership remains only textual tier descriptions;
+    
+- Academy exposes raw loading states;
+    
+- empty Reports state looks like missing content;
+    
+- approved state illustrations are not used;
+    
+- Chinese and English visually break differently without review;
+    
+- the old 13 generic Reality summary-gallery approach returns;
+    
+- Civilization Atlas work is replaced by generic marketing imagery;
+    
+- hundreds of permanent screenshots are added to production/source control.
+    
+
+---
+
+# 47. HUMAN REVIEW GATE
+
+After implementation:
+
+do not automatically mark visual work approved.
+
+State:
+
+`READY_FOR_HUMAN_REVIEW`
+
+Provide the single review entrance:
+
+`tools/review/PHIOS-GLOBAL-VISUAL-R2-HUMAN-REVIEW.html`
+
+Also provide:
+
+- route audit;
+    
+- asset consumption ledger;
+    
+- automated check output;
+    
+- changed-file list;
+    
+- unresolved exceptions;
+    
+- production asset resolution summary.
+    
+
+Human acceptance is required before:
+
+`VISUAL_PUBLICATION_ACCEPTED`.
+
+---
+
+# 48. FINAL RESPONSE FORMAT TO USER
+
+Codex final response must clearly state:
+
+### A. What visually changed
+
+not merely filenames.
+
+### B. Which previously broken / unavailable visuals are repaired.
+
+### C. PHI Configuration changes.
+
+### D. Profile changes.
+
+### E. Homepage changes.
+
+### F. Perspectives / Personal Reality changes.
+
+### G. Knowledge / Books / Academy changes.
+
+### H. Professional / Financial changes.
+
+### I. Account / Membership changes.
+
+### J. Asset binding totals
+
+Report:
+
+- approved asset count;
+    
+- bound primary;
+    
+- bound secondary;
+    
+- state-only;
+    
+- intentionally withheld;
+    
+- unresolved.
+    
+
+### K. Automated validation
+
+exact PASS / FAIL.
+
+### L. Human review
+
+exact review file path.
+
+Do not state:
+
+`completed`
+
+or:
+
+`approved`
+
+unless the required checks genuinely passed and Human ACCEPT has actually been given.
+
+---
+
+# 49. DESIGN PRINCIPLE TO KEEP THROUGHOUT
+
+The objective is not:
+
+> “put more pictures on the website.”
+
+The objective is:
+
+> **make the structure of PHI OS visible before the visitor has to understand it through paragraphs.**
+
+Every major visual must perform one of four jobs:
+
+**Orient**  
+— Where am I?
+
+**Explain**  
+— How do these things relate?
+
+**Experience**  
+— What can I actually do here?
+
+**Differentiate**  
+— Why is this PHI OS capability distinct?
+
+If a visual does none of these, do not add it simply to fill space.
+
+If a paragraph can be understood much faster through an approved figure, use the figure.
+
+If an approved figure is central to the product, do not hide it behind a gallery control.
+
+---
+
+# 50. TARGET END STATE
+
+The final site should no longer feel like:
+
+`many explanations of PHI OS`
+
+but instead:
+
+`a visually inspectable PHI OS`.
+
+A visitor should understand from the page itself that:
+
+**PHI OS**  
+connects questions, knowledge, personal perspectives, present reality, public reality, professional work and continuity;
+
+**PHI Configuration**  
+is a distinctive PHI OS-native configuration model;
+
+**Profile**  
+organizes several types of personal evidence without flattening their provenance;
+
+**Reality**  
+is where selected information returns to an actual changing situation;
+
+**World**  
+provides public external context across scale;
+
+**Knowledge**  
+makes the intellectual system navigable;
+
+**Professional**  
+introduces accountable human participation;
+
+and all of them remain connected without collapsing into one kind of evidence or one giant page of explanatory text.
+
+Keep the consolidation.
+
+Restore the visual intelligence.

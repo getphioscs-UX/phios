@@ -192,3 +192,23 @@ export async function resolvePublicAssetForWeb(assetCode, options = {}) {
   }
   return resolvePublicAsset({ registry, assetCode, publicBaseUrl: registryBase ?? configBase, variant: options.variant, surface: options.surface, locale: options.locale, density: options.density });
 }
+
+let approvedInventoryPromise;
+export async function resolveApprovedVisual(identity, options = {}) {
+  approvedInventoryPromise ||= fetch(options.inventoryUrl || '/data/visual/approved-r2-visual-assets.json')
+    .then(response => { if (!response.ok) throw new PublicAssetResolutionError('APPROVED_INVENTORY_UNAVAILABLE'); return response.json(); })
+    .catch(error => { approvedInventoryPromise = null; throw error; });
+  const inventory = await approvedInventoryPromise;
+  const candidates = inventory.assets.filter(a => a.canonicalFilename === identity || a.r2Path === identity || a.aliases.includes(identity));
+  // Customer surface identities supersede historic book HERO-021/022/023 collisions.
+  const entry = candidates.find(a => a.sources.includes('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json')) || candidates[0];
+  if (!entry) throw new PublicAssetResolutionError('APPROVED_VISUAL_NOT_FOUND', identity);
+  const registry = options.registry ?? await fetchPublicAssetRegistry(options);
+  const base = registry.public_base_url || (await fetchPublicAssetConfig(options)).publicAssetBaseUrl;
+  const resolved = resolvePublicAsset({registry:{bucket:'phios-public-assets',assets:[{
+    asset_code:identity, object_key:entry.r2Path, category:entry.role, family:entry.family,
+    format:entry.canonicalFilename.split('.').at(-1), verification:'verified-owner-inventory-identity',
+    width:entry.width || null,height:entry.height || null
+  }]},assetCode:identity,publicBaseUrl:base,surface:options.surface,locale:options.locale});
+  return {...resolved,semanticRole:entry.role,alt:{en:entry.semanticName,zh:entry.altZh || entry.semanticName},fallbackPolicy:'RETRY_EXACT_OBJECT_WITH_STATE_ILLUSTRATION',objectExistenceVerified:false};
+}
