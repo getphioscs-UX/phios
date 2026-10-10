@@ -8,7 +8,7 @@ import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
 const root=path.resolve('.'),files=['.pages-output/_worker.js','.pages-output/_routes.json'];
 const hashes=()=>files.map(p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex'));
 const before=hashes(),lease=acquirePagesOutputLock(root,'BUILD');
-const run=(script,env={})=>spawnSync(process.execPath,[script],{encoding:'utf8',env:{...process.env,PHIOS_PAGES_BUILD_TOKEN:'',...env}});
+const run=(script,env={})=>spawnSync(process.execPath,[script],{encoding:'utf8',env:{...process.env,PHIOS_PAGES_CHECK_WAIT_MS:'0',PHIOS_PAGES_BUILD_TOKEN:'',...env}});
 try {
  const reader=run('scripts/check-pages-static-assets.mjs');assert.notEqual(reader.status,0);assert.match(reader.stderr,/PAGES_OUTPUT_BUSY/);
  const writer=run('scripts/build-cloudflare-pages.mjs');assert.notEqual(writer.status,0);assert.match(writer.stderr,/PAGES_OUTPUT_BUSY/);

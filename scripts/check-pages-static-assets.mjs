@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
+import {acquirePagesCheckLease} from './lib/pages-output-check-lease.mjs';
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -14,7 +14,7 @@ const output = path.join(
 );
 const config=JSON.parse(fs.readFileSync(path.join(root,'wrangler.jsonc'),'utf8'));
 if(path.resolve(root,config.pages_build_output_dir)!==output)throw Error('PAGES_OUTPUT_DIRECTORY_MISMATCH: checker and wrangler configuration differ');
-const lease=acquirePagesOutputLock(root,'CHECK');
+const lease=await acquirePagesCheckLease(root);
 
 const MAX_FILE_SIZE = 25 * 1024 * 1024;
 

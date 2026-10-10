@@ -1,6 +1,6 @@
 # World Civilization Reading R1 · Closure
 
-Current HEAD: fdfeb96e6a485939b4cda34baed2fa0576e5b4b1
+Current HEAD: 5c7696e8821bcaee4ef5619a67e4e6b9d4272b34
 
 IMPLEMENTED: unified World reading, source-backed relations, native context and consent-based account bookmarks.
 VALIDATED_LOCAL: see exact browser, source-check and build identities in WORLD-R1-VALIDATION.json.

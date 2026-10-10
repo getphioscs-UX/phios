@@ -7,6 +7,9 @@ j.checks=JSON.parse(fs.readFileSync(p+'CHECKS.json'));j.currentSourceCheck={file
 j.maintenanceCandidate={file:candidate,sha256:hash(candidate),status:'CANDIDATE_PENDING_HUMAN_REVIEW',productionAcceptance:false};
 j.STATE_CONTINUITY=JSON.parse(fs.readFileSync(p+'STATE-CONTINUITY-EVIDENCE.json'));
 j.FINAL_BINDING=JSON.parse(fs.readFileSync(p+'FINAL-BINDING-STATUS.json'));
+j.blockers=j.blockers.filter(x=>!x.startsWith('Concurrent shared visual changes'));
+j.versionReconciliation={ownerConfirmedExternalCompletion:true,currentHead:j.head,unchangedWorldConsumerEvidenceReused:true,affectedAskChecks:'CURRENT-RECONCILIATION-CHECKS.json',currentBuildPASS:j.build?.reviewCurrentPass===true};
+j.currentSourceCheck={file:p+'CURRENT-World.log',sha256:hash(p+'CURRENT-World.log'),result:JSON.parse(fs.readFileSync(p+'CURRENT-RECONCILIATION-CHECKS.json')).rows.find(r=>r.name==='World').state};
 j.blockers.push('W16 independently fails the prior World engineering source digest. The exact versioned maintenance candidate is prepared; original hashes and checks remain unchanged.');
 j.sourceVersionReconciliation={fullBrowserRows:52,fullRunHadSharedVisualChange:true,currentFeatureRows:12,currentSharedVisualRows:8,currentFailureBoundaryRows:4,note:'Core implementation byte identities can be reused across HEAD movement; changed shared visual owners were separately exercised. This is bounded regression evidence, not 506 visually reviewed customer objects.'};
 fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
