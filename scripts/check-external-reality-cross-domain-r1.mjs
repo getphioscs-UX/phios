@@ -17,6 +17,7 @@ assert.deepEqual(normalizeJurisdictionContext({...base.jurisdictionContext,inter
 assert.equal(createExternalRealityEvent({...base.eventInput,evidence:{...base.eventInput.evidence,schemaVersion:'SEARCH_RESULT'},now}).state,'AUTHORITY_NOT_MAPPED');
 assert.equal(createExternalRealityEvent({...base.eventInput,evidence:{...base.eventInput.evidence,retrievedAt:'2020-01-01T00:00:00Z'},now}).state,'SOURCE_STALE');
 assert.equal(createExternalRealityEvent({...base.eventInput,evidence:{...base.eventInput.evidence,conflicts:['conflict']},now}).state,'SOURCE_CONFLICTED');
+assert.equal(createExternalRealityEvent({...base.eventInput,evidence:{...base.eventInput.evidence,sourceUrl:'https://wrong-source.invalid/'},now}).state,'AUTHORITY_NOT_MAPPED');
 assert.equal(createExternalRealityEvent({...base.eventInput,eventState:'EFFECTIVE',effectiveAt:null,now}).state,'APPLICABILITY_UNKNOWN');
 assert.equal(createExternalRealityEvent({...base.eventInput,authorityCoverage:{...base.eventInput.authorityCoverage,allowedSourceIds:['wrong-source']},now}).state,'AUTHORITY_NOT_MAPPED');
 assert.equal(createExternalRealityEvent({...base.eventInput,evidence:{...base.eventInput.evidence,authorityClass:'SYMBOLIC_READING'},now}).state,'AUTHORITY_NOT_MAPPED');
