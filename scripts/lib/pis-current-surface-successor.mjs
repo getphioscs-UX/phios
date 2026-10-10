@@ -20,8 +20,14 @@ export function pisCurrentSurfaceSuccessor(){
  assert.equal(founder.predecessor.sha256,sha(fs.readFileSync(founder.predecessor.path)));
  assert.equal(founder.copyAuthoritySha256,sha(fs.readFileSync(founder.copyAuthority)));
  assert.equal(founder.humanAcceptanceGranted,false);assert.equal(founder.historicalRecordsRewritten,false);
+ const guides=JSON.parse(fs.readFileSync('content/web/index-surfaces/pis-r1-guide-consumer-successor-v4.json'));
+ assert.equal(guides.status,'ENGINEERING_RECONCILIATION');
+ assert.equal(guides.predecessor.path,'content/web/index-surfaces/pis-r1-founder-publication-successor-v3.json');
+ assert.equal(guides.predecessor.sha256,sha(fs.readFileSync(guides.predecessor.path)));
+ assert.equal(guides.historicalRecordsRewritten,false);assert.equal(guides.humanAcceptanceGranted,false);
+ assert.deepEqual(guides.surfaces.map(s=>s.file),['perspectives/index.html','professional/index.html']);
  for(const s of r.surfaces){
-  const current=s.file===founder.file?founder:next.surfaces.find(x=>x.file===s.file);
+  const current=s.file===founder.file?founder:guides.surfaces.find(x=>x.file===s.file)||next.surfaces.find(x=>x.file===s.file);
   if(current){assert.equal(current.predecessorSha256,s.sha256);if(current!==founder){const source=fs.readFileSync(s.file,'utf8');for(const ref of ['/assets/customer-ui/surfaces/visual-binding-r5.css','/assets/customer-ui/js/surfaces/visual-binding-r5-guides.js'])assert(source.includes(ref),s.file+': missing R5 consumer');}}
   assert.equal(sha(fs.readFileSync(s.file)),current?.sha256||s.sha256,'PIS current source drift: '+s.file);
  }
@@ -35,6 +41,8 @@ export function pisCurrentSurfaceSuccessor(){
   assert.equal(asset.contentHash,proof.sha256);assert.equal(asset.publicUrl,proof.requestedURL);
  }
  for(const s of next.additionalSurfaces){assert.equal(sha(fs.readFileSync(s.file)),s.sha256,'PIS current source drift: '+s.file);r.surfaces.push(s);}
+ assert.deepEqual(guides.additionalSurfaces.map(s=>s.file),['professional/services/index.html']);
+ for(const s of guides.additionalSurfaces){assert.equal(sha(fs.readFileSync(s.file)),s.sha256,'PIS current source drift: '+s.file);r.surfaces.push(s);}
  return r;
 }
 export function assertPisCurrentSurface(document,surface){

@@ -1,0 +1,3454 @@
+# =====================================================================
+# PHI OS · EXTERNAL REALITY → CROSS-DOMAIN NAVIGATION R1
+# GLOBAL CURRENT REALITY / JURISDICTION / HEALTH / FINANCIAL /
+# WORLD → MY REALITY → NAVIGATION INTEGRATION
+#
+# COMPLETE EXECUTABLE MASTER WORK STEP
+#
+# OWNER:
+# Teresa Lee / PHI OS
+#
+# PRODUCT:
+# getphios.com
+#
+# PRODUCT CATEGORY:
+# Global Reality Navigation Platform
+#
+# PRIMARY MARKET REGIONS:
+# ASIA + UNITED STATES + EUROPE
+#
+# CURRENT PRODUCT LOCALES:
+# en + zh-Hans
+#
+# IMPORTANT:
+# locale != jurisdiction
+# language != tax residency
+# language != current physical location
+# language != health authority
+# language != business jurisdiction
+#
+# EXECUTION MODE:
+# CURRENT MAIN REPO
+# ZERO PROVIDER COST
+# FAIL CLOSED
+# NO AUTO DEPLOY
+# NO AUTO COMMIT
+# NO AUTO PUSH
+#
+# FINAL STATE:
+# READY_FOR_HUMAN_REVIEW
+# =====================================================================
+
+
+# =====================================================================
+# 0. OWNER INTENT
+# =====================================================================
+
+This work connects changing external reality to the existing PHI OS
+Reality Navigation architecture.
+
+The system must become capable of handling situations such as:
+
+- national budgets and fiscal-policy changes;
+- tax measures and implementation changes;
+- interest-rate changes;
+- financial-market conditions;
+- company / industry changes;
+- weather;
+- heat;
+- haze;
+- wildfire smoke;
+- air quality;
+- flood or other environmental conditions;
+- public-health alerts;
+- infrastructure disruption;
+- regulation;
+- technology changes;
+- regional / geopolitical conditions;
+
+and determine whether those changes are actually relevant to a
+specific customer Reality.
+
+The target is NOT:
+
+NEWS FEED
+→ GENERIC AI SUMMARY
+
+The target is:
+
+EXTERNAL REALITY
+→ ADMITTED CURRENT EVIDENCE
+→ JURISDICTION
+→ CASE RELEVANCE
+→ DOMAIN IMPACT
+→ CURRENT REALITY CHANGE
+→ NAVIGATION REVIEW
+→ ACTION / NO ACTION
+→ OUTCOME
+→ REVIEW
+
+External change must not automatically create:
+
+personal facts
+causality
+diagnosis
+tax conclusions
+investment recommendations
+professional judgment
+navigation direction
+action
+
+The system must first establish whether the external change actually
+applies to the person's current Reality.
+
+
+# =====================================================================
+# W0 · EXECUTION BASELINE
+# =====================================================================
+
+Before editing anything, record:
+
+git rev-parse HEAD
+git branch --show-current
+git status --short
+
+Record exact current source digests for every file that will be
+modified.
+
+Do not reset the worktree.
+
+Do not assume an earlier chat commit is the current source.
+
+Do not overwrite unrelated local work.
+
+
+# =====================================================================
+# W0A · GLOBAL MARKET AUTHORITY — NON-NEGOTIABLE
+# =====================================================================
+
+PHI OS / getphios.com is an INTERNATIONAL Reality Navigation platform.
+
+Malaysia is:
+
+- a real operating context;
+- a useful first validation environment;
+- one jurisdiction among many;
+
+but Malaysia is NOT the geographic product boundary.
+
+
+The primary commercial / customer markets are:
+
+ASIA
+UNITED STATES
+EUROPE
+
+with future availability extending to other digitally connected
+markets where reliable online sources, public authorities,
+professional ecosystems and customer-facing internet services are
+available.
+
+
+The architecture MUST therefore be global from inception.
+
+
+Canonical model:
+
+GLOBAL
+   ↓
+REGION
+   ↓
+COUNTRY / SUPRANATIONAL JURISDICTION
+   ↓
+STATE / PROVINCE / LOCAL JURISDICTION when applicable
+   ↓
+CURRENT EVENT / CONDITION
+   ↓
+CASE RELEVANCE
+   ↓
+DOMAIN IMPACT
+   ↓
+CURRENT REALITY
+   ↓
+NAVIGATION
+
+
+Never implement:
+
+MALAYSIA
+→ global default
+
+
+Never implement:
+
+zh-Hans
+→ Malaysia / China jurisdiction
+
+
+Never implement:
+
+English
+→ United States jurisdiction
+
+
+Current product locales:
+
+en
+zh-Hans
+
+are PRESENTATION LOCALES only.
+
+
+Locale switching MUST NOT change:
+
+tax applicability
+legal applicability
+health authority
+regulatory authority
+physical location
+residence
+citizenship
+business jurisdiction
+financial exposure
+professional jurisdiction
+
+
+Unknown jurisdiction remains:
+
+UNKNOWN
+
+
+Do not infer tax residency or legal jurisdiction from:
+
+IP
+browser language
+device locale
+timezone
+currency symbol
+site language
+
+
+Network/device location may at most be a location candidate where
+explicitly permitted by existing privacy contracts.
+
+It cannot silently become legal/tax/health authority.
+
+
+# =====================================================================
+# W0B · CURRENT REPO AUTHORITY RECONCILIATION
+# =====================================================================
+
+Inspect and preserve the current authority structure.
+
+Current relevant authorities include at minimum:
+
+
+## CURRENT WEB AUTHORITY
+
+content/governance/current-web-authority/
+
+Current known state includes:
+
+CWA_W0_W10_FROZEN_NOT_ASK_BOUND
+
+and:
+
+CURRENT_WEB_AUTHORITY_RUNTIME_ACCEPTED_NOT_ASK_BOUND
+
+with:
+
+liveSearchProviderBound = false
+
+Existing invariant:
+
+WEB_RESULT_NE_FACT
+SEARCH_RESULT_NE_AUTHORITY
+CURRENT_SOURCE_NE_TRUSTED_SOURCE
+FACT_NE_LENS
+
+
+DO NOT rewrite or mutate the frozen W0-W10 authority.
+
+Create a successor / bounded extension only if needed.
+
+
+## CURRENT REALITY PAIR
+
+Existing contract:
+
+internalCurrentReality = CCR
+externalCurrentReality = CWA
+
+Existing invariant:
+
+CCR_NE_CWA
+CURRENT_FACT_NE_SYMBOLIC_LENS
+LENS_MAY_READ_BUT_NOT_MUTATE_CURRENT_EVIDENCE
+
+
+Preserve this separation.
+
+
+## MY REALITY
+
+Existing customer API:
+
+functions/api/customer-my-reality.js
+
+Existing customer projection:
+
+functions/customer-projection/reality-customer-projection.js
+
+Existing workspace projection:
+
+functions/customer-projection/my-reality-workspace-projection.js
+
+
+The customer projection already supports:
+
+currentReality.externalEvidence
+
+
+Reuse this.
+
+Do not create a second My Reality authority.
+
+
+## NAVIGATION
+
+Existing customer authority:
+
+functions/customer-projection/accepted-navigation-customer.js
+
+Existing accepted runtime:
+
+functions/runtime/navigation/nav-accepted-batch-06-runtime.js
+
+Existing policy is critical:
+
+session input does NOT automatically become owner-confirmed,
+canonical Navigation evidence.
+
+Navigation admission requires current,
+owner-bound,
+version-matched,
+consented source evidence.
+
+Preserve this.
+
+
+## REALITY NAVIGATION ENGINE / REALITY MODEL
+
+Preserve:
+
+content/runtime/reality-navigation-engine/
+
+content/runtime/reality-model-runtime/
+
+
+Do not create a competing Reality authority.
+
+
+## REALITY DATA GOVERNANCE
+
+Preserve current RDG contracts.
+
+RNE consumer reads are already:
+
+PURPOSE_PERMISSION_VISIBILITY_BOUND
+
+and:
+
+writeAuthorityExpanded = false
+
+Preserve that model.
+
+
+## HEALTH
+
+Existing Health infrastructure is NOT obsolete.
+
+Preserve:
+
+content/health/health-knowledge/
+
+content/health/health-reality-runtime/
+
+content/health/health-reflective/
+
+
+Current Health production state is NOT fully promoted.
+
+Existing evidence currently includes:
+
+publicHealthExecutionAllowed = false
+healthPersistenceAllowed = false
+
+and:
+
+HRX_ACTIVATION_CLOSURE_READY_AWAITING_LIVE_EVIDENCE
+
+
+Do not bypass this gate.
+
+
+## FINANCIAL
+
+Preserve:
+
+Financial Data Runtime
+Financial Calculation Runtime
+Financial Analysis Runtime
+Holistic Financial Planning
+Professional Financial Review
+
+Existing cross-domain financial rule:
+
+mayCombineExistingFindings = true
+mayCreateRecommendation = false
+mayCreateProfessionalJudgment = false
+
+Preserve it.
+
+
+# =====================================================================
+# W1 · GLOBAL JURISDICTION CONTEXT
+# =====================================================================
+
+Add one canonical bounded concept:
+
+JURISDICTION_CONTEXT
+
+This is NOT a legal decision engine.
+
+It records which external jurisdictions may be relevant to the
+current case.
+
+
+Suggested contract identity:
+
+PHI-OS-JURISDICTION-CONTEXT-v1
+
+
+Required conceptual fields:
+
+interfaceLocale
+
+currentPhysicalJurisdiction
+
+residenceJurisdictions[]
+
+taxJurisdictions[]
+
+businessJurisdictions[]
+
+professionalServiceJurisdictions[]
+
+financialMarketExposures[]
+
+propertyJurisdictions[]
+
+travelJurisdictions[]
+
+selectedExternalContext[]
+
+sourceReferences[]
+
+asOf
+
+confirmationState
+
+
+Each jurisdiction item must preserve:
+
+jurisdictionCode
+jurisdictionType
+source
+confirmationState
+asOf
+purpose
+persistenceState
+
+
+Use standardized codes where practical:
+
+ISO 3166-1 country codes
+
+ISO 3166-2 subdivisions where applicable
+
+
+Support supranational context separately:
+
+EU
+ASEAN
+
+Do NOT pretend:
+
+EU = one tax jurisdiction
+
+or:
+
+ASEAN = one legal jurisdiction
+
+
+Possible confirmation states:
+
+USER_CONFIRMED
+DOCUMENT_CONFIRMED
+ACCOUNT_CONFIRMED
+SYSTEM_CANDIDATE
+UNKNOWN
+
+
+SYSTEM_CANDIDATE must NEVER automatically become:
+
+USER_CONFIRMED
+
+
+# =====================================================================
+# W1A · LOCATION IS NOT JURISDICTION
+# =====================================================================
+
+Explicitly preserve:
+
+current location
+!=
+tax residency
+
+
+current location
+!=
+business jurisdiction
+
+
+current location
+!=
+citizenship
+
+
+current location
+!=
+professional licensing jurisdiction
+
+
+Example:
+
+interfaceLocale = zh-Hans
+
+currentPhysicalJurisdiction = JP
+
+residenceJurisdiction = SG
+
+taxJurisdiction = SG
+
+businessJurisdictions = [SG, US]
+
+financialMarketExposure = [US, EU]
+
+
+This must be valid.
+
+
+# =====================================================================
+# W2 · GLOBAL SOURCE / AUTHORITY MODEL
+# =====================================================================
+
+Extend Current Web Authority through a SUCCESSOR,
+not by silently editing the frozen W0-W10 authority.
+
+
+Current CWA domains already include:
+
+HEALTH
+FINANCIAL_MARKETS
+COMPANY_PRODUCT
+NEWS_CURRENT_EVENTS
+WEATHER
+GENERAL_CURRENT
+
+
+R1 must determine whether explicit successor classes are needed for:
+
+PUBLIC_POLICY
+
+TAX
+
+ENVIRONMENT
+
+AIR_QUALITY
+
+PUBLIC_HEALTH
+
+INFRASTRUCTURE
+
+INDUSTRY
+
+REGULATION
+
+TECHNOLOGY
+
+TRANSPORT
+
+GEOPOLITICAL_CURRENT
+
+
+Do not add classes merely for naming convenience.
+
+Add only where domain-specific authority / freshness /
+applicability behavior genuinely differs.
+
+
+# =====================================================================
+# W2A · AUTHORITY MUST BE DOMAIN + JURISDICTION AWARE
+# =====================================================================
+
+Current-event admission must evaluate:
+
+domain
+jurisdiction
+authorityClass
+source identity
+source URL
+publishedAt
+effectiveAt when applicable
+retrievedAt
+freshness
+supportLevel
+conflicts
+applicability
+claim type
+
+
+Authority must not be selected simply because the site is:
+
+popular
+high-ranking
+frequently cited
+English-language
+Chinese-language
+
+
+Source language is independent from UI language.
+
+
+A customer using zh-Hans may still receive a current US claim whose
+authoritative source is an English US government source.
+
+The system may provide a customer-language explanation.
+
+It must retain:
+
+original source
+source language
+jurisdiction
+original title where available
+
+
+Do not present system translation as official publisher wording.
+
+
+# =====================================================================
+# W2B · PRIMARY SOURCE PRINCIPLE
+# =====================================================================
+
+Use official / primary authority where the claim requires it.
+
+
+Examples of authority classes:
+
+PUBLIC POLICY:
+government / legislature / regulator / official publication
+
+TAX:
+competent tax authority / enacted legal instrument /
+appropriate professional review
+
+AIR QUALITY:
+official environmental monitoring authority
+
+WEATHER:
+official meteorological authority where available
+
+PUBLIC HEALTH:
+recognized public-health authority
+
+FINANCIAL MARKET:
+regulator / central bank / exchange /
+issuer / admitted market-data provider as appropriate
+
+COMPANY FACT:
+official company / filing / regulator
+
+NEWS EVENT:
+primary official + reputable news corroboration where practical
+
+
+Do not convert secondary news reporting into formal tax/legal
+authority merely because it is current.
+
+
+# =====================================================================
+# W2C · CURRENTNESS
+# =====================================================================
+
+Preserve current CWA currentness classes:
+
+CURRENTNESS_NONE
+CURRENTNESS_HELPFUL
+CURRENTNESS_REQUIRED
+CURRENTNESS_CRITICAL
+
+
+Examples:
+
+Budget announcement:
+CURRENTNESS_REQUIRED
+
+tax implementation:
+CURRENTNESS_REQUIRED
+
+market condition:
+CURRENTNESS_REQUIRED
+
+weather:
+CURRENTNESS_REQUIRED / CRITICAL depending use
+
+air-quality alert:
+CURRENTNESS_CRITICAL when safety-relevant
+
+public-health alert:
+CURRENTNESS_CRITICAL
+
+
+Stale evidence must not silently remain active.
+
+
+# =====================================================================
+# W3 · EXTERNAL REALITY EVENT / CONDITION IR
+# =====================================================================
+
+Create a bounded canonical External Reality representation.
+
+Do not turn CWA itself into Personal Reality.
+
+Suggested conceptual identity:
+
+EXTERNAL_REALITY_EVENT_V1
+
+
+Minimum fields:
+
+eventId
+
+eventType
+
+domain
+
+title
+
+claimReferences[]
+
+jurisdiction
+
+geographicScope
+
+sourceReferences[]
+
+publishedAt
+
+effectiveAt
+
+expiresAt
+
+retrievedAt
+
+freshnessState
+
+authorityClass
+
+supportLevel
+
+conflicts[]
+
+uncertainties[]
+
+eventState
+
+
+Possible event states where applicable:
+
+ANNOUNCED
+PROPOSED
+PASSED
+GAZETTED
+EFFECTIVE
+ACTIVE
+EXPIRED
+SUPERSEDED
+REPEALED
+UNKNOWN
+
+
+Not every event requires every state.
+
+
+For environmental conditions:
+
+OBSERVED_CURRENT
+FORECAST
+ALERT
+ENDED
+UNKNOWN
+
+may be more appropriate.
+
+
+Do not use one lifecycle enum blindly for every domain.
+
+
+# =====================================================================
+# W3A · POLICY ANNOUNCEMENT ≠ EFFECTIVE LAW
+# =====================================================================
+
+This is mandatory.
+
+Example:
+
+national budget speech
+does NOT automatically equal:
+
+current applicable tax rule
+
+
+Preserve separate states:
+
+announcement
+legislative / legal status
+effective date
+individual applicability
+
+
+The system must be able to say:
+
+A new tax measure was announced.
+
+while separately saying:
+
+Your personal tax treatment is not established.
+
+
+# =====================================================================
+# W4 · EXTERNAL REALITY IMPACT ROUTER
+# =====================================================================
+
+Create or reconcile one bounded runtime function:
+
+EXTERNAL REALITY IMPACT ROUTER
+
+Suggested internal code:
+
+ERIR
+
+
+Before creating it, search the repo for any existing equivalent.
+
+If an existing owner already performs this role,
+extend/reuse it instead of creating a duplicate.
+
+
+ERIR IS NOT A NEW TRUTH AUTHORITY.
+
+
+ERIR may:
+
+read admitted external evidence
+
+read bounded jurisdiction context
+
+compare event scope with case scope
+
+identify potentially affected domains
+
+identify missing applicability information
+
+identify consent gates
+
+produce relevance candidates
+
+produce Navigation review-trigger candidates
+
+
+ERIR may NOT:
+
+create external facts
+
+create personal facts
+
+infer diagnosis
+
+calculate tax
+
+create investment recommendations
+
+make professional judgment
+
+declare causality
+
+change Navigation direction
+
+select an action
+
+mutate private source authority
+
+
+# =====================================================================
+# W4A · IMPACT CANDIDATE CONTRACT
+# =====================================================================
+
+Suggested object:
+
+EXTERNAL_REALITY_IMPACT_CANDIDATE_V1
+
+
+Fields:
+
+impactCandidateId
+
+externalEventRef
+
+currentRealityRef
+
+jurisdictionMatch
+
+relevanceState
+
+relevanceReason
+
+relevanceEvidenceRefs[]
+
+affectedDomains[]
+
+requiredConsent[]
+
+professionalEscalations[]
+
+unknowns[]
+
+createdAt
+
+persisted
+
+
+Allowed relevance states:
+
+NOT_RELEVANT
+
+POTENTIALLY_RELEVANT
+
+RELEVANT_BY_CONFIRMED_FACT
+
+USER_CONFIRMED_RELEVANT
+
+BLOCKED_BY_MISSING_JURISDICTION
+
+BLOCKED_BY_CONSENT
+
+PROFESSIONAL_REVIEW_REQUIRED
+
+UNKNOWN
+
+
+Do not use a fake numeric confidence score merely to look analytical.
+
+
+# =====================================================================
+# W4B · CROSS-DOMAIN EDGE SEMANTICS
+# =====================================================================
+
+Cross-domain network edges must have explicit semantics.
+
+
+Allowed edge classes:
+
+SOURCE_SUPPORTS_CLAIM
+
+EVENT_APPLIES_TO_JURISDICTION
+
+EVENT_RELEVANT_TO_CONTEXT
+
+CONSTRAINT_RELATIONSHIP
+
+USER_CONFIRMED_RELATIONSHIP
+
+TEMPORAL_RELATIONSHIP
+
+PROFESSIONAL_REVIEW_LINK
+
+OBSERVED_OUTCOME_LINK
+
+
+Separate speculative class:
+
+POSSIBLE_RELATIONSHIP
+
+
+Never silently display POSSIBLE_RELATIONSHIP as:
+
+CAUSES
+
+
+No:
+
+haze
+→ illness
+
+unless that individual causality has appropriate professional evidence.
+
+
+No:
+
+budget
+→ user saves RM X tax
+
+without proper applicable tax evidence.
+
+
+# =====================================================================
+# W5 · WORLD → EXTERNAL REALITY BRIDGE
+# =====================================================================
+
+World / Civilization Atlas must become useful without becoming a
+massive automatic ingestion engine.
+
+
+Canonical relationship:
+
+WORLD / CIVILIZATION ATLAS
+        ↓
+public context
+        ↓
+CURRENT EXTERNAL EVIDENCE
+        ↓
+case relevance
+        ↓
+MY REALITY
+        ↓
+NAVIGATION
+
+
+World remains:
+
+public / macro context
+
+
+My Reality remains:
+
+customer / case context
+
+
+Do NOT copy hundreds of World objects into customer Reality.
+
+
+A World item may be:
+
+AVAILABLE_PUBLIC_CONTEXT
+
+without becoming:
+
+CUSTOMER_REALITY_EVIDENCE
+
+
+Only after relevance / selection / applicable rules should a bounded
+reference enter the customer's current Reality.
+
+
+# =====================================================================
+# W5A · CUSTOMER ACTION
+# =====================================================================
+
+Where useful, World / Knowledge / Current Context may expose:
+
+“Use this in My Reality”
+
+or equivalent bilingual action.
+
+
+That action must:
+
+reference the source object
+
+retain source identity
+
+retain jurisdiction
+
+retain currentness
+
+retain timestamp
+
+request necessary consent
+
+not duplicate the entire public object unnecessarily
+
+
+Do not silently add public items to private customer history.
+
+
+# =====================================================================
+# W6 · HEALTH AS A PROTECTED REALITY DOMAIN
+# =====================================================================
+
+Health must NOT be deleted.
+
+Health must NOT become a generic wellness product.
+
+Health must NOT become a symbolic-reading extension.
+
+
+Health is:
+
+A PROTECTED SENSITIVE REALITY DOMAIN
+
+
+Preserve existing HRX governance.
+
+
+Existing Health rules already require:
+
+DATA_MINIMIZATION
+PURPOSE_LIMITATION
+EXPLICIT_CONSENT
+NO_ADVERTISING
+NO_MODEL_TRAINING
+NO_SILENT_SHARING
+
+Preserve all.
+
+
+# =====================================================================
+# W6A · PUBLIC HEALTH CONTEXT VS PRIVATE HEALTH CONTEXT
+# =====================================================================
+
+Explicitly separate:
+
+
+LAYER 1
+PUBLIC EXTERNAL HEALTH / ENVIRONMENT CONDITION
+
+Examples:
+
+air quality
+heat alert
+public-health alert
+infectious-disease alert
+
+This may be public current evidence.
+
+
+LAYER 2
+PERSONAL RELEVANCE
+
+Examples:
+
+customer is currently in affected location
+
+customer has an outdoor activity planned
+
+business employs outdoor staff
+
+family event occurs in affected location
+
+This may be evaluated without reading private medical history.
+
+
+LAYER 3
+PRIVATE HEALTH CONTEXT
+
+Examples:
+
+symptoms
+diagnosis
+medications
+lab values
+medical history
+care plan
+
+
+Layer 3 requires explicit Health consent.
+
+
+Do not require private Health data merely to tell someone:
+
+“Current official air-quality conditions may be relevant to your
+outdoor activity.”
+
+
+# =====================================================================
+# W6B · HEALTH PERSISTENCE GATE
+# =====================================================================
+
+Current Health persistence is not production-promoted.
+
+Do not bypass:
+
+healthPersistenceAllowed = false
+
+
+Until existing HRX activation gates are truly satisfied:
+
+private Health context must remain subject to the current
+session / non-persistent boundaries.
+
+
+Do NOT mutate the Health freeze just to make this R1 pass.
+
+
+The existing W33/W34 path remains authoritative:
+
+live evidence
+→ browser acceptance
+→ promotion gate
+
+
+If those gates are still incomplete:
+
+report:
+
+HEALTH_PRIVATE_PERSISTENCE_NOT_PROMOTED
+
+This does NOT block building the external-reality integration
+architecture.
+
+
+# =====================================================================
+# W6C · HEALTH SAFETY
+# =====================================================================
+
+Preserve existing Health behavior:
+
+differentialDiagnosisGenerated = false
+
+causalityInferred = false
+
+unknownAllowed = true
+
+
+Preserve existing symbolic firewall.
+
+
+AST
+BZR
+NUM
+HDR
+ICH
+TAR
+ZWR
+
+must never become Health evidence for:
+
+diagnosis
+disease risk estimation
+illness prediction
+fertility determination
+lifespan estimation
+medication decisions
+emergency triage
+
+
+Symbolic output may remain:
+
+SEPARATE_REFLECTIVE_CONTEXT_ONLY
+
+
+# =====================================================================
+# W6D · HEALTH NAVIGATION RELATIONSHIP
+# =====================================================================
+
+Health does not choose the customer's life action.
+
+Health may contribute:
+
+constraint
+risk context
+care-navigation suggestion
+professional handoff
+unknown
+review trigger
+
+
+Example:
+
+official air-quality condition
++
+confirmed current location
++
+planned outdoor activity
+
+may create:
+
+NAVIGATION_REVIEW_TRIGGER
+
+but not:
+
+AUTOMATIC_CANCEL_ACTIVITY
+
+
+# =====================================================================
+# W7 · FINANCIAL / TAX / PUBLIC POLICY INTEGRATION
+# =====================================================================
+
+External policy changes may become Financial Reality context.
+
+They do NOT automatically become:
+
+financial facts
+tax calculations
+investment advice
+professional recommendations
+
+
+Pipeline:
+
+PUBLIC POLICY EVENT
+↓
+jurisdiction
+↓
+applicability candidate
+↓
+financial relevance
+↓
+scenario / finding candidate
+↓
+professional boundary where required
+↓
+Navigation review
+
+
+# =====================================================================
+# W7A · TAX BOUNDARY
+# =====================================================================
+
+Preserve:
+
+professional-financial-tax-legal-boundary-contract-v1.json
+
+
+Existing escalation:
+
+TAX_CONSIDERATION
+→ TAX_PROFESSIONAL_REVIEW_REQUIRED
+
+
+and:
+
+LEGAL_REVIEW_REQUIRED
+→ LEGAL_PROFESSIONAL_REVIEW_REQUIRED
+
+
+Do not allow:
+
+Budget announcement
+→ tax calculation
+
+
+Do not allow:
+
+news article
+→ tax applicability
+
+
+Do not allow:
+
+AI explanation
+→ tax authority
+
+
+# =====================================================================
+# W7B · FINANCIAL SCENARIO REASSESSMENT
+# =====================================================================
+
+Where admitted external evidence may affect a financial assumption,
+the system may mark:
+
+ASSUMPTION_REVIEW_REQUIRED
+
+
+Examples:
+
+interest-rate change
+
+confirmed tax change
+
+new subsidy / grant rule
+
+regulatory change
+
+material market condition
+
+currency context
+
+
+The deterministic Financial Calculation Runtime remains calculation
+authority.
+
+
+LLM does not create financial calculations.
+
+
+# =====================================================================
+# W7C · BUSINESS OWNERS
+# =====================================================================
+
+Business Reality may involve:
+
+company spending
+
+staffing
+
+cash-flow
+
+tax timing
+
+regulation
+
+supply chains
+
+weather/environmental operating constraints
+
+industry conditions
+
+
+Cross-domain findings remain traceable to original source findings.
+
+No automatic recommendation.
+
+
+# =====================================================================
+# W8 · RELATIONSHIP / FAMILY / WORK PROPAGATION
+# =====================================================================
+
+External events can propagate across life domains.
+
+Example:
+
+AIR QUALITY
+↓
+outdoor activity constraint
+↓
+school/family schedule
+↓
+parent work availability
+↓
+business/work capacity
+↓
+household spending
+
+
+This is a potential cross-domain propagation model.
+
+The system must distinguish:
+
+OBSERVED relationship
+
+USER-CONFIRMED relationship
+
+POSSIBLE relationship
+
+
+It must not declare:
+
+causal chain proven
+
+unless supported.
+
+
+# =====================================================================
+# W9 · MY REALITY INTEGRATION
+# =====================================================================
+
+Extend the existing My Reality workspace.
+
+Do NOT create a second Reality page.
+
+
+Current customer projection already supports:
+
+externalEvidence
+
+
+Use that lane.
+
+
+Add a customer-readable area such as:
+
+CURRENT EXTERNAL CONDITIONS
+
+or:
+
+WHAT CHANGED AROUND THIS REALITY
+
+
+This is NOT a news feed.
+
+
+Each displayed external item should show:
+
+what changed
+
+why it may matter here
+
+source
+
+jurisdiction
+
+as-of / effective status
+
+freshness state
+
+affected domain candidates
+
+what remains unknown
+
+
+Where appropriate:
+
+Use in this Reality
+
+Ignore for this question
+
+Review relevance
+
+Professional review required
+
+
+# =====================================================================
+# W9A · VISUAL SEMANTICS
+# =====================================================================
+
+External nodes must look different from:
+
+personal facts
+method perspectives
+professional findings
+unknowns
+
+
+Recommended node classes:
+
+EXTERNAL_CURRENT
+
+PERSONAL_CONFIRMED
+
+SELF_REPORTED
+
+PROFESSIONAL
+
+METHOD_PERSPECTIVE
+
+UNKNOWN
+
+
+Do not communicate meaning only by colour.
+
+Use:
+
+shape
+label
+iconography
+text
+ARIA description
+
+
+# =====================================================================
+# W9B · CURRENT REALITY NETWORK
+# =====================================================================
+
+Extend the network concept so External Reality can appear as
+source-bounded nodes.
+
+Example:
+
+Malaysia Budget
+        │
+   policy relevance
+        ↓
+Business Expense Decision
+        │
+        ├─ Financial
+        ├─ Business
+        └─ Tax review
+
+
+and:
+
+Regional Haze
+        │
+        ├─ Environment
+        ├─ Work context
+        ├─ Family schedule
+        └─ Health relevance gate
+
+
+Edges mean:
+
+relevance / constraint / source relationship
+
+NOT automatically:
+
+causation
+
+
+# =====================================================================
+# W10 · NAVIGATION REVIEW TRIGGERS
+# =====================================================================
+
+External change must NOT bypass accepted Navigation admission.
+
+
+Existing accepted Navigation requires:
+
+owner-bound
+confirmed
+current
+version-matched
+consented
+
+source evidence.
+
+
+Preserve this.
+
+
+External Reality may create only:
+
+NAVIGATION_REVIEW_TRIGGER_CANDIDATE
+
+
+before the appropriate Reality evidence is admitted.
+
+
+# =====================================================================
+# W10A · MAP TO EXISTING NAV MODULES
+# =====================================================================
+
+Review the accepted NAV-01–NAV-30 contracts.
+
+Do not create a second Navigation ontology.
+
+
+External Reality is especially relevant to existing modules including:
+
+NAV-04
+Time
+
+NAV-09
+Change Threshold
+
+NAV-12
+Maintenance Cost
+
+NAV-14
+Cross-Domain Propagation
+
+NAV-15
+Capacity Constraint
+
+NAV-18
+Waiting Cost
+
+NAV-23
+Scenario Space
+
+NAV-24
+Baseline / Upside / Downside
+
+
+Potentially others depending on the existing accepted contract.
+
+
+Do not hard-code the above as exclusive.
+
+
+# =====================================================================
+# W10B · REVIEW TRIGGER CONTRACT
+# =====================================================================
+
+Suggested bounded object:
+
+NAVIGATION_REVIEW_TRIGGER_V1
+
+
+Fields:
+
+triggerId
+
+sourceEventRef
+
+realityRef
+
+affectedNavModules[]
+
+reason
+
+sourceRefs[]
+
+jurisdiction
+
+asOf
+
+triggerState
+
+requiredConfirmation
+
+requiredConsent
+
+professionalGate
+
+persisted
+
+
+States:
+
+CANDIDATE
+
+RELEVANCE_CONFIRMED
+
+BLOCKED_UNKNOWN
+
+BLOCKED_CONSENT
+
+PROFESSIONAL_REVIEW_REQUIRED
+
+READY_FOR_REASSESSMENT
+
+SUPERSEDED
+
+
+This object does NOT itself change Navigation.
+
+
+# =====================================================================
+# W10C · NO AUTOMATIC DIRECTION CHANGE
+# =====================================================================
+
+Forbidden:
+
+new external event
+→ change direction
+
+
+Forbidden:
+
+new external event
+→ create action
+
+
+Forbidden:
+
+new external event
+→ alter current position
+
+
+Correct:
+
+new external evidence
+→ identify possible relevance
+→ review Reality
+→ admit confirmed change
+→ rerun applicable Navigation assessment
+→ human/user decision remains separate
+
+
+# =====================================================================
+# W11 · ASK PHI OS INTEGRATION
+# =====================================================================
+
+Current CWA is not yet Ask-bound.
+
+Current HRX Ask bridge is not production activated.
+
+
+Do not simply expose raw web search to Ask.
+
+
+Correct orchestration:
+
+QUESTION
+↓
+classify whether currentness is required
+↓
+determine domain
+↓
+determine required jurisdiction
+↓
+resolve missing jurisdiction if material
+↓
+CWA admitted current evidence
+↓
+case relevance
+↓
+domain router
+↓
+Reality context
+↓
+bounded answer / navigation
+
+
+Ask may consume only:
+
+ADMITTED_CURRENT_EVIDENCE_IR
+
+
+Preserve the existing CWA rule.
+
+
+# =====================================================================
+# W11A · WHEN TO ASK FOR JURISDICTION
+# =====================================================================
+
+Do not ask the user unnecessary questions.
+
+
+If the required jurisdiction is already:
+
+USER_CONFIRMED
+
+and current for the relevant purpose,
+
+reuse it.
+
+
+If jurisdiction materially changes the answer and remains unknown,
+ask for it or return the boundary.
+
+
+Examples:
+
+“What can I deduct from tax?”
+→ tax jurisdiction required
+
+
+“Is the haze bad where I am today?”
+→ current physical location required
+
+
+“What does the Fed rate decision mean generally?”
+→ personal tax residence not required
+
+
+# =====================================================================
+# W11B · CURRENT EVENT QUESTIONS
+# =====================================================================
+
+Questions that explicitly require current information must not be
+answered from stale static knowledge.
+
+Use the current authority path once production-bound.
+
+
+If live authority is not available:
+
+return a bounded state such as:
+
+CURRENT_SOURCE_UNAVAILABLE
+
+rather than inventing a current answer.
+
+
+# =====================================================================
+# W12 · LANGUAGE / INTERNATIONALIZATION
+# =====================================================================
+
+Current output locales remain:
+
+en
+zh-Hans
+
+
+External source locale is independent.
+
+
+Required fields should preserve:
+
+sourceLocale
+customerLocale
+
+
+If system-generated translation is displayed:
+
+do not represent it as an official translation.
+
+
+A source may be:
+
+Japanese
+German
+French
+Korean
+Malay
+Indonesian
+etc.
+
+while customer output is:
+
+English
+or
+Simplified Chinese
+
+
+This architecture must allow that future expansion.
+
+
+# =====================================================================
+# W13 · GLOBAL COVERAGE REGISTRY
+# =====================================================================
+
+Create or reconcile a transparent coverage registry.
+
+Suggested concept:
+
+CURRENT_EXTERNAL_AUTHORITY_COVERAGE_V1
+
+
+This is NOT a marketing list claiming global support.
+
+
+Coverage is:
+
+DOMAIN + JURISDICTION specific.
+
+
+Possible states:
+
+VERIFIED_LIVE
+
+VERIFIED_STATIC_AUTHORITY_MAP
+
+PARTIAL
+
+AUTHORITY_MAPPED_NOT_LIVE
+
+NOT_VERIFIED
+
+UNSUPPORTED
+
+
+Examples:
+
+Malaysia / public policy
+Malaysia / air quality
+United States / federal tax
+United States / air quality
+European Union / EU regulation
+specific EU country / tax
+Japan / weather
+Singapore / public policy
+
+must each have independent states.
+
+
+Do NOT write:
+
+GLOBAL_SUPPORTED = true
+
+
+just because the architecture is global.
+
+
+# =====================================================================
+# W13A · PRIMARY MARKET REGIONS
+# =====================================================================
+
+Registry should support region groupings:
+
+ASIA
+UNITED_STATES
+EUROPE
+
+
+But region grouping is presentation / market organization.
+
+Authority remains jurisdiction-specific.
+
+
+Asia is not one regulatory authority.
+
+Europe is not one regulatory authority.
+
+United States often requires:
+
+federal
++
+state
++
+sometimes local
+
+resolution.
+
+
+# =====================================================================
+# W14 · INITIAL VALIDATION FIXTURES
+# =====================================================================
+
+Build controlled fixtures proving the architecture.
+
+
+Do not use only Malaysia.
+
+
+Minimum fixture set:
+
+
+CASE 1
+MALAYSIA · PUBLIC POLICY / BUDGET
+
+Purpose:
+
+announcement
+vs
+effective tax applicability
+
+Expected:
+
+policy evidence admitted;
+personal tax result NOT auto-created;
+TAX_CONSIDERATION possible;
+professional boundary preserved.
+
+
+CASE 2
+MALAYSIA / ASEAN · AIR QUALITY / HAZE
+
+Purpose:
+
+public environment
+→ location relevance
+→ Work / Family / Health context
+
+Expected:
+
+no personal diagnosis;
+no causality;
+Health private context not read without consent.
+
+
+CASE 3
+UNITED STATES · FEDERAL + STATE
+
+Use a controlled policy or environmental fixture.
+
+Purpose:
+
+prove:
+
+US federal != state applicability
+
+
+CASE 4
+EUROPE · EU + MEMBER COUNTRY
+
+Purpose:
+
+prove:
+
+EU context != national tax/legal applicability
+
+
+CASE 5
+ASIA NON-MALAYSIA
+
+Use a representative digitally connected jurisdiction such as:
+
+Singapore
+Japan
+South Korea
+
+Purpose:
+
+prove:
+
+Malaysia is not a default.
+
+
+CASE 6
+UNKNOWN JURISDICTION
+
+Purpose:
+
+ensure system fails closed rather than guessing.
+
+
+CASE 7
+CHINESE UI + US JURISDICTION
+
+Expected:
+
+Chinese presentation;
+US authority;
+no locale-jurisdiction coupling.
+
+
+CASE 8
+ENGLISH UI + ASIA JURISDICTION
+
+Expected:
+
+English presentation;
+correct Asian authority.
+
+
+# =====================================================================
+# W14A · CROSS-DOMAIN FIXTURES
+# =====================================================================
+
+At least one fixture must affect:
+
+Financial
++
+Work / Business
+
+
+At least one fixture must affect:
+
+Environment
++
+Family
++
+Work
++
+Health relevance
+
+
+At least one fixture must produce:
+
+NO MATERIAL CASE RELEVANCE
+
+
+This proves the system does not attach every world event to everyone.
+
+
+# =====================================================================
+# W14B · NEGATIVE FIXTURES
+# =====================================================================
+
+Required failure tests:
+
+search result only
+→ NOT admitted fact
+
+
+stale policy article
+→ stale / blocked
+
+
+wrong-country tax source
+→ blocked applicability
+
+
+English source + Chinese UI
+→ allowed
+
+
+Chinese source + English UI
+→ allowed if authority valid
+
+
+IP location candidate
+→ does not establish tax jurisdiction
+
+
+Budget announcement
+→ does not establish personal tax deduction
+
+
+bad air quality
+→ does not diagnose illness
+
+
+symbolic method
+→ does not become Health evidence
+
+
+market change
+→ does not automatically generate investment action
+
+
+external event
+→ does not automatically rewrite Navigation
+
+
+# =====================================================================
+# W15 · HEALTH ACTIVATION RECONCILIATION
+# =====================================================================
+
+Do NOT silently promote HRX.
+
+
+Run existing zero-cost Health gates first.
+
+
+Existing scripts include:
+
+check:health-master-gates
+
+check:health-reality-current
+
+check:hrx-w23-w35
+
+check:hrx-activation-closure
+
+
+Live promotion path includes:
+
+hrx:capture-live-evidence
+
+hrx:promote-w34
+
+
+Do NOT run a live promotion merely because this master work mentions it.
+
+First inspect whether the required deployment/live authority evidence is
+actually available.
+
+
+If not:
+
+leave:
+
+HRX_PRIVATE_RUNTIME_NOT_PROMOTED
+
+
+and complete External Reality R1 around that boundary.
+
+
+# =====================================================================
+# W16 · CURRENT WEB AUTHORITY ACTIVATION RECONCILIATION
+# =====================================================================
+
+Current CWA state is:
+
+accepted
+frozen
+not Ask-bound
+liveSearchProviderBound=false
+
+
+Do NOT pretend CWA is live.
+
+
+Create a successor activation readiness path.
+
+
+It must prove:
+
+authority discovery
+
+jurisdiction resolution
+
+source admission
+
+freshness
+
+claim extraction
+
+provenance
+
+conflict
+
+current evidence IR
+
+Ask / Reality consumer projection
+
+
+before:
+
+LIVE_CURRENT_EXTERNAL_REALITY
+
+may be claimed.
+
+
+# =====================================================================
+# W16A · LIVE PROVIDER COST
+# =====================================================================
+
+This Master Work does NOT authorize paid OpenAI/provider calls.
+
+
+providerCalls = 0
+
+providerCostUSD = 0
+
+
+Official HTTPS source retrieval may be tested only where already
+supported by existing zero-cost infrastructure and safe to do so.
+
+Do not introduce an OpenAI call simply to classify a source if
+deterministic classification is sufficient.
+
+
+# =====================================================================
+# W17 · CUSTOMER EXPERIENCE
+# =====================================================================
+
+Do not expose architecture names such as:
+
+ERIR
+CWA
+HRX
+RRE
+RNE
+RDG
+
+
+to normal customers.
+
+
+Customer language should be simple.
+
+
+Possible headings:
+
+What changed around you
+
+Current external conditions
+
+Why this may matter
+
+What this affects
+
+What remains uncertain
+
+Review your current position
+
+Use this in My Reality
+
+
+Chinese:
+
+你周围发生了什么变化
+
+当前外部条件
+
+为什么可能与你有关
+
+可能影响什么
+
+仍然不知道什么
+
+重新检查当前位置
+
+加入我的现实
+
+
+# =====================================================================
+# W17A · DO NOT BUILD A NEWS DASHBOARD
+# =====================================================================
+
+My Reality must not become:
+
+Reuters feed
+Bloomberg feed
+Google News clone
+weather dashboard
+tax-news dashboard
+
+
+External content appears only when:
+
+relevant
+selected
+explicitly opened
+or required by the current question.
+
+
+# =====================================================================
+# W17B · PRIORITY
+# =====================================================================
+
+Customer priority should reflect:
+
+relevance to current Reality
+
+time sensitivity
+
+authority quality
+
+materiality
+
+uncertainty
+
+safety
+
+
+Do NOT sort solely by:
+
+news popularity
+
+clicks
+
+recency alone
+
+social trend
+
+
+# =====================================================================
+# W18 · WORLD PAGE CONNECTION
+# =====================================================================
+
+World can show broader:
+
+civilization
+economy
+industry
+technology
+environment
+demography
+infrastructure
+public policy
+regional conditions
+
+
+But only a subset becomes:
+
+CURRENT EXTERNAL REALITY
+
+
+and an even smaller subset becomes:
+
+PERSONAL REALITY RELEVANT
+
+
+This hierarchy must remain visible in the architecture.
+
+
+# =====================================================================
+# W19 · REALITY DATA GOVERNANCE
+# =====================================================================
+
+Do not turn RDG into a global customer-data warehouse.
+
+
+Preferred ownership:
+
+Health owns Health data.
+
+Financial owns Financial data.
+
+Relationship owns Relationship evidence.
+
+Profile owns Profile evidence.
+
+CWA owns admitted current external evidence.
+
+World owns public World context.
+
+Reality composes bounded references.
+
+Navigation consumes bounded references.
+
+
+This work must preserve:
+
+SOURCE AUTHORITY
++
+PURPOSE
++
+PERMISSION
++
+VISIBILITY
++
+RETENTION
+
+
+Connection does not transfer authority.
+
+
+# =====================================================================
+# W19A · STORAGE
+# =====================================================================
+
+Public external evidence may be referenced by customer Reality.
+
+Do not unnecessarily duplicate the entire source payload.
+
+
+Private cross-domain context must respect the original domain's
+retention/persistence policy.
+
+
+Health remains subject to its stricter policy.
+
+
+# =====================================================================
+# W20 · SUBSCRIPTION / ASK CONTINUITY
+# =====================================================================
+
+This work should remain compatible with:
+
+COM-SUBSCRIPTION-MONTHLY
+
+
+The subscription may later allow customers to continue asking about
+their existing:
+
+Navigation
+Relationship
+Profile
+Methods
+Financial
+Reality
+
+and current external changes.
+
+
+However:
+
+External Reality R1 itself does not change the subscription price,
+quota or USD cost ceiling.
+
+
+No commerce mutation is authorized by this Master Work.
+
+
+When subscription follow-up later consumes current evidence:
+
+retrieve only relevant evidence;
+
+do not send the entire World or customer history to the model.
+
+
+# =====================================================================
+# W21 · CHANGE-DETECTION PRINCIPLE
+# =====================================================================
+
+External Reality should support future change detection.
+
+
+Concept:
+
+previous admitted state
+vs
+current admitted state
+
+
+Possible outputs:
+
+NEW
+
+CHANGED
+
+UNCHANGED
+
+EXPIRED
+
+SUPERSEDED
+
+CONFLICTED
+
+
+But do not create historical changes when no prior verified state exists.
+
+
+UNKNOWN remains UNKNOWN.
+
+
+# =====================================================================
+# W22 · REVIEW / CONTINUITY
+# =====================================================================
+
+This integration must complete the PHI OS loop:
+
+
+CURRENT REALITY
+↓
+NAVIGATION
+↓
+ACTION
+↓
+OUTCOME
+↓
+NEW EXTERNAL REALITY
+↓
+REVIEW
+↓
+REALITY NEXT
+
+
+A later policy, weather or health-context change may invalidate an
+earlier assumption.
+
+
+The system must be able to say:
+
+“Something relevant has changed; review the previous decision.”
+
+It must not say:
+
+“The old decision was wrong.”
+
+unless outcome/evidence establishes that conclusion.
+
+
+# =====================================================================
+# W23 · NAVIGATION NETWORK VISUAL INTEGRATION
+# =====================================================================
+
+Reuse the existing customer navigation-network principles.
+
+
+Current display already preserves:
+
+readOnly
+
+session-only
+
+isolated nodes when relationships lack evidence
+
+no invented edges
+
+unknowns
+
+
+Extend this discipline to External Reality.
+
+
+Required legend distinction:
+
+External current evidence
+
+Customer-reported context
+
+Confirmed personal evidence
+
+Professional evidence / judgment
+
+Perspective
+
+Unknown
+
+
+External current evidence needs:
+
+source
+jurisdiction
+as-of
+freshness
+
+
+# =====================================================================
+# W24 · SOURCE DETAIL UI
+# =====================================================================
+
+Selecting an External Reality node should expose:
+
+Claim / condition
+
+Source
+
+Authority class
+
+Jurisdiction
+
+Published / effective / retrieved date as applicable
+
+Freshness
+
+Why it may be relevant
+
+What is not established
+
+Affected-domain candidates
+
+Consent requirement
+
+Professional-review boundary
+
+
+Do not bury provenance behind an internal developer panel.
+
+
+# =====================================================================
+# W25 · INTERNATIONAL PRIVACY BOUNDARY
+# =====================================================================
+
+Do NOT claim a single global privacy law automatically governs every
+customer.
+
+
+Preserve PHI OS internal privacy controls.
+
+
+Jurisdiction-specific legal compliance is separate and must be
+reviewed where required.
+
+
+This architecture must be compatible with stricter regional privacy
+requirements, but this Master Work does not authorize unsupported
+legal claims such as:
+
+“fully GDPR compliant globally”
+
+or equivalent.
+
+
+# =====================================================================
+# W26 · NO SILENT PROFILE ENRICHMENT
+# =====================================================================
+
+External Reality must NOT silently enrich:
+
+Profile personality
+
+Method report
+
+Relationship profile
+
+Financial profile
+
+Health record
+
+
+without an explicit contract and appropriate consent.
+
+
+Example:
+
+customer lives through a heat wave
+
+does not become:
+
+“this person has low heat tolerance”
+
+unless actual evidence establishes it.
+
+
+# =====================================================================
+# W27 · NO SYMBOLIC EXTERNAL FACT
+# =====================================================================
+
+Method perspectives may read an established current Reality.
+
+They cannot create External Reality.
+
+
+For example:
+
+BaZi timing
+cannot establish:
+
+tax policy
+
+weather
+
+air quality
+
+market price
+
+health condition
+
+regulatory event
+
+
+This preserves:
+
+CURRENT_FACT_NE_SYMBOLIC_LENS
+
+
+# =====================================================================
+# W28 · NEW CODE / CONTRACT LOCATION
+# =====================================================================
+
+Do not scatter this work across arbitrary folders.
+
+
+Before adding files, discover current owner boundaries.
+
+
+If no equivalent exists, suggested bounded structure:
+
+content/runtime/external-reality-impact/
+
+or equivalent current runtime namespace
+
+
+with:
+
+authority/
+contracts/
+registries/
+fixtures/
+acceptance/
+freeze/
+
+
+BUT:
+
+do not create this directory if an existing canonical runtime already
+owns the same responsibility.
+
+
+Runtime implementation should remain in the current functions/runtime
+or orchestration pattern used by the repository.
+
+
+# =====================================================================
+# W29 · PROPOSED CONTRACT SET
+# =====================================================================
+
+Only if absent after discovery, create the minimum necessary contracts:
+
+global-jurisdiction-context-contract-v1.json
+
+external-reality-event-contract-v1.json
+
+external-reality-impact-candidate-contract-v1.json
+
+cross-domain-impact-boundary-contract-v1.json
+
+navigation-review-trigger-contract-v1.json
+
+external-reality-consumer-read-contract-v1.json
+
+world-to-reality-reference-contract-v1.json
+
+external-reality-health-boundary-contract-v1.json
+
+external-reality-financial-boundary-contract-v1.json
+
+external-reality-source-language-contract-v1.json
+
+
+Do not create contracts just to inflate architecture.
+
+
+# =====================================================================
+# W30 · PROPOSED COVERAGE / POLICY REGISTRIES
+# =====================================================================
+
+Only if absent:
+
+external-reality-domain-registry-v1.json
+
+jurisdiction-type-registry-v1.json
+
+external-current-authority-coverage-v1.json
+
+external-reality-event-state-registry-v1.json
+
+external-reality-impact-state-registry-v1.json
+
+navigation-review-trigger-state-registry-v1.json
+
+
+All must be declarative.
+
+No user payloads in registries.
+
+
+# =====================================================================
+# W31 · API / ORCHESTRATION
+# =====================================================================
+
+Prefer extending current orchestration.
+
+Do not create a parallel `/api/my-reality-v2` merely for this work.
+
+
+Potential integration points:
+
+functions/api/customer-my-reality.js
+
+functions/reality-orchestration/
+
+functions/customer-projection/
+
+existing Ask orchestration
+
+existing CWA consumer path
+
+
+Keep raw runtime data hidden from customer projections.
+
+
+# =====================================================================
+# W32 · FAILURE BEHAVIOR
+# =====================================================================
+
+Required fail-closed states:
+
+JURISDICTION_UNKNOWN
+
+AUTHORITY_NOT_MAPPED
+
+LIVE_SOURCE_UNAVAILABLE
+
+SOURCE_STALE
+
+SOURCE_CONFLICTED
+
+APPLICABILITY_UNKNOWN
+
+CONSENT_REQUIRED
+
+PRIVATE_HEALTH_CONTEXT_NOT_AUTHORIZED
+
+HEALTH_RUNTIME_NOT_PROMOTED
+
+TAX_PROFESSIONAL_REVIEW_REQUIRED
+
+LEGAL_PROFESSIONAL_REVIEW_REQUIRED
+
+NAVIGATION_REASSESSMENT_NOT_ADMITTED
+
+
+None of these should become:
+
+500 GENERIC ERROR
+
+unless there is a true server failure.
+
+
+Customer UI must explain bounded states cleanly.
+
+
+# =====================================================================
+# W33 · ZERO-COST CHECKS
+# =====================================================================
+
+Add a dedicated checker:
+
+check:external-reality-cross-domain:r1
+
+
+It must be routed through the existing:
+
+run-zero-cost-regression.mjs
+
+
+It must assert:
+
+global architecture
+
+locale/jurisdiction separation
+
+CWA frozen authority not overwritten
+
+HRX boundaries preserved
+
+no Health promotion bypass
+
+external event IR valid
+
+impact candidates do not create facts
+
+cross-domain edges carry semantics
+
+no unsupported causality
+
+tax boundary preserved
+
+financial recommendation not auto-created
+
+symbolic firewall preserved
+
+Navigation not auto-mutated
+
+unknown jurisdiction fails closed
+
+source provenance retained
+
+World does not auto-write private Reality
+
+private data not silently merged
+
+providerCalls=0
+
+
+# =====================================================================
+# W34 · RUN EXISTING REGRESSION
+# =====================================================================
+
+Run relevant current zero-cost checks.
+
+At minimum inspect/run as applicable:
+
+npm run check:current-web-authority
+
+npm run check:cwa
+
+npm run check:ask2-w0-w3
+
+npm run check:health-master-gates
+
+npm run check:health-reality-current
+
+npm run check:hrx-w23-w35
+
+npm run check:hrx-activation-closure
+
+npm run check:financial-runtime-product
+
+npm run check:m4a-financial-reality-navigation
+
+npm run check:rdg
+
+npm run check:rdg-governance
+
+npm run check:rdg-evidence
+
+npm run check:navigation-contract
+
+npm run check:navigation-state
+
+npm run check:navigation-paths
+
+npm run check:reality-workspace-current
+
+npm run check:rjx-navigation-projection
+
+npm run check:reality-navigation-network
+
+npm run check:full-journey
+
+npm run build:pages
+
+npm run check:pages-build
+
+
+Do not rewrite existing gates simply to obtain PASS.
+
+
+If an existing unrelated baseline failure occurs:
+
+record:
+
+PRE_EXISTING_UNRELATED_BLOCKER
+
+
+with exact:
+
+command
+failure
+source path
+baseline proof
+
+
+# =====================================================================
+# W35 · BROWSER QA
+# =====================================================================
+
+Create controlled browser fixtures for:
+
+1440 desktop
+390 mobile
+
+
+Both:
+
+en
+zh-Hans
+
+
+Required scenarios:
+
+1. no external context
+
+2. relevant public-policy change
+
+3. irrelevant public-policy change
+
+4. current air-quality condition
+
+5. health context unavailable
+
+6. health context consent denied
+
+7. health private persistence not promoted
+
+8. tax professional review required
+
+9. cross-domain propagation candidate
+
+10. Navigation review trigger candidate
+
+11. unknown jurisdiction
+
+12. US jurisdiction with zh-Hans UI
+
+13. Asian jurisdiction with English UI
+
+14. EU-level event + national applicability unresolved
+
+
+No customer page may show:
+
+fake personal facts
+
+fake history
+
+fake Navigation direction
+
+fake Health diagnosis
+
+fake tax result
+
+
+# =====================================================================
+# W36 · HUMAN REVIEW ARTIFACT
+# =====================================================================
+
+Create:
+
+tools/review/
+PHIOS-EXTERNAL-REALITY-CROSS-DOMAIN-NAVIGATION-R1-HUMAN-REVIEW.html
+
+
+It must show:
+
+execution baseline
+
+architecture map
+
+authority ownership
+
+current repo reused components
+
+new successor contracts
+
+jurisdiction model
+
+global market scope
+
+locale/jurisdiction separation
+
+CWA state
+
+Health state
+
+Financial state
+
+World bridge
+
+My Reality integration
+
+Navigation trigger integration
+
+eight international fixtures
+
+negative fixtures
+
+desktop QA
+
+mobile QA
+
+en QA
+
+zh-Hans QA
+
+zero-cost checks
+
+providerCalls = 0
+
+providerCostUSD = 0
+
+live-state limitations
+
+unresolved gates
+
+
+# =====================================================================
+# W37 · REVIEW ARCHITECTURE DIAGRAM
+# =====================================================================
+
+Human review must visually show:
+
+                    GLOBAL / WORLD
+                         │
+                         ↓
+              CURRENT WEB AUTHORITY
+                         │
+              admitted external evidence
+                         │
+                         ↓
+                 JURISDICTION CONTEXT
+                         │
+                         ↓
+          EXTERNAL REALITY IMPACT ROUTER
+                         │
+       ┌─────────────────┼─────────────────┐
+       │                 │                 │
+       ↓                 ↓                 ↓
+   FINANCIAL           HEALTH          WORK/FAMILY/
+    REALITY             HRX            RELATIONSHIP
+       │                 │                 │
+       └─────────────────┼─────────────────┘
+                         ↓
+                  CURRENT REALITY
+                         ↓
+                      READOUT
+                         ↓
+                     NAVIGATION
+                         ↓
+              REVIEW TRIGGER / OPTIONS
+                         ↓
+                      ACTION
+                         ↓
+                      OUTCOME
+                         ↓
+                     REALITY NEXT
+
+
+Also show:
+
+SOURCE AUTHORITY REMAINS WITH SOURCE DOMAIN
+
+
+# =====================================================================
+# W38 · LIVE TRUTH STATES
+# =====================================================================
+
+Use explicit maturity states.
+
+At completion distinguish:
+
+ARCHITECTURE_IMPLEMENTED
+
+FIXTURE_VERIFIED
+
+SOURCE_AUTHORITY_MAPPED
+
+LIVE_SOURCE_VERIFIED
+
+CUSTOMER_SURFACE_BOUND
+
+HEALTH_PRIVATE_RUNTIME_PROMOTED
+
+NAVIGATION_LIVE_VERIFIED
+
+HUMAN_ACCEPTED
+
+DEPLOYED
+
+LIVE_PRODUCTION_VERIFIED
+
+
+Do not collapse these into one PASS.
+
+
+# =====================================================================
+# W39 · NO DEPLOY / NO AUTO PUSH
+# =====================================================================
+
+This Master Work does NOT authorize:
+
+git commit
+
+git push
+
+Cloudflare production deploy
+
+Stripe changes
+
+live customer migration
+
+Health production promotion
+
+paid provider calls
+
+
+Stop after:
+
+READY_FOR_HUMAN_REVIEW
+
+
+# =====================================================================
+# W40 · REQUIRED FINAL CODEX RESPONSE
+# =====================================================================
+
+When complete, respond using this ledger:
+
+
+BASELINE
+- HEAD
+- branch
+- dirty/clean state
+
+
+REUSED AUTHORITIES
+- CWA
+- CCR / Current Reality
+- RDG
+- HRX
+- Financial
+- RNE / accepted Navigation
+- World
+
+
+GLOBAL MARKET
+- architecture global: YES/NO
+- Asia supported by architecture: YES/NO
+- US supported by architecture: YES/NO
+- Europe supported by architecture: YES/NO
+- universal live coverage claimed: MUST BE NO
+
+
+JURISDICTION
+- locale separated from jurisdiction: PASS/FAIL
+- unknown fails closed: PASS/FAIL
+- federal/subnational supported: PASS/FAIL
+- supranational context supported: PASS/FAIL
+
+
+CURRENT WEB AUTHORITY
+- current frozen authority preserved
+- successor state
+- live provider bound YES/NO
+- live claims supported YES/NO
+
+
+EXTERNAL REALITY
+- event IR
+- authority provenance
+- freshness
+- event/effective status
+- applicability
+
+
+IMPACT ROUTER
+- creates truth authority: MUST BE NO
+- creates diagnosis: MUST BE NO
+- creates recommendation: MUST BE NO
+- creates Navigation action: MUST BE NO
+
+
+HEALTH
+- existing HRX preserved
+- symbolic firewall preserved
+- private health requires consent
+- private persistence promoted YES/NO
+- live evidence gate state
+
+
+FINANCIAL
+- tax boundary preserved
+- tax calculation auto-created MUST BE NO
+- financial recommendation auto-created MUST BE NO
+
+
+WORLD → MY REALITY
+- public context remains public by default
+- customer private write automatic MUST BE NO
+- explicit selected reference supported
+
+
+NAVIGATION
+- accepted NAV-01–30 authority preserved
+- external change creates review trigger only
+- automatic direction mutation MUST BE NO
+- automatic action MUST BE NO
+
+
+FIXTURES
+- Malaysia budget/policy
+- Malaysia/ASEAN haze
+- US federal/state
+- EU/member-country
+- Asia non-Malaysia
+- unknown jurisdiction
+- Chinese UI + US
+- English UI + Asia
+
+
+QA
+- new R1 checker
+- CWA
+- Health
+- Financial
+- RDG
+- Navigation
+- My Reality
+- full Journey
+- Pages build
+
+
+COST
+providerCalls=0
+providerCostUSD=0
+
+
+BLOCKERS
+- exact unresolved live gates
+
+
+REVIEW
+tools/review/
+PHIOS-EXTERNAL-REALITY-CROSS-DOMAIN-NAVIGATION-R1-HUMAN-REVIEW.html
+
+
+FINAL STATE
+READY_FOR_HUMAN_REVIEW
+
+
+# =====================================================================
+# OWNER ACCEPTANCE CONDITIONS
+# =====================================================================
+
+Do not call this R1 complete unless the Human Review proves:
+
+1. PHI OS is global by architecture, not Malaysia-specific.
+
+2. English / Chinese do not determine jurisdiction.
+
+3. External Reality is source- and jurisdiction-aware.
+
+4. World does not automatically become Personal Reality.
+
+5. Only relevant external changes reach the current case.
+
+6. Health remains a protected domain.
+
+7. Public environmental context can be used without silently reading
+   private health information.
+
+8. Private Health context requires explicit consent.
+
+9. Existing Health production gates are not bypassed.
+
+10. Budget announcement does not become personal tax truth.
+
+11. Financial calculations remain with deterministic Financial runtime.
+
+12. Tax/legal professional boundaries remain explicit.
+
+13. External events do not create causal claims without evidence.
+
+14. External events do not automatically change Navigation.
+
+15. Navigation continues to require admitted,
+    owner-bound,
+    current evidence.
+
+16. Cross-domain propagation can be represented without pretending
+    causation.
+
+17. The same architecture works for:
+    Asia,
+    US,
+    Europe.
+
+18. Unsupported jurisdictions fail closed.
+
+19. Existing sources retain authority.
+
+20. PHI OS connects domains without absorbing them.
+
+21. Provider calls remain zero during this implementation.
+
+22. The system can eventually support:
+
+    WORLD
+    → PERSON
+    → NAVIGATION
+    → OUTCOME
+    → WORLD / REALITY NEXT
+
+    as one continuous Reality Navigation loop.
