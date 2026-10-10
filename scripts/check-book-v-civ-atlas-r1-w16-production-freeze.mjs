@@ -96,7 +96,18 @@ for(const field of ['productionAdmissionChanged','historicalRegistriesChanged','
 assert.equal(recovery.humanDecision,'PENDING');
 assert.equal(recovery.predecessorSha256,digest(recovery.predecessor));
 for(const entry of recovery.additionalPredecessors)assert.equal(digest(entry.path),entry.sha256);
-for(const entry of recovery.sourceEvidence)assert.equal(digest(entry.path),entry.sha256,'World recovery source evidence drift: '+entry.path);
+const worldHandoff=json('content/civilization-atlas/maintenance/book-v-world-public-recovery-successor-v2.json');
+assert.equal(worldHandoff.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');
+assert.equal(worldHandoff.predecessor,'content/civilization-atlas/maintenance/book-v-world-public-recovery-successor-v1.json');
+assert.equal(worldHandoff.predecessorSha256,digest(worldHandoff.predecessor));
+assert.equal(worldHandoff.humanDecision,'PENDING');
+for(const field of ['productionAdmissionChanged','acceptedBindingsChanged','canonicalTheoryChanged'])assert.equal(worldHandoff[field],false);
+assert.equal(worldHandoff.change.path,'world/index.html');
+for(const entry of recovery.sourceEvidence){
+ const change=worldHandoff.change.path===entry.path?worldHandoff.change:null;
+ if(change)assert.equal(change.previousSha256,entry.sha256);
+ assert.equal(digest(entry.path),change?.successorSha256||entry.sha256,'World recovery source evidence drift: '+entry.path);
+}
 const recoveryDigest=(p,prior)=>{const c=recovery.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior,'World recovery predecessor drift: '+p);assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(c.changeClass));return c.successorSha256;};
 const currentVisualDigest=c=>recoveryDigest(c.path,c.path===fr4.change.path?fr4.change.successorSha256:c.successorSha256);
 for(const change of ownerSuccessor.changes){
