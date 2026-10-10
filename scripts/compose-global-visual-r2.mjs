@@ -1,7 +1,7 @@
 import fs from 'node:fs';import crypto from 'node:crypto';import {parseHTML} from 'linkedom';
 const inv=JSON.parse(fs.readFileSync('data/visual/approved-r2-visual-assets.json')).assets;
 const cx=JSON.parse(fs.readFileSync('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json')).entries;
-const out='artifacts/visual-r2',changes=[];const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const out='artifacts/visual-r2',changes=fs.existsSync('artifacts/visual-r2/CHANGED-FILES.json')?JSON.parse(fs.readFileSync('artifacts/visual-r2/CHANGED-FILES.json')).changes:[];const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const enzh=(en,zh,tag='h2')=>`<${tag} data-vr2-en="${en}" data-vr2-zh="${zh}">${en}</${tag}>`;
 const asset=(identity)=>inv.find(a=>a.canonicalFilename===identity)||inv.find(a=>a.aliases.includes(identity));
 function image(identity,role='PRIMARY_FIGURE',en,zh){const a=asset(identity);if(!a)throw Error('Missing exact inventory identity '+identity);const alt=en||a.semanticName;return `<img data-approved-visual="${a.canonicalFilename}" data-vr2-en-alt="${alt}" data-vr2-zh-alt="${zh||a.altZh||alt}" alt="${alt}" loading="${role==='HERO'?'eager':'lazy'}" decoding="async" width="${a.width||1600}" height="${a.height||1000}">`;}
@@ -28,6 +28,13 @@ edit('perspectives/personal/index.html',d=>{hero(d,'PHIOS-HERO-PERSONAL-REALITY-
 edit('perspectives/phi-configuration/index.html',d=>{d.querySelector('.pm-hero').classList.add('flagship-feature');const k=d.querySelector('.pm-kicker');k.textContent='PHI OS ORIGINAL';k.setAttribute('data-cx-en','PHI OS ORIGINAL');k.setAttribute('data-cx-zh','PHI OS 原生体系');d.querySelector('h1').textContent='PHI Configuration · PHI 构型';d.querySelector('h1').setAttribute('data-cx-en','PHI Configuration · PHI 构型');d.querySelector('h1').setAttribute('data-cx-zh','PHI 构型 · PHI Configuration');d.querySelector('#reading-prompts .pm-grid').outerHTML=lenses();});
 edit('perspectives/profile/index.html',d=>{hero(d,'PHIOS-HERO-PERSONAL-EVIDENCE-v2.webp');insert(d,'#profile-example',story('PLAN-PROFILE-01','Evidence with its provenance visible','来源始终可见的个人证据'),'beforebegin');insert(d,'#profile-modes',figure('PLAN-PROFILE-02','Choose your evidence source','选择你的证据来源'),'beforeend');insert(d,'#profile-report',story('PLAN-PROFILE-03','Read the result and source together','一起阅读结果与来源')+story('PLAN-PROFILE-04','Confirm an external result','确认外部结果')+story('PLAN-PROFILE-07','Compare without flattening differences','比较，并保留来源差异'),'beforebegin');insert(d,'#profile-report',figure('PLAN-PROFILE-05','One bilingual Profile dossier','一份双语 Profile 档案'));insert(d,'#profile-report',story('PLAN-PROFILE-06','Select what enters Reality','选择哪些资料进入现实'),'afterend');});
 const routes=[
+ ['articles/index.html','PHIOS-HERO-KNOWLEDGE-READING-v1.webp','PLAN-KNOW-05','From questions to reading','从问题走向阅读'],
+ ['figures/index.html','PHIOS-HERO-VISUAL-KNOWLEDGE-v1.webp','PLAN-KNOW-04','Figures connect to concepts and articles','图示连接概念与文章'],
+ ['knowledge/ask/index.html','PLAN-HERO-01',null,null,null],
+ ['perspectives/tarot/index.html',null,null,null,null],
+ ['perspectives/iching/index.html',null,null,null,null],
+ ['perspectives/iching/consult/index.html',null,null,null,null],
+ ['professional/reports/index.html',null,null,null,null],
  ['knowledge/index.html','PHIOS-HERO-KNOWLEDGE-LIBRARY-v1.webp','PLAN-KNOW-02','Explore connected knowledge','探索相互连接的知识'],
  ['knowledge/articles/index.html','PHIOS-HERO-KNOWLEDGE-READING-v1.webp','PLAN-KNOW-05','From questions to reading','从问题走向阅读'],
  ['knowledge/figures/index.html','PHIOS-HERO-VISUAL-KNOWLEDGE-v1.webp','PLAN-KNOW-04','Figures connect to concepts and articles','图示连接概念与文章'],
@@ -50,5 +57,6 @@ for(const [file,h,fig,en,zh] of routes)edit(file,d=>{if(h)hero(d,h);if(fig){cons
  if(file==='knowledge/index.html')insert(d,'main',figure('PHIOS-ILLUSTRATION-LIBRARY-KNOWLEDGE-LANDSCAPE-v1.webp','A landscape of connected reading','相互连接的阅读景观','ILLUSTRATION'));
  if(file==='perspectives/relationship/index.html')insert(d,'main',story('PLAN-CROSS-04','Individual control and joint decisions','个人控制与共同决定'));
 });
+for(let n=1;n<=8;n++)edit(`books/book-${n}/index.html`,d=>{d.querySelectorAll('[data-pis-context-figures]').forEach(g=>{const first=g.querySelector('figure');if(first){first.classList.add('figure-editorial');g.replaceWith(first);}});});
 fs.writeFileSync(out+'/CHANGED-FILES.json',JSON.stringify({status:'ENGINEERING_RECOMPOSITION',humanAccepted:false,changes},null,2)+'\n');
 console.log(`${changes.length} consolidated surfaces recomposed; World and Founder untouched.`);

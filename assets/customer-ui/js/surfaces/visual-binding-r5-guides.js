@@ -54,6 +54,7 @@ if(targets.length){
  function localized(node,en,cn){node.dataset.cxEn=en;node.dataset.cxZh=cn;node.textContent=zh()?cn:en;}
  function bind(){for(const [sequence,selector,inline]of targets){
   const host=document.querySelector(selector),asset=registry.entries.find(x=>x.r5Sequence===sequence);
+  if(asset && document.querySelector(`[data-vr2-guide="${asset.assetId}"]`))continue;
   const state=!host?'MISSING_SLOT':!asset?.available?'ASSET_UNAVAILABLE':'BOUND';
   window.phiosVisualBindingState??={};window.phiosVisualBindingState[sequence]={selector,state};
   if(state!=='BOUND')continue;

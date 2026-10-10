@@ -25,3 +25,7 @@ const full=document.createElement('img');dialog.append(close,full);document.body
 document.addEventListener('click',event=>{const link=event.target.closest('a[data-vr2-inspect]');if(!link||!link.href)return;event.preventDefault();trigger=link;full.src=link.href;full.alt=link.querySelector('img')?.alt||'';dialog.showModal();});
 dialog.addEventListener('close',()=>trigger?.focus());
 hydrateApprovedVisuals();
+const surface=document.body.dataset.cxSurface||'';
+document.body.dataset.vr2Density=/ACCOUNT|REPORT/.test(surface)?'WORKSPACE':/BOOK|ARTICLE|CONCEPT|KNOWLEDGE|ACADEMY/.test(surface)?'KNOWLEDGE_READING':/PERSONAL_REALITY|TAROT|ICHING|FINANCIAL|ASK|CONFIGURATION/.test(surface)?'PRODUCT_EXPERIENCE':'MARKET_ENTRY';
+const texture=document.body.dataset.vr2Density==='KNOWLEDGE_READING'?'PHI-OS-IVORY-GRAIN.webp':'PHI-OS-SOFT-MIST.webp';
+resolveApprovedVisual(texture).then(a=>document.body.style.setProperty('--vr2-texture',`url("${a.src}")`)).catch(()=>{});

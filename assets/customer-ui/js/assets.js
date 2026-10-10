@@ -45,7 +45,12 @@ export function resolveCustomerAssetRoleFromRegistry(registry, roleId) {
 }
 
 export async function resolveCustomerAsset(assetId) {
-  return resolveCustomerAssetFromRegistry(await customerAssetRegistry(), assetId);
+  try { return resolveCustomerAssetFromRegistry(await customerAssetRegistry(), assetId); }
+  catch (originalError) {
+    const {resolveApprovedVisual} = await import('../../js/runtime/web-production/asset-resolver.js');
+    try { const a=await resolveApprovedVisual(assetId); return {...a,assetId,available:true,publicUrl:a.src,type:a.semanticRole,delivery:{loading:a.loading,decoding:'async',fetchPriority:a.fetchPriority}}; }
+    catch { throw originalError; }
+  }
 }
 
 export async function resolveCustomerAssetRole(roleId) {
@@ -172,7 +177,7 @@ function resolveAssetIdentity(registry, node, roleId, assetId) {
     return finalAsset;
   }
   if (assetId) {
-    return resolveCustomerAssetFromRegistry(registry, selectContrastAwareLogo(assetId, node));
+    return resolveCustomerAsset(selectContrastAwareLogo(assetId, node));
   }
   throw new Error('CX_ASSET_BINDING_MISSING');
 }

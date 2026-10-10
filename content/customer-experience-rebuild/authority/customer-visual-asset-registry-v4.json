@@ -5922,11 +5922,17 @@
       "sourceSelection": "USER_SELECTED",
       "verificationState": "HTTP_AND_DECODE_VERIFIED_PAGE_REVIEW_PENDING",
       "delivery": {
-        "loading": "responsive eager/lower-page lazy",
+        "loading": "lazy",
         "decoding": "async",
-        "fetchPriority": "responsive high/lower-page auto"
+        "fetchPriority": "auto"
       },
-      "work": "FOUNDER_HUMAN_PRESENCE_R2"
+      "work": "FOUNDER_HUMAN_PRESENCE_R2",
+      "consumerOverrides": {
+        "mobileFounderHero": {
+          "loading": "eager",
+          "fetchPriority": "high"
+        }
+      }
     }
   ],
   "currentVerificationSuccessor": "content/production-closure/live-customer-commercial-convergence/VISUAL-BINDING-R6-R2-DELTA.json"

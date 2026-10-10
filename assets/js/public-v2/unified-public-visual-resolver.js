@@ -1,4 +1,4 @@
-import { fetchPublicAssetRegistry, fetchPublicAssetConfig, resolvePublicAsset, resolvePublicAssetForWeb, normalizePublicAssetBaseUrl } from '../runtime/web-production/asset-resolver.js';
+import { fetchPublicAssetRegistry, fetchPublicAssetConfig, resolvePublicAsset, resolvePublicAssetForWeb, resolveApprovedVisual, normalizePublicAssetBaseUrl } from '../runtime/web-production/asset-resolver.js';
 import {resolveAtlasVisualById,ATLAS_VISUAL_BINDINGS_PATH,isLocalAtlasReview} from '../pages/civilization-atlas/atlas-static-visual.js';
 
 const POINTER_URL = '/content/web-production/registries/current-client-visual-registry.json';
@@ -34,6 +34,9 @@ export async function resolveUnifiedPublicVisual(code, options = {}) {
     return {assetCode:code,src:entry.publicUrl,renderable:true,deliveryState:'VERIFIED_RENDERABLE',reviewState:entry.reviewState,sourceReference:ATLAS_VISUAL_BINDINGS_PATH.slice(1)};
   }
   try {
+    if (!options.registry) {
+      try { return await resolveApprovedVisual(code, options); } catch { /* Historical registry remains available for explicitly governed assets. */ }
+    }
     return await resolvePublicAssetForWeb(code, options);
   } catch (primaryError) {
     const [clientRegistry, publicRegistry] = await Promise.all([clientVisualRegistry(), fetchPublicAssetRegistry()]);

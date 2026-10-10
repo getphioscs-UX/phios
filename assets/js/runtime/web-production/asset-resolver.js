@@ -194,6 +194,7 @@ export async function resolvePublicAssetForWeb(assetCode, options = {}) {
 }
 
 let approvedInventoryPromise;
+let approvedDeliveryContextPromise;
 export async function resolveApprovedVisual(identity, options = {}) {
   approvedInventoryPromise ||= fetch(options.inventoryUrl || '/data/visual/approved-r2-visual-assets.json')
     .then(response => { if (!response.ok) throw new PublicAssetResolutionError('APPROVED_INVENTORY_UNAVAILABLE'); return response.json(); })
@@ -203,8 +204,9 @@ export async function resolveApprovedVisual(identity, options = {}) {
   // Customer surface identities supersede historic book HERO-021/022/023 collisions.
   const entry = candidates.find(a => a.sources.includes('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json')) || candidates[0];
   if (!entry) throw new PublicAssetResolutionError('APPROVED_VISUAL_NOT_FOUND', identity);
-  const registry = options.registry ?? await fetchPublicAssetRegistry(options);
-  const base = registry.public_base_url || (await fetchPublicAssetConfig(options)).publicAssetBaseUrl;
+  approvedDeliveryContextPromise ||= fetchPublicAssetRegistry(options).then(async registry=>({registry,base:registry.public_base_url || (await fetchPublicAssetConfig(options)).publicAssetBaseUrl})).catch(error=>{approvedDeliveryContextPromise=null;throw error;});
+  const delivery=await approvedDeliveryContextPromise;
+  const base = options.publicConfig?.publicAssetBaseUrl || delivery.base;
   const resolved = resolvePublicAsset({registry:{bucket:'phios-public-assets',assets:[{
     asset_code:identity, object_key:entry.r2Path, category:entry.role, family:entry.family,
     format:entry.canonicalFilename.split('.').at(-1), verification:'verified-owner-inventory-identity',
