@@ -112,7 +112,16 @@ assert.equal(delivery.failureContract.silentBlankAllowed,false);
 assert.equal(delivery.failureContract.visibleFallbackRequiredAtRuntime,true);
 assert.equal(delivery.boundaries.browserMayScrapeOrProbeArbitraryAssetUrls,false);
 const assetJs=read('assets/customer-ui/js/assets.js');
-for(const token of ['customer-visual-asset-registry-v3.json','resolveCustomerAsset','resolveCustomerAssetRole','CX_ASSET_UNKNOWN','CX_ASSET_UNAVAILABLE','CX_ASSET_ROLE_UNKNOWN','CX_ASSET_ROLE_UNAVAILABLE','CX_ASSET_IMAGE_LOAD_FAILED','loading','decoding','fetchPriority','data-cx-asset-fallback','Visual unavailable','视觉资源暂时无法显示']) {
+const currentRegistryPath=`${base}/authority/customer-visual-asset-registry-v4.json`;
+const currentRegistry=json(currentRegistryPath);
+assert.equal(currentRegistry.successorOf,delivery.registry,'Current registry must extend the historical R4 contract');
+assert.equal(currentRegistry.authorityBoundary.createsSecondAssetAuthority,false);
+assert.equal(currentRegistry.authorityBoundary.projectionOnly,true);
+assert.equal(new Set(currentRegistry.entries.map(x=>x.assetId)).size,currentRegistry.entries.length);
+assert.ok(assetJs.includes(`'/${currentRegistryPath}'`),'Resolver must bind the registered current successor');
+const currentBy=new Map(currentRegistry.entries.map(x=>[x.assetId,x]));
+const currentRemoteProof=json('content/production-closure/live-customer-commercial-convergence/VISUAL-BINDING-R5-89-R2-VERIFICATION.json').records;
+for(const token of ['resolveCustomerAsset','resolveCustomerAssetRole','CX_ASSET_UNKNOWN','CX_ASSET_UNAVAILABLE','CX_ASSET_ROLE_UNKNOWN','CX_ASSET_ROLE_UNAVAILABLE','CX_ASSET_IMAGE_LOAD_FAILED','loading','decoding','fetchPriority','data-cx-asset-fallback','Visual unavailable','视觉资源暂时无法显示']) {
   assert.ok(assetJs.includes(token),`customer asset resolver missing ${token}`);
 }
 assert.ok(assetJs.includes('naturalWidth'),'image loader must verify a successfully decoded image');
@@ -144,15 +153,23 @@ assert.ok(consumers.length>0,'no live CX visual consumers were discovered');
 for(const consumer of consumers){
   let asset;
   if(consumer.bindingKind==='SEMANTIC_ROLE'){
-    const role=registry.roleBindings.find(x=>x.roleId===consumer.requestedId);
+    const role=currentRegistry.roleBindings.find(x=>x.roleId===consumer.requestedId);
     assert.ok(role,`CX consumer ${consumer.file} references unknown semantic role ${consumer.requestedId}`);
     assert.equal(role.available,true,`CX consumer ${consumer.file} references unavailable semantic role ${consumer.requestedId}`);
-    asset=by.get(role.assetId);
-  }else asset=by.get(consumer.requestedId);
+    asset=currentBy.get(role.assetId);
+  }else asset=currentBy.get(consumer.requestedId);
   assert.ok(asset,`CX consumer ${consumer.file} does not resolve: ${consumer.requestedId}`);
   assert.equal(asset.available,true,`CX consumer ${consumer.file} resolves to unavailable ${asset.assetId}`);
   assert.ok(asset.publicUrl,`CX consumer ${consumer.file} has no delivery URL for ${asset.assetId}`);
-  assert.ok(String(asset.contentType||'').startsWith('image/'),`CX consumer ${consumer.file} has invalid MIME for ${asset.assetId}`);
+  let contentType=asset.contentType;
+  if(!contentType){
+    const proof=currentRemoteProof.find(x=>x.planId===asset.assetId);
+    assert.equal(proof?.decoded,true,`Missing decoded successor proof: ${asset.assetId}`);
+    assert.equal(proof.httpStatus,200);assert.equal(proof.requestedURL,asset.publicUrl);
+    assert.equal(proof.sha256,asset.contentHash);assert.equal(proof.width,asset.width);assert.equal(proof.height,asset.height);
+    contentType=proof.contentType;
+  }
+  assert.ok(String(contentType||'').startsWith('image/'),`CX consumer ${consumer.file} has invalid MIME for ${asset.assetId}`);
   if(String(asset.publicUrl).startsWith('/assets/')) assert.equal(fs.existsSync(String(asset.publicUrl).slice(1)),true,`repo-bundled asset missing: ${asset.publicUrl}`);
   else assert.equal(asset.remoteVerified,true,`remote CX asset lacks recorded verification: ${asset.assetId}`);
 }
