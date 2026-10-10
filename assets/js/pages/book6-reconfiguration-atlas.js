@@ -11,13 +11,15 @@ async function render(){
   const locale=getLocale();
   const [sections,cases,windows,snapshots,dossiers,lived,relationships,knowledgeStates,visualStatus,positions,visualBindings]=await Promise.all([
    loadReconfigurationSections(),loadReconfigurationCases(),loadReconfigurationWindows(),loadReconfigurationSnapshots(),
-   loadContemporaryRuntimeDossiers({dossierId:new URLSearchParams(location.search).get('dossier')}),loadLivedRealityDimensions(),loadReconfigurationRelationships(),loadReconfigurationKnowledgeStates(),
+   loadContemporaryRuntimeDossiers({dossierId:new URLSearchParams(location.search).get('dossier')}),loadLivedRealityDimensions(),loadReconfigurationRelationships().catch(error=>({relationships:[],unavailable:error.message})),loadReconfigurationKnowledgeStates(),
    loadReconfigurationVisualStatus(),loadRuntimePositionRegistry(),loadCivilizationVisualBindings()
   ]);
   if(g!==generation)return;
   const store=createReconfigurationAtlasState({locale});
   const unbind=bindReconfigurationAtlasUrlState(store,{locale});
+  if(relationships.unavailable)root.dataset.relationshipState='SERVICE_ERROR';
   const unmount=mountReconfigurationAtlas(root,{sections,cases,windows,snapshots,dossiers,lived,relationships,knowledgeStates,visualStatus,positions,visualBindings},{locale,store});
+  if(relationships.unavailable){const note=document.createElement('p');note.setAttribute('role','status');note.textContent=locale==='zh-Hans'?'辅助关系资料暂不可读；原生对象仍可阅读，不生成替代关系。':'Supplementary relationships could not load; native objects remain readable and no replacement links are generated.';root.prepend(note);}
   dispose=()=>{unbind?.();unmount?.();};
  }catch(error){
   root.dataset.atlasReady='error';

@@ -8,7 +8,7 @@ const root=document.querySelector('[data-civilization-atlas-root]'),params=new U
 if(current&&!params.has('atlas')){const u=new URL(location.href);u.searchParams.set('view','reconfiguration');u.searchParams.set('atlas','dossiers');u.searchParams.set('intent','current');history.replaceState(history.state,'',u);}
 if(current&&!params.has('atlas')){const u=new URL(location.href);u.searchParams.set('view','reconfiguration');u.searchParams.set('atlas','dossiers');u.searchParams.set('intent','current');history.replaceState(history.state,'',u);}
 const reconfig=current||params.get('view')==='reconfiguration';root.dataset.bookId=reconfig?'book-6':'book-5';if(reconfig)root.dataset.atlasMode='reconfiguration';
-if(params.has('atlas'))document.querySelector('.world-r1-hero-visual')?.remove();
+if(params.has('atlas')){document.querySelector('.world-r1-hero-visual')?.remove();document.querySelector('main').classList.add('world-r1-reading');}
 let index=null,context=null;const currentRecords=new Map();const pair=(en,zh)=>getLocale()==='zh-Hans'?zh:en;
 function copy(){for(const img of document.querySelectorAll('[data-world-image-alt]'))img.alt=img.dataset.worldImageAlt.split('|')[getLocale()==='zh-Hans'?1:0];for(const e of document.querySelectorAll('[data-world-copy]'))e.textContent=e.dataset.worldCopy.split('|')[getLocale()==='zh-Hans'?1:0];}
 function object(){return context&&index?activeWorldObject(index,context.book,context.state):null;}

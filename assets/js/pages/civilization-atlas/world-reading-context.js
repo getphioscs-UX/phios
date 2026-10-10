@@ -4,7 +4,7 @@ export const local=(v,locale)=>v?.[locale]||v?.en||'';
 export const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 export function activeWorldObject(index,book,state){
  const keys=book==='BOOK-5'?{timeline:state.timeWindowId,cases:state.primaryCaseId,world:state.snapshotId,comparison:state.comparisonFamilyId,trajectories:state.trajectoryIds?.[0],transitions:state.transitionWindowId,loss:state.lossTypeId||state.lossFamilyId}:{cases:state.primaryCaseId,windows:state.windowId,snapshots:state.snapshotId,dossiers:state.dossierId,lived:state.livedRealityDimensionId,positions:state.positionId};
- const id=keys[state.activeLayer];return id?index?.rows.find(r=>r.book===book&&r.id===id&&r.type!=='visual')||null:null;
+ const id=book==='BOOK-6'&&state.sectionId?state.sectionId:keys[state.activeLayer];return id?index?.rows.find(r=>r.book===book&&r.id===id&&r.type!=='visual')||null:null;
 }
 export function worldObjectRelations(index,object){return object?(index.relations||[]).filter(r=>r.from===object.id||r.to===object.id):[];}
 export function worldAskContext(book,state,data,locale,currentUrl){

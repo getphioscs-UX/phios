@@ -109,8 +109,14 @@ assert.equal(heroResolverSuccessor.current.path, transition.path);
 assert.deepEqual(heroResolverSuccessor.assetIds, ['HERO-021','HERO-022','HERO-023']);
 assert.equal(git(['rev-parse', `${heroResolverSuccessor.sourceCommit}^:${transition.path}`]), pxrResolverSuccessor.current.gitBlobSha);
 assert.equal(git(['rev-parse', `${heroResolverSuccessor.sourceCommit}:${transition.path}`]), heroResolverSuccessor.current.gitBlobSha);
-assert.equal(canonicalTextGitBlobSha(transition.path), heroResolverSuccessor.current.gitBlobSha, 'PDS_W0_CURRENT_ASSET_RESOLVER_BLOB_DRIFT');
-assert.equal(canonicalTextSha256(transition.path), heroResolverSuccessor.current.sha256, 'PDS_W0_CURRENT_ASSET_RESOLVER_SHA256_DRIFT');
+const approvedResolver=read('content/web-production/reconciliation/pds-w0-approved-visual-resolver-successor-v4.json');
+assert.equal(approvedResolver.status,'ENGINEERING_RECONCILIATION');assert.equal(approvedResolver.path,transition.path);
+assert.equal(approvedResolver.predecessor.path,'content/web-production/reconciliation/pds-w0-asset-resolver-hero-successor-v3.json');assert.equal(approvedResolver.predecessor.sha256,canonicalTextSha256(approvedResolver.predecessor.path));
+assert.equal(approvedResolver.historicalRecordsRewritten,false);assert.equal(approvedResolver.newProductionAcceptanceGranted,false);
+let resolverBlob=heroResolverSuccessor.current.gitBlobSha;
+for(const step of approvedResolver.steps){assert.equal(step.previousGitBlobSha,resolverBlob);if(step.sourceCommit){assert.equal(git(['rev-parse',`${step.sourceCommit}^:${transition.path}`]),resolverBlob);assert.equal(git(['rev-parse',`${step.sourceCommit}:${transition.path}`]),step.gitBlobSha);}resolverBlob=step.gitBlobSha;}
+assert.equal(canonicalTextGitBlobSha(transition.path),resolverBlob,'PDS_W0_CURRENT_ASSET_RESOLVER_BLOB_DRIFT');
+assert.equal(canonicalTextSha256(transition.path),approvedResolver.steps.at(-1).sha256,'PDS_W0_CURRENT_ASSET_RESOLVER_SHA256_DRIFT');
 const {resolveCustomerAssetFromRegistry} = await import('../assets/customer-ui/js/assets.js');
 const heroRegistry = read(heroResolverSuccessor.customerRegistry);
 for(const id of heroResolverSuccessor.assetIds)assert.ok(resolveCustomerAssetFromRegistry(heroRegistry,id).publicUrl);

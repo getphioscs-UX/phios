@@ -4,9 +4,11 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
 const full=process.argv.includes('--full'),routes=full?['/','/perspectives/phi-configuration/','/perspectives/profile/','/perspectives/personal/','/perspectives/','/perspectives/relationship/','/perspectives/tarot/','/perspectives/iching/','/perspectives/iching/consult/','/reality/','/world/','/knowledge/','/books/','/books/reality-formation/','/knowledge/ask/','/academy/','/professional/','/professional/financial/','/account/','/membership.html','/about/founder/','/professional/reports/']:['/','/perspectives/profile/','/perspectives/personal/'];
 const widths=full?[360,390,430,768,1024,1280,1440,1920]:[390,1440];const evidence=[];let browser;
 const dir='artifacts/visual-r2/captures';fs.mkdirSync(dir,{recursive:true});
-try{browser=await chromium.launch({channel:'msedge',headless:true});const context=await browser.newContext();
- for(const route of routes)for(const locale of ['en','zh-Hans'])for(const width of widths){
- const page=await context.newPage();await page.setViewportSize({width,height:1000});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+try{browser=await chromium.launch({channel:'msedge',headless:true});const contexts={en:await browser.newContext(),'zh-Hans':await browser.newContext()};
+ const publicBytes=new Map();for(const context of Object.values(contexts))await context.route(/https:\/\/pub-[^.]+\.r2\.dev\//,async route=>{const url=route.request().url();if(!publicBytes.has(url))publicBytes.set(url,fetch(url,{signal:AbortSignal.timeout(25000)}).then(async r=>({status:r.status,contentType:r.headers.get('content-type')||'application/octet-stream',body:Buffer.from(await r.arrayBuffer())})).catch(error=>{publicBytes.delete(url);throw error;}));try{await route.fulfill(await publicBytes.get(url));}catch{await route.continue();}});
+ const jobs=routes.flatMap(route=>['en','zh-Hans'].flatMap(locale=>widths.map(width=>({route,locale,width}))));let cursor=0;
+ await Promise.all(Array.from({length:4},async()=>{while(cursor<jobs.length){const {route,locale,width}=jobs[cursor++];
+ const page=await contexts[locale].newPage();await page.setViewportSize({width,height:1000});const errors=[];page.on('pageerror',e=>errors.push(e.message));
  // Only read-only local APIs may run. No provider execution, purchase or account mutation.
  await page.route('**/api/**',r=>r.request().method()==='GET'?r.continue():r.abort());
  await page.addInitScript(l=>{localStorage.setItem('phiOSLocale',l);localStorage.setItem('phios-cx-locale',l);},locale);
@@ -16,6 +18,6 @@ try{browser=await chromium.launch({channel:'msedge',headless:true});const contex
  const item={route,locale,width,...data,errors};if([390,1440].includes(width)){await page.evaluate(()=>scrollTo(0,0));const name=`${route.replace(/[^a-z0-9]/gi,'_')||'home'}-${width}-${locale}.png`;await page.screenshot({path:dir+'/'+name});item.capture='captures/'+name;}
  evidence.push(item);fs.writeFileSync('artifacts/visual-r2/BROWSER-QA.json',JSON.stringify({providerCalls:0,commerceTransactions:0,accountMutations:0,evidence},null,2)+'\n');console.log(route,locale,width,data.overflow?'OVERFLOW':'REFLOW',data.failed.length,'failed',data.images.filter(i=>!i.decoded).length,'undecoded');
  }catch(error){evidence.push({route,locale,width,error:String(error),errors});}finally{await page.close();}
- }
+ }}));
 }finally{await browser?.close();await new Promise(r=>server.close(r));}
 fs.writeFileSync('artifacts/visual-r2/BROWSER-QA.json',JSON.stringify({providerCalls:0,commerceTransactions:0,accountMutations:0,evidence},null,2)+'\n');

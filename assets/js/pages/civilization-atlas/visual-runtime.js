@@ -10,11 +10,11 @@ export function monitorVisual(img,asset,locale='en'){
  set('BOUND');
  const fail=(state,extra={})=>{set(state,extra);img.hidden=true;let fallback=host.querySelector('[data-visual-fallback]');if(!fallback){fallback=img.ownerDocument.createElement('p');fallback.dataset.visualFallback='';fallback.setAttribute('role','status');host.append(fallback);}fallback.textContent=locale==='zh-Hans'?'插画暂时无法显示；年代、来源与结构化资料仍可阅读。':'Illustration unavailable. Dates, sources and structured information remain readable.';};
  img.addEventListener('error',()=>fail('R2_HTTP_ERROR'),{once:true});
- const transferTimer=setTimeout(()=>{if(!img.complete||!img.naturalWidth)fail('R2_HTTP_ERROR',{reason:'TRANSFER_TIMEOUT'});},25000);
- let processed=false;const loaded=async()=>{if(processed)return;processed=true;clearTimeout(transferTimer);try{await img.decode();img.hidden=false;host.querySelector('[data-visual-fallback]')?.remove();set('DECODED');requestAnimationFrame(()=>{const rect=img.getBoundingClientRect(),style=getComputedStyle(img);set(rect.width>0&&rect.height>0&&style.display!=='none'&&!img.closest('details:not([open])')?'VISIBLE':'HIDDEN_BY_LAYOUT',{width:rect.width,height:rect.height});});}catch{fail('DECODE_FAILED');}};
+ let transferTimer,observer;const startTransfer=()=>{if(transferTimer||img.complete&&img.naturalWidth)return;recordVisual(asset,'R2_REQUESTED');transferTimer=setTimeout(()=>{if(!img.complete||!img.naturalWidth)fail('R2_HTTP_ERROR',{reason:'TRANSFER_TIMEOUT'});},25000);};if(img.loading==='lazy'&&globalThis.IntersectionObserver){observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){startTransfer();observer.disconnect();}},{rootMargin:'500px'});observer.observe(img);}else startTransfer();
+ let processed=false;const loaded=async()=>{if(processed)return;processed=true;clearTimeout(transferTimer);observer?.disconnect();try{await img.decode();img.hidden=false;host.querySelector('[data-visual-fallback]')?.remove();set('DECODED');requestAnimationFrame(()=>{const rect=img.getBoundingClientRect(),style=getComputedStyle(img);set(rect.width>0&&rect.height>0&&style.display!=='none'&&!img.closest('details:not([open])')?'VISIBLE':'HIDDEN_BY_LAYOUT',{width:rect.width,height:rect.height});});}catch{fail('DECODE_FAILED');}};
  img.addEventListener('load',loaded,{once:true});
  if(img.complete&&img.naturalWidth)loaded();
- set('R2_REQUESTED');return {fail};
+ return {fail};
 }
 export function primaryVisualMarkup(asset,title,locale='en'){
  if(!asset){recordVisual(null,'MISSING_BINDING');return `<p role="status">${locale==='zh-Hans'?'插画尚未匹配；结构化资料仍可阅读。':'Illustration not yet matched. Structured information remains readable.'}</p>`;}

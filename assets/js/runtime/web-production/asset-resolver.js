@@ -204,7 +204,12 @@ export async function resolveApprovedVisual(identity, options = {}) {
   // Customer surface identities supersede historic book HERO-021/022/023 collisions.
   const entry = candidates.find(a => a.sources.includes('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json')) || candidates[0];
   if (!entry) throw new PublicAssetResolutionError('APPROVED_VISUAL_NOT_FOUND', identity);
-  approvedDeliveryContextPromise ||= fetchPublicAssetRegistry(options).then(async registry=>({registry,base:registry.public_base_url || (await fetchPublicAssetConfig(options)).publicAssetBaseUrl})).catch(error=>{approvedDeliveryContextPromise=null;throw error;});
+  approvedDeliveryContextPromise ||= fetchPublicAssetRegistry(options).then(async registry=>{
+    let base=registry.public_base_url;
+    if(!base){const response=await fetch('/content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json');if(response.ok)base=(await response.json()).publicR2Base;}
+    base ||= (await fetchPublicAssetConfig(options)).publicAssetBaseUrl;
+    return {registry,base:normalizePublicAssetBaseUrl(base)};
+  }).catch(error=>{approvedDeliveryContextPromise=null;throw error;});
   const delivery=await approvedDeliveryContextPromise;
   const base = options.publicConfig?.publicAssetBaseUrl || delivery.base;
   const resolved = resolvePublicAsset({registry:{bucket:'phios-public-assets',assets:[{
@@ -212,5 +217,5 @@ export async function resolveApprovedVisual(identity, options = {}) {
     format:entry.canonicalFilename.split('.').at(-1), verification:'verified-owner-inventory-identity',
     width:entry.width || null,height:entry.height || null
   }]},assetCode:identity,publicBaseUrl:base,surface:options.surface,locale:options.locale});
-  return {...resolved,semanticRole:entry.role,alt:{en:entry.semanticName,zh:entry.altZh || entry.semanticName},fallbackPolicy:'RETRY_EXACT_OBJECT_WITH_STATE_ILLUSTRATION',objectExistenceVerified:false};
+  return {...resolved,semanticRole:entry.role,alt:{en:entry.semanticName,zh:entry.altZh || entry.semanticName},fallbackPolicy:'RETRY_EXACT_OBJECT_WITH_STATE_ILLUSTRATION',objectExistenceVerified:!!entry.remoteProof,sourceReference:'data/visual/approved-r2-visual-assets.json'};
 }
