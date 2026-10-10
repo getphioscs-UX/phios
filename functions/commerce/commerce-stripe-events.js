@@ -29,7 +29,8 @@ function validateLineItems(lines,product,order){
   const surcharge=presentation?.surchargeAmountMinor||0;
   assert(lines?.has_more!==true&&lines?.data?.length===(surcharge?2:1));
   const line=lines.data[0],price=line.price||line.pricing?.price_details?.price;
-  assert(id(price)===product.qaPriceId&&line.quantity===1);
+  if(product.fulfillmentType==='CONTINUITY_QUOTA_REFILL')assert(line.quantity===1&&typeof price==='object'&&price.unit_amount===1900&&price.currency==='myr'&&id(price.product)===product.qaProductId&&!price.recurring);
+  else assert(id(price)===product.qaPriceId&&line.quantity===1);
   if(surcharge){const modifier=lines.data[1];assert(modifier.quantity===1&&modifier.price?.unit_amount===surcharge&&modifier.price.currency==='myr'&&id(modifier.price.product)===product.qaProductId&&!modifier.price.recurring);}
 }
 export async function processCommerceStripeEvent({env,event,fetcher,origin,clock=Date.now}){
@@ -87,7 +88,7 @@ export async function processCommerceStripeEvent({env,event,fetcher,origin,clock
         invoice=object;
       }
       await recordCommerceSubscription({env,order,subscription,invoice,clock});
-      if(invoice&&product.productId==='COM-SUBSCRIPTION-MONTHLY')await grantContinuityQuota(env,{ownerAccountId:order.customer_id,subscriptionId:subscription.id,sourceId:invoice.id,kind:'INVOICE',purchaseId:'pur_'+order.checkout_attempt_id,periodStart:invoice.lines.data[0].period.start,periodEnd:invoice.lines.data[0].period.end},clock);
+      if(invoice&&product.productId==='COM-SUBSCRIPTION-MONTHLY'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true')await grantContinuityQuota(env,{ownerAccountId:order.customer_id,subscriptionId:subscription.id,sourceId:invoice.id,kind:'INVOICE',purchaseId:'pur_'+order.checkout_attempt_id,periodStart:invoice.lines.data[0].period.start,periodEnd:invoice.lines.data[0].period.end},clock);
       commerceLog('SUBSCRIPTION_UPDATED',{order_id:orderId,stripe_event_id:event.id,status:subscription.status});
     }else if(event.type==='charge.refunded'){
       const refund=await refundCommerceOrder(env,object);

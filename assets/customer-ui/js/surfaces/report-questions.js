@@ -36,7 +36,7 @@ export function installReportQuestions(host){
     const existing=pending.get(reportId);const request=existing?.question===question?existing:{question,requestId:crypto.randomUUID()};pending.set(reportId,request);
     submit.disabled=true;input.disabled=true;status.textContent=tr('Preparing your answer…','正在准备回答…');
     try{await accountRequest('/api/account-report-questions',{reportId,...request,consentVersion:'REPORT_FOLLOWUP_CONSENT_V1'});pending.delete(reportId);await load();}
-    catch(error){if(['CONTINUITY_QUOTA_REFILL_REQUIRED','COMPLETE_PRODUCT_COST_LIMIT_OR_UNKNOWN_USAGE'].includes(error.code)){status.textContent=tr('The next answer cannot fit in the available quota. Your saved material and subscription remain available.','现有额度不足以生成下一条回答；已保存资料和订阅状态继续保留。');if(!panel.querySelector('a[href*="CONTINUITY_QUOTA_REFILL"]'))refill();}else status.textContent=tr('The answer could not be confirmed. Your question is kept here; no automatic retry will be made.','暂时无法确认回答是否完成。问题已保留在这里，系统不会自动重试。');submit.disabled=false;input.disabled=false;}
+    catch(error){if(['CONTINUITY_QUOTA_REFILL_REQUIRED'].includes(error.code)){pending.delete(reportId);status.textContent=tr('The next answer cannot fit in the available quota. Your saved material and subscription remain available.','现有额度不足以生成下一条回答；已保存资料和订阅状态继续保留。');if(!panel.querySelector('a[href*="CONTINUITY_QUOTA_REFILL"]'))refill();}else status.textContent=tr('The answer could not be confirmed. Your question is kept here; no automatic retry will be made.','暂时无法确认回答是否完成。问题已保留在这里，系统不会自动重试。');submit.disabled=false;input.disabled=false;}
    });
   }
  }

@@ -1,11 +1,11 @@
-import registry from '../../../content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json' with {type:'json'};
+import registry from '../../../content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json';
 import {deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
 export const CONTINUITY_COMMERCIAL_AUTHORITY=deepFreeze(registry);
 export function continuityRefillProduct(product,context={}){
  if(!context.continuityRefill)return product;
  if(product.productId!==registry.productId||!/^sub_[A-Za-z0-9]+$/.test(context.continuityRefill.subscriptionId||''))throw Error('CONTINUITY_REFILL_BINDING_REQUIRED');
- if(!/^price_/.test(registry.refill.stripePriceId||''))throw Object.assign(Error('CONTINUITY_REFILL_PRICE_CONFIGURATION_REQUIRED'),{code:'CONTINUITY_REFILL_PRICE_CONFIGURATION_REQUIRED',status:503});
- return Object.freeze({...product,billingType:'ONE_TIME',amountMinor:1900,qaPriceId:registry.refill.stripePriceId,fulfillmentType:'CONTINUITY_QUOTA_REFILL',entitlementPolicy:'CONTINUITY_QUOTA_UNIT',livePriceId:null});
+ if(registry.refill.priceMode!=='INLINE_ONE_TIME_PRICE_DATA'||!/^prod_/.test(product.qaProductId||''))throw Object.assign(Error('CONTINUITY_REFILL_PRICE_CONFIGURATION_REQUIRED'),{code:'CONTINUITY_REFILL_PRICE_CONFIGURATION_REQUIRED',status:503});
+ return Object.freeze({...product,billingType:'ONE_TIME',amountMinor:1900,qaPriceId:'CONTINUITY_REFILL_INLINE_V1',fulfillmentType:'CONTINUITY_QUOTA_REFILL',entitlementPolicy:'CONTINUITY_QUOTA_UNIT',livePriceId:null});
 }
 export function continuityModelPreflight(model,payload){
  if(model?.modelId!==registry.provider.defaultModel||model.pricingVerified!==true||!model.pricingSource||!model.pricingVerifiedAt||!Number.isSafeInteger(model.maxOutputTokens)||model.maxOutputTokens<1||model.maxOutputTokens>registry.provider.outputTokenMaximum)throw Error('CONTINUITY_VERIFIED_LUNA_REQUIRED');

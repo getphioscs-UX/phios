@@ -54,6 +54,8 @@ export async function settleProductCost(env,{ownerAccountId,requestId,measuredUS
  const db=env.RUNTIME_DB;
  const safePayload=metadata(payload);
  const row=await db.prepare('SELECT x.* FROM provider_product_cost_entries x JOIN provider_product_cost_envelopes a ON a.envelope_id=x.envelope_id WHERE x.request_id=? AND a.owner_account_id=?').bind(requestId,ownerAccountId).first();if(!row||row.state!=='RESERVED')fail('COST_RESERVATION_REQUIRED');
+ const reservedMetadata=JSON.parse(row.payload_json);
+ if(reservedMetadata.quotaUnit&&['quotaUnit','billingPeriodStart','billingPeriodEnd','model'].some(key=>payload[key]!==reservedMetadata[key]))fail('CONTINUITY_COST_BINDING_IMMUTABLE');
  const measured=Number.isFinite(measuredUSD)&&measuredUSD>=0?Math.ceil(measuredUSD*1e6):null;
  const valid=measured!==null&&measured<=row.reserved_micro_usd&&typeof costBasis==='string'&&costBasis.length>0;
  const result=await db.prepare("UPDATE provider_product_cost_entries SET measured_micro_usd=?,state=?,cost_basis=?,payload_json=? WHERE request_id=? AND state='RESERVED'").bind(measured,valid?'METERED':'USAGE_UNKNOWN',valid?costBasis:'UNKNOWN_OR_EXCEEDED_BOUND',safePayload,requestId).run();

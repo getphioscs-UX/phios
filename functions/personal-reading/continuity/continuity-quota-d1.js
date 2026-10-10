@@ -12,6 +12,8 @@ export async function activeContinuitySubscription(env,ownerAccountId,subscripti
 // state or paid refill purchase. The client never receives a grant operation.
 export async function grantContinuityQuota(env,{ownerAccountId,subscriptionId,sourceId,kind,purchaseId,periodStart,periodEnd},clock=Date.now){
  if(!['INVOICE','REFILL'].includes(kind)||!sourceId||!Number.isSafeInteger(periodStart)||!Number.isSafeInteger(periodEnd)||periodStart>=periodEnd)fail('CONTINUITY_QUOTA_GRANT_INVALID');
+ const prior=await env.RUNTIME_DB.prepare('SELECT * FROM continuity_quota_units WHERE grant_source_id=?').bind(sourceId).first();
+ if(prior){if(prior.owner_account_id!==ownerAccountId||prior.stripe_subscription_id!==subscriptionId||prior.grant_kind!==kind||prior.purchase_id!==purchaseId||prior.billing_period_start!==periodStart||prior.billing_period_end!==periodEnd)fail('CONTINUITY_GRANT_IDENTITY_CONFLICT');return prior.quota_unit_id;}
  const sub=await activeContinuitySubscription(env,ownerAccountId,subscriptionId,clock);
  if(periodEnd!==sub.current_period_end||periodEnd>sub.paid_until)fail('CONTINUITY_PERIOD_MISMATCH');
  if(kind==='INVOICE'&&sourceId!==sub.last_invoice_id)fail('CONTINUITY_PAID_INVOICE_REQUIRED');
@@ -24,6 +26,8 @@ export async function grantContinuityQuota(env,{ownerAccountId,subscriptionId,so
   db.prepare(`INSERT OR IGNORE INTO continuity_quota_units (quota_unit_id,envelope_id,owner_account_id,stripe_subscription_id,billing_period_start,billing_period_end,grant_source_id,grant_kind,purchase_id,maximum_micro_usd,created_at) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,3000000,?10)`).bind(unitId,envelopeId,ownerAccountId,subscriptionId,periodStart,periodEnd,sourceId,kind,purchaseId,now),
   db.prepare(`UPDATE provider_product_cost_envelopes SET maximum_cost_micro_usd=(SELECT SUM(maximum_micro_usd) FROM continuity_quota_units WHERE envelope_id=?1) WHERE envelope_id=?1 AND owner_account_id=?2`).bind(envelopeId,ownerAccountId)
  ]);
+ const stored=await db.prepare('SELECT * FROM continuity_quota_units WHERE quota_unit_id=? AND owner_account_id=? AND stripe_subscription_id=?').bind(unitId,ownerAccountId,subscriptionId).first();
+ if(!stored||stored.purchase_id!==purchaseId||stored.billing_period_start!==periodStart||stored.billing_period_end!==periodEnd)fail('CONTINUITY_GRANT_NOT_STORED');
  return unitId;
 }
 export async function readContinuityQuota(env,ownerAccountId,clock=Date.now){
@@ -39,11 +43,20 @@ export async function invokeContinuityProvider({env,ownerAccountId,requestId,con
  if(!unit)fail('CONTINUITY_QUOTA_REFILL_REQUIRED');
  if(!Number.isSafeInteger(quota.billingPeriodStart))fail('CONTINUITY_CURRENT_PAID_PERIOD_REQUIRED');
  const stamp={quotaUnit:unit.quota_unit_id,billingPeriodStart:quota.billingPeriodStart,billingPeriodEnd:quota.billingPeriodEnd,model:model.modelId,spendStage:'CONTINUITY_CONTEXTUAL_FOLLOWUP',toolSearchCostUSD:0};
- const reservation=await reserveProductCost(env,{ownerAccountId,envelopeId:unit.envelope_id,requestId,contextId,costClass:'MODEL',conservativeMaximumUSD:bound.maximumUSD,payload:stamp},clock);
+ let reservation;
+ try{reservation=await reserveProductCost(env,{ownerAccountId,envelopeId:unit.envelope_id,requestId,contextId,costClass:'MODEL',conservativeMaximumUSD:bound.maximumUSD,payload:stamp},clock);}catch(error){
+  if(error.code==='COMPLETE_PRODUCT_COST_LIMIT_OR_UNKNOWN_USAGE'){
+   const unknown=await env.RUNTIME_DB.prepare("SELECT 1 AS blocked FROM provider_product_cost_entries WHERE envelope_id=? AND state='USAGE_UNKNOWN' LIMIT 1").bind(unit.envelope_id).first();
+   if(unknown)fail('CONTINUITY_USAGE_RECONCILIATION_REQUIRED');
+   await activeContinuitySubscription(env,ownerAccountId,quota.subscriptionId,clock);
+   fail('CONTINUITY_QUOTA_REFILL_REQUIRED');
+  }throw error;
+ }
  if(!reservation.newReservation)fail('CONTINUITY_REQUEST_ALREADY_RESERVED');
  let metered=false;
  try{
   const response=await invoke(payload);if(!response.ok)fail('CONTINUITY_PROVIDER_FAILED');const raw=await response.json();
+  if((raw.output||[]).some(item=>/search|tool|computer|code_interpreter/.test(item.type||'')))fail('CONTINUITY_UNADMITTED_TOOL_USAGE');
   const actual=settleProviderUsage({model:model.modelId,inputTokenBound:bound.inputTokenBound,outputTokenLimit:model.maxOutputTokens,estimatedMaximumCostUSD:bound.maximumUSD},{usage:raw.usage,model:raw.model,providerRequestId:raw.id,rates:{inputPerMillion:model.inputPricePerMillion,cachedInputPerMillion:model.cachedInputPricePerMillion,outputPerMillion:model.outputPricePerMillion}});
   await settleProductCost(env,{ownerAccountId,requestId,measuredUSD:actual.providerCostUSD,costBasis:actual.costBasis,payload:{...stamp,inputTokens:actual.inputTokens,cachedTokens:actual.cachedTokens,outputTokens:actual.outputTokens,modelCostUSD:actual.providerCostUSD,providerRequests:1,retryCount:0,providerRequestId:raw.id||null}});metered=true;
   return {raw,quotaUnit:unit.quota_unit_id,providerCalls:1};

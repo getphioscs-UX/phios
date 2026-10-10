@@ -1,0 +1,113 @@
+{
+  "result": "PASS",
+  "currentHead": "3024c004cb8fbec22e0673bf642e602d5f225937",
+  "sourceIdentity": [
+    {
+      "path": "assets/customer-ui/js/surfaces/commerce-account.js",
+      "sha256": "443abc2d52a8d1ec6dcfd224127acc7aff8f39f21ff156c3745dac6f46f56ecf"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/report-questions.js",
+      "sha256": "1450461ee9fd9e5394d745168d0d7a0f48e43696ed114bd0d6831231e05ef019"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-api.js",
+      "sha256": "04cb26a0e60422cc1bdf101737d20c81652a0f8ea26c9a1040f8b5c962e7aa89"
+    },
+    {
+      "path": "functions/commerce/commerce-stripe-events.js",
+      "sha256": "8dc31dfc32232f12b52dd909b669f00fa69f75695af59f9c3568e75428397184"
+    },
+    {
+      "path": "functions/commerce/stripe-client.js",
+      "sha256": "d2b046a21bd0c85ee23d743c4c493dfdd317f39c53dce47c26ca0e147c741d42"
+    },
+    {
+      "path": "functions/commerce/book-commerce-store.js",
+      "sha256": "a1908faf4faebd9242db90807e4e95cc8c58655a78f241a0e2873989774b80f8"
+    },
+    {
+      "path": "functions/pws/commercial/stripe-product-registry.js",
+      "sha256": "df13b4dc9665ee2310030395f128d4d1a447e00773ed6bf6664147a548dbeb77"
+    },
+    {
+      "path": "functions/account/paid-report-question-generation.js",
+      "sha256": "d56f727c2e3ae24583842eee1e2096cef4fc0cc90fd928c689ed78643baecd2a"
+    },
+    {
+      "path": "functions/api/account-report-questions.js",
+      "sha256": "28792a0553f89089bf9f9f66e6a8d9ad9937421f552d2b9df5bcd13ff48525c9"
+    },
+    {
+      "path": "content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json",
+      "sha256": "739f9d865c50146928db245917e1a61e0597a36d2ef6c95120b63b6c666cec1e"
+    },
+    {
+      "path": "content/personal-reading/continuity/contracts/w84-continuity-ask-quota-contract-v2.json",
+      "sha256": "a4b5b5cec66a22cf61391b36afa20170cfecb1dd2b588188a04492d26e04a0e2"
+    },
+    {
+      "path": "functions/provider-cost/product-cost-envelope.js",
+      "sha256": "3a109f8ffc0a517d9378132cdedaf031b75c0d4506b2aafabffd68591f55af52"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-quota-d1.js",
+      "sha256": "f86d0471460e03af92833e1b6124e958165a01be0a2312c8069cb42c34345cf5"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-commercial-authority.js",
+      "sha256": "c5c432d13aeb638619aed1c5d51abc5cdf7f4df9b43f48df7f0508710af48a83"
+    },
+    {
+      "path": "functions/personal-reading/continuity/continuity-report-followup.js",
+      "sha256": "337190d89544ebd2cebbef07e18d452180742effb090297d7b67feb20453a216"
+    },
+    {
+      "path": "db/migration-candidates/0018_continuity_quota_units.sql",
+      "sha256": "0963a4c4d471a6dcf3b3d0386a32795aa4188c6aca40a9214262d8f356e63b67"
+    }
+  ],
+  "scope": "REAL_IN_MEMORY_SQL_AND_SYNTHETIC_TRANSPORT_NO_EXTERNAL_REQUESTS",
+  "checks": [
+    "paid invoice and owner required",
+    "webhook grant duplicate safe",
+    "Luna only",
+    "no unverified prices or tools",
+    "bounded context and output",
+    "cached input metering",
+    "USD3 atomic concurrent hard cap",
+    "next call rejected before invoke",
+    "subscription unchanged at cap",
+    "explicit one-time paid refill",
+    "duplicate refill no extra unit",
+    "no second subscription or anchor shift",
+    "no client redirect entitlement",
+    "unknown usage freezes provider spend",
+    "cancellation preserves quota/history owner",
+    "full dossier not sent",
+    "native fifth report question uses membership pool",
+    "saved answer reopening has no transport",
+    "source identity retrieval is deterministic",
+    "existing Checkout uses one-time price_data",
+    "existing webhook grants refill once"
+  ],
+  "realProviderCalls": 0,
+  "realCharges": 0,
+  "R2Deletion": 0,
+  "productionMigration": 0,
+  "automaticCommitPushDeploy": 0,
+  "migrationCandidate": {
+    "path": "db/migration-candidates/0018_continuity_quota_units.sql",
+    "activeManifest": false
+  },
+  "missing": [
+    "0018 source migration candidate governance acceptance; not in active manifest",
+    "verified server Luna model pricing/profile and explicit runtime activation",
+    "Navigation/Current Reality/Relationship/Profile/Financial/saved observation/timing customer consumer adapters beyond admitted Method reports",
+    "explicit production approval",
+    "actual live and customer validation"
+  ],
+  "SOURCE": "PASS_BOUNDED_COMMERCIAL_AUTHORITY",
+  "DEPLOYED": "NOT_RUN",
+  "LIVE_CUSTOMER": "NOT_RUN"
+}

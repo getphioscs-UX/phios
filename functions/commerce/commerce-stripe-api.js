@@ -38,7 +38,7 @@ export async function commerceApi(context,action){
           }else throw error;
         }
       }
-      return {...p,checkoutAvailable:commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&/^price_/.test(continuityAuthority.refill.stripePriceId||'')}:{}),reportPresentationOptions,reportPurchaseState};
+      return {...p,checkoutAvailable:commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&continuityAuthority.refill.priceMode==='INLINE_ONE_TIME_PRICE_DATA'&&env.PHIOS_CONTINUITY_QUOTA_ENABLED==='true'}:{}),reportPresentationOptions,reportPurchaseState};
     }),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
@@ -84,6 +84,7 @@ export async function commerceApi(context,action){
     if(body.context&&(Object.keys(body.context).some(k=>k!=='readingId')||typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
     const contextSnapshot=reference?{readingId:reference}:{};
     if(body.purchaseKind!==undefined){
+      if(env.PHIOS_CONTINUITY_QUOTA_ENABLED!=='true'||commerceEnvironment(env)!=='QA')throw Object.assign(Error('CONTINUITY_REFILL_NOT_ACTIVATED'),{status:403});
       if(body.purchaseKind!=='CONTINUITY_QUOTA_REFILL'||product.productId!=='COM-SUBSCRIPTION-MONTHLY')throw Object.assign(Error('CONTINUITY_REFILL_PRODUCT_REQUIRED'),{status:422});
       const quota=await readContinuityQuota(env,customerId);
       if(quota.subscriptionId!==body.subscriptionId||!quota.units.length)throw Object.assign(Error('CONTINUITY_REFILL_OWNED_PERIOD_REQUIRED'),{status:403});
