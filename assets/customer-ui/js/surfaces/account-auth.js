@@ -1,4 +1,4 @@
-const host=document.createElement('section');
+const host=document.createElement('section');host.dataset.r5AccountAuth='';
 host.className='cx-card cx-stack';host.setAttribute('aria-live','polite');
 document.querySelector('#main .cx-container')?.prepend(host);
 let session=null;
