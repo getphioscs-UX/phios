@@ -191,7 +191,7 @@ const admittedBookVii = await loadBookViiPublishedAdmission(async rel => {
 });
 const publicationFiles = new Set(tracked.stdout.split('\0').filter(Boolean));
 // Founder R1 local source additions retain the existing static publication predicate.
-for(const file of ['assets/css/founder-publication-r1.css','assets/js/pages/founder-publication-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
+for(const file of ['assets/css/founder-publication-r1.css','assets/css/founder-publication-r2.css','assets/js/pages/founder-publication-r1.js'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);
 // Explicit R5 source additions for uncommitted local preview. Every file still
 // passes the original publication predicate and static/Worker size checks.
 for(const file of ['assets/customer-ui/surfaces/visual-binding-r5.css','assets/customer-ui/js/surfaces/visual-binding-r5-guides.js','content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json'])if(fs.existsSync(path.join(root,file)))publicationFiles.add(file);

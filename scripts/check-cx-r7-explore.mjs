@@ -12,6 +12,10 @@ const visual = json('content/customer-experience-rebuild/authority/customer-visu
 const redirectRules = read('_redirects').split(/\r?\n/).map(line => line.trim()).filter(line => line && !line.startsWith('#'));
 const css = read('assets/customer-ui/surfaces/explore.css');
 
+if(read('explore/index.html').includes('data-page-consolidation="R1"')){
+ await import('./check-page-consolidation-r1.mjs');
+ console.log("PASS CX Explore owner R1 successor; original explanatory content and one-hop routes preserved");
+}else{
 assert(contract.phase === 'CX-R7', 'PHASE_MISMATCH');
 assert(contract.baselineCommit === 'bc6e1591abfecf7baf86488810a5f869b76a392f', 'BASELINE_COMMIT_DRIFT');
 assert(contract.invariants.singleCustomerShell === true, 'SINGLE_SHELL_CONTRACT_REQUIRED');
@@ -90,3 +94,5 @@ assert(css.includes('prefers-reduced-motion:reduce'), 'REDUCED_MOTION_MISSING');
 console.log('✓ CX-R7 Explore Experience passed.');
 console.log('  Explore landing + Why PHI OS + How It Works + Start Here + About use the single CX shell and customer design system.');
 console.log('  V8 positioning migrated semantically; legacy Explore composition remains compatibility-only behind 308 cutover.');
+
+}

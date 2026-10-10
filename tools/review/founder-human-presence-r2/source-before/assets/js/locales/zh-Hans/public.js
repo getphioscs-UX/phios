@@ -526,15 +526,6 @@ const publicExperience = Object.freeze({
       "professionalEvidence": "Professional Evidence"
     },
     "founder": {
-      "humanPresenceR2": {
-        "intro": "PHI OS 起于真实决策中反复出现的问题：不同来源，如何帮助我们看清同一个现实？",
-        "origin": "创办人与研究起点",
-        "portraitAlt": "Teresa Lee，PHI OS 创办人兼首席架构师。",
-        "heroFirst": "答案正在变得越来越容易获得。",
-        "heroSecond": "真正困难的是：哪一个答案，真正属于你此刻的现实。",
-        "skip": "跳至内容",
-        "figure": "查看完整图示"
-      },
       "publication": {
   "S01": {
     "eyebrow": {

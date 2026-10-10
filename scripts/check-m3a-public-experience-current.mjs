@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {parseHTML} from 'linkedom';
+import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
 
 const read = file => fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const json = file => JSON.parse(read(file));
@@ -36,6 +38,18 @@ const currentPages = [
 for (const page of currentPages) {
   assert.equal(fs.existsSync(page), true, `Current customer surface missing: ${page}`);
   const source = read(page);
+  const successor=consolidationSuccessor()?.surfaces.find(s=>s.file===page);
+  if(successor?.redirect){
+    const {document}=parseHTML(source);
+    assertCurrentConsolidatedSurface(document,page);
+    assert(source.includes('/assets/customer-ui/js/surfaces/page-consolidation-redirect.js'),`${page}: redirect runtime missing`);
+    const [route,anchor]=successor.redirect.split('#');
+    const target=read(route.slice(1)+'index.html');
+    assert(target.includes('/assets/customer-ui/js/shell.js'),`${page}: destination shell missing`);
+    assert(target.includes(`id="${anchor}"`),`${page}: destination anchor missing`);
+    assert.equal(source.includes('/assets/js/public-shell-v2.js'),false);
+    continue;
+  }
   assert.ok(source.includes('/assets/customer-ui/js/shell.js'), `${page} must consume the current customer shell`);
   assert.equal(source.includes('/assets/js/public-shell-v2.js'), false, `${page} reintroduced the predecessor shell`);
 }
@@ -80,8 +94,12 @@ for (const rule of [
 ]) assert.ok(redirects.includes(rule), `Retired route compatibility redirect missing: ${rule}`);
 
 const home = read('index.html');
+const consolidatedHome=consolidationSuccessor()?.surfaces.some(s=>s.file==='index.html');
+if(consolidatedHome)assertCurrentConsolidatedSurface(parseHTML(home).document,'index.html');
 for (const href of ['/articles/', '/figures/', '/knowledge/concepts/', '/knowledge/ask/', '/reality/']) {
-  assert.ok(home.includes(`href="${href}"`), `Homepage is missing canonical destination ${href}`);
+  const knowledgeDestination=consolidatedHome&&['/articles/','/figures/','/knowledge/concepts/'].includes(href);
+  if(knowledgeDestination){assert(home.includes('href="/knowledge/"'),'Homepage knowledge entry missing');assert(read('knowledge/index.html').includes(`href="${href}"`),`Knowledge is missing canonical destination ${href}`);}
+  else assert.ok(home.includes(`href="${href}"`), `Homepage is missing canonical destination ${href}`);
 }
 for (const retiredHref of ['/figures.html', '/glossary.html', '/ask.html', '/personal-runtime.html', '/my-reality.html']) {
   assert.equal(home.includes(`href="${retiredHref}"`), false, `Homepage retained retired route ${retiredHref}`);

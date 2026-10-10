@@ -14,6 +14,10 @@ const composition=json('content/customer-experience-rebuild/authority/homepage-c
 const visual=json('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json');
 const methodRegistry=json('content/professional/method-production-activation/registries/method-registry-v5.json');
 
+if(html.includes('data-page-consolidation="R1"')){
+ await import('./check-page-consolidation-r1.mjs');
+ console.log("PASS CX home owner R1 successor; historical H01-H09 composition remains predecessor evidence");
+}else{
 assert(html.includes('data-cx-surface="HOME"'),'HOME_SURFACE_MARKER_MISSING');
 assert(count(html,/data-cx-header/g)===1,'ONE_HEADER_MOUNT_REQUIRED');
 assert(count(html,/data-cx-footer/g)===1,'ONE_FOOTER_MOUNT_REQUIRED');
@@ -83,3 +87,5 @@ for(const phrase of ['Reality will keep changing.','Your understanding should be
 console.log('✓ CX-R6 Homepage Total Rebuild passed.');
 console.log(`  H01-H09 only; ${eligibleMethods.join(', ')} are surfaced from current production-eligibility authority.`);
 console.log('  Canonical CX shell/assets/routes, EN/zh-Hans copy, responsive composition and legacy-removal gates passed.');
+
+}
