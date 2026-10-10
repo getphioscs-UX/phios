@@ -1,0 +1,9 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
+import {resolvePublicAssetForWeb} from '../assets/js/runtime/web-production/asset-resolver.js';
+const p='content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json',r=JSON.parse(fs.readFileSync(p));
+assert.equal(new Set(r.entries.map(x=>x.assetId)).size,r.entries.length,'AMBIGUOUS_ASSET_ID');
+globalThis.fetch=async url=>{assert.equal(url,'/'+p);return new Response(JSON.stringify(r),{headers:{'Content-Type':'application/json'}});};
+for(const [id,name]of [['HERO-021','RELATIONSHIP'],['HERO-022','PERSONAL-EVIDENCE'],['HERO-023','MEMBERSHIP-CONTINUITY']]){const a=await resolvePublicAssetForWeb(id);assert.ok(a.src.endsWith('PHIOS-HERO-'+name+'-v2.webp'),'WRONG_HERO_IDENTITY');assert.ok(a.width>0&&a.height>0);await assert.rejects(()=>resolvePublicAssetForWeb(id,{variant:'invented-en'}));}
+const old='content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json';assert.equal(fs.readFileSync(old,'utf8'),execFileSync('git',['show','HEAD:'+old],{encoding:'utf8',maxBuffer:8*1024*1024}),'PREDECESSOR_CHANGED');
+const source=fs.readFileSync('assets/js/pages/knowledge-spine-visuals.js','utf8');assert.ok(source.includes('resolveSevenVolumeCustomerAsset'));assert.ok(source.includes('BOOK-'));assert.ok(!source.includes("'book-5':'HERO-023'"),'BOOK_MEMBERSHIP_ALIAS_COLLISION');
+const result={state:'PASS_BOUNDED_CORRECTIONS',scope:'Three current web Hero identities, nonexistent variant rejection, unique successor IDs, unchanged predecessor and semantic eight-volume consumer',providerCalls:0};fs.writeFileSync('content/production-closure/live-customer-commercial-convergence/VISUAL-BINDING-R5-SOURCE-QA.json',JSON.stringify(result,null,2)+'\n');console.log(result.state);

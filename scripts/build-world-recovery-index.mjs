@@ -37,6 +37,15 @@ rows.push(...visualRows);
 // Only human-accepted subsystem records are searchable as admitted current objects.
 for(const file of fs.readdirSync(base+'/reconfiguration').filter(f=>/^dossier-.*-w8i-accepted-current-dossier-v1\.json$/.test(f))){const p=base+'/reconfiguration/'+file,r=read(p),id=r.dossierId||r.id;const dossier=rows.find(x=>x.type==='current-dossier'&&x.id===id);if(!dossier)continue;for(const position of r.admittedPositions||[])rows.push({...dossier,id:id+':'+position.runtimePositionId,type:'runtime-position',title:localized(position.shortLabel||positionRegistry.positions.find(p=>p.id===position.runtimePositionId)?.shortLabel),state:'CURRENT_SUBSYSTEM_ONLY',relatedObjects:[id],source:p,summary:{en:'Human-accepted subsystem position; never a whole-region verdict.','zh-Hans':'人工接受的子系统位置，不代表整个地区。'}});rows.push({...dossier,id:id+':accepted',type:'admitted-current-evidence',state:'CURRENT_SUBSYSTEM_ONLY',source:p,summary:{en:'Human-accepted subsystem evidence only; no whole-region conclusion.','zh-Hans':'仅限人工接受的子系统证据，不代表整个地区。'}});}
 const out={schemaVersion:'PHI-OS-WORLD-SEARCH-INDEX-v1',generatedAt:new Date().toISOString(),sourceAuthority:'CANONICAL_REGISTRIES_AND_ACCEPTED_BINDINGS_ONLY',sources,rows};
+// Rebuilding unchanged admitted inputs must not alter the published bytes merely
+// to record another build time. This timestamp is generation, not currentness.
+const indexPath=base+'/search/world-search-index-v1.json';
+if(fs.existsSync(indexPath)){
+ const prior=JSON.parse(fs.readFileSync(indexPath,'utf8'));
+ const {generatedAt:priorGeneratedAt,...priorContent}=prior;
+ const {generatedAt:ignoredGeneratedAt,...currentContent}=out;
+ if(JSON.stringify(priorContent)===JSON.stringify(currentContent))out.generatedAt=priorGeneratedAt;
+}
 fs.mkdirSync(base+'/search',{recursive:true});fs.writeFileSync(base+'/search/world-search-index-v1.json',JSON.stringify(out)+'\n');
 const previousLedger=fs.existsSync('docs/acceptance/world-recovery/visual-coverage-ledger.json')?read('docs/acceptance/world-recovery/visual-coverage-ledger.json').rows:[];
 const coverage=bindings.assets.map(a=>({assetId:a.assetId,family:a.family,subjectId:a.subjectId,reviewState:a.reviewState,bindingState:a.bindingState,bucketKey:a.bucketKey,publicUrl:a.publicUrl,actualConsumer:visualRows.some(x=>x.id===a.assetId)?'world-semantic-visual-atlas':null,consumerRoute:'/world?explore=visuals',discoverable:visualRows.some(x=>x.id===a.assetId),requestedInBrowser:'NOT_RUN',decoded:'NOT_RUN',visible:'NOT_RUN',desktopState:'NOT_RUN',mobileState:'NOT_RUN',localeState:'NOT_RUN',decision:visualRows.some(x=>x.id===a.assetId)?'ACTIVE_VISUAL_ATLAS':'BROKEN_CONSUMER'})).map(row=>{const previous=previousLedger.find(p=>p.assetId===row.assetId&&p.publicUrl===row.publicUrl&&p.bucketKey===row.bucketKey);return previous?{...previous,...row,requestedInBrowser:previous.requestedInBrowser,decoded:previous.decoded,visible:previous.visible,desktopState:previous.desktopState,mobileState:previous.mobileState,localeState:previous.localeState}:row;});

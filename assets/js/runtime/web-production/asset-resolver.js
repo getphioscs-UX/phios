@@ -1,3 +1,4 @@
+import {resolveCustomerAsset} from '../../../customer-ui/js/assets.js';
 const DEFAULT_REGISTRY_URL = '/content/registry/public-assets.json';
 const DEFAULT_CONFIG_URL = '/api/public-asset-config';
 const VERIFIED_PATTERN = /^verified(?:$|[-_])/i;
@@ -172,6 +173,13 @@ export async function resolvePublicAssetGroupMemberForWeb(assetCode, memberObjec
 }
 
 export async function resolvePublicAssetForWeb(assetCode, options = {}) {
+  // Explicit predecessor registry calls retain historical identity. Current web
+  // calls use the same customer asset successor, without route-based guessing.
+  if(!options.registry&&['HERO-021','HERO-022','HERO-023'].includes(assetCode)){
+    const a=await resolveCustomerAsset(assetCode);
+    if(options.variant)throw new PublicAssetResolutionError('PUBLIC_ASSET_VARIANT_UNAVAILABLE');
+    return {assetCode,src:a.publicUrl,width:a.width,height:a.height,renderable:true,deliveryState:'GET_DECODE_VERIFIED_VISUAL_CANDIDATE',sourceReference:a.sourceRegistry};
+  }
   const registry = options.registry ?? await fetchPublicAssetRegistry(options);
   const registryBase = normalizePublicAssetBaseUrl(registry.public_base_url);
   let configBase = null;

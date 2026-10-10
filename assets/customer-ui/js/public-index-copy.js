@@ -16,8 +16,10 @@ new MutationObserver(apply).observe(document.documentElement,{attributes:true,at
 const heroCode=document.body.dataset.pisHero;
 if(heroCode){
  const heading=document.querySelector('main h1');
- const target=heading?.parentElement;
- if(target&&!target.querySelector('form')){
+ const target=heading?.closest('[data-pis-hero-content]')||heading?.parentElement;
+ // A hero must not recolor input, result or service cards in its ancestor.
+ const businessContent=target?.querySelector('form,.cx-card,.account-card,[data-cx-result],[data-profile-result]');
+ if(target&&!businessContent){
   target.classList.add('pis-landing-hero');
   const image=document.createElement('img');image.dataset.px2Asset=heroCode;
   image.className='pis-landing-hero__image';image.alt='';image.setAttribute('aria-hidden','true');
@@ -25,6 +27,6 @@ if(heroCode){
   const section=target.closest('section');
   // The hero has one illustration; do not display the previous boxed duplicate.
   section?.querySelectorAll('.cx-knowledge-hero__visual,.cx-explore-hero__visual').forEach(node=>{node.hidden=true;});
- }
+ }else if(target){target.dataset.pisHeroState='EXPLICIT_MEDIA_TEXT_CONTAINER_REQUIRED';}
 }
 hydrateUnifiedPublicVisuals(document).catch(()=>{});

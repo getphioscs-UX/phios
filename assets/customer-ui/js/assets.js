@@ -1,4 +1,4 @@
-const REGISTRY_URL = '/content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json';
+const REGISTRY_URL = '/content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json';
 const DARK_SURFACE_LOGO_MAP = Object.freeze({
   'LOGO-001': 'LOGO-008',
   'LOGO-003': 'LOGO-010',
