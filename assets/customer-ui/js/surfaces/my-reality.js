@@ -1,4 +1,5 @@
 import {arr,esc,installTabs,locale,postJson,reRenderOnLocale,setStatus,tr,valueText} from './runtime-ui.js';
+import {renderRealityNavigationNetwork,renderNavigationFormationConcept} from '../reality-navigation-network.js';
 let currentView=null;
 const sessionObservations=[];
 const empty=message=>`<div class="cx-p1-empty">${esc(message)}</div>`;
@@ -145,6 +146,8 @@ function renderSide(view){
 }
 
 function render(input){
+  renderRealityNavigationNetwork(document.querySelector('[data-reality-network]'),input?.graphProjection,{locale:locale()});
+  renderNavigationFormationConcept(document.querySelector('[data-network-formation]'),{locale:locale()});
   const view=normalizeWorkspace(input);currentView=view;renderContextSummary(view);renderOverview(view);renderCurrent(view);renderPerspectives(view);renderReading(view);renderNavigation(view);renderActions(view);renderObservations();renderReview(view);renderHistory(view);renderReports(view);renderContinuity(view);renderSide(view);
 }
 async function loadCurrent(){try{const response=await fetch(`/api/customer-my-reality?locale=${encodeURIComponent(locale())}`,{cache:'no-store',credentials:'same-origin'});const payload=await response.json();if(response.ok&&payload?.ok)render(payload.workspace||payload.view)}catch{render({state:'EMPTY',overview:{},currentReality:{},perspectives:{items:[]}})}}

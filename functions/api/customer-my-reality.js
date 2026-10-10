@@ -7,6 +7,7 @@ import {projectReportForCustomer} from '../customer-projection/report-customer-p
 import {projectMyRealityWorkspace} from '../customer-projection/my-reality-workspace-projection.js';
 import {collectMyRealitySavedSources} from '../account/my-reality-saved-sources.js';
 import {acceptedNavigationForCustomer} from '../customer-projection/accepted-navigation-customer.js';
+import {projectRealityNavigationGraph,assertRealityNavigationGraph} from '../customer-projection/reality-navigation-graph-projection.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -18,7 +19,8 @@ function workspaceFromProjectedSources({reality,reading,navigation,journey,repor
   const navigationView=navigation?.schemaVersion==='CX_ACCEPTED_NAVIGATION_V1'?navigation:projectNavigationForCustomer(navigation||{},{locale});
   const continuity=projectContinuityForCustomer(journey||{},{locale});
   const reportViews=list(reports?.items||reports).map(report=>projectReportForCustomer(report,{locale}));
-  return projectMyRealityWorkspace({reality,readout,navigation:navigationView,continuity,reports:reportViews,locale});
+  const workspace=projectMyRealityWorkspace({reality,readout,navigation:navigationView,continuity,reports:reportViews,locale});
+  return {...workspace,graphProjection:assertRealityNavigationGraph(projectRealityNavigationGraph({reality,navigation:navigationView}))};
 }
 async function attachSavedSources(context,base){
  const saved=await collectMyRealitySavedSources(context);

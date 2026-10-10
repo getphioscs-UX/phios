@@ -1,5 +1,5 @@
 # 唯一 Master W00–W40 当前进度
-HEAD: 3039e6c64e7edbba3d38882eb0790a0915f65f38
+HEAD: 6e28839a7b93a2b62f0c2f7057705fc7a826f97f
 
 |阶段|SOURCE|DEPLOYED|LIVE CUSTOMER|下一步|
 |---|---|---|---|---|
@@ -17,7 +17,7 @@ HEAD: 3039e6c64e7edbba3d38882eb0790a0915f65f38
 |W11 Contextual Ask|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify per-context reading ownership and accepted sources|
 |W12 Public Knowledge Ask repair|INHERITED_TARGETED_EVIDENCE_CURRENT_DIGEST_NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Keep public Ask bounded; review current Answer/figure maintenance successor|
 |W13 Book VIII private doctrine|HUMAN_ACCEPTED_DOCTRINE_PUBLIC_BOUNDARY_QA_REMAINS|NOT_VERIFIED_CURRENT_REVISION|NOT_RUN|复用已接受私有规范；核对公开不售与投影边界，不重复要求 doctrine 接受|
-|W14 NAV runtime / Academy mapping|PARTIAL_IMPLEMENTATION|NOT_VERIFIED_CURRENT_REVISION|NOT_RUN|Accepted NAV evaluator/API/readiness UI wired; complete existing-owner canonical snapshot admission and explicitly consented versioned persistence without inventing recommendations.|
+|W14 NAV runtime / Academy mapping|PARTIAL_IMPLEMENTATION|NOT_VERIFIED_CURRENT_REVISION|NOT_RUN|接入可信 server Reality 输入、scoped NAV evaluator API 与 My Reality 消费；不得复制 RNE owner|
 |W15 Academy video model|PARTIAL_IMPLEMENTATION|NOT_VERIFIED_CURRENT_REVISION|NOT_RUN|免费 canonical video registry/API/主题目录已接线；真实视频、transcript 与 publication metadata 待提供；Method 付费视频单独准入|
 |W16 Protected media delivery|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Verify owned permanent video delivery with revoked sharing denied|
 |W17 Academy commerce|NOT_VERIFIED|NOT_VERIFIED_CURRENT_HEAD|NOT_RUN|Keep no-video products disabled; reuse Commerce for admitted asset only|

@@ -6,6 +6,8 @@ import {createPtrcAskRequestContract} from '../functions/_lib/ptrc-ask-contract.
 import {adaptPtrcEvidence,buildPtrcRetrievalStages,evaluatePtrcKnowledgeQuality,filterPtrcSourcesByPolicy} from '../functions/_lib/ptrc-knowledge-quality.js';
 import {classifyAsk2Consumption} from '../functions/ask2/ask2-consumption-runtime.js';
 import {composeDeterministicKapAnswer} from '../functions/_lib/knowledge-answer-composition.js';
+import {currentFooterLogo} from './lib/branding-footer-successor.mjs';
+import {resolveCustomerAssetFromRegistry} from '../assets/customer-ui/js/assets.js';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const text=p=>fs.readFileSync(path.join(root,p),'utf8');
@@ -38,7 +40,15 @@ const currentBrand=json('content/customer-experience-rebuild/authority/customer-
 assert.equal(currentBrand.status,'ACTIVE_SURFACE_AWARE_CUSTOMER_BRAND_BINDING');
 assert.equal(currentBrand.authorityBoundary.upstreamLogoRegistryMutated,false);
 assert.ok(customerShell.includes(`data-cx-asset="${currentBrand.currentConsumers.publicHeaderLight}"`),'shell missing current canonical header');
-assert.match(customerShell,/data-cx-asset="LOGO-010"/);
+// v5 moved the footer to its owner-authorized lockup. The dark header variant
+// remains selected by the contrast-aware loader, rather than literal shell markup.
+assert.ok(customerShell.includes(`data-cx-asset="${currentFooterLogo()}"`),'shell missing owner-authorized footer');
+assert.match(customerShell,/data-cx-asset-auto="contrast"/);
+const assetLoader=text('assets/customer-ui/js/assets.js');
+assert.match(assetLoader,new RegExp(`'${currentBrand.currentConsumers.publicHeaderLight}'\\s*:\\s*'${currentBrand.currentConsumers.publicFooterDark}'`),'current header must retain its approved dark-surface variant');
+assert.match(assetLoader,/if \(darkSurface\) return DARK_SURFACE_LOGO_MAP\[assetId\] \|\| assetId/);
+const currentAssets=json('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json');
+for(const id of [currentBrand.currentConsumers.publicHeaderLight,currentBrand.currentConsumers.publicFooterDark,currentFooterLogo()])assert.equal(resolveCustomerAssetFromRegistry(currentAssets,id).available,true);
 const manifest=json('site.webmanifest');
 assert.equal(manifest.icons[0].type,'image/svg+xml');
 assert.match(manifest.icons[0].src,/PHIOS-APP-ICON-v1\.svg/);
