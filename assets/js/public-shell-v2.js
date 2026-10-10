@@ -24,7 +24,10 @@ const FOOTER = [
   { href: '/contact', zh: '联系', en: 'Contact' }
 ];
 function preferredLocale() {
-  const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_LOCALE_STORAGE_KEY);
+  const requested = new URLSearchParams(location.search).get('locale');
+  if (requested === 'en') return 'en';
+  if (/^zh(?:-|$)/i.test(requested || '')) return 'zh-Hans';
+  const saved = localStorage.getItem(LEGACY_LOCALE_STORAGE_KEY) || localStorage.getItem(STORAGE_KEY);
   if (saved === 'zh-Hans' || saved === 'en') return saved;
   return navigator.language && navigator.language.toLowerCase().startsWith('zh') ? 'zh-Hans' : 'en';
 }
@@ -37,6 +40,9 @@ export function setLocale(locale) {
   document.documentElement.lang = next === 'zh-Hans' ? 'zh-Hans' : 'en';
   localStorage.setItem(STORAGE_KEY, next);
   localStorage.setItem(LEGACY_LOCALE_STORAGE_KEY, next);
+  const url = new URL(location.href);
+  url.searchParams.set('locale', next);
+  history.replaceState(history.state, '', url.pathname + url.search + url.hash);
   document.querySelectorAll('[data-puxr-locale-button]').forEach(button => {
     button.classList.toggle('is-active', button.dataset.puxrLocaleButton === next);
     button.setAttribute('aria-pressed', String(button.dataset.puxrLocaleButton === next));

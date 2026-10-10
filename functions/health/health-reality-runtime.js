@@ -10,7 +10,9 @@ const text = value => String(value ?? '').normalize('NFKC').trim().replace(/\s+/
 const list = value => Array.isArray(value) ? value : [];
 
 const EMERGENCY_PATTERNS = [
-  /(?:sudden|severe).*chest pain.*(?:struggl|difficulty|can't|cannot).*breath/i,
+  // Same chest-pain + breathing-difficulty signal as the existing Chinese rule;
+  // an English severity adjective must not be a prerequisite for safety routing.
+  /chest pain.*(?:struggl|difficulty|can't|cannot).*breath/i,
   /(?:胸痛|胸口.*痛).*(?:呼吸困难|喘不过气|无法呼吸)/,
   /(?:face droop|arm weakness|speech difficulty)/i,
   /(?:脸歪|单侧无力|说话不清)/,

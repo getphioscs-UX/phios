@@ -1,4 +1,5 @@
 import {knowledgeNavigationIntent} from './navigation-intent.js';
+import {renderEntryResult} from '../../js/ask-entry-ui.js';
 import '../../js/client-visual-consumption.js';
 import { CX_NAVIGATION, installNavigationToggle } from './navigation.js';
 import { installLocaleControls } from './locale.js';
@@ -130,22 +131,19 @@ function installAskDrawerNavigation(scope = document) {
   form.dataset.cxAskNavigationInstalled = 'true';
   const textarea = form.querySelector('textarea[name="q"]');
   const openLink = scope.querySelector('#cx-shell-ask a[href="/knowledge/ask/"]');
-  const destination = value => {
-    const q = String(value || '').trim();
-    const params = new URLSearchParams();
-    if (q) params.set('q', q);
-    const suffix = params.toString();
-    return `/knowledge/ask/${suffix ? `?${suffix}` : ''}`;
-  };
+  const destination = () => '/knowledge/ask/';
   const syncOpenLink = () => { if (openLink) openLink.href = destination(textarea?.value); };
   textarea?.addEventListener('input', syncOpenLink);
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
     const q = String(textarea?.value || '').trim();
     if (!q) { textarea?.focus(); return; }
-    const dialog = form.closest('dialog');
-    if (dialog?.open) dialog.close('navigate');
-    location.assign(destination(q));
+    if(form.getAttribute('aria-busy')==='true')return;
+    let result=form.parentElement.querySelector('[data-ask-r1-result]');if(!result){result=document.createElement('section');result.dataset.askR1Result='';form.after(result);}
+    form.setAttribute('aria-busy','true');
+    try{const response=await fetch('/api/client-intent-route',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:q,locale:document.documentElement.lang,entrySurface:'HEADER'})});const payload=await response.json();if(!response.ok||!payload.ok)throw Error('ENTRY_UNAVAILABLE');renderEntryResult(result,payload.route);}
+    catch{result.textContent=document.documentElement.lang==='zh-Hans'?'暂时无法取得入口，请重试。':'Unable to retrieve an entrance. Please retry.';}
+    finally{form.setAttribute('aria-busy','false');}
   });
   syncOpenLink();
 }
@@ -157,7 +155,7 @@ function footerLink(href, en, zh) {
 function footerMarkup() {
   return `<footer class="cx-shell-footer" data-cx-shell-region="footer"><div class="cx-container cx-shell-footer__grid">
     <div class="cx-stack"><a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-006" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a><p class="cx-meta" ${t('Reality changes. Your understanding should be able to change with it.', '现实会继续变化，你的理解也应该能够随之更新。')}>Reality changes. Your understanding should be able to change with it.</p></div>
-    <div><p class="cx-eyebrow" ${t('Navigate', '浏览')}>Navigate</p><p class="cx-meta">${footerLink('/explore/', 'Explore', '探索')}<br>${footerLink('/reality/', 'My Reality', '我的现实')}<br>${footerLink('/perspectives/', 'Perspectives', '视角')}</p></div>
+    <div><p class="cx-eyebrow" ${t('Navigate', '浏览')}>Navigate</p><p class="cx-meta">${footerLink('/about/founder/', 'About PHI OS', '关于 PHI OS')}<br>${footerLink('/reality/', 'My Reality', '我的现实')}<br>${footerLink('/perspectives/', 'Perspectives', '视角')}</p></div>
     <div><p class="cx-eyebrow" ${t('Knowledge', '知识')}>Knowledge</p><p class="cx-meta">${footerLink('/knowledge/', 'Knowledge home', '知识主页')}<br>${footerLink('/search/', 'Search', '搜索')}<br>${footerLink('/knowledge/ask/', 'Ask PHI OS', '向 PHI OS 提问')}</p></div>
     <div><p class="cx-eyebrow" ${t('Continue', '继续')}>Continue</p><p class="cx-meta">${footerLink('/professional/', 'Professional', '专业')}<br>${footerLink('/account/', 'Account', '账户')}<br>${footerLink('/terms', 'Terms', '条款')} · ${footerLink('/privacy', 'Privacy', '隐私')}</p></div>
   </div></footer>`;

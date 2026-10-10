@@ -4,6 +4,7 @@ import {normalizeAskContext} from '../ask-context-contract.js';
 import {renderStructuredAnswer} from './structured-answer.js';
 import {arr,esc,locale,postJson,reRenderOnLocale,setStatus,tr} from './runtime-ui.js';
 import {handoffToMyReality} from '../handoff.js';
+import {installCapabilityOverview,renderEntryResult} from '../../../js/ask-entry-ui.js';
 
 let view=null, seedLoading=false, seedFailed=false;
 const empty=message=>`<div class="cx-p1-empty">${esc(message)}</div>`;
@@ -266,6 +267,9 @@ function boot(){
  installAskReportHandoff(document.querySelector('[data-cx-contextual-ask-form]'),{request:accountRequest,locale});
   const form=document.querySelector('[data-cx-contextual-ask-form]'),status=document.querySelector('[data-cx-contextual-ask-status]');
   if(!form)return;
+  const task=document.createElement('label');task.className='ask-r1-task';task.innerHTML='<span data-cx-en="What would you like to do?" data-cx-zh="你想怎样继续？">'+tr('What would you like to do?','你想怎样继续？')+'</span><select name="askTask"><option value="ENTRY" data-cx-en="Find an entrance" data-cx-zh="找到入口">'+tr('Find an entrance','找到入口')+'</option><option value="KNOWLEDGE_BASIC" data-cx-en="Understand knowledge" data-cx-zh="理解知识">'+tr('Understand knowledge','理解知识')+'</option><option value="REALITY_NAVIGATION" data-cx-en="Continue my reality" data-cx-zh="继续我的现实">'+tr('Continue my reality','继续我的现实')+'</option></select>';form.prepend(task);
+  const taskParams=new URLSearchParams(location.search);form.elements.askTask.value=taskParams.has('contextRef')||taskParams.get('task')==='KNOWLEDGE_BASIC'?'KNOWLEDGE_BASIC':'ENTRY';
+  const entryResult=document.createElement('section');entryResult.dataset.askR1Result='';entryResult.hidden=true;form.after(entryResult);installCapabilityOverview(entryResult.parentElement);
   const routing=document.createElement('label');routing.innerHTML='<span data-routing-label>'+tr('How would you like to continue? ','你想如何继续？ ')+'</span><select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
   form.dataset.askState=navigator.onLine===false?'OFFLINE':'IDLE';
   form.elements.question.addEventListener('input',()=>{if(form.getAttribute('aria-busy')!=='true')form.dataset.askState=navigator.onLine===false?'OFFLINE':form.elements.question.value.trim()?'COMPOSING':'IDLE';});
@@ -284,6 +288,12 @@ function boot(){
     event.preventDefault();
     const question=String(form.elements.question.value||'').trim();
     if(!question||form.getAttribute('aria-busy')==='true')return;
+    if(form.elements.askTask.value==='ENTRY'){
+      form.setAttribute('aria-busy','true');
+      try{const p=await postJson('/api/client-intent-route',{question,locale:locale(),entrySurface:'ASK'});renderEntryResult(entryResult,p.route);setStatus(status,'');}
+      catch{setStatus(status,tr('Unable to find an entrance right now. Retry or browse knowledge.','暂时无法取得入口，请重试或直接浏览知识。'),'error');}
+      finally{form.setAttribute('aria-busy','false');}return;
+    }
     if(navigator.onLine===false){form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');return;}
     if(seedLoading||seedFailed){setStatus(status,tr('The selected source is still unavailable. Reload to retry, or explicitly choose Knowledge only.','所选来源尚未载入。请刷新重试，或明确选择只使用知识提问。'),'error');return;}
     const selection=selectedRequest(form),guided=guidedContext(form);
@@ -292,7 +302,8 @@ function boot(){
     form.setAttribute('aria-busy','true');const submit=form.querySelector('[type=submit]');if(submit)submit.disabled=true;
     form.dataset.askState='RETRIEVING';
     try{
-      const payload=await postJson('/api/customer-contextual-ask',{question,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
+      entryResult.hidden=true;
+      const payload=await postJson('/api/customer-contextual-ask',{question,task:form.elements.askTask.value,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
       view=payload.view;
       form.dataset.askState=['SUFFICIENT','PARTIAL','INSUFFICIENT','AMBIGUOUS','CONTRADICTORY'].includes(view?.qualityOutcome)?view.qualityOutcome:(view?.state||'IDLE');
       render();

@@ -84,7 +84,7 @@ export async function onRequestPost(context) {
   try {
     const requestContract = createPtrcAskRequestContract(body);
     const governedBody = {...body, q: requestContract.question, locale: requestContract.locale, ptrcRequestContract: requestContract};
-    const result = await runAsk2Consumption({ body: governedBody, env: context.env || {}, requestUrl: context.request.url, fetcher: fetch });
+    const result = await runAsk2Consumption({ body: {...governedBody,publicRequest:true,internalAccessClass:null}, env: context.env || {}, requestUrl: context.request.url, fetcher: fetch,allowRuntimeExecution:context.data?.ask2RuntimeExecutionAuthorized===true });
     if (result.classification.mode === 'HEALTH') {
       const response = healthCompat(question, result.classification.health, requestContract.locale);
       return json({...response, requestContract});

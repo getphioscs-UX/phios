@@ -4,7 +4,8 @@ export const CX_NAVIGATION = Object.freeze({
     Object.freeze({ id: 'MY_REALITY', href: '/reality/', en: 'My Reality', zh: '我的现实' }),
     Object.freeze({ id: 'PERSPECTIVES', href: '/perspectives/', en: 'Personal', zh: '个人' }),
     Object.freeze({ id: 'KNOWLEDGE', href: '/knowledge/', en: 'Knowledge', zh: '知识' }),
-    Object.freeze({ id: 'PROFESSIONAL', href: '/professional/', en: 'Services', zh: '服务' })
+    Object.freeze({ id: 'PROFESSIONAL', href: '/professional/', en: 'Services', zh: '服务' }),
+    Object.freeze({ id: 'ABOUT', href: '/about/founder/', en: 'About PHI OS', zh: '关于 PHI OS' })
   ]),
   utilities: Object.freeze([
     Object.freeze({ id: 'SEARCH', mode: 'dialog', dialogId: 'cx-shell-search', en: 'Search', zh: '搜索' }),

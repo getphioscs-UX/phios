@@ -60,7 +60,7 @@ function deriveEphemeralCurrentContextSnapshot(body = {}) {
   });
 }
 
-export async function runAsk2Consumption({ body, env = {}, requestUrl, fetcher = fetch } = {}) {
+export async function runAsk2Consumption({ body, env = {}, requestUrl, fetcher = fetch,allowRuntimeExecution=false } = {}) {
   const question = String(body?.q || body?.question || '').trim();
   const requestContract = body?.ptrcRequestContract || null;
   const classification = classifyAsk2Consumption({ question, body, env });
@@ -78,6 +78,7 @@ export async function runAsk2Consumption({ body, env = {}, requestUrl, fetcher =
   if (plan.orchestrationState !== 'READY_FOR_RUNTIME_EXECUTION') {
     return Object.freeze({ classification, requestContract, plan, execution: null, composition: null, client: buildAsk2ClientProjection({ plan, locale: body?.locale }) });
   }
+  if(!allowRuntimeExecution)return Object.freeze({classification,requestContract,plan,execution:{executionState:'EXPLICIT_PRODUCT_INPUT_REQUIRED',providerInvoked:false,providerCalls:0,governedResults:[]},composition:null,client:buildAsk2ClientProjection({plan,locale:body?.locale})});
   const execution = await executeAsk2RuntimeRequests(plan, {
     runtimeInputs: body?.runtimeInputs || {},
     runtimeResults: body?.runtimeResults || {},

@@ -10,7 +10,7 @@ import {
 
 const NAVIGATION = Object.freeze([
   { id: 'world', href: '/world', key: 'worldRecovery.nav' },
-  { id: 'discover', href: '/explore/', key: 'publicShell.nav.explore' },
+  { id: 'about', href: '/about/founder/', key: 'publicShell.nav.about' },
   { id: 'reality', href: '/reality/', key: 'publicShell.nav.myReality' },
   { id: 'perspectives', href: '/perspectives/', key: 'publicShell.nav.perspectives' },
   { id: 'knowledge', href: '/knowledge/', key: 'publicShell.nav.knowledge' },
@@ -22,10 +22,10 @@ const FOOTER_LINKS = Object.freeze([
   { href: '/articles', key: 'publicShell.footer.articles' },
   { href: '/thesis', key: 'publicShell.footer.thesis' },
   { href: '/book-one', key: 'publicShell.footer.books' },
-  { href: '/explore', key: 'publicShell.footer.atlas' },
+  { href: '/world/', key: 'publicShell.footer.atlas' },
   { href: '/reality/', key: 'publicShell.nav.realityJourney' },
   { href: '/services', key: 'publicShell.nav.professional' },
-  { href: '/about', key: 'publicShell.nav.about' },
+  { href: '/about/founder/', key: 'publicShell.nav.about' },
   { href: '/privacy', key: 'publicShell.footer.privacy' },
   { href: '/terms', key: 'publicShell.footer.terms' },
   { href: '/contact', key: 'publicShell.footer.contact' }

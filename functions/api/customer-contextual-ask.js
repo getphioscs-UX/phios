@@ -1,4 +1,5 @@
 import {isStructuredAskRef,structuredSourceCapability} from '../_lib/structured-source-capability.js';
+import {routeClientIntent} from '../public/client-intent-router.js';
 import {externalRealityQuestionNeed} from '../external-reality-impact/external-reality-impact-runtime.js';
 import {projectExternalRealityContext} from '../customer-projection/external-reality-customer-projection.js';
 import {routeGuidedAsk} from '../contextual-ask/contextual-ask-runtime.js';
@@ -40,6 +41,8 @@ function serverResolvedSeedAvailability(context,locale,seed){
 }
 export async function onRequestGet(context={}){const url=new URL(context.request?.url||'https://phios.test/api/customer-contextual-ask');const locale=url.searchParams.get('locale')==='zh-Hans'?'zh-Hans':'en';const seed=normalizeAskContext(url.searchParams);const availability=buildAskContextAvailability({locale,requestedContextSeed:seed}).map(row=>({...row}));if(seed.contextType==='KNOWLEDGE'&&isStructuredAskRef(seed.contextRef)){const capability=await structuredSourceCapability(context.env||{},seed.contextRef,locale);const row=availability.find(x=>x.contextType==='KNOWLEDGE');row.availability=capability?.available?'AVAILABLE_FROM_SOURCE':'UNAVAILABLE';row.reason=capability?.reason||'SELECTED_SOURCE_UNAVAILABLE';}const authorized=serverResolvedSeedAvailability(context,locale,seed);if(authorized){const index=availability.findIndex(x=>x.contextType===authorized.contextType);if(index>=0)availability[index]=authorized;else availability.push(authorized)}return json({ok:true,canonicalRoute:'/knowledge/ask/',availability})}
 export async function onRequestPost(context){let body;try{body=await context.request.json()}catch{return json({ok:false,error:'INVALID_JSON'},400)};const question=clean(body?.question||body?.q);if(!question)return json({ok:false,error:'ASK_QUESTION_REQUIRED'},400);const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';let guidedRoute=null;
+ if(question.length>2000)return json({ok:false,error:'QUESTION_TOO_LONG'},400);
+ if(['ENTRY','PRODUCT_HELP'].includes(body.task))return json({ok:true,route:routeClientIntent({...body,question,locale}),execution:{generationMode:'DETERMINISTIC',providerInvoked:false,providerCalls:0}});
  for(const selected of requestedContexts(body)){if(selected.contextType==='KNOWLEDGE'&&isStructuredAskRef(selected.contextRef)){const capability=await structuredSourceCapability(context.env||{},selected.contextRef,locale);if(!capability?.available)return json({ok:false,error:'SELECTED_SOURCE_UNAVAILABLE',contextNotUsed:true},422);}}
 
  if(body?.selectedMethod||body?.methodGuidanceRequested===true){

@@ -1,0 +1,488 @@
+{
+  "version": "PHI-OS-ASK-ENTRY-R1-v1",
+  "generatedFrom": [
+    "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+    "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json"
+  ],
+  "capabilities": [
+    {
+      "capabilityId": "PERSONAL_METHODS",
+      "displayLabels": {
+        "en": "Personal methods",
+        "zh-Hans": "个人方法"
+      },
+      "canonicalRoute": "/perspectives/personal/",
+      "routeOwner": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "canonicalDomainRefs": [
+        "PERSONAL_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
+      "inputRequirements": [
+        "Birth date; time and place as required; consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Deterministic method reading"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "RELATIONSHIP",
+      "displayLabels": {
+        "en": "Relationships",
+        "zh-Hans": "关系"
+      },
+      "canonicalRoute": "/perspectives/relationship/",
+      "routeOwner": "functions/relationship/",
+      "canonicalDomainRefs": [
+        "RELATIONSHIP_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Purpose; independently sourced participant information; applicable consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Bounded relationship reading"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "FINANCIAL",
+      "displayLabels": {
+        "en": "Financial reality",
+        "zh-Hans": "财务现实"
+      },
+      "canonicalRoute": "/professional/financial/",
+      "routeOwner": "functions/professional/financial/",
+      "canonicalDomainRefs": [
+        "FINANCIAL_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Income, expenses and selected financial records; consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Financial organization and existing calculators"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "WORLD",
+      "displayLabels": {
+        "en": "World",
+        "zh-Hans": "世界"
+      },
+      "canonicalRoute": "/world/",
+      "routeOwner": "assets/js/pages/world.js",
+      "canonicalDomainRefs": [
+        "WORLD_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Public object or region; dates for current questions"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Historical Atlas and scoped current dossiers"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "HEALTH_CARE",
+      "displayLabels": {
+        "en": "Health and care",
+        "zh-Hans": "健康与照护"
+      },
+      "canonicalRoute": "/health-reality.html",
+      "routeOwner": "functions/health/health-reality-runtime.js",
+      "canonicalDomainRefs": [],
+      "mappingGap": "No product-domain owner with this exact name; customer group is not a new canonical domain.",
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Situation, timing and changes; no diagnosis"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Health organization and safety-first care routing"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "PROFILE",
+      "displayLabels": {
+        "en": "Profile",
+        "zh-Hans": "个人画像"
+      },
+      "canonicalRoute": "/perspectives/profile/",
+      "routeOwner": "functions/profile/profile-production-authority.js",
+      "canonicalDomainRefs": [
+        "PERSONAL_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Self-report or eligible external/task evidence; consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Personal Evidence; existing bilingual report entitlement"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "REFLECTION",
+      "displayLabels": {
+        "en": "Reflection",
+        "zh-Hans": "问题与反思"
+      },
+      "canonicalRoute": "/perspectives/tarot/",
+      "routeOwner": "functions/tarot/",
+      "canonicalDomainRefs": [
+        "PERSONAL_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Question; explicit Tarot draw or I Ching cast"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Separate deterministic symbolic reading"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "PHI_CONFIGURATION",
+      "displayLabels": {
+        "en": "PHI Configuration",
+        "zh-Hans": "PHI 构型"
+      },
+      "canonicalRoute": "/perspectives/phi-configuration/",
+      "routeOwner": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "canonicalDomainRefs": [
+        "PERSONAL_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/customer-experience-rebuild/registries/cx-r12r4-method-availability-registry-v1.json",
+      "inputRequirements": [
+        "Birth date, confirmed time/place; consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Independent PHI configuration model"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "KNOWLEDGE",
+      "displayLabels": {
+        "en": "Read knowledge",
+        "zh-Hans": "阅读知识"
+      },
+      "canonicalRoute": "/knowledge/",
+      "routeOwner": "functions/_lib/knowledge-answer-composition.js",
+      "canonicalDomainRefs": [
+        "KNOWLEDGE"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Question or public source reference"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Source-bound deterministic excerpts and reading paths"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "PRODUCT_HELP",
+      "displayLabels": {
+        "en": "Account and report help",
+        "zh-Hans": "账户与报告帮助"
+      },
+      "canonicalRoute": "/account/",
+      "routeOwner": "functions/account/",
+      "canonicalDomainRefs": [
+        "MY_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Sign in to retrieve private reports or orders"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Authorized account retrieval; no new report generation"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "PROFESSIONAL",
+      "displayLabels": {
+        "en": "Professional assistance",
+        "zh-Hans": "专业协助"
+      },
+      "canonicalRoute": "/professional/",
+      "routeOwner": "functions/professional/",
+      "canonicalDomainRefs": [
+        "PROFESSIONAL"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Selected service and explicit consent"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Existing service/application route"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    },
+    {
+      "capabilityId": "REALITY",
+      "displayLabels": {
+        "en": "Continue My Reality",
+        "zh-Hans": "继续我的现实"
+      },
+      "canonicalRoute": "/reality/",
+      "routeOwner": "functions/api/customer-contextual-ask.js",
+      "canonicalDomainRefs": [
+        "MY_REALITY"
+      ],
+      "mappingGap": null,
+      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
+      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
+      "inputRequirements": [
+        "Explicitly selected authorized records or current self-report"
+      ],
+      "sourceRequirements": [
+        "Existing registered owner; no client-provided authority"
+      ],
+      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
+      "entitlementRequirement": "EXISTING_SERVER_OWNER",
+      "executionClass": "ENTRY",
+      "outputKinds": [
+        "Existing Reality and entitled contextual follow-up"
+      ],
+      "capabilityVersion": "R1-v1",
+      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v1"
+    }
+  ],
+  "methods": [
+    {
+      "methodId": "ASTROLOGY",
+      "formValue": "astrology",
+      "inputMode": "BIRTH_BASED",
+      "experienceState": "AVAILABLE_IN_THIS_READING",
+      "label": {
+        "en": "Astrology",
+        "zh-Hans": "占星"
+      }
+    },
+    {
+      "methodId": "BAZI",
+      "formValue": "bazi",
+      "inputMode": "BIRTH_BASED",
+      "experienceState": "AVAILABLE_IN_THIS_READING",
+      "label": {
+        "en": "BaZi",
+        "zh-Hans": "八字"
+      }
+    },
+    {
+      "methodId": "NUMEROLOGY",
+      "formValue": "numeric",
+      "inputMode": "BIRTH_BASED",
+      "experienceState": "AVAILABLE_IN_THIS_READING",
+      "label": {
+        "en": "Numerology",
+        "zh-Hans": "数字学"
+      }
+    },
+    {
+      "methodId": "ZI_WEI_DOU_SHU",
+      "formValue": "ziwei",
+      "inputMode": "BIRTH_BASED",
+      "experienceState": "AVAILABLE_IN_THIS_READING",
+      "label": {
+        "en": "Zi Wei",
+        "zh-Hans": "紫微斗数"
+      }
+    },
+    {
+      "methodId": "HUMAN_DESIGN",
+      "inputMode": "BIRTH_BASED",
+      "experienceState": "NOT_CURRENTLY_AVAILABLE",
+      "label": {
+        "en": "Human Design",
+        "zh-Hans": "人类图"
+      }
+    },
+    {
+      "methodId": "I_CHING",
+      "inputMode": "QUESTION_CONTEXT",
+      "experienceState": "SEPARATE_EXPERIENCE",
+      "label": {
+        "en": "I Ching",
+        "zh-Hans": "易经"
+      }
+    },
+    {
+      "methodId": "TAROT",
+      "inputMode": "QUESTION_CONTEXT",
+      "experienceState": "SEPARATE_EXPERIENCE",
+      "label": {
+        "en": "Tarot",
+        "zh-Hans": "塔罗"
+      }
+    },
+    {
+      "methodId": "BZR",
+      "formValue": "bazi",
+      "label": {
+        "en": "BaZi",
+        "zh-Hans": "八字"
+      }
+    },
+    {
+      "methodId": "ZWR",
+      "formValue": "ziwei",
+      "label": {
+        "en": "Zi Wei",
+        "zh-Hans": "紫微斗数"
+      }
+    },
+    {
+      "methodId": "AST",
+      "formValue": "astrology",
+      "label": {
+        "en": "Astrology",
+        "zh-Hans": "占星"
+      }
+    },
+    {
+      "methodId": "NUM",
+      "formValue": "numeric",
+      "label": {
+        "en": "Numerology",
+        "zh-Hans": "数字学"
+      }
+    },
+    {
+      "methodId": "PROFILE",
+      "formValue": null,
+      "label": {
+        "en": "PHI OS Profile",
+        "zh-Hans": "PHI OS Profile"
+      }
+    },
+    {
+      "methodId": "ECR",
+      "formValue": "ecr",
+      "label": {
+        "en": "PHI Configuration",
+        "zh-Hans": "PHI 构型"
+      }
+    },
+    {
+      "methodId": "HD",
+      "formValue": null,
+      "label": {
+        "en": "Human Design",
+        "zh-Hans": "人类图"
+      }
+    },
+    {
+      "methodId": "CROSS",
+      "formValue": null,
+      "label": {
+        "en": "Cross Perspective",
+        "zh-Hans": "跨方法视角"
+      }
+    }
+  ]
+}
