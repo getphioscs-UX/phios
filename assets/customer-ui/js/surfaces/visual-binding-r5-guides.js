@@ -63,7 +63,7 @@ if(targets.length){
   const link=document.createElement('a'),image=document.createElement('img');link.href=asset.publicUrl;link.target='_blank';link.rel='noopener';image.dataset.cxEnAlt=english[sequence];image.dataset.cxZhAlt=asset.titleZh;image.alt=zh()?asset.titleZh:english[sequence];image.dataset.cxAsset=asset.assetId;image.width=asset.width;image.height=asset.height;image.loading='lazy';image.decoding='async';link.append(image);node.append(link);
   if(!inline){const caption=document.createElement('figcaption');localized(caption,english[sequence]+'. This is an illustration, not your data, access status or a calculated result. Select the image to view full size.',(sequence===48?'无变爻示例：本卦与之卦相同；你的实际卦局以计算结果为准':asset.titleZh)+'。这是说明图，不是你的资料、权限状态或计算结果。点击图片查看完整大小。');node.append(caption);}
   if(inline||sequence===33)host.prepend(node);else host.append(node);hydrateCustomerAssets(node);
- }}
+ }for(const host of document.querySelectorAll('[data-r5-financial-guide]')){const image=host.querySelector('img'),asset=registry.entries.find(x=>x.assetId===host.dataset.r5FinancialGuide);if(!image||!asset)continue;image.dataset.cxEnAlt||=image.alt;image.dataset.cxZhAlt=asset.titleZh;image.alt=zh()?image.dataset.cxZhAlt:image.dataset.cxEnAlt;} }
  bind();let queued=false;
  const schedule=()=>{if(queued)return;queued=true;queueMicrotask(()=>{queued=false;bind();});};
  // Observe existing method result owners only, never rescan the entire main tree.
@@ -72,5 +72,5 @@ if(targets.length){
  }
  for(const event of ['change','phios:reading-rendered','phios:profile-rendered','phios:account-rendered','phios:search-rendered','phios:ask-source-rendered','phios:estate-rendered','phios:draft-rendered'])document.addEventListener(event,schedule);
  document.addEventListener('DOMContentLoaded',schedule,{once:true});
- window.addEventListener('phios:localechange',()=>{document.querySelectorAll('[data-r5-guide] [data-cx-en]').forEach(node=>node.textContent=zh()?node.dataset.cxZh:node.dataset.cxEn);document.querySelectorAll('[data-r5-guide] img').forEach(node=>node.alt=zh()?node.dataset.cxZhAlt:node.dataset.cxEnAlt);schedule();});
+ window.addEventListener('phios:localechange',()=>{document.querySelectorAll('[data-r5-guide] [data-cx-en]').forEach(node=>node.textContent=zh()?node.dataset.cxZh:node.dataset.cxEn);document.querySelectorAll('[data-r5-guide] img,[data-r5-financial-guide] img').forEach(node=>node.alt=zh()?node.dataset.cxZhAlt:node.dataset.cxEnAlt);schedule();});
 }
