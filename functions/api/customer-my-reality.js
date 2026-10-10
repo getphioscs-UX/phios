@@ -36,7 +36,7 @@ export async function onRequestGet(context){
   const base=workspaceFromProjectedSources({reality,reading:sources.reading,navigation,journey:sources.journey,reports:sources.reports,locale});
   let workspace=await attachSavedSources(context,base);
   const externalReality=projectExternalRealityContext(context,{locale,realityRef:reality.overview.bundleId,realityVersion:context.data?.cxRealitySources?.bundle?.version});
-  workspace={...workspace,externalReality,currentReality:{...workspace.currentReality,evidence:[...workspace.currentReality.evidence,...externalReality.items]}};
+  workspace={...workspace,externalReality,graphProjection:assertRealityNavigationGraph(projectRealityNavigationGraph({reality,navigation,externalReality})),currentReality:{...workspace.currentReality,evidence:[...workspace.currentReality.evidence,...externalReality.items]}};
   if(new URL(context.request.url).searchParams.get('externalContextRef')==='WORLD_PUBLIC_CONTEXT')workspace={...workspace,publicExternalReference:{sourceRef:'WORLD_PUBLIC_CONTEXT',href:'/world/',sourceAuthority:'WORLD',state:'SELECTED_PUBLIC_REFERENCE_NOT_CURRENT_EVIDENCE',selectedAt:new Date().toISOString(),publishedAt:null,jurisdiction:null,persisted:false}};
   return json({ok:true,view:reality,workspace,governance:{persisted:false,readsPersistedSources:workspace.savedSources.state==='OWNER_SCOPED_SOURCE_PROJECTION',rawRuntimeExposed:false,workspaceConsumesCustomerProjections:true,missingHistoryReconstructed:false}});
 }

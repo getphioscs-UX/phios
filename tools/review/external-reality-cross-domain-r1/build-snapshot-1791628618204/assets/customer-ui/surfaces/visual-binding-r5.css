@@ -13,3 +13,14 @@
 .pv-hero-preserved>summary{font-size:1rem;cursor:pointer;padding:12px 0}
 [data-r6-perspectives-hero]>.r5-context-guide,.cx-ask-poster>.r5-context-guide{margin:0}
 @media print{.r5-context-guide{break-inside:avoid}.r5-context-guide img{max-height:75vh;object-fit:contain}}
+/* R6: 200% reflow on a narrow viewport must retain navigation and legal copy. */
+@media(max-width:240px){
+ .cx-shell-header__inner{flex-wrap:wrap;gap:8px;padding-block:8px}
+ .cx-brand{min-width:0;max-width:100%}
+ .cx-utilities{margin-left:0;max-width:100%}
+ body[data-page="digital-product-policy"]{min-width:0;overflow-x:visible}
+ body[data-page="digital-product-policy"] .knowledge-shell{width:calc(100% - 24px);min-width:0;overflow-wrap:anywhere}
+ body[data-page="digital-product-policy"] .knowledge-section{grid-template-columns:minmax(0,1fr)}
+ .r6-policy-visual{min-width:0;padding-inline:12px}
+ .r5-context-guide figcaption{overflow-wrap:anywhere}
+}
