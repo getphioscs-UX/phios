@@ -1,7 +1,7 @@
 {
   "authority": "Existing unique Master / R5 continuation; R6 evidence is not a new asset registry",
-  "head": "936ee33fc47696875bb634c938764e8df322a560",
-  "updatedAt": "2026-10-10T11:47:17.461Z",
+  "head": "6cd0066659796616807b054c3b72b636695bde62",
+  "updatedAt": "2026-10-10T12:01:13.180Z",
   "SOURCE": "PARTIAL",
   "LOCAL_BROWSER": "PARTIAL",
   "DEPLOYED": "NOT_RUN",
@@ -41,6 +41,20 @@
       "state": "PARTIAL"
     },
     {
+      "file": "VISUAL-BINDING-R6-NEW-SLOTS-BUILT-BROWSER-RESULTS.json",
+      "rows": 60,
+      "passed": 54,
+      "errors": [],
+      "state": "PARTIAL"
+    },
+    {
+      "file": "VISUAL-BINDING-R6-USABILITY-BROWSER-RESULTS.json",
+      "rows": 18,
+      "passed": 18,
+      "errors": [],
+      "state": "PASS_BOUNDED_R6_GUIDES"
+    },
+    {
       "file": "VISUAL-BINDING-R6-FINANCIAL-BROWSER-RESULTS.json",
       "rows": 60,
       "passed": 60,
@@ -49,26 +63,28 @@
     }
   ],
   "buildReceipt": {
-    "result": "FAIL",
+    "result": "PASS",
     "command": "node scripts/run-zero-cost-regression.mjs build:pages",
-    "currentHead": "036517853d98b3b94b2ce08aa67e85bdfe56c6c2",
-    "evidenceCommit": "036517853d98b3b94b2ce08aa67e85bdfe56c6c2",
-    "buildAt": "2026-10-10T11:45:51.134Z",
-    "startedAt": "2026-10-10T11:45:23.628Z",
-    "exitCode": 1,
-    "stale": false,
-    "inputBefore": "25108b1cecee9f7f1f36e4fa10dbcb0f2a9367e4c78fe7ef8da1a62081a2d970",
-    "inputAfter": "25108b1cecee9f7f1f36e4fa10dbcb0f2a9367e4c78fe7ef8da1a62081a2d970",
+    "currentHead": "936ee33fc47696875bb634c938764e8df322a560",
+    "evidenceCommit": "936ee33fc47696875bb634c938764e8df322a560",
+    "buildAt": "2026-10-10T11:52:00.490Z",
+    "startedAt": "2026-10-10T11:50:44.177Z",
+    "exitCode": 0,
+    "stale": true,
+    "inputBefore": "8b5cbb992bfaa6f4c6256e0e9c11204a8e9190b15366e70409d095df252a561d",
+    "inputAfter": "8b5cbb992bfaa6f4c6256e0e9c11204a8e9190b15366e70409d095df252a561d",
     "inputScope": "BUILD_INPUT_SOURCE_AND_PUBLIC_FILES_EXCLUDING_INTERNAL_REVIEW_AND_GENERATED_GUARD_RECEIPTS",
     "inputFiles": 17037,
     "buildReceipt": "content/production-closure/live-customer-commercial-convergence/OWNER-CORRECTION-PAGES-BUILD.log",
-    "logSHA256": "35e0bcad69c2dbafe9375cffd373b303e5ab032441d2df8e27de9c89c36f89b2",
-    "workerBytes": null,
-    "gzipBytes": null,
+    "logSHA256": "6607b502bdcdadb3859f86c92ca1553d5444cf7885266be5164bc593a664474d",
+    "workerBytes": 16698675,
+    "gzipBytes": 3109930,
     "providerCalls": 0,
     "deployed": false,
     "liveCustomer": false,
-    "fullReceipt": "content/production-closure/live-customer-commercial-convergence/MASTER-PAGES-CURRENT-RECEIPT.json"
+    "fullReceipt": "content/production-closure/live-customer-commercial-convergence/MASTER-PAGES-CURRENT-RECEIPT.json",
+    "currentHeadNow": "6cd0066659796616807b054c3b72b636695bde62",
+    "currentBuildState": "HISTORICAL_OR_FAILED_NOT_CURRENT_PASS"
   },
   "blockers": [
     {
@@ -111,5 +127,34 @@
   "R2Writes": 0,
   "R2Deletion": 0,
   "productionMigration": 0,
-  "automaticCommitPushDeploy": 0
+  "automaticCommitPushDeploy": 0,
+  "reviewState": "HUMAN_REVIEW_PARTIAL_NOT_FULL_SITE_COMPLETE",
+  "finalBuiltEvidence": {
+    "artifactIdentity": "VISUAL-BINDING-R6-PAGES-ARTIFACT-IDENTITY.json",
+    "financialWill": {
+      "receipt": "VISUAL-BINDING-R6-FINANCIAL-BROWSER-RESULTS.json",
+      "previewRoot": ".pages-output",
+      "passed": 60,
+      "total": 60
+    },
+    "newSlots": {
+      "receipt": "VISUAL-BINDING-R6-NEW-SLOTS-BUILT-BROWSER-RESULTS.json",
+      "passed": 54,
+      "total": 60,
+      "firstStop": "22 requires actual released report"
+    },
+    "usability": {
+      "receipt": "VISUAL-BINDING-R6-USABILITY-BROWSER-RESULTS.json",
+      "passed": 18,
+      "total": 18,
+      "scope": "3 pages; keyboard, full size, focus return, 200% equivalent reflow, print, decode failure text"
+    }
+  },
+  "remainingSourceWork": [
+    "Asset 32 exact R2 key still 404",
+    "Account 86 needs authoritative complete aggregate-empty owner signal",
+    "17 result/authenticated/cast-only source slots need controlled owner-backed browser inputs",
+    "Other 62 filenames: 23 source references and 8 existing formal Book owners still need current consumer proof; 31 need exact identity/owner mapping",
+    "Icons/atmosphere role-wide verification remains partial"
+  ]
 }
