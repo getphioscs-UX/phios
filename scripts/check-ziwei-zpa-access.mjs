@@ -10,13 +10,15 @@ const db={prepare(sql){return {values:[],bind(...v){this.values=v;return this;},
 // Isolated test rows exercise the real Commerce query. No payment is made,
 // webhook simulated as verified, or remote account/entitlement created.
 sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,language,format,currency,amount_minor,source_object_key,created_at,updated_at) VALUES(?,'1','Zi Wei local test','bilingual','REPORT','MYR',3900,'controlled','2026-10-01','2026-10-01')").run(ZIWEI_PRODUCT);
-sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,context_json,created_at,updated_at) VALUES('local-order',?,?,'local-idempotency','paid','FULFILLED',?,'2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
+sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,environment,context_json,created_at,updated_at) VALUES('local-order',?,?,'local-idempotency','paid','FULFILLED','QA',?,'2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
 sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_id,checkout_attempt_id,stripe_checkout_session_id,currency,amount_minor,purchase_state,created_at,updated_at) VALUES('local-purchase',?,?,'local-order','SYNTHETIC-NOT-A-STRIPE-SESSION','MYR',3900,'purchased','2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT);
 sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('local-entitlement','local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT);
 const objects=new Map(),env={PHIOS_ENVIRONMENT:'local',RUNTIME_DB:db,PRIVATE_REPORTS:{async put(k,v){objects.set(k,v);},async get(k){return objects.has(k)?{text:async()=>objects.get(k)}:null;}}};
 const context={env,data:{symbolicAccountIdentity:{userId:owner,providerId:'EXISTING_LOCAL_FIXTURE_MECHANISM',verified:true,authenticated:true}}};
 let loads=0;const loadSubject=async(user,id)=>{loads++;if(user!==owner||id!==personId)throw Error('PERSON_USE_DENIED');return structuredClone(record);};
 const negatives=[];async function reject(name,call){await assert.rejects(call);negatives.push({name,result:'DENIED'});}
+assert.equal((await requireZiweiEntitlement(context,'en')).purchase_id,'local-purchase','Local QA purchase must resolve before exercising access-policy negatives');
+await reject('QA purchase cannot authorize LIVE environment',()=>requireZiweiEntitlement({...context,env:{...env,STRIPE_ENVIRONMENT:'LIVE'}},'en'));
 await reject('anonymous',()=>requireZiweiEntitlement({...context,data:{}},'en'));
 await reject('client entitlement is not authority',()=>requireZiweiEntitlement({...context,data:{symbolicAccountIdentity:{...context.data.symbolicAccountIdentity,userId:'NO-PURCHASE'},entitled:true}},'en'));
 await reject('production stays closed',()=>requireZiweiEntitlement({...context,env:{...env,PHIOS_ENVIRONMENT:'production'}},'en'));

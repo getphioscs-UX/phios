@@ -10,7 +10,7 @@ import {generateAccountZiweiCandidate as generateProductionAccountZiweiCandidate
 import {releaseControlledZiweiReport,openControlledZiweiReport,listControlledZiweiReports} from '../functions/account/ziwei-controlled-report-material.js';
 import {generateAndReleaseAccountZiwei as generateProductionAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../functions/account/ziwei-account-delivery.js';
 import {digest} from '../functions/account/oidc-auth.js';
-import {generateZiweiProductionCandidate} from '../functions/report-delivery/ziwei-production-generation-v1.js';
+import {generateZiweiProductionCandidate,requireZiweiEntitlement} from '../functions/report-delivery/ziwei-production-generation-v1.js';
 // Trusted server injection keeps this storage test offline; the production default is resolved separately from the current canonical cutover state.
 const generateAccountZiweiCandidate=(context,selection)=>generateProductionAccountZiweiCandidate(context,selection,{generateCandidate:generateZiweiProductionCandidate});
 const generateAndReleaseAccountZiwei=(context,selection)=>generateProductionAndReleaseAccountZiwei(context,selection,{generateCandidate:generateAccountZiweiCandidate});
@@ -46,9 +46,10 @@ await denied('client birth replacement',()=>generateAccountZiweiCandidate(a,{...
 // SQL fixture is local policy evidence only, never Stripe/QA purchase proof.
 const product='COM-REPORT-ZIWEI-FULL';
 sqlite.prepare("INSERT INTO commerce_products(product_id,product_version,title,language,format,currency,amount_minor,source_object_key,created_at,updated_at) VALUES(?,'1','Local test','bilingual','REPORT','MYR',3900,'local','2026-10-01','2026-10-01')").run(product);
-sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,context_json,created_at,updated_at) VALUES('cpa-local-order',?,?,'cpa-local-idempotency','paid','FULFILLED',?,'2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
+sqlite.prepare("INSERT INTO commerce_checkout_attempts(checkout_attempt_id,customer_id,product_id,idempotency_key_hash,status,order_state,environment,context_json,created_at,updated_at) VALUES('cpa-local-order',?,?,'cpa-local-idempotency','paid','FULFILLED','QA',?,'2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product,JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
 sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_id,checkout_attempt_id,stripe_checkout_session_id,currency,amount_minor,purchase_state,created_at,updated_at) VALUES('cpa-local-purchase',?,?,'cpa-local-order','LOCAL-NOT-STRIPE','MYR',3900,'purchased','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
 sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('cpa-local-entitlement','cpa-local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run('LOCAL-CPA-A',product);
+assert.equal((await requireZiweiEntitlement(a,'en')).purchase_id,'cpa-local-purchase');
 const zwrCutoverPath='docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json';
 if(fs.existsSync(zwrCutoverPath)){
  const cutover=JSON.parse(fs.readFileSync(zwrCutoverPath,'utf8'));
