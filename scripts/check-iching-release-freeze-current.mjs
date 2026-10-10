@@ -34,7 +34,11 @@ for(const item of release.artifacts){
   if(item.path===ritual.artifact.path){assert.equal(item.sha256,ritual.artifact.historicalSha256);assert.equal(sha(item.path),ritual.artifact.currentSha256,'RITUAL_INTERACTION_DRIFT');continue;}
   assert.equal(sha(item.path),item.sha256,`ICHING-1.0.1 non-presentation artifact drift: ${item.path}`);
 }
-assert.equal(sha(presentation.path),presentation.currentSha256,'ICHING_CURRENT_PRESENTATION_DRIFT');
+const locale=read('content/production/symbolic-method/reconciliation/iching-release-locale-presentation-successor-v2.json');
+assert.equal(locale.status,'ENGINEERING_RECONCILIATION');assert.equal(locale.releaseId,current.releaseId);assert.equal(locale.path,presentation.path);
+assert.equal(locale.predecessor.path,'content/production/symbolic-method/reconciliation/iching-release-1.0.1-cx-presentation-successor-v1.json');assert.equal(locale.predecessor.sha256,sha(locale.predecessor.path));
+assert.equal(locale.historicalRecordsRewritten,false);assert.equal(locale.newProductionAcceptanceGranted,false);assert.equal(locale.previousSha256,presentation.currentSha256);assert.equal(sha(locale.previousPath),presentation.currentSha256);assert.equal(sha(locale.runtime.path),locale.runtime.sha256);
+assert.equal(sha(presentation.path),locale.sha256,'ICHING_CURRENT_PRESENTATION_DRIFT');
 const html=text(presentation.path);
 for(const marker of presentation.requiredMarkers) assert.ok(html.includes(marker),`ICHING_CURRENT_PRESENTATION_MARKER_MISSING:${marker}`);
 for(const marker of presentation.forbiddenMarkers) assert.ok(!html.includes(marker),`ICHING_CURRENT_PRESENTATION_FORBIDDEN_MARKER:${marker}`);

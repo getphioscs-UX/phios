@@ -1,5 +1,6 @@
 import {deriveEpistemicReading,isBookViiManuscriptRequest,excludeProtectedBookViiSources} from './knowledge-epistemic-reading.js';
 import {runKirR2ProductionProjection} from './kir-r2-production.js';
+import {publicAskExecutionPolicy} from '../public/ask-task-policy.js';
 import {structuredAnswerShape} from './structured-ask-policy.js';
 import { runKapGroundingPipeline } from './knowledge-answer-grounding.js';
 import { buildPtrcRetrievalStages } from './ptrc-knowledge-quality.js';
@@ -370,13 +371,16 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     now
   });
   const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true && !projection.answer?.epistemicReading && !grounding.groundingBundle?.sources?.some(s=>s.sourceType==='STRUCTURED_KNOWLEDGE_OBJECT'||s.bookId==='BOOK-7'||s.bookCode==='BOOK-7'||/^KN-B7-/.test(s.nodeCode||''));
-  const kir = relevanceEstablished ? await runKirR2ProductionProjection({
+  // Public knowledge retrieval never starts new synthesis, including DEEP requests.
+  // Paid report and continuity products keep their independent entitlement/provider owners.
+  const executionPolicy=publicAskExecutionPolicy();
+  const kir = executionPolicy.providerAllowed && relevanceEstablished ? await runKirR2ProductionProjection({
     question: input?.question || grounding.groundingBundle?.question?.text || '',
     locale: input?.locale || grounding.groundingBundle?.question?.locale || 'zh-Hans',
     env,
     upstreamGroundedAnswer: projection?.answer?.content?.directAnswer || null,
     upstreamGroundingBundle: grounding.groundingBundle
-  }) : {status:'KIR_R2_BLOCKED_BY_RELEVANCE_GATE',applied:false};
+  }) : {status:'KNOWLEDGE_BASIC_PROVIDER_PROHIBITED',applied:false};
   const kirApplied = kir?.applied === true;
   const kirAnswer = kirApplied ? kir.result.answer.text : null;
   const ptrcContract = grounding.intake?.requestContract || null;

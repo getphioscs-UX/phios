@@ -193,6 +193,9 @@ function resolveAssetIdentity(registry, node, roleId, assetId) {
           roleId,
           binding: roleAsset.binding
         });
+    if (['ILL-010','ILL-003','ICON-027'].includes(finalAsset.assetId)) {
+      return resolveCustomerAsset(finalAsset.assetId).then(current=>({...current,roleId,binding:roleAsset.binding}));
+    }
     return finalAsset;
   }
   if (assetId) {

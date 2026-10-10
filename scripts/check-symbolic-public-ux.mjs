@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {parseHTML} from 'linkedom';
 import { createSymbolicPublicViewModel } from '../functions/symbolic-method-public-ux/symbolic-public-view-model.js';
 
 const text = path => fs.readFileSync(path, 'utf8');
@@ -55,11 +56,15 @@ const tarot = text('perspectives/tarot/index.html');
 for (const marker of [
   'data-cx-surface="TAROT_READING"',
   'This is not a guaranteed prediction.',
-  'data-symbolic-execute disabled',
-  'data-symbolic-save disabled',
   'href="/knowledge/ask/"',
   'href="/reality/"'
 ]) assert.ok(tarot.includes(marker), marker);
+const {document:tarotDocument}=parseHTML(tarot);
+for(const selector of ['[data-symbolic-execute]','[data-symbolic-save]']){
+ const button=tarotDocument.querySelector(selector);
+ assert(button,`Missing Tarot control ${selector}`);
+ assert(button.hasAttribute('disabled'),`Tarot control must start disabled: ${selector}`);
+}
 
 for (const runtimePath of [
   'assets/customer-ui/js/surfaces/iching-full.js',

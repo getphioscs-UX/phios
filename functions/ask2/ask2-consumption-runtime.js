@@ -14,7 +14,8 @@ const HEALTH_K1_SIGNAL = /(rash|redness|itch|itching|hives|swelling|blister|ecze
 
 export function classifyAsk2Consumption({ question, body = {}, env = {} } = {}) {
   const q = String(question || '').trim();
-  let health = STRONG_FINANCIAL_SIGNAL.test(q) ? { route: 'CKA_STANDARD', healthIntent: false } : planAskHealthBridge({ question: q }, env);
+  const safetyFirst=routeHealthSafety({question:q});
+  let health = ['EMERGENCY','URGENT_EVALUATION'].includes(safetyFirst.careState) ? {route:'HRX_SAFETY_FIRST',healthIntent:true,safety:safetyFirst} : STRONG_FINANCIAL_SIGNAL.test(q) ? { route: 'CKA_STANDARD', healthIntent: false } : planAskHealthBridge({ question: q }, env);
   if (!health.healthIntent && HEALTH_K1_SIGNAL.test(q)) {
     const safety = routeHealthSafety({ question: q });
     health = {

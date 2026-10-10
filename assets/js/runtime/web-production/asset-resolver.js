@@ -173,6 +173,14 @@ export async function resolvePublicAssetGroupMemberForWeb(assetCode, memberObjec
 }
 
 export async function resolvePublicAssetForWeb(assetCode, options = {}) {
+  if (!options.registry) {
+    const approved = await loadApprovedVisualInventory(options);
+    const entry = approved.assets.find(a=>a.canonicalFilename===assetCode || a.aliases.includes(assetCode));
+    if (entry && ['OWNER_WITHDRAWN_FROM_PAGE_CONSUMPTION','REMOTE_MISSING_NOT_RENDERABLE'].includes(entry.status)) {
+      throw new PublicAssetResolutionError('APPROVED_VISUAL_WITHHELD', assetCode);
+    }
+    if (approved.identityOverrides?.[assetCode]) return resolveApprovedVisual(assetCode, options);
+  }
   // Explicit predecessor registry calls retain historical identity. Current web
   // calls use the same customer asset successor, without route-based guessing.
   if(!options.registry&&['HERO-021','HERO-022','HERO-023'].includes(assetCode)){
@@ -195,11 +203,14 @@ export async function resolvePublicAssetForWeb(assetCode, options = {}) {
 
 let approvedInventoryPromise;
 let approvedDeliveryContextPromise;
-export async function resolveApprovedVisual(identity, options = {}) {
-  approvedInventoryPromise ||= fetch(options.inventoryUrl || '/data/visual/approved-r2-visual-assets.json')
+async function loadApprovedVisualInventory(options = {}) {
+  approvedInventoryPromise ||= (options.fetchImpl || fetch)(options.inventoryUrl || '/data/visual/approved-r2-visual-assets.json')
     .then(response => { if (!response.ok) throw new PublicAssetResolutionError('APPROVED_INVENTORY_UNAVAILABLE'); return response.json(); })
     .catch(error => { approvedInventoryPromise = null; throw error; });
-  const inventory = await approvedInventoryPromise;
+  return approvedInventoryPromise;
+}
+export async function resolveApprovedVisual(identity, options = {}) {
+  const inventory = await loadApprovedVisualInventory(options);
   const canonicalIdentity = inventory.identityOverrides?.[identity] || identity;
   const candidates = inventory.assets.filter(a => a.canonicalFilename === canonicalIdentity || a.r2Path === canonicalIdentity || a.aliases.includes(canonicalIdentity));
   // Customer surface identities supersede historic book HERO-021/022/023 collisions.
