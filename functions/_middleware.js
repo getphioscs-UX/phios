@@ -1,0 +1,3 @@
+// Presentation-only route consolidation. Queries survive the one-hop redirect.
+const consolidated=Object.freeze({'/explore/why-phios':'/explore/#why','/explore/how-it-works':'/explore/#how','/explore/start':'/#start','/professional/services':'/professional/#services'});
+export async function onRequest(context){const incoming=new URL(context.request.url),target=consolidated[incoming.pathname.replace(/\/$/,'')];if(!target||!['GET','HEAD'].includes(context.request.method))return context.next();const url=new URL(target,incoming.origin);url.search=incoming.search;return new Response(null,{status:308,headers:{Location:url.href,'Cache-Control':'public, max-age=3600'}});}
