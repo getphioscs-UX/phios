@@ -59,12 +59,22 @@ async function fetchConsumerMap(fetchImpl = fetch) {
 }
 
 async function createAssetContext(fetchImpl = fetch) {
-  const registry = await fetchPublicAssetRegistry({ fetchImpl });
+  let registry = await fetchPublicAssetRegistry({ fetchImpl });
   let publicBaseUrl = normalizePublicAssetBaseUrl(registry.public_base_url);
   if (!publicBaseUrl) {
     const config = await fetchPublicAssetConfig({ fetchImpl });
     publicBaseUrl = normalizePublicAssetBaseUrl(config.publicAssetBaseUrl);
   }
+  // Current Unknown icon keeps its approved identity but uses the verified
+  // successor directory. The historical registry itself remains unchanged.
+  try {
+    const response = await fetchImpl('/data/visual/approved-r2-visual-assets.json');
+    if (!response.ok) throw Error('CLIENT_APPROVED_INVENTORY_UNAVAILABLE');
+    const inventory = await response.json();
+    const identity = inventory.identityOverrides?.['ICON-027'];
+    const icon = inventory.assets.find(a=>a.aliases.includes(identity));
+    if (icon?.remoteProof?.httpStatus === 200) registry={...registry,assets:registry.assets.map(a=>a.asset_code==='ICON-027'?{...a,object_key:icon.r2Path,width:icon.width,height:icon.height}:a)};
+  } catch(error) { globalThis.document?.documentElement?.setAttribute('data-client-visual-inventory-state','UNAVAILABLE'); }
   return { registry, publicBaseUrl };
 }
 
@@ -295,7 +305,7 @@ function dispatchReady(detail) {
 export async function initializeClientVisualConsumption({ fetchImpl = fetch, pathname = window.location.pathname } = {}) {
   // Composed heroes and eight-volume readers own their media. Delegation is
   // based on the renderer's static slot, so locale rerenders cannot race it.
-  if (document.querySelector('main [data-vr2-role="HERO"],main .wpr-book-hero')) {
+  if (document.body?.dataset.page === 'book-volume' || document.querySelector('main [data-vr2-role="HERO"],main .wpr-book-hero,main [data-wpr-book-volume]')) {
     return { state: 'DELEGATED_TO_PAGE_HERO', record: null };
   }
   // The current article renderer owns its hero, including asynchronous locale rerenders.

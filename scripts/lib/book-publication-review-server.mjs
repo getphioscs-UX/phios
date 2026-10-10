@@ -5,6 +5,7 @@ import {onRequestGet as askGet,onRequestPost as askPost} from '../../functions/a
 import {onRequestGet as assetConfig} from '../../functions/api/public-asset-config.js';
 import {onRequestGet as thesisDownload} from '../../functions/api/thesis-download.js';
 import {onRequestGet as realityGet,onRequestPost as realityPost} from '../../functions/api/customer-my-reality.js';
+import {onRequestGet as acceptedBook6Get} from '../../functions/api/book6-runtime-readout.js';
 const root=process.cwd();
 function resolveFile(pathname){
  let file=path.resolve(root,'.'+decodeURIComponent(pathname));
@@ -20,7 +21,7 @@ export function createPublicationReviewServer(){
   try {
    const url=new URL(req.url,'http://127.0.0.1');
    if(url.pathname.startsWith('/api/')){
-    const handler=url.pathname==='/api/customer-contextual-ask'?(req.method==='POST'?askPost:askGet):url.pathname==='/api/customer-my-reality'?(req.method==='POST'?realityPost:realityGet):url.pathname==='/api/public-asset-config'?assetConfig:url.pathname==='/api/thesis-download'&&req.method==='GET'?thesisDownload:null;
+    const handler=url.pathname==='/api/book6-runtime-readout'&&req.method==='GET'?acceptedBook6Get:url.pathname==='/api/customer-contextual-ask'?(req.method==='POST'?askPost:askGet):url.pathname==='/api/customer-my-reality'?(req.method==='POST'?realityPost:realityGet):url.pathname==='/api/public-asset-config'?assetConfig:url.pathname==='/api/thesis-download'&&req.method==='GET'?thesisDownload:null;
     if(!handler){res.writeHead(503,{'content-type':'application/json'}).end(JSON.stringify({ok:false,error:'NOT_AVAILABLE_IN_LOCAL_REVIEW'}));return;}
     let body='';for await(const chunk of req)body+=chunk;
     const request=new Request(url,{method:req.method,...(req.method==='POST'?{body,headers:{'content-type':'application/json'}}:{})});

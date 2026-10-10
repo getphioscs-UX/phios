@@ -205,6 +205,9 @@ export async function resolveApprovedVisual(identity, options = {}) {
   // Customer surface identities supersede historic book HERO-021/022/023 collisions.
   const entry = candidates.find(a => a.sources.includes('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json')) || candidates[0];
   if (!entry) throw new PublicAssetResolutionError('APPROVED_VISUAL_NOT_FOUND', identity);
+  if (['OWNER_WITHDRAWN_FROM_PAGE_CONSUMPTION','REMOTE_MISSING_NOT_RENDERABLE'].includes(entry.status)) {
+    throw new PublicAssetResolutionError('APPROVED_VISUAL_WITHHELD', identity);
+  }
   approvedDeliveryContextPromise ||= fetchPublicAssetRegistry(options).then(async registry=>{
     let base=registry.public_base_url;
     if(!base){const response=await fetch('/content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json');if(response.ok)base=(await response.json()).publicR2Base;}

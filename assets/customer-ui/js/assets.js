@@ -45,6 +45,11 @@ export function resolveCustomerAssetRoleFromRegistry(registry, roleId) {
 }
 
 export async function resolveCustomerAsset(assetId) {
+  if (assetId === 'ILL-010') {
+    const {resolveApprovedVisual}=await import('../../js/runtime/web-production/asset-resolver.js');
+    const a=await resolveApprovedVisual('PIS-040');
+    return {...a,assetId,type:'ILLUSTRATION',available:true,publicUrl:a.src,delivery:{loading:'lazy',decoding:'async',fetchPriority:'auto'},sourceRegistry:'data/visual/approved-r2-visual-assets.json'};
+  }
   if (assetId === 'ILL-003') {
     const {resolveApprovedVisual}=await import('../../js/runtime/web-production/asset-resolver.js');
     const a=await resolveApprovedVisual('PIS-041');

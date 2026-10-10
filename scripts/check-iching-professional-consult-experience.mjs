@@ -21,7 +21,11 @@ assert.ok(shell.includes("import('./surfaces/iching-run-cutover.js')"));
 assert.ok(shell.includes("import('./surfaces/iching-casting.js')"),'frozen casting checker compatibility must remain');
 assert.ok(entry.includes('/perspectives/iching/consult/'));
 assert.equal(entryPage.includes('CURRENT AVAILABILITY'),false);assert.equal(entryPage.includes('Full Production'),false);assert.ok(entryPage.includes('开始易经阅读'));
-assert.ok(cutover.includes("location.replace('/perspectives/iching/consult/')"));
+// Recovery R1 acceptance fix: verify the observable redirect, including locale,
+// public question context and hash, instead of requiring a lossy source literal.
+const {runInNewContext}=await import('node:vm');let redirected;
+runInNewContext(cutover,{URL,document:{body:{dataset:{cxSurface:'ICHING_FULL_PRODUCTION'}},documentElement:{style:{}}},location:{href:'https://getphios.com/perspectives/iching/run/?locale=zh-Hans&q=Review#saved',replace:value=>redirected=value}});
+assert.equal(redirected,'/perspectives/iching/consult/?locale=zh-Hans&q=Review#saved');
 for(const phrase of ['Full Production','server authority','exact deployed commit','准确 commit','服务器权限'])assert.equal(page.includes(phrase),false,`customer consult page leaks operational phrase: ${phrase}`);
 const images=['PHIOS-ICHING-CASTING-METHODS-OVERVIEW-v1-en.webp','PHIOS-ICHING-CASTING-METHODS-OVERVIEW-v1-zh-Hans.webp','PHIOS-ICHING-CASTING-THREE-COIN-GUIDE-v1-en.webp','PHIOS-ICHING-CASTING-THREE-COIN-GUIDE-v1-zh-Hans.webp'];
 for(const name of images){const p=`assets/customer-ui/media/iching/casting/${name}`;const b=fs.readFileSync(p);assert.equal(b.subarray(0,4).toString('ascii'),'RIFF');assert.equal(b.subarray(8,12).toString('ascii'),'WEBP');assert.ok(client.includes(name));}

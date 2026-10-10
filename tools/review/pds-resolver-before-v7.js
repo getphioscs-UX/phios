@@ -1,0 +1,222 @@
+import {resolveCustomerAsset} from '../../../customer-ui/js/assets.js';
+const DEFAULT_REGISTRY_URL = '/content/registry/public-assets.json';
+const DEFAULT_CONFIG_URL = '/api/public-asset-config';
+const VERIFIED_PATTERN = /^verified(?:$|[-_])/i;
+
+export class PublicAssetResolutionError extends Error {
+  constructor(code, message = code, details = {}) {
+    super(message);
+    this.name = 'PublicAssetResolutionError';
+    this.code = code;
+    this.details = details;
+  }
+}
+
+export function normalizePublicAssetBaseUrl(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return null;
+  let url;
+  try { url = new URL(raw); } catch { throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_INVALID'); }
+  if (url.protocol !== 'https:') throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_INVALID');
+  if (url.username || url.password || url.search || url.hash) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_INVALID');
+  return url.toString().replace(/\/$/, '');
+}
+
+export function normalizePublicAssetObjectKey(value) {
+  const key = String(value ?? '').trim();
+  if (!key || key.startsWith('/') || key.includes('\\') || key.includes('?') || key.includes('#')) {
+    throw new PublicAssetResolutionError('PUBLIC_ASSET_OBJECT_KEY_INVALID');
+  }
+  const parts = key.split('/');
+  if (parts.some(part => part === '.' || part === '..')) throw new PublicAssetResolutionError('PUBLIC_ASSET_OBJECT_KEY_INVALID');
+  return key;
+}
+
+function encodedObjectKey(key) {
+  const trailingSlash = key.endsWith('/');
+  const encoded = key.split('/').filter((part, index, all) => !(trailingSlash && index === all.length - 1)).map(encodeURIComponent).join('/');
+  return trailingSlash ? `${encoded}/` : encoded;
+}
+
+export function isAssetVerificationRenderable(verification) {
+  return VERIFIED_PATTERN.test(String(verification ?? ''));
+}
+
+export function findPublicAsset(registry, assetCode) {
+  if (!registry || registry.bucket !== 'phios-public-assets' || !Array.isArray(registry.assets)) {
+    throw new PublicAssetResolutionError('PUBLIC_ASSET_REGISTRY_INVALID');
+  }
+  const code = String(assetCode ?? '').trim();
+  const asset = registry.assets.find(item => item.asset_code === code);
+  if (!asset) throw new PublicAssetResolutionError('PUBLIC_ASSET_NOT_FOUND', 'Public asset is not registered.', { assetCode: code });
+  return asset;
+}
+
+function chooseVariant(asset, variantCode = 'ORIGINAL') {
+  const code = String(variantCode || 'ORIGINAL').toUpperCase();
+  if (code === 'ORIGINAL') return { code: 'ORIGINAL', object_key: asset.object_key, format: asset.format, verification: asset.verification, width: asset.width ?? null, height: asset.height ?? null };
+  const variants = Array.isArray(asset.variants) ? asset.variants : [];
+  const variant = variants.find(item => String(item.code ?? '').toUpperCase() === code);
+  if (!variant) throw new PublicAssetResolutionError('PUBLIC_ASSET_VARIANT_NOT_REGISTERED', 'Requested asset variant is not registered.', { assetCode: asset.asset_code, variant: code });
+  return { ...variant, code };
+}
+
+function buildSrcset(baseUrl, asset) {
+  const variants = Array.isArray(asset.variants) ? asset.variants : [];
+  return variants
+    .filter(item => item && item.object_key && Number.isFinite(Number(item.width)) && isAssetVerificationRenderable(item.verification ?? asset.verification))
+    .map(item => `${baseUrl}/${encodedObjectKey(normalizePublicAssetObjectKey(item.object_key))} ${Number(item.width)}w`)
+    .join(', ') || null;
+}
+
+export function resolvePublicAsset({ registry, assetCode, publicBaseUrl, variant = 'ORIGINAL', surface = null, locale = null, density = 1 } = {}) {
+  const baseUrl = normalizePublicAssetBaseUrl(publicBaseUrl);
+  if (!baseUrl) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_UNAVAILABLE');
+  const asset = findPublicAsset(registry, assetCode);
+  const selected = chooseVariant(asset, variant);
+  const objectKey = normalizePublicAssetObjectKey(selected.object_key);
+  const isGroup = objectKey.endsWith('/');
+  if (isGroup) throw new PublicAssetResolutionError('PUBLIC_ASSET_GROUP_REQUIRES_OBJECT_MEMBER', 'Asset group cannot be rendered as a concrete object.', { assetCode });
+  const verification = selected.verification ?? asset.verification;
+  const renderable = isAssetVerificationRenderable(verification);
+  const url = `${baseUrl}/${encodedObjectKey(objectKey)}`;
+  return {
+    assetCode: asset.asset_code,
+    category: asset.category,
+    family: asset.family ?? null,
+    objectKey,
+    contentType: asset.content_type ?? null,
+    canonicalFormat: asset.format ?? null,
+    variant: selected.code,
+    surface,
+    locale,
+    density,
+    src: url,
+    srcset: buildSrcset(baseUrl, asset),
+    sizes: selected.sizes ?? null,
+    width: selected.width ?? null,
+    height: selected.height ?? null,
+    aspectRatio: selected.width && selected.height ? Number(selected.width) / Number(selected.height) : null,
+    loading: selected.loading ?? 'lazy',
+    fetchPriority: selected.fetchPriority ?? 'auto',
+    renderable,
+    deliveryState: renderable ? 'VERIFIED_RENDERABLE' : 'UPSTREAM_VERIFICATION_REQUIRED',
+    verification,
+    sourceReference: 'content/registry/public-assets.json'
+  };
+}
+
+export function resolvePublicAssetGroupMember({ registry, assetCode, publicBaseUrl, memberObjectKey, surface = null, locale = null } = {}) {
+  const baseUrl = normalizePublicAssetBaseUrl(publicBaseUrl);
+  if (!baseUrl) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_UNAVAILABLE');
+  const asset = findPublicAsset(registry, assetCode);
+  const groupKey = normalizePublicAssetObjectKey(asset.object_key);
+  if (!groupKey.endsWith('/')) {
+    throw new PublicAssetResolutionError('PUBLIC_ASSET_NOT_GROUP', 'Registered asset is not a collection.', { assetCode });
+  }
+  const requested = normalizePublicAssetObjectKey(memberObjectKey);
+  const objectKey = requested.startsWith(groupKey)
+    ? requested
+    : `${groupKey}${requested.replace(/^\/+/, '')}`;
+  if (!objectKey.startsWith(groupKey) || objectKey === groupKey || objectKey.endsWith('/')) {
+    throw new PublicAssetResolutionError('PUBLIC_ASSET_GROUP_MEMBER_INVALID', 'Requested member is outside the registered collection.', { assetCode, memberObjectKey });
+  }
+  return {
+    assetCode: asset.asset_code,
+    category: asset.category,
+    objectKey,
+    canonicalFormat: asset.format ?? null,
+    contentType: asset.content_type ?? (asset.format === 'webp' ? 'image/webp' : null),
+    surface,
+    locale,
+    src: `${baseUrl}/${encodedObjectKey(objectKey)}`,
+    renderable: false,
+    runtimeProbeAllowed: true,
+    deliveryState: 'REGISTERED_GROUP_MEMBER_RUNTIME_PROBE_REQUIRED',
+    verification: asset.verification,
+    sourceReference: 'content/registry/public-assets.json'
+  };
+}
+
+export async function fetchPublicAssetRegistry({ fetchImpl = fetch, registryUrl = DEFAULT_REGISTRY_URL } = {}) {
+  const response = await fetchImpl(registryUrl, { headers: { Accept: 'application/json' } });
+  if (!response.ok) throw new PublicAssetResolutionError('PUBLIC_ASSET_REGISTRY_INVALID');
+  return response.json();
+}
+
+export async function fetchPublicAssetConfig({ fetchImpl = fetch, configUrl = DEFAULT_CONFIG_URL } = {}) {
+  const response = await fetchImpl(configUrl, { headers: { Accept: 'application/json' } });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.success || !payload.publicAssetBaseUrl) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_UNAVAILABLE');
+  return payload;
+}
+
+export async function resolvePublicAssetGroupMemberForWeb(assetCode, memberObjectKey, options = {}) {
+  const registry = options.registry ?? await fetchPublicAssetRegistry(options);
+  const registryBase = normalizePublicAssetBaseUrl(registry.public_base_url);
+  let configBase = null;
+  if (!registryBase) {
+    const config = options.publicConfig ?? await fetchPublicAssetConfig(options);
+    configBase = normalizePublicAssetBaseUrl(config.publicAssetBaseUrl);
+  } else if (options.publicConfig?.publicAssetBaseUrl) {
+    configBase = normalizePublicAssetBaseUrl(options.publicConfig.publicAssetBaseUrl);
+    if (configBase !== registryBase) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_CONFLICT');
+  }
+  return resolvePublicAssetGroupMember({
+    registry,
+    assetCode,
+    memberObjectKey,
+    publicBaseUrl: registryBase ?? configBase,
+    surface: options.surface,
+    locale: options.locale
+  });
+}
+
+export async function resolvePublicAssetForWeb(assetCode, options = {}) {
+  // Explicit predecessor registry calls retain historical identity. Current web
+  // calls use the same customer asset successor, without route-based guessing.
+  if(!options.registry&&['HERO-021','HERO-022','HERO-023'].includes(assetCode)){
+    const a=await resolveCustomerAsset(assetCode);
+    if(options.variant)throw new PublicAssetResolutionError('PUBLIC_ASSET_VARIANT_UNAVAILABLE');
+    return {assetCode,src:a.publicUrl,width:a.width,height:a.height,renderable:true,deliveryState:'GET_DECODE_VERIFIED_VISUAL_CANDIDATE',sourceReference:a.sourceRegistry};
+  }
+  const registry = options.registry ?? await fetchPublicAssetRegistry(options);
+  const registryBase = normalizePublicAssetBaseUrl(registry.public_base_url);
+  let configBase = null;
+  if (!registryBase) {
+    const config = options.publicConfig ?? await fetchPublicAssetConfig(options);
+    configBase = normalizePublicAssetBaseUrl(config.publicAssetBaseUrl);
+  } else if (options.publicConfig?.publicAssetBaseUrl) {
+    configBase = normalizePublicAssetBaseUrl(options.publicConfig.publicAssetBaseUrl);
+    if (configBase !== registryBase) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_CONFLICT');
+  }
+  return resolvePublicAsset({ registry, assetCode, publicBaseUrl: registryBase ?? configBase, variant: options.variant, surface: options.surface, locale: options.locale, density: options.density });
+}
+
+let approvedInventoryPromise;
+let approvedDeliveryContextPromise;
+export async function resolveApprovedVisual(identity, options = {}) {
+  approvedInventoryPromise ||= fetch(options.inventoryUrl || '/data/visual/approved-r2-visual-assets.json')
+    .then(response => { if (!response.ok) throw new PublicAssetResolutionError('APPROVED_INVENTORY_UNAVAILABLE'); return response.json(); })
+    .catch(error => { approvedInventoryPromise = null; throw error; });
+  const inventory = await approvedInventoryPromise;
+  const canonicalIdentity = inventory.identityOverrides?.[identity] || identity;
+  const candidates = inventory.assets.filter(a => a.canonicalFilename === canonicalIdentity || a.r2Path === canonicalIdentity || a.aliases.includes(canonicalIdentity));
+  // Customer surface identities supersede historic book HERO-021/022/023 collisions.
+  const entry = candidates.find(a => a.sources.includes('content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json')) || candidates[0];
+  if (!entry) throw new PublicAssetResolutionError('APPROVED_VISUAL_NOT_FOUND', identity);
+  approvedDeliveryContextPromise ||= fetchPublicAssetRegistry(options).then(async registry=>{
+    let base=registry.public_base_url;
+    if(!base){const response=await fetch('/content/customer-experience-rebuild/authority/customer-visual-asset-registry-v4.json');if(response.ok)base=(await response.json()).publicR2Base;}
+    base ||= (await fetchPublicAssetConfig(options)).publicAssetBaseUrl;
+    return {registry,base:normalizePublicAssetBaseUrl(base)};
+  }).catch(error=>{approvedDeliveryContextPromise=null;throw error;});
+  const delivery=await approvedDeliveryContextPromise;
+  const base = options.publicConfig?.publicAssetBaseUrl || delivery.base;
+  const resolved = resolvePublicAsset({registry:{bucket:'phios-public-assets',assets:[{
+    asset_code:identity, object_key:entry.r2Path, category:entry.role, family:entry.family,
+    format:entry.canonicalFilename.split('.').at(-1), verification:'verified-owner-inventory-identity',
+    width:entry.width || null,height:entry.height || null
+  }]},assetCode:identity,publicBaseUrl:base,surface:options.surface,locale:options.locale});
+  return {...resolved,semanticRole:entry.role,alt:{en:entry.semanticName,zh:entry.altZh || entry.semanticName},fallbackPolicy:'RETRY_EXACT_OBJECT_WITH_STATE_ILLUSTRATION',objectExistenceVerified:!!entry.remoteProof,sourceReference:'data/visual/approved-r2-visual-assets.json'};
+}

@@ -10,7 +10,7 @@ const MAP={
 };
 
 async function resolveIllustration(code){
-  try{return await resolveApprovedVisual(code,{surface:document.body.dataset.brclSurface});}catch{}
+  try{return await resolveApprovedVisual(code,{surface:document.body.dataset.brclSurface});}catch(error){if(error.code==='APPROVED_VISUAL_WITHHELD')return null;}
   try{
     const [vr,config]=await Promise.all([fetch(VISUAL_REGISTRY,{headers:{Accept:'application/json'}}).then(r=>r.ok?r.json():Promise.reject()),fetchPublicAssetConfig()]);
     const a=(vr.assets||[]).find(x=>x.sequence===code||x.assetCode===code);

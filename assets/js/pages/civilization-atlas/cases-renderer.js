@@ -1,6 +1,7 @@
+import {worldPublicCopy} from './world-public-copy.js';
 import {resolveAtlasVisualById} from './atlas-static-visual.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
-const loc=(v,lang)=>v?.[lang]||v?.en||v?.['zh-Hans']||'';
+const loc=(v,lang)=>worldPublicCopy(v?.[lang]||v?.en||v?.['zh-Hans']||'',lang);
 const label=(obj,lang)=>loc(obj?.label,lang)||'—';
 const formatYear=(y,lang)=>y<0?(lang==='zh-Hans'?`公元前${Math.abs(y)}年`:`${Math.abs(y)} BCE`):(lang==='zh-Hans'?`公元${y}年`:`${y} CE`);
 const formatRange=(t,lang)=>t?`${formatYear(t.startYear,lang)} – ${formatYear(t.endYear,lang)}`:'—';

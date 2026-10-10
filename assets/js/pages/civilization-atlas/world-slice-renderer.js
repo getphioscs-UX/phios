@@ -1,3 +1,4 @@
+import {worldPublicCopy} from './world-public-copy.js';
 import {primaryVisualMarkup,monitorVisual} from './visual-runtime.js';
 import {resolveAtlasVisualById} from './atlas-static-visual.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;'),loc=(v,l)=>v?.[l]||v?.en||'',year=(v,l)=>v<0?(l==='zh-Hans'?`公元前${Math.abs(v)}年`:`${Math.abs(v)} BCE`):String(v);

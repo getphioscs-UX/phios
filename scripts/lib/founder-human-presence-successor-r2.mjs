@@ -1,12 +1,26 @@
 import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {parseHTML} from 'linkedom';const manifest='content/web/index-surfaces/founder-human-presence-origin-successor-r2.json',sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 export function founderR2Successor(){if(!fs.existsSync(manifest))return null;const r=JSON.parse(fs.readFileSync(manifest));assert.equal(r.status,'ENGINEERING_RECONCILIATION');for(const k of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(r[k],false);assert.equal(r.sourceSelection,'USER_SELECTED');assert.equal(sha(fs.readFileSync(r.predecessor.path)),r.predecessor.sha256);for(const p of [...r.ownerInstructions,...r.sourceFiles,r.assetProof])assert.equal(sha(fs.readFileSync(p.path)),currentFounderSourceDigest(p,r),'Founder R2 source drift: '+p.path);assert.equal(sha(fs.readFileSync(r.sourceBefore)),r.previousSha256);assert.equal(sha(fs.readFileSync(r.runtime.previousPath)),r.runtime.previousSha256);const proof=JSON.parse(fs.readFileSync(r.assetProof.path));assert.equal(proof.records.length,2);for(const a of proof.records){assert.equal(a.state,'VERIFIED');assert.equal(a.sourceSelection,'USER_SELECTED_ATTACHMENT_ADDENDUM');assert.equal(a.pageHumanAccept,false);}const {document}=parseHTML(fs.readFileSync(r.file,'utf8'));assert.equal(document.querySelectorAll('.founder-r2-hero').length,1);for(const id of r.preservedAnchors)assert(document.getElementById(id));assert.equal(document.querySelector('.founder-r2-hero img').getAttribute('src'),proof.records[0].publicUrl);assert.equal(document.querySelector('.founder-r2-origin img').getAttribute('src'),proof.records[1].publicUrl);return r;}
 function currentFounderSourceDigest(entry,founder){
+ if(entry.path===founder.file){
+  const next=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-locale-bootstrap-successor-r4.json'));
+  assert.equal(next.status,'ENGINEERING_RECONCILIATION');assert.equal(next.file,entry.path);assert.equal(next.predecessor.path,manifest);assert.equal(next.predecessor.sha256,sha(fs.readFileSync(manifest)));
+  for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(next[key],false);
+  assert.equal(next.previousSha256,entry.sha256);assert.equal(sha(fs.readFileSync(next.previousPath)),entry.sha256);assert.equal(sha(fs.readFileSync(next.runtime.path)),next.runtime.sha256);return next.sha256;
+ }
  if(entry.path!=='assets/js/client-visual-consumption.js')return entry.sha256;
  const next=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-visual-consumption-successor-r3.json'));
  assert.equal(next.status,'ENGINEERING_RECONCILIATION');assert.equal(next.predecessor.path,manifest);assert.equal(next.predecessor.sha256,sha(fs.readFileSync(manifest)));
  for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(next[key],false);
  assert.equal(next.path,entry.path);assert.equal(next.previousSha256,entry.sha256);assert.equal(sha(fs.readFileSync(next.previousPath)),entry.sha256);
- return next.sha256;
+ const reader=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-book-reader-delegation-successor-r5.json'));
+ assert.equal(reader.status,'ENGINEERING_RECONCILIATION');assert.equal(reader.predecessor.path,'content/web/index-surfaces/founder-visual-consumption-successor-r3.json');assert.equal(reader.predecessor.sha256,sha(fs.readFileSync(reader.predecessor.path)));
+ for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(reader[key],false);
+ assert.equal(reader.path,entry.path);assert.equal(reader.previousSha256,next.sha256);assert.equal(sha(fs.readFileSync(reader.previousPath)),next.sha256);
+ const icon=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-icon-context-successor-r6.json'));
+ assert.equal(icon.status,'ENGINEERING_RECONCILIATION');assert.equal(icon.predecessor.path,'content/web/index-surfaces/founder-book-reader-delegation-successor-r5.json');assert.equal(icon.predecessor.sha256,sha(fs.readFileSync(icon.predecessor.path)));
+ for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(icon[key],false);
+ assert.equal(icon.path,entry.path);assert.equal(icon.previousSha256,reader.sha256);assert.equal(sha(fs.readFileSync(icon.previousPath)),reader.sha256);
+ return icon.sha256;
 }
-export function currentConsolidationDigest(file,expected){const r=founderR2Successor();if(file===r?.file){assert.equal(r.previousSha256,expected,'Founder predecessor/consolidation mismatch');return r.sha256;}return expected;}
+export function currentConsolidationDigest(file,expected){const r=founderR2Successor();if(file===r?.file){assert.equal(r.previousSha256,expected,'Founder predecessor/consolidation mismatch');return currentFounderSourceDigest({path:file,sha256:r.sha256},r);}return expected;}
 export function historicalFounderRuntimeBytes(file){const r=founderR2Successor();return file===r?.runtime.path?fs.readFileSync(r.runtime.previousPath):fs.readFileSync(file);}
