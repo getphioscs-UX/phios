@@ -293,6 +293,11 @@ function dispatchReady(detail) {
 }
 
 export async function initializeClientVisualConsumption({ fetchImpl = fetch, pathname = window.location.pathname } = {}) {
+  // Composed heroes and eight-volume readers own their media. Delegation is
+  // based on the renderer's static slot, so locale rerenders cannot race it.
+  if (document.querySelector('main [data-vr2-role="HERO"],main .wpr-book-hero')) {
+    return { state: 'DELEGATED_TO_PAGE_HERO', record: null };
+  }
   // The current article renderer owns its hero, including asynchronous locale rerenders.
   // Checking for an existing image here races with article loading and creates a second masthead.
   if (document.body?.dataset.cxSurface === 'ARTICLE_DETAIL') {

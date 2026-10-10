@@ -20,9 +20,9 @@ export async function hydrateApprovedVisuals(root=document){
 }
 let trigger;
 const dialog=document.createElement('dialog');dialog.className='vr2-lightbox';dialog.setAttribute('aria-label','Full resolution visual / 完整图像');
-const close=document.createElement('button');close.type='button';close.textContent='Close / 关闭';close.onclick=()=>dialog.close();
+const close=document.createElement('button');close.type='button';close.textContent=zh()?'关闭':'Close';close.onclick=()=>dialog.close();
 const full=document.createElement('img');dialog.append(close,full);document.body.append(dialog);
-document.addEventListener('click',event=>{const link=event.target.closest('a[data-vr2-inspect]');if(!link||!link.href)return;event.preventDefault();trigger=link;full.src=link.href;full.alt=link.querySelector('img')?.alt||'';dialog.showModal();});
+document.addEventListener('click',event=>{const link=event.target.closest('a[data-vr2-inspect]');if(!link||!link.href)return;event.preventDefault();trigger=link;close.textContent=zh()?'关闭':'Close';dialog.setAttribute('aria-label',zh()?'完整图像':'Full resolution visual');full.src=link.href;full.alt=link.querySelector('img')?.alt||'';dialog.showModal();});
 dialog.addEventListener('close',()=>trigger?.focus());
 hydrateApprovedVisuals();
 document.addEventListener('click',async event=>{const button=event.target.closest('[data-vr2-customer-retry]');if(!button)return;const {hydrateCustomerAssets}=await import('../customer-ui/js/assets.js');hydrateCustomerAssets(button.parentElement);});

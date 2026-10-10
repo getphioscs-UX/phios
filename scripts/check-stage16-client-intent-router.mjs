@@ -23,8 +23,15 @@ if(index.includes('data-page-consolidation="R1"')){
  for(const selector of ['data-cir-root','data-cir-form','data-cir-question','data-cir-status','src="/assets/js/pages/client-intent-router.js"','id="start"'])assert(index.includes(selector));
  const {parseHTML}=await import('linkedom');const {document}=parseHTML(index);
  const form=document.querySelector('[data-cir-form]');assert.equal(form.getAttribute('action'),'/knowledge/ask/');assert.equal(form.getAttribute('method'),'get');
- assert.equal(document.querySelectorAll('#start .pm-card').length,6);
- for(const href of ['/knowledge/ask/','/perspectives/personal/','/perspectives/relationship/','/professional/financial/','/world','/knowledge/'])assert(document.querySelector(`#start a[href="${href}"]`));
+ if(document.querySelector('#start [data-vr2-guide]')){
+  const entries=[...document.querySelectorAll('#start a[data-vr2-guide]')];assert.equal(entries.length,6);
+  const routes=['/knowledge/ask/','/knowledge/','/reality/','/perspectives/','/account/','/professional/'];
+  entries.forEach((entry,i)=>{assert.equal(entry.getAttribute('data-vr2-guide'),'PLAN-HOME-'+String(i+1).padStart(2,'0'));assert.equal(entry.getAttribute('href'),routes[i]);assert(entry.querySelector('img[data-approved-visual]'));assert(entry.querySelector('[data-vr2-en][data-vr2-zh]'));});
+  assert(index.includes('/assets/js/global-visual-r2.js'));
+ }else{
+  assert.equal(document.querySelectorAll('#start .pm-card').length,6);
+  for(const href of ['/knowledge/ask/','/perspectives/personal/','/perspectives/relationship/','/professional/financial/','/world','/knowledge/'])assert(document.querySelector(`#start a[href="${href}"]`));
+ }
  for(const forbidden of ['data-method','ASTROLOGY_PROJECTION','BAZI_PROJECTION','ZI_WEI_PROJECTION','HDR.OPERATING_READING'])assert(!form.outerHTML.includes(forbidden));
 }else{
 const index=read('index.html');assert.ok(index.includes('data-cir-root'));assert.equal((index.match(/data-cir-intent=/g)||[]).length,6);assert.ok(index.includes('你不需要先选择 Astrology、BaZi、Zi Wei 或 Numerology'));assert.ok(index.includes('七个客户入口'));assert.ok(index.includes('href="/personal-runtime"'));assert.ok(index.includes('href="/financial-reality"'));assert.ok(index.includes('href="/my-reality"'));assert.ok(index.includes('href="/reality-journey"'));
