@@ -6,6 +6,7 @@ import {commerceEnvironment} from '../commerce/commerce-environment.js';
 import {createReportGenerationStore} from '../personal-reading/report-generation-store.js';
 import {generatePaidReportFollowup} from '../personal-reading/paid-report-followup.js';
 import {reportFollowupContext} from '../report-delivery/customer-report-artifact.js';
+import {generateContinuityReportQuestion} from '../personal-reading/continuity/continuity-report-followup.js';
 const fail=(code,status=409)=>{throw Object.assign(Error(code),{code,status});};
 const schema={type:'object',additionalProperties:false,required:['questionDigest','zhHans','en','supportRefs'],properties:{questionDigest:{type:'string'},zhHans:{type:'string'},en:{type:'string'},supportRefs:{type:'array',minItems:1,uniqueItems:true,items:{type:'string'}}}};
 export async function accountReportQuestionGenerationAvailable(context,candidate,grant){
@@ -37,6 +38,8 @@ export async function generateAccountReportQuestion(context,body,{openMaterial=o
  await store.withLock('lifecycle',async()=>{const state=await store.get('lifecycle');if(!state?.delivered||state.authorityDigest!==authorityDigest)fail('FOLLOWUP_REPORT_COST_LINEAGE_REQUIRED');});
  const sections=source.visualReportIr?.sections;
  if(!Array.isArray(sections)||!sections.length)fail('FOLLOWUP_REPORT_SOURCE_REQUIRED');
+ const priorQuestion=history.rows.find(row=>row.request_id===body.requestId);
+ if(history.includedRemaining<=0&&priorQuestion?.included_slot==null)return generateContinuityReportQuestion({context,body,candidate,sections,fetcher});
  const allowed=new Set(sections.flatMap(s=>s.authorityRefs||[]));
  if(!allowed.size)fail('FOLLOWUP_GOVERNED_REFS_REQUIRED');
  let model;try{model=JSON.parse(env.REPORT_FOLLOWUP_MODEL_PROFILE)}catch{fail('FOLLOWUP_VERIFIED_MODEL_REQUIRED',503);}

@@ -4,6 +4,8 @@ import {orderReportPresentation,validateOrderReportPresentation} from './report-
 import { BOOK_ONE_PRODUCT, resolveBookOneSourceKey, resolveCommerceBookSourceKey } from './book-product-registry.js';
 import { STRIPE_PRODUCT_REGISTRY, commerceProduct, commerceEntitlements, commerceOrderProduct, commerceOrderEntitlements } from '../pws/commercial/stripe-product-registry.js';
 import {commerceLog} from './commerce-observability.js';
+import {continuityRefillProduct} from '../personal-reading/continuity/continuity-commercial-authority.js';
+import {readContinuityQuota} from '../personal-reading/continuity/continuity-quota-d1.js';
 import {
   encryptSensitive,
   randomId,
@@ -35,7 +37,7 @@ export async function ensureCommerceProducts(env, clock=Date.now) {
 }
 export async function createCommerceOrder({env,customerId,productId,selectedProducts,idempotencyKeyHash,requestHash,locale,context={},clock=Date.now}){
   await ensureCommerceProducts(env,clock);
-  const p=commerceStripeProduct(commerceProduct(productId),commerceEnvironment(env)), db=dbFrom(env), now=nowIso(clock);
+  const p=commerceStripeProduct(continuityRefillProduct(commerceProduct(productId),context),commerceEnvironment(env)), db=dbFrom(env), now=nowIso(clock);
   await db.prepare(`INSERT OR IGNORE INTO commerce_checkout_attempts
     (checkout_attempt_id,product_id,idempotency_key_hash,status,locale,created_at,updated_at,customer_id,selected_products_json,order_state,amount_minor,currency,qa_price_id,request_hash,environment,context_json)
     VALUES (?1,?2,?3,'creating',?4,?5,?5,?6,?7,'PENDING',?8,'MYR',?9,?10,?12,?11)`)
@@ -111,7 +113,7 @@ export async function fulfillCommerceOrder({env,order,session,eventId,clock=Date
     db.prepare(`UPDATE commerce_checkout_attempts SET status='paid',order_state=?2,updated_at=?3 WHERE checkout_attempt_id=?1 AND order_state NOT IN ('REFUNDED','PARTIALLY_REFUNDED','FULFILLED')`).bind(order.checkout_attempt_id,paidState,now),
     db.prepare(`INSERT OR IGNORE INTO commerce_receipts (receipt_id,receipt_number,purchase_id,receipt_json,issued_at) VALUES (?1,?2,?3,?4,?5)`)
       .bind(`rcp_${order.checkout_attempt_id}`,`PHI-${order.environment||'QA'}-${order.checkout_attempt_id}`,purchaseId,JSON.stringify({purchaseId,productId:p.productId,productTitle:p.title,currency:'MYR',amountMinor:actualPaid,displayAmount:actualPaid/100,...(paidAmounts?{controlledPayment:paidAmounts}:{}),reportPresentation:orderReportPresentation(order),issuedAt:now,paymentStatus:'paid',environment:order.environment||'QA'}),now)];
-  if(!human&&!subscription){
+  if(!human&&!subscription&&p.fulfillmentType!=='CONTINUITY_QUOTA_REFILL'){
     const selected=p.productId.includes('BUNDLE')?JSON.parse(order.selected_products_json):[];
     for(const e of commerceOrderEntitlements(order)) statements.push(db.prepare(`INSERT OR IGNORE INTO digital_entitlements
       (entitlement_id,purchase_id,product_id,subject_hash,customer_id,entitlement_code,entitlement_status,watermark_status,granted_at,created_at,updated_at)
@@ -161,10 +163,11 @@ export async function commerceAccountProjection(env,customerId,clock=Date.now){
   const [orders,entitlements,subscriptions,services]=await Promise.all([
     db.prepare(`SELECT o.checkout_attempt_id AS orderId,o.product_id AS productId,o.order_state AS state,o.amount_minor AS amountMinor,o.currency,o.review_required AS reviewRequired,o.context_json,p.amount_minor AS paidAmountMinor FROM commerce_checkout_attempts o LEFT JOIN commerce_purchases p ON p.checkout_attempt_id=o.checkout_attempt_id WHERE o.customer_id=?1 AND o.environment=?2 ORDER BY o.created_at DESC LIMIT 100`).bind(customerId,commerceEnvironment(env)).all(),
     db.prepare(`SELECT product_id AS productId,entitlement_code AS entitlementCode,entitlement_status AS status,watermark_status AS deliveryState FROM digital_entitlements e WHERE customer_id=?1 AND entitlement_status='active' AND (expires_at IS NULL OR expires_at>?2) AND EXISTS(SELECT 1 FROM commerce_purchases p JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id WHERE p.purchase_id=e.purchase_id AND o.environment=?3)`).bind(customerId,nowIso(clock),commerceEnvironment(env)).all(),
-    db.prepare('SELECT subscription_status AS status,current_period_end AS currentPeriodEnd,paid_until AS paidUntil,cancel_at_period_end AS cancelAtPeriodEnd FROM commerce_subscriptions s WHERE customer_id=?1 AND EXISTS(SELECT 1 FROM commerce_checkout_attempts o WHERE o.checkout_attempt_id=s.order_id AND o.environment=?2)').bind(customerId,commerceEnvironment(env)).all(),
+    db.prepare('SELECT stripe_subscription_id AS subscriptionId,subscription_status AS status,current_period_end AS currentPeriodEnd,paid_until AS paidUntil,cancel_at_period_end AS cancelAtPeriodEnd FROM commerce_subscriptions s WHERE customer_id=?1 AND EXISTS(SELECT 1 FROM commerce_checkout_attempts o WHERE o.checkout_attempt_id=s.order_id AND o.environment=?2)').bind(customerId,commerceEnvironment(env)).all(),
     db.prepare('SELECT product_id AS productId,fulfillment_state AS state,duration_minutes AS durationMinutes,modality FROM commerce_service_fulfillments s WHERE customer_id=?1 AND EXISTS(SELECT 1 FROM commerce_checkout_attempts o WHERE o.checkout_attempt_id=s.order_id AND o.environment=?2)').bind(customerId,commerceEnvironment(env)).all()
   ]);
-  return {orders:orders.results.map(({context_json,...row})=>{const offer=controlledOrderOffer({context_json,customer_id:customerId,product_id:row.productId,amount_minor:row.amountMinor});return {...row,reportPresentation:orderReportPresentation({context_json}),...(offer?{controlledPayment:{originalAmountMinor:offer.originalAmountMinor,discountAmountMinor:offer.discountAmountMinor,payableAmountMinor:offer.paidAmountMinor,paidAmountMinor:row.paidAmountMinor??null,currency:'MYR'}}:{})};}),entitlements:entitlements.results,subscriptions:subscriptions.results.map(s=>({...s,entitlementCode:'PHIOS_MEMBERSHIP',accessGranted:['ACTIVE','CANCEL_AT_PERIOD_END'].includes(s.status)&&s.paidUntil>time&&s.currentPeriodEnd>time})),services:services.results};
+  let continuityQuota=null; if(subscriptions.results.some(s=>['ACTIVE','CANCEL_AT_PERIOD_END'].includes(s.status)&&s.paidUntil>time&&s.currentPeriodEnd>time))try{const q=await readContinuityQuota(env,customerId,clock);continuityQuota={subscriptionId:q.subscriptionId,remainingMicroUSD:q.units.reduce((n,u)=>n+u.remainingMicroUSD,0),refillRequired:q.units.every(u=>u.remainingMicroUSD===0),refillAmountMinor:1900};}catch{continuityQuota={state:'UNVERIFIED'};}
+  return {continuityQuota,orders:orders.results.map(({context_json,...row})=>{const offer=controlledOrderOffer({context_json,customer_id:customerId,product_id:row.productId,amount_minor:row.amountMinor});return {...row,reportPresentation:orderReportPresentation({context_json}),...(offer?{controlledPayment:{originalAmountMinor:offer.originalAmountMinor,discountAmountMinor:offer.discountAmountMinor,payableAmountMinor:offer.paidAmountMinor,paidAmountMinor:row.paidAmountMinor??null,currency:'MYR'}}:{})};}),entitlements:entitlements.results,subscriptions:subscriptions.results.map(s=>({...s,entitlementCode:'PHIOS_MEMBERSHIP',accessGranted:['ACTIVE','CANCEL_AT_PERIOD_END'].includes(s.status)&&s.paidUntil>time&&s.currentPeriodEnd>time})),services:services.results};
 }
 
 function changes(result) {

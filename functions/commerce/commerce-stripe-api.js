@@ -9,6 +9,8 @@ import { json,commerceError,readJsonBody,localeFrom } from './commerce-http.js';
 import {commerceLog} from './commerce-observability.js';
 import {resolveCommerceBookSourceKey} from './book-product-registry.js';
 import {controlledPurchaseOffer} from './controlled-purchase-candidate.js';
+import {readContinuityQuota} from '../personal-reading/continuity/continuity-quota-d1.js';
+import {continuityRefillProduct,CONTINUITY_COMMERCIAL_AUTHORITY as continuityAuthority} from '../personal-reading/continuity/continuity-commercial-authority.js';
 
 function requireIdentity(context){
   const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
@@ -36,7 +38,7 @@ export async function commerceApi(context,action){
           }else throw error;
         }
       }
-      return {...p,checkoutAvailable:commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),reportPresentationOptions,reportPurchaseState};
+      return {...p,checkoutAvailable:commerceCheckoutAvailable(env)&&(commerceEnvironment(env)!=='LIVE'||Boolean(livePriceId&&liveProductId)),...(p.productId==='COM-SUBSCRIPTION-MONTHLY'?{continuityTerms:{amountMinor:1900,unitMaximumMicroUSD:3000000,defaultModel:'gpt-5.6-luna',fullReportRegeneration:false},refillCheckoutAvailable:commerceEnvironment(env)==='QA'&&commerceCheckoutAvailable(env)&&/^price_/.test(continuityAuthority.refill.stripePriceId||'')}:{}),reportPresentationOptions,reportPurchaseState};
     }),eligibleBundleProducts:standardBundleProducts()});
     const customerId=requireIdentity(context);
     if(action==='account') return json({success:true,...await commerceAccountProjection(env,customerId)});
@@ -69,9 +71,9 @@ export async function commerceApi(context,action){
     }
     // Client amount hints are ignored. Only the canonical product/language quote
     // below is persisted and sent to Stripe; unknown identity/price IDs still fail.
-    const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale','amount','surcharge','total']);
+    const allowed=new Set(['productId','selectedProducts','locale','context','acceptDigitalPolicy','reportLanguageMode','reportLocale','amount','surcharge','total','purchaseKind','subscriptionId']);
     if(Object.keys(body).some(k=>!allowed.has(k))) throw Object.assign(new Error('Only canonical product input is accepted.'),{status:422,code:'checkout_input_invalid'});
-    const product=commerceProduct(body.productId), selected=commerceSelection(product.productId,body.selectedProducts||[]);
+    let product=commerceProduct(body.productId);const selected=commerceSelection(product.productId,body.selectedProducts||[]);
     // A registered price does not establish that the private book can be delivered.
     if(product.category==='BOOK') resolveCommerceBookSourceKey(env,product.productId);
     if(body.acceptDigitalPolicy!==true) throw Object.assign(new Error('Accept purchase terms.'),{status:422,code:'digital_policy_acceptance_required'});
@@ -81,6 +83,14 @@ export async function commerceApi(context,action){
     const reference=body.context?.readingId;
     if(body.context&&(Object.keys(body.context).some(k=>k!=='readingId')||typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
     const contextSnapshot=reference?{readingId:reference}:{};
+    if(body.purchaseKind!==undefined){
+      if(body.purchaseKind!=='CONTINUITY_QUOTA_REFILL'||product.productId!=='COM-SUBSCRIPTION-MONTHLY')throw Object.assign(Error('CONTINUITY_REFILL_PRODUCT_REQUIRED'),{status:422});
+      const quota=await readContinuityQuota(env,customerId);
+      if(quota.subscriptionId!==body.subscriptionId||!quota.units.length)throw Object.assign(Error('CONTINUITY_REFILL_OWNED_PERIOD_REQUIRED'),{status:403});
+      if(!Number.isSafeInteger(quota.billingPeriodStart))throw Object.assign(Error('CONTINUITY_CURRENT_PAID_PERIOD_REQUIRED'),{status:403});
+      contextSnapshot.continuityRefill={subscriptionId:quota.subscriptionId,periodStart:quota.billingPeriodStart,periodEnd:quota.billingPeriodEnd};
+      product=continuityRefillProduct(product,contextSnapshot);
+    }else if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
     const controlled=controlledPurchaseOffer(env,{ownerId:customerId,productId:product.productId,originalAmountMinor:contextSnapshot.reportPresentation?.amountMinor??product.amountMinor});

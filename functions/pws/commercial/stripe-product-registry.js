@@ -1,4 +1,5 @@
 import {commerceStripeProduct} from '../../commerce/commerce-environment.js';
+import {continuityRefillProduct} from '../../personal-reading/continuity/continuity-commercial-authority.js';
 // Additive COM-STRIPE-R1 registry under the existing PWS commercial authority.
 import { resolveReportProduct, eligibleReportIds } from './report-successor-contract.js';
 export const STRIPE_QA_ACCOUNT = 'acct_1UFr0TBEKXJyHMkK';
@@ -856,7 +857,8 @@ const historicalRows=[
 ];
 export function commerceOrderProduct(order){
  const registered=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===order?.product_id);
- const current=registered&&order?.environment==='LIVE'?commerceStripeProduct(registered,'LIVE'):registered;
+ const base=registered&&order?.environment==='LIVE'?commerceStripeProduct(registered,'LIVE'):registered;
+ const current=base?continuityRefillProduct(base,JSON.parse(order.context_json||'{}')):base;
  if(current?.qaPriceId===order?.qa_price_id)return current;
  const historic=historicalRows.find(p=>p.productId===order?.product_id&&p.qaPriceId===order?.qa_price_id);
  if(!historic)throw Object.assign(Error('Stored product price not recognized.'),{status:422,code:'commerce_provider_mismatch'});

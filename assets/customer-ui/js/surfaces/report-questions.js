@@ -23,6 +23,8 @@ export function installReportQuestions(host){
     else paragraph(entry,tr('An answer has not been saved for this question.','这条问题尚未保存回答。'));
    }
    if(data.includedRemaining<1&&!data.governance?.membershipActive){paragraph(panel,tr('Your report and saved answers remain available. Membership lets you continue asking about this report.','报告及已保存问答会继续保留。启用会员后可继续针对这份报告提问。'));const membership=document.createElement('a');membership.href='/account/?product=COM-SUBSCRIPTION-MONTHLY';membership.textContent=tr('Continue with membership','启用会员继续');panel.append(membership);}
+   function refill(){const link=document.createElement('a');link.className='cx-button';link.textContent=tr('Unlock another quota · RM19','解锁另一份额度 · RM19');link.href='/account/?product=COM-SUBSCRIPTION-MONTHLY&purchaseKind=CONTINUITY_QUOTA_REFILL';panel.append(link);return link;}
+   if(data.continuityQuota?.refillRequired)refill();
    if(data.governance?.answerGenerationAdmitted!==true||data.governance?.canAsk===false||(data.includedRemaining<1&&!data.governance?.membershipActive))return;
    const form=document.createElement('form');form.className='cx-stack';panel.append(form);
    const label=document.createElement('label');label.className='cx-field';label.textContent=tr('What would you like to understand about this report?','关于这份报告，你希望进一步了解什么？');form.append(label);
@@ -34,7 +36,7 @@ export function installReportQuestions(host){
     const existing=pending.get(reportId);const request=existing?.question===question?existing:{question,requestId:crypto.randomUUID()};pending.set(reportId,request);
     submit.disabled=true;input.disabled=true;status.textContent=tr('Preparing your answer…','正在准备回答…');
     try{await accountRequest('/api/account-report-questions',{reportId,...request,consentVersion:'REPORT_FOLLOWUP_CONSENT_V1'});pending.delete(reportId);await load();}
-    catch{status.textContent=tr('The answer could not be confirmed. Your question is kept here; no automatic retry will be made.','暂时无法确认回答是否完成。问题已保留在这里，系统不会自动重试。');submit.disabled=false;input.disabled=false;}
+    catch(error){if(['CONTINUITY_QUOTA_REFILL_REQUIRED','COMPLETE_PRODUCT_COST_LIMIT_OR_UNKNOWN_USAGE'].includes(error.code)){status.textContent=tr('The next answer cannot fit in the available quota. Your saved material and subscription remain available.','现有额度不足以生成下一条回答；已保存资料和订阅状态继续保留。');if(!panel.querySelector('a[href*="CONTINUITY_QUOTA_REFILL"]'))refill();}else status.textContent=tr('The answer could not be confirmed. Your question is kept here; no automatic retry will be made.','暂时无法确认回答是否完成。问题已保留在这里，系统不会自动重试。');submit.disabled=false;input.disabled=false;}
    });
   }
  }

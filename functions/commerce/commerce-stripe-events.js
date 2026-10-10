@@ -7,6 +7,7 @@ import {dispatchWatermark} from './book-delivery.js';
 import {commerceLog} from './commerce-observability.js';
 import {retrieveCommerceSession,retrieveCommerceSubscription,requireStripeQa} from './stripe-client.js';
 import {controlledOrderOffer,verifyControlledPayment} from './controlled-purchase-candidate.js';
+import {grantContinuityQuota} from '../personal-reading/continuity/continuity-quota-d1.js';
 const id=value=>typeof value==='string'?value:value?.id;
 const mismatch=()=>Object.assign(new Error('Provider object does not match the canonical order.'),{status:422,code:'commerce_provider_mismatch'});
 function assert(condition){if(!condition)throw mismatch();}
@@ -55,6 +56,10 @@ export async function processCommerceStripeEvent({env,event,fetcher,origin,clock
         else{
           // Membership access still requires invoice.paid plus current valid status.
           await fulfillCommerceOrder({env,order,session,clock});
+          if(product.fulfillmentType==='CONTINUITY_QUOTA_REFILL'){
+            const target=JSON.parse(order.context_json).continuityRefill;
+            await grantContinuityQuota(env,{ownerAccountId:order.customer_id,subscriptionId:target.subscriptionId,sourceId:'pur_'+order.checkout_attempt_id,kind:'REFILL',purchaseId:'pur_'+order.checkout_attempt_id,periodStart:target.periodStart,periodEnd:target.periodEnd},clock);
+          }
           commerceLog('PAYMENT_CONFIRMED',{order_id:orderId,stripe_event_id:event.id,product_id:product.productId});
           if(product.category==='BOOK'){
             const purchaseId=await prepareCommerceBookDelivery(env,order);
@@ -82,6 +87,7 @@ export async function processCommerceStripeEvent({env,event,fetcher,origin,clock
         invoice=object;
       }
       await recordCommerceSubscription({env,order,subscription,invoice,clock});
+      if(invoice&&product.productId==='COM-SUBSCRIPTION-MONTHLY')await grantContinuityQuota(env,{ownerAccountId:order.customer_id,subscriptionId:subscription.id,sourceId:invoice.id,kind:'INVOICE',purchaseId:'pur_'+order.checkout_attempt_id,periodStart:invoice.lines.data[0].period.start,periodEnd:invoice.lines.data[0].period.end},clock);
       commerceLog('SUBSCRIPTION_UPDATED',{order_id:orderId,stripe_event_id:event.id,status:subscription.status});
     }else if(event.type==='charge.refunded'){
       const refund=await refundCommerceOrder(env,object);

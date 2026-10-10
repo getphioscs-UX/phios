@@ -5,6 +5,7 @@ import {digest} from '../account/oidc-auth.js';
 import {requireSameOrigin} from '../account/oidc-auth.js';
 import {generateAccountReportQuestion,accountReportQuestionGenerationAvailable} from '../account/paid-report-question-generation.js';
 import {commerceEnvironment} from '../commerce/commerce-environment.js';
+import {readContinuityQuota} from '../personal-reading/continuity/continuity-quota-d1.js';
 const headers={'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow'};
 // QA history and gated answer generation; no production activation.
 export async function onRequestGet(context){
@@ -29,7 +30,9 @@ export async function onRequestGet(context){
   const answerGenerationAdmitted=await accountReportQuestionGenerationAvailable(context,candidate,history.grant).catch(()=>false);
   const now=Math.floor(Date.now()/1000);
   const membership=await context.env.RUNTIME_DB.prepare(`SELECT 1 AS active FROM commerce_subscriptions s JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=s.order_id WHERE s.customer_id=?1 AND o.customer_id=?1 AND o.environment=?2 AND o.product_id='COM-SUBSCRIPTION-MONTHLY' AND o.review_required=0 AND s.subscription_status IN ('ACTIVE','CANCEL_AT_PERIOD_END') AND s.paid_until>?3 AND s.current_period_end>?3 LIMIT 1`).bind(ownerAccountId,commerceEnvironment(context.env),now).first();
-  return Response.json({ok:true,reportId,includedRemaining:history.includedRemaining,items,governance:{persisted:true,historyRequiresMembership:false,answerGenerationAdmitted,canAsk:history.includedRemaining>0||membership?.active===1,membershipActive:membership?.active===1}},{headers});
+  let continuityQuota=null;
+  if(membership?.active===1)try{const quota=await readContinuityQuota(context.env,ownerAccountId);continuityQuota={subscriptionId:quota.subscriptionId,billingPeriodStart:quota.billingPeriodStart,billingPeriodEnd:quota.billingPeriodEnd,remainingMicroUSD:quota.units.reduce((n,q)=>n+q.remainingMicroUSD,0),units:quota.units.map(q=>({quotaUnit:q.quota_unit_id,remainingMicroUSD:q.remainingMicroUSD,maximumMicroUSD:q.maximum_micro_usd})),refillRequired:quota.units.every(q=>q.remainingMicroUSD===0),refillAmountMinor:1900};}catch{continuityQuota={state:'UNVERIFIED',refillRequired:false};}
+  return Response.json({ok:true,reportId,includedRemaining:history.includedRemaining,items,continuityQuota,governance:{persisted:true,historyRequiresMembership:false,answerGenerationAdmitted,canAsk:history.includedRemaining>0||membership?.active===1,membershipActive:membership?.active===1}},{headers});
  }catch(e){return Response.json({ok:false,code:'REPORT_QUESTION_HISTORY_UNAVAILABLE'},{status:e.status||403,headers});}
 }
 export async function onRequestPost(context){
