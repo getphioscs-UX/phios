@@ -26,7 +26,7 @@ export function structuredIntentRelevant(intent,source){
 export async function retrieveStructuredObject({env,scope,locale='zh-Hans'}){
  const found=await loadStructuredObject(env,scope);if(!found)return {sources:[],nodeCodes:[],chain:[]};const {object:o}=found;
  // Source-index entries intentionally contain no definition; never answer from their titles.
- const text=o.canonicalMeaning||o.articles?.find(a=>a.locale===locale)?.summary||o.definition;
+ const text=locale==='en'?o.articles?.find(a=>a.locale==='en')?.summary:(o.canonicalMeaning||o.articles?.find(a=>a.locale==='zh-Hans')?.summary||o.definition);
  if(!text)return {sources:[],nodeCodes:[],chain:[{stage:'SELECTED_STRUCTURED_OBJECT',status:'SEMANTIC_CONTENT_UNAVAILABLE'}]};
  const discovery=await load(env,'structured-knowledge-registry-v1.json');const href=discovery?.objects?.find(x=>x.objectId===o.objectId)?.explorerHref;
  if(!href)return {sources:[],nodeCodes:[],chain:[]};

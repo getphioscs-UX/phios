@@ -120,8 +120,13 @@ assert.equal(deliverySuccessor.status,'ENGINEERING_RECONCILIATION');assert.equal
 assert.equal(deliverySuccessor.predecessor.path,'content/web-production/reconciliation/pds-w0-approved-visual-resolver-successor-v4.json');assert.equal(deliverySuccessor.predecessor.sha256,canonicalTextSha256(deliverySuccessor.predecessor.path));
 assert.equal(deliverySuccessor.historicalRecordsRewritten,false);assert.equal(deliverySuccessor.newProductionAcceptanceGranted,false);
 assert.equal(deliverySuccessor.previousGitBlobSha,resolverBlob);assert.equal(git(['rev-parse',`${deliverySuccessor.sourceCommit}^:${transition.path}`]),resolverBlob);assert.equal(git(['rev-parse',`${deliverySuccessor.sourceCommit}:${transition.path}`]),deliverySuccessor.gitBlobSha);
-assert.equal(canonicalTextGitBlobSha(transition.path),deliverySuccessor.gitBlobSha,'PDS_W0_CURRENT_ASSET_RESOLVER_BLOB_DRIFT');
-assert.equal(canonicalTextSha256(transition.path),deliverySuccessor.sha256,'PDS_W0_CURRENT_ASSET_RESOLVER_SHA256_DRIFT');
+const identitySuccessor=read('content/web-production/reconciliation/pds-w0-approved-visual-identity-successor-v6.json');
+assert.equal(identitySuccessor.status,'ENGINEERING_RECONCILIATION');assert.equal(identitySuccessor.path,transition.path);
+assert.equal(identitySuccessor.predecessor.path,'content/web-production/reconciliation/pds-w0-approved-visual-delivery-successor-v5.json');assert.equal(identitySuccessor.predecessor.sha256,canonicalTextSha256(identitySuccessor.predecessor.path));
+assert.equal(identitySuccessor.historicalRecordsRewritten,false);assert.equal(identitySuccessor.newProductionAcceptanceGranted,false);
+assert.equal(identitySuccessor.previousGitBlobSha,deliverySuccessor.gitBlobSha);assert.equal(git(['rev-parse',`${identitySuccessor.sourceCommit}^:${transition.path}`]),deliverySuccessor.gitBlobSha);assert.equal(git(['rev-parse',`${identitySuccessor.sourceCommit}:${transition.path}`]),identitySuccessor.gitBlobSha);
+assert.equal(canonicalTextGitBlobSha(transition.path),identitySuccessor.gitBlobSha,'PDS_W0_CURRENT_ASSET_RESOLVER_BLOB_DRIFT');
+assert.equal(canonicalTextSha256(transition.path),identitySuccessor.sha256,'PDS_W0_CURRENT_ASSET_RESOLVER_SHA256_DRIFT');
 const {resolveCustomerAssetFromRegistry} = await import('../assets/customer-ui/js/assets.js');
 const heroRegistry = read(heroResolverSuccessor.customerRegistry);
 for(const id of heroResolverSuccessor.assetIds)assert.ok(resolveCustomerAssetFromRegistry(heroRegistry,id).publicUrl);
