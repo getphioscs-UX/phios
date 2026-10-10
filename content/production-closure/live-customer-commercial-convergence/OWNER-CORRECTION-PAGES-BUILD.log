@@ -1,20 +1,10 @@
 {"entities":898,"visuals":392,"counts":{"macro-era":11,"period":20,"civilization":120,"snapshot":15,"comparison":6,"trajectory":16,"transition":32,"scale-shift":7,"loss-family":6,"loss-type":24,"book-section":85,"reconfiguration-case":60,"reconfiguration-window":24,"reconfiguration-snapshot":12,"current-dossier":12,"lived-dimension":14,"visual":392,"runtime-position":31,"admitted-current-evidence":11}}
+Pages static publication: copied=11565, skipped=34459
 
-node:fs:1222
-  return binding.rmSync(getValidatedPath(path), opts.maxRetries, opts.recursive, opts.retryDelay);
-                 ^
+ ⛅️ wrangler 4.120.0
+────────────────────
+✨ Compiled Worker successfully
+Pages Worker: 16698675 bytes; gzip 3109930 bytes
+PASS Pages publication boundary: 11567 files; no asset exceeds 25 MiB; provider runtime payloads excluded.
+PASS Cloudflare Pages build boundary: .pages-output
 
-Error: EPERM, Permission denied: \\?\C:\phios\.pages-output\content '\\?\C:\phios\.pages-output\content'
-    at Object.rmSync (node:fs:1222:18)
-    at cleanDirectory (file:///C:/phios/scripts/build-cloudflare-pages.mjs:161:8)
-    at file:///C:/phios/scripts/build-cloudflare-pages.mjs:167:1
-    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
-    at async node:internal/modules/esm/loader:643:26
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
-  errno: 1,
-  code: 'EPERM',
-  path: '\\\\?\\C:\\phios\\.pages-output\\content',
-  syscall: 'rm'
-}
-
-Node.js v24.18.0

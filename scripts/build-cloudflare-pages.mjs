@@ -155,11 +155,14 @@ function cleanDirectory(dir) {
   if(!info.isDirectory()||info.isSymbolicLink())throw Error('PAGES_GENERATED_CLEANUP_ROOT_INVALID');
   // Keep the validated generated root: Windows preview/CWD handles can lock
   // directory removal even when its generated children can be replaced.
-  for(const name of fs.readdirSync(checked)){
-    const child=path.resolve(checked,name);
-    if(path.dirname(child)!==checked)throw Error('PAGES_GENERATED_CLEANUP_CHILD_INVALID');
-    fs.rmSync(child,{recursive:!fs.lstatSync(child).isSymbolicLink(),force:true,maxRetries:5,retryDelay:200});
-  }
+  const clearFiles=parent=>{for(const name of fs.readdirSync(parent)){
+    const child=path.resolve(parent,name);
+    if(path.dirname(child)!==parent||!child.startsWith(checked+path.sep))throw Error('PAGES_GENERATED_CLEANUP_CHILD_INVALID');
+    const entry=fs.lstatSync(child);
+    if(entry.isDirectory()&&!entry.isSymbolicLink())clearFiles(child);
+    else fs.rmSync(child,{force:true,maxRetries:5,retryDelay:200});
+  }};
+  clearFiles(checked);
 }
 
 run(process.execPath,['scripts/build-world-recovery-index.mjs']);
